@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Technorati;
 
-use DomDocument,
-    DOMXPath;
+use DomDocument;
+use DOMXPath;
 
 /**
  * Represents a single Technorati BlogInfo query result object.
@@ -30,8 +19,6 @@ use DomDocument,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BlogInfoResult
 {
@@ -92,7 +79,7 @@ class BlogInfoResult
                 // fetched URL often doens't include schema
                 // and this issue causes the following line to fail
                 $this->url = Utils::normalizeUriHttp($result->item(0)->data);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 if ($this->getWeblog() instanceof Weblog) {
                     $this->url = $this->getWeblog()->getUrl();
                 }
@@ -113,7 +100,7 @@ class BlogInfoResult
      *
      * @return  \Zend\Uri\Http
      */
-    public function getUrl() 
+    public function getUrl()
     {
         return $this->url;
     }
@@ -123,7 +110,7 @@ class BlogInfoResult
      *
      * @return  Weblog
      */
-    public function getWeblog() 
+    public function getWeblog()
     {
         return $this->weblog;
     }

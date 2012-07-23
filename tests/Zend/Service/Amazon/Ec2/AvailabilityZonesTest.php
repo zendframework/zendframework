@@ -1,27 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2,
-    Zend\Service\Amazon\Ec2\Exception;
+
+use Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend\Service\Amazon\Ec2\Availabilityzones test case.
@@ -29,8 +21,6 @@ use Zend\Service\Amazon\Ec2,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -39,34 +29,28 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend\Service\Amazon\Ec2\Availabilityzones
+     * @var \Zend\Service\Amazon\Ec2\AvailabilityZones
      */
-    private $availabilityZones;
+    protected $availabilityZones;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->availabilityZones = new Ec2\AvailabilityZones('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\AvailabilityZones::setDefaultHttpClient($client);
-
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-
-        $this->availabilityZones = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->availabilityZones = new Ec2\AvailabilityZones('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testDescribeSingleAvailabilityZone()
@@ -88,7 +72,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </availabilityZoneInfo>\r\n"
                     . "</DescribeAvailabilityZonesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->availabilityZones->describe('us-east-1a');
         $this->assertInternalType('array', $response);
@@ -123,7 +107,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </availabilityZoneInfo>\r\n"
                     . "</DescribeAvailabilityZonesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->availabilityZones->describe();
 

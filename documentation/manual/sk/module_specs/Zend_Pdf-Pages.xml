@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Stránky dokumentu</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title>Stránky dokumentu</title>
     
     <para>
         Stránky v PDF dokumente sú reprezentované triedou <code>Zend_Pdf_Page</code>.
@@ -51,7 +51,7 @@
         a je sním možné manipulovať ako klasickým poľom:
     </para>
 
-    <example><info><title>PDF document pages management.</title></info>
+    <example><title>PDF document pages management.</title>
         
         <programlisting role="php"><![CDATA[<?php
 ...

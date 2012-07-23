@@ -8,8 +8,8 @@
         <para>
             Resolving plugin names to class names is a common requirement within Zend Framework
             applications. The <classname>PluginClassLoader</classname> implements the interfaces
-            <link linkend="zend.loader.plugin-class-locater">PluginClassLocater</link>, <link linkend="zend.loader.short-name-locater">ShortNameLocater</link>, and
-            <interface>IteratorAggregate</interface>, providing a simple mechanism for aliasing
+            <link linkend="zend.loader.plugin-class-locator">PluginClassLocator</link>, <link linkend="zend.loader.short-name-locator">ShortNameLocator</link>, and
+            <interfacename>IteratorAggregate</interfacename>, providing a simple mechanism for aliasing
             plugin names to classnames for later retrieval.
         </para>
 
@@ -113,7 +113,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 <para>
                     The constructor is used to instantiate and intialize the plugin class loader. If
                     passed a string, an array, or a <interfacename>Traversable</interfacename>
-                    object, it will pass this to the <link linkend="zend.loader.plugin-class-loader.methods.registerPlugins">registerPlugins()</link>
+                    object, it will pass this to the <link linkend="zend.loader.plugin-class-loader.methods.register-plugins">registerPlugins()</link>
                     method in order to seed (or overwrite) the plugin class map.
                 </para>
             </refsection>
@@ -201,7 +201,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 
 
                 <para>
-                    Defined by the <link linkend="zend.loader.plugin-class-locater">PluginClassLocater</link>
+                    Defined by the <link linkend="zend.loader.plugin-class-locator">PluginClassLocator</link>
                     interface. Expects two string arguments, the plugin
                     <varname>$shortName</varname>, and the class <varname>$className</varname> which
                     it represents.
@@ -260,7 +260,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 
 
                 <para>
-                    Defined by the <interfacename>PluginClassLocater</interfacename> interface;
+                    Defined by the <interfacename>PluginClassLocator</interfacename> interface;
                     remove a plugin/class association from the plugin class map.
                 </para>
             </refsection>
@@ -275,6 +275,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getRegisteredPlugins</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -282,7 +283,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 
 
                 <para>
-                    Defined by the <interfacename>PluginClassLocater</interfacename> interface;
+                    Defined by the <interfacename>PluginClassLocator</interfacename> interface;
                     return the entire plugin class map as an array.
                 </para>
             </refsection>
@@ -307,7 +308,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 
 
                 <para>
-                    Defined by the <interfacename>ShortNameLocater</interfacename> interface;
+                    Defined by the <interfacename>ShortNameLocator</interfacename> interface;
                     determine if the given plugin has been resolved to a class name.
                 </para>
             </refsection>
@@ -332,7 +333,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 
 
                 <para>
-                    Defined by the <interfacename>ShortNameLocater</interfacename> interface;
+                    Defined by the <interfacename>ShortNameLocator</interfacename> interface;
                     return the class name to which a plugin name resolves.
                 </para>
             </refsection>
@@ -357,7 +358,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 
 
                 <para>
-                    Defined by the <interfacename>ShortNameLocater</interfacename> interface;
+                    Defined by the <interfacename>ShortNameLocator</interfacename> interface;
                     attempt to resolve a plugin name to a class name. If successful, returns the
                     class name; otherwise, returns a boolean <constant>false</constant>.
                 </para>
@@ -373,6 +374,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getIterator</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -517,8 +519,8 @@ PluginLoader::addStaticMap(array(
             <programlisting language="php"><![CDATA[
 namespace My\Plugins;
 
-use Zend\Loader\PluginClassLoader,
-    Zend\View\Helper\HelperLoader;
+use Zend\Loader\PluginClassLoader;
+use Zend\View\Helper\HelperLoader;
 
 class PluginLoader extends PluginClassLoader
 {

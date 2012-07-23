@@ -1,37 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Twitter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Twitter;
 
-use Zend\Service\Twitter,
-    Zend\Service,
-    Zend\Http,
-    Zend\Rest;
+use Zend\Service\Twitter;
+use Zend\Service;
+use Zend\Http;
+use Zend\Rest;
 
 /**
  * @category   Zend
  * @package    Zend_Service_Twitter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
@@ -150,7 +137,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
     public function testAuthorisationFailureWithUsernameAndNoAccessToken()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter(array('username'=>'me'));
         $twitter->statusPublicTimeline();
     }
@@ -186,7 +173,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
      */
     public function testRetrievingStatusesWithInvalidScreenNameCharacterThrowsInvalidScreenNameException()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter();
         $twitter->status->userTimeline(array('screen_name' => 'abc.def'));
     }
@@ -196,7 +183,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
      */
     public function testRetrievingStatusesWithInvalidScreenNameLengthThrowsInvalidScreenNameException()
     {
-        $this->setExpectedException('\Zend\Service\Twitter\Exception');
+        $this->setExpectedException('\Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter();
         $twitter->status->userTimeline(array('screen_name' => 'abcdef_abc123_abc123x'));
     }
@@ -238,14 +225,14 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingGetShouldthrowExceptionWithInvalidMethodType()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter;
         $return = $twitter->foo;
     }
 
     public function testOverloadingGetShouldthrowExceptionWithInvalidFunction()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter;
         $return = $twitter->foo();
     }
@@ -261,7 +248,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodProxyingThrowExceptionsWithInvalidMethods()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter;
         $twitter->status->foo();
     }
@@ -391,14 +378,14 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
     public function testPostStatusUpdateToLongShouldThrowException()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter;
         $twitter->status->update('Test Message - ' . str_repeat(' Hello ', 140));
     }
 
     public function testPostStatusUpdateEmptyShouldThrowException()
     {
-        $this->setExpectedException('Zend\Service\Twitter\Exception');
+        $this->setExpectedException('Zend\Service\Twitter\Exception\ExceptionInterface');
         $twitter = new Twitter\Twitter;
         $twitter->status->update('');
     }

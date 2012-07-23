@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><info><title>Zend_Amf_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><title>Zend_Amf_Server</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         サーバを作成するための習得しやすいインターフェイスを提供します。
     </para>
 
-    <example xml:id="zend.amf.server.basic"><info><title>基本的な AMF サーバ</title></info>
+    <example xml:id="zend.amf.server.basic"><title>基本的な AMF サーバ</title>
         
 
         <para>
@@ -84,7 +84,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
     </example>
 
-    <note><info><title>アタッチされるすべてのメソッドや関数には docblock が必要</title></info>
+    <note><title>アタッチされるすべてのメソッドや関数には docblock が必要</title>
         
 
         <para>
@@ -130,7 +130,7 @@ class World
         </para>
     </note>
 
-    <section xml:id="zend.amf.server.flex"><info><title>サーバへの Flex からの接続</title></info>
+    <section xml:id="zend.amf.server.flex"><title>サーバへの Flex からの接続</title>
         
 
         <para>
@@ -271,7 +271,7 @@ myservice.world.hello("Wade");
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.errors"><info><title>エラー処理</title></info>
+    <section xml:id="zend.amf.server.errors"><title>エラー処理</title>
         
 
         <para>
@@ -304,7 +304,7 @@ $server->setProduction(false);
 $server->setProduction(true);
 ]]></programlisting>
 
-        <note><info><title>production モードの無効化は慎重に!</title></info>
+        <note><title>production モードの無効化は慎重に!</title>
             
 
             <para>
@@ -326,7 +326,7 @@ $server->setProduction(true);
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.response"><info><title>AMF レスポンス</title></info>
+    <section xml:id="zend.amf.server.response"><title>AMF レスポンス</title>
         
 
         <para>
@@ -335,7 +335,7 @@ $server->setProduction(true);
             <methodname>handle()</methodname> メソッドはレスポンスオブジェクトを返すので、これが利用できます。
         </para>
 
-        <example xml:id="zend.amf.server.response.messageHeaderExample"><info><title>AMF レスポンスへのメッセージヘッダの追加</title></info>
+        <example xml:id="zend.amf.server.response.messageHeaderExample"><title>AMF レスポンスへのメッセージヘッダの追加</title>
             
 
             <para>
@@ -351,7 +351,7 @@ echo $response;
         </example>
     </section>
 
-    <section xml:id="zend.amf.server.typedobjects"><info><title>型付きオブジェクト</title></info>
+    <section xml:id="zend.amf.server.typedobjects"><title>型付きオブジェクト</title>
         
 
         <para>
@@ -470,7 +470,7 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.resources"><info><title>リソース</title></info>
+    <section xml:id="zend.amf.server.resources"><title>リソース</title>
         
 
         <para>
@@ -539,7 +539,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
 
     </section>
 
-    <section xml:id="zend.amf.server.flash"><info><title>サーバへの Flash からの接続</title></info>
+    <section xml:id="zend.amf.server.flash"><title>サーバへの Flash からの接続</title>
         
 
         <para>
@@ -692,7 +692,7 @@ private function onFault(fault:Object):void {
 
     </section>
 
-    <section xml:id="zend.amf.server.auth"><info><title>認証</title></info>
+    <section xml:id="zend.amf.server.auth"><title>認証</title>
         
 
         <para>

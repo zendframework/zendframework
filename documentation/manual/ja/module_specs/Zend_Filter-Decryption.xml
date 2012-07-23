@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><info><title>Decrypt</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><title>Decrypt</title>
     
     <para>
         このフィルタは、指定した文字列を指定した設定で復号します。
@@ -14,7 +14,7 @@
         ここでは追加のメソッドや復号時に固有のことなどについてのみ説明します。
     </para>
 
-    <section xml:id="zend.filter.set.decrypt.mcrypt"><info><title>Mcrypt の復号</title></info>
+    <section xml:id="zend.filter.set.decrypt.mcrypt"><title>Mcrypt の復号</title>
         
         <para>
             <classname>Mcrypt</classname> で暗号化したコンテンツを復号するには、
@@ -58,7 +58,7 @@ print $decrypted;
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.decrypt.openssl"><info><title>OpenSSL の復号</title></info>
+    <section xml:id="zend.filter.set.decrypt.openssl"><title>OpenSSL の復号</title>
         
         <para>
             <classname>OpenSSL</classname> での復号は、暗号化と同様にシンプルです。

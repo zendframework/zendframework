@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><title>Zend_Dom_Query</title>
     
 
     <para>
@@ -17,7 +17,7 @@
             dojo.query</link> 都是组件的灵魂）选择节点的功能的 Javascript 工具箱的开发者来说，符号应当很熟悉。
     </para>
 
-    <section xml:id="zend.dom.query.operation"><info><title> 操作理论 </title></info>
+    <section xml:id="zend.dom.query.operation"><title> 操作理论 </title>
         
 
         <para>
@@ -139,14 +139,14 @@ foreach ($results as $result) {
         </para>
     </section>
 
-    <section xml:id="zend.dom.query.methods"><info><title> 可用方法 </title></info>
+    <section xml:id="zend.dom.query.methods"><title> 可用方法 </title>
         
 
         <para>
             <code>Zend_Dom_Query</code> 类家族有下列方法可用。
         </para>
 
-        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><title>Zend_Dom_Query</title>
             
 
             <para>
@@ -191,7 +191,7 @@ foreach ($results as $result) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><title>Zend_Dom_Query_Result</title>
             
 
             <para>

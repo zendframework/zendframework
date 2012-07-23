@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    ZendTest_Cloud_StorageService_Adapter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\StorageService\Adapter;
 
-use ZendTest\Cloud\StorageService\TestCase,
-    Zend\Service\Rackspace\Files as RackspaceService,
-    Zend\Config\Config;
+use ZendTest\Cloud\StorageService\TestCase;
+use Zend\Service\Rackspace\Files as RackspaceService;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RackspaceTest extends TestCase
 {
@@ -61,16 +48,16 @@ class RackspaceTest extends TestCase
 
         parent::setUp();
         $this->_waitPeriod = 5;
-        
+
         // Create the container here
         $rackspace= new RackspaceService(
             $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::USER),
             $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::API_KEY)
         );
-        $rackspace->createContainer( 
+        $rackspace->createContainer(
             $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::REMOTE_CONTAINER)
         );
-        
+
     }
 
     /**
@@ -91,19 +78,19 @@ class RackspaceTest extends TestCase
         );
         $files = $rackspace->getObjects(
             $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::REMOTE_CONTAINER)
-        );             
+        );
         if ($files==!false) {
             foreach ($files as $file) {
                 $rackspace->deleteObject(
                     $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::REMOTE_CONTAINER),
-                    $file->getName()    
+                    $file->getName()
                 );
             }
-        }    
+        }
         $rackspace->deleteContainer(
-            $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::REMOTE_CONTAINER)   
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\Rackspace::REMOTE_CONTAINER)
         );
-        
+
         parent::tearDown();
     }
 

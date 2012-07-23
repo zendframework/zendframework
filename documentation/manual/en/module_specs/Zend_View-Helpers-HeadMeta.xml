@@ -217,7 +217,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
         <para>
             Enabling the RDFa doctype with the <link linkend="zend.view.helpers.initial.doctype">Doctype helper</link>
             enables the use of the 'property' attribute (in addition to the standard 'name' and 'http-equiv') with HeadMeta.
-            This is commonly used with the Facebook <ulink url="http://opengraphprotocol.org/">Open Graph Protocol</ulink>.
+            This is commonly used with the Facebook <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opengraphprotocol.org/">Open Graph Protocol</link>.
         </para>
 
         <para>

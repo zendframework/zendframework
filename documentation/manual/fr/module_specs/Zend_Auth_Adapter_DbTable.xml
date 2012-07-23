@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Authentification avec une table de base de données</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><title>Authentification avec une table de base de données</title>
     
 
-    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><title>Introduction</title>
         
 
         <para>
@@ -61,7 +61,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Utilisation basique</title></info>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><title>Utilisation basique</title>
             
 
             <para>
@@ -176,7 +176,7 @@ Array
         </example>
     </section>
 
-    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Utilisation avancée : maintenir persistant l'objet de résultat DbTable</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><title>Utilisation avancée : maintenir persistant l'objet de résultat DbTable</title>
         
 
         <para>
@@ -216,7 +216,7 @@ if ($result->isValid()) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Utilisation avancée par l'exemple</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><title>Utilisation avancée par l'exemple</title>
         
 
         <para>

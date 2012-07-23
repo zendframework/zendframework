@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><title>Zend_Db_Statement</title>
 
     
 
@@ -18,7 +18,7 @@
         拡張モジュールの PDOStatement オブジェクトをもとにしたものです。
     </para>
 
-    <section xml:id="zend.db.statement.creating"><info><title>ステートメントの作成</title></info>
+    <section xml:id="zend.db.statement.creating"><title>ステートメントの作成</title>
 
         
 
@@ -31,7 +31,7 @@
             バインド変数の配列を指定します。
         </para>
 
-        <example xml:id="zend.db.statement.creating.example1"><info><title>query() による SQL ステートメントオブジェクトの作成</title></info>
+        <example xml:id="zend.db.statement.creating.example1"><title>query() による SQL ステートメントオブジェクトの作成</title>
             
             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
@@ -58,7 +58,7 @@ $stmt = $db->query(
             このステートメントは、準備されただけでまだ実行されていない状態となります。
         </para>
 
-        <example xml:id="zend.db.statement.creating.example2"><info><title>SQL ステートメントのコンストラクタの使用</title></info>
+        <example xml:id="zend.db.statement.creating.example2"><title>SQL ステートメントのコンストラクタの使用</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -69,7 +69,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
     </section>
 
-    <section xml:id="zend.db.statement.executing"><info><title>ステートメントの実行</title></info>
+    <section xml:id="zend.db.statement.executing"><title>ステートメントの実行</title>
 
         
 
@@ -88,7 +88,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
             バインドする値は通常の配列で渡します。
         </para>
 
-        <example xml:id="zend.db.statement.executing.example1"><info><title>位置指定パラメータによるステートメントの実行</title></info>
+        <example xml:id="zend.db.statement.executing.example1"><title>位置指定パラメータによるステートメントの実行</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -106,7 +106,7 @@ $stmt->execute(array('goofy', 'FIXED'));
             配列のキーが、パラメータの名前に対応します。
         </para>
 
-        <example xml:id="zend.db.statement.executing.example2"><info><title>名前つきパラメータによるステートメントの実行</title></info>
+        <example xml:id="zend.db.statement.executing.example2"><title>名前つきパラメータによるステートメントの実行</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
@@ -127,7 +127,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     </section>
 
-    <section xml:id="zend.db.statement.fetching"><info><title>SELECT 文からの結果の取得</title></info>
+    <section xml:id="zend.db.statement.fetching"><title>SELECT 文からの結果の取得</title>
 
         
 
@@ -141,7 +141,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             その結果から行を取得するメソッドをコールすることはできません。
         </para>
 
-        <section xml:id="zend.db.statement.fetching.fetch"><info><title>結果セットからの単一の行の取得</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch"><title>結果セットからの単一の行の取得</title>
 
             
 
@@ -189,7 +189,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <methodname>fetch()</methodname> は <constant>FALSE</constant> を返します。
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>ループ内での fetch() の使用</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch.example"><title>ループ内での fetch() の使用</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -207,7 +207,7 @@ while ($row = $stmt->fetch()) {
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchall"><info><title>結果セット全体の取得</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchall"><title>結果セット全体の取得</title>
 
             
 
@@ -222,7 +222,7 @@ while ($row = $stmt->fetch()) {
                 Zend_Db::FETCH_COLUMN である場合に使用します。
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>fetchAll() の使用法</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchall.example"><title>fetchAll() の使用法</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -240,7 +240,7 @@ echo $rows[0]['bug_description'];
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetch-mode"><info><title>取得形式の変更</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch-mode"><title>取得形式の変更</title>
 
             
 
@@ -257,7 +257,7 @@ echo $rows[0]['bug_description'];
                 <methodname>fetchAll()</methodname> メソッドでその形式を使用するようになります。
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>取得形式の設定</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><title>取得形式の設定</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -277,7 +277,7 @@ echo $rows[0][0];
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchcolumn"><info><title>結果セットからの単一のカラムの取得</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchcolumn"><title>結果セットからの単一のカラムの取得</title>
 
             
 
@@ -299,7 +299,7 @@ echo $rows[0][0];
                 これは、結果セットのすべての行の、最初のカラムの値をまとめたものです。
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>fetchColumn() の使用法</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><title>fetchColumn() の使用法</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
@@ -315,7 +315,7 @@ $bug_status = $stmt->fetchColumn(2);
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchobject"><info><title>オブジェクト形式での行の取得</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchobject"><title>オブジェクト形式での行の取得</title>
 
             
 
@@ -327,7 +327,7 @@ $bug_status = $stmt->fetchColumn(2);
                 これは、最初の引数で指定したクラスのコンストラクタに渡す引数となります。
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>fetchObject() の使用法</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchobject.example"><title>fetchObject() の使用法</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');

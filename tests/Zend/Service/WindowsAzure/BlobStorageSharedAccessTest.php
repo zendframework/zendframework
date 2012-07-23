@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\WindowsAzure;
@@ -31,12 +20,10 @@ use Zend\Service\WindowsAzure\Storage\Blob\Blob;
  * @subpackage UnitTests
  * @group      Zend_Service
  * @group      Zend_Service_WindowsAzure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
 {
-    static $path;
+    public static $path;
 
     public function __construct()
     {
@@ -56,8 +43,7 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $storageClient = $this->createAdministrativeStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX . $i); } catch (\Exception $e) { }
         }
         try { $storageClient->deleteContainer('$root'); } catch (\Exception $e) { }
@@ -114,7 +100,7 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testSharedAccess_OnlyWrite()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
 
             // Account owner performs this part
@@ -124,10 +110,10 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
             $sharedAccessUrl = $administrativeStorageClient->generateSharedAccessUrl(
                 $containerName,
                 '',
-            	'c',
-            	'w',
-            	$administrativeStorageClient->isoDate(time() - 500),
-            	$administrativeStorageClient->isoDate(time() + 3000)
+                'c',
+                'w',
+                $administrativeStorageClient->isoDate(time() - 500),
+                $administrativeStorageClient->isoDate(time() + 3000)
             );
 
 
@@ -171,10 +157,10 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
             $sharedAccessUrl1 = $administrativeStorageClient->generateSharedAccessUrl(
                 $containerName,
                 '',
-            	'c',
-            	'w',
-            	$administrativeStorageClient->isoDate(time() - 500),
-            	$administrativeStorageClient->isoDate(time() + 3000)
+                'c',
+                'w',
+                $administrativeStorageClient->isoDate(time() - 500),
+                $administrativeStorageClient->isoDate(time() + 3000)
             );
             $sharedAccessUrl2 = str_replace($administrativeStorageClient->getAccountName(), 'bogusaccount', $sharedAccessUrl1);
 
@@ -186,10 +172,10 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
 
             $exceptionThrown = false;
             try {
-	            $credentials->setPermissionSet(array(
-	                $sharedAccessUrl1,
-	                $sharedAccessUrl2
-	            ));
+                $credentials->setPermissionSet(array(
+                    $sharedAccessUrl1,
+                    $sharedAccessUrl2
+                ));
             } catch (\Exception $ex) {
                 $exceptionThrown = true;
             }

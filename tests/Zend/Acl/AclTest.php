@@ -1,37 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Acl
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Acl
  */
 
 namespace ZendTest\Acl;
 
-use Zend\Acl,
-    Zend\Acl\Role,
-    Zend\Acl\Resource;
+use Zend\Acl;
+use Zend\Acl\Role;
+use Zend\Acl\Resource;
 
 /**
  * @category   Zend
  * @package    Zend_Acl
  * @subpackage UnitTests
  * @group      Zend_Acl
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AclTest extends \PHPUnit_Framework_TestCase
 {
@@ -1074,28 +1061,28 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $nullReference =& $nullValue;
 
         try {
-            $acl->roleDFSVisitAllPrivileges($someRole, $someResource, $nullReference);
+            $acl->exroleDFSVisitAllPrivileges($someRole, $someResource, $nullReference);
             $this->fail('Expected Zend\Acl\Exception not thrown');
         } catch (Acl\Exception\ExceptionInterface $e) {
             $this->assertEquals('$dfs parameter may not be null', $e->getMessage());
         }
 
         try {
-            $acl->roleDFSOnePrivilege($someRole, $someResource, null);
+            $acl->exroleDFSOnePrivilege($someRole, $someResource, null);
             $this->fail('Expected Zend\Acl\Exception not thrown');
         } catch (Acl\Exception\ExceptionInterface $e) {
             $this->assertEquals('$privilege parameter may not be null', $e->getMessage());
         }
 
         try {
-            $acl->roleDFSVisitOnePrivilege($someRole, $someResource, null);
+            $acl->exroleDFSVisitOnePrivilege($someRole, $someResource, null);
             $this->fail('Expected Zend\Acl\Exception not thrown');
         } catch (Acl\Exception\ExceptionInterface $e) {
             $this->assertEquals('$privilege parameter may not be null', $e->getMessage());
         }
 
         try {
-            $acl->roleDFSVisitOnePrivilege($someRole, $someResource, 'somePrivilege', $nullReference);
+            $acl->exroleDFSVisitOnePrivilege($someRole, $someResource, 'somePrivilege', $nullReference);
             $this->fail('Expected Zend\\Acl\\Exception not thrown');
         } catch (Acl\Exception\ExceptionInterface $e) {
             $this->assertEquals('$dfs parameter may not be null', $e->getMessage());

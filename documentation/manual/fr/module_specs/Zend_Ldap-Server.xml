@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.server"><info><title>Récupérer des informations depuis un serveur LDAP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.server"><title>Récupérer des informations depuis un serveur LDAP</title>
     
 
-    <section xml:id="zend.ldap.server.rootdse"><info><title>RootDSE</title></info>
+    <section xml:id="zend.ldap.server.rootdse"><title>RootDSE</title>
         
 
         <para>
@@ -32,7 +32,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.ldap.server.rootdse.getting"><info><title>Prendre la main sur le RootDSE</title></info>
+        <example xml:id="zend.ldap.server.rootdse.getting"><title>Prendre la main sur le RootDSE</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -44,10 +44,10 @@ $serverType = $rootdse->getServerType();
         </example>
     </section>
 
-    <section xml:id="zend.ldap.server.schema"><info><title>Parcours de Schema</title></info>
+    <section xml:id="zend.ldap.server.schema"><title>Parcours de Schema</title>
         
 
-        <example xml:id="zend.ldap.server.schema.getting"><info><title>Prendre la main sur le schema du serveur</title></info>
+        <example xml:id="zend.ldap.server.schema.getting"><title>Prendre la main sur le schema du serveur</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -58,15 +58,15 @@ $classes = $schema->getObjectClasses();
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.ldap.server.schema.openldap"><info><title>OpenLDAP</title></info>
+        <section xml:id="zend.ldap.server.schema.openldap"><title>OpenLDAP</title>
             
             <para/>
         </section>
 
-        <section xml:id="zend.ldap.server.schema.activedirectory"><info><title>ActiveDirectory</title></info>
+        <section xml:id="zend.ldap.server.schema.activedirectory"><title>ActiveDirectory</title>
             
 
-            <note><info><title>Parcours du Schema pour les serveurs ActiveDirectory</title></info>
+            <note><title>Parcours du Schema pour les serveurs ActiveDirectory</title>
                 
 
                 <para>

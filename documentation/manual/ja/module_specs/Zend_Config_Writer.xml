@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><title>Zend_Config_Writer</title>
     
 
     <para>
@@ -64,7 +64,7 @@
         <methodname>setExtend()</methodname> メソッドをコールします。
     </para>
 
-    <example xml:id="zend.config.writer.example.using"><info><title>Zend_Config_Writer の使用法</title></info>
+    <example xml:id="zend.config.writer.example.using"><title>Zend_Config_Writer の使用法</title>
         
 
         <para>
@@ -110,7 +110,7 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example xml:id="zend.config.writer.modifying"><info><title>既存の設定の変更</title></info>
+    <example xml:id="zend.config.writer.modifying"><title>既存の設定の変更</title>
         
 
         <para>
@@ -134,7 +134,7 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note><info><title>設定ファイルの読み込み</title></info>
+    <note><title>設定ファイルの読み込み</title>
         
         <para>
             既存の設定ファイルを読み込んで変更をする場合は、

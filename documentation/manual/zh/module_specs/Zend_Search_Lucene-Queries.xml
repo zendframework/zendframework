@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.queries"><info><title>查询类型</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.queries"><title>查询类型</title>
     
 
-    <section xml:id="zend.search.lucene.queries.term-query"><info><title>单项查询</title></info>
+    <section xml:id="zend.search.lucene.queries.term-query"><title>单项查询</title>
         
         <para>
         单项查询用于搜索一个搜索项。
@@ -33,7 +33,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>多项查询</title></info>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><title>多项查询</title>
         
         <para>
             多项查询用于搜索一组搜索项。
@@ -119,7 +119,7 @@ $hits = $index->find('+word1 author:word2 -word3');
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>短语查询</title></info>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><title>短语查询</title>
         
         <para>
             短语查询用于搜索短语。

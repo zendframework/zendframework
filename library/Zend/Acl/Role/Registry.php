@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Acl
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Acl
  */
 
 namespace Zend\Acl\Role;
 
-use Zend\Acl,
-    Zend\Acl\Exception,
-    Zend\Acl\Role;
-
+use Zend\Acl;
+use Zend\Acl\Exception;
+use Zend\Acl\Role;
 
 /**
  * @category   Zend
  * @package    Zend_Acl
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Registry
 {
@@ -38,7 +25,7 @@ class Registry
      *
      * @var array
      */
-    protected $_roles = array();
+    protected $roles = array();
 
     /**
      * Adds a Role having an identifier unique to the registry
@@ -54,17 +41,20 @@ class Registry
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  \Zend\Acl\Role\RoleInterface              $role
-     * @param  \Zend\Acl\Role\RoleInterface|string|array $parents
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @param  RoleInterface              $role
+     * @param  RoleInterface|string|array $parents
+     * @throws Exception\InvalidArgumentException
      * @return Registry Provides a fluent interface
      */
-    public function add(Role\RoleInterface $role, $parents = null)
+    public function add(RoleInterface $role, $parents = null)
     {
         $roleId = $role->getRoleId();
 
         if ($this->has($roleId)) {
-            throw new Acl\Exception\InvalidArgumentException("Role id '$roleId' already exists in the registry");
+            throw new Acl\Exception\InvalidArgumentException(sprintf(
+                'Role id "%s" already exists in the registry',
+                $roleId
+            ));
         }
 
         $roleParents = array();
@@ -75,21 +65,24 @@ class Registry
             }
             foreach ($parents as $parent) {
                 try {
-                    if ($parent instanceof Role\RoleInterface) {
+                    if ($parent instanceof RoleInterface) {
                         $roleParentId = $parent->getRoleId();
                     } else {
                         $roleParentId = $parent;
                     }
                     $roleParent = $this->get($roleParentId);
                 } catch (\Exception $e) {
-                    throw new Acl\Exception\InvalidArgumentException("Parent Role id '$roleParentId' does not exist", 0, $e);
+                    throw new Acl\Exception\InvalidArgumentException(sprintf(
+                        'Parent Role id "%s" does not exist',
+                        $roleParentId
+                    ), 0, $e);
                 }
                 $roleParents[$roleParentId] = $roleParent;
-                $this->_roles[$roleParentId]['children'][$roleId] = $role;
+                $this->roles[$roleParentId]['children'][$roleId] = $role;
             }
         }
 
-        $this->_roles[$roleId] = array(
+        $this->roles[$roleId] = array(
             'instance' => $role,
             'parents'  => $roleParents,
             'children' => array(),
@@ -103,13 +96,13 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  \Zend\Acl\Role|string $role
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
-     * @return \Zend\Acl\Role
+     * @param  RoleInterface|string $role
+     * @throws Exception\InvalidArgumentException
+     * @return RoleInterface
      */
     public function get($role)
     {
-        if ($role instanceof Role\RoleInterface) {
+        if ($role instanceof RoleInterface) {
             $roleId = $role->getRoleId();
         } else {
             $roleId = (string) $role;
@@ -119,7 +112,7 @@ class Registry
             throw new Acl\Exception\InvalidArgumentException("Role '$roleId' not found");
         }
 
-        return $this->_roles[$roleId]['instance'];
+        return $this->roles[$roleId]['instance'];
     }
 
     /**
@@ -127,18 +120,18 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  \Zend\Acl\Role|string $role
+     * @param  RoleInterface|string $role
      * @return boolean
      */
     public function has($role)
     {
-        if ($role instanceof Role\RoleInterface) {
+        if ($role instanceof RoleInterface) {
             $roleId = $role->getRoleId();
         } else {
             $roleId = (string) $role;
         }
 
-        return isset($this->_roles[$roleId]);
+        return isset($this->roles[$roleId]);
     }
 
     /**
@@ -151,14 +144,14 @@ class Registry
      *
      * If the Role does not have any parents, then an empty array is returned.
      *
-     * @param  \Zend\Acl\Role\RoleInterface|string $role
+     * @param  RoleInterface|string $role
      * @return array
      */
     public function getParents($role)
     {
         $roleId = $this->get($role)->getRoleId();
 
-        return $this->_roles[$roleId]['parents'];
+        return $this->roles[$roleId]['parents'];
     }
 
     /**
@@ -170,10 +163,10 @@ class Registry
      * through the entire inheritance DAG to determine whether $role
      * inherits from $inherit through its ancestor Roles.
      *
-     * @param  \Zend\Acl\Role\RoleInterface|string  $role
-     * @param  \Zend\Acl\Role\RoleInterface|string  $inherit
-     * @param  boolean                              $onlyParents
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @param  RoleInterface|string  $role
+     * @param  RoleInterface|string  $inherit
+     * @param  boolean                    $onlyParents
+     * @throws Exception\InvalidArgumentException
      * @return boolean
      */
     public function inherits($role, $inherit, $onlyParents = false)
@@ -181,17 +174,17 @@ class Registry
         try {
             $roleId    = $this->get($role)->getRoleId();
             $inheritId = $this->get($inherit)->getRoleId();
-        } catch (Exception $e) {
-            throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (Exception\ExceptionInterface $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
-        $inherits = isset($this->_roles[$roleId]['parents'][$inheritId]);
+        $inherits = isset($this->roles[$roleId]['parents'][$inheritId]);
 
         if ($inherits || $onlyParents) {
             return $inherits;
         }
 
-        foreach ($this->_roles[$roleId]['parents'] as $parentId => $parent) {
+        foreach ($this->roles[$roleId]['parents'] as $parentId => $parent) {
             if ($this->inherits($parentId, $inheritId)) {
                 return true;
             }
@@ -205,26 +198,26 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  \Zend\Acl\Role\RoleInterface|string $role
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @param  RoleInterface|string $role
+     * @throws Exception\InvalidArgumentException
      * @return Registry Provides a fluent interface
      */
     public function remove($role)
     {
         try {
             $roleId = $this->get($role)->getRoleId();
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
-        foreach ($this->_roles[$roleId]['children'] as $childId => $child) {
-            unset($this->_roles[$childId]['parents'][$roleId]);
+        foreach ($this->roles[$roleId]['children'] as $childId => $child) {
+            unset($this->roles[$childId]['parents'][$roleId]);
         }
-        foreach ($this->_roles[$roleId]['parents'] as $parentId => $parent) {
-            unset($this->_roles[$parentId]['children'][$roleId]);
+        foreach ($this->roles[$roleId]['parents'] as $parentId => $parent) {
+            unset($this->roles[$parentId]['children'][$roleId]);
         }
 
-        unset($this->_roles[$roleId]);
+        unset($this->roles[$roleId]);
 
         return $this;
     }
@@ -236,7 +229,7 @@ class Registry
      */
     public function removeAll()
     {
-        $this->_roles = array();
+        $this->roles = array();
 
         return $this;
     }
@@ -248,6 +241,6 @@ class Registry
      */
     public function getRoles()
     {
-        return $this->_roles;
+        return $this->roles;
     }
 }

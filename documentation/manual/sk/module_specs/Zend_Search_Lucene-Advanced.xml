@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Pokročilé</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><title>Pokročilé</title>
     
 
-    <section xml:id="zend.search.lucene.advanced.static"><info><title>Použitie indexu ako statickej vlastnosti</title></info>
+    <section xml:id="zend.search.lucene.advanced.static"><title>Použitie indexu ako statickej vlastnosti</title>
         
 
         <para>

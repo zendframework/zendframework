@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><info><title>描画</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><title>描画</title>
     
 
-    <section xml:id="zend.pdf.drawing.geometry"><info><title>ジオメトリ</title></info>
+    <section xml:id="zend.pdf.drawing.geometry"><title>ジオメトリ</title>
         
         <para>
         <acronym>PDF</acronym> は PostScript と同じジオメトリを使用します。ページの左下隅を基準とし、
@@ -19,7 +19,7 @@ $height = $pdfPage->getHeight();
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.color"><info><title>色</title></info>
+    <section xml:id="zend.pdf.drawing.color"><title>色</title>
         
         <para>
         <acronym>PDF</acronym> には、色を表現するためのさまざまな方法があります。<classname>Zend_Pdf</classname> では、
@@ -50,7 +50,7 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.shape-drawing"><info><title>図形の描画</title></info>
+    <section xml:id="zend.pdf.drawing.shape-drawing"><title>図形の描画</title>
         
         <para>
         描画操作は、<acronym>PDF</acronym> のページに対して行われます。
@@ -200,7 +200,7 @@ public function drawEllipse($x1,
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.text-drawing"><info><title>テキストの描画</title></info>
+    <section xml:id="zend.pdf.drawing.text-drawing"><title>テキストの描画</title>
         
         <para>
         テキストに対する描画操作も、<acronym>PDF</acronym> のページに対して行われます。
@@ -223,7 +223,7 @@ public function drawEllipse($x1,
  */
 public function drawText($text, $x, $y, $charEncoding = '');
 ]]></programlisting>
-        <example xml:id="zend.pdf.drawing.text-drawing.example-1"><info><title>ページ上への文字列の描画</title></info>
+        <example xml:id="zend.pdf.drawing.text-drawing.example-1"><title>ページ上への文字列の描画</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -241,7 +241,7 @@ $pdfPage->drawText('Hello world!', 72, 720);
         <code><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/function.iconv.php">iconv()</link></code>
         関数がサポートしているエンコーディングなら、すべて入力として使用することが可能です。
         </para>
-        <example xml:id="zend.pdf.drawing.text-drawing.example-2"><info><title>UTF-8 でエンコードされた文字列をページに描画する</title></info>
+        <example xml:id="zend.pdf.drawing.text-drawing.example-2"><title>UTF-8 でエンコードされた文字列をページに描画する</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -255,7 +255,7 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.using-fonts"><info><title>フォントの使用</title></info>
+    <section xml:id="zend.pdf.drawing.using-fonts"><title>フォントの使用</title>
         
         <para>
         <methodname>Zend_Pdf_Page::drawText()</methodname> は、
@@ -286,7 +286,7 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
         標準の 14 種類の <acronym>PDF</acronym> フォントの場合は <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname>、
         独自のフォントの場合は <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> です。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-1"><info><title>標準フォントの作成</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-1"><title>標準フォントの作成</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -357,7 +357,7 @@ $pdfPage->setFont($font, 36);
         何らかの理由でフォントが読み込めなかった場合、あるいはそれが TrueType
         フォントでなかった場合は、ファクトリーメソッドが例外をスローします。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-2"><info><title>TrueType フォントの作成</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-2"><title>TrueType フォントの作成</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -375,7 +375,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         ページをきちんと閲覧できるようになります。ファイルの大きさが気になる場合は、
         ファクトリーメソッドのオプションで「フォントを埋め込まない」ことを指定できます。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-3"><info><title>TrueType を作成するが、PDF ドキュメントには埋め込まない</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-3"><title>TrueType を作成するが、PDF ドキュメントには埋め込まない</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -402,7 +402,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         このようなフォントを使用することも可能ですが、そのためには、
         上で説明した「埋め込まない」フラグを使用するか、あるいは例外を抑制しなければなりません。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-4"><info><title>埋め込みが禁止されているフォントで、例外をスローさせないようにする</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-4"><title>埋め込みが禁止されているフォントで、例外をスローさせないようにする</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -423,7 +423,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         デフォルトでは埋め込みフォントは Flate 圧縮され、平均して 50% ほどサイズを節約できます。
         何らかの理由でフォントを圧縮したくない場合は、以下のオプションで圧縮を無効にできます。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-5"><info><title>埋め込みフォントを圧縮しない</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-5"><title>埋め込みフォントを圧縮しない</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -435,7 +435,7 @@ $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
         <para>
         最後に、必要に応じていくつかの埋め込みオプションをビット OR 演算子で連結することもできます。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-6"><info><title>フォントの埋め込みオプションを組み合わせる</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-6"><title>フォントの埋め込みオプションを組み合わせる</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -448,7 +448,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.standard-fonts-limitations"><info><title>標準 PDF フォントの制限</title></info>
+    <section xml:id="zend.pdf.drawing.standard-fonts-limitations"><title>標準 PDF フォントの制限</title>
         
         <para>
             標準 <acronym>PDF</acronym> フォントは、いくつかのシングルバイトエンコーディング
@@ -465,7 +465,7 @@ $font = Zend_Pdf_Font::fontWithPath(
             現在のロケールと異なる場合はそれを指定する必要があります。
             実際に描画されるのは WinLatin1 の文字のみです。
         </para>
-        <example xml:id="zend.pdf.drawing.using-fonts.example-7"><info><title>フォント埋め込みオプションの使用</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-7"><title>フォント埋め込みオプションの使用</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -478,7 +478,7 @@ $pdfPage->setFont($font, 36)
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.extracting-fonts"><info><title>フォントの抽出</title></info>
+    <section xml:id="zend.pdf.drawing.extracting-fonts"><title>フォントの抽出</title>
         
         <para>
             <classname>Zend_Pdf</classname> モジュールを使用すると、読み込んだドキュメントからフォントを抽出できるようになります。
@@ -494,7 +494,7 @@ $pdfPage->setFont($font, 36)
             <classname>Zend_Pdf</classname> オブジェクトおよび <classname>Zend_Pdf_Page</classname> オブジェクトには、
             ドキュメントやページ内のすべてのフォントを抽出するためのメソッドが用意されています。
         </para>
-        <example xml:id="zend.pdf.drawing.extracting-fonts.example-1"><info><title>読み込んだドキュメントからのフォントの抽出</title></info>
+        <example xml:id="zend.pdf.drawing.extracting-fonts.example-1"><title>読み込んだドキュメントからのフォントの抽出</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -522,7 +522,7 @@ $firstPageFonts = $firstPage->extractFonts();
 ...
 ]]></programlisting>
         </example>
-        <example xml:id="zend.pdf.drawing.extracting-fonts.example-2"><info><title>フォント名の指定による、読み込んだドキュメントからのフォントの抽出</title></info>
+        <example xml:id="zend.pdf.drawing.extracting-fonts.example-2"><title>フォント名の指定による、読み込んだドキュメントからのフォントの抽出</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -592,7 +592,7 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.image-drawing"><info><title>画像の描画</title></info>
+    <section xml:id="zend.pdf.drawing.image-drawing"><title>画像の描画</title>
         
         <para>
         <classname>Zend_Pdf_Page</classname> クラスの drawImage() メソッドで、
@@ -616,7 +616,7 @@ public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
         メソッドで作成しなければなりません (現在は JPG、PNG および TIFF
         画像をサポートしています)。
         </para>
-        <example xml:id="zend.pdf.drawing.image-drawing.example-1"><info><title>画像の描画</title></info>
+        <example xml:id="zend.pdf.drawing.image-drawing.example-1"><title>画像の描画</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -640,7 +640,7 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.line-drawing-style"><info><title>直線の描画スタイル</title></info>
+    <section xml:id="zend.pdf.drawing.line-drawing-style"><title>直線の描画スタイル</title>
         
         <para>
         直線の描画スタイルは、線幅と線の色、そして破線のパターンで定義されます。
@@ -668,7 +668,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.fill-style"><info><title>塗りつぶしのスタイル</title></info>
+    <section xml:id="zend.pdf.drawing.fill-style"><title>塗りつぶしのスタイル</title>
         
         <para>
         <methodname>Zend_Pdf_Page::drawRectangle()</methodname>、<methodname>Zend_Pdf_Page::drawPolygon()</methodname>、
@@ -753,9 +753,9 @@ public function setLineDashingPattern($pattern, $phase = 0);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.pdf.drawing.linear-transformations"><info><title>線形変換</title></info>
+    <section xml:id="zend.pdf.drawing.linear-transformations"><title>線形変換</title>
         
-        <section xml:id="zend.pdf.drawing.linear-transformations.rotations"><info><title>回転</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.rotations"><title>回転</title>
             
             <para>
             描画操作を適用する前に、<acronym>PDF</acronym> のページを回転させることができます。
@@ -774,7 +774,7 @@ public function rotate($x, $y, $angle);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.scale"><info><title>ZF 1.8 以降で使用できる拡大/縮小</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.scale"><title>ZF 1.8 以降で使用できる拡大/縮小</title>
             
             <para>
             倍率の変更は <methodname>Zend_Pdf_Page::scale()</methodname> メソッドで行います。
@@ -791,7 +791,7 @@ public function scale($xScale, $yScale);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.translate"><info><title>ZF 1.8 以降で使用できる移動</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.translate"><title>ZF 1.8 以降で使用できる移動</title>
             
             <para>
                 座標系の移動は <methodname>Zend_Pdf_Page::translate()</methodname> メソッドで行います。
@@ -808,7 +808,7 @@ public function translate($xShift, $yShift);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.skew"><info><title>ZF 1.8 以降で使用できる傾斜</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.skew"><title>ZF 1.8 以降で使用できる傾斜</title>
             
             <para>
                 ページを傾けるには <methodname>Zend_Pdf_Page::skew()</methodname> メソッドを使用します。
@@ -828,7 +828,7 @@ public function skew($x, $y, $xAngle, $yAngle);
         </section>
     </section>
 
-    <section xml:id="zend.pdf.drawing.save-restore"><info><title>グラフィックの状態の保存/復元</title></info>
+    <section xml:id="zend.pdf.drawing.save-restore"><title>グラフィックの状態の保存/復元</title>
         
         <para>
         好きな時点でのグラフィックの状態
@@ -859,7 +859,7 @@ public function restoreGS();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.clipping"><info><title>描画領域のクリッピング</title></info>
+    <section xml:id="zend.pdf.drawing.clipping"><title>描画領域のクリッピング</title>
         
         <para>
         <acronym>PDF</acronym> および <classname>Zend_Pdf</classname> モジュールは、描画領域のクリッピングに対応しています。
@@ -940,7 +940,7 @@ public function clipEllipse($x1,
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.styles"><info><title>スタイル</title></info>
+    <section xml:id="zend.pdf.drawing.styles"><title>スタイル</title>
         
         <para>
         <classname>Zend_Pdf_Style</classname> クラスがスタイルに関する機能を提供します。
@@ -1084,7 +1084,7 @@ public function getFontSize();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.alpha"><info><title>透明度</title></info>
+    <section xml:id="zend.pdf.drawing.alpha"><title>透明度</title>
         
         <para>
         <classname>Zend_Pdf</classname> モジュールは、透明度の処理に対応しています。

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introducción</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>Introducción</title>
 
     
 
@@ -8,7 +8,7 @@
         un sencillo mecanismo de encadenar varios filtros que se puedan aplicar
         a un solo dato en un orden definido por el usuario. </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>¿Qué es un filtro?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>¿Qué es un filtro?</title>
         
         <para>En el mundo físico, un filtro se suele utilizar para eliminar
             partes no deseadas de lo ingresado, y la vez lo ingresado pasa a
@@ -17,27 +17,7 @@
             entrada. Este tipo de filtro es útil para aplicaciones web, para la
             supresión de entradas ilegales y/o que no se ajustan, eliminación de
             los espacios en blanco innecesarios, etc</para>
-        <para> This basic definition of a filter may be extended to include
-            generalized transformations upon input. A common transformation
-            applied in web applications is the escaping of
-                <acronym>HTML</acronym> entities. For example, if a form field
-            is automatically populated with untrusted input (e.g., from a web
-            browser), this value should either be free of
-                <acronym>HTML</acronym> entities or contain only escaped
-                <acronym>HTML</acronym> entities, in order to prevent undesired
-            behavior and security vulnerabilities. To meet this requirement,
-                <acronym>HTML</acronym> entities that appear in the input must
-            either be removed or escaped. Of course, which approach is more
-            appropriate depends on the situation. A filter that removes the
-                <acronym>HTML</acronym> entities operates within the scope of
-            the first definition of filter - an operator that produces a subset
-            of the input. A filter that escapes the <acronym>HTML</acronym>
-            entities, however, transforms the input (e.g., "
-                <code>&amp;</code> " is transformed to "
-                <code>&amp;amp;</code> "). Supporting such use cases for web
-            developers is important, and "to filter," in the context of using
-                <classname>Zend_Filter</classname> , means to perform some
-            transformations upon input data. </para> Esta definición básica de
+        <para>Esta definición básica de
         un filtro puede ser extendido para incluir transformaciones
         generalizadas sobre la entrada. Una transformación común requerida en
         las aplicaciones web es la de escapar las entidades
@@ -58,9 +38,9 @@
             <code> &amp;amp;</code> "). El Apoyo a los casos de uso como
         para la web los desarrolladores es importante, y "filtrar", en el
         contexto de la utilización de <classname> Zend_Filter </classname> , los
-        medios para realizar algunas transformaciones en los datos de entrada. </section>
+        medios para realizar algunas transformaciones en los datos de entrada.</para> </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>Uso básico de los filtros</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>Uso básico de los filtros</title>
 
         
 
@@ -81,7 +61,7 @@ echo $htmlEntities->filter('"'); // "
 
     </section>
 
-    <section xml:id="zend.filter.introduction.static"><info><title> Usando el método estático staticFilter()</title></info>
+    <section xml:id="zend.filter.introduction.static"><title> Usando el método estático staticFilter()</title>
 
         
 
@@ -116,7 +96,7 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
             you to instantiate and run multiple filter and validator classes on
             demand to process sets of input data. See <xref linkend="zend.filter.input"/> . </para>
 
-        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
+        <section xml:id="zend.filter.introduction.static.namespaces"><title>Namespaces</title>
 
             
 

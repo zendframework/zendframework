@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
@@ -27,303 +16,279 @@ use Zend\Filter\Null as NullFilter;
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class NullTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_Null object
-     *
-     * @var Zend_Filter_Null
-     */
-    protected $_filter;
-
-    /**
-     * Creates a new Zend_Filter_Null object for each test method
-     *
-     * @return void
-     */
-    public function setUp()
+    public function testConstructorOptions()
     {
-        $this->_filter = new NullFilter();
+        $filter = new NullFilter(array(
+            'type' => NullFilter::TYPE_INTEGER,
+        ));
+
+        $this->assertEquals(NullFilter::TYPE_INTEGER, $filter->getType());
+    }
+
+    public function testConstructorParams()
+    {
+        $filter = new NullFilter(NullFilter::TYPE_INTEGER);
+
+        $this->assertEquals(NullFilter::TYPE_INTEGER, $filter->getType());
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param mixed $value
+     * @param bool  $expected
+     * @dataProvider defaultTestProvider
      */
-    public function testBasic()
+    public function testDefault($value, $expected)
     {
-        $filter = $this->_filter;
-        $this->assertEquals(null, $filter(0.0));
-        $this->assertEquals(null, $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(null, $filter(0));
-        $this->assertEquals(null, $filter(array()));
-        $this->assertEquals(null, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
+        $filter = new NullFilter();
+        $this->assertSame($expected, $filter->filter($value));
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param int $type
+     * @param array $testData
+     * @dataProvider typeTestProvider
      */
-    public function testOnlyBoolean()
+    public function testTypes($type, $testData)
     {
-        $filter = $this->_filter;
-        $filter->setType(NullFilter::BOOLEAN);
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals('0', $filter('0'));
-        $this->assertEquals('', $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(null, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
+        $filter = new NullFilter($type);
+        foreach ($testData as $data) {
+            list($value, $expected) = $data;
+            $message = sprintf(
+                '%s (%s) is not filtered as %s; type = %s',
+                var_export($value, true),
+                gettype($value),
+                var_export($expected, true),
+                $type
+            );
+            $this->assertSame($expected, $filter->filter($value), $message);
+        }
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param array $typeData
+     * @param array $testData
+     * @dataProvider combinedTypeTestProvider
      */
-    public function testOnlyInteger()
+    public function testCombinedTypes($typeData, $testData)
     {
-        $filter = $this->_filter;
-        $filter->setType(NullFilter::INTEGER);
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals('0', $filter('0'));
-        $this->assertEquals('', $filter(''));
-        $this->assertEquals(null, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(false, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
+        foreach ($typeData as $type) {
+            $filter = new NullFilter(array('type' => $type));
+            foreach ($testData as $data) {
+                list($value, $expected) = $data;
+                $message = sprintf(
+                    '%s (%s) is not filtered as %s; type = %s',
+                    var_export($value, true),
+                    gettype($value),
+                    var_export($expected, true),
+                    var_export($type, true)
+                );
+                $this->assertSame($expected, $filter->filter($value), $message);
+            }
+        }
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyArray()
-    {
-        $filter = $this->_filter;
-        $filter->setType(NullFilter::EMPTY_ARRAY);
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals('0', $filter('0'));
-        $this->assertEquals('', $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(null, $filter(array()));
-        $this->assertEquals(false, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyString()
-    {
-        $filter = $this->_filter;
-        $filter->setType(NullFilter::STRING);
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals('0', $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(false, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyZero()
-    {
-        $filter = $this->_filter;
-        $filter->setType(NullFilter::ZERO);
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals(null, $filter('0'));
-        $this->assertEquals('', $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(false, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testArrayConstantNotation()
-    {
-        $filter = new NullFilter(
-            array(
-                NullFilter::ZERO,
-                NullFilter::STRING,
-                NullFilter::BOOLEAN,
-            )
-        );
-
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals(null, $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(null, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testArrayConfigNotation()
-    {
-        $filter = new NullFilter(
-            array(
-                'type' => array(
-                    NullFilter::ZERO,
-                    NullFilter::STRING,
-                    NullFilter::BOOLEAN),
-                'test' => false
-            )
-        );
-
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals(null, $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(null, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testMultiConstantNotation()
-    {
-        $filter = new NullFilter(
-            NullFilter::ZERO + NullFilter::STRING + NullFilter::BOOLEAN
-        );
-
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals(null, $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(null, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testStringNotation()
-    {
-        $filter = new NullFilter(
-            array(
-                'zero', 'string', 'boolean'
-            )
-        );
-
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals(null, $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(null, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSingleStringNotation()
-    {
-        $filter = new NullFilter(
-            'boolean'
-        );
-
-        $this->assertEquals(0.0, $filter(0.0));
-        $this->assertEquals('0', $filter('0'));
-        $this->assertEquals(null, $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(false, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
     public function testSettingFalseType()
     {
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown');
-        $this->_filter->setType(true);
+        $filter = new NullFilter();
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown type value');
+        $filter->setType(true);
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testGetType()
+    public function testGettingDefaultType()
     {
-        $this->assertEquals(63, $this->_filter->getType());
+        $filter = new NullFilter();
+        $this->assertEquals(63, $filter->getType());
     }
 
-    /**
-     * @group ZF-10388
-     */
-    public function testDataTypeFloat()
+    public static function defaultTestProvider()
     {
-        $filter = $this->_filter;
-        $this->assertEquals(null, $filter(0.0));
+        return array(
+            array(null, null),
+            array(false, null),
+            array(true, true),
+            array(0, null),
+            array(1, 1),
+            array(0.0, null),
+            array(1.0, 1.0),
+            array('', null),
+            array('abc', 'abc'),
+            array('0', null),
+            array('1', '1'),
+            array(array(), null),
+            array(array(0), array(0)),
+        );
     }
 
-    /**
-     * @group ZF-10388
-     */
-    public function testOnlyFloat()
+    public static function typeTestProvider()
     {
-        $filter = $this->_filter;
-        $filter->setType(NullFilter::FLOAT);
-        $this->assertEquals(null, $filter(0.0));
-        $this->assertEquals('0', $filter('0'));
-        $this->assertEquals('', $filter(''));
-        $this->assertEquals(0, $filter(0));
-        $this->assertEquals(array(), $filter(array()));
-        $this->assertEquals(false, $filter(false));
-        $this->assertEquals('test', $filter('test'));
-        $this->assertEquals(true, $filter(true));
+        return array(
+            array(
+                NullFilter::TYPE_BOOLEAN,
+                array(
+                    array(null, null),
+                    array(false, null),
+                    array(true, true),
+                    array(0, 0),
+                    array(1, 1),
+                    array(0.0, 0.0),
+                    array(1.0, 1.0),
+                    array('', ''),
+                    array('abc', 'abc'),
+                    array('0', '0'),
+                    array('1', '1'),
+                    array(array(), array()),
+                    array(array(0), array(0)),
+                )
+            ),
+            array(
+                NullFilter::TYPE_INTEGER,
+                array(
+                    array(null, null),
+                    array(false, false),
+                    array(true, true),
+                    array(0, null),
+                    array(1, 1),
+                    array(0.0, 0.0),
+                    array(1.0, 1.0),
+                    array('', ''),
+                    array('abc', 'abc'),
+                    array('0', '0'),
+                    array('1', '1'),
+                    array(array(), array()),
+                    array(array(0), array(0)),
+                )
+            ),
+            array(
+                NullFilter::TYPE_EMPTY_ARRAY,
+                array(
+                    array(null, null),
+                    array(false, false),
+                    array(true, true),
+                    array(0, 0),
+                    array(1, 1),
+                    array(0.0, 0.0),
+                    array(1.0, 1.0),
+                    array('', ''),
+                    array('abc', 'abc'),
+                    array('0', '0'),
+                    array('1', '1'),
+                    array(array(), null),
+                    array(array(0), array(0)),
+                )
+            ),
+            array(
+                NullFilter::TYPE_STRING,
+                array(
+                    array(null, null),
+                    array(false, false),
+                    array(true, true),
+                    array(0, 0),
+                    array(1, 1),
+                    array(0.0, 0.0),
+                    array(1.0, 1.0),
+                    array('', null),
+                    array('abc', 'abc'),
+                    array('0', '0'),
+                    array('1', '1'),
+                    array(array(), array()),
+                    array(array(0), array(0)),
+                )
+            ),
+            array(
+                NullFilter::TYPE_ZERO_STRING,
+                array(
+                    array(null, null),
+                    array(false, false),
+                    array(true, true),
+                    array(0, 0),
+                    array(1, 1),
+                    array(0.0, 0.0),
+                    array(1.0, 1.0),
+                    array('', ''),
+                    array('abc', 'abc'),
+                    array('0', null),
+                    array('1', '1'),
+                    array(array(), array()),
+                    array(array(0), array(0)),
+                )
+            ),
+            array(
+                NullFilter::TYPE_FLOAT,
+                array(
+                    array(null, null),
+                    array(false, false),
+                    array(true, true),
+                    array(0, 0),
+                    array(1, 1),
+                    array(0.0, null),
+                    array(1.0, 1.0),
+                    array('', ''),
+                    array('abc', 'abc'),
+                    array('0', '0'),
+                    array('1', '1'),
+                    array(array(), array()),
+                    array(array(0), array(0)),
+                )
+            ),
+            array(
+                NullFilter::TYPE_ALL,
+                array(
+                    array(null, null),
+                    array(false, null),
+                    array(true, true),
+                    array(0, null),
+                    array(1, 1),
+                    array(0.0, null),
+                    array(1.0, 1.0),
+                    array('', null),
+                    array('abc', 'abc'),
+                    array('0', null),
+                    array('1', '1'),
+                    array(array(), null),
+                    array(array(0), array(0)),
+                )
+            ),
+        );
+    }
+
+    public static function combinedTypeTestProvider()
+    {
+        return array(
+            array(
+                array(
+                    array(
+                        NullFilter::TYPE_ZERO_STRING,
+                        NullFilter::TYPE_STRING,
+                        NullFilter::TYPE_BOOLEAN,
+                    ),
+                    array(
+                        'zero',
+                        'string',
+                        'boolean',
+                    ),
+                    NullFilter::TYPE_ZERO_STRING | NullFilter::TYPE_STRING | NullFilter::TYPE_BOOLEAN,
+                    NullFilter::TYPE_ZERO_STRING + NullFilter::TYPE_STRING + NullFilter::TYPE_BOOLEAN,
+                ),
+                array(
+                    array(null, null),
+                    array(false, null),
+                    array(true, true),
+                    array(0, 0),
+                    array(1, 1),
+                    array(0.0, 0.0),
+                    array(1.0, 1.0),
+                    array('', null),
+                    array('abc', 'abc'),
+                    array('0', null),
+                    array('1', '1'),
+                    array(array(), array()),
+                    array(array(0), array(0)),
+                )
+            )
+        );
     }
 }

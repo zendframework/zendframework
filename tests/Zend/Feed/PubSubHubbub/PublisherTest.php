@@ -1,26 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\PubSubHubbub;
-use Zend\Http;
-use Zend\Feed\PubSubHubbub;
+
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Response as HttpResponse;
+use Zend\Feed\PubSubHubbub\Publisher;
+use Zend\Feed\PubSubHubbub\PubSubHubbub;
 
 /**
  * @category   Zend
@@ -28,22 +21,39 @@ use Zend\Feed\PubSubHubbub;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PublisherTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * @var \Zend\Feed\PubSubHubbub\Publisher
-     */
+    /** @var Publisher */
     protected $_publisher = null;
 
     public function setUp()
     {
-        $client = new Http\Client;
-        PubSubHubbub\PubSubHubbub::setHttpClient($client);
-        $this->_publisher = new PubSubHubbub\Publisher;
+        $client = new HttpClient;
+        PubSubHubbub::setHttpClient($client);
+        $this->_publisher = new Publisher;
+    }
+
+    public function getClientSuccess()
+    {
+        $response = new HttpResponse();
+        $response->setStatusCode(204);
+
+        $client = new ClientNotReset();
+        $client->setResponse($response);
+
+        return $client;
+    }
+
+    public function getClientFail()
+    {
+        $response = new HttpResponse();
+        $response->setStatusCode(404);
+
+        $client = new ClientNotReset();
+        $client->setResponse($response);
+
+        return $client;
     }
 
     public function testAddsHubServerUrl()
@@ -96,28 +106,22 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyHubServerUrl()
     {
-        try {
-            $this->_publisher->addHubUrl('');
-            $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->_publisher->addHubUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
     {
-        try {
-            $this->_publisher->addHubUrl(123);
-            $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->_publisher->addHubUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
     {
-        try {
-            $this->_publisher->addHubUrl('http://');
-            $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->_publisher->addHubUrl('http://');
     }
 
     public function testAddsUpdatedTopicUrl()
@@ -170,34 +174,28 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyUpdatedTopicUrl()
     {
-        try {
-            $this->_publisher->addUpdatedTopicUrl('');
-            $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->_publisher->addUpdatedTopicUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringUpdatedTopicUrl()
     {
-        try {
-            $this->_publisher->addUpdatedTopicUrl(123);
-            $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->_publisher->addUpdatedTopicUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidUpdatedTopicUrl()
     {
-        try {
-            $this->_publisher->addUpdatedTopicUrl('http://');
-            $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->_publisher->addUpdatedTopicUrl('http://');
     }
 
     public function testAddsParameter()
     {
         $this->_publisher->setParameter('foo', 'bar');
-        $this->assertEquals(array('foo'=>'bar'), $this->_publisher->getParameters());
+        $this->assertEquals(array('foo'=> 'bar'), $this->_publisher->getParameters());
     }
 
     public function testAddsParametersFromArray()
@@ -254,30 +252,32 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function testNotifiesHubWithCorrectParameters()
     {
-        PubSubHubbub\PubSubHubbub::setHttpClient(new ClientSuccess);
-        $client = PubSubHubbub\PubSubHubbub::getHttpClient();
+        PubSubHubbub::setHttpClient($this->getClientSuccess());
+        $client = PubSubHubbub::getHttpClient();
         $this->_publisher->addHubUrl('http://www.example.com/hub');
         $this->_publisher->addUpdatedTopicUrl('http://www.example.com/topic');
         $this->_publisher->setParameter('foo', 'bar');
         $this->_publisher->notifyAll();
-        $this->assertEquals('hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&foo=bar', $client->getBody());
+        $this->assertEquals('hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&foo=bar',
+                            $client->getRequest()->getContent());
     }
 
     public function testNotifiesHubWithCorrectParametersAndMultipleTopics()
     {
-        PubSubHubbub\PubSubHubbub::setHttpClient(new ClientSuccess);
-        $client = PubSubHubbub\PubSubHubbub::getHttpClient();
+        PubSubHubbub::setHttpClient($this->getClientSuccess());
+        $client = PubSubHubbub::getHttpClient();
         $this->_publisher->addHubUrl('http://www.example.com/hub');
         $this->_publisher->addUpdatedTopicUrl('http://www.example.com/topic');
         $this->_publisher->addUpdatedTopicUrl('http://www.example.com/topic2');
         $this->_publisher->notifyAll();
-        $this->assertEquals('hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic2', $client->getBody());
+        $this->assertEquals('hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic2',
+                            $client->getRequest()->getContent());
     }
 
     public function testNotifiesHubAndReportsSuccess()
     {
-        PubSubHubbub\PubSubHubbub::setHttpClient(new ClientSuccess);
-        $client = PubSubHubbub\PubSubHubbub::getHttpClient();
+        PubSubHubbub::setHttpClient($this->getClientSuccess());
+        $client = PubSubHubbub::getHttpClient();
         $this->_publisher->addHubUrl('http://www.example.com/hub');
         $this->_publisher->addUpdatedTopicUrl('http://www.example.com/topic');
         $this->_publisher->setParameter('foo', 'bar');
@@ -287,40 +287,20 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function testNotifiesHubAndReportsFail()
     {
-        PubSubHubbub\PubSubHubbub::setHttpClient(new ClientFail);
-        $client = PubSubHubbub\PubSubHubbub::getHttpClient();
+        PubSubHubbub::setHttpClient($this->getClientFail());
+        $client = PubSubHubbub::getHttpClient();
         $this->_publisher->addHubUrl('http://www.example.com/hub');
         $this->_publisher->addUpdatedTopicUrl('http://www.example.com/topic');
         $this->_publisher->setParameter('foo', 'bar');
         $this->_publisher->notifyAll();
         $this->assertFalse($this->_publisher->isSuccess());
     }
-
 }
 
-// Some stubs for what Http_Client would be doing
-
-class ClientSuccess extends Http\Client
+class ClientNotReset extends HttpClient
 {
-    public function request($method = null) {
-        $response = new ResponseSuccess;
-        return $response;
+    public function resetParameters($clearCookies = false)
+    {
+        // Do nothing
     }
-    public function getBody(){return $this->prepareBody();}
-}
-class ClientFail extends Http\Client
-{
-    public function request($method = null) {
-        $response = new ResponseFail;
-        return $response;
-    }
-    public function getBody(){return $this->prepareBody();}
-}
-class ResponseSuccess
-{
-    public function getStatus(){return 204;}
-}
-class ResponseFail
-{
-    public function getStatus(){return 404;}
 }

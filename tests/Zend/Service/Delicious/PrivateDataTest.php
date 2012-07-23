@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Delicious
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Delicious\PrivateData;
-use \Zend\Service\Delicious,
-    \Zend\Http,
-    \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+
+use DateTime;
+use Zend\Service\Delicious;
+use Zend\Http;
+use Zend\Rest\Client as RestClient;
 
 /**
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
@@ -51,7 +39,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \Zend\Service\Delicious
      */
-    protected $_delicious;
+    protected $delicious;
 
     /**
      *
@@ -67,9 +55,8 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
                 'useragent' => 'Zend\Service\Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        RestClient\RestClient::setDefaultHttpClient($httpClient);
 
-        $this->_delicious = new Delicious\Delicious(self::TEST_UNAME, self::TEST_PASS);
+        $this->delicious = new Delicious\Delicious(self::TEST_UNAME, self::TEST_PASS, $httpClient);
     }
 
     /**
@@ -78,7 +65,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLastUpdate()
     {
-        $this->assertInstanceOf('Zend\Date\Date', $this->_delicious->getLastUpdate());
+        $this->assertInstanceOf('DateTime', $this->delicious->getLastUpdate());
     }
 
     /**
@@ -88,7 +75,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testTagsAndBundles()
     {
         // get tags
-        $tags = $this->_delicious->getTags();
+        $tags = $this->delicious->getTags();
         $this->assertInternalType('array', $tags);
         $tags = array_keys($tags);
 
@@ -100,12 +87,12 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         $newTagName = uniqid('tag');
 
         // rename tag
-        $this->_delicious->renameTag($oldTagName, $newTagName);
+        $this->delicious->renameTag($oldTagName, $newTagName);
 
         sleep(self::API_CALL_INTERVAL);
 
         // get renamed tags
-        $tags = $this->_delicious->getTags();
+        $tags = $this->delicious->getTags();
 
         $this->assertArrayHasKey($newTagName, $tags);
         $this->assertArrayNotHasKey($oldTagName, $tags);
@@ -114,23 +101,23 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
 
         // add new bundle
         $newBundleName = uniqid('bundle');
-        $this->_delicious->addBundle($newBundleName, $tags);
+        $this->delicious->addBundle($newBundleName, $tags);
 
         sleep(self::API_CALL_INTERVAL);
 
         // check if bundle was added
-        $bundles = $this->_delicious->getBundles();
+        $bundles = $this->delicious->getBundles();
         $this->assertInternalType('array', $bundles);
         $this->assertArrayHasKey($newBundleName, $bundles);
         $this->assertEquals($tags, $bundles[$newBundleName]);
 
         // delete bundle
-        $this->_delicious->deleteBundle($newBundleName);
+        $this->delicious->deleteBundle($newBundleName);
 
         sleep(self::API_CALL_INTERVAL);
 
         // check if bundle was deleted
-        $bundles = $this->_delicious->getBundles();
+        $bundles = $this->delicious->getBundles();
         $this->assertArrayNotHasKey($newBundleName, $bundles);
     }
 
@@ -140,7 +127,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function _testAddDeletePost()
     {
-        $newPost = $this->_delicious->createNewPost(self::$TEST_POST_TITLE, self::$TEST_POST_URL)
+        $newPost = $this->delicious->createNewPost(self::$TEST_POST_TITLE, self::$TEST_POST_URL)
                                     ->setNotes(self::$TEST_POST_NOTES)
                                     ->setTags(self::$TEST_POST_TAGS)
                                     ->setShared(self::$TEST_POST_SHARED);
@@ -167,7 +154,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         sleep(self::API_CALL_INTERVAL);
 
         // get the post back
-        $returnedPosts = $this->_delicious->getPosts(null, null, self::$TEST_POST_URL);
+        $returnedPosts = $this->delicious->getPosts(null, null, self::$TEST_POST_URL);
 
         $this->assertEquals(1, count($returnedPosts));
 
@@ -179,7 +166,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$TEST_POST_NOTES, $savedPost->getNotes());
         $this->assertEquals(self::$TEST_POST_TAGS, $savedPost->getTags());
         $this->assertEquals(self::$TEST_POST_SHARED, $savedPost->getShared());
-        $this->assertInstanceOf('Zend\Date\Date', $savedPost->getDate());
+        $this->assertInstanceOf('DateTime', $savedPost->getDate());
         $this->assertInternalType('string', $savedPost->getHash());
         $this->assertInternalType('integer', $savedPost->getOthers());
 
@@ -189,7 +176,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         sleep(self::API_CALL_INTERVAL);
 
         // check if post was realy deleted
-        $returnedPosts = $this->_delicious->getPosts(null, null, self::$TEST_POST_URL);
+        $returnedPosts = $this->delicious->getPosts(null, null, self::$TEST_POST_URL);
         $this->assertEquals(0, count($returnedPosts));
     }
 
@@ -200,7 +187,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllPosts()
     {
-        $posts = $this->_delicious->getAllPosts('zfSite');
+        $posts = $this->delicious->getAllPosts('zfSite');
         $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
 
         foreach ($posts as $post) {
@@ -215,7 +202,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRecentPosts()
     {
-        $posts = $this->_delicious->getRecentPosts('zfSite', 10);
+        $posts = $this->delicious->getRecentPosts('zfSite', 10);
         $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
@@ -231,7 +218,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPosts()
     {
-        $posts = $this->_delicious->getPosts('zfSite', new Date(), 'help');
+        $posts = $this->delicious->getPosts('zfSite', new DateTime(), 'help');
         $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
@@ -246,6 +233,6 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDates()
     {
-        $this->assertInternalType('array', $this->_delicious->getDates());
+        $this->assertInternalType('array', $this->delicious->getDates());
     }
 }

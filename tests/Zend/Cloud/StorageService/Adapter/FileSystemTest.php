@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    ZendTest_Cloud_StorageService_Adapter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\StorageService\Adapter;
 
-use ZendTest\Cloud\StorageService\TestCase,
-    Zend\Cloud\StorageService\Adapter\FileSystem,
-    Zend\Config\Config;
+use ZendTest\Cloud\StorageService\TestCase;
+use Zend\Cloud\StorageService\Adapter\FileSystem;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FileSystemTest extends TestCase
 {
@@ -55,12 +42,12 @@ class FileSystemTest extends TestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_string($this->_commonStorage->getClient()));
+        $this->assertTrue(is_string($this->_commonStorage->getClient()));
     }
 
     public function testNoParams()
     {
-	    $this->markTestIncomplete('No config params needed for FileSystem');
+        $this->markTestIncomplete('No config params needed for FileSystem');
     }
 
     // TODO: Create a custom test for FileSystem that checks fetchMetadata() with file system MD.
@@ -79,7 +66,7 @@ class FileSystemTest extends TestCase
         $this->markTestIncomplete("FileSystem doesn't support writable metadata.");
     }
 
-	/**
+    /**
      * Tears down this test case
      *
      * @return void
@@ -103,7 +90,7 @@ class FileSystemTest extends TestCase
 
         if (!file_exists($path)) {
             return true;
-        } else if (!is_dir($path)) {
+        } elseif (!is_dir($path)) {
             return unlink($path);
         } else {
             foreach (scandir($path) as $item) {

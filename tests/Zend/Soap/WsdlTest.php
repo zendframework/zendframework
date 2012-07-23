@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace ZendTest\Soap;
-use Zend\Soap\Wsdl,
-    Zend\Soap\Wsdl\ComplexTypeStrategy;
+
+use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 /**
  * Test cases for Zend_Soap_Wsdl
@@ -29,8 +19,6 @@ use Zend\Soap\Wsdl,
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
@@ -50,7 +38,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    function testConstructor()
+    public function testConstructor()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -65,7 +53,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                  . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
     }
 
-    function testSetUriChangesDomDocumentWsdlStructureTnsAndTargetNamespaceAttributes()
+    public function testSetUriChangesDomDocumentWsdlStructureTnsAndTargetNamespaceAttributes()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
         $wsdl->setUri('http://localhost/MyNewService.php');
@@ -81,7 +69,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                  . 'name="MyService" targetNamespace="http://localhost/MyNewService.php"/>' );
     }
 
-    function testAddMessage()
+    public function testAddMessage()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -109,7 +97,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddPortType()
+    public function testAddPortType()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -128,7 +116,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddPortOperation()
+    public function testAddPortOperation()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -162,7 +150,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddBinding()
+    public function testAddBinding()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -183,7 +171,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddBindingOperation()
+    public function testAddBindingOperation()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -238,7 +226,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddSoapBinding()
+    public function testAddSoapBinding()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -318,7 +306,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    function testAddSoapOperation()
+    public function testAddSoapOperation()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -359,7 +347,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddService()
+    public function testAddService()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -387,7 +375,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
-    function testAddDocumentation()
+    public function testAddDocumentation()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -442,7 +430,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    function testToXml()
+    public function testToXml()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -457,7 +445,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
     }
 
-    function testToDomDocument()
+    public function testToDomDocument()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
         $dom = $wsdl->toDomDocument();
@@ -475,7 +463,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
     }
 
-    function testDump()
+    public function testDump()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -509,7 +497,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         unlink(__DIR__ . '/TestAsset/dumped.wsdl');
     }
 
-    function testGetType()
+    public function testGetType()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -527,7 +515,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('',                 $wsdl->getType('void'),    'void  detection failed.');
     }
 
-    function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
+    public function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
         $this->assertEquals('tns:WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
@@ -538,7 +526,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 //        $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof ComplexTypeStrategy\AnyType);
     }
 
-    function testGetComplexTypeBasedOnStrategiesStringNames()
+    public function testGetComplexTypeBasedOnStrategiesStringNames()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType);
         $this->assertEquals('tns:WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
@@ -549,7 +537,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof ComplexTypeStrategy\AnyType);
     }
 
-    function testAddingSameComplexTypeMoreThanOnceIsIgnored()
+    public function testAddingSameComplexTypeMoreThanOnceIsIgnored()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
         $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:SomeTypeName');
@@ -560,7 +548,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                             $types);
     }
 
-    function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()
+    public function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
         $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
@@ -574,7 +562,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                             $wsdl->getTypes());
     }
 
-    function testAddComplexType()
+    public function testAddComplexType()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
@@ -605,7 +593,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-3910
      */
-    function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
+    public function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 

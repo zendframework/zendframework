@@ -1,25 +1,34 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Acl
+ */
 
 namespace ZendTest\Acl\TestAsset;
+
 use Zend\Acl;
 
 class ExtendedAclZF2234 extends Acl\Acl
 {
-    public function roleDFSVisitAllPrivileges(Acl\Role\RoleInterface $role, Acl\Resource\ResourceInterface $resource = null,
+    public function exroleDFSVisitAllPrivileges(Acl\Role\RoleInterface $role, Acl\Resource\ResourceInterface $resource = null,
                                               &$dfs = null)
     {
-        return $this->_roleDFSVisitAllPrivileges($role, $resource, $dfs);
+        return $this->roleDFSVisitAllPrivileges($role, $resource, $dfs);
     }
 
-    public function roleDFSOnePrivilege(Acl\Role\RoleInterface $role, Acl\Resource\ResourceInterface $resource = null,
+    public function exroleDFSOnePrivilege(Acl\Role\RoleInterface $role, Acl\Resource\ResourceInterface $resource = null,
                                         $privilege = null)
     {
-        return $this->_roleDFSOnePrivilege($role, $resource, $privilege);
+        return $this->roleDFSOnePrivilege($role, $resource, $privilege);
     }
 
-    public function roleDFSVisitOnePrivilege(Acl\Role\RoleInterface $role, Acl\Resource\ResourceInterface $resource = null,
+    public function exroleDFSVisitOnePrivilege(Acl\Role\RoleInterface $role, Acl\Resource\ResourceInterface $resource = null,
                                              $privilege = null, &$dfs = null)
     {
-        return $this->_roleDFSVisitOnePrivilege($role, $resource, $privilege, $dfs);
+        return $this->roleDFSVisitOnePrivilege($role, $resource, $privilege, $dfs);
     }
 }

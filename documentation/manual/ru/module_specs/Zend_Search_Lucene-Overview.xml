@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>Обзор</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><title>Обзор</title>
     
 
-    <section xml:id="zend.search.lucene.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.search.lucene.introduction"><title>Введение</title>
         
         <para>
             Zend_Search_Lucene является поисковым движком общего
@@ -67,7 +67,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>Объекты документа и поля<!--Document and Field Objects--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><title>Объекты документа и поля<!--Document and Field Objects--></title>
         
             <para>
                 Zend_Search_Lucene оперирует с документами как с элементарными
@@ -235,7 +235,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
             </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>Значение типов полей<!--Understanding Field Types--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><title>Значение типов полей<!--Understanding Field Types--></title>
         
         <itemizedlist>
             <listitem>
@@ -318,7 +318,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
 -->
                </para>
 
-                <table><info><title>Типы Zend_Search_Lucene_Field<!--Zend_Search_Lucene_Field Types--></title></info>
+                <table><title>Типы Zend_Search_Lucene_Field<!--Zend_Search_Lucene_Field Types--></title>
                     
                     <tgroup cols="5">
                         <thead>
@@ -373,7 +373,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
        </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.html-documents"><info><title>HTML-документы<!--HTML documents--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.html-documents"><title>HTML-документы<!--HTML documents--></title>
         
         <para>
             Zend_Search_Lucene предоставляет возможность парсинга HTML.

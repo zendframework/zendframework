@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
@@ -165,7 +165,7 @@ class TableEntity
                     'Type'  => $accessor->AzurePropertyType,
                     'Value' => $this->$property,
                 );
-            } else if ($accessor->EntityType == 'ReflectionMethod' &&
+            } elseif ($accessor->EntityType == 'ReflectionMethod' &&
                        substr(strtolower($accessor->EntityAccessor), 0, 3) == 'get'
             ) {
                 $method        = $accessor->EntityAccessor;
@@ -210,8 +210,7 @@ class TableEntity
                                 $values[$accessor->AzurePropertyName] == '1'
                             ) {
                                 $values[$accessor->AzurePropertyName] = true;
-                            }
-                            else {
+                            } else {
                                 $values[$accessor->AzurePropertyName] = false;
                             }
                             break;
@@ -225,13 +224,13 @@ class TableEntity
                 if ($accessor->EntityType == 'ReflectionProperty') {
                     $property        = $accessor->EntityAccessor;
                     $this->$property = $values[$accessor->AzurePropertyName];
-                } else if ($accessor->EntityType == 'ReflectionMethod' &&
+                } elseif ($accessor->EntityType == 'ReflectionMethod' &&
                            substr(strtolower($accessor->EntityAccessor), 0, 3) == 'set'
                 ) {
                     $method = $accessor->EntityAccessor;
                     $this->$method($values[$accessor->AzurePropertyName]);
                 }
-            } else if ($throwOnError) {
+            } elseif ($throwOnError) {
                 throw new UnknownPropertyException(
                     "Property '" . $accessor->AzurePropertyName . "' was not found in \$values array");
             }

@@ -1,68 +1,62 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Extension;
 
 /**
  * @category   Zend
  * @package    Zend_GData
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  */
 class EntryLinkTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryLinkText = file_get_contents(
                 'Zend/GData/_files/EntryLinkElementSample1.xml',
                 true);
         $this->entryLink = new Extension\EntryLink();
     }
 
-    public function testEmptyEntryLinkShouldHaveNoExtensionElements() {
+    public function testEmptyEntryLinkShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entryLink->extensionElements));
         $this->assertTrue(count($this->entryLink->extensionElements) == 0);
     }
 
-    public function testEmptyEntryLinkShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryLinkShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entryLink->extensionAttributes));
         $this->assertTrue(count($this->entryLink->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryLinkShouldHaveNoExtensionElements() {
+    public function testSampleEntryLinkShouldHaveNoExtensionElements()
+    {
         $this->entryLink->transferFromXML($this->entryLinkText);
         $this->assertTrue(is_array($this->entryLink->extensionElements));
         $this->assertTrue(count($this->entryLink->extensionElements) == 0);
     }
 
-    public function testSampleEntryLinkShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryLinkShouldHaveNoExtensionAttributes()
+    {
         $this->entryLink->transferFromXML($this->entryLinkText);
         $this->assertTrue(is_array($this->entryLink->extensionAttributes));
         $this->assertTrue(count($this->entryLink->extensionAttributes) == 0);
     }
 
-    public function testNormalEntryLinkShouldHaveNoExtensionElements() {
+    public function testNormalEntryLinkShouldHaveNoExtensionElements()
+    {
         $this->entryLink->href = "http://gmail.com/jo/contacts/Bob";
         $this->entryLink->rel = "self";
         $this->entryLink->readOnly = "false";
@@ -92,7 +86,8 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($newEntryLink2->readOnly);
     }
 
-    public function testEmptyEntryLinkToAndFromStringShouldMatch() {
+    public function testEmptyEntryLinkToAndFromStringShouldMatch()
+    {
         $entryLinkXml = $this->entryLink->saveXML();
         $newEntryLink = new Extension\EntryLink();
         $newEntryLink->transferFromXML($entryLinkXml);
@@ -100,7 +95,8 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryLinkXml == $newEntryLinkXml);
     }
 
-    public function testEntryLinkWithValueToAndFromStringShouldMatch() {
+    public function testEntryLinkWithValueToAndFromStringShouldMatch()
+    {
         $this->entryLink->href = "http://gmail.com/jo/contacts/Bob";
         $this->entryLink->rel = "self";
         $this->entryLink->readOnly = "false";
@@ -114,7 +110,8 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("false", $this->entryLink->readOnly);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->entryLink->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -128,7 +125,8 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newEntryLink->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullEntryLinkToAndFromString() {
+    public function testConvertFullEntryLinkToAndFromString()
+    {
         $this->entryLink->transferFromXML($this->entryLinkText);
         $this->assertEquals("http://gmail.com/jo/contacts/Jo", $this->entryLink->href);
         $this->assertEquals("via", $this->entryLink->rel);

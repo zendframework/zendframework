@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>クラスの読み込み</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><title>クラスの読み込み</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         この章ではこれらの問題に対して確立したいくつかの解決方法を提示するつもりです。
     </para>
 
-    <section xml:id="performance.classloading.includepath"><info><title>どのようにしたらinclude_pathを最適化できますか？</title></info>
+    <section xml:id="performance.classloading.includepath"><title>どのようにしたらinclude_pathを最適化できますか？</title>
         
 
         <para>
@@ -25,7 +25,7 @@
             そして現行ディレクトリパスをinclude_pathの最後にだけincludeすることです。
         </para>
 
-        <section xml:id="performance.classloading.includepath.abspath"><info><title>絶対パスを使う</title></info>
+        <section xml:id="performance.classloading.includepath.abspath"><title>絶対パスを使う</title>
             
 
             <para>
@@ -70,7 +70,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             </para>
         </section>
 
-        <section xml:id="performance.classloading.includepath.reduce"><info><title>定義したincludeパスの数を減らす</title></info>
+        <section xml:id="performance.classloading.includepath.reduce"><title>定義したincludeパスの数を減らす</title>
             
 
             <para>
@@ -95,7 +95,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             </para>
         </section>
 
-        <section xml:id="performance.classloading.includepath.early"><info><title>Zend Frameworkのinclude_pathを出来るだけ先に定義する</title></info>
+        <section xml:id="performance.classloading.includepath.early"><title>Zend Frameworkのinclude_pathを出来るだけ先に定義する</title>
             
 
             <para>
@@ -107,7 +107,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             </para>
         </section>
 
-        <section xml:id="performance.classloading.includepath.currentdir"><info><title>現行ディレクトリは最後に定義するか、または定義しない</title></info>
+        <section xml:id="performance.classloading.includepath.currentdir"><title>現行ディレクトリは最後に定義するか、または定義しない</title>
             
 
             <para>
@@ -121,7 +121,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 間違いなく現行ディレクトリはリストの最後の要素に入れても良いでしょう。
             </para>
 
-        <example xml:id="performance.classloading.includepath.example"><info><title>例: 最適化されたinclude_path</title></info>
+        <example xml:id="performance.classloading.includepath.example"><title>例: 最適化されたinclude_path</title>
             
 
             <para>
@@ -179,7 +179,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
         </section>
     </section>
 
-    <section xml:id="performance.classloading.striprequires"><info><title>どのようにしたら不要なrequire_once文を除去できますか？</title></info>
+    <section xml:id="performance.classloading.striprequires"><title>どのようにしたら不要なrequire_once文を除去できますか？</title>
         
 
         <para>
@@ -203,7 +203,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             それらの<methodname>require_once()</methodname>呼び出しをどのようにしたら除去できるでしょう？
         </para>
 
-        <section xml:id="performance.classloading.striprequires.sed"><info><title>findおよびsedコマンドを使ってrequire_onceの呼び出しを取り去る</title></info>
+        <section xml:id="performance.classloading.striprequires.sed"><title>findおよびsedコマンドを使ってrequire_onceの呼び出しを取り去る</title>
             
 
             <para>
@@ -248,7 +248,7 @@ Zend_Loader_Autoloader::getInstance();
         </section>
     </section>
 
-    <section xml:id="performance.classloading.pluginloader"><info><title>どのようにしたらプラグインの読み込みを速く出来ますか？</title></info>
+    <section xml:id="performance.classloading.pluginloader"><title>どのようにしたらプラグインの読み込みを速く出来ますか？</title>
         
 
         <para>
@@ -284,10 +284,6 @@ Zend_Loader_Autoloader::getInstance();
             </para></listitem>
 
             <listitem><para>
-                <classname>Zend_Dojo</classname>: ビューヘルパ、フォーム要素およびデコレータ
-            </para></listitem>
-
-            <listitem><para>
                 <classname>Zend_File_Transfer</classname>: アダプタ
             </para></listitem>
 
@@ -318,7 +314,7 @@ Zend_Loader_Autoloader::getInstance();
             どのようにしたらそのような生成された呼び出しの数を減らせますか？
         </para>
 
-        <section xml:id="performance.classloading.pluginloader.includefilecache"><info><title>ファイルキャッシュを含むプラグインローダーを使う</title></info>
+        <section xml:id="performance.classloading.pluginloader.includefilecache"><title>ファイルキャッシュを含むプラグインローダーを使う</title>
             
 
             <para>

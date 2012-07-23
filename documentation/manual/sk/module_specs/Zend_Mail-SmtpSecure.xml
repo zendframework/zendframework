@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Zabezpečenie SMTP prenosu</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>Zabezpečenie SMTP prenosu</title>
   
 
   <para>
@@ -10,7 +10,7 @@
   alebo 465 pre SSL.
   </para>
 
-  <example><info><title>Vytvorene zabezpečného spojenia pomocou Zend_Mail_Transport_Smtp</title></info>
+  <example><title>Vytvorene zabezpečného spojenia pomocou Zend_Mail_Transport_Smtp</title>
     
 
     <programlisting role="php"><![CDATA[<?php

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Zend Framework のシステム要件</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Zend Framework のシステム要件</title>
 
     
 
-    <section xml:id="requirements.introduction"><info><title>導入</title></info>
+    <section xml:id="requirements.introduction"><title>導入</title>
 
         
 
@@ -24,7 +24,7 @@
             をしたりするためですが、これがアプリケーションの機能に直接影響することはありません。
         </para>
 
-        <section xml:id="requirements.version"><info><title>PHP のバージョン</title></info>
+        <section xml:id="requirements.version"><title>PHP のバージョン</title>
 
             
 
@@ -41,7 +41,7 @@
 
         </section>
 
-        <section xml:id="requirements.extensions"><info><title>PHP の拡張モジュール</title></info>
+        <section xml:id="requirements.extensions"><title>PHP の拡張モジュール</title>
 
             
 
@@ -67,7 +67,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-php-extensions-table.xml"/>
         </section>
 
-        <section xml:id="requirements.zendcomponents"><info><title>Zend Framework のコンポーネント</title></info>
+        <section xml:id="requirements.zendcomponents"><title>Zend Framework のコンポーネント</title>
 
             
 
@@ -93,7 +93,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-zendcomponents-table.xml"/>
         </section>
 
-        <section xml:id="requirements.dependencies"><info><title>Zend Framework の依存性</title></info>
+        <section xml:id="requirements.dependencies"><title>Zend Framework の依存性</title>
 
             
 

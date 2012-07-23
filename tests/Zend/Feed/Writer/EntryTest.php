@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Writer;
 
+use DateTime;
 use Zend\Feed\Writer;
-use Zend\Date;
 
 /**
  * @category   Zend
@@ -30,8 +19,6 @@ use Zend\Date;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd New BSD License
  */
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
@@ -210,16 +197,16 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated();
-        $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($entry->getDateCreated()) || $dateNow->equals($entry->getDateCreated()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $entry->getDateCreated());
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
     /**
@@ -229,8 +216,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
     /**
@@ -240,32 +227,32 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
-    public function testSetDateCreatedUsesZendDateObject()
+    public function testSetDateCreatedUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $entry = new Writer\Entry;
-        $entry->setDateCreated(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $entry->setDateCreated($myDate);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
     public function testSetDateModifiedDefaultsToCurrentTime()
     {
         $entry = new Writer\Entry;
         $entry->setDateModified();
-        $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($entry->getDateModified()) || $dateNow->equals($entry->getDateModified()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $entry->getDateModified());
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
     {
         $entry = new Writer\Entry;
         $entry->setDateModified(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
     /**
@@ -275,8 +262,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateModified(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
     /**
@@ -286,16 +273,16 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateModified(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
-    public function testSetDateModifiedUsesZendDateObject()
+    public function testSetDateModifiedUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $entry = new Writer\Entry;
-        $entry->setDateModified(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $entry->setDateModified($myDate);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
     public function testSetDateCreatedThrowsExceptionOnInvalidParameter()

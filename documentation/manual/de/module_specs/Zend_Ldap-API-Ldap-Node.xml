@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node"><info><title>Zend_Ldap_Node</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node"><title>Zend_Ldap_Node</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         <code>RecursiveIterator</code> um rekursive Suchen im Baum zu erlauben.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node.table"><info><title>Zend_Ldap_Node API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node.table"><title>Zend_Ldap_Node API</title>
         
 
         <tgroup cols="2">

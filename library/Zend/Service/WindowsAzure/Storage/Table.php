@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
@@ -118,9 +118,9 @@ class Table extends AbstractBatchStorage
             }
 
             // More tables?
-            if ($response->headers()->get('x-ms-continuation-NextTableName') !== null) {
+            if ($response->getHeaders()->get('x-ms-continuation-NextTableName') !== null) {
                 $returnValue = array_merge($returnValue,
-                                           $this->listTables($response->headers()
+                                           $this->listTables($response->getHeaders()
                                                                  ->get('x-ms-continuation-NextTableName')));
             }
 
@@ -147,9 +147,9 @@ class Table extends AbstractBatchStorage
         // Generate request body
         $requestBody = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>
                         <entry
-                        	xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
-                        	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
-                        	xmlns="http://www.w3.org/2005/Atom">
+                            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+                            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+                            xmlns="http://www.w3.org/2005/Atom">
                           <title />
                           <updated>{tpl:Updated}</updated>
                           <author>
@@ -462,7 +462,7 @@ class Table extends AbstractBatchStorage
             if (count($query) > 0) {
                 $queryString = '?' . implode('&', $query);
             }
-        } else if (get_class($tableName) == 'TableEntityQuery') {
+        } elseif (get_class($tableName) == 'TableEntityQuery') {
             // Option 2: $tableName is a TableEntityQuery instance
 
             // Build queryString
@@ -556,14 +556,14 @@ class Table extends AbstractBatchStorage
             }
 
             // More entities?
-            if ($response->headers()->get('x-ms-continuation-NextPartitionKey') !== null &&
-                $response->headers()->get('x-ms-continuation-NextRowKey') !== null
+            if ($response->getHeaders()->get('x-ms-continuation-NextPartitionKey') !== null &&
+                $response->getHeaders()->get('x-ms-continuation-NextRowKey') !== null
             ) {
                 if (strpos($queryString, '$top') === false) {
                     $returnValue = array_merge($returnValue, $this->retrieveEntities($tableName, $filter, $entityClass,
-                                                                                     $response->headers()
+                                                                                     $response->getHeaders()
                                                                                          ->get('x-ms-continuation-NextPartitionKey'),
-                                                                                     $response->headers()
+                                                                                     $response->getHeaders()
                                                                                          ->get('x-ms-continuation-NextRowKey')));
                 }
             }
@@ -712,8 +712,8 @@ class Table extends AbstractBatchStorage
         }
         if ($response->isSuccess()) {
             // Update properties
-            $entity->setEtag($response->headers()->get('Etag'));
-            $entity->setTimestamp($response->headers()->get('Last-modified'));
+            $entity->setEtag($response->getHeaders()->get('Etag'));
+            $entity->setTimestamp($response->getHeaders()->get('Last-modified'));
 
             return $entity;
         } else {

@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\Annotation;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 
 /**
@@ -33,8 +23,6 @@ use Zend\Pdf\InternalType;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAnnotation
 {
@@ -63,7 +51,8 @@ abstract class AbstractAnnotation
      * @param float $bottom
      * @return \Zend\Pdf\Annotation\AbstractAnnotation
      */
-    public function setBottom($bottom) {
+    public function setBottom($bottom)
+    {
         $this->_annotationDictionary->Rect->items[1]->touch();
         $this->_annotationDictionary->Rect->items[1]->value = $bottom;
 
@@ -75,7 +64,8 @@ abstract class AbstractAnnotation
      *
      * @return float
      */
-    public function getBottom() {
+    public function getBottom()
+    {
         return $this->_annotationDictionary->Rect->items[1]->value;
     }
 
@@ -85,7 +75,8 @@ abstract class AbstractAnnotation
      * @param float $top
      * @return \Zend\Pdf\Annotation\AbstractAnnotation
      */
-    public function setTop($top) {
+    public function setTop($top)
+    {
         $this->_annotationDictionary->Rect->items[3]->touch();
         $this->_annotationDictionary->Rect->items[3]->value = $top;
 
@@ -97,7 +88,8 @@ abstract class AbstractAnnotation
      *
      * @return float
      */
-    public function getTop() {
+    public function getTop()
+    {
         return $this->_annotationDictionary->Rect->items[3]->value;
     }
 
@@ -107,7 +99,8 @@ abstract class AbstractAnnotation
      * @param float $right
      * @return \Zend\Pdf\Annotation\AbstractAnnotation
      */
-    public function setRight($right) {
+    public function setRight($right)
+    {
         $this->_annotationDictionary->Rect->items[2]->touch();
         $this->_annotationDictionary->Rect->items[2]->value = $right;
 
@@ -119,7 +112,8 @@ abstract class AbstractAnnotation
      *
      * @return float
      */
-    public function getRight() {
+    public function getRight()
+    {
         return $this->_annotationDictionary->Rect->items[2]->value;
     }
 
@@ -129,7 +123,8 @@ abstract class AbstractAnnotation
      * @param float $left
      * @return \Zend\Pdf\Annotation\AbstractAnnotation
      */
-    public function setLeft($left) {
+    public function setLeft($left)
+    {
         $this->_annotationDictionary->Rect->items[0]->touch();
         $this->_annotationDictionary->Rect->items[0]->value = $left;
 
@@ -141,7 +136,8 @@ abstract class AbstractAnnotation
      *
      * @return float
      */
-    public function getLeft() {
+    public function getLeft()
+    {
         return $this->_annotationDictionary->Rect->items[0]->value;
     }
 
@@ -152,7 +148,8 @@ abstract class AbstractAnnotation
      *
      * @return string
      */
-    public function getText() {
+    public function getText()
+    {
         if ($this->_annotationDictionary->Contents === null) {
             return '';
         }
@@ -168,7 +165,8 @@ abstract class AbstractAnnotation
      * @param string $text
      * @return \Zend\Pdf\Annotation\AbstractAnnotation
      */
-    public function setText($text) {
+    public function setText($text)
+    {
         if ($this->_annotationDictionary->Contents === null) {
             $this->_annotationDictionary->touch();
             $this->_annotationDictionary->Contents = new InternalType\StringObject($text);

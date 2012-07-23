@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><info><title> Zend Framework 带有的标准表单装饰器（Decorators） </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><title> Zend Framework 带有的标准表单装饰器（Decorators） </title>
     
 
     <para>
         <code>Zend_Form</code> 带有若干标准装饰器，更多关于装饰器的一般用法，参见 <link linkend="zend.form.decorators">the Decorators section</link>。
     </para>
 
-    <section xml:id="zend.form.standardDecorators.callback"><info><title>Zend_Form_Decorator_Callback</title></info>
+    <section xml:id="zend.form.standardDecorators.callback"><title>Zend_Form_Decorator_Callback</title>
         
 
         <para>
@@ -31,7 +31,7 @@ class Util
             回调装饰器允许为替换选项指定一个 null 值，它将用回调返回值来替换原始内容，'prepend' 和 'append' 仍然有效。
         </para>
     </section>
-    <section xml:id="zend.form.standardDecorators.captcha"><info><title>Zend_Form_Decorator_Captcha</title></info>
+    <section xml:id="zend.form.standardDecorators.captcha"><title>Zend_Form_Decorator_Captcha</title>
         
 
         <para>
@@ -45,7 +45,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.description"><info><title>Zend_Form_Decorator_Description</title></info>
+    <section xml:id="zend.form.standardDecorators.description"><title>Zend_Form_Decorator_Description</title>
         
 
         <para>
@@ -61,7 +61,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><info><title>Zend_Form_Decorator_DtDdWrapper</title></info>
+    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><title>Zend_Form_Decorator_DtDdWrapper</title>
         
 
         <para>
@@ -81,7 +81,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.errors"><info><title>Zend_Form_Decorator_Errors</title></info>
+    <section xml:id="zend.form.standardDecorators.errors"><title>Zend_Form_Decorator_Errors</title>
         
 
         <para>
@@ -93,7 +93,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.fieldset"><info><title>Zend_Form_Decorator_Fieldset</title></info>
+    <section xml:id="zend.form.standardDecorators.fieldset"><title>Zend_Form_Decorator_Fieldset</title>
         
 
         <para>
@@ -101,7 +101,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.form"><info><title>Zend_Form_Decorator_Form</title></info>
+    <section xml:id="zend.form.standardDecorators.form"><title>Zend_Form_Decorator_Form</title>
         
 
         <para>
@@ -109,7 +109,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.formElements"><info><title>Zend_Form_Decorator_FormElements</title></info>
+    <section xml:id="zend.form.standardDecorators.formElements"><title>Zend_Form_Decorator_FormElements</title>
         
 
         <para>
@@ -117,7 +117,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.htmlTag"><info><title>Zend_Form_Decorator_HtmlTag</title></info>
+    <section xml:id="zend.form.standardDecorators.htmlTag"><title>Zend_Form_Decorator_HtmlTag</title>
         
 
         <para>
@@ -125,7 +125,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.image"><info><title>Zend_Form_Decorator_Image</title></info>
+    <section xml:id="zend.form.standardDecorators.image"><title>Zend_Form_Decorator_Image</title>
         
 
         <para>
@@ -141,7 +141,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.label"><info><title>Zend_Form_Decorator_Label</title></info>
+    <section xml:id="zend.form.standardDecorators.label"><title>Zend_Form_Decorator_Label</title>
         
 
         <para>
@@ -179,7 +179,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.viewHelper"><info><title>Zend_Form_Decorator_ViewHelper</title></info>
+    <section xml:id="zend.form.standardDecorators.viewHelper"><title>Zend_Form_Decorator_ViewHelper</title>
         
 
         <para>
@@ -195,7 +195,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.viewScript"><info><title>Zend_Form_Decorator_ViewScript</title></info>
+    <section xml:id="zend.form.standardDecorators.viewScript"><title>Zend_Form_Decorator_ViewScript</title>
         
 
         <para>
@@ -258,7 +258,7 @@ $element->setDecorators(array(array('ViewScript', array('class' => 'form element
 </div>
 ]]></programlisting>
 
-        <note><info><title> 用视图脚本替换内容 </title></info>
+        <note><title> 用视图脚本替换内容 </title>
             
 
             <para>

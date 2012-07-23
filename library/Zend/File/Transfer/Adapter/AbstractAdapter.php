@@ -1,33 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_File
  */
 
 namespace Zend\File\Transfer\Adapter;
 
-use Zend\File\Transfer,
-    Zend\File\Transfer\Exception,
-    Zend\Filter,
-    Zend\Filter\Exception as FilterException,
-    Zend\Loader,
-    Zend\Translator,
-    Zend\Translator\Adapter as AdapterTranslator,
-    Zend\Validator;
+use Zend\File\Transfer;
+use Zend\File\Transfer\Exception;
+use Zend\Filter;
+use Zend\Filter\Exception as FilterException;
+use Zend\I18n\Translator\Translator;
+use Zend\Loader;
+use Zend\Validator;
 
 /**
  * Abstract class for file transfers (Downloads and Uploads)
@@ -41,8 +30,6 @@ use Zend\File\Transfer,
  * @todo      Rewrite
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter
 {
@@ -82,7 +69,7 @@ abstract class AbstractAdapter
     protected $messages = array();
 
     /**
-     * @var AdapterTranslator\AbstractAdapter
+     * @var Translator
      */
     protected $translator;
 
@@ -431,13 +418,13 @@ abstract class AbstractAdapter
         foreach ($validators as $name => $validatorInfo) {
             if ($validatorInfo instanceof Validator\ValidatorInterface) {
                 $this->addValidator($validatorInfo, null, null, $files);
-            } else if (is_string($validatorInfo)) {
+            } elseif (is_string($validatorInfo)) {
                 if (!is_int($name)) {
                     $this->addValidator($name, null, $validatorInfo, $files);
                 } else {
                     $this->addValidator($validatorInfo, null, null, $files);
                 }
-            } else if (is_array($validatorInfo)) {
+            } elseif (is_array($validatorInfo)) {
                 $argc                = count($validatorInfo);
                 $breakChainOnFailure = false;
                 $options             = array();
@@ -605,7 +592,8 @@ abstract class AbstractAdapter
      * @param array $options Options to set
      * @param array $files   (Optional) Files to set the options for
      */
-    public function setOptions($options = array(), $files = null) {
+    public function setOptions($options = array(), $files = null)
+    {
         $file = $this->getFiles($files, false, true);
 
         if (is_array($options)) {
@@ -642,7 +630,8 @@ abstract class AbstractAdapter
      * @param  array $files (Optional) Files to return the options for
      * @return array Options for given files
      */
-    public function getOptions($files = null) {
+    public function getOptions($files = null)
+    {
         $file = $this->getFiles($files, false, true);
 
         foreach ($file as $key => $content) {
@@ -1083,7 +1072,7 @@ abstract class AbstractAdapter
 
         if (empty($destinations)) {
             $destinations = $this->getTmpDir();
-        } else if (count($destinations) == 1) {
+        } elseif (count($destinations) == 1) {
             $destinations = current($destinations);
         }
 
@@ -1093,28 +1082,19 @@ abstract class AbstractAdapter
     /**
      * Set translator object for localization
      *
-     * @param  Translator\Translator|AdapterTranslator\AbstractAdapter|null $translator
+     * @param  Translator|null $translator
      * @return AbstractAdapter
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null)
     {
-        if (null === $translator) {
-            $this->translator = null;
-        } elseif ($translator instanceof AdapterTranslator\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid translator specified');
-        }
-
+        $this->translator = $translator;
         return $this;
     }
 
     /**
      * Retrieve localization translator object
      *
-     * @return AdapterTranslator\AbstractAdapter|null
+     * @return Translator|null
      */
     public function getTranslator()
     {
@@ -1166,9 +1146,9 @@ abstract class AbstractAdapter
         foreach($files as $key => $value) {
             if (file_exists($value['name'])) {
                 $result[$key] = hash_file($hash, $value['name']);
-            } else if (file_exists($value['tmp_name'])) {
+            } elseif (file_exists($value['tmp_name'])) {
                 $result[$key] = hash_file($hash, $value['tmp_name']);
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             }
         }
@@ -1198,7 +1178,7 @@ abstract class AbstractAdapter
                 } else {
                     $result[$key] = $value['size'];
                 }
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             } else {
                 continue;
@@ -1222,7 +1202,7 @@ abstract class AbstractAdapter
     {
         if (file_exists($value['name'])) {
             $result = sprintf("%u", @filesize($value['name']));
-        } else if (file_exists($value['tmp_name'])) {
+        } elseif (file_exists($value['tmp_name'])) {
             $result = sprintf("%u", @filesize($value['tmp_name']));
         } else {
             return null;
@@ -1246,7 +1226,7 @@ abstract class AbstractAdapter
         foreach($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 $result[$key] = $value['type'];
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("the file '{$value['name']}' does not exist");
             } else {
                 continue;
@@ -1270,7 +1250,7 @@ abstract class AbstractAdapter
     {
         if (file_exists($value['name'])) {
             $file = $value['name'];
-        } else if (file_exists($value['tmp_name'])) {
+        } elseif (file_exists($value['tmp_name'])) {
             $file = $value['tmp_name'];
         } else {
             return null;

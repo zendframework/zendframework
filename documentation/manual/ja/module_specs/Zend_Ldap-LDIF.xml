@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><info><title>LDIFへ、または、からのLDAPデータシリアライズ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><title>LDIFへ、または、からのLDAPデータシリアライズ</title>
     
-    <section xml:id="zend.ldap.ldif.encode"><info><title>LDIFへのLDAP項目シリアライズ</title></info>
+    <section xml:id="zend.ldap.ldif.encode"><title>LDIFへのLDAP項目シリアライズ</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -64,7 +64,7 @@ title;lang-en: Sales, Director
 
     </section>
 
-    <section xml:id="zend.ldap.ldif.decode"><info><title>LDIF文字列をLDAP項目に非シリアライズ化</title></info>
+    <section xml:id="zend.ldap.ldif.decode"><title>LDIF文字列をLDAP項目に非シリアライズ化</title>
         
 
         <programlisting language="php"><![CDATA[

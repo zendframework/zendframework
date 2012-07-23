@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><title>InArray</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         in einem Array enthalten ist. Er ist auch in der Lage mehrdimensionale Arrays zu prüfen.
     </para>
 
-    <section xml:id="zend.validate.set.in_array.options"><info><title>Unterstützte Optionen für Zend_Validate_InArray</title></info>
+    <section xml:id="zend.validate.set.in_array.options"><title>Unterstützte Optionen für Zend_Validate_InArray</title>
         
 
         <para>
@@ -41,7 +41,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.in_array.basic"><info><title>Einfache Array Prüfung</title></info>
+    <section xml:id="zend.validate.set.in_array.basic"><title>Einfache Array Prüfung</title>
         
 
         <para>
@@ -89,7 +89,7 @@ if ($validator->isValid('value')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.in_array.strict"><info><title>Strikte Array Prüfung</title></info>
+    <section xml:id="zend.validate.set.in_array.strict"><title>Strikte Array Prüfung</title>
         
 
         <para>
@@ -141,7 +141,7 @@ if ($validator->isValid('value')) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.in_array.recursive"><info><title>Rekursive Array Prüfung</title></info>
+    <section xml:id="zend.validate.set.in_array.recursive"><title>Rekursive Array Prüfung</title>
         
 
         <para>
@@ -198,7 +198,7 @@ if ($validator->isValid('value')) {
 }
 ]]></programlisting>
 
-        <note><info><title>Standardwert für die Rekursion</title></info>
+        <note><title>Standardwert für die Rekursion</title>
             
 
             <para>
@@ -206,7 +206,7 @@ if ($validator->isValid('value')) {
             </para>
         </note>
 
-        <note><info><title>Optionsschlüssel im Haystack</title></info>
+        <note><title>Optionsschlüssel im Haystack</title>
             
 
             <para>

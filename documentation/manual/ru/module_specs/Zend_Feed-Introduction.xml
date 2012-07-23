@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>Введение</title>
     
     <para>
         <code>Zend_Feed</code> предназначен для работы с
@@ -28,7 +28,7 @@
         может быть использован для распечатки, сохранения в БД и т.д.
     </para>
 
-    <note><info><title>Внимание</title></info>
+    <note><title>Внимание</title>
         
         <para>
             Многие ленты RSS различаются по набору доступных свойств каналов и
@@ -38,7 +38,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>Использование Zend_Feed в работе с данными ленты RSS</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>Использование Zend_Feed в работе с данными ленты RSS</title>
         
         <programlisting language="php"><![CDATA[
 // Извлечение последних новостей Slashdot

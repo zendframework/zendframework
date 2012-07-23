@@ -1,40 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Search\Query;
 
-use Zend\Search\Lucene\Index,
-	Zend\Search\Lucene,
-	Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
-	Zend\Search\Lucene\Exception\InvalidArgumentException,
-	Zend\Search\Lucene\Exception\OutOfBoundsException,
-	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\OutOfBoundsException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Fuzzy extends AbstractQuery
 {
@@ -227,9 +214,9 @@ class Fuzzy extends AbstractQuery
                         // we don't have anything to compare.  That means if we just add
                         // the letters for current term we get the new word
                         $similarity = (($prefixUtf8Length == 0)? 0 : 1 - strlen($target)/$prefixUtf8Length);
-                    } else if (strlen($target) == 0) {
+                    } elseif (strlen($target) == 0) {
                         $similarity = (($prefixUtf8Length == 0)? 0 : 1 - $termRestLength/$prefixUtf8Length);
-                    } else if ($maxDistance < abs($termRestLength - strlen($target))){
+                    } elseif ($maxDistance < abs($termRestLength - strlen($target))){
                         //just adding the characters of term to target or vice-versa results in too many edits
                         //for example "pre" length is 3 and "prefixes" length is 8.  We can see that
                         //given this optimal circumstance, the edit distance cannot be less than 5.
@@ -295,7 +282,7 @@ class Fuzzy extends AbstractQuery
 
         if (count($this->_matches) == 0) {
             return new EmptyResult();
-        } else if (count($this->_matches) == 1) {
+        } elseif (count($this->_matches) == 1) {
             return new Term(reset($this->_matches));
         } else {
             $rewrittenQuery = new Boolean();
@@ -358,7 +345,7 @@ class Fuzzy extends AbstractQuery
     public function createWeight(Lucene\SearchIndexInterface $reader)
     {
         throw new UnsupportedMethodCallException(
-        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+            'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -374,7 +361,7 @@ class Fuzzy extends AbstractQuery
     public function execute(Lucene\SearchIndexInterface $reader, $docsFilter = null)
     {
         throw new UnsupportedMethodCallException(
-        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+            'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -389,7 +376,7 @@ class Fuzzy extends AbstractQuery
     public function matchedDocs()
     {
         throw new UnsupportedMethodCallException(
-        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+            'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -404,7 +391,7 @@ class Fuzzy extends AbstractQuery
     public function score($docId, Lucene\SearchIndexInterface $reader)
     {
         throw new UnsupportedMethodCallException(
-        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+            'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -446,9 +433,9 @@ class Fuzzy extends AbstractQuery
                     // we don't have anything to compare.  That means if we just add
                     // the letters for current term we get the new word
                     $similarity = (($prefixUtf8Length == 0)? 0 : 1 - strlen($target)/$prefixUtf8Length);
-                } else if (strlen($target) == 0) {
+                } elseif (strlen($target) == 0) {
                     $similarity = (($prefixUtf8Length == 0)? 0 : 1 - $termRestLength/$prefixUtf8Length);
-                } else if ($maxDistance < abs($termRestLength - strlen($target))){
+                } elseif ($maxDistance < abs($termRestLength - strlen($target))){
                     //just adding the characters of term to target or vice-versa results in too many edits
                     //for example "pre" length is 3 and "prefixes" length is 8.  We can see that
                     //given this optimal circumstance, the edit distance cannot be less than 5.

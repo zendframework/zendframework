@@ -1,27 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Placeholder;
 
-use Zend\Registry as RegistryZend;
 use Zend\View\Exception;
 
 /**
@@ -29,16 +17,13 @@ use Zend\View\Exception;
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Registry
 {
     /**
-     * Zend_Registry key under which placeholder registry exists
-     * @const string
+     * @var Registry Singleton instance
      */
-    const REGISTRY_KEY = 'Zend\View\Helper\Placeholder\Registry';
+    protected static $instance;
 
     /**
      * Default container class
@@ -55,18 +40,27 @@ class Registry
     /**
      * Retrieve or create registry instance
      *
-     * @return mixed
+     * @return Registry
      */
     public static function getRegistry()
     {
-        if (RegistryZend::isRegistered(self::REGISTRY_KEY)) {
-            $registry = RegistryZend::get(self::REGISTRY_KEY);
-        } else {
-            $registry = new self();
-            RegistryZend::set(self::REGISTRY_KEY, $registry);
+        if (null === static::$instance) {
+            static::$instance = new self();
         }
 
-        return $registry;
+        return static::$instance;
+    }
+
+    /**
+     * Unset the singleton
+     *
+     * Primarily useful for testing purposes; sets {@link $instance} to null.
+     *
+     * @return void
+     */
+    public static function unsetRegistry()
+    {
+        static::$instance = null;
     }
 
     /**

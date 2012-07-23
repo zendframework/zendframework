@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData\App;
@@ -27,10 +16,8 @@ namespace Zend\GData\App;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed extends FeedSourceParent
+class Feed extends AbstractFeedSourceParent
         implements \Iterator, \ArrayAccess, \Countable
 {
 
@@ -103,7 +90,7 @@ class Feed extends FeedSourceParent
         switch ($absoluteNodeName) {
         case $this->lookupNamespace('atom') . ':' . 'entry':
             $newEntry = new $this->entryClassName($child);
-            $newEntry->setHttpClient($this->getHttpClient());
+            $newEntry->setService($this->getService());
             $newEntry->setMajorProtocolVersion($this->getMajorProtocolVersion());
             $newEntry->setMinorProtocolVersion($this->getMinorProtocolVersion());
             $this->_entry[] = $newEntry;
@@ -275,7 +262,7 @@ class Feed extends FeedSourceParent
             'of results found.');
         }
         $nextLinkHref = $nextLink->getHref();
-        $service = new App($this->getHttpClient());
+        $service = $this->getService();
 
         return $service->getFeed($nextLinkHref, get_called_class());
     }
@@ -295,7 +282,7 @@ class Feed extends FeedSourceParent
             'of results found.');
         }
         $previousLinkHref = $previousLink->getHref();
-        $service = new App($this->getHttpClient());
+        $service = $this->getService();
 
         return $service->getFeed($previousLinkHref, get_called_class());
     }
@@ -304,7 +291,7 @@ class Feed extends FeedSourceParent
      * Set the major protocol version that should be used. Values < 1 will
      * cause a \Zend_Gdata\App\InvalidArgumentException to be thrown.
      *
-     * This value will be propogated to all child entries.
+     * This value will be propagated to all child entries.
      *
      * @see _majorProtocolVersion
      * @param (int|NULL) $value The major protocol version to use.

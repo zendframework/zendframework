@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_InputFilter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_InputFilter
  */
 
 namespace Zend\InputFilter;
@@ -25,12 +15,10 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * @todo       How should we deal with required input when data is missing? 
+ * @todo       How should we deal with required input when data is missing?
  *             should a message be returned? if so, what message?
  * @category   Zend
  * @package    Zend_InputFilter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BaseInputFilter implements InputFilterInterface
 {
@@ -44,7 +32,7 @@ class BaseInputFilter implements InputFilterInterface
      * Countable: number of inputs in this input filter
      *
      * Only details the number of direct children.
-     * 
+     *
      * @return int
      */
     public function count()
@@ -54,9 +42,10 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Add an input to the input filter
-     * 
-     * @param  InputInterface|InputFilterInterface $input 
-     * @param  null|string $name Name used to retrieve this input
+     *
+     * @param  InputInterface|InputFilterInterface $input
+     * @param  null|string                         $name Name used to retrieve this input
+     * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
     public function add($input, $name = null)
@@ -71,17 +60,24 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        if (empty($name)) {
+        if (is_null($name) || $name === '') {
             $name = $input->getName();
         }
+
+        if (isset($this->inputs[$name]) && $this->inputs[$name] instanceof InputInterface) {
+            // The element already exists, so merge the config. Please note that the order is important (already existing
+            // input is merged with the parameter given)
+            $input->merge($this->inputs[$name]);
+        }
+
         $this->inputs[$name] = $input;
         return $this;
     }
 
     /**
      * Retrieve a named input
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return InputInterface|InputFilterInterface
      */
     public function get($name)
@@ -98,8 +94,8 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Test if an input or input filter by the given name is attached
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function has($name)
@@ -109,8 +105,8 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Set data to use when validating and filtering
-     * 
-     * @param  array|Traversable $data 
+     *
+     * @param  array|Traversable $data
      * @return InputFilterInterface
      */
     public function setData($data)
@@ -132,7 +128,7 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Is the data set valid?
-     * 
+     *
      * @return bool
      */
     public function isValid()
@@ -147,51 +143,28 @@ class BaseInputFilter implements InputFilterInterface
         $this->validInputs   = array();
         $this->invalidInputs = array();
         $valid               = true;
-        
+
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
+        //var_dump($inputs);
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
-
-            if (!array_key_exists($name, $this->data)) {
-                // Not sure how to handle input filters in this case
-                if ($input instanceof InputFilterInterface) {
-                    if (!$input->isValid()) {
-                        $this->invalidInputs[$name] = $input;
-                        $valid = false;
+            if (!array_key_exists($name, $this->data) || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)) {
+                if($input instanceof InputInterface) {
+                    // - test if input is required
+                    if (!$input->isRequired()) {
+                        $this->validInputs[$name] = $input;
                         continue;
                     }
-                    $this->validInputs[$name] = $input;
-                    continue;
+                    // - test if input allows empty
+                    if ($input->allowEmpty()) {
+                        $this->validInputs[$name] = $input;
+                        continue;
+                    }
                 }
-
-                // no matching value in data
-                // - test if input is required
-                // - test if input allows empty
-                if (!$input->isRequired()) {
-                    $this->validInputs[$name] = $input;
-                    continue;
-                }
-
-                if ($input->allowEmpty()) {
-                    $this->validInputs[$name] = $input;
-                    continue;
-                }
-
-                // How do we mark the input as invalid in this case?
-                // (for purposes of a validation error message)
-
-                // Mark validation as having failed
-                $this->invalidInputs[$name] = $input;
-                $valid = false;
-                if ($input->breakOnFailure()) {
-                    // We failed validation, and this input is marked to
-                    // break on failure
-                    return false;
-                }
-                continue;
+                // make sure we have a value (empty) for validation
+                $this->data[$name] = '';
             }
 
-            $value = $this->data[$name];
             if ($input instanceof InputFilterInterface) {
                 if (!$input->isValid()) {
                     $this->invalidInputs[$name] = $input;
@@ -230,8 +203,8 @@ class BaseInputFilter implements InputFilterInterface
      *
      * Implementations should allow passing a single array value, or multiple arguments,
      * each specifying a single input.
-     * 
-     * @param  mixed $name 
+     *
+     * @param  mixed $name
      * @return InputFilterInterface
      */
     public function setValidationGroup($name)
@@ -242,14 +215,30 @@ class BaseInputFilter implements InputFilterInterface
         }
 
         if (is_array($name)) {
-            $this->validateValidationGroup($name);
-            $this->validationGroup = $name;
+            $inputs = array();
+            foreach ($name as $key => $value) {
+                if (!$this->has($key)) {
+                    $inputs[] = $value;
+                } else {
+                    $inputs[] = $key;
+
+                    // Recursively populate validation groups for sub input filters
+                    $this->inputs[$key]->setValidationGroup($value);
+                }
+            }
+
+            if (!empty($inputs)) {
+                $this->validateValidationGroup($inputs);
+                $this->validationGroup = $inputs;
+            }
+
             return $this;
         }
 
         $inputs = func_get_args();
         $this->validateValidationGroup($inputs);
         $this->validationGroup = $inputs;
+
         return $this;
     }
 
@@ -258,7 +247,7 @@ class BaseInputFilter implements InputFilterInterface
      *
      * Implementations should return an associative array of name/input pairs
      * that failed validation.
-     * 
+     *
      * @return InputInterface[]
      */
     public function getInvalidInput()
@@ -271,7 +260,7 @@ class BaseInputFilter implements InputFilterInterface
      *
      * Implementations should return an associative array of name/input pairs
      * that passed validation.
-     * 
+     *
      * @return InputInterface[]
      */
     public function getValidInput()
@@ -281,8 +270,8 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Retrieve a value from a named input
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function getValue($name)
@@ -303,7 +292,7 @@ class BaseInputFilter implements InputFilterInterface
      *
      * List should be an associative array, with the values filtered. If
      * validation failed, this should raise an exception.
-     * 
+     *
      * @return array
      */
     public function getValues()
@@ -324,8 +313,8 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Retrieve a raw (unfiltered) value from a named input
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function getRawValue($name)
@@ -346,7 +335,7 @@ class BaseInputFilter implements InputFilterInterface
      *
      * List should be an associative array of named input/value pairs,
      * with the values unfiltered.
-     * 
+     *
      * @return array
      */
     public function getRawValues()
@@ -367,7 +356,7 @@ class BaseInputFilter implements InputFilterInterface
      *
      * Should return an associative array of named input/message list pairs.
      * Pairs should only be returned for inputs that failed validation.
-     * 
+     *
      * @return array
      */
     public function getMessages()
@@ -381,8 +370,8 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Ensure all names of a validation group exist as input in the filter
-     * 
-     * @param  array $inputs 
+     *
+     * @param  array $inputs
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -400,7 +389,7 @@ class BaseInputFilter implements InputFilterInterface
 
     /**
      * Populate the values of all attached inputs
-     * 
+     *
      * @return void
      */
     protected function populate()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.09"><info><title>Zend Framework 0.9</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.09"><title>Zend Framework 0.9</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <section xml:id="migration.09.zend.controller"><info><title>Zend_Controller</title></info>
+    <section xml:id="migration.09.zend.controller"><title>Zend_Controller</title>
         
 
         <para>

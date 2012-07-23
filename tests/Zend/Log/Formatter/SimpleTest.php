@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace ZendTest\Log\Formatter;
 
-use ZendTest\Log\TestAsset\StringObject,
-    \Zend\Log\Formatter\Simple;
+use ZendTest\Log\TestAsset\StringObject;
+use Zend\Log\Formatter\Simple;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
 class SimpleTest extends \PHPUnit_Framework_TestCase
@@ -56,7 +43,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertContains((string)$fields['priority'], $line);
     }
 
-    function testComplexValues()
+    public function testComplexValues()
     {
         $fields = array('timestamp'    => 0,
                         'priority'     => 42,
@@ -97,21 +84,21 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
-    
+
     /**
      * @group ZF-10427
      */
     public function testDefaultFormatShouldDisplayExtraInformations()
     {
-    	$message = 'custom message';
-    	$exception = new \RuntimeException($message);
-    	$event = array(
-    	    'timestamp'    => date('c'),
-    	    'message'      => 'Application error',
-    	    'priority'     => 2,
-    	    'priorityName' => 'CRIT',
-    	    'info'         => $exception,
-    	);
+        $message = 'custom message';
+        $exception = new \RuntimeException($message);
+        $event = array(
+            'timestamp'    => date('c'),
+            'message'      => 'Application error',
+            'priority'     => 2,
+            'priorityName' => 'CRIT',
+            'info'         => $exception,
+        );
 
         $formatter = new Simple();
         $output = $formatter->format($event);

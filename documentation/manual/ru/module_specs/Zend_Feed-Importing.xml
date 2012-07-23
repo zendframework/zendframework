@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Импортирование лент с помощью Zend_Feed</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><title>Импортирование лент с помощью Zend_Feed</title>
     
     <para>
         <code>Zend_Feed</code> позволяет легко получать ленты.
@@ -37,7 +37,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         такой, как недоступная для чтения или плохо сформированная лента.
     </para>
 
-    <section xml:id="zend.feed.importing.custom"><info><title>Создание собственных лент</title></info>
+    <section xml:id="zend.feed.importing.custom"><title>Создание собственных лент</title>
 
         
 
@@ -52,7 +52,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             <code>Zend_Feed_Builder_Interface</code>.
         </para>
 
-        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Импортирование массива</title></info>
+        <section xml:id="zend.feed.importing.custom.importarray"><title>Импортирование массива</title>
 
             
 
@@ -214,7 +214,7 @@ array(
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Импортирование из специального источника данных</title></info>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><title>Импортирование из специального источника данных</title>
 
             
 
@@ -267,7 +267,7 @@ $rssFeedFromArray =
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.dump"><info><title>Дапм содержимого ленты</title></info>
+        <section xml:id="zend.feed.importing.custom.dump"><title>Дапм содержимого ленты</title>
 
             
 

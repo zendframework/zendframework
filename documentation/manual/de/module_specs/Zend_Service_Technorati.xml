@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.technorati"><info><title>Zend_Service_Technorati</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.technorati"><title>Zend_Service_Technorati</title>
     
 
-    <section xml:id="zend.service.technorati.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.technorati.introduction"><title>Einführung</title>
         
 
         <para>
@@ -25,7 +25,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.technorati.getting-started"><info><title>Anfangen</title></info>
+    <section xml:id="zend.service.technorati.getting-started"><title>Anfangen</title>
         
 
         <para>
@@ -35,7 +35,7 @@
             besucht werden.
         </para>
 
-        <note><info><title>API Schlüssel Beschränkungen</title></info>
+        <note><title>API Schlüssel Beschränkungen</title>
             
 
             <para>
@@ -51,7 +51,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.technorati.making-first-query"><info><title>Die erste Abfrage durchführen</title></info>
+    <section xml:id="zend.service.technorati.making-first-query"><title>Die erste Abfrage durchführen</title>
         
 
         <para>
@@ -61,7 +61,7 @@
             ausgewählt werden, und durch Angabe der benötigen Argumente aufgerufen werden.
         </para>
 
-        <example xml:id="zend.service.technorati.making-first-query.example-1"><info><title>Die erste Abfragen senden</title></info>
+        <example xml:id="zend.service.technorati.making-first-query.example-1"><title>Die erste Abfragen senden</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -78,7 +78,7 @@ $resultSet = $technorati->search('PHP');
             kann um die Abfrage zu verfeinern.
         </para>
 
-        <example xml:id="zend.service.technorati.making-first-query.example-2"><info><title>Verfeinern der Abfrage</title></info>
+        <example xml:id="zend.service.technorati.making-first-query.example-2"><title>Verfeinern der Abfrage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -101,9 +101,9 @@ $resultSet = $technorati->search('PHP', $options);
             solange verwendet werden wie es benötigt wird.
         </para>
 
-        <example xml:id="zend.service.technorati.making-first-query.example-3"><info><title>
+        <example xml:id="zend.service.technorati.making-first-query.example-3"><title>
                 Mehrfache Abfragen mit der gleichen Zend_Service_Technorati Instanz senden
-            </title></info>
+            </title>
             
 
             <programlisting language="php"><![CDATA[
@@ -119,7 +119,7 @@ $topTags = $technorati->topTags();
         </example>
     </section>
 
-    <section xml:id="zend.service.technorati.consuming-results"><info><title>Ergebnisse verarbeiten</title></info>
+    <section xml:id="zend.service.technorati.consuming-results"><title>Ergebnisse verarbeiten</title>
         
 
         <para>
@@ -137,7 +137,7 @@ $topTags = $technorati->topTags();
             <methodname>foreach()</methodname> Statement zu durchlaufen.
         </para>
 
-        <example xml:id="zend.service.technorati.consuming-results.example-1"><info><title>Ein Ergebnisset Objekt verarbeiten</title></info>
+        <example xml:id="zend.service.technorati.consuming-results.example-1"><title>Ein Ergebnisset Objekt verarbeiten</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -162,7 +162,7 @@ foreach ($resultSet as $result) {
             wird.
         </para>
 
-        <example xml:id="zend.service.technorati.consuming-results.example-2"><info><title>Ein spezifisches Ergebnisset Objekt suchen</title></info>
+        <example xml:id="zend.service.technorati.consuming-results.example-2"><title>Ein spezifisches Ergebnisset Objekt suchen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -196,7 +196,7 @@ $result = $resultSet->current();
             <classname>Zend_Service_Technorati_Weblog</classname>.
         </para>
 
-        <example xml:id="zend.service.technorati.consuming-results.example-3"><info><title>Ein alleinstehendes Ergebnisobjekt verarbeiten</title></info>
+        <example xml:id="zend.service.technorati.consuming-results.example-3"><title>Ein alleinstehendes Ergebnisobjekt verarbeiten</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -224,7 +224,7 @@ echo "</ol>";
         </para>
     </section>
 
-    <section xml:id="zend.service.technorati.handling-errors"><info><title>Fehler behandeln</title></info>
+    <section xml:id="zend.service.technorati.handling-errors"><title>Fehler behandeln</title>
         
 
         <para>
@@ -248,7 +248,7 @@ echo "</ol>";
             Block umhüllt werden.
         </para>
 
-        <example xml:id="zend.service.technorati.handling-errors.example-1"><info><title>Eine Abfrageausnahme behandeln</title></info>
+        <example xml:id="zend.service.technorati.handling-errors.example-1"><title>Eine Abfrageausnahme behandeln</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -262,7 +262,7 @@ try {
         </example>
     </section>
 
-    <section xml:id="zend.service.technorati.checking-api-daily-usage"><info><title>Prüfen der täglichen Verwendung des eigenen API Schlüssels</title></info>
+    <section xml:id="zend.service.technorati.checking-api-daily-usage"><title>Prüfen der täglichen Verwendung des eigenen API Schlüssels</title>
         
 
         <para>
@@ -282,7 +282,7 @@ try {
                 Referenz Guide</link> nachgesehen werden.
         </para>
 
-        <example xml:id="zend.service.technorati.checking-api-daily-usage.example-1"><info><title>Die Information über die tägliche Verwendung des API Schlüssels erhalten</title></info>
+        <example xml:id="zend.service.technorati.checking-api-daily-usage.example-1"><title>Die Information über die tägliche Verwendung des API Schlüssels erhalten</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -296,7 +296,7 @@ echo "Tägliche Verwendung: " . $key->getApiQueries() . "/" .
         </example>
     </section>
 
-    <section xml:id="zend.service.technorati.queries"><info><title>Vorhandene Technorati Abfragen</title></info>
+    <section xml:id="zend.service.technorati.queries"><title>Vorhandene Technorati Abfragen</title>
         
 
         <para>
@@ -354,7 +354,7 @@ echo "Tägliche Verwendung: " . $key->getApiQueries() . "/" .
             </itemizedlist>
         </para>
 
-        <section xml:id="zend.service.technorati.queries.cosmos"><info><title>Technorati Cosmos</title></info>
+        <section xml:id="zend.service.technorati.queries.cosmos"><title>Technorati Cosmos</title>
             
 
             <para>
@@ -366,7 +366,7 @@ echo "Tägliche Verwendung: " . $key->getApiQueries() . "/" .
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.cosmos.example-1"><info><title>Cosmos Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.cosmos.example-1"><title>Cosmos Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -385,7 +385,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.search"><info><title>Technorati Search</title></info>
+        <section xml:id="zend.service.technorati.queries.search"><title>Technorati Search</title>
             
 
             <para>
@@ -397,7 +397,7 @@ echo "</ol>";
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.search.example-1"><info><title>Suchabfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.search.example-1"><title>Suchabfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -416,7 +416,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.tag"><info><title>Technorati Tag</title></info>
+        <section xml:id="zend.service.technorati.queries.tag"><title>Technorati Tag</title>
             
 
             <para>
@@ -428,7 +428,7 @@ echo "</ol>";
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.tag.example-1"><info><title>Tag Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.tag.example-1"><title>Tag Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -447,7 +447,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.dailycounts"><info><title>Technorati DailyCounts</title></info>
+        <section xml:id="zend.service.technorati.queries.dailycounts"><title>Technorati DailyCounts</title>
             
 
             <para>
@@ -460,7 +460,7 @@ echo "</ol>";
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.dailycounts.example-1"><info><title>DailyCounts Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.dailycounts.example-1"><title>DailyCounts Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -476,7 +476,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.toptags"><info><title>Technorati TopTags</title></info>
+        <section xml:id="zend.service.technorati.queries.toptags"><title>Technorati TopTags</title>
             
 
             <para>
@@ -489,7 +489,7 @@ echo "</ol>";
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.toptags.example-1"><info><title>TopTags Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.toptags.example-1"><title>TopTags Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -508,7 +508,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.bloginfo"><info><title>Technorati BlogInfo</title></info>
+        <section xml:id="zend.service.technorati.queries.bloginfo"><title>Technorati BlogInfo</title>
             
 
             <para>
@@ -521,7 +521,7 @@ echo "</ol>";
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.bloginfo.example-1"><info><title>BlogInfo Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.bloginfo.example-1"><title>BlogInfo Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -534,7 +534,7 @@ echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.blogposttags"><info><title>Technorati BlogPostTags</title></info>
+        <section xml:id="zend.service.technorati.queries.blogposttags"><title>Technorati BlogPostTags</title>
             
 
             <para>
@@ -547,7 +547,7 @@ echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.blogposttags.example-1"><info><title>BlogPostTags Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.blogposttags.example-1"><title>BlogPostTags Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -566,7 +566,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.getinfo"><info><title>Technorati GetInfo</title></info>
+        <section xml:id="zend.service.technorati.queries.getinfo"><title>Technorati GetInfo</title>
             
 
             <para>
@@ -578,7 +578,7 @@ echo "</ol>";
                 nachgesehen werden.
             </para>
 
-            <example xml:id="zend.service.technorati.queries.getinfo.example-1"><info><title>GetInfo Abfrage</title></info>
+            <example xml:id="zend.service.technorati.queries.getinfo.example-1"><title>GetInfo Abfrage</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -597,7 +597,7 @@ echo "</ol>";
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.queries.keyinfo"><info><title>Technorati KeyInfo</title></info>
+        <section xml:id="zend.service.technorati.queries.keyinfo"><title>Technorati KeyInfo</title>
             
 
             <para>
@@ -611,7 +611,7 @@ echo "</ol>";
         </section>
     </section>
 
-    <section xml:id="zend.service.technorati.classes"><info><title>Zend_Service_Technorati Klassen</title></info>
+    <section xml:id="zend.service.technorati.classes"><title>Zend_Service_Technorati Klassen</title>
         
 
         <para>
@@ -742,7 +742,7 @@ echo "</ol>";
             werden.
         </para>
 
-        <section xml:id="zend.service.technorati.classes.resultset"><info><title>Zend_Service_Technorati_ResultSet</title></info>
+        <section xml:id="zend.service.technorati.classes.resultset"><title>Zend_Service_Technorati_ResultSet</title>
             
 
             <para>
@@ -762,7 +762,7 @@ echo "</ol>";
                 <methodname>foreach()</methodname> iterieren.
             </para>
 
-            <example xml:id="zend.service.technorati.classes.resultset.example-1"><info><title>Über Ergebnisobjekte von einer Ergebnisset Kollektion iterieren</title></info>
+            <example xml:id="zend.service.technorati.classes.resultset.example-1"><title>Über Ergebnisobjekte von einer Ergebnisset Kollektion iterieren</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -780,7 +780,7 @@ foreach ($resultSet as $result) {
             </example>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.cosmosresultset"><info><title>Zend_Service_Technorati_CosmosResultSet</title></info>
+        <section xml:id="zend.service.technorati.classes.cosmosresultset"><title>Zend_Service_Technorati_CosmosResultSet</title>
             
 
             <para>
@@ -795,7 +795,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.searchresultset"><info><title>Zend_Service_Technorati_SearchResultSet</title></info>
+        <section xml:id="zend.service.technorati.classes.searchresultset"><title>Zend_Service_Technorati_SearchResultSet</title>
             
 
             <para>
@@ -810,7 +810,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.tagresultset"><info><title>Zend_Service_Technorati_TagResultSet</title></info>
+        <section xml:id="zend.service.technorati.classes.tagresultset"><title>Zend_Service_Technorati_TagResultSet</title>
             
 
             <para>
@@ -825,7 +825,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.dailycountsresultset"><info><title>Zend_Service_Technorati_DailyCountsResultSet</title></info>
+        <section xml:id="zend.service.technorati.classes.dailycountsresultset"><title>Zend_Service_Technorati_DailyCountsResultSet</title>
             
 
             <para>
@@ -841,7 +841,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.tagsresultset"><info><title>Zend_Service_Technorati_TagsResultSet</title></info>
+        <section xml:id="zend.service.technorati.classes.tagsresultset"><title>Zend_Service_Technorati_TagsResultSet</title>
             
 
             <para>
@@ -856,7 +856,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.result"><info><title>Zend_Service_Technorati_Result</title></info>
+        <section xml:id="zend.service.technorati.classes.result"><title>Zend_Service_Technorati_Result</title>
             
 
             <para>
@@ -867,7 +867,7 @@ foreach ($resultSet as $result) {
             </para>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.cosmosresult"><info><title>Zend_Service_Technorati_CosmosResult</title></info>
+        <section xml:id="zend.service.technorati.classes.cosmosresult"><title>Zend_Service_Technorati_CosmosResult</title>
             
 
             <para>
@@ -884,7 +884,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.searchresult"><info><title>Zend_Service_Technorati_SearchResult</title></info>
+        <section xml:id="zend.service.technorati.classes.searchresult"><title>Zend_Service_Technorati_SearchResult</title>
             
 
             <para>
@@ -901,7 +901,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.tagresult"><info><title>Zend_Service_Technorati_TagResult</title></info>
+        <section xml:id="zend.service.technorati.classes.tagresult"><title>Zend_Service_Technorati_TagResult</title>
             
 
             <para>
@@ -918,7 +918,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.dailycountsresult"><info><title>Zend_Service_Technorati_DailyCountsResult</title></info>
+        <section xml:id="zend.service.technorati.classes.dailycountsresult"><title>Zend_Service_Technorati_DailyCountsResult</title>
             
 
             <para>
@@ -935,7 +935,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.tagsresult"><info><title>Zend_Service_Technorati_TagsResult</title></info>
+        <section xml:id="zend.service.technorati.classes.tagsresult"><title>Zend_Service_Technorati_TagsResult</title>
             
 
             <para>
@@ -952,7 +952,7 @@ foreach ($resultSet as $result) {
             </note>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.getinforesult"><info><title>Zend_Service_Technorati_GetInfoResult</title></info>
+        <section xml:id="zend.service.technorati.classes.getinforesult"><title>Zend_Service_Technorati_GetInfoResult</title>
             
 
             <para>
@@ -961,7 +961,7 @@ foreach ($resultSet as $result) {
             </para>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.bloginforesult"><info><title>Zend_Service_Technorati_BlogInfoResult</title></info>
+        <section xml:id="zend.service.technorati.classes.bloginforesult"><title>Zend_Service_Technorati_BlogInfoResult</title>
             
 
             <para>
@@ -970,7 +970,7 @@ foreach ($resultSet as $result) {
             </para>
         </section>
 
-        <section xml:id="zend.service.technorati.classes.keyinforesult"><info><title>Zend_Service_Technorati_KeyInfoResult</title></info>
+        <section xml:id="zend.service.technorati.classes.keyinforesult"><title>Zend_Service_Technorati_KeyInfoResult</title>
             
 
             <para>

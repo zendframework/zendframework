@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\InternalType\StreamFilter;
 
-use Zend\Pdf\Exception,
-    Zend\Pdf;
+use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * AsciiHex stream filter
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AsciiHex implements StreamFilterInterface
 {
@@ -96,9 +83,9 @@ class AsciiHex implements StreamFilterInterface
                 default:
                     if ($charCode >= 0x30 /*'0'*/ && $charCode <= 0x39 /*'9'*/) {
                         $code = $charCode - 0x30;
-                    } else if ($charCode >= 0x41 /*'A'*/ && $charCode <= 0x46 /*'F'*/) {
+                    } elseif ($charCode >= 0x41 /*'A'*/ && $charCode <= 0x46 /*'F'*/) {
                         $code = $charCode - 0x37/*0x41 - 0x0A*/;
-                    } else if ($charCode >= 0x61 /*'a'*/ && $charCode <= 0x66 /*'f'*/) {
+                    } elseif ($charCode >= 0x61 /*'a'*/ && $charCode <= 0x66 /*'f'*/) {
                         $code = $charCode - 0x57/*0x61 - 0x0A*/;
                     } else {
                         throw new Exception\CorruptedPdfException('Wrong character in a encoded stream');

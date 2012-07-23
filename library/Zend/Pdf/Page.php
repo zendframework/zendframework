@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf;
+
+use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
 
 /**
  * PDF Page
  *
  * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-use Zend\Pdf\Exception;
-
-use Zend\Pdf\InternalType;
-
 class Page
 {
     /**** Class Constants ****/
@@ -238,7 +224,7 @@ class Page
                     break;
 
             }
-        } else if ($param1 instanceof Page && $param2 === null && $param3 === null) {
+        } elseif ($param1 instanceof Page && $param2 === null && $param3 === null) {
             // Clone existing page.
             // Let already existing content and resources to be shared between pages
             // We don't give existing content modification functionality, so we don't need "deep copy"
@@ -269,7 +255,7 @@ class Page
             }
 
             return;
-        } else if (is_string($param1) &&
+        } elseif (is_string($param1) &&
                    ($param2 === null || $param2 instanceof ObjectFactory) &&
                    $param3 === null) {
             if ($param2 !== null) {
@@ -306,13 +292,13 @@ class Page
                  * @todo support of user defined pagesize notations, like:
                  *       "210x297mm", "595x842", "8.5x11in", "612x792"
                  */
-                throw new Exception\Exception\InvalidArgumentException('Wrong pagesize notation.');
+                throw new Exception\InvalidArgumentException('Wrong pagesize notation.');
             }
             /**
              * @todo support of pagesize recalculation to "default user space units"
              */
 
-        } else if (is_numeric($param1) && is_numeric($param2) &&
+        } elseif (is_numeric($param1) && is_numeric($param2) &&
                    ($param3 === null || $param3 instanceof ObjectFactory)) {
             if ($param3 !== null) {
                 $this->_objFactory = $param3;
@@ -792,7 +778,7 @@ class Page
                 $fonts[$resourceId] = $extractedFont;
             } catch (Exception\NotImplementedException $e) {
                 // Just skip unsupported font types.
-                if ($e->getMessage() != Resource\Font\Font\Extracted::TYPE_NOT_SUPPORTED) {
+                if ($e->getMessage() != Resource\Font\Extracted::TYPE_NOT_SUPPORTED) {
                     throw $e;
                 }
             }
@@ -845,7 +831,7 @@ class Page
                 return new Resource\Font\Extracted($fontDictionary);
             } catch (Exception\NotImplementedException $e) {
                 // Just skip unsupported font types.
-                if ($e->getMessage() != Resource\Font\Font\Extracted::TYPE_NOT_SUPPORTED) {
+                if ($e->getMessage() != Resource\Font\Extracted::TYPE_NOT_SUPPORTED) {
                     throw $e;
                 }
 
@@ -1161,7 +1147,7 @@ class Page
             // drawEllipse($x1, $y1, $x2, $y2);
             $startAngle = null;
             $fillType = self::SHAPE_DRAW_FILL_AND_STROKE;
-        } else if ($param6 === null) {
+        } elseif ($param6 === null) {
             // drawEllipse($x1, $y1, $x2, $y2, $fillType);
             $startAngle = null;
             $fillType = $param5;
@@ -1808,4 +1794,3 @@ class Page
         return $this;
     }
 }
-

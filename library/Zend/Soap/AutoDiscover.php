@@ -1,35 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage AutoDiscover
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
 
-use Zend\Uri,
-    Zend\Soap\Wsdl,
-    Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy,
-    Zend\Server\Reflection\AbstractFunction,
-    Zend\Server\Reflection,
-    Zend\Server\Reflection\Prototype,
-    Zend\Server\Reflection\ReflectionParameter,
-    Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery,
-    Zend\Soap\AutoDiscover\DiscoveryStrategy\DiscoveryStrategyInterface as DiscoveryStrategy;
+use Zend\Server\Reflection;
+use Zend\Server\Reflection\AbstractFunction;
+use Zend\Server\Reflection\Prototype;
+use Zend\Server\Reflection\ReflectionParameter;
+use Zend\Soap\AutoDiscover\DiscoveryStrategy\DiscoveryStrategyInterface as DiscoveryStrategy;
+use Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery;
+use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
+use Zend\Uri;
 
 /**
  * \Zend\Soap\AutoDiscover
@@ -482,7 +471,7 @@ class AutoDiscover
                 );
                 // Add the wrapper element part, which must be named 'parameters'
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
-            } else if ($prototype->getReturnType() != "void") {
+            } elseif ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
                 $args['return'] = array('type' => $wsdl->getType($this->_discoveryStrategy->getFunctionReturnType($function, $prototype)));
             }

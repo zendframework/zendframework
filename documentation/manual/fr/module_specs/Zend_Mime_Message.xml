@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-    <section xml:id="zend.mime.message.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.mime.message.introduction"><title>Introduction</title>
         
 
         <para>
@@ -18,7 +18,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.instantiation"><info><title>Instancier Zend_Mime_Message</title></info>
+    <section xml:id="zend.mime.message.instantiation"><title>Instancier Zend_Mime_Message</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.addparts"><info><title>Ajouter des parties MIME</title></info>
+    <section xml:id="zend.mime.message.addparts"><title>Ajouter des parties MIME</title>
         
 
         <para>
@@ -53,7 +53,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.bondary"><info><title>Gérer les frontières</title></info>
+    <section xml:id="zend.mime.message.bondary"><title>Gérer les frontières</title>
         
 
         <para>
@@ -80,8 +80,8 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.parse"><info><title>Parser une chaîne de caractère pour créer un objet Zend_Mime_Message
-        (expérimental)</title></info>
+    <section xml:id="zend.mime.message.parse"><title>Parser une chaîne de caractère pour créer un objet Zend_Mime_Message
+        (expérimental)</title>
         
 
         <para>

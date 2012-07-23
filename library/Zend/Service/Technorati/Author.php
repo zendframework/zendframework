@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    DOMXPath;
+use DomElement;
+use DOMXPath;
 
 /**
  * Represents a weblog Author object. It usually belongs to a Technorati account.
@@ -30,8 +19,6 @@ use DomElement,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Author
 {
@@ -228,7 +215,7 @@ class Author
      * @param   string $input   description input value
      * @return  Author  $this instance
      */
-    public function setDescription($input) 
+    public function setDescription($input)
     {
         $this->description = (string) $input;
         return $this;
@@ -242,7 +229,7 @@ class Author
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)
      */
-    public function setThumbnailPicture($input) 
+    public function setThumbnailPicture($input)
     {
         $this->thumbnailPicture = Utils::normalizeUriHttp($input);
         return $this;

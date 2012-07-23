@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\WindowsAzure;
@@ -85,11 +85,9 @@ class TableEntityTest extends \PHPUnit_Framework_TestCase
 
         $exceptionRaised = false;
         $target = new TestAsset\Entity();
-        try
-        {
+        try {
             $target->setAzureValues($values, true);
-        }
-        catch (\Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionRaised = true;
         }
 

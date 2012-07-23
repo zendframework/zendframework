@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>Introduction</title>
     
 
     <para>
@@ -31,7 +31,7 @@
         utilisé pour afficher les données, les stocker dans une base de données etc.
     </para>
 
-    <note><info><title>Attention</title></info>
+    <note><title>Attention</title>
         
         <para>
             Beaucoup de flux <acronym>RSS</acronym> ont à leur disposition différentes propriétés, pour les
@@ -41,7 +41,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>Manipuler des données RSS avec Zend_Feed</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>Manipuler des données RSS avec Zend_Feed</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,38 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Search;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Analysis\Analyzer,
-	Zend\Search\Lucene\Index,
-	Zend\Search\Lucene\Search\Exception\QueryParserException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Search\Exception\QueryParserException;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class QueryParser extends Lucene\AbstractFSM
 {
@@ -530,7 +517,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_rqFirstTerm, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $from = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $from = null;
@@ -539,7 +526,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_currentToken->text, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $to = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $to = null;
@@ -572,7 +559,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_rqFirstTerm, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $from = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $from = null;
@@ -581,7 +568,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_currentToken->text, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $to = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $to = null;

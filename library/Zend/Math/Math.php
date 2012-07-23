@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Math
  */
 
 namespace Zend\Math;
@@ -23,10 +13,8 @@ namespace Zend\Math;
 /**
  * @category   Zend
  * @package    Zend_Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Math extends BigInteger
+class Math
 {
     /**
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
@@ -55,7 +43,7 @@ class Math extends BigInteger
                 if ($rand !== false && strlen($rand) === $length) {
                     return $rand;
                 }
-            }    
+            }
         }
         if ($strong) {
             throw new Exception\RuntimeException(
@@ -93,8 +81,8 @@ class Math extends BigInteger
             );
         }
         $log    = log($range, 2);
-        $bytes  = (int) ($log / 8) + 1; 
-        $bits   = (int) $log + 1; 
+        $bytes  = (int) ($log / 8) + 1;
+        $bits   = (int) $log + 1;
         $filter = (int) (1 << $bits) - 1;
         do {
             $rnd = hexdec(bin2hex(self::randBytes($bytes, $strong)));
@@ -116,27 +104,5 @@ class Math extends BigInteger
             return "\x00" . $long;
         }
         return $long;
-    }
-
-    /**
-     * Translate a binary form into a big integer string
-     *
-     * @param string $binary
-     * @return string
-     */
-    public function fromBinary($binary)
-    {
-        return $this->_math->binaryToInteger($binary);
-    }
-
-    /**
-     * Translate a big integer string into a binary form
-     *
-     * @param string $integer
-     * @return string
-     */
-    public function toBinary($integer)
-    {
-        return $this->_math->integerToBinary($integer);
     }
 }

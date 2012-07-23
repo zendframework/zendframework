@@ -45,7 +45,7 @@ foreach ($posts as $post) {
  * most recent date will be used.
  *
  * @param string $tag Optional filtering by tag
- * @param Zend_Date $dt Optional filtering by date
+ * @param DateTime $dt Optional filtering by date
  * @param string $url Optional filtering by url
  * @return Zend_Service_Delicious_PostList
  */

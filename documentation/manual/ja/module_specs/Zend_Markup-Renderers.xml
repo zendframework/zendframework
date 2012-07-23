@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.renderers"><info><title>Zend_Markup レンダラー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.renderers"><title>Zend_Markup レンダラー</title>
     
  
     <para>
@@ -7,7 +7,7 @@
         <acronym>HTML</acronym> レンダラーが同梱されています。
     </para>
  
-    <section xml:id="zend.markup.renderers.add"><info><title>自作のタグの追加</title></info>
+    <section xml:id="zend.markup.renderers.add"><title>自作のタグの追加</title>
         
  
         <para>
@@ -55,7 +55,7 @@ echo $bbcode->render('my [foo]tag[/foo]');
             closing tag.
         </para>
 
-        <section xml:id="zend.markup.renderers.add.callback"><info><title>Add a callback tag</title></info>
+        <section xml:id="zend.markup.renderers.add.callback"><title>Add a callback tag</title>
             
 
             <para>
@@ -113,10 +113,10 @@ echo $bbcode->render('my [upper]tag[/upper]');
         </section>
     </section>
 
-    <section xml:id="zend.markup.renderers.list"><info><title>タグ一覧</title></info>
+    <section xml:id="zend.markup.renderers.list"><title>タグ一覧</title>
         
 
-        <table xml:id="zend.markup.renderers.list.tags"><info><title>タグ一覧</title></info>
+        <table xml:id="zend.markup.renderers.list.tags"><title>タグ一覧</title>
             
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">

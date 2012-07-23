@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Klasy helperów</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><title>Klasy helperów</title>
 
     
 
@@ -22,7 +22,7 @@
         postaci camelCased: <code>fooBar()</code>.
     </para>
 
-    <note><info><title>Zwróć uwagę na wielkość liter</title></info>
+    <note><title>Zwróć uwagę na wielkość liter</title>
         
         <para>
             Nazwy klas helperów są zawsze w postaci camelCased, czyli nigdy
@@ -31,7 +31,7 @@
         </para>
     </note>
 
-    <note><info><title>Domyślne ścieżki helperów</title></info>
+    <note><title>Domyślne ścieżki helperów</title>
         
 
         <para>
@@ -53,7 +53,7 @@
         <code>$this-&gt;nazwaHelpera()</code>.
     </para>
 
-    <section xml:id="zend.view.helpers.initial"><info><title>Wbudowane klasy helperów</title></info>
+    <section xml:id="zend.view.helpers.initial"><title>Wbudowane klasy helperów</title>
         
 
         <para>
@@ -417,7 +417,7 @@ echo $this->formCheckbox('foo',
 
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>Ścieżki klas helperów</title></info>
+    <section xml:id="zend.view.helpers.paths"><title>Ścieżki klas helperów</title>
 
         
 
@@ -472,7 +472,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>Pisanie własnych klas helperów</title></info>
+    <section xml:id="zend.view.helpers.custom"><title>Pisanie własnych klas helperów</title>
 
         
 

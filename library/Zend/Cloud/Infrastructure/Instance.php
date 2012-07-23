@@ -1,10 +1,11 @@
 <?php
 /**
- * @category   Zend
- * @package    Zend_Cloud
- * @subpackage Infrastructure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\Infrastructure;
@@ -14,10 +15,8 @@ namespace Zend\Cloud\Infrastructure;
  *
  * @package    Zend_Cloud
  * @subpackage Infrastructure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Instance 
+class Instance
 {
     const STATUS_RUNNING       = 'running';
     const STATUS_STOPPED       = 'stopped';
@@ -59,15 +58,15 @@ class Instance
 
     /**
      * Instance's attribute
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $attributes;
 
     /**
      * Attributes required for an instance
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $attributeRequired = array(
         self::INSTANCE_ID,
@@ -80,9 +79,9 @@ class Instance
 
     /**
      * Constructor
-     * 
+     *
      * @param  Adapter\AdapterInterface $adapter
-     * @param  array $data 
+     * @param  array $data
      * @return void
      */
     public function __construct(Adapter\AdapterInterface $adapter, $data = null)
@@ -98,7 +97,7 @@ class Instance
                 $data = iterator_to_array($data);
             }
         }
-        
+
         if (empty($data) || !is_array($data)) {
             throw new Exception\InvalidArgumentException("You must pass an array of parameters");
         }
@@ -106,7 +105,7 @@ class Instance
         foreach ($this->attributeRequired as $key) {
             if (empty($data[$key])) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'The param "%s" is a required param for %s', 
+                    'The param "%s" is a required param for %s',
                     $key,
                     __CLASS__
                 ));
@@ -123,7 +122,7 @@ class Instance
      * @param array $data
      * @return mixed|false
      */
-    public function getAttribute($key) 
+    public function getAttribute($key)
     {
         if (!empty($this->attributes[$key])) {
             return $this->attributes[$key];
@@ -133,7 +132,7 @@ class Instance
 
     /**
      * Get all the attributes
-     * 
+     *
      * @return array
      */
     public function getAttributes()
@@ -143,8 +142,8 @@ class Instance
 
     /**
      * Get the instance's id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getId()
     {
@@ -153,8 +152,8 @@ class Instance
 
     /**
      * Get the instance's image id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getImageId()
     {
@@ -163,8 +162,8 @@ class Instance
 
     /**
      * Get the instance's name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {
@@ -173,8 +172,8 @@ class Instance
 
     /**
      * Get the status of the instance
-     * 
-     * @return string|boolean 
+     *
+     * @return string|boolean
      */
     public function getStatus()
     {
@@ -182,8 +181,8 @@ class Instance
     }
     /**
      * Get the metadata of the instance
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getMetadata()
     {
@@ -191,9 +190,9 @@ class Instance
     }
     /**
      * Wait for status $status with a timeout of $timeout seconds
-     * 
+     *
      * @param  string $status
-     * @param  integer $timeout 
+     * @param  integer $timeout
      * @return boolean
      */
     public function waitStatus($status, $timeout = Adapter\AdapterInterface::TIMEOUT_STATUS_CHANGE)
@@ -203,8 +202,8 @@ class Instance
 
     /**
      * Get the public DNS of the instance
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getPublicDns()
     {
@@ -216,7 +215,7 @@ class Instance
 
     /**
      * Get the instance's CPU
-     * 
+     *
      * @return string
      */
     public function getCpu()
@@ -226,7 +225,7 @@ class Instance
 
     /**
      * Get the instance's RAM size
-     * 
+     *
      * @return string
      */
     public function getRamSize()
@@ -236,7 +235,7 @@ class Instance
 
     /**
      * Get the instance's storage size
-     * 
+     *
      * @return string
      */
     public function getStorageSize()
@@ -246,8 +245,8 @@ class Instance
 
     /**
      * Get the instance's zone
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getZone()
     {
@@ -256,7 +255,7 @@ class Instance
 
     /**
      * Get the instance's launch time
-     * 
+     *
      * @return string
      */
     public function getLaunchTime()
@@ -266,8 +265,8 @@ class Instance
 
     /**
      * Reboot the instance
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function reboot()
     {
@@ -276,8 +275,8 @@ class Instance
 
     /**
      * Stop the instance
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function stop()
     {
@@ -286,8 +285,8 @@ class Instance
 
     /**
      * Start the instance
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function start()
     {
@@ -296,8 +295,8 @@ class Instance
 
     /**
      * Destroy the instance
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function destroy()
     {
@@ -306,11 +305,11 @@ class Instance
 
     /**
      * Return the system informations about the $metric of an instance
-     * 
+     *
      * @param  string $metric
      * @param  null|array $options
      * @return array|boolean
-     */ 
+     */
     public function monitor($metric, $options = null)
     {
         return $this->adapter->monitorInstance($this->attributes[self::INSTANCE_ID], $metric, $options);

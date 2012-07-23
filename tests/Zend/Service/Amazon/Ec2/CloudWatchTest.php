@@ -1,26 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend\Service\Amazon\Ec2\CloudWatch test case.
@@ -28,8 +20,6 @@ use Zend\Service\Amazon\Ec2;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -43,26 +33,23 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
     private $cloudWatchInstance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->cloudWatchInstance = new Ec2\CloudWatch('access_key', 'secret_access_key');
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\CloudWatch::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->cloudWatchInstance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->cloudWatchInstance = new Ec2\CloudWatch('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -98,7 +85,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."    <Label>NetworkIn</Label>"
                     ."  </GetMetricStatisticsResult>\r\n"
                     ."</GetMetricStatisticsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->cloudWatchInstance->getMetricStatistics(array('MeasureName' => 'NetworkIn', 'Statistics' => array('Average')));
 
@@ -169,7 +156,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."    </Metrics>\r\n"
                     ."  </ListMetricsResult>\r\n"
                     ."</ListMetricsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->cloudWatchInstance->listMetrics();
 
@@ -199,10 +186,10 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($arrReturn, $return);
     }
-    
+
     public function testZF8149()
     {
-        
+
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
                     . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
                     . "Server: hi\r\n"
@@ -252,8 +239,8 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."    <RequestId>6fb864fd-d557-11de-ac37-475775222f21</RequestId>\r\n"
                     ."  </ResponseMetadata>\r\n"
                     ."</GetMetricStatisticsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
-        
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
+
         $return = $this->cloudWatchInstance->getMetricStatistics(
             array(
                 'MeasureName' => 'CPUUtilization',
@@ -263,40 +250,40 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                 'EndTime'=>      '2009-11-19T21:56:57+00:00'
            )
         );
-        
+
         $arrReturn = array (
           'label' => 'CPUUtilization',
-          'datapoints' => 
+          'datapoints' =>
           array (
-            0 => 
+            0 =>
             array (
               'Timestamp' => '2009-11-19T21:52:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.09',
             ),
-            1 => 
+            1 =>
             array (
               'Timestamp' => '2009-11-19T21:55:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.18',
             ),
-            2 => 
+            2 =>
             array (
               'Timestamp' => '2009-11-19T21:54:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.09',
             ),
-            3 => 
+            3 =>
             array (
               'Timestamp' => '2009-11-19T21:51:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.18',
             ),
-            4 => 
+            4 =>
             array (
               'Timestamp' => '2009-11-19T21:53:00Z',
               'Unit' => 'Percent',
@@ -305,7 +292,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
             ),
           ),
         );
-        
+
         $this->assertSame($arrReturn, $return);
     }
 

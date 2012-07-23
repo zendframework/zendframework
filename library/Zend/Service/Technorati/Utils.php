@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Technorati;
 
-use Zend\Uri,
-    Zend\Date\Date as ZendDate;
+use DateTime;
+use Zend\Uri;
 
 /**
  * Collection of utilities for various Zend\Service\Technorati classes.
@@ -30,8 +19,6 @@ use Zend\Uri,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Utils
 {
@@ -74,15 +61,14 @@ class Utils
 
         // Validate the URI
         if (!$uri->isValid()) {
-            $caller = function () { 
-                $traces = debug_backtrace(); 
+            $caller = function () {
+                $traces = debug_backtrace();
 
-                if (isset($traces[2])) 
-                { 
-                    return $traces[2]['function']; 
-                } 
+                if (isset($traces[2])) {
+                    return $traces[2]['function'];
+                }
 
-                return null; 
+                return null;
             };
             throw new Exception\RuntimeException(sprintf(
                 '%s (called by %s): invalid URI ("%s") provided',
@@ -96,39 +82,26 @@ class Utils
     }
 
     /**
-     * Parses, validates and returns a valid ZendDate object
+     * Parses, validates and returns a valid DateTime object
      * from given $input.
      *
-     * $input can be either a string, an integer or a ZendDate object.
-     * If $input is string or int, it will be provided to ZendDate as it is.
-     * If $input is a ZendDate object, the object instance will be returned.
+     * $input can be either a string, an integer or a DateTime object.
+     * If $input is string or int, it will be provided to DateTime as it is.
+     * If $input is a DateTime object, the object instance will be returned.
      *
-     * @param   mixed|Date $input
-     * @return  null|Date
-     * @throws  Exception\RuntimeException
+     * @param   mixed|DateTime $input
+     * @return  DateTime
+     * @throws  \Exception
      * @static
      */
     public static function normalizeDate($input)
     {
-        // allow null as value and return valid ZendDate objects
-        if (($input === null) || ($input instanceof ZendDate)) {
+        // allow null as value and return valid DateTime objects
+        if (($input === null) || ($input instanceof DateTime)) {
             return $input;
         }
 
-        // due to a BC break as of ZF 1.5 it's not safe to use ZendDate::isDate() here
-        // see ZF-2524, ZF-2334
-        set_error_handler(function () { return true; }, E_NOTICE|E_WARNING|E_STRICT);
-        if (strtotime($input) === FALSE) {
-            restore_error_handler();
-            throw new Exception\RuntimeException(sprintf(
-                '%s: "%s" is not a valid Date/Time',
-                __METHOD__, 
-                (string) $input
-            ));
-        }
-        restore_error_handler();
-
-        return new ZendDate($input);
+        return new DateTime($input);
     }
 
     /**

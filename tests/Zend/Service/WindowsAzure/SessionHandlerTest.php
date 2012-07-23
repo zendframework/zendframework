@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\WindowsAzure;
@@ -43,8 +43,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $storageClient = $this->createStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX . $i); } catch (\Exception $e) { }
         }
     }

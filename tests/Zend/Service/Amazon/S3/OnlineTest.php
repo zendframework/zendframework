@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon_S3
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\S3;
 
-use Zend\Service\Amazon\S3,
-    Zend\Service\Amazon\S3\Exception,
-    Zend\Http\Response;
+use Zend\Service\Amazon\S3;
+use Zend\Service\Amazon\S3\Exception;
+use Zend\Http\Response;
 
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
@@ -537,7 +524,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->_amazon->removeObject("testgetobjectparams1/zftest2", "testdata");
         $this->_amazon->removeBucket("testgetobjectparams1");
     }
-    
+
     public function testCommonPrefixes()
     {
         $this->_amazon->createBucket($this->_bucket);

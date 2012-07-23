@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
+ */
 
 namespace ZendTest\Service\LiveDocx;
 
-use Zend\Service\LiveDocx\MailMerge,
-    Zend\Soap\Client as SoapClient,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Service\LiveDocx\MailMerge;
+use Zend\Soap\Client as SoapClient;
+use PHPUnit_Framework_TestCase as TestCase;
 
 
 class MailMergeTest extends \PHPUnit_Framework_TestCase
@@ -20,7 +28,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     const TEST_INCLUDE_SUBTEMPLATE_2 = 'subtemplate2.docx';
 
     // -------------------------------------------------------------------------
-    
+
     protected $path;
     protected $mailMerge;
 
@@ -97,7 +105,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $actualResults = array_unique($soapClient->__getFunctions());
 
         sort($actualResults);
-        
+
         $this->assertEquals($expectedResults, $actualResults);
 
         unset($soapClient);
@@ -178,7 +186,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Service\LiveDocx\MailMerge', $mailMerge->setWsdl($wsdl));
 
         $this->assertEquals($wsdl, $mailMerge->getWsdl());
-        
+
         unset($mailMerge);
     }
 
@@ -213,7 +221,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public function testInvalidSetOptions()
     {
         $this->setExpectedException('Zend\Service\LiveDocx\Exception\InvalidArgumentException');
-        
+
         $options = array(
             'username' => 'invalid-username',
             'password' => 'invalid-password',
@@ -222,7 +230,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         );
         $this->mailMerge->setOptions($options);
     }
-    
+
     public function testMissingUsername()
     {
         $this->setExpectedException('Zend\Service\LiveDocx\Exception\InvalidArgumentException');
@@ -235,7 +243,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public function testMissingPassword()
     {
         $this->setExpectedException('Zend\Service\LiveDocx\Exception\InvalidArgumentException');
-        
+
         $mailMerge = new MailMerge();
         $mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME);
         $mailMerge->listTemplates();
@@ -1089,7 +1097,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     }
 
     // -------------------------------------------------------------------------
-    
+
     protected function setUpIncludeTemplate()
     {
         $filenames = array (
@@ -1107,8 +1115,8 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             $this->mailMerge->uploadTemplate($this->path .
                 DIRECTORY_SEPARATOR . $filename);
         }
-    }    
-    
+    }
+
     // -------------------------------------------------------------------------
 
     public function setUp()
@@ -1118,7 +1126,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('LiveDocx tests disabled');
             return true;
         }
-        
+
         $this->mailMerge = new MailMerge();
         $this->mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
                         ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
@@ -1140,10 +1148,10 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             }
             unset($this->mailMerge);
         }
-        
+
         return true;
     }
-    
+
     // -------------------------------------------------------------------------
 
     // Used in tests for premium LiveDocx only
@@ -1176,7 +1184,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
         return true;
     }
-    
+
     // -------------------------------------------------------------------------
 
 }

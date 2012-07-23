@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><title>Zend_Config_Writer</title>
     
     <para>
         <classname>Zend_Config_Writer</classname> позволяет создавать конфигурационные
@@ -55,7 +55,7 @@
         <classname>Zend_Config</classname>.
     </para>
 
-    <example xml:id="zend.config.writer.example.using"><info><title>Использование Zend_Config_Writer</title></info>
+    <example xml:id="zend.config.writer.example.using"><title>Использование Zend_Config_Writer</title>
         
         <para>
             Этот пример демонстрирует использование
@@ -101,7 +101,7 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example xml:id="zend.config.writer.modifying"><info><title>Изменение существующего конфигурационного файла</title></info>
+    <example xml:id="zend.config.writer.modifying"><title>Изменение существующего конфигурационного файла</title>
         
         <para>
             Этот пример демонстрирует редактирование существующего
@@ -125,7 +125,7 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note><info><title>Загрузка конфигурационного файла</title></info>
+    <note><title>Загрузка конфигурационного файла</title>
         
         <para>
             При загрузке существующего файла для последующих изменений

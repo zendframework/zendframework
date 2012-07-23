@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon;
@@ -28,8 +17,6 @@ use Zend\Service;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
@@ -95,11 +82,11 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testUnknownCountryException()
     {
         $this->setExpectedException(
-            'Zend\Service\Amazon\Exception\InvalidArgumentException', 
+            'Zend\Service\Amazon\Exception\InvalidArgumentException',
             'Unknown country code: wrong-country-code');
         $aws = new Amazon\Amazon(
-            TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID, 
-            'wrong-country-code', 
+            TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID,
+            'wrong-country-code',
             TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY);
     }
 
@@ -206,7 +193,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testItemSearchExceptionCityInvalid()
     {
         $this->setExpectedException(
-            'Zend\Service\Amazon\Exception\RuntimeException', 
+            'Zend\Service\Amazon\Exception\RuntimeException',
             'The value you specified for SearchIndex is invalid.'
         );
         $this->_amazon->itemSearch(array(
@@ -332,8 +319,6 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */

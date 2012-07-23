@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_BinaryParser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\BinaryParser\DataSource;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract helper class for {@link \Zend\Pdf\BinaryParser\AbstractBinaryParser}
@@ -43,13 +33,11 @@ use Zend\Pdf;
  * - If the data source cannot be opened for any reason (such as insufficient
  *   permissions, missing file, etc.), it should throw an appropriate exception.
  *
- * The destructor is also not defined in this abstract class. However, 
+ * The destructor is also not defined in this abstract class. However,
  * implementing classes should define one, and have it close the data source.
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractDataSource
 {

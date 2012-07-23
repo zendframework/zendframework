@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.16"><info><title>Zend Framework 1.6</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.16"><title>Zend Framework 1.6</title>
     
 
     <para>
@@ -7,10 +7,10 @@
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <section xml:id="migration.16.zend.controller"><info><title>Zend_Controller</title></info>
+    <section xml:id="migration.16.zend.controller"><title>Zend_Controller</title>
         
 
-        <section xml:id="migration.16.zend.controller.dispatcher"><info><title>ディスパッチャインターフェイスの変更</title></info>
+        <section xml:id="migration.16.zend.controller.dispatcher"><title>ディスパッチャインターフェイスの変更</title>
             
 
             <para>
@@ -40,9 +40,9 @@
         </section>
     </section>
 
-    <section xml:id="migration.16.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.16.zend.file.transfer"><title>Zend_File_Transfer</title>
         
-        <section xml:id="migration.16.zend.file.transfer.validators"><info><title>バリデータを使う際の変更点</title></info>
+        <section xml:id="migration.16.zend.file.transfer.validators"><title>バリデータを使う際の変更点</title>
             
 
             <para>
@@ -73,7 +73,7 @@
                 <constant>FALSE</constant> を追加します。
             </para>
 
-            <example xml:id="migration.16.zend.file.transfer.example"><info><title>ファイルバリデータを 1.6.1 から 1.6.2 に移行する方法</title></info>
+            <example xml:id="migration.16.zend.file.transfer.example"><title>ファイルバリデータを 1.6.1 から 1.6.2 に移行する方法</title>
                 
 
                 <programlisting language="php"><![CDATA[

@@ -1,0 +1,18 @@
+{
+    "name": "zendframework/zend-amf",
+    "description": "provides support for Adobe's » Action Message Format (AMF), to allow communication between Adobe's » Flash Player and PHP",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "amf"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Amf": ""
+        }
+    },
+    "target-dir": "Zend/Amf",
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

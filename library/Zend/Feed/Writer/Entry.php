@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer;
 
-use Zend\Feed\Writer\Exception,
-    Zend\Uri,
-    Zend\Date;
+use DateTime;
+use Zend\Feed\Writer\Exception;
+use Zend\Uri;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Entry
 {
@@ -126,6 +114,7 @@ class Entry
      * Set the feed character encoding
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncoding($encoding)
     {
@@ -179,43 +168,37 @@ class Entry
     /**
      * Set the feed creation date
      *
-     * @return string|null|Date\Date
+     * @return string|null|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setDateCreated($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Zend\Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp passed as parameter');
         }
-        $this->_data['dateCreated'] = $zdate;
+        $this->_data['dateCreated'] = $date;
     }
 
     /**
      * Set the feed modification date
      *
-     * @return string|null
+     * @return string|null|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setDateModified($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp passed as parameter');
         }
-        $this->_data['dateModified'] = $zdate;
+        $this->_data['dateModified'] = $date;
     }
 
     /**

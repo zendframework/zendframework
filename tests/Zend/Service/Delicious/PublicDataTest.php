@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Delicious
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Delicious;
-use \Zend\Service\Delicious\Delicious as DeliciousClient,
-    \Zend\Http,
-    \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+
+use Zend\Service\Delicious\Delicious as DeliciousClient;
+use Zend\Http;
+use Zend\Rest\Client as RestClient;
 
 /**
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
@@ -43,7 +30,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Zend_Service_Delicious
      */
-    protected $_delicious;
+    protected $delicious;
 
     /**
      * @return void
@@ -58,9 +45,8 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
                 'useragent' => '\Zend\Service\Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        RestClient\RestClient::setDefaultHttpClient($httpClient);
 
-        $this->_delicious = new DeliciousClient();
+        $this->delicious = new DeliciousClient(self::TEST_UNAME, self::TEST_PASS, $httpClient);
     }
 
     /**
@@ -70,7 +56,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTags()
     {
-        $tags = $this->_delicious->getUserTags(self::TEST_UNAME);
+        $tags = $this->delicious->getUserTags(self::TEST_UNAME);
 
         $this->assertInternalType('array', $tags);
     }
@@ -80,7 +66,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTagsWithCount()
     {
-        $tags = $this->_delicious->getUserTags(self::TEST_UNAME, null, 20);
+        $tags = $this->delicious->getUserTags(self::TEST_UNAME, null, 20);
 
         $this->assertInternalType('array', $tags);
         $this->assertTrue(count($tags) <= 20);
@@ -91,7 +77,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTagsWithAtLeast()
     {
-        $tags = $this->_delicious->getUserTags(self::TEST_UNAME, 5);
+        $tags = $this->delicious->getUserTags(self::TEST_UNAME, 5);
 
         $this->assertInternalType('array', $tags);
         foreach ($tags as $count) {
@@ -104,7 +90,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNetwork()
     {
-        $network = $this->_delicious->getUserNetwork(self::TEST_UNAME);
+        $network = $this->delicious->getUserNetwork(self::TEST_UNAME);
 
         $this->assertInternalType('array', $network);
     }
@@ -114,7 +100,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFans()
     {
-        $fans = $this->_delicious->getUserFans(self::TEST_UNAME);
+        $fans = $this->delicious->getUserFans(self::TEST_UNAME);
 
         $this->assertInternalType('array', $fans);
     }
@@ -124,7 +110,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUserPosts()
     {
-        $posts = $this->_delicious->getUserPosts(self::TEST_UNAME, 10);
+        $posts = $this->delicious->getUserPosts(self::TEST_UNAME, 10);
 
         $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
 
@@ -148,8 +134,9 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testGetUrlDetails() {
-        $details = $this->_delicious->getUrlDetails(self::TEST_URL);
+    public function testGetUrlDetails()
+    {
+        $details = $this->delicious->getUrlDetails(self::TEST_URL);
 
         $this->assertInternalType('array', $details);
         $this->assertArrayHasKey('hash', $details);

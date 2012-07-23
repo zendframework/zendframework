@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>Zend_Http_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><title>Zend_Http_Client</title>
     
 
-    <section xml:id="zend.http.client.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.http.client.introduction"><title>Inleiding</title>
         
         <para>
             <code>Zend_Http_Client</code> verstrekt een eenvoudige interface om HTTP verzoeken te maken.
@@ -15,7 +15,7 @@
           </para>
         </note>
         <para>
-            <example><info><title>Een basis GET verzoek maken</title></info>
+            <example><title>Een basis GET verzoek maken</title>
                 
                 <programlisting role="php"><![CDATA[<?php
     require_once 'Zend/Http/Client.php';
@@ -34,7 +34,7 @@
             </example>
         </para>
     </section>
-    <section xml:id="zend.http.client.basic-get-requests"><info><title>Basis GET verzoeken met gespecificeerde HTTP Headers</title></info>
+    <section xml:id="zend.http.client.basic-get-requests"><title>Basis GET verzoeken met gespecificeerde HTTP Headers</title>
         
         <para>
             De <code>Zend_Http_Client</code> constructor maakt een <code>Zend_Http_Client</code> instantie om
@@ -44,7 +44,7 @@
             Als je <code>Zend_Http_Client</code> gebruikt op één enkele URL kan je in de meeste gevallen de URL
             en relevante headers aan de <emphasis>constructor</emphasis> geven, zoals in de volgende voorbeelden:
         </para>
-        <example><info><title>Een Basis Zend_Http_Client maken</title></info>
+        <example><title>Een Basis Zend_Http_Client maken</title>
             
             <programlisting role="php"><![CDATA[<?php
     require_once 'Zend/Http/Client.php';
@@ -54,7 +54,7 @@
     ?>       ]]></programlisting>
         </example>
         <para/>
-        <example><info><title>Meerdere Headers sturen</title></info>
+        <example><title>Meerdere Headers sturen</title>
             
             <programlisting role="php"><![CDATA[<?php
     require_once 'Zend/Http/Client.php';
@@ -69,7 +69,7 @@
             sturen, zie dan <xref linkend="zend.http.client.requesting-multiple-domains"/>
         </para>
     </section>
-    <section xml:id="zend.http.client.requesting-multiple-domains"><info><title>Multidomein verzoeken</title></info>
+    <section xml:id="zend.http.client.requesting-multiple-domains"><title>Multidomein verzoeken</title>
         
         <para>
             <code>Zend_Http_Client</code> ondersteunt het sturen van verzoeken aan meerdere domeinen
@@ -78,7 +78,7 @@
         <note>
             <para>Een geweldig gebruik hiervoor is als je meerdere RSS feeds uitleest.</para>
         </note>
-        <example><info><title>Multidomein verzoek</title></info>
+        <example><title>Multidomein verzoek</title>
             
             <programlisting role="php"><![CDATA[<?php
     require_once 'Zend/Http/Client.php';
@@ -100,7 +100,7 @@
     ?>   ]]></programlisting>
         </example>
     </section>
-    <section xml:id="zend.http.client.settimeout"><info><title>De HTTP Timeout wijzigen</title></info>
+    <section xml:id="zend.http.client.settimeout"><title>De HTTP Timeout wijzigen</title>
         
         <para>
             <code>Zend_Http_Client::setTimeout()</code> laat je toe de timeout voor de HTTP verbinding
@@ -110,7 +110,7 @@
             <para>De standaard timeout is 10 seconden.</para>
         </note>
     </section>
-    <section xml:id="zend.http.client.setheaders"><info><title>Dynamisch HTTP Headers zetten</title></info>
+    <section xml:id="zend.http.client.setheaders"><title>Dynamisch HTTP Headers zetten</title>
         
         <para>
             Je kan een <emphasis>array</emphasis> headers zetten met <code>Zend_Http_Client::setHeaders()</code>.
@@ -122,7 +122,7 @@
             </para>
         </important>
     </section>
-    <section xml:id="zend.http.client.making-other-requests"><info><title>POST, PUT en DELETE HTTP verzoeken maken</title></info>
+    <section xml:id="zend.http.client.making-other-requests"><title>POST, PUT en DELETE HTTP verzoeken maken</title>
         
         <para>
             Het maken van POST, PUT en DELETE HTTP verzoeken wordt vereenvoudigd in <code>Zend_Http_Client</code>
@@ -132,7 +132,7 @@
             <emphasis><code>name=value&amp;foo=bar</code></emphasis>. De <code>delete()</code> methode heeft
             geen parameters.
         </para>
-        <example><info><title>POST data verzenden met Zend_Http_Client</title></info>
+        <example><title>POST data verzenden met Zend_Http_Client</title>
             
             <programlisting role="php"><![CDATA[<?php
     require_once 'Zend/Http/Client.php';

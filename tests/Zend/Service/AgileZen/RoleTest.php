@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
+ */
 
 namespace ZendTest\Service\AgileZen;
 
@@ -19,12 +27,12 @@ class RoleTest extends \PHPUnit_Framework_TestCase
         if(!defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID')) {
             self::markTestSkipped('The project ID costant has to be set.');
         }
-        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));                                               
+        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));
     }
     public function testGetRoles()
     {
         $roles = $this->agileZen->getRoles(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
-        
+
         $this->assertTrue($this->agileZen->isSuccessful());
         $this->assertTrue($roles instanceof \Zend\Service\AgileZen\Container);
         foreach ($roles as $role) {
@@ -44,7 +52,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($data['access'], $role->getAccess());
         if (!empty($role)) {
             self::$roleId = $role->getId();
-        }    
+        }
     }
     public function testUpdateRole()
     {
@@ -57,7 +65,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
             'access' => 'admin'
         );
         $role = $this->agileZen->updateRole(
-            constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'), 
+            constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'),
             self::$roleId,
             $data
         );

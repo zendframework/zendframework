@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    TimeSync
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_TimeSync
  */
 
 namespace ZendTest\TimeSync;
@@ -27,8 +16,6 @@ use Zend\TimeSync;
  * @category   Zend
  * @package    TimeSync
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      TimeSync
  */
 class TimeSyncTest extends \PHPUnit_Framework_TestCase
@@ -67,7 +54,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
         $result = $server->getServer('server_f');
 
-        $this->assertInstanceOf('Zend\TimeSync\Protocol', $result);
+        $this->assertInstanceOf('Zend\TimeSync\AbstractProtocol', $result);
     }
 
     /**
@@ -122,7 +109,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     public function testInitUnknownScheme()
     {
         $this->setExpectedException('Zend\TimeSync\Exception\RuntimeException');
-        $server = new TimeSync\TimeSync('http://time.windows.com', 'windows_time');
+        new TimeSync\TimeSync('http://time.windows.com', 'windows_time');
     }
 
     /**
@@ -168,7 +155,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $server = new TimeSync\TimeSync();
         $this->setExpectedException('Zend\TimeSync\Exception\OutOfBoundsException');
-        $result = $server->getOptions('foobar');
+        $server->getOptions('foobar');
     }
 
     /**
@@ -180,7 +167,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $server = new TimeSync\TimeSync();
         $this->setExpectedException('Zend\TimeSync\Exception\InvalidArgumentException');
-        $server->setServer('unkown_alias');
+        $server->setServer('unknown_alias');
     }
 
     /**
@@ -192,7 +179,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $server = new TimeSync\TimeSync();
         $this->setExpectedException('Zend\TimeSync\Exception\InvalidArgumentException');
-        $result = $server->getServer();
+        $server->getServer();
     }
 
     /**
@@ -204,7 +191,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $server = new TimeSync\TimeSync();
         $this->setExpectedException('Zend\TimeSync\Exception\InvalidArgumentException');
-        $result = $server->getServer('none_existing_server_alias');
+        $server->getServer('none_existing_server_alias');
     }
 
     /**
@@ -222,7 +209,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -239,7 +226,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync('ntp://time.windows.com', 'time_windows');
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -256,7 +243,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync('sntp://time-C.timefreq.bldrdoc.gov');
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -274,10 +261,10 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($servers);
 
         try {
-            $result = $server->getDate();
-        } catch (TimeSync\Exception\ExceptionInterface $e) {
+            $server->getDate();
+        } catch (TimeSync\Exception\RuntimeException $e) {
             $i = 0;
-            while($e = $e->getPrevious()) {
+            while ($e = $e->getPrevious()) {
                 $i++;
                 $this->assertInstanceOf('Zend\TimeSync\Exception\ExceptionInterface', $e);
             }
@@ -294,8 +281,8 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $servers = new TimeSync\TimeSync($this->timeservers);
 
-        foreach ($servers as $key => $server) {
-            $this->assertInstanceOf('Zend\TimeSync\Protocol', $server);
+        foreach ($servers as $server) {
+            $this->assertInstanceOf('Zend\TimeSync\AbstractProtocol', $server);
         }
     }
 
@@ -311,7 +298,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new TimeSync\TimeSync('time.windows.com');
-        $date   = $server->getDate();
+        $server->getDate();
         $result = $server->getInfo();
 
         $this->assertTrue(count($result) > 0);

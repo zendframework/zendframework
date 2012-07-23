@@ -1,28 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Sqs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon\Sqs;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Sqs\Exception,
-    Zend\Crypt\Hmac;
+
+use Zend\Crypt\Hmac;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Sqs\Exception;
 
 /**
  * Class for connecting to the Amazon Simple Queue Service (SQS)
@@ -30,8 +20,6 @@ use Zend\Service\Amazon,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_Sqs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://aws.amazon.com/sqs/ Amazon Simple Queue Service
  */
 class Sqs extends \Zend\Service\Amazon\AbstractAmazon
@@ -192,7 +180,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
 
         if ($result->SendMessageResult->MessageId === null) {
             throw new Exception\RuntimeException($result->Error->Code);
-        } else if ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
+        } elseif ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
             throw new Exception\RuntimeException('MD5 of body does not match message sent');
         }
 
@@ -285,7 +273,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         if ($result->GetQueueAttributesResult->Attribute === null) {
             throw new Exception\RuntimeException($result->Error->Code);
         }
-        
+
         if(count($result->GetQueueAttributesResult->Attribute) > 1) {
             $attr_result = array();
             foreach($result->GetQueueAttributesResult->Attribute as $attribute) {
@@ -408,8 +396,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         $data .= $this->_sqsEndpoint . "\n";
         if ($queue_url !== null) {
             $data .= parse_url($queue_url, PHP_URL_PATH);
-        }
-        else {
+        } else {
             $data .= '/';
         }
         $data .= "\n";
@@ -424,7 +411,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::OUTPUT_BINARY);
 
         return base64_encode($hmac);
     }

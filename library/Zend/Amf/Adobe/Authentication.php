@@ -1,39 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf\Adobe;
 
-use stdClass,
-    Zend\Acl\Acl,
-    Zend\Acl\Role,
-    Zend\Amf\AbstractAuthentication,
-    Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+use stdClass;
+use Zend\Acl\Acl;
+use Zend\Acl\Role;
+use Zend\Amf\AbstractAuthentication;
+use Zend\Authentication\Adapter as AuthenticationAdapter;
+use Zend\Authentication\Result as AuthenticationResult;
 
 /**
  * This class implements authentication against XML file with roles for Flex Builder.
  *
  * @package    Zend_Amf
  * @subpackage Adobe
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Authentication extends AbstractAuthentication
 {
@@ -102,7 +90,7 @@ Roles file format:
      */
     public function authenticate()
     {
-        if (empty($this->_username) 
+        if (empty($this->_username)
             || empty($this->_password)
         ) {
             throw new AuthenticationAdapter\Exception\InvalidArgumentException('Username/password should be set');

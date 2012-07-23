@@ -211,16 +211,14 @@ $client->setConfig($config);
 
         <variablelist>
             <varlistentry xml:id="zend.http.client.methods.__construct">
-                <term>
+                <term>__construct</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>__construct</methodname>
                         <methodparam>
                             <funcparams>string $uri, array $config</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Constructor</para>
                     <para></para>
                     <para>Returns void</para>
@@ -228,7 +226,8 @@ $client->setConfig($config);
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-config">
-                <term>
+                <term>setConfig</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setConfig</methodname>
                         <methodparam>
@@ -236,9 +235,6 @@ $client->setConfig($config);
 )</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set configuration parameters for this HTTP client</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -246,16 +242,14 @@ $client->setConfig($config);
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-adapter">
-                <term>
+                <term>setAdapter</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setAdapter</methodname>
                         <methodparam>
                             <funcparams>Zend\Http\Client\Adapter|string $adapter</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Load the connection adapter</para>
                     <para>While this method is not called more than one for a client, it is
 seperated from -&gt;request() to preserve logic and readability</para>
@@ -264,16 +258,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-adapter">
-                <term>
+                <term>getAdapter</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getAdapter</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Load the connection adapter</para>
                     <para></para>
                     <para>Returns Zend\Http\Client\Adapter</para>
@@ -281,16 +273,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-request">
-                <term>
+                <term>getRequest</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getRequest</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get Request</para>
                     <para></para>
                     <para>Returns Request</para>
@@ -298,16 +288,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-response">
-                <term>
+                <term>getResponse</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getResponse</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get Response</para>
                     <para></para>
                     <para>Returns Response</para>
@@ -315,16 +303,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-request">
-                <term>
+                <term>setRequest</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setRequest</methodname>
                         <methodparam>
                             <funcparams>Zend\Http\Zend\Http\Request $request</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set request</para>
                     <para></para>
                     <para>Returns void</para>
@@ -332,16 +318,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-response">
-                <term>
+                <term>setResponse</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setResponse</methodname>
                         <methodparam>
                             <funcparams>Zend\Http\Zend\Http\Response $response</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set response</para>
                     <para></para>
                     <para>Returns void</para>
@@ -349,16 +333,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-last-request">
-                <term>
+                <term>getLastRequest</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getLastRequest</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get the last request (as a string)</para>
                     <para></para>
                     <para>Returns string</para>
@@ -366,16 +348,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-last-response">
-                <term>
+                <term>getLastResponse</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getLastResponse</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get the last response (as a string)</para>
                     <para></para>
                     <para>Returns string</para>
@@ -383,16 +363,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-redirections-count">
-                <term>
+                <term>getRedirectionsCount</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getRedirectionsCount</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get the redirections count</para>
                     <para></para>
                     <para>Returns integer</para>
@@ -400,16 +378,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-uri">
-                <term>
+                <term>setUri</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setUri</methodname>
                         <methodparam>
                             <funcparams>string|Zend\Http\Zend\Uri\Http $uri</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set Uri (to the request)</para>
                     <para></para>
                     <para>Returns void</para>
@@ -417,16 +393,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-uri">
-                <term>
+                <term>getUri</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getUri</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get uri (from the request)</para>
                     <para></para>
                     <para>Returns Zend\Http\Zend\Uri\Http</para>
@@ -434,16 +408,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-method">
-                <term>
+                <term>setMethod</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setMethod</methodname>
                         <methodparam>
                             <funcparams>string $method</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set the HTTP method (to the request)</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -451,16 +423,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-method">
-                <term>
+                <term>getMethod</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getMethod</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get the HTTP method</para>
                     <para></para>
                     <para>Returns string</para>
@@ -468,16 +438,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-enc-type">
-                <term>
+                <term>setEncType</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setEncType</methodname>
                         <methodparam>
                             <funcparams>string $encType, string $boundary</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set the encoding type and the boundary (if any)</para>
                     <para></para>
                     <para>Returns void</para>
@@ -485,16 +453,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-enc-type">
-                <term>
+                <term>getEncType</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getEncType</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get the encoding type</para>
                     <para></para>
                     <para>Returns type</para>
@@ -502,16 +468,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-raw-body">
-                <term>
+                <term>setRawBody</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setRawBody</methodname>
                         <methodparam>
                             <funcparams>string $body</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set raw body (for advanced use cases)</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -519,16 +483,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-parameter-post">
-                <term>
+                <term>setParameterPost</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setParameterPost</methodname>
                         <methodparam>
                             <funcparams>array $post</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set the POST parameters</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -536,16 +498,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-parameter-get">
-                <term>
+                <term>setParameterGet</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setParameterGet</methodname>
                         <methodparam>
                             <funcparams>array $query</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set the GET parameters</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -553,16 +513,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-cookies">
-                <term>
+                <term>getCookies</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getCookies</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Return the current cookies</para>
                     <para></para>
                     <para>Returns array</para>
@@ -570,16 +528,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.add-cookie">
-                <term>
+                <term>addCookie</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>addCookie</methodname>
                         <methodparam>
                             <funcparams>ArrayIterator|SetCookie|string $cookie, string $value, string $domain, string $expire, string $path, boolean $secure = false, boolean $httponly = true</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Add a cookie</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -587,16 +543,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-cookies">
-                <term>
+                <term>setCookies</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setCookies</methodname>
                         <methodparam>
                             <funcparams>array $cookies</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set an array of cookies</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -604,16 +558,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.clear-cookies">
-                <term>
+                <term>clearCookies</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>clearCookies</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Clear all the cookies</para>
                     <para></para>
                     <para>Returns void</para>
@@ -621,16 +573,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-headers">
-                <term>
+                <term>setHeaders</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setHeaders</methodname>
                         <methodparam>
                             <funcparams>Headers|array $headers</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set the headers (for the request)</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -638,16 +588,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.has-header">
-                <term>
+                <term>hasHeader</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>hasHeader</methodname>
                         <methodparam>
                             <funcparams>string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Check if exists the header type specified</para>
                     <para></para>
                     <para>Returns boolean</para>
@@ -655,16 +603,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-header">
-                <term>
+                <term>getHeader</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getHeader</methodname>
                         <methodparam>
                             <funcparams>string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get the header value of the request</para>
                     <para></para>
                     <para>Returns string|boolean</para>
@@ -672,16 +618,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-stream">
-                <term>
+                <term>setStream</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setStream</methodname>
                         <methodparam>
                             <funcparams>string|boolean $streamfile = true</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set streaming for received data</para>
                     <para></para>
                     <para>Returns Zend\Http\Client</para>
@@ -689,16 +633,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.get-stream">
-                <term>
+                <term>getStream</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getStream</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get status of streaming for received data</para>
                     <para></para>
                     <para>Returns boolean|string</para>
@@ -706,16 +648,14 @@ seperated from -&gt;request() to preserve logic and readability</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-auth">
-                <term>
+                <term>setAuth</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setAuth</methodname>
                         <methodparam>
                             <funcparams>string $user, string $password, string $type = 'basic'</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Create a HTTP authentication "Authorization:" header according to the
 specified user, password and authentication method.</para>
                     <para></para>
@@ -724,16 +664,14 @@ specified user, password and authentication method.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.reset-parameters">
-                <term>
+                <term>resetParameters</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>resetParameters</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Reset all the HTTP parameters (auth,cookies,request, response, etc)</para>
                     <para></para>
                     <para>Returns void</para>
@@ -741,16 +679,14 @@ specified user, password and authentication method.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.send">
-                <term>
+                <term>send</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>send</methodname>
                         <methodparam>
                             <funcparams>Request $request</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Send HTTP request</para>
                     <para></para>
                     <para>Returns Response</para>
@@ -758,16 +694,14 @@ specified user, password and authentication method.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.set-file-upload">
-                <term>
+                <term>setFileUpload</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>setFileUpload</methodname>
                         <methodparam>
                             <funcparams>string $filename, string $formname, string $data, string $ctype</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set a file to upload (using a POST request)</para>
                     <para>Can be used in two ways:
 
@@ -782,16 +716,14 @@ application/octet-stream.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.remove-file-upload">
-                <term>
+                <term>removeFileUpload</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>removeFileUpload</methodname>
                         <methodparam>
                             <funcparams>string $filename</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Remove a file to upload</para>
                     <para></para>
                     <para>Returns boolean</para>
@@ -799,7 +731,8 @@ application/octet-stream.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.client.methods.encode-form-data">
-                <term>
+                <term>encodeFormData</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>encodeFormData</methodname>
                         <methodparam>
@@ -807,9 +740,6 @@ application/octet-stream.</para>
 )</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Encode data to a multipart/form-data part suitable for a POST request.</para>
                     <para></para>
                     <para>Returns string</para>
@@ -964,8 +894,8 @@ $client->setParameterPost(array(
             <para></para>
 
             <programlisting language="php" role="php"><![CDATA[
-use Zend\Http\Request,
-    Zend\Http\Client;
+use Zend\Http\Request;
+use Zend\Http\Client;
 $request = new Request();
 $request->setUri('http://www.test.com');
 $request->setMethod('POST');

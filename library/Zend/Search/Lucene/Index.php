@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Search\Similarity,
-	Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\InvalidArgumentException,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException,
-    Zend\Search\Lucene\Exception\OutOfRangeException;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\OutOfRangeException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
+use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Index implements SearchIndexInterface
 {
@@ -282,7 +270,7 @@ class Index implements SearchIndexInterface
 
         if ($format == (int)0xFFFFFFFC) {
             $this->_formatVersion = self::FORMAT_2_3;
-        } else if ($format == (int)0xFFFFFFFD) {
+        } elseif ($format == (int)0xFFFFFFFD) {
             $this->_formatVersion = self::FORMAT_2_1;
         } else {
             throw new InvalidFileFormatException('Unsupported segments file format');
@@ -333,7 +321,7 @@ class Index implements SearchIndexInterface
                 }
 
                 throw new RuntimeException(
-                	'Separate norm files are not supported. Optimize index to use it with Zend\Search\Lucene.'
+                    'Separate norm files are not supported. Optimize index to use it with Zend\Search\Lucene.'
                 );
             }
 
@@ -342,10 +330,10 @@ class Index implements SearchIndexInterface
             if ($isCompoundByte == 0xFF) {
                 // The segment is not a compound file
                 $isCompound = false;
-            } else if ($isCompoundByte == 0x00) {
+            } elseif ($isCompoundByte == 0x00) {
                 // The status is unknown
                 $isCompound = null;
-            } else if ($isCompoundByte == 0x01) {
+            } elseif ($isCompoundByte == 0x01) {
                 // The segment is a compound file
                 $isCompound = true;
             }
@@ -426,7 +414,7 @@ class Index implements SearchIndexInterface
 
         if ($this->_generation == -1) {
             throw new RuntimeException('Index doesn\'t exists in the specified directory.');
-        } else if ($this->_generation == 0) {
+        } elseif ($this->_generation == 0) {
             $this->_readPre21SegmentsFile();
         } else {
             $this->_readSegmentsFile();
@@ -683,7 +671,7 @@ class Index implements SearchIndexInterface
         $query->execute($this);
 
         $topScore = 0;
-        
+
         $resultSetLimit = Lucene::getResultSetLimit();
         foreach ($query->matchedDocs() as $id => $num) {
             $docScore = $query->score($id, $this);
@@ -935,7 +923,7 @@ class Index implements SearchIndexInterface
 
         if (count($subResults) == 0) {
             return array();
-        } else if (count($subResults) == 1) {
+        } elseif (count($subResults) == 1) {
             // Index is optimized (only one segment)
             // Do not perform array reindexing
             return reset($subResults);
@@ -969,7 +957,7 @@ class Index implements SearchIndexInterface
 
         if (count($subResults) == 0) {
             return array();
-        } else if (count($subResults) == 1) {
+        } elseif (count($subResults) == 1) {
             // Index is optimized (only one segment)
             // Do not perform array reindexing
             return reset($subResults);
@@ -1047,11 +1035,11 @@ class Index implements SearchIndexInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity
      */
     public function getSimilarity()
     {
-        return Similarity::getDefault();
+        return AbstractSimilarity::getDefault();
     }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Skrypt kontrolera</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>Skrypt kontrolera</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         a następnie wybierasz skrypt widoku, który ma być zrenderowany.
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>Przekazywanie zmiennych</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>Przekazywanie zmiennych</title>
 
         
 
@@ -78,7 +78,7 @@ $view->assign('c', "Sea");
 
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>Wykonywanie skryptu widoku</title></info>
+    <section xml:id="zend.view.controllers.render"><title>Wykonywanie skryptu widoku</title>
 
         
 
@@ -101,7 +101,7 @@ echo $view->render('someView.php');
 
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>Ścieżki skryptu widoku</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>Ścieżki skryptu widoku</title>
 
         
 

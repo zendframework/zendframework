@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><title>Zend_Server_Reflection</title>
     
 
-    <section xml:id="zend.server.reflection.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.server.reflection.introduction"><title>Wprowadzenie</title>
         
 
         <para>
@@ -19,7 +19,7 @@
             serwerów dla frameworka.
         </para>
     </section>
-    <section xml:id="zend.server.reflection.usage"><info><title>Użycie</title></info>
+    <section xml:id="zend.server.reflection.usage"><title>Użycie</title>
         
 
         <para>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.regex"><info><title>Regex</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.regex"><title>Regex</title>
     
 
     <para>
         Ce validateur valide si une chaine correspond à un motif d'expression régulière.
     </para>
 
-    <section xml:id="zend.validate.set.regex.options"><info><title>Options supportées par Zend_Validate_Regex</title></info>
+    <section xml:id="zend.validate.set.regex.options"><title>Options supportées par Zend_Validate_Regex</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.regex.basic"><info><title>Validation avec Zend_Validate_Regex</title></info>
+    <section xml:id="zend.validate.set.regex.basic"><title>Validation avec Zend_Validate_Regex</title>
         
 
         <para>
@@ -49,7 +49,7 @@ $validator->isValid("Pest"); // retourne false
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.regex.handling"><info><title>Gestion des motifs</title></info>
+    <section xml:id="zend.validate.set.regex.handling"><title>Gestion des motifs</title>
         
 
         <para>

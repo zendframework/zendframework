@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Standard Form Elemente die mit dem Zend Framework ausgeliefert werden</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><title>Standard Form Elemente die mit dem Zend Framework ausgeliefert werden</title>
 
 
     <para>
@@ -10,7 +10,7 @@
         eine Beschreibung der Funktionalität die Sie anbieten.
     </para>
 
-    <section xml:id="zend.form.standardElements.button"><info><title>Zend_Form_Element_Button</title></info>
+    <section xml:id="zend.form.standardElements.button"><title>Zend_Form_Element_Button</title>
 
 
         <para>
@@ -41,7 +41,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.captcha"><info><title>Zend_Form_Element_Captcha</title></info>
+    <section xml:id="zend.form.standardElements.captcha"><title>Zend_Form_Element_Captcha</title>
 
 
         <para>
@@ -125,7 +125,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.checkbox"><info><title>Zend_Form_Element_Checkbox</title></info>
+    <section xml:id="zend.form.standardElements.checkbox"><title>Zend_Form_Element_Checkbox</title>
 
 
         <para>
@@ -160,7 +160,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.file"><info><title>Zend_Form_Element_File</title></info>
+    <section xml:id="zend.form.standardElements.file"><title>Zend_Form_Element_File</title>
 
 
         <para>
@@ -178,7 +178,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             Transferadapter hinzugefügt.
         </para>
 
-        <example xml:id="zend.form.standardElements.file.usage"><info><title>Verwendung des File Formularelements</title></info>
+        <example xml:id="zend.form.standardElements.file.usage"><title>Verwendung des File Formularelements</title>
 
 
             <para>
@@ -229,7 +229,7 @@ $location = $form->foo->getFileName();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Standardmäßige Ablage von Uploads</title></info>
+        <note><title>Standardmäßige Ablage von Uploads</title>
 
 
             <para>
@@ -237,7 +237,7 @@ $location = $form->foo->getFileName();
             </para>
         </note>
 
-        <note><info><title>Datei Werte</title></info>
+        <note><title>Datei Werte</title>
 
 
             <para>
@@ -275,7 +275,7 @@ $form->getValues();
             dieses Flags zu erhalten kann man <methodname>isValueDisabled()</methodname> aufrufen.
         </para>
 
-        <example xml:id="zend.form.standardElements.file.retrievement"><info><title>Datei explizit empfangen</title></info>
+        <example xml:id="zend.form.standardElements.file.retrievement"><title>Datei explizit empfangen</title>
 
 
             <para>
@@ -335,7 +335,7 @@ if ($form->isValid($form->getPost())) {
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.form.standardElements.file.isuploaded"><info><title>Prüfen ob eine optionale Datei hochgeladen wurde</title></info>
+        <example xml:id="zend.form.standardElements.file.isuploaded"><title>Prüfen ob eine optionale Datei hochgeladen wurde</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -360,7 +360,7 @@ if ($form->foo->isUploaded()) {
             Einstellungen mehrere Male durchgeführt werden müssen.
         </para>
 
-        <example xml:id="zend.form.standardElements.file.multiusage"><info><title>Mehrere Dateien setzen</title></info>
+        <example xml:id="zend.form.standardElements.file.multiusage"><title>Mehrere Dateien setzen</title>
 
 
             <para>
@@ -391,7 +391,7 @@ $form->addElement($element, 'foo');
             </para>
         </example>
 
-        <note><info><title>File Elemente in Subformularen</title></info>
+        <note><title>File Elemente in Subformularen</title>
 
 
             <para>
@@ -429,7 +429,7 @@ $element->setLabel('Ein Bild hochladen:')
 $form->addElement($element, 'foo');
 ]]></programlisting>
 
-        <note><info><title>MaxFileSize mit mehreren File Elementen</title></info>
+        <note><title>MaxFileSize mit mehreren File Elementen</title>
 
 
             <para>
@@ -444,7 +444,7 @@ $form->addElement($element, 'foo');
         </note>
     </section>
 
-    <section xml:id="zend.form.standardElements.hidden"><info><title>Zend_Form_Element_Hidden</title></info>
+    <section xml:id="zend.form.standardElements.hidden"><title>Zend_Form_Element_Hidden</title>
 
 
         <para>
@@ -454,7 +454,7 @@ $form->addElement($element, 'foo');
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.hash"><info><title>Zend_Form_Element_Hash</title></info>
+    <section xml:id="zend.form.standardElements.hash"><title>Zend_Form_Element_Hash</title>
 
 
         <para>
@@ -492,7 +492,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.Image"><info><title>Zend_Form_Element_Image</title></info>
+    <section xml:id="zend.form.standardElements.Image"><title>Zend_Form_Element_Image</title>
 
 
         <para>
@@ -520,7 +520,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.multiCheckbox"><info><title>Zend_Form_Element_MultiCheckbox</title></info>
+    <section xml:id="zend.form.standardElements.multiCheckbox"><title>Zend_Form_Element_MultiCheckbox</title>
 
 
         <para>
@@ -598,7 +598,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.multiselect"><info><title>Zend_Form_Element_Multiselect</title></info>
+    <section xml:id="zend.form.standardElements.multiselect"><title>Zend_Form_Element_Multiselect</title>
 
 
         <para>
@@ -648,7 +648,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.password"><info><title>Zend_Form_Element_Password</title></info>
+    <section xml:id="zend.form.standardElements.password"><title>Zend_Form_Element_Password</title>
 
 
         <para>
@@ -665,7 +665,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.radio"><info><title>Zend_Form_Element_Radio</title></info>
+    <section xml:id="zend.form.standardElements.radio"><title>Zend_Form_Element_Radio</title>
 
 
         <para>
@@ -714,7 +714,7 @@ $element->setValue(array('bar', 'bat'));
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.standardElements.reset"><info><title>Zend_Form_Element_Reset</title></info>
+    <section xml:id="zend.form.standardElements.reset"><title>Zend_Form_Element_Reset</title>
 
 
         <para>
@@ -733,7 +733,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.select"><info><title>Zend_Form_Element_Select</title></info>
+    <section xml:id="zend.form.standardElements.select"><title>Zend_Form_Element_Select</title>
 
 
         <para>
@@ -784,7 +784,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.submit"><info><title>Zend_Form_Element_Submit</title></info>
+    <section xml:id="zend.form.standardElements.submit"><title>Zend_Form_Element_Submit</title>
 
 
         <para>
@@ -814,7 +814,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.text"><info><title>Zend_Form_Element_Text</title></info>
+    <section xml:id="zend.form.standardElements.text"><title>Zend_Form_Element_Text</title>
 
 
         <para>
@@ -825,7 +825,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.textarea"><info><title>Zend_Form_Element_Textarea</title></info>
+    <section xml:id="zend.form.standardElements.textarea"><title>Zend_Form_Element_Textarea</title>
 
 
         <para>

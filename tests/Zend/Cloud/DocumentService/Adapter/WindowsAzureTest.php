@@ -1,38 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_DocumentService
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group disable
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\DocumentService\Adapter;
 
-use ZendTest\Cloud\DocumentService\TestCase,
-    Zend\Cloud\DocumentService\Factory,
-    Zend\Cloud\DocumentService\Adapter\WindowsAzure,
-    Zend\Config\Config;
+use ZendTest\Cloud\DocumentService\TestCase;
+use Zend\Cloud\DocumentService\Factory;
+use Zend\Cloud\DocumentService\Adapter\WindowsAzure;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
  * @package    Zend_Cloud
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class WindowsAzureTest extends TestCase
 {
@@ -56,7 +42,7 @@ class WindowsAzureTest extends TestCase
         }
     }
 
-    static function getConfigArray()
+    public static function getConfigArray()
     {
          return array(
             \Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY => 'Zend\Cloud\DocumentService\Adapter\WindowsAzure',
@@ -87,36 +73,36 @@ class WindowsAzureTest extends TestCase
     {
         return array(
             array(
-	        	parent::ID_FIELD => array("Amazon", "0385333498"),
-	        	"name" =>	"The Sirens of Titan",
-	        	"author" =>	"Kurt Vonnegut",
-	        	"year"	=> 1959,
-	        	"pages" =>	336,
-	        	"keyword" => "Book"
-	        	),
+                parent::ID_FIELD => array("Amazon", "0385333498"),
+                "name" =>	"The Sirens of Titan",
+                "author" =>	"Kurt Vonnegut",
+                "year"	=> 1959,
+                "pages" =>	336,
+                "keyword" => "Book"
+                ),
             array(
-	        	parent::ID_FIELD => array("Amazon", "0802131786"),
-	        	"name" =>	"Tropic of Cancer",
-	        	"author" =>	"Henry Miller",
-	        	"year"	=> 1934,
-	        	"pages" =>	318,
-	        	"keyword" => "Book"
-	        	),
+                parent::ID_FIELD => array("Amazon", "0802131786"),
+                "name" =>	"Tropic of Cancer",
+                "author" =>	"Henry Miller",
+                "year"	=> 1934,
+                "pages" =>	318,
+                "keyword" => "Book"
+                ),
             array(
-	        	parent::ID_FIELD => array("Amazon", "B000T9886K"),
-	        	"name" =>	"In Between",
-	        	"author" =>	"Paul Van Dyk",
-	        	"year"	=> 2007,
-	        	"keyword" => "CD"
-	        	),
-	       array(
-	        	parent::ID_FIELD => array("Amazon", "1579124585"),
-	        	"name" =>	"The Right Stuff",
-	        	"author" =>	"Tom Wolfe",
-	        	"year"	=> 1979,
-	        	"pages" =>	304,
-	        	"keyword" => "Book"
-	        	),
+                parent::ID_FIELD => array("Amazon", "B000T9886K"),
+                "name" =>	"In Between",
+                "author" =>	"Paul Van Dyk",
+                "year"	=> 2007,
+                "keyword" => "CD"
+                ),
+           array(
+                parent::ID_FIELD => array("Amazon", "1579124585"),
+                "name" =>	"The Right Stuff",
+                "author" =>	"Tom Wolfe",
+                "year"	=> 1979,
+                "pages" =>	304,
+                "keyword" => "Book"
+                ),
         );
     }
 

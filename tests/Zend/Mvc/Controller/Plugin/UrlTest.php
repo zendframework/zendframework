@@ -1,13 +1,21 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
+ */
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mvc\Controller\Plugin\Url as UrlPlugin,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\Http\Literal as LiteralRoute,
-    Zend\Mvc\Router\SimpleRouteStack,
-    ZendTest\Mvc\Controller\TestAsset\SampleController;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Controller\Plugin\Url as UrlPlugin;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\Http\Literal as LiteralRoute;
+use Zend\Mvc\Router\SimpleRouteStack;
+use ZendTest\Mvc\Controller\TestAsset\SampleController;
 
 class UrlTest extends TestCase
 {

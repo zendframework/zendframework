@@ -1,9 +1,17 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http;
 
-use Zend\Http\Headers,
-    Zend\Http\Header;
+use Zend\Http\Headers;
+use Zend\Http\Header;
 
 class HeadersTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,6 +20,12 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers = new Headers();
         $this->assertInstanceOf('Iterator', $headers);
         $this->assertInstanceOf('Countable', $headers);
+    }
+
+    public function testHeadersCanGetPluginClassLoader()
+    {
+        $headers = new Headers();
+        $this->assertInstanceOf('Zend\Http\HeaderLoader', $headers->getPluginClassLoader());
     }
 
     public function testHeadersFromStringFactoryCreatesSingleObject()
@@ -192,6 +206,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers = new Headers();
         $headers->addHeaders(array('Foo' => 'bar', 'Baz' => 'baz'));
         $iterations = 0;
+        /** @var \Zend\Http\Header\HeaderInterface $header */
         foreach ($headers as $index => $header) {
             $iterations++;
             $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);

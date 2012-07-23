@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf;
-use Zend\Pdf\Exception;
 
 use Zend\Memory;
+use Zend\Pdf\Exception;
 
 /**
  * General entity which describes PDF document.
@@ -35,8 +25,6 @@ use Zend\Memory;
  *
  * @category   Zend
  * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PdfDocument
 {
@@ -171,7 +159,7 @@ class PdfDocument
      *
      * @return Zend\Memory\MemoryManager
      */
-    static public function getMemoryManager()
+    public static function getMemoryManager()
     {
         if (self::$_memoryManager === null) {
             self::$_memoryManager = new Memory\MemoryManager();
@@ -185,7 +173,7 @@ class PdfDocument
      *
      * @param Zend\Memory\MemoryManager $memoryManager
      */
-    static public function setMemoryManager(Memory\MemoryManager $memoryManager)
+    public static function setMemoryManager(Memory\MemoryManager $memoryManager)
     {
         self::$_memoryManager = $memoryManager;
     }
@@ -406,7 +394,7 @@ class PdfDocument
         foreach ($pages->Kids->items as $child) {
             if ($child->Type->value == 'Pages') {
                 $this->_loadPages($child, $attributes);
-            } else if ($child->Type->value == 'Page') {
+            } elseif ($child->Type->value == 'Page') {
                 foreach (self::$_inheritableAttributes as $property) {
                     if ($child->$property === null && array_key_exists($property, $attributes)) {
                         /**
@@ -540,12 +528,12 @@ class PdfDocument
 
         // Refresh named destinations list
         foreach ($this->_namedTargets as $name => $namedTarget) {
-            if ($namedTarget instanceof Destination\Explicit) {
+            if ($namedTarget instanceof Destination\AbstractExplicitDestination) {
                 // Named target is an explicit destination
                 if ($this->resolveDestination($namedTarget, false) === null) {
                     unset($this->_namedTargets[$name]);
                 }
-            } else if ($namedTarget instanceof Action\AbstractAction) {
+            } elseif ($namedTarget instanceof Action\AbstractAction) {
                 // Named target is an action
                 if ($this->_cleanUpAction($namedTarget, false) === null) {
                     // Action is a GoTo action with an unresolved destination
@@ -567,7 +555,7 @@ class PdfDocument
                     if ($this->resolveDestination($target, false) === null) {
                         $outline->setTarget(null);
                     }
-                } else if ($target instanceof Action\AbstractAction) {
+                } elseif ($target instanceof Action\AbstractAction) {
                     // Outline target is an action
                     if ($this->_cleanUpAction($target, false) === null) {
                         // Action is a GoTo action with an unresolved destination
@@ -587,7 +575,7 @@ class PdfDocument
                     // Action is a GoTo action with an unresolved destination
                     $this->setOpenAction(null);
                 }
-            } else if ($openAction instanceof Destination\AbstractDestination) {
+            } elseif ($openAction instanceof Destination\AbstractDestination) {
                 // OpenAction target is a destination
                 if ($this->resolveDestination($openAction, false) === null) {
                     $this->setOpenAction(null);
@@ -653,7 +641,7 @@ class PdfDocument
             if (count($this->_originalOutlines) != count($this->outlines)) {
                 // If original and current outlines arrays have different size then outlines list was updated
                 $updateOutlinesNavigation = true;
-            } else if ( !(array_keys($this->_originalOutlines) === array_keys($this->outlines)) ) {
+            } elseif ( !(array_keys($this->_originalOutlines) === array_keys($this->outlines)) ) {
                 // If original and current outlines arrays have different keys (with a glance to an order) then outlines list was updated
                 $updateOutlinesNavigation = true;
             } else {
@@ -828,7 +816,7 @@ class PdfDocument
      * Return specified named destination
      *
      * @param string $name
-     * @return \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction
+     * @return \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction
      */
     public function getNamedDestination($name)
     {
@@ -843,13 +831,13 @@ class PdfDocument
      * Set specified named destination
      *
      * @param string $name
-     * @param \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction $target
+     * @param \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction $target
      */
     public function setNamedDestination($name, $destination = null)
     {
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
-            !$destination instanceof Destination\Explicit) {
+            !$destination instanceof Destination\AbstractExplicitDestination) {
             throw new Exception\InvalidArgumentException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
@@ -924,7 +912,7 @@ class PdfDocument
                 $destination = $destination->getDestination();
             }
 
-            if (!$destination instanceof Destination\Explicit) {
+            if (!$destination instanceof Destination\AbstractExplicitDestination) {
                 throw new Exception\CorruptedPdfException('Named destination target has to be an explicit destination.');
             }
         }

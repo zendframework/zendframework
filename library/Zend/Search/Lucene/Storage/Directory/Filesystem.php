@@ -1,29 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Storage\Directory;
 
-use Zend\Search\Lucene\Storage\Directory,
-    Zend\Search\Lucene\Storage\File,
-    Zend\Search\Lucene;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Storage\File;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * FileSystem implementation of DirectoryInterface abstraction.
@@ -31,8 +21,6 @@ use Zend\Search\Lucene\Storage\Directory,
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Filesystem implements DirectoryInterface
 {
@@ -117,12 +105,12 @@ class Filesystem implements DirectoryInterface
         if (!is_dir($path)) {
             if (file_exists($path)) {
                 throw new Lucene\Exception\InvalidArgumentException(
-                	'Path exists, but it\'s not a directory'
+                    'Path exists, but it\'s not a directory'
                 );
             } else {
                 if (!self::mkdirs($path)) {
                     throw new Lucene\Exception\InvalidArgumentException(
-                    	"Can't create directory '$path'."
+                        "Can't create directory '$path'."
                     );
                 }
             }
@@ -185,7 +173,9 @@ class Filesystem implements DirectoryInterface
 
         // Set file permissions, but don't care about any possible failures, since file may be already
         // created by anther user which has to care about right permissions
-        @chmod($this->_dirPath . '/' . $filename, self::$_defaultFilePermissions);
+        ErrorHandler::start(E_WARNING);
+        chmod($this->_dirPath . '/' . $filename, self::$_defaultFilePermissions);
+        ErrorHandler::stop();
 
         return $this->_fileHandlers[$filename];
     }
@@ -296,7 +286,7 @@ class Filesystem implements DirectoryInterface
         if (file_exists($this->_dirPath . '/' . $to)) {
             if (!unlink($this->_dirPath . '/' . $to)) {
                 throw new Lucene\Exception\RuntimeException(
-                	'Delete operation failed'
+                    'Delete operation failed'
                 );
             }
         }
@@ -304,7 +294,9 @@ class Filesystem implements DirectoryInterface
         $trackErrors = ini_get('track_errors');
         ini_set('track_errors', '1');
 
-        $success = @rename($this->_dirPath . '/' . $from, $this->_dirPath . '/' . $to);
+        ErrorHandler::start(E_WARNING);
+        $success = rename($this->_dirPath . '/' . $from, $this->_dirPath . '/' . $to);
+        ErrorHandler::stop();
         if (!$success) {
             ini_set('track_errors', $trackErrors);
             throw new Lucene\Exception\RuntimeException($php_errormsg);

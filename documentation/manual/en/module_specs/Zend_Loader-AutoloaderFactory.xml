@@ -27,7 +27,7 @@
             example, consider the following PHP array:
         </para>
 
-        <programlisting xml:lang="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = array(
     'Zend\Loader\ClassMapAutoloader' => array(
         'application' => APPLICATION_PATH . '/.classmap.php',
@@ -46,7 +46,7 @@ $config = array(
             An equivalent INI-style configuration might look like the following:
         </para>
 
-        <programlisting xml:lang="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 Zend\Loader\ClassMapAutoloader.application = APPLICATION_PATH "/.classmap.php"
 Zend\Loader\ClassMapAutoloader.zf          = APPLICATION_PATH "/../library/Zend/.classmap.php"
 Zend\Loader\StandardAutoloader.namespaces.Phly\Mustache = APPLICATION_PATH "/../library/Phly/Mustache"
@@ -58,7 +58,7 @@ Zend\Loader\StandardAutoloader.namespaces.Doctrine       = APPLICATION_PATH "/..
             <classname>AutoloaderFactory</classname>.
         </para>
 
-        <programlisting xml:lang="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // This example assumes ZF is on your include_path.
 // You could also load the factory class from a path relative to the
 // current script, or via an absolute path.
@@ -143,6 +143,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getRegisteredAutoloaders</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

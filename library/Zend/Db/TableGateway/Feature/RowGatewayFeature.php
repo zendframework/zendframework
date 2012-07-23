@@ -1,11 +1,19 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\Db\RowGateway\RowGateway,
-    Zend\Db\RowGateway\RowGatewayInterface,
-    Zend\Db\ResultSet\ResultSet,
-    Zend\Db\TableGateway\Exception;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\RowGateway\RowGateway;
+use Zend\Db\RowGateway\RowGatewayInterface;
+use Zend\Db\TableGateway\Exception;
 
 class RowGatewayFeature extends AbstractFeature
 {
@@ -27,14 +35,23 @@ class RowGatewayFeature extends AbstractFeature
     {
         $args = $this->constructorArguments;
 
+        /** @var $resultSetPrototype ResultSet */
+        $resultSetPrototype = $this->tableGateway->resultSetPrototype;
+
+        if (!$this->tableGateway->resultSetPrototype instanceof ResultSet) {
+            throw new Exception\RuntimeException(
+                'This feature ' . __CLASS__ . ' expects the ResultSet to be an instance of Zend\Db\ResultSet\ResultSet'
+            );
+        }
+
         if (isset($args[0])) {
             if (is_string($args[0])) {
                 $primaryKey = $args[0];
                 $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter, $this->tableGateway->sql);
-                $this->tableGateway->resultSetPrototype->setRowObjectPrototype($rowGatewayPrototype);
+                $resultSetPrototype->setArrayObjectPrototype($rowGatewayPrototype);
             } elseif ($args[0] instanceof RowGatewayInterface) {
                 $rowGatewayPrototype = $args[0];
-                $this->tableGateway->resultSetPrototype->setRowObjectPrototype($rowGatewayPrototype);
+                $resultSetPrototype->setArrayObjectPrototype($rowGatewayPrototype);
             }
         } else {
             // get from metadata feature
@@ -46,7 +63,7 @@ class RowGatewayFeature extends AbstractFeature
             }
             $primaryKey = $metadata->sharedData['metadata']['primaryKey'];
             $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter, $this->tableGateway->sql);
-            $this->tableGateway->resultSetPrototype->setRowObjectPrototype($rowGatewayPrototype);
+            $resultSetPrototype->setArrayObjectPrototype($rowGatewayPrototype);
         }
     }
 

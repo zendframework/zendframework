@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_File
  */
 
 namespace Zend\File\Transfer\Adapter;
 
-use Zend\File\Transfer,
-    Zend\File\Transfer\Exception,
-    Zend\ProgressBar,
-    Zend\ProgressBar\Adapter;
+use Zend\File\Transfer;
+use Zend\File\Transfer\Exception;
+use Zend\ProgressBar;
+use Zend\ProgressBar\Adapter;
 
 /**
  * File transfer adapter class for the HTTP protocol
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Http extends AbstractAdapter
 {
@@ -119,7 +107,7 @@ class Http extends AbstractAdapter
         $content = 0;
         if (isset($_SERVER['CONTENT_LENGTH'])) {
             $content = $_SERVER['CONTENT_LENGTH'];
-        } else if (!empty($_POST)) {
+        } elseif (!empty($_POST)) {
             $content = serialize($_POST);
         }
 
@@ -351,7 +339,7 @@ class Http extends AbstractAdapter
                 if (is_array($call)) {
                     $status = $call + $status;
                 }
-            } else if (self::isUploadProgressAvailable()) {
+            } elseif (self::isUploadProgressAvailable()) {
                 $call = call_user_func(self::$callbackUploadProgress, $id);
                 if (is_array($call)) {
                     $status = $call + $status;
@@ -367,7 +355,7 @@ class Http extends AbstractAdapter
             if (!is_array($call)) {
                 $status['done']    = true;
                 $status['message'] = 'Failure while retrieving the upload progress';
-            } else if (!empty($status['cancel_upload'])) {
+            } elseif (!empty($status['cancel_upload'])) {
                 $status['done']    = true;
                 $status['message'] = 'The upload has been canceled';
             } else {

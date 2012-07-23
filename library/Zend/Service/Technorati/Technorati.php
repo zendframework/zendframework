@@ -1,29 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Technorati;
 
-use DomDocument,
-    Zend\Http\Response,
-    Zend\Rest\Client\RestClient;
+use DomDocument;
+use Zend\Http\Response as HttpResponse;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
 
 /**
  * Zend\Service\Technorati provides an easy, intuitive and object-oriented interface
@@ -35,8 +25,6 @@ use DomDocument,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Technorati
 {
@@ -61,23 +49,15 @@ class Technorati
     const PARAM_DAYS_MAX_VALUE  = 180;
     const PARAM_START_MIN_VALUE = 1;
 
-
     /**
-     * Technorati API key
-     *
-     * @var     string
-     * @access  protected
+     * @var string
      */
     protected $apiKey;
 
     /**
-     * RestClient instance
-     *
-     * @var     RestClient
-     * @access  protected
+     * @var HttpClient
      */
-    protected $restClient;
-
+    protected $httpClient;
 
     /**
      * Constructs a new Zend\Service\Technorati instance
@@ -85,15 +65,33 @@ class Technorati
      *
      * @param  string $apiKey  Your Technorati API key
      */
-    public function __construct($apiKey)
+    public function __construct($apiKey, HttpClient $httpClient = null)
     {
         iconv_set_encoding('output_encoding', 'UTF-8');
         iconv_set_encoding('input_encoding', 'UTF-8');
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
         $this->apiKey = $apiKey;
+        $this->setHttpClient($httpClient ?: new HttpClient);
     }
 
+    /**
+     * @param HttpClient $httpClient
+     * @return Technorati
+     */
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    /**
+     * @return HttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
 
     /**
      * Cosmos query lets you see what blogs are linking to a given URL.
@@ -771,9 +769,14 @@ class Technorati
      */
     protected function makeRequest($path, $options = array())
     {
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet($path, $options);
+        $httpClient = $this->getHttpClient();
+        $httpClient->resetParameters();
+
+        $request = new HttpRequest();
+        $request->setUri($path);
+        $request->getQuery()->fromArray($options);
+
+        $response = $httpClient->send($request);
         self::checkResponse($response);
         return $response;
     }
@@ -893,7 +896,7 @@ class Technorati
      * @throws  Exception\RuntimeException if response content contains an error message
      * @access  protected
      */
-    protected function convertResponseAndCheckContent(Response $response)
+    protected function convertResponseAndCheckContent(HttpResponse $response)
     {
         $dom = new \DOMDocument();
         $dom->loadXML($response->getBody());
@@ -909,7 +912,7 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected static function checkResponse(Response $response)
+    protected static function checkResponse(HttpResponse $response)
     {
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException(sprintf(

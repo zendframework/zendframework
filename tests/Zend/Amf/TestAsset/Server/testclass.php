@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
+ */
 
 namespace ZendTest\Amf\TestAsset\Server;
 
@@ -95,7 +103,8 @@ class testclass
      * test if we can send an array as a paramater without it getting nested two
      * Used to test  ZF-5388
      */
-    public function testSingleArrayParamater($inputArray){
+    public function testSingleArrayParamater($inputArray)
+    {
         if( $inputArray[0] == 'item1' ){
             return true;
         }

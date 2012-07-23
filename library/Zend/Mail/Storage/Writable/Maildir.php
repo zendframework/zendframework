@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage\Writable;
 
-use Zend\Mail\Exception as MailException,
-    Zend\Mail\Storage,
-    Zend\Mail\Storage\Exception as StorageException,
-    Zend\Mail\Storage\Folder;
+use Zend\Mail\Exception as MailException;
+use Zend\Mail\Storage;
+use Zend\Mail\Storage\Exception as StorageException;
+use Zend\Mail\Storage\Folder;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Maildir extends Folder\Maildir implements WritableInterface
 {
@@ -64,7 +52,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
                 $dir = dirname($dir);
                 if (!file_exists($dir)) {
                     throw new StorageException\InvalidArgumentException("parent $dir not found");
-                } else if (!is_dir($dir)) {
+                } elseif (!is_dir($dir)) {
                     throw new StorageException\InvalidArgumentException("parent $dir not a directory");
                 } else {
                     throw new StorageException\RuntimeException('cannot create maildir');
@@ -118,7 +106,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     {
         if ($parentFolder instanceof Folder) {
             $folder = $parentFolder->getGlobalName() . $this->_delim . $name;
-        } else if ($parentFolder != null) {
+        } elseif ($parentFolder != null) {
             $folder = rtrim($parentFolder, $this->_delim) . $this->_delim . $name;
         } else {
             $folder = $name;
@@ -485,7 +473,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if (!link($temp_file['filename'], $new_filename)) {
             $exception = new StorageException\RuntimeException('cannot link message file to final dir');
         }
-        @unlink($temp_file['filename']);
+
+        ErrorHandler::start(E_WARNING);
+        unlink($temp_file['filename']);
+        ErrorHandler::stop();
 
         if ($exception) {
             throw $exception;
@@ -544,10 +535,13 @@ class Maildir extends Folder\Maildir implements WritableInterface
 
         if (!copy($old_file, $temp_file['filename'])) {
             $exception = new StorageException\RuntimeException('cannot copy message file');
-        } else if (!link($temp_file['filename'], $new_file)) {
+        } elseif (!link($temp_file['filename'], $new_file)) {
             $exception = new StorageException\RuntimeException('cannot link message file to final dir');
         }
-        @unlink($temp_file['filename']);
+
+        ErrorHandler::start(E_WARNING);
+        unlink($temp_file['filename']);
+        ErrorHandler::stop();
 
         if ($exception) {
             throw $exception;
@@ -613,7 +607,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if (!rename($old_file, $new_file)) {
             $exception = new StorageException\RuntimeException('cannot move message file');
         }
-        @unlink($temp_file['filename']);
+
+        ErrorHandler::start(E_WARNING);
+        unlink($temp_file['filename']);
+        ErrorHandler::stop();
 
         if ($exception) {
             throw $exception;
@@ -704,7 +701,9 @@ class Maildir extends Folder\Maildir implements WritableInterface
     public function getQuota($fromStorage = false)
     {
         if ($fromStorage) {
-            $fh = @fopen($this->_rootdir . 'maildirsize', 'r');
+            ErrorHandler::start(E_WARNING);
+            $fh = fopen($this->_rootdir . 'maildirsize', 'r');
+            ErrorHandler::stop();
             if (!$fh) {
                 throw new StorageException\RuntimeException('cannot open maildirsize');
             }

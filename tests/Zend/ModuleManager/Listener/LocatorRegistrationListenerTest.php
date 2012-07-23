@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ModuleManager
  */
 
 namespace ZendTest\ModuleManager\Listener;
@@ -60,8 +49,8 @@ class LocatorRegistrationTest extends TestCase
         $this->sharedEvents = new SharedEventManager();
 
         $this->moduleManager = new ModuleManager(array('ListenerTestModule'));
-        $this->moduleManager->events()->setSharedManager($this->sharedEvents);
-        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->setSharedManager($this->sharedEvents);
+        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
 
         $this->application = new MockApplication;
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
@@ -103,9 +92,9 @@ class LocatorRegistrationTest extends TestCase
         });
 
         $locatorRegistrationListener = new LocatorRegistrationListener;
-        $this->moduleManager->events()->attachAggregate($locatorRegistrationListener);
+        $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
         $test = $this;
-        $this->moduleManager->events()->attach('loadModule', function ($e) use ($test) {
+        $this->moduleManager->getEventManager()->attach('loadModule', function ($e) use ($test) {
             $test->module = $e->getModule();
         }, -1000);
         $this->moduleManager->loadModules();

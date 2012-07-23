@@ -1,34 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
+
+use Zend\Validator\Callback;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
@@ -40,13 +27,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $valid = new Validator\Callback(array($this, 'objectCallback'));
+        $valid = new Callback(array($this, 'objectCallback'));
         $this->assertTrue($valid->isValid('test'));
     }
 
     public function testStaticCallback()
     {
-        $valid = new Validator\Callback(
+        $valid = new Callback(
             array('\ZendTest\Validator\CallbackTest', 'staticCallback')
         );
         $this->assertTrue($valid->isValid('test'));
@@ -54,7 +41,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingDefaultOptionsAfterwards()
     {
-        $valid = new Validator\Callback(array($this, 'objectCallback'));
+        $valid = new Callback(array($this, 'objectCallback'));
         $valid->setCallbackOptions('options');
         $this->assertEquals(array('options'), $valid->getCallbackOptions());
         $this->assertTrue($valid->isValid('test'));
@@ -62,20 +49,20 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingDefaultOptions()
     {
-        $valid = new Validator\Callback(array('callback' => array($this, 'objectCallback'), 'callbackOptions' => 'options'));
+        $valid = new Callback(array('callback' => array($this, 'objectCallback'), 'callbackOptions' => 'options'));
         $this->assertEquals(array('options'), $valid->getCallbackOptions());
         $this->assertTrue($valid->isValid('test'));
     }
 
     public function testGettingCallback()
     {
-        $valid = new Validator\Callback(array($this, 'objectCallback'));
+        $valid = new Callback(array($this, 'objectCallback'));
         $this->assertEquals(array($this, 'objectCallback'), $valid->getCallback());
     }
 
     public function testInvalidCallback()
     {
-        $valid = new Validator\Callback(array($this, 'objectCallback'));
+        $valid = new Callback(array($this, 'objectCallback'));
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid callback given');
         $valid->setCallback('invalidcallback');
@@ -83,52 +70,23 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingValueOptions()
     {
-        $valid = new Validator\Callback(array('callback' => array($this, 'optionsCallback'), 'callbackOptions' => 'options'));
+        $valid = new Callback(array('callback' => array($this, 'optionsCallback'), 'callbackOptions' => 'options'));
         $this->assertEquals(array('options'), $valid->getCallbackOptions());
         $this->assertTrue($valid->isValid('test', 'something'));
     }
 
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\Callback(array($this, 'objectCallback'));
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = new Validator\Callback(array($this, 'objectCallback'));
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new Callback(array($this, 'objectCallback'));
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 
     public function testCanAcceptContextWithoutOptions()
     {
         $value     = 'bar';
         $context   = array('foo' => 'bar', 'bar' => 'baz');
-        $validator = new Validator\Callback(function($v, $c) use ($value, $context) {
+        $validator = new Callback(function($v, $c) use ($value, $context) {
             return (($value == $v) && ($context == $c));
         });
         $this->assertTrue($validator->isValid($value, $context));
@@ -139,7 +97,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $value     = 'bar';
         $context   = array('foo' => 'bar', 'bar' => 'baz');
         $options   = array('baz' => 'bat');
-        $validator = new Validator\Callback(function($v, $c, $baz) use ($value, $context, $options) {
+        $validator = new Callback(function($v, $c, $baz) use ($value, $context, $options) {
             return (($value == $v) && ($context == $c) && ($options['baz'] == $baz));
         });
         $validator->setCallbackOptions($options);

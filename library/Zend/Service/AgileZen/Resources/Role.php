@@ -1,79 +1,66 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage AgileZen_Resources
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\AgileZen\Resources;
 
-use Zend\Service\AgileZen\AgileZen,
-    Zend\Service\AgileZen\Entity,
-    Zend\Service\AgileZen\Container;
+use Zend\Service\AgileZen\AbstractEntity;
+use Zend\Service\AgileZen\AgileZen;
+use Zend\Service\AgileZen\Container;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen_Resources
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Role extends Entity
+class Role extends AbstractEntity
 {
     /**
      * Name
-     * 
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Service
-     * 
-     * @var AgileZen 
+     *
+     * @var AgileZen
      */
     protected $service;
 
     /**
      * Role access
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $access;
 
     /**
      * Members
-     * 
+     *
      * @var Container
      */
     protected $members;
 
     /**
      * Project Id
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $projectId;
 
     /**
      * Constructor
-     * 
+     *
      * @param AgileZen $service
-     * @param array $data 
+     * @param array $data
      */
     public function __construct(AgileZen $service, array $data)
     {
@@ -87,21 +74,21 @@ class Role extends Entity
         $this->name = $data['name'];
         if (isset($data['access'])) {
             $this->access = $data['access'];
-        }    
+        }
 
         if (!empty($data['members'])) {
             $this->members = new Container($service, $data['members'], 'user');
-        }    
+        }
 
         $this->service   = $service;
         $this->projectId = $data['projectId'];
-        
+
         parent::__construct($data['id']);
     }
     /**
      * Get name of the project
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {
@@ -110,8 +97,8 @@ class Role extends Entity
 
     /**
      * Get the role access
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getAccess()
     {
@@ -120,8 +107,8 @@ class Role extends Entity
 
     /**
      * Get the members
-     * 
-     * @return Container 
+     *
+     * @return Container
      */
     public function getMembers()
     {
@@ -130,8 +117,8 @@ class Role extends Entity
 
     /**
      * Get the project's Id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getProjectId()
     {

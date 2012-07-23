@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><title>Zend_Uri</title>
     
 
-    <section xml:id="zend.uri.overview"><info><title>概要</title></info>
+    <section xml:id="zend.uri.overview"><title>概要</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.uri.creation"><info><title>新しい URI の作成</title></info>
+    <section xml:id="zend.uri.creation"><title>新しい URI の作成</title>
         
 
         <para>
@@ -34,7 +34,7 @@
             <classname>Zend_Uri</classname> は新しい <acronym>URI</acronym> をゼロから作成します。
         </para>
 
-        <example xml:id="zend.uri.creation.example-1"><info><title>Zend_Uri::factory() による新しい URI の作成</title></info>
+        <example xml:id="zend.uri.creation.example-1"><title>Zend_Uri::factory() による新しい URI の作成</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -63,7 +63,7 @@ $uri = Zend_Uri::factory('http');
             これは、指定したスキームに特化したものとなります。
         </para>
 
-        <section><info><title>Creating a New Custom-Class URI</title></info>
+        <section><title>Creating a New Custom-Class URI</title>
             
             
             <para>
@@ -82,7 +82,7 @@ $uri = Zend_Uri::factory('http');
                 must be in your include_path.   
             </para>
             
-            <example xml:id="zend.uri.creation.custom.example-1"><info><title>Creating a URI using a custom class</title></info>
+            <example xml:id="zend.uri.creation.custom.example-1"><title>Creating a URI using a custom class</title>
                 
                 
                 <programlisting language="php"><![CDATA[
@@ -98,7 +98,7 @@ $ftpUri = Zend_Uri::factory(
         </section>
     </section>
 
-    <section xml:id="zend.uri.manipulation"><info><title>既存の URI の操作</title></info>
+    <section xml:id="zend.uri.manipulation"><title>既存の URI の操作</title>
         
 
         <para>
@@ -106,7 +106,7 @@ $ftpUri = Zend_Uri::factory(
             <methodname>Zend_Uri::factory()</methodname> に渡します。
         </para>
 
-        <example xml:id="zend.uri.manipulation.example-1"><info><title>Zend_Uri::factory() による既存の URI の操作</title></info>
+        <example xml:id="zend.uri.manipulation.example-1"><title>Zend_Uri::factory() による既存の URI の操作</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -126,7 +126,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
         </para>
     </section>
 
-    <section xml:id="zend.uri.validation"><info><title>URI の検証</title></info>
+    <section xml:id="zend.uri.validation"><title>URI の検証</title>
         
 
         <para>
@@ -134,7 +134,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
             既存の <acronym>URI</acronym> の検証のみを行うことができます。
         </para>
 
-        <example xml:id="zend.uri.validation.example-1"><info><title>Zend_Uri::check() による URI の検証</title></info>
+        <example xml:id="zend.uri.validation.example-1"><title>Zend_Uri::check() による URI の検証</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -151,7 +151,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
             を使用して例外を処理するよりも便利です。
         </para>
 
-        <section xml:id="zend.uri.validation.allowunwise"><info><title>URL 内での "Unwise" 文字の許可</title></info>
+        <section xml:id="zend.uri.validation.allowunwise"><title>URL 内での "Unwise" 文字の許可</title>
             
 
             <para>
@@ -167,7 +167,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
                 'allow_unwise' オプションを <constant>TRUE</constant> に設定します。
             </para>
 
-            <example xml:id="zend.uri.validation.allowunwise.example-1"><info><title>URI における特殊文字の許可</title></info>
+            <example xml:id="zend.uri.validation.allowunwise.example-1"><title>URI における特殊文字の許可</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -195,7 +195,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
         </section>
     </section>
 
-    <section xml:id="zend.uri.instance-methods"><info><title>共通のインスタンスメソッド</title></info>
+    <section xml:id="zend.uri.instance-methods"><title>共通のインスタンスメソッド</title>
         
 
         <para>
@@ -204,7 +204,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
             <acronym>URI</acronym> 操作のために便利なインスタンスメソッドがいくつか提供されています。
         </para>
 
-        <section xml:id="zend.uri.instance-methods.getscheme"><info><title>URI のスキームの取得</title></info>
+        <section xml:id="zend.uri.instance-methods.getscheme"><title>URI のスキームの取得</title>
             
 
             <para>
@@ -213,7 +213,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
                 <code>http</code> となります。
             </para>
 
-            <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Zend_Uri_* オブジェクトからのスキームの取得</title></info>
+            <example xml:id="zend.uri.instance-methods.getscheme.example-1"><title>Zend_Uri_* オブジェクトからのスキームの取得</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -230,10 +230,10 @@ $scheme = $uri->getScheme();  // "http"
 
         </section>
 
-        <section xml:id="zend.uri.instance-methods.geturi"><info><title>URI 全体の取得</title></info>
+        <section xml:id="zend.uri.instance-methods.geturi"><title>URI 全体の取得</title>
             
 
-            <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Zend_Uri_* オブジェクトからの URI 全体の取得</title></info>
+            <example xml:id="zend.uri.instance-methods.geturi.example-1"><title>Zend_Uri_* オブジェクトからの URI 全体の取得</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -248,7 +248,7 @@ echo $uri->getUri();  // "http://www.zend.com"
             </para>
         </section>
 
-        <section xml:id="zend.uri.instance-methods.valid"><info><title>URI の検証</title></info>
+        <section xml:id="zend.uri.instance-methods.valid"><title>URI の検証</title>
             
 
             <para>
@@ -260,7 +260,7 @@ echo $uri->getUri();  // "http://www.zend.com"
                 それを操作した後でもまだ妥当な形式であるかどうかを調べることもできます。
             </para>
 
-            <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Zend_Uri_* オブジェクトの検証</title></info>
+            <example xml:id="zend.uri.instance-methods.valid.example-1"><title>Zend_Uri_* オブジェクトの検証</title>
                 
 
                     <programlisting language="php"><![CDATA[

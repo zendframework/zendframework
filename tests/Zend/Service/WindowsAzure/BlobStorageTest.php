@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\WindowsAzure;
@@ -23,7 +23,7 @@ use Zend\Service\WindowsAzure\Storage\Blob\Blob;
  */
 class BlobStorageTest extends \PHPUnit_Framework_TestCase
 {
-    static $path;
+    public static $path;
 
     public function __construct()
     {
@@ -49,8 +49,7 @@ class BlobStorageTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $storageClient = $this->createStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX . $i); } catch (\Exception $e) { }
         }
         try { $storageClient->deleteContainer('$root'); } catch (\Exception $e) { }
@@ -59,8 +58,7 @@ class BlobStorageTest extends \PHPUnit_Framework_TestCase
     protected function createStorageInstance()
     {
         $storageClient = null;
-        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD)
-        {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD) {
             $storageClient = new Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, AbstractRetryPolicy::retryN(10, 250));
         } else {
             $storageClient = new Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, AbstractRetryPolicy::retryN(10, 250));
@@ -435,8 +433,7 @@ class BlobStorageTest extends \PHPUnit_Framework_TestCase
     {
         $fileName = tempnam('', 'tst');
         $fp = fopen($fileName, 'w');
-        for ($i = 0; $i < Blob::MAX_BLOB_SIZE / 1024; $i++)
-        {
+        for ($i = 0; $i < Blob::MAX_BLOB_SIZE / 1024; $i++) {
             fwrite($fp,
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .

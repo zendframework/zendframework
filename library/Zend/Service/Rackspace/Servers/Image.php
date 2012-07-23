@@ -1,74 +1,62 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Service\Rackspace
- * @subpackage Servers
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Rackspace\Servers;
 
 use Zend\Service\Rackspace\Servers as RackspaceServers;
 
-class Image 
+class Image
 {
     const ERROR_PARAM_CONSTRUCT = 'You must pass a Zend\Service\Rackspace\Servers object and an array';
     const ERROR_PARAM_NO_NAME   = 'You must pass the image\'s name in the array (name)';
     const ERROR_PARAM_NO_ID     = 'You must pass the image\'s id in the array (id)';
     /**
      * Name of the image
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $name;
     /**
      * Id of the image
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $id;
     /**
      * Server Id of the image
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $serverId;
     /**
      * Updated data
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $updated;
     /**
      * Created data
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $created;
     /**
      * Status
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $status;
     /**
      * Status progress
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $progress;
     /**
@@ -79,7 +67,7 @@ class Image
     protected $service;
     /**
      * Construct
-     * 
+     *
      * @param array $data
      * @return void
      */
@@ -124,8 +112,8 @@ class Image
     }
     /**
      * Get the image's id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getId()
     {
@@ -133,8 +121,8 @@ class Image
     }
     /**
      * Get the server's id of the image
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getServerId()
     {
@@ -142,8 +130,8 @@ class Image
     }
     /**
      * Get the updated data
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getUpdated()
     {
@@ -151,8 +139,8 @@ class Image
     }
     /**
      * Get the created data
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCreated()
     {
@@ -160,7 +148,7 @@ class Image
     }
     /**
      * Get the image's status
-     * 
+     *
      * @return string|boolean
      */
     public function getStatus()
@@ -175,7 +163,7 @@ class Image
     }
     /**
      * Get the progress's status
-     * 
+     *
      * @return integer|boolean
      */
     public function getProgress()
@@ -190,8 +178,8 @@ class Image
     }
     /**
      * To Array
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function toArray()
     {

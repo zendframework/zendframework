@@ -1,29 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Outline
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\Outline;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
 use Zend\Pdf\Action;
 use Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalStructure;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
@@ -35,8 +25,6 @@ use Zend\Pdf\ObjectFactory;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Created extends AbstractOutline
 {
@@ -255,9 +243,9 @@ class Created extends AbstractOutline
         $target = $this->getTarget();
         if ($target === null) {
             // Do nothing
-        } else if ($target instanceof Pdf\Destination\AbstractDestination) {
+        } elseif ($target instanceof Pdf\Destination\AbstractDestination) {
             $outlineDictionary->Dest = $target->getResource();
-        } else if ($target instanceof Action\AbstractAction) {
+        } elseif ($target instanceof Action\AbstractAction) {
             $outlineDictionary->A    = $target->getResource();
         } else {
             throw new Exception\CorruptedPdfException('Outline target has to be \Zend\Pdf\Destination, \Zend\Pdf\Action object or null');

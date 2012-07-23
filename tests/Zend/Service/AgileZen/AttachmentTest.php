@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
+ */
 
 namespace ZendTest\Service\AgileZen;
 
@@ -7,7 +15,7 @@ use Zend\Service\AgileZen\AgileZen as AgileZenService;
 class AttachmentTest extends \PHPUnit_Framework_TestCase
 {
     protected static $attachId;
-    
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED')) {
@@ -22,7 +30,7 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
         if(!defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID')) {
             self::markTestSkipped('The story ID costant has to be set.');
         }
-        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));                                               
+        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));
     }
     public function testAddAttachment()
     {
@@ -40,7 +48,7 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($attachment instanceof \Zend\Service\AgileZen\Resources\Task);
         self::$attachId = $attachment->getId();
     }
-    
+
     public function testGetAttachments()
     {
         $attachments = $this->agileZen->getAttachments(
@@ -74,7 +82,7 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($attachment instanceof \Zend\Service\AgileZen\Resources\Attachment);
         $this->assertEquals(self::$attachId, $attachment->getId());
     }
-    
+
     public function testUpdateAttachment()
     {
         if (empty(self::$attachId)) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.inflector"><info><title>Zend_Filter_Inflector</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.inflector"><title>Zend_Filter_Inflector</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         <methodname>filter()</methodname> をコールします。
     </para>
 
-    <example xml:id="zend.filter.inflector.camel_case_example"><info><title>MixedCase あるいは camelCase のテキストを別形式に変換する</title></info>
+    <example xml:id="zend.filter.inflector.camel_case_example"><title>MixedCase あるいは camelCase のテキストを別形式に変換する</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -42,7 +42,7 @@ $filtered = $inflector->filter(array('page' => $string));
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.filter.inflector.operation"><info><title>操作</title></info>
+    <section xml:id="zend.filter.inflector.operation"><title>操作</title>
         
 
         <para>
@@ -76,7 +76,7 @@ $filtered = $inflector->filter(array('page' => $string));
         </para>
     </section>
 
-     <section xml:id="zend.filter.inflector.paths"><info><title>その他のフィルタ向けのパスの設定</title></info>
+     <section xml:id="zend.filter.inflector.paths"><title>その他のフィルタ向けのパスの設定</title>
         
 
         <para>
@@ -121,7 +121,7 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
         </para>
     </section>
 
-    <section xml:id="zend.filter.inflector.targets"><info><title>インフレクタのターゲットの設定</title></info>
+    <section xml:id="zend.filter.inflector.targets"><title>インフレクタのターゲットの設定</title>
         
 
         <para>
@@ -202,7 +202,7 @@ class Foo
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.inflector.rules"><info><title>インフレクションのルール</title></info>
+    <section xml:id="zend.filter.inflector.rules"><title>インフレクションのルール</title>
         
 
         <para>
@@ -224,7 +224,7 @@ class Foo
             </para>
         </note>
 
-        <section xml:id="zend.filter.inflector.rules.static"><info><title>静的なルール</title></info>
+        <section xml:id="zend.filter.inflector.rules.static"><title>静的なルール</title>
             
 
             <para>
@@ -284,7 +284,7 @@ class Foo
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.filter.inflector.rules.filters"><info><title>Filter Inflector ルール</title></info>
+        <section xml:id="zend.filter.inflector.rules.filters"><title>Filter Inflector ルール</title>
             
 
             <para>
@@ -341,7 +341,7 @@ $inflector->setFilterRule('script', array(
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.filter.inflector.rules.multiple"><info><title>多くのルールを一度に設定する</title></info>
+        <section xml:id="zend.filter.inflector.rules.multiple"><title>多くのルールを一度に設定する</title>
             
 
             <para>
@@ -370,7 +370,7 @@ $inflector->setFilterRule('script', array(
                 </para></listitem>
             </itemizedlist>
 
-            <example xml:id="zend.filter.inflector.rules.multiple.example"><info><title>複数のルールの一括設定</title></info>
+            <example xml:id="zend.filter.inflector.rules.multiple.example"><title>複数のルールの一括設定</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -388,7 +388,7 @@ $inflector->addRules(array(
         </section>
     </section>
 
-    <section xml:id="zend.filter.inflector.utility"><info><title>ユーティリティメソッド</title></info>
+    <section xml:id="zend.filter.inflector.utility"><title>ユーティリティメソッド</title>
         
 
         <para>
@@ -437,7 +437,7 @@ $inflector->addRules(array(
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.inflector.config"><info><title>Zend_Filter_Inflector での Zend_Config の使用法</title></info>
+    <section xml:id="zend.filter.inflector.config"><title>Zend_Filter_Inflector での Zend_Config の使用法</title>
         
 
         <para>
@@ -477,7 +477,7 @@ $inflector->addRules(array(
             </para></listitem>
         </itemizedlist>
 
-        <example xml:id="zend.filter.inflector.config.example"><info><title>Zend_Filter_Inflector での Zend_Config の使用法</title></info>
+        <example xml:id="zend.filter.inflector.config.example"><title>Zend_Filter_Inflector での Zend_Config の使用法</title>
             
 
             <programlisting language="php"><![CDATA[

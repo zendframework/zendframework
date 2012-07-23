@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Chercher dans un index</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><title>Chercher dans un index</title>
     
-    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Construire des requêtes</title></info>
+    <section xml:id="zend.search.lucene.searching.query_building"><title>Construire des requêtes</title>
         
         <para>
             Il y a deux manières de chercher dans un index. La première
@@ -84,7 +84,7 @@ $index->find($query);
             d'aucune façon. Elle est ainsi plus pratique pour les champs générés par le programme
             ou ceux qui ne sont pas "tokenizés".
         </para>
-        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Parsage de requêtes</title></info>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><title>Parsage de requêtes</title>
             
             <para>
                 La méthode <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname>
@@ -140,7 +140,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             </para>
         </section>
     </section>
-    <section xml:id="zend.search.lucene.searching.results"><info><title>Résultats de recherche</title></info>
+    <section xml:id="zend.search.lucene.searching.results"><title>Résultats de recherche</title>
         
         <para>
             Le résultat de recherche est un tableau d'objets
@@ -199,7 +199,7 @@ foreach ($hits as $hit) {
             stocké dans l'index et doit être récupéré depuis l'index.
         </para>
     </section>
-    <section xml:id="zend.search.lucene.searching.results-limiting"><info><title>Limiter le nombre de résultats</title></info>
+    <section xml:id="zend.search.lucene.searching.results-limiting"><title>Limiter le nombre de résultats</title>
         
         <para>
             L'opération la plus lourde au niveau du calcul dans une recherche est la calculation
@@ -225,7 +225,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
             </footnote>.
         </para>
     </section>
-    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Etablissement des scores des résultats de recherche</title></info>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><title>Etablissement des scores des résultats de recherche</title>
         
         <para>
             <classname>Zend_Search_Lucene</classname> utilise le même algorithme de scoring que
@@ -253,7 +253,7 @@ foreach ($hits as $hit) {
                 Algorithms</link> pour des détails.
         </para>
     </section>
-    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Tri des résultats de recherche</title></info>
+    <section xml:id="zend.search.lucene.searching.sorting"><title>Tri des résultats de recherche</title>
         
         <para>
             Par défaut, les résultats de recherche sont triés par score. Le programmeur peut
@@ -301,7 +301,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
             performances de recherche.
         </para>
     </section>
-    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Mise en évidence des résultats de recherche</title></info>
+    <section xml:id="zend.search.lucene.searching.highlighting"><title>Mise en évidence des résultats de recherche</title>
         
         <para>
             <classname>Zend_Search_Lucene</classname> propose deux options pour mettre en

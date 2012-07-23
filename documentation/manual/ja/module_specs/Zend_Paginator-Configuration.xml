@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><info><title>設定</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><title>設定</title>
     
 
     <para>
         <classname>Zend_Paginator</classname> には設定用のメソッドがいくつか用意されています。
     </para>
 
-    <table xml:id="zend.paginator.configuration.table"><info><title>Zend_Paginator の設定用メソッド</title></info>
+    <table xml:id="zend.paginator.configuration.table"><title>Zend_Paginator の設定用メソッド</title>
         
 
         <tgroup cols="2">

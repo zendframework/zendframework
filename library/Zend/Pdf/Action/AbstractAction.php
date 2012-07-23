@@ -1,39 +1,31 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Action
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\Action;
-use Zend\Pdf\Exception;
-use Zend\Pdf\ObjectFactory;
-use Zend\Pdf\InternalType;
+
+use Countable;
+use RecursiveIterator;
 use Zend\Pdf;
+use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
+use Zend\Pdf\ObjectFactory;
 
 /**
  * Abstract PDF action representation class
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget implements \RecursiveIterator, \Countable
+abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget implements
+    Countable,
+    RecursiveIterator
 {
     /**
      * Action dictionary
@@ -82,7 +74,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
                     $processedActions->attach($dictionary->Next);
                     $this->next[] = self::load($dictionary->Next, $processedActions);
                 }
-            } else if ($dictionary->Next instanceof InternalType\ArrayObject) {
+            } elseif ($dictionary->Next instanceof InternalType\ArrayObject) {
                 foreach ($dictionary->Next->items as $chainedActionDictionary) {
                     // Check if dictionary object is not already processed
                     if (!$processedActions->contains($chainedActionDictionary)) {
@@ -220,7 +212,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
         if (count($this->_originalNextList) != count($this->next)) {
             // If original and current children arrays have different size then children list was updated
             $childListUpdated = true;
-        } else if ( !(array_keys($this->_originalNextList) === array_keys($this->next)) ) {
+        } elseif ( !(array_keys($this->_originalNextList) === array_keys($this->next)) ) {
             // If original and current children arrays have different keys (with a glance to an order) then children list was updated
             $childListUpdated = true;
         } else {

@@ -1,22 +1,11 @@
+#!/usr/bin/env php
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Loader
- * @subpackage Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 use Zend\Console;
@@ -37,10 +26,10 @@ use Zend\Loader\StandardAutoloader;
  *                              file
  */
 
-$libraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
-if (is_dir($libraryPath)) {
+$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
+if (is_dir($zfLibraryPath)) {
     // Try to load StandardAutoloader from library
-    if (false === include($libraryPath . '/Zend/Loader/StandardAutoloader.php')) {
+    if (false === include($zfLibraryPath . '/Zend/Loader/StandardAutoloader.php')) {
         echo 'Unable to locate autoloader via library; aborting' . PHP_EOL;
         exit(2);
     }
@@ -52,8 +41,10 @@ if (is_dir($libraryPath)) {
     }
 }
 
+$libraryPath = getcwd();
+
 // Setup autoloading
-$loader = new StandardAutoloader();
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
 $rules = array(
@@ -156,17 +147,18 @@ if (!$usingStdout) {
 // Get the ClassFileLocator, and pass it the library path
 $l = new ClassFileLocator($libraryPath);
 
-// Iterate over each element in the path, and create a map of 
+// Iterate over each element in the path, and create a map of
 // classname => filename, where the filename is relative to the library path
-$map = new \stdClass;
+$map = new stdClass;
 foreach ($l as $file) {
-    $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());
 
     // Add in relative path to library
     $filename  = $relativePathForClassmap . $filename;
 
-    $map->{$namespace . $file->classname} = $filename;
+    foreach ($file->getClasses() as $class) {
+        $map->{$class} = $filename;
+    }
 }
 
 if ($appending) {

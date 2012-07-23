@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>HeadStyle 助手 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><title>HeadStyle 助手 </title>
     
 
     <para>
         在 HTML <code>&lt;head&gt;</code> 元素中 HTML <code>&lt;style&gt;</code> 元素用来包含 CSS stylesheets inline 。
     </para>
 
-    <note><info><title> 使用 HeadLink 来链接 CSS 文件 </title></info>
+    <note><title> 使用 HeadLink 来链接 CSS 文件 </title>
         
 
         <para>
@@ -49,7 +49,7 @@
         <code>HeadStyle</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体实现。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><info><title>HeadStyle 助手的基本用法 </title></info>
+    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><title>HeadStyle 助手的基本用法 </title>
         
 
         <para>
@@ -89,7 +89,7 @@ $this->headStyle()->prependStyle($firstStyles);
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title> 用 HeadStyle 助手抓取样式声明 </title></info>
+    <example xml:id="zend.view.helpers.initial.headstyle.capture"><title> 用 HeadStyle 助手抓取样式声明 </title>
         
 
         <para>

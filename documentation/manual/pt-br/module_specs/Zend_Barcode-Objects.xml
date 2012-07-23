@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects"><info><title>Objetos Zend_Barcode</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects"><title>Objetos Zend_Barcode</title>
     
 
     <para>
@@ -39,7 +39,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.barcode.objects.configuration"><info><title>Diferentes maneiras de parametrizar um objeto código de barras</title></info>
+    <example xml:id="zend.barcode.objects.configuration"><title>Diferentes maneiras de parametrizar um objeto código de barras</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -64,7 +64,7 @@ $barcode->setText('ZEND-FRAMEWORK')
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.barcode.objects.common.options"><info><title>Opções Comuns</title></info>
+    <section xml:id="zend.barcode.objects.common.options"><title>Opções Comuns</title>
         
 
         <para>
@@ -78,7 +78,7 @@ $barcode->setText('ZEND-FRAMEWORK')
             são:
         </para>
 
-        <table xml:id="zend.barcode.objects.common.options.table"><info><title>Opções Comuns</title></info>
+        <table xml:id="zend.barcode.objects.common.options.table"><title>Opções Comuns</title>
             
 
             <tgroup cols="4">
@@ -250,7 +250,7 @@ $barcode->setText('ZEND-FRAMEWORK')
             </tgroup>
         </table>
 
-        <section xml:id="zend.barcode.objects.common.options.barcodefont"><info><title>O caso particular do setBarcodeFont() estático</title></info>
+        <section xml:id="zend.barcode.objects.common.options.barcodefont"><title>O caso particular do setBarcodeFont() estático</title>
             
 
             <para>
@@ -284,12 +284,12 @@ Zend_Barcode::render(
         </section>
     </section>
 
-    <section xml:id="zend.barcode.objects.common.getters"><info><title>Métodos de Leitura Comuns Adicionais</title></info>
+    <section xml:id="zend.barcode.objects.common.getters"><title>Métodos de Leitura Comuns Adicionais</title>
         
 
         <para/>
 
-        <table xml:id="zend.barcode.objects.common.getters.table"><info><title>Métodos de Leitura Comuns</title></info>
+        <table xml:id="zend.barcode.objects.common.getters.table"><title>Métodos de Leitura Comuns</title>
             
 
             <tgroup cols="3">

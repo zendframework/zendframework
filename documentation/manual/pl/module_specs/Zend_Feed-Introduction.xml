@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Wprowadzenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>Wprowadzenie</title>
     
     <para>
         <code>Zend_Feed</code> zapewnia funkcjonalność umożliwiającą przetwarzanie
@@ -26,7 +26,7 @@
         danych itp.
     </para>
 
-    <note><info><title>Bądż ostrożny</title></info>
+    <note><title>Bądż ostrożny</title>
         
         <para>
             Wiele kanałów RSS ma dostępne różne właściwości samego kanału i jego elementów.
@@ -35,7 +35,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>Użycie Zend_Feed do pobierania danych RSS</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>Użycie Zend_Feed do pobierania danych RSS</title>
         
         <programlisting role="php"><![CDATA[
 // Ściągamy najnowsze nagłówki ze Slashdot

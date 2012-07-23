@@ -10,9 +10,9 @@
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\Db\Metadata\MetadataInterface,
-    Zend\Db\Metadata\Metadata,
-    Zend\Db\TableGateway\Exception;
+use Zend\Db\Metadata\Metadata;
+use Zend\Db\Metadata\MetadataInterface;
+use Zend\Db\TableGateway\Exception;
 
 /**
  * @category   Zend

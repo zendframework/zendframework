@@ -1,41 +1,28 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @subpackage Parse_Amf3
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf\Parser\Amf3;
 
-use Zend\Amf\Parser\AbstractSerializer,
-    Zend\Amf,
-    Zend\Amf\Parser,
-    Zend\Amf\Value,
-    Zend\Date,
-    DOMDocument,
-    SimpleXMLElement;
+use DateTime;
+use DOMDocument;
+use SimpleXMLElement;
+use Zend\Amf;
+use Zend\Amf\Parser;
+use Zend\Amf\Parser\AbstractSerializer;
+use Zend\Amf\Value;
 
 /**
  * Detect PHP object type and convert it to a corresponding AMF3 object type
  *
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Serializer extends AbstractSerializer
 {
@@ -72,7 +59,7 @@ class Serializer extends AbstractSerializer
      */
     public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only
         // variables should be passed by reference"
         if ((null === $data) && ($dataByVal !== false)) {
             $data = &$dataByVal;
@@ -149,11 +136,11 @@ class Serializer extends AbstractSerializer
                     break;
                 case (is_object($data)):
                     // Handle object types.
-                    if (($data instanceof \DateTime) || ($data instanceof Date\Date)) {
+                    if ($data instanceof DateTime) {
                         $markerType = Amf\Constants::AMF3_DATE;
-                    } else if ($data instanceof Value\ByteArray) {
+                    } elseif ($data instanceof Value\ByteArray) {
                         $markerType = Amf\Constants::AMF3_BYTEARRAY;
-                    } else if (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
+                    } elseif (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
                         $markerType = Amf\Constants::AMF3_XMLSTRING;
                     } else {
                         $markerType = Amf\Constants::AMF3_OBJECT;
@@ -296,29 +283,21 @@ class Serializer extends AbstractSerializer
     }
 
     /**
-     * Convert DateTime/Zend_Date to AMF date
+     * Convert DateTime to AMF date
      *
-     * @param  \DateTime|\Zend\Date\Date $date
+     * @param  DateTime $date
      * @return Serializer
      * @throws Parser\Exception\OutOfBoundsException
      */
-    public function writeDate($date)
+    public function writeDate(DateTime $date)
     {
         if($this->writeObjectReference($date)){
             return $this;
         }
 
-        if ($date instanceof \DateTime) {
-            $dateString = $date->format('U') * 1000;
-        } elseif ($date instanceof Date\Date) {
-            $dateString = $date->toString('U') * 1000;
-        } else {
-            throw new Parser\Exception\OutOfBoundsException('Invalid date specified; must be a string DateTime or Zend_Date object');
-        }
-
         $this->writeInteger(0x01);
         // write time to stream minus milliseconds
-        $this->_stream->writeDouble($dateString);
+        $this->_stream->writeDouble($date->getTimestamp());
         return $this;
     }
 

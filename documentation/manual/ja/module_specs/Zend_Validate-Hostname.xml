@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><info><title>ホスト名</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><title>ホスト名</title>
 
     
 
@@ -11,7 +11,7 @@
         デフォルトでは <acronym>DNS</acronym> ホスト名のみが有効となります。
     </para>
 
-    <section xml:id="zend.validate.set.hostname.options"><info><title>Supported options for Zend_Validate_Hostname</title></info>
+    <section xml:id="zend.validate.set.hostname.options"><title>Supported options for Zend_Validate_Hostname</title>
         
 
         <para>
@@ -52,7 +52,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.hostname.basic"><info><title>基本的な使用法</title></info>
+    <section xml:id="zend.validate.set.hostname.basic"><title>基本的な使用法</title>
         
 
         <para>
@@ -79,7 +79,7 @@ if ($validator->isValid($hostname)) {
 
     </section>
 
-    <section xml:id="zend.validate.set.hostname.types"><info><title>さまざまな形式のホスト名を検証</title></info>
+    <section xml:id="zend.validate.set.hostname.types"><title>さまざまな形式のホスト名を検証</title>
         
 
         <para>
@@ -120,7 +120,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
 
     </section>
 
-    <section xml:id="zend.validate.set.hostname.idn"><info><title>国際化ドメイン名を検証</title></info>
+    <section xml:id="zend.validate.set.hostname.idn"><title>国際化ドメイン名を検証</title>
         
 
         <para>
@@ -131,7 +131,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
             の検証プロセスで使用する文字を拡張することで検証できます。
         </para>
 
-        <note><info><title>IDN ドメイン</title></info>
+        <note><title>IDN ドメイン</title>
             
 
             <para>
@@ -172,7 +172,7 @@ $validator =
             に存在しない場合は、通常のホスト名の検証を行います。
         </para>
 
-        <note><info><title>IDN 検証</title></info>
+        <note><title>IDN 検証</title>
             
 
             <para>
@@ -181,7 +181,7 @@ $validator =
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.hostname.tld"><info><title>トップレベルドメインを検証</title></info>
+    <section xml:id="zend.validate.set.hostname.tld"><title>トップレベルドメインを検証</title>
         
 
         <para>
@@ -208,7 +208,7 @@ $validator =
             <acronym>TLD</acronym> の検証を有効あるいは無効にすることもできます。
         </para>
 
-        <note><info><title>TLD 検証</title></info>
+        <note><title>TLD 検証</title>
             
 
             <para>

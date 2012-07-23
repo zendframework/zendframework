@@ -1,13 +1,21 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
+ */
 
 namespace ZendTest\OpenId\TestAsset;
 
-use Zend\OpenId\Consumer\GenericConsumer as Consumer,
-    Zend\OpenId\Consumer\Storage,
-    Zend\Session\Container as SessionContainer,
-    ZendTest\Session\TestAsset\TestManager as SessionManager;
+use Zend\OpenId\Consumer\GenericConsumer as Consumer;
+use Zend\OpenId\Consumer\Storage;
+use Zend\Session\Container as SessionContainer;
+use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
-class ConsumerHelper extends Consumer 
+class ConsumerHelper extends Consumer
 {
     public function __construct(Storage\AbstractStorage $storage = null,
                                 $dumbMode = false)

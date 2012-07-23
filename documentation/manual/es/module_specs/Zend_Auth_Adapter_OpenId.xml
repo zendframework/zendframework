@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Autenticación con Open ID </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><title>Autenticación con Open ID </title>
 
     
 
-    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Introducción</title></info>
+    <section xml:id="zend.auth.adapter.openid.introduction"><title>Introducción</title>
 
         
         <para>
@@ -58,7 +58,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Características</title></info>
+    <section xml:id="zend.auth.adapter.openid.specifics"><title>Características</title>
         
         <para>
             Como es el caso de todos los adaptadores

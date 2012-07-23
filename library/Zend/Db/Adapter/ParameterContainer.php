@@ -27,7 +27,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Data
-     * 
+     *
      * @var array
      */
     protected $data = array();
@@ -39,15 +39,15 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Errata
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $errata = array();
 
     /**
      * Constructor
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      */
     public function __construct(array $data = array())
     {
@@ -58,9 +58,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset exists
-     * 
+     *
      * @param  string $name
-     * @return boolean 
+     * @return boolean
      */
     public function offsetExists($name)
     {
@@ -69,9 +69,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset get
-     * 
+     *
      * @param  string $name
-     * @return mixed 
+     * @return mixed
      */
     public function offsetGet($name)
     {
@@ -89,10 +89,10 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset set
-     * 
+     *
      * @param string|integer $name
      * @param mixed $value
-     * @param mixed $errata 
+     * @param mixed $errata
      */
     public function offsetSet($name, $value, $errata = null)
     {
@@ -108,9 +108,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset unset
-     * 
+     *
      * @param  string $name
-     * @return ParameterContainer 
+     * @return ParameterContainer
      */
     public function offsetUnset($name)
     {
@@ -123,9 +123,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Set from array
-     * 
+     *
      * @param  array $data
-     * @return ParameterContainer 
+     * @return ParameterContainer
      */
     public function setFromArray(Array $data)
     {
@@ -137,9 +137,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset set errata
-     * 
+     *
      * @param string|integer $name
-     * @param mixed $errata 
+     * @param mixed $errata
      */
     public function offsetSetErrata($name, $errata)
     {
@@ -151,9 +151,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset get errata
-     * 
+     *
      * @param  string|integer $name
-     * @return mixed 
+     * @return mixed
      */
     public function offsetGetErrata($name)
     {
@@ -168,9 +168,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset has errata
-     * 
+     *
      * @param  string|integer $name
-     * @return boolean 
+     * @return boolean
      */
     public function offsetHasErrata($name)
     {
@@ -182,7 +182,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset unset errata
-     * 
+     *
      * @param string|integer $name
      */
     public function offsetUnsetErrata($name)
@@ -198,8 +198,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Get errata iterator
-     * 
-     * @return \ArrayIterator 
+     *
+     * @return \ArrayIterator
      */
     public function getErrataIterator()
     {
@@ -228,8 +228,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * count
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function count()
     {
@@ -238,8 +238,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Current
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -248,9 +248,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Next
-     * 
-     * @return mixed 
-     */    
+     *
+     * @return mixed
+     */
     public function next()
     {
         return next($this->data);
@@ -258,8 +258,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Key
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function key()
     {
@@ -268,8 +268,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Valid
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function valid()
     {

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\GApps;
@@ -27,8 +16,6 @@ use Zend\GData\GApps\GroupQuery;
  * @category   Zend
  * @package    Zend_Gdata_Gapps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
@@ -113,7 +100,7 @@ class GroupQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com",
                 $this->query->getQueryUrl());
     }
-        
+
     public function testCanSetDirectOnlyProperty()
     {
         $this->query->setDomain("my.domain.com");
@@ -123,7 +110,7 @@ class GroupQueryTest extends \PHPUnit_Framework_TestCase
         $expected_url  = "https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com/";
         $expected_url .= "?member=bar%40qux.com&directOnly=true";
         $this->assertEquals($expected_url, $this->query->getQueryUrl());
-        
+
         $this->query->setDirectOnly(false);
         $this->assertEquals(false, $this->query->getDirectOnly());
         $expected_url  = "https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com/";
@@ -134,7 +121,7 @@ class GroupQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $this->query->getDirectOnly());
         $expected_url  = "https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com/";
         $expected_url .= "?member=bar%40qux.com";
-        $this->assertEquals($expected_url, $this->query->getQueryUrl());        
+        $this->assertEquals($expected_url, $this->query->getQueryUrl());
     }
 
     // Test to make sure that all parameters can be set simultaneously with no

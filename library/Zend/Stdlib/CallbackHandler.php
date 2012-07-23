@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
@@ -33,8 +23,6 @@ use WeakRef;
  *
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class CallbackHandler
 {
@@ -51,9 +39,9 @@ class CallbackHandler
 
     /**
      * Constructor
-     * 
+     *
      * @param  string $event Event to which slot is subscribed
-     * @param  string|array|object $callback PHP callback 
+     * @param  string|array|object $callback PHP callback
      * @param  array $options Options used by the callback handler (e.g., priority)
      * @return void
      */
@@ -66,14 +54,14 @@ class CallbackHandler
     /**
      * Registers the callback provided in the constructor
      *
-     * If you have pecl/weakref {@see http://pecl.php.net/weakref} installed, 
+     * If you have pecl/weakref {@see http://pecl.php.net/weakref} installed,
      * this method provides additional behavior.
      *
-     * If a callback is a functor, or an array callback composing an object 
+     * If a callback is a functor, or an array callback composing an object
      * instance, this method will pass the object to a WeakRef instance prior
      * to registering the callback.
-     * 
-     * @param  callback $callback 
+     *
+     * @param  callback $callback
      * @return void
      */
     protected function registerCallback($callback)
@@ -105,7 +93,7 @@ class CallbackHandler
 
         list($target, $method) = $callback;
 
-        // If we have an array callback, and the first argument is not an 
+        // If we have an array callback, and the first argument is not an
         // object, register as-is
         if (!is_object($target)) {
             $this->callback = $callback;
@@ -120,7 +108,7 @@ class CallbackHandler
 
     /**
      * Retrieve registered callback
-     * 
+     *
      * @return Callback
      */
     public function getCallback()
@@ -142,7 +130,7 @@ class CallbackHandler
             return $callback;
         }
 
-        // Array callback with WeakRef object -- retrieve the object first, and 
+        // Array callback with WeakRef object -- retrieve the object first, and
         // then return
         list($target, $method) = $callback;
         if ($target instanceof WeakRef) {
@@ -155,7 +143,7 @@ class CallbackHandler
 
     /**
      * Invoke handler
-     * 
+     *
      * @param  array $args Arguments to pass to callback
      * @return mixed
      */
@@ -174,7 +162,7 @@ class CallbackHandler
             $this->validateStringCallbackFor54($callback);
         }
 
-        // Minor performance tweak; use call_user_func() until > 3 arguments 
+        // Minor performance tweak; use call_user_func() until > 3 arguments
         // reached
         switch (count($args)) {
             case 0:
@@ -209,7 +197,7 @@ class CallbackHandler
 
     /**
      * Invoke as functor
-     * 
+     *
      * @return mixed
      */
     public function __invoke()
@@ -219,7 +207,7 @@ class CallbackHandler
 
     /**
      * Get all callback metadata
-     * 
+     *
      * @return array
      */
     public function getMetadata()
@@ -229,8 +217,8 @@ class CallbackHandler
 
     /**
      * Retrieve a single metadatum
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function getMetadatum($name)
@@ -245,8 +233,8 @@ class CallbackHandler
      * Validate a static method call
      *
      * Validates that a static method call in PHP 5.4 will actually work
-     * 
-     * @param  string $callback 
+     *
+     * @param  string $callback
      * @return true
      * @throws Exception\InvalidCallbackException if invalid
      */

@@ -1,38 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter\Encrypt;
 
 use Traversable;
+use Zend\Filter\Compress;
+use Zend\Filter\Decompress;
+use Zend\Filter\Exception;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Filter\Exception,
-    Zend\Filter\Compress,
-    Zend\Filter\Decompress;
 
 /**
  * Encryption adapter for mcrypt
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mcrypt implements EncryptionAlgorithmInterface
 {
@@ -67,6 +55,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Class constructor
      *
      * @param string|array|\Traversable $options Encryption Options
+     * @throws Exception\ExtensionNotLoadedException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
     {
@@ -109,7 +99,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Sets new encryption options
      *
      * @param  string|array $options Encryption options
-     * @return Zend_Filter_File_Encryption
+     * @return Mcrypt
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncryption($options)
     {
@@ -160,7 +151,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Sets the initialization vector
      *
      * @param string $vector (Optional) Vector to set
-     * @return \Zend\Filter\Encrypt\Mcrypt
+     * @return Mcrypt
+     * @throws Exception\InvalidArgumentException
      */
     public function setVector($vector = null)
     {
@@ -176,7 +168,7 @@ class Mcrypt implements EncryptionAlgorithmInterface
             }
 
             $vector = mcrypt_create_iv($size, $method);
-        } else if (strlen($vector) != $size) {
+        } elseif (strlen($vector) != $size) {
             throw new Exception\InvalidArgumentException('The given vector has a wrong size for the set algorithm');
         }
 
@@ -309,8 +301,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Initialises the cipher with the set key
      *
      * @param  resource $cipher
-     * @throws
      * @return resource
+     * @throws Exception\RuntimeException
      */
     protected function _initCipher($cipher)
     {
@@ -320,7 +312,7 @@ class Mcrypt implements EncryptionAlgorithmInterface
         if (empty($keysizes) || ($this->_encryption['salt'] == true)) {
             $keysize = mcrypt_enc_get_key_size($cipher);
             $key     = substr(md5($key), 0, $keysize);
-        } else if (!in_array(strlen($key), $keysizes)) {
+        } elseif (!in_array(strlen($key), $keysizes)) {
             throw new Exception\RuntimeException('The given key has a wrong size for the set algorithm');
         }
 

@@ -1,30 +1,21 @@
 <?php
 /**
- * LICENSE
+ * Zend Framework (http://framework.zend.com/)
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_StorageService
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\StorageService\Adapter;
 
-use Traversable,
-    Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception,
-    Zend\Service\Rackspace\Exception as RackspaceException,
-    Zend\Service\Rackspace\Files as RackspaceFile,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
+use Zend\Service\Rackspace\Exception as RackspaceException;
+use Zend\Service\Rackspace\Files as RackspaceFile;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Adapter for Rackspace cloud storage
@@ -32,8 +23,6 @@ use Traversable,
  * @category   Zend
  * @package    Zend_Cloud_StorageService
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Rackspace implements AdapterInterface
 {
@@ -41,7 +30,7 @@ class Rackspace implements AdapterInterface
     const API_KEY             = 'key';
     const REMOTE_CONTAINER    = 'container';
     const DELETE_METADATA_KEY = 'ZF_metadata_deleted';
-    
+
     /**
      * The Rackspace adapter
      * @var RackspaceFile
@@ -53,14 +42,14 @@ class Rackspace implements AdapterInterface
      * @var string
      */
     protected $container = 'default';
-    
+
     /**
      * Constructor
      *
      * @param  array|Traversable $options
      * @return void
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -75,13 +64,13 @@ class Rackspace implements AdapterInterface
         } catch (RackspaceException $e) {
             throw new Exception\RuntimeException('Error on create: '.$e->getMessage(), $e->getCode(), $e);
         }
-        
+
         if (isset($options[self::HTTP_ADAPTER])) {
             $this->rackspace->getHttpClient()->setAdapter($options[self::HTTP_ADAPTER]);
         }
         if (!empty($options[self::REMOTE_CONTAINER])) {
             $this->container = $options[self::REMOTE_CONTAINER];
-        }    
+        }
     }
 
      /**
@@ -106,7 +95,7 @@ class Rackspace implements AdapterInterface
 
     /**
      * Store an item in the storage service.
-     * 
+     *
      * @param  string $destinationPath
      * @param  mixed $data
      * @param  array $options
@@ -167,18 +156,18 @@ class Rackspace implements AdapterInterface
             $this->copyItem($sourcePath, $destinationPath, $options);
         } catch (Exception\RuntimeException $e) {
             throw new Exception\RuntimeException('Error on move: '.$e->getMessage());
-        }    
+        }
         try {
             $this->deleteItem($sourcePath);
         } catch (Exception\RuntimeException $e) {
             $this->deleteItem($destinationPath);
             throw new Exception\RuntimeException('Error on move: '.$e->getMessage());
-        }    
+        }
     }
 
     /**
      * Rename an item in the storage service to a given name.
-     * 
+     *
      * @param  string $path
      * @param  string $name
      * @param  array $options
@@ -208,7 +197,7 @@ class Rackspace implements AdapterInterface
             $metadata =  $result['metadata'];
         }
         // delete the self::DELETE_METADATA_KEY - this is a trick to remove all
-        // the metadata information of an object (see deleteMetadata). 
+        // the metadata information of an object (see deleteMetadata).
         // Rackspace doesn't have an API to remove the metadata of an object
         unset($metadata[self::DELETE_METADATA_KEY]);
         return $metadata;
@@ -281,7 +270,7 @@ class Rackspace implements AdapterInterface
             $options = array (
                 'prefix'    => $path
             );
-        }    
+        }
         $files = $this->rackspace->getObjects($this->container, $options);
         if (!$this->rackspace->isSuccessful()) {
             throw new Exception\RuntimeException('Error on get all folders: '.$this->rackspace->getErrorMsg());
@@ -307,8 +296,8 @@ class Rackspace implements AdapterInterface
             $options = array (
                 'prefix'    => $path
             );
-        }   
-        
+        }
+
         $files = $this->rackspace->getObjects($this->container,$options);
         if (!$this->rackspace->isSuccessful()) {
             throw new Exception\RuntimeException('Error on list items: '.$this->rackspace->getErrorMsg());
@@ -318,7 +307,7 @@ class Rackspace implements AdapterInterface
             foreach ($files as $file) {
                 $resultArray[] = $file->getName();
             }
-        }    
+        }
         return $resultArray;
     }
 

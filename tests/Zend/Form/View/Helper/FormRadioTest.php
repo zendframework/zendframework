@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
 
-use Zend\Form\Element;
+use Zend\Form\Element\Radio as RadioElement;
 use Zend\Form\View\Helper\FormRadio as FormRadioHelper;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormRadioTest extends CommonTestCase
 {
@@ -39,12 +26,30 @@ class FormRadioTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
-        $element = new Element('foo');
+        $element = new RadioElement('foo');
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => 'value2',
+            'This is the third label' => 'value3',
+        );
+        $element->setAttribute('options', $options);
+        return $element;
+    }
+
+    public function getElementWithOptionSpec()
+    {
+        $element = new RadioElement('foo');
+        $options = array(
+            'This is the first label' => 'value1',
+            'This is the second label' => array(
+                'value'           => 'value2',
+                'label'           => 'This is the second label (overridden)',
+                'disabled'        => false,
+                'label_attributes' => array('class' => 'label-class'),
+                'attributes'      => array('class' => 'input-class'),
+            ),
             'This is the third label' => 'value3',
         );
         $element->setAttribute('options', $options);
@@ -60,6 +65,57 @@ class FormRadioTest extends CommonTestCase
         $this->assertEquals(3, substr_count($markup, 'name="foo"'));
         $this->assertEquals(3, substr_count($markup, 'type="radio"'));
         $this->assertEquals(3, substr_count($markup, '<input'));
+        $this->assertEquals(3, substr_count($markup, '<label'));
+
+        foreach ($options as $label => $value) {
+            $this->assertContains(sprintf('>%s</label>', $label), $markup);
+            $this->assertContains(sprintf('value="%s"', $value), $markup);
+        }
+    }
+
+    public function testUsesOptionsAttributeWithOptionSpecToGenerateRadioOptions()
+    {
+        $element = $this->getElementWithOptionSpec();
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(3, substr_count($markup, 'name="foo'));
+        $this->assertEquals(3, substr_count($markup, 'type="radio"'));
+        $this->assertEquals(3, substr_count($markup, '<input'));
+        $this->assertEquals(3, substr_count($markup, '<label'));
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the first label'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value1'), $markup);
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the second label (overridden)'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value2'), $markup);
+        $this->assertEquals(1, substr_count($markup, 'class="label-class"'));
+        $this->assertEquals(1, substr_count($markup, 'class="input-class"'));
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the third label'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value3'), $markup);
+
+    }
+
+    public function testGenerateRadioOptionsAndHiddenElement()
+    {
+        $element = $this->getElement();
+        $element->setUseHiddenElement(true);
+        $element->setUncheckedValue('none');
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(4, substr_count($markup, 'name="foo'));
+        $this->assertEquals(1, substr_count($markup, 'type="hidden"'));
+        $this->assertEquals(1, substr_count($markup, 'value="none"'));
+        $this->assertEquals(3, substr_count($markup, 'type="radio"'));
+        $this->assertEquals(4, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
 
         foreach ($options as $label => $value) {
@@ -111,6 +167,27 @@ class FormRadioTest extends CommonTestCase
         $markup  = $this->helper->render($element);
 
         $this->assertNotContains('checked', $markup);
+    }
+
+    public function testAllowsSpecifyingLabelAttributes()
+    {
+        $element = $this->getElement();
+
+        $markup  = $this->helper
+            ->setLabelAttributes(array('class' => 'radio'))
+            ->render($element);
+
+        $this->assertEquals(3, substr_count($markup, '<label class="radio"'));
+    }
+
+    public function testAllowsSpecifyingLabelAttributesInElementAttributes()
+    {
+        $element = $this->getElement();
+        $element->setLabelAttributes(array('class' => 'radio'));
+
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(3, substr_count($markup, '<label class="radio"'));
     }
 
     public function testIdShouldNotBeRenderedForEachRadio()

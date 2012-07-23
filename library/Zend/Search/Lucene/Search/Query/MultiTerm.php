@@ -1,38 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Search\Query;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Index,
-	Zend\Search\Lucene\Search\Weight,
-	Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
-	Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Search\Lucene\Search\Weight;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MultiTerm extends AbstractQuery
 {
@@ -140,7 +127,8 @@ class MultiTerm extends AbstractQuery
      * @param  boolean|null $sign
      * @return void
      */
-    public function addTerm(Index\Term $term, $sign = null) {
+    public function addTerm(Index\Term $term, $sign = null)
+    {
         if ($sign !== true || $this->_signs !== null) {       // Skip, if all terms are required
             if ($this->_signs === null) {                     // Check, If all previous terms are required
                 $this->_signs = array();
@@ -640,7 +628,7 @@ class MultiTerm extends AbstractQuery
 
             if ($this->_signs === null || $this->_signs[$id] === true) {
                 $query .= '+';
-            } else if ($this->_signs[$id] === false) {
+            } elseif ($this->_signs[$id] === false) {
                 $query .= '-';
             }
 

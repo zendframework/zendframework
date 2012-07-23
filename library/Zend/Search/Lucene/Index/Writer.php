@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Index;
 
-use Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Document,
-	Zend\Search\Lucene,
-    Zend\Search\Lucene\Exception\ExceptionInterface,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Document;
+use Zend\Search\Lucene\Exception\ExceptionInterface;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Writer
 {
@@ -427,7 +414,7 @@ class Writer
             // Write format marker
             if ($this->_targetFormatVersion == Lucene\Index::FORMAT_2_1) {
                 $newSegmentFile->writeInt((int)0xFFFFFFFD);
-            } else if ($this->_targetFormatVersion == Lucene\Index::FORMAT_2_3) {
+            } elseif ($this->_targetFormatVersion == Lucene\Index::FORMAT_2_3) {
                 $newSegmentFile->writeInt((int)0xFFFFFFFC);
             }
 
@@ -435,9 +422,9 @@ class Writer
             $format = $segmentsFile->readInt();
             if ($format == (int)0xFFFFFFFF) {
                 $srcFormat = Lucene\Index::FORMAT_PRE_2_1;
-            } else if ($format == (int)0xFFFFFFFD) {
+            } elseif ($format == (int)0xFFFFFFFD) {
                 $srcFormat = Lucene\Index::FORMAT_2_1;
-            } else if ($format == (int)0xFFFFFFFC) {
+            } elseif ($format == (int)0xFFFFFFFC) {
                 $srcFormat = Lucene\Index::FORMAT_2_3;
             } else {
                 throw new InvalidFileFormatException('Unsupported segments file format');
@@ -508,10 +495,10 @@ class Writer
                         if ($isCompoundByte == 0xFF) {
                             // The segment is not a compound file
                             $isCompound = false;
-                        } else if ($isCompoundByte == 0x00) {
+                        } elseif ($isCompoundByte == 0x00) {
                             // The status is unknown
                             $isCompound = null;
-                        } else if ($isCompoundByte == 0x01) {
+                        } elseif ($isCompoundByte == 0x01) {
                             // The segment is a compound file
                             $isCompound = true;
                         }
@@ -541,7 +528,7 @@ class Writer
                             // Set DocStoreOffset to -1
                             $newSegmentFile->writeInt((int)0xFFFFFFFF);
                         }
-                    } else if ($docStoreOptions !== null) {
+                    } elseif ($docStoreOptions !== null) {
                         // Release index write lock
                         Lucene\LockManager::releaseWriteLock($this->_directory);
 
@@ -628,12 +615,12 @@ class Writer
                     $filesToDelete[] = $file;
                     $filesTypes[]    = 0; // delete this file first, since it's not used starting from Lucene v2.1
                     $filesNumbers[]  = 0;
-                } else if ($file == 'segments') {
+                } elseif ($file == 'segments') {
                     // 'segments' file
                     $filesToDelete[] = $file;
                     $filesTypes[]    = 1; // second file to be deleted "zero" version of segments file (Lucene pre-2.1)
                     $filesNumbers[]  = 0;
-                } else if (preg_match('/^segments_[a-zA-Z0-9]+$/i', $file)) {
+                } elseif (preg_match('/^segments_[a-zA-Z0-9]+$/i', $file)) {
                     // 'segments_xxx' file
                     // Check if it's not a just created generation file
                     if ($file != Lucene\Index::getSegmentFileName($generation)) {
@@ -641,7 +628,7 @@ class Writer
                         $filesTypes[]    = 2; // first group of files for deletions
                         $filesNumbers[]  = (int)base_convert(substr($file, 9), 36, 10); // ordered by segment generation numbers
                     }
-                } else if (preg_match('/(^_([a-zA-Z0-9]+))\.f\d+$/i', $file, $matches)) {
+                } elseif (preg_match('/(^_([a-zA-Z0-9]+))\.f\d+$/i', $file, $matches)) {
                     // one of per segment files ('<segment_name>.f<decimal_number>')
                     // Check if it's not one of the segments in the current segments set
                     if (!isset($segments[$matches[1]])) {
@@ -649,7 +636,7 @@ class Writer
                         $filesTypes[]    = 3; // second group of files for deletions
                         $filesNumbers[]  = (int)base_convert($matches[2], 36, 10); // order by segment number
                     }
-                } else if (preg_match('/(^_([a-zA-Z0-9]+))(_([a-zA-Z0-9]+))\.del$/i', $file, $matches)) {
+                } elseif (preg_match('/(^_([a-zA-Z0-9]+))(_([a-zA-Z0-9]+))\.del$/i', $file, $matches)) {
                     // one of per segment files ('<segment_name>_<del_generation>.del' where <segment_name> is '_<segment_number>')
                     // Check if it's not one of the segments in the current segments set
                     if (!isset($segments[$matches[1]])) {
@@ -664,7 +651,7 @@ class Writer
                         }
                         $delFiles[$segmentNumber][$delGeneration] = $file;
                     }
-                } else if (isset(self::$_indexExtensions[substr($file, strlen($file)-4)])) {
+                } elseif (isset(self::$_indexExtensions[substr($file, strlen($file)-4)])) {
                     // one of per segment files ('<segment_name>.<ext>')
                     $segmentName = substr($file, 0, strlen($file) - 4);
                     // Check if it's not one of the segments in the current segments set

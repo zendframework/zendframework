@@ -1,8 +1,17 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
+
 namespace ZendTest\Http\PhpEnvironment;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\PhpEnvironment\Request;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\PhpEnvironment\Request;
 
 class RequestTest extends TestCase
 {
@@ -256,10 +265,23 @@ class RequestTest extends TestCase
         $_SERVER = $server;
         $request = new Request();
 
-        $header = $request->headers()->get($name);
+        $header = $request->getHeaders()->get($name);
         $this->assertNotEquals($header, false);
         $this->assertEquals($name,  $header->getFieldName($value));
         $this->assertEquals($value, $header->getFieldValue($value));
+    }
+
+    /**
+     * @dataProvider serverHeaderProvider
+     * @param array  $server
+     * @param string $name
+     */
+    public function testRequestStringHasCorrectHeaderName(array $server, $name)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $this->assertContains($name, $request->toString());
     }
 
     /**
@@ -317,7 +339,7 @@ class RequestTest extends TestCase
         $_SERVER = $server;
         $request = new Request();
 
-        $host = $request->uri()->getHost();
+        $host = $request->getUri()->getHost();
         $this->assertEquals($expectedHost, $host);
 
         $requestUri = $request->getRequestUri();

@@ -1,25 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
+
 use Zend\View\Helper;
 
 /**
@@ -28,8 +18,6 @@ use Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -53,11 +41,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = 'Zend_View_Helper_Doctype';
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Helper\Doctype::unsetDoctypeRegistry();
         $this->helper = new Helper\Doctype();
     }
 
@@ -70,16 +54,6 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-    }
-
-    public function testRegistryEntryCreatedAfterInstantiation()
-    {
-        $this->assertTrue(\Zend\Registry::isRegistered('Zend_View_Helper_Doctype'));
-        $doctype = \Zend\Registry::get('Zend_View_Helper_Doctype');
-        $this->assertTrue($doctype instanceof \ArrayObject);
-        $this->assertTrue(isset($doctype['doctype']));
-        $this->assertTrue(isset($doctype['doctypes']));
-        $this->assertTrue(is_array($doctype['doctypes']));
     }
 
     public function testDoctypeMethodReturnsObjectInstance()
@@ -101,6 +75,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
             Helper\Doctype::XHTML1_TRANSITIONAL,
             Helper\Doctype::XHTML1_FRAMESET,
             Helper\Doctype::XHTML1_RDFA,
+            Helper\Doctype::XHTML1_RDFA11,
             Helper\Doctype::XHTML5
         );
 
@@ -165,6 +140,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->helper->isRdfa());
 
         $this->assertTrue($this->helper->__invoke(Helper\Doctype::XHTML1_RDFA)->isRdfa());
+        $this->assertTrue($this->helper->__invoke(Helper\Doctype::XHTML1_RDFA11)->isRdfa());
 
         // build-in doctypes
         $doctypes = array(
@@ -189,7 +165,8 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($doctype->isRdfa());
     }
 
-    public function testCanRegisterCustomHtml5Doctype() {
+    public function testCanRegisterCustomHtml5Doctype()
+    {
         $doctype = $this->helper->__invoke('<!DOCTYPE html>');
         $this->assertEquals('CUSTOM', $doctype->getDoctype());
         $this->assertTrue($doctype->isHtml5());
@@ -222,8 +199,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
     {
         $doctype = $this->helper->__invoke(Helper\Doctype::XHTML1_STRICT);
         $string   = $doctype->__toString();
-        $registry = \Zend\Registry::get('Zend_View_Helper_Doctype');
-        $this->assertEquals($registry['doctypes'][Helper\Doctype::XHTML1_STRICT], $string);
+        $this->assertEquals('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">', $string);
     }
 }
 

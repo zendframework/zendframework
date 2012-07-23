@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>Placeholder ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><title>Placeholder ヘルパー</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         などです。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title>プレースホルダの基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><title>プレースホルダの基本的な使用法</title>
         
 
         <para>
@@ -31,7 +31,7 @@
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>プレースホルダによるコンテンツの集約</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><title>プレースホルダによるコンテンツの集約</title>
         
 
         <para>
@@ -120,7 +120,7 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>プレースホルダによるコンテンツのキャプチャ</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><title>プレースホルダによるコンテンツのキャプチャ</title>
         
 
         <para>
@@ -201,7 +201,7 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>プレースホルダの具象実装</title></info>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><title>プレースホルダの具象実装</title>
         
 
         <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><info><title>Anpassen von Zend_Queue</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><title>Anpassen von Zend_Queue</title>
     
 
-    <section xml:id="zend.queue.custom.adapter"><info><title>Erstellung eigener Adapter</title></info>
+    <section xml:id="zend.queue.custom.adapter"><title>Erstellung eigener Adapter</title>
         
 
         <para>
@@ -79,7 +79,7 @@ $queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.queue.custom.message"><info><title>Eine eigene Nachrichtenklasse erstellen</title></info>
+    <section xml:id="zend.queue.custom.message"><title>Eine eigene Nachrichtenklasse erstellen</title>
         
 
         <para>
@@ -100,7 +100,7 @@ class Zend_Queue_Message
         </para>
     </section>
 
-    <section xml:id="zend.queue.custom-iterator"><info><title>Erstellen einer eigenen Nachrichten Iterator Klasse</title></info>
+    <section xml:id="zend.queue.custom-iterator"><title>Erstellen einer eigenen Nachrichten Iterator Klasse</title>
         
 
         <para>
@@ -118,7 +118,7 @@ class Zend_Queue_Message
         </para>
     </section>
 
-    <section xml:id="zend.queue.custom.queue"><info><title>Erstellen einer eigenen Queue Klasse</title></info>
+    <section xml:id="zend.queue.custom.queue"><title>Erstellen einer eigenen Queue Klasse</title>
         
 
         <para>

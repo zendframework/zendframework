@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Storage;
@@ -32,8 +21,6 @@ use Zend\Mail\Storage\Message;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
@@ -74,8 +61,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('file' => $this->_file));
 
-        $this->assertEquals($message->from, iconv('UTF-8', iconv_get_encoding('internal_encoding'),
-                                                                   '"Peter Müller" <peter-mueller@example.com>'));
+        $this->assertEquals('"Peter Müller" <peter-mueller@example.com>', $message->from);
     }
 
     public function testGetHeaderAsArray()
@@ -141,9 +127,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $raw = "sUBject: test\nSubJect: test2\n" . $raw;
         $message = new Message(array('raw' => $raw));
 
-        $this->assertEquals($message->getHeader('subject', 'string'),
-                           'test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND .  'multipart');
-        $this->assertEquals($message->getHeader('subject'),  array('test', 'test2', 'multipart'));
+        $this->assertEquals('test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND . 'multipart',
+                            $message->getHeader('subject', 'string'));
+
+        $this->assertEquals(array('test', 'test2', 'multipart'),
+                            $message->getHeader('subject', 'array'));
     }
 
     public function testContentTypeDecode()
@@ -211,9 +199,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testDecodeString()
     {
         $is = Mime\Decode::decodeQuotedPrintable('=?UTF-8?Q?"Peter M=C3=BCller"?= <peter-mueller@example.com>');
-        $should = iconv('UTF-8', iconv_get_encoding('internal_encoding'),
-                        '"Peter Müller" <peter-mueller@example.com>');
-        $this->assertEquals($is, $should);
+        $this->assertEquals('"Peter Müller" <peter-mueller@example.com>', $is);
     }
 
     public function testSplitHeader()
@@ -244,14 +230,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $body   = 'body';
         $newlines = array("\r\n", "\n\r", "\n", "\r");
 
-        $decoded_body   = null; // "Declare" variable before first "read" usage to avoid IDEs warning
-        $decoded_header = null; // "Declare" variable before first "read" usage to avoid IDEs warning
+        $decoded_body    = null; // "Declare" variable before first "read" usage to avoid IDEs warning
+        $decoded_headers = null; // "Declare" variable before first "read" usage to avoid IDEs warning
 
         foreach ($newlines as $contentEOL) {
             foreach ($newlines as $decodeEOL) {
                 $content = $header . $contentEOL . $contentEOL . $body;
-                $decoded = Mime\Decode::splitMessage($content, $decoded_header, $decoded_body, $decodeEOL);
-                $this->assertEquals(array('test' => 'test'), $decoded_header);
+                Mime\Decode::splitMessage($content, $decoded_headers, $decoded_body, $decodeEOL);
+                $this->assertEquals(array('Test' => 'test'), $decoded_headers->toArray());
                 $this->assertEquals($body, $decoded_body);
             }
         }
@@ -279,18 +265,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testEmptyHeader()
     {
         $message = new Message(array());
-        $this->assertEquals(array(), $message->getHeaders());
+        $this->assertEquals(array(), $message->getHeaders()->toArray());
 
         $message = new Message(array());
         $subject = null;
-        try {
-            $subject = $message->subject;
-        } catch (Exception\InvalidArgumentException $e) {
-            // ok
-        }
-        if ($subject) {
-            $this->fail('no exception raised while getting header from empty message');
-        }
+
+        $this->setExpectedException('Zend\\Mail\\Exception\\InvalidArgumentException');
+        $message->subject;
     }
 
     public function testEmptyBody()
@@ -317,11 +298,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('headers' => array('subject' => 'foo')));
 
-        $this->assertTrue( $message->headerExists('subject'));
+        $this->assertTrue( $message->getHeaders()->has('subject'));
         $this->assertTrue( isset($message->subject) );
-        $this->assertTrue( $message->headerExists('SuBject'));
+        $this->assertTrue( $message->getHeaders()->has('SuBject'));
         $this->assertTrue( isset($message->suBjeCt) );
-        $this->assertFalse($message->headerExists('From'));
+        $this->assertFalse($message->getHeaders()->has('From'));
     }
 
     public function testWrongMultipart()
@@ -440,5 +421,17 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $header = 'test; foo =bar; baz      =42';
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo'), 'bar');
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'baz'), 42);
+    }
+       
+    /**
+     * @group ZF2-372
+     */
+    public function testStrictParseMessage()
+    {
+        $this->setExpectedException('Zend\\Mail\\Exception\\RuntimeException');
+
+        $raw = file_get_contents($this->_file);
+        $raw = "From foo@example.com  Sun Jan 01 00:00:00 2000\n" . $raw;
+        $message = new Message(array('raw' => $raw, 'strict' => true));
     }
 }

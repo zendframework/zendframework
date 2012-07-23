@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><title>Zend_Db_Adapter</title>
 
     
 
-    <section xml:id="zend.db.adapter.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.db.adapter.introduction"><title>Inleiding</title>
 
         
 
@@ -53,7 +53,7 @@ $db = Zend_Db::factory('PDO_SQLITE', $params);
         </para>
     </section>
 
-    <section xml:id="zend.db.adapter.quoting"><info><title>Quoting tegen SQL Injectie</title></info>
+    <section xml:id="zend.db.adapter.quoting"><title>Quoting tegen SQL Injectie</title>
 
         
 
@@ -109,7 +109,7 @@ $where = $db->quoteInto('id IN(?)', array(1, 2, 3));
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.queries"><info><title>Directe Queries</title></info>
+    <section xml:id="zend.db.adapter.queries"><title>Directe Queries</title>
 
         
 
@@ -179,7 +179,7 @@ $rows = $stmt->fetchAll();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.transactions"><info><title>Transacties</title></info>
+    <section xml:id="zend.db.adapter.transactions"><title>Transacties</title>
 
         
 
@@ -212,7 +212,7 @@ try {
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.insert"><info><title>Rijen Invoegen</title></info>
+    <section xml:id="zend.db.adapter.insert"><title>Rijen Invoegen</title>
 
         
 
@@ -257,7 +257,7 @@ $last_insert_id = $db->lastInsertId();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.update"><info><title>Rijen updaten</title></info>
+    <section xml:id="zend.db.adapter.update"><title>Rijen updaten</title>
 
         
 
@@ -300,7 +300,7 @@ $rows_affected = $db->update($table, $set, $where);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.delete"><info><title>Rijen Verwijderen</title></info>
+    <section xml:id="zend.db.adapter.delete"><title>Rijen Verwijderen</title>
 
         
 
@@ -332,7 +332,7 @@ $rows_affected = $db->delete($table, $where);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.fetch"><info><title>Rijen Halen</title></info>
+    <section xml:id="zend.db.adapter.fetch"><title>Rijen Halen</title>
 
         
 

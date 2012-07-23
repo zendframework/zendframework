@@ -1,30 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Inflector as InflectorFilter,
-    Zend\Filter\FilterBroker,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker;
+use Zend\Filter\Inflector as InflectorFilter;
+use Zend\Filter\FilterPluginManager;
 
 /**
  * Test class for Zend_Filter_Inflector.
@@ -32,12 +19,20 @@ use Zend\Filter\Inflector as InflectorFilter,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class InflectorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var InflectorFilter
+     */
+    protected $inflector;
+
+    /**
+     * @var FilterPluginManager
+     */
+    protected $broker;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -47,23 +42,23 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->inflector = new InflectorFilter();
-        $this->broker    = $this->inflector->getPluginBroker();
+        $this->broker    = $this->inflector->getPluginManager();
     }
 
-    public function testGetPluginBrokerReturnsFilterBrokerByDefault()
+    public function testGetPluginManagerReturnsFilterManagerByDefault()
     {
-        $broker = $this->inflector->getPluginBroker();
-        $this->assertTrue($broker instanceof FilterBroker);
+        $broker = $this->inflector->getPluginManager();
+        $this->assertTrue($broker instanceof FilterPluginManager);
     }
 
-    public function testSetPluginBrokerAllowsSettingAlternatePluginBroker()
+    public function testSetPluginManagerAllowsSettingAlternatePluginManager()
     {
-        $defaultBroker = $this->inflector->getPluginBroker();
-        $broker = new PluginBroker();
-        $this->inflector->setPluginBroker($broker);
-        $receivedBroker = $this->inflector->getPluginBroker();
-        $this->assertNotSame($defaultBroker, $receivedBroker);
-        $this->assertSame($broker, $receivedBroker);
+        $defaultManager = $this->inflector->getPluginManager();
+        $manager = new FilterPluginManager();
+        $this->inflector->setPluginManager($manager);
+        $receivedManager = $this->inflector->getPluginManager();
+        $this->assertNotSame($defaultManager, $receivedManager);
+        $this->assertSame($manager, $receivedManager);
     }
 
     public function testTargetAccessorsWork()
@@ -335,10 +330,10 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     protected function _testOptions($inflector)
     {
         $options = $this->getOptions();
-        $broker  = $inflector->getPluginBroker();
+        $broker  = $inflector->getPluginManager();
         $this->assertEquals($options['target'], $inflector->getTarget());
 
-        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
+        $this->assertInstanceOf('Zend\Filter\FilterPluginManager', $broker);
         $this->assertTrue($inflector->isThrowTargetExceptionsOn());
         $this->assertEquals($options['targetReplacementIdentifier'], $inflector->getTargetReplacementIdentifier());
 

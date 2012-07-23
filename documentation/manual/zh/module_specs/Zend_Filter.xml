@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title> 简介 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title> 简介 </title>
 
     
 
@@ -7,7 +7,7 @@
         Zend_Filter 组件提供了一系列普遍使用的数据过滤器(data filter)，同时也提供了一个简单的过滤器链机制，使多个过滤器以用户定义的顺序对一个单一的数据进行过滤。
     </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title> 什么是过滤器(filter)？</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title> 什么是过滤器(filter)？</title>
 
         
 
@@ -21,7 +21,7 @@
 
     </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title> 过滤器的基本用法 </title></info>
+    <section xml:id="zend.filter.introduction.using"><title> 过滤器的基本用法 </title>
 
         
 
@@ -44,7 +44,7 @@ echo $htmlEntities->filter('"'); // "
 
     </section>
 
-    <section xml:id="zend.filter.introduction.static"><info><title> 使用静态 <code>get()</code> 方法 </title></info>
+    <section xml:id="zend.filter.introduction.static"><title> 使用静态 <code>get()</code> 方法 </title>
 
         
 

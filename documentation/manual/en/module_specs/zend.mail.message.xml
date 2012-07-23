@@ -115,7 +115,7 @@ $message->setEncoding("UTF-8");
  * Mail headers created:
  * X-API-Key: FOO-BAR-BAZ-BAT
  */
-$message->headers()->addHeaderLine('X-API-Key', 'FOO-BAR-BAZ-BAT');
+$message->getHeaders()->addHeaderLine('X-API-Key', 'FOO-BAR-BAZ-BAT');
 ]]></programlisting>
 
         <para>
@@ -127,9 +127,9 @@ $message->headers()->addHeaderLine('X-API-Key', 'FOO-BAR-BAZ-BAT');
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Mail\Message,
-    Zend\Mime\Message as MimeMessage,
-    Zend\Mime\Part as MimePart;
+use Zend\Mail\Message;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Part as MimePart;
 
 $text = new MimePart($textContent);
 $text->type = "text/plain";
@@ -164,7 +164,7 @@ echo $message->toString();
 // Headers
 // Note: this will also grab all headers for which accessors/mutators exist in 
 // the Message object itself.
-foreach ($message->headers() as $header) {
+foreach ($message->getHeaders() as $header) {
     echo $header->toString();
     // or grab values: $header->getFieldName(), $header->getFieldValue()
 }
@@ -284,12 +284,12 @@ $transport->send($message);
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.mail.message.methods.headers">
-                <term>setHeaders</term>
+            <varlistentry xml:id="zend.mail.message.methods.get-headers">
+                <term>getHeaders</term>
 
                 <listitem>
                     <methodsynopsis>
-                        <methodname>headers</methodname>
+                        <methodname>getHeaders</methodname>
                         <void/>
                     </methodsynopsis>
 

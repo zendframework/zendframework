@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><info><title>A verzió lekérdezése</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><title>A verzió lekérdezése</title>
 
     
 
@@ -20,7 +20,7 @@
         megegyeznek, és +1, ha újabb.
     </para>
 
-    <example xml:id="zend.version.reading.example"><info><title>Példa a compareVersion() tagfüggvény használatára</title></info>
+    <example xml:id="zend.version.reading.example"><title>Példa a compareVersion() tagfüggvény használatára</title>
         
         <programlisting language="php"><![CDATA[
 // -1-gyel, 0-val vagy +1-gyel tér vissza

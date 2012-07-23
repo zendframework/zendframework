@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Conjunto de Caracteres</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><title>Conjunto de Caracteres</title>
     
 
-    <section xml:id="zend.search.lucene.charset.description"><info><title>Suporte aos conjuntos de caracteres UTF-8 e single-byte</title></info>
+    <section xml:id="zend.search.lucene.charset.description"><title>Suporte aos conjuntos de caracteres UTF-8 e single-byte</title>
         
 
         <para>
@@ -36,7 +36,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Analisador de texto padrão</title></info>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><title>Analisador de texto padrão</title>
         
 
         <para>
@@ -64,7 +64,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>Analisadores de texto compatíveis com UTF-8</title></info>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><title>Analisadores de texto compatíveis com UTF-8</title>
         
 
         <para>

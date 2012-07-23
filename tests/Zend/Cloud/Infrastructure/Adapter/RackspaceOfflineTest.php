@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    ZendTest_Cloud_Infrastructure_Adapter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\Infrastructure\Adapter;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as HttpTest,
-    Zend\Cloud\Infrastructure\Adapter\Rackspace,
-    Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\Factory as CloudFactory;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpTest;
+use Zend\Cloud\Infrastructure\Adapter\Rackspace;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\Factory as CloudFactory;
 
 class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,36 +37,36 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
      * @var \Zend\Http\Client\Adapter\Test
      */
     protected $httpClientAdapterTest;
-    
+
     /**
      * Image ID of the instance
-     * 
+     *
      * @var string
      */
     protected static $instanceId;
-    
+
     /**
      * Setup for each test
      */
     public function setUp()
     {
-        $this->infrastructure = CloudFactory::getAdapter(array( 
+        $this->infrastructure = CloudFactory::getAdapter(array(
             CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Rackspace',
-            Rackspace::RACKSPACE_USER   => 'test', 
-            Rackspace::RACKSPACE_KEY    => 'test', 
-            Rackspace::RACKSPACE_REGION => 'USA'  
-        )); 
+            Rackspace::RACKSPACE_USER   => 'test',
+            Rackspace::RACKSPACE_KEY    => 'test',
+            Rackspace::RACKSPACE_REGION => 'USA'
+        ));
 
         $this->httpClientAdapterTest = new HttpTest();
 
         $this->infrastructure->getAdapter()
                              ->getHttpClient()
                              ->setAdapter($this->httpClientAdapterTest);
-        
-        $shortClassName = 'RackspaceTest';      
+
+        $shortClassName = 'RackspaceTest';
         // load the HTTP response (from a file)
         $filename= dirname(__FILE__) . '/_files/' . $shortClassName . '_'. $this->getName().'.response';
-        
+
         if (file_exists($filename)) {
             // authentication (from file)
             $content = file_get_contents(dirname(__FILE__) . '/_files/'.$shortClassName . '_testAuthenticate.response');
@@ -85,17 +74,17 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($this->infrastructure->getAdapter()->authenticate(),'Authentication failed');
             // set the specific API response
             $content = file_get_contents($filename);
-            $this->httpClientAdapterTest->setResponse($content); 
+            $this->httpClientAdapterTest->setResponse($content);
         }
-        
+
     }
-       
+
     /**
      * Get Config Array
-     * 
+     *
      * @return array
-     */ 
-    static function getConfigArray()
+     */
+    public static function getConfigArray()
     {
          return array(
             CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Rackspace',
@@ -104,7 +93,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
             Rackspace::RACKSPACE_REGION => 'USA'
         );
     }
-    
+
     /**
      * Test all the constants of the class
      */
@@ -120,7 +109,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
     /**
      * Test construct with missing params
      */
-    public function testConstructExceptionMissingParams() 
+    public function testConstructExceptionMissingParams()
     {
         $this->setExpectedException(
             'Zend\Cloud\Infrastructure\Adapter\Exception\InvalidArgumentException',
@@ -159,7 +148,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
             )
         );
         $instance = $this->infrastructure->createInstance(self::SERVER_NAME, $options);
-        
+
         $this->assertTrue($this->infrastructure->isSuccessful());
         $this->assertEquals(self::IMAGE_ID, $instance->getImageId());
         $this->assertEquals(self::SERVER_ID, $instance->getId());
@@ -170,7 +159,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::SERVER_PASS, $instance->getAttribute('adminPass'));
         $this->assertTrue(is_array($instance->getAttribute('addresses')));
     }
- 
+
     /**
      * Test list of an instance
      */
@@ -215,7 +204,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
     {
         $dns = $this->infrastructure->publicDnsInstance(self::SERVER_ID);
         $this->assertTrue($this->infrastructure->isSuccessful());
-        $this->assertEquals(self::SERVER_IP, $dns); 
+        $this->assertEquals(self::SERVER_IP, $dns);
     }
     /**
      * Test status instance
@@ -224,7 +213,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
     {
         $status = $this->infrastructure->statusInstance(self::SERVER_ID);
         $this->assertTrue($this->infrastructure->isSuccessful());
-        $this->assertEquals(Instance::STATUS_RUNNING, $status); 
+        $this->assertEquals(Instance::STATUS_RUNNING, $status);
     }
     /**
      * Test monitor instance
@@ -252,7 +241,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testStartInstance()
     {
-        $this->markTestSkipped('Test start instance skipped');   
+        $this->markTestSkipped('Test start instance skipped');
     }
     /**
      * Test reboot and instance

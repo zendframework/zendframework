@@ -15,8 +15,6 @@ namespace Zend\Uri;
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Http extends Uri
 {
@@ -39,7 +37,7 @@ class Http extends Uri
     /**
      * @see Uri::$validHostTypes
      */
-    protected $validHostTypes = self::HOST_DNSORIPV4;
+    protected $validHostTypes = self::HOST_DNS_OR_IPV4_OR_IPV6;
 
     /**
      * User name as provided in authority of URI
@@ -56,7 +54,7 @@ class Http extends Uri
     /**
      * Check if the URI is a valid HTTP URI
      *
-     * This applys additional HTTP specific validation rules beyond the ones
+     * This applies additional HTTP specific validation rules beyond the ones
      * required by the generic URI syntax
      *
      * @return boolean
@@ -124,14 +122,14 @@ class Http extends Uri
     /**
      * Validate the host part of an HTTP URI
      *
-     * This overrides the common URI validation method with a DNS or IPv4 only
+     * This overrides the common URI validation method with a DNS or IP only
      * default. Users may still enforce allowing other host types.
      *
      * @param  string  $host
      * @param  integer $allowed
      * @return boolean
      */
-    public static function validateHost($host, $allowed = self::HOST_DNSORIPV4)
+    public static function validateHost($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
     {
         return parent::validateHost($host, $allowed);
     }

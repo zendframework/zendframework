@@ -15,7 +15,65 @@ namespace Zend\Db\Metadata\Object;
  * @package    Zend_Db
  * @subpackage Metadata
  */
-class ViewObject extends TableObject
+class ViewObject extends AbstractTableObject
 {
+    protected $viewDefinition;
+    protected $checkOption;
+    protected $isUpdatable;
 
+    /**
+     * @return string $viewDefinition
+     */
+    public function getViewDefinition()
+    {
+        return $this->viewDefinition;
+    }
+
+    /**
+     * @param string $viewDefinition to set
+     */
+    public function setViewDefinition($viewDefinition)
+    {
+        $this->viewDefinition = $viewDefinition;
+        return $this;
+    }
+
+    /**
+     * @return string $checkOption
+     */
+    public function getCheckOption()
+    {
+        return $this->checkOption;
+    }
+
+    /**
+     * @param string $checkOption to set
+     */
+    public function setCheckOption($checkOption)
+    {
+        $this->checkOption = $checkOption;
+        return $this;
+    }
+
+    /**
+     * @return bool $isUpdatable
+     */
+    public function getIsUpdatable()
+    {
+        return $this->isUpdatable;
+    }
+
+    /**
+     * @param bool $isUpdatable to set
+     */
+    public function setIsUpdatable($isUpdatable)
+    {
+        $this->isUpdatable = $isUpdatable;
+        return $this;
+    }
+
+    public function isUpdatable()
+    {
+        return $this->isUpdatable;
+    }
 }

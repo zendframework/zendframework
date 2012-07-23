@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><title>Zend_Service_Akismet</title>
     
 
-    <section xml:id="zend.service.akismet.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.service.akismet.introduction"><title>導入</title>
         
 
         <para>
@@ -34,7 +34,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.verifykey"><info><title>API キーの検証</title></info>
+    <section xml:id="zend.service.akismet.verifykey"><title>API キーの検証</title>
         
 
         <para>
@@ -69,7 +69,7 @@ if ($akismet->verifyKey($apiKey) {
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.isspam"><info><title>スパムのチェック</title></info>
+    <section xml:id="zend.service.akismet.isspam"><title>スパムのチェック</title>
         
 
         <para>
@@ -173,7 +173,7 @@ if ($akismet->verifyKey($apiKey) {
             API キーが無効な場合は例外をスローします。
         </para>
 
-        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>isSpam() の使用法</title></info>
+        <example xml:id="zend.service.akismet.isspam.example-1"><title>isSpam() の使用法</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -201,7 +201,7 @@ if ($akismet->isSpam($data)) {
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.submitspam"><info><title>既知のスパムの送信</title></info>
+    <section xml:id="zend.service.akismet.submitspam"><title>既知のスパムの送信</title>
         
 
         <para>
@@ -218,7 +218,7 @@ if ($akismet->isSpam($data)) {
             API キーが無効な場合は例外が発生します。
         </para>
 
-        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>submitSpam() の使用法</title></info>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><title>submitSpam() の使用法</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -241,7 +241,7 @@ $akismet->submitSpam($data));
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.submitham"><info><title>無実のデータ (ハム) の送信</title></info>
+    <section xml:id="zend.service.akismet.submitham"><title>無実のデータ (ハム) の送信</title>
         
 
         <para>
@@ -260,7 +260,7 @@ $akismet->submitSpam($data));
             API キーが無効な場合は例外が発生します。
         </para>
 
-        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>submitHam() の使用法</title></info>
+        <example xml:id="zend.service.akismet.submitham.example-1"><title>submitHam() の使用法</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -283,7 +283,7 @@ $akismet->submitHam($data));
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.accessors"><info><title>Zend 固有のアクセス用メソッド</title></info>
+    <section xml:id="zend.service.akismet.accessors"><title>Zend 固有のアクセス用メソッド</title>
         
 
         <para>

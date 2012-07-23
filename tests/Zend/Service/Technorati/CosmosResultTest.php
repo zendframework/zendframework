@@ -1,42 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Technorati
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
-
-/**
- * Test helper
- */
-
-/**
- * @see Technorati\CosmosResult
- */
-
 
 /**
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
@@ -71,8 +51,8 @@ class CosmosResultTest extends TestCase
         $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('Ho intenzione di prendere il modello bianco', $object->getExcerpt());
 
-        $this->assertInstanceOf('Zend\Date\Date', $object->getLinkCreated());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-11 20:07:11 GMT'), $object->getLinkCreated());
+        $this->assertInstanceOf('DateTime', $object->getLinkCreated());
+        $this->assertEquals(new DateTime('2007-11-11 20:07:11 GMT'), $object->getLinkCreated());
 
         $this->assertInstanceOf('Zend\Uri\Http', $object->getLinkUrl());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php'), $object->getLinkUrl());
@@ -82,7 +62,7 @@ class CosmosResultTest extends TestCase
         $this->assertContains('Progetto-Seo', $object->getWeblog()->getName());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.progetto-seo.com/motori-di-ricerca/links-interni'), $object->getNearestPermalink());
         $this->assertContains('soprattutto Google', $object->getExcerpt());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-10 08:57:22 GMT'), $object->getLinkCreated());
+        $this->assertEquals(new DateTime('2007-11-10 08:57:22 GMT'), $object->getLinkCreated());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php'), $object->getLinkUrl());
     }
 

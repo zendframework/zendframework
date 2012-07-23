@@ -1,41 +1,29 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf\Adobe;
 
-use Zend\Amf\Exception,
-    Zend\Code\Reflection\ClassReflection,
-    Zend\Code\Reflection\PropertyReflection,
-    Zend\Server\Reflection,
-    Zend\Server\Reflection\ReflectionClass as ServerReflectionClass,
-    SplFileInfo,
-    DOMElement,
-    DOMDocument;
+use DOMDocument;
+use DOMElement;
+use SplFileInfo;
+use Zend\Amf\Exception;
+use Zend\Code\Reflection\ClassReflection;
+use Zend\Code\Reflection\PropertyReflection;
+use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionClass as ServerReflectionClass;
 
 /**
  * This class implements a service for generating AMF service descriptions as XML.
  *
  * @package    Zend_Amf
  * @subpackage Adobe
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Introspector
 {
@@ -314,8 +302,8 @@ class Introspector
 
     /**
      * Load a service class from the service path
-     * 
-     * @param  string $class 
+     *
+     * @param  string $class
      * @return bool
      */
     protected function _loadClass($class)

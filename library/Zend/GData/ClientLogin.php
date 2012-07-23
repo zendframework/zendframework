@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -29,8 +18,6 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClientLogin
 {
@@ -96,18 +83,18 @@ class ClientLogin
                 'useragent' => $useragent
             )
         );
-        
+
         $client->setEncType('multipart/form-data');
-        
+
         $postParams = array('accountType' => $accountType,
                             'Email'       => (string)$email,
                             'Passwd'      => (string) $password,
                             'service'     => (string) $service,
                             'source'      => (string) $source);
-        
+
         if ($loginToken || $loginCaptcha) {
             if($loginToken && $loginCaptcha) {
-                $postParams += array('logintoken' => (string)$loginToken, 
+                $postParams += array('logintoken' => (string)$loginToken,
                                      'logincaptcha' => (string)$loginCaptcha);
             } else {
                 throw new App\AuthException(
@@ -115,9 +102,9 @@ class ClientLogin
                     'to the CAPTCHA challenge.');
             }
         }
-        
+
         $client->setParameterPost($postParams);
-        
+
         // Send the authentication request
         // For some reason Google's server causes an SSL error. We use the
         // output buffer to supress an error from being shown. Ugly - but works!
@@ -128,7 +115,7 @@ class ClientLogin
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();
-        
+
         // Parse Google's response
         $goog_resp = array();
         foreach (explode("\n", $response->getBody()) as $l) {
@@ -155,8 +142,7 @@ class ClientLogin
                 $goog_resp['Error'] == 'CaptchaRequired') {
                 throw new App\CaptchaRequiredException(
                     $goog_resp['CaptchaToken'], $goog_resp['CaptchaUrl']);
-            }
-            else {
+            } else {
                 throw new App\AuthException('Authentication with Google failed. Reason: ' .
                     (isset($goog_resp['Error']) ? $goog_resp['Error'] : 'Unspecified.'));
             }

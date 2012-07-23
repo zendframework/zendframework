@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Verändern der Feed- und Eintragsstruktur</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><title>Verändern der Feed- und Eintragsstruktur</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         Datei zu speichern oder an einen Server zu senden.
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Verändern eines bestehenden Feed Eintrags</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><title>Verändern eines bestehenden Feed Eintrags</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -46,7 +46,7 @@ echo $entry->saveXML();
         du nicht explizit einen anderen Namensraum festgelegt hast.
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Erstellen eines Atom Eintrags mit Elementen eines eigenen Namensraumes</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><title>Erstellen eines Atom Eintrags mit Elementen eines eigenen Namensraumes</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><info><title>Autoloaders de ressources</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><title>Autoloaders de ressources</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         dossiers, sous l'espace de noms, tout en gardant les bénéfices de l'autoload.
     </para>
 
-    <section xml:id="zend.loader.autoloader-resource.usage"><info><title>Utilisation de l'autoloader de ressources</title></info>
+    <section xml:id="zend.loader.autoloader-resource.usage"><title>Utilisation de l'autoloader de ressources</title>
         
 
         <para>Soit la structure de répertoires suivante :</para>
@@ -51,7 +51,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ));
 ]]></programlisting>
 
-        <note><info><title>Espace de noms de base</title></info>
+        <note><title>Espace de noms de base</title>
             
 
             <para>
@@ -124,7 +124,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.module"><info><title>L'autoloader de ressource Module</title></info>
+    <section xml:id="zend.loader.autoloader-resource.module"><title>L'autoloader de ressource Module</title>
         
 
         <para>
@@ -161,7 +161,7 @@ views/
         </para>
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.factory"><info><title>Utiliser les autoloaders de ressources comme fabriques d'objets</title></info>
+    <section xml:id="zend.loader.autoloader-resource.factory"><title>Utiliser les autoloaders de ressources comme fabriques d'objets</title>
         
 
         <para/>
@@ -169,7 +169,7 @@ views/
         <!-- @todo -->
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.reference"><info><title>Référence de l'autoloader de ressources</title></info>
+    <section xml:id="zend.loader.autoloader-resource.reference"><title>Référence de l'autoloader de ressources</title>
         
 
         <para/>

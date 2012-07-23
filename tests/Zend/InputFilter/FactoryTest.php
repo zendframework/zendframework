@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_InputFilter
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_InputFilter
  */
 
 namespace ZendTest\InputFilter;
@@ -26,7 +15,6 @@ use Zend\Filter;
 use Zend\InputFilter\Factory;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
-use Zend\Loader\PluginBroker;
 use Zend\Validator;
 
 class FactoryTest extends TestCase
@@ -61,10 +49,10 @@ class FactoryTest extends TestCase
 
     public function testFactoryUsesComposedFilterChainWhenCreatingNewInputObjects()
     {
-        $factory     = new Factory();
-        $filterChain = new Filter\FilterChain();
-        $broker      = new PluginBroker;
-        $filterChain->setBroker($broker);
+        $factory       = new Factory();
+        $filterChain   = new Filter\FilterChain();
+        $pluginManager = new Filter\FilterPluginManager();
+        $filterChain->setPluginManager($pluginManager);
         $factory->setDefaultFilterChain($filterChain);
         $input = $factory->createInput(array(
             'name' => 'foo',
@@ -72,15 +60,15 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $inputFilterChain = $input->getFilterChain();
         $this->assertNotSame($filterChain, $inputFilterChain);
-        $this->assertSame($broker, $inputFilterChain->getBroker());
+        $this->assertSame($pluginManager, $inputFilterChain->getPluginManager());
     }
 
     public function testFactoryUsesComposedValidatorChainWhenCreatingNewInputObjects()
     {
-        $factory        = new Factory();
-        $validatorChain = new Validator\ValidatorChain();
-        $broker         = new PluginBroker;
-        $validatorChain->setBroker($broker);
+        $factory          = new Factory();
+        $validatorChain   = new Validator\ValidatorChain();
+        $validatorPlugins = new Validator\ValidatorPluginManager();
+        $validatorChain->setPluginManager($validatorPlugins);
         $factory->setDefaultValidatorChain($validatorChain);
         $input = $factory->createInput(array(
             'name' => 'foo',
@@ -88,17 +76,18 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $inputValidatorChain = $input->getValidatorChain();
         $this->assertNotSame($validatorChain, $inputValidatorChain);
-        $this->assertSame($broker, $inputValidatorChain->getBroker());
+        $this->assertSame($validatorPlugins, $inputValidatorChain->getPluginManager());
     }
 
     public function testFactoryInjectsComposedFilterAndValidatorChainsIntoInputObjectsWhenCreatingNewInputFilterObjects()
     {
-        $factory        = new Factory();
-        $broker         = new PluginBroker;
-        $filterChain = new Filter\FilterChain();
-        $validatorChain = new Validator\ValidatorChain();
-        $filterChain->setBroker($broker);
-        $validatorChain->setBroker($broker);
+        $factory          = new Factory();
+        $filterPlugins    = new Filter\FilterPluginManager();
+        $validatorPlugins = new Validator\ValidatorPluginManager();
+        $filterChain      = new Filter\FilterChain();
+        $validatorChain   = new Validator\ValidatorChain();
+        $filterChain->setPluginManager($filterPlugins);
+        $validatorChain->setPluginManager($validatorPlugins);
         $factory->setDefaultFilterChain($filterChain);
         $factory->setDefaultValidatorChain($validatorChain);
 
@@ -113,8 +102,8 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $inputFilterChain    = $input->getFilterChain();
         $inputValidatorChain = $input->getValidatorChain();
-        $this->assertSame($broker, $inputFilterChain->getBroker());
-        $this->assertSame($broker, $inputValidatorChain->getBroker());
+        $this->assertSame($filterPlugins, $inputFilterChain->getPluginManager());
+        $this->assertSame($validatorPlugins, $inputValidatorChain->getPluginManager());
     }
 
     public function testFactoryWillCreateInputWithSuggestedFilters()
@@ -226,7 +215,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $this->assertFalse($input->isRequired());
         $this->assertFalse($input->allowEmpty());
-       
+
     }
 
     public function testFactoryWillCreateInputWithSuggestedAllowEmptyFlagAndImpliesRequiredFlag()
@@ -325,7 +314,7 @@ class FactoryTest extends TestCase
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
         $this->assertEquals(4, count($inputFilter));
-        
+
         foreach (array('foo', 'bar', 'baz', 'bat') as $name) {
             $input = $inputFilter->get($name);
 

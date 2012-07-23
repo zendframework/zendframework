@@ -13,8 +13,6 @@ namespace Zend\Paginator\Adapter;
 /**
  * @category   Zend
  * @package    Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ArrayAdapter implements AdapterInterface
 {
@@ -37,7 +35,7 @@ class ArrayAdapter implements AdapterInterface
      *
      * @param array $array ArrayAdapter to paginate
      */
-    public function __construct(array $array)
+    public function __construct(array $array = array())
     {
         $this->_array = $array;
         $this->_count = count($array);

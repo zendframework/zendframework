@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf;
 
-use Zend\Amf\Exception,
-    Zend\Authentication\AuthenticationService,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker,
-    Zend\Server\Reflection,
-    Zend\Server\Server as ServerDefinition;
+use Zend\Amf\Exception;
+use Zend\Authentication\AuthenticationService;
+use Zend\Loader\Broker;
+use Zend\Loader\PluginBroker;
+use Zend\Server\Reflection;
+use Zend\Server\Server as ServerDefinition;
 
 /**
  * An AMF gateway server implementation to allow the connection of the Adobe Flash Player to
@@ -34,8 +24,6 @@ use Zend\Amf\Exception,
  * @todo       Make the relection methods cache and autoload.
  * @package    Zend_Amf
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Server implements ServerDefinition
 {
@@ -78,7 +66,7 @@ class Server implements ServerDefinition
     protected $_response;
 
     /**
-     * Flag: whether or not to return a response instead of automatically 
+     * Flag: whether or not to return a response instead of automatically
      * emitting it. By default, returns it.
      * @var boolean
      */
@@ -297,8 +285,8 @@ class Server implements ServerDefinition
 
     /**
      * Set broker instance
-     * 
-     * @param  string|Broker $broker 
+     *
+     * @param  string|Broker $broker
      * @return Server
      * @throws Exception\InvalidArgumentException
      */
@@ -545,8 +533,7 @@ class Server implements ServerDefinition
         }
 
         // Iterate through each of the service calls in the AMF request
-        foreach($responseBody as $body)
-        {
+        foreach($responseBody as $body) {
             try {
                 if ($handleAuth) {
                     if ($this->_handleAuth(

@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage YouTube
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
 
 use Zend\Http;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Service class for interacting with the YouTube Data API.
@@ -30,8 +20,6 @@ use Zend\Http;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class YouTube extends Media
 {
@@ -178,11 +166,11 @@ class YouTube extends Media
         }
 
         if ($clientId != null) {
-            $client->getRequest()->headers()->addHeaderLine('X-GData-Client', $clientId);
+            $client->getRequest()->getHeaders()->addHeaderLine('X-GData-Client', $clientId);
         }
 
         if ($developerKey != null) {
-            $client->getRequest()->headers()->addHeaderLine('X-GData-Key', 'key='. $developerKey);
+            $client->getRequest()->getHeaders()->addHeaderLine('X-GData-Key', 'key='. $developerKey);
         }
 
         return parent::setHttpClient($client, $applicationId);
@@ -200,7 +188,7 @@ class YouTube extends Media
     {
         if ($location == null) {
             $uri = self::VIDEO_URI;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -230,7 +218,7 @@ class YouTube extends Media
             } else {
                 $uri = self::VIDEO_URI . "/" . $videoId;
             }
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -268,7 +256,7 @@ class YouTube extends Media
         if ($videoId !== null) {
             $uri = self::VIDEO_URI . "/" . $videoId . "/" .
                 self::RELATED_URI_SUFFIX;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -290,7 +278,7 @@ class YouTube extends Media
         if ($videoId !== null) {
             $uri = self::VIDEO_URI . "/" . $videoId . "/" .
                 self::RESPONSES_URI_SUFFIX;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -311,7 +299,7 @@ class YouTube extends Media
     {
         if ($videoId !== null) {
             $uri = self::VIDEO_URI . "/" . $videoId . "/comments";
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -337,7 +325,7 @@ class YouTube extends Media
 
         if ($location == null) {
             $uri = $standardFeedUri;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             if ($location instanceof YouTube\VideoQuery) {
                 if (!isset($location->url)) {
                     $location->setFeedType('top rated');
@@ -369,7 +357,7 @@ class YouTube extends Media
 
         if ($location == null) {
             $uri = $standardFeedUri;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             if ($location instanceof YouTube\VideoQuery) {
                 if (!isset($location->url)) {
                     $location->setFeedType('most viewed');
@@ -400,7 +388,7 @@ class YouTube extends Media
 
         if ($location == null) {
             $uri = $standardFeedUri;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             if ($location instanceof YouTube\VideoQuery) {
                 if (!isset($location->url)) {
                     $location->setFeedType('recently featured');
@@ -432,7 +420,7 @@ class YouTube extends Media
 
         if ($location == null) {
             $uri = $standardFeedUri;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             if ($location instanceof YouTube\VideoQuery) {
                 if (!isset($location->url)) {
                     $location->setFeedType('watch on mobile');
@@ -457,7 +445,7 @@ class YouTube extends Media
     {
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/playlists';
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -495,7 +483,7 @@ class YouTube extends Media
     {
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/subscriptions';
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -515,7 +503,7 @@ class YouTube extends Media
     {
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/contacts';
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -536,7 +524,7 @@ class YouTube extends Media
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/' .
                    self::UPLOADS_URI_SUFFIX;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -557,7 +545,7 @@ class YouTube extends Media
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/' .
                    self::FAVORITES_URI_SUFFIX;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -577,7 +565,7 @@ class YouTube extends Media
     {
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
@@ -595,10 +583,12 @@ class YouTube extends Media
     public static function parseFormUploadTokenResponse($response)
     {
         // Load the feed as an XML DOMDocument object
-        @ini_set('track_errors', 1);
+        ErrorHandler::start(E_WARNING);
+        ini_set('track_errors', 1);
         $doc = new \DOMDocument();
-        $success = @$doc->loadXML($response);
-        @ini_restore('track_errors');
+        $success = $doc->loadXML($response);
+        ini_restore('track_errors');
+        ErrorHandler::stop();
 
         if (!$success) {
             throw new App\Exception(
@@ -759,8 +749,8 @@ class YouTube extends Media
             $messageEntry->setId($this->newId($videoId));
             // TODO there seems to be a bug where v1 inbox entries dont
             // retain their description...
-            $messageEntry->setDescription(
-                new YouTube\Extension\Description($body));
+            $messageEntry->setSummary(
+                new App\Extension\Summary($body));
 
         } else {
             if (!$videoId) {

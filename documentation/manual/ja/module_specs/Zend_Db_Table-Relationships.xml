@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><title>導入</title>
 
     
 
-    <section xml:id="zend.db.table.relationships.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.db.table.relationships.introduction"><title>導入</title>
 
         
 
@@ -22,7 +22,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.relationships.defining"><info><title>リレーションの定義</title></info>
+    <section xml:id="zend.db.table.relationships.defining"><title>リレーションの定義</title>
 
         
 
@@ -216,7 +216,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.dependent"><info><title>従属行セットの取得</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.dependent"><title>従属行セットの取得</title>
 
         
 
@@ -242,7 +242,7 @@ $row->findDependentRowset($table, [$rule]);
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><info><title>従属行セットの取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><title>従属行セットの取得</title>
 
             
 
@@ -278,7 +278,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             ここでは <code>'Reporter'</code> がそれにあたります。
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><info><title>ルールを指定することによる従属行セットの取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><title>ルールを指定することによる従属行セットの取得</title>
 
             
 
@@ -307,7 +307,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
 
         <para>
 
-            <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><info><title>Zend_Db_Table_Select による従属行セットの取得</title></info>
+            <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><title>Zend_Db_Table_Select による従属行セットの取得</title>
 
                 
 
@@ -376,7 +376,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
 
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><info><title>マジックメソッドの使用による従属行セットの取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><title>マジックメソッドの使用による従属行セットの取得</title>
 
             
 
@@ -402,7 +402,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
 
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.parent"><info><title>親の行の取得</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.parent"><title>親の行の取得</title>
 
         
 
@@ -428,7 +428,7 @@ $row->findParentRow($table, [$rule]);
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example"><info><title>親の行の取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example"><title>親の行の取得</title>
 
             
 
@@ -465,7 +465,7 @@ $reporter = $bug1->findParentRow('Accounts');
             ここでは <code>'Reporter'</code> がそれにあたります。
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><info><title>ルールを指定することによる親の行の取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><title>ルールを指定することによる親の行の取得</title>
 
             
 
@@ -527,7 +527,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
 
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><info><title>マジックメソッドの使用による親の行の取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><title>マジックメソッドの使用による親の行の取得</title>
 
             
 
@@ -553,7 +553,7 @@ $engineer = $bug1->findParentAccountsByEngineer();
 
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><info><title>多対多のリレーションを使用した行セットの取得</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><title>多対多のリレーションを使用した行セットの取得</title>
 
         
 
@@ -595,7 +595,7 @@ $row->findManyToManyRowset($table,
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><info><title>多対多の形式の行セットの取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><title>多対多の形式の行セットの取得</title>
 
             
 
@@ -651,7 +651,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             そして <varname>$rule2</varname> が <code>'Product'</code> になります。
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><info><title>ルールを指定することによる多対多の形式の行セットの取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><title>ルールを指定することによる多対多の形式の行セットの取得</title>
 
             
 
@@ -724,7 +724,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
 
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><info><title>マジックメソッドの使用による多対多の形式の行セットの取得</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><title>マジックメソッドの使用による多対多の形式の行セットの取得</title>
 
             
 
@@ -750,11 +750,11 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
     </section>
 
-    <section xml:id="zend.db.table.relationships.cascading"><info><title>書き込み操作の連鎖</title></info>
+    <section xml:id="zend.db.table.relationships.cascading"><title>書き込み操作の連鎖</title>
 
         
 
-        <note><info><title>データベースでの DRI の宣言</title></info>
+        <note><title>データベースでの DRI の宣言</title>
 
             
 
@@ -793,7 +793,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             従属テーブルに対して行う操作を指定できます。
         </para>
 
-        <example xml:id="zend.db.table.relationships.cascading.example-delete"><info><title>連鎖削除の例</title></info>
+        <example xml:id="zend.db.table.relationships.cascading.example-delete"><title>連鎖削除の例</title>
 
             
 
@@ -841,7 +841,7 @@ $product1234->delete();
             まず削除あるいは更新されます。
         </para>
 
-        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><info><title>連鎖操作の宣言の例</title></info>
+        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><title>連鎖操作の宣言の例</title>
 
             
 
@@ -880,7 +880,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         </example>
 
-        <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>連鎖操作に関する注意点</title></info>
+        <section xml:id="zend.db.table.relationships.cascading.notes"><title>連鎖操作に関する注意点</title>
 
             
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         informação deve ser herdada.
     </para>
 
-    <note><info><title>Tipo de Retorno</title></info>
+    <note><title>Tipo de Retorno</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Usando o Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>Usando o Zend_Config_Xml</title>
         
 
         <para>
@@ -82,7 +82,7 @@ echo $config->database->params->dbname; // prints "dbname"
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Usando os Atributos de Tag no Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><title>Usando os Atributos de Tag no Zend_Config_Xml</title>
         
 
         <para>
@@ -146,7 +146,7 @@ echo $config->database->params->dbname; // prints "dbname"
 ]]></programlisting>
     </example>
 
-    <note><info><title>Strings XML</title></info>
+    <note><title>Strings XML</title>
         
 
         <para>
@@ -182,7 +182,7 @@ $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
 
-    <note><info><title>Namespace XML do Zend_Config</title></info>
+    <note><title>Namespace XML do Zend_Config</title>
         
 
         <para>

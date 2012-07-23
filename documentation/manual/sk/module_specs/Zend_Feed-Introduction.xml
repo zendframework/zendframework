@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Úvod</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>Úvod</title>
     
     <para>
         <code>Zend_Feed</code> poskytuje funkcionalitu pre spracovanie RSS a Atom
@@ -23,7 +23,7 @@
         alebo ich uloženie do databázy, atď.
     </para>
 
-    <note><info><title>Uvedomte si</title></info>
+    <note><title>Uvedomte si</title>
         
         <para>
             Veľa RSS zdrojov ma rôzne prúdy a rôzne vlastnosti. Špecifikácia RSS
@@ -32,7 +32,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>Použitie Zend_Feed na získanie dát z RSS zdroja</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>Použitie Zend_Feed na získanie dát z RSS zdroja</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Feed.php';

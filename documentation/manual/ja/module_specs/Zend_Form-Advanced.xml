@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Zend_Form の高度な使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><title>Zend_Form の高度な使用法</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         それらの機能について例を交えて説明します。
     </para>
 
-    <section xml:id="zend.form.advanced.arrayNotation"><info><title>配列記法</title></info>
+    <section xml:id="zend.form.advanced.arrayNotation"><title>配列記法</title>
         
 
         <para>
@@ -207,7 +207,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.advanced.multiPage"><info><title>複数ページのフォーム</title></info>
+    <section xml:id="zend.form.advanced.multiPage"><title>複数ページのフォーム</title>
         
 
         <para>
@@ -224,7 +224,7 @@
             かつすべてのサブフォームの入力を終えるまでフォームの処理を行わないということができます。
         </para>
 
-        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>登録フォームの例</title></info>
+        <example xml:id="zend.form.advanced.multiPage.registration"><title>登録フォームの例</title>
             
 
             <para>

@@ -1,44 +1,32 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OAuth
  */
 
 namespace Zend\OAuth\Token;
 
-use Zend\OAuth\Config\ConfigInterface as Config,
-    Zend\OAuth,
-    Zend\Uri;
+use Zend\OAuth;
+use Zend\OAuth\Config\ConfigInterface as Config;
+use Zend\Uri;
 
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Access extends AbstractToken
 {
     /**
      * Cast to HTTP header
-     * 
-     * @param  string $url 
+     *
+     * @param  string $url
      * @param  Config $config
-     * @param  null|array $customParams 
-     * @param  null|string $realm 
+     * @param  null|array $customParams
+     * @param  null|string $realm
      * @return string
      * @throws OAuth\Exception\InvalidArgumentException
      */
@@ -59,10 +47,10 @@ class Access extends AbstractToken
 
     /**
      * Cast to HTTP query string
-     * 
-     * @param  mixed $url 
-     * @param  Zend\OAuth\Config $config 
-     * @param  null|array $params 
+     *
+     * @param  mixed $url
+     * @param  Zend\OAuth\Config $config
+     * @param  null|array $params
      * @return string
      * @throws OAuth\Exception\InvalidArgumentException
      */
@@ -82,11 +70,11 @@ class Access extends AbstractToken
 
     /**
      * Get OAuth client
-     * 
-     * @param  array $oauthOptions 
-     * @param  null|string $uri 
+     *
+     * @param  array $oauthOptions
+     * @param  null|string $uri
      * @param  null|array|\Traversable $config
-     * @param  bool $excludeCustomParamsFromHeader 
+     * @param  bool $excludeCustomParamsFromHeader
      * @return OAuth\Client
      */
     public function getHttpClient(array $oauthOptions, $uri = null, $config = null, $excludeCustomParamsFromHeader = true)

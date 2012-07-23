@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Verwenden von Ausnahmen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Verwenden von Ausnahmen</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         vom Zend Framework geworfen werden.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Fangen einer Exception</title></info>
+    <example xml:id="zend.exception.using.example"><title>Fangen einer Exception</title>
         
 
         <para>

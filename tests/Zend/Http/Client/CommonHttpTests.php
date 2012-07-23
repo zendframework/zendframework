@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Client;
-use Zend\Http\Client as HTTPClient,
-    Zend\Http,
-    Zend\Http\Client\Adapter,
-    Zend\Http\Client\Adapter\Exception as AdapterException,
-    Zend\Http\Request,
-    Zend\Http\Response;
+
+use Zend\Http\Client as HTTPClient;
+use Zend\Http;
+use Zend\Http\Client\Adapter;
+use Zend\Http\Client\Adapter\Exception as AdapterException;
+use Zend\Http\Request;
+use Zend\Http\Response;
 
 
 /**
@@ -44,8 +34,6 @@ use Zend\Http\Client as HTTPClient,
  * @category   Zend
  * @package    Zend_Http_Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -957,7 +945,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             throw new AdapterException\RuntimeException("Error requesting test URL");
         }
 
-        $clen = $response->headers()->get('Content-Length');
+        $clen = $response->getHeaders()->get('Content-Length');
 
         if (! (is_array($clen))) {
             $this->markTestSkipped("Didn't get multiple Content-length headers");
@@ -986,7 +974,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->send();
         $request = Request::fromString($this->client->getLastRawRequest());
         $this->assertEquals($content_type,
-                            $request->headers()->get('Content-Type')->getFieldValue());
+                            $request->getHeaders()->get('Content-Type')->getFieldValue());
     }
 
     /**
@@ -1006,7 +994,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function parameterArrayProvider()
+    public static function parameterArrayProvider()
     {
         return array(
             array(
@@ -1047,7 +1035,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidConfigProvider()
+    public static function invalidConfigProvider()
     {
         return array(
             array(false),

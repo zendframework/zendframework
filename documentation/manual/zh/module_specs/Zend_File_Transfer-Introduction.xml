@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.introduction"><info><title>Zend_File_Transfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.introduction"><title>Zend_File_Transfer</title>
 
     
 
@@ -9,7 +9,7 @@
         不同的传输协议如 HTTP、 FTP、 WEBDAV 等等就可以使用相同的 API。
     </para>
 
-    <note><info><title>局限</title></info>
+    <note><title>局限</title>
         
         <para>
             当前的 <code>Zend_File_Transfer</code> 实现包含在 1.6.0 版中，仅限于 HTTP Post 上载。文件下载和
@@ -23,13 +23,13 @@
         <code>Zend_File_Transfer</code> 来处理上载文件。参见下面的例子：
     </para>
 
-    <example xml:id="zend.file.transfer.introduction.example"><info><title> 简单的文件上载表单 </title></info>
+    <example xml:id="zend.file.transfer.introduction.example"><title> 简单的文件上载表单 </title>
         
         <para>
             本例示范了一个基本的文件上传，它使用 <code>Zend_File_Transfer</code>  来完成。
             第一部分是文件表单。在例子中，有一个文件要上载。
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         Choose a file to upload: <input name="uploadedfile" type="file" />
@@ -61,7 +61,7 @@ if (!$adapter->receive()) {
             如果有任何上载错误，就会包含在返回的异常里。
         </para>
 
-        <note><info><title>注意</title></info>
+        <note><title>注意</title>
             
             <para>
                 记住这只是个最简单的用法，应该 <emphasis role="strong">永远不要</emphasis>仅仅把它用于实际的环境，

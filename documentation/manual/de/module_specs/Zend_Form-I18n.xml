@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internationalisierung von Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><title>Internationalisierung von Zend_Form</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         <link linkend="zend.translator">Dokumentation zu Zend_Translator</link>.
     </para>
 
-    <note><info><title>Die Übersetzung kann für jedes Element einzeln abgeschaltet werden</title></info>
+    <note><title>Die Übersetzung kann für jedes Element einzeln abgeschaltet werden</title>
         
 
         <para>
@@ -30,7 +30,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.form.i18n.initialization"><info><title>I18n in Formularen initialisieren</title></info>
+    <section xml:id="zend.form.i18n.initialization"><title>I18n in Formularen initialisieren</title>
         
 
         <para>
@@ -112,7 +112,7 @@ $element->setTranslator($translate);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.i18n.standard"><info><title>Standard I18n Ziele</title></info>
+    <section xml:id="zend.form.i18n.standard"><title>Standard I18n Ziele</title>
         
 
         <para>

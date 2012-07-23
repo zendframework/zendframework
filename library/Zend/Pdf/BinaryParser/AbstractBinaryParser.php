@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_BinaryParser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\BinaryParser;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract utility class for parsing binary files.
@@ -37,8 +27,6 @@ use Zend\Pdf;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractBinaryParser
 {
@@ -179,11 +167,13 @@ abstract class AbstractBinaryParser
         $this->_dataSource->moveToOffset($offset);
     }
 
-    public function getOffset() {
+    public function getOffset()
+    {
        return $this->_dataSource->getOffset();
     }
 
-    public function getSize() {
+    public function getSize()
+    {
        return $this->_dataSource->getSize();
     }
 
@@ -257,7 +247,7 @@ abstract class AbstractBinaryParser
                     $number = ($number << 8) | ord($bytes[$i]);
                 }
             }
-        } else if ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
             $number = ord($bytes[$size - 1]);
             if (($number & 0x80) == 0x80) {
                 /* Negative number. See discussion above.
@@ -312,7 +302,7 @@ abstract class AbstractBinaryParser
             for ($i = 1; $i < $size; $i++) {
                 $number = ($number << 8) | ord($bytes[$i]);
             }
-        } else if ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
             $number = 0;
             for ($i = --$size; $i >= 0; $i--) {
                 $number |= ord($bytes[$i]) << ($i * 8);
@@ -403,7 +393,7 @@ abstract class AbstractBinaryParser
                 return $bytes;
             }
             return iconv('UTF-16BE', $characterSet, $bytes);
-        } else if ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
             if ($characterSet == 'UTF-16LE') {
                 return $bytes;
             }

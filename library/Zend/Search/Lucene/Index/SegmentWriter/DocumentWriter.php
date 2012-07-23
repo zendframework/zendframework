@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Index\SegmentWriter;
@@ -26,15 +15,13 @@ use Zend\Search\Lucene\Analysis\Analyzer;
 use Zend\Search\Lucene\Document;
 use Zend\Search\Lucene\Exception as LuceneException;
 use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Search\Similarity;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
 use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DocumentWriter extends AbstractSegmentWriter
 {
@@ -79,7 +66,7 @@ class DocumentWriter extends AbstractSegmentWriter
     {
         $storedFields = array();
         $docNorms     = array();
-        $similarity   = Similarity::getDefault();
+        $similarity   = AbstractSimilarity::getDefault();
 
         foreach ($document->getFieldNames() as $fieldName) {
             $field = $document->getField($fieldName);
@@ -109,7 +96,7 @@ class DocumentWriter extends AbstractSegmentWriter
                             $this->_termDictionary[$termKey] = $term;
                             $this->_termDocs[$termKey] = array();
                             $this->_termDocs[$termKey][$this->_docCount] = array();
-                        } else if (!isset($this->_termDocs[$termKey][$this->_docCount])) {
+                        } elseif (!isset($this->_termDocs[$termKey][$this->_docCount])) {
                             // Existing term, but new term entry
                             $this->_termDocs[$termKey][$this->_docCount] = array();
                         }
@@ -127,7 +114,7 @@ class DocumentWriter extends AbstractSegmentWriter
                                                                                $document->boost*
                                                                                $field->boost ));
                     }
-                } else if (($fieldUtf8Value = $field->getUtf8Value()) == '') {
+                } elseif (($fieldUtf8Value = $field->getUtf8Value()) == '') {
                     // Field contains empty value. Treat it as non-indexed and non-tokenized
                     $field = clone($field);
                     $field->isIndexed = $field->isTokenized = false;
@@ -140,7 +127,7 @@ class DocumentWriter extends AbstractSegmentWriter
                         $this->_termDictionary[$termKey] = $term;
                         $this->_termDocs[$termKey] = array();
                         $this->_termDocs[$termKey][$this->_docCount] = array();
-                    } else if (!isset($this->_termDocs[$termKey][$this->_docCount])) {
+                    } elseif (!isset($this->_termDocs[$termKey][$this->_docCount])) {
                         // Existing term, but new term entry
                         $this->_termDocs[$termKey][$this->_docCount] = array();
                     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><info><title>Déclarer les règles Getopt</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><title>Déclarer les règles Getopt</title>
     
 
     <para>
@@ -23,7 +23,7 @@
         configuration</link> pour la référence des options disponibles.
     </para>
 
-    <section xml:id="zend.console.getopt.rules.short"><info><title>Déclarer des options avec la syntaxe courte</title></info>
+    <section xml:id="zend.console.getopt.rules.short"><title>Déclarer des options avec la syntaxe courte</title>
         
 
         <para>
@@ -36,7 +36,7 @@
             ("<emphasis>:</emphasis>") indique un drapeau qui exige un paramètre.
         </para>
 
-        <example xml:id="zend.console.getopt.rules.short.example"><info><title>Utiliser la syntaxe courte</title></info>
+        <example xml:id="zend.console.getopt.rules.short.example"><title>Utiliser la syntaxe courte</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -58,7 +58,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.rules.long"><info><title>Déclarer des options avec la syntaxe longue</title></info>
+    <section xml:id="zend.console.getopt.rules.long"><title>Déclarer des options avec la syntaxe longue</title>
         
 
         <para>
@@ -105,7 +105,7 @@ $opts = new Zend_Console_Getopt('abp:');
             décrire à l'utilisateur comment employer votre programme.
         </para>
 
-        <example xml:id="zend.console.getopt.rules.long.example"><info><title>Utiliser la syntaxe longue</title></info>
+        <example xml:id="zend.console.getopt.rules.long.example"><title>Utiliser la syntaxe longue</title>
             
 
             <programlisting language="php"><![CDATA[

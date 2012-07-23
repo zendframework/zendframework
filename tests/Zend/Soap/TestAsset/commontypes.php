@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace ZendTest\Soap\TestAsset;
@@ -119,8 +108,6 @@ function TestFunc9($foo, $bar)
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TestFixingMultiplePrototypes
 {
@@ -132,7 +119,7 @@ class TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a=100, $b=200, $d=300)
     {
 
     }
@@ -142,16 +129,15 @@ class TestFixingMultiplePrototypes
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Test {
+class Test
+{
     /**
      * Test Function 1
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -162,7 +148,7 @@ class Test {
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -174,7 +160,7 @@ class Test {
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -184,7 +170,7 @@ class Test {
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -207,8 +193,6 @@ class AutoDiscoverTestClass1
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AutoDiscoverTestClass2
 {
@@ -246,8 +230,6 @@ class AutoDiscoverTestClass2
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ComplexTypeB
 {
@@ -265,8 +247,6 @@ class ComplexTypeB
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ComplexTypeA
 {
@@ -280,8 +260,6 @@ class ComplexTypeA
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ComplexTest
 {
@@ -295,8 +273,6 @@ class ComplexTest
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ComplexObjectStructure
 {
@@ -325,8 +301,6 @@ class ComplexObjectStructure
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ComplexObjectWithObjectStructure
 {
@@ -340,8 +314,6 @@ class ComplexObjectWithObjectStructure
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MyService
 {
@@ -349,20 +321,23 @@ class MyService
      *    @param string $foo
      *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 }
 
@@ -370,8 +345,6 @@ class MyService
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MyServiceSequence
 {
@@ -379,27 +352,31 @@ class MyServiceSequence
      *    @param string $foo
      *    @return string[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return string[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[][][]
      */
-    public function bazNested($baz) {
+    public function bazNested($baz)
+    {
     }
 }
 
@@ -407,8 +384,6 @@ class MyServiceSequence
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MyResponse
 {
@@ -422,8 +397,6 @@ class MyResponse
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Recursion
 {
@@ -450,8 +423,6 @@ function OneWay($message)
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class NoReturnType
 {
@@ -467,13 +438,14 @@ class NoReturnType
 
 /* Client test classes */
 /** Test Class */
-class TestClass {
+class TestClass
+{
     /**
      * Test Function 1
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -484,7 +456,7 @@ class TestClass {
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -496,7 +468,7 @@ class TestClass {
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -506,14 +478,15 @@ class TestClass {
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
 }
 
 /** Test class 2 */
-class TestData1 {
+class TestData1
+{
     /**
      * Property1
      *
@@ -530,7 +503,8 @@ class TestData1 {
 }
 
 /** Test class 2 */
-class TestData2 {
+class TestData2
+{
     /**
      * Property1
      *
@@ -546,7 +520,8 @@ class TestData2 {
      public $property2;
 }
 
-class MockSoapServer {
+class MockSoapServer
+{
     public $handle = null;
     public function handle()
     {
@@ -555,9 +530,11 @@ class MockSoapServer {
     public function __call($name, $args) {}
 }
 
-class MockServer extends \Zend\Soap\Server {
+class MockServer extends \Zend\Soap\Server
+{
     public $mockSoapServer = null;
-    protected function _getSoap() {
+    protected function _getSoap()
+    {
         $this->mockSoapServer = new MockSoapServer();
         return $this->mockSoapServer;
     }
@@ -572,7 +549,7 @@ class ServerTestClass
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -583,7 +560,7 @@ class ServerTestClass
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -595,7 +572,7 @@ class ServerTestClass
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -605,7 +582,7 @@ class ServerTestClass
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -615,7 +592,7 @@ class ServerTestClass
      *
      * @return void
      */
-    function testFunc5()
+    public function testFunc5()
     {
         trigger_error("Test Message", E_USER_ERROR);
     }
@@ -640,13 +617,13 @@ class TestLocalSoapClient extends \SoapClient
      * @param string $wsdl
      * @param array $options
      */
-    function __construct(\Zend\Soap\Server $server, $wsdl, $options)
+    public function __construct(\Zend\Soap\Server $server, $wsdl, $options)
     {
         $this->server = $server;
         parent::__construct($wsdl, $options);
     }
 
-    function __doRequest($request, $location, $action, $version, $one_way = 0)
+    public function __doRequest($request, $location, $action, $version, $one_way = 0)
     {
         ob_start();
         $this->server->handle($request);

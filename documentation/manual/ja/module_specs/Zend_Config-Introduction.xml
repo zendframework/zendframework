@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><title>導入</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         の二種類で、テキストファイルに格納された設定データを使用できるようになっています。.
     </para>
 
-    <example xml:id="zend.config.introduction.example.using"><info><title>Zend_Config の使用例</title></info>
+    <example xml:id="zend.config.introduction.example.using"><title>Zend_Config の使用例</title>
         
 
         <para>
@@ -75,7 +75,7 @@ $db = Zend_Db::factory($config->database);
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
 
-    <example xml:id="zend.config.introduction.example.file.php"><info><title>Zend_Config における PHP 設定ファイルの使用法</title></info>
+    <example xml:id="zend.config.introduction.example.file.php"><title>Zend_Config における PHP 設定ファイルの使用法</title>
         
 
         <para>

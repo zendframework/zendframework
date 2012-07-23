@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.sessions"><info><title>Gérer les sessions dans ZF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.sessions"><title>Gérer les sessions dans ZF</title>
     
 
-    <section xml:id="learning.multiuser.sessions.intro"><info><title>Introduction aux sessions</title></info>
+    <section xml:id="learning.multiuser.sessions.intro"><title>Introduction aux sessions</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="learning.multiuser.sessions.basic-usage"><info><title>Utilisation classique de Zend_Session</title></info>
+    <section xml:id="learning.multiuser.sessions.basic-usage"><title>Utilisation classique de Zend_Session</title>
         
 
         <para>
@@ -95,7 +95,7 @@ if ($mysession->counter > 1999) {
         </para>
     </section>
 
-    <section xml:id="learning.multiuser.sessions.advanced-usage"><info><title>Utilisation avancée de Zend_Session</title></info>
+    <section xml:id="learning.multiuser.sessions.advanced-usage"><title>Utilisation avancée de Zend_Session</title>
         
 
         <para>

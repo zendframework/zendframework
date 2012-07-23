@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>简介</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>简介</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         使用<code>Zend_View</code>主要有两步： 1. 你的Controller建立一个<code>Zend_View</code>实例，并将需要的变量传递给它； 2. Controller告诉<code>Zend_View</code>解析一个特定的视图，生成View输出的内容。
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>控制器脚本</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>控制器脚本</title>
         
 
         <para>
@@ -49,7 +49,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>视图脚本</title></info>
+    <section xml:id="zend.view.introduction.view"><title>视图脚本</title>
 
         
 
@@ -88,7 +88,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.options"><info><title>选项</title></info>
+    <section xml:id="zend.view.introduction.options"><title>选项</title>
         
 
         <para>
@@ -131,7 +131,7 @@ base/path/
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.view.introduction.accessors"><info><title>实用访问器</title></info>
+    <section xml:id="zend.view.introduction.accessors"><title>实用访问器</title>
         
 
         <para>

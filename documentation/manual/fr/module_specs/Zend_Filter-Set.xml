@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>Classes de filtre standards</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><title>Classes de filtre standards</title>
     
 
     <para>
@@ -62,7 +62,7 @@
         </xi:fallback>
     </xi:include>
 
-    <section xml:id="zend.filter.set.stripnewlines"><info><title>Int</title></info>
+    <section xml:id="zend.filter.set.stripnewlines"><title>Int</title>
         
 
         <para>
@@ -71,7 +71,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.striptags"><info><title>StripTags</title></info>
+    <section xml:id="zend.filter.set.striptags"><title>StripTags</title>
         
 
         <para>

@@ -1,27 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Akismet
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Akismet;
-use Zend\Http,
-    Zend\Uri;
+
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
+use Zend\Uri;
 
 /**
  * Akismet REST service implementation
@@ -29,40 +20,43 @@ use Zend\Http,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Akismet
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Akismet extends \Zend\Service\AbstractService
+class Akismet
 {
     /**
      * Akismet API key
      * @var string
      */
-    protected $_apiKey;
+    protected $apiKey;
 
     /**
      * Blog URL
      * @var string
      */
-    protected $_blogUrl;
+    protected $blogUrl;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
 
     /**
      * Charset used for encoding
      * @var string
      */
-    protected $_charset = 'UTF-8';
+    protected $charset = 'UTF-8';
 
     /**
      * TCP/IP port to use in requests
      * @var int
      */
-    protected $_port = 80;
+    protected $port = 80;
 
     /**
      * User Agent string to send in requests
      * @var string
      */
-    protected $_userAgent;
+    protected $userAgent;
 
     /**
      * Constructor
@@ -71,11 +65,34 @@ class Akismet extends \Zend\Service\AbstractService
      * @param string $blog Blog URL
      * @return void
      */
-    public function __construct($apiKey, $blog)
+    public function __construct($apiKey, $blog, HttpClient $httpClient = null)
     {
-        $this->setBlogUrl($blog)
-             ->setApiKey($apiKey)
-             ->setUserAgent('Zend Framework/' . \Zend\Version::VERSION . ' | Akismet/1.11');
+        $this->setBlogUrl($blog);
+        $this->setApiKey($apiKey);
+        $this->setHttpClient(($httpClient) ?: new HttpClient);
+        $this->setUserAgent('Zend Framework/' . \Zend\Version::VERSION . ' | Akismet/1.11');
+    }
+
+    /**
+     * Retrieve API key
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
+    /**
+     * Set API key
+     *
+     * @param string $apiKey
+     * @return Zend_Service_Akismet
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
+        return $this;
     }
 
     /**
@@ -85,7 +102,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function getBlogUrl()
     {
-        return $this->_blogUrl;
+        return $this->blogUrl;
     }
 
     /**
@@ -101,30 +118,26 @@ class Akismet extends \Zend\Service\AbstractService
             throw new Exception\InvalidArgumentException('Invalid url provided for blog');
         }
 
-        $this->_blogUrl = $blogUrl;
+        $this->blogUrl = $blogUrl;
         return $this;
     }
 
     /**
-     * Retrieve API key
-     *
-     * @return string
+     * @param HttpClient $httpClient
+     * @return Akismet
      */
-    public function getApiKey()
+    public function setHttpClient(HttpClient $httpClient)
     {
-        return $this->_apiKey;
+        $this->httpClient = $httpClient;
+        return $this;
     }
 
     /**
-     * Set API key
-     *
-     * @param string $apiKey
-     * @return Zend_Service_Akismet
+     * @return HttpClient
      */
-    public function setApiKey($apiKey)
+    public function getHttpClient()
     {
-        $this->_apiKey = $apiKey;
-        return $this;
+        return $this->httpClient;
     }
 
     /**
@@ -134,7 +147,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function getCharset()
     {
-        return $this->_charset;
+        return $this->charset;
     }
 
     /**
@@ -145,7 +158,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function setCharset($charset)
     {
-        $this->_charset = $charset;
+        $this->charset = $charset;
         return $this;
     }
 
@@ -156,7 +169,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function getPort()
     {
-        return $this->_port;
+        return $this->port;
     }
 
     /**
@@ -172,7 +185,7 @@ class Akismet extends \Zend\Service\AbstractService
             throw new Exception\InvalidArgumentException('Invalid port');
         }
 
-        $this->_port = $port;
+        $this->port = $port;
         return $this;
     }
 
@@ -183,7 +196,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function getUserAgent()
     {
-        return $this->_userAgent;
+        return $this->userAgent;
     }
 
     /**
@@ -203,35 +216,8 @@ class Akismet extends \Zend\Service\AbstractService
             throw new Exception\InvalidArgumentException('Invalid User Agent string; must be of format "Application name/version | Akismet/version"');
         }
 
-        $this->_userAgent = $userAgent;
+        $this->userAgent = $userAgent;
         return $this;
-    }
-
-    /**
-     * Post a request
-     *
-     * @param string $host
-     * @param string $path
-     * @param array  $params
-     * @return mixed
-     */
-    protected function _post($host, $path, array $params)
-    {
-        $uri    = 'http://' . $host . ':' . $this->getPort() . $path;
-        $client = $this->getHttpClient();
-        $client->setUri($uri);
-        $client->setOptions(array(
-            'useragent'    => $this->getUserAgent(),
-        ));
-
-        $client->setHeaders(array(
-            'Host'         => $host,
-            'Content-Type' => 'application/x-www-form-urlencoded; charset=' . $this->getCharset()
-        ));
-        $client->setParameterPost($params);
-
-        $client->setMethod(Http\Request::METHOD_POST);
-        return $client->send();
     }
 
     /**
@@ -251,7 +237,7 @@ class Akismet extends \Zend\Service\AbstractService
             $blog = $this->getBlogUrl();
         }
 
-        $response = $this->_post('rest.akismet.com', '/1.1/verify-key', array(
+        $response = $this->post('rest.akismet.com', '/1.1/verify-key', array(
             'key'  => $key,
             'blog' => $blog
         ));
@@ -259,26 +245,7 @@ class Akismet extends \Zend\Service\AbstractService
         return ('valid' == $response->getBody());
     }
 
-    /**
-     * Perform an API call
-     *
-     * @param string $path
-     * @param array $params
-     * @return Zend\Http\Response
-     * @throws Zend\Service\Exception if missing user_ip or user_agent fields
-     */
-    protected function _makeApiCall($path, $params)
-    {
-        if (empty($params['user_ip']) || empty($params['user_agent'])) {
-            throw new Exception\InvalidArgumentException('Missing required Akismet fields (user_ip and user_agent are required)');
-        }
 
-        if (!isset($params['blog'])) {
-            $params['blog'] = $this->getBlogUrl();
-        }
-
-        return $this->_post($this->getApiKey() . '.rest.akismet.com', $path, $params);
-    }
 
     /**
      * Check a comment for spam
@@ -308,7 +275,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function isSpam($params)
     {
-        $response = $this->_makeApiCall('/1.1/comment-check', $params);
+        $response = $this->makeApiCall('/1.1/comment-check', $params);
 
         $return = trim($response->getBody());
 
@@ -338,7 +305,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function submitSpam($params)
     {
-        $response = $this->_makeApiCall('/1.1/submit-spam', $params);
+        $response = $this->makeApiCall('/1.1/submit-spam', $params);
         $value    = trim($response->getBody());
         if ('invalid' == $value) {
             throw new Exception\InvalidArgumentException('Invalid API key');
@@ -365,6 +332,56 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function submitHam($params)
     {
-        $response = $this->_makeApiCall('/1.1/submit-ham', $params);
+        $this->makeApiCall('/1.1/submit-ham', $params);
     }
+
+    /**
+     * Perform an API call
+     *
+     * @param string $path
+     * @param array $params
+     * @return Zend\Http\Response
+     * @throws Zend\Service\Exception if missing user_ip or user_agent fields
+     */
+    protected function makeApiCall($path, $params)
+    {
+        if (empty($params['user_ip']) || empty($params['user_agent'])) {
+            throw new Exception\InvalidArgumentException('Missing required Akismet fields (user_ip and user_agent are required)');
+        }
+
+        if (!isset($params['blog'])) {
+            $params['blog'] = $this->getBlogUrl();
+        }
+
+        return $this->post($this->getApiKey() . '.rest.akismet.com', $path, $params);
+    }
+
+
+    /**
+     * Post a request
+     *
+     * @param string $host
+     * @param string $path
+     * @param array  $params
+     * @return mixed
+     */
+    protected function post($host, $path, array $params)
+    {
+        $uri    = 'http://' . $host . ':' . $this->getPort() . $path;
+        $client = $this->getHttpClient();
+        $client->setUri($uri);
+        $client->setOptions(array(
+            'useragent'    => $this->getUserAgent(),
+        ));
+
+        $client->setHeaders(array(
+            'Host'         => $host,
+            'Content-Type' => 'application/x-www-form-urlencoded; charset=' . $this->getCharset()
+        ));
+        $client->setParameterPost($params);
+
+        $client->setMethod(HttpRequest::METHOD_POST);
+        return $client->send();
+    }
+
 }

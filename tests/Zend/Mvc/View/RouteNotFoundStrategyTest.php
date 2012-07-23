@@ -1,41 +1,28 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\EventManager,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Mvc\Application,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\View\RouteNotFoundStrategy,
-    Zend\View\Model\ViewModel;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\EventManager\EventManager;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\Application;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\View\RouteNotFoundStrategy;
+use Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RouteNotFoundStrategyTest extends TestCase
 {
@@ -265,7 +252,7 @@ class RouteNotFoundStrategyTest extends TestCase
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
 
-        foreach (array('dispatch' => -90, 'dispatch.error' => 1) as $event => $expectedPriority) {
+        foreach (array(MvcEvent::EVENT_DISPATCH => -90, MvcEvent::EVENT_DISPATCH_ERROR => 1) as $event => $expectedPriority) {
             $listeners        = $events->getListeners($event);
             $expectedCallback = array($this->strategy, 'prepareNotFoundViewModel');
             $found            = false;
@@ -281,7 +268,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
 
-        $listeners        = $events->getListeners('dispatch.error');
+        $listeners        = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $expectedCallback = array($this->strategy, 'detectNotFoundError');
         $expectedPriority = 1;
         $found            = false;
@@ -301,14 +288,14 @@ class RouteNotFoundStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(2, count($listeners));
         $events->detachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(0, count($listeners));
     }
 }

@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub\Subscriber;
 
-use Zend\Feed\PubSubHubbub,
-    Zend\Uri;
+use Zend\Feed\PubSubHubbub;
+use Zend\Uri;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback extends PubSubHubbub\AbstractCallbackInterface
+class Callback extends PubSubHubbub\AbstractCallback
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL
@@ -37,7 +25,7 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
      * @var string
      */
     protected $_feedUpdate = null;
-    
+
     /**
      * Holds a manually set subscription key (i.e. identifies a unique
      * subscription) which is typical when it is not passed in the query string
@@ -47,14 +35,14 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
      * @var string
      */
     protected $_subscriptionKey = null;
-    
+
     /**
      * After verification, this is set to the verified subscription's data.
      *
      * @var array
      */
     protected $_currentSubscriptionData = null;
-    
+
     /**
      * Set a subscription key to use for the current callback request manually.
      * Required if usePathParameter is enabled for the Subscriber.
@@ -99,14 +87,13 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
                 || $this->_getHeader('Content-Type') == 'application/rdf+xml')
         ) {
             $this->setFeedUpdate($this->_getRawBody());
-            $this->getHttpResponse()
-                 ->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());
+            $this->getHttpResponse()->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());
         /**
          * Handle any (un)subscribe confirmation requests
          */
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $data = $this->_currentSubscriptionData;
-            $this->getHttpResponse()->setBody($httpGetData['hub_challenge']);
+            $this->getHttpResponse()->setContent($httpGetData['hub_challenge']);
             $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
             if (isset($httpGetData['hub_lease_seconds'])) {
                 $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
@@ -116,7 +103,7 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
          * Hey, C'mon! We tried everything else!
          */
         } else {
-            $this->getHttpResponse()->setHttpResponseCode(404);
+            $this->getHttpResponse()->setStatusCode(404);
         }
         if ($sendResponseNow) {
             $this->sendResponse();
@@ -142,9 +129,9 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
             return false;
         }
         $required = array(
-            'hub_mode', 
+            'hub_mode',
             'hub_topic',
-            'hub_challenge', 
+            'hub_challenge',
             'hub_verify_token',
         );
         foreach ($required as $key) {

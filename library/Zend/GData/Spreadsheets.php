@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -29,8 +18,6 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Spreadsheets extends GData
 {
@@ -78,7 +65,7 @@ class Spreadsheets extends GData
     {
         if ($location == null) {
             $uri = self::SPREADSHEETS_FEED_URI;
-        } else if ($location instanceof Spreadsheets\DocumentQuery) {
+        } elseif ($location instanceof Spreadsheets\DocumentQuery) {
             if ($location->getDocumentType() == null) {
                 $location->setDocumentType('spreadsheets');
             }
@@ -123,7 +110,7 @@ class Spreadsheets extends GData
                 $location->setDocumentType('worksheets');
             }
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Spreadsheets\SpreadsheetEntry) {
+        } elseif ($location instanceof Spreadsheets\SpreadsheetEntry) {
             $uri = $location->getLink(self::WORKSHEETS_FEED_LINK_URI)->href;
         } else {
             $uri = $location;
@@ -162,7 +149,7 @@ class Spreadsheets extends GData
     {
         if ($location instanceof Spreadsheets\CellQuery) {
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Spreadsheets\WorksheetEntry) {
+        } elseif ($location instanceof Spreadsheets\WorksheetEntry) {
             $uri = $location->getLink(self::CELL_FEED_LINK_URI)->href;
         } else {
             $uri = $location;
@@ -197,7 +184,7 @@ class Spreadsheets extends GData
     {
         if ($location instanceof Spreadsheets\ListQuery) {
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Spreadsheets\WorksheetEntry) {
+        } elseif ($location instanceof Spreadsheets\WorksheetEntry) {
             $uri = $location->getLink(self::LIST_FEED_LINK_URI)->href;
         } else {
             $uri = $location;
@@ -345,7 +332,7 @@ class Spreadsheets extends GData
         $cellQuery = null;
         if ($location instanceof Spreadsheets\CellQuery) {
             $cellQuery = $location;
-        } else if ($location instanceof Spreadsheets\WorksheetEntry) {
+        } elseif ($location instanceof Spreadsheets\WorksheetEntry) {
             $url = $location->getLink(self::CELL_FEED_LINK_URI)->href;
             $cellQuery = new Spreadsheets\CellQuery($url);
         } else {

@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader\Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Entry;
 
-use Zend\Feed\Reader,
-    DOMElement,
-    DOMXPath;
+use DOMElement;
+use DOMXPath;
+use Zend\Feed\Reader;
 
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Atom extends AbstractEntry implements EntryInterface
 {
@@ -59,7 +47,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         $threadClass = Reader\Reader::getPluginLoader()->getClassName('Thread\\Entry');
         $this->_extensions['Thread\\Entry'] = new $threadClass($entry, $entryKey, $type);
-        
+
         $threadClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Entry');
         $this->_extensions['DublinCore\\Entry'] = new $threadClass($entry, $entryKey, $type);
     }
@@ -329,7 +317,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         return $this->_data['commentfeedlink'];
     }
-    
+
     /**
      * Get category data as a Reader\Reader_Collection_Category object
      *
@@ -342,7 +330,7 @@ class Atom extends AbstractEntry implements EntryInterface
         }
 
         $categoryCollection = $this->getExtension('Atom')->getCategories();
-        
+
         if (count($categoryCollection) == 0) {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
@@ -351,7 +339,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         return $this->_data['categories'];
     }
-    
+
     /**
      * Get source feed metadata from the entry
      *
@@ -367,13 +355,14 @@ class Atom extends AbstractEntry implements EntryInterface
 
         $this->_data['source'] = $source;
 
-        return $this->_data['source']; 
+        return $this->_data['source'];
     }
 
     /**
      * Set the XPath query (incl. on all Extensions)
      *
      * @param DOMXPath $xpath
+     * @return void
      */
     public function setXpath(DOMXPath $xpath)
     {

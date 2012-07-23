@@ -15,7 +15,7 @@ use Zend\ModuleManager\ModuleEvent;
 
 /**
  * Init trigger
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener

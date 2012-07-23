@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><title>Einführung</title>
     
 
     <para>
@@ -11,14 +11,14 @@
         Vorhaben.
     </para>
 
-    <section xml:id="zend.navigation.introduction.concepts"><info><title>Seiten und Container</title></info>
+    <section xml:id="zend.navigation.introduction.concepts"><title>Seiten und Container</title>
         
 
         <para>
             Es gibt zwei grundsätzliche Konzepte in <classname>Zend_Navigation</classname>:
         </para>
 
-        <section xml:id="zend.navigation.introduction.pages"><info><title>Seiten</title></info>
+        <section xml:id="zend.navigation.introduction.pages"><title>Seiten</title>
             
 
             <para>
@@ -36,7 +36,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.navigation.introduction.containers"><info><title>Container</title></info>
+        <section xml:id="zend.navigation.introduction.containers"><title>Container</title>
             
 
             <para>
@@ -64,7 +64,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.navigation.introduction.separation"><info><title>Trennung von Daten (Modell) und Darstellung (View)</title></info>
+    <section xml:id="zend.navigation.introduction.separation"><title>Trennung von Daten (Modell) und Darstellung (View)</title>
         
 
         <para>

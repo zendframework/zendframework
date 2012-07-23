@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_ReCaptcha
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\ReCaptcha;
@@ -27,8 +16,6 @@ use Zend\Service\ReCaptcha;
  * @category   Zend
  * @package    Zend_Service_ReCaptcha
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_ReCaptcha
  */
@@ -38,7 +25,7 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
     protected $privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY;
     protected $mailHide   = null;
 
-    public function setUp() 
+    public function setUp()
     {
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('Zend\Service\ReCaptcha tests skipped due to missing mcrypt extension');
@@ -49,13 +36,14 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $this->mailHide = new ReCaptcha\MailHide();
     }
 
-    public function testSetGetPrivateKey() 
+    public function testSetGetPrivateKey()
     {
         $this->mailHide->setPrivateKey($this->privateKey);
         $this->assertSame($this->privateKey, $this->mailHide->getPrivateKey());
     }
 
-    public function testSetGetEmail() {
+    public function testSetGetEmail()
+    {
         $mail = 'mail@example.com';
 
         $this->mailHide->setEmail($mail);
@@ -63,7 +51,8 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('example.com', $this->mailHide->getEmailDomainPart());
     }
 
-    public function testEmailLocalPart() {
+    public function testEmailLocalPart()
+    {
         $this->mailHide->setEmail('abcd@example.com');
         $this->assertSame('a', $this->mailHide->getEmailLocalPart());
 
@@ -74,7 +63,8 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('abcd', $this->mailHide->getEmailLocalPart());
     }
 
-    public function testConstructor() {
+    public function testConstructor()
+    {
         $mail = 'mail@example.com';
 
         $options = array(
@@ -94,7 +84,8 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($options['lang'], $_options['lang']);
     }
 
-    protected function _checkHtml($html) {
+    protected function _checkHtml($html)
+    {
         $server = ReCaptcha\MailHide::MAILHIDE_SERVER;
         $pubKey = $this->publicKey;
 
@@ -103,7 +94,8 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $this->assertRegexp('/c\=[a-zA-Z0-9_=-]+\\\'/', $html);
     }
 
-    public function testGetHtml() {
+    public function testGetHtml()
+    {
         $mail = 'mail@example.com';
 
         $this->mailHide->setEmail($mail);
@@ -115,14 +107,15 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $this->_checkHtml($html);
     }
 
-    public function testGetHtmlWithNoEmail() {
+    public function testGetHtmlWithNoEmail()
+    {
         $this->setExpectedException('Zend\\Service\\ReCaptcha\\MailHideException');
 
         $html = $this->mailHide->getHtml();
     }
 
-    public function testGetHtmlWithMissingPublicKey() {
-
+    public function testGetHtmlWithMissingPublicKey()
+    {
         $mail = 'mail@example.com';
 
         $this->mailHide->setEmail($mail);
@@ -132,7 +125,8 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $html = $this->mailHide->getHtml();
     }
 
-    public function testGetHtmlWithMissingPrivateKey() {
+    public function testGetHtmlWithMissingPrivateKey()
+    {
         $this->setExpectedException('Zend\\Service\\ReCaptcha\\MailHideException');
 
         $mail = 'mail@example.com';
@@ -143,7 +137,8 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $html = $this->mailHide->getHtml();
     }
 
-    public function testGetHtmlWithParamter() {
+    public function testGetHtmlWithParamter()
+    {
         $mail = 'mail@example.com';
 
         $this->mailHide->setPublicKey($this->publicKey);

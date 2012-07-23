@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_StorageService
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\StorageService;
 
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Factory,
-    Zend\Config\Config,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Factory;
+use Zend\Config\Config;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on
@@ -33,8 +22,6 @@ use Zend\Cloud\StorageService\Adapter,
  * @category   Zend
  * @package    Zend_Cloud_StorageService
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class TestCase extends PHPUnitTestCase
 {
@@ -48,7 +35,7 @@ abstract class TestCase extends PHPUnitTestCase
     protected $_dummyNamePrefix = 'TestItem';
 
     protected $_dummyDataPrefix = 'TestData';
-    
+
     protected $_clientType = 'stdClass';
 
     /**
@@ -75,7 +62,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_a($this->_commonStorage->getClient(), $this->_clientType));
+        $this->assertTrue(is_a($this->_commonStorage->getClient(), $this->_clientType));
     }
 
 //    public function testNoParams()
@@ -331,7 +318,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        }
 //    }
 
-	/**
+    /**
      * Test list items
      *
      * @return void

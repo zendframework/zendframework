@@ -12,9 +12,9 @@
   </para>
 
   <programlisting language="php"><![CDATA[
-use Zend\Stdlib\DispatchableInterface,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\DispatchableInterface;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
 
 class Foo implements DispatchableInterface
 {
@@ -119,7 +119,7 @@ public function setServiceManager(ServiceManager $serviceManager);
     </section>
 
     <section xml:id="zend.mvc.controllers.interfaces.event-manager-aware">
-        <info><title>EventManagerAware</title></info>
+        <title>EventManagerAware</title>
 
         <para>
             Typically, it's nice to be able to tie into a controller's workflow
@@ -152,7 +152,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventsCapableInterface;
 
 public function setEventManager(EventManagerInterface $events);
-public function events();
+public function getEventManager();
 ]]></programlisting>
     </section>
 
@@ -209,8 +209,8 @@ public function events();
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Loader\Broker,
-    Zend\Mvc\Controller\PluginBroker;
+use Zend\Loader\Broker;
+use Zend\Mvc\Controller\PluginBroker;
 
 public function setBroker(Broker $broker)
 {
@@ -235,7 +235,7 @@ public function plugin($plugin, array $options = null)
   </section>
 
   <section xml:id="zend.mvc.controllers.action-controller">
-    <title>The ActionController</title>
+    <title>The AbstractActionController</title>
 
     <para>
       Implementing each of the above interfaces is a lesson in
@@ -245,7 +245,7 @@ public function plugin($plugin, array $options = null)
 
     <para>
       The first is
-      <classname>Zend\Mvc\Controller\ActionController</classname>. This
+      <classname>Zend\Mvc\Controller\AbstractActionController</classname>. This
       controller implements each of the above interfaces, and uses the
       following assumptions:
     </para>
@@ -285,7 +285,7 @@ public function plugin($plugin, array $options = null)
 
     <para>
       Essentially, a route mapping to an
-      <classname>ActionController</classname> needs to return both
+      <classname>AbstractActionController</classname> needs to return both
       "controller" and "action" keys in its matches.
     </para>
 
@@ -296,9 +296,9 @@ public function plugin($plugin, array $options = null)
     <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function bazAction()
     {
@@ -316,7 +316,7 @@ class BarController extends ActionController
       <title>Interfaces and Collaborators</title>
 
       <para>
-        <classname>ActionController</classname> implements each of the
+        <classname>AbstractActionController</classname> implements each of the
         following interfaces:
       </para>
 
@@ -372,7 +372,7 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\ActionController</classname>
+            <classname>Zend\Mvc\Controller\AbstractActionController</classname>
           </para>
         </listitem>
       </itemizedlist>
@@ -385,11 +385,11 @@ class BarController extends ActionController
   </section>
 
   <section xml:id="zend.mvc.controllers.restful-controller">
-    <title>The RestfulController</title>
+    <title>The AbstractRestfulController</title>
 
     <para>
       The second abstract controller ZF2 provides is
-      <classname>Zend\Mvc\Controller\RestfulController</classname>. This
+      <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>. This
       controller provides a naive RESTful implementation that simply maps
       HTTP request methods to controller methods, using the following
       matrix:
@@ -447,8 +447,8 @@ class BarController extends ActionController
 
     <para>
       Additionally, you can map "action" methods to the
-      <classname>RestfulController</classname>, just as you would in the
-      <classname>ActionController</classname>; these methods will be suffixed
+      <classname>AbstractRestfulController</classname>, just as you would in the
+      <classname>AbstractActionController</classname>; these methods will be suffixed
       with "Action", differentiating them from the RESTful
       methods listed above. This allows you to perform such actions as
       providing forms used to submit to the various RESTful methods, or
@@ -459,7 +459,7 @@ class BarController extends ActionController
       <title>Interfaces and Collaborators</title>
 
       <para>
-        <classname>RestfulController</classname> implements each of the
+        <classname>AbstractRestfulController</classname> implements each of the
         following interfaces:
       </para>
 
@@ -515,7 +515,7 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\ActionController</classname>
+            <classname>Zend\Mvc\Controller\AbstractActionController</classname>
           </para>
         </listitem>
       </itemizedlist>

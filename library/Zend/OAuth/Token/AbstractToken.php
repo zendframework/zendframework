@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OAuth
  */
 
 namespace Zend\OAuth\Token;
 
-use Zend\Http\Response as HTTPResponse,
-    Zend\OAuth\Http\Utility as HTTPUtility;
+use Zend\Http\Response as HTTPResponse;
+use Zend\OAuth\Http\Utility as HTTPUtility;
 
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractToken implements TokenInterface
 {
@@ -41,14 +29,14 @@ abstract class AbstractToken implements TokenInterface
 
     /**
      * Token parameters
-     * 
+     *
      * @var array
      */
     protected $_params = array();
 
     /**
      * OAuth response object
-     * 
+     *
      * @var \Zend\Http\Response
      */
     protected $_response = null;
@@ -265,11 +253,11 @@ abstract class AbstractToken implements TokenInterface
         }
         return $params;
     }
-    
+
     /**
      * Limit serialisation stored data to the parameters
      */
-    public function __sleep() 
+    public function __sleep()
     {
         return array('_params');
     }
@@ -277,7 +265,7 @@ abstract class AbstractToken implements TokenInterface
     /**
      * After serialisation, re-instantiate a HTTP utility class for use
      */
-    public function __wakeup() 
+    public function __wakeup()
     {
         if ($this->_httpUtility === null) {
             $this->_httpUtility = new HTTPUtility;

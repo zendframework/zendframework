@@ -1,28 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Delicious
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Delicious;
 
-use \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+use DateTime;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
 
 /**
  * Zend_Service_Delicious is a concrete implementation of the del.icio.us web service
@@ -30,8 +20,6 @@ use \Zend\Rest\Client as RestClient,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Delicious
 {
@@ -58,32 +46,30 @@ class Delicious
     const JSON_URL     = '/feeds/json/url/data';
 
     /**
-     * Zend_Service_Rest instance
-     *
-     * @var Zend_Service_Rest
+     * @var HttpClient
      */
-    protected $_rest;
+    protected $httpClient = null;
 
     /**
      * Username
      *
      * @var string
      */
-    protected $_authUname;
+    protected $authUname;
 
     /**
      * Password
      *
      * @var string
      */
-    protected $_authPass;
+    protected $authPass;
 
     /**
      * Microtime of last request
      *
      * @var float
      */
-    protected static $_lastRequestTime = 0;
+    protected static $lastRequestTime = 0;
 
     /**
      * Constructs a new del.icio.us Web Services Client
@@ -92,11 +78,10 @@ class Delicious
      * @param  string $pass  Client password
      * @return void
      */
-    public function __construct($uname = null, $pass = null)
+    public function __construct($uname = null, $pass = null, HttpClient $httpClient = null)
     {
-        $this->_rest = new RestClient\RestClient();
-        $this->_rest->getHttpClient()->setOptions(array('ssltransport' => 'ssl'));
         $this->setAuth($uname, $pass);
+        $this->setHttpClient($httpClient ?: new HttpClient);
     }
 
     /**
@@ -104,21 +89,27 @@ class Delicious
      *
      * @param  string $uname Client user name
      * @param  string $pass  Client password
-     * @return Zend_Service_Delicious Provides a fluent interface
+     * @return Delicious Provides a fluent interface
      */
     public function setAuth($uname, $pass)
     {
-        $this->_authUname = $uname;
-        $this->_authPass  = $pass;
+        $this->authUname = $uname;
+        $this->authPass  = $pass;
 
+        return $this;
+    }
+
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
         return $this;
     }
 
     /**
      * Get time of the last update
      *
-     * @throws Zend_Service_Delicious_Exception
-     * @return Zend_Date
+     * @throws Exception
+     * @return DateTime
      */
     public function getLastUpdate()
     {
@@ -126,7 +117,7 @@ class Delicious
 
         $rootNode = $response->documentElement;
         if ($rootNode && $rootNode->nodeName == 'update') {
-            return new Date(strtotime($rootNode->getAttribute('time')));
+            return new DateTime($rootNode->getAttribute('time'));
         } else {
             throw new Exception('del.icio.us web service has returned something odd!');
         }
@@ -141,7 +132,7 @@ class Delicious
     {
         $response = $this->makeRequest(self::PATH_TAGS);
 
-        return self::_xmlResponseToArray($response, 'tags', 'tag', 'tag', 'count');
+        return self::xmlResponseToArray($response, 'tags', 'tag', 'tag', 'count');
     }
 
     /**
@@ -149,13 +140,13 @@ class Delicious
      *
      * @param  string $old Old tag name
      * @param  string $new New tag name
-     * @return Zend_Service_Delicious Provides a fluent interface
+     * @return Delicious Provides a fluent interface
      */
     public function renameTag($old, $new)
     {
         $response = $this->makeRequest(self::PATH_TAG_RENAME, array('old' => $old, 'new' => $new));
 
-        self::_evalXmlResult($response);
+        self::evalXmlResult($response);
 
         return $this;
     }
@@ -169,7 +160,7 @@ class Delicious
     {
         $response = $this->makeRequest(self::PATH_BUNDLES);
 
-        $bundles = self::_xmlResponseToArray($response, 'bundles', 'bundle', 'name', 'tags');
+        $bundles = self::xmlResponseToArray($response, 'bundles', 'bundle', 'name', 'tags');
         foreach ($bundles as &$tags) {
             $tags = explode(' ', $tags);
         }
@@ -188,7 +179,7 @@ class Delicious
         $tags = implode(' ', (array) $tags);
         $response = $this->makeRequest(self::PATH_BUNDLE_ADD, array('bundle' => $bundle, 'tags' => $tags));
 
-        self::_evalXmlResult($response);
+        self::evalXmlResult($response);
 
         return $this;
     }
@@ -203,7 +194,7 @@ class Delicious
     {
         $response = $this->makeRequest(self::PATH_BUNDLE_DELETE, array('bundle' => $bundle));
 
-        self::_evalXmlResult($response);
+        self::evalXmlResult($response);
 
         return $this;
     }
@@ -218,7 +209,7 @@ class Delicious
     {
         $response = $this->makeRequest(self::PATH_POST_DELETE, array('url' => $url));
 
-        self::_evalXmlResult($response);
+        self::evalXmlResult($response);
 
         return $this;
     }
@@ -240,7 +231,7 @@ class Delicious
 
         $response = $this->makeRequest(self::PATH_DATES, $parms);
 
-        return self::_xmlResponseToArray($response, 'dates', 'date', 'date', 'count');
+        return self::xmlResponseToArray($response, 'dates', 'date', 'date', 'count');
     }
 
     /**
@@ -249,12 +240,12 @@ class Delicious
      * If no date or url is given, most recent date will be used
      *
      * @param  string    $tag Optional filtering by tag
-     * @param  Zend_Date $dt  Optional filtering by date
+     * @param  DateTime  $dt  Optional filtering by date
      * @param  string    $url Optional filtering by url
      * @throws Zend_Service_Delicious_Exception
      * @return Zend_Service_Delicious_PostList
      */
-    public function getPosts($tag = null, Date $dt = null, $url = null)
+    public function getPosts($tag = null, DateTime $dt = null, $url = null)
     {
         $parms = array();
         if ($tag) {
@@ -264,12 +255,12 @@ class Delicious
             $parms['url'] = $url;
         }
         if ($dt) {
-            $parms['dt'] = $dt->toString('Y-m-d\TH:i:s\Z', 'php');
+            $parms['dt'] = $dt->format(DateTime::ISO8601);
         }
 
         $response = $this->makeRequest(self::PATH_POSTS_GET, $parms);
 
-        return $this->_parseXmlPostList($response);
+        return $this->parseXmlPostList($response);
     }
 
     /**
@@ -287,7 +278,7 @@ class Delicious
 
         $response = $this->makeRequest(self::PATH_POSTS_ALL, $parms);
 
-        return $this->_parseXmlPostList($response);
+        return $this->parseXmlPostList($response);
     }
 
     /**
@@ -309,7 +300,7 @@ class Delicious
 
         $response = $this->makeRequest(self::PATH_POSTS_RECENT, $parms);
 
-        return $this->_parseXmlPostList($response);
+        return $this->parseXmlPostList($response);
     }
 
     /**
@@ -432,34 +423,40 @@ class Delicious
      * @return  mixed  decoded response from web service
      * @throws  Zend_Service_Delicious_Exception
      */
-    public function makeRequest($path, array $parms = array(), $type = 'xml')
+    public function makeRequest($path, array $params = array(), $type = 'xml')
     {
         // if previous request was made less then 1 sec ago
         // wait until we can make a new request
-        $timeDiff = microtime(true) - self::$_lastRequestTime;
+        $timeDiff = microtime(true) - self::$lastRequestTime;
         if ($timeDiff < 1) {
             usleep((1 - $timeDiff) * 1000000);
         }
 
-        $this->_rest->getHttpClient()->setAuth($this->_authUname, $this->_authPass);
+        $this->httpClient->setAuth($this->authUname, $this->authPass);
+        $this->httpClient->setOptions(array('ssltransport' => 'ssl'));
+
+        $request = new HttpRequest;
+        $request->setMethod(HttpRequest::METHOD_GET);
 
         switch ($type) {
             case 'xml':
-                $this->_rest->setUri(self::API_URI);
+                $request->setUri(self::API_URI);
                 break;
             case 'json':
-                $parms['raw'] = true;
-                $this->_rest->setUri(self::JSON_URI);
+                $params['raw'] = true;
+                $request->setUri(self::JSON_URI);
                 break;
             default:
                 throw new Exception('Unknown request type');
         }
 
-        self::$_lastRequestTime = microtime(true);
-        $response = $this->_rest->restGet($path, $parms);
+        self::$lastRequestTime = microtime(true);
 
-        if (!$response->isSuccessful()) {
-            throw new Exception("Http client reported an error: '{$response->getMessage()}'");
+        $request->getQuery()->fromArray($params);
+        $response = $this->httpClient->send($request);
+
+        if (!$response->isSuccess()) {
+            throw new Exception("Http client reported an error: '{$response->getReasonPhrase()}'");
         }
 
         $responseBody = $response->getBody();
@@ -489,7 +486,7 @@ class Delicious
      * @return  array
      * @throws  Zend_Service_Delicious_Exception
      */
-    private static function _xmlResponseToArray(\DOMDocument $response, $root, $child, $attKey, $attValue)
+    private static function xmlResponseToArray(\DOMDocument $response, $root, $child, $attKey, $attValue)
     {
         $rootNode = $response->documentElement;
         $arrOut = array();
@@ -517,7 +514,7 @@ class Delicious
      * @return  Zend_Service_Delicious_PostList
      * @throws  Zend_Service_Delicious_Exception
      */
-    private function _parseXmlPostList(\DOMDocument $response)
+    private function parseXmlPostList(\DOMDocument $response)
     {
         $rootNode = $response->documentElement;
 
@@ -535,7 +532,7 @@ class Delicious
      * @return  void
      * @throws  Zend_Service_Delicious_Exception
      */
-    private static function _evalXmlResult(\DOMDocument $response)
+    private static function evalXmlResult(\DOMDocument $response)
     {
         $rootNode = $response->documentElement;
 

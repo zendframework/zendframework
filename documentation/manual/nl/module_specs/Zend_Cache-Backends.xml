@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Zend_Cache backends</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><title>Zend_Cache backends</title>
     
 
-    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+    <section xml:id="zend.cache.backends.file"><title>Zend_Cache_Backend_File</title>
         
         <para>
             Deze backends slaat cache records op in bestanden (in een gekozen map).
@@ -12,7 +12,7 @@
         <para>
             Beschikbare opties zijn :
         </para>
-        <table><info><title>Beschikbare opties</title></info>
+        <table><title>Beschikbare opties</title>
             
             <tgroup cols="4">
                  <thead>
@@ -86,7 +86,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+    <section xml:id="zend.cache.backends.sqlite"><title>Zend_Cache_Backend_Sqlite</title>
         
         <para>
             Deze backend slaat cache records op in een SQLite database.
@@ -94,7 +94,7 @@
         <para>
             Beschikbare opties zijn :
         </para>
-        <table><info><title>Beschikbare opties</title></info>
+        <table><title>Beschikbare opties</title>
             
             <tgroup cols="4">
                  <thead>
@@ -118,7 +118,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+    <section xml:id="zend.cache.backends.memcached"><title>Zend_Cache_Backend_Memcached</title>
         
         <para>
             Deze backend slaat cache records op in een memcache server. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link> is een high-performance, gedistribueerd systeem van object caching. Om deze
@@ -130,7 +130,7 @@
         <para>
             Beschikbare opties zijn :
         </para>
-        <table><info><title>Beschikbare opties</title></info>
+        <table><title>Beschikbare opties</title>
             
             <tgroup cols="4">
                  <thead>
@@ -166,7 +166,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_APC</title></info>
+    <section xml:id="zend.cache.backends.apc"><title>Zend_Cache_Backend_APC</title>
         
         <para>
             Deze backend slaat cache records op in shared memory via de

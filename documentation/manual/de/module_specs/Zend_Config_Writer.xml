@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><title>Zend_Config_Writer</title>
     
 
     <para>
@@ -47,7 +47,7 @@
         <classname>Zend_Config</classname> Objekt aufgerufen werden.
     </para>
 
-    <example xml:id="zend.config.writer.example.using"><info><title>Verwenden von Zend_Config_Writer</title></info>
+    <example xml:id="zend.config.writer.example.using"><title>Verwenden von Zend_Config_Writer</title>
         
 
         <para>
@@ -94,7 +94,7 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example xml:id="zend.config.writer.modifying"><info><title>Eine bestehende Config ändern</title></info>
+    <example xml:id="zend.config.writer.modifying"><title>Eine bestehende Config ändern</title>
         
 
         <para>
@@ -119,7 +119,7 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note><info><title>Laden einer Config Datei</title></info>
+    <note><title>Laden einer Config Datei</title>
         
 
         <para>

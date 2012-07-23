@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\InternalType\StreamFilter;
@@ -26,8 +15,6 @@ namespace Zend\Pdf\InternalType\StreamFilter;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RunLength implements StreamFilterInterface
 {
@@ -103,13 +90,13 @@ class RunLength implements StreamFilterInterface
             if ($length == 128) {
                 // EOD byte
                 break;
-            } else if ($length < 128) {
+            } elseif ($length < 128) {
                 $length++;
 
                 $output .= substr($data, $offset, $length);
 
                 $offset += $length;
-            } else if ($length > 128) {
+            } elseif ($length > 128) {
                 $output .= str_repeat($data[$offset], 257 - $length);
 
                 $offset++;
@@ -119,4 +106,3 @@ class RunLength implements StreamFilterInterface
         return $output;
     }
 }
-

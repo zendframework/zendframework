@@ -1,27 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2\Instance,
-    Zend\Service\Amazon\Ec2\Exception;
+
+use Zend\Service\Amazon\Ec2\Instance;
+use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
+
 
 /**
  * Zend_Service_Amazon_Ec2_Instance test case.
@@ -29,8 +22,6 @@ use Zend\Service\Amazon\Ec2\Instance,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -44,29 +35,23 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
     private $instance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->instance = new Instance('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Instance::setDefaultHTTPClient($client);
-
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-
-        $this->instance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->instance = new Instance('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testConstants()
@@ -96,7 +81,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "  <result>true</result>\r\n"
                     . "  <ownerId>254933287430</ownerId>\r\n"
                     . "</ConfirmProductInstanceResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->confirmProduct('254933287430', 'i-1bda7172');
 
@@ -117,7 +102,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "<ConfirmProductInstanceResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <result>false</result>\r\n"
                     . "</ConfirmProductInstanceResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->confirmProduct('254933287430', 'i-1bda7172');
 
@@ -174,7 +159,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </reservationSet>\r\n"
                     . "</DescribeInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describe('i-28a64341');
 
@@ -233,7 +218,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </reservationSet>\r\n"
                     . "</DescribeInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse, true);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse, true);
 
         $return = $this->instance->describe('i-28a64341', true);
 
@@ -287,7 +272,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </reservationSet>\r\n"
                     . "</DescribeInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeByImageId('ami-6ea54007');
 
@@ -390,7 +375,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </instancesSet>\r\n"
                     . "</RunInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
 
         $arrStart = array(
@@ -462,7 +447,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </instancesSet>\r\n"
                     . "</RunInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $arrStart = array(
             'imageId' => 'ami-60a54009',
@@ -509,7 +494,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </instancesSet>\r\n"
                     . "</TerminateInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->terminate('i-28a64341');
 
@@ -557,7 +542,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </instancesSet>\r\n"
                     . "</TerminateInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $arrInstanceIds = array('i-28a64341', 'i-21a64348');
 
@@ -584,7 +569,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "<RebootInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RebootInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $arrInstanceIds = array('i-28a64341', 'i-21a64348');
         $return = $this->instance->reboot($arrInstanceIds);
@@ -606,7 +591,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "<RebootInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RebootInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->reboot('i-28a64341');
 
@@ -636,7 +621,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
 . "bHQgMSB6b25lbGlzdHMKS2VybmVsIGNvbW1hbmQgbGluZTogcm9vdD0vZGV2L3NkYTEgcm8gNApF\r\n"
 . "bmFibGluZyBmYXN0IEZQVSBzYXZlIGFuZCByZXN0b3JlLi4uIGRvbmUuCg==</output>\r\n"
                     . "</GetConsoleOutputResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->consoleOutput('i-28a64341');
 
@@ -678,7 +663,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>"
                     . "  </instancesSet>"
                     . "</MonitorInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->monitor('i-43a4412a');
 
@@ -707,7 +692,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
                     . "    </item>"
                     . "  </instancesSet>"
                     . "</UnmonitorInstancesResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->unmonitor('i-43a4412a');
 

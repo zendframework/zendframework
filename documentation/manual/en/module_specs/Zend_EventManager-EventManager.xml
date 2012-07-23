@@ -46,7 +46,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventCollection;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAware;
 
@@ -64,7 +64,7 @@ class Foo implements EventManagerAware
         return $this;
     }
 
-    public function events()
+    public function getEventManager()
     {
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
@@ -96,7 +96,7 @@ class Foo
     public function bar($baz, $bat = null)
     {
         $params = compact('baz', 'bat');
-        $this->events()->trigger(__FUNCTION__, $this, $params);
+        $this->getEventManager()->trigger(__FUNCTION__, $this, $params);
     }
 }
 ]]></programlisting>
@@ -114,7 +114,7 @@ use Zend\Log\Factory as LogFactory;
 
 $log = LogFactory($someConfig);
 $foo = new Foo();
-$foo->events()->attach('bar', function ($e) use ($log) {
+$foo->getEventManager()->attach('bar', function ($e) use ($log) {
     $event  = $e->getName();
     $target = get_class($e->getTarget());
     $params = json_encode($e->getParams());
@@ -181,7 +181,7 @@ $events->attach('Foo', 'bar', function ($e) use ($log) {
 
 // Later, instantiate Foo:
 $foo = new Foo();
-$foo->events()->setSharedEventCollection($events);
+$foo->getEventManager()->setSharedEventCollection($events);
 
 // And we can still trigger the above event:
 $foo->bar('baz', 'bat');
@@ -190,7 +190,7 @@ $foo->bar('baz', 'bat');
 ]]></programlisting>
 
         <note>
-            <info><title>StaticEventManager</title></info>
+            <title>StaticEventManager</title>
 
             <para>
                 As of 2.0.0beta3, you can use the <classname>StaticEventManager</classname>
@@ -656,8 +656,8 @@ class ValueObject
     function inject(array $values)
     {
         $argv = compact('values');
-        $argv = $this->events()->prepareArgs($argv);
-        $this->events()->trigger(__FUNCTION__, $this, $argv);
+        $argv = $this->getEventManager()->prepareArgs($argv);
+        $this->getEventManager()->trigger(__FUNCTION__, $this, $argv);
         $date = isset($argv['values']['date']) ? $argv['values']['date'] : new DateTime('now');
 
         // ...
@@ -666,7 +666,7 @@ class ValueObject
 
 $v = new ValueObject();
 
-$v->events()->attach('inject', function($e) {
+$v->getEventManager()->attach('inject', function($e) {
     $values = $e->getParam('values');
     if (!$values) {
         return;
@@ -715,7 +715,7 @@ class Foo implements DispatchableInterface
     public function dispatch(Request $request, Response $response = null)
     {
         $argv = compact('request', 'response');
-        $results = $this->events()->triggerUntil(__FUNCTION__, $this, $argv, function($v) {
+        $results = $this->getEventManager()->triggerUntil(__FUNCTION__, $this, $argv, function($v) {
             return ($v instanceof Response);
         });
     }
@@ -740,7 +740,7 @@ class Foo implements DispatchableInterface
     public function dispatch(Request $request, Response $response = null)
     {
         $argv = compact('request', 'response');
-        $results = $this->events()->triggerUntil(__FUNCTION__, $this, $argv, function($v) {
+        $results = $this->getEventManager()->triggerUntil(__FUNCTION__, $this, $argv, function($v) {
             return ($v instanceof Response);
         });
 
@@ -788,7 +788,7 @@ class SomeValueObject
     public function get($id)
     {
         $params = compact('id');
-        $results = $this->events()->trigger('get.pre', $this, $params);
+        $results = $this->getEventManager()->trigger('get.pre', $this, $params);
 
         // If an event stopped propagation, return the value
         if ($results->stopped()) {
@@ -798,7 +798,7 @@ class SomeValueObject
         // do some work...
 
         $params['__RESULT__'] = $someComputedContent;
-        $this->events()->trigger('get.post', $this, $params);
+        $this->getEventManager()->trigger('get.post', $this, $params);
     }
 }
 ]]></programlisting>
@@ -809,9 +809,9 @@ class SomeValueObject
             </para>
 
             <programlisting language="php"><![CDATA[
-use Zend\Cache\Cache,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate;
+use Zend\Cache\Cache;
+use Zend\EventManager\EventCollection;
+use Zend\EventManager\ListenerAggregate;
 
 class CacheListener implements ListenerAggregate
 {
@@ -856,7 +856,7 @@ class CacheListener implements ListenerAggregate
             <programlisting language="php"><![CDATA[
 $value         = new SomeValueObject();
 $cacheListener = new CacheListener($cache);
-$value->events()->attachAggregate($cacheListener);
+$value->getEventManager()->attachAggregate($cacheListener);
 ]]></programlisting>
 
             <para>

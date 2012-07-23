@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.regex"><info><title>Regex</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.regex"><title>Regex</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Expression entspricht.
     </para>
 
-    <section xml:id="zend.validate.set.regex.options"><info><title>Unterstützte Optionen für Zend_Validate_Regex</title></info>
+    <section xml:id="zend.validate.set.regex.options"><title>Unterstützte Optionen für Zend_Validate_Regex</title>
         
 
         <para>
@@ -25,7 +25,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.regex.basic"><info><title>Prüfen mit Zend_Validate_Regex</title></info>
+    <section xml:id="zend.validate.set.regex.basic"><title>Prüfen mit Zend_Validate_Regex</title>
         
 
         <para>
@@ -50,7 +50,7 @@ $validator->isValid("Pest"); // Gibt false zurück
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.regex.handling"><info><title>Handhabung von Pattern</title></info>
+    <section xml:id="zend.validate.set.regex.handling"><title>Handhabung von Pattern</title>
         
 
         <para>

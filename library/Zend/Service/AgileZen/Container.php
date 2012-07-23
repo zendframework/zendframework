@@ -1,37 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage AgileZen
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\AgileZen;
 
-use ArrayAccess,
-    Countable,
-    Iterator,
-    Traversable;
+use ArrayAccess;
+use Countable;
+use Iterator;
+use Traversable;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Container implements Countable, Iterator, ArrayAccess
 {
@@ -52,25 +39,25 @@ class Container implements Countable, Iterator, ArrayAccess
 
     /**
      * Project id
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $projectId;
 
     /**
      * Namespace prefix for Resources
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $namespacePrefix = 'Zend\Service\AgileZen\Resources';
 
     /**
      * Constructor
-     * 
-     * @param  AgileZen $service 
-     * @param  array|Traversable $list 
-     * @param  string $resource 
-     * @param  null|int|string $projectId 
+     *
+     * @param  AgileZen $service
+     * @param  array|Traversable $list
+     * @param  string $resource
+     * @param  null|int|string $projectId
      * @return void
      */
     public function __construct(AgileZen $service, $list, $resource, $projectId = null)
@@ -142,7 +129,7 @@ class Container implements Countable, Iterator, ArrayAccess
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Service\AgileZen\Resources\*
+     * @return AbstractEntity
      */
     public function current()
     {
@@ -221,7 +208,7 @@ class Container implements Countable, Iterator, ArrayAccess
      *
      * @param   int     $offset
      * @throws  Exception\OutOfBoundsException
-     * @return  Zend\Service\AgileZen\Resources\*
+     * @return  AbstractEntity
      */
     public function offsetGet($offset)
     {

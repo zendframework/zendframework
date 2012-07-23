@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP Authentication Adapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><title>HTTP Authentication Adapter</title>
     
 
-    <section xml:id="zend.auth.adapter.http.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.auth.adapter.http.introduction"><title>Einführung</title>
         
 
         <para>
@@ -76,7 +76,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.auth.adapter.design_overview"><info><title>Design Übersicht</title></info>
+    <section xml:id="zend.auth.adapter.design_overview"><title>Design Übersicht</title>
         
 
         <para>
@@ -91,7 +91,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.configuration_options"><info><title>Konfigurations Optionen</title></info>
+    <section xml:id="zend.auth.adapter.configuration_options"><title>Konfigurations Optionen</title>
         
 
         <para>
@@ -100,7 +100,7 @@
             Optionen vorhanden, und einige davon werden benötigt:
         </para>
 
-        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>Konfigurations Optionen</title></info>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><title>Konfigurations Optionen</title>
             
 
             <tgroup cols="3">
@@ -191,7 +191,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>Auflöser</title></info>
+    <section xml:id="zend.auth.adapter.http.resolvers"><title>Auflöser</title>
         
 
         <para>
@@ -208,7 +208,7 @@
             kann einfach erstellt werden indem das Resolver Interface implementiert wird.
         </para>
 
-        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>Datei Auflöser</title></info>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><title>Datei Auflöser</title>
             
 
             <para>
@@ -258,7 +258,7 @@ $resolver->setFile($path);
         </section>
     </section>
 
-    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>Grundsätzliche Verwendung</title></info>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><title>Grundsätzliche Verwendung</title>
         
 
         <para>

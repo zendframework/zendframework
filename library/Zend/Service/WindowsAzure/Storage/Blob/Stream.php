@@ -5,14 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\Storage\Blob;
 
-use Zend\Service\WindowsAzure\Exception\ExceptionInterface;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\Exception\ExceptionInterface;
 use Zend\Service\WindowsAzure\Exception\RuntimeException;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -139,7 +140,9 @@ class Stream
         $this->_temporaryFileName = tempnam(sys_get_temp_dir(), 'azure');
 
         // Check the file can be opened
-        $fh = @fopen($this->_temporaryFileName, $mode);
+        ErrorHandler::start(E_WARNING);
+        $fh = fopen($this->_temporaryFileName, $mode);
+        ErrorHandler::stop();
         if ($fh === false) {
             return false;
         }
@@ -176,7 +179,9 @@ class Stream
      */
     public function stream_close()
     {
-        @fclose($this->_temporaryFileHandle);
+        ErrorHandler::start(E_WARNING);
+        fclose($this->_temporaryFileHandle);
+        ErrorHandler::stop();
 
         // Upload the file?
         if ($this->_writeMode) {
@@ -198,14 +203,20 @@ class Stream
                     $this->_temporaryFileName
                 );
             } catch (ExceptionInterface $ex) {
-                @unlink($this->_temporaryFileName);
+                ErrorHandler::start(E_WARNING);
+                unlink($this->_temporaryFileName);
+                ErrorHandler::stop();
+
                 unset($this->_storageClient);
 
                 throw $ex;
             }
         }
 
-        @unlink($this->_temporaryFileName);
+        ErrorHandler::start(E_WARNING);
+        unlink($this->_temporaryFileName);
+        ErrorHandler::stop();
+
         unset($this->_storageClient);
     }
 
@@ -311,7 +322,10 @@ class Stream
                     $this->_temporaryFileName
                 );
             } catch (ExceptionInterface $ex) {
-                @unlink($this->_temporaryFileName);
+                ErrorHandler::start(E_WARNING);
+                unlink($this->_temporaryFileName);
+                ErrorHandler::stop();
+
                 unset($this->_storageClient);
 
                 throw $ex;

@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf\Response;
 
-use Zend\Amf\Parser,
-    Zend\Amf\Parser\Amf0,
-    Zend\Amf;
+use Zend\Amf;
+use Zend\Amf\Parser;
+use Zend\Amf\Parser\Amf0;
 
 /**
  * Handles converting the PHP object ready for response back into AMF
  *
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StreamResponse implements ResponseInterface
 {
@@ -91,7 +79,7 @@ class StreamResponse implements ResponseInterface
             $stream->writeByte($header->mustRead);
             $stream->writeLong(Amf\Constants::UNKNOWN_CONTENT_LENGTH);
             if (is_object($header->data)) {
-                // Workaround for PHP5 with E_STRICT enabled complaining about 
+                // Workaround for PHP5 with E_STRICT enabled complaining about
                 // "Only variables should be passed by reference"
                 $placeholder = null;
                 $serializer->writeTypeMarker($placeholder, null, $header->data);
@@ -111,7 +99,7 @@ class StreamResponse implements ResponseInterface
             $bodyData   = $body->getData();
             $markerType = ($this->_objectEncoding == Amf\Constants::AMF0_OBJECT_ENCODING) ? null : Amf\Constants::AMF0_AMF3;
             if (is_object($bodyData)) {
-                // Workaround for PHP5 with E_STRICT enabled complaining about 
+                // Workaround for PHP5 with E_STRICT enabled complaining about
                 // "Only variables should be passed by reference"
                 $placeholder = null;
                 $serializer->writeTypeMarker($placeholder, $markerType, $bodyData);

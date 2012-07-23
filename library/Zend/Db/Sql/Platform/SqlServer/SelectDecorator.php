@@ -10,12 +10,12 @@
 
 namespace Zend\Db\Sql\Platform\SqlServer;
 
-use Zend\Db\Sql\Select,
-    Zend\Db\Sql\Platform\PlatformDecoratorInterface,
-    Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
+use Zend\Db\Sql\Select;
 
 class SelectDecorator extends Select implements PlatformDecoratorInterface
 {
@@ -95,7 +95,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             if (isset($columnParameters[1])) {
                 array_shift($columnParameters);
                 $selectParameters[0][$i] = $columnParameters;
-            } 
+            }
         }
 
         // first, produce column list without compound names (using the AS portion only)

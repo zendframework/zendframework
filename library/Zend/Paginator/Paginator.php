@@ -10,28 +10,26 @@
 
 namespace Zend\Paginator;
 
-use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
-    Zend\Paginator\Adapter\AdapterInterface,
-    ArrayIterator,
-    Countable,
-    Iterator,
-    IteratorAggregate,
-    Traversable,
-    Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Cache\Storage\IteratorInterface as CacheIterator,
-    Zend\Db\Table\AbstractRowset as DbAbstractRowset,
-    Zend\Db\Table\Select as DbTableSelect,
-    Zend\Db\Sql,
-    Zend\Filter\FilterInterface,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View;
+use ArrayIterator;
+use Countable;
+use Iterator;
+use IteratorAggregate;
+use Traversable;
+use Zend\Cache\Storage\IteratorInterface as CacheIterator;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Db\Sql;
+use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
+use Zend\Db\Table\Select as DbTableSelect;
+use Zend\Filter\FilterInterface;
+use Zend\Json\Json;
+use Zend\Paginator\Adapter\AdapterInterface;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View;
 
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Paginator implements Countable, IteratorAggregate
 {
@@ -49,11 +47,11 @@ class Paginator implements Countable, IteratorAggregate
     const CACHE_TAG_PREFIX = 'Zend_Paginator_';
 
     /**
-     * Adapter broker
+     * Adapter plugin manager
      *
-     * @var AdapterBroker
+     * @var AdapterPluginManager
      */
-    protected static $_adapterBroker = null;
+    protected static $_adapters = null;
 
     /**
      * Configuration file
@@ -77,11 +75,11 @@ class Paginator implements Countable, IteratorAggregate
     protected static $_defaultItemCountPerPage = 10;
 
     /**
-     * Scrolling style plugin loader
+     * Scrolling style plugin manager
      *
-     * @var ScrollingStyleBroker
+     * @var ScrollingStylePluginManager
      */
-    protected static $_scrollingStyleBroker = null;
+    protected static $_scrollingStyles = null;
 
     /**
      * Cache object
@@ -187,13 +185,13 @@ class Paginator implements Countable, IteratorAggregate
         if ($adapter == self::INTERNAL_ADAPTER) {
             if (is_array($data)) {
                 $adapter = 'array';
-            } else if ($data instanceof DbTableSelect) {
+            } elseif ($data instanceof DbTableSelect) {
                 $adapter = 'db_table_select';
-            } else if ($data instanceof DbSelect) {
+            } elseif ($data instanceof DbSelect) {
                 $adapter = 'db_select';
-            } else if ($data instanceof Iterator) {
+            } elseif ($data instanceof Iterator) {
                 $adapter = 'iterator';
-            } else if (is_integer($data)) {
+            } elseif (is_integer($data)) {
                 $adapter = 'null';
             } else {
                 $type = (is_object($data)) ? get_class($data) : gettype($data);
@@ -201,49 +199,49 @@ class Paginator implements Countable, IteratorAggregate
             }
         }
 
-        $broker  = self::getAdapterBroker();
-        $adapter = $broker->load($adapter, array($data));
+        $adapters = self::getAdapterPluginManager();
+        $adapter  = $adapters->get($adapter, $data);
         return new self($adapter);
     }
 
     /**
-     * Set the adapter broker
+     * Set the adapter plugin manager
      *
-     * @param string|\Zend\Loader\PluginBroker $broker
+     * @param string|AdapterPluginManager $adapters
      * @throws Exception\InvalidArgumentException
      */
-    public static function setAdapterBroker($broker)
+    public static function setAdapterPluginManager($adapters)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
+        if (is_string($adapters)) {
+            if (!class_exists($adapters)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Unable to locate adapter broker of class "%s"',
-                    $broker
+                    'Unable to locate adapter plugin manager with class "%s"; class not found',
+                    $adapters
                 ));
             }
-            $broker = new $broker();
+            $adapters = new $adapters();
         }
-        if (!$broker instanceof AdapterBroker) {
+        if (!$adapters instanceof AdapterPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Pagination adapter broker must extend AdapterBroker; received "%s"',
-                (is_object($broker) ? get_class($broker) : gettype($broker))
+                'Pagination adapter manager must extend AdapterPluginManager; received "%s"',
+                (is_object($adapters) ? get_class($adapters) : gettype($adapters))
             ));
         }
-        self::$_adapterBroker = $broker;
+        self::$_adapters = $adapters;
     }
 
     /**
-     * Returns the adapter broker.  If it doesn't exist it's created.
+     * Returns the adapter plugin manager.  If it doesn't exist it's created.
      *
-     * @return AdapterBroker
+     * @return AdapterPluginManager
      */
-    public static function getAdapterBroker()
+    public static function getAdapterPluginManager()
     {
-        if (self::$_adapterBroker === null) {
-            self::setAdapterBroker(new AdapterBroker());
+        if (self::$_adapters === null) {
+            self::setAdapterPluginManager(new AdapterPluginManager());
         }
 
-        return self::$_adapterBroker;
+        return self::$_adapters;
     }
 
     /**
@@ -263,16 +261,16 @@ class Paginator implements Countable, IteratorAggregate
 
         self::$_config = $config;
 
-        if (isset($config['adapter_broker'])
-            && null !== ($broker = $config['adapter_broker'])
+        if (isset($config['adapter_plugins'])
+            && null !== ($adapters = $config['adapter_plugins'])
         ) {
-            self::setAdapterBroker($broker);
+            self::setAdapterPluginManager($adapters);
         }
 
-        if (isset($config['scrolling_style_broker'])
-            && null !== ($broker = $config['scrolling_style_broker'])
+        if (isset($config['scrolling_style_plugins'])
+            && null !== ($adapters = $config['scrolling_style_plugins'])
         ) {
-            self::setScrollingStyleBroker($broker);
+            self::setScrollingStylePluginManager($adapters);
         }
 
         $scrollingStyle = isset($config['scrolling_style']) ? $config['scrolling_style'] : null;
@@ -332,39 +330,39 @@ class Paginator implements Countable, IteratorAggregate
         self::$_defaultScrollingStyle = $scrollingStyle;
     }
 
-    public static function setScrollingStyleBroker($broker)
+    public static function setScrollingStylePluginManager($scrollingAdapters)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
+        if (is_string($scrollingAdapters)) {
+            if (!class_exists($scrollingAdapters)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Unable to locate scrolling style broker of class "%s"',
-                    $broker
+                    'Unable to locate scrolling style plugin manager with class "%s"; class not found',
+                    $scrollingAdapters
                 ));
             }
-            $broker = new $broker();
+            $scrollingAdapters = new $scrollingAdapters();
         }
-        if (!$broker instanceof ScrollingStyleBroker) {
+        if (!$scrollingAdapters instanceof ScrollingStylePluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Pagination scrolling-style broker must extend ScrollingStyleBroker; received "%s"',
-                (is_object($broker) ? get_class($broker) : gettype($broker))
+                'Pagination scrolling-style manager must extend ScrollingStylePluginManager; received "%s"',
+                (is_object($scrollingAdapters) ? get_class($scrollingAdapters) : gettype($scrollingAdapters))
             ));
         }
-        self::$_scrollingStyleBroker = $broker;
+        self::$_scrollingStyles = $scrollingAdapters;
     }
 
     /**
-     * Returns the scrolling style broker.  If it doesn't exist it's
+     * Returns the scrolling style manager.  If it doesn't exist it's
      * created.
      *
-     * @return ScrollingStyleBroker
+     * @return ScrollingStylePluginManager
      */
-    public static function getScrollingStyleBroker()
+    public static function getScrollingStylePluginManager()
     {
-        if (self::$_scrollingStyleBroker === null) {
-            self::$_scrollingStyleBroker = new ScrollingStyleBroker();
+        if (self::$_scrollingStyles === null) {
+            self::$_scrollingStyles = new ScrollingStylePluginManager();
         }
 
-        return self::$_scrollingStyleBroker;
+        return self::$_scrollingStyles;
     }
 
     /**
@@ -377,7 +375,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         if ($adapter instanceof AdapterInterface) {
             $this->_adapter = $adapter;
-        } else if ($adapter instanceof AdapterAggregateInterface) {
+        } elseif ($adapter instanceof AdapterAggregateInterface) {
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
@@ -606,7 +604,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         if ($pageNumber == null) {
             $pageNumber = $this->getCurrentPageNumber();
-        } else if ($pageNumber < 0) {
+        } elseif ($pageNumber < 0) {
             $pageNumber = ($this->count() + 1) + $pageNumber;
         }
 
@@ -1051,7 +1049,7 @@ class Paginator implements Countable, IteratorAggregate
                 return $scrollingStyle;
 
             case 'string':
-                return self::getScrollingStyleBroker()->load($scrollingStyle);
+                return self::getScrollingStylePluginManager()->get($scrollingStyle);
 
             case 'null':
                 // Fall through to default case

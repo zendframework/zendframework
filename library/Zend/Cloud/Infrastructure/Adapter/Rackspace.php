@@ -1,29 +1,28 @@
 <?php
 /**
- * @category   Zend
- * @package    Zend_Cloud_Infrastructure
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
 use Traversable;
+use Zend\Cloud\Infrastructure\Image;
+use Zend\Cloud\Infrastructure\ImageList;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\InstanceList;
+use Zend\Service\Rackspace\Servers as RackspaceServers;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Service\Rackspace\Servers as RackspaceServers,
-    Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\InstanceList,
-    Zend\Cloud\Infrastructure\Image,
-    Zend\Cloud\Infrastructure\ImageList;
 
 /**
  * Rackspace servers adapter for infrastructure service
  *
  * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Rackspace extends AbstractAdapter
 {
@@ -37,40 +36,40 @@ class Rackspace extends AbstractAdapter
     const RACKSPACE_ZONE_UK   = 'UK';
     const MONITOR_CPU_SAMPLES = 3;
     /**
-     * Rackspace Servers Instance 
-     * 
+     * Rackspace Servers Instance
+     *
      * @var RackspaceServers
      */
     protected $rackspace;
     /**
      * Rackspace access user
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $accessUser;
 
     /**
      * Rackspace access key
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $accessKey;
     /**
      * Rackspace Region
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $region;
     /**
      * Flavors
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $flavors;
     /**
      * Map array between Rackspace and Infrastructure status
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $mapStatus = array (
         'ACTIVE'             => Instance::STATUS_RUNNING,
@@ -105,7 +104,7 @@ class Rackspace extends AbstractAdapter
         if (empty($options) || !is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options provided');
         }
-        
+
         if (!isset($options[self::RACKSPACE_USER])) {
             throw new Exception\InvalidArgumentException('Rackspace access user not specified!');
         }
@@ -113,10 +112,10 @@ class Rackspace extends AbstractAdapter
         if (!isset($options[self::RACKSPACE_KEY])) {
             throw new Exception\InvalidArgumentException('Rackspace access key not specified!');
         }
-        
+
         $this->accessUser = $options[self::RACKSPACE_USER];
         $this->accessKey  = $options[self::RACKSPACE_KEY];
-        
+
         if (isset($options[self::RACKSPACE_REGION])) {
             switch ($options[self::RACKSPACE_REGION]) {
                 case self::RACKSPACE_ZONE_UK:
@@ -144,13 +143,13 @@ class Rackspace extends AbstractAdapter
     }
     /**
      * Convert the attributes of Rackspace server into attributes of Infrastructure
-     * 
+     *
      * @param  array $attr
-     * @return array|boolean 
+     * @return array|boolean
      */
     protected function convertAttributes($attr)
     {
-        $result = array();       
+        $result = array();
         if (!empty($attr) && is_array($attr)) {
             $result[Instance::INSTANCE_ID]      = $attr['id'];
             unset($attr['id']);
@@ -171,7 +170,7 @@ class Rackspace extends AbstractAdapter
             if (!empty($this->flavors)) {
                 $result[Instance::INSTANCE_RAM]     = $this->flavors[$attr['flavorId']]['ram'];
                 $result[Instance::INSTANCE_STORAGE] = $this->flavors[$attr['flavorId']]['disk'];
-            }    
+            }
             unset($attr['flavorId']);
             $result[Instance::INSTANCE_PUBLICDNS] = $attr['addresses']['public'][0];
             $result = array_merge($attr,$result);
@@ -182,8 +181,8 @@ class Rackspace extends AbstractAdapter
      * Return a list of the available instances
      *
      * @return InstanceList|boolean
-     */ 
-    public function listInstances() 
+     */
+    public function listInstances()
     {
         $this->resetError();
         $this->adapterResult = $this->rackspace->listServers(true);
@@ -203,7 +202,7 @@ class Rackspace extends AbstractAdapter
      *
      * @param  string
      * @return string|boolean
-     */ 
+     */
     public function statusInstance($id)
     {
         $this->resetError();
@@ -217,18 +216,18 @@ class Rackspace extends AbstractAdapter
     }
     /**
      * Return the public DNS name/Ip address of the instance
-     * 
+     *
      * @param  string $id
-     * @return string|boolean 
+     * @return string|boolean
      */
-    public function publicDnsInstance($id) 
+    public function publicDnsInstance($id)
     {
         $this->resetError();
         $this->adapterResult = $this->rackspace->getServerPublicIp($id);
         if (empty($this->adapterResult)) {
             $this->setError();
             return false;
-        }  
+        }
         return $this->adapterResult[0];
     }
     /**
@@ -236,7 +235,7 @@ class Rackspace extends AbstractAdapter
      *
      * @param string $id
      * @return boolean
-     */ 
+     */
     public function rebootInstance($id)
     {
         $this->resetError();
@@ -252,7 +251,7 @@ class Rackspace extends AbstractAdapter
      * @param string $name
      * @param array $options
      * @return Instance|boolean
-     */ 
+     */
     public function createInstance($name, $options)
     {
         if (empty($name)) {
@@ -286,29 +285,29 @@ class Rackspace extends AbstractAdapter
      *
      * @param  string $id
      * @return boolean
-     */ 
+     */
     public function stopInstance($id)
     {
         throw new Exception\RuntimeException('The stopInstance method is not implemented in the adapter');
     }
- 
+
     /**
      * Start an instance
      *
      * @param  string $id
      * @return boolean
-     */ 
+     */
     public function startInstance($id)
     {
         throw new Exception\RuntimeException('The startInstance method is not implemented in the adapter');
     }
- 
+
     /**
      * Destroy an instance
      *
      * @param  string $id
      * @return boolean
-     */ 
+     */
     public function destroyInstance($id)
     {
         $this->resetError();
@@ -322,7 +321,7 @@ class Rackspace extends AbstractAdapter
      * Return a list of all the available instance images
      *
      * @return ImageList|boolean
-     */ 
+     */
     public function imagesInstance()
     {
         $this->resetError();
@@ -331,7 +330,7 @@ class Rackspace extends AbstractAdapter
             $this->setError();
             return false;
         }
-        
+
         $images= $this->adapterResult->toArray();
         $result= array();
         $i=0;
@@ -364,7 +363,7 @@ class Rackspace extends AbstractAdapter
     }
     /**
      * Return all the available zones
-     * 
+     *
      * @return array
      */
     public function zonesInstance()
@@ -374,12 +373,12 @@ class Rackspace extends AbstractAdapter
     /**
      * Return the system information about the $metric of an instance
      * NOTE: it works only for Linux servers
-     * 
+     *
      * @param  string $id
      * @param  string $metric
      * @param  null|array $options
      * @return array|boolean
-     */ 
+     */
     public function monitorInstance($id, $metric, $options = null)
     {
         if (!function_exists("ssh2_connect")) {
@@ -397,7 +396,7 @@ class Rackspace extends AbstractAdapter
         if (!empty($options) && !is_array($options)) {
             throw new Exception\InvalidArgumentException('The options must be an array');
         }
-        
+
         switch ($metric) {
             case Instance::MONITOR_CPU:
                 $cmd= 'top -b -n '.self::MONITOR_CPU_SAMPLES.' | grep \'Cpu\'';
@@ -412,7 +411,7 @@ class Rackspace extends AbstractAdapter
         if (empty($cmd)) {
             throw new Exception\InvalidArgumentException('The metric specified is not supported by the adapter');
         }
-        
+
         $params= array(
             Instance::SSH_USERNAME => $options['username'],
             Instance::SSH_PASSWORD => $options['password']
@@ -447,7 +446,7 @@ class Rackspace extends AbstractAdapter
                         }
                         if ($total>0) {
                             $usage= (float) $used/$total;
-                        }    
+                        }
                         break;
                     case Instance::MONITOR_DISK:
                         if (preg_match('/(\d+)%/', $output,$match)) {
@@ -455,26 +454,26 @@ class Rackspace extends AbstractAdapter
                         }
                         break;
                 }
-                
+
                 $monitor['series'][] = array (
                     'timestamp' => $exec_time,
                     'value'     => number_format($usage,2)
                 );
-                
+
                 $average += $usage;
                 $exec_time+= 60; // seconds
                 $num++;
             }
         }
-        
+
         if ($num>0) {
             $monitor['average'] = number_format($average/$num,2);
         }
         return $monitor;
     }
     /**
-     * Get the adapter 
-     * 
+     * Get the adapter
+     *
      * @return \Zend\Service\Rackspace\Servers
      */
     public function getAdapter()
@@ -483,8 +482,8 @@ class Rackspace extends AbstractAdapter
     }
     /**
      * Get last HTTP request
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getLastHttpRequest()
     {
@@ -492,7 +491,7 @@ class Rackspace extends AbstractAdapter
     }
     /**
      * Get the last HTTP response
-     * 
+     *
      * @return \Zend\Http\Response
      */
     public function getLastHttpResponse()
@@ -501,7 +500,7 @@ class Rackspace extends AbstractAdapter
     }
     /**
      * Set the error message and code
-     * 
+     *
      * @return void
      */
     protected function setError()

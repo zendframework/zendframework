@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Document
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Document;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Exception\ExtensionNotLoadedException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Pptx document.
@@ -31,8 +20,6 @@ use Zend\Search\Lucene,
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Pptx extends AbstractOpenXML
 {
@@ -174,14 +161,12 @@ class Pptx extends AbstractOpenXML
         }
 
         // Store meta data properties
-        foreach ($coreProperties as $key => $value)
-        {
+        foreach ($coreProperties as $key => $value) {
             $this->addField(Field::Text($key, $value, 'UTF-8'));
         }
 
         // Store title (if not present in meta data)
-        if (!isset($coreProperties['title']))
-        {
+        if (!isset($coreProperties['title'])) {
             $this->addField(Field::Text('title', $fileName, 'UTF-8'));
         }
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><title>Einführung</title>
     
 
     <para>
@@ -26,7 +26,7 @@
         relativen Gewicht jedes Elements in diesem, zu kalkulieren.
     </para>
 
-    <example xml:id="zend.tag.example.using"><info><title>Verwenden von Zend_Tag</title></info>
+    <example xml:id="zend.tag.example.using"><title>Verwenden von Zend_Tag</title>
         
 
         <para>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><title>Zend_Db_Select</title>
 
     
 
-    <section xml:id="zend.db.select.简介"><info><title>简介 </title></info>
+    <section xml:id="zend.db.select.简介"><title>简介 </title>
 
         
 
@@ -102,7 +102,7 @@ $result = $db->fetchAll($select, $params);
 
     </section>
 
-    <section xml:id="zend.db.select.fromcols"><info><title>同一表中查询多列数据</title></info>
+    <section xml:id="zend.db.select.fromcols"><title>同一表中查询多列数据</title>
 
         
 
@@ -132,7 +132,7 @@ $select->from('bar', 'bar.col AS col2');
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.select.表联合查询"><info><title>多表联合查询</title></info>
+    <section xml:id="zend.db.select.表联合查询"><title>多表联合查询</title>
 
         
 
@@ -165,7 +165,7 @@ $select->join('bar', 'foo.id = bar.id', '*');
 
     </section>
 
-    <section xml:id="zend.db.select.where"><info><title>WHERE条件</title></info>
+    <section xml:id="zend.db.select.where"><title>WHERE条件</title>
 
         
 
@@ -209,7 +209,7 @@ $select->orWhere('id IN(?)', array(1, 2, 3);
 
     </section>
 
-    <section xml:id="zend.db.select.group"><info><title>GROUP BY分句</title></info>
+    <section xml:id="zend.db.select.group"><title>GROUP BY分句</title>
 
         
 
@@ -241,7 +241,7 @@ $select->group(array('bar', 'baz'));
 
     </section>
 
-    <section xml:id="zend.db.select.having"><info><title>HAVING 条件</title></info>
+    <section xml:id="zend.db.select.having"><title>HAVING 条件</title>
 
         
 
@@ -272,7 +272,7 @@ $select->having('count_id > ?', 1);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.select.order"><info><title>ORDER BY 分句</title></info>
+    <section xml:id="zend.db.select.order"><title>ORDER BY 分句</title>
 
         
 
@@ -303,7 +303,7 @@ $select->order(array('noble_title DESC', 'first_name'));
 
     </section>
 
-    <section xml:id="zend.db.select.limit"><info><title>通过总数和偏移量进行LIMIT限制</title></info>
+    <section xml:id="zend.db.select.limit"><title>通过总数和偏移量进行LIMIT限制</title>
 
         
 
@@ -376,7 +376,7 @@ $select->limit(10, 20);
 
     </section>
 
-    <section xml:id="zend.db.select.分页"><info><title>通过页数和总数进行LIMIT限制</title></info>
+    <section xml:id="zend.db.select.分页"><title>通过页数和总数进行LIMIT限制</title>
 
         
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Intestazioni aggiuntive</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><title>Intestazioni aggiuntive</title>
     
     <para>
         E' possibile impostare intestazioni e-mail arbitrarie utilizzando il metodo <code>addHeader()</code>.
         Richiede due parametri: il nome dell'intestazione ed il suo valore. Un terzo parametro opzionale determina se l'intestazione debba avere uno o più valori:
     </para>
-    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Aggiunta di intestazioni al messaggio e-mail</title></info>
+    <example xml:id="zend.mail.additional-headers.example-1"><title>Aggiunta di intestazioni al messaggio e-mail</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail.php';

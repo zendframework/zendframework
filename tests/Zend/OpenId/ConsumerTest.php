@@ -1,32 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OpenId
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
  */
 
 namespace ZendTest\OpenId;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http,
-    Zend\OpenId\OpenId,
-    Zend\OpenId\Consumer\GenericConsumer as Consumer,
-    Zend\OpenId\Consumer\Storage,
-    Zend\OpenId\Extension;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http;
+use Zend\OpenId\OpenId;
+use Zend\OpenId\Consumer\GenericConsumer as Consumer;
+use Zend\OpenId\Consumer\Storage;
+use Zend\OpenId\Extension;
 
 
 /**
@@ -35,8 +24,6 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
 class ConsumerTest extends TestCase
@@ -68,7 +55,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, null, null, null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
 
         $this->assertTrue(1 <= count($headers));
         $this->assertTrue($headers->has('Location'));
@@ -99,7 +86,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -127,7 +114,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -154,7 +141,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", $ext, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -183,7 +170,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage, true);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -225,7 +212,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->check(self::ID, null, null, null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
 
         $this->assertTrue(1 <= count($headers));
         $this->assertTrue($headers->has('Location'));
@@ -841,7 +828,7 @@ class ConsumerTest extends TestCase
 
     /**
      * testing verify
-     * 
+     *
      */
     public function testVerifyDumb()
     {

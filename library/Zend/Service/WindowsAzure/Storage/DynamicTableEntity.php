@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
@@ -58,9 +58,9 @@ class DynamicTableEntity extends TableEntity
     {
         if (strtolower($name) == 'partitionkey') {
             $this->setPartitionKey($value);
-        } else if (strtolower($name) == 'rowkey') {
+        } elseif (strtolower($name) == 'rowkey') {
             $this->setRowKey($value);
-        } else if (strtolower($name) == 'etag') {
+        } elseif (strtolower($name) == 'etag') {
             $this->setEtag($value);
         } else {
             if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
@@ -69,9 +69,9 @@ class DynamicTableEntity extends TableEntity
                     $type = 'Edm.String';
                     if (is_int($value)) {
                         $type = 'Edm.Int32';
-                    } else if (is_float($value)) {
+                    } elseif (is_float($value)) {
                         $type = 'Edm.Double';
-                    } else if (is_bool($value)) {
+                    } elseif (is_bool($value)) {
                         $type = 'Edm.Boolean';
                     }
                 }

@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Regex extends AbstractValidator
 {
@@ -38,16 +26,16 @@ class Regex extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID   => "Invalid type given. String, integer or float expected",
-        self::NOT_MATCH => "'%value%' does not match against pattern '%pattern%'",
+        self::NOT_MATCH => "The input does not match against pattern '%pattern%'",
         self::ERROROUS  => "There was an internal error while using the pattern '%pattern%'",
     );
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'pattern' => 'pattern'
     );
 
@@ -62,8 +50,7 @@ class Regex extends AbstractValidator
      * Sets validator options
      *
      * @param  string|Traversable $pattern
-     * @throws \Zend\Validator\Exception On missing 'pattern' parameter
-     * @return void
+     * @throws Exception\InvalidArgumentException On missing 'pattern' parameter
      */
     public function __construct($pattern)
     {
@@ -104,8 +91,8 @@ class Regex extends AbstractValidator
      * Sets the pattern option
      *
      * @param  string $pattern
-     * @throws \Zend\Validator\Exception if there is a fatal error in pattern matching
-     * @return \Zend\Validator\Regex Provides a fluent interface
+     * @throws Exception\InvalidArgumentException if there is a fatal error in pattern matching
+     * @return Regex Provides a fluent interface
      */
     public function setPattern($pattern)
     {

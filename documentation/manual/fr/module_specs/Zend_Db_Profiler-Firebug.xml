@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler.profilers.firebug"><info><title>Profiler avec Firebug</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler.profilers.firebug"><title>Profiler avec Firebug</title>
     
 
     <para>
@@ -41,7 +41,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.db.profiler.profilers.firebug.example.with_front_controller"><info><title>Profilage de base de données avec Zend_Controller_Front</title></info>
+    <example xml:id="zend.db.profiler.profilers.firebug.example.with_front_controller"><title>Profilage de base de données avec Zend_Controller_Front</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -59,7 +59,7 @@ $db->setProfiler($profiler)
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.db.profiler.profilers.firebug.example.without_front_controller"><info><title>Profilage de base de données sans Zend_Controller_Front</title></info>
+    <example xml:id="zend.db.profiler.profilers.firebug.example.without_front_controller"><title>Profilage de base de données sans Zend_Controller_Front</title>
         
 
         <programlisting language="php"><![CDATA[

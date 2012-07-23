@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>Utilisation</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><title>Utilisation</title>
     
 
-    <section xml:id="zend.paginator.usage.paginating"><info><title>Paginer des collections de données</title></info>
+    <section xml:id="zend.paginator.usage.paginating"><title>Paginer des collections de données</title>
         
 
         <para>
@@ -12,7 +12,7 @@
             par défaut :
         </para>
 
-        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Adaptateurs pour <classname>Zend_Paginator</classname></title></info>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><title>Adaptateurs pour <classname>Zend_Paginator</classname></title>
             
 
             <tgroup cols="2">
@@ -164,7 +164,7 @@ $this->view->paginator = $paginator;
         </para>
     </section>
 
-    <section xml:id="zend.paginator.usage.dbselect"><info><title>The DbSelect and DbTableSelect adapter</title></info>
+    <section xml:id="zend.paginator.usage.dbselect"><title>The DbSelect and DbTableSelect adapter</title>
         
         <para>
             The usage of most adapters is pretty straight-forward. However, the
@@ -214,7 +214,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
     </section>
 
-    <section xml:id="zend.paginator.rendering"><info><title>Rendre des pages avec les scripts de vue</title></info>
+    <section xml:id="zend.paginator.rendering"><title>Rendre des pages avec les scripts de vue</title>
         
 
         <para>
@@ -277,7 +277,7 @@ $paginator = new Zend_Paginator($adapter);
 
         <para>Il existe 4 types de défilement intégrés dans Zend Framework :</para>
 
-        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Types de défilement pour <classname>Zend_Paginator</classname></title></info>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><title>Types de défilement pour <classname>Zend_Paginator</classname></title>
             
 
             <tgroup cols="2">
@@ -373,7 +373,7 @@ $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting></para>
             </note>
 
-            <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>Exemples de contrôles de pagination</title></info>
+            <section xml:id="zend.paginator.usage.rendering.example-controls"><title>Exemples de contrôles de pagination</title>
                 
 
             <para>
@@ -497,7 +497,7 @@ $('paginationControl').observe('change', function() {
             </para>
         </section>
 
-        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>Liste des propriétés</title></info>
+        <section xml:id="zend.paginator.usage.rendering.properties"><title>Liste des propriétés</title>
             
 
             <para>
@@ -505,7 +505,7 @@ $('paginationControl').observe('change', function() {
                 partials de vue :
             </para>
 
-            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>Propriétés disponibles aux partials de vue</title></info>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><title>Propriétés disponibles aux partials de vue</title>
                 
 
                 <tgroup cols="3">

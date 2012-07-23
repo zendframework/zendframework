@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Pendahuluan</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>Pendahuluan</title>
     
 
     <para>
@@ -28,7 +28,7 @@
         generates the view output.
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>Controller Script</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>Controller Script</title>
         
 
         <para>
@@ -65,7 +65,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>View Script</title></info>
+    <section xml:id="zend.view.introduction.view"><title>View Script</title>
 
         
 
@@ -112,7 +112,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.options"><info><title>Options</title></info>
+    <section xml:id="zend.view.introduction.options"><title>Options</title>
         
 
         <para>
@@ -174,7 +174,7 @@ base/path/
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.view.introduction.accessors"><info><title>Utility Accessors</title></info>
+    <section xml:id="zend.view.introduction.accessors"><title>Utility Accessors</title>
         
 
         <para>

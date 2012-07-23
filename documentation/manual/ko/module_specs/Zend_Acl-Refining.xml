@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>접근 제어의 정련(精鍊)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>접근 제어의 정련(精鍊)</title>
 
     
 
-    <section xml:id="zend.acl.refining.precise"><info><title>정확한 접근 제어</title></info>
+    <section xml:id="zend.acl.refining.precise"><title>정확한 접근 제어</title>
 
         
 
@@ -97,7 +97,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
     </section>
 
-    <section xml:id="zend.acl.refining.removing"><info><title>접근 제어의 삭제</title></info>
+    <section xml:id="zend.acl.refining.removing"><title>접근 제어의 삭제</title>
 
         
 

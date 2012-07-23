@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -32,8 +21,6 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Photos extends GData
 {
@@ -135,14 +122,14 @@ class Photos extends GData
                 $location->setUser($userName);
             }
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             if ($userName !== null) {
                 $location->setUser($userName);
             }
             $uri = $location->getQueryUrl();
-        } else if ($location !== null) {
+        } elseif ($location !== null) {
             $uri = $location;
-        } else if ($userName !== null) {
+        } elseif ($userName !== null) {
             $uri = self::PICASA_BASE_FEED_URI . '/' .
                 self::DEFAULT_PROJECTION . '/' . self::USER_PATH . '/' .
                 $userName;
@@ -169,10 +156,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('feed');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -197,10 +184,10 @@ class Photos extends GData
             $uri = self::PICASA_BASE_FEED_URI . '/' .
                 self::DEFAULT_PROJECTION . '/' .
                 self::COMMUNITY_SEARCH_PATH;
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('feed');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -221,10 +208,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -245,10 +232,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -269,10 +256,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -293,10 +280,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -317,10 +304,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;

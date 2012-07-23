@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP Autentifikácia</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>SMTP Autentifikácia</title>
   
 
   <para>
@@ -10,7 +10,7 @@
   v konfiguračnom poli.
   </para>
 
-  <example><info><title>Nastavenie SMTP autentifikácie v Zend_Mail_Transport_Smtp</title></info>
+  <example><title>Nastavenie SMTP autentifikácie v Zend_Mail_Transport_Smtp</title>
     
 
     <programlisting role="php"><![CDATA[<?php
@@ -32,7 +32,7 @@ $mail->setSubject('TestSubject');
 $mail->send($transport);]]></programlisting>
   </example>
 
-  <note><info><title>Druhy autentifikácie</title></info>
+  <note><title>Druhy autentifikácie</title>
     
 
     <para>

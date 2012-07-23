@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OAuth
  */
 
 namespace Zend\OAuth\Signature;
 
-use Zend\OAuth\Http\Utility as HTTPUtility,
-    Zend\OAuth\Exception,
-    Zend\Uri;
+use Zend\OAuth\Exception;
+use Zend\OAuth\Http\Utility as HTTPUtility;
+use Zend\Uri;
 
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractSignature implements SignatureInterface
 {
@@ -58,10 +46,10 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Constructor
-     * 
-     * @param  string $consumerSecret 
-     * @param  null|string $tokenSecret 
-     * @param  null|string $hashAlgo 
+     *
+     * @param  string $consumerSecret
+     * @param  null|string $tokenSecret
+     * @param  null|string $hashAlgo
      * @return void
      */
     public function __construct($consumerSecret, $tokenSecret = null, $hashAlgo = null)
@@ -78,8 +66,8 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Normalize the base signature URL
-     * 
-     * @param  string $url 
+     *
+     * @param  string $url
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -101,7 +89,7 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Assemble key from consumer and token secrets
-     * 
+     *
      * @return string
      */
     protected function _assembleKey()
@@ -118,17 +106,17 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Get base signature string
-     * 
-     * @param  array $params 
-     * @param  null|string $method 
-     * @param  null|string $url 
+     *
+     * @param  array $params
+     * @param  null|string $method
+     * @param  null|string $url
      * @return string
      */
     protected function _getBaseSignatureString(array $params, $method = null, $url = null)
     {
         $encodedParams = array();
         foreach ($params as $key => $value) {
-            $encodedParams[HTTPUtility::urlEncode($key)] = 
+            $encodedParams[HTTPUtility::urlEncode($key)] =
                 HTTPUtility::urlEncode($value);
         }
         $baseStrings = array();
@@ -152,8 +140,8 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Transform an array to a byte value ordered query string
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return string
      */
     protected function _toByteValueOrderedQueryString(array $params)

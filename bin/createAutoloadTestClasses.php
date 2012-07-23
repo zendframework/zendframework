@@ -2,9 +2,9 @@
 /**
  * createAutoloadTestClasses.php
  *
- * A script for creating a hierarchy of classes for use with testing 
- * autoloading. Each directory has classes from a to p; additional classes are 
- * generated 2 levels deep, giving a total of 16^3 classes to use in 
+ * A script for creating a hierarchy of classes for use with testing
+ * autoloading. Each directory has classes from a to p; additional classes are
+ * generated 2 levels deep, giving a total of 16^3 classes to use in
  * autoloading tests.
  */
 

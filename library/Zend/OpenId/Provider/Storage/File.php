@@ -1,27 +1,17 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
  */
 
 namespace Zend\OpenId\Provider\Storage;
+
 use Zend\OpenId;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * External storage implemmentation using serialized files
@@ -29,8 +19,6 @@ use Zend\OpenId;
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Provider
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class File extends AbstractStorage
 {
@@ -98,7 +86,9 @@ class File extends AbstractStorage
     public function addAssociation($handle, $macFunc, $secret, $expires)
     {
         $name = $this->_dir . '/assoc_' . md5($handle);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -107,7 +97,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'w+');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'w+');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -137,7 +129,9 @@ class File extends AbstractStorage
     public function getAssociation($handle, &$macFunc, &$secret, &$expires)
     {
         $name = $this->_dir . '/assoc_' . md5($handle);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -146,7 +140,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -159,7 +155,9 @@ class File extends AbstractStorage
                     $ret = true;
                 } else {
                     fclose($f);
-                    @unlink($name);
+                    ErrorHandler::start(E_WARNING);
+                    unlink($name);
+                    ErrorHandler::stop();
                     fclose($lock);
                     return false;
                 }
@@ -182,7 +180,9 @@ class File extends AbstractStorage
     public function delAssociation($handle)
     {
         $name = $this->_dir . '/assoc_' . md5($handle);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -191,7 +191,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            @unlink($name);
+            ErrorHandler::start(E_WARNING);
+            unlink($name);
+            ErrorHandler::stop();
             fclose($lock);
             return true;
         } catch (\Exception $e) {
@@ -212,7 +214,9 @@ class File extends AbstractStorage
     public function addUser($id, $password)
     {
         $name = $this->_dir . '/user_' . md5($id);
-        $lock = @fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -221,7 +225,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'x');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'x');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -246,7 +252,9 @@ class File extends AbstractStorage
     public function hasUser($id)
     {
         $name = $this->_dir . '/user_' . md5($id);
-        $lock = @fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -254,8 +262,10 @@ class File extends AbstractStorage
             fclose($lock);
             return false;
         }
-        try { 
-            $f = @fopen($name, 'r');
+        try {
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -287,7 +297,9 @@ class File extends AbstractStorage
     public function checkUser($id, $password)
     {
         $name = $this->_dir . '/user_' . md5($id);
-        $lock = @fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -296,7 +308,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -327,7 +341,9 @@ class File extends AbstractStorage
     public function delUser($id)
     {
         $name = $this->_dir . '/user_' . md5($id);
-        $lock = @fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -336,7 +352,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            @unlink($name);
+            ErrorHandler::start(E_WARNING);
+            unlink($name);
+            ErrorHandler::stop();
             fclose($lock);
             return true;
         } catch (\Exception $e) {
@@ -355,7 +373,9 @@ class File extends AbstractStorage
     public function getTrustedSites($id)
     {
         $name = $this->_dir . '/user_' . md5($id);
-        $lock = @fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -364,7 +384,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -397,7 +419,9 @@ class File extends AbstractStorage
     public function addSite($id, $site, $trusted)
     {
         $name = $this->_dir . '/user_' . md5($id);
-        $lock = @fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/user.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -406,7 +430,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'r+');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'r+');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;

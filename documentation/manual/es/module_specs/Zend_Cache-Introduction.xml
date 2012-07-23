@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Introducción</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><title>Introducción</title>
     
     <para>
         <classname>Zend_Cache</classname> provee una forma genérica para
@@ -18,7 +18,7 @@
             <classname>Zend_Cache_Core</classname> a conveniencia:
             <emphasis>Output</emphasis> , <emphasis>File</emphasis> ,
             <emphasis>Function</emphasis> y <emphasis>Class</emphasis> . </para>
-    <example xml:id="zend.cache.introduction.example-1"><info><title> Obtener un frontend con Zend_Cache::factory() </title></info>
+    <example xml:id="zend.cache.introduction.example-1"><title> Obtener un frontend con Zend_Cache::factory() </title>
         
         <para>
             <methodname>Zend_Cache::factory()</methodname> ejemplifica objetos
@@ -44,7 +44,7 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note><info><title> Frontends y Backends Compuestos de Múltiples Palabras </title></info>
+    <note><title> Frontends y Backends Compuestos de Múltiples Palabras </title>
         
         <para> Algunos frontends y backends se nombran usando varias palabras,
             tal como 'ZenPlatform'. Al fabricarlas las especificamos, las
@@ -52,8 +52,8 @@ $cache = Zend_Cache::factory('Core',
             guión ('-'), o punto ('.'). </para>
     </note>
 
-    <example xml:id="zend.cache.introduction.example-2"><info><title>Almacenando en caché un resultado de consulta a una base de
-            datos</title></info>
+    <example xml:id="zend.cache.introduction.example-2"><title>Almacenando en caché un resultado de consulta a una base de
+            datos</title>
         
 
         <para> Ahora que tenemos un frontend, podemos almacenar en caché
@@ -88,8 +88,8 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.cache.introduction.example-3"><info><title> El almacenamiento en caché de salida con la interfaz de salida
-            Zend_Cache </title></info>
+    <example xml:id="zend.cache.introduction.example-3"><title> El almacenamiento en caché de salida con la interfaz de salida
+            Zend_Cache </title>
         
         <para> 'Resaltamos' las secciones en las que deseamos almacenar en caché
             la salida, mediante la adición de algunas condiciones lógicas,

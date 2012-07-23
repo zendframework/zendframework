@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><info><title>Advanced usage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><title>Advanced usage</title>
     
 
-    <section xml:id="zend.paginator.advanced.adapters"><info><title>Eigene Adapter für Quelldaten</title></info>
+    <section xml:id="zend.paginator.advanced.adapters"><title>Eigene Adapter für Quelldaten</title>
         
 
         <para>
@@ -54,7 +54,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         </para>
     </section>
 
-    <section xml:id="zend.paginator.advanced.scrolling-styles"><info><title>Eigene Scrolling Stile</title></info>
+    <section xml:id="zend.paginator.advanced.scrolling-styles"><title>Eigene Scrolling Stile</title>
         
 
         <para>
@@ -101,7 +101,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.paginator.advanced.caching"><info><title>Caching features</title></info>
+    <section xml:id="zend.paginator.advanced.caching"><title>Caching features</title>
         
 
         <para>
@@ -193,7 +193,7 @@ var_dump($paginator->getPageItemCache());
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.paginator.advanced.aggregator"><info><title>Zend_Paginator_AdapterAggregate Interface</title></info>
+    <section xml:id="zend.paginator.advanced.aggregator"><title>Zend_Paginator_AdapterAggregate Interface</title>
         
 
         <para>

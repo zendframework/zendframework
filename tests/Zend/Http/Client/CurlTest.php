@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Client;
@@ -40,8 +29,6 @@ use Zend\Http\Client\Adapter;
  * @category   Zend
  * @package    Zend_Http_Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -65,19 +52,6 @@ class CurlTest extends CommonHttpTests
             $this->markTestSkipped('cURL is not installed, marking all Http Client Curl Adapter tests skipped.');
         }
         parent::setUp();
-    }
-
-    public function testSimpleRequests()
-    {
-        $this->markTestSkipped('Method PATCH not implemented.');
-    }
-
-    /**
-     * @dataProvider parameterArrayProvider
-     */
-    public function testPatchData($params)
-    {
-        $this->markTestSkipped('Method PATCH not implemented.');
     }
 
     /**
@@ -154,7 +128,7 @@ class CurlTest extends CommonHttpTests
         $this->client = new \Zend\Http\Client($this->client->getUri(true), $config);
 
         $this->setExpectedException(
-        	'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
             'Unknown or erroreous cURL option'
             );
         $this->client->send();

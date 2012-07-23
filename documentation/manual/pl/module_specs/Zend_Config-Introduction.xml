@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Wprowadzenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><title>Wprowadzenie</title>
     
     <para>
         Klasa <code>Zend_Config</code> została stworzona aby uprościć użycie
@@ -13,7 +13,7 @@
         <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
 
     </para>
-    <example xml:id="zend.config.introduction.example.using"><info><title>Użycie Zend_Config</title></info>
+    <example xml:id="zend.config.introduction.example.using"><title>Użycie Zend_Config</title>
         
         <para>
             Normalnie jest tak, że użytkownicy użyliby jednej z klas adaptera,
@@ -69,7 +69,7 @@ $db = Zend_Db::factory($config->database);
 $host = $config->database->get('host', 'localhost');
 
     ]]></programlisting>
-    <example xml:id="zend.config.introduction.example.file.php"><info><title>Użycie Zend_Config z plikiem konfiguracyjnym PHP</title></info>
+    <example xml:id="zend.config.introduction.example.file.php"><title>Użycie Zend_Config z plikiem konfiguracyjnym PHP</title>
         
         <para>
             Często wskazane może być użycie do konfiguracji zwykłego pliku PHP.

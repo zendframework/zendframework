@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><info><title>Zend_ProgressBar_Adapter_JsPush</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><title>Zend_ProgressBar_Adapter_JsPush</title>
     
 
     <para>
@@ -78,7 +78,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.progressbar-adapter.jspush.example"><info><title>Exemple basique du fonctionnement côté-client</title></info>
+    <example xml:id="zend.progressbar-adapter.jspush.example"><title>Exemple basique du fonctionnement côté-client</title>
         
 
         <para>
@@ -168,7 +168,7 @@ function Zend_ProgressBar_Update(data)
         </itemizedlist>
     </example>
 
-    <note><info><title>Intervalle de mise à jour</title></info>
+    <note><title>Intervalle de mise à jour</title>
         
 
         <para>

@@ -1,69 +1,63 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_Calendar
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\Calendar;
+
 use Zend\GData\Calendar\Extension;
 
 /**
  * @category   Zend
  * @package    Zend_GData_Calendar
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_Calendar
  */
 class SendEventNotificationsTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->sendEventNotificationsText = file_get_contents(
                 'Zend/GData/Calendar/_files/SendEventNotificationsElementSample1.xml',
                 true);
         $this->sendEventNotifications = new Extension\SendEventNotifications();
     }
 
-    public function testEmptySendEventNotificationsShouldHaveNoExtensionElements() {
+    public function testEmptySendEventNotificationsShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->sendEventNotifications->extensionElements));
         $this->assertTrue(count($this->sendEventNotifications->extensionElements) == 0);
     }
 
-    public function testEmptySendEventNotificationsShouldHaveNoExtensionAttributes() {
+    public function testEmptySendEventNotificationsShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->sendEventNotifications->extensionAttributes));
         $this->assertTrue(count($this->sendEventNotifications->extensionAttributes) == 0);
     }
 
-    public function testSampleSendEventNotificationsShouldHaveNoExtensionElements() {
+    public function testSampleSendEventNotificationsShouldHaveNoExtensionElements()
+    {
         $this->sendEventNotifications->transferFromXML($this->sendEventNotificationsText);
         $this->assertTrue(is_array($this->sendEventNotifications->extensionElements));
         $this->assertTrue(count($this->sendEventNotifications->extensionElements) == 0);
     }
 
-    public function testSampleSendEventNotificationsShouldHaveNoExtensionAttributes() {
+    public function testSampleSendEventNotificationsShouldHaveNoExtensionAttributes()
+    {
         $this->sendEventNotifications->transferFromXML($this->sendEventNotificationsText);
         $this->assertTrue(is_array($this->sendEventNotifications->extensionAttributes));
         $this->assertTrue(count($this->sendEventNotifications->extensionAttributes) == 0);
     }
 
-    public function testNormalSendEventNotificationsShouldHaveNoExtensionElements() {
+    public function testNormalSendEventNotificationsShouldHaveNoExtensionElements()
+    {
         $this->sendEventNotifications->value = true;
         $this->assertEquals($this->sendEventNotifications->value, true);
         $this->assertEquals(count($this->sendEventNotifications->extensionElements), 0);
@@ -83,7 +77,8 @@ class SendEventNotificationsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newSendEventNotifications2->value, true);
     }
 
-    public function testEmptySendEventNotificationsToAndFromStringShouldMatch() {
+    public function testEmptySendEventNotificationsToAndFromStringShouldMatch()
+    {
         $sendEventNotificationsXml = $this->sendEventNotifications->saveXML();
         $newSendEventNotifications = new Extension\SendEventNotifications();
         $newSendEventNotifications->transferFromXML($sendEventNotificationsXml);
@@ -91,7 +86,8 @@ class SendEventNotificationsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($sendEventNotificationsXml == $newSendEventNotificationsXml);
     }
 
-    public function testSendEventNotificationsWithValueToAndFromStringShouldMatch() {
+    public function testSendEventNotificationsWithValueToAndFromStringShouldMatch()
+    {
         $this->sendEventNotifications->value = true;
         $sendEventNotificationsXml = $this->sendEventNotifications->saveXML();
         $newSendEventNotifications = new Extension\SendEventNotifications();
@@ -101,7 +97,8 @@ class SendEventNotificationsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $newSendEventNotifications->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->sendEventNotifications->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -115,7 +112,8 @@ class SendEventNotificationsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newSendEventNotifications->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullSendEventNotificationsToAndFromString() {
+    public function testConvertFullSendEventNotificationsToAndFromString()
+    {
         $this->sendEventNotifications->transferFromXML($this->sendEventNotificationsText);
         $this->assertEquals($this->sendEventNotifications->value, false);
     }

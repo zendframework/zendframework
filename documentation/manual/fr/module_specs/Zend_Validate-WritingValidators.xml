@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Écrire des validateurs</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><title>Écrire des validateurs</title>
     
 
     <para>
@@ -50,7 +50,7 @@
         succès ou l'échec de validation soit déterminé.
     </para>
 
-    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Création d'une simple classe de validation</title></info>
+    <example xml:id="zend.validate.writing_validators.example.simple"><title>Création d'une simple classe de validation</title>
         
 
         <para>
@@ -87,7 +87,7 @@ class MonValidateur_Float extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Écriture d'une classe de validation ayant des conditions de dépendances</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><title>Écriture d'une classe de validation ayant des conditions de dépendances</title>
         
 
         <para>
@@ -180,8 +180,8 @@ class MonValidateur_NumericBetween extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Validation avec des conditions indépendantes, avec raisons multiples
-        d'échec</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><title>Validation avec des conditions indépendantes, avec raisons multiples
+        d'échec</title>
         
 
         <para>

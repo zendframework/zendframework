@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\Analytics;
@@ -29,8 +18,6 @@ use Zend\GData\Analytics\DataQuery;
  * @category   Zend
  * @package    Zend_Gdata_Analytics
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Analytics
  */
@@ -39,9 +26,9 @@ class Zend_Gdata_Analytics_DataFeedTest extends \PHPUnit_Framework_TestCase
     public $testData = array(
         'blogger.com' => 68140,
         'google.com'  => 29666,
-        'stumbleupon.com' => 4012, 
-        'google.co.uk' => 2968, 
-        'google.co.in' => 2793,        
+        'stumbleupon.com' => 4012,
+        'google.co.uk' => 2968,
+        'google.co.in' => 2793,
     );
     /** @var DataFeed */
     public $dataFeed;
@@ -63,18 +50,18 @@ class Zend_Gdata_Analytics_DataFeedTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($entry instanceof DataEntry);
         }
     }
-    
+
     public function testGetters()
     {
         $sources = array_keys($this->testData);
         $values = array_values($this->testData);
-        
+
         foreach ($this->dataFeed as $index => $row) {
             $source = $row->getDimension(DataQuery::DIMENSION_SOURCE);
             $medium = $row->getDimension('ga:medium');
             $visits = $row->getMetric('ga:visits');
             $visitsValue = $row->getValue('ga:visits');
-            
+
             $this->assertEquals("$medium", 'referral');
             $this->assertEquals("$source", $sources[$index]);
             $this->assertEquals("$visits", $values[$index]);

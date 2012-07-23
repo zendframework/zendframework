@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.value"><info><title>Travailler avec les valeurs des monnaies (les montants)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.value"><title>Travailler avec les valeurs des monnaies (les montants)</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Il faut ainsi travailler avec le montant (la valeur), la précision et l'éventuel taux de change.
     </para>
 
-    <section xml:id="zend.currency.value.money"><info><title>Travailler avec les valeurs des monnaies</title></info>
+    <section xml:id="zend.currency.value.money"><title>Travailler avec les valeurs des monnaies</title>
         
 
         <para>
@@ -46,7 +46,7 @@ print $currency->setValue(2000); // Retournerait '$ 2.000'
         </para>
     </section>
 
-    <section xml:id="zend.currency.value.precision"><info><title>Utiliser la précision des monnaies</title></info>
+    <section xml:id="zend.currency.value.precision"><title>Utiliser la précision des monnaies</title>
         
 
         <para>

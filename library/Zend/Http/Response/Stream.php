@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Response
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Response;
 
-use Zend\Http\Response,
-    Zend\Http\Exception;
-
+use Zend\Http\Exception;
+use Zend\Http\Response;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
@@ -32,26 +21,24 @@ use Zend\Http\Response,
  *
  * @package    Zend_Http
  * @subpackage Response
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Stream extends Response
 {
-    
+
     /**
      * The Content-Length value, if set
      *
      * @var int
      */
     protected $contentLength = null;
-    
+
     /**
      * The portion of the body that has alredy been streamed
      *
      * @var int
      */
     protected $contentStreamed = 0;
-    
+
     /**
      * Response as stream
      *
@@ -139,7 +126,7 @@ class Stream extends Response
         return $this;
     }
 
-    
+
     /**
      * Create a new Zend\Http\Response\Stream object from a stream
      *
@@ -149,14 +136,14 @@ class Stream extends Response
      */
     public static function fromStream($responseString, $stream)
     {
-    
+
         if (!is_resource($stream)) {
             throw new Exception\InvalidArgumentException('A valid stream is required');
         }
 
         $headerComplete = false;
         $headersString  = '';
-        
+
         $responseArray = explode("\n",$responseString);
 
         while (count($responseArray)) {
@@ -167,35 +154,35 @@ class Stream extends Response
                 $headerComplete = true;
                 break;
             }
-            
+
         }
-        
+
         if (!$headerComplete) {
             while (false !== ($nextLine = fgets($stream))) {
-                
+
                 $headersString .= trim($nextLine)."\r\n";
                 if ($nextLine == "\r\n" || $nextLine == "\n") {
                     $headerComplete = true;
                     break;
                 }
             }
-        } 
+        }
 
         if (!$headerComplete) {
             throw new Exception\OutOfRangeException('End of header not found');
         }
-            
+
         $response = static::fromString($headersString);
-    
+
         if (is_resource($stream)) {
             $response->setStream($stream);
         }
-        
+
         if (count($responseArray)) {
             $response->content = implode("\n", $responseArray);
-        } 
-    
-        $headers = $response->headers();
+        }
+
+        $headers = $response->getHeaders();
         foreach($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
                 $response->contentLength = (int) $header->getFieldValue();
@@ -210,8 +197,8 @@ class Stream extends Response
 
         return $response;
     }
-    
-    
+
+
     /**
      * Get the response body as string
      *
@@ -248,7 +235,7 @@ class Stream extends Response
         return $this->content;
     }
 
-    
+
     /**
      * Read stream content and return it as string
      *
@@ -267,15 +254,15 @@ class Stream extends Response
         if (!is_resource($this->stream) || $bytes == 0) {
             return '';
         }
-    
+
         $this->content         .= stream_get_contents($this->stream, $bytes);
         $this->contentStreamed += strlen($this->content);
-    
+
         if ($this->contentLength == $this->contentStreamed) {
             $this->stream = null;
         }
     }
-        
+
     /**
      * Destructor
      */
@@ -285,7 +272,9 @@ class Stream extends Response
             $this->stream = null; //Could be listened by others
         }
         if ($this->cleanup) {
-            @unlink($this->stream_name);
+            ErrorHandler::start(E_WARNING);
+            unlink($this->stream_name);
+            ErrorHandler::stop();
         }
     }
 }

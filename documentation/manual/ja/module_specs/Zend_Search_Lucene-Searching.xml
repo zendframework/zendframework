@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>インデックスの検索</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><title>インデックスの検索</title>
     
 
-    <section xml:id="zend.search.lucene.searching.query_building"><info><title>クエリの作成</title></info>
+    <section xml:id="zend.search.lucene.searching.query_building"><title>クエリの作成</title>
         
 
         <para>
@@ -84,7 +84,7 @@ $index->find($query);
             コンピュータが生成したフィールドやトークン化されていないフィールドに適しています。
         </para>
 
-        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>クエリのパース</title></info>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><title>クエリのパース</title>
             
             <para>
                 <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname>
@@ -150,7 +150,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results"><info><title>検索結果</title></info>
+    <section xml:id="zend.search.lucene.searching.results"><title>検索結果</title>
         
         <para>
             検索結果は <classname>Zend_Search_Lucene_Search_QueryHit</classname> オブジェクトの配列となります。
@@ -225,7 +225,7 @@ foreach ($hits as $hit) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results-limiting"><info><title>結果の制限</title></info>
+    <section xml:id="zend.search.lucene.searching.results-limiting"><title>結果の制限</title>
         
 
         <para>
@@ -256,7 +256,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>結果の重み付け</title></info>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><title>結果の重み付け</title>
         
         <para>
             <classname>Zend_Search_Lucene</classname> は、Java Lucene と同じ重み付けアルゴリズムを使用します。
@@ -289,7 +289,7 @@ foreach ($hits as $hit) {
 
     </section>
 
-    <section xml:id="zend.search.lucene.searching.sorting"><info><title>検索結果の並べ替え</title></info>
+    <section xml:id="zend.search.lucene.searching.sorting"><title>検索結果の並べ替え</title>
         
         <para>
             検索結果は、デフォルトではスコアで並べ替えられます。
@@ -343,7 +343,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>検索結果の強調</title></info>
+    <section xml:id="zend.search.lucene.searching.highlighting"><title>検索結果の強調</title>
         
         <para>
             <classname>Zend_Search_Lucene</classname> では、2 とおりの方法で検索結果を強調させることができます。

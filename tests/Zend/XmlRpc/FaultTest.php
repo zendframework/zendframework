@@ -1,37 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Value,
-    Zend\XmlRpc;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc;
 
 /**
- * Test case for Zend_XmlRpc_Fault
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
 class FaultTest extends \PHPUnit_Framework_TestCase
@@ -46,7 +31,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Value::setGenerator(null);
+        AbstractValue::setGenerator(null);
         $this->_fault = new XmlRpc\Fault();
     }
 
@@ -174,19 +159,19 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Invalid fault structure');
         $this->assertFalse($this->_fault->loadXml('<methodResponse><fault/></methodResponse>'));
     }
-    
+
     public function testLoadXmlThrowsExceptionOnInvalidInput3()
     {
         $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Invalid fault structure');
         $this->_fault->loadXml('<methodResponse><fault/></methodResponse>');
     }
-    
+
     public function testLoadXmlThrowsExceptionOnInvalidInput4()
     {
         $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Fault code and string required');
         $this->_fault->loadXml('<methodResponse><fault><value><struct/></value></fault></methodResponse>');
     }
-    
+
     /**
      * Zend_XmlRpc_Fault::isFault() test
      */
@@ -258,10 +243,10 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_fault->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->_fault->setEncoding('ISO-8859-1');
         $this->assertEquals('ISO-8859-1', $this->_fault->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     public function testUnknownErrorIsUsedIfUnknownErrorCodeEndEmptyMessageIsPassed()

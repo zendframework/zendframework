@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Search;
+
 use Zend\Search\Lucene;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class QueryToken
 {
@@ -134,11 +122,11 @@ class QueryToken
             case self::TC_WORD:
                 if (  strtolower($tokenText) == 'and') {
                     $this->type = self::TT_AND_LEXEME;
-                } else if (strtolower($tokenText) == 'or') {
+                } elseif (strtolower($tokenText) == 'or') {
                     $this->type = self::TT_OR_LEXEME;
-                } else if (strtolower($tokenText) == 'not') {
+                } elseif (strtolower($tokenText) == 'not') {
                     $this->type = self::TT_NOT_LEXEME;
-                } else if (strtolower($tokenText) == 'to') {
+                } elseif (strtolower($tokenText) == 'to') {
                     $this->type = self::TT_TO_LEXEME;
                 } else {
                     $this->type = self::TT_WORD;
@@ -213,7 +201,7 @@ class QueryToken
 
                     default:
                         throw new Lucene\Exception\InvalidArgumentException(
-                        	'Unrecognized query syntax lexeme: \'' . $tokenText . '\''
+                            'Unrecognized query syntax lexeme: \'' . $tokenText . '\''
                         );
                 }
                 break;
@@ -223,7 +211,7 @@ class QueryToken
 
             default:
                 throw new Lucene\Exception\InvalidArgumentException(
-                	'Unrecognized lexeme type: \'' . $tokenCategory . '\''
+                    'Unrecognized lexeme type: \'' . $tokenCategory . '\''
                 );
         }
     }

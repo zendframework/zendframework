@@ -15,8 +15,6 @@ use Zend\Db\Sql;
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DbSelect implements AdapterInterface
 {
@@ -94,7 +92,7 @@ class DbSelect implements AdapterInterface
             $result = $rowCount->query(Db\Db::FETCH_ASSOC)->fetch();
 
             $this->_rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
-        } else if (is_integer($rowCount)) {
+        } elseif (is_integer($rowCount)) {
             $this->_rowCount = $rowCount;
         } else {
             throw new Exception\InvalidArgumentException('Invalid row count');
@@ -185,7 +183,7 @@ class DbSelect implements AdapterInterface
              */
             if (($isDistinct && count($columnParts) > 1) || count($groupParts) > 1 || !empty($havingParts)) {
                 $rowCount = $db->select()->from($this->_select);
-            } else if ($isDistinct) {
+            } elseif ($isDistinct) {
                 $part = $columnParts[0];
 
                 if ($part[1] !== Sql\Select::SQL_WILDCARD && !($part[1] instanceof Sql\ExpressionInterface)) {
@@ -197,7 +195,7 @@ class DbSelect implements AdapterInterface
 
                     $groupPart = $column;
                 }
-            } else if (!empty($groupParts) && $groupParts[0] !== Sql\Select::SQL_WILDCARD &&
+            } elseif (!empty($groupParts) && $groupParts[0] !== Sql\Select::SQL_WILDCARD &&
                 !($groupParts[0] instanceof Sql\ExpressionInterface)
             ) {
                 $groupPart = $db->quoteIdentifier($groupParts[0], true);

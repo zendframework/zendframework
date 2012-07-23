@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon;
-use Zend\Service,
-    Zend\Service\Amazon\Exception,
-    Zend\Rest\Client,
-    Zend\Crypt\Hmac;
+
+use Zend\Crypt\Hmac;
+use Zend\Rest\Client;
+use Zend\Service;
+use Zend\Service\Amazon\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Amazon
 {
@@ -111,9 +99,9 @@ class Amazon
         $client->getHttpClient()->resetParameters();
         $response = $client->restGet('/onca/xml', $options);
 
-        if ($response->isError()) {
+        if ($response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
-                                           . $response->getStatus());
+                                           . $response->getStatusCode());
         }
 
         $dom = new \DOMDocument();
@@ -144,9 +132,9 @@ class Amazon
         $options = $this->_prepareOptions('ItemLookup', $options, $defaultOptions);
         $response = $client->restGet('/onca/xml', $options);
 
-        if ($response->isError()) {
+        if ($response->isClientError()) {
             throw new Exception\RuntimeException(
-                'An error occurred sending request. Status code: ' . $response->getStatus()
+                'An error occurred sending request. Status code: ' . $response->getStatusCode()
             );
         }
 
@@ -235,11 +223,11 @@ class Amazon
      * @param  array $options
      * @return string
      */
-    static public function computeSignature($baseUri, $secretKey, array $options)
+    public static function computeSignature($baseUri, $secretKey, array $options)
     {
         $signature = self::buildRawSignature($baseUri, $options);
         return base64_encode(
-            Hmac::compute($secretKey, 'sha256', $signature, Hmac::BINARY)
+            Hmac::compute($secretKey, 'sha256', $signature, Hmac::OUTPUT_BINARY)
         );
     }
 
@@ -250,7 +238,7 @@ class Amazon
      * @param  array $options
      * @return string
      */
-    static public function buildRawSignature($baseUri, $options)
+    public static function buildRawSignature($baseUri, $options)
     {
         ksort($options);
         $params = array();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.renderers"><info><title>Zend_Barcode Renderer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.renderers"><title>Zend_Barcode Renderer</title>
     
 
     <para>
@@ -33,7 +33,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.barcode.renderers.configuration"><info><title>Unterschiedliche Wegen ein Renderer Objekt zu parametrisieren</title></info>
+    <example xml:id="zend.barcode.renderers.configuration"><title>Unterschiedliche Wegen ein Renderer Objekt zu parametrisieren</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -57,7 +57,7 @@ $renderer->setTopOffset(10);
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.barcode.renderers.common.options"><info><title>Gemeinsame Optionen</title></info>
+    <section xml:id="zend.barcode.renderers.common.options"><title>Gemeinsame Optionen</title>
         
 
         <para>
@@ -70,7 +70,7 @@ $renderer->setTopOffset(10);
             Optionen sind:
         </para>
 
-        <table xml:id="zend.barcode.renderers.common.options.table"><info><title>Gemeinsame Optionen</title></info>
+        <table xml:id="zend.barcode.renderers.common.options.table"><title>Gemeinsame Optionen</title>
             
 
             <tgroup cols="4">
@@ -180,7 +180,7 @@ $renderer->setTopOffset(10);
         </para>
     </section>
 
-    <section xml:id="zend.barcode.renderers.image"><info><title>Zend_Barcode_Renderer_Image</title></info>
+    <section xml:id="zend.barcode.renderers.image"><title>Zend_Barcode_Renderer_Image</title>
         
 
         <para>
@@ -191,7 +191,7 @@ $renderer->setTopOffset(10);
 
         <para>Vorhandene Optionen sind:</para>
 
-        <table xml:id="zend.barcode.renderers.image.table"><info><title>Zend_Barcode_Renderer_Image Optionen</title></info>
+        <table xml:id="zend.barcode.renderers.image.table"><title>Zend_Barcode_Renderer_Image Optionen</title>
             
 
             <tgroup cols="4">
@@ -241,7 +241,7 @@ $renderer->setTopOffset(10);
         </table>
     </section>
 
-    <section xml:id="zend.barcode.renderers.pdf"><info><title>Zend_Barcode_Renderer_Pdf</title></info>
+    <section xml:id="zend.barcode.renderers.pdf"><title>Zend_Barcode_Renderer_Pdf</title>
         
 
         <para>

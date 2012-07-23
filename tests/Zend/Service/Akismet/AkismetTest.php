@@ -1,49 +1,52 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Akismet
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Akismet;
 
-use Zend\Service\Akismet,
-    Zend\Http;
+use Zend\Service\Akismet\Akismet;
+use Zend\Http\Client\Adapter\Test as ClientTestAdapter;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @category   Zend
  * @package    Zend_Service_Akismet
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Akismet
  */
 class AkismetTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Akismet
+     */
+    protected $akismet;
+
+    /**
+     * @var ClientTestAdapter
+     */
+    protected $adapter;
+
+    /**
+     * @var array
+     */
+    protected $comment;
+
     public function setUp()
     {
-        $this->akismet = new Akismet\Akismet('somebogusapikey', 'http://framework.zend.com/wiki/');
-        $adapter = new Http\Client\Adapter\Test();
-        $client = new Http\Client(null, array(
+        $this->akismet = new Akismet('somebogusapikey', 'http://framework.zend.com/wiki/');
+        $adapter = new ClientTestAdapter();
+        $client = new HttpClient(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Akismet\Akismet::setDefaultHttpClient($client);
+        $this->akismet->setHttpClient($client);
 
         $this->comment = array(
             'user_ip'         => '71.161.221.76',
@@ -130,7 +133,7 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "invalid";
         $this->adapter->setResponse($response);
-        
+
         $this->setExpectedException('Zend\Service\Akismet\Exception\InvalidArgumentException', 'Invalid API key');
         $this->akismet->isSpam($this->comment);
     }
@@ -177,7 +180,7 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "invalid";
         $this->adapter->setResponse($response);
-        
+
         $this->setExpectedException('Zend\Service\Akismet\Exception\InvalidArgumentException', 'Invalid API key');
         $this->akismet->submitSpam($this->comment);
     }
@@ -194,7 +197,7 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "Thanks for making the web a better place.";
         $this->adapter->setResponse($response);
-        
+
         $this->akismet->submitSpam($this->comment);
     }
 
@@ -210,7 +213,7 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "Thanks for making the web a better place.";
         $this->adapter->setResponse($response);
-        
+
         $this->akismet->submitHam($this->comment);
     }
 }

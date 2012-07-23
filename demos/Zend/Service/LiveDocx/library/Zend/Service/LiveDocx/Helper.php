@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\LiveDocx;
-use Zend\Date\Date;
+
+use DateTime;
 
 /**
- * @category   Demos
- * @package    Demos_Zend_Service
- * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category   Zend
+ * @package    Zend_Service
+ * @subpackage Demos
  */
 class Helper
 {
@@ -40,17 +28,17 @@ class Helper
      * LiveDocx registration URL
      */
     const REGISTRATION_URL = 'https://www.livedocx.com/user/account_registration.aspx';
-        
+
     /**
      * Line length in characters (used to wrap long lines)
      */
     const LINE_LENGTH = 80;
-    
+
     /**
      * Default locale
      */
     const LOCALE = 'en_US';
-    
+
 
     /**
      * Return filename of configuration file (path + file)
@@ -76,7 +64,7 @@ class Helper
      * Return true, if configuration file exists and constants
      * DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME and
      * DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD have been set.
-     *  
+     *
      * @return boolean
      */
     public static function credentialsAvailable()
@@ -93,14 +81,14 @@ class Helper
                     $ret = true;
                 }
         }
-        
+
         return $ret;
-    } 
-    
+    }
+
     /**
      * Return instructions on how to register to use LiveDocx service and enter
      * username and password into configuration file.
-     * 
+     *
      * @return string
      */
     public static function credentialsHowTo()
@@ -128,10 +116,10 @@ class Helper
         $ret .=                                                                               PHP_EOL;
         $ret .= sprintf('6. Rerun this demonstration application.%s',                         PHP_EOL);
         $ret .=                                                                               PHP_EOL;
-        
+
         return $ret;
     }
-    
+
     /**
      * Decorator to format return value of list methods
      *
@@ -141,15 +129,13 @@ class Helper
     public static function listDecorator($result)
     {
         $ret = '';
-        
-        $date = new Date();
-        
+
         if (count($result) > 0) {
             foreach ($result as $record) {
-                $date->set($record['createTime']);
-                $createTimeFormatted = $date->get(Date::RFC_1123);
-                $date->set($record['modifyTime']);
-                $modifyTimeFormatted = $date->get(Date::RFC_1123);
+                $date = new DateTime($record['createTime']);
+                $createTimeFormatted = $date->format(DateTime::RFC1123);
+                $date = new DateTime($record['modifyTime']);
+                $modifyTimeFormatted = $date->format(DateTime::RFC1123);
                 $ret .= sprintf('         Filename  : %s%s', $record['filename'], PHP_EOL);
                 $ret .= sprintf('         File Size : %d b%s', $record['fileSize'], PHP_EOL);
                 $ret .= sprintf('     Creation Time : %d (%s)%s', $record['createTime'], $createTimeFormatted, PHP_EOL);
@@ -157,12 +143,10 @@ class Helper
                 $ret .= PHP_EOL;
             }
         }
-        
-        unset($date);
-        
+
         return $ret;
     }
-    
+
     /**
      * Decorator to format array
      *

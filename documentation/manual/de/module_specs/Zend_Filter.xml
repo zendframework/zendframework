@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>Einführung</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         können.
     </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>Was ist ein Filter?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>Was ist ein Filter?</title>
         
 
         <para>
@@ -42,7 +42,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>Normale Verwendung von Filtern</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>Normale Verwendung von Filtern</title>
         
 
         <para>
@@ -66,7 +66,7 @@ echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.introduction.static"><info><title>Verwenden der statischen staticFilter() Methode</title></info>
+    <section xml:id="zend.filter.introduction.static"><title>Verwenden der statischen staticFilter() Methode</title>
         
 
         <para>
@@ -109,7 +109,7 @@ echo Zend_Filter::filterStatic('"',
             Eingabedaten zu verarbeiten. Siehe <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
+        <section xml:id="zend.filter.introduction.static.namespaces"><title>Namespaces</title>
             
 
             <para>
@@ -183,7 +183,7 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
         </section>
     </section>
 
-    <section xml:id="zend.filter.introduction.caveats"><info><title>Doppelt filtern</title></info>
+    <section xml:id="zend.filter.introduction.caveats"><title>Doppelt filtern</title>
         
 
         <para>

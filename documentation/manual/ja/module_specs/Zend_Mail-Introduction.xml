@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>導入</title>
 
     
 
-    <section xml:id="zend.mail.introduction.getting-started"><info><title>まずはじめに</title></info>
+    <section xml:id="zend.mail.introduction.getting-started"><title>まずはじめに</title>
 
         
 
@@ -16,7 +16,7 @@
             を使用してメールを送信できます。
         </para>
 
-        <example xml:id="zend.mail.introduction.example-1"><info><title>Zend_Mail を使用したシンプルなメール送信</title></info>
+        <example xml:id="zend.mail.introduction.example-1"><title>Zend_Mail を使用したシンプルなメール送信</title>
 
             
 
@@ -37,7 +37,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>最低限の定義</title></info>
+        <note><title>最低限の定義</title>
             
 
             <para>
@@ -78,7 +78,7 @@ $mail->setBodyText('This is the text of the mail.')
 
     </section>
 
-    <section xml:id="zend.mail.introduction.sendmail"><info><title>デフォルトの sendmail トランスポートの設定</title></info>
+    <section xml:id="zend.mail.introduction.sendmail"><title>デフォルトの sendmail トランスポートの設定</title>
 
         
 
@@ -95,7 +95,7 @@ $mail->setBodyText('This is the text of the mail.')
             メソッドに渡すこともできます。
         </para>
 
-        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>Zend_Mail_Transport_Sendmail トランスポートへの追加パラメータの渡し方</title></info>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><title>Zend_Mail_Transport_Sendmail トランスポートへの追加パラメータの渡し方</title>
 
             
 
@@ -118,7 +118,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>セーフモード時の制限</title></info>
+        <note><title>セーフモード時の制限</title>
             
             <para>
                 <acronym>PHP</acronym> をセーフモードで実行している場合、オプションの追加パラメータを指定すると
@@ -127,7 +127,7 @@ $mail->send();
             </para>
         </note>
 
-        <warning><info><title>Sendmail トランスポートと Windows</title></info>
+        <warning><title>Sendmail トランスポートと Windows</title>
             
 
             <para>

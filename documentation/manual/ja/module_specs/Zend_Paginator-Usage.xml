@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><title>使用法</title>
     
 
-    <section xml:id="zend.paginator.usage.paginating"><info><title>データコレクションのページ処理</title></info>
+    <section xml:id="zend.paginator.usage.paginating"><title>データコレクションのページ処理</title>
         
 
         <para>
@@ -12,7 +12,7 @@
             Zend Framework には、いくつかのアダプタが標準で同梱されています。
         </para>
 
-        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Zend_Paginator 用のアダプタ</title></info>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><title>Zend_Paginator 用のアダプタ</title>
             
 
             <tgroup cols="2">
@@ -159,7 +159,7 @@ $this->view->paginator = $paginator;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.paginator.usage.dbselect"><info><title>DbSelect および DbTableSelect アダプタ</title></info>
+    <section xml:id="zend.paginator.usage.dbselect"><title>DbSelect および DbTableSelect アダプタ</title>
         
         <para>
             大半のアダプタの使用法は非常にわかりやすいものです。
@@ -219,7 +219,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
     </section>
 
-    <section xml:id="zend.paginator.rendering"><info><title>ビュースクリプトによるページのレンダリング</title></info>
+    <section xml:id="zend.paginator.rendering"><title>ビュースクリプトによるページのレンダリング</title>
         
 
         <para>
@@ -289,7 +289,7 @@ $paginator = new Zend_Paginator($adapter);
             4 種類のスクロール形式が Zend Framework に組み込まれています。
         </para>
 
-        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Zend_Paginator のスクロール形式</title></info>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><title>Zend_Paginator のスクロール形式</title>
             
 
             <tgroup cols="2">
@@ -390,7 +390,7 @@ $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
         </note>
 
-        <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>ページ処理コントロールの例</title></info>
+        <section xml:id="zend.paginator.usage.rendering.example-controls"><title>ページ処理コントロールの例</title>
             
 
             <para>
@@ -523,7 +523,7 @@ $('paginationControl').observe('change', function() {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>プロパティの一覧</title></info>
+        <section xml:id="zend.paginator.usage.rendering.properties"><title>プロパティの一覧</title>
             
 
             <para>
@@ -531,7 +531,7 @@ $('paginationControl').observe('change', function() {
                 partial で使用可能です。
             </para>
 
-            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>ビュー partial のプロパティ</title></info>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><title>ビュー partial のプロパティ</title>
                 
 
                 <tgroup cols="3">

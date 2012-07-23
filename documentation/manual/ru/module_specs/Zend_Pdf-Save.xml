@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Сохранение изменений в документе PDF<!-- Save changes to the PDF document. --></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>Сохранение изменений в документе PDF<!-- Save changes to the PDF document. --></title>
     
     <para>
     Есть два метода, с помощью которых производится сохранение изменений в документе
@@ -31,7 +31,7 @@
 -->
     </para>
 
-    <example><info><title>Сохранение документа PDF<!-- Save PDF document. --></title></info>
+    <example><title>Сохранение документа PDF<!-- Save PDF document. --></title>
         
         <programlisting language="php"><![CDATA[<?php
 ...

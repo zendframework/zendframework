@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title> 使用 Zend_Form_Element 生成表单元素 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><title> 使用 Zend_Form_Element 生成表单元素 </title>
     
 
     <para>
@@ -34,7 +34,7 @@
         基础类 <code>Zend_Form_Element</code> 对许多类有合理的缺省设置，但最好还是继承这个类来完成特殊意图的元素。另外，Zend Framework 带有许多标准的 XHTML 元素，请阅读 <link linkend="zend.form.standardElements"> 在标准元素一章 </link> 的有关文档。
     </para>
 
-    <section xml:id="zend.form.elements.loaders"><info><title> 插件加载器 </title></info>
+    <section xml:id="zend.form.elements.loaders"><title> 插件加载器 </title>
         
 
         <para>
@@ -71,7 +71,7 @@
             定制的校验器、过滤器和装饰器是在表单和封装定制功能之间共享功能的简单的办法。
         </para>
 
-        <example xml:id="zend.form.elements.loaders.customLabel"><info><title> 定制标签 </title></info>
+        <example xml:id="zend.form.elements.loaders.customLabel"><title> 定制标签 </title>
             
 
             <para>
@@ -145,7 +145,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
         </example>
     </section>
 
-    <section xml:id="zend.form.elements.filters"><info><title> 过滤器 </title></info>
+    <section xml:id="zend.form.elements.filters"><title> 过滤器 </title>
         
 
         <para>
@@ -190,7 +190,7 @@ $element->addFilter('alnum');
             短名一般就是过滤器名去掉前缀，缺省就是去掉 'Zend_Filter_' 前缀。另外，首字母不需要大写。
         </para>
 
-        <note><info><title> 使用定制的过滤器类 </title></info>
+        <note><title> 使用定制的过滤器类 </title>
             
 
             <para>
@@ -253,7 +253,7 @@ $unfiltered = $element->getUnfilteredValue();
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.elements.validators"><info><title> 校验器 </title></info>
+    <section xml:id="zend.form.elements.validators"><title> 校验器 </title>
         
 
         <para>
@@ -294,7 +294,7 @@ $element->addValidator('alnum');
             短名一般就是校验器名去掉前缀，缺省就是去掉 'Zend_Validate_' 前缀。另外，首字母不需要大写。
         </para>
 
-        <note><info><title> 使用定制的校验器类 </title></info>
+        <note><title> 使用定制的校验器类 </title>
             
 
             <para>
@@ -334,7 +334,7 @@ $element->addValidator('StringLength', false, array(6, 20));
 $validator = new Zend_Validate_StringLength(6, 20);
 ?>]]></programlisting>
 
-        <note><info><title> 提供定制的校验错误消息 </title></info>
+        <note><title> 提供定制的校验错误消息 </title>
             
 
             <para>
@@ -403,7 +403,7 @@ if ($element->isValid($value)) {
 }
 ?>]]></programlisting>
 
-        <note><info><title> 在过滤后的值上校验 </title></info>
+        <note><title> 在过滤后的值上校验 </title>
             
 
             <para>
@@ -411,7 +411,7 @@ if ($element->isValid($value)) {
             </para>
         </note>
 
-        <note><info><title> 校验上下文 </title></info>
+        <note><title> 校验上下文 </title>
             
 
             <para>
@@ -492,7 +492,7 @@ $messages = $element->getMessages();
             关于校验器的更多信息，参见 <link linkend="zend.validate.introduction">Zend_Validate 文档 </link>。
         </para>
 
-        <note><info><title> 使用 Zend_Form_Elements 作为通用的校验器 </title></info>
+        <note><title> 使用 Zend_Form_Elements 作为通用的校验器 </title>
             
 
             <para>
@@ -545,7 +545,7 @@ $messages = $element->getMessages();
                 <code>clearValidators()</code> （删除所有校验器）
             </para></listitem>
         </itemizedlist>
-        <section xml:id="zend.form.elements.validators.errors"><info><title> 定制错误消息 </title></info>
+        <section xml:id="zend.form.elements.validators.errors"><title> 定制错误消息 </title>
             
 
             <para>
@@ -602,7 +602,7 @@ $messages = $element->getMessages();
         </section>
     </section>
 
-    <section xml:id="zend.form.elements.decorators"><info><title> 装饰器 </title></info>
+    <section xml:id="zend.form.elements.decorators"><title> 装饰器 </title>
         
 
         <para>
@@ -635,7 +635,7 @@ $messages = $element->getMessages();
             </para></listitem>
         </itemizedlist>
 
-        <note><info><title> 不需要加载缺省装饰器 </title></info>
+        <note><title> 不需要加载缺省装饰器 </title>
             
 
             <para>
@@ -682,7 +682,7 @@ $this->addDecorators(array(
             关于装饰器的更多信息，请阅读 <link linkend="zend.form.decorators">Zend_Form_Decorator 一节</link>。
         </para>
 
-        <note><info><title> 使用同类型的多重装饰器 </title></info>
+        <note><title> 使用同类型的多重装饰器 </title>
             
 
             <para>
@@ -756,7 +756,7 @@ $fooBar  = $element->getDecorator('FooBar');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.elements.metadata"><info><title> 元数据和属性 </title></info>
+    <section xml:id="zend.form.elements.metadata"><title> 元数据和属性 </title>
         
 
         <para>
@@ -833,7 +833,7 @@ $element->class = 'text;
         </para>
     </section>
 
-    <section xml:id="zend.form.elements.standard"><info><title> 标准元素 </title></info>
+    <section xml:id="zend.form.elements.standard"><title> 标准元素 </title>
         
 
         <para>
@@ -841,7 +841,7 @@ $element->class = 'text;
         </para>
     </section>
 
-    <section xml:id="zend.form.elements.methods"><info><title>Zend_Form_Element 方法 </title></info>
+    <section xml:id="zend.form.elements.methods"><title>Zend_Form_Element 方法 </title>
         
 
         <para>
@@ -947,7 +947,7 @@ $element->class = 'text;
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.elements.config"><info><title> 配置 </title></info>
+    <section xml:id="zend.form.elements.config"><title> 配置 </title>
         
 
         <para>
@@ -1029,7 +1029,7 @@ decorators.label.decorator = "Label"
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.elements.custom"><info><title> 定制元素 </title></info>
+    <section xml:id="zend.form.elements.custom"><title> 定制元素 </title>
         
 
         <para>

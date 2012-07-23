@@ -1,30 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage ReCaptcha
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\ReCaptcha;
 
 use Traversable;
-use Zend\Http\Request;
-use Zend\Service\AbstractService;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\ArrayUtils;
+
 
 /**
  * Zend_Service_ReCaptcha
@@ -32,10 +22,8 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReCaptcha extends AbstractService
+class ReCaptcha
 {
     /**
      * URI to the regular API
@@ -63,28 +51,28 @@ class ReCaptcha extends AbstractService
      *
      * @var string
      */
-    protected $_publicKey = null;
+    protected $publicKey = null;
 
     /**
      * Private key used when verifying user input
      *
      * @var string
      */
-    protected $_privateKey = null;
+    protected $privateKey = null;
 
     /**
      * Ip address used when verifying user input
      *
      * @var string
      */
-    protected $_ip = null;
+    protected $ip = null;
 
     /**
      * Parameters for the object
      *
      * @var array
      */
-    protected $_params = array(
+    protected $params = array(
         'ssl' => false, /* Use SSL or not when generating the recaptcha */
         'error' => null, /* The error message to display in the recaptcha */
         'xhtml' => false /* Enable XHTML output (this will not be XHTML Strict
@@ -99,10 +87,15 @@ class ReCaptcha extends AbstractService
      *
      * @var array
      */
-    protected $_options = array(
+    protected $options = array(
         'theme' => 'red',
         'lang' => 'en',
     );
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
 
     /**
      * Response from the verify server
@@ -120,8 +113,7 @@ class ReCaptcha extends AbstractService
      * @param array|Traversable $options
      * @param string $ip
      */
-    public function __construct($publicKey = null, $privateKey = null,
-                                $params = null, $options = null, $ip = null)
+    public function __construct($publicKey = null, $privateKey = null, $params = null, $options = null, $ip = null, HttpClient $httpClient = null)
     {
         if ($publicKey !== null) {
             $this->setPublicKey($publicKey);
@@ -133,7 +125,7 @@ class ReCaptcha extends AbstractService
 
         if ($ip !== null) {
             $this->setIp($ip);
-        } else if (isset($_SERVER['REMOTE_ADDR'])) {
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
             $this->setIp($_SERVER['REMOTE_ADDR']);
         }
 
@@ -144,6 +136,19 @@ class ReCaptcha extends AbstractService
         if ($options !== null) {
             $this->setOptions($options);
         }
+
+        $this->setHttpClient($httpClient ?: new HttpClient);
+    }
+
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    public function getHttpClient()
+    {
+        return $this->httpClient;
     }
 
     /**
@@ -175,7 +180,7 @@ class ReCaptcha extends AbstractService
      */
     public function setIp($ip)
     {
-        $this->_ip = $ip;
+        $this->ip = $ip;
 
         return $this;
     }
@@ -187,7 +192,7 @@ class ReCaptcha extends AbstractService
      */
     public function getIp()
     {
-        return $this->_ip;
+        return $this->ip;
     }
 
     /**
@@ -199,7 +204,7 @@ class ReCaptcha extends AbstractService
      */
     public function setParam($key, $value)
     {
-        $this->_params[$key] = $value;
+        $this->params[$key] = $value;
 
         return $this;
     }
@@ -239,7 +244,7 @@ class ReCaptcha extends AbstractService
      */
     public function getParams()
     {
-        return $this->_params;
+        return $this->params;
     }
 
     /**
@@ -250,7 +255,7 @@ class ReCaptcha extends AbstractService
      */
     public function getParam($key)
     {
-        return $this->_params[$key];
+        return $this->params[$key];
     }
 
     /**
@@ -262,7 +267,7 @@ class ReCaptcha extends AbstractService
      */
     public function setOption($key, $value)
     {
-        $this->_options[$key] = $value;
+        $this->options[$key] = $value;
 
         return $this;
     }
@@ -300,7 +305,7 @@ class ReCaptcha extends AbstractService
      */
     public function getOptions()
     {
-        return $this->_options;
+        return $this->options;
     }
 
     /**
@@ -311,7 +316,7 @@ class ReCaptcha extends AbstractService
      */
     public function getOption($key)
     {
-        return $this->_options[$key];
+        return $this->options[$key];
     }
 
     /**
@@ -321,7 +326,7 @@ class ReCaptcha extends AbstractService
      */
     public function getPublicKey()
     {
-        return $this->_publicKey;
+        return $this->publicKey;
     }
 
     /**
@@ -332,7 +337,7 @@ class ReCaptcha extends AbstractService
      */
     public function setPublicKey($publicKey)
     {
-        $this->_publicKey = $publicKey;
+        $this->publicKey = $publicKey;
 
         return $this;
     }
@@ -344,7 +349,7 @@ class ReCaptcha extends AbstractService
      */
     public function getPrivateKey()
     {
-        return $this->_privateKey;
+        return $this->privateKey;
     }
 
     /**
@@ -355,7 +360,7 @@ class ReCaptcha extends AbstractService
      */
     public function setPrivateKey($privateKey)
     {
-        $this->_privateKey = $privateKey;
+        $this->privateKey = $privateKey;
 
         return $this;
     }
@@ -371,34 +376,34 @@ class ReCaptcha extends AbstractService
      */
     public function getHtml($name = null)
     {
-        if ($this->_publicKey === null) {
+        if ($this->publicKey === null) {
             throw new Exception('Missing public key');
         }
 
         $host = self::API_SERVER;
 
-        if ((bool) $this->_params['ssl'] === true) {
+        if ((bool) $this->params['ssl'] === true) {
             $host = self::API_SECURE_SERVER;
         }
 
         $htmlBreak = '<br>';
         $htmlInputClosing = '>';
 
-        if ((bool) $this->_params['xhtml'] === true) {
+        if ((bool) $this->params['xhtml'] === true) {
             $htmlBreak = '<br />';
             $htmlInputClosing = '/>';
         }
 
         $errorPart = '';
 
-        if (!empty($this->_params['error'])) {
-            $errorPart = '&error=' . urlencode($this->_params['error']);
+        if (!empty($this->params['error'])) {
+            $errorPart = '&error=' . urlencode($this->params['error']);
         }
 
         $reCaptchaOptions = '';
 
-        if (!empty($this->_options)) {
-            $encoded = \Zend\Json\Json::encode($this->_options);
+        if (!empty($this->options)) {
+            $encoded = \Zend\Json\Json::encode($this->options);
             $reCaptchaOptions = <<<SCRIPT
 <script type="text/javascript">
     var RecaptchaOptions = {$encoded};
@@ -415,12 +420,12 @@ SCRIPT;
         $return = $reCaptchaOptions;
         $return .= <<<HTML
 <script type="text/javascript"
-   src="{$host}/challenge?k={$this->_publicKey}{$errorPart}">
+   src="{$host}/challenge?k={$this->publicKey}{$errorPart}">
 </script>
 HTML;
         $return .= <<<HTML
 <noscript>
-   <iframe src="{$host}/noscript?k={$this->_publicKey}{$errorPart}"
+   <iframe src="{$host}/noscript?k={$this->publicKey}{$errorPart}"
        height="300" width="500" frameborder="0"></iframe>{$htmlBreak}
    <textarea name="{$challengeField}" rows="3" cols="40">
    </textarea>
@@ -440,13 +445,13 @@ HTML;
      * @return \Zend\Http\Response
      * @throws \Zend\Service\ReCaptcha\Exception
      */
-    protected function _post($challengeField, $responseField)
+    protected function post($challengeField, $responseField)
     {
-        if ($this->_privateKey === null) {
+        if ($this->privateKey === null) {
             throw new Exception('Missing private key');
         }
 
-        if ($this->_ip === null) {
+        if ($this->ip === null) {
             throw new Exception('Missing ip address');
         }
 
@@ -461,16 +466,18 @@ HTML;
         /* Fetch an instance of the http client */
         $httpClient = $this->getHttpClient();
 
-        $postParams = array('privatekey' => $this->_privateKey,
-                            'remoteip'   => $this->_ip,
+        $postParams = array('privatekey' => $this->privateKey,
+                            'remoteip'   => $this->ip,
                             'challenge'  => $challengeField,
                             'response'   => $responseField);
 
-        /* Make the POST and return the response */
-        return $httpClient->setUri(self::VERIFY_SERVER)
-                          ->setParameterPost($postParams)
-                          ->setMethod(Request::METHOD_POST)
-                          ->send();
+        $request = new HttpRequest;
+        $request->setUri(self::VERIFY_SERVER);
+        $request->getPost()->fromArray($postParams);
+        $request->setMethod(HttpRequest::METHOD_POST);
+        $httpClient->setEncType($httpClient::ENC_URLENCODED);
+
+        return $httpClient->send($request);
     }
 
     /**
@@ -485,7 +492,7 @@ HTML;
      */
     public function verify($challengeField, $responseField)
     {
-        $response = $this->_post($challengeField, $responseField);
+        $response = $this->post($challengeField, $responseField);
         return new Response(null, null, $response);
     }
 }

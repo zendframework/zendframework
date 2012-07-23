@@ -1,38 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    ZendTest_Cloud_DocumentService_Adapter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\DocumentService\Adapter;
 
-use ZendTest\Cloud\DocumentService\TestCase,
-    Zend\Cloud\DocumentService\Adapter\SimpleDb as AdapterSimpleDb,
-    Zend\Cloud\DocumentService\Document,
-    Zend\Cloud\DocumentService\Factory,
-    Zend\Config;
+use ZendTest\Cloud\DocumentService\TestCase;
+use Zend\Cloud\DocumentService\Adapter\SimpleDb as AdapterSimpleDb;
+use Zend\Cloud\DocumentService\Document;
+use Zend\Cloud\DocumentService\Factory;
+use Zend\Config;
 
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_DocumentService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleDbTest extends TestCase
 {
@@ -96,7 +83,7 @@ class SimpleDbTest extends TestCase
         $this->_commonDocument->deleteCollection($name);
     }
 
-    static function getConfigArray()
+    public static function getConfigArray()
     {
         return array(
                 Factory::DOCUMENT_ADAPTER_KEY => 'Zend\Cloud\DocumentService\Adapter\SimpleDb',
@@ -123,36 +110,36 @@ class SimpleDbTest extends TestCase
     {
         return array(
             array(
-	        	parent::ID_FIELD => "0385333498",
-	        	"name" =>	"The Sirens of Titan",
-	        	"author" =>	"Kurt Vonnegut",
-	        	"year"	=> 1959,
-	        	"pages" =>	336,
-	        	"keyword" => array("Book", "Paperback")
-	        	),
+                parent::ID_FIELD => "0385333498",
+                "name" =>	"The Sirens of Titan",
+                "author" =>	"Kurt Vonnegut",
+                "year"	=> 1959,
+                "pages" =>	336,
+                "keyword" => array("Book", "Paperback")
+                ),
             array(
-	        	parent::ID_FIELD => "0802131786",
-	        	"name" =>	"Tropic of Cancer",
-	        	"author" =>	"Henry Miller",
-	        	"year"	=> 1934,
-	        	"pages" =>	318,
-	        	"keyword" => array("Book")
-	        	),
+                parent::ID_FIELD => "0802131786",
+                "name" =>	"Tropic of Cancer",
+                "author" =>	"Henry Miller",
+                "year"	=> 1934,
+                "pages" =>	318,
+                "keyword" => array("Book")
+                ),
             array(
-	        	parent::ID_FIELD => "B000T9886K",
-	        	"name" =>	"In Between",
-	        	"author" =>	"Paul Van Dyk",
-	        	"year"	=> 2007,
-	        	"keyword" => array("CD", "Music")
-	        	),
-	        array(
-	        	parent::ID_FIELD => "1579124585",
-	        	"name" =>	"The Right Stuff",
-	        	"author" =>	"Tom Wolfe",
-	        	"year"	=> 1979,
-	        	"pages" =>	304,
-	        	"keyword" => array("American", "Book", "Hardcover")
-	        	),
+                parent::ID_FIELD => "B000T9886K",
+                "name" =>	"In Between",
+                "author" =>	"Paul Van Dyk",
+                "year"	=> 2007,
+                "keyword" => array("CD", "Music")
+                ),
+            array(
+                parent::ID_FIELD => "1579124585",
+                "name" =>	"The Right Stuff",
+                "author" =>	"Tom Wolfe",
+                "year"	=> 1979,
+                "pages" =>	304,
+                "keyword" => array("American", "Book", "Hardcover")
+                ),
         );
     }
 

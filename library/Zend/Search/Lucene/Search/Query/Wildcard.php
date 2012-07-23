@@ -1,41 +1,29 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Search\Query;
 
-use Zend\Search\Lucene\Index,
-	Zend\Search\Lucene,
-	Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
-    Zend\Search\Lucene\Analysis\Analyzer\Analyzer,
-	Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
-	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\OutOfBoundsException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
+use Zend\Search\Lucene\Exception\OutOfBoundsException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Wildcard extends AbstractQuery
 {
@@ -116,7 +104,7 @@ class Wildcard extends AbstractQuery
             }
 
             return substr($word, 0, $questionMarkPosition);
-        } else if ($astrericPosition !== false) {
+        } elseif ($astrericPosition !== false) {
             return substr($word, 0, $astrericPosition);
         }
 
@@ -148,12 +136,17 @@ class Wildcard extends AbstractQuery
 
         if ($prefixLength < self::$_minPrefixLength) {
             throw new RuntimeException(
-            	'At least ' . self::$_minPrefixLength . ' non-wildcard characters are required at the beginning of pattern.'
+                'At least ' . self::$_minPrefixLength . ' non-wildcard characters are required at the beginning of pattern.'
             );
         }
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             // PCRE unicode support is turned on
             // add Unicode modifier to the match expression
             $matchExpression .= 'u';
@@ -200,7 +193,7 @@ class Wildcard extends AbstractQuery
 
         if (count($this->_matches) == 0) {
             return new EmptyResult();
-        } else if (count($this->_matches) == 1) {
+        } elseif (count($this->_matches) == 1) {
             return new Term(reset($this->_matches));
         } else {
             $rewrittenQuery = new MultiTerm();
@@ -288,7 +281,7 @@ class Wildcard extends AbstractQuery
     public function matchedDocs()
     {
         throw new UnsupportedMethodCallException(
-        	'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
+            'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -303,7 +296,7 @@ class Wildcard extends AbstractQuery
     public function score($docId, Lucene\SearchIndexInterface $reader)
     {
         throw new UnsupportedMethodCallException(
-        	'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
+            'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -317,7 +310,10 @@ class Wildcard extends AbstractQuery
         $words = array();
 
         $matchExpression = '/^' . str_replace(array('\\?', '\\*'), array('.', '.*') , preg_quote($this->_pattern->text, '/')) . '$/';
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             // PCRE unicode support is turned on
             // add Unicode modifier to the match expression
             $matchExpression .= 'u';

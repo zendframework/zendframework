@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Gevorderd gebruik</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>Gevorderd gebruik</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>Het opslaan van ACL data voor langere duur</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>Het opslaan van ACL data voor langere duur</title>
 
         
 
@@ -26,7 +26,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>Schrijven van conditionele ACL regels met een vereising</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>Schrijven van conditionele ACL regels met een vereising</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Załączniki</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>Załączniki</title>
     
     <para>
         Pliki mogą być dołączone do e-maila za pomocą metody <code>createAttachment()</code>.
@@ -8,7 +8,7 @@
         może być nadpisane przez przekazanie opcjonalnych parametrów do metody
         <code>createAttachment()</code>:
     </para>
-    <example xml:id="zend.mail.attachments.example-1"><info><title>Wiadomości e-mail z załącznikami</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>Wiadomości e-mail z załącznikami</title>
         
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail();

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server\Reflection;
@@ -34,8 +23,6 @@ namespace Zend\Server\Reflection;
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractFunction
 {
@@ -255,8 +242,7 @@ abstract class AbstractFunction
 
         if (!empty($docBlock)) {
             // Get help text
-            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches))
-            {
+            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches)) {
                 $helpText = $matches[1];
                 $helpText = preg_replace('/(^\s*\*\s)/m', '', $helpText);
                 $helpText = preg_replace('/\r?\n\s*\*\s*(\r?\n)*/s', "\n", $helpText);
@@ -267,8 +253,7 @@ abstract class AbstractFunction
             $return     = 'void';
             if (preg_match('/@return\s+(\S+)/', $docBlock, $matches)) {
                 $return = explode('|', $matches[1]);
-                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches))
-                {
+                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
                     $value = $matches[1];
                     $value = preg_replace('/\s?\*\s/m', '', $value);
                     $value = preg_replace('/\s{2,}/', ' ', $value);
@@ -279,8 +264,7 @@ abstract class AbstractFunction
             // Get param types and description
             if (preg_match_all('/@param\s+([^\s]+)/m', $docBlock, $matches)) {
                 $paramTypesTmp = $matches[1];
-                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(@|\*\/)/s', $docBlock, $matches))
-                {
+                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
                     $paramDesc = $matches[2];
                     foreach ($paramDesc as $key => $value) {
                         $value = preg_replace('/\s?\*\s/m', '', $value);

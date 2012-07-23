@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>Zend_Http_Client - Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><title>Zend_Http_Client - Введение</title>
     
 
-    <section xml:id="zend.http.client.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.http.client.introduction"><title>Введение</title>
         
         <para>
             Zend_Http_Client предоставляет простой интерфейс для выполнения
@@ -33,7 +33,7 @@
             array of configuration parameters. Both can be left out,
             and set later using the setUri() and setConfig() methods.
 -->
-            <example><info><title>Инстанцирование объекта Zend_Http_Client<!--Instantiating a Zend_Http_Client object--></title></info>
+            <example><title>Инстанцирование объекта Zend_Http_Client<!--Instantiating a Zend_Http_Client object--></title>
                 
                 <programlisting language="php"><![CDATA[
 <?php
@@ -54,7 +54,7 @@
             </example>
         </para>
     </section>
-    <section xml:id="zend.http.client.configuration"><info><title>Параметры конфигурации<!--Configuration Parameters--></title></info>
+    <section xml:id="zend.http.client.configuration"><title>Параметры конфигурации<!--Configuration Parameters--></title>
         
         <para>
             Конструктор и метод <code>setConfig()</code> принимают ассоциативный
@@ -65,7 +65,7 @@
             of configuration parameters. Setting these parameters is optional,
             as they all have default values.
 -->
-            <table><info><title>Параметры конфигурации Zend_Http_Client<!--Zend_Http_Client configuration parameters--></title></info>
+            <table><title>Параметры конфигурации Zend_Http_Client<!--Zend_Http_Client configuration parameters--></title>
                 
                 <tgroup cols="4">
                     <thead>
@@ -167,7 +167,7 @@
             </table>
         </para>
     </section>
-    <section xml:id="zend.http.client.basic-requests"><info><title>Выполнение базовых HTTP-запросов<!--Performing Basic HTTP Requests--></title></info>
+    <section xml:id="zend.http.client.basic-requests"><title>Выполнение базовых HTTP-запросов<!--Performing Basic HTTP Requests--></title>
         
         <para>
             Выполнение простых HTTP-запросов с использованием метода
@@ -178,7 +178,7 @@
             Performing simple HTTP requests is very easily done using the
             request() method, and rarely needs more than three lines of code:
 -->
-            <example><info><title>Выполнение простого запроса GET<!--Preforming a Simple GET Request--></title></info>
+            <example><title>Выполнение простого запроса GET<!--Preforming a Simple GET Request--></title>
                 
                 <programlisting language="php"><![CDATA[
 <?php
@@ -218,7 +218,7 @@
             call is used. If setMethod() was never called, the default request
             method is GET (see the above example).
 -->
-            <example><info><title>Использование методов запроса, отличных от GET<!--Using Request Methods Other Than GET--></title></info>
+            <example><title>Использование методов запроса, отличных от GET<!--Using Request Methods Other Than GET--></title>
                 
                 <programlisting language="php"><![CDATA[
 <?php
@@ -233,7 +233,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.http.client.parameters"><info><title>Добавление параметров GET и POST<!--Adding GET and POST parameters--></title></info>
+    <section xml:id="zend.http.client.parameters"><title>Добавление параметров GET и POST<!--Adding GET and POST parameters--></title>
         
         <para>
             Добавление параметров GET в HTTP-запрос довольно простое, это может
@@ -253,7 +253,7 @@
             single associative array of name => value GET variables - which may
             be more comfortable when several GET parameters need to be set.
 -->
-            <example><info><title>Установка параметров GET<!--Setting GET Parameters--></title></info>
+            <example><title>Установка параметров GET<!--Setting GET Parameters--></title>
                 
                 <programlisting language="php"><![CDATA[
 <?php
@@ -285,7 +285,7 @@
             and can be done with the setParameterPost() method, which is
             similar to the setParameterGet() method in structure.
 -->
-            <example><info><title>Установка параметров POST<!--Setting POST Parameters--></title></info>
+            <example><title>Установка параметров POST<!--Setting POST Parameters--></title>
                 
                 <programlisting language="php"><![CDATA[
 <?php
@@ -317,7 +317,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.http.client.accessing_last"><info><title>Получение последних запроса и ответа<!--Accessing Last Request and Response--></title></info>
+    <section xml:id="zend.http.client.accessing_last"><title>Получение последних запроса и ответа<!--Accessing Last Request and Response--></title>
         
         <para>
             Zend_Http_Client предоставляет методы для получения последнего

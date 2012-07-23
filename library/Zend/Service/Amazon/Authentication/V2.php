@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon\Authentication;
+
 use Zend\Crypt\Hmac;
 
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class V2 extends Authentication
+class V2 extends AbstractAuthentication
 {
     /**
      * Signature Version
@@ -40,7 +28,7 @@ class V2 extends Authentication
      * Signature Encoding Method
      */
     protected $_signatureMethod = 'HmacSHA256';
-    
+
     /**
      * Type of http request
      * @var string
@@ -64,18 +52,19 @@ class V2 extends Authentication
         }
 
         $data = $this->_signParameters($url, $parameters);
-        
+
         return $data;
     }
-    
+
     /**
      * Set http request type to POST or GET
      * @param $method string
      */
-    public function setHttpMethod($method = "POST") {
+    public function setHttpMethod($method = "POST")
+    {
         $this->_httpMethod = strtoupper($method);
     }
-    
+
     /**
      * Get the current http request type
      * @return string
@@ -122,7 +111,7 @@ class V2 extends Authentication
 
         $data .= implode('&', $arrData);
 
-        $hmac = Hmac::compute($this->_secretKey, 'SHA256', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_secretKey, 'SHA256', $data, Hmac::OUTPUT_BINARY);
 
         $paramaters['Signature'] = base64_encode($hmac);
 

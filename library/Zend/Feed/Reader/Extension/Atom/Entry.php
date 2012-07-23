@@ -1,39 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader\Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
-use DOMDocument,
-    DOMElement,
-    stdClass,
-    Zend\Date,
-    Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Uri;
+use DateTime;
+use DOMDocument;
+use DOMElement;
+use stdClass;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Uri;
 
 /**
 * @category Zend
 * @package Reader\Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Entry extends Extension\AbstractEntry
 {
@@ -106,9 +94,9 @@ class Entry extends Extension\AbstractEntry
         if (array_key_exists('content', $this->_data)) {
             return $this->_data['content'];
         }
-        
+
         $content = null;
-        
+
         $el = $this->getXpath()->query($this->getXpathPrefix() . '/atom:content');
         if($el->length > 0) {
             $el = $el->item(0);
@@ -187,8 +175,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateCreated) {
-            $date = new Date\Date;
-            $date->set($dateCreated, Date\Date::ISO_8601);
+            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
         }
 
         $this->_data['datecreated'] = $date;
@@ -216,8 +203,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateModified) {
-            $date = new Date\Date;
-            $date->set($dateModified, Date\Date::ISO_8601);
+            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
         }
 
         $this->_data['datemodified'] = $date;
@@ -490,7 +476,7 @@ class Entry extends Extension\AbstractEntry
 
         return $this->_data['commentfeedlink'];
     }
-    
+
     /**
      * Get all categories
      *
@@ -531,7 +517,7 @@ class Entry extends Extension\AbstractEntry
 
         return $this->_data['categories'];
     }
-    
+
     /**
      * Get source feed metadata from the entry
      *
@@ -542,7 +528,7 @@ class Entry extends Extension\AbstractEntry
         if (array_key_exists('source', $this->_data)) {
             return $this->_data['source'];
         }
-        
+
         $source = null;
         // TODO: Investigate why _getAtomType() fails here. Is it even needed?
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10) {
@@ -552,9 +538,9 @@ class Entry extends Extension\AbstractEntry
                 $source = new Reader\Feed\Atom\Source($element, $this->getXpathPrefix());
             }
         }
-        
+
         $this->_data['source'] = $source;
-        return $this->_data['source']; 
+        return $this->_data['source'];
     }
 
     /**
@@ -566,7 +552,7 @@ class Entry extends Extension\AbstractEntry
      */
     protected function _absolutiseUri($link)
     {
-        if (!Uri\UriFactory::factory($link)->isValid()) {
+        if (!Uri\UriFactory::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
                 if (!Uri\UriFactory::factory($link)->isValid()) {
@@ -590,7 +576,7 @@ class Entry extends Extension\AbstractEntry
         $emailNode = $element->getElementsByTagName('email');
         $nameNode  = $element->getElementsByTagName('name');
         $uriNode   = $element->getElementsByTagName('uri');
-        
+
         if ($emailNode->length && strlen($emailNode->item(0)->nodeValue) > 0) {
             $author['email'] = $emailNode->item(0)->nodeValue;
         }

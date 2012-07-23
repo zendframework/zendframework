@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_QueueService
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\QueueService;
 
-use Zend\Cloud\QueueService\Adapter,
-    Zend\Config\Config,
-    Zend\Cloud\QueueService\Factory,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\QueueService\Adapter;
+use Zend\Config\Config;
+use Zend\Cloud\QueueService\Factory;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on
@@ -33,8 +22,6 @@ use Zend\Cloud\QueueService\Adapter,
  * @category   Zend
  * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class TestCase extends PHPUnitTestCase
 {
@@ -47,7 +34,7 @@ abstract class TestCase extends PHPUnitTestCase
     protected $_dummyNamePrefix = '/TestItem';
     protected $_dummyDataPrefix = 'TestData';
     protected $_clientType = 'stdClass';
-    
+
     /**
      * Config object
      *
@@ -196,7 +183,7 @@ abstract class TestCase extends PHPUnitTestCase
             foreach ($receivedMessages as $m) {
                 $this->assertEquals($message, $m->getBody());
             }
-		  $this->_commonQueue->deleteQueue($queueURL);
+          $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {
             if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
@@ -289,9 +276,9 @@ abstract class TestCase extends PHPUnitTestCase
             // now there should be no messages left
             $receivedMessages2 = $this->_commonQueue->receiveMessages($queueURL);
             $this->assertInstanceOf('Zend\Cloud\QueueService\MessageSet', $receivedMessages2);
-		    $this->assertEquals(0, count($receivedMessages2));
+            $this->assertEquals(0, count($receivedMessages2));
 
-		    $this->_commonQueue->deleteQueue($queueURL);
+            $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {
             if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;

@@ -1,27 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon\S3;
 
-use Zend\Crypt;
+use Zend\Crypt\Hmac;
 use Zend\Http\Header;
 use Zend\Http\Response\Stream as StreamResponse;
 use Zend\Service\Amazon;
@@ -34,8 +23,6 @@ use Zend\Uri;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
  */
 class S3 extends \Zend\Service\Amazon\AbstractAmazon
@@ -172,8 +159,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         if($location) {
             $data = '<CreateBucketConfiguration><LocationConstraint>'.$location.'</LocationConstraint></CreateBucketConfiguration>';
-        }
-        else {
+        } else {
             $data = null;
         }
         $response = $this->_makeRequest('PUT', $bucket, null, array(), $data);
@@ -236,26 +222,25 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $response = $this->_makeRequest('HEAD', $object);
 
         if ($response->getStatusCode() == 200) {
-            $headers = $response->headers();
-            
+            $headers = $response->getHeaders();
+
             //False if header not found
             $info['type']  = $headers->get('Content-type');
             $info['size']  = $headers->get('Content-length');
             $info['mtime'] = $headers->get('Last-modified');
             $info['etag']  = $headers->get('Content-type');
-            
+
             //Prevents from the fatal error method call on a non-object
             foreach ($info as $key => $value)
-                if ($value instanceof Header\HeaderDescription) {
+                if ($value instanceof Header\HeaderInterface) {
                     $info[$key] = $value->getFieldValue();
                 }
-                
+
             if ($info['mtime']) {
                 $info['mtime'] = strtotime($headers->get('Last-modified')->getFieldValue());
             }
-                     
-        }
-        else {
+
+        } else {
             return false;
         }
 
@@ -420,8 +405,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $object = $this->_fixupObjectName($object);
         if ($paidobject) {
             $response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => 'requester'));
-        }
-        else {
+        } else {
             $response = $this->_makeRequest('GET', $object);
         }
 
@@ -487,14 +471,14 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         // Check the MD5 Etag returned by S3 against and MD5 of the buffer
         if ($response->getStatusCode() == 200) {
             $etag       = '';
-            $etagHeader = $response->headers()->get('Etag');
+            $etagHeader = $response->getHeaders()->get('Etag');
             if ($etagHeader instanceof Header\Etag) {
                 $etag = $etagHeader->getFieldValue();
             }
-            
+
             // It is escaped by double quotes for some reason
             $etag = str_replace('"', '', $etag);
-             
+
             if (is_resource($data) || $etag == md5($data)) {
                 return true;
             }
@@ -659,8 +643,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         }
         if (!empty($parts[1])) {
             $endpoint->setPath('/'.$parts[1]);
-        }
-        else {
+        } else {
             $endpoint->setPath('/');
             if ($parts[0]) {
                 $path = $parts[0].'/';
@@ -741,11 +724,9 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         foreach ($headers as $key=>$val) {
             if (strcasecmp($key, 'content-type') == 0) {
                 $type = $val;
-            }
-            else if (strcasecmp($key, 'content-md5') == 0) {
+            } elseif (strcasecmp($key, 'content-md5') == 0) {
                 $md5 = $val;
-            }
-            else if (strcasecmp($key, 'date') == 0) {
+            } elseif (strcasecmp($key, 'date') == 0) {
                 $date = $val;
             }
         }
@@ -764,8 +745,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             if (substr($key, 0, 6) == 'x-amz-') {
                 if (is_array($val)) {
                     $amz_headers[$key] = $val;
-                }
-                else {
+                } else {
                     $amz_headers[$key][] = preg_replace('/\s+/', ' ', $val);
                 }
             }
@@ -782,21 +762,19 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $urlPathParts = explode('/', $urlPath);
         if (!empty($urlPathParts[0]))
             $urlPathParts[0] = strtolower($urlPathParts[0]);
-        
+
         $sig_str .= '/'.implode('/', $urlPathParts);
         if (strpos($path, '?location') !== false) {
             $sig_str .= '?location';
-        }
-        else if (strpos($path, '?acl') !== false) {
+        } elseif (strpos($path, '?acl') !== false) {
             $sig_str .= '?acl';
-        }
-        else if (strpos($path, '?torrent') !== false) {
+        } elseif (strpos($path, '?torrent') !== false) {
             $sig_str .= '?torrent';
         }
 
-        $signature = base64_encode(Crypt\Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Crypt\Hmac::BINARY));
-        $headers['Authorization'] = 'AWS '.$this->_getAccessKey().':'.$signature;
-        
+        $signature = base64_encode(Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), true));
+        $headers['Authorization'] = 'AWS ' . $this->_getAccessKey() . ':' . $signature;
+
         return $headers;
     }
 

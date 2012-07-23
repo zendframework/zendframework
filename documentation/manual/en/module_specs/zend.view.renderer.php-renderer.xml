@@ -80,8 +80,8 @@ $renderer = new PhpRenderer();
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\View\Renderer\PhpRenderer,
-    Zend\View\Resolver;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver;
 
 $renderer = new PhpRenderer();
 
@@ -185,8 +185,8 @@ return array(
                 </para>
 
                 <programlisting language="php"><![CDATA[
-use Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
 
 $renderer = new PhpRenderer();
 
@@ -239,9 +239,9 @@ echo $renderer->render('booklist');
         <programlisting language="php"><![CDATA[
 namespace Bookstore\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BookController extends ActionController
+class BookController extends AbstractActionController
 {
     public function listAction()
     {
@@ -292,8 +292,8 @@ $renderer->render($model);
 
         <?php foreach ($this->books as $key => $val): ?>
         <tr>
-            <td><?php echo $this->escape($val['author']) ?></td>
-            <td><?php echo $this->escape($val['title']) ?></td>
+            <td><?php echo $this->escapeHtml($val['author']) ?></td>
+            <td><?php echo $this->escapeHtml($val['title']) ?></td>
         </tr>
         <?php endforeach; ?>
 
@@ -309,17 +309,31 @@ $renderer->render($model);
         <note xml:id="zend.view.renderer.php-renderer.usage.escape">
             <title>Escape Output</title>
 
+
+
             <para>
                 The security mantra is "Filter input, escape output." If you are unsure of the
                 source of a given variable -- which is likely most of the time -- you should escape
-                it.
+                it based on which HTML context it is being injected into. The primary contexts to 
+                be aware of are HTML Body, HTML Attribute, Javascript, CSS and URI. Each context 
+                has a dedicated helper available to apply the escaping strategy most appropriate to 
+                each context. You should be aware that escaping does vary significantly between 
+                contexts - there is no one single escaping strategy that can be globally applied.
             </para>
 
             <para>
-                In the example above, there are calls to an <methodname>escape()</methodname>
+                In the example above, there are calls to an <methodname>escapeHtml()</methodname>
                 method. The method is actually a <link linkend="zend.view.helpers">helper</link>,
-                a plugin available via method overloading, but the salient point is: use it to
-                escape your output, and thus help prevent cross-site scripting (XSS) attacks.
+                a plugin available via method overloading. Additional escape helpers provide the
+                <methodname>escapeHtmlAttr()</methodname>, <methodname>escapeJs()</methodname>,
+                <methodname>escapeCss()</methodname>, and <methodname>escapeUrl()</methodname>
+                methods for each of the HTML contexts you are most likely to encounter.
+            </para>
+
+            <para>
+                By using the provided helpers and being aware of your variables' contexts, you
+                will prevent your templates from running afoul of Cross-Site Scripting (XSS)
+                vulnerabilities.
             </para>
         </note>
 

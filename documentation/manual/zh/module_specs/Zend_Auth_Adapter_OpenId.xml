@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID Authentication</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><title>Open ID Authentication</title>
 
     
 
-    <section xml:id="zend.auth.adapter.openid.introduction"><info><title> 简介 </title></info>
+    <section xml:id="zend.auth.adapter.openid.introduction"><title> 简介 </title>
 
         
         <para>
@@ -23,7 +23,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.openid.specifics"><info><title> 细节 </title></info>
+    <section xml:id="zend.auth.adapter.openid.specifics"><title> 细节 </title>
         
         <para>
             作为  <code>Zend_Auth</code> 的适配器，<code>Zend_Auth_Adapter_OpenId</code> 类实现了 <code>Zend_Auth_Adapter_Interface</code>，而<code>Zend_Auth_Adapter_Interface</code> 定义了一个方法 － <code>authenticate()</code>。这个方法执行认证，但在调用之前要准备号对象，适配器准备包括设置 OpenID 身份和其它 <code>Zend_OpenId</code> 特殊选项。

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Salvar Mudanças em Documentos PDF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>Salvar Mudanças em Documentos PDF</title>
     
 
     <para>
@@ -21,7 +21,7 @@
         então apenas o novo segmento do arquivo <acronym>PDF</acronym> será retornado.
     </para>
 
-    <example xml:id="zend.pdf.save.example-1"><info><title>Salvando Documentos PDF</title></info>
+    <example xml:id="zend.pdf.save.example-1"><title>Salvando Documentos PDF</title>
         
 
         <programlisting language="php"><![CDATA[

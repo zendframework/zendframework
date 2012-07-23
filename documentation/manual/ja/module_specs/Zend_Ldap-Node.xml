@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.node"><info><title>Zend_Ldap_Nodeを使用してLDAPツリーへのオブジェクト指向アクセス</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.node"><title>Zend_Ldap_Nodeを使用してLDAPツリーへのオブジェクト指向アクセス</title>
     
-    <section xml:id="zend.ldap.node.basic"><info><title>CRUD基本操作</title></info>
+    <section xml:id="zend.ldap.node.basic"><title>CRUD基本操作</title>
         
-        <section xml:id="zend.ldap.node.basic.retrieve"><info><title>LDAPからデータを取得</title></info>
+        <section xml:id="zend.ldap.node.basic.retrieve"><title>LDAPからデータを取得</title>
             
-            <section xml:id="zend.ldap.node.basic.retrieve.dn"><info><title>DNでノードを取得</title></info>
+            <section xml:id="zend.ldap.node.basic.retrieve.dn"><title>DNでノードを取得</title>
                 
                 <para/>
             </section>
-            <section xml:id="zend.ldap.node.basic.retrieve.search"><info><title>ノードのサブツリーを検索</title></info>
+            <section xml:id="zend.ldap.node.basic.retrieve.search"><title>ノードのサブツリーを検索</title>
                 
                 <para/>
             </section>
         </section>
-        <section xml:id="zend.ldap.node.basic.add"><info><title>LDAPに新規ノードを追加</title></info>
+        <section xml:id="zend.ldap.node.basic.add"><title>LDAPに新規ノードを追加</title>
             
             <para/>
         </section>
-        <section xml:id="zend.ldap.node.basic.delete"><info><title>LDAPからノードを削除</title></info>
+        <section xml:id="zend.ldap.node.basic.delete"><title>LDAPからノードを削除</title>
             
             <para/>
         </section>
-        <section xml:id="zend.ldap.node.basic.update"><info><title>LDAP上のノードを更新</title></info>
+        <section xml:id="zend.ldap.node.basic.update"><title>LDAP上のノードを更新</title>
             
             <para/>
         </section>
     </section>
-    <section xml:id="zend.ldap.node.extended"><info><title>派生的な操作</title></info>
+    <section xml:id="zend.ldap.node.extended"><title>派生的な操作</title>
         
-        <section xml:id="zend.ldap.node.extended.copy-and-move"><info><title>LDAPでノードをコピーまたは移動</title></info>
+        <section xml:id="zend.ldap.node.extended.copy-and-move"><title>LDAPでノードをコピーまたは移動</title>
             
             <para/>
         </section>
     </section>
-    <section xml:id="zend.ldap.node.traversal"><info><title>ツリーの走査</title></info>
+    <section xml:id="zend.ldap.node.traversal"><title>ツリーの走査</title>
         
 
-            <example><info><title>LDAPツリーを再帰的に走査</title></info>
+            <example><title>LDAPツリーを再帰的に走査</title>
             
 
             <programlisting language="php"><![CDATA[

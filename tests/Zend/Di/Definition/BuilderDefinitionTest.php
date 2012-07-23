@@ -1,36 +1,44 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\BuilderDefinition,
-    Zend\Di\Definition\Builder,
-    Zend\Config\Factory as ConfigFactory,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\Definition\BuilderDefinition;
+use Zend\Di\Definition\Builder;
+use Zend\Config\Factory as ConfigFactory;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class BuilderDefinitionTest extends TestCase
 {
-    
+
     public function testBuilderImplementsDefinition()
     {
         $builder = new BuilderDefinition();
         $this->assertInstanceOf('Zend\Di\Definition\DefinitionInterface', $builder);
     }
-    
+
     public function testBuilderCanBuildClassWithMethods()
     {
         $class = new Builder\PhpClass();
         $class->setName('Foo');
         $class->addSuperType('Parent');
-        
+
         $injectionMethod = new Builder\InjectionMethod();
         $injectionMethod->setName('injectBar');
         $injectionMethod->addParameter('bar', 'Bar');
-        
+
         $class->addInjectionMethod($injectionMethod);
-        
+
         $definition = new BuilderDefinition();
         $definition->addClass($class);
-        
+
         $this->assertTrue($definition->hasClass('Foo'));
         $this->assertEquals('__construct', $definition->getInstantiator('Foo'));
         $this->assertContains('Parent', $definition->getClassSupertypes('Foo'));
@@ -42,17 +50,17 @@ class BuilderDefinitionTest extends TestCase
             $definition->getMethodParameters('Foo', 'injectBar')
         );
     }
-    
+
     public function testBuilderCanBuildFromArray()
     {
         $ini = ConfigFactory::fromFile(__DIR__ . '/../_files/sample.ini');
         $iniAsArray = $ini['section-b'];
         $definitionArray = $iniAsArray['di']['definitions'][1];
         unset($definitionArray['class']);
-        
+
         $definition = new BuilderDefinition();
         $definition->createClassesFromArray($definitionArray);
-        
+
         $this->assertTrue($definition->hasClass('My\DbAdapter'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\DbAdapter'));
         $this->assertEquals(
@@ -62,21 +70,21 @@ class BuilderDefinitionTest extends TestCase
             ),
             $definition->getMethodParameters('My\DbAdapter', '__construct')
         );
-        
+
         $this->assertTrue($definition->hasClass('My\Mapper'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Mapper'));
         $this->assertEquals(
             array('My\Mapper::__construct:0' => array('dbAdapter', 'My\DbAdapter', true)),
             $definition->getMethodParameters('My\Mapper', '__construct')
         );
-        
+
         $this->assertTrue($definition->hasClass('My\Repository'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Repository'));
         $this->assertEquals(
             array('My\Repository::__construct:0' => array('mapper', 'My\Mapper', true)),
             $definition->getMethodParameters('My\Repository', '__construct')
         );
-        
+
     }
 
     public function testCanCreateClassFromFluentInterface()
@@ -86,7 +94,7 @@ class BuilderDefinitionTest extends TestCase
 
         $this->assertTrue($builder->hasClass('Foo'));
     }
-    
+
     public function testCanCreateInjectionMethodsAndPopulateFromFluentInterface()
     {
         $builder = new BuilderDefinition();

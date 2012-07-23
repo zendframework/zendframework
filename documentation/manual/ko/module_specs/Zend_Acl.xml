@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>소개</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>소개</title>
     
 
     <para>
@@ -35,7 +35,7 @@
         객체(자원)로의 접근을 허가할 지 제어합니다.
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>자원(Resources)에 대해</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>자원(Resources)에 대해</title>
         
         <para>
             Zend_Acl에서 자원을 작성하는 것은 간단합니다. Zend_Acl은 개발자가 자원을 작성하기 쉽도록
@@ -59,7 +59,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>롤(Roles)에 대해</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>롤(Roles)에 대해</title>
         
         <para>
             자원과 같이, 롤을 작성하는 것도 간단합니다. Zend_Acl는 개발자가 롤을 작성하기 쉽게
@@ -82,7 +82,7 @@
             증가시키는 경우도 있습니다. 다음 예제는 애매한 조건에서 Zend_Acl로 처리하는 방법을
             설명합니다.
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>롤들 간의 다중 상속</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>롤들 간의 다중 상속</title>
             
             <para>
                 다음 코드는 세 개의 기본 롤들 "<code>guest</code>", "<code>member</code>" 그리고
@@ -143,7 +143,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>접근 제어 목록(ACL)의 생성</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>접근 제어 목록(ACL)의 생성</title>
         
 
         <para>
@@ -167,7 +167,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>롤의 등록</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>롤의 등록</title>
         
 
         <para>
@@ -182,7 +182,7 @@ $acl = new Zend_Acl();
             다음과 같이 나타낼 수 있습니다.
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Access Controls for an Example CMS</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Access Controls for an Example CMS</title>
           
           <tgroup cols="3">
             <thead>
@@ -251,7 +251,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>접근 제어의 정의</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>접근 제어의 정의</title>
         
 
         <para>
@@ -304,7 +304,7 @@ $acl->allow('administrator');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>ACL에의 질의</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>ACL에의 질의</title>
         
 
         <para>

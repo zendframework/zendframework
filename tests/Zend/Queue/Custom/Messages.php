@@ -1,25 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Queue
  */
 
 namespace ZendTest\Queue\Custom;
+
 use Zend\Queue as QueueNS;
 
 /**
@@ -29,8 +19,6 @@ use Zend\Queue as QueueNS;
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAccess
 {
@@ -101,7 +89,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayIterator::append
      */
-    public function append($value) {
+    public function append($value)
+    {
         $this->_data[] = $value;
     }
 
@@ -112,7 +101,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayAccess::offsetSet
      */
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value)
+    {
         if (! $value instanceof Message) {
             throw new QueueNS\Exception(
                 '$value must be a child or an instance of \ZendTest\Queue\Custom\Messag'
@@ -126,14 +116,16 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayAccess::offsetGet
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->_data[$offset];
     }
 
     /**
      * @see SPL ArrayAccess::offsetUnset
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         if (! $this->_connected) {
             throw new QueueNS\Exception('Cannot delete message after serialization');
         }
@@ -145,7 +137,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayAccess::offsetExists
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset)
+    {
         return isSet($this->_data[$offset]);
     }
 
@@ -156,7 +149,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL SeekableIterator::seek
      */
-    public function seek($index) {
+    public function seek($index)
+    {
         $this->_pointer = $index;
     }
 }

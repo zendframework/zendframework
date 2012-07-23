@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.uri"><info><title>Zend_Navigation_Page_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.uri"><title>Zend_Navigation_Page_Uri</title>
     
 
     <para>
@@ -26,7 +26,7 @@
         </para>
     </note>
 
-    <table xml:id="zend.navigation.pages.uri.options"><info><title>URI画面のオプション</title></info>
+    <table xml:id="zend.navigation.pages.uri.options"><title>URI画面のオプション</title>
         
 
         <tgroup cols="4">

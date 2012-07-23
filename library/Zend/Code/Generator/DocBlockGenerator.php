@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage PHP
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator;
@@ -26,8 +15,6 @@ use Zend\Code\Reflection\DocBlockReflection;
 /**
  * @category   Zend
  * @package    Zend_Code_Generator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DocBlockGenerator extends AbstractGenerator
 {
@@ -219,7 +206,11 @@ class DocBlockGenerator extends AbstractGenerator
         $content = wordwrap($content, 80, self::LINE_FEED);
         $lines   = explode(self::LINE_FEED, $content);
         foreach ($lines as $line) {
-            $output .= $indent . ' * ' . $line . self::LINE_FEED;
+            $output .= $indent . ' *';
+            if ($line) {
+                $output .= " $line";
+            }
+            $output .= self::LINE_FEED;
         }
         $output .= $indent . ' */' . self::LINE_FEED;
         return $output;

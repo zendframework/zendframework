@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\RetryPolicy;
@@ -24,7 +24,7 @@ abstract class AbstractRetryPolicy
      * @param array        $parameters     Parameters for function call
      * @return mixed
      */
-    public abstract function execute($function, $parameters = array());
+    abstract public function execute($function, $parameters = array());
 
     /**
      * Create a NoRetry instance

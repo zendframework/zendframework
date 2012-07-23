@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><title>Zend_Db_Profiler</title>
 
     
 
-    <section xml:id="zend.db.profiler.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.db.profiler.introduction"><title>Введение</title>
 
         
 
@@ -137,7 +137,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
     </section>
 
-    <section xml:id="zend.db.profiler.using"><info><title>Использование профилировщика</title></info>
+    <section xml:id="zend.db.profiler.using"><title>Использование профилировщика</title>
 
         
 
@@ -268,7 +268,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
 
     </section>
 
-    <section xml:id="zend.db.profiler.advanced"><info><title>Расширенное использование профилировщика</title></info>
+    <section xml:id="zend.db.profiler.advanced"><title>Расширенное использование профилировщика</title>
 
         
 
@@ -279,7 +279,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
             <code>Zend_Db_Profiler</code>:
         </para>
 
-        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Фильтрация по времени выполнения запроса</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><title>Фильтрация по времени выполнения запроса</title>
             
 
             <para>
@@ -300,7 +300,7 @@ $profiler->setFilterElapsedSecs(null);
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Фильтрация по типу запроса</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><title>Фильтрация по типу запроса</title>
             
 
             <para>
@@ -386,7 +386,7 @@ $profiler->setFilterQueryType(null);
 
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Получение профилей по типу запроса</title></info>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><title>Получение профилей по типу запроса</title>
             
 
             <para>
@@ -419,7 +419,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 
     </section>
 
-    <section xml:id="zend.db.profiler.profilers"><info><title>Специализированные профилировщики</title></info>
+    <section xml:id="zend.db.profiler.profilers"><title>Специализированные профилировщики</title>
         
 
         <para>

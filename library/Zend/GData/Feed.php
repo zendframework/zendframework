@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -30,8 +18,6 @@ use Zend\Http\Header\Etag;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Feed extends App\Feed
 {
@@ -143,8 +129,7 @@ class Feed extends App\Feed
             $etag = $attribute->nodeValue;
             if (!($this->_etag instanceof Etag)) {
                 $this->_etag = $etag;
-            }
-            elseif ($this->_etag->getFieldValue() != $etag) {
+            } elseif ($this->_etag->getFieldValue() != $etag) {
                 throw new App\IOException("ETag mismatch");
             }
             break;
@@ -161,7 +146,8 @@ class Feed extends App\Feed
      *        value of the totalResults property. Use null to unset.
      * @return \Zend\GData\Feed Provides a fluent interface.
      */
-    function setTotalResults($value) {
+    public function setTotalResults($value)
+    {
         $this->_totalResults = $value;
         return $this;
     }
@@ -172,7 +158,8 @@ class Feed extends App\Feed
      * @return \Zend\GData\Extension\OpenSearchTotalResults|null The value of
      *         the totalResults property, or null if unset.
      */
-    function getTotalResults() {
+    public function getTotalResults()
+    {
         return $this->_totalResults;
     }
 
@@ -183,7 +170,8 @@ class Feed extends App\Feed
      *        for the startIndex property. Use null to unset.
      * @return \Zend\GData\Feed Provides a fluent interface.
      */
-    function setStartIndex($value) {
+    public function setStartIndex($value)
+    {
         $this->_startIndex = $value;
         return $this;
     }
@@ -194,7 +182,8 @@ class Feed extends App\Feed
      * @return \Zend\GData\Extension\OpenSearchStartIndex|null The value of the
      *         startIndex property, or null if unset.
      */
-    function getStartIndex() {
+    public function getStartIndex()
+    {
         return $this->_startIndex;
     }
 
@@ -205,7 +194,8 @@ class Feed extends App\Feed
      *        value for the itemsPerPage property. Use nul to unset.
      * @return \Zend\GData\Feed Provides a fluent interface.
      */
-    function setItemsPerPage($value) {
+    public function setItemsPerPage($value)
+    {
         $this->_itemsPerPage = $value;
         return $this;
     }
@@ -216,7 +206,8 @@ class Feed extends App\Feed
      * @return \Zend\GData\Extension\OpenSearchItemsPerPage|null The value of
      *         the itemsPerPage property, or null if unset.
      */
-    function getItemsPerPage() {
+    public function getItemsPerPage()
+    {
         return $this->_itemsPerPage;
     }
 

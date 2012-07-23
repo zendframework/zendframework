@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Бэкэнды Zend_Cache</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><title>Бэкэнды Zend_Cache</title>
     
     <para>
         Есть два типа бэкэндов: стандартные и расширенные. Расширенные
         предоставляют больше функциональных возможностей.
     </para>
-    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+    <section xml:id="zend.cache.backends.file"><title>Zend_Cache_Backend_File</title>
         
         <para>
             Этот расширенный бэкэнд хранит записи кэша в файлах (в выбранной
@@ -14,7 +14,7 @@
         <para>
             Доступные опции:
         </para>
-        <table xml:id="zend.cache.backends.file.table"><info><title>Опции Zend_Cache_Backend_File</title></info>
+        <table xml:id="zend.cache.backends.file.table"><title>Опции Zend_Cache_Backend_File</title>
             
             <tgroup cols="4">
                  <thead>
@@ -132,7 +132,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+    <section xml:id="zend.cache.backends.sqlite"><title>Zend_Cache_Backend_Sqlite</title>
         
         <para>
             Этот расширенный бэкэнд хранит записи кэша в базе данных SQLite.
@@ -140,7 +140,7 @@
         <para>
             Доступные опции:
         </para>
-        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Опции Zend_Cache_Backend_Sqlite</title></info>
+        <table xml:id="zend.cache.backends.sqlite.table"><title>Опции Zend_Cache_Backend_Sqlite</title>
             
             <tgroup cols="4">
                  <thead>
@@ -184,7 +184,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+    <section xml:id="zend.cache.backends.memcached"><title>Zend_Cache_Backend_Memcached</title>
         
         <para>
             Этот расширенный бэкэнд хранит записи кэша в сервере memcached.
@@ -201,7 +201,7 @@
         <para>
             Доступные опции:
         </para>
-        <table xml:id="zend.cache.backends.memcached.table"><info><title>Опции Zend_Cache_Backend_Memcached</title></info>
+        <table xml:id="zend.cache.backends.memcached.table"><title>Опции Zend_Cache_Backend_Memcached</title>
             
             <tgroup cols="4">
                  <thead>
@@ -257,7 +257,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+    <section xml:id="zend.cache.backends.apc"><title>Zend_Cache_Backend_Apc</title>
         
         <para>
             Этот расширенный бэкэнд хранит записи кэша в совместно используемой
@@ -276,7 +276,7 @@
             Нет специальных опций для этого бэкэнда.
         </para>
     </section>
-    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+    <section xml:id="zend.cache.backends.xcache"><title>Zend_Cache_Backend_Xcache</title>
         
         <para>
             Этот бэкэнд хранит записи кэша в совместно используемой
@@ -292,7 +292,7 @@
         <para>
             Доступные опции:
         </para>
-        <table xml:id="zend.cache.backends.xcache.table"><info><title>Опции Zend_Cache_Backend_Xcache</title></info>
+        <table xml:id="zend.cache.backends.xcache.table"><title>Опции Zend_Cache_Backend_Xcache</title>
             
             <tgroup cols="4">
                  <thead>
@@ -329,7 +329,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+    <section xml:id="zend.cache.backends.platform"><title>Zend_Cache_Backend_ZendPlatform</title>
         
         <para>
             Этот бэкэнд использует <acronym>API</acronym>
@@ -354,7 +354,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             Нет специальных опций для этого бэкэнда.
         </para>
     </section>
-    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+    <section xml:id="zend.cache.backends.twolevels"><title>Zend_Cache_Backend_TwoLevels</title>
         
         <para>
             Этот расширенный бэкэнд является гибридным. Он сохраняет записи кэша
@@ -370,7 +370,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             Доступные опции:
         </para>
-        <table xml:id="zend.cache.backends.twolevels.table"><info><title>Опции Zend_Cache_Backend_TwoLevels</title></info>
+        <table xml:id="zend.cache.backends.twolevels.table"><title>Опции Zend_Cache_Backend_TwoLevels</title>
             
             <tgroup cols="4">
                  <thead>
@@ -488,7 +488,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.zendserver"><info><title>Zend_Cache_Backend_ZendServer_Disk и Zend_Cache_Backend_ZendServer_ShMem</title></info>
+    <section xml:id="zend.cache.backends.zendserver"><title>Zend_Cache_Backend_ZendServer_Disk и Zend_Cache_Backend_ZendServer_ShMem</title>
         
         <para>
             Эти бэкэнды служат для сохранения записей кэша через соответствующую

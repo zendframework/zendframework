@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><info><title>Db_RecordExists und Db_NoRecordExists</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><title>Db_RecordExists und Db_NoRecordExists</title>
 
 
     <para>
@@ -9,7 +9,7 @@
         existiert.
     </para>
 
-    <section xml:id="zend.validate.set.db.options"><info><title>Unterstützte Optionen für Zend_Validate_Db_*</title></info>
+    <section xml:id="zend.validate.set.db.options"><title>Unterstützte Optionen für Zend_Validate_Db_*</title>
 
 
         <para>
@@ -56,7 +56,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.db.basic-usage"><info><title>Grundsätzliche Verwendung</title></info>
+    <section xml:id="zend.validate.db.basic-usage"><title>Grundsätzliche Verwendung</title>
 
 
         <para>
@@ -116,7 +116,7 @@ if ($validator->isValid($username)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.db.excluding-records"><info><title>Ausnehmen von Einträgen</title></info>
+    <section xml:id="zend.validate.db.excluding-records"><title>Ausnehmen von Einträgen</title>
 
 
         <para>
@@ -198,7 +198,7 @@ if ($validator->isValid($username)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.db.database-adapters"><info><title>Datenbank Adapter</title></info>
+    <section xml:id="zend.validate.db.database-adapters"><title>Datenbank Adapter</title>
 
 
         <para>
@@ -218,7 +218,7 @@ $validator = new Zend_Validate_Db_RecordExists(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.db.database-schemas"><info><title>Datenbank Schemas</title></info>
+    <section xml:id="zend.validate.db.database-schemas"><title>Datenbank Schemas</title>
 
 
         <para>

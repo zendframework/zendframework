@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-use Zend\View,
-    Zend\View\Exception;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Zend_Layout_View_Helper_HeadMeta
@@ -30,10 +19,8 @@ use Zend\View,
  * @see        http://www.w3.org/TR/xhtml1/dtds.html
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HeadMeta extends Placeholder\Container\Standalone
+class HeadMeta extends Placeholder\Container\AbstractStandalone
 {
     /**
      * Types of attributes
@@ -175,14 +162,14 @@ class HeadMeta extends Placeholder\Container\Standalone
         return parent::__call($method, $args);
     }
 
-	/**
-	 * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
-	 * 
-	 * Not valid in a non-HTML5 doctype
-	 *
-	 * @param string $charset 
-	 * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
-	 */
+    /**
+     * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
+     *
+     * Not valid in a non-HTML5 doctype
+     *
+     * @param string $charset
+     * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
+     */
     public function setCharset($charset)
     {
         $item = new \stdClass;
@@ -353,13 +340,13 @@ class HeadMeta extends Placeholder\Container\Standalone
             $modifiersString .= $key . '="' . $this->_escape($value) . '" ';
         }
 
-        if ($this->view instanceof \Zend\Loader\Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             if ($this->view->plugin('doctype')->isHtml5()
                 && $type == 'charset'
             ) {
-				$tpl = ($this->view->plugin('doctype')->isXhtml())
-					? '<meta %s="%s"/>'
-					: '<meta %s="%s">';
+                $tpl = ($this->view->plugin('doctype')->isXhtml())
+                    ? '<meta %s="%s"/>'
+                    : '<meta %s="%s">';
             } elseif ($this->view->plugin('doctype')->isXhtml()) {
                 $tpl = '<meta %s="%s" content="%s" %s/>';
             } else {

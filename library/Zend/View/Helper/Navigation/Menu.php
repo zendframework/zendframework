@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
@@ -33,8 +22,6 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Menu extends AbstractHelper
 {
@@ -164,9 +151,9 @@ class Menu extends AbstractHelper
      * Sets which partial view script to use for rendering menu
      *
      * @param  string|array $partial partial view script or null. If an array is
-     *                               given, it is expected to contain two 
-     *                               values; the partial view script to use, 
-     *                               and the module where the script can be 
+     *                               given, it is expected to contain two
+     *                               values; the partial view script to use,
+     *                               and the module where the script can be
      *                               found.
      * @return Menu  fluent interface, returns self
      */
@@ -233,7 +220,7 @@ class Menu extends AbstractHelper
             $element = 'span';
         }
 
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapeHtml');
         return '<' . $element . $this->_htmlAttribs($attribs) . '>'
              . $escaper($label)
              . '</' . $element . '>';
@@ -319,10 +306,10 @@ class Menu extends AbstractHelper
             if (!$active['page']->hasPages()) {
                 return '';
             }
-        } else if (!$active['page']->hasPages()) {
+        } elseif (!$active['page']->hasPages()) {
             // found pages has no children; render siblings
             $active['page'] = $active['page']->getParent();
-        } else if (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
+        } elseif (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
             // children are below max depth; render siblings
             $active['page'] = $active['page']->getParent();
         }
@@ -389,14 +376,14 @@ class Menu extends AbstractHelper
             if ($depth < $minDepth || !$this->accept($page)) {
                 // page is below minDepth or not accepted by acl/visibilty
                 continue;
-            } else if ($onlyActive && !$isActive) {
+            } elseif ($onlyActive && !$isActive) {
                 // page is not active itself, but might be in the active branch
                 $accept = false;
                 if ($foundPage) {
                     if ($foundPage->hasPage($page)) {
                         // accept if page is a direct child of the active page
                         $accept = true;
-                    } else if ($foundPage->getParent()->hasPage($page)) {
+                    } elseif ($foundPage->getParent()->hasPage($page)) {
                         // page is a sibling of the active page...
                         if (!$foundPage->hasPages() ||
                             is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
@@ -424,7 +411,7 @@ class Menu extends AbstractHelper
                     $ulClass = '';
                 }
                 $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
-            } else if ($prevDepth > $depth) {
+            } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
                     $ind = $indent . str_repeat('        ', $i);
@@ -470,9 +457,9 @@ class Menu extends AbstractHelper
      *
      *
      * @param  AbstractContainer $container [optional] container to create menu from.
-     *                              Default is to use the container retrieved 
+     *                              Default is to use the container retrieved
      *                              from {@link getContainer()}.
-     * @param  array     $options   [optional] options for controlling rendering 
+     * @param  array     $options   [optional] options for controlling rendering
      * @return string    rendered menu
      */
     public function renderMenu($container = null, array $options = array())
@@ -555,14 +542,14 @@ class Menu extends AbstractHelper
      * <code>echo 'Number of pages: ', count($this->container);</code>.
      *
      * @param  AbstractContainer     $container [optional] container to pass to view
-     *                                  script. Default is to use the container 
+     *                                  script. Default is to use the container
      *                                  registered in the helper.
-     * @param  string|array  $partial   [optional] partial view script to use. 
-     *                                  Default is to use the partial 
-     *                                  registered in the helper. If an array 
-     *                                  is given, it is expected to contain two 
-     *                                  values; the partial view script to use, 
-     *                                  and the module where the script can be 
+     * @param  string|array  $partial   [optional] partial view script to use.
+     *                                  Default is to use the partial
+     *                                  registered in the helper. If an array
+     *                                  is given, it is expected to contain two
+     *                                  values; the partial view script to use,
+     *                                  and the module where the script can be
      *                                  found.
      * @return string                   helper output
      * @throws Exception\RuntimeException if no partial provided
@@ -621,7 +608,7 @@ class Menu extends AbstractHelper
      * @see renderMenu()
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the 
+     *                              to render the container registered in the
      *                              helper.
      * @return string               helper output
      */

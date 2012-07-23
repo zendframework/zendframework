@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Помощники видов</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><title>Помощники видов</title>
 
     
 
@@ -22,7 +22,7 @@
         camelCase: <code>fooBar()</code>.
     </para>
 
-    <note><info><title>Следите за регистром</title></info>
+    <note><title>Следите за регистром</title>
         
         <para>
             Имена помощников всегда должны быть в стиле camelCased, т.е. они
@@ -32,7 +32,7 @@
         </para>
     </note>
 
-    <note><info><title>Используемый по умолчанию путь к помощникам</title></info>
+    <note><title>Используемый по умолчанию путь к помощникам</title>
         
 
         <para>
@@ -56,7 +56,7 @@
         <varname>$this-&gt;имяПомощника()</varname>.
     </para>
 
-    <section xml:id="zend.view.helpers.initial"><info><title>Начальный набор помощников</title></info>
+    <section xml:id="zend.view.helpers.initial"><title>Начальный набор помощников</title>
 
         
 
@@ -428,7 +428,7 @@ echo $this->formCheckbox('foo',
         </xi:include>
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>Пути к классам помощников</title></info>
+    <section xml:id="zend.view.helpers.paths"><title>Пути к классам помощников</title>
 
         
 
@@ -477,7 +477,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>Написание собственных помощников</title></info>
+    <section xml:id="zend.view.helpers.custom"><title>Написание собственных помощников</title>
 
         
 

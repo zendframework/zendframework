@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><info><title>Objet mémoire</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><title>Objet mémoire</title>
     
 
-    <section xml:id="zend.memory.memory-objects.movable"><info><title>Mobile</title></info>
+    <section xml:id="zend.memory.memory-objects.movable"><title>Mobile</title>
         
 
         <para>
@@ -17,7 +17,7 @@ $memObject = $memoryManager->create($data);
         </para>
     </section>
 
-    <section xml:id="zend.memory.memory-objects.locked"><info><title>Verrouillé</title></info>
+    <section xml:id="zend.memory.memory-objects.locked"><title>Verrouillé</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $memObject = $memoryManager->createLocked($data);
         </para>
     </section>
 
-    <section xml:id="zend.memory.memory-objects.value"><info><title>Propriété "value" du manager de mémoire</title></info>
+    <section xml:id="zend.memory.memory-objects.value"><title>Propriété "value" du manager de mémoire</title>
         
 
         <para>
@@ -84,12 +84,12 @@ $memObject->value = substr($memObject->value, $start, $length);
         </para>
     </section>
 
-    <section xml:id="zend.memory.memory-objects.api"><info><title>Interface du conteneur de mémoire</title></info>
+    <section xml:id="zend.memory.memory-objects.api"><title>Interface du conteneur de mémoire</title>
         
 
         <para>Le conteneur de mémoire fournit les méthodes suivantes :</para>
 
-        <section xml:id="zend.memory.memory-objects.api.getRef"><info><title>La méthode getRef()</title></info>
+        <section xml:id="zend.memory.memory-objects.api.getRef"><title>La méthode getRef()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -130,7 +130,7 @@ for ($count = 0; $count < strlen($value); $count++) {
 ]]></programlisting></para>
             </section>
 
-            <section xml:id="zend.memory.memory-objects.api.touch"><info><title>La méthode touch()</title></info>
+            <section xml:id="zend.memory.memory-objects.api.touch"><title>La méthode touch()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -158,7 +158,7 @@ $memObject->touch();
 ]]></programlisting></para>
             </section>
 
-            <section xml:id="zend.memory.memory-objects.api.lock"><info><title>La méthode lock()</title></info>
+            <section xml:id="zend.memory.memory-objects.api.lock"><title>La méthode lock()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -198,7 +198,7 @@ $memObject2->unlock();
 ]]></programlisting></para>
             </section>
 
-            <section xml:id="zend.memory.memory-objects.api.unlock"><info><title>La méthode unlock()</title></info>
+            <section xml:id="zend.memory.memory-objects.api.unlock"><title>La méthode unlock()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -211,7 +211,7 @@ public function unlock();
             </para>
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.isLocked"><info><title>La méthode isLocked()</title></info>
+        <section xml:id="zend.memory.memory-objects.api.isLocked"><title>La méthode isLocked()</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>Laden von Klassen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><title>Laden von Klassen</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         konkrete Lösungen für diese Probleme zu geben.
     </para>
 
-    <section xml:id="performance.classloading.includepath"><info><title>Wie kann ich meinen include_path optimieren?</title></info>
+    <section xml:id="performance.classloading.includepath"><title>Wie kann ich meinen include_path optimieren?</title>
         
 
         <para>
@@ -24,7 +24,7 @@
             include_path nur den aktuellen Verzechnispfad inkludieren.
         </para>
 
-        <section xml:id="performance.classloading.includepath.abspath"><info><title>Absolute Pfade verwenden</title></info>
+        <section xml:id="performance.classloading.includepath.abspath"><title>Absolute Pfade verwenden</title>
             
 
             <para>
@@ -70,7 +70,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             </para>
         </section>
 
-        <section xml:id="performance.classloading.includepath.reduce"><info><title>Die Anzahl der Include Pfade die man definiert reduzieren</title></info>
+        <section xml:id="performance.classloading.includepath.reduce"><title>Die Anzahl der Include Pfade die man definiert reduzieren</title>
             
 
             <para>
@@ -95,7 +95,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             </para>
         </section>
 
-        <section xml:id="performance.classloading.includepath.early"><info><title>Definiere den include_path zum Zend Framework so früh wie möglich</title></info>
+        <section xml:id="performance.classloading.includepath.early"><title>Definiere den include_path zum Zend Framework so früh wie möglich</title>
             
 
             <para>
@@ -107,7 +107,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             </para>
         </section>
 
-        <section xml:id="performance.classloading.includepath.currentdir"><info><title>Definiere das aktuelle Verzeichnis als letztes oder gar nicht</title></info>
+        <section xml:id="performance.classloading.includepath.currentdir"><title>Definiere das aktuelle Verzeichnis als letztes oder gar nicht</title>
             
 
             <para>
@@ -121,7 +121,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 letztes Element in der Liste verschoben werden.
             </para>
 
-            <example xml:id="performance.classloading.includepath.example"><info><title>Beispiel: Optimierter include_path</title></info>
+            <example xml:id="performance.classloading.includepath.example"><title>Beispiel: Optimierter include_path</title>
                 
 
                 <para>
@@ -180,7 +180,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
         </section>
     </section>
 
-    <section xml:id="performance.classloading.striprequires"><info><title>Wie kann man unnötige require_once Anweisungen entfernen?</title></info>
+    <section xml:id="performance.classloading.striprequires"><title>Wie kann man unnötige require_once Anweisungen entfernen?</title>
         
 
         <para>
@@ -201,7 +201,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             Autoloader zu maximieren?
         </para>
 
-        <section xml:id="performance.classloading.striprequires.sed"><info><title>Aufrufe von require_once mit find und sed entfernen</title></info>
+        <section xml:id="performance.classloading.striprequires.sed"><title>Aufrufe von require_once mit find und sed entfernen</title>
             
 
             <para>
@@ -243,7 +243,7 @@ Zend_Loader_Autoloader::getInstance();
         </section>
     </section>
 
-    <section xml:id="performance.classloading.pluginloader"><info><title>Wie kann ich das Laden der Plugins beschleunigen?</title></info>
+    <section xml:id="performance.classloading.pluginloader"><title>Wie kann ich das Laden der Plugins beschleunigen?</title>
         
 
         <para>
@@ -271,12 +271,6 @@ Zend_Loader_Autoloader::getInstance();
         <itemizedlist>
             <listitem>
                 <para><classname>Zend_Controller_Action_HelperBroker</classname>: Helfer</para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <classname>Zend_Dojo</classname>: View Helfer, Form Elemente und Dekorator
-                </para>
             </listitem>
 
             <listitem>
@@ -309,7 +303,7 @@ Zend_Loader_Autoloader::getInstance();
             Wie kann man die Anzahl der so gemachten Aufrufe reduzieren?
         </para>
 
-        <section xml:id="performance.classloading.pluginloader.includefilecache"><info><title>Verwenden des PluginLoaders Include-File Caches</title></info>
+        <section xml:id="performance.classloading.pluginloader.includefilecache"><title>Verwenden des PluginLoaders Include-File Caches</title>
             
 
             <para>

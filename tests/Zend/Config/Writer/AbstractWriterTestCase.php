@@ -1,59 +1,46 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace ZendTest\Config\Writer;
 
-use \PHPUnit_Framework_TestCase as TestCase,
-    \Zend\Config\Config;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
 abstract class AbstractWriterTestCase extends TestCase
 {
     /**
-     * @var ReaderInterface
+     * @var \Zend\Config\Reader\ReaderInterface
      */
     protected $reader;
-    
+
     /**
      *
-     * @var WriterInterface
+     * @var \Zend\Config\Writer\WriterInterface
      */
     protected $writer;
-    
+
     /**
      *
      * @var string
      */
     protected $tmpfile;
-    
+
     /**
      * Get test asset name for current test case.
-     * 
+     *
      * @return string
      */
     protected function getTestAssetFileName()
@@ -63,12 +50,17 @@ abstract class AbstractWriterTestCase extends TestCase
         }
         return $this->tmpfile;
     }
-       
+
     public function tearDown()
     {
-        @unlink($this->getTestAssetFileName());
+        if (file_exists($this->getTestAssetFileName())) {
+            if (!is_writable($this->getTestAssetFileName())) {
+                chmod($this->getTestAssetFileName(), 0777);
+            }
+            @unlink($this->getTestAssetFileName());
+        }
     }
-    
+
     public function testNoFilenameSet()
     {
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No file name specified');
@@ -80,7 +72,7 @@ abstract class AbstractWriterTestCase extends TestCase
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $this->writer->toFile('.', new Config(array()));
     }
-    
+
     public function testFileNotWritable()
     {
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');

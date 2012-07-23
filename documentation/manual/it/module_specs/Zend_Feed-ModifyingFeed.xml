@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modifica della struttura e degli elementi di un feed</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><title>Modifica della struttura e degli elementi di un feed</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Un oggetto nuovo o modificato può essere facilmente riconvertito in XML per il salvataggio in un file o l'invio ad un server.
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modifica di un elemento esistente in un feed</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><title>Modifica di un elemento esistente in un feed</title>
         
         <programlisting role="php"><![CDATA[<?php
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -34,7 +34,7 @@ echo $entry->saveXML();
         Un nuovo elemento sarà invece inserito nel namespace predefinito se non si specifica esplicitamente un namespace alternativo.
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Creazione di un elemento di un feed Atom con namespace personalizzato</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><title>Creazione di un elemento di un feed Atom con namespace personalizzato</title>
         
         <programlisting role="php"><![CDATA[<?php
 $entry = new Zend_Feed_Entry_Atom();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><title>Zend_Uri</title>
   
 
-  <section xml:id="zend.uri.overview"><info><title>Privire de ansamblu</title></info>
+  <section xml:id="zend.uri.overview"><title>Privire de ansamblu</title>
     
 
     <para>
@@ -25,7 +25,7 @@
     </para>
   </section>
 
-  <section xml:id="zend.uri.creation"><info><title>Crearea unui nou identificator de resursă (URI)</title></info>
+  <section xml:id="zend.uri.creation"><title>Crearea unui nou identificator de resursă (URI)</title>
     
 
     <para>
@@ -33,7 +33,7 @@
       metodei <code>Zend_Uri::factory()</code>.
     </para>
 
-    <example><info><title>Crearea unui nou URI cu <code>Zend_Uri::factory()</code></title></info>
+    <example><title>Crearea unui nou URI cu <code>Zend_Uri::factory()</code></title>
       
 
       <programlisting role="php"><![CDATA[
@@ -63,7 +63,7 @@ $uri = Zend_Uri::factory('http');
     </para>
   </section>
 
-  <section xml:id="zend.uri.manipulation"><info><title>Manipularea unui identificator de resursă (URI) existent</title></info>
+  <section xml:id="zend.uri.manipulation"><title>Manipularea unui identificator de resursă (URI) existent</title>
     
 
     <para>
@@ -71,7 +71,7 @@ $uri = Zend_Uri::factory('http');
       <code>Zend_Uri::factory()</code>.
     </para>
 
-    <example><info><title>Manipularea unui identificator de resursă (UR) existent cu <code>Zend_Uri::factory()</code></title></info>
+    <example><title>Manipularea unui identificator de resursă (UR) existent cu <code>Zend_Uri::factory()</code></title>
       
 
     <programlisting role="php"><![CDATA[<?php
@@ -92,7 +92,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     </para>
   </section>
 
-  <section xml:id="zend.uri.validation"><info><title>Validarea unui URI</title></info>
+  <section xml:id="zend.uri.validation"><title>Validarea unui URI</title>
     
 
     <para>
@@ -100,7 +100,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
       unui URI existent este necesară într-un moment anume.
     </para>
 
-    <example xml:id="zend.uri.validation.example-1"><info><title>Validarea unui URI cu <code>Zend_Uri::check()</code></title></info>
+    <example xml:id="zend.uri.validation.example-1"><title>Validarea unui URI cu <code>Zend_Uri::check()</code></title>
       
 
     <programlisting role="php"><![CDATA[<?php
@@ -120,7 +120,7 @@ $valid = Zend_Uri::check('http://uri.de.validat');
     </para>
   </section>
 
-  <section xml:id="zend.uri.instance-methods"><info><title>Metode obişnuite de creat instanţe</title></info>
+  <section xml:id="zend.uri.instance-methods"><title>Metode obişnuite de creat instanţe</title>
     
 
     <para>
@@ -129,7 +129,7 @@ $valid = Zend_Uri::check('http://uri.de.validat');
       a fi utile în lucrul cu orice tip de URI.
     </para>
 
-    <section xml:id="zend.uri.instance-methods.getscheme"><info><title>Obţinerea schemei identificatorului (URI)</title></info>
+    <section xml:id="zend.uri.instance-methods.getscheme"><title>Obţinerea schemei identificatorului (URI)</title>
       
 
       <para>
@@ -137,7 +137,7 @@ $valid = Zend_Uri::check('http://uri.de.validat');
         schema identificatorului <code>http://www.zend.com</code> este <code>http</code>.
       </para>
 
-      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Obţinerea schemei dintr-un obiect <code>Zend_Uri_*</code></title></info>
+      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><title>Obţinerea schemei dintr-un obiect <code>Zend_Uri_*</code></title>
         
 
         <programlisting role="php"><![CDATA[<?php
@@ -156,10 +156,10 @@ $scheme = $uri->getScheme();  // "http"
 
     </section>
 
-    <section xml:id="zend.uri.instance-methods.geturi"><info><title>Obţinerea întregului identificator (URI)</title></info>
+    <section xml:id="zend.uri.instance-methods.geturi"><title>Obţinerea întregului identificator (URI)</title>
       
 
-      <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Obţinerea întregului identificator dintr-un obiect <code>Zend_Uri_*</code></title></info>
+      <example xml:id="zend.uri.instance-methods.geturi.example-1"><title>Obţinerea întregului identificator dintr-un obiect <code>Zend_Uri_*</code></title>
         
 
         <programlisting role="php"><![CDATA[<?php
@@ -177,7 +177,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       </para>
     </section>
 
-    <section xml:id="zend.uri.instance-methods.valid"><info><title>Validarea unui identificator (URI)</title></info>
+    <section xml:id="zend.uri.instance-methods.valid"><title>Validarea unui identificator (URI)</title>
       
 
       <para>
@@ -189,7 +189,7 @@ echo $uri->getUri();  // "http://www.zend.com"
         manipulării părţilor sale componente.
       </para>
 
-      <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Validarea unui obiect <code>Zend_Uri_*</code></title></info>
+      <example xml:id="zend.uri.instance-methods.valid.example-1"><title>Validarea unui obiect <code>Zend_Uri_*</code></title>
         
 
         <programlisting role="php"><![CDATA[<?php

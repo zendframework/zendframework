@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OAuth
  */
 
 namespace Zend\OAuth\Config;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\OAuth\Config as OAuthConfig,
-    Zend\OAuth,
-    Zend\Uri;
+use Traversable;
+use Zend\OAuth;
+use Zend\OAuth\Config as OAuthConfig;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Uri;
 
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StandardConfig implements ConfigInterface
 {
@@ -178,6 +166,9 @@ class StandardConfig implements ConfigInterface
                 case 'consumerSecret':
                     $this->setConsumerSecret($value);
                     break;
+                case 'token':
+                    $this->setToken($value);
+                    break;
                 case 'signatureMethod':
                     $this->setSignatureMethod($value);
                     break;
@@ -204,6 +195,9 @@ class StandardConfig implements ConfigInterface
                     break;
                 case 'requestMethod':
                     $this->setRequestMethod($value);
+                    break;
+                case 'requestScheme':
+                    $this->setRequestScheme($value);
                     break;
                 case 'rsaPrivateKey':
                     $this->setRsaPrivateKey($value);
@@ -257,7 +251,7 @@ class StandardConfig implements ConfigInterface
     /**
      * Get consumer secret
      *
-     * Returns RSA private key if set; otherwise, returns any previously set 
+     * Returns RSA private key if set; otherwise, returns any previously set
      * consumer secret.
      *
      * @return string
@@ -432,7 +426,7 @@ class StandardConfig implements ConfigInterface
     /**
      * Get request token URL
      *
-     * If no request token URL has been set, but a site URL has, returns the 
+     * If no request token URL has been set, but a site URL has, returns the
      * site URL with the string "/request_token" appended.
      *
      * @return string
@@ -462,7 +456,7 @@ class StandardConfig implements ConfigInterface
     /**
      * Get access token URL
      *
-     * If no access token URL has been set, but a site URL has, returns the 
+     * If no access token URL has been set, but a site URL has, returns the
      * site URL with the string "/access_token" appended.
      *
      * @return string
@@ -514,7 +508,7 @@ class StandardConfig implements ConfigInterface
     /**
      * Get authorization URL
      *
-     * If no authorization URL has been set, but a site URL has, returns the 
+     * If no authorization URL has been set, but a site URL has, returns the
      * site URL with the string "/authorize" appended.
      *
      * @return string
@@ -538,9 +532,9 @@ class StandardConfig implements ConfigInterface
     {
         $method = strtoupper($method);
         if (!in_array($method, array(
-                OAuth\OAuth::GET, 
-                OAuth\OAuth::POST, 
-                OAuth\OAuth::PUT, 
+                OAuth\OAuth::GET,
+                OAuth\OAuth::POST,
+                OAuth\OAuth::PUT,
                 OAuth\OAuth::DELETE,
             ))
         ) {
@@ -628,8 +622,8 @@ class StandardConfig implements ConfigInterface
 
     /**
      * Determine if a given URL is valid
-     * 
-     * @param  string $url 
+     *
+     * @param  string $url
      * @return void
      * @throws OAuth\Exception\InvalidArgumentException
      */

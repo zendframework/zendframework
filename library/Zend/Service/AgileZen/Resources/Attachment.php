@@ -1,106 +1,93 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage AgileZen_Resources
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\AgileZen\Resources;
 
-use Zend\Service\AgileZen\AgileZen,
-    Zend\Service\AgileZen\Entity;
+use Zend\Service\AgileZen\AbstractEntity;
+use Zend\Service\AgileZen\AgileZen;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen_Resources
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Attachment extends Entity
+class Attachment extends AbstractEntity
 {
     /**
      * File name
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $fileName;
 
     /**
      * Size
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $size;
 
     /**
      * Content type
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $contentType;
 
     /**
      * Token
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $token;
 
     /**
      * Service
-     * 
-     * @var AgileZen 
+     *
+     * @var AgileZen
      */
     protected $service;
 
     /**
      * Project Id
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $projectId;
 
     /**
      * Constructor
-     * 
+     *
      * @param AgileZen $service
-     * @param array $data 
+     * @param array $data
      */
     public function __construct(AgileZen $service, array $data)
     {
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the attachment");
         }
-        
+
         $this->fileName    = $data['fileName'];
         $this->size        = $data['sizeInBytes'];
         $this->contentType = $data['contentType'];
         $this->token       = $data['token'];
         $this->projectId   = $data['projectId'];
         $this->service     = $service;
-        
+
         parent::__construct($data['id']);
     }
 
     /**
      * Get file name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getFileName()
     {
@@ -109,8 +96,8 @@ class Attachment extends Entity
 
     /**
      * Get size
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getSize()
     {
@@ -119,8 +106,8 @@ class Attachment extends Entity
 
     /**
      * Get content type
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getContentType()
     {
@@ -129,8 +116,8 @@ class Attachment extends Entity
 
     /**
      * Get token
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getToken()
     {
@@ -139,8 +126,8 @@ class Attachment extends Entity
 
     /**
      * Get the project's Id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getProjectId()
     {

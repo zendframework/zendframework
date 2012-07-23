@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Resolver;
 
-use SplFileInfo,
-    Zend\Stdlib\SplStack,
-    Zend\View\Exception,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use SplFileInfo;
+use Zend\Stdlib\SplStack;
+use Zend\View\Exception;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Resolves view scripts based on a stack of paths
@@ -32,8 +21,6 @@ use SplFileInfo,
  * @category   Zend
  * @package    Zend_View
  * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TemplatePathStack implements ResolverInterface
 {
@@ -44,7 +31,7 @@ class TemplatePathStack implements ResolverInterface
      * Default suffix to use
      *
      * Appends this suffix if the template requested does not use it.
-     * 
+     *
      * @var string
      */
     protected $defaultSuffix = 'phtml';
@@ -56,7 +43,7 @@ class TemplatePathStack implements ResolverInterface
 
     /**
      * Reason for last lookup failure
-     * 
+     *
      * @var false|string
      */
     protected $lastLookupFailure = false;
@@ -141,7 +128,7 @@ class TemplatePathStack implements ResolverInterface
         $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
         return $this;
     }
-    
+
     /**
      * Get default file suffix
      *
@@ -328,7 +315,7 @@ class TemplatePathStack implements ResolverInterface
                     if (!file_exists($filePath)) {
                         break;
                     }
-                } 
+                }
                 if ($this->useStreamWrapper()) {
                     // If using a stream wrapper, prepend the spec to the path
                     $filePath = 'zend.view://' . $filePath;
@@ -343,7 +330,7 @@ class TemplatePathStack implements ResolverInterface
 
     /**
      * Get the last lookup failure message, if any
-     * 
+     *
      * @return false|string
      */
     public function getLastLookupFailure()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importazione di feed</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><title>Importazione di feed</title>
 
     
 
@@ -30,7 +30,7 @@ $feedDaPHP = Zend_Feed::importString($stringaFeed);
         I metodi d'importazione generano un'eccezione <code>Zend_Feed_Exception</code> in caso di errore, come ad esempio un feed non leggibile o non valido.
     </para>
 
-    <section xml:id="zend.feed.importing.custom"><info><title>Feed personalizzati</title></info>
+    <section xml:id="zend.feed.importing.custom"><title>Feed personalizzati</title>
 
         
 
@@ -40,7 +40,7 @@ $feedDaPHP = Zend_Feed::importString($stringaFeed);
             L'array può essere importato con <code>Zend_Feed::importArray()</code> o con <code>Zend_Feed::importBuilder()</code>. Nell'ultimo caso l'array sarà elaborato al volo da una sorgente di dati personalizzata che implementa <code>Zend_Feed_Builder_Interface</code>.
         </para>
 
-        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importazione di un array personalizzato</title></info>
+        <section xml:id="zend.feed.importing.custom.importarray"><title>Importazione di un array personalizzato</title>
 
             
 
@@ -189,7 +189,7 @@ array(
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importazione di una sorgente di dati personalizzata</title></info>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><title>Importazione di una sorgente di dati personalizzata</title>
 
             
 
@@ -225,7 +225,7 @@ $feedRssDaArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.dump"><info><title>Stampa del contenuto di un feed</title></info>
+        <section xml:id="zend.feed.importing.custom.dump"><title>Stampa del contenuto di un feed</title>
 
             
 

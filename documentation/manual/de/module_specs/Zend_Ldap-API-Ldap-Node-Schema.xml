@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-schema"><info><title>Zend_Ldap_Node_Schema</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-schema"><title>Zend_Ldap_Node_Schema</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         wirft eine <code>BadMethodCallException</code> aus den bekannten Gründen.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.table"><info><title>Zend_Ldap_Node_Schema API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.table"><title>Zend_Ldap_Node_Schema API</title>
         
 
         <tgroup cols="2">
@@ -224,7 +224,7 @@
         </tgroup>
     </table>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.attributetype-interface.table"><info><title>Zend_Ldap_Node_Schema_AttributeType_Interface API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.attributetype-interface.table"><title>Zend_Ldap_Node_Schema_AttributeType_Interface API</title>
         
 
         <tgroup cols="2">
@@ -269,7 +269,7 @@
         </tgroup>
     </table>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.objectclass-interface.table"><info><title>Zend_Ldap_Node_Schema_ObjectClass_Interface API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.objectclass-interface.table"><title>Zend_Ldap_Node_Schema_ObjectClass_Interface API</title>
         
 
         <tgroup cols="2">
@@ -367,7 +367,7 @@
         in Schema Informations Nodes nicht erlaubt sind.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.schema-item.table"><info><title>Zend_Ldap_Node_Schema_Item API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.schema-item.table"><title>Zend_Ldap_Node_Schema_Item API</title>
         
 
         <tgroup cols="2">
@@ -396,7 +396,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap"><info><title>OpenLDAP</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap"><title>OpenLDAP</title>
         
 
         <para>
@@ -404,7 +404,7 @@
             <code>Zend_Ldap_Node_Schema_OpenLDAP</code> angewendet werden.
         </para>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.table"><info><title>Zend_Ldap_Node_Schema_OpenLDAP API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.table"><title>Zend_Ldap_Node_Schema_OpenLDAP API</title>
             
 
             <tgroup cols="2">
@@ -434,7 +434,7 @@
             </tgroup>
         </table>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.attributetype-interface.table"><info><title>Zend_Ldap_Node_Schema_AttributeType_OpenLDAP API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.attributetype-interface.table"><title>Zend_Ldap_Node_Schema_AttributeType_OpenLDAP API</title>
             
 
             <tgroup cols="2">
@@ -461,7 +461,7 @@
             </tgroup>
         </table>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.objectclass-interface.table"><info><title>Zend_Ldap_Node_Schema_ObjectClass_OpenLDAP API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.objectclass-interface.table"><title>Zend_Ldap_Node_Schema_ObjectClass_OpenLDAP API</title>
             
 
             <tgroup cols="2">
@@ -487,10 +487,10 @@
         </table>
     </section>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory"><info><title>ActiveDirectory</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory"><title>ActiveDirectory</title>
         
 
-        <note><info><title>Browsen im Schema von ActiveDirectory Servern</title></info>
+        <note><title>Browsen im Schema von ActiveDirectory Servern</title>
             
 
             <para>
@@ -506,7 +506,7 @@
             an.
         </para>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.attributetype-interface.table"><info><title>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.attributetype-interface.table"><title>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory API</title>
             
 
             <tgroup cols="1">
@@ -521,7 +521,7 @@
             </tgroup>
         </table>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.objectclass-interface.table"><info><title>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.objectclass-interface.table"><title>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory API</title>
             
 
             <tgroup cols="1">

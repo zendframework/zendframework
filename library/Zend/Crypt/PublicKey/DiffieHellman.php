@@ -7,10 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\PublicKey;
 
 use Zend\Crypt\Exception;
-use Zend\Math\Math;
+use Zend\Math;
 
 /**
  * PHP implementation of the Diffie-Hellman public key encryption algorithm.
@@ -19,8 +20,6 @@ use Zend\Math\Math;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DiffieHellman
 {
@@ -67,7 +66,7 @@ class DiffieHellman
     /**
      * BigInteger support object courtesy of Zend\Math\Math
      *
-     * @var \Zend\Math\Math
+     * @var \Zend\Math\BigInteger\Adapter\AdapterInterface
      */
     private $math = null;
 
@@ -108,7 +107,9 @@ class DiffieHellman
         if ($privateKey !== null) {
             $this->setPrivateKey($privateKey, $privateKeyFormat);
         }
-        $this->setBigIntegerMath();
+
+        // set up BigInteger adapter
+        $this->math = Math\BigInteger\BigInteger::factory();
     }
 
     /**
@@ -385,20 +386,6 @@ class DiffieHellman
     }
 
     /**
-     * Setter to pass an extension parameter which is used to create
-     * a specific BigInteger instance for a specific extension type.
-     * Allows manual setting of the class in case of an extension
-     * problem or bug.
-     *
-     * @param string $extension
-     * @return void
-     */
-    public function setBigIntegerMath($extension = null)
-    {
-        $this->math = new Math($extension);
-    }
-
-    /**
      * Convert number between formats
      *
      * @param $number
@@ -417,7 +404,7 @@ class DiffieHellman
         switch ($inputFormat) {
             case self::FORMAT_BINARY:
             case self::FORMAT_BTWOC:
-                $number = $this->math->fromBinary($number);
+                $number = $this->math->binToInt($number);
                 break;
             case self::FORMAT_NUMBER:
             default:
@@ -428,10 +415,10 @@ class DiffieHellman
         // convert to output format
         switch ($outputFormat) {
             case self::FORMAT_BINARY:
-                return $this->math->toBinary($number);
+                return $this->math->intToBin($number);
                 break;
             case self::FORMAT_BTWOC:
-                return $this->math->btwoc($this->math->toBinary($number));
+                return $this->math->intToBin($number, true);
                 break;
             case self::FORMAT_NUMBER:
             default:
@@ -451,7 +438,7 @@ class DiffieHellman
      */
     protected function generatePrivateKey()
     {
-        $rand = $this->math->randBytes(strlen($this->getPrime()), true);
+        $rand = Math\Math::randBytes(strlen($this->getPrime()), true);
         return $rand;
     }
 }

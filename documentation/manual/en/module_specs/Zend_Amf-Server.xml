@@ -690,15 +690,15 @@ private function onFault(fault:Object):void {
         <para>
             <classname>Zend_Amf_Server</classname> allows you to specify authentication and
             authorization hooks to control access to the services. It is using the infrastructure
-            provided by <link linkend="zend.auth"><classname>Zend_Auth</classname></link> and
+            provided by <link linkend="zend.authentication"><classname>Zend_Authentication</classname></link> and
             <link linkend="zend.acl"><classname>Zend_Acl</classname></link> components.
         </para>
 
         <para>
-            In order to define authentication, the user provides authentication adapter extening
+            In order to define authentication, the user provides authentication adapter extending
             <classname>Zend_Amf_Auth_Abstract</classname> abstract class. The adapter should
             implement the <methodname>authenticate()</methodname> method just like regular
-            <link linkend="zend.auth.introduction.adapters">authentication adapter</link>.
+            <link linkend="zend.authentication.introduction.adapters">authentication adapter</link>.
         </para>
 
         <para>

@@ -1,8 +1,17 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
+
 namespace ZendTest\Http\Client;
 
-use Zend\Http\ClientStatic as HTTPClient,
-    Zend\Http\Client;
+use Zend\Http\ClientStatic as HTTPClient;
+use Zend\Http\Client;
 
 
 /**
@@ -11,8 +20,6 @@ use Zend\Http\ClientStatic as HTTPClient,
  * @category   Zend
  * @package    Zend\Http\Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend\Http
  * @group      Zend\Http\Client
  */
@@ -42,7 +49,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
         }
     }
-    
+
     /**
      * Test simple GET
      */
@@ -51,7 +58,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $response= HTTPClient::get($this->baseuri . 'testSimpleRequests.php');
         $this->assertTrue($response->isSuccess());
     }
-    
+
     /**
      * Test GET with query string in URI
      */
@@ -61,7 +68,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo',$response->getBody());
     }
-    
+
     /**
      * Test GET with query as params
      */
@@ -72,7 +79,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('foo',$response->getBody());
         $this->assertContains('bar',$response->getBody());
     }
-    
+
     /**
      * Test simple POST
      */
@@ -83,7 +90,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('foo',$response->getBody());
         $this->assertContains('bar',$response->getBody());
     }
-    
+
     /**
      * Test POST with header Content-Type
      */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><info><title>CLIツールの使用</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><title>CLIツールの使用</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         Windowsでの<filename>cmd.exe</filename>やconsole2、更にはCygwinプロジェクトとも共通の実装を持ちます。
     </para>
 
-    <section xml:id="zend.tool.framework.clitool.setup-general"><info><title>CLIツールの設定</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-general"><title>CLIツールの設定</title>
         
 
         <para>
@@ -67,7 +67,7 @@
 
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-starnix"><info><title>Unixのようなシステム上でCLIツールを設定</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-starnix"><title>Unixのようなシステム上でCLIツールを設定</title>
         
 
         <para>
@@ -151,7 +151,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
 
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-windows"><info><title>WindowsでCLIツールを設定</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-windows"><title>WindowsでCLIツールを設定</title>
         
 
         <para>
@@ -218,7 +218,7 @@ C:\WAMP\PHP\bin
 
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><info><title>設定での他の考慮事項</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><title>設定での他の考慮事項</title>
         
 
         <para>
@@ -240,7 +240,7 @@ C:\WAMP\PHP\bin
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.continuing"><info><title>次に進むべきところは？</title></info>
+    <section xml:id="zend.tool.framework.clitool.continuing"><title>次に進むべきところは？</title>
         
 
         <para>

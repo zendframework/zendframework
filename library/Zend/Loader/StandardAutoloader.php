@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Loader
- * @subpackage Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Loader
  */
 
 namespace Zend\Loader;
@@ -32,7 +21,6 @@ require_once __DIR__ . '/SplAutoloader.php';
  * class is not found, a PHP warning will be raised by include().
  *
  * @package    Zend_Loader
- * @license New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class StandardAutoloader implements SplAutoloader
 {
@@ -41,6 +29,7 @@ class StandardAutoloader implements SplAutoloader
     const LOAD_NS          = 'namespaces';
     const LOAD_PREFIX      = 'prefixes';
     const ACT_AS_FALLBACK  = 'fallback_autoloader';
+    const AUTOREGISTER_ZF  = 'autoregister_zf';
 
     /**
      * @var array Namespace/directory pairs to search; ZF library added by default
@@ -65,8 +54,6 @@ class StandardAutoloader implements SplAutoloader
      */
     public function __construct($options = null)
     {
-        $this->registerNamespace('Zend', dirname(__DIR__));
-
         if (null !== $options) {
             $this->setOptions($options);
         }
@@ -102,6 +89,11 @@ class StandardAutoloader implements SplAutoloader
 
         foreach ($options as $type => $pairs) {
             switch ($type) {
+                case self::AUTOREGISTER_ZF:
+                    if ($pairs) {
+                        $this->registerNamespace('Zend', dirname(__DIR__));
+                    }
+                    break;
                 case self::LOAD_NS:
                     if (is_array($pairs) || $pairs instanceof \Traversable) {
                         $this->registerNamespaces($pairs);

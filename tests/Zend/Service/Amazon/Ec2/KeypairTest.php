@@ -1,27 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2,
-    Zend\Service\Amazon\Ec2\Exception;
+
+use Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend\Service\Amazon\Ec2\Keypair test case.
@@ -29,8 +21,6 @@ use Zend\Service\Amazon\Ec2,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -44,29 +34,25 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
     private $keypairInstance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->keypairInstance = new Ec2\Keypair('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\Keypair::setDefaultHTTPClient($client);
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->keypairInstance = new Ec2\Keypair('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-
-        $this->keypairInstance = null;
-    }
 
     public function testCreateKeyPairNoNameThrowsException()
     {
@@ -118,7 +104,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
 . "2ERKKdwz0ZL9SWq6VTdhr/5G994CK72fy5WhyERbDjUIdHaK3M849JJuf8cSrvSb4g==\r\n"
 . "-----END RSA PRIVATE KEY-----</keyMaterial>\r\n"
                     . "</CreateKeyPairResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->create('example-key-name');
 
@@ -148,7 +134,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </keySet>\r\n"
                     . "</DescribeKeyPairsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->describe('example-key-name');
         $this->assertEquals('example-key-name', $response[0]['keyName']);
@@ -178,7 +164,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </keySet>\r\n"
                     . "</DescribeKeyPairsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->describe(array('example-key-name', 'zend-test-key'));
 
@@ -221,7 +207,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "<DeleteKeyPair xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>false</return>\r\n"
                     . "</DeleteKeyPair>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->delete('myfakekeyname');
         $this->assertInternalType('boolean', $response);
@@ -243,7 +229,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "<DeleteKeyPair xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeleteKeyPair>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->delete('example-key-name');
         $this->assertInternalType('boolean', $response);

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework Programmeer Standaard</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><title>Zend Framework Programmeer Standaard</title>
   
 
-  <section xml:id="coding-standard.overview"><info><title>Overzicht</title></info>
+  <section xml:id="coding-standard.overview"><title>Overzicht</title>
     
 
-    <section xml:id="coding-standard.overview.scope"><info><title>Bereik</title></info>
+    <section xml:id="coding-standard.overview.scope"><title>Bereik</title>
       
 
       <para>Dit document beschrijft de richtlijnen en
@@ -31,7 +31,7 @@
         </itemizedlist></para>
     </section>
 
-    <section xml:id="coding-standard.overview.goals"><info><title>Doelen</title></info>
+    <section xml:id="coding-standard.overview.goals"><title>Doelen</title>
       
 
       <para>Goede coderichtlijnen zijn belangrijk in
@@ -42,10 +42,10 @@
     </section>
   </section>
 
-  <section xml:id="coding-standard.php-file-formatting"><info><title>PHP Bestandsformattering</title></info>
+  <section xml:id="coding-standard.php-file-formatting"><title>PHP Bestandsformattering</title>
     
 
-    <section xml:id="coding-standard.php-file-formatting.general"><info><title>Algemeen</title></info>
+    <section xml:id="coding-standard.php-file-formatting.general"><title>Algemeen</title>
       
 
       <para>Voor bestanden die alleen PHP code bevatten
@@ -60,13 +60,13 @@
       speciale installatie scripts.</para>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>Indenting</title></info>
+    <section xml:id="coding-standard.php-file-formatting.indentation"><title>Indenting</title>
       
 
       <para>Gebruik een indent van 4 spaties, zonder tabulatie</para>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>Maximale regellengte</title></info>
+    <section xml:id="coding-standard.php-file-formatting.max-line-length"><title>Maximale regellengte</title>
       
 
       <para>De doellengte voor een regel is 80 tekens,
@@ -76,7 +76,7 @@
       120 tekens.</para>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>Regeleinde</title></info>
+    <section xml:id="coding-standard.php-file-formatting.line-termination"><title>Regeleinde</title>
       
 
       <para>Regeleindes worden geschreven volgens de
@@ -91,10 +91,10 @@
     </section>
   </section>
 
-  <section xml:id="coding-standard.naming-conventions"><info><title>Benamingsovereenkomst</title></info>
+  <section xml:id="coding-standard.naming-conventions"><title>Benamingsovereenkomst</title>
     
 
-    <section xml:id="coding-standard.naming-conventions.classes"><info><title>Klassen</title></info>
+    <section xml:id="coding-standard.naming-conventions.classes"><title>Klassen</title>
       
 
       <para>Het Zend Framework gebruikt een
@@ -133,7 +133,7 @@ Zend_View_Helper
       beginnen met "Zend_".</para>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>Interfaces</title></info>
+    <section xml:id="coding-standard.naming-conventions.interfaces"><title>Interfaces</title>
       
 
       <para>Interface klassen moeten dezelfde overeenkomsten
@@ -145,7 +145,7 @@ Zend_View_Helper
 Zend_Controller_Dispatcher_Interface]]></programlisting></para>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions.filenames"><info><title>Bestandsnamen</title></info>
+    <section xml:id="coding-standard.naming-conventions.filenames"><title>Bestandsnamen</title>
       
 
       <para>Voor alle andere bestanden zijn alleen alfanumerieke
@@ -166,7 +166,7 @@ Zend/View/Helper/FormRadio.php]]></programlisting> Bestandsnamen moeten de
       beschreven.</para>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>Functies en methodes</title></info>
+    <section xml:id="coding-standard.naming-conventions.functions-and-methods"><title>Functies en methodes</title>
       
 
       <para>Functienamen mogen alleen alfanumerieke tekens bevatten.
@@ -202,7 +202,7 @@ widgetFactory()]]></programlisting></para>
       functies in een statische klasse te wikkelen.</para>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions.variables"><info><title>Variabelen</title></info>
+    <section xml:id="coding-standard.naming-conventions.variables"><title>Variabelen</title>
       
 
       <para>Namen van variabelen mogen alleen bestaan uit alfanumerieke
@@ -226,7 +226,7 @@ widgetFactory()]]></programlisting></para>
       variabelen meer beschrijvende namen hebben.</para>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions.constants"><info><title>Constanten</title></info>
+    <section xml:id="coding-standard.naming-conventions.constants"><title>Constanten</title>
       
 
       <para>Namen voor constanten mogen zowel alfanumerieke tekens
@@ -242,10 +242,10 @@ widgetFactory()]]></programlisting></para>
     </section>
   </section>
 
-  <section xml:id="coding-standard.coding-style"><info><title>Codestijl</title></info>
+  <section xml:id="coding-standard.coding-style"><title>Codestijl</title>
     
 
-    <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP Code Afbakening</title></info>
+    <section xml:id="coding-standard.coding-style.php-code-demarcation"><title>PHP Code Afbakening</title>
       
 
       <para>PHP code moet altijd worden afgebakend met de volledige standaard PHP
@@ -257,10 +257,10 @@ widgetFactory()]]></programlisting></para>
       <para>Korte markeringen zijn nooit toegelaten</para>
     </section>
 
-    <section xml:id="coding-standard.coding-style.strings"><info><title>Strings</title></info>
+    <section xml:id="coding-standard.coding-style.strings"><title>Strings</title>
       
 
-      <section xml:id="coding-standard.coding-style.strings.literals"><info><title>String Literals</title></info>
+      <section xml:id="coding-standard.coding-style.strings.literals"><title>String Literals</title>
         
 
         <para>Wanneer een string letterlijk is (hij bevat geen variabelvervanging),
@@ -269,7 +269,7 @@ widgetFactory()]]></programlisting></para>
 $a = 'Voorbeeld String';]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>Letterlijke strings die apostrofen bevatten</title></info>
+      <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><title>Letterlijke strings die apostrofen bevatten</title>
         
 
         <para>Wanneer een letterlijke string zelf apostrofen bevat is het
@@ -280,7 +280,7 @@ $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'"
         De bovenstaande syntax is verkozen boven het "escapen" van de apostrofen.</para>
       </section>
 
-      <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>Variabelvervanging</title></info>
+      <section xml:id="coding-standard.coding-style.strings.variable-substitution"><title>Variabelvervanging</title>
         
 
         <para>Variabelvervanging is toegestaan met respect voor de volgende vormen: <programlisting role="php"><![CDATA[
@@ -292,7 +292,7 @@ $greeting = "Hello {$name}, welcome back!";]]></programlisting></para>
 $greeting = "Hello ${name}, welcome back!";]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>String samenvoeging</title></info>
+      <section xml:id="coding-standard.coding-style.strings.string-concatenation"><title>String samenvoeging</title>
         
 
         <para>Strings kunnen samengevoegd worden met de "." operator. Er moet steeds een spatie
@@ -309,10 +309,10 @@ $sql = "SELECT `id`, `name` FROM `people` "
       </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style.arrays"><info><title>Arrays</title></info>
+    <section xml:id="coding-standard.coding-style.arrays"><title>Arrays</title>
       
 
-      <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>Numeriek Geïndexeerde Arrays</title></info>
+      <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><title>Numeriek Geïndexeerde Arrays</title>
         
 
         <para>Negatieve nummers zijn verboden voor indexen.</para>
@@ -335,7 +335,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      56.44, $d, 500);]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>Associatieve Arrays</title></info>
+      <section xml:id="coding-standard.coding-style.arrays.associative"><title>Associatieve Arrays</title>
         
 
         <para>Wanneer men associatieve arrays met het <code>array</code>
@@ -348,10 +348,10 @@ $sampleArray = array('firstKey'  => 'firstValue',
       </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style.classes"><info><title>Klassen</title></info>
+    <section xml:id="coding-standard.coding-style.classes"><title>Klassen</title>
       
 
-      <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>Klasse Verklaring</title></info>
+      <section xml:id="coding-standard.coding-style.classes.declaration"><title>Klasse Verklaring</title>
         
 
         <para>Klassebenaming moet de volgende overeenkomsten volgen.</para>
@@ -382,7 +382,7 @@ class SampleClass
 }]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>Klasse lidvariabelen</title></info>
+      <section xml:id="coding-standard.coding-style.classes.member-variables"><title>Klasse lidvariabelen</title>
         
 
         <para>Lidvariabelen moeten benaamd worden volgens de variabele
@@ -399,10 +399,10 @@ class SampleClass
       </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>Functies en Methodes</title></info>
+    <section xml:id="coding-standard.coding-style.functions-and-methods"><title>Functies en Methodes</title>
       
 
-      <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>Functie en Methode Verklaring</title></info>
+      <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><title>Functie en Methode Verklaring</title>
         
 
         <para>Functiebenaming moet de benamingsovereenkomsten volgen.</para>
@@ -450,7 +450,7 @@ function foo()
 }]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Functie- en Methodegebruik</title></info>
+      <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><title>Functie- en Methodegebruik</title>
         
 
         <para>Functie-argumenten worden gescheiden door één enkele spatie
@@ -476,10 +476,10 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
       </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style.control-statements"><info><title>Control Statements</title></info>
+    <section xml:id="coding-standard.coding-style.control-statements"><title>Control Statements</title>
       
 
-      <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If / Else / Elseif</title></info>
+      <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><title>If / Else / Elseif</title>
         
 
         <para>Control statements gebaseerd op <code>if</code> en
@@ -523,7 +523,7 @@ if ($a != 2) {
         aanbevolen.</para>
       </section>
 
-      <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+      <section xml:id="coding-standards.coding-style.control-statements.switch"><title>Switch</title>
         
 
         <para>Control statements geschreven met "switch" moeten een enkele spatie
@@ -559,10 +559,10 @@ switch ($numPeople) {
       </section>
     </section>
 
-    <section xml:id="coding-standards.inline-documentation"><info><title>Inline Documentatie</title></info>
+    <section xml:id="coding-standards.inline-documentation"><title>Inline Documentatie</title>
       
 
-      <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>Documentatie Formaat</title></info>
+      <section xml:id="coding-standards.inline-documentation.documentation-format"><title>Documentatie Formaat</title>
         
 
         <para>Alle documentatieblokken ("docblocks") moeten compatibel zijn
@@ -576,7 +576,7 @@ switch ($numPeople) {
         klasse. Hierna enkele voorbeelden van zulke docblocks.</para>
       </section>
 
-      <section xml:id="coding-standards.inline-documentation.files"><info><title>Bestanden</title></info>
+      <section xml:id="coding-standards.inline-documentation.files"><title>Bestanden</title>
         
 
         <para>Elk bestand dat PHP code bevat moet een hoofdblok aan het
@@ -596,7 +596,7 @@ switch ($numPeople) {
 */]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standards.inline-documentation.classes"><info><title>Klassen</title></info>
+      <section xml:id="coding-standards.inline-documentation.classes"><title>Klassen</title>
         
 
         <para>Elke klasse moet een docblock bevatten dat minstens
@@ -615,7 +615,7 @@ switch ($numPeople) {
  */]]></programlisting></para>
       </section>
 
-      <section xml:id="coding-standards.inline-documentation.functions"><info><title>Functies</title></info>
+      <section xml:id="coding-standards.inline-documentation.functions"><title>Functies</title>
         
 
         <para>Elke functie, methodes inbegrepen, moet een docblock hebben

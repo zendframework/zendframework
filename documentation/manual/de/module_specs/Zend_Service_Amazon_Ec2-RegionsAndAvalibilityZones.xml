@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><info><title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         Anwendung vor einem Fehler in einer einzelnen Availability Zone schützen.
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.zones.regions"><info><title>Amazon EC2 Regionen</title></info>
+    <section xml:id="zend.service.amazon.ec2.zones.regions"><title>Amazon EC2 Regionen</title>
         
 
         <para>
@@ -28,7 +28,7 @@
              Stabilität, und es macht die Lokalität jeder EC2 Ressource eindeutig.
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.zones.regions.example"><info><title>Ansehen der vorhendenen Regionen</title></info>
+        <example xml:id="zend.service.amazon.ec2.zones.regions.example"><title>Ansehen der vorhendenen Regionen</title>
             
 
             <para>
@@ -52,7 +52,7 @@ foreach($regions as $region) {
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.zones.availability"><info><title>Amazon EC2 Availability Zonen</title></info>
+    <section xml:id="zend.service.amazon.ec2.zones.availability"><title>Amazon EC2 Availability Zonen</title>
         
 
         <para>
@@ -67,7 +67,7 @@ foreach($regions as $region) {
             müssen.
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.zones.availability.example"><info><title>Vorhendene Zonen sehen</title></info>
+        <example xml:id="zend.service.amazon.ec2.zones.availability.example"><title>Vorhendene Zonen sehen</title>
             
 
             <para>

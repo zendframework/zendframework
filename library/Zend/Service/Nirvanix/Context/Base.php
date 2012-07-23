@@ -1,33 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Nirvanix
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Nirvanix\Context;
 
-use Traversable,
-    Zend\Http\Client as HttpClient,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\Service\Nirvanix\Exception,
-    Zend\Service\Nirvanix\Response,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\Service\Nirvanix\Exception;
+use Zend\Service\Nirvanix\Response;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * The Nirvanix web services are split into namespaces.  This is a proxy class
@@ -37,8 +26,6 @@ use Traversable,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Nirvanix
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Base
 {
@@ -86,7 +73,7 @@ class Base
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable of options');
         }
-        
+
         if (isset($options['baseUrl'])) {
             $this->host = $options['baseUrl'];
         }

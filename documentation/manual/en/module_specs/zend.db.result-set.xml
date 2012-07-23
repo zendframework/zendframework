@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xml:id="zend.db.result-set">
+    <title>Zend\Db\ResultSet</title>
+
+    <para>
+        <classname>Zend\Db\ResultSet</classname> is a sub-component of Zend\Db for abstracting
+        the iteration of rowset producing queries.  While data sources for
+        this can be anything that is iterable, generally a
+        <classname>Zend\Db\Adpater\Driver\ResultInterface</classname> based object is the primary
+        source for retrieving data.
+    </para>
+
+    <para>
+        <classname>Zend\Db\ResultSet</classname>'s must implement the <classname>Zend\Db\ResultSet\ResultSetInterface</classname>
+        and all sub-components of Zend\Db that return a ResultSet as part
+        of their API will assume an instance of a <classname>ResultSetInterface</classname> should be
+        returned.  In most casts, the Prototype pattern will be used by consuming
+        object to clone a prototype of a ResultSet and return a specialized
+        ResultSet with a specific data source injected.  The interface of
+        ResultSetInterface looks like this:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+interface ResultSetInterface extends \Traversable, \Countable
+{
+    public function initialize($dataSource);
+    public function getFieldCount();
+}
+]]></programlisting>
+
+    <section xml:id="zend.db.result-set.result-set">
+        <title>Quickstart</title>
+
+        <para>
+            <classname>Zend\Db\ResultSet\ResultSet</classname> is the most basic form of a ResultSet
+            object that will expose each row as either an ArrayObject-like object
+            or an array of row data.  The following workflow is based on that
+            inside <classname>Zend\Db\Adapter\Adapter::query()</classname>:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
+
+$stmt = $driver->createStatement($sql);
+$stmt->prepare($parameters);
+$result = $stmt->execute();
+
+if ($result instanceof ResultInterface && $result->isQueryResult()) {
+    $resultSet = new ResultSet
+    $resultSet->initialize($result);
+
+    foreach ($resultSet as $row) {
+        echo $row->my_column . PHP_EOL;
+    }
+}
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.db.result-set.hydrating-result-set">
+        <title>Zend\Db\ResultSet\HydratingResultSet</title>
+
+        <para>
+            <classname>Zend\Db\ResultSet\HydratingResultSet</classname> is a more flexible <classname>ResultSet</classname>
+            object that allows the developer to choose an appropriate
+            "hydration strategy" for getting row data into a target object.
+            While iterating, <classname>HydratingResultSet</classname> will take a prototype of a
+            target object and clone it for each successive new row it iterates.
+            With this newly cloned row, <classname>HydratingResultSet</classname> will hydrate
+            the target object with the row data.
+        </para>
+
+        <para>
+            In the example below, rows from the database will be iterated, and
+            during iteration, <classname>HydratingRowSet</classname> will use the Reflection based
+            hydrator to inject the row data directly into the protected members
+            of the cloned UserEntity object:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\HydratingResultSet;
+use Zend\Stdlib\Hydrator\Reflection as ReflectionHydrator;
+
+class UserEntity {
+    protected function $first_name;
+    protected function $last_name;
+    public function getFirstName() { return $this->first_name; }
+    public function getLastName() { return $this->last_name; }
+}
+
+$stmt = $driver->createStatement($sql);
+$stmt->prepare($parameters);
+$result = $stmt->execute();
+
+if ($result instanceof ResultInterface && $result->isQueryResult()) {
+    $resultSet = new HydratingResultSet(new ReflectionHydrator, new UserEntity);
+    $resultSet->initialize($result);
+
+    foreach ($resultSet as $user) {
+        echo $user->getFirstName() . ' ' . $user->getLastName() . PHP_EOL;
+    }
+}
+]]></programlisting>
+
+        <para>
+            For more information, see the <classname>Zend\Stdlib\Hydrator</classname> documentation
+            to get a better sense of the different strategies that can be
+            employed in order to populate a target object.
+        </para>
+
+    </section>
+
+</section>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.instance"><info><title>Zend_Service_Amazon_Ec2: Instanzen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.instance"><title>Zend_Service_Amazon_Ec2: Instanzen</title>
     
 
-    <section xml:id="zend.service.amazon.ec2.instance.types"><info><title>Instanz Typen</title></info>
+    <section xml:id="zend.service.amazon.ec2.instance.types"><title>Instanz Typen</title>
         
 
         <para>
@@ -25,7 +25,7 @@
             zu starten und die Anweundung zu benchmarken.
         </para>
 
-        <note><info><title>Instanz Typen</title></info>
+        <note><title>Instanz Typen</title>
             
 
             <para>
@@ -34,7 +34,7 @@
             </para>
         </note>
 
-        <table xml:id="zend.service.amazon.ec2.instance.types-table"><info><title>Vorhandene Instanztypen</title></info>
+        <table xml:id="zend.service.amazon.ec2.instance.types-table"><title>Vorhandene Instanztypen</title>
             
 
             <tgroup cols="8">
@@ -181,14 +181,14 @@
         </table>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.instance.operations"><info><title>Ausführen von Amazon EC2 Instanzen</title></info>
+    <section xml:id="zend.service.amazon.ec2.instance.operations"><title>Ausführen von Amazon EC2 Instanzen</title>
         
 
         <para>
             Dieses Kapitel beschreibt die Methoden für die Behandlung von Amazon EC2 Instanzen.
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.instance.operations.run"><info><title>Starten neuer EC2 Instanzen</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.operations.run"><title>Starten neuer EC2 Instanzen</title>
             
 
             <para>
@@ -198,7 +198,7 @@
             </para>
 
             <para>
-                <table xml:id="zend.service.amazon.ec2.instance.operations.run-table"><info><title>Gültige Optionen für das Starten</title></info>
+                <table xml:id="zend.service.amazon.ec2.instance.operations.run-table"><title>Gültige Optionen für das Starten</title>
                     
 
                     <tgroup cols="3">
@@ -399,7 +399,7 @@ $return = $ec2_instance->run(array('imageId' => 'ami-509320',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.instance.operations.reboot"><info><title>Neu booten von EC2 Instanzen</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.operations.reboot"><title>Neu booten von EC2 Instanzen</title>
             
 
             <para>
@@ -425,7 +425,7 @@ $return = $ec2_instance->reboot('instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.instance.operations.terminate"><info><title>Beenden von EC2 Instanzen</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.operations.terminate"><title>Beenden von EC2 Instanzen</title>
             
 
             <para>
@@ -446,14 +446,14 @@ $return = $ec2_instance->terminate('instanceId');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Terminierte Instanzen</title></info>
+        <note><title>Terminierte Instanzen</title>
             
             <para>Terminierte Instanzen bleiben nach der Terminierung sichtbar (voraussichtlich
             eine Stunde).</para>
         </note>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.instance.utility"><info><title>Utilities für Amazon Instanzen</title></info>
+    <section xml:id="zend.service.amazon.ec2.instance.utility"><title>Utilities für Amazon Instanzen</title>
         
 
         <para>
@@ -461,7 +461,7 @@ $return = $ec2_instance->terminate('instanceId');
             erhält und sieht ob eine Instanz einen Produktcode enthält.
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.instance.utility.describe"><info><title>Instanzen beschreiben</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.utility.describe"><title>Instanzen beschreiben</title>
             
 
             <para>
@@ -490,7 +490,7 @@ $return = $ec2_instance->describe('instanceId');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Beendete Instanzen</title></info>
+        <note><title>Beendete Instanzen</title>
             
 
             <para>
@@ -502,7 +502,7 @@ $return = $ec2_instance->describe('instanceId');
             </para>
         </note>
 
-        <example xml:id="zend.service.amazon.ec2.instance.utility.describebyimageid"><info><title>Instanzen anhand der Image Id beschreiben</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.utility.describebyimageid"><title>Instanzen anhand der Image Id beschreiben</title>
             
 
             <para>
@@ -522,7 +522,7 @@ $return = $ec2_instance->describeByImageId('imageId');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Beendete Instanzen</title></info>
+        <note><title>Beendete Instanzen</title>
             
 
             <para>
@@ -534,7 +534,7 @@ $return = $ec2_instance->describeByImageId('imageId');
             </para>
         </note>
 
-        <example xml:id="zend.service.amazon.ec2.instance.utility.consoleOutput"><info><title>Empfangen von Konsolen-Ausgaben</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.utility.consoleOutput"><title>Empfangen von Konsolen-Ausgaben</title>
             
 
             <para>
@@ -561,7 +561,7 @@ $return = $ec2_instance->consoleOutput('instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.instance.utility.confirmproduct"><info><title>Produktcode an einer Instanz bestätigen</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.utility.confirmproduct"><title>Produktcode an einer Instanz bestätigen</title>
             
 
             <para>
@@ -585,7 +585,7 @@ $return = $ec2_instance->confirmProduct('productCode', 'instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.instance.utility.monitor"><info><title>Einschalten des CloudWatch Monitorings für Instanzen</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.utility.monitor"><title>Einschalten des CloudWatch Monitorings für Instanzen</title>
             
 
             <para>
@@ -601,7 +601,7 @@ $return = $ec2_instance->monitor('instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.instance.utility.unmonitor"><info><title>Ausschalten des CloudWatch Monitorings für Instanzen</title></info>
+        <example xml:id="zend.service.amazon.ec2.instance.utility.unmonitor"><title>Ausschalten des CloudWatch Monitorings für Instanzen</title>
             
 
             <para>

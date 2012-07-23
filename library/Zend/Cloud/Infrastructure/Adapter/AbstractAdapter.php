@@ -1,20 +1,11 @@
 <?php
 /**
- * LICENSE
+ * Zend Framework (http://framework.zend.com/)
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\Infrastructure\Adapter;
@@ -27,21 +18,19 @@ use Zend\Cloud\Infrastructure\Instance;
  * @category   Zend
  * @package    Zend_Cloud
  * @subpackage Infrastructure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**
      * Store the last response from the adapter
-     * 
+     *
      * @var array
      */
     protected $adapterResult;
-    
+
     /**
      * Valid metrics for monitor
-     * 
+     *
      * @var array
      */
     protected $validMetrics = array(
@@ -56,18 +45,18 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Error message
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $errorMsg;
-    
+
     /**
      * Error code
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $errorCode;
-    
+
     /**
      * Get the last result of the adapter
      *
@@ -80,10 +69,10 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Wait for status $status with a timeout of $timeout seconds
-     * 
+     *
      * @param  string $id
      * @param  string $status
-     * @param  integer $timeout 
+     * @param  integer $timeout
      * @return boolean
      */
     public function waitStatusInstance($id, $status, $timeout = self::TIMEOUT_STATUS_CHANGE)
@@ -107,7 +96,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param  array $param
      * @param  string|array $cmd
      * @return string|array
-     */ 
+     */
     public function deployInstance($id, $params, $cmd)
     {
         if (!function_exists("ssh2_connect")) {
@@ -122,9 +111,9 @@ abstract class AbstractAdapter implements AdapterInterface
             throw new Exception\InvalidArgumentException('You must specify the shell commands to run on the instance');
         }
 
-        if (empty($params) 
-            || empty($params[Instance::SSH_USERNAME]) 
-            || (empty($params[Instance::SSH_PASSWORD]) 
+        if (empty($params)
+            || empty($params[Instance::SSH_USERNAME])
+            || (empty($params[Instance::SSH_PASSWORD])
                 && empty($params[Instance::SSH_PRIVATE_KEY]))
         ) {
             throw new Exception\InvalidArgumentException('You must specify the params for the SSH connection');
@@ -133,7 +122,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $host = $this->publicDnsInstance($id);
         if (empty($host)) {
             throw new Exception\RuntimeException(sprintf(
-                'The instance identified by "%s" does not exist', 
+                'The instance identified by "%s" does not exist',
                 $id
             ));
         }
@@ -150,11 +139,11 @@ abstract class AbstractAdapter implements AdapterInterface
                 $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
 
                 stream_set_blocking($errorStream, true);
-                stream_set_blocking($stream, true); 
+                stream_set_blocking($stream, true);
 
                 $output = stream_get_contents($stream);
                 $error  = stream_get_contents($errorStream);
-                
+
                 if (empty($error)) {
                     $result[$command] = $output;
                 } else {
@@ -167,53 +156,53 @@ abstract class AbstractAdapter implements AdapterInterface
             $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
 
             stream_set_blocking($errorStream, true);
-            stream_set_blocking($stream, true); 
+            stream_set_blocking($stream, true);
 
             $output = stream_get_contents($stream);
             $error  = stream_get_contents($errorStream);
-            
+
             if (empty($error)) {
                 $result = $output;
             } else {
                 $result = $error;
             }
-        }    
+        }
         return $result;
     }
-    
+
     /**
      * Return true if the last request was successful
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isSuccessful()
     {
         return (empty($this->errorMsg));
     }
-    
+
     /**
      * Get the error message
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getErrorMsg()
     {
         return $this->errorMsg;
     }
-    
+
     /**
      * Get the error code
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getErrorCode()
     {
         return $this->errorCode;
     }
-    
+
     /**
      * Reset the error message and error code
-     * 
+     *
      * @return void
      */
     protected function resetError()

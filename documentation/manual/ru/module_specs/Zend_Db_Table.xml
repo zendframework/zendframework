@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><title>Zend_Db_Table</title>
 
     
 
-    <section xml:id="zend.db.table.introduction"><info><title>Класс таблицы - введение</title></info>
+    <section xml:id="zend.db.table.introduction"><title>Класс таблицы - введение</title>
 
         
 
@@ -23,7 +23,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.defining"><info><title>Определение класса таблицы</title></info>
+    <section xml:id="zend.db.table.defining"><title>Определение класса таблицы</title>
 
         
 
@@ -32,7 +32,7 @@
             наследующий от Zend_Db_Table_Abstract.
         </para>
 
-        <section xml:id="zend.db.table.defining.table-schema"><info><title>Определение имени и схемы таблицы</title></info>
+        <section xml:id="zend.db.table.defining.table-schema"><title>Определение имени и схемы таблицы</title>
 
             
 
@@ -43,7 +43,7 @@
                 представлена в БД.
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example1"><info><title>Объявление класса таблицы с явным определением имени таблицы</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example1"><title>Объявление класса таблицы с явным определением имени таблицы</title>
 
                 
 
@@ -63,7 +63,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 должно иметь то же написание, что и имя таблицы в БД.
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example"><info><title>Объявление класса таблицы с неявным определением имени таблицы</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example"><title>Объявление класса таблицы с неявным определением имени таблицы</title>
 
                 
 
@@ -88,7 +88,7 @@ class bugs extends Zend_Db_Table_Abstract
                 "пространство таблиц", они используются аналогичным образом.
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example3"><info><title>Объявление класса таблицы со схемой</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example3"><title>Объявление класса таблицы со схемой</title>
 
                 
 
@@ -127,7 +127,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 переданное через опцию <code>schema</code>.
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example.constructor"><info><title>Объявление имен таблицы и схемы во время инстанцирования</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example.constructor"><title>Объявление имен таблицы и схемы во время инстанцирования</title>
 
                 
 
@@ -161,7 +161,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
         </section>
 
-        <section xml:id="zend.db.table.defining.primary-key"><info><title>Определение первичного ключа таблицы</title></info>
+        <section xml:id="zend.db.table.defining.primary-key"><title>Определение первичного ключа таблицы</title>
 
             
 
@@ -173,7 +173,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 составным.
             </para>
 
-            <example xml:id="zend.db.table.defining.primary-key.example"><info><title>Пример определения первичного ключа</title></info>
+            <example xml:id="zend.db.table.defining.primary-key.example"><title>Пример определения первичного ключа</title>
 
                 
 
@@ -210,7 +210,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.defining.setup"><info><title>Переопределение методов установки таблицы</title></info>
+        <section xml:id="zend.db.table.defining.setup"><title>Переопределение методов установки таблицы</title>
 
             
 
@@ -222,7 +222,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 вызываться родительский метод.
             </para>
 
-            <example xml:id="zend.db.table.defining.setup.example"><info><title>Пример переопределения метода _setupTableName()</title></info>
+            <example xml:id="zend.db.table.defining.setup.example"><title>Пример переопределения метода _setupTableName()</title>
 
                 
 
@@ -288,7 +288,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.initialization"><info><title>Инициализация таблицы</title></info>
+        <section xml:id="zend.db.table.initialization"><title>Инициализация таблицы</title>
 
             
 
@@ -301,7 +301,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <code>__construct</code>, если только не требуется изменять
                 метаданные программным путем.
 
-                <example xml:id="zend.db.table.defining.init.usage.example"><info><title>Пример использования метода init()</title></info>
+                <example xml:id="zend.db.table.defining.init.usage.example"><title>Пример использования метода init()</title>
 
                     
 
@@ -327,7 +327,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
     </section>
 
-    <section xml:id="zend.db.table.constructing"><info><title>Создание экземпляра класса таблицы</title></info>
+    <section xml:id="zend.db.table.constructing"><title>Создание экземпляра класса таблицы</title>
 
         
 
@@ -340,7 +340,7 @@ class Bugs extends Zend_Db_Table_Abstract
             классу таблицы, и эти три способа описаны ниже:
         </para>
 
-        <section xml:id="zend.db.table.constructing.adapter"><info><title>Установка адаптера БД</title></info>
+        <section xml:id="zend.db.table.constructing.adapter"><title>Установка адаптера БД</title>
 
             
 
@@ -350,7 +350,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 массиве опций под ключом <code>'db'</code>.
             </para>
 
-            <example xml:id="zend.db.table.constructing.adapter.example"><info><title>Пример создания экземпляра таблицы с использованием объекта адаптера</title></info>
+            <example xml:id="zend.db.table.constructing.adapter.example"><title>Пример создания экземпляра таблицы с использованием объекта адаптера</title>
 
                 
 
@@ -366,7 +366,7 @@ $table = new Bugs(array('db' => $db));
 
         </section>
 
-        <section xml:id="zend.db.table.constructing.default-adapter"><info><title>Установка используемого по умолчанию адаптера БД</title></info>
+        <section xml:id="zend.db.table.constructing.default-adapter"><title>Установка используемого по умолчанию адаптера БД</title>
 
             
 
@@ -379,7 +379,7 @@ $table = new Bugs(array('db' => $db));
                 аргументом является объект типа Zend_Db_Adapter_Abstract.
             </para>
 
-            <example xml:id="zend.db.table.constructing.default-adapter.example"><info><title>Пример создания экземпляра таблицы с адаптером, используемым по умолчанию</title></info>
+            <example xml:id="zend.db.table.constructing.default-adapter.example"><title>Пример создания экземпляра таблицы с адаптером, используемым по умолчанию</title>
 
                 
 
@@ -409,7 +409,7 @@ $table = new Bugs();
         </section>
 
 
-        <section xml:id="zend.db.table.constructing.registry"><info><title>Хранение адаптера БД в реестре</title></info>
+        <section xml:id="zend.db.table.constructing.registry"><title>Хранение адаптера БД в реестре</title>
 
             
 
@@ -421,7 +421,7 @@ $table = new Bugs();
                 типа Zend_Db_Adapter_Abstract.
             </para>
 
-            <example xml:id="zend.db.table.constructing.registry.example"><info><title>Пример создания экземпляра таблицы с использованием ключа реестра</title></info>
+            <example xml:id="zend.db.table.constructing.registry.example"><title>Пример создания экземпляра таблицы с использованием ключа реестра</title>
 
                 
 
@@ -454,7 +454,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
     </section>
 
-    <section xml:id="zend.db.table.insert"><info><title>Добавление строк в таблицу</title></info>
+    <section xml:id="zend.db.table.insert"><title>Добавление строк в таблицу</title>
 
         
 
@@ -466,7 +466,7 @@ $table = new Bugs(array('db' => 'my_db'));
             значения.
         </para>
 
-        <example xml:id="zend.db.table.insert.example"><info><title>Пример добавления строк в таблицу</title></info>
+        <example xml:id="zend.db.table.insert.example"><title>Пример добавления строк в таблицу</title>
 
             
 
@@ -493,7 +493,7 @@ $table->insert($data);
             объекты типа Zend_Db_Expr.
         </para>
 
-        <example xml:id="zend.db.table.insert.example-expr"><info><title>Пример добавления выражений в таблицу</title></info>
+        <example xml:id="zend.db.table.insert.example-expr"><title>Пример добавления выражений в таблицу</title>
 
             
 
@@ -518,7 +518,7 @@ $data = array(
             первичных ключей.
         </para>
 
-        <section xml:id="zend.db.table.insert.key-auto"><info><title>Использование таблицы с автоинкрементным ключом</title></info>
+        <section xml:id="zend.db.table.insert.key-auto"><title>Использование таблицы с автоинкрементным ключом</title>
 
             
 
@@ -535,7 +535,7 @@ $data = array(
                 столбец.
             </para>
 
-            <example xml:id="zend.db.table.insert.key-auto.example"><info><title>Пример объявления таблицы с автоинкрементным первичным ключом</title></info>
+            <example xml:id="zend.db.table.insert.key-auto.example"><title>Пример объявления таблицы с автоинкрементным первичным ключом</title>
 
                 
 
@@ -572,7 +572,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.insert.key-sequence"><info><title>Использование таблицы с последовательностью</title></info>
+        <section xml:id="zend.db.table.insert.key-sequence"><title>Использование таблицы с последовательностью</title>
 
             
 
@@ -592,7 +592,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <code>INSERT</code>.
             </para>
 
-            <example xml:id="zend.db.table.insert.key-sequence.example"><info><title>Пример объявления таблицы с последовательностью</title></info>
+            <example xml:id="zend.db.table.insert.key-sequence.example"><title>Пример объявления таблицы с последовательностью</title>
 
                 
 
@@ -625,7 +625,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.insert.key-natural"><info><title>Использование таблицы с естественным ключом</title></info>
+        <section xml:id="zend.db.table.insert.key-natural"><title>Использование таблицы с естественным ключом</title>
 
             
 
@@ -645,7 +645,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 исключение Zend_Db_Table_Exception.
             </para>
 
-            <example xml:id="zend.db.table.insert.key-natural.example"><info><title>Пример объявления таблицы с естественным ключом</title></info>
+            <example xml:id="zend.db.table.insert.key-natural.example"><title>Пример объявления таблицы с естественным ключом</title>
 
                 
 
@@ -677,7 +677,7 @@ class BugStatus extends Zend_Db_Table_Abstract
 
     </section>
 
-    <section xml:id="zend.db.table.update"><info><title>Обновление строк в таблице</title></info>
+    <section xml:id="zend.db.table.update"><title>Обновление строк в таблице</title>
 
         
 
@@ -691,7 +691,7 @@ class BugStatus extends Zend_Db_Table_Abstract
             <code>UPDATE</code>.
         </para>
 
-        <example xml:id="zend.db.table.update.example"><info><title>Пример обновления строк в таблице</title></info>
+        <example xml:id="zend.db.table.update.example"><title>Пример обновления строк в таблице</title>
 
             
 
@@ -734,7 +734,7 @@ $table->update($data, $where);
 
     </section>
 
-    <section xml:id="zend.db.table.delete"><info><title>Удаление строк из таблицы</title></info>
+    <section xml:id="zend.db.table.delete"><title>Удаление строк из таблицы</title>
 
         
 
@@ -745,7 +745,7 @@ $table->update($data, $where);
             <code>WHERE</code> в качестве условия, по которому удаляются строки.
         </para>
 
-        <example xml:id="zend.db.table.delete.example"><info><title>Пример удаления строк из таблицы</title></info>
+        <example xml:id="zend.db.table.delete.example"><title>Пример удаления строк из таблицы</title>
 
             
 
@@ -782,7 +782,7 @@ $table->delete($where);
 
     </section>
 
-    <section xml:id="zend.db.table.find"><info><title>Извлечение строк по первичному ключу</title></info>
+    <section xml:id="zend.db.table.find"><title>Извлечение строк по первичному ключу</title>
 
         
 
@@ -794,7 +794,7 @@ $table->delete($where);
             первичным ключом таблицы.
         </para>
 
-        <example xml:id="zend.db.table.find.example"><info><title>Пример извлечения строк по значениям первичного ключа</title></info>
+        <example xml:id="zend.db.table.find.example"><title>Пример извлечения строк по значениям первичного ключа</title>
 
             
 
@@ -848,7 +848,7 @@ $rows = $table->find(array(1234, 5678));
             первичного ключа, вторые элементы - второго составного ключа и т.д.
         </para>
 
-        <example xml:id="zend.db.table.find.example-compound"><info><title>Пример извлечения строк по значениям составного первичного ключа</title></info>
+        <example xml:id="zend.db.table.find.example-compound"><title>Пример извлечения строк по значениям составного первичного ключа</title>
 
             
 
@@ -882,11 +882,11 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
     </section>
 
-    <section xml:id="zend.db.table.fetch-all"><info><title>Извлечение наборов строк</title></info>
+    <section xml:id="zend.db.table.fetch-all"><title>Извлечение наборов строк</title>
 
         
 
-        <section xml:id="zend.db.table.fetch-all.select"><info><title>API для произведения выборки</title></info>
+        <section xml:id="zend.db.table.fetch-all.select"><title>API для произведения выборки</title>
 
             
 
@@ -988,7 +988,7 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><info><title>Простое использование</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><title>Простое использование</title>
 
                     
 
@@ -1014,7 +1014,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><info><title>Пример использования fluent interface</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><title>Пример использования fluent interface</title>
 
                     
 
@@ -1033,7 +1033,7 @@ $rows =
 
         </section>
 
-        <section xml:id="zend.db.table.fetch-all.usage"><info><title>Извлечение набора строк</title></info>
+        <section xml:id="zend.db.table.fetch-all.usage"><title>Извлечение набора строк</title>
 
             
 
@@ -1044,7 +1044,7 @@ $rows =
                 объект типа <code>Zend_Db_Table_Rowset_Abstract</code>.
             </para>
 
-            <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><info><title>Пример поиска строк по выражению</title></info>
+            <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><title>Пример поиска строк по выражению</title>
 
                 
 
@@ -1069,7 +1069,7 @@ $rows = $table->fetchAll($select);
                 <code>LIMIT</code>.
             </para>
 
-            <example xml:id="zend.db.table.fetch-all.example2"><info><title>Пример поиска строк по выражению</title></info>
+            <example xml:id="zend.db.table.fetch-all.example2"><title>Пример поиска строк по выражению</title>
 
                 
 
@@ -1103,7 +1103,7 @@ $rows = $table->fetchAll($select);
 
         </section>
 
-        <section xml:id="zend.db.table.advanced.usage"><info><title>Расширенное использование</title></info>
+        <section xml:id="zend.db.table.advanced.usage"><title>Расширенное использование</title>
 
             
 
@@ -1116,7 +1116,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><info><title>Извлечение определенных столбцов</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><title>Извлечение определенных столбцов</title>
 
                     
 
@@ -1161,7 +1161,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><info><title>Извлечение выражений как столбцов</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><title>Извлечение выражений как столбцов</title>
 
                     
 
@@ -1188,7 +1188,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.refine.example"><info><title>Использование таблицы поиска для фильтрации результатов, возвращаемых fetchAll()</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.refine.example"><title>Использование таблицы поиска для фильтрации результатов, возвращаемых fetchAll()</title>
 
                     
 
@@ -1224,11 +1224,11 @@ $rows = $table->fetchAll($select);
                 исключения.
             </para>
 
-            <example xml:id="zend.db.table.qry.rows.set.integrity.example"><info><title>Отключение проверки целостности в Zend_Db_Table_Select для получения объединенных строк</title></info>
+            <example xml:id="zend.db.table.qry.rows.set.integrity.example"><title>Отключение проверки целостности в Zend_Db_Table_Select для получения объединенных строк</title>
 
                 
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select()->setIntegrityCheck(false);
@@ -1248,7 +1248,7 @@ $rows = $table->fetchAll($select);
 
     </section>
 
-    <section xml:id="zend.db.table.fetch-row"><info><title>Извлечение одной строки</title></info>
+    <section xml:id="zend.db.table.fetch-row"><title>Извлечение одной строки</title>
 
         
 
@@ -1257,7 +1257,7 @@ $rows = $table->fetchAll($select);
             тем, что используются в методе <code>fetchAll()</code>.
         </para>
 
-        <example xml:id="zend.db.table.fetch-row.example1"><info><title>Пример поиска одной строки по выражению</title></info>
+        <example xml:id="zend.db.table.fetch-row.example1"><title>Пример поиска одной строки по выражению</title>
 
             
 
@@ -1282,7 +1282,7 @@ $row = $table->fetchRow($select);
 
     </section>
 
-    <section xml:id="zend.db.table.info"><info><title>Получение метаданных таблицы</title></info>
+    <section xml:id="zend.db.table.info"><title>Получение метаданных таблицы</title>
 
         
 
@@ -1292,7 +1292,7 @@ $row = $table->fetchRow($select);
             данными о таблице, ее столбцах, первичном ключе и другие метаданные.
         </para>
 
-        <example xml:id="zend.db.table.info.example"><info><title>Пример получения имени таблицы</title></info>
+        <example xml:id="zend.db.table.info.example"><title>Пример получения имени таблицы</title>
 
             
 
@@ -1381,7 +1381,7 @@ echo "The table name is " . $info['name'] . "\n";
 
     </section>
 
-    <section xml:id="zend.db.table.metadata.caching"><info><title>Кэширование метаданных таблицы</title></info>
+    <section xml:id="zend.db.table.metadata.caching"><title>Кэширование метаданных таблицы</title>
 
         
 
@@ -1432,7 +1432,7 @@ echo "The table name is " . $info['name'] . "\n";
             возможность изменять его для конкретного объекта таблицы.
         </para>
 
-        <example xml:id="zend.db.table.metadata.caching-default"><info><title>Кэширование метаданных по умолчанию для всех объектов таблиц</title></info>
+        <example xml:id="zend.db.table.metadata.caching-default"><title>Кэширование метаданных по умолчанию для всех объектов таблиц</title>
 
             
 
@@ -1477,7 +1477,7 @@ $bugs = new Bugs();
 
         </example>
 
-        <example xml:id="zend.db.table.metadata.caching-instance"><info><title>Кэширование метаданных для одного объекта таблицы</title></info>
+        <example xml:id="zend.db.table.metadata.caching-instance"><title>Кэширование метаданных для одного объекта таблицы</title>
 
             
 
@@ -1515,7 +1515,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
 
         </example>
 
-        <note><info><title>Автоматическая сериализация через фронтэнд кэша</title></info>
+        <note><title>Автоматическая сериализация через фронтэнд кэша</title>
 
             
 
@@ -1538,11 +1538,11 @@ $bugs = new Bugs(array('metadataCache' => $cache));
 
     </section>
 
-    <section xml:id="zend.db.table.extending"><info><title>Расширение класса таблицы</title></info>
+    <section xml:id="zend.db.table.extending"><title>Расширение класса таблицы</title>
 
         
 
-        <section xml:id="zend.db.table.extending.row-rowset"><info><title>Использование собственных классов строки и набора строк</title></info>
+        <section xml:id="zend.db.table.extending.row-rowset"><title>Использование собственных классов строки и набора строк</title>
 
             
 
@@ -1563,7 +1563,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
                 соответственно. Задавайте имена классов в виде обычных строк.
             </para>
 
-            <example xml:id="zend.db.table.extending.row-rowset.example"><info><title>Пример указания классов строки и набора строк</title></info>
+            <example xml:id="zend.db.table.extending.row-rowset.example"><title>Пример указания классов строки и набора строк</title>
 
                 
 
@@ -1603,7 +1603,7 @@ $rows = $table->fetchAll($where);
                 строк, созданных ранее.
             </para>
 
-            <example xml:id="zend.db.table.extending.row-rowset.example2"><info><title>Пример смены используемых для строк и наборов строк классов</title></info>
+            <example xml:id="zend.db.table.extending.row-rowset.example2"><title>Пример смены используемых для строк и наборов строк классов</title>
 
                 
 
@@ -1637,7 +1637,7 @@ $rowsCustom = $table->fetchAll($where);
 
         </section>
 
-        <section xml:id="zend.db.table.extending.insert-update"><info><title>Определение собственной логики для добавления, обновления и удаления строк</title></info>
+        <section xml:id="zend.db.table.extending.insert-update"><title>Определение собственной логики для добавления, обновления и удаления строк</title>
 
             
 
@@ -1650,7 +1650,7 @@ $rowsCustom = $table->fetchAll($where);
                 действий.
             </para>
 
-            <example xml:id="zend.db.table.extending.insert-update.example"><info><title>Собственная логика для управления отметками времени</title></info>
+            <example xml:id="zend.db.table.extending.insert-update.example"><title>Собственная логика для управления отметками времени</title>
 
                 
 
@@ -1688,7 +1688,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.extending.finders"><info><title>Определение собственных методов для поиска</title></info>
+        <section xml:id="zend.db.table.extending.finders"><title>Определение собственных методов для поиска</title>
 
             
 
@@ -1703,7 +1703,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 таблицы для выполнения часто используемых запросов к таблице.
             </para>
 
-            <example xml:id="zend.db.table.extending.finders.example"><info><title>Метод для поиска ошибок с определенным статусом</title></info>
+            <example xml:id="zend.db.table.extending.finders.example"><title>Метод для поиска ошибок с определенным статусом</title>
 
                 
 
@@ -1725,7 +1725,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.extending.inflection"><info><title>Определение инфлекции в Zend_Db_Table</title></info>
+        <section xml:id="zend.db.table.extending.inflection"><title>Определение инфлекции в Zend_Db_Table</title>
 
             
 
@@ -1779,7 +1779,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 класса.
             </para>
 
-            <example xml:id="zend.db.table.extending.inflection.example"><info><title>Пример абстрактного класса таблицы, реализующего инфлекцию</title></info>
+            <example xml:id="zend.db.table.extending.inflection.example"><title>Пример абстрактного класса таблицы, реализующего инфлекцию</title>
 
                 
 

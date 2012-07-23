@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Docs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -29,8 +17,6 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Docs extends GData
 {
@@ -63,7 +49,7 @@ class Docs extends GData
       'XLSX'=>'application/vnd.ms-excel',
       'PPT'=>'application/vnd.ms-powerpoint',
       'PPS'=>'application/vnd.ms-powerpoint');
-    
+
     /**
     * Namespaces used for \Zend\GData\Docs
     *
@@ -97,7 +83,8 @@ class Docs extends GData
      * @return string The mime type to be sent to the server to tell it how the
      *          multipart mime data should be interpreted.
      */
-    public static function lookupMimeType($fileExtension) {
+    public static function lookupMimeType($fileExtension)
+    {
       return self::$SUPPORTED_FILETYPES[strtoupper($fileExtension)];
     }
 
@@ -111,7 +98,7 @@ class Docs extends GData
     {
         if ($location === null) {
             $uri = self::DOCUMENTS_LIST_FEED_URI;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -130,7 +117,7 @@ class Docs extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -149,7 +136,8 @@ class Docs extends GData
      *     Document List URLs. Examples: document, spreadsheet, presentation
      * @return \Zend\GData\Docs\DocumentListEntry
      */
-    public function getDoc($docId, $docType) {
+    public function getDoc($docId, $docType)
+    {
         $location = 'https://docs.google.com/feeds/documents/private/full/' .
             $docType . '%3A' . $docId;
         return $this->getDocumentListEntry($location);
@@ -161,7 +149,8 @@ class Docs extends GData
      * @param string $id The URL id for the document. Example:
      *     dcmg89gw_62hfjj8m
      */
-    public function getDocument($id) {
+    public function getDocument($id)
+    {
       return $this->getDoc($id, 'document');
     }
 
@@ -171,7 +160,8 @@ class Docs extends GData
      * @param string $id The URL id for the document. Example:
      *     pKq0CzjiF3YmGd0AIlHKqeg
      */
-    public function getSpreadsheet($id) {
+    public function getSpreadsheet($id)
+    {
       return $this->getDoc($id, 'spreadsheet');
     }
 
@@ -181,7 +171,8 @@ class Docs extends GData
      * @param string $id The URL id for the document. Example:
      *     dcmg89gw_21gtrjcn
      */
-    public function getPresentation($id) {
+    public function getPresentation($id)
+    {
       return $this->getDoc($id, 'presentation');
     }
 
@@ -252,8 +243,9 @@ class Docs extends GData
      * @todo ZF-8732: This should return a *subclass* of Zend_Gdata_Entry, but
      *       the appropriate type doesn't exist yet.
      */
-    public function createFolder($folderName, $folderResourceId=null) {
-        $category = new App\Extension\Category(self::DOCUMENTS_CATEGORY_TERM, 
+    public function createFolder($folderName, $folderResourceId=null)
+    {
+        $category = new App\Extension\Category(self::DOCUMENTS_CATEGORY_TERM,
                                                           self::DOCUMENTS_CATEGORY_SCHEMA);
         $title = new App\Extension\Title($folderName);
         $entry = new Entry();
@@ -268,10 +260,10 @@ class Docs extends GData
 
         return $this->insertEntry($entry, $uri);
     }
-    
+
     /**
      * Share a document or folder with a given user, group, domain or make it public.
-     * 
+     *
      * @param string $documentId
      * @param string|null $email
      * @param string $scopeType
@@ -281,20 +273,20 @@ class Docs extends GData
     public function setDocumentACL($documentId, $email = NULL, $scopeType = 'default', $role = 'reader')
     {
         $category = new \Zend\GData\App\Extension\Category(self::DOCUMENT_ACL_TERM, self::DOCUMENTS_ACL_SCHEMEA);
-        
+
         $entry = new \Zend\GData\Docs\ACLEntry();
-        
+
         $entry->setCategory(array($category));
-        
+
         $entry->setScope(new \Zend\GData\Docs\Extension\ACLScope($scopeType, $email));
-        
+
         $entry->setRole(new \Zend\GData\Docs\Extension\ACLRole($role));
-        
+
         $uri = self::DOCUMENT_ACL_URI . $documentId . '/acl';
-        
+
         //This requires version 3
         $this->setMajorProtocolVersion(3);
-        
+
         return $this->insertEntry($entry, $uri);
     }
 

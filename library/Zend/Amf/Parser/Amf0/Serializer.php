@@ -1,38 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @subpackage Parse_Amf0
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf\Parser\Amf0;
 
-use Zend\Amf\Parser\AbstractSerializer,
-    Zend\Amf\Parser,
-    Zend\Amf,
-    Zend\Date;
+use DateTime;
+use Zend\Amf;
+use Zend\Amf\Parser;
+use Zend\Amf\Parser\AbstractSerializer;
 
 /**
  * Serializer PHP misc types back to there corresponding AMF0 Type Marker.
  *
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Serializer extends AbstractSerializer
 {
@@ -62,8 +49,8 @@ class Serializer extends AbstractSerializer
      */
     public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
-        // variables should be passed by reference" 
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only
+        // variables should be passed by reference"
         if ((null === $data) && ($dataByVal !== false)) {
             $data = &$dataByVal;
         }
@@ -132,7 +119,7 @@ class Serializer extends AbstractSerializer
                     $markerType = Amf\Constants::AMF0_STRING;
                     break;
                 case (is_object($data)):
-                    if (($data instanceof \DateTime) || ($data instanceof Date\Date)) {
+                    if ($data instanceof DateTime) {
                         $markerType = Amf\Constants::AMF0_DATE;
                     } else {
 
@@ -159,7 +146,7 @@ class Serializer extends AbstractSerializer
                             $markerType = Amf\Constants::AMF0_OBJECT;
                             break;
                             // check if it is a sparse indexed array
-                         } else if ($key != $i) {
+                         } elseif ($key != $i) {
                              $markerType = Amf\Constants::AMF0_MIXEDARRAY;
                              break;
                          }
@@ -189,18 +176,18 @@ class Serializer extends AbstractSerializer
      * @param mixed $objectByVal object to check for reference
      * @return Boolean true, if the reference was written, false otherwise
      */
-    protected function writeObjectReference(&$object, $markerType, $objectByVal = false) 
+    protected function writeObjectReference(&$object, $markerType, $objectByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only
         // variables should be passed by reference"
         if ((null === $object) && ($objectByVal !== false)) {
             $object = &$objectByVal;
         }
 
-        if ($markerType == Amf\Constants::AMF0_OBJECT 
-            || $markerType == Amf\Constants::AMF0_MIXEDARRAY 
+        if ($markerType == Amf\Constants::AMF0_OBJECT
+            || $markerType == Amf\Constants::AMF0_MIXEDARRAY
             || $markerType == Amf\Constants::AMF0_ARRAY
-            || $markerType == Amf\Constants::AMF0_TYPEDOBJECT 
+            || $markerType == Amf\Constants::AMF0_TYPEDOBJECT
         ) {
             $ref = array_search($object, $this->_referenceObjects,true);
             //handle object reference
@@ -264,23 +251,14 @@ class Serializer extends AbstractSerializer
     /**
      * Convert the DateTime into an AMF Date
      *
-     * @param  \DateTime|\Zend\Date\Date $data
+     * @param  DateTime $date
      * @return Serializer
      * @throws Amf\Exception\InvalidArgumentException
      */
-    public function writeDate($data)
+    public function writeDate(DateTime $date)
     {
-        if ($data instanceof \DateTime) {
-            $dateString = $data->format('U');
-        } elseif ($data instanceof Date\Date) {
-            $dateString = $data->toString('U');
-        } else {
-            throw new Amf\Exception\InvalidArgumentException('Invalid date specified; must be a DateTime or Zend_Date object');
-        }
-        $dateString *= 1000;
-
         // Make the conversion and remove milliseconds.
-        $this->_stream->writeDouble($dateString);
+        $this->_stream->writeDouble($date->getTimestamp());
 
         // Flash does not respect timezone but requires it.
         $this->_stream->writeInt(0);

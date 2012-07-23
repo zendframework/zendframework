@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>Platzhalter (PlaceHolder) Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><title>Platzhalter (PlaceHolder) Helfer</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         zu Inhalten hinzuzufügen (und eigene Separatoren für vereinigte Inhalte).
     </para>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title>Grundsätzliche Verwendung von Platzhaltern</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><title>Grundsätzliche Verwendung von Platzhaltern</title>
         
 
         <para>
@@ -29,7 +29,7 @@
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>Platzhalter verwenden um Inhalt zu vereinigen</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><title>Platzhalter verwenden um Inhalt zu vereinigen</title>
         
 
         <para>
@@ -122,7 +122,7 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>Verwenden von Platzhaltern um Inhalt zu erfassen</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><title>Verwenden von Platzhaltern um Inhalt zu erfassen</title>
         
 
         <para>
@@ -200,7 +200,7 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>Konkrete Platzhalter Implementationen</title></info>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><title>Konkrete Platzhalter Implementationen</title>
         
 
         <para>

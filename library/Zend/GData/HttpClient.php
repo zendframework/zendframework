@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -32,8 +21,6 @@ use Zend\Http;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HttpClient extends Http\Client
 {
@@ -137,7 +124,8 @@ class HttpClient extends Http\Client
      *
      * @return string The private key
      */
-    public function getAuthSubPrivateKeyId() {
+    public function getAuthSubPrivateKeyId()
+    {
         return $this->_authSubPrivateKeyId;
     }
 
@@ -146,7 +134,8 @@ class HttpClient extends Http\Client
      *
      * @return string The token
      */
-    public function getAuthSubToken() {
+    public function getAuthSubToken()
+    {
         return $this->_authSubToken;
     }
 
@@ -156,7 +145,8 @@ class HttpClient extends Http\Client
      * @param string $token The token
      * @return \Zend\GData\HttpClient Provides a fluent interface
      */
-    public function setAuthSubToken($token) {
+    public function setAuthSubToken($token)
+    {
         $this->_authSubToken = $token;
         return $this;
     }
@@ -166,7 +156,8 @@ class HttpClient extends Http\Client
      *
      * @return string The token
      */
-    public function getClientLoginToken() {
+    public function getClientLoginToken()
+    {
         return $this->_clientLoginToken;
     }
 
@@ -176,7 +167,8 @@ class HttpClient extends Http\Client
      * @param string $token The token
      * @return \Zend\GData\HttpClient Provides a fluent interface
      */
-    public function setClientLoginToken($token) {
+    public function setClientLoginToken($token)
+    {
         $this->_clientLoginToken = $token;
         return $this;
     }
@@ -202,7 +194,8 @@ class HttpClient extends Http\Client
      * @return array The processed values in an associative array,
      *               using the same names as the params
      */
-    public function filterHttpRequest($method, $url, $headers = array(), $body = null, $contentType = null) {
+    public function filterHttpRequest($method, $url, $headers = array(), $body = null, $contentType = null)
+    {
         if ($this->getAuthSubToken() != null) {
             // AuthSub authentication
             if ($this->getAuthSubPrivateKeyId() != null) {
@@ -244,7 +237,8 @@ class HttpClient extends Http\Client
      * @param \Zend\Http\Response $response The response object to filter
      * @return \Zend\Http\Response The filterd response object
      */
-    public function filterHttpResponse($response) {
+    public function filterHttpResponse($response)
+    {
         return $response;
     }
 
@@ -311,8 +305,7 @@ class HttpClient extends Http\Client
             $this->setHeaders(self::CONTENT_LENGTH,
                 $this->raw_post_data->getTotalSize());
             return $this->raw_post_data;
-        }
-        else {
+        } else {
             return parent::prepareBody();
         }
     }

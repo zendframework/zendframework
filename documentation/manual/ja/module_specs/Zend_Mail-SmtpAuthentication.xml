@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP 認証</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>SMTP 認証</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         が指定されていることを想定しています。
     </para>
 
-    <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Zend_Mail_Transport_Smtp での認証の有効化</title></info>
+    <example xml:id="zend.mail.smtp-authentication.example-1"><title>Zend_Mail_Transport_Smtp での認証の有効化</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -30,7 +30,7 @@ $mail->send($transport);
 ]]></programlisting>
     </example>
 
-    <note><info><title>認証方式</title></info>
+    <note><title>認証方式</title>
         
 
         <para>

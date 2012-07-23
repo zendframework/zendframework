@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.migration"><info><title>前バージョンからの移行</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.migration"><title>前バージョンからの移行</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         前バージョンからの移行を手伝う役目を果たさなければなりません。
     </para>
 
-    <section xml:id="zend.view.navigation.zf7341"><info><title>バージョン 1.9以前からの移行</title></info>
+    <section xml:id="zend.view.navigation.zf7341"><title>バージョン 1.9以前からの移行</title>
         
 
         <para>

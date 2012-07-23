@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-      <section xml:id="zend.mime.message.introduction"><info><title>Inleiding</title></info>
+      <section xml:id="zend.mime.message.introduction"><title>Inleiding</title>
           
 
           <para><code>Zend_Mime_Message</code> stelt een MIME compatibel bericht voor
@@ -18,14 +18,14 @@
           </para>
       </section>
 
-      <section xml:id="zend.mime.message.instantiation"><info><title>Instantiëring</title></info>
+      <section xml:id="zend.mime.message.instantiation"><title>Instantiëring</title>
         
         <para>
             Er is geen expliciete constructor voor <code>Zend_Mime_Message</code>.
         </para>
       </section>
 
-      <section xml:id="zend.mime.message.addparts"><info><title>MIME Delen Toevoegen</title></info>
+      <section xml:id="zend.mime.message.addparts"><title>MIME Delen Toevoegen</title>
         
 
         <para><link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
@@ -45,7 +45,7 @@
         object dus een Multipart-Mime-Message zou genereren bij weergave.</para>
       </section>
 
-      <section xml:id="zend.mime.message.bondary"><info><title>Boundary afhandeling</title></info>
+      <section xml:id="zend.mime.message.bondary"><title>Boundary afhandeling</title>
         
 
         <para><code>Zend_Mime_Message</code> maakt en gebruikt meestal zijn eigen
@@ -66,8 +66,8 @@
         <code>Zend_Mime_Message</code> als een string weer.</para>
       </section>
 
-      <section xml:id="zend.mime.message.parse"><info><title>Een string parsen om een Zend_Mime_Message object te maken
-        (experimenteel)</title></info>
+      <section xml:id="zend.mime.message.parse"><title>Een string parsen om een Zend_Mime_Message object te maken
+        (experimenteel)</title>
         
 
         <para>Een gegeven MIME compatibel bericht in de vorm van een string

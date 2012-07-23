@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Json
  */
 
 namespace Zend\Json;
 
-use Zend\Json\Exception\RuntimeException,
-    Zend\Json\Exception\InvalidArgumentException;
+use Zend\Json\Exception\InvalidArgumentException;
+use Zend\Json\Exception\RuntimeException;
 
 /**
  * Decode JSON encoded string to PHP variable constructs
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Decoder
 {
@@ -474,7 +462,13 @@ class Decoder
                     // single, escaped unicode character
                     $utf16 = chr(hexdec(substr($chrs, ($i + 2), 2)))
                            . chr(hexdec(substr($chrs, ($i + 4), 2)));
-                    $utf8 .= self::_utf162utf8($utf16);
+                    $utf8char = self::_utf162utf8($utf16);
+                    $search  = array('\\', "\n", "\t", "\r", chr(0x08), chr(0x0C), '"', '\'', '/');
+                    if (in_array($utf8char, $search)) {
+                        $replace = array('\\\\', '\\n', '\\t', '\\r', '\\b', '\\f', '\\"', '\\\'', '\\/');
+                        $utf8char  = str_replace($search, $replace, $utf8char);
+                    }
+                    $utf8 .= $utf8char;
                     $i += 5;
                     break;
                 case ($ord_chrs_c >= 0x20) && ($ord_chrs_c <= 0x7F):
@@ -562,4 +556,3 @@ class Decoder
         return '';
     }
 }
-

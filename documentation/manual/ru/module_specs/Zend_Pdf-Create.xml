@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Создание и загрузка документов PDF<!--Creating and loading PDF documents.--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><title>Создание и загрузка документов PDF<!--Creating and loading PDF documents.--></title>
     
     <para>
     Класс <code>Zend_Pdf</code> представляет документ PDF и обеспечивает
@@ -29,10 +29,10 @@
 -->
     </para>
 
-    <example><info><title>
+    <example><title>
         Создание нового или загрузка существующего документа PDF
         <!-- Create new or load existing PDF document.-->
-        </title></info>
+        </title>
         
         <programlisting language="php"><![CDATA[<?php
 ...
@@ -78,7 +78,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     call.
     </para>
 
-    <example><info><title>Извлечение определенной версии документа PDF<!--Requesting specified revision of the PDF document.--></title></info>
+    <example><title>Извлечение определенной версии документа PDF<!--Requesting specified revision of the PDF document.--></title>
         
         <programlisting language="php"><![CDATA[<?php
 ...

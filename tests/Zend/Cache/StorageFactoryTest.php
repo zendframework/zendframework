@@ -1,34 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache;
-use Zend\Cache,
-    Zend\Loader\Broker;
+
+use Zend\Cache;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
 class StorageFactoryTest extends \PHPUnit_Framework_TestCase
@@ -36,27 +23,27 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        Cache\StorageFactory::resetAdapterBroker();
-        Cache\StorageFactory::resetPluginBroker();
+        Cache\StorageFactory::resetAdapterPluginManager();
+        Cache\StorageFactory::resetPluginManager();
     }
 
     public function tearDown()
     {
-        Cache\StorageFactory::resetAdapterBroker();
-        Cache\StorageFactory::resetPluginBroker();
+        Cache\StorageFactory::resetAdapterPluginManager();
+        Cache\StorageFactory::resetPluginManager();
     }
 
-    public function testDefaultAdapterBroker()
+    public function testDefaultAdapterPluginManager()
     {
-        $broker = Cache\StorageFactory::getAdapterBroker();
-        $this->assertInstanceOf('Zend\Cache\Storage\AdapterBroker', $broker);
+        $adapters = Cache\StorageFactory::getAdapterPluginManager();
+        $this->assertInstanceOf('Zend\Cache\Storage\AdapterPluginManager', $adapters);
     }
 
-    public function testChangeAdapterBroker()
+    public function testChangeAdapterPluginManager()
     {
-        $broker = new Cache\Storage\AdapterBroker();
-        Cache\StorageFactory::setAdapterBroker($broker);
-        $this->assertSame($broker, Cache\StorageFactory::getAdapterBroker());
+        $adapters = new Cache\Storage\AdapterPluginManager();
+        Cache\StorageFactory::setAdapterPluginManager($adapters);
+        $this->assertSame($adapters, Cache\StorageFactory::getAdapterPluginManager());
     }
 
     public function testAdapterFactory()
@@ -70,17 +57,17 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($adapter1, $adapter2);
     }
 
-    public function testDefaultPluginBroker()
+    public function testDefaultPluginManager()
     {
-        $broker = Cache\StorageFactory::getPluginBroker();
-        $this->assertInstanceOf('Zend\Cache\Storage\PluginBroker', $broker);
+        $manager = Cache\StorageFactory::getPluginManager();
+        $this->assertInstanceOf('Zend\Cache\Storage\PluginManager', $manager);
     }
 
-    public function testChangePluginBroker()
+    public function testChangePluginManager()
     {
-        $broker = new Cache\Storage\PluginBroker();
-        Cache\StorageFactory::setPluginBroker($broker);
-        $this->assertSame($broker, Cache\StorageFactory::getPluginBroker());
+        $manager = new Cache\Storage\PluginManager();
+        Cache\StorageFactory::setPluginManager($manager);
+        $this->assertSame($manager, Cache\StorageFactory::getPluginManager());
     }
 
     public function testPluginFactory()

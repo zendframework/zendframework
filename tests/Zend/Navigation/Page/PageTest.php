@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Navigation
  */
 
 namespace ZendTest\Navigation\Page;
 
-use Zend\Navigation\Page\AbstractPage,
-    Zend\Navigation\Page\Mvc,
-    Zend\Navigation\Page\Uri,
-    Zend\Navigation,
-    Zend\Config;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\Navigation\Page\Mvc;
+use Zend\Navigation\Page\Uri;
+use Zend\Navigation;
+use Zend\Config;
 
 /**
  * Tests the class Zend_Navigation_Page
@@ -34,8 +23,6 @@ use Zend\Navigation\Page\AbstractPage,
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
 class PageTest extends \PHPUnit_Framework_TestCase
@@ -185,12 +172,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'uri'                => '#',
             'fragment' => 'foo',
         ));
-        
+
         $this->assertEquals('foo', $page->getFragment());
-        
+
         $page->setFragment('bar');
         $this->assertEquals('bar', $page->getFragment());
-        
+
         $invalids = array(42, (object) null);
         foreach ($invalids as $invalid) {
             try {
@@ -729,7 +716,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         /**
          * ZF-10146
-         * 
+         *
          * @link http://framework.zend.com/issues/browse/ZF-10146
          */
         $page->setVisible('False');

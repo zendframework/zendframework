@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Delicious
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Delicious;
@@ -27,25 +16,23 @@ namespace Zend\Service\Delicious;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PostList implements \Countable, \Iterator, \ArrayAccess
 {
     /**
      * @var array Array of Zend_Service_Delicious_Post
      */
-    protected $_posts = array();
+    protected $posts = array();
 
     /**
      * @var Zend_Service_Delicious Service that has downloaded the post list
      */
-    protected $_service;
+    protected $service;
 
     /**
      * @var int Iterator key
      */
-    protected $_iteratorKey = 0;
+    protected $iteratorKey = 0;
 
     /**
      * @param  Zend_Service_Delicious $service Service that has downloaded the post
@@ -54,11 +41,11 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function __construct(Delicious $service, $posts = null)
     {
-        $this->_service = $service;
+        $this->service = $service;
         if ($posts instanceof \DOMNodeList) {
-            $this->_constructFromNodeList($posts);
-        } else if (is_array($posts)) {
-            $this->_constructFromArray($posts);
+            $this->constructFromNodeList($posts);
+        } elseif (is_array($posts)) {
+            $this->constructFromArray($posts);
         }
     }
 
@@ -68,12 +55,12 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      * @param  DOMNodeList $nodeList
      * @return void
      */
-    private function _constructFromNodeList(\DOMNodeList $nodeList)
+    private function constructFromNodeList(\DOMNodeList $nodeList)
     {
         for ($i = 0; $i < $nodeList->length; $i++) {
             $curentNode = $nodeList->item($i);
             if($curentNode->nodeName == 'post') {
-                $this->_addPost(new Post($this->_service, $curentNode));
+                $this->addPost(new Post($this->service, $curentNode));
             }
         }
     }
@@ -84,10 +71,10 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      * @param  array $postList
      * @return void
      */
-    private function _constructFromArray(array $postList)
+    private function constructFromArray(array $postList)
     {
         foreach ($postList as $f_post) {
-            $this->_addPost(new SimplePost($f_post));
+            $this->addPost(new SimplePost($f_post));
         }
     }
 
@@ -97,9 +84,9 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      * @param  Zend_Service_Delicious_SimplePost $post
      * @return Zend_Service_Delicious_PostList
      */
-    protected function _addPost(SimplePost $post)
+    protected function addPost(SimplePost $post)
     {
-        $this->_posts[] = $post;
+        $this->posts[] = $post;
 
         return $this;
     }
@@ -112,11 +99,11 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function withTags(array $tags)
     {
-        $postList = new self($this->_service);
+        $postList = new self($this->service);
 
-        foreach ($this->_posts as $post) {
+        foreach ($this->posts as $post) {
             if (count(array_diff($tags, $post->getTags())) == 0) {
-                $postList->_addPost($post);
+                $postList->addPost($post);
             }
         }
 
@@ -142,11 +129,11 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function withUrl($regexp)
     {
-        $postList = new self($this->_service);
+        $postList = new self($this->service);
 
-        foreach ($this->_posts as $post) {
+        foreach ($this->posts as $post) {
             if (preg_match($regexp, $post->getUrl())) {
-                $postList->_addPost($post);
+                $postList->addPost($post);
             }
         }
 
@@ -162,7 +149,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function count()
     {
-        return count($this->_posts);
+        return count($this->posts);
     }
 
     /**
@@ -174,7 +161,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function current()
     {
-        return $this->_posts[$this->_iteratorKey];
+        return $this->posts[$this->iteratorKey];
     }
 
     /**
@@ -186,7 +173,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function key()
     {
-        return $this->_iteratorKey;
+        return $this->iteratorKey;
     }
 
     /**
@@ -198,7 +185,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function next()
     {
-        $this->_iteratorKey += 1;
+        $this->iteratorKey += 1;
     }
 
     /**
@@ -210,7 +197,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function rewind()
     {
-        $this->_iteratorKey = 0;
+        $this->iteratorKey = 0;
     }
 
     /**
@@ -224,7 +211,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
     {
         $numItems = $this->count();
 
-        if ($numItems > 0 && $this->_iteratorKey < $numItems) {
+        if ($numItems > 0 && $this->iteratorKey < $numItems) {
             return true;
         } else {
             return false;
@@ -256,7 +243,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
-            return $this->_posts[$offset];
+            return $this->posts[$offset];
         } else {
             throw new \OutOfBoundsException('Illegal index');
         }

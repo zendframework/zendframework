@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Writers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><title>Writers</title>
   
   <para>
     一个Writer是继承自<code>Zend_Log_Writer_Abstract</code>类的一个对象.Writer的职责是向存储后端纪录日志数据.
   </para>
 
-  <section xml:id="zend.log.writers.stream"><info><title>写入到流(Streams)</title></info>
+  <section xml:id="zend.log.writers.stream"><title>写入到流(Streams)</title>
     
     <para>
       <code>Zend_Log_Writer_Stream</code> 写入日志数据到
@@ -61,7 +61,7 @@ $logger->info('Informational message');
     </para>
   </section>
 
-  <section xml:id="zend.log.writers.database"><info><title>写入到数据库</title></info>
+  <section xml:id="zend.log.writers.database"><title>写入到数据库</title>
     
     <para>
         <code>Zend_Log_Writer_Db</code>使用<code>Zend_Db</code>写入日志信息到数据库表中.
@@ -93,7 +93,7 @@ $logger->info('Informational message');
     <xi:fallback href="../en/module_specs/Zend_Log-Writers-Firebug.xml"/>
 </xi:include>
 
-  <section xml:id="zend.log.writers.null"><info><title>踩熄Writer</title></info>
+  <section xml:id="zend.log.writers.null"><title>踩熄Writer</title>
     
     <para>
       <code>Zend_Log_Writer_Null</code>是一个不向任何地方写入任何数据的存根.
@@ -110,7 +110,7 @@ $logger->info('Informational message');
     </para>
   </section>
 
-  <section xml:id="zend.log.writers.mock"><info><title>测试 Mock</title></info>
+  <section xml:id="zend.log.writers.mock"><title>测试 Mock</title>
     
     <para>
       <code>Zend_Log_Writer_Mock</code>是一个非常简单的Writer,它纪录所接收到的原始的数据到到作为public属性的
@@ -140,7 +140,7 @@ var_dump($mock->events[0]);
     </para>
   </section>
 
-  <section xml:id="zend.log.writers.compositing"><info><title>组合Writers</title></info>
+  <section xml:id="zend.log.writers.compositing"><title>组合Writers</title>
     
 
     <para>

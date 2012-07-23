@@ -1,30 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_StrikeIron
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\StrikeIron;
-use Zend\Service\StrikeIron;
 
-/**
- * Test helper
- */
+use Zend\Service\StrikeIron;
 
 /**
  * @ see Zend_Service_StrikeIron_BaseTest
@@ -34,8 +20,6 @@ use Zend\Service\StrikeIron;
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
@@ -94,25 +78,21 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     public function testAddingInvalidSoapHeaderThrows()
     {
         $invalidHeaders = 'foo';
-        try {
-            $base = new StrikeIron\Base(array('client'  => $this->soapClient,
-                                                           'headers' => $invalidHeaders));
-            $this->fail();
-        } catch (StrikeIron\Exception $e) {
-            $this->assertRegExp('/instance of soapheader/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\RuntimeException', 'instance of');
+        $base = new StrikeIron\Base(array(
+            'client'  => $this->soapClient,
+            'headers' => $invalidHeaders,
+        ));
     }
 
     public function testAddingInvalidSoapHeaderArrayThrows()
     {
         $invalidHeaders = array('foo');
-        try {
-            $base = new StrikeIron\Base(array('client'  => $this->soapClient,
-                                                           'headers' => $invalidHeaders));
-            $this->fail();
-        } catch (StrikeIron\Exception $e) {
-            $this->assertRegExp('/instance of soapheader/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\RuntimeException', 'instance of');
+        $base = new StrikeIron\Base(array(
+            'client'  => $this->soapClient,
+            'headers' => $invalidHeaders,
+        ));
     }
 
     public function testAddingScalarSoapHeaderNotLicenseInfo()
@@ -189,14 +169,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodExceptionsAreWrapped()
     {
-        try {
-            $this->base->throwTheException();
-            $this->fail();
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('Zend\Service\StrikeIron\Exception', $e);
-            $this->assertEquals('Exception: foo', $e->getMessage());
-            $this->assertEquals(43, $e->getCode());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\ExceptionInterface', 'Exception: foo', 43);
+        $this->base->throwTheException();
     }
 
     public function testGettingOutputHeaders()
@@ -247,11 +221,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testGettingSubscriptionInfoThrowsWhenHeaderNotFound()
     {
-        try {
-            $this->base->getSubscriptionInfo(true, 'ReturnNoOutputHeaders');
-            $this->fail();
-        } catch (StrikeIron\Exception $e) {
-            $this->assertRegExp('/no subscriptioninfo header/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\ExceptionInterface', 'ubscription');
+        $this->base->getSubscriptionInfo(true, 'ReturnNoOutputHeaders');
     }
 }

@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Writer\Renderer\Entry;
+
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
  * @category   Zend
@@ -31,8 +20,6 @@ use Zend\Date;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd New BSD License
  */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
@@ -76,11 +63,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testRenderMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
         $renderer = new Renderer\Feed\Atom($this->_validWriter);
-        try {
-            $renderer->render();
-        } catch (Writer\Exception $e) {
-            $this->fail('Valid Writer object caused an exception when building which should never happen');
-        }
+        $renderer->render();
     }
 
     public function testEntryEncodingHasBeenSet()
@@ -153,7 +136,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
-        $this->assertEquals(1234567890, $entry->getDateModified()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567890, $entry->getDateModified()->getTimestamp());
     }
 
     /**
@@ -171,7 +154,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
-        $this->assertEquals(1234567000, $entry->getDateCreated()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567000, $entry->getDateCreated()->getTimestamp());
     }
 
     public function testEntryIncludesLinkToHtmlVersionOfFeed()

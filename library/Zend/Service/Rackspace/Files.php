@@ -1,30 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Service
- * @subpackage Rackspace
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Rackspace;
 
-use Zend\Service\Rackspace\Rackspace as RackspaceAbstract,
-    Zend\Http\Client as HttpClient;
-
-class Files extends RackspaceAbstract
+class Files extends AbstractRackspace
 {
     const ERROR_CONTAINER_NOT_EMPTY            = 'The container is not empty, I cannot delete it.';
     const ERROR_CONTAINER_NOT_FOUND            = 'The container was not found.';
@@ -130,7 +116,7 @@ class Files extends RackspaceAbstract
      * - total count containers
      * - size in bytes of all the containers
      * - total objects in all the containers
-     * 
+     *
      * @return array|boolean
      */
     public function getInfoAccount()
@@ -138,9 +124,9 @@ class Files extends RackspaceAbstract
         $result= $this->httpCall($this->getStorageUrl(),'HEAD');
         if ($result->isSuccess()) {
             $output= array(
-                'tot_containers'  => (int) $result->headers()->get(self::ACCOUNT_CONTAINER_COUNT)->getFieldValue(),
-                'size_containers' => (int) $result->headers()->get(self::ACCOUNT_BYTES_USED)->getFieldValue(),
-                'tot_objects'     => (int) $result->headers()->get(self::ACCOUNT_OBJ_COUNT)->getFieldValue()
+                'tot_containers'  => (int) $result->getHeaders()->get(self::ACCOUNT_CONTAINER_COUNT)->getFieldValue(),
+                'size_containers' => (int) $result->getHeaders()->get(self::ACCOUNT_BYTES_USED)->getFieldValue(),
+                'tot_objects'     => (int) $result->getHeaders()->get(self::ACCOUNT_OBJ_COUNT)->getFieldValue()
             );
             return $output;
         }
@@ -160,7 +146,7 @@ class Files extends RackspaceAbstract
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),'GET',null,$options);
         if ($result->isSuccess() && ($result->getBody()!=='[]')) {
-            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);  
+            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);
         }
         return false;
     }
@@ -244,7 +230,7 @@ class Files extends RackspaceAbstract
         $status= $result->getStatusCode();
         switch ($status) {
             case '204': // break intentionally omitted
-                $headers= $result->headers();
+                $headers= $result->getHeaders();
                 $count= strlen(self::METADATA_CONTAINER_HEADER);
                 $metadata= array();
                 foreach ($headers as $h) {
@@ -272,11 +258,12 @@ class Files extends RackspaceAbstract
     }
     /**
      * Get a container
-     * 
+     *
      * @param string $container
      * @return Container|boolean
      */
-    public function getContainer($container) {
+    public function getContainer($container)
+    {
         $result= $this->getMetadataContainer($container);
         if (!empty($result)) {
             return new Files\Container($this,$result);
@@ -306,10 +293,10 @@ class Files extends RackspaceAbstract
                 $data= array(
                     'name'          => $object,
                     'container'     => $container,
-                    'hash'          => $result->headers()->get(self::HEADER_HASH)->getFieldValue(),
-                    'bytes'         => (int) $result->headers()->get(self::HEADER_CONTENT_LENGTH)->getFieldValue(),
-                    'last_modified' => $result->headers()->get(self::HEADER_LAST_MODIFIED)->getFieldValue(),
-                    'content_type'  => $result->headers()->get(self::HEADER_CONTENT_TYPE)->getFieldValue(),
+                    'hash'          => $result->getHeaders()->get(self::HEADER_HASH)->getFieldValue(),
+                    'bytes'         => (int) $result->getHeaders()->get(self::HEADER_CONTENT_LENGTH)->getFieldValue(),
+                    'last_modified' => $result->getHeaders()->get(self::HEADER_LAST_MODIFIED)->getFieldValue(),
+                    'content_type'  => $result->getHeaders()->get(self::HEADER_CONTENT_TYPE)->getFieldValue(),
                     'content'       => $result->getBody()
                 );
                 return new Files\Object($this,$data);
@@ -324,7 +311,7 @@ class Files extends RackspaceAbstract
         return false;
     }
     /**
-     * Store a file in a container 
+     * Store a file in a container
      *
      * @param string $container
      * @param string $object
@@ -332,7 +319,8 @@ class Files extends RackspaceAbstract
      * @param array $metadata
      * @return boolean
      */
-    public function storeObject($container,$object,$content,$metadata=array()) {
+    public function storeObject($container,$object,$content,$metadata=array())
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -374,7 +362,8 @@ class Files extends RackspaceAbstract
      * @param string $object
      * @return boolean
      */
-    public function deleteObject($container,$object) {
+    public function deleteObject($container,$object)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -407,7 +396,8 @@ class Files extends RackspaceAbstract
      * @param string $content_type
      * @return boolean
      */
-    public function copyObject($container_source,$obj_source,$container_dest,$obj_dest,$metadata=array(),$content_type=null) {
+    public function copyObject($container_source,$obj_source,$container_dest,$obj_dest,$metadata=array(),$content_type=null)
+    {
         if (empty($container_source)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_SOURCE_CONTAINER);
         }
@@ -451,7 +441,8 @@ class Files extends RackspaceAbstract
      * @param string $object
      * @return array|boolean
      */
-    public function getMetadataObject($container,$object) {
+    public function getMetadataObject($container,$object)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -462,7 +453,7 @@ class Files extends RackspaceAbstract
         $status= $result->getStatusCode();
         switch ($status) {
             case '200': // break intentionally omitted
-                $headers= $result->headers();
+                $headers= $result->getHeaders();
                 $count= strlen(self::METADATA_OBJECT_HEADER);
                 $metadata= array();
                 foreach ($headers as $h) {
@@ -494,7 +485,7 @@ class Files extends RackspaceAbstract
     /**
      * Set the metadata of a object in a container
      * The old metadata values are replaced with the new one
-     * 
+     *
      * @param string $container
      * @param string $object
      * @param array $metadata
@@ -537,7 +528,8 @@ class Files extends RackspaceAbstract
      * @param integer $ttl
      * @return array|boolean
      */
-    public function enableCdnContainer ($container,$ttl=self::CDN_TTL_MIN) {
+    public function enableCdnContainer ($container,$ttl=self::CDN_TTL_MIN)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -553,8 +545,8 @@ class Files extends RackspaceAbstract
             case '201':
             case '202': // break intentionally omitted
                 $data= array (
-                    'cdn_uri'     => $result->headers()->get(self::CDN_URI)->getFieldValue(),
-                    'cdn_uri_ssl' => $result->headers()->get(self::CDN_SSL_URI)->getFieldValue()
+                    'cdn_uri'     => $result->getHeaders()->get(self::CDN_URI)->getFieldValue(),
+                    'cdn_uri_ssl' => $result->getHeaders()->get(self::CDN_SSL_URI)->getFieldValue()
                 );
                 return $data;
             case '404':
@@ -628,7 +620,8 @@ class Files extends RackspaceAbstract
      * @param string $container
      * @return array|boolean
      */
-    public function getInfoCdnContainer($container) {
+    public function getInfoCdnContainer($container)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -637,12 +630,12 @@ class Files extends RackspaceAbstract
         switch ($status) {
             case '204': // break intentionally omitted
                 $data= array (
-                    'ttl'         => (int) $result->headers()->get(self::CDN_TTL)->getFieldValue(),
-                    'cdn_uri'     => $result->headers()->get(self::CDN_URI)->getFieldValue(),
-                    'cdn_uri_ssl' => $result->headers()->get(self::CDN_SSL_URI)->getFieldValue()
+                    'ttl'         => (int) $result->getHeaders()->get(self::CDN_TTL)->getFieldValue(),
+                    'cdn_uri'     => $result->getHeaders()->get(self::CDN_URI)->getFieldValue(),
+                    'cdn_uri_ssl' => $result->getHeaders()->get(self::CDN_SSL_URI)->getFieldValue()
                 );
-                $data['cdn_enabled']= (strtolower($result->headers()->get(self::CDN_ENABLED)->getFieldValue())!=='false');
-                $data['log_retention']= (strtolower($result->headers()->get(self::CDN_LOG_RETENTION)->getFieldValue())!=='false');
+                $data['cdn_enabled']= (strtolower($result->getHeaders()->get(self::CDN_ENABLED)->getFieldValue())!=='false');
+                $data['log_retention']= (strtolower($result->getHeaders()->get(self::CDN_LOG_RETENTION)->getFieldValue())!=='false');
                 return $data;
             case '404':
                 $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;

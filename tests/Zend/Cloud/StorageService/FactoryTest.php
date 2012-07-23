@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_StorageService
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\StorageService;
 
-use Zend\Config\Factory as ConfigFactory,
-    Zend\Cloud\StorageService\Factory,
-    Zend\Cloud\StorageService\Adapter\FileSystem,
-    Zend\Cloud\StorageService\Adapter\Nirvanix,
-    Zend\Cloud\StorageService\Adapter\S3,
-    //Zend\Cloud\StorageService\Adapter\WindowsAzure,
-    Zend\Http\Client\Adapter\Test as HttpClientTest,
-    Zend\Http\Response as HttpResponse,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Config\Factory as ConfigFactory;
+use Zend\Cloud\StorageService\Factory;
+use Zend\Cloud\StorageService\Adapter\FileSystem;
+use Zend\Cloud\StorageService\Adapter\Nirvanix;
+use Zend\Cloud\StorageService\Adapter\S3;
+use Zend\Http\Client\Adapter\Test as HttpClientTest;
+use Zend\Http\Response as HttpResponse;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * Test class for \Zend\Cloud\StorageService\Factory
@@ -37,8 +25,6 @@ use Zend\Config\Factory as ConfigFactory,
  * @category   Zend
  * @package    Zend_Cloud_StorageService
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cloud
  */
 class FactoryTest extends PHPUnitTestCase
@@ -65,9 +51,9 @@ class FactoryTest extends PHPUnitTestCase
         $root->appendChild($sessionTok);
         $doc->appendChild($root);
         $body = $doc->saveXML();
-        
+
         $resp = HttpResponse::fromString("HTTP/1.1 200 OK\nContent-type: text/xml;charset=UTF-8\nDate: 0\n\n".$body);
-        
+
         $httptest->setResponse($resp);
         $nirvanixAdapter = Factory::getAdapter($nirvanixConfig);
         $this->assertEquals('Zend\Cloud\StorageService\Adapter\Nirvanix', get_class($nirvanixAdapter));
@@ -111,7 +97,7 @@ class FactoryTest extends PHPUnitTestCase
         $httptest->setResponse($resp);
         $azureAdapter = Factory::getAdapter($azureConfig);
         $this->assertEquals('Zend\Cloud\StorageService\Adapter\WindowsAzure', get_class($azureAdapter));
-         * 
+         *
          */
     }
 

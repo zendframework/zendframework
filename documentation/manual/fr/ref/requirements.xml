@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Configuration système requise par Zend Framework</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Configuration système requise par Zend Framework</title>
     
 
-    <section xml:id="requirements.introduction"><info><title>Introduction</title></info>
+    <section xml:id="requirements.introduction"><title>Introduction</title>
         
 
         <para>
@@ -23,7 +23,7 @@
             n'affectent pas directement le fonctionnement de l'application.
         </para>
 
-        <section xml:id="requirements.version"><info><title>Version de PHP requise</title></info>
+        <section xml:id="requirements.version"><title>Version de PHP requise</title>
             
 
             <para>
@@ -38,7 +38,7 @@
             </para>
         </section>
 
-        <section xml:id="requirements.extensions"><info><title>Extensions PHP</title></info>
+        <section xml:id="requirements.extensions"><title>Extensions PHP</title>
             
 
             <para>
@@ -62,7 +62,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-php-extensions-table.xml"/>
         </section>
 
-        <section xml:id="requirements.zendcomponents"><info><title>Les composants de Zend Framework</title></info>
+        <section xml:id="requirements.zendcomponents"><title>Les composants de Zend Framework</title>
             
 
             <para>
@@ -85,7 +85,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-zendcomponents-table.xml"/>
         </section>
 
-        <section xml:id="requirements.dependencies"><info><title>Dépendances internes de Zend Framework</title></info>
+        <section xml:id="requirements.dependencies"><title>Dépendances internes de Zend Framework</title>
             
 
             <para>

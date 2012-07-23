@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http\Header;
 
@@ -9,7 +17,7 @@ class IfUnmodifiedSinceTest extends \PHPUnit_Framework_TestCase
 
     public function testIfUnmodifiedSinceFromStringCreatesValidIfUnmodifiedSinceHeader()
     {
-        $ifUnmodifiedSinceHeader = IfUnmodifiedSince::fromString('If-Unmodified-Since: xxx');
+        $ifUnmodifiedSinceHeader = IfUnmodifiedSince::fromString('If-Unmodified-Since: Sun, 06 Nov 1994 08:49:37 GMT');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ifUnmodifiedSinceHeader);
         $this->assertInstanceOf('Zend\Http\Header\IfUnmodifiedSince', $ifUnmodifiedSinceHeader);
     }
@@ -22,23 +30,22 @@ class IfUnmodifiedSinceTest extends \PHPUnit_Framework_TestCase
 
     public function testIfUnmodifiedSinceGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('IfUnmodifiedSince needs to be completed');
-
         $ifUnmodifiedSinceHeader = new IfUnmodifiedSince();
-        $this->assertEquals('xxx', $ifUnmodifiedSinceHeader->getFieldValue());
+        $ifUnmodifiedSinceHeader->setDate('Sun, 06 Nov 1994 08:49:37 GMT');
+        $this->assertEquals('Sun, 06 Nov 1994 08:49:37 GMT', $ifUnmodifiedSinceHeader->getFieldValue());
     }
 
     public function testIfUnmodifiedSinceToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('IfUnmodifiedSince needs to be completed');
-
         $ifUnmodifiedSinceHeader = new IfUnmodifiedSince();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('If-Unmodified-Since: xxx', $ifUnmodifiedSinceHeader->toString());
+        $ifUnmodifiedSinceHeader->setDate('Sun, 06 Nov 1994 08:49:37 GMT');
+        $this->assertEquals('If-Unmodified-Since: Sun, 06 Nov 1994 08:49:37 GMT', $ifUnmodifiedSinceHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    /**
+     * Implementation specific tests are covered by DateTest
+     * @see ZendTest\Http\Header\DateTest
+     */
+
 }
 

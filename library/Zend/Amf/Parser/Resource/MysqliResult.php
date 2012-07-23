@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @subpackage Parser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace Zend\Amf\Parser\Resource;
@@ -27,15 +16,13 @@ namespace Zend\Amf\Parser\Resource;
  *
  * @package    Zend_Amf
  * @subpackage Parser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MysqliResult
 {
     /**
      * mapping taken from http://forums.mysql.com/read.php?52,255868,255895#msg-255895
      */
-    static public $mysqli_type = array(
+    public static $mysqli_type = array(
         0   => "MYSQLI_TYPE_DECIMAL",
         1   => "MYSQLI_TYPE_TINYINT",
         2   => "MYSQLI_TYPE_SMALLINT",
@@ -64,7 +51,7 @@ class MysqliResult
     );
 
     // Build an associative array for a type look up
-    static $mysqli_to_php = array(
+    public static $mysqli_to_php = array(
         "MYSQLI_TYPE_DECIMAL"     => 'float',
         "MYSQLI_TYPE_NEWDECIMAL"  => 'float',
         "MYSQLI_TYPE_BIT"         => 'integer',
@@ -101,7 +88,7 @@ class MysqliResult
      * @param resource $resource
      * @return array
      */
-    public function parse($resource) 
+    public function parse($resource)
     {
         $result   = array();
         $fieldcnt = mysqli_num_fields($resource);

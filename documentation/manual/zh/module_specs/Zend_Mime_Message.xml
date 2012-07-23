@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-    <section xml:id="zend.mime.message.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.mime.message.introduction"><title>简介</title>
       
 
       <para><code>Zend_Mime_Message</code>表示一个包含一个或多个段（段以<link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>对象表示）的符合MIME标准的消息。
@@ -14,14 +14,14 @@
       </para>
     </section>
 
-    <section xml:id="zend.mime.message.instantiation"><info><title>实例化</title></info>
+    <section xml:id="zend.mime.message.instantiation"><title>实例化</title>
         
         <para>
             <code>Zend_Mime_Message</code>没有构造函数。
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.addparts"><info><title>增加MIME消息段</title></info>
+    <section xml:id="zend.mime.message.addparts"><title>增加MIME消息段</title>
         
 
         <para>
@@ -41,7 +41,7 @@
      </para>
     </section>
 
-    <section xml:id="zend.mime.message.bondary"><info><title>分界线处理</title></info>
+    <section xml:id="zend.mime.message.bondary"><title>分界线处理</title>
         
         <para>
           <code>Zend_Mime_Message</code>通常创建和使用自身的<code>Zend_Mime</code>对象来产生MINE分界线。
@@ -52,7 +52,7 @@
         <para><code>-&gt;generateMessage()</code>方法，渲染<code>Zend_Mime_Message</code>的内容为字符串。</para>
    </section>
 
-    <section xml:id="zend.mime.message.parse"><info><title>解析字符串，创建Zend_Mime_Message对象（实验性的）</title></info>
+    <section xml:id="zend.mime.message.parse"><title>解析字符串，创建Zend_Mime_Message对象（实验性的）</title>
         
 
         <para>给定一个字符串形式的符合MIME标准的消息，可以重构出<code>Zend_Mime_Message</code>对象。

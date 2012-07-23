@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Фронтэнды Zend_Cache</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><title>Фронтэнды Zend_Cache</title>
     
 
-    <section xml:id="zend.cache.frontends.core"><info><title>Zend_Cache_Core</title></info>
+    <section xml:id="zend.cache.frontends.core"><title>Zend_Cache_Core</title>
         
-        <section xml:id="zend.cache.frontends.core.introduction"><info><title>Введение</title></info>
+        <section xml:id="zend.cache.frontends.core.introduction"><title>Введение</title>
             
             <para>
                 Фронтэнд <classname>Zend_Cache_Core</classname> является особым,
@@ -20,13 +20,13 @@
                 </para>
             </note>
         </section>
-        <section xml:id="zend.cache.frontends.core.options"><info><title>Доступные опции</title></info>
+        <section xml:id="zend.cache.frontends.core.options"><title>Доступные опции</title>
             
             <para>
                 Эти опции передаются фабричному методу, как было показано в
                 предыдущих примерах.
             </para>
-            <table xml:id="zend.cache.frontends.core.options.table"><info><title>Опции Zend_Cache_Core</title></info>
+            <table xml:id="zend.cache.frontends.core.options.table"><title>Опции Zend_Cache_Core</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -143,7 +143,7 @@
               </table>
         </section>
 
-        <section xml:id="zend.cache.core.examples"><info><title>Примеры</title></info>
+        <section xml:id="zend.cache.core.examples"><title>Примеры</title>
             
             <para>
                 Пример был дан в самом начале данного раздела руководства.
@@ -258,9 +258,9 @@ if (!($cache->test($id))) {
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+    <section xml:id="zend.cache.frontends.output"><title>Zend_Cache_Frontend_Output</title>
         
-        <section xml:id="zend.cache.frontends.output.introduction"><info><title>Введение</title></info>
+        <section xml:id="zend.cache.frontends.output.introduction"><title>Введение</title>
             
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> является фронтэндом,
@@ -270,7 +270,7 @@ if (!($cache->test($id))) {
                 <methodname>start()</methodname> и <methodname>end()</methodname>.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.output.options"><info><title>Доступные опции</title></info>
+        <section xml:id="zend.cache.frontends.output.options"><title>Доступные опции</title>
             
             <para>
                 Этот фронтэнд не имеет каких-либо специальных опций, отличных
@@ -278,7 +278,7 @@ if (!($cache->test($id))) {
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.output.examples"><info><title>Примеры</title></info>
+        <section xml:id="zend.cache.frontends.output.examples"><title>Примеры</title>
             
             <para>
                 Пример был дан в самом начале данного руководства. Здесь
@@ -307,9 +307,9 @@ echo 'This is never cached ('.time().').';
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+    <section xml:id="zend.cache.frontends.function"><title>Zend_Cache_Frontend_Function</title>
         
-        <section xml:id="zend.cache.frontends.function.introduction"><info><title>Введение</title></info>
+        <section xml:id="zend.cache.frontends.function.introduction"><title>Введение</title>
             
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> сохраняет в кэш
@@ -318,9 +318,9 @@ echo 'This is never cached ('.time().').';
                 вызова в виде массива.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.function.options"><info><title>Доступные опции</title></info>
+        <section xml:id="zend.cache.frontends.function.options"><title>Доступные опции</title>
             
-            <table xml:id="zend.cache.frontends.function.options.table"><info><title>Опции Zend_Cache_Frontend_Function</title></info>
+            <table xml:id="zend.cache.frontends.function.options.table"><title>Опции Zend_Cache_Frontend_Function</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -363,7 +363,7 @@ echo 'This is never cached ('.time().').';
               </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.function.examples"><info><title>Примеры</title></info>
+        <section xml:id="zend.cache.frontends.function.examples"><title>Примеры</title>
             
             <para>
                 Функция <methodname>call()</methodname> используется так же, как и
@@ -398,9 +398,9 @@ $cache->call('veryExpensiveFunc', $params);
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+    <section xml:id="zend.cache.frontends.class"><title>Zend_Cache_Frontend_Class</title>
         
-        <section xml:id="zend.cache.frontends.class.introduction"><info><title>Введение</title></info>
+        <section xml:id="zend.cache.frontends.class.introduction"><title>Введение</title>
             
             <para>
                 <classname>Zend_Cache_Frontend_Class</classname> отличается от
@@ -408,9 +408,9 @@ $cache->call('veryExpensiveFunc', $params);
                 кэшировать объекты и статические вызовы методов.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.class.options"><info><title>Доступные опции</title></info>
+        <section xml:id="zend.cache.frontends.class.options"><title>Доступные опции</title>
             
-            <table xml:id="zend.cache.frontends.class.options.table"><info><title>Опции Zend_Cache_Frontend_Class</title></info>
+            <table xml:id="zend.cache.frontends.class.options.table"><title>Опции Zend_Cache_Frontend_Class</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -466,7 +466,7 @@ $cache->call('veryExpensiveFunc', $params);
               </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.class.examples"><info><title>Примеры</title></info>
+        <section xml:id="zend.cache.frontends.class.examples"><title>Примеры</title>
             
             <para>
                 Кэширование статических вызовов:
@@ -519,9 +519,9 @@ $result = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+    <section xml:id="zend.cache.frontends.file"><title>Zend_Cache_Frontend_File</title>
         
-        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Введение</title></info>
+        <section xml:id="zend.cache.frontends.file.introduction"><title>Введение</title>
             
             <para>
                 <classname>Zend_Cache_Frontend_File</classname> является фронтэндом,
@@ -542,9 +542,9 @@ $result = $cache->foobar2('1', '2');
                 недействительным.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.file.options"><info><title>Доступные опции</title></info>
+        <section xml:id="zend.cache.frontends.file.options"><title>Доступные опции</title>
             
-            <table xml:id="zend.cache.frontends.file.options.table"><info><title>Опции Zend_Cache_Frontend_File</title></info>
+            <table xml:id="zend.cache.frontends.file.options.table"><title>Опции Zend_Cache_Frontend_File</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -597,7 +597,7 @@ $result = $cache->foobar2('1', '2');
                   </tgroup>
               </table>
         </section>
-        <section xml:id="zend.cache.frontends.file.examples"><info><title>Примеры</title></info>
+        <section xml:id="zend.cache.frontends.file.examples"><title>Примеры</title>
             
             <para>
                 Этот фронтэнд используется так же, как и
@@ -608,9 +608,9 @@ $result = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+    <section xml:id="zend.cache.frontends.page"><title>Zend_Cache_Frontend_Page</title>
         
-        <section xml:id="zend.cache.frontends.page.introduction"><info><title>Введение</title></info>
+        <section xml:id="zend.cache.frontends.page.introduction"><title>Введение</title>
             
             <para>
                 <classname>Zend_Cache_Frontend_Page</classname> похож на
@@ -638,9 +638,9 @@ $result = $cache->foobar2('1', '2');
                 в кэш и броузер уже имеет правильную версию страницы).
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.page.options"><info><title>Доступные опции</title></info>
+        <section xml:id="zend.cache.frontends.page.options"><title>Доступные опции</title>
             
-            <table xml:id="zend.cache.frontends.page.options.table"><info><title>Опции Zend_Cache_Frontend_Page</title></info>
+            <table xml:id="zend.cache.frontends.page.options.table"><title>Опции Zend_Cache_Frontend_Page</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -863,7 +863,7 @@ $result = $cache->foobar2('1', '2');
                   </tgroup>
               </table>
         </section>
-        <section xml:id="zend.cache.frontends.page.examples"><info><title>Примеры</title></info>
+        <section xml:id="zend.cache.frontends.page.examples"><title>Примеры</title>
             
             <para>
                 Использование <classname>Zend_Cache_Frontend_Page</classname> довольно
@@ -934,7 +934,7 @@ $cache->start();
 // (этот код не исполняется, если есть попадание в кэш)
 ]]></programlisting>
         </section>
-        <section xml:id="zend.cache.frontends.page.cancel"><info><title>Отмена кэширования</title></info>
+        <section xml:id="zend.cache.frontends.page.cancel"><title>Отмена кэширования</title>
             
             <para>
                 В некоторых случаях может потребоваться отменить текущий

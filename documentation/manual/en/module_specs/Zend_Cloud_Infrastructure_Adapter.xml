@@ -32,8 +32,8 @@
         </para>
         
          <programlisting language="php"><![CDATA[
-use Zend\Cloud\Infrastructure\Adapter\Ec2 as Ec2Adapter,
-    Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
+use Zend\Cloud\Infrastructure\Adapter\Ec2 as Ec2Adapter;
+use Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
 
 $key    = 'key';
 $secret = 'secret';
@@ -95,8 +95,8 @@ print_r($cpuUsage);
         </para>
         
         <programlisting language="php"><![CDATA[
-use Zend\Cloud\Infrastructure\Adapter\Rackspace as RackspaceAdapter,
-    Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
+use Zend\Cloud\Infrastructure\Adapter\Rackspace as RackspaceAdapter;
+use Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
 
 $user = 'username';
 $key  = 'API key';

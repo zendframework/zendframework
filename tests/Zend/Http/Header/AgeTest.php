@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http\Header;
 
@@ -30,11 +38,16 @@ class AgeTest extends \PHPUnit_Framework_TestCase
 
     public function testAgeToStringReturnsHeaderFormattedString()
     {
-        $ageHeader = Age::fromString('Age: 12');
+        $ageHeader = new Age();
+        $ageHeader->setDeltaSeconds('12');
         $this->assertEquals('Age: 12', $ageHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    public function testAgeCorrectsDeltaSecondsOverflow()
+    {
+        $ageHeader = new Age();
+        $ageHeader->setDeltaSeconds(PHP_INT_MAX);
+        $this->assertEquals('Age: 2147483648', $ageHeader->toString());
+    }
 }
 

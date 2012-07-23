@@ -8,7 +8,7 @@ use Zend\Service\LiveDocx\MailMerge;
 
 Helper::printLine(
     PHP_EOL . 'Field and Block Field Names (merge fields)' .
-    PHP_EOL . 
+    PHP_EOL .
     PHP_EOL . 'The following templates contain the listed field or block field names:' .
     PHP_EOL .
     PHP_EOL
@@ -29,7 +29,7 @@ printf('Field names in %s:%s', $templateName, PHP_EOL);
 
 $fieldNames = $mailMerge->getFieldNames();
 foreach ($fieldNames as $fieldName) {
-    printf('- %s%s', $fieldName, PHP_EOL);   
+    printf('- %s%s', $fieldName, PHP_EOL);
 }
 
 // -----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ printf('%sField names in %s:%s', PHP_EOL, $templateName, PHP_EOL);
 
 $fieldNames = $mailMerge->getFieldNames();
 foreach ($fieldNames as $fieldName) {
-    printf('- %s%s', $fieldName, PHP_EOL);     
+    printf('- %s%s', $fieldName, PHP_EOL);
 }
 
 // -----------------------------------------------------------------------------
@@ -55,14 +55,14 @@ printf('%sField names in %s:%s', PHP_EOL, $templateName, PHP_EOL);
 
 $fieldNames = $mailMerge->getFieldNames();
 foreach ($fieldNames as $fieldName) {
-    printf('- %s%s', $fieldName, PHP_EOL);     
+    printf('- %s%s', $fieldName, PHP_EOL);
 }
 
 printf('%sBlock names in %s:%s', PHP_EOL, $templateName, PHP_EOL);
 
 $blockNames = $mailMerge->getBlockNames();
 foreach ($blockNames as $blockName) {
-    printf('- %s%s', $blockName, PHP_EOL);    
+    printf('- %s%s', $blockName, PHP_EOL);
 }
 
 printf('%sBlock field names in %s:%s', PHP_EOL, $templateName, PHP_EOL);
@@ -70,7 +70,7 @@ printf('%sBlock field names in %s:%s', PHP_EOL, $templateName, PHP_EOL);
 foreach ($blockNames as $blockName) {
     $blockFieldNames = $mailMerge->getBlockFieldNames($blockName);
     foreach ($blockFieldNames as $blockFieldName) {
-        printf('- %s::%s%s', $blockName, $blockFieldName, PHP_EOL);          
+        printf('- %s::%s%s', $blockName, $blockFieldName, PHP_EOL);
     }
 }
 

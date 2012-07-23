@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>InlineScript ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><title>InlineScript ヘルパー</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         <methodname>inlineScript()</methodname> メソッドを使用します。
     </para>
 
-    <note><info><title>HTML Body スクリプトでの InlineScript の使用法</title></info>
+    <note><title>HTML Body スクリプトでの InlineScript の使用法</title>
         
 
         <para>

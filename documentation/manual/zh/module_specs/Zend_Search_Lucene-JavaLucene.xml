@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>与 Java Lucene 的互操作性</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>与 Java Lucene 的互操作性</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>文件格式</title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>文件格式</title>
         
         <para>
           Zend_Search_Lucene 的索引文件格式和 1.4 或更高版本的 Java Lucene 二进制兼容。
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>索引目录</title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>索引目录</title>
         
 
         <para>
@@ -41,7 +41,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Java 源代码</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>Java 源代码</title>
         
         <para>
             下面的 Java 程序提供了一个如何使用 Java Lucene 索引文件的例子：

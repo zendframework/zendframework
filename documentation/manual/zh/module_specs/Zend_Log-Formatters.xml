@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formatters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><title>Formatters</title>
   
   <para>
     Formatter是一个负责取得一个描述日志事件的<code>event</code>数组并输出一个格式化的日志行的对象.
@@ -10,7 +10,7 @@
     对于这样的Writer不支持Formatter,如果你对这样的Writer设置一个Formatter将抛出一个异常.
   </para>
 
-  <section xml:id="zend.log.formatters.simple"><info><title>简单格式化</title></info>
+  <section xml:id="zend.log.formatters.simple"><title>简单格式化</title>
     
     <para>
       <code>Zend_Log_Formatter_Simple</code> 是默认的.当未指定任何formatter时使用.
@@ -44,7 +44,7 @@ $logger->info('there');
     </para>
   </section>
 
-  <section xml:id="zend.log.formatters.xml"><info><title>格式化到XML</title></info>
+  <section xml:id="zend.log.formatters.xml"><title>格式化到XML</title>
     
     <para>
     <code>Zend_Log_Formatter_Xml</code>格式化日志数据到XML字符串中.

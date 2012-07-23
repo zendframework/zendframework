@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>הצגת משתנים</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><title>הצגת משתנים</title>
 
     
 
@@ -8,7 +8,7 @@
         דרך זו היא פשוטה שימושית ונפוצה, מאחר והיא לא דורשת שום קריאה מוקדמת למחלקות כלשהן, כלים מסויימים או סביבות עבודה כלשהן.
     </para>
 
-    <example xml:id="zend.debug.dumping.example"><info><title>דוגמא לשימוש</title></info>
+    <example xml:id="zend.debug.dumping.example"><title>דוגמא לשימוש</title>
         
         <programlisting role="php"><![CDATA[
 
@@ -39,7 +39,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         ולאחר מכן מוצג כשהוא עטוף ב <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip><info><title>ניפוי שגיאות בעזרת Zend_Log</title></info>
+    <tip><title>ניפוי שגיאות בעזרת Zend_Log</title>
         
         <para>
             שימוש ב <code>Zend_Debug::dump()</code> היא הדרך הטובה ביותר להצגת נתונים אודות משתנים בתהליך הפיתוח.

@@ -1,32 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Amf
  */
 
 namespace ZendTest\Amf;
-use Zend\Amf,
-    Zend\Amf\Parser,
-    Zend\Amf\Value,
-    Zend\Amf\Request,
-    Zend\Amf\Value\Messaging,
-    Zend\Amf\Response,
-    Zend\Session;
+
+use Zend\Amf;
+use Zend\Amf\Parser;
+use Zend\Amf\Value;
+use Zend\Amf\Request;
+use Zend\Amf\Value\Messaging;
+use Zend\Amf\Response;
+use Zend\Session;
 
 require_once __DIR__ . '/TestAsset/Server/serverFunctions.php';
 require_once __DIR__ . '/TestAsset/Server/ServiceA.php';
@@ -36,8 +26,6 @@ require_once __DIR__ . '/TestAsset/Server/ServiceB.php';
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
 class ServerTest extends \PHPUnit_Framework_TestCase
@@ -147,11 +135,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFunction()
     {
-        try {
-            $this->_server->addFunction('ZendTest\\Amf\\TestAsset\\Server\\testFunction', 'test');
-        } catch (\Exception $e) {
-            $this->fail('Attachment should have worked');
-        }
+
+        $this->_server->addFunction('ZendTest\\Amf\\TestAsset\\Server\\testFunction', 'test');
 
         $methods = $this->_server->listMethods();
         $this->assertTrue(in_array('test.ZendTest\\Amf\\TestAsset\\Server\\testFunction', $methods), var_export($methods, 1));
@@ -160,21 +145,18 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             $this->_server->addFunction('nosuchfunction');
             $this->fail('nosuchfunction() should not exist and should throw an exception');
         } catch (\Exception $e) {
-            // do nothing
         }
 
         $server = new Amf\Server();
-        try {
-            $server->addFunction(
-                array(
-                    'ZendTest\\Amf\\TestAsset\\Server\\testFunction',
-                    'ZendTest\\Amf\\TestAsset\\Server\\testFunction2',
-                ),
-                'zsr'
-            );
-        } catch (\Exception $e) {
-            $this->fail('Error attaching array of functions: ' . $e->getMessage());
-        }
+
+        $server->addFunction(
+            array(
+                'ZendTest\\Amf\\TestAsset\\Server\\testFunction',
+                'ZendTest\\Amf\\TestAsset\\Server\\testFunction2',
+            ),
+            'zsr'
+        );
+
         $methods = $server->listMethods();
         $this->assertTrue(in_array('zsr.ZendTest\\Amf\\TestAsset\\Server\\testFunction', $methods));
         $this->assertTrue(in_array('zsr.ZendTest\\Amf\\TestAsset\\Server\\testFunction2', $methods));

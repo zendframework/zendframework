@@ -13,8 +13,6 @@ namespace Zend\Paginator\Adapter;
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Null implements AdapterInterface
 {
@@ -31,7 +29,7 @@ class Null implements AdapterInterface
      * @param integer $count Total item count (Optional)
      */
     public function __construct($count = 0)
-    {;
+    {
         $this->_count = $count;
     }
 

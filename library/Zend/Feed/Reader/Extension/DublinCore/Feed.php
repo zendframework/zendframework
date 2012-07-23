@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader\Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Date;
+use DateTime;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
 
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed extends Extension\AbstractFeed
 {
@@ -74,7 +62,7 @@ class Feed extends Extension\AbstractFeed
                 $list = $this->_xpath->query('//dc10:publisher');
             }
         }
-        
+
         if ($list->length) {
             foreach ($list as $author) {
                 $authors[] = array(
@@ -227,7 +215,7 @@ class Feed extends Extension\AbstractFeed
     /**
      *
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDate()
     {
@@ -243,15 +231,14 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($date) {
-            $d = new Date\Date;
-            $d->set($date, Date\Date::ISO_8601);
+            $d = DateTime::createFromFormat(DateTime::ISO8601, $date);
         }
 
         $this->_data['date'] = $d;
 
         return $this->_data['date'];
     }
-    
+
     /**
      * Get categories (subjects under DC)
      *
@@ -262,13 +249,13 @@ class Feed extends Extension\AbstractFeed
         if (array_key_exists('categories', $this->_data)) {
             return $this->_data['categories'];
         }
-        
+
         $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:subject');
 
         if (!$list->length) {
             $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:subject');
         }
-        
+
         if ($list->length) {
             $categoryCollection = new Collection\Category;
             foreach ($list as $category) {
@@ -281,9 +268,9 @@ class Feed extends Extension\AbstractFeed
         } else {
             $categoryCollection = new Collection\Category;
         }
-        
+
         $this->_data['categories'] = $categoryCollection;
-        return $this->_data['categories'];  
+        return $this->_data['categories'];
     }
 
     /**

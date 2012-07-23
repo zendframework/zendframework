@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_App
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\App;
@@ -25,8 +14,6 @@ namespace ZendTest\GData\App;
  * @category   Zend
  * @package    Zend_GData_App
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_App
  */
@@ -38,63 +25,74 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $this->base = new \ZendTest\GData\App\TestAsset\MockBase();
     }
 
-    public function testUnknownNamespaceReturnsInput() {
+    public function testUnknownNamespaceReturnsInput()
+    {
         $this->assertEquals('example',
                 $this->base->lookupNamespace('example'));
     }
-    public function testAtomV1NamespaceReturnedByDefault() {
+    public function testAtomV1NamespaceReturnedByDefault()
+    {
         $this->assertEquals('http://www.w3.org/2005/Atom',
                 $this->base->lookupNamespace('atom'));
     }
 
-    public function testAtomPubV1NamespaceReturnedByDefault() {
+    public function testAtomPubV1NamespaceReturnedByDefault()
+    {
         $this->assertEquals('http://purl.org/atom/app#',
                 $this->base->lookupNamespace('app'));
     }
 
-    public function testAtomV1NamespaceReturnedWhenSpecifyingMajorVersion() {
+    public function testAtomV1NamespaceReturnedWhenSpecifyingMajorVersion()
+    {
         $this->assertEquals('http://www.w3.org/2005/Atom',
                 $this->base->lookupNamespace('atom',
                 1));
     }
 
-    public function testAtomV1NamespaceReturnedWhenSpecifyingMajorAndMinorVersion() {
+    public function testAtomV1NamespaceReturnedWhenSpecifyingMajorAndMinorVersion()
+    {
         $this->assertEquals('http://www.w3.org/2005/Atom',
                 $this->base->lookupNamespace('atom',
                 1, 0));
     }
 
-    public function testAtomPubV1NamespaceReturnedWhenSpecifyingMajorVersion() {
+    public function testAtomPubV1NamespaceReturnedWhenSpecifyingMajorVersion()
+    {
         $this->assertEquals('http://purl.org/atom/app#',
                 $this->base->lookupNamespace('app',
                 1));
     }
 
-    public function testAtomPubV1NamespaceReturnedWhenSpecifyingMajorAndMinorVersion() {
+    public function testAtomPubV1NamespaceReturnedWhenSpecifyingMajorAndMinorVersion()
+    {
         $this->assertEquals('http://purl.org/atom/app#',
                 $this->base->lookupNamespace('app',
                 1, 0));
     }
 
-    public function testAtomPubV2NamespaceReturnedWhenSpecifyingMajorVersion() {
+    public function testAtomPubV2NamespaceReturnedWhenSpecifyingMajorVersion()
+    {
         $this->assertEquals('http://www.w3.org/2007/app',
                 $this->base->lookupNamespace('app',
                 2));
     }
 
-    public function testAtomPubV2NamespaceReturnedWhenSpecifyingMajorAndMinorVersion() {
+    public function testAtomPubV2NamespaceReturnedWhenSpecifyingMajorAndMinorVersion()
+    {
         $this->assertEquals('http://www.w3.org/2007/app',
                 $this->base->lookupNamespace('app',
                 2, 0));
     }
 
-    public function testNullReturnsLatestVersion() {
+    public function testNullReturnsLatestVersion()
+    {
         $this->assertEquals('http://www.w3.org/2007/app',
                 $this->base->lookupNamespace('app',
                 null, null));
     }
 
-    public function testRegisterNamespaceWorksWithoutVersion() {
+    public function testRegisterNamespaceWorksWithoutVersion()
+    {
         $ns = 'http://example.net/namespaces.foo';
         $prefix = 'foo';
         $this->base->registerNamespace($prefix, $ns);
@@ -102,7 +100,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ns, $result);
     }
 
-    public function testRegisterNamespaceAllowsSettingMajorVersion() {
+    public function testRegisterNamespaceAllowsSettingMajorVersion()
+    {
         $ns = 'http://example.net/namespaces.foo';
         $prefix = 'foo';
         $this->base->registerNamespace($prefix, 'wrong-1', 1);
@@ -113,7 +112,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ns, $result);
     }
 
-    public function testRegisterNamespaceAllowsSettingMinorVersion() {
+    public function testRegisterNamespaceAllowsSettingMinorVersion()
+    {
         $ns = 'http://example.net/namespaces.foo';
         $prefix = 'foo';
         $this->base->registerNamespace($prefix, 'wrong-1', 1);

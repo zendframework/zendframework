@@ -1,26 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Service
- * @subpackage GoGrid
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\GoGrid;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
 use Zend\Service\GoGrid\Object;
 
 /**
@@ -29,50 +21,58 @@ use Zend\Service\GoGrid\Object;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage GoGrid
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ObjectList implements \Countable, \Iterator, \ArrayAccess
+class ObjectList implements
+    Countable,
+    Iterator,
+    ArrayAccess
 {
     const SUCCESS_STATUS= 'success';
+
     /**
      * @var array Array of Zend\Service\GoGrid\Object
      */
     protected $_objects = array();
+
     /**
      * @var int Iterator key
      */
     protected $_iteratorKey = 0;
+
     /**
      * @var array
      */
     protected $_summary;
+
     /**
      * @var string
      */
     protected $_status;
+
     /**
      * @var string
      */
     protected $_method;
+
     /**
      * @var boolean
      */
     protected $_error= true;
+
     /**
      * @var string
      */
     protected $_errorMsg= '';
+
     /**
-     * __construct()
-     * 
-     * @param  array $list
-     * @return boolean
+     * Constructor
+     *
+     * @param array $list
      */
-    public function __construct($list = array())
+    public function __construct(array $list = array())
     {
-        if (empty($list) || !is_array($list)) {
-            return false;
+        if (empty($list)) {
+            return;
         }
         if (array_key_exists('status', $list)) {
             $this->_status= $list['status'];
@@ -90,8 +90,9 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
         }
         if (!$this->_error) {
             $this->_constructFromArray($list['list']);
-        }    
+        }
     }
+
     /**
      * Transforms the Array to array of posts
      *
@@ -104,17 +105,19 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
             $this->_addObject(new Object($obj));
         }
     }
+
     /**
      * Add an object
      *
-     * @param  Zend\Service\GoGrid\Object $obj
-     * @return Zend\Service\GoGrid\ObjectList
+     * @param  Object $obj
+     * @return ObjectList
      */
     protected function _addObject (Object $obj)
     {
         $this->_objects[] = $obj;
         return $this;
     }
+
     /**
      * Return number of servers
      *
@@ -126,6 +129,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     {
         return count($this->_objects);
     }
+
     /**
      * Return the current element
      *
@@ -148,6 +152,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     {
         return $this->_iteratorKey;
     }
+
     /**
      * Move forward to next element
      *
@@ -159,6 +164,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     {
         $this->_iteratorKey += 1;
     }
+
     /**
      * Rewind the Iterator to the first element
      *
@@ -170,6 +176,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     {
         $this->_iteratorKey = 0;
     }
+
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
@@ -186,6 +193,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
             return false;
         }
     }
+
     /**
      * Whether the offset exists
      *
@@ -198,13 +206,14 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     {
         return ($offset < $this->count());
     }
+
     /**
      * Return value at given offset
      *
      * Implement ArrayAccess::offsetGet()
      *
      * @param   int     $offset
-     * @throws  OutOfBoundsException
+     * @throws  Exception\OutOfBoundsException
      * @return  Zend\Service\GoGrid\Object
      */
     public function offsetGet($offset)
@@ -223,11 +232,11 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @param   string  $value
-     * @throws  Zend\Service\GoGrid\Exception
+     * @throws  Exception\RuntimeException
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception('You are trying to set read-only property');
+        throw new Exception\RuntimeException('You are trying to set read-only property');
     }
 
     /**
@@ -236,35 +245,41 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      * Implement ArrayAccess::offsetUnset()
      *
      * @param   int     $offset
-     * @throws  Zend\Service\GoGrid\Exception
+     * @throws  Exception\RuntimeException
      */
     public function offsetUnset($offset)
     {
-        throw new Exception('You are trying to unset read-only property');
+        throw new Exception\RuntimeException('You are trying to unset read-only property');
     }
+
     /**
      * Check if the service call was successful
-     * 
+     *
      * @return boolen
      */
-    public function isSuccess() {
+    public function isSuccess()
+    {
         return ($this->_error===false);
     }
+
     /**
      * Get the error masg
-     * 
-     * @return string 
+     *
+     * @return string
      */
-    public function getError() {
+    public function getError()
+    {
         return $this->_errorMsg;
     }
+
     /**
      * getSummary
      *
      * @param string $key
      * @return string|array
      */
-    public function getSummary($key=null) {
+    public function getSummary($key=null)
+    {
         if (!empty($key)) {
             if (array_key_exists($key, $this->_summary)) {
                 return $this->_summary[$key];
@@ -274,20 +289,24 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
         }
         return $this->_summary;
     }
+
     /**
      * getMethod
      *
      * @return string
      */
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->_method;
     }
+
     /**
      * getStatus
      *
      * @return string
      */
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->_status;
     }
 }

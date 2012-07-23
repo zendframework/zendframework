@@ -1,27 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_BinaryParser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\BinaryParser\DataSource;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}
@@ -33,8 +24,6 @@ use Zend\Pdf;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class File extends AbstractDataSource
 {
@@ -96,7 +85,9 @@ class File extends AbstractDataSource
     public function __destruct()
     {
         if (is_resource($this->_fileResource)) {
-            @fclose($this->_fileResource);
+            ErrorHandler::start(E_WARNING);
+            fclose($this->_fileResource);
+            ErrorHandler::stop();
         }
     }
 

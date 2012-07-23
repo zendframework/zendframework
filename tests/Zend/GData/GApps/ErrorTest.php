@@ -1,68 +1,62 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_GApps
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps;
 
 /**
  * @category   Zend
  * @package    Zend_GData_GApps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_GApps
  */
 class ErrorTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->error = new GApps\Error();
     }
 
-    public function testCanSetAndGetErrorCodeUsingConstant() {
+    public function testCanSetAndGetErrorCodeUsingConstant()
+    {
         $this->error->setErrorCode(
             GApps\Error::INVALID_EMAIL_ADDRESS);
         $this->assertEquals(GApps\Error::INVALID_EMAIL_ADDRESS,
             $this->error->getErrorCode());
     }
 
-    public function testCanSetAndGetErrorCodeUsingInteger() {
+    public function testCanSetAndGetErrorCodeUsingInteger()
+    {
         $this->error->setErrorCode(123);
         $this->assertEquals(123, $this->error->getErrorCode());
     }
 
-   public function testCanSetAndGetReason() {
+   public function testCanSetAndGetReason()
+   {
         $text = "The foo is missing a bar.";
         $this->error->setReason($text);
         $this->assertEquals($text, $this->error->getReason());
     }
 
-    public function testCanSetAndGetInvalidInput() {
+    public function testCanSetAndGetInvalidInput()
+    {
          $text = "for___baz";
          $this->error->setInvalidInput($text);
          $this->assertEquals($text, $this->error->getInvalidInput());
     }
 
-    public function testContstructorAllowsSettingAllVariables() {
+    public function testContstructorAllowsSettingAllVariables()
+    {
         $this->error = new GApps\Error(
             GApps\Error::USER_DELETED_RECENTLY,
             "foo", "bar");
@@ -72,7 +66,8 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("bar", $this->error->getInvalidInput());
     }
 
-    public function testToStringProvidesHelpfulMessage() {
+    public function testToStringProvidesHelpfulMessage()
+    {
         $this->error->setErrorCode(GApps\Error::USER_SUSPENDED);
         $this->error->setReason("The foo is missing a bar.");
         $this->error->setInvalidInput("for___baz");

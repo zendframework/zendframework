@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>从网页上获得Feed</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><title>从网页上获得Feed</title>
     
     <para>
         在网页上与该页内容其相关的详细信息常被包含在一个用<code>&lt;link&gt;</code>标记关联的Feed中。<code>Zend_Feed</code>能让你用一个简单的方法提取一个页面上所有关联的Feed:

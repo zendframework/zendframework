@@ -1,48 +1,33 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace ZendTest\Db\ResultSet;
 
-use ArrayObject,
-    ArrayIterator,
-    PHPUnit_Framework_TestCase as TestCase,
-    SplStack,
-    stdClass,
-    Zend\Db\ResultSet\ResultSet,
-    Zend\Db\ResultSet\Row,
-    Zend\Db\ResultSet\RowObjectInterface;
+use ArrayObject;
+use ArrayIterator;
+use PHPUnit_Framework_TestCase as TestCase;
+use SplStack;
+use stdClass;
+use Zend\Db\ResultSet\ResultSet;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ResultSetTest extends TestCase
 {
     /**
      * @var ResultSet
      */
-    protected $set;
+    protected $resultSet;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -51,48 +36,40 @@ class ResultSetTest extends TestCase
     protected function setUp()
     {
 
-        $this->set = new ResultSet;
+        $this->resultSet = new ResultSet;
     }
 
     public function testRowObjectPrototypeIsPopulatedByRowObjectByDefault()
     {
-        $row = $this->set->getRowObjectPrototype();
-        $this->assertInstanceOf('Zend\Db\ResultSet\Row', $row);
+        $row = $this->resultSet->getArrayObjectPrototype();
+        $this->assertInstanceOf('ArrayObject', $row);
     }
 
     public function testRowObjectPrototypeIsMutable()
     {
-        $row = new Row();
-        $this->set->setRowObjectPrototype($row);
-        $this->assertSame($row, $this->set->getRowObjectPrototype());
+        $row = new \ArrayObject();
+        $this->resultSet->setArrayObjectPrototype($row);
+        $this->assertSame($row, $this->resultSet->getArrayObjectPrototype());
     }
 
     public function testRowObjectPrototypeMayBePassedToConstructor()
     {
-        $row = new Row();
-        $set = new ResultSet($row);
-        $this->assertSame($row, $set->getRowObjectPrototype());
+        $row = new \ArrayObject();
+        $resultSet = new ResultSet(ResultSet::TYPE_ARRAYOBJECT, $row);
+        $this->assertSame($row, $resultSet->getArrayObjectPrototype());
     }
 
     public function testReturnTypeIsObjectByDefault()
     {
-        $this->assertEquals(ResultSet::TYPE_OBJECT, $this->set->getReturnType());
-    }
-
-    public function testReturnTypeMayBeSetToArray()
-    {
-        $this->set->setReturnType(ResultSet::TYPE_ARRAY);
-        $this->assertEquals(ResultSet::TYPE_ARRAY, $this->set->getReturnType());
+        $this->assertEquals(ResultSet::TYPE_ARRAYOBJECT, $this->resultSet->getReturnType());
     }
 
     public function invalidReturnTypes()
     {
         return array(
-            array(null),
             array(1),
             array(1.0),
             array(true),
-            array(false),
             array('string'),
             array(array('foo')),
             array(new stdClass),
@@ -105,27 +82,27 @@ class ResultSetTest extends TestCase
     public function testSettingInvalidReturnTypeRaisesException($type)
     {
         $this->setExpectedException('Zend\Db\ResultSet\Exception\InvalidArgumentException');
-        $this->set->setReturnType($type);
+        new ResultSet(ResultSet::TYPE_ARRAYOBJECT, $type);
     }
 
     public function testDataSourceIsNullByDefault()
     {
-        $this->assertNull($this->set->getDataSource());
+        $this->assertNull($this->resultSet->getDataSource());
     }
 
     public function testCanProvideIteratorAsDataSource()
     {
         $it = new SplStack;
-        $this->set->setDataSource($it);
-        $this->assertSame($it, $this->set->getDataSource());
+        $this->resultSet->initialize($it);
+        $this->assertSame($it, $this->resultSet->getDataSource());
     }
 
     public function testCanProvideIteratorAggregateAsDataSource()
     {
         $iteratorAggregate = $this->getMock('IteratorAggregate', array('getIterator'), array(new SplStack));
         $iteratorAggregate->expects($this->any())->method('getIterator')->will($this->returnValue($iteratorAggregate));
-        $this->set->setDataSource($iteratorAggregate);
-        $this->assertSame($iteratorAggregate->getIterator(), $this->set->getDataSource());
+        $this->resultSet->initialize($iteratorAggregate);
+        $this->assertSame($iteratorAggregate->getIterator(), $this->resultSet->getDataSource());
     }
 
     /**
@@ -138,12 +115,12 @@ class ResultSetTest extends TestCase
             return;
         }
         $this->setExpectedException('Zend\Db\ResultSet\Exception\InvalidArgumentException');
-        $this->set->setDataSource($dataSource);
+        $this->resultSet->initialize($dataSource);
     }
 
     public function testFieldCountIsZeroWithNoDataSourcePresent()
     {
-        $this->assertEquals(0, $this->set->getFieldCount());
+        $this->assertEquals(0, $this->resultSet->getFieldCount());
     }
 
     public function getArrayDataSource($count)
@@ -160,18 +137,18 @@ class ResultSetTest extends TestCase
 
     public function testFieldCountRepresentsNumberOfFieldsInARowOfData()
     {
-        $this->set->setReturnType(ResultSet::TYPE_ARRAY);
+        $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
         $dataSource = $this->getArrayDataSource(10);
-        $this->set->setDataSource($dataSource);
-        $this->assertEquals(2, $this->set->getFieldCount());
+        $resultSet->initialize($dataSource);
+        $this->assertEquals(2, $resultSet->getFieldCount());
     }
 
     public function testWhenReturnTypeIsArrayThenIterationReturnsArrays()
     {
-        $this->set->setReturnType(ResultSet::TYPE_ARRAY);
+        $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
         $dataSource = $this->getArrayDataSource(10);
-        $this->set->setDataSource($dataSource);
-        foreach ($this->set as $index => $row) {
+        $resultSet->initialize($dataSource);
+        foreach ($resultSet as $index => $row) {
             $this->assertEquals($dataSource[$index], $row);
         }
     }
@@ -179,9 +156,9 @@ class ResultSetTest extends TestCase
     public function testWhenReturnTypeIsObjectThenIterationReturnsRowObjects()
     {
         $dataSource = $this->getArrayDataSource(10);
-        $this->set->setDataSource($dataSource);
-        foreach ($this->set as $index => $row) {
-            $this->assertInstanceOf('Zend\Db\ResultSet\RowObjectInterface', $row);
+        $this->resultSet->initialize($dataSource);
+        foreach ($this->resultSet as $index => $row) {
+            $this->assertInstanceOf('ArrayObject', $row);
             $this->assertEquals($dataSource[$index], $row->getArrayCopy());
         }
     }
@@ -190,8 +167,8 @@ class ResultSetTest extends TestCase
     {
         $count      = rand(3, 75);
         $dataSource = $this->getArrayDataSource($count);
-        $this->set->setDataSource($dataSource);
-        $this->assertEquals($count, $this->set->count());
+        $this->resultSet->initialize($dataSource);
+        $this->assertEquals($count, $this->resultSet->count());
     }
 
     public function testToArrayRaisesExceptionForRowsThatAreNotArraysOrArrayCastable()
@@ -201,17 +178,17 @@ class ResultSetTest extends TestCase
         foreach ($dataSource as $index => $row) {
             $dataSource[$index] = (object) $row;
         }
-        $this->set->setDataSource($dataSource);
+        $this->resultSet->initialize($dataSource);
         $this->setExpectedException('Zend\Db\ResultSet\Exception\RuntimeException');
-        $this->set->toArray();
+        $this->resultSet->toArray();
     }
 
     public function testToArrayCreatesArrayOfArraysRepresentingRows()
     {
         $count      = rand(3, 75);
         $dataSource = $this->getArrayDataSource($count);
-        $this->set->setDataSource($dataSource);
-        $test = $this->set->toArray();
+        $this->resultSet->initialize($dataSource);
+        $test = $this->resultSet->toArray();
         $this->assertEquals($dataSource->getArrayCopy(), $test, var_export($test, 1));
     }
 }

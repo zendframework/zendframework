@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><title>Введение</title>
     
     <para>
         <classname>Zend_Cache</classname> предназначен для кэширования любых данных.
@@ -20,7 +20,7 @@
         <classname>Zend_Cache_Core</classname>: <emphasis>Output</emphasis>,
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> и <emphasis>Class</emphasis>.
     </para>
-    <example xml:id="zend.cache.introduction.example-1"><info><title>Получение фронтэнда с помощью Zend_Cache::factory()</title></info>
+    <example xml:id="zend.cache.introduction.example-1"><title>Получение фронтэнда с помощью Zend_Cache::factory()</title>
         
         <para>
             <methodname>Zend_Cache::factory()</methodname> инстанцирует нужные объекты и
@@ -45,7 +45,7 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note><info><title>Фронтэнды и бэкэнды, содержащие несколько слов в названии</title></info>
+    <note><title>Фронтэнды и бэкэнды, содержащие несколько слов в названии</title>
         
         <para>
             Некоторые фронтэнды и бэкэнды имеют имена, состоящие из нескольких
@@ -55,7 +55,7 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example xml:id="zend.cache.introduction.example-2"><info><title>Кэширование результатов запросов к базе данных</title></info>
+    <example xml:id="zend.cache.introduction.example-2"><title>Кэширование результатов запросов к базе данных</title>
         
 
         <para>
@@ -91,7 +91,7 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.cache.introduction.example-3"><info><title>Кэширование вывода с помощью фронтэнда Zend_Cache</title></info>
+    <example xml:id="zend.cache.introduction.example-3"><title>Кэширование вывода с помощью фронтэнда Zend_Cache</title>
         
         <para>
             Мы размечаем участки, выходные данные которых хотим поместить в кэш,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Änderungen an PDF Dokumenten speichern</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>Änderungen an PDF Dokumenten speichern</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         Dateisegment zurückgegeben.
     </para>
 
-    <example xml:id="zend.pdf.save.example-1"><info><title>Speichern von PDF Dokumenten</title></info>
+    <example xml:id="zend.pdf.save.example-1"><title>Speichern von PDF Dokumenten</title>
         
 
         <programlisting language="php"><![CDATA[

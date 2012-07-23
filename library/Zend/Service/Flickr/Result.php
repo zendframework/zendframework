@@ -1,32 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Flickr
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
+
+namespace Zend\Service\Flickr;
+
+use DOMElement;
+use DOMXPath;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Flickr
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Flickr_Result
+class Result
 {
     /**
      * The photo's Flickr ID.
@@ -50,7 +42,7 @@ class Zend_Service_Flickr_Result
     public $secret;
 
     /**
-     * The servername to use for URI construction.
+     * The server name to use for URI construction.
      *
      * @var string
      */
@@ -68,21 +60,21 @@ class Zend_Service_Flickr_Result
      *
      * @var string
      */
-    public $ispublic;
+    public $isPublic;
 
     /**
      * Whether the photo is visible to you because you are a friend of the owner.
      *
      * @var string
      */
-    public $isfriend;
+    public $isFriend;
 
     /**
      * Whether the photo is visible to you because you are family of the owner.
      *
      * @var string
      */
-    public $isfamily;
+    public $isFamily;
 
     /**
      * The license the photo is available under.
@@ -96,96 +88,95 @@ class Zend_Service_Flickr_Result
      *
      * @var string
      */
-    public $dateupload;
+    public $dateUpload;
 
     /**
      * The date the photo was taken.
      *
      * @var string
      */
-    public $datetaken;
+    public $dateTaken;
 
     /**
-     * The screenname of the owner.
+     * The screen name of the owner.
      *
      * @var string
      */
-    public $ownername;
+    public $ownerName;
 
     /**
      * The server used in assembling icon URLs.
      *
      * @var string
      */
-    public $iconserver;
+    public $iconServer;
 
     /**
      * A 75x75 pixel square thumbnail of the image.
      *
-     * @var Zend_Service_Flickr_Image
+     * @var Image
      */
-    public $Square;
+    public $square;
 
     /**
      * A 100 pixel thumbnail of the image.
      *
-     * @var Zend_Service_Flickr_Image
+     * @var Image
      */
-    public $Thumbnail;
+    public $thumbnail;
 
     /**
      * A 240 pixel version of the image.
      *
-     * @var Zend_Service_Flickr_Image
+     * @var Image
      */
-    public $Small;
+    public $small;
 
     /**
      * A 500 pixel version of the image.
      *
-     * @var Zend_Service_Flickr_Image
+     * @var Image
      */
-    public $Medium;
+    public $medium;
 
     /**
      * A 640 pixel version of the image.
      *
-     * @var Zend_Service_Flickr_Image
+     * @var Image
      */
-    public $Large;
+    public $large;
 
     /**
      * The original image.
      *
-     * @var Zend_Service_Flickr_Image
+     * @var Image
      */
-    public $Original;
+    public $original;
 
     /**
-     * Original Zend_Service_Flickr object.
+     * Original Flickr object.
      *
-     * @var Zend_Service_Flickr
+     * @var Flickr
      */
-    protected $_flickr;
+    protected $flickr;
 
     /**
      * Parse the Flickr Result
      *
-     * @param  DOMElement          $image
-     * @param  Zend_Service_Flickr $flickr Original Zend_Service_Flickr object with which the request was made
-     * @return void
+     * @param  DOMElement $image
+     * @param  Flickr     $flickr Original Flickr object with which the request was made
      */
-    public function __construct(DOMElement $image, Zend_Service_Flickr $flickr)
+    public function __construct(DOMElement $image, Flickr $flickr)
     {
         $xpath = new DOMXPath($image->ownerDocument);
 
         foreach ($xpath->query('./@*', $image) as $property) {
-            $this->{$property->name} = (string) $property->value;
+            $this->{$property->name} = (string)$property->value;
         }
 
-        $this->_flickr = $flickr;
+        $this->flickr = $flickr;
 
-        foreach ($this->_flickr->getImageDetails($this->id) as $k => $v) {
+        foreach ($this->flickr->getImageDetails($this->id) as $k => $v) {
             $this->$k = $v;
         }
     }

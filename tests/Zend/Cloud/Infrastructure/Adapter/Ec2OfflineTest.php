@@ -1,30 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    ZendTest_Cloud_Infrastructure_Adapter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
+
 namespace ZendTest\Cloud\Infrastructure\Adapter;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as HttpTest,
-    Zend\Cloud\Infrastructure\Adapter\Ec2,
-    Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\Factory as CloudFactory;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpTest;
+use Zend\Cloud\Infrastructure\Adapter\Ec2;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\Factory as CloudFactory;
 
 class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,10 +36,10 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
      * @var \Zend\Http\Client\Adapter\Test
      */
     protected $httpClientAdapterTest;
-    
+
     /**
      * Image ID of the instance
-     * 
+     *
      * @var string
      */
     protected static $instanceId;
@@ -59,38 +49,38 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->infrastructure = CloudFactory::getAdapter(array( 
+        $this->infrastructure = CloudFactory::getAdapter(array(
             CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2',
-            Ec2::AWS_ACCESS_KEY         => '0123456789', 
-            Ec2::AWS_SECRET_KEY         => 'test', 
-            Ec2::AWS_REGION             => 'us-east-1'     
-        )); 
+            Ec2::AWS_ACCESS_KEY         => '0123456789',
+            Ec2::AWS_SECRET_KEY         => 'test',
+            Ec2::AWS_REGION             => 'us-east-1'
+        ));
 
-        $this->httpClientAdapterTest = new HttpTest();     
+        $this->httpClientAdapterTest = new HttpTest();
 
         // load the HTTP response (from a file)
         $shortClassName = 'Ec2Test';
         $filename= dirname(__FILE__) . '/_files/' . $shortClassName . '_'. $this->getName().'.response';
 
         if (file_exists($filename)) {
-            $this->httpClientAdapterTest->setResponse(file_get_contents($filename)); 
+            $this->httpClientAdapterTest->setResponse(file_get_contents($filename));
         }
-        
+
         $adapter= $this->infrastructure->getAdapter();
-        
+
         $client = new HttpClient(null, array(
             'adapter' => $this->httpClientAdapterTest
         ));
-        
+
         call_user_func(array($adapter,'setHttpClient'),$client);
-    
+
     }
     /**
      * Get Config Array
-     * 
+     *
      * @return array
-     */ 
-    static function getConfigArray()
+     */
+    public static function getConfigArray()
     {
          return array(
             CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2',
@@ -100,7 +90,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
             Ec2::AWS_SECURITY_GROUP     => self::SERVER_GROUP
         );
     }
-    
+
     /**
      * Test all the constants of the class
      */
@@ -114,7 +104,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
     /**
      * Test construct with missing params
      */
-    public function testConstructExceptionMissingParams() 
+    public function testConstructExceptionMissingParams()
     {
         $this->setExpectedException(
             'Zend\Cloud\Infrastructure\Adapter\Exception\InvalidArgumentException',
@@ -139,7 +129,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
         $options = array (
             Instance::INSTANCE_IMAGEID => self::IMAGE_ID,
             Ec2::AWS_SECURITY_GROUP => array(self::SERVER_GROUP)
-        );       
+        );
         $instance = $this->infrastructure->createInstance(self::SERVER_NAME, $options);
         $this->assertTrue($this->infrastructure->isSuccessful());
         $this->assertEquals(self::IMAGE_ID, $instance->getImageId());
@@ -186,7 +176,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->infrastructure->isSuccessful());
         $this->assertTrue(is_array($zones));
         $this->assertEquals(4, count($zones));
-        $this->assertEquals('us-east-1a', $zones[0][Instance::INSTANCE_ZONE]); 
+        $this->assertEquals('us-east-1a', $zones[0][Instance::INSTANCE_ZONE]);
         $this->assertEquals('us-east-1b', $zones[1][Instance::INSTANCE_ZONE]);
         $this->assertEquals('us-east-1c', $zones[2][Instance::INSTANCE_ZONE]);
         $this->assertEquals('us-east-1d', $zones[3][Instance::INSTANCE_ZONE]);
@@ -198,7 +188,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $dns = $this->infrastructure->publicDnsInstance(self::SERVER_ID);
         $this->assertTrue($this->infrastructure->isSuccessful());
-        $this->assertEquals(self::SERVER_IP, $dns); 
+        $this->assertEquals(self::SERVER_IP, $dns);
     }
     /**
      * Test monitor instance
@@ -232,7 +222,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testStartInstance()
     {
-        $this->markTestSkipped('Test start instance skipped');   
+        $this->markTestSkipped('Test start instance skipped');
     }
 
     /**

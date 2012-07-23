@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-opening"><info><title>Ouverture et création d'index</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-opening"><title>Ouverture et création d'index</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         être obtenu avec l'une des méthodes suivantes.
     </para>
 
-    <example xml:id="learning.lucene.index-opening.creation"><info><title>Création d'index Lucene</title></info>
+    <example xml:id="learning.lucene.index-opening.creation"><title>Création d'index Lucene</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -16,7 +16,7 @@ $index = Zend_Search_Lucene::create($indexPath);
 ]]></programlisting>
     </example>
 
-    <example xml:id="learning.lucene.index-opening.opening"><info><title>Ouverture d'index Lucene</title></info>
+    <example xml:id="learning.lucene.index-opening.opening"><title>Ouverture d'index Lucene</title>
         
 
         <programlisting language="php"><![CDATA[

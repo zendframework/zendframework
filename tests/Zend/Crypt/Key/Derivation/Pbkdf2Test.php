@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Crypt
  */
 
 namespace ZendTest\Crypt\Key\Derivation;
@@ -27,8 +16,6 @@ use Zend\Crypt\Key\Derivation\Pbkdf2;
  * @category   Zend
  * @package    Zend_Crypt
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Pbkdf2Test extends \PHPUnit_Framework_TestCase
 {
@@ -57,8 +44,8 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
 
     /**
      * Test vectors from RFC 6070
-     * 
-     * @see http://tools.ietf.org/html/draft-josefsson-pbkdf2-test-vectors-06 
+     *
+     * @see http://tools.ietf.org/html/draft-josefsson-pbkdf2-test-vectors-06
      */
     public static function provideTestVectors()
     {
@@ -66,13 +53,13 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
             array('sha1', 'password', 'salt', 1, 20, '0c60c80f961f0e71f3a9b524af6012062fe037a6'),
             array('sha1', 'password', 'salt', 2, 20, 'ea6c014dc72d6f8ccd1ed92ace1d41f0d8de8957'),
             array('sha1', 'password', 'salt', 4096, 20, '4b007901b765489abead49d926f721d065a429c1'),
-	    array('sha1', 'passwordPASSWORDpassword', 'saltSALTsaltSALTsaltSALTsaltSALTsalt', 4096, 25, '3d2eec4fe41c849b80c8d83662c0e44a8b291a964cf2f07038'),
+        array('sha1', 'passwordPASSWORDpassword', 'saltSALTsaltSALTsaltSALTsaltSALTsalt', 4096, 25, '3d2eec4fe41c849b80c8d83662c0e44a8b291a964cf2f07038'),
             array('sha1', "pass\0word", "sa\0lt", 4096, 16, '56fa6aa75548099dcc37d7f03425e0c3')
         );
     }
 
     /**
-     * @dataProvider provideTestVectors 
+     * @dataProvider provideTestVectors
      */
     public function testRFC670($hash, $password, $salt, $cycles, $length, $expect)
     {

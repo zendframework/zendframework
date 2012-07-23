@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure;
@@ -110,8 +110,7 @@ class SessionHandler
                 $id
             );
             return base64_decode($sessionRecord->serializedData);
-        }
-        catch (\Exception $ex) {
+        } catch (\Exception $ex) {
             return '';
         }
     }
@@ -132,8 +131,7 @@ class SessionHandler
 
         try {
             $this->_tableStorage->updateEntity($this->_sessionTable, $sessionRecord);
-        }
-        catch (Exception\RuntimeException $unknownRecord) {
+        } catch (Exception\RuntimeException $unknownRecord) {
             $this->_tableStorage->insertEntity($this->_sessionTable, $sessionRecord);
         }
     }
@@ -155,8 +153,7 @@ class SessionHandler
             $this->_tableStorage->deleteEntity($this->_sessionTable, $sessionRecord);
 
             return true;
-        }
-        catch (Exception\ExceptionInterface $ex) {
+        } catch (Exception\ExceptionInterface $ex) {
             return false;
         }
     }
@@ -181,8 +178,7 @@ class SessionHandler
                 $this->_tableStorage->deleteEntity($this->_sessionTable, $sessionRecord);
             }
             return true;
-        }
-        catch (Exception\ExceptionInterface $ex) {
+        } catch (Exception\ExceptionInterface $ex) {
             return false;
         }
     }

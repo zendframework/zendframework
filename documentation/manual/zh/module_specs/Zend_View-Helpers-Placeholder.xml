@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title> 占位符助手（Placeholder Helper） </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><title> 占位符助手（Placeholder Helper） </title>
     
 
     <para>
         <code>Placeholder</code> 视图助手用来在视图脚本和视图实例之间持久化内容。它也提供一些有用的功能如：聚合内容、抓取视图脚本内容以后来用和添加前置（pre-）和后置（post-）文本到内容 （还可以为聚合内容定制分隔符等）。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title> 占位符的基本用法 </title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><title> 占位符的基本用法 </title>
         
 
         <para>
@@ -23,7 +23,7 @@
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title> 用占位符来聚合内容 </title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><title> 用占位符来聚合内容 </title>
         
 
         <para>
@@ -87,7 +87,7 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title> 使用占位符（Placeholders）来抓取内容 </title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><title> 使用占位符（Placeholders）来抓取内容 </title>
         
 
         <para>
@@ -147,7 +147,7 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title> 具体占位符实现 </title></info>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><title> 具体占位符实现 </title>
         
 
         <para>

@@ -1,0 +1,18 @@
+{
+    "name": "zendframework/zend-service-strikeiron",
+    "description": "provides a PHP 5 client to StrikeIron web services",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "strikeiron"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\StrikeIron": ""
+        }
+    },
+    "target-dir": "Zend/Service/StrikeIron",
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

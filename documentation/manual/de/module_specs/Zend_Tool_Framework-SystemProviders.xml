@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.system-providers"><info><title>Mitgelieferte System Provider</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.system-providers"><title>Mitgelieferte System Provider</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         erstellt.
     </para>
 
-    <section xml:id="zend.tool.framework.system-providers.version"><info><title>Der Version Provider</title></info>
+    <section xml:id="zend.tool.framework.system-providers.version"><title>Der Version Provider</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.system-providers.manifest"><info><title>Der Manifest Provider</title></info>
+    <section xml:id="zend.tool.framework.system-providers.manifest"><title>Der Manifest Provider</title>
         
 
         <para>

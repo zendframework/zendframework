@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    Zend\Uri;
+use DomElement;
+use Zend\Uri;
 
 /**
  * Represents a single Technorati Search query result object.
@@ -32,10 +21,8 @@ use DomElement,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SearchResult extends Result
+class SearchResult extends AbstractResult
 {
     /**
      * Technorati weblog object corresponding to queried keyword.
@@ -64,7 +51,7 @@ class SearchResult extends Result
     /**
      * The datetime the entry was created.
      *
-     * @var     ZendDate
+     * @var     \DateTime
      * @access  protected
      */
     protected $created;
@@ -132,7 +119,7 @@ class SearchResult extends Result
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  ZendDate
+     * @return  \DateTime
      */
     public function getCreated()
     {

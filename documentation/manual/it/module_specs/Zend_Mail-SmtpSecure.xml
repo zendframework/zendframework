@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Messa in sicurezza del trasporto SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>Messa in sicurezza del trasporto SMTP</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         Opzionalmente è possibile fornire una porta, in alternativa verranno usati i valori predefiniti 25 per TSL e 465 per SSL.
     </para>
 
-    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Abilitazione di una connessione sicura in Zend_Mail_Transport_Smtp</title></info>
+    <example xml:id="zend.mail.smtp-secure.example-1"><title>Abilitazione di una connessione sicura in Zend_Mail_Transport_Smtp</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail.php';

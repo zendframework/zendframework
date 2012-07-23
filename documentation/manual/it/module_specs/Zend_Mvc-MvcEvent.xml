@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.mvc-event">
-  <info><title>MvcEvent</title></info>
+  <title>MvcEvent</title>
 
   <para>
     Il layer MVC di ZF2 incorpora ed utilizza un tipo

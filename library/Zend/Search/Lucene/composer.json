@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-search-lucene",
+    "description": "a general purpose text search engine written entirely in PHP 5",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "lucene"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Search\\Lucene": ""
+        }
+    },
+    "target-dir": "Zend/Search/Lucene",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
+    }
+}

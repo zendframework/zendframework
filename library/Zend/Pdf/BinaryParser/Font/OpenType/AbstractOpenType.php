@@ -1,28 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Fonts
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\BinaryParser\Font\OpenType;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
 use Zend\Pdf\Cmap;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract base class for OpenType font file parsers.
@@ -46,8 +36,6 @@ use Zend\Pdf\Cmap;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
 {
@@ -572,7 +560,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
              * outlines from fonts yet, so this means no embed.
              */
             $this->isEmbeddable = false;
-        } else if ($this->isBitSet(1, $embeddingFlags)) {
+        } elseif ($this->isBitSet(1, $embeddingFlags)) {
             /* Restricted license embedding. We currently don't have any way to
              * enforce this, so interpret this as no embed. This may be revised
              * in the future...
@@ -1055,7 +1043,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
                     return null;
             }
 
-        } else if ($platformID == 1) {    // Macintosh encoding.
+        } elseif ($platformID == 1) {    // Macintosh encoding.
             switch ($languageID) {
                 case 0:
                     return 'en';

@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_GApps
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps;
 
 /**
  * @category   Zend
  * @package    Zend_GData_GApps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_GApps
  */
@@ -36,7 +24,8 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
     protected $fixture;
     protected $data;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->xmlSample = file_get_contents(
                 'Zend/GData/GApps/_files/AppsForYourDomainElementSample1.xml',
                 true);
@@ -53,7 +42,8 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
         throw $this->fixture;
     }
 
-    public function testCanSetAndGetErrorArray() {
+    public function testCanSetAndGetErrorArray()
+    {
         $this->fixture->setErrors($this->data);
         $incoming = $this->fixture->getErrors();
         $this->assertTrue(is_array($incoming));
@@ -63,7 +53,8 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCanInsertSingleError() {
+    public function testCanInsertSingleError()
+    {
         $this->fixture->setErrors($this->data);
         $outgoing = new GApps\Error(1111, "a", "b");
         $this->fixture->addError($outgoing);
@@ -71,7 +62,8 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($outgoing, $result);
     }
 
-    public function testCanSetPropertiesViaConstructor() {
+    public function testCanSetPropertiesViaConstructor()
+    {
         $this->fixture = new GApps\ServiceException($this->data);
         $incoming = $this->fixture->getErrors();
         $this->assertTrue(is_array($incoming));
@@ -81,25 +73,29 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCanRetrieveASpecificErrorByCode() {
+    public function testCanRetrieveASpecificErrorByCode()
+    {
         $this->fixture->setErrors($this->data);
         $result = $this->fixture->getError(5978);
         $this->assertEquals($this->data[3], $result);
     }
 
-    public function testRetrievingNonexistantErrorCodeReturnsNull() {
+    public function testRetrievingNonexistantErrorCodeReturnsNull()
+    {
         $this->fixture->setErrors($this->data);
         $result = $this->fixture->getError(0000);
         $this->assertEquals(null, $result);
     }
 
-    public function testCanCheckIfAKeyExists() {
+    public function testCanCheckIfAKeyExists()
+    {
         $this->fixture->setErrors($this->data);
         $this->assertTrue($this->fixture->hasError(2398));
         $this->assertFalse($this->fixture->hasError(0000));
     }
 
-    public function testCanConvertFromXML() {
+    public function testCanConvertFromXML()
+    {
         $this->fixture->importFromString($this->xmlSample);
         $incoming = $this->fixture->getErrors();
         $this->assertTrue(is_array($incoming));
@@ -109,7 +105,8 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Bar", $incoming[9925]->reason);
     }
 
-    public function testCanConvertToString() {
+    public function testCanConvertToString()
+    {
         $this->fixture->setErrors($this->data);
         $this->assertEquals("The server encountered the following errors processing the request:
 Error 1234: foo

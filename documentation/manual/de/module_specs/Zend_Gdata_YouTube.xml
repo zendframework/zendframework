@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.youtube"><info><title>Verwenden der YouTube Daten API</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.youtube"><title>Verwenden der YouTube Daten API</title>
     
 
     <para>
@@ -15,7 +15,7 @@
             Entwickler Dokumentation</link> auf code.google.com.
     </para>
 
-    <section xml:id="zend.gdata.youtube.authentication"><info><title>Authentifizierung</title></info>
+    <section xml:id="zend.gdata.youtube.authentication"><title>Authentifizierung</title>
         
 
         <para>
@@ -28,7 +28,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.youtube.developer_key"><info><title>Entwickler Schlüssel und Client ID</title></info>
+    <section xml:id="zend.gdata.youtube.developer_key"><title>Entwickler Schlüssel und Client ID</title>
         
 
         <para>
@@ -40,9 +40,9 @@
             Service Pbjekt übergeben werden.
         </para>
 
-        <example xml:id="zend.gdata.youtube.developer_key.example"><info><title>
+        <example xml:id="zend.gdata.youtube.developer_key.example"><title>
                 Einen Entwicklerschlüssel und eine ClientID an Zend_Gdata_YouTube übergeben
-            </title></info>
+            </title>
 
             
 
@@ -55,7 +55,7 @@ $yt = new Zend_Gdata_YouTube($httpClient,
         </example>
     </section>
 
-    <section xml:id="zend.gdata.youtube.videos"><info><title>Öffentliche Video Feeds empfangen</title></info>
+    <section xml:id="zend.gdata.youtube.videos"><title>Öffentliche Video Feeds empfangen</title>
         
 
         <para>
@@ -68,7 +68,7 @@ $yt = new Zend_Gdata_YouTube($httpClient,
             vorhandenen Feeds.
         </para>
 
-        <section xml:id="zend.gdata.youtube.videos.searching"><info><title>Suchen nach Videos durch Metadaten</title></info>
+        <section xml:id="zend.gdata.youtube.videos.searching"><title>Suchen nach Videos durch Metadaten</title>
             
 
             <para>
@@ -79,7 +79,7 @@ $yt = new Zend_Gdata_YouTube($httpClient,
                 Ansichten.
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.searching.example"><info><title>Suchen nach Videos</title></info>
+            <example xml:id="zend.gdata.youtube.videos.searching.example"><title>Suchen nach Videos</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -112,7 +112,7 @@ foreach ($videoFeed as $videoEntry) {
             </para>
         </section>
 
-        <section xml:id="zend.gdata.youtube.videos.searchingcategories"><info><title>Suchen nach Videos durch Kategorien und Tags/Schlüsselwörter</title></info>
+        <section xml:id="zend.gdata.youtube.videos.searchingcategories"><title>Suchen nach Videos durch Kategorien und Tags/Schlüsselwörter</title>
             
 
             <para>
@@ -122,7 +122,7 @@ foreach ($videoFeed as $videoEntry) {
                 nach Komödien-Videos zu suchen die das Schlüsselwort Hund enthalten:
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.searchingcategories.example"><info><title>Suchen nach Videos in speziellen Kategorien</title></info>
+            <example xml:id="zend.gdata.youtube.videos.searchingcategories.example"><title>Suchen nach Videos in speziellen Kategorien</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -136,7 +136,7 @@ $videoFeed = $yt->getVideoFeed($query);
             </example>
         </section>
 
-        <section xml:id="zend.gdata.youtube.videos.standard"><info><title>Standard Feeds empfangen</title></info>
+        <section xml:id="zend.gdata.youtube.videos.standard"><title>Standard Feeds empfangen</title>
             
 
             <para>
@@ -154,7 +154,7 @@ $videoFeed = $yt->getVideoFeed($query);
                 werden:
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.standard.example-1"><info><title>Empfangen eines Standard Videofeeds</title></info>
+            <example xml:id="zend.gdata.youtube.videos.standard.example-1"><title>Empfangen eines Standard Videofeeds</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -172,7 +172,7 @@ $videoFeed = $yt->getTopRatedVideoFeed();
                 Um zum Beispiel die Top gereihten Videos von Heute zu erhalten:
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.standard.example-2"><info><title>Verwenden von Zend_Gdata_YouTube_VideoQuery um Videos zu empfangen</title></info>
+            <example xml:id="zend.gdata.youtube.videos.standard.example-2"><title>Verwenden von Zend_Gdata_YouTube_VideoQuery um Videos zu empfangen</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -188,7 +188,7 @@ $videoFeed = $yt->getTopRatedVideoFeed($query);
                 wird:
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.standard.example-3"><info><title>Empfangen eines Video Feeds durch die URL</title></info>
+            <example xml:id="zend.gdata.youtube.videos.standard.example-3"><title>Empfangen eines Video Feeds durch die URL</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -199,7 +199,7 @@ $videoFeed = $yt->getVideoFeed($url);
             </example>
         </section>
 
-        <section xml:id="zend.gdata.youtube.videos.user"><info><title>Videos erhalten die von einem Benutzer hochgeladen wurden</title></info>
+        <section xml:id="zend.gdata.youtube.videos.user"><title>Videos erhalten die von einem Benutzer hochgeladen wurden</title>
             
 
             <para>
@@ -208,9 +208,9 @@ $videoFeed = $yt->getVideoFeed($url);
                 empfängt Videos die vom Benutzer 'liz' hochgeladen wurden.
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.user.example"><info><title>
+            <example xml:id="zend.gdata.youtube.videos.user.example"><title>
                     Empfangen von Videos die von einem spezifischen Benutzer hochgeladen wurden
-                </title></info>
+                </title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -220,7 +220,7 @@ $videoFeed = $yt->getUserUploads('liz');
             </example>
         </section>
 
-        <section xml:id="zend.gdata.youtube.videos.favorites"><info><title>Videos empfangen die von einem Benutzer bevorzugt werden</title></info>
+        <section xml:id="zend.gdata.youtube.videos.favorites"><title>Videos empfangen die von einem Benutzer bevorzugt werden</title>
             
 
             <para>
@@ -229,7 +229,7 @@ $videoFeed = $yt->getUserUploads('liz');
                 Benutzer 'liz' bevorzugt werden.
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.favorites.example"><info><title>Empfangen von den bevorzugten Videos eines Benutzers</title></info>
+            <example xml:id="zend.gdata.youtube.videos.favorites.example"><title>Empfangen von den bevorzugten Videos eines Benutzers</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -239,7 +239,7 @@ $videoFeed = $yt->getUserFavorites('liz');
             </example>
         </section>
 
-        <section xml:id="zend.gdata.youtube.videos.responses"><info><title>Videobewertungen für ein Video erhalten</title></info>
+        <section xml:id="zend.gdata.youtube.videos.responses"><title>Videobewertungen für ein Video erhalten</title>
             
 
             <para>
@@ -248,7 +248,7 @@ $videoFeed = $yt->getUserFavorites('liz');
                 Video mit der ID 'abc123813abc'.
             </para>
 
-            <example xml:id="zend.gdata.youtube.videos.responses.example"><info><title>Empfangen eines Feeds von Video Antworten</title></info>
+            <example xml:id="zend.gdata.youtube.videos.responses.example"><title>Empfangen eines Feeds von Video Antworten</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -259,7 +259,7 @@ $videoFeed = $yt->getVideoResponseFeed('abc123813abc');
         </section>
     </section>
 
-    <section xml:id="zend.gdata.youtube.comments"><info><title>Videokommentare erhalten</title></info>
+    <section xml:id="zend.gdata.youtube.comments"><title>Videokommentare erhalten</title>
         
 
         <para>
@@ -268,7 +268,7 @@ $videoFeed = $yt->getVideoResponseFeed('abc123813abc');
             folgende Code verwendet werden:
         </para>
 
-        <example xml:id="zend.gdata.youtube.videos.comments.example-1"><info><title>Empfangen eines Feeds von Videokommentaren von einer Video ID</title></info>
+        <example xml:id="zend.gdata.youtube.videos.comments.example-1"><title>Empfangen eines Feeds von Videokommentaren von einer Video ID</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -287,9 +287,9 @@ foreach ($commentFeed as $commentEntry) {
             Objektes hat:
         </para>
 
-        <example xml:id="zend.gdata.youtube.videos.comments.example-2"><info><title>
+        <example xml:id="zend.gdata.youtube.videos.comments.example-2"><title>
                 Empfangen eines Feeds von Videokommentaren von einem Zend_Gdata_YouTube_VideoEntry
-            </title></info>
+            </title>
             
 
             <programlisting language="php"><![CDATA[
@@ -302,7 +302,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
         </example>
     </section>
 
-    <section xml:id="zend.gdata.youtube.playlists"><info><title>PlayList Feeds erhalten</title></info>
+    <section xml:id="zend.gdata.youtube.playlists"><title>PlayList Feeds erhalten</title>
         
 
         <para>
@@ -310,7 +310,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
             Profile, PlayListen, Einschreibungen, und weitere.
         </para>
 
-        <section xml:id="zend.gdata.youtube.playlists.user"><info><title>Die PlayListen eines Benutzer erhalten</title></info>
+        <section xml:id="zend.gdata.youtube.playlists.user"><title>Die PlayListen eines Benutzer erhalten</title>
             
 
             <para>
@@ -319,7 +319,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
                 erhalten kann der folgende Code verwendet werden:
             </para>
 
-            <example xml:id="zend.gdata.youtube.playlists.user.example"><info><title>Empfangen von Playlisten eines Benutzers</title></info>
+            <example xml:id="zend.gdata.youtube.playlists.user.example"><title>Empfangen von Playlisten eines Benutzers</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -335,7 +335,7 @@ foreach ($playlistListFeed as $playlistEntry) {
             </example>
         </section>
 
-        <section xml:id="zend.gdata.youtube.playlists.special"><info><title>Eine spezielle PlayListe erhalten</title></info>
+        <section xml:id="zend.gdata.youtube.playlists.special"><title>Eine spezielle PlayListe erhalten</title>
             
 
             <para>
@@ -344,7 +344,7 @@ foreach ($playlistListFeed as $playlistEntry) {
                 Eintrag zu erhalten kann der folgende Code verwendet werden:
             </para>
 
-            <example xml:id="zend.gdata.youtube.playlists.special.example"><info><title>Empfangen von speziellen Playlisten</title></info>
+            <example xml:id="zend.gdata.youtube.playlists.special.example"><title>Empfangen von speziellen Playlisten</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -355,7 +355,7 @@ $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
         </section>
     </section>
 
-    <section xml:id="zend.gdata.youtube.subscriptions"><info><title>Eine Liste von Einschreibungen eines Benutzers erhalten</title></info>
+    <section xml:id="zend.gdata.youtube.subscriptions"><title>Eine Liste von Einschreibungen eines Benutzers erhalten</title>
         
 
         <para>
@@ -369,7 +369,7 @@ $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
             verwendet werden:
         </para>
 
-        <example xml:id="zend.gdata.youtube.subscriptions.example"><info><title>Empfangen aller Einschreibungen eines Benutzers</title></info>
+        <example xml:id="zend.gdata.youtube.subscriptions.example"><title>Empfangen aller Einschreibungen eines Benutzers</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -383,7 +383,7 @@ foreach ($subscriptionFeed as $subscriptionEntry) {
         </example>
     </section>
 
-    <section xml:id="zend.gdata.youtube.profile"><info><title>Ein Benutzerprofil erhalten</title></info>
+    <section xml:id="zend.gdata.youtube.profile"><title>Ein Benutzerprofil erhalten</title>
         
 
         <para>
@@ -391,7 +391,7 @@ foreach ($subscriptionFeed as $subscriptionEntry) {
             das Profil für den Benutzer 'liz' zu erhalten kann der folgende Code verwendet werden:
         </para>
 
-        <example xml:id="zend.gdata.youtube.profile.example"><info><title>Empfangen des Profils eines Benutzers</title></info>
+        <example xml:id="zend.gdata.youtube.profile.example"><title>Empfangen des Profils eines Benutzers</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -404,7 +404,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
         </example>
     </section>
 
-    <section xml:id="zend.gdata.youtube.uploads"><info><title>Videos auf YouTube hochladen</title></info>
+    <section xml:id="zend.gdata.youtube.uploads"><title>Videos auf YouTube hochladen</title>
         
 
         <para>
@@ -422,7 +422,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
             folgenden Eigenschaften:
         </para>
 
-        <table xml:id="zend.gdata.youtube.uploads.metadata"><info><title>Metadaten die im folgenden Code-Beispiel verwendet werden</title></info>
+        <table xml:id="zend.gdata.youtube.uploads.metadata"><title>Metadaten die im folgenden Code-Beispiel verwendet werden</title>
             
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
@@ -495,7 +495,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
             um auf den aktuell authentifizierten Benutzer zu verweisen.
         </para>
 
-        <example xml:id="zend.gdata.youtube.uploads.example"><info><title>Ein Video hochladen</title></info>
+        <example xml:id="zend.gdata.youtube.uploads.example"><title>Ein Video hochladen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -555,7 +555,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.gdata.youtube.uploads.browser"><info><title>Browser-basierender Upload</title></info>
+    <section xml:id="zend.gdata.youtube.uploads.browser"><title>Browser-basierender Upload</title>
         
 
         <para>
@@ -567,7 +567,7 @@ try {
             <acronym>HTML</acronym> Upload Formular zu erstellen.
         </para>
 
-        <example xml:id="zend.gdata.youtube.uploads.browser.example-1"><info><title>Browser-basierender Upload</title></info>
+        <example xml:id="zend.gdata.youtube.uploads.browser.example-1"><title>Browser-basierender Upload</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -600,7 +600,7 @@ $postUrl = $tokenArray['url'];
             ein Status und eine ID Variable in der <acronym>URL</acronym> zurückgegeben werden.
         </para>
 
-        <example xml:id="zend.gdata.youtube.uploads.browser.example-2"><info><title>Browser-basierender Upload: Erstellen des HTML Formulars</title></info>
+        <example xml:id="zend.gdata.youtube.uploads.browser.example-2"><title>Browser-basierender Upload: Erstellen des HTML Formulars</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -617,7 +617,7 @@ $form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
         </example>
     </section>
 
-    <section xml:id="zend.gdata.youtube.uploads.status"><info><title>Den Upload Status prüfen</title></info>
+    <section xml:id="zend.gdata.youtube.uploads.status"><title>Den Upload Status prüfen</title>
         
 
         <para>
@@ -629,7 +629,7 @@ $form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
              um zu sehen ob er jetzt noch nicht live ist oder ob er nicht akzeptiert wurde.
         </para>
 
-        <example xml:id="zend.gdata.youtube.uploads.status.example"><info><title>Den Status von Video Uploads checken</title></info>
+        <example xml:id="zend.gdata.youtube.uploads.status.example"><title>Den Status von Video Uploads checken</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -659,7 +659,7 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
         </example>
     </section>
 
-    <section xml:id="zend.gdata.youtube.other"><info><title>Andere Funktionen</title></info>
+    <section xml:id="zend.gdata.youtube.other"><title>Andere Funktionen</title>
         
 
         <para>

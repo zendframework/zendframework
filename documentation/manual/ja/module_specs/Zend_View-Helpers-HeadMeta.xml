@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><title>HeadMeta ヘルパー</title>
     
 
     <para>
@@ -103,7 +103,7 @@
         ヘルパー</link> の具象実装です。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>HeadMeta ヘルパーの基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><title>HeadMeta ヘルパーの基本的な使用法</title>
         
 
         <para>

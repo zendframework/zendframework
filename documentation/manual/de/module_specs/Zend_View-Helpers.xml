@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>View Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><title>View Helfer</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         <methodname>fooBar()</methodname>.
     </para>
 
-    <note><info><title>Betrachte den Fall</title></info>
+    <note><title>Betrachte den Fall</title>
         
 
         <para>
@@ -30,7 +30,7 @@
         </para>
     </note>
 
-    <note><info><title>Standard Helfer Pfad</title></info>
+    <note><title>Standard Helfer Pfad</title>
         
 
         <para>
@@ -51,7 +51,7 @@
         wird bei allen weiteren Aufrufen von <command>$this-&gt;helperName()</command> wiederverwendet.
     </para>
 
-    <section xml:id="zend.view.helpers.initial"><info><title>Vorhandene Helfer</title></info>
+    <section xml:id="zend.view.helpers.initial"><title>Vorhandene Helfer</title>
         
 
         <para>
@@ -406,7 +406,7 @@ echo $this->formCheckbox('foo',
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>Helfer Pfade</title></info>
+    <section xml:id="zend.view.helpers.paths"><title>Helfer Pfade</title>
         
 
         <para>
@@ -453,7 +453,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>Eigene Helfer schreiben</title></info>
+    <section xml:id="zend.view.helpers.custom"><title>Eigene Helfer schreiben</title>
         
 
         <para>
@@ -598,7 +598,7 @@ class My_View_Helper_ScriptPath
         </para>
     </section>
 
-    <section xml:id="zend.view.helpers.registering-concrete"><info><title>Konkrete Helper registrieren</title></info>
+    <section xml:id="zend.view.helpers.registering-concrete"><title>Konkrete Helper registrieren</title>
         
 
         <para>
@@ -620,7 +620,7 @@ $view->registerHelper($helper, 'foo');
             Objekt diese aufrufen und sich selbst bei der Registrierung in den Helfer injizieren.
         </para>
 
-        <note><info><title>Helfer-Namen sollten einer Methode entsprechen</title></info>
+        <note><title>Helfer-Namen sollten einer Methode entsprechen</title>
             
 
             <para>

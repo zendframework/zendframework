@@ -1,42 +1,29 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Serializer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Serializer
  */
 
 namespace Zend\Serializer;
 
-use Zend\Loader\Broker,
-    Zend\Serializer\Adapter\AdapterInterface as Adapter;
+use Zend\Serializer\Adapter\AdapterInterface as Adapter;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Serializer
 {
     /**
-     * Broker for loading adapters
+     * Plugin manager for loading adapters
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|AdapterPluginManager
      */
-    private static $_adapterBroker = null;
+    private static $_adapters = null;
 
     /**
      * The default adapter.
@@ -52,59 +39,59 @@ class Serializer
      * @param array |\Traversable $opts Serializer options
      * @return Adapter
      */
-    public static function factory($adapterName, $opts = array()) 
+    public static function factory($adapterName, $opts = array())
     {
         if ($adapterName instanceof Adapter) {
             return $adapterName; // $adapterName is already an adapter object
         }
 
-        return self::getAdapterBroker()->load($adapterName, $opts);
+        return self::getAdapterPluginManager()->get($adapterName, $opts);
     }
 
     /**
-     * Get the adapter broker
+     * Get the adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    public static function getAdapterBroker() 
+    public static function getAdapterPluginManager()
     {
-        if (self::$_adapterBroker === null) {
-            self::$_adapterBroker = self::_getDefaultAdapterBroker();
+        if (self::$_adapters === null) {
+            self::$_adapters = self::_getDefaultAdapterPluginManager();
         }
-        return self::$_adapterBroker;
+        return self::$_adapters;
     }
 
     /**
-     * Change the adapter broker
+     * Change the adapter plugin manager
      *
-     * @param  Broker $broker
+     * @param  AdapterPluginManager $adapters
      * @return void
      */
-    public static function setAdapterBroker(Broker $broker) 
+    public static function setAdapterPluginManager(AdapterPluginManager $adapters)
     {
-        self::$_adapterBroker = $broker;
+        self::$_adapters = $adapters;
     }
-    
+
     /**
-     * Resets the internal adapter broker
+     * Resets the internal adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    public static function resetAdapterBroker()
+    public static function resetAdapterPluginManager()
     {
-        self::$_adapterBroker = self::_getDefaultAdapterBroker();
-        return self::$_adapterBroker;
+        self::$_adapters = self::_getDefaultAdapterPluginManager();
+        return self::$_adapters;
     }
-    
+
     /**
-     * Returns a default adapter broker
+     * Returns a default adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    protected static function _getDefaultAdapterBroker()
+    protected static function _getDefaultAdapterPluginManager()
     {
-        $broker = new AdapterBroker();
-        return $broker;
+        $adapters = new AdapterPluginManager();
+        return $adapters;
     }
 
     /**
@@ -113,7 +100,7 @@ class Serializer
      * @param string|Adapter $adapter
      * @param array|\Traversable $options
      */
-    public static function setDefaultAdapter($adapter, $options = array()) 
+    public static function setDefaultAdapter($adapter, $options = array())
     {
         self::$_defaultAdapter = self::factory($adapter, $options);
     }
@@ -123,7 +110,7 @@ class Serializer
      *
      * @return Adapter
      */
-    public static function getDefaultAdapter() 
+    public static function getDefaultAdapter()
     {
         if (!self::$_defaultAdapter instanceof Adapter) {
             self::setDefaultAdapter(self::$_defaultAdapter);
@@ -138,7 +125,7 @@ class Serializer
      * @param array $options
      * @return string
      */
-    public static function serialize($value, array $options = array()) 
+    public static function serialize($value, array $options = array())
     {
         if (isset($options['adapter'])) {
             $adapter = self::factory($options['adapter']);
@@ -157,7 +144,7 @@ class Serializer
      * @param array $options
      * @return mixed
      */
-    public static function unserialize($serialized, array $options = array()) 
+    public static function unserialize($serialized, array $options = array())
     {
         if (isset($options['adapter'])) {
             $adapter = self::factory($options['adapter']);

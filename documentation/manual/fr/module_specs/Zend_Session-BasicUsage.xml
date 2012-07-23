@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>Usage basique</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><title>Usage basique</title>
     
 
     <para>
@@ -30,7 +30,7 @@ $monNamespace = new Zend_Session_Namespace('monNamespace');
         <classname>Zend_Session_Namespace</classname>.
     </para>
 
-    <section xml:id="zend.session.basic_usage.basic_examples"><info><title>Tutoriel d'exemples</title></info>
+    <section xml:id="zend.session.basic_usage.basic_examples"><title>Tutoriel d'exemples</title>
         
 
         <para>
@@ -45,7 +45,7 @@ $monNamespace = new Zend_Session_Namespace('monNamespace');
             suivant à votre fichier d'amorçage ZF :
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>Compter le nombre de pages vues</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><title>Compter le nombre de pages vues</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -82,7 +82,7 @@ echo "Page demandée lors de cette session : ",
             par "<code>Zend</code>".
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>Nouvelle méthode : les espaces de noms évitent les collisions</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><title>Nouvelle méthode : les espaces de noms évitent les collisions</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -102,7 +102,7 @@ $webServiceNamespace->user = "monwebusername";
             espace de noms respectif.
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>Ancienne méthode : accès aux sessions PHP</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><title>Ancienne méthode : accès aux sessions PHP</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -112,7 +112,7 @@ $_SESSION['Un_Service_Web']['user'] = "monwebusername";
         </example>
     </section>
 
-    <section xml:id="zend.session.basic_usage.iteration"><info><title>Énumérer les espaces de noms de session</title></info>
+    <section xml:id="zend.session.basic_usage.iteration"><title>Énumérer les espaces de noms de session</title>
         
 
         <para>
@@ -121,7 +121,7 @@ $_SESSION['Un_Service_Web']['user'] = "monwebusername";
             <code>foreach</code> :
         </para>
 
-        <example xml:id="zend.session.basic_usage.iteration.example"><info><title>Énumération des sessions</title></info>
+        <example xml:id="zend.session.basic_usage.iteration.example"><title>Énumération des sessions</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -135,7 +135,7 @@ foreach ($unNamespace as $index => $valeur) {
         </example>
     </section>
 
-    <section xml:id="zend.session.basic_usage.accessors"><info><title>Accesseurs pour les espaces de noms de session</title></info>
+    <section xml:id="zend.session.basic_usage.accessors"><title>Accesseurs pour les espaces de noms de session</title>
         
 
         <para>
@@ -146,7 +146,7 @@ foreach ($unNamespace as $index => $valeur) {
             méthodes magiques, comme :
         </para>
 
-        <example xml:id="zend.session.basic_usage.accessors.example"><info><title>Accéder aux données de session</title></info>
+        <example xml:id="zend.session.basic_usage.accessors.example"><title>Accéder aux données de session</title>
             
 
             <programlisting language="php"><![CDATA[

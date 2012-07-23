@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript 助手</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><title>HeadScript 助手</title>
     
 
     <para>
@@ -49,7 +49,7 @@
         The <code>HeadScript</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体实现。
     </para>
 
-    <note><info><title>在HTML Body中使用 InlineScript </title></info>
+    <note><title>在HTML Body中使用 InlineScript </title>
         
 
         <para>
@@ -57,7 +57,7 @@
         </para>
     </note>
 
-    <note><info><title> 任意的属性缺省关闭 （Disabled）</title></info>
+    <note><title> 任意的属性缺省关闭 （Disabled）</title>
         
 
         <para>
@@ -69,7 +69,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ?>]]></programlisting>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>HeadScript 助手基本用法 </title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><title>HeadScript 助手基本用法 </title>
         
 
         <para>
@@ -110,7 +110,7 @@ $this->headScript()->prependScript('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Capturing Scripts Using the HeadScript Helper</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><title>Capturing Scripts Using the HeadScript Helper</title>
         
 
         <para>

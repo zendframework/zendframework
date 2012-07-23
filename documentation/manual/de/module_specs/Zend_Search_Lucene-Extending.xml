@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Erweiterbarkeit</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>Erweiterbarkeit</title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Textanalyse</title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>Textanalyse</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $index->addDocument($doc);
             Hier ist ein Beispiel für einen eigenen Analysator, welcher Wörter mit Ziffern als
             Begriffe akzeptiert:
 
-            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Eigener Textanalysator</title></info>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><title>Eigener Textanalysator</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -135,7 +135,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.filters"><info><title>Filtern von Tokens</title></info>
+    <section xml:id="zend.search.lucene.extending.filters"><title>Filtern von Tokens</title>
         
 
         <para>
@@ -241,7 +241,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Algorithmen für Punktwertermittlung</title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title>Algorithmen für Punktwertermittlung</title>
         
 
         <para>
@@ -353,7 +353,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>Storage Container</title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>Storage Container</title>
         
 
         <para>

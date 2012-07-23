@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http\Header;
 
@@ -6,12 +14,13 @@ use Zend\Http\Header\Connection;
 
 class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testConnectionFromStringCreatesValidConnectionHeader()
     {
-        $connectionHeader = Connection::fromString('Connection: xxx');
+        $connectionHeader = Connection::fromString('Connection: close');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $connectionHeader);
         $this->assertInstanceOf('Zend\Http\Header\Connection', $connectionHeader);
+        $this->assertEquals('close', $connectionHeader->getFieldValue());
+        $this->assertFalse($connectionHeader->isPersistent());
     }
 
     public function testConnectionGetFieldNameReturnsHeaderName()
@@ -22,10 +31,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
 
     public function testConnectionGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Connection needs to be completed');
-
         $connectionHeader = new Connection();
-        $this->assertEquals('xxx', $connectionHeader->getFieldValue());
+        $connectionHeader->setValue('Keep-Alive');
+        $this->assertEquals('keep-alive', $connectionHeader->getFieldValue());
     }
 
     public function testConnectionToStringReturnsHeaderFormattedString()
@@ -33,12 +41,19 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Connection needs to be completed');
 
         $connectionHeader = new Connection();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('Connection: xxx', $connectionHeader->toString());
+        $connectionHeader->setValue('close');
+        $this->assertEmpty('Connection: close', $connectionHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    public function testConnectionSetPersistentReturnsProperValue()
+    {
+        $connectionHeader = new Connection();
+        $connectionHeader->setPersistent(true);
+        $this->assertEquals('keep-alive', $connectionHeader->getFieldValue());
+        $connectionHeader->setPersistent(false);
+        $this->assertEquals('close', $connectionHeader->getFieldValue());
+
+    }
+
 }
 

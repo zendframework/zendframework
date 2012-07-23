@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>文字セット</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><title>文字セット</title>
     
 
-    <section xml:id="zend.search.lucene.charset.description"><info><title>UTF-8 およびシングルバイト文字セットのサポート</title></info>
+    <section xml:id="zend.search.lucene.charset.description"><title>UTF-8 およびシングルバイト文字セットのサポート</title>
         
 
         <para>
@@ -36,7 +36,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>デフォルトのテキスト解析器</title></info>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><title>デフォルトのテキスト解析器</title>
         
         <para>
             しかし、デフォルトのテキスト解析器
@@ -59,7 +59,7 @@
             </footnote>
         </para>
 
-        <note><info><title/></info>
+        <note>
             
             <para>
                 デフォルトの解析器は、数字は単語の一部として扱いません。
@@ -68,7 +68,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>UTF-8 互換のテキスト解析器</title></info>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><title>UTF-8 互換のテキスト解析器</title>
         
 
         <para>
@@ -89,7 +89,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
         </para>
 
-        <warning><info><title/></info>
+        <warning>
             
             <para>
                 UTF-8 互換の解析器は Zend Framework 1.5 で改良されました。

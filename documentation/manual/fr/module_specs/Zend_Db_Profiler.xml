@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><title>Zend_Db_Profiler</title>
     
 
-    <section xml:id="zend.db.profiler.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.db.profiler.introduction"><title>Introduction</title>
         
 
         <para>
@@ -130,7 +130,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.profiler.using"><info><title>Utiliser le profileur</title></info>
+    <section xml:id="zend.db.profiler.using"><title>Utiliser le profileur</title>
         
 
         <para>
@@ -270,7 +270,7 @@ echo "Requête la plus lente (SQL) : \n"
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.profiler.advanced"><info><title>Utilisation avancée du profileur</title></info>
+    <section xml:id="zend.db.profiler.advanced"><title>Utilisation avancée du profileur</title>
         
 
         <para>
@@ -279,7 +279,7 @@ echo "Requête la plus lente (SQL) : \n"
             instance de <classname>Zend_Db_Profiler</classname> :
         </para>
 
-        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filtrer par temps d'exécution</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><title>Filtrer par temps d'exécution</title>
             
 
             <para>
@@ -297,7 +297,7 @@ $profileur->setFilterElapsedSecs(null);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filtrer par type de requête</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><title>Filtrer par type de requête</title>
             
 
             <para>
@@ -385,7 +385,7 @@ $profileur->setFilterQueryType(null);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Récupérer les profils par type de requête</title></info>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><title>Récupérer les profils par type de requête</title>
             
 
             <para>
@@ -416,7 +416,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
         </section>
     </section>
 
-    <section xml:id="zend.db.profiler.profilers"><info><title>Profileurs spécialisés</title></info>
+    <section xml:id="zend.db.profiler.profilers"><title>Profileurs spécialisés</title>
         
 
         <para>

@@ -1,41 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Json
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Json
  */
 
 namespace ZendTest\Json\Server;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as TestAdapter,
-    Zend\Json\Server\Client,
-    Zend\Json\Server\Error,
-    Zend\Json\Server\Request,
-    Zend\Json\Server\Response;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as TestAdapter;
+use Zend\Json\Server\Client;
+use Zend\Json\Server\Error;
+use Zend\Json\Server\Request;
+use Zend\Json\Server\Response;
 
 /**
- * Test case for Zend\Json\Server\Client
- *
  * @category   Zend
  * @package    Zend_Json
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -207,7 +192,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->jsonClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(null);
-        $this->assertNull($this->jsonClient->getHttpClient()->getRequest()->getUri());
+        $this->assertNull($this->jsonClient->getHttpClient()->getRequest()->getUriString());
         $this->jsonClient->call('foo');
         $uri = $this->jsonClient->getHttpClient()->getUri();
 

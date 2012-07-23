@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Znakové sady</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><title>Znakové sady</title>
     
     <para>
         Trieda <code>Zend_Mail</code> nekontroluje správne nastavenie znakovej sady v jednotlivých častiach
@@ -11,7 +11,7 @@
         znakovú sadu.
     </para>
 
-    <note><info><title>Iba pre textový obsah</title></info>
+    <note><title>Iba pre textový obsah</title>
         
         <para>
             Nastavenie znakovej sady je platné iba pre časti ktoré sú textové.

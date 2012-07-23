@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><title>Introduction</title>
 
 
     <para>
@@ -8,7 +8,7 @@
         multiples validateurs à une donnée dans un ordre défini par l'utilisateur.
     </para>
 
-    <section xml:id="zend.validate.introduction.definition"><info><title>Qu'est-ce qu'un validateur ?</title></info>
+    <section xml:id="zend.validate.introduction.definition"><title>Qu'est-ce qu'un validateur ?</title>
 
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.introduction.using"><info><title>Utilisation basique des validateurs</title></info>
+    <section xml:id="zend.validate.introduction.using"><title>Utilisation basique des validateurs</title>
 
 
         <para>
@@ -85,7 +85,7 @@ if ($validator->isValid($email)) {
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.validate.introduction.messages"><info><title>Messages personnalisés</title></info>
+        <section xml:id="zend.validate.introduction.messages"><title>Messages personnalisés</title>
 
 
         <para>
@@ -166,7 +166,7 @@ if (!validator->isValid('word')) {
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.validate.introduction.static"><info><title>Utilisation de la méthode statique <methodname>is()</methodname></title></info>
+        <section xml:id="zend.validate.introduction.static"><title>Utilisation de la méthode statique <methodname>is()</methodname></title>
 
 
         <para>
@@ -213,7 +213,7 @@ if (Zend_Validate::is($value,
             demande pour traiter l'ensemble de données saisies. Voir <xref linkend="zend.filter.input"/>.
         </para>
 
-        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Espaces de noms</title></info>
+        <section xml:id="zend.validate.introduction.static.namespaces"><title>Espaces de noms</title>
 
 
 
@@ -294,7 +294,7 @@ if (Zend_Validate::is($value,
         </section>
     </section>
 
-    <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
+    <section xml:id="zend.validate.introduction.translation"><title>Translating messages</title>
 
 
         <para>

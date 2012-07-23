@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><title>導入</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         JavaScript、設定ファイル、apache vhosts、その他。
     </para>
 
-    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Theory of Operation</title></info>
+    <section xml:id="zend.codegenerator.introduction.theory"><title>Theory of Operation</title>
         
 
         <para>

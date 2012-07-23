@@ -1,36 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @feed       Zend
- * @category   Zend
- * @package    Zend_GData_App
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\App;
 
-use Zend\GData\App,
-    Zend\Http\Header\Etag;
+use Zend\GData\App;
+use Zend\Http\Header\Etag;
 
 /**
  * @category   Zend
  * @package    Zend_GData_App
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_App
  */
@@ -40,19 +26,22 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     /** @var App\Feed */
     public $feed;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->feedText = file_get_contents(
                 'Zend/GData/App/_files/FeedSample1.xml',
                 true);
         $this->feed = new App\Feed();
     }
 
-    public function testEmptyFeedShouldHaveEmptyExtensionsList() {
+    public function testEmptyFeedShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedToAndFromStringShouldMatch() {
+    public function testEmptyFeedToAndFromStringShouldMatch()
+    {
         $feedXml = $this->feed->saveXML();
         $newFeed = new App\Feed();
         $newFeed->transferFromXML($feedXml);
@@ -60,7 +49,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newFeedXml);
     }
 
-    public function testConvertFeedToAndFromString() {
+    public function testConvertFeedToAndFromString()
+    {
         $this->feed->transferFromXML($this->feedText);
         $feedXml = $this->feed->saveXML();
         $newFeed = new App\Feed();
@@ -102,7 +92,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('xhtml', $entry->content->type);
     }
 
-    public function testCanAddIndividualEntries() {
+    public function testCanAddIndividualEntries()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertEquals(1, count($this->feed->entry));
         $oldTitle = $this->feed->entry[0]->title->text;
@@ -114,13 +105,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Foo", $this->feed->entry[1]->title->text);
     }
 
-    public function testCanSetAndGetEtag() {
+    public function testCanSetAndGetEtag()
+    {
         $data = Etag::fromString("Etag: W/&amp;FooBarBaz&amp;");
         $this->feed->setEtag($data);
         $this->assertEquals($this->feed->getEtag(), $data);
     }
 
-    public function testSetServicePropagatesToChildren() {
+    public function testSetServicePropagatesToChildren()
+    {
         // Setup
         $entries = array(new App\Entry(), new App\Entry());
         foreach ($entries as $entry) {
@@ -214,7 +207,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $v1TestString = 'TEST-v1';
         $v2TestString = 'TEST-v2';
 
-        App\Base::flushNamespaceLookupCache();
+        App\AbstractBase::flushNamespaceLookupCache();
         $feed = $this->feed;
         $feed->registerNamespace($prefix, $v1TestString, 1, 0);
         $feed->registerNamespace($prefix, $v2TestString, 2, 0);
@@ -238,7 +231,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $testString12 = 'TEST-v1-2';
         $testString22 = 'TEST-v2-2';
 
-        App\Base::flushNamespaceLookupCache();
+        App\AbstractBase::flushNamespaceLookupCache();
         $feed = $this->feed;
         $feed->registerNamespace($prefix, $testString10, 1, 0);
         $feed->registerNamespace($prefix, $testString20, 2, 0);

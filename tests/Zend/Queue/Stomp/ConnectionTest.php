@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Queue
  */
 
 namespace ZendTest\Queue\Stomp;
 
-use Zend\Queue\Stomp\Client,
-    Zend\Queue\Stomp\Connection,
-    Zend\Queue\Stomp\Frame,
-    PHPUnit_Framework_TestCase as Testcase;
+use Zend\Queue\Stomp\Client;
+use Zend\Queue\Stomp\Connection;
+use Zend\Queue\Stomp\Frame;
+use PHPUnit_Framework_TestCase as Testcase;
 
 /*
  * The adapter test class provides a universal test class for all of the
@@ -38,8 +27,6 @@ use Zend\Queue\Stomp\Client,
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
 
@@ -57,7 +44,7 @@ class ConnectionSocketOverload extends Connection
 
 class ConnectionTest extends TestCase
 {
-    var $_socket = null;
+    public $_socket = null;
 
     public function setUp()
     {

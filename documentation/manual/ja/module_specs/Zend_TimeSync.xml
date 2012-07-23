@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><title>導入</title>
 
     
 
@@ -20,7 +20,7 @@
         NTP や SNTP 経由の実際の時刻とサーバの時刻との差を考慮して動作します。
     </para>
 
-    <note><info><title>背景</title></info>
+    <note><title>背景</title>
 
         
 
@@ -32,7 +32,7 @@
 
     </note>
 
-    <section xml:id="zend.timesync.introduction.why"><info><title>なぜ Zend_TimeSync ?</title></info>
+    <section xml:id="zend.timesync.introduction.why"><title>なぜ Zend_TimeSync ?</title>
 
         
 
@@ -104,7 +104,7 @@
 
     </section>
 
-    <section xml:id="zend.timesync.introduction.ntp"><info><title>NTP とは?</title></info>
+    <section xml:id="zend.timesync.introduction.ntp"><title>NTP とは?</title>
 
         
 
@@ -119,7 +119,7 @@
 
     </section>
 
-    <section xml:id="zend.timesync.introduction.sntp"><info><title>SNTP とは?</title></info>
+    <section xml:id="zend.timesync.introduction.sntp"><title>SNTP とは?</title>
 
         
 
@@ -132,7 +132,7 @@
 
     </section>
 
-    <section xml:id="zend.timesync.introduction.problematic"><info><title>問題のある使用法</title></info>
+    <section xml:id="zend.timesync.introduction.problematic"><title>問題のある使用法</title>
 
         
 
@@ -146,7 +146,7 @@
 
     </section>
 
-    <section xml:id="zend.timesync.introduction.decision"><info><title>どのサーバを使用するか</title></info>
+    <section xml:id="zend.timesync.introduction.decision"><title>どのサーバを使用するか</title>
 
         
 

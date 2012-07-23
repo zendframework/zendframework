@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Получение лент из веб-страниц</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><title>Получение лент из веб-страниц</title>
     
     <para>
        Веб-страницы часто содержат теги <code>&lt;link&gt;</code>, которые ссылаются на

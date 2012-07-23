@@ -1,32 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage;
+
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mbox extends AbstractStorage
 {
@@ -218,7 +207,9 @@ class Mbox extends AbstractStorage
     protected function _isMboxFile($file, $fileIsString = true)
     {
         if ($fileIsString) {
-            $file = @fopen($file, 'r');
+            ErrorHandler::start(E_WARNING);
+            $file = fopen($file, 'r');
+            ErrorHandler::stop();
             if (!$file) {
                 return false;
             }
@@ -234,7 +225,9 @@ class Mbox extends AbstractStorage
         }
 
         if ($fileIsString) {
-            @fclose($file);
+            ErrorHandler::start(E_WARNING);
+            fclose($file);
+            ErrorHandler::stop();
         }
 
         return $result;
@@ -261,7 +254,9 @@ class Mbox extends AbstractStorage
         $this->_filemtime = filemtime($this->_filename);
 
         if (!$this->_isMboxFile($this->_fh, false)) {
-            @fclose($this->_fh);
+            ErrorHandler::start(E_WARNING);
+            fclose($this->_fh);
+            ErrorHandler::stop();
             throw new Exception\InvalidArgumentException('file is not a valid mbox format');
         }
 
@@ -294,7 +289,9 @@ class Mbox extends AbstractStorage
      */
     public function close()
     {
-        @fclose($this->_fh);
+        ErrorHandler::start(E_WARNING);
+        fclose($this->_fh);
+        ErrorHandler::stop();
         $this->_positions = array();
     }
 

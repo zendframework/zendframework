@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api"><info><title>API Übersicht</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api"><title>API Übersicht</title>
     
 
-    <section xml:id="zend.ldap.api.configuration"><info><title>Konfiguration und Optionen</title></info>
+    <section xml:id="zend.ldap.api.configuration"><title>Konfiguration und Optionen</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             <methodname>setOptions()</methodname> Methode. Die erlaubten Optionen sind folgende:
         </para>
 
-        <table xml:id="zend.ldap.api.configuration.table"><info><title>Zend_Ldap Optionen</title></info>
+        <table xml:id="zend.ldap.api.configuration.table"><title>Zend_Ldap Optionen</title>
             
 
             <tgroup cols="2">
@@ -207,7 +207,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.ldap.api.reference"><info><title>API Referenz</title></info>
+    <section xml:id="zend.ldap.api.reference"><title>API Referenz</title>
         
 
         <note>

@@ -1,36 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Loader
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Loader
  */
 
 namespace ZendTest\Loader;
 
-use Zend\Loader\ClassMapAutoloader,
-    Zend\Loader\Exception\InvalidArgumentException;
+use Zend\Loader\ClassMapAutoloader;
+use Zend\Loader\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
  * @package    Loader
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
 class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
@@ -108,7 +94,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
         $map = $this->loader->getAutoloadMap();
         $this->assertTrue(is_array($map));
         $this->assertEquals(2, count($map));
-        // Just to make sure nothing changes after loading the same map again 
+        // Just to make sure nothing changes after loading the same map again
         // (loadMapFromFile should just return)
         $this->loader->registerAutoloadMap(__DIR__ . '/_files/goodmap.php');
         $map = $this->loader->getAutoloadMap();

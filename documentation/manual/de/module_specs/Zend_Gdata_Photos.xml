@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.photos"><info><title>Picasa Web Alben verwenden</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.photos"><title>Picasa Web Alben verwenden</title>
     
 
     <para>
@@ -21,7 +21,7 @@
             <acronym>API</acronym> Übersicht</link> gesehen werden.
     </para>
 
-    <note><info><title>Authentifizierung</title></info>
+    <note><title>Authentifizierung</title>
         
 
         <para>
@@ -32,7 +32,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.photos.connecting"><info><title>Zum Service verbinden</title></info>
+    <section xml:id="zend.gdata.photos.connecting"><title>Zum Service verbinden</title>
         
 
         <para>
@@ -50,7 +50,7 @@
             <classname>Zend_Gdata_Photos</classname> Instanz an diesen Client.
         </para>
 
-        <section xml:id="zend.gdata.photos.connecting.authentication"><info><title>Authentifikation</title></info>
+        <section xml:id="zend.gdata.photos.connecting.authentication"><title>Authentifikation</title>
             
 
             <para>
@@ -93,7 +93,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.gdata.photos.connecting.service"><info><title>Erstellen einer Service Instanz</title></info>
+        <section xml:id="zend.gdata.photos.connecting.service"><title>Erstellen einer Service Instanz</title>
             
 
             <para>
@@ -241,7 +241,7 @@ $service = new Zend_Gdata_Photos();
         </section>
     </section>
 
-    <section xml:id="zend.gdata.photos.queries"><info><title>Verstehen und Erstellen von Abfragen</title></info>
+    <section xml:id="zend.gdata.photos.queries"><title>Verstehen und Erstellen von Abfragen</title>
         
 
         <para>
@@ -384,7 +384,7 @@ $query->setUser("sample.user");
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.gdata.photos.retrieval"><info><title>Feeds und Einträge erhalten</title></info>
+    <section xml:id="zend.gdata.photos.retrieval"><title>Feeds und Einträge erhalten</title>
         
 
         <para>
@@ -392,7 +392,7 @@ $query->setUser("sample.user");
             Alben, und individuelle Photos zu erhalten.
         </para>
 
-        <section xml:id="zend.gdata.photos.user_retrieval"><info><title>Einen Benutzer erhalten</title></info>
+        <section xml:id="zend.gdata.photos.user_retrieval"><title>Einen Benutzer erhalten</title>
             
 
             <para>
@@ -461,7 +461,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.album_retrieval"><info><title>Ein Album erhalten</title></info>
+        <section xml:id="zend.gdata.photos.album_retrieval"><title>Ein Album erhalten</title>
             
 
             <para>
@@ -520,7 +520,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.photo_retrieval"><info><title>Ein Photo erhalten</title></info>
+        <section xml:id="zend.gdata.photos.photo_retrieval"><title>Ein Photo erhalten</title>
             
 
             <para>
@@ -574,7 +574,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.comment_retrieval"><info><title>Ein Kommentar erhalten</title></info>
+        <section xml:id="zend.gdata.photos.comment_retrieval"><title>Ein Kommentar erhalten</title>
             
 
             <para>
@@ -614,7 +614,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.tag_retrieval"><info><title>Ein Tag erhalten</title></info>
+        <section xml:id="zend.gdata.photos.tag_retrieval"><title>Ein Tag erhalten</title>
             
 
             <para>
@@ -654,14 +654,14 @@ try {
         </section>
     </section>
 
-    <section xml:id="zend.gdata.photos.creation"><info><title>Einträge erstellen</title></info>
+    <section xml:id="zend.gdata.photos.creation"><title>Einträge erstellen</title>
         
 
         <para>
             Der Service hat Funktionen für die Erstellung von Alben, Photos, Kommentaren und Tags.
         </para>
 
-        <section xml:id="zend.gdata.photos.album_creation"><info><title>Ein Album erstellen</title></info>
+        <section xml:id="zend.gdata.photos.album_creation"><title>Ein Album erstellen</title>
             
 
             <para>
@@ -681,7 +681,7 @@ $service->insertAlbumEntry($entry);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.photo_creation"><info><title>Ein Photo erstellen</title></info>
+        <section xml:id="zend.gdata.photos.photo_creation"><title>Ein Photo erstellen</title>
             
 
             <para>
@@ -713,7 +713,7 @@ $service->insertPhotoEntry($entry, $albumEntry);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.comment_creation"><info><title>Erstellen eines Kommentars</title></info>
+        <section xml:id="zend.gdata.photos.comment_creation"><title>Erstellen eines Kommentars</title>
             
             <para>Das Service unterstützt die Erstellung von neuen Kommentaren für ein Photo:</para>
 
@@ -738,7 +738,7 @@ $service->insertCommentEntry($entry, $photoEntry);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.tag_creation"><info><title>Erstellen eines Tags</title></info>
+        <section xml:id="zend.gdata.photos.tag_creation"><title>Erstellen eines Tags</title>
             
             <para>Das Service unterstützt die Erstellung von neuen Tags für ein Photo:</para>
 
@@ -764,11 +764,11 @@ $service->insertTagEntry($entry, $photoEntry);
 
     </section>
 
-    <section xml:id="zend.gdata.photos.deletion"><info><title>Einträge löschen</title></info>
+    <section xml:id="zend.gdata.photos.deletion"><title>Einträge löschen</title>
         
         <para>Der Service hat Funktionen um Alben, Photos, Kommentare und Tags zu löschen.</para>
 
-        <section xml:id="zend.gdata.photos.album_deletion"><info><title>Ein Album löschen</title></info>
+        <section xml:id="zend.gdata.photos.album_deletion"><title>Ein Album löschen</title>
             
 
             <para>
@@ -791,7 +791,7 @@ $service->deleteAlbumEntry($entry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.photo_deletion"><info><title>Löschen eines Photos</title></info>
+        <section xml:id="zend.gdata.photos.photo_deletion"><title>Löschen eines Photos</title>
             
 
             <para>
@@ -815,7 +815,7 @@ $service->deletePhotoEntry($entry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.comment_deletion"><info><title>Ein Kommentar löschen</title></info>
+        <section xml:id="zend.gdata.photos.comment_deletion"><title>Ein Kommentar löschen</title>
             
 
             <para>
@@ -841,7 +841,7 @@ $service->deleteCommentEntry($entry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.tag_deletion"><info><title>Ein Tag löschen</title></info>
+        <section xml:id="zend.gdata.photos.tag_deletion"><title>Ein Tag löschen</title>
             
 
             <para>
@@ -874,7 +874,7 @@ $service->deleteTagEntry($tagEntry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.optimistic_concurrenty"><info><title>Optimistische Gleichzeitigkeit (Notizen für das Löschen)</title></info>
+        <section xml:id="zend.gdata.photos.optimistic_concurrenty"><title>Optimistische Gleichzeitigkeit (Notizen für das Löschen)</title>
             
 
             <para>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>Invio via SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><title>Invio via SMTP</title>
     
     <para>
         Per inviare e-mail via SMTP è necessario creare e registrare <code>Zend_Mail_Transport_Smtp</code> con <code>Zend_Mail</code> prima della chiamata del metodo <code>send()</code>.
         In seguito, ogni successiva chiamata a <code>Zend_Mail::send()</code> utilizzerà SMTP come transport.
     </para>
-    <example xml:id="zend.mail.sending.example-1"><info><title>Invio di e-mail via SMTP</title></info>
+    <example xml:id="zend.mail.sending.example-1"><title>Invio di e-mail via SMTP</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail/Transport/Smtp.php';

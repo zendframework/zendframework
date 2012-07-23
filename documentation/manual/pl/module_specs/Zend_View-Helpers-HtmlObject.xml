@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>Helpery HTML Object</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><title>Helpery HTML Object</title>
     
 
     <para>
@@ -44,7 +44,7 @@
         pokażemy przykłady tylko dwóch z nich.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Helper Flash</title></info>
+    <example xml:id="zend.view.helpers.initial.object.flash"><title>Helper Flash</title>
 
         
 
@@ -79,7 +79,7 @@
         do zademonstrowane za pomocą helpera <code>htmlObject</code>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.object.object"><info><title>Konfigurowanie obiektu poprzez przekazanie dodatkowych argumentów</title></info>
+    <example xml:id="zend.view.helpers.initial.object.object"><title>Konfigurowanie obiektu poprzez przekazanie dodatkowych argumentów</title>
         
 
         <para>

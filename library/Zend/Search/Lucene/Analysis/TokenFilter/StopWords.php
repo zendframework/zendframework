@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
 
-use Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\Token,
-    Zend\Search\Lucene\Exception\InvalidArgumentException,
-    Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Token;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Token filter that removes stop words. These words must be provided as array (set), example:
@@ -35,8 +24,6 @@ use Zend\Search\Lucene,
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StopWords implements TokenFilterInterface
 {
@@ -51,7 +38,8 @@ class StopWords implements TokenFilterInterface
      *
      * @param array $stopwords array (set) of words that will be filtered out
      */
-    public function __construct($stopwords = array()) {
+    public function __construct($stopwords = array())
+    {
         $this->_stopSet = array_flip($stopwords);
     }
 
@@ -61,7 +49,8 @@ class StopWords implements TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Token $srcToken) {
+    public function normalize(Token $srcToken)
+    {
         if (array_key_exists($srcToken->getTermText(), $this->_stopSet)) {
             return null;
         } else {
@@ -79,7 +68,8 @@ class StopWords implements TokenFilterInterface
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
-    public function loadFromFile($filepath = null) {
+    public function loadFromFile($filepath = null)
+    {
         if (! $filepath || ! file_exists($filepath)) {
             throw new InvalidArgumentException('You have to provide valid file path');
         }

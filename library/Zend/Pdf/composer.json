@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-pdf",
+    "description": " ",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "pdf"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Pdf": ""
+        }
+    },
+    "target-dir": "Zend/Pdf",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
+    }
+}

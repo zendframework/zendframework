@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>高级用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><title>高级用法</title>
 
     
 
@@ -7,7 +7,7 @@
         虽然在基本用法中讲到的利用Zend框架的会话管理的方法是完全可以接受的，但还有些最佳实践需要去考虑。这一节讨论会话处理和示例Zend_Session架构的更高级用法的精彩细节。
     </para>
 
-    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>开启会话</title></info>
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><title>开启会话</title>
 
         
 
@@ -15,7 +15,7 @@
             如何你希望所有的请求都有个由Zend_Seesion管理的会话，那么请在程序的引导文件中开启它：
         </para>
 
-        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>开启全局会话</title></info>
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><title>开启全局会话</title>
 
             
 
@@ -88,7 +88,7 @@ Zend_Session::start();
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.locking"><info><title>锁住会话命名空间</title></info>
+    <section xml:id="zend.session.advanced_usage.locking"><title>锁住会话命名空间</title>
 
         
 
@@ -96,7 +96,7 @@ Zend_Session::start();
             会话的命名空间可以加锁，以防止意外的变更该命名空间下的会话变量值。使用<code>lock()</code>方法使某命名空间下会话变量为只读，<code>unlock()</code>方法使一个只读的名空间为可读写，<code>isLocked()</code>方法测试某命名空间是否已经被加锁。加锁是短暂的，且只在此页面请求内有效，不会持续到下一个页面请求。给命名空间加锁不会影响到存储在该命名空间下对象的setter方法，但是阻止了命名空间的setter方法的移除或替换对象。也就是说，虽给<code>Zend_Session_Namespace</code>的实例加了锁，但还是不能阻止它处同样引用了命名空间下数据的对它的变更（参见<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references">PHP references</link>)。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>锁住会话命名空间</title></info>
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><title>锁住会话命名空间</title>
 
             
 
@@ -118,7 +118,7 @@ $userProfileNamespace->unLock();
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.expiration"><info><title>命名空间过期</title></info>
+    <section xml:id="zend.session.advanced_usage.expiration"><title>命名空间过期</title>
 
         
 
@@ -126,7 +126,7 @@ $userProfileNamespace->unLock();
             对于命名空间和在命名空间中的独立键，它们的寿命都是有限的。在授权后，普通用例包括在请求之间传递临时信息，和通过除去访问潜在的敏感信息来降低一定的安全风险的暴露时有发生。过期可以基于消逝的秒数或者跳步(hop)的个数，对每次初始化命名空间的成功请求，跳步至少发生一次。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>过期的例子</title></info>
+        <example xml:id="zend.session.advanced_usage.expiration.example"><title>过期的例子</title>
 
             
 
@@ -155,7 +155,7 @@ $s->setExpirationSeconds(60);
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.controllers"><info><title>会话封装和控制器</title></info>
+    <section xml:id="zend.session.advanced_usage.controllers"><title>会话封装和控制器</title>
 
         
 
@@ -163,7 +163,7 @@ $s->setExpirationSeconds(60);
             命名空间可以被用来分离控制器对会话的访问，以免被污染。例如， 一个认证控制器可以为会议安全请求保持它的会话状态数据与其他控制器分离。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>带有生命期的控制器命名空间会话</title></info>
+        <example xml:id="zend.session.advanced_usage.controllers.example"><title>带有生命期的控制器命名空间会话</title>
 
             
 
@@ -202,7 +202,7 @@ else {
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>防止每个命名空间有多重实例</title></info>
+    <section xml:id="zend.session.advanced_usage.single_instance"><title>防止每个命名空间有多重实例</title>
 
         
 
@@ -214,7 +214,7 @@ else {
             为开启这个动作，当创建<code>Zend_Session_Namespace</code>的最后允许的实例，传递<code>true</code>给第二个构造函数参数。任何后来的初始化同一个命名空间的企图都会导致一个异常的抛出。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>限制命名空间访问单一实例</title></info>
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><title>限制命名空间访问单一实例</title>
 
             
 
@@ -249,7 +249,7 @@ try {
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.arrays"><info><title>使用数组</title></info>
+    <section xml:id="zend.session.advanced_usage.arrays"><title>使用数组</title>
 
         
 
@@ -257,7 +257,7 @@ try {
             在PHP 5.2.1 版本之前，因为PHP魔术方法实现的历史，修改在命名空间里的数组是不可以的。如果你只使用PHP 5.2.1 或以后的版本，那么你可以<link linkend="zend.session.advanced_usage.objects">跳到下一章节</link>。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>修改带有会话命名空间的数组数据</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><title>修改带有会话命名空间的数组数据</title>
 
             
 
@@ -275,7 +275,7 @@ echo $sessionNamespace->array['testKey'];
 
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>在会话存储之前构造数组</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><title>在会话存储之前构造数组</title>
 
             
 
@@ -295,7 +295,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
             如果你正使用有影响的PHP版本并需要在分配给一个会话命名空间的键之后修改数组，你可以用下面的其中之一或者全部的方案。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>方案：重新分配一个被修改的数组</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><title>方案：重新分配一个被修改的数组</title>
 
             
 
@@ -324,7 +324,7 @@ echo $sessionNamespace->array['fruit']; // prints "peach"
 
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>方案：存储包括引用的数组</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><title>方案：存储包括引用的数组</title>
 
             
 
@@ -345,7 +345,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.objects"><info><title>在对象中使用会话</title></info>
+    <section xml:id="zend.session.advanced_usage.objects"><title>在对象中使用会话</title>
 
         
 
@@ -355,7 +355,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.testing"><info><title>在单元测试中使用会话</title></info>
+    <section xml:id="zend.session.advanced_usage.testing"><title>在单元测试中使用会话</title>
 
         
 
@@ -367,7 +367,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             围绕这一工作，参见<code>tests/Zend/Session</code> 中<code>SessionTest.php</code>和<code>SessionTestHelper.php</code>的单元测试<code>testSetExpirationSeconds()</code>，利用了PHP的<code>exec()</code>发起一个独立的过程。新的过程准确地模拟了一个来自浏览器的继上次之后的第二个请求。独立请求始于一个“干净”的会话，就像为任一请求执行PHP脚本。同时，要使$_SESSION[]在子过程中可更改，那么需要在父过程执行<code>exec()</code>之前关闭会话。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit Testing Code Dependent on Zend_Session</title></info>
+        <example xml:id="zend.session.advanced_usage.testing.example"><title>PHPUnit Testing Code Dependent on Zend_Session</title>
 
             
 

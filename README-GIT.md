@@ -84,14 +84,14 @@ repository.
  5. Create a new branch for the ZF repository (named "zf/master" here)
 
     ```sh
-    % git branch -b zf/master zf2/master
+    % git checkout -b zf/master zf2/master
     ```
 
  6. Create your master branch off the ZF branch, and push to your
     repository
 
     ```sh
-    % git branch -b master
+    % git checkout -b master
     % git push origin HEAD:master
     ```
 

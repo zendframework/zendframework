@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Key\Derivation;
 
 use Zend\Crypt\Hmac;
@@ -16,8 +17,6 @@ use Zend\Crypt\Hmac;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Pbkdf2
 {
@@ -37,14 +36,14 @@ class Pbkdf2
         if (!in_array($hash, Hmac::getSupportedAlgorithms())) {
             throw new Exception\InvalidArgumentException("The hash algorihtm $hash is not supported by " . __CLASS__);
         }
-        $num    = ceil($length / Hmac::getOutputSize($hash, Hmac::BINARY));
+        $num    = ceil($length / Hmac::getOutputSize($hash, Hmac::OUTPUT_BINARY));
         $result = '';
         for ($block = 1; $block <= $num; $block++) {
-            $hmac = Hmac::compute($password, $hash, $salt . pack('N', $block), Hmac::BINARY);
-            $mix  = $hmac; 
+            $hmac = Hmac::compute($password, $hash, $salt . pack('N', $block), Hmac::OUTPUT_BINARY);
+            $mix  = $hmac;
             for ($i = 1; $i < $iterations; $i++) {
-                $hmac = Hmac::compute($password, $hash, $hmac, Hmac::BINARY);
-                $mix ^= $hmac;    
+                $hmac = Hmac::compute($password, $hash, $hmac, Hmac::OUTPUT_BINARY);
+                $mix ^= $hmac;
             }
             $result .= $mix;
         }

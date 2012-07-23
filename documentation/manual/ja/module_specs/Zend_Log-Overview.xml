@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>概要</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><title>概要</title>
     
 
     <para>
@@ -42,7 +42,7 @@
       </itemizedlist>
     </para>
 
-    <section xml:id="zend.log.overview.creating-a-logger"><info><title>ログの作成</title></info>
+    <section xml:id="zend.log.overview.creating-a-logger"><title>ログの作成</title>
       
       <para>
         ログの記録を開始するには、ライターのインスタンスを作成し、
@@ -76,7 +76,7 @@ $logger = new Zend_Log($writer);
       </para>
     </section>
 
-    <section xml:id="zend.log.overview.logging-messages"><info><title>メッセージの記録</title></info>
+    <section xml:id="zend.log.overview.logging-messages"><title>メッセージの記録</title>
       
 
       <para>
@@ -109,7 +109,7 @@ $logger->emerg('Emergency message');
 ]]></programlisting>
   </section>
 
-  <section xml:id="zend.log.overview.destroying-a-logger"><info><title>ログの破棄</title></info>
+  <section xml:id="zend.log.overview.destroying-a-logger"><title>ログの破棄</title>
     
     <para>
       ログオブジェクトが不要になったら、ログオブジェクトを指す変数に
@@ -128,7 +128,7 @@ $logger = null;
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.builtin-priorities"><info><title>組み込みの優先度の使用</title></info>
+  <section xml:id="zend.log.overview.builtin-priorities"><title>組み込みの優先度の使用</title>
     
     <para>
       <classname>Zend_Log</classname> クラスでは以下の優先度を定義しています。
@@ -169,7 +169,7 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.user-defined-priorities"><info><title>ユーザ定義の優先度の追加</title></info>
+  <section xml:id="zend.log.overview.user-defined-priorities"><title>ユーザ定義の優先度の追加</title>
     
 
     <para>
@@ -196,7 +196,7 @@ $logger->foo('Foo Message');
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.understanding-fields"><info><title>ログのイベントについて理解する</title></info>
+  <section xml:id="zend.log.overview.understanding-fields"><title>ログのイベントについて理解する</title>
     
 
     <para>
@@ -240,7 +240,7 @@ $logger->setEventItem('pid', getmypid());
   </section>
 
     <!-- TODO : to be translated -->
-    <section xml:id="zend.log.overview.as-errorHandler"><info><title>Log PHP Errors</title></info>
+    <section xml:id="zend.log.overview.as-errorHandler"><title>Log PHP Errors</title>
         
 
         <para>
@@ -249,9 +249,9 @@ $logger->setEventItem('pid', getmypid());
             error handler, and will pass the error along as well.
         </para>
 
-        <table xml:id="zend.log.overview.as-errorHandler.properties.table-1"><info><title>Zend_Log events from PHP errors have the additional fields matching
+        <table xml:id="zend.log.overview.as-errorHandler.properties.table-1"><title>Zend_Log events from PHP errors have the additional fields matching
             <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int $errline  [, array $errcontext  ]]] )</methodname>
-            from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</link></title></info>
+            from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</link></title>
             
 
             <tgroup cols="3">

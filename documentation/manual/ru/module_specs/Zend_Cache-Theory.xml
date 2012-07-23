@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>Теория кэширования</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><title>Теория кэширования</title>
     
     <para>
         Есть три ключевых понятия в <classname>Zend_Cache</classname>. Первое — уникальный
@@ -31,7 +31,7 @@
         которые помещаются в кэш. С другой стороны, если есть "попадание",
         то бэкэнд автоматически извлечет запись из кэша.
     </para></note>
-    <section xml:id="zend.cache.factory"><info><title>Фабричный метод Zend_Cache</title></info>
+    <section xml:id="zend.cache.factory"><title>Фабричный метод Zend_Cache</title>
         
         <para>
             Корректным способом создания рабочего экземпляра
@@ -71,7 +71,7 @@ $cache = Zend_Cache::factory($frontendName,
         </para></note>
     </section>
 
-    <section xml:id="zend.cache.tags"><info><title>Добавление тегов к записям</title></info>
+    <section xml:id="zend.cache.tags"><title>Добавление тегов к записям</title>
         
         <para>
             Теги являются средством категоризации записей кэша. Когда вы
@@ -91,7 +91,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             </para>
         </note>
     </section>
-    <section xml:id="zend.cache.clean"><info><title>Очистка кэша</title></info>
+    <section xml:id="zend.cache.clean"><title>Очистка кэша</title>
         
         <para>
             Для того, чтобы удалить или сделать недействительной запись с

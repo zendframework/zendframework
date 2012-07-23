@@ -4,10 +4,10 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.intro">
-    <info><title>Introduzione a Zend\Di</title></info>
+    <title>Introduzione a Zend\Di</title>
 
     <section xml:id="zend.di.intro.di">
-        <info><title>Dependency Injection (Iniezione delle dipendenze)</title></info>
+        <title>Dependency Injection (Iniezione delle dipendenze)</title>
         <para>
             Dependency Injection (chiamata DI)  è un concetto che viene 
             navigato molto e discusso sul web. Semplicemente, vogliamo
@@ -33,7 +33,7 @@ $b = new MovieLister(new MovieFinder));
 
 
     <section xml:id="zend.di.intro.dic">
-        <info><title>Dependency Injection Containers (Contenitori DI)</title></info>
+        <title>Dependency Injection Containers (Contenitori DI)</title>
 
         <para>
             Quando il tuo codice è scritto in modo che tutte le tue dipendenze

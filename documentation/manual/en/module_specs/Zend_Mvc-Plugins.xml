@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section 
+<section
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.controller-plugins">
   <title>Controller Plugins</title>
 
   <para>
-    When using the <classname>ActionController</classname> or
-    <classname>RestfulController</classname>, or if you compose the
+    When using the <classname>AbstractActionController</classname> or
+    <classname>AbstractRestfulController</classname>, or if you compose the
     <classname>Zend\Mvc\Controller\PluginBroker</classname> in your custom
     controllers, you have access to a number of pre-built plugins.
     Additionally, you can register your own custom plugins with the
@@ -58,8 +58,8 @@ $plugin = $this->plugin('url');
 
   <para>
     For an extra layer of convenience, both
-    <classname>ActionController</classname> and
-    <classname>RestfulController</classname> have
+    <classname>AbstractActionController</classname> and
+    <classname>AbstractRestfulController</classname> have
     <methodname>__call()</methodname> implementations that allow you to
     retrieve plugins via method calls:
   </para>

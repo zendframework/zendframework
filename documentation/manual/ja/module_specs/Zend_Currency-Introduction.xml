@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>Zend_Currency について</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><title>Zend_Currency について</title>
 
     
 
@@ -10,7 +10,7 @@
         通貨や金額の表現方法や書式、為替サービス、計算についてのすべての問題を取り扱います。
     </para>
 
-    <section xml:id="zend.currency.introduction.list"><info><title>Zend_Currency を使うべき理由は?</title></info>
+    <section xml:id="zend.currency.introduction.list"><title>Zend_Currency を使うべき理由は?</title>
 
         
 

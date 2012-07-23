@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>ファイルの添付</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>ファイルの添付</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         <methodname>createAttachment()</methodname> に追加のパラメータを指定します。
     </para>
 
-    <example xml:id="zend.mail.attachments.example-1"><info><title>ファイルを添付したメール</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>ファイルを添付したメール</title>
         
 
         <programlisting language="php"><![CDATA[

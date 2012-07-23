@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.controllers">
-  <info><title>Controller disponibili</title></info>
+  <title>Controller disponibili</title>
 
   <para>
     I controller del layer MVC semplicemente devono essere oggetti che
@@ -12,9 +12,9 @@
   </para>
 
   <programlisting language="php"><![CDATA[
-use Zend\Stdlib\DispatchableInterface,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\DispatchableInterface;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
 
 class Foo implements DispatchableInterface
 {
@@ -38,10 +38,10 @@ class Foo implements DispatchableInterface
   </para>
 
   <section xml:id="zend.mvc.controllers.interfaces">
-    <info><title>Interfacce comuni usate con i controller</title></info>
+    <title>Interfacce comuni usate con i controller</title>
 
     <section xml:id="zend.mvc.controllers.interfaces.inject-application-event">
-      <info><title>InjectApplicationEvent</title></info>
+      <title>InjectApplicationEvent</title>
 
       <para>
         L'interfaccia <classname>Zend\Mvc\IbjectApplicationEvent</classname>
@@ -88,7 +88,7 @@ public function getEvent($event);
     </section>
 
     <section xml:id="zend.mvc.controllers.interfaces.locator-aware">
-      <info><title>LocatorAware</title></info>
+      <title>LocatorAware</title>
 
       <para>
         Nella maggior parte dei casi definirai i tuo controller
@@ -121,7 +121,7 @@ public function getLocator($locator);
     </section>
 
     <section xml:id="zend.mvc.controllers.interfaces.pluggable">
-      <info><title>Pluggable</title></info>
+      <title>Pluggable</title>
 
       <para>
         Riutilizzare il codice è un obiettivo comune per gli sviluppatori.
@@ -175,8 +175,8 @@ public function getLocator($locator);
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Loader\Broker,
-    Zend\Mvc\Controller\PluginBroker;
+use Zend\Loader\Broker;
+use Zend\Mvc\Controller\PluginBroker;
 
 public function setBroker(Broker $broker)
 {
@@ -201,7 +201,7 @@ public function plugin($plugin, array $options = null)
   </section>
 
   <section xml:id="zend.mvc.controllers.action-controller">
-    <info><title>L'ActionController</title></info>
+    <title>L'AbstractActionController</title>
 
     <para>
         Implementare ognuna delle interfacce precedenti è molto
@@ -211,7 +211,7 @@ public function plugin($plugin, array $options = null)
     </para>
 
     <para>
-        Il primo è <classname>Zend\Mvc\Controller\ActionController</classname>.
+        Il primo è <classname>Zend\Mvc\Controller\AbstractActionController</classname>.
         Questo controller implementa ognuna delle interfacce descritte
         precedentemente e usa le seguenti assuzioni:
     </para>
@@ -250,7 +250,7 @@ public function plugin($plugin, array $options = null)
 
     <para>
         Essenzialmente, una mappatura della strada verso
-        un <classname>ActionController</classname> necessita di
+        un <classname>AbstractActionController</classname> necessita di
         ritornare le chiavi "controller" e "action" che combaciano.
     </para>
 
@@ -261,9 +261,9 @@ public function plugin($plugin, array $options = null)
     <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function bazAction()
     {
@@ -278,10 +278,10 @@ class BarController extends ActionController
 ]]></programlisting>
 
     <section xml:id="zend.mvc.controllers.action-controller.interfaces-and-collaborators">
-      <info><title>Interfacce e collaboratori</title></info>
+      <title>Interfacce e collaboratori</title>
 
       <para>
-        <classname>ActionController</classname> implementa ognuna di
+        <classname>AbstractActionController</classname> implementa ognuna di
         queste interfacce:
       </para>
 
@@ -346,7 +346,7 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\ActionController</classname>
+            <classname>Zend\Mvc\Controller\AbstractActionController</classname>
           </para>
         </listitem>
       </itemizedlist>
@@ -359,11 +359,11 @@ class BarController extends ActionController
   </section>
 
   <section xml:id="zend.mvc.controllers.restful-controller">
-    <info><title>Il RestfulController</title></info>
+    <title>Il AbstractRestfulController</title>
 
     <para>
         Il secondo controller astratto che è fornito da ZF2 è
-        <classname>Zend\Mvc\Controller\RestfulController</classname>.
+        <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>.
         Questo controller fornisce una implementazione RESTful che
         semplicemente mappa le richieste HTTP nei metodi del controller
         utilizzando la seguente matrice:
@@ -420,8 +420,8 @@ class BarController extends ActionController
 
     <para>
         In aggiunta, puoi mappare metodi "action" nel
-        <classname>RestfulController</classname>, proprio come si farebbe
-        nell'<classname>ActionController</classname>; questi metodi avranno 
+        <classname>AbstractRestfulController</classname>, proprio come si farebbe
+        nell'<classname>AbstractActionController</classname>; questi metodi avranno
         il suffisso "Action", differenziandosi da metodi RESTful descritti
         precendentemente. Questo ti permette di realizzare azioni come
         per esempio l'invio di form verso diversi metodi RESTful o aggiungere
@@ -429,10 +429,10 @@ class BarController extends ActionController
     </para>
 
     <section xml:id="zend.mvc.controllers.restful-controller.interfaces-and-collaborators">
-      <info><title>Interfacce e collaboratori</title></info>
+      <title>Interfacce e collaboratori</title>
 
       <para>
-        <classname>RestfulController</classname> implementa ognuna delle
+        <classname>AbstractRestfulController</classname> implementa ognuna delle
         seguenti interfacce:
       </para>
 
@@ -498,7 +498,7 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\RestfulController</classname>
+            <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>
           </para>
         </listitem>
       </itemizedlist>

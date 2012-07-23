@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.19"><info><title>Zend Framework 1.9</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.19"><title>Zend Framework 1.9</title>
     
 
     <para>
@@ -7,10 +7,10 @@
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <section xml:id="migration.19.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.19.zend.file.transfer"><title>Zend_File_Transfer</title>
         
 
-        <section xml:id="migration.110.zend.file.transfer.mimetype"><info><title>MimeType validation</title></info>
+        <section xml:id="migration.110.zend.file.transfer.mimetype"><title>MimeType validation</title>
             
 
             <para>
@@ -28,7 +28,7 @@
                 <methodname>enableHeaderCheck()</methodname> method.
             </para>
 
-            <note><info><title>Security hint</title></info>
+            <note><title>Security hint</title>
                 
 
                 <para>
@@ -38,7 +38,7 @@
                 </para>
             </note>
 
-            <example xml:id="migration.110.zend.file.transfer.example"><info><title>Allow the usage of the HTTP fields</title></info>
+            <example xml:id="migration.110.zend.file.transfer.example"><title>Allow the usage of the HTTP fields</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -52,7 +52,7 @@ $valid->enableHeaderCheck();
         </section>
     </section>
 
-    <section xml:id="migration.19.zend.filter"><info><title>Zend_Filter</title></info>
+    <section xml:id="migration.19.zend.filter"><title>Zend_Filter</title>
         
 
         <para>
@@ -64,10 +64,10 @@ $valid->enableHeaderCheck();
         </para>
     </section>
 
-    <section xml:id="migration.19.zend.http.client"><info><title>Zend_Http_Client</title></info>
+    <section xml:id="migration.19.zend.http.client"><title>Zend_Http_Client</title>
         
 
-        <section xml:id="migration.19.zend.http.client.fileuploadsarray"><info><title>Changement dans le stockage interne des fichiers d'upload</title></info>
+        <section xml:id="migration.19.zend.http.client.fileuploadsarray"><title>Changement dans le stockage interne des fichiers d'upload</title>
             
 
             <para>
@@ -83,7 +83,7 @@ $valid->enableHeaderCheck();
                 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/issues/browse/ZF-5744">rapport de bug</link>.
             </para>
 
-            <example xml:id="migration.19.zend.http.client.fileuploadsarray.example"><info><title>Stockage interne des informations sur les fichiers uploadés</title></info>
+            <example xml:id="migration.19.zend.http.client.fileuploadsarray.example"><title>Stockage interne des informations sur les fichiers uploadés</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -121,7 +121,7 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
             </para>
         </section>
 
-        <section xml:id="migration.19.zend.http.client.getparamsrecursize"><info><title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title></info>
+        <section xml:id="migration.19.zend.http.client.getparamsrecursize"><title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title>
             
 
             <para>
@@ -143,10 +143,10 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
         </section>
     </section>
 
-    <section xml:id="migration.19.zend.locale"><info><title>Zend_Locale</title></info>
+    <section xml:id="migration.19.zend.locale"><title>Zend_Locale</title>
         
 
-        <section xml:id="migration.19.zend.locale.deprecated"><info><title>Méthodes dépréciées</title></info>
+        <section xml:id="migration.19.zend.locale.deprecated"><title>Méthodes dépréciées</title>
             
 
             <para>
@@ -157,7 +157,7 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
                 appels :
             </para>
 
-            <table xml:id="migration.19.zend.locale.deprecated.table-1"><info><title>Liste des types de mesures</title></info>
+            <table xml:id="migration.19.zend.locale.deprecated.table-1"><title>Liste des types de mesures</title>
                 
 
                 <tgroup cols="2">
@@ -206,7 +206,7 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
         </section>
     </section>
 
-    <section xml:id="migration.19.zend.view.helper.navigation"><info><title>Zend_View_Helper_Navigation</title></info>
+    <section xml:id="migration.19.zend.view.helper.navigation"><title>Zend_View_Helper_Navigation</title>
         
 
         <para>
@@ -295,7 +295,7 @@ echo $this->navigation()->menu()->renderMenu($container, array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="migration.19.security"><info><title>Security fixes as with 1.9.7</title></info>
+    <section xml:id="migration.19.security"><title>Security fixes as with 1.9.7</title>
         
 
         <para>
@@ -304,34 +304,7 @@ echo $this->navigation()->menu()->renderMenu($container, array(
             compatibility implications.
         </para>
 
-        <section xml:id="migration.19.security.zend.dojo.editor"><info><title>Zend_Dojo_View_Helper_Editor</title></info>
-            
-
-            <para>
-                A slight change was made in the 1.9 series to modify the default usage of the Editor
-                dijit to use <acronym>div</acronym> tags instead of a <acronym>textarea</acronym>
-                tag; the latter usage has <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">security
-                implications</link>, and usage of <acronym>div</acronym> tags is recommended by the
-                Dojo project.
-            </para>
-
-            <para>
-                In order to still allow graceful degradation, a new <varname>degrade</varname>
-                option was added to the view helper; this would allow developers to optionally use a
-                <acronym>textarea</acronym> instead. However, this opens applications developed with
-                that usage to <acronym>XSS</acronym> vectors. In 1.9.7, we have removed this option.
-                Graceful degradation is still supported, however, via a <acronym>noscript</acronym>
-                tag that embeds a <acronym>textarea</acronym>. This solution addressess all security
-                concerns.
-            </para>
-
-            <para>
-                The takeaway is that if you were using the <varname>degrade</varname> flag, it will
-                simply be ignored at this time.
-            </para>
-        </section>
-
-        <section xml:id="migration.19.security.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+        <section xml:id="migration.19.security.zend.filter.html-entities"><title>Zend_Filter_HtmlEntities</title>
             
 
             <para>
@@ -353,7 +326,7 @@ echo $this->navigation()->menu()->renderMenu($container, array(
             </para>
         </section>
 
-        <section xml:id="migration.19.security.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+        <section xml:id="migration.19.security.zend.filter.strip-tags"><title>Zend_Filter_StripTags</title>
             
 
             <para>

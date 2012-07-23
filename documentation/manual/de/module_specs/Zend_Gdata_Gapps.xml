@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gapps"><info><title>Google Apps Provisionierung verwenden</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gapps"><title>Google Apps Provisionierung verwenden</title>
     
 
     <para>
@@ -24,7 +24,7 @@
             <acronym>API</acronym> V2.0 Referenz</link> gesehen werden.
     </para>
 
-    <note><info><title>Authentifizierung</title></info>
+    <note><title>Authentifizierung</title>
         
 
         <para>
@@ -34,7 +34,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.gapps.domain"><info><title>Die aktuelle Domain setzen</title></info>
+    <section xml:id="zend.gdata.gapps.domain"><title>Die aktuelle Domain setzen</title>
         
 
         <para>
@@ -44,7 +44,7 @@
             den Abfrageklassen gespeichert um Sie zu verwenden wenn Abfragen erstellt werden.
         </para>
 
-        <section xml:id="zend.gdata.gapps.domain.service"><info><title>Setzen der Domain für die Serviceklasse</title></info>
+        <section xml:id="zend.gdata.gapps.domain.service"><title>Setzen der Domain für die Serviceklasse</title>
             
 
             <para>
@@ -59,7 +59,7 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.domain.query"><info><title>Die Domain für die Abfrageklasse setzen</title></info>
+        <section xml:id="zend.gdata.gapps.domain.query"><title>Die Domain für die Abfrageklasse setzen</title>
             
 
             <para>
@@ -89,7 +89,7 @@ $query = $gdata->newUserQuery($arg);
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.users"><info><title>Interaktion mit Benutzern</title></info>
+    <section xml:id="zend.gdata.gapps.users"><title>Interaktion mit Benutzern</title>
         
 
         <para>
@@ -99,7 +99,7 @@ $query = $gdata->newUserQuery($arg);
             Zugriffsrechte und aktuellen Quoten.
         </para>
 
-        <section xml:id="zend.gdata.gapps.users.creating"><info><title>Erstellen eines Benutzerzugangs</title></info>
+        <section xml:id="zend.gdata.gapps.users.creating"><title>Erstellen eines Benutzerzugangs</title>
             
 
             <para>
@@ -137,7 +137,7 @@ $user = $gdata->insertUser($user);
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.users.retrieving"><info><title>Einen Benutzerzugang erhalten</title></info>
+        <section xml:id="zend.gdata.gapps.users.retrieving"><title>Einen Benutzerzugang erhalten</title>
             
 
             <para>
@@ -192,7 +192,7 @@ echo 'Hat den Regeln zugestimmt: ' .
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.users.retrievingAll"><info><title>Alle Benutzer in einer Domain erhalten</title></info>
+        <section xml:id="zend.gdata.gapps.users.retrievingAll"><title>Alle Benutzer in einer Domain erhalten</title>
             
 
             <para>
@@ -231,7 +231,7 @@ foreach ($feed as $user) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.users.updating"><info><title>Einen Benutzerzugang aktualisieren</title></info>
+        <section xml:id="zend.gdata.gapps.users.updating"><title>Einen Benutzerzugang aktualisieren</title>
             
 
             <para>
@@ -248,7 +248,7 @@ $user->name->familyName = 'Bar';
 $user = $user->save();
 ]]></programlisting>
 
-            <section xml:id="zend.gdata.gapps.users.updating.resettingPassword"><info><title>Ein Benutzerpasswort zurücksetzen</title></info>
+            <section xml:id="zend.gdata.gapps.users.updating.resettingPassword"><title>Ein Benutzerpasswort zurücksetzen</title>
                 
 
                 <para>
@@ -269,7 +269,7 @@ $user = $user->save();
                 </para>
             </section>
 
-            <section xml:id="zend.gdata.gapps.users.updating.forcingPasswordChange"><info><title>Einen Benutzer zwingen sein Passwort zu ändern</title></info>
+            <section xml:id="zend.gdata.gapps.users.updating.forcingPasswordChange"><title>Einen Benutzer zwingen sein Passwort zu ändern</title>
                 
 
                 <para>
@@ -291,7 +291,7 @@ $user = $user->save();
                 </para>
             </section>
 
-            <section xml:id="zend.gdata.gapps.users.updating.suspendingAccount"><info><title>Einen Benutzerzugang unterbrechen</title></info>
+            <section xml:id="zend.gdata.gapps.users.updating.suspendingAccount"><title>Einen Benutzerzugang unterbrechen</title>
                 
 
                 <para>
@@ -326,7 +326,7 @@ $user = $user->save();
                 </para>
             </section>
 
-            <section xml:id="zend.gdata.gapps.users.updating.grantingAdminRights"><info><title>Administrative Rechte vergeben</title></info>
+            <section xml:id="zend.gdata.gapps.users.updating.grantingAdminRights"><title>Administrative Rechte vergeben</title>
                 
 
                 <para>
@@ -349,7 +349,7 @@ $user = $user->save();
             </section>
         </section>
 
-        <section xml:id="zend.gdata.gapps.users.deleting"><info><title>Löschen eines Benutzerzugangs</title></info>
+        <section xml:id="zend.gdata.gapps.users.deleting"><title>Löschen eines Benutzerzugangs</title>
             
 
             <para>
@@ -373,7 +373,7 @@ $gdata->deleteUser('foo');
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.nicknames"><info><title>Mit Spitznamen interagieren</title></info>
+    <section xml:id="zend.gdata.gapps.nicknames"><title>Mit Spitznamen interagieren</title>
         
 
         <para>
@@ -388,7 +388,7 @@ $gdata->deleteUser('foo');
             <classname>Zend_Gdata_Gapps_NicknameEntry</classname>.
         </para>
 
-        <section xml:id="zend.gdata.gapps.nicknames.creating"><info><title>Erstellen eines Spitznamens</title></info>
+        <section xml:id="zend.gdata.gapps.nicknames.creating"><title>Erstellen eines Spitznamens</title>
             
 
             <para>
@@ -415,7 +415,7 @@ $nickname = $gdata->insertNickname($nickname);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.nicknames.retrieving"><info><title>Einen Spitznamen empfangen</title></info>
+        <section xml:id="zend.gdata.gapps.nicknames.retrieving"><title>Einen Spitznamen empfangen</title>
             
 
             <para>
@@ -456,7 +456,7 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.nicknames.retrievingUser"><info><title>Alle Spitznamen eines Benutzers erhalten</title></info>
+        <section xml:id="zend.gdata.gapps.nicknames.retrievingUser"><title>Alle Spitznamen eines Benutzers erhalten</title>
             
 
             <para>
@@ -495,7 +495,7 @@ foreach ($feed as $nickname) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.nicknames.retrievingAll"><info><title>Empfangen aller Spitznamen in einer Domain</title></info>
+        <section xml:id="zend.gdata.gapps.nicknames.retrievingAll"><title>Empfangen aller Spitznamen in einer Domain</title>
             
 
             <para>
@@ -532,7 +532,7 @@ foreach ($feed as $nickname) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.nicknames.deleting"><info><title>Löschen eines Spitznamens</title></info>
+        <section xml:id="zend.gdata.gapps.nicknames.deleting"><title>Löschen eines Spitznamens</title>
             
 
             <para>
@@ -556,7 +556,7 @@ $gdata->deleteNickname('bar');
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.groups"><info><title>Mit Gruppen interagieren</title></info>
+    <section xml:id="zend.gdata.gapps.groups"><title>Mit Gruppen interagieren</title>
         
 
         <para>
@@ -574,7 +574,7 @@ $gdata->deleteNickname('bar');
             <classname>Zend_Gdata_Gapps_GroupEntry</classname> repräsentiert.
         </para>
 
-        <section xml:id="zend.gdata.gapps.groups.creating"><info><title>Erstellen einer Gruppe</title></info>
+        <section xml:id="zend.gdata.gapps.groups.creating"><title>Erstellen einer Gruppe</title>
             
 
             <para>
@@ -609,7 +609,7 @@ $group = $gdata->insertGroup($group);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groups.retrieveGroup"><info><title>Eine individuelle Gruppe empfangen</title></info>
+        <section xml:id="zend.gdata.gapps.groups.retrieveGroup"><title>Eine individuelle Gruppe empfangen</title>
             
 
             <para>
@@ -650,7 +650,7 @@ foreach ($entry->property as $p) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groups.retrievingAll"><info><title>Alle Gruppen einer Domäne empfangen</title></info>
+        <section xml:id="zend.gdata.gapps.groups.retrievingAll"><title>Alle Gruppen einer Domäne empfangen</title>
             
 
             <para>
@@ -693,7 +693,7 @@ foreach ($feed->entry as $entry) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groups.deleting"><info><title>Eine Gruppe löschen</title></info>
+        <section xml:id="zend.gdata.gapps.groups.deleting"><title>Eine Gruppe löschen</title>
             
 
             <para>
@@ -706,7 +706,7 @@ $gdata->deleteGroup('friends');
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groups.updating"><info><title>Eine Gruppe aktualisieren</title></info>
+        <section xml:id="zend.gdata.gapps.groups.updating"><title>Eine Gruppe aktualisieren</title>
             
 
             <para>
@@ -726,7 +726,7 @@ $gdata->updateGroup('group-id-here', 'Name der Gruppe hier');
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groups.retrieve"><info><title>Empfangen aller Gruppen bei denen eine Person Mitglied ist</title></info>
+        <section xml:id="zend.gdata.gapps.groups.retrieve"><title>Empfangen aller Gruppen bei denen eine Person Mitglied ist</title>
             
 
             <para>
@@ -774,7 +774,7 @@ foreach ($feed->entry as $entry) {
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.groupMembers"><info><title>Mit Gruppenmitgliedern interagieren</title></info>
+    <section xml:id="zend.gdata.gapps.groupMembers"><title>Mit Gruppenmitgliedern interagieren</title>
         
 
         <para>
@@ -783,7 +783,7 @@ foreach ($feed->entry as $entry) {
             können individuelle Empfänger bei Gruppen hinzugefügt und gelöscht werden.
         </para>
 
-        <section xml:id="zend.gdata.gapps.groupMembers.adding"><info><title>Ein Mitglied zu einer Gruppe hinzufügen</title></info>
+        <section xml:id="zend.gdata.gapps.groupMembers.adding"><title>Ein Mitglied zu einer Gruppe hinzufügen</title>
             
 
             <para>
@@ -796,7 +796,7 @@ $gdata->addMemberToGroup('bar@somewhere.com', 'friends');
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groupMembers.check"><info><title>Prüfen um zu sehen ob ein Mitglied einer Gruppe angehört</title></info>
+        <section xml:id="zend.gdata.gapps.groupMembers.check"><title>Prüfen um zu sehen ob ein Mitglied einer Gruppe angehört</title>
             
 
             <para>
@@ -816,7 +816,7 @@ var_dump($isMember);
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groupMembers.removing"><info><title>Ein Mitglied von einer Gruppe entfernen</title></info>
+        <section xml:id="zend.gdata.gapps.groupMembers.removing"><title>Ein Mitglied von einer Gruppe entfernen</title>
             
 
             <para>
@@ -829,7 +829,7 @@ $gdata->removeMemberFromGroup('baz', 'friends');
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groupMembers.retrieving"><info><title>Die Liste der Mitglieder einer Gruppe erhalten</title></info>
+        <section xml:id="zend.gdata.gapps.groupMembers.retrieving"><title>Die Liste der Mitglieder einer Gruppe erhalten</title>
             
 
             <para>
@@ -874,7 +874,7 @@ foreach ($feed as $member) {
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.groupOwners"><info><title>Mit Gruppen Eigentümern interagieren</title></info>
+    <section xml:id="zend.gdata.gapps.groupOwners"><title>Mit Gruppen Eigentümern interagieren</title>
         
 
         <para>
@@ -883,7 +883,7 @@ foreach ($feed as $member) {
             können individuelle Eigentümer hinzugefügt und von Gruppen entfernt werden.
         </para>
 
-        <section xml:id="zend.gdata.gapps.groupOwners.adding"><info><title>Einen Eigentümer einer Gruppe hinzufügen</title></info>
+        <section xml:id="zend.gdata.gapps.groupOwners.adding"><title>Einen Eigentümer einer Gruppe hinzufügen</title>
             
 
             <para>
@@ -896,7 +896,7 @@ $gdata->addOwnerToGroup('bar@somewhere.com', 'friends');
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groupOwners.retrieving"><info><title>Die Liste der Eigentümer einer Gruppe erhalten</title></info>
+        <section xml:id="zend.gdata.gapps.groupOwners.retrieving"><title>Die Liste der Eigentümer einer Gruppe erhalten</title>
             
 
             <para>
@@ -940,7 +940,7 @@ foreach ($feed as $owner) {
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groupOwners.check"><info><title>Prüfen um zu sehen ob ein Email der Eigentümer einer Gruppe ist</title></info>
+        <section xml:id="zend.gdata.gapps.groupOwners.check"><title>Prüfen um zu sehen ob ein Email der Eigentümer einer Gruppe ist</title>
             
 
             <para>
@@ -960,7 +960,7 @@ var_dump($isOwner);
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.groupOwners.removing"><info><title>Einen Eigentümer von einer Gruppe entfernen</title></info>
+        <section xml:id="zend.gdata.gapps.groupOwners.removing"><title>Einen Eigentümer von einer Gruppe entfernen</title>
             
 
             <para>
@@ -974,7 +974,7 @@ $gdata->removeOwnerFromGroup('baz@somewhere.com', 'friends');
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.emailLists"><info><title>Mit Email Listen interagieren</title></info>
+    <section xml:id="zend.gdata.gapps.emailLists"><title>Mit Email Listen interagieren</title>
         
 
         <para>
@@ -989,7 +989,7 @@ $gdata->removeOwnerFromGroup('baz@somewhere.com', 'friends');
             <classname>Zend_Gdata_Gapps_EmailListEntry</classname> repräsentiert.
         </para>
 
-        <section xml:id="zend.gdata.gapps.emailLists.creating"><info><title>Erstellen einer Email Liste</title></info>
+        <section xml:id="zend.gdata.gapps.emailLists.creating"><title>Erstellen einer Email Liste</title>
             
 
             <para>
@@ -1015,7 +1015,7 @@ $list = $gdata->insertEmailList($list);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.emailList.retrieve"><info><title>Empfangen aller Email Listen bei denen ein Empfänger eingeschrieben ist</title></info>
+        <section xml:id="zend.gdata.gapps.emailList.retrieve"><title>Empfangen aller Email Listen bei denen ein Empfänger eingeschrieben ist</title>
             
 
             <para>
@@ -1056,7 +1056,7 @@ foreach ($feed as $list) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.emailLists.retrievingAll"><info><title>Empfangen aller Email Listen in einer Domain</title></info>
+        <section xml:id="zend.gdata.gapps.emailLists.retrievingAll"><title>Empfangen aller Email Listen in einer Domain</title>
             
 
             <para>
@@ -1091,7 +1091,7 @@ foreach ($feed as $list) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.emailList.deleting"><info><title>Löschen einer Email Liste</title></info>
+        <section xml:id="zend.gdata.gapps.emailList.deleting"><title>Löschen einer Email Liste</title>
             
 
             <para>
@@ -1105,7 +1105,7 @@ $gdata->deleteEmailList('friends');
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.emailListRecipients"><info><title>Mit den Empfängern von Email Listen interagieren</title></info>
+    <section xml:id="zend.gdata.gapps.emailListRecipients"><title>Mit den Empfängern von Email Listen interagieren</title>
         
 
         <para>
@@ -1115,7 +1115,7 @@ $gdata->deleteEmailList('friends');
             werden.
         </para>
 
-        <section xml:id="zend.gdata.gapps.emailListRecipients.adding"><info><title>Einen Empfängern zu einer Email Liste hinzufügen</title></info>
+        <section xml:id="zend.gdata.gapps.emailListRecipients.adding"><title>Einen Empfängern zu einer Email Liste hinzufügen</title>
             
 
             <para>
@@ -1128,7 +1128,7 @@ $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.gapps.emailListRecipients.retrieving"><info><title>Eine Liste von Empfängern einer Email Liste erhalten</title></info>
+        <section xml:id="zend.gdata.gapps.emailListRecipients.retrieving"><title>Eine Liste von Empfängern einer Email Liste erhalten</title>
             
 
             <para>
@@ -1167,7 +1167,7 @@ foreach ($feed as $recipient) {
             </para>
         </section>
 
-        <section xml:id="zend.gdata.gapps.emailListRecipients.removing"><info><title>Einen Empfänger von einer Email Liste entfernen</title></info>
+        <section xml:id="zend.gdata.gapps.emailListRecipients.removing"><title>Einen Empfänger von einer Email Liste entfernen</title>
             
 
             <para>
@@ -1181,7 +1181,7 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
         </section>
     </section>
 
-    <section xml:id="zend.gdata.gapps.exceptions"><info><title>Fehler handhaben</title></info>
+    <section xml:id="zend.gdata.gapps.exceptions"><title>Fehler handhaben</title>
         
 
         <para>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder"><info><title>Zend_Ldif_Encoder</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder"><title>Zend_Ldif_Encoder</title>
     
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table"><info><title>API für Zend_Ldif_Encoder</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table"><title>API für Zend_Ldif_Encoder</title>
         
 
         <tgroup cols="2">

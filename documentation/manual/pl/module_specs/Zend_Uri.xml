@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><title>Zend_Uri</title>
   
 
-  <section xml:id="zend.uri.overview"><info><title>Wstęp</title></info>
+  <section xml:id="zend.uri.overview"><title>Wstęp</title>
     
 
     <para>
@@ -27,7 +27,7 @@
     </para>
   </section>
 
-  <section xml:id="zend.uri.creation"><info><title>Tworzenie nowego URI</title></info>
+  <section xml:id="zend.uri.creation"><title>Tworzenie nowego URI</title>
     
 
     <para>
@@ -35,7 +35,7 @@
       <code>Zend_Uri::factory()</code> przekazana jest tylko nazwa schematu.
     </para>
 
-    <example xml:id="zend.uri.creation.example-1"><info><title>Tworzenie nowego URI za pomocą <code>Zend_Uri::factory()</code></title></info>
+    <example xml:id="zend.uri.creation.example-1"><title>Tworzenie nowego URI za pomocą <code>Zend_Uri::factory()</code></title>
       
 
       <programlisting role="php"><![CDATA[
@@ -62,7 +62,7 @@ $uri = Zend_Uri::factory('http');
     </para>
   </section>
 
-  <section xml:id="zend.uri.manipulation"><info><title>Manipulowanie istniejącym URI</title></info>
+  <section xml:id="zend.uri.manipulation"><title>Manipulowanie istniejącym URI</title>
     
 
     <para>
@@ -70,7 +70,7 @@ $uri = Zend_Uri::factory('http');
       <code>Zend_Uri::factory()</code>.
     </para>
 
-    <example xml:id="zend.uri.manipulation.example-1"><info><title>Manipulowanie istniejącym URI za pomocą <code>Zend_Uri::factory()</code></title></info>
+    <example xml:id="zend.uri.manipulation.example-1"><title>Manipulowanie istniejącym URI za pomocą <code>Zend_Uri::factory()</code></title>
       
 
     <programlisting role="php"><![CDATA[
@@ -91,7 +91,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     </para>
   </section>
 
-  <section xml:id="zend.uri.validation"><info><title>Sprawdzanie poprawności URI</title></info>
+  <section xml:id="zend.uri.validation"><title>Sprawdzanie poprawności URI</title>
     
 
     <para>
@@ -99,7 +99,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
       jest tylko sprawdzenie poprawności istniejącego URI.
     </para>
 
-    <example xml:id="zend.uri.validation.example-1"><info><title>Sprawdzanie poprawności URI za pomocą <code>Zend_Uri::check()</code></title></info>
+    <example xml:id="zend.uri.validation.example-1"><title>Sprawdzanie poprawności URI za pomocą <code>Zend_Uri::check()</code></title>
       
 
     <programlisting role="php"><![CDATA[
@@ -118,7 +118,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
     </para>
   </section>
 
-  <section xml:id="zend.uri.instance-methods"><info><title>Wspólne metody instancji</title></info>
+  <section xml:id="zend.uri.instance-methods"><title>Wspólne metody instancji</title>
     
 
     <para>
@@ -127,7 +127,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
       z rożnego rodzaju URI.
     </para>
 
-    <section xml:id="zend.uri.instance-methods.getscheme"><info><title>Pobieranie schematu URI</title></info>
+    <section xml:id="zend.uri.instance-methods.getscheme"><title>Pobieranie schematu URI</title>
       
 
       <para>
@@ -135,7 +135,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
         nazwą schematu adresu <code>http://www.zend.com</code> jest <code>http</code>.
       </para>
 
-      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Pobieranie schematu z obiektu <code>Zend_Uri_*</code></title></info>
+      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><title>Pobieranie schematu z obiektu <code>Zend_Uri_*</code></title>
         
 
         <programlisting role="php"><![CDATA[
@@ -153,10 +153,10 @@ $scheme = $uri->getScheme();  // "http"
 
     </section>
 
-    <section xml:id="zend.uri.instance-methods.geturi"><info><title>Pobieranie całego URI</title></info>
+    <section xml:id="zend.uri.instance-methods.geturi"><title>Pobieranie całego URI</title>
       
 
-      <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Pobieranie całego URI z obiektu <code>Zend_Uri_*</code></title></info>
+      <example xml:id="zend.uri.instance-methods.geturi.example-1"><title>Pobieranie całego URI z obiektu <code>Zend_Uri_*</code></title>
         
 
         <programlisting role="php"><![CDATA[
@@ -173,7 +173,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       </para>
     </section>
 
-    <section xml:id="zend.uri.instance-methods.valid"><info><title>Sprawdzanie poprawności URI</title></info>
+    <section xml:id="zend.uri.instance-methods.valid"><title>Sprawdzanie poprawności URI</title>
       
 
       <para>
@@ -185,7 +185,7 @@ echo $uri->getUri();  // "http://www.zend.com"
         się niepoprawny, po tym jak będziemy nim manipulować.
       </para>
 
-      <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Sprawdzanie poprawności obiektu <code>Zend_Uri_*</code></title></info>
+      <example xml:id="zend.uri.instance-methods.valid.example-1"><title>Sprawdzanie poprawności obiektu <code>Zend_Uri_*</code></title>
         
 
         <programlisting role="php"><![CDATA[

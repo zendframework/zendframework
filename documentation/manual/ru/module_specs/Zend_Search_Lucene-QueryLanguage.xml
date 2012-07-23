@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><info><title>Язык запросов<!--Query Language--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><title>Язык запросов<!--Query Language--></title>
     
 
     <para>
@@ -26,7 +26,7 @@
 -->
     </para>
 
-    <section xml:id="zend.search.lucene.query-language.terms"><info><title>Элементы<!--Terms--></title></info>
+    <section xml:id="zend.search.lucene.query-language.terms"><title>Элементы<!--Terms--></title>
         
 
         <para>
@@ -67,7 +67,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.fields"><info><title>Поля<!--Fields--></title></info>
+    <section xml:id="zend.search.lucene.query-language.fields"><title>Поля<!--Fields--></title>
         
 
         <para>
@@ -161,7 +161,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.modifiers"><info><title>Модификаторы элементов<!--Term Modifiers--></title></info>
+    <section xml:id="zend.search.lucene.query-language.modifiers"><title>Модификаторы элементов<!--Term Modifiers--></title>
         
 
         <para>
@@ -190,7 +190,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.proximity-search"><info><title>Поиск по критерию близости<!--Proximity Searches--></title></info>
+    <section xml:id="zend.search.lucene.query-language.proximity-search"><title>Поиск по критерию близости<!--Proximity Searches--></title>
         
 
         <para>
@@ -208,7 +208,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.boosting"><info><title>Усиление элемента<!--Boosting a Term--></title></info>
+    <section xml:id="zend.search.lucene.query-language.boosting"><title>Усиление элемента<!--Boosting a Term--></title>
         
 
         <para>
@@ -259,7 +259,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.boolean"><info><title>Булевы операторы<!--Boolean Operators--></title></info>
+    <section xml:id="zend.search.lucene.query-language.boolean"><title>Булевы операторы<!--Boolean Operators--></title>
         
 
         <para>
@@ -296,7 +296,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
 -->
         </para>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.and"><info><title>AND</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.and"><title>AND</title>
             
             <para>
                 Оператор AND означает, что документ должен соответствовать всем
@@ -315,7 +315,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.or"><info><title>OR</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.or"><title>OR</title>
             
             <para>
                 Оператор OR делит запрос на несколько необязательных частей.
@@ -333,7 +333,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.not"><info><title>NOT</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.not"><title>NOT</title>
             
             <para>
                 Оператор NOT исключает документы, содержащие элемент после NOT.
@@ -355,7 +355,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><info><title>Операторы &amp;&amp;, ||, и !<!--&amp;&amp;, ||, and ! operators--></title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><title>Операторы &amp;&amp;, ||, и !<!--&amp;&amp;, ||, and ! operators--></title>
             
             <para>
                 Операторы &amp;&amp;, ||, и ! могут использоваться вместо AND,
@@ -366,7 +366,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.plus"><info><title>+</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.plus"><title>+</title>
             
             <para>
                 "+" означает, что документ должен соответствовать элементу,
@@ -385,7 +385,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.minus"><info><title>-</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.minus"><title>-</title>
             
             <para>
                 "-" исключает документы, соответствующие элементу находящемуся
@@ -404,7 +404,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><info><title>Отсутствие оператора<!--no operator--></title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><title>Отсутствие оператора<!--no operator--></title>
             
             <para>
                 Если не не указан оператор, то поведение определяется
@@ -463,7 +463,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.grouping"><info><title>Групирование<!--Grouping--></title></info>
+    <section xml:id="zend.search.lucene.query-language.grouping"><title>Групирование<!--Grouping--></title>
         
 
         <para>
@@ -484,7 +484,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.field-grouping"><info><title>Группирование полей<!--Field Grouping--></title></info>
+    <section xml:id="zend.search.lucene.query-language.field-grouping"><title>Группирование полей<!--Field Grouping--></title>
         
 
         <para>
@@ -509,7 +509,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.escaping"><info><title>Экранирование специальных символов<!--Escaping Special Characters--></title></info>
+    <section xml:id="zend.search.lucene.query-language.escaping"><title>Экранирование специальных символов<!--Escaping Special Characters--></title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>MIME バウンダリの制御</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><title>MIME バウンダリの制御</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         これが実現できます。
     </para>
 
-    <example xml:id="zend.mail.boundary.example-1"><info><title>MIME バウンダリの変更</title></info>
+    <example xml:id="zend.mail.boundary.example-1"><title>MIME バウンダリの変更</title>
         
 
         <programlisting language="php"><![CDATA[

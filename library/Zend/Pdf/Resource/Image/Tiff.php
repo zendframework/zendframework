@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Image
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\Resource\Image;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 
 /**
@@ -29,8 +19,6 @@ use Zend\Pdf\InternalType;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Tiff extends AbstractImage
 {
@@ -99,7 +87,8 @@ class Tiff extends AbstractImage
      * @param string $bytes
      * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
-    protected function unpackBytes($type, $bytes) {
+    protected function unpackBytes($type, $bytes)
+    {
         if(!isset($this->_endianType)) {
             throw new Exception\CorruptedImageException(
                 'The unpackBytes function can only be used after the endianness of the file is known'
@@ -407,22 +396,24 @@ class Tiff extends AbstractImage
     /**
      * Image width (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
-    public function getPixelWidth() {
+    public function getPixelWidth()
+    {
         return $this->_width;
     }
 
     /**
      * Image height (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
-    public function getPixelHeight() {
+    public function getPixelHeight()
+    {
         return $this->_height;
     }
 
     /**
      * Image properties (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->_imageProperties;
     }
 }
-

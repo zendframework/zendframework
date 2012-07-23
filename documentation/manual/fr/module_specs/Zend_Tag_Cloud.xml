@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><info><title>Zend_Tag_Cloud</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><title>Zend_Tag_Cloud</title>
     
 
     <para>
@@ -68,7 +68,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.tag.cloud.example.using"><info><title>Utiliser Zend_Tag_Cloud</title></info>
+    <example xml:id="zend.tag.cloud.example.using"><title>Utiliser Zend_Tag_Cloud</title>
         
 
         <para>
@@ -96,7 +96,7 @@ echo $cloud;
         <para>Ceci affichera le nuage de tags, avec les polices par défaut.</para>
     </example>
 
-    <section xml:id="zend.tag.cloud.decorators"><info><title>Decorateurs</title></info>
+    <section xml:id="zend.tag.cloud.decorators"><title>Decorateurs</title>
         
 
         <para>
@@ -107,7 +107,7 @@ echo $cloud;
             tailles de polices différentes selon les poids des tags.
         </para>
 
-        <section xml:id="zend.tag.cloud.decorators.htmltag"><info><title>Décorateur HTML</title></info>
+        <section xml:id="zend.tag.cloud.decorators.htmltag"><title>Décorateur HTML</title>
             
 
             <para>
@@ -116,7 +116,7 @@ echo $cloud;
                 l'être.
             </para>
 
-            <note><info><title>Paramètre d'URL</title></info>
+            <note><title>Paramètre d'URL</title>
                 
 
                 <para>
@@ -171,7 +171,7 @@ echo $cloud;
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><info><title>Décorateur HTML de nuage</title></info>
+        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><title>Décorateur HTML de nuage</title>
             
 
             <para>

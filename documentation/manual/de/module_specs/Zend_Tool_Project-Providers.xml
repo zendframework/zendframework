@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.providers"><info><title>Project Provider für Zend_Tool</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.providers"><title>Project Provider für Zend_Tool</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         ausgeliefert werden.
     </para>
 
-    <table xml:id="zend.tool.project.project-provider"><info><title>Optionen des Project Providers</title></info>
+    <table xml:id="zend.tool.project.project-provider"><title>Optionen des Project Providers</title>
         
 
         <tgroup cols="4">

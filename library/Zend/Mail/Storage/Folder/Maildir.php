@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage\Folder;
 
 use Zend\Mail\Storage;
 use Zend\Mail\Storage\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Maildir extends Storage\Maildir implements FolderInterface
 {
@@ -100,7 +88,9 @@ class Maildir extends Storage\Maildir implements FolderInterface
         $this->_rootFolder = new Storage\Folder('/', '/', false);
         $this->_rootFolder->INBOX = new Storage\Folder('INBOX', 'INBOX', true);
 
-        $dh = @opendir($this->_rootdir);
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($this->_rootdir);
+        ErrorHandler::stop();
         if (!$dh) {
             throw new Exception\RuntimeException("can't read folders in maildir");
         }
@@ -139,7 +129,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                     array_push($folderStack, $parentFolder);
                     $parentFolder = $folder;
                     break;
-                } else if ($stack) {
+                } elseif ($stack) {
                     $parent = array_pop($stack);
                     $parentFolder = array_pop($folderStack);
                 }
@@ -169,9 +159,11 @@ class Maildir extends Storage\Maildir implements FolderInterface
         }
         $currentFolder = $this->_rootFolder;
         $subname = trim($rootFolder, $this->_delim);
-        
+
         while ($currentFolder) {
-            @list($entry, $subname) = @explode($this->_delim, $subname, 2);
+            ErrorHandler::start(E_NOTICE);
+            list($entry, $subname) = explode($this->_delim, $subname, 2);
+            ErrorHandler::stop();
             $currentFolder = $currentFolder->$entry;
             if (!$subname) {
                 break;

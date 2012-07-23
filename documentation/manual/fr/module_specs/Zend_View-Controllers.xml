@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Scripts de contrôleur</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>Scripts de contrôleur</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         comment effectuer le rendu en utilisant un script particulier.
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>Assigner des variables</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>Assigner des variables</title>
         
 
         <para>
@@ -70,7 +70,7 @@ $view->assign('c', "Cé");
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>Effectuer le rendu d'un script de vue</title></info>
+    <section xml:id="zend.view.controllers.render"><title>Effectuer le rendu d'un script de vue</title>
         
 
         <para>
@@ -91,7 +91,7 @@ echo $view->render('uneVue.php');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>Chemin des scripts de vue</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>Chemin des scripts de vue</title>
         
 
         <para>
@@ -139,8 +139,8 @@ $view->addScriptPath('/chemin/des/vues-personnalisees');
 // courant pour trouver le fichier "listelivre.php".
 ]]></programlisting>
 
-        <note><info><title>Ne jamais utiliser une entrée utilisateur pour spécifier les chemins vers les
-            scripts de vues</title></info>
+        <note><title>Ne jamais utiliser une entrée utilisateur pour spécifier les chemins vers les
+            scripts de vues</title>
             
 
             <para>

@@ -251,10 +251,10 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -316,9 +316,9 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingCrazyAction()
     {
@@ -352,10 +352,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -424,7 +424,7 @@ class ArticleController extends ActionController
     <!-- This is from the $articleView view model, and the "content/article" 
          template -->
     <article class="twelve columns">
-        <?php echo $this->escape('article') ?>
+        <?php echo $this->escapeHtml('article') ?>
     </article>
 
 <?php // "content/main-sidebar template ?>
@@ -568,10 +568,10 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -601,10 +601,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -635,10 +635,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -667,10 +667,10 @@ class ArticleController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -747,7 +747,7 @@ class Module
     {
         // Register a dispatch event
         $app = $e->getParam('application');
-        $app->events()->attach('dispatch', array($this, 'setLayout'), -100);
+        $app->getEventManager()->attach('dispatch', array($this, 'setLayout'), -100);
     }
 
     public function setLayout($e)
@@ -854,7 +854,7 @@ class Module
         // Register a "render" event, at high priority (so it executes prior
         // to the view attempting to render)
         $app = $e->getParam('application');
-        $app->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $app->getEventManager()->attach('render', array($this, 'registerJsonStrategy'), 100);
     }
 
     public function registerJsonStrategy($e)
@@ -865,7 +865,7 @@ class Module
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
         // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
+        $view->getEventManager()->attach($jsonStrategy, 100);
     }
 }
 
@@ -895,7 +895,7 @@ class Module
     {
         // Register a render event
         $app = $e->getParam('application');
-        $app->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $app->getEventManager()->attach('render', array($this, 'registerJsonStrategy'), 100);
     }
 
     public function registerJsonStrategy($e)
@@ -918,7 +918,7 @@ class Module
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
         // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
+        $view->getEventManager()->attach($jsonStrategy, 100);
     }
 }
 ]]></programlisting>
@@ -940,12 +940,12 @@ class Module
             <programlisting language="php"><![CDATA[
 namespace Content\View;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
-    Zend\Feed\Writer\Feed,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\EventManager\EventCollection;
+use Zend\EventManager\ListenerAggregate;
+use Zend\Feed\Writer\Feed;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\Renderer\JsonRenderer;
+use Zend\View\Renderer\PhpRenderer;
 
 class AcceptStrategy implements ListenerAggregate
 {
@@ -987,7 +987,7 @@ class AcceptStrategy implements ListenerAggregate
     public function selectRenderer($e)
     {
         $request = $e->getRequest();
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
 
         // No Accept header? return PhpRenderer
         if (!$headers->has('accept')) {
@@ -1022,13 +1022,13 @@ class AcceptStrategy implements ListenerAggregate
 
         if ($renderer === $this->jsonRenderer) {
             // JSON Renderer; set content-type header
-            $headers = $response->headers();
+            $headers = $response->getHeaders();
             $headers->addHeaderLine('content-type', 'application/json');
         } elseif ($renderer === $this->feedRenderer) {
             // Feed Renderer; set content-type header, and export the feed if
             // necessary
             $feedType  = $this->feedRenderer->getFeedType();
-            $headers   = $response->headers();
+            $headers   = $response->getHeaders();
             $mediatype = 'application/'
                        . (('rss' == $feedType) ? 'rss' : 'atom')
                        . '+xml';

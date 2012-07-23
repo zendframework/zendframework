@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><info><title>Float</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><title>Float</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Gleitkommazahl enthält. Diese Prüfung kann auch lokalisierte Eingaben prüfen.
     </para>
 
-    <section xml:id="zend.validate.set.float.options"><info><title>Unterstützte Optionen für Zend_Validate_Float</title></info>
+    <section xml:id="zend.validate.set.float.options"><title>Unterstützte Optionen für Zend_Validate_Float</title>
         
 
         <para>
@@ -25,7 +25,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.float.basic"><info><title>Einfache Float Prüfung</title></info>
+    <section xml:id="zend.validate.set.float.basic"><title>Einfache Float Prüfung</title>
         
 
         <para>
@@ -47,7 +47,7 @@ $validator->isValid('1,234.5'); // Gibt true zurück
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.float.localized"><info><title>Lokalisierte Prüfung von Gleitkommazahlen</title></info>
+    <section xml:id="zend.validate.set.float.localized"><title>Lokalisierte Prüfung von Gleitkommazahlen</title>
         
 
         <para>

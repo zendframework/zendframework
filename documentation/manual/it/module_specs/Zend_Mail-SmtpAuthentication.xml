@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>Autenticazione SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>Autenticazione SMTP</title>
   
 
   <para>
@@ -7,7 +7,7 @@
       I metodi di autenticazione integrati disponibili sono PLAIN, LOGIN e CRAM-MD5, che necessitano dei valori di 'username' e 'password' nell'array di configurazione.
   </para>
 
-  <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Abilitazione dell'autenticazione in Zend_Mail_Transport_Smtp</title></info>
+  <example xml:id="zend.mail.smtp-authentication.example-1"><title>Abilitazione dell'autenticazione in Zend_Mail_Transport_Smtp</title>
     
 
     <programlisting role="php"><![CDATA[<?php
@@ -29,7 +29,7 @@ $mail->send($transport);
     ]]></programlisting>
   </example>
 
-  <note><info><title>Tipi di autenticazione</title></info>
+  <note><title>Tipi di autenticazione</title>
     
 
     <para>

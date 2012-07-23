@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><title>Zend_Db_Profiler</title>
     
 
-    <section xml:id="zend.db.profiler.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.db.profiler.introduction"><title>Einführung</title>
         
 
         <para>
@@ -129,7 +129,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.profiler.using"><info><title>Den Profiler verwenden</title></info>
+    <section xml:id="zend.db.profiler.using"><title>Den Profiler verwenden</title>
         
 
         <para>
@@ -264,7 +264,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.profiler.advanced"><info><title>Fortgeschrittene Profiler Verwendung</title></info>
+    <section xml:id="zend.db.profiler.advanced"><title>Fortgeschrittene Profiler Verwendung</title>
         
 
         <para>
@@ -273,7 +273,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
             mit einer <classname>Zend_Db_Profiler</classname> Instanz:
         </para>
 
-        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filtern anhand der Laufzeit der Abfragen</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><title>Filtern anhand der Laufzeit der Abfragen</title>
             
 
             <para>
@@ -292,7 +292,7 @@ $profiler->setFilterElapsedSecs(null);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filtern anhand des Abfragetyp</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><title>Filtern anhand des Abfragetyp</title>
             
 
             <para>
@@ -381,7 +381,7 @@ $profiler->setFilterQueryType(null);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Hole Profil nach Abfragetyp zurück</title></info>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><title>Hole Profil nach Abfragetyp zurück</title>
             
 
             <para>
@@ -410,7 +410,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
         </section>
     </section>
 
-    <section xml:id="zend.db.profiler.profilers"><info><title>Specialized Profilers</title></info>
+    <section xml:id="zend.db.profiler.profilers"><title>Specialized Profilers</title>
         
 
         <para>

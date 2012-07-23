@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>Erstellung eigener Seiten Typen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><title>Erstellung eigener Seiten Typen</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         <command>$internalId = $page-&gt;get('internal_id');</command> erreichbar.
     </para>
 
-    <example xml:id="zend.navigation.custom.example.simple"><info><title>Die einfachste eigene Seite</title></info>
+    <example xml:id="zend.navigation.custom.example.simple"><title>Die einfachste eigene Seite</title>
         
 
         <para>
@@ -37,7 +37,7 @@ class My_Simple_Page extends Zend_Navigation_Page
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.navigation.custom.example.properties"><info><title>Eine eigene Seite mit Eigenschaften</title></info>
+    <example xml:id="zend.navigation.custom.example.properties"><title>Eine eigene Seite mit Eigenschaften</title>
         
 
         <para>

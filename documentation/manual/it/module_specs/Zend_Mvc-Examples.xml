@@ -3,17 +3,17 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.examples">
-  <info><title>Esempi</title></info>
+  <title>Esempi</title>
 
   <section xml:id="zend.mvc.examples.controllers">
-    <info><title>I Controller</title></info>
+    <title>I Controller</title>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
-      <info><title>Accedere alle Request e Response (richieste e risposte)</title></info>
+      <title>Accedere alle Request e Response (richieste e risposte)</title>
 
       <para>
-        Quando utilizzi <classname>ActionController</classname> oppure
-        <classname>RestfulController</classname> la gli oggetti 
+        Quando utilizzi <classname>AbstractActionController</classname> oppure
+        <classname>AbstractRestfulController</classname> la gli oggetti
         richiesta e la risposta sono costruiti direttamente dentro 
         il controller prima dei chiamare il metodo <methodname>dispatch()</methodname>.
         Puoi accedere a queste variabili nei seguenti modi:
@@ -32,7 +32,7 @@ $response = $this->response;
       <para>
         In aggiunta, il tuo controller implementa 
         <classname>InjectApplicationEvent</classname> (come anche
-        <classname>ActionController</classname> e  <classname>RestfulController</classname> 
+        <classname>AbstractActionController</classname> e  <classname>AbstractRestfulController</classname>
         fanno) e puoi accedere a questi oggetti dal collegamento 
         con <classname>MvcEvent</classname>
       </para>
@@ -50,7 +50,7 @@ $response = $event->getResponse();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
-      <info><title>Accedere ai parametri di instradamento</title></info>
+      <title>Accedere ai parametri di instradamento</title>
 
       <para>
         I parametri di ritorno quando un intradamento è completo sono
@@ -62,15 +62,15 @@ $response = $event->getResponse();
       <para>
         In aggiunta, il tuo controller implementa 
         <classname>InjectApplicationEvent</classname> (come anche
-        <classname>ActionController</classname> e  <classname>RestfulController</classname> 
+        <classname>AbstractActionController</classname> e  <classname>AbstractRestfulController</classname>
         fanno) e puoi accedere a questi oggetti dal collegamento 
         con <classname>MvcEvent</classname>
       </para>
       <!-- <para>
         Within your controller, if you implement
         <classname>InjectApplicationEvent</classname> (as both
-        <classname>ActionController</classname> and
-        <classname>RestfulController</classname> do), you can access this
+        <classname>AbstractActionController</classname> and
+        <classname>AbstractRestfulController</classname> do), you can access this
         object from the attached <classname>MvcEvent</classname>:
       </para> --> <!-- Again? see before...-->
 
@@ -86,7 +86,7 @@ $matches = $event->getRouteMatch();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.returning-early">
-      <info><title>Returning early</title></info>
+      <title>Returning early</title>
 
       <para>
         Puoi effettivamente cortocircuitare l'esecuzione dell'applicazione
@@ -108,10 +108,10 @@ $matches = $event->getRouteMatch();
   </section>
 
   <section xml:id="zend.mvc.examples.bootstrapping">
-    <info><title>Bootstrapping</title></info>
+    <title>Bootstrapping</title>
 
     <section xml:id="registering-module-specific-listeners">
-      <info><title>Registrare listener specifici per un modulo</title></info>
+      <title>Registrare listener specifici per un modulo</title>
 
       <para>
         Spesso si vogliono dei listener specifici per un modulo. Un esempio
@@ -165,7 +165,7 @@ class Module
 
         $listeners   = new Listeners\ViewListener();
         $listeners->setView($view);
-        $application->events()->attachAggregate($listeners);
+        $application->getEventManager()->attachAggregate($listeners);
     }
 }
 ]]></programlisting>

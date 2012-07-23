@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.bundled-services"><info><title>Zend_Service_StrikeIron: バンドルされているサービス</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.bundled-services"><title>Zend_Service_StrikeIron: バンドルされているサービス</title>
     
 
     <para>
@@ -7,7 +7,7 @@
       のサービスのうち人気のある 3 つについてのラッパークラスが含まれています。
     </para>
 
-    <section xml:id="zend.service.strikeiron.bundled-services.zip-code-information"><info><title>ZIP Code Information</title></info>
+    <section xml:id="zend.service.strikeiron.bundled-services.zip-code-information"><title>ZIP Code Information</title>
       
 
       <para>
@@ -71,7 +71,7 @@ $status = $response->serviceStatus;
       </para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.bundled-services.us-address-verification"><info><title>U.S. Address Verification</title></info>
+    <section xml:id="zend.service.strikeiron.bundled-services.us-address-verification"><title>U.S. Address Verification</title>
       
 
       <para>
@@ -132,7 +132,7 @@ if ($result->addressErrorNumber != 0) {
       </para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.bundled-services.sales-use-tax-basic"><info><title>Sales &amp; Use Tax Basic</title></info>
+    <section xml:id="zend.service.strikeiron.bundled-services.sales-use-tax-basic"><title>Sales &amp; Use Tax Basic</title>
       
 
       <para>

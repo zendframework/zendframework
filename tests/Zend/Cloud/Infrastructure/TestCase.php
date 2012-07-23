@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Cloud
- * @subpackage Infrastructure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace ZendTest\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Adapter\AdapterInterface,
-    Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\Adapter\AdapterInterface;
+use Zend\Cloud\Infrastructure\Instance;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on
@@ -31,8 +20,6 @@ use Zend\Cloud\Infrastructure\Adapter\AdapterInterface,
  * @category   Zend
  * @package    Zend_Cloud
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -74,7 +61,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_a($this->_commonInfrastructure->getClient(), $this->_clientType));
+        $this->assertTrue(is_a($this->_commonInfrastructure->getClient(), $this->_clientType));
     }
 
     /**
@@ -114,7 +101,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Test construct with missing params
      */
-    public function testConstructExceptionMissingParams() 
+    public function testConstructExceptionMissingParams()
     {
         $this->setExpectedException(
             'Zend\Cloud\Infrastructure\Exception\InvalidArgumentException',
@@ -282,7 +269,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     abstract protected function _getConfig();
 
-    protected function _wait() {
+    protected function _wait()
+    {
         sleep($this->_waitPeriod);
     }
 

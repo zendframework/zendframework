@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.node"><info><title>Accès à l'arbre LDAP de manière orientée objet avec Zend_Ldap_Node</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.node"><title>Accès à l'arbre LDAP de manière orientée objet avec Zend_Ldap_Node</title>
     
 
-    <section xml:id="zend.ldap.node.basic"><info><title>Opérations CRUD basiques</title></info>
+    <section xml:id="zend.ldap.node.basic"><title>Opérations CRUD basiques</title>
         
 
-        <section xml:id="zend.ldap.node.basic.retrieve"><info><title>Récupérer des données depuis LDAP</title></info>
+        <section xml:id="zend.ldap.node.basic.retrieve"><title>Récupérer des données depuis LDAP</title>
             
 
-            <section xml:id="zend.ldap.node.basic.retrieve.dn"><info><title>Récupérer un noeud par son DN</title></info>
+            <section xml:id="zend.ldap.node.basic.retrieve.dn"><title>Récupérer un noeud par son DN</title>
                 
                 <para/>
             </section>
 
-            <section xml:id="zend.ldap.node.basic.retrieve.search"><info><title>Chercher les sous-arbres d'un noeud</title></info>
+            <section xml:id="zend.ldap.node.basic.retrieve.search"><title>Chercher les sous-arbres d'un noeud</title>
                 
                 <para/>
             </section>
         </section>
 
-        <section xml:id="zend.ldap.node.basic.add"><info><title>Ajouter un nouveau noeud à LDAP</title></info>
+        <section xml:id="zend.ldap.node.basic.add"><title>Ajouter un nouveau noeud à LDAP</title>
             
             <para/>
         </section>
 
-        <section xml:id="zend.ldap.node.basic.delete"><info><title>Supprimer un noeud de LDAP</title></info>
+        <section xml:id="zend.ldap.node.basic.delete"><title>Supprimer un noeud de LDAP</title>
             
             <para/>
         </section>
 
-        <section xml:id="zend.ldap.node.basic.update"><info><title>Mettre à jour un noeud de LDAP</title></info>
+        <section xml:id="zend.ldap.node.basic.update"><title>Mettre à jour un noeud de LDAP</title>
             
             <para/>
         </section>
     </section>
 
-    <section xml:id="zend.ldap.node.extended"><info><title>Opérations avancées</title></info>
+    <section xml:id="zend.ldap.node.extended"><title>Opérations avancées</title>
         
 
-        <section xml:id="zend.ldap.node.extended.copy-and-move"><info><title>Copier et déplacer des noeuds dans LDAP</title></info>
+        <section xml:id="zend.ldap.node.extended.copy-and-move"><title>Copier et déplacer des noeuds dans LDAP</title>
             
             <para/>
         </section>
     </section>
 
-    <section xml:id="zend.ldap.node.traversal"><info><title>Parcours d'un arbre</title></info>
+    <section xml:id="zend.ldap.node.traversal"><title>Parcours d'un arbre</title>
         
 
-        <example><info><title>Parcours récursif d'un arbre LDAP</title></info>
+        <example><title>Parcours récursif d'un arbre LDAP</title>
             
 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);

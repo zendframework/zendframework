@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
@@ -14,8 +14,9 @@ use Zend\Http\Client;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Service\WindowsAzure\Credentials;
-use Zend\Service\WindowsAzure\RetryPolicy;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\RetryPolicy;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -373,7 +374,9 @@ class Storage
      */
     protected function _parseResponse(Response $response)
     {
-        $xml = @simplexml_load_string($response->getBody());
+        ErrorHandler::start(E_WARNING);
+        $xml = simplexml_load_string($response->getBody());
+        ErrorHandler::stop();
 
         if ($xml !== false) {
             // Fetch all namespaces
@@ -450,15 +453,21 @@ class Storage
      */
     public function isoDate($timestamp = null)
     {
-        $tz = @date_default_timezone_get();
-        @date_default_timezone_set('UTC');
+        ErrorHandler::start(E_WARNING);
+        $tz = date_default_timezone_get();
+        date_default_timezone_set('UTC');
+        ErrorHandler::stop();
 
         if ($timestamp === null) {
             $timestamp = time();
         }
 
         $returnValue = str_replace('+00:00', '.0000000Z', @date('c', $timestamp));
-        @date_default_timezone_set($tz);
+
+        ErrorHandler::start(E_WARNING);
+        date_default_timezone_set($tz);
+        ErrorHandler::stop();
+
         return $returnValue;
     }
 

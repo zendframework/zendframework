@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><info><title>Introduction à Zend_Search_Lucene</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><title>Introduction à Zend_Search_Lucene</title>
     
     <para>
         Le composant <classname>Zend_Search_Lucene</classname> est prévu pour fournir une
@@ -40,7 +40,7 @@
         Il n'est pas sensible à la case, et saute les nombres. Utilisez d'autres analyseurs ou
         créez votre propre analyseur si vous avez besoin de changer ce comportement.
     </para>
-    <note><info><title>Utilisation des analyseurs durant l'indexation et la recherche</title></info>
+    <note><title>Utilisation des analyseurs durant l'indexation et la recherche</title>
         
         <para>
             Note importante !  Les requêtes de recherches sont aussi segmentées en utilisant

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.i18n.filters">
+    <title>I18n Filters</title>
+
+    <para>
+        Zend Framework comes with a set of filters related to Internationalization.
+    </para>
+
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alnum.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alpha.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.number-format.xml"/>
+</section>

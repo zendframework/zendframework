@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon\S3;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\S3\Exception;
+
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\S3\Exception;
 
 /**
  * Amazon S3 PHP stream wrapper
@@ -29,8 +19,6 @@ use Zend\Service\Amazon,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Stream
 {
@@ -130,8 +118,7 @@ class Stream
             $this->_writeBuffer = true;
             $this->_getS3Client($path);
             return true;
-        }
-        else {
+        } else {
             // Otherwise, just see if the file exists or not
             $info = $this->_getS3Client($path)->getInfo($name);
             if ($info) {
@@ -165,9 +152,9 @@ class Stream
     /**
      * Read from the stream
      *
-     * http://bugs.php.net/21641 - stream_read() is always passed PHP's 
-     * internal read buffer size (8192) no matter what is passed as $count 
-     * parameter to fread(). 
+     * http://bugs.php.net/21641 - stream_read() is always passed PHP's
+     * internal read buffer size (8192) no matter what is passed as $count
+     * parameter to fread().
      *
      * @param  integer $count
      * @return string
@@ -407,8 +394,7 @@ class Stream
 
         if (preg_match('@^([a-z0-9+.]|-)+://$@', $path)) {
             $this->_bucketList = $this->_getS3Client($path)->getBuckets();
-        }
-        else {
+        } else {
             $host = parse_url($path, PHP_URL_HOST);
             $this->_bucketList = $this->_getS3Client($path)->getObjectsByBucket($host);
         }

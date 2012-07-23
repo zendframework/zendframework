@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title> Zend_Form 的国际化 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><title> Zend_Form 的国际化 </title>
     
 
     <para>
@@ -10,7 +10,7 @@
         缺省地，<code>Zend_Form</code> 不支持国际化（I18n）。要打开在 <code>Zend_Form</code> 中的 I18n 功能，需要带适当的适配器实例化一个 <code>Zend_Translator</code> 对象，并把它附加到 <code>Zend_Form</code> 和/或 <code>Zend_Validate</code> 中。参见 <link linkend="zend.translator">Zend_Translator 文档 </link> 有更多关于生成翻译对象和翻译文件的信息。
     </para>
 
-    <note><info><title> 可以对每个元素关闭翻译 </title></info>
+    <note><title> 可以对每个元素关闭翻译 </title>
         
 
         <para>
@@ -18,7 +18,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.form.i18n.initialization"><info><title> 在表单中初始化 I18n </title></info>
+    <section xml:id="zend.form.i18n.initialization"><title> 在表单中初始化 I18n </title>
         
 
         <para>
@@ -82,7 +82,7 @@ $element->setTranslator($translate);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.i18n.standard"><info><title> 标准 I18n 目标 </title></info>
+    <section xml:id="zend.form.i18n.standard"><title> 标准 I18n 目标 </title>
         
 
         <para>

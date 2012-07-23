@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon;
@@ -29,8 +18,6 @@ use Zend\Service\Amazon;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
@@ -41,14 +28,14 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      *
      * @var Zend_Service_Amazon
      */
-    protected $_amazon;
+    protected $amazon;
 
     /**
      * HTTP client adapter for testing
      *
      * @var Zend\Http\Client\Adapter\Test
      */
-    protected $_httpClientAdapterTest;
+    protected $httpClientTestAdapter;
 
     /**
      * Sets up this test case
@@ -57,9 +44,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
+        $this->amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
 
-        $this->_httpClientAdapterTest = new \Zend\Http\Client\Adapter\Test();
+        $this->httpClientTestAdapter = new \Zend\Http\Client\Adapter\Test();
     }
 
     /**
@@ -300,50 +287,44 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
-	/**
+
+    /**
      * Testing if Amazon service component can handle return values where the
      * item-list is not empty
-     * 
+     *
      * @group ZF-9547
      */
     public function testAmazonComponentHandlesValidBookResults()
     {
-    	$xml = file_get_contents(__DIR__."/_files/amazon-response-valid.xml");
+        $xml = file_get_contents(__DIR__."/_files/amazon-response-valid.xml");
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
-        
-    	$result = new Amazon\ResultSet($dom);
 
-    	$currentItem = null;
-    	try {
-    		$currentItem = $result->current();
-    	} catch (Amazon\Exception $e) {
-    		$this->fail('Unexpected exception was triggered');
-    	}
-    	$this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
-    	$this->assertEquals('0754512673', $currentItem->ASIN);
+        $result = new Amazon\ResultSet($dom);
+
+        $currentItem = null;
+
+        $currentItem = $result->current();
+
+        $this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
+        $this->assertEquals('0754512673', $currentItem->ASIN);
     }
-    
+
     /**
      * Testing if Amazon service component can handle return values where the
      * item-list is empty (no results found)
-     * 
+     *
      * @group ZF-9547
      */
     public function testAmazonComponentHandlesEmptyBookResults()
     {
-    	$xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
+        $xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
-        
-    	$result = new Amazon\ResultSet($dom);
 
-    	try {
-    		$result->current();
-    		$this->fail('Expected exception was not triggered');
-    	} catch (Amazon\Exception $e) {
-			return;
-        }
+        $result = new Amazon\ResultSet($dom);
+
+        $this->setExpectedException('Zend\Service\Amazon\Exception\ExceptionInterface');
+        $result->current();
     }
 }

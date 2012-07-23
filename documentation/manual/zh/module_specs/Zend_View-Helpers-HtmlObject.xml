@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML 对象助手</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><title>HTML 对象助手</title>
     
 
     <para>
@@ -42,7 +42,7 @@
         所有这些助手使用相似的接口。这样，本文档只包含两个助手的例子。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Flash 助手</title></info>
+    <example xml:id="zend.view.helpers.initial.object.flash"><title>Flash 助手</title>
 
         
 
@@ -70,7 +70,7 @@
         这个用 <code>htmlObject</code> 助手来示范。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.object.object"><info><title> 通过传递另外的参数来定制对象 </title></info>
+    <example xml:id="zend.view.helpers.initial.object.object"><title> 通过传递另外的参数来定制对象 </title>
         
 
         <para>

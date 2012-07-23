@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.advanced"><info><title>Fortgeschrittene Verwendung von Zend_Json</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.advanced"><title>Fortgeschrittene Verwendung von Zend_Json</title>
     
 
-    <section xml:id="zend.json.advanced.objects1"><info><title>JSON Objekte</title></info>
+    <section xml:id="zend.json.advanced.objects1"><title>JSON Objekte</title>
         
 
         <para>
@@ -55,7 +55,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         </para>
     </section>
 
-    <section xml:id="zend.json.advanced.objects2"><info><title>Kodierung von PHP Objekten</title></info>
+    <section xml:id="zend.json.advanced.objects2"><title>Kodierung von PHP Objekten</title>
         
 
         <para>
@@ -67,7 +67,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         </para>
     </section>
 
-    <section xml:id="zend.json.advanced.internal"><info><title>Interner Encoder/Decoder</title></info>
+    <section xml:id="zend.json.advanced.internal"><title>Interner Encoder/Decoder</title>
         
 
         <para>
@@ -91,7 +91,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.json.advanced.expr"><info><title>JSON Ausdrücke</title></info>
+    <section xml:id="zend.json.advanced.expr"><title>JSON Ausdrücke</title>
         
 
         <para>

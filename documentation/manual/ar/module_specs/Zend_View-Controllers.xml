@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>جزء الـ Controller</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>جزء الـ Controller</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         ثم تقوم بالأمر بأن يتم معاجلة الـ view و إنتاج الخرج الذى سيتم عرضه.
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>إنشاء متغيرات و إعطائها قيم</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>إنشاء متغيرات و إعطائها قيم</title>
 
         
 
@@ -75,7 +75,7 @@ $view->assign('c', "Sea");
 
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>معالجة(تصيير) جزء الـ View</title></info>
+    <section xml:id="zend.view.controllers.render"><title>معالجة(تصيير) جزء الـ View</title>
 
         
 
@@ -97,7 +97,7 @@ echo $view->render('someView.php');
 
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>مسارات أجزاء الـ View</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>مسارات أجزاء الـ View</title>
 
         
 

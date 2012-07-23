@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title> 加载插件 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><title> 加载插件 </title>
     
 
     <para>
@@ -10,7 +10,7 @@
         <code>PluginLoader</code> 的基本用法遵循 Zend Framework 的命名约定（一个文件一个类），解析路径时，使用下划线作为路径分隔符。当决定是否加载特别的插件类，允许传递可选的类前缀来预处理。另外，路径按 LIFO 顺序来搜索。由于 LIFO 搜索和类的前缀，允许命名空间给插件，这样可以从早期注册的路径来覆盖插件。
     </para>
 
-    <section xml:id="zend.loader.pluginloader.usage"><info><title> 基本用例 </title></info>
+    <section xml:id="zend.loader.pluginloader.usage"><title> 基本用例 </title>
         
 
         <para>
@@ -68,7 +68,7 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             类加载后，就可以实例化了。
         </para>
 
-        <note><info><title> 为一个前缀注册多个路径 </title></info>
+        <note><title> 为一个前缀注册多个路径 </title>
             
 
             <para>
@@ -76,7 +76,7 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             </para>
         </note>
 
-        <note><info><title> 实例化时定义路径 </title></info>
+        <note><title> 实例化时定义路径 </title>
             
 
             <para>
@@ -107,7 +107,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </para>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.paths"><info><title> 处理插件路径 </title></info>
+    <section xml:id="zend.loader.pluginloader.paths"><title> 处理插件路径 </title>
         
 
         <para>
@@ -129,7 +129,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.checks"><info><title> 测试插件和获取类的名字 </title></info>
+    <section xml:id="zend.loader.pluginloader.checks"><title> 测试插件和获取类的名字 </title>
         
 
         <para>

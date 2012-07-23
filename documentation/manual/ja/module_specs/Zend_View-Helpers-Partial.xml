@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>Partial ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><title>Partial ヘルパー</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         その各要素に対してレンダリングを行うものです。
     </para>
 
-    <note><info><title>PartialLoop カウンタ</title></info>
+    <note><title>PartialLoop カウンタ</title>
         
         <para>
             <classname>PartialLoop</classname> ビューヘルパーは、変数を
@@ -27,7 +27,7 @@
 
     </note>
 
-    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Partial の基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><title>Partial の基本的な使用法</title>
         
 
         <para>
@@ -66,7 +66,7 @@
 ]]></programlisting>
 
     </example>
-        <note><info><title>モデルは何?</title></info>
+        <note><title>モデルは何?</title>
             
 
             <para>
@@ -125,7 +125,7 @@ $view->partialLoop()->setObjectKey('model');
             </para>
         </note>
 
-    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>PartialLoop による反復処理可能なモデルのレンダリング</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><title>PartialLoop による反復処理可能なモデルのレンダリング</title>
         
 
         <para>
@@ -198,7 +198,7 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>他のモジュールの Partial のレンダリング</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><title>他のモジュールの Partial のレンダリング</title>
         
 
         <para>

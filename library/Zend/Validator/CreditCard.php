@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class CreditCard extends AbstractValidator
 {
@@ -62,14 +50,14 @@ class CreditCard extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::CHECKSUM       => "'%value%' seems to contain an invalid checksum",
-        self::CONTENT        => "'%value%' must contain only digits",
+    protected $messageTemplates = array(
+        self::CHECKSUM       => "The input seems to contain an invalid checksum",
+        self::CONTENT        => "The input must contain only digits",
         self::INVALID        => "Invalid type given. String expected",
-        self::LENGTH         => "'%value%' contains an invalid amount of digits",
-        self::PREFIX         => "'%value%' is not from an allowed institute",
-        self::SERVICE        => "'%value%' seems to be an invalid creditcard number",
-        self::SERVICEFAILURE => "An exception has been raised while validating '%value%'",
+        self::LENGTH         => "The input contains an invalid amount of digits",
+        self::PREFIX         => "The input is not from an allowed institute",
+        self::SERVICE        => "The input seems to be an invalid creditcard number",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
     );
 
     /**
@@ -150,13 +138,13 @@ class CreditCard extends AbstractValidator
     /**
      * Constructor
      *
-     * @param string|array|Traversable $type OPTIONAL Type of CCI to allow
+     * @param string|array|Traversable $options OPTIONAL Type of CCI to allow
      */
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['type'] = array_shift($options);
             if (!empty($options)) {

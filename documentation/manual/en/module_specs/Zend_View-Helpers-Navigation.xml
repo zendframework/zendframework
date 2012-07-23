@@ -55,7 +55,7 @@
         All built-in helpers extend
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, which
         adds integration with <link linkend="zend.acl">ACL</link> and
-        <link linkend="zend.translator">translation</link>. The abstract class
+        <link linkend="zend.i18n.translating">translation</link>. The abstract class
         implements the interface
         <classname>Zend_View_Helper_Navigation_Helper</classname>, which
         defines the following methods:
@@ -247,12 +247,9 @@ $this->navigation()->addPage(array(
 
         <para>
             The navigation helpers support translation of page labels and titles.
-            You can set a translator of type <classname>Zend_Translator</classname>
-            or <classname>Zend_Translator_Adapter</classname> in the helper using
-            <command>$helper-&gt;setTranslator($translator)</command>, or like with other
-            I18n-enabled components; by adding the translator to
-            <link linkend="zend.registry">the registry</link> by using the key
-            <classname>Zend_Translator</classname>.
+            You can set a translator of type <classname>Zend\I18n\Translator</classname>
+            in the helper using
+            <command>$helper-&gt;setTranslator($translator)</command>.
         </para>
 
         <para>
@@ -1836,7 +1833,7 @@ foreach ($this->container as $page) {
 
         <para>
             By default, the sitemap helper uses
-            <link linkend="zend.validate.sitemap">sitemap validators</link>
+            <link linkend="zend.validator.sitemap">sitemap validators</link>
             to validate each element that is rendered. This can be disabled by
             calling <code>$helper-&gt;setUseSitemapValidators(false)</code>.
         </para>

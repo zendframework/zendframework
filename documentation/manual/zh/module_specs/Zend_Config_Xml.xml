@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
         <code>Zend_Config_Xml</code> 让开发者能够存储配置数据到一个简单XML格式并通过嵌入对象属性语法来读取。XML文件的根元素（root element）不相关并可以任意命名。顶级的XML元素和配置数据的节相对应。XML格式通过嵌入XML元素到节一级元素（section-level elements）的下面来支持等级结构组织。叶一级（leaf-level）的XML元素和配置数据的值相对应。节继承通过一个特殊的XML属性名为<code>extends</code>来支持，与之相对应的这个属性的值通过扩展节（extending section）来继承。
     </para>
-    <note><info><title>返回类型</title></info>
+    <note><title>返回类型</title>
         
         <para>
             读入<code>Zend_Config_Xml</code>中的配置数据总是返回字串。数据从字符串到其它类型的转换留给开发者来适应他们特定的需求。
         </para>
     </note>
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>使用Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>使用Zend_Config_Xml</title>
         
         <para>
             这个例子示例了从INI文件加载配置数据的<code>Zend_Config_Xml</code>的基本用法。在这个例子中有生产系统（production system）和开发系统（staging system）的配置数据。因为开发系统配置数据和生产系统的配置数据类似，所以开发系统的节从生产系统的节继承。在这个案例中，结果(decision)是任意的并且它可以反过来做，即生产系统节从开发系统节继承，尽管这不可能用于更复杂的情形。接着，假定下面的配置数据包含在<code>/path/to/config.xml</code>中：
@@ -53,7 +53,7 @@ echo $config->database->params->dbname; // 输出 "dbname"
 
         ]]></programlisting>
     </example>
-    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title> 在 Zend_Config_Xml 使用标签（tag）属性 </title></info>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><title> 在 Zend_Config_Xml 使用标签（tag）属性 </title>
         
         <para>
             Zend_Config_Xml 也支持另外两种方法在配置文件里定义节点。它们都利用属性。

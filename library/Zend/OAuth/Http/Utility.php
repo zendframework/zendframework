@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OAuth
  */
 
 namespace Zend\OAuth\Http;
@@ -25,8 +15,6 @@ use Zend\OAuth;
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Utility
 {
@@ -40,7 +28,7 @@ class Utility
      * @return array
      */
     public function assembleParams(
-        $url, 
+        $url,
         OAuth\Config\ConfigInterface $config,
         array $serviceProviderParams = null
     ) {
@@ -51,7 +39,7 @@ class Utility
             'oauth_timestamp'        => $this->generateTimestamp(),
             'oauth_version'          => $config->getVersion(),
         );
-        
+
         if ($config->getToken()->getToken() != null) {
             $params['oauth_token'] = $config->getToken()->getToken();
         }
@@ -93,8 +81,8 @@ class Utility
         }
         $encodedParams = array();
         foreach ($params as $key => $value) {
-            $encodedParams[] = self::urlEncode($key) 
-                             . '=' 
+            $encodedParams[] = self::urlEncode($key)
+                             . '='
                              . self::urlEncode($value);
         }
         return implode('&', $encodedParams);
@@ -102,10 +90,10 @@ class Utility
 
     /**
      * Cast to authorization header
-     * 
-     * @param  array $params 
-     * @param  null|string $realm 
-     * @param  bool $excludeCustomParams 
+     *
+     * @param  array $params
+     * @param  null|string $realm
+     * @param  bool $excludeCustomParams
      * @return void
      */
     public function toAuthorizationHeader(array $params, $realm = null, $excludeCustomParams = true)
@@ -120,7 +108,7 @@ class Utility
                     continue;
                 }
             }
-            $headerValue[] = self::urlEncode($key) 
+            $headerValue[] = self::urlEncode($key)
                            . '="'
                            . self::urlEncode($value) . '"';
         }
@@ -129,13 +117,13 @@ class Utility
 
     /**
      * Sign request
-     * 
-     * @param  array $params 
-     * @param  string $signatureMethod 
-     * @param  string $consumerSecret 
-     * @param  null|string $tokenSecret 
-     * @param  null|string $method 
-     * @param  null|string $url 
+     *
+     * @param  array $params
+     * @param  string $signatureMethod
+     * @param  string $consumerSecret
+     * @param  null|string $tokenSecret
+     * @param  null|string $method
+     * @param  null|string $url
      * @return string
      */
     public function sign(
@@ -157,8 +145,8 @@ class Utility
 
     /**
      * Parse query string
-     * 
-     * @param  mixed $query 
+     *
+     * @param  mixed $query
      * @return array
      */
     public function parseQueryString($query)
@@ -180,7 +168,7 @@ class Utility
 
     /**
      * Generate nonce
-     * 
+     *
      * @return string
      */
     public function generateNonce()
@@ -190,7 +178,7 @@ class Utility
 
     /**
      * Generate timestamp
-     * 
+     *
      * @return int
      */
     public function generateTimestamp()
@@ -200,8 +188,8 @@ class Utility
 
     /**
      * urlencode a value
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return string
      */
     public static function urlEncode($value)

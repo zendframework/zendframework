@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.currency"><info><title>Aide Currency</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.currency"><title>Aide Currency</title>
     
 
     <para>
@@ -55,7 +55,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.currency.registered"><info><title>Instance en registre</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.registered"><title>Instance en registre</title>
         
 
         <para>
@@ -81,7 +81,7 @@ echo $this->currency(1234.56);
         dans votre vue et la configurer après cela.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.currency.afterwards"><info><title>Instance dans la vue</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.afterwards"><title>Instance dans la vue</title>
         
 
         <para>
@@ -102,7 +102,7 @@ $this->currency()->setCurrency($currency)->currency(1234.56);
         l'utiliser de manière directe, via instanciation manuelle.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.currency.directly.example-1"><info><title>Utilisation directe via instanciation</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.directly.example-1"><title>Utilisation directe via instanciation</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -122,7 +122,7 @@ echo $helper->currency(1234.56); // Ceci affiche '€ 1.234,56'
         interne de l'aide.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.currency.directly.example-2"><info><title>Utilisation directe</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.directly.example-2"><title>Utilisation directe</title>
         
 
         <programlisting language="php"><![CDATA[

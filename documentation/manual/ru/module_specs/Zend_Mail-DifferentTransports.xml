@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Использование различных транспортов</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>Использование различных транспортов</title>
     
     <para>
         В том случае, если вы хотите отправлять различные сообщения через
@@ -9,7 +9,7 @@
         Для текущего запроса <methodname>send()</methodname> переданный объект
         заменит собой транспорт, используемый по умолчанию:
     </para>
-    <example xml:id="zend.mail.different-transports.example-1"><info><title>Использование различных транспортов</title></info>
+    <example xml:id="zend.mail.different-transports.example-1"><title>Использование различных транспортов</title>
         
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -21,7 +21,7 @@ $mail->send($tr2);
 $mail->send();  // опять используется транспорт по умолчанию
 ]]></programlisting>
     </example>
-    <note><info><title>Дополнительные транспорты</title></info>
+    <note><title>Дополнительные транспорты</title>
         
         <para>
             Дополнительные транспорты могут быть написаны посредством реализации

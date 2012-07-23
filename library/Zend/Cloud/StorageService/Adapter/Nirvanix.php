@@ -1,30 +1,21 @@
 <?php
 /**
- * LICENSE
+ * Zend Framework (http://framework.zend.com/)
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_StorageService
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
+use Zend\Http\Client as HttpClient;
+use Zend\Service\Nirvanix\Nirvanix as NirvanixService;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception,
-    Zend\Service\Nirvanix\Nirvanix as NirvanixService,
-    Zend\Http\Client as HttpClient;
 
 /**
  * Adapter for Nirvanix cloud storage
@@ -32,8 +23,6 @@ use Zend\Cloud\StorageService\Adapter,
  * @category   Zend
  * @package    Zend_Cloud_StorageService
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Nirvanix implements AdapterInterface
 {
@@ -57,7 +46,7 @@ class Nirvanix implements AdapterInterface
      *
      * @param  array|Traversable $options
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -227,14 +216,10 @@ class Nirvanix implements AdapterInterface
 
         // Need to special case this as Nirvanix returns an array if there is
         // more than one, but doesn't return an array if there is only one.
-        if ($length == 1)
-        {
+        if ($length == 1) {
             $metadata[(string)$metadataNode->Metadata->Type->value] = (string)$metadataNode->Metadata->Value;
-        }
-        else if ($length > 1)
-        {
-            for ($i=0; $i<$length; $i++)
-            {
+        } elseif ($length > 1) {
+            for ($i=0; $i<$length; $i++) {
                 $metadata[(string)$metadataNode->Metadata[$i]->Type] = (string)$metadataNode->Metadata[$i]->Value;
             }
         }
@@ -367,8 +352,7 @@ class Nirvanix implements AdapterInterface
                 //more than one, but doesn't return an array if there is only one.
                 if ($numFiles == 1) {
                     $resultArray[] = (string)$response->ListFolder->File->Name;
-                }
-                else {
+                } else {
                     foreach ($response->ListFolder->File as $arrayElem) {
                         $resultArray[] = (string) $arrayElem->Name;
                     }

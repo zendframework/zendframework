@@ -1,62 +1,33 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
-use ReflectionClass;
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_Hex
- */
-
+use Zend\Validator\Hex;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class HexTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validator_Hex object
-     *
-     * @var Zend_Validator_Hex
+     * @var Hex
      */
-    protected $_validator;
+    protected $validator;
 
-    /**
-     * Creates a new Zend_Validator_Hex object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
-        $this->_validator = new \Zend\Validator\Hex();
+        $this->validator = new Hex();
     }
 
     /**
@@ -78,7 +49,7 @@ class HexTest extends \PHPUnit_Framework_TestCase
             array('1.2', false)
             );
         foreach ($valuesExpected as $element) {
-            $this->assertEquals($element[1], $this->_validator->isValid($element[0]), $element[0]);
+            $this->assertEquals($element[1], $this->validator->isValid($element[0]), $element[0]);
         }
     }
 
@@ -89,7 +60,7 @@ class HexTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->validator->getMessages());
     }
 
     /**
@@ -97,42 +68,13 @@ class HexTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+        $this->assertFalse($this->validator->isValid(array(1 => 1)));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

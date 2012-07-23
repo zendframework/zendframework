@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Loader
  */
 
 namespace Zend\Loader;
 
-use Zend\Stdlib\ArrayStack,
-    Zend\Stdlib\SplStack,
-    SplDoublyLinkedList,
-    SplFileInfo;
+use SplDoublyLinkedList;
+use SplFileInfo;
+use Zend\Stdlib\ArrayStack;
+use Zend\Stdlib\SplStack;
 
 /**
  * Prefix/Path plugin loader
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
 {
@@ -74,7 +62,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
     {
         // Allow extending classes to pre-set the prefix paths
         if (is_array($this->prefixPaths)) {
-            // If prefixPaths is an array, pass the array to addPrefixPaths() 
+            // If prefixPaths is an array, pass the array to addPrefixPaths()
             // after first setting the property to an ArrayStack
             $prefixPaths = $this->prefixPaths;
             $this->prefixPaths = new ArrayStack();
@@ -96,8 +84,8 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
 
     /**
      * Add global static paths to merge at instantiation
-     * 
-     * @param  null|array|Traversable $paths 
+     *
+     * @param  null|array|Traversable $paths
      * @return void
      */
     public static function addStaticPaths($paths)
@@ -129,7 +117,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      * Configure the prefix path plugin loader
      *
      * Proxies to {@link addPrefixPaths()}.
-     * 
+     *
      * @param  array|\Traversable $options
      * @return PrefixPathLoader
      */
@@ -173,20 +161,20 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
     /**
      * Add many prefix paths at once
      *
-     * Accepts an array or Traversable object of prefix (or namspace) / path 
+     * Accepts an array or Traversable object of prefix (or namspace) / path
      * pairs. The path may either be a string path, or an array or Traversable
-     * object with many paths to associate with this prefix. If adding many 
-     * paths at once, please remember that the prefix/path pairs act as a LIFO 
+     * object with many paths to associate with this prefix. If adding many
+     * paths at once, please remember that the prefix/path pairs act as a LIFO
      * stack, as does the stack of paths associated with any given prefix.
-     * 
-     * @param  array|Traversable $prefixPaths 
+     *
+     * @param  array|Traversable $prefixPaths
      * @return PrefixPathLoader
      */
     public function addPrefixPaths($prefixPaths)
     {
         if (!is_array($prefixPaths) && !$prefixPaths instanceof \Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array or Traversable object; received %s', 
+                'Expected an array or Traversable object; received %s',
                 (is_object($prefixPaths) ? get_class($prefixPaths) : gettype($prefixPaths))
             ));
         }
@@ -221,8 +209,8 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      * Get path stack
      *
      * @param  string $prefix
-     * @return false|ArrayStack|SplStack False if prefix does not exist, 
-     * SplStack otherwise; if no prefix provide, ArrayStack of prefix/SplStack 
+     * @return false|ArrayStack|SplStack False if prefix does not exist,
+     * SplStack otherwise; if no prefix provide, ArrayStack of prefix/SplStack
      * pairs
      */
     public function getPaths($prefix = null)
@@ -411,7 +399,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      *
      * Returns an array of plugin name/class name pairs, suitable for seeding
      * a PluginClassLoader instance.
-     * 
+     *
      * @return array
      */
     public function getPluginMap()
@@ -426,7 +414,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      * a ClassMapAutoloader instance. Note: filenames will be absolute paths
      * based on the operating system on which the class map is retrieved. You
      * may need to alter the paths to be relative to any filesystem.
-     * 
+     *
      * @return array
      */
     public function getClassMap()
@@ -449,7 +437,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      * Format prefix for internal use
      *
      * @param  string $prefix
-     * @param  bool $namespaced Whether the paths are namespaced or prefixed; 
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed;
      * namespaced by default
      * @return string
      */
@@ -482,10 +470,10 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
     /**
      * Format a path for comparisons
      *
-     * Strips trailing directory separator(s), if any, and then appends 
+     * Strips trailing directory separator(s), if any, and then appends
      * system directory separator.
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return string
      */
     protected function formatPath($path)

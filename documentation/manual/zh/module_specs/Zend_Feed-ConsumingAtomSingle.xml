@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>单个Atom条目的处理</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>单个Atom条目的处理</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         如果你想读取单个条目，你仍然可以使用<code>Zend_Feed_Atom</code>对象，它将自动创建一个匿名的Feed用来包含条目。
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>读取Atom Feed的单个条目</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>读取Atom Feed的单个条目</title>
         
         <programlisting role="php"><![CDATA[<?php
 
@@ -25,7 +25,7 @@ $entry = $feed->current();]]></programlisting>
         或者如果你确定只想访问文档的一个<code>&lt;entry&gt;</code>，那么你可以用条目对象直接访问：
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>用条目对象直接访问Atom Feed的单个条目</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>用条目对象直接访问Atom Feed的单个条目</title>
         
         <programlisting role="php"><![CDATA[<?php
 

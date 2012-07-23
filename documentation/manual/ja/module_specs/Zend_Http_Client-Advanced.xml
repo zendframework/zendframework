@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><info><title>Zend_Http_Client - 高度な使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><title>Zend_Http_Client - 高度な使用法</title>
     
 
-    <section xml:id="zend.http.client.redirections"><info><title>HTTP リダイレクト</title></info>
+    <section xml:id="zend.http.client.redirections"><title>HTTP リダイレクト</title>
         
         <para>
             デフォルトでは、<classname>Zend_Http_Client</classname> は自動的に五段階までの
@@ -20,7 +20,7 @@
             GET パラメータや POST パラメータをすべてリセットした上で新しい場所に
             GET リクエストを送信します。この振る舞いを変更するには、設定パラメータ
             'strictredirects' を <constant>TRUE</constant> に設定します。
-            <example xml:id="zend.http.client.redirections.example-1"><info><title>301 や 302 のレスポンスに対する RFC 2616 準拠のリダイレクト</title></info>
+            <example xml:id="zend.http.client.redirections.example-1"><title>301 や 302 のレスポンスに対する RFC 2616 準拠のリダイレクト</title>
                 
                 <programlisting language="php"><![CDATA[
 // 厳格なリダイレクト
@@ -37,13 +37,13 @@ $client->setConfig(array('strictredirects' => false));
         </para>
     </section>
 
-    <section xml:id="zend.http.client.cookies"><info><title>クッキーの追加および持続的なクッキーの使用</title></info>
+    <section xml:id="zend.http.client.cookies"><title>クッキーの追加および持続的なクッキーの使用</title>
         
         <para>
             Zend_Http_Client を使用すると、リクエストに簡単にクッキーを追加できます。
             ヘッダを変更したりする必要はありません。クッキーを追加するには
             setCookie() メソッドを使用します。このメソッドにはいくつかの用法があります。
-            <example xml:id="zend.http.client.cookies.example-1"><info><title>setCookie() によるクッキーの設定</title></info>
+            <example xml:id="zend.http.client.cookies.example-1"><title>setCookie() によるクッキーの設定</title>
                 
                 <programlisting language="php"><![CDATA[
 // 簡単でシンプルな方法: クッキーの名前と値を指定します。
@@ -67,7 +67,7 @@ $client->setCookie($cookie);
             それ以降のリクエストで自動的に再送信します。
             これは、たとえばリモートサイトにログインして
             認証情報やセッション ID のクッキーを取得してから次のリクエストに進む場合などに便利です。
-            <example xml:id="zend.http.client.cookies.example-2"><info><title>クッキーの持続化</title></info>
+            <example xml:id="zend.http.client.cookies.example-2"><title>クッキーの持続化</title>
                 
                 <programlisting language="php"><![CDATA[
 // クッキーの持続性を有効にし、ジャーに保存します
@@ -93,12 +93,12 @@ $client->request('GET');
         </para>
     </section>
 
-    <section xml:id="zend.http.client.custom_headers"><info><title>独自のリクエストヘッダの設定</title></info>
+    <section xml:id="zend.http.client.custom_headers"><title>独自のリクエストヘッダの設定</title>
         
         <para>
             独自のヘッダを指定するには setHeaders() メソッドを使用します。
             このメソッドには、さまざまな用法があります。それを以下の例で説明します。
-            <example xml:id="zend.http.client.custom_headers.example-1"><info><title>独自のリクエストヘッダの設定</title></info>
+            <example xml:id="zend.http.client.custom_headers.example-1"><title>独自のリクエストヘッダの設定</title>
                 
                 <programlisting language="php"><![CDATA[
 // ひとつのヘッダを設定します。既存の値を上書きします。
@@ -119,7 +119,7 @@ $client->setHeaders('Cookie', array(
         <para>
             setHeader() は、複数のヘッダを一度に設定することも簡単にできます。
             その場合は、ヘッダの配列をパラメータとして指定します。
-            <example xml:id="zend.http.client.custom_headers.example-2"><info><title>複数の独自リクエストヘッダの設定</title></info>
+            <example xml:id="zend.http.client.custom_headers.example-2"><title>複数の独自リクエストヘッダの設定</title>
                 
                 <programlisting language="php"><![CDATA[
 // 複数のヘッダを設定します。既存の値を上書きします。
@@ -138,7 +138,7 @@ $client->setHeaders(array(
         </para>
     </section>
 
-    <section xml:id="zend.http.client.file_uploads"><info><title>ファイルのアップロード</title></info>
+    <section xml:id="zend.http.client.file_uploads"><title>ファイルのアップロード</title>
         
         <para>
             ファイルを <acronym>HTTP</acronym> でアップロードするには setFileUpload メソッドを使用します。
@@ -157,7 +157,7 @@ $client->setHeaders(array(
             関数を使用して content-type を判定します。
             いずれの場合でも、デフォルトの MIME 型は
             application/octet-stream となります。
-            <example xml:id="zend.http.client.file_uploads.example-1"><info><title>setFileUpload によるファイルのアップロード</title></info>
+            <example xml:id="zend.http.client.file_uploads.example-1"><title>setFileUpload によるファイルのアップロード</title>
                 
                 <programlisting language="php"><![CDATA[
 // 任意のデータをファイルとしてアップロードします。
@@ -178,7 +178,7 @@ $client->request('POST');
             content-type は自動的に推測されます。推測に失敗した場合は、
             'application/octet-stream' に設定されます。
         </para>
-        <note><info><title>ファイルのアップロード</title></info>
+        <note><title>ファイルのアップロード</title>
             
             <para>
                 ファイルをアップロードする際には、<acronym>HTTP</acronym> リクエストの content-type
@@ -189,7 +189,7 @@ $client->request('POST');
             </para>
         </note>
     </section>
-    <section xml:id="zend.http.client.raw_post_data"><info><title>生の POST データの送信</title></info>
+    <section xml:id="zend.http.client.raw_post_data"><title>生の POST データの送信</title>
         
         <para>
             Zend_Http_Client で生の POST データを送信するには
@@ -198,7 +198,7 @@ $client->request('POST');
             二番目のパラメータはオプションで、データの content-type を指定します。
             このパラメータはオプションですが、リクエストを送信する前にはできるだけ設定しておくようにしましょう。
             setRawData() 以外にも、別のメソッド setEncType() を使用することもできます。
-            <example xml:id="zend.http.client.raw_post_data.example-1"><info><title>生の POST データの送信</title></info>
+            <example xml:id="zend.http.client.raw_post_data.example-1"><title>生の POST データの送信</title>
                 
                 <programlisting language="php"><![CDATA[
 $xml = '<book>' .
@@ -216,7 +216,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             このデータをサーバ側で使用するには、 <acronym>PHP</acronym> の変数
             $HTTP_RAW_POST_DATA あるいは php://input ストリームを使用します。
         </para>
-        <note><info><title>生の POST データの使用</title></info>
+        <note><title>生の POST データの使用</title>
             
             <para>
                 リクエストに生の POST データを設定すると、その他の POST
@@ -227,7 +227,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         </note>
     </section>
 
-    <section xml:id="zend.http.client.http_authentication"><info><title>HTTP 認証</title></info>
+    <section xml:id="zend.http.client.http_authentication"><title>HTTP 認証</title>
         
         <para>
             現在 Zend_Http_Client がサポートしているのは、ベーシック <acronym>HTTP</acronym> 認証のみです。
@@ -237,7 +237,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             ユーザ名とパスワード、そしてオプションで認証タイプとなります。
             先ほど説明したように、現在はベーシック認証しかサポートしていません
             (将来的にはダイジェスト認証もサポートする予定です)。
-            <example xml:id="zend.http.client.http_authentication.example-1"><info><title>HTTP 認証用のユーザとパスワードの設定</title></info>
+            <example xml:id="zend.http.client.http_authentication.example-1"><title>HTTP 認証用のユーザとパスワードの設定</title>
                 
                 <programlisting language="php"><![CDATA[
 // ベーシック認証を使用します。
@@ -253,7 +253,7 @@ $client->setUri('http://christer:secret@example.com');
         </para>
     </section>
 
-    <section xml:id="zend.http.client.multiple_requests"><info><title>同一クライアントでの複数リクエストの送信</title></info>
+    <section xml:id="zend.http.client.multiple_requests"><title>同一クライアントでの複数リクエストの送信</title>
         
         <para>
             <classname>Zend_Http_Client</classname> は、複数の連続したリクエストを同一オブジェクトで処理できるようになっています。
@@ -274,7 +274,7 @@ $client->setUri('http://christer:secret@example.com');
             POST のパラメータ、リクエストの本文そしてリクエスト固有のヘッダがリセットされ、
             次のリクエストには持ち越されなくなります。
         </para>
-        <note><info><title>パラメータのリセット</title></info>
+        <note><title>パラメータのリセット</title>
             
             <para>
                 リクエスト固有でないヘッダは、<methodname>resetParameters()</methodname>
@@ -301,7 +301,7 @@ $client->setUri('http://christer:secret@example.com');
             クッキージャーオブジェクトをセッションに格納することをお勧めします。
             こうすると、一度認証を受けるだけでそれをセッション全体で使いまわせるようになります。
         </para>
-        <example xml:id="zend.http.client.multiple_requests.example-1"><info><title>単一のクライアントによる連続したリクエストの実行</title></info>
+        <example xml:id="zend.http.client.multiple_requests.example-1"><title>単一のクライアントによる連続したリクエストの実行</title>
             
             <programlisting language="php"><![CDATA[
 // まず、クライアントのインスタンスを作成します。
@@ -338,7 +338,7 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
 ]]></programlisting>
         </example>
     </section>
-    <section xml:id="zend.http.client.streaming"><info><title>データ・ストリーミング</title></info>
+    <section xml:id="zend.http.client.streaming"><title>データ・ストリーミング</title>
         
         <para>
             <classname>Zend_Http_Client</classname> はデフォルトでデータを <acronym>PHP</acronym> 文字列として受け取り、
@@ -353,7 +353,7 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
             とデータの受け渡しを行うために、 <methodname>setRawData()</methodname> メソッドを
             ストリームリソースであるデータ引数とともに使用します。
             (例、 <methodname>fopen()</methodname> の戻り値).
-            <example xml:id="zend.http.client.streaming.example-1"><info><title>ストリーミングでHTTP サーバにファイルを送信</title></info>
+            <example xml:id="zend.http.client.streaming.example-1"><title>ストリーミングでHTTP サーバにファイルを送信</title>
                 
                 <programlisting language="php"><![CDATA[
 $fp = fopen("mybigfile.zip", "r");
@@ -385,7 +385,7 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         <para>
         あなたは事前に定義したファイルへレスポンスを書き込んだり、
         ストアしたり送出したりするためにテンポラリファイルを使用したり、通常のストリーム機能で使用される別のファイルへ書きだせます。
-        <example xml:id="zend.http.client.streaming.example-2"><info><title>ストリーミングでHTTP サーバからファイルを受信</title></info>
+        <example xml:id="zend.http.client.streaming.example-2"><title>ストリーミングでHTTP サーバからファイルを受信</title>
                 
                 <programlisting language="php"><![CDATA[
 $client->setStream(); // 一時ファイルを使用

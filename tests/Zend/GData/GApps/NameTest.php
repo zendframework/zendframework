@@ -1,69 +1,63 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_GApps
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps\Extension;
 
 /**
  * @category   Zend
  * @package    Zend_GData_GApps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_GApps
  */
 class NameTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->theNameText = file_get_contents(
                 'Zend/GData/GApps/_files/NameElementSample1.xml',
                 true);
         $this->theName = new Extension\Name();
     }
 
-    public function testEmptyNameShouldHaveNoExtensionElements() {
+    public function testEmptyNameShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->theName->extensionElements));
         $this->assertTrue(count($this->theName->extensionElements) == 0);
     }
 
-    public function testEmptyNameShouldHaveNoExtensionAttributes() {
+    public function testEmptyNameShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->theName->extensionAttributes));
         $this->assertTrue(count($this->theName->extensionAttributes) == 0);
     }
 
-    public function testSampleNameShouldHaveNoExtensionElements() {
+    public function testSampleNameShouldHaveNoExtensionElements()
+    {
         $this->theName->transferFromXML($this->theNameText);
         $this->assertTrue(is_array($this->theName->extensionElements));
         $this->assertTrue(count($this->theName->extensionElements) == 0);
     }
 
-    public function testSampleNameShouldHaveNoExtensionAttributes() {
+    public function testSampleNameShouldHaveNoExtensionAttributes()
+    {
         $this->theName->transferFromXML($this->theNameText);
         $this->assertTrue(is_array($this->theName->extensionAttributes));
         $this->assertTrue(count($this->theName->extensionAttributes) == 0);
     }
 
-    public function testNormalNameShouldHaveNoExtensionElements() {
+    public function testNormalNameShouldHaveNoExtensionElements()
+    {
         $this->theName->givenName = "John";
         $this->theName->familyName = "Doe";
 
@@ -89,7 +83,8 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Doe", $newName2->familyName);
     }
 
-    public function testEmptyNameToAndFromStringShouldMatch() {
+    public function testEmptyNameToAndFromStringShouldMatch()
+    {
         $nameXml = $this->theName->saveXML();
         $newName = new Extension\Name();
         $newName->transferFromXML($nameXml);
@@ -97,7 +92,8 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($nameXml == $newNameXml);
     }
 
-    public function testNameWithValueToAndFromStringShouldMatch() {
+    public function testNameWithValueToAndFromStringShouldMatch()
+    {
         $this->theName->givenName = "John";
         $this->theName->familyName = "Doe";
         $nameXml = $this->theName->saveXML();
@@ -109,7 +105,8 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Doe", $this->theName->familyName);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->theName->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -123,7 +120,8 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newName->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullNameToAndFromString() {
+    public function testConvertFullNameToAndFromString()
+    {
         $this->theName->transferFromXML($this->theNameText);
         $this->assertEquals("Susan", $this->theName->givenName);
         $this->assertEquals("Jones", $this->theName->familyName);

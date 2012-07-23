@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Feed;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Exception,
-    Zend\Date,
-    DOMDocument;
+use DateTime;
+use DOMDocument;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Exception;
 
 /**
 * @category Zend
 * @package Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Rss extends AbstractFeed
 {
@@ -87,7 +75,7 @@ class Rss extends AbstractFeed
         if (array_key_exists('authors', $this->_data)) {
             return $this->_data['authors'];
         }
-        
+
         $authors = array();
         $authors_dc = $this->getExtension('DublinCore')->getAuthors();
         if (!empty($authors_dc)) {
@@ -121,7 +109,7 @@ class Rss extends AbstractFeed
                         $data['name'] = $matches[1];
                     }
                     $authors[] = $data;
-                } 
+                }
             }
         }
 
@@ -190,7 +178,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return Date\Date
+     * @return DateTime
      * @throws Exception\RuntimeException
      */
     public function getDateModified()
@@ -211,17 +199,16 @@ class Rss extends AbstractFeed
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new Date\Date($dateModifiedParsed);
+                    $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($dateModified, $standard);
+                            $date = DateTime::createFromFormat($standard, $dateModified);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
@@ -255,7 +242,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed lastBuild date
      *
-     * @return Date\Date
+     * @return DateTime
      */
     public function getLastBuildDate()
     {
@@ -272,17 +259,16 @@ class Rss extends AbstractFeed
             if ($lastBuildDate) {
                 $lastBuildDateParsed = strtotime($lastBuildDate);
                 if ($lastBuildDateParsed) {
-                    $date = new Date\Date($lastBuildDateParsed);
+                    $date = new DateTime('@' . $lastBuildDateParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($lastBuildDate, $standard);
+                            $date = DateTime::createFromFormat($standard, $lastBuildDateParsed);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
@@ -633,7 +619,7 @@ class Rss extends AbstractFeed
 
         return $this->_data['hubs'];
     }
-    
+
     /**
      * Get all categories
      *
@@ -664,7 +650,7 @@ class Rss extends AbstractFeed
         } else {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
-        
+
         if (count($categoryCollection) == 0) {
             $categoryCollection = $this->getExtension('Atom')->getCategories();
         }

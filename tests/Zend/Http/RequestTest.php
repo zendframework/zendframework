@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http;
 
@@ -21,11 +29,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testRequestUsesParametersContainerByDefault()
     {
         $request = new Request();
-        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->query());
-        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->post());
-        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->file());
-        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->server());
-        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->env());
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->getQuery());
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->getPost());
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->getFile());
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->getServer());
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->getEnv());
     }
 
     public function testRequestAllowsSettingOfParameterContainer()
@@ -38,11 +46,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $request->setServer($p);
         $request->setEnv($p);
 
-        $this->assertSame($p, $request->query());
-        $this->assertSame($p, $request->post());
-        $this->assertSame($p, $request->file());
-        $this->assertSame($p, $request->server());
-        $this->assertSame($p, $request->env());
+        $this->assertSame($p, $request->getQuery());
+        $this->assertSame($p, $request->getPost());
+        $this->assertSame($p, $request->getFile());
+        $this->assertSame($p, $request->getServer());
+        $this->assertSame($p, $request->getEnv());
     }
 
     public function testRequestPersistsRawBody()
@@ -55,7 +63,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testRequestUsesHeadersContainerByDefault()
     {
         $request = new Request();
-        $this->assertInstanceOf('Zend\Http\Headers', $request->headers());
+        $this->assertInstanceOf('Zend\Http\Headers', $request->getHeaders());
     }
 
     public function testRequestCanSetHeaders()
@@ -65,7 +73,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $ret = $request->setHeaders($headers);
         $this->assertInstanceOf('Zend\Http\Request', $ret);
-        $this->assertSame($headers, $request->headers());
+        $this->assertSame($headers, $request->getHeaders());
     }
 
     public function testRequestCanSetAndRetrieveValidMethod()
@@ -90,9 +98,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $request = new Request();
         $request->setUri($uri);
         $this->assertEquals($uri, $request->getUri());
-        $this->assertInstanceOf('Zend\Uri\Uri', $request->uri());
-        $this->assertEquals($uri, $request->uri()->toString());
-        $this->assertEquals($uri, $request->getUri());
+        $this->assertInstanceOf('Zend\Uri\Uri', $request->getUri());
+        $this->assertEquals($uri, $request->getUri()->toString());
+        $this->assertEquals($uri, $request->getUriString());
     }
 
     public function uriDataProvider()
@@ -156,11 +164,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($request->isXmlHttpRequest());
 
         $request = new Request();
-        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'FooBazBar');
+        $request->getHeaders()->addHeaderLine('X_REQUESTED_WITH', 'FooBazBar');
         $this->assertFalse($request->isXmlHttpRequest());
 
         $request = new Request();
-        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
+        $request->getHeaders()->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
         $this->assertTrue($request->isXmlHttpRequest());
     }
 
@@ -170,11 +178,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($request->isFlashRequest());
 
         $request = new Request();
-        $request->headers()->addHeaderLine('USER_AGENT', 'FooBazBar');
+        $request->getHeaders()->addHeaderLine('USER_AGENT', 'FooBazBar');
         $this->assertFalse($request->isFlashRequest());
 
         $request = new Request();
-        $request->headers()->addHeaderLine('USER_AGENT', 'Shockwave Flash');
+        $request->getHeaders()->addHeaderLine('USER_AGENT', 'Shockwave Flash');
         $this->assertTrue($request->isFlashRequest());
     }
 

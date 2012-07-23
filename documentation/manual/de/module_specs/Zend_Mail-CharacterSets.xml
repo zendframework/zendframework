@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Zeichensätze</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><title>Zeichensätze</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         werden.
     </para>
 
-    <note><info><title>Nur im Textformat</title></info>
+    <note><title>Nur im Textformat</title>
         
 
         <para>
@@ -20,7 +20,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.mail.character-sets.cjk"><info><title>Verwendung in CJK Sprachen</title></info>
+    <example xml:id="zend.mail.character-sets.cjk"><title>Verwendung in CJK Sprachen</title>
         
 
         <para>

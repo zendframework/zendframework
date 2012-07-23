@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Schreiben von Prüfern</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><title>Schreiben von Prüfern</title>
     
 
     <para>
@@ -51,7 +51,7 @@
         benötigt werden um zu erkennen ob die Prüfung gültig oder ungültig ist.
     </para>
 
-    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Erstellen einer einfachen Prüfklasse</title></info>
+    <example xml:id="zend.validate.writing_validators.example.simple"><title>Erstellen einer einfachen Prüfklasse</title>
         
 
         <para>
@@ -94,7 +94,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Schreiben einer Prüfklasse die abhängige Konditionen besitzt</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><title>Schreiben einer Prüfklasse die abhängige Konditionen besitzt</title>
         
 
         <para>
@@ -189,7 +189,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Prüfen mit unabhängigen Konditionen, mehrfache Gründe für Fehler</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><title>Prüfen mit unabhängigen Konditionen, mehrfache Gründe für Fehler</title>
         
 
         <para>

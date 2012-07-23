@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Zend_Layout 配置选项</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><title>Zend_Layout 配置选项</title>
     
 
     <para>
@@ -40,7 +40,7 @@
         </para></listitem>
     </itemizedlist>
 
-    <note><info><title>助手类和插件类必须传递给startMvc()</title></info>
+    <note><title>助手类和插件类必须传递给startMvc()</title>
         
 
         <para>
@@ -48,7 +48,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.layout.options.examples"><info><title>范例</title></info>
+    <section xml:id="zend.layout.options.examples"><title>范例</title>
         
 
         <para>
@@ -73,7 +73,7 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 ?>]]></programlisting>
 
-        <example xml:id="zend.layout.options.examples.constructor"><info><title>传递选项给构造器或startMvc()</title></info>
+        <example xml:id="zend.layout.options.examples.constructor"><title>传递选项给构造器或startMvc()</title>
             
 
             <para>
@@ -111,7 +111,7 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>使用setOption() 和 setConfig()</title></info>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><title>使用setOption() 和 setConfig()</title>
             
 
             <para>
@@ -131,7 +131,7 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example xml:id="zend.layout.options.examples.accessors"><info><title>使用访问器</title></info>
+        <example xml:id="zend.layout.options.examples.accessors"><title>使用访问器</title>
             
 
             <para>

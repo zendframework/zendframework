@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><info><title>A quoi ressemble une monnaie?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><title>A quoi ressemble une monnaie?</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         va utiliser le rendu arabe pour toutes les monnaies, voyez l'exemple:
     </para>
 
-    <example xml:id="zend.currency.number.example-1"><info><title>Utiliser un script personnalisé</title></info>
+    <example xml:id="zend.currency.number.example-1"><title>Utiliser un script personnalisé</title>
         
 
         <para>

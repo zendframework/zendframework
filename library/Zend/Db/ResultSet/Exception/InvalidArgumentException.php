@@ -17,7 +17,7 @@ use Zend\Db\ResultSet\Exception;
  * @package    Zend_Db
  * @subpackage ResultSet
  */
-class InvalidArgumentException 
-    extends \InvalidArgumentException 
+class InvalidArgumentException
+    extends \InvalidArgumentException
     implements Exception
 {}

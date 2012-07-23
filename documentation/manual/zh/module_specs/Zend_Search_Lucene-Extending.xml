@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>扩展性</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>扩展性</title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>文本分析</title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>文本分析</title>
         
         <para>
             <code>Zend_Search_Lucene_Analysis_Analyzer</code> 类被索引建立程序用于记号化文档的文本字段。
@@ -43,7 +43,7 @@ $index->addDocument($doc);
         <para>
             这里是一个自定义分析程序的例子，它将单词变成数字作为搜索项：
 
-            <example><info><title>自定义文本分析程序</title></info>
+            <example><title>自定义文本分析程序</title>
                 
                 <programlisting role="php"><![CDATA[<?php
 /** Here is a custome text analyser, which treats words with digits as one term */
@@ -104,7 +104,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
         </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title> 评分算法</title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title> 评分算法</title>
         
         <para>
             查询 <literal>q</literal> 的在文档 <literal>d</literal> 中的分值 score 定义如下：
@@ -193,7 +193,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>存储容器</title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>存储容器</title>
         
         <para>
         抽象类 Zend_Search_Lucene_Storage_Directory 定义了目录功能。
@@ -218,7 +218,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         <para>
         Zend_Search_Lucene_Storage_Directory 的方法：
 
-        <programlisting><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
@@ -318,7 +318,7 @@ abstract function getFileObject($filename);
         <para>
         Zend_Search_Lucene_Storage_File 类中只有两个方法是你必须重载的：
 
-        <programlisting><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**

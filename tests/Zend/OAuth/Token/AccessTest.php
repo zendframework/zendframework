@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OAuth
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id:$
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OAuth
  */
 
 namespace ZendTest\OAuth\Token;
 
-use Zend\OAuth\Token\Access as AccessToken,
-    Zend\Http\Response as HTTPResponse;
+use Zend\OAuth\Token\Access as AccessToken;
+use Zend\Http\Response as HTTPResponse;
 
 /**
  * @category   Zend
  * @package    Zend_OAuth
  * @subpackage UnitTests
  * @group      Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AccessTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,7 +35,7 @@ class AccessTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-        
+
         $token = new AccessToken($response);
         $this->assertEquals('jZaee4GF52O3lUb9', $token->getToken());
     }
@@ -60,7 +46,7 @@ class AccessTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new AccessToken($response);
         $this->assertEquals('J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri', $token->getTokenSecret());
     }
@@ -71,7 +57,7 @@ class AccessTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new AccessToken($response);
         $this->assertEquals('J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri', $token->oauth_token_secret);
     }
@@ -100,7 +86,7 @@ class AccessTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new AccessToken($response);
         $this->assertFalse($token->isValid());
     }
@@ -111,12 +97,12 @@ class AccessTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new AccessToken($response);
         $this->assertTrue($token->isValid());
     }
 
-    public function testToHeaderReturnsValidHeaderString() 
+    public function testToHeaderReturnsValidHeaderString()
     {
         $token = new AccessToken(null, new HTTPUtility90244);
         $value = $token->toHeader(
@@ -149,6 +135,6 @@ class Config90244 extends \Zend\OAuth\Config\StandardConfig
     public function getToken(){$token = new AccessToken;
         $token->setToken('abcde');
         return $token;}
-    public function getRequestMethod() 
+    public function getRequestMethod()
     {return 'POST';}
 }

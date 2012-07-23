@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introductie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><title>Introductie</title>
     
     <para>
         <code>Zend_Config</code> is ontworpen om de toegang tot en het gebruik van configuratiedata te
@@ -10,7 +10,7 @@
         opgeslagen via <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> en
         <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
     </para>
-     <example xml:id="zend.config.introduction.example.using"><info><title>Zend_Config gebruiken zonder hulpklasse</title></info>
+     <example xml:id="zend.config.introduction.example.using"><title>Zend_Config gebruiken zonder hulpklasse</title>
         
         <para>
             Normaal gesproken wordt er verondersteld dat gebruikers één van de hulpklassen als
@@ -63,7 +63,7 @@ $db = Zend_Db::factory($config->database);]]></programlisting>
     <programlisting role="php"><![CDATA[<?php
 $host = $config->database->get('host', 'localhost');
     ]]></programlisting>
-    <example xml:id="zend.config.introduction.example.file.php"><info><title>Zend_Config gebruiken met een PHP configuratie bestand</title></info>
+    <example xml:id="zend.config.introduction.example.file.php"><title>Zend_Config gebruiken met een PHP configuratie bestand</title>
         
         <para>
             Het is vaak wenselijk om een puur op PHP gebaseerd configuratie bestand te gebruiken.

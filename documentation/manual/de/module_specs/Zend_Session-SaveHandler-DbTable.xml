@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><title>Zend_Session_SaveHandler_DbTable</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         Daten die in der Session gespeichert werden.
     </para>
 
-    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>Basis Setup</title></info>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><title>Basis Setup</title>
         
 
         <programlisting language="SQL"><![CDATA[
@@ -61,7 +61,7 @@ Zend_Session::start();
         <classname>Zend_Session_SaveHandler_DbTable</classname> verwenden.
     </para>
 
-    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>Mehr-Spalten Primary-Keys verwenden</title></info>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><title>Mehr-Spalten Primary-Keys verwenden</title>
         
 
         <programlisting language="SQL"><![CDATA[

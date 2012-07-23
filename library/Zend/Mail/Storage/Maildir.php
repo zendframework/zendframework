@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage;
 
 use Zend\Mail;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Maildir extends AbstractStorage
 {
@@ -278,18 +266,22 @@ class Maildir extends AbstractStorage
             $this->close();
         }
 
-        $dh = @opendir($dirname . '/cur/');
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($dirname . '/cur/');
+        ErrorHandler::stop();
         if (!$dh) {
             throw new Exception\RuntimeException('cannot open maildir');
         }
         $this->_getMaildirFiles($dh, $dirname . '/cur/');
         closedir($dh);
 
-        $dh = @opendir($dirname . '/new/');
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($dirname . '/new/');
+        ErrorHandler::stop();
         if ($dh) {
             $this->_getMaildirFiles($dh, $dirname . '/new/', array(Mail\Storage::FLAG_RECENT));
             closedir($dh);
-        } else if (file_exists($dirname . '/new/')) {
+        } elseif (file_exists($dirname . '/new/')) {
             throw new Exception\RuntimeException('cannot read recent mails in maildir');
         }
     }
@@ -308,15 +300,20 @@ class Maildir extends AbstractStorage
                 continue;
             }
 
-            @list($uniq, $info) = explode(':', $entry, 2);
-            @list(,$size) = explode(',', $uniq, 2);
+            ErrorHandler::start(E_NOTICE);
+            list($uniq, $info) = explode(':', $entry, 2);
+            list(,$size) = explode(',', $uniq, 2);
+            ErrorHandler::stop();
             if ($size && $size[0] == 'S' && $size[1] == '=') {
                 $size = substr($size, 2);
             }
             if (!ctype_digit($size)) {
                 $size = null;
             }
-            @list($version, $flags) = explode(',', $info, 2);
+
+            ErrorHandler::start(E_NOTICE);
+            list($version, $flags) = explode(',', $info, 2);
+            ErrorHandler::stop();
             if ($version != 2) {
                 $flags = '';
             }

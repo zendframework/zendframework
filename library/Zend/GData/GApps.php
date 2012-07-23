@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage GApps
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -35,8 +24,6 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GApps extends GData
 {
@@ -296,7 +283,7 @@ class GApps extends GData
      {
          if ($domain !== null) {
              return self::APPS_BASE_FEED_URI . '/' . $domain;
-         } else if ($this->_domain !== null) {
+         } elseif ($this->_domain !== null) {
              return self::APPS_BASE_FEED_URI . '/' . $this->_domain;
          } else {
              throw new App\InvalidArgumentException(
@@ -318,7 +305,7 @@ class GApps extends GData
     {
         if ($location === null) {
             $uri = $this->getBaseUrl() . self::APPS_USER_PATH;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -340,7 +327,7 @@ class GApps extends GData
     {
         if ($location === null) {
             $uri = $this->getBaseUrl() . self::APPS_NICKNAME_PATH;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -364,7 +351,7 @@ class GApps extends GData
         if ($location === null) {
             $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
             $uri .= $this->getDomain();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -388,7 +375,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -412,7 +399,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
 
             $uri = $location->getQueryUrl();
         } else {
@@ -436,7 +423,7 @@ class GApps extends GData
     {
         if ($location === null) {
             $uri = $this->getBaseUrl() . self::APPS_NICKNAME_PATH;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -459,7 +446,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -481,7 +468,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -503,7 +490,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -525,7 +512,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -547,7 +534,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -569,7 +556,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -591,7 +578,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -613,7 +600,7 @@ class GApps extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -798,7 +785,8 @@ class GApps extends GData
      * @param array $args The arguments passed to the call
      * @throws App\Exception
      */
-    public function __call($method, $args) {
+    public function __call($method, $args)
+    {
         if (preg_match('/^new(\w+Query)/', $method, $matches)) {
             $class = $matches[1];
             $foundClassName = null;
@@ -903,7 +891,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrievePageOfUsers ($startUsername = null) {
+    public function retrievePageOfUsers ($startUsername = null)
+    {
         $query = $this->newUserQuery();
         $query->setStartUsername($startUsername);
         return $this->getUserFeed($query);
@@ -921,7 +910,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveAllUsers () {
+    public function retrieveAllUsers ()
+    {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfUsers());
     }
 
@@ -943,7 +933,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function updateUser($username, $userEntry) {
+    public function updateUser($username, $userEntry)
+    {
         return $this->updateEntry($userEntry, $this->getBaseUrl() .
             self::APPS_USER_PATH . '/' . $username);
     }
@@ -959,7 +950,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function suspendUser($username) {
+    public function suspendUser($username)
+    {
         $user = $this->retrieveUser($username);
         $user->login->suspended = true;
         return $user->save();
@@ -976,7 +968,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function restoreUser($username) {
+    public function restoreUser($username)
+    {
         $user = $this->retrieveUser($username);
         $user->login->suspended = false;
         return $user->save();
@@ -991,7 +984,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function deleteUser($username) {
+    public function deleteUser($username)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_USER_PATH . '/' .
             $username);
     }
@@ -1008,7 +1002,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function createNickname($username, $nickname) {
+    public function createNickname($username, $nickname)
+    {
         $entry = $this->newNicknameEntry();
         $nickname = $this->newNickname($nickname);
         $login = $this->newLogin($username);
@@ -1026,7 +1021,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveNickname($nickname) {
+    public function retrieveNickname($nickname)
+    {
         $query = $this->newNicknameQuery();
         $query->setNickname($nickname);
         try {
@@ -1053,7 +1049,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveNicknames($username) {
+    public function retrieveNicknames($username)
+    {
         $query = $this->newNicknameQuery();
         $query->setUsername($username);
         $nicknameFeed = $this->retrieveAllEntriesForFeed(
@@ -1074,7 +1071,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrievePageOfNicknames ($startNickname = null) {
+    public function retrievePageOfNicknames ($startNickname = null)
+    {
         $query = $this->newNicknameQuery();
         $query->setStartNickname($startNickname);
         return $this->getNicknameFeed($query);
@@ -1092,7 +1090,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveAllNicknames () {
+    public function retrieveAllNicknames ()
+    {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfNicknames());
     }
 
@@ -1104,7 +1103,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function deleteNickname($nickname) {
+    public function deleteNickname($nickname)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_NICKNAME_PATH . '/' . $nickname);
     }
 
@@ -1216,7 +1216,7 @@ class GApps extends GData
         //if the enitiy is not a member, an exception is thrown
         try {
             $results = $this->get($uri);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $results = false;
         }
 
@@ -1330,7 +1330,7 @@ class GApps extends GData
         //if the enitiy is not an owner of the group, an exception is thrown
         try {
             $results = $this->get($uri);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $results = false;
         }
 
@@ -1470,7 +1470,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function createEmailList($emailList) {
+    public function createEmailList($emailList)
+    {
         $entry = $this->newEmailListEntry();
         $list = $this->newEmailList();
         $list->name = $emailList;
@@ -1489,7 +1490,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveEmailLists($recipient) {
+    public function retrieveEmailLists($recipient)
+    {
         $query = $this->newEmailListQuery();
         $query->recipient = $recipient;
         return $this->getEmailListFeed($query);
@@ -1508,7 +1510,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrievePageOfEmailLists ($startNickname = null) {
+    public function retrievePageOfEmailLists ($startNickname = null)
+    {
         $query = $this->newEmailListQuery();
         $query->setStartEmailListName($startNickname);
         return $this->getEmailListFeed($query);
@@ -1526,7 +1529,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveAllEmailLists() {
+    public function retrieveAllEmailLists()
+    {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfEmailLists());
     }
 
@@ -1538,7 +1542,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function deleteEmailList($emailList) {
+    public function deleteEmailList($emailList)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_EMAIL_LIST_PATH . '/'
             . $emailList);
     }
@@ -1556,7 +1561,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function addRecipientToEmailList($recipientAddress, $emailList) {
+    public function addRecipientToEmailList($recipientAddress, $emailList)
+    {
         $entry = $this->newEmailListRecipientEntry();
         $who = $this->newWho();
         $who->email = $recipientAddress;
@@ -1602,7 +1608,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function retrieveAllRecipients($emailList) {
+    public function retrieveAllRecipients($emailList)
+    {
         return $this->retrieveAllEntriesForFeed(
                 $this->retrievePageOfRecipients($emailList));
     }
@@ -1617,7 +1624,8 @@ class GApps extends GData
      * @throws App\HttpException
      * @throws GApps\ServiceException
      */
-    public function removeRecipientFromEmailList($recipientAddress, $emailList) {
+    public function removeRecipientFromEmailList($recipientAddress, $emailList)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_EMAIL_LIST_PATH . '/'
             . $emailList . self::APPS_EMAIL_LIST_RECIPIENT_POSTFIX . '/'
             . $recipientAddress);

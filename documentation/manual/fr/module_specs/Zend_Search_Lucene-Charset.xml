@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Jeu de caractères</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><title>Jeu de caractères</title>
     
 
-    <section xml:id="zend.search.lucene.charset.description"><info><title>Support UTF-8 et caractères sur un octet</title></info>
+    <section xml:id="zend.search.lucene.charset.description"><title>Support UTF-8 et caractères sur un octet</title>
         
 
         <para>
@@ -33,7 +33,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Analyseur de texte par défaut</title></info>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><title>Analyseur de texte par défaut</title>
         
 
         <para>
@@ -52,7 +52,7 @@
                 </footnote>
             </para>
 
-        <note><info><title/></info>
+        <note>
             
 
             <para>
@@ -62,7 +62,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>Analyseurs de texte compatibles UTF-8</title></info>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><title>Analyseurs de texte compatibles UTF-8</title>
         
 
         <para>
@@ -82,7 +82,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
             </para>
 
-        <warning><info><title/></info>
+        <warning>
             
 
             <para>

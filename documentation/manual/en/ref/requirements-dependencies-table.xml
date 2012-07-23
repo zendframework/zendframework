@@ -208,13 +208,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -339,13 +332,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
                         <classname>Zend_Db</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -668,13 +654,6 @@
             <row>
                 <entry morerows="3" valign="middle">&requirements.soft;</entry>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -929,13 +908,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -1030,13 +1002,6 @@
                 <entry>---</entry>
             </row>
             <row>
-                <entry morerows="22" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                            <classname>Zend_Dojo</classname>
-                        </link>
-                    </emphasis>
-                </entry>
                 <entry morerows="4" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.exception.html">
@@ -1142,13 +1107,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
                         <classname>Zend_Db</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -1517,13 +1475,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.form.html">
                         <classname>Zend_Form</classname>
                     </link>
@@ -1852,13 +1803,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.form.html">
                         <classname>Zend_Form</classname>
                     </link>
@@ -2037,13 +1981,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
                         <classname>Zend_Db</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -2308,13 +2245,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -2488,13 +2418,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.config.html">
                         <classname>Zend_Config</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -2701,13 +2624,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -2860,13 +2776,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
                         <classname>Zend_Db</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -3053,13 +2962,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.date.html">
                         <classname>Zend_Date</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -4106,13 +4008,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -4472,21 +4367,6 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="11" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.service.yahoo.html">
-                            <classname>Zend_Service_Yahoo</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry morerows="2" valign="middle">&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.exception.html">
-                        <classname>Zend_Exception</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.http.html">
                         <classname>Zend_Http</classname>
@@ -4615,13 +4495,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.date.html">
                         <classname>Zend_Date</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -4797,21 +4670,6 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="23" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.test.html">
-                            <classname>Zend_Test</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry morerows="5" valign="middle">&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.controller.html">
-                        <classname>Zend_Controller</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dom.html">
                         <classname>Zend_Dom</classname>
@@ -4909,13 +4767,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
                         <classname>Zend_Db</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>
@@ -5304,13 +5155,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </link>
@@ -5470,13 +5314,6 @@
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
                         <classname>Zend_Db</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                        <classname>Zend_Dojo</classname>
                     </link>
                 </entry>
             </row>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>编写校验器</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><title>编写校验器</title>
 
     
 
@@ -23,7 +23,7 @@
        一般地，<code>isValid()</code>方法不应该抛出任何异常，除了不可能决定输入值是否有效。一些抛出异常的合情合理的例子可能是如果文件不能被打开，LDAP服务器不能被联系，或者数据库连接无效，并且有些事情必须由校验成功或失败来决定。
     </para>
 
-    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>创建简单校验类</title></info>
+    <example xml:id="zend.validate.writing_validators.example.simple"><title>创建简单校验类</title>
 
         
 
@@ -58,7 +58,7 @@ class MyValid_Float extends Zend_Validate_Abstract
 
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>编写有独立条件的校验类</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><title>编写有独立条件的校验类</title>
 
         
 
@@ -137,7 +137,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>带有独立条件、多重失败原因的校验</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><title>带有独立条件、多重失败原因的校验</title>
 
         
 

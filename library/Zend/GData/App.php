@@ -1,30 +1,19 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
 
-use Zend\Http,
-    Zend\Http\Header\Etag,
-    Zend\Uri;
+use Zend\Http;
+use Zend\Http\Header\Etag;
+use Zend\Stdlib\ErrorHandler;
+use Zend\Uri;
 
 /**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
@@ -34,8 +23,6 @@ use Zend\Http,
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class App
 {
@@ -146,12 +133,12 @@ class App
      *
      * @var boolean
      */
-    protected $_useObjectMapping = true;
+    protected static $_useObjectMapping = true;
 
     /**
      * Create Gdata object
      *
-     * @param \Zend\Http\Client $client
+     * @param Http\Client $client
      * @param string $applicationId
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
@@ -229,9 +216,9 @@ class App
     /**
      * Set the Zend\Http\Client object used for communication
      *
-     * @param \Zend\Http\Client $client The client to use for communication
+     * @param Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
-     * @return \Zend\GData\App Provides a fluent interface
+     * @return App Provides a fluent interface
      */
     public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -241,7 +228,7 @@ class App
 
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
-        $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
+        $client->getRequest()->getHeaders()->addHeaderLine('User-Agent', $userAgent);
         $client->setOptions(array(
             'strictredirects' => true
             )
@@ -603,15 +590,15 @@ class App
                 'You must specify an URI to which to post.');
         }
         if ($contentType != null){
-            $headers['Content-Type'] = $contentType; 
+            $headers['Content-Type'] = $contentType;
         }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
-            if (strpos($this->_httpClient->headers()->get('User-Agent'),
+            if (strpos($this->_httpClient->getHeaders()->get('User-Agent'),
                 'gzip') === false) {
                 $headers['User-Agent'] =
-                    $this->_httpClient->headers()->get('User-Agent') . ' (gzip)';
+                    $this->_httpClient->getHeaders()->get('User-Agent') . ' (gzip)';
             }
             $headers['Accept-encoding'] = 'gzip, deflate';
         } else {
@@ -670,7 +657,7 @@ class App
         }
         if ($response->isRedirect() && $response->getStatusCode() != '304') {
             if ($remainingRedirects > 0) {
-                $newUrl = $response->headers()->get('Location');
+                $newUrl = $response->getHeaders()->get('Location')->getFieldValue();
                 $response = $this->performHttpRequest(
                     $method, $newUrl, $headers, $body,
                     $contentType, $remainingRedirects);
@@ -717,12 +704,12 @@ class App
             $requestData['method'], $requestData['url']);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
         $feed = self::importString($feedContent, $className);
         if ($client != null) {
-            $feed->setHttpClient($client);
+            $feed->setService($app);
         }
         return $feed;
     }
@@ -746,11 +733,11 @@ class App
         $response = $this->get($url, $extraHeaders);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
 
-        $header = $response->headers()->get('GData-Version');
+        $header = $response->getHeaders()->get('GData-Version');
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;
         if ($header instanceof Http\Header\HeaderInterface) {
@@ -767,9 +754,9 @@ class App
         $feed = self::importString($feedContent, $className,
             $majorProtocolVersion, $minorProtocolVersion);
         if ($this->getHttpClient() != null) {
-            $feed->setHttpClient($this->getHttpClient());
+            $feed->setService($this);
         }
-        $etag = $response->headers()->get('ETag');
+        $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
             $feed->setEtag($etag);
         }
@@ -798,10 +785,12 @@ class App
         }
 
         // Load the feed as an XML DOMDocument object
-        @ini_set('track_errors', 1);
+        ErrorHandler::start(E_WARNING);
+        ini_set('track_errors', 1);
         $doc = new \DOMDocument();
-        $success = @$doc->loadXML($string);
-        @ini_restore('track_errors');
+        $success = $doc->loadXML($string);
+        ini_restore('track_errors');
+        ErrorHandler::stop();
 
         if (!$success) {
             throw new App\Exception(
@@ -812,7 +801,7 @@ class App
         $feed->setMajorProtocolVersion($majorProtocolVersion);
         $feed->setMinorProtocolVersion($minorProtocolVersion);
         $feed->transferFromXML($string);
-        $feed->setHttpClient(self::getstaticHttpClient());
+        $feed->setService(new static(self::getstaticHttpClient()));
         return $feed;
     }
 
@@ -829,9 +818,11 @@ class App
     public static function importFile($filename,
             $className='Zend\GData\App\Feed', $useIncludePath = false)
     {
-        @ini_set('track_errors', 1);
-        $feed = @file_get_contents($filename, $useIncludePath);
-        @ini_restore('track_errors');
+        ErrorHandler::start(E_WARNING);
+        ini_set('track_errors', 1);
+        $feed = file_get_contents($filename, $useIncludePath);
+        ini_restore('track_errors');
+        ErrorHandler::stop();
         if ($feed === false) {
             throw new App\Exception(
                 "File could not be loaded: $php_errormsg");
@@ -954,9 +945,9 @@ class App
         $response = $this->post($data, $uri, null, null, $extraHeaders);
 
         $returnEntry = new $className($response->getBody());
-        $returnEntry->setHttpClient(self::getstaticHttpClient());
+        $returnEntry->setService(new static(self::getstaticHttpClient()));
 
-        $etag = $response->headers()->get('ETag');
+        $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
             $returnEntry->setEtag($etag);
         }
@@ -993,9 +984,9 @@ class App
 
         $response = $this->put($data, $uri, null, null, $extraHeaders);
         $returnEntry = new $className($response->getBody());
-        $returnEntry->setHttpClient(self::getstaticHttpClient());
+        $returnEntry->setService(new static(self::getstaticHttpClient()));
 
-        $etag = $response->headers()->get('ETag');
+        $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
             $returnEntry->setEtag($etag);
         }
@@ -1036,8 +1027,8 @@ class App
             if ($foundClassName != null) {
                 $reflectionObj = new \ReflectionClass($foundClassName);
                 $instance = $reflectionObj->newInstanceArgs($args);
-                if ($instance instanceof App\FeedEntryParent) {
-                    $instance->setHttpClient($this->_httpClient);
+                if ($instance instanceof App\AbstractFeedEntryParent) {
+                    $instance->setService($this);
 
                     // Propogate version data
                     $instance->setMajorProtocolVersion(
@@ -1065,7 +1056,8 @@ class App
      * @return mixed A new feed of the same type as the one originally
      *          passed in, containing all relevant entries.
      */
-    public function retrieveAllEntriesForFeed($feed) {
+    public function retrieveAllEntriesForFeed($feed)
+    {
         $feedClass = get_class($feed);
         $reflectionObj = new \ReflectionClass($feedClass);
         $result = $reflectionObj->newInstance();
@@ -1080,8 +1072,7 @@ class App
             } else {
                 $feed = null;
             }
-        }
-        while ($feed != null);
+        } while ($feed != null);
         return $result;
     }
 
@@ -1172,7 +1163,7 @@ class App
             $etag = $data->getEtag();
             if ($etag instanceof Etag) {
                 $etag = $etag->getFieldValue();
-                if (!empty($etag) 
+                if (!empty($etag)
                     && ($allowWeek || (substr($etag, 0, 2) != 'W/'))
                 ) {
                     $result = $etag;
@@ -1189,9 +1180,9 @@ class App
      * @return boolean True if service object is using XML to object mapping,
      *                 false otherwise.
      */
-    public function usingObjectMapping()
+    public static function usingObjectMapping()
     {
-        return $this->_useObjectMapping;
+        return self::$_useObjectMapping;
     }
 
     /**
@@ -1201,13 +1192,9 @@ class App
      *                       Pass in false or null to disable it.
      * @return void
      */
-    public function useObjectMapping($value)
+    public static function useObjectMapping($value)
     {
-        if ($value === True) {
-            $this->_useObjectMapping = true;
-        } else {
-            $this->_useObjectMapping = false;
-        }
+        self::$_useObjectMapping = (bool) $value;
     }
 
 }

@@ -1,39 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Tag
- * @subpackage ItemList
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Tag
  */
 
 namespace Zend\Tag;
 
-use Zend\Amf\Parser\Exception;
-
-use Zend\Tag\Exception\InvalidArgumentException,
-	Zend\Tag\Exception\OutOfBoundsException,
-    Countable,
-    SeekableIterator,
-    ArrayAccess;
+use ArrayAccess;
+use Countable;
+use SeekableIterator;
+use Zend\Tag\Exception\InvalidArgumentException;
+use Zend\Tag\Exception\OutOfBoundsException;
 
 /**
  * @category   Zend
  * @package    Zend_Tag
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ItemList implements Countable, SeekableIterator, ArrayAccess
 {
@@ -192,7 +177,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return boolean
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset)
+    {
         return array_key_exists($offset, $this->_items);
     }
 
@@ -202,7 +188,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return TaggableInterface
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->_items[$offset];
     }
 
@@ -214,7 +201,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @throws OutOfBoundsException When item does not implement Zend\Tag\TaggableInterface
      * @return void
      */
-    public function offsetSet($offset, $item) {
+    public function offsetSet($offset, $item)
+    {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
         if (!($item instanceof TaggableInterface)) {
@@ -234,7 +222,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return void
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         unset($this->_items[$offset]);
     }
 }

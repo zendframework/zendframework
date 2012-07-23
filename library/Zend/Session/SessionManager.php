@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-webat this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Session
  */
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\Session\SaveHandler\SaveHandlerInterface,
-    Zend\Validator\Alnum as AlnumValidator;
+use Zend\EventManager\EventManagerInterface;
+use Zend\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionManager extends AbstractManager
 {
@@ -104,9 +91,7 @@ class SessionManager extends AbstractManager
 
         // Since session is starting, we need to potentially repopulate our
         // session storage
-        if ($storage instanceof Storage\SessionStorage
-            && $_SESSION !== $storage
-        ) {
+        if ($storage instanceof Storage\SessionStorage && $_SESSION !== $storage) {
             if (!$preserveStorage) {
                 $storage->fromArray($_SESSION);
             }
@@ -145,7 +130,7 @@ class SessionManager extends AbstractManager
     /**
      * Write session to save handler and close
      *
-     * Once done, the Storage object will be marked as immutable.
+     * Once done, the Storage object will be marked as isImmutable.
      *
      * @return void
      */
@@ -161,12 +146,41 @@ class SessionManager extends AbstractManager
         // Additionally, while you _can_ write to $_SESSION following a
         // session_write_close() operation, no changes made to it will be
         // flushed to the session handler. As such, we now mark the storage
-        // object immutable.
+        // object isImmutable.
         $storage  = $this->getStorage();
         $_SESSION = (array) $storage;
         session_write_close();
         $storage->fromArray($_SESSION);
         $storage->markImmutable();
+    }
+
+    /**
+     * Attempt to set the session name
+     *
+     * If the session has already been started, or if the name provided fails
+     * validation, an exception will be raised.
+     *
+     * @param  string $name
+     * @return SessionManager
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setName($name)
+    {
+        if ($this->sessionExists()) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot set session name after a session has already started'
+            );
+        }
+
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $name)) {
+            throw new Exception\InvalidArgumentException(
+                'Name provided contains invalid characters; must be alphanumeric only'
+            );
+        }
+
+        $this->name = $name;
+        session_name($name);
+        return $this;
     }
 
     /**
@@ -186,44 +200,6 @@ class SessionManager extends AbstractManager
             $this->name = session_name();
         }
         return $this->name;
-    }
-
-    /**
-     * Attempt to set the session name
-     *
-     * If the session has already been started, or if the name provided fails
-     * validation, an exception will be raised.
-     *
-     * @param  string $name
-     * @return SessionManager
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setName($name)
-    {
-        if ($this->sessionExists()) {
-            throw new Exception\InvalidArgumentException('Cannot set session name after a session has already started');
-        }
-
-        $validator = new AlnumValidator();
-        if (!$validator->isValid($name)) {
-            throw new Exception\InvalidArgumentException('Name provided contains invalid characters; must be alphanumeric only');
-        }
-
-        $this->name = $name;
-        session_name($name);
-        return $this;
-    }
-
-    /**
-     * Get session ID
-     *
-     * Proxies to {@link session_id()}
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return session_id();
     }
 
     /**
@@ -247,6 +223,18 @@ class SessionManager extends AbstractManager
     }
 
     /**
+     * Get session ID
+     *
+     * Proxies to {@link session_id()}
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return session_id();
+    }
+
+    /**
      * Regenerate id
      *
      * Regenerate the session ID, using session save handler's
@@ -257,11 +245,6 @@ class SessionManager extends AbstractManager
      */
     public function regenerateId($deleteOldSession = true)
     {
-        if (!$this->sessionExists()) {
-            session_regenerate_id((bool) $deleteOldSession);
-            return $this;
-        }
-
         session_regenerate_id((bool) $deleteOldSession);
         return $this;
     }
@@ -315,7 +298,7 @@ class SessionManager extends AbstractManager
      *
      * By default, uses an instance of {@link ValidatorChain}.
      *
-     * @return void
+     * @return EventManagerInterface
      */
     public function getValidatorChain()
     {

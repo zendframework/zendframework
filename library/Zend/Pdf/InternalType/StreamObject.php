@@ -1,29 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\InternalType;
+
+use Zend\Pdf;
 use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType\StreamFilter\Compression as CompressionFilter;
 use Zend\Pdf\ObjectFactory;
-use Zend\Pdf;
 
 /**
  * PDF file 'stream object' element implementation
@@ -31,8 +21,6 @@ use Zend\Pdf;
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StreamObject extends IndirectObject
 {
@@ -101,7 +89,7 @@ class StreamObject extends IndirectObject
         $dictionaryArray['DecodeParms'] = array();
         if ($this->_dictionary->Filter === null) {
             // Do nothing.
-        } else if ($this->_dictionary->Filter->getType() == AbstractTypeObject::TYPE_ARRAY) {
+        } elseif ($this->_dictionary->Filter->getType() == AbstractTypeObject::TYPE_ARRAY) {
             foreach ($this->_dictionary->Filter->items as $id => $filter) {
                 $dictionaryArray['Filter'][$id]      = $filter->value;
                 $dictionaryArray['DecodeParms'][$id] = array();
@@ -116,7 +104,7 @@ class StreamObject extends IndirectObject
                     }
                 }
             }
-        } else if ($this->_dictionary->Filter->getType() != AbstractTypeObject::TYPE_NULL) {
+        } elseif ($this->_dictionary->Filter->getType() != AbstractTypeObject::TYPE_NULL) {
             $dictionaryArray['Filter'][0]      = $this->_dictionary->Filter->value;
             $dictionaryArray['DecodeParms'][0] = array();
             if ($this->_dictionary->DecodeParms !== null ) {
@@ -135,7 +123,7 @@ class StreamObject extends IndirectObject
         $dictionaryArray['FDecodeParms'] = array();
         if ($this->_dictionary->FFilter === null) {
             // Do nothing.
-        } else if ($this->_dictionary->FFilter->getType() == AbstractTypeObject::TYPE_ARRAY) {
+        } elseif ($this->_dictionary->FFilter->getType() == AbstractTypeObject::TYPE_ARRAY) {
             foreach ($this->_dictionary->FFilter->items as $id => $filter) {
                 $dictionaryArray['FFilter'][$id]      = $filter->value;
                 $dictionaryArray['FDecodeParms'][$id] = array();
@@ -396,7 +384,7 @@ class StreamObject extends IndirectObject
         if ($this->_streamDecoded) {
             $this->_initialDictionaryData = $this->_extractDictionaryData();
             $this->_encodeStream();
-        } else if ($this->_initialDictionaryData != null) {
+        } elseif ($this->_initialDictionaryData != null) {
             $newDictionary   = $this->_extractDictionaryData();
 
             if ($this->_initialDictionaryData !== $newDictionary) {

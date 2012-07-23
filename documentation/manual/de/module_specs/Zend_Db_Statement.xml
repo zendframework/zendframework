@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><title>Zend_Db_Statement</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         Objekt aus der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PHP Data Objects</link> Erweiterung.
     </para>
 
-    <section xml:id="zend.db.statement.creating"><info><title>Erzeugung von Statement Objekten</title></info>
+    <section xml:id="zend.db.statement.creating"><title>Erzeugung von Statement Objekten</title>
         
 
         <para>
@@ -27,7 +27,7 @@
             im <acronym>SQL</acronym> String.
         </para>
 
-        <example xml:id="zend.db.statement.creating.example1"><info><title>Erzeugung eines SQL Statement Objekts mit query()</title></info>
+        <example xml:id="zend.db.statement.creating.example1"><title>Erzeugung eines SQL Statement Objekts mit query()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -54,7 +54,7 @@ $stmt = $db->query(
             Das Statement ist dadurch vorbereitet, jedoch nicht Ausgeführt.
         </para>
 
-        <example xml:id="zend.db.statement.creating.example2"><info><title>Nutzung des SQL Statement Konstruktors</title></info>
+        <example xml:id="zend.db.statement.creating.example2"><title>Nutzung des SQL Statement Konstruktors</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -65,7 +65,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
         </example>
     </section>
 
-    <section xml:id="zend.db.statement.executing"><info><title>Ausführen eines Statements</title></info>
+    <section xml:id="zend.db.statement.executing"><title>Ausführen eines Statements</title>
         
 
         <para>
@@ -81,7 +81,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
             ('<emphasis>?</emphasis>') verwendet werden, muss ein einfaches Array übergeben werden.
         </para>
 
-        <example xml:id="zend.db.statement.executing.example1"><info><title>Ausführen eines Statements mit positionierten Parametern</title></info>
+        <example xml:id="zend.db.statement.executing.example1"><title>Ausführen eines Statements mit positionierten Parametern</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -100,7 +100,7 @@ $stmt->execute(array('goofy', 'FIXED'));
             den Parameternamen entsprechen.
         </para>
 
-        <example xml:id="zend.db.statement.executing.example2"><info><title>Ausführen eines Statements mit benannten Parametern</title></info>
+        <example xml:id="zend.db.statement.executing.example2"><title>Ausführen eines Statements mit benannten Parametern</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -121,7 +121,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </para>
     </section>
 
-    <section xml:id="zend.db.statement.fetching"><info><title>Holen von Ergebnissen eines SELECT Statements</title></info>
+    <section xml:id="zend.db.statement.fetching"><title>Holen von Ergebnissen eines SELECT Statements</title>
         
 
         <para>
@@ -136,7 +136,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             oder Ergebnisse liefern können bei diesen nicht verwendet werden.
         </para>
 
-        <section xml:id="zend.db.statement.fetching.fetch"><info><title>Holen einer einzelnen Zeile eines Ergebnissatzes</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch"><title>Holen einer einzelnen Zeile eines Ergebnissatzes</title>
             
 
             <para>
@@ -183,7 +183,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 Zeilen des Ergbnissatzes geholt wurden.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>Nutzung fetch() in einer Schleife</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch.example"><title>Nutzung fetch() in einer Schleife</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -201,7 +201,7 @@ while ($row = $stmt->fetch()) {
             </para>
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchall"><info><title>Holen eines gesamten Ergebnissatzes</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchall"><title>Holen eines gesamten Ergebnissatzes</title>
             
 
             <para>
@@ -214,7 +214,7 @@ while ($row = $stmt->fetch()) {
                 der Fetch Style <constant>Zend_Db::FETCH_COLUMN</constant> ist.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>Nutzung von fetchAll()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchall.example"><title>Nutzung von fetchAll()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -231,7 +231,7 @@ echo $rows[0]['bug_description'];
             </para>
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetch-mode"><info><title>Ändern des Fetch Modus</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch-mode"><title>Ändern des Fetch Modus</title>
             
 
             <para>
@@ -248,7 +248,7 @@ echo $rows[0]['bug_description'];
                 <methodname>fetchAll()</methodname> benutzen den neu gesetzten Fetch-Modus.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>Ändern des Fetch-Modus</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><title>Ändern des Fetch-Modus</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -267,7 +267,7 @@ echo $rows[0][0];
             </para>
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchcolumn"><info><title>Holen einer einzelnen Spalte eines Ergebnissatzes</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchcolumn"><title>Holen einer einzelnen Spalte eines Ergebnissatzes</title>
             
 
             <para>
@@ -287,7 +287,7 @@ echo $rows[0][0];
                 eines Ergebnissatzes zurück.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>Nutzung von fetchColumn()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><title>Nutzung von fetchColumn()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -302,7 +302,7 @@ $bug_status = $stmt->fetchColumn(2);
             </para>
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchobject"><info><title>Holen einer Zeile als Objekt</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchobject"><title>Holen einer Zeile als Objekt</title>
             
 
             <para>
@@ -314,7 +314,7 @@ $bug_status = $stmt->fetchColumn(2);
                 übergeben werden.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>Nutzung von fetchObject()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchobject.example"><title>Nutzung von fetchObject()</title>
                 
 
                 <programlisting language="php"><![CDATA[

@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage YouTube
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube,
-    Zend\GData\App;
+use Zend\GData\App;
+use Zend\GData\YouTube;
 
 /**
  * Represents the YouTube video playlist flavor of an Atom entry
@@ -30,8 +19,6 @@ use Zend\GData\YouTube,
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UserProfileEntry extends \Zend\GData\Entry
 {
@@ -51,13 +38,6 @@ class UserProfileEntry extends \Zend\GData\Entry
      * @var string
      */
     protected $_username = null;
-
-    /**
-     * The description of the user
-     *
-     * @var string
-     */
-    protected $_description = null;
 
     /**
      * The contents of the 'About Me' field.
@@ -204,9 +184,6 @@ class UserProfileEntry extends \Zend\GData\Entry
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_description != null) {
-            $element->appendChild($this->_description->getDOM($element->ownerDocument));
-        }
         if ($this->_aboutMe != null) {
             $element->appendChild($this->_aboutMe->getDOM($element->ownerDocument));
         }
@@ -279,11 +256,6 @@ class UserProfileEntry extends \Zend\GData\Entry
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('yt') . ':' . 'description':
-            $description = new Extension\Description();
-            $description->transferFromDOM($child);
-            $this->_description = $description;
-            break;
         case $this->lookupNamespace('yt') . ':' . 'aboutMe':
             $aboutMe = new Extension\AboutMe();
             $aboutMe->transferFromDOM($child);
@@ -490,14 +462,7 @@ class UserProfileEntry extends \Zend\GData\Entry
      */
     public function getLastName()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-           ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The getLastName ' .
-                ' method is only supported as of version 2 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_lastName;
-        }
+        return $this->_lastName;
     }
 
     /**
@@ -508,14 +473,7 @@ class UserProfileEntry extends \Zend\GData\Entry
      */
     public function getStatistics()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-           ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The getStatistics ' .
-                ' method is only supported as of version 2 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_statistics;
-        }
+        return $this->_statistics;
     }
 
     /**
@@ -526,14 +484,7 @@ class UserProfileEntry extends \Zend\GData\Entry
      */
     public function getThumbnail()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-           ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The getThumbnail ' .
-                ' method is only supported as of version 2 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_thumbnail;
-        }
+        return $this->_thumbnail;
     }
 
     /**

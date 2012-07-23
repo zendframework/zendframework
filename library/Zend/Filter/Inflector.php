@@ -1,43 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader\Broker;
 
 /**
  * Filter chain for string inflection
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\Broker
+     * @var FilterPluginManager
      */
-    protected $_pluginBroker = null;
+    protected $_pluginManager = null;
 
     /**
      * @var string
@@ -98,26 +85,26 @@ class Inflector extends AbstractFilter
     /**
      * Retreive plugin broker
      *
-     * @return \Zend\Loader\Broker
+     * @return FilterPluginManager
      */
-    public function getPluginBroker()
+    public function getPluginManager()
     {
-        if (!$this->_pluginBroker instanceof Broker) {
-            $this->setPluginBroker(new FilterBroker());
+        if (!$this->_pluginManager instanceof FilterPluginManager) {
+            $this->setPluginManager(new FilterPluginManager());
         }
 
-        return $this->_pluginBroker;
+        return $this->_pluginManager;
     }
 
     /**
-     * Set plugin broker
+     * Set plugin manager
      *
-     * @param \Zend\Loader\Broker $broker
+     * @param  FilterPluginManager $manager
      * @return Inflector
      */
-    public function setPluginBroker(Broker $broker)
+    public function setPluginManager(FilterPluginManager $manager)
     {
-        $this->_pluginBroker = $broker;
+        $this->_pluginManager = $manager;
         return $this;
     }
 
@@ -133,12 +120,12 @@ class Inflector extends AbstractFilter
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        // Set broker
-        if (array_key_exists('pluginBroker', $options)) {
-            if (is_scalar($options['pluginBroker']) && class_exists($options['pluginBroker'])) {
-                $options['pluginBroker'] = new $options['pluginBroker'];
+        // Set plugin manager
+        if (array_key_exists('pluginManager', $options)) {
+            if (is_scalar($options['pluginManager']) && class_exists($options['pluginManager'])) {
+                $options['pluginManager'] = new $options['pluginManager'];
             }
-            $this->setPluginBroker($options['pluginBroker']);
+            $this->setPluginManager($options['pluginManager']);
         }
 
         if (array_key_exists('throwTargetExceptionsOn', $options)) {
@@ -483,6 +470,6 @@ class Inflector extends AbstractFilter
         }
 
         $rule = (string) $rule;
-        return $this->getPluginBroker()->load($rule);
+        return $this->getPluginManager()->get($rule);
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Lettura di un singolo elemento di un feed Atom</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Lettura di un singolo elemento di un feed Atom</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         Anche se si legge un singolo elemento, si dispone ancora di un valido oggetto <code>Zend_Feed_Atom</code>, ma verrà creato un "anonimo" feed contenente un solo elemento.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Lettura di un feed Atom con un singolo elemento</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Lettura di un feed Atom con un singolo elemento</title>
         
         <programlisting role="php"><![CDATA[<?php
 
@@ -25,7 +25,7 @@ $entry = $feed->current();]]></programlisting>
         In alternativa, è possibile creare direttamente un'istanza di un oggetto per l'elemento se si accede ad un singolo nodo <code>&lt;entry&gt;</code>:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Utilizzo diretto dell'oggetto Entry per un singolo elemento del feed Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>Utilizzo diretto dell'oggetto Entry per un singolo elemento del feed Atom</title>
         
         <programlisting role="php"><![CDATA[<?php
 

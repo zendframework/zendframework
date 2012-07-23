@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Aide Cycle</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><title>Aide Cycle</title>
 
     
 
@@ -7,7 +7,7 @@
       L'aide <code>Cycle</code> est utilisée pour alterner des valeurs.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><info><title>Aide Cycle : utilisation de base</title></info>
+    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><title>Aide Cycle : utilisation de base</title>
 
         
 
@@ -46,7 +46,7 @@ $this->cycle()->prev();
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>Travailler avec 2 cycles ou plus</title></info>
+    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><title>Travailler avec 2 cycles ou plus</title>
 
         
 

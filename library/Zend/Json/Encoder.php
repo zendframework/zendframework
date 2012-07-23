@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Json
  */
 
 namespace Zend\Json;
 
-use Zend\Json\Exception\RecursionException,
-    Zend\Json\Exception\InvalidArgumentException;
+use Zend\Json\Exception\InvalidArgumentException;
+use Zend\Json\Exception\RecursionException;
 
 /**
  * Encode PHP constructs to JSON
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Encoder
 {
@@ -96,7 +84,7 @@ class Encoder
     {
         if (is_object($value)) {
             return $this->_encodeObject($value);
-        } else if (is_array($value)) {
+        } elseif (is_array($value)) {
             return $this->_encodeArray($value);
         }
 
@@ -160,7 +148,7 @@ class Encoder
         }
 
         $className = get_class($value);
-        return '{"__className":' 
+        return '{"__className":'
             . $this->_encodeString($className)
             . $props . '}';
     }
@@ -260,10 +248,10 @@ class Encoder
      */
     protected function _encodeString(&$string)
     {
-        // Escape these characters with a backslash:
+        // Escape these characters with a backslash or unicode escape:
         // " \ / \n \r \t \b \f
-        $search  = array('\\', "\n", "\t", "\r", "\b", "\f", '"', '/');
-        $replace = array('\\\\', '\\n', '\\t', '\\r', '\\b', '\\f', '\"', '\\/');
+        $search  = array('\\', "\n", "\t", "\r", "\b", "\f", '"', '\'', '&', '<', '>', '/');
+        $replace = array('\\\\', '\\n', '\\t', '\\r', '\\b', '\\f', '\\u0022', '\\u0027', '\\u0026',  '\\u003C', '\\u003E', '\\/');
         $string  = str_replace($search, $replace, $string);
 
         // Escape certain ASCII characters:
@@ -580,4 +568,3 @@ class Encoder
         return '';
     }
 }
-

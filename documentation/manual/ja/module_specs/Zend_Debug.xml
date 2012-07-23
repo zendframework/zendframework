@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>変数の出力</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><title>変数の出力</title>
 
     
 
@@ -11,7 +11,7 @@
         この単純なデバッグ手法は、一般的によく用いられています。
     </para>
 
-    <example xml:id="zend.debug.dumping.example"><info><title>dump() メソッドの例</title></info>
+    <example xml:id="zend.debug.dumping.example"><title>dump() メソッドの例</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -47,7 +47,7 @@ Zend_Debug::dump($var, $label = null, $echo = true);
         でエスケープされ、(X)HTML の <command>&lt;pre&gt;</command> タグで囲まれます。
     </para>
 
-    <tip><info><title>Zend_Log を使用したデバッグ</title></info>
+    <tip><title>Zend_Log を使用したデバッグ</title>
         
 
         <para>

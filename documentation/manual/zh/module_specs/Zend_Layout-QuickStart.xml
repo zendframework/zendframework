@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout 快速入门</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><title>Zend_Layout 快速入门</title>
     
 
     <para>
         <code>Zend_Layout</code>有两个基本用例：带有Zend Framework MVC和不带。
     </para>
 
-    <section xml:id="zend.layout.quickstart.layouts"><info><title>布局脚本</title></info>
+    <section xml:id="zend.layout.quickstart.layouts"><title>布局脚本</title>
         
 
         <para>
@@ -71,7 +71,7 @@
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.layout.quickstart.mvc"><info><title> 和Zend Framework MVC一起使用 Zend_Layout </title></info>
+    <section xml:id="zend.layout.quickstart.mvc"><title> 和Zend Framework MVC一起使用 Zend_Layout </title>
         
 
         <para>
@@ -156,7 +156,7 @@ $layout = Zend_Layout::getMvcInstance();
         </para>
     </section>
 
-    <section xml:id="zend.layout.quickstart.standalone"><info><title>使用Zend_Layout做为独立的组件</title></info>
+    <section xml:id="zend.layout.quickstart.standalone"><title>使用Zend_Layout做为独立的组件</title>
         
 
         <para>
@@ -195,7 +195,7 @@ echo $layout->render();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.layout.quickstart.example"><info><title>尝试一下布局</title></info>
+    <section xml:id="zend.layout.quickstart.example"><title>尝试一下布局</title>
         
 
         <para>

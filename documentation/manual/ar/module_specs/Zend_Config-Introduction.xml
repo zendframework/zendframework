@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>مقدمة</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><title>مقدمة</title>
     
     <para>
         تم تصميم <code>Zend_Config</code> لتُبسّط عملية الوصول و أستخدام بيانات الأعدادات "configuration data"
@@ -10,7 +10,7 @@
         <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> و
         <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
     </para>
-    <example><info><title>إستخدام Zend_Config Per Se</title></info>
+    <example><title>إستخدام Zend_Config Per Se</title>
         
         <para>
             من الطبيعى توقع أن المبرمجين سيستخدمون أحد الـ adapter classes أو الـ "classes التوفيقية" مثل

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML メール</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>HTML メール</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         multipart/alternative な <acronym>MIME</acronym> メッセージが自動的に生成されます。
     </para>
 
-    <example xml:id="zend.mail.html-mails.example-1"><info><title>HTML メールの送信</title></info>
+    <example xml:id="zend.mail.html-mails.example-1"><title>HTML メールの送信</title>
         
 
         <programlisting language="php"><![CDATA[

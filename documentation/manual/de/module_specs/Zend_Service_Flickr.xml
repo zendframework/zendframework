@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><info><title>Zend_Service_Flickr</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><title>Zend_Service_Flickr</title>
     
 
-    <section xml:id="zend.service.flickr.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.flickr.introduction"><title>Einführung</title>
         
 
         <para>
@@ -19,7 +19,7 @@
             Photos zu suchen welche "php" im Tag haben.
         </para>
 
-        <example xml:id="zend.service.flickr.introduction.example-1"><info><title>Simple Flickr Photo Suche</title></info>
+        <example xml:id="zend.service.flickr.introduction.example-1"><title>Simple Flickr Photo Suche</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -32,7 +32,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
 
-        <note><info><title>Optionale Parameter</title></info>
+        <note><title>Optionale Parameter</title>
             
 
             <para>
@@ -42,7 +42,7 @@ foreach ($results as $result) {
         </note>
     </section>
 
-    <section xml:id="zend.service.flickr.finding-users"><info><title>Bilder und Informationen von Flickr Benutzern finden</title></info>
+    <section xml:id="zend.service.flickr.finding-users"><title>Bilder und Informationen von Flickr Benutzern finden</title>
         
 
         <para>
@@ -75,9 +75,9 @@ foreach ($results as $result) {
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.flickr.finding-users.example-1"><info><title>
+        <example xml:id="zend.service.flickr.finding-users.example-1"><title>
                 Finden von öffentlichen Photos eines Flickr Benutzers durch seine E-Mail Adresse
-            </title></info>
+            </title>
             
 
             <para>
@@ -97,7 +97,7 @@ foreach ($results as $result) {
         </example>
     </section>
 
-    <section xml:id="zend.service.flickr.grouppoolgetphotos"><info><title>Photos in einem Gruppenpool finden</title></info>
+    <section xml:id="zend.service.flickr.grouppoolgetphotos"><title>Photos in einem Gruppenpool finden</title>
         
 
         <para>
@@ -106,7 +106,7 @@ foreach ($results as $result) {
             <methodname>groupPoolGetPhotos()</methodname> Methode verwendet werden:
         </para>
 
-        <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><info><title>Empfangen von Photos aus einem Gruppenpool durch die Gruppen ID</title></info>
+        <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><title>Empfangen von Photos aus einem Gruppenpool durch die Gruppen ID</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -120,7 +120,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Optionale Parameter</title></info>
+        <note><title>Optionale Parameter</title>
             
 
             <para>
@@ -130,7 +130,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
         </note>
     </section>
 
-    <section xml:id="zend.service.flickr.getimagedetails"><info><title>Empfangen von Details zu Bildern durch Flickr</title></info>
+    <section xml:id="zend.service.flickr.getimagedetails"><title>Empfangen von Details zu Bildern durch Flickr</title>
         
 
         <para>
@@ -139,7 +139,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
             der <methodname>getImageDetails()</methodname> Methode, wie im folgenden Beispiel:
         </para>
 
-        <example xml:id="zend.service.flickr.getimagedetails.example-1"><info><title>Empfangen von Details zu Bildern durch Flickr</title></info>
+        <example xml:id="zend.service.flickr.getimagedetails.example-1"><title>Empfangen von Details zu Bildern durch Flickr</title>
             
 
             <para>
@@ -157,7 +157,7 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
         </example>
     </section>
 
-    <section xml:id="zend.service.flickr.classes"><info><title>Zend_Service_Flickr Ergebnis Klassen</title></info>
+    <section xml:id="zend.service.flickr.classes"><title>Zend_Service_Flickr Ergebnis Klassen</title>
         
 
         <para>
@@ -185,7 +185,7 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
             </itemizedlist>
         </para>
 
-        <section xml:id="zend.service.flickr.classes.resultset"><info><title>Zend_Service_Flickr_ResultSet</title></info>
+        <section xml:id="zend.service.flickr.classes.resultset"><title>Zend_Service_Flickr_ResultSet</title>
             
 
             <para>Repräsentiert ein Set von Ergebnissen von einer Flickr Suche.</para>
@@ -199,10 +199,10 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                 </para>
             </note>
 
-            <section xml:id="zend.service.flickr.classes.resultset.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.flickr.classes.resultset.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.flickr.classes.resultset.properties.table-1"><info><title>Zend_Service_Flickr_ResultSet Eigenschaften</title></info>
+                <table xml:id="zend.service.flickr.classes.resultset.properties.table-1"><title>Zend_Service_Flickr_ResultSet Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -237,7 +237,7 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                 </table>
             </section>
 
-            <section xml:id="zend.service.flickr.classes.resultset.totalResults"><info><title>Zend_Service_Flickr_ResultSet::totalResults()</title></info>
+            <section xml:id="zend.service.flickr.classes.resultset.totalResults"><title>Zend_Service_Flickr_ResultSet::totalResults()</title>
                 
 
                 <para>
@@ -258,17 +258,17 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
             </section>
         </section>
 
-        <section xml:id="zend.service.flickr.classes.result"><info><title>Zend_Service_Flickr_Result</title></info>
+        <section xml:id="zend.service.flickr.classes.result"><title>Zend_Service_Flickr_Result</title>
             
 
             <para>
                 Ein einzelnes Bild Ergebnis von einer Flickr Suche
             </para>
 
-            <section xml:id="zend.service.flickr.classes.result.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.flickr.classes.result.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.flickr.classes.result.properties.table-1"><info><title>Zend_Service_Flickr_Result Eigenschaften</title></info>
+                <table xml:id="zend.service.flickr.classes.result.properties.table-1"><title>Zend_Service_Flickr_Result Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -450,14 +450,14 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
             </section>
         </section>
 
-        <section xml:id="zend.service.flickr.classes.image"><info><title>Zend_Service_Flickr_Image</title></info>
+        <section xml:id="zend.service.flickr.classes.image"><title>Zend_Service_Flickr_Image</title>
             
             <para>Repräsentiert ein Bild welches durch eine Flickr Suche zurückgegeben wird.</para>
 
-            <section xml:id="zend.service.flickr.classes.image.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.flickr.classes.image.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.flickr.classes.image.properties.table-1"><info><title>Zend_Service_Flickr_Image Eigenschaften</title></info>
+                <table xml:id="zend.service.flickr.classes.image.properties.table-1"><title>Zend_Service_Flickr_Image Eigenschaften</title>
                     
 
                     <tgroup cols="3">

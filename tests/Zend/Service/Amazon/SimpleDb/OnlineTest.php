@@ -1,38 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Service\Amazon\SimpleDb
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\SimpleDb;
 
-use Zend\Service\Amazon\SimpleDb,
-    Zend\Service\Amazon\SimpleDb\Exception,
-    Zend\Http\Client\Adapter\Socket;
+use Zend\Service\Amazon\SimpleDb;
+use Zend\Service\Amazon\SimpleDb\Exception;
+use Zend\Http\Client\Adapter\Socket;
 
 
 /**
  * @category   Zend
  * @package    Zend\Service\Amazon\SimpleDb
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OnlineTest extends \PHPUnit_Framework_TestCase
 {
@@ -122,7 +108,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         return $response;
     }
 
-    public function testGetAttributes() {
+    public function testGetAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testGetAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -162,7 +149,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testPutAttributes() {
+    public function testPutAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testPutAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -194,7 +182,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testBatchPutAttributes() {
+    public function testBatchPutAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testBatchPutAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -286,7 +275,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testDeleteAttributes() {
+    public function testDeleteAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testDeleteAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -358,7 +348,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $nextToken          Integer between 1 and 100
      * @return array              0 or more domain names
      */
-    public function testListDomains() {
+    public function testListDomains()
+    {
         $domainName = null;
         try {
             // Create some domains
@@ -425,7 +416,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $domainName string Name of the domain for which metadata will be requested
      * @return array Key/value array of metadatum names and values.
      */
-    public function testDomainMetadata() {
+    public function testDomainMetadata()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testDomainMetadata';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -460,8 +452,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $domainName	string	Valid domain name of the domain to create
      * @return 				boolean True if successful, false if not
      */
-	public function testCreateDomain() {
-	    $domainName = $this->_testDomainNamePrefix . '_testCreateDomain';
+    public function testCreateDomain()
+    {
+        $domainName = $this->_testDomainNamePrefix . '_testCreateDomain';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
         try {
@@ -475,8 +468,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-	public function testDeleteDomain() {
-	    $domainName = $this->_testDomainNamePrefix . '_testDeleteDomain';
+    public function testDeleteDomain()
+    {
+        $domainName = $this->_testDomainNamePrefix . '_testDeleteDomain';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
         try {
@@ -493,7 +487,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    private function _wait() {
+    private function _wait()
+    {
         sleep($this->_testWaitPeriod);
     }
 

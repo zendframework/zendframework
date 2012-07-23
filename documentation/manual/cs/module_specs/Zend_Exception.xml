@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Práce s výjimkami</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Práce s výjimkami</title>
 
     
 
@@ -8,7 +8,7 @@
         hlavní třídy Zend_Exception.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Příklad zachycení výjimky</title></info>
+    <example xml:id="zend.exception.using.example"><title>Příklad zachycení výjimky</title>
         
         <programlisting role="php"><![CDATA[<?php
 try {

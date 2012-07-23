@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Classes personnalisées pour les flux et entrées</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>Classes personnalisées pour les flux et entrées</title>
     
 
     <para>
@@ -15,10 +15,10 @@
         soucier des espaces de noms.
     </para>
 
-    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><title>
             Étendre la classe représentant les entrées Atom pour ajouter la gestion d'un
             espace de noms personnalisé
-        </title></info>
+        </title>
         
 
         <programlisting language="php"><![CDATA[

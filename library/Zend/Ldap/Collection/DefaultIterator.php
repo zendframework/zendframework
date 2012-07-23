@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Collection;
@@ -29,8 +19,6 @@ use Zend\Ldap\Exception;
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DefaultIterator implements \Iterator, \Countable
 {
@@ -140,7 +128,7 @@ class DefaultIterator implements \Iterator, \Countable
         if (is_callable($attributeNameTreatment)) {
             if (is_string($attributeNameTreatment) && !function_exists($attributeNameTreatment)) {
                 $this->attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
-            } else if (is_array($attributeNameTreatment)
+            } elseif (is_array($attributeNameTreatment)
                 && !method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])
             ) {
                 $this->attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
@@ -277,7 +265,7 @@ class DefaultIterator implements \Iterator, \Countable
                 if ($code === Exception\LdapException::LDAP_SIZELIMIT_EXCEEDED) {
                     // we have reached the size limit enforced by the server
                     return;
-                } else if ($code > Exception\LdapException::LDAP_SUCCESS) {
+                } elseif ($code > Exception\LdapException::LDAP_SUCCESS) {
                     throw new Exception\LdapException($this->ldap, 'getting next entry (' . $msg . ')');
                 }
             }

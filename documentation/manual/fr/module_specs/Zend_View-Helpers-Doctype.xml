@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>L'aide de vue Doctype</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><title>L'aide de vue Doctype</title>
     
 
     <para>
@@ -59,7 +59,7 @@
         L'aide <code>Doctype</code> est une implémentation concrète de l'<link linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Utilisation basique de l'aide Doctype</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><title>Utilisation basique de l'aide Doctype</title>
         
 
         <para>
@@ -81,7 +81,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Récupérer le Doctype</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><title>Récupérer le Doctype</title>
         
 
         <para>

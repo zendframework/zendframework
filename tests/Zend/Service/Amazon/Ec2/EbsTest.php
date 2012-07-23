@@ -1,26 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
+
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
+
 
 /**
  * Zend\Service\Amazon\Ec2\Ebs test case.
@@ -28,8 +22,6 @@ use Zend\Service\Amazon\Ec2;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -38,32 +30,28 @@ class EbsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend\Service\Amazon\Ec2\Ebs
+     * @var \Zend\Service\Amazon\Ec2\Ebs
      */
     private $ebsInstance;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->ebsInstance = new Ec2\Ebs('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\Ebs::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->ebsInstance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->ebsInstance = new Ec2\Ebs('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testAttachVolume()
@@ -84,7 +72,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  <status>attaching</status>\r\n"
                     . "  <attachTime>2008-05-07T11:51:50.000Z</attachTime>\r\n"
                     . "</AttachVolumeResponse >";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->attachVolume('vol-4d826724', 'i-6058a509', '/dev/sdh');
 
@@ -118,7 +106,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  <startTime>2008-05-07T11:51:50.000Z</startTime>\r\n"
                     . "  <progress></progress>\r\n"
                     . "</CreateSnapshotResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->createSnapshot('vol-4d826724');
 
@@ -153,7 +141,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  <availabilityZone>us-east-1a</availabilityZone>\r\n"
                     . "  <snapshotId></snapshotId>\r\n"
                     . "</CreateVolumeResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->createNewVolume(400, 'us-east-1a');
 
@@ -188,7 +176,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  <availabilityZone>us-east-1a</availabilityZone>\r\n"
                     . "  <snapshotId>snap-78a54011</snapshotId>\r\n"
                     . "</CreateVolumeResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
 
@@ -220,7 +208,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "<DeleteSnapshotResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeleteSnapshotResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->deleteSnapshot('snap-78a54011');
 
@@ -242,7 +230,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "<DeleteVolumeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeleteVolumeResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->deleteVolume('vol-4d826724');
 
@@ -274,7 +262,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </snapshotSet>\r\n"
                     . "</DescribeSnapshotsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->describeSnapshot('snap-78a54011');
 
@@ -320,7 +308,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </snapshotSet>\r\n"
                     . "</DescribeSnapshotsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->describeSnapshot(array('snap-78a54011', 'snap-78a54012'));
 
@@ -381,7 +369,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  </item>\r\n"
                     . "</volumeSet>\r\n"
                     . "</DescribeVolumesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->describeVolume('vol-4282672b');
 
@@ -444,7 +432,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  </item>\r\n"
                     . "</volumeSet>\r\n"
                     . "</DescribeVolumesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->describeVolume(array('vol-4282672b', 'vol-42826775'));
 
@@ -512,7 +500,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  </item>\r\n"
                     . "</volumeSet>\r\n"
                     . "</DescribeVolumesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->describeAttachedVolumes('i-6058a509');
 
@@ -556,7 +544,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "  <status>detaching</status>\r\n"
                     . "  <attachTime>2008-05-08T11:51:50.000Z</attachTime>\r\n"
                     . "</DetachVolumeResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ebsInstance->detachVolume('vol-4d826724');
 

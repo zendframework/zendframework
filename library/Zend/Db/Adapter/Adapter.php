@@ -70,7 +70,7 @@ class Adapter
      * @param Platform\PlatformInterface $platform
      * @param ResultSet\ResultSet $queryResultPrototype
      */
-    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSet $queryResultPrototype = null)
+    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
     {
         if (is_array($driver)) {
             $driver = $this->createDriverFromParameters($driver);
@@ -93,7 +93,7 @@ class Adapter
 
     /**
      * getDriver()
-     * 
+     *
      * @throws Exception
      * @return Driver\DriverInterface
      */
@@ -135,9 +135,9 @@ class Adapter
         return $this->platform;
     }
 
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
-        return $this->driver->getConnection()->getDefaultSchema();
+        return $this->driver->getConnection()->getCurrentSchema();
     }
 
     /**
@@ -175,7 +175,7 @@ class Adapter
 
         if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
             $resultSet = clone $this->queryResultSetPrototype;
-            $resultSet->setDataSource($result);
+            $resultSet->initialize($result);
             return $resultSet;
         }
 
@@ -184,10 +184,10 @@ class Adapter
 
     /**
      * Create statement
-     * 
+     *
      * @param  string $initialSql
      * @param  ParameterContainer $initialParameters
-     * @return Driver\StatementInterface 
+     * @return Driver\StatementInterface
      */
     public function createStatement($initialSql = null, $initialParameters = null)
     {
@@ -244,13 +244,22 @@ class Adapter
             throw new Exception\InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
         }
 
+        $options = array();
+        if (isset($parameters['options'])) {
+            $options = (array) $parameters['options'];
+            unset($parameters['options']);
+        }
+
         $driverName = strtolower($parameters['driver']);
         switch ($driverName) {
             case 'mysqli':
-                $driver = new Driver\Mysqli\Mysqli($parameters);
+                $driver = new Driver\Mysqli\Mysqli($parameters, null, null, $options);
                 break;
             case 'sqlsrv':
                 $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
+                break;
+            case 'pgsql':
+                $driver = new Driver\Pgsql\Pgsql($parameters);
                 break;
             case 'pdo':
             default:

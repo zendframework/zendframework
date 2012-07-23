@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><info><title>Zend_Json_Server - JSON-RPCサーバー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><title>Zend_Json_Server - JSON-RPCサーバー</title>
     
 
     <para>
@@ -50,7 +50,7 @@
         同じサーバーエンドポイントを簡単に利用できるようにします。
     </para>
 
-    <example xml:id="zend.json.server.usage"><info><title>Zend_Json_Server利用方法</title></info>
+    <example xml:id="zend.json.server.usage"><title>Zend_Json_Server利用方法</title>
         
 
         <para>
@@ -191,7 +191,7 @@ $server->handle();
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.json.server.details"><info><title>高度な詳細</title></info>
+    <section xml:id="zend.json.server.details"><title>高度な詳細</title>
         
 
         <para>
@@ -200,7 +200,7 @@ $server->handle();
             より高度な機能を利用できます。
         </para>
 
-        <section xml:id="zend.json.server.details.zendjsonserver"><info><title>Zend_Json_Server</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserver"><title>Zend_Json_Server</title>
             
 
             <para>
@@ -260,7 +260,7 @@ $server->handle();
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonserverrequest"><info><title>Zend_Json_Server_Request</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserverrequest"><title>Zend_Json_Server_Request</title>
             
 
             <para>
@@ -339,7 +339,7 @@ $server->handle();
             </para>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonserverresponse"><info><title>Zend_Json_Server_Response</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserverresponse"><title>Zend_Json_Server_Response</title>
             
 
             <para>
@@ -407,7 +407,7 @@ $server->handle();
             </para>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonservererror"><info><title>Zend_Json_Server_Error</title></info>
+        <section xml:id="zend.json.server.details.zendjsonservererror"><title>Zend_Json_Server_Error</title>
             
 
             <para>
@@ -461,7 +461,7 @@ $server->handle();
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonserversmd"><info><title>Zend_Json_Server_Smd</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserversmd"><title>Zend_Json_Server_Smd</title>
             
 
             <para>

@@ -1,25 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Crypt
  */
 
 namespace ZendTest\Crypt;
+
 use Zend\Crypt\Hash;
 
 /**
@@ -31,8 +21,6 @@ use Zend\Crypt\Hash;
  * @category   Zend
  * @package    Zend_Crypt
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
 class HashTest extends \PHPUnit_Framework_TestCase
@@ -84,7 +72,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($output, $hash);
     }
 
-    // MD5 test suite talen from RFC 1321
+    // MD5 test suite taken from RFC 1321
 
     public static function provideTestMD5Data()
     {
@@ -118,7 +106,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
 
     public function testBinaryOutput()
     {
-        $hash = Hash::compute('sha1', 'test', Hash::BINARY);
+        $hash = Hash::compute('sha1', 'test', Hash::OUTPUT_BINARY);
         $this->assertEquals('qUqP5cyxm6YcTAhz05Hph5gvu9M=', base64_encode($hash));
     }
 

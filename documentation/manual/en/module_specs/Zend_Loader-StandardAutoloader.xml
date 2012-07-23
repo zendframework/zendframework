@@ -6,13 +6,13 @@
         
 
         <para>
-            <classname>Zend\Loader\StandardAutoloader</classname> is designed as a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0</link>-compliant
+            <classname>Zend\Loader\StandardAutoloader</classname> is designed as a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</link>-compliant
             autoloader. It assumes a 1:1 mapping of the namespace+classname to the filesystem,
             wherein namespace separators and underscores are translated to directory separators. A
             simple statement that illustrates how resolution works is as follows:
         </para>
 
-        <programlisting xml:lang="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname) 
           . '.php';
 ]]></programlisting>
@@ -104,19 +104,19 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
         </para>
 
         <para>
-            By default, the class will register the "Zend" namespace to the directory above where
-            its own classfile is located on the filesystem.
+            If the option key 'autoregister_zf' is set to true then the class will register the "Zend" 
+            namespace to the directory above where its own classfile is located on the filesystem.
         </para>
 
         <example xml:id="zend.loader.standard-autoloader.quick-start.example-manual-configuration"><title>Manual Configuration</title>
             
 
-            <programlisting xml:lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // This example assumes ZF is on your include_path.
 // You could also load the autoloader class from a path relative to the
 // current script, or via an absolute path.
 require_once 'Zend/Loader/StandardAutoloader.php';
-$loader = new Zend\Loader\StandardAutoloader();
+$loader = new Zend\Loader\StandardAutoloader(array('autoregister_zf' => true));
 
 // Register the "Phly" namespace:
 $loader->registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');
@@ -145,7 +145,7 @@ $loader->register();
                 <listitem>
                     <para>
                         The argument passed may be either an array or a
-                        <interface>Traversable</interface> object (such as a
+                        <interfacename>Traversable</interfacename> object (such as a
                         <classname>Zend\Config</classname> object.
                     </para>
                 </listitem>
@@ -162,9 +162,10 @@ $loader->register();
                 The following is equivalent to the previous example.
             </para>
 
-            <programlisting xml:lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/StandardAutoloader.php';
 $loader = new Zend\Loader\StandardAutoloader(array(
+    'autoregister_zf' => true,
     'namespaces' => array(
         'Phly' => APPLICATION_PATH . '/../library/Phly',
     ),
@@ -188,7 +189,6 @@ $loader->register();
         </para>
 
         <variablelist><title>StandardAutoloader Options</title>
-            
 
             <varlistentry>
                 <term>namespaces</term>
@@ -228,6 +228,19 @@ $loader->register();
                     </para>
                 </listitem>
             </varlistentry>
+
+            <varlistentry>
+                <term>autoregister_zf</term>
+
+                <listitem>
+                    <para>
+                        An boolean value indicating that the class should register the "Zend" 
+                        namespace to the directory above where its own classfile is located 
+                        on the filesystem.
+                    </para>
+                </listitem>
+            </varlistentry>            
+
         </variablelist>
     </section>
 
@@ -341,6 +354,7 @@ $loader->register();
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>isFallbackAutoloader</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -491,6 +505,7 @@ $loader->register();
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>register</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

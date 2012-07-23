@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>Envoyer des émail en utilisant SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><title>Envoyer des émail en utilisant SMTP</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         utilisé :
     </para>
 
-    <example xml:id="zend.mail.sending.example-1"><info><title>Envoyer un émail via SMTP</title></info>
+    <example xml:id="zend.mail.sending.example-1"><title>Envoyer un émail via SMTP</title>
         
 
         <programlisting language="php"><![CDATA[

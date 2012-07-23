@@ -1,33 +1,21 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Consumer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
  */
 
 namespace Zend\OpenId\Consumer;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\OpenId,
-    Zend\OpenId\Extension,
-    Zend\Session\Container as SessionContainer;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\OpenId;
+use Zend\OpenId\Extension;
+use Zend\Session\Container as SessionContainer;
 
 /**
  * OpenID consumer implementation
@@ -35,8 +23,6 @@ use Zend\Http\Client as HttpClient,
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GenericConsumer
 {
@@ -185,7 +171,7 @@ class GenericConsumer
 
         if (isset($params["openid_claimed_id"])) {
             $identity = $params["openid_claimed_id"];
-        } else if (isset($params["openid_identity"])){
+        } elseif (isset($params["openid_identity"])){
             $identity = $params["openid_identity"];
         } else {
             $identity = "";
@@ -255,7 +241,7 @@ class GenericConsumer
                 $this->_setError("Missing openid.op_endpoint");
                 return false;
             /* OpenID 2.0 (11.3) Checking the Nonce */
-            } else if (!$this->_storage->isUniqueNonce($params['openid_op_endpoint'], $params['openid_response_nonce'])) {
+            } elseif (!$this->_storage->isUniqueNonce($params['openid_op_endpoint'], $params['openid_response_nonce'])) {
                 $this->_setError("Duplicate openid.response_nonce");
                 return false;
             }
@@ -296,10 +282,10 @@ class GenericConsumer
                     if (!OpenId\OpenId::normalize($id)) {
                         $this->_setError("Normalization failed");
                         return false;
-                    } else if (!$this->_discovery($id, $discovered_server, $discovered_version)) {
+                    } elseif (!$this->_discovery($id, $discovered_server, $discovered_version)) {
                         $this->_setError("Discovery failed: " . $this->getError());
                         return false;
-                    } else if ((!empty($params['openid_identity']) &&
+                    } elseif ((!empty($params['openid_identity']) &&
                                 $params["openid_identity"] != $id) ||
                                (!empty($params['openid_op_endpoint']) &&
                                 $params['openid_op_endpoint'] != $discovered_server) ||
@@ -313,13 +299,11 @@ class GenericConsumer
             $this->_storage->delAssociation($url);
             $this->_setError("Signature check failed");
             return false;
-        }
-        else
-        {
+        } else {
             /* Use dumb mode */
             if (isset($params['openid_claimed_id'])) {
                 $id = $params['openid_claimed_id'];
-            } else if (isset($params['openid_identity'])) {
+            } elseif (isset($params['openid_identity'])) {
                 $id = $params['openid_identity'];
             } else {
                 $this->_setError("Missing openid.claimed_id and openid.identity");
@@ -329,7 +313,7 @@ class GenericConsumer
             if (!OpenId\OpenId::normalize($id)) {
                 $this->_setError("Normalization failed");
                 return false;
-            } else if (!$this->_discovery($id, $server, $discovered_version)) {
+            } elseif (!$this->_discovery($id, $server, $discovered_version)) {
                 $this->_setError("Discovery failed: " . $this->getError());
                 return false;
             }
@@ -348,9 +332,9 @@ class GenericConsumer
             foreach ($params as $key => $val) {
                 if (strpos($key, 'openid_ns_') === 0) {
                     $key = 'openid.ns.' . substr($key, strlen('openid_ns_'));
-                } else if (strpos($key, 'openid_sreg_') === 0) {
+                } elseif (strpos($key, 'openid_sreg_') === 0) {
                     $key = 'openid.sreg.' . substr($key, strlen('openid_sreg_'));
-                } else if (strpos($key, 'openid_') === 0) {
+                } elseif (strpos($key, 'openid_') === 0) {
                     $key = 'openid.' . substr($key, strlen('openid_'));
                 }
                 $params2[$key] = $val;
@@ -591,7 +575,7 @@ class GenericConsumer
                 if ($params['openid.session_type'] == 'DH-SHA256') {
                     $params['openid.session_type'] = 'DH-SHA1';
                     $params['openid.assoc_type'] = 'HMAC-SHA1';
-                } else if ($params['openid.session_type'] == 'DH-SHA1') {
+                } elseif ($params['openid.session_type'] == 'DH-SHA1') {
                     $params['openid.session_type'] = 'no-encryption';
                 } else {
                     $this->_setError("The OpenID service responded with: " . $ret['error_code']);
@@ -631,7 +615,7 @@ class GenericConsumer
 
         if ($ret['assoc_type'] == 'HMAC-SHA1') {
             $macFunc = 'sha1';
-        } else if ($ret['assoc_type'] == 'HMAC-SHA256' &&
+        } elseif ($ret['assoc_type'] == 'HMAC-SHA256' &&
             $version >= 2.0) {
             $macFunc = 'sha256';
         } else {
@@ -643,12 +627,12 @@ class GenericConsumer
              ($version >= 2.0 && $ret['session_type'] == 'no-encryption')) &&
              isset($ret['mac_key'])) {
             $secret = base64_decode($ret['mac_key']);
-        } else if (isset($ret['session_type']) &&
+        } elseif (isset($ret['session_type']) &&
             $ret['session_type'] == 'DH-SHA1' &&
             !empty($ret['dh_server_public']) &&
             !empty($ret['enc_mac_key'])) {
             $dhFunc = 'sha1';
-        } else if (isset($ret['session_type']) &&
+        } elseif (isset($ret['session_type']) &&
             $ret['session_type'] == 'DH-SHA256' &&
             $version >= 2.0 &&
             !empty($ret['dh_server_public']) &&
@@ -677,7 +661,7 @@ class GenericConsumer
                 $this->_setError("The length of the sha1 secret must be 20");
                 return false;
             }
-        } else if ($macFunc == 'sha256') {
+        } elseif ($macFunc == 'sha256') {
             if (strlen($secret) != 32) {
                 $this->_setError("The length of the sha256 secret must be 32");
                 return false;
@@ -729,19 +713,19 @@ class GenericConsumer
                 $r)) {
             $version = 2.0;
             $server = $r[3];
-        } else if (preg_match(
+        } elseif (preg_match(
                 '/<link[^>]*href=(["\'])([^"\']+)\\1[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid2.provider[ \t]*[^"\']*\\3[^>]*\/?>/i',
                 $response,
                 $r)) {
             $version = 2.0;
             $server = $r[2];
-        } else if (preg_match(
+        } elseif (preg_match(
                 '/<link[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid.server[ \t]*[^"\']*\\1[^>]*href=(["\'])([^"\']+)\\2[^>]*\/?>/i',
                 $response,
                 $r)) {
             $version = 1.1;
             $server = $r[3];
-        } else if (preg_match(
+        } elseif (preg_match(
                 '/<link[^>]*href=(["\'])([^"\']+)\\1[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid.server[ \t]*[^"\']*\\3[^>]*\/?>/i',
                 $response,
                 $r)) {
@@ -756,7 +740,7 @@ class GenericConsumer
                     $response,
                     $r)) {
                 $realId = $r[3];
-            } else if (preg_match(
+            } elseif (preg_match(
                     '/<link[^>]*href=(["\'])([^"\']+)\\1[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid2.local_id[ \t]*[^"\']*\\3[^>]*\/?>/i',
                     $response,
                     $r)) {
@@ -768,7 +752,7 @@ class GenericConsumer
                     $response,
                     $r)) {
                 $realId = $r[3];
-            } else if (preg_match(
+            } elseif (preg_match(
                     '/<link[^>]*href=(["\'])([^"\']+)\\1[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid.delegate[ \t]*[^"\']*\\3[^>]*\/?>/i',
                     $response,
                     $r)) {
@@ -845,7 +829,7 @@ class GenericConsumer
             if ($this->_session !== null) {
                 $this->_session->identity = $id;
                 $this->_session->claimed_id = $claimedId;
-            } else if (defined('SID')) {
+            } elseif (defined('SID')) {
                 $_SESSION["zend_openid"] = array(
                     "identity" => $id,
                     "claimed_id" => $claimedId);
@@ -888,7 +872,7 @@ class GenericConsumer
      *
      * @param HttpClient $client HTTP client object to be used
      */
-    public function setHttpClient($client) 
+    public function setHttpClient($client)
     {
         $this->_httpClient = $client;
     }
@@ -898,7 +882,7 @@ class GenericConsumer
      *
      * @return HttpClient
      */
-    public function getHttpClient() 
+    public function getHttpClient()
     {
         return $this->_httpClient;
     }
@@ -908,7 +892,7 @@ class GenericConsumer
      *
      * @param SessionContainer $session HTTP client object to be used
      */
-    public function setSession(SessionContainer $session) 
+    public function setSession(SessionContainer $session)
     {
         $this->_session = $session;
     }
@@ -918,7 +902,7 @@ class GenericConsumer
      *
      * @return Zend\Session\Container
      */
-    public function getSession() 
+    public function getSession()
     {
         return $this->_session;
     }

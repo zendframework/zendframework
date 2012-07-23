@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Rest
- * @subpackage Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Rest
  */
 
 namespace Zend\Rest\Client;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Uri;
+use Zend\Http\Client as HttpClient;
+use Zend\Service\AbstractService;
+use Zend\Uri;
 
 /**
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RestClient extends \Zend\Service\AbstractService
+class RestClient extends AbstractService
 {
     /**
      * Data for the query
@@ -65,8 +53,8 @@ class RestClient extends \Zend\Service\AbstractService
 
     /**
      * Set HTTP client instance to use with this service instance
-     * 
-     * @param  HttpClient $client 
+     *
+     * @param  HttpClient $client
      * @return RestClient
      */
     public function setHttpClient(HttpClient $client)
@@ -79,7 +67,7 @@ class RestClient extends \Zend\Service\AbstractService
      * Get the HTTP client instance registered with this service instance
      *
      * If none set, will check for a default instance.
-     * 
+     *
      * @return HttpClient
      */
     public function getHttpClient()
@@ -140,8 +128,8 @@ class RestClient extends \Zend\Service\AbstractService
         $this->uri->setPath($path);
 
         /**
-         * Get the HTTP client and configure it for the endpoint URI.  Do this 
-         * each time as the Zend\Http\Client instance may be shared with other 
+         * Get the HTTP client and configure it for the endpoint URI.  Do this
+         * each time as the Zend\Http\Client instance may be shared with other
          * Zend\Service\AbstractService subclasses.
          */
         $client = $this->getHttpClient();
@@ -186,7 +174,7 @@ class RestClient extends \Zend\Service\AbstractService
         if (is_string($data)) {
             $request->setContent($data);
         } elseif (is_array($data) || is_object($data)) {
-            $request->post()->fromArray((array) $data);
+            $request->getPost()->fromArray((array) $data);
         }
         return $client->send($request);
     }

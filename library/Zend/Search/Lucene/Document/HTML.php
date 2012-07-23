@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Document
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Document;
 
-use Zend\Search\Lucene\Document,
-    Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\Analyzer,
-    Zend\Search\Lucene\Exception\RuntimeException,
-    Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Document;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * HTML document.
@@ -33,8 +23,6 @@ use Zend\Search\Lucene\Document,
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HTML extends Document
 {
@@ -98,7 +86,9 @@ class HTML extends Document
         } else {
             $htmlData = $data;
         }
-        @$this->_doc->loadHTML($htmlData);
+        ErrorHandler::start(E_WARNING);
+        $this->_doc->loadHTML($htmlData);
+        ErrorHandler::stop();
 
         if ($this->_doc->encoding === null) {
             // Document encoding is not recognized
@@ -109,9 +99,11 @@ class HTML extends Document
                 // Add additional HEAD section and recognize document
                 $htmlTagOffset = $matches[0][1] + strlen($matches[0][0]);
 
-                @$this->_doc->loadHTML(iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, 0, $htmlTagOffset))
+                ErrorHandler::start(E_WARNING);
+                $this->_doc->loadHTML(iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, 0, $htmlTagOffset))
                                      . '<head><META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/></head>'
                                      . iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, $htmlTagOffset)));
+                ErrorHandler::stop();
 
                 // Remove additional HEAD section
                 $xpath = new \DOMXPath($this->_doc);
@@ -119,9 +111,11 @@ class HTML extends Document
                 $head->parentNode->removeChild($head);
             } else {
                 // It's an HTML fragment
-                @$this->_doc->loadHTML('<html><head><META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/></head><body>'
+                ErrorHandler::start(E_WARNING);
+                $this->_doc->loadHTML('<html><head><META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/></head><body>'
                                      . iconv($defaultEncoding, 'UTF-8//IGNORE', $htmlData)
                                      . '</body></html>');
+                ErrorHandler::stop();
             }
 
         }
@@ -222,7 +216,7 @@ class HTML extends Document
             if(!in_array($node->parentNode->tagName, $this->_inlineTags)) {
                 $text .= ' ';
             }
-        } else if ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
+        } elseif ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
             foreach ($node->childNodes as $childNode) {
                 $this->_retrieveNodeText($childNode, $text);
             }
@@ -319,10 +313,12 @@ class HTML extends Document
             // Transform HTML string to a DOM representation and automatically transform retrieved string
             // into valid XHTML (It's automatically done by loadHTML() method)
             $highlightedWordNodeSetDomDocument = new \DOMDocument('1.0', 'UTF-8');
-            $success = @$highlightedWordNodeSetDomDocument->
+            ErrorHandler::start(E_WARNING);
+            $success = $highlightedWordNodeSetDomDocument->
                                 loadHTML('<html><head><meta http-equiv="Content-type" content="text/html; charset=UTF-8"/></head><body>'
                                        . $highlightedWordNodeSetHTML
                                        . '</body></html>');
+            ErrorHandler::stop();
             if (!$success) {
                 throw new RuntimeException("Error occured while loading highlighted text fragment: '$highlightedWordNodeSetHTML'.");
             }

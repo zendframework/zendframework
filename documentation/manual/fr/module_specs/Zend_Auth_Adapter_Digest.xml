@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Authentification "Digest"</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><title>Authentification "Digest"</title>
     
 
-    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.auth.adapter.digest.introduction"><title>Introduction</title>
         
 
         <para>
@@ -48,7 +48,7 @@ unUtilisateur:Un domaine:3b17d7f3a9374666e892cbce58aa724f
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Spécifications</title></info>
+    <section xml:id="zend.auth.adapter.digest.specifics"><title>Spécifications</title>
         
 
         <para>
@@ -86,7 +86,7 @@ unUtilisateur:Un domaine:3b17d7f3a9374666e892cbce58aa724f
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.identity"><info><title>Identité</title></info>
+    <section xml:id="zend.auth.adapter.digest.identity"><title>Identité</title>
         
 
         <para>

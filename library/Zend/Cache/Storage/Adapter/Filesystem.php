@@ -1,58 +1,49 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    GlobIterator,
-    stdClass,
-    Exception as BaseException,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage,
-    Zend\Cache\Storage\StorageInterface,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearExpiredInterface,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\OptimizableInterface,
-    Zend\Cache\Storage\TagableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface,
-    Zend\Cache\Utils,
-    Zend\Stdlib\ErrorHandler;
+use ArrayObject;
+use Exception as BaseException;
+use GlobIterator;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem
-    extends AbstractAdapter
-    implements FlushableInterface, ClearExpiredInterface, ClearByNamespaceInterface, ClearByPrefixInterface,
-               TagableInterface, IterableInterface, OptimizableInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Filesystem extends AbstractAdapter implements
+    AvailableSpaceCapableInterface,
+    ClearByNamespaceInterface,
+    ClearByPrefixInterface,
+    ClearExpiredInterface,
+    FlushableInterface,
+    IterableInterface,
+    OptimizableInterface,
+    TaggableInterface,
+    TotalSpaceCapableInterface
 {
 
     /**
@@ -172,11 +163,6 @@ class Filesystem
                 if (file_exists($tagPathname)) {
                     unlink($tagPathname);
                 }
-
-                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
-                if (file_exists($ifoPathname)) {
-                    unlink($ifoPathname);
-                }
             }
         }
         $error = ErrorHandler::stop();
@@ -253,7 +239,7 @@ class Filesystem
         return true;
     }
 
-    /* TagableInterface  */
+    /* TaggableInterface  */
 
     /**
      * Set tags to an item by given key.
@@ -348,11 +334,6 @@ class Filesystem
                 if (file_exists($datPathname)) {
                     unlink($datPathname);
                 }
-
-                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
-                if (file_exists($ifoPathname)) {
-                    unlink($ifoPathname);
-                }
             }
         }
 
@@ -381,7 +362,7 @@ class Filesystem
     /**
      * Optimize the storage
      *
-     * @return void
+     * @return boolean
      * @return Exception\RuntimeException
      */
     public function optimize()
@@ -417,7 +398,7 @@ class Filesystem
             }
 
             // clean total space buffer on change cache_dir
-            $events     = $this->events();
+            $events     = $this->getEventManager();
             $handle     = null;
             $totalSpace = & $this->totalSpace;
             $callback   = function ($event) use (& $events, & $handle, & $totalSpace) {
@@ -427,8 +408,9 @@ class Filesystem
                     $events->detach($handle);
                 }
             };
-            $handle = $this->events()->attach($callback);
+            $handle = $events->attach($callback);
         }
+
         return $this->totalSpace;
     }
 
@@ -526,17 +508,6 @@ class Filesystem
             $filespec = $this->getFileSpec($normalizedKey);
             $data     = $this->getFileContent($filespec . '.dat');
 
-            if ($this->getOptions()->getReadControl()) {
-                if ( ($info = $this->readInfoFile($filespec . '.ifo'))
-                    && isset($info['hash'], $info['algo'])
-                    && Utils::generateHash($info['algo'], $data, true) != $info['hash']
-                ) {
-                    throw new Exception\UnexpectedValueException(
-                        "ReadControl: Stored hash and computed hash don't match"
-                    );
-                }
-            }
-
             // use filemtime + filesize as CAS token
             if (func_num_args() > 2) {
                 $casToken = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
@@ -581,17 +552,6 @@ class Filesystem
                     continue;
                 } else {
                     unset($keys[$i]);
-                }
-
-                if ($options->getReadControl()) {
-                    $info = $this->readInfoFile($filespec . '.ifo');
-                    if (isset($info['hash'], $info['algo'])
-                        && Utils::generateHash($info['algo'], $data, true) != $info['hash']
-                    ) {
-                        throw new Exception\UnexpectedValueException(
-                            "ReadControl: Stored hash and computed hash doesn't match"
-                        );
-                    }
                 }
 
                 $result[$key] = $data;
@@ -923,36 +883,13 @@ class Filesystem
         $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
-        $info = null;
-        if ($options->getReadControl()) {
-            $info['hash'] = Utils::generateHash($options->getReadControlAlgo(), $value, true);
-            $info['algo'] = $options->getReadControlAlgo();
-        }
-
         // write files
         try {
             // set umask for files
             $oldUmask = umask($options->getFileUmask());
 
-            $contents = array($filespec . '.dat' => & $value);
-            if ($info) {
-                $contents[$filespec . '.ifo'] = serialize($info);
-            } else {
-                $this->unlink($filespec . '.ifo');
-                $this->unlink($filespec . '.tag');
-            }
-
-            while ($contents) {
-                $nonBlocking = count($contents) > 1;
-                $wouldblock  = null;
-
-                foreach ($contents as $file => $content) {
-                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
-                    if (!$nonBlocking || !$wouldblock) {
-                        unset($contents[$file]);
-                    }
-                }
-            }
+            $this->putFileContent($filespec . '.dat', $value);
+            $this->unlink($filespec . '.tag');
 
             // reset file_umask
             umask($oldUmask);
@@ -987,18 +924,8 @@ class Filesystem
             // *.dat file
             $contents[$filespec . '.dat'] = & $value;
 
-            // *.ifo file
-            $info = null;
-            if ($baseOptions->getReadControl()) {
-                $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
-                $info['algo'] = $baseOptions->getReadControlAlgo();
-            }
-            if ($info) {
-                $contents[$filespec . '.ifo'] = serialize($info);
-            } else {
-                $this->unlink($filespec . '.ifo');
-                $this->unlink($filespec . '.tag');
-            }
+            // *.tag file
+            $this->unlink($filespec . '.tag');
         }
 
         // write to disk
@@ -1208,7 +1135,6 @@ class Filesystem
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.tag');
-            $this->unlink($filespec . '.ifo');
         }
         return true;
     }
@@ -1250,18 +1176,19 @@ class Filesystem
                         'resource' => false,
                     ),
                     'supportedMetadata'  => $metadata,
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => false,
                     'ttlPrecision'       => 1,
                     'expiredRead'        => true,
-                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
+                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .tag)
                     'namespaceIsPrefix'  => true,
                     'namespaceSeparator' => $options->getNamespaceSeparator(),
                 )
             );
 
             // update capabilities on change options
-            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+            $this->getEventManager()->attach('option', function ($event) use ($capabilities, $marker) {
                 $params = $event->getParams();
 
                 if (isset($params['namespace_separator'])) {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Követelmények</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Követelmények</title>
 
     
 
-    <section xml:id="requirements.introduction"><info><title>Bevezetés</title></info>
+    <section xml:id="requirements.introduction"><title>Bevezetés</title>
 
         
 
@@ -29,7 +29,7 @@
             közvetlen hatással az alkalmazás funkcionalitására.
         </para>
 
-        <section xml:id="requirements.version"><info><title>PHP verzió</title></info>
+        <section xml:id="requirements.version"><title>PHP verzió</title>
 
             
 
@@ -46,7 +46,7 @@
 
         </section>
 
-        <section xml:id="requirements.extensions"><info><title>PHP kiterjesztések</title></info>
+        <section xml:id="requirements.extensions"><title>PHP kiterjesztések</title>
 
             
 
@@ -74,7 +74,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-php-extensions-table.xml"/>
         </section>
 
-        <section xml:id="requirements.zendcomponents"><info><title>Összetevők</title></info>
+        <section xml:id="requirements.zendcomponents"><title>Összetevők</title>
 
             
 
@@ -101,7 +101,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-zendcomponents-table.xml"/>
         </section>
 
-        <section xml:id="requirements.dependencies"><info><title>Függőségek</title></info>
+        <section xml:id="requirements.dependencies"><title>Függőségek</title>
 
             
 

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OpenId
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
  */
 
 namespace ZendTest\OpenId;
@@ -27,8 +16,6 @@ use Zend\OpenId\OpenId;
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
 class OpenIdTest extends \PHPUnit_Framework_TestCase
@@ -407,7 +394,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
         OpenId::redirect("http://www.test.com/", null, $response, 'GET');
         $this->assertSame( 302, $response->getStatusCode() );
 
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue(1 <= count($headers));
         $this->assertTrue($headers->has('Location'));
         $location = $headers->get('Location');
@@ -416,27 +403,27 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php?a=b", null, $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'b'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'b', 'c'=>'d'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php?a=b", array('c'=>'d'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'x y'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=x+y', $location->getFieldValue() );
 
         $response = new ResponseHelper(false);

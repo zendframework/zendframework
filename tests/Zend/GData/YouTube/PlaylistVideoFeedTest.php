@@ -1,52 +1,37 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_YouTube
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
-
-/**
- * Test helper
- */
-
 
 /**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_YouTube
  */
 class PlaylistVideoFeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->feedText = file_get_contents(
                 'Zend/GData/YouTube/_files/PlaylistVideoFeedDataSample1.xml',
                 true);
         $this->feed = new YouTube\PlaylistVideoFeed();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($playlistVideoFeed) {
+    private function verifyAllSamplePropertiesAreCorrect ($playlistVideoFeed)
+    {
         $this->assertEquals('http://gdata.youtube.com/feeds/playlists/46A2F8C9B36B6FE7',
             $playlistVideoFeed->id->text);
         $this->assertEquals('2007-09-20T13:42:19.000-07:00', $playlistVideoFeed->updated->text);
@@ -68,29 +53,34 @@ class PlaylistVideoFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $entries[0]->getPosition()->getText());
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertTrue(count($this->feed->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertTrue(count($this->feed->extensionAttributes) == 0);
     }
 
-    public function testEmptyPlaylistVideoFeedToAndFromStringShouldMatch() {
+    public function testEmptyPlaylistVideoFeedToAndFromStringShouldMatch()
+    {
         $entryXml = $this->feed->saveXML();
         $newPlaylistVideoFeed = new YouTube\PlaylistVideoFeed();
         $newPlaylistVideoFeed->transferFromXML($entryXml);
@@ -98,12 +88,14 @@ class PlaylistVideoFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newPlaylistVideoFeedXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->verifyAllSamplePropertiesAreCorrect($this->feed);
     }
 
-    public function testConvertPlaylistVideoFeedToAndFromString() {
+    public function testConvertPlaylistVideoFeedToAndFromString()
+    {
         $this->feed->transferFromXML($this->feedText);
         $feedXml = $this->feed->saveXML();
         $newPlaylistVideoFeed = new YouTube\PlaylistVideoFeed();

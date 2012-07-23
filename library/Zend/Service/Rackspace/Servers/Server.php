@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Service\Rackspace
- * @subpackage Servers
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Rackspace\Servers;
@@ -31,7 +19,7 @@ class Server
     const ERROR_PARAM_NO_ID     = 'You must pass the server\'s id in the array (id)';
     /**
      * Server's name
-     * 
+     *
      * @var string
      */
     protected $name;
@@ -49,38 +37,38 @@ class Server
     protected $imageId;
     /**
      * Flavor id of the server
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $flavorId;
     /**
      * Host id
-     * 
+     *
      * @var string
      */
     protected $hostId;
     /**
      * Server's status
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $status;
     /**
      * Progress of the status
-     * 
+     *
      * @var integer
      */
     protected $progress;
     /**
      * Admin password, generated on a new server
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $adminPass;
     /**
      * Public and private IP addresses
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $addresses = array();
     /**
@@ -137,7 +125,7 @@ class Server
         }
         if (isset($data['metadata']) && is_array($data['metadata'])) {
             $this->metadata= $data['metadata'];
-        } 
+        }
     }
     /**
      * Get the name of the server
@@ -150,8 +138,8 @@ class Server
     }
     /**
      * Get the server's id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getId()
     {
@@ -159,8 +147,8 @@ class Server
     }
     /**
      * Get the server's image Id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getImageId()
     {
@@ -168,8 +156,8 @@ class Server
     }
     /**
      * Get the server's flavor Id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getFlavorId()
     {
@@ -177,8 +165,8 @@ class Server
     }
     /**
      * Get the server's host Id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getHostId()
     {
@@ -186,8 +174,8 @@ class Server
     }
     /**
      * Ge the server's admin password
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getAdminPass()
     {
@@ -195,7 +183,7 @@ class Server
     }
     /**
      * Get the server's status
-     * 
+     *
      * @return string|boolean
      */
     public function getStatus()
@@ -210,7 +198,7 @@ class Server
     }
     /**
      * Get the progress's status
-     * 
+     *
      * @return integer|boolean
      */
     public function getProgress()
@@ -225,7 +213,7 @@ class Server
     }
     /**
      * Get the private IPs
-     * 
+     *
      * @return array|boolean
      */
     public function getPrivateIp()
@@ -237,7 +225,7 @@ class Server
     }
     /**
      * Get the public IPs
-     * 
+     *
      * @return array|boolean
      */
     public function getPublicIp()
@@ -264,11 +252,11 @@ class Server
     }
     /**
      * Change the name of the server
-     * 
+     *
      * @param string $name
-     * @return boolean 
+     * @return boolean
      */
-    public function changeName($name) 
+    public function changeName($name)
     {
         $result= $this->service->changeServerName($this->id, $name);
         if ($result!==false) {
@@ -279,9 +267,9 @@ class Server
     }
     /**
      * Change the admin password of the server
-     * 
+     *
      * @param string $password
-     * @return boolean 
+     * @return boolean
      */
     public function changePassword($password)
     {
@@ -294,8 +282,8 @@ class Server
     }
     /**
      * Reboot the server
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function reboot($hard=false)
     {
@@ -303,8 +291,8 @@ class Server
     }
     /**
      * To Array
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function toArray()
     {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>内存管理器</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><title>内存管理器</title>
     
 
-    <section xml:id="zend.memory.memory-manager.creation"><info><title>创建一个内存管理器</title></info>
+    <section xml:id="zend.memory.memory-manager.creation"><title>创建一个内存管理器</title>
 
         
 
@@ -52,7 +52,7 @@ $memoryManager = Zend_Memory::factory('None');
 
     </section>
 
-    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>管理内存对象</title></info>
+    <section xml:id="zend.memory.memory-manager.objects-management"><title>管理内存对象</title>
 
         
 
@@ -60,7 +60,7 @@ $memoryManager = Zend_Memory::factory('None');
             这一节描述了在受管理的内存中创建和销毁对象,和控制内存管理的行为的设置.
         </para>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>创建可移动的对象</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><title>创建可移动的对象</title>
 
             
 
@@ -79,7 +79,7 @@ $memObject = $memoryManager->create($data);
 
         </section>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>创建锁定的对象</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><title>创建锁定的对象</title>
 
             
 
@@ -97,7 +97,7 @@ $memObject = $memoryManager->createLocked($data);
 
         </section>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>销毁对象</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><title>销毁对象</title>
 
             
 
@@ -139,11 +139,11 @@ function foo()
 
     </section>
 
-    <section xml:id="zend.memory.memory-manager.settings"><info><title>内存管理器设置</title></info>
+    <section xml:id="zend.memory.memory-manager.settings"><title>内存管理器设置</title>
 
         
 
-        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>内存限制</title></info>
+        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><title>内存限制</title>
 
             
 
@@ -176,7 +176,7 @@ $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
 
         </section>
 
-        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize</title></info>
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><title>MinSize</title>
 
             
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>הקדמה ל Zend_Currency</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><title>הקדמה ל Zend_Currency</title>
 
     
 
@@ -10,7 +10,7 @@
         כמו כן היא מספקת מתודות נוספות אשר מספקות מידע אודות מטבעות, כמו איזה מטבע משומש בכל איזור.
     </para>
 
-    <section xml:id="zend.currency.introduction.list"><info><title>למה להשתמש ב <code>Zend_Currency</code>?</title></info>
+    <section xml:id="zend.currency.introduction.list"><title>למה להשתמש ב <code>Zend_Currency</code>?</title>
 
         
 

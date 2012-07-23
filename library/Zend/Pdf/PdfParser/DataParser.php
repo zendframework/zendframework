@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf\PdfParser;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\InternalType\IndirectObjectReference;
 use Zend\Pdf\ObjectFactory;
@@ -31,8 +21,6 @@ use Zend\Pdf\ObjectFactory;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DataParser
 {
@@ -160,7 +148,7 @@ class DataParser
 //        while ($this->offset < strlen($this->data)) {
 //            if (strpos("\x00\t\n\f\r ", $this->data[$this->offset]) !== false) {
 //                $this->offset++;
-//            } else if (ord($this->data[$this->offset]) == 0x25 && $skipComment) { // '%'
+//            } elseif (ord($this->data[$this->offset]) == 0x25 && $skipComment) { // '%'
 //                $this->skipComment();
 //            } else {
 //                return;
@@ -174,8 +162,7 @@ class DataParser
      */
     public function skipComment()
     {
-        while ($this->offset < strlen($this->data))
-        {
+        while ($this->offset < strlen($this->data)) {
             if (ord($this->data[$this->offset]) != 0x0A || // Line feed
                 ord($this->data[$this->offset]) != 0x0d    // Carriage return
                ) {
@@ -316,9 +303,9 @@ class DataParser
             default:
                 if (strcasecmp($nextLexeme, 'true') == 0) {
                     return ($this->_elements[] = new InternalType\BooleanObject(true));
-                } else if (strcasecmp($nextLexeme, 'false') == 0) {
+                } elseif (strcasecmp($nextLexeme, 'false') == 0) {
                     return ($this->_elements[] = new InternalType\BooleanObject(false));
-                } else if (strcasecmp($nextLexeme, 'null') == 0) {
+                } elseif (strcasecmp($nextLexeme, 'null') == 0) {
                     return ($this->_elements[] = new InternalType\NullObject());
                 }
 
@@ -594,7 +581,7 @@ class DataParser
         if ($this->data[$this->offset] == "\r" &&
             $this->data[$this->offset + 1] == "\n"    ) {
             $this->offset += 2;
-        } else if ($this->data[$this->offset] == "\n"    ) {
+        } elseif ($this->data[$this->offset] == "\n"    ) {
             $this->offset++;
         } else {
             throw new Exception\CorruptedPdfException(sprintf('PDF file syntax error. Offset - 0x%X. \'stream\' must be followed by either cr-lf sequence or lf character only.', $this->offset - strlen($nextLexeme)));

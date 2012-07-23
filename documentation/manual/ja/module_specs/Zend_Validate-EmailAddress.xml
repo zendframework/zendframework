@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><info><title>メールアドレス</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><title>メールアドレス</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         に分割し、メールアドレスやホスト名の仕様にあわせて検証します。
     </para>
 
-    <section xml:id="zend.validate.set.email_address.basic"><info><title>基本的な使用法</title></info>
+    <section xml:id="zend.validate.set.email_address.basic"><title>基本的な使用法</title>
         
 
         <para>
@@ -35,7 +35,7 @@ if ($validator->isValid($email)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.options"><info><title>メールアドレス検証のオプション</title></info>
+    <section xml:id="zend.validate.set.email_address.options"><title>メールアドレス検証のオプション</title>
         
 
         <para>
@@ -102,7 +102,7 @@ $validator->setOptions(array('domain' => false));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.complexlocal"><info><title>複雑なローカルパート</title></info>
+    <section xml:id="zend.validate.set.email_address.complexlocal"><title>複雑なローカルパート</title>
         
 
         <para>
@@ -119,7 +119,7 @@ $validator->setOptions(array('domain' => false));
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.purelocal"><info><title>ローカルパートのみの検証</title></info>
+    <section xml:id="zend.validate.set.email_address.purelocal"><title>ローカルパートのみの検証</title>
         
 
         <para>
@@ -137,7 +137,7 @@ $validator->setOptions(array('domain' => FALSE));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.hostnametype"><info><title>さまざまな形式のホスト名の検証</title></info>
+    <section xml:id="zend.validate.set.email_address.hostnametype"><title>さまざまな形式のホスト名の検証</title>
         
 
         <para>
@@ -171,7 +171,7 @@ if ($validator->isValid($email)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.checkacceptance"><info><title>そのホスト名が実際にメールを受け付けるかどうかのチェック</title></info>
+    <section xml:id="zend.validate.set.email_address.checkacceptance"><title>そのホスト名が実際にメールを受け付けるかどうかのチェック</title>
         
 
         <para>
@@ -199,7 +199,7 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <note><info><title>WindowsでのMX のチェック</title></info>
+        <note><title>WindowsでのMX のチェック</title>
             
 
             <para>
@@ -242,7 +242,7 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <warning><info><title>パフォーマンスの警告</title></info>
+        <warning><title>パフォーマンスの警告</title>
             
 
             <para>
@@ -253,7 +253,7 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </warning>
 
-        <note><info><title>許可されないIPアドレス</title></info>
+        <note><title>許可されないIPアドレス</title>
             
 
             <para>
@@ -265,7 +265,7 @@ $validator = new Zend_Validate_EmailAddress(
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.validateidn"><info><title>国際化ドメイン名の検証</title></info>
+    <section xml:id="zend.validate.set.email_address.validateidn"><title>国際化ドメイン名の検証</title>
         
 
         <para>
@@ -290,7 +290,7 @@ $validator->getHostnameValidator()->setValidateIdn(false);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.validatetld"><info><title>トップレベルドメインの検証</title></info>
+    <section xml:id="zend.validate.set.email_address.validatetld"><title>トップレベルドメインの検証</title>
         
 
         <para>
@@ -314,7 +314,7 @@ $validator->getHostnameValidator()->setValidateTld(false);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.setmessage"><info><title>メッセージの設定</title></info>
+    <section xml:id="zend.validate.set.email_address.setmessage"><title>メッセージの設定</title>
         
 
         <para>

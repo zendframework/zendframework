@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><info><title>Arten von Maßeinheiten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><title>Arten von Maßeinheiten</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         anhand der standardmäßigen Benutzung Ihrer Maßeinheiten.
     </para>
 
-    <table xml:id="zend.measure.types.table-1"><info><title>Liste der Arten von Maßeinheiten</title></info>
+    <table xml:id="zend.measure.types.table-1"><title>Liste der Arten von Maßeinheiten</title>
         
 
         <tgroup cols="4">
@@ -342,7 +342,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.measure.types.binary"><info><title>Hinweise für Zend_Measure_Binary</title></info>
+    <section xml:id="zend.measure.types.binary"><title>Hinweise für Zend_Measure_Binary</title>
         
 
         <para>
@@ -363,7 +363,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.measure.types.decimal"><info><title>Hinweise für Zend_Measure_Number</title></info>
+    <section xml:id="zend.measure.types.decimal"><title>Hinweise für Zend_Measure_Number</title>
         
 
         <para>
@@ -374,7 +374,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.measure.types.roman"><info><title>Römische Zahlen</title></info>
+    <section xml:id="zend.measure.types.roman"><title>Römische Zahlen</title>
         
 
         <para>

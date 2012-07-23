@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><info><title>Zend_Service_ReCaptcha</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><title>Zend_Service_ReCaptcha</title>
     
 
-    <section xml:id="zend.service.recaptcha.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.recaptcha.introduction"><title>Einführung</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.simplestuse"><info><title>Einfachste Verwendung</title></info>
+    <section xml:id="zend.service.recaptcha.simplestuse"><title>Einfachste Verwendung</title>
         
 
         <para>
@@ -32,7 +32,7 @@
             öffentlichen und privaten Schlüssel übergeben:
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-1"><info><title>Erstellung einer Instanz des reCAPTCHA Services</title></info>
+        <example xml:id="zend.service.recaptcha.example-1"><title>Erstellung einer Instanz des reCAPTCHA Services</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -45,7 +45,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             Methode aufgerufen werden:
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-2"><info><title>Das reCAPTCHA darstellen</title></info>
+        <example xml:id="zend.service.recaptcha.example-2"><title>Das reCAPTCHA darstellen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -59,7 +59,7 @@ echo $recaptcha->getHTML();
             <methodname>verify()</methodname> Methode des reCAPTCHA Objekts zu übergeben:
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-3"><info><title>Das Formular Feld verifizieren</title></info>
+        <example xml:id="zend.service.recaptcha.example-3"><title>Das Formular Feld verifizieren</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -76,7 +76,7 @@ $result = $recaptcha->verify(
             eine <methodname>isValid()</methodname> Methode anbietet.
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-4"><info><title>Das reCAPTCHA prüfen</title></info>
+        <example xml:id="zend.service.recaptcha.example-4"><title>Das reCAPTCHA prüfen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -96,7 +96,7 @@ if (!$result->isValid()) {
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.mailhide"><info><title>Email Adressen verstecken</title></info>
+    <section xml:id="zend.service.recaptcha.mailhide"><title>Email Adressen verstecken</title>
         
 
         <para>
@@ -112,7 +112,7 @@ if (!$result->isValid()) {
             öffentliche und private Schlüssel für die Mailhide <acronym>API</acronym> erstellen.
         </para>
 
-        <example xml:id="zend.service.recaptcha.mailhide.example-1"><info><title>Verwenden der Mail Hide Komponente</title></info>
+        <example xml:id="zend.service.recaptcha.mailhide.example-1"><title>Verwenden der Mail Hide Komponente</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -142,7 +142,7 @@ print($mailHide);
             erlaubt einige Optionen für die Komponente zu setzen. Die vorhandenen Optionen sind in
             der folgenden Tabelle aufgelistet:
 
-            <table xml:id="zend.service.recaptcha.mailhide.options.table"><info><title>Zend_Service_ReCaptcha_MailHide options</title></info>
+            <table xml:id="zend.service.recaptcha.mailhide.options.table"><title>Zend_Service_ReCaptcha_MailHide options</title>
                 
 
                 <tgroup cols="4">
@@ -195,7 +195,7 @@ print($mailHide);
             <link linkend="zend.config">Zend_Config</link> entgegen nimmt.
         </para>
 
-        <example xml:id="zend.service.recaptcha.mailhide.example-2"><info><title>Viele versteckte Email Adressen erzeugen</title></info>
+        <example xml:id="zend.service.recaptcha.mailhide.example-2"><title>Viele versteckte Email Adressen erzeugen</title>
             
 
             <programlisting language="php"><![CDATA[

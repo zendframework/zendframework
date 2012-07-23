@@ -1,33 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Search\Query\Preprocessing;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Search\Query,
-	Zend\Search\Lucene\Index,
-	Zend\Search\Lucene\Search,
-	Zend\Search\Lucene\Analysis\Analyzer,
-	Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
-	Zend\Search\Lucene\Search\Exception\QueryParserException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Search;
+use Zend\Search\Lucene\Search\Exception\QueryParserException;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Search\Lucene\Search\Query;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
@@ -37,8 +27,6 @@ use Zend\Search\Lucene,
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @internal
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Fuzzy extends AbstractPreprocessing
 {
@@ -169,8 +157,13 @@ class Fuzzy extends AbstractPreprocessing
         // -------------------------------------
         // Recognize wildcard queries
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             $subPatterns = preg_split('/[*?]/u', iconv($this->_encoding, 'UTF-8', $this->_word));
         } else {
             $subPatterns = preg_split('/[*?]/', $this->_word);
@@ -219,8 +212,13 @@ class Fuzzy extends AbstractPreprocessing
         // -------------------------------------
         // Recognize wildcard queries
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             $subPatterns = preg_split('/[*?]/u', iconv($this->_encoding, 'UTF-8', $this->_word));
         } else {
             $subPatterns = preg_split('/[*?]/', $this->_word);

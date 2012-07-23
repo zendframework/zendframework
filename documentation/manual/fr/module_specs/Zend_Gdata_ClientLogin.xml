@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><info><title>Authentification avec ClientLogin</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><title>Authentification avec ClientLogin</title>
     
 
     <para>
@@ -30,7 +30,7 @@
         correspondent à ceux de l'utilisateur de l'application.
     </para>
 
-    <section xml:id="zend.gdata.clientlogin.login"><info><title>Création d'un client HTTP "ClientLogin" authentifié</title></info>
+    <section xml:id="zend.gdata.clientlogin.login"><title>Création d'un client HTTP "ClientLogin" authentifié</title>
         
 
         <para>
@@ -95,7 +95,7 @@ $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.clientlogin.terminating"><info><title>Fermer un client HTTP authentifié par ClientLogin</title></info>
+    <section xml:id="zend.gdata.clientlogin.terminating"><title>Fermer un client HTTP authentifié par ClientLogin</title>
         
 
         <para>

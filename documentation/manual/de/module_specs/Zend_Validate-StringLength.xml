@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.stringlength"><info><title>StringLength</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.stringlength"><title>StringLength</title>
     
 
     <para>
         Diese Prüfung erlaubt es zu prüfen ob ein angegebener String eine definierte Länge besitzt.
     </para>
 
-    <note><info><title>Zend_Validate_StringLength unterstützt nur die Prüfung von Strings</title></info>
+    <note><title>Zend_Validate_StringLength unterstützt nur die Prüfung von Strings</title>
         
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.stringlength.options"><info><title>Unterstützte Optionen für Zend_Validate_StringLength</title></info>
+    <section xml:id="zend.validate.set.stringlength.options"><title>Unterstützte Optionen für Zend_Validate_StringLength</title>
         
 
         <para>
@@ -48,7 +48,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.basic"><info><title>Standardverhalten für Zend_Validate_StringLength</title></info>
+    <section xml:id="zend.validate.set.stringlength.basic"><title>Standardverhalten für Zend_Validate_StringLength</title>
         
 
         <para>
@@ -64,7 +64,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.maximum"><info><title>Die maximal erlaubte Länge eines String begrenzen</title></info>
+    <section xml:id="zend.validate.set.stringlength.maximum"><title>Die maximal erlaubte Länge eines String begrenzen</title>
         
 
         <para>
@@ -94,7 +94,7 @@ $validator->isValid("Testing"); // Gibt false zurück
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.minimum"><info><title>Die mindestens benötigte Länge eines Strings begrenzen</title></info>
+    <section xml:id="zend.validate.set.stringlength.minimum"><title>Die mindestens benötigte Länge eines Strings begrenzen</title>
         
 
         <para>
@@ -124,7 +124,7 @@ $validator->isValid("Testing"); // Gibt true zurück
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.both"><info><title>Einen String auf beiden Seiten begrenzen</title></info>
+    <section xml:id="zend.validate.set.stringlength.both"><title>Einen String auf beiden Seiten begrenzen</title>
         
 
         <para>
@@ -143,7 +143,7 @@ $validator->isValid("Test"); // Gibt true zurück
 $validator->isValid("Testing"); // Gibt true zurück
 ]]></programlisting>
 
-        <note><info><title>Eine kleinere Maximalgrenze als die Mindestgrenze setzen</title></info>
+        <note><title>Eine kleinere Maximalgrenze als die Mindestgrenze setzen</title>
             
 
             <para>
@@ -154,7 +154,7 @@ $validator->isValid("Testing"); // Gibt true zurück
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.encoding"><info><title>Kodierung von Werten</title></info>
+    <section xml:id="zend.validate.set.stringlength.encoding"><title>Kodierung von Werten</title>
         
 
         <para>

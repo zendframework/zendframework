@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.digits"><info><title>Digits</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.digits"><title>Digits</title>
     
 
     <para>
         <classname>Zend_Validate_Digit</classname> valide si une donnée contient des chiffres.
     </para>
 
-    <section xml:id="zend.validate.set.digits.options"><info><title>Options supportées par Zend_Validate_Digits</title></info>
+    <section xml:id="zend.validate.set.digits.options"><title>Options supportées par Zend_Validate_Digits</title>
         
 
         <para>
@@ -14,7 +14,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.digits.basic"><info><title>Valider des chiffres</title></info>
+    <section xml:id="zend.validate.set.digits.basic"><title>Valider des chiffres</title>
         
 
         <para>
@@ -30,7 +30,7 @@ $validator->isValid(1234);         // retourne true
 $validator->isValid('1a234');      // retourne false
 ]]></programlisting>
 
-        <note><info><title>Valider des nombres</title></info>
+        <note><title>Valider des nombres</title>
             
 
             <para>

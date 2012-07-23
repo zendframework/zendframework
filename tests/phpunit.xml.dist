@@ -6,7 +6,6 @@
             <exclude>./Zend/AllTests/</exclude>
             <exclude>./Zend/Amf/</exclude>
             <exclude>./Zend/Queue/</exclude>
-            <exclude>./Zend/Service/</exclude>
         </testsuite>
     </testsuites>
 
@@ -15,7 +14,6 @@
             <group>disable</group>
             <group>Zend_Amf</group>
             <group>Zend_Queue</group>
-            <group>Zend_Service</group>
         </exclude>
     </groups>
 </phpunit>

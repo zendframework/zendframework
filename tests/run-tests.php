@@ -66,32 +66,6 @@ if ($argc == 1) {
                     $components = getAll($phpunit_conf);
                 }
                 break;
-            case 'Akismet':
-            case 'Amazon':
-            case 'Amazon_Ec2':
-            case 'Amazon_S3':
-            case 'Amazon_Sqs':
-            case 'Audioscrobbler':
-            case 'Delicious':
-            case 'Flickr':
-            case 'GoGrid':
-            case 'LiveDocx':
-            case 'Nirvanix':
-            case 'Rackspace':
-            case 'ReCaptcha':
-            case 'Simpy':
-            case 'SlideShare':
-            case 'StrikeIron':
-            case 'Technorati':
-            case 'Twitter':
-            case 'WindowsAzure':
-            case 'Yahoo':
-                $components[] = 'Zend_Service_' . $arg;
-                break;
-            case 'Ec2':
-            case 'S3':
-                $components[] = 'Zend_Service_Amazon_' . $arg;
-                break;
             case 'Search':
                 $components[] = 'Zend_Search_Lucene';
                 break;

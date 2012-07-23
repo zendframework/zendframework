@@ -281,9 +281,9 @@ class Request extends Message implements RequestInterface
 
         if($name === null){
             return $this->queryParams;
-        }else{
-            return $this->queryParams->get($name, $default);
         }
+
+        return $this->queryParams->get($name, $default);
     }
 
     /**
@@ -314,9 +314,9 @@ class Request extends Message implements RequestInterface
 
         if($name === null){
             return $this->postParams;
-        }else{
-            return $this->postParams->get($name, $default);
         }
+
+        return $this->postParams->get($name, $default);
     }
 
     /**
@@ -358,9 +358,9 @@ class Request extends Message implements RequestInterface
 
         if($name === null){
             return $this->fileParams;
-        }else{
-            return $this->fileParams->get($name, $default);
         }
+
+        return $this->fileParams->get($name, $default);
     }
 
     /**
@@ -392,9 +392,9 @@ class Request extends Message implements RequestInterface
 
         if($name === null){
             return $this->serverParams;
-        }else{
-            return $this->serverParams->get($name, $default);
         }
+
+        return $this->serverParams->get($name, $default);
     }
 
     /**
@@ -425,9 +425,9 @@ class Request extends Message implements RequestInterface
 
         if($name === null){
             return $this->envParams;
-        }else{
-            return $this->envParams->get($name, $default);
         }
+
+        return $this->envParams->get($name, $default);
     }
 
     /**
@@ -460,11 +460,13 @@ class Request extends Message implements RequestInterface
 
         if($name === null){
             return $this->headers;
-        }elseif($this->headers->has($name)){
-            return $this->headers->get($name);
-        }else{
-            return $default;
         }
+
+        if($this->headers->has($name)){
+            return $this->headers->get($name);
+        }
+
+        return $default;
     }
 
     /**

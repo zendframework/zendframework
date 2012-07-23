@@ -134,8 +134,8 @@ class Db extends AbstractWriter
     protected function prepareInsert(Adapter $db, $tableName, array $fields)
     {
         $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($tableName) . ' (' .
-               implode(",",array_map(array($db->platform, 'quoteIdentifier'), $fields)) . ') VALUES (' .
-               implode(",",array_map(array($db->driver, 'formatParameterName'), $fields)) . ')';
+            implode(",",array_map(array($db->platform, 'quoteIdentifier'), array_keys($fields))) . ') VALUES (' .
+            implode(",",array_map(array($db->driver, 'formatParameterName'), array_keys($fields))) . ')';
 
         return $sql;
     }

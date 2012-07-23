@@ -54,16 +54,28 @@ class Db extends AbstractWriter
      *
      * We used the Adapter instead of Zend\Db for a performance reason.
      *
-     * @param Adapter $db
+     * @param Adapter|array $db
      * @param string $tableName
      * @param array $columnMap
      * @param string $separator
      * @return Db
      * @throw Exception\InvalidArgumentException
      */
-    public function __construct(Adapter $db, $tableName, array $columnMap = null, $separator = null)
+    public function __construct($db, $tableName, array $columnMap = null, $separator = null)
     {
-        if ($db === null) {
+        if (is_array($db)) {
+            if (isset($db[3])) {
+                $separator = $db[3];
+            }
+            if (isset($db[2]) && is_array($db[2])) {
+                $columnMap = $db[2];
+            }
+            if (isset($db[1])) {
+                $tableName = $db[1];
+            }
+            $db = $db[0];
+        }
+        if ($db === null || !($db instanceof Adapter)) {
             throw new Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
         }
 

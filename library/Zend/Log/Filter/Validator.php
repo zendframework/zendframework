@@ -30,11 +30,20 @@ class Validator implements FilterInterface
     /**
      * Filter out any log messages not matching the validator
      *
-     * @param ZendValidator $validator
+     * @param ZendValidator|array $validator
      * @return Validator
      */
-    public function __construct(ZendValidator $validator)
+    public function __construct($validator)
     {
+        if (is_array($validator)) {
+            $validator = $validator[0];
+        }
+        if (!$validator instanceof ZendValidator) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Parameter of type %s is invalid; must implements Zend\Validator\ValidatorInterface',
+                (is_object($validator) ? get_class($validator) : gettype($validator))
+            ));
+        }
         $this->validator = $validator;
     }
 

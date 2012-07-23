@@ -33,14 +33,19 @@ class Priority implements FilterInterface
      * Filter logging by $priority. By default, it will accept any log
      * event whose priority value is less than or equal to $priority.
      *
-     * @param int $priority Priority
+     * @param int|array $priority Priority
      * @param string $operator Comparison operator
      * @return Priority
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($priority, $operator = null)
     {
-        if (!is_int($priority)) {
+        if (is_array($priority)) {
+            if (isset($priority[1])) {
+                $operator = $priority[1];
+            }
+            $priority = $priority[0];
+        } elseif (!is_int($priority)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Priority must be an integer; received "%s"',
                 gettype($priority)

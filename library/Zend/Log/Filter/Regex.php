@@ -30,12 +30,15 @@ class Regex implements FilterInterface
     /**
      * Filter out any log messages not matching the pattern
      *
-     * @param string $regex Regular expression to test the log message
+     * @param string|array $regex Regular expression to test the log message
      * @return Regex
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($regex)
     {
+        if (is_array($regex)) {
+            $regex = $regex[0];
+        }
         ErrorHandler::start(E_WARNING);
         $result = preg_match($regex, '');
         ErrorHandler::stop();

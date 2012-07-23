@@ -22,6 +22,13 @@ use Zend\Log\Formatter\FormatterInterface as Formatter;
 abstract class AbstractWriter implements WriterInterface
 {
     /**
+     * Filter plugins
+     *
+     * @var FilterPluginManager
+     */
+    protected $filterPlugins;
+    
+    /**
      * Filter chain
      *
      * @var array
@@ -38,17 +45,19 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Add a filter specific to this writer.
      *
-     * @param  Filter\FilterInterface|int $filter
+     * @param  int|string|Filter\FilterInterface $filter
      * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
      */
-    public function addFilter($filter)
+    public function addFilter($filter, array $options = null)
     {
         if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
+        } elseif (is_string($filter)) {
+            $filter = $this->filterPlugin($filter, $options);
         } elseif (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Filter must implement Zend\Log\Filter; received %s',
+                'Writer must implement Zend\Log\Filter\FilterInterface; received "%s"',
                 is_object($filter) ? get_class($filter) : gettype($filter)
             ));
         }
@@ -57,6 +66,55 @@ abstract class AbstractWriter implements WriterInterface
         return $this;
     }
 
+    /**
+     * Get filter plugin manager
+     *
+     * @return FilterPluginManager
+     */
+    public function getFilterPluginManager()
+    {
+        if (null === $this->filterPlugins) {
+            $this->setFilterPluginManager(new FilterPluginManager());
+        }
+        return $this->filterPlugins;
+    }
+
+    /**
+     * Set filter plugin manager
+     *
+     * @param  string|FilterPluginManager $plugins
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setFilterPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof FilterPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Writer plugin manager must extend %s\FilterPluginManager; received %s',
+                __NAMESPACE__,
+                is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+
+        $this->filterPlugins = $plugins;
+        return $this;
+    }
+
+    /**
+     * Get filter instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Writer
+     */
+    public function filterPlugin($name, array $options = null)
+    {
+        return $this->getFilterPluginManager()->get($name, $options);
+    }
+    
     /**
      * Log a message to this writer.
      *

@@ -47,6 +47,18 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->_writer->addFilter(new \StdClass());
     }
 
+    public function testAddMockFilterByName()
+    {
+        $instance = $this->_writer->addFilter('mock');
+        $this->assertTrue($instance instanceof ConcreteWriter);
+    }
+    
+    public function testAddRegexFilterWithParamsByName()
+    {
+        $instance = $this->_writer->addFilter('regex', array('/mess/'));
+        $this->assertTrue($instance instanceof ConcreteWriter);
+    }
+    
     /**
      * @group ZF-8953
      */

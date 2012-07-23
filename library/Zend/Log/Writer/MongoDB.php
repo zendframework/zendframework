@@ -42,14 +42,32 @@ class MongoDB extends AbstractWriter
     /**
      * Constructor
      *
-     * @param Mongo $mongo
+     * @param Mongo|array $mongo
      * @param string $database
      * @param string $collection
      * @param array  $saveOptions
      * @return Zend\Log\Writer\MongoDB
      */
-    public function __construct(Mongo $mongo, $database, $collection, array $saveOptions = array())
+    public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {
+        if (is_array($mongo)) {
+            if (isset($mongo[3]) && is_array($mongo[3])) {
+                $saveOptions = $mongo[3];
+            }
+            if (isset($mongo[2])) {
+                $collection = $mongo[2];
+            }
+            if (isset($mongo[1])) {
+                $database = $mongo[1];
+            }
+            $mongo = $mongo[0];
+        }
+        if (!($mongo instanceof Mongo)) {
+            throw new Exception\InvalidArgumentException(
+                'Parameter of type %s is invalid; must be Mongo',
+                (is_object($mongo) ? get_class($mongo) : gettype($mongo)) 
+            );
+        }
         $this->mongoCollection = $mongo->selectCollection($database, $collection);
         $this->saveOptions = $saveOptions;
     }

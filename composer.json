@@ -12,9 +12,7 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "doctrine/common": ">=2.1",
-        "zendframework/zendpdf": "*",
-        "zendframework/zendservice-recaptcha": "*"
+        "doctrine/common": ">=2.1"
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",

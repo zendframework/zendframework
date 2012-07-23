@@ -550,6 +550,29 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($identifiers[0], __CLASS__);
     }
 
+    public function testIdentifierGetterSettersWorkWithStrings()
+    {
+        $identifier1 = 'foo';
+        $identifiers = array($identifier1);
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifier1));
+        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+        $identifier2 = 'baz';
+        $identifiers = array($identifier1, $identifier2);
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifier2));
+        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+    }
+
+    public function testIdentifierGetterSettersWorkWithNewArrays()
+    {
+        $identifiers = array('foo', 'bar');
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
+        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+        $identifier  = 'baz';
+        $identifiers = array_merge($identifiers, array($identifier));
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifier));
+        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+    }
+
     public function testIdentifierGetterSettersWorkWithArrays()
     {
         $identifiers = array('foo', 'bar');

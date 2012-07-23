@@ -288,4 +288,26 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     {
         $this->offsetSet($name, $value);
     }
+
+    /**
+     * __isset
+     *
+     * @param  string $name
+     * @return boolean
+     */
+    public function __isset($name)
+    {
+        return $this->offsetExists($name);
+    }
+
+    /**
+     * __unset
+     *
+     * @param  string $name
+     * @return void
+     */
+    public function __unset($name)
+    {
+        $this->offsetUnset($name);
+    }
 }

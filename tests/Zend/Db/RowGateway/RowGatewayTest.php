@@ -53,4 +53,53 @@ class RowGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $row['testColumn']);
     }
 
+    public function test__isset()
+    {
+        // Test isset before and after assigning to a property:
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $this->assertFalse(isset($row->foo));
+        $row->foo = 'bar';
+        $this->assertTrue(isset($row->foo));
+
+        // Test isset before and after assigning to an index:
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $this->assertFalse(isset($row->foo));
+        $row['foo'] = 'bar';
+        $this->assertTrue(isset($row->foo));
+    }
+
+    public function testOffsetExists()
+    {
+        // Test isset before and after assigning to a property:
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $this->assertFalse(isset($row['foo']));
+        $row->foo = 'bar';
+        $this->assertTrue(isset($row['foo']));
+
+        // Test isset before and after assigning to an index:
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $this->assertFalse(isset($row['foo']));
+        $row['foo'] = 'bar';
+        $this->assertTrue(isset($row['foo']));
+    }
+
+    public function test__unset()
+    {
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $row->foo = 'bar';
+        $this->assertEquals('bar', $row->foo);
+        unset($row->foo);
+        $this->assertEmpty($row->foo);
+        $this->assertEmpty($row['foo']);
+    }
+
+    public function testOffsetUnset()
+    {
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $row['foo'] = 'bar';
+        $this->assertEquals('bar', $row['foo']);
+        unset($row['foo']);
+        $this->assertEmpty($row->foo);
+        $this->assertEmpty($row['foo']);
+    }
 }

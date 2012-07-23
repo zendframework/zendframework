@@ -39,6 +39,12 @@ class Stream extends AbstractWriter
      */
     public function __construct($streamOrUrl, $mode = null)
     {
+        if (is_array($streamOrUrl) && !isset($streamOrUrl['stream'])) {
+            if (isset($streamOrUrl[1])) {
+                $mode = $streamOrUrl[1];
+            }
+            $streamOrUrl = $streamOrUrl[0];
+        }
         // Setting the default mode
         if (null === $mode) {
             $mode = 'a';

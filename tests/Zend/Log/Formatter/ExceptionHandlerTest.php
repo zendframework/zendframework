@@ -50,31 +50,29 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $expected = <<<EOF
-2012-06-12T09:00:00+02:00 CRIT (1) test in test.php on line 1
-[Trace]
-File  : test.php
-Line  : 1
-Func  : test
-Class : Test
-Type  : static
-Args  : Array
-(
-    [0] => 1
-)
-
-File  : test.php
-Line  : 2
-Func  : test
-Class : Test
-Type  : static
-Args  : Array
-(
-    [0] => 1
-)
-
-
-EOF;
+        
+        // The formatter ends with unix style line endings so make sure we expect that 
+        // output as well:
+        $expected = "2012-06-12T09:00:00+02:00 CRIT (1) test in test.php on line 1\n";
+        $expected .= "[Trace]\n";
+        $expected .= "File  : test.php\n";
+        $expected .= "Line  : 1\n";
+        $expected .= "Func  : test\n";
+        $expected .= "Class : Test\n";
+        $expected .= "Type  : static\n";
+        $expected .= "Args  : Array\n";
+        $expected .= "(\n";
+        $expected .= "    [0] => 1\n";
+        $expected .= ")\n\n";
+        $expected .= "File  : test.php\n";
+        $expected .= "Line  : 2\n";
+        $expected .= "Func  : test\n";
+        $expected .= "Class : Test\n";
+        $expected .= "Type  : static\n";
+        $expected .= "Args  : Array\n";
+        $expected .= "(\n";
+        $expected .= "    [0] => 1\n";
+        $expected .= ")\n\n";
 
         $formatter = new ExceptionHandler();
         $output = $formatter->format($event);

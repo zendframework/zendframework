@@ -14,7 +14,7 @@ use Zend\Crypt\Hmac;
 use Zend\Crypt\Key\Derivation\Pbkdf2;
 use Zend\Crypt\Symmetric\SymmetricInterface;
 use Zend\Crypt\Utils;
-use Zend\Math\Math;
+use Zend\Math\Rand;
 
 /**
  * Encrypt using a symmetric cipher then authenticate using HMAC (SHA-256)
@@ -319,7 +319,7 @@ class BlockCipher
         }
         $keySize = $this->cipher->getKeySize();
         // generate a random salt (IV)
-        $this->cipher->setSalt(Math::randBytes($this->cipher->getSaltSize(), true));
+        $this->cipher->setSalt(Rand::getBytes($this->cipher->getSaltSize(), true));
         // generate the encryption key and the HMAC key for the authentication
         $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
                              $this->getKey(),

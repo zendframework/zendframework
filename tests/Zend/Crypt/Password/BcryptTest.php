@@ -72,7 +72,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testWrongConstruct()
     {
         $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
-                                    'The options parameter must be an array, a Zend\Config\Config object or a Traversable');
+                                    'The options parameter must be an array or a Traversable');
         $bcrypt = new Bcrypt('test');
     }
 

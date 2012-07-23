@@ -131,12 +131,11 @@ class InArray extends AbstractValidator
         );
 
         // validate strict value
-        if (in_array($strict, $checkTypes)) { // don't need to strict check as dev sets strict mode
-            $this->strict = $strict;
-        }
-        else{
+        if (!in_array($strict, $checkTypes)){
             throw new Exception\InvalidArgumentException('Strict option must be one of the COMPARE_ constants');
         }
+
+        $this->strict = $strict;
         return $this;
     }
 

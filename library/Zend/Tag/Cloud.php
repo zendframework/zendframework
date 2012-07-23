@@ -24,35 +24,35 @@ class Cloud
      *
      * @var Cloud
      */
-    protected $_cloudDecorator = null;
+    protected $cloudDecorator = null;
 
     /**
      * DecoratorInterface for the tags
      *
      * @var Tag
      */
-    protected $_tagDecorator = null;
+    protected $tagDecorator = null;
 
     /**
      * List of all tags
      *
      * @var ItemList
      */
-    protected $_tags = null;
+    protected $tags = null;
 
     /**
      * Plugin manager for decorators
      *
      * @var Cloud\DecoratorPluginManager
      */
-    protected $_decorators = null;
+    protected $decorators = null;
 
     /**
      * Option keys to skip when calling setOptions()
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $skipOptions = array(
         'options',
         'config',
     );
@@ -80,17 +80,12 @@ class Cloud
      */
     public function setOptions(array $options)
     {
-        if (isset($options['prefixPath'])) {
-            $this->addPrefixPaths($options['prefixPath']);
-            unset($options['prefixPath']);
-        }
-
         foreach ($options as $key => $value) {
-            if (in_array(strtolower($key), $this->_skipOptions)) {
+            if (in_array(strtolower($key), $this->skipOptions)) {
                 continue;
             }
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set' . $key;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -157,7 +152,7 @@ class Cloud
      */
     public function setItemList(ItemList $itemList)
     {
-        $this->_tags = $itemList;
+        $this->tags = $itemList;
         return $this;
     }
 
@@ -170,10 +165,10 @@ class Cloud
      */
     public function getItemList()
     {
-        if (null === $this->_tags) {
+        if (null === $this->tags) {
             $this->setItemList(new ItemList());
         }
-        return $this->_tags;
+        return $this->tags;
     }
 
     /**
@@ -205,7 +200,7 @@ class Cloud
             throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\AbstractCloud');
         }
 
-        $this->_cloudDecorator = $decorator;
+        $this->cloudDecorator = $decorator;
 
         return $this;
     }
@@ -217,10 +212,10 @@ class Cloud
      */
     public function getCloudDecorator()
     {
-        if (null === $this->_cloudDecorator) {
+        if (null === $this->cloudDecorator) {
             $this->setCloudDecorator('htmlCloud');
         }
-        return $this->_cloudDecorator;
+        return $this->cloudDecorator;
     }
 
     /**
@@ -252,7 +247,7 @@ class Cloud
             throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\Tag');
         }
 
-        $this->_tagDecorator = $decorator;
+        $this->tagDecorator = $decorator;
 
         return $this;
     }
@@ -264,10 +259,10 @@ class Cloud
      */
     public function getTagDecorator()
     {
-        if (null === $this->_tagDecorator) {
+        if (null === $this->tagDecorator) {
             $this->setTagDecorator('htmlTag');
         }
-        return $this->_tagDecorator;
+        return $this->tagDecorator;
     }
 
     /**
@@ -278,7 +273,7 @@ class Cloud
      */
     public function setDecoratorPluginManager(Cloud\DecoratorPluginManager $decorators)
     {
-        $this->_decorators = $decorators;
+        $this->decorators = $decorators;
         return $this;
     }
 
@@ -289,11 +284,11 @@ class Cloud
      */
     public function getDecoratorPluginManager()
     {
-        if ($this->_decorators === null) {
-            $this->_decorators = new Cloud\DecoratorPluginManager();
+        if ($this->decorators === null) {
+            $this->decorators = new Cloud\DecoratorPluginManager();
         }
 
-        return $this->_decorators;
+        return $this->decorators;
     }
 
     /**

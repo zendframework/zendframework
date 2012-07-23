@@ -135,7 +135,7 @@ class ConfigListener extends AbstractListener implements
      */
     public function onLoadModule(ModuleEvent $e)
     {
-        $module = $e->getParam('module');
+        $module = $e->getModule();
 
         if (!$module instanceof ConfigProviderInterface
             && !is_callable(array($module, 'getConfig'))

@@ -175,35 +175,9 @@ class ViewManager implements ListenerAggregateInterface
      */
     public function getResolver()
     {
-        if ($this->resolver) {
-            return $this->resolver;
+        if (null === $this->resolver) {
+            $this->resolver = $this->services->get('ViewResolver');
         }
-
-        $map = array();
-        if (isset($this->config['template_map'])) {
-            $map = $this->config['template_map'];
-        }
-        $templateMapResolver = new ViewResolver\TemplateMapResolver($map);
-
-        $stack = array();
-        if (isset($this->config['template_path_stack'])) {
-            $stack = $this->config['template_path_stack'];
-        }
-        $templatePathStack = new ViewResolver\TemplatePathStack();
-        $templatePathStack->addPaths($stack);
-
-        $this->resolver = new ViewResolver\AggregateResolver();
-        $this->resolver->attach($templateMapResolver);
-        $this->resolver->attach($templatePathStack);
-
-        $this->services->setService('ViewTemplateMapResolver', $templateMapResolver);
-        $this->services->setService('ViewTemplatePathStack', $templatePathStack);
-        $this->services->setService('ViewResolver', $this->resolver);
-
-        $this->services->setAlias('Zend\View\Resolver\TemplateMapResolver', 'ViewTemplateMapResolver');
-        $this->services->setAlias('Zend\View\Resolver\TemplatePathStack', 'ViewTemplatePathStack');
-        $this->services->setAlias('Zend\View\Resolver\AggregateResolver', 'ViewResolver');
-        $this->services->setAlias('Zend\View\Resolver\ResolverInterface', 'ViewResolver');
 
         return $this->resolver;
     }

@@ -151,7 +151,7 @@ class Collection extends Fieldset
         if (count($data) < $this->getCount()) {
             if (!$this->allowRemove) {
                 throw new Exception\DomainException(sprintf(
-                    'There are less elements than specified in collection %s. Either set allow_remove option ' .
+                    'There are fewer elements than specified in the collection (%s). Either set the allow_remove option ' .
                     'to true, or re-submit the form.',
                     get_class($this)
                     )
@@ -299,7 +299,7 @@ class Collection extends Fieldset
      *
      * @return bool
      */
-    public function getAllowAdd()
+    public function allowAdd()
     {
         return $this->allowAdd;
     }
@@ -317,7 +317,7 @@ class Collection extends Fieldset
     /**
      * @return bool
      */
-    public function getAllowRemove()
+    public function allowRemove()
     {
         return $this->allowRemove;
     }

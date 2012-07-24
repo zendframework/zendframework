@@ -51,9 +51,30 @@ class StaticEventManager extends SharedEventManager
     public static function getInstance()
     {
         if (null === static::$instance) {
-            static::$instance = new static();
+            static::setInstance(new static());
         }
         return static::$instance;
+    }
+
+    /**
+     * Set the singleton to a specific SharedEventManagerInterface instance
+     * 
+     * @param SharedEventManagerInterface $instance 
+     * @return void
+     */
+    public static function setInstance(SharedEventManagerInterface $instance)
+    {
+        static::$instance = $instance;
+    }
+
+    /**
+     * Is a singleton instance defined?
+     * 
+     * @return bool
+     */
+    public static function hasInstance()
+    {
+        return (static::$instance instanceof SharedEventManagerInterface);
     }
 
     /**

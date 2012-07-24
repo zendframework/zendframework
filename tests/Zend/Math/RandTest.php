@@ -10,7 +10,7 @@
 
 namespace ZendTest\Math;
 
-use Zend\Math\Math;
+use Zend\Math\Rand;
 
 /**
  * @category   Zend
@@ -18,7 +18,7 @@ use Zend\Math\Math;
  * @subpackage UnitTests
  * @group      Zend_Math
  */
-class MathTest extends \PHPUnit_Framework_TestCase
+class RandTest extends \PHPUnit_Framework_TestCase
 {
     public static function provideRandInt()
     {
@@ -31,9 +31,17 @@ class MathTest extends \PHPUnit_Framework_TestCase
     public function testRandBytes()
     {
         for ($length = 1; $length < 4096; $length++) {
-            $rand = Math::randBytes($length);
+            $rand = Rand::getBytes($length);
             $this->assertTrue($rand !== false);
             $this->assertEquals($length, strlen($rand));
+        }
+    }
+
+    public function testRandBoolean()
+    {
+        for ($length = 1; $length < 512; $length++) {
+            $rand = Rand::getBoolean();
+            $this->assertTrue(is_bool($rand));
         }
     }
 
@@ -48,21 +56,22 @@ class MathTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider provideRandInt
      */
-    public function testRandInt($num, $valid, $cycles, $tot, $min, $max, $strong)
+    public function testRandInteger($num, $valid, $cycles, $tot, $min, $max, $strong)
     {
         try {
-            $test = Math::randBytes(1, $strong);
+            $test = Rand::getBytes(1, $strong);
         } catch (\Zend\Math\Exception\RuntimeException $e) {
             $this->markTestSkipped($e->getMessage());
         }
+        
         $i     = 0;
         $count = 0;
         do {
             $up   = 0;
             $down = 0;
-            for ($i=0; $i<$cycles; $i++) {
-                $x = Math::rand(0, $tot, $strong);
-                $y = Math::rand(0, $tot, $strong);
+            for ($i = 0; $i < $cycles; $i++) {
+                $x = Rand::getInteger(0, $tot, $strong);
+                $y = Rand::getInteger(0, $tot, $strong);
                 if ($x > $y) {
                     $up++;
                 } elseif ($x < $y) {
@@ -77,8 +86,45 @@ class MathTest extends \PHPUnit_Framework_TestCase
             }
             $i++;
         } while ($i < $num && $count < $valid);
+
         if ($count < $valid) {
             $this->fail('The random number generator failed the Monte Carlo test');
+        }
+    }
+
+    public function testIntegerRangeFail()
+    {
+        $this->setExpectedException(
+            'Zend\Math\Exception\DomainException',
+            'min parameter must be lower than max parameter'
+        );
+        $rand = Rand::getInteger(100, 0);
+    }
+
+    public function testRandFloat()
+    {
+        for ($length = 1; $length < 512; $length++) {
+            $rand = Rand::getFloat();
+            $this->assertTrue(is_float($rand));
+            $this->assertTrue(($rand >= 0 && $rand <= 1));
+        }
+    }
+
+    public function testGetString()
+    {
+        for ($length = 1; $length < 512; $length++) {
+            $rand = Rand::getString($length, '0123456789abcdef');
+            $this->assertEquals(strlen($rand), $length);
+            $this->assertTrue(preg_match('#^[0-9a-f]+$#', $rand) === 1);
+        }
+    }
+
+    public function testGetStringBase64()
+    {
+        for ($length = 1; $length < 512; $length++) {
+            $rand = Rand::getString($length);
+            $this->assertEquals(strlen($rand), $length);
+            $this->assertTrue(preg_match('#^[0-9a-zA-Z+/]+$#', $rand) === 1);
         }
     }
 }

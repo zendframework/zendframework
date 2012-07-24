@@ -72,7 +72,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testWrongConstruct()
     {
         $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
-                                    'The options parameter must be an array, a Zend\Config\Config object or a Traversable');
+                                    'The options parameter must be an array or a Traversable');
         $bcrypt = new Bcrypt('test');
     }
 
@@ -128,10 +128,12 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->bcrypt->setSalt($this->salt);
 
         if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->assertEquals('$2y$14$MTIzNDU2Nzg5MDEyMzQ1NexAbOIUHkG6Ra.TK9QxHOVUhDxOe4dkW', $this->bcrypt->create($password));
+            $this->assertEquals('$2y$14$MTIzNDU2Nzg5MDEyMzQ1NexAbOIUHkG6Ra.TK9QxHOVUhDxOe4dkW',
+                                $this->bcrypt->create($password));
         } else {
             $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
-                'The bcrypt implementation used by PHP can contains a security flaw using password with 8-bit character. ' .
+                'The bcrypt implementation used by PHP can contains a security flaw ' .
+                'using password with 8-bit character. ' .
                 'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
             );
             $output = $this->bcrypt->create($password);

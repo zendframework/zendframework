@@ -5,16 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace Zend\Acl\Role;
-
-use Zend\Acl\Role\RoleInterface;
+namespace Zend\Permissions\Acl\Role;
 
 /**
  * @category   Zend
- * @package    Zend_Acl
+ * @package    Zend_Permissions
+ * @subpackage Acl
  */
 class GenericRole implements RoleInterface
 {
@@ -36,7 +35,7 @@ class GenericRole implements RoleInterface
     }
 
     /**
-     * Defined by Zend\Acl\Role\RoleInterface; returns the Role identifier
+     * Defined by RoleInterface; returns the Role identifier
      *
      * @return string
      */
@@ -46,7 +45,7 @@ class GenericRole implements RoleInterface
     }
 
     /**
-     * Defined by Zend\Acl\Role\RoleInterface; returns the Role identifier
+     * Defined by RoleInterface; returns the Role identifier
      * Proxies to getRoleId()
      *
      * @return string

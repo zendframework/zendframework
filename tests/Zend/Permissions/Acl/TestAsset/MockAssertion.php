@@ -5,12 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace ZendTest\Acl\TestAsset;
+namespace ZendTest\Permissions\Acl\TestAsset;
 
-use Zend\Acl;
+use Zend\Permissions\Acl;
 
 class MockAssertion implements Acl\Assertion\AssertionInterface
 {

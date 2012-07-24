@@ -5,18 +5,17 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace Zend\Acl\Role;
+namespace Zend\Permissions\Acl\Role;
 
-use Zend\Acl;
-use Zend\Acl\Exception;
-use Zend\Acl\Role;
+use Zend\Permissions\Acl\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Acl
+ * @package    Zend_Permissions
+ * @subpackage Acl
  */
 class Registry
 {
@@ -51,7 +50,7 @@ class Registry
         $roleId = $role->getRoleId();
 
         if ($this->has($roleId)) {
-            throw new Acl\Exception\InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Role id "%s" already exists in the registry',
                 $roleId
             ));
@@ -72,7 +71,7 @@ class Registry
                     }
                     $roleParent = $this->get($roleParentId);
                 } catch (\Exception $e) {
-                    throw new Acl\Exception\InvalidArgumentException(sprintf(
+                    throw new Exception\InvalidArgumentException(sprintf(
                         'Parent Role id "%s" does not exist',
                         $roleParentId
                     ), 0, $e);
@@ -109,7 +108,7 @@ class Registry
         }
 
         if (!$this->has($role)) {
-            throw new Acl\Exception\InvalidArgumentException("Role '$roleId' not found");
+            throw new Exception\InvalidArgumentException("Role '$roleId' not found");
         }
 
         return $this->roles[$roleId]['instance'];
@@ -207,7 +206,7 @@ class Registry
         try {
             $roleId = $this->get($role)->getRoleId();
         } catch (Exception\ExceptionInterface $e) {
-            throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         foreach ($this->roles[$roleId]['children'] as $childId => $child) {

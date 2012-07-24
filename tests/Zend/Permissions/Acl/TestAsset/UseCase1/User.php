@@ -5,21 +5,18 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace Zend\Acl\Resource;
+namespace ZendTest\Permissions\Acl\TestAsset\UseCase1;
 
-/**
- * @category   Zend
- * @package    Zend_Acl
- */
-interface ResourceInterface
+use Zend\Permissions\Acl\Role;
+
+class User implements Role\RoleInterface
 {
-    /**
-     * Returns the string identifier of the Resource
-     *
-     * @return string
-     */
-    public function getResourceId();
+    public $role = 'guest';
+    public function getRoleId()
+    {
+        return $this->role;
+    }
 }

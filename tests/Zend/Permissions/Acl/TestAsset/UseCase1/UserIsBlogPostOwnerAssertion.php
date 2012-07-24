@@ -5,13 +5,13 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace ZendTest\Acl\TestAsset\UseCase1;
+namespace ZendTest\Permissions\Acl\TestAsset\UseCase1;
 
-use Zend\Acl\Assertion\AssertionInterface;
-use Zend\Acl as ZendAcl;
+use Zend\Permissions\Acl\Assertion\AssertionInterface;
+use Zend\Permissions\Acl as ZendAcl;
 
 class UserIsBlogPostOwnerAssertion implements AssertionInterface
 {

@@ -5,18 +5,22 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace ZendTest\Acl\TestAsset\UseCase1;
+namespace Zend\Permissions\Acl\Resource;
 
-use Zend\Acl\Resource;
-
-class BlogPost implements Resource\ResourceInterface
+/**
+ * @category   Zend
+ * @package    Zend_Permissions
+ * @subpackage Acl
+ */
+interface ResourceInterface
 {
-    public $owner = null;
-    public function getResourceId()
-    {
-        return 'blogPost';
-    }
+    /**
+     * Returns the string identifier of the Resource
+     *
+     * @return string
+     */
+    public function getResourceId();
 }

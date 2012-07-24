@@ -116,7 +116,8 @@ abstract class Rand
      *
      * PHP uses double precision floating-point format (64-bit) which has
      * 52-bits of significand precision. We gather 7 bytes of random data,
-     * clear last 4 bits, then add 8th NULl byte
+     * and we fix the exponent to the bias (1023). In this way we generate
+     * a float of 1.mantissa.
      *
      * @param  boolean $strong  true if you need a strong random generator (cryptography)
      * @return float
@@ -124,14 +125,11 @@ abstract class Rand
     public static function getFloat($strong = false)
     {
         $bytes    = static::getBytes(7, $strong);
-        $bytes[6] = $bytes[6] & chr(0x0F); // clear last 4 bits
-        $bytes   .= chr(0);
-
-        // unpack two unsigned long (32-bit)
-        list(, $a, $b) = unpack('V2', $bytes);
-
-        // The second unsigned long has 20-bits of significant precision
-        return (float) ($a / pow(2.0, 52) + $b / pow(2.0, 20));
+        $bytes[6] = $bytes[6] | chr(0xF0);  
+        $bytes   .= chr(63); // exponent bias (1023)
+        list(, $float) = unpack('d', $bytes);
+        
+        return $float - 1;
     }
 
     /**

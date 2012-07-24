@@ -49,8 +49,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getAuthors()
     {
-        if (array_key_exists('authors', $this->_data)) {
-            return $this->_data['authors'];
+        if (array_key_exists('authors', $this->data)) {
+            return $this->data['authors'];
         }
 
         $authors = array();
@@ -65,7 +65,7 @@ class Entry extends Extension\AbstractEntry
 
         if ($list->length) {
             foreach ($list as $author) {
-                $author = $this->_getAuthor($author);
+                $author = $this->getAuthorFromElement($author);
                 if (!empty($author)) {
                     $authors[] = $author;
                 }
@@ -80,8 +80,8 @@ class Entry extends Extension\AbstractEntry
             );
         }
 
-        $this->_data['authors'] = $authors;
-        return $this->_data['authors'];
+        $this->data['authors'] = $authors;
+        return $this->data['authors'];
     }
 
     /**
@@ -91,8 +91,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getContent()
     {
-        if (array_key_exists('content', $this->_data)) {
-            return $this->_data['content'];
+        if (array_key_exists('content', $this->data)) {
+            return $this->data['content'];
         }
 
         $content = null;
@@ -117,7 +117,7 @@ class Entry extends Extension\AbstractEntry
                     $d = new DOMDocument('1.0', $this->getEncoding());
                     $xhtmls = $d->importNode($xhtml, true);
                     $d->appendChild($xhtmls);
-                    $content = $this->_collectXhtml(
+                    $content = $this->collectXhtml(
                         $d->saveXML(),
                         $d->lookupPrefix('http://www.w3.org/1999/xhtml')
                     );
@@ -129,9 +129,9 @@ class Entry extends Extension\AbstractEntry
             $content = $this->getDescription();
         }
 
-        $this->_data['content'] = trim($content);
+        $this->data['content'] = trim($content);
 
-        return $this->_data['content'];
+        return $this->data['content'];
     }
 
     /**
@@ -141,7 +141,7 @@ class Entry extends Extension\AbstractEntry
      * @param $prefix
      * @return mixed
      */
-    protected function _collectXhtml($xhtml, $prefix)
+    protected function collectXhtml($xhtml, $prefix)
     {
         if (!empty($prefix)) $prefix = $prefix . ':';
         $matches = array(
@@ -162,13 +162,13 @@ class Entry extends Extension\AbstractEntry
      */
     public function getDateCreated()
     {
-        if (array_key_exists('datecreated', $this->_data)) {
-            return $this->_data['datecreated'];
+        if (array_key_exists('datecreated', $this->data)) {
+            return $this->data['datecreated'];
         }
 
         $date = null;
 
-        if ($this->_getAtomType() === Reader\Reader::TYPE_ATOM_03) {
+        if ($this->getAtomType() === Reader\Reader::TYPE_ATOM_03) {
             $dateCreated = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
         } else {
             $dateCreated = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
@@ -178,9 +178,9 @@ class Entry extends Extension\AbstractEntry
             $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
         }
 
-        $this->_data['datecreated'] = $date;
+        $this->data['datecreated'] = $date;
 
-        return $this->_data['datecreated'];
+        return $this->data['datecreated'];
     }
 
     /**
@@ -190,13 +190,13 @@ class Entry extends Extension\AbstractEntry
      */
     public function getDateModified()
     {
-        if (array_key_exists('datemodified', $this->_data)) {
-            return $this->_data['datemodified'];
+        if (array_key_exists('datemodified', $this->data)) {
+            return $this->data['datemodified'];
         }
 
         $date = null;
 
-        if ($this->_getAtomType() === Reader\Reader::TYPE_ATOM_03) {
+        if ($this->getAtomType() === Reader\Reader::TYPE_ATOM_03) {
             $dateModified = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
         } else {
             $dateModified = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
@@ -206,9 +206,9 @@ class Entry extends Extension\AbstractEntry
             $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
         }
 
-        $this->_data['datemodified'] = $date;
+        $this->data['datemodified'] = $date;
 
-        return $this->_data['datemodified'];
+        return $this->data['datemodified'];
     }
 
     /**
@@ -218,8 +218,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getDescription()
     {
-        if (array_key_exists('description', $this->_data)) {
-            return $this->_data['description'];
+        if (array_key_exists('description', $this->data)) {
+            return $this->data['description'];
         }
 
         $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:summary)');
@@ -228,9 +228,9 @@ class Entry extends Extension\AbstractEntry
             $description = null;
         }
 
-        $this->_data['description'] = $description;
+        $this->data['description'] = $description;
 
-        return $this->_data['description'];
+        return $this->data['description'];
     }
 
     /**
@@ -240,8 +240,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getEnclosure()
     {
-        if (array_key_exists('enclosure', $this->_data)) {
-            return $this->_data['enclosure'];
+        if (array_key_exists('enclosure', $this->data)) {
+            return $this->data['enclosure'];
         }
 
         $enclosure = null;
@@ -255,9 +255,9 @@ class Entry extends Extension\AbstractEntry
             $enclosure->type   = $nodeList->item(0)->getAttribute('type');
         }
 
-        $this->_data['enclosure'] = $enclosure;
+        $this->data['enclosure'] = $enclosure;
 
-        return $this->_data['enclosure'];
+        return $this->data['enclosure'];
     }
 
     /**
@@ -267,8 +267,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getId()
     {
-        if (array_key_exists('id', $this->_data)) {
-            return $this->_data['id'];
+        if (array_key_exists('id', $this->data)) {
+            return $this->data['id'];
         }
 
         $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
@@ -283,9 +283,9 @@ class Entry extends Extension\AbstractEntry
             }
         }
 
-        $this->_data['id'] = $id;
+        $this->data['id'] = $id;
 
-        return $this->_data['id'];
+        return $this->data['id'];
     }
 
     /**
@@ -295,8 +295,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getBaseUrl()
     {
-        if (array_key_exists('baseUrl', $this->_data)) {
-            return $this->_data['baseUrl'];
+        if (array_key_exists('baseUrl', $this->data)) {
+            return $this->data['baseUrl'];
         }
 
         $baseUrl = $this->getXpath()->evaluate('string('
@@ -311,9 +311,9 @@ class Entry extends Extension\AbstractEntry
             $baseUrl = null;
         }
 
-        $this->_data['baseUrl'] = $baseUrl;
+        $this->data['baseUrl'] = $baseUrl;
 
-        return $this->_data['baseUrl'];
+        return $this->data['baseUrl'];
     }
 
     /**
@@ -324,12 +324,12 @@ class Entry extends Extension\AbstractEntry
      */
     public function getLink($index = 0)
     {
-        if (!array_key_exists('links', $this->_data)) {
+        if (!array_key_exists('links', $this->data)) {
             $this->getLinks();
         }
 
-        if (isset($this->_data['links'][$index])) {
-            return $this->_data['links'][$index];
+        if (isset($this->data['links'][$index])) {
+            return $this->data['links'][$index];
         }
 
         return null;
@@ -342,8 +342,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getLinks()
     {
-        if (array_key_exists('links', $this->_data)) {
-            return $this->_data['links'];
+        if (array_key_exists('links', $this->data)) {
+            return $this->data['links'];
         }
 
         $links = array();
@@ -355,13 +355,13 @@ class Entry extends Extension\AbstractEntry
 
         if ($list->length) {
             foreach ($list as $link) {
-                $links[] = $this->_absolutiseUri($link->value);
+                $links[] = $this->absolutiseUri($link->value);
             }
         }
 
-        $this->_data['links'] = $links;
+        $this->data['links'] = $links;
 
-        return $this->_data['links'];
+        return $this->data['links'];
     }
 
     /**
@@ -381,8 +381,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getTitle()
     {
-        if (array_key_exists('title', $this->_data)) {
-            return $this->_data['title'];
+        if (array_key_exists('title', $this->data)) {
+            return $this->data['title'];
         }
 
         $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
@@ -391,9 +391,9 @@ class Entry extends Extension\AbstractEntry
             $title = null;
         }
 
-        $this->_data['title'] = $title;
+        $this->data['title'] = $title;
 
-        return $this->_data['title'];
+        return $this->data['title'];
     }
 
     /**
@@ -403,8 +403,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCommentCount()
     {
-        if (array_key_exists('commentcount', $this->_data)) {
-            return $this->_data['commentcount'];
+        if (array_key_exists('commentcount', $this->data)) {
+            return $this->data['commentcount'];
         }
 
         $count = null;
@@ -418,9 +418,9 @@ class Entry extends Extension\AbstractEntry
             $count = $list->item(0)->value;
         }
 
-        $this->_data['commentcount'] = $count;
+        $this->data['commentcount'] = $count;
 
-        return $this->_data['commentcount'];
+        return $this->data['commentcount'];
     }
 
     /**
@@ -430,8 +430,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCommentLink()
     {
-        if (array_key_exists('commentlink', $this->_data)) {
-            return $this->_data['commentlink'];
+        if (array_key_exists('commentlink', $this->data)) {
+            return $this->data['commentlink'];
         }
 
         $link = null;
@@ -442,12 +442,12 @@ class Entry extends Extension\AbstractEntry
 
         if ($list->length) {
             $link = $list->item(0)->value;
-            $link = $this->_absolutiseUri($link);
+            $link = $this->absolutiseUri($link);
         }
 
-        $this->_data['commentlink'] = $link;
+        $this->data['commentlink'] = $link;
 
-        return $this->_data['commentlink'];
+        return $this->data['commentlink'];
     }
 
     /**
@@ -457,8 +457,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCommentFeedLink($type = 'atom')
     {
-        if (array_key_exists('commentfeedlink', $this->_data)) {
-            return $this->_data['commentfeedlink'];
+        if (array_key_exists('commentfeedlink', $this->data)) {
+            return $this->data['commentfeedlink'];
         }
 
         $link = null;
@@ -469,12 +469,12 @@ class Entry extends Extension\AbstractEntry
 
         if ($list->length) {
             $link = $list->item(0)->value;
-            $link = $this->_absolutiseUri($link);
+            $link = $this->absolutiseUri($link);
         }
 
-        $this->_data['commentfeedlink'] = $link;
+        $this->data['commentfeedlink'] = $link;
 
-        return $this->_data['commentfeedlink'];
+        return $this->data['commentfeedlink'];
     }
 
     /**
@@ -484,11 +484,11 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCategories()
     {
-        if (array_key_exists('categories', $this->_data)) {
-            return $this->_data['categories'];
+        if (array_key_exists('categories', $this->data)) {
+            return $this->data['categories'];
         }
 
-        if ($this->_getAtomType() == Reader\Reader::TYPE_ATOM_10) {
+        if ($this->getAtomType() == Reader\Reader::TYPE_ATOM_10) {
             $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom:category');
         } else {
             /**
@@ -513,9 +513,9 @@ class Entry extends Extension\AbstractEntry
             return new Collection\Category;
         }
 
-        $this->_data['categories'] = $categoryCollection;
+        $this->data['categories'] = $categoryCollection;
 
-        return $this->_data['categories'];
+        return $this->data['categories'];
     }
 
     /**
@@ -525,8 +525,8 @@ class Entry extends Extension\AbstractEntry
      */
     public function getSource()
     {
-        if (array_key_exists('source', $this->_data)) {
-            return $this->_data['source'];
+        if (array_key_exists('source', $this->data)) {
+            return $this->data['source'];
         }
 
         $source = null;
@@ -539,8 +539,8 @@ class Entry extends Extension\AbstractEntry
             }
         }
 
-        $this->_data['source'] = $source;
-        return $this->_data['source'];
+        $this->data['source'] = $source;
+        return $this->data['source'];
     }
 
     /**
@@ -550,7 +550,7 @@ class Entry extends Extension\AbstractEntry
      * @param $link
      * @return string
      */
-    protected function _absolutiseUri($link)
+    protected function absolutiseUri($link)
     {
         if (!Uri\UriFactory::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
@@ -569,7 +569,7 @@ class Entry extends Extension\AbstractEntry
      * @param DOMElement $element
      * @return string
      */
-    protected function _getAuthor(DOMElement $element)
+    protected function getAuthorFromElement(DOMElement $element)
     {
         $author = array();
 
@@ -598,9 +598,9 @@ class Entry extends Extension\AbstractEntry
     /**
      * Register the default namespaces for the current feed format
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        switch ($this->_getAtomType()) {
+        switch ($this->getAtomType()) {
             case Reader\Reader::TYPE_ATOM_03:
                 $this->getXpath()->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_03);
                 break;
@@ -613,7 +613,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Detect the presence of any Atom namespaces in use
      */
-    protected function _getAtomType()
+    protected function getAtomType()
     {
         $dom = $this->getDomDocument();
         $prefixAtom03 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_03);

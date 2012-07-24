@@ -22,19 +22,19 @@ class Entry extends Extension\AbstractEntry
 
     public function getIsbn()
     {
-        if (isset($this->_data['isbn'])) {
-            return $this->_data['isbn'];
+        if (isset($this->data['isbn'])) {
+            return $this->data['isbn'];
         }
-        $isbn = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:isbn)');
+        $isbn = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:isbn)');
         if (!$isbn) {
             $isbn = null;
         }
-        $this->_data['isbn'] = $title;
-        return $this->_data['isbn'];
+        $this->data['isbn'] = $title;
+        return $this->data['isbn'];
     }
 
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('jungle', 'http://example.com/junglebooks/rss/module/1.0/');
+        $this->xpath->registerNamespace('jungle', 'http://example.com/junglebooks/rss/module/1.0/');
     }
 }

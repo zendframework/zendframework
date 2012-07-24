@@ -769,13 +769,14 @@ class AbstractFeed
      */
     protected function _loadExtensions()
     {
-        $all = Writer::getExtensions();
-        $exts = $all['feed'];
+        $all     = Writer::getExtensions();
+        $manager = Writer::getExtensionManager();
+        $exts    = $all['feed'];
         foreach ($exts as $ext) {
-            if (!$className = Writer::getPluginLoader()->getClassName($ext)) {
+            if (!$manager->has($ext)) {
                 throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
             }
-            $this->_extensions[$ext] = new $className();
+            $this->_extensions[$ext] = $manager->get($ext);
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }
     }

@@ -249,17 +249,13 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://foo/test.atom', $links->atom);
     }
 
-    public function testAddsPrefixPath()
-    {
-        $path = str_replace('#', DIRECTORY_SEPARATOR, '#A#B#C');
-        Reader\Reader::addPrefixPath('A\\B\\C', $path);
-        $prefixPaths = Reader\Reader::getPluginLoader()->getPaths();
-        $this->assertEquals($path . DIRECTORY_SEPARATOR, $prefixPaths['A\\B\\C\\'][0]);
-    }
-
     public function testRegistersUserExtension()
     {
-        Reader\Reader::addPrefixPath('My\\Extension', dirname(__FILE__) . '/_files/My/Extension');
+        require_once __DIR__ . '/_files/My/Extension/JungleBooks/Entry.php';
+        require_once __DIR__ . '/_files/My/Extension/JungleBooks/Feed.php';
+        $manager = Reader\Reader::getExtensionManager();
+        $manager->setInvokableClass('JungleBooks\Entry', 'My\Extension\JungleBooks\Entry');
+        $manager->setInvokableClass('JungleBooks\Feed', 'My\Extension\JungleBooks\Feed');
         Reader\Reader::registerExtension('JungleBooks');
 
         $this->assertTrue(Reader\Reader::isRegistered('JungleBooks'));

@@ -25,7 +25,7 @@ class Entry extends Extension\AbstractEntry
      */
     public function getSection()
     {
-        return $this->_getData('section');
+        return $this->getData('section');
     }
 
     /**
@@ -35,7 +35,7 @@ class Entry extends Extension\AbstractEntry
      */
     public function getDepartment()
     {
-        return $this->_getData('department');
+        return $this->getData('department');
     }
 
     /**
@@ -47,11 +47,11 @@ class Entry extends Extension\AbstractEntry
     {
         $name = 'hit_parade';
 
-        if (isset($this->_data[$name])) {
-            return $this->_data[$name];
+        if (isset($this->data[$name])) {
+            return $this->data[$name];
         }
 
-        $stringParade = $this->_getData($name);
+        $stringParade = $this->getData($name);
         $hitParade    = array();
 
         if (!empty($stringParade)) {
@@ -61,7 +61,7 @@ class Entry extends Extension\AbstractEntry
                 $hitParade[] = $hit + 0; //cast to integer
         }
 
-        $this->_data[$name] = $hitParade;
+        $this->data[$name] = $hitParade;
         return $hitParade;
     }
 
@@ -74,15 +74,15 @@ class Entry extends Extension\AbstractEntry
     {
         $name = 'comments';
 
-        if (isset($this->_data[$name])) {
-            return $this->_data[$name];
+        if (isset($this->data[$name])) {
+            return $this->data[$name];
         }
 
-        $comments = $this->_getData($name, 'string');
+        $comments = $this->getData($name, 'string');
 
         if (!$comments) {
-            $this->_data[$name] = null;
-            return $this->_data[$name];
+            $this->data[$name] = null;
+            return $this->data[$name];
         }
 
         return $comments;
@@ -95,19 +95,19 @@ class Entry extends Extension\AbstractEntry
      *
      * @return mixed|null
      */
-    protected function _getData($name, $type = 'string')
+    protected function getData($name, $type = 'string')
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
-        $data = $this->_xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
+        $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
 
         if (!$data) {
             $data = null;
         }
 
-        $this->_data[$name] = $data;
+        $this->data[$name] = $data;
 
         return $data;
     }
@@ -117,8 +117,8 @@ class Entry extends Extension\AbstractEntry
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('slash10', 'http://purl.org/rss/1.0/modules/slash/');
+        $this->xpath->registerNamespace('slash10', 'http://purl.org/rss/1.0/modules/slash/');
     }
 }

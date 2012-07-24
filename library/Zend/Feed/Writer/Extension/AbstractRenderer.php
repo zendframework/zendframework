@@ -17,7 +17,7 @@ use DOMElement;
 * @category Zend
 * @package Zend_Feed_Writer_Entry_Rss
 */
-abstract class AbstractRenderer implements Renderer
+abstract class AbstractRenderer implements RendererInterface
 {
     /**
      * @var DOMDocument
@@ -57,14 +57,15 @@ abstract class AbstractRenderer implements Renderer
     protected $_encoding = 'UTF-8';
 
     /**
-     * Constructor
+     * Set the data container
      *
      * @param  mixed $container
-     * @return void
+     * @return AbstractRenderer
      */
-    public function __construct($container)
+    public function setDataContainer($container)
     {
         $this->_container = $container;
+        return $this;
     }
 
     /**

@@ -40,11 +40,4 @@ interface ValidatorInterface
      * @return array
      */
     public function getMessages();
-
-    /**
-     * Returns an array of validators.
-     *
-     * @return array
-     */
-    public function getValidators();
 }

@@ -107,7 +107,7 @@ abstract class Rand
             $rnd = $rnd & $filter;
         } while ($rnd > $range);
 
-        return $min + $rnd;
+        return ($min + $rnd);
     }
 
     /**
@@ -125,11 +125,11 @@ abstract class Rand
     public static function getFloat($strong = false)
     {
         $bytes    = static::getBytes(7, $strong);
-        $bytes[6] = $bytes[6] | chr(0xF0);  
+        $bytes[6] = $bytes[6] | chr(0xF0);
         $bytes   .= chr(63); // exponent bias (1023)
         list(, $float) = unpack('d', $bytes);
         
-        return $float - 1;
+        return ($float - 1);
     }
 
     /**

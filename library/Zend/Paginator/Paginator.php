@@ -171,12 +171,10 @@ class Paginator implements Countable, IteratorAggregate
      *
      * @param  mixed  $data
      * @param  string $adapter
-     * @param  array  $prefixPaths
      * @throws Exception\InvalidArgumentException
      * @return Paginator
      */
-    public static function factory($data, $adapter = self::INTERNAL_ADAPTER,
-                                   array $prefixPaths = null)
+    public static function factory($data, $adapter = self::INTERNAL_ADAPTER)
     {
         if ($data instanceof AdapterAggregateInterface) {
             return new self($data->getPaginatorAdapter());

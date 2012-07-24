@@ -10,9 +10,8 @@
 
 namespace Zend\Log\Filter;
 
-use Zend\Log\Exception;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use Zend\Log\Exception;
 
 /**
  * @category   Zend
@@ -43,7 +42,7 @@ class Priority implements FilterInterface
     public function __construct($priority, $operator = null)
     {
         if ($priority instanceof Traversable) {
-            $priority = ArrayUtils::iteratorToArray($priority);
+            $priority = iterator_to_array($priority);
         }
         if (is_array($priority)) {
             $operator = isset($priority['operator']) ? $priority['operator'] : null;

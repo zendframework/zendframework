@@ -36,6 +36,13 @@ class FilterPluginManager extends AbstractPluginManager
     );
 
     /**
+     * Allow many filters of the same type
+     * 
+     * @var bool
+     */
+    protected $shareByDefault = false;
+
+    /**
      * Validate the plugin
      *
      * Checks that the writer loaded is an instance of Filter\FilterInterface.

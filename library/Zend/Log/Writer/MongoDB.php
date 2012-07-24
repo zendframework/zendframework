@@ -12,10 +12,10 @@
 namespace Zend\Log\Writer;
 
 use Mongo;
+use Traversable;
 use Zend\Log\Exception\InvalidArgumentException;
 use Zend\Log\Exception\RuntimeException;
 use Zend\Log\Formatter\FormatterInterface;
-use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -53,6 +53,7 @@ class MongoDB extends AbstractWriter
     public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {
         if ($mongo instanceof Traversable) {
+            // Configuration may be multi-dimensional due to save options
             $mongo = ArrayUtils::iteratorToArray($mongo);
         }
         if (is_array($mongo)) {
@@ -71,14 +72,16 @@ class MongoDB extends AbstractWriter
             }
             $mongo = isset($mongo['mongo']) ? $mongo['mongo'] : null;
         }
+
         if (!($mongo instanceof Mongo)) {
             throw new Exception\InvalidArgumentException(
                 'Parameter of type %s is invalid; must be Mongo',
                 (is_object($mongo) ? get_class($mongo) : gettype($mongo)) 
             );
         }
+
         $this->mongoCollection = $mongo->selectCollection($database, $collection);
-        $this->saveOptions = $saveOptions;
+        $this->saveOptions     = $saveOptions;
     }
 
     /**

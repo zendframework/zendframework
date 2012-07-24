@@ -36,6 +36,13 @@ class WriterPluginManager extends AbstractPluginManager
     );
 
     /**
+     * Allow many writers of the same type
+     * 
+     * @var bool
+     */
+    protected $shareByDefault = false;
+
+    /**
      * Validate the plugin
      *
      * Checks that the writer loaded is an instance of Writer\WriterInterface.

@@ -10,11 +10,10 @@
 
 namespace Zend\Log\Writer;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Stdlib\ErrorHandler;
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -42,12 +41,14 @@ class Stream extends AbstractWriter
     public function __construct($streamOrUrl, $mode = null)
     {
         if ($streamOrUrl instanceof Traversable) {
-            $streamOrUrl = ArrayUtils::iteratorToArray($streamOrUrl);
+            $streamOrUrl = iterator_to_array($streamOrUrl);
         }
+
         if (is_array($streamOrUrl)) {
             $mode        = isset($streamOrUrl['mode']) ? $streamOrUrl['mode'] : null;
             $streamOrUrl = isset($streamOrUrl['stream']) ? $streamOrUrl['stream'] : null;
         }
+
         // Setting the default mode
         if (null === $mode) {
             $mode = 'a';
@@ -70,7 +71,7 @@ class Stream extends AbstractWriter
 
             $this->stream = $streamOrUrl;
         } else {
-            if (! $this->stream = @fopen($streamOrUrl, $mode, false)) {
+            if (!$this->stream = @fopen($streamOrUrl, $mode, false)) {
                 throw new Exception\RuntimeException(sprintf(
                     '"%s" cannot be opened with mode "%s"',
                     $streamOrUrl,

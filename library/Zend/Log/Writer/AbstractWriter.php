@@ -53,9 +53,13 @@ abstract class AbstractWriter implements WriterInterface
     {
         if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
-        } elseif (is_string($filter)) {
+        } 
+
+        if (is_string($filter)) {
             $filter = $this->filterPlugin($filter, $options);
-        } elseif (!$filter instanceof Filter\FilterInterface) {
+        } 
+        
+        if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Writer must implement Zend\Log\Filter\FilterInterface; received "%s"',
                 is_object($filter) ? get_class($filter) : gettype($filter)

@@ -10,10 +10,9 @@
 
 namespace Zend\Log\Filter;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Validator\ValidatorInterface as ZendValidator;
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -38,7 +37,7 @@ class Validator implements FilterInterface
     public function __construct($validator)
     {
         if ($validator instanceof Traversable) {
-            $validator = ArrayUtils::iteratorToArray($validator);
+            $validator = iterator_to_array($validator);
         }
         if (is_array($validator)) {
             $validator = isset($validator['validator']) ? $validator['validator'] : null;

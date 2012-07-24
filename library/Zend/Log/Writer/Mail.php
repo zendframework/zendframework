@@ -10,13 +10,12 @@
 
 namespace Zend\Log\Writer;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Mail\Message as MailMessage;
 use Zend\Mail\Transport;
 use Zend\Mail\Transport\Exception as TransportException;
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class used for writing log messages to email via Zend\Mail.
@@ -82,31 +81,35 @@ class Mail extends AbstractWriter
     public function __construct($mail, Transport\TransportInterface $transport = null)
     {
         if ($mail instanceof Traversable) {
-            $mail = ArrayUtils::iteratorToArray($mail);
+            $mail = iterator_to_array($mail);
         }
+
         if (is_array($mail)) {
             $transport = isset($mail['transport']) ? $mail['transport'] : null;
             $mail      = isset($mail['mail']) ? $mail['mail'] : null;
-            if (!($transport instanceof Transport\TransportInterface)) {
-                throw new Exception\InvalidArgumentException(
-                    'Parameter of type %s is invalid; must be Zend\Mail\Transport\TransportInterface',
-                    (is_object($mail[1]) ? get_class($mail[1]) : gettype($mail[1]))  
-                );
-            }
         }
-        if (!($mail instanceof MailMessage)) {
+
+        // Ensure we have a valid mail message
+        if (!$mail instanceof MailMessage) {
             throw new Exception\InvalidArgumentException(
-                'Parameter of type %s is invalid; must be Zend\Mail\Message',
+                'Mail parameter of type %s is invalid; must be of type Zend\Mail\Message',
                 (is_object($mail) ? get_class($mail) : gettype($mail))  
             );
         }
         $this->mail = $mail;
-        if (null !== $transport) {
-            $this->setTransport($transport);
-        } else {
-            // default transport
-            $this->setTransport(new Transport\Sendmail());
+
+        // Ensure we have a valid mail transport
+        if (null === $transport) {
+            $transport = new Transport\Sendmail();
         }
+        if (!$transport instanceof Transport\TransportInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Transport parameter of type %s is invalid; must be of type Zend\Mail\Transport\TransportInterface',
+                (is_object($transport) ? get_class($transport) : gettype($transport))  
+            );
+        }
+        $this->setTransport($transport);
+
         $this->formatter = new SimpleFormatter();
     }
 

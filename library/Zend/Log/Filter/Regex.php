@@ -10,10 +10,9 @@
 
 namespace Zend\Log\Filter;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Stdlib\ErrorHandler;
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -39,7 +38,7 @@ class Regex implements FilterInterface
     public function __construct($regex)
     {
         if ($regex instanceof Traversable) {
-            $regex = ArrayUtils::iteratorToArray($regex);
+            $regex = iterator_to_array($regex);
         }
         if (is_array($regex)) {
             $regex = isset($regex['regex']) ? $regex['regex'] : null;

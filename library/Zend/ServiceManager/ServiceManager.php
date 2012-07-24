@@ -721,7 +721,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @return array $canonicalNames
      * @return ServiceManager
      */
-    public function getCanonicalNames($canonicalNames)
+    public function setCanonicalNames($canonicalNames)
     {
         $this->canonicalNames = $canonicalNames;
     }

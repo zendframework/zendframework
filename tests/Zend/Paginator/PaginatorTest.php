@@ -795,24 +795,28 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAdapterPluginManagerWithAdapterThrowsInvalidArgumentException()
     {
-        $adapter = new \ZendTest\Paginator\TestAsset\InvalidAdapter;
         $this->setExpectedException(
             'Zend\Paginator\Exception\InvalidArgumentException',
-            'Pagination adapter manager must extend AdapterPluginManager; received "ZendTest\Paginator\TestAsset\InvalidAdapter"'
+            'Pagination adapter manager must extend AdapterPluginManager; received "stdClass"'
         );
 
-        $this->_paginator->setAdapterPluginManager($adapter);
+        $this->_paginator->setAdapterPluginManager(
+            new \stdClass()
+        );
     }
 
     public function testSetAdapterPluginManagerWithAdaptersThrowsInvalidArgumentException()
     {
-        $adapter = new \ZendTest\Paginator\TestAsset\InvalidAdapter;
         $this->setExpectedException(
             'Zend\Paginator\Exception\InvalidArgumentException',
             'Pagination adapter manager must extend AdapterPluginManager; received "array"'
         );
 
-        $this->_paginator->setAdapterPluginManager(array($adapter));
+        $this->_paginator->setAdapterPluginManager(
+            array(
+                new \stdClass()
+            )
+        );
     }
 
     public function testSetOptionsThrowsInvalidArgumentException()

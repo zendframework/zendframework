@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Writer;
 
+use FirePHP as FirePHPService;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
 
@@ -83,6 +84,15 @@ class FirePhp extends AbstractWriter
      */
     public function getFirePhp()
     {
+        // Remember: class names in strings are absolute; thus the class_exists 
+        // here references the canonical name for the FirePHP class
+        if (!$this->firephp instanceof FirePhp\FirePhpInterface
+            && class_exists('FirePHP')
+        ) {
+            // FirePHPService is an alias for FirePHP; otherwise the class 
+            // names would clash in this file on this line.
+            $this->setFirePhp(new FirePhp\FirePhpBridge(new FirePHPService()));
+        }
         return $this->firephp;
     }
 

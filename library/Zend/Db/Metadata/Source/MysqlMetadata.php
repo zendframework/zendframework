@@ -154,7 +154,7 @@ class MysqlMetadata extends AbstractSource
                 } else {
                     $permittedValues = array($permittedValues);
                 }
-                $erratas = $permittedValues;
+                $erratas['permitted_values'] = $permittedValues;
             }
             $columns[$row['COLUMN_NAME']] = array(
                 'ordinal_position'          => $row['ORDINAL_POSITION'],

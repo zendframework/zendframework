@@ -351,7 +351,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
                 '$role must be a string, null, or an instance of '
-                .  'Zend\Acl\Role\RoleInterface; %s given',
+                .  'Zend\Permissions\Role\RoleInterface; %s given',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
         }
@@ -861,7 +861,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             self::$defaultRole = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be null|string|Zend\Acl\Role\RoleInterface; received "%s"',
+                '$role must be null|string|Zend\Permissions\Role\RoleInterface; received "%s"',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
         }

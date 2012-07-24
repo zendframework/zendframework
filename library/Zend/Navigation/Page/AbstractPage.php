@@ -102,7 +102,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * ACL resource associated with this page
      *
-     * @var string|\Zend\Acl\Resource|null
+     * @var string|AclResource|null
      */
     protected $resource;
 
@@ -659,7 +659,7 @@ abstract class AbstractPage extends AbstractContainer
         } else {
             throw new Exception\InvalidArgumentException(
                 'Invalid argument: $resource must be null, a string, ' .
-                'or an instance of Zend\Acl\Resource'
+                'or an instance of Zend\Permissions\Acl\Resource\ResourceInterface'
             );
         }
 
@@ -667,7 +667,7 @@ abstract class AbstractPage extends AbstractContainer
     }
 
     /**
-     * Returns ACL resource assoicated with this page
+     * Returns ACL resource associated with this page
      *
      * @return string|AclResource|null  ACL resource or null
      */

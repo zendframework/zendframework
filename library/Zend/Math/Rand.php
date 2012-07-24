@@ -71,7 +71,7 @@ abstract class Rand
     public static function getBoolean($strong = false)
     {
         $byte = static::getBytes(1, $strong);
-        return (boolean) ((ord($byte) + 1) % 2);
+        return (boolean) (ord($byte) % 2);
     }
 
     /**

@@ -16,6 +16,7 @@ use Zend\Mvc\Service\ControllerLoaderFactory;
 use Zend\Mvc\Service\ControllerPluginManagerFactory;
 use Zend\Mvc\Service\DiFactory;
 use Zend\Mvc\Service\EventManagerFactory;
+use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
 
 class ControllerLoaderFactoryTest extends TestCase
@@ -31,6 +32,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->services->setFactory('ControllerPluginBroker', new ControllerPluginManagerFactory());
         $this->services->setFactory('Di', new DiFactory());
         $this->services->setFactory('EventManager', new EventManagerFactory());
+        $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
 
         $this->loader = $this->services->get('ControllerLoader');
     }
@@ -48,5 +50,30 @@ class ControllerLoaderFactoryTest extends TestCase
                 $this->assertNotContains('Should not instantiate this', $e->getMessage());
             } while ($e = $e->getPrevious());
         }
+    }
+
+    public function testCannotLoadControllerFromPeer()
+    {
+        $this->services->setService('foo', $this);
+
+        $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
+        $this->loader->get('foo');
+    }
+
+    public function testControllerLoadedCanBeInjectedWithValuesFromPeer()
+    {
+        $config = array(
+            'invokables' => array(
+                'ZendTest\Dispatchable' => 'ZendTest\Mvc\Service\TestAsset\Dispatchable',
+            ),
+        );
+        $config = new Config($config);
+        $config->configureServiceManager($this->loader);
+
+        $controller = $this->loader->get('ZendTest\Dispatchable');
+        $this->assertInstanceOf('ZendTest\Mvc\Service\TestAsset\Dispatchable', $controller);
+        $this->assertSame($this->services, $controller->getServiceLocator());
+        $this->assertSame($this->services->get('EventManager'), $controller->getEventManager());
+        $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
     }
 }

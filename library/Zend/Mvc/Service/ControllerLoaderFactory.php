@@ -10,13 +10,9 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\ServiceManager\Di\DiAbstractServiceFactory;
-use Zend\ServiceManager\Di\DiServiceInitializer;
+use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * @category   Zend
@@ -28,50 +24,24 @@ class ControllerLoaderFactory implements FactoryInterface
     /**
      * Create the controller loader service
      *
-     * Creates and returns a scoped service manager. The only controllers
-     * this manager will allow are those defined in the application
-     * configuration's "controllers" array. If a controller is matched, the
-     * scoped manager will attempt to load the controller, pulling it from
-     * a DI service if a matching service is not found. Finally, it will
-     * attempt to inject the controller plugin manager if the controller
-     * implements a setPluginManager() method.
+     * Creates and returns an instance of Controller\ControllerManager. The 
+     * only controllers this manager will allow are those defined in the 
+     * application configuration's "controllers" array. If a controller is 
+     * matched, the scoped manager will attempt to load the controller. 
+     * Finally, it will attempt to inject the controller plugin manager 
+     * if the controller implements a setPluginManager() method.
+     *
+     * This plugin manager is _not_ peered against DI, and as such, will
+     * not load unknown classes.
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ServiceManager
+     * @return ControllerManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (!$serviceLocator instanceof ServiceManager) {
-            return $serviceLocator;
-        }
-
-        $controllerLoader = $serviceLocator->createScopedServiceManager();
-
-        $configuration    = $serviceLocator->get('Config');
-        if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-            $di = $serviceLocator->get('Di');
-            $controllerLoader->addAbstractFactory(
-                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-            );
-            $controllerLoader->addInitializer(
-                new DiServiceInitializer($di, $serviceLocator)
-            );
-        }
-
-        $controllerLoader->addInitializer(function ($instance) use ($serviceLocator) {
-            if ($instance instanceof ServiceLocatorAwareInterface) {
-                $instance->setServiceLocator($serviceLocator->get('Zend\ServiceManager\ServiceLocatorInterface'));
-            }
-
-            if ($instance instanceof EventManagerAwareInterface) {
-                $instance->setEventManager($serviceLocator->get('EventManager'));
-            }
-
-            if (method_exists($instance, 'setPluginManager')) {
-                $instance->setPluginManager($serviceLocator->get('ControllerPluginBroker'));
-            }
-        });
-
+        $controllerLoader = new ControllerManager();
+        $controllerLoader->setServiceLocator($serviceLocator);
+        $controllerLoader->addPeeringServiceManager($serviceLocator);
         return $controllerLoader;
     }
 }

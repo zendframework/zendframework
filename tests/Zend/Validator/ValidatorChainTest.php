@@ -42,16 +42,16 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->validator = new ValidatorChain();
     }
 
-	public function populateValidatorChain()
-	{
-		$this->validator->addValidator(new NotEmpty());
-		$this->validator->addValidator(new Between());
-	}
+    public function populateValidatorChain()
+    {
+        $this->validator->addValidator(new NotEmpty());
+        $this->validator->addValidator(new Between());
+    }
 
-	public function testValidatorChainIsEmptyByDefault()
-	{
-		$this->assertEquals(0, count($this->validator->getValidators()));
-	}
+    public function testValidatorChainIsEmptyByDefault()
+    {
+        $this->assertEquals(0, count($this->validator->getValidators()));
+    }
 
     /**
      * Ensures expected results from empty validator chain
@@ -158,11 +158,11 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('isEmpty', $messages);
     }
 
-	public function testCountGivesCountOfAttachedValidators()
-	{
-		$this->populateValidatorChain();
-		$this->assertEquals(2, count($this->validator->getValidators()));
-	}
+    public function testCountGivesCountOfAttachedValidators()
+    {
+        $this->populateValidatorChain();
+        $this->assertEquals(2, count($this->validator->getValidators()));
+    }
 
     /**
      * Handle file not found errors

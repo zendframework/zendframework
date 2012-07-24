@@ -313,10 +313,6 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
                 ),
                 'suffix' => 'php'
             ),
-            'filterPrefixPath' => array(
-                'Zend\\View\\Filter' => 'Zend/View/Filter/',
-                'Foo\\Filter'        => 'foo/filters/'
-            ),
         );
         return $options;
     }

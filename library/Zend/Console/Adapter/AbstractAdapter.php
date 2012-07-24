@@ -150,24 +150,22 @@ abstract class AbstractAdapter implements AdapterInterface
         /**
          * Validate coordinates
          */
-        if (
-            $x1 < 0 ||
-            $y1 < 0 ||
-            $x2 < $x1 ||
-            $y2 < $y1
-        ) {
+        if ($x1 < 0 
+            || $y1 < 0
+            || $x2 < $x1
+            || $y2 < $y1) {
+
             throw new BadMethodCallException('Supplied X,Y coordinates are invalid.');
         }
 
         /**
          * Determine charset and dimensions
          */
-        /** @var $charset \Zend\Console\Charset\Ascii */
-        $charset = $this->getCharset();
-        $width = $x2 - $x1 + 1;
-        $height = $y2 - $y1 + 1;
+        $charset    = $this->getCharset();
+        $width      = $x2 - $x1 + 1;
+        $height     = $y2 - $y1 + 1;
 
-        if($width <= 2){
+        if($width <= 2) {
             $lineStyle = static::LINE_NONE;
         }
 
@@ -182,16 +180,16 @@ abstract class AbstractAdapter implements AdapterInterface
          */
         if($lineStyle !== static::LINE_NONE) {
             switch ($lineStyle) {
-                case static::LINE_SINGLE;
+                case static::LINE_SINGLE:
                     $lineChar = $charset::LINE_SINGLE_EW;
                     break;
 
-                case static::LINE_DOUBLE;
+                case static::LINE_DOUBLE:
                     $lineChar = $charset::LINE_DOUBLE_EW;
                     break;
 
+                case static::LINE_BLOCK:
                 default:
-                case static::LINE_BLOCK;
                     $lineChar = $charset::LINE_BLOCK_EW;
                     break;
             }
@@ -205,28 +203,28 @@ abstract class AbstractAdapter implements AdapterInterface
         /**
          * Draw vertical lines and fill
          */
-        if (
-            is_numeric( $fillStyle ) &&
-            $fillStyle !== static::FILL_NONE
-        ) {
+        if (is_numeric( $fillStyle )
+            && $fillStyle !== static::FILL_NONE) {
+
             switch ($fillStyle) {
-                case static::FILL_SHADE_LIGHT;
+                case static::FILL_SHADE_LIGHT:
                     $fillChar = $charset::SHADE_LIGHT;
                     break;
-                case static::FILL_SHADE_MEDIUM;
+                case static::FILL_SHADE_MEDIUM:
                     $fillChar = $charset::SHADE_MEDIUM;
                     break;
-                case static::FILL_SHADE_DARK;
+                case static::FILL_SHADE_DARK:
                     $fillChar = $charset::SHADE_DARK;
                     break;
-                case static::FILL_SHADE_LIGHT;
+                case static::FILL_SHADE_LIGHT:
                     $fillChar = $charset::SHADE_LIGHT;
                     break;
-                case static::FILL_BLOCK;
+                case static::FILL_BLOCK:
                 default:
                     $fillChar = $charset::BLOCK;
                     break;
             }
+
         } elseif ($fillStyle) {
             $fillChar = $this->stringTrim( $fillStyle, 1 );
         } else {
@@ -246,8 +244,8 @@ abstract class AbstractAdapter implements AdapterInterface
                 case static::LINE_BLOCK:
                     $lineChar = $charset::LINE_BLOCK_NS;
                     break;
-                default:
                 case static::LINE_SINGLE:
+                default:
                     $lineChar = $charset::LINE_SINGLE_NS;
                     break;
             }
@@ -264,9 +262,13 @@ abstract class AbstractAdapter implements AdapterInterface
         /**
          * Draw corners
          */
-        if($lineStyle !== static::LINE_NONE){
-            if($color !== null)     $this->setColor($color);
-            if($bgColor !== null)   $this->setBgColor($bgColor);
+        if($lineStyle !== static::LINE_NONE) {
+            if($color !== null) {
+                $this->setColor($color);
+            }
+            if($bgColor !== null) {
+                $this->setBgColor($bgColor);
+            }
             if ($lineStyle === static::LINE_SINGLE) {
                 $this->writeAt( $charset::LINE_SINGLE_NW, $x1, $y1 );
                 $this->writeAt( $charset::LINE_SINGLE_NE, $x2, $y1 );
@@ -309,9 +311,12 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function writeTextBlock(
         $text,
-        $width, $height = null, $x = 0, $y = 0,
-        $color = null, $bgColor = null
-    )
+        $width, 
+        $height = null, 
+        $x = 0, 
+        $y = 0,
+        $color = null, 
+        $bgColor = null)
     {
 
     }
@@ -392,17 +397,26 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param int   $x
      * @param int   $y
      */
-    public function setPos($x, $y){}
+    public function setPos($x, $y)
+    {
+
+    }
 
     /**
      * Show console cursor
      */
-    public function showCursor(){}
+    public function showCursor()
+    {
+
+    }
 
     /**
      * Hide console cursor
      */
-    public function hideCursor(){}
+    public function hideCursor()
+    {
+
+    }
 
     /**
      * Return current console window title.
@@ -534,19 +548,19 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     protected function getStringWidth($string)
     {
+        $width = strlen($string);
+
         if ($this->isUtf8()) {
             if (static::$hasMBString === null) {
                 static::$hasMBString = extension_loaded( 'mbstring' );
             }
 
-            if (static::$hasMBString) {
-                return mb_strlen( $string, 'UTF-8' );
-            } else {
-                return strlen( utf8_decode( $string ) );
-            }
-        } else {
-            return strlen( $string );
+            $width = (static::$hasMBString)
+                        ? mb_strlen($string, 'UTF-8' )
+                        : strlen(utf8_decode($string));
         }
+
+        return $width;
     }
 
     protected function stringTrim($string, $length)
@@ -572,7 +586,8 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param int $maxLength        Maximum response length
      * @return string
      */
-    public function readLine($maxLength = 2048){
+    public function readLine($maxLength = 2048)
+    {
         $f = fopen('php://stdin','r');
         $line = stream_get_line($f,2048,"\n");
         fclose($f);
@@ -585,11 +600,12 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param string|null   $mask   A list of allowed chars
      * @return string
      */
-    public function readChar($mask = null){
+    public function readChar($mask = null)
+    {
         $f = fopen('php://stdin','r');
-        do{
+        do {
             $char = fread($f,1);
-        }while($mask === null || stristr($mask,$char));
+        } while($mask === null || stristr($mask,$char));
         fclose($f);
         return $char;
     }

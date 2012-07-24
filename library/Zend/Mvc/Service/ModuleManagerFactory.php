@@ -34,7 +34,6 @@ class ModuleManagerFactory implements FactoryInterface
         'invokables' => array(
             'DispatchListener' => 'Zend\Mvc\DispatchListener',
             'RouteListener'    => 'Zend\Mvc\RouteListener',
-            'ConsoleRouter'    => 'Zend\Mvc\Service\RouterFactory',
         ),
         'factories' => array(
             'Application'             => 'Zend\Mvc\Service\ApplicationFactory',

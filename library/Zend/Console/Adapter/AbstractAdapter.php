@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Console
+ */
+
 namespace Zend\Console\Adapter;
 
 use Zend\Console\AdapterInterface;
@@ -150,7 +159,7 @@ abstract class AbstractAdapter implements AdapterInterface
         /**
          * Validate coordinates
          */
-        if ($x1 < 0 
+        if ($x1 < 0
             || $y1 < 0
             || $x2 < $x1
             || $y2 < $y1) {
@@ -311,11 +320,11 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function writeTextBlock(
         $text,
-        $width, 
-        $height = null, 
-        $x = 0, 
+        $width,
+        $height = null,
+        $x = 0,
         $y = 0,
-        $color = null, 
+        $color = null,
         $bgColor = null)
     {
 

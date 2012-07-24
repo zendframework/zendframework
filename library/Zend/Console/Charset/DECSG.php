@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Console
+ */
+
 namespace Zend\Console\Charset;
 
 use Zend\Console\CharsetInterface;
@@ -25,7 +34,7 @@ class DECSG implements CharsetInterface{
     const LINE_SINGLE_SE    = "\x6a";
     const LINE_SINGLE_SW    = "\x6d";
     const LINE_SINGLE_CROSS = "\x6e";
-    
+
     const LINE_DOUBLE_EW    = "\x73";
     const LINE_DOUBLE_NS    = "\x78";
     const LINE_DOUBLE_NW    = "\x6c";
@@ -33,7 +42,7 @@ class DECSG implements CharsetInterface{
     const LINE_DOUBLE_SE    = "\x6a";
     const LINE_DOUBLE_SW    = "\x6d";
     const LINE_DOUBLE_CROSS = "\x6e";
-    
+
     const LINE_BLOCK_EW    = "\x61";
     const LINE_BLOCK_NS    = "\x61";
     const LINE_BLOCK_NW    = "\x61";
@@ -41,5 +50,5 @@ class DECSG implements CharsetInterface{
     const LINE_BLOCK_SE    = "\x61";
     const LINE_BLOCK_SW    = "\x61";
     const LINE_BLOCK_CROSS = "\x61";
-    
+
 }

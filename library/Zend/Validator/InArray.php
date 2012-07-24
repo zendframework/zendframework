@@ -21,6 +21,26 @@ class InArray extends AbstractValidator
 {
     const NOT_IN_ARRAY = 'notInArray';
 
+    // Type of Strict check
+    /**
+     * standard in_array strict checking value and type
+     */
+    const COMPARE_STRICT = 1;
+
+    /**
+     * Non strict check but prevents "asdf" == 0 returning TRUE causing false/positive.
+     * This is the most secure option for non-strict checks and replaces strict = false
+     * This will only be effective when the input is a string
+     */
+    const COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY = 0;
+
+    /**
+     * Standard non-strict check where "asdf" == 0 returns TRUE
+     * This will be wanted when comparing "0" against int 0
+     */
+    const COMPARE_NOT_STRICT = -1;
+
+
     /**
      * @var array
      */
@@ -36,11 +56,14 @@ class InArray extends AbstractValidator
     protected $haystack;
 
     /**
-     * Whether a strict in_array() invocation is used
+     * Type of strict check to be used. Due to "foo" == 0 === TRUE with in_array when strict = false,
+     * an option has been added to prevent this. When $strict = 0/false, the most
+     * secure non-strict check is implemented. if $strict = -1, the default in_array non-strict
+     * behaviour is used
      *
-     * @var boolean
+     * @var int
      */
-    protected $strict = false;
+    protected $strict = self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY;
 
     /**
      * Whether a recursive search should be done
@@ -78,22 +101,41 @@ class InArray extends AbstractValidator
     /**
      * Returns the strict option
      *
-     * @return boolean
+     * @return boolean|int
      */
     public function getStrict()
     {
+        // To keep BC with new strict modes
+        if ($this->strict == self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY
+            || $this->strict == self::COMPARE_STRICT
+        ) {
+            return (bool) $this->strict;
+        }
         return $this->strict;
     }
 
     /**
-     * Sets the strict option
+     * Sets the strict option mode
+     * InArray::CHECK_STRICT | InArray::CHECK_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY | InArray::CHECK_NOT_STRICT
      *
-     * @param  boolean $strict
+     * @param  int $strict
      * @return InArray Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
      */
     public function setStrict($strict)
     {
-        $this->strict = (boolean) $strict;
+        $checkTypes = array(
+            self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY,    // 0
+            self::COMPARE_STRICT,                                             // 1
+            self::COMPARE_NOT_STRICT                                          // -1
+        );
+
+        // validate strict value
+        if (!in_array($strict, $checkTypes)){
+            throw new Exception\InvalidArgumentException('Strict option must be one of the COMPARE_ constants');
+        }
+
+        $this->strict = $strict;
         return $this;
     }
 
@@ -123,33 +165,70 @@ class InArray extends AbstractValidator
      * Returns true if and only if $value is contained in the haystack option. If the strict
      * option is true, then the type of $value is also checked.
      *
-     * @param  mixed $value
-     * @throws Exception\RuntimeException If 0 is present in the haystack and strict mode is disabled.
+     * @param mixed $value
      * See {@link http://php.net/manual/function.in-array.php#104501}
      * @return boolean
      */
     public function isValid($value)
     {
-        if (!$this->strict && in_array(0, $this->getHaystack(), true)) {
-            // Strings are treated as 0 integer by PHP
-            // ZF2-337 http://php.net/manual/function.in-array.php#104501
-            throw new Exception\RuntimeException('Comparisons with 0 are only possible in strict mode');
+        // we create a copy of the haystack in case we need to modify it
+        $haystack = $this->getHaystack();
+
+        // if the input is a string or float, and vulnerability protection is on
+        // we type cast the input to a string
+        if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
+            && (is_int($value) || is_float($value))) {
+            $value =(string) $value;
         }
 
         $this->setValue($value);
+
         if ($this->getRecursive()) {
-            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($this->getHaystack()));
+            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($haystack));
             foreach ($iterator as $element) {
-                if ($this->strict) {
+                if (self::COMPARE_STRICT == $this->strict) {
+
                     if ($element === $value) {
                         return true;
                     }
-                } elseif ($element == $value) {
-                    return true;
+
+                } else{
+
+                    // add protection to prevent string to int vuln's
+                    $el = $element;
+                    if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
+                        && is_string($value) && (is_int($el) || is_float($el))
+                    ) {
+                        $el = (string)$el;
+                    }
+
+                    if ($el == $value) {
+                        return true;
+                    }
+
                 }
             }
         } else {
-            if (in_array($value, $this->getHaystack(), $this->strict)) {
+
+            /**
+             * If the check is not strict, then, to prevent "asdf" being converted to 0
+             * and returning a false positive if 0 is in haystack, we type cast
+             * the haystack to strings. To prevent "56asdf" == 56 === TRUE we also
+             * type cast values like 56 to strings as well.
+             *
+             * This occurs only if the input is a string and a haystack member is an int
+             */
+            if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
+                && is_string($value)
+            ) {
+                foreach ($haystack as &$h) {
+                    if (is_int($h) || is_float($h)) {
+                        $h = (string)$h;
+                    }
+                }
+            }
+
+            if (in_array($value, $haystack, $this->strict == self::COMPARE_STRICT ? true : false)) {
                 return true;
             }
         }

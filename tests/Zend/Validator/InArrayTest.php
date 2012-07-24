@@ -101,35 +101,216 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A'),
+                 'haystack' => array('test', 0, 'A', 0.0),
             )
         );
-        $validator->setStrict(true);
+
+        // test non-strict with vulnerability prevention (default choice)
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->getStrict());
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertTrue($validator->getStrict());
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertEquals(InArray::COMPARE_NOT_STRICT,$validator->getStrict());
+    }
+
+    public function testNonStrictSafeComparisons()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
+            )
+        );
+
+        $this->assertFalse($validator->getStrict());
+        $this->assertFalse($validator->isValid('b'));
+        $this->assertFalse($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertTrue($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
+        $this->assertTrue($validator->isValid(0));
+    }
+
+    public function testStrictComparisons()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
+            )
+        );
+
+        // bog standard strict compare
+        $validator->setStrict(InArray::COMPARE_STRICT);
+
         $this->assertTrue($validator->getStrict());
         $this->assertFalse($validator->isValid('b'));
         $this->assertFalse($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertFalse($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 
-    /**
-     * @group ZF2-337
-     */
-    public function testNotSetStrictModeWith0InTheHaystack()
+    public function testNonStrictComparisons()
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A'),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
-        $this->assertFalse($validator->getStrict());
 
-        $this->setExpectedException(
-            'Zend\Validator\Exception\RuntimeException',
-            'Comparisons with 0 are only possible in strict mode'
+        // non-numeric strings converted to 0
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+
+        $this->assertEquals(InArray::COMPARE_NOT_STRICT, $validator->getStrict());
+        $this->assertTrue($validator->isValid('b'));
+        $this->assertTrue($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertTrue($validator->isValid('0'));
+        $this->assertTrue($validator->isValid('1a'));
+        $this->assertTrue($validator->isValid(0));
+    }
+
+    public function testNonStrictSafeComparisonsRecurisve()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
+                 )
+            )
         );
+
+        $validator->setRecursive(true);
+
+        $this->assertFalse($validator->getStrict());
         $this->assertFalse($validator->isValid('b'));
+        $this->assertTrue($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertTrue($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
+        $this->assertTrue($validator->isValid(0));
+    }
+
+    public function testStrictComparisonsRecursive()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
+                 )
+            )
+        );
+
+        // bog standard strict compare
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $validator->setRecursive(true);
+
+        $this->assertTrue($validator->getStrict());
+        $this->assertFalse($validator->isValid('b'));
+        $this->assertTrue($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertFalse($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
+        $this->assertTrue($validator->isValid(0));
+    }
+
+    public function testNonStrictComparisonsRecursive()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
+                 )
+            )
+        );
+
+        // non-numeric strings converted to 0
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $validator->setRecursive(true);
+
+        $this->assertEquals(InArray::COMPARE_NOT_STRICT, $validator->getStrict());
+        $this->assertTrue($validator->isValid('b'));
+        $this->assertTrue($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertTrue($validator->isValid('0'));
+        $this->assertTrue($validator->isValid('1a'));
+        $this->assertTrue($validator->isValid(0));
+    }
+
+    public function testIntegerInputAndStringInHaystack(){
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 1, 2),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid(0));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid(0));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid(0));
+    }
+
+    public function testFloatInputAndStringInHaystack(){
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 1, 2),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid(0.0));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid(0.0));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid(0.0));
+    }
+
+    public function testNumberStringInputAgainstNumberInHaystack()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(1, 2),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid('1asdf'));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid('1asdf'));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid('1asdf'));
+    }
+
+    public function testFloatStringInputAgainstNumberInHaystack()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(1.5, 2.4),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid('1.5asdf'));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid('1.5asdf'));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid('1.5asdf'));
     }
 
     public function testSettingStrictViaInitiation()

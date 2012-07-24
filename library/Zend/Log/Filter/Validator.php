@@ -12,6 +12,8 @@ namespace Zend\Log\Filter;
 
 use Zend\Log\Exception;
 use Zend\Validator\ValidatorInterface as ZendValidator;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -30,11 +32,23 @@ class Validator implements FilterInterface
     /**
      * Filter out any log messages not matching the validator
      *
-     * @param ZendValidator $validator
+     * @param  ZendValidator|array|Traversable $validator
      * @return Validator
      */
-    public function __construct(ZendValidator $validator)
+    public function __construct($validator)
     {
+        if ($validator instanceof Traversable) {
+            $validator = ArrayUtils::iteratorToArray($validator);
+        }
+        if (is_array($validator)) {
+            $validator = isset($validator['validator']) ? $validator['validator'] : null;
+        }
+        if (!$validator instanceof ZendValidator) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Parameter of type %s is invalid; must implements Zend\Validator\ValidatorInterface',
+                (is_object($validator) ? get_class($validator) : gettype($validator))
+            ));
+        }
         $this->validator = $validator;
     }
 

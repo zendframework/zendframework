@@ -59,7 +59,7 @@ class Logger implements LoggerInterface
         self::INFO   => 'INFO',
         self::DEBUG  => 'DEBUG',
     );
-
+   
     /**
      * Writers
      *
@@ -141,10 +141,10 @@ class Logger implements LoggerInterface
      *
      * @return WriterPluginManager
      */
-    public function getPluginManager()
+    public function getWriterPluginManager()
     {
         if (null === $this->writerPlugins) {
-            $this->setPluginManager(new WriterPluginManager());
+            $this->setWriterPluginManager(new WriterPluginManager());
         }
         return $this->writerPlugins;
     }
@@ -152,11 +152,11 @@ class Logger implements LoggerInterface
     /**
      * Set writer plugin manager
      *
-     * @param string|WriterPluginManager $plugins
+     * @param  string|WriterPluginManager $plugins
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
-    public function setPluginManager($plugins)
+    public function setWriterPluginManager($plugins)
     {
         if (is_string($plugins)) {
             $plugins = new $plugins;
@@ -180,9 +180,9 @@ class Logger implements LoggerInterface
      * @param array|null $options
      * @return Writer
      */
-    public function plugin($name, array $options = null)
+    public function writerPlugin($name, array $options = null)
     {
-        return $this->getPluginManager()->get($name, $options);
+        return $this->getWriterPluginManager()->get($name, $options);
     }
 
     /**
@@ -193,10 +193,10 @@ class Logger implements LoggerInterface
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
-    public function addWriter($writer, $priority=1)
+    public function addWriter($writer, $priority = 1, array $options = null)
     {
         if (is_string($writer)) {
-            $writer = $this->plugin($writer);
+            $writer = $this->writerPlugin($writer, $options);
         } elseif (!$writer instanceof Writer\WriterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Writer must implement Zend\Log\Writer; received "%s"',
@@ -280,7 +280,7 @@ class Logger implements LoggerInterface
         if (is_array($message)) {
             $message = var_export($message, true);
         }
-
+        
         foreach ($this->writers->toArray() as $writer) {
             $writer->write(array(
                 'timestamp'    => $timestamp,

@@ -51,7 +51,9 @@ class Number extends Element implements InputProviderInterface
         }
 
         $validators = array();
-        $validators[] = new NumberValidator();
+        $validators[] = new NumberValidator(array(
+            'locale' => 'en_US', // HTML5 uses "100.01" format
+        ));
 
         $inclusive = true;
         if (!empty($this->attributes['inclusive'])) {

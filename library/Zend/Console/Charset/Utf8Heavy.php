@@ -14,6 +14,9 @@ namespace Zend\Console\Charset;
  * UTF-8 box drawing (modified to use heavy single lines)
  *
  * @link http://en.wikipedia.org/wiki/Box-drawing_characters
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Charset
  */
 class Utf8Heavy extends Utf8 {
 

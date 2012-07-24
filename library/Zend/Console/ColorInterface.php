@@ -10,7 +10,10 @@
 
 namespace Zend\Console;
 
-
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ */
 interface ColorInterface {
     const NORMAL = 0;
     const RESET = 0;

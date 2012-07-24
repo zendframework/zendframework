@@ -12,6 +12,11 @@ namespace Zend\Console\Prompt;
 
 use Zend\Console\PromptInterface;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Prompt
+ */
 class Confirm extends Char implements PromptInterface
 {
     /**

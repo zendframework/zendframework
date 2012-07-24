@@ -16,6 +16,8 @@ use Zend\Console\Exception\InvalidArgumentException;
  * An static, utility class for interacting with Console enviromen.
  * Declared abstract to prevent from instantiating.
  *
+ * @category   Zend
+ * @package    Zend_Console
  */
 abstract class Console
 {

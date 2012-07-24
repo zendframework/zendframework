@@ -16,6 +16,9 @@ use Zend\Console\CharsetInterface;
  * DEC Special Graphics (VT100 line drawing) character set
  *
  * @link http://vt100.net/docs/vt220-rm/table2-4.html
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Charset
  */
 class DECSG implements CharsetInterface{
 

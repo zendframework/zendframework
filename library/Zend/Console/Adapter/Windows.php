@@ -16,6 +16,11 @@ use Zend\Console\CharsetInterface;
 use Zend\Console\Exception\RuntimeException;
 use Zend\Console;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Adapter
+ */
 class Windows extends Virtual implements AdapterInterface
 {
     protected static $hasMBString;

@@ -14,6 +14,11 @@ use Zend\Console\PromptInterface;
 use Zend\Console\Console;
 use Zend\Console\AdapterInterface as ConsoleAdapter;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Prompt
+ */
 abstract class AbstractPrompt implements PromptInterface
 {
     /**

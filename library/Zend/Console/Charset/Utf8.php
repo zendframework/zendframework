@@ -16,6 +16,9 @@ use Zend\Console\CharsetInterface;
  * UTF-8 box drawing
  *
  * @link http://en.wikipedia.org/wiki/Box-drawing_characters
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Charset
  */
 class Utf8 implements CharsetInterface{
     const ACTIVATE          = "";

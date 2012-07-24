@@ -12,6 +12,10 @@ namespace Zend\Console;
 
 use Zend\Console\AdapterInterface as ConsoleAdapter;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ */
 interface PromptInterface {
 
     /**

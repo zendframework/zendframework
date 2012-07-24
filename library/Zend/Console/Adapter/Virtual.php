@@ -17,6 +17,10 @@ use Zend\Console;
 
 /**
  * Virtual buffer adapter
+ *
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Adapter
  */
 class Virtual extends AbstractAdapter implements AdapterInterface
 {

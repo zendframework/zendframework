@@ -15,6 +15,10 @@ use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ParametersInterface;
 use Zend\Stdlib\RequestInterface;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ */
 class Request extends Message implements RequestInterface
 {
     /**

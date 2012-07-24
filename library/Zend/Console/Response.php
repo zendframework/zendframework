@@ -13,6 +13,10 @@ namespace Zend\Console;
 use Zend\Stdlib\Message;
 use Zend\Stdlib\ResponseInterface;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ */
 class Response extends Message implements ResponseInterface
 {
     protected $contentSent = false;

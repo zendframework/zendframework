@@ -14,6 +14,10 @@ use Zend\Console\CharsetInterface;
 
 /**
  * Basic (low) ASCII line drawing characters.
+ *
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Charset
  */
 class Ascii implements CharsetInterface{
 

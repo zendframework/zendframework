@@ -13,6 +13,11 @@ namespace Zend\Console\Prompt;
 use Zend\Console\PromptInterface;
 use Zend\Console\Exception\BadMethodCallException;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Prompt
+ */
 class Select extends Char implements PromptInterface
 {
     /**

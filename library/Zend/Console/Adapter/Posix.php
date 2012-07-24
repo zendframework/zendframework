@@ -18,6 +18,9 @@ use Zend\Console;
 
 /**
  * @link http://en.wikipedia.org/wiki/ANSI_escape_code
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Adapter
  */
 class Posix extends AbstractAdapter implements AdapterInterface
 {

@@ -14,6 +14,7 @@ use Zend\Log\Logger;
 use Zend\Log\Writer\Mock as MockWriter;
 use Zend\Log\Filter\Mock as MockFilter;
 use Zend\Stdlib\SplPriorityQueue;
+use Zend\Validator\Digits as DigitsFilter;
 
 /**
  * @category   Zend
@@ -186,19 +187,30 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $writer->events[0]['message']);
     }
     
-    public function testAddFilterByNameWithParams()
+    /**
+     * provideTestFilters 
+     */
+    public function provideTestFilters() 
+    {
+        return array(
+            array('priority', array('priority' => Logger::INFO)),
+            array('regex', array( 'regex' => '/[0-9]+/' )),
+            array('validator', array('validator' => new DigitsFilter)),
+        );
+    }
+    
+    /**
+     * @dataProvider provideTestFilters 
+     */
+    public function testAddFilterByNameWithParams($filter, $options)
     {
         $writer = new MockWriter;
-        $writer->addFilter('regex', array('/[a-z]+/'));
+        $writer->addFilter($filter, $options);
         $this->logger->addWriter($writer);
         
-        $this->logger->log(Logger::INFO, 'test');
+        $this->logger->log(Logger::INFO, '123');
         $this->assertEquals(count($writer->events), 1);
-        $this->assertContains('test', $writer->events[0]['message']);
-        
-        $this->logger->log(Logger::INFO, '0123');
-        $this->assertEquals(count($writer->events), 1);
-        $this->assertContains('test', $writer->events[0]['message']);
+        $this->assertContains('123', $writer->events[0]['message']);
     }
     
     public static function provideAttributes()

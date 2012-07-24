@@ -55,7 +55,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     
     public function testAddRegexFilterWithParamsByName()
     {
-        $instance = $this->_writer->addFilter('regex', array('/mess/'));
+        $instance = $this->_writer->addFilter('regex', array( 'regex' => '/mess/' ));
         $this->assertTrue($instance instanceof ConcreteWriter);
     }
     

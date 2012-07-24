@@ -15,6 +15,8 @@ use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Mail\Message as MailMessage;
 use Zend\Mail\Transport;
 use Zend\Mail\Transport\Exception as TransportException;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class used for writing log messages to email via Zend\Mail.
@@ -73,23 +75,24 @@ class Mail extends AbstractWriter
     /**
      * Constructor
      *
-     * @param MailMessage|array $mail
-     * @param Transport\TransportInterface $transport Optional
+     * @param  MailMessage|array|Traversable $mail
+     * @param  Transport\TransportInterface $transport Optional
      * @return Mail
      */
     public function __construct($mail, Transport\TransportInterface $transport = null)
     {
+        if ($mail instanceof Traversable) {
+            $mail = ArrayUtils::iteratorToArray($mail);
+        }
         if (is_array($mail)) {
-            if (isset($mail[1])) {
-                if (!($mail[1] instanceof Transport\TransportInterface)) {
-                    throw new Exception\InvalidArgumentException(
-                          'Parameter of type %s is invalid; must be Zend\Mail\Transport\TransportInterface',
-                            (is_object($mail[1]) ? get_class($mail[1]) : gettype($mail[1]))  
-                    );
-                }
-                $transport = $mail[1];             
+            $transport = isset($mail['transport']) ? $mail['transport'] : null;
+            $mail      = isset($mail['mail']) ? $mail['mail'] : null;
+            if (!($transport instanceof Transport\TransportInterface)) {
+                throw new Exception\InvalidArgumentException(
+                    'Parameter of type %s is invalid; must be Zend\Mail\Transport\TransportInterface',
+                    (is_object($mail[1]) ? get_class($mail[1]) : gettype($mail[1]))  
+                );
             }
-            $mail = $mail[0];
         }
         if (!($mail instanceof MailMessage)) {
             throw new Exception\InvalidArgumentException(

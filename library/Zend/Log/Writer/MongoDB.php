@@ -15,6 +15,8 @@ use Mongo;
 use Zend\Log\Exception\InvalidArgumentException;
 use Zend\Log\Exception\RuntimeException;
 use Zend\Log\Formatter\FormatterInterface;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * MongoDB log writer.
@@ -42,7 +44,7 @@ class MongoDB extends AbstractWriter
     /**
      * Constructor
      *
-     * @param Mongo|array $mongo
+     * @param Mongo|array|Traversable $mongo
      * @param string $database
      * @param string $collection
      * @param array  $saveOptions
@@ -50,17 +52,24 @@ class MongoDB extends AbstractWriter
      */
     public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {
+        if ($mongo instanceof Traversable) {
+            $mongo = ArrayUtils::iteratorToArray($mongo);
+        }
         if (is_array($mongo)) {
-            if (isset($mongo[3]) && is_array($mongo[3])) {
-                $saveOptions = $mongo[3];
+            $saveOptions = isset($mongo['save_options']) ? $mongo['save_options'] : null;
+            $collection  = isset($mongo['collection']) ? $mongo['collection'] : null;
+            if (null === $collection) {
+                throw new Exception\InvalidArgumentException(
+                    'The collection parameter cannot be emtpy'
+                );
             }
-            if (isset($mongo[2])) {
-                $collection = $mongo[2];
+            $database = isset($mongo['database']) ? $mongo['database'] : null;
+            if (null === $database) {
+                throw new Exception\InvalidArgumentException(
+                    'The database parameter cannot be emtpy'
+                );
             }
-            if (isset($mongo[1])) {
-                $database = $mongo[1];
-            }
-            $mongo = $mongo[0];
+            $mongo = isset($mongo['mongo']) ? $mongo['mongo'] : null;
         }
         if (!($mongo instanceof Mongo)) {
             throw new Exception\InvalidArgumentException(

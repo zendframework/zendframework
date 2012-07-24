@@ -13,6 +13,8 @@ namespace Zend\Log\Writer;
 use Zend\Log\Exception;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Stdlib\ErrorHandler;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -31,19 +33,20 @@ class Stream extends AbstractWriter
     /**
      * Constructor
      *
-     * @param array|string|resource $streamOrUrl Stream or URL to open as a stream
-     * @param string|null $mode Mode, only applicable if a URL is given
+     * @param  string|resource|array|Traversable $streamOrUrl Stream or URL to open as a stream
+     * @param  string|null $mode Mode, only applicable if a URL is given
      * @return Stream
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
     public function __construct($streamOrUrl, $mode = null)
     {
-        if (is_array($streamOrUrl) && !isset($streamOrUrl['stream'])) {
-            if (isset($streamOrUrl[1])) {
-                $mode = $streamOrUrl[1];
-            }
-            $streamOrUrl = $streamOrUrl[0];
+        if ($streamOrUrl instanceof Traversable) {
+            $streamOrUrl = ArrayUtils::iteratorToArray($streamOrUrl);
+        }
+        if (is_array($streamOrUrl)) {
+            $mode        = isset($streamOrUrl['mode']) ? $streamOrUrl['mode'] : null;
+            $streamOrUrl = isset($streamOrUrl['stream']) ? $streamOrUrl['stream'] : null;
         }
         // Setting the default mode
         if (null === $mode) {
@@ -67,10 +70,6 @@ class Stream extends AbstractWriter
 
             $this->stream = $streamOrUrl;
         } else {
-            if (is_array($streamOrUrl) && isset($streamOrUrl['stream'])) {
-                $streamOrUrl = $streamOrUrl['stream'];
-            }
-
             if (! $this->stream = @fopen($streamOrUrl, $mode, false)) {
                 throw new Exception\RuntimeException(sprintf(
                     '"%s" cannot be opened with mode "%s"',

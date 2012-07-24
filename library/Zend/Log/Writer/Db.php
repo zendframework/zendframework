@@ -13,6 +13,8 @@ namespace Zend\Log\Writer;
 use Zend\Db\Adapter\Adapter;
 use Zend\Log\Exception;
 use Zend\Log\Formatter;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -54,7 +56,7 @@ class Db extends AbstractWriter
      *
      * We used the Adapter instead of Zend\Db for a performance reason.
      *
-     * @param Adapter|array $db
+     * @param Adapter|array|Traversable $db
      * @param string $tableName
      * @param array $columnMap
      * @param string $separator
@@ -63,17 +65,14 @@ class Db extends AbstractWriter
      */
     public function __construct($db, $tableName, array $columnMap = null, $separator = null)
     {
+        if ($db instanceof Traversable) {
+            $db = ArrayUtils::iteratorToArray($db);
+        }
         if (is_array($db)) {
-            if (isset($db[3])) {
-                $separator = $db[3];
-            }
-            if (isset($db[2]) && is_array($db[2])) {
-                $columnMap = $db[2];
-            }
-            if (isset($db[1])) {
-                $tableName = $db[1];
-            }
-            $db = $db[0];
+            $separator = isset($db['separator']) ? $db['separator'] : null;
+            $columnMap = isset($db['column']) ? $db['column'] : null;
+            $tableName = isset($db['table']) ? $db['table'] : null;
+            $db        = isset($db['db']) ? $db['db'] : null;
         }
         if ($db === null || !($db instanceof Adapter)) {
             throw new Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');

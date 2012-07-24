@@ -446,7 +446,6 @@ class Reader
             }
         }
 
-        $type = self::TYPE_ATOM_ANY;
         $xpath->registerNamespace('atom', self::NAMESPACE_ATOM_10);
 
         if ($xpath->query('//atom:feed')->length) {

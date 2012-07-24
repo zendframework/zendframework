@@ -38,8 +38,9 @@ class Deleted
     /**
      * Set the feed character encoding
      *
-     * @return string|null
+     * @param  $encoding
      * @throws Exception\InvalidArgumentException
+     * @return string|null
      */
     public function setEncoding($encoding)
     {

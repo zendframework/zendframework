@@ -41,7 +41,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return Zend_Feed_Writer_Entry
+     * @return \Zend\Feed\Writer\Entry
      */
     public function createEntry()
     {
@@ -54,10 +54,11 @@ class Feed extends AbstractFeed implements Iterator, Countable
     }
 
     /**
-     * Appends a Zend_Feed_Writer_Deleted object representing a new entry tombstone
+     * Appends a Zend\Feed\Writer\Deleted object representing a new entry tombstone
      * to the feed data container's internal group of entries.
      *
-     * @param Zend_Feed_Writer_Deleted $entry
+     * @param Deleted $deleted
+     * @return void
      */
     public function addTombstone(Deleted $deleted)
     {
@@ -69,7 +70,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return Zend_Feed_Writer_Deleted
+     * @return Deleted
      */
     public function createTombstone()
     {
@@ -82,10 +83,10 @@ class Feed extends AbstractFeed implements Iterator, Countable
     }
 
     /**
-     * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
+     * Appends a Zend\Feed\Writer\Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param Zend_Feed_Writer_Entry $entry
+     * @param Entry $entry
      */
     public function addEntry(Entry $entry)
     {
@@ -164,7 +165,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
     /**
      * Return the current entry
      *
-     * @return Zend_Feed_Reader_Entry_Interface
+     * @return Entry
      */
     public function current()
     {
@@ -174,7 +175,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
     /**
      * Return the current feed key
      *
-     * @return unknown
+     * @return mixed
      */
     public function key()
     {
@@ -214,9 +215,10 @@ class Feed extends AbstractFeed implements Iterator, Countable
     /**
      * Attempt to build and return the feed resulting from the data set
      *
-     * @param $type The feed type "rss" or "atom" to export as
-     * @return string
+     * @param  string  $type The feed type "rss" or "atom" to export as
+     * @param  bool    $ignoreExceptions
      * @throws Exception\InvalidArgumentException
+     * @return string
      */
     public function export($type, $ignoreExceptions = false)
     {

@@ -161,7 +161,7 @@ class MenuTest extends AbstractTest
     {
         $acl = $this->_getAcl();
         $this->_helper->setAcl($acl['acl']);
-        $this->_helper->setRole(new \Zend\Acl\Role\GenericRole('member'));
+        $this->_helper->setRole(new \Zend\Permissions\Acl\Role\GenericRole('member'));
 
         $expected = $this->_getExpected('menu/acl_role_interface.html');
         $this->assertEquals($expected, $this->_helper->render());

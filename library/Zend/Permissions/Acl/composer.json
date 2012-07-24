@@ -1,5 +1,5 @@
 {
-    "name": "zendframework/zend-acl",
+    "name": "zendframework/zend-permissions-acl",
     "description": "provides a lightweight and flexible access control list (ACL) implementation for privileges management",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -8,10 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Acl": ""
+            "Zend\\Permissions\\Acl": ""
         }
     },
-    "target-dir": "Zend/Acl",
+    "target-dir": "Zend/Permissions/Acl",
     "require": {
         "php": ">=5.3.3"
     }

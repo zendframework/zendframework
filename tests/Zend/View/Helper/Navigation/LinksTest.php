@@ -10,12 +10,12 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
+use Zend\Config;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation\Page\Uri as UriPage;
-use Zend\Config;
-use Zend\Acl;
-use Zend\Acl\Role;
-use Zend\Acl\Resource;
+use Zend\Permissions\Acl;
+use Zend\Permissions\Acl\Role;
+use Zend\Permissions\Acl\Resource;
 use Zend\View;
 use Zend\View\Helper\Navigation;
 

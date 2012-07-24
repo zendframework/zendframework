@@ -458,7 +458,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'label'    => 'hello'
         ));
 
-        $resource = new \Zend\Acl\Resource\GenericResource('bar');
+        $resource = new \Zend\Permissions\Acl\Resource\GenericResource('bar');
 
         $page->setResource($resource);
         $this->assertEquals($resource, $page->getResource());

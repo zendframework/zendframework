@@ -5,16 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Acl
+ * @package   Zend_Permissions
  */
 
-namespace Zend\Acl\Resource;
-
-use Zend\Acl\Resource\ResourceInterface;
+namespace Zend\Permissions\Acl\Resource;
 
 /**
  * @category   Zend
- * @package    Zend_Acl
+ * @package    Zend_Permissions
+ * @subpackage Acl
  */
 class GenericResource implements ResourceInterface
 {
@@ -36,7 +35,7 @@ class GenericResource implements ResourceInterface
     }
 
     /**
-     * Defined by Zend\Acl\Resource; returns the Resource identifier
+     * Defined by ResourceInterface; returns the Resource identifier
      *
      * @return string
      */
@@ -46,7 +45,7 @@ class GenericResource implements ResourceInterface
     }
 
     /**
-     * Defined by Zend\Acl\Resource; returns the Resource identifier
+     * Defined by ResourceInterface; returns the Resource identifier
      * Proxies to getResourceId()
      *
      * @return string

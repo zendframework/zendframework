@@ -32,22 +32,23 @@ class Windows extends Virtual implements AdapterInterface
      *
      * @return int
      */
-    public function getWidth(){
+    public function getWidth()
+    {
         static $width;
-        if($width > 0){
+        if ($width > 0) {
             return $width;
         }
 
         /**
          * Try to read console size from "mode" command
          */
-        if($this->probeResult === null){
+        if ($this->probeResult === null) {
             $this->runProbeCommand();
         }
 
-        if(count($this->probeResult) && (int)$this->probeResult[0]){
+        if (count($this->probeResult) && (int)$this->probeResult[0]) {
             $width = (int)$this->probeResult[0];
-        }else{
+        } else {
             $width = parent::getWidth();
         }
 
@@ -59,29 +60,31 @@ class Windows extends Virtual implements AdapterInterface
      *
      * @return false|int
      */
-    public function getHeight(){
+    public function getHeight()
+    {
         static $height;
-        if($height > 0){
+        if ($height > 0) {
             return $height;
         }
 
         /**
          * Try to read console size from "mode" command
          */
-        if($this->probeResult === null){
+        if ($this->probeResult === null) {
             $this->runProbeCommand();
         }
 
-        if(count($this->probeResult) && (int)$this->probeResult[1]){
+        if (count($this->probeResult) && (int)$this->probeResult[1]) {
             $height = (int)$this->probeResult[1];
-        }else{
+        } else {
             $height = parent::getheight();
         }
 
         return $height;
     }
 
-    protected function runProbeCommand(){
+    protected function runProbeCommand()
+    {
         /**
          * Run a Windows Powershell command that determines parameters of console window. The command is fed through
          * standard input (with echo) to prevent Powershell from creating a sub-thread and hanging PHP when run through
@@ -92,9 +95,9 @@ class Windows extends Virtual implements AdapterInterface
             $output,
             $return
         );
-        if($return || empty($output)){
+        if ($return || empty($output)) {
             $this->probeResult = '';
-        }else{
+        } else {
             $this->probeResult = $output;
         }
     }
@@ -104,19 +107,20 @@ class Windows extends Virtual implements AdapterInterface
      *
      * @return bool
      */
-    public function isUtf8(){
+    public function isUtf8()
+    {
         /**
          * Try to read code page info from "mode" command
          */
-        if($this->probeResult === null){
+        if ($this->probeResult === null) {
             $this->runProbeCommand();
         }
 
-        if(preg_match('/Code page\:\s+(\d+)/',$this->probeResult,$matches)){
+        if (preg_match('/Code page\:\s+(\d+)/',$this->probeResult,$matches)) {
             return (int)$matches[1] == 65001;
-        }else{
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -124,7 +128,8 @@ class Windows extends Virtual implements AdapterInterface
      * @param int   $x
      * @param int   $y
      */
-    public function setPos($x, $y){
+    public function setPos($x, $y)
+    {
 
     }
 
@@ -133,16 +138,17 @@ class Windows extends Virtual implements AdapterInterface
      *
      * @return string
      */
-    public function getTitle(){
+    public function getTitle()
+    {
         /**
          * Try to use powershell to retrieve console window title
          */
         exec('powershell -command "write $Host.UI.RawUI.WindowTitle"',$output,$result);
-        if($result || !$output){
+        if ($result || !$output) {
             return '';
-        }else{
-            return trim($output,"\r\n");
         }
+
+        return trim($output,"\r\n");
     }
 
     /**
@@ -150,7 +156,8 @@ class Windows extends Virtual implements AdapterInterface
      *
      * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(CharsetInterface $charset){
+    public function setCharset(CharsetInterface $charset)
+    {
         $this->charset = $charset;
     }
 
@@ -159,8 +166,9 @@ class Windows extends Virtual implements AdapterInterface
      *
      * @return \Zend\Console\CharsetInterface $charset
      */
-    public function getCharset(){
-        if($this->charset === null){
+    public function getCharset()
+    {
+        if ($this->charset === null) {
             $this->charset = $this->getDefaultCharset();
         }
 
@@ -170,11 +178,13 @@ class Windows extends Virtual implements AdapterInterface
     /**
      * @return \Zend\Console\Charset\AsciiExtended
      */
-    public function getDefaultCharset(){
+    public function getDefaultCharset()
+    {
         return new Charset\AsciiExtended;
     }
 
-    protected function switchToUtf8(){
+    protected function switchToUtf8()
+    {
         `mode con cp select=65001`;
     }
 
@@ -201,38 +211,38 @@ class Windows extends Virtual implements AdapterInterface
      * @param string|null   $mask   A list of allowed chars
      * @return string
      */
-    public function readChar($mask = null){
+    public function readChar($mask = null)
+    {
         /**
          * Decide if we can use `choice` tool
          */
         $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]*$/',$mask);
 
-        do{
-            if($useChoice){
+        do {
+            if ($useChoice) {
                 /**
                  * Use the `choice` tool available since windows 2000
                  */
                 system('choice /n /cs /c '.escapeshellarg($mask).' >NUL',$return);
-                if($return == 255 || $return < 1 || $return > strlen($mask)){
+                if ($return == 255 || $return < 1 || $return > strlen($mask)) {
                     throw new RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
-                }else{
+                } else {
                     /**
                      * Fetch the char from mask
                      */
                     $char = substr($mask,$return-1,1);
                 }
-            }else{
+            } else {
                 /**
                  * Use a fallback method
                  */
                 $char = $this->readLine(1);
-                if(!$char){
+                if (!$char) {
                     $char = "\n"; // user pressed [enter]
                 }
             }
-        }while(
-            ($mask !== null && !stristr($mask,$char))
-        );
+        } while (($mask !== null && !stristr($mask,$char)));
+
         return $char;
     }
 
@@ -242,10 +252,12 @@ class Windows extends Virtual implements AdapterInterface
      * @param int $maxLength        Maximum response length
      * @return string
      */
-    public function readLine($maxLength = 2048){
+    public function readLine($maxLength = 2048)
+    {
         $f = fopen('php://stdin','r');
         $line = trim(fread($f,$maxLength));
         fclose($f);
+        
         return $line;
     }
 

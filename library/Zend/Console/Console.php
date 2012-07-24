@@ -34,27 +34,28 @@ abstract class Console
      * @param null $forceAdapter       Console\Adapter class name (can be absolute namespace or relative to Adapter\)
      * @return \Zend\Console\Adapter
      */
-    static public function getInstance($forceAdapter = null, $forceCharset = null){
+    static public function getInstance($forceAdapter = null, $forceCharset = null)
+    {
         /**
          * Create instance
          */
-        if(static::$instance === null){
-            if($forceAdapter !== null){
+        if (static::$instance === null) {
+            if ($forceAdapter !== null) {
                 /**
                  * Use the supplied adapter class
                  */
-                if(substr($forceAdapter,0,1) == '\\'){
+                if (substr($forceAdapter,0,1) == '\\') {
                     $className = $forceAdapter;
-                }elseif(stristr($forceAdapter,'\\')){
+                } elseif (stristr($forceAdapter,'\\')) {
                     $className = __NAMESPACE__.'\\'.ltrim($forceAdapter,'\\');
-                }else{
+                } else {
                     $className = __NAMESPACE__.'\\Adapter\\'.$forceAdapter;
                 }
 
-                if(!class_exists($className)){
+                if (!class_exists($className)) {
                     throw new InvalidArgumentException('Cannot find Console adapter class '.$className);
                 }
-            }else{
+            } else {
                 /**
                  * Try to detect best instance for console
                  */
@@ -69,16 +70,16 @@ abstract class Console
             /**
              * Try to use the supplied charset class
              */
-            if($forceCharset !== null){
-                if(substr($forceCharset,0,1) == '\\'){
+            if ($forceCharset !== null){
+                if (substr($forceCharset,0,1) == '\\') {
                     $className = $forceCharset;
-                }elseif(stristr($forceAdapter,'\\')){
+                } elseif (stristr($forceAdapter,'\\')) {
                     $className = __NAMESPACE__.'\\'.ltrim($forceCharset,'\\');
-                }else{
+                } else {
                     $className = __NAMESPACE__.'\\Charset\\'.$forceCharset;
                 }
 
-                if(!class_exists($className)){
+                if (!class_exists($className)) {
                     throw new InvalidArgumentException('Cannot find Charset class '.$className);
                 }
 
@@ -98,7 +99,8 @@ abstract class Console
      * @static
      * @return bool
      */
-    static public function isWindows(){
+    static public function isWindows()
+    {
         return class_exists('COM',false);
     }
 
@@ -108,7 +110,8 @@ abstract class Console
      * @static
      * @return bool
      */
-    static public function isAnsicon(){
+    static public function isAnsicon()
+    {
         return getenv('ANSICON') !== false;
     }
 
@@ -118,7 +121,8 @@ abstract class Console
      * @static
      * @return bool
      */
-    static public function isConsole(){
+    static public function isConsole()
+    {
         return PHP_SAPI == 'cli';
     }
 
@@ -126,17 +130,18 @@ abstract class Console
      * @static
      * @return \Zend\Console\Adapter|null
      */
-    static public function detectBestAdapter(){
+    static public function detectBestAdapter()
+    {
         // Check if we are in a console environment
-        if(!static::isConsole()){
+        if (!static::isConsole()) {
             return null;
         }
 
         // Check if we're on windows
-        if(static::isWindows()){
-            if(static::isAnsicon()){
+        if (static::isWindows()) {
+            if (static::isAnsicon()) {
                 $className = __NAMESPACE__.'\Adapter\WindowsAnsicon';
-            }else{
+            } else {
                 $className = __NAMESPACE__.'\Adapter\Windows';
             }
 
@@ -156,7 +161,8 @@ abstract class Console
      * @param $arguments
      * @return mixed
      */
-    public static function __callStatic($funcName, $arguments){
+    public static function __callStatic($funcName, $arguments)
+    {
         $instance = static::getInstance();
         return call_user_func_array(array($instance,$funcName),$arguments);
     }

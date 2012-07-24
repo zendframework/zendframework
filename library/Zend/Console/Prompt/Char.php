@@ -54,29 +54,33 @@ class Char extends AbstractPrompt implements PromptInterface
      * @param bool    $echo           Display the selection after user presses key
      */
     public function __construct(
-        $promptText = 'Please hit a key', $allowedChars = 'abc', $ignoreCase = true, $allowEmpty = false, $echo = true
-    ){
-        if($promptText !== null){
+        $promptText = 'Please hit a key', 
+        $allowedChars = 'abc', 
+        $ignoreCase = true, 
+        $allowEmpty = false, 
+        $echo = true)
+    {
+        if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
 
-        if($allowEmpty !== null){
+        if ($allowEmpty !== null) {
             $this->setAllowEmpty($allowEmpty);
         }
 
-        if($ignoreCase !== null){
+        if ($ignoreCase !== null) {
             $this->setIgnoreCase($ignoreCase);
         }
 
-        if($allowedChars !== null){
-            if($this->ignoreCase){
+        if ($allowedChars !== null) {
+            if ($this->ignoreCase) {
                 $this->setAllowedChars(strtolower($allowedChars));
-            }else{
+            } else {
                 $this->setAllowedChars($allowedChars);
             }
         }
 
-        if($echo !== null){
+        if ($echo !== null) {
             $this->setEcho($echo);
         }
     }
@@ -94,7 +98,7 @@ class Char extends AbstractPrompt implements PromptInterface
         /**
          * Normalize the mask if case is irrelevant
          */
-        if($this->ignoreCase){
+        if ($this->ignoreCase) {
             $mask = strtolower($mask);   // lowercase all
             $mask .= strtoupper($mask);  // uppercase and append
             $mask = str_split($mask);    // convert to array
@@ -102,7 +106,7 @@ class Char extends AbstractPrompt implements PromptInterface
             $mask = implode("",$mask);   // convert back to string
         }
 
-        do{
+        do {
             /**
              * Read char from console
              */
@@ -111,22 +115,22 @@ class Char extends AbstractPrompt implements PromptInterface
             /**
              * Lowercase the response if case is irrelevant
              */
-            if($this->ignoreCase){
+            if ($this->ignoreCase) {
                 $char = strtolower($char);
             }
 
             /**
              * Check if it is an allowed char
              */
-            if(stristr($this->allowedChars,$char)){
-                if($this->echo){
+            if (stristr($this->allowedChars,$char)) {
+                if ($this->echo) {
                     echo trim($char)."\n";
-                }else{
+                } else {
                     echo "\n";
                 }
                 break;
             }
-        }while(true);
+        } while(true);
 
         return $this->lastResponse = $char;
     }

@@ -43,7 +43,7 @@ class Request extends Message implements RequestInterface
      */
     public function __construct(array $args = null, array $env = null)
     {
-        if($args === null){
+        if ($args === null){
             if (!isset($_SERVER['argv'])) {
                 $errorDescription = (ini_get('register_argc_argv') == false)
                     ? "Cannot create Console\\Request because PHP ini option 'register_argc_argv' is set Off"
@@ -53,14 +53,14 @@ class Request extends Message implements RequestInterface
             $args = $_SERVER['argv'];
         }
 
-        if($env === null){
+        if ($env === null) {
             $env = $_ENV;
         }
 
         /**
          * Extract first param assuming it is the script name
          */
-        if(count($args) > 0){
+        if (count($args) > 0) {
             $this->setScriptName(array_shift($args));
         }
 

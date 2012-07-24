@@ -49,25 +49,29 @@ class Number extends Line implements PromptInterface
      * @param integer   $max            Maximum value (inclusive)
      */
     public function __construct(
-        $promptText = 'Please enter a number: ', $allowEmpty = false, $allowFloat = false, $min = null, $max = null
-    ){
-        if($promptText !== null){
+        $promptText = 'Please enter a number: ', 
+        $allowEmpty = false, 
+        $allowFloat = false, 
+        $min = null, 
+        $max = null)
+    {
+        if ($promptText !== null){
             $this->setPromptText($promptText);
         }
 
-        if($allowEmpty !== null){
+        if ($allowEmpty !== null){
             $this->setAllowEmpty($allowEmpty);
         }
 
-        if($min !== null){
+        if ($min !== null){
             $this->setMin($min);
         }
 
-        if($max !== null){
+        if ($max !== null){
             $this->setMax($max);
         }
 
-        if($allowFloat !== null){
+        if ($allowFloat !== null){
             $this->setAllowFloat($allowFloat);
         }
     }
@@ -85,20 +89,20 @@ class Number extends Line implements PromptInterface
         do{
             $valid = true;
             $number = parent::show();
-            if($number === "" && !$this->allowEmpty){
+            if ($number === "" && !$this->allowEmpty){
                 $valid = false;
-            }elseif($number === ""){
+            }elseif ($number === ""){
                 $number = null;
-            }elseif(!is_numeric($number)){
+            }elseif (!is_numeric($number)){
                 $this->getConsole()->writeLine("$number is not a number\n");
                 $valid = false;
-            }elseif(!$this->allowFloat && (round($number) != $number) ){
+            }elseif (!$this->allowFloat && (round($number) != $number) ){
                 $this->getConsole()->writeLine("Please enter a non-floating number, i.e. ".round($number)."\n");
                 $valid = false;
-            }elseif($this->max !== null && $number > $this->max){
+            }elseif ($this->max !== null && $number > $this->max){
                 $this->getConsole()->writeLine("Please enter a number not greater than ".$this->max."\n");
                 $valid = false;
-            }elseif($this->min !== null && $number < $this->min){
+            }elseif ($this->min !== null && $number < $this->min){
                 $this->getConsole()->writeLine("Please enter a number not smaller than ".$this->min."\n");
                 $valid = false;
             }
@@ -107,7 +111,7 @@ class Number extends Line implements PromptInterface
         /**
          * Cast proper type
          */
-        if($number !== null){
+        if ($number !== null){
             $number = $this->allowFloat ? (double)$number : (int)$number;
         }
 

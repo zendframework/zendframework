@@ -44,13 +44,16 @@ class Select extends Char implements PromptInterface
      * @param bool      $echo           True to display selected option?
      */
     public function __construct(
-        $promptText = 'Please select one option', $options = array(), $allowEmpty = false, $echo = false
-    ){
-        if($promptText !== null){
+        $promptText = 'Please select one option', 
+        $options = array(), 
+        $allowEmpty = false, 
+        $echo = false)
+    {
+        if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
 
-        if(!count($options)){
+        if (!count($options)) {
             throw new BadMethodCallException(
                 'Cannot construct a "select" prompt without any options'
             );
@@ -58,11 +61,11 @@ class Select extends Char implements PromptInterface
 
         $this->setOptions($options);
 
-        if($allowEmpty !== null){
+        if ($allowEmpty !== null) {
             $this->setAllowEmpty($allowEmpty);
         }
 
-        if($echo !== null){
+        if ($echo !== null) {
             $this->setEcho($echo);
         }
 
@@ -88,7 +91,7 @@ class Select extends Char implements PromptInterface
          * Ask for selection
          */
         $mask = implode("",array_keys($this->options));
-        if($this->allowEmpty){
+        if ($this->allowEmpty){
             $mask .= "\r\n";
         }
         $this->setAllowedChars($mask);
@@ -107,18 +110,18 @@ class Select extends Char implements PromptInterface
      */
     public function setOptions($options)
     {
-        if(!is_array($options) && !$options instanceof \Traversable){
+        if (!is_array($options) && !$options instanceof \Traversable) {
             throw new BadMethodCallException(
                 'Please specify an array or Traversable object as options'
             );
         }
 
-        if(!is_array($options)){
+        if (!is_array($options)) {
             $this->options = array();
             foreach($options as $k => $v){
                 $this->options[$k] = $v;
             }
-        }else{
+        } else {
             $this->options = $options;
         }
     }

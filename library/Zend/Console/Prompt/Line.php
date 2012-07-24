@@ -43,15 +43,15 @@ class Line extends AbstractPrompt implements PromptInterface
      */
     public function __construct($promptText = 'Please enter value: ', $allowEmpty = false, $maxLength = 2048)
     {
-        if($promptText !== null){
+        if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
 
-        if($allowEmpty !== null){
+        if ($allowEmpty !== null) {
             $this->setAllowEmpty($allowEmpty);
         }
 
-        if($maxLength !== null){
+        if ($maxLength !== null) {
             $this->setMaxLength($maxLength);
         }
     }
@@ -63,10 +63,10 @@ class Line extends AbstractPrompt implements PromptInterface
      */
     public function show()
     {
-        do{
+        do {
             $this->getConsole()->write($this->promptText);
             $line = $this->getConsole()->readLine($this->maxLength);
-        }while(!$this->allowEmpty && !$line);
+        } while(!$this->allowEmpty && !$line);
 
         return $this->lastResponse = $line;
     }

@@ -179,7 +179,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $width      = $x2 - $x1 + 1;
         $height     = $y2 - $y1 + 1;
 
-        if($width <= 2) {
+        if ($width <= 2) {
             $lineStyle = static::LINE_NONE;
         }
 
@@ -192,7 +192,7 @@ abstract class AbstractAdapter implements AdapterInterface
         /**
          * Draw horizontal lines
          */
-        if($lineStyle !== static::LINE_NONE) {
+        if ($lineStyle !== static::LINE_NONE) {
             switch ($lineStyle) {
                 case static::LINE_SINGLE:
                     $lineChar = $charset::LINE_SINGLE_EW;
@@ -276,11 +276,11 @@ abstract class AbstractAdapter implements AdapterInterface
         /**
          * Draw corners
          */
-        if($lineStyle !== static::LINE_NONE) {
-            if($color !== null) {
+        if ($lineStyle !== static::LINE_NONE) {
+            if ($color !== null) {
                 $this->setColor($color);
             }
-            if($bgColor !== null) {
+            if ($bgColor !== null) {
                 $this->setBgColor($bgColor);
             }
             if ($lineStyle === static::LINE_SINGLE) {

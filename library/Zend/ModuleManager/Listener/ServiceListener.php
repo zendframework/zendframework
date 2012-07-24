@@ -12,7 +12,6 @@ namespace Zend\ModuleManager\Listener;
 
 use Traversable;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\ServiceManager\Config as ServiceConfig;
@@ -24,7 +23,7 @@ use Zend\Stdlib\ArrayUtils;
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class ServiceListener implements ListenerAggregateInterface, ServiceListenerInterface
+class ServiceListener implements ServiceListenerInterface
 {
     /**
      * @var bool

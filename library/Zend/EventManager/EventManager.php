@@ -112,6 +112,7 @@ class EventManager implements EventManagerInterface
      */
     public function getSharedManager()
     {
+        // "false" means "I do not want a shared manager; don't try and fetch one"
         if (false === $this->sharedManager
             || $this->sharedManager instanceof SharedEventManagerInterface
         ) {

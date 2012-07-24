@@ -84,16 +84,17 @@ class Posix extends AbstractAdapter implements AdapterInterface
      *
      * @return int
      */
-    public function getWidth(){
+    public function getWidth()
+    {
         static $width;
-        if($width > 0){
+        if ($width > 0){
             return $width;
         }
 
         /**
          * Try to read env variable
          */
-        if(($result = getenv('COLUMNS')) !== false){
+        if (($result = getenv('COLUMNS')) !== false) {
             return $width = (int)$result;
         }
 
@@ -101,12 +102,11 @@ class Posix extends AbstractAdapter implements AdapterInterface
          * Try to read console size from "tput" command
          */
         $result = exec('tput cols',$output, $return);
-        if(!$return && is_numeric($result)){
+        if (!$return && is_numeric($result)) {
             return $width = (int)$result;
-        }else{
-            return $width = parent::getWidth();
         }
 
+        return $width = parent::getWidth();
     }
 
     /**
@@ -114,35 +114,38 @@ class Posix extends AbstractAdapter implements AdapterInterface
      *
      * @return false|int
      */
-    public function getHeight(){
+    public function getHeight()
+    {
         static $height;
-        if($height > 0){
+        if ($height > 0) {
             return $height;
         }
 
         /**
          * Try to read env variable
          */
-        if(($result = getenv('LINES')) !== false){
+        if (($result = getenv('LINES')) !== false) {
             return $height = (int)$result;
         }
 
         /**
-                 * Try to read console size from "tput" command
-                 */
+         * Try to read console size from "tput" command
+         */
         $result = exec('tput lines',$output, $return);
-        if(!$return && is_numeric($result)){
+        if (!$return && is_numeric($result)) {
             return $height = (int)$result;
-        }else{
-            return $height = parent::getHeight();
         }
+        
+        return $height = parent::getHeight();
+        
     }
 
-    protected function runModeCommand(){
+    protected function runModeCommand()
+    {
         exec('mode',$output,$return);
-        if($return || !count($output)){
+        if ($return || !count($output)) {
             $this->modeResult = '';
-        }else{
+        } else {
             $this->modeResult = trim(implode('',$output));
         }
     }
@@ -152,11 +155,12 @@ class Posix extends AbstractAdapter implements AdapterInterface
      *
      * @return bool
      */
-    public function isUtf8(){
+    public function isUtf8()
+    {
         /**
          * Try to retrieve it from LANG env variable
          */
-        if(($lang = getenv('LANG')) !== false){
+        if (($lang = getenv('LANG')) !== false) {
             return stristr($lang,'utf-8') || stristr($lang,'utf8');
         }
 
@@ -166,14 +170,16 @@ class Posix extends AbstractAdapter implements AdapterInterface
     /**
      * Show console cursor
      */
-    public function showCursor(){
+    public function showCursor()
+    {
         echo "\x1b[?25h";
     }
 
     /**
      * Hide console cursor
      */
-    public function hideCursor(){
+    public function hideCursor()
+    {
         echo "\x1b[?25l";
     }
 
@@ -182,7 +188,8 @@ class Posix extends AbstractAdapter implements AdapterInterface
      * @param int   $x
      * @param int   $y
      */
-    public function setPos($x, $y){
+    public function setPos($x, $y)
+    {
         echo "\x1b[".$y.';'.$x.'f';
     }
 
@@ -199,21 +206,21 @@ class Posix extends AbstractAdapter implements AdapterInterface
         /**
          * Retrieve ansi color codes
          */
-        if($color !== null){
-            if(!isset(static::$ansiColorMap['fg'][$color])){
+        if ($color !== null) {
+            if (!isset(static::$ansiColorMap['fg'][$color])) {
                 throw new BadMethodCallException(
                     'Unknown color "'.$color.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
-            }else{
+            } else {
                 $color = static::$ansiColorMap['fg'][$color];
             }
         }
-        if($bgColor !== null){
-            if(!isset(static::$ansiColorMap['bg'][$bgColor])){
+        if ($bgColor !== null){
+            if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
                 throw new BadMethodCallException(
                     'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
-            }else{
+            } else {
                 $bgColor = static::$ansiColorMap['bg'][$bgColor];
             }
         }
@@ -236,12 +243,12 @@ class Posix extends AbstractAdapter implements AdapterInterface
         /**
          * Retrieve ansi color code
          */
-        if($color !== null){
-            if(!isset(static::$ansiColorMap['fg'][$color])){
+        if ($color !== null) {
+            if (!isset(static::$ansiColorMap['fg'][$color])) {
                 throw new BadMethodCallException(
                     'Unknown color "'.$color.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
-            }else{
+            } else {
                 $color = static::$ansiColorMap['fg'][$color];
             }
         }
@@ -259,12 +266,12 @@ class Posix extends AbstractAdapter implements AdapterInterface
         /**
          * Retrieve ansi color code
          */
-        if($bgColor !== null){
-            if(!isset(static::$ansiColorMap['bg'][$bgColor])){
+        if ($bgColor !== null) {
+            if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
                 throw new BadMethodCallException(
                     'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
-            }else{
+            } else {
                 $bgColor = static::$ansiColorMap['bg'][$bgColor];
             }
         }
@@ -287,7 +294,8 @@ class Posix extends AbstractAdapter implements AdapterInterface
      *
      * @return string
      */
-    public function getTitle(){
+    public function getTitle()
+    {
 
     }
 
@@ -297,7 +305,8 @@ class Posix extends AbstractAdapter implements AdapterInterface
 
      * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(CharsetInterface $charset){
+    public function setCharset(CharsetInterface $charset)
+    {
         $this->charset = $charset;
     }
 
@@ -306,8 +315,9 @@ class Posix extends AbstractAdapter implements AdapterInterface
      *
      * @return \Zend\Console\CharsetInterface $charset
      */
-    public function getCharset(){
-        if($this->charset === null){
+    public function getCharset()
+    {
+        if ($this->charset === null) {
             $this->charset = $this->getDefaultCharset();
         }
 
@@ -317,10 +327,11 @@ class Posix extends AbstractAdapter implements AdapterInterface
     /**
      * @return \Zend\Console\Charset
      */
-    public function getDefaultCharset(){
-        if($this->isUtf8()){
+    public function getDefaultCharset()
+    {
+        if ($this->isUtf8()) {
             return new Charset\Utf8;
-        }else{
+        } else {
             return new Charset\DECSG();
         }
     }
@@ -336,12 +347,10 @@ class Posix extends AbstractAdapter implements AdapterInterface
         $this->setTTYMode('-icanon -echo');
 
         $stream = fopen('php://stdin','rb');
-        do{
+        do {
             $char = fgetc($stream);
-        }while(
-            !$char ||
-            ($mask !== null && !stristr($mask,$char))
-        );
+        } while(!$char || ($mask !== null && !stristr($mask,$char)));
+
         fclose($stream);
 
         $this->restoreTTYMode();
@@ -351,7 +360,8 @@ class Posix extends AbstractAdapter implements AdapterInterface
     /**
      * Reset color to console default.
      */
-    public function clear(){
+    public function clear()
+    {
         echo "\x1b[2J"; // reset bg color
         $this->setPos(1,1); // reset cursor position
     }
@@ -361,9 +371,11 @@ class Posix extends AbstractAdapter implements AdapterInterface
      *
      * @return mixed
      */
-    protected function restoreTTYMode(){
-        if($this->lastTTYMode === null)
+    protected function restoreTTYMode()
+    {
+        if ($this->lastTTYMode === null) {
             return;
+        }
 
         shell_exec('stty '.escapeshellarg($this->lastTTYMode));
 

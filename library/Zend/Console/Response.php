@@ -20,7 +20,8 @@ class Response extends Message implements ResponseInterface
      * @param integer   $errorLevel
      * @return Response
      */
-    public function setErrorLevel($errorLevel){
+    public function setErrorLevel($errorLevel)
+    {
         $this->setMetadata('errorLevel', $errorLevel);
         return $this;
     }
@@ -30,7 +31,8 @@ class Response extends Message implements ResponseInterface
      *
      * @return integer|0
      */
-    public function getErrorLevel(){
+    public function getErrorLevel()
+    {
         return $this->getMetadata('errorLevel', 0);
     }
 

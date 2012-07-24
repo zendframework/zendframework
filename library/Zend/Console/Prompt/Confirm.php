@@ -38,17 +38,19 @@ class Confirm extends Char implements PromptInterface
      * @param string    $noChar         The "no" key (defaults to N)
      */
     public function __construct(
-        $promptText = 'Are you sure?', $yesChar = 'y', $noChar = 'n'
-    ){
-        if($promptText !== null){
+        $promptText = 'Are you sure?', 
+        $yesChar = 'y', 
+        $noChar = 'n')
+    {
+        if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
 
-        if($yesChar !== null){
+        if ($yesChar !== null) {
             $this->setYesChar($yesChar);
         }
 
-        if($noChar !== null){
+        if ($noChar !== null) {
             $this->setNoChar($noChar);
         }
     }

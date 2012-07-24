@@ -32,18 +32,19 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      *
      * @return int
      */
-    public function getWidth(){
+    public function getWidth()
+    {
         static $width;
-        if($width > 0){
+        if ($width > 0) {
             return $width;
         }
 
         /**
          * Try to read console size from ANSICON env var
          */
-        if(preg_match('/\((\d+)x/',getenv('ANSICON'),$matches)){
+        if (preg_match('/\((\d+)x/',getenv('ANSICON'),$matches)) {
             $width = $matches[1];
-        }else{
+        } else {
             $width = AbstractAdapter::getWidth();
         }
 
@@ -55,28 +56,30 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      *
      * @return false|int
      */
-    public function getHeight(){
+    public function getHeight()
+    {
         static $height;
-        if($height > 0){
+        if ($height > 0) {
             return $height;
         }
 
         /**
          * Try to read console size from ANSICON env var
          */
-        if(preg_match('/\(\d+x(\d+)/',getenv('ANSICON'),$matches)){
+        if (preg_match('/\(\d+x(\d+)/',getenv('ANSICON'),$matches)) {
             $height = $matches[1];
-        }else{
+        } else {
             $height = AbstractAdapter::getHeight();
         }
         return $height;
     }
 
-    protected function runModeCommand(){
+    protected function runModeCommand()
+    {
         exec('mode',$output,$return);
-        if($return || !count($output)){
+        if ($return || !count($output)) {
             $this->modeResult = '';
-        }else{
+        } else {
             $this->modeResult = trim(implode('',$output));
         }
     }
@@ -86,19 +89,20 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      *
      * @return bool
      */
-    public function isUtf8(){
+    public function isUtf8()
+    {
         /**
          * Try to read code page info from "mode" command
          */
-        if($this->modeResult === null){
+        if ($this->modeResult === null) {
             $this->runModeCommand();
         }
 
-        if(preg_match('/Code page\:\s+(\d+)/',$this->modeResult,$matches)){
+        if (preg_match('/Code page\:\s+(\d+)/', $this->modeResult,$matches)) {
             return (int)$matches[1] == 65001;
-        }else{
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -106,16 +110,17 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      *
      * @return string
      */
-    public function getTitle(){
+    public function getTitle()
+    {
         /**
          * Try to use powershell to retrieve console window title
          */
         exec('powershell -command "write $Host.UI.RawUI.WindowTitle"',$output,$result);
-        if($result || !$output){
+        if ($result || !$output){
             return '';
-        }else{
-            return trim($output,"\r\n");
         }
+
+        return trim($output,"\r\n");
     }
 
     /**
@@ -140,7 +145,8 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      *
      * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(CharsetInterface $charset){
+    public function setCharset(CharsetInterface $charset)
+    {
         $this->charset = $charset;
     }
 
@@ -150,8 +156,9 @@ class WindowsAnsicon extends Posix implements AdapterInterface
 
      * @return \Zend\Console\CharsetInterface $charset
      */
-    public function getCharset(){
-        if($this->charset === null){
+    public function getCharset()
+    {
+        if ($this->charset === null) {
             $this->charset = $this->getDefaultCharset();
         }
 
@@ -161,7 +168,8 @@ class WindowsAnsicon extends Posix implements AdapterInterface
     /**
      * @return \Zend\Console\Charset\AsciiExtended
      */
-    public function getDefaultCharset(){
+    public function getDefaultCharset()
+    {
         return new Charset\AsciiExtended();
     }
 
@@ -171,30 +179,29 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      * @param string|null   $mask   A list of allowed chars
      * @return string
      */
-    public function readChar($mask = null){
+    public function readChar($mask = null)
+    {
         /**
          * Decide if we can use `choice` tool
          */
-        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]$',$mask);
+        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]$', $mask);
 
-        do{
-            if($useChoice){
+        do {
+            if ($useChoice) {
                 system('choice /n /cs /c '.$mask,$return);
-                if($return == 255 || $return < 1 || $return > strlen($mask)){
+                if ($return == 255 || $return < 1 || $return > strlen($mask)) {
                     throw new RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
-                }else{
+                } else {
                     /**
                      * Fetch the char from mask
                      */
                     $char = substr($mask,$return-1,1);
                 }
-            }else{
+            } else {
                 $char = parent::readChar($mask);
             }
-        }while(
-            !$char ||
-            ($mask !== null && !stristr($mask,$char))
-        );
+        } while(!$char || ($mask !== null && !stristr($mask, $char)));
+
         return $char;
     }
 

@@ -17,14 +17,18 @@ abstract class AbstractPrompt implements PromptInterface
      */
     protected $lastResponse;
 
-    public function show(){}
+    public function show()
+    {
+
+    }
 
     /**
      * Return last answer to this prompt.
      *
      * @return mixed
      */
-    public function getLastResponse(){
+    public function getLastResponse()
+    {
         return $this->lastResponse;
     }
 
@@ -33,8 +37,9 @@ abstract class AbstractPrompt implements PromptInterface
      *
      * @return \Zend\Console\AdapterInterface
      */
-    public function getConsole(){
-        if(!$this->console){
+    public function getConsole()
+    {
+        if (!$this->console) {
             $this->console = Console::getInstance();
         }
 
@@ -46,7 +51,8 @@ abstract class AbstractPrompt implements PromptInterface
      *
      * @param \Zend\Console\AdapterInterface $adapter
      */
-    public function setConsole(ConsoleAdapter $adapter){
+    public function setConsole(ConsoleAdapter $adapter)
+    {
         $this->console = $adapter;
     }
 

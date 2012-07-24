@@ -48,95 +48,17 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    public function testAdapterShouldThrowExceptionWhenRetrievingPluginLoaderOfInvalidType()
+    public function testAdapterShouldLazyLoadValidatorPluginManager()
     {
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException',
-                                    'Invalid type "BOGUS" provided to getPluginLoader');
-        $this->adapter->getPluginLoader('bogus');
+        $loader = $this->adapter->getValidatorManager();
+        $this->assertInstanceOf('Zend\File\Transfer\Adapter\ValidatorPluginManager', $loader);
     }
 
-    public function testAdapterShouldHavePluginLoaderForValidators()
+    public function testAdapterShouldAllowSettingFilterPluginManagerInstance()
     {
-        $loader = $this->adapter->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof Loader\PrefixPathLoader);
-    }
-
-    public function testAdapterShouldAllowAddingCustomPluginLoader()
-    {
-        $loader = new Loader\PrefixPathLoader();
-        $this->adapter->setPluginLoader($loader, 'filter');
-        $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
-    }
-
-    public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
-    {
-        $loader = new Loader\PrefixPathLoader();
-
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException',
-                                    'Invalid type "BOGUS" provided to setPluginLoader');
-        $this->adapter->setPluginLoader($loader, 'bogus');
-    }
-
-    public function testAdapterShouldProxyAddingPluginLoaderPrefixPath()
-    {
-        $loader = $this->adapter->getPluginLoader('validator');
-        $this->adapter->addPrefixPath('Foo_Valid', 'Foo/Valid/', 'validator');
-        $paths = $loader->getPaths('Foo_Valid');
-        $this->assertInstanceOf('SplStack', $paths);
-    }
-
-    public function testPassingNoTypeWhenAddingPrefixPathToAdapterShouldGeneratePathsForAllTypes()
-    {
-        $this->adapter->addPrefixPath('Foo', 'Foo');
-        $validateLoader = $this->adapter->getPluginLoader('validator');
-        $filterLoader   = $this->adapter->getPluginLoader('filter');
-        $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-    }
-
-
-    public function testPassingInvalidTypeWhenAddingPrefixPathToAdapterShouldThrowException()
-    {
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException',
-                                    'Invalid type "BOGUS" provided to getPluginLoader');
-        $this->adapter->addPrefixPath('Foo', 'Foo', 'bogus');
-    }
-
-    public function testAdapterShouldProxyAddingMultiplePluginLoaderPrefixPaths()
-    {
-        $validatorLoader = $this->adapter->getPluginLoader('validator');
-        $filterLoader    = $this->adapter->getPluginLoader('filter');
-        $this->adapter->addPrefixPaths(array(
-            'validator' => array('prefix' => 'Foo\Valid', 'path' => 'Foo/Valid/'),
-            'filter'   => array(
-                'Foo\Filter' => 'Foo/Filter/',
-                'Baz\Filter' => array(
-                    'Baz/Filter/',
-                    'My/Baz/Filter/',
-                ),
-            ),
-            array('type' => 'filter', 'prefix' => 'Bar\Filter', 'path' => 'Bar/Filter/'),
-        ));
-        $paths = $validatorLoader->getPaths('Foo\Valid');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Bar\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Baz\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $this->assertEquals(2, count($paths));
-    }
-
-    public function testValidatorPluginLoaderShouldRegisterPathsForBaseAndFileValidatorsByDefault()
-    {
-        $loader = $this->adapter->getPluginLoader('validator');
-        $paths  = $loader->getPaths('Zend\Validator');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths  = $loader->getPaths('Zend\Validator\File');
-        $this->assertInstanceOf('SplStack', $paths);
+        $manager = new File\Transfer\Adapter\FilterPluginManager();
+        $this->adapter->setFilterManager($manager);
+        $this->assertSame($manager, $this->adapter->getFilterManager());
     }
 
     public function testAdapterShouldAllowAddingValidatorInstance()
@@ -147,13 +69,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($validator, $test);
     }
 
-    public function testAdapterShouldAllowAddingValidatorViaPluginLoader()
+    public function testAdapterShouldAllowAddingValidatorViaPluginManager()
     {
         $this->adapter->addValidator('Count', false, array('min' => 1, 'max' => 1));
         $test = $this->adapter->getValidator('Count');
         $this->assertTrue($test instanceof FileValidator\Count);
     }
-
 
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidValidatorType()
     {
@@ -327,19 +248,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(empty($errors));
     }
 
-    public function testAdapterShouldHavePluginLoaderForFilters()
+    public function testAdapterShouldLazyLoadFilterPluginManager()
     {
-        $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof Loader\ShortNameLocator);
-    }
-
-    public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()
-    {
-        $loader = $this->adapter->getPluginLoader('filter');
-        $paths  = $loader->getPaths('Zend\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths  = $loader->getPaths('Zend\Filter\File');
-        $this->assertInstanceOf('SplStack', $paths);
+        $loader = $this->adapter->getFilterManager();
+        $this->assertInstanceOf('Zend\File\Transfer\Adapter\FilterPluginManager', $loader);
     }
 
     public function testAdapterShouldAllowAddingFilterInstance()
@@ -350,7 +262,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($filter, $test);
     }
 
-    public function testAdapterShouldAllowAddingFilterViaPluginLoader()
+    public function testAdapterShouldAllowAddingFilterViaPluginManager()
     {
         $this->adapter->addFilter('StringTrim');
         $test = $this->adapter->getFilter('StringTrim');

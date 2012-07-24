@@ -16,7 +16,6 @@ use Zend\Filter;
 use Zend\Filter\Exception as FilterException;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
-use Zend\Loader;
 use Zend\Validator;
 
 /**
@@ -47,6 +46,11 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * @var array
      */
     protected $break = array();
+
+    /**
+     * @var FilterPluginManager
+     */
+    protected $filterManager;
 
     /**
      * Internal list of filters
@@ -87,6 +91,11 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * @var string
      */
     protected $translatorTextDomain = 'default';
+
+    /**
+     * @var ValidatorPluginManager
+     */
+    protected $validatorManager;
 
     /**
      * Internal list of validators
@@ -214,161 +223,53 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     //abstract public function getFile();
 
     /**
-     * Set plugin loader to use for validator or filter chain
-     *
-     * @param  Loader\ShortNameLocator $loader
-     * @param  string                  $type 'filter', or 'validator'
-     * @return AbstractAdapter
-     * @throws Exception\InvalidArgumentException on invalid type
-     */
-    public function setPluginLoader(Loader\ShortNameLocator $loader, $type)
-    {
-        $type = strtoupper($type);
-        switch ($type) {
-            case self::FILTER:
-            case self::VALIDATOR:
-                $this->loaders[$type] = $loader;
-                return $this;
-            default:
-                throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid type "%s" provided to setPluginLoader()', $type)
-                );
-        }
-    }
-
-    /**
-     * Retrieve plugin loader for validator or filter chain
-     *
-     * Instantiates with default rules if none available for that type. Use
-     * 'filter' or 'validator' for $type.
-     *
-     * @param  string $type
-     * @return Loader\ShortNameLocator
-     * @throws Exception\InvalidArgumentException on invalid type.
-     */
-    public function getPluginLoader($type)
-    {
-        $type = strtoupper($type);
-        switch ($type) {
-            case self::FILTER:
-            case self::VALIDATOR:
-                $prefixSegment = ucfirst(strtolower($type));
-                $pathSegment   = $prefixSegment;
-                if (!isset($this->loaders[$type])) {
-                    $paths         = array(
-                        'Zend\\' . $prefixSegment . '\\'    => 'Zend/' . $pathSegment . '/',
-                        'Zend\\' . $prefixSegment . '\File' => 'Zend/' . $pathSegment . '/File',
-                    );
-
-                    $this->loaders[$type] = new Loader\PrefixPathLoader($paths);
-                } else {
-                    $loader = $this->loaders[$type];
-                    if ($loader instanceof Loader\PrefixPathMapper) {
-                        $prefix = 'Zend\\' . $prefixSegment . '\File\\';
-                        if (!$loader->getPaths($prefix)) {
-                            $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
-                        }
-                    }
-                }
-
-                return $this->loaders[$type];
-            default:
-                throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid type "%s" provided to getPluginLoader()', $type)
-                );
-        }
-    }
-
-    /**
-     * Add prefix path for plugin loader
-     *
-     * If no $type specified, assumes it is a base path for both filters and
-     * validators, and sets each according to the following rules:
-     * - filters:    $prefix = $prefix . '_Filter'
-     * - validators: $prefix = $prefix . '_Validator'
-     *
-     * Otherwise, the path prefix is set on the appropriate plugin loader.
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @param  string $type
-     * @return AbstractAdapter
-     * @throws Exception\InvalidArgumentException for invalid type
-     */
-    public function addPrefixPath($prefix, $path, $type = null)
-    {
-        $type = (null === $type) ? null : strtoupper($type);
-        switch ($type) {
-            case self::FILTER:
-            case self::VALIDATOR:
-                $loader = $this->getPluginLoader($type);
-                if ($loader instanceof Loader\PrefixPathMapper) {
-                    $loader->addPrefixPath($prefix, $path);
-                }
-
-                return $this;
-            case null:
-                $prefix = rtrim($prefix, '\\');
-                $path   = rtrim($path, DIRECTORY_SEPARATOR);
-                foreach (array(self::FILTER, self::VALIDATOR) as $type) {
-                    $loader       = $this->getPluginLoader($type);
-                    if ($loader instanceof Loader\PrefixPathMapper) {
-                        $cType        = ucfirst(strtolower($type));
-                        $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
-                        $pluginPrefix = $prefix . '\\' . $cType;
-                        $loader->addPrefixPath($pluginPrefix, $pluginPath);
-                    }
-                }
-
-                return $this;
-            default:
-                throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid type "%s" provided to getPluginLoader()', $type)
-                );
-        }
-    }
-
-    /**
-     * Add many prefix paths at once
-     *
-     * @param  array $spec
+     * Set the filter plugin manager instance
+     * 
+     * @param  FilterPluginManager $filterManager 
      * @return AbstractAdapter
      */
-    public function addPrefixPaths(array $spec)
+    public function setFilterManager(FilterPluginManager $filterManager)
     {
-        if (isset($spec['prefix']) && isset($spec['path'])) {
-            return $this->addPrefixPath($spec['prefix'], $spec['path']);
-        }
-        foreach ($spec as $type => $paths) {
-            if (is_numeric($type) && is_array($paths)) {
-                $type = null;
-                if (isset($paths['prefix']) && isset($paths['path'])) {
-                    if (isset($paths['type'])) {
-                        $type = $paths['type'];
-                    }
-                    $this->addPrefixPath($paths['prefix'], $paths['path'], $type);
-                }
-            } elseif (!is_numeric($type)) {
-                if (!isset($paths['prefix']) || !isset($paths['path'])) {
-                    foreach ($paths as $prefix => $spec) {
-                        if (is_array($spec)) {
-                            foreach ($spec as $path) {
-                                if (!is_string($path)) {
-                                    continue;
-                                }
-                                $this->addPrefixPath($prefix, $path, $type);
-                            }
-                        } elseif (is_string($spec)) {
-                            $this->addPrefixPath($prefix, $spec, $type);
-                        }
-                    }
-                } else {
-                    $this->addPrefixPath($paths['prefix'], $paths['path'], $type);
-                }
-            }
-        }
-
+        $this->filterManager = $filterManager;
         return $this;
+    }
+
+    /**
+     * Get the filter plugin manager instance
+     * 
+     * @return FilterPluginManager
+     */
+    public function getFilterManager()
+    {
+        if (!$this->filterManager instanceof FilterPluginManager) {
+            $this->setFilterManager(new FilterPluginManager());
+        }
+        return $this->filterManager;
+    }
+
+    /**
+     * Set the validator plugin manager instance
+     * 
+     * @param  ValidatorPluginManager $validatorManager 
+     * @return AbstractAdapter
+     */
+    public function setValidatorManager(ValidatorPluginManager $validatorManager)
+    {
+        $this->validatorManager = $validatorManager;
+        return $this;
+    }
+
+    /**
+     * Get the validator plugin manager instance
+     * 
+     * @return ValidatorPluginManager
+     */
+    public function getValidatorManager()
+    {
+        if (!$this->validatorManager instanceof ValidatorPluginManager) {
+            $this->setValidatorManager(new ValidatorPluginManager());
+        }
+        return $this->validatorManager;
     }
 
     /**
@@ -383,11 +284,8 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = null, $files = null)
     {
-        if ($validator instanceof Validator\ValidatorInterface) {
-            $name = get_class($validator);
-        } elseif (is_string($validator)) {
-            $name      = $this->getPluginLoader(self::VALIDATOR)->load($validator);
-            $validator = new $name($options);
+        if (is_string($validator)) {
+            $validator = $this->getValidatorManager()->get($validator, $options);
             if (is_array($options) && isset($options['messages'])) {
                 if (is_array($options['messages'])) {
                     $validator->setMessages($options['messages']);
@@ -397,12 +295,16 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
 
                 unset($options['messages']);
             }
-        } else {
+        }
+
+        if (!$validator instanceof Validator\ValidatorInterface) {
             throw new Exception\InvalidArgumentException(
                 'Invalid validator provided to addValidator; ' .
                 'must be string or Zend\Validator\ValidatorInterface'
             );
         }
+
+        $name = get_class($validator);
 
         $this->validators[$name] = $validator;
         $this->break[$name]      = $breakChainOnFailure;
@@ -803,17 +705,17 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      */
     public function addFilter($filter, $options = null, $files = null)
     {
-        if ($filter instanceof Filter\FilterInterface) {
-            $class = get_class($filter);
-        } elseif (is_string($filter)) {
-            $class  = $this->getPluginLoader(self::FILTER)->load($filter);
-            $filter = new $class($options);
-        } else {
+        if (is_string($filter)) {
+            $filter = $this->getFilterManager()->get($filter, $options);
+        }
+
+        if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException('Invalid filter specified');
         }
 
+        $class                 = get_class($filter);
         $this->filters[$class] = $filter;
-        $files                  = $this->getFiles($files, true, true);
+        $files                 = $this->getFiles($files, true, true);
         foreach ($files as $file) {
             $this->files[$file]['filters'][] = $class;
         }

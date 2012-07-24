@@ -705,6 +705,28 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Retrieve a keyed list of all canonical names. Handy for debugging!
+     *
+     * @return array
+     */
+    public function getCanonicalNames()
+    {
+        return $this->canonicalNames;
+    }
+
+    /**
+     * Allows to override the canonical names lookup map with predefined
+     * values.
+     *
+     * @return array $canonicalNames
+     * @return ServiceManager
+     */
+    public function setCanonicalNames($canonicalNames)
+    {
+        $this->canonicalNames = $canonicalNames;
+    }
+
+    /**
      * Attempt to retrieve an instance via a peering manager
      *
      * @param  string $name

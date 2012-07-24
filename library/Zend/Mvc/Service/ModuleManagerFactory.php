@@ -87,18 +87,37 @@ class ModuleManagerFactory implements FactoryInterface
         $configuration    = $serviceLocator->get('ApplicationConfig');
         $listenerOptions  = new ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);
-        $serviceListener  = new ServiceListener($serviceLocator, $this->defaultServiceConfig);
+        $serviceListener  = $serviceLocator->get('ServiceListener');
 
-        $serviceListener->addServiceManager($serviceLocator, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
-        $serviceListener->addServiceManager('ControllerLoader', 'controllers', 'Zend\ModuleManager\Feature\ControllerProviderInterface', 'getControllerConfig');
-        $serviceListener->addServiceManager('ControllerPluginManager', 'controller_plugins', 'Zend\ModuleManager\Feature\ControllerPluginProviderInterface', 'getControllerPluginConfig');
-        $serviceListener->addServiceManager('ViewHelperManager', 'view_helpers', 'Zend\ModuleManager\Feature\ViewHelperProviderInterface', 'getViewHelperConfig');
+        $serviceListener->addServiceManager($serviceLocator,
+            'service_manager',
+            'Zend\ModuleManager\Feature\ServiceProviderInterface',
+            'getServiceConfig'
+        );
+        $serviceListener->addServiceManager(
+            'ControllerLoader',
+            'controllers',
+            'Zend\ModuleManager\Feature\ControllerProviderInterface',
+            'getControllerConfig'
+        );
+        $serviceListener->addServiceManager(
+            'ControllerPluginManager',
+            'controller_plugins',
+            'Zend\ModuleManager\Feature\ControllerPluginProviderInterface',
+            'getControllerPluginConfig'
+        );
+        $serviceListener->addServiceManager(
+            'ViewHelperManager',
+            'view_helpers',
+            'Zend\ModuleManager\Feature\ViewHelperProviderInterface',
+            'getViewHelperConfig'
+        );
 
-        $events        = $serviceLocator->get('EventManager');
+        $events = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);
         $events->attach($serviceListener);
 
-        $moduleEvent   = new ModuleEvent;
+        $moduleEvent = new ModuleEvent;
         $moduleEvent->setParam('ServiceManager', $serviceLocator);
 
         $moduleManager = new ModuleManager($configuration['modules'], $events);

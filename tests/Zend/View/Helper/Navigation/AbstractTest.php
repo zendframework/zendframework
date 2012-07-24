@@ -129,6 +129,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
         $sm->setService('ApplicationConfig', $smConfig);
+        $sm->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
         $sm->setFactory('Navigation', 'Zend\Navigation\Service\DefaultNavigationFactory');

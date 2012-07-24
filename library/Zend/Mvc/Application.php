@@ -227,8 +227,10 @@ class Application implements
      * Static method for quick and easy initialization of the Application.
      *
      * If you use this init() method, you cannot specify a service with the
-     * name of 'ApplicationConfig' in your service manager config. That
-     * name is reserved to hold the array from application.config.php
+     * name of 'ApplicationConfig' and 'ServiceListener' in your service
+     * manager config. These names are reserved to hold the array from
+     * application.config.php and creating an instance of
+     * Zend\Mvc\Service\ServiceListenerFactory
      *
      * The following services can only be overridden from application.config.php:
      *
@@ -247,6 +249,7 @@ class Application implements
         $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();
         $serviceManager = new ServiceManager(new Service\ServiceManagerConfig($smConfig));
         $serviceManager->setService('ApplicationConfig', $configuration);
+        $serviceManager->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
         $serviceManager->get('ModuleManager')->loadModules();
         return $serviceManager->get('Application')->bootstrap();
     }

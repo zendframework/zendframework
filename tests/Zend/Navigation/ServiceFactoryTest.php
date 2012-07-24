@@ -83,6 +83,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
         $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
         $sm->setService('ApplicationConfig', $config);
+        $sm->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
 

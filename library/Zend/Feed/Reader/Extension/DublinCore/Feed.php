@@ -45,21 +45,21 @@ class Feed extends Extension\AbstractFeed
      */
     public function getAuthors()
     {
-        if (array_key_exists('authors', $this->_data)) {
-            return $this->_data['authors'];
+        if (array_key_exists('authors', $this->data)) {
+            return $this->data['authors'];
         }
 
         $authors = array();
-        $list    = $this->_xpath->query('//dc11:creator');
+        $list    = $this->xpath->query('//dc11:creator');
 
         if (!$list->length) {
-            $list = $this->_xpath->query('//dc10:creator');
+            $list = $this->xpath->query('//dc10:creator');
         }
         if (!$list->length) {
-            $list = $this->_xpath->query('//dc11:publisher');
+            $list = $this->xpath->query('//dc11:publisher');
 
             if (!$list->length) {
-                $list = $this->_xpath->query('//dc10:publisher');
+                $list = $this->xpath->query('//dc10:publisher');
             }
         }
 
@@ -76,9 +76,9 @@ class Feed extends Extension\AbstractFeed
             $authors = null;
         }
 
-        $this->_data['authors'] = $authors;
+        $this->data['authors'] = $authors;
 
-        return $this->_data['authors'];
+        return $this->data['authors'];
     }
 
     /**
@@ -88,24 +88,24 @@ class Feed extends Extension\AbstractFeed
      */
     public function getCopyright()
     {
-        if (array_key_exists('copyright', $this->_data)) {
-            return $this->_data['copyright'];
+        if (array_key_exists('copyright', $this->data)) {
+            return $this->data['copyright'];
         }
 
         $copyright = null;
-        $copyright = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:rights)');
+        $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:rights)');
 
         if (!$copyright) {
-            $copyright = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:rights)');
+            $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:rights)');
         }
 
         if (!$copyright) {
             $copyright = null;
         }
 
-        $this->_data['copyright'] = $copyright;
+        $this->data['copyright'] = $copyright;
 
-        return $this->_data['copyright'];
+        return $this->data['copyright'];
     }
 
     /**
@@ -115,24 +115,24 @@ class Feed extends Extension\AbstractFeed
      */
     public function getDescription()
     {
-        if (array_key_exists('description', $this->_data)) {
-            return $this->_data['description'];
+        if (array_key_exists('description', $this->data)) {
+            return $this->data['description'];
         }
 
         $description = null;
-        $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
+        $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
 
         if (!$description) {
-            $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
+            $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
         }
 
         if (!$description) {
             $description = null;
         }
 
-        $this->_data['description'] = $description;
+        $this->data['description'] = $description;
 
-        return $this->_data['description'];
+        return $this->data['description'];
     }
 
     /**
@@ -142,20 +142,20 @@ class Feed extends Extension\AbstractFeed
      */
     public function getId()
     {
-        if (array_key_exists('id', $this->_data)) {
-            return $this->_data['id'];
+        if (array_key_exists('id', $this->data)) {
+            return $this->data['id'];
         }
 
         $id = null;
-        $id = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
+        $id = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
 
         if (!$id) {
-            $id = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
+            $id = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
         }
 
-        $this->_data['id'] = $id;
+        $this->data['id'] = $id;
 
-        return $this->_data['id'];
+        return $this->data['id'];
     }
 
     /**
@@ -165,24 +165,24 @@ class Feed extends Extension\AbstractFeed
      */
     public function getLanguage()
     {
-        if (array_key_exists('language', $this->_data)) {
-            return $this->_data['language'];
+        if (array_key_exists('language', $this->data)) {
+            return $this->data['language'];
         }
 
         $language = null;
-        $language = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:language)');
+        $language = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:language)');
 
         if (!$language) {
-            $language = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:language)');
+            $language = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:language)');
         }
 
         if (!$language) {
             $language = null;
         }
 
-        $this->_data['language'] = $language;
+        $this->data['language'] = $language;
 
-        return $this->_data['language'];
+        return $this->data['language'];
     }
 
     /**
@@ -192,24 +192,24 @@ class Feed extends Extension\AbstractFeed
      */
     public function getTitle()
     {
-        if (array_key_exists('title', $this->_data)) {
-            return $this->_data['title'];
+        if (array_key_exists('title', $this->data)) {
+            return $this->data['title'];
         }
 
         $title = null;
-        $title = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
+        $title = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
 
         if (!$title) {
-            $title = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
+            $title = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
         }
 
         if (!$title) {
             $title = null;
         }
 
-        $this->_data['title'] = $title;
+        $this->data['title'] = $title;
 
-        return $this->_data['title'];
+        return $this->data['title'];
     }
 
     /**
@@ -219,24 +219,24 @@ class Feed extends Extension\AbstractFeed
      */
     public function getDate()
     {
-        if (array_key_exists('date', $this->_data)) {
-            return $this->_data['date'];
+        if (array_key_exists('date', $this->data)) {
+            return $this->data['date'];
         }
 
         $d = null;
-        $date = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
+        $date = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
 
         if (!$date) {
-            $date = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
+            $date = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
         }
 
         if ($date) {
             $d = DateTime::createFromFormat(DateTime::ISO8601, $date);
         }
 
-        $this->_data['date'] = $d;
+        $this->data['date'] = $d;
 
-        return $this->_data['date'];
+        return $this->data['date'];
     }
 
     /**
@@ -246,14 +246,14 @@ class Feed extends Extension\AbstractFeed
      */
     public function getCategories()
     {
-        if (array_key_exists('categories', $this->_data)) {
-            return $this->_data['categories'];
+        if (array_key_exists('categories', $this->data)) {
+            return $this->data['categories'];
         }
 
-        $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:subject');
+        $list = $this->xpath->evaluate($this->getXpathPrefix() . '//dc11:subject');
 
         if (!$list->length) {
-            $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:subject');
+            $list = $this->xpath->evaluate($this->getXpathPrefix() . '//dc10:subject');
         }
 
         if ($list->length) {
@@ -269,8 +269,8 @@ class Feed extends Extension\AbstractFeed
             $categoryCollection = new Collection\Category;
         }
 
-        $this->_data['categories'] = $categoryCollection;
-        return $this->_data['categories'];
+        $this->data['categories'] = $categoryCollection;
+        return $this->data['categories'];
     }
 
     /**
@@ -278,9 +278,9 @@ class Feed extends Extension\AbstractFeed
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('dc10', 'http://purl.org/dc/elements/1.0/');
-        $this->_xpath->registerNamespace('dc11', 'http://purl.org/dc/elements/1.1/');
+        $this->xpath->registerNamespace('dc10', 'http://purl.org/dc/elements/1.0/');
+        $this->xpath->registerNamespace('dc11', 'http://purl.org/dc/elements/1.1/');
     }
 }

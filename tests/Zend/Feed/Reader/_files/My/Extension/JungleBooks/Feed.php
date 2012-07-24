@@ -22,19 +22,19 @@ class Feed extends Extension\AbstractFeed
 
     public function getDaysPopularBookLink()
     {
-        if (isset($this->_data['dayPopular'])) {
-            return $this->_data['dayPopular'];
+        if (isset($this->data['dayPopular'])) {
+            return $this->data['dayPopular'];
         }
-        $dayPopular = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:dayPopular)');
+        $dayPopular = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:dayPopular)');
         if (!$dayPopular) {
             $dayPopular = null;
         }
-        $this->_data['dayPopular'] = $dayPopular;
-        return $this->_data['dayPopular'];
+        $this->data['dayPopular'] = $dayPopular;
+        return $this->data['dayPopular'];
     }
 
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('jungle', 'http://example.com/junglebooks/rss/module/1.0/');
+        $this->xpath->registerNamespace('jungle', 'http://example.com/junglebooks/rss/module/1.0/');
     }
 }

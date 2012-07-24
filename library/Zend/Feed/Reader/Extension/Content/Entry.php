@@ -25,9 +25,9 @@ class Entry extends Extension\AbstractEntry
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+            $content = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         } else {
-            $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+            $content = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
         }
         return $content;
     }
@@ -35,8 +35,8 @@ class Entry extends Extension\AbstractEntry
     /**
      * Register RSS Content Module namespace
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('content', 'http://purl.org/rss/1.0/modules/content/');
+        $this->xpath->registerNamespace('content', 'http://purl.org/rss/1.0/modules/content/');
     }
 }

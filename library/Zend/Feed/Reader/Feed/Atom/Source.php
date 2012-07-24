@@ -33,17 +33,24 @@ class Source extends Feed\Atom
      */
     public function __construct(DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
     {
-        $this->_domDocument = $source->ownerDocument;
-        $this->_xpath = new DOMXPath($this->_domDocument);
-        $this->_data['type'] = $type;
-        $this->_registerNamespaces();
-        $this->_loadExtensions();
+        $this->domDocument = $source->ownerDocument;
+        $this->xpath = new DOMXPath($this->domDocument);
+        $this->data['type'] = $type;
+        $this->registerNamespaces();
+        $this->loadExtensions();
 
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
-        $this->_extensions['Atom\\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Feed');
-        $this->_extensions['DublinCore\\Feed'] = new $atomClass($this->_domDocument, $this->_data['type'], $this->_xpath);
-        foreach ($this->_extensions as $extension) {
+        $manager = Reader\Reader::getExtensionManager();
+        $extensions = array('Atom\Feed', 'DublinCore\Feed');
+
+        foreach ($extensions as $name) {
+            $extension = $manager->get($name);
+            $extension->setDomDocument($this->domDocument);
+            $extension->setType($this->data['type']);
+            $extension->setXpath($this->xpath);
+            $this->extensions[$name] = $extension;
+        }
+
+        foreach ($this->extensions as $extension) {
             $extension->setXpathPrefix(rtrim($xpathPrefix, '/') . '/atom:source');
         }
     }
@@ -86,6 +93,6 @@ class Source extends Feed\Atom
     /**
      * @return void
      */
-    protected function _indexEntries() {}
+    protected function indexEntries() {}
 
 }

@@ -26,17 +26,17 @@ class Entry extends Extension\AbstractEntry
     public function getCommentFeedLink()
     {
         $name = 'commentRss';
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
-        $data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/wfw:' . $name . ')');
+        $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/wfw:' . $name . ')');
 
         if (!$data) {
             $data = null;
         }
 
-        $this->_data[$name] = $data;
+        $this->data[$name] = $data;
 
         return $data;
     }
@@ -46,8 +46,8 @@ class Entry extends Extension\AbstractEntry
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('wfw', 'http://wellformedweb.org/CommentAPI/');
+        $this->xpath->registerNamespace('wfw', 'http://wellformedweb.org/CommentAPI/');
     }
 }

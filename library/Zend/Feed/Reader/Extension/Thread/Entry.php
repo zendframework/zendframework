@@ -37,7 +37,7 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCommentCount()
     {
-        return $this->_getData('total');
+        return $this->getData('total');
     }
 
     /**
@@ -47,19 +47,19 @@ class Entry extends Extension\AbstractEntry
      * @param  string $type
      * @return mixed|null
      */
-    protected function _getData($name)
+    protected function getData($name)
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
-        $data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
+        $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
 
         if (!$data) {
             $data = null;
         }
 
-        $this->_data[$name] = $data;
+        $this->data[$name] = $data;
 
         return $data;
     }
@@ -69,8 +69,8 @@ class Entry extends Extension\AbstractEntry
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
+        $this->xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
     }
 }

@@ -260,7 +260,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid(0));
     }
 
-        public function testFloatInputAndStringInHaystack(){
+    public function testFloatInputAndStringInHaystack(){
         $validator = new InArray(
             array(
                  'haystack' => array('test', 1, 2),
@@ -275,7 +275,42 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
         $validator->setStrict(InArray::COMPARE_STRICT);
         $this->assertFalse($validator->isValid(0.0));
+    }
 
+    public function testNumberStringInputAgainstNumberInHaystack()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(1, 2),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid('1asdf'));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid('1asdf'));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid('1asdf'));
+    }
+
+    public function testFloatStringInputAgainstNumberInHaystack()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array(1.5, 2.4),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid('1.5asdf'));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid('1.5asdf'));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid('1.5asdf'));
     }
 
     public function testSettingStrictViaInitiation()

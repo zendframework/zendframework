@@ -147,8 +147,14 @@ class MysqlMetadata extends AbstractSource
         foreach ($results->toArray() as $row) {
             $erratas = array();
             $matches = array();
-            if (preg_match('/^(enum|set)\(\'(.+)\'\)$/', $row['COLUMN_TYPE'], $matches)) {
-                $erratas = explode("','", $matches[2]);
+            if (preg_match('/^(?:enum|set)\((.+)\)$/i', $row['COLUMN_TYPE'], $matches)) {
+                $permittedValues = $matches[1];
+                if (preg_match_all("/\\s*'((?:[^']++|'')*+)'\\s*(?:,|\$)/", $permittedValues, $matches, PREG_PATTERN_ORDER)) {
+                    $permittedValues = str_replace("''", "'", $matches[1]);
+                } else {
+                    $permittedValues = array($permittedValues);
+                }
+                $erratas['permitted_values'] = $permittedValues;
             }
             $columns[$row['COLUMN_NAME']] = array(
                 'ordinal_position'          => $row['ORDINAL_POSITION'],

@@ -11,12 +11,12 @@
 namespace ZendTest\View\Helper\Navigation;
 
 use Zend\Navigation\Navigation;
-use Zend\Acl\Acl;
-use Zend\Acl\Role\GenericRole;
-use Zend\Acl\Resource\GenericResource;
 use Zend\Config\Factory as ConfigFactory;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\Permissions\Acl\Acl;
+use Zend\Permissions\Acl\Role\GenericRole;
+use Zend\Permissions\Acl\Resource\GenericResource;
 use Zend\ServiceManager\ServiceManager;
 use Zend\I18n\Translator\Translator;
 use Zend\View\Renderer\PhpRenderer;

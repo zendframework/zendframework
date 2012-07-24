@@ -10,10 +10,10 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Acl;
-use Zend\View\Helper\Navigation;
-use Zend\Acl\Role;
+use Zend\Permissions\Acl;
+use Zend\Permissions\Acl\Role;
 use Zend\View;
+use Zend\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation

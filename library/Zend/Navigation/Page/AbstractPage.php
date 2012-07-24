@@ -11,9 +11,9 @@
 namespace Zend\Navigation\Page;
 
 use Traversable;
-use Zend\Acl\Resource\ResourceInterface as AclResource;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Exception;
+use Zend\Permissions\Acl\Resource\ResourceInterface as AclResource;
 use Zend\Stdlib\ArrayUtils;
 
 /**

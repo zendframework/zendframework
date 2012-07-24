@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Console
+ */
+
 namespace Zend\Console\Charset;
 
 use Zend\Console\CharsetInterface;
@@ -7,6 +16,9 @@ use Zend\Console\CharsetInterface;
  * Extended ASCII character set (positions 127+, MS DOS & Windows compatible)
  *
  * @link http://en.wikipedia.org/wiki/Box-drawing_characters
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Charset
  */
 class AsciiExtended implements CharsetInterface{
 
@@ -25,7 +37,7 @@ class AsciiExtended implements CharsetInterface{
     const LINE_SINGLE_SE    = "\xd9";
     const LINE_SINGLE_SW    = "\xc0";
     const LINE_SINGLE_CROSS = "\xc5";
-    
+
     const LINE_DOUBLE_EW    = "\xcd";
     const LINE_DOUBLE_NS    = "\xba";
     const LINE_DOUBLE_NW    = "\xc9";

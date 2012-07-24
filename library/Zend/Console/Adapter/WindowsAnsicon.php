@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Console
+ */
+
 namespace Zend\Console\Adapter;
 
 use Zend\Console\AdapterInterface;
@@ -20,6 +29,10 @@ use Zend\Console;
  * Console should not run in UTF8 code page (65001), because ANSICON does not behave well with it.
  * It's best to use non-unicode code page 437, 850, 851, 852 or similar. Run "help mode" for more
  * information on how to change Windows console code page.
+ *
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Adapter
  */
 class WindowsAnsicon extends Posix implements AdapterInterface
 {

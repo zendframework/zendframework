@@ -10,6 +10,11 @@
 
 namespace Zend\Console\Exception;
 
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Exception
+ */
 class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {
 

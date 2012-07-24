@@ -12,6 +12,7 @@ namespace ZendTest\Mvc\Controller\Plugin;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
+use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\Plugin\Forward as ForwardPlugin;
@@ -27,6 +28,7 @@ class ForwardTest extends TestCase
 {
     public function setUp()
     {
+        StaticEventManager::resetInstance();
         $event   = new MvcEvent();
         $event->setRequest(new Request());
         $event->setResponse(new Response());
@@ -42,6 +44,11 @@ class ForwardTest extends TestCase
         $this->controller->setServiceLocator($locator);
 
         $this->plugin = $this->controller->plugin('forward');
+    }
+
+    public function tearDown()
+    {
+        StaticEventManager::resetInstance();
     }
 
     public function testPluginWithoutEventAwareControllerRaisesDomainException()

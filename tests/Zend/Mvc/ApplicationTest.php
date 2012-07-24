@@ -80,6 +80,7 @@ class ApplicationTest extends TestCase
             ))
         );
         $sm->setService('ApplicationConfig', $appConfig);
+        $sm->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
         $sm->setAllowOverride(true);
 
         $this->application = $sm->get('Application');

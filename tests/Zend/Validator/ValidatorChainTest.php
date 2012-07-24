@@ -13,6 +13,7 @@ namespace ZendTest\Validator;
 use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Between;
+use Zend\Validator\NotEmpty;
 use Zend\Validator\StaticValidator;
 use Zend\Validator\ValidatorChain;
 
@@ -39,6 +40,17 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->validator = new ValidatorChain();
+    }
+
+    public function populateValidatorChain()
+    {
+        $this->validator->addValidator(new NotEmpty());
+        $this->validator->addValidator(new Between());
+    }
+
+    public function testValidatorChainIsEmptyByDefault()
+    {
+        $this->assertEquals(0, count($this->validator->getValidators()));
     }
 
     /**
@@ -144,6 +156,12 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('isEmpty', $messages);
+    }
+
+    public function testCountGivesCountOfAttachedValidators()
+    {
+        $this->populateValidatorChain();
+        $this->assertEquals(2, count($this->validator->getValidators()));
     }
 
     /**

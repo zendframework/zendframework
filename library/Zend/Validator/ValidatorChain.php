@@ -211,6 +211,16 @@ class ValidatorChain implements
     }
 
     /**
+     * Get all the validators
+     *
+     * @return array
+     */
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
+    /**
      * Invoke chain as command
      *
      * @param  mixed $value

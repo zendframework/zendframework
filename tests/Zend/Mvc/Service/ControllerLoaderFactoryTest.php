@@ -44,7 +44,9 @@ class ControllerLoaderFactoryTest extends TestCase
             $this->loader->get('ZendTest\Mvc\Service\TestAsset\InvalidDispatchableClass');
             $this->fail('Retrieving the invalid dispatchable should fail');
         } catch (\Exception $e) {
-            $this->assertNotContains('Should not instantiate this', $e->getMessage());
+            do {
+                $this->assertNotContains('Should not instantiate this', $e->getMessage());
+            } while ($e = $e->getPrevious());
         }
     }
 }

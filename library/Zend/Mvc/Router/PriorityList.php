@@ -63,7 +63,7 @@ class PriorityList implements Iterator, Countable
 
         $this->routes[$name] = array(
             'route'    => $route,
-            'priority' => $priority,
+            'priority' => (int) $priority,
             'serial'   => $this->serial++,
         );
     }

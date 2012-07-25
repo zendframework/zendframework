@@ -10,7 +10,8 @@
 
 namespace ZendTest\Filter\Encrypt;
 
-use Zend\Filter\Encrypt\Mcrypt as McryptEncryption;
+use Zend\Filter\Encrypt\BlockCipher as BlockCipherEncryption;
+use Zend\Filter\Exception;
 
 /**
  * @category   Zend
@@ -18,11 +19,13 @@ use Zend\Filter\Encrypt\Mcrypt as McryptEncryption;
  * @subpackage UnitTests
  * @group      Zend_Filter
  */
-class McryptTest extends \PHPUnit_Framework_TestCase
+class BlockCipherTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (!extension_loaded('mcrypt')) {
+        try {
+            $filter = new BlockCipherEncryption(array('key' => 'testkey'));
+        } catch (Exception\RuntimeException $e) {
             $this->markTestSkipped('This adapter needs the mcrypt extension');
         }
     }
@@ -32,20 +35,19 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testBasicMcrypt()
+    public function testBasicBlockCipher()
     {
-        $filter = new McryptEncryption(array('key' => 'testkey'));
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
         $valuesExpected = array(
-            'STRING' => 'STRING',
-            'ABC1@3' => 'ABC1@3',
-            'A b C'  => 'A B C'
+            'STRING' => '5b68e3648f9136e5e9bfaa2242e5b668e7501b2c20e8f9e2c76638f017f62a8eWmVuZEZyYW1ld29yazIuMDpd5vWydswa0fyIo2dnF0Q=',
+            'ABC1@3' => 'c7da11b89330f6bbbb15fcb6de574c7ec869ad7187a7d466e60f2437914d927aWmVuZEZyYW1ld29yazIuMKXsBdYXBLQx9elx0B20uxQ=',
+            'A b C' => 'ca1b9df732facf9dfadc7c3fdf1ccdc211bf21f638d459f43fefc74bbc9c8e01WmVuZEZyYW1ld29yazIuMM1som/As52rdK/4g7uoYx4='
         );
-
+        $filter->setVector('ZendFramework2.0');
         $enc = $filter->getEncryption();
-        $filter->setVector('testvect');
         $this->assertEquals('testkey', $enc['key']);
         foreach ($valuesExpected as $input => $output) {
-            $this->assertNotEquals($output, $filter->encrypt($input));
+            $this->assertEquals($output, $filter->encrypt($input));
         }
     }
 
@@ -56,12 +58,12 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetVector()
     {
-        $filter = new McryptEncryption(array('key' => 'testkey'));
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $this->assertEquals('testvect', $filter->getVector());
 
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'wrong size');
-        $filter->setVector('1');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
+        $output = $filter->encrypt('test');
     }
 
     /**
@@ -71,16 +73,14 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultEncryption()
     {
-        $filter = new McryptEncryption(array('key' => 'testkey'));
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $this->assertEquals(
             array('key' => 'testkey',
-                  'algorithm' => MCRYPT_BLOWFISH,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_CBC,
-                  'mode_directory' => '',
+                  'algorithm' => 'aes',
                   'vector' => 'testvect',
-                  'salt' => false),
+                  'key_iteration' => 5000,
+                  'hash' => 'sha256'),
             $filter->getEncryption()
         );
     }
@@ -92,19 +92,17 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetEncryption()
     {
-        $filter = new McryptEncryption(array('key' => 'testkey'));
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $filter->setEncryption(
-            array('mode' => MCRYPT_MODE_ECB,
-                  'algorithm' => MCRYPT_3DES));
+            array('algorithm' => '3des')
+        );
         $this->assertEquals(
             array('key' => 'testkey',
-                  'algorithm' => MCRYPT_3DES,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_ECB,
-                  'mode_directory' => '',
+                  'algorithm' => '3des',
                   'vector' => 'testvect',
-                  'salt' => false),
+                  'key_iteration' => 5000,
+                  'hash' => 'sha256'),
             $filter->getEncryption()
         );
     }
@@ -116,8 +114,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncryptionWithDecryptionMcrypt()
     {
-        $filter = new McryptEncryption(array('key' => 'testkey'));
-        $filter->setVector('testvect');
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
+        $filter->setVector('1234567890123456');
         $output = $filter->encrypt('teststring');
 
         $this->assertNotEquals('teststring', $output);
@@ -131,7 +129,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructionWithStringKey()
     {
-        $filter = new McryptEncryption('testkey');
+        $filter = new BlockCipherEncryption('testkey');
         $data = $filter->getEncryption();
         $this->assertEquals('testkey', $data['key']);
     }
@@ -142,7 +140,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testConstructionWithInteger()
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options argument');
-        $filter = new McryptEncryption(1234);
+        $filter = new BlockCipherEncryption(1234);
     }
 
     /**
@@ -150,8 +148,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
-        $filter = new McryptEncryption('testkey');
-        $this->assertEquals('Mcrypt', $filter->toString());
+        $filter = new BlockCipherEncryption('testkey');
+        $this->assertEquals('BlockCipher', $filter->toString());
     }
 
     /**
@@ -159,7 +157,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingEncryptionOptions()
     {
-        $filter = new McryptEncryption('testkey');
+        $filter = new BlockCipherEncryption('testkey');
         $filter->setEncryption('newkey');
         $test = $filter->getEncryption();
         $this->assertEquals('newkey', $test['key']);
@@ -180,7 +178,6 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
         try {
             $filter->setEncryption(array('mode' => 'unknown'));
-            $filter->fail();
         } catch (\Zend\Filter\Exception\InvalidArgumentException $e) {
             $this->assertContains('The mode', $e->getMessage());
         }
@@ -191,8 +188,9 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingEmptyVector()
     {
-        $filter = new McryptEncryption('newkey');
-        $filter->setVector();
+        $filter = new BlockCipherEncryption('newkey');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'The salt (IV) cannot be empty');
+        $filter->setVector('');
     }
 
     /**
@@ -210,8 +208,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the bz2 extension');
         }
 
-        $filter = new McryptEncryption(array('key' => 'testkey'));
-        $filter->setVector('testvect');
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
+        $filter->setVector('1234567890123456');
         $filter->setCompression('bz2');
         $output = $filter->encrypt('teststring');
 

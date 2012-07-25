@@ -53,7 +53,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
             dirname(__DIR__).'/_files/newencryption.txt',
             $filter->getFilename());
 
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
             $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
@@ -70,7 +70,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileEncrypt();
         $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
             $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
@@ -79,7 +79,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
             file_get_contents(dirname(__DIR__).'/_files/newencryption.txt'));
 
         $filter = new FileDecrypt();
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
         $input = $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt', $input);
 
@@ -94,7 +94,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     public function testNonExistingFile()
     {
         $filter = new FileEncrypt();
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         echo $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
@@ -106,7 +106,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     public function testEncryptionInSameFile()
     {
         $filter = new FileEncrypt();
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
 
         copy(dirname(__DIR__).'/_files/encryption.txt', dirname(__DIR__).'/_files/newencryption.txt');
         $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');

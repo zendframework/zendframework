@@ -360,7 +360,7 @@ class Table
         $totalNumColumns = count($this->columnWidths);
 
         // Check if we have a horizontal character defined
-        $hasHorizontal = $this->_decorator->getHorizontal() !== '';
+        $hasHorizontal = $this->decorator->getHorizontal() !== '';
 
         // Now render all rows, starting from the first one
         $numRows = count($this->rows);

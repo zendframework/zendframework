@@ -10,8 +10,6 @@
 
 namespace Zend\ServiceManager;
 
-use ReflectionClass;
-
 /**
  * ServiceManager implementation for managing plugins
  *

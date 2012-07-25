@@ -10,6 +10,8 @@
 
 namespace Zend\ServiceManager;
 
+use ReflectionClass;
+
 class ServiceManager implements ServiceLocatorInterface
 {
 

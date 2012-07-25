@@ -52,10 +52,10 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      * Add a default initializer to ensure the plugin is valid after instance
      * creation.
      *
-     * @param  null|ConfigurationInterface $configuration
+     * @param  null|ConfigInterface $configuration
      * @return void
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
         $self = $this;

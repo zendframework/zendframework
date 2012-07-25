@@ -439,7 +439,6 @@ class ApplicationTest extends TestCase
         $this->application->run();
         $this->assertContains(Application::ERROR_CONTROLLER_INVALID, $response->getContent());
         $this->assertContains('bad', $response->getContent());
-        $this->assertContains('stdClass', $response->getContent());
     }
 
     /**

@@ -86,7 +86,7 @@ class ControllerManager extends AbstractPluginManager
      *
      * @param  mixed $plugin
      * @return true
-     * @throws Exception\DomainException
+     * @throws Exception\InvalidControllerException
      */
     public function validatePlugin($plugin)
     {
@@ -95,7 +95,7 @@ class ControllerManager extends AbstractPluginManager
             return;
         }
 
-        throw new Exception\DomainException(sprintf(
+        throw new Exception\InvalidControllerException(sprintf(
             'Controller of type %s is invalid; must implement Zend\Stdlib\DispatchableInterface',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin))
         ));

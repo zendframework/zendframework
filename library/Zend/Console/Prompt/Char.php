@@ -54,12 +54,13 @@ class Char extends AbstractPrompt implements PromptInterface
      * @param bool    $echo           Display the selection after user presses key
      */
     public function __construct(
-        $promptText = 'Please hit a key', 
-        $allowedChars = 'abc', 
-        $ignoreCase = true, 
-        $allowEmpty = false, 
-        $echo = true)
-    {
+        $promptText = 'Please hit a key',
+        $allowedChars = 'abc',
+        $ignoreCase = true,
+        $allowEmpty = false,
+        $echo = true
+    ) {
+
         if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
@@ -130,7 +131,7 @@ class Char extends AbstractPrompt implements PromptInterface
                 }
                 break;
             }
-        } while(true);
+        } while (true);
 
         return $this->lastResponse = $char;
     }

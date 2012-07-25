@@ -20,7 +20,9 @@ use Zend\Console\CharsetInterface;
  * @package    Zend_Console
  * @subpackage Charset
  */
-class Utf8 implements CharsetInterface{
+class Utf8 implements CharsetInterface
+{
+
     const ACTIVATE          = "";
     const DEACTIVATE        = "";
 

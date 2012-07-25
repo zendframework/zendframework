@@ -70,7 +70,7 @@ abstract class Console
             /**
              * Try to use the supplied charset class
              */
-            if ($forceCharset !== null){
+            if ($forceCharset !== null) {
                 if (substr($forceCharset,0,1) == '\\') {
                     $className = $forceCharset;
                 } elseif (stristr($forceAdapter,'\\')) {

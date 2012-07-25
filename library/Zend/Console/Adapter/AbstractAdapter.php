@@ -98,7 +98,7 @@ abstract class AbstractAdapter implements AdapterInterface
         } elseif ($width == $consoleWidth) {
             $this->write($text, $color, $bgColor);
         } else {
-            $this->write($text. "\n", $color, $bgColor);;
+            $this->write($text. "\n", $color, $bgColor);
         }
     }
 
@@ -136,11 +136,17 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param null|int                 $fillBgColor  (optional) Background color of box fill
      */
     public function writeBox(
-        $x1, $y1, $x2, $y2,
-        $lineStyle = self::LINE_SINGLE, $fillStyle = self::FILL_NONE,
-        $color = null, $bgColor = null, $fillColor = null, $fillBgColor = null
-    )
-    {
+        $x1,
+        $y1,
+        $x2,
+        $y2,
+        $lineStyle = self::LINE_SINGLE,
+        $fillStyle = self::FILL_NONE,
+        $color = null,
+        $bgColor = null,
+        $fillColor = null,
+        $fillBgColor = null
+    ) {
         /**
          * Sanitize coordinates
          */
@@ -330,8 +336,8 @@ abstract class AbstractAdapter implements AdapterInterface
         $x = 0,
         $y = 0,
         $color = null,
-        $bgColor = null)
-    {
+        $bgColor = null
+    ) {
 
     }
 
@@ -468,7 +474,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function colorize($string, $color = null, $bgColor = null)
     {
-       return $string;
+        return $string;
     }
 
     /**
@@ -619,8 +625,9 @@ abstract class AbstractAdapter implements AdapterInterface
         $f = fopen('php://stdin','r');
         do {
             $char = fread($f,1);
-        } while($mask === null || stristr($mask,$char));
+        } while ($mask === null || stristr($mask,$char));
         fclose($f);
         return $char;
     }
 }
+

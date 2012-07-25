@@ -20,7 +20,8 @@ use Zend\Console\CharsetInterface;
  * @package    Zend_Console
  * @subpackage Charset
  */
-class DECSG implements CharsetInterface{
+class DECSG implements CharsetInterface
+{
 
     const ACTIVATE          = "\x1b(0";
     const DEACTIVATE        = "\x1b(B";

@@ -37,6 +37,54 @@ class Params extends AbstractPlugin
     }
 
     /**
+     * Retrieve a named $_FILES value
+     * 
+     * @param  string $name 
+     * @param  mixed $default 
+     * @return array|\ArrayAccess|null
+     */
+    public function fromFiles($name, $default = null)
+    {
+        return $this->getController()->getRequest()->getFiles($name, $default);
+    }
+
+    /**
+     * Get a header
+     * 
+     * @param  string $header 
+     * @param  mixed $default 
+     * @return null|\Zend\Http\Header\HeaderInterface
+     */
+    public function fromHeader($header, $default = null)
+    {
+        return $this->getController()->getRequest()->getHeaders($header, $default);
+    }
+
+    /**
+     * Get a param from POST.
+     *
+     * @param string $param
+     * @param mixed $default
+     * @return mixed
+     */
+    public function fromPost($param, $default = null)
+    {
+        return $this->getController()->getRequest()->getPost($param, $default);
+    }
+
+    /**
+     * Get a param from QUERY.
+     *
+     * @param string $param
+     * @param mixed $default
+     * @return mixed
+     */
+    public function fromQuery($param, $default = null)
+    {
+        return $this->getController()->getRequest()->getQuery($param, $default);
+    }
+
+    /**
      * Get a param from the route match.
      *
      * @param string $param
@@ -55,29 +103,5 @@ class Params extends AbstractPlugin
         }
 
         return $controller->getEvent()->getRouteMatch()->getParam($param, $default);
-    }
-
-    /**
-     * Get a param from POST.
-     *
-     * @param string $param
-     * @param mixed $default
-     * @return mixed
-     */
-    public function fromPost($param, $default = null)
-    {
-        return $this->getController()->getRequest()->getPost()->get($param, $default);
-    }
-
-    /**
-     * Get a param from QUERY.
-     *
-     * @param string $param
-     * @param mixed $default
-     * @return mixed
-     */
-    public function fromQuery($param, $default = null)
-    {
-        return $this->getController()->getRequest()->getQuery()->get($param, $default);
     }
 }

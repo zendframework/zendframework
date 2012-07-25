@@ -391,7 +391,7 @@ class Fieldset extends Element implements FieldsetInterface
                 continue;
             }
 
-            $element->setAttribute('value', $value);
+            $element->setValue($value);
         }
     }
 

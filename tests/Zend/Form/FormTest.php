@@ -491,7 +491,7 @@ class FormTest extends TestCase
         $this->assertSame($model->getInputFilter(), $this->form->getInputFilter());
     }
 
-    public function testSettingDataShouldSetElementValueAttributes()
+    public function testSettingDataShouldSetElementValues()
     {
         $this->populateForm();
         $data = array(
@@ -507,10 +507,10 @@ class FormTest extends TestCase
         $fieldset = $this->form->get('foobar');
         foreach (array('foo', 'bar') as $name) {
             $element = $this->form->get($name);
-            $this->assertEquals($data[$name], $element->getAttribute('value'));
+            $this->assertEquals($data[$name], $element->getValue());
 
             $element = $fieldset->get($name);
-            $this->assertEquals($data[$name], $element->getAttribute('value'));
+            $this->assertEquals($data[$name], $element->getValue());
         }
     }
 
@@ -524,9 +524,9 @@ class FormTest extends TestCase
         $this->form->bind($object);
 
         $foo = $this->form->get('foo');
-        $this->assertEquals('foobar', $foo->getAttribute('value'));
+        $this->assertEquals('foobar', $foo->getValue());
         $bar = $this->form->get('bar');
-        $this->assertEquals('barbaz', $bar->getAttribute('value'));
+        $this->assertEquals('barbaz', $bar->getValue());
     }
 
     public function testUsesBoundObjectAsDataSourceWhenNoDataSet()

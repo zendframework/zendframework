@@ -26,53 +26,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class ModuleManagerFactory implements FactoryInterface
 {
     /**
-     * Default mvc-related service configuration -- can be overridden by modules.
-     *
-     * @var array
-     */
-    protected $defaultServiceConfig = array(
-        'invokables' => array(
-            'DispatchListener' => 'Zend\Mvc\DispatchListener',
-            'RouteListener'    => 'Zend\Mvc\RouteListener',
-        ),
-        'factories' => array(
-            'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-            'Config'                  => 'Zend\Mvc\Service\ConfigFactory',
-            'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
-            'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
-            'ConsoleAdapter'          => 'Zend\Mvc\Service\ConsoleAdapterFactory',
-            'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
-            'Request'                 => 'Zend\Mvc\Service\RequestFactory',
-            'Response'                => 'Zend\Mvc\Service\ResponseFactory',
-            'Router'                  => 'Zend\Mvc\Service\RouterFactory',
-            'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
-            'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
-            'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
-            'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
-            'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-            'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-            'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-            'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
-            'ViewResolver'            => 'Zend\Mvc\Service\ViewResolverFactory',
-            'ViewTemplateMapResolver' => 'Zend\Mvc\Service\ViewTemplateMapResolverFactory',
-            'ViewTemplatePathStack'   => 'Zend\Mvc\Service\ViewTemplatePathStackFactory',
-        ),
-        'aliases' => array(
-            'Configuration'                          => 'Config',
-            'Console'                                => 'ConsoleAdapter',
-            'ControllerPluginBroker'                 => 'ControllerPluginManager',
-            'Di'                                     => 'DependencyInjector',
-            'Zend\Di\LocatorInterface'               => 'DependencyInjector',
-            'Zend\Mvc\Controller\PluginBroker'       => 'ControllerPluginBroker',
-            'Zend\Mvc\Controller\PluginManager'      => 'ControllerPluginManager',
-            'Zend\View\Resolver\TemplateMapResolver' => 'ViewTemplateMapResolver',
-            'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',
-            'Zend\View\Resolver\AggregateResolver'   => 'ViewResolver',
-            'Zend\View\Resolver\ResolverInterface'   => 'ViewResolver',
-        ),
-    );
-
-    /**
      * Creates and returns the module manager
      *
      * Instantiates the default module listeners, providing them configuration
@@ -88,6 +41,8 @@ class ModuleManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $serviceLocator->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
+
         $configuration    = $serviceLocator->get('ApplicationConfig');
         $listenerOptions  = new ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);

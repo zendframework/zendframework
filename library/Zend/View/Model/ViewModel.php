@@ -148,7 +148,7 @@ class ViewModel implements ModelInterface
     }
 
     /**
-     * Set renderer option/hint
+     * Set a single option
      *
      * @param  string $name
      * @param  mixed $value
@@ -161,9 +161,23 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Get a single option
+     *
+     * @param  string       $name           The option to get.
+     * @param  mixed|null   $default        (optional) A default value if the option is not yet set.
+     * @return mixed
+     */
+    public function getOption($name, $default = null)
+    {
+        $name = (string)$name;
+        return array_key_exists($name, $this->options) ? $this->options[$name] : $default;
+    }
+
+    /**
      * Set renderer options/hints en masse
      *
-     * @param  array|Traversable $name
+     * @param array|\Traversable $options
+     * @throws \Zend\View\Exception\InvalidArgumentException
      * @return ViewModel
      */
     public function setOptions($options)
@@ -194,6 +208,23 @@ class ViewModel implements ModelInterface
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Get a single view variable
+     *
+     * @param  string       $name
+     * @param  mixed|null   $default (optional) default value if the variable is not present.
+     * @return mixed
+     */
+    public function getVariable($name, $default = null)
+    {
+        $name = (string)$name;
+        if(array_key_exists($name,$this->variables)){
+            return $this->variables[$name];
+        }else{
+            return $default;
+        }
     }
 
     /**

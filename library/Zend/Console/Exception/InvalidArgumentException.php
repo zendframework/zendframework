@@ -10,9 +10,11 @@
 
 namespace Zend\Console\Exception;
 
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+/**
+ * @category   Zend
+ * @package    Zend_Console
+ * @subpackage Exception
+ */
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
-
 }

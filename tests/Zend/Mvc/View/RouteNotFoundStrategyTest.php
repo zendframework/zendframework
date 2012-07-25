@@ -16,7 +16,7 @@ use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\RouteNotFoundStrategy;
+use Zend\Mvc\View\Http\RouteNotFoundStrategy;
 use Zend\View\Model\ViewModel;
 
 /**

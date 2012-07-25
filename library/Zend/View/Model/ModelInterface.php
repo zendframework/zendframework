@@ -52,6 +52,15 @@ interface ModelInterface extends Countable, IteratorAggregate
     public function getOptions();
 
     /**
+     * Get a single view variable
+     *
+     * @param  string       $name
+     * @param  mixed|null   $default (optional) default value if the variable is not present.
+     * @return mixed
+     */
+    public function getVariable($name, $default = null);
+
+    /**
      * Set view variable
      *
      * @param  string $name

@@ -10,9 +10,11 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Mvc\Router\Http\TreeRouteStack as Router;
+use Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter;
+use Zend\Mvc\Router\Console\SimpleRouteStack as ConsoleRouter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Console\Console;
 
 /**
  * @category   Zend
@@ -28,14 +30,32 @@ class RouterFactory implements FactoryInterface
      * to instantiate the router. Uses the TreeRouteStack implementation by
      * default.
      *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return TreeRouteStack
+     * @param  ServiceLocatorInterface        $serviceLocator
+     * @param string|null                     $cName
+     * @param string|null                     $rName
+     * @return \Zend\Mvc\Router\RouteStackInterface
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function createService(ServiceLocatorInterface $serviceLocator, $cName = null, $rName = null)
     {
         $config = $serviceLocator->get('Configuration');
-        $routes = isset($config['router']) ? $config['router'] : array();
-        $router = Router::factory($routes);
+
+        if(
+            $rName === 'ConsoleRouter' ||                   // force console router
+            ($rName === null && Console::isConsole())       // auto detect console
+        ){
+            // We are in a console, use console router.
+            if(isset($config['console']) && isset($config['console']['router'])){
+                $routerConfig = $config['console']['router'];
+            }else{
+                $routerConfig = array();
+            }
+
+            $router = ConsoleRouter::factory($routerConfig);
+        }else{
+            // This is an HTTP request, so use HTTP router
+            $routerConfig = isset($config['router']) ? $config['router'] : array();
+            $router = HttpRouter::factory($routerConfig);
+        }
         return $router;
     }
 }

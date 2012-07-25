@@ -19,7 +19,7 @@ use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\DefaultRenderingStrategy;
+use Zend\Mvc\View\Http\DefaultRenderingStrategy;
 use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
 use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\FeedRenderer;

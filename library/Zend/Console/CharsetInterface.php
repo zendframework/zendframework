@@ -8,13 +8,12 @@
  * @package   Zend_Console
  */
 
-namespace Zend\Console\Exception;
+namespace Zend\Console;
 
 /**
  * @category   Zend
  * @package    Zend_Console
- * @subpackage Exception
  */
-interface ExceptionInterface
+interface CharsetInterface
 {
 }

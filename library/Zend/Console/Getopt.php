@@ -318,7 +318,7 @@ class Getopt
      */
     public function addArguments($argv)
     {
-        if(!is_array($argv)) {
+        if (!is_array($argv)) {
             throw new Exception\InvalidArgumentException("Parameter #1 to addArguments should be an array");
         }
         $this->_argv = array_merge($this->_argv, $argv);
@@ -336,7 +336,7 @@ class Getopt
      */
     public function setArguments($argv)
     {
-        if(!is_array($argv)) {
+        if (!is_array($argv)) {
             throw new Exception\InvalidArgumentException("Parameter #1 to setArguments should be an array");
         }
         $this->_argv = $argv;
@@ -541,6 +541,15 @@ class Getopt
         return $this->_remainingArgs;
     }
 
+    public function getArguments()
+    {
+        $result = $this->getRemainingArgs();
+        foreach ($this->getOptions() as $option) {
+            $result[$option] = $this->getOption($option);
+        }
+        return $result;
+    }
+
     /**
      * Return a useful option reference, formatted for display in an
      * error message.
@@ -672,7 +681,7 @@ class Getopt
                 $this->_parseLongOption($argv);
             } elseif (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
                 $this->_parseShortOptionCluster($argv);
-            } else if($this->_getoptConfig[self::CONFIG_PARSEALL]) {
+            } else if ($this->_getoptConfig[self::CONFIG_PARSEALL]) {
                 $this->_remainingArgs[] = array_shift($argv);
             } else {
                 /*
@@ -836,7 +845,7 @@ class Getopt
 
         if (!array_key_exists($flag, $this->_options)) {
             $this->_options[$flag] = $value;
-        } else if($this->_getoptConfig[self::CONFIG_CUMULATIVE_PARAMETERS]) {
+        } else if ($this->_getoptConfig[self::CONFIG_CUMULATIVE_PARAMETERS]) {
             $this->_options[$flag] = (array) $this->_options[$flag];
             array_push($this->_options[$flag], $value);
         } else {

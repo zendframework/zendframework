@@ -8,23 +8,16 @@
  * @package   Zend_Mvc
  */
 
-namespace Zend\Mvc\View;
+namespace Zend\Mvc\View\Http;
 
 use Zend\EventManager\EventManagerInterface as Events;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use Zend\View\Model\ModelInterface as ViewModel;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Model\ViewModel;
 
-class InjectViewModelListener implements ListenerAggregateInterface
+class CreateViewModelListener implements ListenerAggregateInterface
 {
-    /**
-     * FilterInterface/inflector used to normalize names for use as template identifiers
-     *
-     * @var mixed
-     */
-    protected $inflector;
-
     /**
      * Listeners we've registered
      *
@@ -40,8 +33,8 @@ class InjectViewModelListener implements ListenerAggregateInterface
      */
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromArray'),  -80);
+        $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromNull'),   -80);
     }
 
     /**
@@ -60,29 +53,36 @@ class InjectViewModelListener implements ListenerAggregateInterface
     }
 
     /**
-     * Insert the view model into the event
-     *
-     * Inspects the MVC result; if it is a view model, it then either (a) adds
-     * it as a child to the default, composed view model, or (b) replaces it,
-     * if the result  is marked as terminable.
+     * Inspect the result, and cast it to a ViewModel if an assoc array is detected
      *
      * @param  MvcEvent $e
      * @return void
      */
-    public function injectViewModel(MvcEvent $e)
+    public function createViewModelFromArray(MvcEvent $e)
     {
         $result = $e->getResult();
-        if (!$result instanceof ViewModel) {
+        if (!ArrayUtils::hasStringKeys($result, true)) {
             return;
         }
 
-        $model = $e->getViewModel();
+        $model = new ViewModel($result);
+        $e->setResult($model);
+    }
 
-        if ($result->terminate()) {
-            $e->setViewModel($result);
+    /**
+     * Inspect the result, and cast it to a ViewModel if null is detected
+     *
+     * @param MvcEvent $e
+     * @return void
+    */
+    public function createViewModelFromNull(MvcEvent $e)
+    {
+        $result = $e->getResult();
+        if (null !== $result) {
             return;
         }
 
-        $model->addChild($result);
+        $model = new ViewModel;
+        $e->setResult($model);
     }
 }

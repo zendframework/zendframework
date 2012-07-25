@@ -14,7 +14,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 use Zend\EventManager\EventManager;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\CreateViewModelListener;
+use Zend\Mvc\View\Http\CreateViewModelListener;
 use Zend\View\Model\ViewModel;
 
 /**

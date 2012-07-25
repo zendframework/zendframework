@@ -359,6 +359,9 @@ class Table
         // Count total columns
         $totalNumColumns = count($this->columnWidths);
 
+        // Check if we have a horizontal character defined
+        $hasHorizontal = $this->_decorator->getHorizontal() !== '';
+
         // Now render all rows, starting from the first one
         $numRows = count($this->rows);
         foreach ($this->rows as $rowNum => $row) {
@@ -372,7 +375,7 @@ class Table
             $numColumns   = count($columnWidths);
 
             // Check what we have to draw
-            if ($rowNum === 0) {
+            if ($rowNum === 0 && $hasHorizontal) {
                 // If this is the first row, draw the table top
                 $result .= $this->decorator->getTopLeft();
 
@@ -390,7 +393,9 @@ class Table
                 $result .= "\n";
             } else {
                 // Else check if we have to draw the row separator
-                if ($this->autoSeparate & self::AUTO_SEPARATE_ALL) {
+                if (!$hasHorizontal){
+                    $drawSeparator = false; // there is no horizontal character;
+                } elseif ($this->autoSeparate & self::AUTO_SEPARATE_ALL) {
                     $drawSeparator = true;
                 } elseif ($rowNum === 1 && $this->autoSeparate & self::AUTO_SEPARATE_HEADER) {
                     $drawSeparator = true;
@@ -408,6 +413,7 @@ class Table
                     $currentUpperWidth  = 0;
                     $currentLowerWidth  = 0;
 
+                    // Add horizontal lines
                     // Loop through all column widths
                     foreach ($this->columnWidths as $columnNum => $columnWidth) {
                         // Add the horizontal line
@@ -471,7 +477,7 @@ class Table
             $result .= $renderedRow;
 
             // If this is the last row, draw the table bottom
-            if (($rowNum + 1) === $numRows) {
+            if (($rowNum + 1) === $numRows && $hasHorizontal) {
                 $result .= $this->decorator->getBottomLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {

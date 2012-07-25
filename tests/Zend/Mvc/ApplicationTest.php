@@ -22,7 +22,7 @@ use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\Mvc\View\ViewManager;
+use Zend\Mvc\View\Http\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\Uri\UriFactory;
@@ -34,6 +34,11 @@ use Zend\Uri\UriFactory;
  */
 class ApplicationTest extends TestCase
 {
+    /**
+     * @var ServiceManager
+     */
+    protected $serviceManager;
+
     public function setUp()
     {
         $appConfig = array(
@@ -70,10 +75,11 @@ class ApplicationTest extends TestCase
                     'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
                     'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
                     'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-                    'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+                    'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
                     'Config'                  => $config,
                 ),
                 'aliases' => array(
+                    'Router'                 => 'HttpRouter',
                     'Configuration'          => 'Config',
                     'ControllerPluginBroker' => 'ControllerPluginManager',
                 ),
@@ -207,7 +213,7 @@ class ApplicationTest extends TestCase
 
         $request  = $this->application->getRequest();
         $response = $this->application->getResponse();
-        $router   = $this->serviceManager->get('Router');
+        $router   = $this->serviceManager->get('HttpRouter');
 
         $this->assertSame($request, $event->getRequest());
         $this->assertSame($response, $event->getResponse());
@@ -222,7 +228,7 @@ class ApplicationTest extends TestCase
         $uri     = UriFactory::factory('http://example.local/path');
         $request->setUri($uri);
 
-        $router = $this->serviceManager->get('Router');
+        $router = $this->serviceManager->get('HttpRouter');
         $route  = Router\Http\Literal::factory(array(
             'route'    => '/path',
             'defaults' => array(
@@ -246,7 +252,7 @@ class ApplicationTest extends TestCase
         $uri     = UriFactory::factory('http://example.local/sample');
         $request->setUri($uri);
 
-        $router = $this->serviceManager->get('Router');
+        $router = $this->serviceManager->get('HttpRouter');
         $route  = Router\Http\Literal::factory(array(
             'route'    => '/sample',
             'defaults' => array(
@@ -269,7 +275,7 @@ class ApplicationTest extends TestCase
         $uri     = UriFactory::factory('http://example.local/bad');
         $request->setUri($uri);
 
-        $router = $this->serviceManager->get('Router');
+        $router = $this->serviceManager->get('HttpRouter');
         $route  = Router\Http\Literal::factory(array(
             'route'    => '/bad',
             'defaults' => array(

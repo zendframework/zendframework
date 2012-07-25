@@ -33,18 +33,21 @@ class ModuleManagerFactory implements FactoryInterface
     protected $defaultServiceConfig = array(
         'invokables' => array(
             'DispatchListener' => 'Zend\Mvc\DispatchListener',
-            'Request'          => 'Zend\Http\PhpEnvironment\Request',
-            'Response'         => 'Zend\Http\PhpEnvironment\Response',
             'RouteListener'    => 'Zend\Mvc\RouteListener',
-            'ViewManager'      => 'Zend\Mvc\View\ViewManager',
         ),
         'factories' => array(
             'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
             'Config'                  => 'Zend\Mvc\Service\ConfigFactory',
             'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
             'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+            'ConsoleAdapter'          => 'Zend\Mvc\Service\ConsoleAdapterFactory',
             'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
+            'Request'                 => 'Zend\Mvc\Service\RequestFactory',
+            'Response'                => 'Zend\Mvc\Service\ResponseFactory',
             'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+            'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
+            'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
+            'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
             'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
             'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
             'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
@@ -56,6 +59,7 @@ class ModuleManagerFactory implements FactoryInterface
         ),
         'aliases' => array(
             'Configuration'                          => 'Config',
+            'Console'                                => 'ConsoleAdapter',
             'ControllerPluginBroker'                 => 'ControllerPluginManager',
             'Di'                                     => 'DependencyInjector',
             'Zend\Di\LocatorInterface'               => 'DependencyInjector',

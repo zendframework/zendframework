@@ -851,6 +851,52 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testLoadScrollingStyleWithDigitThrowsInvalidArgumentException()
+    {
+        $adapter = new \ZendTest\Paginator\TestAsset\TestAdapter;
+        $paginator = new \Zend\Paginator\Paginator($adapter);
+        $reflection = new \ReflectionMethod($paginator, '_loadScrollingStyle');
+        $reflection->setAccessible(true);
+
+        $this->setExpectedException(
+            'Zend\Paginator\Exception\InvalidArgumentException',
+            'Scrolling style must be a class ' .
+                'name or object implementing Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
+        );
+
+        $reflection->invoke($paginator, 12345);
+    }
+
+    public function testLoadScrollingStyleWithObjectThrowsInvalidArgumentException()
+    {
+        $adapter = new \ZendTest\Paginator\TestAsset\TestAdapter;
+        $paginator = new \Zend\Paginator\Paginator($adapter);
+        $reflection = new \ReflectionMethod($paginator, '_loadScrollingStyle');
+        $reflection->setAccessible(true);
+
+        $this->setExpectedException(
+            'Zend\Paginator\Exception\InvalidArgumentException',
+            'Scrolling style must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
+        );
+
+        $reflection->invoke($paginator, new \stdClass());
+    }
+
+    public function testGetCacheId()
+    {
+        $adapter = new \ZendTest\Paginator\TestAsset\TestAdapter;
+        $paginator = new \Zend\Paginator\Paginator($adapter);
+        $reflectionGetCacheId = new \ReflectionMethod($paginator, '_getCacheId');
+        $reflectionGetCacheId->setAccessible(true);
+        $outputGetCacheId = $reflectionGetCacheId->invoke($paginator, null);
+
+        $reflectionGetCacheInternalId = new \ReflectionMethod($paginator, '_getCacheInternalId');
+        $reflectionGetCacheInternalId->setAccessible(true);
+        $outputGetCacheInternalId = $reflectionGetCacheInternalId->invoke($paginator);
+
+        $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
+    }
+
 }
 
 class TestArrayAggregate implements Paginator\AdapterAggregateInterface

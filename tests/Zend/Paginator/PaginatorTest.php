@@ -841,13 +841,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testSetScrollingStylePluginManagerWithAdapterThrowsInvalidArgumentException()
     {
-        $adapter = new \ZendTest\Paginator\TestAsset\InvalidAdapter;
         $this->setExpectedException(
             'Zend\Paginator\Exception\InvalidArgumentException',
-            'Pagination scrolling-style manager must extend ScrollingStylePluginManager; received "ZendTest\Paginator\TestAsset\InvalidAdapter"'
+            'Pagination scrolling-style manager must extend ScrollingStylePluginManager; received "stdClass"'
         );
 
-        $this->_paginator->setScrollingStylePluginManager($adapter);
+        $this->_paginator->setScrollingStylePluginManager(
+            new \stdClass()
+        );
     }
 
 }

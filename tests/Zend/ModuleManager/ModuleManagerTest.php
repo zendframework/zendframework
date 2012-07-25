@@ -131,4 +131,16 @@ class ModuleManagerTest extends TestCase
         $moduleManager = new ModuleManager(array('NotFoundModule'));
         $moduleManager->loadModules();
     }
+
+    public function testCanLoadModuleDuringTheLoadModuleEvent()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+        $this->assertTrue(isset($config['loaded']));
+        $this->assertSame('oh, yeah baby!', $config['loaded']);
+    }
 }

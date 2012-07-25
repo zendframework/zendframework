@@ -11,6 +11,8 @@
 namespace ZendTest\Http;
 
 use Zend\Http\Request;
+use Zend\Http\Headers;
+use Zend\Http\Header\GenericHeader;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,6 +47,52 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($p, $request->getQuery());
         $this->assertSame($p, $request->getPost());
         $this->assertSame($p, $request->getFiles());
+
+        $headers = new Headers();
+        $request->setHeaders($headers);
+        $this->assertSame($headers, $request->getHeaders());
+    }
+    
+    public function testRetrievingASingleValueForParameters()
+    {
+        $request = new Request();
+        $p = new \Zend\Stdlib\Parameters(array(
+            'foo' => 'bar'
+        ));
+        $request->setQuery($p);
+        $request->setPost($p);
+        $request->setFiles($p);
+
+        $this->assertSame('bar', $request->getQuery('foo'));
+        $this->assertSame('bar', $request->getPost('foo'));
+        $this->assertSame('bar', $request->getFiles('foo'));
+
+        $headers = new Headers();
+        $h = new GenericHeader('foo','bar');
+        $headers->addHeader($h);
+
+        $request->setHeaders($headers);
+        $this->assertSame($headers, $request->getHeaders());
+        $this->assertSame($h, $request->getHeaders()->get('foo'));
+        $this->assertSame($h, $request->getHeader('foo'));
+    }
+
+    public function testParameterRetrievalDefaultValue()
+    {
+        $request = new Request();
+        $p = new \Zend\Stdlib\Parameters(array(
+            'foo' => 'bar'
+        ));
+        $request->setQuery($p);
+        $request->setPost($p);
+        $request->setFiles($p);
+        
+        $default = 15;
+        $this->assertSame($default, $request->getQuery('baz', $default));
+        $this->assertSame($default, $request->getPost('baz', $default));
+        $this->assertSame($default, $request->getFiles('baz', $default));
+        $this->assertSame($default, $request->getHeaders('baz', $default));
+        $this->assertSame($default, $request->getHeader('baz', $default));
     }
 
     public function testRequestPersistsRawBody()

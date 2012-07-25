@@ -294,18 +294,24 @@ class Request extends HttpRequest
     }
 
     /**
-     * Return the parameter container responsible for server parameters
+     * Return the parameter container responsible for server parameters or a single parameter value.
      *
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.
      * @see http://www.faqs.org/rfcs/rfc3875.html
-     * @return ParametersInterface
+     * @return \Zend\Stdlib\ParametersInterface|mixed
      */
-    public function getServer()
+    public function getServer($name = null, $default = null)
     {
         if ($this->serverParams === null) {
             $this->serverParams = new Parameters();
         }
 
-        return $this->serverParams;
+        if($name === null){
+            return $this->serverParams;
+        }
+
+        return $this->serverParams->get($name, $default);
     }
 
     /**
@@ -322,17 +328,23 @@ class Request extends HttpRequest
     }
 
     /**
-     * Return the parameter container responsible for env parameters
+     * Return the parameter container responsible for env parameters or a single parameter value.
      *
-     * @return ParametersInterface
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
+     * @return \Zend\Stdlib\ParametersInterface|mixed
      */
-    public function getEnv()
+    public function getEnv($name = null, $default = null)
     {
         if ($this->envParams === null) {
             $this->envParams = new Parameters();
         }
 
-        return $this->envParams;
+        if($name === null){
+            return $this->envParams;
+        }
+
+        return $this->envParams->get($name, $default);
     }
 
     /**

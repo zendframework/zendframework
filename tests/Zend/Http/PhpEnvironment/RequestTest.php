@@ -11,6 +11,8 @@
 namespace ZendTest\Http\PhpEnvironment;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Headers;
+use Zend\Http\Header\GenericHeader;
 use Zend\Http\PhpEnvironment\Request;
 
 class RequestTest extends TestCase
@@ -580,5 +582,55 @@ class RequestTest extends TestCase
         $_FILES = $files;
         $request = new Request();
         $this->assertEquals($expectedFiles, $request->getFiles()->toArray());
+    }
+
+    public function testParameterRetrievalDefaultValue()
+    {
+        $request = new Request();
+        $p = new \Zend\Stdlib\Parameters(array(
+            'foo' => 'bar'
+        ));
+        $request->setQuery($p);
+        $request->setPost($p);
+        $request->setFiles($p);
+        $request->setServer($p);
+        $request->setEnv($p);
+        
+        $default = 15;
+        $this->assertSame($default, $request->getQuery('baz', $default));
+        $this->assertSame($default, $request->getPost('baz', $default));
+        $this->assertSame($default, $request->getFiles('baz', $default));
+        $this->assertSame($default, $request->getServer('baz', $default));
+        $this->assertSame($default, $request->getEnv('baz', $default));
+        $this->assertSame($default, $request->getHeaders('baz', $default));
+        $this->assertSame($default, $request->getHeader('baz', $default));
+    }
+    
+    public function testRetrievingASingleValueForParameters()
+    {
+        $request = new Request();
+        $p = new \Zend\Stdlib\Parameters(array(
+            'foo' => 'bar'
+        ));
+        $request->setQuery($p);
+        $request->setPost($p);
+        $request->setFiles($p);
+        $request->setServer($p);
+        $request->setEnv($p);
+
+        $this->assertSame('bar', $request->getQuery('foo'));
+        $this->assertSame('bar', $request->getPost('foo'));
+        $this->assertSame('bar', $request->getFiles('foo'));
+        $this->assertSame('bar', $request->getServer('foo'));
+        $this->assertSame('bar', $request->getEnv('foo'));
+
+        $headers = new Headers();
+        $h = new GenericHeader('foo','bar');
+        $headers->addHeader($h);
+
+        $request->setHeaders($headers);
+        $this->assertSame($headers, $request->getHeaders());
+        $this->assertSame($h, $request->getHeaders()->get('foo'));
+        $this->assertSame($h, $request->getHeader('foo'));
     }
 }

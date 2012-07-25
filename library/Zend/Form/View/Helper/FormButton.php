@@ -84,9 +84,10 @@ class FormButton extends FormInput
             ));
         }
 
-        $attributes         = $element->getAttributes();
-        $attributes['name'] = $name;
-        $attributes['type'] = $this->getType($element);
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getType($element);
+        $attributes['value'] = $element->getValue();
 
         return sprintf(
             '<button %s>',

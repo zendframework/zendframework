@@ -51,11 +51,11 @@ class FormCheckboxTest extends CommonTestCase
     public function testUsesElementValueToDetermineCheckboxStatus()
     {
         $element = $this->getElement();
-        $element->setAttribute('value', 'checked');
+        $element->setValue('checked');
         $markup  = $this->helper->render($element);
 
-        $this->assertRegexp('#value="checked"\s+checked="checked"#', $markup);
-        $this->assertNotRegexp('#value="unchecked"\s+checked="checked"#', $markup);
+        $this->assertRegexp('#checked="checked"\s+value="checked"#', $markup);
+        $this->assertNotRegexp('#checked="checked"\s+value="unchecked"#', $markup);
     }
 
     public function testNoOptionsAttributeCreatesDefaultCheckedAndUncheckedValues()

@@ -82,12 +82,7 @@ class FormSelect extends AbstractHelper
         $options = (array) $attributes['options'];
         unset($attributes['options']);
 
-        $value = array();
-        if (isset($attributes['value'])) {
-            $value = $attributes['value'];
-            $value = $this->validateMultiValue($value, $attributes);
-            unset($attributes['value']);
-        };
+        $value = $this->validateMultiValue($element->getValue(), $attributes);
 
         $attributes['name'] = $name;
         if (array_key_exists('multiple', $attributes) && $attributes['multiple']) {
@@ -245,6 +240,10 @@ class FormSelect extends AbstractHelper
      */
     protected function validateMultiValue($value, array $attributes)
     {
+        if (null === $value) {
+            return array();
+        }
+
         if (!is_array($value)) {
             return (array) $value;
         }

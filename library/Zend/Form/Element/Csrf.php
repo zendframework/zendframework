@@ -51,38 +51,14 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     }
 
     /**
-     * Override: set a single element attribute
+     * Retrieve value
      *
-     * Does not allow setting value attribute; this will always be
-     * retrieved from the validator.
-     *
-     * @param  string $name
-     * @param  mixed $value
-     * @return Csrf
+     * Retrieves the hash from the validator
+     * 
+     * @return void
      */
-    public function setAttribute($name, $value)
+    public function getValue()
     {
-        if ('value' == $name) {
-            // Do not allow setting this
-            return;
-        }
-        return parent::setAttribute($name, $value);
-    }
-
-    /**
-     * Override: retrieve a single element attribute
-     *
-     * Retrieves validator hash when asked for 'value' attribute;
-     * otherwise, proxies to parent.
-     *
-     * @param  string $name
-     * @return mixed
-     */
-    public function getAttribute($name)
-    {
-        if ($name != 'value') {
-            return parent::getAttribute($name);
-        }
         $validator = $this->getValidator();
         return $validator->getHash();
     }

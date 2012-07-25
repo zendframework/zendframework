@@ -37,9 +37,62 @@ class DateTime extends Element implements InputProviderInterface
     );
 
     /**
+     * Date format to use for DateTime values. By default, this is RFC-3339, 
+     * which is what HTML5 dictates.
+     * 
+     * @var string
+     */
+    protected $format = PhpDateTime::RFC3339;
+
+    /**
      * @var array
      */
     protected $validators;
+
+    /**
+     * Retrieve the element value
+     *
+     * If the value is a DateTime object, and $returnFormattedValue is true 
+     * (the default), we return the string
+     * representation using the currently registered format.
+     *
+     * If $returnFormattedValue is false, the original value will be
+     * returned, regardless of type.
+     * 
+     * @param  bool $returnFormattedValue
+     * @return mixed
+     */
+    public function getValue($returnFormattedValue = true)
+    {
+        $value = parent::getValue();
+        if (!$value instanceof PhpDateTime || !$returnFormattedValue) {
+            return $value;
+        }
+        $format = $this->getFormat();
+        return $value->format($format);
+    }
+
+    /**
+     * Set value for format
+     *
+     * @param  string format
+     * @return DateTime
+     */
+    public function setFormat($format)
+    {
+        $this->format = (string) $format;
+        return $this;
+    }
+    
+    /**
+     * Retrieve the DateTime format to use for the value
+     *
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
 
     /**
      * Get validators

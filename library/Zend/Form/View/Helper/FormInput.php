@@ -106,9 +106,10 @@ class FormInput extends AbstractHelper
             ));
         }
 
-        $attributes         = $element->getAttributes();
-        $attributes['name'] = $name;
-        $attributes['type'] = $this->getType($element);
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getType($element);
+        $attributes['value'] = $element->getValue();
 
         return sprintf(
             '<input %s%s',

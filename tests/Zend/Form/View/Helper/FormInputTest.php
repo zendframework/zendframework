@@ -305,7 +305,6 @@ class FormInputTest extends CommonTestCase
             'style'              => 'value',
             'tabindex'           => 'value',
             'title'              => 'value',
-            'value'              => 'value',
             'width'              => 'value',
             'wrap'               => 'value',
             'xml:base'           => 'value',
@@ -317,6 +316,7 @@ class FormInputTest extends CommonTestCase
             'arbitrary'          => 'value',
             'meta'               => 'value',
         ));
+        $element->setValue('value');
         return $element;
     }
 
@@ -327,7 +327,14 @@ class FormInputTest extends CommonTestCase
     {
         $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);
-        $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+        switch ($attribute) {
+            case 'value':
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                break;
+            default:
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                break;
+        }
         $this->$assertion($expect, $markup);
     }
 

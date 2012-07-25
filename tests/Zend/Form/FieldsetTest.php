@@ -14,6 +14,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilter;
 
 /**
  * @category   Zend
@@ -194,6 +195,23 @@ class FieldsetTest extends TestCase
         $this->fieldset->setMessages($messages);
         $test = $this->fieldset->getMessages();
         $this->assertEquals($messages, $test);
+    }
+
+    public function testOnlyElementsWithErrorsInMessages()
+    {
+        $fieldset = new TestAsset\FieldsetWithInputFilter('set');
+        $fieldset->add(new Element('foo'));
+        $fieldset->add(new Element('bar'));
+
+        $form = new Form();
+        $form->add($fieldset);
+        $form->setInputFilter(new InputFilter());
+        $form->setData(array());
+        $form->isValid();
+
+        $messages = $form->getMessages();
+        $this->assertArrayHasKey('foo', $messages['set']);
+        $this->assertArrayNotHasKey('bar', $messages['set']);
     }
 
     public function testCanRetrieveMessagesForSingleElementsAfterMessagesHaveBeenSet()

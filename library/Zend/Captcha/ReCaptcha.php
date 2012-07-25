@@ -12,7 +12,7 @@ namespace Zend\Captcha;
 
 use Traversable;
 use Zend\Form\Element;
-use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
+use ZendService\ReCaptcha\ReCaptcha as ReCaptchaService;
 
 /**
  * ReCaptcha adapter

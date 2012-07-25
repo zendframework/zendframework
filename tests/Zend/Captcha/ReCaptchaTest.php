@@ -11,7 +11,7 @@
 namespace ZendTest\Captcha;
 
 use Zend\Captcha\ReCaptcha;
-use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
+use ZendService\ReCaptcha\ReCaptcha as ReCaptchaService;
 
 /**
  * @category   Zend

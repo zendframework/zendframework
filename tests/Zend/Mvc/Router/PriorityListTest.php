@@ -126,4 +126,19 @@ class PriorityListTest extends TestCase
 
         $this->assertEquals(array('baz', 'bar', 'foo'), $orders);
     }
+
+    public function testPriorityWithNegativesAndNull()
+    {
+        $this->list->insert('foo', new TestAsset\DummyRoute(), null);
+        $this->list->insert('bar', new TestAsset\DummyRoute(), 1);
+        $this->list->insert('baz', new TestAsset\DummyRoute(), -1);
+
+        $order = array();
+
+        foreach ($this->list as $key => $value) {
+            $orders[] = $key;
+        }
+
+        $this->assertEquals(array('bar', 'foo', 'baz'), $orders);
+    }
 }

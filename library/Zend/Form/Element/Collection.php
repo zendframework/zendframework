@@ -171,8 +171,10 @@ class Collection extends Fieldset
 
         if ($this->targetElement instanceof FieldsetInterface) {
             foreach ($this->byName as $name => $fieldset) {
-                $fieldset->populateValues($data[$name]);
-                unset($data[$name]);
+                if (isset($data[$name])) {
+                    $fieldset->populateValues($data[$name]);
+                    unset($data[$name]);
+                }
             }
         } else {
             foreach ($this->byName as $name => $element) {

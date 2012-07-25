@@ -38,6 +38,11 @@ class ModuleManager implements ModuleManagerInterface
     protected $event;
 
     /**
+     * @var boolean
+     */
+    protected $loadFinished;
+
+    /**
      * modules
      *
      * @var array|Traversable
@@ -119,8 +124,10 @@ class ModuleManager implements ModuleManagerInterface
             return $this->loadedModules[$moduleName];
         }
 
-        $event = $this->getEvent();
+        $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
+
+        $this->loadFinished = false;
 
         $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
             return (is_object($r));
@@ -138,6 +145,9 @@ class ModuleManager implements ModuleManagerInterface
 
         $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
         $this->loadedModules[$moduleName] = $module;
+
+        $this->loadFinished = true;
+
         return $module;
     }
 

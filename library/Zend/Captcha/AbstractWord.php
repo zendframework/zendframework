@@ -11,6 +11,7 @@
 namespace Zend\Captcha;
 
 use Zend\Session\Container;
+use Zend\Math\Rand;
 
 /**
  * AbstractWord-based captcha adapter
@@ -350,7 +351,7 @@ abstract class AbstractWord extends AbstractAdapter
      */
     protected function generateRandomId()
     {
-        return md5(mt_rand(0, 1000) . microtime(true));
+        return md5(Rand::getBytes(32));
     }
 
     /**

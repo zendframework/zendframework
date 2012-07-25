@@ -46,6 +46,13 @@ class BlockCipher
      * @var string
      */
     protected $hash = 'sha256';
+    
+    /**
+     * Salt (IV)
+     *
+     * @var string
+     */
+    protected $salt;
 
     /**
      * The output is binary?
@@ -177,6 +184,32 @@ class BlockCipher
         return $this->keyIteration;
     }
 
+    /**
+     * Set the salt (IV)
+     *
+     * @param string $salt
+     * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setSalt($salt)
+    {
+        if (empty($salt)) {
+            throw new Exception\InvalidArgumentException("The salt (IV) cannot be empty");
+        }
+        $this->salt = $salt;
+        return $this;
+    }
+            
+    /**
+     * Get the salt (IV)
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+    
     /**
      * Enable/disable the binary output
      *
@@ -318,8 +351,12 @@ class BlockCipher
             throw new Exception\InvalidArgumentException('No symmetric cipher specified');
         }
         $keySize = $this->cipher->getKeySize();
-        // generate a random salt (IV)
-        $this->cipher->setSalt(Rand::getBytes($this->cipher->getSaltSize(), true));
+        $salt = $this->getSalt();
+        // generate a random salt (IV) if empty
+        if (empty($salt)) {
+            $salt = Rand::getBytes($this->cipher->getSaltSize(), true);
+        }
+        $this->cipher->setSalt($salt); 
         // generate the encryption key and the HMAC key for the authentication
         $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
                              $this->getKey(),

@@ -15,8 +15,12 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "zendframework/zend-crypt": "self.version"
+    },
     "suggest": {
         "zendframework/zend-i18n": "Zend\\I18n component",
-        "zendframework/zend-validator": "Zend\\Validator component"
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-crypt": "Zend\\Crypt component"
     }
 }

@@ -65,7 +65,7 @@ class Encrypt extends AbstractFilter
             $adapter = $options['adapter'];
             unset($options['adapter']);
         } else {
-            $adapter = 'Mcrypt';
+            $adapter = 'BlockCipher';
         }
 
         if (!is_array($options)) {

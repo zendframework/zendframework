@@ -120,6 +120,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
                                     'The key is not long enough for the cipher');
         $result = $this->mcrypt->setKey('short');
+        $output = $this->mcrypt->encrypt('test');
     }
 
     public function testSetSalt()
@@ -130,9 +131,11 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testShortSalt()
     {
+        $this->mcrypt->setSalt('short');
+        $this->mcrypt->setKey($this->key);
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
                                     'The size of the salt (IV) is not enough. You need 16 bytes');
-        $this->mcrypt->setSalt('short');
+        $output = $this->mcrypt->encrypt('test');
     }
 
     public function testSetMode()

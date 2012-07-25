@@ -10,12 +10,14 @@
 
 namespace Zend\ModuleManager\Listener;
 
+use Zend\EventManager\ListenerAggregateInterface;
+
 /**
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-interface ServiceListenerInterface
+interface ServiceListenerInterface extends ListenerAggregateInterface
 {
     /**
      * @param  ServiceManager|string $serviceManager  Service Manager instance or name

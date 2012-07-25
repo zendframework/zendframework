@@ -47,7 +47,7 @@ class FilterPluginManager extends AbstractPluginManager
         'digits'                    => 'Zend\Filter\Digits',
         'dir'                       => 'Zend\Filter\Dir',
         'encrypt'                   => 'Zend\Filter\Encrypt',
-        'encryptmcrypt'             => 'Zend\Filter\Encrypt\Mcrypt',
+        'encryptblockcipher'        => 'Zend\Filter\Encrypt\BlockCipher',
         'encryptopenssl'            => 'Zend\Filter\Encrypt\Openssl',
         'filedecrypt'               => 'Zend\Filter\File\Decrypt',
         'fileencrypt'               => 'Zend\Filter\File\Encrypt',

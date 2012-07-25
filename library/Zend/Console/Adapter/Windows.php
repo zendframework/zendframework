@@ -257,9 +257,8 @@ class Windows extends Virtual implements AdapterInterface
         $f = fopen('php://stdin','r');
         $line = trim(fread($f,$maxLength));
         fclose($f);
-        
+
         return $line;
     }
-
 
 }

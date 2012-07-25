@@ -129,7 +129,7 @@ class WindowsAnsicon extends Posix implements AdapterInterface
          * Try to use powershell to retrieve console window title
          */
         exec('powershell -command "write $Host.UI.RawUI.WindowTitle"',$output,$result);
-        if ($result || !$output){
+        if ($result || !$output) {
             return '';
         }
 
@@ -213,7 +213,7 @@ class WindowsAnsicon extends Posix implements AdapterInterface
             } else {
                 $char = parent::readChar($mask);
             }
-        } while(!$char || ($mask !== null && !stristr($mask, $char)));
+        } while (!$char || ($mask !== null && !stristr($mask, $char)));
 
         return $char;
     }

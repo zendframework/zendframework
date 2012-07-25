@@ -82,9 +82,16 @@ interface AdapterInterface
      * @param null|int $fillBgColor  (optional) Background color of box fill
      */
     public function writeBox(
-        $x1, $y1, $x2, $y2,
-        $lineStyle = self::LINE_SINGLE, $fillStyle = self::FILL_NONE,
-        $color = null, $bgColor = null, $fillColor = null, $fillBgColor = null
+        $x1,
+        $y1,
+        $x2,
+        $y2,
+        $lineStyle = self::LINE_SINGLE,
+        $fillStyle = self::FILL_NONE,
+        $color = null,
+        $bgColor = null,
+        $fillColor = null,
+        $fillBgColor = null
     );
 
     /**
@@ -102,8 +109,12 @@ interface AdapterInterface
      */
     public function writeTextBlock(
         $text,
-        $width, $height = null, $x = 0, $y = 0,
-        $color = null, $bgColor = null
+        $width,
+        $height = null,
+        $x = 0,
+        $y = 0,
+        $color = null,
+        $bgColor = null
     );
 
 

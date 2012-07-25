@@ -44,11 +44,11 @@ class Select extends Char implements PromptInterface
      * @param bool      $echo           True to display selected option?
      */
     public function __construct(
-        $promptText = 'Please select one option', 
-        $options = array(), 
-        $allowEmpty = false, 
-        $echo = false)
-    {
+        $promptText = 'Please select one option',
+        $options = array(),
+        $allowEmpty = false,
+        $echo = false
+    ) {
         if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
@@ -83,7 +83,7 @@ class Select extends Char implements PromptInterface
          */
         $console = $this->getConsole();
         $console->writeLine($this->promptText);
-        foreach($this->options as $k=>$v){
+        foreach ($this->options as $k => $v) {
             $console->writeLine('  '.$k.') '.$v);
         }
 
@@ -91,7 +91,7 @@ class Select extends Char implements PromptInterface
          * Ask for selection
          */
         $mask = implode("",array_keys($this->options));
-        if ($this->allowEmpty){
+        if ($this->allowEmpty) {
             $mask .= "\r\n";
         }
         $this->setAllowedChars($mask);
@@ -118,7 +118,7 @@ class Select extends Char implements PromptInterface
 
         if (!is_array($options)) {
             $this->options = array();
-            foreach($options as $k => $v){
+            foreach ($options as $k => $v) {
                 $this->options[$k] = $v;
             }
         } else {

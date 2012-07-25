@@ -66,7 +66,7 @@ class Line extends AbstractPrompt implements PromptInterface
         do {
             $this->getConsole()->write($this->promptText);
             $line = $this->getConsole()->readLine($this->maxLength);
-        } while(!$this->allowEmpty && !$line);
+        } while (!$this->allowEmpty && !$line);
 
         return $this->lastResponse = $line;
     }

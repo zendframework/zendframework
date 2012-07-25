@@ -18,7 +18,8 @@ namespace Zend\Console\Charset;
  * @package    Zend_Console
  * @subpackage Charset
  */
-class Utf8Heavy extends Utf8 {
+class Utf8Heavy extends Utf8
+{
 
     const LINE_SINGLE_EW = "━";
     const LINE_SINGLE_NS = "┃";

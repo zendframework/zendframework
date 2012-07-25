@@ -71,7 +71,7 @@ class Virtual extends AbstractAdapter implements AdapterInterface
         /**
          * Try to read console size from "mode" command
          */
-        if ($this->modeResult === null){
+        if ($this->modeResult === null) {
             $this->runProbeCommand();
         }
 
@@ -111,7 +111,7 @@ class Virtual extends AbstractAdapter implements AdapterInterface
         if (preg_match('/Code page\:\s+(\d+)/',$this->modeResult,$matches)) {
             return (int)$matches[1] == 65001;
         }
-        
+
         return false;
     }
 
@@ -179,4 +179,5 @@ class Virtual extends AbstractAdapter implements AdapterInterface
     {
         `mode con cp select=65001`;
     }
+
 }

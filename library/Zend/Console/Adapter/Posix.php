@@ -99,7 +99,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
     public function getWidth()
     {
         static $width;
-        if ($width > 0){
+        if ($width > 0) {
             return $width;
         }
 
@@ -147,9 +147,9 @@ class Posix extends AbstractAdapter implements AdapterInterface
         if (!$return && is_numeric($result)) {
             return $height = (int)$result;
         }
-        
+
         return $height = parent::getHeight();
-        
+
     }
 
     protected function runModeCommand()
@@ -227,7 +227,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
                 $color = static::$ansiColorMap['fg'][$color];
             }
         }
-        if ($bgColor !== null){
+        if ($bgColor !== null) {
             if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
                 throw new BadMethodCallException(
                     'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
@@ -361,7 +361,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
         $stream = fopen('php://stdin','rb');
         do {
             $char = fgetc($stream);
-        } while(!$char || ($mask !== null && !stristr($mask,$char)));
+        } while (!$char || ($mask !== null && !stristr($mask,$char)));
 
         fclose($stream);
 
@@ -415,5 +415,5 @@ class Posix extends AbstractAdapter implements AdapterInterface
     /**
      * @todo Add GNU readline support
      */
-
 }
+

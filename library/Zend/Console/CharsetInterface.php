@@ -14,5 +14,6 @@ namespace Zend\Console;
  * @category   Zend
  * @package    Zend_Console
  */
-interface CharsetInterface {
+interface CharsetInterface
+{
 }

@@ -19,7 +19,8 @@ use Zend\Console\CharsetInterface;
  * @package    Zend_Console
  * @subpackage Charset
  */
-class Ascii implements CharsetInterface{
+class Ascii implements CharsetInterface
+{
 
     const ACTIVATE          = "";
     const DEACTIVATE        = "";
@@ -52,4 +53,5 @@ class Ascii implements CharsetInterface{
     const LINE_BLOCK_SE     = "+";
     const LINE_BLOCK_SW     = "+";
     const LINE_BLOCK_CROSS  = "+";
+
 }

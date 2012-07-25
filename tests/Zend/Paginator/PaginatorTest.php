@@ -10,11 +10,14 @@
 
 namespace ZendTest\Paginator;
 
+use ReflectionMethod;
+use stdClass;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 use Zend\Config;
 use Zend\Db\Adapter as DbAdapter;
 use Zend\Db\Sql;
+use Zend\Filter;
 use Zend\Paginator;
 use Zend\Paginator\Adapter;
 use Zend\Paginator\Exception;
@@ -34,7 +37,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Paginator instance
      *
-     * @var \Zend\Paginator\Paginator
+     * @var Paginator\Paginator
      */
     protected $_paginator = null;
 
@@ -47,7 +50,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     protected $_config = null;
 
     /**
-     * @var \Zend\Db\Adapter\Adapter
+     * @var DbAdapter\Adapter
      */
     protected $_adapter = null;
 
@@ -169,7 +172,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testFactoryThrowsInvalidClassExceptionAdapter()
     {
         $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type stdClass');
-        $paginator = Paginator\Paginator::factory(new \stdClass());
+        $paginator = Paginator\Paginator::factory(new stdClass());
     }
 
     public function testFactoryThrowsInvalidTypeExceptionAdapter()
@@ -216,7 +219,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsPagesForPageOne()
     {
-        $expected = new \stdClass();
+        $expected = new stdClass();
         $expected->pageCount        = 11;
         $expected->itemCountPerPage = 10;
         $expected->first            = 1;
@@ -238,7 +241,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsPagesForPageTwo()
     {
-        $expected = new \stdClass();
+        $expected = new stdClass();
         $expected->pageCount        = 11;
         $expected->itemCountPerPage = 10;
         $expected->first            = 1;
@@ -574,7 +577,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testAcceptsTraversableInstanceFromAdapter()
     {
-        $paginator = new Paginator\Paginator(new \ZendTest\Paginator\TestAsset\TestAdapter());
+        $paginator = new Paginator\Paginator(new TestAsset\TestAdapter());
         $this->assertInstanceOf('ArrayObject', $paginator->getCurrentItems());
     }
 
@@ -672,7 +675,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     // ZF-5519
     public function testFilter()
     {
-        $filter = new \Zend\Filter\Callback(array($this, 'filterCallback'));
+        $filter = new Filter\Callback(array($this, 'filterCallback'));
         $paginator = Paginator\Paginator::factory(range(1, 10));
         $paginator->setFilter($filter);
 
@@ -801,7 +804,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->_paginator->setAdapterPluginManager(
-            new \stdClass()
+            new stdClass()
         );
     }
 
@@ -814,7 +817,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $this->_paginator->setAdapterPluginManager(
             array(
-                new \stdClass()
+                new stdClass()
             )
         );
     }
@@ -847,15 +850,15 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->_paginator->setScrollingStylePluginManager(
-            new \stdClass()
+            new stdClass()
         );
     }
 
     public function testLoadScrollingStyleWithDigitThrowsInvalidArgumentException()
     {
-        $adapter = new \ZendTest\Paginator\TestAsset\TestAdapter;
-        $paginator = new \Zend\Paginator\Paginator($adapter);
-        $reflection = new \ReflectionMethod($paginator, '_loadScrollingStyle');
+        $adapter = new TestAsset\TestAdapter;
+        $paginator = new Paginator\Paginator($adapter);
+        $reflection = new ReflectionMethod($paginator, '_loadScrollingStyle');
         $reflection->setAccessible(true);
 
         $this->setExpectedException(
@@ -869,9 +872,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadScrollingStyleWithObjectThrowsInvalidArgumentException()
     {
-        $adapter = new \ZendTest\Paginator\TestAsset\TestAdapter;
-        $paginator = new \Zend\Paginator\Paginator($adapter);
-        $reflection = new \ReflectionMethod($paginator, '_loadScrollingStyle');
+        $adapter = new TestAsset\TestAdapter;
+        $paginator = new Paginator\Paginator($adapter);
+        $reflection = new ReflectionMethod($paginator, '_loadScrollingStyle');
         $reflection->setAccessible(true);
 
         $this->setExpectedException(
@@ -879,18 +882,18 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
             'Scrolling style must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
         );
 
-        $reflection->invoke($paginator, new \stdClass());
+        $reflection->invoke($paginator, new stdClass());
     }
 
     public function testGetCacheId()
     {
-        $adapter = new \ZendTest\Paginator\TestAsset\TestAdapter;
-        $paginator = new \Zend\Paginator\Paginator($adapter);
-        $reflectionGetCacheId = new \ReflectionMethod($paginator, '_getCacheId');
+        $adapter = new TestAsset\TestAdapter;
+        $paginator = new Paginator\Paginator($adapter);
+        $reflectionGetCacheId = new ReflectionMethod($paginator, '_getCacheId');
         $reflectionGetCacheId->setAccessible(true);
         $outputGetCacheId = $reflectionGetCacheId->invoke($paginator, null);
 
-        $reflectionGetCacheInternalId = new \ReflectionMethod($paginator, '_getCacheInternalId');
+        $reflectionGetCacheInternalId = new ReflectionMethod($paginator, '_getCacheInternalId');
         $reflectionGetCacheInternalId->setAccessible(true);
         $outputGetCacheInternalId = $reflectionGetCacheInternalId->invoke($paginator);
 

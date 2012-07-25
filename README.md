@@ -32,6 +32,7 @@ PLEASE USE AT YOUR OWN RISK.
    - When submitted form has file inputs with brackets (name="file[]")
      $fileParams parameters in Http\PhpEnvironment\Request will be
      re-structured to have the same look as query/post/server/envParams
+ - Moved Zend\Acl to Zend\Permissions\Acl
 
 Over *XXX* pull requests for a variety of features and bugfixes were handled
 since beta5!

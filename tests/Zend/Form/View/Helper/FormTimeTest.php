@@ -117,9 +117,9 @@ class FormTimeTest extends CommonTestCase
             'size'               => 'value',
             'src'                => 'value',
             'step'               => 'value',
-            'value'              => 'value',
             'width'              => 'value',
         ));
+        $element->setValue('value');
         return $element;
     }
 
@@ -130,7 +130,14 @@ class FormTimeTest extends CommonTestCase
     {
         $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);
-        $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+        switch ($attribute) {
+            case 'value':
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                break;
+            default:
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                break;
+        }
         $this->$assertion($expect, $markup);
     }
 

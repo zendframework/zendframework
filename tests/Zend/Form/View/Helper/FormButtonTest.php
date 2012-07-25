@@ -178,9 +178,9 @@ class FormButtonTest extends CommonTestCase
             'size'               => 'value',
             'src'                => 'value',
             'step'               => 'value',
-            'value'              => 'value',
             'width'              => 'value',
         ));
+        $element->setValue('value');
         return $element;
     }
 
@@ -192,7 +192,14 @@ class FormButtonTest extends CommonTestCase
         $element = $this->getCompleteElement();
         $element->setAttribute('label', '{button_content}');
         $markup  = $this->helper->render($element);
-        $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+        switch ($attribute) {
+            case 'value':
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                break;
+            default:
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                break;
+        }
         $this->$assertion($expect, $markup);
     }
 

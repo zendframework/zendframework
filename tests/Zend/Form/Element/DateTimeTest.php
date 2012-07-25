@@ -10,6 +10,7 @@
 
 namespace ZendTest\Form\Element;
 
+use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateTime as DateTimeElement;
 use Zend\Form\Factory;
@@ -56,5 +57,36 @@ class DateTimeTest extends TestCase
                     break;
             }
         }
+    }
+
+    public function testUsesRfc3339FormatByDefault()
+    {
+        $element = new DateTimeElement('foo');
+        $this->assertEquals(DateTime::RFC3339, $element->getFormat());
+    }
+
+    public function testSpecifyingADateTimeValueWillReturnRfc3339FormattedStringByDefault()
+    {
+        $date = new DateTime();
+        $element = new DateTimeElement('foo');
+        $element->setValue($date);
+        $this->assertEquals($date->format($date::RFC3339), $element->getValue());
+    }
+
+    public function testValueIsFormattedAccordingToFormatInElement()
+    {
+        $date = new DateTime();
+        $element = new DateTimeElement('foo');
+        $element->setFormat($date::RFC2822);
+        $element->setValue($date);
+        $this->assertEquals($date->format($date::RFC2822), $element->getValue());
+    }
+
+    public function testCanRetrieveDateTimeObjectByPassingBooleanFalseToGetValue()
+    {
+        $date = new DateTime();
+        $element = new DateTimeElement('foo');
+        $element->setValue($date);
+        $this->assertSame($date, $element->getValue(false));
     }
 }

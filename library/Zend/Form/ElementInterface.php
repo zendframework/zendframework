@@ -100,6 +100,21 @@ interface ElementInterface
     public function getAttributes();
 
     /**
+     * Set the value of the element
+     * 
+     * @param  mixed $value 
+     * @return ElementInterface
+     */
+    public function setValue($value);
+
+    /**
+     * Retrieve the element value
+     * 
+     * @return mixed
+     */
+    public function getValue();
+
+    /**
      * Set the label (if any) used for this element
      *
      * @param  $label

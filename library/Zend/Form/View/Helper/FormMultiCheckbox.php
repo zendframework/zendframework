@@ -214,12 +214,7 @@ class FormMultiCheckbox extends FormInput
 
         $attributes['name'] = $name;
         $attributes['type'] = $this->getInputType();
-
-        $selectedOptions = array();
-        if (isset($attributes['value'])) {
-            $selectedOptions = (array) $attributes['value'];
-            unset($attributes['value']);
-        }
+        $selectedOptions    = (array) $element->getValue();
 
         $rendered = $this->renderOptions($element, $options, $selectedOptions, $attributes);
 

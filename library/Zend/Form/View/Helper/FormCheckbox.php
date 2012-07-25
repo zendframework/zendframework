@@ -44,7 +44,8 @@ class FormCheckbox extends FormInput
         $attributes['type']    = $this->getInputType();
         $closingBracket        = $this->getInlineClosingBracket();
 
-        if (isset($attributes['value']) && $attributes['value'] == $element->getCheckedValue()) {
+        $value = $element->getValue();
+        if ($value === $element->getCheckedValue()) {
             $attributes['checked'] = 'checked';
         }
         $attributes['value'] = $element->getCheckedValue();

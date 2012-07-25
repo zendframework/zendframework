@@ -509,4 +509,16 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $foo = $sm->get('foo');
         $this->assertSame($abstractFactory->expectedInstance, $foo);
     }
+
+    public function testShouldAllowAddingInitializersAsClassNames()
+    {
+        $result = $this->serviceManager->addInitializer('ZendTest\ServiceManager\TestAsset\FooInitializer');
+        $this->assertSame($this->serviceManager, $result);
+    }
+
+    public function testShouldRaiseExceptionIfInitializerClassIsNotAnInitializerInterfaceImplementation()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\InvalidArgumentException');
+        $result = $this->serviceManager->addInitializer(get_class($this));
+    }
 }

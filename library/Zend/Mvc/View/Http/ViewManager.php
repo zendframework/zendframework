@@ -334,9 +334,13 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->routeNotFoundStrategy = new RouteNotFoundStrategy();
 
+        $displayExceptions     = false;
         $displayNotFoundReason = false;
         $notFoundTemplate      = '404';
 
+        if (isset($this->config['display_exceptions'])) {
+            $displayExceptions = $this->config['display_exceptions'];
+        }
         if (isset($this->config['display_not_found_reason'])) {
             $displayNotFoundReason = $this->config['display_not_found_reason'];
         }
@@ -344,6 +348,7 @@ class ViewManager implements ListenerAggregateInterface
             $notFoundTemplate = $this->config['not_found_template'];
         }
 
+        $this->routeNotFoundStrategy->setDisplayExceptions($displayExceptions);
         $this->routeNotFoundStrategy->setDisplayNotFoundReason($displayNotFoundReason);
         $this->routeNotFoundStrategy->setNotFoundTemplate($notFoundTemplate);
 

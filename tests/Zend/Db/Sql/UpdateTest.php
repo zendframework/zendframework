@@ -93,15 +93,6 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         });
     }
 
-    public function testBlankWhere()
-    {
-        $update = clone $this->update;
-        $update->table('foo')
-            ->set(array('bar' => 'baz'))
-            ->where(null);
-        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\'', $update->getSqlString());
-    }
-
     /**
      * @covers Zend\Db\Sql\Update::prepareStatement
      */

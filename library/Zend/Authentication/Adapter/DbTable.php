@@ -29,77 +29,77 @@ class DbTable implements AdapterInterface
      *
      * @var DbAdapter
      */
-    protected $_zendDb = null;
+    protected $zendDb = null;
 
     /**
      * @var DbSelect
      */
-    protected $_dbSelect = null;
+    protected $dbSelect = null;
 
     /**
-     * $_tableName - the table name to check
+     * $tableName - the table name to check
      *
      * @var string
      */
-    protected $_tableName = null;
+    protected $tableName = null;
 
     /**
-     * $_identityColumn - the column to use as the identity
+     * $identityColumn - the column to use as the identity
      *
      * @var string
      */
-    protected $_identityColumn = null;
+    protected $identityColumn = null;
 
     /**
-     * $_credentialColumns - columns to be used as the credentials
+     * $credentialColumns - columns to be used as the credentials
      *
      * @var string
      */
-    protected $_credentialColumn = null;
+    protected $credentialColumn = null;
 
     /**
-     * $_identity - Identity value
+     * $identity - Identity value
      *
      * @var string
      */
-    protected $_identity = null;
+    protected $identity = null;
 
     /**
-     * $_credential - Credential values
+     * $credential - Credential values
      *
      * @var string
      */
-    protected $_credential = null;
+    protected $credential = null;
 
     /**
-     * $_credentialTreatment - Treatment applied to the credential, such as MD5() or PASSWORD()
+     * $credentialTreatment - Treatment applied to the credential, such as MD5() or PASSWORD()
      *
      * @var string
      */
-    protected $_credentialTreatment = null;
+    protected $credentialTreatment = null;
 
     /**
-     * $_authenticateResultInfo
+     * $authenticateResultInfo
      *
      * @var array
      */
-    protected $_authenticateResultInfo = null;
+    protected $authenticateResultInfo = null;
 
     /**
-     * $_resultRow - Results of database authentication query
+     * $resultRow - Results of database authentication query
      *
      * @var array
      */
-    protected $_resultRow = null;
+    protected $resultRow = null;
 
     /**
-     * $_ambiguityIdentity - Flag to indicate same Identity can be used with
+     * $ambiguityIdentity - Flag to indicate same Identity can be used with
      * different credentials. Default is FALSE and need to be set to true to
      * allow ambiguity usage.
      *
      * @var boolean
      */
-    protected $_ambiguityIdentity = false;
+    protected $ambiguityIdentity = false;
 
     /**
      * __construct() - Sets configuration options
@@ -114,7 +114,7 @@ class DbTable implements AdapterInterface
     public function __construct(DbAdapter $zendDb, $tableName = null, $identityColumn = null,
                                 $credentialColumn = null, $credentialTreatment = null)
     {
-        $this->_zendDb = $zendDb;
+        $this->zendDb = $zendDb;
 
         if (null !== $tableName) {
             $this->setTableName($tableName);
@@ -141,7 +141,7 @@ class DbTable implements AdapterInterface
      */
     public function setTableName($tableName)
     {
-        $this->_tableName = $tableName;
+        $this->tableName = $tableName;
         return $this;
     }
 
@@ -153,7 +153,7 @@ class DbTable implements AdapterInterface
      */
     public function setIdentityColumn($identityColumn)
     {
-        $this->_identityColumn = $identityColumn;
+        $this->identityColumn = $identityColumn;
         return $this;
     }
 
@@ -165,7 +165,7 @@ class DbTable implements AdapterInterface
      */
     public function setCredentialColumn($credentialColumn)
     {
-        $this->_credentialColumn = $credentialColumn;
+        $this->credentialColumn = $credentialColumn;
         return $this;
     }
 
@@ -188,7 +188,7 @@ class DbTable implements AdapterInterface
      */
     public function setCredentialTreatment($treatment)
     {
-        $this->_credentialTreatment = $treatment;
+        $this->credentialTreatment = $treatment;
         return $this;
     }
 
@@ -200,7 +200,7 @@ class DbTable implements AdapterInterface
      */
     public function setIdentity($value)
     {
-        $this->_identity = $value;
+        $this->identity = $value;
         return $this;
     }
 
@@ -213,7 +213,7 @@ class DbTable implements AdapterInterface
      */
     public function setCredential($credential)
     {
-        $this->_credential = $credential;
+        $this->credential = $credential;
         return $this;
     }
 
@@ -228,9 +228,9 @@ class DbTable implements AdapterInterface
     public function setAmbiguityIdentity($flag)
     {
         if (is_integer($flag)) {
-            $this->_ambiguityIdentity = (1 === $flag ? true : false);
+            $this->ambiguityIdentity = (1 === $flag ? true : false);
         } elseif (is_bool($flag)) {
-            $this->_ambiguityIdentity = $flag;
+            $this->ambiguityIdentity = $flag;
         }
         return $this;
     }
@@ -243,7 +243,7 @@ class DbTable implements AdapterInterface
      */
     public function getAmbiguityIdentity()
     {
-        return $this->_ambiguityIdentity;
+        return $this->ambiguityIdentity;
     }
 
     /**
@@ -253,10 +253,10 @@ class DbTable implements AdapterInterface
      */
     public function getDbSelect()
     {
-        if ($this->_dbSelect == null) {
-            $this->_dbSelect = new DbSelect();
+        if ($this->dbSelect == null) {
+            $this->dbSelect = new DbSelect();
         }
-        return $this->_dbSelect;
+        return $this->dbSelect;
     }
 
     /**
@@ -268,7 +268,7 @@ class DbTable implements AdapterInterface
      */
     public function getResultRowObject($returnColumns = null, $omitColumns = null)
     {
-        if (!$this->_resultRow) {
+        if (!$this->resultRow) {
             return false;
         }
 
@@ -276,10 +276,10 @@ class DbTable implements AdapterInterface
 
         if (null !== $returnColumns) {
 
-            $availableColumns = array_keys($this->_resultRow);
+            $availableColumns = array_keys($this->resultRow);
             foreach ((array)$returnColumns as $returnColumn) {
                 if (in_array($returnColumn, $availableColumns)) {
-                    $returnObject->{$returnColumn} = $this->_resultRow[$returnColumn];
+                    $returnObject->{$returnColumn} = $this->resultRow[$returnColumn];
                 }
             }
             return $returnObject;
@@ -287,7 +287,7 @@ class DbTable implements AdapterInterface
         } elseif (null !== $omitColumns) {
 
             $omitColumns = (array)$omitColumns;
-            foreach ($this->_resultRow as $resultColumn => $resultValue) {
+            foreach ($this->resultRow as $resultColumn => $resultValue) {
                 if (!in_array($resultColumn, $omitColumns)) {
                     $returnObject->{$resultColumn} = $resultValue;
                 }
@@ -296,7 +296,7 @@ class DbTable implements AdapterInterface
 
         } else {
 
-            foreach ($this->_resultRow as $resultColumn => $resultValue) {
+            foreach ($this->resultRow as $resultColumn => $resultValue) {
                 $returnObject->{$resultColumn} = $resultValue;
             }
             return $returnObject;
@@ -346,15 +346,15 @@ class DbTable implements AdapterInterface
     {
         $exception = null;
 
-        if ($this->_tableName == '') {
+        if ($this->tableName == '') {
             $exception = 'A table must be supplied for the DbTable authentication adapter.';
-        } elseif ($this->_identityColumn == '') {
+        } elseif ($this->identityColumn == '') {
             $exception = 'An identity column must be supplied for the DbTable authentication adapter.';
-        } elseif ($this->_credentialColumn == '') {
+        } elseif ($this->credentialColumn == '') {
             $exception = 'A credential column must be supplied for the DbTable authentication adapter.';
-        } elseif ($this->_identity == '') {
+        } elseif ($this->identity == '') {
             $exception = 'A value for the identity was not provided prior to authentication with DbTable.';
-        } elseif ($this->_credential === null) {
+        } elseif ($this->credential === null) {
             $exception = 'A credential value was not provided prior to authentication with DbTable.';
         }
 
@@ -362,9 +362,9 @@ class DbTable implements AdapterInterface
             throw new Exception\RuntimeException($exception);
         }
 
-        $this->_authenticateResultInfo = array(
+        $this->authenticateResultInfo = array(
             'code'     => AuthenticationResult::FAILURE,
-            'identity' => $this->_identity,
+            'identity' => $this->identity,
             'messages' => array()
         );
 
@@ -380,23 +380,23 @@ class DbTable implements AdapterInterface
     protected function _authenticateCreateSelect()
     {
         // build credential expression
-        if (empty($this->_credentialTreatment) || (strpos($this->_credentialTreatment, '?') === false)) {
-            $this->_credentialTreatment = '?';
+        if (empty($this->credentialTreatment) || (strpos($this->credentialTreatment, '?') === false)) {
+            $this->credentialTreatment = '?';
         }
 
         $credentialExpression = new Expression(
             '(CASE WHEN '
-            . $this->_zendDb->getPlatform()->quoteIdentifier($this->_credentialColumn)
-            . ' = ' . $this->_credentialTreatment
+            . $this->zendDb->getPlatform()->quoteIdentifier($this->credentialColumn)
+            . ' = ' . $this->credentialTreatment
             . ' THEN 1 ELSE 0 END) AS '
-            . $this->_zendDb->getPlatform()->quoteIdentifier('zend_auth_credential_match')
+            . $this->zendDb->getPlatform()->quoteIdentifier('zend_auth_credential_match')
         );
 
         // get select
         $dbSelect = clone $this->getDbSelect();
-        $dbSelect->from($this->_tableName)
+        $dbSelect->from($this->tableName)
                  ->columns(array('*', $credentialExpression))
-                 ->where($this->_zendDb->getPlatform()->quoteIdentifier($this->_identityColumn) . ' = ?');
+                 ->where($this->zendDb->getPlatform()->quoteIdentifier($this->identityColumn) . ' = ?');
 
         return $dbSelect;
     }
@@ -411,11 +411,11 @@ class DbTable implements AdapterInterface
      */
     protected function _authenticateQuerySelect(DbSelect $dbSelect)
     {
-        $statement = $this->_zendDb->createStatement();
-        $dbSelect->prepareStatement($this->_zendDb, $statement);
+        $statement = $this->zendDb->createStatement();
+        $dbSelect->prepareStatement($this->zendDb, $statement);
         $resultSet = new ResultSet();
         try {
-            $resultSet->initialize($statement->execute(array($this->_credential, $this->_identity)));
+            $resultSet->initialize($statement->execute(array($this->credential, $this->identity)));
             $resultIdentities = $resultSet->toArray();
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
@@ -438,12 +438,12 @@ class DbTable implements AdapterInterface
     {
 
         if (count($resultIdentities) < 1) {
-            $this->_authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
-            $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
+            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
+            $this->authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
             return $this->_authenticateCreateAuthResult();
         } elseif (count($resultIdentities) > 1 && false === $this->getAmbiguityIdentity()) {
-            $this->_authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
-            $this->_authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
+            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
+            $this->authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
             return $this->_authenticateCreateAuthResult();
         }
 
@@ -461,16 +461,16 @@ class DbTable implements AdapterInterface
     protected function _authenticateValidateResult($resultIdentity)
     {
         if ($resultIdentity['zend_auth_credential_match'] != '1') {
-            $this->_authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
-            $this->_authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
+            $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
             return $this->_authenticateCreateAuthResult();
         }
 
         unset($resultIdentity['zend_auth_credential_match']);
-        $this->_resultRow = $resultIdentity;
+        $this->resultRow = $resultIdentity;
 
-        $this->_authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
-        $this->_authenticateResultInfo['messages'][] = 'Authentication successful.';
+        $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
+        $this->authenticateResultInfo['messages'][] = 'Authentication successful.';
         return $this->_authenticateCreateAuthResult();
     }
 
@@ -483,9 +483,9 @@ class DbTable implements AdapterInterface
     protected function _authenticateCreateAuthResult()
     {
         return new AuthenticationResult(
-            $this->_authenticateResultInfo['code'],
-            $this->_authenticateResultInfo['identity'],
-            $this->_authenticateResultInfo['messages']
+            $this->authenticateResultInfo['code'],
+            $this->authenticateResultInfo['identity'],
+            $this->authenticateResultInfo['messages']
         );
     }
 

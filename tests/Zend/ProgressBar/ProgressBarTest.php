@@ -99,37 +99,37 @@ class Stub extends \Zend\ProgressBar\ProgressBar
 {
     public function sleep($seconds)
     {
-        $this->_startTime -= $seconds;
+        $this->startTime -= $seconds;
     }
 
     public function getCurrent()
     {
-        return $this->_adapter->getCurrent();
+        return $this->adapter->getCurrent();
     }
 
     public function getMax()
     {
-        return $this->_adapter->getMax();
+        return $this->adapter->getMax();
     }
 
     public function getPercent()
     {
-        return $this->_adapter->getPercent();
+        return $this->adapter->getPercent();
     }
 
     public function getTimeTaken()
     {
-        return $this->_adapter->getTimeTaken();
+        return $this->adapter->getTimeTaken();
     }
 
     public function getTimeRemaining()
     {
-        return $this->_adapter->getTimeRemaining();
+        return $this->adapter->getTimeRemaining();
     }
 
     public function getText()
     {
-        return $this->_adapter->getText();
+        return $this->adapter->getText();
     }
 }
 

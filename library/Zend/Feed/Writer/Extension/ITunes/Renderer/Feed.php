@@ -28,7 +28,7 @@ class Feed extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render feed
@@ -37,18 +37,18 @@ class Feed extends Extension\AbstractRenderer
      */
     public function render()
     {
-        $this->_setAuthors($this->_dom, $this->_base);
-        $this->_setBlock($this->_dom, $this->_base);
-        $this->_setCategories($this->_dom, $this->_base);
-        $this->_setImage($this->_dom, $this->_base);
-        $this->_setDuration($this->_dom, $this->_base);
-        $this->_setExplicit($this->_dom, $this->_base);
-        $this->_setKeywords($this->_dom, $this->_base);
-        $this->_setNewFeedUrl($this->_dom, $this->_base);
-        $this->_setOwners($this->_dom, $this->_base);
-        $this->_setSubtitle($this->_dom, $this->_base);
-        $this->_setSummary($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setAuthors($this->dom, $this->base);
+        $this->_setBlock($this->dom, $this->base);
+        $this->_setCategories($this->dom, $this->base);
+        $this->_setImage($this->dom, $this->base);
+        $this->_setDuration($this->dom, $this->base);
+        $this->_setExplicit($this->dom, $this->base);
+        $this->_setKeywords($this->dom, $this->base);
+        $this->_setNewFeedUrl($this->dom, $this->base);
+        $this->_setOwners($this->dom, $this->base);
+        $this->_setSubtitle($this->dom, $this->base);
+        $this->_setSummary($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -83,7 +83,7 @@ class Feed extends Extension\AbstractRenderer
             $el->appendChild($text);
             $root->appendChild($el);
         }
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -103,7 +103,7 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($block);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -135,7 +135,7 @@ class Feed extends Extension\AbstractRenderer
                 }
             }
         }
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -154,7 +154,7 @@ class Feed extends Extension\AbstractRenderer
         $el = $dom->createElement('itunes:image');
         $el->setAttribute('href', $image);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -174,7 +174,7 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($duration);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -194,7 +194,7 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($explicit);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -214,7 +214,7 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode(implode(',', $keywords));
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -234,7 +234,7 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($url);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -262,7 +262,7 @@ class Feed extends Extension\AbstractRenderer
             $el->appendChild($name);
             $el->appendChild($email);
         }
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -282,7 +282,7 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($subtitle);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -302,6 +302,6 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($summary);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 }

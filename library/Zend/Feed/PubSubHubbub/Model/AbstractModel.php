@@ -24,7 +24,7 @@ class AbstractModel
      *
      * @var TableGatewayInterface
      */
-    protected $_db = null;
+    protected $db = null;
 
     /**
      * Constructor
@@ -36,9 +36,9 @@ class AbstractModel
         if ($tableGateway === null) {
             $parts = explode('\\', get_called_class());
             $table = strtolower(array_pop($parts));
-            $this->_db = new TableGateway($table, null);
+            $this->db = new TableGateway($table, null);
         } else {
-            $this->_db = $tableGateway;
+            $this->db = $tableGateway;
         }
     }
 }

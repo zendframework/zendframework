@@ -61,10 +61,10 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
                 . ' atom:title element but a title has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
-            if (!$this->_ignoreExceptions) {
+            if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
-                $this->_exceptions[] = $exception;
+                $this->exceptions[] = $exception;
                 return;
             }
         }
@@ -109,10 +109,10 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
                 . ' atom:updated element but a modification date has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
-            if (!$this->_ignoreExceptions) {
+            if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
-                $this->_exceptions[] = $exception;
+                $this->exceptions[] = $exception;
                 return;
             }
         }
@@ -188,10 +188,10 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
                 . 'preferred URI for retrieving Atom Feed Documents representing '
                 . 'this Atom feed but a feed link has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
-            if (!$this->_ignoreExceptions) {
+            if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
-                $this->_exceptions[] = $exception;
+                $this->exceptions[] = $exception;
                 return;
             }
         }
@@ -215,7 +215,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
-        $authors = $this->_container->getAuthors();
+        $authors = $this->container->getAuthors();
         if (!$authors || empty($authors)) {
             /**
              * Technically we should defer an exception until we can check
@@ -225,20 +225,20 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
             return;
         }
         foreach ($authors as $data) {
-            $author = $this->_dom->createElement('author');
-            $name = $this->_dom->createElement('name');
+            $author = $this->dom->createElement('author');
+            $name = $this->dom->createElement('name');
             $author->appendChild($name);
             $root->appendChild($author);
             $text = $dom->createTextNode($data['name']);
             $name->appendChild($text);
             if (array_key_exists('email', $data)) {
-                $email = $this->_dom->createElement('email');
+                $email = $this->dom->createElement('email');
                 $author->appendChild($email);
                 $text = $dom->createTextNode($data['email']);
                 $email->appendChild($text);
             }
             if (array_key_exists('uri', $data)) {
-                $uri = $this->_dom->createElement('uri');
+                $uri = $this->dom->createElement('uri');
                 $author->appendChild($uri);
                 $text = $dom->createTextNode($data['uri']);
                 $uri->appendChild($text);
@@ -263,10 +263,10 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
                 . 'value as atom:link however neither a suitable link nor an '
                 . 'id have been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
-            if (!$this->_ignoreExceptions) {
+            if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
-                $this->_exceptions[] = $exception;
+                $this->exceptions[] = $exception;
                 return;
             }
         }

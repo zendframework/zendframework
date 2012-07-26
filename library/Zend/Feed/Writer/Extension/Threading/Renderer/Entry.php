@@ -28,7 +28,7 @@ class Entry extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render entry
@@ -40,10 +40,10 @@ class Entry extends Extension\AbstractRenderer
         if (strtolower($this->getType()) == 'rss') {
             return; // Atom 1.0 only
         }
-        $this->_setCommentLink($this->_dom, $this->_base);
-        $this->_setCommentFeedLinks($this->_dom, $this->_base);
-        $this->_setCommentCount($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setCommentLink($this->dom, $this->base);
+        $this->_setCommentFeedLinks($this->dom, $this->base);
+        $this->_setCommentCount($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -72,7 +72,7 @@ class Entry extends Extension\AbstractRenderer
         if (!$link) {
             return;
         }
-        $clink = $this->_dom->createElement('link');
+        $clink = $this->dom->createElement('link');
         $clink->setAttribute('rel', 'replies');
         $clink->setAttribute('type', 'text/html');
         $clink->setAttribute('href', $link);
@@ -81,7 +81,7 @@ class Entry extends Extension\AbstractRenderer
             $clink->setAttribute('thr:count', $count);
         }
         $root->appendChild($clink);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -98,7 +98,7 @@ class Entry extends Extension\AbstractRenderer
             return;
         }
         foreach ($links as $link) {
-            $flink = $this->_dom->createElement('link');
+            $flink = $this->dom->createElement('link');
             $flink->setAttribute('rel', 'replies');
             $flink->setAttribute('type', 'application/'. $link['type'] .'+xml');
             $flink->setAttribute('href', $link['uri']);
@@ -107,7 +107,7 @@ class Entry extends Extension\AbstractRenderer
                 $flink->setAttribute('thr:count', $count);
             }
             $root->appendChild($flink);
-            $this->_called = true;
+            $this->called = true;
         }
     }
 
@@ -124,9 +124,9 @@ class Entry extends Extension\AbstractRenderer
         if ($count === null) {
             return;
         }
-        $tcount = $this->_dom->createElement('thr:total');
+        $tcount = $this->dom->createElement('thr:total');
         $tcount->nodeValue = $count;
         $root->appendChild($tcount);
-        $this->_called = true;
+        $this->called = true;
     }
 }

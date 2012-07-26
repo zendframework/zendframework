@@ -51,7 +51,7 @@ class Capabilities
      *
      * @var null|boolean
      */
-    protected $_expiredRead;
+    protected $expiredRead;
 
     /**
      * Max. key length
@@ -61,7 +61,7 @@ class Capabilities
      *
      * @var null|int
      */
-    protected $_maxKeyLength;
+    protected $maxKeyLength;
 
     /**
      * Min. TTL (0 means items never expire)
@@ -71,7 +71,7 @@ class Capabilities
      *
      * @var null|int
      */
-    protected $_minTtl;
+    protected $minTtl;
 
     /**
      * Max. TTL (0 means infinite)
@@ -81,7 +81,7 @@ class Capabilities
      *
      * @var null|int
      */
-    protected $_maxTtl;
+    protected $maxTtl;
 
     /**
      * Namespace is prefix
@@ -91,7 +91,7 @@ class Capabilities
      *
      * @var null|boolean
      */
-    protected $_namespaceIsPrefix;
+    protected $namespaceIsPrefix;
 
     /**
      * Namespace separator
@@ -101,7 +101,7 @@ class Capabilities
      *
      * @var null|string
      */
-    protected $_namespaceSeparator;
+    protected $namespaceSeparator;
 
     /**
      * Static ttl
@@ -111,7 +111,7 @@ class Capabilities
      *
      * @var null|boolean
      */
-    protected $_staticTtl;
+    protected $staticTtl;
 
    /**
     * Supported datatypes
@@ -121,7 +121,7 @@ class Capabilities
     *
     * @var null|array
     */
-    protected $_supportedDatatypes;
+    protected $supportedDatatypes;
 
     /**
      * Supported metdata
@@ -131,7 +131,7 @@ class Capabilities
      *
      * @var null|array
      */
-    protected $_supportedMetadata;
+    protected $supportedMetadata;
 
     /**
      * TTL precision
@@ -141,7 +141,7 @@ class Capabilities
      *
      * @var null|int
      */
-    protected $_ttlPrecision;
+    protected $ttlPrecision;
 
     /**
      * Use request time
@@ -151,7 +151,7 @@ class Capabilities
      *
      * @var null|boolean
      */
-    protected $_useRequestTime;
+    protected $useRequestTime;
 
     /**
      * Constructor
@@ -495,17 +495,16 @@ class Capabilities
     /**
      * Get a capability
      *
-     * @param  string $name
+     * @param  string $property
      * @param  mixed $default
      * @return mixed
      */
-    protected function getCapability($name, $default = null)
+    protected function getCapability($property, $default = null)
     {
-        $property = '_' . $name;
         if ($this->$property !== null) {
             return $this->$property;
         } elseif ($this->baseCapabilities) {
-            $getMethod = 'get' . $name;
+            $getMethod = 'get' . $property;
             return $this->baseCapabilities->$getMethod();
         }
         return $default;
@@ -520,20 +519,19 @@ class Capabilities
      * @return Capabilities Fluent interface
      * @throws Exception\InvalidArgumentException
      */
-    protected function setCapability(stdClass $marker, $name, $value)
+    protected function setCapability(stdClass $marker, $property, $value)
     {
         if ($this->marker !== $marker) {
             throw new Exception\InvalidArgumentException('Invalid marker');
         }
 
-        $property = '_' . $name;
         if ($this->$property !== $value) {
             $this->$property = $value;
 
             // trigger event
             if ($this->storage instanceof EventsCapableInterface) {
                 $this->storage->getEventManager()->trigger('capability', $this->storage, new ArrayObject(array(
-                    $name => $value
+                    $property => $value
                 )));
             }
         }

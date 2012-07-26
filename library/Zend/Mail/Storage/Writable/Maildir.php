@@ -402,7 +402,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
 
         $info  = ':2,';
         $flags = array();
-        foreach (Storage\Maildir::$_knownFlags as $char => $flag) {
+        foreach (Storage\Maildir::$knownFlags as $char => $flag) {
             if (!isset($wanted_flags[$flag])) {
                 continue;
             }
@@ -482,7 +482,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
             throw $exception;
         }
 
-        $this->_files[] = array('uniq'     => $temp_file['uniq'],
+        $this->files[] = array('uniq'     => $temp_file['uniq'],
                                 'flags'    => $flags,
                                 'filename' => $new_filename);
         if ($this->_quota) {
@@ -550,7 +550,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if ($folder->getGlobalName() == $this->_currentFolder
             || ($this->_currentFolder == 'INBOX' && $folder->getGlobalName() == '/')
         ) {
-            $this->_files[] = array('uniq'     => $temp_file['uniq'],
+            $this->files[] = array('uniq'     => $temp_file['uniq'],
                                     'flags'    => $flags,
                                     'filename' => $new_file);
         }
@@ -616,9 +616,9 @@ class Maildir extends Folder\Maildir implements WritableInterface
             throw $exception;
         }
 
-        unset($this->_files[$id - 1]);
+        unset($this->files[$id - 1]);
         // remove the gap
-        $this->_files = array_values($this->_files);
+        $this->files = array_values($this->files);
     }
 
 
@@ -646,7 +646,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         $filedata['flags']    = $flags;
         $filedata['filename'] = $new_filename;
 
-        $this->_files[$id - 1] = $filedata;
+        $this->files[$id - 1] = $filedata;
     }
 
 
@@ -667,9 +667,9 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if (!@unlink($filename)) {
             throw new StorageException\RuntimeException('cannot remove message');
         }
-        unset($this->_files[$id - 1]);
+        unset($this->files[$id - 1]);
         // remove the gap
-        $this->_files = array_values($this->_files);
+        $this->files = array_values($this->files);
         if ($this->_quota) {
             $this->_addQuotaEntry(0 - (int)$size, -1);
         }

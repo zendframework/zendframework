@@ -28,7 +28,7 @@ class Feed extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render feed
@@ -44,9 +44,9 @@ class Feed extends Extension\AbstractRenderer
         if (strtolower($this->getType()) == 'atom') {
             return;
         }
-        $this->_setFeedLinks($this->_dom, $this->_base);
-        $this->_setHubs($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setFeedLinks($this->dom, $this->base);
+        $this->_setHubs($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -83,7 +83,7 @@ class Feed extends Extension\AbstractRenderer
             $flink->setAttribute('type', $mime);
             $flink->setAttribute('href', $href);
         }
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -105,6 +105,6 @@ class Feed extends Extension\AbstractRenderer
             $hub->setAttribute('href', $hubUrl);
             $root->appendChild($hub);
         }
-        $this->_called = true;
+        $this->called = true;
     }
 }

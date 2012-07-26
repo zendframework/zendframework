@@ -28,7 +28,7 @@ class Entry extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render entry
@@ -40,8 +40,8 @@ class Entry extends Extension\AbstractRenderer
         if (strtolower($this->getType()) == 'atom') {
             return;
         }
-        $this->_setContent($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setContent($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -74,6 +74,6 @@ class Entry extends Extension\AbstractRenderer
         $root->appendChild($element);
         $cdata = $dom->createCDATASection($content);
         $element->appendChild($cdata);
-        $this->_called = true;
+        $this->called = true;
     }
 }

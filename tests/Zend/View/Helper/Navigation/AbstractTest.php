@@ -62,14 +62,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     protected $_helper;
 
     /**
-     * The first container in the config file (_files/navigation.xml)
+     * The first container in the config file (files/navigation.xml)
      *
      * @var Zend_Navigation
      */
     protected $_nav1;
 
     /**
-     * The second container in the config file (_files/navigation.xml)
+     * The second container in the config file (files/navigation.xml)
      *
      * @var Navigation\Navigation
      */

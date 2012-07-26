@@ -24,14 +24,14 @@ class Entry
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * Encoding of all text values
      *
      * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * Set feed encoding
@@ -41,7 +41,7 @@ class Entry
      */
     public function setEncoding($enc)
     {
-        $this->_encoding = $enc;
+        $this->encoding = $enc;
         return $this;
     }
 
@@ -52,7 +52,7 @@ class Entry
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
@@ -72,7 +72,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
         }
-        $this->_data['block'] = $value;
+        $this->data['block'] = $value;
     }
 
     /**
@@ -102,10 +102,10 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
-        if (!isset($this->_data['authors'])) {
-            $this->_data['authors'] = array();
+        if (!isset($this->data['authors'])) {
+            $this->data['authors'] = array();
         }
-        $this->_data['authors'][] = $value;
+        $this->data['authors'][] = $value;
         return $this;
     }
 
@@ -126,7 +126,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "duration" may only'
             . ' be of a specified [[HH:]MM:]SS format');
         }
-        $this->_data['duration'] = $value;
+        $this->data['duration'] = $value;
         return $this;
     }
 
@@ -143,7 +143,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }
-        $this->_data['explicit'] = $value;
+        $this->data['explicit'] = $value;
         return $this;
     }
 
@@ -166,7 +166,7 @@ class Entry
             . ' have a concatenated length of 255 chars where terms are delimited'
             . ' by a comma');
         }
-        $this->_data['keywords'] = $value;
+        $this->data['keywords'] = $value;
         return $this;
     }
 
@@ -183,7 +183,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "subtitle" may only'
             . ' contain a maximum of 255 characters');
         }
-        $this->_data['subtitle'] = $value;
+        $this->data['subtitle'] = $value;
         return $this;
     }
 
@@ -200,7 +200,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "summary" may only'
             . ' contain a maximum of 4000 characters');
         }
-        $this->_data['summary'] = $value;
+        $this->data['summary'] = $value;
         return $this;
     }
 
@@ -221,11 +221,11 @@ class Entry
                 'invalid method: ' . $method
             );
         }
-        if (!array_key_exists($point, $this->_data)
-            || empty($this->_data[$point])
+        if (!array_key_exists($point, $this->data)
+            || empty($this->data[$point])
         ) {
             return null;
         }
-        return $this->_data[$point];
+        return $this->data[$point];
     }
 }

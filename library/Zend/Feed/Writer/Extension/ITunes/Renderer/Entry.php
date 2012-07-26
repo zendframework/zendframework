@@ -27,7 +27,7 @@ class Entry extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render entry
@@ -36,14 +36,14 @@ class Entry extends Extension\AbstractRenderer
      */
     public function render()
     {
-        $this->_setAuthors($this->_dom, $this->_base);
-        $this->_setBlock($this->_dom, $this->_base);
-        $this->_setDuration($this->_dom, $this->_base);
-        $this->_setExplicit($this->_dom, $this->_base);
-        $this->_setKeywords($this->_dom, $this->_base);
-        $this->_setSubtitle($this->_dom, $this->_base);
-        $this->_setSummary($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setAuthors($this->dom, $this->base);
+        $this->_setBlock($this->dom, $this->base);
+        $this->_setDuration($this->dom, $this->base);
+        $this->_setExplicit($this->dom, $this->base);
+        $this->_setKeywords($this->dom, $this->base);
+        $this->_setSubtitle($this->dom, $this->base);
+        $this->_setSummary($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -77,7 +77,7 @@ class Entry extends Extension\AbstractRenderer
             $text = $dom->createTextNode($author);
             $el->appendChild($text);
             $root->appendChild($el);
-            $this->_called = true;
+            $this->called = true;
         }
     }
 
@@ -98,7 +98,7 @@ class Entry extends Extension\AbstractRenderer
         $text = $dom->createTextNode($block);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -118,7 +118,7 @@ class Entry extends Extension\AbstractRenderer
         $text = $dom->createTextNode($duration);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -138,7 +138,7 @@ class Entry extends Extension\AbstractRenderer
         $text = $dom->createTextNode($explicit);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -158,7 +158,7 @@ class Entry extends Extension\AbstractRenderer
         $text = $dom->createTextNode(implode(',', $keywords));
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -178,7 +178,7 @@ class Entry extends Extension\AbstractRenderer
         $text = $dom->createTextNode($subtitle);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 
     /**
@@ -198,6 +198,6 @@ class Entry extends Extension\AbstractRenderer
         $text = $dom->createTextNode($summary);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 }

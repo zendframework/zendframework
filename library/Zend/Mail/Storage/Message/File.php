@@ -50,7 +50,7 @@ class File extends Part\File implements MessageInterface
      */
     public function getTopLines()
     {
-        return $this->_topLines;
+        return $this->topLines;
     }
 
     /**

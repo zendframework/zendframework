@@ -28,7 +28,7 @@ class Entry extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render entry
@@ -40,8 +40,8 @@ class Entry extends Extension\AbstractRenderer
         if (strtolower($this->getType()) == 'atom') {
             return; // RSS 2.0 only
         }
-        $this->_setCommentCount($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setCommentCount($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -70,9 +70,9 @@ class Entry extends Extension\AbstractRenderer
         if (!$count) {
             $count = 0;
         }
-        $tcount = $this->_dom->createElement('slash:comments');
+        $tcount = $this->dom->createElement('slash:comments');
         $tcount->nodeValue = $count;
         $root->appendChild($tcount);
-        $this->_called = true;
+        $this->called = true;
     }
 }

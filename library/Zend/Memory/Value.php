@@ -29,21 +29,21 @@ class Value implements ArrayAccess, Countable
      *
      * @var string
      */
-    private $_value;
+    private $value;
 
     /**
      * Container
      *
      * @var Container\Movable
      */
-    private $_container;
+    private $container;
 
     /**
      * Boolean flag which signals to trace value modifications
      *
      * @var boolean
      */
-    private $_trace;
+    private $trace;
 
 
     /**
@@ -54,9 +54,9 @@ class Value implements ArrayAccess, Countable
      */
     public function __construct($value, Container\Movable $container)
     {
-        $this->_container = $container;
+        $this->container = $container;
 
-        $this->_value = (string)$value;
+        $this->value = (string)$value;
 
         /**
          * Object is marked as just modified by memory manager
@@ -66,7 +66,7 @@ class Value implements ArrayAccess, Countable
          *
          * It reduces overall numberr of calls necessary to modification trace
          */
-        $this->_trace = false;
+        $this->trace = false;
     }
 
     /**
@@ -76,7 +76,7 @@ class Value implements ArrayAccess, Countable
      */
     public function count()
     {
-        return strlen($this->_value);
+        return strlen($this->value);
     }
 
     /**
@@ -88,7 +88,7 @@ class Value implements ArrayAccess, Countable
      */
     public function offsetExists($offset)
     {
-        return $offset >= 0  &&  $offset < strlen($this->_value);
+        return $offset >= 0  &&  $offset < strlen($this->value);
     }
 
     /**
@@ -100,7 +100,7 @@ class Value implements ArrayAccess, Countable
      */
     public function offsetGet($offset)
     {
-        return $this->_value[$offset];
+        return $this->value[$offset];
     }
 
     /**
@@ -112,11 +112,11 @@ class Value implements ArrayAccess, Countable
      */
     public function offsetSet($offset, $char)
     {
-        $this->_value[$offset] = $char;
+        $this->value[$offset] = $char;
 
-        if ($this->_trace) {
-            $this->_trace = false;
-            $this->_container->processUpdate();
+        if ($this->trace) {
+            $this->trace = false;
+            $this->container->processUpdate();
         }
     }
 
@@ -128,11 +128,11 @@ class Value implements ArrayAccess, Countable
      */
     public function offsetUnset($offset)
     {
-        unset($this->_value[$offset]);
+        unset($this->value[$offset]);
 
-        if ($this->_trace) {
-            $this->_trace = false;
-            $this->_container->processUpdate();
+        if ($this->trace) {
+            $this->trace = false;
+            $this->container->processUpdate();
         }
     }
 
@@ -144,7 +144,7 @@ class Value implements ArrayAccess, Countable
      */
     public function __toString()
     {
-        return $this->_value;
+        return $this->value;
     }
 
 
@@ -159,7 +159,7 @@ class Value implements ArrayAccess, Countable
      */
     public function &getRef()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -172,6 +172,6 @@ class Value implements ArrayAccess, Countable
      */
     public function startTrace()
     {
-        $this->_trace = true;
+        $this->trace = true;
     }
 }

@@ -28,7 +28,7 @@ class Entry extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render entry
@@ -40,8 +40,8 @@ class Entry extends Extension\AbstractRenderer
         if (strtolower($this->getType()) == 'atom') {
             return;
         }
-        $this->_setAuthors($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setAuthors($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -71,13 +71,13 @@ class Entry extends Extension\AbstractRenderer
             return;
         }
         foreach ($authors as $data) {
-            $author = $this->_dom->createElement('dc:creator');
+            $author = $this->dom->createElement('dc:creator');
             if (array_key_exists('name', $data)) {
                 $text = $dom->createTextNode($data['name']);
                 $author->appendChild($text);
                 $root->appendChild($author);
             }
         }
-        $this->_called = true;
+        $this->called = true;
     }
 }

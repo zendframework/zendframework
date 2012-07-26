@@ -38,29 +38,29 @@ class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer\Renderer
      */
     public function render()
     {
-        if (!$this->_container->getEncoding()) {
-            $this->_container->setEncoding('UTF-8');
+        if (!$this->container->getEncoding()) {
+            $this->container->setEncoding('UTF-8');
         }
-        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
-        $this->_dom->formatOutput = true;
-        $root = $this->_dom->createElement('source');
+        $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
+        $this->dom->formatOutput = true;
+        $root = $this->dom->createElement('source');
         $this->setRootElement($root);
-        $this->_dom->appendChild($root);
-        $this->_setLanguage($this->_dom, $root);
-        $this->_setBaseUrl($this->_dom, $root);
-        $this->_setTitle($this->_dom, $root);
-        $this->_setDescription($this->_dom, $root);
-        $this->_setDateCreated($this->_dom, $root);
-        $this->_setDateModified($this->_dom, $root);
-        $this->_setGenerator($this->_dom, $root);
-        $this->_setLink($this->_dom, $root);
-        $this->_setFeedLinks($this->_dom, $root);
-        $this->_setId($this->_dom, $root);
-        $this->_setAuthors($this->_dom, $root);
-        $this->_setCopyright($this->_dom, $root);
-        $this->_setCategories($this->_dom, $root);
+        $this->dom->appendChild($root);
+        $this->_setLanguage($this->dom, $root);
+        $this->_setBaseUrl($this->dom, $root);
+        $this->_setTitle($this->dom, $root);
+        $this->_setDescription($this->dom, $root);
+        $this->_setDateCreated($this->dom, $root);
+        $this->_setDateModified($this->dom, $root);
+        $this->_setGenerator($this->dom, $root);
+        $this->_setLink($this->dom, $root);
+        $this->_setFeedLinks($this->dom, $root);
+        $this->_setId($this->dom, $root);
+        $this->_setAuthors($this->dom, $root);
+        $this->_setCopyright($this->dom, $root);
+        $this->_setCategories($this->dom, $root);
 
-        foreach ($this->_extensions as $ext) {
+        foreach ($this->extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
             $ext->setDomDocument($this->getDomDocument(), $root);

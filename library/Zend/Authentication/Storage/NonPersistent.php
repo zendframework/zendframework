@@ -26,7 +26,7 @@ class NonPersistent implements StorageInterface
     /**
      * Holds the actual auth data
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Returns true if and only if storage is empty
@@ -36,7 +36,7 @@ class NonPersistent implements StorageInterface
      */
     public function isEmpty()
     {
-        return empty($this->_data);
+        return empty($this->data);
     }
 
     /**
@@ -47,7 +47,7 @@ class NonPersistent implements StorageInterface
      */
     public function read()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -58,7 +58,7 @@ class NonPersistent implements StorageInterface
      */
     public function write($contents)
     {
-        $this->_data = $contents;
+        $this->data = $contents;
     }
 
     /**
@@ -68,6 +68,6 @@ class NonPersistent implements StorageInterface
      */
     public function clear()
     {
-        $this->_data = null;
+        $this->data = null;
     }
 }

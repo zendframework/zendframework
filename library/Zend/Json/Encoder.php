@@ -26,21 +26,21 @@ class Encoder
      *
      * @var boolean
      */
-    protected $_cycleCheck;
+    protected $cycleCheck;
 
     /**
      * Additional options used during encoding
      *
      * @var array
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * Array of visited objects; used to prevent cycling.
      *
      * @var array
      */
-    protected $_visited = array();
+    protected $visited = array();
 
     /**
      * Constructor
@@ -51,8 +51,8 @@ class Encoder
      */
     protected function __construct($cycleCheck = false, $options = array())
     {
-        $this->_cycleCheck = $cycleCheck;
-        $this->_options = $options;
+        $this->cycleCheck = $cycleCheck;
+        $this->options = $options;
     }
 
     /**
@@ -107,11 +107,11 @@ class Encoder
      */
     protected function _encodeObject(&$value)
     {
-        if ($this->_cycleCheck) {
+        if ($this->cycleCheck) {
             if ($this->_wasVisited($value)) {
 
-                if (isset($this->_options['silenceCyclicalExceptions'])
-                    && $this->_options['silenceCyclicalExceptions']===true) {
+                if (isset($this->options['silenceCyclicalExceptions'])
+                    && $this->options['silenceCyclicalExceptions']===true) {
 
                     return '"* RECURSION (' . str_replace('\\', '\\\\', get_class($value)) . ') *"';
 
@@ -123,7 +123,7 @@ class Encoder
                 }
             }
 
-            $this->_visited[] = $value;
+            $this->visited[] = $value;
         }
 
         $props = '';
@@ -162,7 +162,7 @@ class Encoder
      */
     protected function _wasVisited(&$value)
     {
-        if (in_array($value, $this->_visited, true)) {
+        if (in_array($value, $this->visited, true)) {
             return true;
         }
 

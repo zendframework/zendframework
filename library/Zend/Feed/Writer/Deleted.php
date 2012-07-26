@@ -25,7 +25,7 @@ class Deleted
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
@@ -33,7 +33,7 @@ class Deleted
      *
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
      * Set the feed character encoding
@@ -47,7 +47,7 @@ class Deleted
         if (empty($encoding) || !is_string($encoding)) {
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
-        $this->_data['encoding'] = $encoding;
+        $this->data['encoding'] = $encoding;
     }
 
     /**
@@ -57,10 +57,10 @@ class Deleted
      */
     public function getEncoding()
     {
-        if (!array_key_exists('encoding', $this->_data)) {
+        if (!array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
-        return $this->_data['encoding'];
+        return $this->data['encoding'];
     }
 
     /**
@@ -70,8 +70,8 @@ class Deleted
      */
     public function remove($name)
     {
-        if (isset($this->_data[$name])) {
-            unset($this->_data[$name]);
+        if (isset($this->data[$name])) {
+            unset($this->data[$name]);
         }
     }
 
@@ -84,7 +84,7 @@ class Deleted
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     /**
@@ -94,7 +94,7 @@ class Deleted
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -108,15 +108,15 @@ class Deleted
         if (empty($reference) || !is_string($reference)) {
             throw new Exception\InvalidArgumentException('Invalid parameter: reference must be a non-empty string');
         }
-        $this->_data['reference'] = $reference;
+        $this->data['reference'] = $reference;
     }
 
     public function getReference()
     {
-        if (!array_key_exists('reference', $this->_data)) {
+        if (!array_key_exists('reference', $this->data)) {
             return null;
         }
-        return $this->_data['reference'];
+        return $this->data['reference'];
     }
 
     /**
@@ -135,7 +135,7 @@ class Deleted
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
             . ' passed as parameter');
         }
-        $this->_data['when'] = $date;
+        $this->data['when'] = $date;
     }
 
     /**
@@ -143,10 +143,10 @@ class Deleted
      */
     public function getWhen()
     {
-        if (!array_key_exists('when', $this->_data)) {
+        if (!array_key_exists('when', $this->data)) {
             return null;
         }
-        return $this->_data['when'];
+        return $this->data['when'];
     }
 
     /**
@@ -183,28 +183,28 @@ class Deleted
             }
             $author['uri'] = $by['uri'];
         }
-        $this->_data['by'] = $author;
+        $this->data['by'] = $author;
     }
 
     public function getBy()
     {
-        if (!array_key_exists('by', $this->_data)) {
+        if (!array_key_exists('by', $this->data)) {
             return null;
         }
-        return $this->_data['by'];
+        return $this->data['by'];
     }
 
     public function setComment($comment)
     {
-        $this->_data['comment'] = $comment;
+        $this->data['comment'] = $comment;
     }
 
     public function getComment()
     {
-        if (!array_key_exists('comment', $this->_data)) {
+        if (!array_key_exists('comment', $this->data)) {
             return null;
         }
-        return $this->_data['comment'];
+        return $this->data['comment'];
     }
 
 }

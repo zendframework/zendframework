@@ -29,7 +29,7 @@ use Zend\Http\Request;
 class UseCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * The bast URI for this test, containing all files in the _files directory
+     * The bast URI for this test, containing all files in the files directory
      * Should be set in TestConfiguration.php or TestConfiguration.php.dist
      *
      * @var string

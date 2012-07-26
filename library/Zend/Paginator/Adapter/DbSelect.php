@@ -30,21 +30,21 @@ class DbSelect implements AdapterInterface
      *
      * @var \Zend\Db\Sql\Select
      */
-    protected $_countSelect = null;
+    protected $countSelect = null;
 
     /**
      * Database query
      *
      * @var \Zend\Db\Sql\Select
      */
-    protected $_select = null;
+    protected $select = null;
 
     /**
      * Total item count
      *
      * @var integer
      */
-    protected $_rowCount = null;
+    protected $rowCount = null;
 
     /**
      * Constructor.
@@ -53,7 +53,7 @@ class DbSelect implements AdapterInterface
      */
     public function __construct(Sql\Select $select)
     {
-        $this->_select = $select;
+        $this->select = $select;
     }
 
     /**
@@ -82,7 +82,7 @@ class DbSelect implements AdapterInterface
                 $countColumnPart = $countColumnPart->__toString();
             }
 
-            $rowCountColumn = $this->_select->getAdapter()->foldCase(self::ROW_COUNT_COLUMN);
+            $rowCountColumn = $this->select->getAdapter()->foldCase(self::ROW_COUNT_COLUMN);
 
             // The select query can contain only one column, which should be the row count column
             if (false === strpos($countColumnPart, $rowCountColumn)) {
@@ -91,9 +91,9 @@ class DbSelect implements AdapterInterface
 
             $result = $rowCount->query(Db\Db::FETCH_ASSOC)->fetch();
 
-            $this->_rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
+            $this->rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
         } elseif (is_integer($rowCount)) {
-            $this->_rowCount = $rowCount;
+            $this->rowCount = $rowCount;
         } else {
             throw new Exception\InvalidArgumentException('Invalid row count');
         }
@@ -110,9 +110,9 @@ class DbSelect implements AdapterInterface
      */
     public function getItems($offset, $itemCountPerPage)
     {
-        $this->_select->limit($itemCountPerPage, $offset);
+        $this->select->limit($itemCountPerPage, $offset);
 
-        return $this->_select->query()->fetchAll();
+        return $this->select->query()->fetchAll();
     }
 
     /**
@@ -122,13 +122,13 @@ class DbSelect implements AdapterInterface
      */
     public function count()
     {
-        if ($this->_rowCount === null) {
+        if ($this->rowCount === null) {
             $this->setRowCount(
                 $this->getCountSelect()
             );
         }
 
-        return $this->_rowCount;
+        return $this->rowCount;
     }
 
     /**
@@ -146,11 +146,11 @@ class DbSelect implements AdapterInterface
          * We only need to generate a COUNT query once. It will not change for
          * this instance.
          */
-        if ($this->_countSelect !== null) {
-            return $this->_countSelect;
+        if ($this->countSelect !== null) {
+            return $this->countSelect;
         }
 
-        $rowCount = clone $this->_select;
+        $rowCount = clone $this->select;
         $rowCount->__toString(); // Workaround for ZF-3719 and related
 
         $db = $rowCount->getAdapter();
@@ -182,7 +182,7 @@ class DbSelect implements AdapterInterface
              * the original query and use it as a subquery os the COUNT query.
              */
             if (($isDistinct && count($columnParts) > 1) || count($groupParts) > 1 || !empty($havingParts)) {
-                $rowCount = $db->select()->from($this->_select);
+                $rowCount = $db->select()->from($this->select);
             } elseif ($isDistinct) {
                 $part = $columnParts[0];
 
@@ -224,7 +224,7 @@ class DbSelect implements AdapterInterface
                 ->columns($expression);
         }
 
-        $this->_countSelect = $rowCount;
+        $this->countSelect = $rowCount;
 
         return $rowCount;
     }

@@ -28,7 +28,7 @@ class Entry extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
+    protected $called = false;
 
     /**
      * Render entry
@@ -40,8 +40,8 @@ class Entry extends Extension\AbstractRenderer
         if (strtolower($this->getType()) == 'atom') {
             return; // RSS 2.0 only
         }
-        $this->_setCommentFeedLinks($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setCommentFeedLinks($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
@@ -72,12 +72,12 @@ class Entry extends Extension\AbstractRenderer
         }
         foreach ($links as $link) {
             if ($link['type'] == 'rss') {
-                $flink = $this->_dom->createElement('wfw:commentRss');
+                $flink = $this->dom->createElement('wfw:commentRss');
                 $text = $dom->createTextNode($link['uri']);
                 $flink->appendChild($text);
                 $root->appendChild($flink);
             }
         }
-        $this->_called = true;
+        $this->called = true;
     }
 }

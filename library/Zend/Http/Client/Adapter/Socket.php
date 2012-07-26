@@ -72,7 +72,7 @@ class Socket implements HttpAdapter, StreamInterface
      *
      * @var resource
      */
-    protected $_context = null;
+    protected $context = null;
 
     /**
      * Adapter constructor, currently empty. Config is set using setOptions()
@@ -129,10 +129,10 @@ class Socket implements HttpAdapter, StreamInterface
     public function setStreamContext($context)
     {
         if (is_resource($context) && get_resource_type($context) == 'stream-context') {
-            $this->_context = $context;
+            $this->context = $context;
 
         } elseif (is_array($context)) {
-            $this->_context = stream_context_create($context);
+            $this->context = stream_context_create($context);
 
         } else {
             // Invalid parameter
@@ -153,11 +153,11 @@ class Socket implements HttpAdapter, StreamInterface
      */
     public function getStreamContext()
     {
-        if (! $this->_context) {
-            $this->_context = stream_context_create();
+        if (! $this->context) {
+            $this->context = stream_context_create();
         }
 
-        return $this->_context;
+        return $this->context;
     }
 
     /**

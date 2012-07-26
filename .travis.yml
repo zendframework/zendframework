@@ -9,9 +9,11 @@ before_install:
  - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
  - curl -s https://getcomposer.org/installer | php -- --quiet
  - php composer.phar install --dev
+ - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
 script:
  - php ./tests/run-tests.php
+ - output=$(php php-cs-fixer.phar fix -v --fixers=elseif,trailing_spaces,linefeed,indentation --dry-run .); if [[ $output ]]; then echo -e "\e[00;31m$output\e[00m"; false; fi;
 
 notifications:
   irc: "irc.freenode.org#zftalk.2"

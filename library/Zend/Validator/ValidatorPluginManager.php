@@ -108,6 +108,13 @@ class ValidatorPluginManager extends AbstractPluginManager
     );
 
     /**
+     * Whether or not to share by default; default to false
+     *
+     * @var bool
+     */
+    protected $shareByDefault = false;
+
+    /**
      * Constructor
      *
      * After invoking parent constructor, add an initializer to inject the

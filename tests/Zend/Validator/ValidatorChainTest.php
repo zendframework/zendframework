@@ -39,7 +39,13 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        AbstractValidator::setMessageLength(-1);
         $this->validator = new ValidatorChain();
+    }
+
+    public function tearDown()
+    {
+        AbstractValidator::setMessageLength(-1);
     }
 
     public function populateValidatorChain()
@@ -219,5 +225,52 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
             ->method('getMessages')
             ->will($this->returnValue(array('error' => 'validation failed')));
         return $validator;
+    }
+
+    /**
+     * @group ZF-412
+     */
+    public function testCanAttachMultipleValidatorsOfTheSameTypeAsDiscreteInstances()
+    {
+        $this->validator->addByName('Callback', array(
+            'callback' => function ($value) {
+                return true;
+            },
+            'messages' => array(
+                'callbackValue' => 'This should not be seen in the messages',
+            ),
+        ));
+        $this->validator->addByName('Callback', array(
+            'callback' => function ($value) {
+                return false;
+            },
+            'messages' => array(
+                'callbackValue' => 'Second callback trapped',
+            ),
+        ));
+
+        $this->assertEquals(2, count($this->validator));
+        $validators = $this->validator->getValidators();
+        $compare = null;
+        foreach ($validators as $validator) {
+            $this->assertNotSame($compare, $validator);
+            $compare = $validator;
+        }
+
+        $this->assertFalse($this->validator->isValid('foo'));
+        $messages = $this->validator->getMessages();
+        $found    = false;
+        $test     = 'Second callback trapped';
+        foreach ($messages as $messageSet) {
+            if (is_string($messageSet) && $messageSet === $test) {
+                $found = true;
+                break;
+            }
+            if (is_array($messageSet) && in_array('Second callback trapped', $messageSet)) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found);
     }
 }

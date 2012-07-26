@@ -74,4 +74,11 @@ class FormCheckboxTest extends CommonTestCase
         $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
+
+    public function testDoesNotThrowExceptionIfNameIsZero()
+    {
+        $element = new Element\Checkbox(0);
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('name="0"', $markup);
+    }
 }

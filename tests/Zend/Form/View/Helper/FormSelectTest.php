@@ -241,4 +241,14 @@ class FormSelectTest extends CommonTestCase
         $this->helper->setTranslatorEnabled(false);
         $this->assertFalse($this->helper->isTranslatorEnabled());
     }
+
+    public function testDoesNotThrowExceptionIfNameIsZero()
+    {
+        $element = $this->getElement();
+        $element->setName(0);
+
+        $this->helper->__invoke($element);
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('name="0"', $markup);
+    }
 }

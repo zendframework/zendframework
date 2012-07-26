@@ -14,7 +14,9 @@
     "target-dir": "Zend/Cache",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-eventmanager": "self.version"
     },
     "suggest": {
         "zendframework/zend-log": "Zend\\Log component"

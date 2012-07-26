@@ -28,7 +28,7 @@ abstract class AbstractStorage implements
      * class capabilities with default values
      * @var array
      */
-    protected $_has = array('uniqueid'  => true,
+    protected $has = array('uniqueid'  => true,
                             'delete'    => false,
                             'create'    => false,
                             'top'       => false,
@@ -39,19 +39,19 @@ abstract class AbstractStorage implements
      * current iteration position
      * @var int
      */
-    protected $_iterationPos = 0;
+    protected $iterationPos = 0;
 
     /**
      * maximum iteration position (= message count)
      * @var null|int
      */
-    protected $_iterationMax = null;
+    protected $iterationMax = null;
 
     /**
      * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = 'Zend\Mail\Storage\Message';
+    protected $messageClass = 'Zend\Mail\Storage\Message';
 
     /**
      * Getter for has-properties. The standard has properties
@@ -70,7 +70,7 @@ abstract class AbstractStorage implements
     {
         if (strpos($var, 'has') === 0) {
             $var = strtolower(substr($var, 3));
-            return isset($this->_has[$var]) ? $this->_has[$var] : null;
+            return isset($this->has[$var]) ? $this->has[$var] : null;
         }
 
         throw new Exception\InvalidArgumentException($var . ' not found');
@@ -84,7 +84,7 @@ abstract class AbstractStorage implements
      */
     public function getCapabilities()
     {
-        return $this->_has;
+        return $this->has;
     }
 
 
@@ -271,8 +271,8 @@ abstract class AbstractStorage implements
       */
      public function rewind()
      {
-        $this->_iterationMax = $this->countMessages();
-        $this->_iterationPos = 1;
+        $this->iterationMax = $this->countMessages();
+        $this->iterationPos = 1;
      }
 
 
@@ -283,7 +283,7 @@ abstract class AbstractStorage implements
       */
      public function current()
      {
-        return $this->getMessage($this->_iterationPos);
+        return $this->getMessage($this->iterationPos);
      }
 
 
@@ -294,7 +294,7 @@ abstract class AbstractStorage implements
       */
      public function key()
      {
-        return $this->_iterationPos;
+        return $this->iterationPos;
      }
 
 
@@ -303,7 +303,7 @@ abstract class AbstractStorage implements
       */
      public function next()
      {
-        ++$this->_iterationPos;
+        ++$this->iterationPos;
      }
 
 
@@ -314,10 +314,10 @@ abstract class AbstractStorage implements
       */
      public function valid()
      {
-        if ($this->_iterationMax === null) {
-          $this->_iterationMax = $this->countMessages();
+        if ($this->iterationMax === null) {
+          $this->iterationMax = $this->countMessages();
         }
-        return $this->_iterationPos && $this->_iterationPos <= $this->_iterationMax;
+        return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
      }
 
 
@@ -329,14 +329,14 @@ abstract class AbstractStorage implements
       */
      public function seek($pos)
      {
-        if ($this->_iterationMax === null) {
-          $this->_iterationMax = $this->countMessages();
+        if ($this->iterationMax === null) {
+          $this->iterationMax = $this->countMessages();
         }
 
-        if ($pos > $this->_iterationMax) {
+        if ($pos > $this->iterationMax) {
             throw new Exception\OutOfBoundsException('this position does not exist');
         }
-        $this->_iterationPos = $pos;
+        $this->iterationPos = $pos;
      }
 
 }

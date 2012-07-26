@@ -25,25 +25,25 @@ class Maildir extends Storage\Maildir implements FolderInterface
      * root folder for folder structure
      * @var \Zend\Mail\Storage\Folder
      */
-    protected $_rootFolder;
+    protected $rootFolder;
 
     /**
      * rootdir of folder structure
      * @var string
      */
-    protected $_rootdir;
+    protected $rootdir;
 
     /**
      * name of current folder
      * @var string
      */
-    protected $_currentFolder;
+    protected $currentFolder;
 
     /**
      * delim char for subfolders
      * @var string
      */
-    protected $_delim;
+    protected $delim;
 
     /**
      * Create instance with parameters
@@ -65,31 +65,31 @@ class Maildir extends Storage\Maildir implements FolderInterface
             throw new Exception\InvalidArgumentException('no valid dirname given in params');
         }
 
-        $this->_rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $this->rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        $this->_delim = isset($params->delim) ? $params->delim : '.';
+        $this->delim = isset($params->delim) ? $params->delim : '.';
 
         $this->_buildFolderTree();
         $this->selectFolder(!empty($params->folder) ? $params->folder : 'INBOX');
-        $this->_has['top'] = true;
-        $this->_has['flags'] = true;
+        $this->has['top'] = true;
+        $this->has['flags'] = true;
     }
 
     /**
      * find all subfolders and mbox files for folder structure
      *
-     * Result is save in \Zend\Mail\Storage\Folder instances with the root in $this->_rootFolder.
+     * Result is save in \Zend\Mail\Storage\Folder instances with the root in $this->rootFolder.
      * $parentFolder and $parentGlobalName are only used internally for recursion.
      *
      * @throws \Zend\Mail\Storage\Exception\RuntimeException
      */
     protected function _buildFolderTree()
     {
-        $this->_rootFolder = new Storage\Folder('/', '/', false);
-        $this->_rootFolder->INBOX = new Storage\Folder('INBOX', 'INBOX', true);
+        $this->rootFolder = new Storage\Folder('/', '/', false);
+        $this->rootFolder->INBOX = new Storage\Folder('INBOX', 'INBOX', true);
 
         ErrorHandler::start(E_WARNING);
-        $dh = opendir($this->_rootdir);
+        $dh = opendir($this->rootdir);
         ErrorHandler::stop();
         if (!$dh) {
             throw new Exception\RuntimeException("can't read folders in maildir");
@@ -103,7 +103,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                 continue;
             }
 
-            if ($this->_isMaildir($this->_rootdir . $entry)) {
+            if ($this->_isMaildir($this->rootdir . $entry)) {
                 $dirs[] = $entry;
             }
         }
@@ -112,18 +112,18 @@ class Maildir extends Storage\Maildir implements FolderInterface
         sort($dirs);
         $stack = array(null);
         $folderStack = array(null);
-        $parentFolder = $this->_rootFolder;
+        $parentFolder = $this->rootFolder;
         $parent = '.';
 
         foreach ($dirs as $dir) {
             do {
                 if (strpos($dir, $parent) === 0) {
                     $local = substr($dir, strlen($parent));
-                    if (strpos($local, $this->_delim) !== false) {
+                    if (strpos($local, $this->delim) !== false) {
                         throw new Exception\RuntimeException('error while reading maildir');
                     }
                     array_push($stack, $parent);
-                    $parent = $dir . $this->_delim;
+                    $parent = $dir . $this->delim;
                     $folder = new Storage\Folder($local, substr($dir, 1), true);
                     $parentFolder->$local = $folder;
                     array_push($folderStack, $parentFolder);
@@ -150,19 +150,19 @@ class Maildir extends Storage\Maildir implements FolderInterface
     public function getFolders($rootFolder = null)
     {
         if (!$rootFolder || $rootFolder == 'INBOX') {
-            return $this->_rootFolder;
+            return $this->rootFolder;
         }
 
         // rootdir is same as INBOX in maildir
-        if (strpos($rootFolder, 'INBOX' . $this->_delim) === 0) {
+        if (strpos($rootFolder, 'INBOX' . $this->delim) === 0) {
             $rootFolder = substr($rootFolder, 6);
         }
-        $currentFolder = $this->_rootFolder;
-        $subname = trim($rootFolder, $this->_delim);
+        $currentFolder = $this->rootFolder;
+        $subname = trim($rootFolder, $this->delim);
 
         while ($currentFolder) {
             ErrorHandler::start(E_NOTICE);
-            list($entry, $subname) = explode($this->_delim, $subname, 2);
+            list($entry, $subname) = explode($this->delim, $subname, 2);
             ErrorHandler::stop();
             $currentFolder = $currentFolder->$entry;
             if (!$subname) {
@@ -170,7 +170,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
             }
         }
 
-        if ($currentFolder->getGlobalName() != rtrim($rootFolder, $this->_delim)) {
+        if ($currentFolder->getGlobalName() != rtrim($rootFolder, $this->delim)) {
             throw new Exception\InvalidArgumentException("folder $rootFolder not found");
         }
         return $currentFolder;
@@ -186,20 +186,20 @@ class Maildir extends Storage\Maildir implements FolderInterface
      */
     public function selectFolder($globalName)
     {
-        $this->_currentFolder = (string)$globalName;
+        $this->currentFolder = (string)$globalName;
 
         // getting folder from folder tree for validation
-        $folder = $this->getFolders($this->_currentFolder);
+        $folder = $this->getFolders($this->currentFolder);
 
         try {
-            $this->_openMaildir($this->_rootdir . '.' . $folder->getGlobalName());
+            $this->_openMaildir($this->rootdir . '.' . $folder->getGlobalName());
         } catch(Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
-                throw new Exception\RuntimeException("{$this->_currentFolder} is not selectable", 0, $e);
+                throw new Exception\RuntimeException("{$this->currentFolder} is not selectable", 0, $e);
             }
             // seems like file has vanished; rebuilding folder tree - but it's still an exception
-            $this->_buildFolderTree($this->_rootdir);
+            $this->_buildFolderTree($this->rootdir);
             throw new Exception\RuntimeException('seems like the maildir has vanished, I\'ve rebuild the ' .
                                                          'folder tree, search for an other folder and try again', 0, $e);
         }
@@ -212,6 +212,6 @@ class Maildir extends Storage\Maildir implements FolderInterface
      */
     public function getCurrentFolder()
     {
-        return $this->_currentFolder;
+        return $this->currentFolder;
     }
 }

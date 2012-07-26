@@ -27,19 +27,19 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      * protocol handler
      * @var null|\Zend\Mail\Protocol\Imap
      */
-    protected $_protocol;
+    protected $protocol;
 
     /**
      * name of current folder
      * @var string
      */
-    protected $_currentFolder = '';
+    protected $currentFolder = '';
 
     /**
      * IMAP flags to constants translation
      * @var array
      */
-    protected static $_knownFlags = array('\Passed'   => Mail\Storage::FLAG_PASSED,
+    protected static $knownFlags = array('\Passed'   => Mail\Storage::FLAG_PASSED,
                                           '\Answered' => Mail\Storage::FLAG_ANSWERED,
                                           '\Seen'     => Mail\Storage::FLAG_SEEN,
                                           '\Deleted'  => Mail\Storage::FLAG_DELETED,
@@ -50,7 +50,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      * IMAP flags to search criteria
      * @var array
      */
-    protected static $_searchFlags = array('\Recent'   => 'RECENT',
+    protected static $searchFlags = array('\Recent'   => 'RECENT',
                                            '\Answered' => 'ANSWERED',
                                            '\Seen'     => 'SEEN',
                                            '\Deleted'  => 'DELETED',
@@ -67,24 +67,24 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function countMessages($flags = null)
     {
-        if (!$this->_currentFolder) {
+        if (!$this->currentFolder) {
             throw new Exception\RuntimeException('No selected folder to count');
         }
 
         if ($flags === null) {
-            return count($this->_protocol->search(array('ALL')));
+            return count($this->protocol->search(array('ALL')));
         }
 
         $params = array();
         foreach ((array)$flags as $flag) {
-            if (isset(self::$_searchFlags[$flag])) {
-                $params[] = self::$_searchFlags[$flag];
+            if (isset(self::$searchFlags[$flag])) {
+                $params[] = self::$searchFlags[$flag];
             } else {
                 $params[] = 'KEYWORD';
-                $params[] = $this->_protocol->escapeString($flag);
+                $params[] = $this->protocol->escapeString($flag);
             }
         }
-        return count($this->_protocol->search($params));
+        return count($this->protocol->search($params));
     }
 
     /**
@@ -97,9 +97,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     public function getSize($id = 0)
     {
         if ($id) {
-            return $this->_protocol->fetch('RFC822.SIZE', $id);
+            return $this->protocol->fetch('RFC822.SIZE', $id);
         }
-        return $this->_protocol->fetch('RFC822.SIZE', 1, INF);
+        return $this->protocol->fetch('RFC822.SIZE', 1, INF);
     }
 
     /**
@@ -111,15 +111,15 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function getMessage($id)
     {
-        $data = $this->_protocol->fetch(array('FLAGS', 'RFC822.HEADER'), $id);
+        $data = $this->protocol->fetch(array('FLAGS', 'RFC822.HEADER'), $id);
         $header = $data['RFC822.HEADER'];
 
         $flags = array();
         foreach ($data['FLAGS'] as $flag) {
-            $flags[] = isset(self::$_knownFlags[$flag]) ? self::$_knownFlags[$flag] : $flag;
+            $flags[] = isset(self::$knownFlags[$flag]) ? self::$knownFlags[$flag] : $flag;
         }
 
-        return new $this->_messageClass(array('handler' => $this, 'id' => $id, 'headers' => $header, 'flags' => $flags));
+        return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $header, 'flags' => $flags));
     }
 
     /*
@@ -141,7 +141,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         }
 
         // TODO: toplines
-        return $this->_protocol->fetch('RFC822.HEADER', $id);
+        return $this->protocol->fetch('RFC822.HEADER', $id);
     }
 
     /*
@@ -160,7 +160,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             throw new Exception\RuntimeException('not implemented');
         }
 
-        return $this->_protocol->fetch('RFC822.TEXT', $id);
+        return $this->protocol->fetch('RFC822.TEXT', $id);
     }
 
     /**
@@ -184,10 +184,10 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             $params = (object)$params;
         }
 
-        $this->_has['flags'] = true;
+        $this->has['flags'] = true;
 
         if ($params instanceof Protocol\Imap) {
-            $this->_protocol = $params;
+            $this->protocol = $params;
             try {
                 $this->selectFolder('INBOX');
             } catch(Exception\ExceptionInterface $e) {
@@ -205,9 +205,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         $port     = isset($params->port)     ? $params->port     : null;
         $ssl      = isset($params->ssl)      ? $params->ssl      : false;
 
-        $this->_protocol = new Protocol\Imap();
-        $this->_protocol->connect($host, $port, $ssl);
-        if (!$this->_protocol->login($params->user, $password)) {
+        $this->protocol = new Protocol\Imap();
+        $this->protocol->connect($host, $port, $ssl);
+        if (!$this->protocol->login($params->user, $password)) {
             throw new Exception\RuntimeException('cannot login, user or password wrong');
         }
         $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
@@ -219,8 +219,8 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function close()
     {
-        $this->_currentFolder = '';
-        $this->_protocol->logout();
+        $this->currentFolder = '';
+        $this->protocol->logout();
     }
 
     /**
@@ -230,7 +230,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function noop()
     {
-        if (!$this->_protocol->noop()) {
+        if (!$this->protocol->noop()) {
             throw new Exception\RuntimeException('could not do nothing');
         }
     }
@@ -245,11 +245,11 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function removeMessage($id)
     {
-        if (!$this->_protocol->store(array(Mail\Storage::FLAG_DELETED), $id, null, '+')) {
+        if (!$this->protocol->store(array(Mail\Storage::FLAG_DELETED), $id, null, '+')) {
             throw new Exception\RuntimeException('cannot set deleted flag');
         }
         // TODO: expunge here or at close? we can handle an error here better and are more fail safe
-        if (!$this->_protocol->expunge()) {
+        if (!$this->protocol->expunge()) {
             throw new Exception\RuntimeException('message marked as deleted, but could not expunge');
         }
     }
@@ -266,10 +266,10 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     public function getUniqueId($id = null)
     {
         if ($id) {
-            return $this->_protocol->fetch('UID', $id);
+            return $this->protocol->fetch('UID', $id);
         }
 
-        return $this->_protocol->fetch('UID', 1, INF);
+        return $this->protocol->fetch('UID', 1, INF);
     }
 
     /**
@@ -307,7 +307,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function getFolders($rootFolder = null)
     {
-        $folders = $this->_protocol->listMailbox((string)$rootFolder);
+        $folders = $this->protocol->listMailbox((string)$rootFolder);
         if (!$folders) {
             throw new Exception\InvalidArgumentException('folder not found');
         }
@@ -361,9 +361,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function selectFolder($globalName)
     {
-        $this->_currentFolder = $globalName;
-        if (!$this->_protocol->select($this->_currentFolder)) {
-            $this->_currentFolder = '';
+        $this->currentFolder = $globalName;
+        if (!$this->protocol->select($this->currentFolder)) {
+            $this->currentFolder = '';
             throw new Exception\RuntimeException('cannot change folder, maybe it does not exist');
         }
     }
@@ -376,7 +376,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function getCurrentFolder()
     {
-        return $this->_currentFolder;
+        return $this->currentFolder;
     }
 
     /**
@@ -400,7 +400,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             $folder = $name;
         }
 
-        if (!$this->_protocol->create($folder)) {
+        if (!$this->protocol->create($folder)) {
             throw new Exception\RuntimeException('cannot create folder');
         }
     }
@@ -417,7 +417,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             $name = $name->getGlobalName();
         }
 
-        if (!$this->_protocol->delete($name)) {
+        if (!$this->protocol->delete($name)) {
             throw new Exception\RuntimeException('cannot delete folder');
         }
     }
@@ -437,7 +437,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             $oldName = $oldName->getGlobalName();
         }
 
-        if (!$this->_protocol->rename($oldName, $newName)) {
+        if (!$this->protocol->rename($oldName, $newName)) {
             throw new Exception\RuntimeException('cannot rename folder');
         }
     }
@@ -454,7 +454,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     public function appendMessage($message, $folder = null, $flags = null)
     {
         if ($folder === null) {
-            $folder = $this->_currentFolder;
+            $folder = $this->currentFolder;
         }
 
         if ($flags === null) {
@@ -462,7 +462,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         }
 
         // TODO: handle class instances for $message
-        if (!$this->_protocol->append($folder, $message, $flags)) {
+        if (!$this->protocol->append($folder, $message, $flags)) {
             throw new Exception\RuntimeException('cannot create message, please check if the folder exists and your flags');
         }
     }
@@ -476,7 +476,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function copyMessage($id, $folder)
     {
-        if (!$this->_protocol->copy($folder, $id)) {
+        if (!$this->protocol->copy($folder, $id)) {
             throw new Exception\RuntimeException('cannot copy message, does the folder exist?');
         }
     }
@@ -507,7 +507,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function setFlags($id, $flags)
     {
-        if (!$this->_protocol->store($flags, $id)) {
+        if (!$this->protocol->store($flags, $id)) {
             throw new Exception\RuntimeException('cannot set flags, have you tried to set the recent flag or special chars?');
         }
     }

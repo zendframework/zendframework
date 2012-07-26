@@ -68,7 +68,7 @@ class Pop3 extends AbstractStorage
         $bodyLines = 0;
         $message = $this->protocol->top($id, $bodyLines, true);
 
-        return new $this->_messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message,
+        return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message,
                                               'noToplines' => $bodyLines < 1));
     }
 
@@ -135,9 +135,9 @@ class Pop3 extends AbstractStorage
             $params = (object)$params;
         }
 
-        $this->_has['fetchPart'] = false;
-        $this->_has['top']       = null;
-        $this->_has['uniqueid']  = null;
+        $this->has['fetchPart'] = false;
+        $this->has['top']       = null;
+        $this->has['uniqueid']  = null;
 
         if ($params instanceof Protocol\Pop3) {
             $this->protocol = $params;
@@ -266,7 +266,7 @@ class Pop3 extends AbstractStorage
                     // ignoring error
                 }
             }
-            $this->_has['top'] = $this->protocol->hasTop;
+            $this->has['top'] = $this->protocol->hasTop;
             return $this->protocol->hasTop;
         }
 
@@ -277,8 +277,8 @@ class Pop3 extends AbstractStorage
             } catch(MailException\ExceptionInterface $e) {
                 // ignoring error
             }
-            $this->_has['uniqueid'] = $id ? true : false;
-            return $this->_has['uniqueid'];
+            $this->has['uniqueid'] = $id ? true : false;
+            return $this->has['uniqueid'];
         }
 
         return $result;

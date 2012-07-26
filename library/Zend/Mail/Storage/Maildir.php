@@ -232,8 +232,8 @@ class Maildir extends AbstractStorage
             throw new Exception\InvalidArgumentException('invalid maildir given');
         }
 
-        $this->_has['top'] = true;
-        $this->_has['flags'] = true;
+        $this->has['top'] = true;
+        $this->has['flags'] = true;
         $this->_openMaildir($params->dirname);
     }
 

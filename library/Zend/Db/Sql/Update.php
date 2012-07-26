@@ -140,7 +140,11 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } else {
                         $predicate = new Predicate\Expression($pvalue);
                     }
+
+                    $this->where->addPredicate($predicate, $combination);
                 }
+
+                return $this;
             }
             $this->where->addPredicate($predicate, $combination);
         }

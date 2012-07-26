@@ -90,6 +90,28 @@ class Predicate extends PredicateSet
     }
 
     /**
+     * Create "Not Equal To" predicate
+     *
+     * Utilizes Operator predicate
+     *
+     * @param  scalar $left
+     * @param  scalar $right
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @return Predicate
+     */
+    public function notEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
+    {
+        $this->addPredicate(
+            new Operator($left, Operator::OPERATOR_NOT_EQUAL_TO, $right, $leftType, $rightType),
+            ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
+        );
+        $this->nextPredicateCombineOperator = null;
+
+        return $this;
+    }
+
+    /**
      * Create "Less Than" predicate
      *
      * Utilizes Operator predicate

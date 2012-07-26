@@ -248,5 +248,7 @@ class FormSelectTest extends CommonTestCase
         $element->setName(0);
 
         $this->helper->__invoke($element);
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('name="0"', $markup);
     }
 }

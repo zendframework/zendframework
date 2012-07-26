@@ -77,7 +77,8 @@ class FormCheckboxTest extends CommonTestCase
 
     public function testDoesNotThrowExceptionIfNameIsZero()
     {
-        $element = new Element\Checkbox('0');
-        $this->helper->__invoke($element);
+        $element = new Element\Checkbox(0);
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('name="0"', $markup);
     }
 }

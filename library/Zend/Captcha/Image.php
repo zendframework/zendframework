@@ -604,7 +604,7 @@ class Image extends AbstractWord
         $suffixLength = strlen($this->suffix);
         foreach (new DirectoryIterator($imgdir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
-                if ($file->getMTime() < $expire) {
+                if (file_exists($file->getPathname()) && $file->getMTime() < $expire) {
                     // only deletes files ending with $this->suffix
                     if (substr($file->getFilename(), -($suffixLength)) == $this->suffix) {
                         unlink($file->getPathname());

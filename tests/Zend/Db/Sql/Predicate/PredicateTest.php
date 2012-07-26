@@ -27,6 +27,17 @@ class PredicateTest extends TestCase
         $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
     }
 
+    public function testNotEqualToCreatesOperatorPredicate()
+    {
+        $predicate = new Predicate();
+        $predicate->notEqualTo('foo.bar', 'bar');
+        $parts = $predicate->getExpressionData();
+        $this->assertEquals(1, count($parts));
+        $this->assertContains('%s != %s', $parts[0]);
+        $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
+    }
+
+
     public function testLessThanCreatesOperatorPredicate()
     {
         $predicate = new Predicate();

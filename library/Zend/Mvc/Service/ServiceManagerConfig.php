@@ -13,6 +13,7 @@ namespace Zend\Mvc\Service;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
@@ -107,7 +108,7 @@ class ServiceManagerConfig implements ConfigInterface
      *
      * In addition to using each of the internal properties to configure the
      * service manager, also adds an initializer to inject ServiceManagerAware
-     * classes with the service manager.
+     * and ServiceLocatorAware classes with the service manager.
      *
      * @param  ServiceManager $serviceManager
      * @return void
@@ -145,6 +146,12 @@ class ServiceManagerConfig implements ConfigInterface
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof ServiceManagerAwareInterface) {
                 $instance->setServiceManager($serviceManager);
+            }
+        });
+
+        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
+            if ($instance instanceof ServiceLocatorAwareInterface) {
+                $instance->setServiceLocator($serviceManager);
             }
         });
 

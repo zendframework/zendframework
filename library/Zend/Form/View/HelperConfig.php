@@ -76,9 +76,7 @@ class HelperConfig implements ConfigInterface
      * Configure the provided service manager instance with the configuration
      * in this class.
      *
-     * In addition to using each of the internal properties to configure the
-     * service manager, also adds an initializer to inject ServiceManagerAware
-     * classes with the service manager.
+     * Adds the invokables defined in this class to the SM managing helpers.
      *
      * @param  ServiceManager $serviceManager
      * @return void

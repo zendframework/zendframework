@@ -48,7 +48,8 @@ class ControllerManager extends AbstractPluginManager
     public function __construct(ConfigurationInterface $configuration = null)
     {
         parent::__construct($configuration);
-        $this->addInitializer(array($this, 'injectControllerDependencies'));
+        // Pushing to bottom of stack to ensure this is done last
+        $this->addInitializer(array($this, 'injectControllerDependencies'), false);
     }
 
     /**

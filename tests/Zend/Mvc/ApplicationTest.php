@@ -334,6 +334,9 @@ class ApplicationTest extends TestCase
         $this->assertContains('dispatch', $response->toString());
     }
 
+    /**
+     * @group zen-92
+     */
     public function testDispatchingInjectsLocatorInLocatorAwareControllers()
     {
         $this->setupActionController();

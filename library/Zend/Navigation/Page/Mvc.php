@@ -105,7 +105,7 @@ class Mvc extends AbstractPage
      */
     public function isActive($recursive = false)
     {
-        if (!$this->active) {
+        if (!$this->active && $this->routeMatch instanceof RouteMatch) {
             $myParams = $this->params;
             if (null !== $this->controller) {
                 $myParams['controller'] = $this->controller;
@@ -124,24 +124,21 @@ class Mvc extends AbstractPage
                 $myParams['action'] = 'index';
             }
 
-            if ($this->routeMatch instanceof RouteMatch) {
-                $reqParams = $this->routeMatch->getParams();
-                if($this->getRoute() !== null) {
-                    $routeName  = $this->getRoute();
-                } else {
-                    $routeName  = $this->routeMatch->getMatchedRouteName();
-                }
+            $reqParams = $this->routeMatch->getParams();
+            if($this->getRoute() !== null) {
+                $routeName  = $this->getRoute();
+            } else {
+                $routeName  = $this->routeMatch->getMatchedRouteName();
+            }
 
-                if ($this->routeMatch->getMatchedRouteName() === $routeName
-                    && (count($reqParams) == count($myParams))
-                    && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
-                ) {
-                    $this->active = true;
-                    return true;
-                }
+            if ($this->routeMatch->getMatchedRouteName() === $routeName
+                && (count($reqParams) == count($myParams))
+                && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
+            ) {
+                $this->active = true;
+                return true;
             }
         }
-
         return parent::isActive($recursive);
     }
 

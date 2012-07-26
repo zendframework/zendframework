@@ -46,7 +46,7 @@ class BlockCipher
      * @var string
      */
     protected $hash = 'sha256';
-    
+
     /**
      * Salt (IV)
      *
@@ -199,7 +199,7 @@ class BlockCipher
         $this->salt = $salt;
         return $this;
     }
-            
+
     /**
      * Get the salt (IV)
      *
@@ -209,7 +209,7 @@ class BlockCipher
     {
         return $this->salt;
     }
-    
+
     /**
      * Enable/disable the binary output
      *
@@ -356,7 +356,7 @@ class BlockCipher
         if (empty($salt)) {
             $salt = Rand::getBytes($this->cipher->getSaltSize(), true);
         }
-        $this->cipher->setSalt($salt); 
+        $this->cipher->setSalt($salt);
         // generate the encryption key and the HMAC key for the authentication
         $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
                              $this->getKey(),

@@ -17,10 +17,10 @@ use Zend\Text\Table;
 
 /*
  * Convert a file from DocBook to reStructuredText format
- * 
+ *
  * Note: this script has been created to convert the Zend Framework
  * documentation. We have not tested it with other docBook file formats.
- * 
+ *
  * Usage:
  * --help|-h        Get usage message
  * --docbook|-d     Docbook file to convert

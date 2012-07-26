@@ -20,7 +20,7 @@ use Zend\View\Exception;
  * @package    Zend_View
  * @subpackage Helper
  */
-class HeadTitle extends Placeholder\Container\AbstractStandalone implements 
+class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     TranslatorAwareInterface
 {
     /**

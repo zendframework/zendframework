@@ -286,7 +286,7 @@ class ServiceManager implements ServiceLocatorInterface
     public function addInitializer($initializer, $topOfStack = true)
     {
         if (!is_callable($initializer) && !$initializer instanceof InitializerInterface) {
-            if (!is_string($initializer) 
+            if (!is_string($initializer)
                 || !$this->isSubclassOf($initializer, __NAMESPACE__ . '\InitializerInterface')
             ) {
                 throw new Exception\InvalidArgumentException('$initializer should be callable.');

@@ -131,7 +131,7 @@ class Element implements ElementInterface
 
     /**
      * Return the specified option
-     * 
+     *
      * @param string $option
      * @return NULL|mixed
      */
@@ -140,10 +140,10 @@ class Element implements ElementInterface
         if (!isset($this->options[$option])) {
             return null;
         }
-        
+
         return $this->options[$option];
     }
-    
+
     /**
      * Set a single element attribute
      *
@@ -234,8 +234,8 @@ class Element implements ElementInterface
 
     /**
      * Set the element value
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return Element
      */
     public function setValue($value)
@@ -246,7 +246,7 @@ class Element implements ElementInterface
 
     /**
      * Retrieve the element value
-     * 
+     *
      * @return mixed
      */
     public function getValue()

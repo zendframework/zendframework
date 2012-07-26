@@ -41,10 +41,10 @@ interface ElementInterface
      * @return ElementInterface
      */
     public function setOptions($options);
-    
+
     /**
      * get the defined options
-     * 
+     *
      * @return array
      */
     public function getOptions();
@@ -101,15 +101,15 @@ interface ElementInterface
 
     /**
      * Set the value of the element
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return ElementInterface
      */
     public function setValue($value);
 
     /**
      * Retrieve the element value
-     * 
+     *
      * @return mixed
      */
     public function getValue();

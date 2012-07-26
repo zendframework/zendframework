@@ -52,13 +52,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $instance = $this->_writer->addFilter('mock');
         $this->assertTrue($instance instanceof ConcreteWriter);
     }
-    
+
     public function testAddRegexFilterWithParamsByName()
     {
         $instance = $this->_writer->addFilter('regex', array( 'regex' => '/mess/' ));
         $this->assertTrue($instance instanceof ConcreteWriter);
     }
-    
+
     /**
      * @group ZF-8953
      */

@@ -67,8 +67,8 @@ abstract class AbstractEntry
      * Set the entry DOMElement
      *
      * Has side effect of setting the DOMDocument for the entry.
-     * 
-     * @param  DOMElement $entry 
+     *
+     * @param  DOMElement $entry
      * @return AbstractEntry
      */
     public function setEntryElement(DOMElement $entry)
@@ -80,7 +80,7 @@ abstract class AbstractEntry
 
     /**
      * Get the entry DOMElement
-     * 
+     *
      * @return DOMElement
      */
     public function getEntryElement()
@@ -90,8 +90,8 @@ abstract class AbstractEntry
 
     /**
      * Set the entry key
-     * 
-     * @param  string $entryKey 
+     *
+     * @param  string $entryKey
      * @return AbstractEntry
      */
     public function setEntryKey($entryKey)
@@ -125,8 +125,8 @@ abstract class AbstractEntry
      * Set the entry type
      *
      * Has side effect of setting xpath prefix
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return AbstractEntry
      */
     public function setType($type)

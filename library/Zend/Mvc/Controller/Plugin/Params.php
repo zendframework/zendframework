@@ -38,9 +38,9 @@ class Params extends AbstractPlugin
 
     /**
      * Retrieve a named $_FILES value
-     * 
-     * @param  string $name 
-     * @param  mixed $default 
+     *
+     * @param  string $name
+     * @param  mixed $default
      * @return array|\ArrayAccess|null
      */
     public function fromFiles($name, $default = null)
@@ -50,9 +50,9 @@ class Params extends AbstractPlugin
 
     /**
      * Get a header
-     * 
-     * @param  string $header 
-     * @param  mixed $default 
+     *
+     * @param  string $header
+     * @param  mixed $default
      * @return null|\Zend\Http\Header\HeaderInterface
      */
     public function fromHeader($header, $default = null)

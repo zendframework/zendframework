@@ -52,7 +52,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $request->setHeaders($headers);
         $this->assertSame($headers, $request->getHeaders());
     }
-    
+
     public function testRetrievingASingleValueForParameters()
     {
         $request = new Request();
@@ -86,7 +86,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $request->setQuery($p);
         $request->setPost($p);
         $request->setFiles($p);
-        
+
         $default = 15;
         $this->assertSame($default, $request->getQuery('baz', $default));
         $this->assertSame($default, $request->getPost('baz', $default));

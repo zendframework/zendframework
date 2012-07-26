@@ -58,8 +58,8 @@ class StaticEventManager extends SharedEventManager
 
     /**
      * Set the singleton to a specific SharedEventManagerInterface instance
-     * 
-     * @param SharedEventManagerInterface $instance 
+     *
+     * @param SharedEventManagerInterface $instance
      * @return void
      */
     public static function setInstance(SharedEventManagerInterface $instance)
@@ -69,7 +69,7 @@ class StaticEventManager extends SharedEventManager
 
     /**
      * Is a singleton instance defined?
-     * 
+     *
      * @return bool
      */
     public static function hasInstance()

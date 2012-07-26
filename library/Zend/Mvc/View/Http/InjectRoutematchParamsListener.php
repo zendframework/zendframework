@@ -45,15 +45,15 @@ class InjectRoutematchParamsListener implements ListenerAggregate
 
     /**
      * Should request params overwrite existing request params?
-     * 
+     *
      * @var bool
      */
     protected $overwrite = true;
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function attach(EventCollection $events)

@@ -102,10 +102,10 @@ class EventManager implements EventManagerInterface
     /**
      * Get shared event manager
      *
-     * If one is not defined, but we have a static instance in 
+     * If one is not defined, but we have a static instance in
      * StaticEventManager, that one will be used and set in this instance.
      *
-     * If none is available in the StaticEventManager, a boolean false is 
+     * If none is available in the StaticEventManager, a boolean false is
      * returned.
      *
      * @return false|SharedEventManagerInterface

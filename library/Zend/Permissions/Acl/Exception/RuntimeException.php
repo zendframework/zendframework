@@ -15,7 +15,7 @@ namespace Zend\Permissions\Acl\Exception;
  * @package    Zend_Permissions
  * @subpackage Acl
  */
-class RuntimeException extends \RuntimeException implements 
+class RuntimeException extends \RuntimeException implements
     ExceptionInterface
 {
 

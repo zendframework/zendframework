@@ -50,8 +50,8 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        
-        // The formatter ends with unix style line endings so make sure we expect that 
+
+        // The formatter ends with unix style line endings so make sure we expect that
         // output as well:
         $expected = "2012-06-12T09:00:00+02:00 CRIT (1) test in test.php on line 1\n";
         $expected .= "[Trace]\n";

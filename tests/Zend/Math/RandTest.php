@@ -63,7 +63,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
         } catch (\Zend\Math\Exception\RuntimeException $e) {
             $this->markTestSkipped($e->getMessage());
         }
-        
+
         $i     = 0;
         $count = 0;
         do {

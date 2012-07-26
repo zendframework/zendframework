@@ -143,7 +143,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
     }
-    
+
     public function testLogging()
     {
         $writer = new MockWriter;
@@ -175,22 +175,22 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($filter->events), 1);
         $this->assertContains('test', $filter->events[0]['message']);
     }
-    
+
     public function testAddFilterByName()
     {
         $writer = new MockWriter;
         $writer->addFilter('mock');
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, array('test'));
-        
+
         $this->assertEquals(count($writer->events), 1);
         $this->assertContains('test', $writer->events[0]['message']);
     }
-    
+
     /**
-     * provideTestFilters 
+     * provideTestFilters
      */
-    public function provideTestFilters() 
+    public function provideTestFilters()
     {
         return array(
             array('priority', array('priority' => Logger::INFO)),
@@ -198,21 +198,21 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             array('validator', array('validator' => new DigitsFilter)),
         );
     }
-    
+
     /**
-     * @dataProvider provideTestFilters 
+     * @dataProvider provideTestFilters
      */
     public function testAddFilterByNameWithParams($filter, $options)
     {
         $writer = new MockWriter;
         $writer->addFilter($filter, $options);
         $this->logger->addWriter($writer);
-        
+
         $this->logger->log(Logger::INFO, '123');
         $this->assertEquals(count($writer->events), 1);
         $this->assertContains('123', $writer->events[0]['message']);
     }
-    
+
     public static function provideAttributes()
     {
         return array(

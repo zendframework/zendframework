@@ -25,16 +25,16 @@ class MessageIdTest extends \PHPUnit_Framework_TestCase
         $id = "CALTvGe4_oYgf9WsYgauv7qXh2-6=KbPLExmJNG7fCs9B=1nOYg@mail.example.com";
         $messageid = new Header\MessageId();
         $messageid->setId($id);
-        
+
         $expected = sprintf('<%s>', $id);
         $this->assertEquals($expected, $messageid->getFieldValue());
     }
-    
+
     public function testAutoGeneration()
     {
         $messageid = new Header\MessageId();
         $messageid->setId();
-        
+
         $this->assertContains('@', $messageid->getFieldValue());
-    }    
+    }
 }

@@ -37,11 +37,11 @@ use Zend\Log\Logger;
 class FirePhpTest extends \PHPUnit_Framework_TestCase
 {
     protected $firephp;
-    
+
     public function setUp()
     {
         $this->firephp = new MockFirePhp();
-        
+
     }
     /**
      * Test get FirePhp
@@ -58,7 +58,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
     {
         $writer   = new FirePhp($this->firephp);
         $firephp2 = new MockFirePhp();
-        
+
         $writer->setFirePhp($firephp2);
         $this->assertTrue($writer->getFirePhp() instanceof FirePhpInterface);
         $this->assertEquals($firephp2, $writer->getFirePhp());

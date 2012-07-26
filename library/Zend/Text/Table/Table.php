@@ -237,8 +237,8 @@ class Table
 
     /**
      * Set the plugin manager instance for decorators
-     * 
-     * @param  DecoratorManager $decoratorManager 
+     *
+     * @param  DecoratorManager $decoratorManager
      * @return Table
      */
     public function setDecoratorManager(DecoratorManager $decoratorManager)

@@ -33,7 +33,7 @@ class MessageId implements HeaderInterface
         if (strtolower($name) !== 'message-id') {
             throw new Exception\InvalidArgumentException('Invalid header line for Message-ID string');
         }
-        
+
         $header = new static();
         $header->setId($value);
 
@@ -76,12 +76,12 @@ class MessageId implements HeaderInterface
         if ($id === null) {
             $id = $this->createMessageId();
         }
-        
+
         $id = sprintf('<%s>', $id);
         $this->messageId = $id;
         return $this;
     }
-    
+
     /**
      * Retrieve the message id
      *
@@ -91,7 +91,7 @@ class MessageId implements HeaderInterface
     {
         return $this->messageId;
     }
-    
+
     /**
      * Creates the Message-ID
      *
@@ -117,5 +117,5 @@ class MessageId implements HeaderInterface
 
         return sha1($time . $user . $rand) . '@' . $hostName;
     }
-    
+
 }

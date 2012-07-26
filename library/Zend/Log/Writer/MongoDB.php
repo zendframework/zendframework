@@ -76,7 +76,7 @@ class MongoDB extends AbstractWriter
         if (!($mongo instanceof Mongo)) {
             throw new Exception\InvalidArgumentException(
                 'Parameter of type %s is invalid; must be Mongo',
-                (is_object($mongo) ? get_class($mongo) : gettype($mongo)) 
+                (is_object($mongo) ? get_class($mongo) : gettype($mongo))
             );
         }
 

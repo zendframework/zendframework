@@ -26,7 +26,7 @@ class RequestFactory implements FactoryInterface
     /**
      * Create and return a request instance, according to current environment.
      *
-     * @param  ServiceLocatorInterface $serviceLocator 
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return \Zend\Stdlib\Message
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

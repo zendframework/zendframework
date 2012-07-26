@@ -50,8 +50,8 @@ abstract class AbstractFeed
 
     /**
      * Set the DOM document
-     * 
-     * @param  DOMDocument $dom 
+     *
+     * @param  DOMDocument $dom
      * @return AbstractFeed
      */
     public function setDomDocument(DOMDocument $dom)
@@ -83,8 +83,8 @@ abstract class AbstractFeed
 
     /**
      * Set the feed type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return AbstractFeed
      */
     public function setType($type)

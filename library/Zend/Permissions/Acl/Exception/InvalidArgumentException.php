@@ -15,6 +15,6 @@ namespace Zend\Permissions\Acl\Exception;
  * @package    Zend_Permissions
  * @subpackage Acl
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

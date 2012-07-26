@@ -37,7 +37,7 @@ class FilterPluginManager extends AbstractPluginManager
 
     /**
      * Allow many filters of the same type
-     * 
+     *
      * @var bool
      */
     protected $shareByDefault = false;

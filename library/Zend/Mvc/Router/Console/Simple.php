@@ -111,17 +111,17 @@ class Simple implements RouteInterface
                 $this->filters = $filters;
             }elseif($filters instanceof Traversable){
                 $this->filters = new FilterChain(array(
-                    'filters' => ArrayUtils::iteratorToArray($filters, false) 
+                    'filters' => ArrayUtils::iteratorToArray($filters, false)
                 ));
             }elseif(is_array($filters)){
                 $this->filters = new FilterChain(array(
-                    'filters' => $filters 
+                    'filters' => $filters
                 ));
             }else{
                 throw new InvalidArgumentException('Cannot use '.gettype($filters).' as filters for '.__CLASS__);
             }
         }
-        
+
         if($validators !== null){
             if($validators instanceof ValidatorChain){
                 $this->validators = $validators;
@@ -134,7 +134,7 @@ class Simple implements RouteInterface
                 throw new InvalidArgumentException('Cannot use '.gettype($validators).' as validators for '.__CLASS__);
             }
         }
-        
+
         $this->parts = $this->parseRouteDefinition($route);
     }
 

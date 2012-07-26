@@ -34,7 +34,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
 
     /**
      * Whether or not to auto-add a class as an invokable class if it exists
-     * 
+     *
      * @var bool
      */
     protected $autoAddInvokableClass = true;

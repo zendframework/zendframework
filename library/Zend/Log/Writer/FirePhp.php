@@ -23,14 +23,14 @@ class FirePhp extends AbstractWriter
 {
     /**
      * The instance of FirePhp that is used to log messages to.
-     * 
+     *
      * @var FirePhp\FirePhpInterface
      */
     protected $firephp;
 
     /**
      * Initializes a new instance of this class.
-     * 
+     *
      * @param null|FirePhp\FirePhpInterface $instance An instance of FirePhpInterface
      *        that should be used for logging
      */
@@ -79,17 +79,17 @@ class FirePhp extends AbstractWriter
 
     /**
      * Gets the FirePhp instance that is used for logging.
-     * 
+     *
      * @return FirePhp\FirePhpInterface
      */
     public function getFirePhp()
     {
-        // Remember: class names in strings are absolute; thus the class_exists 
+        // Remember: class names in strings are absolute; thus the class_exists
         // here references the canonical name for the FirePHP class
         if (!$this->firephp instanceof FirePhp\FirePhpInterface
             && class_exists('FirePHP')
         ) {
-            // FirePHPService is an alias for FirePHP; otherwise the class 
+            // FirePHPService is an alias for FirePHP; otherwise the class
             // names would clash in this file on this line.
             $this->setFirePhp(new FirePhp\FirePhpBridge(new FirePHPService()));
         }
@@ -98,7 +98,7 @@ class FirePhp extends AbstractWriter
 
     /**
      * Sets the FirePhp instance that is used for logging.
-     * 
+     *
      * @param  FirePhp\FirePhpInterface $instance The FirePhp instance to set.
      * @return FirePhp
      */

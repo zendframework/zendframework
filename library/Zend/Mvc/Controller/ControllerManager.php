@@ -31,7 +31,7 @@ class ControllerManager extends AbstractPluginManager
 {
     /**
      * We do not want arbitrary classes instantiated as controllers.
-     * 
+     *
      * @var bool
      */
     protected $autoAddInvokableClass = false;
@@ -104,10 +104,10 @@ class ControllerManager extends AbstractPluginManager
 
     /**
      * Override: do not use peering service manager to retrieve controller
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $usePeeringServiceManagers 
+     *
+     * @param  string $name
+     * @param  array $options
+     * @param  bool $usePeeringServiceManagers
      * @return mixed
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = false)

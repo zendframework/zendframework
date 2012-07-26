@@ -59,7 +59,7 @@ class Logger implements LoggerInterface
         self::INFO   => 'INFO',
         self::DEBUG  => 'DEBUG',
     );
-   
+
     /**
      * Writers
      *
@@ -280,7 +280,7 @@ class Logger implements LoggerInterface
         if (is_array($message)) {
             $message = var_export($message, true);
         }
-        
+
         foreach ($this->writers->toArray() as $writer) {
             $writer->write(array(
                 'timestamp'    => $timestamp,

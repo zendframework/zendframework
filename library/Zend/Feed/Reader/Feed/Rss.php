@@ -47,7 +47,7 @@ class Rss extends AbstractFeed
         $feed->setXpath($this->xpath);
         $this->extensions['Atom\Feed'] = $feed;
 
-        if ($this->getType() !== Reader\Reader::TYPE_RSS_10 
+        if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
             $xpathPrefix = '/rss/channel';

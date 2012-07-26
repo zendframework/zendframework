@@ -54,7 +54,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      * Retrieve value
      *
      * Retrieves the hash from the validator
-     * 
+     *
      * @return void
      */
     public function getValue()

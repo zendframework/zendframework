@@ -98,7 +98,7 @@ class Part implements RecursiveIterator, Part\PartInterface
             $this->_mail       = $params['handler'];
             $this->_messageNum = $params['id'];
         }
-        
+
         $params['strict'] = isset($params['strict']) ? $params['strict'] : false;
 
         if (isset($params['raw'])) {

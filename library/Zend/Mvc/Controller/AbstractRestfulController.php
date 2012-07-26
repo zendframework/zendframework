@@ -228,17 +228,17 @@ abstract class AbstractRestfulController implements
 
     /**
      * Process post data and call create
-     * 
+     *
      * @param Request $request
      */
     public function processPostData(Request $request)
-    {     
+    {
         return $this->create($request->getPost()->toArray());
     }
 
     /**
      * Process put data and call update
-     * 
+     *
      * @param Request $request
      * @param $routeMatch
      */

@@ -37,7 +37,7 @@ use Zend\View\Variables;
  * Abstract class for Zend_View to help enforce private constructs.
  *
  * Note: all private variables in this class are prefixed with "__". This is to
- * mark them as part of the internal implementation, and thus prevent conflict 
+ * mark them as part of the internal implementation, and thus prevent conflict
  * with variables injected into the renderer.
  *
  * @category   Zend
@@ -96,8 +96,8 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
 
     /**
      * Set filter chain
-     * 
-     * @param  FilterChain $filters 
+     *
+     * @param  FilterChain $filters
      * @return Zend\View\PhpRenderer
      */
     public function setFilterChain(FilterChain $filters)
@@ -108,7 +108,7 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
 
     /**
      * Retrieve filter chain for post-filtering script content
-     * 
+     *
      * @return FilterChain
      */
     public function getFilterChain()

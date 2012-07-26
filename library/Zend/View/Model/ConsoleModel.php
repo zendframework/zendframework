@@ -37,14 +37,14 @@ class ConsoleModel extends ViewModel
 
     /**
      * Console output doesn't support containers.
-     * 
+     *
      * @var string
      */
     protected $captureTo = null;
 
     /**
      * Console output should always be terminal.
-     * 
+     *
      * @var bool
      */
     protected $terminate = true;

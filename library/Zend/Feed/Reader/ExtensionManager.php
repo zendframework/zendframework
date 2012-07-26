@@ -16,7 +16,7 @@ use Zend\ServiceManager\ConfigInterface;
 /**
  * Plugin manager implementation for feed reader extensions
  *
- * Validation checks that we have an Extension\AbstractEntry or 
+ * Validation checks that we have an Extension\AbstractEntry or
  * Extension\AbstractFeed.
  *
  * @category   Zend
@@ -47,7 +47,7 @@ class ExtensionManager extends AbstractPluginManager
 
     /**
      * Do not share instances
-     * 
+     *
      * @var bool
      */
     protected $shareByDefault = false;

@@ -27,7 +27,7 @@ abstract class AbstractWriter implements WriterInterface
      * @var FilterPluginManager
      */
     protected $filterPlugins;
-    
+
     /**
      * Filter chain
      *
@@ -53,12 +53,12 @@ abstract class AbstractWriter implements WriterInterface
     {
         if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
-        } 
+        }
 
         if (is_string($filter)) {
             $filter = $this->filterPlugin($filter, $options);
-        } 
-        
+        }
+
         if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Writer must implement Zend\Log\Filter\FilterInterface; received "%s"',
@@ -118,7 +118,7 @@ abstract class AbstractWriter implements WriterInterface
     {
         return $this->getFilterPluginManager()->get($name, $options);
     }
-    
+
     /**
      * Log a message to this writer.
      *

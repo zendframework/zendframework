@@ -41,5 +41,5 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
 
         $this->assertContains($fields['message'], $line);
-    }    
+    }
 }

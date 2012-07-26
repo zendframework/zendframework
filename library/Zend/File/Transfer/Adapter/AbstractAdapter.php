@@ -224,8 +224,8 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
 
     /**
      * Set the filter plugin manager instance
-     * 
-     * @param  FilterPluginManager $filterManager 
+     *
+     * @param  FilterPluginManager $filterManager
      * @return AbstractAdapter
      */
     public function setFilterManager(FilterPluginManager $filterManager)
@@ -236,7 +236,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
 
     /**
      * Get the filter plugin manager instance
-     * 
+     *
      * @return FilterPluginManager
      */
     public function getFilterManager()
@@ -249,8 +249,8 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
 
     /**
      * Set the validator plugin manager instance
-     * 
-     * @param  ValidatorPluginManager $validatorManager 
+     *
+     * @param  ValidatorPluginManager $validatorManager
      * @return AbstractAdapter
      */
     public function setValidatorManager(ValidatorPluginManager $validatorManager)
@@ -261,7 +261,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
 
     /**
      * Get the validator plugin manager instance
-     * 
+     *
      * @return ValidatorPluginManager
      */
     public function getValidatorManager()

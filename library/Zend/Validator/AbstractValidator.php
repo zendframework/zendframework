@@ -20,7 +20,7 @@ use Zend\Validator\Exception\InvalidArgumentException;
  * @category   Zend
  * @package    Zend_Validate
  */
-abstract class AbstractValidator implements 
+abstract class AbstractValidator implements
     TranslatorAwareInterface,
     ValidatorInterface
 {

@@ -595,7 +595,7 @@ class RequestTest extends TestCase
         $request->setFiles($p);
         $request->setServer($p);
         $request->setEnv($p);
-        
+
         $default = 15;
         $this->assertSame($default, $request->getQuery('baz', $default));
         $this->assertSame($default, $request->getPost('baz', $default));
@@ -605,7 +605,7 @@ class RequestTest extends TestCase
         $this->assertSame($default, $request->getHeaders('baz', $default));
         $this->assertSame($default, $request->getHeader('baz', $default));
     }
-    
+
     public function testRetrievingASingleValueForParameters()
     {
         $request = new Request();

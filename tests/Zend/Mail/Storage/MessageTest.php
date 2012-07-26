@@ -422,7 +422,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo'), 'bar');
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'baz'), 42);
     }
-       
+
     /**
      * @group ZF2-372
      */

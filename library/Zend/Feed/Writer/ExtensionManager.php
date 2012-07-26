@@ -44,7 +44,7 @@ class ExtensionManager extends AbstractPluginManager
 
     /**
      * Do not share instances
-     * 
+     *
      * @var bool
      */
     protected $shareByDefault = false;

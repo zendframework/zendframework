@@ -93,7 +93,7 @@ class Mail extends AbstractWriter
         if (!$mail instanceof MailMessage) {
             throw new Exception\InvalidArgumentException(
                 'Mail parameter of type %s is invalid; must be of type Zend\Mail\Message',
-                (is_object($mail) ? get_class($mail) : gettype($mail))  
+                (is_object($mail) ? get_class($mail) : gettype($mail))
             );
         }
         $this->mail = $mail;
@@ -105,7 +105,7 @@ class Mail extends AbstractWriter
         if (!$transport instanceof Transport\TransportInterface) {
             throw new Exception\InvalidArgumentException(
                 'Transport parameter of type %s is invalid; must be of type Zend\Mail\Transport\TransportInterface',
-                (is_object($transport) ? get_class($transport) : gettype($transport))  
+                (is_object($transport) ? get_class($transport) : gettype($transport))
             );
         }
         $this->setTransport($transport);

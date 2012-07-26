@@ -47,11 +47,11 @@ class BlockCipher implements EncryptionAlgorithmInterface
 
     /**
      * BlockCipher
-     * 
-     * @var BlockCipher 
+     *
+     * @var BlockCipher
      */
     protected $blockCipher;
-    
+
     /**
      * Internal compression
      *
@@ -73,7 +73,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         } catch (SymmetricException\RuntimeException $e) {
             throw new Exception\RuntimeException('The BlockCipher cannot be used without the Mcrypt extension');
         }
-        
+
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (is_string($options)) {
@@ -118,13 +118,13 @@ class BlockCipher implements EncryptionAlgorithmInterface
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
         }
-        
+
         $options = $options + $this->encryption;
-        
+
         if (isset($options['key'])) {
             $this->blockCipher->setKey($options['key']);
         }
-        
+
         if (isset($options['algorithm'])) {
             try {
                 $this->blockCipher->setCipherAlgorithm($options['algorithm']);
@@ -132,7 +132,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
                 throw new Exception\InvalidArgumentException("The algorithm '{$options['algorithm']}' is not supported");
             }
         }
-        
+
         if (isset($options['hash'])) {
             try {
                 $this->blockCipher->setHashAlgorithm($options['hash']);
@@ -140,15 +140,15 @@ class BlockCipher implements EncryptionAlgorithmInterface
                 throw new Exception\InvalidArgumentException("The algorithm '{$options['hash']}' is not supported");
             }
         }
-        
+
         if (isset($options['vector'])) {
             $this->setVector($options['vector']);
         }
-        
+
         if (isset($options['key_iteration'])) {
             $this->blockCipher->setKeyIteration($options['key_iteration']);
         }
-               
+
         $this->encryption = $options;
 
         return $this;
@@ -163,13 +163,13 @@ class BlockCipher implements EncryptionAlgorithmInterface
     {
         return $this->encryption['vector'];
     }
-    
+
     /**
      * Set the inizialization vector
-     * 
+     *
      * @param  string $vector
      * @return BlockCipher
-     * @throws Exception\InvalidArgumentException 
+     * @throws Exception\InvalidArgumentException
      */
     public function setVector($vector)
     {
@@ -177,11 +177,11 @@ class BlockCipher implements EncryptionAlgorithmInterface
             $this->blockCipher->setSalt($vector);
         } catch (CryptException\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
-        } 
+        }
         $this->encryption['vector'] = $vector;
         return $this;
     }
-    
+
     /**
      * Returns the compression
      *

@@ -128,7 +128,7 @@ abstract class Rand
         $bytes[6] = $bytes[6] | chr(0xF0);
         $bytes   .= chr(63); // exponent bias (1023)
         list(, $float) = unpack('d', $bytes);
-        
+
         return ($float - 1);
     }
 

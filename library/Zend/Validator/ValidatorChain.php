@@ -177,7 +177,7 @@ class ValidatorChain implements
             }
             $result         = false;
             $messages       = $validator->getMessages();
-            $this->messages = array_merge($this->messages, $messages);
+            $this->messages = array_replace_recursive($this->messages, $messages);
             if ($element['breakChainOnFailure']) {
                 break;
             }

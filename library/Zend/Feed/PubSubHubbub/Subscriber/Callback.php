@@ -78,13 +78,14 @@ class Callback extends PubSubHubbub\AbstractCallback
          * SHOULD be validated/processed by an asynchronous process so as
          * to avoid holding up responses to the Hub.
          */
+        $contentType = $this->_getHeader('Content-Type');
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post'
             && $this->_hasValidVerifyToken(null, false)
-            && ($this->_getHeader('Content-Type') == 'application/atom+xml'
-                || $this->_getHeader('Content-Type') == 'application/rss+xml'
-                || $this->_getHeader('Content-Type') == 'application/xml'
-                || $this->_getHeader('Content-Type') == 'text/xml'
-                || $this->_getHeader('Content-Type') == 'application/rdf+xml')
+            && (stripos($contentType, 'application/atom+xml') === 0
+                || stripos($contentType, 'application/rss+xml') === 0
+                || stripos($contentType, 'application/xml') === 0
+                || stripos($contentType, 'text/xml') === 0
+                || stripos($contentType, 'application/rdf+xml') === 0)
         ) {
             $this->setFeedUpdate($this->_getRawBody());
             $this->getHttpResponse()->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());

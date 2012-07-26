@@ -20,6 +20,11 @@ use Zend\Log\WriterPluginManager;
  */
 class WriterPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var WriterPluginManager
+     */
+    protected $plugins;
+
     public function setUp()
     {
         $this->plugins = new WriterPluginManager();
@@ -29,5 +34,11 @@ class WriterPluginManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
         $this->plugins->setService('test', $this);
+    }
+
+    public function testInvokableClassFirephp()
+    {
+        $firephp = $this->plugins->get('firephp');
+        $this->assertInstanceOf('Zend\Log\Writer\Firephp', $firephp);
     }
 }

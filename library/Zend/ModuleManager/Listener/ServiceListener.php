@@ -26,11 +26,6 @@ use Zend\Stdlib\ArrayUtils;
 class ServiceListener implements ServiceListenerInterface
 {
     /**
-     * @var bool
-     */
-    protected $configured = false;
-
-    /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
@@ -180,7 +175,8 @@ class ServiceListener implements ServiceListenerInterface
             // The actual merging takes place later. Doing it this way will enable us to provide more powerful
             // debugging tools for showing which modules overrode what.
             $fullname = $e->getModuleName() . '::' . $sm['module_class_method'] . '()';
-            $this->serviceManagers[$key]['configuration'][$fullname] = $config;        }
+            $this->serviceManagers[$key]['configuration'][$fullname] = $config;
+        }
     }
 
     /**
@@ -230,8 +226,6 @@ class ServiceListener implements ServiceListenerInterface
             $serviceConfig = new ServiceConfig($smConfig);
             $serviceConfig->configureServiceManager($sm['service_manager']);
         }
-
-        $this->configured = true;
     }
 
     /**

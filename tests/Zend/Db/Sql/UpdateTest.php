@@ -93,6 +93,10 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         });
     }
 
+    /**
+     * @group ZF2-240
+     * @covers Zend\Db\Sql\Update::where
+     */
     public function testPassingMultipleKeyValueInWhereClause()
     {
         $update = clone $this->update;

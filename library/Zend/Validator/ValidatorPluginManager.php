@@ -107,7 +107,6 @@ class ValidatorPluginManager extends AbstractPluginManager
         'step'                     => 'Zend\Validator\Step',
     );
 
-
     /**
      * Whether or not to share by default; default to false
      *

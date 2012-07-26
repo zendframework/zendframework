@@ -11,7 +11,7 @@
 namespace Zend\Filter;
 
 use Countable;
-use Zend\Stdlib\SplPriorityQueue;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Filter chain
      *
-     * @var SplPriorityQueue
+     * @var PriorityQueue
      */
     protected $filters;
 
@@ -42,7 +42,7 @@ class FilterChain extends AbstractFilter implements Countable
      */
     public function __construct($options = null)
     {
-        $this->filters = new SplPriorityQueue();
+        $this->filters = new PriorityQueue();
 
         if (null !== $options) {
             $this->setOptions($options);
@@ -198,7 +198,7 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Get all the filters
      *
-     * @return SplPriorityQueue
+     * @return PriorityQueue
      */
     public function getFilters()
     {

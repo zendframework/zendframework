@@ -132,6 +132,32 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         return strtoupper($value);
     }
+
+    /**
+     * @group ZF-412
+     */
+    public function testCanAttachMultipleFiltersOfTheSameTypeAsDiscreteInstances()
+    {
+        $chain = new FilterChain();
+        $chain->attachByName('PregReplace', array(
+            'pattern'     => '/Foo/',
+            'replacement' => 'Bar',
+        ));
+        $chain->attachByName('PregReplace', array(
+            'pattern'     => '/Bar/',
+            'replacement' => 'PARTY',
+        ));
+
+        $this->assertEquals(2, count($chain));
+        $filters = $chain->getFilters();
+        $compare = null;
+        foreach ($filters as $filter) {
+            $this->assertNotSame($compare, $filter);
+            $compare = $filter;
+        }
+
+        $this->assertEquals('Tu et PARTY', $chain->filter('Tu et Foo'));
+    }
 }
 
 

@@ -1,9 +1,8 @@
 <?php
 
 // Set used namespaces
-use \Zend\Loader\StandardAutoloader;
-use \Zend\Locale\Locale;
-use \Zend\Service\LiveDocx\Helper;
+use Zend\Loader\StandardAutoloader;
+use Zend\Service\LiveDocx\Helper;
 
 // Turn up error reporting
 error_reporting(E_ALL | E_STRICT);
@@ -19,9 +18,6 @@ $loader->register();
 
 // Include utility class
 require_once "{$base}/demos/Zend/Service/LiveDocx/library/Zend/Service/LiveDocx/Helper.php";
-
-// Set fallback locale
-Locale::setFallback(Helper::LOCALE);
 
 // Ensure LiveDocx credentials are available
 if (false === Helper::credentialsAvailable()) {

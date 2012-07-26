@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Acl;
-use Zend\View\Helper\Navigation;
-use Zend\Acl\Role;
+use Zend\Permissions\Acl;
+use Zend\Permissions\Acl\Role;
 use Zend\View;
+use Zend\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation
@@ -32,8 +21,6 @@ use Zend\View;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -66,18 +53,18 @@ class NavigationTest extends AbstractTest
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
-    
+
     public function testAcceptAclShouldReturnGracefullyWithUnknownResource()
     {
         // setup
         $acl = $this->_getAcl();
         $this->_helper->setAcl($acl['acl']);
         $this->_helper->setRole($acl['role']);
-        
+
         $accepted = $this->_helper->accept(
             new \Zend\Navigation\Page\Uri(array(
                 'resource'  => 'unknownresource',
-                'privilege' => 'someprivilege' 
+                'privilege' => 'someprivilege'
             ),
             false)
         );
@@ -189,6 +176,20 @@ class NavigationTest extends AbstractTest
         $actual = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->_helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->_helper->getTranslator());
+        $this->assertEquals('foo', $this->_helper->getTranslatorTextDomain());
+        $this->assertTrue($this->_helper->hasTranslator());
+        $this->assertTrue($this->_helper->isTranslatorEnabled());
+
+        $this->_helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->_helper->isTranslatorEnabled());
     }
 
     public function testSpecifyingDefaultProxy()
@@ -419,5 +420,15 @@ class NavigationTest extends AbstractTest
         $render = $this->_helper->menu()->render($container);
 
         $this->assertTrue(strpos($render, 'p2') !== false);
+    }
+
+    /**
+     * Returns the contens of the expected $file, normalizes newlines
+     * @param  string $file
+     * @return string
+     */
+    protected function _getExpected($file)
+    {
+        return str_replace("\n", PHP_EOL, parent::_getExpected($file));
     }
 }

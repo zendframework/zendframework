@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Protocol;
@@ -30,8 +18,6 @@ use Zend\Validator;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @todo Implement proxy settings
  */
 abstract class AbstractProtocol
@@ -97,14 +83,6 @@ abstract class AbstractProtocol
 
 
     /**
-     * String template for parsing server responses using sscanf (default: 3 digit code and response string)
-     * @var resource
-     * @deprecated Since 1.10.3
-     */
-    protected $_template = '%d%s';
-
-
-    /**
      * Log of mail requests and server responses for a session
      * @var array
      */
@@ -142,26 +120,26 @@ abstract class AbstractProtocol
     }
 
     /**
-     * Set the maximum log size 
-     * 
+     * Set the maximum log size
+     *
      * @param integer $maximumLog Maximum log size
      */
     public function setMaximumLog($maximumLog)
     {
         $this->_maximumLog = (int) $maximumLog;
     }
-    
-    
+
+
     /**
-     * Get the maximum log size 
-     * 
+     * Get the maximum log size
+     *
      * @return int the maximum log size
      */
     public function getMaximumLog()
     {
         return $this->_maximumLog;
     }
-    
+
 
     /**
      * Create a connection to the remote host

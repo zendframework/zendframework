@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\File;
@@ -27,8 +16,6 @@ use Zend\Filter\File\Rename as FileRename;
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class RenameTest extends \PHPUnit_Framework_TestCase
@@ -371,7 +358,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             array('source'    => $this->_oldFile,
                   'target'    => $this->_newFile,
                   'overwrite' => false)), $filter->getFile());
-        
+
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'could not be renamed');
         $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
     }

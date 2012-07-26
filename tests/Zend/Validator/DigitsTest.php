@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -27,8 +16,6 @@ use Zend\Validator\Digits;
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class DigitsTest extends \PHPUnit_Framework_TestCase
@@ -84,7 +71,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Digits::STRING_EMPTY => '\'\' is an empty string'
+            Digits::STRING_EMPTY => 'The input is an empty string'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
@@ -97,7 +84,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid('#'));
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Digits::NOT_DIGITS => '\'#\' must contain only digits'
+            Digits::NOT_DIGITS => 'The input must contain only digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Dom
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Dom
  */
 
 namespace Zend\Dom;
@@ -25,8 +15,6 @@ namespace Zend\Dom;
  *
  * @package    Zend_Dom
  * @subpackage Query
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Css2Xpath
 {
@@ -112,7 +100,7 @@ class Css2Xpath
         $expression = preg_replace_callback(
             '|\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i',
             function ($matches) {
-                return "[contains(concat(' ', normalize-space(@" . strtolower($matches[1]) . "), ' '), ' " 
+                return "[contains(concat(' ', normalize-space(@" . strtolower($matches[1]) . "), ' '), ' "
                      . $matches[2] . " ')]";
             },
             $expression
@@ -122,7 +110,7 @@ class Css2Xpath
         $expression = preg_replace_callback(
             '|\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i',
             function ($matches) {
-                return "[contains(@" . strtolower($matches[1]) . ", '" 
+                return "[contains(@" . strtolower($matches[1]) . ", '"
                      . $matches[2] . "')]";
             },
             $expression
@@ -130,8 +118,8 @@ class Css2Xpath
 
         // Classes
         $expression = preg_replace(
-            '|\.([a-z][a-z0-9_-]*)|i', 
-            "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]", 
+            '|\.([a-z][a-z0-9_-]*)|i',
+            "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]",
             $expression
         );
 

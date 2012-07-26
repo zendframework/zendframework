@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\PubSubHubbub\Model;
 
+use DateTime;
 use PDO;
-use Zend\Date\Date;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Feed\PubSubHubbub\Model\Subscription;
@@ -32,8 +22,6 @@ use Zend\Feed\PubSubHubbub\Model\Subscription;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Pubsubhubbub_Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SubscriptionTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,9 +32,9 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = $this->initDb();
         $table = new TableGateway('subscription', $adapter);
-        
+
         $subscription = new Subscription($table);
-        
+
         $id = uniqid();
         $this->assertFalse($subscription->hasSubscription($id));
         $this->assertFalse($subscription->getSubscription($id));
@@ -75,7 +63,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
     public function testCurrentTimeSetterAndGetter()
     {
-        $now = new Date;
+        $now = new DateTime();
         $subscription = new Subscription(new TableGateway('subscription', $this->initDb()));
         $subscription->setNow($now);
         $this->assertSame($subscription->getNow(), $now);
@@ -90,7 +78,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         }
         $db = new DbAdapter(array('driver' => 'pdo_sqlite', 'dsn' => 'sqlite::memory:'));
         $this->createTable($db);
-        
+
         return $db;
     }
 

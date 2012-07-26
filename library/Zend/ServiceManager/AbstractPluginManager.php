@@ -1,26 +1,14 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ServiceManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
  */
 
 namespace Zend\ServiceManager;
-
-use Zend\Code\Reflection\ClassReflection;
 
 /**
  * ServiceManager implementation for managing plugins
@@ -34,17 +22,22 @@ use Zend\Code\Reflection\ClassReflection;
  *
  * @category   Zend
  * @package    Zend_ServiceManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractPluginManager extends ServiceManager
+abstract class AbstractPluginManager extends ServiceManager implements ServiceLocatorAwareInterface
 {
     /**
      * Allow overriding by default
-     * 
+     *
      * @var bool
      */
     protected $allowOverride   = true;
+
+    /**
+     * Whether or not to auto-add a class as an invokable class if it exists
+     * 
+     * @var bool
+     */
+    protected $autoAddInvokableClass = true;
 
     /**
      * @var mixed Options to use when creating an instance
@@ -52,25 +45,30 @@ abstract class AbstractPluginManager extends ServiceManager
     protected $creationOptions = null;
 
     /**
-     * Enable this by default to allow overriding the default plugins
+     * The main service locator
      *
-     * @var bool
+     * @var ServiceLocatorInterface
      */
-    protected $retrieveFromPeeringManagerFirst = true;
+    protected $serviceLocator;
 
     /**
      * Constructor
      *
      * Add a default initializer to ensure the plugin is valid after instance
      * creation.
-     * 
-     * @param  null|ConfigurationInterface $configuration 
+     *
+     * @param  null|ConfigInterface $configuration
      * @return void
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
-        $this->addInitializer(array($this, 'validatePlugin'), true);
+        $self = $this;
+        $this->addInitializer(function ($instance) use ($self) {
+            if ($instance instanceof ServiceManagerAwareInterface) {
+                $instance->setServiceManager($self);
+            }
+        });
     }
 
     /**
@@ -78,8 +76,8 @@ abstract class AbstractPluginManager extends ServiceManager
      *
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */
@@ -91,22 +89,23 @@ abstract class AbstractPluginManager extends ServiceManager
      * Allows passing an array of options to use when creating the instance.
      * createFromInvokable() will use these and pass them to the instance
      * constructor if not null and a non-empty array.
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $usePeeringServiceManagers 
+     *
+     * @param  string $name
+     * @param  array $options
+     * @param  bool $usePeeringServiceManagers
      * @return object
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
         // Allow specifying a class name directly; registers as an invokable class
-        if (!$this->has($name) && class_exists($name)) {
+        if (!$this->has($name) && $this->autoAddInvokableClass && class_exists($name)) {
             $this->setInvokableClass($name, $name);
         }
 
         $this->creationOptions = $options;
         $instance = parent::get($name, $usePeeringServiceManagers);
         $this->creationOptions = null;
+        $this->validatePlugin($instance);
         return $instance;
     }
 
@@ -115,7 +114,7 @@ abstract class AbstractPluginManager extends ServiceManager
      *
      * Validates that the service object via validatePlugin() prior to
      * attempting to register it.
-     * 
+     *
      * @param  string $name
      * @param  mixed $service
      * @param  bool $shared
@@ -132,13 +131,35 @@ abstract class AbstractPluginManager extends ServiceManager
     }
 
     /**
+     * Set the main service locator so factories can have access to it to pull deps
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return AbstractPluginManager
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * Get the main plugin manager. Useful for fetching dependencies from within factories.
+     *
+     * @return mixed
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    /**
      * Attempt to create an instance via an invokable class
      *
-     * Overrides parent implementation by passing $creationOptions to the 
+     * Overrides parent implementation by passing $creationOptions to the
      * constructor, if non-null.
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
      * @return null|\stdClass
      * @throws Exception\ServiceNotCreatedException If resolved class does not exist
      */
@@ -155,7 +176,7 @@ abstract class AbstractPluginManager extends ServiceManager
             ));
         }
 
-        if (null === $this->creationOptions 
+        if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))
         ) {
             $instance = new $invokable();
@@ -164,26 +185,5 @@ abstract class AbstractPluginManager extends ServiceManager
         }
 
         return $instance;
-    }
-
-    /**
-     * Determine if a class implements a given interface
-     *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses 
-     * reflection to determine the interfaces implemented.
-     * 
-     * @param  string $class 
-     * @param  string $type 
-     * @return bool
-     */
-    protected function isSubclassOf($class, $type)
-    {
-        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
-            return is_subclass_of($class, $type);
-        }
-
-        $r = new ClassReflection($class);
-        $interfaces = $r->getInterfaceNames();
-        return (in_array($type, $interfaces));
     }
 }

@@ -15,7 +15,7 @@ use Zend\ModuleManager\ModuleEvent;
 
 /**
  * Autoloader listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
@@ -37,7 +37,7 @@ class OnBootstrapListener extends AbstractListener
         }
 
         $moduleManager = $e->getTarget();
-        $events        = $moduleManager->events();
+        $events        = $moduleManager->getEventManager();
         $sharedEvents  = $events->getSharedManager();
         $sharedEvents->attach('application', 'bootstrap', array($module, 'onBootstrap'));
     }

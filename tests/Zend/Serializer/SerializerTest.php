@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Serializer
  */
 
 namespace ZendTest\Serializer;
@@ -30,8 +19,6 @@ use Zend\Serializer\Serializer;
  * @package    Zend_Serializer
  * @subpackage UnitTests
  * @group      Zend_Serializer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SerializerTest extends \PHPUnit_Framework_TestCase
 {
@@ -73,7 +60,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         Serializer::factory('unknown');
     }
-    
+
     public function testFactoryOnADummyClassAdapter()
     {
         $adapters = new AdapterPluginManager();
@@ -97,6 +84,15 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($newAdapter === Serializer::getDefaultAdapter());
     }
 
+    public function testFactoryPassesAdapterOptions()
+    {
+        $options = new Adapter\PythonPickleOptions(array('protocol' => 2));
+        /** @var Adapter\PythonPickle $adapter  */
+        $adapter = Serializer::factory('pythonpickle', $options);
+        $this->assertTrue($adapter instanceof Adapter\PythonPickle);
+        $this->assertEquals(2, $adapter->getOptions()->getProtocol());
+    }
+
     public function testSerializeDefaultAdapter()
     {
         $value = 'test';
@@ -110,7 +106,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $value = 'test';
         $adapter = new Adapter\Json();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, Serializer::serialize($value, array('adapter' => $adapter)));
+        $this->assertEquals($expected, Serializer::serialize($value, $adapter));
     }
 
     public function testUnserializeDefaultAdapter()
@@ -127,7 +123,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $adapter = new Adapter\Json();
         $value = '"test"';
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, Serializer::unserialize($value, array('adapter' => $adapter)));
+        $this->assertEquals($expected, Serializer::unserialize($value, $adapter));
     }
 
 }

@@ -1,37 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
 
+use DateInterval;
+use DateTime;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Date;
 use Zend\Http\Request as HttpRequest;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 use Zend\Version;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Subscriber
 {
@@ -119,7 +108,7 @@ class Subscriber
      * @var array
      */
     protected $_authentications = array();
-    
+
     /**
      * Tells the Subscriber to append any subscription identifier to the path
      * of the base Callback URL. E.g. an identifier "subkey1" would be added
@@ -392,12 +381,12 @@ class Subscriber
         $this->_hubUrls = array_unique($this->_hubUrls);
         return $this->_hubUrls;
     }
-    
+
     /**
      * Add authentication credentials for a given URL
-     * 
-     * @param  string $url 
-     * @param  array $authentication 
+     *
+     * @param  string $url
+     * @param  array $authentication
      * @return Subscriber
      * @throws Exception\InvalidArgumentException
      */
@@ -411,11 +400,11 @@ class Subscriber
         $this->_authentications[$url] = $authentication;
         return $this;
     }
-    
+
     /**
      * Add authentication credentials for hub URLs
-     * 
-     * @param  array $authentications 
+     *
+     * @param  array $authentications
      * @return Subscriber
      */
     public function addAuthentications(array $authentications)
@@ -425,21 +414,21 @@ class Subscriber
         }
         return $this;
     }
-    
+
     /**
      * Get all hub URL authentication credentials
-     * 
+     *
      * @return array
      */
     public function getAuthentications()
     {
         return $this->_authentications;
     }
-    
+
     /**
      * Set flag indicating whether or not to use a path parameter
-     * 
-     * @param  bool $bool 
+     *
+     * @param  bool $bool
      * @return Subscriber
      */
     public function usePathParameter($bool = true)
@@ -535,7 +524,7 @@ class Subscriber
     }
 
     /**
-     * Gets an instance of Zend\Feed\Pubsubhubbub\Storage\StoragePersistence used 
+     * Gets an instance of Zend\Feed\Pubsubhubbub\Storage\StoragePersistence used
      * to background save any verification tokens associated with a subscription
      * or other.
      *
@@ -738,19 +727,19 @@ class Subscriber
         foreach ($optParams as $name => $value) {
             $params[$name] = $value;
         }
-        
+
         // store subscription to storage
-        $now = new Date\Date;
+        $now = new DateTime();
         $expires = null;
         if (isset($params['hub.lease_seconds'])) {
-            $expires = $now->add($params['hub.lease_seconds'], Date\Date::SECOND)
-                ->get('yyyy-MM-dd HH:mm:ss');
+            $expires = $now->add(new DateInterval('PT' . $params['hub.lease_seconds'] . 'S'))
+                ->format('Y-m-d H:i:s');
         }
         $data = array(
             'id'                 => $key,
             'topic_url'          => $params['hub.topic'],
             'hub_url'            => $hubUrl,
-            'created_time'       => $now->get('yyyy-MM-dd HH:mm:ss'),
+            'created_time'       => $now->format('Y-m-d H:i:s'),
             'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,

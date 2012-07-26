@@ -1,41 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Serializer
  */
 
 namespace ZendTest\Serializer\Adapter;
 
-use Zend\Serializer,
-    Zend\Serializer\Exception\ExtensionNotLoadedException;
+use Zend\Serializer;
+use Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
  * @group      Zend_Serializer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class WddxTest extends \PHPUnit_Framework_TestCase
 {
-
-    private $_adapter;
+    /**
+     * @var Serializer\Adapter\Wddx
+     */
+    private $adapter;
 
     public function setUp()
     {
@@ -46,12 +35,12 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             } catch (ExtensionNotLoadedException $e) {}
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
-        $this->_adapter = new \Zend\Serializer\Adapter\Wddx();
+        $this->adapter = new Serializer\Adapter\Wddx();
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
     }
 
     public function testSerializeString()
@@ -60,7 +49,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><string>test</string></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -70,7 +59,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header><comment>a test comment</comment></header>'
                   . '<data><string>test</string></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value, array('comment' => 'a test comment'));
+        $this->adapter->getOptions()->setComment('a test comment');
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -80,7 +70,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><boolean value=\'false\'/></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -90,7 +80,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><boolean value=\'true\'/></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -100,7 +90,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><null/></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -110,7 +100,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><number>100</number></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -124,7 +114,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<var name=\'test\'><string>test</string></var>'
                   . '</struct></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -134,7 +124,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<data><string>test</string></data></wddxPacket>';
         $expected = 'test';
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -144,7 +134,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<data><boolean value=\'false\'/></data></wddxPacket>';
         $expected = false;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -154,7 +144,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<data><boolean value=\'true\'/></data></wddxPacket>';
         $expected = true;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -164,7 +154,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<data><null/></data></wddxPacket>';
         $expected = null;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -179,7 +169,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<data><null/></data></wddxPacket>';
         $expected = null;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -189,7 +179,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
                   . '<data><number>100</number></data></wddxPacket>';
         $expected = 100;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -203,7 +193,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = new \stdClass();
         $expected->test = 'test';
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -218,7 +208,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             'Zend\Serializer\Exception\RuntimeException',
             'String could not be parsed as XML'
         );
-        $this->_adapter->unserialize($value);
+        $this->adapter->unserialize($value);
     }
 
     public function testUnserialzeInvalidWddx()
@@ -230,9 +220,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $value = '<wddxPacket version=\'1.0\'><header /></wddxPacket>';
         $this->setExpectedException(
             'Zend\Serializer\Exception\RuntimeException',
-            'Invalid wddx'
+            'Invalid wddx packet'
         );
-        $this->_adapter->unserialize($value);
+        $this->adapter->unserialize($value);
     }
-
 }

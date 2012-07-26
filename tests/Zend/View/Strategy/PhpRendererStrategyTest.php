@@ -1,52 +1,36 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Strategy;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\EventManager,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\Registry,
-    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\Strategy\PhpRendererStrategy,
-    Zend\View\ViewEvent;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\EventManager\EventManager;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Strategy\PhpRendererStrategy;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpRendererStrategyTest extends TestCase
 {
     public function setUp()
     {
         // Necessary to ensure placeholders do not persist between individual tests
-        if (Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY)) {
-            Registry::getInstance()->offsetUnset(PlaceholderRegistry::REGISTRY_KEY);
-        }
+        PlaceholderRegistry::unsetRegistry();
 
         $this->renderer = new PhpRenderer;
         $this->strategy = new PhpRendererStrategy($this->renderer);
@@ -63,7 +47,7 @@ class PhpRendererStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -82,7 +66,7 @@ class PhpRendererStrategyTest extends TestCase
         $this->strategy->injectResponse($this->event);
         $this->assertResponseNotInjected();
     }
-    
+
     public function testResponseContentSetToContentPlaceholderWhenResultAndArticlePlaceholderAreEmpty()
     {
         $this->renderer->placeholder('content')->set('Content');
@@ -155,7 +139,7 @@ class PhpRendererStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
     }
-    
+
     public function testCanAttachListenersAtSpecifiedPriority()
     {
         $events = new EventManager();

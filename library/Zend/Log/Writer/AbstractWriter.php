@@ -1,39 +1,33 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Filter,
-    Zend\Log\Formatter\FormatterInterface as Formatter,
-    Zend\Log\Exception;
+use Zend\Log\Exception;
+use Zend\Log\Filter;
+use Zend\Log\Formatter\FormatterInterface as Formatter;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractWriter implements WriterInterface
 {
+    /**
+     * Filter plugins
+     *
+     * @var FilterPluginManager
+     */
+    protected $filterPlugins;
+    
     /**
      * Filter chain
      *
@@ -51,17 +45,23 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Add a filter specific to this writer.
      *
-     * @param  Filter\FilterInterface|int $filter
+     * @param  int|string|Filter\FilterInterface $filter
      * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
      */
-    public function addFilter($filter)
+    public function addFilter($filter, array $options = null)
     {
         if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
-        } elseif (!$filter instanceof Filter\FilterInterface) {
+        } 
+
+        if (is_string($filter)) {
+            $filter = $this->filterPlugin($filter, $options);
+        } 
+        
+        if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Filter must implement Zend\Log\Filter; received %s',
+                'Writer must implement Zend\Log\Filter\FilterInterface; received "%s"',
                 is_object($filter) ? get_class($filter) : gettype($filter)
             ));
         }
@@ -70,6 +70,55 @@ abstract class AbstractWriter implements WriterInterface
         return $this;
     }
 
+    /**
+     * Get filter plugin manager
+     *
+     * @return FilterPluginManager
+     */
+    public function getFilterPluginManager()
+    {
+        if (null === $this->filterPlugins) {
+            $this->setFilterPluginManager(new FilterPluginManager());
+        }
+        return $this->filterPlugins;
+    }
+
+    /**
+     * Set filter plugin manager
+     *
+     * @param  string|FilterPluginManager $plugins
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setFilterPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof FilterPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Writer plugin manager must extend %s\FilterPluginManager; received %s',
+                __NAMESPACE__,
+                is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+
+        $this->filterPlugins = $plugins;
+        return $this;
+    }
+
+    /**
+     * Get filter instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Writer
+     */
+    public function filterPlugin($name, array $options = null)
+    {
+        return $this->getFilterPluginManager()->get($name, $options);
+    }
+    
     /**
      * Log a message to this writer.
      *

@@ -1,12 +1,20 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace ZendTest\Di;
 
-use Zend\Di\Di,
-    Zend\Di\DefinitionList,
-    Zend\Di\InstanceManager,
-    Zend\Di\Configuration,
-    Zend\Di\Definition;
+use Zend\Di\Di;
+use Zend\Di\DefinitionList;
+use Zend\Di\InstanceManager;
+use Zend\Di\Config;
+use Zend\Di\Definition;
 
 
 class DiTest extends \PHPUnit_Framework_TestCase
@@ -27,7 +35,7 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $dl = new DefinitionList(array());
         $im = new InstanceManager();
-        $cg = new Configuration(array());
+        $cg = new Config(array());
         $di = new Di($dl, $im, $cg);
 
         $this->assertSame($dl, $di->definitions());
@@ -147,7 +155,7 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
 //    public function testCanSetInstantiatorToStaticFactory()
 //    {
-//        $config = new Configuration(array(
+//        $config = new Config(array(
 //            'definition' => array(
 //                'class' => array(
 //                    'ZendTest\Di\TestAsset\DummyParams' => array(
@@ -597,7 +605,7 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testMarkingClassAsNotSharedInjectsNewInstanceIntoAllRequestersButDependentsAreShared()
     {
         $di = new Di();
-        $di->configure(new Configuration(array(
+        $di->configure(new Config(array(
             'instance' => array(
                 'ZendTest\Di\TestAsset\SharedInstance\Lister' => array(
                     'shared' => false

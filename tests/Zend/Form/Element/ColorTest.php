@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Element;
@@ -45,35 +34,27 @@ class ColorTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider colorData
-     */
-    public function testLazyLoadsRegexValidatorByDefaultAndValidatesColors($color, $expected)
-    {
-        $element   = new ColorElement();
-        $validator = $element->getValidator();
-        $this->assertInstanceOf('Zend\Validator\Regex', $validator);
-        $this->assertEquals($expected, $validator->isValid($color));
-    }
-
-    public function testCanInjectValidator()
-    {
-        $element   = new ColorElement();
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $element->setValidator($validator);
-        $this->assertSame($validator, $element->getValidator());
-    }
-
-    public function testProvidesInputSpecificationThatIncludesValidator()
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
         $element = new ColorElement();
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $element->setValidator($validator);
 
         $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
-        $test = array_shift($inputSpec['validators']);
-        $this->assertSame($validator, $test);
+
+        $expectedClasses = array(
+            'Zend\Validator\Regex'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Regex':
+                    $this->assertEquals('/^#[0-9a-fA-F]{6}$/', $validator->getPattern());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

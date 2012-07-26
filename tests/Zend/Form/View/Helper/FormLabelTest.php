@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -30,8 +19,6 @@ use Zend\Form\View\Helper\FormLabel as FormLabelHelper;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormLabelTest extends CommonTestCase
 {
@@ -98,7 +85,7 @@ class FormLabelTest extends CommonTestCase
     public function testPassingElementToInvokeGeneratesLabelMarkup()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->__invoke($element);
         $this->assertContains('>The value for foo:<', $markup);
         $this->assertContains('for="foo"', $markup);
@@ -119,7 +106,7 @@ class FormLabelTest extends CommonTestCase
     public function testPassingElementAndContentAndFlagToInvokeUsesLabelAttribute()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->__invoke($element, '<input type="text" id="foo" />', FormLabelHelper::PREPEND);
         $this->assertContains('>The value for foo:<input', $markup);
         $this->assertContains('for="foo"', $markup);
@@ -131,7 +118,7 @@ class FormLabelTest extends CommonTestCase
     public function testCanAppendLabelContentUsingFlagToInvoke()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->__invoke($element, '<input type="text" id="foo" />', FormLabelHelper::APPEND);
         $this->assertContains('"foo" />The value for foo:</label>', $markup);
         $this->assertContains('for="foo"', $markup);
@@ -153,5 +140,36 @@ class FormLabelTest extends CommonTestCase
         $this->assertEquals('<label>', $markup);
         $markup = $helper()->closeTag();
         $this->assertEquals('</label>', $markup);
+    }
+
+    public function testCanTranslateContent()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value for foo:');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+                       ->method('translate')
+                       ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+    }
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
     }
 }

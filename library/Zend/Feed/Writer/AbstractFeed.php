@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer;
 
-use Zend\Uri,
-    Zend\Date,
-    Zend\Validator;
+use DateTime;
+use Zend\Uri;
+use Zend\Validator;
 
 /**
  * @category Zend
  * @package Zend_Feed_Writer
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 class AbstractFeed
 {
@@ -131,64 +119,58 @@ class AbstractFeed
     /**
      * Set the feed creation date
      *
-     * @param null|integer|Date\Date
+     * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setDateCreated($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
+                                                         . ' passed as parameter');
         }
-        $this->_data['dateCreated'] = $zdate;
+        $this->_data['dateCreated'] = $date;
     }
 
     /**
      * Set the feed modification date
      *
-     * @param null|integer|Date\Date
+     * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setDateModified($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
+                                                         . ' passed as parameter');
         }
-        $this->_data['dateModified'] = $zdate;
+        $this->_data['dateModified'] = $date;
     }
 
     /**
      * Set the feed last-build date. Ignored for Atom 1.0.
      *
-     * @param null|integer|Date\Date
+     * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setLastBuildDate($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
+                                                         . ' passed as parameter');
         }
-        $this->_data['lastBuildDate'] = $zdate;
+        $this->_data['lastBuildDate'] = $date;
     }
 
     /**
@@ -787,13 +769,14 @@ class AbstractFeed
      */
     protected function _loadExtensions()
     {
-        $all = Writer::getExtensions();
-        $exts = $all['feed'];
+        $all     = Writer::getExtensions();
+        $manager = Writer::getExtensionManager();
+        $exts    = $all['feed'];
         foreach ($exts as $ext) {
-            if (!$className = Writer::getPluginLoader()->getClassName($ext)) {
+            if (!$manager->has($ext)) {
                 throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
             }
-            $this->_extensions[$ext] = new $className();
+            $this->_extensions[$ext] = $manager->get($ext);
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }
     }

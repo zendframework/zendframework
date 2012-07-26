@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -33,7 +22,7 @@ class FormSelectTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
         $element = new Element('foo');
         $options = array(
@@ -184,16 +173,16 @@ class FormSelectTest extends CommonTestCase
     public function getScalarOptionsDataProvider()
     {
         return array(
-            array(array('string'  => 'value')),
-            array(array('int'     => 1)),
-            array(array('int-neg' => -1)),
-            array(array('hex'     => 0x1A)),
-            array(array('oct'     => 0123)),
-            array(array('float'   => 2.1)),
-            array(array('float-e' => 1.2e3)),
-            array(array('float-E' => 7E-10)),
-            array(array('bool-t'  => true)),
-            array(array('bool-f'  => false)),
+            array(array('value' => 'string')),
+            array(array(1       => 'int')),
+            array(array(-1      => 'int-neg')),
+            array(array(0x1A    => 'hex')),
+            array(array(0123    => 'oct')),
+            array(array(2.1     => 'float')),
+            array(array(1.2e3   => 'float-e')),
+            array(array(7E-10   => 'float-E')),
+            array(array(true    => 'bool-t')),
+            array(array(false   => 'bool-f')),
         );
     }
 
@@ -206,7 +195,7 @@ class FormSelectTest extends CommonTestCase
         $element = new Element('foo');
         $element->setAttribute('options', $options);
         $markup = $this->helper->render($element);
-        list($label, $value) = each($options);
+        list($value, $label) = each($options);
         $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
     }
 
@@ -214,5 +203,42 @@ class FormSelectTest extends CommonTestCase
     {
         $element = $this->getElement();
         $this->assertSame($this->helper, $this->helper->__invoke());
+    }
+
+    public function testCanTranslateContent()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('options', array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+        ->method('translate')
+        ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+    }
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
     }
 }

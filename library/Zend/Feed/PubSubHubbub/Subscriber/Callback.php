@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub\Subscriber;
 
-use Zend\Feed\PubSubHubbub,
-    Zend\Uri;
+use Zend\Feed\PubSubHubbub;
+use Zend\Uri;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Callback extends PubSubHubbub\AbstractCallback
 {
@@ -37,7 +25,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      * @var string
      */
     protected $_feedUpdate = null;
-    
+
     /**
      * Holds a manually set subscription key (i.e. identifies a unique
      * subscription) which is typical when it is not passed in the query string
@@ -47,14 +35,14 @@ class Callback extends PubSubHubbub\AbstractCallback
      * @var string
      */
     protected $_subscriptionKey = null;
-    
+
     /**
      * After verification, this is set to the verified subscription's data.
      *
      * @var array
      */
     protected $_currentSubscriptionData = null;
-    
+
     /**
      * Set a subscription key to use for the current callback request manually.
      * Required if usePathParameter is enabled for the Subscriber.
@@ -90,13 +78,14 @@ class Callback extends PubSubHubbub\AbstractCallback
          * SHOULD be validated/processed by an asynchronous process so as
          * to avoid holding up responses to the Hub.
          */
+        $contentType = $this->_getHeader('Content-Type');
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post'
             && $this->_hasValidVerifyToken(null, false)
-            && ($this->_getHeader('Content-Type') == 'application/atom+xml'
-                || $this->_getHeader('Content-Type') == 'application/rss+xml'
-                || $this->_getHeader('Content-Type') == 'application/xml'
-                || $this->_getHeader('Content-Type') == 'text/xml'
-                || $this->_getHeader('Content-Type') == 'application/rdf+xml')
+            && (stripos($contentType, 'application/atom+xml') === 0
+                || stripos($contentType, 'application/rss+xml') === 0
+                || stripos($contentType, 'application/xml') === 0
+                || stripos($contentType, 'text/xml') === 0
+                || stripos($contentType, 'application/rdf+xml') === 0)
         ) {
             $this->setFeedUpdate($this->_getRawBody());
             $this->getHttpResponse()->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());
@@ -141,9 +130,9 @@ class Callback extends PubSubHubbub\AbstractCallback
             return false;
         }
         $required = array(
-            'hub_mode', 
+            'hub_mode',
             'hub_topic',
-            'hub_challenge', 
+            'hub_challenge',
             'hub_verify_token',
         );
         foreach ($required as $key) {

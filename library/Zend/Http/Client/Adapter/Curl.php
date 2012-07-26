@@ -1,33 +1,21 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
-use Zend\Http\Client;
 use Zend\Http\Request;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
@@ -36,8 +24,6 @@ use Zend\Http\Request;
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Curl implements HttpAdapter, StreamInterface
 {
@@ -314,6 +300,11 @@ class Curl implements HttpAdapter, StreamInterface
                 }
                 break;
 
+            case 'PATCH' :
+                $curlMethod = CURLOPT_CUSTOMREQUEST;
+                $curlValue = "PATCH";
+                break;
+
             case 'DELETE' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "DELETE";
@@ -366,9 +357,9 @@ class Curl implements HttpAdapter, StreamInterface
 
         // Treating basic auth headers in a special way
         if (array_key_exists('Authorization', $headers) && 'Basic' == substr($headers['Authorization'], 0, 5)) {
-        	curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        	curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
-        	unset($headers['Authorization']);
+            curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
+            unset($headers['Authorization']);
         }
 
         // set additional headers
@@ -397,6 +388,8 @@ class Curl implements HttpAdapter, StreamInterface
             unset($this->config['curloptions'][CURLOPT_INFILESIZE]);
         } elseif ($method == 'PUT') {
             // This is a PUT by a setRawData string, not by file-handle
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+        } elseif ($method == 'PATCH') {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
 

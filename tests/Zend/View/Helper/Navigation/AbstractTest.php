@@ -1,36 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Navigation;
 
 use Zend\Navigation\Navigation;
-use Zend\Acl\Acl;
-use Zend\Acl\Role\GenericRole;
-use Zend\Acl\Resource\GenericResource;
 use Zend\Config\Factory as ConfigFactory;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\Permissions\Acl\Acl;
+use Zend\Permissions\Acl\Role\GenericRole;
+use Zend\Permissions\Acl\Resource\GenericResource;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Translator\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\View\Renderer\PhpRenderer;
+use ZendTest\View\Helper\TestAsset;
 
 /**
  * Base class for navigation view helper tests
@@ -38,8 +28,6 @@ use Zend\View\Renderer\PhpRenderer;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -123,22 +111,24 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                 'config_cache_enabled' => false,
                 'cache_dir'            => 'data/cache',
                 'module_paths'         => array(),
-            ),
-            'service_manager' => array(
-                'factories' => array(
-                    'Configuration' => function() use ($config) {
-                        return array(
-                            'navigation' => array(
-                                'default' => $config->get('nav_test1')
-                            )
-                        );
-                    }
-                )
+                'extra_config'         => array(
+                    'service_manager' => array(
+                        'factories' => array(
+                            'Config' => function() use ($config) {
+                                return array(
+                                    'navigation' => array(
+                                        'default' => $config->get('nav_test1'),
+                                    ),
+                                );
+                            }
+                        ),
+                    ),
+                ),
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration($smConfig['service_manager']));
-        $sm->setService('ApplicationConfiguration', $smConfig);
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
+        $sm->setService('ApplicationConfig', $smConfig);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
         $sm->setFactory('Navigation', 'Zend\Navigation\Service\DefaultNavigationFactory');
@@ -152,7 +142,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the contens of the exepcted $file
+     * Returns the contens of the expected $file
      * @param  string $file
      * @return string
      */
@@ -196,7 +186,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected function _getTranslator()
     {
-        $data = array(
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
             'Page 1'       => 'Side 1',
             'Page 1.1'     => 'Side 1.1',
             'Page 2'       => 'Side 2',
@@ -205,7 +196,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             'Home'         => 'Hjem',
             'Go home'      => 'Gå hjem'
         );
-
-        return new Translator('ArrayAdapter', $data, 'nb_NO');
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
+        return $translator;
     }
 }

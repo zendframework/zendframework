@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Reader\Entry;
+
+use DateTime;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
 * @category Zend
 * @package Zend_Feed
 * @subpackage UnitTests
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
@@ -36,26 +24,16 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
-    
+
     protected $_expectedCats = array();
-    
+
     protected $_expectedCatsDc = array();
 
     public function setup()
     {
         Reader\Reader::reset();
-        if (\Zend\Registry::isRegistered('Zend_Locale')) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Locale']);
-        }
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/AtomStandaloneEntry';
-        $this->_options = Date\Date::setOptions();
-        foreach($this->_options as $k=>$v) {
-            if (is_null($v)) {
-                unset($this->_options[$k]);
-            }
-        }
-        Date\Date::setOptions(array('format_type'=>'iso'));
+
         $this->_expectedCats = array(
             array(
                 'term' => 'topic1',
@@ -86,12 +64,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
-    
-    public function teardown()
-    {
-        Date\Date::setOptions($this->_options);
-    }
-    
+
     public function testReaderImportOfAtomEntryDocumentReturnsEntryClass()
     {
         $object = Reader\Reader::importString(
@@ -121,9 +94,8 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $entry = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath . '/datecreated/atom10.xml')
         );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateCreated()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateCreated());
     }
 
     /**
@@ -135,9 +107,8 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $entry = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath . '/datemodified/atom10.xml')
         );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateModified());
     }
 
     /**
@@ -215,7 +186,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $entry->getEnclosure());
     }
-    
+
     /**
      * TEXT
      * @group ZFRATOMCONTENT
@@ -227,7 +198,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('Entry Content &amp;', $entry->getContent());
     }
-    
+
     /**
      * HTML Escaped
      * @group ZFRATOMCONTENT
@@ -239,7 +210,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('<p>Entry Content &amp;</p>', $entry->getContent());
     }
-    
+
     /**
      * HTML CDATA Escaped
      * @group ZFRATOMCONTENT
@@ -251,7 +222,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('<p>Entry Content &amp;</p>', $entry->getContent());
     }
-    
+
     /**
      * XHTML
      * @group ZFRATOMCONTENT
@@ -287,7 +258,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
     }
-    
+
     /**
      * Get category data
      * @group ZFR002
@@ -300,5 +271,5 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCats, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
-    
+
 }

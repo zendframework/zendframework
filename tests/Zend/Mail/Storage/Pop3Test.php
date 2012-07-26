@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Storage;
@@ -29,8 +18,6 @@ use Zend\Mail\Storage;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
 class Pop3Test extends \PHPUnit_Framework_TestCase
@@ -101,45 +88,27 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
 
     public function testConnectOk()
     {
-        try {
-            $mail = new Storage\Pop3($this->_params);
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading connection to pop3 server');
-        }
+        new Storage\Pop3($this->_params);
     }
 
     public function testConnectConfig()
     {
-        try {
-            $mail = new Storage\Pop3(new Config\Config($this->_params));
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading connection to pop3 server');
-        }
+         new Storage\Pop3(new Config\Config($this->_params));
     }
 
 
     public function testConnectFailure()
     {
         $this->_params['host'] = 'example.example';
-        try {
-            $mail = new Storage\Pop3($this->_params);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
 
-        // I can only hope noone installs a POP3 server there
-        $this->fail('no exception raised while connecting to example.example');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Pop3($this->_params);
     }
 
     public function testNoParams()
     {
-        try {
-            $mail = new Storage\Pop3(array());
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised with empty params');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Pop3(array());
     }
 
     public function testConnectSSL()
@@ -149,11 +118,8 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
         }
 
         $this->_params['ssl'] = 'SSL';
-        try {
-            $mail = new Storage\Pop3($this->_params);
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading connection to pop3 server with SSL');
-        }
+
+        new Storage\Pop3($this->_params);
     }
 
     public function testConnectTLS()
@@ -163,48 +129,31 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
         }
 
         $this->_params['ssl'] = 'TLS';
-        try {
-            $mail = new Storage\Pop3($this->_params);
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading connection to pop3 server with TLS');
-        }
+
+        new Storage\Pop3($this->_params);
     }
 
     public function testInvalidService()
     {
         $this->_params['port'] = TESTS_ZEND_MAIL_POP3_INVALID_PORT;
 
-        try {
-            $mail = new Storage\Pop3($this->_params);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception while connection to invalid port');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Pop3($this->_params);
     }
 
     public function testWrongService()
     {
         $this->_params['port'] = TESTS_ZEND_MAIL_POP3_WRONG_PORT;
 
-        try {
-            $mail = new Storage\Pop3($this->_params);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception while connection to wrong port');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Pop3($this->_params);
     }
 
     public function testClose()
     {
         $mail = new Storage\Pop3($this->_params);
 
-        try {
-            $mail->close();
-        } catch (\Exception $e) {
-            $this->fail('exception raised while closing pop3 connection');
-        }
+        $mail->close();
     }
 
     public function testHasTop()
@@ -225,11 +174,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Pop3($this->_params);
 
-        try {
-            $mail->noop();
-        } catch (\Exception $e) {
-            $this->fail('exception raised while doing nothing (noop)');
-        }
+        $mail->noop();
     }
 
     public function testCount()
@@ -312,27 +257,19 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     {
         $protocol = new Protocol\Pop3($this->_params['host']);
         $mail = new Storage\Pop3($protocol);
-        try {
-            // because we did no login this has to throw an exception
-            $mail->getMessage(1);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
 
-        $this->fail('no exception raised while fetching with wrong transport');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        // because we did no login this has to throw an exception
+        $mail->getMessage(1);
     }
 
     public function testRequestAfterClose()
     {
         $mail = new Storage\Pop3($this->_params);
         $mail->close();
-        try {
-            $mail->getMessage(1);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
 
-        $this->fail('no exception raised while requesting after closing connection');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->getMessage(1);
     }
 
     public function testServerCapa()
@@ -386,13 +323,9 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     public function testWrongUniqueId()
     {
         $mail = new Storage\Pop3($this->_params);
-        try {
-            $mail->getNumberByUniqueId('this_is_an_invalid_id');
-        } catch (\Exception $e) {
-            return; // test ok
-        }
 
-        $this->fail('no exception while getting number for invalid id');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->getNumberByUniqueId('this_is_an_invalid_id');
     }
 
     public function testReadAfterClose()
@@ -400,13 +333,8 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
         $protocol = new Protocol\Pop3($this->_params['host']);
         $protocol->logout();
 
-        try {
-            $protocol->readResponse();
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception while reading from closed socket');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $protocol->readResponse();
     }
 
     public function testRemove()

@@ -1,38 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter\Encrypt;
 
 use Traversable;
+use Zend\Filter\Compress;
+use Zend\Filter\Decompress;
+use Zend\Filter\Exception;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Filter\Exception,
-    Zend\Filter\Compress,
-    Zend\Filter\Decompress;
 
 /**
  * Encryption adapter for openssl
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Openssl implements EncryptionAlgorithmInterface
 {
@@ -82,6 +70,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *   'package'     => pack envelope keys into encrypted string, simplifies decryption
      *
      * @param string|array|Traversable $options Options for this adapter
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = array())
     {
@@ -119,7 +108,8 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets the encryption keys
      *
      * @param  string|array $keys Key with type association
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
+     * @throws Exception\InvalidArgumentException
      */
     protected function _setKeys($keys)
     {
@@ -216,7 +206,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *
      * @param  string $key Private key
      * @param  string $passphrase
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPrivateKey($key, $passphrase = null)
     {
@@ -285,7 +275,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets a new passphrase
      *
      * @param string $passphrase
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPassphrase($passphrase)
     {
@@ -307,7 +297,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets a internal compression for values to encrypt
      *
      * @param string|array $compression
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setCompression($compression)
     {
@@ -333,7 +323,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets if the envelope keys should be included in the encrypted value
      *
      * @param boolean $package
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPackage($package)
     {

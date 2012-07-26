@@ -10,9 +10,9 @@
 
 namespace Zend\Db\ResultSet;
 
-use Zend\Stdlib\Hydrator\HydratorInterface;
-use Zend\Stdlib\Hydrator\ArraySerializable;
 use ArrayObject;
+use Zend\Stdlib\Hydrator\ArraySerializable;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend
@@ -92,6 +92,21 @@ class HydratingResultSet extends AbstractResultSet
         $data = $this->dataSource->current();
         $object = clone $this->objectPrototype;
         return is_array($data) ? $this->hydrator->hydrate($data, $object) : false;
+    }
+
+    /**
+     * Cast result set to array of arrays
+     *
+     * @return array
+     * @throws Exception\RuntimeException if any row is not castable to an array
+     */
+    public function toArray()
+    {
+        $return = array();
+        foreach ($this as $row) {
+            $return[] = $this->getHydrator()->extract($row);
+        }
+        return $return;
     }
 
 }

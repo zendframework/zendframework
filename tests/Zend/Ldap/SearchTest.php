@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category      Zend
- * @package       Zend_Ldap
- * @subpackage    UnitTests
- * @copyright     Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license       http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace ZendTest\Ldap;
@@ -29,8 +18,6 @@ use Zend\Ldap\Exception;
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
 class SearchTest extends AbstractOnlineTestCase
@@ -109,8 +96,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, count($items));
 
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
@@ -164,8 +150,7 @@ class SearchTest extends AbstractOnlineTestCase
             Ldap\Ldap::SEARCH_SCOPE_SUB, array(), 'l'
         );
         $this->assertEquals(5, $items->count());
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($lSorted[$key], $item['l'][0]);
         }
     }
@@ -256,15 +241,13 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals($isCount, $items->count());
 
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
         $this->assertEquals($isCount, $i);
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
@@ -272,15 +255,13 @@ class SearchTest extends AbstractOnlineTestCase
 
         $items->close();
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
         $this->assertEquals($isCount, $i);
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
@@ -537,8 +518,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $current['dn']);
 
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }

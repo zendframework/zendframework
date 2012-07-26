@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\Hostname;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class HostnameTest extends \PHPUnit_Framework_TestCase
@@ -276,7 +264,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $translations = array(
             'hostnameInvalidLocalName' => 'this is the IP error message',
         );
-        $translator = new \Zend\Translator\Translator('ArrayAdapter', $translations);
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = $translations;
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
         $this->validator->setTranslator($translator);
 
         $this->validator->isValid('0.239,512.777');

@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc_Router
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\Router\Http\TestAsset;
 
-use Zend\Mvc\Router\Http\RouteInterface,
-    Zend\Mvc\Router\Http\RouteMatch,
-    Zend\Stdlib\RequestInterface;
+use Zend\Mvc\Router\Http\RouteInterface;
+use Zend\Mvc\Router\Http\RouteMatch;
+use Zend\Stdlib\RequestInterface;
 
 /**
  * Dummy route.
@@ -31,8 +20,6 @@ use Zend\Mvc\Router\Http\RouteInterface,
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DummyRouteWithParam extends DummyRoute
 {
@@ -47,7 +34,7 @@ class DummyRouteWithParam extends DummyRoute
     {
         return new RouteMatch(array('foo' => 'bar'), -4);
     }
-    
+
     /**
      * assemble(): defined by RouteInterface interface.
      *
@@ -61,7 +48,7 @@ class DummyRouteWithParam extends DummyRoute
         if (isset($params['foo'])) {
             return $params['foo'];
         }
-        
+
         return '';
     }
 }

@@ -19,8 +19,8 @@ interface MetadataInterface
 {
     public function getSchemas();
 
-    public function getTableNames($schema = null);
-    public function getTables($schema = null);
+    public function getTableNames($schema = null, $includeViews = false);
+    public function getTables($schema = null, $includeViews = false);
     public function getTable($tableName, $schema = null);
 
     public function getViewNames($schema = null);

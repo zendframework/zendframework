@@ -1,30 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace ZendTest\Soap\Wsdl;
 
-use Zend\Soap\Wsdl\ComplexTypeStrategy,
-    Zend\Soap\Wsdl,
-    Zend\Soap\Wsdl\ComplexTypeStrategy\Composite,
-    Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex,
-    Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence;
+use Zend\Soap\Wsdl\ComplexTypeStrategy;
+use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\ComplexTypeStrategy\Composite;
+use Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex;
+use Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence;
 
 /**
  * @package Zend_Soap
@@ -39,8 +29,6 @@ use Zend\Soap\Wsdl\ComplexTypeStrategy,
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */

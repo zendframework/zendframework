@@ -86,6 +86,14 @@ interface AdapterInterface
     public function sqrt($operand);
 
     /**
+     * Get absolute value of a big integer
+     *
+     * @param  string $operand
+     * @return string
+     */
+    public function abs($operand);
+
+    /**
      * Get modulus of a big integer
      *
      * @param  string $leftOperand

@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Client;
 
-use Zend\Uri\Http as UriHttp,
-    Zend\Http\Client as HTTPClient,
-    Zend\Http,
-    Zend\Http\Header\SetCookie,
-    Zend\Http\Request;
+use Zend\Uri\Http as UriHttp;
+use Zend\Http\Client as HTTPClient;
+use Zend\Http;
+use Zend\Http\Header\SetCookie;
+use Zend\Http\Request;
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -36,8 +25,6 @@ use Zend\Uri\Http as UriHttp,
  * @category   Zend
  * @package    Zend_Http_Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -139,10 +126,10 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'Accept-language' => 'en,de,*',
         ));
 
-        $this->assertEquals($this->_client->getHeader('Accept-encoding'), 'gzip,deflate', 'Returned value of header is not as expected');
+        $this->assertEquals($this->_client->getHeader('Accept-encoding'), 'gzip, deflate', 'Returned value of header is not as expected');
         $this->assertEquals($this->_client->getHeader('X-Fake-Header'), null, 'Non-existing header should not return a value');
     }
-    
+
     /**
      * Authentication tests
      */
@@ -194,7 +181,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         // Try unsetting the cookies
         $this->_client->clearCookies();
         $cookies = $this->_client->getCookies();
-        
+
         $this->assertTrue(empty($cookies), 'Cookies is expected to be null but it is not');
     }
 
@@ -221,7 +208,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsArray()
     {
-        
+
         $config = array(
             'timeout'    => 500,
             'someoption' => 'hasvalue'
@@ -243,7 +230,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsZendConfig()
     {
- 
+
         $config = new \Zend\Config\Config(array(
             'timeout'  => 400,
             'nested'   => array(
@@ -280,7 +267,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigPassToAdapterZF4557()
     {
-        
+
         $adapter = new MockAdapter();
 
         // test that config passes when we set the adapter
@@ -423,9 +410,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->send();
 
         $expectedLines = file(__DIR__ . '/_files/ZF7038-multipartarrayrequest.txt');
-        
+
         $gotLines = explode("\n", $this->_client->getLastRawRequest());
-        
+
         $this->assertEquals(count($expectedLines), count($gotLines));
 
         while (($expected = array_shift($expectedLines)) &&
@@ -468,10 +455,10 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(filesize($bodyFile), (int) $match[1]);
     }
-    
+
     /**
      * Testing if the connection isn't closed
-     * 
+     *
      * @group ZF-9685
      */
     public function testOpenTempStreamWithValidFileDoesntThrowsException()
@@ -484,19 +471,17 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
-        try {
-            $result = $client->send();
-        } catch (Http\Exception\ExceptionInterface $e) {
-            $this->fail('Unexpected exception was thrown: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
-        }
+
+        $result = $client->send();
+
         // we can safely return until we can verify link is still active
         // @todo verify link is still active
         return;
     }
-    
+
     /**
      * Testing if the connection can be closed
-     * 
+     *
      * @group ZF-9685
      */
     public function testOpenTempStreamWithBogusFileClosesTheConnection()
@@ -561,7 +546,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validMethodProvider()
+    public static function validMethodProvider()
     {
         return array(
             array('OPTIONS'),
@@ -578,7 +563,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidMethodProvider()
+    public static function invalidMethodProvider()
     {
         return array(
             array('N@5TYM3T#0D'),
@@ -593,7 +578,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidConfigProvider()
+    public static function invalidConfigProvider()
     {
         return array(
             array(false),

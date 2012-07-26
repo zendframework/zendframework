@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Xml as XmlWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Xml as XmlReader;
+use Zend\Config\Writer\Xml as XmlWriter;
+use Zend\Config\Config;
+use Zend\Config\Reader\Xml as XmlReader;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class XmlTest extends \PHPUnit_Framework_TestCase
+class XmlTest extends AbstractWriterTestCase
 {
     protected $_tempName;
 
@@ -61,7 +48,7 @@ ECS;
 
         $this->assertEquals($expected, $configString);
     }
-    
+
     public function testSectionsToString()
     {
         $config = new Config(array(), true);
@@ -74,9 +61,9 @@ ECS;
         $config->production->database->params->username = 'production';
         $config->production->database->params->password = 'secret';
         $config->production->database->params->dbname = 'dbproduction';
-        
+
         $configString = $this->writer->toString($config);
-        
+
         $expected = <<<ECS
 <?xml version="1.0" encoding="UTF-8"?>
 <zend-config>
@@ -94,7 +81,7 @@ ECS;
 </zend-config>
 
 ECS;
-        
+
         $this->assertEquals($expected, $configString);
     }
 }

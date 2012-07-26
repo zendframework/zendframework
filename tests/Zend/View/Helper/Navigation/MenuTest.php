@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Navigation;
@@ -27,8 +16,6 @@ namespace ZendTest\View\Helper\Navigation;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -174,7 +161,7 @@ class MenuTest extends AbstractTest
     {
         $acl = $this->_getAcl();
         $this->_helper->setAcl($acl['acl']);
-        $this->_helper->setRole(new \Zend\Acl\Role\GenericRole('member'));
+        $this->_helper->setRole(new \Zend\Permissions\Acl\Role\GenericRole('member'));
 
         $expected = $this->_getExpected('menu/acl_role_interface.html');
         $this->assertEquals($expected, $this->_helper->render());
@@ -199,7 +186,7 @@ class MenuTest extends AbstractTest
     public function testTranslationUsingZendTranslateAdapter()
     {
         $translator = $this->_getTranslator();
-        $this->_helper->setTranslator($translator->getAdapter());
+        $this->_helper->setTranslator($translator);
 
         $expected = $this->_getExpected('menu/translated.html');
         $this->assertEquals($expected, $this->_helper->render());
@@ -209,7 +196,7 @@ class MenuTest extends AbstractTest
     {
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
-        $this->_helper->setUseTranslator(false);
+        $this->_helper->setTranslatorEnabled(false);
 
         $expected = $this->_getExpected('menu/default1.html');
         $this->assertEquals($expected, $this->_helper->render());
@@ -495,5 +482,15 @@ class MenuTest extends AbstractTest
         $actual = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Returns the contens of the expected $file, normalizes newlines
+     * @param  string $file
+     * @return string
+     */
+    protected function _getExpected($file)
+    {
+        return str_replace("\n", PHP_EOL, parent::_getExpected($file));
     }
 }

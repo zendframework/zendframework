@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ModuleManager
  */
 
 namespace ZendTest\ModuleManager;
@@ -49,7 +38,7 @@ class ModuleManagerTest extends TestCase
         $this->includePath = get_include_path();
 
         $this->defaultListeners = new DefaultListenerAggregate(
-            new ListenerOptions(array( 
+            new ListenerOptions(array(
                 'module_paths'         => array(
                     realpath(__DIR__ . '/TestAsset'),
                 ),
@@ -60,7 +49,7 @@ class ModuleManagerTest extends TestCase
     public function tearDown()
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
-        @unlink($file[0]); // change this if there's ever > 1 file 
+        @unlink($file[0]); // change this if there's ever > 1 file
         @rmdir($this->tmpdir);
         // Restore original autoloaders
         AutoloaderFactory::unregisterAutoloaders();
@@ -78,11 +67,11 @@ class ModuleManagerTest extends TestCase
         // Restore original include_path
         set_include_path($this->includePath);
     }
-    
+
     public function testEventManagerIdentifiers()
     {
         $moduleManager = new ModuleManager(array());
-        $identifiers = $moduleManager->events()->getIdentifiers();
+        $identifiers = $moduleManager->getEventManager()->getIdentifiers();
         $expected    = array('Zend\ModuleManager\ModuleManager', 'module_manager');
         $this->assertEquals($expected, array_values($identifiers));
     }
@@ -91,7 +80,7 @@ class ModuleManagerTest extends TestCase
     {
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager(array('SomeModule'), new EventManager);
-        $moduleManager->events()->attachAggregate($this->defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
@@ -103,7 +92,7 @@ class ModuleManagerTest extends TestCase
     {
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager(array('BarModule', 'BazModule'));
-        $moduleManager->events()->attachAggregate($this->defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
@@ -119,7 +108,7 @@ class ModuleManagerTest extends TestCase
     public function testModuleLoadingBehavior()
     {
         $moduleManager = new ModuleManager(array('BarModule'));
-        $moduleManager->events()->attachAggregate($this->defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $modules = $moduleManager->getLoadedModules();
         $this->assertSame(0, count($modules));
         $modules = $moduleManager->getLoadedModules(true);
@@ -141,5 +130,17 @@ class ModuleManagerTest extends TestCase
         $this->setExpectedException('RuntimeException');
         $moduleManager = new ModuleManager(array('NotFoundModule'));
         $moduleManager->loadModules();
+    }
+
+    public function testCanLoadModuleDuringTheLoadModuleEvent()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+        $this->assertTrue(isset($config['loaded']));
+        $this->assertSame('oh, yeah baby!', $config['loaded']);
     }
 }

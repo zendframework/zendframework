@@ -10,11 +10,11 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Platform\Sql92;
 
 /**
  * @category   Zend
@@ -62,8 +62,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Constructor
-     * 
-     * @param  null|string $table 
+     *
+     * @param  null|string $table
      * @param  null|string $schema
      * @return void
      */
@@ -77,8 +77,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create from statement
-     * 
-     * @param  string $table 
+     *
+     * @param  string $table
      * @param  null|string $schema
      * @return Delete
      */
@@ -101,8 +101,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create where clause
-     * 
-     * @param  Where|Closure|string|array $predicate 
+     *
+     * @param  Where|Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @return Delete
      */
@@ -115,6 +115,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             if (is_string($predicate)) {
                 $predicate = new Predicate\Expression($predicate);
+                $this->where->addPredicate($predicate, $combination);
             } elseif (is_array($predicate)) {
                 foreach ($predicate as $pkey => $pvalue) {
                     if (is_string($pkey) && strpos($pkey, '?') !== false) {
@@ -124,18 +125,18 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } else {
                         $predicate = new Predicate\Expression($pvalue);
                     }
+                    $this->where->addPredicate($predicate, $combination);
                 }
             }
-            $this->where->addPredicate($predicate, $combination);
         }
         return $this;
     }
 
     /**
      * Prepare the delete statement
-     * 
-     * @param  Adapter $adapter 
-     * @param  StatementInterface $statement 
+     *
+     * @param  Adapter $adapter
+     * @param  StatementInterface $statement
      * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
@@ -167,7 +168,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Get the SQL string, based on the platform
      *
      * Platform defaults to Sql92 if none provided
-     * 
+     *
      * @param  null|PlatformInterface $adapterPlatform
      * @return string
      */
@@ -194,8 +195,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Property overloading
      *
      * Overloads "where" only.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)

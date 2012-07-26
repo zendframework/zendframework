@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager;
@@ -35,8 +25,6 @@ use Zend\Stdlib\PriorityQueue;
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EventManager implements EventManagerInterface
 {
@@ -97,12 +85,13 @@ class EventManager implements EventManagerInterface
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {
         $this->sharedManager = $sharedEventManager;
+        StaticEventManager::setInstance($sharedEventManager);
         return $this;
     }
 
     /**
      * Remove any shared event manager currently attached
-     * 
+     *
      * @return void
      */
     public function unsetSharedManager()
@@ -113,13 +102,28 @@ class EventManager implements EventManagerInterface
     /**
      * Get shared event manager
      *
+     * If one is not defined, but we have a static instance in 
+     * StaticEventManager, that one will be used and set in this instance.
+     *
+     * If none is available in the StaticEventManager, a boolean false is 
+     * returned.
+     *
      * @return false|SharedEventManagerInterface
      */
     public function getSharedManager()
     {
-        if (null === $this->sharedManager) {
-            $this->setSharedManager(StaticEventManager::getInstance());
+        // "false" means "I do not want a shared manager; don't try and fetch one"
+        if (false === $this->sharedManager
+            || $this->sharedManager instanceof SharedEventManagerInterface
+        ) {
+            return $this->sharedManager;
         }
+
+        if (!StaticEventManager::hasInstance()) {
+            return false;
+        }
+
+        $this->sharedManager = StaticEventManager::getInstance();
         return $this->sharedManager;
     }
 
@@ -160,7 +164,7 @@ class EventManager implements EventManagerInterface
         if (is_array($identifiers) || $identifiers instanceof \Traversable) {
             $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
-            $this->identifiers = array_unique($this->identifiers + array($identifiers));
+            $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
         }
         return $this;
     }
@@ -258,7 +262,7 @@ class EventManager implements EventManagerInterface
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      *
-     * You can specify "*" for the event name. In such cases, the listener will 
+     * You can specify "*" for the event name. In such cases, the listener will
      * be triggered for every event.
      *
      * @param  string|array|ListenerAggregateInterface $event An event or array of event names. If a ListenerAggregateInterface, proxies to {@link attachAggregate()}.
@@ -521,9 +525,9 @@ class EventManager implements EventManagerInterface
      * Add listeners to the master queue of listeners
      *
      * Used to inject shared listeners and wildcard listeners.
-     * 
-     * @param  PriorityQueue $masterListeners 
-     * @param  PriorityQueue $listeners 
+     *
+     * @param  PriorityQueue $masterListeners
+     * @param  PriorityQueue $listeners
      * @return void
      */
     protected function insertListeners($masterListeners, $listeners)

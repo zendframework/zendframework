@@ -10,28 +10,26 @@
 
 namespace Zend\Paginator;
 
-use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
-    Zend\Paginator\Adapter\AdapterInterface,
-    ArrayIterator,
-    Countable,
-    Iterator,
-    IteratorAggregate,
-    Traversable,
-    Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Cache\Storage\IteratorInterface as CacheIterator,
-    Zend\Db\Table\AbstractRowset as DbAbstractRowset,
-    Zend\Db\Table\Select as DbTableSelect,
-    Zend\Db\Sql,
-    Zend\Filter\FilterInterface,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View;
+use ArrayIterator;
+use Countable;
+use Iterator;
+use IteratorAggregate;
+use Traversable;
+use Zend\Cache\Storage\IteratorInterface as CacheIterator;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Db\Sql;
+use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
+use Zend\Db\Table\Select as DbTableSelect;
+use Zend\Filter\FilterInterface;
+use Zend\Json\Json;
+use Zend\Paginator\Adapter\AdapterInterface;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View;
 
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Paginator implements Countable, IteratorAggregate
 {
@@ -173,12 +171,10 @@ class Paginator implements Countable, IteratorAggregate
      *
      * @param  mixed  $data
      * @param  string $adapter
-     * @param  array  $prefixPaths
      * @throws Exception\InvalidArgumentException
      * @return Paginator
      */
-    public static function factory($data, $adapter = self::INTERNAL_ADAPTER,
-                                   array $prefixPaths = null)
+    public static function factory($data, $adapter = self::INTERNAL_ADAPTER)
     {
         if ($data instanceof AdapterAggregateInterface) {
             return new self($data->getPaginatorAdapter());
@@ -187,13 +183,13 @@ class Paginator implements Countable, IteratorAggregate
         if ($adapter == self::INTERNAL_ADAPTER) {
             if (is_array($data)) {
                 $adapter = 'array';
-            } else if ($data instanceof DbTableSelect) {
+            } elseif ($data instanceof DbTableSelect) {
                 $adapter = 'db_table_select';
-            } else if ($data instanceof DbSelect) {
+            } elseif ($data instanceof DbSelect) {
                 $adapter = 'db_select';
-            } else if ($data instanceof Iterator) {
+            } elseif ($data instanceof Iterator) {
                 $adapter = 'iterator';
-            } else if (is_integer($data)) {
+            } elseif (is_integer($data)) {
                 $adapter = 'null';
             } else {
                 $type = (is_object($data)) ? get_class($data) : gettype($data);
@@ -377,7 +373,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         if ($adapter instanceof AdapterInterface) {
             $this->_adapter = $adapter;
-        } else if ($adapter instanceof AdapterAggregateInterface) {
+        } elseif ($adapter instanceof AdapterAggregateInterface) {
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
@@ -606,7 +602,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         if ($pageNumber == null) {
             $pageNumber = $this->getCurrentPageNumber();
-        } else if ($pageNumber < 0) {
+        } elseif ($pageNumber < 0) {
             $pageNumber = ($this->count() + 1) + $pageNumber;
         }
 

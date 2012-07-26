@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View;
@@ -30,8 +20,6 @@ use ArrayObject;
  * @todo       Move strict variables into variables object
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Variables extends ArrayObject
 {
@@ -39,22 +27,22 @@ class Variables extends ArrayObject
      * Strict variables flag; when on, undefined variables accessed in the view
      * scripts will trigger notices
      *
-     * @var bool 
+     * @var bool
      */
     protected $strictVars = false;
 
     /**
      * Constructor
-     * 
-     * @param  array $variables 
-     * @param  array $options 
+     *
+     * @param  array $variables
+     * @param  array $options
      * @return void
      */
-    public function __construct(array $variables = array(), array $options = array()) 
+    public function __construct(array $variables = array(), array $options = array())
     {
         parent::__construct(
-            $variables, 
-            ArrayObject::ARRAY_AS_PROPS, 
+            $variables,
+            ArrayObject::ARRAY_AS_PROPS,
             'ArrayIterator'
         );
 
@@ -63,8 +51,8 @@ class Variables extends ArrayObject
 
     /**
      * Configure object
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return Variables
      */
     public function setOptions(array $options)
@@ -85,8 +73,8 @@ class Variables extends ArrayObject
 
     /**
      * Set status of "strict vars" flag
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return Variables
      */
     public function setStrictVars($flag)
@@ -97,7 +85,7 @@ class Variables extends ArrayObject
 
     /**
      * Are we operating with strict variables?
-     * 
+     *
      * @return bool
      */
     public function isStrict()
@@ -107,8 +95,8 @@ class Variables extends ArrayObject
 
     /**
      * Assign many values at once
-     * 
-     * @param  array|object $spec 
+     *
+     * @param  array|object $spec
      * @return Variables
      * @throws Exception\InvalidArgumentException
      */
@@ -137,12 +125,12 @@ class Variables extends ArrayObject
     /**
      * Get the variable value
      *
-     * If the value has not been defined, a null value will be returned; if 
+     * If the value has not been defined, a null value will be returned; if
      * strict vars on in place, a notice will also be raised.
      *
      * Otherwise, returns _escaped_ version of the value.
-     * 
-     * @param  mixed $key 
+     *
+     * @param  mixed $key
      * @return void
      */
     public function offsetGet($key)
@@ -168,7 +156,7 @@ class Variables extends ArrayObject
 
     /**
      * Clear all variables
-     * 
+     *
      * @return void
      */
     public function clear()

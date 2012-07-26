@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
+
 namespace Zend\Db\Sql;
 
 /**
@@ -99,5 +108,18 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
         $this->assertEquals('DELETE FROM "foo" WHERE x = y', $this->delete->getSqlString());
 
+    }
+
+    /**
+     * @group pull-request-1813
+     * @covers Zend\Db\Sql\Delete::where
+     */
+    public function testDeleteWhereCombination()
+    {
+        $this->delete->where(array(
+            'one' => 1,
+            'two' => 2
+        ));
+        $this->assertCount(2, $this->delete->getRawState('where'));
     }
 }

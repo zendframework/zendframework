@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\EventManager,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteMatch,
-    Zend\Mvc\View\InjectViewModelListener,
-    Zend\View\Model\ViewModel;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\EventManager\EventManager;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\View\Http\InjectViewModelListener;
+use Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InjectViewModelListenerTest extends TestCase
 {
@@ -83,7 +70,7 @@ class InjectViewModelListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
 
         $expectedCallback = array($this->listener, 'injectViewModel');
         $expectedPriority = -100;
@@ -99,7 +86,7 @@ class InjectViewModelListenerTest extends TestCase
         }
         $this->assertTrue($found, 'Listener not found');
 
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $found     = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
@@ -117,14 +104,14 @@ class InjectViewModelListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(1, count($listeners));
         $events->detachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(0, count($listeners));
     }
 }

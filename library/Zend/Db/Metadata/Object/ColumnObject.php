@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
+
 namespace Zend\Db\Metadata\Object;
 
 /**
@@ -37,7 +38,7 @@ class ColumnObject
 
     /**
      *
-     * @var 
+     * @var
      */
     protected $ordinalPosition = null;
 
@@ -49,7 +50,7 @@ class ColumnObject
 
     /**
      *
-     * @var boolean 
+     * @var boolean
      */
     protected $isNullable = null;
 
@@ -79,9 +80,15 @@ class ColumnObject
 
     /**
      *
-     * @var type 
+     * @var type
      */
     protected $numericScale = null;
+
+    /**
+     *
+     * @var boolean
+     */
+    protected $numericUnsigned = null;
 
     /**
      *
@@ -89,36 +96,12 @@ class ColumnObject
      */
     protected $errata = array();
 
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
-
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
-
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
-
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
-
     /**
      * Constructor
-     * 
+     *
      * @param string $name
      * @param string $tableName
-     * @param string $schemaName 
+     * @param string $schemaName
      */
     public function __construct($name, $tableName, $schemaName = null)
     {
@@ -129,8 +112,8 @@ class ColumnObject
 
     /**
      * Set name
-     * 
-     * @param string $name 
+     *
+     * @param string $name
      */
     public function setName($name)
     {
@@ -139,8 +122,8 @@ class ColumnObject
 
     /**
      * Get name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {
@@ -149,7 +132,7 @@ class ColumnObject
 
     /**
      * Get table name
-     * 
+     *
      * @return string
      */
     public function getTableName()
@@ -159,7 +142,7 @@ class ColumnObject
 
     /**
      * Set table name
-     * 
+     *
      * @param string $tableName
      */
     public function setTableName($tableName)
@@ -170,8 +153,8 @@ class ColumnObject
 
     /**
      * Set schema name
-     * 
-     * @param string $schemaName 
+     *
+     * @param string $schemaName
      */
     public function setSchemaName($schemaName)
     {
@@ -180,8 +163,8 @@ class ColumnObject
 
     /**
      * Get schema name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getSchemaName()
     {
@@ -238,6 +221,14 @@ class ColumnObject
     {
         $this->isNullable = $isNullable;
         return $this;
+    }
+
+    /**
+     * @return bool $isNullable
+     */
+    public function isNullable()
+    {
+        return $this->isNullable;
     }
 
     /**
@@ -325,39 +316,30 @@ class ColumnObject
         return $this;
     }
 
-//    /**
-//     * @return the $characterSetName
-//     */
-//    public function getCharacterSetName()
-//    {
-//        return $this->characterSetName;
-//    }
-//
-//    /**
-//     * @param $characterSetName the $characterSetName to set
-//     */
-//    public function setCharacterSetName($characterSetName)
-//    {
-//        $this->characterSetName = $characterSetName;
-//        return $this;
-//    }
-//
-//    /**
-//     * @return the $collationName
-//     */
-//    public function getCollationName()
-//    {
-//        return $this->collationName;
-//    }
-//
-//    /**
-//     * @param $collationName the $collationName to set
-//     */
-//    public function setCollationName($collationName)
-//    {
-//        $this->collationName = $collationName;
-//        return $this;
-//    }
+    /**
+     * @return boolean
+     */
+    public function getNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
+
+    /**
+     * @param $numericUnsigned boolean
+     */
+    public function setNumericUnsigned($numericUnsigned)
+    {
+        $this->numericUnsigned = $numericUnsigned;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
 
     /**
      * @return the $errata
@@ -365,6 +347,29 @@ class ColumnObject
     public function getErratas()
     {
         return $this->errata;
+    }
+
+    /**
+     * @return the $errata
+     */
+    public function setErratas(array $erratas)
+    {
+        foreach ($erratas as $name => $value) {
+            $this->setErrata($name, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $errataName
+     * @return ColumnMetadata
+     */
+    public function getErrata($errataName)
+    {
+        if (array_key_exists($errataName, $this->errata)) {
+            return $this->errata[$errataName];
+        }
+        return null;
     }
 
     /**

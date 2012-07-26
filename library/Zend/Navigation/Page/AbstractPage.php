@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage Page
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Navigation
  */
 
 namespace Zend\Navigation\Page;
 
-use Traversable,
-    Zend\Acl\Resource\ResourceInterface as AclResource,
-    Zend\Navigation\AbstractContainer,
-    Zend\Navigation\Exception,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Exception;
+use Zend\Permissions\Acl\Resource\ResourceInterface as AclResource;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Base class for Zend\Navigation\Page pages
@@ -33,8 +22,6 @@ use Traversable,
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractPage extends AbstractContainer
 {
@@ -115,7 +102,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * ACL resource associated with this page
      *
-     * @var string|\Zend\Acl\Resource|null
+     * @var string|AclResource|null
      */
     protected $resource;
 
@@ -656,15 +643,15 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Sets ACL resource assoicated with this page
      *
-     * @param  string|AclResource $resource [optional] resource to associate 
-     *                                      with page. Default is null, which 
+     * @param  string|AclResource $resource [optional] resource to associate
+     *                                      with page. Default is null, which
      *                                      sets no resource.
      * @return AbstractPage fluent interface, returns self
      * @throws Exception\InvalidArgumentException if $resource is invalid
      */
     public function setResource($resource = null)
     {
-        if (null === $resource 
+        if (null === $resource
             || is_string($resource)
             || $resource instanceof AclResource
         ) {
@@ -672,7 +659,7 @@ abstract class AbstractPage extends AbstractContainer
         } else {
             throw new Exception\InvalidArgumentException(
                 'Invalid argument: $resource must be null, a string, ' .
-                'or an instance of Zend\Acl\Resource'
+                'or an instance of Zend\Permissions\Acl\Resource\ResourceInterface'
             );
         }
 
@@ -680,7 +667,7 @@ abstract class AbstractPage extends AbstractContainer
     }
 
     /**
-     * Returns ACL resource assoicated with this page
+     * Returns ACL resource associated with this page
      *
      * @return string|AclResource|null  ACL resource or null
      */
@@ -791,7 +778,7 @@ abstract class AbstractPage extends AbstractContainer
      */
     public function isVisible($recursive = false)
     {
-        if ($recursive 
+        if ($recursive
             && isset($this->parent)
             && $this->parent instanceof self
         ) {
@@ -1116,7 +1103,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @return string  a hash code value for this page
      */
-    public final function hashCode()
+    final public function hashCode()
     {
         return spl_object_hash($this);
     }

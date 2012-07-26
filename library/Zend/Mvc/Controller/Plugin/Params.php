@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\InjectApplicationEventInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Params extends AbstractPlugin
 {
@@ -41,9 +28,60 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function __invoke($param, $default = null)
+    public function __invoke($param = NULL, $default = null)
     {
+        if ($param === NULL) {
+            return $this;
+        }
         return $this->fromRoute($param, $default);
+    }
+
+    /**
+     * Retrieve a named $_FILES value
+     * 
+     * @param  string $name 
+     * @param  mixed $default 
+     * @return array|\ArrayAccess|null
+     */
+    public function fromFiles($name, $default = null)
+    {
+        return $this->getController()->getRequest()->getFiles($name, $default);
+    }
+
+    /**
+     * Get a header
+     * 
+     * @param  string $header 
+     * @param  mixed $default 
+     * @return null|\Zend\Http\Header\HeaderInterface
+     */
+    public function fromHeader($header, $default = null)
+    {
+        return $this->getController()->getRequest()->getHeaders($header, $default);
+    }
+
+    /**
+     * Get a param from POST.
+     *
+     * @param string $param
+     * @param mixed $default
+     * @return mixed
+     */
+    public function fromPost($param, $default = null)
+    {
+        return $this->getController()->getRequest()->getPost($param, $default);
+    }
+
+    /**
+     * Get a param from QUERY.
+     *
+     * @param string $param
+     * @param mixed $default
+     * @return mixed
+     */
+    public function fromQuery($param, $default = null)
+    {
+        return $this->getController()->getRequest()->getQuery($param, $default);
     }
 
     /**
@@ -52,6 +90,7 @@ class Params extends AbstractPlugin
      * @param string $param
      * @param mixed $default
      * @return mixed
+     * @throws RuntimeException
      */
     public function fromRoute($param, $default = null)
     {
@@ -64,29 +103,5 @@ class Params extends AbstractPlugin
         }
 
         return $controller->getEvent()->getRouteMatch()->getParam($param, $default);
-    }
-
-    /**
-     * Get a param from POST.
-     *
-     * @param string $param
-     * @param mixed $default
-     * @return mixed
-     */
-    public function fromPost($param, $default = null)
-    {
-        return $this->getController()->getRequest()->post()->get($param, $default);
-    }
-
-    /**
-     * Get a param from QUERY.
-     *
-     * @param string $param
-     * @param mixed $default
-     * @return mixed
-     */
-    public function fromQuery($param, $default = null)
-    {
-        return $this->getController()->getRequest()->query()->get($param, $default);
     }
 }

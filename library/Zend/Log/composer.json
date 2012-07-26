@@ -1,0 +1,26 @@
+{
+    "name": "zendframework/zend-log",
+    "description": "component for general purpose logging",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "log",
+        "logging"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Log": ""
+        }
+    },
+    "target-dir": "Zend/Log",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "ext-mongo": "*",
+        "zendframework/zend-db": "Zend\\Db component",
+        "zendframework/zend-mail": "Zend\\Mail component",
+        "zendframework/zend-validator": "Zend\\Validator component"
+    }
+}

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -28,8 +17,6 @@ use Zend\Form\View\Helper\FormInput as FormInputHelper;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormInputTest extends CommonTestCase
 {
@@ -318,7 +305,6 @@ class FormInputTest extends CommonTestCase
             'style'              => 'value',
             'tabindex'           => 'value',
             'title'              => 'value',
-            'value'              => 'value',
             'width'              => 'value',
             'wrap'               => 'value',
             'xml:base'           => 'value',
@@ -330,6 +316,7 @@ class FormInputTest extends CommonTestCase
             'arbitrary'          => 'value',
             'meta'               => 'value',
         ));
+        $element->setValue('value');
         return $element;
     }
 
@@ -340,7 +327,14 @@ class FormInputTest extends CommonTestCase
     {
         $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);
-        $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+        switch ($attribute) {
+            case 'value':
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                break;
+            default:
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                break;
+        }
         $this->$assertion($expect, $markup);
     }
 
@@ -403,6 +397,7 @@ class FormInputTest extends CommonTestCase
     }
 
     /**
+     * @group ZF2-391
      * @dataProvider booleanAttributeTypes
      */
     public function testBooleanAttributeTypesAreRenderedCorrectly($attribute, $on, $off)
@@ -414,6 +409,22 @@ class FormInputTest extends CommonTestCase
         $this->assertContains($expect, $markup, sprintf("Enabled value for %s should be '%s'; received %s", $attribute, $on, $markup));
 
         $element->setAttribute($attribute, false);
+        $markup = $this->helper->render($element);
+        $expect = sprintf('%s="%s"', $attribute, $off);
+
+        if ($off !== '') {
+            $this->assertContains($expect, $markup, sprintf("Disabled value for %s should be '%s'; received %s", $attribute, $off, $markup));
+        } else {
+            $this->assertNotContains($expect, $markup, sprintf("Disabled value for %s should not be rendered; received %s", $attribute, $markup));
+        }
+
+        // ZF2-391 : Ability to use non-boolean values that match expected end-value
+        $element->setAttribute($attribute, $on);
+        $markup = $this->helper->render($element);
+        $expect = sprintf('%s="%s"', $attribute, $on);
+        $this->assertContains($expect, $markup, sprintf("Enabled value for %s should be '%s'; received %s", $attribute, $on, $markup));
+
+        $element->setAttribute($attribute, $off);
         $markup = $this->helper->render($element);
         $expect = sprintf('%s="%s"', $attribute, $off);
 

@@ -1,43 +1,31 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Entry;
 
-use Zend\Date,
-    Zend\Feed\Writer,
-    Zend\Feed\Writer\Renderer,
-    Zend\Uri,
-    DOMDocument,
-    DOMElement;
+use DateTime;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
+use Zend\Uri;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
-     * 
+     *
      * @param  Writer\Entry $container
      * @return void
      */
@@ -45,10 +33,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     {
         parent::__construct($container);
     }
-    
+
     /**
      * Render RSS entry
-     * 
+     *
      * @return Rss
      */
     public function render()
@@ -58,7 +46,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $this->_dom->substituteEntities = false;
         $entry = $this->_dom->createElement('item');
         $this->_dom->appendChild($entry);
-        
+
         $this->_setTitle($this->_dom, $entry);
         $this->_setDescription($this->_dom, $entry);
         $this->_setDateCreated($this->_dom, $entry);
@@ -78,13 +66,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
 
         return $this;
     }
-    
+
     /**
      * Set entry title
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -106,13 +95,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $text = $dom->createTextNode($this->getDataContainer()->getTitle());
         $title->appendChild($text);
     }
-    
+
     /**
      * Set entry description
-     * 
+     *
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
@@ -138,12 +128,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $text = $dom->createCDATASection($this->getDataContainer()->getDescription());
         $subtitle->appendChild($text);
     }
-    
+
     /**
      * Set date entry was last modified
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
@@ -155,16 +145,16 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $updated = $dom->createElement('pubDate');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(Date\Date::RSS)
+            $this->getDataContainer()->getDateModified()->format(DateTime::RSS)
         );
         $updated->appendChild($text);
     }
-    
+
     /**
      * Set date entry was created
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
@@ -178,12 +168,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             );
         }
     }
-    
+
     /**
      * Set entry authors
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -203,13 +193,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $root->appendChild($author);
         }
     }
-    
+
     /**
      * Set entry enclosure
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {
@@ -251,12 +242,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $enclosure->setAttribute('url', $data['uri']);
         $root->appendChild($enclosure);
     }
-    
+
     /**
      * Set link to entry
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
@@ -269,12 +260,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $text = $dom->createTextNode($this->getDataContainer()->getLink());
         $link->appendChild($text);
     }
-    
+
     /**
      * Set entry identifier
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
@@ -296,12 +287,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $id->setAttribute('isPermaLink', 'false');
         }
     }
-    
+
     /**
      * Set link to entry comments
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
@@ -315,12 +306,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $clink->appendChild($text);
         $root->appendChild($clink);
     }
-    
+
     /**
      * Set entry categories
-     * 
-     * @param DOMDocument $dom 
-     * @param DOMElement $root 
+     *
+     * @param DOMDocument $dom
+     * @param DOMElement $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)

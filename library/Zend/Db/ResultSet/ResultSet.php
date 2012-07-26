@@ -24,7 +24,7 @@ class ResultSet extends AbstractResultSet
 
     /**
      * Allowed return types
-     * 
+     *
      * @var array
      */
     protected $allowedReturnTypes = array(
@@ -39,14 +39,14 @@ class ResultSet extends AbstractResultSet
 
     /**
      * Return type to use when returning an object from the set
-     * 
+     *
      * @var ResultSet::TYPE_ARRAYOBJECT|ResultSet::TYPE_ARRAY
      */
     protected $returnType = self::TYPE_ARRAYOBJECT;
 
     /**
      * Constructor
-     * 
+     *
      * @param  null|ArrayObject $arrayObjectPrototype
      * @return void
      */
@@ -60,7 +60,7 @@ class ResultSet extends AbstractResultSet
 
     /**
      * Set the row object prototype
-     * 
+     *
      * @param  ArrayObject $arrayObjectPrototype
      * @return ResultSet
      */
@@ -78,7 +78,7 @@ class ResultSet extends AbstractResultSet
 
     /**
      * Get the row object prototype
-     * 
+     *
      * @return ArrayObject
      */
     public function getArrayObjectPrototype()
@@ -88,7 +88,7 @@ class ResultSet extends AbstractResultSet
 
     /**
      * Get the return type to use when returning objects from the set
-     * 
+     *
      * @return string
      */
     public function getReturnType()

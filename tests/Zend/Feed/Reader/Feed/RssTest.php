@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Reader\Feed;
+
+use DateTime;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
 * @category Zend
 * @package Zend_Feed
 * @subpackage UnitTests
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
@@ -36,28 +24,18 @@ class RssTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
-    
+
     protected $_expectedCats = array();
-    
+
     protected $_expectedCatsRdf = array();
-    
+
     protected $_expectedCatsAtom = array();
 
     public function setup()
     {
         Reader\Reader::reset();
-        if (\Zend\Registry::isRegistered('Zend_Locale')) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Locale']);
-        }
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Rss';
-        $this->_options = Date\Date::setOptions();
-        foreach($this->_options as $k=>$v) {
-            if (is_null($v)) {
-                unset($this->_options[$k]);
-            }
-        }
-        Date\Date::setOptions(array('format_type'=>'iso'));
+
         $this->_expectedCats = array(
             array(
                 'term' => 'topic1',
@@ -104,11 +82,6 @@ class RssTest extends \PHPUnit_Framework_TestCase
                 'label' => 'Cat & Dog'
             )
         );
-    }
-    
-    public function teardown()
-    {
-        Date\Date::setOptions($this->_options);
     }
 
     /**
@@ -2106,9 +2079,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/rss20.xml')
         );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getLastBuildDate()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertTrue($edate == $feed->getLastBuildDate());
     }
 
     public function testGetsLastBuildDateFromRss20_None()
@@ -2120,307 +2092,56 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Date Modified (Unencoded Text)
+     * Get DateModified (Unencoded Text)
+     * @dataProvider dateModifiedProvider
      */
-    public function testGetsDateModifiedFromRss20()
+    public function testGetsDateModified($path, $edate)
     {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20.xml')
+        $feed  = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath . $path)
         );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
+
+        $this->assertTrue($edate == $feed->getDateModified());
     }
 
-    /**
-     * @group ZF-8702
-     */
-    public function testParsesCorrectDateIfMissingOffsetWhenSystemUsesUSLocale()
+    public function dateModifiedProvider()
     {
-        $locale = new \Zend\Locale\Locale('en_US');
-        \Zend\Registry::set('Zend_Locale', $locale);
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
+        $iso = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $us  = DateTime::createFromFormat(DateTime::ISO8601, '2010-01-04T02:14:00-0600');
+        return array(
+            array('/datemodified/plain/rss20.xml', $iso),
+            array('/datemodified/plain/rss20_en_US.xml', $us),
+            array('/datemodified/plain/dc10/rss20.xml', $iso),
+            array('/datemodified/plain/dc10/rss094.xml', $iso),
+            array('/datemodified/plain/dc10/rss093.xml', $iso),
+            array('/datemodified/plain/dc10/rss092.xml', $iso),
+            array('/datemodified/plain/dc10/rss091.xml', $iso),
+            array('/datemodified/plain/dc10/rss10.xml', $iso),
+            array('/datemodified/plain/dc10/rss090.xml', $iso),
+            array('/datemodified/plain/dc11/rss20.xml', $iso),
+            array('/datemodified/plain/dc11/rss094.xml', $iso),
+            array('/datemodified/plain/dc11/rss093.xml', $iso),
+            array('/datemodified/plain/dc11/rss092.xml', $iso),
+            array('/datemodified/plain/dc11/rss091.xml', $iso),
+            array('/datemodified/plain/dc11/rss10.xml', $iso),
+            array('/datemodified/plain/dc11/rss090.xml', $iso),
+
+            array('/datemodified/plain/atom10/rss20.xml', $iso),
+            array('/datemodified/plain/atom10/rss094.xml', $iso),
+            array('/datemodified/plain/atom10/rss093.xml', $iso),
+            array('/datemodified/plain/atom10/rss092.xml', $iso),
+            array('/datemodified/plain/atom10/rss091.xml', $iso),
+            array('/datemodified/plain/atom10/rss10.xml', $iso),
+            array('/datemodified/plain/atom10/rss090.xml', $iso),
+
+            array('/datemodified/plain/none/rss20.xml', null),
+            array('/datemodified/plain/none/rss094.xml', null),
+            array('/datemodified/plain/none/rss093.xml', null),
+            array('/datemodified/plain/none/rss092.xml', null),
+            array('/datemodified/plain/none/rss091.xml', null),
+            array('/datemodified/plain/none/rss10.xml', null),
+            array('/datemodified/plain/none/rss090.xml', null),
         );
-        $fdate = $feed->getDateModified();
-        $edate = new Date\Date;
-        $edate->set('2010-01-04T02:14:00-0600', Date\Date::ISO_8601);
-        \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
-        $this->assertTrue($edate->equals($fdate));
-    }
-
-    // DC 1.0
-
-    public function testGetsDateModifiedFromRss20_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss20.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss094_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss094.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss093_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss093.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss092_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss092.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss091_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss091.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss10_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss10.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss090_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss090.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    // DC 1.1
-
-    public function testGetsDateModifiedFromRss20_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss20.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss094_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss094.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss093_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss093.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss092_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss092.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss091_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss091.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss10_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss10.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss090_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss090.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    // Atom 1.0
-
-    public function testGetsDateModifiedFromRss20_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss20.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss094_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss094.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss093_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss093.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss092_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss092.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss091_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss091.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss10_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss10.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss090_atom10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss090.xml')
-        );
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($feed->getDateModified()));
-    }
-
-    // Missing DateModified
-
-    public function testGetsDateModifiedFromRss20_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss20.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss094_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss094.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss093_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss093.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss092_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss092.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss091_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss091.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss10_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss10.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss090_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss090.xml')
-        );
-        $this->assertEquals(null, $feed->getDateModified());
     }
 
     /**
@@ -2560,13 +2281,13 @@ class RssTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(null, $feed->getHubs());
     }
-    
+
     /**
      * Get category data
      */
-    
+
     // RSS 2.0
-    
+
     public function testGetsCategoriesFromRss20()
     {
         $feed = Reader\Reader::importString(
@@ -2575,9 +2296,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCats, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     // DC 1.0
-    
+
     public function testGetsCategoriesFromRss090_Dc10()
     {
         $feed = Reader\Reader::importString(
@@ -2586,7 +2307,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss091_Dc10()
     {
         $feed = Reader\Reader::importString(
@@ -2595,7 +2316,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss092_Dc10()
     {
         $feed = Reader\Reader::importString(
@@ -2604,7 +2325,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss093_Dc10()
     {
         $feed = Reader\Reader::importString(
@@ -2613,7 +2334,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss094_Dc10()
     {
         $feed = Reader\Reader::importString(
@@ -2622,7 +2343,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss10_Dc10()
     {
         $feed = Reader\Reader::importString(
@@ -2631,9 +2352,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     // DC 1.1
-    
+
     public function testGetsCategoriesFromRss090_Dc11()
     {
         $feed = Reader\Reader::importString(
@@ -2642,7 +2363,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss091_Dc11()
     {
         $feed = Reader\Reader::importString(
@@ -2651,7 +2372,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss092_Dc11()
     {
         $feed = Reader\Reader::importString(
@@ -2660,7 +2381,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss093_Dc11()
     {
         $feed = Reader\Reader::importString(
@@ -2669,7 +2390,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss094_Dc11()
     {
         $feed = Reader\Reader::importString(
@@ -2678,7 +2399,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss10_Dc11()
     {
         $feed = Reader\Reader::importString(
@@ -2687,9 +2408,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     // Atom 1.0
-    
+
     public function testGetsCategoriesFromRss090_Atom10()
     {
         $feed = Reader\Reader::importString(
@@ -2698,7 +2419,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss091_Atom10()
     {
         $feed = Reader\Reader::importString(
@@ -2707,7 +2428,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss092_Atom10()
     {
         $feed = Reader\Reader::importString(
@@ -2716,7 +2437,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss093_Atom10()
     {
         $feed = Reader\Reader::importString(
@@ -2725,7 +2446,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss094_Atom10()
     {
         $feed = Reader\Reader::importString(
@@ -2734,7 +2455,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss10_Atom10()
     {
         $feed = Reader\Reader::importString(
@@ -2743,9 +2464,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
-    
+
     // No Categories In Entry
-    
+
     public function testGetsCategoriesFromRss20_None()
     {
         $feed = Reader\Reader::importString(
@@ -2754,7 +2475,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), (array) $feed->getCategories());
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss090_None()
     {
         $feed = Reader\Reader::importString(
@@ -2763,7 +2484,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), (array) $feed->getCategories());
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss091_None()
     {
         $feed = Reader\Reader::importString(
@@ -2772,7 +2493,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), (array) $feed->getCategories());
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss092_None()
     {
         $feed = Reader\Reader::importString(
@@ -2781,7 +2502,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), (array) $feed->getCategories());
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss093_None()
     {
         $feed = Reader\Reader::importString(
@@ -2790,7 +2511,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), (array) $feed->getCategories());
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss094_None()
     {
         $feed = Reader\Reader::importString(
@@ -2799,7 +2520,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), (array) $feed->getCategories());
         $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromRss10_None()
     {
         $feed = Reader\Reader::importString(

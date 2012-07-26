@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
@@ -28,8 +18,6 @@ use Zend\Stdlib\ArrayUtils;
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Encrypt extends AbstractFilter
 {
@@ -67,16 +55,17 @@ class Encrypt extends AbstractFilter
      *
      * @param  string|array $options (Optional) Encryption options
      * @return Encrypt
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($options = null)
     {
         if (is_string($options)) {
             $adapter = $options;
-        } else if (isset($options['adapter'])) {
+        } elseif (isset($options['adapter'])) {
             $adapter = $options['adapter'];
             unset($options['adapter']);
         } else {
-            $adapter = 'Mcrypt';
+            $adapter = 'BlockCipher';
         }
 
         if (!is_array($options)) {
@@ -110,6 +99,7 @@ class Encrypt extends AbstractFilter
      *
      * @param string       $method  Method to call
      * @param string|array $options Options for this method
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $options)
     {

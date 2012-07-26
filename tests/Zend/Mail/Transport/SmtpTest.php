@@ -1,38 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Transport;
 
-use Zend\Mail\Headers,
-    Zend\Mail\Message,
-    Zend\Mail\Transport\Smtp,
-    Zend\Mail\Transport\SmtpOptions,
-    ZendTest\Mail\TestAsset\SmtpProtocolSpy;
+use Zend\Mail\Headers;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp;
+use Zend\Mail\Transport\SmtpOptions;
+use ZendTest\Mail\TestAsset\SmtpProtocolSpy;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
 class SmtpTest extends \PHPUnit_Framework_TestCase
@@ -62,7 +49,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
                 ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
                 ->setSubject('Testing Zend\Mail\Transport\Sendmail')
                 ->setBody('This is only a test.');
-        $message->headers()->addHeaders(array(
+        $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
         return $message;
@@ -71,7 +58,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
     /**
      *  Per RFC 2822 3.6
      */
-    public function testSendMailWithoutMinimalHeaders() {
+    public function testSendMailWithoutMinimalHeaders()
+    {
         $this->setExpectedException(
             'Zend\Mail\Transport\Exception\RuntimeException',
             'transport expects either a Sender or at least one From address in the Message; none provided'
@@ -84,7 +72,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
      *  Per RFC 2821 3.3 (page 18)
      *  - RCPT (recipient) must be called before DATA (headers or body)
      */
-    public function testSendMailWithoutRecipient() {
+    public function testSendMailWithoutRecipient()
+    {
         $this->setExpectedException(
             'Zend\Mail\Transport\Exception\RuntimeException',
             'at least one recipient if the message has at least one header or body'
@@ -94,7 +83,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->transport->send($message);
     }
 
-    public function testSendMinimalMail() {
+    public function testSendMinimalMail()
+    {
         $headers = new Headers();
         $headers->addHeaderLine('Date', 'Sun, 10 Jun 2012 20:07:24 +0200');
         $message = new Message();
@@ -151,25 +141,25 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('matthew', $connection->getUsername());
         $this->assertEquals('password', $connection->getPassword());
     }
-    
+
     public function testSetAutoDisconnect()
     {
         $this->transport->setAutoDisconnect(false);
         $this->assertFalse($this->transport->getAutoDisconnect());
     }
-    
+
     public function testGetDefaultAutoDisconnectValue()
     {
         $this->assertTrue($this->transport->getAutoDisconnect());
     }
-    
+
     public function testAutoDisconnectTrue()
     {
         $this->connection->connect();
         unset($this->transport);
         $this->assertFalse($this->connection->isConnected());
     }
-    
+
     public function testAutoDisconnectFalse()
     {
         $this->connection->connect();
@@ -177,7 +167,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         unset($this->transport);
         $this->assertTrue($this->connection->isConnected());
     }
-    
+
     public function testDisconnect()
     {
         $this->connection->connect();

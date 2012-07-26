@@ -1,36 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator as BaseApcIterator,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\IteratorInterface;
+use APCIterator as BaseApcIterator;
+use Zend\Cache\Storage\IteratorInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ApcIterator implements IteratorInterface
 {
@@ -81,7 +67,7 @@ class ApcIterator implements IteratorInterface
     /**
      * Get storage instance
      *
-     * @return StorageInterface
+     * @return Apc
      */
     public function getStorage()
     {
@@ -112,10 +98,10 @@ class ApcIterator implements IteratorInterface
 
     /* Iterator */
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -134,10 +120,10 @@ class ApcIterator implements IteratorInterface
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
      */
     public function key()
     {
@@ -157,20 +143,20 @@ class ApcIterator implements IteratorInterface
         $this->baseIterator->next();
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return boolean
      */
     public function valid()
     {
         return $this->baseIterator->valid();
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

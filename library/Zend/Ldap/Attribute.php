@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
@@ -27,8 +17,6 @@ use DateTime;
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Attribute
 {
@@ -58,7 +46,7 @@ class Attribute
                     $valArray[] = $v;
                 }
             }
-        } else if ($value !== null) {
+        } elseif ($value !== null) {
             $value = self::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
@@ -95,10 +83,10 @@ class Attribute
                 $retArray[] = self::valueFromLDAP($v);
             }
             return $retArray;
-        } else if (is_int($index)) {
+        } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
-            } else if ($index >= 0 && $index < count($data[$attribName])) {
+            } elseif ($index >= 0 && $index < count($data[$attribName])) {
                 return self::valueFromLDAP($data[$attribName][$index]);
             } else {
                 return null;
@@ -260,7 +248,7 @@ class Attribute
                 $password = '"' . $password . '"';
                 if (function_exists('mb_convert_encoding')) {
                     $password = mb_convert_encoding($password, 'UTF-16LE', 'UTF-8');
-                } else if (function_exists('iconv')) {
+                } elseif (function_exists('iconv')) {
                     $password = iconv('UTF-8', 'UTF-16LE', $password);
                 } else {
                     $len = strlen($password);
@@ -375,7 +363,7 @@ class Attribute
     {
         if ($value instanceof DateTime) {
             return $value->format('U');
-        } else if (is_string($value)) {
+        } elseif (is_string($value)) {
             try {
                 return Converter\Converter::fromLdapDateTime($value, false)->format('U');
             } catch (Converter\Exception\InvalidArgumentException $e) {

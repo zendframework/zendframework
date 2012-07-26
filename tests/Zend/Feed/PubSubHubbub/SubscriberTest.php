@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\PubSubHubbub;
@@ -31,16 +21,14 @@ use Zend\Http\Client as HttpClient;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SubscriberTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Subscriber */
     protected $_subscriber = null;
-    
+
     protected $_adapter = null;
-    
+
     protected $_tableGateway = null;
 
     public function setUp()
@@ -290,7 +278,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetStorageImplementation()
     {
-	$storage = new Subscription($this->_tableGateway);
+        $storage = new Subscription($this->_tableGateway);
         $this->_subscriber->setStorage($storage);
         $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
     }
@@ -301,8 +289,9 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
         $this->_subscriber->getStorage();
     }
-    
-    protected function _getCleanMock($className) {
+
+    protected function _getCleanMock($className)
+    {
         $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();

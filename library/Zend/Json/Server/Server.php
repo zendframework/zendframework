@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Json
  */
 
 namespace Zend\Json\Server;
 
-use ReflectionFunction,
-    ReflectionMethod,
-    Zend\Server\AbstractServer,
-    Zend\Server\Definition,
-    Zend\Server\Method,
-    Zend\Server\Reflection;
+use ReflectionFunction;
+use ReflectionMethod;
+use Zend\Server\AbstractServer;
+use Zend\Server\Definition;
+use Zend\Server\Method;
+use Zend\Server\Reflection;
 
 /**
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Server extends AbstractServer
 {
@@ -266,29 +254,6 @@ class Server extends AbstractServer
             $this->setResponse(new Response\Http());
         }
         return $this->_response;
-    }
-
-    /**
-     * Set flag indicating whether or not to auto-emit response
-     *
-     * @param  bool $flag
-     * @return Server
-     * @deprecated Left just for BC, drop it as soon as not used by anyone - use setReturnResponse() with negation instead.
-     */
-    public function setAutoEmitResponse($flag)
-    {
-        return $this->setReturnResponse(!$flag);
-    }
-
-    /**
-     * Will we auto-emit the response?
-     *
-     * @return bool
-     * @deprecated Left just for BC, drop it as soon as not used by anyone - use getReturnResponse() with negation instead.
-     */
-    public function autoEmitResponse()
-    {
-        return !$this->getReturnResponse();
     }
 
     /**
@@ -549,8 +514,8 @@ class Server extends AbstractServer
             if ('function' == $callback->getType()) {
                 $reflection = new ReflectionFunction( $callback->getFunction() );
             } else {
-                
-                $reflection = new ReflectionMethod( 
+
+                $reflection = new ReflectionMethod(
                     $callback->getClass(),
                     $callback->getMethod()
                 );

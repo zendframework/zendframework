@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace ZendTest\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
-use Zend\Date\Date;
 use Zend\Ldap\Converter\Converter;
 
 /**
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
 class ConverterTest extends \PHPUnit_Framework_TestCase
@@ -84,11 +70,11 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
                         'utc' => false), '20100512131445+0300'),
             array(array('date'=> '2010-05-12 13:14:45+0300',
                         'utc' => true), '20100512101445Z'),
-            array(array('date'=> new Date('2010-05-12T13:14:45+0300', Date::ISO_8601),
+            array(array('date'=> DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
                         'utc' => true), '20100512101445Z'),
-            array(array('date'=> new Date('2010-05-12T13:14:45+0300', Date::ISO_8601),
+            array(array('date'=> DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
                         'utc' => false), '20100512131445+0300'),
-            array(array('date'=> new Date('0', Date::TIMESTAMP),
+            array(array('date'=> date_timestamp_set(new DateTime(), 0),
                         'utc' => true), '19700101000000Z'),
         );
     }
@@ -153,7 +139,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
                              'type' => 0)),
             array('FALSE', array('value'=> 0,
                                  'type' => 1)),
-            array('19700101000000Z', array('value'=> new Date('1970-01-01T00:00:00+0000', Date::ISO_8601),
+            array('19700101000000Z', array('value'=> DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
                                            'type' => 0)),
 
         );
@@ -192,6 +178,11 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider fromLdapDateTimeProvider
+     *
+     * @param DateTime $expected
+     * @param string   $convert
+     * @param boolean  $utc
+     * @return void
      */
     public function testFromLdapDateTime($expected, $convert, $utc)
     {

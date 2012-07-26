@@ -13,9 +13,8 @@ namespace Zend\Db\Exception;
 /**
  * @category   Zend
  * @package    Zend_Db
- * @subpackage Adapter
+ * @subpackage Exception
  */
 interface ExceptionInterface
 {
-
 }

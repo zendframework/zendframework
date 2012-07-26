@@ -12,11 +12,11 @@ namespace Zend\ModuleManager\Exception;
 
 /**
  * Invalid Argument Exception
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
-    ExceptionInterface
-{}
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+{
+}

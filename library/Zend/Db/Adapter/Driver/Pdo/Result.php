@@ -10,10 +10,10 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ResultInterface;
 use Iterator;
 use PDO as PDOResource;
 use PDOStatement;
+use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
 
 /**

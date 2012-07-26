@@ -10,12 +10,12 @@
 
 namespace Zend\Http;
 
+use ArrayIterator;
+use Countable;
+use Iterator;
+use Traversable;
 use Zend\Http\HeaderLoader;
 use Zend\Loader\PluginClassLocator;
-use Iterator;
-use Countable;
-use Traversable;
-use ArrayIterator;
 
 /**
  * Basic HTTP headers collection functionality
@@ -25,7 +25,7 @@ use ArrayIterator;
  * @package    Zend_Http
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
  */
-class Headers implements Iterator, Countable
+class Headers implements Countable, Iterator
 {
     /**
      * @var \Zend\Loader\PluginClassLoader
@@ -195,7 +195,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Add a Header to this container, for raw values @see addHeaderLine() and addHeaders()
-     * 
+     *
      * @param  Header\HeaderInterface $header
      * @return Headers
      */
@@ -229,7 +229,7 @@ class Headers implements Iterator, Countable
      * Clear all headers
      *
      * Removes all headers from queue
-     * 
+     *
      * @return Headers
      */
     public function clearHeaders()
@@ -240,7 +240,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Get all headers of a certain name/type
-     * 
+     *
      * @param  string $name
      * @return bool|Header\HeaderInterface|ArrayIterator
      */
@@ -279,7 +279,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Test for existence of a type of header
-     * 
+     *
      * @param  string $name
      * @return bool
      */

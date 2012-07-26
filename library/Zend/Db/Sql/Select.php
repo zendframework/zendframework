@@ -7,13 +7,14 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
+
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 
 /**
  * @category   Zend
@@ -30,7 +31,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     const SPECIFICATION_SELECT = 'select';
     const SPECIFICATION_JOIN = 'join';
-    const SPECIFICATION_JOIN_ALIAS = 'joinAlias';
     const SPECIFICATION_WHERE = 'where';
     const SPECIFICATION_GROUP = 'group';
     const SPECIFICATION_HAVING = 'having';
@@ -134,7 +134,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param  null|string $table
      * @return void
      */
@@ -151,7 +151,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create from clause
-     * 
+     *
      * @param  string|array|TableIdentifier $table
      * @param  null|string $schema
      * @return Select
@@ -166,8 +166,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             throw new Exception\InvalidArgumentException('$table must be a string, array, or an instance of TableIdentifier');
         }
 
-        if (is_array($table)) {
-            $table = new TableIdentifier($table);
+        if (is_array($table) && (!is_string(key($table)) || count($table) !== 1)) {
+            throw new Exception\InvalidArgumentException('from() expects $table as an array is a single element associative array');
         }
 
         $this->table = $table;
@@ -200,15 +200,18 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create join clause
-     * 
-     * @param  string|array $name 
-     * @param  string $on 
-     * @param  string|array $columns 
+     *
+     * @param  string|array $name
+     * @param  string $on
+     * @param  string|array $columns
      * @param  string $type one of the JOIN_* constants
      * @return Select
      */
     public function join($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER)
     {
+        if (is_array($name) && (!is_string(key($name)) || count($name) !== 1)) {
+            throw new Exception\InvalidArgumentException('join() expects $name as an array is a single element associative array');
+        }
         if (!is_array($columns)) {
             $columns = array($columns);
         }
@@ -223,8 +226,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create where clause
-     * 
-     * @param  Where|\Closure|string|array $predicate 
+     *
+     * @param  Where|\Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @return Select
      */
@@ -423,30 +426,32 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             return null;
         }
 
-        // create quoted table name to use in columns processing
-        if ($this->table instanceof TableIdentifier) {
-            list($table, $schema, $alias) = $this->table->getTableAndSchema();
-            $table = $platform->quoteIdentifier($table);
-            if ($schema) {
-                $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
-            }
-            
-            if ($alias) {
-                $alias = $platform->quoteIdentifier($alias);
-                $table = $table . ' AS ' . $alias;
-            }
-        } else {
-            $table = $platform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = $alias = null;
+
+        if (is_array($table)) {
+            $alias = key($this->table);
+            $table = current($this->table);
         }
 
-        $quotedTable = '';
-        if ($this->prefixColumnsWithTable) {
-            if (isset($alias)) {
-                $quotedTable = $alias . $platform->getIdentifierSeparator();
-            } else {
-                $quotedTable = $table . $platform->getIdentifierSeparator();
-            }
+        // create quoted table name to use in columns processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
         }
+
+        $table = $platform->quoteIdentifier($table);
+        if ($schema) {
+            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
+        }
+
+        if ($alias) {
+            $fromTable = $platform->quoteIdentifier($alias);
+            $table .= ' AS ' . $fromTable;
+        } else {
+            $fromTable = ($this->prefixColumnsWithTable) ? $table : '';
+        }
+
+        $fromTable .= $platform->getIdentifierSeparator();
 
         // process table columns
         $columns = array();
@@ -454,9 +459,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
             $columnName = '';
             if ($column === self::SQL_STAR) {
-                $columns[] = array($quotedTable . self::SQL_STAR);
+                $columns[] = array($fromTable . self::SQL_STAR);
                 continue;
-            } 
+            }
 
             if ($column instanceof Expression) {
                 $columnParts = $this->processExpression(
@@ -470,7 +475,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 }
                 $columnName .= $columnParts['sql'];
             } else {
-                $columnName .= $quotedTable . $platform->quoteIdentifier($column);
+                $columnName .= $fromTable . $platform->quoteIdentifier($column);
             }
 
             // process As portion
@@ -488,12 +493,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->joins as $join) {
             foreach ($join['columns'] as $jKey => $jColumn) {
                 $jColumns = array();
-                if (is_array($join['name'])) {
-                    $keys = array_keys($join['name']);
-                    $name = array_pop($keys);
-                } else {
-                    $name = $join['name'];
-                }
+                $name = (is_array($join['name'])) ? key($join['name']) : $name = $join['name'];
                 $jColumns[] = $platform->quoteIdentifier($name) . $separator . $platform->quoteIdentifierInFragment($jColumn);
                 if (is_string($jKey)) {
                     $jColumns[] = $platform->quoteIdentifier($jKey);
@@ -516,21 +516,23 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         // process joins
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
-
-            if (is_array($join['name'])) {
-                $keys = array_keys($join['name']);
-                $alias = array_pop($keys);
-                $name = $join['name'][$alias];
-
-                $nameArg = $platform->quoteIdentifier($name) . ' AS ' . $platform->quoteIdentifier($alias);
-            } else {
-                $nameArg = $platform->quoteIdentifier($join['name']);
-            }
-
             $joinSpecArgArray[$j] = array();
-            $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
-            $joinSpecArgArray[$j][] = $nameArg; // table
-            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
+            // type
+            $joinSpecArgArray[$j][] = strtoupper($join['type']);
+            // table name
+            $joinSpecArgArray[$j][] = (is_array($join['name']))
+                ? $platform->quoteIdentifier(current($join['name'])) . ' AS ' . $platform->quoteIdentifier(key($join['name']))
+                : $platform->quoteIdentifier($join['name']);
+            // on expression
+            $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
+                ? $this->processExpression($join['on'], $platform, ($adapter) ? $adapter->getDriver() : null, 'join')
+                : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
+            if (is_array($joinSpecArgArray[$j][2])) {
+                if (count($joinSpecArgArray[$j][2]['parameters']) > 0) {
+                    $parameterContainer->merge($joinSpecArgArray[$j][2]['parameters']);
+                }
+                $joinSpecArgArray[$j][2] = $joinSpecArgArray[$j][2]['sql'];
+            }
         }
 
         return array($joinSpecArgArray);
@@ -640,8 +642,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Variable overloading
      *
      * Proxies to "where" only
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)
@@ -655,13 +657,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     }
 
     /**
-     * __clone 
+     * __clone
      *
      * Resets the where object each time the Select is cloned.
-     * 
+     *
      * @return void
      */
-    public function __clone() {
+    public function __clone()
+    {
         $this->where = clone $this->where;
     }
 }

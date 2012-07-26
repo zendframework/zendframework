@@ -1,27 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
-use Zend\Session\Configuration\StandardConfiguration;
+use Zend\Session\Config\StandardConfig;
 use Zend\Session\Container;
 use Zend\Validator\Csrf;
 
@@ -31,8 +20,6 @@ use Zend\Validator\Csrf;
  * @category   Zend
  * @package    Zend
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class CsrfTest extends \PHPUnit_Framework_TestCase
@@ -47,7 +34,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
     {
         // Setup session handling
         $_SESSION = array();
-        $sessionConfig = new StandardConfiguration(array(
+        $sessionConfig = new StandardConfig(array(
             'storage' => 'Zend\Session\Storage\ArrayStorage',
         ));
         $sessionManager       = new TestAsset\SessionManager($sessionConfig);

@@ -14,11 +14,11 @@ use Zend\ModuleManager\Exception;
 
 /**
  * Invalid Argument Exception
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
-    ExceptionInterface
-{}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{
+}

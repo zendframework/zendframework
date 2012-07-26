@@ -1,40 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc_Router
- * @subpackage Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\RoutePluginManager,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\PriorityList;
+use Traversable;
+use Zend\Mvc\Router\Exception;
+use Zend\Mvc\Router\PriorityList;
+use Zend\Mvc\Router\RoutePluginManager;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * RouteInterface part.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
 class Part extends TreeRouteStack implements RouteInterface
@@ -92,7 +79,7 @@ class Part extends TreeRouteStack implements RouteInterface
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return Part
      */
     public static function factory($options = array())
@@ -141,7 +128,7 @@ class Part extends TreeRouteStack implements RouteInterface
 
         $match = $this->route->match($request, $pathOffset);
 
-        if ($match !== null && method_exists($request, 'uri')) {
+        if ($match !== null && method_exists($request, 'getUri')) {
             if ($this->childRoutes !== null) {
                 $this->addRoutes($this->childRoutes);
                 $this->childRoutes = null;
@@ -149,7 +136,7 @@ class Part extends TreeRouteStack implements RouteInterface
 
             $nextOffset = $pathOffset + $match->getLength();
 
-            $uri        = $request->uri();
+            $uri        = $request->getUri();
             $pathLength = strlen($uri->getPath());
 
             if ($this->mayTerminate && $nextOffset === $pathLength) {

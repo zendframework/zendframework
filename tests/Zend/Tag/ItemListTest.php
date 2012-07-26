@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Tag
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Tag
  */
 
 namespace ZendTest\Tag;
 
-use Zend\Tag,
-	Zend\Tag\Exception\InvalidArgumentException,
-	Zend\Tag\Exception\OutOfBoundsException;
+use Zend\Tag;
+use Zend\Tag\Exception\InvalidArgumentException;
+use Zend\Tag\Exception\OutOfBoundsException;
 
 /**
  * @category   Zend
  * @package    Zend_Tag
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Tag
  */
 class ItemListTest extends \PHPUnit_Framework_TestCase
@@ -69,7 +56,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
         $list->seek(2);
         $this->assertEquals($list->current()->getTitle(), $values[2]);
     }
-    
+
     public function testSeektableIteratorThrowsBoundsException()
     {
         $list = new Tag\ItemList();
@@ -79,7 +66,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
             $list[] = $this->_getItem($value);
         }
         $list->seek(2);
-        
+
         $this->setExpectedException('Zend\Tag\Exception\OutOfBoundsException', 'Invalid seek position');
         $list->seek(3);
     }

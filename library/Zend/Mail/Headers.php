@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail;
 
-use ArrayIterator,
-    Iterator,
-    Countable,
-    Traversable,
-    Zend\Loader\PluginClassLocator;
+use ArrayIterator;
+use Countable;
+use Iterator;
+use Traversable;
+use Zend\Loader\PluginClassLocator;
 
 /**
  * Basic mail headers collection functionality
@@ -35,10 +24,8 @@ use ArrayIterator,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Headers implements Iterator, Countable
+class Headers implements Countable, Iterator
 {
     /** @var string End of Line for fields */
     const EOL = "\r\n";
@@ -244,10 +231,11 @@ class Headers implements Iterator, Countable
     public function addHeader(Header\HeaderInterface $header)
     {
         $key = $this->normalizeFieldName($header->getFieldName());
-
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
-        $header->setEncoding($this->getEncoding());
+        if ($this->getEncoding() !== 'ASCII') {
+            $header->setEncoding($this->getEncoding());
+        }
         return $this;
     }
 
@@ -296,7 +284,11 @@ class Headers implements Iterator, Countable
         $results = array();
 
         foreach (array_keys($this->headersKeys, $key) as $index) {
-            $results[] = $this->headers[$index];
+            if ($this->headers[$index] instanceof Header\GenericHeader) {
+                $results[] = $this->lazyLoadHeader($index);
+            } else {
+                $results[] = $this->headers[$index];
+            }
         }
 
         switch(count($results)) {
@@ -457,7 +449,7 @@ class Headers implements Iterator, Countable
         /* @var $class Header\HeaderInterface */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
-        $encoding = $this->getEncoding();
+        $encoding = $current->getEncoding();
         $headers  = $class::fromString($current->toString());
         if (is_array($headers)) {
             $current = array_shift($headers);

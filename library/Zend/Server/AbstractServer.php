@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server;
@@ -27,30 +17,9 @@ use ReflectionClass;
  *
  * @category   Zend
  * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractServer implements Server
 {
-    /**
-     * @deprecated
-     * @var array List of PHP magic methods (lowercased)
-     */
-    protected static $magic_methods = array(
-        '__call',
-        '__clone',
-        '__construct',
-        '__destruct',
-        '__get',
-        '__isset',
-        '__set',
-        '__set_state',
-        '__sleep',
-        '__tostring',
-        '__unset',
-        '__wakeup',
-    );
-
     /**
      * @var bool Flag; whether or not overwriting existing methods is allowed
      */
@@ -84,22 +53,6 @@ abstract class AbstractServer implements Server
     public function getFunctions()
     {
         return $this->table;
-    }
-
-    /**
-     * Lowercase a string
-     *
-     * Lowercase's a string by reference
-     *
-     * @deprecated
-     * @param  string $string value
-     * @param  string $key
-     * @return string Lower cased string
-     */
-    public static function lowerCase(&$value, &$key)
-    {
-        trigger_error(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed in a future version', E_USER_NOTICE);
-        return $value = strtolower($value);
     }
 
     /**

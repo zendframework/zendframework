@@ -1,797 +1,478 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Boolean as BooleanFilter,
-    Zend\Locale\Locale;
+use Zend\Filter\Boolean as BooleanFilter;
 
 /**
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class BooleanTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Zend_Filter_Boolean object
-     *
-     * @var Zend_Filter_Boolean
-     */
-    protected $_filter;
-
-    /**
-     * Creates a new Zend_Filter_Boolean object for each test method
-     *
-     * @return void
-     */
-    public function setUp()
+    public function testConstructorOptions()
     {
-        $this->_filter = new BooleanFilter();
+        $filter = new BooleanFilter(array(
+            'type'    => BooleanFilter::TYPE_INTEGER,
+            'casting' => false,
+        ));
+
+        $this->assertEquals(BooleanFilter::TYPE_INTEGER, $filter->getType());
+        $this->assertFalse($filter->getCasting());
+    }
+
+    public function testConstructorParams()
+    {
+        $filter = new BooleanFilter(BooleanFilter::TYPE_INTEGER, false);
+
+        $this->assertEquals(BooleanFilter::TYPE_INTEGER, $filter->getType());
+        $this->assertFalse($filter->getCasting());
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param mixed $value
+     * @param bool  $expected
+     * @dataProvider defaultTestProvider
      */
-    public function testBasic()
+    public function testDefault($value, $expected)
     {
-        $filter = $this->_filter;
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
+        $filter = new BooleanFilter();
+        $this->assertSame($expected, $filter->filter($value));
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param mixed $value
+     * @param bool  $expected
+     * @dataProvider noCastingTestProvider
      */
-    public function testOnlyBoolean()
+    public function testNoCasting($value, $expected)
     {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::BOOLEAN);
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
+        $filter = new BooleanFilter('all', false);
+        $this->assertEquals($expected, $filter->filter($value));
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param int $type
+     * @param array $testData
+     * @dataProvider typeTestProvider
      */
-    public function testOnlyInteger()
+    public function testTypes($type, $testData)
     {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::INTEGER);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
+        $filter = new BooleanFilter($type);
+        foreach ($testData as $data) {
+            list($value, $expected) = $data;
+            $message = sprintf(
+                '%s (%s) is not filtered as %s; type = %s',
+                var_export($value, true),
+                gettype($value),
+                var_export($expected, true),
+                $type
+            );
+            $this->assertSame($expected, $filter->filter($value), $message);
+        }
     }
 
     /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
+     * @param array $typeData
+     * @param array $testData
+     * @dataProvider combinedTypeTestProvider
      */
-    public function testOnlyFloat()
+    public function testCombinedTypes($typeData, $testData)
     {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::FLOAT);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
+        foreach ($typeData as $type) {
+            $filter = new BooleanFilter(array('type' => $type));
+            foreach ($testData as $data) {
+                list($value, $expected) = $data;
+                $message = sprintf(
+                    '%s (%s) is not filtered as %s; type = %s',
+                    var_export($value, true),
+                    gettype($value),
+                    var_export($expected, true),
+                    var_export($type, true)
+                );
+                $this->assertSame($expected, $filter->filter($value), $message);
+            }
+        }
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyString()
+    public function testLocalized()
     {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::STRING);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyZero()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::ZERO);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyArray()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::EMPTY_ARRAY);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyNull()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::NULL);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyPHP()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::PHP);
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyFalseString()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::FALSE_STRING);
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyYes()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::YES);
-        $filter->setLocale('en');
-        $this->assertTrue($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertFalse($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testOnlyAll()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::ALL);
-        $filter->setLocale('en');
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertFalse($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testArrayConstantNotation()
-    {
-        $filter = new BooleanFilter(
-            array(
-                'type' => array(
-                    BooleanFilter::ZERO,
-                    BooleanFilter::STRING,
-                    BooleanFilter::BOOLEAN,
-                ),
+        $filter = new BooleanFilter(array(
+            'type' => BooleanFilter::TYPE_LOCALIZED,
+            'translations' => array(
+                'yes' => true,
+                'y'   => true,
+                'no'  => false,
+                'n'   => false,
+                'yay' => true,
+                'nay' => false,
             )
-        );
+        ));
 
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
+        $this->assertTrue($filter->filter('yes'));
+        $this->assertTrue($filter->filter('yay'));
+        $this->assertFalse($filter->filter('n'));
+        $this->assertFalse($filter->filter('nay'));
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testArrayConfigNotation()
-    {
-        $filter = new BooleanFilter(
-            array(
-                'type' => array(
-                    BooleanFilter::ZERO,
-                    BooleanFilter::STRING,
-                    BooleanFilter::BOOLEAN,
-                ),
-                'test' => false,
-            )
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testMultiConstantNotation()
-    {
-        $filter = new BooleanFilter(
-            BooleanFilter::ZERO + BooleanFilter::STRING + BooleanFilter::BOOLEAN
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testStringNotation()
-    {
-        $filter = new BooleanFilter(
-            array(
-                'type' => array('zero', 'string', 'boolean')
-            )
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSingleStringNotation()
-    {
-        $filter = new BooleanFilter(
-            'boolean'
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertTrue($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertTrue($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertTrue($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertTrue($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertTrue($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertTrue($filter(null));
-        $this->assertTrue($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSettingLocale()
-    {
-        $filter = $this->_filter;
-        $filter->setType(BooleanFilter::ALL);
-        $filter->setLocale('de');
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-        $this->assertFalse($filter('nein'));
-        $this->assertTrue($filter('ja'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSettingLocalePerConstructorString()
-    {
-        $filter = new BooleanFilter(
-            'all', true, 'de'
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-        $this->assertFalse($filter('nein'));
-        $this->assertTrue($filter('ja'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testConfigObject()
-    {
-        $options = array('type' => 'all', 'locale' => 'de');
-        $config  = new \Zend\Config\Config($options);
-
-        $filter = new BooleanFilter(
-            $config
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-        $this->assertFalse($filter('nein'));
-        $this->assertTrue($filter('ja'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSettingLocalePerConstructorArray()
-    {
-        $filter = new BooleanFilter(
-            array('type' => 'all', 'locale' => 'de')
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-        $this->assertFalse($filter('nein'));
-        $this->assertTrue($filter('ja'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSettingLocaleInstance()
-    {
-        $locale = new Locale('de');
-        $filter = new BooleanFilter(
-            array('type' => 'all', 'locale' => $locale)
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertFalse($filter(''));
-        $this->assertTrue($filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertFalse($filter(array()));
-        $this->assertTrue($filter(array('xxx')));
-        $this->assertFalse($filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertTrue($filter('no'));
-        $this->assertTrue($filter('yes'));
-        $this->assertFalse($filter('nein'));
-        $this->assertTrue($filter('ja'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testWithoutCasting()
-    {
-        $locale = new Locale('de');
-        $filter = new BooleanFilter(
-            array('type' => 'all', 'casting' => false, 'locale' => $locale)
-        );
-
-        $this->assertFalse($filter(false));
-        $this->assertTrue($filter(true));
-        $this->assertFalse($filter(0));
-        $this->assertTrue($filter(1));
-        $this->assertEquals(2, $filter(2));
-        $this->assertFalse($filter(0.0));
-        $this->assertTrue($filter(1.0));
-        $this->assertEquals(0.5, $filter(0.5));
-        $this->assertFalse($filter(''));
-        $this->assertEquals('abc', $filter('abc'));
-        $this->assertFalse($filter('0'));
-        $this->assertTrue($filter('1'));
-        $this->assertEquals('2', $filter('2'));
-        $this->assertFalse($filter(array()));
-        $this->assertEquals(array('xxx'), $filter(array('xxx')));
-        $this->assertEquals(null, $filter(null));
-        $this->assertFalse($filter('false'));
-        $this->assertTrue($filter('true'));
-        $this->assertEquals('no', $filter('no'));
-        $this->assertEquals('yes', $filter('yes'));
-        $this->assertFalse($filter('nein'));
-        $this->assertTrue($filter('ja'));
-    }
-
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
     public function testSettingFalseType()
     {
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown');
-        $this->_filter->setType(true);
+        $filter = new BooleanFilter();
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown type value');
+        $filter->setType(true);
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testGetType()
+    public function testGettingDefaultType()
     {
-        $this->assertEquals(127, $this->_filter->getType());
+        $filter = new BooleanFilter();
+        $this->assertEquals(127, $filter->getType());
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSettingFalseLocaleType()
+    public static function defaultTestProvider()
     {
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Locale has to be');
-        $this->_filter->setLocale(true);
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, false),
+            array(1, true),
+            array(0.0, false),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), false),
+            array(array(0), true),
+            array(null, false),
+            array('false', true),
+            array('true', true),
+            array('no', true),
+            array('yes', true),
+        );
     }
 
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testSettingUnknownLocale()
+    public static function noCastingTestProvider()
     {
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown locale');
-        $this->_filter->setLocale('yy');
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, false),
+            array(1, true),
+            array(2, 2),
+            array(0.0, false),
+            array(1.0, true),
+            array(0.5, 0.5),
+            array('', false),
+            array('abc', 'abc'),
+            array('0', false),
+            array('1', true),
+            array('2', '2'),
+            array(array(), false),
+            array(array(0), array(0)),
+            array(null, null),
+            array('false', false),
+            array('true', true),
+        );
+    }
+
+    public static function typeTestProvider()
+    {
+        return array(
+            array(
+                BooleanFilter::TYPE_BOOLEAN,
+                array(
+                    array(false, false),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_INTEGER,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, false),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_FLOAT,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, false),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_STRING,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', false),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_ZERO_STRING,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', false),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_EMPTY_ARRAY,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), false),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_NULL,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, false),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_PHP,
+                array(
+                    array(false, false),
+                    array(true, true),
+                    array(0, false),
+                    array(1, true),
+                    array(0.0, false),
+                    array(1.0, true),
+                    array('', false),
+                    array('abc', true),
+                    array('0', false),
+                    array('1', true),
+                    array(array(), false),
+                    array(array(0), true),
+                    array(null, false),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_FALSE_STRING,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', false),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            // default behaviour with no translations provided
+            // all values filtered as true
+            array(
+                BooleanFilter::TYPE_LOCALIZED,
+                array(
+                    array(false, true),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', true),
+                    array('abc', true),
+                    array('0', true),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+            array(
+                BooleanFilter::TYPE_ALL,
+                array(
+                    array(false, false),
+                    array(true, true),
+                    array(0, false),
+                    array(1, true),
+                    array(0.0, false),
+                    array(1.0, true),
+                    array('', false),
+                    array('abc', true),
+                    array('0', false),
+                    array('1', true),
+                    array(array(), false),
+                    array(array(0), true),
+                    array(null, false),
+                    array('false', false),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            ),
+        );
+    }
+
+    public static function combinedTypeTestProvider()
+    {
+        return array(
+            array(
+                array(
+                    array(
+                        BooleanFilter::TYPE_ZERO_STRING,
+                        BooleanFilter::TYPE_STRING,
+                        BooleanFilter::TYPE_BOOLEAN,
+                    ),
+                    array(
+                        'zero',
+                        'string',
+                        'boolean',
+                    ),
+                    BooleanFilter::TYPE_ZERO_STRING | BooleanFilter::TYPE_STRING | BooleanFilter::TYPE_BOOLEAN,
+                    BooleanFilter::TYPE_ZERO_STRING + BooleanFilter::TYPE_STRING + BooleanFilter::TYPE_BOOLEAN,
+                ),
+                array(
+                    array(false, false),
+                    array(true, true),
+                    array(0, true),
+                    array(1, true),
+                    array(0.0, true),
+                    array(1.0, true),
+                    array('', false),
+                    array('abc', true),
+                    array('0', false),
+                    array('1', true),
+                    array(array(), true),
+                    array(array(0), true),
+                    array(null, true),
+                    array('false', true),
+                    array('true', true),
+                    array('no', true),
+                    array('yes', true),
+                )
+            )
+        );
     }
 }

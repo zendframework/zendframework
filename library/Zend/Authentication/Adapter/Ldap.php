@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter;
@@ -29,8 +18,6 @@ use Zend\Ldap\Exception\LdapException;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ldap implements AdapterInterface
 {
@@ -346,11 +333,11 @@ class Ldap implements AdapterInterface
                      * server options.
                      */
                     continue;
-                } else if ($err == LdapException::LDAP_NO_SUCH_OBJECT) {
+                } elseif ($err == LdapException::LDAP_NO_SUCH_OBJECT) {
                     $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
                     $messages[0] = "Account not found: $username";
                     $failedAuthorities[$dname] = $zle->getMessage();
-                } else if ($err == LdapException::LDAP_INVALID_CREDENTIALS) {
+                } elseif ($err == LdapException::LDAP_INVALID_CREDENTIALS) {
                     $code = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
                     $messages[0] = 'Invalid credentials';
                     $failedAuthorities[$dname] = $zle->getMessage();

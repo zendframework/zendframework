@@ -50,6 +50,16 @@ defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_
  */
 defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
 
+
+/**
+ * Zend\Barcode\Renderer\Pdf
+ *
+ * Enable this if you have installed ZendPdf on the include_path or via
+ * Composer.
+ */
+defined('TESTS_ZEND_BARCODE_PDF_SUPPORT') || define('TESTS_ZEND_BARCODE_PDF_SUPPORT', false);
+
+
 /**
  * Zend\Cache\Storage\Adapter
  */
@@ -64,6 +74,24 @@ defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || define('TESTS_ZEND_CACHE_ZEND
 defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_MEMCACHED_ENABLED', false);
 defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED_HOST', '127.0.0.1');
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
+
+
+/**
+ * Zend\Captcha
+ *
+ * Enable this if you have installed ZendService\ReCaptcha on the include_path or via
+ * Composer.
+ */
+defined('TESTS_ZEND_CAPTCHA_RECAPTCHA_SUPPORT') || define('TESTS_ZEND_CAPTCHA_RECAPTCHA_SUPPORT', false);
+
+
+/**
+ * Zend\Code\Annotation
+ *
+ * Enable this if you have installed Doctrine\Common on the include_path or via
+ * Composer.
+ */
+defined('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT') || define('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT', false);
 
 /**
  * Zend\Config
@@ -182,115 +210,21 @@ defined('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI') || define('TESTS_ZEND_FEED_PUBSU
 defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED') || define('TESTS_ZEND_FEED_READER_ONLINE_ENABLED', false);
 
 /**
- * Zend\GData tests
+ * Zend\Form\Annotation
  *
- * If the ONLINE_ENABLED property is false, only tests that can be executed with
- * a mock HTTP client are run. No request is sent to the Google Gdata servers.
- * If ONLINE_ENABLED is true, some tests may make requests to the remote
- * servers. This does not work if you are running tests on a disconnected
- * client host. Also, the tests may show as failures if the Google servers
- * cannot be reached or if they do not respond for another reason.
- *
- * If the CLIENTLOGIN_ENABLED property below is false, the authenticated
- * tests are reported Skipped in the test run. Set this property to true
- * to enable tests that require ClientLogin authentication. Enter your
- * Google login credentials in the EMAIL and PASSWORD properties below.
- *
- * Edit TestConfiguration.php, not TestConfiguration.php.dist.
- * Never commit plaintext passwords to the source code repository.
- *
- * Note: the GData tests currently require that the TZID env variable
- * be set or the timezone otherwise configured. You'll see errors from the
- * tests if this is not the case.
+ * Enable this if you have installed Doctrine\Common on the include_path or via
+ * composer.
  */
-defined('TESTS_ZEND_GDATA_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_GDATA_CLIENTLOGIN_ENABLED') || define('TESTS_ZEND_GDATA_CLIENTLOGIN_ENABLED', false);
+defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', false);
 
 /*
- * The credentials provided here should be only for a TEST account.
- * Data for various services in this account may be added to, updated,
- * or deleted based upon the actions of these test accounts.
+ * Enable this if you have installed ZendService\ReCaptcha on the include_path or via
+ * Composer.
  */
-defined('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL') || define('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL', 'example@example.com');
-defined('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD') || define('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD', 'password');
+defined('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT') || define('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT', false);
+defined('TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY') || define('TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY', 'public key');
+defined('TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY') || define('TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY', 'private key');
 
-/*
- * This is the ID of a blank blog. There is no need to have
- * any content in this blog. Also, blogs can only be used
- * several times for the purpose of these test cases before
- * they must be deleted and recreated. Otherwise, the tests
- * will start failing, as posts to Blogger will return a 201 Created
- * response even though the entry was not posted to the blog.
- * This problem is being investigated.
- */
-defined('TESTS_ZEND_GDATA_BLOGGER_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_BLOGGER_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_GDATA_BLOG_ID') || define('TESTS_ZEND_GDATA_BLOG_ID', '1111111111111111111');
-
-/*
- * This is the key for a spreadsheet with data only in the first row of
- * the spreadsheet. The strings 'a1', 'b1', 'c1', 'd1' should be in the
- * corresponding cell locations.
- */
-defined('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_GDATA_SPREADSHEETS_SPREADSHEETKEY') || define('TESTS_ZEND_GDATA_SPREADSHEETS_SPREADSHEETKEY', 'o01111111111111111111.1111111111111111111');
-defined('TESTS_ZEND_GDATA_SPREADSHEETS_WORKSHEETID') || define('TESTS_ZEND_GDATA_SPREADSHEETS_WORKSHEETID', 'default');
-
-/*
- * This indicates that online tests for the Google Calendar API should
- * be performed. The default calendar will be used.
- */
-defined('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED', false);
-
-/*
- * This is the fully-qualified domain name for a domain hosted using
- * Google Apps. This domain must be registered with Google Apps and
- * have API access enabled. This should be a TEST domain only.
- */
-defined('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_GDATA_GAPPS_DOMAIN') || define('TESTS_ZEND_GDATA_GAPPS_DOMAIN', 'example.com.invalid');
-defined('TESTS_ZEND_GDATA_GAPPS_EMAIL') || define('TESTS_ZEND_GDATA_GAPPS_EMAIL', 'example@example.com');
-defined('TESTS_ZEND_GDATA_GAPPS_PASSWORD') || define('TESTS_ZEND_GDATA_GAPPS_PASSWORD', 'password');
-
-/*
- * This indicates that online tests for the Books Search data API
- * should be performed.
- */
-defined('TESTS_ZEND_GDATA_BOOKS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_BOOKS_ONLINE_ENABLED', false);
-
-/*
- * This indicates that online tests for the YouTube data API should
- * be performed.
- */
-defined('TESTS_ZEND_GDATA_YOUTUBE_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_YOUTUBE_ONLINE_ENABLED', false);
-
-/*
- * This is the username to use for retrieving subscriptions, etc
- */
-defined('TESTS_ZEND_GDATA_YOUTUBE_ACCOUNT') || define('TESTS_ZEND_GDATA_YOUTUBE_ACCOUNT', 'zfgdata');
-
-/*
- * This is the developer key to access the YouTube API
- */
-defined('TESTS_ZEND_GDATA_YOUTUBE_DEVELOPER_KEY') || define('TESTS_ZEND_GDATA_YOUTUBE_DEVELOPER_KEY', 'your_developer_key_here');
-
-/*
- * This is the client ID to access the YouTube API
- */
-defined('TESTS_ZEND_GDATA_YOUTUBE_CLIENT_ID') || define('TESTS_ZEND_GDATA_YOUTUBE_CLIENT_ID', 'ZF_UnitTests_unknown');
-
-/*
- * This indicates that online tests for the Google Documents API should
- * be performed.
- */
-defined('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_GDATA_DOCS_DOCUMENTTITLE') || define('TESTS_ZEND_GDATA_DOCS_DOCUMENTTITLE', 'title');
-
-/*
- * This indicates that online tests for the GData Photos API should
- * be performed.
- */
-defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_GDATA_PHOTOS_USERNAME') || define('TESTS_ZEND_GDATA_PHOTOS_USERNAME', 'zfgdata');
 
 /**
  * Zend\Http\Client tests
@@ -402,38 +336,6 @@ defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD'
 //(defined('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE') || define('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE', 'OU=Test,OU=Sales,DC=example,DC=com');
 
 /**
- * Zend\Locale tests
- *
- * If the TESTS_ZEND_LOCALE_FORMAT_SETLOCALE property below is a valid,
- * locally recognized locale (try "locale -a"), then all tests in
- * tests/Zend/Locale/ test suites will execute *after*
- *    setlocale(LC_ALL, TESTS_ZEND_LOCALE_FORMAT_SETLOCALE);
- * Primarily, this switches certain PHP functions to emit "localized" output,
- * including the built-in "to string" for integer and float conversions.
- * Thus, a locale of 'fr_FR' yields number-to-string conversions in a
- * localized form with the decimal place separator chosen via:
- *    setlocale(LC_ALL, 'fr_FR@euro');
- */
-//define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr');
-//define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr_FR@euro');
-defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', false);
-
-/**
- * Zend\Date tests
- *
- * If the BCMATH_ENABLED property below is false, all arithmetic
- * operations will use ordinary PHP math operators and functions.
- * Otherwise, the bcmath functions will be used for unlimited precision.
- *
- * If the EXTENDED_COVERAGE property below is false, most of the I18N
- * unit tests will not be computed... this speeds tests up to 80 minutes
- * when doing reports. *
- * Edit TestConfiguration.php, not TestConfiguration.php.dist.
- */
-defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') || define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', true);
-defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE') || define('TESTS_ZEND_I18N_EXTENDED_COVERAGE', true);
-
-/**
  * Zend\Mail\Storage tests
  *
  * TESTS_ZEND_MAIL_SERVER_TESTDIR and TESTS_ZEND_MAIL_SERVER_FORMAT are used for POP3 and IMAP tests.
@@ -510,262 +412,6 @@ defined('TESTS_ZEND_MAIL_SMTP_AUTH') || define('TESTS_ZEND_MAIL_SMTP_AUTH', fals
 // AUTH can be set to false or a string of AUTH method (e.g. LOGIN, PLAIN, CRAMMD5 or DIGESTMD5)
 
 /**
- * Zend\Queue Test Configuration constants
- *
- * The Zend\Queue\Adapter\Db constant should be a JSON-encoded string
- * representing a configuration object for Zend\Db::factory(). For example:
- * {
- *     type: "pdo_mysql",
- *     host: "127.0.0.1",
- *     port: 3306,
- *     username: "queue",
- *     password: "queue",
- *     dbname: "queue"
- * }
- *
- * The PlatformJobQueue adapter expects two parameters, the host and password.
- * The HOST string should include both the host and port (typically 10003):
- *     127.0.0.1:10003
- * When running tests against PlatformJobQueue, it's best to do so where
- * Platform is installed on localhost and has maximum workers set to 20
- * (default is 5); do so with this zend.ini setting:
- *     zend_jq.max_num_of_request_workers=20
- *
- * Selectively define the below in order to run tests for them.
- */
-defined('TESTS_ZEND_QUEUE_ACTIVEMQ_ENABLED') || define('TESTS_ZEND_QUEUE_ACTIVEMQ_ENABLED', false);
-defined('TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME') || define('TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME', false);
-defined('TESTS_ZEND_QUEUE_ACTIVEMQ_HOST') || define('TESTS_ZEND_QUEUE_ACTIVEMQ_HOST', false);
-defined('TESTS_ZEND_QUEUE_ACTIVEMQ_PORT') || define('TESTS_ZEND_QUEUE_ACTIVEMQ_PORT', false);
-defined('TESTS_ZEND_QUEUE_DB_ENABLED') || define('TESTS_ZEND_QUEUE_DB_ENABLED', false);
-defined('TESTS_ZEND_QUEUE_DB') || define('TESTS_ZEND_QUEUE_DB', false);
-defined('TESTS_ZEND_QUEUE_MEMCACHEQ_ENABLED') || define('TESTS_ZEND_QUEUE_MEMCACHEQ_ENABLED', false);
-defined('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST') || define('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST', false);
-defined('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT') || define('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT', false);
-defined('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED', false);
-defined('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
-defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
-
-
-/**
- * Zend\Service\AgileZen online tests
- */
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY', 'insert the API key');
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID', 'insert the project id');
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID', 'insert the story id');
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL', 'insert email for invitation');
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID', 'insert role id for invitation');
-defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME', 'insert the member name to add to the project');
-
-
-/**
- * Zend\Service\Amazon online tests
- */
-defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID', 'Enter AWSAccessKeyId here');
-defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY') || define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY', 'Enter AWSSecretKey here');
-defined('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID') || define('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID', 'zftestamazonimageid');
-defined('TESTS_ZEND_SERVICE_AMAZON_EC2_ZONE') || define('TESTS_ZEND_SERVICE_AMAZON_EC2_ZONE', 'us-east-1');
-defined('TESTS_ZEND_SERVICE_AMAZON_EC2_SECURITY_GROUP') || define('TESTS_ZEND_SERVICE_AMAZON_EC2_SECURITY_GROUP', 'default');
-defined('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET') || define('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET', 'zftestamazons3bucket');
-defined('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE') || define('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE', 'zftestamazonsqsqueuename');
-
-/**
- * Zend\Service\Delicious tests
- */
-defined('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED') || define('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED', false);
-
-/**
- * Zend\Service\DeveloperGarden tests
- * Setup your Username and Password to test this Service
- */
-defined('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_LOGIN') || define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_LOGIN', 'ZF_Username');
-defined('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_PASSWORD') || define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_PASSWORD', 'ZF_Password');
-
-/**
- * Zend\Service\Flickr online tests
- */
-defined('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY') || define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
-
-/**
- * Zend\Service\GoGrid offline tests
- */
-
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY', 'insert key here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET', 'insert secret here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME', 'test-zf');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IMAGE') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IMAGE', 'insert image name here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM', 'insert ram name here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP', 'insert ip here');
-
-/**
- * Zend\Service\LiveDocx configuration
- *
- * Define username and password in order to run unit tests for LiveDocx web services.
- *
- * phpunit/phpunit will typically work.
- */
-defined('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME') || define('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
-defined('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
-
-/**
- * Zend\Service\LiveDocx premium configuration
- *
- * Define username, password, WSDL in order to run unit tests for premium LiveDocx web services.
- */
-defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME', false);
-defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD', false);
-defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL', false);
-
-/**
- * Zend\Service\Rackspace tests
- */
-defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER', 'Enter key here');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY', 'Enter secret here');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION', 'USA');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME', 'zf-unit-test');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME', 'zf-object-test');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME', 'zf-unit-test');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID', '49');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID', '49');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_FLAVORID') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_FLAVORID', '1');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGE_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGE_NAME', 'ZFunitTestImage');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_SHARED_IP_GROUP_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_SHARED_IP_GROUP_NAME', 'ZFgroupIP');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_TIMEOUT') || define('TESTS_ZEND_SERVICE_RACKSPACE_TIMEOUT', 60);
-
-/**
- * Zend\Service\ReCaptcha tests
- */
-defined('TESTS_ZEND_SERVICE_RECAPTCHA_ENABLED') || define('TESTS_ZEND_SERVICE_RECAPTCHA_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_RECAPTCHA_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_RECAPTCHA_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_RECAPTCHA_PUBLIC_KEY') || define('TESTS_ZEND_SERVICE_RECAPTCHA_PUBLIC_KEY', 'public key');
-defined('TESTS_ZEND_SERVICE_RECAPTCHA_PRIVATE_KEY') || define('TESTS_ZEND_SERVICE_RECAPTCHA_PRIVATE_KEY', 'private key');
-defined('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY') || define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY', 'public mailhide key');
-defined('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY') || define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY', 'private mailhide key');
-
-/**
- * Zend\Service\Simpy tests
- */
-defined('TESTS_ZEND_SERVICE_SIMPY_ENABLED') || define('TESTS_ZEND_SERVICE_SIMPY_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_SIMPY_USERNAME') || define('TESTS_ZEND_SERVICE_SIMPY_USERNAME', 'syapizend');
-defined('TESTS_ZEND_SERVICE_SIMPY_PASSWORD') || define('TESTS_ZEND_SERVICE_SIMPY_PASSWORD', 'mgt37ge');
-
-/**
- * Zend\Service\SlideShare tests
- */
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME') || define('TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME', '');
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD') || define('TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD', '');
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET') || define('TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET', '');
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY') || define('TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY', '');
-
-// The slide show ID to retrieve during tests
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID') || define('TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID', 0);
-
-// The tag to retrieve during tests
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_TAG') || define('TESTS_ZEND_SERVICE_SLIDESHARE_TAG', 'zend');
-
-// The group to retrieve during tests
-defined('TESTS_ZEND_SERVICE_SLIDESHARE_GROUP') || define('TESTS_ZEND_SERVICE_SLIDESHARE_GROUP', '');
-
-/**
- * Zend\Service\Twitter tests
- *
- * ONLINE_ENABLED indicates whether or not to run tests requiring a network
- * connection.
- *
- * TWITTER_USER and TWITTER_PASS are valid Twitter credentials you wish to use
- * when testing.
- */
-defined('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_TWITTER_USER') || define('TESTS_ZEND_SERVICE_TWITTER_USER', 'zftestuser');
-defined('TESTS_ZEND_SERVICE_TWITTER_PASS') || define('TESTS_ZEND_SERVICE_TWITTER_PASS', 'zftestuser');
-
-/**
- * Zend\Service\WindowsAzure tests
- */
-
-/**
- * Online
- */
-
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTNAME') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTNAME', '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTKEY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTKEY', '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_TABLE_HOST') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_TABLE_HOST', '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_HOST') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_HOST', '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_PORT') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_PORT', '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_CREDENTIALS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_CREDENTIALS', '');
-
-/**
- * Proxy settings
- */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY', '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT', '8080');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS', '');
-
-/**
- * Azure hosts
- */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV', '127.0.0.1:10000');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV', '127.0.0.1:10001');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV', '127.0.0.1:10002');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD', 'blob.core.windows.net');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD', 'queue.core.windows.net');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD', 'table.core.windows.net');
-
-/**
- * Credentials
- */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV', 'devstoreaccount1');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV', 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD', 'phpazure');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD', 'I+ebYPcIDB6BsmfAe6pJSpOw8oXA6jMBZv1BEZcSPRqTpldt44refCl65YpKJqcBOiD21Lxsj8d6Ah8Oc2/gKA==');
-
-/**
- * Blob storage tests
- */
-// Enable this tests only when you have a working account
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB', true);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX', 'phpazuretestblob');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX', 'phpazureteststream');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX', 'phpazuretestshared');
-
-/**
- * Table storage tests
- */
-// Enable this tests only when you have a working account
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX', 'phpazuretesttable');
-
-/**
- * Queue storage tests
- */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX', 'phpazuretestqueue');
-
-/**
- * SessionHandler tests
- */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD', false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX', 'phpazuretestsession');
-
-/**
- * Zend\Service\Yahoo online tests
- */
-defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID', 'Enter APPID here');
-
-/**
  * Zend\Soap\AutoDiscover scenario tests for complex objects and wsdl generation
  *
  * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory
@@ -777,11 +423,6 @@ defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_Y
  * when having more than one version installed and include paths are changing.
  */
 defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
-
-/**
- * Zend\TimeSync tests
- */
-defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', false);
 
 /**
  * Zend\Uri tests

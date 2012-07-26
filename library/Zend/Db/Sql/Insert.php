@@ -10,11 +10,11 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Platform\Sql92;
 
 /**
  * @category   Zend
@@ -53,8 +53,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Constructor
-     * 
-     * @param  null|string $table 
+     *
+     * @param  null|string $table
      * @param  null|string $schema
      * @return void
      */
@@ -67,9 +67,9 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Crete INTO clause
-     * 
-     * @param  string $table 
-     * @param  null|string $databaseOrSchema 
+     *
+     * @param  string $table
+     * @param  null|string $databaseOrSchema
      * @return Insert
      */
     public function into($table)
@@ -80,8 +80,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Specify columns
-     * 
-     * @param  array $columns 
+     *
+     * @param  array $columns
      * @return Insert
      */
     public function columns(array $columns)
@@ -92,8 +92,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Specify values to insert
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @param  string $flag one of VALUES_MERGE or VALUES_SET; defaults to VALUES_SET
      * @return Insert
      */
@@ -181,7 +181,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Get SQL string for this statement
-     * 
+     *
      * @param  null|PlatformInterface $adapterPlatform Defaults to Sql92 if none provided
      * @return string
      */
@@ -212,9 +212,9 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Overloading: variable setting
      *
      * Proxies to values, using VALUES_MERGE strategy
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return Insert
      */
     public function __set($name, $value)
@@ -228,8 +228,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Overloading: variable unset
      *
      * Proxies to values and columns
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return void
      */
     public function __unset($name)
@@ -246,8 +246,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Overloading: variable isset
      *
      * Proxies to columns; does a column of that name exist?
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function __isset($name)
@@ -259,8 +259,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Overloading: variable retrieval
      *
      * Retrieves value by column name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)

@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\PublicKey;
 
 use Zend\Crypt\Exception;
@@ -19,8 +20,6 @@ use Zend\Math;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DiffieHellman
 {
@@ -65,7 +64,7 @@ class DiffieHellman
     private $privateKey = null;
 
     /**
-     * BigInteger support object courtesy of Zend\Math\Math
+     * BigInteger support object courtesy of Zend\Math
      *
      * @var \Zend\Math\BigInteger\Adapter\AdapterInterface
      */
@@ -439,7 +438,6 @@ class DiffieHellman
      */
     protected function generatePrivateKey()
     {
-        $rand = Math\Math::randBytes(strlen($this->getPrime()), true);
-        return $rand;
+        return Math\Rand::getBytes(strlen($this->getPrime()), true);
     }
 }

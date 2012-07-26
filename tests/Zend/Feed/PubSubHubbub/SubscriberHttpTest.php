@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\PubSubHubbub;
@@ -38,8 +28,6 @@ use Zend\Http\Client as HttpClient;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
 {
@@ -71,7 +59,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             $this->_client->setAdapter('\Zend\Http\Client\Adapter\Socket');
             PubSubHubbub::setHttpClient($this->_client);
             $this->_subscriber = new Subscriber;
-            
+
             $this->_storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
             $this->_subscriber->setStorage($this->_storage);
 
@@ -110,8 +98,9 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             .'&hub.verify_token=abc',
             $this->_client->getResponse()->getBody());
     }
-    
-    protected function _getCleanMock($className) {
+
+    protected function _getCleanMock($className)
+    {
         $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();

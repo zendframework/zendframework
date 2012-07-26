@@ -10,9 +10,9 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -109,8 +109,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get current schema
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCurrentSchema()
     {
@@ -118,20 +118,31 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
+        switch ($this->driverName) {
+            case 'mysql':
+                $sql = 'SELECT DATABASE()';
+                break;
+            case 'sqlite':
+                return 'main';
+            case 'pgsql':
+            default:
+                $sql = 'SELECT CURRENT_SCHEMA';
+                break;
+        }
+
         /** @var $result \PDOStatement */
-        $result = $this->resource->query('SELECT DATABASE()');
+        $result = $this->resource->query($sql);
         if ($result instanceof \PDOStatement) {
-            $r = $result->fetch_row();
-            return $r[0];
+            return $result->fetchColumn();
         }
         return false;
     }
 
     /**
      * Set resource
-     * 
+     *
      * @param  \PDO $resource
-     * @return Connection 
+     * @return Connection
      */
     public function setResource(\PDO $resource)
     {
@@ -341,13 +352,17 @@ class Connection implements ConnectionInterface
 
     /**
      * Get last generated id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
+        if ($name === null && $this->driverName == 'pgsql') {
+            return null;
+        }
+
         try {
-            return $this->resource->lastInsertId();
+            return $this->resource->lastInsertId($name);
         } catch (\Exception $e) {
             // do nothing
         }

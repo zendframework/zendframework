@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\HtmlEntities as HtmlEntitiesFilter,
-    Zend\Filter\Exception;
+use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
+use Zend\Filter\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
@@ -62,7 +49,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             'string' => 'string',
             '<'      => '&lt;',
             '>'      => '&gt;',
-            '\''     => '\'',
+            '\''     => '&#039;',
             '"'      => '&quot;',
             '&'      => '&amp;'
             );
@@ -79,7 +66,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetQuoteStyle()
     {
-        $this->assertEquals(ENT_COMPAT, $this->_filter->getQuoteStyle());
+        $this->assertEquals(ENT_QUOTES, $this->_filter->getQuoteStyle());
     }
 
     /**
@@ -188,7 +175,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
     {
         $input  = "A 'single' and " . '"double"';
         $result = "A 'single' and &quot;double&quot;";
-        
+
         $this->_filter->setQuoteStyle(ENT_COMPAT);
         $this->assertEquals($result, $this->_filter->filter($input));
     }
@@ -219,7 +206,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
 
-        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
         $result = $this->_filter->filter($string);
@@ -239,7 +226,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
 
-        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
         $result = $this->_filter->filter($string);
@@ -259,7 +246,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-dash-only.txt');
 
-        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         // Also, explicit try, so that we don't mess up PHPUnit error handlers
         set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);

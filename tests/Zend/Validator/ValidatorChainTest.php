@@ -1,28 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Between;
+use Zend\Validator\NotEmpty;
 use Zend\Validator\StaticValidator;
 use Zend\Validator\ValidatorChain;
 
@@ -30,8 +21,6 @@ use Zend\Validator\ValidatorChain;
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class ValidatorChainTest extends \PHPUnit_Framework_TestCase
@@ -51,6 +40,17 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->validator = new ValidatorChain();
+    }
+
+    public function populateValidatorChain()
+    {
+        $this->validator->addValidator(new NotEmpty());
+        $this->validator->addValidator(new Between());
+    }
+
+    public function testValidatorChainIsEmptyByDefault()
+    {
+        $this->assertEquals(0, count($this->validator->getValidators()));
     }
 
     /**
@@ -135,11 +135,9 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetDefaultTranslator()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new \Zend\Translator\Translator('ArrayAdapter', array(), 'en');
-        restore_error_handler();
+        $translator = new Translator();
         AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
+        $this->assertSame($translator, AbstractValidator::getDefaultTranslator());
     }
 
     public function testAllowsPrependingValidators()
@@ -158,6 +156,12 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('isEmpty', $messages);
+    }
+
+    public function testCountGivesCountOfAttachedValidators()
+    {
+        $this->populateValidatorChain();
+        $this->assertEquals(2, count($this->validator->getValidators()));
     }
 
     /**

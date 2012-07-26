@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
 
 use DirectoryIterator;
 use Zend\Captcha;
-use Zend\Form\Element;
+use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\FormCaptcha as FormCaptchaHelper;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -31,13 +20,11 @@ use Zend\View\Renderer\PhpRenderer;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormCaptchaTest extends CommonTestCase
 {
-    protected $publicKey  = TESTS_ZEND_SERVICE_RECAPTCHA_PUBLIC_KEY;
-    protected $privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_PRIVATE_KEY;
+    protected $publicKey  = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
+    protected $privateKey = TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY;
     protected $testDir    = null;
     protected $tmpDir     = null;
 
@@ -81,11 +68,11 @@ class FormCaptchaTest extends CommonTestCase
 
     public function getElement()
     {
-        $element = new Element('foo');
+        $element = new CaptchaElement('foo');
         return $element;
     }
 
-    public function testRaisesExceptionIfElementHasNoCaptchaAttribute()
+    public function testRaisesExceptionIfElementHasNoCaptcha()
     {
         $element = $this->getElement();
         $this->setExpectedException('Zend\Form\Exception\ExceptionInterface', 'captcha');
@@ -98,7 +85,7 @@ class FormCaptchaTest extends CommonTestCase
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains($captcha->getLabel(), $markup);
     }
@@ -109,7 +96,7 @@ class FormCaptchaTest extends CommonTestCase
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains('<pre>' . $captcha->getFiglet()->render($captcha->getWord()) . '</pre>', $markup);
     }
@@ -135,10 +122,10 @@ class FormCaptchaTest extends CommonTestCase
         $captcha = new Captcha\Image(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             'imgDir'       => $this->testDir,
-            'font'         => __DIR__. '/../../../Pdf/_fonts/Vera.ttf',
+            'font'         => __DIR__. '/Captcha/_files/Vera.ttf',
         ));
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains('<img ', $markup);
         $this->assertContains($captcha->getImgUrl(), $markup);
@@ -147,6 +134,10 @@ class FormCaptchaTest extends CommonTestCase
 
     public function testPassingElementWithReCaptchaRendersCorrectly()
     {
+        if (!constant('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_FORM_RECAPTCHA_SUPPORT to test PDF render');
+        }
+
         $captcha = new Captcha\ReCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
@@ -155,7 +146,7 @@ class FormCaptchaTest extends CommonTestCase
         $service->setPrivateKey($this->privateKey);
 
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains('foo-challenge', $markup);
         $this->assertContains('foo-response', $markup);

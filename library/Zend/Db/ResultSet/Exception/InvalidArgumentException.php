@@ -10,14 +10,13 @@
 
 namespace Zend\Db\ResultSet\Exception;
 
-use Zend\Db\ResultSet\Exception;
+use Zend\Db\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage ResultSet
  */
-class InvalidArgumentException 
-    extends \InvalidArgumentException 
-    implements Exception
-{}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{
+}

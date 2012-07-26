@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Version
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Version.php
  */
 
 namespace Zend;
@@ -27,15 +17,13 @@ use Zend\Json\Json;
  *
  * @category   Zend
  * @package    Zend_Version
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 final class Version
 {
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.0beta4';
+    const VERSION = '2.0.0rc1';
 
     /**
      * The latest stable version Zend Framework available
@@ -64,9 +52,9 @@ final class Version
     /**
      * Fetches the version of the latest stable release.
      *
-     * This uses the GitHub API (v3) and only returns refs that begin with 
-     * 'tags/release-'. Because GitHub returns the refs in alphabetical order, 
-     * we need to reduce the array to a single value, comparing the version 
+     * This uses the GitHub API (v3) and only returns refs that begin with
+     * 'tags/release-'. Because GitHub returns the refs in alphabetical order,
+     * we need to reduce the array to a single value, comparing the version
      * numbers with version_compare().
      *
      * @see http://developer.github.com/v3/git/refs/#get-all-references
@@ -81,7 +69,7 @@ final class Version
 
             $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
 
-            // Simplify the API response into a simple array of version numbers 
+            // Simplify the API response into a simple array of version numbers
             $tags = array_map(function($tag){
                 return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
             }, $apiResponse);
@@ -98,8 +86,8 @@ final class Version
     /**
      * Returns true if the running version of Zend Framework is
      * the latest (or newer??) than the latest tag on GitHub,
-     * which is returned by static::getLatest(). 
-     * 
+     * which is returned by static::getLatest().
+     *
      * @return boolean
      */
     public static function isLatest()

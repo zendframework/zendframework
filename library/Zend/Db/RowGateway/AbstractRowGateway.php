@@ -13,8 +13,8 @@ namespace Zend\Db\RowGateway;
 use ArrayAccess;
 use Countable;
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\TableIdentifier;
 
 /**
  * @category   Zend
@@ -176,7 +176,8 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         $rowData = $result->current();
         unset($statement, $result); // cleanup
 
-        $this->populateOriginalData($rowData);
+        // make sure data and original data are in sync after save
+        $this->populate($rowData, true);
 
         // return rows affected
         return $rowsAffected;
@@ -275,5 +276,39 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         } else {
             throw new \InvalidArgumentException('Not a valid column in this row: ' . $name);
         }
+    }
+
+    /**
+     * __set
+     *
+     * @param  string $name
+     * @param  mixed $value
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        $this->offsetSet($name, $value);
+    }
+
+    /**
+     * __isset
+     *
+     * @param  string $name
+     * @return boolean
+     */
+    public function __isset($name)
+    {
+        return $this->offsetExists($name);
+    }
+
+    /**
+     * __unset
+     *
+     * @param  string $name
+     * @return void
+     */
+    public function __unset($name)
+    {
+        $this->offsetUnset($name);
     }
 }

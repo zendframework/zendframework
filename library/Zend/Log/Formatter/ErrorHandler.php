@@ -1,27 +1,13 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Formatter;
 
 use Zend\Log\Exception;
@@ -30,25 +16,24 @@ use Zend\Log\Exception;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ErrorHandler implements FormatterInterface
 {
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
-    
+
     /**
      * Format
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $format;
-    
+
     /**
      * Class constructor
      *
-     * @param  null|string  $format  Format specifier for log messages
-     * @throws Zend\Log\Exception\InvalidArgumentException
+     * @param null|string $format Format specifier for log messages
+     * @return ErrorHandler
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($format = null)
     {

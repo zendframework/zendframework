@@ -12,10 +12,11 @@ namespace Zend\ModuleManager\Exception;
 
 /**
  * Runtime Exception
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Exception
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
-{}
+{
+}

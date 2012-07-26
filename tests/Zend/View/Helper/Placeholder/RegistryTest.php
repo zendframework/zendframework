@@ -1,25 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Placeholder;
+
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper\Placeholder\Container;
 
@@ -30,8 +20,6 @@ use Zend\View\Helper\Placeholder\Container;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -51,10 +39,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $registry = \Zend\Registry::getInstance();
-        if (isset($registry[Registry::REGISTRY_KEY])) {
-            unset($registry[Registry::REGISTRY_KEY]);
-        }
+        Registry::unsetRegistry();
         $this->registry = new Registry();
     }
 
@@ -169,16 +154,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $registry1 = Registry::getRegistry();
         $registry2 = Registry::getRegistry();
         $this->assertSame($registry1, $registry2);
-    }
-
-    public function testGetRegistryRegistersWithGlobalRegistry()
-    {
-        $this->assertFalse(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-        $registry = Registry::getRegistry();
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-
-        $registered = \Zend\Registry::get(Registry::REGISTRY_KEY);
-        $this->assertSame($registry, $registered);
     }
 
     /**

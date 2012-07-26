@@ -1,32 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_File
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_File
  */
 
 namespace ZendTest\File\Transfer\Adapter;
 
-use Zend\File,
-    Zend\Filter,
-    Zend\Filter\Word,
-    Zend\Loader,
-    Zend\Validator,
-    Zend\Validator\File as FileValidator;
+use Zend\File;
+use Zend\Filter;
+use Zend\Filter\Word;
+use Zend\Loader;
+use Zend\Validator;
+use Zend\Validator\File as FileValidator;
 
 /**
  * Test class for Zend\File\Transfer\Adapter\AbstractAdapter
@@ -34,8 +23,6 @@ use Zend\File,
  * @category   Zend
  * @package    Zend_File
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
 class AbstractTest extends \PHPUnit_Framework_TestCase
@@ -61,92 +48,17 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    public function testAdapterShouldThrowExceptionWhenRetrievingPluginLoaderOfInvalidType()
+    public function testAdapterShouldLazyLoadValidatorPluginManager()
     {
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to getPluginLoader');
-        $this->adapter->getPluginLoader('bogus');
+        $loader = $this->adapter->getValidatorManager();
+        $this->assertInstanceOf('Zend\File\Transfer\Adapter\ValidatorPluginManager', $loader);
     }
 
-    public function testAdapterShouldHavePluginLoaderForValidators()
+    public function testAdapterShouldAllowSettingFilterPluginManagerInstance()
     {
-        $loader = $this->adapter->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof Loader\PrefixPathLoader);
-    }
-
-    public function testAdapterShouldAllowAddingCustomPluginLoader()
-    {
-        $loader = new Loader\PrefixPathLoader();
-        $this->adapter->setPluginLoader($loader, 'filter');
-        $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
-    }
-
-    public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
-    {
-        $loader = new Loader\PrefixPathLoader();
-
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to setPluginLoader');
-        $this->adapter->setPluginLoader($loader, 'bogus');
-    }
-
-    public function testAdapterShouldProxyAddingPluginLoaderPrefixPath()
-    {
-        $loader = $this->adapter->getPluginLoader('validator');
-        $this->adapter->addPrefixPath('Foo_Valid', 'Foo/Valid/', 'validator');
-        $paths = $loader->getPaths('Foo_Valid');
-        $this->assertInstanceOf('SplStack', $paths);
-    }
-
-    public function testPassingNoTypeWhenAddingPrefixPathToAdapterShouldGeneratePathsForAllTypes()
-    {
-        $this->adapter->addPrefixPath('Foo', 'Foo');
-        $validateLoader = $this->adapter->getPluginLoader('validator');
-        $filterLoader   = $this->adapter->getPluginLoader('filter');
-        $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-    }
-
-
-    public function testPassingInvalidTypeWhenAddingPrefixPathToAdapterShouldThrowException()
-    {
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to getPluginLoader');
-        $this->adapter->addPrefixPath('Foo', 'Foo', 'bogus');
-    }
-
-    public function testAdapterShouldProxyAddingMultiplePluginLoaderPrefixPaths()
-    {
-        $validatorLoader = $this->adapter->getPluginLoader('validator');
-        $filterLoader    = $this->adapter->getPluginLoader('filter');
-        $this->adapter->addPrefixPaths(array(
-            'validator' => array('prefix' => 'Foo\Valid', 'path' => 'Foo/Valid/'),
-            'filter'   => array(
-                'Foo\Filter' => 'Foo/Filter/',
-                'Baz\Filter' => array(
-                    'Baz/Filter/',
-                    'My/Baz/Filter/',
-                ),
-            ),
-            array('type' => 'filter', 'prefix' => 'Bar\Filter', 'path' => 'Bar/Filter/'),
-        ));
-        $paths = $validatorLoader->getPaths('Foo\Valid');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Bar\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths = $filterLoader->getPaths('Baz\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $this->assertEquals(2, count($paths));
-    }
-
-    public function testValidatorPluginLoaderShouldRegisterPathsForBaseAndFileValidatorsByDefault()
-    {
-        $loader = $this->adapter->getPluginLoader('validator');
-        $paths  = $loader->getPaths('Zend\Validator');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths  = $loader->getPaths('Zend\Validator\File');
-        $this->assertInstanceOf('SplStack', $paths);
+        $manager = new File\Transfer\Adapter\FilterPluginManager();
+        $this->adapter->setFilterManager($manager);
+        $this->assertSame($manager, $this->adapter->getFilterManager());
     }
 
     public function testAdapterShouldAllowAddingValidatorInstance()
@@ -157,13 +69,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($validator, $test);
     }
 
-    public function testAdapterShouldAllowAddingValidatorViaPluginLoader()
+    public function testAdapterShouldAllowAddingValidatorViaPluginManager()
     {
         $this->adapter->addValidator('Count', false, array('min' => 1, 'max' => 1));
         $test = $this->adapter->getValidator('Count');
         $this->assertTrue($test instanceof FileValidator\Count);
     }
-
 
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidValidatorType()
     {
@@ -176,7 +87,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validators = array(
             'count' => array('min' => 1, 'max' => 1),
             'Exists' => 'C:\temp',
-            array('validator' => 'Upload', 'options' => array(realpath(__FILE__))),
+            array(
+                'validator' => 'Upload',
+                'options' => array(realpath(__FILE__))
+            ),
             new FileValidator\Extension('jpg'),
         );
         $this->adapter->addValidators($validators);
@@ -197,16 +111,16 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testGetValidatorShouldReturnNullWhenNoMatchingIdentifierExists()
     {
-        $this->assertNull($this->adapter->getValidator('Alpha'));
+        $this->assertNull($this->adapter->getValidator('Between'));
     }
 
     public function testAdapterShouldAllowPullingValidatorsByFile()
     {
-        $this->adapter->addValidator('Alpha', false, false, 'foo');
+        $this->adapter->addValidator('Between', false, false, 'foo');
         $validators = $this->adapter->getValidators('foo');
         $this->assertEquals(1, count($validators));
         $validator = array_shift($validators);
-        $this->assertTrue($validator instanceof Validator\Alpha);
+        $this->assertTrue($validator instanceof Validator\Between);
     }
 
     public function testCallingSetValidatorsOnAdapterShouldOverwriteExistingValidators()
@@ -266,9 +180,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader();
         $validators = $this->adapter->getValidators();
-        $this->assertFalse($this->adapter->hasValidator('Alpha'));
-        $this->adapter->removeValidator('Alpha');
-        $this->assertFalse($this->adapter->hasValidator('Alpha'));
+        $this->assertFalse($this->adapter->hasValidator('Between'));
+        $this->adapter->removeValidator('Between');
+        $this->assertFalse($this->adapter->hasValidator('Between'));
         $test = $this->adapter->getValidators();
         $this->assertSame($validators, $test);
     }
@@ -334,19 +248,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(empty($errors));
     }
 
-    public function testAdapterShouldHavePluginLoaderForFilters()
+    public function testAdapterShouldLazyLoadFilterPluginManager()
     {
-        $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof Loader\ShortNameLocator);
-    }
-
-    public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()
-    {
-        $loader = $this->adapter->getPluginLoader('filter');
-        $paths  = $loader->getPaths('Zend\Filter');
-        $this->assertInstanceOf('SplStack', $paths);
-        $paths  = $loader->getPaths('Zend\Filter\File');
-        $this->assertInstanceOf('SplStack', $paths);
+        $loader = $this->adapter->getFilterManager();
+        $this->assertInstanceOf('Zend\File\Transfer\Adapter\FilterPluginManager', $loader);
     }
 
     public function testAdapterShouldAllowAddingFilterInstance()
@@ -357,7 +262,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($filter, $test);
     }
 
-    public function testAdapterShouldAllowAddingFilterViaPluginLoader()
+    public function testAdapterShouldAllowAddingFilterViaPluginManager()
     {
         $this->adapter->addFilter('StringTrim');
         $test = $this->adapter->getFilter('StringTrim');
@@ -375,7 +280,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $filters = array(
             'Word\SeparatorToCamelCase' => array('separator' => ' '),
-            array('filter' => 'Alpha', 'options' => array(true)),
+            array(
+                'filter' => 'Boolean',
+                'casting' => true
+            ),
             new Filter\BaseName(),
         );
         $this->adapter->addFilters($filters);
@@ -385,7 +293,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $count = array_shift($test);
         $this->assertTrue($count instanceof Word\SeparatorToCamelCase);
         $size = array_shift($test);
-        $this->assertTrue($size instanceof Filter\Alpha);
+        $this->assertTrue($size instanceof Filter\Boolean);
         $ext  = array_shift($test);
         $orig = array_pop($filters);
         $this->assertSame($orig, $ext);
@@ -393,16 +301,16 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFilterShouldReturnNullWhenNoMatchingIdentifierExists()
     {
-        $this->assertNull($this->adapter->getFilter('Alpha'));
+        $this->assertNull($this->adapter->getFilter('Boolean'));
     }
 
     public function testAdapterShouldAllowPullingFiltersByFile()
     {
-        $this->adapter->addFilter('Alpha', false, 'foo');
+        $this->adapter->addFilter('Boolean', 1, 'foo');
         $filters = $this->adapter->getFilters('foo');
         $this->assertEquals(1, count($filters));
         $filter = array_shift($filters);
-        $this->assertTrue($filter instanceof Filter\Alpha);
+        $this->assertTrue($filter instanceof Filter\Boolean);
     }
 
     public function testCallingSetFiltersOnAdapterShouldOverwriteExistingFilters()
@@ -410,7 +318,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->testAdapterShouldAllowAddingMultipleFiltersAtOnceUsingBothInstancesAndPluginLoader();
         $filters = array(
             new Filter\StringToUpper(),
-            new Filter\Alpha(),
+            new Filter\Boolean(),
         );
         $this->adapter->setFilters($filters);
         $test = $this->adapter->getFilters();
@@ -427,8 +335,8 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingFilterInstancesByPluginName()
     {
         $this->testAdapterShouldAllowAddingMultipleFiltersAtOnceUsingBothInstancesAndPluginLoader();
-        $count = $this->adapter->getFilter('Alpha');
-        $this->assertTrue($count instanceof Filter\Alpha);
+        $count = $this->adapter->getFilter('Boolean');
+        $this->assertTrue($count instanceof Filter\Boolean);
     }
 
     public function testAdapterShouldAllowRetrievingAllFiltersAtOnce()
@@ -453,9 +361,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRemovingFilterInstancesByPluginName()
     {
         $this->testAdapterShouldAllowAddingMultipleFiltersAtOnceUsingBothInstancesAndPluginLoader();
-        $this->assertTrue($this->adapter->hasFilter('Alpha'));
-        $this->adapter->removeFilter('Alpha');
-        $this->assertFalse($this->adapter->hasFilter('Alpha'));
+        $this->assertTrue($this->adapter->hasFilter('Boolean'));
+        $this->adapter->removeFilter('Boolean');
+        $this->assertFalse($this->adapter->hasFilter('Boolean'));
     }
 
     public function testRemovingNonexistentFilterShouldDoNothing()
@@ -643,7 +551,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testFileSizeByTmpName()
     {
-    	$expectedSize = sprintf("%.2fkB", 1.14);
+        $expectedSize = sprintf("%.2fkB", 1.14);
         $options = $this->adapter->getOptions();
         $this->assertTrue($options['baz']['useByteString']);
         $this->assertEquals($expectedSize, $this->adapter->getFileSize('baz.text'));

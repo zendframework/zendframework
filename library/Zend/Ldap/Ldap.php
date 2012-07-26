@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ldap
 {
@@ -128,7 +116,9 @@ class Ldap
      */
     public function getLastErrorCode()
     {
-        $ret = @ldap_get_option($this->resource, LDAP_OPT_ERROR_NUMBER, $err);
+        ErrorHandler::start(E_WARNING);
+        $ret = ldap_get_option($this->resource, LDAP_OPT_ERROR_NUMBER, $err);
+        ErrorHandler::stop();
         if ($ret === true) {
             if ($err <= -1 && $err >= -17) {
                 /* For some reason draft-ietf-ldapext-ldap-c-api-xx.txt error
@@ -158,15 +148,21 @@ class Ldap
          * different things so we just try to collect what we
          * can and eliminate dupes.
          */
-        $estr1 = @ldap_error($this->resource);
+        ErrorHandler::start(E_WARNING);
+        $estr1 = ldap_error($this->resource);
+        ErrorHandler::stop();
         if ($errorCode !== 0 && $estr1 === 'Success') {
-            $estr1 = @ldap_err2str($errorCode);
+            ErrorHandler::start(E_WARNING);
+            $estr1 = ldap_err2str($errorCode);
+            ErrorHandler::stop();
         }
         if (!empty($estr1)) {
             $errorMessages[] = $estr1;
         }
 
-        @ldap_get_option($this->resource, LDAP_OPT_ERROR_STRING, $estr2);
+        ErrorHandler::start(E_WARNING);
+        ldap_get_option($this->resource, LDAP_OPT_ERROR_STRING, $estr2);
+        ErrorHandler::stop();
         if (!empty($estr2) && !in_array($estr2, $errorMessages)) {
             $errorMessages[] = $estr2;
         }
@@ -216,7 +212,7 @@ class Ldap
      *  accountFilterFormat
      *  allowEmptyPassword
      *  useStartTls
-     *  optRefferals
+     *  optReferrals
      *  tryUsernameSplit
      *  networkTimeout
      *
@@ -227,7 +223,7 @@ class Ldap
     public function setOptions($options)
     {
         if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+            $options = iterator_to_array($options);
         }
 
         $permittedOptions = array(
@@ -643,7 +639,9 @@ class Ldap
     public function disconnect()
     {
         if (is_resource($this->resource)) {
-            @ldap_unbind($this->resource);
+            ErrorHandler::start(E_WARNING);
+            ldap_unbind($this->resource);
+            ErrorHandler::stop();
         }
         $this->resource  = null;
         $this->boundUser = false;
@@ -731,16 +729,19 @@ class Ldap
             $this->boundUser = false;
 
             $optReferrals = ($this->getOptReferrals()) ? 1 : 0;
-            if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3)
-                && @ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)
+            ErrorHandler::start(E_WARNING);
+            if (ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3)
+                && ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)
             ) {
                 if ($networkTimeout) {
-                    @ldap_set_option($resource, LDAP_OPT_NETWORK_TIMEOUT, $networkTimeout);
+                    ldap_set_option($resource, LDAP_OPT_NETWORK_TIMEOUT, $networkTimeout);
                 }
                 if ($useSsl || !$useStartTls || @ldap_start_tls($resource)) {
+                    ErrorHandler::stop();
                     return $this;
                 }
             }
+            ErrorHandler::stop();
 
             $zle = new Exception\LdapException($this, "$host:$port");
             $this->disconnect();
@@ -814,7 +815,10 @@ class Ldap
             $zle = new Exception\LdapException(null,
                 'Empty password not allowed - see allowEmptyPassword option.');
         } else {
-            if (@ldap_bind($this->resource, $username, $password)) {
+            ErrorHandler::start(E_WARNING);
+            $bind = ldap_bind($this->resource, $username, $password);
+            ErrorHandler::stop();
+            if ($bind) {
                 $this->boundUser = $username;
                 return $this;
             }
@@ -892,7 +896,7 @@ class Ldap
 
         if ($basedn === null) {
             $basedn = $this->getBaseDn();
-        } else if ($basedn instanceof Dn) {
+        } elseif ($basedn instanceof Dn) {
                 $basedn = $basedn->toString();
         }
 
@@ -900,24 +904,28 @@ class Ldap
             $filter = $filter->toString();
         }
 
+        ErrorHandler::start(E_WARNING);
         switch ($scope) {
             case self::SEARCH_SCOPE_ONE:
-                $search = @ldap_list($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
+                $search = ldap_list($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
                 break;
             case self::SEARCH_SCOPE_BASE:
-                $search = @ldap_read($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
+                $search = ldap_read($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
                 break;
             case self::SEARCH_SCOPE_SUB:
             default:
-                $search = @ldap_search($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
+                $search = ldap_search($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
                 break;
         }
+        ErrorHandler::stop();
 
         if ($search === false) {
             throw new Exception\LdapException($this, 'searching: ' . $filter);
         }
         if ($sort !== null && is_string($sort)) {
-            $isSorted = @ldap_sort($this->getResource(), $search, $sort);
+            ErrorHandler::start(E_WARNING);
+            $isSorted = ldap_sort($this->getResource(), $search, $sort);
+            ErrorHandler::stop();
             if ($isSorted === false) {
                 throw new Exception\LdapException($this, 'sorting: ' . $sort);
             }
@@ -1150,7 +1158,7 @@ class Ldap
             $value = Dn::unescapeValue($value);
             if (!array_key_exists($key, $entry)) {
                 $entry[$key] = array($value);
-            } else if (!in_array($value, $entry[$key])) {
+            } elseif (!in_array($value, $entry[$key])) {
                     $entry[$key] = array_merge(array($value), $entry[$key]);
             }
         }
@@ -1162,7 +1170,9 @@ class Ldap
             }
         }
 
-        $isAdded = @ldap_add($this->getResource(), $dn->toString(), $entry);
+        ErrorHandler::start(E_WARNING);
+        $isAdded = ldap_add($this->getResource(), $dn->toString(), $entry);
+        ErrorHandler::stop();
         if ($isAdded === false) {
             throw new Exception\LdapException($this, 'adding: ' . $dn->toString());
         }
@@ -1201,7 +1211,9 @@ class Ldap
         }
 
         if (count($entry) > 0) {
-            $isModified = @ldap_modify($this->getResource(), $dn->toString(), $entry);
+            ErrorHandler::start(E_WARNING);
+            $isModified = ldap_modify($this->getResource(), $dn->toString(), $entry);
+            ErrorHandler::stop();
             if ($isModified === false) {
                 throw new Exception\LdapException($this, 'updating: ' . $dn->toString());
             }
@@ -1256,7 +1268,9 @@ class Ldap
                 }
             }
         }
-        $isDeleted = @ldap_delete($this->getResource(), $dn);
+        ErrorHandler::start(E_WARNING);
+        $isDeleted = ldap_delete($this->getResource(), $dn);
+        ErrorHandler::stop();
         if ($isDeleted === false) {
             throw new Exception\LdapException($this, 'deleting: ' . $dn);
         }
@@ -1280,19 +1294,23 @@ class Ldap
             $parentDn = $parentDn->toString();
         }
         $children = array();
-        $search   = @ldap_list($this->getResource(), $parentDn, '(objectClass=*)', array('dn'));
+
+        ErrorHandler::start(E_WARNING);
+        $search = ldap_list($this->getResource(), $parentDn, '(objectClass=*)', array('dn'));
         for (
-            $entry = @ldap_first_entry($this->getResource(), $search);
+            $entry = ldap_first_entry($this->getResource(), $search);
             $entry !== false;
-            $entry = @ldap_next_entry($this->getResource(), $entry)
+            $entry = ldap_next_entry($this->getResource(), $entry)
         ) {
-            $childDn = @ldap_get_dn($this->getResource(), $entry);
+            $childDn = ldap_get_dn($this->getResource(), $entry);
             if ($childDn === false) {
+                ErrorHandler::stop();
                 throw new Exception\LdapException($this, 'getting dn');
             }
             $children[] = $childDn;
         }
-        @ldap_free_result($search);
+        ldap_free_result($search);
+        ErrorHandler::stop();
 
         return $children;
     }
@@ -1361,7 +1379,7 @@ class Ldap
         $emulate = (bool)$alwaysEmulate;
         if (!function_exists('ldap_rename')) {
             $emulate = true;
-        } else if ($recursively) {
+        } elseif ($recursively) {
             $emulate = true;
         }
 
@@ -1378,10 +1396,13 @@ class Ldap
 
             $newRdn    = Dn::implodeRdn(array_shift($newDnParts));
             $newParent = Dn::implodeDn($newDnParts);
-            $isOK      = @ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
+
+            ErrorHandler::start(E_WARNING);
+            $isOK = ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
+            ErrorHandler::stop();
             if ($isOK === false) {
                 throw new Exception\LdapException($this, 'renaming ' . $from . ' to ' . $to);
-            } else if (!$this->exists($to)) {
+            } elseif (!$this->exists($to)) {
                 $emulate = true;
             }
         }

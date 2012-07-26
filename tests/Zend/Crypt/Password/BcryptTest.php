@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Crypt
  */
 
 namespace ZendTest\Crypt\Password;
@@ -29,8 +18,6 @@ use Zend\Crypt\Password\Exception;
  * @category   Zend
  * @package    Zend_Crypt
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
 class BcryptTest extends \PHPUnit_Framework_TestCase
@@ -54,7 +41,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->prefix = '$2a$';
         }
-        $this->bcryptPassword = $this->prefix . '14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';    
+        $this->bcryptPassword = $this->prefix . '14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
     }
 
     public function testConstructByOptions()
@@ -85,7 +72,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testWrongConstruct()
     {
         $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
-                                    'The options parameter must be an array, a Zend\Config\Config object or a Traversable');
+                                    'The options parameter must be an array or a Traversable');
         $bcrypt = new Bcrypt('test');
     }
 
@@ -134,17 +121,19 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->bcrypt->verify($this->password, $this->bcryptPassword));
         $this->assertFalse($this->bcrypt->verify(substr($this->password, -1), $this->bcryptPassword));
     }
-    
+
     public function testPasswordWith8bitCharacter()
     {
         $password = 'test' . chr(128);
         $this->bcrypt->setSalt($this->salt);
-        
+
         if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->assertEquals('$2y$14$MTIzNDU2Nzg5MDEyMzQ1NexAbOIUHkG6Ra.TK9QxHOVUhDxOe4dkW', $this->bcrypt->create($password));
+            $this->assertEquals('$2y$14$MTIzNDU2Nzg5MDEyMzQ1NexAbOIUHkG6Ra.TK9QxHOVUhDxOe4dkW',
+                                $this->bcrypt->create($password));
         } else {
             $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
-                'The bcrypt implementation used by PHP can contains a security flaw using password with 8-bit character. ' .
+                'The bcrypt implementation used by PHP can contains a security flaw ' .
+                'using password with 8-bit character. ' .
                 'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
             );
             $output = $this->bcrypt->create($password);

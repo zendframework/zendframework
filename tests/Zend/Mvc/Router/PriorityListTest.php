@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc_Router
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\Router;
 
-use Zend\Mvc\Router\PriorityList,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Router\PriorityList;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Router
  */
 class PriorityListTest extends TestCase
@@ -66,7 +53,7 @@ class PriorityListTest extends TestCase
 
         $this->assertEquals(1, count($this->list));
     }
-    
+
     public function testRemovingNonExistentRouteDoesNotYieldError()
     {
         $this->list->remove('foo');
@@ -84,13 +71,13 @@ class PriorityListTest extends TestCase
         $this->assertEquals(0, count($this->list));
         $this->assertSame(false, $this->list->current());
     }
-    
+
     public function testGet()
     {
         $route = new TestAsset\DummyRoute();
-        
+
         $this->list->insert('foo', $route, 0);
-        
+
         $this->assertEquals($route, $this->list->get('foo'));
         $this->assertNull($this->list->get('bar'));
     }
@@ -138,5 +125,20 @@ class PriorityListTest extends TestCase
         }
 
         $this->assertEquals(array('baz', 'bar', 'foo'), $orders);
+    }
+
+    public function testPriorityWithNegativesAndNull()
+    {
+        $this->list->insert('foo', new TestAsset\DummyRoute(), null);
+        $this->list->insert('bar', new TestAsset\DummyRoute(), 1);
+        $this->list->insert('baz', new TestAsset\DummyRoute(), -1);
+
+        $order = array();
+
+        foreach ($this->list as $key => $value) {
+            $orders[] = $key;
+        }
+
+        $this->assertEquals(array('bar', 'foo', 'baz'), $orders);
     }
 }

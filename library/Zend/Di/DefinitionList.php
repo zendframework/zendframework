@@ -1,12 +1,28 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di;
 
 use SplDoublyLinkedList;
 
+/**
+ * Class definition based on multiple definitions
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class DefinitionList extends SplDoublyLinkedList implements Definition\DefinitionInterface
 {
-
+    /**
+     * @param Definition\DefinitionInterface|Definition\DefinitionInterface[] $definitions
+     */
     public function __construct($definitions)
     {
         if (!is_array($definitions)) {
@@ -16,7 +32,14 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
             $this->push($definition);
         }
     }
-    
+
+    /**
+     * Add definitions
+     *
+     * @param  Definition\DefinitionInterface $definition
+     * @param  bool                           $addToBackOfList
+     * @return void
+     */
     public function addDefinition(Definition\DefinitionInterface $definition, $addToBackOfList = true)
     {
         if ($addToBackOfList) {
@@ -27,7 +50,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * @param string $type
+     * @param  string       $type
      * @return Definition[]
      */
     public function getDefinitionsByType($type)
@@ -38,12 +61,15 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 $definitions[] = $definition;
             }
         }
+
         return $definitions;
     }
 
     /**
-     * @param string $type
-     * @return Definition
+     * Get definition by type
+     *
+     * @param  string                         $type
+     * @return Definition\DefinitionInterface
      */
     public function getDefinitionByType($type)
     {
@@ -52,9 +78,14 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 return $definition;
             }
         }
+
         return false;
     }
 
+    /**
+     * @param  string                              $class
+     * @return bool|Definition\DefinitionInterface
+     */
     public function getDefinitionForClass($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -63,15 +94,22 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 return $definition;
             }
         }
+
         return false;
     }
 
+    /**
+     * @param  string                              $class
+     * @return bool|Definition\DefinitionInterface
+     */
     public function forClass($class)
     {
         return $this->getDefinitionForClass($class);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public function getClasses()
     {
         $classes = array();
@@ -79,9 +117,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         foreach ($this as $definition) {
             $classes = array_merge($classes, $definition->getClasses());
         }
+
         return $classes;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function hasClass($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -90,9 +132,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 return true;
             }
         }
+
         return false;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function getClassSupertypes($class)
     {
         $supertypes = array();
@@ -103,7 +149,10 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         // @todo remove duplicates?
         return $supertypes;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function getInstantiator($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -117,9 +166,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 }
             }
         }
+
         return false;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function hasMethods($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -132,9 +185,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 }
             }
         }
+
         return false;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function hasMethod($class, $method)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -147,9 +204,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 }
             }
         }
+
         return false;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function getMethods($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -163,15 +224,23 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 }
             }
         }
+
         return $methods;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hasMethodParameters($class, $method)
     {
         $methodParameters = $this->getMethodParameters($class, $method);
+
         return ($methodParameters !== array());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getMethodParameters($class, $method)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -180,7 +249,8 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 return $definition->getMethodParameters($class, $method);
             }
         }
+
         return array();
     }
-    
+
 }

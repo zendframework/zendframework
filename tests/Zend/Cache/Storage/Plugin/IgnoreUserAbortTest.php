@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache\Storage\Plugin;
-use Zend\Cache,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\PostEvent,
-    Zend\Serializer,
-    ArrayObject;
+
+use Zend\Cache;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\PostEvent;
+use Zend\Serializer;
+use ArrayObject;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
 class IgnoreUserAbortTest extends CommonPluginTest
@@ -103,7 +91,7 @@ class IgnoreUserAbortTest extends CommonPluginTest
             'decrementItems.exception' => 'onAfter',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
-            $listeners = $this->_adapter->events()->getListeners($eventName);
+            $listeners = $this->_adapter->getEventManager()->getListeners($eventName);
 
             // event should attached only once
             $this->assertSame(1, $listeners->count());
@@ -123,6 +111,6 @@ class IgnoreUserAbortTest extends CommonPluginTest
         $this->_adapter->removePlugin($this->_plugin);
 
         // no events should be attached
-        $this->assertEquals(0, count($this->_adapter->events()->getEvents()));
+        $this->assertEquals(0, count($this->_adapter->getEventManager()->getEvents()));
     }
 }

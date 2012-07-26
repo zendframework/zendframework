@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Authentication
  */
 
 namespace ZendTest\Authentication\Adapter\Http;
 
-use Zend\Authentication\Adapter\Http,
-    Zend\Authentication\Adapter,
-    Zend\Authentication,
-    Zend\Http\Headers,
-    Zend\Http\Request,
-    Zend\Http\Response;
+use Zend\Authentication\Adapter\Http;
+use Zend\Authentication\Adapter;
+use Zend\Authentication;
+use Zend\Http\Headers;
+use Zend\Http\Request;
+use Zend\Http\Response;
 
 /**
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Auth
  */
 class ObjectTest extends \PHPUnit_Framework_TestCase
@@ -69,14 +56,14 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * File resolver setup against with HTTP Basic auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_basicResolver;
 
     /**
      * File resolver setup against with HTTP Digest auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_digestResolver;
 
@@ -110,32 +97,13 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testValidConfigs()
     {
-        try {
-            $t = new Adapter\Http($this->_basicConfig);
-        } catch (Adapter\Exception\ExceptionInterface $e) {
-            $this->fail('Valid config deemed invalid');
-        }
-        $this->assertFalse(empty($t));
-        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
-        unset($t);
-
-        try {
-            $t = new Adapter\Http($this->_digestConfig);
-        } catch (Adapter\Exception\ExceptionInterface $e) {
-            $this->fail('Valid config deemed invalid');
-        }
-        $this->assertFalse(empty($t));
-        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
-        unset($t);
-
-        try {
-            $t = new Adapter\Http($this->_bothConfig);
-        } catch (Adapter\Exception\ExceptionInterface $e) {
-            $this->fail('Valid config deemed invalid');
-        }
-        $this->assertFalse(empty($t));
-        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
-        unset($t);
+        $configs = array (
+            $this->_basicConfig,
+            $this->_digestConfig,
+            $this->_bothConfig,
+        );
+        foreach($configs as $config)
+        new Adapter\Http($config);
     }
 
     public function testInvalidConfigs()
@@ -246,12 +214,13 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $request->setHeaders($headers);
 
         // Test a Digest auth process while the request is containing a Basic auth header
-        $a = new Adapter\Http($this->_digestConfig);
-        $a->setDigestResolver($this->_digestResolver)
-          ->setRequest($request)
-          ->setResponse($response);
-        $result = $a->authenticate();
-        $this->assertEquals($result->getCode(),Authentication\Result::FAILURE_CREDENTIAL_INVALID);
+        $adapter = new Adapter\Http($this->_digestConfig);
+        $adapter->setDigestResolver($this->_digestResolver)
+                ->setRequest($request)
+                ->setResponse($response);
+        $result = $adapter->authenticate();
+
+        $this->assertEquals($result->getCode(), Authentication\Result::FAILURE_CREDENTIAL_INVALID);
     }
 
     public function testUnsupportedScheme()
@@ -259,6 +228,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $response = new Response();
         $headers  = new Headers();
         $request  = new Request();
+
         $headers->addHeaderLine('Authorization', 'NotSupportedScheme <followed by a space character');
         $request->setHeaders($headers);
 

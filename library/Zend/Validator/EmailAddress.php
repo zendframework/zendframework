@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -23,8 +13,6 @@ namespace Zend\Validator;
 /**
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EmailAddress extends AbstractValidator
 {
@@ -43,14 +31,14 @@ class EmailAddress extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID            => "Invalid type given. String expected",
-        self::INVALID_FORMAT     => "'%value%' is not a valid email address. Use the basic format local-part@hostname",
-        self::INVALID_HOSTNAME   => "'%hostname%' is not a valid hostname for email address '%value%'",
-        self::INVALID_MX_RECORD  => "'%hostname%' does not appear to have a valid MX record for the email address '%value%'",
-        self::INVALID_SEGMENT    => "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network",
+        self::INVALID_FORMAT     => "The input is not a valid email address. Use the basic format local-part@hostname",
+        self::INVALID_HOSTNAME   => "'%hostname%' is not a valid hostname for the email address",
+        self::INVALID_MX_RECORD  => "'%hostname%' does not appear to have a valid MX record for the email address",
+        self::INVALID_SEGMENT    => "'%hostname%' is not in a routable network segment. The email address should not be resolved from public network",
         self::DOT_ATOM           => "'%localPart%' can not be matched against dot-atom format",
         self::QUOTED_STRING      => "'%localPart%' can not be matched against quoted-string format",
-        self::INVALID_LOCAL_PART => "'%localPart%' is not a valid local part for email address '%value%'",
-        self::LENGTH_EXCEEDED    => "'%value%' exceeds the allowed length",
+        self::INVALID_LOCAL_PART => "'%localPart%' is not a valid local part for the email address",
+        self::LENGTH_EXCEEDED    => "The input exceeds the allowed length",
     );
 
     /**

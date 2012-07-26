@@ -12,7 +12,7 @@ namespace Zend\ModuleManager\Listener;
 
 /**
  * Abstract listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
@@ -28,7 +28,6 @@ abstract class AbstractListener
      * __construct
      *
      * @param  ListenerOptions $options
-     * @return void
      */
     public function __construct(ListenerOptions $options = null)
     {

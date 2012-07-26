@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
@@ -25,8 +15,6 @@ namespace Zend\Ldap;
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Dn implements \ArrayAccess
 {
@@ -67,7 +55,7 @@ class Dn implements \ArrayAccess
     {
         if (is_array($dn)) {
             return self::fromArray($dn, $caseFold);
-        } else if (is_string($dn)) {
+        } elseif (is_string($dn)) {
             return self::fromString($dn, $caseFold);
         } else {
             throw new Exception\LdapException(null, 'Invalid argument type for $dn');
@@ -180,8 +168,7 @@ class Dn implements \ArrayAccess
         }
         if ($length === 1) {
             return self::caseFoldRdn($this->dn[$index], $caseFold);
-        }
-        else {
+        } else {
             return self::caseFoldDn(array_slice($this->dn, $index, $length, false), $caseFold);
         }
     }
@@ -582,7 +569,7 @@ class Dn implements \ArrayAccess
                     $multi[$key] = $val;
                 }
                 $ret[] = $multi;
-            } else if (is_string($k[$i]) && is_string($v[$i])) {
+            } elseif (is_string($k[$i]) && is_string($v[$i])) {
                 $ret[] = array($k[$i] => $v[$i]);
             }
         }
@@ -629,7 +616,7 @@ class Dn implements \ArrayAccess
                         $key = trim(substr($dn, $ko, $di - $ko));
                         if ($caseFold == self::ATTR_CASEFOLD_LOWER) {
                             $key = strtolower($key);
-                        } else if ($caseFold == self::ATTR_CASEFOLD_UPPER) {
+                        } elseif ($caseFold == self::ATTR_CASEFOLD_UPPER) {
                             $key = strtoupper($key);
                         }
                         if (is_array($multi)) {
@@ -644,14 +631,14 @@ class Dn implements \ArrayAccess
                         }
                         $state = 2;
                         $vo    = $di + 1;
-                    } else if ($ch === ',' || $ch === ';' || $ch === '+') {
+                    } elseif ($ch === ',' || $ch === ';' || $ch === '+') {
                         return false;
                     }
                     break;
                 case 2: // collect value
                     if ($ch === '\\') {
                         $state = 3;
-                    } else if ($ch === ',' || $ch === ';' || $ch === 0 || $ch === '+') {
+                    } elseif ($ch === ',' || $ch === ';' || $ch === 0 || $ch === '+') {
                         $value = self::unescapeValue(trim(substr($dn, $vo, $di - $vo)));
                         if (is_array($multi)) {
                             $va[count($va) - 1][] = $value;
@@ -666,10 +653,10 @@ class Dn implements \ArrayAccess
                             $ka[]    = array($lastKey);
                             $va[]    = array($lastVal);
                             $multi   = array(strtolower($lastKey));
-                        } else if ($ch === ',' || $ch === ';' || $ch === 0) {
+                        } elseif ($ch === ',' || $ch === ';' || $ch === 0) {
                             $multi = false;
                         }
-                    } else if ($ch === '=') {
+                    } elseif ($ch === '=') {
                         return false;
                     }
                     break;

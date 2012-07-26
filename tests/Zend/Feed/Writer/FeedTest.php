@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Writer;
 
+use DateTime;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Feed;
-use Zend\Date;
 
 /**
  * @category   Zend
@@ -31,8 +20,6 @@ use Zend\Date;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd New BSD License
  */
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
@@ -146,16 +133,16 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setDateCreated();
-        $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($writer->getDateCreated()) || $dateNow->equals($writer->getDateCreated()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $writer->getDateCreated());
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
     {
         $writer = new Writer\Feed;
         $writer->setDateCreated(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateCreated()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $writer->getDateCreated());
     }
 
     /**
@@ -165,8 +152,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setDateCreated(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateCreated()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $writer->getDateCreated());
     }
 
     /**
@@ -176,33 +163,32 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setDateCreated(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateCreated()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $writer->getDateCreated());
     }
 
-    public function testSetDateCreatedUsesZendDateObject()
+    public function testSetDateCreatedUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $writer = new Writer\Feed;
-        $writer->setDateCreated(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateCreated()));
+        $writer->setDateCreated($myDate);
+        $this->assertEquals($myDate, $writer->getDateCreated());
     }
 
     public function testSetDateModifiedDefaultsToCurrentTime()
     {
         $writer = new Writer\Feed;
         $writer->setDateModified();
-        $dateNow = new Date\Date;
-        $this->assertTrue(
-            $dateNow->isLater($writer->getDateModified()) || $dateNow->equals($writer->getDateModified()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $writer->getDateModified());
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
     {
         $writer = new Writer\Feed;
         $writer->setDateModified(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateModified()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $writer->getDateModified());
     }
 
     /**
@@ -212,8 +198,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setDateModified(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateModified()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $writer->getDateModified());
     }
 
     /**
@@ -221,18 +207,19 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDateModifiedUsesGivenUnixTimestampThatIsAVerySmallInteger()
     {
+
         $writer = new Writer\Feed;
         $writer->setDateModified(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateModified()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $writer->getDateModified());
     }
 
-    public function testSetDateModifiedUsesZendDateObject()
+    public function testSetDateModifiedUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $writer = new Writer\Feed;
-        $writer->setDateModified(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getDateModified()));
+        $writer->setDateModified($myDate);
+        $this->assertEquals($myDate, $writer->getDateModified());
     }
 
     public function testSetDateCreatedThrowsExceptionOnInvalidParameter()
@@ -271,17 +258,16 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setLastBuildDate();
-        $dateNow = new Date\Date;
-        $this->assertTrue(
-            $dateNow->isLater($writer->getLastBuildDate()) || $dateNow->equals($writer->getLastBuildDate()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $writer->getLastBuildDate());
     }
 
     public function testSetLastBuildDateUsesGivenUnixTimestamp()
     {
         $writer = new Writer\Feed;
         $writer->setLastBuildDate(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $writer->getLastBuildDate());
     }
 
     /**
@@ -291,8 +277,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setLastBuildDate(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $writer->getLastBuildDate());
     }
 
     /**
@@ -302,16 +288,16 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setLastBuildDate(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $writer->getLastBuildDate());
     }
 
-    public function testSetLastBuildDateUsesZendDateObject()
+    public function testSetLastBuildDateUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $writer = new Writer\Feed;
-        $writer->setLastBuildDate(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+        $writer->setLastBuildDate($myDate);
+        $this->assertEquals($myDate, $writer->getLastBuildDate());
     }
 
     public function testSetLastBuildDateThrowsExceptionOnInvalidParameter()
@@ -906,7 +892,6 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer->addEntry($entry);
         $writer->addEntry($entry2);
         $writer->orderByDate();
-        $this->assertEquals(1230000000, $writer->getEntry(1)->getDateCreated()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1230000000, $writer->getEntry(1)->getDateCreated()->getTimestamp());
     }
-
 }

@@ -1,40 +1,28 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use Zend\Feed\Writer\Renderer,
-    Zend\Feed\Writer,
-    DOMDocument;
+use DOMDocument;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Atom extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
      * Constructor
-     * 
+     *
      * @param  Writer\Feed $container
      * @return void
      */
@@ -45,7 +33,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
 
     /**
      * Render Atom feed
-     * 
+     *
      * @return Atom
      */
     public function render()
@@ -75,14 +63,14 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
         $this->_setCopyright($this->_dom, $root);
         $this->_setCategories($this->_dom, $root);
         $this->_setHubs($this->_dom, $root);
-        
+
         foreach ($this->_extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
             $ext->setDOMDocument($this->getDOMDocument(), $root);
             $ext->render();
         }
-        
+
         foreach ($this->_container as $entry) {
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());

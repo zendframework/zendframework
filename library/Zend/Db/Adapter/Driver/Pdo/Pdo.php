@@ -10,10 +10,10 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface,
-    Zend\Db\Adapter\Driver\Feature\AbstractFeature,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
+use Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -74,9 +74,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Register connection
-     * 
+     *
      * @param  Connection $connection
-     * @return Pdo 
+     * @return Pdo
      */
     public function registerConnection(Connection $connection)
     {
@@ -87,8 +87,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Register statement prototype
-     * 
-     * @param Statement $statementPrototype 
+     *
+     * @param Statement $statementPrototype
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
@@ -98,8 +98,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Register result prototype
-     * 
-     * @param Result $resultPrototype 
+     *
+     * @param Result $resultPrototype
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
@@ -146,9 +146,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Get database platform name
-     * 
+     *
      * @param  string $nameFormat
-     * @return string 
+     * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {

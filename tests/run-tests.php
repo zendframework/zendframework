@@ -21,6 +21,9 @@
  *
  * To get a list of all @group tags: phpunit --list-groups Zend/
  *
+ * Also is possible pass specific PHPUnit's switches using the environment
+ * variable PHPUNIT_OPTS.
+ *
  * @category Zend
  * @package  UnitTests
  */
@@ -32,6 +35,10 @@ $phpunit_bin      = 'phpunit';
 $phpunit_conf     = (file_exists('phpunit.xml') ? 'phpunit.xml' : 'phpunit.xml.dist');
 $phpunit_opts     = "-c $phpunit_conf";
 $phpunit_coverage = '';
+
+if (getenv('PHPUNIT_OPTS') !== false) {
+    $phpunit_opts .= ' ' . getenv('PHPUNIT_OPTS');
+}
 
 $run_as     = 'paths';
 $components = array();
@@ -58,32 +65,6 @@ if ($argc == 1) {
                 if ($run_as == 'paths') {
                     $components = getAll($phpunit_conf);
                 }
-                break;
-            case 'Akismet':
-            case 'Amazon':
-            case 'Amazon_Ec2':
-            case 'Amazon_S3':
-            case 'Amazon_Sqs':
-            case 'Audioscrobbler':
-            case 'Delicious':
-            case 'Flickr':
-            case 'GoGrid':
-            case 'LiveDocx':
-            case 'Nirvanix':
-            case 'Rackspace':
-            case 'ReCaptcha':
-            case 'Simpy':
-            case 'SlideShare':
-            case 'StrikeIron':
-            case 'Technorati':
-            case 'Twitter':
-            case 'WindowsAzure':
-            case 'Yahoo':
-                $components[] = 'Zend_Service_' . $arg;
-                break;
-            case 'Ec2':
-            case 'S3':
-                $components[] = 'Zend_Service_Amazon_' . $arg;
                 break;
             case 'Search':
                 $components[] = 'Zend_Search_Lucene';
@@ -119,7 +100,8 @@ if ($run_as == 'groups') {
 exit($result);
 
 // Functions
-function getAll($phpunit_conf) {
+function getAll($phpunit_conf)
+{
     $components = array();
     $conf = simplexml_load_file($phpunit_conf);
     $excludes = $conf->xpath('/phpunit/testsuites/testsuite/exclude/text()');

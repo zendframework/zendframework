@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -48,22 +48,24 @@ class Mysqli implements DriverInterface
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = array())
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
         }
 
+        $options = array_intersect_key(array_merge($this->options, $options), $this->options);
+
         $this->registerConnection($connection);
-        $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
+        $this->registerStatementPrototype(($statementPrototype) ?: new Statement($options['buffer_results']));
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
     /**
      * Register connection
-     * 
+     *
      * @param  Connection $connection
-     * @return Mysqli 
+     * @return Mysqli
      */
     public function registerConnection(Connection $connection)
     {
@@ -74,8 +76,8 @@ class Mysqli implements DriverInterface
 
     /**
      * Register statement prototype
-     * 
-     * @param Statement $statementPrototype 
+     *
+     * @param Statement $statementPrototype
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
@@ -93,8 +95,8 @@ class Mysqli implements DriverInterface
 
     /**
      * Register result prototype
-     * 
-     * @param Result $resultPrototype 
+     *
+     * @param Result $resultPrototype
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
@@ -111,9 +113,9 @@ class Mysqli implements DriverInterface
 
     /**
      * Get database platform name
-     * 
+     *
      * @param  string $nameFormat
-     * @return string 
+     * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<recurrence xmlns="http://schemas.google.com/g/2005">
-DTSTART;VALUE=DATE:20070501
-DTEND;VALUE=DATE:20070502
-RRULE:FREQ=WEEKLY;BYDAY=Tu;UNTIL=20070904
-</recurrence>

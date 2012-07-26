@@ -50,7 +50,12 @@ class Gmp implements AdapterInterface
             }
         }
 
-        return gmp_strval(gmp_init($sign . $operand, $base));
+        $res = gmp_init($sign . $operand, $base);
+        if ($res === false) {
+            return false;
+        }
+
+        return gmp_strval($res);
     }
 
     /**
@@ -135,6 +140,18 @@ class Gmp implements AdapterInterface
     public function sqrt($operand)
     {
         $result = gmp_sqrt($operand);
+        return gmp_strval($result);
+    }
+
+    /**
+     * Get absolute value of a big integer
+     *
+     * @param  string $operand
+     * @return string
+     */
+    public function abs($operand)
+    {
+        $result = gmp_abs($operand);
         return gmp_strval($result);
     }
 

@@ -1,28 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_I18n
  */
 
 namespace Zend\I18n\Translator;
 
 use Locale;
+use Traversable;
+use Zend\Cache;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\I18n\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Translator.
@@ -30,8 +23,6 @@ use Zend\Cache\Storage\StorageInterface as CacheStorage;
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Translator
 {
@@ -85,6 +76,102 @@ class Translator
     protected $pluginManager;
 
     /**
+     * Instantiate a translator
+     *
+     * @param  array|Traversable $options
+     * @return Translator
+     * @throws Exception\InvalidArgumentException
+     */
+    public static function factory($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
+        $translator = new static();
+
+        // locales
+        if (isset($options['locale'])) {
+            $locales = (array) $options['locale'];
+            $translator->setLocale(array_shift($locales));
+            if (count($locales) > 0) {
+                $translator->setFallbackLocale(array_shift($locales));
+            }
+        }
+
+        // patterns
+        if (isset($options['translation_patterns'])) {
+            if (!is_array($options['translation_patterns'])) {
+                throw new Exception\InvalidArgumentException(
+                    '"translation_patterns" should be an array'
+                );
+            }
+
+            $requiredKeys = array('type', 'base_dir', 'pattern');
+            foreach ($options['translation_patterns'] as $pattern) {
+                foreach ($requiredKeys as $key) {
+                    if (!isset($pattern[$key])) {
+                        throw new Exception\InvalidArgumentException(
+                            "'{$key}' is missing for translation pattern options"
+                        );
+                    }
+                }
+
+                $translator->addTranslationPattern(
+                    $pattern['type'],
+                    $pattern['base_dir'],
+                    $pattern['pattern'],
+                    isset($pattern['text_domain']) ? $pattern['text_domain'] : 'default'
+                );
+            }
+        }
+
+        // files
+        if (isset($options['translation_files'])) {
+            if (!is_array($options['translation_files'])) {
+                throw new Exception\InvalidArgumentException(
+                    '"translation_files" should be an array'
+                );
+            }
+
+            $requiredKeys = array('type', 'filename');
+            foreach ($options['translation_files'] as $file) {
+                foreach ($requiredKeys as $key) {
+                    if (!isset($file[$key])) {
+                        throw new Exception\InvalidArgumentException(
+                            "'{$key}' is missing for translation file options"
+                        );
+                    }
+                }
+
+                $translator->addTranslationFile(
+                    $file['type'],
+                    $file['filename'],
+                    isset($file['text_domain']) ? $file['text_domain'] : 'default',
+                    isset($file['locale']) ? $file['locale'] : null
+                );
+            }
+        }
+
+        // cache
+        if (isset($options['cache'])) {
+            if ($options['cache'] instanceof CacheStorage) {
+                $translator->setCache($options['cache']);
+            } else {
+                $translator->setCache(Cache\StorageFactory::factory($options['cache']));
+            }
+        }
+
+        return $translator;
+    }
+
+    /**
      * Set the default locale.
      *
      * @param  string $locale
@@ -118,7 +205,7 @@ class Translator
      */
     public function setFallbackLocale($locale)
     {
-        $this->locale = $locale;
+        $this->fallbackLocale = $locale;
         return $this;
     }
 
@@ -129,11 +216,7 @@ class Translator
      */
     public function getFallbackLocale()
     {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
-        }
-
-        return $this->locale;
+        return $this->fallbackLocale;
     }
 
     /**
@@ -160,8 +243,8 @@ class Translator
 
     /**
      * Set the plugin manager for translation loaders
-     * 
-     * @param  LoaderPluginManager $pluginManager 
+     *
+     * @param  LoaderPluginManager $pluginManager
      * @return Translator
      */
     public function setPluginManager(LoaderPluginManager $pluginManager)
@@ -201,9 +284,9 @@ class Translator
 
         if ($translation !== null && $translation !== '') {
             return $translation;
-        } 
-        
-        if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+        }
+
+        if (null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
             return $this->translate($message, $textDomain, $fallbackLocale);
@@ -215,12 +298,13 @@ class Translator
     /**
      * Translate a plural message.
      *
-     * @param  type $singular
-     * @param  type $plural
-     * @param  type $number
-     * @param  type $textDomain
-     * @param  type $locale
+     * @param  string      $singular
+     * @param  string      $plural
+     * @param  int         $number
+     * @param  string      $textDomain
+     * @param  string|null $locale
      * @return string
+     * @throws Exception\OutOfBoundsException
      */
     public function translatePlural(
         $singular,
@@ -230,26 +314,26 @@ class Translator
         $locale = null
     ) {
         $locale      = $locale ?: $this->getLocale();
-        $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
+        $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if ($translation === null || $translation === '') {
-            if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+            if (null !== ($fallbackLocale = $this->getFallbackLocale())
                 && $locale !== $fallbackLocale
             ) {
                 return $this->translatePlural(
-                    $singular, 
-                    $plural, 
-                    $number, 
-                    $textDomain, 
+                    $singular,
+                    $plural,
+                    $number,
+                    $textDomain,
                     $fallbackLocale
                 );
             }
 
-            return ($number != 1 ? $singular : $plural);
+            return ($number == 1 ? $singular : $plural);
         }
 
         $index = $this->messages[$textDomain][$locale]
-                      ->pluralRule()
+                      ->getPluralRule()
                       ->evaluate($number);
 
         if (!isset($translation[$index])) {
@@ -282,7 +366,7 @@ class Translator
             $this->loadMessages($textDomain, $locale);
         }
 
-        if (!array_key_exists($message, $this->messages[$textDomain][$locale])) {
+        if (!isset($this->messages[$textDomain][$locale][$message])) {
             return null;
         }
 
@@ -339,7 +423,7 @@ class Translator
 
         $this->patterns[$textDomain][] = array(
             'type'    => $type,
-            'baseDir' => rtrim($baseDir . '/'),
+            'baseDir' => rtrim($baseDir, '/'),
             'pattern' => $pattern,
         );
 
@@ -371,9 +455,8 @@ class Translator
         // Try to load from pattern
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir'] . '/'
-                          . sprintf($pattern['pattern'], $locale);
-
+                $filename = $pattern['baseDir']
+                          . '/' . sprintf($pattern['pattern'], $locale);
                 if (is_file($filename)) {
                     $this->messages[$textDomain][$locale] = $this->getPluginManager()
                          ->get($pattern['type'])

@@ -1,12 +1,21 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
+ */
+
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\Http\Query,
-    ZendTest\Mvc\Router\FactoryTester,
-    Zend\Uri\Http;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request as Request;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Mvc\Router\Http\Query;
+use ZendTest\Mvc\Router\FactoryTester;
+use Zend\Uri\Http;
 
 class QueryTest extends TestCase
 {

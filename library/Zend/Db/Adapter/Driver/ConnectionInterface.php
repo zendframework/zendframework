@@ -26,5 +26,5 @@ interface ConnectionInterface
     public function commit();
     public function rollback();
     public function execute($sql); // return result set
-    public function getLastGeneratedValue();
+    public function getLastGeneratedValue($name = null);
 }

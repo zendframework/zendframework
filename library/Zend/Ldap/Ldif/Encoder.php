@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Ldif
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Ldif;
@@ -29,8 +18,6 @@ use Zend\Ldap;
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Ldif
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Encoder
 {
@@ -88,9 +75,9 @@ class Encoder
             $matches = array();
             if (substr($line, 0, 1) === ' ' && $last !== null) {
                 $last[2] .= substr($line, 1);
-            } else if (substr($line, 0, 1) === '#') {
+            } elseif (substr($line, 0, 1) === '#') {
                 continue;
-            } else if (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
+            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
                 $name  = strtolower($matches[1]);
                 $type  = trim($matches[2]);
                 $value = $matches[3];
@@ -99,13 +86,13 @@ class Encoder
                 }
                 if ($name === 'version') {
                     continue;
-                } else if (count($item) > 0 && $name === 'dn') {
+                } elseif (count($item) > 0 && $name === 'dn') {
                     $items[] = $item;
                     $item    = array();
                     $last    = null;
                 }
                 $last = array($name, $type, $value);
-            } else if (trim($line) === '') {
+            } elseif (trim($line) === '') {
                 continue;
             }
         }
@@ -133,7 +120,7 @@ class Encoder
         }
         if ($name === 'dn') {
             $entry[$name] = $value;
-        } else if (isset($entry[$name]) && $value !== '') {
+        } elseif (isset($entry[$name]) && $value !== '') {
             $entry[$name][] = $value;
         } else {
             $entry[$name] = ($value !== '') ? array($value) : array();
@@ -165,9 +152,9 @@ class Encoder
     {
         if (is_scalar($value)) {
             return $this->encodeString($value);
-        } else if (is_array($value)) {
+        } elseif (is_array($value)) {
             return $this->encodeAttributes($value);
-        } else if ($value instanceof Ldap\Node) {
+        } elseif ($value instanceof Ldap\Node) {
             return $value->toLdif($this->options);
         }
 
@@ -212,10 +199,10 @@ class Encoder
             if ($char >= 127) {
                 $base64 = true;
                 break;
-            } else if ($i === 0 && in_array($char, $unsafe_init_char)) {
+            } elseif ($i === 0 && in_array($char, $unsafe_init_char)) {
                 $base64 = true;
                 break;
-            } else if (in_array($char, $unsafe_char)) {
+            } elseif (in_array($char, $unsafe_char)) {
                 $base64 = true;
                 break;
             }

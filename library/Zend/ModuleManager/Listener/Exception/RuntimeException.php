@@ -14,11 +14,11 @@ use Zend\ModuleManager\Exception;
 
 /**
  * Runtime Exception
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class RuntimeException extends Exception\RuntimeException implements 
-    ExceptionInterface
-{}
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
+{
+}

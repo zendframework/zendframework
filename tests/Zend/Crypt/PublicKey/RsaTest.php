@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Crypt
  */
 
 namespace ZendTest\Crypt;
@@ -29,8 +18,6 @@ use Zend\Crypt\PublicKey\Rsa\Exception;
  * @category   Zend
  * @package    Zend_Crypt
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
 class RsaTest extends \PHPUnit_Framework_TestCase
@@ -59,7 +46,7 @@ class RsaTest extends \PHPUnit_Framework_TestCase
 
     /** @var Rsa */
     protected $rsa;
-    
+
     /** @var Rsa */
     protected $rsaBase64Out;
 
@@ -154,7 +141,7 @@ CERT;
         ));
         $this->assertInstanceOf('Zend\Crypt\PublicKey\Rsa', $rsa);
         $this->assertInstanceOf('Zend\Crypt\PublicKey\RsaOptions', $rsa->getOptions());
-    }    
+    }
 
     public function testFacrotyCreatesKeys()
     {
@@ -421,13 +408,9 @@ CERT;
             'private_key_bits' => 512,
         ));
 
-        try {
-            $rsa = Rsa::factory(array(
-                'pass_phrase' => '0987654321',
-                'private_key' => $rsaOptions->getPrivateKey()->toString(),
-            ));
-        } catch (Exception\RuntimeException $e) {
-            $this->fail('Passphrase loading of a private key failed');
-        }
+        Rsa::factory(array(
+            'pass_phrase' => '0987654321',
+            'private_key' => $rsaOptions->getPrivateKey()->toString(),
+        ));
     }
 }

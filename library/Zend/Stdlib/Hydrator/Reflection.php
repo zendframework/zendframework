@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
+ */
 
 namespace Zend\Stdlib\Hydrator;
 
 use ReflectionClass;
-use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\Exception;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class Reflection implements HydratorInterface
 {
@@ -12,7 +20,7 @@ class Reflection implements HydratorInterface
      * Simple in-memory array cache of ReflectionProperties used.
      * @var array
      */
-    static protected $reflProperties = array();
+    protected static $reflProperties = array();
 
     /**
      * Extract values from an object
@@ -60,7 +68,7 @@ class Reflection implements HydratorInterface
     {
         if (is_object($input)) {
             $input = get_class($input);
-        } else if (!is_string($input)) {
+        } elseif (!is_string($input)) {
             throw new Exception\InvalidArgumentException('Input must be a string or an object.');
         }
 

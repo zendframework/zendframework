@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Protocol;
@@ -25,8 +14,6 @@ namespace Zend\Mail\Protocol;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Imap
 {
@@ -55,7 +42,7 @@ class Imap
      * @param  bool     $ssl   use ssl? 'SSL', 'TLS' or false
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
-    function __construct($host = '', $port = null, $ssl = false)
+    public function __construct($host = '', $port = null, $ssl = false)
     {
         if ($host) {
             $this->connect($host, $port, $ssl);
@@ -118,7 +105,7 @@ class Imap
      */
     protected function _nextLine()
     {
-        $line = @fgets($this->_socket);
+        $line = fgets($this->_socket);
         if ($line === false) {
             throw new Exception\RuntimeException('cannot read - connection closed?');
         }
@@ -322,7 +309,7 @@ class Imap
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (@fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
                     throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
@@ -334,7 +321,7 @@ class Imap
             }
         }
 
-        if (@fwrite($this->_socket, $line . "\r\n") === false) {
+        if (fwrite($this->_socket, $line . "\r\n") === false) {
             throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }
@@ -537,9 +524,9 @@ class Imap
     {
         if (is_array($from)) {
             $set = implode(',', $from);
-        } else if ($to === null) {
+        } elseif ($to === null) {
             $set = (int)$from;
-        } else if ($to === INF) {
+        } elseif ($to === INF) {
             $set = (int)$from . ':*';
         } else {
             $set = (int)$from . ':' . (int)$to;

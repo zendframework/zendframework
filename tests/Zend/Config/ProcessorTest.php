@@ -1,51 +1,38 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace ZendTest\Config;
 
-use Zend\Config\Config,
-Zend\Config\Processor\Token as TokenProcessor,
-Zend\Config\Processor\Translator as TranslatorProcessor,
-Zend\Config\Processor\Filter as FilterProcessor,
-Zend\Config\Processor\Constant as ConstantProcessor,
-Zend\Config\Processor\Queue as Queue,
-Zend\Translator\Translator,
-Zend\Translator\Adapter\ArrayAdapter,
-Zend\Filter\StringToLower,
-Zend\Filter\StringToUpper,
-Zend\Filter\PregReplace;
+use Zend\Config\Config;
+use Zend\Config\Processor\Token as TokenProcessor;
+use Zend\Config\Processor\Translator as TranslatorProcessor;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Processor\Constant as ConstantProcessor;
+use Zend\Config\Processor\Queue as Queue;
+use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\Loader\PhpArray;
+use Zend\Filter\StringToLower;
+use Zend\Filter\StringToUpper;
+use Zend\Filter\PregReplace;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
 class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
     protected $nested;
     protected $tokenBare, $tokenPrefix, $tokenSuffix, $tokenSurround, $tokenSurroundMixed;
-    protected $translator, $translatorStrings;
+    protected $translatorData, $translatorFile;
     protected $userConstants, $phpConstants;
     protected $filter;
 
@@ -116,7 +103,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->translator = array(
+        $this->translatorData = array(
             'pages' => array(
                 array(
                     'id' => 'oneDog',
@@ -131,10 +118,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->translatorStrings = array(
-            'one dog' => 'ein Hund',
-            'two dogs' => 'zwei Hunde'
-        );
+        $this->translatorFile = realpath(__DIR__ . '/_files/translations-de_DE.php');
 
         $this->filter = array(
             'simple' => 'some MixedCase VALue',
@@ -142,11 +126,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
                 'simple' => 'OTHER mixed Case Value',
             ),
         );
-
-        if (ArrayAdapter::hasCache()) {
-            ArrayAdapter::clearCache();
-            ArrayAdapter::removeCache();
-        }
 
         $this->userConstants = array(
             'simple' => 'SOME_USERLAND_CONSTANT',
@@ -198,10 +177,11 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     public function testAddInvalidToken()
     {
         $processor = new TokenProcessor();
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot use ' . gettype(array()) . ' as token name.');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
+                                    'Cannot use ' . gettype(array()) . ' as token name.');
         $processor->addToken(array(), 'bar');
     }
-    
+
     public function testSingleValueToken()
     {
         $processor = new TokenProcessor();
@@ -210,17 +190,18 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $out = $processor->processValue($data);
         $this->assertEquals($out, 'test');
     }
-    
+
     public function testTokenReadOnly()
     {
         $config = new Config($this->tokenBare, false);
         $processor = new TokenProcessor();
         $processor->addToken('BARETOKEN', 'some replaced value');
-        
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
+                                    'Cannot process config because it is read-only');
         $processor->process($config);
     }
-    
+
     public function testTokenPrefix()
     {
         $config = new Config($this->tokenPrefix, true);
@@ -306,7 +287,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($tokens));
         $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
         $this->assertTrue(!$processor->getUserOnly());
-        
+
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
         $this->assertEquals('some constant value', $config->nested->simple);
@@ -324,17 +305,17 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->process($config);
 
         $tokens = $processor->getTokens();
-        
+
         $this->assertTrue(is_array($tokens));
         $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
         $this->assertTrue($processor->getUserOnly());
-        
+
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
         $this->assertEquals('some constant value', $config->nested->simple);
         $this->assertEquals('some text with some constant value inside', $config->nested->inside);
     }
-    
+
     /**
      * @depends testTokenSurround
      */
@@ -352,42 +333,45 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
-        $config = new Config($this->translator, true);
-        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
-        $processor = new TranslatorProcessor($translator);
+        $config     = new Config($this->translatorData, true);
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
 
         $processor->process($config);
 
         $this->assertEquals('oneDog', $config->pages[0]->id);
         $this->assertEquals('ein Hund', $config->pages[0]->label);
-
         $this->assertEquals('twoDogs', $config->pages[1]->id);
         $this->assertEquals('zwei Hunde', $config->pages[1]->label);
     }
-    
+
     public function testTranslatorReadOnly()
     {
-        $config = new Config($this->translator, false);
-        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
-        $processor = new TranslatorProcessor($translator);
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+        $config     = new Config($this->translatorData, false);
+        $translator = new Translator();
+        $processor  = new TranslatorProcessor($translator);
+
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
+                                    'Cannot process config because it is read-only');
         $processor->process($config);
     }
 
     public function testTranslatorSingleValue()
-    {        
-        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
-        $processor = new TranslatorProcessor($translator);
-        $word = 'one dog'; 
-        $this->assertEquals('ein Hund', $processor->processValue($word));
+    {
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
+
+        $this->assertEquals('ein Hund', $processor->processValue('one dog'));
     }
-    
+
     public function testFilter()
     {
         $config = new Config($this->filter, true);
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
-        
+
         $this->assertTrue($processor->getFilter() instanceof StringToLower);
         $processor->process($config);
 
@@ -400,20 +384,21 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $config = new Config($this->filter, false);
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
-        
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
+                                    'Cannot process config because it is read-only');
         $processor->process($config);
     }
-    
+
     public function testFilterValue()
     {
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
-        
+
         $value = 'TEST';
         $this->assertEquals('test', $processor->processValue($value));
     }
-    
+
     /**
      * @depends testFilter
      */
@@ -436,7 +421,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('some mixedcase value', $config->simple);
         $this->assertEquals('other mixed case value', $config->nested->simple);
     }
-    
+
     public function testQueueReadOnly()
     {
         $config = new Config($this->filter, false);
@@ -448,8 +433,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
          */
         $queue = new Queue();
         $queue->insert($lowerProcessor);
-        
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
+                                    'Cannot process config because it is read-only');
         $queue->process($config);
     }
 
@@ -466,11 +452,12 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue = new Queue();
         $queue->insert($upperProcessor);
         $queue->insert($lowerProcessor);
-        
+
         $data ='TeSt';
         $this->assertEquals('test', $queue->processValue($data));
-        
+
     }
+
     /**
      * @depends testQueueFIFO
      */

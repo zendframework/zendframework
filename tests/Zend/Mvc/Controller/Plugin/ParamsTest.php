@@ -1,13 +1,22 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
+ */
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteMatch,
-    ZendTest\Mvc\Controller\TestAsset\SampleController;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Header\GenericHeader;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use ZendTest\Mvc\Controller\TestAsset\SampleController;
 
 class ParamsTest extends TestCase
 {
@@ -76,10 +85,41 @@ class ParamsTest extends TestCase
         $this->assertEquals($value, 'post:1234');
     }
 
+    public function testFromFilesReturnsExpectedValue()
+    {
+        $file = array(
+            'name'     => 'test.txt',
+            'type'     => 'text/plain',
+            'size'     => 0,
+            'tmp_name' => '/tmp/' . uniqid(),
+            'error'    => UPLOAD_ERR_OK,
+        );
+        $this->request->getFiles()->set('test', $file);
+        $this->controller->dispatch($this->request);
+
+        $value = $this->plugin->fromFiles('test');
+        $this->assertEquals($file, $value);
+    }
+
+    public function testFromHeaderReturnsExpectedValue()
+    {
+        $header = new GenericHeader('X-TEST', 'test');
+        $this->request->getHeaders()->addHeader($header);
+        $this->controller->dispatch($this->request);
+
+        $value = $this->plugin->fromHeader('X-TEST');
+        $this->assertSame($header, $value);
+    }
+
+    public function testInvokeWithNoArgumentsReturnsInstance()
+    {
+        $this->assertSame($this->plugin, $this->plugin->__invoke());
+    }
+
     protected function setQuery()
     {
         $this->request->setMethod(Request::METHOD_GET);
-        $this->request->query()->set('value', 'query:1234');
+        $this->request->getQuery()->set('value', 'query:1234');
 
         $this->controller->dispatch($this->request);
     }
@@ -87,7 +127,7 @@ class ParamsTest extends TestCase
     protected function setPost()
     {
         $this->request->setMethod(Request::METHOD_POST);
-        $this->request->post()->set('value', 'post:1234');
+        $this->request->getPost()->set('value', 'post:1234');
 
         $this->controller->dispatch($this->request);
     }

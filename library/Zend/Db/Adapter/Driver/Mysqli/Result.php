@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ResultInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -75,7 +75,7 @@ class Result implements \Iterator, ResultInterface
      * @param mixed $resource
      * @param mixed $generatedValue
      * @param bool|null $isBuffered
-     * @return Result 
+     * @return Result
      */
     public function initialize($resource, $generatedValue, $isBuffered = null)
     {
@@ -114,7 +114,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Return the resource
-     * @return mixed 
+     * @return mixed
      */
     public function getResource()
     {
@@ -123,8 +123,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Is query result?
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isQueryResult()
     {
@@ -165,18 +165,18 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Mysqli's binding and returning of statement values
-     * 
-     * Mysqli requires you to bind variables to the extension in order to 
+     *
+     * Mysqli requires you to bind variables to the extension in order to
      * get data out.  These values have to be references:
      * @see http://php.net/manual/en/mysqli-stmt.bind-result.php
-     * 
+     *
      * @throws \RuntimeException
      * @return bool
      */
     protected function loadDataFromMysqliStatement()
     {
         $data = null;
-        // build the default reference based bind strutcure, if it does not already exist
+        // build the default reference based bind structure, if it does not already exist
         if ($this->statementBindValues['keys'] === null) {
             $this->statementBindValues['keys'] = array();
             $resultResource = $this->resource->result_metadata();
@@ -210,8 +210,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Load from mysqli result
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     protected function loadFromMysqliResult()
     {
@@ -291,7 +291,7 @@ class Result implements \Iterator, ResultInterface
     public function count()
     {
         if ($this->isBuffered === false) {
-            throw new Exception\RuntimeException('Row count is not availabe in unbuffered result sets.');
+            throw new Exception\RuntimeException('Row count is not available in unbuffered result sets.');
         }
         return $this->resource->num_rows;
     }

@@ -1,36 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
+use Zend\Form\Form;
 use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilter;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FieldsetTest extends TestCase
 {
@@ -96,6 +85,12 @@ class FieldsetTest extends TestCase
                 ),
             ),
         );
+    }
+
+    public function testExtractOnAnEmptyRelationship()
+    {
+        $form = new TestAsset\FormCollection();
+        $form->populateValues(array('fieldsets' => array()));
     }
 
     public function testFieldsetIsEmptyByDefault()
@@ -202,6 +197,23 @@ class FieldsetTest extends TestCase
         $this->assertEquals($messages, $test);
     }
 
+    public function testOnlyElementsWithErrorsInMessages()
+    {
+        $fieldset = new TestAsset\FieldsetWithInputFilter('set');
+        $fieldset->add(new Element('foo'));
+        $fieldset->add(new Element('bar'));
+
+        $form = new Form();
+        $form->add($fieldset);
+        $form->setInputFilter(new InputFilter());
+        $form->setData(array());
+        $form->isValid();
+
+        $messages = $form->getMessages();
+        $this->assertArrayHasKey('foo', $messages['set']);
+        $this->assertArrayNotHasKey('bar', $messages['set']);
+    }
+
     public function testCanRetrieveMessagesForSingleElementsAfterMessagesHaveBeenSet()
     {
         $this->populateFieldset();
@@ -252,5 +264,20 @@ class FieldsetTest extends TestCase
             $test[] = $element->getName();
         }
         $this->assertEquals($expected, $test);
+    }
+
+    public function testSubFieldsetsBindObject()
+    {
+        $form = new Form();
+        $fieldset = new Fieldset('foobar');
+        $form->add($fieldset);
+        $value = new \ArrayObject(array(
+            'foobar' => 'abc',
+        ));
+        $value['foobar'] = new \ArrayObject(array(
+            'foo' => 'abc'
+        ));
+        $form->bind($value);
+        $this->assertSame($fieldset, $form->get('foobar'));
     }
 }

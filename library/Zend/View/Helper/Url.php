@@ -1,57 +1,45 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-use Zend\Mvc\Router\RouteStackInterface,
-    Zend\Mvc\Router\RouteMatch,
-    Zend\View\Exception;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\RouteStackInterface;
+use Zend\View\Exception;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Url extends AbstractHelper
 {
     /**
      * RouteStackInterface instance.
-     * 
+     *
      * @var RouteStackInterface
      */
     protected $router;
-    
+
     /**
      * RouteInterface match returned by the router.
-     * 
+     *
      * @var RouteMatch.
      */
     protected $routeMatch;
 
     /**
      * Set the router to use for assembling.
-     * 
+     *
      * @param RouteStackInterface $router
      * @return Url
      */
@@ -60,10 +48,10 @@ class Url extends AbstractHelper
         $this->router = $router;
         return $this;
     }
-    
+
     /**
      * Set route match returned by the router.
-     * 
+     *
      * @param  RouteMatch $routeMatch
      * @return self
      */
@@ -96,18 +84,24 @@ class Url extends AbstractHelper
             if ($this->routeMatch === null) {
                 throw new Exception\RuntimeException('No RouteMatch instance provided');
             }
-            
+
             $name = $this->routeMatch->getMatchedRouteName();
-            
+
             if ($name === null) {
                 throw new Exception\RuntimeException('RouteMatch does not contain a matched route name');
             }
         }
-        
+
         if ($reuseMatchedParams && $this->routeMatch !== null) {
-            $params = array_merge($this->routeMatch->getParams(), $params);
+            $routeMatchParams = $this->routeMatch->getParams();
+
+            if (isset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
+                $routeMatchParams['controller'] = $routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
+            }
+
+            $params = array_merge($routeMatchParams, $params);
         }
-        
+
         $options['name'] = $name;
 
         return $this->router->assemble($params, $options);

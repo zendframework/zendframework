@@ -106,21 +106,7 @@ class Mvc extends AbstractPage
     public function isActive($recursive = false)
     {
         if (!$this->active) {
-            $reqParams = array();
-            if ($this->routeMatch instanceof RouteMatch) {
-                $reqParams = $this->routeMatch->getParams();
-
-                if (null !== $this->getRoute()
-                    && $this->routeMatch->getMatchedRouteName() === $this->getRoute()
-                ) {
-                    $this->active = true;
-                    return true;
-                }
-            }
-
-
             $myParams = $this->params;
-
             if (null !== $this->controller) {
                 $myParams['controller'] = $this->controller;
             } else {
@@ -129,21 +115,30 @@ class Mvc extends AbstractPage
                  */
                 $myParams['controller'] = 'index';
             }
-
             if (null !== $this->action) {
                 $myParams['action'] = $this->action;
             } else {
                 /**
                  * @todo In ZF1, this was configurable and pulled from the front controller
                  */
-                $myParams['action'] = 'action';
+                $myParams['action'] = 'index';
             }
 
-            if (count(array_intersect_assoc($reqParams, $myParams)) ==
-                count($myParams)
-            ) {
-                $this->active = true;
-                return true;
+            if ($this->routeMatch instanceof RouteMatch) {
+                $reqParams = $this->routeMatch->getParams();
+                if($this->getRoute() !== null) {
+                    $routeName  = $this->getRoute();
+                } else {
+                    $routeName  = $this->routeMatch->getMatchedRouteName();
+                }
+
+                if ($this->routeMatch->getMatchedRouteName() === $routeName
+                    && (count($reqParams) == count($myParams))
+                    && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
+                ) {
+                    $this->active = true;
+                    return true;
+                }
             }
         }
 

@@ -94,6 +94,19 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-240
+     * @covers Zend\Db\Sql\Update::where
+     */
+    public function testPassingMultipleKeyValueInWhereClause()
+    {
+        $update = clone $this->update;
+        $update->table('table');
+        $update->set(array('fld1' => 'val1'));
+        $update->where(array('id1' => 'val1', 'id2' => 'val2'));
+        $this->assertEquals('UPDATE "table" SET "fld1" = \'val1\' WHERE "id1" = \'val1\' AND "id2" = \'val2\'', $update->getSqlString());
+    }
+
+    /**
      * @covers Zend\Db\Sql\Update::prepareStatement
      */
     public function testPrepareStatement()

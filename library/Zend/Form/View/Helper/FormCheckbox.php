@@ -31,7 +31,7 @@ class FormCheckbox extends FormInput
     public function render(ElementInterface $element)
     {
         $name = $element->getName();
-        if (empty($name) && $name !== 0) {
+        if (is_null($name) || $name === '') {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__

@@ -254,4 +254,10 @@ class FormButtonTest extends CommonTestCase
         $element = new Element('foo');
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
+
+    public function testDoesNotThrowExceptionIfNameIsZero()
+    {
+        $element = new Element('0');
+        $this->helper->__invoke($element, '{button_content}');
+    }
 }

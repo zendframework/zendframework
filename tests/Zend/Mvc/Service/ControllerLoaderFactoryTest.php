@@ -21,6 +21,16 @@ use Zend\ServiceManager\ServiceManager;
 
 class ControllerLoaderFactoryTest extends TestCase
 {
+    /**
+     * @var ServiceManager
+     */
+    protected $services;
+
+    /**
+     * @var ControllerLoaderFactory
+     */
+    protected $loader;
+
     public function setUp()
     {
         $loaderFactory  = new ControllerLoaderFactory();
@@ -75,5 +85,28 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->assertSame($this->services, $controller->getServiceLocator());
         $this->assertSame($this->services->get('EventManager'), $controller->getEventManager());
         $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
+    }
+
+    public function willInstantiateDefinedClassFromDi()
+    {
+        $config = new Config(array(
+            'di' => array(
+                'instance' => array(
+                    'my-controller' => 'stdClass',
+                ),
+            ),
+        ));
+        $config->configureServiceManager($this->loader);
+
+        $controller = $this->loader->get('my-controller');
+        $this->assertInstanceOf('stdClass', $controller);
+    }
+
+    public function testWillNotInstantiateArbitraryClassFromDic()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $config = new Config(array('di' => array()));
+        $config->configureServiceManager($this->loader);
+        $this->loader->get('stdClass');
     }
 }

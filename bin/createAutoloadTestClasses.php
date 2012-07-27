@@ -12,11 +12,7 @@ function createClasses($depth, $namespace)
 {
     foreach (range('a', 'p') as $letter) {
         // Create content for namespaced class
-        $content =<<<EOT
-<?php
-namespace $namespace;
-class $letter { }
-EOT;
+        $content = "<?php\nnamespace $namespace;\nclass $letter { }";
 
         // Write content to disk
         $dir = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);

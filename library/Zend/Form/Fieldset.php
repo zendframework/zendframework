@@ -485,7 +485,7 @@ class Fieldset extends Element implements FieldsetInterface
         $hydratableData = array();
 
         foreach ($values as $name => $value) {
-            if (empty($value)) {
+            if (empty($value) || !$this->has($name)) {
                 continue;
             }
 

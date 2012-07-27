@@ -26,14 +26,14 @@ class JsPush extends AbstractAdapter
      *
      * @var string
      */
-    protected $_updateMethodName = 'Zend\ProgressBar\ProgressBar\Update';
+    protected $updateMethodName = 'Zend\ProgressBar\ProgressBar\Update';
 
     /**
      * Name of the JavaScript method to call on finish
      *
      * @var string
      */
-    protected $_finishMethodName;
+    protected $finishMethodName;
 
     /**
      * Set the update method name
@@ -43,7 +43,7 @@ class JsPush extends AbstractAdapter
      */
     public function setUpdateMethodName($methodName)
     {
-        $this->_updateMethodName = $methodName;
+        $this->updateMethodName = $methodName;
 
         return $this;
     }
@@ -56,7 +56,7 @@ class JsPush extends AbstractAdapter
      */
     public function setFinishMethodName($methodName)
     {
-        $this->_finishMethodName = $methodName;
+        $this->finishMethodName = $methodName;
 
         return $this;
     }
@@ -84,7 +84,7 @@ class JsPush extends AbstractAdapter
         );
 
         $data = '<script type="text/javascript">'
-              . 'parent.' . $this->_updateMethodName . '(' . Json::encode($arguments) . ');'
+              . 'parent.' . $this->updateMethodName . '(' . Json::encode($arguments) . ');'
               . '</script>';
 
         // Output the data
@@ -98,12 +98,12 @@ class JsPush extends AbstractAdapter
      */
     public function finish()
     {
-        if ($this->_finishMethodName === null) {
+        if ($this->finishMethodName === null) {
             return;
         }
 
         $data = '<script type="text/javascript">'
-              . 'parent.' . $this->_finishMethodName . '();'
+              . 'parent.' . $this->finishMethodName . '();'
               . '</script>';
 
         $this->_outputData($data);

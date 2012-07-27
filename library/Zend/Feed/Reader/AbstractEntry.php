@@ -25,42 +25,42 @@ abstract class AbstractEntry
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * DOM document object
      *
      * @var DOMDocument
      */
-    protected $_domDocument = null;
+    protected $domDocument = null;
 
     /**
      * Entry instance
      *
      * @var Zend\Feed\Entry
      */
-    protected $_entry = null;
+    protected $entry = null;
 
     /**
      * Pointer to the current entry
      *
      * @var int
      */
-    protected $_entryKey = 0;
+    protected $entryKey = 0;
 
     /**
      * XPath object
      *
      * @var DOMXPath
      */
-    protected $_xpath = null;
+    protected $xpath = null;
 
     /**
      * Registered extensions
      *
      * @var array
      */
-    protected $_extensions = array();
+    protected $extensions = array();
 
     /**
      * Constructor
@@ -72,13 +72,13 @@ abstract class AbstractEntry
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
-        $this->_entry       = $entry;
-        $this->_entryKey    = $entryKey;
-        $this->_domDocument = $entry->ownerDocument;
+        $this->entry       = $entry;
+        $this->entryKey    = $entryKey;
+        $this->domDocument = $entry->ownerDocument;
         if ($type !== null) {
-            $this->_data['type'] = $type;
+            $this->data['type'] = $type;
         } else {
-            $this->_data['type'] = Reader::detectType($feed);
+            $this->data['type'] = Reader::detectType($feed);
         }
         $this->_loadExtensions();
     }
@@ -90,7 +90,7 @@ abstract class AbstractEntry
      */
     public function getDomDocument()
     {
-        return $this->_domDocument;
+        return $this->domDocument;
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class AbstractEntry
      */
     public function getElement()
     {
-        return $this->_entry;
+        return $this->entry;
     }
 
     /**
@@ -137,7 +137,7 @@ abstract class AbstractEntry
      */
     public function getType()
     {
-        return $this->_data['type'];
+        return $this->data['type'];
     }
 
     /**
@@ -147,10 +147,10 @@ abstract class AbstractEntry
      */
     public function getXpath()
     {
-        if (!$this->_xpath) {
+        if (!$this->xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
-        return $this->_xpath;
+        return $this->xpath;
     }
 
     /**
@@ -161,7 +161,7 @@ abstract class AbstractEntry
      */
     public function setXpath(DOMXPath $xpath)
     {
-        $this->_xpath = $xpath;
+        $this->xpath = $xpath;
         return $this;
     }
 
@@ -172,7 +172,7 @@ abstract class AbstractEntry
      */
     public function getExtensions()
     {
-        return $this->_extensions;
+        return $this->extensions;
     }
 
     /**
@@ -183,8 +183,8 @@ abstract class AbstractEntry
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '\Entry', $this->_extensions)) {
-            return $this->_extensions[$name . '\Entry'];
+        if (array_key_exists($name . '\Entry', $this->extensions)) {
+            return $this->extensions[$name . '\Entry'];
         }
         return null;
     }
@@ -199,7 +199,7 @@ abstract class AbstractEntry
      */
     public function __call($method, $args)
     {
-        foreach ($this->_extensions as $extension) {
+        foreach ($this->extensions as $extension) {
             if (method_exists($extension, $method)) {
                 return call_user_func_array(array($extension, $method), $args);
             }
@@ -222,8 +222,8 @@ abstract class AbstractEntry
                 continue;
             }
             $className = Reader::getPluginLoader()->getClassName($extension);
-            $this->_extensions[$extension] = new $className(
-                $this->getElement(), $this->_entryKey, $this->_data['type']
+            $this->extensions[$extension] = new $className(
+                $this->getElement(), $this->entryKey, $this->data['type']
             );
         }
     }

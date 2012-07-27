@@ -51,14 +51,14 @@ class Result
      *
      * @var int
      */
-    protected $_code;
+    protected $code;
 
     /**
      * The identity used in the authentication attempt
      *
      * @var mixed
      */
-    protected $_identity;
+    protected $identity;
 
     /**
      * An array of string reasons why the authentication attempt was unsuccessful
@@ -67,7 +67,7 @@ class Result
      *
      * @var array
      */
-    protected $_messages;
+    protected $messages;
 
     /**
      * Sets the result code, identity, and failure messages
@@ -86,9 +86,9 @@ class Result
             $code = 1;
         }
 
-        $this->_code     = $code;
-        $this->_identity = $identity;
-        $this->_messages = $messages;
+        $this->code     = $code;
+        $this->identity = $identity;
+        $this->messages = $messages;
     }
 
     /**
@@ -98,7 +98,7 @@ class Result
      */
     public function isValid()
     {
-        return ($this->_code > 0) ? true : false;
+        return ($this->code > 0) ? true : false;
     }
 
     /**
@@ -108,7 +108,7 @@ class Result
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -118,7 +118,7 @@ class Result
      */
     public function getIdentity()
     {
-        return $this->_identity;
+        return $this->identity;
     }
 
     /**
@@ -130,6 +130,6 @@ class Result
      */
     public function getMessages()
     {
-        return $this->_messages;
+        return $this->messages;
     }
 }

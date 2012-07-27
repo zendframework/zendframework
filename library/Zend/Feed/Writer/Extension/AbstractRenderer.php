@@ -22,39 +22,39 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * @var DOMDocument
      */
-    protected $_dom = null;
+    protected $dom = null;
 
     /**
      * @var mixed
      */
-    protected $_entry = null;
+    protected $entry = null;
 
     /**
      * @var DOMElement
      */
-    protected $_base = null;
+    protected $base = null;
 
     /**
      * @var mixed
      */
-    protected $_container = null;
+    protected $container = null;
 
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
      * @var DOMElement
      */
-    protected $_rootElement = null;
+    protected $rootElement = null;
 
     /**
      * Encoding of all text values
      *
      * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * Set the data container
@@ -64,7 +64,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function setDataContainer($container)
     {
-        $this->_container = $container;
+        $this->container = $container;
         return $this;
     }
 
@@ -76,7 +76,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function setEncoding($enc)
     {
-        $this->_encoding = $enc;
+        $this->encoding = $enc;
         return $this;
     }
 
@@ -87,7 +87,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
@@ -99,8 +99,8 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function setDomDocument(DOMDocument $dom, DOMElement $base)
     {
-        $this->_dom  = $dom;
-        $this->_base = $base;
+        $this->dom  = $dom;
+        $this->base = $base;
         return $this;
     }
 
@@ -111,7 +111,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function getDataContainer()
     {
-        return $this->_container;
+        return $this->container;
     }
 
     /**
@@ -122,7 +122,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
         return $this;
     }
 
@@ -133,7 +133,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -144,7 +144,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function setRootElement(DOMElement $root)
     {
-        $this->_rootElement = $root;
+        $this->rootElement = $root;
         return $this;
     }
 
@@ -155,7 +155,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function getRootElement()
     {
-        return $this->_rootElement;
+        return $this->rootElement;
     }
 
     /**

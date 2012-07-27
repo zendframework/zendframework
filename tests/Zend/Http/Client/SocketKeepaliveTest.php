@@ -17,7 +17,7 @@ namespace ZendTest\Http\Client;
  * adapters and configurations.
  *
  * Note that $this->baseuri must point to a directory on a web server
- * containing all the files under the _files directory. You should symlink
+ * containing all the files under the files directory. You should symlink
  * or copy these files and set 'baseuri' properly.
  *
  * You can also set the proper constand in your test configuration file to

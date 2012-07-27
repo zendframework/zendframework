@@ -25,8 +25,8 @@ class DbTableSelect extends DbSelect
      */
     public function getItems($offset, $itemCountPerPage)
     {
-        $this->_select->limit($itemCountPerPage, $offset);
+        $this->select->limit($itemCountPerPage, $offset);
 
-        return $this->_select->getTable()->fetchAll($this->_select);
+        return $this->select->getTable()->fetchAll($this->select);
     }
 }

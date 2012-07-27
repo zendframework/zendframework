@@ -47,25 +47,25 @@ class Server extends AbstractServer
      * Request object
      * @var Request
      */
-    protected $_request;
+    protected $request;
 
     /**
      * Response object
      * @var Response
      */
-    protected $_response;
+    protected $response;
 
     /**
      * SMD object
      * @var Smd
      */
-    protected $_serviceMap;
+    protected $serviceMap;
 
     /**
      * SMD class accessors
      * @var array
      */
-    protected $_smdMethods;
+    protected $smdMethods;
 
     /**
      * Attach a function or callback to the server
@@ -214,7 +214,7 @@ class Server extends AbstractServer
      */
     public function setRequest(Request $request)
     {
-        $this->_request = $request;
+        $this->request = $request;
         return $this;
     }
 
@@ -225,10 +225,10 @@ class Server extends AbstractServer
      */
     public function getRequest()
     {
-        if (null === ($request = $this->_request)) {
+        if (null === ($request = $this->request)) {
             $this->setRequest(new Request\Http());
         }
-        return $this->_request;
+        return $this->request;
     }
 
     /**
@@ -239,7 +239,7 @@ class Server extends AbstractServer
      */
     public function setResponse(Response $response)
     {
-        $this->_response = $response;
+        $this->response = $response;
         return $this;
     }
 
@@ -250,10 +250,10 @@ class Server extends AbstractServer
      */
     public function getResponse()
     {
-        if (null === ($response = $this->_response)) {
+        if (null === ($response = $this->response)) {
             $this->setResponse(new Response\Http());
         }
-        return $this->_response;
+        return $this->response;
     }
 
     /**
@@ -314,10 +314,10 @@ class Server extends AbstractServer
      */
     public function getServiceMap()
     {
-        if (null === $this->_serviceMap) {
-            $this->_serviceMap = new Smd();
+        if (null === $this->serviceMap) {
+            $this->serviceMap = new Smd();
         }
-        return $this->_serviceMap;
+        return $this->serviceMap;
     }
 
     /**
@@ -459,8 +459,8 @@ class Server extends AbstractServer
      */
     protected function _getSmdMethods()
     {
-        if (null === $this->_smdMethods) {
-            $this->_smdMethods = array();
+        if (null === $this->smdMethods) {
+            $this->smdMethods = array();
             $methods = get_class_methods('Zend\\Json\\Server\\Smd');
             foreach ($methods as $key => $method) {
                 if (!preg_match('/^(set|get)/', $method)) {
@@ -469,10 +469,10 @@ class Server extends AbstractServer
                 if (strstr($method, 'Service')) {
                     continue;
                 }
-                $this->_smdMethods[] = $method;
+                $this->smdMethods[] = $method;
             }
         }
-        return $this->_smdMethods;
+        return $this->smdMethods;
     }
 
     /**

@@ -23,31 +23,31 @@ class Mbox extends AbstractStorage
      * file handle to mbox file
      * @var null|resource
      */
-    protected $_fh;
+    protected $fh;
 
     /**
      * filename of mbox file for __wakeup
      * @var string
      */
-    protected $_filename;
+    protected $filename;
 
     /**
      * modification date of mbox file for __wakeup
      * @var int
      */
-    protected $_filemtime;
+    protected $filemtime;
 
     /**
      * start and end position of messages as array('start' => start, 'separator' => headersep, 'end' => end)
      * @var array
      */
-    protected $_positions;
+    protected $positions;
 
     /**
      * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = '\Zend\Mail\Storage\Message\File';
+    protected $messageClass = '\Zend\Mail\Storage\Message\File';
 
     /**
      * Count messages all messages in current box
@@ -57,7 +57,7 @@ class Mbox extends AbstractStorage
      */
     public function countMessages()
     {
-        return count($this->_positions);
+        return count($this->positions);
     }
 
 
@@ -70,12 +70,12 @@ class Mbox extends AbstractStorage
     public function getSize($id = 0)
     {
         if ($id) {
-            $pos = $this->_positions[$id - 1];
+            $pos = $this->positions[$id - 1];
             return $pos['end'] - $pos['start'];
         }
 
         $result = array();
-        foreach ($this->_positions as $num => $pos) {
+        foreach ($this->positions as $num => $pos) {
             $result[$num + 1] = $pos['end'] - $pos['start'];
         }
 
@@ -88,15 +88,15 @@ class Mbox extends AbstractStorage
      *
      * @param int $id number of message
      * @throws Exception\InvalidArgumentException
-     * @return array positions as in _positions
+     * @return array positions as in positions
      */
-    protected function _getPos($id)
+    protected function getPos($id)
     {
-        if (!isset($this->_positions[$id - 1])) {
+        if (!isset($this->positions[$id - 1])) {
             throw new Exception\InvalidArgumentException('id does not exist');
         }
 
-        return $this->_positions[$id - 1];
+        return $this->positions[$id - 1];
     }
 
 
@@ -110,11 +110,11 @@ class Mbox extends AbstractStorage
     public function getMessage($id)
     {
         // TODO that's ugly, would be better to let the message class decide
-        if (strtolower($this->_messageClass) == '\zend\mail\storage\message\file'
-            || is_subclass_of($this->_messageClass, '\Zend\Mail\Storage\Message\File')) {
+        if (strtolower($this->messageClass) == '\zend\mail\storage\message\file'
+            || is_subclass_of($this->messageClass, '\Zend\Mail\Storage\Message\File')) {
             // TODO top/body lines
-            $messagePos = $this->_getPos($id);
-            return new $this->_messageClass(array('file' => $this->_fh, 'startPos' => $messagePos['start'],
+            $messagePos = $this->getPos($id);
+            return new $this->messageClass(array('file' => $this->fh, 'startPos' => $messagePos['start'],
                                                   'endPos' => $messagePos['end']));
         }
 
@@ -124,12 +124,12 @@ class Mbox extends AbstractStorage
         // file pointer is after headers now
         if ($bodyLines) {
             $message .= "\n";
-            while ($bodyLines-- && ftell($this->_fh) < $this->_positions[$id - 1]['end']) {
-                $message .= fgets($this->_fh);
+            while ($bodyLines-- && ftell($this->fh) < $this->positions[$id - 1]['end']) {
+                $message .= fgets($this->fh);
             }
         }
 
-        return new $this->_messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message));
+        return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message));
     }
 
     /*
@@ -148,9 +148,9 @@ class Mbox extends AbstractStorage
             // TODO: implement
             throw new Exception\RuntimeException('not implemented');
         }
-        $messagePos = $this->_getPos($id);
+        $messagePos = $this->getPos($id);
         // TODO: toplines
-        return stream_get_contents($this->_fh, $messagePos['separator'] - $messagePos['start'], $messagePos['start']);
+        return stream_get_contents($this->fh, $messagePos['separator'] - $messagePos['start'], $messagePos['start']);
     }
 
     /*
@@ -168,8 +168,8 @@ class Mbox extends AbstractStorage
             // TODO: implement
             throw new Exception\RuntimeException('not implemented');
         }
-        $messagePos = $this->_getPos($id);
-        return stream_get_contents($this->_fh, $messagePos['end'] - $messagePos['separator'], $messagePos['separator']);
+        $messagePos = $this->getPos($id);
+        return stream_get_contents($this->fh, $messagePos['end'] - $messagePos['separator'], $messagePos['separator']);
     }
 
     /**
@@ -190,9 +190,9 @@ class Mbox extends AbstractStorage
             throw new Exception\InvalidArgumentException('no valid filename given in params');
         }
 
-        $this->_openMboxFile($params->filename);
-        $this->_has['top']      = true;
-        $this->_has['uniqueid'] = false;
+        $this->openMboxFile($params->filename);
+        $this->has['top']      = true;
+        $this->has['uniqueid'] = false;
     }
 
     /**
@@ -204,7 +204,7 @@ class Mbox extends AbstractStorage
      * @param  bool $fileIsString file is string or resource
      * @return bool file is mbox file
      */
-    protected function _isMboxFile($file, $fileIsString = true)
+    protected function isMboxFile($file, $fileIsString = true)
     {
         if ($fileIsString) {
             ErrorHandler::start(E_WARNING);
@@ -240,46 +240,46 @@ class Mbox extends AbstractStorage
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
-    protected function _openMboxFile($filename)
+    protected function openMboxFile($filename)
     {
-        if ($this->_fh) {
+        if ($this->fh) {
             $this->close();
         }
 
-        $this->_fh = @fopen($filename, 'r');
-        if (!$this->_fh) {
+        $this->fh = @fopen($filename, 'r');
+        if (!$this->fh) {
             throw new Exception\RuntimeException('cannot open mbox file');
         }
-        $this->_filename = $filename;
-        $this->_filemtime = filemtime($this->_filename);
+        $this->filename = $filename;
+        $this->filemtime = filemtime($this->filename);
 
-        if (!$this->_isMboxFile($this->_fh, false)) {
+        if (!$this->isMboxFile($this->fh, false)) {
             ErrorHandler::start(E_WARNING);
-            fclose($this->_fh);
+            fclose($this->fh);
             ErrorHandler::stop();
             throw new Exception\InvalidArgumentException('file is not a valid mbox format');
         }
 
-        $messagePos = array('start' => ftell($this->_fh), 'separator' => 0, 'end' => 0);
-        while (($line = fgets($this->_fh)) !== false) {
+        $messagePos = array('start' => ftell($this->fh), 'separator' => 0, 'end' => 0);
+        while (($line = fgets($this->fh)) !== false) {
             if (strpos($line, 'From ') === 0) {
-                $messagePos['end'] = ftell($this->_fh) - strlen($line) - 2; // + newline
+                $messagePos['end'] = ftell($this->fh) - strlen($line) - 2; // + newline
                 if (!$messagePos['separator']) {
                     $messagePos['separator'] = $messagePos['end'];
                 }
-                $this->_positions[] = $messagePos;
-                $messagePos = array('start' => ftell($this->_fh), 'separator' => 0, 'end' => 0);
+                $this->positions[] = $messagePos;
+                $messagePos = array('start' => ftell($this->fh), 'separator' => 0, 'end' => 0);
             }
             if (!$messagePos['separator'] && !trim($line)) {
-                $messagePos['separator'] = ftell($this->_fh);
+                $messagePos['separator'] = ftell($this->fh);
             }
         }
 
-        $messagePos['end'] = ftell($this->_fh);
+        $messagePos['end'] = ftell($this->fh);
         if (!$messagePos['separator']) {
             $messagePos['separator'] = $messagePos['end'];
         }
-        $this->_positions[] = $messagePos;
+        $this->positions[] = $messagePos;
     }
 
     /**
@@ -290,9 +290,9 @@ class Mbox extends AbstractStorage
     public function close()
     {
         ErrorHandler::start(E_WARNING);
-        fclose($this->_fh);
+        fclose($this->fh);
         ErrorHandler::stop();
-        $this->_positions = array();
+        $this->positions = array();
     }
 
 
@@ -333,7 +333,7 @@ class Mbox extends AbstractStorage
     {
         if ($id) {
             // check if id exists
-            $this->_getPos($id);
+            $this->getPos($id);
             return $id;
         }
 
@@ -354,7 +354,7 @@ class Mbox extends AbstractStorage
     public function getNumberByUniqueId($id)
     {
         // check if id exists
-        $this->_getPos($id);
+        $this->getPos($id);
         return $id;
     }
 
@@ -367,7 +367,7 @@ class Mbox extends AbstractStorage
      */
     public function __sleep()
     {
-        return array('_filename', '_positions', '_filemtime');
+        return array('filename', 'positions', 'filemtime');
     }
 
     /**
@@ -380,12 +380,12 @@ class Mbox extends AbstractStorage
      */
     public function __wakeup()
     {
-        if ($this->_filemtime != @filemtime($this->_filename)) {
+        if ($this->filemtime != @filemtime($this->filename)) {
             $this->close();
-            $this->_openMboxFile($this->_filename);
+            $this->openMboxFile($this->filename);
         } else {
-            $this->_fh = @fopen($this->_filename, 'r');
-            if (!$this->_fh) {
+            $this->fh = @fopen($this->filename, 'r');
+            if (!$this->fh) {
                 throw new Exception\RuntimeException('cannot open mbox file');
             }
         }

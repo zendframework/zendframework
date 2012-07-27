@@ -32,7 +32,7 @@ class AccessController implements ContainerInterface
      *
      * @var Movable
      */
-    private $_memContainer;
+    private $memContainer;
 
 
     /**
@@ -42,7 +42,7 @@ class AccessController implements ContainerInterface
      */
     public function __construct(Movable $memContainer)
     {
-        $this->_memContainer = $memContainer;
+        $this->memContainer = $memContainer;
     }
 
     /**
@@ -50,7 +50,7 @@ class AccessController implements ContainerInterface
      */
     public function __destruct()
     {
-        $this->_memContainer->destroy();
+        $this->memContainer->destroy();
     }
 
 
@@ -64,7 +64,7 @@ class AccessController implements ContainerInterface
      */
     public function &getRef()
     {
-        return $this->_memContainer->getRef();
+        return $this->memContainer->getRef();
     }
 
     /**
@@ -74,7 +74,7 @@ class AccessController implements ContainerInterface
      */
     public function touch()
     {
-        $this->_memContainer->touch();
+        $this->memContainer->touch();
     }
 
     /**
@@ -82,7 +82,7 @@ class AccessController implements ContainerInterface
      */
     public function lock()
     {
-        $this->_memContainer->lock();
+        $this->memContainer->lock();
     }
 
 
@@ -91,7 +91,7 @@ class AccessController implements ContainerInterface
      */
     public function unlock()
     {
-        $this->_memContainer->unlock();
+        $this->memContainer->unlock();
     }
 
     /**
@@ -101,7 +101,7 @@ class AccessController implements ContainerInterface
      */
     public function isLocked()
     {
-        return $this->_memContainer->isLocked();
+        return $this->memContainer->isLocked();
     }
 
     /**
@@ -115,7 +115,7 @@ class AccessController implements ContainerInterface
      */
     public function __get($property)
     {
-        return $this->_memContainer->$property;
+        return $this->memContainer->$property;
     }
 
     /**
@@ -126,6 +126,6 @@ class AccessController implements ContainerInterface
      */
     public function __set($property, $value)
     {
-        $this->_memContainer->$property = $value;
+        $this->memContainer->$property = $value;
     }
 }

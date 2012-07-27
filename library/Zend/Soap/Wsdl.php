@@ -216,7 +216,7 @@ class Wsdl
     }
 
     /**
-     * Add an {@link http://www.w3.org/TR/wsdl#_request-response operation} element to a portType element
+     * Add an {@link http://www.w3.org/TR/wsdl#request-response operation} element to a portType element
      *
      * @param object $portType a portType XML_Tree_Node, from {@link function addPortType}
      * @param string $name Operation name

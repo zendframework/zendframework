@@ -20,7 +20,7 @@ class Message extends Part implements Message\MessageInterface
      * flags for this message
      * @var array
      */
-    protected $_flags = array();
+    protected $flags = array();
 
     /**
      * Public constructor
@@ -47,7 +47,7 @@ class Message extends Part implements Message\MessageInterface
 
         if (!empty($params['flags'])) {
             // set key and value to the same value for easy lookup
-            $this->_flags = array_combine($params['flags'], $params['flags']);
+            $this->flags = array_combine($params['flags'], $params['flags']);
         }
 
         parent::__construct($params);
@@ -60,7 +60,7 @@ class Message extends Part implements Message\MessageInterface
      */
     public function getTopLines()
     {
-        return $this->_topLines;
+        return $this->topLines;
     }
 
     /**
@@ -71,7 +71,7 @@ class Message extends Part implements Message\MessageInterface
      */
     public function hasFlag($flag)
     {
-        return isset($this->_flags[$flag]);
+        return isset($this->flags[$flag]);
     }
 
     /**
@@ -81,6 +81,6 @@ class Message extends Part implements Message\MessageInterface
      */
     public function getFlags()
     {
-        return $this->_flags;
+        return $this->flags;
     }
 }

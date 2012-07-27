@@ -22,7 +22,7 @@ class File extends Part\File implements MessageInterface
      * flags for this message
      * @var array
      */
-    protected $_flags = array();
+    protected $flags = array();
 
     /**
      * Public constructor
@@ -37,7 +37,7 @@ class File extends Part\File implements MessageInterface
     {
         if (!empty($params['flags'])) {
             // set key and value to the same value for easy lookup
-            $this->_flags = array_combine($params['flags'], $params['flags']);
+            $this->flags = array_combine($params['flags'], $params['flags']);
         }
 
         parent::__construct($params);
@@ -50,7 +50,7 @@ class File extends Part\File implements MessageInterface
      */
     public function getTopLines()
     {
-        return $this->_topLines;
+        return $this->topLines;
     }
 
     /**
@@ -61,7 +61,7 @@ class File extends Part\File implements MessageInterface
      */
     public function hasFlag($flag)
     {
-        return isset($this->_flags[$flag]);
+        return isset($this->flags[$flag]);
     }
 
     /**
@@ -71,6 +71,6 @@ class File extends Part\File implements MessageInterface
      */
     public function getFlags()
     {
-        return $this->_flags;
+        return $this->flags;
     }
 }

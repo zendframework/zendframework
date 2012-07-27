@@ -24,14 +24,14 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
      *
      * @var int
      */
-    private $_offset;
+    private $offset;
 
     /**
      * Maximum number of elements to show or -1 for all
      *
      * @var int
      */
-    private $_count;
+    private $count;
 
     /**
      * Construct a Zend\Paginator\SerializableLimitIterator
@@ -44,8 +44,8 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
     public function __construct (Iterator $it, $offset=0, $count=-1)
     {
         parent::__construct($it, $offset, $count);
-        $this->_offset = $offset;
-        $this->_count = $count;
+        $this->offset = $offset;
+        $this->count = $count;
     }
 
     /**
@@ -55,8 +55,8 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
     {
         return serialize(array(
             'it'     => $this->getInnerIterator(),
-            'offset' => $this->_offset,
-            'count'  => $this->_count,
+            'offset' => $this->offset,
+            'count'  => $this->count,
             'pos'    => $this->getPosition(),
         ));
     }
@@ -105,7 +105,7 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
      */
     public function offsetExists($offset)
     {
-        if ($offset > 0 && $offset < $this->_count) {
+        if ($offset > 0 && $offset < $this->count) {
             try {
                 $currentOffset = $this->key();
                 $this->seek($offset);

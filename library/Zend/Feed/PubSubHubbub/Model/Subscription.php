@@ -42,7 +42,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
                 'ID must be set before attempting a save'
             );
         }
-        $result = $this->_db->select(array('id' => $data['id']));
+        $result = $this->db->select(array('id' => $data['id']));
         if ($result && (0 < count($result))) {
             $data['created_time'] = $result->current()->created_time;
             $now = $this->getNow();
@@ -52,14 +52,14 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
                 $data['expiration_time'] = $now->add(new DateInterval('PT' . $data['lease_seconds'] . 'S'))
                     ->format('Y-m-d H:i:s');
             }
-            $this->_db->update(
+            $this->db->update(
                 $data,
                 array('id' => $data['id'])
             );
             return false;
         }
 
-        $this->_db->insert($data);
+        $this->db->insert($data);
         return true;
     }
 
@@ -76,7 +76,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
             throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
-        $result = $this->_db->select(array('id' => $key));
+        $result = $this->db->select(array('id' => $key));
         if (count($result)) {
             return $result->current()->getArrayCopy();
         }
@@ -96,7 +96,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
             throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
-        $result = $this->_db->select(array('id' => $key));
+        $result = $this->db->select(array('id' => $key));
         if (count($result)) {
             return true;
         }
@@ -111,9 +111,9 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
      */
     public function deleteSubscription($key)
     {
-        $result = $this->_db->select(array('id' => $key));
+        $result = $this->db->select(array('id' => $key));
         if (count($result)) {
-            $this->_db->delete(
+            $this->db->delete(
                 array('id' => $key)
             );
             return true;

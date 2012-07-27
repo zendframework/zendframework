@@ -28,7 +28,7 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @var Model\SubscriptionPersistenceInterface
      */
-    protected $_storage = null;
+    protected $storage = null;
 
     /**
      * An instance of a class handling Http Responses. This is implemented in
@@ -37,14 +37,14 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @var HttpResponse|PhpResponse
      */
-    protected $_httpResponse = null;
+    protected $httpResponse = null;
 
     /**
      * The number of Subscribers for which any updates are on behalf of.
      *
      * @var int
      */
-    protected $_subscriberCount = 1;
+    protected $subscriberCount = 1;
 
     /**
      * Constructor; accepts an array or Traversable object to preset
@@ -111,7 +111,7 @@ abstract class AbstractCallback implements CallbackInterface
      */
     public function setStorage(Model\SubscriptionPersistenceInterface $storage)
     {
-        $this->_storage = $storage;
+        $this->storage = $storage;
         return $this;
     }
 
@@ -125,11 +125,11 @@ abstract class AbstractCallback implements CallbackInterface
      */
     public function getStorage()
     {
-        if ($this->_storage === null) {
+        if ($this->storage === null) {
             throw new Exception\RuntimeException('No storage object has been'
                 . ' set that subclasses Zend\Feed\Pubsubhubbub\Model\SubscriptionPersistence');
         }
-        return $this->_storage;
+        return $this->storage;
     }
 
     /**
@@ -148,7 +148,7 @@ abstract class AbstractCallback implements CallbackInterface
                 . ' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
                 . ' Zend\Http\PhpEnvironment\Response');
         }
-        $this->_httpResponse = $httpResponse;
+        $this->httpResponse = $httpResponse;
         return $this;
     }
 
@@ -161,10 +161,10 @@ abstract class AbstractCallback implements CallbackInterface
      */
     public function getHttpResponse()
     {
-        if ($this->_httpResponse === null) {
-            $this->_httpResponse = new HttpResponse;
+        if ($this->httpResponse === null) {
+            $this->httpResponse = new HttpResponse;
         }
-        return $this->_httpResponse;
+        return $this->httpResponse;
     }
 
     /**
@@ -183,7 +183,7 @@ abstract class AbstractCallback implements CallbackInterface
             throw new Exception\InvalidArgumentException('Subscriber count must be'
                 . ' greater than zero');
         }
-        $this->_subscriberCount = $count;
+        $this->subscriberCount = $count;
         return $this;
     }
 
@@ -195,7 +195,7 @@ abstract class AbstractCallback implements CallbackInterface
      */
     public function getSubscriberCount()
     {
-        return $this->_subscriberCount;
+        return $this->subscriberCount;
     }
 
     /**

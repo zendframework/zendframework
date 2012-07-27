@@ -28,21 +28,21 @@ class Movable extends AbstractContainer
      *
      * @var integer
      */
-    protected $_id;
+    protected $id;
 
     /**
      * Memory manager reference
      *
      * @var \Zend\Memory\MemoryManager
      */
-    private $_memManager;
+    private $memManager;
 
     /**
      * Value object
      *
      * @var \Zend\Memory\Value
      */
-    private $_value;
+    private $value;
 
     /** Value states */
     const LOADED   = 1;
@@ -54,7 +54,7 @@ class Movable extends AbstractContainer
      *
      * @var integer
      */
-    private $_state;
+    private $state;
 
     /**
      * Object constructor
@@ -65,10 +65,10 @@ class Movable extends AbstractContainer
      */
     public function __construct(Memory\MemoryManager $memoryManager, $id, $value)
     {
-        $this->_memManager = $memoryManager;
-        $this->_id    = $id;
-        $this->_state = self::LOADED;
-        $this->_value = new Memory\Value($value, $this);
+        $this->memManager = $memoryManager;
+        $this->id    = $id;
+        $this->state = self::LOADED;
+        $this->value = new Memory\Value($value, $this);
     }
 
     /**
@@ -76,12 +76,12 @@ class Movable extends AbstractContainer
      */
     public function lock()
     {
-        if ( !($this->_state & self::LOADED) ) {
-            $this->_memManager->load($this, $this->_id);
-            $this->_state |= self::LOADED;
+        if ( !($this->state & self::LOADED) ) {
+            $this->memManager->load($this, $this->id);
+            $this->state |= self::LOADED;
         }
 
-        $this->_state |= self::LOCKED;
+        $this->state |= self::LOCKED;
 
         /**
          * @todo
@@ -96,7 +96,7 @@ class Movable extends AbstractContainer
     public function unlock()
     {
         // Clear LOCKED state bit
-        $this->_state &= ~self::LOCKED;
+        $this->state &= ~self::LOCKED;
     }
 
     /**
@@ -106,7 +106,7 @@ class Movable extends AbstractContainer
      */
     public function isLocked()
     {
-        return $this->_state & self::LOCKED;
+        return $this->state & self::LOCKED;
     }
 
     /**
@@ -125,12 +125,12 @@ class Movable extends AbstractContainer
             throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
         }
 
-        if ( !($this->_state & self::LOADED) ) {
-            $this->_memManager->load($this, $this->_id);
-            $this->_state |= self::LOADED;
+        if ( !($this->state & self::LOADED) ) {
+            $this->memManager->load($this, $this->id);
+            $this->state |= self::LOADED;
         }
 
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -146,10 +146,10 @@ class Movable extends AbstractContainer
             throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
         }
 
-        $this->_state = self::LOADED;
-        $this->_value = new Memory\Value($value, $this);
+        $this->state = self::LOADED;
+        $this->value = new Memory\Value($value, $this);
 
-        $this->_memManager->processUpdate($this, $this->_id);
+        $this->memManager->processUpdate($this, $this->id);
     }
 
 
@@ -163,12 +163,12 @@ class Movable extends AbstractContainer
      */
     public function &getRef()
     {
-        if ( !($this->_state & self::LOADED) ) {
-            $this->_memManager->load($this, $this->_id);
-            $this->_state |= self::LOADED;
+        if ( !($this->state & self::LOADED) ) {
+            $this->memManager->load($this, $this->id);
+            $this->state |= self::LOADED;
         }
 
-        return $this->_value->getRef();
+        return $this->value->getRef();
     }
 
     /**
@@ -178,7 +178,7 @@ class Movable extends AbstractContainer
      */
     public function touch()
     {
-        $this->_memManager->processUpdate($this, $this->_id);
+        $this->memManager->processUpdate($this, $this->id);
     }
 
     /**
@@ -190,9 +190,9 @@ class Movable extends AbstractContainer
     public function processUpdate()
     {
         // Clear SWAPPED state bit
-        $this->_state &= ~self::SWAPPED;
+        $this->state &= ~self::SWAPPED;
 
-        $this->_memManager->processUpdate($this, $this->_id);
+        $this->memManager->processUpdate($this, $this->id);
     }
 
     /**
@@ -202,12 +202,12 @@ class Movable extends AbstractContainer
      */
     public function startTrace()
     {
-        if ( !($this->_state & self::LOADED) ) {
-            $this->_memManager->load($this, $this->_id);
-            $this->_state |= self::LOADED;
+        if ( !($this->state & self::LOADED) ) {
+            $this->memManager->load($this, $this->id);
+            $this->state |= self::LOADED;
         }
 
-        $this->_value->startTrace();
+        $this->value->startTrace();
     }
 
     /**
@@ -217,7 +217,7 @@ class Movable extends AbstractContainer
      */
     public function setValue($value)
     {
-        $this->_value = new Memory\Value($value, $this);
+        $this->value = new Memory\Value($value, $this);
     }
 
     /**
@@ -228,9 +228,9 @@ class Movable extends AbstractContainer
     public function unloadValue()
     {
         // Clear LOADED state bit
-        $this->_state &= ~self::LOADED;
+        $this->state &= ~self::LOADED;
 
-        $this->_value = null;
+        $this->value = null;
     }
 
     /**
@@ -241,7 +241,7 @@ class Movable extends AbstractContainer
     public function markAsSwapped()
     {
         // Clear LOADED state bit
-        $this->_state |= self::LOADED;
+        $this->state |= self::LOADED;
     }
 
     /**
@@ -252,7 +252,7 @@ class Movable extends AbstractContainer
      */
     public function isSwapped()
     {
-        return $this->_state & self::SWAPPED;
+        return $this->state & self::SWAPPED;
     }
 
     /**
@@ -263,7 +263,7 @@ class Movable extends AbstractContainer
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
     /**
      * Destroy memory container and remove it from memory manager list
@@ -277,6 +277,6 @@ class Movable extends AbstractContainer
          * Cleaning is performed by Memory Manager destructor
          */
 
-        $this->_memManager->unlink($this, $this->_id);
+        $this->memManager->unlink($this, $this->id);
     }
 }

@@ -21,7 +21,7 @@ class Null implements AdapterInterface
      *
      * @var integer
      */
-    protected $_count = null;
+    protected $count = null;
 
     /**
      * Constructor.
@@ -30,7 +30,7 @@ class Null implements AdapterInterface
      */
     public function __construct($count = 0)
     {
-        $this->_count = $count;
+        $this->count = $count;
     }
 
     /**
@@ -59,6 +59,6 @@ class Null implements AdapterInterface
      */
     public function count()
     {
-        return $this->_count;
+        return $this->count;
     }
 }

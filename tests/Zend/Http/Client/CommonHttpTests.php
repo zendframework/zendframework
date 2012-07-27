@@ -25,7 +25,7 @@ use Zend\Http\Response;
  * adapters and configurations.
  *
  * Note that $this->baseuri must point to a directory on a web server
- * containing all the files under the _files directory. You should symlink
+ * containing all the files under the files directory. You should symlink
  * or copy these files and set 'baseuri' properly.
  *
  * You can also set the proper constant in your test configuration file to
@@ -40,7 +40,7 @@ use Zend\Http\Response;
 abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 {
     /**
-     * The bast URI for this test, containing all files in the _files directory
+     * The bast URI for this test, containing all files in the files directory
      * Should be set in TestConfiguration.php or TestConfiguration.php.dist
      *
      * @var string

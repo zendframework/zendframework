@@ -40,16 +40,16 @@ class Deleted
      */
     public function render()
     {
-        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
-        $this->_dom->formatOutput = true;
-        $entry = $this->_dom->createElement('at:deleted-entry');
-        $this->_dom->appendChild($entry);
+        $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
+        $this->dom->formatOutput = true;
+        $entry = $this->dom->createElement('at:deleted-entry');
+        $this->dom->appendChild($entry);
 
-        $entry->setAttribute('ref', $this->_container->getReference());
-        $entry->setAttribute('when', $this->_container->getWhen()->format(DateTime::ISO8601));
+        $entry->setAttribute('ref', $this->container->getReference());
+        $entry->setAttribute('when', $this->container->getWhen()->format(DateTime::ISO8601));
 
-        $this->_setBy($this->_dom, $entry);
-        $this->_setComment($this->_dom, $entry);
+        $this->_setBy($this->dom, $entry);
+        $this->_setComment($this->dom, $entry);
 
         return $this;
     }
@@ -82,24 +82,24 @@ class Deleted
      */
     protected function _setBy(DOMDocument $dom, DOMElement $root)
     {
-        $data = $this->_container->getBy();
+        $data = $this->container->getBy();
         if ((!$data || empty($data))) {
             return;
         }
-        $author = $this->_dom->createElement('at:by');
-        $name = $this->_dom->createElement('name');
+        $author = $this->dom->createElement('at:by');
+        $name = $this->dom->createElement('name');
         $author->appendChild($name);
         $root->appendChild($author);
         $text = $dom->createTextNode($data['name']);
         $name->appendChild($text);
         if (array_key_exists('email', $data)) {
-            $email = $this->_dom->createElement('email');
+            $email = $this->dom->createElement('email');
             $author->appendChild($email);
             $text = $dom->createTextNode($data['email']);
             $email->appendChild($text);
         }
         if (array_key_exists('uri', $data)) {
-            $uri = $this->_dom->createElement('uri');
+            $uri = $this->dom->createElement('uri');
             $author->appendChild($uri);
             $text = $dom->createTextNode($data['uri']);
             $uri->appendChild($text);

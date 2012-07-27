@@ -26,7 +26,7 @@ class Encrypt extends Filter\Encrypt
      *
      * @var string
      */
-    protected $_filename;
+    protected $filename;
 
     /**
      * Returns the new filename where the content will be stored
@@ -35,7 +35,7 @@ class Encrypt extends Filter\Encrypt
      */
     public function getFilename()
     {
-        return $this->_filename;
+        return $this->filename;
     }
 
     /**
@@ -46,7 +46,7 @@ class Encrypt extends Filter\Encrypt
      */
     public function setFilename($filename = null)
     {
-        $this->_filename = $filename;
+        $this->filename = $filename;
         return $this;
     }
 
@@ -66,12 +66,12 @@ class Encrypt extends Filter\Encrypt
             throw new Exception\InvalidArgumentException("File '$value' not found");
         }
 
-        if (!isset($this->_filename)) {
-            $this->_filename = $value;
+        if (!isset($this->filename)) {
+            $this->filename = $value;
         }
 
-        if (file_exists($this->_filename) and !is_writable($this->_filename)) {
-            throw new Exception\RuntimeException("File '{$this->_filename}' is not writable");
+        if (file_exists($this->filename) and !is_writable($this->filename)) {
+            throw new Exception\RuntimeException("File '{$this->filename}' is not writable");
         }
 
         $content = file_get_contents($value);
@@ -80,12 +80,12 @@ class Encrypt extends Filter\Encrypt
         }
 
         $encrypted = parent::filter($content);
-        $result    = file_put_contents($this->_filename, $encrypted);
+        $result    = file_put_contents($this->filename, $encrypted);
 
         if (!$result) {
-            throw new Exception\RuntimeException("Problem while writing file '{$this->_filename}'");
+            throw new Exception\RuntimeException("Problem while writing file '{$this->filename}'");
         }
 
-        return $this->_filename;
+        return $this->filename;
     }
 }

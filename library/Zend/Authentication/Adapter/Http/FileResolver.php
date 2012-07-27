@@ -24,7 +24,7 @@ class FileResolver implements ResolverInterface
      *
      * @var string
      */
-    protected $_file;
+    protected $file;
 
     /**
      * Constructor
@@ -50,7 +50,7 @@ class FileResolver implements ResolverInterface
         if (empty($path) || !is_readable($path)) {
             throw new Exception\InvalidArgumentException('Path not readable: ' . $path);
         }
-        $this->_file = $path;
+        $this->file = $path;
 
         return $this;
     }
@@ -62,7 +62,7 @@ class FileResolver implements ResolverInterface
      */
     public function getFile()
     {
-        return $this->_file;
+        return $this->file;
     }
 
     /**
@@ -102,9 +102,9 @@ class FileResolver implements ResolverInterface
         }
 
         // Open file, read through looking for matching credentials
-        $fp = @fopen($this->_file, 'r');
+        $fp = @fopen($this->file, 'r');
         if (!$fp) {
-            throw new Exception\RuntimeException('Unable to open password file: ' . $this->_file);
+            throw new Exception\RuntimeException('Unable to open password file: ' . $this->file);
         }
 
         // No real validation is done on the contents of the password file. The

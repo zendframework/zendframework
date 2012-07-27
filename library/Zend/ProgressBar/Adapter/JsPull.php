@@ -26,7 +26,7 @@ class JsPull extends AbstractAdapter
      *
      * @var boolean
      */
-    protected $_exitAfterSend = true;
+    protected $exitAfterSend = true;
 
     /**
      * Set wether to exit after json data send or not
@@ -36,7 +36,7 @@ class JsPull extends AbstractAdapter
      */
     public function setExitAfterSend($exitAfterSend)
     {
-        $this->_exitAfterSend = $exitAfterSend;
+        $this->exitAfterSend = $exitAfterSend;
     }
 
     /**
@@ -92,7 +92,7 @@ class JsPull extends AbstractAdapter
     {
         echo $data;
 
-        if ($this->_exitAfterSend) {
+        if ($this->exitAfterSend) {
             exit;
         }
     }

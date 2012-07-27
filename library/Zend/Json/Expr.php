@@ -43,7 +43,7 @@ class Expr
      *
      * @var string
      */
-    protected $_expression;
+    protected $expression;
 
     /**
      * Constructor
@@ -53,7 +53,7 @@ class Expr
      */
     public function __construct($expression)
     {
-        $this->_expression = (string) $expression;
+        $this->expression = (string) $expression;
     }
 
     /**
@@ -63,6 +63,6 @@ class Expr
      */
     public function __toString()
     {
-        return $this->_expression;
+        return $this->expression;
     }
 }

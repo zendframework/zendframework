@@ -81,7 +81,7 @@ class Cookies
      *
      * @var array
      */
-    protected $_rawCookies = array();
+    protected $rawCookies = array();
 
     /**
      * Construct
@@ -113,7 +113,7 @@ class Cookies
                 $this->cookies[$domain][$path] = array();
             }
             $this->cookies[$domain][$path][$cookie->getName()] = $cookie;
-            $this->_rawCookies[] = $cookie;
+            $this->rawCookies[] = $cookie;
         } else {
             throw new Exception\InvalidArgumentException('Supplient argument is not a valid cookie string or object');
         }
@@ -350,7 +350,7 @@ class Cookies
      */
     public function count()
     {
-        return count($this->_rawCookies);
+        return count($this->rawCookies);
     }
 
     /**
@@ -360,7 +360,7 @@ class Cookies
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->_rawCookies);
+        return new ArrayIterator($this->rawCookies);
     }
 
     /**
@@ -380,7 +380,7 @@ class Cookies
      */
     public function reset()
     {
-        $this->cookies = $this->_rawCookies = array();
+        $this->cookies = $this->rawCookies = array();
         return $this;
     }
 

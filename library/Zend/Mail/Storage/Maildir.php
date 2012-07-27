@@ -24,13 +24,13 @@ class Maildir extends AbstractStorage
      * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = '\Zend\Mail\Storage\Message\File';
+    protected $messageClass = '\Zend\Mail\Storage\Message\File';
 
     /**
      * data of found message files in maildir dir
      * @var array
      */
-    protected $_files = array();
+    protected $files = array();
 
     /**
      * known flag chars in filenames
@@ -39,7 +39,7 @@ class Maildir extends AbstractStorage
      *
      * @var array
      */
-    protected static $_knownFlags = array('D' => Mail\Storage::FLAG_DRAFT,
+    protected static $knownFlags = array('D' => Mail\Storage::FLAG_DRAFT,
                                           'F' => Mail\Storage::FLAG_FLAGGED,
                                           'P' => Mail\Storage::FLAG_PASSED,
                                           'R' => Mail\Storage::FLAG_ANSWERED,
@@ -57,12 +57,12 @@ class Maildir extends AbstractStorage
     public function countMessages($flags = null)
     {
         if ($flags === null) {
-            return count($this->_files);
+            return count($this->files);
         }
 
         $count = 0;
         if (!is_array($flags)) {
-            foreach ($this->_files as $file) {
+            foreach ($this->files as $file) {
                 if (isset($file['flaglookup'][$flags])) {
                     ++$count;
                 }
@@ -71,7 +71,7 @@ class Maildir extends AbstractStorage
         }
 
         $flags = array_flip($flags);
-           foreach ($this->_files as $file) {
+           foreach ($this->files as $file) {
                foreach ($flags as $flag => $v) {
                    if (!isset($file['flaglookup'][$flag])) {
                        continue 2;
@@ -92,19 +92,19 @@ class Maildir extends AbstractStorage
      */
     protected function _getFileData($id, $field = null)
     {
-        if (!isset($this->_files[$id - 1])) {
+        if (!isset($this->files[$id - 1])) {
             throw new Exception\InvalidArgumentException('id does not exist');
         }
 
         if (!$field) {
-            return $this->_files[$id - 1];
+            return $this->files[$id - 1];
         }
 
-        if (!isset($this->_files[$id - 1][$field])) {
+        if (!isset($this->files[$id - 1][$field])) {
             throw new Exception\InvalidArgumentException('field does not exist');
         }
 
-        return $this->_files[$id - 1][$field];
+        return $this->files[$id - 1][$field];
     }
 
     /**
@@ -121,7 +121,7 @@ class Maildir extends AbstractStorage
         }
 
         $result = array();
-        foreach ($this->_files as $num => $data) {
+        foreach ($this->files as $num => $data) {
             $result[$num + 1] = isset($data['size']) ? $data['size'] : filesize($data['filename']);
         }
 
@@ -140,13 +140,13 @@ class Maildir extends AbstractStorage
     public function getMessage($id)
     {
         // TODO that's ugly, would be better to let the message class decide
-        if (strtolower($this->_messageClass) == '\zend\mail\storage\message\file'
-            || is_subclass_of($this->_messageClass, '\Zend\Mail\Storage\Message\File')) {
-            return new $this->_messageClass(array('file'  => $this->_getFileData($id, 'filename'),
+        if (strtolower($this->messageClass) == '\zend\mail\storage\message\file'
+            || is_subclass_of($this->messageClass, '\Zend\Mail\Storage\Message\File')) {
+            return new $this->messageClass(array('file'  => $this->_getFileData($id, 'filename'),
                                                   'flags' => $this->_getFileData($id, 'flags')));
         }
 
-        return new $this->_messageClass(array('handler' => $this, 'id' => $id, 'headers' => $this->getRawHeader($id),
+        return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $this->getRawHeader($id),
                                               'flags'   => $this->_getFileData($id, 'flags')));
     }
 
@@ -232,8 +232,8 @@ class Maildir extends AbstractStorage
             throw new Exception\InvalidArgumentException('invalid maildir given');
         }
 
-        $this->_has['top'] = true;
-        $this->_has['flags'] = true;
+        $this->has['top'] = true;
+        $this->has['flags'] = true;
         $this->_openMaildir($params->dirname);
     }
 
@@ -262,7 +262,7 @@ class Maildir extends AbstractStorage
      */
     protected function _openMaildir($dirname)
     {
-        if ($this->_files) {
+        if ($this->files) {
             $this->close();
         }
 
@@ -322,7 +322,7 @@ class Maildir extends AbstractStorage
             $length = strlen($flags);
             for ($i = 0; $i < $length; ++$i) {
                 $flag = $flags[$i];
-                $named_flags[$flag] = isset(self::$_knownFlags[$flag]) ? self::$_knownFlags[$flag] : $flag;
+                $named_flags[$flag] = isset(self::$knownFlags[$flag]) ? self::$knownFlags[$flag] : $flag;
             }
 
             $data = array('uniq'       => $uniq,
@@ -332,7 +332,7 @@ class Maildir extends AbstractStorage
             if ($size !== null) {
                 $data['size'] = (int)$size;
             }
-            $this->_files[] = $data;
+            $this->files[] = $data;
         }
     }
 
@@ -344,7 +344,7 @@ class Maildir extends AbstractStorage
      */
     public function close()
     {
-        $this->_files = array();
+        $this->files = array();
     }
 
 
@@ -385,7 +385,7 @@ class Maildir extends AbstractStorage
         }
 
         $ids = array();
-        foreach ($this->_files as $num => $file) {
+        foreach ($this->files as $num => $file) {
             $ids[$num + 1] = $file['uniq'];
         }
         return $ids;
@@ -403,7 +403,7 @@ class Maildir extends AbstractStorage
      */
     public function getNumberByUniqueId($id)
     {
-        foreach ($this->_files as $num => $file) {
+        foreach ($this->files as $num => $file) {
             if ($file['uniq'] == $id) {
                 return $num + 1;
             }

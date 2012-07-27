@@ -25,7 +25,7 @@ class Pop3 extends AbstractStorage
      * protocol handler
      * @var null|\Zend\Mail\Protocol\Pop3
      */
-    protected $_protocol;
+    protected $protocol;
 
 
     /**
@@ -39,7 +39,7 @@ class Pop3 extends AbstractStorage
     {
         $count  = 0; // "Declare" variable before first usage.
         $octets = 0; // "Declare" variable since it's passed by reference
-        $this->_protocol->status($count, $octets);
+        $this->protocol->status($count, $octets);
         return (int)$count;
     }
 
@@ -53,7 +53,7 @@ class Pop3 extends AbstractStorage
     public function getSize($id = 0)
     {
         $id = $id ? $id : null;
-        return $this->_protocol->getList($id);
+        return $this->protocol->getList($id);
     }
 
     /**
@@ -66,9 +66,9 @@ class Pop3 extends AbstractStorage
     public function getMessage($id)
     {
         $bodyLines = 0;
-        $message = $this->_protocol->top($id, $bodyLines, true);
+        $message = $this->protocol->top($id, $bodyLines, true);
 
-        return new $this->_messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message,
+        return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message,
                                               'noToplines' => $bodyLines < 1));
     }
 
@@ -89,7 +89,7 @@ class Pop3 extends AbstractStorage
             throw new Exception\RuntimeException('not implemented');
         }
 
-        return $this->_protocol->top($id, 0, true);
+        return $this->protocol->top($id, 0, true);
     }
 
     /*
@@ -108,7 +108,7 @@ class Pop3 extends AbstractStorage
             throw new Exception\RuntimeException('not implemented');
         }
 
-        $content = $this->_protocol->retrieve($id);
+        $content = $this->protocol->retrieve($id);
         // TODO: find a way to avoid decoding the headers
         $headers = null; // "Declare" variable since it's passed by reference
         $body    = null; // "Declare" variable before first usage.
@@ -135,12 +135,12 @@ class Pop3 extends AbstractStorage
             $params = (object)$params;
         }
 
-        $this->_has['fetchPart'] = false;
-        $this->_has['top']       = null;
-        $this->_has['uniqueid']  = null;
+        $this->has['fetchPart'] = false;
+        $this->has['top']       = null;
+        $this->has['uniqueid']  = null;
 
         if ($params instanceof Protocol\Pop3) {
-            $this->_protocol = $params;
+            $this->protocol = $params;
             return;
         }
 
@@ -153,9 +153,9 @@ class Pop3 extends AbstractStorage
         $port     = isset($params->port)     ? $params->port     : null;
         $ssl      = isset($params->ssl)      ? $params->ssl      : false;
 
-        $this->_protocol = new Protocol\Pop3();
-        $this->_protocol->connect($host, $port, $ssl);
-        $this->_protocol->login($params->user, $password);
+        $this->protocol = new Protocol\Pop3();
+        $this->protocol->connect($host, $port, $ssl);
+        $this->protocol->login($params->user, $password);
     }
 
     /**
@@ -164,7 +164,7 @@ class Pop3 extends AbstractStorage
      */
     public function close()
     {
-        $this->_protocol->logout();
+        $this->protocol->logout();
     }
 
     /**
@@ -174,7 +174,7 @@ class Pop3 extends AbstractStorage
      */
     public function noop()
     {
-        $this->_protocol->noop();
+        $this->protocol->noop();
     }
 
     /**
@@ -187,7 +187,7 @@ class Pop3 extends AbstractStorage
      */
     public function removeMessage($id)
     {
-        $this->_protocol->delete($id);
+        $this->protocol->delete($id);
     }
 
     /**
@@ -213,7 +213,7 @@ class Pop3 extends AbstractStorage
             return array_combine($range, $range);
         }
 
-        return $this->_protocol->uniqueid($id);
+        return $this->protocol->uniqueid($id);
     }
 
     /**
@@ -258,27 +258,27 @@ class Pop3 extends AbstractStorage
         }
 
         if (strtolower($var) == 'hastop') {
-            if ($this->_protocol->hasTop === null) {
+            if ($this->protocol->hasTop === null) {
                 // need to make a real call, because not all server are honest in their capas
                 try {
-                    $this->_protocol->top(1, 0, false);
+                    $this->protocol->top(1, 0, false);
                 } catch(MailException\ExceptionInterface $e) {
                     // ignoring error
                 }
             }
-            $this->_has['top'] = $this->_protocol->hasTop;
-            return $this->_protocol->hasTop;
+            $this->has['top'] = $this->protocol->hasTop;
+            return $this->protocol->hasTop;
         }
 
         if (strtolower($var) == 'hasuniqueid') {
             $id = null;
             try {
-                $id = $this->_protocol->uniqueid(1);
+                $id = $this->protocol->uniqueid(1);
             } catch(MailException\ExceptionInterface $e) {
                 // ignoring error
             }
-            $this->_has['uniqueid'] = $id ? true : false;
-            return $this->_has['uniqueid'];
+            $this->has['uniqueid'] = $id ? true : false;
+            return $this->has['uniqueid'];
         }
 
         return $result;

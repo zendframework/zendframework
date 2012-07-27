@@ -24,37 +24,37 @@ class Request
      * Request ID
      * @var mixed
      */
-    protected $_id;
+    protected $id;
 
     /**
      * Flag
      * @var bool
      */
-    protected $_isMethodError = false;
+    protected $isMethodError = false;
 
     /**
      * Requested method
      * @var string
      */
-    protected $_method;
+    protected $method;
 
     /**
      * Regex for method
      * @var string
      */
-    protected $_methodRegex = '/^[a-z][a-z0-9\\\\_.]*$/i';
+    protected $methodRegex = '/^[a-z][a-z0-9\\\\_.]*$/i';
 
     /**
      * Request parameters
      * @var array
      */
-    protected $_params = array();
+    protected $params = array();
 
     /**
      * JSON-RPC version of request
      * @var string
      */
-    protected $_version = '1.0';
+    protected $version = '1.0';
 
     /**
      * Set request state
@@ -86,10 +86,10 @@ class Request
     public function addParam($value, $key = null)
     {
         if ((null === $key) || !is_string($key)) {
-            $index = count($this->_params);
-            $this->_params[$index] = $value;
+            $index = count($this->params);
+            $this->params[$index] = $value;
         } else {
-            $this->_params[$key] = $value;
+            $this->params[$key] = $value;
         }
 
         return $this;
@@ -117,7 +117,7 @@ class Request
      */
     public function setParams(array $params)
     {
-        $this->_params = array();
+        $this->params = array();
         return $this->addParams($params);
     }
 
@@ -129,8 +129,8 @@ class Request
      */
     public function getParam($index)
     {
-        if (array_key_exists($index, $this->_params)) {
-            return $this->_params[$index];
+        if (array_key_exists($index, $this->params)) {
+            return $this->params[$index];
         }
 
         return null;
@@ -143,7 +143,7 @@ class Request
      */
     public function getParams()
     {
-        return $this->_params;
+        return $this->params;
     }
 
     /**
@@ -154,10 +154,10 @@ class Request
      */
     public function setMethod($name)
     {
-        if (!preg_match($this->_methodRegex, $name)) {
-            $this->_isMethodError = true;
+        if (!preg_match($this->methodRegex, $name)) {
+            $this->isMethodError = true;
         } else {
-            $this->_method = $name;
+            $this->method = $name;
         }
         return $this;
     }
@@ -169,7 +169,7 @@ class Request
      */
     public function getMethod()
     {
-        return $this->_method;
+        return $this->method;
     }
 
     /**
@@ -179,7 +179,7 @@ class Request
      */
     public function isMethodError()
     {
-        return $this->_isMethodError;
+        return $this->isMethodError;
     }
 
     /**
@@ -190,7 +190,7 @@ class Request
      */
     public function setId($name)
     {
-        $this->_id = (string) $name;
+        $this->id = (string) $name;
         return $this;
     }
 
@@ -201,7 +201,7 @@ class Request
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -213,9 +213,9 @@ class Request
     public function setVersion($version)
     {
         if ('2.0' == $version) {
-            $this->_version = '2.0';
+            $this->version = '2.0';
         } else {
-            $this->_version = '1.0';
+            $this->version = '1.0';
         }
         return $this;
     }
@@ -227,7 +227,7 @@ class Request
      */
     public function getVersion()
     {
-        return $this->_version;
+        return $this->version;
     }
 
     /**

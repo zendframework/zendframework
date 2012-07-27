@@ -23,14 +23,14 @@ class Iterator implements AdapterInterface
      *
      * @var Iterator
      */
-    protected $_iterator = null;
+    protected $iterator = null;
 
     /**
      * Item count
      *
      * @var integer
      */
-    protected $_count = null;
+    protected $count = null;
 
     /**
      * Constructor.
@@ -44,8 +44,8 @@ class Iterator implements AdapterInterface
             throw new Exception\InvalidArgumentException('Iterator must implement Countable');
         }
 
-        $this->_iterator = $iterator;
-        $this->_count = count($iterator);
+        $this->iterator = $iterator;
+        $this->count = count($iterator);
     }
 
     /**
@@ -57,10 +57,10 @@ class Iterator implements AdapterInterface
      */
     public function getItems($offset, $itemCountPerPage)
     {
-        if ($this->_count == 0) {
+        if ($this->count == 0) {
             return array();
         }
-        return new Paginator\SerializableLimitIterator($this->_iterator, $offset, $itemCountPerPage);
+        return new Paginator\SerializableLimitIterator($this->iterator, $offset, $itemCountPerPage);
     }
 
     /**
@@ -70,6 +70,6 @@ class Iterator implements AdapterInterface
      */
     public function count()
     {
-        return $this->_count;
+        return $this->count;
     }
 }

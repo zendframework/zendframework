@@ -21,9 +21,9 @@ use Zend\Mime;
  */
 class File extends Part
 {
-    protected $_contentPos = array();
-    protected $_partPos = array();
-    protected $_fh;
+    protected $contentPos = array();
+    protected $partPos = array();
+    protected $fh;
 
     /**
      * Public constructor
@@ -44,30 +44,30 @@ class File extends Part
         }
 
         if (!is_resource($params['file'])) {
-            $this->_fh = fopen($params['file'], 'r');
+            $this->fh = fopen($params['file'], 'r');
         } else {
-            $this->_fh = $params['file'];
+            $this->fh = $params['file'];
         }
-        if (!$this->_fh) {
+        if (!$this->fh) {
             throw new Exception\RuntimeException('could not open file');
         }
         if (isset($params['startPos'])) {
-            fseek($this->_fh, $params['startPos']);
+            fseek($this->fh, $params['startPos']);
         }
         $header = '';
         $endPos = isset($params['endPos']) ? $params['endPos'] : null;
-        while (($endPos === null || ftell($this->_fh) < $endPos) && trim($line = fgets($this->_fh))) {
+        while (($endPos === null || ftell($this->fh) < $endPos) && trim($line = fgets($this->fh))) {
             $header .= $line;
         }
 
-        $this->_headers = Headers::fromString($header);
+        $this->headers = Headers::fromString($header);
 
-        $this->_contentPos[0] = ftell($this->_fh);
+        $this->contentPos[0] = ftell($this->fh);
         if ($endPos !== null) {
-            $this->_contentPos[1] = $endPos;
+            $this->contentPos[1] = $endPos;
         } else {
-            fseek($this->_fh, 0, SEEK_END);
-            $this->_contentPos[1] = ftell($this->_fh);
+            fseek($this->fh, 0, SEEK_END);
+            $this->contentPos[1] = ftell($this->fh);
         }
         if (!$this->isMultipart()) {
             return;
@@ -79,35 +79,35 @@ class File extends Part
         }
 
         $part = array();
-        $pos = $this->_contentPos[0];
-        fseek($this->_fh, $pos);
-        while (!feof($this->_fh) && ($endPos === null || $pos < $endPos)) {
-            $line = fgets($this->_fh);
+        $pos = $this->contentPos[0];
+        fseek($this->fh, $pos);
+        while (!feof($this->fh) && ($endPos === null || $pos < $endPos)) {
+            $line = fgets($this->fh);
             if ($line === false) {
-                if (feof($this->_fh)) {
+                if (feof($this->fh)) {
                     break;
                 }
                 throw new Exception\RuntimeException('error reading file');
             }
 
             $lastPos = $pos;
-            $pos = ftell($this->_fh);
+            $pos = ftell($this->fh);
             $line = trim($line);
 
             if ($line == '--' . $boundary) {
                 if ($part) {
                     // not first part
                     $part[1] = $lastPos;
-                    $this->_partPos[] = $part;
+                    $this->partPos[] = $part;
                 }
                 $part = array($pos);
             } elseif ($line == '--' . $boundary . '--') {
                 $part[1] = $lastPos;
-                $this->_partPos[] = $part;
+                $this->partPos[] = $part;
                 break;
             }
         }
-        $this->_countParts = count($this->_partPos);
+        $this->_countParts = count($this->partPos);
 
     }
 
@@ -122,12 +122,12 @@ class File extends Part
      */
     public function getContent($stream = null)
     {
-        fseek($this->_fh, $this->_contentPos[0]);
+        fseek($this->fh, $this->contentPos[0]);
         if ($stream !== null) {
-            return stream_copy_to_stream($this->_fh, $stream, $this->_contentPos[1] - $this->_contentPos[0]);
+            return stream_copy_to_stream($this->fh, $stream, $this->contentPos[1] - $this->contentPos[0]);
         }
-        $length = $this->_contentPos[1] - $this->_contentPos[0];
-        return $length < 1 ? '' : fread($this->_fh, $length);
+        $length = $this->contentPos[1] - $this->contentPos[0];
+        return $length < 1 ? '' : fread($this->fh, $length);
     }
 
     /**
@@ -139,7 +139,7 @@ class File extends Part
      */
     public function getSize()
     {
-        return $this->_contentPos[1] - $this->_contentPos[0];
+        return $this->contentPos[1] - $this->contentPos[0];
     }
 
     /**
@@ -152,11 +152,11 @@ class File extends Part
     public function getPart($num)
     {
         --$num;
-        if (!isset($this->_partPos[$num])) {
+        if (!isset($this->partPos[$num])) {
             throw new Exception\RuntimeException('part not found');
         }
 
-        return new self(array('file' => $this->_fh, 'startPos' => $this->_partPos[$num][0],
-                              'endPos' => $this->_partPos[$num][1]));
+        return new self(array('file' => $this->fh, 'startPos' => $this->partPos[$num][0],
+                              'endPos' => $this->partPos[$num][1]));
     }
 }

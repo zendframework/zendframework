@@ -41,20 +41,6 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
-     * Whether or not to display exceptions related to the 404 condition
-     *
-     * @var bool
-     */
-    protected $displayExceptions = false;
-
-    /**
-     * Whether or not to display the reason for a 404
-     *
-     * @var bool
-     */
-    protected $displayNotFoundReason = false;
-
-    /**
      * The reason for a not-found condition
      *
      * @var false|string

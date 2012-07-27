@@ -477,6 +477,10 @@ class Form extends Fieldset implements FormInterface
                 continue;
             }
 
+            if (!isset($data[$key])) {
+                continue;
+            }
+
             $fieldset = $formOrFieldset->byName[$key];
 
             if ($fieldset instanceof Collection) {
@@ -489,9 +493,7 @@ class Form extends Fieldset implements FormInterface
 
                 $value = $values;
             } else {
-                if (isset($data[$key])) {
-                    $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
-                }
+                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
             }
         }
     }

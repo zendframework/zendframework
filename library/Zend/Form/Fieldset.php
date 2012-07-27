@@ -485,6 +485,10 @@ class Fieldset extends Element implements FieldsetInterface
         $hydratableData = array();
 
         foreach ($values as $name => $value) {
+            if (empty($value) || !$this->has($name)) {
+                continue;
+            }
+
             $element = $this->byName[$name];
 
             if ($element instanceof Collection) {
@@ -496,7 +500,10 @@ class Fieldset extends Element implements FieldsetInterface
             $hydratableData[$name] = $value;
         }
 
-        $this->object = $hydrator->hydrate($hydratableData, $this->object);
+        if (!empty($hydratableData)) {
+            $this->object = $hydrator->hydrate($hydratableData, $this->object);
+        }
+
         return $this->object;
     }
 

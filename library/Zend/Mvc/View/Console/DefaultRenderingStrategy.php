@@ -33,17 +33,6 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
-     * Set view
-     *
-     * @param  View $view
-     * @return DefaultRenderingStrategy
-     */
-    public function __construct()
-    {
-        return $this;
-    }
-
-    /**
      * Attach the aggregate to the specified event manager
      *
      * @param  EventManagerInterface $events
@@ -84,7 +73,6 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
 
         // <artial arguments
         $response  = $e->getResponse();
-        $viewModel = $e->getViewModel();
 
         if(empty($result)){
             /**

@@ -12,7 +12,7 @@ namespace Zend\Mvc\Controller;
 
 use Zend\Mvc\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\Stdlib\DispatchableInterface;
 
 /**
@@ -62,10 +62,9 @@ class PluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached controller, if any, to the currently requested plugin.
      *
-     * @param  null|ConfigurationInterface $configuration
-     * @return void
+     * @param  null|ConfigInterface $configuration
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
         $this->addInitializer(array($this, 'injectController'));
@@ -123,6 +122,7 @@ class PluginManager extends AbstractPluginManager
      *
      * @param  mixed $plugin
      * @return true
+     * @throws Exception\InvalidPluginException
      */
     public function validatePlugin($plugin)
     {

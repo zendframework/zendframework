@@ -13,7 +13,7 @@ namespace Zend\Mvc\Controller;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\Mvc\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\DispatchableInterface;
@@ -42,10 +42,9 @@ class ControllerManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * service manager, event manager, and plugin manager
      *
-     * @param  null|ConfigurationInterface $configuration
-     * @return void
+     * @param  null|ConfigInterface $configuration
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
         // Pushing to bottom of stack to ensure this is done last

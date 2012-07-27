@@ -99,8 +99,9 @@ class ServiceListenerFactory implements FactoryInterface
      *   - method: the name of the method that modules have to implement as string
      *
      * @param  ServiceLocatorInterface  $serviceLocator
-     * @throws InvalidArgumentException For invalid configurations.
      * @return ServiceListener
+     * @throws InvalidArgumentException For invalid configurations.
+     * @throws RuntimeException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

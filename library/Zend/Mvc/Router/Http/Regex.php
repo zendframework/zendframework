@@ -102,8 +102,8 @@ class Regex implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
      * @param  Request $request
+     * @param  integer $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)

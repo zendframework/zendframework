@@ -229,10 +229,9 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
      * Application::ERROR_CONTROLLER_CANNOT_DISPATCH.
      *
      * @param  ViewModel $model
-     * @param  MvcEvent $e
      * @return void
      */
-    protected function injectNotFoundReason($model)
+    protected function injectNotFoundReason(ViewModel $model)
     {
         if (!$this->displayNotFoundReason()) {
             return;

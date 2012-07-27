@@ -15,6 +15,7 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper as ViewHelper;
+use Zend\View\Helper\HelperInterface as ViewHelperInterface;
 
 /**
  * @category   Zend
@@ -40,7 +41,8 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
      * Create and return the view helper manager
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ControllerPluginManager
+     * @return ViewHelperInterface
+     * @throws Exception\RuntimeException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

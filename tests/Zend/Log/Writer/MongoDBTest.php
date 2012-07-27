@@ -11,6 +11,8 @@
 
 namespace ZendTest\Log\Writer;
 
+use DateTime;
+use MongoDate;
 use Zend\Log\Logger;
 use Zend\Log\Writer\MongoDB as MongoDBWriter;
 
@@ -80,6 +82,20 @@ class MongoDBTest extends \PHPUnit_Framework_TestCase
             ->with($event, $saveOptions);
 
         $writer = new MongoDBWriter($this->mongo, $this->database, $this->collection, $saveOptions);
+
+        $writer->write($event);
+    }
+
+    public function testWriteConvertsDateTimeToMongoDate()
+    {
+        $date = new DateTime();
+        $event = array('timestamp'=> $date);
+
+        $this->mongoCollection->expects($this->once())
+            ->method('save')
+            ->with($this->contains(new MongoDate($date->getTimestamp()), false));
+
+        $writer = new MongoDBWriter($this->mongo, $this->database, $this->collection);
 
         $writer->write($event);
     }

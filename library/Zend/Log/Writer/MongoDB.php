@@ -11,7 +11,9 @@
 
 namespace Zend\Log\Writer;
 
+use DateTime;
 use Mongo;
+use MongoDate;
 use Traversable;
 use Zend\Log\Exception\InvalidArgumentException;
 use Zend\Log\Exception\RuntimeException;
@@ -107,6 +109,10 @@ class MongoDB extends AbstractWriter
     {
         if (null === $this->mongoCollection) {
             throw new RuntimeException('MongoCollection must be defined');
+        }
+
+        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
+            $event['timestamp'] = new MongoDate($event['timestamp']->getTimestamp());
         }
 
         $this->mongoCollection->save($event, $this->saveOptions);

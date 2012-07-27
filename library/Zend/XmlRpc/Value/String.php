@@ -24,10 +24,10 @@ class String extends AbstractScalar
      */
     public function __construct($value)
     {
-        $this->_type = self::XMLRPC_TYPE_STRING;
+        $this->type = self::XMLRPC_TYPE_STRING;
 
         // Make sure this value is string and all XML characters are encoded
-        $this->_value = (string)$value;
+        $this->value = (string)$value;
     }
 
     /**
@@ -37,6 +37,6 @@ class String extends AbstractScalar
      */
     public function getValue()
     {
-        return (string)$this->_value;
+        return (string)$this->value;
     }
 }

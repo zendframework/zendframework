@@ -43,7 +43,7 @@ class ReflectionMethod extends AbstractFunction
     public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {
         $this->classReflection = $class;
-        $this->_reflection      = $r;
+        $this->reflection      = $r;
 
         $classNamespace = $class->getNamespace();
 
@@ -56,7 +56,7 @@ class ReflectionMethod extends AbstractFunction
 
         // Determine arguments
         if (is_array($argv)) {
-            $this->_argv = $argv;
+            $this->argv = $argv;
         }
 
         // If method call, need to store some info on the class
@@ -87,7 +87,7 @@ class ReflectionMethod extends AbstractFunction
     public function __wakeup()
     {
         $this->classReflection = new ReflectionClass(new \ReflectionClass($this->class), $this->getNamespace(), $this->getInvokeArguments());
-        $this->_reflection = new \ReflectionMethod($this->classReflection->getName(), $this->getName());
+        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->getName());
     }
 
 }

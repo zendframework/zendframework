@@ -487,7 +487,7 @@ class Server extends AbstractServer
      */
     public function getSystem()
     {
-        return $this->_system;
+        return $this->system;
     }
 
     /**
@@ -585,7 +585,7 @@ class Server extends AbstractServer
     protected function registerSystemMethods()
     {
         $system = new Server\System($this);
-        $this->_system = $system;
+        $this->system = $system;
         $this->setClass($system, 'system');
     }
 

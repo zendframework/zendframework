@@ -27,13 +27,13 @@ class Base64 extends AbstractScalar
      */
     public function __construct($value, $alreadyEncoded = false)
     {
-        $this->_type = self::XMLRPC_TYPE_BASE64;
+        $this->type = self::XMLRPC_TYPE_BASE64;
 
         $value = (string)$value;    // Make sure this value is string
         if (!$alreadyEncoded) {
             $value = base64_encode($value);     // We encode it in base64
         }
-        $this->_value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -44,6 +44,6 @@ class Base64 extends AbstractScalar
      */
     public function getValue()
     {
-        return base64_decode($this->_value);
+        return base64_decode($this->value);
     }
 }

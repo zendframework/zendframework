@@ -24,7 +24,7 @@ class Struct extends AbstractCollection
      */
     public function __construct($value)
     {
-        $this->_type = self::XMLRPC_TYPE_STRUCT;
+        $this->type = self::XMLRPC_TYPE_STRUCT;
         parent::__construct($value);
     }
 
@@ -40,8 +40,8 @@ class Struct extends AbstractCollection
         $generator->openElement('value')
                   ->openElement('struct');
 
-        if (is_array($this->_value)) {
-            foreach ($this->_value as $name => $val) {
+        if (is_array($this->value)) {
+            foreach ($this->value as $name => $val) {
                 $generator->openElement('member')
                           ->openElement('name', $name)
                           ->closeElement('name');

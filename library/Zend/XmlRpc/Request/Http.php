@@ -50,7 +50,7 @@ class Http extends XmlRpcRequest
     {
         $xml = @file_get_contents('php://input');
         if (!$xml) {
-            $this->_fault = new Fault(630);
+            $this->fault = new Fault(630);
             return;
         }
 

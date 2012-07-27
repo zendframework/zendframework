@@ -34,7 +34,7 @@ abstract class AbstractCollection extends AbstractValue
             if (!$value instanceof parent) {
                 $value = self::getXmlRpcValue($value, self::AUTO_DETECT_TYPE);
             }
-            $this->_value[$key] = $value;
+            $this->value[$key] = $value;
         }
     }
 
@@ -46,7 +46,7 @@ abstract class AbstractCollection extends AbstractValue
      */
     public function getValue()
     {
-        $values = (array)$this->_value;
+        $values = (array)$this->value;
         foreach ($values as $key => $value) {
             $values[$key] = $value->getValue();
         }

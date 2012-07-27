@@ -121,8 +121,8 @@ EOT;
     public function testExtendingClassShouldBeAbleToReceiveMethodAndParams()
     {
         $request = new HTTPTestExtension('foo', array('bar', 'baz'));
-        $this->assertEquals('foo', $request->method);
-        $this->assertEquals(array('bar', 'baz'), $request->params);
+        $this->assertEquals('foo', $request->getMethod());
+        $this->assertEquals(array('bar', 'baz'), $request->getParams());
     }
 
     public function testHttpRequestReadsFromPhpInput()

@@ -50,6 +50,11 @@ class Response
     protected $version;
 
     /**
+     * @var $args
+     */
+    protected $args;
+
+    /**
      * Set response state
      *
      * @param  array $options
@@ -225,7 +230,7 @@ class Response
      */
     public function getArgs()
     {
-        return $this->_args;
+        return $this->args;
     }
 
     /**
@@ -236,7 +241,7 @@ class Response
      */
     public function setArgs($args)
     {
-        $this->_args = $args;
+        $this->args = $args;
         return $this;
     }
 

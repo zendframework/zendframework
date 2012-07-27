@@ -44,7 +44,7 @@ class Stdin extends XmlRpcRequest
     {
         $fh = fopen('php://stdin', 'r');
         if (!$fh) {
-            $this->_fault = new ServerException(630);
+            $this->fault = new ServerException(630);
             return;
         }
 

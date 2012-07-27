@@ -50,7 +50,8 @@ class ModuleManagerFactory implements FactoryInterface
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);
         $serviceListener  = $serviceLocator->get('ServiceListener');
 
-        $serviceListener->addServiceManager($serviceLocator,
+        $serviceListener->addServiceManager(
+            $serviceLocator,
             'service_manager',
             'Zend\ModuleManager\Feature\ServiceProviderInterface',
             'getServiceConfig'

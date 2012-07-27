@@ -110,6 +110,7 @@ class ReCaptcha extends FormInput
      */
     protected function renderJsEvents($challengeId, $responseId)
     {
+        $elseif = 'else if'; // php-cs-fixer bug
         $js =<<<EOJ
 <script type="text/javascript" language="JavaScript">
 function windowOnLoad(fn)
@@ -126,7 +127,7 @@ function zendBindEvent(el, eventName, eventHandler)
 {
     if (el.addEventListener){
         el.addEventListener(eventName, eventHandler, false);
-    } elseif (el.attachEvent){
+    } $elseif (el.attachEvent){
         el.attachEvent('on'+eventName, eventHandler);
     }
 }

@@ -478,7 +478,7 @@ class Form extends Fieldset implements FormInterface
             }
             
             if (!isset($data[$key])) {
-                return;
+                continue;
             }
 
             $fieldset = $formOrFieldset->byName[$key];

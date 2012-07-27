@@ -27,7 +27,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
      *
      * @var string
      */
-    protected $_closingBracket = null;
+    protected $closingBracket = null;
 
     /**
      * Get the tag closing bracket
@@ -36,15 +36,15 @@ abstract class AbstractHtmlElement extends AbstractHelper
      */
     public function getClosingBracket()
     {
-        if (!$this->_closingBracket) {
-            if ($this->_isXhtml()) {
-                $this->_closingBracket = ' />';
+        if (!$this->closingBracket) {
+            if ($this->isXhtml()) {
+                $this->closingBracket = ' />';
             } else {
-                $this->_closingBracket = '>';
+                $this->closingBracket = '>';
             }
         }
 
-        return $this->_closingBracket;
+        return $this->closingBracket;
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
      *
      * @return boolean
      */
-    protected function _isXhtml()
+    protected function isXhtml()
     {
         $doctype = $this->view->plugin('doctype');
         return $doctype->isXhtml();
@@ -68,7 +68,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
      *
      * @return string The XHTML for the attributes.
      */
-    protected function _htmlAttribs($attribs)
+    protected function htmlAttribs($attribs)
     {
         $xhtml   = '';
         $escaper = $this->view->plugin('escapehtml');
@@ -94,7 +94,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
             }
 
             if ('id' == $key) {
-                $val = $this->_normalizeId($val);
+                $val = $this->normalizeId($val);
             }
 
             if (strpos($val, '"') !== false) {
@@ -113,7 +113,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
      * @param  string $value
      * @return string
      */
-    protected function _normalizeId($value)
+    protected function normalizeId($value)
     {
         if (strstr($value, '[')) {
             if ('[]' == substr($value, -2)) {

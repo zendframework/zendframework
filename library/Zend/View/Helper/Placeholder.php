@@ -27,23 +27,23 @@ class Placeholder extends AbstractHelper
      * Placeholder items
      * @var array
      */
-    protected $_items = array();
+    protected $items = array();
 
     /**
      * @var \Zend\View\Helper\Placeholder\Registry
      */
-    protected $_registry;
+    protected $registry;
 
     /**
      * Constructor
      *
-     * Retrieve container registry from Zend_Registry, or create new one and register it.
+     * Retrieve container registry from Placeholder\Registry, or create new one and register it.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->_registry = Placeholder\Registry::getRegistry();
+        $this->registry = Placeholder\Registry::getRegistry();
     }
 
     /**
@@ -60,7 +60,7 @@ class Placeholder extends AbstractHelper
         }
 
         $name = (string) $name;
-        return $this->_registry->getContainer($name);
+        return $this->registry->getContainer($name);
     }
 
     /**
@@ -70,6 +70,6 @@ class Placeholder extends AbstractHelper
      */
     public function getRegistry()
     {
-        return $this->_registry;
+        return $this->registry;
     }
 }

@@ -29,13 +29,13 @@ class Registry
      * Default container class
      * @var string
      */
-    protected $_containerClass = 'Zend\View\Helper\Placeholder\Container';
+    protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
 
     /**
      * Placeholder containers
      * @var array
      */
-    protected $_items = array();
+    protected $items = array();
 
     /**
      * Retrieve or create registry instance
@@ -74,8 +74,8 @@ class Registry
     {
         $key = (string) $key;
 
-        $this->_items[$key] = new $this->_containerClass($value);
-        return $this->_items[$key];
+        $this->items[$key] = new $this->containerClass($value);
+        return $this->items[$key];
     }
 
     /**
@@ -87,8 +87,8 @@ class Registry
     public function getContainer($key)
     {
         $key = (string) $key;
-        if (isset($this->_items[$key])) {
-            return $this->_items[$key];
+        if (isset($this->items[$key])) {
+            return $this->items[$key];
         }
 
         $container = $this->createContainer($key);
@@ -105,7 +105,7 @@ class Registry
     public function containerExists($key)
     {
         $key = (string) $key;
-        $return =  array_key_exists($key, $this->_items);
+        $return =  array_key_exists($key, $this->items);
         return $return;
     }
 
@@ -119,7 +119,7 @@ class Registry
     public function setContainer($key, Container\AbstractContainer $container)
     {
         $key = (string) $key;
-        $this->_items[$key] = $container;
+        $this->items[$key] = $container;
         return $this;
     }
 
@@ -132,8 +132,8 @@ class Registry
     public function deleteContainer($key)
     {
         $key = (string) $key;
-        if (isset($this->_items[$key])) {
-            unset($this->_items[$key]);
+        if (isset($this->items[$key])) {
+            unset($this->items[$key]);
             return true;
         }
 
@@ -162,7 +162,7 @@ class Registry
             throw new Exception\InvalidArgumentException('Invalid Container class specified');
         }
 
-        $this->_containerClass = $name;
+        $this->containerClass = $name;
         return $this;
     }
 
@@ -173,6 +173,6 @@ class Registry
      */
     public function getContainerClass()
     {
-        return $this->_containerClass;
+        return $this->containerClass;
     }
 }

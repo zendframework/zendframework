@@ -26,25 +26,25 @@ abstract class AbstractStandalone
     /**
      * @var \Zend\View\Helper\Placeholder\Container\AbstractContainer
      */
-    protected $_container;
+    protected $container;
 
     /**
      * @var \Zend\View\Helper\Placeholder\Registry
      */
-    protected $_registry;
+    protected $registry;
 
     /**
      * Registry key under which container registers itself
      * @var string
      */
-    protected $_regKey;
+    protected $regKey;
 
     /**
      * Flag wheter to automatically escape output, must also be
      * enforced in the child class if __toString/toString is overriden
      * @var book
      */
-    protected $_autoEscape = true;
+    protected $autoEscape = true;
 
     /**
      * Constructor
@@ -54,7 +54,7 @@ abstract class AbstractStandalone
     public function __construct()
     {
         $this->setRegistry(Registry::getRegistry());
-        $this->setContainer($this->getRegistry()->getContainer($this->_regKey));
+        $this->setContainer($this->getRegistry()->getContainer($this->regKey));
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class AbstractStandalone
      */
     public function getRegistry()
     {
-        return $this->_registry;
+        return $this->registry;
     }
 
     /**
@@ -75,7 +75,7 @@ abstract class AbstractStandalone
      */
     public function setRegistry(Registry $registry)
     {
-        $this->_registry = $registry;
+        $this->registry = $registry;
         return $this;
     }
 
@@ -87,7 +87,7 @@ abstract class AbstractStandalone
      */
     public function setAutoEscape($autoEscape = true)
     {
-        $this->_autoEscape = ($autoEscape) ? true : false;
+        $this->autoEscape = ($autoEscape) ? true : false;
         return $this;
     }
 
@@ -98,7 +98,7 @@ abstract class AbstractStandalone
      */
     public function getAutoEscape()
     {
-        return $this->_autoEscape;
+        return $this->autoEscape;
     }
 
     /**
@@ -107,7 +107,7 @@ abstract class AbstractStandalone
      * @param  string $string
      * @return string
      */
-    protected function _escape($string)
+    protected function escape($string)
     {
         $enc = 'UTF-8';
         if ($this->view instanceof \Zend\View\Renderer\RendererInterface
@@ -136,7 +136,7 @@ abstract class AbstractStandalone
      */
     public function setContainer(AbstractContainer $container)
     {
-        $this->_container = $container;
+        $this->container = $container;
         return $this;
     }
 
@@ -147,7 +147,7 @@ abstract class AbstractStandalone
      */
     public function getContainer()
     {
-        return $this->_container;
+        return $this->container;
     }
 
     /**

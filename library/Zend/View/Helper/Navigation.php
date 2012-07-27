@@ -193,7 +193,7 @@ class Navigation extends AbstractNavigationHelper
         $class  = get_class($helper);
 
         if (!isset($this->injected[$class])) {
-            $this->_inject($helper);
+            $this->inject($helper);
             $this->injected[$class] = true;
         }
 
@@ -207,7 +207,7 @@ class Navigation extends AbstractNavigationHelper
      * @param  NavigationHelper $helper  helper instance
      * @return void
      */
-    protected function _inject(NavigationHelper $helper)
+    protected function inject(NavigationHelper $helper)
     {
         if ($this->getInjectContainer() && !$helper->hasContainer()) {
             $helper->setContainer($this->getContainer());

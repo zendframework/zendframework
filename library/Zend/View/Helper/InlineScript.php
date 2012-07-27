@@ -23,7 +23,7 @@ class InlineScript extends HeadScript
      * Registry key for placeholder
      * @var string
      */
-    protected $_regKey = 'Zend_View_Helper_InlineScript';
+    protected $regKey = 'Zend_View_Helper_InlineScript';
 
     /**
      * Return InlineScript object

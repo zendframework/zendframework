@@ -51,7 +51,7 @@ class HtmlObject extends AbstractHtmlElement
 
             $options = array_merge(array('name' => $param), $options);
 
-            $paramHtml[] = '<param' . $this->_htmlAttribs($options) . $closingBracket;
+            $paramHtml[] = '<param' . $this->htmlAttribs($options) . $closingBracket;
         }
 
         // Content
@@ -60,7 +60,7 @@ class HtmlObject extends AbstractHtmlElement
         }
 
         // Object header
-        $xhtml = '<object' . $this->_htmlAttribs($attribs) . '>' . self::EOL
+        $xhtml = '<object' . $this->htmlAttribs($attribs) . '>' . self::EOL
                  . implode(self::EOL, $paramHtml) . self::EOL
                  . ($content ? $content . self::EOL : '')
                  . '</object>';

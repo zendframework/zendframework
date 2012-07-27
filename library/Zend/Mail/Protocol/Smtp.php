@@ -258,6 +258,7 @@ class Smtp extends AbstractProtocol
      */
     public function rcpt($to)
     {
+
         if ($this->mail !== true) {
             throw new Exception\RuntimeException('No sender reverse path has been supplied');
         }

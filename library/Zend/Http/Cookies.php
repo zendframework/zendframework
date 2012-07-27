@@ -43,6 +43,11 @@ class Cookies extends Headers
     protected $headers = null;
 
     /**
+     * @var $_rawCookies
+     */
+    protected $rawCookies;
+
+    /**
      * @static
      * @throws Exception\RuntimeException
      * @param $string
@@ -85,7 +90,7 @@ class Cookies extends Headers
                 $this->cookies[$domain][$path] = array();
             }
             $this->cookies[$domain][$path][$cookie->getName()] = $cookie;
-            $this->_rawCookies[] = $cookie;
+            $this->rawCookies[] = $cookie;
         } else {
             throw new Exception\InvalidArgumentException('Supplient argument is not a valid cookie string or object');
         }
@@ -332,7 +337,7 @@ class Cookies extends Headers
      */
     public function reset()
     {
-        $this->cookies = $this->_rawCookies = array();
+        $this->cookies = $this->rawCookies = array();
         return $this;
     }
 

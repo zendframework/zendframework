@@ -476,7 +476,7 @@ class Form extends Fieldset implements FormInterface
             if (!$formOrFieldset->has($key)) {
                 continue;
             }
-            
+
             if (!isset($data[$key])) {
                 continue;
             }

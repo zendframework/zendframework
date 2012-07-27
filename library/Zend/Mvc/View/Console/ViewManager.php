@@ -72,7 +72,7 @@ class ViewManager extends BaseViewManager
     /**
      * Instantiates and configures the default MVC rendering strategy
      *
-     * Overriding to ensure we pick up the MVC rendering strategy for console, 
+     * Overriding to ensure we pick up the MVC rendering strategy for console,
      * as well as to ensure that the appropriate aliases are set.
      *
      * @return DefaultRenderingStrategy

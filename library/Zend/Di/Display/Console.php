@@ -120,7 +120,7 @@ class Console
         echo PHP_EOL . '  Configurations:' . PHP_EOL;
 
         foreach ($configuredTypes as $type) {
-            $info = $this->di->instanceManager()->getConfiguration($type);
+            $info = $this->di->instanceManager()->getConfig($type);
             echo '    ' . $type . PHP_EOL;
 
             if ($info['parameters']) {

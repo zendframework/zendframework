@@ -500,7 +500,10 @@ class Fieldset extends Element implements FieldsetInterface
             $hydratableData[$name] = $value;
         }
 
-        $this->object = $hydrator->hydrate($hydratableData, $this->object);
+        if (!empty($hydratableData)) {
+            $this->object = $hydrator->hydrate($hydratableData, $this->object);
+        }
+
         return $this->object;
     }
 

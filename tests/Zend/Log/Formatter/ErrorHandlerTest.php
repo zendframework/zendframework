@@ -10,6 +10,7 @@
 
 namespace ZendTest\Log\Formatter;
 
+use DateTime;
 use Zend\Log\Formatter\ErrorHandler;
 
 /**
@@ -22,7 +23,8 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormat()
     {
-        $date = date('c');
+        $date = new DateTime();
+
         $event = array(
             'timestamp'    => $date,
             'message'      => 'test',
@@ -37,6 +39,6 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
         $formatter = new ErrorHandler();
         $output = $formatter->format($event);
 
-        $this->assertEquals($date . ' CRIT (1) test (errno 1) in test.php on line 1', $output);
+        $this->assertEquals($date->format('c') . ' CRIT (1) test (errno 1) in test.php on line 1', $output);
     }
 }

@@ -80,7 +80,7 @@ class Server extends AbstractServer
      * PHP types => XML-RPC types
      * @var array
      */
-    protected $_typeMap = array(
+    protected $typeMap = array(
         'i4'                         => 'i4',
         'int'                        => 'int',
         'integer'                    => 'int',
@@ -516,8 +516,8 @@ class Server extends AbstractServer
      */
     protected function _fixType($type)
     {
-        if (isset($this->_typeMap[$type])) {
-            return $this->_typeMap[$type];
+        if (isset($this->typeMap[$type])) {
+            return $this->typeMap[$type];
         }
         return 'void';
     }

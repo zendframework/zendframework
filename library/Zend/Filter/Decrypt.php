@@ -28,6 +28,6 @@ class Decrypt extends Encrypt
      */
     public function filter($value)
     {
-        return $this->_adapter->decrypt($value);
+        return $this->adapter->decrypt($value);
     }
 }

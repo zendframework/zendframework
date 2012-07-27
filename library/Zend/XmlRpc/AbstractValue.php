@@ -33,23 +33,23 @@ abstract class AbstractValue
      * If the native type of this object is array or struct, this will be an array
      * of Value objects
      */
-    protected $_value;
+    protected $value;
 
     /**
      * The native XML-RPC type of this object
      * One of the XMLRPC_TYPE_* constants
      */
-    protected $_type;
+    protected $type;
 
     /**
      * XML code representation of this object (will be calculated only once)
      */
-    protected $_xml;
+    protected $xml;
 
     /**
      * @var Zend\XmlRpc\Generator\GeneratorAbstract
      */
-    protected static $_generator;
+    protected static $generator;
 
     /**
      * Specify that the XML-RPC native type will be auto detected from a PHP variable type
@@ -85,7 +85,7 @@ abstract class AbstractValue
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -95,15 +95,15 @@ abstract class AbstractValue
      */
     public static function getGenerator()
     {
-        if (!self::$_generator) {
+        if (!self::$generator) {
             if (extension_loaded('xmlwriter')) {
-                self::$_generator = new Generator\XmlWriter();
+                self::$generator = new Generator\XmlWriter();
             } else {
-                self::$_generator = new Generator\DomDocument();
+                self::$generator = new Generator\DomDocument();
             }
         }
 
-        return self::$_generator;
+        return self::$generator;
     }
 
     /**
@@ -114,7 +114,7 @@ abstract class AbstractValue
      */
     public static function setGenerator(Generator\GeneratorInterface $generator = null)
     {
-        self::$_generator = $generator;
+        self::$generator = $generator;
     }
 
     /**
@@ -145,11 +145,11 @@ abstract class AbstractValue
      */
     public function saveXml()
     {
-        if (!$this->_xml) {
+        if (!$this->xml) {
             $this->generateXml();
-            $this->_xml = (string) $this->getGenerator();
+            $this->xml = (string) $this->getGenerator();
         }
-        return $this->_xml;
+        return $this->xml;
     }
 
     /**
@@ -463,6 +463,6 @@ abstract class AbstractValue
      */
     protected function _setXML($xml)
     {
-        $this->_xml = $this->getGenerator()->stripDeclaration($xml);
+        $this->xml = $this->getGenerator()->stripDeclaration($xml);
     }
 }

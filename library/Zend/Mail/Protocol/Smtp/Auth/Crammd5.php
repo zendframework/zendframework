@@ -85,7 +85,7 @@ class Crammd5 extends Smtp
         $digest = $this->_hmacMd5($this->getPassword(), $challenge);
         $this->_send(base64_encode($this->getUsername() . ' ' . $digest));
         $this->_expect(235);
-        $this->_auth = true;
+        $this->auth = true;
     }
 
     /**

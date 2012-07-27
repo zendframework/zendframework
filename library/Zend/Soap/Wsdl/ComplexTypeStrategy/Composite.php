@@ -28,21 +28,21 @@ class Composite implements ComplexTypeStrategy
      *
      * @var array
      */
-    protected $_typeMap = array();
+    protected $typeMap = array();
 
     /**
      * Default Strategy of this composite
      *
      * @var string|ComplexTypeStrategy
      */
-    protected $_defaultStrategy;
+    protected $defaultStrategy;
 
     /**
      * Context WSDL file that this composite serves
      *
      * @var \Zend\Soap\Wsdl|null
      */
-    protected $_context;
+    protected $context;
 
     /**
      * Construct Composite WSDL Strategy.
@@ -55,7 +55,7 @@ class Composite implements ComplexTypeStrategy
         foreach($typeMap AS $type => $strategy) {
             $this->connectTypeToStrategy($type, $strategy);
         }
-        $this->_defaultStrategy = $defaultStrategy;
+        $this->defaultStrategy = $defaultStrategy;
     }
 
     /**
@@ -71,7 +71,7 @@ class Composite implements ComplexTypeStrategy
         if(!is_string($type)) {
             throw new Exception\InvalidArgumentException('Invalid type given to Composite Type Map.');
         }
-        $this->_typeMap[$type] = $strategy;
+        $this->typeMap[$type] = $strategy;
         return $this;
     }
 
@@ -84,7 +84,7 @@ class Composite implements ComplexTypeStrategy
      */
     public function getDefaultStrategy()
     {
-        $strategy = $this->_defaultStrategy;
+        $strategy = $this->defaultStrategy;
         if(is_string($strategy) && class_exists($strategy)) {
             $strategy = new $strategy;
         }
@@ -93,7 +93,7 @@ class Composite implements ComplexTypeStrategy
                 'Default Strategy for Complex Types is not a valid strategy object.'
             );
         }
-        $this->_defaultStrategy = $strategy;
+        $this->defaultStrategy = $strategy;
         return $strategy;
     }
 
@@ -106,8 +106,8 @@ class Composite implements ComplexTypeStrategy
      */
     public function getStrategyOfType($type)
     {
-        if(isset($this->_typeMap[$type])) {
-            $strategy = $this->_typeMap[$type];
+        if(isset($this->typeMap[$type])) {
+            $strategy = $this->typeMap[$type];
 
             if(is_string($strategy) && class_exists($strategy)) {
                 $strategy = new $strategy();
@@ -118,7 +118,7 @@ class Composite implements ComplexTypeStrategy
                     "Strategy for Complex Type '$type' is not a valid strategy object."
                 );
             }
-            $this->_typeMap[$type] = $strategy;
+            $this->typeMap[$type] = $strategy;
         } else {
             $strategy = $this->getDefaultStrategy();
         }
@@ -132,7 +132,7 @@ class Composite implements ComplexTypeStrategy
      */
     public function setContext(Wsdl $context)
     {
-        $this->_context = $context;
+        $this->context = $context;
         return $this;
     }
 
@@ -145,14 +145,14 @@ class Composite implements ComplexTypeStrategy
      */
     public function addComplexType($type)
     {
-        if(!($this->_context instanceof Wsdl) ) {
+        if(!($this->context instanceof Wsdl) ) {
             throw new Exception\InvalidArgumentException(
                 "Cannot add complex type '$type', no context is set for this composite strategy."
             );
         }
 
         $strategy = $this->getStrategyOfType($type);
-        $strategy->setContext($this->_context);
+        $strategy->setContext($this->context);
         return $strategy->addComplexType($type);
     }
 }

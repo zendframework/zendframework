@@ -26,13 +26,13 @@ class Imap
      * socket to imap server
      * @var resource|null
      */
-    protected $_socket;
+    protected $socket;
 
     /**
      * counter for request tag
      * @var int
      */
-    protected $_tagCount = 0;
+    protected $tagCount = 0;
 
     /**
      * Public constructor
@@ -78,8 +78,8 @@ class Imap
 
         $errno  =  0;
         $errstr = '';
-        $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
-        if (!$this->_socket) {
+        $this->socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+        if (!$this->socket) {
             throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr .
                                                    ' (errno = ' . $errno . ' )');
         }
@@ -90,7 +90,7 @@ class Imap
 
         if ($ssl === 'TLS') {
             $result = $this->requestAndResponse('STARTTLS');
-            $result = $result && stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+            $result = $result && stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {
                 throw new Exception\RuntimeException('cannot enable TLS');
             }
@@ -105,7 +105,7 @@ class Imap
      */
     protected function _nextLine()
     {
-        $line = fgets($this->_socket);
+        $line = fgets($this->socket);
         if ($line === false) {
             throw new Exception\RuntimeException('cannot read - connection closed?');
         }
@@ -301,15 +301,15 @@ class Imap
     public function sendRequest($command, $tokens = array(), &$tag = null)
     {
         if (!$tag) {
-            ++$this->_tagCount;
-            $tag = 'TAG' . $this->_tagCount;
+            ++$this->tagCount;
+            $tag = 'TAG' . $this->tagCount;
         }
 
         $line = $tag . ' ' . $command;
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (fwrite($this->socket, $line . ' ' . $token[0] . "\r\n") === false) {
                     throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
@@ -321,7 +321,7 @@ class Imap
             }
         }
 
-        if (fwrite($this->_socket, $line . "\r\n") === false) {
+        if (fwrite($this->socket, $line . "\r\n") === false) {
             throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }
@@ -406,14 +406,14 @@ class Imap
     public function logout()
     {
         $result = false;
-        if ($this->_socket) {
+        if ($this->socket) {
             try {
                 $result = $this->requestAndResponse('LOGOUT', array(), true);
             } catch (Exception\ExceptionInterface $e) {
                 // ignoring exception
             }
-            fclose($this->_socket);
-            $this->_socket = null;
+            fclose($this->socket);
+            $this->socket = null;
         }
         return $result;
     }

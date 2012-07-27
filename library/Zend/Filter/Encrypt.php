@@ -24,7 +24,7 @@ class Encrypt extends AbstractFilter
     /**
      * Encryption adapter
      */
-    protected $_adapter;
+    protected $adapter;
 
     /**
      * Class constructor
@@ -47,7 +47,7 @@ class Encrypt extends AbstractFilter
      */
     public function getAdapter()
     {
-        return $this->_adapter->toString();
+        return $this->adapter->toString();
     }
 
     /**
@@ -84,8 +84,8 @@ class Encrypt extends AbstractFilter
                 ));
         }
 
-        $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+        $this->adapter = new $adapter($options);
+        if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
             throw new Exception\InvalidArgumentException(
                 "Encoding adapter '" . $adapter
                 . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
@@ -104,11 +104,11 @@ class Encrypt extends AbstractFilter
     public function __call($method, $options)
     {
         $part = substr($method, 0, 3);
-        if ((($part != 'get') and ($part != 'set')) or !method_exists($this->_adapter, $method)) {
+        if ((($part != 'get') and ($part != 'set')) or !method_exists($this->adapter, $method)) {
             throw new Exception\BadMethodCallException("Unknown method '{$method}'");
         }
 
-        return call_user_func_array(array($this->_adapter, $method), $options);
+        return call_user_func_array(array($this->adapter, $method), $options);
     }
 
     /**
@@ -121,6 +121,6 @@ class Encrypt extends AbstractFilter
      */
     public function filter($value)
     {
-        return $this->_adapter->encrypt($value);
+        return $this->adapter->encrypt($value);
     }
 }

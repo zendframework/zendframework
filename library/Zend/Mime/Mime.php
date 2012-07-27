@@ -33,7 +33,7 @@ class Mime
     const MULTIPART_MIXED = 'multipart/mixed';
     const MULTIPART_RELATED = 'multipart/related';
 
-    protected $_boundary;
+    protected $boundary;
     protected static $makeUnique = 0;
 
     // lookup-Tables for QuotedPrintable
@@ -286,9 +286,9 @@ class Mime
     {
         // This string needs to be somewhat unique
         if ($boundary === null) {
-            $this->_boundary = '=_' . md5(microtime(1) . self::$makeUnique++);
+            $this->boundary = '=_' . md5(microtime(1) . self::$makeUnique++);
         } else {
-            $this->_boundary = $boundary;
+            $this->boundary = $boundary;
         }
     }
 
@@ -325,7 +325,7 @@ class Mime
      */
     public function boundary()
     {
-        return $this->_boundary;
+        return $this->boundary;
     }
 
     /**
@@ -337,7 +337,7 @@ class Mime
      */
     public function boundaryLine($EOL = self::LINEEND)
     {
-        return $EOL . '--' . $this->_boundary . $EOL;
+        return $EOL . '--' . $this->boundary . $EOL;
     }
 
     /**
@@ -348,6 +348,6 @@ class Mime
      */
     public function mimeEnd($EOL = self::LINEEND)
     {
-        return $EOL . '--' . $this->_boundary . '--' . $EOL;
+        return $EOL . '--' . $this->boundary . '--' . $EOL;
     }
 }

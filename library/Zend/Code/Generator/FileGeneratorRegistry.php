@@ -15,9 +15,9 @@ use Zend\Code\Generator\Exception\RuntimeException;
 class FileGeneratorRegistry
 {
     /**
-     * @var array[string]\Zend\Code\Generator\FileGenerator $_fileCodeGenerators registry for Zend\Code\Generator\FileGenerator
+     * @var array[string]\Zend\Code\Generator\FileGenerator $fileCodeGenerators registry for Zend\Code\Generator\FileGenerator
      */
-    private static $_fileCodeGenerators = array();
+    private static $fileCodeGenerators = array();
 
     /**
      * Registry for the Zend_Code package. Zend_Tool uses this
@@ -40,7 +40,7 @@ class FileGeneratorRegistry
         // in the same DIRECTORY_SEPARATOR that realpath would use:
         $fileName = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $fileName);
 
-        self::$_fileCodeGenerators[$fileName] = $fileCodeGenerator;
+        self::$fileCodeGenerators[$fileName] = $fileCodeGenerator;
 
     }
 }

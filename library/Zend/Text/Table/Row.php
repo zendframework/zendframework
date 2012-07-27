@@ -25,14 +25,14 @@ class Row
      *
      * @var array
      */
-    protected $_columns = array();
+    protected $columns = array();
 
     /**
      * Temporary stored column widths
      *
      * @var array
      */
-    protected $_columnWidths = null;
+    protected $columnWidths = null;
 
     /**
      * Create a new column and append it to the row
@@ -66,7 +66,7 @@ class Row
      */
     public function appendColumn(Column $column)
     {
-        $this->_columns[] = $column;
+        $this->columns[] = $column;
 
         return $this;
     }
@@ -81,11 +81,11 @@ class Row
      */
     public function getColumn($index)
     {
-        if (!isset($this->_columns[$index])) {
+        if (!isset($this->columns[$index])) {
             return null;
         }
 
-        return $this->_columns[$index];
+        return $this->columns[$index];
     }
 
     /**
@@ -95,7 +95,7 @@ class Row
      */
     public function getColumns()
     {
-        return $this->_columns;
+        return $this->columns;
     }
 
     /**
@@ -106,11 +106,11 @@ class Row
      */
     public function getColumnWidths()
     {
-        if ($this->_columnWidths === null) {
+        if ($this->columnWidths === null) {
             throw new Exception\UnexpectedValueException('render() must be called before columnWidths can be populated');
         }
 
-        return $this->_columnWidths;
+        return $this->columnWidths;
     }
 
     /**
@@ -125,11 +125,11 @@ class Row
     public function render(array $columnWidths, Decorator $decorator, $padding = 0)
     {
         // Prepare an array to store all column widths
-        $this->_columnWidths = array();
+        $this->columnWidths = array();
 
         // If there is no single column, create a column which spans over the
         // entire row
-        if (count($this->_columns) === 0) {
+        if (count($this->columns) === 0) {
             $this->appendColumn(new Column(null, null, count($columnWidths)));
         }
 
@@ -137,7 +137,7 @@ class Row
         $renderedColumns = array();
         $maxHeight       = 0;
         $colNum          = 0;
-        foreach ($this->_columns as $column) {
+        foreach ($this->columns as $column) {
             // Get the colspan of the column
             $colSpan = $column->getColSpan();
 
@@ -155,7 +155,7 @@ class Row
             $result = explode("\n", $column->render($columnWidth, $padding));
 
             // Store the width of the rendered column
-            $this->_columnWidths[] = $columnWidth;
+            $this->columnWidths[] = $columnWidth;
 
             // Store the rendered column and calculate the new max height
             $renderedColumns[] = $result;
@@ -173,7 +173,7 @@ class Row
                                                      $colNum));
             $renderedColumns[] = array(str_repeat(' ', $remainingWidth));
 
-            $this->_columnWidths[] = $remainingWidth;
+            $this->columnWidths[] = $remainingWidth;
         }
 
         // Add each single column line to the result
@@ -185,7 +185,7 @@ class Row
                 if (isset($renderedColumn[$line]) === true) {
                     $result .= $renderedColumn[$line];
                 } else {
-                    $result .= str_repeat(' ', $this->_columnWidths[$index]);
+                    $result .= str_repeat(' ', $this->columnWidths[$index]);
                 }
 
                 $result .= $decorator->getVertical();

@@ -24,27 +24,27 @@ class Inflector extends AbstractFilter
     /**
      * @var FilterPluginManager
      */
-    protected $_pluginManager = null;
+    protected $pluginManager = null;
 
     /**
      * @var string
      */
-    protected $_target = null;
+    protected $target = null;
 
     /**
      * @var bool
      */
-    protected $_throwTargetExceptionsOn = true;
+    protected $throwTargetExceptionsOn = true;
 
     /**
      * @var string
      */
-    protected $_targetReplacementIdentifier = ':';
+    protected $targetReplacementIdentifier = ':';
 
     /**
      * @var array
      */
-    protected $_rules = array();
+    protected $rules = array();
 
     /**
      * Constructor
@@ -89,11 +89,11 @@ class Inflector extends AbstractFilter
      */
     public function getPluginManager()
     {
-        if (!$this->_pluginManager instanceof FilterPluginManager) {
+        if (!$this->pluginManager instanceof FilterPluginManager) {
             $this->setPluginManager(new FilterPluginManager());
         }
 
-        return $this->_pluginManager;
+        return $this->pluginManager;
     }
 
     /**
@@ -104,7 +104,7 @@ class Inflector extends AbstractFilter
      */
     public function setPluginManager(FilterPluginManager $manager)
     {
-        $this->_pluginManager = $manager;
+        $this->pluginManager = $manager;
         return $this;
     }
 
@@ -156,7 +156,7 @@ class Inflector extends AbstractFilter
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
-        $this->_throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
+        $this->throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
         return $this;
     }
 
@@ -167,7 +167,7 @@ class Inflector extends AbstractFilter
      */
     public function isThrowTargetExceptionsOn()
     {
-        return $this->_throwTargetExceptionsOn;
+        return $this->throwTargetExceptionsOn;
     }
 
     /**
@@ -179,7 +179,7 @@ class Inflector extends AbstractFilter
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
         if ($targetReplacementIdentifier) {
-            $this->_targetReplacementIdentifier = (string) $targetReplacementIdentifier;
+            $this->targetReplacementIdentifier = (string) $targetReplacementIdentifier;
         }
 
         return $this;
@@ -192,7 +192,7 @@ class Inflector extends AbstractFilter
      */
     public function getTargetReplacementIdentifier()
     {
-        return $this->_targetReplacementIdentifier;
+        return $this->targetReplacementIdentifier;
     }
 
     /**
@@ -204,7 +204,7 @@ class Inflector extends AbstractFilter
      */
     public function setTarget($target)
     {
-        $this->_target = (string) $target;
+        $this->target = (string) $target;
         return $this;
     }
 
@@ -215,7 +215,7 @@ class Inflector extends AbstractFilter
      */
     public function getTarget()
     {
-        return $this->_target;
+        return $this->target;
     }
 
     /**
@@ -226,7 +226,7 @@ class Inflector extends AbstractFilter
      */
     public function setTargetReference(&$target)
     {
-        $this->_target =& $target;
+        $this->target =& $target;
         return $this;
     }
 
@@ -287,13 +287,13 @@ class Inflector extends AbstractFilter
     {
         if (null !== $spec) {
             $spec = $this->_normalizeSpec($spec);
-            if (isset($this->_rules[$spec])) {
-                return $this->_rules[$spec];
+            if (isset($this->rules[$spec])) {
+                return $this->rules[$spec];
             }
             return false;
         }
 
-        return $this->_rules;
+        return $this->rules;
     }
 
     /**
@@ -306,9 +306,9 @@ class Inflector extends AbstractFilter
     public function getRule($spec, $index)
     {
         $spec = $this->_normalizeSpec($spec);
-        if (isset($this->_rules[$spec]) && is_array($this->_rules[$spec])) {
-            if (isset($this->_rules[$spec][$index])) {
-                return $this->_rules[$spec][$index];
+        if (isset($this->rules[$spec]) && is_array($this->rules[$spec])) {
+            if (isset($this->rules[$spec][$index])) {
+                return $this->rules[$spec][$index];
             }
         }
         return false;
@@ -321,7 +321,7 @@ class Inflector extends AbstractFilter
      */
     public function clearRules()
     {
-        $this->_rules = array();
+        $this->rules = array();
         return $this;
     }
 
@@ -336,7 +336,7 @@ class Inflector extends AbstractFilter
     public function setFilterRule($spec, $ruleSet)
     {
         $spec = $this->_normalizeSpec($spec);
-        $this->_rules[$spec] = array();
+        $this->rules[$spec] = array();
         return $this->addFilterRule($spec, $ruleSet);
     }
 
@@ -350,22 +350,22 @@ class Inflector extends AbstractFilter
     public function addFilterRule($spec, $ruleSet)
     {
         $spec = $this->_normalizeSpec($spec);
-        if (!isset($this->_rules[$spec])) {
-            $this->_rules[$spec] = array();
+        if (!isset($this->rules[$spec])) {
+            $this->rules[$spec] = array();
         }
 
         if (!is_array($ruleSet)) {
             $ruleSet = array($ruleSet);
         }
 
-        if (is_string($this->_rules[$spec])) {
-            $temp = $this->_rules[$spec];
-            $this->_rules[$spec] = array();
-            $this->_rules[$spec][] = $temp;
+        if (is_string($this->rules[$spec])) {
+            $temp = $this->rules[$spec];
+            $this->rules[$spec] = array();
+            $this->rules[$spec][] = $temp;
         }
 
         foreach ($ruleSet as $rule) {
-            $this->_rules[$spec][] = $this->_getRule($rule);
+            $this->rules[$spec][] = $this->_getRule($rule);
         }
 
         return $this;
@@ -381,7 +381,7 @@ class Inflector extends AbstractFilter
     public function setStaticRule($name, $value)
     {
         $name = $this->_normalizeSpec($name);
-        $this->_rules[$name] = (string) $value;
+        $this->rules[$name] = (string) $value;
         return $this;
     }
 
@@ -399,7 +399,7 @@ class Inflector extends AbstractFilter
     public function setStaticRuleReference($name, &$reference)
     {
         $name = $this->_normalizeSpec($name);
-        $this->_rules[$name] =& $reference;
+        $this->rules[$name] =& $reference;
         return $this;
     }
 
@@ -416,10 +416,10 @@ class Inflector extends AbstractFilter
             $source[ltrim($sourceName, ':')] = $sourceValue;
         }
 
-        $pregQuotedTargetReplacementIdentifier = preg_quote($this->_targetReplacementIdentifier, '#');
+        $pregQuotedTargetReplacementIdentifier = preg_quote($this->targetReplacementIdentifier, '#');
         $processedParts = array();
 
-        foreach ($this->_rules as $ruleName => $ruleValue) {
+        foreach ($this->rules as $ruleName => $ruleValue) {
             if (isset($source[$ruleName])) {
                 if (is_string($ruleValue)) {
                     // overriding the set rule
@@ -437,10 +437,10 @@ class Inflector extends AbstractFilter
         }
 
         // all of the values of processedParts would have been str_replace('\\', '\\\\', ..)'d to disable preg_replace backreferences
-        $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->_target);
+        $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->target);
 
-        if ($this->_throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
-            throw new Exception\RuntimeException('A replacement identifier ' . $this->_targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
+        if ($this->throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
+            throw new Exception\RuntimeException('A replacement identifier ' . $this->targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
         }
 
         return $inflectedTarget;

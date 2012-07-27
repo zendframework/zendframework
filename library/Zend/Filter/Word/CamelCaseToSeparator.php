@@ -26,10 +26,10 @@ class CamelCaseToSeparator extends AbstractSeparator
     {
         if (self::hasPcreUnicodeSupport()) {
             parent::setPattern(array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#','#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'));
-            parent::setReplacement(array($this->_separator . '\1', $this->_separator . '\1'));
+            parent::setReplacement(array($this->separator . '\1', $this->separator . '\1'));
         } else {
             parent::setPattern(array('#(?<=(?:[A-Z]))([A-Z]+)([A-Z][A-z])#', '#(?<=(?:[a-z0-9]))([A-Z])#'));
-            parent::setReplacement(array('\1' . $this->_separator . '\2', $this->_separator . '\1'));
+            parent::setReplacement(array('\1' . $this->separator . '\2', $this->separator . '\1'));
         }
 
         return parent::filter($value);

@@ -24,7 +24,7 @@ class XmlWriter extends AbstractGenerator
      *
      * @var XMLWriter
      */
-    protected $_xmlWriter;
+    protected $xmlWriter;
 
     /**
      * Initialized XMLWriter instance
@@ -33,9 +33,9 @@ class XmlWriter extends AbstractGenerator
      */
     protected function _init()
     {
-        $this->_xmlWriter = new \XMLWriter();
-        $this->_xmlWriter->openMemory();
-        $this->_xmlWriter->startDocument('1.0', $this->_encoding);
+        $this->xmlWriter = new \XMLWriter();
+        $this->xmlWriter->openMemory();
+        $this->xmlWriter->startDocument('1.0', $this->encoding);
     }
 
 
@@ -47,7 +47,7 @@ class XmlWriter extends AbstractGenerator
      */
     protected function _openElement($name)
     {
-        $this->_xmlWriter->startElement($name);
+        $this->xmlWriter->startElement($name);
     }
 
     /**
@@ -58,7 +58,7 @@ class XmlWriter extends AbstractGenerator
      */
     protected function _writeTextData($text)
     {
-        $this->_xmlWriter->text($text);
+        $this->xmlWriter->text($text);
     }
 
     /**
@@ -69,7 +69,7 @@ class XmlWriter extends AbstractGenerator
      */
     protected function _closeElement($name)
     {
-        $this->_xmlWriter->endElement();
+        $this->xmlWriter->endElement();
 
         return $this;
     }
@@ -81,6 +81,6 @@ class XmlWriter extends AbstractGenerator
      */
     public function saveXml()
     {
-        return $this->_xmlWriter->flush(false);
+        return $this->xmlWriter->flush(false);
     }
 }

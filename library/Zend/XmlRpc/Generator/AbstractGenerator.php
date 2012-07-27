@@ -21,7 +21,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      *
      * @var string
      */
-    protected $_encoding;
+    protected $encoding;
 
     /**
      * Construct new instance of the generator
@@ -82,7 +82,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
@@ -93,7 +93,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      */
     public function setEncoding($encoding)
     {
-        $this->_encoding = $encoding;
+        $this->encoding = $encoding;
         return $this;
     }
 

@@ -21,12 +21,12 @@ class Definition implements \Countable, \Iterator
     /**
      * @var array Array of \Zend\Server\Method\Definition objects
      */
-    protected $_methods = array();
+    protected $methods = array();
 
     /**
      * @var bool Whether or not overwriting existing methods is allowed
      */
-    protected $_overwriteExistingMethods = false;
+    protected $overwriteExistingMethods = false;
 
     /**
      * Constructor
@@ -49,7 +49,7 @@ class Definition implements \Countable, \Iterator
      */
     public function setOverwriteExistingMethods($flag)
     {
-        $this->_overwriteExistingMethods = (bool) $flag;
+        $this->overwriteExistingMethods = (bool) $flag;
         return $this;
     }
 
@@ -81,10 +81,10 @@ class Definition implements \Countable, \Iterator
             throw new Exception\InvalidArgumentException('No method name provided');
         }
 
-        if (!$this->_overwriteExistingMethods && array_key_exists($name, $this->_methods)) {
+        if (!$this->overwriteExistingMethods && array_key_exists($name, $this->methods)) {
             throw new Exception\InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
         }
-        $this->_methods[$name] = $method;
+        $this->methods[$name] = $method;
         return $this;
     }
 
@@ -123,7 +123,7 @@ class Definition implements \Countable, \Iterator
      */
     public function hasMethod($method)
     {
-        return array_key_exists($method, $this->_methods);
+        return array_key_exists($method, $this->methods);
     }
 
     /**
@@ -135,7 +135,7 @@ class Definition implements \Countable, \Iterator
     public function getMethod($method)
     {
         if ($this->hasMethod($method)) {
-            return $this->_methods[$method];
+            return $this->methods[$method];
         }
         return false;
     }
@@ -147,7 +147,7 @@ class Definition implements \Countable, \Iterator
      */
     public function getMethods()
     {
-        return $this->_methods;
+        return $this->methods;
     }
 
     /**
@@ -159,7 +159,7 @@ class Definition implements \Countable, \Iterator
     public function removeMethod($method)
     {
         if ($this->hasMethod($method)) {
-            unset($this->_methods[$method]);
+            unset($this->methods[$method]);
         }
         return $this;
     }
@@ -171,7 +171,7 @@ class Definition implements \Countable, \Iterator
      */
     public function clearMethods()
     {
-        $this->_methods = array();
+        $this->methods = array();
         return $this;
     }
 
@@ -196,7 +196,7 @@ class Definition implements \Countable, \Iterator
      */
     public function count()
     {
-        return count($this->_methods);
+        return count($this->methods);
     }
 
     /**
@@ -206,7 +206,7 @@ class Definition implements \Countable, \Iterator
      */
     public function current()
     {
-        return current($this->_methods);
+        return current($this->methods);
     }
 
     /**
@@ -216,7 +216,7 @@ class Definition implements \Countable, \Iterator
      */
     public function key()
     {
-        return key($this->_methods);
+        return key($this->methods);
     }
 
     /**
@@ -226,7 +226,7 @@ class Definition implements \Countable, \Iterator
      */
     public function next()
     {
-        return next($this->_methods);
+        return next($this->methods);
     }
 
     /**
@@ -236,7 +236,7 @@ class Definition implements \Countable, \Iterator
      */
     public function rewind()
     {
-        return reset($this->_methods);
+        return reset($this->methods);
     }
 
     /**

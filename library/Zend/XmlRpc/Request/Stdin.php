@@ -29,7 +29,7 @@ class Stdin extends XmlRpcRequest
      * Raw XML as received via request
      * @var string
      */
-    protected $_xml;
+    protected $xml;
 
     /**
      * Constructor
@@ -54,7 +54,7 @@ class Stdin extends XmlRpcRequest
         }
         fclose($fh);
 
-        $this->_xml = $xml;
+        $this->xml = $xml;
 
         $this->loadXml($xml);
     }
@@ -66,6 +66,6 @@ class Stdin extends XmlRpcRequest
      */
     public function getRawRequest()
     {
-        return $this->_xml;
+        return $this->xml;
     }
 }

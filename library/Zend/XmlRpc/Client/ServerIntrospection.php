@@ -24,7 +24,7 @@ class ServerIntrospection
     /**
      * @var \Zend\XmlRpc\Client\ServerProxy
      */
-    private $_system = null;
+    private $system = null;
 
 
     /**
@@ -32,7 +32,7 @@ class ServerIntrospection
      */
     public function __construct(XMLRPCClient $client)
     {
-        $this->_system = $client->getProxy('system');
+        $this->system = $client->getProxy('system');
     }
 
     /**
@@ -79,7 +79,7 @@ class ServerIntrospection
                                        'params'     => array($method));
         }
 
-        $serverSignatures = $this->_system->multicall($multicallParams);
+        $serverSignatures = $this->system->multicall($multicallParams);
 
         if (! is_array($serverSignatures)) {
             $type = gettype($serverSignatures);
@@ -130,7 +130,7 @@ class ServerIntrospection
      */
     public function getMethodSignature($method)
     {
-        $signature = $this->_system->methodSignature($method);
+        $signature = $this->system->methodSignature($method);
         if (!is_array($signature)) {
             $error = 'Invalid signature for method "' . $method . '"';
             throw new Exception\IntrospectException($error);
@@ -146,7 +146,7 @@ class ServerIntrospection
      */
     public function listMethods()
     {
-        return $this->_system->listMethods();
+        return $this->system->listMethods();
     }
 
 }

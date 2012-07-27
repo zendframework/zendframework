@@ -86,7 +86,7 @@ class Login extends Smtp
         $this->_expect(334);
         $this->_send(base64_encode($this->getPassword()));
         $this->_expect(235);
-        $this->_auth = true;
+        $this->auth = true;
     }
 
     /**

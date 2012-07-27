@@ -32,28 +32,28 @@ class Column
      *
      * @var string
      */
-    protected $_content = '';
+    protected $content = '';
 
     /**
      * Align of the column
      *
      * @var string
      */
-    protected $_align = self::ALIGN_LEFT;
+    protected $align = self::ALIGN_LEFT;
 
     /**
      * Colspan of the column
      *
      * @var integer
      */
-    protected $_colSpan = 1;
+    protected $colSpan = 1;
 
     /**
      * Allowed align parameters
      *
      * @var array
      */
-    protected $_allowedAligns = array(self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT);
+    protected $allowedAligns = array(self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT);
 
     /**
      * Create a column for a Zend\Text\Table\Row object.
@@ -112,7 +112,7 @@ class Column
 
         }
 
-        $this->_content = $content;
+        $this->content = $content;
 
         return $this;
     }
@@ -126,11 +126,11 @@ class Column
      */
     public function setAlign($align)
     {
-        if (in_array($align, $this->_allowedAligns) === false) {
+        if (in_array($align, $this->allowedAligns) === false) {
             throw new Exception\OutOfBoundsException('Invalid align supplied');
         }
 
-        $this->_align = $align;
+        $this->align = $align;
 
         return $this;
     }
@@ -148,7 +148,7 @@ class Column
             throw new Exception\InvalidArgumentException('$colSpan must be an integer and greater than 0');
         }
 
-        $this->_colSpan = $colSpan;
+        $this->colSpan = $colSpan;
 
         return $this;
     }
@@ -160,7 +160,7 @@ class Column
      */
     public function getColSpan()
     {
-        return $this->_colSpan;
+        return $this->colSpan;
     }
 
     /**
@@ -184,7 +184,7 @@ class Column
             throw new Exception\OutOfBoundsException('Padding (' . $padding . ') is greater than column width');
         }
 
-        switch ($this->_align) {
+        switch ($this->align) {
             case self::ALIGN_LEFT:
                 $padMode = STR_PAD_RIGHT;
                 break;
@@ -203,7 +203,7 @@ class Column
         }
 
         $outputCharset = Table::getOutputCharset();
-        $lines         = explode("\n", Text\MultiByte::wordWrap($this->_content, $columnWidth, "\n", true, $outputCharset));
+        $lines         = explode("\n", Text\MultiByte::wordWrap($this->content, $columnWidth, "\n", true, $outputCharset));
         $paddedLines   = array();
 
         foreach ($lines AS $line) {

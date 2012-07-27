@@ -24,27 +24,27 @@ class Callback
     /**
      * @var string Class name for class method callback
      */
-    protected $_class;
+    protected $class;
 
     /**
      * @var string Function name for function callback
      */
-    protected $_function;
+    protected $function;
 
     /**
      * @var string Method name for class method callback
      */
-    protected $_method;
+    protected $method;
 
     /**
      * @var string Callback type
      */
-    protected $_type;
+    protected $type;
 
     /**
      * @var array Valid callback types
      */
-    protected $_types = array('function', 'static', 'instance');
+    protected $types = array('function', 'static', 'instance');
 
     /**
      * Constructor
@@ -87,7 +87,7 @@ class Callback
         if (is_object($class)) {
             $class = get_class($class);
         }
-        $this->_class = $class;
+        $this->class = $class;
         return $this;
     }
 
@@ -98,7 +98,7 @@ class Callback
      */
     public function getClass()
     {
-        return $this->_class;
+        return $this->class;
     }
 
     /**
@@ -109,7 +109,7 @@ class Callback
      */
     public function setFunction($function)
     {
-        $this->_function = (string) $function;
+        $this->function = (string) $function;
         $this->setType('function');
         return $this;
     }
@@ -121,7 +121,7 @@ class Callback
      */
     public function getFunction()
     {
-        return $this->_function;
+        return $this->function;
     }
 
     /**
@@ -132,7 +132,7 @@ class Callback
      */
     public function setMethod($method)
     {
-        $this->_method = $method;
+        $this->method = $method;
         return $this;
     }
 
@@ -143,7 +143,7 @@ class Callback
      */
     public function getMethod()
     {
-        return $this->_method;
+        return $this->method;
     }
 
     /**
@@ -155,10 +155,10 @@ class Callback
      */
     public function setType($type)
     {
-        if (!in_array($type, $this->_types)) {
+        if (!in_array($type, $this->types)) {
             throw new Server\Exception\InvalidArgumentException('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
         }
-        $this->_type = $type;
+        $this->type = $type;
         return $this;
     }
 
@@ -169,7 +169,7 @@ class Callback
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**

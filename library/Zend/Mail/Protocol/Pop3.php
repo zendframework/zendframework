@@ -32,13 +32,13 @@ class Pop3
      * socket to pop3
      * @var null|resource
      */
-    protected $_socket;
+    protected $socket;
 
     /**
      * greeting timestamp for apop
      * @var null|string
      */
-    protected $_timestamp;
+    protected $timestamp;
 
 
     /**
@@ -86,8 +86,8 @@ class Pop3
 
         $errno  =  0;
         $errstr = '';
-        $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
-        if (!$this->_socket) {
+        $this->socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+        if (!$this->socket) {
             throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr
                                 . ' (errno = ' . $errno . ' )');
         }
@@ -95,16 +95,16 @@ class Pop3
         $welcome = $this->readResponse();
 
         strtok($welcome, '<');
-        $this->_timestamp = strtok('>');
-        if (!strpos($this->_timestamp, '@')) {
-            $this->_timestamp = null;
+        $this->timestamp = strtok('>');
+        if (!strpos($this->timestamp, '@')) {
+            $this->timestamp = null;
         } else {
-            $this->_timestamp = '<' . $this->_timestamp . '>';
+            $this->timestamp = '<' . $this->timestamp . '>';
         }
 
         if ($ssl === 'TLS') {
             $this->request('STLS');
-            $result = stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+            $result = stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {
                 throw new Exception\RuntimeException('cannot enable TLS');
             }
@@ -122,7 +122,7 @@ class Pop3
      */
     public function sendRequest($request)
     {
-        $result = @fputs($this->_socket, $request . "\r\n");
+        $result = @fputs($this->socket, $request . "\r\n");
         if (!$result) {
             throw new Exception\RuntimeException('send failed - connection closed?');
         }
@@ -138,7 +138,7 @@ class Pop3
      */
     public function readResponse($multiline = false)
     {
-        $result = @fgets($this->_socket);
+        $result = @fgets($this->socket);
         if (!is_string($result)) {
             throw new Exception\RuntimeException('read failed - connection closed?');
         }
@@ -157,13 +157,13 @@ class Pop3
 
         if ($multiline) {
             $message = '';
-            $line = fgets($this->_socket);
+            $line = fgets($this->socket);
             while ($line && rtrim($line, "\r\n") != '.') {
                 if ($line[0] == '.') {
                     $line = substr($line, 1);
                 }
                 $message .= $line;
-                $line = fgets($this->_socket);
+                $line = fgets($this->socket);
             };
         }
 
@@ -192,15 +192,15 @@ class Pop3
      */
     public function logout()
     {
-        if ($this->_socket) {
+        if ($this->socket) {
             try {
                 $this->request('QUIT');
             } catch (Exception\ExceptionInterface $e) {
                 // ignore error - we're closing the socket anyway
             }
 
-            fclose($this->_socket);
-            $this->_socket = null;
+            fclose($this->socket);
+            $this->socket = null;
         }
     }
 
@@ -226,9 +226,9 @@ class Pop3
      */
     public function login($user, $password, $tryApop = true)
     {
-        if ($tryApop && $this->_timestamp) {
+        if ($tryApop && $this->timestamp) {
             try {
-                $this->request("APOP $user " . md5($this->_timestamp . $password));
+                $this->request("APOP $user " . md5($this->timestamp . $password));
             } catch (Exception\ExceptionInterface $e) {
                 // ignore
             }

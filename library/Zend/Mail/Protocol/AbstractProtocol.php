@@ -37,56 +37,56 @@ abstract class AbstractProtocol
      * Maximum of the transaction log
      * @var integer
      */
-    protected $_maximumLog = 64;
+    protected $maximumLog = 64;
 
 
     /**
      * Hostname or IP address of remote server
      * @var string
      */
-    protected $_host;
+    protected $host;
 
 
     /**
      * Port number of connection
      * @var integer
      */
-    protected $_port;
+    protected $port;
 
 
     /**
      * Instance of Zend\Validator\ValidatorChain to check hostnames
      * @var \Zend\Validator\ValidatorChain
      */
-    protected $_validHost;
+    protected $validHost;
 
 
     /**
      * Socket connection resource
      * @var resource
      */
-    protected $_socket;
+    protected $socket;
 
 
     /**
      * Last request sent to server
      * @var string
      */
-    protected $_request;
+    protected $request;
 
 
     /**
      * Array of server responses to last request
      * @var array
      */
-    protected $_response;
+    protected $response;
 
 
     /**
      * Log of mail requests and server responses for a session
      * @var array
      */
-    private $_log = array();
+    private $log = array();
 
 
     /**
@@ -98,15 +98,15 @@ abstract class AbstractProtocol
      */
     public function __construct($host = '127.0.0.1', $port = null)
     {
-        $this->_validHost = new Validator\ValidatorChain();
-        $this->_validHost->addValidator(new Validator\Hostname(Validator\Hostname::ALLOW_ALL));
+        $this->validHost = new Validator\ValidatorChain();
+        $this->validHost->addValidator(new Validator\Hostname(Validator\Hostname::ALLOW_ALL));
 
-        if (!$this->_validHost->isValid($host)) {
-            throw new Exception\RuntimeException(implode(', ', $this->_validHost->getMessages()));
+        if (!$this->validHost->isValid($host)) {
+            throw new Exception\RuntimeException(implode(', ', $this->validHost->getMessages()));
         }
 
-        $this->_host = $host;
-        $this->_port = $port;
+        $this->host = $host;
+        $this->port = $port;
     }
 
 
@@ -126,7 +126,7 @@ abstract class AbstractProtocol
      */
     public function setMaximumLog($maximumLog)
     {
-        $this->_maximumLog = (int) $maximumLog;
+        $this->maximumLog = (int) $maximumLog;
     }
 
 
@@ -137,7 +137,7 @@ abstract class AbstractProtocol
      */
     public function getMaximumLog()
     {
-        return $this->_maximumLog;
+        return $this->maximumLog;
     }
 
 
@@ -156,7 +156,7 @@ abstract class AbstractProtocol
      */
     public function getRequest()
     {
-        return $this->_request;
+        return $this->request;
     }
 
 
@@ -167,7 +167,7 @@ abstract class AbstractProtocol
      */
     public function getResponse()
     {
-        return $this->_response;
+        return $this->response;
     }
 
 
@@ -178,7 +178,7 @@ abstract class AbstractProtocol
      */
     public function getLog()
     {
-        return implode('', $this->_log);
+        return implode('', $this->log);
     }
 
 
@@ -188,7 +188,7 @@ abstract class AbstractProtocol
      */
     public function resetLog()
     {
-        $this->_log = array();
+        $this->log = array();
     }
 
     /**
@@ -198,11 +198,11 @@ abstract class AbstractProtocol
      */
     protected function _addLog($value)
     {
-        if ($this->_maximumLog >= 0 && count($this->_log) >= $this->_maximumLog) {
-            array_shift($this->_log);
+        if ($this->maximumLog >= 0 && count($this->log) >= $this->maximumLog) {
+            array_shift($this->log);
         }
 
-        $this->_log[] = $value;
+        $this->log[] = $value;
     }
 
     /**
@@ -220,16 +220,16 @@ abstract class AbstractProtocol
         $errorStr = '';
 
         // open connection
-        $this->_socket = @stream_socket_client($remote, $errorNum, $errorStr, self::TIMEOUT_CONNECTION);
+        $this->socket = @stream_socket_client($remote, $errorNum, $errorStr, self::TIMEOUT_CONNECTION);
 
-        if ($this->_socket === false) {
+        if ($this->socket === false) {
             if ($errorNum == 0) {
                 $errorStr = 'Could not open socket';
             }
             throw new Exception\RuntimeException($errorStr);
         }
 
-        if (($result = stream_set_timeout($this->_socket, self::TIMEOUT_CONNECTION)) === false) {
+        if (($result = stream_set_timeout($this->socket, self::TIMEOUT_CONNECTION)) === false) {
             throw new Exception\RuntimeException('Could not set stream timeout');
         }
 
@@ -243,8 +243,8 @@ abstract class AbstractProtocol
      */
     protected function _disconnect()
     {
-        if (is_resource($this->_socket)) {
-            fclose($this->_socket);
+        if (is_resource($this->socket)) {
+            fclose($this->socket);
         }
     }
 
@@ -258,19 +258,19 @@ abstract class AbstractProtocol
      */
     protected function _send($request)
     {
-        if (!is_resource($this->_socket)) {
-            throw new Exception\RuntimeException('No connection has been established to ' . $this->_host);
+        if (!is_resource($this->socket)) {
+            throw new Exception\RuntimeException('No connection has been established to ' . $this->host);
         }
 
-        $this->_request = $request;
+        $this->request = $request;
 
-        $result = fwrite($this->_socket, $request . self::EOL);
+        $result = fwrite($this->socket, $request . self::EOL);
 
         // Save request to internal log
         $this->_addLog($request . self::EOL);
 
         if ($result === false) {
-            throw new Exception\RuntimeException('Could not send request to ' . $this->_host);
+            throw new Exception\RuntimeException('Could not send request to ' . $this->host);
         }
 
         return $result;
@@ -286,30 +286,30 @@ abstract class AbstractProtocol
      */
     protected function _receive($timeout = null)
     {
-        if (!is_resource($this->_socket)) {
-            throw new Exception\RuntimeException('No connection has been established to ' . $this->_host);
+        if (!is_resource($this->socket)) {
+            throw new Exception\RuntimeException('No connection has been established to ' . $this->host);
         }
 
         // Adapters may wish to supply per-commend timeouts according to appropriate RFC
         if ($timeout !== null) {
-           stream_set_timeout($this->_socket, $timeout);
+           stream_set_timeout($this->socket, $timeout);
         }
 
         // Retrieve response
-        $response = fgets($this->_socket, 1024);
+        $response = fgets($this->socket, 1024);
 
         // Save request to internal log
         $this->_addLog($response);
 
         // Check meta data to ensure connection is still valid
-        $info = stream_get_meta_data($this->_socket);
+        $info = stream_get_meta_data($this->socket);
 
         if (!empty($info['timed_out'])) {
-            throw new Exception\RuntimeException($this->_host . ' has timed out');
+            throw new Exception\RuntimeException($this->host . ' has timed out');
         }
 
         if ($response === false) {
-            throw new Exception\RuntimeException('Could not read from ' . $this->_host);
+            throw new Exception\RuntimeException('Could not read from ' . $this->host);
         }
 
         return $response;
@@ -329,7 +329,7 @@ abstract class AbstractProtocol
      */
     protected function _expect($code, $timeout = null)
     {
-        $this->_response = array();
+        $this->response = array();
         $cmd  = '';
         $more = '';
         $msg  = '';
@@ -340,7 +340,7 @@ abstract class AbstractProtocol
         }
 
         do {
-            $this->_response[] = $result = $this->_receive($timeout);
+            $this->response[] = $result = $this->_receive($timeout);
             list($cmd, $more, $msg) = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
 
             if ($errMsg !== '') {

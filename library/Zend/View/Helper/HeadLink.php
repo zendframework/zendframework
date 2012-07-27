@@ -23,7 +23,7 @@ use Zend\View\Exception;
 class HeadLink extends Placeholder\Container\AbstractStandalone
 {
     /**
-     * $_validAttributes
+     * $validAttributes
      *
      * @var array
      */

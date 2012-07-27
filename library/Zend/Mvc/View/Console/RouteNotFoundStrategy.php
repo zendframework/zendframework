@@ -80,7 +80,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
      * encountered, sets the response status code to 404.
      *
      * @param  MvcEvent $e
-     * @throws \Zend\Mvc\Exception\RuntimeException
+     * @throws RuntimeException
+     * @throws ServiceNotFoundException
      * @return void
      */
     public function handleRouteNotFoundError(MvcEvent $e)
@@ -185,7 +186,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
          */
         $banners = array();
         if($moduleManager !== null){
-            foreach($moduleManager->getLoadedModules(false) as $name => $module){
+            foreach($moduleManager->getLoadedModules(false) as $module){
                 if(!$module instanceof ConsoleBannerProviderInterface){
                     continue; // this module does not provide a banner
                 }
@@ -211,16 +212,16 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     /**
      * Build Console usage information by querying currently loaded modules.
      *
-     * @param ModuleManagerInterface $moduleManager
-     * @param string                 $scriptName
      * @param ConsoleAdapter         $console
+     * @param string                 $scriptName
+     * @param ModuleManagerInterface $moduleManager
      * @return string
+     * @throws RuntimeException
      */
     protected function getConsoleUsage(
         ConsoleAdapter $console,
         $scriptName,
-        ModuleManagerInterface $moduleManager = null,
-        RouteInterface $router = null
+        ModuleManagerInterface $moduleManager = null
     ){
         /**
          * Loop through all loaded modules and collect usage info
@@ -312,7 +313,6 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // Finish last table
         if($table !== false){
             $result .= $this->renderTable($table, $tableCols,$console->getWidth());
-            $table = false;
         }
 
         return $result;
@@ -378,8 +378,6 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             $table->appendRow($row);
         }
 
-        $foo = $table->render();
-        $bar = urlencode(substr($foo,-30));
-        return $foo;
+        return $table->render();
     }
 }

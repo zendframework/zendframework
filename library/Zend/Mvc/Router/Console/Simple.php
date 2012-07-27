@@ -192,6 +192,7 @@ class Simple implements RouteInterface
      *
      * @param  string $def
      * @return array
+     * @throws Exception\InvalidArgumentException
      */
     protected function parseRouteDefinition($def)
     {

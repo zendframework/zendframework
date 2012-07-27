@@ -166,7 +166,7 @@ abstract class AbstractRestfulController implements
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new \DomainException('Missing route matches; unsure how to retrieve action');
+            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
         $request = $e->getRequest();
@@ -206,14 +206,14 @@ abstract class AbstractRestfulController implements
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
                         if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
+                            throw new Exception\DomainException('Missing identifier');
                         }
                     }
                     $action = 'delete';
                     $return = $this->delete($id);
                     break;
                 default:
-                    throw new \DomainException('Invalid HTTP method!');
+                    throw new Exception\DomainException('Invalid HTTP method!');
             }
 
             $routeMatch->setParam('action', $action);
@@ -230,6 +230,7 @@ abstract class AbstractRestfulController implements
      * Process post data and call create
      *
      * @param Request $request
+     * @return mixed
      */
     public function processPostData(Request $request)
     {
@@ -241,12 +242,14 @@ abstract class AbstractRestfulController implements
      *
      * @param Request $request
      * @param $routeMatch
+     * @return mixed
+     * @throws Exception\DomainException
      */
     public function processPutData(Request $request, $routeMatch)
     {
         if (null === $id = $routeMatch->getParam('id')) {
             if (!($id = $request->getQuery()->get('id', false))) {
-                throw new \DomainException('Missing identifier');
+                throw new Exception\DomainException('Missing identifier');
             }
         }
         $content = $request->getContent();

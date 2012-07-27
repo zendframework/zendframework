@@ -31,7 +31,7 @@ class ModuleRouteListener implements ListenerAggregateInterface
      * Attach to an event manager
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @param  integer $priority
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {

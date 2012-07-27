@@ -19,6 +19,7 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\DispatchableInterface;
 
+
 /**
  * Default dispatch listener
  *
@@ -86,7 +87,6 @@ class DispatchListener implements ListenerAggregateInterface
         $events           = $application->getEventManager();
         $controllerLoader = $application->getServiceManager()->get('ControllerLoader');
 
-        $exception = false;
         try {
             $controller = $controllerLoader->get($controllerName);
         } catch (ServiceNotFoundException $exception) {
@@ -148,14 +148,20 @@ class DispatchListener implements ListenerAggregateInterface
     /**
      * Marshall a controller not found exception event
      *
-     * @param  string $controllerName
-     * @param  \Exception $exception
-     * @param  MvcEvent $event
-     * @param  Application $application
+     * @param  string $type
+     * @param  string $controllerName 
+     * @param  \Exception $exception 
+     * @param  MvcEvent $event 
+     * @param  Application $application 
      * @return mixed
      */
-    protected function marshallControllerNotFoundEvent($type, $controllerName, $exception, $event, $application)
-    {
+    protected function marshallControllerNotFoundEvent(
+        $type,
+        $controllerName,
+        \Exception $exception,
+        MvcEvent $event,
+        Application $application
+    ) {
         $event->setError($type)
               ->setController($controllerName)
               ->setControllerClass('invalid controller class or alias: ' . $controllerName)
@@ -179,8 +185,12 @@ class DispatchListener implements ListenerAggregateInterface
      * @param  Application $application
      * @return mixed
      */
-    protected function marshallBadControllerEvent($controllerName, $exception, $event, $application)
-    {
+    protected function marshallBadControllerEvent(
+        $controllerName,
+        \Exception $exception,
+        MvcEvent $event,
+        Application $application
+    ) {
         $event->setError($application::ERROR_EXCEPTION)
               ->setController($controllerName)
               ->setParam('exception', $exception);

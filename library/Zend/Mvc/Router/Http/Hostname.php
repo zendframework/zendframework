@@ -150,7 +150,7 @@ class Hostname implements RouteInterface
         if (isset($options['uri'])) {
             $parts = array();
 
-            foreach ($this->route as $index => $routePart) {
+            foreach ($this->route as $routePart) {
                 if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
                     if (!isset($mergedParams[$matches['name']])) {
                         throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $matches['name']));

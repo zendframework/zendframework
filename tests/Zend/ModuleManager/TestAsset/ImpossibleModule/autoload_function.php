@@ -1,6 +1,6 @@
 <?php
 return function ($class) {
-    static $map;
+    public static $map;
     if (!$map) {
         $map = include __DIR__ . '/autoload_classmap.php';
     }

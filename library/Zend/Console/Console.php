@@ -34,7 +34,7 @@ abstract class Console
      * @param null $forceAdapter       Console\Adapter class name (can be absolute namespace or relative to Adapter\)
      * @return \Zend\Console\Adapter
      */
-    static public function getInstance($forceAdapter = null, $forceCharset = null)
+    public static function getInstance($forceAdapter = null, $forceCharset = null)
     {
         /**
          * Create instance
@@ -99,7 +99,7 @@ abstract class Console
      * @static
      * @return bool
      */
-    static public function isWindows()
+    public static function isWindows()
     {
         return class_exists('COM',false);
     }
@@ -110,7 +110,7 @@ abstract class Console
      * @static
      * @return bool
      */
-    static public function isAnsicon()
+    public static function isAnsicon()
     {
         return getenv('ANSICON') !== false;
     }
@@ -121,7 +121,7 @@ abstract class Console
      * @static
      * @return bool
      */
-    static public function isConsole()
+    public static function isConsole()
     {
         return PHP_SAPI == 'cli';
     }
@@ -130,7 +130,7 @@ abstract class Console
      * @static
      * @return \Zend\Console\Adapter|null
      */
-    static public function detectBestAdapter()
+    public static function detectBestAdapter()
     {
         // Check if we are in a console environment
         if (!static::isConsole()) {

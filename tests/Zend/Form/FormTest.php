@@ -872,4 +872,21 @@ class FormTest extends TestCase
         $this->assertEquals('foo[colors][0]', $form->get('colors')->get('0')->getName());
         $this->assertEquals('foo[fieldsets][0][field]', $form->get('fieldsets')->get('0')->get('field')->getName());
     }
+    
+    public function testEmptyValuesNotBound()
+    {
+        $this->populateForm();
+        $validSet = array(
+            'foo' => null,
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' ALWAYS valid',
+            ),
+        );
+        $this->form->setData($validSet);
+        $this->form->isValid();
+        $data = $this->form->getData(Form::VALUES_RAW);
+        $this->assertEmpty($data['foo']);
+    }
 }

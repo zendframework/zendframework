@@ -122,6 +122,21 @@ class MvcTest extends TestCase
         $this->assertEquals(true, $page->isActive());
     }
 
+    public function testIsActiveReturnsFalseWhenMatchingRouteButNonMatchingParams()
+    {
+        $page       = new Page\Mvc(array(
+                                   'label'     => 'foo',
+                                   'route'     => 'bar',
+                                   'action'    => 'baz',
+                               ));
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('bar');
+        $routeMatch->setParam('action', 'qux');
+        $page->setRouteMatch($routeMatch);
+
+        $this->assertFalse($page->isActive());
+    }
+
     public function testIsActiveReturnsFalseWhenNoRouteAndNoMatchedRouteNameIsSet()
     {
         $page = new Page\Mvc();

@@ -149,10 +149,10 @@ class DispatchListener implements ListenerAggregateInterface
      * Marshall a controller not found exception event
      *
      * @param  string $type
-     * @param  string $controllerName 
-     * @param  \Exception $exception 
-     * @param  MvcEvent $event 
-     * @param  Application $application 
+     * @param  string $controllerName
+     * @param  \Exception $exception
+     * @param  MvcEvent $event
+     * @param  Application $application
      * @return mixed
      */
     protected function marshallControllerNotFoundEvent(

@@ -3,13 +3,14 @@ namespace ZendTest\Log\TestAsset;
 
 use Zend\Log\Writer\FirePhp\FirePhpInterface;
 
-class MockFirePhp implements FirePhpInterface {
-
+class MockFirePhp implements FirePhpInterface
+{
     public $calls = array();
 
     protected $enabled;
 
-    public function __construct($enabled = true) {
+    public function __construct($enabled = true)
+    {
         $this->enabled = $enabled;
     }
 

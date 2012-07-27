@@ -97,8 +97,8 @@ class MessageId implements HeaderInterface
      *
      * @return string
      */
-    public function createMessageId() {
-
+    public function createMessageId()
+    {
         $time = time();
 
         if (isset($_SERVER['REMOTE_ADDR'])) {

@@ -463,8 +463,7 @@ class Simple implements RouteInterface
                     'positional' => true,
                     'hasValue'   => false,
                 );
-            }
-            else {
+            } else {
                 throw new Exception\InvalidArgumentException(
                     'Cannot understand Console route at "' . substr( $def, $pos ) . '"'
                 );

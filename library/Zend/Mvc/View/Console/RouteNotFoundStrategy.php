@@ -192,7 +192,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
      * @param ConsoleAdapter         $console
      * @return string
      */
-    protected function getConsoleBanner(ConsoleAdapter $console, ModuleManagerInterface $moduleManager = null){
+    protected function getConsoleBanner(ConsoleAdapter $console, ModuleManagerInterface $moduleManager = null)
+    {
         /**
          * Loop through all loaded modules and collect banners
          */
@@ -339,7 +340,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
      * @param $consoleWidth
      * @return string
      */
-    protected function renderTable($data, $cols, $consoleWidth){
+    protected function renderTable($data, $cols, $consoleWidth)
+    {
         $result = '';
         $padding = 2;
 

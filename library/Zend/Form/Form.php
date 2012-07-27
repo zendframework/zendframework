@@ -476,6 +476,10 @@ class Form extends Fieldset implements FormInterface
             if (!$formOrFieldset->has($key)) {
                 continue;
             }
+            
+            if (!isset($data[$key])) {
+                return;
+            }
 
             $fieldset = $formOrFieldset->byName[$key];
 
@@ -489,9 +493,7 @@ class Form extends Fieldset implements FormInterface
 
                 $value = $values;
             } else {
-                if (isset($data[$key])) {
-                    $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
-                }
+                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
             }
         }
     }

@@ -24,8 +24,8 @@ class Nil extends AbstractScalar
      */
     public function __construct()
     {
-        $this->_type = self::XMLRPC_TYPE_NIL;
-        $this->_value = null;
+        $this->type = self::XMLRPC_TYPE_NIL;
+        $this->value = null;
     }
 
     /**

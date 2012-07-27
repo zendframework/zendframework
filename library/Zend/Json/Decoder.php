@@ -74,6 +74,11 @@ class Decoder
     protected $decodeType;
 
     /**
+     * @var $_tokenValue
+     */
+    protected $tokenValue;
+
+    /**
      * Constructor
      *
      * @param string $source String source to decode
@@ -143,7 +148,7 @@ class Decoder
     {
         switch ($this->token) {
             case self::DATUM:
-                $result  = $this->_tokenValue;
+                $result  = $this->tokenValue;
                 $this->_getNextToken();
                 return($result);
                 break;
@@ -180,11 +185,11 @@ class Decoder
         $tok = $this->_getNextToken();
 
         while ($tok && $tok != self::RBRACE) {
-            if ($tok != self::DATUM || ! is_string($this->_tokenValue)) {
+            if ($tok != self::DATUM || ! is_string($this->tokenValue)) {
                 throw new RuntimeException('Missing key in object encoding: ' . $this->source);
             }
 
-            $key = $this->_tokenValue;
+            $key = $this->tokenValue;
             $tok = $this->_getNextToken();
 
             if ($tok != self::COLON) {
@@ -288,7 +293,7 @@ class Decoder
     protected function _getNextToken()
     {
         $this->token      = self::EOF;
-        $this->_tokenValue = null;
+        $this->tokenValue = null;
         $this->_eatWhitespace();
 
         if ($this->offset >= $this->sourceLength) {
@@ -374,28 +379,28 @@ class Decoder
                 } while ($i < $str_length);
 
                 $this->token = self::DATUM;
-                //$this->_tokenValue = substr($str, $start + 1, $i - $start - 1);
-                $this->_tokenValue = $result;
+                //$this->tokenValue = substr($str, $start + 1, $i - $start - 1);
+                $this->tokenValue = $result;
                 break;
             case 't':
                 if (($i+ 3) < $str_length && substr($str, $start, 4) == "true") {
                     $this->token = self::DATUM;
                 }
-                $this->_tokenValue = true;
+                $this->tokenValue = true;
                 $i += 3;
                 break;
             case 'f':
                 if (($i+ 4) < $str_length && substr($str, $start, 5) == "false") {
                     $this->token = self::DATUM;
                 }
-                $this->_tokenValue = false;
+                $this->tokenValue = false;
                 $i += 4;
                 break;
             case 'n':
                 if (($i+ 3) < $str_length && substr($str, $start, 4) == "null") {
                     $this->token = self::DATUM;
                 }
-                $this->_tokenValue = NULL;
+                $this->tokenValue = NULL;
                 $i += 3;
                 break;
         }
@@ -418,7 +423,7 @@ class Decoder
                     } else {
                         $val  = intval($datum);
                         $fVal = floatval($datum);
-                        $this->_tokenValue = ($val == $fVal ? $val : $fVal);
+                        $this->tokenValue = ($val == $fVal ? $val : $fVal);
                     }
                 } else {
                     throw new RuntimeException("Illegal number format: {$datum}");

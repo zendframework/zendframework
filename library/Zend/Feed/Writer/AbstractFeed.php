@@ -36,6 +36,11 @@ class AbstractFeed
     protected $type = null;
 
     /**
+     * @var $_extensions
+     */
+    protected $extensions;
+
+    /**
      * Constructor: Primarily triggers the registration of core extensions and
      * loads those appropriate to this data container.
      *
@@ -751,7 +756,7 @@ class AbstractFeed
      */
     public function __call($method, $args)
     {
-        foreach ($this->_extensions as $extension) {
+        foreach ($this->extensions as $extension) {
             try {
                 return call_user_func_array(array($extension, $method), $args);
             } catch (Exception\BadMethodCallException $e) {
@@ -776,8 +781,8 @@ class AbstractFeed
             if (!$manager->has($ext)) {
                 throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
             }
-            $this->_extensions[$ext] = $manager->get($ext);
-            $this->_extensions[$ext]->setEncoding($this->getEncoding());
+            $this->extensions[$ext] = $manager->get($ext);
+            $this->extensions[$ext]->setEncoding($this->getEncoding());
         }
     }
 }

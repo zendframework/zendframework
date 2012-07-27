@@ -107,7 +107,7 @@ class File extends Part
                 break;
             }
         }
-        $this->_countParts = count($this->partPos);
+        $this->countParts = count($this->partPos);
 
     }
 

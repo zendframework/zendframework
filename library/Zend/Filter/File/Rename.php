@@ -24,7 +24,7 @@ class Rename extends Filter\AbstractFilter
     /**
      * Internal array of array(source, target, overwrite)
      */
-    protected $_files = array();
+    protected $files = array();
 
     /**
      * Class constructor
@@ -58,7 +58,7 @@ class Rename extends Filter\AbstractFilter
      */
     public function getFile()
     {
-        return $this->_files;
+        return $this->files;
     }
 
     /**
@@ -74,7 +74,7 @@ class Rename extends Filter\AbstractFilter
      */
     public function setFile($options)
     {
-        $this->_files = array();
+        $this->files = array();
         $this->addFile($options);
 
         return $this;
@@ -223,16 +223,16 @@ class Rename extends Filter\AbstractFilter
         }
 
         $found = false;
-        foreach ($this->_files as $key => $value) {
+        foreach ($this->files as $key => $value) {
             if ($value['source'] == $files['source']) {
-                $this->_files[$key] = $files;
+                $this->files[$key] = $files;
                 $found              = true;
             }
         }
 
         if (!$found) {
-            $count                = count($this->_files);
-            $this->_files[$count] = $files;
+            $count                = count($this->files);
+            $this->files[$count] = $files;
         }
 
         return $this;
@@ -248,7 +248,7 @@ class Rename extends Filter\AbstractFilter
     protected function _getFileName($file)
     {
         $rename = array();
-        foreach ($this->_files as $value) {
+        foreach ($this->files as $value) {
             if ($value['source'] == '*') {
                 if (!isset($rename['source'])) {
                     $rename           = $value;

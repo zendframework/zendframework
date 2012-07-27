@@ -27,7 +27,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      *
      * @var array
      */
-    protected $_items = array();
+    protected $items = array();
 
     /**
      * Count all items
@@ -36,7 +36,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function count()
     {
-        return count($this->_items);
+        return count($this->items);
     }
 
     /**
@@ -58,7 +58,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
 
         // If just a single value is supplied simply assign it to to all tags
         if (count($values) === 1) {
-            foreach ($this->_items as $item) {
+            foreach ($this->items as $item) {
                 $item->setParam('weightValue', $values[0]);
             }
         } else {
@@ -66,7 +66,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
             $minWeight = null;
             $maxWeight = null;
 
-            foreach ($this->_items as $item) {
+            foreach ($this->items as $item) {
                 if ($minWeight === null && $maxWeight === null) {
                     $minWeight = $item->getWeight();
                     $maxWeight = $item->getWeight();
@@ -86,7 +86,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
             }
 
             // Then assign the weight values
-            foreach ($this->_items as $item) {
+            foreach ($this->items as $item) {
                 $threshold = floor(100 * log($item->getWeight() + 2));
 
                 for ($i = 0; $i < $steps; $i++) {
@@ -128,7 +128,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function current()
     {
-        return current($this->_items);
+        return current($this->items);
     }
 
     /**
@@ -138,7 +138,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function next()
     {
-        return next($this->_items);
+        return next($this->items);
     }
 
     /**
@@ -148,7 +148,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function key()
     {
-        return key($this->_items);
+        return key($this->items);
     }
 
     /**
@@ -168,7 +168,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function rewind()
     {
-        reset($this->_items);
+        reset($this->items);
     }
 
     /**
@@ -179,7 +179,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->_items);
+        return array_key_exists($offset, $this->items);
     }
 
     /**
@@ -190,7 +190,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return $this->_items[$offset];
+        return $this->items[$offset];
     }
 
     /**
@@ -210,9 +210,9 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
         }
 
         if ($offset === null) {
-            $this->_items[] = $item;
+            $this->items[] = $item;
         } else {
-            $this->_items[$offset] = $item;
+            $this->items[$offset] = $item;
         }
     }
 
@@ -224,6 +224,6 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        unset($this->_items[$offset]);
+        unset($this->items[$offset]);
     }
 }

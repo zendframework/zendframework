@@ -30,7 +30,7 @@ class Prototype
      */
     public function __construct(ReflectionReturnValue $return, $params = null)
     {
-        $this->_return = $return;
+        $this->return = $return;
 
         if (!is_array($params) && (null !== $params)) {
             throw new Exception\InvalidArgumentException('Invalid parameters');
@@ -44,7 +44,7 @@ class Prototype
             }
         }
 
-        $this->_params = $params;
+        $this->params = $params;
     }
 
     /**
@@ -54,7 +54,7 @@ class Prototype
      */
     public function getReturnType()
     {
-        return $this->_return->getType();
+        return $this->return->getType();
     }
 
     /**
@@ -65,7 +65,7 @@ class Prototype
      */
     public function getReturnValue()
     {
-        return $this->_return;
+        return $this->return;
     }
 
     /**
@@ -75,6 +75,6 @@ class Prototype
      */
     public function getParameters()
     {
-        return $this->_params;
+        return $this->params;
     }
 }

@@ -21,14 +21,14 @@ class HtmlCloud extends AbstractCloud
     /**
      * @var string Encoding to use
      */
-    protected $_encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * List of HTML tags
      *
      * @var array
      */
-    protected $_htmlTags = array(
+    protected $htmlTags = array(
         'ul' => array('class' => 'Zend\Tag\Cloud')
     );
 
@@ -37,7 +37,7 @@ class HtmlCloud extends AbstractCloud
      *
      * @var string
      */
-    protected $_separator = ' ';
+    protected $separator = ' ';
 
     /**
      * Get encoding
@@ -46,7 +46,7 @@ class HtmlCloud extends AbstractCloud
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
@@ -57,7 +57,7 @@ class HtmlCloud extends AbstractCloud
      */
     public function setEncoding($value)
     {
-        $this->_encoding = (string) $value;
+        $this->encoding = (string) $value;
         return $this;
     }
 
@@ -69,7 +69,7 @@ class HtmlCloud extends AbstractCloud
      */
     public function setHTMLTags(array $htmlTags)
     {
-        $this->_htmlTags = $htmlTags;
+        $this->htmlTags = $htmlTags;
         return $this;
     }
 
@@ -80,7 +80,7 @@ class HtmlCloud extends AbstractCloud
      */
     public function getHTMLTags()
     {
-        return $this->_htmlTags;
+        return $this->htmlTags;
     }
 
     /**
@@ -91,7 +91,7 @@ class HtmlCloud extends AbstractCloud
      */
     public function setSeparator($separator)
     {
-        $this->_separator = $separator;
+        $this->separator = $separator;
         return $this;
     }
 
@@ -102,7 +102,7 @@ class HtmlCloud extends AbstractCloud
      */
     public function getSeparator()
     {
-        return $this->_separator;
+        return $this->separator;
     }
 
     /**

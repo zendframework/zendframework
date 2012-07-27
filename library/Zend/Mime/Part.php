@@ -28,8 +28,8 @@ class Part
     public $boundary;
     public $location;
     public $language;
-    protected $_content;
-    protected $_isStream = false;
+    protected $content;
+    protected $isStream = false;
 
 
     /**
@@ -41,9 +41,9 @@ class Part
      */
     public function __construct($content)
     {
-        $this->_content = $content;
+        $this->content = $content;
         if (is_resource($content)) {
-            $this->_isStream = true;
+            $this->isStream = true;
         }
     }
 
@@ -63,7 +63,7 @@ class Part
      */
     public function isStream()
     {
-      return $this->_isStream;
+      return $this->isStream;
     }
 
     /**
@@ -75,7 +75,7 @@ class Part
      */
     public function getEncodedStream()
     {
-        if (!$this->_isStream) {
+        if (!$this->isStream) {
             throw new Exception\RuntimeException('Attempt to get a stream from a string part');
         }
 
@@ -83,7 +83,7 @@ class Part
         switch ($this->encoding) {
             case Mime::ENCODING_QUOTEDPRINTABLE:
                 $filter = stream_filter_append(
-                    $this->_content,
+                    $this->content,
                     'convert.quoted-printable-encode',
                     STREAM_FILTER_READ,
                     array(
@@ -97,7 +97,7 @@ class Part
                 break;
             case Mime::ENCODING_BASE64:
                 $filter = stream_filter_append(
-                    $this->_content,
+                    $this->content,
                     'convert.base64-encode',
                     STREAM_FILTER_READ,
                     array(
@@ -111,7 +111,7 @@ class Part
                 break;
             default:
         }
-        return $this->_content;
+        return $this->content;
     }
 
     /**
@@ -121,10 +121,10 @@ class Part
      */
     public function getContent($EOL = Mime::LINEEND)
     {
-        if ($this->_isStream) {
+        if ($this->isStream) {
             return stream_get_contents($this->getEncodedStream());
         } else {
-            return Mime::encode($this->_content, $this->encoding, $EOL);
+            return Mime::encode($this->content, $this->encoding, $EOL);
         }
     }
 
@@ -134,10 +134,10 @@ class Part
      */
     public function getRawContent()
     {
-        if ($this->_isStream) {
-            return stream_get_contents($this->_content);
+        if ($this->isStream) {
+            return stream_get_contents($this->content);
         } else {
-            return $this->_content;
+            return $this->content;
         }
     }
 

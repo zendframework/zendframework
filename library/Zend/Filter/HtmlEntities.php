@@ -24,21 +24,21 @@ class HtmlEntities extends AbstractFilter
      *
      * @var integer
      */
-    protected $_quoteStyle;
+    protected $quoteStyle;
 
     /**
      * Corresponds to the third htmlentities() argument
      *
      * @var string
      */
-    protected $_encoding;
+    protected $encoding;
 
     /**
      * Corresponds to the forth htmlentities() argument
      *
      * @var boolean
      */
-    protected $_doubleQuote;
+    protected $doubleQuote;
 
     /**
      * Sets filter options
@@ -87,7 +87,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function getQuoteStyle()
     {
-        return $this->_quoteStyle;
+        return $this->quoteStyle;
     }
 
     /**
@@ -98,7 +98,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setQuoteStyle($quoteStyle)
     {
-        $this->_quoteStyle = $quoteStyle;
+        $this->quoteStyle = $quoteStyle;
         return $this;
     }
 
@@ -110,7 +110,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function getEncoding()
     {
-         return $this->_encoding;
+         return $this->encoding;
     }
 
     /**
@@ -121,7 +121,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setEncoding($value)
     {
-        $this->_encoding = (string) $value;
+        $this->encoding = (string) $value;
         return $this;
     }
 
@@ -157,7 +157,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function getDoubleQuote()
     {
-        return $this->_doubleQuote;
+        return $this->doubleQuote;
     }
 
     /**
@@ -168,7 +168,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setDoubleQuote($doubleQuote)
     {
-        $this->_doubleQuote = (boolean) $doubleQuote;
+        $this->doubleQuote = (boolean) $doubleQuote;
         return $this;
     }
 

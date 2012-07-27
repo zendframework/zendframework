@@ -17,7 +17,7 @@ namespace Zend\Filter;
 class RealPath extends AbstractFilter
 {
     /**
-     * @var boolean $_pathExists
+     * @var array $options
      */
     protected $options = array(
         'exists' => true

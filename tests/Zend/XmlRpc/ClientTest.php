@@ -729,8 +729,8 @@ class TestClient extends Client
 {
     public function getProxy($namespace = '')
     {
-        if (empty($this->_proxyCache[$namespace])) {
-            $this->_proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
+        if (empty($this->proxyCache[$namespace])) {
+            $this->proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
         }
         return parent::getProxy($namespace);
     }

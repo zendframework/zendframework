@@ -24,7 +24,7 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      *
      * @var \Zend\Soap\Wsdl
      */
-    protected $_context;
+    protected $context;
 
     /**
      * Set the Zend_Soap_Wsdl Context object this strategy resides in.
@@ -34,7 +34,7 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      */
     public function setContext(\Zend\Soap\Wsdl $context)
     {
-        $this->_context = $context;
+        $this->context = $context;
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      */
     public function getContext()
     {
-        return $this->_context;
+        return $this->context;
     }
 
     /**

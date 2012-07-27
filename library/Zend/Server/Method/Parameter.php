@@ -22,27 +22,27 @@ class Parameter
     /**
      * @var mixed Default parameter value
      */
-    protected $_defaultValue;
+    protected $defaultValue;
 
     /**
      * @var string Parameter description
      */
-    protected $_description = '';
+    protected $description = '';
 
     /**
      * @var string Parameter variable name
      */
-    protected $_name;
+    protected $name;
 
     /**
      * @var bool Is parameter optional?
      */
-    protected $_optional = false;
+    protected $optional = false;
 
     /**
      * @var string Parameter type
      */
-    protected $_type = 'mixed';
+    protected $type = 'mixed';
 
     /**
      * Constructor
@@ -82,7 +82,7 @@ class Parameter
      */
     public function setDefaultValue($defaultValue)
     {
-        $this->_defaultValue = $defaultValue;
+        $this->defaultValue = $defaultValue;
         return $this;
     }
 
@@ -93,7 +93,7 @@ class Parameter
      */
     public function getDefaultValue()
     {
-        return $this->_defaultValue;
+        return $this->defaultValue;
     }
 
     /**
@@ -104,7 +104,7 @@ class Parameter
      */
     public function setDescription($description)
     {
-        $this->_description = (string) $description;
+        $this->description = (string) $description;
         return $this;
     }
 
@@ -115,7 +115,7 @@ class Parameter
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -126,7 +126,7 @@ class Parameter
      */
     public function setName($name)
     {
-        $this->_name = (string) $name;
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -137,7 +137,7 @@ class Parameter
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -148,7 +148,7 @@ class Parameter
      */
     public function setOptional($flag)
     {
-        $this->_optional = (bool) $flag;
+        $this->optional = (bool) $flag;
         return $this;
     }
 
@@ -159,7 +159,7 @@ class Parameter
      */
     public function isOptional()
     {
-        return $this->_optional;
+        return $this->optional;
     }
 
     /**
@@ -170,7 +170,7 @@ class Parameter
      */
     public function setType($type)
     {
-        $this->_type = (string) $type;
+        $this->type = (string) $type;
         return $this;
     }
 
@@ -181,7 +181,7 @@ class Parameter
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**

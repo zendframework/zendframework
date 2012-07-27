@@ -24,7 +24,7 @@ class ArrayValue extends AbstractCollection
      */
     public function __construct($value)
     {
-        $this->_type = self::XMLRPC_TYPE_ARRAY;
+        $this->type = self::XMLRPC_TYPE_ARRAY;
         parent::__construct($value);
     }
 
@@ -41,8 +41,8 @@ class ArrayValue extends AbstractCollection
                   ->openElement('array')
                   ->openElement('data');
 
-        if (is_array($this->_value)) {
-            foreach ($this->_value as $val) {
+        if (is_array($this->value)) {
+            foreach ($this->value as $val) {
                 $val->generateXml();
             }
         }

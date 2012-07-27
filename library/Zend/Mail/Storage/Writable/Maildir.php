@@ -30,7 +30,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
      *
      * @var bool|int
      */
-    protected $_quota;
+    protected $quota;
 
     /**
      * create a new maildir
@@ -432,7 +432,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     // not yet * @param string|\Zend\Mail\Message|\Zend\Mime\Message $message message as string or instance of message class
     public function appendMessage($message, $folder = null, $flags = null, $recent = false)
     {
-        if ($this->_quota && $this->checkQuota()) {
+        if ($this->quota && $this->checkQuota()) {
             throw new StorageException\RuntimeException('storage is over quota!');
         }
 
@@ -485,7 +485,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         $this->files[] = array('uniq'     => $temp_file['uniq'],
                                 'flags'    => $flags,
                                 'filename' => $new_filename);
-        if ($this->_quota) {
+        if ($this->quota) {
             $this->_addQuotaEntry((int)$size, 1);
         }
     }
@@ -499,7 +499,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
      */
     public function copyMessage($id, $folder)
     {
-        if ($this->_quota && $this->checkQuota()) {
+        if ($this->quota && $this->checkQuota()) {
             throw new StorageException\RuntimeException('storage is over quota!');
         }
 
@@ -555,7 +555,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
                                     'filename' => $new_file);
         }
 
-        if ($this->_quota) {
+        if ($this->quota) {
             $this->_addQuotaEntry((int)$size, 1);
         }
     }
@@ -660,7 +660,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     {
         $filename = $this->_getFileData($id, 'filename');
 
-        if ($this->_quota) {
+        if ($this->quota) {
             $size = filesize($filename);
         }
 
@@ -670,7 +670,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         unset($this->files[$id - 1]);
         // remove the gap
         $this->files = array_values($this->files);
-        if ($this->_quota) {
+        if ($this->quota) {
             $this->_addQuotaEntry(0 - (int)$size, -1);
         }
     }
@@ -687,7 +687,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
      */
     public function setQuota($value)
     {
-        $this->_quota = $value;
+        $this->quota = $value;
     }
 
     /**
@@ -721,7 +721,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
             return $quota;
         }
 
-        return $this->_quota;
+        return $this->quota;
     }
 
     /**
@@ -735,8 +735,8 @@ class Maildir extends Folder\Maildir implements WritableInterface
         $messages   = 0;
         $total_size = 0;
 
-        if (is_array($this->_quota)) {
-            $quota = $this->_quota;
+        if (is_array($this->quota)) {
+            $quota = $this->quota;
         } else {
             try {
                 $quota = $this->getQuota(true);
@@ -854,8 +854,8 @@ class Maildir extends Folder\Maildir implements WritableInterface
             $quota      = $result['quota'];
         } else {
             $maildirsize = explode("\n", $maildirsize);
-            if (is_array($this->_quota)) {
-                $quota = $this->_quota;
+            if (is_array($this->quota)) {
+                $quota = $this->quota;
             } else {
                 $definition = explode(',', $maildirsize[0]);
                 $quota      = array();

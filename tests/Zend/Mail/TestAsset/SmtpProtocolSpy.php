@@ -24,8 +24,8 @@ class SmtpProtocolSpy extends Smtp
     protected $connect = false;
     protected $helo;
     protected $mail;
-    protected $rcpt = array();
-    protected $_sess = true;
+    protected $rcptTest = array();
+    protected $sess = true;
 
     public function connect()
     {
@@ -55,7 +55,7 @@ class SmtpProtocolSpy extends Smtp
     public function rset()
     {
         parent::rset();
-        $this->rcpt = array();
+        $this->rcptTest = array();
     }
 
     public function mail($from)
@@ -66,8 +66,8 @@ class SmtpProtocolSpy extends Smtp
 
     public function rcpt($to)
     {
-        $this->_rcpt = true;
-        $this->rcpt[] = $to;
+        $this->rcpt = true;
+        $this->rcptTest[] = $to;
     }
 
     protected function _send($request)
@@ -118,6 +118,6 @@ class SmtpProtocolSpy extends Smtp
      */
     public function getRecipients()
     {
-        return $this->rcpt;
+        return $this->rcptTest;
     }
 }

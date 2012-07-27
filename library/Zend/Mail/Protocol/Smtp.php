@@ -26,7 +26,7 @@ class Smtp extends AbstractProtocol
      *
      * @var string
      */
-    protected $_transport = 'tcp';
+    protected $transport = 'tcp';
 
 
     /**
@@ -34,7 +34,7 @@ class Smtp extends AbstractProtocol
      *
      * @var string
      */
-    protected $_secure;
+    protected $secure;
 
 
     /**
@@ -42,7 +42,7 @@ class Smtp extends AbstractProtocol
      *
      * @var boolean
      */
-    protected $_sess = false;
+    protected $sess = false;
 
 
     /**
@@ -50,7 +50,7 @@ class Smtp extends AbstractProtocol
      *
      * @var boolean
      */
-    protected $_helo = false;
+    protected $helo = false;
 
 
     /**
@@ -58,7 +58,7 @@ class Smtp extends AbstractProtocol
      *
      * @var boolean
      */
-    protected $_auth = false;
+    protected $auth = false;
 
 
     /**
@@ -66,7 +66,7 @@ class Smtp extends AbstractProtocol
      *
      * @var boolean
      */
-    protected $_mail = false;
+    protected $mail = false;
 
 
     /**
@@ -74,7 +74,7 @@ class Smtp extends AbstractProtocol
      *
      * @var boolean
      */
-    protected $_rcpt = false;
+    protected $rcpt = false;
 
 
     /**
@@ -82,7 +82,7 @@ class Smtp extends AbstractProtocol
      *
      * @var boolean
      */
-    protected $_data = null;
+    protected $data = null;
 
 
     /**
@@ -131,12 +131,12 @@ class Smtp extends AbstractProtocol
         if (isset($config['ssl'])) {
             switch (strtolower($config['ssl'])) {
                 case 'tls':
-                    $this->_secure = 'tls';
+                    $this->secure = 'tls';
                     break;
 
                 case 'ssl':
-                    $this->_transport = 'ssl';
-                    $this->_secure = 'ssl';
+                    $this->transport = 'ssl';
+                    $this->secure = 'ssl';
                     if ($port == null) {
                         $port = 465;
                     }
@@ -166,7 +166,7 @@ class Smtp extends AbstractProtocol
      */
     public function connect()
     {
-        return $this->_connect($this->_transport . '://' . $this->_host . ':'. $this->_port);
+        return $this->_connect($this->transport . '://' . $this->host . ':'. $this->port);
     }
 
 
@@ -179,13 +179,13 @@ class Smtp extends AbstractProtocol
     public function helo($host = '127.0.0.1')
     {
         // Respect RFC 2821 and disallow HELO attempts if session is already initiated.
-        if ($this->_sess === true) {
+        if ($this->sess === true) {
             throw new Exception\RuntimeException('Cannot issue HELO to existing session');
         }
 
         // Validate client hostname
-        if (!$this->_validHost->isValid($host)) {
-            throw new Exception\RuntimeException(implode(', ', $this->_validHost->getMessages()));
+        if (!$this->validHost->isValid($host)) {
+            throw new Exception\RuntimeException(implode(', ', $this->validHost->getMessages()));
         }
 
         // Initiate helo sequence
@@ -193,10 +193,10 @@ class Smtp extends AbstractProtocol
         $this->_ehlo($host);
 
         // If a TLS session is required, commence negotiation
-        if ($this->_secure == 'tls') {
+        if ($this->secure == 'tls') {
             $this->_send('STARTTLS');
             $this->_expect(220, 180);
-            if (!stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            if (!stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
                 throw new Exception\RuntimeException('Unable to connect via TLS');
             }
             $this->_ehlo($host);
@@ -236,7 +236,7 @@ class Smtp extends AbstractProtocol
      */
     public function mail($from)
     {
-        if ($this->_sess !== true) {
+        if ($this->sess !== true) {
             throw new Exception\RuntimeException('A valid session has not been started');
         }
 
@@ -244,9 +244,9 @@ class Smtp extends AbstractProtocol
         $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
 
         // Set mail to true, clear recipients and any existing data flags as per 4.1.1.2 of RFC 2821
-        $this->_mail = true;
-        $this->_rcpt = false;
-        $this->_data = false;
+        $this->mail = true;
+        $this->rcpt = false;
+        $this->data = false;
     }
 
 
@@ -258,14 +258,15 @@ class Smtp extends AbstractProtocol
      */
     public function rcpt($to)
     {
-        if ($this->_mail !== true) {
+
+        if ($this->mail !== true) {
             throw new Exception\RuntimeException('No sender reverse path has been supplied');
         }
 
         // Set rcpt to true, as per 4.1.1.3 of RFC 2821
         $this->_send('RCPT TO:<' . $to . '>');
         $this->_expect(array(250, 251), 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
-        $this->_rcpt = true;
+        $this->rcpt = true;
     }
 
 
@@ -278,7 +279,7 @@ class Smtp extends AbstractProtocol
     public function data($data)
     {
         // Ensure recipients have been set
-        if ($this->_rcpt !== true) { // Per RFC 2821 3.3 (page 18)
+        if ($this->rcpt !== true) { // Per RFC 2821 3.3 (page 18)
             throw new Exception\RuntimeException('No recipient forward path has been supplied');
         }
 
@@ -295,7 +296,7 @@ class Smtp extends AbstractProtocol
 
         $this->_send('.');
         $this->_expect(250, 600); // Timeout set for 10 minutes as per RFC 2821 4.5.3.2
-        $this->_data = true;
+        $this->data = true;
     }
 
 
@@ -311,9 +312,9 @@ class Smtp extends AbstractProtocol
         // MS ESMTP doesn't follow RFC, see [ZF-1377]
         $this->_expect(array(250, 220));
 
-        $this->_mail = false;
-        $this->_rcpt = false;
-        $this->_data = false;
+        $this->mail = false;
+        $this->rcpt = false;
+        $this->data = false;
     }
 
 
@@ -350,7 +351,7 @@ class Smtp extends AbstractProtocol
      */
     public function quit()
     {
-        if ($this->_sess) {
+        if ($this->sess) {
             $this->_send('QUIT');
             $this->_expect(221, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
             $this->_stopSession();
@@ -367,7 +368,7 @@ class Smtp extends AbstractProtocol
      */
     public function auth()
     {
-        if ($this->_auth === true) {
+        if ($this->auth === true) {
             throw new Exception\RuntimeException('Already authenticated for this session');
         }
     }
@@ -389,7 +390,7 @@ class Smtp extends AbstractProtocol
      */
     protected function _startSession()
     {
-        $this->_sess = true;
+        $this->sess = true;
     }
 
 
@@ -399,6 +400,6 @@ class Smtp extends AbstractProtocol
      */
     protected function _stopSession()
     {
-        $this->_sess = false;
+        $this->sess = false;
     }
 }

@@ -32,7 +32,7 @@ class Local extends SOAPClient
      *
      * @var \Zend\Soap\Server
      */
-    protected $_server;
+    protected $server;
 
     /**
      * Local client constructor
@@ -43,7 +43,7 @@ class Local extends SOAPClient
      */
     public function __construct(SOAPServer $server, $wsdl, $options = null)
     {
-        $this->_server = $server;
+        $this->server = $server;
 
         // Use Server specified SOAP version as default
         $this->setSoapVersion($server->getSoapVersion());
@@ -67,7 +67,7 @@ class Local extends SOAPClient
     {
         // Perform request as is
         ob_start();
-        $this->_server->handle($request);
+        $this->server->handle($request);
         $response = ob_get_clean();
 
         return $response;

@@ -25,7 +25,7 @@ class SeparatorToCamelCase extends AbstractSeparator
     public function filter($value)
     {
         // a unicode safe way of converting characters to \x00\x00 notation
-        $pregQuotedSeparator = preg_quote($this->_separator, '#');
+        $pregQuotedSeparator = preg_quote($this->separator, '#');
 
         if (self::hasPcreUnicodeSupport()) {
             parent::setPattern(array('#('.$pregQuotedSeparator.')(\p{L}{1})#eu','#(^\p{Ll}{1})#eu'));

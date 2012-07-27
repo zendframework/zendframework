@@ -18,8 +18,8 @@ use Zend\Filter\Exception;
  */
 class SeparatorToSeparator extends \Zend\Filter\PregReplace
 {
-    protected $_searchSeparator = null;
-    protected $_replacementSeparator = null;
+    protected $searchSeparator = null;
+    protected $replacementSeparator = null;
 
     /**
      * Constructor
@@ -41,7 +41,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      */
     public function setSearchSeparator($separator)
     {
-        $this->_searchSeparator = $separator;
+        $this->searchSeparator = $separator;
         return $this;
     }
 
@@ -52,7 +52,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      */
     public function getSearchSeparator()
     {
-        return $this->_searchSeparator;
+        return $this->searchSeparator;
     }
 
     /**
@@ -63,7 +63,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      */
     public function setReplacementSeparator($separator)
     {
-        $this->_replacementSeparator = $separator;
+        $this->replacementSeparator = $separator;
         return $this;
     }
 
@@ -74,7 +74,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      */
     public function getReplacementSeparator()
     {
-        return $this->_replacementSeparator;
+        return $this->replacementSeparator;
     }
 
     /**
@@ -101,12 +101,12 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      */
     protected function _separatorToSeparatorFilter($value)
     {
-        if ($this->_searchSeparator == null) {
+        if ($this->searchSeparator == null) {
             throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 
-        $this->setPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
-        $this->setReplacement($this->_replacementSeparator);
+        $this->setPattern('#' . preg_quote($this->searchSeparator, '#') . '#');
+        $this->setReplacement($this->replacementSeparator);
         return parent::filter($value);
     }
 

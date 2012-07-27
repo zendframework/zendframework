@@ -31,8 +31,8 @@ class Integer extends AbstractScalar
             throw new Exception\ValueException('Overlong integer given');
         }
 
-        $this->_type = self::XMLRPC_TYPE_INTEGER;
-        $this->_value = (int)$value;    // Make sure this value is integer
+        $this->type = self::XMLRPC_TYPE_INTEGER;
+        $this->value = (int)$value;    // Make sure this value is integer
     }
 
     /**
@@ -42,6 +42,6 @@ class Integer extends AbstractScalar
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 }

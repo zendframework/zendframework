@@ -29,13 +29,13 @@ abstract class AbstractFunction
     /**
      * @var ReflectionFunction
      */
-    protected $_reflection;
+    protected $reflection;
 
     /**
      * Additional arguments to pass to method on invocation
      * @var array
      */
-    protected $_argv = array();
+    protected $argv = array();
 
     /**
      * Used to store extra configuration for the method (typically done by the
@@ -44,37 +44,37 @@ abstract class AbstractFunction
      * {@link __set()}
      * @var array
      */
-    protected $_config = array();
+    protected $config = array();
 
     /**
      * Declaring class (needed for when serialization occurs)
      * @var string
      */
-    protected $_class;
+    protected $class;
 
     /**
      * Function/method description
      * @var string
      */
-    protected $_description = '';
+    protected $description = '';
 
     /**
      * Namespace with which to prefix function/method name
      * @var string
      */
-    protected $_namespace;
+    protected $namespace;
 
     /**
      * Prototypes
      * @var array
      */
-    protected $_prototypes = array();
+    protected $prototypes = array();
 
-    private $_return;
-    private $_returnDesc;
-    private $_paramDesc;
-    private $_sigParams;
-    private $_sigParamsDepth;
+    private $return;
+    private $returnDesc;
+    private $paramDesc;
+    private $sigParams;
+    private $sigParamsDepth;
 
     /**
      * Constructor
@@ -91,7 +91,7 @@ abstract class AbstractFunction
             && (!$r instanceof \ReflectionMethod)) {
             throw new Exception\InvalidArgumentException('Invalid reflection class');
         }
-        $this->_reflection = $r;
+        $this->reflection = $r;
 
         // Determine namespace
         if (null !== $namespace){
@@ -100,12 +100,12 @@ abstract class AbstractFunction
 
         // Determine arguments
         if (is_array($argv)) {
-            $this->_argv = $argv;
+            $this->argv = $argv;
         }
 
         // If method call, need to store some info on the class
         if ($r instanceof \ReflectionMethod) {
-            $this->_class = $r->getDeclaringClass()->getName();
+            $this->class = $r->getDeclaringClass()->getName();
         }
 
         // Perform some introspection
@@ -116,7 +116,7 @@ abstract class AbstractFunction
      * Create signature node tree
      *
      * Recursive method to build the signature node tree. Increments through
-     * each array in {@link $_sigParams}, adding every value of the next level
+     * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
      * @param \Zend\Server\Reflection\Node $parent
@@ -125,13 +125,13 @@ abstract class AbstractFunction
      */
     protected function _addTree(Node $parent, $level = 0)
     {
-        if ($level >= $this->_sigParamsDepth) {
+        if ($level >= $this->sigParamsDepth) {
             return;
         }
 
-        foreach ($this->_sigParams[$level] as $value) {
+        foreach ($this->sigParams[$level] as $value) {
             $node = new Node($value, $parent);
-            if ((null !== $value) && ($this->_sigParamsDepth > $level + 1)) {
+            if ((null !== $value) && ($this->sigParamsDepth > $level + 1)) {
                 $this->_addTree($node, $level + 1);
             }
         }
@@ -149,7 +149,7 @@ abstract class AbstractFunction
     protected function _buildTree()
     {
         $returnTree = array();
-        foreach ((array) $this->_return as $value) {
+        foreach ((array) $this->return as $value) {
             $node = new Node($value);
             $this->_addTree($node);
             $returnTree[] = $node;
@@ -172,11 +172,11 @@ abstract class AbstractFunction
      */
     protected function _buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
     {
-        $this->_return         = $return;
-        $this->_returnDesc     = $returnDesc;
-        $this->_paramDesc      = $paramDesc;
-        $this->_sigParams      = $paramTypes;
-        $this->_sigParamsDepth = count($paramTypes);
+        $this->return         = $return;
+        $this->returnDesc     = $returnDesc;
+        $this->paramDesc      = $paramDesc;
+        $this->sigParams      = $paramTypes;
+        $this->sigParamsDepth = count($paramTypes);
         $signatureTrees        = $this->_buildTree();
         $signatures            = array();
 
@@ -205,17 +205,17 @@ abstract class AbstractFunction
         }
 
         // Build prototypes
-        $params = $this->_reflection->getParameters();
+        $params = $this->reflection->getParameters();
         foreach ($signatures as $signature) {
-            $return = new ReflectionReturnValue(array_shift($signature), $this->_returnDesc);
+            $return = new ReflectionReturnValue(array_shift($signature), $this->returnDesc);
             $tmp    = array();
             foreach ($signature as $key => $type) {
-                $param = new ReflectionParameter($params[$key], $type, (isset($this->_paramDesc[$key]) ? $this->_paramDesc[$key] : null));
+                $param = new ReflectionParameter($params[$key], $type, (isset($this->paramDesc[$key]) ? $this->paramDesc[$key] : null));
                 $param->setPosition($key);
                 $tmp[] = $param;
             }
 
-            $this->_prototypes[] = new Prototype($return, $tmp);
+            $this->prototypes[] = new Prototype($return, $tmp);
         }
     }
 
@@ -231,7 +231,7 @@ abstract class AbstractFunction
      */
     protected function _reflect()
     {
-        $function           = $this->_reflection;
+        $function           = $this->reflection;
         $helpText           = '';
         $signatures         = array();
         $returnDesc         = '';
@@ -333,8 +333,8 @@ abstract class AbstractFunction
      */
     public function __call($method, $args)
     {
-        if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
+        if (method_exists($this->reflection, $method)) {
+            return call_user_func_array(array($this->reflection, $method), $args);
         }
 
         throw new Exception\BadMethodCallException('Invalid reflection method ("' .$method. '")');
@@ -343,7 +343,7 @@ abstract class AbstractFunction
     /**
      * Retrieve configuration parameters
      *
-     * Values are retrieved by key from {@link $_config}. Returns null if no
+     * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
      * @param string $key
@@ -351,8 +351,8 @@ abstract class AbstractFunction
      */
     public function __get($key)
     {
-        if (isset($this->_config[$key])) {
-            return $this->_config[$key];
+        if (isset($this->config[$key])) {
+            return $this->config[$key];
         }
 
         return null;
@@ -361,7 +361,7 @@ abstract class AbstractFunction
     /**
      * Set configuration parameters
      *
-     * Values are stored by $key in {@link $_config}.
+     * Values are stored by $key in {@link $config}.
      *
      * @param string $key
      * @param mixed $value
@@ -369,7 +369,7 @@ abstract class AbstractFunction
      */
     public function __set($key, $value)
     {
-        $this->_config[$key] = $value;
+        $this->config[$key] = $value;
     }
 
     /**
@@ -381,7 +381,7 @@ abstract class AbstractFunction
     public function setNamespace($namespace)
     {
         if (empty($namespace)) {
-            $this->_namespace = '';
+            $this->namespace = '';
             return;
         }
 
@@ -389,7 +389,7 @@ abstract class AbstractFunction
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
-        $this->_namespace = $namespace;
+        $this->namespace = $namespace;
     }
 
     /**
@@ -399,7 +399,7 @@ abstract class AbstractFunction
      */
     public function getNamespace()
     {
-        return $this->_namespace;
+        return $this->namespace;
     }
 
     /**
@@ -414,7 +414,7 @@ abstract class AbstractFunction
             throw new Exception\InvalidArgumentException('Invalid description');
         }
 
-        $this->_description = $string;
+        $this->description = $string;
     }
 
     /**
@@ -424,7 +424,7 @@ abstract class AbstractFunction
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -435,7 +435,7 @@ abstract class AbstractFunction
      */
     public function getPrototypes()
     {
-        return $this->_prototypes;
+        return $this->prototypes;
     }
 
     /**
@@ -445,7 +445,7 @@ abstract class AbstractFunction
      */
     public function getInvokeArguments()
     {
-        return $this->_argv;
+        return $this->argv;
     }
 
     /**
@@ -458,11 +458,11 @@ abstract class AbstractFunction
      */
     public function __wakeup()
     {
-        if ($this->_reflection instanceof \ReflectionMethod) {
-            $class = new \ReflectionClass($this->_class);
-            $this->_reflection = new \ReflectionMethod($class->newInstance(), $this->getName());
+        if ($this->reflection instanceof \ReflectionMethod) {
+            $class = new \ReflectionClass($this->class);
+            $this->reflection = new \ReflectionMethod($class->newInstance(), $this->getName());
         } else {
-            $this->_reflection = new \ReflectionFunction($this->getName());
+            $this->reflection = new \ReflectionFunction($this->getName());
         }
     }
 }

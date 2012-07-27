@@ -27,33 +27,33 @@ class HtmlTag extends AbstractTag
      *
      * @var array
      */
-    protected $_classList = null;
+    protected $classList = null;
 
     /**
      * @var string Encoding to utilize
      */
-    protected $_encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * Unit for the fontsize
      *
      * @var string
      */
-    protected $_fontSizeUnit = 'px';
+    protected $fontSizeUnit = 'px';
 
     /**
      * Allowed fontsize units
      *
      * @var array
      */
-    protected $_alloweFontSizeUnits = array('em', 'ex', 'px', 'in', 'cm', 'mm', 'pt', 'pc', '%');
+    protected $allowedFontSizeUnits = array('em', 'ex', 'px', 'in', 'cm', 'mm', 'pt', 'pc', '%');
 
     /**
      * List of HTML tags
      *
      * @var array
      */
-    protected $_htmlTags = array(
+    protected $htmlTags = array(
         'li'
     );
 
@@ -62,14 +62,14 @@ class HtmlTag extends AbstractTag
      *
      * @var integer
      */
-    protected $_maxFontSize = 20;
+    protected $maxFontSize = 20;
 
     /**
      * Minimum fontsize
      *
      * @var integer
      */
-    protected $_minFontSize = 10;
+    protected $minFontSize = 10;
 
     /**
      * Set a list of classes to use instead of fontsizes
@@ -93,7 +93,7 @@ class HtmlTag extends AbstractTag
             }
         }
 
-        $this->_classList = $classList;
+        $this->classList = $classList;
         return $this;
     }
 
@@ -104,7 +104,7 @@ class HtmlTag extends AbstractTag
      */
     public function getClassList()
     {
-        return $this->_classList;
+        return $this->classList;
     }
 
     /**
@@ -114,7 +114,7 @@ class HtmlTag extends AbstractTag
      */
     public function getEncoding()
     {
-         return $this->_encoding;
+         return $this->encoding;
     }
 
     /**
@@ -125,7 +125,7 @@ class HtmlTag extends AbstractTag
      */
     public function setEncoding($value)
     {
-        $this->_encoding = (string) $value;
+        $this->encoding = (string) $value;
         return $this;
     }
 
@@ -140,11 +140,11 @@ class HtmlTag extends AbstractTag
      */
     public function setFontSizeUnit($fontSizeUnit)
     {
-        if (!in_array($fontSizeUnit, $this->_alloweFontSizeUnits)) {
+        if (!in_array($fontSizeUnit, $this->allowedFontSizeUnits)) {
             throw new InvalidArgumentException('Invalid fontsize unit specified');
         }
 
-        $this->_fontSizeUnit = (string) $fontSizeUnit;
+        $this->fontSizeUnit = (string) $fontSizeUnit;
         $this->setClassList(null);
         return $this;
     }
@@ -156,7 +156,7 @@ class HtmlTag extends AbstractTag
      */
     public function getFontSizeUnit()
     {
-        return $this->_fontSizeUnit;
+        return $this->fontSizeUnit;
     }
      /**
      * Set the HTML tags surrounding the <a> element
@@ -166,7 +166,7 @@ class HtmlTag extends AbstractTag
      */
     public function setHTMLTags(array $htmlTags)
     {
-        $this->_htmlTags = $htmlTags;
+        $this->htmlTags = $htmlTags;
         return $this;
     }
 
@@ -177,7 +177,7 @@ class HtmlTag extends AbstractTag
      */
     public function getHTMLTags()
     {
-        return $this->_htmlTags;
+        return $this->htmlTags;
     }
 
     /**
@@ -193,7 +193,7 @@ class HtmlTag extends AbstractTag
             throw new InvalidArgumentException('Fontsize must be numeric');
         }
 
-        $this->_maxFontSize = (int) $maxFontSize;
+        $this->maxFontSize = (int) $maxFontSize;
         $this->setClassList(null);
         return $this;
     }
@@ -205,7 +205,7 @@ class HtmlTag extends AbstractTag
      */
     public function getMaxFontSize()
     {
-        return $this->_maxFontSize;
+        return $this->maxFontSize;
     }
 
     /**
@@ -221,7 +221,7 @@ class HtmlTag extends AbstractTag
             throw new InvalidArgumentException('Fontsize must be numeric');
         }
 
-        $this->_minFontSize = (int) $minFontSize;
+        $this->minFontSize = (int) $minFontSize;
         $this->setClassList(null);
         return $this;
     }
@@ -233,7 +233,7 @@ class HtmlTag extends AbstractTag
      */
     public function getMinFontSize()
     {
-        return $this->_minFontSize;
+        return $this->minFontSize;
     }
 
     /**

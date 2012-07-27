@@ -28,43 +28,43 @@ class Client implements ServerClient
      * @var string
      * @example http://time.xmlrpc.com/RPC2
      */
-    protected $_serverAddress;
+    protected $serverAddress;
 
     /**
      * HTTP Client to use for requests
      * @var Zend\Http\Client
      */
-    protected $_httpClient = null;
+    protected $httpClient = null;
 
     /**
      * Introspection object
      * @var Zend\Http\Client\ServerIntrospection
      */
-    protected $_introspector = null;
+    protected $introspector = null;
 
     /**
      * Request of the last method call
      * @var Zend\XmlRpc\Request
      */
-    protected $_lastRequest = null;
+    protected $lastRequest = null;
 
     /**
      * Response received from the last method call
      * @var Zend\XmlRpc\Response
      */
-    protected $_lastResponse = null;
+    protected $lastResponse = null;
 
     /**
      * Proxy object for more convenient method calls
      * @var array of Zend\XmlRpc\Client\ServerProxy
      */
-    protected $_proxyCache = array();
+    protected $proxyCache = array();
 
     /**
      * Flag for skipping system lookup
      * @var bool
      */
-    protected $_skipSystemLookup = false;
+    protected $skipSystemLookup = false;
 
     /**
      * Create a new XML-RPC client to a remote server
@@ -77,13 +77,13 @@ class Client implements ServerClient
     public function __construct($server, Http\Client $httpClient = null)
     {
         if ($httpClient === null) {
-            $this->_httpClient = new Http\Client();
+            $this->httpClient = new Http\Client();
         } else {
-            $this->_httpClient = $httpClient;
+            $this->httpClient = $httpClient;
         }
 
-        $this->_introspector  = new Client\ServerIntrospection($this);
-        $this->_serverAddress = $server;
+        $this->introspector  = new Client\ServerIntrospection($this);
+        $this->serverAddress = $server;
     }
 
 
@@ -95,7 +95,7 @@ class Client implements ServerClient
      */
     public function setHttpClient(Http\Client $httpClient)
     {
-        return $this->_httpClient = $httpClient;
+        return $this->httpClient = $httpClient;
     }
 
 
@@ -106,7 +106,7 @@ class Client implements ServerClient
      */
     public function getHttpClient()
     {
-        return $this->_httpClient;
+        return $this->httpClient;
     }
 
 
@@ -118,7 +118,7 @@ class Client implements ServerClient
      */
     public function setIntrospector(Client\ServerIntrospection $introspector)
     {
-        return $this->_introspector = $introspector;
+        return $this->introspector = $introspector;
     }
 
 
@@ -129,7 +129,7 @@ class Client implements ServerClient
      */
     public function getIntrospector()
     {
-        return $this->_introspector;
+        return $this->introspector;
     }
 
 
@@ -140,7 +140,7 @@ class Client implements ServerClient
      */
     public function getLastRequest()
     {
-        return $this->_lastRequest;
+        return $this->lastRequest;
     }
 
 
@@ -151,7 +151,7 @@ class Client implements ServerClient
      */
     public function getLastResponse()
     {
-        return $this->_lastResponse;
+        return $this->lastResponse;
     }
 
 
@@ -163,11 +163,11 @@ class Client implements ServerClient
      */
     public function getProxy($namespace = '')
     {
-        if (empty($this->_proxyCache[$namespace])) {
+        if (empty($this->proxyCache[$namespace])) {
             $proxy = new Client\ServerProxy($this, $namespace);
-            $this->_proxyCache[$namespace] = $proxy;
+            $this->proxyCache[$namespace] = $proxy;
         }
-        return $this->_proxyCache[$namespace];
+        return $this->proxyCache[$namespace];
     }
 
     /**
@@ -178,7 +178,7 @@ class Client implements ServerClient
      */
     public function setSkipSystemLookup($flag = true)
     {
-        $this->_skipSystemLookup = (bool) $flag;
+        $this->skipSystemLookup = (bool) $flag;
         return $this;
     }
 
@@ -189,7 +189,7 @@ class Client implements ServerClient
      */
     public function skipSystemLookup()
     {
-        return $this->_skipSystemLookup;
+        return $this->skipSystemLookup;
     }
 
     /**
@@ -202,7 +202,7 @@ class Client implements ServerClient
      */
     public function doRequest($request, $response = null)
     {
-        $this->_lastRequest = $request;
+        $this->lastRequest = $request;
 
         iconv_set_encoding('input_encoding', 'UTF-8');
         iconv_set_encoding('output_encoding', 'UTF-8');
@@ -211,7 +211,7 @@ class Client implements ServerClient
         $http        = $this->getHttpClient();
         $httpRequest = $http->getRequest();
         if ($httpRequest->getUriString() === null) {
-            $http->setUri($this->_serverAddress);
+            $http->setUri($this->serverAddress);
         }
 
         $headers = $httpRequest->getHeaders();
@@ -224,7 +224,7 @@ class Client implements ServerClient
             $headers->addHeaderLine('user-agent', 'Zend_XmlRpc_Client');
         }
 
-        $xml = $this->_lastRequest->__toString();
+        $xml = $this->lastRequest->__toString();
         $http->setRawBody($xml);
         $httpResponse = $http->setMethod('POST')->send();
 
@@ -242,8 +242,8 @@ class Client implements ServerClient
             $response = new Response();
         }
 
-        $this->_lastResponse = $response;
-        $this->_lastResponse->loadXml(trim($httpResponse->getBody()));
+        $this->lastResponse = $response;
+        $this->lastResponse->loadXml(trim($httpResponse->getBody()));
     }
 
     /**
@@ -318,8 +318,8 @@ class Client implements ServerClient
 
         $this->doRequest($request);
 
-        if ($this->_lastResponse->isFault()) {
-            $fault = $this->_lastResponse->getFault();
+        if ($this->lastResponse->isFault()) {
+            $fault = $this->lastResponse->getFault();
             /**
              * Exception thrown when an XML-RPC fault is returned
              */
@@ -329,7 +329,7 @@ class Client implements ServerClient
                 );
         }
 
-        return $this->_lastResponse->getReturnValue();
+        return $this->lastResponse->getReturnValue();
     }
 
     /**

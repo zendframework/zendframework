@@ -24,8 +24,8 @@ class BigInteger extends Integer
      */
     public function __construct($value)
     {
-        $this->_value = BigIntegerMath::factory()->init($value, 10);
-        $this->_type  = self::XMLRPC_TYPE_I8;
+        $this->value = BigIntegerMath::factory()->init($value, 10);
+        $this->type  = self::XMLRPC_TYPE_I8;
     }
 
     /**
@@ -35,6 +35,6 @@ class BigInteger extends Integer
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 }

@@ -23,19 +23,19 @@ class Node
      * Node value
      * @var mixed
      */
-    protected $_value = null;
+    protected $value = null;
 
     /**
      * Array of child nodes (if any)
      * @var array
      */
-    protected $_children = array();
+    protected $children = array();
 
     /**
      * Parent node (if any)
      * @var \Zend\Server\Reflection\Node
      */
-    protected $_parent = null;
+    protected $parent = null;
 
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Node
      */
     public function __construct($value, Node $parent = null)
     {
-        $this->_value = $value;
+        $this->value = $value;
         if (null !== $parent) {
             $this->setParent($parent, true);
         }
@@ -64,7 +64,7 @@ class Node
      */
     public function setParent(Node $node, $new = false)
     {
-        $this->_parent = $node;
+        $this->parent = $node;
 
         if ($new) {
             $node->attachChild($this);
@@ -94,7 +94,7 @@ class Node
      */
     public function attachChild(Node $node)
     {
-        $this->_children[] = $node;
+        $this->children[] = $node;
 
         if ($node->getParent() !== $this) {
             $node->setParent($this);
@@ -108,7 +108,7 @@ class Node
      */
     public function getChildren()
     {
-        return $this->_children;
+        return $this->children;
     }
 
     /**
@@ -118,7 +118,7 @@ class Node
      */
     public function hasChildren()
     {
-        return count($this->_children) > 0;
+        return count($this->children) > 0;
     }
 
     /**
@@ -128,7 +128,7 @@ class Node
      */
     public function getParent()
     {
-        return $this->_parent;
+        return $this->parent;
     }
 
     /**
@@ -138,7 +138,7 @@ class Node
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -149,7 +149,7 @@ class Node
      */
     public function setValue($value)
     {
-        $this->_value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -168,7 +168,7 @@ class Node
             return $endPoints;
         }
 
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             $value = $child->getValue();
 
             if (null === $value) {

@@ -23,13 +23,13 @@ class ReflectionMethod extends AbstractFunction
      * Parent class name
      * @var string
      */
-    protected $_class;
+    protected $class;
 
     /**
      * Parent class reflection
      * @var Zend\Server\Reflection\ReflectionClass
      */
-    protected $_classReflection;
+    protected $classReflection;
 
     /**
      * Constructor
@@ -42,8 +42,8 @@ class ReflectionMethod extends AbstractFunction
      */
     public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {
-        $this->_classReflection = $class;
-        $this->_reflection      = $r;
+        $this->classReflection = $class;
+        $this->reflection      = $r;
 
         $classNamespace = $class->getNamespace();
 
@@ -56,11 +56,11 @@ class ReflectionMethod extends AbstractFunction
 
         // Determine arguments
         if (is_array($argv)) {
-            $this->_argv = $argv;
+            $this->argv = $argv;
         }
 
         // If method call, need to store some info on the class
-        $this->_class = $class->getName();
+        $this->class = $class->getName();
 
         // Perform some introspection
         $this->_reflect();
@@ -73,7 +73,7 @@ class ReflectionMethod extends AbstractFunction
      */
     public function getDeclaringClass()
     {
-        return $this->_classReflection;
+        return $this->classReflection;
     }
 
     /**
@@ -86,8 +86,8 @@ class ReflectionMethod extends AbstractFunction
      */
     public function __wakeup()
     {
-        $this->_classReflection = new ReflectionClass(new \ReflectionClass($this->_class), $this->getNamespace(), $this->getInvokeArguments());
-        $this->_reflection = new \ReflectionMethod($this->_classReflection->getName(), $this->getName());
+        $this->classReflection = new ReflectionClass(new \ReflectionClass($this->class), $this->getNamespace(), $this->getInvokeArguments());
+        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->getName());
     }
 
 }

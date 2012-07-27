@@ -24,14 +24,14 @@ class DateTime extends AbstractScalar
      *
      * @var string
      */
-    protected $_phpFormatString = 'Ymd\\TH:i:s';
+    protected $phpFormatString = 'Ymd\\TH:i:s';
 
     /**
      * ISO compatible format string for XML/RPC datetime values
      *
      * @var string
      */
-    protected $_isoFormatString = 'yyyyMMddTHH:mm:ss';
+    protected $isoFormatString = 'yyyyMMddTHH:mm:ss';
 
     /**
      * Set the value of a dateTime.iso8601 native type
@@ -43,12 +43,12 @@ class DateTime extends AbstractScalar
      */
     public function __construct($value)
     {
-        $this->_type = self::XMLRPC_TYPE_DATETIME;
+        $this->type = self::XMLRPC_TYPE_DATETIME;
 
         if ($value instanceof \DateTime) {
-            $this->_value = $value->format($this->_phpFormatString);
+            $this->value = $value->format($this->phpFormatString);
         } elseif (is_numeric($value)) { // The value is numeric, we make sure it is an integer
-            $this->_value = date($this->_phpFormatString, (int)$value);
+            $this->value = date($this->phpFormatString, (int)$value);
         } else {
             try {
                 $dateTime = new \DateTime($value);
@@ -56,7 +56,7 @@ class DateTime extends AbstractScalar
                 throw new Exception\ValueException($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->_value = $dateTime->format($this->_phpFormatString); // Convert the DateTime to iso8601 format
+            $this->value = $dateTime->format($this->phpFormatString); // Convert the DateTime to iso8601 format
         }
     }
 
@@ -67,6 +67,6 @@ class DateTime extends AbstractScalar
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 }

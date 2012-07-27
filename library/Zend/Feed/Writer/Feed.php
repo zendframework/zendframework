@@ -27,14 +27,14 @@ class Feed extends AbstractFeed implements Iterator, Countable
      *
      * @var array
      */
-    protected $_entries = array();
+    protected $entries = array();
 
     /**
      * A pointer for the iterator to keep track of the entries array
      *
      * @var int
      */
-    protected $_entriesKey = 0;
+    protected $entriesKey = 0;
 
     /**
      * Creates a new Zend_Feed_Writer_Entry data container for use. This is NOT
@@ -62,7 +62,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function addTombstone(Deleted $deleted)
     {
-        $this->_entries[] = $deleted;
+        $this->entries[] = $deleted;
     }
 
     /**
@@ -90,7 +90,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function addEntry(Entry $entry)
     {
-        $this->_entries[] = $entry;
+        $this->entries[] = $entry;
     }
 
     /**
@@ -102,8 +102,8 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function removeEntry($index)
     {
-        if (isset($this->_entries[$index])) {
-            unset($this->_entries[$index]);
+        if (isset($this->entries[$index])) {
+            unset($this->entries[$index]);
         }
         throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
     }
@@ -117,8 +117,8 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function getEntry($index = 0)
     {
-        if (isset($this->_entries[$index])) {
-            return $this->_entries[$index];
+        if (isset($this->entries[$index])) {
+            return $this->entries[$index];
         }
         throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
     }
@@ -139,7 +139,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
          */
         $timestamp = time();
         $entries = array();
-        foreach ($this->_entries as $entry) {
+        foreach ($this->entries as $entry) {
             if ($entry->getDateModified()) {
                 $timestamp = (int) $entry->getDateModified()->getTimestamp();
             } elseif ($entry->getDateCreated()) {
@@ -148,7 +148,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
             $entries[$timestamp] = $entry;
         }
         krsort($entries, \SORT_NUMERIC);
-        $this->_entries = array_values($entries);
+        $this->entries = array_values($entries);
     }
 
     /**
@@ -159,7 +159,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function count()
     {
-        return count($this->_entries);
+        return count($this->entries);
     }
 
     /**
@@ -169,7 +169,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function current()
     {
-        return $this->_entries[$this->key()];
+        return $this->entries[$this->key()];
     }
 
     /**
@@ -179,7 +179,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function key()
     {
-        return $this->_entriesKey;
+        return $this->entriesKey;
     }
 
     /**
@@ -189,7 +189,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function next()
     {
-        ++$this->_entriesKey;
+        ++$this->entriesKey;
     }
 
     /**
@@ -199,7 +199,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function rewind()
     {
-        $this->_entriesKey = 0;
+        $this->entriesKey = 0;
     }
 
     /**
@@ -209,7 +209,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function valid()
     {
-        return 0 <= $this->_entriesKey && $this->_entriesKey < $this->count();
+        return 0 <= $this->entriesKey && $this->entriesKey < $this->count();
     }
 
     /**

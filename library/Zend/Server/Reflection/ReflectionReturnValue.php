@@ -25,13 +25,13 @@ class ReflectionReturnValue
      * Return value type
      * @var string
      */
-    protected $_type;
+    protected $type;
 
     /**
      * Return value description
      * @var string
      */
-    protected $_description;
+    protected $description;
 
     /**
      * Constructor
@@ -52,7 +52,7 @@ class ReflectionReturnValue
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -67,7 +67,7 @@ class ReflectionReturnValue
             throw new Exception\InvalidArgumentException('Invalid parameter type');
         }
 
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     /**
@@ -77,7 +77,7 @@ class ReflectionReturnValue
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -92,6 +92,6 @@ class ReflectionReturnValue
             throw new Exception\InvalidArgumentException('Invalid parameter description');
         }
 
-        $this->_description = $description;
+        $this->description = $description;
     }
 }

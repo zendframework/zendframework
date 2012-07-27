@@ -716,7 +716,7 @@ class Links extends AbstractHelper
         );
 
         return '<link' .
-               $this->_htmlAttribs($attribs) .
+               $this->htmlAttribs($attribs) .
                $this->getClosingBracket();
     }
 

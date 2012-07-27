@@ -24,14 +24,14 @@ class ServerUrl extends AbstractHelper
      *
      * @var string
      */
-    protected $_scheme;
+    protected $scheme;
 
     /**
      * Host (including port)
      *
      * @var string
      */
-    protected $_host;
+    protected $host;
 
     /**
      * Constructor
@@ -97,7 +97,7 @@ class ServerUrl extends AbstractHelper
      */
     public function getHost()
     {
-        return $this->_host;
+        return $this->host;
     }
 
     /**
@@ -108,7 +108,7 @@ class ServerUrl extends AbstractHelper
      */
     public function setHost($host)
     {
-        $this->_host = $host;
+        $this->host = $host;
         return $this;
     }
 
@@ -119,7 +119,7 @@ class ServerUrl extends AbstractHelper
      */
     public function getScheme()
     {
-        return $this->_scheme;
+        return $this->scheme;
     }
 
     /**
@@ -130,7 +130,7 @@ class ServerUrl extends AbstractHelper
      */
     public function setScheme($scheme)
     {
-        $this->_scheme = $scheme;
+        $this->scheme = $scheme;
         return $this;
     }
 }

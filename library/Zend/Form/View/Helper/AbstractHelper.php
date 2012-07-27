@@ -210,7 +210,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
                     continue;
                 }
             }
-            //@TODO Escape event attributes like AbstractHtmlElement view helper does in _htmlAttribs ??
+            //@TODO Escape event attributes like AbstractHtmlElement view helper does in htmlAttribs ??
             $strings[] = sprintf('%s="%s"', $escape($key), $escape($value));
         }
         return implode(' ', $strings);

@@ -332,7 +332,7 @@ class Gravatar extends AbstractHtmlElement
     {
         $this->setSrcAttribForImg();
         $html = '<img'
-              . $this->_htmlAttribs($this->getAttribs())
+              . $this->htmlAttribs($this->getAttribs())
               . $this->getClosingBracket();
 
         return $html;

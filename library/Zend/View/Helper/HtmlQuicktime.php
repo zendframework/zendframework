@@ -40,7 +40,7 @@ class HtmlQuicktime extends AbstractHtmlElement
      *
      * @var array
      */
-    protected $_attribs = array('classid'  => self::ATTRIB_CLASSID,
+    protected $attribs = array('classid'  => self::ATTRIB_CLASSID,
                                 'codebase' => self::ATTRIB_CODEBASE);
 
     /**
@@ -55,7 +55,7 @@ class HtmlQuicktime extends AbstractHtmlElement
     public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
         // Attrs
-        $attribs = array_merge($this->_attribs, $attribs);
+        $attribs = array_merge($this->attribs, $attribs);
 
         // Params
         $params = array_merge(array('src' => $data), $params);

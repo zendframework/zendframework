@@ -222,7 +222,7 @@ class Menu extends AbstractHelper
         }
 
         $escaper = $this->view->plugin('escapeHtml');
-        return '<' . $element . $this->_htmlAttribs($attribs) . '>'
+        return '<' . $element . $this->htmlAttribs($attribs) . '>'
              . $escaper($label)
              . '</' . $element . '>';
     }
@@ -344,7 +344,7 @@ class Menu extends AbstractHelper
      * @param  bool                      $onlyActive  render only active branch?
      * @return string
      */
-    protected function _renderMenu(AbstractContainer $container,
+    protected function renderNormalMenu(AbstractContainer $container,
                                    $ulClass,
                                    $indent,
                                    $minDepth,
@@ -480,7 +480,7 @@ class Menu extends AbstractHelper
                                               $options['minDepth'],
                                               $options['maxDepth']);
         } else {
-            $html = $this->_renderMenu($container,
+            $html = $this->renderNormalMenu($container,
                                        $options['ulClass'],
                                        $options['indent'],
                                        $options['minDepth'],
@@ -496,7 +496,7 @@ class Menu extends AbstractHelper
      *
      * This is a convenience method which is equivalent to the following call:
      * <code>
-     * _renderMenu($container, array(
+     * renderMenu($container, array(
      *     'indent'           => $indent,
      *     'ulClass'          => $ulClass,
      *     'minDepth'         => null,

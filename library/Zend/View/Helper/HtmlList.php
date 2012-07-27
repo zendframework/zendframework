@@ -50,7 +50,7 @@ class HtmlList extends AbstractHtmlElement
         }
 
         if ($attribs) {
-            $attribs = $this->_htmlAttribs($attribs);
+            $attribs = $this->htmlAttribs($attribs);
         } else {
             $attribs = '';
         }

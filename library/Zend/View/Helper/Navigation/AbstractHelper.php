@@ -604,7 +604,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
         $escaper = $this->view->plugin('escapeHtml');
 
-        return '<a' . $this->_htmlAttribs($attribs) . '>'
+        return '<a' . $this->htmlAttribs($attribs) . '>'
              . $escaper($label)
              . '</a>';
     }
@@ -794,13 +794,13 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * Converts an associative array to a string of tag attributes.
      *
-     * Overloads {@link View\Helper\AbstractHtmlElement::_htmlAttribs()}.
+     * Overloads {@link View\Helper\AbstractHtmlElement::htmlAttribs()}.
      *
      * @param  array $attribs  an array where each key-value pair is converted
      *                         to an attribute name and value
      * @return string          an attribute string
      */
-    protected function _htmlAttribs($attribs)
+    protected function htmlAttribs($attribs)
     {
         // filter out null values and empty string values
         foreach ($attribs as $key => $value) {
@@ -809,18 +809,18 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             }
         }
 
-        return parent::_htmlAttribs($attribs);
+        return parent::htmlAttribs($attribs);
     }
 
     /**
      * Normalize an ID
      *
-     * Overrides {@link View\Helper\AbstractHtmlElement::_normalizeId()}.
+     * Overrides {@link View\Helper\AbstractHtmlElement::normalizeId()}.
      *
      * @param  string $value
      * @return string
      */
-    protected function _normalizeId($value)
+    protected function normalizeId($value)
     {
         $prefix = get_class($this);
         $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '\\')), '\\'));

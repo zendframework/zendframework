@@ -24,7 +24,7 @@ class Partial extends AbstractHelper
      * Variable to which object will be assigned
      * @var string
      */
-    protected $_objectKey;
+    protected $objectKey;
 
     /**
      * Renders a template fragment within a variable scope distinct from the
@@ -94,9 +94,9 @@ class Partial extends AbstractHelper
     public function setObjectKey($key)
     {
         if (null === $key) {
-            $this->_objectKey = null;
+            $this->objectKey = null;
         } else {
-            $this->_objectKey = (string) $key;
+            $this->objectKey = (string) $key;
         }
 
         return $this;
@@ -112,6 +112,6 @@ class Partial extends AbstractHelper
      */
     public function getObjectKey()
     {
-        return $this->_objectKey;
+        return $this->objectKey;
     }
 }

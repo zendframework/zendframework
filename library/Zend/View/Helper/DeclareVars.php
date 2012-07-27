@@ -55,10 +55,10 @@ class DeclareVars extends AbstractHelper
         foreach($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
-                    $this->_declareVar($name, $value);
+                    $this->declareVar($name, $value);
                 }
             } elseif (!isset($view->vars()->$key)) {
-                $this->_declareVar($key);
+                $this->declareVar($key);
             }
         }
     }
@@ -72,7 +72,7 @@ class DeclareVars extends AbstractHelper
      * @param  string $value Defaults to an empty string
      * @return void
      */
-    protected function _declareVar($key, $value = '')
+    protected function declareVar($key, $value = '')
     {
         $view = $this->getView();
         $vars = $view->vars();

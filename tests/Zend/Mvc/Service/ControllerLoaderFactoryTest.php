@@ -18,6 +18,7 @@ use Zend\Mvc\Service\DiFactory;
 use Zend\Mvc\Service\EventManagerFactory;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
+use Zend\Mvc\Exception;
 
 class ControllerLoaderFactoryTest extends TestCase
 {
@@ -27,7 +28,7 @@ class ControllerLoaderFactoryTest extends TestCase
     protected $services;
 
     /**
-     * @var ControllerLoaderFactory
+     * @var \Zend\Mvc\Controller\ControllerManager
      */
     protected $loader;
 
@@ -87,26 +88,46 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
     }
 
-    public function willInstantiateDefinedClassFromDi()
+    public function testWillInstantiateControllersOnlyWhenInWhitelist()
     {
-        $config = new Config(array(
+        // rewriting since controller loader does not have the correct config, but is already fetched
+        $loaderFactory  = new ControllerLoaderFactory();
+        $config         = new ArrayObject(array(
             'di' => array(
                 'instance' => array(
-                    'my-controller' => 'stdClass',
+                    'alias' => array(
+                        'my-controller'   => 'stdClass',
+                        'evil-controller' => 'stdClass',
+                    ),
+                ),
+
+                'allowed_controllers' => array(
+                    'my-controller',
                 ),
             ),
         ));
-        $config->configureServiceManager($this->loader);
+        $this->services = new ServiceManager();
+        $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
+        $this->services->setFactory('ControllerLoader', $loaderFactory);
+        $this->services->setService('Config', $config);
+        $this->services->setFactory('ControllerPluginBroker', new ControllerPluginManagerFactory());
+        $this->services->setFactory('Di', new DiFactory());
+        $this->services->setFactory('EventManager', new EventManagerFactory());
+        $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
 
-        $controller = $this->loader->get('my-controller');
-        $this->assertInstanceOf('stdClass', $controller);
-    }
+        $this->loader = $this->services->get('ControllerLoader');
 
-    public function testWillNotInstantiateArbitraryClassFromDic()
-    {
+        $this->assertTrue($this->loader->has('my-controller'));
+
+        try {
+            $controller = $this->loader->get('my-controller');
+            $this->fail('Zend\Mvc\Exception\InvalidControllerException expected');
+        } catch (Exception\InvalidControllerException $e) {
+            // try-catch to compact test
+        }
+
+        $this->assertFalse($this->loader->has('evil-controller'));
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
-        $config = new Config(array('di' => array()));
-        $config->configureServiceManager($this->loader);
-        $this->loader->get('stdClass');
+        $this->loader->get('evil-controller');
     }
 }

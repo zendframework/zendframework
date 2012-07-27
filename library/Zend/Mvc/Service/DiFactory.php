@@ -46,13 +46,6 @@ class DiFactory implements FactoryInterface
             $di->configure(new DiConfig($config['di']));
         }
 
-        if ($serviceLocator instanceof ServiceManager) {
-            // register as abstract factory as well:
-            $serviceLocator->addAbstractFactory(
-                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-            );
-        }
-
         return $di;
     }
 }

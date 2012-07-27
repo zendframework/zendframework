@@ -11,9 +11,9 @@
 namespace Zend\Mvc\Service;
 
 use Zend\Mvc\Controller\ControllerManager;
+use Zend\Mvc\Service\DiStrictAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\Di\DiStrictAbstractServiceFactory;
 
 /**
  * @category   Zend
@@ -44,14 +44,16 @@ class ControllerLoaderFactory implements FactoryInterface
         $controllerLoader->setServiceLocator($serviceLocator);
         $controllerLoader->addPeeringServiceManager($serviceLocator);
 
-        $configuration = $serviceLocator->get('Config');
+        $config = $serviceLocator->get('Config');
 
-        if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-            $di = $serviceLocator->get('Di');
-
-            $controllerLoader->addAbstractFactory(
-                new DiStrictAbstractServiceFactory($di, DiStrictAbstractServiceFactory::USE_SL_BEFORE_DI)
+        if (isset($config['di']) && isset($config['di']['allowed_controllers']) && $serviceLocator->has('Di')) {
+            $diAbstractFactory = new DiStrictAbstractServiceFactory(
+                $serviceLocator->get('Di'),
+                DiStrictAbstractServiceFactory::USE_SL_BEFORE_DI
             );
+            $diAbstractFactory->setAllowedServiceNames($config['di']['allowed_controllers']);
+
+            $controllerLoader->addAbstractFactory($diAbstractFactory);
         }
 
         return $controllerLoader;

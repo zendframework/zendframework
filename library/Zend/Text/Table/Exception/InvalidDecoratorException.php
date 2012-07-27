@@ -16,5 +16,5 @@ use DomainException;
  * @category Zend
  * @package  Zend_Text
  */
-class UnexpectedValueException extends DomainException implements ExceptionInterface
+class InvalidDecoratorException extends DomainException implements ExceptionInterface
 {}

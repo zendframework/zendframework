@@ -208,7 +208,11 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
                 ));
             }
 
-            $container = $this->getServiceLocator()->get($container);
+            $sl = $this->getServiceLocator();
+            if ($sl instanceof View\HelperPluginManager) {
+                $sl = $sl->getServiceLocator();
+            }
+            $container = $sl->get($container);
             return;
         }
 

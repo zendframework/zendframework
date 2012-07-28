@@ -208,6 +208,13 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
                 ));
             }
 
+            /**
+             * Load the navigation container from the root service locator
+             *
+             * The navigation container is probably located in Zend\ServiceManager\ServiceManager
+             * and not in the Zend\View\HelperPluginManager. If the set service locator is a
+             * HelperPluginManager, access the navigation container via the main service locator.
+             */
             $sl = $this->getServiceLocator();
             if ($sl instanceof View\HelperPluginManager) {
                 $sl = $sl->getServiceLocator();

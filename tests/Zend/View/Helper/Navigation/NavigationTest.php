@@ -141,11 +141,8 @@ class NavigationTest extends AbstractTest
                        ->with('navigation')
                        ->will($this->returnValue($container));
 
-        $pluginManager  = $this->getMock('Zend\View\HelperPluginManager', array('getServiceLocator'));
+        $pluginManager  = new View\HelperPluginManager;
         $pluginManager->setServiceLocator($serviceManager);
-        $pluginManager->expects($this->any())
-                      ->method('getServiceLocator')
-                      ->will($this->returnValue($serviceManager));
 
         $this->_helper->setServiceLocator($pluginManager);
         $this->_helper->setContainer('navigation');
@@ -153,7 +150,6 @@ class NavigationTest extends AbstractTest
         $expected = $this->_helper->getContainer();
         $actual   = $container;
         $this->assertEquals($expected, $actual);
-
     }
 
     public function testInjectingAcl()

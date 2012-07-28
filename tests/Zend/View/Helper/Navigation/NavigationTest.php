@@ -13,6 +13,7 @@ namespace ZendTest\View\Helper\Navigation;
 use Zend\Navigation\Navigation as Container;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Acl\Role;
+use Zend\ServiceManager\ServiceManager;
 use Zend\View;
 use Zend\View\Helper\Navigation;
 

@@ -388,6 +388,34 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($config['db']['name']));
     }
 
+    public function testArrayAccessModification()
+    {
+        $config = new Config($this->numericData, true);
+
+        // Define some values we'll be using
+        $poem = array(
+            'poem' => array (
+                'line 1' => 'Roses are red, bacon is also red,',
+                'line 2' => 'Poems are hard,',
+                'line 3' => 'Bacon.',
+            ),
+        );
+
+        $bacon = 'Bacon';
+
+        // Add a value
+        $config[] = $bacon;
+
+        // Check if bacon now has a key that equals to 2
+        $this->assertEquals($bacon, $config[2]);
+
+        // Now let's try setting an array with no key supplied
+        $config[] = $poem;
+
+        // This should now be set with key 3
+        $this->assertEquals($poem, $config[3]->toArray());
+    }
+
     /**
      * Ensures that toArray() supports objects of types other than Zend_Config
      *

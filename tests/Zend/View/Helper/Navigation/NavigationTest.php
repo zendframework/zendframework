@@ -135,12 +135,8 @@ class NavigationTest extends AbstractTest
     public function testServiceManagerIsUsedToRetrieveContainer()
     {
         $container      = new Container;
-
-        $serviceManager = $this->getMock('Zend\ServiceManager\ServiceManager', array('get'));
-        $serviceManager->expects($this->any())
-                       ->method('get')
-                       ->with('navigation')
-                       ->will($this->returnValue($container));
+        $serviceManager = new ServiceManager;
+        $serviceManager->setService('navigation', $container);
 
         $pluginManager  = new View\HelperPluginManager;
         $pluginManager->setServiceLocator($serviceManager);

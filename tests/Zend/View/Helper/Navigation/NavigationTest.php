@@ -10,6 +10,7 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
+use Zend\Navigation\Navigation as Container;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Acl\Role;
 use Zend\View;
@@ -128,6 +129,31 @@ class NavigationTest extends AbstractTest
         );
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testServiceManagerIsUsedToRetrieveContainer()
+    {
+        $container      = new Container;
+
+        $serviceManager = $this->getMock('Zend\ServiceManager\ServiceManager', array('get'));
+        $serviceManager->expects($this->any())
+                       ->method('get')
+                       ->with('navigation')
+                       ->will($this->returnValue($container));
+
+        $pluginManager  = $this->getMock('Zend\View\HelperPluginManager', array('getServiceLocator'));
+        $pluginManager->setServiceLocator($serviceManager);
+        $pluginManager->expects($this->any())
+                      ->method('getServiceLocator')
+                      ->will($this->returnValue($serviceManager));
+
+        $this->_helper->setServiceLocator($pluginManager);
+        $this->_helper->setContainer('navigation');
+
+        $expected = $this->_helper->getContainer();
+        $actual   = $container;
+        $this->assertEquals($expected, $actual);
+
     }
 
     public function testInjectingAcl()

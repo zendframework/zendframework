@@ -122,8 +122,13 @@ class Config implements Countable, Iterator, ArrayAccess
     public function __set($name, $value)
     {
         if ($this->allowModifications) {
+
             if (is_array($value)) {
-                $this->data[$name] = new self($value, true);
+                $value = new self($value, true);
+            }
+
+            if (null === $name) {
+                $this->data[] = $value;
             } else {
                 $this->data[$name] = $value;
             }

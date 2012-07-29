@@ -282,7 +282,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      * Set helper plugin manager instance
      *
      * @param  string|HelperPluginManager $helpers
-     * @return void
+     * @return PhpRenderer
      * @throws Exception\InvalidArgumentException
      */
     public function setHelperPluginManager($helpers)
@@ -304,6 +304,8 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         }
         $helpers->setRenderer($this);
         $this->__helpers = $helpers;
+
+        return $this;
     }
 
     /**

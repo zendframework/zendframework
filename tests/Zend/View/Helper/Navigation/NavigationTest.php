@@ -10,8 +10,10 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
+use Zend\Navigation\Navigation as Container;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Acl\Role;
+use Zend\ServiceManager\ServiceManager;
 use Zend\View;
 use Zend\View\Helper\Navigation;
 
@@ -127,6 +129,23 @@ class NavigationTest extends AbstractTest
             'breadcrumbs' => $this->_helper->breadcrumbs()->render()
         );
 
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testServiceManagerIsUsedToRetrieveContainer()
+    {
+        $container      = new Container;
+        $serviceManager = new ServiceManager;
+        $serviceManager->setService('navigation', $container);
+
+        $pluginManager  = new View\HelperPluginManager;
+        $pluginManager->setServiceLocator($serviceManager);
+
+        $this->_helper->setServiceLocator($pluginManager);
+        $this->_helper->setContainer('navigation');
+
+        $expected = $this->_helper->getContainer();
+        $actual   = $container;
         $this->assertEquals($expected, $actual);
     }
 

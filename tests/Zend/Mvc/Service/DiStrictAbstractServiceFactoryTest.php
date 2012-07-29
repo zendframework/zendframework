@@ -16,6 +16,16 @@ use Zend\ServiceManager\Di\DiInstanceManagerProxy;
 
 class DiStrictAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    public function testSetGetAllowedServiceNames()
+    {
+        $instance = new DiStrictAbstractServiceFactory($this->getMock('Zend\Di\Di'));
+        $instance->setAllowedServiceNames(array('first-service', 'second-service'));
+        $allowedServices = $instance->getAllowedServiceNames();
+        $this->assertCount(2, $allowedServices);
+        $this->assertContains('first-service', $allowedServices);
+        $this->assertContains('second-service', $allowedServices);
+    }
+
     public function testWillOnlyCreateServiceInWhitelist()
     {
         $instance = new DiStrictAbstractServiceFactory($this->getMock('Zend\Di\Di'));

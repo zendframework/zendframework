@@ -88,7 +88,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
     }
 
-    public function testWillInstantiateControllersOnlyWhenInWhitelist()
+    public function testWillInstantiateControllersFromDiAbstractFactoryOnlyWhenInWhitelist()
     {
         // rewriting since controller loader does not have the correct config, but is already fetched
         $loaderFactory  = new ControllerLoaderFactory();
@@ -126,7 +126,6 @@ class ControllerLoaderFactoryTest extends TestCase
             // try-catch to compact test
         }
 
-        $this->assertFalse($this->loader->has('evil-controller'));
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->loader->get('evil-controller');
     }

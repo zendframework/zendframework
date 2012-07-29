@@ -304,7 +304,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         }
         $helpers->setRenderer($this);
         $this->__helpers = $helpers;
-        
+
         return $this;
     }
 

@@ -485,10 +485,10 @@ class Fieldset extends Element implements FieldsetInterface
         $hydratableData = array();
 
         foreach ($values as $name => $value) {
-            if (empty($value) || !$this->has($name)) {
+            if (!$this->has($name)) {
                 continue;
             }
-
+            
             $element = $this->byName[$name];
 
             if ($element instanceof Collection) {

@@ -104,6 +104,18 @@ class BaseInputFilter implements InputFilterInterface
     }
 
     /**
+     * Remove a named input
+     *
+     * @param  string $name
+     * @return InputFilterInterface
+     */
+    public function remove($name)
+    {
+        unset($this->inputs[$name]);
+        return $this;
+    }
+
+    /**
      * Set data to use when validating and filtering
      *
      * @param  array|Traversable $data

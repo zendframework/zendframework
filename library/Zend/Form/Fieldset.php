@@ -228,12 +228,12 @@ class Fieldset extends Element implements FieldsetInterface
      * Remove a named element or fieldset
      *
      * @param  string $elementOrFieldset
-     * @return void
+     * @return FieldsetInterface
      */
     public function remove($elementOrFieldset)
     {
         if (!$this->has($elementOrFieldset)) {
-            return;
+            return $this;
         }
 
         $entry = $this->byName[$elementOrFieldset];
@@ -243,11 +243,11 @@ class Fieldset extends Element implements FieldsetInterface
 
         if ($entry instanceof FieldsetInterface) {
             unset($this->fieldsets[$elementOrFieldset]);
-            return;
+            return $this;
         }
 
         unset($this->elements[$elementOrFieldset]);
-        return;
+        return $this;
     }
 
     /**

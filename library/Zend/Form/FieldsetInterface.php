@@ -58,7 +58,7 @@ interface FieldsetInterface extends
      * Remove a named element or fieldset
      *
      * @param  string $elementOrFieldset
-     * @return void
+     * @return FieldsetInterface
      */
     public function remove($elementOrFieldset);
 

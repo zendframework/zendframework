@@ -14,6 +14,7 @@
     "target-dir": "Zend/Mail",
     "require": {
         "php": ">=5.3.3",
+        "zendframework/zend-loader": "self.version",
         "zendframework/zend-mime": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },

@@ -889,7 +889,7 @@ class FormTest extends TestCase
         $this->form->setData($validSet);
         $this->form->isValid();
         $data = $this->form->getData();
-        $this->assertClassNotHasAttribute('foo', $data);
-        $this->assertClassHasAttribute('bar', $data);
+        $this->assertObjectNotHasAttribute('foo', $data);
+        $this->assertObjectHasAttribute('bar', $data);
     }
 }

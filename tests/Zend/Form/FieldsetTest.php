@@ -287,7 +287,7 @@ class FieldsetTest extends TestCase
             'foo' => 'abc',
             'bar' => 'def',
         ));
-        
+
         $inputFilter = new InputFilter();
         $inputFilter->add(array('name' => 'foo', 'required' => false));
         $inputFilter->add(array('name' => 'bar', 'required' => false));

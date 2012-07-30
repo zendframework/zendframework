@@ -488,7 +488,7 @@ class Fieldset extends Element implements FieldsetInterface
             if (!$this->has($name)) {
                 continue;
             }
-            
+
             $element = $this->byName[$name];
 
             if ($element instanceof Collection) {

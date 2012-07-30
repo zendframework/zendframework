@@ -46,6 +46,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         parent::insert($datum, $priority);
     }
 
+
     /**
      * Serialize to an array
      *
@@ -55,26 +56,11 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      */
     public function toArray()
     {
-        $this->setExtractFlags(self::EXTR_BOTH);
         $array = array();
-        while ($this->valid()) {
-            $array[] = $this->current();
-            $this->next();
+        foreach (clone $this as $item) {
+            $array[] = $item;
         }
-        $this->setExtractFlags(self::EXTR_DATA);
-
-        // Iterating through a priority queue removes items
-        foreach ($array as $item) {
-            $this->insert($item['data'], $item['priority']);
-        }
-
-        // Return only the data
-        $return = array();
-        foreach ($array as $item) {
-            $return[] = $item['data'];
-        }
-
-        return $return;
+        return $array;
     }
 
     /**

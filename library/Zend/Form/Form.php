@@ -477,13 +477,14 @@ class Form extends Fieldset implements FormInterface
                 continue;
             }
 
-            if (!isset($data[$key])) {
-                continue;
-            }
-
             $fieldset = $formOrFieldset->byName[$key];
 
             if ($fieldset instanceof Collection) {
+                if (!isset($data[$key])) {
+                    unset ($validationGroup[$key]);
+                    continue;
+                }
+
                 $values = array();
                 $count = count($data[$key]);
 
@@ -493,7 +494,9 @@ class Form extends Fieldset implements FormInterface
 
                 $value = $values;
             } else {
-                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
+                if (isset($data[$key])) {
+                    $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
+                }
             }
         }
     }

@@ -40,6 +40,13 @@ class Menu extends AbstractHelper
     protected $onlyActiveBranch = false;
 
     /**
+     * Whether labels should be escaped
+     *
+     * @var bool
+     */
+    protected $escapeLabels = true;
+
+    /**
      * Whether parents should be rendered when only rendering active branch
      *
      * @var bool
@@ -120,6 +127,26 @@ class Menu extends AbstractHelper
     }
 
     /**
+     * Sets a flag indicating whether labels should be escaped
+     *
+     * @param bool $flag [optional] escape labels. Default is true.
+     * @return Menu  fluent interface, returns self
+     */
+    public function setEscapeLabels($flag = true)
+    {
+        $this->escapeLabels = $flag;
+        return $this;
+    }
+
+    /**
+     * @return bool whether or not to escape labels
+     */
+    public function getEscapeLabels()
+    {
+        return $this->escapeLabels;
+    }
+
+    /**
      * Enables/disables rendering of parents when only rendering active branch
      *
      * See {@link setOnlyActiveBranch()} for more information.
@@ -184,10 +211,11 @@ class Menu extends AbstractHelper
      *
      * Overrides {@link AbstractHelper::htmlify()}.
      *
-     * @param  AbstractPage $page  page to generate HTML for
-     * @return string              HTML string for the given page
+     * @param  AbstractPage $page   page to generate HTML for
+     * @param bool $escapeLabel     Whether or not to escape the label
+     * @return string               HTML string for the given page
      */
-    public function htmlify(AbstractPage $page)
+    public function htmlify(AbstractPage $page, $escapeLabel = true)
     {
         // get label and title for translating
         $label = $page->getLabel();
@@ -221,10 +249,16 @@ class Menu extends AbstractHelper
             $element = 'span';
         }
 
-        $escaper = $this->view->plugin('escapeHtml');
-        return '<' . $element . $this->htmlAttribs($attribs) . '>'
-             . $escaper($label)
-             . '</' . $element . '>';
+        $html = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        if ($escapeLabel === true) {
+            $escaper = $this->view->plugin('escapeHtml');
+            $html .= $escaper($label);
+        } else {
+            $html .= $label;
+        }
+        $html .= '</' . $element . '>';
+
+        return $html;
     }
 
     /**
@@ -271,6 +305,10 @@ class Menu extends AbstractHelper
             $options['onlyActiveBranch'] = $this->getOnlyActiveBranch();
         }
 
+        if (!isset($options['escapeLabels'])) {
+            $options['escapeLabels'] = $this->getEscapeLabels();
+        }
+
         if (!isset($options['renderParents'])) {
             $options['renderParents'] = $this->getRenderParents();
         }
@@ -296,7 +334,8 @@ class Menu extends AbstractHelper
                                          $ulClass,
                                          $indent,
                                          $minDepth,
-                                         $maxDepth
+                                         $maxDepth,
+                                         $escapeLabels
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -324,7 +363,7 @@ class Menu extends AbstractHelper
             }
             $liClass = $subPage->isActive(true) ? ' class="active"' : '';
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage) . self::EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
             $html .= $indent . '    </li>' . self::EOL;
         }
 
@@ -349,7 +388,8 @@ class Menu extends AbstractHelper
                                    $indent,
                                    $minDepth,
                                    $maxDepth,
-                                   $onlyActive
+                                   $onlyActive,
+                                   $escapeLabels
     ) {
         $html = '';
 
@@ -429,7 +469,7 @@ class Menu extends AbstractHelper
             // render li tag and page
             $liClass = $isActive ? ' class="active"' : '';
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                   . $myIndent . '        ' . $this->htmlify($page) . self::EOL;
+                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -478,14 +518,16 @@ class Menu extends AbstractHelper
                                               $options['ulClass'],
                                               $options['indent'],
                                               $options['minDepth'],
-                                              $options['maxDepth']);
+                                              $options['maxDepth'],
+                                              $options['escapeLabels']);
         } else {
             $html = $this->renderNormalMenu($container,
                                        $options['ulClass'],
                                        $options['indent'],
                                        $options['minDepth'],
                                        $options['maxDepth'],
-                                       $options['onlyActiveBranch']);
+                                       $options['onlyActiveBranch'],
+                                       $options['escapeLabels']);
         }
 
         return $html;
@@ -531,7 +573,8 @@ class Menu extends AbstractHelper
             'minDepth'         => null,
             'maxDepth'         => null,
             'onlyActiveBranch' => true,
-            'renderParents'    => false
+            'renderParents'    => false,
+            'escapeLabels'     => true
         ));
     }
 

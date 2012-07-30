@@ -251,7 +251,7 @@ class Rsa
             throw new Exception\InvalidArgumentException('No key specified for the decryption');
         }
 
-        // check if date is encoded in Base64
+        // check if data is encoded in Base64
         $output = base64_decode($data, true);
         if (false !== $output) {
             $data = $output;

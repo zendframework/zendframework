@@ -55,6 +55,17 @@ class BaseInputFilterTest extends TestCase
         $this->assertSame($child, $parent->get('child'));
     }
 
+    public function testCanRemoveInputFilter()
+    {
+        $parent = new InputFilter();
+        $child  = new InputFilter();
+        $parent->add($child, 'child');
+        $this->assertEquals(1, count($parent));
+        $this->assertSame($child, $parent->get('child'));
+        $parent->remove('child');
+        $this->assertEquals(0, count($parent));
+    }
+
     public function getInputFilter()
     {
         $filter = new InputFilter();

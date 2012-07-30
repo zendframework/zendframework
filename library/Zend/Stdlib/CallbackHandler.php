@@ -44,6 +44,12 @@ class CallbackHandler
     protected static $isPhp54;
 
     /**
+     * Is pecl/weakref extension installed?
+     * @var boolean
+     */
+    protected static $hasWeakRefExtension;
+
+    /**
      * Constructor
      *
      * @param  string $event Event to which slot is subscribed
@@ -76,8 +82,12 @@ class CallbackHandler
             throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
         }
 
+        if (null === self::$hasWeakRefExtension) {
+            self::$hasWeakRefExtension = class_exists('WeakRef');
+        }
+
         // If pecl/weakref is not installed, simply store the callback and return
-        if (!class_exists('WeakRef')) {
+        if (!self::$hasWeakRefExtension) {
             $this->callback = $callback;
             return;
         }

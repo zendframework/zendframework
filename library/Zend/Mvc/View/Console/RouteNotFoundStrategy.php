@@ -259,6 +259,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $result = '';
         $table = false;
         $tableCols = 0;
+        $tableType = 0;
         foreach($usageInfo as $moduleName => $usage){
             if(is_string($usage)){
                 // It's a plain string - output as is
@@ -270,25 +271,33 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         /**
                          *    'ivocation method' => 'explanation'
                          */
-                        if($tableCols !== 2 && $table !== false){
+                        if(($tableCols !== 2 || $tableType != 1) && $table !== false){
                             // render last table
                             $result .= $this->renderTable($table, $tableCols,$console->getWidth());
                             $table = false;
+
+                             // add extra newline for clarity
+                            $result .= "\n";
                         }
 
                         $tableCols = 2;
+                        $tableType = 1;
                         $table[] = array($scriptName . ' ' . $a, $b);
                     }elseif(is_array($b)){
                         /**
                          *  array( '--param', '--explanation' )
                          */
-                        if(count($b) != $tableCols && $table !== false){
+                        if((count($b) != $tableCols || $tableType != 2) && $table !== false){
                             // render last table
-                            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+                            $result .= $this->renderTable($table, $tableCols, $console->getWidth());
                             $table = false;
+
+                             // add extra newline for clarity
+                            $result .= "\n";
                         }
 
                         $tableCols = count($b);
+                        $tableType = 2;
                         $table[] = $b;
                     }else{
                         /**
@@ -296,12 +305,14 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                          */
                         if($table !== false){
                             // render last table
-                            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+                            $result .= $this->renderTable($table, $tableCols, $console->getWidth());
                             $table = false;
 
                             // add extra newline for clarity
                             $result .= "\n";
                         }
+
+                        $tableType = 0;
                         $result .= $b."\n";
                     }
                 }

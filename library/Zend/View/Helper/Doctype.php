@@ -214,7 +214,7 @@ class Doctype extends AbstractHelper
      */
     public function isRdfa()
     {
-        return (stristr($this->getDoctype(), 'rdfa') ? true : false);
+        return ($this->isHtml5() || stristr($this->getDoctype(), 'rdfa') ? true : false);
     }
 
     /**

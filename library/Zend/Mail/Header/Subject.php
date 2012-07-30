@@ -55,7 +55,7 @@ class Subject implements UnstructuredInterface
 
     public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
-        if (HeaderInterface::FORMAT_ENCODED) {
+        if (HeaderInterface::FORMAT_ENCODED === $format) {
             return HeaderWrap::wrap($this->subject, $this);
         }
 

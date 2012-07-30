@@ -347,9 +347,9 @@ class Simple implements RouteInterface
                 );
             }
             /**
-             * Required long flag alternative
-             *    ( --something | --somethingElse | --anotherOne )
-             *    ( --something | --somethingElse | --anotherOne ):namedGroup
+             * Required long/short flag alternative
+             *    ( --something | --somethingElse | --anotherOne | -s | -a )
+             *    ( --something | --somethingElse | --anotherOne | -s | -a ):namedGroup
              */
             elseif (preg_match( '/
                 \G
@@ -382,6 +382,47 @@ class Simple implements RouteInterface
                     'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
                     'literal'       => false,
                     'required'      => true,
+                    'positional'    => false,
+                    'alternatives'  => $options,
+                    'hasValue'      => false,
+                );
+            }
+            /**
+             * Optional flag alternative
+             *    [ --something | --somethingElse | --anotherOne | -s | -a ]
+             *    [ --something | --somethingElse | --anotherOne | -s | -a ]:namedGroup
+             */
+            elseif (preg_match( '/
+                \G
+                \[
+                    (?<options>
+                        (?:
+                            \ *?
+                            \-+(?<name>[a-zA-Z0-9][a-zA-Z0-9_\-]*?)
+                            \ *?
+                            (?:\||(?=\]))
+                            \ *?
+                        )+
+                    )
+                \]
+                (?:\:(?<groupName>[a-zA-Z0-9]+))?
+                (?:\ +|$)
+                /sx', $def, $m, 0, $pos
+            )) {
+                // extract available options
+                $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
+
+                // remove dupes
+                array_unique($options);
+
+                // remove prefix
+                array_walk($options,function(&$val,$key){$val = ltrim($val,'-');});
+
+                // prepare item
+                $item = array(
+                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
+                    'literal'       => false,
+                    'required'      => false,
                     'positional'    => false,
                     'alternatives'  => $options,
                     'hasValue'      => false,
@@ -650,6 +691,15 @@ class Simple implements RouteInterface
                         }
                     }
                 }
+            }
+        }
+
+        /**
+         * Scan for left-out flags that should result in a mismatch
+         */
+        foreach($params as $param){
+            if(preg_match('#^\-+#',$param)){
+                return; // there is an unrecognized flag
             }
         }
 

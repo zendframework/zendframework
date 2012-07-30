@@ -27,7 +27,7 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
         $subject->setSubject($string);
 
         $expected = wordwrap($string, 78, "\r\n ");
-        $test     = $subject->getFieldValue();
+        $test     = $subject->getFieldValue(Header\HeaderInterface::FORMAT_ENCODED);
         $this->assertEquals($expected, $test);
     }
 }

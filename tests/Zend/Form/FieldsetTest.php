@@ -266,6 +266,22 @@ class FieldsetTest extends TestCase
         $this->assertEquals($expected, $test);
     }
 
+    public function testIteratingRespectsOrderPriorityProvidedWhenSetLater()
+    {
+        $this->fieldset->add(new Element('foo'), array('priority' => 10));
+        $this->fieldset->add(new Element('bar'), array('priority' => 20));
+        $this->fieldset->add(new Element('baz'), array('priority' => -10));
+        $this->fieldset->add(new Fieldset('barbaz'), array('priority' => 30));
+        $this->fieldset->setPriority('baz', 99);
+
+        $expected = array('baz', 'barbaz', 'bar', 'foo');
+        $test     = array();
+        foreach ($this->fieldset as $element) {
+            $test[] = $element->getName();
+        }
+        $this->assertEquals($expected, $test);
+    }
+
     public function testSubFieldsetsBindObject()
     {
         $form = new Form();

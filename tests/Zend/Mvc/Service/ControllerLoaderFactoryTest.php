@@ -44,12 +44,12 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->services->setFactory('Di', new DiFactory());
         $this->services->setFactory('EventManager', new EventManagerFactory());
         $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
-
-        $this->loader = $this->services->get('ControllerLoader');
     }
 
     public function testCannotLoadInvalidDispatchable()
     {
+        $this->loader = $this->services->get('ControllerLoader');
+
         // Ensure the class exists and can be autoloaded
         $this->assertTrue(class_exists('ZendTest\Mvc\Service\TestAsset\InvalidDispatchableClass'));
 
@@ -65,6 +65,7 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function testCannotLoadControllerFromPeer()
     {
+        $this->loader = $this->services->get('ControllerLoader');
         $this->services->setService('foo', $this);
 
         $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
@@ -73,6 +74,7 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function testControllerLoadedCanBeInjectedWithValuesFromPeer()
     {
+        $this->loader = $this->services->get('ControllerLoader');
         $config = array(
             'invokables' => array(
                 'ZendTest\Dispatchable' => 'ZendTest\Mvc\Service\TestAsset\Dispatchable',
@@ -88,44 +90,49 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
     }
 
-    public function testWillInstantiateControllersFromDiAbstractFactoryOnlyWhenInWhitelist()
+    public function testWillInstantiateControllersFromDiAbstractFactoryWhenWhitelisted()
     {
         // rewriting since controller loader does not have the correct config, but is already fetched
-        $loaderFactory  = new ControllerLoaderFactory();
         $config         = new ArrayObject(array(
             'di' => array(
                 'instance' => array(
                     'alias' => array(
                         'my-controller'   => 'stdClass',
-                        'evil-controller' => 'stdClass',
                     ),
                 ),
-
                 'allowed_controllers' => array(
                     'my-controller',
                 ),
             ),
         ));
-        $this->services = new ServiceManager();
-        $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
-        $this->services->setFactory('ControllerLoader', $loaderFactory);
+        $this->services->setAllowOverride(true);
         $this->services->setService('Config', $config);
-        $this->services->setFactory('ControllerPluginBroker', new ControllerPluginManagerFactory());
-        $this->services->setFactory('Di', new DiFactory());
-        $this->services->setFactory('EventManager', new EventManagerFactory());
-        $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
-
         $this->loader = $this->services->get('ControllerLoader');
 
         $this->assertTrue($this->loader->has('my-controller'));
+        // invalid controller exception (because we're getting an \stdClass after all)
+        $this->setExpectedException('Zend\Mvc\Exception\InvalidControllerException');
+        $this->loader->get('my-controller');
+    }
 
-        try {
-            $controller = $this->loader->get('my-controller');
-            $this->fail('Zend\Mvc\Exception\InvalidControllerException expected');
-        } catch (Exception\InvalidControllerException $e) {
-            // try-catch to compact test
-        }
-
+    public function testWillNotInstantiateControllersFromDiAbstractFactoryWhenNotWhitelisted()
+    {
+        // rewriting since controller loader does not have the correct config, but is already fetched
+        $config         = new ArrayObject(array(
+            'di' => array(
+                'instance' => array(
+                    'alias' => array(
+                        'evil-controller' => 'stdClass',
+                    ),
+                ),
+                'allowed_controllers' => array(
+                    'my-controller',
+                ),
+            ),
+        ));
+        $this->services->setAllowOverride(true);
+        $this->services->setService('Config', $config);
+        $this->loader = $this->services->get('ControllerLoader');
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->loader->get('evil-controller');
     }

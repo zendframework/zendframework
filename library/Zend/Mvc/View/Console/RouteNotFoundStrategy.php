@@ -275,6 +275,9 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                             // render last table
                             $result .= $this->renderTable($table, $tableCols,$console->getWidth());
                             $table = false;
+
+                             // add extra newline for clarity
+                            $result .= "\n";
                         }
 
                         $tableCols = 2;
@@ -288,6 +291,9 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                             // render last table
                             $result .= $this->renderTable($table, $tableCols, $console->getWidth());
                             $table = false;
+
+                             // add extra newline for clarity
+                            $result .= "\n";
                         }
 
                         $tableCols = count($b);

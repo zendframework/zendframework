@@ -892,13 +892,13 @@ class FormTest extends TestCase
         $this->assertObjectNotHasAttribute('foo', $data);
         $this->assertObjectHasAttribute('bar', $data);
     }
-	public function testRemoveCollectionFromValidationGroupWhenZeroCountAndNoData()
-	{
-		$dataWithoutCollection = array(
+    public function testRemoveCollectionFromValidationGroupWhenZeroCountAndNoData()
+    {
+        $dataWithoutCollection = array(
             'foo' => 'bar'
         );
-		$this->populateForm();
-		$this->form->add(array(
+        $this->populateForm();
+        $this->form->add(array(
             'type' => 'Zend\Form\Element\Collection',
             'name' => 'categories',
             'options' => array(
@@ -909,12 +909,12 @@ class FormTest extends TestCase
             )
         ));
         $this->form->setValidationGroup(array(
-			'foo',
+            'foo',
             'categories' => array(
                 'name'
             )
         ));
-		$this->form->setData($dataWithoutCollection);
-		$this->assertTrue($this->form->isValid());
-	}
+        $this->form->setData($dataWithoutCollection);
+        $this->assertTrue($this->form->isValid());
+    }
 }

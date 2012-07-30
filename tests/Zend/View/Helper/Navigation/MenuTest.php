@@ -174,6 +174,24 @@ class MenuTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render($this->_nav2));
     }
 
+    public function testOptionEscapeLabelsAsFalse()
+    {
+        $options = array(
+            'escapeLabels' => false
+        );
+
+        $container = new \Zend\Navigation\Navigation($this->_nav2->toArray());
+        $container->addPage(array(
+            'label' => 'Badges <span class="badge">1</span>',
+            'uri' => 'badges'
+        ));
+
+        $expected = $this->_getExpected('menu/escapelabels_as_false.html');
+        $actual = $this->_helper->renderMenu($container, $options);
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testTranslationUsingZendTranslate()
     {
         $translator = $this->_getTranslator();

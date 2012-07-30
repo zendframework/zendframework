@@ -132,18 +132,10 @@ class Menu extends AbstractHelper
      * @param bool $flag [optional] escape labels. Default is true.
      * @return Menu  fluent interface, returns self
      */
-    public function setEscapeLabels($flag = true)
+    public function escapeLabels($flag = true)
     {
         $this->escapeLabels = $flag;
         return $this;
-    }
-
-    /**
-     * @return bool whether or not to escape labels
-     */
-    public function getEscapeLabels()
-    {
-        return $this->escapeLabels;
     }
 
     /**
@@ -306,7 +298,7 @@ class Menu extends AbstractHelper
         }
 
         if (!isset($options['escapeLabels'])) {
-            $options['escapeLabels'] = $this->getEscapeLabels();
+            $options['escapeLabels'] = $this->escapeLabels;
         }
 
         if (!isset($options['renderParents'])) {

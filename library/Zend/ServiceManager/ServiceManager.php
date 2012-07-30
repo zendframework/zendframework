@@ -489,22 +489,12 @@ class ServiceManager implements ServiceLocatorInterface
             $cName = $this->canonicalizeName($rName);
         }
 
-        $has = (
+        if (
             isset($this->invokableClasses[$cName])
             || isset($this->factories[$cName])
             || isset($this->aliases[$cName])
             || isset($this->instances[$cName])
-        );
-
-        if ($has) {
-            return true;
-        }
-
-        if (isset($this->factories[$cName])) {
-            return true;
-        }
-
-        if (isset($this->invokableClasses[$cName])) {
+        ) {
             return true;
         }
 

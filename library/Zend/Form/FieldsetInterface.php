@@ -63,6 +63,15 @@ interface FieldsetInterface extends
     public function remove($elementOrFieldset);
 
     /**
+     * Set/change the priority of an element or fieldset
+     *
+     * @param string $elementOrFieldset
+     * @param int $priority
+     * @return FieldsetInterface
+     */
+    public function setPriority($elementOrFieldset, $priority);
+
+    /**
      * Retrieve all attached elements
      *
      * Storage is an implementation detail of the concrete class.

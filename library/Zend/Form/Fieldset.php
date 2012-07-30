@@ -251,6 +251,21 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Set/change the priority of an element or fieldset
+     *
+     * @param string $elementOrFieldset
+     * @param int $priority
+     * @return FieldsetInterface
+     */
+    public function setPriority($elementOrFieldset, $priority)
+    {
+        $element = $this->get($elementOrFieldset);
+        $this->remove($elementOrFieldset);
+        $this->add($element, array('priority' => $priority));
+        return $this;
+    }
+
+    /**
      * Retrieve all attached elements
      *
      * Storage is an implementation detail of the concrete class.

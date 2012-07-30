@@ -184,13 +184,13 @@ class Rsa
         if (null === $publicKey) {
             $publicKey = $this->options->getPublicKey();
         }
-        
+
         // check if signature is encoded in Base64
         $output = base64_decode($signature, true);
         if (false !== $output) {
             $signature = $output;
-        }       
-        
+        }
+
         $result = openssl_verify(
             $data,
             $signature,
@@ -255,8 +255,8 @@ class Rsa
         $output = base64_decode($data, true);
         if (false !== $output) {
             $data = $output;
-        } 
-        
+        }
+
         return $key->decrypt($data);
     }
 

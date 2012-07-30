@@ -373,9 +373,34 @@ class SimpleTestTest extends TestCase
                     'c' => true,
                 ),
             ),
+            'optional-value-param-1' => array(
+                'a b [<c>]',
+                array('a','b','bar'),
+                array(
+                    'a'   => true,
+                    'b'   => true,
+                    'c'   => 'bar',
+                    'bar' => null,
+                ),
+            ),
+            'optional-value-param-2' => array(
+                'a b [<c>]',
+                array('a','b'),
+                array(
+                    'a'   => true,
+                    'b'   => true,
+                    'c'   => null,
+                    'bar' => null,
+                ),
+            ),
+            'optional-value-param-3' => array(
+                'a b [<c>]',
+                array('a','b','--c'),
+                null
+            ),
 
             // -- combinations
-            'mandatory-long-short-alternative1' => array(
+            'mandatory-long-short-alternative-1' => array(
                 ' ( --foo | -f )',
                 array('--foo'),
                 array(
@@ -384,7 +409,7 @@ class SimpleTestTest extends TestCase
                     'baz' => null,
                 )
             ),
-            'mandatory-long-short-alternative2' => array(
+            'mandatory-long-short-alternative-2' => array(
                 ' ( --foo | -f )',
                 array('-f'),
                 array(
@@ -393,6 +418,70 @@ class SimpleTestTest extends TestCase
                     'baz' => null,
                 )
             ),
+            'optional-long-short-alternative-1' => array(
+                'a <b> [ --foo | -f ]',
+                array('a','bar'),
+                array(
+                    'a'   => true,
+                    'b'   => 'bar',
+                    'foo' => false,
+                    'f'   => false,
+                    'baz' => null,
+                )
+            ),
+            'optional-long-short-alternative-2' => array(
+                'a <b> [ --foo | -f ]',
+                array('a','bar', '-f'),
+                array(
+                    'a'   => true,
+                    'b'   => 'bar',
+                    'foo' => false,
+                    'f'   => true,
+                    'baz' => null,
+                )
+            ),
+            'optional-long-short-alternative-3' => array(
+                'a <b> [ --foo | -f ]',
+                array('a','--foo', 'bar'),
+                array(
+                    'a'   => true,
+                    'b'   => 'bar',
+                    'foo' => true,
+                    'f'   => false,
+                    'baz' => null,
+                )
+            ),
+
+
+            'mandatory-and-optional-value-params-with-flags-1' => array(
+                'a b <c> [<d>] [--eee|-e] [--fff|-f]',
+                array('a','b','foo','bar'),
+                array(
+                    'a'   => true,
+                    'b'   => true,
+                    'c'   => 'foo',
+                    'd'   => 'bar',
+                    'e'   => false,
+                    'eee' => false,
+                    'fff' => false,
+                    'f'   => false,
+                ),
+            ),
+            'mandatory-and-optional-value-params-with-flags-2' => array(
+                'a b <c> [<d>] [--eee|-e] [--fff|-f]',
+                array('a','b','--eee', 'foo','bar'),
+                array(
+                    'a'   => true,
+                    'b'   => true,
+                    'c'   => 'foo',
+                    'd'   => 'bar',
+                    'e'   => false,
+                    'eee' => true,
+                    'fff' => false,
+                    'f'   => false,
+                ),
+            ),
+
 
             // -- overflows
             'too-many-arguments1' => array(

@@ -71,6 +71,27 @@ class PluginManager extends AbstractPluginManager
     }
 
     /**
+     * Retrieve a registered instance
+     *
+     * After the plugin is retrieved from the service locator, inject the
+     * controller in the plugin every time it is requested. This is required
+     * because a controller can use a plugin and another controller can be
+     * dispatched afterwards. If this second controller uses the same plugin
+     * as the first controller, the reference to the controller inside the
+     * plugin is lost.
+     *
+     * @param  string $cName
+     * @param  array $params
+     * @return mixed
+     */
+    public function get($name, $usePeeringServiceManagers = true)
+    {
+        $plugin = parent::get($name, $usePeeringServiceManagers);
+        $this->injectController($plugin);
+        return $plugin;
+    }
+
+    /**
      * Set controller
      *
      * @param  DispatchableInterface $controller

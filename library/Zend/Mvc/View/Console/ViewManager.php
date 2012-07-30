@@ -61,6 +61,7 @@ class ViewManager extends BaseViewManager
         $createViewModelListener = new CreateViewModelListener();
         $injectViewModelListener = new InjectViewModelListener();
         $sendResponseListener    = new SendResponseListener();
+        $injectParamsListener    = new InjectNamedConsoleParamsListener();
 
         $this->registerMvcRenderingStrategies($events);
         $this->registerViewStrategies();
@@ -71,6 +72,7 @@ class ViewManager extends BaseViewManager
         $events->attach($mvcRenderingStrategy);
         $events->attach($sendResponseListener);
 
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectParamsListener,  'injectNamedParams'), 1000);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromString'), -80);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);

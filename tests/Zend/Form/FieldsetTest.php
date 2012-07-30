@@ -280,4 +280,30 @@ class FieldsetTest extends TestCase
         $form->bind($value);
         $this->assertSame($fieldset, $form->get('foobar'));
     }
+
+    public function testBindEmptyValue()
+    {
+        $value = new \ArrayObject(array(
+            'foo' => 'abc',
+            'bar' => 'def',
+        ));
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add(array('name' => 'foo', 'required' => false));
+        $inputFilter->add(array('name' => 'bar', 'required' => false));
+
+        $form = new Form();
+        $form->add(new Element('foo'));
+        $form->add(new Element('bar'));
+        $form->setInputFilter($inputFilter);
+        $form->bind($value);
+        $form->setData(array(
+            'foo' => '',
+            'bar' => 'ghi',
+        ));
+        $form->isValid();
+
+        $this->assertSame('', $value['foo']);
+        $this->assertSame('ghi', $value['bar']);
+    }
 }

@@ -14,7 +14,8 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\Exception;
 use Zend\Di\Di;
-use Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\Di\Exception\ClassNotFoundException;
+use Zend\Mvc\Exception\DomainException;
 
 class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterface
 {
@@ -45,12 +46,6 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
      * @var array an array of whitelisted service names (keys are the service names)
      */
     protected $allowedServiceNames = array();
-
-    /**
-     * @var int registers the depth of the given calls to avoid accessing the service locator when createServiceWithName
-     * is called
-     */
-    private $getCallRecursion = 0;
 
     /**
      * @param Di $di
@@ -92,10 +87,9 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
             throw new Exception\InvalidServiceNameException('Service "' . $requestedName . '" is not whitelisted');
         }
 
-        $this->getCallRecursion = 0;
         $this->serviceLocator = $serviceLocator;
 
-        return $this->get($requestedName);
+        return parent::get($requestedName);
     }
 
     /**
@@ -107,10 +101,8 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
      */
     public function get($name, array $params = array())
     {
-        if (!$this->getCallRecursion) {
-            $this->getCallRecursion += 1;
-
-            return parent::get($name, $params);
+        if (null === $this->serviceLocator) {
+            throw new DomainException('No ServiceLocator defined, use `createServiceWithName` instead of `get`');
         }
 
         if (self::USE_SL_BEFORE_DI === $this->useServiceLocator && $this->serviceLocator->has($name)) {
@@ -119,17 +111,17 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
 
         try {
             return parent::get($name, $params);
-        } catch (DiClassNotFoundException $e) {
+        } catch (ClassNotFoundException $e) {
             if (self::USE_SL_AFTER_DI === $this->useServiceLocator && $this->serviceLocator->has($name)) {
                 return $this->serviceLocator->get($name);
             }
-
-            throw new Exception\ServiceNotFoundException(
-                sprintf('Service %s was not found in this DI instance', $name),
-                null,
-                $e
-            );
         }
+
+        throw new Exception\ServiceNotFoundException(
+            sprintf('Service %s was not found in this DI instance', $name),
+            null,
+            $e
+        );
     }
 
     /**

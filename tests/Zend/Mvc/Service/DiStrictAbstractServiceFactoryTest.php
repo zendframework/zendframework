@@ -13,6 +13,8 @@ namespace ZendTest\Mvc\Service;
 use Zend\Mvc\Service\DiStrictAbstractServiceFactory;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Di\DiInstanceManagerProxy;
+use Zend\Di\Di;
+use Zend\Di\Config;
 
 class DiStrictAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,5 +42,25 @@ class DiStrictAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($instance->canCreateServiceWithName($locator, 'not-whitelisted', 'not-whitelisted'));
         $this->setExpectedException('Zend\ServiceManager\Exception\InvalidServiceNameException');
         $instance->createServiceWithName($locator, 'not-whitelisted', 'not-whitelisted');
+    }
+
+    public function testWillFetchDependenciesFromServiceManagerBeforeDi()
+    {
+        $controllerName = __NAMESPACE__ . '\TestAsset\ControllerWithDependencies';
+        $config = new Config(array(
+            'instance' => array(
+                $controllerName => array('parameters' => array('injected' => 'stdClass')),
+            ),
+        ));
+        $locator = new ServiceManager();
+        $testService = new \stdClass();
+        $locator->setService('stdClass', $testService);
+
+        $di = new Di;
+        $config->configure($di);
+        $instance = new DiStrictAbstractServiceFactory($di, DiStrictAbstractServiceFactory::USE_SL_BEFORE_DI);
+        $instance->setAllowedServiceNames(array($controllerName));
+        $service = $instance->createServiceWithName($locator, $controllerName, $controllerName);
+        $this->assertSame($testService, $service->injectedValue);
     }
 }

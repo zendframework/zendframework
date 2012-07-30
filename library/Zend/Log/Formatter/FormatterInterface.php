@@ -32,7 +32,14 @@ interface FormatterInterface
     public function format($event);
 
     /**
-     * Formats data into a single line to be written by the writer.
+     * Get the format specifier for DateTime objects
+     *
+     * @return string
+     */
+    public function getDateTimeFormat();
+
+    /**
+     * Set the format specifier for DateTime objects
      *
      * @see http://php.net/manual/en/function.date.php
      * @param string $dateTimeFormat DateTime format

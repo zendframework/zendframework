@@ -31,6 +31,16 @@ class FirePhp implements FormatterInterface
     /**
      * This method is implemented for FormatterInterface but not used.
      *
+     * @return string
+     */
+    public function getDateTimeFormat()
+    {
+        return '';
+    }
+
+    /**
+     * This method is implemented for FormatterInterface but not used.
+     *
      * @param string $dateTimeFormat
      * @return FormatterInterface
      */

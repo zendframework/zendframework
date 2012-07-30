@@ -41,4 +41,13 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($date->format('c') . ' CRIT (1) test (errno 1) in test.php on line 1', $output);
     }
+
+    public function testSetDateTimeFormat()
+    {
+        $formatter = new ErrorHandler();
+
+        $this->assertEquals('c', $formatter->getDateTimeFormat());
+        $this->assertSame($formatter, $formatter->setDateTimeFormat('r'));
+        $this->assertEquals('r', $formatter->getDateTimeFormat());
+    }
 }

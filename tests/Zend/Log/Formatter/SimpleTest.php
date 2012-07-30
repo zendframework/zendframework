@@ -109,6 +109,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $formatter = new Simple('%timestamp%');
 
         $this->assertSame($formatter, $formatter->setDateTimeFormat($dateTimeFormat));
+        $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
         $this->assertEquals($date->format($dateTimeFormat), $formatter->format($event));
     }
 

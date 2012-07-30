@@ -36,7 +36,7 @@ class ExceptionHandler implements FormatterInterface
     public function format($event)
     {
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->dateTimeFormat);
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
 
         $output = $event['timestamp'] . ' ' . $event['priorityName'] . ' ('
@@ -57,6 +57,14 @@ class ExceptionHandler implements FormatterInterface
         }
 
         return $output;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->dateTimeFormat;
     }
 
     /**

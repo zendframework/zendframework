@@ -42,4 +42,13 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains($fields['message'], $line);
     }
+
+    public function testSetDateTimeFormatDoesNothing()
+    {
+        $formatter = new FirePhp();
+
+        $this->assertEquals('', $formatter->getDateTimeFormat());
+        $this->assertSame($formatter, $formatter->setDateTimeFormat('r'));
+        $this->assertEquals('', $formatter->getDateTimeFormat());
+    }
 }

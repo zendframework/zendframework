@@ -130,7 +130,7 @@ class Xml implements FormatterInterface
     public function format($event)
     {
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->dateTimeFormat);
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
 
         if ($this->elementMap === null) {
@@ -162,6 +162,14 @@ class Xml implements FormatterInterface
         $xml = preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
 
         return $xml . PHP_EOL;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->dateTimeFormat;
     }
 
     /**

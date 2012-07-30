@@ -58,6 +58,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $date = new DateTime();
         $f = new XmlFormatter();
         $this->assertSame($f, $f->setDateTimeFormat($dateTimeFormat));
+        $this->assertContains($dateTimeFormat, $f->getDateTimeFormat());
         $this->assertContains($date->format($dateTimeFormat), $f->format(array('timestamp' => $date)));
     }
 

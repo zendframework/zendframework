@@ -73,7 +73,7 @@ class Simple implements FormatterInterface
         }
 
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->dateTimeFormat);
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
 
         foreach ($event as $name => $value) {
@@ -87,6 +87,14 @@ class Simple implements FormatterInterface
         }
 
         return $output;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->dateTimeFormat;
     }
 
     /**

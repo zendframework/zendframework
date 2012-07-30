@@ -33,7 +33,7 @@ class ErrorHandler extends Simple
         $output = $this->format;
 
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->dateTimeFormat);
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
 
         foreach ($event as $name => $value) {

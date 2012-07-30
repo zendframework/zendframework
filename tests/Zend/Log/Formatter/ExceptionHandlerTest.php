@@ -106,6 +106,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $formatter = new ExceptionHandler();
 
         $this->assertSame($formatter, $formatter->setDateTimeFormat($dateTimeFormat));
+        $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
         $this->assertEquals($expected, $formatter->format($event));
     }
 

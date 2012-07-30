@@ -141,6 +141,8 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->helper->__invoke(Helper\Doctype::XHTML1_RDFA)->isRdfa());
         $this->assertTrue($this->helper->__invoke(Helper\Doctype::XHTML1_RDFA11)->isRdfa());
+        $this->assertTrue($this->helper->__invoke(Helper\Doctype::XHTML5)->isRdfa());
+        $this->assertTrue($this->helper->__invoke(Helper\Doctype::HTML5)->isRdfa());
 
         // build-in doctypes
         $doctypes = array(
@@ -149,11 +151,9 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
             Helper\Doctype::XHTML1_TRANSITIONAL,
             Helper\Doctype::XHTML1_FRAMESET,
             Helper\Doctype::XHTML_BASIC1,
-            Helper\Doctype::XHTML5,
             Helper\Doctype::HTML4_STRICT,
             Helper\Doctype::HTML4_LOOSE,
-            Helper\Doctype::HTML4_FRAMESET,
-            Helper\Doctype::HTML5,
+            Helper\Doctype::HTML4_FRAMESET
         );
 
         foreach ($doctypes as $type) {

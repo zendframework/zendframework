@@ -17,6 +17,16 @@ use Zend\Mvc\Controller\PluginManager;
 
 class PluginManagerTest extends TestCase
 {
+    public function testPluginManagerThrowsExceptionForMissingPluginInterface()
+    {
+        $this->setExpectedException('Zend\Mvc\Exception\InvalidPluginException');
+
+        $pluginManager = new PluginManager;
+        $pluginManager->setInvokableClass('samplePlugin', 'stdClass');
+
+        $plugin = $pluginManager->get('samplePlugin');
+    }
+
     public function testPluginManagerInjectsControllerInPlugin()
     {
         $controller    = new SampleController;

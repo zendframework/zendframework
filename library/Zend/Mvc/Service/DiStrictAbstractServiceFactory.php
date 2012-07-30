@@ -115,13 +115,13 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
             if (self::USE_SL_AFTER_DI === $this->useServiceLocator && $this->serviceLocator->has($name)) {
                 return $this->serviceLocator->get($name);
             }
-        }
 
-        throw new Exception\ServiceNotFoundException(
-            sprintf('Service %s was not found in this DI instance', $name),
-            null,
-            $e
-        );
+            throw new Exception\ServiceNotFoundException(
+                sprintf('Service %s was not found in this DI instance', $name),
+                null,
+                $e
+            );
+        }
     }
 
     /**

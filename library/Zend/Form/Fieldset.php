@@ -485,19 +485,17 @@ class Fieldset extends Element implements FieldsetInterface
         $hydratableData = array();
 
         foreach ($values as $name => $value) {
-            if (empty($value) || !$this->has($name)) {
-                continue;
+            if ($this->has($name)) {
+                $element = $this->byName[$name];
+
+                if ($element instanceof Collection) {
+                    $value = $element->bindValues($value);
+                } elseif ($element instanceof FieldsetInterface && is_object($element->object)) {
+                    $value = $element->bindValues($value);
+                }
+
+                $hydratableData[$name] = $value;
             }
-
-            $element = $this->byName[$name];
-
-            if ($element instanceof Collection) {
-                $value = $element->bindValues($value);
-            } elseif ($element instanceof FieldsetInterface && is_object($element->object)) {
-                $value = $element->bindValues($value);
-            }
-
-            $hydratableData[$name] = $value;
         }
 
         if (!empty($hydratableData)) {

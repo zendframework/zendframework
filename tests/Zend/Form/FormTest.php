@@ -873,20 +873,23 @@ class FormTest extends TestCase
         $this->assertEquals('foo[fieldsets][0][field]', $form->get('fieldsets')->get('0')->get('field')->getName());
     }
 
-    public function testEmptyValuesNotBound()
+    public function testUnsetValuesNotBound()
     {
-        $this->populateForm();
+        $model = new stdClass;
         $validSet = array(
-            'foo' => null,
-            'bar' => ' ALWAYS valid ',
+            'bar' => 'always valid',
             'foobar' => array(
                 'foo' => 'abcde',
-                'bar' => ' ALWAYS valid',
+                'bar' => 'always valid',
             ),
         );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($model);
         $this->form->setData($validSet);
         $this->form->isValid();
-        $data = $this->form->getData(Form::VALUES_RAW);
-        $this->assertEmpty($data['foo']);
+        $data = $this->form->getData();
+        $this->assertClassNotHasAttribute('foo', $data);
+        $this->assertClassHasAttribute('bar', $data);
     }
 }

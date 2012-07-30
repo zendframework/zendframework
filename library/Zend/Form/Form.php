@@ -268,12 +268,12 @@ class Form extends Fieldset implements FormInterface
 
     /**
      * Parse filtered values and return only posted fields for binding
-     * 
+     *
      * @param array $values
-     * @param type $match
+     * @param array $match
      * @return array
      */
-    protected function prepareBindData(array $values, $match)
+    protected function prepareBindData(array $values, array $match)
     {
         $data = array();
         foreach ($values as $name => $value) {

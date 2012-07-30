@@ -262,7 +262,32 @@ class Form extends Fieldset implements FormInterface
                 break;
         }
 
+        $data = $this->prepareBindData($data, $this->data);
         $this->object = parent::bindValues($data);
+    }
+
+    /**
+     * Parse filtered values and return only posted fields for binding
+     * 
+     * @param array $values
+     * @param type $match
+     * @return array
+     */
+    protected function prepareBindData(array $values, $match)
+    {
+        $data = array();
+        foreach ($values as $name => $value) {
+            if (!array_key_exists($name, $match)) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                $data[$name] = $this->prepareBindData($value, $match[$name]);
+            } else {
+                $data[$name] = $value;
+            }
+        }
+        return $data;
     }
 
     /**

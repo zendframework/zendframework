@@ -117,7 +117,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
-        if (HeaderInterface::FORMAT_ENCODED) {
+        if (HeaderInterface::FORMAT_ENCODED === $format) {
             return HeaderWrap::wrap($this->fieldValue, $this);
         }
 

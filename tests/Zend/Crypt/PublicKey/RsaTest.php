@@ -261,7 +261,7 @@ CERT;
     public function testVerifyVerifiesBase64Signatures()
     {
         $signature = $this->rsaBase64Out->sign('1234567890');
-        $result    = $this->rsaBase64Out->verify('1234567890', base64_decode($signature));
+        $result    = $this->rsaBase64Out->verify('1234567890', $signature);
 
         $this->assertSame(true, $result);
     }
@@ -308,7 +308,7 @@ CERT;
         $this->assertEquals(
             '1234567890',
             $this->rsaBase64Out->decrypt(
-                base64_decode($encrypted),
+                $encrypted,
                 $this->rsaBase64Out->getOptions()->getPrivateKey()
             )
         );

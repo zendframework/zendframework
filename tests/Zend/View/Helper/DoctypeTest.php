@@ -153,7 +153,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
             Helper\Doctype::XHTML_BASIC1,
             Helper\Doctype::HTML4_STRICT,
             Helper\Doctype::HTML4_LOOSE,
-            Helper\Doctype::HTML4_FRAMESET
+            Helper\Doctype::HTML4_FRAMESET,
         );
 
         foreach ($doctypes as $type) {

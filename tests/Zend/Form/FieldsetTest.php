@@ -306,4 +306,12 @@ class FieldsetTest extends TestCase
         $this->assertSame('', $value['foo']);
         $this->assertSame('ghi', $value['bar']);
     }
+
+    public function testFieldsetExposesFluentInterface()
+    {
+        $fieldset = $this->fieldset->add(new Element('foo'));
+        $this->assertSame($this->fieldset, $fieldset);
+        $fieldset = $this->fieldset->remove('foo');
+        $this->assertSame($this->fieldset, $fieldset);
+    }
 }

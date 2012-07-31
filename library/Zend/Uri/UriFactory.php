@@ -37,6 +37,8 @@ abstract class UriFactory
         'https'  => 'Zend\Uri\Http',
         'mailto' => 'Zend\Uri\Mailto',
         'file'   => 'Zend\Uri\File',
+        'urn'    => 'Zend\Uri\Uri',
+        'tag'    => 'Zend\Uri\Uri',
     );
 
     /**

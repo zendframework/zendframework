@@ -28,6 +28,13 @@ class FormCollection extends AbstractHelper
      * @var boolean
      */
     protected $shouldWrap = true;
+    
+    /**
+     * The default view helper that is used to render sub elements.
+     * 
+     * @var string
+     */
+    protected $defaultSubHelper = 'form_row';
 
     /**
      * @var FormRow
@@ -154,7 +161,7 @@ class FormCollection extends AbstractHelper
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $this->rowHelper = $this->view->plugin('form_row');
+            $this->rowHelper = $this->view->plugin($this->defaultSubHelper);
         }
 
         if (!$this->rowHelper instanceof FormRow) {

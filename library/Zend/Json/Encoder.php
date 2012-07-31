@@ -10,6 +10,8 @@
 
 namespace Zend\Json;
 
+use Iterator;
+use IteratorAggregate;
 use Zend\Json\Exception\InvalidArgumentException;
 use Zend\Json\Exception\RecursionException;
 
@@ -131,9 +133,9 @@ class Encoder
         if (method_exists($value, 'toJson')) {
             $props =',' . preg_replace("/^\{(.*)\}$/","\\1",$value->toJson());
         } else {
-            if ($value instanceof \IteratorAggregate) {
+            if ($value instanceof IteratorAggregate) {
                 $propCollection = $value->getIterator();
-            } elseif ($value instanceof \Iterator) {
+            } elseif ($value instanceof Iterator) {
                 $propCollection = $value;
             } else {
                 $propCollection = get_object_vars($value);

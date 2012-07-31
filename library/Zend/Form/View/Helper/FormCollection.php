@@ -59,7 +59,7 @@ class FormCollection extends AbstractHelper
         $markup = '';
         $templateMarkup = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $rowHelper = $this->getRowHelper();
+        $elementHelper = $this->getElementHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
             $elementOrFieldset = $element->getTemplateElement();
@@ -67,7 +67,7 @@ class FormCollection extends AbstractHelper
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $templateMarkup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $rowHelper($elementOrFieldset);
+                $templateMarkup .= $elementHelper($elementOrFieldset);
             }
         }
 
@@ -75,7 +75,7 @@ class FormCollection extends AbstractHelper
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $markup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $markup .= $rowHelper($elementOrFieldset);
+                $markup .= $elementHelper($elementOrFieldset);
             }
         }
 
@@ -176,7 +176,7 @@ class FormCollection extends AbstractHelper
      *
      * @return FormRow
      */
-    protected function getRowHelper()
+    protected function getElementHelper()
     {
         if ($this->rowHelper) {
             return $this->rowHelper;
@@ -199,7 +199,7 @@ class FormCollection extends AbstractHelper
      * @param FormRow $rowHelper The row helper to use.
      * @return FormCollection
      */
-    public function setRowHelper(FormRow $rowHelper)
+    public function setElementHelper(FormRow $rowHelper)
     {
         $this->rowHelper = $rowHelper;
         return $this;

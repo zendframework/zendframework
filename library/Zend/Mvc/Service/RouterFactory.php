@@ -41,7 +41,7 @@ class RouterFactory implements FactoryInterface
 
         if(
             $rName === 'ConsoleRouter' ||                   // force console router
-            ($rName === null && Console::isConsole())       // auto detect console
+            ($cName === 'router' && Console::isConsole())       // auto detect console
         ){
             // We are in a console, use console router.
             if(isset($config['console']) && isset($config['console']['router'])){

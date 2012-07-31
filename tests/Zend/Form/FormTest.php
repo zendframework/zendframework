@@ -873,20 +873,48 @@ class FormTest extends TestCase
         $this->assertEquals('foo[fieldsets][0][field]', $form->get('fieldsets')->get('0')->get('field')->getName());
     }
 
-    public function testEmptyValuesNotBound()
+    public function testUnsetValuesNotBound()
     {
-        $this->populateForm();
+        $model = new stdClass;
         $validSet = array(
-            'foo' => null,
-            'bar' => ' ALWAYS valid ',
+            'bar' => 'always valid',
             'foobar' => array(
                 'foo' => 'abcde',
-                'bar' => ' ALWAYS valid',
+                'bar' => 'always valid',
             ),
         );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($model);
         $this->form->setData($validSet);
         $this->form->isValid();
-        $data = $this->form->getData(Form::VALUES_RAW);
-        $this->assertEmpty($data['foo']);
+        $data = $this->form->getData();
+        $this->assertObjectNotHasAttribute('foo', $data);
+        $this->assertObjectHasAttribute('bar', $data);
+    }
+    public function testRemoveCollectionFromValidationGroupWhenZeroCountAndNoData()
+    {
+        $dataWithoutCollection = array(
+            'foo' => 'bar'
+        );
+        $this->populateForm();
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'categories',
+            'options' => array(
+                'count' => 0,
+                'target_element' => array(
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
+                )
+            )
+        ));
+        $this->form->setValidationGroup(array(
+            'foo',
+            'categories' => array(
+                'name'
+            )
+        ));
+        $this->form->setData($dataWithoutCollection);
+        $this->assertTrue($this->form->isValid());
     }
 }

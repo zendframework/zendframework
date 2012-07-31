@@ -52,6 +52,19 @@ abstract class UriFactory
     }
 
     /**
+     * Unregister a scheme
+     *
+     * @param string $scheme
+     */
+    public static function unregisterScheme($scheme)
+    {
+        $scheme = strtolower($scheme);
+        if (isset(static::$schemeClasses[$scheme])) {
+        	unset(static::$schemeClasses[$scheme]);
+        }
+    }
+
+    /**
      * Create a URI from a string
      *
      * @param  string $uriString

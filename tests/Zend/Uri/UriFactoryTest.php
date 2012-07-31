@@ -36,6 +36,9 @@ class UriFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeNotContains($class, 'schemeClasses', '\Zend\Uri\UriFactory');
         UriFactory::registerScheme($scheme, $class);
         $this->assertAttributeContains($class, 'schemeClasses', '\Zend\Uri\UriFactory');
+        UriFactory::unregisterScheme($scheme);
+        $this->assertAttributeNotContains($class, 'schemeClasses', '\Zend\Uri\UriFactory');
+       
     }
     
     /**

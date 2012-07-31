@@ -34,10 +34,10 @@ class Iban extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOTSUPPORTED => "Unknown country within the IBAN",
-        self::SEPANOTSUPPORTED => "Unknown country within the SEPA",
-        self::FALSEFORMAT  => "The input has a false IBAN format",
-        self::CHECKFAILED  => "The input has failed the IBAN check",
+        self::NOTSUPPORTED     => "Unknown country within the IBAN",
+        self::SEPANOTSUPPORTED => "Countries outside the Single Euro Payments Area (SEPA) are not supported",
+        self::FALSEFORMAT      => "The input has a false IBAN format",
+        self::CHECKFAILED      => "The input has failed the IBAN check",
     );
 
     /**
@@ -49,28 +49,28 @@ class Iban extends AbstractValidator
 
     /**
      * Optionally allow IBAN codes from non-SEPA countries. Defaults to true
-     * 
+     *
      * @var bool
      */
     protected $allowNonSepa = true;
-    
+
     /**
      * The SEPA country codes
-     * 
-     * @var array<ISO 3166-1> 
+     *
+     * @var array<ISO 3166-1>
      */
     protected static $sepaCountries = array(
-        'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'FO', 'GL', 'EE', 'FI', 'FR', 'DE', 
-        'GI', 'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'MC', 
+        'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'FO', 'GL', 'EE', 'FI', 'FR', 'DE',
+        'GI', 'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'MC',
         'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB'
     );
-    
+
     /**
      * IBAN regexes by country code
      *
      * @var array
      */
-    protected static $ibanRegex = array(    
+    protected static $ibanRegex = array(
         'AD' => 'AD[0-9]{2}[0-9]{4}[0-9]{4}[A-Z0-9]{12}',
         'AE' => 'AE[0-9]{2}[0-9]{3}[0-9]{16}',
         'AL' => 'AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}',
@@ -154,7 +154,7 @@ class Iban extends AbstractValidator
         if (array_key_exists('allow_non_sepa', $options)) {
             $this->setAllowNonSepa($options['allow_non_sepa']);
         }
-        
+
         parent::__construct($options);
     }
 
@@ -167,7 +167,7 @@ class Iban extends AbstractValidator
     {
         return $this->countryCode;
     }
-    
+
     /**
      * Sets an optional country code by ISO 3166-1
      *
@@ -193,27 +193,23 @@ class Iban extends AbstractValidator
 
     /**
      * Returns the optional allow non-sepa countries setting
-     * 
+     *
      * @return bool
      */
-    public function getAllowNonSepa()
+    public function allowNonSepa()
     {
         return $this->allowNonSepa;
     }
-    
+
     /**
      * Sets the optional allow non-sepa countries setting
-     * 
-     * @param type $allowNonSepa 
+     *
+     * @param  bool $allowNonSepa
      * @return Iban provides a fluent interface
      */
-    public function setAllowNonSepa($allowNonSepa = null)
+    public function setAllowNonSepa($allowNonSepa)
     {
-        if ($allowNonSepa !== null) {
-            $allowNonSepa = (bool) $allowNonSepa;
-        }
-        
-        $this->allowNonSepa = $allowNonSepa;
+        $this->allowNonSepa = (bool) $allowNonSepa;
         return $this;
     }
 
@@ -221,7 +217,7 @@ class Iban extends AbstractValidator
      * Returns true if $value is a valid IBAN
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -249,7 +245,7 @@ class Iban extends AbstractValidator
             $this->error(self::SEPANOTSUPPORTED);
             return false;
         }
-        
+
         if (!preg_match('/^' . self::$ibanRegex[$countryCode] . '$/', $value)) {
             $this->error(self::FALSEFORMAT . $value . '<>' .  self::$ibanRegex[$countryCode]);
             return false;

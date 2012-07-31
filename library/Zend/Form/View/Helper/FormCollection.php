@@ -192,4 +192,16 @@ class FormCollection extends AbstractHelper
 
         return $this->rowHelper;
     }
+    
+    /**
+     * Sets the row helper that should be used by this collection.
+     * 
+     * @param FormRow $rowHelper The row helper to use.
+     * @return FormCollection
+     */
+    public function setRowHelper(FormRow $rowHelper)
+    {
+        $this->rowHelper = $rowHelper;
+        return $this;
+    }
 }

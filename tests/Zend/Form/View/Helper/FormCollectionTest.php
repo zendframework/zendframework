@@ -17,6 +17,7 @@ use Zend\Form\View\Helper\FormCollection as FormCollectionHelper;
 use Zend\View\Helper\Doctype;
 use Zend\View\Renderer\PhpRenderer;
 use ZendTest\Form\TestAsset\FormCollection;
+use ZendTest\Form\TestAsset\CustomViewHelper;
 
 /**
  * @category   Zend
@@ -96,5 +97,21 @@ class FormCollectionTest extends TestCase
         $this->assertContains('fieldsets[0][field]', $markup);
         $this->assertContains('fieldsets[1][field]', $markup);
         $this->assertContains('fieldsets[1][nested_fieldset][anotherField]', $markup);
+    }
+
+    public function testRenderWithDefaultHelper()
+    {
+        $form = $this->getForm();
+        
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(false);
+
+        $elementHelper = new CustomViewHelper();
+        $elementHelper->setView($this->renderer);
+        
+        $markup = $this->helper->setElementHelper($elementHelper)->render($collection);
+        
+        $this->assertContains('id="customcolors0"', $markup);
+        $this->assertContains('id="customcolors1"', $markup);
     }
 }

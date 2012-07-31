@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Formatter;
 
+use DateTime;
 use Zend\Log\Exception;
 
 /**
@@ -19,31 +20,42 @@ use Zend\Log\Exception;
  */
 class Simple implements FormatterInterface
 {
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
+
     /**
+     * Format specifier for log messages
+     *
      * @var string
      */
     protected $format;
 
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
+    /**
+     * Format specifier for DateTime objects in event data (default: ISO 8601)
+     *
+     * @see http://php.net/manual/en/function.date.php
+     * @var string
+     */
+    protected $dateTimeFormat = self::DEFAULT_DATETIME_FORMAT;
 
     /**
      * Class constructor
      *
+     * @see http://php.net/manual/en/function.date.php
      * @param null|string $format Format specifier for log messages
-     * @return Simple
+     * @param null|string $dateTimeFormat Format specifier for DateTime objects in event data
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($format = null)
+    public function __construct($format = null, $dateTimeFormat = null)
     {
-        if ($format === null) {
-            $format = self::DEFAULT_FORMAT . PHP_EOL;
-        }
-
-        if (!is_string($format)) {
+        if (isset($format) && !is_string($format)) {
             throw new Exception\InvalidArgumentException('Format must be a string');
         }
 
-        $this->format = $format;
+        $this->format = isset($format) ? $format : static::DEFAULT_FORMAT;
+
+        if (isset($dateTimeFormat)) {
+            $this->dateTimeFormat = $dateTimeFormat;
+        }
     }
 
     /**
@@ -59,6 +71,11 @@ class Simple implements FormatterInterface
         if (!isset($event['info'])) {
             $event['info'] = '';
         }
+
+        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
+        }
+
         foreach ($event as $name => $value) {
             if ((is_object($value) && !method_exists($value,'__toString'))
                 || is_array($value)
@@ -70,5 +87,22 @@ class Simple implements FormatterInterface
         }
 
         return $output;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->dateTimeFormat;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDateTimeFormat($dateTimeFormat)
+    {
+        $this->dateTimeFormat = (string) $dateTimeFormat;
+        return $this;
     }
 }

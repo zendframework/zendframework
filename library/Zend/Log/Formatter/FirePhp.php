@@ -18,7 +18,7 @@ namespace Zend\Log\Formatter;
 class FirePhp implements FormatterInterface
 {
     /**
-     * Formats the given evevnt data into a single line to be written by the writer.
+     * Formats the given event data into a single line to be written by the writer.
      *
      * @param array $event The event data which should be formatted.
      * @return string
@@ -26,5 +26,26 @@ class FirePhp implements FormatterInterface
     public function format($event)
     {
         return $event['message'];
+    }
+
+    /**
+     * This method is implemented for FormatterInterface but not used.
+     *
+     * @return string
+     */
+    public function getDateTimeFormat()
+    {
+        return '';
+    }
+
+    /**
+     * This method is implemented for FormatterInterface but not used.
+     *
+     * @param string $dateTimeFormat
+     * @return FormatterInterface
+     */
+    public function setDateTimeFormat($dateTimeFormat)
+    {
+        return $this;
     }
 }

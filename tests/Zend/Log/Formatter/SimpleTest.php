@@ -10,6 +10,7 @@
 
 namespace ZendTest\Log\Formatter;
 
+use DateTime;
 use ZendTest\Log\TestAsset\StringObject;
 use Zend\Log\Formatter\Simple;
 
@@ -29,7 +30,8 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultFormat()
     {
-        $fields = array('timestamp'    => 0,
+        $date = new DateTime();
+        $fields = array('timestamp'    => $date,
                         'message'      => 'foo',
                         'priority'     => 42,
                         'priorityName' => 'bar');
@@ -37,7 +39,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $f = new Simple();
         $line = $f->format($fields);
 
-        $this->assertContains((string)$fields['timestamp'], $line);
+        $this->assertContains($date->format('c'), $line, 'Default date format is ISO 8601');
         $this->assertContains($fields['message'], $line);
         $this->assertContains($fields['priorityName'], $line);
         $this->assertContains((string)$fields['priority'], $line);
@@ -45,7 +47,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
     public function testComplexValues()
     {
-        $fields = array('timestamp'    => 0,
+        $fields = array('timestamp'    => new DateTime(),
                         'priority'     => 42,
                         'priorityName' => 'bar');
 
@@ -57,11 +59,11 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
         $fields['message'] = 10;
         $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
+        $this->assertContains((string)$fields['message'], $line);
 
         $fields['message'] = 10.5;
         $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
+        $this->assertContains((string)$fields['message'], $line);
 
         $fields['message'] = true;
         $line = $f->format($fields);
@@ -86,6 +88,40 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testCustomDateTimeFormat($dateTimeFormat)
+    {
+        $date = new DateTime();
+        $event = array('timestamp' => $date);
+        $formatter = new Simple('%timestamp%', $dateTimeFormat);
+
+        $this->assertEquals($date->format($dateTimeFormat), $formatter->format($event));
+    }
+
+    /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testSetDateTimeFormat($dateTimeFormat)
+    {
+        $date = new DateTime();
+        $event = array('timestamp' => $date);
+        $formatter = new Simple('%timestamp%');
+
+        $this->assertSame($formatter, $formatter->setDateTimeFormat($dateTimeFormat));
+        $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
+        $this->assertEquals($date->format($dateTimeFormat), $formatter->format($event));
+    }
+
+    public function provideDateTimeFormats()
+    {
+        return array(
+            array('r'),
+            array('U'),
+        );
+    }
+
+    /**
      * @group ZF-10427
      */
     public function testDefaultFormatShouldDisplayExtraInformations()
@@ -93,7 +129,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $message = 'custom message';
         $exception = new \RuntimeException($message);
         $event = array(
-            'timestamp'    => date('c'),
+            'timestamp'    => new DateTime(),
             'message'      => 'Application error',
             'priority'     => 2,
             'priorityName' => 'CRIT',

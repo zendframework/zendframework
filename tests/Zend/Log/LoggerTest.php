@@ -29,17 +29,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger = new Logger;
     }
 
-    public function testUsesDateFormatIso8601ByDefault()
-    {
-        $this->assertEquals('c', $this->logger->getDateTimeFormat());
-    }
-
-    public function testPassingStringToSetDateTimeFormat()
-    {
-        $this->logger->setDateTimeFormat('U');
-        $this->assertEquals('U', $this->logger->getDateTimeFormat());
-    }
-
     public function testUsesWriterPluginManagerByDefault()
     {
         $this->assertInstanceOf('Zend\Log\WriterPluginManager', $this->logger->getWriterPluginManager());

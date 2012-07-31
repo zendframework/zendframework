@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Formatter;
 
+use DateTime;
 use DOMDocument;
 use DOMElement;
 use Traversable;
@@ -38,6 +39,14 @@ class Xml implements FormatterInterface
     protected $encoding;
 
     /**
+     * Format specifier for DateTime objects in event data (default: ISO 8601)
+     *
+     * @see http://php.net/manual/en/function.date.php
+     * @var string
+     */
+    protected $dateTimeFormat = self::DEFAULT_DATETIME_FORMAT;
+
+    /**
      * Class constructor
      * (the default encoding is UTF-8)
      *
@@ -64,6 +73,10 @@ class Xml implements FormatterInterface
             if (count($args)) {
                 $options['encoding'] = array_shift($args);
             }
+
+            if (count($args)) {
+                $options['dateTimeFormat'] = array_shift($args);
+            }
         }
 
         if (!array_key_exists('rootElement', $options)) {
@@ -79,6 +92,10 @@ class Xml implements FormatterInterface
 
         if (array_key_exists('elementMap', $options)) {
             $this->elementMap  = $options['elementMap'];
+        }
+
+        if (array_key_exists('dateTimeFormat', $options)) {
+            $this->setDateTimeFormat($options['dateTimeFormat']);
         }
     }
 
@@ -112,6 +129,10 @@ class Xml implements FormatterInterface
      */
     public function format($event)
     {
+        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
+        }
+
         if ($this->elementMap === null) {
             $dataToInsert = $event;
         } else {
@@ -141,5 +162,22 @@ class Xml implements FormatterInterface
         $xml = preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
 
         return $xml . PHP_EOL;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->dateTimeFormat;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDateTimeFormat($dateTimeFormat)
+    {
+        $this->dateTimeFormat = (string) $dateTimeFormat;
+        return $this;
     }
 }

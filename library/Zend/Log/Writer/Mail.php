@@ -181,7 +181,7 @@ class Mail extends AbstractWriter
         }
 
         // Always provide events to mail as plaintext.
-        $this->mail->setBody(implode('', $this->eventsToMail));
+        $this->mail->setBody(implode(PHP_EOL, $this->eventsToMail));
 
         // Finally, send the mail.  If an exception occurs, convert it into a
         // warning-level message so we can avoid an exception thrown without a

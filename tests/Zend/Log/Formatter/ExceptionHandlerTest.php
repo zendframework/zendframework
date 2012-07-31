@@ -10,6 +10,7 @@
 
 namespace ZendTest\Log\Formatter;
 
+use DateTime;
 use Zend\Log\Formatter\ExceptionHandler;
 
 /**
@@ -22,12 +23,14 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormat()
     {
+        $date = new DateTime();
+
         $event = array(
-            'timestamp'    => '2012-06-12T09:00:00+02:00',
+            'timestamp'    => $date,
             'message'      => 'test',
             'priority'     => 1,
             'priorityName' => 'CRIT',
-            'extra' => array (
+            'extra' => array(
                 'file'  => 'test.php',
                 'line'  => 1,
                 'trace' => array(
@@ -53,7 +56,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
         // The formatter ends with unix style line endings so make sure we expect that
         // output as well:
-        $expected = "2012-06-12T09:00:00+02:00 CRIT (1) test in test.php on line 1\n";
+        $expected = $date->format('c') . " CRIT (1) test in test.php on line 1\n";
         $expected .= "[Trace]\n";
         $expected .= "File  : test.php\n";
         $expected .= "Line  : 1\n";
@@ -78,5 +81,40 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $output = $formatter->format($event);
 
         $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testSetDateTimeFormat($dateTimeFormat)
+    {
+        $date = new DateTime();
+
+        $event = array(
+            'timestamp'    => $date,
+            'message'      => 'test',
+            'priority'     => 1,
+            'priorityName' => 'CRIT',
+            'extra' => array(
+                'file'  => 'test.php',
+                'line'  => 1,
+            ),
+        );
+
+        $expected = $date->format($dateTimeFormat) . ' CRIT (1) test in test.php on line 1';
+
+        $formatter = new ExceptionHandler();
+
+        $this->assertSame($formatter, $formatter->setDateTimeFormat($dateTimeFormat));
+        $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
+        $this->assertEquals($expected, $formatter->format($event));
+    }
+
+    public function provideDateTimeFormats()
+    {
+        return array(
+            array('r'),
+            array('U'),
+        );
     }
 }

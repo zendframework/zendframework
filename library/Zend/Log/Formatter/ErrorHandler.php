@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Formatter;
 
+use DateTime;
 use Zend\Log\Exception;
 
 /**
@@ -17,36 +18,9 @@ use Zend\Log\Exception;
  * @package    Zend_Log
  * @subpackage Formatter
  */
-class ErrorHandler implements FormatterInterface
+class ErrorHandler extends Simple
 {
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
-
-    /**
-     * Format
-     *
-     * @var string
-     */
-    protected $format;
-
-    /**
-     * Class constructor
-     *
-     * @param null|string $format Format specifier for log messages
-     * @return ErrorHandler
-     * @throws Exception\InvalidArgumentException
-     */
-    public function __construct($format = null)
-    {
-        if ($format === null) {
-            $format = self::DEFAULT_FORMAT;
-        }
-
-        if (!is_string($format)) {
-            throw new Exception\InvalidArgumentException('Format must be a string');
-        }
-
-        $this->format = $format;
-    }
 
     /**
      * This method formats the event for the PHP Error Handler.
@@ -57,6 +31,11 @@ class ErrorHandler implements FormatterInterface
     public function format($event)
     {
         $output = $this->format;
+
+        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
+        }
+
         foreach ($event as $name => $value) {
             if (is_array($value)) {
                 foreach ($value as $sname => $svalue) {
@@ -66,6 +45,7 @@ class ErrorHandler implements FormatterInterface
                 $output = str_replace("%$name%", $value, $output);
             }
         }
+
         return $output;
     }
 }

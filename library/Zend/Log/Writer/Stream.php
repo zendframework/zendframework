@@ -92,7 +92,7 @@ class Stream extends AbstractWriter
      */
     protected function doWrite(array $event)
     {
-        $line = $this->formatter->format($event);
+        $line = $this->formatter->format($event) . PHP_EOL;
 
         ErrorHandler::start(E_WARNING);
         $result = fwrite($this->stream, $line);

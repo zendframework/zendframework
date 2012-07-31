@@ -10,6 +10,7 @@
 
 namespace ZendTest\Log\Formatter;
 
+use DateTime;
 use ZendTest\Log\TestAsset\SerializableObject;
 use Zend\Log\Formatter\Xml as XmlFormatter;
 
@@ -23,9 +24,11 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultFormat()
     {
+        $date = new DateTime();
         $f = new XmlFormatter();
-        $line = $f->format(array('message' => 'foo', 'priority' => 42));
+        $line = $f->format(array('timestamp' => $date, 'message' => 'foo', 'priority' => 42));
 
+        $this->assertContains($date->format('c'), $line);
         $this->assertContains('foo', $line);
         $this->assertContains((string)42, $line);
     }
@@ -35,6 +38,36 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $f = new XmlFormatter('log', array('foo' => 'bar'));
         $line = $f->format(array('bar' => 'baz'));
         $this->assertContains('<log><foo>baz</foo></log>', $line);
+    }
+
+    /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testConfiguringDateTimeFormat($dateTimeFormat)
+    {
+        $date = new DateTime();
+        $f = new XmlFormatter('log', null, 'UTF-8', $dateTimeFormat);
+        $this->assertContains($date->format($dateTimeFormat), $f->format(array('timestamp' => $date)));
+    }
+
+    /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testSetDateTimeFormat($dateTimeFormat)
+    {
+        $date = new DateTime();
+        $f = new XmlFormatter();
+        $this->assertSame($f, $f->setDateTimeFormat($dateTimeFormat));
+        $this->assertContains($dateTimeFormat, $f->getDateTimeFormat());
+        $this->assertContains($date->format($dateTimeFormat), $f->format(array('timestamp' => $date)));
+    }
+
+    public function provideDateTimeFormats()
+    {
+        return array(
+            array('r'),
+            array('U'),
+        );
     }
 
     public function testXmlDeclarationIsStripped()
@@ -81,18 +114,22 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithArray()
     {
+        $date = new DateTime();
         $options = array(
             'rootElement' => 'log',
             'elementMap' => array(
+                'date' => 'timestamp',
                 'word' => 'message',
                 'priority' => 'priority'
-            )
+            ),
+            'dateTimeFormat' => 'r',
         );
         $event = array(
+            'timestamp' => $date,
             'message' => 'tottakai',
             'priority' => 4
         );
-        $expected = '<log><word>tottakai</word><priority>4</priority></log>';
+        $expected = sprintf('<log><date>%s</date><word>tottakai</word><priority>4</priority></log>', $date->format('r'));
 
         $formatter = new XmlFormatter($options);
         $output = $formatter->format($event);

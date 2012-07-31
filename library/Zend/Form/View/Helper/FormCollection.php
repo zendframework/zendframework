@@ -10,6 +10,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use RuntimeException;
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
@@ -187,8 +188,9 @@ class FormCollection extends AbstractHelper
             $this->elementHelper = $this->view->plugin($this->defaultSubHelper);
         }
 
-        if (!$this->elementHelper instanceof FormRow) {
-            $this->elementHelper = new FormRow();
+        if (!$this->elementHelper instanceof AbstractHelper) {
+            // @todo Ideally the helper should implement an interface.
+            throw new RuntimeException('Invalid element helper set in FormCollection. The helper must be an instance of AbstractHelper.');
         }
 
         return $this->elementHelper;
@@ -200,7 +202,7 @@ class FormCollection extends AbstractHelper
      * @param FormRow $rowHelper The row helper to use.
      * @return FormCollection
      */
-    public function setElementHelper(FormRow $elementHelper)
+    public function setElementHelper(AbstractHelper $elementHelper)
     {
         $this->elementHelper = $elementHelper;
         return $this;

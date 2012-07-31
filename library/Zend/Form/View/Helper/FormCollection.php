@@ -35,7 +35,7 @@ class FormCollection extends AbstractHelper
      * 
      * @var string
      */
-    protected $defaultSubHelper = 'form_row';
+    protected $defaultElementHelper = 'form_row';
 
     /**
      * The view helper used to render sub elements.
@@ -156,9 +156,9 @@ class FormCollection extends AbstractHelper
      * 
      * @return string
      */
-    public function getDefaultSubHelper()
+    public function getDefaultElementHelper()
     {
-        return $this->defaultSubHelper;
+        return $this->defaultElementHelper;
     }
     
     /**
@@ -167,9 +167,9 @@ class FormCollection extends AbstractHelper
      * @param string $defaultSubHelper The name of the view helper to set.
      * @return FormCollection
      */
-    public function setDefaultSubHelper($defaultSubHelper)
+    public function setDefaultElementHelper($defaultSubHelper)
     {
-        $this->defaultSubHelper = $defaultSubHelper;
+        $this->defaultElementHelper = $defaultSubHelper;
         return $this;
     }
 
@@ -185,7 +185,7 @@ class FormCollection extends AbstractHelper
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $this->elementHelper = $this->view->plugin($this->defaultSubHelper);
+            $this->elementHelper = $this->view->plugin($this->getDefaultElementHelper());
         }
 
         if (!$this->elementHelper instanceof AbstractHelper) {

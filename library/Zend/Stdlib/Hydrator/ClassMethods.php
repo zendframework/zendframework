@@ -17,7 +17,7 @@ use Zend\Stdlib\Exception;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-class ClassMethods implements HydratorInterface
+class ClassMethods extends AbstractHydrator
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
@@ -31,6 +31,7 @@ class ClassMethods implements HydratorInterface
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
+        parent::__construct();
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
     }
 
@@ -70,8 +71,15 @@ class ClassMethods implements HydratorInterface
                 if ($this->underscoreSeparatedKeys) {
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
+                
+                $value = $object->$method();
+                
+                if ($this->hasStrategy($attribute)) {
+                    $strategy = $this->getStrategy($attribute);
+                    $value = $strategy->extract($value);
+                }
 
-                $attributes[$attribute] = $object->$method();
+                $attributes[$attribute] = $value;
             }
         }
 
@@ -108,6 +116,11 @@ class ClassMethods implements HydratorInterface
             }
             $method = 'set' . ucfirst($property);
             if (method_exists($object, $method)) {
+                if ($this->hasStrategy($property)) {
+                    $strategy = $this->getStrategy($property);
+                    $value = $strategy->hydrate($value);
+                }
+                
                 $object->$method($value);
             }
         }

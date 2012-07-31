@@ -17,7 +17,7 @@ use Zend\Stdlib\Exception;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-class ObjectProperty implements HydratorInterface
+class ObjectProperty extends AbstractHydrator
 {
     /**
      * Extract values from an object
@@ -37,7 +37,14 @@ class ObjectProperty implements HydratorInterface
             ));
         }
 
-        return get_object_vars($object);
+        $data = get_object_vars($object);
+        foreach ($data as $name => $value) {
+            if ($this->hasStrategy($name)) {
+                $strategy = $this->getStrategy($name);
+                $data[$name] = $strategy->extract($value);
+            }
+        }
+        return $data;
     }
 
     /**
@@ -59,6 +66,10 @@ class ObjectProperty implements HydratorInterface
             ));
         }
         foreach ($data as $property => $value) {
+            if ($this->hasStrategy($property)) {
+                $strategy = $this->getStrategy($property);
+                $value = $strategy->hydrate($value);
+            }
             $object->$property = $value;
         }
         return $object;

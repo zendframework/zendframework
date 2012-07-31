@@ -17,7 +17,7 @@ use Zend\Stdlib\Exception;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-class ArraySerializable implements HydratorInterface
+class ArraySerializable extends AbstractHydrator
 {
     /**
      * Extract values from the provided object
@@ -36,7 +36,19 @@ class ArraySerializable implements HydratorInterface
                 __METHOD__
             ));
         }
-        return $object->getArrayCopy();
+        $data = $object->getArrayCopy();
+        
+        $result = array();
+        foreach ($data as $name => $value) {
+            if ($this->hasStrategy($name)) {
+                $strategy = $this->getStrategy($name);
+                $value = $strategy->extract($value);
+            }
+            
+            $result[$name] = $value;
+        }
+        
+        return $result;
     }
 
     /**
@@ -52,10 +64,19 @@ class ArraySerializable implements HydratorInterface
      */
     public function hydrate(array $data, $object)
     {
+        $hydrationData = array();
+        foreach ($data as $name => $value) {
+            if ($this->hasStrategy($name)) {
+                $strategy = $this->getStrategy($name);
+                $value = $strategy->hydrate($value);
+            }
+            $hydrationData[$name] = $value;
+        }
+        
         if (is_callable(array($object, 'exchangeArray'))) {
-            $object->exchangeArray($data);
+            $object->exchangeArray($hydrationData);
         } elseif (is_callable(array($object, 'populate'))) {
-            $object->populate($data);
+            $object->populate($hydrationData);
         } else {
             throw new Exception\BadMethodCallException(sprintf(
                 '%s expects the provided object to implement exchangeArray() or populate()',

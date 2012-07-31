@@ -14,7 +14,7 @@ use ReflectionClass;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
-class Reflection implements HydratorInterface
+class Reflection extends AbstractHydrator
 {
     /**
      * Simple in-memory array cache of ReflectionProperties used.
@@ -32,7 +32,15 @@ class Reflection implements HydratorInterface
     {
         $result = array();
         foreach(self::getReflProperties($object) as $property) {
-            $result[$property->getName()] = $property->getValue($object);
+            $propertyName = $property->getName();
+            $value = $property->getValue($object);
+            
+            if ($this->hasStrategy($propertyName)) {
+                $strategy = $this->getStrategy($propertyName);
+                $value = $strategy->extract($value);
+            }
+            
+            $result[$propertyName] = $value;
         }
 
         return $result;
@@ -50,6 +58,10 @@ class Reflection implements HydratorInterface
         $reflProperties = self::getReflProperties($object);
         foreach($data as $key => $value) {
             if (isset($reflProperties[$key])) {
+                if ($this->hasStrategy($key)) {
+                    $strategy = $this->getStrategy($key);
+                    $value = $strategy->hydrate($value);
+                }
                 $reflProperties[$key]->setValue($object, $value);
             }
         }

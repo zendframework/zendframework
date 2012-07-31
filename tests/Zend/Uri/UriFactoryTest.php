@@ -38,71 +38,71 @@ class UriFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeContains($class, 'schemeClasses', '\Zend\Uri\UriFactory');
         UriFactory::unregisterScheme($scheme);
         $this->assertAttributeNotContains($class, 'schemeClasses', '\Zend\Uri\UriFactory');
-       
+
     }
-    
+
     /**
      * Provide the data for the RegisterNewScheme-test
      */
     public function registeringNewSchemeProvider()
     {
-    	return array(
-    		array('ssh', 'Foo\Bar\Class'),
-    		array('ntp', 'No real class at all!!!'),
-    	);
+        return array(
+            array('ssh', 'Foo\Bar\Class'),
+            array('ntp', 'No real class at all!!!'),
+        );
     }
-    
+
     /**
      * Test creation of new URI with an existing scheme-classd
      *
      * @param string $uri           THe URI to create
      * @param string $expectedClass The class expected
-     * 
+     *
      * @dataProvider createUriWithFactoryProvider
      */
     public function testCreateUriWithFactory($uri, $expectedClass)
     {
-    	$class = UriFactory::factory($uri);
-    	$this->assertInstanceof($expectedClass, $class);
+        $class = UriFactory::factory($uri);
+        $this->assertInstanceof($expectedClass, $class);
     }
-    
+
     /**
      * Providethe data for the CreateUriWithFactory-test
-     * 
+     *
      * @return array
      */
     public function createUriWithFactoryProvider()
     {
-    	return array(
-    		array('http://example.com', 'Zend\Uri\Http'),
-    		array('https://example.com', 'Zend\Uri\Http'),
-    		array('mailto://example.com', 'Zend\Uri\Mailto'),
-    		array('file://example.com', 'Zend\Uri\File'),
-    	);
+        return array(
+            array('http://example.com', 'Zend\Uri\Http'),
+            array('https://example.com', 'Zend\Uri\Http'),
+            array('mailto://example.com', 'Zend\Uri\Mailto'),
+            array('file://example.com', 'Zend\Uri\File'),
+        );
     }
-    
+
     /**
      * Test, that unknown Schemes will result in an exception
-     * 
+     *
      * @param string $uri an uri with an unknown scheme
      * @expectedException Zend\Uri\Exception\InvalidArgumentException
      * @dataProvider unknownSchemeThrowsExceptionProvider
      */
     public function testUnknownSchemeThrowsException($uri)
     {
-    	$url = UriFactory::factory($uri);	
+        $url = UriFactory::factory($uri);
     }
 
     /**
      * Provide data to the unknownSchemeThrowsException-TEst
-     * 
+     *
      * @return array
      */
     public function unknownSchemeThrowsExceptionProvider()
     {
-    	return array(
-    		array('foo://bar'),
-    		array('ssh://bar'),
-    	);
+        return array(
+            array('foo://bar'),
+            array('ssh://bar'),
+        );
     }
 }

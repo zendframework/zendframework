@@ -62,7 +62,7 @@ abstract class UriFactory
     {
         $scheme = strtolower($scheme);
         if (isset(static::$schemeClasses[$scheme])) {
-        	unset(static::$schemeClasses[$scheme]);
+            unset(static::$schemeClasses[$scheme]);
         }
     }
 
@@ -90,23 +90,23 @@ abstract class UriFactory
         }
 
         if ($scheme && ! isset(static::$schemeClasses[$scheme])) {
-        	throw new Exception\InvalidArgumentException(sprintf(
-        			'no class registered for scheme "%s"',
-        			$scheme
-        		));
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'no class registered for scheme "%s"',
+                    $scheme
+                ));
         }
         if ($scheme && isset(static::$schemeClasses[$scheme])) {
-	        $class = static::$schemeClasses[$scheme];
-	        $uri = new $class($uri);
-	        if (! $uri instanceof UriInterface) {
-	            throw new Exception\InvalidArgumentException(sprintf(
-	                'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
-	                $class,
-	                $scheme
-	            ));
-	        }
+            $class = static::$schemeClasses[$scheme];
+            $uri = new $class($uri);
+            if (! $uri instanceof UriInterface) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
+                    $class,
+                    $scheme
+                ));
+            }
         }
-        
+
         return $uri;
     }
 }

@@ -47,7 +47,7 @@ class ContentLocationTest extends \PHPUnit_Framework_TestCase
     {
         $contentLocationHeader = ContentLocation::fromString('Content-Location: http://www.example.com/path');
         $uri = $contentLocationHeader->uri();
-        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertInstanceOf('Zend\Uri\UriInterface', $uri);
         $this->assertTrue($uri->isAbsolute());
         $this->assertEquals('http://www.example.com/path', $contentLocationHeader->getUri());
     }
@@ -56,7 +56,7 @@ class ContentLocationTest extends \PHPUnit_Framework_TestCase
     {
         $contentLocationHeader = ContentLocation::fromString('Content-Location: /path/to');
         $uri = $contentLocationHeader->uri();
-        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertInstanceOf('Zend\Uri\UriInterface', $uri);
         $this->assertFalse($uri->isAbsolute());
         $this->assertEquals('/path/to', $contentLocationHeader->getUri());
     }

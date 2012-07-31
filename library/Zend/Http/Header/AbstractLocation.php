@@ -11,7 +11,10 @@
 namespace Zend\Http\Header;
 
 use Zend\Uri\Exception as UriException;
-use Zend\Uri\Http as HttpUri;
+use Zend\Uri\UriInterface;
+use Zend\Uri\UriFactory;
+use Zend\Uri\Uri;
+
 
 /**
  * Abstract Location Header
@@ -32,7 +35,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * URI for this header
      *
-     * @var HttpUri
+     * @var UriInterface
      */
     protected $uri = null;
 
@@ -65,7 +68,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * Set the URI/URL for this header, this can be a string or an instance of Zend\Uri\Http
      *
-     * @param string|HttpUri $uri
+     * @param string|UriInterface $uri
      * @return AbstractLocation
      * @throws Exception\InvalidArgumentException
      */
@@ -73,7 +76,7 @@ abstract class AbstractLocation implements HeaderInterface
     {
         if (is_string($uri)) {
             try {
-                $uri = new HttpUri($uri);
+                $uri = UriFactory::factory($uri);
             } catch (UriException\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
                         sprintf('Invalid URI passed as string (%s)', (string) $uri),
@@ -81,7 +84,7 @@ abstract class AbstractLocation implements HeaderInterface
                         $e
                 );
             }
-        } elseif (!($uri instanceof HttpUri)) {
+        } elseif (!($uri instanceof UriInterface)) {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
         }
         $this->uri = $uri;
@@ -96,7 +99,7 @@ abstract class AbstractLocation implements HeaderInterface
      */
     public function getUri()
     {
-        if ($this->uri instanceof HttpUri) {
+        if ($this->uri instanceof UriInterface) {
             return $this->uri->toString();
         }
         return $this->uri;
@@ -105,12 +108,12 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * Return the URI for this header as an instance of Zend\Uri\Http
      *
-     * @return HttpUri
+     * @return UriInterface
      */
     public function uri()
     {
         if ($this->uri === null || is_string($this->uri)) {
-            $this->uri = new HttpUri($this->uri);
+            $this->uri = UriFactory::factory($this->uri);
         }
         return $this->uri;
     }

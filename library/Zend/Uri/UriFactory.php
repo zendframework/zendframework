@@ -37,6 +37,8 @@ abstract class UriFactory
         'https'  => 'Zend\Uri\Http',
         'mailto' => 'Zend\Uri\Mailto',
         'file'   => 'Zend\Uri\File',
+        'urn'    => 'Zend\Uri\Uri',
+        'tag'    => 'Zend\Uri\Uri',
     );
 
     /**
@@ -49,6 +51,19 @@ abstract class UriFactory
     {
         $scheme = strtolower($scheme);
         static::$schemeClasses[$scheme] = $class;
+    }
+
+    /**
+     * Unregister a scheme
+     *
+     * @param string $scheme
+     */
+    public static function unregisterScheme($scheme)
+    {
+        $scheme = strtolower($scheme);
+        if (isset(static::$schemeClasses[$scheme])) {
+        	unset(static::$schemeClasses[$scheme]);
+        }
     }
 
     /**
@@ -74,18 +89,24 @@ abstract class UriFactory
             $scheme = $defaultScheme;
         }
 
-        if ($scheme && isset(static::$schemeClasses[$scheme])) {
-            $class = static::$schemeClasses[$scheme];
-            $uri = new $class($uri);
-            if (! $uri instanceof Uri) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'class "%s" registered for scheme "%s" is not a subclass of Zend\Uri\Uri',
-                    $class,
-                    $scheme
-                ));
-            }
+        if ($scheme && ! isset(static::$schemeClasses[$scheme])) {
+        	throw new Exception\InvalidArgumentException(sprintf(
+        			'no class registered for scheme "%s"',
+        			$scheme
+        		));
         }
-
+        if ($scheme && isset(static::$schemeClasses[$scheme])) {
+	        $class = static::$schemeClasses[$scheme];
+	        $uri = new $class($uri);
+	        if (! $uri instanceof UriInterface) {
+	            throw new Exception\InvalidArgumentException(sprintf(
+	                'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
+	                $class,
+	                $scheme
+	            ));
+	        }
+        }
+        
         return $uri;
     }
 }

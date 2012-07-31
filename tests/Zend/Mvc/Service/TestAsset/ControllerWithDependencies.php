@@ -1,7 +1,11 @@
 <?php
 namespace ZendTest\Mvc\Service\TestAsset;
 
-class ControllerWithDependencies
+use Zend\Stdlib\DispatchableInterface;
+use Zend\Stdlib\RequestInterface;
+use Zend\Stdlib\ResponseInterface;
+
+class ControllerWithDependencies implements DispatchableInterface
 {
     /**
      * @var \stdClass
@@ -14,5 +18,9 @@ class ControllerWithDependencies
     public function setInjectedValue(\stdClass $injected)
     {
         $this->injectedValue = $injected;
+    }
+
+    public function dispatch(RequestInterface $request, ResponseInterface $response = null)
+    {
     }
 }

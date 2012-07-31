@@ -12,6 +12,7 @@ namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 use Zend\Di\Di;
 use Zend\Di\Exception\ClassNotFoundException;
@@ -87,7 +88,13 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
             throw new Exception\InvalidServiceNameException('Service "' . $requestedName . '" is not whitelisted');
         }
 
-        $this->serviceLocator = $serviceLocator;
+
+        if ($serviceLocator instanceof AbstractPluginManager) {
+            /* @var $serviceLocator AbstractPluginManager */
+            $this->serviceLocator = $serviceLocator->getServiceLocator();
+        } else {
+            $this->serviceLocator = $serviceLocator;
+        }
 
         return parent::get($requestedName);
     }

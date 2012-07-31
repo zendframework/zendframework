@@ -148,6 +148,28 @@ class FormCollection extends AbstractHelper
     {
         return $this->shouldWrap();
     }
+    
+    /**
+     * Gets the name of the view helper that should be used to render sub elements.
+     * 
+     * @return string
+     */
+    public function getDefaultSubHelper()
+    {
+        return $this->defaultSubHelper;
+    }
+    
+    /**
+     * Sets the name of the view helper that should be used to render sub elements.
+     * 
+     * @param string $defaultSubHelper The name of the view helper to set.
+     * @return FormCollection
+     */
+    public function setDefaultSubHelper($defaultSubHelper)
+    {
+        $this->defaultSubHelper = $defaultSubHelper;
+        return $this;
+    }
 
     /**
      * Retrieve the FormRow helper

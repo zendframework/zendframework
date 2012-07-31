@@ -266,6 +266,22 @@ class FieldsetTest extends TestCase
         $this->assertEquals($expected, $test);
     }
 
+    public function testIteratingRespectsOrderPriorityProvidedWhenSetLater()
+    {
+        $this->fieldset->add(new Element('foo'), array('priority' => 10));
+        $this->fieldset->add(new Element('bar'), array('priority' => 20));
+        $this->fieldset->add(new Element('baz'), array('priority' => -10));
+        $this->fieldset->add(new Fieldset('barbaz'), array('priority' => 30));
+        $this->fieldset->setPriority('baz', 99);
+
+        $expected = array('baz', 'barbaz', 'bar', 'foo');
+        $test     = array();
+        foreach ($this->fieldset as $element) {
+            $test[] = $element->getName();
+        }
+        $this->assertEquals($expected, $test);
+    }
+
     public function testSubFieldsetsBindObject()
     {
         $form = new Form();
@@ -305,5 +321,13 @@ class FieldsetTest extends TestCase
 
         $this->assertSame('', $value['foo']);
         $this->assertSame('ghi', $value['bar']);
+    }
+
+    public function testFieldsetExposesFluentInterface()
+    {
+        $fieldset = $this->fieldset->add(new Element('foo'));
+        $this->assertSame($this->fieldset, $fieldset);
+        $fieldset = $this->fieldset->remove('foo');
+        $this->assertSame($this->fieldset, $fieldset);
     }
 }

@@ -46,6 +46,14 @@ interface InputFilterInterface extends Countable
     public function has($name);
 
     /**
+     * Remove a named input
+     *
+     * @param  string $name
+     * @return InputFilterInterface
+     */
+    public function remove($name);
+
+    /**
      * Set data to use when validating and filtering
      *
      * @param  array|Traversable $data

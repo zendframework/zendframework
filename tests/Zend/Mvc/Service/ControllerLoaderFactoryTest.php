@@ -92,7 +92,6 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function testWillInstantiateControllersFromDiAbstractFactoryWhenWhitelisted()
     {
-        // rewriting since controller loader does not have the correct config, but is already fetched
         $config         = new ArrayObject(array(
             'di' => array(
                 'instance' => array(
@@ -117,8 +116,7 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function testWillNotInstantiateControllersFromDiAbstractFactoryWhenNotWhitelisted()
     {
-        // rewriting since controller loader does not have the correct config, but is already fetched
-        $config         = new ArrayObject(array(
+        $config = new ArrayObject(array(
             'di' => array(
                 'instance' => array(
                     'alias' => array(
@@ -135,5 +133,34 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->loader = $this->services->get('ControllerLoader');
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->loader->get('evil-controller');
+    }
+
+    public function testWillFetchDiDependenciesFromControllerLoaderServiceManager()
+    {
+        $controllerName = __NAMESPACE__ . '\TestAsset\ControllerWithDependencies';
+        // rewriting since controller loader does not have the correct config, but is already fetched
+        $config = new ArrayObject(array(
+            'di' => array(
+                'instance' => array(
+                    $controllerName => array(
+                        'parameters' => array(
+                            'injected' => 'stdClass',
+                        ),
+                    ),
+                ),
+                'allowed_controllers' => array(
+                    $controllerName,
+                ),
+            ),
+        ));
+        $this->services->setAllowOverride(true);
+        $this->services->setService('Config', $config);
+        $this->loader = $this->services->get('ControllerLoader');
+
+        $testService = new \stdClass();
+        $this->services->setService('stdClass', $testService);
+        // invalid controller exception (because we're not getting a \Zend\Stdlib\DispatchableInterface after all)
+        $controller = $this->loader->get($controllerName);
+        $this->assertSame($testService, $controller->injectedValue);
     }
 }

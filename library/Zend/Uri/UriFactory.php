@@ -87,18 +87,24 @@ abstract class UriFactory
             $scheme = $defaultScheme;
         }
 
-        if ($scheme && isset(static::$schemeClasses[$scheme])) {
-            $class = static::$schemeClasses[$scheme];
-            $uri = new $class($uri);
-            if (! $uri instanceof Uri) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'class "%s" registered for scheme "%s" is not a subclass of Zend\Uri\Uri',
-                    $class,
-                    $scheme
-                ));
-            }
+        if ($scheme && ! isset(static::$schemeClasses[$scheme])) {
+        	throw new Exception\InvalidArgumentException(sprintf(
+        			'no class registered for scheme "%s"',
+        			$scheme
+        		));
         }
-
+        if ($scheme && isset(static::$schemeClasses[$scheme])) {
+	        $class = static::$schemeClasses[$scheme];
+	        $uri = new $class($uri);
+	        if (! $uri instanceof UriInterface) {
+	            throw new Exception\InvalidArgumentException(sprintf(
+	                'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
+	                $class,
+	                $scheme
+	            ));
+	        }
+        }
+        
         return $uri;
     }
 }

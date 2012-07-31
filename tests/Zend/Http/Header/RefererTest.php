@@ -56,7 +56,7 @@ class RefererTest extends \PHPUnit_Framework_TestCase
     {
         $refererHeader = Referer::fromString('Referer: /path/to');
         $uri = $refererHeader->uri();
-        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertInstanceOf('Zend\Uri\Uri', $uri);
         $this->assertFalse($uri->isAbsolute());
         $this->assertEquals('/path/to', $refererHeader->getUri());
     }

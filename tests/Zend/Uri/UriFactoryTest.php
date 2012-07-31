@@ -85,7 +85,7 @@ class UriFactoryTest extends \PHPUnit_Framework_TestCase
      * Test, that unknown Schemes will result in an exception
      * 
      * @param string $uri an uri with an unknown scheme
-     * @expectedException InvalidArgumentException
+     * @expectedException Zend\Uri\Exception\InvalidArgumentException
      * @dataProvider unknownSchemeThrowsExceptionProvider
      */
     public function testUnknownSchemeThrowsException($uri)

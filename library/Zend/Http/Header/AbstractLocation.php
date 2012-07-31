@@ -12,7 +12,6 @@ namespace Zend\Http\Header;
 
 use Zend\Uri\Exception as UriException;
 use Zend\Uri\UriInterface;
-use Zend\Uri\Http as HttpUri;
 use Zend\Uri\UriFactory;
 use Zend\Uri\Uri;
 
@@ -36,7 +35,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * URI for this header
      *
-     * @var HttpUri
+     * @var UriInterface
      */
     protected $uri = null;
 
@@ -69,7 +68,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * Set the URI/URL for this header, this can be a string or an instance of Zend\Uri\Http
      *
-     * @param string|HttpUri $uri
+     * @param string|UriInterface $uri
      * @return AbstractLocation
      * @throws Exception\InvalidArgumentException
      */
@@ -109,7 +108,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * Return the URI for this header as an instance of Zend\Uri\Http
      *
-     * @return HttpUri
+     * @return UriInterface
      */
     public function uri()
     {

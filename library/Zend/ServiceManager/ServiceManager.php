@@ -94,7 +94,7 @@ class ServiceManager implements ServiceLocatorInterface
     protected $retrieveFromPeeringManagerFirst = false;
 
     /**
-     * @var boolean Track whether not ot throw exceptions during create()
+     * @var bool Track whether not to throw exceptions during create()
      */
     protected $throwExceptionInCreate = true;
 
@@ -123,7 +123,7 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getAllowOverride()
     {
@@ -133,7 +133,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Set flag indicating whether services are shared by default
      *
-     * @param  boolean $shareByDefault
+     * @param  bool $shareByDefault
      * @return ServiceManager
      * @throws Exception\RuntimeException if allowOverride is false
      */
@@ -152,7 +152,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Are services shared by default?
      *
-     * @return boolean
+     * @return bool
      */
     public function shareByDefault()
     {
@@ -160,7 +160,7 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * @param  boolean $throwExceptionInCreate
+     * @param  bool $throwExceptionInCreate
      * @return ServiceManager
      */
     public function setThrowExceptionInCreate($throwExceptionInCreate)
@@ -170,7 +170,7 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getThrowExceptionInCreate()
     {
@@ -180,7 +180,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Set flag indicating whether to pull from peering manager before attempting creation
      *
-     * @param  boolean $retrieveFromPeeringManagerFirst
+     * @param  bool $retrieveFromPeeringManagerFirst
      * @return ServiceManager
      */
     public function setRetrieveFromPeeringManagerFirst($retrieveFromPeeringManagerFirst = true)
@@ -192,7 +192,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Should we retrieve from the peering manager prior to attempting to create a service?
      *
-     * @return boolean
+     * @return bool
      */
     public function retrieveFromPeeringManagerFirst()
     {
@@ -202,7 +202,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * @param  string  $name
      * @param  string  $invokableClass
-     * @param  boolean $shared
+     * @param  bool $shared
      * @throws Exception\InvalidServiceNameException
      */
     public function setInvokableClass($name, $invokableClass, $shared = true)
@@ -226,7 +226,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * @param  string                           $name
      * @param  string|FactoryInterface|callable $factory
-     * @param  boolean                          $shared
+     * @param  bool                          $shared
      * @throws Exception\InvalidServiceNameException
      */
     public function setFactory($name, $factory, $shared = true)
@@ -255,7 +255,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * @param  AbstractFactoryInterface|string $factory
-     * @param  boolean                         $topOfStack
+     * @param  bool                            $topOfStack
      * @throws Exception\InvalidArgumentException if the abstract factory is invalid
      */
     public function addAbstractFactory($factory, $topOfStack = true)
@@ -316,7 +316,7 @@ class ServiceManager implements ServiceLocatorInterface
      *
      * @param  string  $name
      * @param  mixed   $service
-     * @param  boolean $shared
+     * @param  bool    $shared
      * @return ServiceManager
      * @throws Exception\InvalidServiceNameException
      */
@@ -343,7 +343,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * @param  string $name
-     * @param  boolean $isShared
+     * @param  bool   $isShared
      * @return ServiceManager
      * @throws Exception\ServiceNotFoundException
      */
@@ -367,7 +367,7 @@ class ServiceManager implements ServiceLocatorInterface
      * Retrieve a registered instance
      *
      * @param  string  $cName
-     * @param  boolean $usePeeringServiceManagers
+     * @param  bool    $usePeeringServiceManagers
      * @return object|array
      */
     public function get($name, $usePeeringServiceManagers = true)
@@ -478,7 +478,7 @@ class ServiceManager implements ServiceLocatorInterface
      * Determine if we can create an instance.
      *
      * @param  string|array $name
-     * @return boolean
+     * @return bool
      */
     public function canCreate($name, $checkAbstractFactories = true)
     {
@@ -507,9 +507,9 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * @param  string|array  $name
-     * @param  boolean       $checkAbstractFactories
-     * @param  boolean       $usePeeringServiceManagers
-     * @return boolean
+     * @param  bool          $checkAbstractFactories
+     * @param  bool          $usePeeringServiceManagers
+     * @return bool
      */
     public function has($name, $checkAbstractFactories = true, $usePeeringServiceManagers = true)
     {
@@ -540,7 +540,7 @@ class ServiceManager implements ServiceLocatorInterface
      *
      * @param  string $cName
      * @param  string $rName
-     * @return boolean
+     * @return bool
      */
     public function canCreateFromAbstractFactory($cName, $rName)
     {
@@ -595,7 +595,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * @param  string $alias
-     * @return boolean
+     * @return bool
      */
     public function hasAlias($alias)
     {

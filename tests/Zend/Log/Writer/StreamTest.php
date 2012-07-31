@@ -111,4 +111,40 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains($expected, $contents);
     }
+
+    public function testAllowSpecifyingLogSeparator()
+    {
+        $stream = fopen('php://memory', 'w+');
+        $writer = new StreamWriter($stream);
+        $writer->setLogSeparator('::');
+
+        $fields = array('message' => 'message1');
+        $writer->write($fields);
+        $fields['message'] = 'message2';
+        $writer->write($fields);
+
+        rewind($stream);
+        $contents = stream_get_contents($stream);
+        fclose($stream);
+
+        $this->assertRegexp('/message1.*?::.*?message2/', $contents);
+        $this->assertNotContains(PHP_EOL, $contents);
+    }
+
+    public function testAllowsSpecifyingLogSeparatorAsConstructorArgument()
+    {
+        $writer = new StreamWriter('php://memory', 'w+', '::');
+        $this->assertEquals('::', $writer->getLogSeparator());
+    }
+
+    public function testAllowsSpecifyingLogSeparatorWithinArrayPassedToConstructor()
+    {
+        $options = array(
+            'stream'        => 'php://memory',
+            'mode'          => 'w+',
+            'log_separator' => '::',
+        );
+        $writer = new StreamWriter($options);
+        $this->assertEquals('::', $writer->getLogSeparator());
+    }
 }

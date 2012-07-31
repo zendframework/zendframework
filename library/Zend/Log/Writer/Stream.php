@@ -23,6 +23,13 @@ use Zend\Stdlib\ErrorHandler;
 class Stream extends AbstractWriter
 {
     /**
+     * Separator between log entries
+     *
+     * @var string
+     */
+    protected $logSeparator = PHP_EOL;
+
+    /**
      * Holds the PHP stream to log to.
      *
      * @var null|stream
@@ -34,19 +41,21 @@ class Stream extends AbstractWriter
      *
      * @param  string|resource|array|Traversable $streamOrUrl Stream or URL to open as a stream
      * @param  string|null $mode Mode, only applicable if a URL is given
+     * @param  null|string $logSeparator Log separator string
      * @return Stream
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function __construct($streamOrUrl, $mode = null)
+    public function __construct($streamOrUrl, $mode = null, $logSeparator = null)
     {
         if ($streamOrUrl instanceof Traversable) {
             $streamOrUrl = iterator_to_array($streamOrUrl);
         }
 
         if (is_array($streamOrUrl)) {
-            $mode        = isset($streamOrUrl['mode']) ? $streamOrUrl['mode'] : null;
-            $streamOrUrl = isset($streamOrUrl['stream']) ? $streamOrUrl['stream'] : null;
+            $mode         = isset($streamOrUrl['mode'])          ? $streamOrUrl['mode']          : null;
+            $logSeparator = isset($streamOrUrl['log_separator']) ? $streamOrUrl['log_separator'] : null;
+            $streamOrUrl  = isset($streamOrUrl['stream'])        ? $streamOrUrl['stream']        : null;
         }
 
         // Setting the default mode
@@ -80,6 +89,10 @@ class Stream extends AbstractWriter
             }
         }
 
+        if (null !== $logSeparator) {
+            $this->setLogSeparator($logSeparator);
+        }
+
         $this->formatter = new SimpleFormatter();
     }
 
@@ -92,7 +105,7 @@ class Stream extends AbstractWriter
      */
     protected function doWrite(array $event)
     {
-        $line = $this->formatter->format($event) . PHP_EOL;
+        $line = $this->formatter->format($event) . $this->logSeparator;
 
         ErrorHandler::start(E_WARNING);
         $result = fwrite($this->stream, $line);
@@ -100,6 +113,28 @@ class Stream extends AbstractWriter
         if (false === $result) {
             throw new Exception\RuntimeException("Unable to write to stream");
         }
+    }
+
+    /**
+     * Set log separator string
+     *
+     * @param  string $logSeparator
+     * @return Stream
+     */
+    public function setLogSeparator($logSeparator)
+    {
+        $this->logSeparator = (string) $logSeparator;
+        return $this;
+    }
+
+    /**
+     * Get log separator string
+     *
+     * @return string
+     */
+    public function getLogSeparator()
+    {
+        return $this->logSeparator;
     }
 
     /**

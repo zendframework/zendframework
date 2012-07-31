@@ -730,7 +730,26 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     public function testEncodeObjectImplementingIterator()
     {
-        $this->markTestIncomplete('Test is not yet finished.');
+        $iterator = new \ArrayIterator(array(
+            'foo' => 'bar',
+            'baz' => 5
+        ));
+        $target = '{"__className":"ArrayIterator","foo":"bar","baz":5}';
+
+        Json\Json::$useBuiltinEncoderDecoder = true;
+        $this->assertEquals($target, Json\Json::encode($iterator));
+    }
+
+    /**
+     * @group ZF-12347
+     */
+    public function testEncodeObjectImplementingIteratorAggregate()
+    {
+        $iterator = new TestAsset\TestIteratorAggregate();
+        $target = '{"__className":"ZendTest\\\\Json\\\\TestAsset\\\\TestIteratorAggregate","foo":"bar","baz":5}';
+
+        Json\Json::$useBuiltinEncoderDecoder = true;
+        $this->assertEquals($target, Json\Json::encode($iterator));
     }
 
     /**

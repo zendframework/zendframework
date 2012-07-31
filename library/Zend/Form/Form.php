@@ -547,15 +547,16 @@ class Form extends Fieldset implements FormInterface
     public function getInputFilter()
     {
         if ($this->object instanceof InputFilterAwareInterface) {
-            $filter = $this->object->getInputFilter();
-
-            if (null !== $this->baseFieldset) {
+            if (null == $this->baseFieldset) {
+                $this->filter = $this->object->getInputFilter();
+            } else {
                 $name = $this->baseFieldset->getName();
-                $filter = new InputFilter();
-                $filter->add($this->object->getInputFilter(), $name);
+                if (!$this->filter instanceof InputFilterInterface || !$this->filter->has($name)) {
+                    $filter = new InputFilter();
+                    $filter->add($this->object->getInputFilter(), $name);
+                    $this->filter = $filter;
+                }
             }
-
-            $this->filter = $filter;
         }
 
         if ($this->filter instanceof InputFilterInterface && $this->useInputFilterDefaults()) {

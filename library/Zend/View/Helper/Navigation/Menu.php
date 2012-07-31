@@ -134,7 +134,7 @@ class Menu extends AbstractHelper
      */
     public function escapeLabels($flag = true)
     {
-        $this->escapeLabels = $flag;
+        $this->escapeLabels = (bool) $flag;
         return $this;
     }
 

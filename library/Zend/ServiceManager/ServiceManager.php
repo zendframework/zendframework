@@ -99,6 +99,11 @@ class ServiceManager implements ServiceLocatorInterface
     protected $throwExceptionInCreate = true;
 
     /**
+     * @var array map of characters to be replaced through strtr
+     */
+    protected $canonicalNamesReplacements = array('-' => '', '_' => '', ' ' => '', '\\' => '', '/' => '');
+
+    /**
      * @param ConfigInterface $config
      */
     public function __construct(ConfigInterface $config = null)
@@ -641,10 +646,12 @@ class ServiceManager implements ServiceLocatorInterface
      */
     protected function canonicalizeName($name)
     {
-        if (!isset($this->canonicalNames[$name])) {
-            $this->canonicalNames[$name] = strtolower(str_replace(array('-', '_', ' ', '\\', '/'), '', $name));
+        if (isset($this->canonicalNames[$name])) {
+            return $this->canonicalNames[$name];
         }
-        return $this->canonicalNames[$name];
+
+        // this is just for performance instead of using str_replace
+        return $this->canonicalNames[$name] = strtolower(strtr($name, $this->canonicalNamesReplacements));
     }
 
     /**

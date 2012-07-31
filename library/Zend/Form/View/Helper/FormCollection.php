@@ -30,17 +30,18 @@ class FormCollection extends AbstractHelper
     protected $shouldWrap = true;
     
     /**
-     * The default view helper that is used to render sub elements.
+     * The name of the default view helper that is used to render sub elements.
      * 
      * @var string
      */
     protected $defaultSubHelper = 'form_row';
 
     /**
-     * @var FormRow
+     * The view helper used to render sub elements.
+     * 
+     * @var AbstractHelper
      */
-    protected $rowHelper;
-
+    protected $elementHelper;
 
     /**
      * Render a collection by iterating through all fieldsets and elements
@@ -178,19 +179,19 @@ class FormCollection extends AbstractHelper
      */
     protected function getElementHelper()
     {
-        if ($this->rowHelper) {
-            return $this->rowHelper;
+        if ($this->elementHelper) {
+            return $this->elementHelper;
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $this->rowHelper = $this->view->plugin($this->defaultSubHelper);
+            $this->elementHelper = $this->view->plugin($this->defaultSubHelper);
         }
 
-        if (!$this->rowHelper instanceof FormRow) {
-            $this->rowHelper = new FormRow();
+        if (!$this->elementHelper instanceof FormRow) {
+            $this->elementHelper = new FormRow();
         }
 
-        return $this->rowHelper;
+        return $this->elementHelper;
     }
     
     /**
@@ -199,9 +200,9 @@ class FormCollection extends AbstractHelper
      * @param FormRow $rowHelper The row helper to use.
      * @return FormCollection
      */
-    public function setElementHelper(FormRow $rowHelper)
+    public function setElementHelper(FormRow $elementHelper)
     {
-        $this->rowHelper = $rowHelper;
+        $this->elementHelper = $elementHelper;
         return $this;
     }
 }

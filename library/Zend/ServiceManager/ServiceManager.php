@@ -397,7 +397,8 @@ class ServiceManager implements ServiceLocatorInterface
 
         if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
             $instance = $this->retrieveFromPeeringManager($name);
-        } else {
+        }
+        if (!$instance) {
             if ($this->canCreate(array($cName, $rName))) {
                 $instance = $this->create(array($cName, $rName));
             } elseif ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {

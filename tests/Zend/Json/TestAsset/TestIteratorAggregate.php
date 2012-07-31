@@ -20,7 +20,8 @@ class TestIteratorAggregate implements \IteratorAggregate
         'baz' => 5
     );
 
-    public function getIterator() {
+    public function getIterator()
+    {
         return new \ArrayIterator($this->array);
     }
 }

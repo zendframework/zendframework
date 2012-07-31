@@ -65,7 +65,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             array('P2M',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-02-01T00:00:00Z', false),
             array('P2M',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1971-05-01T00:00:00Z', true ),
             array('P1M',  'Y-m',             '1970-01',              '1970-10',              true ),
-            array('P2M',  'Y-m',             '1970-01',              '1970-11',              true ),
+            array('P2M',  '!Y-m',            '1970-01',              '1970-11',              true ),
             array('P2M',  'Y-m',             '1970-01',              '1970-10',              false),
             // years
             array('P1Y',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1973-01-01T00:00:00Z', true ),

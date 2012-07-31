@@ -35,7 +35,7 @@ class FormCollection extends AbstractHelper
      * 
      * @var string
      */
-    protected $defaultElementHelper = 'form_row';
+    protected $defaultElementHelper = 'formrow';
 
     /**
      * The view helper used to render sub elements.

@@ -63,6 +63,11 @@ class FormTest extends TestCase
         return $product;
     }
 
+    public function populateHydratorStrategyForm()
+    {
+        $this->form->add(new Element('entities'));
+    }
+
     public function populateForm()
     {
         $this->form->add(new Element('foo'));
@@ -916,5 +921,39 @@ class FormTest extends TestCase
         ));
         $this->form->setData($dataWithoutCollection);
         $this->assertTrue($this->form->isValid());
+    }
+
+    public function testExtractDataHydratorStrategy()
+    {
+        $this->populateHydratorStrategyForm();
+        
+        $hydrator = new Hydrator\ObjectProperty();
+        $hydrator->addStrategy('entities', new TestAsset\HydratorStrategy());
+        $this->form->setHydrator($hydrator);
+        
+        $model = new TestAsset\HydratorStrategyEntityA();
+        $this->form->bind($model);
+        
+        $validSet = array(
+            'entities' => array(
+                111, 
+                333
+            ),
+        );
+        
+        $this->form->setData($validSet);
+        $this->form->isValid();
+        
+        $data = $this->form->getData(Form::VALUES_AS_ARRAY);
+        $this->assertEquals($validSet, $data);
+        
+        $entities = $model->getEntities();
+        $this->assertCount(2, $entities);
+        
+        $this->assertEquals(111, $entities[0]->getField1());
+        $this->assertEquals(333, $entities[1]->getField1());
+        
+        $this->assertEquals('AAA', $entities[0]->getField2());
+        $this->assertEquals('CCC', $entities[1]->getField2());
     }
 }

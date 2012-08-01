@@ -10,6 +10,8 @@
 
 namespace Zend\Stdlib\Hydrator;
 
+use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+
 /**
  * @category   Zend
  * @package    Zend_Stdlib

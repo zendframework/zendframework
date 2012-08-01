@@ -18,6 +18,10 @@ recommend testing your production applications against it.
  - REALLY removed Zend\Markup from the repository (we reported it
    removed for RC1, and had in fact created the repository for it, but
    not removed it from the zf2 repository).
+ - Addition of Hydrator strategies, to allow easier hydration of
+   composed objects. The HydratorInterface remains unchanged, but the
+   shipped hydrators now all implement both that and the new
+   StrategyEnabledInterface.
 
 Almost *XXX* pull requests for a variety of features and bugfixes were handled
 since beta5!

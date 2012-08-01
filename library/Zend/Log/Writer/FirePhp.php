@@ -13,6 +13,8 @@ namespace Zend\Log\Writer;
 use FirePHP as FirePHPService;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
+use Zend\Log\Writer\FirePhp\FirePhpBridge;
+use Zend\Log\Writer\FirePhp\FirePhpInterface;
 
 /**
  * @category   Zend
@@ -22,21 +24,21 @@ use Zend\Log\Logger;
 class FirePhp extends AbstractWriter
 {
     /**
-     * The instance of FirePhp that is used to log messages to.
+     * A FirePhpInterface instance that is used to log messages to.
      *
-     * @var FirePhp\FirePhpInterface
+     * @var FirePhpInterface
      */
     protected $firephp;
 
     /**
      * Initializes a new instance of this class.
      *
-     * @param null|FirePhp\FirePhpInterface $instance An instance of FirePhpInterface
+     * @param null|FirePhpInterface $instance An instance of FirePhpInterface
      *        that should be used for logging
      */
-    public function __construct(FirePhp\FirePhpInterface $instance = null)
+    public function __construct(FirePhpInterface $instance = null)
     {
-        $this->firephp   = $instance;
+        $this->firephp   = $instance === null ? $this->getFirePhp() : $instance;
         $this->formatter = new FirePhpFormatter();
     }
 
@@ -78,31 +80,31 @@ class FirePhp extends AbstractWriter
     }
 
     /**
-     * Gets the FirePhp instance that is used for logging.
+     * Gets the FirePhpInterface instance that is used for logging.
      *
-     * @return FirePhp\FirePhpInterface
+     * @return FirePhpInterface
      */
     public function getFirePhp()
     {
         // Remember: class names in strings are absolute; thus the class_exists
         // here references the canonical name for the FirePHP class
-        if (!$this->firephp instanceof FirePhp\FirePhpInterface
+        if (!$this->firephp instanceof FirePhpInterface
             && class_exists('FirePHP')
         ) {
             // FirePHPService is an alias for FirePHP; otherwise the class
             // names would clash in this file on this line.
-            $this->setFirePhp(new FirePhp\FirePhpBridge(new FirePHPService()));
+            $this->setFirePhp(new FirePhpBridge(new FirePHPService()));
         }
         return $this->firephp;
     }
 
     /**
-     * Sets the FirePhp instance that is used for logging.
+     * Sets the FirePhpInterface instance that is used for logging.
      *
-     * @param  FirePhp\FirePhpInterface $instance The FirePhp instance to set.
+     * @param  FirePhpInterface $instance A FirePhpInterface instance to set.
      * @return FirePhp
      */
-    public function setFirePhp(FirePhp\FirePhpInterface $instance)
+    public function setFirePhp(FirePhpInterface $instance)
     {
         $this->firephp = $instance;
         return $this;

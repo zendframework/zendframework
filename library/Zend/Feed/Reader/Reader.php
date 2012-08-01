@@ -269,8 +269,10 @@ class Reader
     public static function importString($string)
     {
         $libxml_errflag = libxml_use_internal_errors(true);
+        libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadXML($string);
+        libxml_disable_entity_loader(false);
         libxml_use_internal_errors($libxml_errflag);
 
         if (!$status) {
@@ -336,8 +338,10 @@ class Reader
         }
         $responseHtml = $response->getBody();
         $libxml_errflag = libxml_use_internal_errors(true);
+        //libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadHTML($responseHtml);
+        //libxml_disable_entity_loader(false);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
             // Build error message

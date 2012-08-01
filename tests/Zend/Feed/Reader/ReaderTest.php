@@ -261,6 +261,14 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Reader\Reader::isRegistered('JungleBooks'));
     }
 
+    public function testXxePreventionOnFeedParsing()
+    {
+        $string = file_get_contents($this->_feedSamplePath.'/Reader/xxe-atom10.xml');
+        $string = str_replace('XXE_URI', $this->_feedSamplePath.'/Reader/xxe-info.txt', $string);
+        $feed = Reader\Reader::importString($string);
+        $this->assertEquals('info:', $feed->getTitle());
+    }
+
     protected function _getTempDirectory()
     {
         $tmpdir = array();

@@ -338,10 +338,10 @@ class Reader
         }
         $responseHtml = $response->getBody();
         $libxml_errflag = libxml_use_internal_errors(true);
-        //libxml_disable_entity_loader(true);
+        libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadHTML($responseHtml);
-        //libxml_disable_entity_loader(false);
+        libxml_disable_entity_loader(false);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
             // Build error message
@@ -375,8 +375,10 @@ class Reader
         } elseif(is_string($feed) && !empty($feed)) {
             ErrorHandler::start(E_NOTICE|E_WARNING);
             ini_set('track_errors', 1);
+            libxml_disable_entity_loader(true);
             $dom = new DOMDocument;
             $status = $dom->loadXML($feed);
+            libxml_disable_entity_loader(false);
             ini_restore('track_errors');
             ErrorHandler::stop();
             if (!$status) {

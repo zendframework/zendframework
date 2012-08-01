@@ -57,7 +57,10 @@ class ViewTest extends TestCase
         $this->model->setVariables($variables);
         $this->view->render($this->model);
 
-        $this->assertEquals(var_export($variables, true), $this->result->content);
+        foreach ($variables as $key => $value) {
+            $expect = sprintf("'%s' => '%s',", $key, $value);
+            $this->assertContains($expect, $this->result->content);
+        }
     }
 
     public function testRendersViewModelWithChildren()

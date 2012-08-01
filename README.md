@@ -22,6 +22,10 @@ recommend testing your production applications against it.
    composed objects. The HydratorInterface remains unchanged, but the
    shipped hydrators now all implement both that and the new
    StrategyEnabledInterface.
+ - Zend\View\Model\ViewModel::setVariables() no longer overwrites the
+   internal variables container by default. If you wish to do so, it
+   does provide an optional $overwrite argument; passing a boolean true
+   will cause the method to overwrite the container.
 
 Almost *XXX* pull requests for a variety of features and bugfixes were handled
 since beta5!

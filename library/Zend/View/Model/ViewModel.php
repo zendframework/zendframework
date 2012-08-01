@@ -84,7 +84,9 @@ class ViewModel implements ModelInterface
         if (null === $variables) {
             $variables = new ViewVariables();
         }
-        $this->setVariables($variables);
+
+        // Initializing the variables container
+        $this->setVariables($variables, true);
 
         if (null !== $options) {
             $this->setOptions($options);
@@ -246,29 +248,31 @@ class ViewModel implements ModelInterface
      * Can be an array or a Traversable + ArrayAccess object.
      *
      * @param  array|ArrayAccess&Traversable $variables
+     * @param  bool $overwrite Whether or not to overwrite the internal container with $variables
      * @return ViewModel
      */
-    public function setVariables($variables)
+    public function setVariables($variables, $overwrite = false)
     {
-        // Assumption is that renderers can handle arrays or ArrayAccess objects
-        if ($variables instanceof ArrayAccess && $variables instanceof Traversable) {
-            $this->variables = $variables;
-            return $this;
-        }
-
-        if ($variables instanceof Traversable) {
-            $variables = ArrayUtils::iteratorToArray($variables);
-        }
-
-        if (!is_array($variables)) {
+        if (!is_array($variables) && !$variables instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s: expects an array, or Traversable ArrayAccess argument; received "%s"',
+                '%s: expects an array, or Traversable argument; received "%s"',
                 __METHOD__,
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
         }
 
-        $this->variables = $variables;
+        if ($overwrite) {
+            if (!is_object($variables) && !$variables instanceof ArrayAccess) {
+                $variables = ArrayUtils::iteratorToArray($variables);
+            }
+            $this->variables = $variables;
+            return $this;
+        }
+
+        foreach ($variables as $key => $value) {
+            $this->setVariable($key, $value);
+        }
+
         return $this;
     }
 

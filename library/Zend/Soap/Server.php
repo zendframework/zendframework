@@ -660,11 +660,12 @@ class Server implements \Zend\Server\Server
             } else {
                 $xml = $request;
             }
-
+            libxml_disable_entity_loader(true);
             $dom = new DOMDocument();
             if(strlen($xml) == 0 || !$dom->loadXML($xml)) {
                 throw new Exception\InvalidArgumentException('Invalid XML');
             }
+            libxml_disable_entity_loader(false);
         }
         $this->request = $xml;
         return $this;

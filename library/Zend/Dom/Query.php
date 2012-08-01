@@ -233,6 +233,7 @@ class Query
 
         $encoding = $this->getEncoding();
         libxml_use_internal_errors(true);
+        libxml_disable_entity_loader(true);
         if (null === $encoding) {
             $domDoc = new DOMDocument('1.0');
         } else {
@@ -255,6 +256,7 @@ class Query
             $this->documentErrors = $errors;
             libxml_clear_errors();
         }
+        libxml_disable_entity_loader(false);
         libxml_use_internal_errors(false);
 
         if (!$success) {

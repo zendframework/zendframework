@@ -89,13 +89,14 @@ class Wsdl
                     xmlns:xsd='http://www.w3.org/2001/XMLSchema'
                     xmlns:soap-enc='http://schemas.xmlsoap.org/soap/encoding/'
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
+        libxml_disable_entity_loader(true);
         $this->dom = new DOMDocument();
         if (!$this->dom->loadXML($wsdl)) {
             throw new Exception\RuntimeException('Unable to create DomDocument');
         } else {
             $this->wsdl = $this->dom->documentElement;
         }
-
+        libxml_disable_entity_loader(false);
         $this->setComplexTypeStrategy($strategy ?: new Wsdl\ComplexTypeStrategy\DefaultComplexType);
     }
 
@@ -135,8 +136,10 @@ class Wsdl
             // @todo: This is the worst hack ever, but its needed due to design and non BC issues of WSDL generation
             $xml = $this->dom->saveXML();
             $xml = str_replace($oldUri, $uri, $xml);
+            libxml_disable_entity_loader(true);
             $this->dom = new DOMDocument();
             $this->dom->loadXML($xml);
+            libxml_disable_entity_loader(false);
         }
 
         return $this;

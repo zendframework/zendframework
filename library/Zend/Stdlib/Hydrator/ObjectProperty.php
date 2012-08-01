@@ -32,15 +32,14 @@ class ObjectProperty extends AbstractHydrator
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
 
         $data = get_object_vars($object);
-		array_walk($data, function(&$value, $name) {
-			$value = $this->extractValue($name, $value);
-		});
+        array_walk($data, function(&$value, $name) {
+            $value = $this->extractValue($name, $value);
+        });
         return $data;
     }
 
@@ -58,8 +57,7 @@ class ObjectProperty extends AbstractHydrator
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
         foreach ($data as $property => $value) {

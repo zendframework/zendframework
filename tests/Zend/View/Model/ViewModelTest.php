@@ -67,11 +67,11 @@ class ViewModelTest extends TestCase
         $this->assertEquals(array('foo' => 'baz'), $model->getVariables());
     }
 
-    public function testSetVariablesOverwritesAllPreviouslyStored()
+    public function testSetVariablesMergesWithPreviouslyStoredVariables()
     {
         $model = new ViewModel(array('foo' => 'bar', 'bar' => 'baz'));
         $model->setVariables(array('bar' => 'BAZBAT'));
-        $this->assertEquals(array('bar' => 'BAZBAT'), $model->getVariables());
+        $this->assertEquals(array('foo' => 'bar', 'bar' => 'BAZBAT'), $model->getVariables());
     }
 
     public function testCanSetOptionsSingly()
@@ -212,11 +212,10 @@ class ViewModelTest extends TestCase
         $this->assertEquals('foo', $child->captureTo());
     }
 
-    public function testAllowsPassingViewVariablesContainerAsVariables()
+    public function testAllowsPassingViewVariablesContainerAsVariablesToConstructor()
     {
         $variables = new ViewVariables();
-        $model     = new ViewModel();
-        $model->setVariables($variables);
+        $model     = new ViewModel($variables);
         $this->assertSame($variables, $model->getVariables());
     }
 
@@ -243,7 +242,7 @@ class ViewModelTest extends TestCase
         $this->assertTrue(isset($model->bar));
         $this->assertEquals('baz', $model->bar);
         $variables = $model->getVariables();
-        $this->assertArrayHasKey('bar', $variables);
+        $this->assertTrue(isset($variables['bar']));
         $this->assertEquals('baz', $variables['bar']);
     }
 }

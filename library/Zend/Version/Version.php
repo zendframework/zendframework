@@ -8,7 +8,7 @@
  * @package   Zend_Version.php
  */
 
-namespace Zend;
+namespace Zend\Version;
 
 use Zend\Json\Json;
 

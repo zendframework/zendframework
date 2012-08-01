@@ -11,6 +11,7 @@
 namespace Zend\Stdlib\Hydrator;
 
 use ArrayObject;
+use Zend\Stdlib\Hydrator\StrategyEnabledInterface;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
 /**
@@ -18,7 +19,7 @@ use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-abstract class AbstractHydrator implements HydratorInterface
+abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInterface
 {
     /**
      * The list with strategies that this hydrator has.

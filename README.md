@@ -4,14 +4,14 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0rc2-dev*
+*Zend Framework 2.0.0rc2*
 
 This is the second release candidate for 2.0.0. We will be releasing RCs
 on a weekly basis until we feel all critical issues are addressed. At
 this time, we anticipate no API changes before the stable release, and
 recommend testing your production applications against it.
 
-25 July 2012
+01 August 2012
 
 ### UPDATES IN RC2
 
@@ -26,8 +26,44 @@ recommend testing your production applications against it.
    internal variables container by default. If you wish to do so, it
    does provide an optional $overwrite argument; passing a boolean true
    will cause the method to overwrite the container.
+ - Zend\Validator\Iban was expanded to include Single Euro Payments Area
+   (SEPA) support
+ - Zend\Mvc\Controller\ControllerManager now allows fetching controllers
+   via DI. This is done via a new DiStrict abstract service factory,
+   which only fetches services in a provided whitelist.
+ - Zend\Json\Encoder now accepts IteratorAggregates.
+ - Controller, Filter, and Validator plugin managers were fixed to no
+   longer share instances.
+ - Zend\Form was updated to only bind values that were actually provided
+   in the data. Additionally, if a Collection has no entries, it will be
+   removed from the validation group. Finally, elements with the name
+   "0" (zero) are now allowed.
+ - Zend\View\Helper\Doctype was updated to respond true to isRdfa() when
+   the doctype is an HTML5 variant.
+ - Zend\Navigation was fixed to ensure the navigation services is passed
+   correctly between helpers. Additionally, a bug in Mvc::isActive() was
+   fixed to ensure routes were properly seeded.
+ - The GreaterThan and LessThan validators were updated to pass
+   constructor arguments to the parents, for consistency with other
+   validators.
+ - Log formatters are now responsible for formatting DateTime values in
+   the log events.
+ - The Console ViewManager was updated to extend from the standard HTTP
+   version, and to use Config instead of Configuration, fixing several
+   minor issues.
+ - Zend\Version was moved to Zend\Version\Version (for consistency)
+ - Zend\Debug was moved to Zend\Debug\Debug (for consistency)
+ - All protected members that still had underscore prefixes were
+   refactored to remove that prefix.
+ - Identified and fixed all CS issues as identified by php-cs-fixer, and
+   added php-cs-fixer to the Travis-CI build tasks.
+ - ServiceManagerAwareInterface was removed from all but the most
+   necessary locations, and replaced with ServiceLocatorAwareInterface.
+ - Zend\Feed\Reader, Zend\Dom, Zend\Serializer\Wddx, and Zend\Soap were
+   not properly protecting against XXE injections; these situations have
+   now been corrected.
 
-Almost *XXX* pull requests for a variety of features and bugfixes were handled
+Around *70* pull requests for a variety of features and bugfixes were handled
 since beta5!
 
 ### SYSTEM REQUIREMENTS

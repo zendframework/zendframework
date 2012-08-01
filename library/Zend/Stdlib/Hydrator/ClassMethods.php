@@ -106,10 +106,7 @@ class ClassMethods extends AbstractHydrator
             }
             $method = 'set' . ucfirst($property);
             if (method_exists($object, $method)) {
-                if ($this->hasStrategy($property)) {
-                    $strategy = $this->getStrategy($property);
-                    $value = $strategy->hydrate($value);
-                }
+                $value = $this->hydrateValue($property, $value);
 
                 $object->$method($value);
             }

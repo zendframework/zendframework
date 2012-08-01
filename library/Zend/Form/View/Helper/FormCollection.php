@@ -10,6 +10,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use RuntimeException;
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
@@ -28,12 +29,20 @@ class FormCollection extends AbstractHelper
      * @var boolean
      */
     protected $shouldWrap = true;
+    
+    /**
+     * The name of the default view helper that is used to render sub elements.
+     * 
+     * @var string
+     */
+    protected $defaultElementHelper = 'formrow';
 
     /**
-     * @var FormRow
+     * The view helper used to render sub elements.
+     * 
+     * @var AbstractHelper
      */
-    protected $rowHelper;
-
+    protected $elementHelper;
 
     /**
      * Render a collection by iterating through all fieldsets and elements
@@ -52,7 +61,7 @@ class FormCollection extends AbstractHelper
         $markup = '';
         $templateMarkup = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $rowHelper = $this->getRowHelper();
+        $elementHelper = $this->getElementHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
             $elementOrFieldset = $element->getTemplateElement();
@@ -60,7 +69,7 @@ class FormCollection extends AbstractHelper
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $templateMarkup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $rowHelper($elementOrFieldset);
+                $templateMarkup .= $elementHelper($elementOrFieldset);
             }
         }
 
@@ -68,7 +77,7 @@ class FormCollection extends AbstractHelper
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $markup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $markup .= $rowHelper($elementOrFieldset);
+                $markup .= $elementHelper($elementOrFieldset);
             }
         }
 
@@ -141,26 +150,61 @@ class FormCollection extends AbstractHelper
     {
         return $this->shouldWrap();
     }
+    
+    /**
+     * Gets the name of the view helper that should be used to render sub elements.
+     * 
+     * @return string
+     */
+    public function getDefaultElementHelper()
+    {
+        return $this->defaultElementHelper;
+    }
+    
+    /**
+     * Sets the name of the view helper that should be used to render sub elements.
+     * 
+     * @param string $defaultSubHelper The name of the view helper to set.
+     * @return FormCollection
+     */
+    public function setDefaultElementHelper($defaultSubHelper)
+    {
+        $this->defaultElementHelper = $defaultSubHelper;
+        return $this;
+    }
 
     /**
      * Retrieve the FormRow helper
      *
      * @return FormRow
      */
-    protected function getRowHelper()
+    protected function getElementHelper()
     {
-        if ($this->rowHelper) {
-            return $this->rowHelper;
+        if ($this->elementHelper) {
+            return $this->elementHelper;
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $this->rowHelper = $this->view->plugin('form_row');
+            $this->elementHelper = $this->view->plugin($this->getDefaultElementHelper());
         }
 
-        if (!$this->rowHelper instanceof FormRow) {
-            $this->rowHelper = new FormRow();
+        if (!$this->elementHelper instanceof AbstractHelper) {
+            // @todo Ideally the helper should implement an interface.
+            throw new RuntimeException('Invalid element helper set in FormCollection. The helper must be an instance of AbstractHelper.');
         }
 
-        return $this->rowHelper;
+        return $this->elementHelper;
+    }
+    
+    /**
+     * Sets the row helper that should be used by this collection.
+     * 
+     * @param FormRow $rowHelper The row helper to use.
+     * @return FormCollection
+     */
+    public function setElementHelper(AbstractHelper $elementHelper)
+    {
+        $this->elementHelper = $elementHelper;
+        return $this;
     }
 }

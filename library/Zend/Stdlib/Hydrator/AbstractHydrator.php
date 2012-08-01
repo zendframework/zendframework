@@ -23,22 +23,22 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
 {
     /**
      * The list with strategies that this hydrator has.
-     * 
+     *
      * @var ArrayObject
      */
     protected $strategies;
 
     /**
-     * Initializes a new instance of this class. 
+     * Initializes a new instance of this class.
      */
     public function __construct()
     {
         $this->strategies = new ArrayObject();
     }
-    
+
     /**
      * Gets the strategy with the given name.
-     * 
+     *
      * @param string $name The name of the strategy to get.
      * @return StrategyInterface
      */
@@ -46,10 +46,10 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     {
         return $this->strategies[$name];
     }
-    
+
     /**
      * Checks if the strategy with the given name exists.
-     * 
+     *
      * @param string $name The name of the strategy to check for.
      * @return bool
      */
@@ -57,10 +57,10 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     {
         return array_key_exists($name, $this->strategies);
     }
-    
+
     /**
      * Adds the given strategy under the given name.
-     * 
+     *
      * @param string $name The name of the strategy to register.
      * @param StrategyInterface $strategy The strategy to register.
      * @return HydratorInterface
@@ -70,10 +70,10 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
         $this->strategies[$name] = $strategy;
         return $this;
     }
-    
+
     /**
      * Removes the strategy with the given name.
-     * 
+     *
      * @param string $name The name of the strategy to remove.
      * @return HydratorInterface
      */
@@ -82,10 +82,10 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
         unset($this->strategies[$name]);
         return $this;
     }
-    
+
     /**
      * Converts a value for extraction. If no strategy exists the plain value is returned.
-     * 
+     *
      * @param string $name The name of the strategy to use.
      * @param mixed $value The value that should be converted.
      * @return mixed
@@ -98,10 +98,10 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
         }
         return $value;
     }
-    
+
     /**
      * Converts a value for hydration. If no strategy exists the plain value is returned.
-     * 
+     *
      * @param string $name The name of the strategy to use.
      * @param mixed $value The value that should be converted.
      * @return mixed

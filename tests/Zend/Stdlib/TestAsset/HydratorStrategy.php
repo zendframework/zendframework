@@ -16,11 +16,11 @@ class HydratorStrategy extends DefaultStrategy
 {
     /**
      * A simulated storage device which is just an array with Car objects.
-     * 
+     *
      * @var array
      */
     private $simulatedStorageDevice;
-    
+
     public function __construct()
     {
         $this->simulatedStorageDevice = array();
@@ -28,7 +28,7 @@ class HydratorStrategy extends DefaultStrategy
         $this->simulatedStorageDevice[] = new HydratorStrategyEntityB(222, 'BBB');
         $this->simulatedStorageDevice[] = new HydratorStrategyEntityB(333, 'CCC');
     }
-    
+
     public function extract($value)
     {
         $result = array();
@@ -37,7 +37,7 @@ class HydratorStrategy extends DefaultStrategy
         }
         return $result;
     }
-    
+
     public function hydrate($value)
     {
         $result = $value;
@@ -49,7 +49,7 @@ class HydratorStrategy extends DefaultStrategy
         }
         return $result;
     }
-    
+
     private function findEntity($field1)
     {
         $result = null;

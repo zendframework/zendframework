@@ -33,7 +33,7 @@ class Reflection extends AbstractHydrator
         $result = array();
         foreach(self::getReflProperties($object) as $property) {
             $propertyName = $property->getName();
-            
+
             $value = $property->getValue($object);
             $result[$propertyName] = $this->extractValue($propertyName, $value);
         }

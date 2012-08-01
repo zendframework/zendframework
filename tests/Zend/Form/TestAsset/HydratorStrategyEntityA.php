@@ -19,7 +19,7 @@ class HydratorStrategyEntityA implements InputFilterAwareInterface
 {
     public $entities; // public to make testing easier!
     private $inputFilter; // used to test forms
-    
+
     public function __construct()
     {
         $this->entities = array();
@@ -46,14 +46,14 @@ class HydratorStrategyEntityA implements InputFilterAwareInterface
             $input = new Input();
             $input->setName('entities');
             $input->setRequired(false);
-            
+
             $this->inputFilter = new RealInputFilter();
             $this->inputFilter->add($input);
         }
 
         return $this->inputFilter;
     }
-    
+
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;

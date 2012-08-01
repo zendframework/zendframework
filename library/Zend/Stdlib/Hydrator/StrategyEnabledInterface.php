@@ -21,7 +21,7 @@ interface StrategyEnabledInterface
 {
     /**
      * Adds the given strategy under the given name.
-     * 
+     *
      * @param string $name The name of the strategy to register.
      * @param StrategyInterface $strategy The strategy to register.
      * @return HydratorInterface
@@ -30,7 +30,7 @@ interface StrategyEnabledInterface
 
     /**
      * Gets the strategy with the given name.
-     * 
+     *
      * @param string $name The name of the strategy to get.
      * @return StrategyInterface
      */
@@ -38,7 +38,7 @@ interface StrategyEnabledInterface
 
     /**
      * Checks if the strategy with the given name exists.
-     * 
+     *
      * @param string $name The name of the strategy to check for.
      * @return bool
      */
@@ -46,7 +46,7 @@ interface StrategyEnabledInterface
 
     /**
      * Removes the strategy with the given name.
-     * 
+     *
      * @param string $name The name of the strategy to remove.
      * @return HydratorInterface
      */

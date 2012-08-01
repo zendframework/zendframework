@@ -205,6 +205,19 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::update
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::updateWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeUpdate
+     */
+    public function testUpdateWithNoCriteria()
+    {
+        $mockUpdate = $this->mockSql->update();
+
+        $affectedRows = $this->table->update(array('foo' => 'bar'));
+        $this->assertEquals(5, $affectedRows);
+    }
+
+    /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::delete
      * @covers Zend\Db\TableGateway\AbstractTableGateway::deleteWith
      * @covers Zend\Db\TableGateway\AbstractTableGateway::executeDelete

@@ -38,12 +38,9 @@ class ObjectProperty extends AbstractHydrator
         }
 
         $data = get_object_vars($object);
-        foreach ($data as $name => $value) {
-            if ($this->hasStrategy($name)) {
-                $strategy = $this->getStrategy($name);
-                $data[$name] = $strategy->extract($value);
-            }
-        }
+		array_walk($data, function(&$value, $name) {
+			$value = $this->extractValue($name, $value);
+		});
         return $data;
     }
 
@@ -66,11 +63,7 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
         foreach ($data as $property => $value) {
-            if ($this->hasStrategy($property)) {
-                $strategy = $this->getStrategy($property);
-                $value = $strategy->hydrate($value);
-            }
-            $object->$property = $value;
+            $object->$property = $this->hydrateValue($property, $value);
         }
         return $object;
     }

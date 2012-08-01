@@ -41,4 +41,22 @@ abstract class AbstractHydrator implements HydratorInterface
     {
         $this->strategies[$name] = $strategy;
     }
+    
+    public function extractValue($name, $value)
+    {
+        if ($this->hasStrategy($name)) {
+            $strategy = $this->getStrategy($name);
+            $value = $strategy->extract($value);
+        }
+        return $value;
+    }
+    
+    public function hydrateValue($name, $value)
+    {
+        if ($this->hasStrategy($name)) {
+            $strategy = $this->getStrategy($name);
+            $value = $strategy->hydrate($value);
+        }
+        return $value;
+    }
 }

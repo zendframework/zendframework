@@ -36,19 +36,12 @@ class ArraySerializable extends AbstractHydrator
                 __METHOD__
             ));
         }
+        
         $data = $object->getArrayCopy();
-        
-        $result = array();
-        foreach ($data as $name => $value) {
-            if ($this->hasStrategy($name)) {
-                $strategy = $this->getStrategy($name);
-                $value = $strategy->extract($value);
-            }
-            
-            $result[$name] = $value;
-        }
-        
-        return $result;
+		array_walk($data, function(&$value, $name) {
+			$value = $this->extractValue($name, $value);
+		});
+        return $data;
     }
 
     /**
@@ -64,19 +57,14 @@ class ArraySerializable extends AbstractHydrator
      */
     public function hydrate(array $data, $object)
     {
-        $hydrationData = array();
-        foreach ($data as $name => $value) {
-            if ($this->hasStrategy($name)) {
-                $strategy = $this->getStrategy($name);
-                $value = $strategy->hydrate($value);
-            }
-            $hydrationData[$name] = $value;
-        }
+		array_walk($data, function(&$value, $name) {
+			$value = $this->hydrateValue($name, $value);
+		});
         
         if (is_callable(array($object, 'exchangeArray'))) {
-            $object->exchangeArray($hydrationData);
+            $object->exchangeArray($data);
         } elseif (is_callable(array($object, 'populate'))) {
-            $object->populate($hydrationData);
+            $object->populate($data);
         } else {
             throw new Exception\BadMethodCallException(sprintf(
                 '%s expects the provided object to implement exchangeArray() or populate()',

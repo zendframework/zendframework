@@ -48,8 +48,7 @@ class ClassMethods extends AbstractHydrator
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
 
@@ -59,11 +58,11 @@ class ClassMethods extends AbstractHydrator
         };
         $attributes = array();
         $methods = get_class_methods($object);
-        foreach($methods as $method) {
-            if(preg_match('/^get[A-Z]\w*/', $method)) {
+        foreach ($methods as $method) {
+            if (preg_match('/^get[A-Z]\w*/', $method)) {
                 // setter verification
                 $setter = preg_replace('/^get/', 'set', $method);
-                if(!in_array($setter, $methods)) {
+                if (!in_array($setter, $methods)) {
                     continue;
                 }
                 $attribute = substr($method, 3);
@@ -92,8 +91,7 @@ class ClassMethods extends AbstractHydrator
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
 
@@ -112,7 +110,7 @@ class ClassMethods extends AbstractHydrator
                     $strategy = $this->getStrategy($property);
                     $value = $strategy->hydrate($value);
                 }
-                
+
                 $object->$method($value);
             }
         }

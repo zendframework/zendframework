@@ -67,7 +67,7 @@ class ArraySerializable extends AbstractHydrator
             $object->populate($data);
         } else {
             throw new Exception\BadMethodCallException(sprintf(
-            '%s expects the provided object to implement exchangeArray() or populate()', __METHOD__
+                '%s expects the provided object to implement exchangeArray() or populate()', __METHOD__
             ));
         }
         return $object;

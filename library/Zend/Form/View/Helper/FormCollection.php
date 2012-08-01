@@ -29,17 +29,17 @@ class FormCollection extends AbstractHelper
      * @var boolean
      */
     protected $shouldWrap = true;
-    
+
     /**
      * The name of the default view helper that is used to render sub elements.
-     * 
+     *
      * @var string
      */
     protected $defaultElementHelper = 'formrow';
 
     /**
      * The view helper used to render sub elements.
-     * 
+     *
      * @var AbstractHelper
      */
     protected $elementHelper;
@@ -150,20 +150,20 @@ class FormCollection extends AbstractHelper
     {
         return $this->shouldWrap();
     }
-    
+
     /**
      * Gets the name of the view helper that should be used to render sub elements.
-     * 
+     *
      * @return string
      */
     public function getDefaultElementHelper()
     {
         return $this->defaultElementHelper;
     }
-    
+
     /**
      * Sets the name of the view helper that should be used to render sub elements.
-     * 
+     *
      * @param string $defaultSubHelper The name of the view helper to set.
      * @return FormCollection
      */
@@ -195,10 +195,10 @@ class FormCollection extends AbstractHelper
 
         return $this->elementHelper;
     }
-    
+
     /**
      * Sets the row helper that should be used by this collection.
-     * 
+     *
      * @param FormRow $rowHelper The row helper to use.
      * @return FormCollection
      */

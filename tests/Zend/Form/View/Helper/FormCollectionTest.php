@@ -99,18 +99,18 @@ class FormCollectionTest extends TestCase
         $this->assertContains('fieldsets[1][nested_fieldset][anotherField]', $markup);
     }
 
-    public function testRenderWithDefaultHelper()
+    public function testRenderWithCustomHelper()
     {
         $form = $this->getForm();
-        
+
         $collection = $form->get('colors');
         $collection->setShouldCreateTemplate(false);
 
         $elementHelper = new CustomViewHelper();
         $elementHelper->setView($this->renderer);
-        
+
         $markup = $this->helper->setElementHelper($elementHelper)->render($collection);
-        
+
         $this->assertContains('id="customcolors0"', $markup);
         $this->assertContains('id="customcolors1"', $markup);
     }

@@ -20,15 +20,15 @@ class CustomViewHelper extends AbstractHelper
      * @var FormElement
      */
     protected $elementHelper;
-    
+
     public function __invoke(ElementInterface $element)
     {
         $elementHelper = $this->getElementHelper();
-        
+
         $name = preg_replace('/[^a-z0-9_-]+/', '', $element->getName());
-        
+
         $result = '<div id="custom' . $name . '">' . $elementHelper($element) . '</div>';
-        
+
         return $result;
     }
 

@@ -28,6 +28,19 @@ $zfRoot        = realpath(dirname(__DIR__));
 $zfCoreLibrary = "$zfRoot/library";
 $zfCoreTests   = "$zfRoot/tests";
 
+/*
+ * Prepend the Zend Framework library/ and tests/ directories to the
+ * include_path. This allows the tests to run out of the box and helps prevent
+ * loading other copies of the framework code and tests that would supersede
+ * this copy.
+ */
+$path = array(
+    $zfCoreLibrary,
+    $zfCoreTests,
+    get_include_path(),
+);
+set_include_path(implode(PATH_SEPARATOR, $path));
+
 /**
  * Setup autoloading
  */
@@ -76,4 +89,4 @@ if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
 /*
  * Unset global variables that are no longer needed.
  */
-unset($zfRoot, $zfCoreLibrary, $zfCoreTests);
+unset($zfRoot, $zfCoreLibrary, $zfCoreTests, $path);

@@ -178,7 +178,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals(
-            'Zend_Feed_Writer ' . \Zend\Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
+            'Zend_Feed_Writer ' . \Zend\Version\Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
     }
 
     public function testFeedLanguageHasBeenSet()

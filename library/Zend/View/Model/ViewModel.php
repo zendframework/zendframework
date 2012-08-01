@@ -85,8 +85,8 @@ class ViewModel implements ModelInterface
             $variables = new ViewVariables();
         }
 
-        // Not using setter here, as it's initializing the variables container
-        $this->variables = $variables;
+        // Initializing the variables container
+        $this->setVariables($variables, true);
 
         if (null !== $options) {
             $this->setOptions($options);
@@ -248,9 +248,10 @@ class ViewModel implements ModelInterface
      * Can be an array or a Traversable + ArrayAccess object.
      *
      * @param  array|ArrayAccess&Traversable $variables
+     * @param  bool $overwrite Whether or not to overwrite the internal container with $variables
      * @return ViewModel
      */
-    public function setVariables($variables)
+    public function setVariables($variables, $overwrite = false)
     {
         if (!is_array($variables) && !$variables instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -258,6 +259,14 @@ class ViewModel implements ModelInterface
                 __METHOD__,
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
+        }
+
+        if ($overwrite) {
+            if (!is_object($variables) && !$variables instanceof ArrayAccess) {
+                $variables = ArrayUtils::iteratorToArray($variables);
+            }
+            $this->variables = $variables;
+            return $this;
         }
 
         foreach ($variables as $key => $value) {

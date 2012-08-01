@@ -219,6 +219,15 @@ class ViewModelTest extends TestCase
         $this->assertSame($variables, $model->getVariables());
     }
 
+    public function testPassingOverwriteFlagWhenSettingVariablesOverwritesContainer()
+    {
+        $variables = new ViewVariables(array('foo' => 'bar'));
+        $model     = new ViewModel($variables);
+        $overwrite = new ViewVariables(array('foo' => 'baz'));
+        $model->setVariables($overwrite, true);
+        $this->assertSame($overwrite, $model->getVariables());
+    }
+
     public function testPropertyOverloadingGivesAccessToProperties()
     {
         $model      = new ViewModel();

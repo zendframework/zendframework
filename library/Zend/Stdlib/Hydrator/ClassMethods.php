@@ -71,15 +71,7 @@ class ClassMethods extends AbstractHydrator
                 if ($this->underscoreSeparatedKeys) {
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
-                
-                $value = $object->$method();
-                
-                if ($this->hasStrategy($attribute)) {
-                    $strategy = $this->getStrategy($attribute);
-                    $value = $strategy->extract($value);
-                }
-
-                $attributes[$attribute] = $value;
+                $attributes[$attribute] = $this->extractValue($attribute, $object->$method());
             }
         }
 

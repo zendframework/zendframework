@@ -17,7 +17,7 @@ use Zend\Stdlib\Exception;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-class ClassMethods implements HydratorInterface
+class ClassMethods extends AbstractHydrator
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
@@ -31,6 +31,7 @@ class ClassMethods implements HydratorInterface
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
+        parent::__construct();
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
     }
 
@@ -47,8 +48,7 @@ class ClassMethods implements HydratorInterface
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
 
@@ -58,11 +58,11 @@ class ClassMethods implements HydratorInterface
         };
         $attributes = array();
         $methods = get_class_methods($object);
-        foreach($methods as $method) {
-            if(preg_match('/^get[A-Z]\w*/', $method)) {
+        foreach ($methods as $method) {
+            if (preg_match('/^get[A-Z]\w*/', $method)) {
                 // setter verification
                 $setter = preg_replace('/^get/', 'set', $method);
-                if(!in_array($setter, $methods)) {
+                if (!in_array($setter, $methods)) {
                     continue;
                 }
                 $attribute = substr($method, 3);
@@ -70,8 +70,7 @@ class ClassMethods implements HydratorInterface
                 if ($this->underscoreSeparatedKeys) {
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
-
-                $attributes[$attribute] = $object->$method();
+                $attributes[$attribute] = $this->extractValue($attribute, $object->$method());
             }
         }
 
@@ -92,8 +91,7 @@ class ClassMethods implements HydratorInterface
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
 
@@ -108,6 +106,8 @@ class ClassMethods implements HydratorInterface
             }
             $method = 'set' . ucfirst($property);
             if (method_exists($object, $method)) {
+                $value = $this->hydrateValue($property, $value);
+
                 $object->$method($value);
             }
         }

@@ -26,8 +26,6 @@ recommend testing your production applications against it.
    internal variables container by default. If you wish to do so, it
    does provide an optional $overwrite argument; passing a boolean true
    will cause the method to overwrite the container.
- - Zend\Feed\Reader was not properly protecting against XXE injections;
-   this situation has now been corrected.
  - Zend\Validator\Iban was expanded to include Single Euro Payments Area
    (SEPA) support
  - Zend\Mvc\Controller\ControllerManager now allows fetching controllers
@@ -61,6 +59,9 @@ recommend testing your production applications against it.
    added php-cs-fixer to the Travis-CI build tasks.
  - ServiceManagerAwareInterface was removed from all but the most
    necessary locations, and replaced with ServiceLocatorAwareInterface.
+ - Zend\Feed\Reader, Zend\Dom, Zend\Serializer\Wddx, and Zend\Soap were
+   not properly protecting against XXE injections; these situations have
+   now been corrected.
 
 Around *70* pull requests for a variety of features and bugfixes were handled
 since beta5!

@@ -247,7 +247,7 @@ class Iban extends AbstractValidator
         }
 
         if (!preg_match('/^' . self::$ibanRegex[$countryCode] . '$/', $value)) {
-            $this->error(self::FALSEFORMAT . $value . '<>' .  self::$ibanRegex[$countryCode]);
+            $this->error(self::FALSEFORMAT);
             return false;
         }
 

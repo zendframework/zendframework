@@ -37,12 +37,13 @@ class AnnotationBuilderTest extends TestCase
 
         $username = $form->get('username');
         $this->assertInstanceOf('Zend\Form\Element', $username);
-        $attribute = $username->getAttribute('required');
-        $this->assertEquals('required', $attribute);
+        $this->assertEquals('required', $username->getAttribute('required'));
+
         $password = $form->get('password');
         $this->assertInstanceOf('Zend\Form\Element', $password);
         $attributes = $password->getAttributes();
         $this->assertEquals(array('type' => 'password', 'label' => 'Enter your password', 'name' => 'password'), $attributes);
+        $this->assertNull($password->getAttribute('required'));
 
         $filter = $form->getInputFilter();
         $this->assertTrue($filter->has('username'));

@@ -10,7 +10,7 @@
 
 namespace Zend\Stdlib\Hydrator;
 
-use Zend\Stdlib\Exception;
+use ArrayObject;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
 /**
@@ -20,11 +20,19 @@ use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
  */
 abstract class AbstractHydrator implements HydratorInterface
 {
+    /**
+     * The list with strategies that this hydrator has.
+     * 
+     * @var ArrayObject
+     */
     protected $strategies;
-    
+
+    /**
+     * Initializes a new instance of this class. 
+     */
     public function __construct()
     {
-        $this->strategies = array();
+        $this->strategies = new ArrayObject();
     }
     
     public function getStrategy($name)

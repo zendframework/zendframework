@@ -36,9 +36,10 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
 
+        $self = $this;
         $data = get_object_vars($object);
-        array_walk($data, function(&$value, $name) {
-            $value = $this->extractValue($name, $value);
+        array_walk($data, function(&$value, $name) use ($self) {
+            $value = $self->extractValue($name, $value);
         });
         return $data;
     }

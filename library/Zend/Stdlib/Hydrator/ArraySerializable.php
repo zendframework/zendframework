@@ -37,9 +37,10 @@ class ArraySerializable extends AbstractHydrator
             ));
         }
 
+        $self = $this;
         $data = $object->getArrayCopy();
-        array_walk($data, function(&$value, $name) {
-            $value = $this->extractValue($name, $value);
+        array_walk($data, function(&$value, $name) use ($self) {
+            $value = $self->extractValue($name, $value);
         });
         return $data;
     }
@@ -57,8 +58,9 @@ class ArraySerializable extends AbstractHydrator
      */
     public function hydrate(array $data, $object)
     {
-        array_walk($data, function(&$value, $name) {
-            $value = $this->hydrateValue($name, $value);
+        $self = $this;
+        array_walk($data, function(&$value, $name) use ($self) {
+            $value = $self->hydrateValue($name, $value);
         });
 
         if (is_callable(array($object, 'exchangeArray'))) {

@@ -12,9 +12,6 @@ namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
-use ZendTest\StdLib\TestAsset\HydratorStrategy;
-use ZendTest\StdLib\TestAsset\HydratorStrategyEntityA;
-use ZendTest\StdLib\TestAsset\HydratorStrategyEntityB;
 
 /**
  * @category   Zend
@@ -22,15 +19,15 @@ use ZendTest\StdLib\TestAsset\HydratorStrategyEntityB;
  * @subpackage UnitTests
  * @group      Zend_Stdlib
  */
-class HydratorTest extends \PHPUnit_Framework_TestCase
+class HydratorStrategyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * The hydrator that is used during testing.
-     * 
+     *
      * @var HydratorInterface
      */
     private $hydrator;
-    
+
     public function setUp()
     {
         $this->hydrator = new ClassMethods();
@@ -39,9 +36,9 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     public function testAddingStrategy()
     {
         $this->assertAttributeCount(0, 'strategies', $this->hydrator);
-        
-        $this->hydrator->addStrategy('myStrategy', new HydratorStrategy());
-        
+
+        $this->hydrator->addStrategy('myStrategy', new TestAsset\HydratorStrategy());
+
         $this->assertAttributeCount(1, 'strategies', $this->hydrator);
     }
 
@@ -52,58 +49,58 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
 
     public function testCheckStrategyNotEmpty()
     {
-        $this->hydrator->addStrategy('myStrategy', new HydratorStrategy());
-        
+        $this->hydrator->addStrategy('myStrategy', new TestAsset\HydratorStrategy());
+
         $this->assertTrue($this->hydrator->hasStrategy('myStrategy'));
     }
 
     public function testRemovingStrategy()
     {
         $this->assertAttributeCount(0, 'strategies', $this->hydrator);
-        
-        $this->hydrator->addStrategy('myStrategy', new HydratorStrategy());
+
+        $this->hydrator->addStrategy('myStrategy', new TestAsset\HydratorStrategy());
         $this->assertAttributeCount(1, 'strategies', $this->hydrator);
-        
+
         $this->hydrator->removeStrategy('myStrategy');
         $this->assertAttributeCount(0, 'strategies', $this->hydrator);
     }
 
     public function testRetrieveStrategy()
     {
-        $strategy = new HydratorStrategy();
+        $strategy = new TestAsset\HydratorStrategy();
         $this->hydrator->addStrategy('myStrategy', $strategy);
-        
+
         $this->assertEquals($strategy, $this->hydrator->getStrategy('myStrategy'));
     }
 
     public function testExtractingObjects()
     {
-        $this->hydrator->addStrategy('entities', new HydratorStrategy());
-        
-        $entityA = new HydratorStrategyEntityA();
-        $entityA->addEntity(new HydratorStrategyEntityB(111, 'AAA'));
-        $entityA->addEntity(new HydratorStrategyEntityB(222, 'BBB'));
-        
+        $this->hydrator->addStrategy('entities', new TestAsset\HydratorStrategy());
+
+        $entityA = new TestAsset\HydratorStrategyEntityA();
+        $entityA->addEntity(new TestAsset\HydratorStrategyEntityB(111, 'AAA'));
+        $entityA->addEntity(new TestAsset\HydratorStrategyEntityB(222, 'BBB'));
+
         $attributes = $this->hydrator->extract($entityA);
-        
+
         $this->assertContains(111, $attributes['entities']);
         $this->assertContains(222, $attributes['entities']);
     }
 
     public function testHydratingObjects()
     {
-        $this->hydrator->addStrategy('entities', new HydratorStrategy());
-        
-        $entityA = new HydratorStrategyEntityA();
-        $entityA->addEntity(new HydratorStrategyEntityB(111, 'AAA'));
-        $entityA->addEntity(new HydratorStrategyEntityB(222, 'BBB'));
-        
+        $this->hydrator->addStrategy('entities', new TestAsset\HydratorStrategy());
+
+        $entityA = new TestAsset\HydratorStrategyEntityA();
+        $entityA->addEntity(new TestAsset\HydratorStrategyEntityB(111, 'AAA'));
+        $entityA->addEntity(new TestAsset\HydratorStrategyEntityB(222, 'BBB'));
+
         $attributes = $this->hydrator->extract($entityA);
         $attributes['entities'][] = 333;
-        
+
         $this->hydrator->hydrate($attributes, $entityA);
         $entities = $entityA->getEntities();
-        
+
         $this->assertCount(3, $entities);
     }
 }

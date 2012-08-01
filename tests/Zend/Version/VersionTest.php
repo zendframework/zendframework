@@ -8,7 +8,7 @@
  * @package   Zend_VersionTest.php
  */
 
-use Zend\Version;
+use Zend\Version\Version;
 
 /**
  * @category   Zend

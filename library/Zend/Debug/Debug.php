@@ -8,7 +8,7 @@
  * @package   Zend_Debug.php
  */
 
-namespace Zend;
+namespace Zend\Debug;
 
 /**
  * Concrete class for generating debug dumps related to the output source.

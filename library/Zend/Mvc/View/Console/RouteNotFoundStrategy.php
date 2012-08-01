@@ -25,7 +25,7 @@ use Zend\Console\Request as ConsoleRequest;
 use Zend\Console\AdapterInterface as ConsoleAdapter;
 use Zend\Mvc\Router\RouteInterface;
 use Zend\View\Model\ConsoleModel;
-use Zend\Version;
+use Zend\Version\Version;
 use Zend\Stdlib\ResponseInterface as Response;
 
 /**

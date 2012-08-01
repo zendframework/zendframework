@@ -14,6 +14,7 @@ use Datetime;
 use DOMDocument;
 use DOMElement;
 use Zend\Feed;
+use Zend\Version\Version;
 
 /**
  * @category   Zend
@@ -136,7 +137,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         if(!$this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator('Zend_Feed_Writer',
-                \Zend\Version::VERSION, 'http://framework.zend.com');
+                Version::VERSION, 'http://framework.zend.com');
         }
 
         $gdata = $this->getDataContainer()->getGenerator();

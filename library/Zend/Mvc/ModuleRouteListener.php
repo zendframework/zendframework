@@ -64,7 +64,7 @@ class ModuleRouteListener implements ListenerAggregateInterface
      * @param  MvcEvent $e
      * @return null
      */
-    public function onRoute($e)
+    public function onRoute(MvcEvent $e)
     {
         $matches = $e->getRouteMatch();
         if (!$matches instanceof Router\RouteMatch) {

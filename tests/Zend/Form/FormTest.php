@@ -892,6 +892,7 @@ class FormTest extends TestCase
         $this->assertObjectNotHasAttribute('foo', $data);
         $this->assertObjectHasAttribute('bar', $data);
     }
+
     public function testRemoveCollectionFromValidationGroupWhenZeroCountAndNoData()
     {
         $dataWithoutCollection = array(
@@ -915,6 +916,41 @@ class FormTest extends TestCase
             )
         ));
         $this->form->setData($dataWithoutCollection);
+        $this->assertTrue($this->form->isValid());
+    }
+
+    public function testApplyObjectInputFilterToBaseFieldsetAndApplyValidationGroup()
+    {
+        $fieldset = new Fieldset('foobar');
+        $fieldset->add(new Element('foo'));
+        $fieldset->setUseAsBaseFieldset(true);
+        $this->form->add($fieldset);
+        $this->form->setValidationGroup(array(
+            'foobar'=> array(
+                'foo',
+            )
+        ));
+
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'foo' => array(
+                'name'       => 'foo',
+                'required'   => true,
+            ),
+        ));
+        $model = new TestAsset\ValidatingModel();
+        $model->setInputFilter($inputFilter);
+        $this->form->bind($model);
+
+        $this->form->setData(array());
+        $this->assertFalse($this->form->isValid());
+
+        $validSet = array(
+            'foobar' => array(
+                'foo' => 'abcde',
+            )
+        );
+        $this->form->setData($validSet);
         $this->assertTrue($this->form->isValid());
     }
 }

@@ -340,6 +340,9 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
                 // add required attribute to form element
                 if ($inputSpec['required']){
+		    if (!array_key_exists('attributes', $elementSpec['spec'])){
+	 	        $elementSpec['spec']['attributes'] = array();
+		    }
                     $elementSpec['spec']['attributes']['required'] = 'required';
                 }
             }

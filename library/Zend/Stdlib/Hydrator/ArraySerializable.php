@@ -33,7 +33,7 @@ class ArraySerializable extends AbstractHydrator
     {
         if (!is_callable(array($object, 'getArrayCopy'))) {
             throw new Exception\BadMethodCallException(sprintf(
-            '%s expects the provided object to implement getArrayCopy()', __METHOD__
+                '%s expects the provided object to implement getArrayCopy()', __METHOD__
             ));
         }
 

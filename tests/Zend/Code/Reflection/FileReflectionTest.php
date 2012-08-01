@@ -23,8 +23,8 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testFileConstructor()
     {
-        require_once 'Zend/Version.php';
-        $reflectionFile = new FileReflection('Zend/Version.php');
+        require_once 'Zend/Version/Version.php';
+        $reflectionFile = new FileReflection('Zend/Version/Version.php');
         $this->assertEquals(get_class($reflectionFile), 'Zend\Code\Reflection\FileReflection');
     }
 
@@ -68,18 +68,18 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull(FileReflection::export());
 
-        require_once 'Zend/Version.php';
-        $reflectionFile = new FileReflection('Zend/Version.php');
+        require_once 'Zend/Version/Version.php';
+        $reflectionFile = new FileReflection('Zend/Version/Version.php');
         $this->assertEquals('', $reflectionFile->__toString());
     }
 
     public function testFileGetFilenameReturnsCorrectFilename()
     {
-        require_once 'Zend/Version.php';
-        $reflectionFile = new FileReflection('Zend/Version.php');
+        require_once 'Zend/Version/Version.php';
+        $reflectionFile = new FileReflection('Zend/Version/Version.php');
 
         // Make sure this test works on all platforms
-        $this->assertRegExp('#^.*Zend.Version.php$#i', $reflectionFile->getFileName());
+        $this->assertRegExp('#^.*Zend.Version.Version.php$#i', $reflectionFile->getFileName());
     }
 
     public function testFileGetLineNumbersWorks()

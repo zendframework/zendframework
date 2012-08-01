@@ -18,12 +18,37 @@ namespace Zend\Stdlib\Hydrator;
 interface HydratorInterface
 {
     /**
+     * Adds the given strategy under the given name.
+     * 
+     * @param string $name The name of the strategy to register.
+     * @param StrategyInterface $strategy The strategy to register.
+     * @return HydratorInterface
+     */
+    public function addStrategy($name, StrategyInterface $strategy);
+
+    /**
      * Extract values from an object
      *
      * @param  object $object
      * @return array
      */
     public function extract($object);
+
+    /**
+     * Gets the strategy with the given name.
+     * 
+     * @param string $name The name of the strategy to get.
+     * @return StrategyInterface
+     */
+    public function getStrategy($name);
+
+    /**
+     * Checks if the strategy with the given name exists.
+     * 
+     * @param string $name The name of the strategy to check for.
+     * @return bool
+     */
+    public function hasStrategy($name);
 
     /**
      * Hydrate $object with the provided $data.
@@ -33,4 +58,12 @@ interface HydratorInterface
      * @return object
      */
     public function hydrate(array $data, $object);
+
+    /**
+     * Removes the strategy with the given name.
+     * 
+     * @param string $name The name of the strategy to remove.
+     * @return HydratorInterface
+     */
+    public function removeStrategy($name);
 }

@@ -26,10 +26,10 @@ use Zend\Stdlib\ResponseInterface as Response;
  */
 abstract class AbstractRestfulController extends AbstractController
 {
-	/**
-	 * @var string
-	 */
-	protected $eventIdentifier = __CLASS__;
+    /**
+     * @var string
+     */
+    protected $eventIdentifier = __CLASS__;
 
     /**
      * Return list of resources
@@ -79,6 +79,7 @@ abstract class AbstractRestfulController extends AbstractController
     public function notFoundAction()
     {
         $this->response->setStatusCode(404);
+
         return array('content' => 'Page not found');
     }
 
@@ -186,6 +187,7 @@ abstract class AbstractRestfulController extends AbstractController
         // - return from method, request, response
         // If a listener returns a response object, return it immediately
         $e->setResult($return);
+
         return $return;
     }
 
@@ -217,6 +219,7 @@ abstract class AbstractRestfulController extends AbstractController
         }
         $content = $request->getContent();
         parse_str($content, $parsedParams);
+
         return $this->update($id, $parsedParams);
     }
 

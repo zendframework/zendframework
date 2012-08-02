@@ -67,11 +67,11 @@ abstract class AbstractController implements
      * @var ServiceLocatorInterface
      */
     protected $serviceManager;
-	
-	/**
-	 * @var string
-	 */
-	protected $eventIdentifier;
+
+    /**
+     * @var string
+     */
+    protected $eventIdentifier;
 
     /**
      * Execute the request
@@ -91,6 +91,7 @@ abstract class AbstractController implements
         if (!$this->request) {
             $this->request = new HttpRequest();
         }
+
         return $this->request;
     }
 
@@ -104,6 +105,7 @@ abstract class AbstractController implements
         if (!$this->response) {
             $this->response = new HttpResponse();
         }
+
         return $this->response;
     }
 
@@ -119,11 +121,12 @@ abstract class AbstractController implements
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
             get_called_class(),
-			$this->eventIdentifier,
+            $this->eventIdentifier,
             substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();
+
         return $this;
     }
 
@@ -139,6 +142,7 @@ abstract class AbstractController implements
         if (!$this->events) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 
@@ -173,6 +177,7 @@ abstract class AbstractController implements
         if (!$this->event) {
             $this->setEvent(new MvcEvent());
         }
+
         return $this->event;
     }
 
@@ -207,6 +212,7 @@ abstract class AbstractController implements
         if (!$this->plugins) {
             $this->setPluginManager(new PluginManager());
         }
+
         return $this->plugins;
     }
 
@@ -223,6 +229,7 @@ abstract class AbstractController implements
         if (method_exists($plugins, 'setController')) {
             $this->plugins->setController($this);
         }
+
         return $this;
     }
 
@@ -245,7 +252,7 @@ abstract class AbstractController implements
      * Otherwise, return the plugin instance.
      *
      * @param  string $method
-     * @param  array $params
+     * @param  array  $params
      * @return mixed
      */
     public function __call($method, $params)
@@ -254,6 +261,7 @@ abstract class AbstractController implements
         if (is_callable($plugin)) {
             return call_user_func_array($plugin, $params);
         }
+
         return $plugin;
     }
 
@@ -281,6 +289,7 @@ abstract class AbstractController implements
         $method  = str_replace(' ', '', $method);
         $method  = lcfirst($method);
         $method .= 'Action';
+
         return $method;
     }
 }

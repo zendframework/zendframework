@@ -24,12 +24,12 @@ use Zend\View\Model\ViewModel;
  * @package    Zend_Mvc
  * @subpackage Controller
  */
-abstract class AbstractActionController extends AbstractController 
+abstract class AbstractActionController extends AbstractController
 {
-	/**
-	 * @var string
-	 */
-	protected $eventIdentifier = __CLASS__;
+    /**
+     * @var string
+     */
+    protected $eventIdentifier = __CLASS__;
 
     /**
      * Default action if none provided
@@ -90,13 +90,14 @@ abstract class AbstractActionController extends AbstractController
         if ($result->stopped()) {
             return $result->last();
         }
+
         return $e->getResult();
     }
 
     /**
      * Execute the request
      *
-     * @param  MvcEvent $e
+     * @param  MvcEvent                  $e
      * @return mixed
      * @throws Exception\DomainException
      */
@@ -121,6 +122,7 @@ abstract class AbstractActionController extends AbstractController
         $actionResponse = $this->$method();
 
         $e->setResult($actionResponse);
+
         return $actionResponse;
     }
 }

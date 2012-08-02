@@ -480,4 +480,28 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // Make sure it set the right HTTP code
         $this->assertEquals(400, $status);
     }
+
+    public function testBasicAuthValidCredsWithCustomIdentityObjectResolverReturnsAuthResult()
+    {
+        $this->_basicResolver  = new TestAsset\BasicAuthObjectResolver();
+
+        $result = $this->_doAuth('Basic ' . base64_encode('Bryce:ThisIsNotMyPassword'), 'basic');
+        $result = $result['result'];
+
+        $this->assertInstanceOf('Zend\\Authentication\\Result', $result);
+        $this->assertTrue($result->isValid());
+    }
+
+    public function testBasicAuthInvalidCredsWithCustomIdentityObjectResolverReturnsUnauthorizedResponse()
+    {
+        $this->_basicResolver  = new TestAsset\BasicAuthObjectResolver();
+        $data = $this->_doAuth('Basic ' . base64_encode('David:ThisIsNotMyPassword'), 'basic');
+
+        $expected = array(
+            'type'   => 'Basic ',
+            'realm'  => 'realm="' . $this->_bothConfig['realm'] . '"',
+        );
+
+        $this->_checkUnauthorized($data, $expected);
+    }
 }

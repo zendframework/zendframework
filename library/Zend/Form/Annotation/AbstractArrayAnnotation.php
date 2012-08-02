@@ -36,7 +36,7 @@ abstract class AbstractArrayAnnotation
             throw new Exception\DomainException(sprintf(
                 '%s expects the annotation to define an array; received "%s"',
                 get_class($this),
-                gettype($data['value'])
+                isset($data['value']) ? gettype($data['value']) : 'null'
             ));
         }
         $this->value = $data['value'];

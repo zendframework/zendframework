@@ -1,9 +1,9 @@
 <?php
 namespace ZendTest\Log\TestAsset;
 
-use Zend\Log\Writer\FirePhp\FirePhpInterface;
+use Zend\Log\Writer\ChromePhp\ChromePhpInterface;
 
-class MockFirePhp implements FirePhpInterface
+class MockChromePhp implements ChromePhpInterface
 {
     public $calls = array();
 

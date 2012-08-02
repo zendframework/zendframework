@@ -262,7 +262,7 @@ class ViewModel implements ModelInterface
         }
 
         if ($overwrite) {
-            if (!is_object($variables) && !$variables instanceof ArrayAccess && !is_array($variables)) {
+            if (is_object($variables) && !$variables instanceof ArrayAccess) {
                 $variables = ArrayUtils::iteratorToArray($variables);
             }
 

@@ -15,6 +15,7 @@ use stdClass;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\View\Model\ViewModel;
 use Zend\View\Variables as ViewVariables;
+use ZendTest\View\Model\TestAsset\Variable;
 
 /**
  * @category   Zend
@@ -51,6 +52,13 @@ class ViewModelTest extends TestCase
         $model = new ViewModel($vars, $options);
         $this->assertSame($vars, $model->getVariables());
         $this->assertSame(iterator_to_array($options), $model->getOptions());
+    }
+
+    public function testAllowsPassingNonArrayAccessObjectsAsArrayInConstructor()
+    {
+        $vars  = array('foo' => new Variable);
+        $model = new ViewModel($vars);
+        $this->assertSame($vars, $model->getVariables());
     }
 
     public function testCanSetVariablesSingly()

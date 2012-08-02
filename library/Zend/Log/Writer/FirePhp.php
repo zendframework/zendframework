@@ -13,8 +13,6 @@ namespace Zend\Log\Writer;
 use FirePHP as FirePHPService;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
-use Zend\Log\Writer\FirePhp\FirePhpBridge;
-use Zend\Log\Writer\FirePhp\FirePhpInterface;
 
 /**
  * @category   Zend
@@ -26,19 +24,19 @@ class FirePhp extends AbstractWriter
     /**
      * A FirePhpInterface instance that is used to log messages to.
      *
-     * @var FirePhpInterface
+     * @var FirePhp\FirePhpInterface
      */
     protected $firephp;
 
     /**
      * Initializes a new instance of this class.
      *
-     * @param null|FirePhpInterface $instance An instance of FirePhpInterface
+     * @param null|FirePhp\FirePhpInterface $instance An instance of FirePhpInterface
      *        that should be used for logging
      */
-    public function __construct(FirePhpInterface $instance = null)
+    public function __construct(FirePhp\FirePhpInterface $instance = null)
     {
-        $this->firephp   = $instance === null ? $this->getFirePhp() : $instance;
+        $this->firephp   = $instance;
         $this->formatter = new FirePhpFormatter();
     }
 
@@ -50,7 +48,9 @@ class FirePhp extends AbstractWriter
      */
     protected function doWrite(array $event)
     {
-        if (!$this->firephp->getEnabled()) {
+        $firephp = $this->getFirePhp();
+
+        if (!$firephp->getEnabled()) {
             return;
         }
 
@@ -61,20 +61,20 @@ class FirePhp extends AbstractWriter
             case Logger::ALERT:
             case Logger::CRIT:
             case Logger::ERR:
-                $this->firephp->error($line);
+                $firephp->error($line);
                 break;
             case Logger::WARN:
-                $this->firephp->warn($line);
+                $firephp->warn($line);
                 break;
             case Logger::NOTICE:
             case Logger::INFO:
-                $this->firephp->info($line);
+                $firephp->info($line);
                 break;
             case Logger::DEBUG:
-                $this->firephp->trace($line);
+                $firephp->trace($line);
                 break;
             default:
-                $this->firephp->log($line);
+                $firephp->log($line);
                 break;
         }
     }
@@ -82,18 +82,18 @@ class FirePhp extends AbstractWriter
     /**
      * Gets the FirePhpInterface instance that is used for logging.
      *
-     * @return FirePhpInterface
+     * @return FirePhp\FirePhpInterface
      */
     public function getFirePhp()
     {
         // Remember: class names in strings are absolute; thus the class_exists
         // here references the canonical name for the FirePHP class
-        if (!$this->firephp instanceof FirePhpInterface
+        if (!$this->firephp instanceof FirePhp\FirePhpInterface
             && class_exists('FirePHP')
         ) {
             // FirePHPService is an alias for FirePHP; otherwise the class
             // names would clash in this file on this line.
-            $this->setFirePhp(new FirePhpBridge(new FirePHPService()));
+            $this->setFirePhp(new FirePhp\FirePhpBridge(new FirePHPService()));
         }
         return $this->firephp;
     }
@@ -101,10 +101,10 @@ class FirePhp extends AbstractWriter
     /**
      * Sets the FirePhpInterface instance that is used for logging.
      *
-     * @param  FirePhpInterface $instance A FirePhpInterface instance to set.
+     * @param  FirePhp\FirePhpInterface $instance A FirePhpInterface instance to set.
      * @return FirePhp
      */
-    public function setFirePhp(FirePhpInterface $instance)
+    public function setFirePhp(FirePhp\FirePhpInterface $instance)
     {
         $this->firephp = $instance;
         return $this;

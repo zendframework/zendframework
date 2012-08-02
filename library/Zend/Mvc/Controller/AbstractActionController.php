@@ -97,7 +97,7 @@ abstract class AbstractActionController extends AbstractController
     /**
      * Execute the request
      *
-     * @param  MvcEvent                  $e
+     * @param  MvcEvent $e
      * @return mixed
      * @throws Exception\DomainException
      */

@@ -29,6 +29,24 @@ class Redirect extends AbstractPlugin
     protected $router;
 
     /**
+     * Gets current route name
+     *
+     * @return string
+     */
+    protected function getCurrentRoute ()
+    {
+        return $this->getEvent()->getRouteMatch()->getMatchedRouteName();
+    }
+
+    /**
+     * Gets current route params
+     */
+    protected function getCurrentRouteParams()
+    {
+        return $this->getEvent()->getRouteMatch()->getParams();
+    }
+
+    /**
      * Generates a URL based on a route
      *
      * @param  string $route RouteInterface name
@@ -38,8 +56,14 @@ class Redirect extends AbstractPlugin
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event
      */
-    public function toRoute($route, array $params = array(), array $options = array())
+    public function toRoute($route = null, array $params = array(), array $options = array())
     {
+        // Refresh if null provided
+        if (is_null($route)) {
+            $route  = $this->getCurrentRoute();
+            $params = array_merge($this->getCurrentRouteParams(), $params);
+        }
+
         $response = $this->getResponse();
         $router   = $this->getRouter();
 
@@ -62,6 +86,16 @@ class Redirect extends AbstractPlugin
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
+    }
+
+    /**
+     * Refresh to current route
+     *
+     * @return string
+     */
+    public function refresh()
+    {
+        return $this->toRoute($this->getCurrentRoute(), $this->getCurrentRouteParams());
     }
 
     /**

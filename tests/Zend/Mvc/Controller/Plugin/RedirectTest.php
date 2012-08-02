@@ -12,10 +12,12 @@ namespace ZendTest\Mvc\Controller\Plugin;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\Response;
+use Zend\Route\Request;
 use Zend\Mvc\Controller\Plugin\Redirect as RedirectPlugin;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;
 use Zend\Mvc\Router\SimpleRouteStack;
+use Zend\Mvc\Router\RouteMatch;
 use ZendTest\Mvc\Controller\TestAsset\SampleController;
 
 class RedirectTest extends TestCase
@@ -32,9 +34,13 @@ class RedirectTest extends TestCase
             ),
         )));
 
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('home');
+
         $event = new MvcEvent();
         $event->setRouter($router);
         $event->setResponse($this->response);
+        $event->setRouteMatch($routeMatch);
 
         $this->controller = new SampleController();
         $this->controller->setEvent($event);
@@ -94,5 +100,23 @@ class RedirectTest extends TestCase
         $plugin = $controller->plugin('redirect');
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose a router');
         $plugin->toRoute('home');
+    }
+
+    public function testPluginCanRefreshToRouteWhenProperlyConfigured()
+    {
+        $response = $this->plugin->refresh();
+        $this->assertTrue($response->isRedirect());
+        $headers = $response->getHeaders();
+        $location = $headers->get('Location');
+        $this->assertEquals('/', $location->getFieldValue());
+    }
+
+    public function testPluginCanRedirectToRouteWithNullWhenProperlyConfigured()
+    {
+        $response = $this->plugin->toRoute();
+        $this->assertTrue($response->isRedirect());
+        $headers = $response->getHeaders();
+        $location = $headers->get('Location');
+        $this->assertEquals('/', $location->getFieldValue());
     }
 }

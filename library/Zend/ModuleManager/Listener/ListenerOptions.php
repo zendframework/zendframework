@@ -58,6 +58,16 @@ class ListenerOptions extends AbstractOptions
     protected $cacheDir;
 
     /**
+     * @var string
+     */
+    protected $moduleMapCacheEnabled = false;
+
+    /**
+     * @var string
+     */
+    protected $moduleMapCacheKey;
+
+    /**
      * Get an array of paths where modules reside
      *
      * @return array
@@ -259,6 +269,60 @@ class ListenerOptions extends AbstractOptions
             $this->cacheDir = static::normalizePath($cacheDir);
         }
         return $this;
+    }
+
+    /**
+     * Check if the module class map cache is enabled
+     *
+     * @return bool
+     */
+    public function getModuleMapCacheEnabled()
+    {
+        return $this->moduleMapCacheEnabled;
+    }
+
+    /**
+     * Set if the module class map cache should be enabled or not
+     *
+     * @param  bool $enabled
+     * @return ListenerOptions
+     */
+    public function setModuleMapCacheEnabled($enabled)
+    {
+        $this->moduleMapCacheEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Get key used to create the cache file name
+     *
+     * @return string
+     */
+    public function getModuleMapCacheKey()
+    {
+        return (string) $this->moduleMapCacheKey;
+    }
+
+    /**
+     * Set key used to create the cache file name
+     *
+     * @param  string $moduleMapCacheKey the value to be set
+     * @return ListenerOptions
+     */
+    public function setModuleMapCacheKey($moduleMapCacheKey)
+    {
+        $this->moduleMapCacheKey = $moduleMapCacheKey;
+        return $this;
+    }
+
+    /**
+     * Get the path to the module class map cache
+     *
+     * @return string
+     */
+    public function getModuleMapCacheFile()
+    {
+        return $this->getCacheDir() . '/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
     }
 
     /**

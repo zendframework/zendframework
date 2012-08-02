@@ -14,13 +14,14 @@ use Zend\Console\AdapterInterface;
 use Zend\Console\ColorInterface as Color;
 use Zend\Console\CharsetInterface;
 use Zend\Console\Exception\BadMethodCallException;
+use Zend\Console\Charset;
 use Zend\Console;
 
 /**
- * @link http://en.wikipedia.org/wiki/ANSI_escape_code
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Adapter
+ * @link http://en.wikipedia.org/wiki/ANSI_escape_code
  */
 class Posix extends AbstractAdapter implements AdapterInterface
 {
@@ -337,7 +338,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
     }
 
     /**
-     * @return \Zend\Console\Charset
+     * @return \Zend\Console\CharsetInterface
      */
     public function getDefaultCharset()
     {

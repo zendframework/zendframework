@@ -8,7 +8,9 @@
  * @package   Zend_Console
  */
 
-namespace Zend\Console;
+namespace Zend\Console\Adapter;
+
+use Zend\Console\Charset\CharsetInterface;
 
 /**
  * @category   Zend
@@ -238,19 +240,19 @@ interface AdapterInterface
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\CharsetInterface $charset
+     * @param CharsetInterface $charset
      */
     public function setCharset(CharsetInterface $charset);
 
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\CharsetInterface $charset
+     * @return CharsetInterface $charset
      */
     public function getCharset();
 
     /**
-     * @return \Zend\Console\CharsetInterface
+     * @return CharsetInterface
      */
     public function getDefaultCharset();
 

@@ -10,12 +10,8 @@
 
 namespace Zend\Console\Adapter;
 
-use Zend\Console\AdapterInterface;
-use Zend\Console\ColorInterface;
-use Zend\Console\CharsetInterface;
-use Zend\Console\Exception\BadMethodCallException;
 use Zend\Console\Charset;
-use Zend\Console;
+use Zend\Console\Exception;
 
 /**
  * @category   Zend
@@ -24,31 +20,43 @@ use Zend\Console;
  */
 abstract class AbstractAdapter implements AdapterInterface
 {
+    /**
+     * Whether or not mbstring is enabled
+     *
+     * @var null|bool
+     */
     protected static $hasMBString;
 
     /**
-     * @var \Zend\Console\CharsetInterface
+     * @var Charset\CharsetInterface
      */
     protected $charset;
 
     /**
-     * Current cursor position
+     * Current cursor X position
      *
      * @var int
      */
-    protected $posX, $posY;
+    protected $posX;
+
+    /**
+     * Current cursor Y position
+     *
+     * @var int
+     */
+    protected $posY;
 
     /**
      * Write a chunk of text to console.
      *
-     * @param string                   $text
-     * @param null|int                 $color
-     * @param null|int                 $bgColor
+     * @param string   $text
+     * @param null|int $color
+     * @param null|int $bgColor
      */
     public function write($text, $color = null, $bgColor = null)
     {
         if ($color !== null || $bgColor !== null) {
-            echo $this->colorize( $text, $color, $bgColor );
+            echo $this->colorize($text, $color, $bgColor);
         } else {
             echo $text;
         }
@@ -57,13 +65,13 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Alias for write()
      *
-     * @param string                   $text
-     * @param null|int                 $color
-     * @param null|int                 $bgColor
+     * @param string   $text
+     * @param null|int $color
+     * @param null|int $bgColor
      */
     public function writeText($text, $color = null, $bgColor = null)
     {
-        return $this->write( $text, $color, $bgColor );
+        return $this->write($text, $color, $bgColor);
     }
 
     /**
@@ -71,30 +79,24 @@ abstract class AbstractAdapter implements AdapterInterface
      * If the text is longer than console width it will be truncated.
      *
      *
-     * @param string                   $text
-     * @param null|int                 $color
-     * @param null|int                 $bgColor
+     * @param string   $text
+     * @param null|int $color
+     * @param null|int $bgColor
      */
     public function writeLine($text = "", $color = null, $bgColor = null)
     {
-        $width = $this->getStringWidth( $text );
+        $width = $this->getStringWidth($text);
 
-        /**
-         * Remove newline characters from the end of string
-         */
-        $text = trim( $text, "\r\n" );
+        // Remove newline characters from the end of string
+        $text = trim($text, "\r\n");
 
-        /**
-         * Replace newline characters with spaces
-         */
-        $test = str_replace( "\n", " ", $text );
+        // Replace newline characters with spaces
+        $test = str_replace("\n", " ", $text);
 
-        /**
-         * Trim the line if it's too long and output text
-         */
+        // Trim the line if it's too long and output text
         $consoleWidth = $this->getWidth();
         if ($width > $consoleWidth) {
-            $text = $this->stringTrim( $text, $consoleWidth );
+            $text = $this->stringTrim($text, $consoleWidth);
             $this->write($text, $color, $bgColor);
         } elseif ($width == $consoleWidth) {
             $this->write($text, $color, $bgColor);
@@ -107,11 +109,11 @@ abstract class AbstractAdapter implements AdapterInterface
      * Write a piece of text at the coordinates of $x and $y
      *
      *
-     * @param string                   $text     Text to write
-     * @param int                      $x        Console X coordinate (column)
-     * @param int                      $y        Console Y coordinate (row)
-     * @param null|int                 $color
-     * @param null|int                 $bgColor
+     * @param string   $text    Text to write
+     * @param int      $x       Console X coordinate (column)
+     * @param int      $y       Console Y coordinate (row)
+     * @param null|int $color
+     * @param null|int $bgColor
      */
     public function writeAt($text, $x, $y, $color = null, $bgColor = null)
     {
@@ -124,17 +126,16 @@ abstract class AbstractAdapter implements AdapterInterface
      * If X or Y coordinate value is negative, it will be calculated as the distance from far right or bottom edge
      * of the console (respectively).
      *
-     *
-     * @param int                      $x1           Top-left corner X coordinate (column)
-     * @param int                      $y1           Top-left corner Y coordinate (row)
-     * @param int                      $x2           Bottom-right corner X coordinate (column)
-     * @param int                      $y2           Bottom-right corner Y coordinate (row)
-     * @param int                      $lineStyle    (optional) Box border style.
-     * @param int                      $fillStyle    (optional) Box fill style or a single character to fill it with.
-     * @param int                      $color        (optional) Foreground color
-     * @param int                      $bgColor      (optional) Background color
-     * @param null|int                 $fillColor    (optional) Foreground color of box fill
-     * @param null|int                 $fillBgColor  (optional) Background color of box fill
+     * @param int      $x1           Top-left corner X coordinate (column)
+     * @param int      $y1           Top-left corner Y coordinate (row)
+     * @param int      $x2           Bottom-right corner X coordinate (column)
+     * @param int      $y2           Bottom-right corner Y coordinate (row)
+     * @param int      $lineStyle    (optional) Box border style.
+     * @param int      $fillStyle    (optional) Box fill style or a single character to fill it with.
+     * @param int      $color        (optional) Foreground color
+     * @param int      $bgColor      (optional) Background color
+     * @param null|int $fillColor    (optional) Foreground color of box fill
+     * @param null|int $fillBgColor  (optional) Background color of box fill
      */
     public function writeBox(
         $x1,
@@ -148,17 +149,13 @@ abstract class AbstractAdapter implements AdapterInterface
         $fillColor = null,
         $fillBgColor = null
     ) {
-        /**
-         * Sanitize coordinates
-         */
-        $x1 = (int)$x1;
-        $y1 = (int)$y1;
-        $x2 = (int)$x2;
-        $y2 = (int)$y2;
+        // Sanitize coordinates
+        $x1 = (int) $x1;
+        $y1 = (int) $y1;
+        $x2 = (int) $x2;
+        $y2 = (int) $y2;
 
-        /**
-         * Translate negative coordinates
-         */
+        // Translate negative coordinates
         if ($x2 < 0) {
             $x2 = $this->getWidth() - $x2;
         }
@@ -167,38 +164,28 @@ abstract class AbstractAdapter implements AdapterInterface
             $y2 = $this->getHeight() - $y2;
         }
 
-
-        /**
-         * Validate coordinates
-         */
+        // Validate coordinates
         if ($x1 < 0
             || $y1 < 0
             || $x2 < $x1
-            || $y2 < $y1) {
-
-            throw new BadMethodCallException('Supplied X,Y coordinates are invalid.');
+            || $y2 < $y1
+       ) {
+            throw new Exception\BadMethodCallException('Supplied X,Y coordinates are invalid.');
         }
 
-        /**
-         * Determine charset and dimensions
-         */
-        $charset    = $this->getCharset();
-        $width      = $x2 - $x1 + 1;
-        $height     = $y2 - $y1 + 1;
+        // Determine charset and dimensions
+        $charset = $this->getCharset();
+        $width   = $x2 - $x1 + 1;
+        $height  = $y2 - $y1 + 1;
 
         if ($width <= 2) {
             $lineStyle = static::LINE_NONE;
         }
 
-
-        /**
-         * Activate line drawing
-         */
+        // Activate line drawing
         $this->write($charset::ACTIVATE);
 
-        /**
-         * Draw horizontal lines
-         */
+        // Draw horizontal lines
         if ($lineStyle !== static::LINE_NONE) {
             switch ($lineStyle) {
                 case static::LINE_SINGLE:
@@ -215,16 +202,14 @@ abstract class AbstractAdapter implements AdapterInterface
                     break;
             }
 
-            $this->setPos( $x1 + 1, $y1 );
-            $this->write( str_repeat( $lineChar, $width - 2 ), $color, $bgColor );
-            $this->setPos( $x1 + 1, $y2 );
-            $this->write( str_repeat( $lineChar, $width - 2 ), $color, $bgColor );
+            $this->setPos($x1 + 1, $y1);
+            $this->write(str_repeat($lineChar, $width - 2), $color, $bgColor);
+            $this->setPos($x1 + 1, $y2);
+            $this->write(str_repeat($lineChar, $width - 2), $color, $bgColor);
         }
 
-        /**
-         * Draw vertical lines and fill
-         */
-        if (is_numeric( $fillStyle )
+        // Draw vertical lines and fill
+        if (is_numeric($fillStyle)
             && $fillStyle !== static::FILL_NONE) {
 
             switch ($fillStyle) {
@@ -247,15 +232,15 @@ abstract class AbstractAdapter implements AdapterInterface
             }
 
         } elseif ($fillStyle) {
-            $fillChar = $this->stringTrim( $fillStyle, 1 );
+            $fillChar = $this->stringTrim($fillStyle, 1);
         } else {
             $fillChar = ' ';
         }
 
         if ($lineStyle === static::LINE_NONE) {
             for ($y = $y1; $y <= $y2; $y++) {
-                $this->setPos( $x1, $y );
-                $this->write(str_repeat( $fillChar, $width), $fillColor, $fillBgColor);
+                $this->setPos($x1, $y);
+                $this->write(str_repeat($fillChar, $width), $fillColor, $fillBgColor);
             }
         } else {
             switch($lineStyle){
@@ -272,17 +257,15 @@ abstract class AbstractAdapter implements AdapterInterface
             }
 
             for ($y = $y1 + 1; $y < $y2; $y++) {
-                $this->setPos( $x1, $y );
+                $this->setPos($x1, $y);
                 $this->write($lineChar, $color, $bgColor);
-                $this->write(str_repeat( $fillChar, $width - 2 ), $fillColor, $fillBgColor);
+                $this->write(str_repeat($fillChar, $width - 2), $fillColor, $fillBgColor);
                 $this->write($lineChar, $color, $bgColor);
             }
         }
 
 
-        /**
-         * Draw corners
-         */
+        // Draw corners
         if ($lineStyle !== static::LINE_NONE) {
             if ($color !== null) {
                 $this->setColor($color);
@@ -291,29 +274,26 @@ abstract class AbstractAdapter implements AdapterInterface
                 $this->setBgColor($bgColor);
             }
             if ($lineStyle === static::LINE_SINGLE) {
-                $this->writeAt( $charset::LINE_SINGLE_NW, $x1, $y1 );
-                $this->writeAt( $charset::LINE_SINGLE_NE, $x2, $y1 );
-                $this->writeAt( $charset::LINE_SINGLE_SE, $x2, $y2 );
-                $this->writeAt( $charset::LINE_SINGLE_SW, $x1, $y2 );
+                $this->writeAt($charset::LINE_SINGLE_NW, $x1, $y1);
+                $this->writeAt($charset::LINE_SINGLE_NE, $x2, $y1);
+                $this->writeAt($charset::LINE_SINGLE_SE, $x2, $y2);
+                $this->writeAt($charset::LINE_SINGLE_SW, $x1, $y2);
             } elseif ($lineStyle === static::LINE_DOUBLE) {
-                $this->writeAt( $charset::LINE_DOUBLE_NW, $x1, $y1 );
-                $this->writeAt( $charset::LINE_DOUBLE_NE, $x2, $y1 );
-                $this->writeAt( $charset::LINE_DOUBLE_SE, $x2, $y2 );
-                $this->writeAt( $charset::LINE_DOUBLE_SW, $x1, $y2 );
+                $this->writeAt($charset::LINE_DOUBLE_NW, $x1, $y1);
+                $this->writeAt($charset::LINE_DOUBLE_NE, $x2, $y1);
+                $this->writeAt($charset::LINE_DOUBLE_SE, $x2, $y2);
+                $this->writeAt($charset::LINE_DOUBLE_SW, $x1, $y2);
             } elseif ($lineStyle === static::LINE_BLOCK) {
-                $this->writeAt( $charset::LINE_BLOCK_NW, $x1, $y1 );
-                $this->writeAt( $charset::LINE_BLOCK_NE, $x2, $y1 );
-                $this->writeAt( $charset::LINE_BLOCK_SE, $x2, $y2 );
-                $this->writeAt( $charset::LINE_BLOCK_SW, $x1, $y2 );
+                $this->writeAt($charset::LINE_BLOCK_NW, $x1, $y1);
+                $this->writeAt($charset::LINE_BLOCK_NE, $x2, $y1);
+                $this->writeAt($charset::LINE_BLOCK_SE, $x2, $y2);
+                $this->writeAt($charset::LINE_BLOCK_SW, $x1, $y2);
             }
         }
 
-        /**
-         * Deactivate line drawing and reset colors
-         */
+        // Deactivate line drawing and reset colors
         $this->write($charset::DEACTIVATE);
         $this->resetColor();
-
     }
 
     /**
@@ -321,14 +301,13 @@ abstract class AbstractAdapter implements AdapterInterface
      * In case a line of text does not fit desired width, it will be wrapped to the next line.
      * In case the whole text does not fit in desired height, it will be truncated.
      *
-     *
-     * @param string                   $text     Text to write
-     * @param int                      $width    Maximum block width. Negative value means distance from right edge.
-     * @param int|null                 $height   Maximum block height. Negative value means distance from bottom edge.
-     * @param int                      $x        Block X coordinate (column)
-     * @param int                      $y        Block Y coordinate (row)
-     * @param null|int                 $color    (optional) Text color
-     * @param null|int                 $bgColor  (optional) Text background color
+     * @param string   $text    Text to write
+     * @param int      $width   Maximum block width. Negative value means distance from right edge.
+     * @param int|null $height  Maximum block height. Negative value means distance from bottom edge.
+     * @param int      $x       Block X coordinate (column)
+     * @param int      $y       Block Y coordinate (row)
+     * @param null|int $color   (optional) Text color
+     * @param null|int $bgColor (optional) Text background color
      */
     public function writeTextBlock(
         $text,
@@ -339,7 +318,6 @@ abstract class AbstractAdapter implements AdapterInterface
         $color = null,
         $bgColor = null
     ) {
-
     }
 
     /**
@@ -365,13 +343,13 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Determine and return current console width and height.
      *
-     * @return array        array($width, $height)
+     * @return array array($width, $height)
      */
     public function getSize()
     {
         return array(
             $this->getWidth(),
-            $this->getHeight()
+            $this->getHeight(),
         );
     }
 
@@ -389,11 +367,10 @@ abstract class AbstractAdapter implements AdapterInterface
      * Return current cursor position - array($x, $y)
      *
      *
-     * @return array        array($x, $y);
+     * @return array array($x, $y);
      */
     public function getPos()
     {
-
     }
 
 //    /**
@@ -411,16 +388,15 @@ abstract class AbstractAdapter implements AdapterInterface
 //     * @return  false|int       Integer or false if failed to determine.
 //     */
 //    public function getY();
-//
+
     /**
      * Set cursor position
      *
-     * @param int   $x
-     * @param int   $y
+     * @param int $x
+     * @param int $y
      */
     public function setPos($x, $y)
     {
-
     }
 
     /**
@@ -428,7 +404,6 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function showCursor()
     {
-
     }
 
     /**
@@ -436,7 +411,6 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function hideCursor()
     {
-
     }
 
     /**
@@ -468,9 +442,9 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Prepare a string that will be rendered in color.
      *
-     * @param string                     $string
-     * @param int                        $color
-     * @param null|int                   $bgColor
+     * @param  string   $string
+     * @param  int      $color
+     * @param  null|int $bgColor
      * @return string
      */
     public function colorize($string, $color = null, $bgColor = null)
@@ -503,13 +477,12 @@ abstract class AbstractAdapter implements AdapterInterface
     {
     }
 
-
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\CharsetInterface $charset
+     * @param Charset\CharsetInterface $charset
      */
-    public function setCharset(CharsetInterface $charset)
+    public function setCharset(Charset\CharsetInterface $charset)
     {
         $this->charset = $charset;
     }
@@ -517,7 +490,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\CharsetInterface $charset
+     * @return Charset\CharsetInterface $charset
      */
     public function getCharset()
     {
@@ -529,7 +502,7 @@ abstract class AbstractAdapter implements AdapterInterface
     }
 
     /**
-     * @return \Zend\Console\Charset\Utf8
+     * @return Charset\Utf8
      */
     public function getDefaultCharset()
     {
@@ -571,34 +544,43 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         $width = strlen($string);
 
-        if ($this->isUtf8()) {
-            if (static::$hasMBString === null) {
-                static::$hasMBString = extension_loaded( 'mbstring' );
-            }
-
-            $width = (static::$hasMBString)
-                        ? mb_strlen($string, 'UTF-8' )
-                        : strlen(utf8_decode($string));
+        if (!$this->isUtf8()) {
+            return $width;
         }
+
+        if (static::$hasMBString === null) {
+            static::$hasMBString = extension_loaded( 'mbstring' );
+        }
+
+        $width = (static::$hasMBString)
+               ? mb_strlen($string, 'UTF-8' )
+               : strlen(utf8_decode($string));
 
         return $width;
     }
 
+    /**
+     * Trim a string in an encoding-safe way
+     *
+     * @param  mixed $string
+     * @param  mixed $length
+     * @return int
+     */
     protected function stringTrim($string, $length)
     {
         if ($this->isUtf8()) {
             if (static::$hasMBString === null) {
-                static::$hasMBString = extension_loaded( 'mbstring' );
+                static::$hasMBString = extension_loaded('mbstring');
             }
 
             if (static::$hasMBString) {
-                return mb_strlen( $string, 'UTF-8' );
-            } else {
-                return strlen( utf8_decode( $string ) );
+                return mb_strlen($string, 'UTF-8');
             }
-        } else {
-            return strlen( $string );
+
+            return strlen(utf8_decode($string));
         }
+
+        return strlen($string);
     }
 
     /**
@@ -609,8 +591,8 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function readLine($maxLength = 2048)
     {
-        $f = fopen('php://stdin','r');
-        $line = stream_get_line($f,2048,"\n");
+        $f    = fopen('php://stdin','r');
+        $line = stream_get_line($f, 2048, PHP_EOL);
         fclose($f);
         return rtrim($line,"\n\r");
     }
@@ -631,4 +613,3 @@ abstract class AbstractAdapter implements AdapterInterface
         return $char;
     }
 }
-

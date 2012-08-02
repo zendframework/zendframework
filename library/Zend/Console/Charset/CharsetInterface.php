@@ -8,7 +8,7 @@
  * @package   Zend_Console
  */
 
-namespace Zend\Console;
+namespace Zend\Console\Charset;
 
 /**
  * @category   Zend

@@ -10,8 +10,6 @@
 
 namespace Zend\Console\Charset;
 
-use Zend\Console\CharsetInterface;
-
 /**
  * Basic (low) ASCII line drawing characters.
  *

@@ -8,9 +8,9 @@
  * @package   Zend_Console
  */
 
-namespace Zend\Console;
+namespace Zend\Console\Prompt;
 
-use Zend\Console\AdapterInterface as ConsoleAdapter;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
 
 /**
  * @category   Zend
@@ -18,7 +18,6 @@ use Zend\Console\AdapterInterface as ConsoleAdapter;
  */
 interface PromptInterface
 {
-
     /**
      * Show the prompt to user and return the answer.
      *
@@ -36,15 +35,14 @@ interface PromptInterface
     /**
      * Return console adapter to use when showing prompt.
      *
-     * @return \Zend\Console\AdapterInterface
+     * @return ConsoleAdapter
      */
     public function getConsole();
 
     /**
      * Set console adapter to use when showing prompt.
      *
-     * @param \Zend\Console\AdapterInterface    $adapter
+     * @param ConsoleAdapter $adapter
      */
     public function setConsole(ConsoleAdapter $adapter);
-
 }

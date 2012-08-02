@@ -10,15 +10,14 @@
 
 namespace Zend\Console\Prompt;
 
-use Zend\Console\PromptInterface;
-use Zend\Console\Exception\BadMethodCallException;
+use Zend\Console\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Prompt
  */
-class Select extends Char implements PromptInterface
+class Select extends Char
 {
     /**
      * @var string
@@ -54,7 +53,7 @@ class Select extends Char implements PromptInterface
         }
 
         if (!count($options)) {
-            throw new BadMethodCallException(
+            throw new Exception\BadMethodCallException(
                 'Cannot construct a "select" prompt without any options'
             );
         }
@@ -111,7 +110,7 @@ class Select extends Char implements PromptInterface
     public function setOptions($options)
     {
         if (!is_array($options) && !$options instanceof \Traversable) {
-            throw new BadMethodCallException(
+            throw new Exception\BadMethodCallException(
                 'Please specify an array or Traversable object as options'
             );
         }

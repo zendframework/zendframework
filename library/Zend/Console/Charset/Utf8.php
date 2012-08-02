@@ -10,8 +10,6 @@
 
 namespace Zend\Console\Charset;
 
-use Zend\Console\CharsetInterface;
-
 /**
  * UTF-8 box drawing
  *

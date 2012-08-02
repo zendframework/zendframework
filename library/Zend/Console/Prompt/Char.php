@@ -10,14 +10,12 @@
 
 namespace Zend\Console\Prompt;
 
-use Zend\Console\PromptInterface;
-
 /**
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Prompt
  */
-class Char extends AbstractPrompt implements PromptInterface
+class Char extends AbstractPrompt
 {
     /**
      * @var string

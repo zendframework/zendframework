@@ -72,7 +72,7 @@ class Encrypt extends AbstractFilter
             $options = array();
         }
 
-        if (stream_resolve_include_path('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
+        if (file_exists(__DIR__ . '/Encrypt/' . ucfirst($adapter) . '.php')) {
             $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
         }
 

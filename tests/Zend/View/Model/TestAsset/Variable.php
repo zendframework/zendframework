@@ -14,23 +14,23 @@ use Iterator;
 
 class Variable implements Iterator
 {
-	public function current()
-	{
-	}
+    public function current()
+    {
+    }
 
-	public function key()
-	{
-	}
+    public function key()
+    {
+    }
 
-	public function next()
-	{
-	}
+    public function next()
+    {
+    }
 
-	public function rewind()
-	{
-	}
+    public function rewind()
+    {
+    }
 
-	public function valid()
-	{
-	}
+    public function valid()
+    {
+    }
 }

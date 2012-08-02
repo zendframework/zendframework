@@ -45,13 +45,13 @@ class ModuleLoaderListenerTest extends TestCase
             'module_map_cache_key'     => 'foo',
         ));
 
-        $configListener = new ModuleLoaderListener($options);
+        $moduleLoaderListener = new ModuleLoaderListener($options);
 
         $moduleManager = $this->moduleManager;
         $this->assertEquals(1, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES)));
         $this->assertEquals(0, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
 
-        $configListener->attach($moduleManager->getEventManager());
+        $moduleLoaderListener->attach($moduleManager->getEventManager());
         $this->assertEquals(2, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES)));
         $this->assertEquals(1, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
     }
@@ -62,13 +62,13 @@ class ModuleLoaderListenerTest extends TestCase
             'cache_dir' => $this->tmpdir,
         ));
 
-        $configListener = new ModuleLoaderListener($options);
+        $moduleLoaderListener = new ModuleLoaderListener($options);
 
         $moduleManager = $this->moduleManager;
         $this->assertEquals(1, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES)));
         $this->assertEquals(0, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
 
-        $configListener->attach($moduleManager->getEventManager());
+        $moduleLoaderListener->attach($moduleManager->getEventManager());
         $this->assertEquals(2, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES)));
         $this->assertEquals(0, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
     }
@@ -77,20 +77,20 @@ class ModuleLoaderListenerTest extends TestCase
     {
         $options = new ListenerOptions(array(
             'cache_dir'                => $this->tmpdir,
-            'module_map_cache_enabled' => true,
             'module_map_cache_key'     => 'foo',
+            'module_map_cache_enabled' => true,
         ));
 
         file_put_contents($options->getModuleMapCacheFile(), '<?php return array();');
 
-        $configListener = new ModuleLoaderListener($options);
+        $moduleLoaderListener = new ModuleLoaderListener($options);
 
         $moduleManager = $this->moduleManager;
         $this->assertEquals(1, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES)));
         $this->assertEquals(0, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
 
-        $configListener->attach($moduleManager->getEventManager());
+        $moduleLoaderListener->attach($moduleManager->getEventManager());
         $this->assertEquals(2, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES)));
-        $this->assertEquals(1, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
+        $this->assertEquals(0, count($moduleManager->getEventManager()->getListeners(ModuleEvent::EVENT_LOAD_MODULES_POST)));
     }
 }

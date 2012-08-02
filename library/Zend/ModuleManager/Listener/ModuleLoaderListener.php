@@ -106,7 +106,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     {
         if (
             $this->options->getModuleMapCacheEnabled()
-            && file_exists($this->options->getConfigCacheFile())
+            && file_exists($this->options->getModuleMapCacheFile())
         ) {
             return true;
         }

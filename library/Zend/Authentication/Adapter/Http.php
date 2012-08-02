@@ -491,7 +491,7 @@ class Http implements AdapterInterface
             return $result;
         }
 
-        if (!$result instanceof Authentication\Result)
+        if (!$result instanceof Authentication\Result
             && !is_array($result)
             && $this->_secureStringCompare($result, $creds[1])
         ) {

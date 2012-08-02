@@ -22,7 +22,7 @@ use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Console\Response as ConsoleResponse;
 use Zend\Console\Request as ConsoleRequest;
-use Zend\Console\AdapterInterface as ConsoleAdapter;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
 use Zend\Mvc\Router\RouteInterface;
 use Zend\View\Model\ConsoleModel;
 use Zend\Version\Version;

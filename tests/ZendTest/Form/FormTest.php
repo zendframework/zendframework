@@ -992,4 +992,20 @@ class FormTest extends TestCase
         $this->assertEquals('AAA', $entities[0]->getField2());
         $this->assertEquals('CCC', $entities[1]->getField2());
     }
+	
+	public function testSetDataWithNullValues()
+    {
+        $this->populateForm();
+
+        $set = array(
+            'foo' => null,
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->form->setData($set);
+        $this->assertTrue($this->form->isValid());
+    }
 }

@@ -26,6 +26,11 @@ use Zend\View\Model\ViewModel;
  */
 abstract class AbstractActionController extends AbstractController 
 {
+	/**
+	 * @var string
+	 */
+	protected $eventIdentifier = __CLASS__;
+
     /**
      * Default action if none provided
      *

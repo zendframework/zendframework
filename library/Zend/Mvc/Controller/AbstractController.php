@@ -67,6 +67,11 @@ abstract class AbstractController implements
      * @var ServiceLocatorInterface
      */
     protected $serviceManager;
+	
+	/**
+	 * @var string
+	 */
+	protected $eventIdentifier;
 
     /**
      * Execute the request
@@ -106,7 +111,7 @@ abstract class AbstractController implements
      * Set the event manager instance used by this context
      *
      * @param  EventManagerInterface $events
-     * @return AbstractRestfulController
+     * @return AbstractController
      */
     public function setEventManager(EventManagerInterface $events)
     {
@@ -114,6 +119,7 @@ abstract class AbstractController implements
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
             get_called_class(),
+			$this->eventIdentifier,
             substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
         ));
         $this->events = $events;

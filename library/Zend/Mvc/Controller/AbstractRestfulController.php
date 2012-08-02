@@ -10,18 +10,10 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\EventManager\EventInterface as Event;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerInterface;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Exception;
-use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\DispatchableInterface as Dispatchable;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 
@@ -34,6 +26,10 @@ use Zend\Stdlib\ResponseInterface as Response;
  */
 abstract class AbstractRestfulController extends AbstractController
 {
+	/**
+	 * @var string
+	 */
+	protected $eventIdentifier = __CLASS__;
 
     /**
      * Return list of resources

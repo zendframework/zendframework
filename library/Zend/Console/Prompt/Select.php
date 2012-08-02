@@ -105,7 +105,7 @@ class Select extends Char
     /**
      * Set allowed options
      *
-     * @param array|Traversable $options
+     * @param array|\Traversable $options
      */
     public function setOptions($options)
     {

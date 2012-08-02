@@ -592,7 +592,7 @@ abstract class AbstractAdapter implements AdapterInterface
     public function readLine($maxLength = 2048)
     {
         $f    = fopen('php://stdin','r');
-        $line = stream_get_line($f, 2048, PHP_EOL);
+        $line = stream_get_line($f, $maxLength, PHP_EOL);
         fclose($f);
         return rtrim($line,"\n\r");
     }

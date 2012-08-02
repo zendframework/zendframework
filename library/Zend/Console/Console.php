@@ -11,7 +11,7 @@
 namespace Zend\Console;
 
 /**
- * An static, utility class for interacting with Console enviromen.
+ * An static, utility class for interacting with Console enviroment.
  * Declared abstract to prevent from instantiating.
  *
  * @category   Zend
@@ -25,9 +25,15 @@ abstract class Console
     protected static $instance;
 
     /**
-     * Instantiate (if needed) and retrieve Adapter\AdapterInterface instance.
+     * Create and return Adapter\AdapterInterface instance.
      *
-     * @param  null $forceAdapter Adapter\AdapterInterface class name (can be absolute namespace or relative to Adapter\)
+     * @param  null|string  $forceAdapter Optional adapter class name. Ccan be absolute namespace or class name
+     *                                    relative to Zend\Console\Adapter\. If not provided, a best matching
+     *                                    adapter will be automatically selected.
+     * @param  null|string  $forceCharset optional charset name can be absolute namespace or class name relative to
+     *                                    Zend\Console\Charset\. If not provided, charset will be detected
+     *                                    automatically.
+     * @throws Exception\InvalidArgumentException
      * @return Adapter\AdapterInterface
      */
     public static function getInstance($forceAdapter = null, $forceCharset = null)
@@ -117,6 +123,7 @@ abstract class Console
     }
 
     /**
+     * Try to detect best matching adapter
      * @return string|null
      */
     public static function detectBestAdapter()

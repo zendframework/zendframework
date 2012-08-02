@@ -121,7 +121,7 @@ class Char extends AbstractPrompt
             /**
              * Check if it is an allowed char
              */
-            if (stristr($this->allowedChars,$char)) {
+            if (stristr($this->allowedChars,$char) !== false) {
                 if ($this->echo) {
                     echo trim($char)."\n";
                 } else {

@@ -205,11 +205,11 @@ class Windows extends Virtual implements AdapterInterface
         echo "\r".str_repeat(' ',$this->getWidth())."\r";
     }
 
-
     /**
      * Read a single character from the console input
      *
      * @param string|null   $mask   A list of allowed chars
+     * @throws \Zend\Console\Exception\RuntimeException
      * @return string
      */
     public function readChar($mask = null)
@@ -217,32 +217,114 @@ class Windows extends Virtual implements AdapterInterface
         /**
          * Decide if we can use `choice` tool
          */
-        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]*$/',$mask);
+        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]+$/D', $mask);
 
-        do {
-            if ($useChoice) {
-                /**
-                 * Use the `choice` tool available since windows 2000
-                 */
-                system('choice /n /cs /c '.escapeshellarg($mask).' >NUL',$return);
+        if ($useChoice) {
+            /**
+             * Use Windows 95+ "choice" command, which allows for reading a single character matching a mask,
+             * but is limited to lower ASCII range.
+             */
+            do {
+                system('choice /n /cs /c:' . $mask, $return);
                 if ($return == 255 || $return < 1 || $return > strlen($mask)) {
                     throw new RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
                 } else {
                     /**
                      * Fetch the char from mask
                      */
-                    $char = substr($mask,$return-1,1);
+                    $char = substr($mask, $return - 1, 1);
                 }
-            } else {
-                /**
-                 * Use a fallback method
-                 */
-                $char = $this->readLine(1);
-                if (!$char) {
-                    $char = "\n"; // user pressed [enter]
-                }
+            } while (!$char || ($mask !== null && !stristr($mask, $char)));
+
+            return $char;
+        }
+
+        /**
+         * Try to use PowerShell, giving it console access. Because PowersShell interpreter can take a short while to
+         * load, we are emptying the whole keyboard buffer and picking the last key that has been pressed before or
+         * after PowerShell command has started. The ASCII code for that key is then converted to a character.
+         */
+        if ($mask === null) {
+            exec(
+                'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "' .
+                    'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}' .
+                    'write $key.VirtualKeyCode;' .
+                    '"',
+                $result,
+                $return
+            );
+
+            // Retrieve char from the result.
+            $char = !empty($result) ? implode('', $result) : null;
+
+            if (!empty($char) && !$return) {
+                // We have obtained an ASCII code, convert back to a char ...
+                $char = chr($char);
+
+                // ... and return it...
+                return $char;
             }
-        } while (($mask !== null && !stristr($mask,$char)));
+        } else {
+            /**
+             * Windows and DOS will return carriage-return char (ASCII 13) when the user presses [ENTER] key,
+             * but Console Adapter user might have provided a \n Newline (ASCII 10) in the mask, to allow [ENTER].
+             * We are going to replace all CR with NL to conform.
+             */
+            $mask = strtr($mask, "\n", "\r");
+
+            /**
+             * Prepare a list of ASCII codes from mask chars
+             */
+            $asciiMask = array_map(function($char)
+            {
+                return ord($char);
+            }, str_split($mask));
+            $asciiMask = array_unique($asciiMask);
+
+            /**
+             * Char mask filtering is now handled by the PowerShell itself, because it's a much faster method than
+             * invoking PS interpreter after each mismatch. The command should return ASCII code of a matching key.
+             */
+            $result = $return = null;
+            exec(
+                'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "' .
+                    '[int[]] $mask = ' . join(',', $asciiMask) . ';' .
+                    'do {' .
+                    '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;' .
+                    '} while( !($mask -contains $key) );' .
+                    'write $key;' .
+                    '"',
+                $result,
+                $return
+            );
+
+            $char = !empty($result) ? trim(implode('', $result)) : null;
+
+            if (!$return && $char && ($mask === null || in_array($char, $asciiMask))) {
+                // Normalize CR to LF
+                if ($char == 13) {
+                    $char = 10;
+                }
+
+                // Convert to a char
+                $char = chr($char);
+
+                // ... and return it...
+                return $char;
+            }
+        }
+
+        /**
+         * Fall back to standard input, which on Windows does not allow reading a single character. This is a
+         * limitation of Windows streams implementation (not PHP) and this behavior cannot be changed with a command
+         * like "stty", known to POSIX systems.
+         */
+        $stream = fopen('php://stdin', 'rb');
+        do {
+            $char = fgetc($stream);
+            $char = substr(trim($char), 0, 1);
+        } while (!$char || ($mask !== null && !stristr($mask, $char)));
+        fclose($stream);
 
         return $char;
     }

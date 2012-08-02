@@ -267,11 +267,12 @@ class Uri implements UriInterface
             $this->setHost($authority);
         }
 
+        if (!$uri) {
+            return $this;
+        }
+
         // Capture the path
         if (preg_match('|^[^\?#]*|', $uri, $match)) {
-            if (strlen($match[0]) === 0){
-                $match[0] = '/';
-            }
             $this->setPath($match[0]);
             $uri = substr($uri, strlen($match[0]));
         }

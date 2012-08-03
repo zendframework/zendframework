@@ -587,12 +587,12 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         // First - fail password
         $this->client->setAuth('alice', 'wrong');
         $res = $this->client->send();
-        $this->assertEquals(401, $res->getStatusCode(), 'Expected HTTP 401 response was not recieved');
+        $this->assertEquals(401, $res->getStatusCode(), 'Expected HTTP 401 response was not received');
 
         // Now use good password
         $this->client->setAuth('alice', 'secret');
         $res = $this->client->send();
-        $this->assertEquals(200, $res->getStatusCode(), 'Expected HTTP 200 response was not recieved');
+        $this->assertEquals(200, $res->getStatusCode(), 'Expected HTTP 200 response was not received');
     }
 
     /**
@@ -614,13 +614,13 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setUri(sprintf($uri, 'alice', 'wrong'));
         $this->client->setMethod('GET');
         $res = $this->client->send();
-        $this->assertEquals(401, $res->getStatusCode(), 'Expected HTTP 401 response was not recieved');
+        $this->assertEquals(401, $res->getStatusCode(), 'Expected HTTP 401 response was not received');
 
         // Now use good password
         $this->client->setUri(sprintf($uri, 'alice', 'secret'));
         $this->client->setMethod('GET');
         $res = $this->client->send();
-        $this->assertEquals(200, $res->getStatusCode(), 'Expected HTTP 200 response was not recieved');
+        $this->assertEquals(200, $res->getStatusCode(), 'Expected HTTP 200 response was not received');
     }
 
     /**

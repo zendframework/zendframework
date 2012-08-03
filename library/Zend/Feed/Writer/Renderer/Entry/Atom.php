@@ -383,7 +383,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     }
 
     /**
-     * Set entry cateories
+     * Set entry categories
      *
      * @param  DOMDocument $dom
      * @param  DOMElement $root

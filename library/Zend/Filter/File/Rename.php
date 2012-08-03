@@ -166,7 +166,7 @@ class Rename extends Filter\AbstractFilter
         $result = rename($file['source'], $file['target']);
 
         if ($result !== true) {
-            throw new Exception\RuntimeException(sprintf("File '%s' could not be renamed. An error occured while processing the file.", $value));
+            throw new Exception\RuntimeException(sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $value));
         }
 
         return $file['target'];

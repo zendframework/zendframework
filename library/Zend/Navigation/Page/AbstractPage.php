@@ -641,7 +641,7 @@ abstract class AbstractPage extends AbstractContainer
     }
 
     /**
-     * Sets ACL resource assoicated with this page
+     * Sets ACL resource associated with this page
      *
      * @param  string|AclResource $resource [optional] resource to associate
      *                                      with page. Default is null, which

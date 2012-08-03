@@ -41,7 +41,7 @@ class Regex implements RouteInterface
     /**
      * Specification for URL assembly.
      *
-     * Parameters accepting subsitutions should be denoted as "%key%"
+     * Parameters accepting substitutions should be denoted as "%key%"
      *
      * @var string
      */

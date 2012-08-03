@@ -311,7 +311,7 @@ class Menu extends AbstractHelper
     // Render methods:
 
     /**
-     * Renders the deepest active menu within [$minDepth, $maxDeth], (called
+     * Renders the deepest active menu within [$minDepth, $maxDepth], (called
      * from {@link renderMenu()})
      *
      * @param  AbstractContainer         $container  container to render
@@ -407,7 +407,7 @@ class Menu extends AbstractHelper
             $depth = $iterator->getDepth();
             $isActive = $page->isActive(true);
             if ($depth < $minDepth || !$this->accept($page)) {
-                // page is below minDepth or not accepted by acl/visibilty
+                // page is below minDepth or not accepted by acl/visibility
                 continue;
             } elseif ($onlyActive && !$isActive) {
                 // page is not active itself, but might be in the active branch

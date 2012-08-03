@@ -299,7 +299,7 @@ class Headers implements Countable, Iterator
     }
 
     /**
-     * Return the current key for this object as an interator
+     * Return the current key for this object as an iterator
      *
      * @return mixed
      */

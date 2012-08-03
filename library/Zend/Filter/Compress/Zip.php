@@ -106,7 +106,7 @@ class Zip extends AbstractCompressionAlgorithm
      *
      * @param  string $content
      * @return string Compressed archive
-     * @throws Exception\RuntimeException if unable to open zip archive, or error during compresion
+     * @throws Exception\RuntimeException if unable to open zip archive, or error during compression
      */
     public function compress($content)
     {

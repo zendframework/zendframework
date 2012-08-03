@@ -283,7 +283,7 @@ class MvcEvent extends Event
     }
 
     /**
-     * Get controller clas
+     * Get controller class
      *
      * @return string
      */

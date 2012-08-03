@@ -100,7 +100,7 @@ class Hostname extends AbstractValidator
      * Array for valid Idns
      * @see http://www.iana.org/domains/idn-tables/ Official list of supported IDN Chars
      * (.AC) Ascension Island http://www.nic.ac/pdf/AC-IDN-Policy.pdf
-     * (.AR) Argentinia http://www.nic.ar/faqidn.html
+     * (.AR) Argentina http://www.nic.ar/faqidn.html
      * (.AS) American Samoa http://www.nic.as/idn/chars.cfm
      * (.AT) Austria http://www.nic.at/en/service/technical_information/idn/charset_converter/
      * (.BIZ) International http://www.iana.org/domains/idn-tables/

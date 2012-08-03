@@ -509,7 +509,7 @@ class Dba extends AbstractAdapter implements
     }
 
     /**
-     * Close database file if opend
+     * Close database file if opened
      *
      * @return void
      */

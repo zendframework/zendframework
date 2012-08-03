@@ -254,7 +254,7 @@ class Translator
     }
 
     /**
-     * Retreive the plugin manager for tranlation loaders.
+     * Retrieve the plugin manager for translation loaders.
      *
      * Lazy loads an instance if none currently set.
      *

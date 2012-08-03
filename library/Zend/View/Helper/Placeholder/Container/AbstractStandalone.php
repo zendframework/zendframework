@@ -14,7 +14,7 @@ use Zend\View\Exception;
 use Zend\View\Helper\Placeholder\Registry;
 
 /**
- * Base class for targetted placeholder helpers
+ * Base class for targeted placeholder helpers
  *
  * @package    Zend_View
  * @subpackage Helper
@@ -40,8 +40,8 @@ abstract class AbstractStandalone
     protected $regKey;
 
     /**
-     * Flag wheter to automatically escape output, must also be
-     * enforced in the child class if __toString/toString is overriden
+     * Flag whether to automatically escape output, must also be
+     * enforced in the child class if __toString/toString is overridden
      * @var book
      */
     protected $autoEscape = true;

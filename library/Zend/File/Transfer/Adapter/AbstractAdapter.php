@@ -111,7 +111,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      *         type,            - Mime type of this file
      *         size,            - Filesize in bytes
      *         tmp_name,        - Internally temporary filename for uploaded files
-     *         error,           - Error which has occured
+     *         error,           - Error which has occurred
      *         destination,     - New destination for this file
      *         validators,      - Set validator names for this file
      *         files            - Set file names for this file

@@ -79,7 +79,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Normalize type attribut of meta
+     * Normalize type attribute of meta
      *
      * @param $type type in CamelCase
      * @return string
@@ -107,11 +107,11 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      *
      * Allows the following 'virtual' methods:
      * - appendName($keyValue, $content, $modifiers = array())
-     * - offsetGetName($index, $keyValue, $content, $modifers = array())
+     * - offsetGetName($index, $keyValue, $content, $modifiers = array())
      * - prependName($keyValue, $content, $modifiers = array())
      * - setName($keyValue, $content, $modifiers = array())
      * - appendHttpEquiv($keyValue, $content, $modifiers = array())
-     * - offsetGetHttpEquiv($index, $keyValue, $content, $modifers = array())
+     * - offsetGetHttpEquiv($index, $keyValue, $content, $modifiers = array())
      * - prependHttpEquiv($keyValue, $content, $modifiers = array())
      * - setHttpEquiv($keyValue, $content, $modifiers = array())
      * - appendProperty($keyValue, $content, $modifiers = array())

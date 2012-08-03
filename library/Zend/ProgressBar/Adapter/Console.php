@@ -122,7 +122,7 @@ class Console extends AbstractAdapter
     protected $textWidth = 20;
 
     /**
-     * Wether the output started yet or not
+     * Whether the output started yet or not
      *
      * @var boolean
      */
@@ -239,7 +239,7 @@ class Console extends AbstractAdapter
      * Set the elements to display with the progressbar
      *
      * @param  array $elements
-     * @throws \Zend\ProgressBar\Adapter\Exception When an invalid element is foudn in the array
+     * @throws \Zend\ProgressBar\Adapter\Exception When an invalid element is found in the array
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setElements(array $elements)

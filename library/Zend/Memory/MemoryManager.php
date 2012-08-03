@@ -116,7 +116,7 @@ class MemoryManager
     {
         /**
          * @todo !!!
-         * uniqid() php function doesn't really garantee the id to be unique
+         * uniqid() php function doesn't really guarantee the id to be unique
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
@@ -388,7 +388,7 @@ class MemoryManager
 
     /**
      * Swap object data to disk
-     * Actualy swaps data or only unloads it from memory,
+     * Actually swaps data or only unloads it from memory,
      * if object is not changed since last swap
      *
      * @param \Zend\Memory\Container\Movable $container
@@ -426,7 +426,7 @@ class MemoryManager
         $this->memorySize += strlen($value);
         $this->_swapCheck();
 
-        // Add loaded obect to the end of loaded objects list
+        // Add loaded object to the end of loaded objects list
         $container->setValue($value);
 
         if ($this->sizes[$id] > $this->minSize) {

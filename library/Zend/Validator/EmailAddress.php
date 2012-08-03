@@ -278,7 +278,7 @@ class EmailAddress extends AbstractValidator
      * '224.0.0.0/4', '240.0.0.0/4'
      * @see http://en.wikipedia.org/wiki/Reserved_IP_addresses
      *
-     * As of RFC5753 (JAN 2010), the following blocks are no logner reserved:
+     * As of RFC5753 (JAN 2010), the following blocks are no longer reserved:
      *   - 128.0.0.0/16
      *   - 191.255.0.0/16
      *   - 223.255.255.0/24

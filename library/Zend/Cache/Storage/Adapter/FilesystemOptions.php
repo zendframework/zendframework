@@ -132,7 +132,7 @@ class FilesystemOptions extends AdapterOptions
         if ($cacheDir !== null) {
             if (!is_dir($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$cacheDir}' not found or not a directoy"
+                    "Cache directory '{$cacheDir}' not found or not a directory"
                 );
             } elseif (!is_writable($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
@@ -339,14 +339,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeperator
+     * @param  string $namespaceSeparator
      * @return FilesystemOptions
      */
-    public function setNamespaceSeparator($namespaceSeperator)
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        $namespaceSeperator = (string) $namespaceSeperator;
-        $this->triggerOptionEvent('namespace_separator', $namespaceSeperator);
-        $this->namespaceSeparator = $namespaceSeperator;
+        $namespaceSeparator = (string) $namespaceSeparator;
+        $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+        $this->namespaceSeparator = $namespaceSeparator;
         return $this;
     }
 

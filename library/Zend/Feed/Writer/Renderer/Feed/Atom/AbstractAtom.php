@@ -377,7 +377,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     }
 
     /**
-     * Set feed cateories
+     * Set feed categories
      *
      * @param  DOMDocument $dom
      * @param  DOMElement $root

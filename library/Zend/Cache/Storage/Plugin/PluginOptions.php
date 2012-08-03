@@ -105,7 +105,7 @@ class PluginOptions extends AbstractOptions
      * Used by:
      * - ExceptionHandler
      *
-     * @param  callable EexceptionCallback
+     * @param  callable ExceptionCallback
      * @return PluginOptions
      */
     public function setExceptionCallback($exceptionCallback)

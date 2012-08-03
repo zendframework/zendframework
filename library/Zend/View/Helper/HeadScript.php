@@ -22,7 +22,7 @@ use Zend\View\Exception;
 class HeadScript extends Placeholder\Container\AbstractStandalone
 {
     /**#@+
-     * Script type contants
+     * Script type constants
      * @const string
      */
     const FILE   = 'FILE';

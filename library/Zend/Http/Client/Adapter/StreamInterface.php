@@ -13,7 +13,7 @@ namespace Zend\Http\Client\Adapter;
 /**
  * An interface description for Zend_Http_Client_Adapter_Stream classes.
  *
- * This interface decribes Zend_Http_Client_Adapter which supports streaming.
+ * This interface describes Zend_Http_Client_Adapter which supports streaming.
  *
  * @category   Zend
  * @package    Zend_Http

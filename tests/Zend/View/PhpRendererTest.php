@@ -183,7 +183,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF2-68
      */
-    public function testPassingVariablesObjectToSetVarsShouldUseItDirectoy()
+    public function testPassingVariablesObjectToSetVarsShouldUseItDirectory()
     {
         $vars = new Variables(array('foo' => '<p>Bar</p>'));
         $this->renderer->setVars($vars);

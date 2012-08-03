@@ -34,7 +34,7 @@ class SharedEventManager implements SharedEventManagerInterface
     /**
      * Attach a listener to an event
      *
-     * Allows attaching a callback to an event offerred by one or more
+     * Allows attaching a callback to an event offered by one or more
      * identifying components. As an example, the following connects to the
      * "getAll" event of both an AbstractResource and EntityResource:
      *

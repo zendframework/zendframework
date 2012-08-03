@@ -62,7 +62,7 @@ class SessionManager extends AbstractManager
     /**
      * Start session
      *
-     * if No sesion currently exists, attempt to start it. Calls
+     * if No session currently exists, attempt to start it. Calls
      * {@link isValid()} once session_start() is called, and raises an
      * exception if validation fails.
      *

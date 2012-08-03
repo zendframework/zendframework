@@ -11,10 +11,24 @@
 namespace ZendTest\Code\Scanner;
 
 use Zend\Code\Scanner\FileScanner;
+use Zend\Code\Annotation;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class ClassScannerTest extends TestCase
 {
+    protected $manager;
+ 
+    public function setUp()
+    {
+        $this->manager = new Annotation\AnnotationManager();
+        
+        $genericParser = new Annotation\Parser\GenericAnnotationParser();
+        $genericParser->registerAnnotation('ZendTest\Code\Annotation\TestAsset\Foo');
+        $genericParser->registerAnnotation('ZendTest\Code\Annotation\TestAsset\Bar');
+        
+        $this->manager->attach($genericParser);
+    }
+    
     public function testClassScannerHasClassInformation()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
@@ -84,5 +98,18 @@ class ClassScannerTest extends TestCase
         $this->assertEquals(11, $class->getLineStart());
         $this->assertEquals(34, $class->getLineEnd());
     }
+    
+    public function testClassScannerCanScanAnnotations()
+    {
+        $file    = new FileScanner(__DIR__ . '/../Annotation/TestAsset/EntityWithAnnotations.php');
+        $class   = $file->getClass('ZendTest\Code\Annotation\TestAsset\EntityWithAnnotations');
+        $annotations = $class->getAnnotations($this->manager);
+        
+        $this->assertTrue($annotations->hasAnnotation('ZendTest\Code\Annotation\TestAsset\Foo'));
+        $this->assertTrue($annotations->hasAnnotation('ZendTest\Code\Annotation\TestAsset\Bar'));
 
+        $this->assertEquals('first',  $annotations[0]->content);
+        $this->assertEquals('second', $annotations[1]->content);
+        $this->assertEquals('third',  $annotations[2]->content);
+    }
 }

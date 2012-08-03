@@ -15,8 +15,8 @@ use Zend\Authentication\Adapter\Http\ResolverInterface;
 
 class BasicAuthObjectResolver implements ResolverInterface
 {
-    public function resolve($username, $realm, $password = null) {
-
+    public function resolve($username, $realm, $password = null)
+    {
         if ($username == 'Bryce' && $password == 'ThisIsNotMyPassword') {
             $identity = new \stdClass();
 
@@ -32,6 +32,5 @@ class BasicAuthObjectResolver implements ResolverInterface
             null,
             array('Authentication failed.')
         );
-
     }
 }

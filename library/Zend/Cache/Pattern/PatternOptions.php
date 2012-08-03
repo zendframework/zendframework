@@ -641,7 +641,7 @@ class PatternOptions extends AbstractOptions
 
         if (!is_dir($publicDir)) {
             throw new Exception\InvalidArgumentException(
-                "Public directory '{$publicDir}' not found or not a directoy"
+                "Public directory '{$publicDir}' not found or not a directory"
             );
         } elseif (!is_writable($publicDir)) {
             throw new Exception\InvalidArgumentException(

@@ -24,7 +24,7 @@ class InitTrigger extends AbstractListener
 {
     /**
      * @param ModuleEvent $e
-     * @eturn void
+     * @return void
      */
     public function __invoke(ModuleEvent $e)
     {

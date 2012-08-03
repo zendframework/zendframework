@@ -135,7 +135,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->_subdirs[] = '.foo.bar';
     }
 
-    public function testCreateFolderEmtpyPart()
+    public function testCreateFolderEmptyPart()
     {
         $mail = new Writable\Maildir($this->_params);
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');

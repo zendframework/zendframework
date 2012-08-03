@@ -271,7 +271,7 @@ class Connection implements ConnectionInterface
             // ignore general warnings
             if ($errors[0]['SQLSTATE'] != '01000') {
                 throw new Exception\RuntimeException(
-                    'An exception occured while trying to execute the provided $sql',
+                    'An exception occurred while trying to execute the provided $sql',
                     null,
                     new ErrorException($errors)
                 );

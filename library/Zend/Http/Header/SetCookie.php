@@ -111,7 +111,7 @@ class SetCookie implements MultipleHeaderInterface
                         continue;
                     }
 
-                    // Process the remanining elements
+                    // Process the remaining elements
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
                         case 'expires' : $header->setExpires($headerValue); break;
                         case 'domain'  : $header->setDomain($headerValue); break;

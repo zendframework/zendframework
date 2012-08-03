@@ -188,7 +188,7 @@ class Parser
     }
 
     /**
-     * Register a symbold.
+     * Register a symbol.
      *
      * @param  string  $id
      * @param  integer $leftBindingPower

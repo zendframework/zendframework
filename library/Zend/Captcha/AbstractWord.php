@@ -137,7 +137,7 @@ abstract class AbstractWord extends AbstractAdapter
     }
 
     /**
-     * Retrieve word length to use when genrating captcha
+     * Retrieve word length to use when generating captcha
      *
      * @return integer
      */

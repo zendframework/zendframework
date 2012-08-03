@@ -150,7 +150,7 @@ abstract class AbstractWriter implements WriterInterface
     }
 
     /**
-     * Perform shutdown activites such as closing open resources
+     * Perform shutdown activities such as closing open resources
      *
      * @return void
      */

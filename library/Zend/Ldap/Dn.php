@@ -680,7 +680,7 @@ class Dn implements \ArrayAccess
      * Returns a DN part in the form $attribute = $value
      *
      * This method supports the creation of multi-valued RDNs
-     * $part must contain an even number of elemets.
+     * $part must contain an even number of elements.
      *
      * @param  array  $part
      * @param  string $caseFold

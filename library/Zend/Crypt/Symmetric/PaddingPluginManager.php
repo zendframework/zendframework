@@ -44,7 +44,7 @@ class PaddingPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the padding adaper loaded is an instance of Padding\PaddingInterface.
+     * Checks that the padding adapter loaded is an instance of Padding\PaddingInterface.
      *
      * @param  mixed $plugin
      * @return void

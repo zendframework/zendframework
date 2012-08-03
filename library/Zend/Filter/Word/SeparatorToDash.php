@@ -19,7 +19,7 @@ class SeparatorToDash extends SeparatorToSeparator
     /**
      * Constructor
      *
-     * @param  string  $searchSeparator  Seperator to search for change
+     * @param  string  $searchSeparator  Separator to search for change
      */
     public function __construct($searchSeparator = ' ')
     {

@@ -13,7 +13,7 @@ namespace Zend\Authentication\Adapter\Http;
 /**
  * Auth HTTP Resolver Interface
  *
- * Defines an interace to resolve a username/realm combination into a shared
+ * Defines an interface to resolve a username/realm combination into a shared
  * secret usable by HTTP Authentication.
  *
  * @category   Zend

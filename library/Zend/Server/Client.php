@@ -21,7 +21,7 @@ interface Client
     /**
      * Executes remote call
      *
-     * Unified interface for calling custome remote methods.
+     * Unified interface for calling custom remote methods.
      *
      * @param  string $method Remote call name.
      * @param  array $params Call parameters.

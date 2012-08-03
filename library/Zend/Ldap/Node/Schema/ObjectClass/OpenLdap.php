@@ -145,7 +145,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
     }
 
     /**
-     * Returns the parent object classes in the inhertitance tree if one exists
+     * Returns the parent object classes in the inheritance tree if one exists
      *
      * @return array of OpenLdap
      */

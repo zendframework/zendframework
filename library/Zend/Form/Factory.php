@@ -431,7 +431,7 @@ class Factory
     }
 
     /**
-     * Prepare a validaiton group and inject in the provided form
+     * Prepare a validation group and inject in the provided form
      *
      * Takes an array of elements names
      *

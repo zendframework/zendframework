@@ -20,7 +20,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
      * We use the __ prefix to avoid collisions with properties in
-     * user-implmentations.
+     * user-implementations.
      *
      * @var bool
      */

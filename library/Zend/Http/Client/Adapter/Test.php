@@ -51,7 +51,7 @@ class Test implements AdapterInterface
     protected $responseIndex = 0;
 
     /**
-     * Wether or not the next request will fail with an exception
+     * Whether or not the next request will fail with an exception
      *
      * @var boolean
      */

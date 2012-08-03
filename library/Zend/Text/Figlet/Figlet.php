@@ -137,7 +137,7 @@ class Figlet
     protected $userSmush = 0;
 
     /**
-     * Wether to handle paragraphs || not
+     * Whether to handle paragraphs || not
      *
      * @var boolean
      */
@@ -199,7 +199,7 @@ class Figlet
     protected $outlineLength = 0;
 
     /**
-     * Maxmimum outline length
+     * Maximum outline length
      *
      * @var integer
      */
@@ -317,7 +317,7 @@ class Figlet
     /**
      * Set handling of paragraphs
      *
-     * @param  boolean $handleParagraphs Wether to handle paragraphs or not
+     * @param  boolean $handleParagraphs Whether to handle paragraphs or not
      * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
@@ -1092,7 +1092,7 @@ class Figlet
     }
 
     /**
-     * Set the used smush mode, according to smush override, user smsush and
+     * Set the used smush mode, according to smush override, user smush and
      * font smush.
      *
      * @return void

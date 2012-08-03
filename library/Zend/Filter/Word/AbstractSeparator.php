@@ -40,9 +40,9 @@ abstract class AbstractSeparator extends PregReplaceFilter
     }
 
     /**
-     * Sets a new seperator
+     * Sets a new separator
      *
-     * @param  string  $separator  Seperator
+     * @param  string  $separator  Separator
      * @return AbstractSeparator
      * @throws Exception\InvalidArgumentException
      */
@@ -56,7 +56,7 @@ abstract class AbstractSeparator extends PregReplaceFilter
     }
 
     /**
-     * Returns the actual set seperator
+     * Returns the actual set separator
      *
      * @return  string
      */

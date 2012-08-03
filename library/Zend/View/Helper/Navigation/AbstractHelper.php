@@ -74,7 +74,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     protected $acl;
 
     /**
-     * Wheter invisible items should be rendered by this helper
+     * Whether invisible items should be rendered by this helper
      *
      * @var bool
      */

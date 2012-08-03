@@ -57,7 +57,7 @@ class Ini extends AbstractWriter
     }
 
     /**
-     * Set if rendering should occour without sections or not.
+     * Set if rendering should occur without sections or not.
      *
      * If set to true, the INI file is rendered without sections completely
      * into the global namespace of the INI file.

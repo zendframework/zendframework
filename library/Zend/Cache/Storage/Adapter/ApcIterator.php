@@ -22,7 +22,7 @@ class ApcIterator implements IteratorInterface
 {
 
     /**
-     * The apc storage intance
+     * The apc storage instance
      *
      * @var Apc
      */

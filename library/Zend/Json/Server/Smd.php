@@ -70,7 +70,7 @@ class Smd
     protected $id;
 
     /**
-     * Services offerred
+     * Services offered
      * @var array
      */
     protected $services = array();

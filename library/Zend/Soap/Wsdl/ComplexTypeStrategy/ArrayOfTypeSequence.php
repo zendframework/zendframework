@@ -70,7 +70,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
     }
 
     /**
-     * From a nested defintion with type[], get the singular xsd:type
+     * From a nested definition with type[], get the singular xsd:type
      *
      * @param  string $type
      * @return string

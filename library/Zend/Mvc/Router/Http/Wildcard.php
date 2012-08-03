@@ -32,7 +32,7 @@ class Wildcard implements RouteInterface
     protected $keyValueDelimiter;
 
     /**
-     * Delimtier before parameters.
+     * Delimiter before parameters.
      *
      * @var array
      */

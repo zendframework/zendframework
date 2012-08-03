@@ -51,7 +51,7 @@ class Decoder
     protected $sourceLength;
 
     /**
-     * The offset within the souce being decoded
+     * The offset within the source being decoded
      *
      * @var int
      *
@@ -140,7 +140,7 @@ class Decoder
     }
 
     /**
-     * Recursive driving rountine for supported toplevel tops
+     * Recursive driving routine for supported toplevel tops
      *
      * @return mixed
      */
@@ -267,7 +267,7 @@ class Decoder
 
 
     /**
-     * Removes whitepsace characters from the source input
+     * Removes whitespace characters from the source input
      */
     protected function _eatWhitespace()
     {
@@ -520,7 +520,7 @@ class Decoder
      *
      * Normally should be handled by mb_convert_encoding, but
      * provides a slower PHP-only method for installations
-     * that lack the multibye string extension.
+     * that lack the multibyte string extension.
      *
      * This method is from the Solar Framework by Paul M. Jones
      *

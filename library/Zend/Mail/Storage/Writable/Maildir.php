@@ -315,7 +315,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
      *
      * If someone disables posix we create a random number of the same size, so this method should also
      * work on Windows - if you manage to get maildir working on Windows.
-     * Microtime could also be disabled, altough I've never seen it.
+     * Microtime could also be disabled, although I've never seen it.
      *
      * @return string new uniqueid
      */

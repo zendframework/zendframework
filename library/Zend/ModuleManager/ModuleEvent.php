@@ -68,7 +68,7 @@ class ModuleEvent extends Event
                 ,__METHOD__, gettype($moduleName)
             ));
         }
-        // Performance tweak, dont add it as param.
+        // Performance tweak, don't add it as param.
         $this->moduleName = $moduleName;
 
         return $this;
@@ -98,14 +98,14 @@ class ModuleEvent extends Event
                 ,__METHOD__, gettype($module)
             ));
         }
-        // Performance tweak, dont add it as param.
+        // Performance tweak, don't add it as param.
         $this->module = $module;
 
         return $this;
     }
 
     /**
-     * Get the config listner
+     * Get the config listener
      *
      * @return null|Listener\ConfigMergerInterface
      */

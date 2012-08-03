@@ -18,7 +18,7 @@ require_once __DIR__ . '/SplAutoloader.php';
  *
  * Utilizes class-map files to lookup classfile locations.
  *
- * @catebory   Zend
+ * @category   Zend
  * @package    Zend_Loader
  */
 class ClassMapAutoloader implements SplAutoloader

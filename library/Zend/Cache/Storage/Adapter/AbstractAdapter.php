@@ -1569,7 +1569,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     }
 
     /**
-     * Validates and normalizes an array of key-value paírs
+     * Validates and normalizes an array of key-value pairs
      *
      * @param  array $keyValuePairs
      * @return void

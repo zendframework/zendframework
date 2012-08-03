@@ -347,7 +347,7 @@ a {
 
     }
 
-    public function testMediaAttributeAsCommaSeperatedString()
+    public function testMediaAttributeAsCommaSeparatedString()
     {
         $this->helper->setIndent(4);
         $this->helper->appendStyle('

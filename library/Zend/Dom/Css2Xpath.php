@@ -123,7 +123,7 @@ class Css2Xpath
             $expression
         );
 
-        /** ZF-9764 -- remove double asterix */
+        /** ZF-9764 -- remove double asterisk */
         $expression = str_replace('**', '*', $expression);
 
         return $expression;

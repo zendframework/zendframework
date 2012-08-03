@@ -118,7 +118,7 @@ class CacheControl implements HeaderInterface
     }
 
     /**
-     * Assembles the directives into a comma-delimeted string
+     * Assembles the directives into a comma-delimited string
      *
      * @return string
      */

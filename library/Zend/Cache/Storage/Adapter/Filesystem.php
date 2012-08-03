@@ -1444,7 +1444,7 @@ class Filesystem extends AbstractAdapter implements
             foreach ($parts as $part) {
                 $path.= \DIRECTORY_SEPARATOR . $part;
 
-                // create a single directory, set and reset umask immediatly
+                // create a single directory, set and reset umask immediately
                 $umask = ($umask !== false) ? umask($umask) : false;
                 $res   = mkdir($path, ($perm === false) ? 0777 : $perm, false);
                 if ($umask !== false) {

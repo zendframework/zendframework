@@ -125,7 +125,7 @@ class Sitemap extends AbstractHelper
     /**
      * Sets whether the XML declaration should be used in output
      *
-     * @param  bool $useXmlDecl whether XML delcaration should be rendered
+     * @param  bool $useXmlDecl whether XML declaration should be rendered
      * @returnSitemap  fluent interface, returns self
      */
     public function setUseXmlDeclaration($useXmlDecl)

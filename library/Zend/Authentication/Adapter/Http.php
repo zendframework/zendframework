@@ -115,7 +115,7 @@ class Http implements AdapterInterface
     protected $algo;
 
     /**
-     * List of supported qop options. My intetion is to support both 'auth' and
+     * List of supported qop options. My intention is to support both 'auth' and
      * 'auth-int', but 'auth-int' won't make it into the first version.
      *
      * @var array
@@ -146,7 +146,7 @@ class Http implements AdapterInterface
      *    'digest_domains' => <string> Space-delimited list of URIs
      *    'nonce_timeout' => <int>
      *    'use_opaque' => <bool> Whether to send the opaque value in the header
-     *    'alogrithm' => <string> See $supportedAlgos. Default: MD5
+     *    'algorithm' => <string> See $supportedAlgos. Default: MD5
      *    'proxy_auth' => <bool> Whether to do authentication as a Proxy
      * @throws Exception\InvalidArgumentException
      */
@@ -487,7 +487,11 @@ class Http implements AdapterInterface
 
         $result = $this->basicResolver->resolve($creds[0], $this->realm, $creds[1]);
 
-        if ($result
+        if ($result instanceof Authentication\Result && $result->isValid()) {
+            return $result;
+        }
+
+        if (!$result instanceof Authentication\Result
             && !is_array($result)
             && $this->_secureStringCompare($result, $creds[1])
         ) {

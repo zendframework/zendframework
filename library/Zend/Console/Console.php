@@ -11,7 +11,7 @@
 namespace Zend\Console;
 
 /**
- * An static, utility class for interacting with Console enviroment.
+ * An static, utility class for interacting with Console environment.
  * Declared abstract to prevent from instantiating.
  *
  * @category   Zend

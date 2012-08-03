@@ -622,7 +622,7 @@ class Imap
      * @param  array       $flags  flags to set, add or remove - see $mode
      * @param  int         $from   message for items or start message if $to !== null
      * @param  int|null    $to     if null only one message ($from) is fetched, else it's the
-     *                             last message, INF means last message avaible
+     *                             last message, INF means last message available
      * @param  string|null $mode   '+' to add flags, '-' to remove flags, everything else sets the flags as given
      * @param  bool        $silent if false the return values are the new flags for the wanted messages
      * @return bool|array new flags if $silent is false, else true or false depending on success

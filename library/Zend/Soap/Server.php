@@ -723,7 +723,7 @@ class Server implements \Zend\Server\Server
      *
      * Uses {@link $wsdl} and return value of {@link getOptions()} to instantiate
      * SoapServer object, and then registers any functions or class with it, as
-     * well as peristence.
+     * well as persistence.
      *
      * @return SoapServer
      */
@@ -767,7 +767,7 @@ class Server implements \Zend\Server\Server
      * - string; if so, verifies XML
      *
      * If no request is passed, pulls request using php:://input (for
-     * cross-platform compatability purposes).
+     * cross-platform compatibility purposes).
      *
      * @param DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request Optional request
      * @return void|string
@@ -817,7 +817,7 @@ class Server implements \Zend\Server\Server
     }
 
     /**
-     * Method initalizes the error context that the SOAPServer enviroment will run in.
+     * Method initializes the error context that the SOAPServer environment will run in.
      *
      * @return boolean display_errors original value
      */

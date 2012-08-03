@@ -101,7 +101,7 @@ class Message
      * only one part is present, the content of this part is returned. If no
      * part had been added, an empty string is returned.
      *
-     * Parts are seperated by the mime boundary as defined in Zend_Mime. If
+     * Parts are separated by the mime boundary as defined in Zend_Mime. If
      * {@link setMime()} has been called before this method, the Zend_Mime
      * object set by this call will be used. Otherwise, a new Zend_Mime object
      * is generated and used.
@@ -168,7 +168,7 @@ class Message
     }
 
     /**
-     * Explode MIME multipart string into seperate parts
+     * Explode MIME multipart string into separate parts
      *
      * Parts consist of the header and the body of each MIME part.
      *

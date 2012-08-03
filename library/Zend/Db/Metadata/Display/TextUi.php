@@ -77,7 +77,7 @@ class TextUi
     {
         $columnAttributes = array(
             array('name', 'Name', 12),
-            array('ordinalPosition', "Oridinal\nPosition", 10),
+            array('ordinalPosition', "Ordinal\nPosition", 10),
             array('columnDefault', "Column\nDefault", 8),
             array('isNullable', "Is\nNullable", 9),
             array('dataType', "Data\nType", 8),

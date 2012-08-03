@@ -100,7 +100,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     }
 
     /**
-     * Seek to an absolute positio
+     * Seek to an absolute position
      *
      * @param  integer $index
      * @throws OutOfBoundsException When the seek position is invalid

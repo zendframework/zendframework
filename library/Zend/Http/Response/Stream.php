@@ -62,7 +62,7 @@ class Stream extends Response
     /**
      * Get the response as stream
      *
-     * @return resourse
+     * @return resource
      */
     public function getStream()
     {
@@ -72,7 +72,7 @@ class Stream extends Response
     /**
      * Set the response stream
      *
-     * @param resourse $stream
+     * @param resource $stream
      * @return Stream
      */
     public function setStream($stream)
@@ -204,7 +204,7 @@ class Stream extends Response
      * should be in it's readable version - that is, after decoding it (if it
      * was decoded), deflating it (if it was gzip compressed), etc.
      *
-     * If you want to get the raw body (as transfered on wire) use
+     * If you want to get the raw body (as transferred on wire) use
      * $this->getRawBody() instead.
      *
      * @return string
@@ -218,7 +218,7 @@ class Stream extends Response
     }
 
     /**
-     * Get the raw response body (as transfered "on wire") as string
+     * Get the raw response body (as transferred "on wire") as string
      *
      * If the body is encoded (with Transfer-Encoding, not content-encoding -
      * IE "chunked" body), gzip compressed, etc. it will not be decoded.

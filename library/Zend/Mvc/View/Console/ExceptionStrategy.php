@@ -32,7 +32,7 @@ class ExceptionStrategy implements ListenerAggregateInterface
     protected $displayExceptions = true;
 
     /**
-     * A template for message to show in console when an exception has occured.
+     * A template for message to show in console when an exception has occurred.
      * @var string|callable
      */
     protected $message = <<<EOT

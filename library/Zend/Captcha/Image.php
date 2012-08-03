@@ -385,7 +385,7 @@ class Image extends AbstractWord
     }
 
     /**
-     * Set captch image filename suffix
+     * Set captcha image filename suffix
      *
      * @param  string $suffix
      * @return Image

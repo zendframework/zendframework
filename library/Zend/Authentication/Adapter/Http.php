@@ -487,7 +487,11 @@ class Http implements AdapterInterface
 
         $result = $this->basicResolver->resolve($creds[0], $this->realm, $creds[1]);
 
-        if ($result
+        if ($result instanceof Authentication\Result && $result->isValid()) {
+            return $result;
+        }
+
+        if (!$result instanceof Authentication\Result
             && !is_array($result)
             && $this->_secureStringCompare($result, $creds[1])
         ) {

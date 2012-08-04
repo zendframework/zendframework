@@ -183,7 +183,7 @@ class Http extends Uri
      * Parse a URI string
      *
      * @param  string $uri
-     * @return Uri
+     * @return Http
      */
     public function parse($uri)
     {

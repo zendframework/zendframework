@@ -114,9 +114,9 @@ class Wddx extends AbstractAdapter
             // check if the returned NULL is valid
             // or based on an invalid wddx string
             try {
-                libxml_disable_entity_loader(true);
+                $oldLibxmlDisableEntityLoader = libxml_disable_entity_loader(true);
                 $simpleXml = new \SimpleXMLElement($wddx);
-                libxml_disable_entity_loader(false);
+                libxml_disable_entity_loader($oldLibxmlDisableEntityLoader);
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }

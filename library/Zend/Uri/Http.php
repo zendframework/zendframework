@@ -192,5 +192,7 @@ class Http extends Uri
         if (empty($this->path)){
             $this->path = '/';
         }
+
+        return $this;
     }
 }

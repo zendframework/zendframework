@@ -37,6 +37,13 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         Reader\Reader::reset();
     }
 
+    public function testStringImportTrimsContentToAllowSlightlyInvalidXml()
+    {
+        $feed = Reader\Reader::importString(
+            '   ' . file_get_contents($this->_feedSamplePath.'/Reader/rss20.xml')
+        );
+    }
+
     public function testDetectsFeedIsRss20()
     {
         $feed = Reader\Reader::importString(

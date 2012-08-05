@@ -271,7 +271,7 @@ class Reader
         $libxml_errflag = libxml_use_internal_errors(true);
         libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
-        $status = $dom->loadXML($string);
+        $status = $dom->loadXML(trim($string));
         libxml_disable_entity_loader(false);
         libxml_use_internal_errors($libxml_errflag);
 
@@ -279,6 +279,7 @@ class Reader
             // Build error message
             $error = libxml_get_last_error();
             if ($error && $error->message) {
+                $error->message = trim($error->message);
                 $errormsg = "DOMDocument cannot parse XML: {$error->message}";
             } else {
                 $errormsg = "DOMDocument cannot parse XML: Please check the XML document's validity";
@@ -298,7 +299,7 @@ class Reader
             $reader = new Feed\Atom($dom, $type);
         } else {
             throw new Exception\RuntimeException('The URI used does not point to a '
-            . 'valid Atom, RSS or RDF feed that Zend_Feed_Reader can parse.');
+            . 'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
         }
         return $reader;
     }
@@ -340,13 +341,14 @@ class Reader
         $libxml_errflag = libxml_use_internal_errors(true);
         libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
-        $status = $dom->loadHTML($responseHtml);
+        $status = $dom->loadHTML(trim($responseHtml));
         libxml_disable_entity_loader(false);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
             // Build error message
             $error = libxml_get_last_error();
             if ($error && $error->message) {
+                $error->message = trim($error->message);
                 $errormsg = "DOMDocument cannot parse HTML: {$error->message}";
             } else {
                 $errormsg = "DOMDocument cannot parse HTML: Please check the XML document's validity";

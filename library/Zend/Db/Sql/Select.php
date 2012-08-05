@@ -43,7 +43,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const JOIN_RIGHT = 'right';
     const SQL_STAR = '*';
     const ORDER_ASCENDING = 'ASC';
-    const ORDER_DESENDING = 'DESC';
+    const ORDER_DESCENDING = 'DESC';
     /**#@-*/
 
     /**
@@ -600,8 +600,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     $v = self::ORDER_ASCENDING;
                 }
             }
-            if (strtoupper($v) == self::ORDER_DESENDING) {
-                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_DESENDING);
+            if (strtoupper($v) == self::ORDER_DESCENDING) {
+                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_DESCENDING);
             } else {
                 $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_ASCENDING);
             }

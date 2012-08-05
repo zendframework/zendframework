@@ -583,7 +583,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr24 = 'SELECT "foo".* FROM "foo" ORDER BY "c1" DESC, "c2" ASC';
         $internalTests24 = array(
             'processSelect' => array(array(array('"foo".*')), '"foo"'),
-            'processOrder'  => array(array(array('"c1"', Select::ORDER_DESENDING), array('"c2"', Select::ORDER_ASCENDING)))
+            'processOrder'  => array(array(array('"c1"', Select::ORDER_DESCENDING), array('"c2"', Select::ORDER_ASCENDING)))
         );
 
         $select25 = new Select;
@@ -592,7 +592,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr25 = 'SELECT "foo".* FROM "foo" ORDER BY "c1" ASC, "c2" DESC';
         $internalTests25 = array(
             'processSelect' => array(array(array('"foo".*')), '"foo"'),
-            'processOrder'  => array(array(array('"c1"', Select::ORDER_ASCENDING), array('"c2"', Select::ORDER_DESENDING)))
+            'processOrder'  => array(array(array('"c1"', Select::ORDER_ASCENDING), array('"c2"', Select::ORDER_DESCENDING)))
         );
 
         // limit

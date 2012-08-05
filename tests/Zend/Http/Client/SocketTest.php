@@ -65,6 +65,29 @@ class SocketTest extends CommonHttpTests
         }
     }
 
+    public function testDefaultConfig()
+    {
+        $config = $this->_adapter->getConfig();
+        $this->assertEquals(TRUE, $config['sslverifypeer']);
+        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
+    }
+
+    public function testConnectingViaSslEnforcesDefaultSslOptionsOnContext()
+    {
+        $config = array('timeout' => 30);
+        $this->_adapter->setOptions($config);
+        try {
+            $this->_adapter->connect('localhost', 443, true);
+        } catch (\Zend\Http\Client\Adapter\Exception\RuntimeException $e) {
+            // Test is designed to allow connect failure because we're interested
+            // only in the stream context state created within that method.
+        }
+        $context = $this->_adapter->getStreamContext();
+        $options = stream_context_get_options($context);
+        $this->assertTrue($options['ssl']['verify_peer']);
+        $this->assertFalse($options['ssl']['allow_self_signed']);
+    }
+
     /**
      * Test that a Zend_Config object can be used to set configuration
      *

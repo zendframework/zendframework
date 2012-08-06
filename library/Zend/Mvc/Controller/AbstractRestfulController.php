@@ -122,7 +122,14 @@ abstract class AbstractRestfulController extends AbstractController
         return $e->getResult();
     }
 
-    public function execute(MvcEvent $e)
+    /**
+     * Handle the request
+     * 
+     * @param  MvcEvent $e 
+     * @return mixed
+     * @throws Exception\DomainException if no route matches in event or invalid HTTP method
+     */
+    public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {

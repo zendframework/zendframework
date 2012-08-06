@@ -101,7 +101,7 @@ abstract class AbstractActionController extends AbstractController
      * @return mixed
      * @throws Exception\DomainException
      */
-    public function execute(MvcEvent $e)
+    public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {

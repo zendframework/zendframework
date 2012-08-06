@@ -79,7 +79,7 @@ abstract class AbstractController implements
      * @param  MvcEvent $e
      * @return mixed
      */
-    abstract public function execute(MvcEvent $e);
+    abstract public function onDispatch(MvcEvent $e);
 
     /**
      * Get request object
@@ -273,7 +273,7 @@ abstract class AbstractController implements
     protected function attachDefaultListeners()
     {
         $events = $this->getEventManager();
-        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'execute'));
+        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'));
     }
 
     /**

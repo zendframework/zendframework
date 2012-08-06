@@ -72,18 +72,16 @@ class Encrypt extends AbstractFilter
             $options = array();
         }
 
-        if (file_exists(__DIR__ . '/Encrypt/' . ucfirst($adapter) . '.php')) {
-            $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
-        }
-
-        if (!class_exists($adapter)) {
+        if (class_exists('Zend\Filter\Encrypt\\' . ucfirst($adapter))) {
+            $adapter = 'Zend\Filter\Encrypt\\' . ucfirst($adapter);
+        } elseif (!class_exists($adapter)) {
             throw new Exception\DomainException(
                 sprintf('%s expects a valid registry class name; received "%s", which did not resolve',
-                        __METHOD__,
-                        $adapter
-                ));
+                    __METHOD__,
+                    $adapter
+            ));
         }
-
+        
         $this->adapter = new $adapter($options);
         if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
             throw new Exception\InvalidArgumentException(

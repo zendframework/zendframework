@@ -539,7 +539,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingUriOnHttpClientIsNotOverwrittenByXmlRpcClient()
     {
-        $changedUri = 'http://bar:80';
+        $changedUri = 'http://bar:80/';
         // Overwrite: http://foo:80
         $this->setServerResponseTo(array());
         $this->xmlrpcClient->getHttpClient()->setUri($changedUri);
@@ -554,7 +554,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingNoHttpClientUriForcesClientToSetUri()
     {
-        $baseUri = 'http://foo:80';
+        $baseUri = 'http://foo:80/';
         $this->httpAdapter = new Adapter\Test();
         $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
 

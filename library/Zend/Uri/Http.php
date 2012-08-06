@@ -178,4 +178,21 @@ class Http extends Uri
         }
         return $this->port;
     }
+
+    /**
+     * Parse a URI string
+     *
+     * @param  string $uri
+     * @return Http
+     */
+    public function parse($uri)
+    {
+        parent::parse($uri);
+
+        if (empty($this->path)){
+            $this->path = '/';
+        }
+
+        return $this;
+    }
 }

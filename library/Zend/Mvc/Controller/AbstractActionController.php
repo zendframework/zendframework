@@ -10,17 +10,9 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\EventManager\EventInterface as Event;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerInterface;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Mvc\Exception;
-use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\DispatchableInterface as Dispatchable;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
@@ -32,20 +24,12 @@ use Zend\View\Model\ViewModel;
  * @package    Zend_Mvc
  * @subpackage Controller
  */
-abstract class AbstractActionController implements
-    Dispatchable,
-    EventManagerAwareInterface,
-    InjectApplicationEventInterface,
-    ServiceLocatorAwareInterface
+abstract class AbstractActionController extends AbstractController
 {
-    //use \Zend\EventManager\ProvidesEvents;
-
-    protected $event;
-    protected $events;
-    protected $locator;
-    protected $plugins;
-    protected $request;
-    protected $response;
+    /**
+     * @var string
+     */
+    protected $eventIdentifier = __CLASS__;
 
     /**
      * Default action if none provided
@@ -106,6 +90,7 @@ abstract class AbstractActionController implements
         if ($result->stopped()) {
             return $result->last();
         }
+
         return $e->getResult();
     }
 
@@ -116,7 +101,7 @@ abstract class AbstractActionController implements
      * @return mixed
      * @throws Exception\DomainException
      */
-    public function execute(MvcEvent $e)
+    public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {
@@ -137,205 +122,7 @@ abstract class AbstractActionController implements
         $actionResponse = $this->$method();
 
         $e->setResult($actionResponse);
+
         return $actionResponse;
-    }
-
-    /**
-     * Get the request object
-     *
-     * @return Request
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
-
-    /**
-     * Get the response object
-     *
-     * @return Response
-     */
-    public function getResponse()
-    {
-        if (null === $this->response) {
-            $this->response = new HttpResponse();
-        }
-        return $this->response;
-    }
-
-    /**
-     * Set the event manager instance used by this context
-     *
-     * @param  EventManagerInterface $events
-     * @return AbstractActionController
-     */
-    public function setEventManager(EventManagerInterface $events)
-    {
-        $events->setIdentifiers(array(
-            'Zend\Stdlib\DispatchableInterface',
-            __CLASS__,
-            get_called_class(),
-            substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
-        ));
-        $this->events = $events;
-        $this->attachDefaultListeners();
-        return $this;
-    }
-
-    /**
-     * Retrieve the event manager
-     *
-     * Lazy-loads an EventManager instance if none registered.
-     *
-     * @return EventManagerInterface
-     */
-    public function getEventManager()
-    {
-        if (!$this->events instanceof EventManagerInterface) {
-            $this->setEventManager(new EventManager());
-        }
-        return $this->events;
-    }
-
-    /**
-     * Set an event to use during dispatch
-     *
-     * By default, will re-cast to MvcEvent if another event type is provided.
-     *
-     * @param  Event $e
-     * @return void
-     */
-    public function setEvent(Event $e)
-    {
-        if ($e instanceof Event && !$e instanceof MvcEvent) {
-            $eventParams = $e->getParams();
-            $e = new MvcEvent();
-            $e->setParams($eventParams);
-            unset($eventParams);
-        }
-        $this->event = $e;
-    }
-
-    /**
-     * Get the attached event
-     *
-     * Will create a new MvcEvent if none provided.
-     *
-     * @return MvcEvent
-     */
-    public function getEvent()
-    {
-        if (!$this->event) {
-            $this->setEvent(new MvcEvent());
-        }
-        return $this->event;
-    }
-
-    /**
-     * Set locator instance
-     *
-     * @param  ServiceLocatorInterface $locator
-     * @return void
-     */
-    public function setServiceLocator(ServiceLocatorInterface $locator)
-    {
-        $this->locator = $locator;
-    }
-
-    /**
-     * Retrieve locator instance
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->locator;
-    }
-
-    /**
-     * Get plugin manager
-     *
-     * @return PluginManager
-     */
-    public function getPluginManager()
-    {
-        if (!$this->plugins) {
-            $this->setPluginManager(new PluginManager());
-        }
-        return $this->plugins;
-    }
-
-    /**
-     * Set plugin manager
-     *
-     * @param  string|PluginManager $plugins
-     * @return ActionController
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setPluginManager(PluginManager $plugins)
-    {
-        $this->plugins = $plugins;
-        if (method_exists($plugins, 'setController')) {
-            $this->plugins->setController($this);
-        }
-        return $this;
-    }
-
-    /**
-     * Get plugin instance
-     *
-     * @param  string     $name    Name of plugin to return
-     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
-     * @return mixed
-     */
-    public function plugin($name, array $options = null)
-    {
-        return $this->getPluginManager()->get($name, $options);
-    }
-
-    /**
-     * Method overloading: return/call plugins
-     *
-     * If the plugin is a functor, call it, passing the parameters provided.
-     * Otherwise, return the plugin instance.
-     *
-     * @param  string $method
-     * @param  array $params
-     * @return mixed
-     */
-    public function __call($method, array $params)
-    {
-        $plugin = $this->plugin($method);
-        if (is_callable($plugin)) {
-            return call_user_func_array($plugin, $params);
-        }
-        return $plugin;
-    }
-
-    /**
-     * Register the default events for this controller
-     *
-     * @return void
-     */
-    protected function attachDefaultListeners()
-    {
-        $events = $this->getEventManager();
-        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'execute'));
-    }
-
-    /**
-     * Transform an action name into a method name
-     *
-     * @param  string $action
-     * @return string
-     */
-    public static function getMethodFromAction($action)
-    {
-        $method  = str_replace(array('.', '-', '_'), ' ', $action);
-        $method  = ucwords($method);
-        $method  = str_replace(' ', '', $method);
-        $method  = lcfirst($method);
-        $method .= 'Action';
-        return $method;
     }
 }

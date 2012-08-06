@@ -276,6 +276,7 @@ class Uri implements UriInterface
             $this->setPath($match[0]);
             $uri = substr($uri, strlen($match[0]));
         }
+
         if (!$uri) {
             return $this;
         }

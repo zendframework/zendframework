@@ -4,67 +4,23 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0rc2*
+*Zend Framework 2.0.0rc3-dev*
 
-This is the second release candidate for 2.0.0. We will be releasing RCs
+This is the third release candidate for 2.0.0. We will be releasing RCs
 on a weekly basis until we feel all critical issues are addressed. At
-this time, we anticipate no API changes before the stable release, and
+this time, we anticipate few API changes before the stable release, and
 recommend testing your production applications against it.
 
-01 August 2012
+XX August 2012
 
-### UPDATES IN RC2
+### UPDATES IN RC3
 
- - REALLY removed Zend\Markup from the repository (we reported it
-   removed for RC1, and had in fact created the repository for it, but
-   not removed it from the zf2 repository).
- - Addition of Hydrator strategies, to allow easier hydration of
-   composed objects. The HydratorInterface remains unchanged, but the
-   shipped hydrators now all implement both that and the new
-   StrategyEnabledInterface.
- - Zend\View\Model\ViewModel::setVariables() no longer overwrites the
-   internal variables container by default. If you wish to do so, it
-   does provide an optional $overwrite argument; passing a boolean true
-   will cause the method to overwrite the container.
- - Zend\Validator\Iban was expanded to include Single Euro Payments Area
-   (SEPA) support
- - Zend\Mvc\Controller\ControllerManager now allows fetching controllers
-   via DI. This is done via a new DiStrict abstract service factory,
-   which only fetches services in a provided whitelist.
- - Zend\Json\Encoder now accepts IteratorAggregates.
- - Controller, Filter, and Validator plugin managers were fixed to no
-   longer share instances.
- - Zend\Form was updated to only bind values that were actually provided
-   in the data. Additionally, if a Collection has no entries, it will be
-   removed from the validation group. Finally, elements with the name
-   "0" (zero) are now allowed.
- - Zend\View\Helper\Doctype was updated to respond true to isRdfa() when
-   the doctype is an HTML5 variant.
- - Zend\Navigation was fixed to ensure the navigation services is passed
-   correctly between helpers. Additionally, a bug in Mvc::isActive() was
-   fixed to ensure routes were properly seeded.
- - The GreaterThan and LessThan validators were updated to pass
-   constructor arguments to the parents, for consistency with other
-   validators.
- - Log formatters are now responsible for formatting DateTime values in
-   the log events.
- - The Console ViewManager was updated to extend from the standard HTTP
-   version, and to use Config instead of Configuration, fixing several
-   minor issues.
- - Zend\Version was moved to Zend\Version\Version (for consistency)
- - Zend\Debug was moved to Zend\Debug\Debug (for consistency)
- - All protected members that still had underscore prefixes were
-   refactored to remove that prefix.
- - Identified and fixed all CS issues as identified by php-cs-fixer, and
-   added php-cs-fixer to the Travis-CI build tasks.
- - ServiceManagerAwareInterface was removed from all but the most
-   necessary locations, and replaced with ServiceLocatorAwareInterface.
- - Zend\Feed\Reader, Zend\Dom, Zend\Serializer\Wddx, and Zend\Soap were
-   not properly protecting against XXE injections; these situations have
-   now been corrected.
+- Zend\Http
+  - Socket client: Updated to enable verify_peer by default, to prevent
+    potential Man-In-The-Middle attacks.
 
-Around *70* pull requests for a variety of features and bugfixes were handled
-since beta5!
+Around *XX* pull requests for a variety of features and bugfixes were handled
+since RC2!
 
 ### SYSTEM REQUIREMENTS
 

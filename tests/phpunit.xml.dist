@@ -1,9 +1,9 @@
 <phpunit bootstrap="./Bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Zend Framework Test Suite">
-            <directory>./Zend</directory>
-            <exclude>./Zend/_files/</exclude>
-            <exclude>./Zend/AllTests/</exclude>
+            <directory>./ZendTest</directory>
+            <exclude>./ZendTest/_files/</exclude>
+            <exclude>./ZendTest/AllTests/</exclude>
         </testsuite>
     </testsuites>
 

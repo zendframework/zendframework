@@ -160,8 +160,8 @@ class BaseInputFilter implements InputFilterInterface
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
             if (!array_key_exists($name, $this->data)
-                || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
                 || (null === $this->data[$name])
+                || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
             ) {
                 if($input instanceof InputInterface) {
                     // - test if input is required

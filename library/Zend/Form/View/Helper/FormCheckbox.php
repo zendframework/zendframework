@@ -75,23 +75,6 @@ class FormCheckbox extends FormInput
     }
 
     /**
-     * Invoke helper as functor
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface $element
-     * @return string|FormCheckbox
-     */
-    public function __invoke(ElementInterface $element = null)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        return $this->render($element);
-    }
-
-    /**
      * Return input type
      *
      * @return string

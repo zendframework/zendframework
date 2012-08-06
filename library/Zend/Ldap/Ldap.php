@@ -904,17 +904,18 @@ class Ldap
             $filter = $filter->toString();
         }
 
+        $resource = $this->getResource();
         ErrorHandler::start(E_WARNING);
         switch ($scope) {
             case self::SEARCH_SCOPE_ONE:
-                $search = ldap_list($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
+                $search = ldap_list($resource, $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
                 break;
             case self::SEARCH_SCOPE_BASE:
-                $search = ldap_read($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
+                $search = ldap_read($resource, $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
                 break;
             case self::SEARCH_SCOPE_SUB:
             default:
-                $search = ldap_search($this->getResource(), $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
+                $search = ldap_search($resource, $basedn, $filter, $attributes, 0, $sizelimit, $timelimit);
                 break;
         }
         ErrorHandler::stop();

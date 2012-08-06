@@ -114,6 +114,10 @@ class Wildcard implements RouteInterface
         $uri  = $request->getUri();
         $path = $uri->getPath();
 
+        if ($path === '/') {
+            $path = '';
+        }
+
         if ($pathOffset !== null) {
             $path = substr($path, $pathOffset);
         }

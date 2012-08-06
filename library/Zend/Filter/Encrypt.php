@@ -81,7 +81,7 @@ class Encrypt extends AbstractFilter
                     $adapter
             ));
         }
-        
+
         $this->adapter = new $adapter($options);
         if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
             throw new Exception\InvalidArgumentException(

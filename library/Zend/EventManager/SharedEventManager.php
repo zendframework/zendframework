@@ -64,12 +64,17 @@ class SharedEventManager implements SharedEventManagerInterface
     public function attach($id, $event, $callback, $priority = 1)
     {
         $ids = (array) $id;
+        $listeners = array();
         foreach ($ids as $id) {
             if (!array_key_exists($id, $this->identifiers)) {
                 $this->identifiers[$id] = new EventManager();
             }
-            $this->identifiers[$id]->attach($event, $callback, $priority);
+            $listeners[] = $this->identifiers[$id]->attach($event, $callback, $priority);
         }
+        if (count($listeners) > 1){
+            return $listeners;
+        }
+        return $listeners[0];
     }
 
     /**

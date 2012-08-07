@@ -612,9 +612,13 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($shared, StaticEventManager::getInstance());
     }
 
-    public function testSharedEventManagerAttachReturnsCallbackHander(){
+    public function testSharedEventManagerAttachReturnsCallbackHandler()
+    {
         $shared = new SharedEventManager;
-        $callbackHandler = $shared->attach('foo', 'bar', function($e){
+        $callbackHandler = $shared->attach(
+            'foo',
+            'bar',
+            function($e) {
                 return true;
             }
         );

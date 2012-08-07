@@ -24,6 +24,7 @@ namespace Zend\Form\Element;
 use Traversable;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\Explode as ExplodeValidator;
 use Zend\Validator\InArray as InArrayValidator;
 use Zend\Validator\ValidatorInterface;
 
@@ -58,10 +59,22 @@ class Select extends Element
     protected function getValidator()
     {
         if (null === $this->validator) {
-            $this->validator = new InArrayValidator(array(
+            $validator = new InArrayValidator(array(
                 'haystack' => (array) $this->getAttribute('options'),
                 'strict'   => false
             ));
+
+            $multiple = (isset($this->attributes['multiple']))
+                      ? $this->attributes['multiple'] : null;
+
+            if (true === $multiple || 'multiple' === $multiple) {
+                $validator = new ExplodeValidator(array(
+                    'validator'      => $validator,
+                    'valueDelimiter' => null, // skip explode if only one value
+                ));
+            }
+
+            $this->validator = $validator;
         }
         return $this->validator;
     }

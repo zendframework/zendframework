@@ -219,6 +219,19 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that the supplied table and schema are successfully passed to the select
+     * statement
+     */
+    public function testSelectAcknowledgesTableAndSchema()
+    {
+        $validator = new RecordExists(array('table' => 'users', 'schema' => 'my'),
+                                      'field1', null, $this->getMockHasResult());
+        $table = $validator->getSelect()->getRawState('table');
+        $this->assertInstanceOf('Zend\Db\Sql\TableIdentifier', $table);
+        $this->assertEquals(array('users','my'), $table->getTableAndSchema());
+    }
+
+    /**
      * @group ZF-10642
      */
     public function testCreatesQueryBasedOnNamedOrPositionalAvailability()

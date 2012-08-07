@@ -8,41 +8,37 @@
  * @package   Zend_Db
  */
 
-namespace Zend\Db\Adapter\Driver;
-
-use Zend\Db\Adapter\StatementContainerInterface;
-use Zend\Db\Adapter\ParameterContainer;
+namespace Zend\Db\Adapter;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
  */
-interface StatementInterface extends StatementContainerInterface
+interface StatementContainerInterface
 {
-
     /**
-     * @return resource
+     * @abstract
+     * @param $sql
+     * @return mixed
      */
-    public function getResource();
+    public function setSql($sql);
 
     /**
      * @abstract
-     * @param string $sql
+     * @return mixed
      */
-    public function prepare($sql = null);
+    public function getSql();
 
     /**
      * @abstract
-     * @return bool
+     * @return mixed
      */
-    public function isPrepared();
+    public function setParameterContainer(ParameterContainer $parameterContainer);
 
     /**
      * @abstract
-     * @param null $parameters
-     * @return ResultInterface
+     * @return mixed
      */
-    public function execute($parameters = null);
-
+    public function getParameterContainer();
 }

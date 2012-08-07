@@ -37,9 +37,9 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
 
-        $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams['sql']);
-        $this->assertInternalType('array', $sqlAndParams['parameters']);
-        $this->assertEmpty($sqlAndParams['parameters']);
+        $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams->getSql());
+        $this->assertInstanceOf('Zend\Db\Adapter\ParameterContainer', $sqlAndParams->getParameterContainer());
+        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
     }
 
     /**
@@ -72,26 +72,33 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(function ($x) {
             return ':' . $x;
         }));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
-        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockDriver);
+        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockAdapter);
 
-        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams['sql']);
-        $this->assertInternalType('array', $sqlAndParams['parameters']);
+        $parameterContainer = $sqlAndParams->getParameterContainer();
+        $parameters = $parameterContainer->getNamedArray();
+
+        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams->getSql());
 
         // test keys and values
-        preg_match('#expr(\d\d\d\d)Param1#', key($sqlAndParams['parameters']), $matches);
+        preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
         $expressionNumber = $matches[1];
 
-        $this->assertRegExp('#expr\d\d\d\dParam1#', key($sqlAndParams['parameters']));
-        $this->assertEquals(5, current($sqlAndParams['parameters']));
-        next($sqlAndParams['parameters']);
-        $this->assertRegExp('#expr\d\d\d\dParam2#', key($sqlAndParams['parameters']));
-        $this->assertEquals(10, current($sqlAndParams['parameters']));
+        $this->assertRegExp('#expr\d\d\d\dParam1#', key($parameters));
+        $this->assertEquals(5, current($parameters));
+        next($parameters);
+        $this->assertRegExp('#expr\d\d\d\dParam2#', key($parameters));
+        $this->assertEquals(10, current($parameters));
 
         // ensure next invocation increases number by 1
-        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockDriver);
-        preg_match('#expr(\d\d\d\d)Param1#', key($sqlAndParamsNext['parameters']), $matches);
+        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockAdapter);
+
+        $parameterContainer = $sqlAndParamsNext->getParameterContainer();
+        $parameters = $parameterContainer->getNamedArray();
+
+        preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
         $expressionNumberNext = $matches[1];
 
         $this->assertEquals(1, (int) $expressionNumberNext - (int) $expressionNumber);
@@ -107,16 +114,15 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $predicateSet = new Predicate\PredicateSet(array(new Predicate\PredicateSet(array($expression))));
         $sqlAndParams = $this->invokeProcessExpressionMethod($predicateSet);
 
-        $this->assertEquals("(x = '5')", $sqlAndParams['sql']);
-        $this->assertInternalType('array', $sqlAndParams['parameters']);
-        $this->assertEmpty($sqlAndParams['parameters']);
+        $this->assertEquals("(x = '5')", $sqlAndParams->getSql());
+        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
     }
 
-    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, DriverInterface $driver = null)
+    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $adapter = null)
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
-        return $method->invoke($this->abstractSql, $expression, new Sql92, $driver);
+        return $method->invoke($this->abstractSql, $expression, new Sql92, $adapter);
     }
 
 }

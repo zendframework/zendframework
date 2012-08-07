@@ -612,6 +612,15 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($shared, StaticEventManager::getInstance());
     }
 
+    public function testSharedEventManagerAttachReturnsCallbackHander(){
+        $shared = new SharedEventManager;
+        $callbackHandler = $shared->attach('foo', 'bar', function($e){
+                return true;
+            }
+        );
+        $this->assertTrue($callbackHandler instanceof CallbackHandler);
+    }
+
     public function testDoesNotCreateStaticInstanceIfNonePresent()
     {
         StaticEventManager::resetInstance();

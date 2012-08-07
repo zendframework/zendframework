@@ -124,8 +124,8 @@ abstract class AbstractRestfulController extends AbstractController
 
     /**
      * Handle the request
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return mixed
      * @throws Exception\DomainException if no route matches in event or invalid HTTP method
      */

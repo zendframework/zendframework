@@ -11,6 +11,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend
@@ -47,5 +48,40 @@ class FormSubmit extends FormInput
     protected function getType(ElementInterface $element)
     {
         return 'submit';
+    }
+
+    /**
+     * Render a form <input> element from the provided $element
+     *
+     * @param  ElementInterface $element
+     * @return string
+     */
+    public function render(ElementInterface $element)
+    {
+        $name = $element->getName();
+        if ($name === null || $name === '') {
+            throw new Exception\DomainException(sprintf(
+                '%s requires that the element has an assigned name; none discovered',
+                __METHOD__
+            ));
+        }
+
+        $submitValue = $element->getValue();
+        if (null !== ($translator = $this->getTranslator())) {
+            $submitValue = $translator->translate(
+                $submitValue, $this->getTranslatorTextDomain()
+            );
+        }
+
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getType($element);
+        $attributes['value'] = $submitValue;
+
+        return sprintf(
+            '<input %s%s',
+            $this->createAttributesString($attributes),
+            $this->getInlineClosingBracket()
+        );
     }
 }

@@ -363,7 +363,7 @@ class Windows extends Virtual
     public function readLine($maxLength = 2048)
     {
         $f    = fopen('php://stdin','r');
-        $line = trim(fread($f,$maxLength));
+        $line = rtrim(fread($f,$maxLength),"\r\n");
         fclose($f);
 
         return $line;

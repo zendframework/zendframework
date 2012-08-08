@@ -231,7 +231,7 @@ class CreditCard extends AbstractValidator
      *
      * @param  callable $service
      * @return CreditCard
-     * @throws Exception\InvalidArgumentException on invalid service callable
+     * @throws Exception\InvalidArgumentException on invalid service callback
      */
     public function setService($service)
     {

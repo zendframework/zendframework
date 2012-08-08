@@ -65,7 +65,7 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Unserialize
      *
-     * @todo   Allow integration with unserialize_callable_func
+     * @todo   Allow integration with unserialize_callback_func
      * @param  string $serialized
      * @return mixed
      * @throws Exception\RuntimeException on unserialize error

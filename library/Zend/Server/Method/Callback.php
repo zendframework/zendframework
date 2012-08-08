@@ -22,17 +22,17 @@ use Zend\Server;
 class Callback
 {
     /**
-     * @var string Class name for class method callable
+     * @var string Class name for class method callback
      */
     protected $class;
 
     /**
-     * @var string Function name for function callable
+     * @var string Function name for function callback
      */
     protected $function;
 
     /**
-     * @var string Method name for class method callable
+     * @var string Method name for class method callback
      */
     protected $method;
 
@@ -42,7 +42,7 @@ class Callback
     protected $type;
 
     /**
-     * @var array Valid callable types
+     * @var array Valid callback types
      */
     protected $types = array('function', 'static', 'instance');
 

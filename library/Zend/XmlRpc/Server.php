@@ -171,8 +171,8 @@ class Server extends AbstractServer
      * any arguments following the namespace will be aggregated and passed at
      * dispatch time.
      *
-     * @param string|array $function Valid callable
-     * @param string $namespace Optional namespace prefix
+     * @param string|array|callable $function  Valid callback
+     * @param string                $namespace Optional namespace prefix
      * @return void
      * @throws Zend\XmlRpc\Server\Exception
      */

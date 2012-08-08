@@ -70,8 +70,8 @@ class Server extends AbstractServer
     /**
      * Attach a function or callback to the server
      *
-     * @param  string|array $function Valid PHP callable
-     * @param  string $namespace  Ignored
+     * @param  string|array|callable $function   Valid PHP callback
+     * @param  string                $namespace  Ignored
      * @return Server
      */
     public function addFunction($function, $namespace = '')

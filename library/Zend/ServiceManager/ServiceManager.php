@@ -271,7 +271,7 @@ class ServiceManager implements ServiceLocatorInterface
                     'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'
                 );
             }
-            $refl = new \ReflectionClass($factory);
+            $refl = new ReflectionClass($factory);
             if (!$refl->implementsInterface(__NAMESPACE__ . '\\AbstractFactoryInterface')) {
                 throw new Exception\InvalidArgumentException(
                     'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'

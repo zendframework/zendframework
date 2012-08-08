@@ -15,6 +15,7 @@ use Zend\Db\Sql\ExpressionInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Platform\Sql92;
 use Zend\Db\Sql\Predicate;
+use Zend\Db\Sql\Select;
 
 class AbstractSqlTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,26 +41,6 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams->getSql());
         $this->assertInstanceOf('Zend\Db\Adapter\ParameterContainer', $sqlAndParams->getParameterContainer());
         $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
-    }
-
-    /**
-     * @covers Zend\Db\Sql\AbstractSql::processExpression
-     */
-    public function testProcessExpressionWithDriverAndParameterizationTypePositional()
-    {
-//        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-//        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue(DriverInterface::PARAMETERIZATION_POSITIONAL));
-//        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-//
-//        $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
-//        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockDriver);
-//
-//        $this->assertEquals('"x" > ? AND y < ?', $sqlAndParams['sql']);
-//        $this->assertInternalType('array', $sqlAndParams['parameters']);
-//        $this->assertEquals(
-//            array(5, 10),
-//            $sqlAndParams['parameters']
-//        );
     }
 
     /**
@@ -118,6 +99,28 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
     }
 
+    /**
+     * @covers Zend\Db\Sql\AbstractSql::processExpression
+     */
+    public function testProcessExpressionWorksWithExpressionContainingSelectObject()
+    {
+        $select = new Select();
+        $select->from('x')->where->like('bar', 'Foo%');
+        $expression = new Predicate\In('x', $select);
+
+        $predicateSet = new Predicate\PredicateSet(array(new Predicate\PredicateSet(array($expression))));
+        $sqlAndParams = $this->invokeProcessExpressionMethod($predicateSet);
+
+        $this->assertEquals('("x" IN (SELECT "x".* FROM "x" WHERE "bar" LIKE \'Foo%\'))', $sqlAndParams->getSql());
+        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+    }
+
+
+    /**
+     * @param \Zend\Db\Sql\ExpressionInterface $expression
+     * @param \Zend\Db\Adapter\Adapter|null $adapter
+     * @return \Zend\Db\Adapter\StatementContainer
+     */
     protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $adapter = null)
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');

@@ -349,12 +349,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $rawState = array(
             'columns' => $this->columns,
-            'table' => $this->table,
-            'joins' => $this->joins,
-            'where' => $this->where,
-            'order' => $this->order,
-            'limit' => $this->limit,
-            'offset' => $this->offset
+            'table'   => $this->table,
+            'joins'   => $this->joins,
+            'where'   => $this->where,
+            'order'   => $this->order,
+            'group'   => $this->group,
+            'having'  => $this->having,
+            'limit'   => $this->limit,
+            'offset'  => $this->offset
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }

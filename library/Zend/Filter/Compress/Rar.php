@@ -64,7 +64,7 @@ class Rar extends AbstractCompressionAlgorithm
     /**
      * Sets the callback to use
      *
-     * @param  string $callable
+     * @param  string $callback
      * @return Rar
      * @throws Exception\InvalidArgumentException if invalid callable provided
      */

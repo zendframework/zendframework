@@ -219,7 +219,7 @@ class EventManager implements EventManagerInterface
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  Callable $callable
+     * @param  callable $callback
      * @return ResponseCollection
      * @throws Exception\InvalidCallbackException if invalid callable provided
      */

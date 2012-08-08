@@ -52,9 +52,9 @@ class CallbackHandler
     /**
      * Constructor
      *
-     * @param  string $event Event to which slot is subscribed
-     * @param  string|array|object $callable PHP callback
-     * @param  array $options Options used by the callable handler (e.g., priority)
+     * @param  string                       $event    Event to which slot is subscribed
+     * @param  string|array|object|callable $callback PHP callback
+     * @param  array                        $options  Options used by the callable handler (e.g., priority)
      * @return void
      */
     public function __construct($callback, array $metadata = array())
@@ -73,7 +73,7 @@ class CallbackHandler
      * instance, this method will pass the object to a WeakRef instance prior
      * to registering the callback.
      *
-     * @param  callable $callable
+     * @param  callable $callback
      * @return void
      */
     protected function registerCallback($callback)
@@ -262,7 +262,7 @@ class CallbackHandler
      *
      * Validates that a static method call in PHP 5.4 will actually work
      *
-     * @param  string $callable
+     * @param  string $callback
      * @return true|array
      * @throws Exception\InvalidCallbackException if invalid
      */

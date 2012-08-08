@@ -42,7 +42,7 @@ class Callback extends AbstractFilter
     /**
      * Sets a new callback for this filter
      *
-     * @param  callable $callable
+     * @param  callable $callback
      * @return Callback
      */
     public function setCallback($callback)

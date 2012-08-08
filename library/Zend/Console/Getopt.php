@@ -81,7 +81,7 @@ namespace Zend\Console;
  *        e.g. if -b is specified, -a must be specified or else the
  *        usage is invalid.
  *
- * @todo  Feature request to implement callables.
+ * @todo  Feature request to implement callbacks.
  *        e.g. if -a is specified, run function 'handleOptionA'().
  */
 class Getopt

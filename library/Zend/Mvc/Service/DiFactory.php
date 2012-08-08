@@ -48,9 +48,8 @@ class DiFactory implements FactoryInterface
 
         if ($serviceLocator instanceof ServiceManager) {
             /* @var $serviceLocator ServiceManager */
-            $serviceLocator->addAbstractFactory(
-                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-            );
+            //$serviceLocator->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
+            //$serviceLocator->addInitializer($serviceLocator->get('DiServiceInitializer'));
         }
 
         return $di;

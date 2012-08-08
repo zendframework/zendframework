@@ -30,23 +30,21 @@ abstract class AbstractPluginManagerFactory implements FactoryInterface
      * the PLUGIN_MANGER_CLASS constant.
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return AbstractPluginManager
+     * @return \Zend\ServiceManager\AbstractPluginManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $pluginManagerClass = static::PLUGIN_MANAGER_CLASS;
+        /* @var $plugins \Zend\ServiceManager\AbstractPluginManager */
         $plugins = new $pluginManagerClass;
         $plugins->setServiceLocator($serviceLocator);
-        $configuration    = $serviceLocator->get('Config');
+        $configuration = $serviceLocator->get('Config');
+
         if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-            $di = $serviceLocator->get('Di');
-            $plugins->addAbstractFactory(
-                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-            );
-            $plugins->addInitializer(
-                new DiServiceInitializer($di, $serviceLocator)
-            );
+            $plugins->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
+            $plugins->addInitializer($serviceLocator->get('DiServiceInitializer'));
         }
+
         return $plugins;
     }
 }

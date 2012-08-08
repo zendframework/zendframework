@@ -20,7 +20,7 @@ use Zend\Form\Exception;
  * @package    Zend_Form
  * @subpackage View
  */
-class FormLabel extends AbstractHelper implements TranslatorAwareInterface
+class FormLabel extends AbstractHelper
 {
     const APPEND  = 'append';
     const PREPEND = 'prepend';
@@ -34,28 +34,6 @@ class FormLabel extends AbstractHelper implements TranslatorAwareInterface
         'for'  => true,
         'form' => true,
     );
-
-    /**
-     * Translator (optional)
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     * Translator text domain (optional)
-     *
-     * @var string
-     */
-    protected $translatorTextDomain = 'default';
-
-    /**
-     * Whether translator should be used
-     *
-     * @var bool
-     */
-    protected $translatorEnabled = true;
-
 
     /**
      * Generate an opening label tag

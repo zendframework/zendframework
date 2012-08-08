@@ -43,7 +43,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     /**
      * The reason for a not-found condition
      *
-     * @var false|string
+     * @var boolean|string
      */
     protected $reason = false;
 
@@ -163,9 +163,9 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $usage = $this->getConsoleUsage($console, $scriptName, $mm, $router);
 
         // Inject the text into view model
-        $model->setResult(
-            $banner . "\n\n" . $usage
-        );
+        $result = $banner ? rtrim($banner,"\r\n") : '';
+        $result .= $usage ? "\n\n" . trim($usage,"\r\n") : '';
+        $model->setResult($result);
 
         // Inject the result into MvcEvent
         $e->setResult($model);
@@ -200,7 +200,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
          * Handle an application with no defined banners
          */
         if(!count($banners)){
-            return "Zend Framework ".Version::VERSION." application.\nUsage:\n";
+            return "Zend Framework ".Version::VERSION." application";
         }
 
         /**

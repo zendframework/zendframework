@@ -27,7 +27,7 @@ use WeakRef;
 class CallbackHandler
 {
     /**
-     * @var string|array PHP callback to invoke
+     * @var string|array PHP callable to invoke
      */
     protected $callback;
 
@@ -53,8 +53,8 @@ class CallbackHandler
      * Constructor
      *
      * @param  string $event Event to which slot is subscribed
-     * @param  string|array|object $callback PHP callback
-     * @param  array $options Options used by the callback handler (e.g., priority)
+     * @param  string|array|object $callable PHP callback
+     * @param  array $options Options used by the callable handler (e.g., priority)
      * @return void
      */
     public function __construct($callback, array $metadata = array())
@@ -73,7 +73,7 @@ class CallbackHandler
      * instance, this method will pass the object to a WeakRef instance prior
      * to registering the callback.
      *
-     * @param  callable $callback
+     * @param  callable $callable
      * @return void
      */
     protected function registerCallback($callback)
@@ -160,7 +160,7 @@ class CallbackHandler
     /**
      * Invoke handler
      *
-     * @param  array $args Arguments to pass to callback
+     * @param  array $args Arguments to pass to callable
      * @return mixed
      */
     public function call(array $args = array())
@@ -262,7 +262,7 @@ class CallbackHandler
      *
      * Validates that a static method call in PHP 5.4 will actually work
      *
-     * @param  string $callback
+     * @param  string $callable
      * @return true|array
      * @throws Exception\InvalidCallbackException if invalid
      */

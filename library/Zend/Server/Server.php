@@ -26,7 +26,7 @@ interface Server
      *
      * @param  string $function
      * @param  string $namespace
-     * @param  null|array Optional array of arguments to pass to callbacks at
+     * @param  null|array Optional array of arguments to pass to callables at
      *                    dispatch.
      * @return void
      */
@@ -47,7 +47,7 @@ interface Server
      * @param  string $namespace Optional namespace with which to prepend method
      *                           names in the dispatch table.
      *                           methods in the class will be valid callbacks.
-     * @param  null|array Optional array of arguments to pass to callbacks at
+     * @param  null|array Optional array of arguments to pass to callables at
      *                    dispatch.
      * @return void
      */

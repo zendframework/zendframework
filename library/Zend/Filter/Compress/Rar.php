@@ -64,9 +64,9 @@ class Rar extends AbstractCompressionAlgorithm
     /**
      * Sets the callback to use
      *
-     * @param  string $callback
+     * @param  string $callable
      * @return Rar
-     * @throws Exception\InvalidArgumentException if invalid callback provided
+     * @throws Exception\InvalidArgumentException if invalid callable provided
      */
     public function setCallback($callback)
     {
@@ -157,7 +157,7 @@ class Rar extends AbstractCompressionAlgorithm
      *
      * @param  string|array $content
      * @return string
-     * @throws Exception\RuntimeException if no callback available, or error during compression
+     * @throws Exception\RuntimeException if no callable available, or error during compression
      */
     public function compress($content)
     {

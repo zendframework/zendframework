@@ -40,7 +40,7 @@ class CallbackCache extends AbstractPattern
     /**
      * Call the specified callback or get the result from cache
      *
-     * @param  callback   $callback  A valid callback
+     * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return mixed Result
      * @throws Exception
@@ -110,7 +110,7 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callback   $callback  A valid callback
+     * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return string
      * @throws Exception
@@ -124,7 +124,7 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callback   $callback  A valid callback
+     * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return string
      * @throws Exception

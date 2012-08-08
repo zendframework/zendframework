@@ -219,7 +219,7 @@ class CreditCard extends AbstractValidator
     /**
      * Returns the actual set service
      *
-     * @return callback
+     * @return callable
      */
     public function getService()
     {
@@ -231,7 +231,7 @@ class CreditCard extends AbstractValidator
      *
      * @param  callable $service
      * @return CreditCard
-     * @throws Exception\InvalidArgumentException on invalid service callback
+     * @throws Exception\InvalidArgumentException on invalid service callable
      */
     public function setService($service)
     {

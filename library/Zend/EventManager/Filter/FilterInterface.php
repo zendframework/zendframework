@@ -33,7 +33,7 @@ interface FilterInterface
     /**
      * Attach an intercepting filter
      *
-     * @param  callback $callback
+     * @param  callable $callback
      * @return CallbackHandler
      */
     public function attach($callback);

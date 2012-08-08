@@ -57,7 +57,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * The method that will be applied to the attribute's names.
      *
-     * @var  integer|callback
+     * @var  integer|callable
      */
     protected $attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
 
@@ -120,7 +120,7 @@ class DefaultIterator implements \Iterator, \Countable
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
-     * @param  integer|callback $attributeNameTreatment
+     * @param  integer|callable $attributeNameTreatment
      * @return DefaultIterator Provides a fluent interface
      */
     public function setAttributeNameTreatment($attributeNameTreatment)
@@ -155,7 +155,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Returns the currently set attribute name treatment
      *
-     * @return integer|callback
+     * @return integer|callable
      */
     public function getAttributeNameTreatment()
     {

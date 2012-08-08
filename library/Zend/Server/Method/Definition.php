@@ -106,7 +106,7 @@ class Definition
     /**
      * Set method callback
      *
-     * @param  array|\Zend\Server\Method\Callback $callback
+     * @param  array|\Zend\Server\Method\Callback $callable
      * @return \Zend\Server\Method\Definition
      */
     public function setCallback($callback)

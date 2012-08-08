@@ -229,9 +229,9 @@ class TreeRouteStack extends SimpleRouteStack
                     $uri->setScheme($this->requestUri->getScheme());
                 }
 
-                return $uri->setPath($path)->toString();
+                return $uri->setPath($path)->normalize()->toString();
             } elseif (!$uri->isAbsolute() && $uri->isValidRelative()) {
-                return $uri->setPath($path)->toString();
+                return $uri->setPath($path)->normalize()->toString();
             }
         }
 

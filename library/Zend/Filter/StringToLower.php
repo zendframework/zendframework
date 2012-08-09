@@ -33,7 +33,7 @@ class StringToLower extends AbstractUnicode
     public function __construct($encodingOrOptions = null)
     {
         if ($encodingOrOptions !== null) {
-            if (!static::isOptions($encodingOrOptions)){
+            if (!static::isOptions($encodingOrOptions)) {
                 $this->setEncoding($encodingOrOptions);
             } else {
                 $this->setOptions($encodingOrOptions);

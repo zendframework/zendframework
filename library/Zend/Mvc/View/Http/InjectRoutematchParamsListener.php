@@ -88,22 +88,22 @@ class InjectRoutematchParamsListener implements ListenerAggregate
         $request = $e->getRequest();
 
         /** @var $params \Zend\Stdlib\Parameters */
-        if ($request instanceof ConsoleRequest){
+        if ($request instanceof ConsoleRequest) {
             $params = $request->params();
-        } elseif ($request instanceof HttpRequest){
+        } elseif ($request instanceof HttpRequest) {
             $params = $request->get();
         } else {
             // unsupported request type
             return;
         }
 
-        if ($this->overwrite){
-            foreach ($routeMatchParams as $key=>$val){
+        if ($this->overwrite) {
+            foreach ($routeMatchParams as $key=>$val) {
                 $params->$key = $val;
             }
         } else {
-            foreach ($routeMatchParams as $key=>$val){
-                if (!$params->offsetExists($key)){
+            foreach ($routeMatchParams as $key=>$val) {
+                if (!$params->offsetExists($key)) {
                     $params->$key = $val;
                 }
             }

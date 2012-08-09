@@ -47,7 +47,7 @@ class ConsoleAdapterFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         // First, check if we're actually in a Console environment
-        if (!Console::isConsole()){
+        if (!Console::isConsole()) {
             // SM factory cannot currently return null, so we return dummy object
             return new stdClass();
         }
@@ -64,7 +64,7 @@ class ConsoleAdapterFactory implements FactoryInterface
         }
 
         // check if we have a valid console adapter
-        if (!$adapter instanceof AdapterInterface){
+        if (!$adapter instanceof AdapterInterface) {
             // SM factory cannot currently return null, so we convert it to dummy object
             return new stdClass();
         }

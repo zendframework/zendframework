@@ -342,14 +342,14 @@ class Encoder
                 }
                 $argNames .= "];";
 
-                $result .= "){"
+                $result .= ") {"
                          . $argNames
                          . 'var result = ZAjaxEngine.invokeRemoteMethod('
                          . "this, '" . $method->getName()
                          . "',argNames,arguments);"
                          . 'return(result);}';
             } else {
-                $result .= "){}";
+                $result .= ") {}";
             }
         }
 

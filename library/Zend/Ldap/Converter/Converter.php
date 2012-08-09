@@ -311,7 +311,7 @@ class Converter
         }
 
         // Set Offset
-        $offsetRegEx = '/([Z\-\+])(\d{2}\'?){0,1}(\d{2}\'?){0,1}$/';
+        $offsetRegEx = '/([Z\-\+])(\d{2}\'?) {0,1}(\d{2}\'?) {0,1}$/';
         $off         = array();
         if (preg_match($offsetRegEx, $date, $off)) {
             $offset = $off[1];

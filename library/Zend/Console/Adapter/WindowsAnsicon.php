@@ -237,7 +237,7 @@ class WindowsAnsicon extends Posix
             // Retrieve char from the result.
             $char = !empty($result) ? implode('', $result) : null;
 
-            if (!empty($char) && !$return){
+            if (!empty($char) && !$return) {
                 // We have obtained an ASCII code, convert back to a char ...
                 $char = chr($char);
 

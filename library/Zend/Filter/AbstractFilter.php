@@ -39,7 +39,7 @@ abstract class AbstractFilter implements FilterInterface
     public static function hasPcreUnicodeSupport()
     {
         if (static::$hasPcreUnicodeSupport === null) {
-            if (defined('PREG_BAD_UTF8_OFFSET_ERROR') || @preg_match('/\pL/u', 'a') == 1){
+            if (defined('PREG_BAD_UTF8_OFFSET_ERROR') || @preg_match('/\pL/u', 'a') == 1) {
                 static::$hasPcreUnicodeSupport = true;
             } else {
                 static::$hasPcreUnicodeSupport = false;

@@ -197,7 +197,7 @@ class Collection extends Fieldset
 
                 $this->add($elementOrFieldset);
             }
-        } else {
+        } elseif (!empty($data) && !$this->allowAdd) {
             throw new Exception\DomainException(sprintf(
                 'There are more elements than specified in the collection (%s). Either set the allow_add option ' .
                 'to true, or re-submit the form.',

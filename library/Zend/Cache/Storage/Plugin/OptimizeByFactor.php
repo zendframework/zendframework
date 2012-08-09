@@ -89,7 +89,7 @@ class OptimizeByFactor extends AbstractPlugin
     public function optimizeByFactor(PostEvent $event)
     {
         $storage = $event->getStorage();
-        if (($storage instanceof OptimizableInterface) !== true) {
+        if (!($storage instanceof OptimizableInterface)) {
             return;
         }
 

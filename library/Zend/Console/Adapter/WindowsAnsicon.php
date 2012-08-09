@@ -157,7 +157,6 @@ class WindowsAnsicon extends Posix
         echo chr(27) . '[1K';
     }
 
-
     /**
      * Set Console charset to use.
      *
@@ -208,7 +207,7 @@ class WindowsAnsicon extends Posix
             // single character matching a mask, but is limited to lower ASCII
             // range.
             do {
-                system('choice /n /cs /c:' . $mask, $return);
+                exec('choice /n /cs /c:' . $mask, $output, $return);
                 if ($return == 255 || $return < 1 || $return > strlen($mask)) {
                     throw new Exception\RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
                 }

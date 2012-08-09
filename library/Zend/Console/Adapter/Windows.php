@@ -35,6 +35,13 @@ class Windows extends Virtual
     protected $probeResult;
 
     /**
+     * Results of mode command
+     *
+     * @var mixed
+     */
+    protected $modeResult;
+
+    /**
      * Determine and return current console width.
      *
      * @return int
@@ -110,6 +117,21 @@ class Windows extends Virtual
     }
 
     /**
+     * Run and cache results of mode command
+     *
+     * @return void
+     */
+    protected function runModeCommand()
+    {
+        exec('mode', $output, $return);
+        if ($return || !count($output)) {
+            $this->modeResult = '';
+        } else {
+            $this->modeResult = trim(implode('', $output));
+        }
+    }
+
+    /**
      * Check if console is UTF-8 compatible
      *
      * @return bool
@@ -117,11 +139,11 @@ class Windows extends Virtual
     public function isUtf8()
     {
         // Try to read code page info from "mode" command
-        if ($this->probeResult === null) {
-            $this->runProbeCommand();
+        if ($this->modeResult === null) {
+            $this->runModeCommand();
         }
 
-        if (preg_match('/Code page\:\s+(\d+)/', $this->probeResult, $matches)) {
+        if (preg_match('/Code page\:\s+(\d+)/', $this->modeResult, $matches)) {
             return (int) $matches[1] == 65001;
         }
 
@@ -200,7 +222,13 @@ class Windows extends Virtual
      */
     public function clear()
     {
-        echo str_repeat("\r\n", $this->getHeight());
+        // Attempt to clear the screen using PowerShell command
+        exec("powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command Clear-Host", $output, $return);
+
+        if ($return) {
+            // Could not run powershell... fall back to filling the buffer with newlines
+            echo str_repeat("\r\n", $this->getHeight());
+        }
     }
 
     /**
@@ -228,10 +256,11 @@ class Windows extends Virtual
             // single character matching a mask, but is limited to lower ASCII
             // range.
             do {
-                system('choice /n /cs /c:' . $mask, $return);
+                exec('choice /n /cs /c:' . $mask, $output, $return);
                 if ($return == 255 || $return < 1 || $return > strlen($mask)) {
                     throw new Exception\RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
                 }
+
                 // Fetch the char from mask
                 $char = substr($mask, $return - 1, 1);
             } while (!$char || ($mask !== null && !stristr($mask, $char)));
@@ -334,7 +363,7 @@ class Windows extends Virtual
     public function readLine($maxLength = 2048)
     {
         $f    = fopen('php://stdin','r');
-        $line = trim(fread($f,$maxLength));
+        $line = rtrim(fread($f,$maxLength),"\r\n");
         fclose($f);
 
         return $line;

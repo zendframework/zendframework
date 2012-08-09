@@ -125,7 +125,9 @@ class Char extends AbstractPrompt
                 if ($this->echo) {
                     echo trim($char)."\n";
                 } else {
-                    echo "\n";
+                    if ($this->promptText) {
+                        echo "\n";  // skip to next line but only if we had any prompt text
+                    }
                 }
                 break;
             }

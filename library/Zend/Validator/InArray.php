@@ -192,7 +192,7 @@ class InArray extends AbstractValidator
                         return true;
                     }
 
-                } else{
+                } else {
 
                     // add protection to prevent string to int vuln's
                     $el = $element;

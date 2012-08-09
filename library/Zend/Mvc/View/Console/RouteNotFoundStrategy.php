@@ -152,7 +152,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // Retrieve the script's name (entry point)
         if ($request instanceof ConsoleRequest){
             $scriptName = basename($request->getScriptName());
-        } else{
+        } else {
             $scriptName = '';
         }
 

@@ -31,7 +31,7 @@ class StaticEventsMock implements SharedEventManagerInterface
      *
      * @param  string|array $id Identifier(s) for event emitting component(s)
      * @param  string $event
-     * @param  callback $callback PHP Callback
+     * @param  callable $callback PHP Callback
      * @param  int $priority Priority at which listener should execute
      * @return void
      */

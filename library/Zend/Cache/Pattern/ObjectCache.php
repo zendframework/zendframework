@@ -171,7 +171,7 @@ class ObjectCache extends CallbackCache
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callback   $callback  A valid callback
+     * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return string
      * @throws Exception

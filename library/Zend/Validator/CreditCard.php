@@ -219,7 +219,7 @@ class CreditCard extends AbstractValidator
     /**
      * Returns the actual set service
      *
-     * @return callback
+     * @return callable
      */
     public function getService()
     {

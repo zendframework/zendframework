@@ -34,7 +34,7 @@ class SimpleRouteStack extends BaseSimpleRouteStack
     protected function init()
     {
         $routes = $this->routePluginManager;
-        foreach(array(
+        foreach (array(
                 'catchall' => __NAMESPACE__ . '\Catchall',
                 'simple'   => __NAMESPACE__ . '\Simple',
             ) as $name => $class
@@ -79,7 +79,7 @@ class SimpleRouteStack extends BaseSimpleRouteStack
         }
 
         // default to 'simple' console route
-        if(!isset($specs['type'])) $specs['type'] = 'simple';
+        if (!isset($specs['type'])) $specs['type'] = 'simple';
 
         // build route object
         $route = parent::routeFromArray($specs);

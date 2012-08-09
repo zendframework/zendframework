@@ -522,10 +522,10 @@ class Server extends AbstractServer
             }
 
             $orderedParams = array();
-            foreach($reflection->getParameters() as $refParam) {
-                if(isset( $params[ $refParam->getName() ] )) {
+            foreach ($reflection->getParameters() as $refParam) {
+                if (isset( $params[ $refParam->getName() ] )) {
                     $orderedParams[ $refParam->getName() ] = $params[ $refParam->getName() ];
-                } elseif($refParam->isOptional()) {
+                } elseif ($refParam->isOptional()) {
                     $orderedParams[ $refParam->getName() ] = null;
                 } else {
                     return $this->fault('Invalid params', Error::ERROR_INVALID_PARAMS);

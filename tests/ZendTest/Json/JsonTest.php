@@ -503,7 +503,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodingObjectWithExprAndExtJSON()
     {
-        if(!function_exists('json_encode')) {
+        if (!function_exists('json_encode')) {
             $this->markTestSkipped('Test only works with ext/json enabled!');
         }
 
@@ -682,7 +682,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeWithUtf8IsTransformedSolarRegressionEqualsJSONExt()
     {
-        if(function_exists('json_encode') == false) {
+        if (function_exists('json_encode') == false) {
             $this->markTestSkipped('Test can only be run, when ext/json is installed.');
         }
 

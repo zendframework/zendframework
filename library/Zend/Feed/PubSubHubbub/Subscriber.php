@@ -698,7 +698,7 @@ class Subscriber
             );
         }
         $params['hub.verify'] = array();
-        foreach($vmodes as $vmode) {
+        foreach ($vmodes as $vmode) {
             $params['hub.verify'][] = $vmode;
         }
 

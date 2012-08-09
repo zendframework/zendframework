@@ -242,11 +242,11 @@ class Server implements \Zend\Server\Server
             $options['uri'] = $this->uri;
         }
 
-        if(null !== $this->features) {
+        if (null !== $this->features) {
             $options['features'] = $this->features;
         }
 
-        if(null !== $this->wsdlCache) {
+        if (null !== $this->wsdlCache) {
             $options['cache_wsdl'] = $this->wsdlCache;
         }
 
@@ -560,11 +560,11 @@ class Server implements \Zend\Server\Server
      */
     public function setObject($object)
     {
-        if(!is_object($object)) {
+        if (!is_object($object)) {
             throw new Exception\InvalidArgumentException('Invalid object argument ('.gettype($object).')');
         }
 
-        if(isset($this->object)) {
+        if (isset($this->object)) {
             throw new Exception\InvalidArgumentException('An object has already been registered with this soap server instance');
         }
 
@@ -662,7 +662,7 @@ class Server implements \Zend\Server\Server
             }
             libxml_disable_entity_loader(true);
             $dom = new DOMDocument();
-            if(strlen($xml) == 0 || !$dom->loadXML($xml)) {
+            if (strlen($xml) == 0 || !$dom->loadXML($xml)) {
                 throw new Exception\InvalidArgumentException('Invalid XML');
             }
             libxml_disable_entity_loader(false);
@@ -791,7 +791,7 @@ class Server implements \Zend\Server\Server
         $soap = $this->_getSoap();
 
         ob_start();
-        if($setRequestException instanceof \Exception) {
+        if ($setRequestException instanceof \Exception) {
             // Send SOAP fault message if we've catched exception
             $soap->fault('Sender', $setRequestException->getMessage());
         } else {
@@ -893,7 +893,7 @@ class Server implements \Zend\Server\Server
             } else {
                 $message = 'Unknown error';
             }
-        } elseif(is_string($fault)) {
+        } elseif (is_string($fault)) {
             $message = $fault;
         } else {
             $message = 'Unknown error';
@@ -903,7 +903,7 @@ class Server implements \Zend\Server\Server
             'VersionMismatch', 'MustUnderstand', 'DataEncodingUnknown',
             'Sender', 'Receiver', 'Server'
         );
-        if(!in_array($code, $allowedFaultModes)) {
+        if (!in_array($code, $allowedFaultModes)) {
             $code = "Receiver";
         }
 

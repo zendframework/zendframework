@@ -102,7 +102,7 @@ class AbstractFeed
      */
     public function addAuthors(array $authors)
     {
-        foreach($authors as $author) {
+        foreach ($authors as $author) {
             $this->addAuthor($author);
         }
     }

@@ -126,7 +126,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getTitle()) {
+        if (!$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' title element but a title has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
@@ -154,7 +154,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDescription()) {
+        if (!$this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' description element but one has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
@@ -180,7 +180,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDateModified()) {
+        if (!$this->getDataContainer()->getDateModified()) {
             return;
         }
 
@@ -201,7 +201,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getGenerator()) {
+        if (!$this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator('Zend_Feed_Writer',
                 Version::VERSION, 'http://framework.zend.com');
         }
@@ -231,7 +231,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
         $value = $this->getDataContainer()->getLink();
-        if(!$value) {
+        if (!$value) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' link element but one has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
@@ -418,10 +418,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDateCreated()) {
+        if (!$this->getDataContainer()->getDateCreated()) {
             return;
         }
-        if(!$this->getDataContainer()->getDateModified()) {
+        if (!$this->getDataContainer()->getDateModified()) {
             $this->getDataContainer()->setDateModified(
                 $this->getDataContainer()->getDateCreated()
             );
@@ -437,7 +437,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setLastBuildDate(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getLastBuildDate()) {
+        if (!$this->getDataContainer()->getLastBuildDate()) {
             return;
         }
 

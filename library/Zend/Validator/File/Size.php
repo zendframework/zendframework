@@ -363,7 +363,7 @@ class Size extends AbstractValidator
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $this->value = $file['name'];
                 }
             } elseif (is_string($file)) {

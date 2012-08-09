@@ -78,7 +78,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getTitle()) {
+        if (!$this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
             . ' atom:title element but a title has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
@@ -105,7 +105,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDescription()) {
+        if (!$this->getDataContainer()->getDescription()) {
             return; // unless src content or base64
         }
         $subtitle = $dom->createElement('summary');
@@ -127,7 +127,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDateModified()) {
+        if (!$this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
             . ' atom:updated element but a modification date has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
@@ -233,7 +233,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
 
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getLink()) {
+        if (!$this->getDataContainer()->getLink()) {
             return;
         }
         $link = $dom->createElement('link');
@@ -253,7 +253,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getId()
+        if (!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one '
             . 'atom:id element, or as an alternative, we can use the same '

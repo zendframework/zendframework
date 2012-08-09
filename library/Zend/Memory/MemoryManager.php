@@ -320,7 +320,7 @@ class MemoryManager
         }
 
         // Remove just updated object from list of candidates to unload
-        if( isset($this->unloadCandidates[$id])) {
+        if ( isset($this->unloadCandidates[$id])) {
             unset($this->unloadCandidates[$id]);
         }
 

@@ -71,7 +71,7 @@ class TokenArrayScanner implements ScannerInterface
             $type    = $token[0];
             $value   = $token[1];
             $lineNum = $token[2];
-            if(($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
+            if (($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
                 continue;
             } elseif ($type == T_DOC_COMMENT) {
                 $this->docComment = $value;

@@ -263,8 +263,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
 
         foreach ($this->itemKeys as $itemKey) {
             if (isset($attributes[$itemKey])) {
-                if(is_array($attributes[$itemKey])) {
-                    foreach($attributes[$itemKey] as $key => $value) {
+                if (is_array($attributes[$itemKey])) {
+                    foreach ($attributes[$itemKey] as $key => $value) {
                         $link .= sprintf('%s="%s" ', $key, ($this->autoEscape) ? $this->escape($value) : $value);
                     }
                 } else {
@@ -346,7 +346,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
 
         if (0 < count($args)) {
             $media = array_shift($args);
-            if(is_array($media)) {
+            if (is_array($media)) {
                 $media = implode(',', $media);
             } else {
                 $media = (string) $media;
@@ -354,14 +354,14 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         }
         if (0 < count($args)) {
             $conditionalStylesheet = array_shift($args);
-            if(!empty($conditionalStylesheet) && is_string($conditionalStylesheet)) {
+            if (!empty($conditionalStylesheet) && is_string($conditionalStylesheet)) {
                 $conditionalStylesheet = (string) $conditionalStylesheet;
             } else {
                 $conditionalStylesheet = null;
             }
         }
 
-        if(0 < count($args) && is_array($args[0])) {
+        if (0 < count($args) && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
         }
@@ -407,11 +407,11 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $type  = array_shift($args);
         $title = array_shift($args);
 
-        if(0 < count($args) && is_array($args[0])) {
+        if (0 < count($args) && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
 
-            if(isset($extras['media']) && is_array($extras['media'])) {
+            if (isset($extras['media']) && is_array($extras['media'])) {
                 $extras['media'] = implode(',', $extras['media']);
             }
         }

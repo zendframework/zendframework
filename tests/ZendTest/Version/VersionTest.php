@@ -61,7 +61,7 @@ class Zend_VersionTest extends \PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
-        if(!extension_loaded('openssl')) {
+        if (!extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
         $actual = Version::getLatest();

@@ -107,10 +107,10 @@ class FormCaptchaTest extends CommonTestCase
             $this->markTestSkipped('The GD extension is not available.');
             return;
         }
-        if(!function_exists("imagepng")) {
+        if (!function_exists("imagepng")) {
             $this->markTestSkipped("Image CAPTCHA requires PNG support");
         }
-        if(!function_exists("imageftbbox")) {
+        if (!function_exists("imageftbbox")) {
             $this->markTestSkipped("Image CAPTCHA requires FT fonts support");
         }
 

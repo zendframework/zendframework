@@ -132,7 +132,7 @@ class Curl implements HttpAdapter, StreamInterface
 
         foreach ($options as $k => $v) {
             $option = strtolower($k);
-            switch($option) {
+            switch ($option) {
                 case 'proxyhost':
                     $this->setCurlOption(CURLOPT_PROXY, $v);
                     break;

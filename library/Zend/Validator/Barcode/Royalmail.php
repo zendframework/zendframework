@@ -56,7 +56,7 @@ class Royalmail extends AbstractAdapter
         $values   = str_split(substr($value, 0, -1));
         $rowvalue = 0;
         $colvalue = 0;
-        foreach($values as $row) {
+        foreach ($values as $row) {
             $rowvalue += $this->rows[$row];
             $colvalue += $this->columns[$row];
         }

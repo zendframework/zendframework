@@ -77,7 +77,7 @@ class Debug
                     . PHP_EOL . $output
                     . PHP_EOL;
         } else {
-            if(!extension_loaded('xdebug')) {
+            if (!extension_loaded('xdebug')) {
                 $output = htmlspecialchars($output, ENT_QUOTES);
             }
 

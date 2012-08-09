@@ -102,7 +102,7 @@ class Query implements RouteInterface
     protected function recursiveUrldecode(array $array)
     {
         $matches = array();
-        foreach($array as $key => $value) {
+        foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $matches[urldecode($key)] = $this->recursiveUrldecode($value);
             } else {

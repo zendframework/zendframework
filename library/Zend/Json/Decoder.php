@@ -371,7 +371,7 @@ class Decoder
                             default:
                                 throw new RuntimeException("Illegal escape sequence '{$chr}'");
                         }
-                    } elseif($chr == '"') {
+                    } elseif ($chr == '"') {
                         break;
                     } else {
                         $result .= $chr;

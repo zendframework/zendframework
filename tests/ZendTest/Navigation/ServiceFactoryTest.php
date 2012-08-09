@@ -120,7 +120,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $container = $this->serviceManager->get('Navigation');
 
         $recursive = function($that, $pages) use (&$recursive) {
-            foreach($pages as $page) {
+            foreach ($pages as $page) {
                 if ($page instanceof MvcPage) {
                     $that->assertInstanceOf('Zend\Mvc\Router\RouteStackInterface', $page->getRouter());
                     $that->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $page->getRouteMatch());

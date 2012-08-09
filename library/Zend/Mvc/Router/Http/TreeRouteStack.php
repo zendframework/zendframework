@@ -49,7 +49,7 @@ class TreeRouteStack extends SimpleRouteStack
     protected function init()
     {
         $routes = $this->routePluginManager;
-        foreach(array(
+        foreach (array(
                 'hostname' => __NAMESPACE__ . '\Hostname',
                 'literal'  => __NAMESPACE__ . '\Literal',
                 'part'     => __NAMESPACE__ . '\Part',

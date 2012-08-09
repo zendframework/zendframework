@@ -307,7 +307,7 @@ class Request extends HttpRequest
             $this->serverParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null){
             return $this->serverParams;
         }
 
@@ -340,7 +340,7 @@ class Request extends HttpRequest
             $this->envParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null){
             return $this->envParams;
         }
 

@@ -25,32 +25,39 @@ class EmailTest extends TestCase
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
 
-        $expectedClasses = array(
+        $expectedValidators = array(
             'Zend\Validator\Regex'
         );
-        foreach ($inputSpec['validators'] as $validator) {
+        foreach ($inputSpec['validators'] as $i => $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertEquals($expectedValidators[$i], $class);
         }
     }
 
-    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
+    public function emailAttributesDataProvider()
+    {
+        return array(
+                  // attributes               // expectedValidators
+            array(array('multiple' => true),  array('Zend\Validator\Explode')),
+            array(array('multiple' => false), array('Zend\Validator\Regex')),
+        );
+    }
+
+    /**
+     * @dataProvider emailAttributesDataProvider
+     */
+    public function testProvidesInputSpecificationBasedOnAttributes($attributes, $expectedValidators)
     {
         $element = new EmailElement();
-        $element->setAttributes(array(
-            'multiple' => true
-        ));
+        $element->setAttributes($attributes);
 
         $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
 
-        $expectedClasses = array(
-            'Zend\Validator\Explode'
-        );
-        foreach ($inputSpec['validators'] as $validator) {
+        foreach ($inputSpec['validators'] as $i => $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertEquals($expectedValidators[$i], $class);
             switch ($class) {
                 case 'Zend\Validator\Explode':
                     $this->assertInstanceOf('Zend\Validator\Regex', $validator->getValidator());

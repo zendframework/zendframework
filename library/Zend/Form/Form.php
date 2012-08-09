@@ -618,9 +618,13 @@ class Form extends Fieldset implements FormInterface
 
             if (!$fieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
-                    // Add a new empty input filter if it does not exist, so that elements of nested fieldsets can be
-                    // recursively added
-                    $inputFilter->add(new InputFilter(), $name);
+                    // Add a new empty input filter if it does not exist (or the fieldset's object input filter),
+                    // so that elements of nested fieldsets can be recursively added
+                    if ($fieldset->getObject() instanceof InputFilterAwareInterface) {
+                        $inputFilter->add($fieldset->getObject()->getInputFilter(), $name);
+                    } else {
+                        $inputFilter->add(new InputFilter(), $name);
+                    }
                 }
 
                 $fieldsetFilter = $inputFilter->get($name);

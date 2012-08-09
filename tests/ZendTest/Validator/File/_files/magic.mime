@@ -6468,8 +6468,8 @@
 #        10	SS, 8 SPT
 #        11	DS, 8 SPT
 #
-#  11111001	Double density 3? floppy disk, high density 5?
-#  11110000	High density 3? floppy disk
+#  11111001	Double density 3½ floppy disk, high density 5¼
+#  11110000	High density 3½ floppy disk
 #  11111000	Hard disk any format
 #
 
@@ -9504,7 +9504,7 @@
 #
 # Linux kernel boot images, from Albert Cahalan <acahalan@cs.uml.edu>
 # and others such as Axel Kohlmeyer <akohlmey@rincewind.chemie.uni-ulm.de>
-# and Nicol?s Lichtmaier <nick@debian.org>
+# and Nicolás Lichtmaier <nick@debian.org>
 # All known start with: b8 c0 07 8e d8 b8 00 90 8e c0 b9 00 01 29 f6 29
 # Linux kernel boot images (i386 arch) (Wolfram Kleff)
 514	string		HdrS		Linux kernel
@@ -9527,10 +9527,10 @@
 >0x1e3		string	Loading		version 1.3.79 or older
 >0x1e9		string	Loading		from prehistoric times
 
-# System.map files - Nicol?s Lichtmaier <nick@debian.org>
+# System.map files - Nicolás Lichtmaier <nick@debian.org>
 8	search/1	\ A\ _text	Linux kernel symbol map text
 
-# LSM entries - Nicol?s Lichtmaier <nick@debian.org>
+# LSM entries - Nicolás Lichtmaier <nick@debian.org>
 0	search/1	Begin3	Linux Software Map entry text
 0	search/1	Begin4	Linux Software Map entry text (new format)
 
@@ -11718,7 +11718,7 @@
 # natinst:  file(1) magic for National Instruments Code Files
 
 #
-# From <egamez@fcfm.buap.mx> Enrique G?mez-Flores
+# From <egamez@fcfm.buap.mx> Enrique Gámez-Flores
 # version 1
 # Many formats still missing, we use, for the moment LabVIEW
 # We guess VXI format file. VISA, LabWindowsCVI, BridgeVIEW, etc, are missing
@@ -12962,7 +12962,7 @@
 #
 #	http://www.seanet.com/users/matts/riffmci/riffmci.htm
 #
-# AVI section extended by Patrik R?dman <patrik+file-magic@iki.fi>
+# AVI section extended by Patrik Rådman <patrik+file-magic@iki.fi>
 #
 0	string		RIFF		RIFF (little-endian) data
 # RIFF Palette format
@@ -15809,7 +15809,7 @@
 512	string		R\0o\0o\0t\0	Hangul (Korean) Word Processor File 2000
 !:mime	application/x-hwp
 
-# CosmicBook, from Beno?t Rouits
+# CosmicBook, from Benoît Rouits
 0       string  CSBK    Ted Neslson's CosmicBook hypertext file
 
 2       string  EYWR    AmigaWriter file

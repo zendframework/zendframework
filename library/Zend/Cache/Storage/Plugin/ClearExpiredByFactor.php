@@ -92,7 +92,7 @@ class ClearExpiredByFactor extends AbstractPlugin
     public function clearExpiredByFactor(PostEvent $event)
     {
         $storage = $event->getStorage();
-        if ( !($storage instanceof ClearExpiredInterface) ) {
+        if (($storage instanceof ClearExpiredInterface) !== true) {
             return;
         }
 

@@ -750,7 +750,7 @@ class PatternOptions extends AbstractOptions
             $storage = StorageFactory::factory($storage);
         } elseif (is_string($storage)) {
             $storage = StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof Storage) ) {
+        } elseif (($storage instanceof Storage) !== true) {
             throw new Exception\InvalidArgumentException(
                 'The storage must be an instanceof Zend\Cache\Storage\StorageInterface '
                 . 'or an array passed to Zend\Cache\Storage::factory '

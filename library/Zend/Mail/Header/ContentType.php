@@ -48,7 +48,7 @@ class ContentType implements HeaderInterface
 
         if (count($values)) {
             foreach ($values as $keyValuePair) {
-                list($key, $value) = explode('=', $keyValuePair);
+                list($key, $value) = explode('=', $keyValuePair, 2);
                 $value = trim($value, "'\" \t\n\r\0\x0B");
                 $header->addParameter($key, $value);
             }

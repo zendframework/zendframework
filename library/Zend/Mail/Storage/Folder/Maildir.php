@@ -193,7 +193,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
 
         try {
             $this->_openMaildir($this->rootdir . '.' . $folder->getGlobalName());
-        } catch(Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
                 throw new Exception\RuntimeException("{$this->currentFolder} is not selectable", 0, $e);

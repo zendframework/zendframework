@@ -130,7 +130,7 @@ class Part implements RecursiveIterator, Part\PartInterface
     {
         try {
             return stripos($this->contentType, 'multipart/') === 0;
-        } catch(Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface $e) {
             return false;
         }
     }

@@ -197,7 +197,7 @@ EOT;
                         ),
                         $this->message
                     );
-                }else{
+                } else {
                     $message = str_replace(
                         array(
                             ':className',

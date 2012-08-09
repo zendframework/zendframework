@@ -427,7 +427,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         try {
             $opts = new GetOpt('abp:');
             $this->fail();
-        } catch(\Zend\Console\Exception\InvalidArgumentException $e) {
+        } catch (\Zend\Console\Exception\InvalidArgumentException $e) {
             $this->assertContains('$_SERVER["argv"]', $e->getMessage());
         }
 

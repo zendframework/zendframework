@@ -190,7 +190,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             $this->protocol = $params;
             try {
                 $this->selectFolder('INBOX');
-            } catch(Exception\ExceptionInterface $e) {
+            } catch (Exception\ExceptionInterface $e) {
                 throw new Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
             }
             return;

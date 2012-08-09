@@ -109,15 +109,15 @@ class Simple implements RouteInterface
         if ($filters !== null){
             if ($filters instanceof FilterChain){
                 $this->filters = $filters;
-            }elseif ($filters instanceof Traversable){
+            } elseif ($filters instanceof Traversable){
                 $this->filters = new FilterChain(array(
                     'filters' => ArrayUtils::iteratorToArray($filters, false)
                 ));
-            }elseif (is_array($filters)){
+            } elseif (is_array($filters)){
                 $this->filters = new FilterChain(array(
                     'filters' => $filters
                 ));
-            }else{
+            } else{
                 throw new InvalidArgumentException('Cannot use '.gettype($filters).' as filters for '.__CLASS__);
             }
         }
@@ -125,12 +125,12 @@ class Simple implements RouteInterface
         if ($validators !== null){
             if ($validators instanceof ValidatorChain){
                 $this->validators = $validators;
-            }elseif ($validators instanceof Traversable || is_array($validators)){
+            } elseif ($validators instanceof Traversable || is_array($validators)){
                 $this->validators = new ValidatorChain();
                 foreach ($validators as $v){
                     $this->validators->addValidator($v);
                 }
-            }else{
+            } else{
                 throw new InvalidArgumentException('Cannot use '.gettype($validators).' as validators for '.__CLASS__);
             }
         }
@@ -562,23 +562,23 @@ class Simple implements RouteInterface
 
                 if ($part['hasValue']){
                     $regex .= ')(?:\=(?<value>.*?)$)?$/';
-                }else{
+                } else{
                     $regex .= ')$/';
                 }
-            }else{
+            } else{
                 // a single named flag
                 if ($part['short'] === true){
                     // short variant
                     if ($part['hasValue']){
                         $regex = '/^\-'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
-                    }else{
+                    } else{
                         $regex = '/^\-'.$part['name'].'$/';
                     }
-                }elseif ($part['short'] === false){
+                } elseif ($part['short'] === false){
                     // long variant
                     if ($part['hasValue']){
                         $regex = '/^\-{2,}'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
-                    }else{
+                    } else{
                         $regex = '/^\-{2,}'.$part['name'].'$/';
                     }
                 }
@@ -643,7 +643,7 @@ class Simple implements RouteInterface
 
                     // prevent further scanning of this param
                     array_splice($params,$x,1);
-                }else{
+                } else{
                     // there are no more params available
                     return;
                 }
@@ -666,7 +666,7 @@ class Simple implements RouteInterface
              */
             if ($part['hasValue']){
                 $matches[$part['name']] = $value;
-            }else{
+            } else{
                 $matches[$part['name']] = true;
             }
 
@@ -682,7 +682,7 @@ class Simple implements RouteInterface
                             $matches[$alt] = null;
                         }
                     }
-                }else{
+                } else{
                     foreach ($part['alternatives'] as $alt){
                         if ($alt == $matchedName){
                             $matches[$alt] = true;
@@ -715,7 +715,7 @@ class Simple implements RouteInterface
                 if ($part['required']){
                     // cannot find required positional param
                     return;
-                }else{
+                } else {
                     // stop matching
                     break;
                 }

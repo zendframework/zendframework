@@ -92,7 +92,7 @@ class InjectRoutematchParamsListener implements ListenerAggregate
             $params = $request->params();
         } elseif ($request instanceof HttpRequest){
             $params = $request->get();
-        }else{
+        } else {
             // unsupported request type
             return;
         }
@@ -101,7 +101,7 @@ class InjectRoutematchParamsListener implements ListenerAggregate
             foreach ($routeMatchParams as $key=>$val){
                 $params->$key = $val;
             }
-        }else{
+        } else {
             foreach ($routeMatchParams as $key=>$val){
                 if (!$params->offsetExists($key)){
                     $params->$key = $val;

@@ -125,7 +125,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // Try to fetch module manager
         try{
             $mm = $sm->get('ModuleManager');
-        }catch(ServiceNotFoundException $e){
+        } catch (ServiceNotFoundException $e){
             // The application does not have or use module manager, so we cannot use it
             $mm = null;
         }
@@ -136,7 +136,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             if (!$console instanceof ConsoleAdapter){
                 throw new ServiceNotFoundException();
             }
-        }catch(ServiceNotFoundException $e){
+        } catch (ServiceNotFoundException $e){
             // The application does not have console adapter
             throw new RuntimeException('Cannot access Console adapter - is it defined in ServiceManager?');
         }
@@ -144,7 +144,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // Try to fetch router
         try{
             $router = $sm->get('Router');
-        }catch(ServiceNotFoundException $e){
+        } catch (ServiceNotFoundException $e){
             // The application does not have a router
             $router = null;
         }
@@ -152,7 +152,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // Retrieve the script's name (entry point)
         if ($request instanceof ConsoleRequest){
             $scriptName = basename($request->getScriptName());
-        }else{
+        } else{
             $scriptName = '';
         }
 
@@ -264,7 +264,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             if (is_string($usage)){
                 // It's a plain string - output as is
                 $result .= $usage."\n";
-            }elseif (is_array($usage)){
+            } elseif (is_array($usage)){
                 // It's an array, analyze it
                 foreach ($usage as $a => $b){
                     if (is_string($a) && is_string($b)){
@@ -283,7 +283,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         $tableCols = 2;
                         $tableType = 1;
                         $table[] = array($scriptName . ' ' . $a, $b);
-                    }elseif (is_array($b)){
+                    } elseif (is_array($b)){
                         /**
                          *  array( '--param', '--explanation' )
                          */
@@ -299,7 +299,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         $tableCols = count($b);
                         $tableType = 2;
                         $table[] = $b;
-                    }else{
+                    } else {
                         /**
                          *    'A single line of text'
                          */
@@ -316,7 +316,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         $result .= $b."\n";
                     }
                 }
-            }else{
+            } else {
                 throw new RuntimeException('Cannot understand usage info for module '.$moduleName);
             }
         }

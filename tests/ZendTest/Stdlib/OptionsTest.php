@@ -53,7 +53,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $options = new TestOptions(null);
-        } catch(InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("Unexpected InvalidArgumentException raised");
         }
     }

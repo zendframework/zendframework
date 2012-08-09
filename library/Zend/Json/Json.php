@@ -362,11 +362,11 @@ class Json
                     $result .= $prefix;
                 }
                 $result .= "$token\n";
-            } else if (!$inLiteral && ($token == "}" || $token == "]")) {
+            } elseif (!$inLiteral && ($token == "}" || $token == "]")) {
                 $indent--;
                 $prefix = str_repeat($ind, $indent);
                 $result .= "\n$prefix$token";
-            } else if (!$inLiteral && $token == ",") {
+            } elseif (!$inLiteral && $token == ",") {
                 $result .= "$token\n";
             } else {
                 $result .= ($inLiteral ?  '' : $prefix) . $token;

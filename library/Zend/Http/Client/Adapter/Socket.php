@@ -184,7 +184,7 @@ class Socket implements HttpAdapter, StreamInterface
         if (! is_resource($this->socket) || ! $this->config['keepalive']) {
             $context = $this->getStreamContext();
             if ($secure || $this->config['sslusecontext']) {
-                if ($this->config['sslverifypeer'] !== null) {
+                if (isset($this->config['sslverifypeer']) && $this->config['sslverifypeer'] !== null) {
                     if (! stream_context_set_option($context, 'ssl', 'verify_peer',
                                                     $this->config['sslverifypeer'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');

@@ -85,7 +85,7 @@ class ViewModelTest extends TestCase
     public function testCanUnsetVariable()
     {
         $model = new ViewModel(array('foo' => 'bar'));
-        $model->__unset('foo');                
+        $model->__unset('foo');
         $this->assertEquals(array(), $model->getVariables());
     }
 

@@ -47,7 +47,7 @@ class Metadata implements MetadataInterface
      * Create source from adapter
      *
      * @param  Adapter $adapter
-     * @return Source\InformationSchemaMetadata
+     * @return Source\AbstractSource
      */
     protected function createSourceFromAdapter(Adapter $adapter)
     {

@@ -239,7 +239,7 @@ class Console extends AbstractAdapter
      * Set the elements to display with the progressbar
      *
      * @param  array $elements
-     * @throws \Zend\ProgressBar\Adapter\Exception When an invalid element is found in the array
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When an invalid element is found in the array
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setElements(array $elements)
@@ -264,7 +264,7 @@ class Console extends AbstractAdapter
      * Set the left-hand character for the bar
      *
      * @param  string $char
-     * @throws \Zend\ProgressBar\Adapter\Exception When character is empty
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When character is empty
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setBarLeftChar($char)
@@ -282,7 +282,7 @@ class Console extends AbstractAdapter
      * Set the right-hand character for the bar
      *
      * @param  string $char
-     * @throws \Zend\ProgressBar\Adapter\Exception When character is empty
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When character is empty
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setBarRightChar($char)
@@ -338,7 +338,7 @@ class Console extends AbstractAdapter
      * Set the finish action
      *
      * @param  string $action
-     * @throws \Zend\ProgressBar\Adapter\Exception When an invalid action is specified
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When an invalid action is specified
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setFinishAction($action)

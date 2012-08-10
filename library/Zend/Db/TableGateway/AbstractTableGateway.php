@@ -63,7 +63,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected $resultSetPrototype = null;
 
     /**
-     * @var Sql\Sql
+     * @var Sql
      */
     protected $sql = null;
 
@@ -198,7 +198,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
-     * @param Sql\Select $select
+     * @param Select $select
      * @return null|ResultSetInterface
      * @throws \RuntimeException
      */

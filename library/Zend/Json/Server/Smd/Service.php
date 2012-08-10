@@ -428,9 +428,10 @@ class Service
     /**
      * Validate parameter type
      *
-     * @param  string $type
-     * @return true
-     * @throws Zend\Json\Server\Exception
+     * @param string  $type
+     * @param boolean $isReturn
+     * @return string
+     * @throws InvalidArgumentException
      */
     protected function _validateParamType($type, $isReturn = false)
     {

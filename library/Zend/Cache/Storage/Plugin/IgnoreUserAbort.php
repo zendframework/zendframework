@@ -31,7 +31,7 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * The storage who activated ignore_user_abort.
      *
-     * @var null|Zend\Cache\Storage\StorageInterface
+     * @var null|\Zend\Cache\Storage\StorageInterface
      */
     protected $activatedTarget = null;
 

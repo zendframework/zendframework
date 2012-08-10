@@ -127,7 +127,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
     /**
      * Return the current entry
      *
-     * @return \Zend\Feed\Reader\Entry
+     * @return \Zend\Feed\Reader\AbstractEntry
      */
     public function current()
     {

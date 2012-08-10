@@ -49,7 +49,8 @@ class DotNet extends SOAPClient
      * My be overridden in descendant classes
      *
      * @param array $arguments
-     * @throws \Zend\Soap\ClientException
+     * @throws Exception\RuntimeException
+     * @return array
      */
     protected function _preProcessArguments($arguments)
     {
@@ -68,7 +69,7 @@ class DotNet extends SOAPClient
      *
      * My be overridden in descendant classes
      *
-     * @param array $arguments
+     * @param object $result
      */
     protected function _preProcessResult($result)
     {

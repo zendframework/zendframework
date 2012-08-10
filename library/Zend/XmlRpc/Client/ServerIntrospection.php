@@ -28,7 +28,7 @@ class ServerIntrospection
 
 
     /**
-     * @param Zend\XmlRpc\Client $client
+     * @param \Zend\XmlRpc\Client $client
      */
     public function __construct(XMLRPCClient $client)
     {

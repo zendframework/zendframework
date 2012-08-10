@@ -27,15 +27,15 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * Parent class reflection
-     * @var Zend\Server\Reflection\ReflectionClass
+     * @var ReflectionClass
      */
     protected $classReflection;
 
     /**
      * Constructor
      *
-     * @param \Zend\Server\Reflection\ReflectionClass $class
-     * @param ReflectionMethod $r
+     * @param ReflectionClass $class
+     * @param \ReflectionMethod $r
      * @param string $namespace
      * @param array $argv
      * @return void

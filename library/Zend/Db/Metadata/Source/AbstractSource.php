@@ -375,8 +375,7 @@ abstract class AbstractSource implements MetadataInterface
      * @param  string $constraint
      * @param  string $table
      * @param  string $schema
-     * @param  string $database
-     * @return Object\ConstraintKeyObject
+     * @return array
      */
     public function getConstraintKeys($constraint, $table, $schema = null)
     {

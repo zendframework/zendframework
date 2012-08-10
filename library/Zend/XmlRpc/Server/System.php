@@ -27,7 +27,7 @@ class System
     /**
      * Constructor
      *
-     * @param  \Zend\XmlRpc\Server\Server $server
+     * @param \Zend\XmlRpc\Server $server
      * @return void
      */
     public function __construct(\Zend\XmlRpc\Server $server)

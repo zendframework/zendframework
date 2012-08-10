@@ -59,7 +59,7 @@ class Definition implements \Countable, \Iterator
      * @param  array|\Zend\Server\Method\Definition $method
      * @param  null|string $name
      * @return \Zend\Server\Definition
-     * @throws \Zend\Server\Exception if duplicate or invalid method provided
+     * @throws \Zend\Server\Exception\ExceptionInterface if duplicate or invalid method provided
      */
     public function addMethod($method, $name = null)
     {

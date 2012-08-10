@@ -1254,8 +1254,8 @@ class Client implements Stdlib\DispatchableInterface
      * the interaction with the adapter
      *
      * @param Http $uri
-     * @param string $secure
      * @param string $method
+     * @param boolean $secure
      * @param array $headers
      * @param string $body
      * @return string the raw response

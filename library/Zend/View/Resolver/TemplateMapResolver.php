@@ -35,7 +35,6 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      * Instantiate and optionally populate template map.
      *
      * @param  array|Traversable $map
-     * @return void
      */
     public function __construct($map = array())
     {

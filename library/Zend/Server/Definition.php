@@ -32,7 +32,6 @@ class Definition implements \Countable, \Iterator
      * Constructor
      *
      * @param  null|array $methods
-     * @return void
      */
     public function __construct($methods = null)
     {

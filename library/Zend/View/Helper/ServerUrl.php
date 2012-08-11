@@ -36,7 +36,6 @@ class ServerUrl extends AbstractHelper
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

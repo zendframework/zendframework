@@ -61,7 +61,6 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @param  array|Traversable $modules
      * @param  EventManagerInterface $eventManager
-     * @return void
      */
     public function __construct($modules, EventManagerInterface $eventManager = null)
     {

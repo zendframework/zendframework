@@ -50,7 +50,6 @@ class MongoDB extends AbstractWriter
      * @param string|MongoDB $database
      * @param string $collection
      * @param array $saveOptions
-     * @return void
      */
     public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {

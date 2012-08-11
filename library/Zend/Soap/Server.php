@@ -144,7 +144,6 @@ class Server implements \Zend\Server\Server
      *
      * @param string $wsdl
      * @param array $options
-     * @return void
      * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($wsdl = null, array $options = null)

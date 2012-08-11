@@ -107,7 +107,6 @@ class Service
      * Constructor
      *
      * @param  string|array $spec
-     * @return void
      * @throws Zend\Json\Server\Exception\InvalidArgumentException if no name provided
      */
     public function __construct($spec)

@@ -110,7 +110,6 @@ class ReflectionTestClass
      * This shouldn't be reflected
      *
      * @param mixed $arg
-     * @return void
      */
     public function __construct($arg = null)
     {

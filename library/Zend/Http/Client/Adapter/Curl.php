@@ -74,7 +74,6 @@ class Curl implements HttpAdapter, StreamInterface
      *
      * Config is set using setOptions()
      *
-     * @return void
      * @throws AdapterException\InitializationException
      */
     public function __construct()

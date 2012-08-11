@@ -96,7 +96,6 @@ class Symbol
      * @param  Parser  $parser
      * @param  string  $id
      * @param  integer $leftBindingPower
-     * @return void
      */
     public function __construct(Parser $parser, $id, $leftBindingPower)
     {

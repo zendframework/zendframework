@@ -35,7 +35,6 @@ abstract class AbstractServer implements Server
      *
      * Setup server description
      *
-     * @return void
      */
     public function __construct()
     {

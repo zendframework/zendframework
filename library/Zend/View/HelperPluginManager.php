@@ -82,7 +82,6 @@ class HelperPluginManager extends AbstractPluginManager
      * attached renderer and translator, if any, to the currently requested helper.
      *
      * @param  null|ConfigInterface $configuration
-     * @return void
      */
     public function __construct(ConfigInterface $configuration = null)
     {

@@ -26,7 +26,6 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
      * Constructor
      *
      * @param  Zend_Feed_Writer_Feed_Source $container
-     * @return void
      */
     public function __construct (Writer\Source $container)
     {

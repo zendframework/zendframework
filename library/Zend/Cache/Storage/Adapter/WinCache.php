@@ -34,7 +34,6 @@ class WinCache extends AbstractAdapter implements
      *
      * @param  array|Traversable|WinCacheOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {

@@ -52,7 +52,6 @@ class Response
      *
      * @param mixed $return
      * @param string $type
-     * @return void
      */
     public function __construct($return = null, $type = null)
     {

@@ -70,7 +70,6 @@ class AbstractRenderer
      * Constructor
      *
      * @param  mixed $container
-     * @return void
      */
     public function __construct($container)
     {

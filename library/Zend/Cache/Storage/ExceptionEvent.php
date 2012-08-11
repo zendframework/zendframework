@@ -44,7 +44,6 @@ class ExceptionEvent extends PostEvent
      * @param  ArrayObject $params
      * @param  mixed       $result
      * @param  Exception   $exception
-     * @return void
      */
     public function __construct($name, StorageInterface $storage, ArrayObject $params, & $result, Exception $exception)
     {

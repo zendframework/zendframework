@@ -68,7 +68,6 @@ class Query
      * Constructor
      *
      * @param  null|string $document
-     * @return void
      */
     public function __construct($document = null, $encoding = null)
     {

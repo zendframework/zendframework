@@ -77,7 +77,6 @@ class ViewModel implements ModelInterface
      *
      * @param  null|array|Traversable $variables
      * @param  array|Traversable $options
-     * @return void
      */
     public function __construct($variables = null, $options = null)
     {

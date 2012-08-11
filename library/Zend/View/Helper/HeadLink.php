@@ -39,7 +39,6 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      *
      * Use PHP_EOL as separator
      *
-     * @return void
      */
     public function __construct()
     {

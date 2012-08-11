@@ -135,7 +135,6 @@ class Server extends AbstractServer
      *
      * Creates system.* methods.
      *
-     * @return void
      */
     public function __construct()
     {

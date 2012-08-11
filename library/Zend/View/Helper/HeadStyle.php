@@ -65,7 +65,6 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      *
      * Set separator to PHP_EOL.
      *
-     * @return void
      */
     public function __construct()
     {

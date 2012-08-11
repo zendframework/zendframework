@@ -55,7 +55,6 @@ class Parser
     /**
      * Create a new plural parser.
      *
-     * @return void
      */
     public function __construct()
     {

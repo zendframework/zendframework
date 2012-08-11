@@ -26,7 +26,6 @@ class Prototype
      *
      * @param ReflectionReturnValue $return
      * @param array $params
-     * @return void
      */
     public function __construct(ReflectionReturnValue $return, $params = null)
     {

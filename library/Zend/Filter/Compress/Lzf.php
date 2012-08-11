@@ -24,7 +24,6 @@ class Lzf implements CompressionAlgorithmInterface
      * Class constructor
      *
      * @param  null $options
-     * @return void
      * @throws Exception\ExtensionNotLoadedException if lzf extension missing
      */
     public function __construct($options = null)

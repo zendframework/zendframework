@@ -50,7 +50,6 @@ class Callback
      * Constructor
      *
      * @param  null|array $options
-     * @return void
      */
     public function __construct($options = null)
     {

@@ -55,7 +55,6 @@ class ApcIterator implements IteratorInterface
      * @param Apc             $storage
      * @param BaseApcIterator $baseIterator
      * @param string          $prefix
-     * @return void
      */
     public function __construct(Apc $storage, BaseApcIterator $baseIterator, $prefix)
     {

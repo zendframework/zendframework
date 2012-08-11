@@ -129,7 +129,6 @@ class MemoryManager
      * If cache is not specified, then memory objects are never swapped
      *
      * @param  CacheStorage $cache
-     * @return void
      */
     public function __construct(CacheStorage $cache = null)
     {

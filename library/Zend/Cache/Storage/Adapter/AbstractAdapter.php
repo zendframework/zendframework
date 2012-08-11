@@ -77,7 +77,6 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      *
      * @param  null|array|Traversable|AdapterOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {

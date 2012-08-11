@@ -25,7 +25,6 @@ class In implements PredicateInterface
      *
      * @param  null|string $identifier
      * @param  array $valueSet
-     * @return void
      */
     public function __construct($identifier = null, array $valueSet = array())
     {

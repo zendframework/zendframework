@@ -45,7 +45,6 @@ class PhpRendererStrategy implements ListenerAggregateInterface
      * Constructor
      *
      * @param  PhpRenderer $renderer
-     * @return void
      */
     public function __construct(PhpRenderer $renderer)
     {

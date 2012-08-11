@@ -62,7 +62,6 @@ class FilesystemIterator implements IteratorInterface
      * @param Filesystem  $storage
      * @param string      $path
      * @param string      $prefix
-     * @return void
      */
     public function __construct(Filesystem $storage, $path, $prefix)
     {

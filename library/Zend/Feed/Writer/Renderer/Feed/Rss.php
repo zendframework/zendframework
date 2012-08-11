@@ -28,7 +28,6 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Constructor
      *
      * @param  Zend_Feed_Writer_Feed $container
-     * @return void
      */
     public function __construct (Writer\Feed $container)
     {

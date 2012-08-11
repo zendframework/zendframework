@@ -123,7 +123,6 @@ class Image extends AbstractWord
      * Constructor
      *
      * @param  array|\Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

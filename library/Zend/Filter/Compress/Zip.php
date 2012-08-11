@@ -40,7 +40,6 @@ class Zip extends AbstractCompressionAlgorithm
      * Class constructor
      *
      * @param  null|array|\Traversable $options (Optional) Options to set
-     * @return void
      */
     public function __construct($options = null)
     {

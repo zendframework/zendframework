@@ -32,7 +32,6 @@ class IsNull implements PredicateInterface
      * Constructor
      *
      * @param  string $identifier
-     * @return void
      */
     public function __construct($identifier = null)
     {

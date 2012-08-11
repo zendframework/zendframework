@@ -54,7 +54,6 @@ class Operator implements PredicateInterface
      * @param  mixed $right
      * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
      * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
-     * @return void
      */
     public function __construct($left = null, $operator = self::OPERATOR_EQUAL_TO, $right = null, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
     {

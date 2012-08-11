@@ -26,7 +26,6 @@ class Deleted
      * Constructor
      *
      * @param  \Zend\Feed\Writer\Deleted $container
-     * @return void
      */
     public function __construct (\Zend\Feed\Writer\Deleted $container)
     {

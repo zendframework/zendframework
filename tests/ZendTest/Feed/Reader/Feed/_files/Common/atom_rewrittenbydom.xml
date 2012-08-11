@@ -521,7 +521,6 @@ class Wp_Amf_Gateway
      *
      * @param array $dbConfig
      * @param string $prefix
-     * @return void
      */
     public function __construct(array $dbConfig, $prefix)
     {

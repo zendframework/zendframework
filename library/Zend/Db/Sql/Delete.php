@@ -65,7 +65,6 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * @param  null|string $table
      * @param  null|string $schema
-     * @return void
      */
     public function __construct($table = null)
     {

@@ -62,7 +62,6 @@ class KeyListIterator implements IteratorInterface, Countable
      *
      * @param StorageInterface $storage
      * @param array            $keys
-     * @return void
      */
     public function __construct(StorageInterface $storage, array $keys)
     {

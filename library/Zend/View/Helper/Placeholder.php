@@ -39,7 +39,6 @@ class Placeholder extends AbstractHelper
      *
      * Retrieve container registry from Placeholder\Registry, or create new one and register it.
      *
-     * @return void
      */
     public function __construct()
     {

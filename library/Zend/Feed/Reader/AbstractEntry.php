@@ -68,7 +68,6 @@ abstract class AbstractEntry
      * @param  DOMElement $entry
      * @param  int $entryKey
      * @param  null|string $type
-     * @return void
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {

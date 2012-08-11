@@ -66,7 +66,6 @@ class TemplatePathStack implements ResolverInterface
      * Constructor
      *
      * @param  null|array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

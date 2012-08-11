@@ -57,7 +57,6 @@ class Item implements TaggableInterface
      * @throws \Zend\Tag\Exception\InvalidArgumentException When invalid options are provided
      * @throws \Zend\Tag\Exception\InvalidArgumentException When title was not set
      * @throws \Zend\Tag\Exception\InvalidArgumentException When weight was not set
-     * @return void
      */
     public function __construct($options)
     {

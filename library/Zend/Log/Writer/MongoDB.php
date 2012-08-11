@@ -47,10 +47,9 @@ class MongoDB extends AbstractWriter
      * Constructor
      *
      * @param Mongo|array|Traversable $mongo
-     * @param string $database
+     * @param string|MongoDB $database
      * @param string $collection
-     * @param array  $saveOptions
-     * @return Zend\Log\Writer\MongoDB
+     * @param array $saveOptions
      */
     public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {

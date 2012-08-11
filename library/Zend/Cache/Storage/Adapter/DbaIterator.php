@@ -61,7 +61,6 @@ class DbaIterator implements IteratorInterface
      * @param Dba      $storage
      * @param resource $handle
      * @param string   $prefix
-     * @return void
      */
     public function __construct(Dba $storage, $handle, $prefix)
     {

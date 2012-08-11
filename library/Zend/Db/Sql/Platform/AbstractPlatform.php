@@ -15,6 +15,7 @@ use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\PreparableSqlInterface;
 use Zend\Db\Sql\SqlInterface;
+use Zend\Db\Sql\Exception;
 
 class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInterface, SqlInterface
 {
@@ -55,7 +56,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
 
     /**
      * @param Adapter $adapter
-     * @return StatementInterface
+     * @param StatementInterface $statement
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {

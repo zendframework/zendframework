@@ -35,7 +35,6 @@ class PostEvent extends Event
      * @param  StorageInterface $storage
      * @param  ArrayObject      $params
      * @param  mixed            $result
-     * @return void
      */
     public function __construct($name, StorageInterface $storage, ArrayObject $params, & $result)
     {

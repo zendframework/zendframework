@@ -59,7 +59,7 @@ class ProgressBar
     /**
      * Adapter for the output
      *
-     * @var \Zend\ProgressBar\Adapter\Adapter
+     * @var \Zend\ProgressBar\Adapter\AbstractAdapter
      */
     protected $adapter;
 
@@ -74,9 +74,9 @@ class ProgressBar
      * Create a new progressbar backend.
      *
      * @param  Adapter\AbstractAdapter $adapter
-     * @param  float                    $min
-     * @param  float                    $max
-     * @param  string                   $persistenceNamespace
+     * @param  float|int               $min
+     * @param  float|int               $max
+     * @param  string|null             $persistenceNamespace
      * @throws Exception\OutOfRangeException When $min is greater than $max
      */
     public function __construct(Adapter\AbstractAdapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)

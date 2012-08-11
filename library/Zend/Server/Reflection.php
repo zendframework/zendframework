@@ -31,12 +31,12 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param null|array $argv Optional arguments to be used during the method call
+     * @param boolean|array $argv Optional arguments to be used during the method call
      * @param string $namespace Optional namespace with which to prefix the
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
-     * @return \Zend\Server\Reflection\ClassReflection
-     * @throws \Zend\Server\Reflection\Exception
+     * @return \Zend\Server\Reflection\ReflectionClass
+     * @throws \Zend\Server\Reflection\Exception\ExceptionInterface
      */
     public static function reflectClass($class, $argv = false, $namespace = '')
     {
@@ -65,12 +65,12 @@ class Reflection
      * may be provided as an array to $argv.
      *
      * @param string $function Function name
-     * @param null|array $argv Optional arguments to be used during the method call
+     * @param boolean|array $argv Optional arguments to be used during the method call
      * @param string $namespace Optional namespace with which to prefix the
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
-     * @return \Zend\Server\Reflection\FunctionReflection
-     * @throws \Zend\Server\Reflection\Exception
+     * @return \Zend\Server\Reflection\ReflectionFunction
+     * @throws \Zend\Server\Reflection\Exception\ExceptionInterface
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {

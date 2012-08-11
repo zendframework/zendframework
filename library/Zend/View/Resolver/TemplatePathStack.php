@@ -66,7 +66,6 @@ class TemplatePathStack implements ResolverInterface
      * Constructor
      *
      * @param  null|array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -233,7 +232,7 @@ class TemplatePathStack implements ResolverInterface
      * Set LFI protection flag
      *
      * @param  bool $flag
-     * @return \Zend\View\TemplatePathStack
+     * @return TemplatePathStack
      */
     public function setLfiProtection($flag)
     {
@@ -255,7 +254,7 @@ class TemplatePathStack implements ResolverInterface
      * Set flag indicating if stream wrapper should be used if short_open_tag is off
      *
      * @param  bool $flag
-     * @return \Zend\View\View
+     * @return TemplatePathStack
      */
     public function setUseStreamWrapper($flag)
     {

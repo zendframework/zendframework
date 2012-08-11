@@ -43,7 +43,6 @@ class Rss extends AbstractEntry implements EntryInterface
      * @param  DOMElement $entry
      * @param  string $entryKey
      * @param  string $type
-     * @return void
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {

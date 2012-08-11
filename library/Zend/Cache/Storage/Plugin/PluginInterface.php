@@ -22,8 +22,8 @@ interface PluginInterface extends ListenerAggregateInterface
     /**
      * Set options
      *
-     * @param  Plugin\PluginOptions $options
-     * @return Plugin
+     * @param  PluginOptions $options
+     * @return PluginInterface
      */
     public function setOptions(PluginOptions $options);
 

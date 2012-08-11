@@ -122,7 +122,6 @@ class ReCaptcha extends AbstractAdapter
      * Constructor
      *
      * @param  null|array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

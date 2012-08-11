@@ -31,7 +31,6 @@ class PregReplace extends AbstractFilter
      *     'replacement' => replace with this
      *
      * @param  array|Traversable|string|null $options
-     * @return void
      */
     public function __construct($options = null)
     {

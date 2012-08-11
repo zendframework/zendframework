@@ -47,7 +47,7 @@ abstract class AbstractValue
     protected $xml;
 
     /**
-     * @var Zend\XmlRpc\Generator\GeneratorAbstract
+     * @var \Zend\XmlRpc\Generator\GeneratorInterface
      */
     protected static $generator;
 
@@ -323,10 +323,10 @@ abstract class AbstractValue
     /**
      * Transform an XML string into a XML-RPC native value
      *
-     * @param string|SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
+     * @param string|\SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
      * It can be also a valid XML string for conversion
      *
-     * @return Zend\XmlRpc\Value\AbstractValue
+     * @return \Zend\XmlRpc\AbstractValue
      * @static
      */
     protected static function _xmlStringToNativeXmlRpc($xml)
@@ -431,7 +431,7 @@ abstract class AbstractValue
     /**
      * Extract XML/RPC type and value from SimpleXMLElement object
      *
-     * @param SimpleXMLElement $xml
+     * @param \SimpleXMLElement $xml
      * @param string &$type Type bind variable
      * @param string &$value Value bind variable
      * @return void

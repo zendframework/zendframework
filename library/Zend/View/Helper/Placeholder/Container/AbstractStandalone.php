@@ -49,7 +49,6 @@ abstract class AbstractStandalone
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

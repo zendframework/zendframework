@@ -212,7 +212,6 @@ class Getopt
      * @param  array $rules
      * @param  array $argv
      * @param  array $getoptConfig
-     * @return void
      */
     public function __construct($rules, $argv = null, $getoptConfig = array())
     {

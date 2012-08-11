@@ -27,7 +27,6 @@ abstract class AbstractArrayAnnotation
      * Receive and process the contents of an annotation
      *
      * @param  array $data
-     * @return void
      * @throws Exception\DomainException if a 'value' key is missing, or its value is not an array
      */
     public function __construct(array $data)

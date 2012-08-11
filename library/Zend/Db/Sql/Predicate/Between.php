@@ -28,7 +28,6 @@ class Between implements PredicateInterface
      * @param  string $identifier
      * @param  string $minValue
      * @param  string $maxValue
-     * @return void
      */
     public function __construct($identifier = null, $minValue = null, $maxValue = null)
     {

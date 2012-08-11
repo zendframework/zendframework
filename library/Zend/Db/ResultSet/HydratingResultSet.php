@@ -36,7 +36,6 @@ class HydratingResultSet extends AbstractResultSet
      *
      * @param  null|HydratorInterface $hydrator
      * @param  null|object $objectPrototype
-     * @return void
      */
     public function __construct(HydratorInterface $hydrator = null, $objectPrototype = null)
     {

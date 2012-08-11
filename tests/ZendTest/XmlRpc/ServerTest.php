@@ -699,7 +699,6 @@ class TestClass
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct($value1 = null, $value2 = null)
     {

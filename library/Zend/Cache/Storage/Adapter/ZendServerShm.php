@@ -32,7 +32,6 @@ class ZendServerShm extends AbstractZendServer implements
      *
      * @param  null|array|\Traversable|AdapterOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = array())
     {

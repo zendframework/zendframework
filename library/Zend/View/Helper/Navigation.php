@@ -149,7 +149,7 @@ class Navigation extends AbstractNavigationHelper
      * Lazy-loads an instance of Navigation\HelperLoader if none currently
      * registered.
      *
-     * @return ShortNameLocator
+     * @return Navigation\PluginManager
      */
     public function getPluginManager()
     {
@@ -170,7 +170,7 @@ class Navigation extends AbstractNavigationHelper
      *                                             exceptions should be
      *                                             thrown if something goes
      *                                             wrong. Default is true.
-     * @return \Zend\View\Helper\Navigation\Helper\HelperInterface  helper instance
+     * @return \Zend\View\Helper\Navigation\HelperInterface  helper instance
      * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
      *         helper cannot be found
      * @throws Exception\InvalidArgumentException if $strict is true and

@@ -33,7 +33,6 @@ class PredicateSet implements PredicateInterface, Countable
      *
      * @param  null|array $predicates
      * @param  string $defaultCombination
-     * @return void
      */
     public function __construct(array $predicates = null, $defaultCombination = self::COMBINED_BY_AND)
     {

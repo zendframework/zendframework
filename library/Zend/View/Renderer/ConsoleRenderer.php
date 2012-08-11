@@ -25,9 +25,7 @@ namespace Zend\View\Renderer;
 
 use ArrayAccess;
 use Zend\Filter\FilterChain;
-use Zend\Loader\Pluggable;
 use Zend\View\Exception;
-use Zend\View\HelperBroker;
 use Zend\View\Model;
 use Zend\View\Renderer;
 use Zend\View\Resolver;
@@ -98,7 +96,7 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
      * Set filter chain
      *
      * @param  FilterChain $filters
-     * @return Zend\View\PhpRenderer
+     * @return ConsoleRenderer
      */
     public function setFilterChain(FilterChain $filters)
     {

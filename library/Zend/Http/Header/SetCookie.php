@@ -75,7 +75,7 @@ class SetCookie implements MultipleHeaderInterface
     protected $secure = null;
 
     /**
-     * @var true
+     * @var boolean|null
      */
     protected $httponly = null;
 
@@ -432,7 +432,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param \Zend\Http\Header\true $httponly
+     * @param boolean $httponly
      */
     public function setHttponly($httponly)
     {
@@ -440,7 +440,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @return \Zend\Http\Header\true
+     * @return boolean
      */
     public function isHttponly()
     {

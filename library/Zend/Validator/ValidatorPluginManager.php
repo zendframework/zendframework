@@ -121,7 +121,6 @@ class ValidatorPluginManager extends AbstractPluginManager
      * attached translator, if any, to the currently requested helper.
      *
      * @param  null|ConfigInterface $configuration
-     * @return void
      */
     public function __construct(ConfigInterface $configuration = null)
     {

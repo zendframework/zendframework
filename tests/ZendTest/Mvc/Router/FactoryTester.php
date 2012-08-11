@@ -29,7 +29,6 @@ class FactoryTester
      * Create a new factory tester.
      *
      * @param  TestCase $testCase
-     * @return void
      */
     public function __construct(TestCase $testCase)
     {

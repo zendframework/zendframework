@@ -125,7 +125,7 @@ abstract class AbstractFeed
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Reader\Reader_Extension_EntryAbstract
+     * @return AbstractEntry
      */
     public function setXpath(DOMXPath $xpath = null)
     {

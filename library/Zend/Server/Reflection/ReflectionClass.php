@@ -56,7 +56,6 @@ class ReflectionClass
      * @param ReflectionClass $reflection
      * @param string $namespace
      * @param mixed $argv
-     * @return void
      */
     public function __construct(\ReflectionClass $reflection, $namespace = null, $argv = false)
     {

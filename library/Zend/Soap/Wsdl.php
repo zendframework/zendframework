@@ -122,7 +122,7 @@ class Wsdl
      * Set a new uri for this WSDL
      *
      * @param  string|Uri $uri
-     * @return \Zend\Server\Wsdl
+     * @return \Zend\Soap\Wsdl
      */
     public function setUri($uri)
     {

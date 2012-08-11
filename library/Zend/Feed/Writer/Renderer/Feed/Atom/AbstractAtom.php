@@ -26,7 +26,6 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Constructor
      *
      * @param  \Zend\Feed\Writer\Feed $container
-     * @return void
      */
     public function __construct ($container)
     {

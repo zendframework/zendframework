@@ -48,7 +48,6 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
      *
      * Instantiate the internal priority queue
      *
-     * @return void
      */
     public function __construct()
     {

@@ -129,7 +129,6 @@ class MemoryManager
      * If cache is not specified, then memory objects are never swapped
      *
      * @param  CacheStorage $cache
-     * @return void
      */
     public function __construct(CacheStorage $cache = null)
     {
@@ -224,8 +223,8 @@ class MemoryManager
      * Create new Zend_Memory value container
      *
      * @param string $value
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
     public function create($value = '')
     {
@@ -237,8 +236,8 @@ class MemoryManager
      * locked in memory
      *
      * @param string $value
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
     public function createLocked($value = '')
     {
@@ -250,8 +249,8 @@ class MemoryManager
      *
      * @param string $value
      * @param boolean $locked
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return \Zend\Memory\Container\ContainerInterface
+     * @throws \Zend\Memory\Exception\ExceptionInterface
      */
     private function _create($value, $locked)
     {
@@ -280,8 +279,9 @@ class MemoryManager
      * Used by Memory container destroy() method
      *
      * @internal
+     * @param Container\Movable $container
      * @param integer $id
-     * @return \Zend\Memory\Container\AbstractContainer
+     * @return null
      */
     public function unlink(Container\Movable $container, $id)
     {

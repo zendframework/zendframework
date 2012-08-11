@@ -50,7 +50,6 @@ class Callback
      * Constructor
      *
      * @param  null|array $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -150,8 +149,8 @@ class Callback
      * Set callback type
      *
      * @param  string $type
-     * @return \Zend\Server\Method\Callback
-     * @throws \Zend\Server\Exception
+     * @return Callback
+     * @throws Server\Exception\InvalidArgumentException
      */
     public function setType($type)
     {

@@ -175,7 +175,7 @@ abstract class AbstractEntry
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Reader\Reader_Extension_EntryAbstract
+     * @return AbstractEntry
      */
     public function setXpath(DOMXPath $xpath)
     {
@@ -221,7 +221,7 @@ abstract class AbstractEntry
      * Set the XPath prefix
      *
      * @param  string $prefix
-     * @return Reader\Reader_Extension_EntryAbstract
+     * @return AbstractEntry
      */
     public function setXpathPrefix($prefix)
     {

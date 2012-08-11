@@ -40,7 +40,7 @@ class Response
 
     /**
      * Fault, if response is a fault response
-     * @var null|Zend\XmlRpc\Fault
+     * @var null|\Zend\XmlRpc\Fault
      */
     protected $fault = null;
 
@@ -52,7 +52,6 @@ class Response
      *
      * @param mixed $return
      * @param string $type
-     * @return void
      */
     public function __construct($return = null, $type = null)
     {
@@ -63,7 +62,7 @@ class Response
      * Set encoding to use in response
      *
      * @param string $encoding
-     * @return Zend\XmlRpc\Response
+     * @return \Zend\XmlRpc\Response
      */
     public function setEncoding($encoding)
     {
@@ -110,7 +109,7 @@ class Response
     /**
      * Retrieve the XMLRPC value for the return value
      *
-     * @return Zend\XmlRpc\Value
+     * @return \Zend\XmlRpc\AbstractValue
      */
     protected function _getXmlRpcReturn()
     {
@@ -130,7 +129,7 @@ class Response
     /**
      * Returns the fault, if any.
      *
-     * @return null|Zend\XmlRpc\Fault
+     * @return null|\Zend\XmlRpc\Fault
      */
     public function getFault()
     {

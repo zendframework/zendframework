@@ -36,7 +36,6 @@ class Variables extends ArrayObject
      *
      * @param  array $variables
      * @param  array $options
-     * @return void
      */
     public function __construct(array $variables = array(), array $options = array())
     {

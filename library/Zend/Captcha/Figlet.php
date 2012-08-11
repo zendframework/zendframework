@@ -34,7 +34,6 @@ class Figlet extends AbstractWord
      * Constructor
      *
      * @param  null|string|array|\Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

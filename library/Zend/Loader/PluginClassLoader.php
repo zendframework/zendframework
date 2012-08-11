@@ -38,7 +38,6 @@ class PluginClassLoader implements PluginClassLocator
      * Constructor
      *
      * @param  null|array|Traversable $map If provided, seeds the loader with a map
-     * @return void
      */
     public function __construct($map = null)
     {

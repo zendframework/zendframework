@@ -86,7 +86,6 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Constructor
      * @param array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

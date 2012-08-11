@@ -52,7 +52,7 @@ class Request
 
     /**
      * Fault object, if any
-     * @var Zend\XmlRpc\Fault
+     * @var \Zend\XmlRpc\Fault
      */
     protected $fault = null;
 
@@ -90,7 +90,7 @@ class Request
      * Set encoding to use in request
      *
      * @param string $encoding
-     * @return Zend\XmlRpc\Request
+     * @return \Zend\XmlRpc\Request
      */
     public function setEncoding($encoding)
     {
@@ -350,7 +350,7 @@ class Request
     /**
      * Retrieve the fault response, if any
      *
-     * @return null|Zend\XmlRpc\Fault
+     * @return null|\Zend\XmlRpc\Fault
      */
     public function getFault()
     {

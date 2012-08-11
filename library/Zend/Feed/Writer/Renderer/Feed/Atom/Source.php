@@ -24,7 +24,6 @@ class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer\Renderer
      * Constructor
      *
      * @param  \Zend\Feed\Writer\Source $container
-     * @return void
      */
     public function __construct (\Zend\Feed\Writer\Source $container)
     {

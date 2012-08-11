@@ -280,7 +280,6 @@ class Mime
      *
      * @param null|string $boundary
      * @access public
-     * @return void
      */
     public function __construct($boundary = null)
     {

@@ -203,6 +203,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Activate/Deactivate the automatic rendering of exception
      * @param boolean $value
+     * @return AbstractRenderer
      */
     public function setAutomaticRenderError($value)
     {

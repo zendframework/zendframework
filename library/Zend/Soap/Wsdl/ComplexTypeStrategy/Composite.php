@@ -129,6 +129,7 @@ class Composite implements ComplexTypeStrategy
      * Method accepts the current WSDL context file.
      *
      * @param \Zend\Soap\Wsdl $context
+     * @return Composite
      */
     public function setContext(Wsdl $context)
     {

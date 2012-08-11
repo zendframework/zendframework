@@ -23,6 +23,7 @@ class ObjectCache extends CallbackCache
      * Set options
      *
      * @param  PatternOptions $options
+     * @return void
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions(PatternOptions $options)

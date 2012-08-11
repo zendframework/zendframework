@@ -192,7 +192,7 @@ class Metadata implements MetadataInterface
      * Get views names
      *
      * @param string $schema
-     * @param string $database
+     * @return \Zend\Db\Metadata\Object\TableObject
      */
     public function getViewNames($schema = null)
     {
@@ -204,7 +204,7 @@ class Metadata implements MetadataInterface
      *
      * @param string $viewName
      * @param string $schema
-     * @param string $database
+     * @return \Zend\Db\Metadata\Object\TableObject
      */
     public function getView($viewName, $schema = null)
     {
@@ -215,7 +215,7 @@ class Metadata implements MetadataInterface
      * Get trigger names
      *
      * @param string $schema
-     * @param string $database
+     * @return array
      */
     public function getTriggerNames($schema = null)
     {
@@ -227,7 +227,7 @@ class Metadata implements MetadataInterface
      *
      * @param string $triggerName
      * @param string $schema
-     * @param string $database
+     * @return \Zend\Db\Metadata\Object\TriggerObject
      */
     public function getTrigger($triggerName, $schema = null)
     {
@@ -239,7 +239,7 @@ class Metadata implements MetadataInterface
      *
      * @param string $table
      * @param string $schema
-     * @param string $database
+     * @return array
      */
     public function getColumnNames($table, $schema = null)
     {
@@ -252,6 +252,7 @@ class Metadata implements MetadataInterface
      * @param string $columnName
      * @param string $table
      * @param string $schema
+     * @return \Zend\Db\Metadata\Object\ColumnObject
      */
     public function getColumn($columnName, $table, $schema = null)
     {

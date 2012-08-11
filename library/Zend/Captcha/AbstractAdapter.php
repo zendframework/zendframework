@@ -63,6 +63,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
      * Set name
      *
      * @param string $name
+     * @return AbstractAdapter
      */
     public function setName($name)
     {

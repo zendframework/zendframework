@@ -223,6 +223,7 @@ class CacheControl implements HeaderInterface
      * @param array $tokens
      * @param string $string
      * @param string $lastMatch
+     * @return int
      */
     protected static function match($tokens, &$string, &$lastMatch)
     {

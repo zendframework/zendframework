@@ -998,6 +998,7 @@ class Client implements ServerClient
      * My be overridden in descendant classes
      *
      * @param array $arguments
+     * @return array
      */
     protected function _preProcessArguments($arguments)
     {
@@ -1010,7 +1011,8 @@ class Client implements ServerClient
      *
      * My be overridden in descendant classes
      *
-     * @param array $arguments
+     * @param array $result
+     * @return array
      */
     protected function _preProcessResult($result)
     {
@@ -1021,7 +1023,7 @@ class Client implements ServerClient
     /**
      * Add SOAP input header
      *
-     * @param SoapHeader $header
+     * @param \SoapHeader $header
      * @param boolean $permanent
      * @return \Zend\Soap\Client
      */

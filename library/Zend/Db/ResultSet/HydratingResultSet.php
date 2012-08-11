@@ -63,7 +63,8 @@ class HydratingResultSet extends AbstractResultSet
     /**
      * Set the hydrator to use for each row object
      *
-     * @param HydratorInterface $rowObjectHydrator
+     * @param HydratorInterface $hydrator
+     * @return HydratingResultSet
      */
     public function setHydrator(HydratorInterface $hydrator)
     {

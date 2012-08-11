@@ -539,6 +539,7 @@ abstract class AbstractObject implements ObjectInterface
      * Automatically add leading zeros if barcode length is fixed
      * @param string $text
      * @param boolean $withoutChecksum
+     * @return string
      */
     protected function addLeadingZeros($text, $withoutChecksum = false)
     {

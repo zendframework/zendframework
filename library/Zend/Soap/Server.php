@@ -452,7 +452,7 @@ class Server implements \Zend\Server\Server
     /**
      * Set the SOAP WSDL Caching Options
      *
-     * @param string|int|boolean $caching
+     * @param string|int|boolean $options
      * @return Server
      */
     public function setWSDLCache($options)
@@ -518,6 +518,8 @@ class Server implements \Zend\Server\Server
      * See {@link setObject()} to set preconfigured object instances as request handlers.
      *
      * @param string|object $class Class name or object instance which executes SOAP Requests at endpoint.
+     * @param string $namespace
+     * @param $argv
      * @return Server
      * @throws Exception\InvalidArgumentException if called more than once, or if class
      * does not exist

@@ -173,6 +173,7 @@ class Gravatar extends AbstractHtmlElement
      *
      * @link   http://pl.gravatar.com/site/implement/url More information about rating.
      * @param  string $rating Value for rating. Allowed values are: g, px, r,x
+     * @return Gravatar
      * @throws Exception\DomainException
      */
     public function setRating($rating)

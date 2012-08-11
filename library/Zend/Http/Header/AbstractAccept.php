@@ -151,7 +151,8 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Parse the keys contained in the header line
      *
-     * @param string mediaType
+     * @param string $fieldValuePart
+     * @return array
      */
     protected function getParametersFromFieldValuePart($fieldValuePart)
     {

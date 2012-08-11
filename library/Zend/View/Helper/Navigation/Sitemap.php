@@ -126,7 +126,7 @@ class Sitemap extends AbstractHelper
      * Sets whether the XML declaration should be used in output
      *
      * @param  bool $useXmlDecl whether XML declaration should be rendered
-     * @returnSitemap  fluent interface, returns self
+     * @return Sitemap  fluent interface, returns self
      */
     public function setUseXmlDeclaration($useXmlDecl)
     {
@@ -148,7 +148,7 @@ class Sitemap extends AbstractHelper
      * Sets whether sitemap should be validated using Zend\Validate\Sitemap_*
      *
      * @param  bool $useSitemapValidators whether sitemap validators should be used
-     * @returnSitemap  fluent interface, returns self
+     * @return Sitemap  fluent interface, returns self
      */
     public function setUseSitemapValidators($useSitemapValidators)
     {
@@ -170,7 +170,7 @@ class Sitemap extends AbstractHelper
      * Sets whether sitemap should be schema validated when generated
      *
      * @param  bool $schemaValidation whether sitemap should validated using XSD Schema
-     * @returnSitemap  fluent interface, returns self
+     * @return Sitemap
      */
     public function setUseSchemaValidation($schemaValidation)
     {

@@ -63,6 +63,7 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
 
     /**
      * @param string $data representation of the instance
+     * @return void
      */
     public function unserialize($data)
     {

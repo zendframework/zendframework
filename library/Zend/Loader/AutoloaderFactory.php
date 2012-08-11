@@ -205,6 +205,7 @@ abstract class AutoloaderFactory
      *
      * @param string $className
      * @param string $type
+     * @return bool
      */
     protected static function isSubclassOf($className, $type)
     {

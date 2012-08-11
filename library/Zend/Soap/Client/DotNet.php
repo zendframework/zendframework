@@ -70,6 +70,7 @@ class DotNet extends SOAPClient
      * My be overridden in descendant classes
      *
      * @param object $result
+     * @return mixed
      */
     protected function _preProcessResult($result)
     {

@@ -265,6 +265,7 @@ class Image extends AbstractWord
 
     /**
      * @param string $startImage
+     * @return Image
      */
     public function setStartImage($startImage)
     {
@@ -274,6 +275,7 @@ class Image extends AbstractWord
 
     /**
      * @param int $dotNoiseLevel
+     * @return Image
      */
     public function setDotNoiseLevel($dotNoiseLevel)
     {
@@ -283,6 +285,7 @@ class Image extends AbstractWord
 
     /**
      * @param int $lineNoiseLevel
+     * @return Image
      */
     public function setLineNoiseLevel($lineNoiseLevel)
     {
@@ -376,6 +379,7 @@ class Image extends AbstractWord
 
     /**
      * @param string $imgAlt
+     * @return Image
      */
     public function setImgAlt($imgAlt)
     {

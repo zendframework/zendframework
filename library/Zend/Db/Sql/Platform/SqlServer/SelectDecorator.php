@@ -52,8 +52,8 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
-     * @param Adapter $adapter
-     * @param StatementInterface $statement
+     * @param PlatformInterface $platform
+     * @return string
      */
     public function getSqlString(PlatformInterface $platform = null)
     {

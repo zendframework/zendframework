@@ -10,8 +10,8 @@
 
 namespace Zend\View\Renderer;
 
-use Zend\View\Model\ModelInterface as Model;
-use Zend\View\Resolver\ResolverInterface as Resolver;
+use Zend\View\Model\ModelInterface;
+use Zend\View\Resolver\ResolverInterface;
 
 /**
  * Interface class for Zend_View compatible template engine implementations
@@ -35,16 +35,16 @@ interface RendererInterface
     /**
      * Set the resolver used to map a template name to a resource the renderer may consume.
      *
-     * @param  Resolver $resolver
+     * @param  ResolverInterface $resolver
      * @return RendererInterface
      */
-    public function setResolver(Resolver $resolver);
+    public function setResolver(ResolverInterface $resolver);
 
     /**
      * Processes a view script and returns the output.
      *
-     * @param  string|Model $name The script/resource process, or a view model
-     * @param  null|array|\ArrayAccess Values to use during rendering
+     * @param  string|ModelInterface   $nameOrModel The script/resource process, or a view model
+     * @param  null|array|\ArrayAccess $values      Values to use during rendering
      * @return string The script output.
      */
     public function render($nameOrModel, $values = null);

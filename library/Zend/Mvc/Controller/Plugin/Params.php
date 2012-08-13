@@ -28,7 +28,7 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function __invoke($param = NULL, $default = null)
+    public function __invoke($param = null, $default = null)
     {
         if ($param === NULL) {
             return $this;
@@ -43,7 +43,7 @@ class Params extends AbstractPlugin
      * @param  mixed $default
      * @return array|\ArrayAccess|null
      */
-    public function fromFiles($name, $default = null)
+    public function fromFiles($name = null, $default = null)
     {
         return $this->getController()->getRequest()->getFiles($name, $default);
     }
@@ -55,7 +55,7 @@ class Params extends AbstractPlugin
      * @param  mixed $default
      * @return null|\Zend\Http\Header\HeaderInterface
      */
-    public function fromHeader($header, $default = null)
+    public function fromHeader($header = null, $default = null)
     {
         return $this->getController()->getRequest()->getHeaders($header, $default);
     }
@@ -67,7 +67,7 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function fromPost($param, $default = null)
+    public function fromPost($param = null, $default = null)
     {
         return $this->getController()->getRequest()->getPost($param, $default);
     }
@@ -79,7 +79,7 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function fromQuery($param, $default = null)
+    public function fromQuery($param = null, $default = null)
     {
         return $this->getController()->getRequest()->getQuery($param, $default);
     }

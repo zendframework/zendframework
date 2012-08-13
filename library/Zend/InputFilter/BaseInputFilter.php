@@ -44,10 +44,11 @@ class BaseInputFilter implements InputFilterInterface
      * Add an input to the input filter
      *
      * @param  InputInterface|InputFilterInterface $input
+     * @param  null|string                         $name Name used to retrieve this input
      * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
-    public function add($input)
+    public function add($input, $name = null)
     {
         if (!$input instanceof InputInterface && !$input instanceof InputFilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -59,7 +60,9 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        $name = $input->getName();
+        if (is_null($name) || $name === '') {
+            $name = $input->getName();
+        }
 
         if (isset($this->inputs[$name]) && $this->inputs[$name] instanceof InputInterface) {
             // The element already exists, so merge the config. Please note that the order is important (already existing

@@ -111,7 +111,7 @@ abstract class AbstractZendServer extends AbstractAdapter
     {
         $namespace = $this->getOptions()->getNamespace();
         if ($namespace === '') {
-            return array_keys($this->zdcFetchMulti());
+            return array_keys($this->zdcFetchMulti($normalizedKeys));
         }
 
         $prefix       = $namespace . self::NAMESPACE_SEPARATOR;
@@ -144,7 +144,7 @@ abstract class AbstractZendServer extends AbstractAdapter
     {
         $namespace = $this->getOptions()->getNamespace();
         if ($namespace === '') {
-            $result = $this->zdcFetchMulti();
+            $result = $this->zdcFetchMulti($normalizedKeys);
             return array_fill_keys(array_keys($result), array());
         }
 

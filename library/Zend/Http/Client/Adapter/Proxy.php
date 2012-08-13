@@ -34,16 +34,18 @@ class Proxy extends Socket
      * @var array
      */
     protected $config = array(
-        'ssltransport'  => 'ssl',
-        'sslcert'       => null,
-        'sslpassphrase' => null,
-        'sslusecontext' => false,
-        'proxy_host'    => '',
-        'proxy_port'    => 8080,
-        'proxy_user'    => '',
-        'proxy_pass'    => '',
-        'proxy_auth'    => Client::AUTH_BASIC,
-        'persistent'    => false
+        'ssltransport'       => 'ssl',
+        'sslcert'            => null,
+        'sslpassphrase'      => null,
+        'sslverifypeer'      => true,
+        'sslallowselfsigned' => false,
+        'sslusecontext'      => false,
+        'proxy_host'         => '',
+        'proxy_port'         => 8080,
+        'proxy_user'         => '',
+        'proxy_pass'         => '',
+        'proxy_auth'         => Client::AUTH_BASIC,
+        'persistent'         => false
     );
 
     /**

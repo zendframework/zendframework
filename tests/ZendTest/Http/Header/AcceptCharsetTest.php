@@ -63,7 +63,7 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
         );
 
         $test = array();
-        foreach($header->getPrioritized() as $type) {
+        foreach ($header->getPrioritized() as $type) {
             $this->assertEquals(array_shift($expected), $type->getCharset());
         }
     }

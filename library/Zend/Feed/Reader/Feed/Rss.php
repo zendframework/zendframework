@@ -685,7 +685,7 @@ class Rss extends AbstractFeed
             $entries = $this->xpath->evaluate('//rss:item');
         }
 
-        foreach($entries as $index=>$entry) {
+        foreach ($entries as $index=>$entry) {
             $this->entries[$index] = $entry;
         }
     }

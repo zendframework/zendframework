@@ -116,11 +116,11 @@ class AutoDiscover
             $this->setComplexTypeStrategy($strategy);
         }
 
-        if($endpointUri !== null) {
+        if ($endpointUri !== null) {
             $this->setUri($endpointUri);
         }
 
-        if($wsdlClass !== null) {
+        if ($wsdlClass !== null) {
             $this->setWsdlClass($wsdlClass);
         }
     }
@@ -226,7 +226,7 @@ class AutoDiscover
      */
     public function getUri()
     {
-        if($this->uri === null) {
+        if ($this->uri === null) {
             throw new Exception\RuntimeException("Missing uri. You have to explicitly configure the Endpoint Uri by calling AutoDiscover#setUri().");
         }
         if (is_string($this->uri)) {
@@ -277,7 +277,7 @@ class AutoDiscover
      */
     public function setOperationBodyStyle(array $operationStyle=array())
     {
-        if(!isset($operationStyle['use'])) {
+        if (!isset($operationStyle['use'])) {
             throw new Exception\InvalidArgumentException("Key 'use' is required in Operation soap:body style.");
         }
         $this->operationBodyStyle = $operationStyle;
@@ -294,10 +294,10 @@ class AutoDiscover
      */
     public function setBindingStyle(array $bindingStyle=array())
     {
-        if(isset($bindingStyle['style'])) {
+        if (isset($bindingStyle['style'])) {
             $this->bindingStyle['style'] = $bindingStyle['style'];
         }
-        if(isset($bindingStyle['transport'])) {
+        if (isset($bindingStyle['transport'])) {
             $this->bindingStyle['transport'] = $bindingStyle['transport'];
         }
         return $this;
@@ -453,7 +453,7 @@ class AutoDiscover
 
         $isOneWayMessage = $this->discoveryStrategy->isFunctionOneWay($function, $prototype);
 
-        if($isOneWayMessage == false) {
+        if ($isOneWayMessage == false) {
             // Add the output message (return value)
             $args = array();
             if ($this->bindingStyle['style'] == 'document') {
@@ -479,7 +479,7 @@ class AutoDiscover
         }
 
         // Add the portType operation
-        if($isOneWayMessage == false) {
+        if ($isOneWayMessage == false) {
             $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', 'tns:' . $functionName . 'Out');
         } else {
             $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', false);
@@ -496,7 +496,7 @@ class AutoDiscover
         }
 
         // Add the binding operation
-        if($isOneWayMessage == false) {
+        if ($isOneWayMessage == false) {
             $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle, $operationBodyStyle);
         } else {
             $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle);

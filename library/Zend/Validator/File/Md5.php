@@ -102,7 +102,7 @@ class Md5 extends Hash
             return $this->throwError($file, self::NOT_DETECTED);
         }
 
-        foreach($hashes as $hash) {
+        foreach ($hashes as $hash) {
             if ($filehash === $hash) {
                 return true;
             }

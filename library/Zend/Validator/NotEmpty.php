@@ -131,7 +131,7 @@ class NotEmpty extends AbstractValidator
     {
         if (is_array($type)) {
             $detected = 0;
-            foreach($type as $value) {
+            foreach ($type as $value) {
                 if (is_int($value)) {
                     $detected += $value;
                 } elseif (in_array($value, $this->constants)) {

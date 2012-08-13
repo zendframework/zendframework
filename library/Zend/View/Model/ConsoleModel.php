@@ -64,7 +64,7 @@ class ConsoleModel extends ViewModel
      */
     public function getErrorLevel()
     {
-        if(array_key_exists('errorLevel', $this->options)){
+        if (array_key_exists('errorLevel', $this->options)) {
             return $this->options['errorLevel'];
         }
     }

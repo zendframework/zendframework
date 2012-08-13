@@ -101,36 +101,36 @@ class Simple implements RouteInterface
         array $aliases = array(),
         $filters = null,
         $validators = null
-    ){
+    ) {
         $this->defaults = $defaults;
         $this->constraints = $constraints;
         $this->aliases = $aliases;
 
-        if($filters !== null){
-            if($filters instanceof FilterChain){
+        if ($filters !== null) {
+            if ($filters instanceof FilterChain) {
                 $this->filters = $filters;
-            }elseif($filters instanceof Traversable){
+            } elseif ($filters instanceof Traversable) {
                 $this->filters = new FilterChain(array(
                     'filters' => ArrayUtils::iteratorToArray($filters, false)
                 ));
-            }elseif(is_array($filters)){
+            } elseif (is_array($filters)) {
                 $this->filters = new FilterChain(array(
                     'filters' => $filters
                 ));
-            }else{
+            } else {
                 throw new InvalidArgumentException('Cannot use '.gettype($filters).' as filters for '.__CLASS__);
             }
         }
 
-        if($validators !== null){
-            if($validators instanceof ValidatorChain){
+        if ($validators !== null) {
+            if ($validators instanceof ValidatorChain) {
                 $this->validators = $validators;
-            }elseif($validators instanceof Traversable || is_array($validators)){
+            } elseif ($validators instanceof Traversable || is_array($validators)) {
                 $this->validators = new ValidatorChain();
-                foreach($validators as $v){
+                foreach ($validators as $v) {
                     $this->validators->addValidator($v);
                 }
-            }else{
+            } else {
                 throw new InvalidArgumentException('Cannot use '.gettype($validators).' as validators for '.__CLASS__);
             }
         }
@@ -158,11 +158,11 @@ class Simple implements RouteInterface
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
-        foreach(array(
+        foreach (array(
             'constraints',
             'defaults',
             'aliases',
-        ) as $opt){
+        ) as $opt) {
             if (!isset($options[$opt])) {
                 $options[$opt] = array();
             }
@@ -375,7 +375,7 @@ class Simple implements RouteInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options,function(&$val,$key){$val = ltrim($val,'-');});
+                array_walk($options,function(&$val,$key) {$val = ltrim($val,'-');});
 
                 // prepare item
                 $item = array(
@@ -416,7 +416,7 @@ class Simple implements RouteInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options,function(&$val,$key){$val = ltrim($val,'-');});
+                array_walk($options,function(&$val,$key) {$val = ltrim($val,'-');});
 
                 // prepare item
                 $item = array(
@@ -541,8 +541,8 @@ class Simple implements RouteInterface
          * Extract positional and named parts
          */
         $positional = $named = array();
-        foreach($this->parts as &$part){
-            if($part['positional'])
+        foreach ($this->parts as &$part) {
+            if ($part['positional'])
                 $positional[] = &$part;
             else
                 $named[] = &$part;
@@ -551,34 +551,34 @@ class Simple implements RouteInterface
         /**
          * Scan for named parts inside Console params
          */
-        foreach($named as &$part){
+        foreach ($named as &$part) {
             /**
              * Prepare match regex
              */
-            if(isset($part['alternatives'])){
+            if (isset($part['alternatives'])) {
                 // an alternative of flags
                 $regex = '/^\-+(?<name>';
                 $regex .= join('|',$part['alternatives']);
 
-                if($part['hasValue']){
+                if ($part['hasValue']) {
                     $regex .= ')(?:\=(?<value>.*?)$)?$/';
-                }else{
+                } else {
                     $regex .= ')$/';
                 }
-            }else{
+            } else {
                 // a single named flag
-                if($part['short'] === true){
+                if ($part['short'] === true) {
                     // short variant
-                    if($part['hasValue']){
+                    if ($part['hasValue']) {
                         $regex = '/^\-'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
-                    }else{
+                    } else {
                         $regex = '/^\-'.$part['name'].'$/';
                     }
-                }elseif($part['short'] === false){
+                } elseif ($part['short'] === false) {
                     // long variant
-                    if($part['hasValue']){
+                    if ($part['hasValue']) {
                         $regex = '/^\-{2,}'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
-                    }else{
+                    } else {
                         $regex = '/^\-{2,}'.$part['name'].'$/';
                     }
                 }
@@ -588,19 +588,19 @@ class Simple implements RouteInterface
              * Look for param
              */
             $value = $param = null;
-            for($x=0;$x<count($params);$x++){
-                if(preg_match($regex,$params[$x],$m)){
+            for ($x=0;$x<count($params);$x++) {
+                if (preg_match($regex,$params[$x],$m)) {
                     // found param
                     $param = $params[$x];
 
                     // prevent further scanning of this param
                     array_splice($params,$x,1);
 
-                    if(isset($m['value'])){
+                    if (isset($m['value'])) {
                         $value = $m['value'];
                     }
 
-                    if(isset($m['name'])){
+                    if (isset($m['name'])) {
                         $matchedName = $m['name'];
                     }
 
@@ -609,18 +609,18 @@ class Simple implements RouteInterface
             }
 
 
-            if(!$param){
+            if (!$param) {
                 /**
                  * Drop out if that was a mandatory param
                  */
-                if($part['required']){
+                if ($part['required']) {
                     return;
                 }
 
                 /**
                  * Continue to next positional param
                  */
-                else{
+                else {
                     continue;
                 }
             }
@@ -629,21 +629,21 @@ class Simple implements RouteInterface
             /**
              * Value for flags is always boolean
              */
-            if($param && !$part['hasValue']){
+            if ($param && !$part['hasValue']) {
                 $value = true;
             }
 
             /**
              * Try to retrieve value if it is expected
              */
-            if(!$value && $part['hasValue']){
-                if($x < count($params)+1){
+            if (!$value && $part['hasValue']) {
+                if ($x < count($params)+1) {
                     // retrieve value from adjacent param
                     $value = $params[$x];
 
                     // prevent further scanning of this param
                     array_splice($params,$x,1);
-                }else{
+                } else {
                     // there are no more params available
                     return;
                 }
@@ -652,10 +652,10 @@ class Simple implements RouteInterface
             /**
              * Validate the value against constraints
              */
-            if($part['hasValue'] && isset($this->constraints[$part['name']])){
-                if(
+            if ($part['hasValue'] && isset($this->constraints[$part['name']])) {
+                if (
                     !preg_match($this->constraints[$part['name']],$value)
-                ){
+                ) {
                     // constraint failed
                     return;
                 }
@@ -664,27 +664,27 @@ class Simple implements RouteInterface
             /**
              * Store the value
              */
-            if($part['hasValue']){
+            if ($part['hasValue']) {
                 $matches[$part['name']] = $value;
-            }else{
+            } else {
                 $matches[$part['name']] = true;
             }
 
             /**
              * If there are alternatives, fill them
              */
-            if(isset($part['alternatives'])){
-                if($part['hasValue']){
-                    foreach($part['alternatives'] as $alt){
-                        if($alt == $matchedName){
+            if (isset($part['alternatives'])) {
+                if ($part['hasValue']) {
+                    foreach ($part['alternatives'] as $alt) {
+                        if ($alt == $matchedName) {
                             $matches[$alt] = $value;
                         } else {
                             $matches[$alt] = null;
                         }
                     }
-                }else{
-                    foreach($part['alternatives'] as $alt){
-                        if($alt == $matchedName){
+                } else {
+                    foreach ($part['alternatives'] as $alt) {
+                        if ($alt == $matchedName) {
                             $matches[$alt] = true;
                         } else {
                             $matches[$alt] = false;
@@ -697,8 +697,8 @@ class Simple implements RouteInterface
         /**
          * Scan for left-out flags that should result in a mismatch
          */
-        foreach($params as $param){
-            if(preg_match('#^\-+#',$param)){
+        foreach ($params as $param) {
+            if (preg_match('#^\-+#',$param)) {
                 return; // there is an unrecognized flag
             }
         }
@@ -707,15 +707,15 @@ class Simple implements RouteInterface
          * Go through all positional params
          */
         $argPos = 0;
-        foreach($positional as &$part){
+        foreach ($positional as &$part) {
             /**
              * Check if param exists
              */
-            if(!isset($params[$argPos])){
-                if($part['required']){
+            if (!isset($params[$argPos])) {
+                if ($part['required']) {
                     // cannot find required positional param
                     return;
-                }else{
+                } else {
                     // stop matching
                     break;
                 }
@@ -726,11 +726,11 @@ class Simple implements RouteInterface
             /**
              * Check if literal param matches
              */
-            if($part['literal']){
-                if(
+            if ($part['literal']) {
+                if (
                     (isset($part['alternatives']) && !in_array($value,$part['alternatives'])) ||
                     (!isset($part['alternatives']) && $value != $part['name'])
-                ){
+                ) {
                     return;
                 }
             }
@@ -738,10 +738,10 @@ class Simple implements RouteInterface
             /**
              * Validate the value against constraints
              */
-            if($part['hasValue'] && isset($this->constraints[$part['name']])){
-                if(
+            if ($part['hasValue'] && isset($this->constraints[$part['name']])) {
+                if (
                     !preg_match($this->constraints[$part['name']],$value)
-                ){
+                ) {
                     // constraint failed
                     return;
                 }
@@ -750,19 +750,19 @@ class Simple implements RouteInterface
             /**
              * Store the value
              */
-            if($part['hasValue']){
+            if ($part['hasValue']) {
                 $matches[$part['name']] = $value;
 
-            }elseif(isset($part['alternatives'])){
+            } elseif (isset($part['alternatives'])) {
                 // from all alternativesm set matching parameter to TRUE and the rest to FALSE
-                foreach($part['alternatives'] as $alt){
+                foreach ($part['alternatives'] as $alt) {
                     $matches[$alt] = $alt == $value;
                 }
 
                 // set alternatives group value
                 $matches[$part['name']] = $value;
 
-            }else{
+            } else {
                 // set matching parameter flag to true
                 $matches[$part['name']] = true;
             }
@@ -777,7 +777,7 @@ class Simple implements RouteInterface
         /**
          * Check if we have consumed all positional parameters
          */
-        if($argPos < count($params)){
+        if ($argPos < count($params)) {
             return; // there are extraneous params that were not consumed
         }
 

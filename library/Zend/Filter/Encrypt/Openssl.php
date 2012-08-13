@@ -177,7 +177,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function setPublicKey($key)
     {
         if (is_array($key)) {
-            foreach($key as $type => $option) {
+            foreach ($key as $type => $option) {
                 if ($type !== 'public') {
                     $key['public'] = $option;
                     unset($key[$type]);
@@ -211,7 +211,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function setPrivateKey($key, $passphrase = null)
     {
         if (is_array($key)) {
-            foreach($key as $type => $option) {
+            foreach ($key as $type => $option) {
                 if ($type !== 'private') {
                     $key['private'] = $option;
                     unset($key[$type]);
@@ -248,7 +248,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function setEnvelopeKey($key)
     {
         if (is_array($key)) {
-            foreach($key as $type => $option) {
+            foreach ($key as $type => $option) {
                 if ($type !== 'envelope') {
                     $key['envelope'] = $option;
                     unset($key[$type]);
@@ -351,7 +351,7 @@ class Openssl implements EncryptionAlgorithmInterface
         $keys         = array();
         $fingerprints = array();
         $count        = -1;
-        foreach($this->keys['public'] as $key => $cert) {
+        foreach ($this->keys['public'] as $key => $cert) {
             $keys[$key] = openssl_pkey_get_public($cert);
             if ($this->package) {
                 $details = openssl_pkey_get_details($keys[$key]);
@@ -384,7 +384,7 @@ class Openssl implements EncryptionAlgorithmInterface
         // Pack data and envelope keys into single string
         if ($this->package) {
             $header = pack('n', count($this->keys['envelope']));
-            foreach($this->keys['envelope'] as $key => $envKey) {
+            foreach ($this->keys['envelope'] as $key => $envKey) {
                 $header .= pack('H32n', $fingerprints[$key], strlen($envKey)) . $envKey;
             }
 
@@ -416,7 +416,7 @@ class Openssl implements EncryptionAlgorithmInterface
             throw new Exception\RuntimeException('Please give an envelope key for decryption with Openssl');
         }
 
-        foreach($this->keys['private'] as $key => $cert) {
+        foreach ($this->keys['private'] as $key => $cert) {
             $keys = openssl_pkey_get_private($cert, $this->getPassphrase());
         }
 
@@ -431,7 +431,7 @@ class Openssl implements EncryptionAlgorithmInterface
             $count = unpack('ncount', $value);
             $count = $count['count'];
             $length  = 2;
-            for($i = $count; $i > 0; --$i) {
+            for ($i = $count; $i > 0; --$i) {
                 $header = unpack('H32print/nsize', substr($value, $length, 18));
                 $length  += 18;
                 if ($header['print'] == $fingerprint) {

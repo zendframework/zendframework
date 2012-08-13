@@ -174,10 +174,10 @@ EOT;
                 // Prepare error message
                 $exception = $e->getParam('exception');
 
-                if(is_callable($this->message)){
+                if (is_callable($this->message)) {
                     $callback = $this->message;
                     $message = (string)$callback($exception, $this->displayExceptions);
-                }elseif($this->displayExceptions && $exception instanceof \Exception){
+                } elseif ($this->displayExceptions && $exception instanceof \Exception) {
                     /* @var $exception \Exception */
                     $message = str_replace(
                         array(
@@ -197,7 +197,7 @@ EOT;
                         ),
                         $this->message
                     );
-                }else{
+                } else {
                     $message = str_replace(
                         array(
                             ':className',

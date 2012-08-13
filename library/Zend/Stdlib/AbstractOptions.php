@@ -135,7 +135,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     {
         try {
             $this->__set($key, null);
-        } catch(\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
                     . ' NULL is an invalid value for it',

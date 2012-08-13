@@ -189,7 +189,7 @@ class Http extends Uri
     {
         parent::parse($uri);
 
-        if (empty($this->path)){
+        if (empty($this->path)) {
             $this->path = '/';
         }
 

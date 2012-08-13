@@ -167,7 +167,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
 
         try {
             $this->openMboxFile($this->rootdir . $folder->getGlobalName());
-        } catch(Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
                 throw new Exception\RuntimeException("{$this->currentFolder} is not selectable", 0, $e);

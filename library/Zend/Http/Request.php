@@ -237,7 +237,7 @@ class Request extends AbstractMessage implements RequestInterface
             $this->queryParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->queryParams;
         }
 
@@ -270,7 +270,7 @@ class Request extends AbstractMessage implements RequestInterface
             $this->postParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->postParams;
         }
 
@@ -314,7 +314,7 @@ class Request extends AbstractMessage implements RequestInterface
             $this->fileParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->fileParams;
         }
 
@@ -336,11 +336,11 @@ class Request extends AbstractMessage implements RequestInterface
             $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->headers;
         }
 
-        if($this->headers->has($name)){
+        if ($this->headers->has($name)) {
             return $this->headers->get($name);
         }
 

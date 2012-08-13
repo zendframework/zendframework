@@ -52,7 +52,7 @@ class DeclareVars extends AbstractHelper
     {
         $view = $this->getView();
         $args = func_get_args();
-        foreach($args as $key) {
+        foreach ($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
                     $this->declareVar($name, $value);

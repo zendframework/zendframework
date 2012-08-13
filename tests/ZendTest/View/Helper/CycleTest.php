@@ -126,7 +126,7 @@ class CycleTest extends \PHPUnit_Framework_TestCase
     {
         $expected = array(5,4,2,3);
         $expected2 = array(7,34,8,6);
-        for($i=0;$i<4;$i++) {
+        for ($i=0;$i<4;$i++) {
           $this->assertEquals($expected[$i], (string) $this->helper->__invoke($expected)->next());
           $this->assertEquals($expected2[$i], (string) $this->helper->__invoke($expected2,'cycle2')->next());
         }

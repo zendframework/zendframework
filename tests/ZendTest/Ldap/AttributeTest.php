@@ -24,7 +24,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     {
         $tsValue = date('YmdHisO', $timestamp);
 
-        if(date('O', strtotime('20120101'))) {
+        if (date('O', strtotime('20120101'))) {
             // Local timezone is +0000 when DST is off. Zend_Ldap converts
             // +0000 to "Z" (see Zend\Ldap\Converter\Converter:toLdapDateTime()), so
             // take account of that here

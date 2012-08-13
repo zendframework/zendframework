@@ -102,7 +102,7 @@ class IsCompressed extends MimeType
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $file = $file['name'];
                 }
             }
@@ -112,7 +112,7 @@ class IsCompressed extends MimeType
             }
         }
 
-        switch($errorType) {
+        switch ($errorType) {
             case MimeType::FALSE_TYPE :
                 $errorType = self::FALSE_TYPE;
                 break;

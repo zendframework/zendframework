@@ -125,13 +125,13 @@ function windowOnLoad(fn)
 }
 function zendBindEvent(el, eventName, eventHandler)
 {
-    if (el.addEventListener){
+    if (el.addEventListener) {
         el.addEventListener(eventName, eventHandler, false);
-    } $elseif (el.attachEvent){
+    } $elseif (el.attachEvent) {
         el.attachEvent('on'+eventName, eventHandler);
     }
 }
-windowOnLoad(function(){
+windowOnLoad(function() {
     zendBindEvent(
         document.getElementById("$challengeId").form,
         'submit',

@@ -221,9 +221,9 @@ class ViewModel implements ModelInterface
     public function getVariable($name, $default = null)
     {
         $name = (string)$name;
-        if(array_key_exists($name,$this->variables)){
+        if (array_key_exists($name,$this->variables)) {
             return $this->variables[$name];
-        }else{
+        } else {
             return $default;
         }
     }

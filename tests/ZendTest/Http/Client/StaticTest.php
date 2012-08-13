@@ -218,7 +218,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $hasConfig = $this->_client->config;
 
-        foreach($config as $k => $v) {
+        foreach ($config as $k => $v) {
             $this->assertEquals($v, $hasConfig[$k]);
         }
     }

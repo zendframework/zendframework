@@ -31,7 +31,7 @@ class RealPath extends AbstractFilter
     public function __construct($existsOrOptions = true)
     {
         if ($existsOrOptions !== null) {
-            if (!static::isOptions($existsOrOptions)){
+            if (!static::isOptions($existsOrOptions)) {
                 $this->setExists($existsOrOptions);
             } else {
                 $this->setOptions($existsOrOptions);

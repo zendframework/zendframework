@@ -243,7 +243,7 @@ abstract class AbstractAdapter implements AdapterInterface
                 $this->write(str_repeat($fillChar, $width), $fillColor, $fillBgColor);
             }
         } else {
-            switch($lineStyle){
+            switch ($lineStyle) {
                 case static::LINE_DOUBLE:
                     $lineChar = $charset::LINE_DOUBLE_NS;
                     break;

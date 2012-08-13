@@ -372,9 +372,9 @@ class Reader
     {
         if ($feed instanceof Feed\AbstractFeed) {
             $dom = $feed->getDomDocument();
-        } elseif($feed instanceof DOMDocument) {
+        } elseif ($feed instanceof DOMDocument) {
             $dom = $feed;
-        } elseif(is_string($feed) && !empty($feed)) {
+        } elseif (is_string($feed) && !empty($feed)) {
             ErrorHandler::start(E_NOTICE|E_WARNING);
             ini_set('track_errors', 1);
             libxml_disable_entity_loader(true);
@@ -404,7 +404,7 @@ class Reader
             $version = $xpath->evaluate('string(/rss/@version)');
 
             if (strlen($version) > 0) {
-                switch($version) {
+                switch ($version) {
                     case '2.0':
                         $type = self::TYPE_RSS_20;
                         break;

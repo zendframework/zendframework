@@ -503,7 +503,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodingObjectWithExprAndExtJSON()
     {
-        if(!function_exists('json_encode')) {
+        if (!function_exists('json_encode')) {
             $this->markTestSkipped('Test only works with ext/json enabled!');
         }
 
@@ -543,12 +543,12 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $data = array(
             0 => array(
-                "alpha" => new Json\Expr("function(){}"),
+                "alpha" => new Json\Expr("function() {}"),
                 "beta"  => "gamma",
             ),
             1 => array(
                 "alpha" => "gamma",
-                "beta"  => new Json\Expr("function(){}"),
+                "beta"  => new Json\Expr("function() {}"),
             ),
             2 => array(
                 "alpha" => "gamma",
@@ -558,7 +558,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $result = Json\Json::encode($data, false, array('enableJsonExprFinder' => true));
 
         $this->assertEquals(
-            '[{"alpha":function(){},"beta":"gamma"},{"alpha":"gamma","beta":function(){}},{"alpha":"gamma","beta":"gamma"}]',
+            '[{"alpha":function() {},"beta":"gamma"},{"alpha":"gamma","beta":function() {}},{"alpha":"gamma","beta":"gamma"}]',
             $result
         );
     }
@@ -598,7 +598,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         $data = array(
             0 => array(
-                "alpha" => new Json\Expr("function(){}"),
+                "alpha" => new Json\Expr("function() {}"),
                 "beta"  => "gamma",
             ),
         );
@@ -682,7 +682,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeWithUtf8IsTransformedSolarRegressionEqualsJSONExt()
     {
-        if(function_exists('json_encode') == false) {
+        if (function_exists('json_encode') == false) {
             $this->markTestSkipped('Test can only be run, when ext/json is installed.');
         }
 

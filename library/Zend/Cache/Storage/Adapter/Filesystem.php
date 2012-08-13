@@ -1522,7 +1522,7 @@ class Filesystem extends AbstractAdapter implements
                 throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
             }
 
-            if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
+            if (!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 if ($wouldblock) {

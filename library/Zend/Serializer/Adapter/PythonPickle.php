@@ -1141,7 +1141,7 @@ class PythonPickle extends AbstractAdapter
 
         // remove all elements after marker
         $max = count($this->stack);
-        for($i = $k + 1; $i < $max; $i++) {
+        for ($i = $k + 1; $i < $max; $i++) {
             unset($this->stack[$i]);
         }
     }
@@ -1191,7 +1191,7 @@ class PythonPickle extends AbstractAdapter
         $this->stack[$k]  =  array();
         $tuple            =& $this->stack[$k];
         $max              =  count($this->stack);
-        for($i = $k + 1; $i < $max; $i++) {
+        for ($i = $k + 1; $i < $max; $i++) {
             $tuple[] = $this->stack[$i];
             unset($this->stack[$i]);
         }

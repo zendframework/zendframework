@@ -48,7 +48,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testComposeNewUriAndCastToString($exp, $parts)
     {
         $uri = new Uri;
-        foreach($parts as $k => $v) {
+        foreach ($parts as $k => $v) {
             $setMethod = 'set' . ucfirst($k);
             $uri->$setMethod($v);
         }

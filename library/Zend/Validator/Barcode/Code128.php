@@ -192,7 +192,7 @@ class Code128 extends AbstractAdapter
                 $char = iconv_substr($value, 0, 2, 'UTF-8');
             }
 
-            switch($char) {
+            switch ($char) {
                 // Function definition
                 case 'Ç' :
                 case 'ü' :

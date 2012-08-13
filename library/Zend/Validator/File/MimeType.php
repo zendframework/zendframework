@@ -389,7 +389,7 @@ class MimeType extends AbstractValidator
         $types = explode('/', $this->type);
         $types = array_merge($types, explode('-', $this->type));
         $types = array_merge($types, explode(';', $this->type));
-        foreach($mimetype as $mime) {
+        foreach ($mimetype as $mime) {
             if (in_array($mime, $types)) {
                 return true;
             }
@@ -409,7 +409,7 @@ class MimeType extends AbstractValidator
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $file = $file['name'];
                 }
             }

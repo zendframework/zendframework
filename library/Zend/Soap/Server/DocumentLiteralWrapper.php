@@ -148,7 +148,7 @@ class DocumentLiteralWrapper
 
     protected function _assertServiceDelegateHasMethod($method)
     {
-        if ( !$this->reflection->hasMethod($method) ) {
+        if (!$this->reflection->hasMethod($method)) {
             throw new BadMethodCallException(sprintf(
                 "Method %s does not exist on delegate object %s",
                 $method, get_class($this->object)

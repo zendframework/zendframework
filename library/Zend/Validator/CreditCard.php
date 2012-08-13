@@ -203,7 +203,7 @@ class CreditCard extends AbstractValidator
             $type = array($type);
         }
 
-        foreach($type as $typ) {
+        foreach ($type as $typ) {
             if (defined('self::' . strtoupper($typ)) && !in_array($typ, $this->options['type'])) {
                 $this->options['type'][] = $typ;
             }
@@ -279,7 +279,7 @@ class CreditCard extends AbstractValidator
             }
         }
 
-        if ($foundp == false){
+        if ($foundp == false) {
             $this->error(self::PREFIX, $value);
             return false;
         }

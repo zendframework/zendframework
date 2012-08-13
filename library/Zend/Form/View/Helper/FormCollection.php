@@ -73,7 +73,7 @@ class FormCollection extends AbstractHelper
             }
         }
 
-        foreach($element->getIterator() as $elementOrFieldset) {
+        foreach ($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $markup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {

@@ -38,7 +38,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
             dirname(__DIR__) . '/_files/_compress'
         );
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             if (file_exists($file)) {
                 if (is_dir($file)) {
                     rmdir($file);
@@ -70,7 +70,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
             dirname(__DIR__) . '/_files/_compress'
         );
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             if (file_exists($file)) {
                 if (is_dir($file)) {
                     rmdir($file);

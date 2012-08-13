@@ -393,7 +393,7 @@ class Table
                 $result .= "\n";
             } else {
                 // Else check if we have to draw the row separator
-                if (!$hasHorizontal){
+                if (!$hasHorizontal) {
                     $drawSeparator = false; // there is no horizontal character;
                 } elseif ($this->autoSeparate & self::AUTO_SEPARATE_ALL) {
                     $drawSeparator = true;

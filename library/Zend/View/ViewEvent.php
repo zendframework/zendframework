@@ -174,7 +174,7 @@ class ViewEvent extends Event
      */
     public function getParam($name, $default = null)
     {
-        switch($name) {
+        switch ($name) {
             case 'model':
                 return $this->getModel();
             case 'renderer':

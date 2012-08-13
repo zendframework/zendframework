@@ -357,7 +357,7 @@ class ConfigListener extends AbstractListener implements
             case self::GLOB_PATH:
                 // We want to keep track of where each value came from so we don't
                 // use ConfigFactory::fromFiles() since it does merging internally.
-                foreach(Glob::glob($path, Glob::GLOB_BRACE) as $file) {
+                foreach (Glob::glob($path, Glob::GLOB_BRACE) as $file) {
                     $this->addConfig($file, ConfigFactory::fromFile($file));
                 }
                 break;

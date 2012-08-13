@@ -102,7 +102,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             $this->_digestConfig,
             $this->_bothConfig,
         );
-        foreach($configs as $config)
+        foreach ($configs as $config)
         new Adapter\Http($config);
     }
 

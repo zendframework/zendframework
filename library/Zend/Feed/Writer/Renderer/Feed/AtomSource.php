@@ -79,7 +79,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getGenerator()) {
+        if (!$this->getDataContainer()->getGenerator()) {
             return;
         }
 

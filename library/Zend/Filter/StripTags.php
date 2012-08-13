@@ -112,7 +112,7 @@ class StripTags extends AbstractFilter
                 $this->tagsAllowed[$tagName] = array();
             }
             // Otherwise, if a tag was provided with attributes
-            else if (is_string($index) && (is_array($element) || is_string($element))) {
+            elseif (is_string($index) && (is_array($element) || is_string($element))) {
                 // Canonicalize the tag name
                 $tagName = strtolower($index);
                 // Canonicalize the attributes

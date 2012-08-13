@@ -67,7 +67,7 @@ class SendResponseListener implements ListenerAggregateInterface
         }
 
         // send the response if possible
-        if(is_callable(array($response,'send'))){
+        if (is_callable(array($response,'send'))) {
             return $response->send();
         }
     }

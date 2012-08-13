@@ -70,7 +70,7 @@ final class Version
             $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
 
             // Simplify the API response into a simple array of version numbers
-            $tags = array_map(function($tag){
+            $tags = array_map(function($tag) {
                 return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
             }, $apiResponse);
 

@@ -66,7 +66,7 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
         $this->init();
     }
 
-    public function setResolver(Resolver $resolver){}
+    public function setResolver(Resolver $resolver) {}
 
     /**
      * Return the template engine object
@@ -128,7 +128,7 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
      */
     public function render($model, $values = null)
     {
-        if(!$model instanceof Model){
+        if (!$model instanceof Model) {
             return '';
         }
 
@@ -145,14 +145,14 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
 
         $values = $model->getVariables();
 
-        if(isset($values['result'])){
+        if (isset($values['result'])) {
             // filter and append the result
             $result .= $this->getFilterChain()->filter($values['result']);
         }
 
-        if($model->hasChildren()){
+        if ($model->hasChildren()) {
             // recursively render all children
-            foreach($model->getChildren() as $child){
+            foreach ($model->getChildren() as $child) {
                 $result .= $this->render($child, $values);
             }
         }

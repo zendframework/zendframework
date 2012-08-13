@@ -778,7 +778,7 @@ class Client implements ServerClient
      */
     public function setStreamContext($context)
     {
-        if(!is_resource($context) || get_resource_type($context) !== "stream-context") {
+        if (!is_resource($context) || get_resource_type($context) !== "stream-context") {
             throw new Exception\InvalidArgumentException('Invalid stream context resource given.');
         }
 

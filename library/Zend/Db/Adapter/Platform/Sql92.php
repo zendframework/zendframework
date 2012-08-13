@@ -120,7 +120,7 @@ class Sql92 implements PlatformInterface
     {
         $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
-        foreach($parts as $i => $part) {
+        foreach ($parts as $i => $part) {
             if ($safeWords && in_array($part, $safeWords)) {
                 continue;
             }

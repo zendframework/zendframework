@@ -152,7 +152,7 @@ class Barcode extends AbstractValidator
             if (is_array($this->options['length'])) {
                 $temp = $this->options['length'];
                 $this->options['length'] = "";
-                foreach($temp as $length) {
+                foreach ($temp as $length) {
                     $this->options['length'] .= "/";
                     $this->options['length'] .= $length;
                 }

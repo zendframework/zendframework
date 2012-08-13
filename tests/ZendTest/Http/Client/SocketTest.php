@@ -60,7 +60,7 @@ class SocketTest extends CommonHttpTests
         $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
-        foreach($config as $k => $v) {
+        foreach ($config as $k => $v) {
             $this->assertEquals($v, $hasConfig[$k]);
         }
     }

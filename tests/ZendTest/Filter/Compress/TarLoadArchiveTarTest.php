@@ -30,7 +30,7 @@ class TarLoadArchveTarTest extends \PHPUnit_Framework_TestCase
         try {
             $tar = new TarCompression;
             $this->fail('ExtensionNotLoadedException was expected but not thrown');
-        } catch(ExtensionNotLoadedException $e) {
+        } catch (ExtensionNotLoadedException $e) {
         }
     }
 }

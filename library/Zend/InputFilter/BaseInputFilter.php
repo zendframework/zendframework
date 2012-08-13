@@ -163,7 +163,7 @@ class BaseInputFilter implements InputFilterInterface
                 || (null === $this->data[$name])
                 || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
             ) {
-                if($input instanceof InputInterface) {
+                if ($input instanceof InputInterface) {
                     // - test if input is required
                     if (!$input->isRequired()) {
                         $this->validInputs[$name] = $input;

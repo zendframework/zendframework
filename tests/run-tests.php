@@ -102,7 +102,7 @@ function getAll($phpunit_conf)
     $components = array();
     $conf = simplexml_load_file($phpunit_conf);
     $excludes = $conf->xpath('/phpunit/testsuites/testsuite/exclude/text()');
-    for($i = 0; $i < count($excludes); $i++) {
+    for ($i = 0; $i < count($excludes); $i++) {
         $excludes[$i] = basename($excludes[$i]);
     }
     if ($handle = opendir(__DIR__ . '/ZendTest/')) {

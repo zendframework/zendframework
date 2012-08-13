@@ -74,7 +74,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
     {
-        if($type == 'constant') {
+        if ($type == 'constant') {
             return; // constant can only be detected explicitly
         }
 

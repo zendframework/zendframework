@@ -48,7 +48,7 @@ class Server2
     }
 }
 
-if(isset($_GET['wsdl'])) {
+if (isset($_GET['wsdl'])) {
     $server = new \Zend\Soap\AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex());
 } else {
     $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";

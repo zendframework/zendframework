@@ -187,7 +187,7 @@ class Part
             $headers[] = array('Content-Location', $this->location);
         }
 
-        if ($this->language){
+        if ($this->language) {
             $headers[] = array('Content-Language', $this->language);
         }
 

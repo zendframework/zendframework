@@ -8,7 +8,7 @@
  * @package   Zend_Http
  */
 
-if (! isset($_GET['redirection'])){
+if (! isset($_GET['redirection'])) {
     $_GET['redirection'] = 0;
 
     /**

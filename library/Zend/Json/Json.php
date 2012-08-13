@@ -110,7 +110,7 @@ class Json
 
         // Pre-encoding look for Zend_Json_Expr objects and replacing by tmp ids
         $javascriptExpressions = array();
-        if(isset($options['enableJsonExprFinder'])
+        if (isset($options['enableJsonExprFinder'])
            && ($options['enableJsonExprFinder'] == true)
         ) {
             $valueToEncode = self::_recursiveJsonExprFinder($valueToEncode, $javascriptExpressions);
@@ -129,7 +129,7 @@ class Json
         //only do post-processing to revert back the Zend_Json_Expr if any.
         if (count($javascriptExpressions) > 0) {
             $count = count($javascriptExpressions);
-            for($i = 0; $i < $count; $i++) {
+            for ($i = 0; $i < $count; $i++) {
                 $magicKey = $javascriptExpressions[$i]['magicKey'];
                 $value    = $javascriptExpressions[$i]['value'];
 
@@ -347,26 +347,26 @@ class Json
         $indent = 0;
 
         $ind = "\t";
-        if(isset($options['indent'])) {
+        if (isset($options['indent'])) {
             $ind = $options['indent'];
         }
 
         $inLiteral = false;
-        foreach($tokens as $token) {
-            if($token == "") continue;
+        foreach ($tokens as $token) {
+            if ($token == "") continue;
 
             $prefix = str_repeat($ind, $indent);
-            if(!$inLiteral && ($token == "{" || $token == "[")) {
+            if (!$inLiteral && ($token == "{" || $token == "[")) {
                 $indent++;
-                if($result != "" && $result[strlen($result)-1] == "\n") {
+                if ($result != "" && $result[strlen($result)-1] == "\n") {
                     $result .= $prefix;
                 }
                 $result .= "$token\n";
-            } else if(!$inLiteral && ($token == "}" || $token == "]")) {
+            } elseif (!$inLiteral && ($token == "}" || $token == "]")) {
                 $indent--;
                 $prefix = str_repeat($ind, $indent);
                 $result .= "\n$prefix$token";
-            } else if(!$inLiteral && $token == ",") {
+            } elseif (!$inLiteral && $token == ",") {
                 $result .= "$token\n";
             } else {
                 $result .= ($inLiteral ?  '' : $prefix) . $token;

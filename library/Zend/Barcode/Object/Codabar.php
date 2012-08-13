@@ -43,7 +43,7 @@ class Codabar extends AbstractObject
         $quietZone       = $this->getQuietZone();
         $encodedData = 0;
         $barcodeChar = str_split($this->getText());
-        if(count($barcodeChar) > 1) {
+        if (count($barcodeChar) > 1) {
             foreach ($barcodeChar as $c) {
                 $encodedData += ((strlen($this->codingMap[$c]) + 1) * $this->barThinWidth) * $this->factor;
             }

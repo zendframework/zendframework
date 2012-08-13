@@ -94,7 +94,7 @@ class Request extends HttpRequest
     {
         if (empty($this->content)) {
             $requestBody = file_get_contents('php://input');
-            if (strlen($requestBody) > 0){
+            if (strlen($requestBody) > 0) {
                 $this->content = $requestBody;
             }
         }
@@ -307,7 +307,7 @@ class Request extends HttpRequest
             $this->serverParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->serverParams;
         }
 
@@ -340,7 +340,7 @@ class Request extends HttpRequest
             $this->envParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->envParams;
         }
 

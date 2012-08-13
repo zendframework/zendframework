@@ -31,7 +31,7 @@ class ResponseFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if(Console::isConsole()){
+        if (Console::isConsole()) {
             return new ConsoleResponse();
         }
 

@@ -426,7 +426,7 @@ class Logger implements LoggerInterface
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
 
-        set_exception_handler(function ($exception) use ($logger){
+        set_exception_handler(function ($exception) use ($logger) {
             $extra = array(
                 'file'  => $exception->getFile(),
                 'line'  => $exception->getLine(),

@@ -230,7 +230,7 @@ class Zip extends AbstractCompressionAlgorithm
      */
     public function errorString($error)
     {
-        switch($error) {
+        switch ($error) {
             case ZipArchive::ER_MULTIDISK :
                 return 'Multidisk ZIP Archives not supported';
 

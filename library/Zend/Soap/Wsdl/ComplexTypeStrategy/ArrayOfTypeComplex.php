@@ -36,9 +36,9 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $singularType = $this->_getSingularPhpType($type);
         $nestingLevel = $this->_getNestedCount($type);
 
-        if($nestingLevel == 0) {
+        if ($nestingLevel == 0) {
             return parent::addComplexType($singularType);
-        } else if($nestingLevel == 1) {
+        } elseif ($nestingLevel == 1) {
             // The following blocks define the Array of Object structure
             return $this->_addArrayOfComplexType($singularType, $type);
         } else {

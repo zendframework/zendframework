@@ -856,7 +856,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testOptimize()
     {
-        if ( !($this->_storage instanceof OptimizableInterface) ) {
+        if (!($this->_storage instanceof OptimizableInterface)) {
             $this->markTestSkipped("Storage doesn't implement OptimizableInterface");
         }
 
@@ -897,7 +897,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testFlush()
     {
-        if ( !($this->_storage instanceof FlushableInterface) ) {
+        if (!($this->_storage instanceof FlushableInterface)) {
             $this->markTestSkipped("Storage doesn't implement OptimizableInterface");
         }
 
@@ -913,7 +913,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testClearByPrefix()
     {
-        if ( !($this->_storage instanceof ClearByPrefixInterface) ) {
+        if (!($this->_storage instanceof ClearByPrefixInterface)) {
             $this->markTestSkipped("Storage doesn't implement ClearByPrefixInterface");
         }
 
@@ -931,7 +931,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testClearByNamespace()
     {
-        if ( !($this->_storage instanceof ClearByNamespaceInterface) ) {
+        if (!($this->_storage instanceof ClearByNamespaceInterface)) {
             $this->markTestSkipped("Storage doesn't implement ClearByNamespaceInterface");
         }
 
@@ -965,7 +965,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testClearExpired()
     {
-        if ( !($this->_storage instanceof ClearExpiredInterface) ) {
+        if (!($this->_storage instanceof ClearExpiredInterface)) {
             $this->markTestSkipped("Storage doesn't implement ClearExpiredInterface");
         }
 
@@ -994,7 +994,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testTagable()
     {
-        if ( !($this->_storage instanceof TaggableInterface) ) {
+        if (!($this->_storage instanceof TaggableInterface)) {
             $this->markTestSkipped("Storage doesn't implement TaggableInterface");
         }
 

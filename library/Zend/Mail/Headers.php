@@ -212,7 +212,7 @@ class Headers implements Countable, Iterator
         if ($fieldValue === null) {
             $this->addHeader(Header\GenericHeader::fromString($headerFieldNameOrLine));
         } elseif (is_array($fieldValue)) {
-            foreach($fieldValue as $i) {
+            foreach ($fieldValue as $i) {
                 $this->addHeader(new Header\GenericMultiHeader($headerFieldNameOrLine, $i));
             }
         } else {
@@ -291,7 +291,7 @@ class Headers implements Countable, Iterator
             }
         }
 
-        switch(count($results)) {
+        switch (count($results)) {
             case 0:
                 return false;
             case 1:

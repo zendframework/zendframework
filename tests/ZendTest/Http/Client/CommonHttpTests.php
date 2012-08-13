@@ -816,7 +816,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $files = array('file1.txt', 'file2.txt', 'someotherfile.foo');
 
         $expectedBody = '';
-        foreach($files as $filename) {
+        foreach ($files as $filename) {
             $this->client->setFileUpload($filename, 'uploadfile[]', $rawData, 'text/plain');
             $expectedBody .= "uploadfile $filename text/plain " . strlen($rawData) . "\n";
         }
@@ -844,7 +844,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponse()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
+        if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -871,7 +871,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('To check with the new ZF2 implementation');
 
-        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
+        if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -891,7 +891,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponseNamed()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
+        if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -917,7 +917,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamRequest()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
+        if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }

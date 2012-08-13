@@ -371,7 +371,7 @@ class Decoder
                             default:
                                 throw new RuntimeException("Illegal escape sequence '{$chr}'");
                         }
-                    } elseif($chr == '"') {
+                    } elseif ($chr == '"') {
                         break;
                     } else {
                         $result .= $chr;
@@ -457,7 +457,7 @@ class Decoder
         $utf8        = '';
         $strlen_chrs = strlen($chrs);
 
-        for($i = 0; $i < $strlen_chrs; $i++) {
+        for ($i = 0; $i < $strlen_chrs; $i++) {
 
             $substr_chrs_c_2 = substr($chrs, $i, 2);
             $ord_chrs_c = ord($chrs[$i]);
@@ -531,7 +531,7 @@ class Decoder
     protected static function _utf162utf8($utf16)
     {
         // Check for mb extension otherwise do by hand.
-        if( function_exists('mb_convert_encoding') ) {
+        if (function_exists('mb_convert_encoding')) {
             return mb_convert_encoding($utf16, 'UTF-8', 'UTF-16');
         }
 

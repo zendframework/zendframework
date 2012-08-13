@@ -672,7 +672,7 @@ class Paginator implements Countable, IteratorAggregate
 
         if (is_array($items) || $items instanceof Countable) {
             $itemCount = count($items);
-        } elseif($items instanceof Traversable) { // $items is something like LimitIterator
+        } elseif ($items instanceof Traversable) { // $items is something like LimitIterator
             $itemCount = iterator_count($items);
         }
 

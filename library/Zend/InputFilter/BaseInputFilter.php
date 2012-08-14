@@ -60,7 +60,7 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        if (empty($name) || is_int($name)) {
+        if ($input instanceof InputInterface && (empty($name) || is_int($name))) {
             $name = $input->getName();
         }
 

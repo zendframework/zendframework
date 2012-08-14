@@ -64,7 +64,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Constructor
      *
      * @param  null|string $table
-     * @param  null|string $schema
      */
     public function __construct($table = null)
     {
@@ -78,7 +77,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Specify table for statement
      *
      * @param  string $table
-     * @param  null|string $schema
      * @return Update
      */
     public function table($table)

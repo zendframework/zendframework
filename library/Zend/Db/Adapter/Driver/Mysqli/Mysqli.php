@@ -47,8 +47,9 @@ class Mysqli implements DriverInterface
      * @param array|Connection|\mysqli $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
+     * @param array $options
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = array())
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, array $options = array())
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
@@ -145,7 +146,7 @@ class Mysqli implements DriverInterface
     }
 
     /**
-     * @param string $sql
+     * @param string $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
@@ -165,6 +166,7 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * @param resource $resource
      * @return Result
      */
     public function createResult($resource, $isBuffered = null)
@@ -183,7 +185,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
+     * @param mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

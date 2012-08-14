@@ -301,6 +301,7 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      *
+     * @param string $name
      * @return mixed
      */
     public function getLastGeneratedValue($name = null)

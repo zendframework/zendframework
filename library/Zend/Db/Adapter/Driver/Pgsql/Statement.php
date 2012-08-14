@@ -153,7 +153,7 @@ class Statement implements StatementInterface
 
     /**
      * @param  null $parameters
-     * @return ResultInterface
+     * @return Result
      */
     public function execute($parameters = null)
     {

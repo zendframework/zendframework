@@ -353,7 +353,8 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      *
-     * @return integer
+     * @param string $name
+     * @return integer|null|false
      */
     public function getLastGeneratedValue($name = null)
     {

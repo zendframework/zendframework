@@ -154,7 +154,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Create from clause
      *
      * @param  string|array|TableIdentifier $table
-     * @param  null|string $schema
      * @return Select
      */
     public function from($table)
@@ -190,6 +189,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *     value can be string or Expression objects
      *
      * @param  array $columns
+     * @param  bool  $prefixColumnsWithTable
      * @return Select
      */
     public function columns(array $columns, $prefixColumnsWithTable = true)

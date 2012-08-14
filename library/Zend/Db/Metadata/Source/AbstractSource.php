@@ -67,6 +67,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get table names
      *
      * @param  string $schema
+     * @param  bool   $includeViews
      * @return string[]
      */
     public function getTableNames($schema = null, $includeViews = false)
@@ -95,6 +96,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get tables
      *
      * @param  string $schema
+     * @param  bool   $includeViews
      * @return Object\TableObject[]
      */
     public function getTables($schema = null, $includeViews = false)

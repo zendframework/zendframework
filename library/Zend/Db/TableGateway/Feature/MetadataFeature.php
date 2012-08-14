@@ -30,7 +30,7 @@ class MetadataFeature extends AbstractFeature
     /**
      * Constructor
      *
-     * @param Adapter $slaveAdapter
+     * @param MetadataInterface $metadata
      */
     public function __construct(MetadataInterface $metadata = null)
     {

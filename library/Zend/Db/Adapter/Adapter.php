@@ -68,7 +68,7 @@ class Adapter
     /**
      * @param Driver\DriverInterface|array $driver
      * @param Platform\PlatformInterface $platform
-     * @param ResultSet\ResultSet $queryResultPrototype
+     * @param ResultSet\ResultSetInterface $queryResultPrototype
      */
     public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
     {
@@ -94,7 +94,7 @@ class Adapter
     /**
      * getDriver()
      *
-     * @throws Exception
+     * @throws Exception\RuntimeException
      * @return Driver\DriverInterface
      */
     public function getDriver()

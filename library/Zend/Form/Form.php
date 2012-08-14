@@ -20,7 +20,7 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend

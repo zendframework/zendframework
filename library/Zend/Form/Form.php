@@ -236,6 +236,22 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
+     * Set the hydrator to use when binding an object to the element
+     *
+     * @param  HydratorInterface $hydrator
+     * @return FieldsetInterface
+     */
+    public function setHydrator(HydratorInterface $hydrator)
+    {
+        if ($this->baseFieldset !== null) {
+            $this->baseFieldset->setHydrator($hydrator);
+        }
+
+        $this->hydrator = $hydrator;
+        return $this;
+    }
+
+    /**
      * Bind values to the bound object
      *
      * @param array $values

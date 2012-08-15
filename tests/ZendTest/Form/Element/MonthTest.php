@@ -57,4 +57,30 @@ class MonthTest extends TestCase
             }
         }
     }
+
+    public function monthValuesDataProvider()
+    {
+        return array(
+            //    value         expected
+            array('2012-01',    true),
+            array('2012-12',    true),
+            array('2012-13',    false),
+            array('2012-12-01', false),
+            array('12-2012',    false),
+            array('2012-1',     false),
+            array('12-01',      false),
+        );
+    }
+
+    /**
+     * @dataProvider monthValuesDataProvider
+     */
+    public function testHTML5MonthValidation($value, $expected)
+    {
+        $element = new MonthElement('foo');
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $monthValidator = $inputSpec['validators'][0];
+        $this->assertEquals($expected, $monthValidator->isValid($value));
+    }
 }

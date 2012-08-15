@@ -389,7 +389,6 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController(false);
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
-        $controllerLoader->setInvokableClass('bad', 'DoesNotExist');
         $response = $this->application->getResponse();
         $events   = $this->application->getEventManager();
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($response) {
@@ -478,7 +477,6 @@ class ApplicationTest extends TestCase
     {
         $this->setupPathController(false);
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
-        $controllerLoader->setInvokableClass('path', 'InvalidClassName');
         $response = new Response();
         $this->application->getEventManager()->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) use ($response) {
             return $response;
@@ -574,7 +572,6 @@ class ApplicationTest extends TestCase
     {
         $this->setupPathController(false);
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
-        $controllerLoader->setInvokableClass('path', 'InvalidClassName');
         $model = $this->getMock('Zend\View\Model\ViewModel');
         $this->application->getEventManager()->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) use ($model) {
             $e->setResult($model);

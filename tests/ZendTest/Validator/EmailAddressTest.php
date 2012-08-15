@@ -263,7 +263,6 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
    /**
      * Ensures that the validator follows expected behavior for checking MX records
      *
@@ -280,6 +279,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // Are MX checks supported by this system?
         if (!$validator->isMxSupported()) {
             $this->markTestSkipped('Testing MX records is not supported with this configuration');
+
             return;
         }
 
@@ -302,6 +302,41 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()));
             }
         }
+    }
+
+    /**
+     * Ensures that the validator follows expected behavior for checking MX records with A record fallback.
+     * This behavior is documented in RFC 2821, section 5: "If no MX records are found, but an A RR is
+     * found, the A RR is treated as if it was associated with an implicit MX RR, with a preference of 0,
+     * pointing to that host.
+     *
+     * @return void
+     */
+    public function testNoMxRecordARecordFallback()
+    {
+        if (!constant('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Testing MX records has been disabled');
+        }
+
+        $validator = new EmailAddress(Hostname::ALLOW_DNS, true);
+
+        // Are MX checks supported by this system?
+        if (!$validator->isMxSupported()) {
+            $this->markTestSkipped('Testing MX records is not supported with this configuration');
+
+            return;
+        }
+
+        $email = 'good@example.com';
+
+    //Assert that email host contains no MX records.
+    $this->assertFalse(checkdnsrr(preg_replace('/.*@/', null, $email), 'MX'), 'Email address contains MX records');
+
+    //Asert that email host contains at least one A record.
+    $this->assertTrue(checkdnsrr(preg_replace('/.*@/', null, $email), 'A'), 'Email host contains no A records');
+
+    //Assert that validtor falls back to A record.
+    $this->assertTrue($validator->isValid($email), implode("\n", $validator->getMessages()));
     }
 
    /**
@@ -565,6 +600,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
 
         if (!$validator->isMxSupported()) {
             $this->markTestSkipped('Testing MX records is not supported with this configuration');
+
             return;
         }
 

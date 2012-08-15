@@ -57,6 +57,12 @@ class RegexTest extends TestCase
                 null,
                 array('foo' => 'foo bar')
             ),
+            'empty-matches-are-replaced-with-defaults' => array(
+                new Regex('/foo(?:/(?<bar>[^/]+))?/baz-(?<baz>[^/]+)', '/foo/baz-%baz%', array('bar' => 'bar')),
+                '/foo/baz-baz',
+                null,
+                array('bar' => 'bar', 'baz' => 'baz')
+            ),
         );
     }
 

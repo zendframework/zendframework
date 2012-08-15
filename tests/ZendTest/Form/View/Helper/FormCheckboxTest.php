@@ -83,13 +83,12 @@ class FormCheckboxTest extends CommonTestCase
     }
 
     /**
-     * #ZF2-457
-     *
-     * @expectedException InvalidArgumentException
+     * @group ZF2-457
      */
     public function testBaseElementType()
     {
         $element = new Element('foo');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $markup = $this->helper->render($element);
     }
 }

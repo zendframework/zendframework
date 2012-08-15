@@ -89,7 +89,7 @@ class Application implements
      * @var ServiceManager
      */
     protected $serviceManager = null;
-    
+
     /**
      * Constructor
      *

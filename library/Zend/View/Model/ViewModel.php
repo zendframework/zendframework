@@ -144,8 +144,7 @@ class ViewModel implements ModelInterface
             return null;
         }
 
-        $variables = $this->getVariables();
-        unset($variables[$name]);
+        unset($this->variables[$name]);
     }
 
     /**

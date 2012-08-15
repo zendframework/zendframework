@@ -349,7 +349,8 @@ class FactoryTest extends TestCase
         }
     }
 
-    public function testFactoryWillCreateInputFilterMatchingInputNameWhenNotSpecified() {
+    public function testFactoryWillCreateInputFilterMatchingInputNameWhenNotSpecified()
+    {
         $factory     = new Factory();
         $inputFilter = $factory->createInputFilter(array(
             array('name' => 'foo')

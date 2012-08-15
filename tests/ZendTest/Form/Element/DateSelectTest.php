@@ -32,7 +32,7 @@ class DateSelectTest extends TestCase
             $this->assertTrue(in_array($class, $expectedClasses), $class);
             switch ($class) {
                 case 'Zend\Validator\Date':
-                    $this->assertEquals('Y-n-j', $validator->getFormat());
+                    $this->assertEquals('Y-m-d', $validator->getFormat());
                     break;
                 default:
                     break;

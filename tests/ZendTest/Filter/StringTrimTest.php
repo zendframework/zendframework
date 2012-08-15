@@ -61,7 +61,7 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUtf8()
     {
-        $this->assertEquals('a', $this->_filter(utf8_encode("\xa0a\xa0")));
+        $this->assertEquals('a', $this->_filter->filter(utf8_encode("\xa0a\xa0")));
     }
 
     /**

@@ -102,12 +102,12 @@ class StringTrim extends AbstractFilter
     protected function unicodeTrim($value, $charlist = '\\\\s')
     {
         $chars = preg_replace(
-            array('/[\^\-\]\\\]/S', '/\\\{4}/', '/\//'),
+            array('/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'),
             array('\\\\\\0', '\\', '\/'),
             $charlist
         );
 
-        $pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usD';
+        $pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
 
         return preg_replace($pattern, '', $value);
     }

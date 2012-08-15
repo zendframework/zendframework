@@ -247,8 +247,7 @@ class Form extends Fieldset implements FormInterface
             $this->baseFieldset->setHydrator($hydrator);
         }
 
-        $this->hydrator = $hydrator;
-        return $this;
+        return parent::setHydrator($hydrator);
     }
 
     /**

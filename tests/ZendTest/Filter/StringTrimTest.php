@@ -55,6 +55,16 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the filter follows expected behavior
+     *
+     * @return void
+     */
+    public function testUtf8()
+    {
+        $this->assertEquals('a', $this->_filter(utf8_encode("\xa0a\xa0")));
+    }
+
+    /**
      * Ensures that getCharList() returns expected default value
      *
      * @return void

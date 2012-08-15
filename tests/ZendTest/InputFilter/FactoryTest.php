@@ -348,4 +348,15 @@ class FactoryTest extends TestCase
             }
         }
     }
+
+    public function testFactoryWillCreateInputFilterMatchingInputNameWhenNotSpecified()
+    {
+        $factory     = new Factory();
+        $inputFilter = $factory->createInputFilter(array(
+            array('name' => 'foo')
+        ));
+
+        $this->assertTrue($inputFilter->has('foo'));
+        $this->assertInstanceOf('Zend\InputFilter\Input', $inputFilter->get('foo'));
+    }
 }

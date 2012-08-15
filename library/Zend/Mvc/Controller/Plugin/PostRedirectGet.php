@@ -55,7 +55,7 @@ class PostRedirectGet extends AbstractPlugin
                 $response->setStatusCode(303);
                 return $response;
             }
-            
+
             $response = $redirector->toUrl($redirect);
             $response->setStatusCode(303);
             return $response;

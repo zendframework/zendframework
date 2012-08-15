@@ -89,12 +89,7 @@ class Application implements
      * @var ServiceManager
      */
     protected $serviceManager = null;
-
-    /**
-     * @var ModuleManagerInterface
-     */
-    protected $moduleManager;
-
+    
     /**
      * Constructor
      *
@@ -108,7 +103,6 @@ class Application implements
 
         $this->setEventManager($serviceManager->get('EventManager'));
 
-        $this->moduleManager  = $serviceManager->get('ModuleManager');
         $this->request        = $serviceManager->get('Request');
         $this->response       = $serviceManager->get('Response');
     }

@@ -121,13 +121,6 @@ class ApplicationTest extends TestCase
         $this->assertSame($response, $this->application->getResponse());
     }
 
-    public function testModuleManagerIsPopulatedFromServiceManager()
-    {
-        $modules = $this->serviceManager->get('ModuleManager');
-        $this->assertObjectHasAttribute('moduleManager', $this->application);
-        $this->assertAttributeSame($modules, 'moduleManager', $this->application);
-    }
-
     public function testEventManagerIsPopulated()
     {
         $events       = $this->serviceManager->get('EventManager');

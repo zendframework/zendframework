@@ -214,12 +214,16 @@ class FormDateSelect extends AbstractHelper
      */
     public function getDaysOptions($pattern)
     {
-        $formatter  = new IntlDateFormatter($this->getLocale(), null, null, null, null, $pattern);
-        $date       = new DateTime('1970-01-01');
+        $keyFormatter   = new IntlDateFormatter($this->getLocale(), null, null, null, null, 'dd');
+        $valueFormatter = new IntlDateFormatter($this->getLocale(), null, null, null, null, $pattern);
+        $date           = new DateTime('1970-01-01');
 
         $result = array();
         for ($day = 1; $day <= 31; $day++) {
-            $result[$day] = $formatter->format($date);
+            $key   = $keyFormatter->format($date);
+            $value = $valueFormatter->format($date);
+            $result[$key] = $value;
+
             $date->modify('+1 day');
         }
 
@@ -234,12 +238,16 @@ class FormDateSelect extends AbstractHelper
      */
     public function getMonthsOptions($pattern)
     {
-        $formatter  = new IntlDateFormatter($this->getLocale(), null, null, null, null, $pattern);
-        $date       = new DateTime('1970-01-01');
+        $keyFormatter   = new IntlDateFormatter($this->getLocale(), null, null, null, null, 'MM');
+        $valueFormatter = new IntlDateFormatter($this->getLocale(), null, null, null, null, $pattern);
+        $date           = new DateTime('1970-01-01');
 
         $result = array();
         for ($month = 1; $month <= 12; $month++) {
-            $result[$month] = $formatter->format($date);
+            $key   = $keyFormatter->format($date);
+            $value = $valueFormatter->format($date);
+            $result[$key] = $value;
+
             $date->modify('+1 month');
         }
 

@@ -118,7 +118,7 @@ class Regex extends AbstractValidator
             $this->error(self::INVALID);
             return false;
         }
-var_dump($value);
+
         $this->setValue($value);
 
         $status = @preg_match($this->pattern, $value);

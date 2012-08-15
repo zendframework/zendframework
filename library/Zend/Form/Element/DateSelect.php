@@ -195,7 +195,7 @@ class DateSelect extends Element implements InputProviderInterface, ElementPrepa
     protected function getValidator()
     {
         if (null === $this->validator) {
-            $this->validator = new DateValidator(array('format' => 'Y-n-j'));
+            $this->validator = new DateValidator(array('format' => 'Y-m-d'));
         }
 
         return $this->validator;

@@ -520,16 +520,19 @@ class Form extends Fieldset implements FormInterface
             $fieldset = $formOrFieldset->byName[$key];
 
             if ($fieldset instanceof Collection) {
-                if (!isset($data[$key])) {
+                if (!isset($data[$key]) && $fieldset->getCount() == 0) {
                     unset ($validationGroup[$key]);
                     continue;
                 }
 
                 $values = array();
-                $count = count($data[$key]);
 
-                for ($i = 0 ; $i != $count ; ++$i) {
-                    $values[] = $value;
+                if (isset($data[$key])) {
+                    $count = count($data[$key]);
+
+                    for ($i = 0 ; $i != $count ; ++$i) {
+                        $values[] = $value;
+                    }
                 }
 
                 $value = $values;

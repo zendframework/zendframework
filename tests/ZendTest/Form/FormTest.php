@@ -1008,4 +1008,16 @@ class FormTest extends TestCase
         $this->form->setData($set);
         $this->assertTrue($this->form->isValid());
     }
+
+    public function testHydratorAppliedToBaseFieldset()
+    {
+        $fieldset = new Fieldset('foobar');
+        $fieldset->add(new Element('foo'));
+        $fieldset->setUseAsBaseFieldset(true);
+        $this->form->add($fieldset);
+        $this->form->setHydrator(new Hydrator\ArraySerializable());
+
+        $baseHydrator = $this->form->get('foobar')->getHydrator();
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $baseHydrator);
+    }
 }

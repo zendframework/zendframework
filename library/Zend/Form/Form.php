@@ -20,7 +20,7 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend
@@ -233,6 +233,21 @@ class Form extends Fieldset implements FormInterface
         $this->bindAs = $flags;
         $this->setObject($object);
         $this->extract();
+    }
+
+    /**
+     * Set the hydrator to use when binding an object to the element
+     *
+     * @param  HydratorInterface $hydrator
+     * @return FieldsetInterface
+     */
+    public function setHydrator(HydratorInterface $hydrator)
+    {
+        if ($this->baseFieldset !== null) {
+            $this->baseFieldset->setHydrator($hydrator);
+        }
+
+        return parent::setHydrator($hydrator);
     }
 
     /**

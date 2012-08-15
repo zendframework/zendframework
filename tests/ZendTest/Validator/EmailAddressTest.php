@@ -329,14 +329,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
 
         $email = 'good@example.com';
 
-    //Assert that email host contains no MX records.
-    $this->assertFalse(checkdnsrr(preg_replace('/.*@/', null, $email), 'MX'), 'Email address contains MX records');
+        //Assert that email host contains no MX records.
+        $this->assertFalse(checkdnsrr(preg_replace('/.*@/', null, $email), 'MX'), 'Email address contains MX records');
 
-    //Asert that email host contains at least one A record.
-    $this->assertTrue(checkdnsrr(preg_replace('/.*@/', null, $email), 'A'), 'Email host contains no A records');
+        //Asert that email host contains at least one A record.
+        $this->assertTrue(checkdnsrr(preg_replace('/.*@/', null, $email), 'A'), 'Email host contains no A records');
 
-    //Assert that validtor falls back to A record.
-    $this->assertTrue($validator->isValid($email), implode("\n", $validator->getMessages()));
+        //Assert that validtor falls back to A record.
+        $this->assertTrue($validator->isValid($email), implode("\n", $validator->getMessages()));
     }
 
    /**

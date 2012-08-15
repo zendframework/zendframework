@@ -330,7 +330,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $email = 'good@example.com';
 
         //Assert that email host contains no MX records.
-        $this->assertFalse(checkdnsrr(preg_replace('/.*@/', null, $email), 'MX'), 'Email address contains MX records');
+        $this->assertFalse(checkdnsrr(preg_replace('/.*@/', null, $email), 'MX'), 'Email host contains MX records');
 
         //Asert that email host contains at least one A record.
         $this->assertTrue(checkdnsrr(preg_replace('/.*@/', null, $email), 'A'), 'Email host contains no A records');

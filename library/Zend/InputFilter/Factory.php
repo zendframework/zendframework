@@ -205,7 +205,7 @@ class Factory
         }
 
         $class = 'Zend\InputFilter\InputFilter';
-        if (isset($inputFilterSpecification['type'])) {
+        if (isset($inputFilterSpecification['type']) && is_string($inputFilterSpecification['type'])) {
             $class = $inputFilterSpecification['type'];
             if (!class_exists($class)) {
                 throw new Exception\RuntimeException(sprintf(

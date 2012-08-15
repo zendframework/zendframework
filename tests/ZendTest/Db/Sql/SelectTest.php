@@ -254,6 +254,53 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test join() returns same Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::having
+     */
+    public function testHaving()
+    {
+        $select = new Select;
+        $return = $select->having(array('x = ?' => 5));
+        $this->assertSame($select, $return);
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns information populated via having()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testHaving
+     */
+    public function testGetRawStateViaHaving(Select $select)
+    {
+        $this->assertInstanceOf('Zend\Db\Sql\Having', $select->getRawState('having'));
+    }
+
+    /**
+     * @testdox unit test: Test join() returns same Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::group
+     */
+    public function testGroup()
+    {
+        $select = new Select;
+        $return = $select->group(array('col1', 'col2'));
+        $this->assertSame($select, $return);
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns information populated via group()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testGroup
+     */
+    public function testGetRawStateViaGroup(Select $select)
+    {
+        $this->assertEquals(
+            array('col1', 'col2'),
+            $select->getRawState('group')
+        );
+    }
+
+    /**
      * @testdox unit test: Test prepareStatement() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::prepareStatement
      * @dataProvider providerData
@@ -315,6 +362,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Text process*() methods will return proper array when internally called, part of extension API
      * @dataProvider providerData
      * @covers Zend\Db\Sql\Select::processSelect
+     * @covers Zend\Db\Sql\Select::processJoin
+     * @covers Zend\Db\Sql\Select::processWhere
+     * @covers Zend\Db\Sql\Select::processGroup
+     * @covers Zend\Db\Sql\Select::processHaving
+     * @covers Zend\Db\Sql\Select::processOrder
+     * @covers Zend\Db\Sql\Select::processLimit
+     * @covers Zend\Db\Sql\Select::processOffset
      */
     public function testProcessMethods(Select $select, $unused, $unused2, $unused3, $internalTests)
     {
@@ -658,6 +712,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoin'   => array(array(array('INNER', '"zac"', '(m = n AND c.x) BETWEEN x AND y.z')))
         );
 
+        $select32subselect = new Select;
+        $select32subselect->from('bar')->where->like('y', '%Foo%');
+        $select32 = new Select;
+        $select32->from(array('x' => $select32subselect));
+        $sqlPrep32 = 'SELECT "x".* FROM (SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "x"';
+        $sqlStr32 = 'SELECT "x".* FROM (SELECT "bar".* FROM "bar" WHERE "y" LIKE \'%Foo%\') AS "x"';
+        $internalTests32 = array(
+            'processSelect' => array(array(array('"x".*')), '(SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "x"'),
+        );
+
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -699,6 +764,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select29, $sqlPrep29, array(),    $sqlStr29, $internalTests29),
             array($select30, $sqlPrep30, array(),    $sqlStr30, $internalTests30),
             array($select31, $sqlPrep31, array(),    $sqlStr31, $internalTests31),
+            array($select32, $sqlPrep32, array(),    $sqlStr32, $internalTests32),
         );
     }
 

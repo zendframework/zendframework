@@ -11,7 +11,7 @@
 namespace Zend\Db\Sql\Platform\SqlServer;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
@@ -34,9 +34,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
     /**
      * @param Adapter $adapter
-     * @param StatementInterface $statement
+     * @param StatementContainerInterface $statementContainer
      */
-    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
+    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
     {
         // localize variables
         foreach (get_object_vars($this->select) as $name => $value) {
@@ -48,7 +48,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         unset($this->specifications[self::SPECIFICATION_OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
-        parent::prepareStatement($adapter, $statement);
+        parent::prepareStatement($adapter, $statementContainer);
     }
 
     /**

@@ -283,10 +283,10 @@ class Predicate extends PredicateSet
      * Utilizes In predicate
      *
      * @param  string $identifier
-     * @param  array $valueSet
+     * @param  array|Select $valueSet
      * @return Predicate
      */
-    public function in($identifier, array $valueSet = array())
+    public function in($identifier, $valueSet = null)
     {
         $this->addPredicate(
             new In($identifier, $valueSet),

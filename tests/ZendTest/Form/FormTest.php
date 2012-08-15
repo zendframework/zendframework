@@ -959,6 +959,28 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testAddNonBaseFieldsetObjectInputFilterToFormInputFilter()
+    {
+        $fieldset = new Fieldset('foobar');
+        $fieldset->add(new Element('foo'));
+        $fieldset->setUseAsBaseFieldset(false);
+        $this->form->add($fieldset);
+
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'foo' => array(
+                'name'       => 'foo',
+                'required'   => true,
+            ),
+        ));
+        $model = new TestAsset\ValidatingModel();
+        $model->setInputFilter($inputFilter);
+
+        $this->form->bind($model);
+
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $this->form->getInputFilter()->get('foobar'));
+    }
+
     public function testExtractDataHydratorStrategy()
     {
         $this->populateHydratorStrategyForm();

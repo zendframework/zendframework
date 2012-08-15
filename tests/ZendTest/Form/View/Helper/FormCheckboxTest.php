@@ -81,4 +81,15 @@ class FormCheckboxTest extends CommonTestCase
         $markup = $this->helper->__invoke($element);
         $this->assertContains('name="0"', $markup);
     }
+
+    /**
+     * #ZF2-457
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testBaseElementType()
+    {
+        $element = new Element('foo');
+        $markup = $this->helper->render($element);
+    }
 }

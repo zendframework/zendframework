@@ -153,7 +153,7 @@ class Xml implements FormatterInterface
             ) {
                 if ($key == "message") {
                     $value = htmlspecialchars($value, ENT_COMPAT, $enc);
-                } elseif($key == "extra" && empty($value)) {
+                } elseif ($key == "extra" && empty($value)) {
                     continue;
                 }
                 $elt->appendChild(new DOMElement($key, (string)$value));

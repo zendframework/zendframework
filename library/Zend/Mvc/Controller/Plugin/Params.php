@@ -37,7 +37,7 @@ class Params extends AbstractPlugin
     }
 
     /**
-     * Return all filesor a single file.
+     * Return all files or a single file.
      *
      * @param  string $name File name to retrieve, or null to get all.
      * @param  mixed $default Default value to use when the file is missing.

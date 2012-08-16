@@ -101,25 +101,8 @@ abstract class AbstractRestfulController extends AbstractController
         if (!$request instanceof HttpRequest) {
             throw new Exception\InvalidArgumentException('Expected an HTTP request');
         }
-        $this->request = $request;
-        if (!$response) {
-            $response = new HttpResponse();
-        }
-        $this->response = $response;
 
-        $e = $this->getEvent();
-        $e->setRequest($request)
-          ->setResponse($response)
-          ->setTarget($this);
-
-        $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
-            return ($test instanceof Response);
-        });
-        if ($result->stopped()) {
-            return $result->last();
-        }
-
-        return $e->getResult();
+        return parent::dispatch($request, $response);
     }
 
     /**

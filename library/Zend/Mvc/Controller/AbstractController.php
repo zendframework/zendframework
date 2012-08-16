@@ -81,6 +81,39 @@ abstract class AbstractController implements
      */
     abstract public function onDispatch(MvcEvent $e);
 
+
+    /**
+     * Dispatch a request
+     *
+     * @events dispatch.pre, dispatch.post
+     * @param  Request $request
+     * @param  null|Response $response
+     * @return Response|mixed
+     */
+    public function dispatch(Request $request, Response $response = null)
+    {
+        $this->request = $request;
+        if (!$response) {
+            $response = new HttpResponse();
+        }
+        $this->response = $response;
+
+        $e = $this->getEvent();
+        $e->setRequest($request)
+          ->setResponse($response)
+          ->setTarget($this);
+
+        $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
+            return ($test instanceof Response);
+        });
+
+        if ($result->stopped()) {
+            return $result->last();
+        }
+
+        return $e->getResult();
+    }
+
     /**
      * Get request object
      *

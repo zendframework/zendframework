@@ -107,7 +107,7 @@ class StringTrim extends AbstractFilter
             $charlist
         );
 
-        $pattern = '/^[' . $chars . ']*|[' . $chars . ']*$/sSD';
+        $pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
 
         return preg_replace($pattern, '', $value);
     }

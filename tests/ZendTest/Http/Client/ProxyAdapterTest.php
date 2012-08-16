@@ -87,8 +87,8 @@ class ProxyAdapterTest extends SocketTest
         ));
 
         $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
-        $res = $this->client->request(Client::TRACE);
-        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
+        $res = $this->client->setMethod(\Zend\Http\Request::METHOD_TRACE)->send();
+        if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
             $this->markTestSkipped('Server does not allow the TRACE method');
         }
 
@@ -102,5 +102,12 @@ class ProxyAdapterTest extends SocketTest
          * because the proxy server modifies the request which is sent back in
          * the TRACE response
          */
+    }
+
+    public function testDefaultConfig()
+    {
+        $config = $this->_adapter->getConfig();
+        $this->assertEquals(TRUE, $config['sslverifypeer']);
+        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
     }
 }

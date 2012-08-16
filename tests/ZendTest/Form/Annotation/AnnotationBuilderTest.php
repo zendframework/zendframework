@@ -186,4 +186,15 @@ class AnnotationBuilderTest extends TestCase
         $this->assertEquals('Username:', $username->getLabel());
         $this->assertEquals(array('class' => 'label'), $username->getLabelAttributes());
     }
+
+    public function testAllowTypeAsElementNameInInputFilter()
+    {
+        $entity  = new TestAsset\Annotation\EntityWithTypeAsElementName();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertInstanceOf('Zend\Form\Form', $form);
+        $element = $form->get('type');
+        $this->assertInstanceOf('Zend\Form\Element', $element);
+    }
 }

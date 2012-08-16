@@ -27,7 +27,7 @@ use Zend\Form\Factory;
 
 class SelectTest extends TestCase
 {
-    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
+    public function testProvidesInputSpecificationForSingleSelect()
     {
         $element = new SelectElement();
         $element->setAttribute('options', array(
@@ -49,6 +49,38 @@ class SelectTest extends TestCase
             switch ($class) {
                 case 'Zend\Validator\InArray':
                     $this->assertEquals($element->getAttribute('options'), $validator->getHaystack());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public function testProvidesInputSpecificationForMultipleSelect()
+    {
+        $element = new SelectElement();
+        $element->setAttributes(array(
+            'multiple' => true,
+            'options'  => array(
+                'Option 1' => 'option1',
+                'Option 2' => 'option2',
+                'Option 3' => 'option3',
+            ),
+        ));
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
+
+        $expectedClasses = array(
+            'Zend\Validator\Explode'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Explode':
+                    $this->assertInstanceOf('Zend\Validator\InArray', $validator->getValidator());
                     break;
                 default:
                     break;

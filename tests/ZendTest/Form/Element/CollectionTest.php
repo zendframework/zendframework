@@ -44,9 +44,9 @@ class CollectionTest extends TestCase
         $collection->populateValues($data);
         $this->assertEquals(2, count($collection->getElements()));
 
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
         $data[] = 'orange';
         $collection->populateValues($data);
-        $this->assertEquals(2, count($collection->getElements()));
     }
 
     public function testCanAddNewElementsIfAllowAddIsTrue()

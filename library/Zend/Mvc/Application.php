@@ -91,11 +91,6 @@ class Application implements
     protected $serviceManager = null;
 
     /**
-     * @var ModuleManagerInterface
-     */
-    protected $moduleManager;
-
-    /**
      * Constructor
      *
      * @param mixed $configuration
@@ -108,7 +103,6 @@ class Application implements
 
         $this->setEventManager($serviceManager->get('EventManager'));
 
-        $this->moduleManager  = $serviceManager->get('ModuleManager');
         $this->request        = $serviceManager->get('Request');
         $this->response       = $serviceManager->get('Response');
     }

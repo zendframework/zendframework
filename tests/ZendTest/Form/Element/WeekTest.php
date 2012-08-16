@@ -40,9 +40,6 @@ class WeekTest extends TestCase
             $class = get_class($validator);
             $this->assertTrue(in_array($class, $expectedClasses), $class);
             switch ($class) {
-                case 'Zend\Validator\Regex':
-                    $this->assertEquals('/^#[0-9]{4}\-W[0-9]{2}$/', $validator->getPattern());
-                    break;
                 case 'Zend\Validator\GreaterThan':
                     $this->assertTrue($validator->getInclusive());
                     $this->assertEquals('1970-W01', $validator->getMin());
@@ -59,5 +56,30 @@ class WeekTest extends TestCase
                     break;
             }
         }
+    }
+
+    public function weekValuesDataProvider()
+    {
+        return array(
+                //    value        expected
+                array('2012-W01',  true),
+                array('2012-W52',  true),
+                array('2012-01',   false),
+                array('W12-2012',  false),
+                array('2012-W1',   false),
+                array('12-W01',    false),
+        );
+    }
+
+    /**
+     * @dataProvider weekValuesDataProvider
+     */
+    public function testHTML5WeekValidation($value, $expected)
+    {
+        $element = new WeekElement('foo');
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $weekValidator = $inputSpec['validators'][0];
+        $this->assertEquals($expected, $weekValidator->isValid($value));
     }
 }

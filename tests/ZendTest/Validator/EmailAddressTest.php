@@ -279,14 +279,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // Are MX checks supported by this system?
         if (!$validator->isMxSupported()) {
             $this->markTestSkipped('Testing MX records is not supported with this configuration');
-
-            return;
         }
 
         $valuesExpected = array(
-            array(true, array('Bob.Jones@zend.com', 'Bob.Jones@php.net')),
+            array(true,  array('Bob.Jones@zend.com',        'Bob.Jones@php.net')),
             array(false, array('Bob.Jones@bad.example.com', 'Bob.Jones@anotherbad.example.com'))
-            );
+        );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()));
@@ -323,8 +321,6 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // Are MX checks supported by this system?
         if (!$validator->isMxSupported()) {
             $this->markTestSkipped('Testing MX records is not supported with this configuration');
-
-            return;
         }
 
         $email = 'good@example.com';
@@ -601,8 +597,6 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
 
         if (!$validator->isMxSupported()) {
             $this->markTestSkipped('Testing MX records is not supported with this configuration');
-
-            return;
         }
 
         $this->assertTrue($validator->isValid('john.doe@gmail.com'));

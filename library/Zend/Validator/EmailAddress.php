@@ -33,7 +33,7 @@ class EmailAddress extends AbstractValidator
         self::INVALID            => "Invalid type given. String expected",
         self::INVALID_FORMAT     => "The input is not a valid email address. Use the basic format local-part@hostname",
         self::INVALID_HOSTNAME   => "'%hostname%' is not a valid hostname for the email address",
-        self::INVALID_MX_RECORD  => "'%hostname%' does not appear to have a valid MX record for the email address",
+        self::INVALID_MX_RECORD  => "'%hostname%' does not appear to have any valid MX or A records for the email address",
         self::INVALID_SEGMENT    => "'%hostname%' is not in a routable network segment. The email address should not be resolved from public network",
         self::DOT_ATOM           => "'%localPart%' can not be matched against dot-atom format",
         self::QUOTED_STRING      => "'%localPart%' can not be matched against quoted-string format",
@@ -124,6 +124,7 @@ class EmailAddress extends AbstractValidator
         if ($messageKey === null) {
             $this->options['hostnameValidator']->setMessage($messageString);
             parent::setMessage($messageString);
+
             return $this;
         }
 
@@ -157,6 +158,7 @@ class EmailAddress extends AbstractValidator
         }
 
         $this->options['hostnameValidator'] = $hostnameValidator;
+
         return $this;
     }
 
@@ -217,6 +219,7 @@ class EmailAddress extends AbstractValidator
     public function useMxCheck($mx)
     {
         $this->options['useMxCheck'] = (bool) $mx;
+
         return $this;
     }
 
@@ -239,6 +242,7 @@ class EmailAddress extends AbstractValidator
     public function useDeepMxCheck($deep)
     {
         $this->options['useDeepMxCheck'] = (bool) $deep;
+
         return $this;
     }
 
@@ -262,6 +266,7 @@ class EmailAddress extends AbstractValidator
     public function useDomainCheck($domain = true)
     {
         $this->options['useDomainCheck'] = (boolean) $domain;
+
         return $this;
     }
 
@@ -321,6 +326,7 @@ class EmailAddress extends AbstractValidator
                 return false;
             }
         }
+
         return true;
     }
 
@@ -388,6 +394,14 @@ class EmailAddress extends AbstractValidator
         }
 
         arsort($this->mxRecord);
+
+        //Fallback to IPv4 hosts if no MX record found (RFC 2821 SS 5).
+        if (!$result) {
+            $result = gethostbynamel($this->hostname);
+            if (is_array($result)) {
+                $this->mxRecord = array_flip($result);
+            }
+        }
 
         if (!$result) {
             $this->error(self::INVALID_MX_RECORD);
@@ -461,6 +475,7 @@ class EmailAddress extends AbstractValidator
 
         $this->localPart = $matches[1];
         $this->hostname  = $matches[2];
+
         return true;
     }
 
@@ -479,6 +494,7 @@ class EmailAddress extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -488,6 +504,7 @@ class EmailAddress extends AbstractValidator
         // Split email address up and disallow '..'
         if (!$this->splitEmailParts($value)) {
             $this->error(self::INVALID_FORMAT);
+
             return false;
         }
 

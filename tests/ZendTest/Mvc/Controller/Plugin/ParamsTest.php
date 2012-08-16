@@ -157,7 +157,7 @@ class ParamsTest extends TestCase
             'tmp_name' => '/tmp/' . uniqid(),
             'error'    => UPLOAD_ERR_OK,
         );
-		
+
         $file2 = array(
             'name'     => 'file2.txt',
             'type'     => 'text/plain',

@@ -469,7 +469,7 @@ class Fieldset extends Element implements FieldsetInterface
      * @return boolean
      */
     public function acceptObject($object) {
-        return $fieldset->object && $object instanceof $this->object;
+        return $this->object && $object instanceof $this->object;
     }
 
     /**

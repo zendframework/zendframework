@@ -66,7 +66,7 @@ abstract class AbstractController implements
     /**
      * @var ServiceLocatorInterface
      */
-    protected $serviceManager;
+    protected $serviceLocator;
 
     /**
      * @var string
@@ -80,6 +80,39 @@ abstract class AbstractController implements
      * @return mixed
      */
     abstract public function onDispatch(MvcEvent $e);
+
+
+    /**
+     * Dispatch a request
+     *
+     * @events dispatch.pre, dispatch.post
+     * @param  Request $request
+     * @param  null|Response $response
+     * @return Response|mixed
+     */
+    public function dispatch(Request $request, Response $response = null)
+    {
+        $this->request = $request;
+        if (!$response) {
+            $response = new HttpResponse();
+        }
+        $this->response = $response;
+
+        $e = $this->getEvent();
+        $e->setRequest($request)
+          ->setResponse($response)
+          ->setTarget($this);
+
+        $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
+            return ($test instanceof Response);
+        });
+
+        if ($result->stopped()) {
+            return $result->last();
+        }
+
+        return $e->getResult();
+    }
 
     /**
      * Get request object
@@ -184,12 +217,12 @@ abstract class AbstractController implements
     /**
      * Set serviceManager instance
      *
-     * @param  ServiceLocatorInterface $serviceManager
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return void
      */
-    public function setServiceLocator(ServiceLocatorInterface $serviceManager)
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
-        $this->serviceManager = $serviceManager;
+        $this->serviceLocator = $serviceLocator;
     }
 
     /**
@@ -199,7 +232,7 @@ abstract class AbstractController implements
      */
     public function getServiceLocator()
     {
-        return $this->serviceManager;
+        return $this->serviceLocator;
     }
 
     /**

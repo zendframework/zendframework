@@ -66,7 +66,7 @@ abstract class AbstractController implements
     /**
      * @var ServiceLocatorInterface
      */
-    protected $serviceManager;
+    protected $serviceLocator;
 
     /**
      * @var string
@@ -184,12 +184,12 @@ abstract class AbstractController implements
     /**
      * Set serviceManager instance
      *
-     * @param  ServiceLocatorInterface $serviceManager
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return void
      */
-    public function setServiceLocator(ServiceLocatorInterface $serviceManager)
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
-        $this->serviceManager = $serviceManager;
+        $this->serviceLocator = $serviceLocator;
     }
 
     /**
@@ -199,7 +199,7 @@ abstract class AbstractController implements
      */
     public function getServiceLocator()
     {
-        return $this->serviceManager;
+        return $this->serviceLocator;
     }
 
     /**

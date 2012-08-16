@@ -28,71 +28,87 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function __invoke($param = NULL, $default = null)
+    public function __invoke($param = null, $default = null)
     {
-        if ($param === NULL) {
+        if ($param === null) {
             return $this;
         }
         return $this->fromRoute($param, $default);
     }
 
     /**
-     * Retrieve a named $_FILES value
+     * Return all files or a single file.
      *
-     * @param  string $name
-     * @param  mixed $default
+     * @param  string $name File name to retrieve, or null to get all.
+     * @param  mixed $default Default value to use when the file is missing.
      * @return array|\ArrayAccess|null
      */
-    public function fromFiles($name, $default = null)
+    public function fromFiles($name = null, $default = null)
     {
-        return $this->getController()->getRequest()->getFiles($name, $default);
+        if ($name === null) {
+            return $this->getController()->getRequest()->getFiles($name, $default)->toArray();
+        } else {
+            return $this->getController()->getRequest()->getFiles($name, $default);
+        }
     }
 
     /**
-     * Get a header
+     * Return all header parameters or a single header parameter.
      *
-     * @param  string $header
-     * @param  mixed $default
+     * @param  string $header Header name to retrieve, or null to get all.
+     * @param  mixed $default Default value to use when the requested header is missing.
      * @return null|\Zend\Http\Header\HeaderInterface
      */
-    public function fromHeader($header, $default = null)
+    public function fromHeader($header = null, $default = null)
     {
-        return $this->getController()->getRequest()->getHeaders($header, $default);
+        if ($header === null) {
+            return $this->getController()->getRequest()->getHeaders($header, $default)->toArray();
+        } else {
+            return $this->getController()->getRequest()->getHeaders($header, $default);
+        }
     }
 
     /**
-     * Get a param from POST.
+     * Return all post parameters or a single post parameter.
      *
-     * @param string $param
-     * @param mixed $default
+     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      */
-    public function fromPost($param, $default = null)
+    public function fromPost($param = null, $default = null)
     {
-        return $this->getController()->getRequest()->getPost($param, $default);
+        if ($param === null) {
+            return $this->getController()->getRequest()->getPost($param, $default)->toArray();
+        } else {
+            return $this->getController()->getRequest()->getPost($param, $default);
+        }
     }
 
     /**
-     * Get a param from QUERY.
+     * Return all query parameters or a single query parameter.
      *
-     * @param string $param
-     * @param mixed $default
+     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      */
-    public function fromQuery($param, $default = null)
+    public function fromQuery($param = null, $default = null)
     {
-        return $this->getController()->getRequest()->getQuery($param, $default);
+        if ($param === null) {
+            return $this->getController()->getRequest()->getQuery($param, $default)->toArray();
+        } else {
+            return $this->getController()->getRequest()->getQuery($param, $default);
+        }
     }
 
     /**
-     * Get a param from the route match.
+     * Return all route parameters or a single route parameter.
      *
-     * @param string $param
-     * @param mixed $default
+     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      * @throws RuntimeException
      */
-    public function fromRoute($param, $default = null)
+    public function fromRoute($param = null, $default = null)
     {
         $controller = $this->getController();
 
@@ -102,6 +118,10 @@ class Params extends AbstractPlugin
             );
         }
 
-        return $controller->getEvent()->getRouteMatch()->getParam($param, $default);
+        if ($param === null) {
+            return $controller->getEvent()->getRouteMatch()->getParams();
+        } else {
+            return $controller->getEvent()->getRouteMatch()->getParam($param, $default);
+        }
     }
 }

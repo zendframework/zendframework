@@ -187,10 +187,10 @@ class ParamsTest extends TestCase
     {
         $header = new GenericHeader('X-TEST', 'test');
         $header2 = new GenericHeader('OTHER-TEST', 'value:12345');
-		
+
         $this->request->getHeaders()->addHeader($header);
         $this->request->getHeaders()->addHeader($header2);
-		
+
         $this->controller->dispatch($this->request);
 
         $value = $this->plugin->fromHeader();

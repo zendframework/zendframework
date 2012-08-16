@@ -459,15 +459,15 @@ class Fieldset extends Element implements FieldsetInterface
     {
         return $this->object;
     }
-    
-    
+
     /**
      * Checks if the object can be set in this fieldset
      *
      * @param object $object
      * @return boolean
      */
-    public function acceptObject($object) {
+    public function allowObjectBinding($object)
+    {
         return $this->object && $object instanceof $this->object;
     }
 
@@ -497,13 +497,14 @@ class Fieldset extends Element implements FieldsetInterface
         }
         return $this->hydrator;
     }
-    
+
     /**
      * Checks if this fieldset can bind data
-     * 
+     *
      * @return boolean
      */
-    public function acceptValues() {
+    public function allowValueBinding()
+    {
         return is_object($this->object);
     }
 
@@ -524,8 +525,8 @@ class Fieldset extends Element implements FieldsetInterface
             }
 
             $element = $this->byName[$name];
-            
-            if($element instanceof FieldsetInterface && $element->acceptValues()) {
+
+            if($element instanceof FieldsetInterface && $element->allowValueBinding()) {
                 $value = $element->bindValues($value);
             }
 
@@ -589,8 +590,8 @@ class Fieldset extends Element implements FieldsetInterface
 
             if (isset($values[$name])) {
                 $object = $values[$name];
-                
-                if($fieldset->acceptObject($object)) {
+
+                if($fieldset->allowObjectBinding($object)) {
                     $fieldset->setObject($object);
                     $values[$name] = $fieldset->extract();
                 }

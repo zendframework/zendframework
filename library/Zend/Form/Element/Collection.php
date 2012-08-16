@@ -126,18 +126,18 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         return $this;
     }
 
-    
+
     /**
      * Checks if the object can be set in this fieldset
      *
      * @param object $object
      * @return boolean
      */
-    public function acceptObject($object) {
+    public function allowObjectBinding($object)
+    {
         return true;
     }
-    
-    
+
     /**
      * Set the object used by the hydrator
      * In this case the "object" is a collection of objects
@@ -147,7 +147,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      * @throws Exception\InvalidArgumentException
      */
     public function setObject($object)
-    {        
+    {
         if (!is_array($object) && !$object instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects an array or Traversable object argument; received "%s"',
@@ -155,12 +155,12 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
                     (is_object($object) ? get_class($object) : gettype($object))
             ));
         }
-    
+
         $this->object = $object;
         return $this;
     }
-    
-    
+
+
     /**
      * Populate values
      *
@@ -242,13 +242,14 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             );
         }
     }
-    
+
     /**
      * Checks if this fieldset can bind data
      *
      * @return boolean
      */
-    public function acceptValues() {
+    public function allowValueBinding()
+    {
         return true;
     }
 

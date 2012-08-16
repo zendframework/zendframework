@@ -111,14 +111,14 @@ interface FieldsetInterface extends
      * @return mixed
      */
     public function getObject();
-    
+
     /**
      * Checks if the object can be set in this fieldset
      *
      * @param $object
      * @return boolean
      */
-    public function acceptObject($object);
+    public function allowObjectBinding($object);
 
     /**
      * Set the hydrator to use when binding an object to the element
@@ -142,11 +142,11 @@ interface FieldsetInterface extends
      * @return mixed
      */
     public function bindValues(array $values = array());
-    
+
     /**
      * Checks if this fieldset can bind data
      *
      * @return boolean
      */
-    public function acceptValues();
+    public function allowValueBinding();
 }

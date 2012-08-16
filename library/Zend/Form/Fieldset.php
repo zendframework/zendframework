@@ -11,7 +11,6 @@
 namespace Zend\Form;
 
 use Traversable;
-use Zend\Form\Element\Collection;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\PriorityQueue;
@@ -186,8 +185,8 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            if ($elementOrFieldset instanceof Collection) {
-                $elementOrFieldset->prepareCollection();
+            if ($elementOrFieldset instanceof FieldsetPrepareAwareInterface) {
+                $elementOrFieldset->prepareFieldset();
             }
 
             $this->fieldsets[$name] = $elementOrFieldset;
@@ -498,6 +497,15 @@ class Fieldset extends Element implements FieldsetInterface
         }
         return $this->hydrator;
     }
+    
+    /**
+     * Checks if this fieldset can bind data
+     * 
+     * @return boolean
+     */
+    public function acceptValues() {
+        return is_object($this->object);
+    }
 
     /**
      * Bind values to the bound object
@@ -516,10 +524,8 @@ class Fieldset extends Element implements FieldsetInterface
             }
 
             $element = $this->byName[$name];
-
-            if ($element instanceof Collection) {
-                $value = $element->bindValues($value);
-            } elseif ($element instanceof FieldsetInterface && is_object($element->object)) {
+            
+            if($element instanceof FieldsetInterface && $element->acceptValues()) {
                 $value = $element->bindValues($value);
             }
 

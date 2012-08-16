@@ -16,6 +16,7 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
+use Zend\Form\FieldsetPrepareAwareInterface;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\ArrayUtils;
@@ -25,7 +26,7 @@ use Zend\Stdlib\ArrayUtils;
  * @package    Zend_Form
  * @subpackage Element
  */
-class Collection extends Fieldset
+class Collection extends Fieldset implements FieldsetPrepareAwareInterface
 {
     /**
      * Default template placeholder
@@ -240,6 +241,15 @@ class Collection extends Fieldset
                 )
             );
         }
+    }
+    
+    /**
+     * Checks if this fieldset can bind data
+     *
+     * @return boolean
+     */
+    public function acceptValues() {
+        return true;
     }
 
     /**
@@ -481,7 +491,7 @@ class Collection extends Fieldset
      *
      * @return void
      */
-    protected function prepareCollection()
+    public function prepareFieldset()
     {
         if ($this->targetElement !== null) {
             for ($i = 0 ; $i != $this->count ; ++$i) {

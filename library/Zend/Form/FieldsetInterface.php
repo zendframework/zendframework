@@ -142,4 +142,11 @@ interface FieldsetInterface extends
      * @return mixed
      */
     public function bindValues(array $values = array());
+    
+    /**
+     * Checks if this fieldset can bind data
+     *
+     * @return boolean
+     */
+    public function acceptValues();
 }

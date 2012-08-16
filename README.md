@@ -4,47 +4,26 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0rc3*
+*Zend Framework 2.0.0rc4*
 
-This is the third release candidate for 2.0.0. We will be releasing RCs
+This is the fourth release candidate for 2.0.0. We will be releasing RCs
 on a weekly basis until we feel all critical issues are addressed. At
 this time, we anticipate few API changes before the stable release, and
 recommend testing your production applications against it.
 
-09 August 2012
+17 August 2012
 
-### UPDATES IN RC3
+### UPDATES IN RC4
 
-- Zend\Http
-  - Socket client: Updated to enable verify_peer by default, to prevent
-    potential Man-In-The-Middle attacks.
+- Zend\Form
+  - FieldsetInterface now defines the methods allowObjectBinding() and
+    allowValueBinding().
+  - New interface, FieldsetPrepareAwareInterface. Collection and Fieldset both
+    implement this.
+  - See https://github.com/zendframework/zf2/pull/2184 for details
 
-- Zend\EventManager\SharedEventManager
-  - SharedEventManager::attach now returns a callbackhandler for detaching,
-    inline with what EventManager::attach does.
-
-- Zend\Form\Annotation
-  - Form annotation builder - if isRequired is true, automatically add required attribute.
-
-- Zend\Mvc\Controller
-  - Removed duplication between AbstractActionController and AbstractRestfullController.
-    The AbstractController has the shared functions of both and allows to reuse it without the unneeded
-    specific functions from AbstractActionController.
-
-- Zend\Feed
-  - Added trim() to XML input when importing an XML or HTML string. This prevent a few isolated problems
-    with the feeds of some applications having illegal preceeding space in an XML feed.
-
-- PSR-2 compatible
-  - We refactored some of the components in order to be PSR-2 compatible. We will continue to check for
-    PSR-2 compatibility in the next RC.
-
-- Removed the doc2rst scripts
-  - We removed the scripts bin/doc2rst.php, bin/doc2rst.xsl, and bin/ZendBin for the conversion from
-    DocBook to reStructuredText (all the doc files have been converted).
-
-Around 65 pull requests for a variety of features and bugfixes were handled
-since RC2!
+Around XX pull requests for a variety of features and bugfixes were handled
+since RC3!
 
 ### SYSTEM REQUIREMENTS
 

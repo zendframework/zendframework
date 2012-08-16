@@ -60,7 +60,7 @@ class Select extends Element implements InputProviderInterface
     {
         if (null === $this->validator) {
             $validator = new InArrayValidator(array(
-                'haystack' => (array) $this->getAttribute('options'),
+                'haystack' => $this->getOptionAttributeValues(),
                 'strict'   => false
             ));
 
@@ -97,5 +97,21 @@ class Select extends Element implements InputProviderInterface
         );
 
         return $spec;
+    }
+
+    /**
+     * Get only the values from the options attribute
+     *
+     * @return array
+     */
+    protected function getOptionAttributeValues()
+    {
+        $values = array();
+        $options = $this->getAttribute('options');
+        foreach ($options as $key => $optionSpec) {
+            $value = (is_array($optionSpec)) ? $optionSpec['value'] : $key;
+            $values[] = $value;
+        }
+        return $values;
     }
 }

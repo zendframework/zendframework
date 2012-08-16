@@ -460,6 +460,17 @@ class Fieldset extends Element implements FieldsetInterface
     {
         return $this->object;
     }
+    
+    
+    /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param object $object
+     * @return boolean
+     */
+    public function acceptObject($object) {
+        return $fieldset->object && $object instanceof $this->object;
+    }
 
     /**
      * Set the hydrator to use when binding an object to the element
@@ -572,12 +583,9 @@ class Fieldset extends Element implements FieldsetInterface
 
             if (isset($values[$name])) {
                 $object = $values[$name];
-
-                // Is the object bound to the fieldset of the same type ? Note that we are using a little hack
-                // here, as in case of collection, we bind array to object instance, and let the collection extract
-                // the data
-                if ($fieldset instanceof Collection || (is_object($object) && $fieldset->object && $object instanceof $fieldset->object)) {
-                    $fieldset->object = $object;
+                
+                if($fieldset->acceptObject($object)) {
+                    $fieldset->setObject($object);
                     $values[$name] = $fieldset->extract();
                 }
             }

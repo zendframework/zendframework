@@ -111,6 +111,14 @@ interface FieldsetInterface extends
      * @return mixed
      */
     public function getObject();
+    
+    /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param $object
+     * @return boolean
+     */
+    public function acceptObject($object);
 
     /**
      * Set the hydrator to use when binding an object to the element

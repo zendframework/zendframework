@@ -125,6 +125,41 @@ class Collection extends Fieldset
         return $this;
     }
 
+    
+    /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param object $object
+     * @return boolean
+     */
+    public function acceptObject($object) {
+        return true;
+    }
+    
+    
+    /**
+     * Set the object used by the hydrator
+     * In this case the "object" is a collection of objects
+     *
+     * @param  array|\Traversable $object
+     * @return Fieldset|FieldsetInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setObject($object)
+    {        
+        if (!is_array($object) && !$object instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    '%s expects an array or Traversable object argument; received "%s"',
+                    __METHOD__,
+                    (is_object($object) ? get_class($object) : gettype($object))
+            ));
+        }
+    
+        $this->object = $object;
+        return $this;
+    }
+    
+    
     /**
      * Populate values
      *

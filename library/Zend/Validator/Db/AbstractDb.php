@@ -14,6 +14,7 @@ use Traversable;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Adapter\Driver\DriverInterface as DbDriverInterface;
 use Zend\Db\Sql\Select as DbSelect;
+use Zend\Db\Sql\TableIdentifier;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
@@ -292,7 +293,8 @@ abstract class AbstractDb extends AbstractValidator
              * Build select object
              */
             $select = new DbSelect();
-            $select->from($this->table, $this->schema)->columns(
+            $tableIdentifier = new TableIdentifier($this->table, $this->schema);
+            $select->from($tableIdentifier)->columns(
                 array($this->field)
             );
 

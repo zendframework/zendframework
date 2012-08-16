@@ -150,9 +150,9 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     {
         if (!is_array($object) && !$object instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    '%s expects an array or Traversable object argument; received "%s"',
-                    __METHOD__,
-                    (is_object($object) ? get_class($object) : gettype($object))
+                '%s expects an array or Traversable object argument; received "%s"',
+                __METHOD__,
+                (is_object($object) ? get_class($object) : gettype($object))
             ));
         }
 

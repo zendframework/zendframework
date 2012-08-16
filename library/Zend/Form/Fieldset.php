@@ -468,7 +468,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function allowObjectBinding($object)
     {
-        return $this->object && $object instanceof $this->object;
+        return ($this->object && $object instanceof $this->object);
     }
 
     /**
@@ -572,6 +572,7 @@ class Fieldset extends Element implements FieldsetInterface
         if (!is_object($this->object)) {
             return array();
         }
+
         $hydrator = $this->getHydrator();
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
             return array();
@@ -591,7 +592,7 @@ class Fieldset extends Element implements FieldsetInterface
             if (isset($values[$name])) {
                 $object = $values[$name];
 
-                if($fieldset->allowObjectBinding($object)) {
+                if ($fieldset->allowObjectBinding($object)) {
                     $fieldset->setObject($object);
                     $values[$name] = $fieldset->extract();
                 }

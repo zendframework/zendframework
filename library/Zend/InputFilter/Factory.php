@@ -157,30 +157,30 @@ class Factory
                     }
                     break;
                 case 'filters':
-                    if (!is_array($value) && !$value instanceof Traversable && !$value instanceof FilterChain) {
+                    if ($value instanceof FilterChain) {
+                        $input->setFilterChain($value);
+                        break;
+                    }
+                    if (!is_array($value) && !$value instanceof Traversable) {
                         throw new Exception\RuntimeException(sprintf(
                             '%s expects the value associated with "filters" to be an array/Traversable of filters or filter specifications, or a FilterChain; received "%s"',
                             __METHOD__,
                             (is_object($value) ? get_class($value) : gettype($value))
                         ));
                     }
-                    if ($value instanceof FilterChain) {
-                        $input->setFilterChain($value);
-                        break;
-                    }
                     $this->populateFilters($input->getFilterChain(), $value);
                     break;
                 case 'validators':
-                    if (!is_array($value) && !$value instanceof Traversable && !$value instanceof ValidatorChain) {
+                    if ($value instanceof ValidatorChain) {
+                        $input->setValidatorChain($value);
+                        break;
+                    }
+                    if (!is_array($value) && !$value instanceof Traversable) {
                         throw new Exception\RuntimeException(sprintf(
                             '%s expects the value associated with "validators" to be an array/Traversable of validators or validator specifications, or a ValidatorChain; received "%s"',
                             __METHOD__,
                             (is_object($value) ? get_class($value) : gettype($value))
                         ));
-                    }
-                    if ($value instanceof ValidatorChain) {
-                        $input->setValidatorChain($value);
-                        break;
                     }
                     $this->populateValidators($input->getValidatorChain(), $value);
                     break;

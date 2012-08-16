@@ -46,13 +46,6 @@ class SelectTest extends TestCase
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
             $this->assertTrue(in_array($class, $expectedClasses), $class);
-            switch ($class) {
-                case 'Zend\Validator\InArray':
-                    $this->assertEquals($element->getAttribute('options'), $validator->getHaystack());
-                    break;
-                default:
-                    break;
-            }
         }
     }
 
@@ -85,6 +78,44 @@ class SelectTest extends TestCase
                 default:
                     break;
             }
+        }
+    }
+
+    public function selectOptionsDataProvider()
+    {
+        return array(
+            array(
+                array('foo', 'bar'),
+                array(
+                    'foo' => 'My Foo Label',
+                    'bar' => 'My Bar Label',
+                )
+            ),
+            array(
+                array('foo', 'bar'),
+                array(
+                    0 => array('label' => 'My Foo Label', 'value' => 'foo'),
+                    1 => array('label' => 'My Bar Label', 'value' => 'bar'),
+                )
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider selectOptionsDataProvider
+     */
+    public function testInArrayValidationOfOptions($valueTests, $options)
+    {
+        $element = new SelectElement('my-select');
+        $element->setAttributes(array(
+            'options' => $options,
+        ));
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $inArrayValidator = $inputSpec['validators'][0];
+        $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
+        foreach ($valueTests as $valueToTest) {
+            $this->assertTrue($inArrayValidator->isValid($valueToTest));
         }
     }
 }

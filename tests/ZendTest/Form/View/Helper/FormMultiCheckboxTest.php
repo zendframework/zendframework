@@ -31,9 +31,9 @@ class FormMultiCheckboxTest extends CommonTestCase
     {
         $element = new MultiCheckboxElement('foo');
         $options = array(
-            'This is the first label' => 'value1',
-            'This is the second label' => 'value2',
-            'This is the third label' => 'value3',
+            'value1' => 'This is the first label',
+            'value2' => 'This is the second label',
+            'value3' => 'This is the third label',
         );
         $element->setAttribute('options', $options);
         return $element;
@@ -43,15 +43,15 @@ class FormMultiCheckboxTest extends CommonTestCase
     {
         $element = new MultiCheckboxElement('foo');
         $options = array(
-            'This is the first label' => 'value1',
-            'This is the second label' => array(
+            'value1' => 'This is the first label',
+            1 => array(
                 'value'           => 'value2',
                 'label'           => 'This is the second label (overridden)',
                 'disabled'        => false,
                 'label_attributes' => array('class' => 'label-class'),
                 'attributes'      => array('class' => 'input-class'),
             ),
-            'This is the third label' => 'value3',
+            'value3' => 'This is the third label',
         );
         $element->setAttribute('options', $options);
         return $element;
@@ -68,7 +68,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertEquals(3, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
 
-        foreach ($options as $label => $value) {
+        foreach ($options as $value => $label) {
             $this->assertContains(sprintf('>%s</label>', $label), $markup);
             $this->assertContains(sprintf('value="%s"', $value), $markup);
         }
@@ -119,7 +119,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertEquals(4, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
 
-        foreach ($options as $label => $value) {
+        foreach ($options as $value => $label) {
             $this->assertContains(sprintf('>%s</label>', $label), $markup);
             $this->assertContains(sprintf('value="%s"', $value), $markup);
         }
@@ -156,7 +156,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertEquals(3, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
 
-        foreach ($options as $label => $value) {
+        foreach ($options as $value => $label) {
             $this->assertContains(sprintf('<label>%s<', $label), $markup);
         }
     }

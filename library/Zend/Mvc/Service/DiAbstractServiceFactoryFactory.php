@@ -13,6 +13,7 @@ namespace Zend\Mvc\Service;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * @category   Zend
@@ -29,6 +30,13 @@ class DiAbstractServiceFactoryFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new DiAbstractServiceFactory($serviceLocator->get('Di'), DiAbstractServiceFactory::USE_SL_BEFORE_DI);
+        $factory = new DiAbstractServiceFactory($serviceLocator->get('Di'), DiAbstractServiceFactory::USE_SL_BEFORE_DI);
+
+        if ($serviceLocator instanceof ServiceManager) {
+            /* @var $serviceLocator ServiceManager */
+            $serviceLocator->addAbstractFactory($factory);
+        }
+
+        return $factory;
     }
 }

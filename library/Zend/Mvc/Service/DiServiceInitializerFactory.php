@@ -13,6 +13,7 @@ namespace Zend\Mvc\Service;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * @category   Zend
@@ -22,13 +23,20 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class DiServiceInitializerFactory implements FactoryInterface
 {
     /**
-     * Class responsible for instantiating a DiStrictAbstractServiceFactory
+     * Class responsible for instantiating a DiServiceInitializer
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return DiStrictAbstractServiceFactory
+     * @return DiServiceInitializer
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new DiServiceInitializer($serviceLocator->get('Di'), $serviceLocator);
+        $initializer = new DiServiceInitializer($serviceLocator->get('Di'), $serviceLocator);
+
+        if ($serviceLocator instanceof ServiceManager) {
+            /* @var $serviceLocator ServiceManager */
+            $serviceLocator->addInitializer($initializer);
+        }
+
+        return $initializer;
     }
 }

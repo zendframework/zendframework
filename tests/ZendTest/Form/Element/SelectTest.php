@@ -118,4 +118,10 @@ class SelectTest extends TestCase
             $this->assertTrue($inArrayValidator->isValid($valueToTest));
         }
     }
+
+    public function testOptionsHasArrayOnConstruct()
+    {
+        $element = new SelectElement();
+        $this->assertTrue(is_array($element->getAttribute('options')));
+    }
 }

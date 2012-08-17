@@ -43,7 +43,8 @@ class Select extends Element implements InputProviderInterface
      * @var array
      */
     protected $attributes = array(
-        'type' => 'select',
+        'type'    => 'select',
+        'options' => array(),
     );
 
     /**

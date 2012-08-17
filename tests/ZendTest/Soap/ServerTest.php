@@ -858,6 +858,9 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_string($server->mockSoapServer->handle[0]));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testShouldThrowExceptionIfHandledRequestContainsDoctype()
     {
         $server = new Server();
@@ -881,7 +884,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
         $response = $server->handle($request);
-        $this->assertContains($response, 'Invalid XML');
+        $this->assertContains('Invalid XML', $response->getMessage());
     }
 
 }

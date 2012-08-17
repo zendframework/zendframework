@@ -798,16 +798,16 @@ class Server implements \Zend\Server\Server
 
         $soap = $this->_getSoap();
 
+        $fault = false;
         ob_start();
         if ($setRequestException instanceof \Exception) {
-            // Send SOAP fault message if we've catched exception
-            $soap->fault('Sender', $setRequestException->getMessage());
+            // Create SOAP fault message if we've caught a request exception
+            $fault = $this->fault($setRequestException->getMessage(), 'Sender');
         } else {
             try {
                 $soap->handle($this->request);
             } catch (\Exception $e) {
                 $fault = $this->fault($e);
-                $soap->fault($fault->faultcode, $fault->faultstring);
             }
         }
         $this->response = ob_get_clean();
@@ -816,8 +816,12 @@ class Server implements \Zend\Server\Server
         restore_error_handler();
         ini_set('display_errors', $displayErrorsOriginalState);
 
+        // Send a fault, if we have one
+        if ($fault) {
+            $this->response = $fault;
+        }
+
         if (!$this->returnResponse) {
-            echo $this->response;
             return;
         }
 

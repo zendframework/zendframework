@@ -285,7 +285,17 @@ class Request
         // @see ZF-12293 - disable external entities for security purposes
         $loadEntities = libxml_disable_entity_loader(true);
         try {
-            $xml = new \SimpleXMLElement($request);
+            $dom = new \DOMDocument;
+            $dom->loadXML($request);
+            foreach ($dom->childNodes as $child) {
+                if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
+                    throw new Exception\ValueException(
+                        'Invalid XML: Detected use of illegal DOCTYPE'
+                    );
+                }
+            }
+            $xml = simplexml_import_dom($dom);
+            //$xml = new \SimpleXMLElement($request);
             libxml_disable_entity_loader($loadEntities);
         } catch (\Exception $e) {
             // Not valid XML

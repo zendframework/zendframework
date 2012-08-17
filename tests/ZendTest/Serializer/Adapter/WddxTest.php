@@ -197,7 +197,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalidXml()
+    public function testUnserializeInvalidXml()
     {
         if (!class_exists('SimpleXMLElement', false)) {
             $this->markTestSkipped('Skipped by missing ext/simplexml');
@@ -206,7 +206,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $value = 'not a serialized string';
         $this->setExpectedException(
             'Zend\Serializer\Exception\RuntimeException',
-            'String could not be parsed as XML'
+            'DOMDocument::loadXML(): Start tag expected'
         );
         $this->adapter->unserialize($value);
     }
@@ -223,5 +223,14 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             'Invalid wddx packet'
         );
         $this->adapter->unserialize($value);
+    }
+
+    public function testShouldThrowExceptionIfXmlToUnserializeFromContainsADoctype()
+    {
+        $value    = '<!DOCTYPE>'
+                  . '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><string>test</string></data></wddxPacket>';
+        $this->setExpectedException("Zend\Serializer\Exception\RuntimeException");
+        $data = $this->adapter->unserialize($value);
     }
 }

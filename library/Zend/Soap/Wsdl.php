@@ -94,6 +94,13 @@ class Wsdl
         if (!$this->dom->loadXML($wsdl)) {
             throw new Exception\RuntimeException('Unable to create DomDocument');
         } else {
+            foreach ($this->dom->childNodes as $child) {
+                if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
+                    throw new Exception\RuntimeException(
+                        'Invalid XML: Detected use of illegal DOCTYPE'
+                    );
+                }
+            }
             $this->wsdl = $this->dom->documentElement;
         }
         libxml_disable_entity_loader(false);

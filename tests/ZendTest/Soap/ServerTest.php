@@ -857,4 +857,34 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $r = $server->handle(new \DOMDocument('1.0', 'UTF-8'));
         $this->assertTrue(is_string($server->mockSoapServer->handle[0]));
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testShouldThrowExceptionIfHandledRequestContainsDoctype()
+    {
+        $server = new Server();
+        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setReturnResponse(true);
+
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+
+        $request =
+            '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<!DOCTYPE foo>' . "\n"
+          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             . 'xmlns:ns1="http://framework.zend.com" '
+                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .     '<SOAP-ENV:Body>'
+          .         '<ns1:testFunc2>'
+          .             '<param0 xsi:type="xsd:string">World</param0>'
+          .         '</ns1:testFunc2>'
+          .     '</SOAP-ENV:Body>'
+          . '</SOAP-ENV:Envelope>' . "\n";
+        $response = $server->handle($request);
+        $this->assertContains('Invalid XML', $response->getMessage());
+    }
+
 }

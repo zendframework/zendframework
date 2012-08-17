@@ -115,7 +115,17 @@ class Wddx extends AbstractAdapter
             // or based on an invalid wddx string
             try {
                 $oldLibxmlDisableEntityLoader = libxml_disable_entity_loader(true);
-                $simpleXml = new \SimpleXMLElement($wddx);
+                $dom = new \DOMDocument;
+                $dom->loadXML($wddx);
+                foreach ($dom->childNodes as $child) {
+                    if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
+                        throw new Exception\InvalidArgumentException(
+                            'Invalid XML: Detected use of illegal DOCTYPE'
+                        );
+                    }
+                }
+                $simpleXml = simplexml_import_dom($dom);
+                //$simpleXml = new \SimpleXMLElement($wddx);
                 libxml_disable_entity_loader($oldLibxmlDisableEntityLoader);
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null

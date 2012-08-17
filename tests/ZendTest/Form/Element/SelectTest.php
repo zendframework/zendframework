@@ -122,6 +122,6 @@ class SelectTest extends TestCase
     public function testOptionsHasArrayOnConstruct()
     {
         $element = new SelectElement();
-        $this->assertTrue(is_array($this->getAttribute('options')));
+        $this->assertTrue(is_array($element->getAttribute('options')));
     }
 }

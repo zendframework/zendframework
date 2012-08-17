@@ -822,6 +822,7 @@ class Server implements \Zend\Server\Server
         }
 
         if (!$this->returnResponse) {
+            echo $this->response;
             return;
         }
 

@@ -23,11 +23,11 @@ use Zend\Session;
  */
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Manager
      */
     protected $manager;
+
     /**
      * @var Container
      */

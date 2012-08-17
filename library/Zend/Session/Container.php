@@ -470,6 +470,7 @@ class Container extends ArrayObject
         }
 
         if (null === $vars) {
+            $this->expireKeys(); // first we need to expire global key, since it can already be expired
             $data = array('EXPIRE' => $ts);
         } elseif (is_array($vars)) {
             // Cannot pass "$this" to a lambda
@@ -518,6 +519,7 @@ class Container extends ArrayObject
         }
 
         if (null === $vars) {
+            $this->expireKeys(); // first we need to expire global key, since it can already be expired
             $data = array('EXPIRE_HOPS' => array('hops' => $hops, 'ts' => $ts));
         } elseif (is_array($vars)) {
             // Cannot pass "$this" to a lambda

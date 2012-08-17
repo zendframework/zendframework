@@ -70,6 +70,13 @@ class Local extends SOAPClient
         $this->server->handle($request);
         $response = ob_get_clean();
 
+        if ($response === null || $response === '') {
+            $serverResponse = $this->server->getResponse();
+            if ($serverResponse !== null) {
+                $response = $serverResponse;
+            }
+        }
+
         return $response;
     }
 }

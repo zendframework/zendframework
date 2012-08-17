@@ -666,6 +666,13 @@ class Server implements \Zend\Server\Server
             if (strlen($xml) == 0 || !$dom->loadXML($xml)) {
                 throw new Exception\InvalidArgumentException('Invalid XML');
             }
+            foreach ($dom->childNodes as $child) {
+                if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
+                    throw new Exception\InvalidArgumentException(
+                        'Invalid XML: Detected use of illegal DOCTYPE'
+                    );
+                }
+            }
             libxml_disable_entity_loader(false);
         }
         $this->request = $xml;

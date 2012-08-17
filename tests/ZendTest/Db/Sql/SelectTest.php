@@ -499,7 +499,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr10 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON "m" = "n"';
         $internalTests10 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
-            'processJoin'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
+            'processJoins'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
         );
 
         // join with columns
@@ -509,7 +509,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr11 = 'SELECT "foo".*, "zac"."bar" AS "bar", "zac"."baz" AS "baz" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
         $internalTests11 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac"."bar"', '"bar"'), array('"zac"."baz"', '"baz"')), '"foo"'),
-            'processJoin'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
+            'processJoins'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
         );
 
         // join with alternate type
@@ -519,7 +519,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr12 = 'SELECT "foo".*, "zac"."bar" AS "bar", "zac"."baz" AS "baz" FROM "foo" OUTER JOIN "zac" ON "m" = "n"';
         $internalTests12 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac"."bar"', '"bar"'), array('"zac"."baz"', '"baz"')), '"foo"'),
-            'processJoin'   => array(array(array('OUTER', '"zac"', '"m" = "n"')))
+            'processJoins'   => array(array(array('OUTER', '"zac"', '"m" = "n"')))
         );
 
         // join with column aliases
@@ -529,7 +529,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr13 = 'SELECT "foo".*, "zac"."bar" AS "BAR", "zac"."baz" AS "BAZ" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
         $internalTests13 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac"."bar"', '"BAR"'), array('"zac"."baz"', '"BAZ"')), '"foo"'),
-            'processJoin'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
+            'processJoins'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
         );
 
         // join with table aliases
@@ -539,7 +539,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr14 = 'SELECT "foo".*, "b".* FROM "foo" INNER JOIN "bar" AS "b" ON "b"."foo_id" = "foo"."foo_id"';
         $internalTests14 = array(
             'processSelect' => array(array(array('"foo".*'), array('"b".*')), '"foo"'),
-            'processJoin' => array(array(array('INNER', '"bar" AS "b"', '"b"."foo_id" = "foo"."foo_id"')))
+            'processJoins' => array(array(array('INNER', '"bar" AS "b"', '"b"."foo_id" = "foo"."foo_id"')))
         );
 
         // where (simple string)
@@ -679,7 +679,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr28 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON ("m" = "n" AND "c"."x") BETWEEN "x" AND "y"."z"';
         $internalTests28 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
-            'processJoin'   => array(array(array('INNER', '"zac"', '("m" = "n" AND "c"."x") BETWEEN "x" AND "y"."z"')))
+            'processJoins'   => array(array(array('INNER', '"zac"', '("m" = "n" AND "c"."x") BETWEEN "x" AND "y"."z"')))
         );
 
         // order with compound name
@@ -709,7 +709,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr31 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON (m = n AND c.x) BETWEEN x AND y.z';
         $internalTests31 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
-            'processJoin'   => array(array(array('INNER', '"zac"', '(m = n AND c.x) BETWEEN x AND y.z')))
+            'processJoins'   => array(array(array('INNER', '"zac"', '(m = n AND c.x) BETWEEN x AND y.z')))
         );
 
         $select32subselect = new Select;

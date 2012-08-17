@@ -32,7 +32,7 @@ class DbSelect implements AdapterInterface
     /**
      * Database query
      *
-     * @var \Zend\Db\Sql\Select
+     * @var Select
      */
     protected $select = null;
 
@@ -51,7 +51,9 @@ class DbSelect implements AdapterInterface
     /**
      * Constructor.
      *
-     * @param \Zend\Db\Sql\Select $select The select query
+     * @param Select $select The select query
+     * @param Adapter|Sql $adapterOrSqlObject DB adapter or Sql object
+     * @param null|ResultSetInterface $resultSetPrototype
      */
     public function __construct(Select $select, $adapterOrSqlObject, ResultSetInterface $resultSetPrototype = null)
     {
@@ -67,7 +69,7 @@ class DbSelect implements AdapterInterface
             );
         }
 
-        $this->sql = $adapterOrSqlObject;
+        $this->sql                = $adapterOrSqlObject;
         $this->resultSetPrototype = ($resultSetPrototype) ?: new ResultSet;
     }
 
@@ -85,7 +87,7 @@ class DbSelect implements AdapterInterface
         $select->limit($itemCountPerPage);
 
         $statement = $this->sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
+        $result    = $statement->execute();
 
         $resultSet = clone $this->resultSetPrototype;
         $resultSet->initialize($result);
@@ -100,22 +102,23 @@ class DbSelect implements AdapterInterface
      */
     public function count()
     {
-        if ($this->rowCount === null) {
-            $select = clone $this->select;
-            $select->reset(Select::COLUMNS);
-            $select->reset(Select::LIMIT);
-            $select->reset(Select::OFFSET);
-
-            $select->columns(array('c' => new Expression('COUNT(1)')));
-
-            $statement = $this->sql->prepareStatementForSqlObject($select);
-            $result = $statement->execute();
-            $row = $result->current();
-
-            $this->rowCount = $row['c'];
+        if ($this->rowCount !== null) {
+            return $this->rowCount;
         }
+
+        $select = clone $this->select;
+        $select->reset(Select::COLUMNS);
+        $select->reset(Select::LIMIT);
+        $select->reset(Select::OFFSET);
+
+        $select->columns(array('c' => new Expression('COUNT(1)')));
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $result    = $statement->execute();
+        $row       = $result->current();
+
+        $this->rowCount = $row['c'];
 
         return $this->rowCount;
     }
-
 }

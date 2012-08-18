@@ -58,6 +58,7 @@ class Socket implements HttpAdapter, StreamInterface
         'sslcert'               => null,
         'sslpassphrase'         => null,
         'sslverifypeer'         => true,
+        'sslcapath'             => null,
         'sslallowselfsigned'    => false,
         'sslusecontext'         => false
     );
@@ -188,6 +189,10 @@ class Socket implements HttpAdapter, StreamInterface
                     if (! stream_context_set_option($context, 'ssl', 'verify_peer',
                                                     $this->config['sslverifypeer'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');
+                    }
+                    if (! stream_context_set_option($context, 'ssl', 'capath',
+                                                    $this->config['sslcapath'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslcapath option');
                     }
                     if ($this->config['sslallowselfsigned'] !== null) {
                         if (! stream_context_set_option($context, 'ssl', 'allow_self_signed',

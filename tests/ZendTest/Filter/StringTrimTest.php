@@ -55,6 +55,19 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the filter follows expected behavior
+     *
+     * @return void
+     */
+    public function testUtf8()
+    {
+        if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
+            $this->markTestSkipped('PCRE update in 5.3.4 fixes unicode whitespace checking issues; in 5.3.3, this test fails due to outdated PCRE version');
+        }
+        $this->assertEquals('a', $this->_filter->filter(utf8_encode("\xa0a\xa0")));
+    }
+
+    /**
      * Ensures that getCharList() returns expected default value
      *
      * @return void

@@ -51,10 +51,14 @@ class PostRedirectGet extends AbstractPlugin
             }
 
             if ($redirectToUrl === false) {
-                return $redirector->toRoute($redirect);
+                $response = $redirector->toRoute($redirect);
+                $response->setStatusCode(303);
+                return $response;
             }
 
-            return $redirector->toUrl($redirect);
+            $response = $redirector->toUrl($redirect);
+            $response->setStatusCode(303);
+            return $response;
         } else {
             if ($container->post !== null) {
                 $post = $container->post;

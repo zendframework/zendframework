@@ -62,16 +62,46 @@ class MultiCheckboxTest extends TestCase
                 case 'Zend\Validator\Explode':
                     $inArrayValidator = $validator->getValidator();
                     $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
-
-                    $values = array_values($options);
-                    if ($element->useHiddenElement()) {
-                        $values[] = $element->getUncheckedValue();
-                    }
-                    $this->assertEquals($values, $inArrayValidator->getHaystack());
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    public function multiCheckboxOptionsDataProvider()
+    {
+        return array(
+            array(
+                array('foo', 'bar'),
+                array(
+                    'foo' => 'My Foo Label',
+                    'bar' => 'My Bar Label',
+                )
+            ),
+            array(
+                array('foo', 'bar'),
+                array(
+                    0 => array('label' => 'My Foo Label', 'value' => 'foo'),
+                    1 => array('label' => 'My Bar Label', 'value' => 'bar'),
+                )
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider multiCheckboxOptionsDataProvider
+     */
+    public function testInArrayValidationOfOptions($valueTests, $options)
+    {
+        $element = new MultiCheckboxElement('my-checkbox');
+        $element->setAttributes(array(
+            'options' => $options,
+        ));
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $explodeValidator = $inputSpec['validators'][0];
+        $this->assertInstanceOf('Zend\Validator\Explode', $explodeValidator);
+        $this->assertTrue($explodeValidator->isValid($valueTests));
     }
 }

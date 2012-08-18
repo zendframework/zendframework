@@ -24,6 +24,7 @@ namespace Zend\Form\Element;
 use Traversable;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\Explode as ExplodeValidator;
 use Zend\Validator\InArray as InArrayValidator;
 use Zend\Validator\ValidatorInterface;
 
@@ -34,7 +35,7 @@ use Zend\Validator\ValidatorInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Select extends Element
+class Select extends Element implements InputProviderInterface
 {
     /**
      * Seed attributes
@@ -42,7 +43,8 @@ class Select extends Element
      * @var array
      */
     protected $attributes = array(
-        'type' => 'select',
+        'type'    => 'select',
+        'options' => array(),
     );
 
     /**
@@ -58,10 +60,22 @@ class Select extends Element
     protected function getValidator()
     {
         if (null === $this->validator) {
-            $this->validator = new InArrayValidator(array(
-                'haystack' => (array) $this->getAttribute('options'),
+            $validator = new InArrayValidator(array(
+                'haystack' => $this->getOptionAttributeValues(),
                 'strict'   => false
             ));
+
+            $multiple = (isset($this->attributes['multiple']))
+                      ? $this->attributes['multiple'] : null;
+
+            if (true === $multiple || 'multiple' === $multiple) {
+                $validator = new ExplodeValidator(array(
+                    'validator'      => $validator,
+                    'valueDelimiter' => null, // skip explode if only one value
+                ));
+            }
+
+            $this->validator = $validator;
         }
         return $this->validator;
     }
@@ -84,5 +98,21 @@ class Select extends Element
         );
 
         return $spec;
+    }
+
+    /**
+     * Get only the values from the options attribute
+     *
+     * @return array
+     */
+    protected function getOptionAttributeValues()
+    {
+        $values = array();
+        $options = $this->getAttribute('options');
+        foreach ($options as $key => $optionSpec) {
+            $value = (is_array($optionSpec)) ? $optionSpec['value'] : $key;
+            $values[] = $value;
+        }
+        return $values;
     }
 }

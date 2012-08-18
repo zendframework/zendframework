@@ -263,7 +263,7 @@ class Connection implements ConnectionInterface
     public function disconnect()
     {
         if ($this->isConnected()) {
-            unset($this->resource);
+            $this->resource = null;
         }
         return $this;
     }

@@ -11,6 +11,7 @@
 namespace ZendTest\Db\Sql\Predicate;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\In;
 
 class InTest extends TestCase
@@ -54,6 +55,17 @@ class InTest extends TestCase
             '%s IN (%s, %s, %s)',
             array('foo.bar', 1, 2, 3),
             array(In::TYPE_IDENTIFIER, In::TYPE_VALUE, In::TYPE_VALUE, In::TYPE_VALUE),
+        ));
+        $this->assertEquals($expected, $in->getExpressionData());
+    }
+
+    public function testGetExpressionDataWithSubselect()
+    {
+        $in = new In('foo', $select = new Select);
+        $expected = array(array(
+            '%s IN %s',
+            array('foo', $select),
+            array($in::TYPE_IDENTIFIER, $in::TYPE_SELECT)
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }

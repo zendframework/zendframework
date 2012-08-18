@@ -238,11 +238,17 @@ class Query
         } else {
             $domDoc = new DOMDocument('1.0', $encoding);
         }
-
         $type   = $this->getDocumentType();
         switch ($type) {
             case self::DOC_XML:
                 $success = $domDoc->loadXML($document);
+                foreach ($domDoc->childNodes as $child) {
+                    if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
+                        throw new Exception\RuntimeException(
+                            'Invalid XML: Detected use of illegal DOCTYPE'
+                        );
+                    }
+                }
                 break;
             case self::DOC_HTML:
             case self::DOC_XHTML:

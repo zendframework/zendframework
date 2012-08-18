@@ -342,4 +342,18 @@ EOB;
         $this->query->setDocument($xhtmlWithXmlDecl, 'utf-8');
         $this->assertEquals(1, $this->query->execute('//p')->count());
     }
+
+    public function testLoadingXmlContainingDoctypeShouldFailToPreventXxeAndXeeAttacks()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<!DOCTYPE results [<!ENTITY harmless "completely harmless">]>
+<results>
+    <result>This result is &harmless;</result>
+</results>
+XML;
+        $this->query->setDocumentXml($xml);
+        $this->setExpectedException("\Zend\Dom\Exception\RuntimeException");
+        $this->query->queryXpath('/');
+    }
 }

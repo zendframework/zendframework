@@ -157,9 +157,13 @@ class Factory
                     }
                     break;
                 case 'filters':
+                    if ($value instanceof FilterChain) {
+                        $input->setFilterChain($value);
+                        break;
+                    }
                     if (!is_array($value) && !$value instanceof Traversable) {
                         throw new Exception\RuntimeException(sprintf(
-                            '%s expects the value associated with "filters" to be an array/Traversable of filters or filter specifications; received "%s"',
+                            '%s expects the value associated with "filters" to be an array/Traversable of filters or filter specifications, or a FilterChain; received "%s"',
                             __METHOD__,
                             (is_object($value) ? get_class($value) : gettype($value))
                         ));
@@ -167,9 +171,13 @@ class Factory
                     $this->populateFilters($input->getFilterChain(), $value);
                     break;
                 case 'validators':
+                    if ($value instanceof ValidatorChain) {
+                        $input->setValidatorChain($value);
+                        break;
+                    }
                     if (!is_array($value) && !$value instanceof Traversable) {
                         throw new Exception\RuntimeException(sprintf(
-                            '%s expects the value associated with "validators" to be an array/Traversable of validators or validator specifications; received "%s"',
+                            '%s expects the value associated with "validators" to be an array/Traversable of validators or validator specifications, or a ValidatorChain; received "%s"',
                             __METHOD__,
                             (is_object($value) ? get_class($value) : gettype($value))
                         ));
@@ -205,7 +213,7 @@ class Factory
         }
 
         $class = 'Zend\InputFilter\InputFilter';
-        if (isset($inputFilterSpecification['type'])) {
+        if (isset($inputFilterSpecification['type']) && is_string($inputFilterSpecification['type'])) {
             $class = $inputFilterSpecification['type'];
             if (!class_exists($class)) {
                 throw new Exception\RuntimeException(sprintf(

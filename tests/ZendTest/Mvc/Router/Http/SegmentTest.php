@@ -147,6 +147,12 @@ class SegmentTest extends TestCase
                 null,
                 array('foo' => 'foo bar')
             ),
+            'empty-matches-are-replaced-with-defaults' => array(
+                new Segment('/foo[/:bar]/baz-:baz', array(), array('bar' => 'bar')),
+                '/foo/baz-baz',
+                null,
+                array('bar' => 'bar', 'baz' => 'baz')
+            ),
         );
     }
 

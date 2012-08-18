@@ -39,7 +39,7 @@ class Month extends DateTime
      */
     protected function getDateValidator()
     {
-        return new RegexValidator('/^#[0-9]{4}\-(0?[1-9]|1[012])$/');
+        return new RegexValidator('/^[0-9]{4}\-(0[1-9]|1[012])$/');
     }
 
     /**

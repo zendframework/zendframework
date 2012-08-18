@@ -259,4 +259,11 @@ EOD;
             $this->assertNotContains('Local file inclusion', $value);
         }
     }
+
+    public function testShouldDisallowsDoctypeInRequestXmlAndReturnFalseOnLoading()
+    {
+        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-response.xml');
+        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $this->assertFalse($this->_response->loadXml($payload));
+    }
 }

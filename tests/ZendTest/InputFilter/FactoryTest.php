@@ -348,4 +348,41 @@ class FactoryTest extends TestCase
             }
         }
     }
+
+    public function testFactoryWillCreateInputFilterMatchingInputNameWhenNotSpecified()
+    {
+        $factory     = new Factory();
+        $inputFilter = $factory->createInputFilter(array(
+            array('name' => 'foo')
+        ));
+
+        $this->assertTrue($inputFilter->has('foo'));
+        $this->assertInstanceOf('Zend\InputFilter\Input', $inputFilter->get('foo'));
+    }
+
+    public function testFactoryAllowsPassingValidatorChainsInInputSpec()
+    {
+        $factory = new Factory();
+        $chain   = new Validator\ValidatorChain();
+        $input   = $factory->createInput(array(
+            'name'       => 'foo',
+            'validators' => $chain,
+        ));
+        $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
+        $test = $input->getValidatorChain();
+        $this->assertSame($chain, $test);
+    }
+
+    public function testFactoryAllowsPassingFilterChainsInInputSpec()
+    {
+        $factory = new Factory();
+        $chain   = new Filter\FilterChain();
+        $input   = $factory->createInput(array(
+            'name'    => 'foo',
+            'filters' => $chain,
+        ));
+        $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
+        $test = $input->getFilterChain();
+        $this->assertSame($chain, $test);
+    }
 }

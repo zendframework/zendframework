@@ -154,7 +154,8 @@ class SocketTest extends CommonHttpTests
                 'bindto' => '1.2.3.4:0'
             ),
             'ssl' => array(
-                'verify_peer' => true,
+                'capath'            => null,
+                'verify_peer'       => true,
                 'allow_self_signed' => false
             )
         );

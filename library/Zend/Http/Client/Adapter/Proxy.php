@@ -38,6 +38,7 @@ class Proxy extends Socket
         'sslcert'            => null,
         'sslpassphrase'      => null,
         'sslverifypeer'      => true,
+        'sslcapath'          => null,
         'sslallowselfsigned' => false,
         'sslusecontext'      => false,
         'proxy_host'         => '',

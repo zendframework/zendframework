@@ -183,8 +183,36 @@ class InputTest extends TestCase
         $input = new Input('foo');
         $this->assertTrue($input->isRequired());
         $input->setValue('');
+        $validatorChain = $input->getValidatorChain();
+        $this->assertEquals(0, count($validatorChain->getValidators()));
+
         $this->assertFalse($input->isValid());
         $messages = $input->getMessages();
         $this->assertArrayHasKey('isEmpty', $messages);
+        $this->assertEquals(1, count($validatorChain->getValidators()));
+
+        // Assert that NotEmpty validator wasn't added again
+        $this->assertFalse($input->isValid());
+        $this->assertEquals(1, count($validatorChain->getValidators()));
+    }
+
+    public function testRequiredNotEmptyValidatorNotAddedWhenOneExists()
+    {
+        $input = new Input('foo');
+        $this->assertTrue($input->isRequired());
+        $input->setValue('');
+
+        $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
+        $notEmptyMock->expects($this->exactly(1))
+                     ->method('isValid')
+                     ->will($this->returnValue(false));
+
+        $validatorChain = $input->getValidatorChain();
+        $validatorChain->prependValidator($notEmptyMock);
+        $this->assertFalse($input->isValid());
+
+        $validators = $validatorChain->getValidators();
+        $this->assertEquals(1, count($validators));
+        $this->assertEquals($notEmptyMock, $validators[0]['instance']);
     }
 }

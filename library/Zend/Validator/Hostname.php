@@ -10,6 +10,8 @@
 
 namespace Zend\Validator;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * Please note there are two standalone test scripts for testing IDN characters due to problems
  * with file encoding.
@@ -545,7 +547,9 @@ class Hostname extends AbstractValidator
                         // Check each domain part
                         $checked = false;
                         foreach ($regexChars as $regexKey => $regexChar) {
-                            $status = @preg_match($regexChar, $domainPart);
+                            ErrorHandler::start();
+                            $status = preg_match($regexChar, $domainPart);
+                            ErrorHandler::stop();
                             if ($status > 0) {
                                 $length = 63;
                                 if (array_key_exists(strtoupper($this->tld), $this->idnLength)
@@ -599,8 +603,10 @@ class Hostname extends AbstractValidator
         }
 
         // Check input against local network name schema; last chance to pass validation
+        ErrorHandler::start();
         $regexLocal = '/^(([a-zA-Z0-9\x2d]{1,63}\x2e)*[a-zA-Z0-9\x2d]{1,63}[\x2e]{0,1}){1,254}$/';
-        $status = @preg_match($regexLocal, $value);
+        $status = preg_match($regexLocal, $value);
+        ErrorHandler::stop();
 
         // If the input passes as a local network name, and local network names are allowed, then the
         // hostname passes validation

@@ -10,6 +10,8 @@
 
 namespace Zend\Mail\Protocol;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -78,7 +80,9 @@ class Imap
 
         $errno  =  0;
         $errstr = '';
-        $this->socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+        ErrorHandler::start();
+        $this->socket = fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+        ErrorHandler::stop();
         if (!$this->socket) {
             throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr .
                                                    ' (errno = ' . $errno . ' )');

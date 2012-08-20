@@ -14,6 +14,7 @@ use ArrayIterator;
 use Traversable;
 use Zend\Stdlib;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Uri\Http;
 
 /**
@@ -598,7 +599,10 @@ class Client implements Stdlib\DispatchableInterface
             );
         }
 
-        if (false === ($fp = @fopen($this->streamName, "w+b"))) {
+        ErrorHandler::start();
+        $fp = fopen($this->streamName, "w+b");
+        ErrorHandler::stop();
+        if (false === $fp) {
             if ($this->adapter instanceof Client\Adapter\AdapterInterface) {
                 $this->adapter->close();
             }
@@ -926,7 +930,10 @@ class Client implements Stdlib\DispatchableInterface
     public function setFileUpload($filename, $formname, $data = null, $ctype = null)
     {
         if ($data === null) {
-            if (($data = @file_get_contents($filename)) === false) {
+            ErrorHandler::start();
+            $data = file_get_contents($filename);
+            ErrorHandler::stop();
+            if ($data === false) {
                 throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload");
             }
             if (!$ctype) {
@@ -1156,7 +1163,9 @@ class Client implements Stdlib\DispatchableInterface
         // First try with fileinfo functions
         if (function_exists('finfo_open')) {
             if (self::$fileInfoDb === null) {
-                self::$fileInfoDb = @finfo_open(FILEINFO_MIME);
+                ErrorHandler::start();
+                self::$fileInfoDb = finfo_open(FILEINFO_MIME);
+                ErrorHandler::stop();
             }
 
             if (self::$fileInfoDb) {

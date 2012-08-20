@@ -10,6 +10,8 @@
 
 namespace Zend\Mail\Protocol;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -86,7 +88,9 @@ class Pop3
 
         $errno  =  0;
         $errstr = '';
-        $this->socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+        ErrorHandler::start();
+        $this->socket = fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+        ErrorHandler::stop();
         if (!$this->socket) {
             throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr
                                 . ' (errno = ' . $errno . ' )');
@@ -122,7 +126,9 @@ class Pop3
      */
     public function sendRequest($request)
     {
-        $result = @fputs($this->socket, $request . "\r\n");
+        ErrorHandler::start();
+        $result = fputs($this->socket, $request . "\r\n");
+        ErrorHandler::stop();
         if (!$result) {
             throw new Exception\RuntimeException('send failed - connection closed?');
         }
@@ -138,7 +144,9 @@ class Pop3
      */
     public function readResponse($multiline = false)
     {
-        $result = @fgets($this->socket);
+        ErrorHandler::start();
+        $result = fgets($this->socket);
+        ErrorHandler::stop();
         if (!is_string($result)) {
             throw new Exception\RuntimeException('read failed - connection closed?');
         }

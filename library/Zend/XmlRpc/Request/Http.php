@@ -10,6 +10,7 @@
 
 namespace Zend\XmlRpc\Request;
 
+use Zend\Stdlib\ErrorHandler;
 use Zend\XmlRpc\Fault;
 use Zend\XmlRpc\Request as XmlRpcRequest;
 
@@ -47,7 +48,9 @@ class Http extends XmlRpcRequest
      */
     public function __construct()
     {
-        $xml = @file_get_contents('php://input');
+        ErrorHandler::start();
+        $xml = file_get_contents('php://input');
+        ErrorHandler::stop();
         if (!$xml) {
             $this->fault = new Fault(630);
             return;

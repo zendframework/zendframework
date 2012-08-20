@@ -10,12 +10,14 @@
 
 namespace Zend\File\Transfer\Adapter;
 
+use ErrorException;
 use Zend\File\Transfer;
 use Zend\File\Transfer\Exception;
 use Zend\Filter;
 use Zend\Filter\Exception as FilterException;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Validator;
 
 /**
@@ -1161,14 +1163,21 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     protected function detectFileSize($value)
     {
         if (file_exists($value['name'])) {
-            $result = sprintf("%u", @filesize($value['name']));
+            $filename = $value['name'];
         } elseif (file_exists($value['tmp_name'])) {
-            $result = sprintf("%u", @filesize($value['tmp_name']));
+            $filename = $value['tmp_name'];
         } else {
             return null;
         }
 
-        return $result;
+        ErrorHandler::start();
+        $filesize = filesize($filename);
+        $return   = ErrorHandler::stop();
+        if ($return instanceof ErrorException) {
+            $filesize = 0;
+        }
+
+        return sprintf("%u", $filesize);
     }
 
     /**
@@ -1219,11 +1228,15 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!empty($value['options']['magicFile'])) {
-                $mime = @finfo_open($const, $value['options']['magicFile']);
+                ErrorHandler::start();
+                $mime = finfo_open($const, $value['options']['magicFile']);
+                ErrorHandler::stop();
             }
 
             if (empty($mime)) {
-                $mime = @finfo_open($const);
+                ErrorHandler::start();
+                $mime = finfo_open($const);
+                ErrorHandler::stop();
             }
 
             if (!empty($mime)) {
@@ -1357,13 +1370,17 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         $tempFile = rtrim($path, "/\\");
         $tempFile .= '/' . 'test.1';
 
-        $result = @file_put_contents($tempFile, 'TEST');
+        ErrorHandler::start();
+        $result = file_put_contents($tempFile, 'TEST');
+        ErrorHandler::stop();
 
         if ($result == false) {
             return false;
         }
 
-        $result = @unlink($tempFile);
+        ErrorHandler::start();
+        $result = unlink($tempFile);
+        ErrorHandler::stop();
 
         if ($result == false) {
             return false;

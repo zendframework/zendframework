@@ -722,7 +722,9 @@ class Ldap
         /* Only OpenLDAP 2.2 + supports URLs so if SSL is not requested, just
          * use the old form.
          */
-        $resource = ($useUri) ? @ldap_connect($this->connectString) : @ldap_connect($host, $port);
+        ErrorHandler::start();
+        $resource = ($useUri) ? ldap_connect($this->connectString) : ldap_connect($host, $port);
+        ErrorHandler::stop();
 
         if (is_resource($resource) === true) {
             $this->resource  = $resource;
@@ -736,7 +738,7 @@ class Ldap
                 if ($networkTimeout) {
                     ldap_set_option($resource, LDAP_OPT_NETWORK_TIMEOUT, $networkTimeout);
                 }
-                if ($useSsl || !$useStartTls || @ldap_start_tls($resource)) {
+                if ($useSsl || !$useStartTls || ldap_start_tls($resource)) {
                     ErrorHandler::stop();
                     return $this;
                 }

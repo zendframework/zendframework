@@ -48,7 +48,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
                 throw new StorageException\InvalidArgumentException('maildir must be a directory if already exists');
             }
         } else {
-            if (!mkdir($dir)) {
+            ErrorHandler::start();
+            $test = mkdir($dir);
+            ErrorHandler::stop();
+            if (!$test) {
                 $dir = dirname($dir);
                 if (!file_exists($dir)) {
                     throw new StorageException\InvalidArgumentException("parent $dir not found");
@@ -61,7 +64,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         }
 
         foreach (array('cur', 'tmp', 'new') as $subdir) {
-            if (!@mkdir($dir . DIRECTORY_SEPARATOR . $subdir)) {
+            ErrorHandler::start();
+            $test = mkdir($dir . DIRECTORY_SEPARATOR . $subdir);
+            ErrorHandler::stop();
+            if (!$test) {
                 // ignore if dir exists (i.e. was already valid maildir or two processes try to create one)
                 if (!file_exists($dir . DIRECTORY_SEPARATOR . $subdir)) {
                     throw new StorageException\RuntimeException('could not create subdir ' . $subdir);
@@ -155,9 +161,12 @@ class Maildir extends Folder\Maildir implements WritableInterface
             }
         }
 
-        if (!@mkdir($fulldir) || !@mkdir($fulldir . DIRECTORY_SEPARATOR . 'cur')) {
+        ErrorHandler::start();
+        if (!mkdir($fulldir) || !mkdir($fulldir . DIRECTORY_SEPARATOR . 'cur')) {
+            ErrorHandler::stop();
             throw new StorageException\RuntimeException('error while creating new folder, may be created incompletely');
         }
+        ErrorHandler::stop();
 
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'new');
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'tmp');
@@ -639,7 +648,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         // NOTE: double dirname to make sure we always move to cur. if recent flag has been set (message is in new) it will be moved to cur.
         $new_filename = dirname(dirname($filedata['filename'])) . DIRECTORY_SEPARATOR . 'cur' . DIRECTORY_SEPARATOR . "$filedata[uniq]$info";
 
-        if (!@rename($filedata['filename'], $new_filename)) {
+        ErrorHandler::start();
+        $test = rename($filedata['filename'], $new_filename);
+        ErrorHandler::stop();
+        if (!$test) {
             throw new StorageException\RuntimeException('cannot rename file');
         }
 
@@ -664,7 +676,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
             $size = filesize($filename);
         }
 
-        if (!@unlink($filename)) {
+        ErrorHandler::start();
+        $test = unlink($filename);
+        ErrorHandler::stop();
+        if (!$test) {
             throw new StorageException\RuntimeException('cannot remove message');
         }
         unset($this->files[$id - 1]);

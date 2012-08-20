@@ -12,6 +12,7 @@ namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception;
 use Zend\Cache\StorageFactory;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -145,13 +146,16 @@ class CallbackCache extends AbstractPattern
             $object = $callback[0];
         }
         if (isset($object)) {
+            ErrorHandler::start();
             try {
-                $serializedObject = @serialize($object);
+                $serializedObject = serialize($object);
             } catch (\Exception $e) {
+                ErrorHandler::stop();
                 throw new Exception\RuntimeException(
                     "Can't serialize callback: see previous exception", 0, $e
                 );
             }
+            ErrorHandler::stop();
 
             if (!$serializedObject) {
                 $lastErr = error_get_last();
@@ -178,13 +182,16 @@ class CallbackCache extends AbstractPattern
             return '';
         }
 
+        ErrorHandler::start();
         try {
-            $serializedArgs = @serialize(array_values($args));
+            $serializedArgs = serialize(array_values($args));
         } catch (\Exception $e) {
+            ErrorHandler::stop();
             throw new Exception\RuntimeException(
                 "Can't serialize arguments: see previous exception"
             , 0, $e);
         }
+        ErrorHandler::stop();
 
         if (!$serializedArgs) {
             $lastErr = error_get_last();

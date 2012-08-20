@@ -10,6 +10,8 @@
 
 namespace Zend\Filter;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -78,7 +80,9 @@ class RealPath extends AbstractFilter
             return realpath($path);
         }
 
-        $realpath = @realpath($path);
+        ErrorHandler::start();
+        $realpath = realpath($path);
+        ErrorHandler::stop();
         if ($realpath) {
             return $realpath;
         }

@@ -10,6 +10,8 @@
 
 namespace Zend\Mail\Storage;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -36,7 +38,9 @@ class Message extends Part implements Message\MessageInterface
     {
         if (isset($params['file'])) {
             if (!is_resource($params['file'])) {
-                $params['raw'] = @file_get_contents($params['file']);
+                ErrorHandler::start();
+                $params['raw'] = file_get_contents($params['file']);
+                ErrorHandler::stop();
                 if ($params['raw'] === false) {
                     throw new Exception\RuntimeException('could not open file');
                 }

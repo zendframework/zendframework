@@ -246,7 +246,9 @@ class Mbox extends AbstractStorage
             $this->close();
         }
 
-        $this->fh = @fopen($filename, 'r');
+        ErrorHandler::start();
+        $this->fh = fopen($filename, 'r');
+        ErrorHandler::stop();
         if (!$this->fh) {
             throw new Exception\RuntimeException('cannot open mbox file');
         }
@@ -380,11 +382,16 @@ class Mbox extends AbstractStorage
      */
     public function __wakeup()
     {
-        if ($this->filemtime != @filemtime($this->filename)) {
+        ErrorHandler::start();
+        $filemtime = filemtime($this->filename);
+        ErrorHandler::stop();
+        if ($this->filemtime != $filemtime) {
             $this->close();
             $this->openMboxFile($this->filename);
         } else {
-            $this->fh = @fopen($this->filename, 'r');
+            ErrorHandler::start();
+            $this->fh = fopen($this->filename, 'r');
+            ErrorHandler::stop();
             if (!$this->fh) {
                 throw new Exception\RuntimeException('cannot open mbox file');
             }

@@ -12,6 +12,7 @@ namespace Zend\Text\Figlet;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Text\Figlet is a PHP implementation of FIGlet
@@ -426,7 +427,10 @@ class Figlet
 
         $wordBreakMode  = 0;
         $lastCharWasEol = false;
-        $textLength     = @iconv_strlen($text, 'UTF-8');
+
+        ErrorHandler::start(E_NOTICE);
+        $textLength = iconv_strlen($text, 'UTF-8');
+        ErrorHandler::stop();
 
         if ($textLength === false) {
             throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);

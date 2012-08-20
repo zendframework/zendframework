@@ -11,6 +11,7 @@
 namespace Zend\Authentication\Adapter;
 
 use Zend\Authentication\Result as AuthenticationResult;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -169,7 +170,10 @@ class Digest implements AdapterInterface
             }
         }
 
-        if (false === ($fileHandle = @fopen($this->filename, 'r'))) {
+        ErrorHandler::start(E_WARNING);
+        $fileHandle = fopen($this->filename, 'r');
+        ErrorHandler::stop();
+        if (false === $fileHandle) {
             throw new Exception\UnexpectedValueException("Cannot open '$this->filename' for reading");
         }
 

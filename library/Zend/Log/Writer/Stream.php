@@ -80,7 +80,10 @@ class Stream extends AbstractWriter
 
             $this->stream = $streamOrUrl;
         } else {
-            if (!$this->stream = @fopen($streamOrUrl, $mode, false)) {
+            ErrorHandler::start();
+            $this->stream = fopen($streamOrUrl, $mode, false);
+            ErrorHandler::stop();
+            if (!$this->stream) {
                 throw new Exception\RuntimeException(sprintf(
                     '"%s" cannot be opened with mode "%s"',
                     $streamOrUrl,

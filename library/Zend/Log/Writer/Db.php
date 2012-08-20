@@ -62,7 +62,7 @@ class Db extends AbstractWriter
      * @return Db
      * @throw Exception\InvalidArgumentException
      */
-    public function __construct($db, $tableName, array $columnMap = null, $separator = null)
+    public function __construct($db, $tableName = null, array $columnMap = null, $separator = null)
     {
         if ($db instanceof Traversable) {
             $db = iterator_to_array($db);
@@ -73,6 +73,14 @@ class Db extends AbstractWriter
             $columnMap = isset($db['column']) ? $db['column'] : null;
             $tableName = isset($db['table']) ? $db['table'] : null;
             $db        = isset($db['db']) ? $db['db'] : null;
+        }
+
+        if (null === $db){
+            throw new Exception\InvalidArgumentException('You must specify a database adapter either explicitly in the constructor or in options array with key "db"');
+        }
+
+        if (null === $tableName){
+            throw new Exception\InvalidArgumentException('You must specify a table name. Either directly in the constructor, or via options');
         }
 
         if (!$db instanceof Adapter) {

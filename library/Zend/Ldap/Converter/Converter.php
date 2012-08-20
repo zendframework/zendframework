@@ -386,7 +386,7 @@ class Converter
         ErrorHandler::start(E_NOTICE);
         $v = unserialize($value);
         ErrorHandler::stop();
-        
+
         if (false === $v && $value != 'b:0;') {
             throw new Exception\UnexpectedValueException('The given value could not be unserialized');
         }

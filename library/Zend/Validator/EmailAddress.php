@@ -143,7 +143,7 @@ class EmailAddress extends AbstractValidator
      */
     public function getHostnameValidator()
     {
-        if (!isset($this->options['hostnameValidator']) 
+        if (!isset($this->options['hostnameValidator'])
             || !$this->options['hostnameValidator'] instanceof Hostname
         ) {
             $this->setHostnameValidator();

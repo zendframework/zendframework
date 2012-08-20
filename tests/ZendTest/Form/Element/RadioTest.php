@@ -58,17 +58,44 @@ class RadioTest extends TestCase
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
             $this->assertTrue(in_array($class, $expectedClasses), $class);
-            switch ($class) {
-                case 'Zend\Validator\InArray':
-                    $values = array_values($options);
-                    if ($element->useHiddenElement()) {
-                        $values[] = $element->getUncheckedValue();
-                    }
-                    $this->assertEquals($values, $validator->getHaystack());
-                    break;
-                default:
-                    break;
-            }
+        }
+    }
+
+    public function radioOptionsDataProvider()
+    {
+        return array(
+            array(
+                array('foo', 'bar'),
+                array(
+                    'foo' => 'My Foo Label',
+                    'bar' => 'My Bar Label',
+                )
+            ),
+            array(
+                array('foo', 'bar'),
+                array(
+                    0 => array('label' => 'My Foo Label', 'value' => 'foo'),
+                    1 => array('label' => 'My Bar Label', 'value' => 'bar'),
+                )
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider radioOptionsDataProvider
+     */
+    public function testInArrayValidationOfOptions($valueTests, $options)
+    {
+        $element = new RadioElement('my-radio');
+        $element->setAttributes(array(
+            'options' => $options,
+        ));
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $inArrayValidator = $inputSpec['validators'][0];
+        $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
+        foreach ($valueTests as $valueToTest) {
+            $this->assertTrue($inArrayValidator->isValid($valueToTest));
         }
     }
 }

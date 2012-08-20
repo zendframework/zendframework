@@ -23,6 +23,16 @@ use Zend\Session;
  */
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Manager
+     */
+    protected $manager;
+
+    /**
+     * @var Container
+     */
+    protected $container;
+
     public function setUp()
     {
         $this->forceAutoloader();
@@ -281,6 +291,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $storage->setMetadata('Default', array('EXPIRE_KEYS' => array('foo' => $_SERVER['REQUEST_TIME'] - 18600)));
         $this->assertFalse(isset($this->container->foo));
         $this->assertTrue(isset($this->container->bar));
+    }
+
+    public function testKeyExistsWithContainerExpirationInPastWithSetExpirationSecondsReturnsFalse()
+    {
+        $this->container->foo = 'bar';
+        $storage = $this->manager->getStorage();
+        $storage->setMetadata('Default', array('EXPIRE' => $_SERVER['REQUEST_TIME'] - 18600));
+        $this->container->setExpirationSeconds(1);
+        $this->assertFalse(isset($this->container->foo));
     }
 
     public function testSettingExpiredKeyOverwritesExpiryMetadataForThatKey()

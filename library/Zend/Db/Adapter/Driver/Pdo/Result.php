@@ -176,9 +176,9 @@ class Result implements Iterator, ResultInterface
             return $this->rowCount;
         }
         if ($this->rowCount instanceof \Closure) {
-            $this->rowCount = call_user_func($this->rowCount);
+            $this->rowCount = (int) call_user_func($this->rowCount);
         } else {
-            $this->rowCount = $this->resource->rowCount();
+            $this->rowCount = (int) $this->resource->rowCount();
         }
         return $this->rowCount;
     }

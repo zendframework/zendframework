@@ -18,8 +18,6 @@ use Traversable;
 use Zend\Cache\Storage\IteratorInterface as CacheIterator;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\Db\Sql;
-use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
-use Zend\Db\Table\Select as DbTableSelect;
 use Zend\Filter\FilterInterface;
 use Zend\Json\Json;
 use Zend\Paginator\Adapter\AdapterInterface;
@@ -183,9 +181,7 @@ class Paginator implements Countable, IteratorAggregate
         if ($adapter == self::INTERNAL_ADAPTER) {
             if (is_array($data)) {
                 $adapter = 'array';
-            } elseif ($data instanceof DbTableSelect) {
-                $adapter = 'db_table_select';
-            } elseif ($data instanceof DbSelect) {
+            } elseif ($data instanceof Sql\Select) {
                 $adapter = 'db_select';
             } elseif ($data instanceof Iterator) {
                 $adapter = 'iterator';

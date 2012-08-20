@@ -105,6 +105,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'sitemappriority'          => 'Zend\Validator\Sitemap\Priority',
         'stringlength'             => 'Zend\Validator\StringLength',
         'step'                     => 'Zend\Validator\Step',
+        'uri'                      => 'Zend\Validator\Uri',
     );
 
     /**

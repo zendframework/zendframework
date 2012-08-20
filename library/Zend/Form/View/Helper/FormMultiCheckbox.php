@@ -269,8 +269,11 @@ class FormMultiCheckbox extends FormInput
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
 
-            if (is_string($optionSpec) || is_numeric($optionSpec) || is_bool($optionSpec)) {
-                $optionSpec = array('value' => (string) $optionSpec);
+            if (is_scalar($optionSpec)) {
+                $optionSpec = array(
+                    'label' => $optionSpec,
+                    'value' => $key
+                );
             }
 
             if (isset($optionSpec['value'])) {

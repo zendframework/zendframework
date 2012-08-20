@@ -235,7 +235,9 @@ class Csrf extends AbstractValidator
      */
     public function getSessionName()
     {
-        return str_replace('\\', '_', __CLASS__) . '_' . $this->getSalt() . '_' . $this->getName();
+        return str_replace('\\', '_', __CLASS__) . '_'
+            . $this->getSalt() . '_'
+            . strtr($this->getName(), array('[' => '_', ']' => ''));
     }
 
     /**

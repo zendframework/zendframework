@@ -29,14 +29,16 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Constant
      * @const
      */
-    const SPECIFICATION_SELECT = 'select';
-    const SPECIFICATION_JOIN = 'join';
-    const SPECIFICATION_WHERE = 'where';
-    const SPECIFICATION_GROUP = 'group';
-    const SPECIFICATION_HAVING = 'having';
-    const SPECIFICATION_ORDER = 'order';
-    const SPECIFICATION_LIMIT = 'limit';
-    const SPECIFICATION_OFFSET = 'offset';
+    const SELECT = 'select';
+    const COLUMNS = 'columns';
+    const TABLE = 'table';
+    const JOINS = 'joins';
+    const WHERE = 'where';
+    const GROUP = 'group';
+    const HAVING = 'having';
+    const ORDER = 'order';
+    const LIMIT = 'limit';
+    const OFFSET = 'offset';
     const JOIN_INNER = 'inner';
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
@@ -50,31 +52,31 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @var array Specifications
      */
     protected $specifications = array(
-        self::SPECIFICATION_SELECT => array(
+        self::SELECT => array(
             'SELECT %1$s FROM %2$s' => array(
                 array(1 => '%1$s', 2 => '%1$s AS %2$s', 'combinedby' => ', '),
                 null
             )
         ),
-        self::SPECIFICATION_JOIN   => array(
+        self::JOINS  => array(
             '%1$s' => array(
                 array(3 => '%1$s JOIN %2$s ON %3$s', 'combinedby' => ' ')
             )
         ),
-        self::SPECIFICATION_WHERE  => 'WHERE %1$s',
-        self::SPECIFICATION_GROUP  => array(
+        self::WHERE  => 'WHERE %1$s',
+        self::GROUP  => array(
             'GROUP BY %1$s' => array(
                 array(1 => '%1$s', 'combinedby' => ', ')
             )
         ),
-        self::SPECIFICATION_HAVING => 'HAVING %1$s',
-        self::SPECIFICATION_ORDER  => array(
+        self::HAVING => 'HAVING %1$s',
+        self::ORDER  => array(
             'ORDER BY %1$s' => array(
                 array(2 => '%1$s %2$s', 'combinedby' => ', ')
             )
         ),
-        self::SPECIFICATION_LIMIT  => 'LIMIT %1$s',
-        self::SPECIFICATION_OFFSET => 'OFFSET %1$s'
+        self::LIMIT  => 'LIMIT %1$s',
+        self::OFFSET => 'OFFSET %1$s'
     );
 
     /**
@@ -158,7 +160,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function from($table)
     {
         if ($this->tableReadOnly) {
-            throw new \InvalidArgumentException('Since this object was created with a table and/or schema in the constructor, it is read only.');
+            throw new Exception\InvalidArgumentException('Since this object was created with a table and/or schema in the constructor, it is read only.');
         }
 
         if (!is_string($table) && !is_array($table) && !$table instanceof TableIdentifier) {
@@ -324,15 +326,58 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * @param int $limit
+     * @return Select
+     */
     public function limit($limit)
     {
         $this->limit = $limit;
         return $this;
     }
 
+    /**
+     * @param int $offset
+     * @return Select
+     */
     public function offset($offset)
     {
         $this->offset = $offset;
+        return $this;
+    }
+
+    /**
+     * @param string $part
+     * @return Select
+     * @throws Exception\InvalidArgumentException
+     */
+    public function reset($part)
+    {
+        switch ($part) {
+            case self::TABLE:
+                if ($this->tableReadOnly) {
+                    throw new Exception\InvalidArgumentException(
+                        'Since this object was created with a table and/or schema in the constructor, it is read only.'
+                    );
+                }
+                $this->table = null;
+                break;
+            case self::COLUMNS:
+                $this->columns = array();
+                break;
+            case self::JOINS:
+                $this->joins = array();
+                break;
+            case self::WHERE:
+                $this->where = new Where;
+                break;
+            case self::LIMIT:
+                $this->limit = null;
+                break;
+            case self::OFFSET:
+                $this->offset = null;
+                break;
+        }
         return $this;
     }
 
@@ -348,15 +393,15 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getRawState($key = null)
     {
         $rawState = array(
-            'columns' => $this->columns,
-            'table'   => $this->table,
-            'joins'   => $this->joins,
-            'where'   => $this->where,
-            'order'   => $this->order,
-            'group'   => $this->group,
-            'having'  => $this->having,
-            'limit'   => $this->limit,
-            'offset'  => $this->offset
+            self::TABLE   => $this->table,
+            self::COLUMNS => $this->columns,
+            self::JOINS   => $this->joins,
+            self::WHERE   => $this->where,
+            self::ORDER   => $this->order,
+            self::GROUP   => $this->group,
+            self::HAVING  => $this->having,
+            self::LIMIT   => $this->limit,
+            self::OFFSET  => $this->offset
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
@@ -524,7 +569,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($columns, $table);
     }
 
-    protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
+    protected function processJoins(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->joins) {
             return null;

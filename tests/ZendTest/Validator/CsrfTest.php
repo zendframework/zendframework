@@ -132,6 +132,16 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->validator->getSessionName());
     }
 
+    public function testSessionNameRemainsValidForElementBelongingToFieldset()
+    {
+        $this->validator->setName('fieldset[csrf]');
+        $class = get_class($this->validator);
+        $class = str_replace('\\', '_', $class);
+        $name = strtr($this->validator->getName(), array('[' => '_', ']' => ''));
+        $expected = sprintf('%s_%s_%s', $class, $this->validator->getSalt(), $name);
+        $this->assertEquals($expected, $this->validator->getSessionName());
+    }
+
     public function testIsValidReturnsFalseWhenValueDoesNotMatchHash()
     {
         $this->assertFalse($this->validator->isValid('foo'));

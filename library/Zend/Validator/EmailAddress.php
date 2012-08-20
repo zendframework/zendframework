@@ -122,13 +122,13 @@ class EmailAddress extends AbstractValidator
     public function setMessage($messageString, $messageKey = null)
     {
         if ($messageKey === null) {
-            $this->options['hostnameValidator']->setMessage($messageString);
+            $this->getHostnameValidator()->setMessage($messageString);
             parent::setMessage($messageString);
             return $this;
         }
 
         if (!isset($this->messageTemplates[$messageKey])) {
-            $this->options['hostnameValidator']->setMessage($messageString, $messageKey);
+            $this->getHostnameValidator()->setMessage($messageString, $messageKey);
         } else {
             parent::setMessage($messageString, $messageKey);
         }
@@ -143,6 +143,12 @@ class EmailAddress extends AbstractValidator
      */
     public function getHostnameValidator()
     {
+        if (!isset($this->options['hostnameValidator']) 
+            || !$this->options['hostnameValidator'] instanceof Hostname
+        ) {
+            $this->setHostnameValidator();
+        }
+
         return $this->options['hostnameValidator'];
     }
 

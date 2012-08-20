@@ -474,9 +474,12 @@ class Request extends HttpRequest
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
 
+            $baseUrl  = '/';
             $basename = basename($filename);
-            $path     = ($phpSelf ? trim($phpSelf, '/') : '');
-            $baseUrl  = '/'. substr($path, 0, strpos($path, $basename)) . $basename;
+            if ($basename) {
+                $path     = ($phpSelf ? trim($phpSelf, '/') : '');
+                $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
+            }
         }
 
         // Does the base URL have anything in common with the request URI?

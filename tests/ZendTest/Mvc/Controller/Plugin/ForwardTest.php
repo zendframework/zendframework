@@ -29,7 +29,16 @@ class ForwardTest extends TestCase
     public function setUp()
     {
         StaticEventManager::resetInstance();
+
+        $mockSharedEventManager = $this->getMock('Zend\EventManager\SharedEventManagerInterface');
+        $mockSharedEventManager->expects($this->any())->method('getListeners')->will($this->returnValue(array()));
+        $mockEventManager = $this->getMock('Zend\EventManager\EventManagerInterface');
+        $mockEventManager->expects($this->any())->method('getSharedManager')->will($this->returnValue($mockSharedEventManager));
+        $mockApplication = $this->getMock('Zend\Mvc\ApplicationInterface');
+        $mockApplication->expects($this->any())->method('getEventManager')->will($this->returnValue($mockEventManager));
+
         $event   = new MvcEvent();
+        $event->setApplication($mockApplication);
         $event->setRequest(new Request());
         $event->setResponse(new Response());
         $event->setRouteMatch(new RouteMatch(array('action' => 'test')));

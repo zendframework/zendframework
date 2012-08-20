@@ -182,7 +182,7 @@ class ColumnObject
 
     /**
      * @param int $ordinalPosition to set
-     * @return Column
+     * @return ColumnObject
      */
     public function setOrdinalPosition($ordinalPosition)
     {
@@ -191,7 +191,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $columnDefault
+     * @return null|string the $columnDefault
      */
     public function getColumnDefault()
     {
@@ -235,7 +235,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $dataType
+     * @return null|string the $dataType
      */
     public function getDataType()
     {
@@ -253,7 +253,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $characterMaximumLength
+     * @return int|null the $characterMaximumLength
      */
     public function getCharacterMaximumLength()
     {
@@ -271,7 +271,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $characterOctetLength
+     * @return int|null the $characterOctetLength
      */
     public function getCharacterOctetLength()
     {
@@ -351,7 +351,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $errata
+     * @return array the $errata
      */
     public function getErratas()
     {
@@ -359,7 +359,8 @@ class ColumnObject
     }
 
     /**
-     * @return the $errata
+     * @param array $erratas
+     * @return ColumnObject
      */
     public function setErratas(array $erratas)
     {
@@ -371,7 +372,7 @@ class ColumnObject
 
     /**
      * @param string $errataName
-     * @return ColumnMetadata
+     * @return mixed
      */
     public function getErrata($errataName)
     {
@@ -384,7 +385,7 @@ class ColumnObject
     /**
      * @param string $errataName
      * @param mixed $errataValue
-     * @return ColumnMetadata
+     * @return ColumnObject
      */
     public function setErrata($errataName, $errataValue)
     {

@@ -26,7 +26,7 @@ abstract class AbstractFeature
     protected $driver = null;
 
     /**
-     * @param DriverInterface $pdoDriver
+     * @param DriverInterface $driver
      */
     public function setDriver(DriverInterface $driver)
     {

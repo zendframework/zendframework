@@ -167,7 +167,7 @@ class Statement implements StatementInterface
      * Execute
      *
      * @param  array|ParameterContainer $parameters
-     * @return type
+     * @return Result
      */
     public function execute($parameters = null)
     {

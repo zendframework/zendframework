@@ -447,7 +447,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
-     * @param $property
+     * @param string $property
+     * @param mixed $value
      * @return mixed
      * @throws Exception\InvalidArgumentException
      */

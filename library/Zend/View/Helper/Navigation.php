@@ -171,10 +171,8 @@ class Navigation extends AbstractNavigationHelper
      *                                             thrown if something goes
      *                                             wrong. Default is true.
      * @return \Zend\View\Helper\Navigation\HelperInterface  helper instance
-     * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
+     * @throws Exception\RuntimeException if $strict is true and
      *         helper cannot be found
-     * @throws Exception\InvalidArgumentException if $strict is true and
-     *         helper does not implement the specified interface
      */
     public function findHelper($proxy, $strict = true)
     {
@@ -334,11 +332,8 @@ class Navigation extends AbstractNavigationHelper
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.
-     * @return string                                helper output
-     * @throws \Zend\Loader\PluginLoader\Exception    if helper cannot be found
-     * @throws \Zend\View\Exception\ExceptionInterface                   if helper doesn't implement
-     *                                               the interface specified in
-     *                                               {@link findHelper()}
+     * @return string helper output
+     * @throws Exception\RuntimeException if helper cannot be found
      */
     public function render($container = null)
     {

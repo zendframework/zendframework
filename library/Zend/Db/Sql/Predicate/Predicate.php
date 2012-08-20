@@ -29,7 +29,7 @@ class Predicate extends PredicateSet
     /**
      * Begin nesting predicates
      *
-     * @return PredicateSet
+     * @return Predicate
      */
     public function nest()
     {
@@ -72,10 +72,10 @@ class Predicate extends PredicateSet
      *
      * Utilizes Operator predicate
      *
-     * @param  scalar $left
-     * @param  scalar $right
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @param  int|float|bool|string $left
+     * @param  int|float|bool|string $right
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -94,10 +94,10 @@ class Predicate extends PredicateSet
      *
      * Utilizes Operator predicate
      *
-     * @param  scalar $left
-     * @param  scalar $right
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @param  int|float|bool|string $left
+     * @param  int|float|bool|string $right
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function notEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -116,10 +116,10 @@ class Predicate extends PredicateSet
      *
      * Utilizes Operator predicate
      *
-     * @param  scalar $left
-     * @param  scalar $right
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @param  int|float|bool|string $left
+     * @param  int|float|bool|string $right
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -138,10 +138,10 @@ class Predicate extends PredicateSet
      *
      * Utilizes Operator predicate
      *
-     * @param  scalar $left
-     * @param  scalar $right
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @param  int|float|bool|string $left
+     * @param  int|float|bool|string $right
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -160,10 +160,10 @@ class Predicate extends PredicateSet
      *
      * Utilizes Operator predicate
      *
-     * @param  scalar $left
-     * @param  scalar $right
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @param  int|float|bool|string $left
+     * @param  int|float|bool|string $right
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -182,10 +182,10 @@ class Predicate extends PredicateSet
      *
      * Utilizes Operator predicate
      *
-     * @param  scalar $left
-     * @param  scalar $right
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
+     * @param  int|float|bool|string $left
+     * @param  int|float|bool|string $right
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -225,7 +225,7 @@ class Predicate extends PredicateSet
      * Utilizes Like predicate
      *
      * @param  string $literal
-     * @param  scalar|array $parameter
+     * @param  int|float|bool|string|array $parameter
      * @return Predicate
      */
     public function literal($literal, $parameter)
@@ -303,8 +303,8 @@ class Predicate extends PredicateSet
      * Utilizes Between predicate
      *
      * @param  string $identifier
-     * @param  scalar $minValue
-     * @param  scalar $maxValue
+     * @param  int|float|string $minValue
+     * @param  int|float|string $maxValue
      * @return Predicate
      */
     public function between($identifier, $minValue, $maxValue)

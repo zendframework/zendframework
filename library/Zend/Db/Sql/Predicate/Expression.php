@@ -24,7 +24,7 @@ class Expression extends BaseExpression implements PredicateInterface
      * Constructor
      *
      * @param string $expression
-     * @param mixed $valueParameter
+     * @param int|float|bool|string|array $valueParameter
      */
     public function __construct($expression = null, $valueParameter = null /*[, $valueParameter, ... ]*/)
     {

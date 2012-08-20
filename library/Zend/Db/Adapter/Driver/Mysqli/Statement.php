@@ -236,8 +236,6 @@ class Statement implements StatementInterface
 
     /**
      * Bind parameters from container
-     *
-     * @param ParameterContainer $pContainer
      */
     protected function bindParametersFromContainer()
     {

@@ -75,6 +75,8 @@ class Result implements Iterator, ResultInterface
      * Initialize
      *
      * @param  PDOStatement $resource
+     * @param               $generatedValue
+     * @param  int          $rowCount
      * @return Result
      */
     public function initialize(PDOStatement $resource, $generatedValue, $rowCount = null)

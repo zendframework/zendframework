@@ -102,7 +102,7 @@ class ConstraintObject
      * Constructor
      *
      * @param string $name
-     * @param string $table
+     * @param string $tableName
      * @param string $schemaName
      */
     public function __construct($name, $tableName, $schemaName = null)
@@ -177,7 +177,7 @@ class ConstraintObject
     /**
      * Set type
      *
-     * @param type $constraintType
+     * @param string $type
      */
     public function setType($type)
     {

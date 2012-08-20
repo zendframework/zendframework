@@ -633,4 +633,20 @@ class RequestTest extends TestCase
         $this->assertSame($h, $request->getHeaders()->get('foo'));
         $this->assertSame($h, $request->getHeader('foo'));
     }
+
+    /**
+     * @group ZF2-480
+     */
+    public function testBaseurlFallsBackToRootPathIfScriptFilenameIsNotSet()
+    {
+        $request = new Request();
+        $server  = $request->getServer();
+        $server->set('SCRIPT_NAME', null);
+        $server->set('PHP_SELF', null);
+        $server->set('ORIG_SCRIPT_NAME', null);
+        $server->set('ORIG_SCRIPT_NAME', null);
+        $server->set('SCRIPT_FILENAME', null);
+
+        $this->assertEquals('', $request->getBaseUrl());
+    }
 }

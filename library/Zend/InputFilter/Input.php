@@ -283,15 +283,13 @@ class Input implements InputInterface
         }
         $chain = $this->getValidatorChain();
 
-        // Check if NotEmpty validator is already in chain
+        // Check if NotEmpty validator is already first in chain
         $validators = $chain->getValidators();
-        foreach ($validators as $validatorInfo) {
-            if (isset($validatorInfo['instance'])
-                && $validatorInfo['instance'] instanceof NotEmpty
-            ) {
-                $this->notEmptyValidator = true;
-                return;
-            }
+        if (isset($validators[0]['instance'])
+            && $validators[0]['instance'] instanceof NotEmpty
+        ) {
+            $this->notEmptyValidator = true;
+            return;
         }
 
         $chain->prependByName('NotEmpty', array(), true);

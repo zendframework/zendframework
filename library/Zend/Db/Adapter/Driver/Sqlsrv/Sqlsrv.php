@@ -10,7 +10,6 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use PDOStatement;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Exception;
 
@@ -75,6 +74,7 @@ class Sqlsrv implements DriverInterface
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
+        return $this;
     }
 
     /**
@@ -85,6 +85,7 @@ class Sqlsrv implements DriverInterface
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+        return $this;
     }
 
     /**
@@ -121,7 +122,7 @@ class Sqlsrv implements DriverInterface
     }
 
     /**
-     * @param string|PDOStatement $sqlOrResource
+     * @param string $sql
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
@@ -129,10 +130,13 @@ class Sqlsrv implements DriverInterface
         $statement = clone $this->statementPrototype;
         if (is_string($sqlOrResource)) {
             $statement->setSql($sqlOrResource);
-        } elseif ($sqlOrResource instanceof PDOStatement) {
+            if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+            }
+            $statement->initialize($this->connection->getResource());
+        } elseif (is_resource($sqlOrResource)) {
             $statement->setResource($sqlOrResource);
         }
-        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 

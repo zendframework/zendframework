@@ -156,9 +156,6 @@ class Connection implements ConnectionInterface
      */
     public function getResource()
     {
-        if ($this->resource == null) {
-            $this->connect();
-        }
         return $this->resource;
     }
 

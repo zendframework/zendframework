@@ -86,7 +86,13 @@ class Statement implements StatementInterface
      */
     public function initialize($resource)
     {
+        $resourceType = get_resource_type($resource);
+        if ($resourceType != 'SQL Server Connection' && $resourceType != 'SQL Server Statement') {
+            throw new Exception\InvalidArgumentException('Invalid resource provided to ' . __CLASS__);
+        }
+
         $this->sqlsrv = $resource;
+        return $this;
     }
 
     /**
@@ -97,6 +103,7 @@ class Statement implements StatementInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -105,6 +112,14 @@ class Statement implements StatementInterface
     public function getParameterContainer()
     {
         return $this->parameterContainer;
+    }
+
+    /**
+     * @param $resource
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
     }
 
     /**
@@ -153,6 +168,7 @@ class Statement implements StatementInterface
         $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef);
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**

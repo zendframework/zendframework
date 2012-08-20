@@ -10,6 +10,21 @@
     <groups>
         <exclude>
             <group>disable</group>
+            <group>integration</group>
+            <group>integration-sqlserver</group>
         </exclude>
     </groups>
+
+    <php>
+
+        <!-- Integration Test Variables -->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE" value="" />-->
+
+    </php>
+
+
+
 </phpunit>

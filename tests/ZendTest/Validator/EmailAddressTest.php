@@ -519,6 +519,20 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
     }
 
+    public function testSetSingleMessageViaOptions()
+    {
+        $validator = new EmailAddress(array('message' => 'TestMessage'));
+        $messages = $validator->getMessageTemplates();
+        $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
+    }
+
+    public function testSetMultipleMessageViaOptions()
+    {
+        $validator = new EmailAddress(array('messages' => array(EmailAddress::INVALID => 'TestMessage')));
+        $messages = $validator->getMessageTemplates();
+        $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
+    }
+
     /**
      * Testing getValidateMx
      */

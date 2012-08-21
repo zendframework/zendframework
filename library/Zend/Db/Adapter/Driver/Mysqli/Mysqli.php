@@ -159,14 +159,16 @@ class Mysqli implements DriverInterface
         */
 
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
+        if ($sqlOrResource instanceof \mysqli_stmt) {
+            $statement->setResource($sqlOrResource);
+        } else {
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            }
             if (!$this->connection->isConnected()) {
                 $this->connection->connect();
             }
             $statement->initialize($this->connection->getResource());
-        } elseif ($sqlOrResource instanceof \mysqli_stmt) {
-            $statement->setResource($sqlOrResource);
         }
         return $statement;
     }

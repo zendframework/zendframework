@@ -69,6 +69,7 @@ class Sqlsrv implements DriverInterface
      * Register statement prototype
      *
      * @param Statement $statementPrototype
+     * @return Sqlsrv
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
@@ -81,6 +82,7 @@ class Sqlsrv implements DriverInterface
      * Register result prototype
      *
      * @param Result $resultPrototype
+     * @return Sqlsrv
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
@@ -105,6 +107,7 @@ class Sqlsrv implements DriverInterface
 
     /**
      * Check environment
+     * @return void
      */
     public function checkEnvironment()
     {

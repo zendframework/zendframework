@@ -83,6 +83,7 @@ class Statement implements StatementInterface
      * (there will need to already be a bound param set if it applies to this query)
      *
      * @param resource
+     * @return Statement
      */
     public function initialize($resource)
     {
@@ -99,6 +100,7 @@ class Statement implements StatementInterface
      * Set parameter container
      *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
@@ -116,10 +118,12 @@ class Statement implements StatementInterface
 
     /**
      * @param $resource
+     * @return Statement
      */
     public function setResource($resource)
     {
         $this->resource = $resource;
+        return $this;
     }
 
     /**
@@ -134,10 +138,12 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+        return $this;
     }
 
     /**
@@ -152,6 +158,7 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function prepare($sql = null)
     {

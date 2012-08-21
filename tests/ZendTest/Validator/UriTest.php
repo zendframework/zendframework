@@ -134,4 +134,26 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('messageTemplates', $validator);
         $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
+
+    public function testUriHandlerCanBeSpecifiedAsString()
+    {
+        $this->validator->setUriHandler('Zend\Uri\Http');
+        $this->assertInstanceOf('Zend\Uri\Http', $this->validator->getUriHandler());
+    }
+
+    /**
+     * @expectedException Zend\Validator\Exception\InvalidArgumentException
+     */
+    public function testUriHandlerStringInvalidClassThrowsException()
+    {
+        $this->validator->setUriHandler('stdClass');
+    }
+
+    /**
+     * @expectedException Zend\Validator\Exception\InvalidArgumentException
+     */
+    public function testUriHandlerInvalidTypeThrowsException()
+    {
+        $this->validator->setUriHandler(new \stdClass());
+    }
 }

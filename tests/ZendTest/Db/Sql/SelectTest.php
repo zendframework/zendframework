@@ -768,4 +768,53 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    
+    
+
+     
+    /**
+     * @covers Zend\Db\Sql\Select::where
+     * @group ZF2-479
+     */
+    public function testWhereArrayEnhanced()
+    {
+        $select = new Select;
+        $select->from('table')->columns(array('*'));
+        $select->where(array(
+            'c1' => null,
+            'c2' => array(1, 2, 3),
+            new \Zend\Db\Sql\Predicate\IsNotNull('c3')
+        ));
+        $this->assertEquals('SELECT "table".* FROM "table" WHERE "c1" IS NULL AND "c2" IN (\'1\', \'2\', \'3\') AND "c3" IS NOT NULL', $select->getSqlString());
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Select::prepareStatement
+     * @group ZF2-479
+     */
+    public function testPrepareStatementEnhanced()
+    {
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+
+        $mockStatement->expects($this->at(1))
+                ->method('setSql')
+                ->with($this->equalTo('SELECT "table".* FROM "table" WHERE "c1" IS NULL AND "c2" IN (?, ?, ?) AND "c3" IS NOT NULL'));
+
+        $select = new Select;
+        $select->from('table')->columns(array('*'));
+        $select->where(array(
+            'c1' => null,
+            'c2' => array(1, 2, 3),
+            new \Zend\Db\Sql\Predicate\IsNotNull('c3')
+        ));
+
+        $select->prepareStatement($mockAdapter, $mockStatement);
+    }
 }

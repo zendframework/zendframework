@@ -136,4 +136,17 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->foo = 'bar';
         $this->assertEquals('bar', $this->insert->foo);
     }
+    
+        
+    /**
+     * @covers Zend\Db\Sql\Insert::getSqlString
+     * @group ZF2-479
+     */
+    public function testGetSqlStringNull()
+    {
+        $this->insert->into('foo')
+            ->values(array('bar' => 'baz', 'boo' => null));
+
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo") VALUES (\'baz\', NULL)', $this->insert->getSqlString());
+    }
 }

@@ -162,4 +162,67 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString());
     }
+    
+    
+    
+    
+    /**
+     * @covers Zend\Db\Sql\Update::getSqlString
+     * @group ZF2-479
+     */
+    public function testGetSqlStringNull()
+    {
+        $this->update->table('foo')
+            ->set(array('bar' => 'baz', 'boo' => null))
+            ->where('x = y');
+
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NULL WHERE x = y', $this->update->getSqlString());
+    }
+    
+    
+    /**
+     * @covers Zend\Db\Sql\Update::where
+     * @group ZF2-479
+     */
+    public function testWhereArrayEnhanced()
+    {
+        $this->update->table('table');
+        $this->update->set(array('foo' => 'bar'));
+        $this->update->where(array(
+            'c1' => null,
+            'c2' => array(1, 2, 3),
+            new \Zend\Db\Sql\Predicate\IsNotNull('c3')
+         ));
+        $this->assertEquals('UPDATE "table" SET "foo" = \'bar\' WHERE "c1" IS NULL AND "c2" IN (\'1\', \'2\', \'3\') AND "c3" IS NOT NULL', $this->update->getSqlString());
+    }
+    
+    /**
+     * @covers Zend\Db\Sql\Update::prepareStatement
+     * @group ZF2-479
+     */
+    public function testPrepareStatementEnhanced()
+    {
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('UPDATE "table" SET "foo" = ? WHERE "c1" IS NULL AND "c2" IN (?, ?, ?) AND "c3" IS NOT NULL'));
+
+        $this->update->table('table');
+        $this->update->set(array('foo' => 'bar'));
+        $this->update->where(array(
+            'c1' => null,
+            'c2' => array(1, 2, 3),
+            new \Zend\Db\Sql\Predicate\IsNotNull('c3')
+         ));
+
+        $this->update->prepareStatement($mockAdapter, $mockStatement);
+    }
 }

@@ -98,4 +98,13 @@ class CheckboxTest extends TestCase
         $element->setChecked(false);
         $this->assertEquals(false, $element->isChecked());
     }
+
+    public function testCheckWithCheckedValue()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setValue($element->getCheckedValue());
+        $this->assertEquals(true, $element->isChecked());
+    }
 }

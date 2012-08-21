@@ -12,6 +12,7 @@ namespace Zend\Validator\File;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
@@ -145,7 +146,17 @@ class MimeType extends AbstractValidator
             $magic = getenv('magic');
             if (!empty($magic)) {
                 $this->setMagicFile($magic);
-            } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
+                if ($this->options['magicFile'] === null) {
+                    $this->options['magicFile'] = false;
+                }
+                return $this->options['magicFile'];
+            }
+
+            ErrorHandler::start();
+            $safeMode = ini_get('safe_mode');
+            ErrorHandler::stop();
+
+            if (!($safeMode == 'On' || $safeMode === 1)) {
                 foreach ($this->magicFiles as $file) {
                     // suppressing errors which are thrown due to openbase_dir restrictions
                     try {
@@ -195,16 +206,17 @@ class MimeType extends AbstractValidator
             ));
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-            $this->finfo = @finfo_open($const, $file);
+            ErrorHandler::start(E_NOTICE|E_WARNING);
+            $this->finfo = finfo_open($const, $file);
+            $error       = ErrorHandler::stop();
             if (empty($this->finfo)) {
                 $this->finfo = null;
                 throw new Exception\InvalidMagicMimeFileException(sprintf(
                     'The given magicfile ("%s") could not be used by ext/finfo',
                     $file
-                ));
-            } else {
-                $this->options['magicFile'] = $file;
+                ), 0, $error);
             }
+            $this->options['magicFile'] = $file;
         }
 
         return $this;
@@ -355,11 +367,15 @@ class MimeType extends AbstractValidator
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!$this->isMagicFileDisabled() && (!empty($mimefile) && empty($this->finfo))) {
-                $this->finfo = @finfo_open($const, $mimefile);
+                ErrorHandler::start(E_NOTICE|E_WARNING);
+                $this->finfo = finfo_open($const, $mimefile);
+                ErrorHandler::stop();
             }
 
             if (empty($this->finfo)) {
-                $this->finfo = @finfo_open($const);
+                ErrorHandler::start(E_NOTICE|E_WARNING);
+                $this->finfo = finfo_open($const);
+                ErrorHandler::stop();
             }
 
             $this->type = null;

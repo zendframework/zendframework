@@ -15,6 +15,7 @@ use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
 use Zend\Http\Response;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used
@@ -218,19 +219,25 @@ class Socket implements HttpAdapter, StreamInterface
             $flags = STREAM_CLIENT_CONNECT;
             if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
 
-            $errno = null;
-            $errstr = '';
-            $this->socket = @stream_socket_client($host . ':' . $port,
-                                                  $errno,
-                                                  $errstr,
-                                                  (int) $this->config['timeout'],
-                                                  $flags,
-                                                  $context);
+            ErrorHandler::start();
+            $this->socket = stream_socket_client(
+                $host . ':' . $port,
+                $errno,
+                $errstr,
+                (int) $this->config['timeout'],
+                $flags,
+                $context
+            );
+            $error = ErrorHandler::stop();
 
             if (! $this->socket) {
                 $this->close();
-                throw new AdapterException\RuntimeException(
-                    'Unable to Connect to ' . $host . ':' . $port . '. Error #' . $errno . ': ' . $errstr);
+                throw new AdapterException\RuntimeException(sprintf(
+                    'Unable to connect to %s:%d%s',
+                    $host,
+                    $port
+                    ($error ? '. Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
+                ), 0, $error);
             }
 
             // Set the stream timeout
@@ -287,8 +294,11 @@ class Socket implements HttpAdapter, StreamInterface
         }
 
         // Send the request
-        if (! @fwrite($this->socket, $request)) {
-            throw new AdapterException\RuntimeException('Error writing request to server');
+        ErrorHandler::start();
+        $test  = fwrite($this->socket, $request);
+        $error = ErrorHandler::stop();
+        if (!test) {
+            throw new AdapterException\RuntimeException('Error writing request to server', 0, $error);
         }
 
         if (is_resource($body)) {
@@ -392,7 +402,9 @@ class Socket implements HttpAdapter, StreamInterface
                         }
                     } while (! feof($this->socket));
 
-                    $chunk .= @fgets($this->socket);
+                    ErrorHandler::start();
+                    $chunk .= fgets($this->socket);
+                    ErrorHandler::stop();
                     $this->_checkSocketReadTimeout();
 
                     if (!$this->out_stream) {
@@ -485,7 +497,11 @@ class Socket implements HttpAdapter, StreamInterface
      */
     public function close()
     {
-        if (is_resource($this->socket)) @fclose($this->socket);
+        if (is_resource($this->socket)) {
+            ErrorHandler::start();
+            fclose($this->socket);
+            ErrorHandler::stop();
+        }
         $this->socket = null;
         $this->connected_to = array(null, null);
     }

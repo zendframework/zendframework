@@ -96,10 +96,13 @@ class AdapterOptions extends AbstractOptions
             if ($keyPattern !== '') {
                 ErrorHandler::start(E_WARNING);
                 $result = preg_match($keyPattern, '');
-                ErrorHandler::stop();
+                $error = ErrorHandler::stop();
                 if ($result === false) {
-                    $err = error_get_last();
-                    throw new Exception\InvalidArgumentException("Invalid pattern '{$keyPattern}': {$err['message']}");
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'Invalid pattern "%s"%s',
+                        $keyPattern,
+                        ($error ? ': ' . $error->getMessage() : '')
+                    ), 0, $error);
                 }
             }
 

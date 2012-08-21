@@ -12,6 +12,7 @@ namespace Zend\Ldap\Collection;
 
 use Zend\Ldap;
 use Zend\Ldap\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -73,7 +74,10 @@ class DefaultIterator implements \Iterator, \Countable
     {
         $this->ldap      = $ldap;
         $this->resultId  = $resultId;
-        $this->itemCount = @ldap_count_entries($ldap->getResource(), $resultId);
+
+        ErrorHandler::start();
+        $this->itemCount = ldap_count_entries($ldap->getResource(), $resultId);
+        ErrorHandler::stop();
         if ($this->itemCount === false) {
             throw new Exception\LdapException($this->ldap, 'counting entries');
         }
@@ -93,7 +97,10 @@ class DefaultIterator implements \Iterator, \Countable
     {
         $isClosed = false;
         if (is_resource($this->resultId)) {
-            $isClosed       = @ldap_free_result($this->resultId);
+            ErrorHandler::start();
+            $isClosed       = ldap_free_result($this->resultId);
+            ErrorHandler::stop();
+
             $this->resultId = null;
             $this->current  = null;
         }
@@ -191,13 +198,26 @@ class DefaultIterator implements \Iterator, \Countable
 
         $entry          = array('dn' => $this->key());
         $ber_identifier = null;
-        $name           = @ldap_first_attribute(
+
+        ErrorHandler::start();
+        $name = ldap_first_attribute(
             $this->ldap->getResource(), $this->current,
             $ber_identifier
         );
+        ErrorHandler::stop();
+
         while ($name) {
-            $data = @ldap_get_values_len($this->ldap->getResource(), $this->current, $name);
-            unset($data['count']);
+            ErrorHandler::start();
+            $data = ldap_get_values_len($this->ldap->getResource(), $this->current, $name);
+            ErrorHandler::stop();
+
+            if (!$data) {
+                $data = array();
+            }
+
+            if (isset($data['count'])) {
+                unset($data['count']);
+            }
 
             switch ($this->attributeNameTreatment) {
                 case self::ATTRIBUTE_TO_LOWER:
@@ -214,10 +234,13 @@ class DefaultIterator implements \Iterator, \Countable
                     break;
             }
             $entry[$attrName] = $data;
-            $name             = @ldap_next_attribute(
+
+            ErrorHandler::start();
+            $name = ldap_next_attribute(
                 $this->ldap->getResource(), $this->current,
                 $ber_identifier
             );
+            ErrorHandler::stop();
         }
         ksort($entry, SORT_LOCALE_STRING);
         return $entry;
@@ -236,7 +259,10 @@ class DefaultIterator implements \Iterator, \Countable
             $this->rewind();
         }
         if (is_resource($this->current)) {
-            $currentDn = @ldap_get_dn($this->ldap->getResource(), $this->current);
+            ErrorHandler::start();
+            $currentDn = ldap_get_dn($this->ldap->getResource(), $this->current);
+            ErrorHandler::stop();
+
             if ($currentDn === false) {
                 throw new Exception\LdapException($this->ldap, 'getting dn');
             }
@@ -259,7 +285,9 @@ class DefaultIterator implements \Iterator, \Countable
         $code = 0;
 
         if (is_resource($this->current) && $this->itemCount > 0) {
-            $this->current = @ldap_next_entry($this->ldap->getResource(), $this->current);
+            ErrorHandler::start();
+            $this->current = ldap_next_entry($this->ldap->getResource(), $this->current);
+            ErrorHandler::stop();
             if ($this->current === false) {
                 $msg = $this->ldap->getLastError($code);
                 if ($code === Exception\LdapException::LDAP_SIZELIMIT_EXCEEDED) {
@@ -284,7 +312,9 @@ class DefaultIterator implements \Iterator, \Countable
     public function rewind()
     {
         if (is_resource($this->resultId)) {
-            $this->current = @ldap_first_entry($this->ldap->getResource(), $this->resultId);
+            ErrorHandler::start();
+            $this->current = ldap_first_entry($this->ldap->getResource(), $this->resultId);
+            ErrorHandler::stop();
             if ($this->current === false
                 && $this->ldap->getLastErrorCode() > Exception\LdapException::LDAP_SUCCESS
             ) {

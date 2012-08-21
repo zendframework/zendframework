@@ -12,6 +12,7 @@ namespace Zend\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Ldap\Converter is a collection of useful LDAP related conversion functions.
@@ -382,7 +383,10 @@ class Converter
      */
     public static function fromLdapUnserialize($value)
     {
-        $v = @unserialize($value);
+        ErrorHandler::start(E_NOTICE);
+        $v = unserialize($value);
+        ErrorHandler::stop();
+
         if (false === $v && $value != 'b:0;') {
             throw new Exception\UnexpectedValueException('The given value could not be unserialized');
         }

@@ -13,7 +13,8 @@
     },
     "target-dir": "Zend/File",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
         "zendframework/zend-filter": "Zend\\Filter component",

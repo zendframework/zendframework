@@ -13,6 +13,7 @@ namespace Zend\I18n\Translator\Loader;
 use Zend\I18n\Exception;
 use Zend\I18n\Translator\Plural\Rule as PluralRule;
 use Zend\I18n\Translator\TextDomain;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Gettext loader.
@@ -57,7 +58,15 @@ class Gettext implements LoaderInterface
 
         $textDomain = new TextDomain();
 
-        $this->file = @fopen($filename, 'rb');
+        ErrorHandler::start();
+        $this->file = fopen($filename, 'rb');
+        $error = ErrorHandler::stop();
+        if (false === $this->file) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Could not open file %s for reading',
+                $filename
+            ), 0, $error);
+        }
 
         // Verify magic number
         $magic = fread($this->file, 4);

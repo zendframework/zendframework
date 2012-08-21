@@ -10,6 +10,8 @@
 
 namespace Zend\Authentication\Adapter\Http;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * HTTP Authentication File Resolver
  *
@@ -102,9 +104,11 @@ class FileResolver implements ResolverInterface
         }
 
         // Open file, read through looking for matching credentials
-        $fp = @fopen($this->file, 'r');
+        ErrorHandler::start(E_WARNING);
+        $fp     = fopen($this->file, 'r');
+        $error = ErrorHandler::stop();
         if (!$fp) {
-            throw new Exception\RuntimeException('Unable to open password file: ' . $this->file);
+            throw new Exception\RuntimeException('Unable to open password file: ' . $this->file, 0, $error);
         }
 
         // No real validation is done on the contents of the password file. The

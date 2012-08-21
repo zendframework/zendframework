@@ -12,6 +12,7 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -96,11 +97,13 @@ class Regex extends AbstractValidator
      */
     public function setPattern($pattern)
     {
+        ErrorHandler::start();
         $this->pattern = (string) $pattern;
-        $status        = @preg_match($this->pattern, "Test");
+        $status        = preg_match($this->pattern, "Test");
+        $error         = ErrorHandler::stop();
 
         if (false === $status) {
-             throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'");
+             throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'", 0, $error);
         }
 
         return $this;
@@ -121,7 +124,9 @@ class Regex extends AbstractValidator
 
         $this->setValue($value);
 
-        $status = @preg_match($this->pattern, $value);
+        ErrorHandler::start();
+        $status = preg_match($this->pattern, $value);
+        ErrorHandler::stop();
         if (false === $status) {
             $this->error(self::ERROROUS);
             return false;

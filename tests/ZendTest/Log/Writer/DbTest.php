@@ -38,22 +38,27 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->writer->setFormatter(new SimpleFormatter);
     }
 
-    public function testNotPassingTableNameToConstructorThrowsException(){
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'You must specify a table name. Either directly in the constructor, or via options');
-        new DbWriter($this->db);
+    public function testNotPassingTableNameToConstructorThrowsException()
+    {
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'table name');
+        $writer = new DbWriter($this->db);
     }
 
-    public function testNotPassingDbToConstructorThrowsException(){
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'You must specify a database adapter either explicitly in the constructor or in options array with key "db"');
-        new DbWriter(array());
+    public function testNotPassingDbToConstructorThrowsException()
+    {
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Adapter');
+        $writer = new DbWriter(array());
     }
 
-    public function testPassingTableNameAsArgIsOK(){
+    public function testPassingTableNameAsArgIsOK()
+    {
         $options = array(
-            'db' => $this->db,
+            'db'    => $this->db,
             'table' => $this->tableName,
         );
-        new DbWriter ($options);
+        $writer = new DbWriter($options);
+        $this->assertInstanceOf('Zend\Log\Writer\Db', $writer);
+        $this->assertAttributeEquals($this->tableName, 'tableName', $writer);
     }
 
     public function testWriteWithDefaults()

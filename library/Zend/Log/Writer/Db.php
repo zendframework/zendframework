@@ -75,16 +75,13 @@ class Db extends AbstractWriter
             $db        = isset($db['db']) ? $db['db'] : null;
         }
 
-        if (null === $db){
-            throw new Exception\InvalidArgumentException('You must specify a database adapter either explicitly in the constructor or in options array with key "db"');
-        }
-
-        if (null === $tableName){
-            throw new Exception\InvalidArgumentException('You must specify a table name. Either directly in the constructor, or via options');
-        }
-
         if (!$db instanceof Adapter) {
             throw new Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
+        }
+
+        $tableName = (string) $tableName;
+        if ('' === $tableName){
+            throw new Exception\InvalidArgumentException('You must specify a table name. Either directly in the constructor, or via options');
         }
 
         $this->db        = $db;

@@ -228,12 +228,8 @@ class Checkbox extends Element implements InputProviderInterface
     {
         if (is_bool($value)) {
             $this->value = $value;
-        } elseif ($value === $this->getCheckedValue()) {
-            $this->value = true;
-        } elseif (is_object($value) && method_exists('__toString', $value)) {
-            $this->value = $value->__toString() == $this->getCheckedValue();
         } else {
-            $this->value = false;
+            $this->value = $value === $this->getCheckedValue();
         }
         return $this;
     }

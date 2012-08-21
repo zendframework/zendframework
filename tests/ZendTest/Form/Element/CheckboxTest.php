@@ -23,7 +23,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Checkbox as CheckboxElement;
-use Zend\Form\Factory;
 
 class CheckboxTest extends TestCase
 {

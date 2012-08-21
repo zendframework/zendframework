@@ -109,7 +109,7 @@ abstract class Console
         return
             ( defined('PHP_OS') && ( substr_compare(PHP_OS,'win',0,3,true) === 0) ) ||
             (getenv('OS') != false && substr_compare(getenv('OS'),'windows',0,7,true))
-            ;
+        ;
     }
 
     /**

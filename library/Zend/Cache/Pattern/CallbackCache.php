@@ -159,9 +159,9 @@ class CallbackCache extends AbstractPattern
 
             if (!$serializedObject) {
                 throw new Exception\RuntimeException(sprintf(
-                    'Cannot serialize callback: %s',
-                    $error->getMessage()
-                ));
+                    'Cannot serialize callback%s',
+                    ($error ? ': ' . $error->getMessage() : '')
+                ), 0, $error);
             }
             $callbackKey.= $serializedObject;
         }
@@ -191,13 +191,13 @@ class CallbackCache extends AbstractPattern
                 "Can't serialize arguments: see previous exception"
             , 0, $e);
         }
-        ErrorHandler::stop();
+        $error = ErrorHandler::stop();
 
         if (!$serializedArgs) {
-            $lastErr = error_get_last();
-            throw new Exception\RuntimeException(
-                "Can't serialize arguments: " . $lastErr['message']
-            );
+            throw new Exception\RuntimeException(sprintf(
+                'Cannot serialize arguments%s',
+                ($error ? ': ' . $error->getMessage() : '')
+            ), 0, $error);
         }
 
         return md5($serializedArgs);

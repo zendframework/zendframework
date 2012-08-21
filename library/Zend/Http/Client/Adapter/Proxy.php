@@ -157,10 +157,10 @@ class Proxy extends Socket
 
         // Send the request
         ErrorHandler::start();
-        $test = fwrite($this->socket, $request);
-        ErrorHandler::stop();
+        $test  = fwrite($this->socket, $request);
+        $error = ErrorHandler::stop();
         if (!$test) {
-            throw new AdapterException\RuntimeException("Error writing request to proxy server");
+            throw new AdapterException\RuntimeException("Error writing request to proxy server", 0, $error);
         }
 
         if (is_resource($body)) {
@@ -201,10 +201,10 @@ class Proxy extends Socket
 
         // Send the request
         ErrorHandler::start();
-        $test = fwrite($this->socket, $request);
-        ErrorHandler::stop();
+        $test  = fwrite($this->socket, $request);
+        $error = ErrorHandler::stop();
         if (!$test) {
-            throw new AdapterException\RuntimeException("Error writing request to proxy server");
+            throw new AdapterException\RuntimeException("Error writing request to proxy server", 0, $error);
         }
 
         // Read response headers only

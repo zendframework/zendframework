@@ -100,10 +100,10 @@ class Regex extends AbstractValidator
         ErrorHandler::start();
         $this->pattern = (string) $pattern;
         $status        = preg_match($this->pattern, "Test");
-        ErrorHandler::stop();
+        $error         = ErrorHandler::stop();
 
         if (false === $status) {
-             throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'");
+             throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'", 0, $error);
         }
 
         return $this;

@@ -86,14 +86,14 @@ class Pop3
             $port = $ssl == 'SSL' ? 995 : 110;
         }
 
-        $errno  =  0;
-        $errstr = '';
         ErrorHandler::start();
         $this->socket = fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
-        ErrorHandler::stop();
+        $error = ErrorHandler::stop();
         if (!$this->socket) {
-            throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr
-                                . ' (errno = ' . $errno . ' )');
+            throw new Exception\RuntimeException(sprintf(
+                'cannot connect to host%s',
+                ($error ? sprintf('; error = %s (errno = %d )', $error->getMessage(), $error->getCode()) : '')
+            ), 0, $error);
         }
 
         $welcome = $this->readResponse();
@@ -128,9 +128,9 @@ class Pop3
     {
         ErrorHandler::start();
         $result = fputs($this->socket, $request . "\r\n");
-        ErrorHandler::stop();
+        $error  = ErrorHandler::stop();
         if (!$result) {
-            throw new Exception\RuntimeException('send failed - connection closed?');
+            throw new Exception\RuntimeException('send failed - connection closed?', 0, $error);
         }
     }
 
@@ -146,9 +146,9 @@ class Pop3
     {
         ErrorHandler::start();
         $result = fgets($this->socket);
-        ErrorHandler::stop();
+        $error  = ErrorHandler::stop();
         if (!is_string($result)) {
-            throw new Exception\RuntimeException('read failed - connection closed?');
+            throw new Exception\RuntimeException('read failed - connection closed?', 0, $error);
         }
 
         $result = trim($result);

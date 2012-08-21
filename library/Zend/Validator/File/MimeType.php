@@ -208,16 +208,15 @@ class MimeType extends AbstractValidator
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             ErrorHandler::start(E_NOTICE|E_WARNING);
             $this->finfo = finfo_open($const, $file);
-            ErrorHandler::stop();
+            $error       = ErrorHandler::stop();
             if (empty($this->finfo)) {
                 $this->finfo = null;
                 throw new Exception\InvalidMagicMimeFileException(sprintf(
                     'The given magicfile ("%s") could not be used by ext/finfo',
                     $file
-                ));
-            } else {
-                $this->options['magicFile'] = $file;
+                ), 0, $error);
             }
+            $this->options['magicFile'] = $file;
         }
 
         return $this;

@@ -99,10 +99,10 @@ class AdapterOptions extends AbstractOptions
                 $error = ErrorHandler::stop();
                 if ($result === false) {
                     throw new Exception\InvalidArgumentException(sprintf(
-                        'Invalid pattern "%s": %s',
+                        'Invalid pattern "%s"%s',
                         $keyPattern,
-                        $error->getMessage()
-                    ));
+                        ($error ? ': ' . $error->getMessage() : '')
+                    ), 0, $error);
                 }
             }
 

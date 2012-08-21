@@ -172,10 +172,10 @@ class Console extends AbstractAdapter
     {
         ErrorHandler::start();
         $stream = fopen($resource, 'w');
-        ErrorHandler::stop();
+        $error  = ErrorHandler::stop();
 
         if ($stream === false) {
-                throw new Exception\RuntimeException('Unable to open stream');
+            throw new Exception\RuntimeException('Unable to open stream', 0, $error);
         }
 
         if ($this->outputStream !== null) {

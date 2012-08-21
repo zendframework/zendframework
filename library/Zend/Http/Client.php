@@ -600,13 +600,13 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         ErrorHandler::start();
-        $fp = fopen($this->streamName, "w+b");
-        ErrorHandler::stop();
+        $fp    = fopen($this->streamName, "w+b");
+        $error = ErrorHandler::stop();
         if (false === $fp) {
             if ($this->adapter instanceof Client\Adapter\AdapterInterface) {
                 $this->adapter->close();
             }
-            throw new Exception\RuntimeException("Could not open temp file {$this->streamName}");
+            throw new Exception\RuntimeException("Could not open temp file {$this->streamName}", 0, $error);
         }
 
         return $fp;
@@ -931,10 +931,10 @@ class Client implements Stdlib\DispatchableInterface
     {
         if ($data === null) {
             ErrorHandler::start();
-            $data = file_get_contents($filename);
-            ErrorHandler::stop();
+            $data  = file_get_contents($filename);
+            $error = ErrorHandler::stop();
             if ($data === false) {
-                throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload");
+                throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload", 0, $error);
             }
             if (!$ctype) {
                 $ctype = $this->detectFileMimeType($filename);

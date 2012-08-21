@@ -60,12 +60,12 @@ class Gettext implements LoaderInterface
 
         ErrorHandler::start();
         $this->file = fopen($filename, 'rb');
-        ErrorHandler::stop();
+        $error = ErrorHandler::stop();
         if (false === $this->file) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not open file %s for reading',
                 $filename
-            ));
+            ), 0, $error);
         }
 
         // Verify magic number

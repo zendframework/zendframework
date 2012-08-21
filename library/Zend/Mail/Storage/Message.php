@@ -40,9 +40,9 @@ class Message extends Part implements Message\MessageInterface
             if (!is_resource($params['file'])) {
                 ErrorHandler::start();
                 $params['raw'] = file_get_contents($params['file']);
-                ErrorHandler::stop();
+                $error = ErrorHandler::stop();
                 if ($params['raw'] === false) {
-                    throw new Exception\RuntimeException('could not open file');
+                    throw new Exception\RuntimeException('could not open file', 0, $error);
                 }
             } else {
                 $params['raw'] = stream_get_contents($params['file']);

@@ -49,28 +49,28 @@ class Maildir extends Folder\Maildir implements WritableInterface
             }
         } else {
             ErrorHandler::start();
-            $test = mkdir($dir);
-            ErrorHandler::stop();
+            $test  = mkdir($dir);
+            $error = ErrorHandler::stop();
             if (!$test) {
                 $dir = dirname($dir);
                 if (!file_exists($dir)) {
-                    throw new StorageException\InvalidArgumentException("parent $dir not found");
+                    throw new StorageException\InvalidArgumentException("parent $dir not found", 0, $error);
                 } elseif (!is_dir($dir)) {
-                    throw new StorageException\InvalidArgumentException("parent $dir not a directory");
+                    throw new StorageException\InvalidArgumentException("parent $dir not a directory", 0, $error);
                 } else {
-                    throw new StorageException\RuntimeException('cannot create maildir');
+                    throw new StorageException\RuntimeException('cannot create maildir', 0, $error);
                 }
             }
         }
 
         foreach (array('cur', 'tmp', 'new') as $subdir) {
             ErrorHandler::start();
-            $test = mkdir($dir . DIRECTORY_SEPARATOR . $subdir);
-            ErrorHandler::stop();
+            $test  = mkdir($dir . DIRECTORY_SEPARATOR . $subdir);
+            $error = ErrorHandler::stop();
             if (!$test) {
                 // ignore if dir exists (i.e. was already valid maildir or two processes try to create one)
                 if (!file_exists($dir . DIRECTORY_SEPARATOR . $subdir)) {
-                    throw new StorageException\RuntimeException('could not create subdir ' . $subdir);
+                    throw new StorageException\RuntimeException('could not create subdir ' . $subdir, 0, $error);
                 }
             }
         }
@@ -163,8 +163,8 @@ class Maildir extends Folder\Maildir implements WritableInterface
 
         ErrorHandler::start();
         if (!mkdir($fulldir) || !mkdir($fulldir . DIRECTORY_SEPARATOR . 'cur')) {
-            ErrorHandler::stop();
-            throw new StorageException\RuntimeException('error while creating new folder, may be created incompletely');
+            $error = ErrorHandler::stop();
+            throw new StorageException\RuntimeException('error while creating new folder, may be created incompletely', 0, $error);
         }
         ErrorHandler::stop();
 
@@ -649,10 +649,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         $new_filename = dirname(dirname($filedata['filename'])) . DIRECTORY_SEPARATOR . 'cur' . DIRECTORY_SEPARATOR . "$filedata[uniq]$info";
 
         ErrorHandler::start();
-        $test = rename($filedata['filename'], $new_filename);
-        ErrorHandler::stop();
+        $test  = rename($filedata['filename'], $new_filename);
+        $error = ErrorHandler::stop();
         if (!$test) {
-            throw new StorageException\RuntimeException('cannot rename file');
+            throw new StorageException\RuntimeException('cannot rename file', 0, $error);
         }
 
         $filedata['flags']    = $flags;
@@ -677,10 +677,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         }
 
         ErrorHandler::start();
-        $test = unlink($filename);
-        ErrorHandler::stop();
+        $test  = unlink($filename);
+        $error = ErrorHandler::stop();
         if (!$test) {
-            throw new StorageException\RuntimeException('cannot remove message');
+            throw new StorageException\RuntimeException('cannot remove message', 0, $error);
         }
         unset($this->files[$id - 1]);
         // remove the gap
@@ -717,10 +717,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
     {
         if ($fromStorage) {
             ErrorHandler::start(E_WARNING);
-            $fh = fopen($this->rootdir . 'maildirsize', 'r');
-            ErrorHandler::stop();
+            $fh    = fopen($this->rootdir . 'maildirsize', 'r');
+            $error = ErrorHandler::stop();
             if (!$fh) {
-                throw new StorageException\RuntimeException('cannot open maildirsize');
+                throw new StorageException\RuntimeException('cannot open maildirsize', 0, $error);
             }
             $definition = fgets($fh);
             fclose($fh);

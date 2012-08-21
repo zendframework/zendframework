@@ -219,8 +219,6 @@ class Socket implements HttpAdapter, StreamInterface
             $flags = STREAM_CLIENT_CONNECT;
             if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
 
-            $errno = null;
-            $errstr = '';
             ErrorHandler::start();
             $this->socket = stream_socket_client(
                 $host . ':' . $port,
@@ -230,12 +228,16 @@ class Socket implements HttpAdapter, StreamInterface
                 $flags,
                 $context
             );
-            ErrorHandler::stop();
+            $error = ErrorHandler::stop();
 
             if (! $this->socket) {
                 $this->close();
-                throw new AdapterException\RuntimeException(
-                    'Unable to Connect to ' . $host . ':' . $port . '. Error #' . $errno . ': ' . $errstr);
+                throw new AdapterException\RuntimeException(sprintf(
+                    'Unable to connect to %s:%d%s',
+                    $host,
+                    $port
+                    ($error ? '. Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
+                ), 0, $error);
             }
 
             // Set the stream timeout
@@ -293,10 +295,10 @@ class Socket implements HttpAdapter, StreamInterface
 
         // Send the request
         ErrorHandler::start();
-        $test = fwrite($this->socket, $request);
-        ErrorHandler::stop();
+        $test  = fwrite($this->socket, $request);
+        $error = ErrorHandler::stop();
         if (!test) {
-            throw new AdapterException\RuntimeException('Error writing request to server');
+            throw new AdapterException\RuntimeException('Error writing request to server', 0, $error);
         }
 
         if (is_resource($body)) {

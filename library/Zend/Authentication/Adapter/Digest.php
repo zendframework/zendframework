@@ -172,9 +172,9 @@ class Digest implements AdapterInterface
 
         ErrorHandler::start(E_WARNING);
         $fileHandle = fopen($this->filename, 'r');
-        ErrorHandler::stop();
+        $error      = ErrorHandler::stop();
         if (false === $fileHandle) {
-            throw new Exception\UnexpectedValueException("Cannot open '$this->filename' for reading");
+            throw new Exception\UnexpectedValueException("Cannot open '$this->filename' for reading", 0, $error);
         }
 
         $id       = "$this->username:$this->realm";

@@ -424,13 +424,13 @@ class Sitemap extends AbstractHelper
         // validate using schema if specified
         if ($this->getUseSchemaValidation()) {
             ErrorHandler::start();
-            $test = $dom->schemaValidate(self::SITEMAP_XSD);
-            ErrorHandler::stop();
+            $test  = $dom->schemaValidate(self::SITEMAP_XSD);
+            $error = ErrorHandler::stop();
             if (!$test) {
                 throw new Exception\RuntimeException(sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
                     self::SITEMAP_XSD
-                ));
+                ), 0, $error);
             }
         }
 

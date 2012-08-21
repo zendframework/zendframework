@@ -430,10 +430,10 @@ class Figlet
 
         ErrorHandler::start(E_NOTICE);
         $textLength = iconv_strlen($text, 'UTF-8');
-        ErrorHandler::stop();
+        $error      = ErrorHandler::stop();
 
         if ($textLength === false) {
-            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
+            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding, 0, $error);
         }
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {

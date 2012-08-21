@@ -82,13 +82,13 @@ class Stream extends AbstractWriter
         } else {
             ErrorHandler::start();
             $this->stream = fopen($streamOrUrl, $mode, false);
-            ErrorHandler::stop();
+            $error = ErrorHandler::stop();
             if (!$this->stream) {
                 throw new Exception\RuntimeException(sprintf(
                     '"%s" cannot be opened with mode "%s"',
                     $streamOrUrl,
                     $mode
-                ));
+                ), 0, $error);
             }
         }
 
@@ -112,9 +112,9 @@ class Stream extends AbstractWriter
 
         ErrorHandler::start(E_WARNING);
         $result = fwrite($this->stream, $line);
-        ErrorHandler::stop();
+        $error  = ErrorHandler::stop();
         if (false === $result) {
-            throw new Exception\RuntimeException("Unable to write to stream");
+            throw new Exception\RuntimeException("Unable to write to stream", 0, $error);
         }
     }
 

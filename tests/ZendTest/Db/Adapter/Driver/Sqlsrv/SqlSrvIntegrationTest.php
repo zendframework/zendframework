@@ -9,12 +9,6 @@ use Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
  */
 class SqlsrvIntegrationTest extends \PHPUnit_Framework_TestCase
 {
-//    protected $variables = array(
-//        'hostname' => 'ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME',
-//        'username' => 'ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME',
-//        'password' => 'ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD',
-//        'database' => 'ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE',
-//    );
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -22,12 +16,6 @@ class SqlsrvIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-//        foreach ($this->variables as $name => $value) {
-//            if (!isset($GLOBALS[$value])) {
-//                $this->markTestSkipped('Missing required variable ' . $value . ' from phpunit.xml for this integration test');
-//            }
-//        }
-
         if (!extension_loaded('sqlsrv')) {
             $this->fail('The phpunit group integration-sqlsrv was enabled, but the extension is not loaded.');
         }

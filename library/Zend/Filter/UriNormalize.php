@@ -1,13 +1,25 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
+ */
 
 namespace Zend\Filter;
 
-use Zend\Filter\AbstractFilter,
-    Zend\Filter\Exception\InvalidArgumentException,
-    Zend\Uri\UriFactory,
-    Zend\Uri\Uri,
-    Zend\Uri\Exception\ExceptionInterface as UriException;
+use Zend\Filter\AbstractFilter;
+use Zend\Filter\Exception\InvalidArgumentException;
+use Zend\Uri\UriFactory;
+use Zend\Uri\Uri;
+use Zend\Uri\Exception\ExceptionInterface as UriException;
 
+/**
+ * @category   Zend
+ * @package    Zend_Filter
+ */
 class UriNormalize extends AbstractFilter
 {
     /**
@@ -32,7 +44,9 @@ class UriNormalize extends AbstractFilter
      */
     public function __construct($options = null)
     {
-        if ($options) $this->setOptions($options);
+        if ($options) {
+            $this->setOptions($options);
+        }
     }
 
     /**
@@ -81,13 +95,13 @@ class UriNormalize extends AbstractFilter
         $defaultScheme = $this->defaultScheme ?: $this->enforcedScheme;
 
         // Reset default scheme if it is not a known scheme
-        if (! UriFactory::getRegisteredSchemeClass($defaultScheme)) {
+        if (!UriFactory::getRegisteredSchemeClass($defaultScheme)) {
             $defaultScheme = null;
         }
 
         try {
             $uri = UriFactory::factory($value, $defaultScheme);
-            if ($this->enforcedScheme && (! $uri->getScheme())) {
+            if ($this->enforcedScheme && (!$uri->getScheme())) {
                 $this->enforceScheme($uri);
             }
 
@@ -98,7 +112,7 @@ class UriNormalize extends AbstractFilter
 
         $uri->normalize();
 
-        if (! $uri->isValid()) {
+        if (!$uri->isValid()) {
             return $value;
         }
 
@@ -125,7 +139,9 @@ class UriNormalize extends AbstractFilter
         }
 
         // We have nothing to do if we have no host
-        if (! $host) return;
+        if (!$host) {
+            return;
+        }
 
         $uri->setScheme($this->enforcedScheme)
             ->setHost($host)

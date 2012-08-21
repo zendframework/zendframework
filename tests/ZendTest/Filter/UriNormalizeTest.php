@@ -1,9 +1,23 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
+ */
 
 namespace ZendTest\Filter;
 
 use Zend\Filter\UriNormalize;
 
+/**
+ * @category   Zend
+ * @package    Zend_Filter
+ * @subpackage UnitTests
+ * @group      Zend_Filter
+ */
 class UriNormalizeTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -31,7 +45,7 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    static public function abnormalUriProvider()
+    public static function abnormalUriProvider()
     {
         return array(
             array('http://www.example.com', 'http://www.example.com/'),
@@ -43,7 +57,7 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function enforcedSchemeTestcaseProvider()
+    public static function enforcedSchemeTestcaseProvider()
     {
         return array(
             array('ftp', 'http://www.example.com', 'http://www.example.com/'), // no effect - this one has a scheme

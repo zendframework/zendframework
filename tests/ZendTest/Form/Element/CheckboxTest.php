@@ -57,4 +57,45 @@ class CheckboxTest extends TestCase
             }
         }
     }
+
+    public function testIsChecked()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+    }
+
+    public function testSetAttributeValue()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setAttribute('value', 123);
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setAttribute('value', true);
+        $this->assertEquals(true, $element->isChecked());
+    }
+
+    public function testIntegerCheckedValue()
+    {
+        $element = new CheckboxElement();
+        $element->setCheckedValue(123);
+
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setAttribute('value', 123);
+        $this->assertEquals(true, $element->isChecked());
+    }
+
+    public function testSetChecked()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setChecked(true);
+        $this->assertEquals(true, $element->isChecked());
+
+        $element->setChecked(false);
+        $this->assertEquals(false, $element->isChecked());
+    }
 }

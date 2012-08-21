@@ -90,8 +90,8 @@ class Uri extends AbstractValidator
         if (null === $this->uriHandler) {
             // Lazy load the base Uri handler
             $this->uriHandler = new UriHandler();
-
-        } elseif (is_string($this->uriHandler)) {
+        } elseif (is_string($this->uriHandler) && class_exists($this->uriHandler)) {
+            // Instantiate string Uri handler that references a class
             $this->uriHandler = new $this->uriHandler;
         }
 

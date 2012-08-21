@@ -122,10 +122,9 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertCount(2, $this->delete->getRawState('where'));
     }
-    
-    
-    
-     
+
+
+
     /**
      * @covers Zend\Db\Sql\Delete::where
      * @group ZF2-479

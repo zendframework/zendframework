@@ -162,10 +162,9 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString());
     }
-    
-    
-    
-    
+
+
+
     /**
      * @covers Zend\Db\Sql\Update::getSqlString
      * @group ZF2-479
@@ -178,8 +177,8 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NULL WHERE x = y', $this->update->getSqlString());
     }
-    
-    
+
+
     /**
      * @covers Zend\Db\Sql\Update::where
      * @group ZF2-479
@@ -195,7 +194,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
          ));
         $this->assertEquals('UPDATE "table" SET "foo" = \'bar\' WHERE "c1" IS NULL AND "c2" IN (\'1\', \'2\', \'3\') AND "c3" IS NOT NULL', $this->update->getSqlString());
     }
-    
+
     /**
      * @covers Zend\Db\Sql\Update::prepareStatement
      * @group ZF2-479

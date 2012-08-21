@@ -140,12 +140,12 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } elseif (is_string($pkey)) {
                         if (is_null($pvalue)) {
                             $predicate = new Predicate\IsNull($pkey, $pvalue);
-                        } else if (is_array($pvalue)) {
+                        } elseif (is_array($pvalue)) {
                             $predicate = new Predicate\In($pkey, $pvalue);
                         } else {
                             $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
                         }
-                    } else if ($pvalue instanceof Predicate\PredicateInterface) {
+                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
                         $predicate = $pvalue;
                     } else {
                         $predicate = new Predicate\Expression($pvalue);
@@ -233,7 +233,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 if ($value instanceof Expression) {
                     $exprData = $this->processExpression($value, $adapterPlatform);
                     $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
-                } else if (is_null($value)) {
+                } elseif (is_null($value)) {
                     $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = NULL';
                 } else {
                     $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);

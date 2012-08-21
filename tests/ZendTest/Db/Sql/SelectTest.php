@@ -768,10 +768,10 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    
-    
 
-     
+
+
+
     /**
      * @covers Zend\Db\Sql\Select::where
      * @group ZF2-479

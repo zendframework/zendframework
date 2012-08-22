@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -20,6 +21,7 @@ use Zend\Db\Sql\Exception;
  */
 class In implements PredicateInterface
 {
+
     protected $identifier;
     protected $valueSet;
 
@@ -72,7 +74,7 @@ class In implements PredicateInterface
     {
         if (!is_array($valueSet) && !$valueSet instanceof Select) {
             throw new Exception\InvalidArgumentException(
-                '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
+                    '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
             );
         }
         $this->valueSet = $valueSet;
@@ -84,6 +86,16 @@ class In implements PredicateInterface
         return $this->valueSet;
     }
 
+    protected function getSelectSpecification()
+    {
+        return '%s IN %s';
+    }
+
+    protected function getValueSpecification($count)
+    {
+        return '%s IN (' . implode(', ', array_fill(0, $count, '%s')) . ')';
+    }
+
     /**
      * Return array of parts for where statement
      *
@@ -93,11 +105,11 @@ class In implements PredicateInterface
     {
         $values = $this->getValueSet();
         if ($values instanceof Select) {
-            $specification = '%s IN %s';
+            $specification = $this->getSelectSpecification();
             $types = array(self::TYPE_VALUE);
             $values = array($values);
         } else {
-            $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
+            $specification = $this->getValueSpecification(count($values));
             $types = array_fill(0, count($values), self::TYPE_VALUE);
         }
 
@@ -106,10 +118,10 @@ class In implements PredicateInterface
         array_unshift($types, self::TYPE_IDENTIFIER);
 
         return array(array(
-            $specification,
-            $values,
-            $types,
-        ));
+                $specification,
+                $values,
+                $types,
+                ));
     }
 
 }

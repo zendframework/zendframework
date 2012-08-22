@@ -245,6 +245,18 @@ class SocketTest extends CommonHttpTests
     }
 
     /**
+     * @group ZF2-490
+     */
+    public function testSocketThrowsExceptionWhenSslCaPathNotProvided()
+    {
+        $request = new \Zend\Http\Request();
+        $request->setUri('https://www.google.com');
+
+        $this->setExpectedException('Zend\Http\Client\Adapter\Exception\RuntimeException', 'Invalid sslcapath provided; not a directory');
+        $this->client->send($request);
+    }
+
+    /**
      * Data Providers
      */
 

@@ -190,7 +190,7 @@ class FormButtonTest extends CommonTestCase
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
-        $element->setAttribute('label', '{button_content}');
+        $element->setLabel('{button_content}');
         $markup  = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
@@ -213,7 +213,7 @@ class FormButtonTest extends CommonTestCase
     public function testPassingElementToRenderGeneratesButtonMarkup()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', '{button_content}');
+        $element->setLabel('{button_content}');
         $markup = $this->helper->render($element);
         $this->assertContains('>{button_content}<', $markup);
         $this->assertContains('name="foo"', $markup);

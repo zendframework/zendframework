@@ -11,6 +11,7 @@
 namespace ZendTest\View\Helper;
 
 use Zend\View\Helper\Url as UrlHelper;
+use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack as Router;
 
 /**
@@ -45,6 +46,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
                     'route' => '/:controller[/:action]',
                 )
         ));
+        $this->router = $router;
 
         $this->url = new UrlHelper;
         $this->url->setRouter($router);
@@ -67,5 +69,67 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     {
         $url = $this->url->__invoke('default', array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
+    }
+
+    public function testPluginWithoutRouteMatchesInEventRaisesExceptionWhenNoRouteProvided()
+    {
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'RouteMatch');
+        $url = $this->url->__invoke();
+    }
+
+    public function testPluginWithRouteMatchesReturningNoMatchedRouteNameRaisesExceptionWhenNoRouteProvided()
+    {
+        $this->url->setRouteMatch(new RouteMatch(array()));
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'matched');
+        $url = $this->url->__invoke();
+    }
+
+    public function testPassingNoArgumentsWithValidRouteMatchGeneratesUrl()
+    {
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('home');
+        $this->url->setRouteMatch($routeMatch);
+        $url = $this->url->__invoke();
+        $this->assertEquals('/', $url);
+    }
+
+    public function testCanReuseMatchedParameters()
+    {
+        $this->router->addRoute('replace', array(
+            'type'    => 'Zend\Mvc\Router\Http\Segment',
+            'options' => array(
+                'route'    => '/:controller/:action',
+                'defaults' => array(
+                    'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
+                ),
+            ),
+        ));
+        $routeMatch = new RouteMatch(array(
+            'controller' => 'foo',
+        ));
+        $routeMatch->setMatchedRouteName('replace');
+        $this->url->setRouteMatch($routeMatch);
+        $url = $this->url->__invoke('replace', array('action' => 'bar'), array(), true);
+        $this->assertEquals('/foo/bar', $url);
+    }
+
+    public function testCanPassBooleanValueForThirdArgumentToAllowReusingRouteMatches()
+    {
+        $this->router->addRoute('replace', array(
+            'type' => 'Zend\Mvc\Router\Http\Segment',
+            'options' => array(
+                'route'    => '/:controller/:action',
+                'defaults' => array(
+                    'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
+                ),
+            ),
+        ));
+        $routeMatch = new RouteMatch(array(
+            'controller' => 'foo',
+        ));
+        $routeMatch->setMatchedRouteName('replace');
+        $this->url->setRouteMatch($routeMatch);
+        $url = $this->url->__invoke('replace', array('action' => 'bar'), true);
+        $this->assertEquals('/foo/bar', $url);
     }
 }

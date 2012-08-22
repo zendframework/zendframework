@@ -889,8 +889,8 @@ class ServiceManager implements ServiceLocatorInterface
      * Called when $allowOverride is true and we detect that a service being
      * added to the instance already exists. This will remove the duplicate
      * entry, and also any shared flags previously registered.
-     * 
-     * @param  string $canonical 
+     *
+     * @param  string $canonical
      * @return void
      */
     protected function unregisterService($canonical)

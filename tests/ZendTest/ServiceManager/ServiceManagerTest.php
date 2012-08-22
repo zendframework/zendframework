@@ -527,7 +527,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         return array(
             array(
-                'setFactory', 
+                'setFactory',
                 function ($services) use ($self) {
                     return $self;
                 },
@@ -535,13 +535,13 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
                 'assertSame',
             ),
             array(
-                'setInvokableClass', 
+                'setInvokableClass',
                 'stdClass',
                 'stdClass',
                 'assertInstanceOf',
             ),
             array(
-                'setService', 
+                'setService',
                 $self,
                 $self,
                 'assertSame',

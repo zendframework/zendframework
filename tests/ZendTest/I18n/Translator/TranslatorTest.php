@@ -112,6 +112,20 @@ class TranslatorTest extends TestCase
         $this->assertEquals('bar', $this->translator->translate('foo'));
     }
 
+
+    public function testTranslateWithCache()
+    {
+        $cache = \Zend\Cache\StorageFactory::factory(array('adapter' => 'memory'));
+        $this->translator->setCache($cache);
+
+        $loader = new TestLoader();
+        $loader->textDomain = new TextDomain(array('foo' => 'bar'));
+        $this->translator->getPluginManager()->setService('test', $loader);
+        $this->translator->addTranslationFile('test', null);
+
+        $this->assertEquals('bar', $this->translator->translate('foo'));
+    }
+
     public function testTranslatePlurals()
     {
         $this->translator->setLocale('en_EN');

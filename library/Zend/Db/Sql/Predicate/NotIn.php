@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -18,7 +17,6 @@ namespace Zend\Db\Sql\Predicate;
  */
 class NotIn extends In
 {
-
     protected $identifier;
     protected $valueSet;
 

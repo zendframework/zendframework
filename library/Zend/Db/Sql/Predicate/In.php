@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -21,7 +20,6 @@ use Zend\Db\Sql\Exception;
  */
 class In implements PredicateInterface
 {
-
     protected $identifier;
     protected $valueSet;
 
@@ -74,7 +72,7 @@ class In implements PredicateInterface
     {
         if (!is_array($valueSet) && !$valueSet instanceof Select) {
             throw new Exception\InvalidArgumentException(
-                    '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
+                '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
             );
         }
         $this->valueSet = $valueSet;
@@ -118,10 +116,10 @@ class In implements PredicateInterface
         array_unshift($types, self::TYPE_IDENTIFIER);
 
         return array(array(
-                $specification,
-                $values,
-                $types,
-                ));
+            $specification,
+            $values,
+            $types,
+        ));
     }
 
 }

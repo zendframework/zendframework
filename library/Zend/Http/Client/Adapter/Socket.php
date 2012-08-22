@@ -192,6 +192,9 @@ class Socket implements HttpAdapter, StreamInterface
                         throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');
                     }
                     if ($this->config['sslverifypeer'] == true) {
+                        if ($this->config['sslcapath'] == null || !is_dir($this->config['sslcapath'])) {
+                            throw new AdapterException\RuntimeException('Invalid sslcapath provided; not a directory');
+                        }
                         if (! stream_context_set_option($context, 'ssl', 'capath',
                                                         $this->config['sslcapath'])) {
                             throw new AdapterException\RuntimeException('Unable to set sslcapath option');

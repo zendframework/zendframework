@@ -265,7 +265,7 @@ class Connection implements ConnectionInterface
         }
 
         if (!$this->driver instanceof Sqlsrv) {
-            throw new \RuntimeException('Connection is missing an instance of Sqlsrv');
+            throw new Exception\RuntimeException('Connection is missing an instance of Sqlsrv');
         }
 
         $returnValue = sqlsrv_query($this->resource, $sql);

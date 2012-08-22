@@ -151,17 +151,25 @@ class Mysqli implements DriverInterface
      */
     public function createStatement($sqlOrResource = null)
     {
+        /**
+         * @todo Resource tracking
         if (is_resource($sqlOrResource) && !in_array($sqlOrResource, $this->resources, true)) {
             $this->resources[] = $sqlOrResource;
         }
+        */
 
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
-        } elseif ($sqlOrResource instanceof \mysqli_stmt) {
+        if ($sqlOrResource instanceof \mysqli_stmt) {
             $statement->setResource($sqlOrResource);
+        } else {
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            }
+            if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+            }
+            $statement->initialize($this->connection->getResource());
         }
-        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 

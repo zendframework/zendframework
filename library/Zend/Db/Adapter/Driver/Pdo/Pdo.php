@@ -201,12 +201,17 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     public function createStatement($sqlOrResource = null)
     {
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
-        } elseif ($sqlOrResource instanceof PDOStatement) {
+        if ($sqlOrResource instanceof \PDOStatement) {
             $statement->setResource($sqlOrResource);
+        } else {
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            }
+            if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+            }
+            $statement->initialize($this->connection->getResource());
         }
-        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 

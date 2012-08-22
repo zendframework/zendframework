@@ -182,6 +182,7 @@ class Connection implements ConnectionInterface
             );
         }
 
+        return $this;
     }
 
     /**
@@ -263,6 +264,10 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
+        if (!$this->driver instanceof Sqlsrv) {
+            throw new \RuntimeException('Connection is missing an instance of Sqlsrv');
+        }
+
         $returnValue = sqlsrv_query($this->resource, $sql);
 
         // if the returnValue is something other than a Sqlsrv_result, bypass wrapping it
@@ -306,6 +311,9 @@ class Connection implements ConnectionInterface
      */
     public function getLastGeneratedValue($name = null)
     {
+        if (!$this->resource) {
+            $this->connect();
+        }
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);

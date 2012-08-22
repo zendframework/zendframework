@@ -235,7 +235,7 @@ class Socket implements HttpAdapter, StreamInterface
                 throw new AdapterException\RuntimeException(sprintf(
                     'Unable to connect to %s:%d%s',
                     $host,
-                    $port
+                    $port,
                     ($error ? '. Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
                 ), 0, $error);
             }

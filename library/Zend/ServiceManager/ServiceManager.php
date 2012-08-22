@@ -212,15 +212,18 @@ class ServiceManager implements ServiceLocatorInterface
         $cName = $this->canonicalizeName($name);
         $rName = $name;
 
-        if ($this->allowOverride === false && $this->has(array($cName, $rName), false)) {
-            throw new Exception\InvalidServiceNameException(sprintf(
-                'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
-                $cName
-            ));
+        if ($this->has(array($cName, $rName), false)) {
+            if ($this->allowOverride === false) {
+                throw new Exception\InvalidServiceNameException(sprintf(
+                    'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
+                    $cName
+                ));
+            }
+            $this->unregisterService($cName);
         }
 
         $this->invokableClasses[$cName] = $invokableClass;
-        $this->shared[$cName]    = (bool) $shared;
+        $this->shared[$cName]           = (bool) $shared;
 
         return $this;
     }
@@ -243,11 +246,14 @@ class ServiceManager implements ServiceLocatorInterface
             );
         }
 
-        if ($this->allowOverride === false && $this->has(array($cName, $rName), false)) {
-            throw new Exception\InvalidServiceNameException(sprintf(
-                'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
-                $cName
-            ));
+        if ($this->has(array($cName, $rName), false)) {
+            if ($this->allowOverride === false) {
+                throw new Exception\InvalidServiceNameException(sprintf(
+                    'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
+                    $cName
+                ));
+            }
+            $this->unregisterService($cName);
         }
 
         $this->factories[$cName] = $factory;
@@ -328,17 +334,16 @@ class ServiceManager implements ServiceLocatorInterface
     {
         $cName = $this->canonicalizeName($name);
 
-        if ($this->allowOverride === false && $this->has($cName, false)) {
-            throw new Exception\InvalidServiceNameException(sprintf(
-                '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
-                __METHOD__,
-                $name
-            ));
+        if ($this->has($cName, false)) {
+            if ($this->allowOverride === false) {
+                throw new Exception\InvalidServiceNameException(sprintf(
+                    '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
+                    __METHOD__,
+                    $name
+                ));
+            }
+            $this->unregisterService($cName);
         }
-
-        /**
-         * @todo If a service is being overwritten, destroy all previous aliases
-         */
 
         $this->instances[$cName] = $service;
         $this->shared[$cName]    = (bool) $shared;
@@ -876,5 +881,34 @@ class ServiceManager implements ServiceLocatorInterface
         }
         $r = new ReflectionClass($className);
         return $r->implementsInterface($type);
+    }
+
+    /**
+     * Unregister a service
+     *
+     * Called when $allowOverride is true and we detect that a service being
+     * added to the instance already exists. This will remove the duplicate
+     * entry, and also any shared flags previously registered.
+     *
+     * @param  string $canonical
+     * @return void
+     */
+    protected function unregisterService($canonical)
+    {
+        $types = array('invokableClasses', 'factories', 'aliases');
+        foreach ($types as $type) {
+            if (isset($this->{$type}[$canonical])) {
+                unset($this->{$type}[$canonical]);
+                break;
+            }
+        }
+
+        if (isset($this->instances[$canonical])) {
+            unset($this->instances[$canonical]);
+        }
+
+        if (isset($this->shared[$canonical])) {
+            unset($this->shared[$canonical]);
+        }
     }
 }

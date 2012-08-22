@@ -10,6 +10,7 @@
 
 namespace ZendTest\Barcode;
 
+use ReflectionClass;
 use Zend\Barcode;
 use Zend\Barcode\Renderer;
 use Zend\Barcode\Object;
@@ -38,19 +39,21 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         // Set timezone to avoid "It is not safe to rely on the system's timezone settings."
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
+
+        // Reset plugin managers
+        $r = new ReflectionClass('Zend\Barcode\Barcode');
+
+        $rObjectPlugins = $r->getProperty('objectPlugins');
+        $rObjectPlugins->setAccessible(true);
+        $rObjectPlugins->setValue(null);
+
+        $rRendererPlugins = $r->getProperty('rendererPlugins');
+        $rRendererPlugins->setAccessible(true);
+        $rRendererPlugins->setValue(null);
     }
 
     public function tearDown()
     {
-        $objectPlugins = Barcode\Barcode::getObjectPluginManager();
-        $objectPlugins->setService('code25', null);
-        $objectPlugins->setService('code39', null);
-        $objectPlugins->setService('error', null);
-
-        $rendererPlugins = Barcode\Barcode::getRendererPluginManager();
-        $rendererPlugins->setService('image', null);
-        $rendererPlugins->setService('pdf', null);
-
         date_default_timezone_set($this->originaltimezone);
     }
 
@@ -62,6 +65,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($renderer->getBarcode() instanceof Object\Code39);
     }
 
+    /**
+     * @group fml
+     */
     public function testMinimalFactoryWithRenderer()
     {
         $renderer = Barcode\Barcode::factory('code39', 'pdf');

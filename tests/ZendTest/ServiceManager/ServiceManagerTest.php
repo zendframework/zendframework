@@ -521,4 +521,49 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\InvalidArgumentException');
         $result = $this->serviceManager->addInitializer(get_class($this));
     }
+
+    public function duplicateService()
+    {
+        $self = $this;
+        return array(
+            array(
+                'setFactory',
+                function ($services) use ($self) {
+                    return $self;
+                },
+                $self,
+                'assertSame',
+            ),
+            array(
+                'setInvokableClass',
+                'stdClass',
+                'stdClass',
+                'assertInstanceOf',
+            ),
+            array(
+                'setService',
+                $self,
+                $self,
+                'assertSame',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider duplicateService
+     */
+    public function testWithAllowOverrideOnRegisteringAServiceDuplicatingAnExistingAliasShouldInvalidateTheAlias($method, $service, $expected, $assertion = 'assertSame')
+    {
+        $this->serviceManager->setAllowOverride(true);
+        $sm = $this->serviceManager;
+        $this->serviceManager->setFactory('http.response', function ($services) use ($sm) {
+            return $sm;
+        });
+        $this->serviceManager->setAlias('response', 'http.response');
+        $this->assertSame($sm, $this->serviceManager->get('response'));
+
+        $self = $this;
+        $this->serviceManager->{$method}('response', $service);
+        $this->{$assertion}($expected, $this->serviceManager->get('response'));
+    }
 }

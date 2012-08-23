@@ -49,9 +49,12 @@ class Db implements FormatterInterface
      */
     public function format($event)
     {
-        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
-        }
+        $format = $this->getDateTimeFormat();
+        array_walk_recursive($event, function (&$value) use ($format) {
+            if ($value instanceof DateTime) {
+                $value = $value->format($format);
+            }
+        });
 
         return $event;
     }

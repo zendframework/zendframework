@@ -207,7 +207,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->writer->setFormatter(new \StdClass());
     }
 
-    public function testWriteDateTime()
+    public function testWriteDateTimeAsTimestamp()
     {
         $date = new DateTime();
         $event = array('timestamp'=> $date);
@@ -218,6 +218,24 @@ class DbTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array(array(
             'timestamp' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT)
+        )), $this->db->calls['execute'][0]);
+    }
+
+    public function testWriteDateTimeAsExtraValue()
+    {
+        $date = new DateTime();
+        $event = array(
+            'extra'=> array(
+                'request_time' => $date
+            )
+        );
+        $this->writer->write($event);
+
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+
+        $this->assertEquals(array(array(
+            'extra_request_time' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT)
         )), $this->db->calls['execute'][0]);
     }
 }

@@ -23,7 +23,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Checkbox as CheckboxElement;
-use Zend\Form\Factory;
 
 class CheckboxTest extends TestCase
 {
@@ -56,5 +55,55 @@ class CheckboxTest extends TestCase
                     break;
             }
         }
+    }
+
+    public function testIsChecked()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+    }
+
+    public function testSetAttributeValue()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setAttribute('value', 123);
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setAttribute('value', true);
+        $this->assertEquals(true, $element->isChecked());
+    }
+
+    public function testIntegerCheckedValue()
+    {
+        $element = new CheckboxElement();
+        $element->setCheckedValue(123);
+
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setAttribute('value', 123);
+        $this->assertEquals(true, $element->isChecked());
+    }
+
+    public function testSetChecked()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setChecked(true);
+        $this->assertEquals(true, $element->isChecked());
+
+        $element->setChecked(false);
+        $this->assertEquals(false, $element->isChecked());
+    }
+
+    public function testCheckWithCheckedValue()
+    {
+        $element = new CheckboxElement();
+        $this->assertEquals(false, $element->isChecked());
+
+        $element->setValue($element->getCheckedValue());
+        $this->assertEquals(true, $element->isChecked());
     }
 }

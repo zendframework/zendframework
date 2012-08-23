@@ -268,7 +268,7 @@ class Socket implements HttpAdapter, StreamInterface
                 if ($this->config['ssltransport'] && isset(self::$sslCryptoTypes[$this->config['ssltransport']])) {
                     $sslCryptoMethod = self::$sslCryptoTypes[$this->config['ssltransport']];
                 } else {
-                    $sslCryptoMethod = STREAM_CRYPTO_METHOD_SSLv23_CLIENT;
+                    $sslCryptoMethod = STREAM_CRYPTO_METHOD_SSLv3_CLIENT;
                 }
 
                 ErrorHandler::start();

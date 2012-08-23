@@ -28,6 +28,18 @@ use Zend\Stdlib\ErrorHandler;
 class Socket implements HttpAdapter, StreamInterface
 {
     /**
+     * Map SSL transport wrappers to stream crypto method constants
+     *
+     * @var array
+     */
+    protected static $sslCryptoTypes = array(
+            'ssl'   => STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
+            'sslv2' => STREAM_CRYPTO_METHOD_SSLv2_CLIENT,
+            'sslv3' => STREAM_CRYPTO_METHOD_SSLv3_CLIENT,
+            'tls'   => STREAM_CRYPTO_METHOD_TLS_CLIENT
+    );
+
+    /**
      * The socket for server connection
      *
      * @var resource|null
@@ -174,9 +186,6 @@ class Socket implements HttpAdapter, StreamInterface
      */
     public function connect($host, $port = 80, $secure = false)
     {
-        // If the URI should be accessed via SSL, prepend the Hostname with ssl://
-        $host = ($secure ? $this->config['ssltransport'] : 'tcp') . '://' . $host;
-
         // If we are connected to the wrong host, disconnect first
         if (($this->connected_to[0] != $host || $this->connected_to[1] != $port)) {
             if (is_resource($this->socket)) {
@@ -193,20 +202,26 @@ class Socket implements HttpAdapter, StreamInterface
                     if (!stream_context_set_option($context, 'ssl', 'verify_peer', $this->config['sslverifypeer'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');
                     }
+                }
+
+                if ($this->config['sslcapath']) {
                     if (!stream_context_set_option($context, 'ssl', 'capath', $this->config['sslcapath'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslcapath option');
                     }
-                    if ($this->config['sslallowselfsigned'] !== null) {
-                        if (!stream_context_set_option($context, 'ssl', 'allow_self_signed', $this->config['sslallowselfsigned'])) {
-                            throw new AdapterException\RuntimeException('Unable to set sslallowselfsigned option');
-                        }
+                }
+
+                if ($this->config['sslallowselfsigned'] !== null) {
+                    if (!stream_context_set_option($context, 'ssl', 'allow_self_signed', $this->config['sslallowselfsigned'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslallowselfsigned option');
                     }
                 }
+
                 if ($this->config['sslcert'] !== null) {
                     if (!stream_context_set_option($context, 'ssl', 'local_cert', $this->config['sslcert'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslcert option');
                     }
                 }
+
                 if ($this->config['sslpassphrase'] !== null) {
                     if (!stream_context_set_option($context, 'ssl', 'passphrase', $this->config['sslpassphrase'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslpassphrase option');
@@ -249,15 +264,38 @@ class Socket implements HttpAdapter, StreamInterface
                 throw new AdapterException\RuntimeException('Unable to set the connection timeout');
             }
 
-            if ($secure) {
-                if (!@stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_SSLv23_CLIENT)) {
+            if ($secure || $this->config['sslusecontext']) {
+                if ($this->config['ssltransport'] && isset(self::$sslCryptoTypes[$this->config['ssltransport']])) {
+                    $sslCryptoMethod = self::$sslCryptoTypes[$this->config['ssltransport']];
+                } else {
+                    $sslCryptoMethod = STREAM_CRYPTO_METHOD_SSLv23_CLIENT;
+                }
+
+                if (!@stream_socket_enable_crypto($this->socket, true, $sslCryptoMethod)) {
+                    // Error handling is kind of difficult when it comes to SSL
                     $errorString = '';
                     while (($sslError = openssl_error_string()) != false) {
                         $errorString .= "; SSL error: $sslError";
                     }
                     $this->close();
-                    throw new AdapterException\RuntimeException("Unable to enable crypto on TCP connection {$host}: $errorString");
+
+                    if ((! $errorString) && $this->config['sslverifypeer']) {
+                        // There's good chance our error is due to sslcapath not being properly set
+                        if (! ($this->config['sslcapath'] && is_dir($this->config['sslcapath']))) {
+                            $errorString = 'make sure the "sslcapath" option points to a valid SSL certificate directory';
+                        }
+                    }
+
+                    if ($errorString) {
+                        $errorString = ": $errorString";
+                    }
+
+                    throw new AdapterException\RuntimeException("Unable to enable crypto on TCP connection {$host}{$errorString}");
                 }
+
+                $host = $this->config['ssltransport'] . "://" . $host;
+            } else {
+                $host = 'tcp://' . $host;
             }
 
             // Update connected_to

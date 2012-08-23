@@ -11,14 +11,11 @@
 namespace Zend\Form\Element;
 
 use DateTime;
-use Zend\Form\Element;
-use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Form\Form;
-use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Date as DateValidator;
 
-class DateSelect extends Element implements InputProviderInterface, ElementPrepareAwareInterface
+class DateSelect extends MonthSelect
 {
     /**
      * Select form element that contains values for day
@@ -28,40 +25,7 @@ class DateSelect extends Element implements InputProviderInterface, ElementPrepa
     protected $dayElement;
 
     /**
-     * Select form element that contains values for month
-     *
-     * @var Select
-     */
-    protected $monthElement;
-
-    /**
-     * Select form element that contains values for year
-     *
-     * @var Select
-     */
-    protected $yearElement;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
-     * Min year to use for the select (default: current year - 100)
-     *
-     * @var int
-     */
-    protected $minYear;
-
-    /**
-     * Max year to use for the select (default: current year)
-     *
-     * @var int
-     */
-    protected $maxYear;
-
-    /**
-     * Constructor. Add three selects elements
+     * Constructor. Add the day select element
      *
      * @param  null|int|string  $name    Optional name for the element
      * @param  array            $options Optional options for the element
@@ -71,34 +35,6 @@ class DateSelect extends Element implements InputProviderInterface, ElementPrepa
         parent::__construct($name, $options);
 
         $this->dayElement = new Select('day');
-        $this->monthElement = new Select('month');
-        $this->yearElement = new Select('year');
-
-        $this->maxYear = date('Y');
-        $this->minYear = $this->maxYear - 100;
-    }
-
-    /**
-     * Accepted options for DateSelect:
-     * - min_year: min year to use in the year select
-     * - max_year: max year to use in the year select
-     *
-     * @param array|\Traversable $options
-     * @return DateSelect
-     */
-    public function setOptions($options)
-    {
-        parent::setOptions($options);
-
-        if (isset($options['min_year'])) {
-            $this->setMinYear($options['min_year']);
-        }
-
-        if (isset($options['max_year'])) {
-            $this->setMaxYear($options['max_year']);
-        }
-
-        return $this;
     }
 
     /**
@@ -110,66 +46,13 @@ class DateSelect extends Element implements InputProviderInterface, ElementPrepa
     }
 
     /**
-     * @return Select
-     */
-    public function getMonthElement()
-    {
-        return $this->monthElement;
-    }
-
-    /**
-     * @return Select
-     */
-    public function getYearElement()
-    {
-        return $this->yearElement;
-    }
-
-    /**
-     * @param  int $minYear
-     * @return DateSelect
-     */
-    public function setMinYear($minYear)
-    {
-        $this->minYear = $minYear;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMinYear()
-    {
-        return $this->minYear;
-    }
-
-    /**
-     * @param  int $maxYear
-     * @return DateSelect
-     */
-    public function setMaxYear($maxYear)
-    {
-        $this->maxYear = $maxYear;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMaxYear()
-    {
-        return $this->maxYear;
-    }
-
-    /**
      * @param mixed $value
      * @return void|\Zend\Form\Element
      */
     public function setValue($value)
     {
+        parent::setValue($value);
         $this->dayElement->setValue($value['day']);
-        $this->monthElement->setValue($value['month']);
-        $this->yearElement->setValue($value['year']);
     }
 
     /**
@@ -180,11 +63,10 @@ class DateSelect extends Element implements InputProviderInterface, ElementPrepa
      */
     public function prepareElement(Form $form)
     {
-        $name = $this->getName();
+        parent::prepareElement($form);
 
+        $name = $this->getName();
         $this->dayElement->setName($name . '[day]');
-        $this->monthElement->setName($name . '[month]');
-        $this->yearElement->setName($name . '[year]');
     }
 
     /**

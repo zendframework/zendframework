@@ -39,4 +39,36 @@ class MonthSelectTest extends TestCase
             }
         }
     }
+
+    /**
+     * Note about those tests: 2012-1 is not valid in HTML5 validation, but here we use selects, and in some
+     * locales, the month may be expressed using only 1 digit, so this is valid here
+     *
+     * @return array
+     */
+    public function monthValuesDataProvider()
+    {
+        return array(
+            //    value         expected
+            array('2012-01',    true),
+            array('2012-12',    true),
+            array('2012-13',    false),
+            array('2012-12-01', false),
+            array('12-2012',    false),
+            array('2012-1',     true),
+            array('12-01',      false),
+        );
+    }
+
+    /**
+     * @dataProvider monthValuesDataProvider
+     */
+    public function testMonthValidation($value, $expected)
+    {
+        $element = new MonthSelectElement('foo');
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $monthValidator = $inputSpec['validators'][0];
+        $this->assertEquals($expected, $monthValidator->isValid($value));
+    }
 }

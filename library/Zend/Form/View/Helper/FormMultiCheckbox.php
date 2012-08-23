@@ -297,7 +297,7 @@ class FormMultiCheckbox extends FormInput
                 $inputAttributes = array_merge($inputAttributes, $optionSpec['attributes']);
             }
 
-            if (in_array($value, $selectedOptions, true)) {
+            if (in_array($value, $selectedOptions)) {
                 $selected = true;
             }
 

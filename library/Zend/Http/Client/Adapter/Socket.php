@@ -271,7 +271,10 @@ class Socket implements HttpAdapter, StreamInterface
                     $sslCryptoMethod = STREAM_CRYPTO_METHOD_SSLv23_CLIENT;
                 }
 
-                if (!@stream_socket_enable_crypto($this->socket, true, $sslCryptoMethod)) {
+                ErrorHandler::start();
+                $test  = stream_socket_enable_crypto($this->socket, true, $sslCryptoMethod);
+                $error = ErrorHandler::stop();
+                if (!$test || $error) {
                     // Error handling is kind of difficult when it comes to SSL
                     $errorString = '';
                     while (($sslError = openssl_error_string()) != false) {
@@ -290,7 +293,11 @@ class Socket implements HttpAdapter, StreamInterface
                         $errorString = ": $errorString";
                     }
 
-                    throw new AdapterException\RuntimeException("Unable to enable crypto on TCP connection {$host}{$errorString}");
+                    throw new AdapterException\RuntimeException(sprintf(
+                        'Unable to enable crypto on TCP connection %s%s',
+                        $host,
+                        $errorString
+                    ), 0, $error);
                 }
 
                 $host = $this->config['ssltransport'] . "://" . $host;

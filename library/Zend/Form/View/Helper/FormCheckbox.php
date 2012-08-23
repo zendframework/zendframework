@@ -55,7 +55,7 @@ class FormCheckbox extends FormInput
         if ($element->isChecked()) {
             $attributes['checked'] = 'checked';
         }
-        
+
         $rendered = sprintf(
             '<input %s%s',
             $this->createAttributesString($attributes),

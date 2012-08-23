@@ -191,19 +191,14 @@ class Socket implements HttpAdapter, StreamInterface
                                                     $this->config['sslverifypeer'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');
                     }
-                    if ($this->config['sslverifypeer'] == true) {
-                        if ($this->config['sslcapath'] == null || !is_dir($this->config['sslcapath'])) {
-                            throw new AdapterException\RuntimeException('Invalid sslcapath provided; not a directory');
-                        }
-                        if (! stream_context_set_option($context, 'ssl', 'capath',
-                                                        $this->config['sslcapath'])) {
-                            throw new AdapterException\RuntimeException('Unable to set sslcapath option');
-                        }
-                        if ($this->config['sslallowselfsigned'] !== null) {
-                            if (! stream_context_set_option($context, 'ssl', 'allow_self_signed',
-                                                            $this->config['sslallowselfsigned'])) {
-                                throw new AdapterException\RuntimeException('Unable to set sslallowselfsigned option');
-                            }
+                    if (! stream_context_set_option($context, 'ssl', 'capath',
+                                                    $this->config['sslcapath'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslcapath option');
+                    }
+                    if ($this->config['sslallowselfsigned'] !== null) {
+                        if (! stream_context_set_option($context, 'ssl', 'allow_self_signed',
+                                                        $this->config['sslallowselfsigned'])) {
+                            throw new AdapterException\RuntimeException('Unable to set sslallowselfsigned option');
                         }
                     }
                 }

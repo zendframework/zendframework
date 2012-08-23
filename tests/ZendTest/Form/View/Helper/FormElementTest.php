@@ -171,6 +171,16 @@ class FormElementTest extends TestCase
         $this->assertContains('>Initial content<', $markup);
     }
 
+    public function testRendersButtonAsExpected()
+    {
+        $element = new Element\Button('foo');
+        $element->setLabel('My Button');
+        $markup  = $this->helper->render($element);
+
+        $this->assertContains('<button', $markup);
+        $this->assertContains('>My Button<', $markup);
+    }
+
     public function testInvokeWithNoElementChainsHelper()
     {
         $element = new Element('foo');

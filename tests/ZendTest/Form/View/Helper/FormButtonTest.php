@@ -190,7 +190,7 @@ class FormButtonTest extends CommonTestCase
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
-        $element->setAttribute('label', '{button_content}');
+        $element->setLabel('{button_content}');
         $markup  = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
@@ -213,7 +213,7 @@ class FormButtonTest extends CommonTestCase
     public function testPassingElementToRenderGeneratesButtonMarkup()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', '{button_content}');
+        $element->setLabel('{button_content}');
         $markup = $this->helper->render($element);
         $this->assertContains('>{button_content}<', $markup);
         $this->assertContains('name="foo"', $markup);
@@ -260,5 +260,36 @@ class FormButtonTest extends CommonTestCase
         $element = new Element(0);
         $markup = $this->helper->__invoke($element, '{button_content}');
         $this->assertContains('name="0"', $markup);
+    }
+
+    public function testCanTranslateContent()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value for foo:');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+            ->method('translate')
+            ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+    }
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
     }
 }

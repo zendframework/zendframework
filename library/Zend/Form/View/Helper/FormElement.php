@@ -38,6 +38,11 @@ class FormElement extends BaseAbstractHelper
             return '';
         }
 
+        if ($element instanceof Element\Button) {
+            $helper = $renderer->plugin('form_button');
+            return $helper($element);
+        }
+
         if ($element instanceof Element\Captcha) {
             $helper = $renderer->plugin('form_captcha');
             return $helper($element);

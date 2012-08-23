@@ -24,6 +24,8 @@ recommend testing your production applications against it.
     now requires that the label value is set in the element.
   - Fixed an issue with the MultiCheckBox helper to ensure checked/unchecked
     values are properly populated.
+  - The FormCheckbox view helper now requires that the element is a Checkbox
+    element; this is done to ensure the required options are available.
 - Zend\Log
   - The table name constructor option is now optional, allowing you to pass it
     in a configuration array.

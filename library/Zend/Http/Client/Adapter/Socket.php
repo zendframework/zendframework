@@ -179,45 +179,45 @@ class Socket implements HttpAdapter, StreamInterface
 
         // If we are connected to the wrong host, disconnect first
         if (($this->connected_to[0] != $host || $this->connected_to[1] != $port)) {
-            if (is_resource($this->socket)) $this->close();
+            if (is_resource($this->socket)) {
+                $this->close();
+            }
         }
 
         // Now, if we are not connected, connect
-        if (! is_resource($this->socket) || ! $this->config['keepalive']) {
+        if (!is_resource($this->socket) || ! $this->config['keepalive']) {
             $context = $this->getStreamContext();
+
             if ($secure || $this->config['sslusecontext']) {
                 if ($this->config['sslverifypeer'] !== null) {
-                    if (! stream_context_set_option($context, 'ssl', 'verify_peer',
-                                                    $this->config['sslverifypeer'])) {
+                    if (!stream_context_set_option($context, 'ssl', 'verify_peer', $this->config['sslverifypeer'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');
                     }
-                    if (! stream_context_set_option($context, 'ssl', 'capath',
-                                                    $this->config['sslcapath'])) {
+                    if (!stream_context_set_option($context, 'ssl', 'capath', $this->config['sslcapath'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslcapath option');
                     }
                     if ($this->config['sslallowselfsigned'] !== null) {
-                        if (! stream_context_set_option($context, 'ssl', 'allow_self_signed',
-                                                        $this->config['sslallowselfsigned'])) {
+                        if (!stream_context_set_option($context, 'ssl', 'allow_self_signed', $this->config['sslallowselfsigned'])) {
                             throw new AdapterException\RuntimeException('Unable to set sslallowselfsigned option');
                         }
                     }
                 }
                 if ($this->config['sslcert'] !== null) {
-                    if (! stream_context_set_option($context, 'ssl', 'local_cert',
-                                                    $this->config['sslcert'])) {
+                    if (!stream_context_set_option($context, 'ssl', 'local_cert', $this->config['sslcert'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslcert option');
                     }
                 }
                 if ($this->config['sslpassphrase'] !== null) {
-                    if (! stream_context_set_option($context, 'ssl', 'passphrase',
-                                                    $this->config['sslpassphrase'])) {
+                    if (!stream_context_set_option($context, 'ssl', 'passphrase', $this->config['sslpassphrase'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslpassphrase option');
                     }
                 }
             }
 
             $flags = STREAM_CLIENT_CONNECT;
-            if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
+            if ($this->config['persistent']) {
+                $flags |= STREAM_CLIENT_PERSISTENT;
+            }
 
             ErrorHandler::start();
             $this->socket = stream_socket_client(
@@ -230,19 +230,34 @@ class Socket implements HttpAdapter, StreamInterface
             );
             $error = ErrorHandler::stop();
 
-            if (! $this->socket) {
+            if (!$this->socket) {
                 $this->close();
-                throw new AdapterException\RuntimeException(sprintf(
-                    'Unable to connect to %s:%d%s',
-                    $host,
-                    $port,
-                    ($error ? '. Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
-                ), 0, $error);
+                throw new AdapterException\RuntimeException(
+                    sprintf(
+                        'Unable to connect to %s:%d%s',
+                        $host,
+                        $port,
+                        ($error ? '. Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
+                    ),
+                    0,
+                    $error
+                );
             }
 
             // Set the stream timeout
-            if (! stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
+            if (!stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
                 throw new AdapterException\RuntimeException('Unable to set the connection timeout');
+            }
+
+            if ($secure) {
+                if (!@stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_SSLv23_CLIENT)) {
+                    $errorString = '';
+                    while (($sslError = openssl_error_string()) != false) {
+                        $errorString .= "; SSL error: $sslError";
+                    }
+                    $this->close();
+                    throw new AdapterException\RuntimeException("Unable to enable crypto on TCP connection {$host}: $errorString");
+                }
             }
 
             // Update connected_to

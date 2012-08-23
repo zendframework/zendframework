@@ -12,7 +12,7 @@ namespace Zend\Form\View\Helper;
 
 use Traversable;
 use Zend\Form\ElementInterface;
-use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Checkbox as CheckboxElement;
 use Zend\Form\Exception;
 
 /**
@@ -49,34 +49,15 @@ class FormCheckbox extends FormInput
         $attributes            = $element->getAttributes();
         $attributes['name']    = $name;
         $attributes['type']    = $this->getInputType();
+        $attributes['value']   = $element->getCheckedValue();
         $closingBracket        = $this->getInlineClosingBracket();
 
-        if ($element instanceof Checkbox) {
-            if ($element->isChecked()) {
-                $attributes['checked'] = 'checked';
-            }
-            $attributes['value'] = $element->getCheckedValue();
-            $useHiddenElement    = $element->useHiddenElement();
-            $unCheckedValue      = $element->getUncheckedValue();
+        if ($element->isChecked()) {
+            $attributes['checked'] = 'checked';
         }
-        if (!$element instanceof Checkbox) {
-            $value = (bool) $element->getValue();
-            if ($value) {
-                $attributes['checked'] = 'checked';
-            }
-            $attributes['value'] = $element->getOption('checked_value');
-            if (null === $attributes['value']) {
-                $attributes['value'] = '1';
-            }
-            $useHiddenElement    = $element->getOption('use_hidden_element');
-            if (null === $useHiddenElement) {
-                $useHiddenElement = true;
-            }
-            $unCheckedValue = $element->getOption('unchecked_value');
-            if (null === $unCheckedValue) {
-                $unCheckedValue = '0';
-            }
-        }
+
+        $useHiddenElement    = $element->useHiddenElement();
+        $unCheckedValue      = $element->getUncheckedValue();
 
         $rendered = sprintf(
             '<input %s%s',

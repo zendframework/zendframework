@@ -292,6 +292,10 @@ class Socket implements HttpAdapter, StreamInterface
 
                     throw new AdapterException\RuntimeException("Unable to enable crypto on TCP connection {$host}{$errorString}");
                 }
+
+                $host = $this->config['ssltransport'] . "://" . $host;
+            } else {
+                $host = 'tcp://' . $host;
             }
 
             // Update connected_to

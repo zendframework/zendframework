@@ -31,6 +31,13 @@ class FormCheckbox extends FormInput
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof CheckboxElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\Checkbox',
+                __METHOD__
+            ));
+        }
+
         $name = $element->getName();
         if (empty($name) && $name !== 0) {
             throw new Exception\DomainException(sprintf(

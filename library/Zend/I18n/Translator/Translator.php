@@ -446,7 +446,7 @@ class Translator
         if (null !== ($cache = $this->getCache())) {
             $cacheId = 'Zend_I18n_Translator_Messages_' . md5($textDomain . $locale);
 
-            if (false !== ($result = $cache->getItem($cacheId))) {
+            if (null !== ($result = $cache->getItem($cacheId))) {
                 $this->messages[$textDomain][$locale] = $result;
                 return;
             }

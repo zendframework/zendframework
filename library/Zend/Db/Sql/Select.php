@@ -676,7 +676,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $orders = array();
         foreach ($this->order as $k => $v) {
+            $quoteIdentifiers = true;
             if (is_int($k)) {
+                if ($v instanceof Expression) {
+                    $v = $this->processExpression($v, $platform, $adapter)->getSql();
+                    $quoteIdentifiers = false;  // expressions are already quoted
+                }
                 if (strpos($v, ' ') !== false) {
                     list($k, $v) = preg_split('# #', $v, 2);
                 } else {
@@ -684,10 +689,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     $v = self::ORDER_ASCENDING;
                 }
             }
+            $k = $quoteIdentifiers ? $platform->quoteIdentifierInFragment($k) : $k;
             if (strtoupper($v) == self::ORDER_DESCENDING) {
-                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_DESCENDING);
+                $orders[] = array($k, self::ORDER_DESCENDING);
             } else {
-                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_ASCENDING);
+                $orders[] = array($k, self::ORDER_ASCENDING);
             }
         }
         return array($orders);

@@ -250,7 +250,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $select->order(array('name ASC', 'age DESC'));
         $this->assertEquals(array('name ASC', 'age DESC'), $select->getRawState('order'));
+    }
 
+    /**
+     * @author Demian Katz
+     * @testdox unit test: Test order() supports Expressions
+     * @covers Zend\Db\Sql\Select::order
+     */
+    public function testOrderSupportsExpressions()
+    {
+        $select = new Select;
+        $select->order(array(new Expression('isnull(?) desc', array('name'), array(Expression::TYPE_IDENTIFIER)), 'name'));
+        $this->assertEquals('ORDER BY isnull("name") DESC, "name" ASC', $select->getSqlString());
     }
 
     /**

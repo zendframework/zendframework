@@ -55,20 +55,17 @@ class FormCheckbox extends FormInput
         if ($element->isChecked()) {
             $attributes['checked'] = 'checked';
         }
-
-        $useHiddenElement    = $element->useHiddenElement();
-        $unCheckedValue      = $element->getUncheckedValue();
-
+        
         $rendered = sprintf(
             '<input %s%s',
             $this->createAttributesString($attributes),
             $closingBracket
         );
 
-        if ($useHiddenElement) {
+        if ($element->useHiddenElement()) {
             $hiddenAttributes = array(
                 'name'  => $attributes['name'],
-                'value' => $unCheckedValue,
+                'value' => $element->getUncheckedValue(),
             );
 
             $rendered = sprintf(

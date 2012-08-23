@@ -12,6 +12,7 @@ namespace Zend\Form\View\Helper;
 
 use Traversable;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\Checkbox;
 use Zend\Form\Exception;
 
 /**
@@ -43,10 +44,32 @@ class FormCheckbox extends FormInput
         $attributes['type']    = $this->getInputType();
         $closingBracket        = $this->getInlineClosingBracket();
 
-        if ($element->isChecked()) {
-            $attributes['checked'] = 'checked';
+        if ($element instanceof Checkbox) {
+            if ($element->isChecked()) {
+                $attributes['checked'] = 'checked';
+            }
+            $attributes['value'] = $element->getCheckedValue();
+            $useHiddenElement    = $element->useHiddenElement();
+            $unCheckedValue      = $element->getUncheckedValue();
         }
-        $attributes['value'] = $element->getCheckedValue();
+        if (!$element instanceof Checkbox) {
+            $value = (bool) $element->getValue();
+            if ($value) {
+                $attributes['checked'] = 'checked';
+            }
+            $attributes['value'] = $element->getOption('checked_value');
+            if (null === $attributes['value']) {
+                $attributes['value'] = '1';
+            }
+            $useHiddenElement    = $element->getOption('use_hidden_element');
+            if (null === $useHiddenElement) {
+                $useHiddenElement = true;
+            }
+            $unCheckedValue = $element->getOption('unchecked_value');
+            if (null === $unCheckedValue) {
+                $unCheckedValue = '0';
+            }
+        }
 
         $rendered = sprintf(
             '<input %s%s',
@@ -54,12 +77,10 @@ class FormCheckbox extends FormInput
             $closingBracket
         );
 
-        $useHiddenElement = $element->useHiddenElement();
-
         if ($useHiddenElement) {
             $hiddenAttributes = array(
                 'name'  => $attributes['name'],
-                'value' => $element->getUncheckedValue()
+                'value' => $unCheckedValue,
             );
 
             $rendered = sprintf(

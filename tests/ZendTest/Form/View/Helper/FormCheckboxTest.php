@@ -54,8 +54,8 @@ class FormCheckboxTest extends CommonTestCase
         $element->setValue('checked');
         $markup  = $this->helper->render($element);
 
-        $this->assertRegexp('#checked="checked"\s+value="checked"#', $markup);
-        $this->assertNotRegexp('#checked="checked"\s+value="unchecked"#', $markup);
+        $this->assertRegexp('#value="checked"\s+checked="checked"#', $markup);
+        $this->assertNotRegexp('#value="unchecked"\s+checked="checked"#', $markup);
     }
 
     public function testNoOptionsAttributeCreatesDefaultCheckedAndUncheckedValues()

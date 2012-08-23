@@ -69,4 +69,16 @@ class MultiCheckbox extends Checkbox
         }
         return $values;
     }
+
+    /**
+     * Sets the value that should be selected.
+     *
+     * @param mixed $value The value to set.
+     * @return Element
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
 }

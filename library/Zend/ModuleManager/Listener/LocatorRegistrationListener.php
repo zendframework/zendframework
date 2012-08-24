@@ -67,7 +67,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         $events        = $moduleManager->getEventManager()->getSharedManager();
 
         // Shared instance for module manager
-        $events->attach('application', 'bootstrap', function ($e) use ($moduleManager) {
+        $events->attach('Zend\Mvc\Application', 'bootstrap', function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
             $application     = $e->getApplication();
             $services        = $application->getServiceManager();
@@ -81,7 +81,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         }
 
         // Attach to the bootstrap event if there are modules we need to process
-        $events->attach('application', 'bootstrap', array($this, 'onBootstrap'), 1000);
+        $events->attach('Zend\Mvc\Application', 'bootstrap', array($this, 'onBootstrap'), 1000);
     }
 
     /**

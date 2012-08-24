@@ -71,6 +71,17 @@ class ClassMethods extends AbstractHydrator
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
                 $attributes[$attribute] = $this->extractValue($attribute, $object->$method());
+            } elseif (preg_match('/^is[A-Z]\w*/', $method)) {
+                // setter verification
+                $setter = 'set' . ucfirst($method);
+                if (!in_array($setter, $methods)) {
+                    continue;
+                }
+                $attribute = $method;
+                if ($this->underscoreSeparatedKeys) {
+                    $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
+                }
+                $attributes[$attribute] = $this->extractValue($attribute, $object->$method());
             }
         }
 

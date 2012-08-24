@@ -130,7 +130,12 @@ class Ini implements ReaderInterface
 
         foreach ($data as $section => $value) {
             if (is_array($value)) {
-                $config[$section] = $this->processSection($value);
+                if (strpos($section, $this->nestSeparator) !== false) {
+                    $section = explode($this->nestSeparator, $section, 2);
+                    $config[$section[0]][$section[1]] = $this->processSection($value);
+                } else {
+                    $config[$section] = $this->processSection($value);
+                }
             } else {
                 $this->processKey($section, $value, $config);
             }

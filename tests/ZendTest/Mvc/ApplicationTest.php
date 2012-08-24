@@ -135,7 +135,7 @@ class ApplicationTest extends TestCase
     {
         $events      = $this->application->getEventManager();
         $identifiers = $events->getIdentifiers();
-        $expected    = array('Zend\Mvc\Application', 'application');
+        $expected    = array('Zend\Mvc\Application');
         $this->assertEquals($expected, array_values($identifiers));
     }
 

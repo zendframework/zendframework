@@ -84,7 +84,7 @@ ECS;
         $this->assertEquals($arrayIni['all']['bar'][1], 'foo');
     }
     
-        public function testFromStringNested()
+    public function testFromStringNested()
     {
         $ini = <<<ECS
 foo.bar = foobar

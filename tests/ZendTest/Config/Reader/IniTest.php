@@ -83,4 +83,21 @@ ECS;
         $this->assertEquals($arrayIni['all']['bar'][0], 'baz');
         $this->assertEquals($arrayIni['all']['bar'][1], 'foo');
     }
+
+    public function testFromStringNested()
+    {
+        $ini = <<<ECS
+foo.bar = foobar
+foobar[] = foobarArray
+foo.baz[] = foobaz1
+foo.baz[] = foobaz2
+
+ECS;
+
+        $arrayIni = $this->reader->fromString($ini);
+        $this->assertEquals($arrayIni['foo']['bar'], 'foobar');
+        $this->assertEquals($arrayIni['foobar'][0], 'foobarArray');
+        $this->assertEquals($arrayIni['foo']['baz'][0], 'foobaz1');
+        $this->assertEquals($arrayIni['foo']['baz'][1], 'foobaz2');
+    }
 }

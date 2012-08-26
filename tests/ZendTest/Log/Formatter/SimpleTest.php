@@ -37,7 +37,8 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             'timestamp'    => $date,
             'message'      => 'foo',
             'priority'     => 42,
-            'priorityName' => 'bar'
+            'priorityName' => 'bar',
+            'extra'        => array()
         );
 
         $f = new Simple();
@@ -54,7 +55,8 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $fields = array(
             'timestamp'    => new DateTime(),
             'priority'     => 42,
-            'priorityName' => 'bar'
+            'priorityName' => 'bar',
+            'extra'        => array()
         );
 
         $f = new Simple();
@@ -77,12 +79,12 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
         $fields['message'] = fopen('php://stdout', 'w');
         $line = $f->format($fields);
-        $this->assertContains('Resource id ', $line);
+        $this->assertContains('resource(stream)', $line);
         fclose($fields['message']);
 
         $fields['message'] = range(1, 10);
         $line = $f->format($fields);
-        $this->assertContains('array', $line);
+        $this->assertContains('[1,2,3,4,5,6,7,8,9,10]', $line);
 
         $fields['message'] = new StringObject();
         $line = $f->format($fields);
@@ -139,7 +141,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             'message'      => 'Application error',
             'priority'     => 2,
             'priorityName' => 'CRIT',
-            'info'         => $exception,
+            'extra'        => array($exception),
         );
 
         $formatter = new Simple();

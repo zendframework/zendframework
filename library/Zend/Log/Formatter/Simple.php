@@ -18,9 +18,9 @@ use Zend\Log\Exception;
  * @package    Zend_Log
  * @subpackage Formatter
  */
-class Simple implements FormatterInterface
+class Simple extends Base
 {
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %extra%';
 
     /**
      * Format specifier for log messages
@@ -68,21 +68,8 @@ class Simple implements FormatterInterface
     {
         $output = $this->format;
 
-        if (!isset($event['info'])) {
-            $event['info'] = '';
-        }
-
-        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
-        }
-
+        $event = parent::format($event);
         foreach ($event as $name => $value) {
-            if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)
-            ) {
-                $value = gettype($value);
-            }
-
             $output = str_replace("%$name%", $value, $output);
         }
 

@@ -348,39 +348,45 @@ class Factory
     /**
      * Prepare and inject a named hydrator
      *
-     * Takes a string indicating a hydrator class name, instantiates the class
+     * Takes a string indicating a hydrator class name (or a concrete instance), instantiates the class
      * by that name, and injects the hydrator instance into the form.
      *
-     * @param  string $hydratorName
+     * @param  string $hydratorOrName
      * @param  FieldsetInterface $fieldset
      * @param  string $method
      * @return void
-     * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
+     * @throws Exception\DomainException If $hydratorOrName is not a string, does not resolve to a known class, or
+     *                                   the class does not implement Hydrator\HydratorInterface
      */
-    protected function prepareAndInjectHydrator($hydratorName, FieldsetInterface $fieldset, $method)
+    protected function prepareAndInjectHydrator($hydratorOrName, FieldsetInterface $fieldset, $method)
     {
-        if (!is_string($hydratorName)) {
+        if (is_object($hydratorOrName) && $hydratorOrName instanceof Hydrator\HydratorInterface) {
+            $fieldset->setHydrator($hydratorOrName);
+            return;
+        }
+
+        if (!is_string($hydratorOrName)) {
             throw new Exception\DomainException(sprintf(
                 '%s expects string hydrator class name; received "%s"',
                 $method,
-                (is_object($hydratorName) ? get_class($hydratorName) : gettype($hydratorName))
+                (is_object($hydratorOrName) ? get_class($hydratorOrName) : gettype($hydratorOrName))
             ));
         }
 
-        if (!class_exists($hydratorName)) {
+        if (!class_exists($hydratorOrName)) {
             throw new Exception\DomainException(sprintf(
                 '%s expects string hydrator name to be a valid class name; received "%s"',
                 $method,
-                $hydratorName
+                $hydratorOrName
             ));
         }
 
-        $hydrator = new $hydratorName;
+        $hydrator = new $hydratorOrName;
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
             throw new Exception\DomainException(sprintf(
                 '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
                 $method,
-                $hydratorName
+                $hydratorOrName
             ));
         }
 

@@ -90,10 +90,24 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(300, $this->validator->getTimeout());
     }
 
-    public function testTimeoutIsMutable()
+    public function timeoutValuesDataProvider()
     {
-        $this->validator->setTimeout(600);
-        $this->assertEquals(600, $this->validator->getTimeout());
+        return array(
+            //    timeout  expected
+            array(600,     600),
+            array(null,    null),
+            array("0",     0),
+            array("100",   100),
+        );
+    }
+
+    /**
+     * @dataProvider timeoutValuesDataProvider
+     */
+    public function testTimeoutIsMutable($timeout, $expected)
+    {
+        $this->validator->setTimeout($timeout);
+        $this->assertEquals($expected, $this->validator->getTimeout());
     }
 
     public function testAllOptionsMayBeSetViaConstructor()

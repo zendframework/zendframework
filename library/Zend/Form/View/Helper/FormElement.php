@@ -58,13 +58,13 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if ($element instanceof Element\MonthSelect) {
-            $helper = $renderer->plugin('form_month_select');
+        if ($element instanceof Element\DateSelect) {
+            $helper = $renderer->plugin('form_date_select');
             return $helper($element);
         }
 
-        if ($element instanceof Element\DateSelect) {
-            $helper = $renderer->plugin('form_date_select');
+        if ($element instanceof Element\MonthSelect) {
+            $helper = $renderer->plugin('form_month_select');
             return $helper($element);
         }
 

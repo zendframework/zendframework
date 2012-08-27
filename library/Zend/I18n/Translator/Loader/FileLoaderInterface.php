@@ -17,7 +17,7 @@ namespace Zend\I18n\Translator\Loader;
  * @package    Zend_I18n
  * @subpackage Translator
  */
-interface FileLoaderInterface extends LoaderInterface
+interface FileLoaderInterface
 {
     /**
      * Load translations from a file.

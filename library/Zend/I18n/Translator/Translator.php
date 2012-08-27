@@ -114,16 +114,16 @@ class Translator
             }
         }
 
-        // patterns
-        if (isset($options['translation_patterns'])) {
-            if (!is_array($options['translation_patterns'])) {
+        // file patterns
+        if (isset($options['translation_file_patterns'])) {
+            if (!is_array($options['translation_file_patterns'])) {
                 throw new Exception\InvalidArgumentException(
                     '"translation_patterns" should be an array'
                 );
             }
 
             $requiredKeys = array('type', 'base_dir', 'pattern');
-            foreach ($options['translation_patterns'] as $pattern) {
+            foreach ($options['translation_file_patterns'] as $pattern) {
                 foreach ($requiredKeys as $key) {
                     if (!isset($pattern[$key])) {
                         throw new Exception\InvalidArgumentException(
@@ -437,7 +437,7 @@ class Translator
     }
 
     /**
-     * Add multiple translations with a pattern.
+     * Add multiple translations with a file pattern.
      *
      * @param  string $type
      * @param  string $baseDir
@@ -445,7 +445,7 @@ class Translator
      * @param  string $textDomain
      * @return Translator
      */
-    public function addTranslationPattern(
+    public function addTranslationFilePattern(
         $type,
         $baseDir,
         $pattern,

@@ -17,7 +17,7 @@ namespace Zend\I18n\Translator\Loader;
  * @package    Zend_I18n
  * @subpackage Translator
  */
-interface RemoteLoaderInterface extends LoaderInterface
+interface RemoteLoaderInterface
 {
     /**
      * Load translations from a remote source.

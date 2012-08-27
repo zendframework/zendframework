@@ -16,9 +16,9 @@ use Zend\ServiceManager\AbstractPluginManager;
 /**
  * Plugin manager implementation for translation loaders.
  *
- * Enforces that filters retrieved are either callbacks or instances of
- * Loader\LoaderInterface. Additionally, it registers a number of default
- * loaders.
+ * Enforces that loaders retrieved are either instances of
+ * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface. Additionally,
+ * it registers a number of default loaders.
  *
  * @category   Zend
  * @package    Zend_I18n
@@ -27,20 +27,20 @@ use Zend\ServiceManager\AbstractPluginManager;
 class LoaderPluginManager extends AbstractPluginManager
 {
     /**
-     * Default set of loaders
+     * Default set of loaders.
      *
      * @var array
      */
     protected $invokableClasses = array(
         'phparray' => 'Zend\I18n\Translator\Loader\PhpArray',
         'gettext'  => 'Zend\I18n\Translator\Loader\Gettext',
-        'database' => 'Zend\I18n\Translator\Loader\Database',
     );
 
     /**
-     * Validate the plugin
+     * Validate the plugin.
      *
-     * Checks that the filter loaded is an instance of Loader\LoaderInterface.
+     * Checks that the filter loaded is an instance of
+     * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface.
      *
      * @param  mixed $plugin
      * @return void
@@ -48,13 +48,13 @@ class LoaderPluginManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        if ($plugin instanceof Loader\LoaderInterface) {
+        if ($plugin instanceof Loader\FileLoaderInterface || $plugin instanceof Loader\RemoteLoaderInterface) {
             // we're okay
             return;
         }
 
         throw new Exception\RuntimeException(sprintf(
-            'Plugin of type %s is invalid; must implement %s\Loader\LoaderInterface',
+            'Plugin of type %s is invalid; must implement %s\Loader\FileLoaderInterface or %s\Loader\RemoteLoaderInterface',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__
         ));

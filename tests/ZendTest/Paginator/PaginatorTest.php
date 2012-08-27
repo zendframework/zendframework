@@ -23,8 +23,6 @@ use Zend\Paginator\Adapter;
 use Zend\Paginator\Exception;
 use Zend\View;
 use Zend\View\Helper;
-use ZendTest\Paginator\TestAsset\TestTable;
-
 
 /**
  * @category   Zend

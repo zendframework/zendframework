@@ -32,7 +32,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->locale    = Locale::getDefault();
-        $this->validator = new FloatValidator();
+        $this->validator = new FloatValidator(array('locale' => 'en'));
     }
 
     public function tearDown()

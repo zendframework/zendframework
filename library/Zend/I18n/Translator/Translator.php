@@ -15,6 +15,8 @@ use Traversable;
 use Zend\Cache;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\I18n\Exception;
+use Zend\I18n\Translator\Loader\FileLoaderInterface;
+use Zend\I18n\Translator\Loader\RemoteLoaderInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -46,6 +48,13 @@ class Translator
      * @var array
      */
     protected $patterns = array();
+
+    /**
+     * Remote locations for loading messages.
+     *
+     * @var array
+     */
+    protected $remote = array();
 
     /**
      * Default locale.
@@ -155,6 +164,31 @@ class Translator
                     $file['filename'],
                     isset($file['text_domain']) ? $file['text_domain'] : 'default',
                     isset($file['locale']) ? $file['locale'] : null
+                );
+            }
+        }
+
+        // remote
+        if (isset($options['remote_translation'])) {
+            if (!is_array($options['remote_translation'])) {
+                throw new Exception\InvalidArgumentException(
+                    '"remote_translation" should be an array'
+                );
+            }
+
+            $requiredKeys = array('type');
+            foreach ($options['remote_translation'] as $remote) {
+                foreach ($requiredKeys as $key) {
+                    if (!isset($remote[$key])) {
+                        throw new Exception\InvalidArgumentException(
+                            "'{$key}' is missing for remote translation options"
+                        );
+                    }
+                }
+
+                $translator->addRemoteTranslations(
+                    $remote['type'],
+                    isset($remote['text_domain']) ? $remote['text_domain'] : 'default'
                 );
             }
         }
@@ -431,6 +465,24 @@ class Translator
     }
 
     /**
+     * Add remote translations.
+     *
+     * @param  string $type
+     * @param  string $textDomain
+     * @return Translator
+     */
+    public function addRemoteTranslations($type, $textDomain = 'default')
+    {
+        if (!isset($this->remote[$textDomain])) {
+            $this->remote[$textDomain] = array();
+        }
+
+        $this->remote[$textDomain][] = $type;
+
+        return $this;
+    }
+
+    /**
      * Load messages for a given language and domain.
      *
      * @param  string $textDomain
@@ -452,15 +504,34 @@ class Translator
             }
         }
 
+        // Try to load from remote sources
+        if (isset($this->remote[$textDomain])) {
+            foreach ($this->remote[$textDomain] as $loaderType) {
+                $loader = $this->getPluginManager()->get($loaderType);
+
+                if (!$loader instanceof RemoteLoaderInterface) {
+                    throw new Exception\RuntimeException('Specified loader is not a remote loader');
+                }
+
+                $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
+                return;
+            }
+        }
+
         // Try to load from pattern
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir']
-                          . '/' . sprintf($pattern['pattern'], $locale);
+                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+
                 if (is_file($filename)) {
-                    $this->messages[$textDomain][$locale] = $this->getPluginManager()
-                         ->get($pattern['type'])
-                         ->load($filename, $locale);
+                    $loader = $this->getPluginManager()->get($pattern['type']);
+
+                    if (!$loader instanceof FileLoaderInterface) {
+                        throw new Exception\RuntimeException('Specified loader is not a file loader');
+                    }
+
+                    $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
+                    return;
                 }
             }
         }
@@ -471,12 +542,17 @@ class Translator
                 continue;
             }
 
-            $file = $this->files[$textDomain][$currentLocale];
-            $this->messages[$textDomain][$locale] = $this->getPluginManager()
-                 ->get($file['type'])
-                 ->load($file['filename'], $locale);
+            $file   = $this->files[$textDomain][$currentLocale];
+            $loader = $this->getPluginManager()->get($pattern['type']);
+
+            if (!$loader instanceof FileLoaderInterface) {
+                throw new Exception\RuntimeException('Specified loader is not a file loader');
+            }
+
+            $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
 
             unset($this->files[$textDomain][$currentLocale]);
+            return;
         }
 
         // Cache the loaded text domain

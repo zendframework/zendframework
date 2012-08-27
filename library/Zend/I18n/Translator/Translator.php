@@ -543,7 +543,7 @@ class Translator
             }
 
             $file   = $this->files[$textDomain][$currentLocale];
-            $loader = $this->getPluginManager()->get($pattern['type']);
+            $loader = $this->getPluginManager()->get($file['type']);
 
             if (!$loader instanceof FileLoaderInterface) {
                 throw new Exception\RuntimeException('Specified loader is not a file loader');

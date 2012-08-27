@@ -22,6 +22,15 @@ XX August 2012
 
       http://zend-framework-community.634137.n4.nabble.com/Change-to-Zend-Mvc-Application-s-event-identifiers-tp4656517.html
 
+ - Zend\I18n\Translator
+   - Loader\LoaderInterface was splitted into Loader\FileLoaderInterface and
+     Loader\RemoteLoaderInterface. The latter one will be used in ZF 2.1 for
+     a database loader.
+   - Translator::addTranslationPattern() and the option "translation_patterns"
+     were renamed to Translator::addTranslationFilePattern and
+     "translation_file_patterns".
+   - A new method Translator::addRemoteTranslations() was added.
+
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC5, as well as around XX documentation changes!
 

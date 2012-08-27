@@ -25,7 +25,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \Zend\Paginator\Adapter\Iterator
      */
-    private $_adapter;
+    private $adapter;
 
     /**
      * Prepares the environment before running a test.
@@ -34,20 +34,20 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $iterator = new \ArrayIterator(range(1, 101));
-        $this->_adapter = new Adapter\Iterator($iterator);
+        $this->adapter = new Adapter\Iterator($iterator);
     }
     /**
      * Cleans up the environment after running a test.
      */
     protected function tearDown ()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
         parent::tearDown();
     }
 
     public function testGetsItemsAtOffsetZero()
     {
-        $actual = $this->_adapter->getItems(0, 10);
+        $actual = $this->adapter->getItems(0, 10);
         $this->assertInstanceOf('LimitIterator', $actual);
 
         $i = 1;
@@ -59,7 +59,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsItemsAtOffsetTen()
     {
-        $actual = $this->_adapter->getItems(10, 10);
+        $actual = $this->adapter->getItems(10, 10);
         $this->assertInstanceOf('LimitIterator', $actual);
 
         $i = 11;
@@ -71,7 +71,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsCorrectCount()
     {
-        $this->assertEquals(101, $this->_adapter->count());
+        $this->assertEquals(101, $this->adapter->count());
     }
 
     public function testThrowsExceptionIfNotCountable()
@@ -98,7 +98,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetItemsSerializable()
     {
-        $items = $this->_adapter->getItems(0, 1);
+        $items = $this->adapter->getItems(0, 1);
         $innerIterator = $items->getInnerIterator();
         $items = unserialize(serialize($items));
         $this->assertTrue( ($items->getInnerIterator() == $innerIterator), 'getItems has to be serializable to use caching');
@@ -110,8 +110,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     public function testEmptySet()
     {
         $iterator = new \ArrayIterator(array());
-        $this->_adapter = new Adapter\Iterator($iterator);
-        $actual = $this->_adapter->getItems(0, 10);
+        $this->adapter = new Adapter\Iterator($iterator);
+        $actual = $this->adapter->getItems(0, 10);
         $this->assertEquals(array(), $actual);
     }
 }

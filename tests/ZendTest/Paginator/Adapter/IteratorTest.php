@@ -11,6 +11,7 @@
 namespace ZendTest\Paginator\Adapter;
 
 use Zend\Paginator\Adapter;
+use Zend\Paginator\Paginator;
 use Zend\Paginator\Exception;
 
 /**
@@ -86,7 +87,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoesNotThrowOutOfBoundsExceptionIfIteratorIsEmpty()
     {
-        $this->_paginator = \Zend\Paginator\Paginator::factory(new \ArrayIterator(array()));
+        $this->_paginator = new Paginator(new Adapter\Iterator(new \ArrayIterator(array())));
         $items = $this->_paginator->getCurrentItems();
 
         foreach ($items as $item);

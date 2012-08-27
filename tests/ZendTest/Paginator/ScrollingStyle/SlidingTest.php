@@ -10,6 +10,9 @@
 
 namespace ZendTest\Paginator\ScrollingStyle;
 
+use Zend\Paginator\Paginator;
+use Zend\Paginator\Adapter\ArrayAdapter;
+
 /**
  * @category   Zend
  * @package    Zend_Paginator
@@ -34,7 +37,7 @@ class SlidingTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->_scrollingStyle = new \Zend\Paginator\ScrollingStyle\Sliding();
-        $this->_paginator = \Zend\Paginator\Paginator::factory(range(1, 101));
+        $this->_paginator = new Paginator(new ArrayAdapter(range(1, 101)));
         $this->_paginator->setItemCountPerPage(10);
         $this->_paginator->setPageRange(5);
     }

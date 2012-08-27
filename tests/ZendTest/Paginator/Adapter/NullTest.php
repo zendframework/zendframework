@@ -59,7 +59,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdapterReturnsCorrectValues()
     {
-        $paginator = Paginator\Paginator::factory(2);
+        $paginator = new Paginator\Paginator(new Adapter\Null(2));
         $paginator->setCurrentPageNumber(1);
         $paginator->setItemCountPerPage(5);
 
@@ -68,7 +68,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $pages->currentItemCount);
         $this->assertEquals(2, $pages->lastItemNumber);
 
-        $paginator = Paginator\Paginator::factory(19);
+        $paginator = new Paginator\Paginator(new Adapter\Null(19));
         $paginator->setCurrentPageNumber(4);
         $paginator->setItemCountPerPage(5);
 

@@ -50,7 +50,10 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertContains((string) $fields['priority'], $line);
     }
 
-    public function testComplexValues()
+    /**
+     * @dataProvider provideMessages
+     */
+    public function testComplexMessages($message, $printExpected)
     {
         $fields = array(
             'timestamp'    => new DateTime(),
@@ -59,40 +62,25 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             'extra'        => array()
         );
 
-        $f = new Simple();
+        $formatter = new Simple();
 
-        $fields['message'] = 'Foo';
-        $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
+        $fields['message'] = $message;
+        $line = $formatter->format($fields);
+        $this->assertContains($printExpected, $line);
+    }
 
-        $fields['message'] = 10;
-        $line = $f->format($fields);
-        $this->assertContains((string) $fields['message'], $line);
-
-        $fields['message'] = 10.5;
-        $line = $f->format($fields);
-        $this->assertContains((string) $fields['message'], $line);
-
-        $fields['message'] = true;
-        $line = $f->format($fields);
-        $this->assertContains('1', $line);
-
-        $fields['message'] = fopen('php://stdout', 'w');
-        $line = $f->format($fields);
-        $this->assertContains('resource(stream)', $line);
-        fclose($fields['message']);
-
-        $fields['message'] = range(1, 10);
-        $line = $f->format($fields);
-        $this->assertContains('[1,2,3,4,5,6,7,8,9,10]', $line);
-
-        $fields['message'] = new StringObject();
-        $line = $f->format($fields);
-        $this->assertContains($fields['message']->__toString(), $line);
-
-        $fields['message'] = new stdClass();
-        $line = $f->format($fields);
-        $this->assertContains('object', $line);
+    public function provideMessages()
+    {
+        return array(
+            array('Foo', 'Foo'),
+            array(10, '10'),
+            array(10.5, '10.5'),
+            array(true, '1'),
+            array(fopen('php://stdout', 'w'), 'resource(stream)'),
+            array(range(1, 10), '[1,2,3,4,5,6,7,8,9,10]'),
+            array(new StringObject(), 'Hello World'),
+            array(new stdClass(), 'object'),
+        );
     }
 
     /**

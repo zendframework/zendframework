@@ -32,6 +32,72 @@ class MultiCheckbox extends Checkbox
     protected $uncheckedValue = '';
 
     /**
+     * @var array
+     */
+    protected $valueOptions = array();
+
+    /**
+     * @return array
+     */
+    public function getValueOptions()
+    {
+        return $this->valueOptions;
+    }
+
+    /**
+     * @param  array $options
+     * @return MultiCheckbox
+     */
+    public function setValueOptions(array $options)
+    {
+        $this->valueOptions = $options;
+        return $this;
+    }
+
+    /**
+     * Set options for an element. Accepted options are:
+     * - label: label to associate with the element
+     * - label_attributes: attributes to use when the label is rendered
+     * - value_options: list of values and labels for the select options
+     *
+     * @param  array|\Traversable $options
+     * @return MultiCheckbox|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($this->options['value_options'])) {
+            $this->setValueOptions($this->options['value_options']);
+        }
+        // Alias for 'value_options'
+        if (isset($this->options['options'])) {
+            $this->setValueOptions($this->options['options']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set a single element attribute
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return MultiCheckbox|ElementInterface
+     */
+    public function setAttribute($key, $value)
+    {
+        // Do not include the options in the list of attributes
+        // TODO: Deprecate this
+        if ($key === 'options') {
+            $this->setValueOptions($value);
+            return $this;
+        }
+        return parent::setAttribute($key, $value);
+    }
+
+    /**
      * Get validator
      *
      * @return ValidatorInterface
@@ -40,7 +106,7 @@ class MultiCheckbox extends Checkbox
     {
         if (null === $this->validator) {
             $inArrayValidator = new InArrayValidator(array(
-                'haystack'  => $this->getOptionAttributeValues(),
+                'haystack'  => $this->getValueOptionsValues(),
                 'strict'    => false,
             ));
             $this->validator = new ExplodeValidator(array(
@@ -56,10 +122,10 @@ class MultiCheckbox extends Checkbox
      *
      * @return array
      */
-    protected function getOptionAttributeValues()
+    protected function getValueOptionsValues()
     {
         $values = array();
-        $options = $this->getAttribute('options');
+        $options = $this->getValueOptions();
         foreach ($options as $key => $optionSpec) {
             $value = (is_array($optionSpec)) ? $optionSpec['value'] : $key;
             $values[] = $value;

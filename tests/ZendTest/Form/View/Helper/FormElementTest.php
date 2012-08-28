@@ -80,6 +80,8 @@ class FormElementTest extends TestCase
             $element = new Element\Radio('foo');
         } elseif ($type === 'checkbox') {
             $element = new Element\Checkbox('foo');
+        } elseif ($type === 'select') {
+            $element = new Element\Select('foo');
         } else {
             $element = new Element('foo');
         }
@@ -108,9 +110,17 @@ class FormElementTest extends TestCase
      */
     public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
     {
-        $element = new Element\MultiCheckbox('foo');
+        if ($type === 'radio') {
+            $element = new Element\Radio('foo');
+        } elseif ($type === 'multi_checkbox') {
+            $element = new Element\MultiCheckbox('foo');
+        } elseif ($type === 'select') {
+            $element = new Element\Select('foo');
+        } else {
+            $element = new Element('foo');
+        }
         $element->setAttribute('type', $type);
-        $element->setAttribute('options', array(
+        $element->setValueOptions(array(
             'value1' => 'option',
             'value2' => 'label',
             'value3' => 'last',

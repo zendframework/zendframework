@@ -59,13 +59,21 @@ class Simple extends Base
         $output = $this->format;
 
         $event = parent::format($event);
-        if (array_key_exists('extra', $event)) {
-            $event['extra'] = $this->normalize($event['extra']);
-        }
         foreach ($event as $name => $value) {
+            if ('extra' == $name && count($value)) {
+                $value = $this->normalize($value);
+            } elseif ('extra' == $name) {
+                // Don't print an empty array
+                $value = '';
+            }
             $output = str_replace("%$name%", $value, $output);
         }
 
+        if (isset($event['extra']) && empty($event['extra'])
+            && false !== strpos($this->format, '%extra%')
+        ) {
+            $output = rtrim($output, ' ');
+        }
         return $output;
     }
 }

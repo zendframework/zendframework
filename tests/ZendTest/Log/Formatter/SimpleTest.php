@@ -32,7 +32,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultFormat()
     {
-        $date = new DateTime();
+        $date = new DateTime('2012-08-28T18:15:00Z');
         $fields = array(
             'timestamp'    => $date,
             'message'      => 'foo',
@@ -41,13 +41,10 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             'extra'        => array()
         );
 
-        $f = new Simple();
-        $line = $f->format($fields);
+        $outputExpected = '2012-08-28T18:15:00+00:00 bar (42): foo';
+        $formatter = new Simple();
 
-        $this->assertContains($date->format('c'), $line, 'Default date format is ISO 8601');
-        $this->assertContains($fields['message'], $line);
-        $this->assertContains($fields['priorityName'], $line);
-        $this->assertContains((string) $fields['priority'], $line);
+        $this->assertEquals($outputExpected, $formatter->format($fields));
     }
 
     /**

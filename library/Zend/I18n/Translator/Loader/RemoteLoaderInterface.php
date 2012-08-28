@@ -11,20 +11,20 @@
 namespace Zend\I18n\Translator\Loader;
 
 /**
- * Loader interface.
+ * Remote loader interface.
  *
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
  */
-interface LoaderInterface
+interface RemoteLoaderInterface
 {
     /**
-     * Load translations from a file.
+     * Load translations from a remote source.
      *
-     * @param  string $filename
      * @param  string $locale
+     * @param  string $textDomain
      * @return \Zend\I18n\Translator\TextDomain|null
      */
-    public function load($filename, $locale);
+    public function load($locale, $textDomain);
 }

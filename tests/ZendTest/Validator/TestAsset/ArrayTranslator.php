@@ -12,7 +12,7 @@ namespace ZendTest\Validator\TestAsset;
 
 use Zend\I18n\Translator;
 
-class ArrayTranslator implements Translator\Loader\LoaderInterface
+class ArrayTranslator implements Translator\Loader\FileLoaderInterface
 {
     public $translations;
 

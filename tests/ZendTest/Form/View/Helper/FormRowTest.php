@@ -119,6 +119,19 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#<ul>\s*<li>First error message</li>\s*<li>Second error message</li>\s*<li>Third error message</li>\s*</ul>#s', $markup);
     }
 
+    public function testDoesNotRenderErrorsIfSetToFalse()
+    {
+        $element  = new Element('foo');
+        $element->setMessages(array(
+            'First error message',
+            'Second error message',
+            'Third error message',
+        ));
+
+        $markup = $this->helper->setRenderErrors(false)->render($element);
+        $this->assertRegexp('/<input name="foo" type="text"[^\/>]*\/?>/', $markup);
+    }
+
     public function testInvokeWithNoElementChainsHelper()
     {
         $this->assertSame($this->helper, $this->helper->__invoke());

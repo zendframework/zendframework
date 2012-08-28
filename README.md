@@ -29,6 +29,8 @@ XX August 2012
 
       http://zend-framework-community.634137.n4.nabble.com/Change-to-Zend-Mvc-Application-s-event-identifiers-tp4656517.html
 
+  - The PRG plugin now allows passing no arguments; if you do so, the currently
+    matched route will be used for the redirect.
 - Zend\Paginator
   - Removes the factory() and related methods. This was done to be more
     consistent with other components, and also because the utility was not

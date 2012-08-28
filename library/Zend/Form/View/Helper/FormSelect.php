@@ -12,6 +12,7 @@ namespace Zend\Form\View\Helper;
 
 use Traversable;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\Exception;
 
 /**
@@ -60,6 +61,13 @@ class FormSelect extends AbstractHelper
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof SelectElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\Select',
+                __METHOD__
+            ));
+        }
+
         $name   = $element->getName();
         if (empty($name) && $name !== 0) {
             throw new Exception\DomainException(sprintf(
@@ -68,21 +76,17 @@ class FormSelect extends AbstractHelper
             ));
         }
 
-        $attributes = $element->getAttributes();
 
-        if (!isset($attributes['options'])
-            || (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable)
-        ) {
+        $options = $element->getValueOptions();
+        if (empty($options)) {
             throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an array or Traversable "options" attribute; none found',
+                '%s requires that the element has "value_options"; none found',
                 __METHOD__
             ));
         }
 
-        $options = (array) $attributes['options'];
-        unset($attributes['options']);
-
-        $value = $this->validateMultiValue($element->getValue(), $attributes);
+        $attributes = $element->getAttributes();
+        $value      = $this->validateMultiValue($element->getValue(), $attributes);
 
         $attributes['name'] = $name;
         if (array_key_exists('multiple', $attributes) && $attributes['multiple']) {

@@ -25,6 +25,10 @@ XX August 2012
   - You can now use concrete hydrator instances with the factory.
   - You may now set the CSRF validator class and/or options to use on the Csrf
     element
+  - The Select, Radio, and MultiCheckbox elements and view helpers were
+    refactored to move value options into properties, instead of attributes.
+    This makes them more consistent with other elements, and simplifies the
+    interfaces.
  - Zend\Http
    - Some browser/web server combingations set SERVER_NAME to the IPv6 address,
      and enclose it in brackets. The PhpEnvironment\Request object now correctly

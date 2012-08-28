@@ -34,7 +34,7 @@ class FormRadioTest extends CommonTestCase
             'value2' => 'This is the second label',
             'value3' => 'This is the third label',
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
         return $element;
     }
 
@@ -52,14 +52,14 @@ class FormRadioTest extends CommonTestCase
             ),
             'value3' => 'This is the third label',
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
         return $element;
     }
 
     public function testUsesOptionsAttributeToGenerateRadioOptions()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo"'));
@@ -76,7 +76,7 @@ class FormRadioTest extends CommonTestCase
     public function testUsesOptionsAttributeWithOptionSpecToGenerateRadioOptions()
     {
         $element = $this->getElementWithOptionSpec();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo'));
@@ -108,7 +108,7 @@ class FormRadioTest extends CommonTestCase
         $element = $this->getElement();
         $element->setUseHiddenElement(true);
         $element->setUncheckedValue('none');
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(4, substr_count($markup, 'name="foo'));
@@ -146,7 +146,7 @@ class FormRadioTest extends CommonTestCase
     public function testAllowsSpecifyingLabelPosition()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $this->helper->setLabelPosition(FormRadioHelper::LABEL_PREPEND);
         $markup  = $this->helper->render($element);
 
@@ -163,7 +163,7 @@ class FormRadioTest extends CommonTestCase
     public function testDoesNotRenderCheckedAttributeIfNotPassed()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertNotContains('checked', $markup);
@@ -216,7 +216,7 @@ class FormRadioTest extends CommonTestCase
     public function testCanTranslateContent()
     {
         $element = new RadioElement('foo');
-        $element->setAttribute('options', array(
+        $element->setValueOptions(array(
             array(
                 'label' => 'label1',
                 'value' => 'value1',

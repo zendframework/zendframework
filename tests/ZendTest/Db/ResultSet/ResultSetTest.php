@@ -191,4 +191,27 @@ class ResultSetTest extends TestCase
         $test = $this->resultSet->toArray();
         $this->assertEquals($dataSource->getArrayCopy(), $test, var_export($test, 1));
     }
+
+    public function testBufferingCallsDatasourceCurrentOnce()
+    {
+        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $mockResult->expects($this->once())->method('current')->will($this->returnValue(array('foo' => 'bar')));
+
+        $this->resultSet->initialize($mockResult);
+        $this->resultSet->buffer();
+        $this->resultSet->current();
+
+        // assertion above will fail if this calls datasource current
+        $this->resultSet->current();
+    }
+
+    public function testCallingBufferAfterIterationThrowsException()
+    {
+        $this->resultSet->initialize($this->getMock('Zend\Db\Adapter\Driver\ResultInterface'));
+        $this->resultSet->current();
+
+        $this->setExpectedException('Zend\Db\ResultSet\Exception\RuntimeException', 'Buffering must be enabled before iteration is started');
+        $this->resultSet->buffer();
+    }
+
 }

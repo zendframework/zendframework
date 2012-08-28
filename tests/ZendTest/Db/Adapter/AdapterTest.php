@@ -120,35 +120,21 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test setQueryMode() sets proper internal state and returns Adapter
-     * @covers Zend\Db\Adapter\Adapter::setQueryMode
-     */
-    public function testSetQueryMode()
-    {
-        $this->adapter->setQueryMode(Adapter::QUERY_MODE_EXECUTE);
-        $this->assertEquals(Adapter::QUERY_MODE_EXECUTE, $this->readAttribute($this->adapter, 'queryMode'));
-        $return = $this->adapter->setQueryMode(Adapter::QUERY_MODE_PREPARE);
-        $this->assertEquals(Adapter::QUERY_MODE_PREPARE, $this->readAttribute($this->adapter, 'queryMode'));
-        $this->assertEquals($this->adapter, $return);
-    }
-
-    /**
-     * @testdox unit test: Test setQueryMode() will throw excetion on unknown mode type
-     * @covers Zend\Db\Adapter\Adapter::setQueryMode
-     */
-    public function testSetQueryModeThrowsException()
-    {
-        $this->setExpectedException('InvalidArgumentException', 'Query Mode must be one of');
-        $this->adapter->setQueryMode('foo');
-    }
-
-    /**
      * @testdox unit test: Test getPlatform() returns platform object
      * @covers Zend\Db\Adapter\Adapter::getPlatform
      */
     public function testGetPlatform()
     {
         $this->assertSame($this->mockPlatform, $this->adapter->getPlatform());
+    }
+
+    /**
+     * @testdox unit test: Test getPlatform() returns platform object
+     * @covers Zend\Db\Adapter\Adapter::getQueryResultSetPrototype
+     */
+    public function testGetQueryResultSetPrototype()
+    {
+        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSetInterface', $this->adapter->getQueryResultSetPrototype());
     }
 
     /**

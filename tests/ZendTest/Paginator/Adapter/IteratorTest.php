@@ -87,8 +87,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoesNotThrowOutOfBoundsExceptionIfIteratorIsEmpty()
     {
-        $this->_paginator = new Paginator(new Adapter\Iterator(new \ArrayIterator(array())));
-        $items = $this->_paginator->getCurrentItems();
+        $this->paginator = new Paginator(new Adapter\Iterator(new \ArrayIterator(array())));
+        $items = $this->paginator->getCurrentItems();
 
         foreach ($items as $item);
     }

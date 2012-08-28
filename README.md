@@ -25,6 +25,10 @@ XX August 2012
   - You can now use concrete hydrator instances with the factory.
   - You may now set the CSRF validator class and/or options to use on the Csrf
     element
+ - Zend\Http
+   - Some browser/web server combingations set SERVER_NAME to the IPv6 address,
+     and enclose it in brackets. The PhpEnvironment\Request object now correctly
+     detects such situations.
  - Zend\I18n\Translator
    - Loader\LoaderInterface was splitted into Loader\FileLoaderInterface and
      Loader\RemoteLoaderInterface. The latter one will be used in ZF 2.1 for

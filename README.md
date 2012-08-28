@@ -32,6 +32,7 @@ XX August 2012
   - Forms now lazy-load an input filter if none has been specified; this should
     simplify usage for many, and remove the "no input filter attached"
     exception.
+  - All form helpers for buttons (button, submit, reset) now allow translation.
 - Zend\Http
   - Some browser/web server combingations set SERVER_NAME to the IPv6 address,
     and enclose it in brackets. The PhpEnvironment\Request object now correctly

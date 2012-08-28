@@ -23,7 +23,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Zend\Paginator\Adapter\Array
      */
-    private $_adapter;
+    private $adapter;
 
     /**
      * Prepares the environment before running a test.
@@ -31,34 +31,34 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     protected function setUp ()
     {
         parent::setUp();
-        $this->_adapter = new Adapter\ArrayAdapter(range(1, 101));
+        $this->adapter = new Adapter\ArrayAdapter(range(1, 101));
     }
     /**
      * Cleans up the environment after running a test.
      */
     protected function tearDown ()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
         parent::tearDown();
     }
 
     public function testGetsItemsAtOffsetZero()
     {
         $expected = range(1, 10);
-        $actual = $this->_adapter->getItems(0, 10);
+        $actual = $this->adapter->getItems(0, 10);
         $this->assertEquals($expected, $actual);
     }
 
     public function testGetsItemsAtOffsetTen()
     {
         $expected = range(11, 20);
-        $actual = $this->_adapter->getItems(10, 10);
+        $actual = $this->adapter->getItems(10, 10);
         $this->assertEquals($expected, $actual);
     }
 
     public function testReturnsCorrectCount()
     {
-        $this->assertEquals(101, $this->_adapter->count());
+        $this->assertEquals(101, $this->adapter->count());
     }
 
 
@@ -67,8 +67,8 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmptySet()
     {
-        $this->_adapter = new Adapter\ArrayAdapter(array());
-        $actual = $this->_adapter->getItems(0, 10);
+        $this->adapter = new Adapter\ArrayAdapter(array());
+        $actual = $this->adapter->getItems(0, 10);
         $this->assertEquals(array(), $actual);
     }
 }

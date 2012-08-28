@@ -31,12 +31,6 @@ use Zend\View;
  */
 class Paginator implements Countable, IteratorAggregate
 {
-    /**
-     * Specifies that the factory should try to detect the proper adapter type first
-     *
-     * @var string
-     */
-    const INTERNAL_ADAPTER = 'Zend\Paginator\Adapter\Internal';
 
     /**
      * The cache tag prefix used to namespace Paginator results in the cache
@@ -165,86 +159,12 @@ class Paginator implements Countable, IteratorAggregate
     protected $view = null;
 
     /**
-     * Factory.
-     *
-     * @param  mixed  $data
-     * @param  string $adapter
-     * @throws Exception\InvalidArgumentException
-     * @return Paginator
-     */
-    public static function factory($data, $adapter = self::INTERNAL_ADAPTER)
-    {
-        if ($data instanceof AdapterAggregateInterface) {
-            return new self($data->getPaginatorAdapter());
-        }
-
-        if ($adapter == self::INTERNAL_ADAPTER) {
-            if (is_array($data)) {
-                $adapter = 'array';
-            } elseif ($data instanceof Sql\Select) {
-                $adapter = 'db_select';
-            } elseif ($data instanceof Iterator) {
-                $adapter = 'iterator';
-            } elseif (is_integer($data)) {
-                $adapter = 'null';
-            } else {
-                $type = (is_object($data)) ? get_class($data) : gettype($data);
-                throw new Exception\InvalidArgumentException('No adapter for type ' . $type);
-            }
-        }
-
-        $adapters = self::getAdapterPluginManager();
-        $adapter  = $adapters->get($adapter, $data);
-        return new self($adapter);
-    }
-
-    /**
-     * Set the adapter plugin manager
-     *
-     * @param string|AdapterPluginManager $adapters
-     * @throws Exception\InvalidArgumentException
-     */
-    public static function setAdapterPluginManager($adapters)
-    {
-        if (is_string($adapters)) {
-            if (!class_exists($adapters)) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'Unable to locate adapter plugin manager with class "%s"; class not found',
-                    $adapters
-                ));
-            }
-            $adapters = new $adapters();
-        }
-        if (!$adapters instanceof AdapterPluginManager) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Pagination adapter manager must extend AdapterPluginManager; received "%s"',
-                (is_object($adapters) ? get_class($adapters) : gettype($adapters))
-            ));
-        }
-        self::$adapters = $adapters;
-    }
-
-    /**
-     * Returns the adapter plugin manager.  If it doesn't exist it's created.
-     *
-     * @return AdapterPluginManager
-     */
-    public static function getAdapterPluginManager()
-    {
-        if (self::$adapters === null) {
-            self::setAdapterPluginManager(new AdapterPluginManager());
-        }
-
-        return self::$adapters;
-    }
-
-    /**
      * Set a global config
      *
      * @param array|\Traversable $config
      * @throws Exception\InvalidArgumentException
      */
-    public static function setOptions($config)
+    public static function setGlobalConfig($config)
     {
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
@@ -254,12 +174,6 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         self::$config = $config;
-
-        if (isset($config['adapter_plugins'])
-            && null !== ($adapters = $config['adapter_plugins'])
-        ) {
-            self::setAdapterPluginManager($adapters);
-        }
 
         if (isset($config['scrolling_style_plugins'])
             && null !== ($adapters = $config['scrolling_style_plugins'])

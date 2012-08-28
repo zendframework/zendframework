@@ -23,8 +23,6 @@ use Zend\Paginator\Adapter;
 use Zend\Paginator\Exception;
 use Zend\View;
 use Zend\View\Helper;
-use ZendTest\Paginator\TestAsset\TestTable;
-
 
 /**
  * @category   Zend
@@ -61,7 +59,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->select->from('test');
 
         $this->testCollection = range(1, 101);
-        $this->paginator = Paginator\Paginator::factory($this->testCollection);
+        $this->paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter($this->testCollection));
 
         $this->config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
@@ -114,62 +112,11 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         Paginator\Paginator::setDefaultScrollingStyle();
         Helper\PaginationControl::setDefaultViewPartial(null);
 
-        Paginator\Paginator::setOptions($this->config->default);
+        Paginator\Paginator::setGlobalConfig($this->config->default);
 
         Paginator\Paginator::setScrollingStylePluginManager(new Paginator\ScrollingStylePluginManager());
 
         $this->paginator->setCacheEnabled(true);
-    }
-
-    public function testFactoryReturnsArrayAdapter()
-    {
-        $paginator = Paginator\Paginator::factory($this->testCollection);
-        $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
-    }
-
-    public function testFactoryReturnsDbSelectAdapter()
-    {
-        $this->markTestIncomplete('Will skip until Zend\Db is refactored.');
-        $paginator = Paginator\Paginator::factory($this->select);
-
-        $this->assertInstanceOf('Zend\Paginator\Adapter\DbSelect', $paginator->getAdapter());
-    }
-
-    /**
-     * @group ZF-4607
-     */
-    public function testFactoryReturnsDbTableSelectAdapter()
-    {
-        $this->markTestIncomplete('Will skip until Zend\Db is refactored.');
-        $table = new TestTable('test', $this->adapter);
-
-        $paginator = Paginator\Paginator::factory($table->select());
-
-        $this->assertInstanceOf('Zend\Paginator\Adapter\DbSelect', $paginator->getAdapter());
-    }
-
-    public function testFactoryReturnsIteratorAdapter()
-    {
-        $paginator = Paginator\Paginator::factory(new \ArrayIterator($this->testCollection));
-        $this->assertInstanceOf('Zend\Paginator\Adapter\Iterator', $paginator->getAdapter());
-    }
-
-    public function testFactoryReturnsNullAdapter()
-    {
-        $paginator = Paginator\Paginator::factory(101);
-        $this->assertInstanceOf('Zend\Paginator\Adapter\Null', $paginator->getAdapter());
-    }
-
-    public function testFactoryThrowsInvalidClassExceptionAdapter()
-    {
-        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type stdClass');
-        $paginator = Paginator\Paginator::factory(new stdClass());
-    }
-
-    public function testFactoryThrowsInvalidTypeExceptionAdapter()
-    {
-        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type string');
-        $paginator = Paginator\Paginator::factory('invalid argument');
     }
 
     public function testGetsAndSetsDefaultScrollingStyle()
@@ -182,28 +129,25 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testHasCorrectCountAfterInit()
     {
-        $paginator = Paginator\Paginator::factory(range(1, 101));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $this->assertEquals(11, $paginator->count());
     }
 
     public function testHasCorrectCountOfAllItemsAfterInit()
     {
-        $paginator = Paginator\Paginator::factory(range(1, 101));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $this->assertEquals(101, $paginator->getTotalItemCount());
     }
 
     public function testLoadsFromConfig()
     {
-        Paginator\Paginator::setOptions($this->config->testing);
+        Paginator\Paginator::setGlobalConfig($this->config->testing);
         $this->assertEquals('Scrolling', Paginator\Paginator::getDefaultScrollingStyle());
 
         $plugins = Paginator\Paginator::getScrollingStylePluginManager();
         $this->assertInstanceOf('ZendTest\Paginator\TestAsset\ScrollingStylePluginManager', $plugins);
 
-        $plugins = Paginator\Paginator::getAdapterPluginManager();
-        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\AdapterPluginManager', $plugins);
-
-        $paginator = Paginator\Paginator::factory(range(1, 101));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $this->assertEquals(3, $paginator->getItemCountPerPage());
         $this->assertEquals(7, $paginator->getPageRange());
     }
@@ -285,7 +229,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAndSetsItemCountPerPage()
     {
-        Paginator\Paginator::setOptions(new Config\Config(array()));
+        Paginator\Paginator::setGlobalConfig(new Config\Config(array()));
         $this->paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $this->assertEquals(10, $this->paginator->getItemCountPerPage());
         $this->paginator->setItemCountPerPage(15);
@@ -300,7 +244,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAndSetsItemCounterPerPageOfNegativeOne()
     {
-        Paginator\Paginator::setOptions(new Config\Config(array()));
+        Paginator\Paginator::setGlobalConfig(new Config\Config(array()));
         $this->paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 101)));
         $this->paginator->setItemCountPerPage(-1);
         $this->assertEquals(101, $this->paginator->getItemCountPerPage());
@@ -312,7 +256,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAndSetsItemCounterPerPageOfZero()
     {
-        Paginator\Paginator::setOptions(new Config\Config(array()));
+        Paginator\Paginator::setGlobalConfig(new Config\Config(array()));
         $this->paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 101)));
         $this->paginator->setItemCountPerPage(0);
         $this->assertEquals(101, $this->paginator->getItemCountPerPage());
@@ -324,7 +268,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAndSetsItemCounterPerPageOfNull()
     {
-        Paginator\Paginator::setOptions(new Config\Config(array()));
+        Paginator\Paginator::setGlobalConfig(new Config\Config(array()));
         $this->paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 101)));
         $this->paginator->setItemCountPerPage();
         $this->assertEquals(101, $this->paginator->getItemCountPerPage());
@@ -402,7 +346,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionWhenCollectionIsEmpty()
     {
-        $paginator = Paginator\Paginator::factory(array());
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(array()));
 
         $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'Page 1 does not exist');
         $paginator->getItem(1);
@@ -523,7 +467,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGivesCorrectItemCount()
     {
-        $paginator = Paginator\Paginator::factory(range(1, 101));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $paginator->setCurrentPageNumber(5)
                   ->setItemCountPerPage(5);
         $expected = new \ArrayIterator(range(21, 25));
@@ -536,7 +480,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testKeepsCurrentPageNumberAfterItemCountPerPageSet()
     {
-        $paginator = Paginator\Paginator::factory(array('item1', 'item2'));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(array('item1', 'item2')));
         $paginator->setCurrentPageNumber(2)
                   ->setItemCountPerPage(1);
 
@@ -666,7 +610,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testFilter()
     {
         $filter = new Filter\Callback(array($this, 'filterCallback'));
-        $paginator = Paginator\Paginator::factory(range(1, 10));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $paginator->setFilter($filter);
 
         $page = $paginator->getCurrentItems();
@@ -690,15 +634,15 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetDefaultItemCountPerPage()
     {
-        Paginator\Paginator::setOptions(new Config\Config(array()));
+        Paginator\Paginator::setGlobalConfig(new Config\Config(array()));
 
-        $paginator = Paginator\Paginator::factory(range(1, 10));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 10)));
         $this->assertEquals(10, $paginator->getItemCountPerPage());
 
         Paginator\Paginator::setDefaultItemCountPerPage(20);
         $this->assertEquals(20, Paginator\Paginator::getDefaultItemCountPerPage());
 
-        $paginator = Paginator\Paginator::factory(range(1, 10));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 10)));
         $this->assertEquals(20, $paginator->getItemCountPerPage());
 
         $this->_restorePaginatorDefaults();
@@ -709,7 +653,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testItemCountPerPageByDefault()
     {
-        $paginator = Paginator\Paginator::factory(range(1,20));
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 20)));
         $this->assertEquals(2, $paginator->count());
     }
 
@@ -728,7 +672,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testAcceptAndHandlePaginatorAdapterAggregateDataInFactory()
     {
-        $p = Paginator\Paginator::factory(new TestArrayAggregate());
+        $p = new Paginator\Paginator(new TestArrayAggregate());
 
         $this->assertEquals(1, count($p));
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $p->getAdapter());
@@ -763,7 +707,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testArrayAccessInClassSerializableLimitIterator()
     {
         $iterator  = new \ArrayIterator(array('zf9396', 'foo', null));
-        $paginator = Paginator\Paginator::factory($iterator);
+        $paginator = new Paginator\Paginator(new Adapter\Iterator($iterator));
 
         $this->assertEquals('zf9396', $paginator->getItem(1));
 
@@ -777,49 +721,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($items[3]));
     }
 
-    public function testSetAdapterPluginManagerWithStringThrowsInvalidArgumentException()
+    public function testSetGlobalConfigThrowsInvalidArgumentException()
     {
         $this->setExpectedException(
             'Zend\Paginator\Exception\InvalidArgumentException',
-            'Unable to locate adapter plugin manager with class "invalid adapter"; class not found'
-        );
-        $this->paginator->setAdapterPluginManager('invalid adapter');
-    }
-
-    public function testSetAdapterPluginManagerWithAdapterThrowsInvalidArgumentException()
-    {
-        $this->setExpectedException(
-            'Zend\Paginator\Exception\InvalidArgumentException',
-            'Pagination adapter manager must extend AdapterPluginManager; received "stdClass"'
+            'setGlobalConfig expects an array or Traversable'
         );
 
-        $this->paginator->setAdapterPluginManager(
-            new stdClass()
-        );
-    }
-
-    public function testSetAdapterPluginManagerWithAdaptersThrowsInvalidArgumentException()
-    {
-        $this->setExpectedException(
-            'Zend\Paginator\Exception\InvalidArgumentException',
-            'Pagination adapter manager must extend AdapterPluginManager; received "array"'
-        );
-
-        $this->paginator->setAdapterPluginManager(
-            array(
-                new stdClass()
-            )
-        );
-    }
-
-    public function testSetOptionsThrowsInvalidArgumentException()
-    {
-        $this->setExpectedException(
-            'Zend\Paginator\Exception\InvalidArgumentException',
-            'setOptions expects an array or Traversable'
-        );
-
-        $this->paginator->setOptions('not array');
+        $this->paginator->setGlobalConfig('not array');
     }
 
     public function testSetScrollingStylePluginManagerWithStringThrowsInvalidArgumentException()

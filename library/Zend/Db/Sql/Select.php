@@ -72,7 +72,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         self::HAVING => 'HAVING %1$s',
         self::ORDER  => array(
             'ORDER BY %1$s' => array(
-                array(2 => '%1$s %2$s', 'combinedby' => ', ')
+                array(1 => '%1$s', 2 => '%1$s %2$s', 'combinedby' => ', ')
             )
         ),
         self::LIMIT  => 'LIMIT %1$s',
@@ -676,12 +676,16 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $orders = array();
         foreach ($this->order as $k => $v) {
-            $quoteIdentifiers = true;
-            if (is_int($k)) {
-                if ($v instanceof Expression) {
-                    $v = $this->processExpression($v, $platform, $adapter)->getSql();
-                    $quoteIdentifiers = false;  // expressions are already quoted
+            if ($v instanceof Expression) {
+                /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
+                $orderParts = $this->processExpression($v, $platform, $adapter);
+                if ($parameterContainer) {
+                    $parameterContainer->merge($orderParts->getParameterContainer());
                 }
+                $orders[] = array($orderParts->getSql());
+                continue;
+            }
+            if (is_int($k)) {
                 if (strpos($v, ' ') !== false) {
                     list($k, $v) = preg_split('# #', $v, 2);
                 } else {
@@ -689,11 +693,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     $v = self::ORDER_ASCENDING;
                 }
             }
-            $k = $quoteIdentifiers ? $platform->quoteIdentifierInFragment($k) : $k;
             if (strtoupper($v) == self::ORDER_DESCENDING) {
-                $orders[] = array($k, self::ORDER_DESCENDING);
+                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_DESCENDING);
             } else {
-                $orders[] = array($k, self::ORDER_ASCENDING);
+                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_ASCENDING);
             }
         }
         return array($orders);

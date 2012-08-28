@@ -11,6 +11,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend
@@ -42,5 +43,40 @@ class FormReset extends FormInput
     protected function getType(ElementInterface $element)
     {
         return 'reset';
+    }
+
+    /**
+     * Render a form <input> element from the provided $element
+     *
+     * @param  ElementInterface $element
+     * @return string
+     */
+    public function render(ElementInterface $element)
+    {
+        $name = $element->getName();
+        if ($name === null || $name === '') {
+            throw new Exception\DomainException(sprintf(
+                '%s requires that the element has an assigned name; none discovered',
+                __METHOD__
+            ));
+        }
+
+        $resetValue = $element->getValue();
+        if (null !== ($translator = $this->getTranslator())) {
+            $resetValue = $translator->translate(
+                $resetValue, $this->getTranslatorTextDomain()
+            );
+        }
+
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getType($element);
+        $attributes['value'] = $resetValue;
+
+        return sprintf(
+            '<input %s%s',
+            $this->createAttributesString($attributes),
+            $this->getInlineClosingBracket()
+        );
     }
 }

@@ -31,6 +31,8 @@ XX August 2012
     consistent with other components, and also because the utility was not
     terribly useful; in most cases, developers needed to configure the adapter
     up-front anyways.
+- Zend\Stdlib
+  - ClassMethods Hydrator now supports boolean getters prefixed with "is"
 
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC5, as well as around XX documentation changes!

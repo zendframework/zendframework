@@ -33,21 +33,56 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     );
 
     /**
+     * @var array
+     */
+    protected $csrfValidatorOptions = array();
+
+    /**
      * @var CsrfValidator
      */
-    protected $validator;
+    protected $csrfValidator;
+
+    /**
+     * @return array
+     */
+    public function getCsrfValidatorOptions()
+    {
+        return $this->csrfValidatorOptions;
+    }
+
+    /**
+     * @param  array $options
+     * @return Csrf
+     */
+    public function setCsrfValidatorOptions(array $options)
+    {
+        $this->csrfValidatorOptions = $options;
+        return $this;
+    }
 
     /**
      * Get CSRF validator
      *
      * @return CsrfValidator
      */
-    protected function getValidator()
+    public function getCsrfValidator()
     {
-        if (null === $this->validator) {
-            $this->validator = new CsrfValidator(array('name' => $this->getName()));
+        if (null === $this->csrfValidator) {
+            $csrfOptions = $this->getCsrfValidatorOptions();
+            $csrfOptions = array_merge($csrfOptions, array('name' => $this->getName()));
+            $this->csrfValidator = new CsrfValidator($csrfOptions);
         }
-        return $this->validator;
+        return $this->csrfValidator;
+    }
+
+    /**
+     * @param  \Zend\Validator\Csrf $validator
+     * @return Csrf
+     */
+    public function setCsrfValidator(CsrfValidator $validator)
+    {
+        $this->csrfValidator = $validator;
+        return $this;
     }
 
     /**
@@ -59,7 +94,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      */
     public function getValue()
     {
-        $validator = $this->getValidator();
+        $validator = $this->getCsrfValidator();
         return $validator->getHash();
     }
 
@@ -73,7 +108,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     public function getAttributes()
     {
         $attributes = parent::getAttributes();
-        $validator  = $this->getValidator();
+        $validator  = $this->getCsrfValidator();
         $attributes['value'] = $validator->getHash();
         return $attributes;
     }
@@ -94,7 +129,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
                 array('name' => 'Zend\Filter\StringTrim'),
             ),
             'validators' => array(
-                $this->getValidator(),
+                $this->getCsrfValidator(),
             ),
         );
     }
@@ -104,6 +139,6 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      */
     public function prepareElement(Form $form)
     {
-        $this->getValidator()->getHash(true);
+        $this->getCsrfValidator()->getHash(true);
     }
 }

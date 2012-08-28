@@ -261,6 +261,11 @@ class Request extends HttpRequest
         $port = null;
         if (isset($this->serverParams['SERVER_NAME'])) {
             $host = $this->serverParams['SERVER_NAME'];
+            // Check for missinterpreted IPv6-Address
+            // Reported at least for Safari on Windows
+            if (isset($this->serverParams['SERVER_ADDR']) && preg_match('/^\[[0-9a-fA-F\:]+\]$/', $host)) {
+            	$host = '[' . $this->serverParams['SERVER_ADDR'] . ']';
+            }
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];
             }

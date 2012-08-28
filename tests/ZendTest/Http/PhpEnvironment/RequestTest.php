@@ -313,6 +313,27 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
+                    'SERVER_NAME' => '[1:2:3:4:5:6::6]',
+                    'SERVER_ADDR' => '1:2:3:4:5:6::6',
+                	'SERVER_PORT' => '80',
+                	'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
+                ),
+                '[1:2:3:4:5:6::6]',
+                '/news',
+            ),
+       		// Test for broken $_SERVER implementation from Windows-Safari 
+            array(
+                array(
+                    'SERVER_NAME' => '[1:2:3:4:5:6:]',
+                    'SERVER_ADDR' => '1:2:3:4:5:6::6',
+                	'SERVER_PORT' => '80',
+                	'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
+                ),
+                '[1:2:3:4:5:6::6]',
+                '/news',
+            ),
+            array(
+                array(
                     'SERVER_NAME' => 'test.example.com',
                     'SERVER_PORT' => '8080',
                     'REQUEST_URI' => 'http://test.example.com/news',

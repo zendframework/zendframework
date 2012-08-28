@@ -301,7 +301,7 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => 'http://test.example.com/news',
                 ),
                 'test.example.com',
-            	'80',
+                '80',
                 '/news',
             ),
             array(
@@ -310,30 +310,30 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => 'http://test.example.com/news',
                 ),
                 'test.example.com',
-            	'80',
+                '80',
                 '/news',
             ),
             array(
                 array(
                     'SERVER_NAME' => '[1:2:3:4:5:6::6]',
                     'SERVER_ADDR' => '1:2:3:4:5:6::6',
-                	'SERVER_PORT' => '80',
-                	'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
+                    'SERVER_PORT' => '80',
+                    'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
                 ),
                 '[1:2:3:4:5:6::6]',
-            	'80',
+                '80',
                 '/news',
             ),
-       		// Test for broken $_SERVER implementation from Windows-Safari 
+               // Test for broken $_SERVER implementation from Windows-Safari
             array(
                 array(
                     'SERVER_NAME' => '[1:2:3:4:5:6:]',
                     'SERVER_ADDR' => '1:2:3:4:5:6::6',
-                	'SERVER_PORT' => '6',
-                	'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
+                    'SERVER_PORT' => '6',
+                    'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
                 ),
                 '[1:2:3:4:5:6::6]',
-            	'80',
+                '80',
                 '/news',
             ),
             array(
@@ -373,7 +373,7 @@ class RequestTest extends TestCase
 
         $host = $request->getUri()->getHost();
         $this->assertEquals($expectedHost, $host);
-        
+
         $port = $request->getUri()->getPort();
         $this->assertEquals($expectedPort, $port);
 

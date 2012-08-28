@@ -30,6 +30,11 @@ class FormRow extends AbstractHelper
     protected $labelPosition = self::LABEL_PREPEND;
 
     /**
+     * @var bool
+     */
+    protected $renderErrors = true;
+
+    /**
      * @var array
      */
     protected $labelAttributes;
@@ -65,7 +70,6 @@ class FormRow extends AbstractHelper
         $elementErrorsHelper = $this->getElementErrorsHelper();
         $label               = $element->getLabel();
         $elementString       = $elementHelper->render($element);
-        $elementErrors       = $elementErrorsHelper->render($element);
 
         if (!empty($label)) {
             $label = $escapeHtmlHelper($label);
@@ -95,16 +99,24 @@ class FormRow extends AbstractHelper
 
                 switch ($this->labelPosition) {
                     case self::LABEL_PREPEND:
-                        $markup = $labelOpen . $label . $elementString . $labelClose . $elementErrors;
+                        $markup = $labelOpen . '<span>' . $label . '</span>'. $elementString . $labelClose;
                         break;
                     case self::LABEL_APPEND:
                     default:
-                        $markup = $labelOpen . $elementString . $label . $labelClose . $elementErrors;
+                        $markup = $labelOpen . $elementString . '<span>' . $label . '</span>' . $labelClose;
                         break;
+                }
+
+                if ($this->renderErrors) {
+                    $markup .= $elementErrorsHelper->render($element);
                 }
             }
         } else {
-            $markup = $elementString . $elementErrors;
+            if ($this->renderErrors) {
+                $markup = $elementString . $elementErrorsHelper->render($element);
+            } else {
+                $markup = $elementString;
+            }
         }
 
         return $markup;
@@ -116,10 +128,11 @@ class FormRow extends AbstractHelper
      * Proxies to {@link render()}.
      *
      * @param null|ElementInterface $element
-     * @param null|string $labelPosition
+     * @param null|string           $labelPosition
+     * @param bool                  $renderErrors
      * @return string|FormRow
      */
-    public function __invoke(ElementInterface $element = null, $labelPosition = null)
+    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = true)
     {
         if (!$element) {
             return $this;
@@ -128,6 +141,8 @@ class FormRow extends AbstractHelper
         if ($labelPosition !== null) {
             $this->setLabelPosition($labelPosition);
         }
+
+        $this->setRenderErrors($renderErrors);
 
         return $this->render($element);
     }
@@ -164,6 +179,26 @@ class FormRow extends AbstractHelper
     public function getLabelPosition()
     {
         return $this->labelPosition;
+    }
+
+    /**
+     * Are the errors rendered by this helper ?
+     *
+     * @param  bool $renderErrors
+     * @return FormRow
+     */
+    public function setRenderErrors($renderErrors)
+    {
+        $this->renderErrors = (bool) $renderErrors;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRenderErrors()
+    {
+        return $this->renderErrors;
     }
 
     /**

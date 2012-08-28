@@ -19,6 +19,9 @@ XX August 2012
   - ResultInterface adds isBuffered() method for checking if the resultset is
     buffered or not. Allows for more fine grained control of result set
     buffering, including using the database engine's native buffering.
+- Zend\Form
+  - You can now omit error messages on elements when rendering via formRow(), by
+    passing a boolean false as the third argument of the helper.
 - Zend\Mvc
   - Application no longer defines the "application" identifier for its composed
     EventManager instance. If you had listeners listening on that context,

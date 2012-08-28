@@ -22,6 +22,7 @@ XX August 2012
 - Zend\Form
   - You can now omit error messages on elements when rendering via formRow(), by
     passing a boolean false as the third argument of the helper.
+  - You can now use concrete hydrator instances with the factory.
 - Zend\Mvc
   - Application no longer defines the "application" identifier for its composed
     EventManager instance. If you had listeners listening on that context,

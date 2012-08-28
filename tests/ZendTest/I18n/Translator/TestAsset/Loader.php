@@ -10,7 +10,7 @@
 
 namespace ZendTest\I18n\Translator\TestAsset;
 
-use Zend\I18n\Translator\Loader\LoaderInterface;
+use Zend\I18n\Translator\Loader\FileLoaderInterface;
 
 /**
  * Test loader.
@@ -19,7 +19,7 @@ use Zend\I18n\Translator\Loader\LoaderInterface;
  * @package    ZendTest_I18n
  * @subpackage Translator
  */
-class Loader implements LoaderInterface
+class Loader implements FileLoaderInterface
 {
     public $textDomain;
 

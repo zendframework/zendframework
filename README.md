@@ -25,6 +25,14 @@ XX August 2012
   - You can now use concrete hydrator instances with the factory.
   - You may now set the CSRF validator class and/or options to use on the Csrf
     element
+ - Zend\I18n\Translator
+   - Loader\LoaderInterface was splitted into Loader\FileLoaderInterface and
+     Loader\RemoteLoaderInterface. The latter one will be used in ZF 2.1 for
+     a database loader.
+   - Translator::addTranslationPattern() and the option "translation_patterns"
+     were renamed to Translator::addTranslationFilePattern and
+     "translation_file_patterns".
+   - A new method Translator::addRemoteTranslations() was added.
 - Zend\Mvc
   - Application no longer defines the "application" identifier for its composed
     EventManager instance. If you had listeners listening on that context,

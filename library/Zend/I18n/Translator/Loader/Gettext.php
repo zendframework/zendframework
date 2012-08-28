@@ -22,7 +22,7 @@ use Zend\Stdlib\ErrorHandler;
  * @package    Zend_I18n
  * @subpackage Translator
  */
-class Gettext implements LoaderInterface
+class Gettext implements FileLoaderInterface
 {
     /**
      * Current file pointer.
@@ -39,15 +39,15 @@ class Gettext implements LoaderInterface
     protected $littleEndian;
 
     /**
-     * load(): defined by LoaderInterface.
+     * load(): defined by FileLoaderInterface.
      *
-     * @see    LoaderInterface::load()
-     * @param  string $filename
+     * @see    FileLoaderInterface::load()
      * @param  string $locale
+     * @param  string $filename
      * @return TextDomain
      * @throws Exception\InvalidArgumentException
      */
-    public function load($filename, $locale)
+    public function load($locale, $filename)
     {
         if (!is_file($filename) || !is_readable($filename)) {
             throw new Exception\InvalidArgumentException(sprintf(

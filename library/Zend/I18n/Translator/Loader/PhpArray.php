@@ -21,18 +21,18 @@ use Zend\I18n\Translator\TextDomain;
  * @package    Zend_I18n
  * @subpackage Translator
  */
-class PhpArray implements LoaderInterface
+class PhpArray implements FileLoaderInterface
 {
     /**
-     * load(): defined by LoaderInterface.
+     * load(): defined by FileLoaderInterface.
      *
-     * @see    LoaderInterface::load()
-     * @param  string $filename
+     * @see    FileLoaderInterface::load()
      * @param  string $locale
+     * @param  string $filename
      * @return TextDomain|null
      * @throws Exception\InvalidArgumentException
      */
-    public function load($filename, $locale)
+    public function load($locale, $filename)
     {
         if (!is_file($filename) || !is_readable($filename)) {
             throw new Exception\InvalidArgumentException(sprintf(

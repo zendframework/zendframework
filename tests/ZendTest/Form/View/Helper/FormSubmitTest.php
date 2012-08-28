@@ -156,7 +156,7 @@ class FormSubmitTest extends CommonTestCase
     }
 
     /**
-     * #ZF2-450
+     * @group ZF2-450
      */
     public function testCanTranslateValue()
     {

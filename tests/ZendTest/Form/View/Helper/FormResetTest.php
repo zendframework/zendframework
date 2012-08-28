@@ -157,7 +157,7 @@ class FormResetTest extends CommonTestCase
     }
 
     /**
-     * #ZF2-489
+     * @group ZF2-489
      */
     public function testCanTranslateValue()
     {

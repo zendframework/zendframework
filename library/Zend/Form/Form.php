@@ -577,6 +577,10 @@ class Form extends Fieldset implements FormInterface
             }
         }
 
+        if (null === $this->filter) {
+            $this->filter = new InputFilter();
+        }
+
         if ($this->filter instanceof InputFilterInterface && $this->useInputFilterDefaults()) {
             $this->attachInputFilterDefaults($this->filter, $this);
         }

@@ -53,7 +53,7 @@ class Result implements Iterator, ResultInterface
      * Track current item in recordset
      * @var mixed
      */
-    protected $currentData;
+    protected $currentData = null;
 
     /**
      * Current position of scrollable statement
@@ -93,6 +93,14 @@ class Result implements Iterator, ResultInterface
     public function buffer()
     {
         return null;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isBuffered()
+    {
+        return false;
     }
 
     /**
@@ -164,7 +172,7 @@ class Result implements Iterator, ResultInterface
      */
     public function valid()
     {
-        return ($this->currentData != false);
+        return ($this->currentData !== false);
     }
 
     /**

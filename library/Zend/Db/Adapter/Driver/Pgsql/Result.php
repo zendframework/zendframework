@@ -34,7 +34,6 @@ class Result implements ResultInterface
     public function initialize($resource, $generatedValue)
     {
         if (!is_resource($resource) || get_resource_type($resource) != 'pgsql result') {
-            var_dump($resource); debug_print_backtrace();
             throw new \Exception('Resource not of the correct type.');
         }
 
@@ -73,7 +72,12 @@ class Result implements ResultInterface
 
     public function buffer()
     {
-        // @todo
+        return null;
+    }
+
+    public function isBuffered()
+    {
+        return false;
     }
 
     public function isQueryResult()

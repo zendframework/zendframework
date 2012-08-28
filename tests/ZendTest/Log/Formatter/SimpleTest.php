@@ -48,39 +48,6 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideMessages
-     */
-    public function testComplexMessages($message, $printExpected)
-    {
-        $fields = array(
-            'timestamp'    => new DateTime(),
-            'priority'     => 42,
-            'priorityName' => 'bar',
-            'extra'        => array()
-        );
-
-        $formatter = new Simple();
-
-        $fields['message'] = $message;
-        $line = $formatter->format($fields);
-        $this->assertContains($printExpected, $line);
-    }
-
-    public function provideMessages()
-    {
-        return array(
-            array('Foo', 'Foo'),
-            array(10, '10'),
-            array(10.5, '10.5'),
-            array(true, '1'),
-            array(fopen('php://stdout', 'w'), 'resource(stream)'),
-            array(range(1, 10), '[1,2,3,4,5,6,7,8,9,10]'),
-            array(new StringObject(), 'Hello World'),
-            array(new stdClass(), 'object'),
-        );
-    }
-
-    /**
      * @dataProvider provideDateTimeFormats
      */
     public function testCustomDateTimeFormat($dateTimeFormat)

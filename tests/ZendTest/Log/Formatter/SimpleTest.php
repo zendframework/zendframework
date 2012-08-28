@@ -137,4 +137,11 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains($message, $output);
     }
+
+    public function testAllowsSpecifyingFormatAsConstructorArgument()
+    {
+        $format = '[%timestamp%] %message%';
+        $formatter = new Simple($format);
+        $this->assertEquals($format, $formatter->format(array()));
+    }
 }

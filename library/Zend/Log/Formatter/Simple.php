@@ -69,6 +69,9 @@ class Simple extends Base
         $output = $this->format;
 
         $event = parent::format($event);
+        if (array_key_exists('extra', $event)) {
+            $event['extra'] = $this->normalize($event['extra']);
+        }
         foreach ($event as $name => $value) {
             $output = str_replace("%$name%", $value, $output);
         }

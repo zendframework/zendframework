@@ -51,7 +51,12 @@ class Base implements FormatterInterface
     public function format($event)
     {
         foreach ($event as $key => $value) {
-            $event[$key] = $this->normalize($value);
+            // Keep extra as an array
+            if ('extra' === $key) {
+                $event[$key] = self::format($value);
+            } else {
+                $event[$key] = $this->normalize($value);
+            }
         }
 
         return $event;
@@ -65,13 +70,16 @@ class Base implements FormatterInterface
      */
     protected function normalize($value)
     {
-        if (is_scalar($value)) {
+        if (is_scalar($value) || null === $value) {
             return $value;
         }
 
         if ($value instanceof DateTime) {
             $value = $value->format($this->getDateTimeFormat());
         } elseif (is_array($value) || $value instanceof Traversable) {
+            if ($value instanceof Traversable) {
+                $value = iterator_to_array($value);
+            }
             foreach ($value as $key => $subvalue) {
                 $value[$key] = $this->normalize($subvalue);
             }

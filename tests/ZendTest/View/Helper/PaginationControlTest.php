@@ -48,7 +48,8 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         Helper\PaginationControl::setDefaultViewPartial(null);
         $this->_viewHelper = new Helper\PaginationControl();
         $this->_viewHelper->setView($view);
-        $this->_paginator = Paginator\Paginator::factory(range(1, 101));
+        $adapter = new Paginator\Adapter\ArrayAdapter(range(1, 101));
+        $this->_paginator = new Paginator\Paginator($adapter);
     }
 
     public function tearDown()
@@ -159,7 +160,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     public function testUsesPaginatorFromViewOnlyIfNoneSupplied()
     {
         $this->_viewHelper->getView()->vars()->paginator  = $this->_paginator;
-        $paginator = Paginator\Paginator::factory(range(1, 30));
+        $paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 30)));
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
         $output = $this->_viewHelper->__invoke($paginator);

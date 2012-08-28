@@ -54,7 +54,7 @@ class FormRowTest extends TestCase
         $element->setLabel('The value for foo:');
         $this->helper->setLabelPosition('prepend');
         $markup = $this->helper->render($element);
-        $this->assertContains('<label>The value for foo:<', $markup);
+        $this->assertContains('<label><span>The value for foo:</span><', $markup);
         $this->assertContains('</label>', $markup);
     }
 

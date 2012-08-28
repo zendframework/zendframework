@@ -317,6 +317,18 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
     }
 
+    public function testCanCreateHydratorFromConcreteClass()
+    {
+        $form = $this->factory->createForm(array(
+            'name' => 'foo',
+            'hydrator' => new \Zend\Stdlib\Hydrator\ObjectProperty()
+        ));
+
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $hydrator = $form->getHydrator();
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
+    }
+
     public function testCanCreateFormWithHydratorAndInputFilterAndElementsAndFieldsets()
     {
         $form = $this->factory->createForm(array(

@@ -301,6 +301,7 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => 'http://test.example.com/news',
                 ),
                 'test.example.com',
+                '80',
                 '/news',
             ),
             array(
@@ -309,6 +310,30 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => 'http://test.example.com/news',
                 ),
                 'test.example.com',
+                '80',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => '[1:2:3:4:5:6::6]',
+                    'SERVER_ADDR' => '1:2:3:4:5:6::6',
+                    'SERVER_PORT' => '80',
+                    'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
+                ),
+                '[1:2:3:4:5:6::6]',
+                '80',
+                '/news',
+            ),
+               // Test for broken $_SERVER implementation from Windows-Safari
+            array(
+                array(
+                    'SERVER_NAME' => '[1:2:3:4:5:6:]',
+                    'SERVER_ADDR' => '1:2:3:4:5:6::6',
+                    'SERVER_PORT' => '6',
+                    'REQUEST_URI' => 'http://[1:2:3:4:5:6::6]/news',
+                ),
+                '[1:2:3:4:5:6::6]',
+                '80',
                 '/news',
             ),
             array(
@@ -318,6 +343,7 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => 'http://test.example.com/news',
                 ),
                 'test.example.com',
+                '8080',
                 '/news',
             ),
             array(
@@ -328,6 +354,7 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => 'https://test.example.com/news',
                 ),
                 'test.example.com',
+                '443',
                 '/news',
             ),
         );
@@ -339,13 +366,16 @@ class RequestTest extends TestCase
      * @param string $name
      * @param string $value
      */
-    public function testServerHostnameProvider(array $server, $expectedHost, $expectedRequestUri)
+    public function testServerHostnameProvider(array $server, $expectedHost, $expectedPort, $expectedRequestUri)
     {
         $_SERVER = $server;
         $request = new Request();
 
         $host = $request->getUri()->getHost();
         $this->assertEquals($expectedHost, $host);
+
+        $port = $request->getUri()->getPort();
+        $this->assertEquals($expectedPort, $port);
 
         $requestUri = $request->getRequestUri();
         $this->assertEquals($expectedRequestUri, $requestUri);

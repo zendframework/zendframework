@@ -29,18 +29,21 @@ XX August 2012
     refactored to move value options into properties, instead of attributes.
     This makes them more consistent with other elements, and simplifies the
     interfaces.
- - Zend\Http
-   - Some browser/web server combingations set SERVER_NAME to the IPv6 address,
-     and enclose it in brackets. The PhpEnvironment\Request object now correctly
-     detects such situations.
- - Zend\I18n\Translator
-   - Loader\LoaderInterface was splitted into Loader\FileLoaderInterface and
-     Loader\RemoteLoaderInterface. The latter one will be used in ZF 2.1 for
-     a database loader.
-   - Translator::addTranslationPattern() and the option "translation_patterns"
-     were renamed to Translator::addTranslationFilePattern and
-     "translation_file_patterns".
-   - A new method Translator::addRemoteTranslations() was added.
+  - Forms now lazy-load an input filter if none has been specified; this should
+    simplify usage for many, and remove the "no input filter attached"
+    exception.
+- Zend\Http
+  - Some browser/web server combingations set SERVER_NAME to the IPv6 address,
+    and enclose it in brackets. The PhpEnvironment\Request object now correctly
+    detects such situations.
+- Zend\I18n\Translator
+  - Loader\LoaderInterface was splitted into Loader\FileLoaderInterface and
+    Loader\RemoteLoaderInterface. The latter one will be used in ZF 2.1 for
+    a database loader.
+  - Translator::addTranslationPattern() and the option "translation_patterns"
+    were renamed to Translator::addTranslationFilePattern and
+    "translation_file_patterns".
+  - A new method Translator::addRemoteTranslations() was added.
 - Zend\Mvc
   - Application no longer defines the "application" identifier for its composed
     EventManager instance. If you had listeners listening on that context,

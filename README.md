@@ -15,12 +15,22 @@ XX August 2012
 
 ### UPDATES IN RC6
 
+- Zend\Db
+  - ResultInterface adds isBuffered() method for checking if the resultset is
+    buffered or not. Allows for more fine grained control of result set
+    buffering, including using the database engine's native buffering.
 - Zend\Mvc
   - Application no longer defines the "application" identifier for its composed
     EventManager instance. If you had listeners listening on that context,
     update them to use "Zend\Mvc\Application". See this thread for more details:
 
       http://zend-framework-community.634137.n4.nabble.com/Change-to-Zend-Mvc-Application-s-event-identifiers-tp4656517.html
+
+- Zend\Paginator
+  - Removes the factory() and related methods. This was done to be more
+    consistent with other components, and also because the utility was not
+    terribly useful; in most cases, developers needed to configure the adapter
+    up-front anyways.
 
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC5, as well as around XX documentation changes!

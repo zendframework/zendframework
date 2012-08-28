@@ -11,7 +11,7 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\Element;
+use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\View\Helper\FormSelect as FormSelectHelper;
 
 class FormSelectTest extends CommonTestCase
@@ -24,7 +24,7 @@ class FormSelectTest extends CommonTestCase
 
     public function getElement()
     {
-        $element = new Element('foo');
+        $element = new SelectElement('foo');
         $options = array(
             array(
                 'label' => 'This is the first label',
@@ -39,7 +39,7 @@ class FormSelectTest extends CommonTestCase
                 'value' => 'value3',
             ),
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
         return $element;
     }
 
@@ -96,9 +96,9 @@ class FormSelectTest extends CommonTestCase
     public function testCanMarkOptionsAsDisabled()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions('options');
         $options[1]['disabled'] = true;
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#option .*?value="value2" .*?disabled="disabled"#', $markup);
@@ -107,14 +107,14 @@ class FormSelectTest extends CommonTestCase
     public function testOptgroupsAreCreatedWhenAnOptionHasAnOptionsKey()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions('options');
         $options[1]['options'] = array(
             array(
                 'label' => 'foo',
                 'value' => 'bar',
             )
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#optgroup[^>]*?label="This is the second label"[^>]*>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#s', $markup);
@@ -123,7 +123,7 @@ class FormSelectTest extends CommonTestCase
     public function testCanDisableAnOptgroup()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions('options');
         $options[1]['disabled'] = true;
         $options[1]['options']  = array(
             array(
@@ -131,7 +131,7 @@ class FormSelectTest extends CommonTestCase
                 'value' => 'bar',
             )
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#optgroup .*?label="This is the second label"[^>]*?disabled="disabled"[^>]*?>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#', $markup);
@@ -192,8 +192,8 @@ class FormSelectTest extends CommonTestCase
      */
     public function testScalarOptionValues($options)
     {
-        $element = new Element('foo');
-        $element->setAttribute('options', $options);
+        $element = new SelectElement('foo');
+        $element->setValueOptions($options);
         $markup = $this->helper->render($element);
         list($value, $label) = each($options);
         $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
@@ -207,8 +207,8 @@ class FormSelectTest extends CommonTestCase
 
     public function testCanTranslateContent()
     {
-        $element = new Element('foo');
-        $element->setAttribute('options', array(
+        $element = new SelectElement('foo');
+        $element->setValueOptions(array(
             array(
                 'label' => 'label1',
                 'value' => 'value1',

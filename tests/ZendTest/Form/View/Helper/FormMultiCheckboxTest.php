@@ -35,7 +35,7 @@ class FormMultiCheckboxTest extends CommonTestCase
             'value2' => 'This is the second label',
             'value3' => 'This is the third label',
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
         return $element;
     }
 
@@ -53,14 +53,14 @@ class FormMultiCheckboxTest extends CommonTestCase
             ),
             'value3' => 'This is the third label',
         );
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
         return $element;
     }
 
     public function testUsesOptionsAttributeToGenerateCheckBoxes()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo'));
@@ -77,7 +77,7 @@ class FormMultiCheckboxTest extends CommonTestCase
     public function testUsesOptionsAttributeWithOptionSpecToGenerateCheckBoxes()
     {
         $element = $this->getElementWithOptionSpec();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo'));
@@ -109,7 +109,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         $element = $this->getElement();
         $element->setUseHiddenElement(true);
         $element->setUncheckedValue('none');
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(4, substr_count($markup, 'name="foo'));
@@ -147,7 +147,7 @@ class FormMultiCheckboxTest extends CommonTestCase
     public function testAllowsSpecifyingLabelPosition()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
+        $options = $element->getValueOptions();
         $this->helper->setLabelPosition(FormMultiCheckboxHelper::LABEL_PREPEND);
         $markup  = $this->helper->render($element);
 
@@ -212,17 +212,17 @@ class FormMultiCheckboxTest extends CommonTestCase
 
     public function testEnsureUseHiddenElementMethodExists()
     {
-        $element = new Element();
+        $element = new MultiCheckboxElement();
         $element->setName('codeType');
         $element->setOptions(array('label' => 'Code Type'));
         $element->setAttributes(array(
             'type' => 'radio',
-            'options' => array(
-                'Markdown' => 'markdown',
-                'HTML'     => 'html',
-                'Wiki'     => 'wiki',
-            ),
             'value' => array('markdown'),
+        ));
+        $element->setValueOptions(array(
+            'Markdown' => 'markdown',
+            'HTML'     => 'html',
+            'Wiki'     => 'wiki',
         ));
 
         $markup = $this->helper->render($element);
@@ -232,8 +232,8 @@ class FormMultiCheckboxTest extends CommonTestCase
 
     public function testCanTranslateContent()
     {
-        $element = new Element('foo');
-        $element->setAttribute('options', array(
+        $element = new MultiCheckboxElement('foo');
+        $element->setValueOptions(array(
             array(
                 'label' => 'label1',
                 'value' => 'value1',

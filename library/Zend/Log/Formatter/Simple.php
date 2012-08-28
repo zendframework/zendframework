@@ -30,14 +30,6 @@ class Simple extends Base
     protected $format;
 
     /**
-     * Format specifier for DateTime objects in event data (default: ISO 8601)
-     *
-     * @see http://php.net/manual/en/function.date.php
-     * @var string
-     */
-    protected $dateTimeFormat = self::DEFAULT_DATETIME_FORMAT;
-
-    /**
      * Class constructor
      *
      * @see http://php.net/manual/en/function.date.php
@@ -53,9 +45,7 @@ class Simple extends Base
 
         $this->format = isset($format) ? $format : static::DEFAULT_FORMAT;
 
-        if (isset($dateTimeFormat)) {
-            $this->dateTimeFormat = $dateTimeFormat;
-        }
+        parent::__construct($dateTimeFormat);
     }
 
     /**
@@ -77,22 +67,5 @@ class Simple extends Base
         }
 
         return $output;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDateTimeFormat()
-    {
-        return $this->dateTimeFormat;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDateTimeFormat($dateTimeFormat)
-    {
-        $this->dateTimeFormat = (string) $dateTimeFormat;
-        return $this;
     }
 }

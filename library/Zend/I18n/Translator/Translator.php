@@ -132,7 +132,7 @@ class Translator
                     }
                 }
 
-                $translator->addTranslationPattern(
+                $translator->addTranslationFilePattern(
                     $pattern['type'],
                     $pattern['base_dir'],
                     $pattern['pattern'],

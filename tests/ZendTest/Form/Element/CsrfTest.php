@@ -40,4 +40,21 @@ class CsrfTest extends TestCase
             }
         }
     }
+
+    public function testAllowSettingCustomCsrfValidator()
+    {
+        $element = new CsrfElement('foo');
+        $validatorMock = $this->getMock('Zend\Validator\Csrf');
+        $element->setCsrfValidator($validatorMock);
+        $this->assertEquals($validatorMock, $element->getCsrfValidator());
+    }
+
+    public function testAllowSettingCsrfValidatorOptions()
+    {
+        $element = new CsrfElement('foo');
+        $element->setCsrfValidatorOptions(array('timeout' => 777));
+        $validator = $element->getCsrfValidator();
+        $this->assertEquals('foo', $validator->getName());
+        $this->assertEquals(777, $validator->getTimeout());
+    }
 }

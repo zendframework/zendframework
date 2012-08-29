@@ -65,7 +65,7 @@ class Csrf extends AbstractValidator
 
     /**
      * TTL for CSRF token
-     * @var int
+     * @var int|null
      */
     protected $timeout = 300;
 
@@ -243,12 +243,12 @@ class Csrf extends AbstractValidator
     /**
      * Set timeout for CSRF session token
      *
-     * @param  int $ttl
+     * @param  int|null $ttl
      * @return Csrf
      */
     public function setTimeout($ttl)
     {
-        $this->timeout = (int) $ttl;
+        $this->timeout = ($ttl !== null) ? (int)$ttl : null;
         return $this;
     }
 
@@ -271,7 +271,10 @@ class Csrf extends AbstractValidator
     {
         $session = $this->getSession();
         //$session->setExpirationHops(1, null, true);
-        $session->setExpirationSeconds($this->getTimeout());
+        $timeout = $this->getTimeout();
+        if (null !== $timeout) {
+            $session->setExpirationSeconds($timeout);
+        }
         $session->hash = $this->getHash();
     }
 

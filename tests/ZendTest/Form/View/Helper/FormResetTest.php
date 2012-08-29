@@ -120,6 +120,7 @@ class FormResetTest extends CommonTestCase
             'width'              => 'value',
         ));
         $element->setValue('value');
+
         return $element;
     }
 
@@ -153,5 +154,25 @@ class FormResetTest extends CommonTestCase
     public function testInvokeWithNoElementChainsHelper()
     {
         $this->assertSame($this->helper, $this->helper->__invoke());
+    }
+
+    /**
+     * @group ZF2-489
+     */
+    public function testCanTranslateValue()
+    {
+        $element = new Element('foo');
+        $element->setValue('Reset Label');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+                       ->method('translate')
+                       ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('value="translated content"', $markup);
     }
 }

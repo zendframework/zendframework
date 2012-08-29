@@ -68,8 +68,7 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        $type    = $element->getAttribute('type');
-        $options = $element->getAttribute('options');
+        $type = $element->getAttribute('type');
 
         if ('checkbox' == $type) {
             $helper = $renderer->plugin('form_checkbox');
@@ -121,7 +120,7 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if ('multi_checkbox' == $type && is_array($options)) {
+        if ('multi_checkbox' == $type) {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }
@@ -136,7 +135,7 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if ('radio' == $type && is_array($options)) {
+        if ('radio' == $type) {
             $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
@@ -156,7 +155,7 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if ('select' == $type && is_array($options)) {
+        if ('select' == $type) {
             $helper = $renderer->plugin('form_select');
             return $helper($element);
         }

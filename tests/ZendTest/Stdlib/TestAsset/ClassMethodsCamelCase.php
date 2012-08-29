@@ -16,6 +16,10 @@ class ClassMethodsCamelCase
 
     protected $fooBarBaz = '2';
 
+    protected $isFoo = true;
+
+    protected $isBar = true;
+
     public function getFooBar()
     {
         return $this->fooBar;
@@ -35,6 +39,28 @@ class ClassMethodsCamelCase
     public function setFooBarBaz($value)
     {
         $this->fooBarBaz = $value;
+        return $this;
+    }
+
+    public function getIsFoo()
+    {
+        return $this->isFoo;
+    }
+
+    public function setIsFoo($value)
+    {
+        $this->isFoo = $value;
+        return $this;
+    }
+
+    public function isBar()
+    {
+        return $this->isBar;
+    }
+
+    public function setIsBar($value)
+    {
+        $this->isBar = $value;
         return $this;
     }
 }

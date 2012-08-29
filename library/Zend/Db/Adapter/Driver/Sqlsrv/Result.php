@@ -70,6 +70,14 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isBuffered()
+    {
+        return false;
+    }
+
+    /**
      * Get resource
      *
      * @return resource

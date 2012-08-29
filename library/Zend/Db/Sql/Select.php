@@ -72,7 +72,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         self::HAVING => 'HAVING %1$s',
         self::ORDER  => array(
             'ORDER BY %1$s' => array(
-                array(2 => '%1$s %2$s', 'combinedby' => ', ')
+                array(1 => '%1$s', 2 => '%1$s %2$s', 'combinedby' => ', ')
             )
         ),
         self::LIMIT  => 'LIMIT %1$s',
@@ -676,6 +676,15 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $orders = array();
         foreach ($this->order as $k => $v) {
+            if ($v instanceof Expression) {
+                /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
+                $orderParts = $this->processExpression($v, $platform, $adapter);
+                if ($parameterContainer) {
+                    $parameterContainer->merge($orderParts->getParameterContainer());
+                }
+                $orders[] = array($orderParts->getSql());
+                continue;
+            }
             if (is_int($k)) {
                 if (strpos($v, ' ') !== false) {
                     list($k, $v) = preg_split('# #', $v, 2);

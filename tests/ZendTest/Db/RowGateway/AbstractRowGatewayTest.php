@@ -156,6 +156,41 @@ class AbstractRowGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\RowGateway\RowGateway::save
      */
+    public function testSaveInsertMultiKey()
+    {
+        $this->rowGateway = $this->getMockForAbstractClass('Zend\Db\RowGateway\AbstractRowGateway');
+
+        $mockSql = $this->getMockForAbstractClass('Zend\Db\Sql\Sql', array($this->mockAdapter));
+
+        $rgPropertyValues = array(
+            'primaryKeyColumn' => array('one', 'two'),
+            'table' => 'foo',
+            'sql' => $mockSql
+        );
+        $this->setRowGatewayState($rgPropertyValues);
+
+        // test insert
+        $this->mockResult->expects($this->any())->method('current')->will($this->returnValue(array('one' => 'foo', 'two' => 'bar')));
+
+        // @todo Need to assert that $where was filled in
+
+        $refRowGateway = new \ReflectionObject($this->rowGateway);
+        $refRowGatewayProp = $refRowGateway->getProperty('primaryKeyData');
+        $refRowGatewayProp->setAccessible(true);
+
+        $this->rowGateway->populate(array('one' => 'foo', 'two' => 'bar'));
+
+        $this->assertNull($refRowGatewayProp->getValue($this->rowGateway));
+
+        // save should setup the primaryKeyData
+        $this->rowGateway->save();
+
+        $this->assertEquals(array('one' => 'foo', 'two' => 'bar'), $refRowGatewayProp->getValue($this->rowGateway));
+    }
+
+    /**
+     * @covers Zend\Db\RowGateway\RowGateway::save
+     */
     public function testSaveUpdate()
     {
         // test update

@@ -30,7 +30,7 @@ class SelectTest extends TestCase
     public function testProvidesInputSpecificationForSingleSelect()
     {
         $element = new SelectElement();
-        $element->setAttribute('options', array(
+        $element->setValueOptions(array(
             'Option 1' => 'option1',
             'Option 2' => 'option2',
             'Option 3' => 'option3',
@@ -54,11 +54,11 @@ class SelectTest extends TestCase
         $element = new SelectElement();
         $element->setAttributes(array(
             'multiple' => true,
-            'options'  => array(
-                'Option 1' => 'option1',
-                'Option 2' => 'option2',
-                'Option 3' => 'option3',
-            ),
+        ));
+        $element->setValueOptions(array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -107,9 +107,7 @@ class SelectTest extends TestCase
     public function testInArrayValidationOfOptions($valueTests, $options)
     {
         $element = new SelectElement('my-select');
-        $element->setAttributes(array(
-            'options' => $options,
-        ));
+        $element->setValueOptions($options);
         $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $inArrayValidator = $inputSpec['validators'][0];
@@ -122,6 +120,21 @@ class SelectTest extends TestCase
     public function testOptionsHasArrayOnConstruct()
     {
         $element = new SelectElement();
-        $this->assertTrue(is_array($element->getAttribute('options')));
+        $this->assertTrue(is_array($element->getValueOptions()));
+    }
+
+    public function testDeprecateOptionsInAttributes()
+    {
+        $element = new SelectElement();
+        $valueOptions = array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
+        );
+        $element->setAttributes(array(
+            'multiple' => true,
+            'options'  => $valueOptions,
+        ));
+        $this->assertEquals($valueOptions, $element->getValueOptions());
     }
 }

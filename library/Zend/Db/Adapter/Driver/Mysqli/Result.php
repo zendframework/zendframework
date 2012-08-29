@@ -113,6 +113,14 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * @return bool|null
+     */
+    public function isBuffered()
+    {
+        return $this->isBuffered;
+    }
+
+    /**
      * Return the resource
      * @return mixed
      */
@@ -192,7 +200,9 @@ class Result implements \Iterator, ResultInterface
         }
 
         if (($r = $this->resource->fetch()) === null) {
-            $this->resource->close();
+            if (!$this->isBuffered) {
+                $this->resource->close();
+            }
             return false;
         } elseif ($r === false) {
             throw new Exception\RuntimeException($this->resource->error);

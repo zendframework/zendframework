@@ -180,7 +180,7 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        $resultResource = pg_execute($this->pgsql, $this->statementName, $parameters);
+        $resultResource = pg_execute($this->pgsql, $this->statementName, (array) $parameters);
 
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_last_error());

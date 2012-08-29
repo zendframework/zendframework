@@ -54,7 +54,7 @@ class FormRowTest extends TestCase
         $element->setLabel('The value for foo:');
         $this->helper->setLabelPosition('prepend');
         $markup = $this->helper->render($element);
-        $this->assertContains('<label>The value for foo:<', $markup);
+        $this->assertContains('<label><span>The value for foo:</span><', $markup);
         $this->assertContains('</label>', $markup);
     }
 
@@ -117,6 +117,19 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#<ul>\s*<li>First error message</li>\s*<li>Second error message</li>\s*<li>Third error message</li>\s*</ul>#s', $markup);
+    }
+
+    public function testDoesNotRenderErrorsIfSetToFalse()
+    {
+        $element  = new Element('foo');
+        $element->setMessages(array(
+            'First error message',
+            'Second error message',
+            'Third error message',
+        ));
+
+        $markup = $this->helper->setRenderErrors(false)->render($element);
+        $this->assertRegexp('/<input name="foo" type="text"[^\/>]*\/?>/', $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()

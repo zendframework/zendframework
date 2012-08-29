@@ -147,9 +147,9 @@ class FormTest extends TestCase
         $this->form->setInputFilter($inputFilter);
     }
 
-    public function testNoInputFilterPresentByDefault()
+    public function testInputFilterPresentByDefault()
     {
-        $this->assertNull($this->form->getInputFilter());
+        $this->assertNotNull($this->form->getInputFilter());
     }
 
     public function testCanComposeAnInputFilter()

@@ -198,10 +198,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @todo Why is this one causing a segfault?
-     * @group disable
-     */
     public function testRendersWithoutPartial()
     {
         $this->paginator->setView(new View\Renderer\PhpRenderer());

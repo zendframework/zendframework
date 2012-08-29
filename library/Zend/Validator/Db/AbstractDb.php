@@ -284,44 +284,46 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getSelect()
     {
-        if (null === $this->select) {
-            $adapter  = $this->getAdapter();
-            $driver   = $adapter->getDriver();
-            $platform = $adapter->getPlatform();
+        if ($this->select instanceof DbSelect) {
+            return $this->select;
+        }
 
-            /**
-             * Build select object
-             */
-            $select = new DbSelect();
-            $tableIdentifier = new TableIdentifier($this->table, $this->schema);
-            $select->from($tableIdentifier)->columns(
-                array($this->field)
+        $adapter  = $this->getAdapter();
+        $driver   = $adapter->getDriver();
+        $platform = $adapter->getPlatform();
+
+        /*
+         * Build select object
+         */
+        $select          = new DbSelect();
+        $tableIdentifier = new TableIdentifier($this->table, $this->schema);
+        $select->from($tableIdentifier)->columns(
+            array($this->field)
+        );
+
+        // Support both named and positional parameters
+        if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
+            $select->where(
+                $platform->quoteIdentifier($this->field, true) . ' = :value'
             );
+        } else {
+            $select->where(
+                $platform->quoteIdentifier($this->field, true) . ' = ?'
+            );
+        }
 
-            // Support both named and positional parameters
-            if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
-                $select->where(
-                    $platform->quoteIdentifier($this->field, true) . ' = :value'
+        if ($this->exclude !== null) {
+            if (is_array($this->exclude)) {
+                $select->where->notEqualTo(
+                    $this->exclude['field'],
+                    $this->exclude['value']
                 );
             } else {
-                $select->where(
-                    $platform->quoteIdentifier($this->field, true) . ' = ?'
-                );
+                $select->where($this->exclude);
             }
-
-            if ($this->exclude !== null) {
-                if (is_array($this->exclude)) {
-                    $select->where(
-                        $platform->quoteIdentifier($this->exclude['field'], true) .
-                        ' != ?', $this->exclude['value']
-                    );
-                } else {
-                    $select->where($this->exclude);
-                }
-            }
-
-            $this->select = $select;
         }
+
+        $this->select = $select;
 
         return $this->select;
     }

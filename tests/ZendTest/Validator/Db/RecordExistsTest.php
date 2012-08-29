@@ -10,8 +10,9 @@
 
 namespace ZendTest\Validator\Db;
 
-use Zend\Validator\Db\RecordExists;
 use ArrayObject;
+use Zend\Db\Adapter\Adapter;
+use Zend\Validator\Db\RecordExists;
 
 /**
  * @category   Zend
@@ -258,5 +259,40 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator  = new RecordExists('users', 'field1');
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
                                      'messageTemplates', $validator);
+    }
+
+    /**
+     * Test that we don't get a mix of positional and named parameters
+     * @group ZF2-502
+     */
+    public function testSelectDoesNotMixPositionalAndNamedParameters()
+    {
+        if (!extension_loaded('sqlite3')) {
+            $this->markTestSkipped('Relies on SQLite extension');
+        }
+        $adapter = new Adapter(array(
+            'driver'   => 'Pdo_Sqlite',
+            'database' => 'sqlite::memory:',
+        ));
+        $validator = new RecordExists(
+            array(
+                'table' => 'users', 
+                'schema' => 'my'
+            ), 
+            'field1', 
+            array(
+                'field' => 'foo',
+                'value' => 'bar'
+            ),
+            $adapter
+        );
+        $select = $validator->getSelect();
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $select);
+        $string = $select->getSqlString();
+        if (preg_match('/:[a-zA-Z]+/', $string)) {
+            $this->assertNotContains(' != ?', $string);
+        } else {
+            $this->assertContains(' != ?', $string);
+        }
     }
 }

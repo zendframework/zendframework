@@ -31,7 +31,7 @@ class RequestFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (class_exists("Zend\Console\Console") && Console::isConsole()) {
+        if (Console::isConsole()) {
             return new ConsoleRequest();
         }
 

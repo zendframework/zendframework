@@ -118,7 +118,7 @@ class Translator
         if (isset($options['translation_file_patterns'])) {
             if (!is_array($options['translation_file_patterns'])) {
                 throw new Exception\InvalidArgumentException(
-                    '"translation_patterns" should be an array'
+                    '"translation_file_patterns" should be an array'
                 );
             }
 

@@ -33,6 +33,8 @@ XX August 2012
     simplify usage for many, and remove the "no input filter attached"
     exception.
   - All form helpers for buttons (button, submit, reset) now allow translation.
+  - The formRow() view helper now allows you to set the CSS class used to
+    designate an input with errors.
 - Zend\Http
   - Some browser/web server combingations set SERVER_NAME to the IPv6 address,
     and enclose it in brackets. The PhpEnvironment\Request object now correctly

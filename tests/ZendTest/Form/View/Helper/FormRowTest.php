@@ -119,7 +119,7 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#<ul>\s*<li>First error message</li>\s*<li>Second error message</li>\s*<li>Third error message</li>\s*</ul>#s', $markup);
     }
 
-    public function testDoesNotRenderErrorsIfSetToFalse()
+    public function testDoesNotRenderErrorsListIfSetToFalse()
     {
         $element  = new Element('foo');
         $element->setMessages(array(
@@ -129,7 +129,30 @@ class FormRowTest extends TestCase
         ));
 
         $markup = $this->helper->setRenderErrors(false)->render($element);
-        $this->assertRegexp('/<input name="foo" type="text"[^\/>]*\/?>/', $markup);
+        $this->assertRegexp('/<input name="foo" class="input-error" type="text" [^\/>]*\/?>/', $markup);
+    }
+
+    public function testCanModifyDefaultErrorClass()
+    {
+        $element  = new Element('foo');
+        $element->setMessages(array(
+            'Error message'
+        ));
+
+        $markup = $this->helper->setInputErrorClass('custom-error-class')->render($element);
+        $this->assertRegexp('/<input name="foo" class="custom-error-class" type="text" [^\/>]*\/?>/', $markup);
+    }
+
+    public function testDoesNotOverrideClassesIfAlreadyPresentWhenThereAreErrors()
+    {
+        $element  = new Element('foo');
+        $element->setMessages(array(
+            'Error message'
+        ));
+        $element->setAttribute('class', 'foo bar');
+
+        $markup = $this->helper->setInputErrorClass('custom-error-class')->render($element);
+        $this->assertRegexp('/<input name="foo" class="foo bar custom-error-class" type="text" [^\/>]*\/?>/', $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()

@@ -276,10 +276,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         ));
         $validator = new RecordExists(
             array(
-                'table' => 'users', 
+                'table' => 'users',
                 'schema' => 'my'
-            ), 
-            'field1', 
+            ),
+            'field1',
             array(
                 'field' => 'foo',
                 'value' => 'bar'

@@ -25,8 +25,8 @@ class Step extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID => "Invalid value given. Scalar expected.",
-        self::NOT_STEP => "The input is not a valid step."
+        self::INVALID => "Invalid value given. Scalar expected",
+        self::NOT_STEP => "The input is not a valid step"
     );
 
     /**

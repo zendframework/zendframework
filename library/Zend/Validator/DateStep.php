@@ -34,7 +34,7 @@ class DateStep extends AbstractValidator
     protected $messageTemplates = array(
         self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
         self::INVALID_DATE => "The input does not appear to be a valid date",
-        self::NOT_STEP     => "The input is not a valid step."
+        self::NOT_STEP     => "The input is not a valid step"
     );
 
     /**

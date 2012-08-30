@@ -4,32 +4,16 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0rc7*
+*Zend Framework 2.0.1*
 
-This is the seventh release candidate for 2.0.0. At this time, we anticipate
-that this will be the final release candidate before issuing a stable release.
-We highly recommend testing your production applications against it.
+This is the first maintenance release for the 2.0 series.
 
-XX August 2012
+XX YYYY 2012
 
-### UPDATES IN RC7
+### UPDATES IN 2.0.1
 
-- Zend\Di
-  - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
-    boolean values.
-- Zend\Form
-  - Fixes issue with multi-checkbox rendering.
-- Zend\Ldap
-  - Fixes an error nesting condition
-- Zend\Log
-  - Fixes an issue with Zend\Log\Formatter\Simple whereby it was using a legacy
-    key ("info") instead of the key standardized upon in ZF2 ("extra"). 
-  - Simple formatter now defaults to JSON-encoding for array and object
-    serialization (prevents issues with some writers.)
-- Zend\Mvc
-  - Fixes an issue in the ViewHelperManagerFactory whereby a condition was
-    testing against an uninitialized value.
-  - Added zend-console to composer.json dependencies.
+- Zend\Stdlib
+  - Adds support for "has" methods to ClassMethods hydrator
 
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC6, as well as almost XX documentation changes!

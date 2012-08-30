@@ -449,12 +449,14 @@ class FormInputTest extends CommonTestCase
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
 
-    /*
-     * To avoid repeating code on ZF2-489 tests. Creates a mock of the
-     * translator.
+    /**
+     * @group ZF2-489
      */
-    private function mockTranslator()
+    public function testCanTranslatePlaceholder()
     {
+        $element = new Element('test');
+        $element->setAttribute('placeholder', 'test');
+
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
 
         $mockTranslator->expects($this->exactly(1))
@@ -464,32 +466,6 @@ class FormInputTest extends CommonTestCase
         $this->helper->setTranslator($mockTranslator);
 
         $this->assertTrue($this->helper->hasTranslator());
-    }
-
-    /**
-     * @group ZF2-489
-     */
-    public function testcanTranslateValue()
-    {
-        $element = new Element('test');
-        $element->setValue('placeholder');
-
-        $this->mockTranslator();
-
-        $markup = $this->helper->__invoke($element);
-
-        $this->assertContains('value="translated string"', $markup);
-    }
-
-    /**
-     * @group ZF2-489
-     */
-    public function testCanTranslatePlaceholder()
-    {
-        $element = new Element('test');
-        $element->setAttribute('placeholder', 'test');
-
-        $this->mockTranslator();
 
         $markup = $this->helper->__invoke($element);
 

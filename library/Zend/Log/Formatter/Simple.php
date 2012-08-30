@@ -18,9 +18,9 @@ use Zend\Log\Exception;
  * @package    Zend_Log
  * @subpackage Formatter
  */
-class Simple implements FormatterInterface
+class Simple extends Base
 {
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %extra%';
 
     /**
      * Format specifier for log messages
@@ -28,14 +28,6 @@ class Simple implements FormatterInterface
      * @var string
      */
     protected $format;
-
-    /**
-     * Format specifier for DateTime objects in event data (default: ISO 8601)
-     *
-     * @see http://php.net/manual/en/function.date.php
-     * @var string
-     */
-    protected $dateTimeFormat = self::DEFAULT_DATETIME_FORMAT;
 
     /**
      * Class constructor
@@ -53,9 +45,7 @@ class Simple implements FormatterInterface
 
         $this->format = isset($format) ? $format : static::DEFAULT_FORMAT;
 
-        if (isset($dateTimeFormat)) {
-            $this->dateTimeFormat = $dateTimeFormat;
-        }
+        parent::__construct($dateTimeFormat);
     }
 
     /**
@@ -68,41 +58,22 @@ class Simple implements FormatterInterface
     {
         $output = $this->format;
 
-        if (!isset($event['info'])) {
-            $event['info'] = '';
-        }
-
-        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
-            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
-        }
-
+        $event = parent::format($event);
         foreach ($event as $name => $value) {
-            if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)
-            ) {
-                $value = gettype($value);
+            if ('extra' == $name && count($value)) {
+                $value = $this->normalize($value);
+            } elseif ('extra' == $name) {
+                // Don't print an empty array
+                $value = '';
             }
-
             $output = str_replace("%$name%", $value, $output);
         }
 
+        if (isset($event['extra']) && empty($event['extra'])
+            && false !== strpos($this->format, '%extra%')
+        ) {
+            $output = rtrim($output, ' ');
+        }
         return $output;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDateTimeFormat()
-    {
-        return $this->dateTimeFormat;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDateTimeFormat($dateTimeFormat)
-    {
-        $this->dateTimeFormat = (string) $dateTimeFormat;
-        return $this;
     }
 }

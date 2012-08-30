@@ -36,6 +36,16 @@ class ArrayDefinitionTest extends TestCase
         $this->assertFalse($this->definition->hasClass('My\Foo'));
     }
 
+    public function testArrayDefinitionHasMethods()
+    {
+    	$this->assertTrue($this->definition->hasMethods('My\Mapper'));
+    	$this->assertFalse($this->definition->hasMethods('My\EntityA'));
+    	$this->assertTrue($this->definition->hasMethods('My\Mapper'));
+    	$this->assertFalse($this->definition->hasMethods('My\RepositoryA'));
+    	$this->assertFalse($this->definition->hasMethods('My\RepositoryB'));
+    	$this->assertFalse($this->definition->hasMethods('My\Foo'));
+    }
+    
     public function testArrayDefinitionCanGetClassses()
     {
         $list = array(

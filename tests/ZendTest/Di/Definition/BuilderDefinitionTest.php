@@ -51,6 +51,29 @@ class BuilderDefinitionTest extends TestCase
         );
     }
 
+    public function testBuilderDefinitionHasMethodsThrowsRuntimeException()
+    {
+    	$definition = new BuilderDefinition();
+    	
+    	$this->setExpectedException('Zend\Di\Exception\RuntimeException');
+    	$definition->hasMethods('Foo');
+    }
+    
+    public function testBuilderDefinitionHasMethods()
+    {
+    	$class = new Builder\PhpClass();
+    	$class->setName('Foo');
+    	
+    	$definition = new BuilderDefinition();
+    	$definition->addClass($class);
+    	
+    	$this->assertFalse($definition->hasMethods('Foo'));
+    	
+    	$class->createInjectionMethod('injectBar');
+    	
+    	$this->assertTrue($definition->hasMethods('Foo'));
+    }
+    
     public function testBuilderCanBuildFromArray()
     {
         $ini = ConfigFactory::fromFile(__DIR__ . '/../_files/sample.ini');

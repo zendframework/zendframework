@@ -12,6 +12,8 @@ XX YYYY 2012
 
 ### UPDATES IN 2.0.1
 
+- Zend\Form
+  - Made value and placeholder form attributes translatable
 - Zend\Stdlib
   - Adds support for "has" methods to ClassMethods hydrator
 

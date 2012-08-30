@@ -82,7 +82,7 @@ class FormRow extends AbstractHelper
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
             // labels. The semantic way is to group them inside a fieldset
             $type = $element->getAttribute('type');
-            if ($type === 'multi_checkbox' || $type === 'multicheckbox' || $type === 'radio') {
+            if ($type === 'multi_checkbox' || $type === 'radio') {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,

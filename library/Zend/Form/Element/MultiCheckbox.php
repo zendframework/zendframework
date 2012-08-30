@@ -22,6 +22,15 @@ use Zend\Validator\ValidatorInterface;
 class MultiCheckbox extends Checkbox
 {
     /**
+     * Seed attributes
+     *
+     * @var array
+     */
+    protected $attributes = array(
+        'type' => 'multi_checkbox',
+    );
+
+    /**
      * @var bool
      */
     protected $useHiddenElement = false;

@@ -104,4 +104,13 @@ class MultiCheckboxTest extends TestCase
         $this->assertInstanceOf('Zend\Validator\Explode', $explodeValidator);
         $this->assertTrue($explodeValidator->isValid($valueTests));
     }
+
+    public function testAttributeType()
+    {
+        $element = new MultiCheckboxElement();
+        $attributes = $element->getAttributes();
+
+        $this->assertArrayHasKey('type', $attributes);
+        $this->assertEquals('multi_checkbox', $attributes['type']);
+    }
 }

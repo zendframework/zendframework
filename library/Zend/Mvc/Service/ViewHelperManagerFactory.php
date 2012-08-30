@@ -51,17 +51,17 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
         foreach ($this->defaultHelperMapClasses as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
                 $config = new $configClass;
-            }
 
-            if (!$config instanceof ConfigInterface) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
-                    $configClass,
-                    'Zend\ServiceManager\ConfigInterface'
-                ));
-            }
+                if (!$config instanceof ConfigInterface) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
+                        $configClass,
+                        'Zend\ServiceManager\ConfigInterface'
+                    ));
+                }
 
-            $config->configureServiceManager($plugins);
+                $config->configureServiceManager($plugins);
+            }
         }
 
         // Configure URL view helper with router

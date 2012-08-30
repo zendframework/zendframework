@@ -17,7 +17,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class BuilderDefinitionTest extends TestCase
 {
-
     public function testBuilderImplementsDefinition()
     {
         $builder = new BuilderDefinition();
@@ -49,6 +48,28 @@ class BuilderDefinitionTest extends TestCase
             array('Foo::injectBar:0' => array('bar', 'Bar', true)),
             $definition->getMethodParameters('Foo', 'injectBar')
         );
+    }
+
+    public function testBuilderDefinitionHasMethodsThrowsRuntimeException()
+    {
+        $definition = new BuilderDefinition();
+
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $definition->hasMethods('Foo');
+    }
+
+    public function testBuilderDefinitionHasMethods()
+    {
+        $class = new Builder\PhpClass();
+        $class->setName('Foo');
+
+        $definition = new BuilderDefinition();
+        $definition->addClass($class);
+
+        $this->assertFalse($definition->hasMethods('Foo'));
+        $class->createInjectionMethod('injectBar');
+
+        $this->assertTrue($definition->hasMethods('Foo'));
     }
 
     public function testBuilderCanBuildFromArray()

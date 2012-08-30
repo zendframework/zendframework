@@ -45,6 +45,13 @@ class Navigation extends AbstractNavigationHelper
     protected $defaultProxy = 'menu';
 
     /**
+     * Indicates whether or not a given helper has been injected
+     *
+     * @var array
+     */
+    protected $injected = array();
+
+    /**
      * Whether container should be injected when proxying
      *
      * @var bool
@@ -183,7 +190,11 @@ class Navigation extends AbstractNavigationHelper
         $helper = $plugins->get($proxy);
         $class  = get_class($helper);
 
-        $this->inject($helper);
+        if (!isset($this->injected[$class])) {
+            $this->inject($helper);
+            $this->injected[$class] = true;
+        }
+
         return $helper;
     }
 
@@ -196,16 +207,20 @@ class Navigation extends AbstractNavigationHelper
      */
     protected function inject(NavigationHelper $helper)
     {
-        if ($this->getInjectContainer()) {
+        if ($this->getInjectContainer() && !$helper->hasContainer()) {
             $helper->setContainer($this->getContainer());
         }
 
         if ($this->getInjectAcl()) {
-            $helper->setAcl($this->getAcl());
-            $helper->setRole($this->getRole());
+            if (!$helper->hasAcl()) {
+                $helper->setAcl($this->getAcl());
+            }
+            if (!$helper->hasRole()) {
+                $helper->setRole($this->getRole());
+            }
         }
 
-        if ($this->getInjectTranslator()) {
+        if ($this->getInjectTranslator() && !$helper->hasTranslator()) {
             $helper->setTranslator(
                 $this->getTranslator(), $this->getTranslatorTextDomain()
             );

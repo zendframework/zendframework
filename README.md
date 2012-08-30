@@ -14,6 +14,9 @@ XX August 2012
 
 ### UPDATES IN RC7
 
+- Zend\Di
+  - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
+    boolean values.
 - Zend\Log
   - Fixes an issue with Zend\Log\Formatter\Simple whereby it was using a legacy
     key ("info") instead of the key standardized upon in ZF2 ("extra"). 

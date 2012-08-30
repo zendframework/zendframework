@@ -157,8 +157,9 @@ class Logger implements LoggerInterface
     /**
      * Add a writer to a logger
      *
-     * @param  string|Writer $writer
+     * @param  string|Writer\WriterInterface $writer
      * @param  int $priority
+     * @param  array|null $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */

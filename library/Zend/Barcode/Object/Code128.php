@@ -195,6 +195,7 @@ class Code128 extends AbstractObject
 
     /**
      * Convert string to barcode string
+     * @param string $string
      * @return array
      */
     protected function convertToBarcodeChars($string)

@@ -93,7 +93,7 @@ class Prototype
     /**
      * Add parameters
      *
-     * @param  array $parameter
+     * @param  array $parameters
      * @return \Zend\Server\Method\Prototype
      */
     public function addParameters(array $parameters)

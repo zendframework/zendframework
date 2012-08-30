@@ -71,7 +71,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Get an author entry
      *
-     * @param DOMElement $element
+     * @param int $index
      * @return string
      */
     public function getAuthor($index = 0)

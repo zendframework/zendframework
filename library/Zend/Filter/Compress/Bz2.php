@@ -60,7 +60,8 @@ class Bz2 extends AbstractCompressionAlgorithm
     /**
      * Sets a new blocksize
      *
-     * @param  integer $level
+     * @param  integer $blocksize
+     * @throws Exception\InvalidArgumentException
      * @return Bz2
      */
     public function setBlocksize($blocksize)

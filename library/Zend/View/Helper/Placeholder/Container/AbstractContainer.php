@@ -337,6 +337,7 @@ abstract class AbstractContainer extends \ArrayObject
     /**
      * Render the placeholder
      *
+     * @param null|int|string $indent
      * @return string
      */
     public function toString($indent = null)

@@ -245,8 +245,9 @@ class ViewModel implements ModelInterface
      *
      * Can be an array or a Traversable + ArrayAccess object.
      *
-     * @param  array|ArrayAccess&Traversable $variables
+     * @param  array|ArrayAccess|Traversable $variables
      * @param  bool $overwrite Whether or not to overwrite the internal container with $variables
+     * @throws Exception\InvalidArgumentException
      * @return ViewModel
      */
     public function setVariables($variables, $overwrite = false)

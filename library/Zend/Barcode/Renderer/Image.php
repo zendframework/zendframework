@@ -135,9 +135,9 @@ class Image extends AbstractRenderer
     /**
      * Set an image resource to draw the barcode inside
      *
-     * @param resource $value
+     * @param resource $image
      * @return Image
-     * @throw  Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function setResource($image)
     {

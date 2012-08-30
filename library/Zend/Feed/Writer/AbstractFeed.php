@@ -109,7 +109,7 @@ class AbstractFeed
     /**
      * Set the copyright entry
      *
-     * @return string|null
+     * @param string $copyright
      * @throws Exception\InvalidArgumentException
      */
     public function setCopyright($copyright)
@@ -180,7 +180,7 @@ class AbstractFeed
     /**
      * Set the feed description
      *
-     * @return string|null
+     * @param string $description
      * @throws Exception\InvalidArgumentException
      */
     public function setDescription($description)
@@ -310,7 +310,7 @@ class AbstractFeed
     /**
      * Set the feed language
      *
-     * @return string|null
+     * @param string $language
      * @throws Exception\InvalidArgumentException
      */
     public function setLanguage($language)
@@ -338,7 +338,8 @@ class AbstractFeed
     /**
      * Set a link to an XML feed for any feed type/version
      *
-     * @return string|null
+     * @param string $link
+     * @param string $type
      * @throws Exception\InvalidArgumentException
      */
     public function setFeedLink($link, $type)
@@ -355,7 +356,7 @@ class AbstractFeed
     /**
      * Set the feed title
      *
-     * @return string|null
+     * @param string $title
      * @throws Exception\InvalidArgumentException
      */
     public function setTitle($title)
@@ -428,7 +429,7 @@ class AbstractFeed
     /**
      * Add a feed category
      *
-     * @param string $category
+     * @param array $category
      * @throws Exception\InvalidArgumentException
      */
     public function addCategory(array $category)

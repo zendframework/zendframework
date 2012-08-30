@@ -265,7 +265,7 @@ class Wsdl
      * Add a {@link http://www.w3.org/TR/wsdl#_bindings binding} element to WSDL
      *
      * @param string $name Name of the Binding
-     * @param string $type name of the portType to bind
+     * @param string $portType name of the portType to bind
      * @return object The new binding's XML_Tree_Node for use with {@link function addBindingOperation} and {@link function addDocumentation}
      */
     public function addBinding($name, $portType)

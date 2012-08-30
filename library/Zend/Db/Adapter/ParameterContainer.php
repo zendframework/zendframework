@@ -285,7 +285,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param array $array
+     * @param array|ParameterContainer $parameters
+     * @throws Exception\InvalidArgumentException
      * @return ParameterContainer
      */
     public function merge($parameters)

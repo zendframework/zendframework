@@ -23,7 +23,7 @@ interface PreparableSqlInterface
 
     /**
      * @param Adapter $adapter
-     * @param StatementContainerInterface
+     * @param StatementContainerInterface $statementContainer
      * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer);

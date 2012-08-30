@@ -129,7 +129,7 @@ class Uri extends AbstractValidator
     /**
      * Sets the allowAbsolute option
      *
-     * @param  boolean $allowWhiteSpace
+     * @param  boolean $allowAbsolute
      * @return Uri
      */
     public function setAllowAbsolute($allowAbsolute)

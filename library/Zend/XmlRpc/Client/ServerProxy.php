@@ -72,7 +72,7 @@ class ServerProxy
     /**
      * Call a method in this namespace.
      *
-     * @param  string $methodN
+     * @param  string $method
      * @param  array $args
      * @return mixed
      */

@@ -29,7 +29,7 @@ class StringTrim extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|Traversable $options
+     * @param  string|array|Traversable $charlistOrOptions
      */
     public function __construct($charlistOrOptions = null)
     {

@@ -166,7 +166,7 @@ abstract class AbstractFunction
      *
      * @param array $return Array of return types
      * @param string $returnDesc Return value description
-     * @param array $params Array of arguments (each an array of types)
+     * @param array $paramTypes Array of arguments (each an array of types)
      * @param array $paramDesc Array of parameter descriptions
      * @return array
      */

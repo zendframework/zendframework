@@ -247,7 +247,7 @@ class Encoder
     /**
      * JSON encode a string value by escaping characters as necessary
      *
-     * @param $value string
+     * @param string $string
      * @return string
      */
     protected function _encodeString(&$string)

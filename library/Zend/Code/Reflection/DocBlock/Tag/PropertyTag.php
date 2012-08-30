@@ -42,7 +42,7 @@ class PropertyTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocBlockLine
+     * @param string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {

@@ -275,7 +275,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Does the header have the requested type?
      *
-     * @param  string $type
+     * @param  array|string $matchAgainst
      * @return bool
      */
     protected function hasType($matchAgainst)

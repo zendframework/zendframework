@@ -73,7 +73,7 @@ abstract class AbstractFeed implements FeedInterface
     /**
      * Constructor
      *
-     * @param DOMDocument The DOM object for the feed's XML
+     * @param DOMDocument $domDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
     public function __construct(DOMDocument $domDocument, $type = null)

@@ -211,7 +211,7 @@ class Smd
     /**
      * Set service ID
      *
-     * @param  string $Id
+     * @param  string $id
      * @return Smd
      */
     public function setId($id)

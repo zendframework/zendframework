@@ -209,7 +209,7 @@ class Dba extends AbstractAdapter implements
     /**
      * Remove items by given namespace
      *
-     * @param string $prefix
+     * @param string $namespace
      * @return boolean
      */
     public function clearByNamespace($namespace)

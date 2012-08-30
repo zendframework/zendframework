@@ -27,7 +27,8 @@ class Callback extends AbstractFilter
     );
 
     /**
-     * @param array|Traversable $options
+     * @param callable|array|Traversable $callbackOrOptions
+     * @param array $callbackParams
      */
     public function __construct($callbackOrOptions, $callbackParams = array())
     {
@@ -43,7 +44,8 @@ class Callback extends AbstractFilter
      * Sets a new callback for this filter
      *
      * @param  callable $callback
-     * @return Callback
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function setCallback($callback)
     {

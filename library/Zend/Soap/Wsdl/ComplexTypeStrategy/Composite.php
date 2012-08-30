@@ -79,7 +79,6 @@ class Composite implements ComplexTypeStrategy
      * Return default strategy of this composite
      *
      * @throws  Exception\InvalidArgumentException
-     * @param  string $type
      * @return ComplexTypeStrategy
      */
     public function getDefaultStrategy()

@@ -279,7 +279,7 @@ class Cookies extends Headers
     /**
      * Return a subset of a domain-matching cookies that also match a specified path
      *
-     * @param array $dom_array
+     * @param array $domains
      * @param string $path
      * @return array
      */

@@ -27,7 +27,7 @@ class MultiCheckbox extends Checkbox
      * @var array
      */
     protected $attributes = array(
-        'type' => 'multi_checkbox'
+        'type' => 'multi_checkbox',
     );
 
     /**

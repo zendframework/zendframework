@@ -14,21 +14,17 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class ClassDefinitionTest extends TestCase
 {
-	public function testClassImplementsDefinition()
-	{
-		$definition = new ClassDefinition('Foo');
-		$this->assertInstanceOf('Zend\Di\Definition\DefinitionInterface', $definition);
-	}
-	
-	public function testClassDefinitionHasMethods()
-	{
-		$definition = new ClassDefinition('Foo');
-		
-		$this->assertFalse($definition->hasMethods('Foo'));
-		
-		$definition->addMethod('doBar');
-		
-		$this->assertTrue($definition->hasMethods('Foo'));
-	}
-}
+    public function testClassImplementsDefinition()
+    {
+        $definition = new ClassDefinition('Foo');
+        $this->assertInstanceOf('Zend\Di\Definition\DefinitionInterface', $definition);
+    }
 
+    public function testClassDefinitionHasMethods()
+    {
+        $definition = new ClassDefinition('Foo');
+        $this->assertFalse($definition->hasMethods('Foo'));
+        $definition->addMethod('doBar');
+        $this->assertTrue($definition->hasMethods('Foo'));
+    }
+}

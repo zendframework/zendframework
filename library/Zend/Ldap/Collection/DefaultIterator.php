@@ -75,8 +75,9 @@ class DefaultIterator implements \Iterator, \Countable
         $this->ldap      = $ldap;
         $this->resultId  = $resultId;
 
+        $resource = $ldap->getResource();
         ErrorHandler::start();
-        $this->itemCount = ldap_count_entries($ldap->getResource(), $resultId);
+        $this->itemCount = ldap_count_entries($resource, $resultId);
         ErrorHandler::stop();
         if ($this->itemCount === false) {
             throw new Exception\LdapException($this->ldap, 'counting entries');
@@ -199,16 +200,17 @@ class DefaultIterator implements \Iterator, \Countable
         $entry          = array('dn' => $this->key());
         $ber_identifier = null;
 
+        $resource = $this->ldap->getResource();
         ErrorHandler::start();
         $name = ldap_first_attribute(
-            $this->ldap->getResource(), $this->current,
+            $resource, $this->current,
             $ber_identifier
         );
         ErrorHandler::stop();
 
         while ($name) {
             ErrorHandler::start();
-            $data = ldap_get_values_len($this->ldap->getResource(), $this->current, $name);
+            $data = ldap_get_values_len($resource, $this->current, $name);
             ErrorHandler::stop();
 
             if (!$data) {
@@ -237,7 +239,7 @@ class DefaultIterator implements \Iterator, \Countable
 
             ErrorHandler::start();
             $name = ldap_next_attribute(
-                $this->ldap->getResource(), $this->current,
+                $resource, $this->current,
                 $ber_identifier
             );
             ErrorHandler::stop();
@@ -259,8 +261,9 @@ class DefaultIterator implements \Iterator, \Countable
             $this->rewind();
         }
         if (is_resource($this->current)) {
+            $resource = $this->ldap->getResource();
             ErrorHandler::start();
-            $currentDn = ldap_get_dn($this->ldap->getResource(), $this->current);
+            $currentDn = ldap_get_dn($resource, $this->current);
             ErrorHandler::stop();
 
             if ($currentDn === false) {
@@ -285,8 +288,9 @@ class DefaultIterator implements \Iterator, \Countable
         $code = 0;
 
         if (is_resource($this->current) && $this->itemCount > 0) {
+            $resource = $this->ldap->getResource();
             ErrorHandler::start();
-            $this->current = ldap_next_entry($this->ldap->getResource(), $this->current);
+            $this->current = ldap_next_entry($resource, $this->current);
             ErrorHandler::stop();
             if ($this->current === false) {
                 $msg = $this->ldap->getLastError($code);
@@ -312,8 +316,9 @@ class DefaultIterator implements \Iterator, \Countable
     public function rewind()
     {
         if (is_resource($this->resultId)) {
+            $resource = $this->ldap->getResource();
             ErrorHandler::start();
-            $this->current = ldap_first_entry($this->ldap->getResource(), $this->resultId);
+            $this->current = ldap_first_entry($resource, $this->resultId);
             ErrorHandler::stop();
             if ($this->current === false
                 && $this->ldap->getLastErrorCode() > Exception\LdapException::LDAP_SUCCESS

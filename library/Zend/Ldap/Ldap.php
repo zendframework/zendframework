@@ -927,7 +927,7 @@ class Ldap
         }
         if ($sort !== null && is_string($sort)) {
             ErrorHandler::start(E_WARNING);
-            $isSorted = ldap_sort($this->getResource(), $search, $sort);
+            $isSorted = ldap_sort($resource, $search, $sort);
             ErrorHandler::stop();
             if ($isSorted === false) {
                 throw new Exception\LdapException($this, 'sorting: ' . $sort);
@@ -1173,8 +1173,9 @@ class Ldap
             }
         }
 
+        $resource = $this->getResource();
         ErrorHandler::start(E_WARNING);
-        $isAdded = ldap_add($this->getResource(), $dn->toString(), $entry);
+        $isAdded = ldap_add($resource, $dn->toString(), $entry);
         ErrorHandler::stop();
         if ($isAdded === false) {
             throw new Exception\LdapException($this, 'adding: ' . $dn->toString());
@@ -1214,8 +1215,9 @@ class Ldap
         }
 
         if (count($entry) > 0) {
+            $resource = $this->getResource();
             ErrorHandler::start(E_WARNING);
-            $isModified = ldap_modify($this->getResource(), $dn->toString(), $entry);
+            $isModified = ldap_modify($resource, $dn->toString(), $entry);
             ErrorHandler::stop();
             if ($isModified === false) {
                 throw new Exception\LdapException($this, 'updating: ' . $dn->toString());
@@ -1271,8 +1273,10 @@ class Ldap
                 }
             }
         }
+
+        $resource = $this->getResource();
         ErrorHandler::start(E_WARNING);
-        $isDeleted = ldap_delete($this->getResource(), $dn);
+        $isDeleted = ldap_delete($resource, $dn);
         ErrorHandler::stop();
         if ($isDeleted === false) {
             throw new Exception\LdapException($this, 'deleting: ' . $dn);
@@ -1298,14 +1302,15 @@ class Ldap
         }
         $children = array();
 
+        $resource = $this->getResource();
         ErrorHandler::start(E_WARNING);
-        $search = ldap_list($this->getResource(), $parentDn, '(objectClass=*)', array('dn'));
+        $search = ldap_list($resource, $parentDn, '(objectClass=*)', array('dn'));
         for (
-            $entry = ldap_first_entry($this->getResource(), $search);
+            $entry = ldap_first_entry($resource, $search);
             $entry !== false;
-            $entry = ldap_next_entry($this->getResource(), $entry)
+            $entry = ldap_next_entry($resource, $entry)
         ) {
-            $childDn = ldap_get_dn($this->getResource(), $entry);
+            $childDn = ldap_get_dn($resource, $entry);
             if ($childDn === false) {
                 ErrorHandler::stop();
                 throw new Exception\LdapException($this, 'getting dn');
@@ -1400,8 +1405,9 @@ class Ldap
             $newRdn    = Dn::implodeRdn(array_shift($newDnParts));
             $newParent = Dn::implodeDn($newDnParts);
 
+            $resource = $this->getResource();
             ErrorHandler::start(E_WARNING);
-            $isOK = ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
+            $isOK = ldap_rename($resource, $from, $newRdn, $newParent, true);
             ErrorHandler::stop();
             if ($isOK === false) {
                 throw new Exception\LdapException($this, 'renaming ' . $from . ' to ' . $to);

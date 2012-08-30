@@ -112,10 +112,13 @@ class FormElementTest extends TestCase
     {
         if ($type === 'radio') {
             $element = new Element\Radio('foo');
+            $this->assertEquals('radio', $element->getAttribute('type'));
         } elseif ($type === 'multi_checkbox') {
             $element = new Element\MultiCheckbox('foo');
+            $this->assertEquals('multi_checkbox', $element->getAttribute('type'));
         } elseif ($type === 'select') {
             $element = new Element\Select('foo');
+            $this->assertEquals('select', $element->getAttribute('type'));
         } else {
             $element = new Element('foo');
         }

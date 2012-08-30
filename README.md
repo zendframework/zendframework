@@ -17,6 +17,8 @@ XX August 2012
 - Zend\Di
   - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
     boolean values.
+- Zend\Form
+  - Fixes issue with multi-checkbox rendering.
 - Zend\Ldap
   - Fixes an error nesting condition
 - Zend\Log

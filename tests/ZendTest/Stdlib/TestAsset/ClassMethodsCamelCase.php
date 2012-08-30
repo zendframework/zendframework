@@ -67,7 +67,7 @@ class ClassMethodsCamelCase
         $this->isBar = $value;
         return $this;
     }
-    
+
     public function getHasFoo()
     {
         return $this->hasFoo;

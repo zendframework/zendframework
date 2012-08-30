@@ -67,7 +67,7 @@ class ClassMethodsUnderscore
         $this->is_bar = $value;
         return $this;
     }
-    
+
     public function getHasFoo()
     {
         return $this->has_foo;

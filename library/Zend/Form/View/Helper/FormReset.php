@@ -33,11 +33,11 @@ class FormReset extends FormInput
         'type'           => true,
         'value'          => true,
     );
-    
+
     /**
      * Translatable attributes
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $translatableAttributes = array(
         'value' => true

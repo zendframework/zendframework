@@ -41,13 +41,13 @@ class FormSubmit extends FormInput
 
     /**
      * Translatable attributes
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $translatableAttributes = array(
         'value' => true
     );
-    
+
     /**
      * Determine input type to use
      *

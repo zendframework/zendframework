@@ -14,11 +14,18 @@ XX August 2012
 
 ### UPDATES IN RC7
 
+- Zend\Di
+  - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
+    boolean values.
 - Zend\Log
   - Fixes an issue with Zend\Log\Formatter\Simple whereby it was using a legacy
     key ("info") instead of the key standardized upon in ZF2 ("extra"). 
   - Simple formatter now defaults to JSON-encoding for array and object
     serialization (prevents issues with some writers.)
+- Zend\Mvc
+  - Fixes an issue in the ViewHelperManagerFactory whereby a condition was
+    testing against an uninitialized value.
+  - Added zend-console to composer.json dependencies.
 
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC6, as well as almost XX documentation changes!

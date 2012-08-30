@@ -15,7 +15,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class ArrayDefinitionTest extends TestCase
 {
-
     /**
      * @var ArrayDefinition
      */
@@ -34,6 +33,16 @@ class ArrayDefinitionTest extends TestCase
         $this->assertTrue($this->definition->hasClass('My\RepositoryA'));
         $this->assertTrue($this->definition->hasClass('My\RepositoryB'));
         $this->assertFalse($this->definition->hasClass('My\Foo'));
+    }
+
+    public function testArrayDefinitionHasMethods()
+    {
+        $this->assertTrue($this->definition->hasMethods('My\Mapper'));
+        $this->assertFalse($this->definition->hasMethods('My\EntityA'));
+        $this->assertTrue($this->definition->hasMethods('My\Mapper'));
+        $this->assertFalse($this->definition->hasMethods('My\RepositoryA'));
+        $this->assertFalse($this->definition->hasMethods('My\RepositoryB'));
+        $this->assertFalse($this->definition->hasMethods('My\Foo'));
     }
 
     public function testArrayDefinitionCanGetClassses()
@@ -60,7 +69,6 @@ class ArrayDefinitionTest extends TestCase
         $this->assertContains('My\RepositoryA', $this->definition->getClassSupertypes('My\RepositoryB'));
     }
 
-
     public function testArrayDefinitionCanGetInstantiator()
     {
         $this->assertEquals('__construct', $this->definition->getInstantiator('My\RepositoryA'));
@@ -86,7 +94,4 @@ class ArrayDefinitionTest extends TestCase
     {
         $this->markTestIncomplete();
     }
-
-
-
 }

@@ -72,7 +72,7 @@ class DateFormat extends AbstractHelper
         if(!$this->timezone) {
             return date_default_timezone_get();
         }
-        
+
         return $this->timezone;
     }
 

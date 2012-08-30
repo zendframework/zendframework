@@ -13,6 +13,8 @@ namespace ZendTest\Log\Formatter;
 use DateTime;
 use ZendTest\Log\TestAsset\StringObject;
 use Zend\Log\Formatter\Simple;
+use stdClass;
+use RuntimeException;
 
 /**
  * @category   Zend
@@ -30,61 +32,19 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultFormat()
     {
-        $date = new DateTime();
-        $fields = array('timestamp'    => $date,
-                        'message'      => 'foo',
-                        'priority'     => 42,
-                        'priorityName' => 'bar');
+        $date = new DateTime('2012-08-28T18:15:00Z');
+        $fields = array(
+            'timestamp'    => $date,
+            'message'      => 'foo',
+            'priority'     => 42,
+            'priorityName' => 'bar',
+            'extra'        => array()
+        );
 
-        $f = new Simple();
-        $line = $f->format($fields);
+        $outputExpected = '2012-08-28T18:15:00+00:00 bar (42): foo';
+        $formatter = new Simple();
 
-        $this->assertContains($date->format('c'), $line, 'Default date format is ISO 8601');
-        $this->assertContains($fields['message'], $line);
-        $this->assertContains($fields['priorityName'], $line);
-        $this->assertContains((string)$fields['priority'], $line);
-    }
-
-    public function testComplexValues()
-    {
-        $fields = array('timestamp'    => new DateTime(),
-                        'priority'     => 42,
-                        'priorityName' => 'bar');
-
-        $f = new Simple();
-
-        $fields['message'] = 'Foo';
-        $line = $f->format($fields);
-        $this->assertContains($fields['message'], $line);
-
-        $fields['message'] = 10;
-        $line = $f->format($fields);
-        $this->assertContains((string)$fields['message'], $line);
-
-        $fields['message'] = 10.5;
-        $line = $f->format($fields);
-        $this->assertContains((string)$fields['message'], $line);
-
-        $fields['message'] = true;
-        $line = $f->format($fields);
-        $this->assertContains('1', $line);
-
-        $fields['message'] = fopen('php://stdout', 'w');
-        $line = $f->format($fields);
-        $this->assertContains('Resource id ', $line);
-        fclose($fields['message']);
-
-        $fields['message'] = range(1,10);
-        $line = $f->format($fields);
-        $this->assertContains('array', $line);
-
-        $fields['message'] = new StringObject();
-        $line = $f->format($fields);
-        $this->assertContains($fields['message']->__toString(), $line);
-
-        $fields['message'] = new \stdClass();
-        $line = $f->format($fields);
-        $this->assertContains('object', $line);
+        $this->assertEquals($outputExpected, $formatter->format($fields));
     }
 
     /**
@@ -127,18 +87,25 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     public function testDefaultFormatShouldDisplayExtraInformations()
     {
         $message = 'custom message';
-        $exception = new \RuntimeException($message);
+        $exception = new RuntimeException($message);
         $event = array(
             'timestamp'    => new DateTime(),
             'message'      => 'Application error',
             'priority'     => 2,
             'priorityName' => 'CRIT',
-            'info'         => $exception,
+            'extra'        => array($exception),
         );
 
         $formatter = new Simple();
         $output = $formatter->format($event);
 
         $this->assertContains($message, $output);
+    }
+
+    public function testAllowsSpecifyingFormatAsConstructorArgument()
+    {
+        $format = '[%timestamp%] %message%';
+        $formatter = new Simple($format);
+        $this->assertEquals($format, $formatter->format(array()));
     }
 }

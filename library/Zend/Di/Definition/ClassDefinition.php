@@ -152,7 +152,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
      */
     public function hasMethods($class)
     {
-        return ($this->methods);
+        return (count($this->methods) > 0);
     }
 
     /**

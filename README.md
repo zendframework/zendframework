@@ -17,6 +17,8 @@ XX August 2012
 - Zend\Di
   - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
     boolean values.
+- Zend\Ldap
+  - Fixes an error nesting condition
 - Zend\Log
   - Fixes an issue with Zend\Log\Formatter\Simple whereby it was using a legacy
     key ("info") instead of the key standardized upon in ZF2 ("extra"). 

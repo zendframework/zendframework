@@ -622,15 +622,19 @@ class Form extends Fieldset implements FormInterface
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
         foreach ($fieldset->getElements() as $element) {
-            if (!$element instanceof InputProviderInterface) {
-                // only interested in the element if it provides input information
-                continue;
-            }
-
             $name = $element->getName();
 
-            // Create an input based on the specification returned from the element
-            $spec  = $element->getInputSpecification();
+            if (!$element instanceof InputProviderInterface) {
+                if ($inputFilter->has($name)) {
+                    continue;
+                }
+                // Create a new empty default input for this element
+                $spec = array('name' => $name, 'required' => false);
+            } else {
+                // Create an input based on the specification returned from the element
+                $spec  = $element->getInputSpecification();
+            }
+
             $input = $inputFactory->createInput($spec);
             $inputFilter->add($input, $name);
         }

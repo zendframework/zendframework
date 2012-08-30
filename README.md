@@ -19,6 +19,10 @@ XX August 2012
     key ("info") instead of the key standardized upon in ZF2 ("extra"). 
   - Simple formatter now defaults to JSON-encoding for array and object
     serialization (prevents issues with some writers.)
+- Zend\Mvc
+  - Fixes an issue in the ViewHelperManagerFactory whereby a condition was
+    testing against an uninitialized value.
+  - Added zend-console to composer.json dependencies.
 
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC6, as well as almost XX documentation changes!

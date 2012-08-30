@@ -73,7 +73,7 @@ class FingersCrossed extends AbstractWriter
     public function __construct(WriterInterface $writer, $activationStrategyOrPriority = null, $bufferSize = 0)
     {
         $this->writer = $writer;
-        
+
         if ($activationStrategyOrPriority === null) {
             $this->activationStrategy = new ErrorLevelActivationStrategy(Logger::WARN);
         } elseif (! $activationStrategyOrPriority instanceof ActivationStrategyInterface) {
@@ -81,7 +81,7 @@ class FingersCrossed extends AbstractWriter
         } else {
             $this->activationStrategy = $activationStrategyOrPriority;
         }
-        
+
         $this->bufferSize = $bufferSize;
     }
 
@@ -95,14 +95,14 @@ class FingersCrossed extends AbstractWriter
     {
         if ($this->buffering) {
             $this->buffer[] = $event;
-            
+
             if ($this->bufferSize > 0 && count($this->buffer) > $this->bufferSize) {
                 array_shift($this->buffer);
             }
-            
+
             if ($this->activationStrategy->isWriterActivated($event)) {
                 $this->buffering = false;
-                
+
                 foreach ($this->buffer as $bufferedEvent) {
                     $this->writer->write($bufferedEvent);
                 }

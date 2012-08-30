@@ -26,32 +26,32 @@ class FingersCrossedTest extends \PHPUnit_Framework_TestCase
     {
         $wrappedWriter = new MockWriter();
         $writer = new FingersCrossedWriter($wrappedWriter, 2);
-       
+
         $writer->write(array('priority' => 3, 'message' => 'foo'));
-        
+
         $this->assertSame(count($wrappedWriter->events), 0);
     }
-    
+
     public function testFlushing()
     {
         $wrappedWriter = new MockWriter();
         $writer = new FingersCrossedWriter($wrappedWriter, 2);
-         
+
         $writer->write(array('priority' => 3, 'message' => 'foo'));
         $writer->write(array('priority' => 1, 'message' => 'bar'));
-    
+
         $this->assertSame(count($wrappedWriter->events), 2);
     }
-    
+
     public function testAfterFlushing()
     {
         $wrappedWriter = new MockWriter();
         $writer = new FingersCrossedWriter($wrappedWriter, 2);
-         
+
         $writer->write(array('priority' => 3, 'message' => 'foo'));
         $writer->write(array('priority' => 1, 'message' => 'bar'));
         $writer->write(array('priority' => 3, 'message' => 'bar'));
-    
+
         $this->assertSame(count($wrappedWriter->events), 3);
     }
 }

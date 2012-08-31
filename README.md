@@ -1,24 +1,17 @@
-### Welcome to the *Zend Framework 2.0.0* Release!
+### Welcome to the *Zend Framework 2.1.0* Release!
 
 Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.1*
+*Zend Framework 2.1.0*
 
-This is the first maintenance release for the 2.0 series.
+This is the first feature release for the 2.0 series.
 
-XX YYYY 2012
+XX YYYY 201Z
 
-### UPDATES IN 2.0.1
+### UPDATES IN 2.1.0
 
-- Zend\Form
-  - Made value and placeholder form attributes translatable
-- Zend\Stdlib
-  - Adds support for "has" methods to ClassMethods hydrator
-
-More than XX pull requests for a variety of features and bugfixes were handled
-since RC6, as well as almost XX documentation changes!
 
 ### SYSTEM REQUIREMENTS
 

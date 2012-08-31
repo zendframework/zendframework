@@ -23,7 +23,7 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.0rc6';
+    const VERSION = '2.1.0dev';
 
     /**
      * The latest stable version Zend Framework available

@@ -30,6 +30,9 @@ XX August 2012
   - Fixes an issue in the ViewHelperManagerFactory whereby a condition was
     testing against an uninitialized value.
   - Added zend-console to composer.json dependencies.
+- Zend\View
+  - Breadcrumbs helper allows passing string container name now, allowing
+    multiple navigation containers.
 
 More than XX pull requests for a variety of features and bugfixes were handled
 since RC6, as well as almost XX documentation changes!

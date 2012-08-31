@@ -133,6 +133,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $sm->get('Application')->bootstrap();
         $sm->setFactory('Navigation', 'Zend\Navigation\Service\DefaultNavigationFactory');
 
+        $sm->setService('nav1', $this->_nav1);
+        $sm->setService('nav2', $this->_nav2);
+
         $app = $this->serviceManager->get('Application');
         $app->getMvcEvent()->setRouteMatch(new RouteMatch(array(
             'controller' => 'post',

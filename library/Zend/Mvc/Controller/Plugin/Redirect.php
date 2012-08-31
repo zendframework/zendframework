@@ -34,6 +34,7 @@ class Redirect extends AbstractPlugin
      * @param  string $route RouteInterface name
      * @param  array $params Parameters to use in url generation, if any
      * @param  array $options RouteInterface-specific options to use in url generation, if any
+     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
      * @return Response
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event

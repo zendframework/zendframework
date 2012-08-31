@@ -34,6 +34,7 @@ class Url extends AbstractPlugin
      * @return string
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event
+     * @throws Exception\RuntimeException if no RouteMatch instance or no matched route name present
      */
     public function fromRoute($route = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
     {

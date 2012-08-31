@@ -278,7 +278,6 @@ class DefaultIterator implements \Iterator, \Countable
      * Implements Iterator
      *
      * @throws \Zend\Ldap\Exception\LdapException
-     * @return
      */
     public function next()
     {

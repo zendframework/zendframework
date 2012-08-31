@@ -359,6 +359,7 @@ abstract class AbstractWord extends AbstractAdapter
      *
      * @see    Zend\Validator\ValidatorInterface::isValid()
      * @param  mixed $value
+     * @param  mixed $context
      * @return bool
      */
     public function isValid($value, $context = null)

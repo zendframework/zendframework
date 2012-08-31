@@ -145,7 +145,8 @@ class Server extends AbstractServer
      *
      * @param  string $fault
      * @param  int $code
-     * @return false
+     * @param  mixed $data
+     * @return Error
      */
     public function fault($fault = null, $code = 404, $data = null)
     {

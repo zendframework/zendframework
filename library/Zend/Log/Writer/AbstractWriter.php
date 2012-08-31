@@ -31,7 +31,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Filter chain
      *
-     * @var array
+     * @var Filter\FilterInterface[]
      */
     protected $filters = array();
 
@@ -46,6 +46,7 @@ abstract class AbstractWriter implements WriterInterface
      * Add a filter specific to this writer.
      *
      * @param  int|string|Filter\FilterInterface $filter
+     * @param  array|null $options
      * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
      */
@@ -87,7 +88,7 @@ abstract class AbstractWriter implements WriterInterface
      * Set filter plugin manager
      *
      * @param  string|FilterPluginManager $plugins
-     * @return Logger
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setFilterPluginManager($plugins)
@@ -112,7 +113,7 @@ abstract class AbstractWriter implements WriterInterface
      *
      * @param string $name
      * @param array|null $options
-     * @return Writer
+     * @return Filter\FilterInterface
      */
     public function filterPlugin($name, array $options = null)
     {

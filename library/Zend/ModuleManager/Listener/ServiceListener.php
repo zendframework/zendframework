@@ -49,6 +49,7 @@ class ServiceListener implements ServiceListenerInterface
 
     /**
      * @param ServiceManager $serviceManager
+     * @param null|array $configuration
      */
     public function __construct(ServiceManager $serviceManager, $configuration = null)
     {
@@ -75,6 +76,7 @@ class ServiceListener implements ServiceListenerInterface
      * @param  string                $key             Configuration key
      * @param  string                $moduleInterface FQCN as string
      * @param  string                $method          Method name
+     * @throws Exception\RuntimeException
      * @return ServiceListener
      */
     public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
@@ -187,6 +189,7 @@ class ServiceListener implements ServiceListenerInterface
      * used to configure the service manager.
      *
      * @param  ModuleEvent $e
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function onLoadModulesPost(ModuleEvent $e)
@@ -235,6 +238,7 @@ class ServiceListener implements ServiceListenerInterface
      * the internal service configuration.
      *
      * @param  ServiceConfig|string $config Instance of ServiceConfig or class name
+     * @throws Exception\RuntimeException
      * @return array
      */
     protected function serviceConfigToArray($config)

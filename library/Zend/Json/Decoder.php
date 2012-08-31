@@ -85,6 +85,7 @@ class Decoder
      * @param int $decodeType How objects should be decoded -- see
      * {@link Zend_Json::TYPE_ARRAY} and {@link Zend_Json::TYPE_OBJECT} for
      * valid values
+     * @throws InvalidArgumentException
      * @return void
      */
     protected function __construct($source, $decodeType)
@@ -447,7 +448,7 @@ class Decoder
      *
      * @link   http://solarphp.com/
      * @link   http://svn.solarphp.com/core/trunk/Solar/Json.php
-     * @param  string $value
+     * @param  string $chrs
      * @return string
      */
     public static function decodeUnicodeString($chrs)

@@ -60,8 +60,7 @@ class Db extends AbstractWriter
      * @param string $tableName
      * @param array $columnMap
      * @param string $separator
-     * @return Db
-     * @throw Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($db, $tableName = null, array $columnMap = null, $separator = null)
     {

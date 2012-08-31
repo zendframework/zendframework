@@ -50,7 +50,14 @@ class ServerUrl extends AbstractHelper
         }
         $this->setScheme($scheme);
 
-        if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
+        if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+            $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+            if (strpos($host, ',') !== false) {
+                $hosts = explode(',', $host);
+                $host = trim(array_pop($hosts));
+            }
+            $this->setHost($host);
+        } elseif (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
             $this->setHost($_SERVER['HTTP_HOST']);
         } elseif (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
             $name = $_SERVER['SERVER_NAME'];

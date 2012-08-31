@@ -224,4 +224,18 @@ class FilterChain extends AbstractFilter implements Countable
 
         return $valueFiltered;
     }
+    
+    /**
+     * Prepare filter chain for serialization
+     *
+     * FilterPluginManager cannot be serialized, as it contains Traits. For
+     * this reason property 'plugins' is excluded and thus serialized
+     * filter chain is not necessarily equal to current chain.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array('filters');
+    }
 }

@@ -230,4 +230,18 @@ class ValidatorChain implements
     {
         return $this->isValid($value);
     }
+    
+    /**
+     * Prepare validator chain for serialization
+     *
+     * ValidatorPluginManager cannot be serialized, as it contains Traits. For
+     * this reason property 'plugins' is excluded and thus serialized
+     * filter chain is not necessarily equal to current chain.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array('validators', 'messages');
+    }
 }

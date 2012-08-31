@@ -103,7 +103,8 @@ class Message
     {
         if (null === $this->headers) {
             $this->setHeaders(new Headers());
-            $this->headers->addHeaderLine('Date', date('r'));
+            $date = Header\Date::fromString('Date: ' . date('r'));
+            $this->headers->addHeader($date);
         }
         return $this->headers;
     }

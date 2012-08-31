@@ -17,6 +17,9 @@ XX YYYY 2012
     boolean values.
 - Zend\Form
   - Fixes issue with multi-checkbox rendering.
+- Zend\I18n
+  - DateFormat view helper now correctly falls back to date.timezone setting
+    instead of system timezone.
 - Zend\Ldap
   - Fixes an error nesting condition
 - Zend\Log

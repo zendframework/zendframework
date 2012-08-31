@@ -226,7 +226,14 @@ class Factory
         }
 
         foreach ($inputFilterSpecification as $key => $value) {
-            $input = $this->createInput($value);
+            
+            if(($value instanceof InputInterface) || ($value instanceof InputFilterInterface)){
+                $input = $value;
+            }
+            else{
+                $input = $this->createInput($value);
+            }
+
             $inputFilter->add($input, $key);
         }
 

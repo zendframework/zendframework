@@ -73,6 +73,7 @@ class ClassMapAutoloader implements SplAutoloader
      * classname/file pairs.
      *
      * @param  string|array $map
+     * @throws Exception\InvalidArgumentException
      * @return ClassMapAutoloader
      */
     public function registerAutoloadMap($map)
@@ -105,6 +106,7 @@ class ClassMapAutoloader implements SplAutoloader
      * Register many autoload maps at once
      *
      * @param  array $locations
+     * @throws Exception\InvalidArgumentException
      * @return ClassMapAutoloader
      */
     public function registerAutoloadMaps($locations)

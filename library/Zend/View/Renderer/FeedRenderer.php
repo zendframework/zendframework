@@ -114,6 +114,7 @@ class FeedRenderer implements RendererInterface
      * Set feed type ('rss' or 'atom')
      *
      * @param  string $feedType
+     * @throws Exception\InvalidArgumentException
      * @return FeedRenderer
      */
     public function setFeedType($feedType)

@@ -49,8 +49,8 @@ class Svg extends AbstractRenderer
     /**
      * Set height of the result image
      * @param null|integer $value
+     * @throws Exception\OutOfRangeException
      * @return Svg
-     * @throw  Exception
      */
     public function setHeight($value)
     {
@@ -77,7 +77,8 @@ class Svg extends AbstractRenderer
      * Set barcode width
      *
      * @param mixed $value
-     * @return void
+     * @throws Exception\OutOfRangeException
+     * @return self
      */
     public function setWidth($value)
     {

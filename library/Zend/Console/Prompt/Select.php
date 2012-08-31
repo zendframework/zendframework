@@ -41,6 +41,7 @@ class Select extends Char
      * @param array     $options        Allowed options
      * @param bool      $allowEmpty     Allow empty (no) selection?
      * @param bool      $echo           True to display selected option?
+     * @throws Exception\BadMethodCallException if no options available
      */
     public function __construct(
         $promptText = 'Please select one option',
@@ -121,6 +122,7 @@ class Select extends Char
      * Set allowed options
      *
      * @param array|\Traversable $options
+     * @throws Exception\BadMethodCallException
      */
     public function setOptions($options)
     {

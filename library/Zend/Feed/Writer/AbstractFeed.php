@@ -770,6 +770,7 @@ class AbstractFeed
     /**
      * Load extensions from Zend_Feed_Writer
      *
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function _loadExtensions()

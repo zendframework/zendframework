@@ -45,7 +45,7 @@ class FileResolver implements ResolverInterface
      *
      * @param  string $path
      * @return FileResolver Provides a fluent interface
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException if path is not readable
      */
     public function setFile($path)
     {

@@ -102,6 +102,7 @@ class Socket implements HttpAdapter, StreamInterface
      * Set the configuration array for the adapter
      *
      * @param  array|Traversable $options
+     * @throws AdapterException\InvalidArgumentException
      */
     public function setOptions($options = array())
     {
@@ -373,6 +374,7 @@ class Socket implements HttpAdapter, StreamInterface
     /**
      * Read response from server
      *
+     * @throws AdapterException\RuntimeException
      * @return string
      */
     public function read()

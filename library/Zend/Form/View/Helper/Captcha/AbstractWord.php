@@ -44,8 +44,9 @@ abstract class AbstractWord extends FormInput
     /**
      * Set value for captchaPosition
      *
-     * @param  mixed captchaPosition
-     * @return $this
+     * @param mixed $captchaPosition
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function setCaptchaPosition($captchaPosition)
     {
@@ -105,6 +106,7 @@ abstract class AbstractWord extends FormInput
      * More specific renderers will consume this and render it.
      *
      * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     protected function renderCaptchaInputs(ElementInterface $element)

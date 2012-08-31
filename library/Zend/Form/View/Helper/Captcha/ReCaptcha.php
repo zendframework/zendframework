@@ -27,6 +27,7 @@ class ReCaptcha extends FormInput
      * Render ReCaptcha form elements
      *
      * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)

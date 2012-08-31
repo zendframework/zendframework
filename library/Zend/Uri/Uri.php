@@ -949,6 +949,7 @@ class Uri implements UriInterface
      * part with percent-encoded representation
      *
      * @param  string $path
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function encodePath($path)

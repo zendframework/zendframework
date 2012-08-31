@@ -82,7 +82,8 @@ class Statement implements StatementInterface
      * b) "SQL Server Statement" when a prepared statement has been already produced
      * (there will need to already be a bound param set if it applies to this query)
      *
-     * @param resource
+     * @param resource $resource
+     * @throws Exception\InvalidArgumentException
      * @return Statement
      */
     public function initialize($resource)

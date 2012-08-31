@@ -32,6 +32,7 @@ class ClassFileLocator extends FilterIterator
      * instance.
      *
      * @param  string|DirectoryIterator $dirOrIterator
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($dirOrIterator = '.')
     {

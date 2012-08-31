@@ -200,7 +200,7 @@ class Token implements ProcessorInterface
      *
      * @param  Config $config
      * @return Config
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function process(Config $config)
     {

@@ -30,6 +30,7 @@ class Http extends AbstractAdapter
      * Constructor for Http File Transfers
      *
      * @param array $options OPTIONAL Options to set
+     * @throws Exception\PhpEnvironmentException if file uploads are not allowed
      */
     public function __construct($options = array())
     {

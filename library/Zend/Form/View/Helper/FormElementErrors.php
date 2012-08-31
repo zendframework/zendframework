@@ -127,6 +127,7 @@ class FormElementErrors extends AbstractHelper
      *
      * @param  ElementInterface $element
      * @param  array $attributes
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element, array $attributes = array())

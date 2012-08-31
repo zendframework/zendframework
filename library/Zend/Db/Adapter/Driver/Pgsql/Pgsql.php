@@ -105,6 +105,7 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * @throws Exception\RuntimeException
      * @return bool
      */
     public function checkEnvironment()

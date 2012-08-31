@@ -101,6 +101,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
      * Set object state from options array
      *
      * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      * @return AbstractAdapter
      */
     public function setOptions($options = array())

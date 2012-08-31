@@ -78,6 +78,7 @@ class BaseInputFilter implements InputFilterInterface
      * Retrieve a named input
      *
      * @param  string $name
+     * @throws Exception\InvalidArgumentException
      * @return InputInterface|InputFilterInterface
      */
     public function get($name)
@@ -119,6 +120,7 @@ class BaseInputFilter implements InputFilterInterface
      * Set data to use when validating and filtering
      *
      * @param  array|Traversable $data
+     * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
     public function setData($data)
@@ -141,6 +143,7 @@ class BaseInputFilter implements InputFilterInterface
     /**
      * Is the data set valid?
      *
+     * @throws Exception\RuntimeException
      * @return bool
      */
     public function isValid()
@@ -286,6 +289,7 @@ class BaseInputFilter implements InputFilterInterface
      * Retrieve a value from a named input
      *
      * @param  string $name
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function getValue($name)
@@ -329,6 +333,7 @@ class BaseInputFilter implements InputFilterInterface
      * Retrieve a raw (unfiltered) value from a named input
      *
      * @param  string $name
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function getRawValue($name)

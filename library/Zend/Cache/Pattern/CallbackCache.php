@@ -44,7 +44,8 @@ class CallbackCache extends AbstractPattern
      * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return mixed Result
-     * @throws Exception
+     * @throws Exception\RuntimeException if invalid cached data
+     * @throws \Exception
      */
     public function call($callback, array $args = array())
     {
@@ -127,8 +128,9 @@ class CallbackCache extends AbstractPattern
      *
      * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
+     * @throws Exception\RuntimeException if callback not serializable
+     * @throws Exception\InvalidArgumentException if invalid callback
      * @return string
-     * @throws Exception
      */
     protected function generateCallbackKey($callback, array $args)
     {
@@ -173,8 +175,8 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key of the argument part.
      *
      * @param  array $args
+     * @throws Exception\RuntimeException
      * @return string
-     * @throws Exception
      */
     protected function generateArgumentsKey(array $args)
     {

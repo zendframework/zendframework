@@ -242,6 +242,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Get session object
      *
+     * @throws Exception\InvalidArgumentException
      * @return Container
      */
     public function getSession()

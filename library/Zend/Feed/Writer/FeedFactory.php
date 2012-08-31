@@ -23,6 +23,7 @@ abstract class FeedFactory
      * Create and return a Feed based on data provided.
      *
      * @param  array|\Traversable $data
+     * @throws Exception\InvalidArgumentException
      * @return Feed
      */
     public static function factory($data)
@@ -88,6 +89,7 @@ abstract class FeedFactory
      *
      * @param  array|Traversable $entries
      * @param  Feed $feed
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     protected static function createEntries($entries, Feed $feed)

@@ -72,6 +72,7 @@ class Server extends AbstractServer
      *
      * @param  string|array|callable $function   Valid PHP callback
      * @param  string                $namespace  Ignored
+     * @throws Exception\InvalidArgumentException if function invalid or not callable
      * @return Server
      */
     public function addFunction($function, $namespace = '')
@@ -190,6 +191,7 @@ class Server extends AbstractServer
      * Load function definitions
      *
      * @param  array|Definition $definition
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function loadFunctions($definition)

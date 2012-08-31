@@ -65,6 +65,7 @@ class In implements PredicateInterface
      * Set set of values for IN comparison
      *
      * @param  array $valueSet
+     * @throws Exception\InvalidArgumentException
      * @return In
      */
     public function setValueSet($valueSet)

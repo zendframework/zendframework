@@ -93,6 +93,8 @@ class Factory
      * Factory for input objects
      *
      * @param  array|Traversable $inputSpecification
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      * @return InputInterface|InputFilterInterface
      */
     public function createInput($inputSpecification)
@@ -197,6 +199,8 @@ class Factory
      * Factory for input filters
      *
      * @param  array|Traversable $inputFilterSpecification
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      * @return InputFilterInterface
      */
     public function createInputFilter($inputFilterSpecification)

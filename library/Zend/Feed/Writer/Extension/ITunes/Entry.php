@@ -209,6 +209,7 @@ class Entry
      *
      * @param  string $method
      * @param  array $params
+     * @throws Writer\Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, array $params)

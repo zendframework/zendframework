@@ -103,6 +103,7 @@ class Filesystem extends AbstractAdapter implements
     /**
      * Flush the whole storage
      *
+     * @throws Exception\RuntimeException
      * @return boolean
      */
     public function flush()
@@ -179,6 +180,7 @@ class Filesystem extends AbstractAdapter implements
      * Remove items by given namespace
      *
      * @param string $namespace
+     * @throws Exception\RuntimeException
      * @return boolean
      */
     public function clearByNamespace($namespace)
@@ -212,6 +214,7 @@ class Filesystem extends AbstractAdapter implements
      * Remove items matching given prefix
      *
      * @param string $prefix
+     * @throws Exception\RuntimeException
      * @return boolean
      */
     public function clearByPrefix($prefix)
@@ -383,6 +386,7 @@ class Filesystem extends AbstractAdapter implements
     /**
      * Get total space in bytes
      *
+     * @throws Exception\RuntimeException
      * @return int|float
      */
     public function getTotalSpace()
@@ -419,6 +423,7 @@ class Filesystem extends AbstractAdapter implements
     /**
      * Get available space in bytes
      *
+     * @throws Exception\RuntimeException
      * @return int|float
      */
     public function getAvailableSpace()

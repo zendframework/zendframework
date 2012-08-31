@@ -42,6 +42,7 @@ class Tar extends AbstractCompressionAlgorithm
      * Class constructor
      *
      * @param array $options (Optional) Options to set
+     * @throws Exception\ExtensionNotLoadedException if Archive_Tar component not available
      */
     public function __construct($options = null)
     {

@@ -215,6 +215,7 @@ class Logger implements LoggerInterface
      * @return Logger
      * @throws Exception\InvalidArgumentException if message can't be cast to string
      * @throws Exception\InvalidArgumentException if extra can't be iterated over
+     * @throws Exception\RuntimeException if no log writer specified
      */
     public function log($priority, $message, $extra = array())
     {

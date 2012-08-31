@@ -70,6 +70,7 @@ class Layout extends AbstractHelper
     /**
      * Get the root view model
      *
+     * @throws Exception\RuntimeException
      * @return null|Model
      */
     protected function getRoot()

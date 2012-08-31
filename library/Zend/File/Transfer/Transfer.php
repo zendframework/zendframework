@@ -91,6 +91,7 @@ class Transfer
      *
      * @param  string $method  Method to call
      * @param  array  $options Options for this method
+     * @throws Exception\BadMethodCallException if unknown method
      * @return mixed
      */
     public function __call($method, array $options)

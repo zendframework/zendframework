@@ -83,6 +83,7 @@ class Uri extends AbstractValidator
     }
 
     /**
+     * @throws InvalidArgumentException
      * @return UriHandler
      */
     public function getUriHandler()
@@ -104,6 +105,7 @@ class Uri extends AbstractValidator
 
     /**
      * @param  UriHandler $uriHandler
+     * @throws InvalidArgumentException
      * @return Uri
      */
     public function setUriHandler($uriHandler)

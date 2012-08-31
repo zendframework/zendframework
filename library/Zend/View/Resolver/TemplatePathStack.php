@@ -281,7 +281,7 @@ class TemplatePathStack implements ResolverInterface
      * @param  string $name
      * @param  null|Renderer $renderer
      * @return string
-     * @throws Exception\RuntimeException
+     * @throws Exception\DomainException
      */
     public function resolve($name, Renderer $renderer = null)
     {

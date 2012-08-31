@@ -60,7 +60,8 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      * Set the encoding to use for escape operations
      *
      * @param  string $encoding
-     * @return AbstractEscaper
+     * @throws Exception\InvalidArgumentException
+     * @return AbstractHelper
      */
     public function setEncoding($encoding)
     {

@@ -67,7 +67,9 @@ class Image extends AbstractRenderer
 
     /**
      * Constructor
+     *
      * @param array|\Traversable $options
+     * @throws RendererCreationException
      */
     public function __construct($options = null)
     {
@@ -80,9 +82,10 @@ class Image extends AbstractRenderer
 
     /**
      * Set height of the result image
+     *
      * @param null|integer $value
+     * @throws Exception\OutOfRangeException
      * @return Image
-     * @throw  Exception
      */
     public function setHeight($value)
     {
@@ -109,7 +112,8 @@ class Image extends AbstractRenderer
      * Set barcode width
      *
      * @param mixed $value
-     * @return void
+     * @throws Exception\OutOfRangeException
+     * @return self
      */
     public function setWidth($value)
     {
@@ -154,8 +158,8 @@ class Image extends AbstractRenderer
      * Set the image type to produce (png, jpeg, gif)
      *
      * @param string $value
+     * @throws Exception\InvalidArgumentException
      * @return Image
-     * @throw  Exception
      */
     public function setImageType($value)
     {
@@ -260,6 +264,7 @@ class Image extends AbstractRenderer
     /**
      * Check barcode dimensions
      *
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function checkDimensions()

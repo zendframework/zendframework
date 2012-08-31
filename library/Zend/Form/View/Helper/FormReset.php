@@ -49,6 +49,7 @@ class FormReset extends FormInput
      * Render a form <input> element from the provided $element
      *
      * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)

@@ -38,6 +38,7 @@ class Bz2 extends AbstractCompressionAlgorithm
      * Class constructor
      *
      * @param null|array|\Traversable $options (Optional) Options to set
+     * @throws Exception\ExtensionNotLoadedException if bz2 extension not loaded
      */
     public function __construct($options = null)
     {

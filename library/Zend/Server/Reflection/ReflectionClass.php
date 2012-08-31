@@ -80,6 +80,7 @@ class ReflectionClass
      *
      * @param string $method
      * @param array $args
+     * @throws Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, $args)
@@ -148,6 +149,7 @@ class ReflectionClass
      * Set namespace for this class
      *
      * @param string $namespace
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setNamespace($namespace)

@@ -177,6 +177,7 @@ class Rule
      * Create a new rule from a string.
      *
      * @param  string $string
+     * @throws Exception\ParseException
      * @return Rule
      */
     public static function fromString($string)

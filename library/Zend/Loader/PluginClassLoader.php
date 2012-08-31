@@ -58,6 +58,7 @@ class PluginClassLoader implements PluginClassLocator
      * A null value will clear the static map.
      *
      * @param  null|array|Traversable $map
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public static function addStaticMap($map)

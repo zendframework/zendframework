@@ -72,6 +72,7 @@ class CallbackHandler
      * to registering the callback.
      *
      * @param  callable $callback
+     * @throws Exception\InvalidCallbackException
      * @return void
      */
     protected function registerCallback($callback)

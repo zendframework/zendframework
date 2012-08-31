@@ -29,6 +29,8 @@ We highly recommend testing your production applications against it.
     key ("info") instead of the key standardized upon in ZF2 ("extra"). 
   - Simple formatter now defaults to JSON-encoding for array and object
     serialization (prevents issues with some writers.)
+- Zend\Mail
+  - The Date header is now properly encoded as ASCII.
 - Zend\Mvc
   - Fixes an issue in the ViewHelperManagerFactory whereby a condition was
     testing against an uninitialized value.

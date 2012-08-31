@@ -4,13 +4,15 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.1*
+*Zend Framework 2.0.0rc7*
 
-This is the first maintenance release for the 2.0 series.
+This is the seventh release candidate for 2.0.0. At this time, we anticipate
+that this will be the final release candidate before issuing a stable release.
+We highly recommend testing your production applications against it.
 
-XX YYYY 2012
+31 August 2012
 
-### UPDATES IN 2.0.1
+### UPDATES IN RC7
 
 - Zend\Di
   - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
@@ -35,9 +37,6 @@ XX YYYY 2012
   - Breadcrumbs helper allows passing string container name now, allowing
     multiple navigation containers.
   - ServerUrl now works for servers behind proxies.
-
-More than XX pull requests for a variety of features and bugfixes were handled
-since RC6, as well as almost XX documentation changes!
 
 ### SYSTEM REQUIREMENTS
 

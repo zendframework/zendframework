@@ -69,6 +69,17 @@ class BreadcrumbsTest extends AbstractTest
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
 
+    public function testHelperEntryPointWithContainerStringParam()
+    {
+        $pm = new \Zend\View\HelperPluginManager;
+        $pm->setServiceLocator($this->serviceManager);
+        $this->_helper->setServiceLocator($pm);
+
+        $returned = $this->_helper->__invoke('nav1');
+        $this->assertEquals($this->_helper, $returned);
+        $this->assertEquals($this->_nav1, $returned->getContainer());
+    }
+
     public function testNullOutContainer()
     {
         $old = $this->_helper->getContainer();

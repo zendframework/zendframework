@@ -10,6 +10,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
+use Traversable;
 use Zend\Cache\Exception;
 
 /**

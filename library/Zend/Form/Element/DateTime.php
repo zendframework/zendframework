@@ -75,7 +75,7 @@ class DateTime extends Element implements InputProviderInterface
     /**
      * Set value for format
      *
-     * @param  string format
+     * @param  string $format
      * @return DateTime
      */
     public function setFormat($format)

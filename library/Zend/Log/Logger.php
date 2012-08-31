@@ -147,7 +147,7 @@ class Logger implements LoggerInterface
      *
      * @param string $name
      * @param array|null $options
-     * @return Writer
+     * @return Writer\WriterInterface
      */
     public function writerPlugin($name, array $options = null)
     {

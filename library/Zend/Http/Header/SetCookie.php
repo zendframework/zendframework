@@ -10,6 +10,8 @@
 
 namespace Zend\Http\Header;
 
+use Closure;
+
 /**
  * @throws Exception\InvalidArgumentException
  * @see http://www.ietf.org/rfc/rfc2109.txt

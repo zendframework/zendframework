@@ -11,6 +11,7 @@
 namespace Zend\InputFilter;
 
 use Countable;
+use Traversable;
 
 /**
  * @category   Zend

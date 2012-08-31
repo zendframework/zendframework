@@ -11,6 +11,7 @@
 namespace Zend\Barcode\Renderer;
 
 use DOMDocument;
+use DOMElement;
 use DOMText;
 
 /**

@@ -212,7 +212,7 @@ class PluginClassLoader implements PluginClassLocator
      * Returns an instance of ArrayIterator, containing a map of
      * all plugins
      *
-     * @return Iterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {

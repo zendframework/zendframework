@@ -128,7 +128,7 @@ class FilterChain extends AbstractFilter implements Countable
      *
      * @param  mixed $name
      * @param  array $options
-     * @return Filter
+     * @return FilterInterface
      */
     public function plugin($name, array $options = array())
     {

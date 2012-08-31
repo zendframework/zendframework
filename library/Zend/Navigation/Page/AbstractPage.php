@@ -238,7 +238,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @param  array|Traversable $options [optional] page options. Default is
      *                                    null, which should set defaults.
-     * @throws Exception if invalid options are given
+     * @throws Exception\InvalidArgumentException if invalid options are given
      */
     public function __construct($options = null)
     {

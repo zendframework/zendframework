@@ -10,6 +10,7 @@
 
 namespace Zend\Json;
 
+use stdClass;
 use Zend\Json\Exception\InvalidArgumentException;
 use Zend\Json\Exception\RuntimeException;
 
@@ -177,7 +178,7 @@ class Decoder
      * {@link $decodeType}. If invalid $decodeType present, returns as an
      * array.
      *
-     * @return array|StdClass
+     * @return array|stdClass
      * @throws Zend\Json\Exception\RuntimeException
      */
     protected function _decodeObject()
@@ -215,7 +216,7 @@ class Decoder
         switch ($this->decodeType) {
             case Json::TYPE_OBJECT:
                 // Create new StdClass and populate with $members
-                $result = new \stdClass();
+                $result = new stdClass();
                 foreach ($members as $key => $value) {
                     if ($key === '') {
                         $key = '_empty_';

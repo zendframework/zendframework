@@ -275,7 +275,7 @@ class Code128 extends AbstractObject
     /**
      * Set text to encode
      * @param string $value
-     * @return Zend_Barcode_Object
+     * @return Code128
      */
     public function setText($value)
     {

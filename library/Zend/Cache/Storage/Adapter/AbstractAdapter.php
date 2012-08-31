@@ -22,6 +22,7 @@ use Zend\Cache\Storage\Plugin;
 use Zend\Cache\Storage\PostEvent;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventsCapableInterface;
 
 /**

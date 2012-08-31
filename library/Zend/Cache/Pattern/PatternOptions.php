@@ -10,6 +10,7 @@
 
 namespace Zend\Cache\Pattern;
 
+use Traversable;
 use Zend\Cache\Exception;
 use Zend\Cache\StorageFactory;
 use Zend\Cache\Storage\StorageInterface as Storage;
@@ -742,7 +743,8 @@ class PatternOptions extends AbstractOptions
      * Create a storage object from a given specification
      *
      * @param  array|string|Storage $storage
-     * @return StorageAdapter
+     * @throws Exception\InvalidArgumentException
+     * @return Storage
      */
     protected function storageFactory($storage)
     {

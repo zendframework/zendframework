@@ -11,7 +11,6 @@
 namespace Zend\Log\Writer;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 use Zend\Log\Filter;
 use Zend\Log\Exception;
 

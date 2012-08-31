@@ -101,7 +101,8 @@ class CallbackCache extends AbstractPattern
      * @param  string $function  Function name to call
      * @param  array  $args      Function arguments
      * @return mixed
-     * @throws Exception
+     * @throws Exception\RuntimeException
+     * @throws \Exception
      */
     public function __call($function, array $args)
     {
@@ -115,7 +116,8 @@ class CallbackCache extends AbstractPattern
      * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return string
-     * @throws Exception
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function generateKey($callback, array $args = array())
     {

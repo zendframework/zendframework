@@ -253,7 +253,7 @@ abstract class AbstractController implements
      * Set plugin manager
      *
      * @param  string|PluginManager $plugins
-     * @return RestfulController
+     * @return AbstractController
      * @throws Exception\InvalidArgumentException
      */
     public function setPluginManager(PluginManager $plugins)

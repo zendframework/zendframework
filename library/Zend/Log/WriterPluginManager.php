@@ -11,7 +11,6 @@
 namespace Zend\Log;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * @category   Zend

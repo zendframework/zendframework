@@ -208,7 +208,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Sets if session should be preserved on generate()
      *
-     * @param $keepSession Should session be kept on generate()?
+     * @param bool $keepSession Should session be kept on generate()?
      * @return AbstractWord
      */
     public function setKeepSession($keepSession)

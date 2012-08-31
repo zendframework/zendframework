@@ -507,7 +507,7 @@ class AutoDiscover
     /**
      * Generate the WSDL file from the configured input.
      *
-     * @return Zend_Wsdl
+     * @return Wsdl
      */
     public function generate()
     {

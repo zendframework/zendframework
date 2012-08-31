@@ -10,6 +10,7 @@
 
 namespace Zend\Json;
 
+use SimpleXMLElement;
 use Zend\Json\Exception\RecursionException;
 use Zend\Json\Exception\RuntimeException;
 
@@ -192,7 +193,7 @@ class Json
      * if it matches, we return a new Zend_Json_Expr instead of a text node
      *
      * @param SimpleXMLElement $simpleXmlElementObject
-     * @return Zend_Json_Expr|string
+     * @return Expr|string
      */
     protected static function _getXmlValue($simpleXmlElementObject)
     {

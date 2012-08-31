@@ -362,7 +362,7 @@ class MemoryManager
     /**
      * Check and swap objects if necessary
      *
-     * @throws Zend_MemoryException
+     * @throws Exception\RuntimeException
      */
     private function _swapCheck()
     {

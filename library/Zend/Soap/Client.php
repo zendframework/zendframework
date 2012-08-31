@@ -1140,7 +1140,7 @@ class Client implements ServerClient
     }
 
     /**
-     * @param SoapClient $soapClient
+     * @param \SoapClient $soapClient
      * @return \Zend\Soap\Client
      */
     public function setSoapClient(\SoapClient $soapClient)

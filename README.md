@@ -8,7 +8,7 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 This is the first maintenance release for the 2.0 series.
 
-XX YYYY 2012
+XX YYY 2012
 
 ### UPDATES IN 2.0.1
 

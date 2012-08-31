@@ -632,4 +632,19 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $expected = 'Subject: =?UTF-8?Q?This=20is=20a=20subject?=';
         $this->assertContains($expected, $test);
     }
+
+    /**
+     * @group ZF2-507
+     */
+    public function testDefaultDateHeaderEncodingIsAlwaysAscii()
+    {
+        $this->message->setEncoding('utf-8');
+        $headers = $this->message->getHeaders();
+        $header  = $headers->get('date');
+        $date    = date('r');
+        $date    = substr($date, 0, 16);
+        $test    = $header->getFieldValue();
+        $test    = substr($test, 0, 16);
+        $this->assertEquals($date, $test);
+    }
 }

@@ -10,6 +10,7 @@
 
 namespace Zend\View\Helper;
 
+use stdClass;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -166,7 +167,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      */
     protected function isValid($value)
     {
-        if ((!$value instanceof \stdClass)
+        if ((!$value instanceof stdClass)
             || !isset($value->content)
             || !isset($value->attributes))
         {
@@ -250,8 +251,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Start capture action
      *
-     * @param  mixed $captureType
-     * @param  string $typeOrAttrs
+     * @param string $type
+     * @param string $attrs
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -300,7 +301,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * @param  string $indent Indentation to use
      * @return string
      */
-    public function itemToString(\stdClass $item, $indent)
+    public function itemToString(stdClass $item, $indent)
     {
         $attrString = '';
         if (!empty($item->attributes)) {
@@ -398,7 +399,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
             $attributes['media'] = implode(',', $attributes['media']);
         }
 
-        $data = new \stdClass();
+        $data = new stdClass();
         $data->content    = $content;
         $data->attributes = $attributes;
 

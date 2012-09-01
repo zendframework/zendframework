@@ -47,7 +47,7 @@ class ReflectionParameter
     /**
      * Constructor
      *
-     * @param ReflectionParameter $r
+     * @param \ReflectionParameter $r
      * @param string $type Parameter type
      * @param string $description Parameter description
      */

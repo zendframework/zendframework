@@ -10,6 +10,8 @@
 
 namespace Zend\Http\Header;
 
+use stdClass;
+
 /**
  * Abstract Accept Header
  *
@@ -118,7 +120,7 @@ abstract class AbstractAccept implements HeaderInterface
      * Parse the accept params belonging to a media range
      *
      * @param string $fieldValuePart
-     * @return StdClass
+     * @return stdClass
      */
     protected function parseFieldValuePart($fieldValuePart)
     {
@@ -184,6 +186,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Get field value
      *
+     * @param array|null $values
      * @return string
      */
     public function getFieldValue($values = null)
@@ -207,7 +210,7 @@ abstract class AbstractAccept implements HeaderInterface
      * Assemble and escape the field value parameters based on RFC 2616 section 2.1
      *
      * @todo someone should review this thoroughly
-     * @param string value
+     * @param string $value
      * @param string $key
      * @return string
      */
@@ -368,7 +371,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Add a key/value combination to the internal queue
      *
-     * @param unknown_type $value
+     * @param stdClass $value
      * @return number
      */
     protected function addFieldValuePartToQueue($value)

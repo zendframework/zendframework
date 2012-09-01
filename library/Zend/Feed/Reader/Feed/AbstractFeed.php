@@ -11,6 +11,7 @@
 namespace Zend\Feed\Reader\Feed;
 
 use DOMDocument;
+use DOMElement;
 use DOMXPath;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
@@ -210,7 +211,7 @@ abstract class AbstractFeed implements FeedInterface
     /**
      * Return the current feed key
      *
-     * @return unknown
+     * @return int
      */
     public function key()
     {

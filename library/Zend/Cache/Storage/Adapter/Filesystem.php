@@ -615,7 +615,6 @@ class Filesystem extends AbstractAdapter implements
      * Internal method to test if an item exists.
      *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
@@ -665,6 +664,7 @@ class Filesystem extends AbstractAdapter implements
      * Get metadatas
      *
      * @param array $keys
+     * @param array $options
      * @return array Associative array of keys and metadata
      */
     public function getMetadatas(array $keys, array $options = array())
@@ -1032,7 +1032,7 @@ class Filesystem extends AbstractAdapter implements
     /**
      * Internal method to reset lifetime of an item
      *
-     * @param  string $key
+     * @param  string $normalizedKey
      * @return boolean
      * @throws Exception\ExceptionInterface
      */

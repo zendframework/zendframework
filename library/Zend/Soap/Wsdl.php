@@ -67,7 +67,9 @@ class Wsdl
      *
      * @param string  $name Name of the Web Service being Described
      * @param string|Uri $uri URI where the WSDL will be available
-     * @param ComplexTypeStrategy $strategy
+     * @param null|ComplexTypeStrategy $strategy Strategy for detection of complex types
+     * @param null|array $classMap Map of PHP Class names to WSDL QNames
+     * @throws Exception\RuntimeException
      */
     public function __construct($name, $uri, ComplexTypeStrategy $strategy = null, array $classMap = array())
     {

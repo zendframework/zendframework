@@ -600,7 +600,7 @@ class Server implements \Zend\Server\Server
     /**
      * Unimplemented: Load server definition
      *
-     * @param array $array
+     * @param array $definition
      * @return void
      * @throws Exception\RuntimeException Unimplemented
      */

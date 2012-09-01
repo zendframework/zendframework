@@ -309,7 +309,7 @@ class Cookies extends Headers
      * of the cookie.
      *
      * @param Response $response HTTP Response object
-     * @param Uri\Uri|string $uri The requested URI
+     * @param Uri\Uri|string $ref_uri The requested URI
      * @return Cookies
      * @todo Add the $uri functionality.
      */

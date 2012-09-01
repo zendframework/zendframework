@@ -99,7 +99,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Create where clause
      *
-     * @param  Where|Closure|string|array $predicate
+     * @param  Where|\Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @return Delete
      */

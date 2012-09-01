@@ -50,7 +50,7 @@ class Encoder
      *
      * @param boolean $cycleCheck Whether or not to check for recursion when encoding
      * @param array $options Additional options used during encoding
-     * @return void
+     * @return Encoder
      */
     protected function __construct($cycleCheck = false, $options = array())
     {

@@ -64,7 +64,7 @@ class PhpRendererStrategy implements ListenerAggregateInterface
     /**
      * Set list of possible content placeholders
      *
-     * @param  array contentPlaceholders
+     * @param  array $contentPlaceholders
      * @return PhpRendererStrategy
      */
     public function setContentPlaceholders(array $contentPlaceholders)

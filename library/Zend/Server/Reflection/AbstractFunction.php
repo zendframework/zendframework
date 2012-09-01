@@ -79,7 +79,9 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param ReflectionFunction $r
+     * @param \Reflector $r
+     * @param null|string $namespace
+     * @param null|array $argv
      */
     public function __construct(\Reflector $r, $namespace = null, $argv = array())
     {
@@ -226,7 +228,6 @@ abstract class AbstractFunction
      * comment. Determines method signatures using a combination of
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
-     * @param ReflectionFunction $function
      * @return array
      */
     protected function _reflect()

@@ -20,12 +20,12 @@ namespace Zend\XmlRpc\Generator;
 class DomDocument extends AbstractGenerator
 {
     /**
-     * @var DOMDocument
+     * @var \DOMDocument
      */
     protected $dom;
 
     /**
-     * @var DOMNode
+     * @var \DOMNode
      */
     protected $currentElement;
 

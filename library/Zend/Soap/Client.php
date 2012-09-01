@@ -666,7 +666,7 @@ class Client implements ServerClient
     /**
      * Set proxy password
      *
-     * @param  string $proxyLogin
+     * @param  string $proxyPassword
      * @return \Zend\Soap\Client
      */
     public function setProxyPassword($proxyPassword)
@@ -774,6 +774,7 @@ class Client implements ServerClient
     /**
      * Set Stream Context
      *
+     * @param resource $context
      * @return \Zend\Soap\Client
      */
     public function setStreamContext($context)

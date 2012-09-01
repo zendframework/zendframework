@@ -361,7 +361,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Delete
      *
-     * @param  Closure $where
+     * @param  \Closure $where
      * @return int
      */
     public function delete($where)

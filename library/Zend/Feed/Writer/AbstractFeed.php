@@ -194,8 +194,11 @@ class AbstractFeed
     /**
      * Set the feed generator entry
      *
-     * @return string|null
+     * @param array|string $name
+     * @param null|string $version
+     * @param null|string $uri
      * @throws Exception\InvalidArgumentException
+     * @return string|null
      */
     public function setGenerator($name, $version = null, $uri = null)
     {

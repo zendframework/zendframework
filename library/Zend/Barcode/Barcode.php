@@ -100,7 +100,7 @@ class Barcode
      * @param  mixed $rendererConfig  OPTIONAL; an array or Traversable object with renderer parameters.
      * @param  boolean $automaticRenderError  OPTIONAL; set the automatic rendering of exception
      * @return Barcode
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public static function factory($barcode,
                                    $renderer = 'image',
@@ -204,7 +204,7 @@ class Barcode
      *
      * @param mixed $renderer           String name of renderer class, or Traversable object.
      * @param mixed $rendererConfig     OPTIONAL; an array or Traversable object with renderer parameters.
-     * @return Renderer
+     * @return Renderer\RendererInterface
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())
     {
@@ -254,7 +254,7 @@ class Barcode
      * Proxy to renderer render() method
      *
      * @param string | Object\ObjectInterface | array | Traversable $barcode
-     * @param string | Renderer $renderer
+     * @param string | Renderer\RendererInterface $renderer
      * @param array  | Traversable $barcodeConfig
      * @param array  | Traversable $rendererConfig
      */
@@ -270,7 +270,7 @@ class Barcode
      * Proxy to renderer draw() method
      *
      * @param string | Object\ObjectInterface | array | Traversable $barcode
-     * @param string | Renderer $renderer
+     * @param string | Renderer\RendererInterface $renderer
      * @param array | Traversable $barcodeConfig
      * @param array | Traversable $rendererConfig
      * @return mixed

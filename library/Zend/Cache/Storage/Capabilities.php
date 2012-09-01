@@ -156,7 +156,7 @@ class Capabilities
     /**
      * Constructor
      *
-     * @param Adapter           $adapter
+     * @param StorageInterface  $storage
      * @param stdClass          $marker
      * @param array             $capabilities
      * @param null|Capabilities $baseCapabilities
@@ -179,7 +179,7 @@ class Capabilities
     /**
      * Get the storage adapter
      *
-     * @return Adapter
+     * @return StorageInterface
      */
     public function getAdapter()
     {
@@ -514,7 +514,7 @@ class Capabilities
      * Change a capability
      *
      * @param  stdClass $marker
-     * @param  string $name
+     * @param  string $property
      * @param  mixed $value
      * @return Capabilities Fluent interface
      * @throws Exception\InvalidArgumentException

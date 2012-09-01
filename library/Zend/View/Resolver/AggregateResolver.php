@@ -67,7 +67,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     /**
      * IteratorAggregate: return internal iterator
      *
-     * @return Traversable
+     * @return PriorityQueue
      */
     public function getIterator()
     {

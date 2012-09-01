@@ -56,7 +56,7 @@ class ServerProxy
     /**
      * Get the next successive namespace
      *
-     * @param string $name
+     * @param string $namespace
      * @return \Zend\XmlRpc\Client\ServerProxy
      */
     public function __get($namespace)

@@ -125,7 +125,7 @@ class Sqlsrv implements DriverInterface
     }
 
     /**
-     * @param string $sql
+     * @param string|resource $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)

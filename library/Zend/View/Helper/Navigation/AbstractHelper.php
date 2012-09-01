@@ -83,7 +83,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * ACL role to use when iterating pages
      *
-     * @var string|Acl\Role
+     * @var string|Acl\Role\RoleInterface
      */
     protected $role;
 
@@ -127,7 +127,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Default ACL role to use when iterating pages if not explicitly set in the
      * instance by calling {@link setRole()}
      *
-     * @var string|Acl\Role
+     * @var string|Acl\Role\RoleInterface
      */
     protected static $defaultRole;
 
@@ -485,7 +485,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      *                                          {@link getMinDepth()}. A
      *                                          null value means no minimum
      *                                          depth required.
-     * @param  int|null             $minDepth   [optional] maximum depth
+     * @param  int|null             $maxDepth   [optional] maximum depth
      *                                          a page can have to be
      *                                          valid. Default is to use
      *                                          {@link getMaxDepth()}. A

@@ -287,7 +287,7 @@ class Query
     /**
      * Register PHP Functions to use in internal DOMXPath
      *
-     * @param  mixed $restrict
+     * @param  bool $xpathPhpFunctions
      * @return void
      */
     public function registerXpathPhpFunctions($xpathPhpFunctions = true)

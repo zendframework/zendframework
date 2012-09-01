@@ -150,6 +150,7 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * @param resource $resource
      * @return Result
      */
     public function createResult($resource)

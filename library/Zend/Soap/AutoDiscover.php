@@ -106,6 +106,7 @@ class AutoDiscover
      * @param ComplexTypeStrategy $strategy
      * @param string|Uri\Uri $endpointUri
      * @param string $wsdlClass
+     * @param array $classMap
      */
     public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null, array $classMap = array())
     {
@@ -368,6 +369,7 @@ class AutoDiscover
     /**
      * Generate the WSDL for a set of reflection method instances.
      *
+     * @param array $reflectionMethods
      * @return Zend\Soap\Wsdl
      */
     protected function _generateWsdl(array $reflectionMethods)

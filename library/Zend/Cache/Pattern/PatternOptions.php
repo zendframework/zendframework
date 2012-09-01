@@ -152,7 +152,7 @@ class PatternOptions extends AbstractOptions
      * Constructor
      *
      * @param  array|Traversable|null $options
-     * @return AbstractOptions
+     * @return PatternOptions
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -492,7 +492,7 @@ class PatternOptions extends AbstractOptions
     /**
      * Set object to cache
      *
-     * @param  mixed $value
+     * @param  mixed $object
      * @return $this
      */
     public function setObject($object)
@@ -575,7 +575,7 @@ class PatternOptions extends AbstractOptions
      * Used by:
      * - ObjectCache
      *
-     * @param  mixed $value
+     * @param  mixed $objectKey
      * @return $this
      */
     public function setObjectKey($objectKey)

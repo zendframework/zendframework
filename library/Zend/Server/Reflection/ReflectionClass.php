@@ -53,7 +53,7 @@ class ReflectionClass
      * Create array of dispatchable methods, each a
      * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
-     * @param ReflectionClass $reflection
+     * @param \ReflectionClass $reflection
      * @param string $namespace
      * @param mixed $argv
      */

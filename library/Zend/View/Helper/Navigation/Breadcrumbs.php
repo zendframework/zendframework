@@ -56,7 +56,7 @@ class Breadcrumbs extends AbstractHelper
      * Helper entry point
      *
      * @param  string|AbstractContainer $container container to operate on
-     * @return Navigation
+     * @return Breadcrumbs
      */
     public function __invoke($container = null)
     {

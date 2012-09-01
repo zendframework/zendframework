@@ -37,7 +37,7 @@ class Entry
      * Set feed encoding
      *
      * @param  string $enc
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return Entry
      */
     public function setEncoding($enc)
     {

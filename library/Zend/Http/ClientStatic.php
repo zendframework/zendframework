@@ -69,7 +69,7 @@ class ClientStatic
 
         return self::getStaticClient()->send($request);
     }
-    
+
     /**
      * HTTP POST METHOD (static)
      *

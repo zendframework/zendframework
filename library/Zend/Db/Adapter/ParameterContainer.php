@@ -296,7 +296,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
         }
 
         if (count($parameters) == 0) {
-            return;
+            return $this;
         }
 
         if ($parameters instanceof ParameterContainer) {

@@ -47,7 +47,7 @@ class Rule
      *
      * @param  integer $numPlurals
      * @param  array   $ast
-     * @return void
+     * @return Rule
      */
     protected function __construct($numPlurals, array $ast)
     {

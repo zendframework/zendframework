@@ -420,7 +420,7 @@ abstract class AbstractFunction
     /**
      * Retrieve the description
      *
-     * @return void
+     * @return string
      */
     public function getDescription()
     {

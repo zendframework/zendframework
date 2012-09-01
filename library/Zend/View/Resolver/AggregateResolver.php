@@ -57,7 +57,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     /**
      * Return count of attached resolvers
      *
-     * @return void
+     * @return int
      */
     public function count()
     {

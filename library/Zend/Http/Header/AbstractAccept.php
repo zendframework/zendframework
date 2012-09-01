@@ -209,7 +209,7 @@ abstract class AbstractAccept implements HeaderInterface
      * @todo someone should review this thoroughly
      * @param string value
      * @param string $key
-     * @return void
+     * @return string
      */
     protected function assembleAcceptParam(&$value, $key)
     {

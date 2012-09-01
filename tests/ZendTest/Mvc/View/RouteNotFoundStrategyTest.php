@@ -37,9 +37,9 @@ class RouteNotFoundStrategyTest extends TestCase
         $event    = new MvcEvent();
         $event->setResponse($response);
         $response->setStatusCode(404);
-        
+
         $event->setResult(null);
-        
+
         $testCase = array(
             'assertEquals' => array (
                 'bar',

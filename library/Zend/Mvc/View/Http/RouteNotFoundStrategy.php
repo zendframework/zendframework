@@ -204,7 +204,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             // Only handle 404 responses
             return;
         }
-        
+
         if (!$vars instanceof ViewModel) {
             $model = new ViewModel();
             if (is_string($vars)) {
@@ -218,7 +218,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                 $model->setVariable('message', 'Page not found.');
             }
         }
-        
+
         $model->setTemplate($this->getNotFoundTemplate());
 
         // If displaying reasons, inject the reason

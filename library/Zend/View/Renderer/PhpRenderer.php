@@ -397,6 +397,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      *                                   contain a template option.
      * @throws Exception\InvalidArgumentException if the values passed are not
      *                                            an array or ArrayAccess object
+     * @throws Exception\RuntimeException if the template cannot be rendered
      */
     public function render($nameOrModel, $values = null)
     {

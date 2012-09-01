@@ -10,6 +10,8 @@
 
 namespace Zend\Db\Sql\Predicate;
 
+use Zend\Db\Sql\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Db
@@ -104,12 +106,13 @@ class Operator implements PredicateInterface
      * Set parameter type for left side of operator
      *
      * @param  string $type TYPE_IDENTIFIER or TYPE_VALUE {@see allowedTypes}
+     * @throws Exception\InvalidArgumentException
      * @return Operator
      */
     public function setLeftType($type)
     {
         if (!in_array($type, $this->allowedTypes)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid type "%s" provided; must be of type "%s" or "%s"',
                 $type,
                 __CLASS__ . '::TYPE_IDENTIFIER',
@@ -178,12 +181,13 @@ class Operator implements PredicateInterface
      * Set parameter type for right side of operator
      *
      * @param  string $type TYPE_IDENTIFIER or TYPE_VALUE {@see allowedTypes}
+     * @throws Exception\InvalidArgumentException
      * @return Operator
      */
     public function setRightType($type)
     {
         if (!in_array($type, $this->allowedTypes)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid type "%s" provided; must be of type "%s" or "%s"',
                 $type,
                 __CLASS__ . '::TYPE_IDENTIFIER',

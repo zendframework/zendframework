@@ -153,6 +153,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
      * Offset get errata
      *
      * @param  string|integer $name
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function offsetGetErrata($name)
@@ -184,6 +185,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
      * Offset unset errata
      *
      * @param string|integer $name
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetUnsetErrata($name)
     {

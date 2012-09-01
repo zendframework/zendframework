@@ -157,6 +157,7 @@ class Statement implements StatementInterface
 
     /**
      * @param  null $parameters
+     * @throws Exception\InvalidQueryException
      * @return Result
      */
     public function execute($parameters = null)

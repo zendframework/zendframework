@@ -141,6 +141,7 @@ class Socket implements HttpAdapter, StreamInterface
      * @since  Zend Framework 1.9
      *
      * @param  mixed $context Stream context or array of context options
+     * @throws Exception\InvalidArgumentException
      * @return Socket
      */
     public function setStreamContext($context)
@@ -320,6 +321,7 @@ class Socket implements HttpAdapter, StreamInterface
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body
+     * @throws AdapterException\RuntimeException
      * @return string Request as string
      */
     public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')

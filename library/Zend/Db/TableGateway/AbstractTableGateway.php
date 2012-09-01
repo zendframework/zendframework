@@ -84,6 +84,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Initialize
      *
+     * @throws Exception\RuntimeException
      * @return null
      */
     public function initialize()
@@ -428,6 +429,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      * __get
      *
      * @param  string $property
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function __get($property)

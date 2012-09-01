@@ -168,8 +168,10 @@ class Upce extends Ean13
     /**
      * Particular validation for Upce barcode objects
      * (to suppress checksum character substitution)
+     *
      * @param string $value
      * @param array  $options
+     * @throws Exception\BarcodeValidationException
      */
     protected function validateSpecificText($value, $options = array())
     {

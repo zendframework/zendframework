@@ -137,6 +137,7 @@ class Connection implements ConnectionInterface
     /**
      * Connect
      *
+     * @throws Exception\RuntimeException
      * @return null
      */
     public function connect()
@@ -232,6 +233,7 @@ class Connection implements ConnectionInterface
     /**
      * Rollback
      *
+     * @throws Exception\RuntimeException
      * @return Connection
      */
     public function rollback()
@@ -252,6 +254,7 @@ class Connection implements ConnectionInterface
      * Execute
      *
      * @param  string $sql
+     * @throws Exception\InvalidQueryException
      * @return Result
      */
     public function execute($sql)

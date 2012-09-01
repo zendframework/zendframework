@@ -114,7 +114,7 @@ class Expression implements ExpressionInterface
 
     /**
      * @return array
-     * @throws \RuntimeException
+     * @throws Exception\RuntimeException
      */
     public function getExpressionData()
     {

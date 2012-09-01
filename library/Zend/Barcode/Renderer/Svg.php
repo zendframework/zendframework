@@ -217,6 +217,7 @@ class Svg extends AbstractRenderer
     /**
      * Check barcode dimensions
      *
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function checkDimensions()

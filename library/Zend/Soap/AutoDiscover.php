@@ -402,6 +402,7 @@ class AutoDiscover
      * @param $wsdl \Zend\Soap\Wsdl WSDL document
      * @param $port object wsdl:portType
      * @param $binding object wsdl:binding
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     protected function _addFunctionToWsdl($function, $wsdl, $port, $binding)
@@ -509,6 +510,7 @@ class AutoDiscover
     /**
      * Generate the WSDL file from the configured input.
      *
+     * @throws Exception\RuntimeException
      * @return Wsdl
      */
     public function generate()

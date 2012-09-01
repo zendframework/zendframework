@@ -82,6 +82,8 @@ abstract class AbstractFunction
      * @param \Reflector $r
      * @param null|string $namespace
      * @param null|array $argv
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function __construct(\Reflector $r, $namespace = null, $argv = array())
     {
@@ -228,6 +230,7 @@ abstract class AbstractFunction
      * comment. Determines method signatures using a combination of
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
+     * @throws Exception\RuntimeException
      * @return array
      */
     protected function _reflect()
@@ -330,6 +333,7 @@ abstract class AbstractFunction
      *
      * @param string $method
      * @param array $args
+     * @throws Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, $args)
@@ -377,6 +381,7 @@ abstract class AbstractFunction
      * Set method's namespace
      *
      * @param string $namespace
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setNamespace($namespace)
@@ -407,6 +412,7 @@ abstract class AbstractFunction
      * Set the description
      *
      * @param string $string
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setDescription($string)

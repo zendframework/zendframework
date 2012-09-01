@@ -235,6 +235,7 @@ class PatternOptions extends AbstractOptions
      * - ClassCache
      *
      * @param  string $class
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setClass($class)
@@ -319,6 +320,7 @@ class PatternOptions extends AbstractOptions
      * Set directory permission
      *
      * @param  false|int $dirPermission
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setDirPermission($dirPermission)
@@ -359,6 +361,7 @@ class PatternOptions extends AbstractOptions
      * - CaptureCache
      *
      * @param  false|int $umask
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setUmask($umask)
@@ -430,6 +433,7 @@ class PatternOptions extends AbstractOptions
      * Set file permission
      *
      * @param  false|int $filePermission
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setFilePermission($filePermission)
@@ -493,6 +497,7 @@ class PatternOptions extends AbstractOptions
      * Set object to cache
      *
      * @param  mixed $object
+     * @throws Exception\InvalidArgumentException
      * @return $this
      */
     public function setObject($object)
@@ -634,6 +639,7 @@ class PatternOptions extends AbstractOptions
      * - CaptureCache
      *
      * @param  string $publicDir
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setPublicDir($publicDir)

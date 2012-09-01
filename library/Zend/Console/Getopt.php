@@ -212,6 +212,7 @@ class Getopt
      * @param  array $rules
      * @param  array $argv
      * @param  array $getoptConfig
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($rules, $argv = null, $getoptConfig = array())
     {
@@ -312,7 +313,7 @@ class Getopt
      * These are appended to those defined when the constructor was called.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Exception\ExceptionInterface When not given an array as parameter
+     * @throws \Zend\Console\Exception\InvalidArgumentException When not given an array as parameter
      * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function addArguments($argv)
@@ -330,7 +331,7 @@ class Getopt
      * These replace any currently defined.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Exception\ExceptionInterface When not given an array as parameter
+     * @throws \Zend\Console\Exception\InvalidArgumentException When not given an array as parameter
      * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function setArguments($argv)
@@ -802,6 +803,7 @@ class Getopt
      * or no one numeric option handlers is defined
      *
      * @param  int $value
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function _setNumericOptionValue($value)

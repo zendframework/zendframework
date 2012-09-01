@@ -364,6 +364,7 @@ class Image extends AbstractRenderer
      * @param integer $color
      * @param string $alignment
      * @param float $orientation
+     * @throws Exception\RuntimeException
      */
     protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
     {

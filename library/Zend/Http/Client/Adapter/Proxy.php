@@ -96,6 +96,7 @@ class Proxy extends Socket
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body
+     * @throws AdapterException\RuntimeException
      * @return string Request as string
      */
     public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
@@ -179,6 +180,7 @@ class Proxy extends Socket
      * @param integer $port
      * @param string  $http_ver
      * @param array   $headers
+     * @throws AdapterException\RuntimeException
      */
     protected function connectHandshake($host, $port = 443, $http_ver = '1.1', array &$headers = array())
     {

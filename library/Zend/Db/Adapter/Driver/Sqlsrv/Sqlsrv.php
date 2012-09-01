@@ -107,6 +107,8 @@ class Sqlsrv implements DriverInterface
 
     /**
      * Check environment
+     *
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function checkEnvironment()

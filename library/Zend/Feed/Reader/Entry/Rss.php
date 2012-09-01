@@ -185,6 +185,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Get the entry's date of modification
      *
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function getDateModified()

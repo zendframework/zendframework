@@ -628,6 +628,7 @@ class Wsdl
      * Parse an xsd:element represented as an array into a DOMElement.
      *
      * @param array $element an xsd:element represented as an array
+     * @throws Exception\RuntimeException if $element is not an array
      * @return DOMElement parsed element
      */
     private function _parseElement($element)

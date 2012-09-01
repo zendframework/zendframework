@@ -151,6 +151,7 @@ class Barcode
      *
      * @param mixed $barcode        String name of barcode class, or Traversable object, or barcode object.
      * @param mixed $barcodeConfig  OPTIONAL; an array or Traversable object with barcode parameters.
+     * @throws Exception\InvalidArgumentException
      * @return Object
      */
     public static function makeBarcode($barcode, $barcodeConfig = array())
@@ -204,6 +205,7 @@ class Barcode
      *
      * @param mixed $renderer           String name of renderer class, or Traversable object.
      * @param mixed $rendererConfig     OPTIONAL; an array or Traversable object with renderer parameters.
+     * @throws Exception\RendererCreationException
      * @return Renderer\RendererInterface
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())

@@ -154,6 +154,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Create from clause
      *
      * @param  string|array|TableIdentifier $table
+     * @throws Exception\InvalidArgumentException
      * @return Select
      */
     public function from($table)
@@ -206,6 +207,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  string $on
      * @param  string|array $columns
      * @param  string $type one of the JOIN_* constants
+     * @throws Exception\InvalidArgumentException
      * @return Select
      */
     public function join($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER)
@@ -737,6 +739,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Proxies to "where" only
      *
      * @param  string $name
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function __get($name)

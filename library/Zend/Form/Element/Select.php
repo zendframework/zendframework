@@ -106,8 +106,8 @@ class Select extends Element implements InputProviderInterface
             $this->setValueOptions($this->options['options']);
         }
 
-        if (isset($this->options['create_empty_options'])) {
-            $this->setShouldCreateEmptyOption($this->options['create_empty_options']);
+        if (isset($this->options['create_empty_option'])) {
+            $this->setShouldCreateEmptyOption($this->options['create_empty_option']);
         }
 
         return $this;

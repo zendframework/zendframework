@@ -52,6 +52,15 @@ class Select extends Element implements InputProviderInterface
     protected $validator;
 
     /**
+     * If set to true, an empty option will be automatically prepended to the options. This is
+     * especially useful with JavaScript libraries that may ask an empty option for some features,
+     * like adding a placeholder text
+     *
+     * @var bool
+     */
+    protected $createEmptyOption = false;
+
+    /**
      * @var array
      */
     protected $valueOptions = array();
@@ -79,6 +88,7 @@ class Select extends Element implements InputProviderInterface
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
      * - value_options: list of values and labels for the select options
+     * _ create_empty_option: should an empty option be prepended to the options ?
      *
      * @param  array|\Traversable $options
      * @return Select|ElementInterface
@@ -94,6 +104,10 @@ class Select extends Element implements InputProviderInterface
         // Alias for 'value_options'
         if (isset($this->options['options'])) {
             $this->setValueOptions($this->options['options']);
+        }
+
+        if (isset($this->options['create_empty_options'])) {
+            $this->setShouldCreateEmptyOption($this->options['create_empty_options']);
         }
 
         return $this;
@@ -115,6 +129,28 @@ class Select extends Element implements InputProviderInterface
             return $this;
         }
         return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * Set if an empty option should be added to the value options
+     *
+     * @param  bool $createEmptyOption
+     * @return Select
+     */
+    public function setShouldCreateEmptyOption($createEmptyOption)
+    {
+        $this->createEmptyOption = (bool) $createEmptyOption;
+        return $this;
+    }
+
+    /**
+     * Return true if an empty option should be added to the value options
+     *
+     * @return bool
+     */
+    public function shouldCreateEmptyOption()
+    {
+        return $this->createEmptyOption;
     }
 
     /**

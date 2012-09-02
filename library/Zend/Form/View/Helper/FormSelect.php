@@ -76,13 +76,16 @@ class FormSelect extends AbstractHelper
             ));
         }
 
-
         $options = $element->getValueOptions();
         if (empty($options)) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has "value_options"; none found',
                 __METHOD__
             ));
+        }
+
+        if ($element->shouldCreateEmptyOption()) {
+            $options = array('' => '') + $options;
         }
 
         $attributes = $element->getAttributes();

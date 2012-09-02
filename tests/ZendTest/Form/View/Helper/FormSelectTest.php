@@ -251,4 +251,19 @@ class FormSelectTest extends CommonTestCase
         $markup = $this->helper->__invoke($element);
         $this->assertContains('name="0"', $markup);
     }
+
+    public function testCanCreateEmptyOption()
+    {
+        $element = new SelectElement('foo');
+        $element->setShouldCreateEmptyOption(true);
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertContains('<option value=""></option>', $markup);
+    }
 }

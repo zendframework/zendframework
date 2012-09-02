@@ -42,6 +42,17 @@ class FormDateSelectTest extends CommonTestCase
         $this->assertContains('<select name="year"', $markup);
     }
 
+    public function testCanGenerateSelectsWithEmptyOption()
+    {
+        $element = new DateSelect('foo');
+        $element->setShouldCreateEmptyOption(true);
+        $markup  = $this->helper->render($element);
+        $this->assertContains('<select name="day"', $markup);
+        $this->assertContains('<select name="month"', $markup);
+        $this->assertContains('<select name="year"', $markup);
+        $this->assertContains('<option value=""></option>', $markup);
+    }
+
     public function testInvokeProxiesToRender()
     {
         $element = new DateSelect('foo');

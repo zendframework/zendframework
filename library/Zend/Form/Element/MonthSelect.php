@@ -48,6 +48,14 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     protected $maxYear;
 
     /**
+     * If set to true, it will generate an empty option for every select (this is mainly needed by most JavaScript
+     * libraries to allow to have a placeholder)
+     *
+     * @var bool
+     */
+    protected $createEmptyOption = false;
+
+    /**
      * @var ValidatorInterface
      */
     protected $validator;
@@ -61,13 +69,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     public function __construct($name = null, $options = array())
     {
-        parent::__construct($name, $options);
+        $this->minYear = date('Y') - 100;
+        $this->maxYear = date('Y');
 
         $this->monthElement = new Select('month');
         $this->yearElement = new Select('year');
 
-        $this->maxYear = date('Y');
-        $this->minYear = $this->maxYear - 100;
+        parent::__construct($name, $options);
     }
 
     /**
@@ -88,6 +96,10 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
         if (isset($options['max_year'])) {
             $this->setMaxYear($options['max_year']);
+        }
+
+        if (isset($options['create_empty_option'])) {
+            $this->setShouldCreateEmptyOption($options['create_empty_option']);
         }
 
         return $this;
@@ -111,7 +123,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param  int $minYear
-     * @return DateSelect
+     * @return MonthSelect
      */
     public function setMinYear($minYear)
     {
@@ -129,7 +141,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param  int $maxYear
-     * @return DateSelect
+     * @return MonthSelect
      */
     public function setMaxYear($maxYear)
     {
@@ -143,6 +155,24 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function getMaxYear()
     {
         return $this->maxYear;
+    }
+
+    /**
+     * @param  bool $createEmptyOption
+     * @return MonthSelect
+     */
+    public function setShouldCreateEmptyOption($createEmptyOption)
+    {
+        $this->createEmptyOption = (bool) $createEmptyOption;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function shouldCreateEmptyOption()
+    {
+        return $this->createEmptyOption;
     }
 
     /**

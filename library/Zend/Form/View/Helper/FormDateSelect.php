@@ -13,6 +13,7 @@ namespace Zend\Form\View\Helper;
 use DateTime;
 use IntlDateFormatter;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\DateSelect as DateSelectElement;
 use Zend\Form\Exception;
 use Zend\Form\View\Helper\FormMonthSelect as FormMonthSelectHelper;
 
@@ -27,11 +28,19 @@ class FormDateSelect extends FormMonthSelectHelper
      * Render a date element that is composed of three selects
      *
      * @param  ElementInterface $element
-     * @throws Exception\DomainException
+     * @throws \Zend\Form\Exception\InvalidArgumentException
+     * @throws \Zend\Form\Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof DateSelectElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\Select',
+                __METHOD__
+            ));
+        }
+
         $name = $element->getName();
         if ($name === null || $name === '') {
             throw new Exception\DomainException(sprintf(
@@ -47,9 +56,15 @@ class FormDateSelect extends FormMonthSelectHelper
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
         $yearOptions   = $this->getYearsOptions($element->getMinYear(), $element->getMaxYear());
 
-        $dayElement   = $element->getDayElement()->setAttribute('options', $daysOptions);
-        $monthElement = $element->getMonthElement()->setAttribute('options', $monthsOptions);
-        $yearElement  = $element->getYearElement()->setAttribute('options', $yearOptions);
+        if ($element->shouldCreateEmptyOption()) {
+            $daysOptions   = array('' => '') + $daysOptions;
+            $monthsOptions = array('' => '') + $monthsOptions;
+            $yearOptions   = array('' => '') + $yearOptions;
+        }
+
+        $dayElement   = $element->getDayElement()->setValueOptions($daysOptions);
+        $monthElement = $element->getMonthElement()->setValueOptions($monthsOptions);
+        $yearElement  = $element->getYearElement()->setValueOptions($yearOptions);
 
         $markup = array();
         $markup[$pattern['day']]   = $selectHelper->render($dayElement);
@@ -74,7 +89,7 @@ class FormDateSelect extends FormMonthSelectHelper
      * @param string  $pattern Pattern to use for days
      * @return array
      */
-    public function getDaysOptions($pattern)
+    protected function getDaysOptions($pattern)
     {
         $keyFormatter   = new IntlDateFormatter($this->getLocale(), null, null, null, null, 'dd');
         $valueFormatter = new IntlDateFormatter($this->getLocale(), null, null, null, null, $pattern);

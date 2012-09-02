@@ -14,6 +14,7 @@ use DateTime;
 use IntlDateFormatter;
 use Locale;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\MonthSelect as MonthSelectElement;
 use Zend\Form\Exception;
 
 /**
@@ -51,15 +52,24 @@ class FormMonthSelect extends AbstractHelper
      */
     protected $locale;
 
+
     /**
      * Render a month element that is composed of two selects
      *
      * @param \Zend\Form\ElementInterface $element
+     * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof MonthSelectElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\Select',
+                __METHOD__
+            ));
+        }
+
         $name = $element->getName();
         if ($name === null || $name === '') {
             throw new Exception\DomainException(sprintf(
@@ -78,8 +88,13 @@ class FormMonthSelect extends AbstractHelper
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
         $yearOptions   = $this->getYearsOptions($element->getMinYear(), $element->getMaxYear());
 
-        $monthElement = $element->getMonthElement()->setAttribute('options', $monthsOptions);
-        $yearElement  = $element->getYearElement()->setAttribute('options', $yearOptions);
+        if ($element->shouldCreateEmptyOption()) {
+            $monthsOptions = array('' => '') + $monthsOptions;
+            $yearOptions   = array('' => '') + $yearOptions;
+        }
+
+        $monthElement = $element->getMonthElement()->setValueOptions($monthsOptions);
+        $yearElement  = $element->getYearElement()->setValueOptions($yearOptions);
 
         $markup = array();
         $markup[$pattern['month']] = $selectHelper->render($monthElement);
@@ -211,7 +226,7 @@ class FormMonthSelect extends AbstractHelper
      * @param string $pattern Pattern to use for months
      * @return array
      */
-    public function getMonthsOptions($pattern)
+    protected function getMonthsOptions($pattern)
     {
         $keyFormatter   = new IntlDateFormatter($this->getLocale(), null, null, null, null, 'MM');
         $valueFormatter = new IntlDateFormatter($this->getLocale(), null, null, null, null, $pattern);
@@ -238,7 +253,7 @@ class FormMonthSelect extends AbstractHelper
      * @param int $maxYear
      * @return array
      */
-    public function getYearsOptions($minYear, $maxYear)
+    protected function getYearsOptions($minYear, $maxYear)
     {
         $result = array();
         for ($i = $maxYear; $i >= $minYear; --$i) {

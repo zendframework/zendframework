@@ -230,7 +230,7 @@ class ValidatorChain implements
     {
         return $this->isValid($value);
     }
-    
+
     /**
      * Prepare validator chain for serialization
      *
@@ -243,6 +243,6 @@ class ValidatorChain implements
      */
     public function __sleep()
     {
-        return array('validators', 'messages');
+        return array('validators','messages');
     }
 }

@@ -224,7 +224,7 @@ class FilterChain extends AbstractFilter implements Countable
 
         return $valueFiltered;
     }
-    
+
     /**
      * Prepare filter chain for serialization
      *

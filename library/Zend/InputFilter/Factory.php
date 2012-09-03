@@ -220,17 +220,16 @@ class Factory
         if (!$inputFilter instanceof InputFilterInterface) {
             throw new Exception\RuntimeException(sprintf(
                 'InputFilter factory expects the "type" to be a class implementing %s; received "%s"',
-                'Zend\InputFilter\InputFilterInterface',
-                $class
-            ));
+                'Zend\InputFilter\InputFilterInterface', $class));
         }
-
+        
         foreach ($inputFilterSpecification as $key => $value) {
             
-            if(($value instanceof InputInterface) || ($value instanceof InputFilterInterface)){
+            if (($value instanceof InputInterface) 
+                || ($value instanceof InputFilterInterface)
+            ) {
                 $input = $value;
-            }
-            else{
+            } else {
                 $input = $this->createInput($value);
             }
 

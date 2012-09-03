@@ -265,7 +265,7 @@ class FactoryTest extends TestCase
         
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
         $this->assertTrue($inputFilter->has('foo'));
-        $this->assertTrue($inputFilter->get('foo') === $input2);
+        $this->assertTrue($inputFilter->get('foo') === $input);
     }
 
     public function testFactoryWillCreateInputFilterAndAllInputObjectsFromGivenConfiguration()

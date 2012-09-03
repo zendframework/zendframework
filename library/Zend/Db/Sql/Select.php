@@ -573,7 +573,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                         $adapter,
                         $this->processInfo['paramPrefix'] . ((is_string($jKey)) ? $jKey : 'column')
                     );
-                    $parameterContainer->merge($jColumnParts->getParameterContainer());
+                    if ($parameterContainer) {
+                        $parameterContainer->merge($jColumnParts->getParameterContainer());
+                    }
                     $jColumns[] = $jColumnParts->getSql();
                 } else {
                     $name = (is_array($join['name'])) ? key($join['name']) : $name = $join['name'];

@@ -239,6 +239,34 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $this->assertEquals('foo', $input->getName());
     }
+    
+    public function testFactoryAcceptsInputInterface()
+    {
+        $factory = new Factory();
+        $input = new Input();
+        
+        $inputFilter = $factory->createInputFilter(array(
+            'foo' => $input        
+        ));
+        
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
+        $this->assertTrue($inputFilter->has('foo'));
+        $this->assertTrue($inputFilter->get('foo') === $input);
+    }
+    
+    public function testFactoryAcceptsInputFilterInterface()
+    {
+        $factory = new Factory();
+        $input = new InputFilter();
+        
+        $inputFilter = $factory->createInputFilter(array(
+            'foo' => $input        
+        ));
+        
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
+        $this->assertTrue($inputFilter->has('foo'));
+        $this->assertTrue($inputFilter->get('foo') === $input2);
+    }
 
     public function testFactoryWillCreateInputFilterAndAllInputObjectsFromGivenConfiguration()
     {

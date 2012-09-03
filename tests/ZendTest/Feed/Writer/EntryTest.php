@@ -521,6 +521,13 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $entry->getCommentCount());
     }
 
+    public function testSetsCommentCount0()
+    {
+        $entry = new Writer\Entry;
+        $entry->setCommentCount(0);
+        $this->assertEquals(0, $entry->getCommentCount());
+    }
+
     public function testSetCommentCountThrowsExceptionOnInvalidEmptyParameter()
     {
         $entry = new Writer\Entry;

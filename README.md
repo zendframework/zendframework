@@ -4,41 +4,58 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0rc7*
+*Zend Framework 2.0.0*
 
-This is the seventh release candidate for 2.0.0. At this time, we anticipate
-that this will be the final release candidate before issuing a stable release.
-We highly recommend testing your production applications against it.
+This is the first stable release of the new version 2 release branch.
 
-31 August 2012
+04 September 2012
 
-### UPDATES IN RC7
+### NEW IN ZEND FRAMEWORK 2
 
-- Zend\Di
-  - Fixes ArrayDefinition and ClassDefinition hasMethods() methods to return
-    boolean values.
-- Zend\Form
-  - Fixes issue with multi-checkbox rendering.
-- Zend\I18n
-  - DateFormat view helper now correctly falls back to date.timezone setting
-    instead of system timezone.
-- Zend\Ldap
-  - Fixes an error nesting condition
-- Zend\Log
-  - Fixes an issue with Zend\Log\Formatter\Simple whereby it was using a legacy
-    key ("info") instead of the key standardized upon in ZF2 ("extra"). 
-  - Simple formatter now defaults to JSON-encoding for array and object
-    serialization (prevents issues with some writers.)
-- Zend\Mail
-  - The Date header is now properly encoded as ASCII.
-- Zend\Mvc
-  - Fixes an issue in the ViewHelperManagerFactory whereby a condition was
-    testing against an uninitialized value.
-  - Added zend-console to composer.json dependencies.
-- Zend\View
-  - Breadcrumbs helper allows passing string container name now, allowing
-    multiple navigation containers.
-  - ServerUrl now works for servers behind proxies.
+New and/or refactored components include:
+
+- EventManager - provides subject/observer, pubsub, aspect-oriented programming,
+  signal slots, and event systems for your applications.
+- ServiceManager - provides an Inversion of Control (IoC) container for managing
+  object life-cycles and dependencies via a configurable and programmable
+  interface.
+- DI - provides a Dependency Injection Container, another form of IoC.
+- MVC - a newly written MVC layer for ZF2, using controllers as services, and
+  wiring everything together using events.
+- ModuleManager - a solution for providing plug-and-play functionality for
+  either MVC applications or any application requiring pluggable 3rd party code.
+  Within ZF2, the ModuleManager provides the MVC with services, and assists in
+  wiring events.
+- Loader - provides new options for autoloading, including standard, performant
+  PSR-0 loading and class-map-based autoloading.
+- Code - provides support for code reflection, static code scanning, and
+  annotation parsing.
+- Config - more performant and more flexible configuration parsing and creation.
+- Escaper - a new component for providing context-specific escaping solutions
+  for HTML, HTML attributes, CSS, JavaScript, and combinations of contexts as
+  well.
+- HTTP - rewritten to provide better header, request, and response abstraction.
+- I18n - a brand new internationalization and localization layer built on top of
+  PHP's ext/intl extension.
+- InputFilter - a new component for providing normalization and validation of
+  sets of data.
+- Form - rewritten from the ground up to properly separate validation, domain
+  modeling, and presentation concerns. Allows binding objects to forms, defining
+  forms and input filters via annotations, and more.
+- Log - rewritten to be more flexible and provide better capabilities
+  surrounding message formats and filtering.
+- Mail - rewritten to separate concerns more cleanly between messages and
+  transports.
+- Session - rewritten to make testing easier, as well as to make it more
+  configurable for end users.
+- Uri - rewritten to provide a cleaner, more object oriented interface.
+
+Many components have been ported from Zend Framework 1, and operate in
+practically identical manners to their 1.X equivalent. Others, such as the
+service components, have been moved to their own repositories to ensure that as
+APIs change, they do not need to wait on the framework to release new versions.
+
+Welcome to a new generation of Zend Framework!
 
 ### SYSTEM REQUIREMENTS
 

@@ -73,6 +73,21 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo Bar', $response->getContent());
     }
 
+    public function testResponseHasZeroLengthReasonPhrase()
+    {
+        // Space after status code is mandatory,
+        // though, reason phrase can be empty.
+        // @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1
+        $string = 'HTTP/1.0 200 ' . "\r\n\r\n" . 'Foo Bar';
+
+        $response = Response::fromString($string);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('Foo Bar', $response->getContent());
+
+        // Reason phrase would fallback to default reason phrase.
+        $this->assertEquals('OK', $response->getReasonPhrase());
+    }
+
     public function testGzipResponse ()
     {
         $response_text = file_get_contents(__DIR__ . '/_files/response_gzip');

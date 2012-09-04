@@ -253,7 +253,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test join() returns same Select object (is chainable)
+     * @testdox unit test: Test having() returns same Select object (is chainable)
      * @covers Zend\Db\Sql\Select::having
      */
     public function testHaving()
@@ -275,7 +275,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test join() returns same Select object (is chainable)
+     * @testdox unit test: Test group() returns same Select object (is chainable)
      * @covers Zend\Db\Sql\Select::group
      */
     public function testGroup()
@@ -746,6 +746,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processOrder'  => array(array(array('isnull("name") DESC'), array('"name"', Select::ORDER_ASCENDING)))
         );
 
+        // join with Expression object in COLUMNS part (ZF2-514)
+        // @co-author Koen Pieters (kpieters)
+        $select35 = new Select;
+        $select35->from('foo')->columns(array())->join('bar', 'm = n', array('thecount' => new Expression("COUNT(*)")));
+        $sqlPrep35 = // same
+        $sqlStr35 = 'SELECT COUNT(*) AS "thecount" FROM "foo" INNER JOIN "bar" ON "m" = "n"';
+        $internalTests35 = array(
+            'processSelect' => array(array(array('COUNT(*)', '"thecount"')), '"foo"'),
+            'processJoins'   => array(array(array('INNER', '"bar"', '"m" = "n"')))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -790,6 +801,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select32, $sqlPrep32, array(),    $sqlStr32, $internalTests32),
             array($select33, $sqlPrep33, array(),    $sqlStr33, $internalTests33),
             array($select34, $sqlPrep34, array(),    $sqlStr34, $internalTests34),
+            array($select35, $sqlPrep35, array(),    $sqlStr35, $internalTests35),
         );
     }
 

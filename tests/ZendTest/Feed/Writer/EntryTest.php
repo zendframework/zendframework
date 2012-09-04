@@ -528,6 +528,27 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $entry->getCommentCount());
     }
 
+    public function testSetsCommentCountAllowed()
+    {
+        $entry = new Writer\Entry;
+        foreach (array(0, 0.0, 1, PHP_INT_MAX) as $testCase) {
+            $entry->setCommentCount($testCase);
+            $this->assertEquals((int)$testCase, $entry->getCommentCount());
+        }
+    }
+
+    public function testSetsCommentCountDisallowed()
+    {
+        $entry = new Writer\Entry;
+        foreach (array(1.1, -1, -PHP_INT_MAX, array(), '', false, true, new \stdClass, null) as $testCase) {
+            try {
+                $entry->setCommentCount($testCase);
+                $this->fail();
+            } catch (Writer\Exception\ExceptionInterface $e) {
+            }
+        }
+    }
+
     public function testSetCommentCountThrowsExceptionOnInvalidEmptyParameter()
     {
         $entry = new Writer\Entry;

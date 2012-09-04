@@ -27,9 +27,13 @@ class PostRedirectGet extends AbstractPlugin
     {
         $controller = $this->getController();
         $request    = $controller->getRequest();
+        $params     = array();
 
         if (null === $redirect) {
-            $redirect = $controller->getEvent()->getRouteMatch()->getMatchedRouteName();
+            $routeMatch = $controller->getEvent()->getRouteMatch();
+
+            $redirect = $routeMatch->getMatchedRouteName();
+            $params   = $routeMatch->getParams();
         }
 
         $container = new Container('prg_post1');
@@ -42,9 +46,8 @@ class PostRedirectGet extends AbstractPlugin
                 // get the redirect plugin from the plugin manager
                 $redirector = $controller->getPluginManager()->get('Redirect');
             } else {
-
                 /*
-                 * if the user wants to redirect to a route, the redirector has to come
+                 * If the user wants to redirect to a route, the redirector has to come
                  * from the plugin manager -- otherwise no router will be injected
                  */
                 if ($redirectToUrl === false) {
@@ -55,13 +58,14 @@ class PostRedirectGet extends AbstractPlugin
             }
 
             if ($redirectToUrl === false) {
-                $response = $redirector->toRoute($redirect);
+                $response = $redirector->toRoute($redirect, $params);
                 $response->setStatusCode(303);
                 return $response;
             }
 
             $response = $redirector->toUrl($redirect);
             $response->setStatusCode(303);
+
             return $response;
         } else {
             if ($container->post !== null) {

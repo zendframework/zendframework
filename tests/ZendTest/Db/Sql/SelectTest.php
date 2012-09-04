@@ -746,14 +746,15 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processOrder'  => array(array(array('isnull("name") DESC'), array('"name"', Select::ORDER_ASCENDING)))
         );
 
-        // join with expression in COLUMNS part (ZF2-514)
+        // join with Expression object in COLUMNS part (ZF2-514)
+        // @co-author Koen Pieters (kpieters)
         $select35 = new Select;
-        $select35->from('foo')->join('zac', 'm = n', array('bar' => new Expression("IF(foo.id = 1, NULL, foo.bar)")));
+        $select35->from('foo')->columns(array())->join('bar', 'm = n', array('thecount' => new Expression("COUNT(*)")));
         $sqlPrep35 = // same
-        $sqlStr35 = 'SELECT "foo".*, IF(foo.id = 1, NULL, foo.bar) AS "bar" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
+        $sqlStr35 = 'SELECT COUNT(*) AS "thecount" FROM "foo" INNER JOIN "bar" ON "m" = "n"';
         $internalTests35 = array(
-            'processSelect' => array(array(array('"foo".*'), array('IF(foo.id = 1, NULL, foo.bar)', '"bar"')), '"foo"'),
-            'processJoins'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
+            'processSelect' => array(array(array('COUNT(*)', '"thecount"')), '"foo"'),
+            'processJoins'   => array(array(array('INNER', '"bar"', '"m" = "n"')))
         );
 
         /**

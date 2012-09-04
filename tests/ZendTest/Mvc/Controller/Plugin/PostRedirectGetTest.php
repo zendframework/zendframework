@@ -16,6 +16,7 @@ use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;
+use Zend\Mvc\Router\Http\Segment as SegmentRoute;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\Parameters;
@@ -41,7 +42,14 @@ class PostRedirectGetTest extends TestCase
             'route'    => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
-            ),
+            )
+        )));
+
+        $router->addRoute('sub', SegmentRoute::factory(array(
+            'route' => '/foo/:param',
+            'defaults' => array(
+                'param' => 1
+            )
         )));
 
         $this->controller = new SampleController();
@@ -126,13 +134,30 @@ class PostRedirectGetTest extends TestCase
             'postval1' => 'value1'
         )));
 
-
         $result         = $this->controller->dispatch($this->request, $this->response);
         $prgResultRoute = $this->controller->prg();
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
         $this->assertEquals('/', $prgResultRoute->getHeaders()->get('Location')->getUri());
+        $this->assertEquals(303, $prgResultRoute->getStatusCode());
+    }
+
+    public function testReuseMatchedParameters()
+    {
+        $this->controller->getEvent()->getRouteMatch()->setMatchedRouteName('sub');
+
+        $this->request->setMethod('POST');
+        $this->request->setPost(new Parameters(array(
+            'postval1' => 'value1'
+        )));
+
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultRoute = $this->controller->prg();
+
+        $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
+        $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
+        $this->assertEquals('/foo/1', $prgResultRoute->getHeaders()->get('Location')->getUri());
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 }

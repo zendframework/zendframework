@@ -149,7 +149,7 @@ class PluginManager extends AbstractPluginManager
     {
         if ($plugin instanceof Plugin\PluginInterface) {
             // we're okay
-            return;
+            return true;
         }
 
         throw new Exception\InvalidPluginException(sprintf(

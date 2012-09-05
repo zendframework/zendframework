@@ -11,6 +11,7 @@
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
+use Zend\Form\Element\DateTime as DateTimeElement;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
@@ -21,7 +22,7 @@ use Zend\Validator\ValidatorInterface;
  * @package    Zend_Form
  * @subpackage Element
  */
-class Date extends DateTime
+class Date extends DateTimeElement
 {
     /**
      * Seed attributes

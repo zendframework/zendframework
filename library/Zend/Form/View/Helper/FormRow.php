@@ -121,7 +121,7 @@ class FormRow extends AbstractHelper
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if (!empty($label)) {
+                if ($label !== '') {
                     $label = '<span>' . $label . '</span>';
                 }
 

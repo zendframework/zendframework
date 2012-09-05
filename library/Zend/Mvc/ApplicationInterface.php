@@ -21,21 +21,21 @@ interface ApplicationInterface extends EventsCapableInterface
     /**
      * Get the locator object
      *
-     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     * @return \Zend\ServiceManager\ServiceManager
      */
     public function getServiceManager();
 
     /**
      * Get the request object
      *
-     * @return Request
+     * @return \Zend\Stdlib\RequestInterface
      */
     public function getRequest();
 
     /**
      * Get the response object
      *
-     * @return Response
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function getResponse();
 

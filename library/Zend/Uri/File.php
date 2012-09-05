@@ -13,7 +13,7 @@ namespace Zend\Uri;
 /**
  * File URI handler
  *
- * The 'file:...' scheme is loosly defined in RFC-1738
+ * The 'file:...' scheme is loosely defined in RFC-1738
  *
  * @category  Zend
  * @package   Zend_Uri

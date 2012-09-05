@@ -28,7 +28,6 @@ class Event extends BaseEvent
      * @param  string           $name Event name
      * @param  StorageInterface $storage
      * @param  ArrayObject      $params
-     * @return void
      */
     public function __construct($name, StorageInterface $storage, ArrayObject $params)
     {

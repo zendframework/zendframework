@@ -39,7 +39,7 @@ class Response
 
     /**
      * Service map
-     * @var Smd\Smd
+     * @var Smd
      */
     protected $serviceMap;
 
@@ -248,7 +248,7 @@ class Response
     /**
      * Set service map object
      *
-     * @param  Smd\Smd $serviceMap
+     * @param  Smd $serviceMap
      * @return Response
      */
     public function setServiceMap($serviceMap)
@@ -260,7 +260,7 @@ class Response
     /**
      * Retrieve service map
      *
-     * @return Smd\Smd|null
+     * @return Smd|null
      */
     public function getServiceMap()
     {

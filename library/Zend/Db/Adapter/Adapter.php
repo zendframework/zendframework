@@ -51,14 +51,9 @@ class Adapter
     protected $platform = null;
 
     /**
-     * @var \Zend\Db\ResultSet\ResultSet
+     * @var ResultSet\ResultSetInterface
      */
     protected $queryResultSetPrototype = null;
-
-    /**
-     * @var string
-     */
-    protected $queryMode = self::QUERY_MODE_PREPARE;
 
     /**
      * @var Driver\StatementInterface
@@ -68,7 +63,7 @@ class Adapter
     /**
      * @param Driver\DriverInterface|array $driver
      * @param Platform\PlatformInterface $platform
-     * @param ResultSet\ResultSet $queryResultPrototype
+     * @param ResultSet\ResultSetInterface $queryResultPrototype
      */
     public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
     {
@@ -94,7 +89,7 @@ class Adapter
     /**
      * getDriver()
      *
-     * @throws Exception
+     * @throws Exception\RuntimeException
      * @return Driver\DriverInterface
      */
     public function getDriver()
@@ -106,33 +101,19 @@ class Adapter
     }
 
     /**
-     * @param string $queryMode
-     * @return Adapter
-     * @throws \InvalidArgumentException
-     */
-    public function setQueryMode($queryMode)
-    {
-        if (!in_array($queryMode, array(self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE))) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Query Mode must be one of "%s" or "%s"', self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE)
-            );
-        }
-
-        $this->queryMode = $queryMode;
-        return $this;
-    }
-
-    public function getQueryMode()
-    {
-        return $this->queryMode;
-    }
-
-    /**
      * @return Platform\PlatformInterface
      */
     public function getPlatform()
     {
         return $this->platform;
+    }
+
+    /**
+     * @return ResultSet\ResultSetInterface
+     */
+    public function getQueryResultSetPrototype()
+    {
+        return $this->queryResultSetPrototype;
     }
 
     public function getCurrentSchema()

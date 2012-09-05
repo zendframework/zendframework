@@ -75,7 +75,7 @@ class SetCookie implements MultipleHeaderInterface
     protected $secure = null;
 
     /**
-     * @var true
+     * @var boolean|null
      */
     protected $httponly = null;
 
@@ -111,7 +111,7 @@ class SetCookie implements MultipleHeaderInterface
                         continue;
                     }
 
-                    // Process the remanining elements
+                    // Process the remaining elements
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
                         case 'expires' : $header->setExpires($headerValue); break;
                         case 'domain'  : $header->setDomain($headerValue); break;
@@ -432,7 +432,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param \Zend\Http\Header\true $httponly
+     * @param boolean $httponly
      */
     public function setHttponly($httponly)
     {
@@ -440,7 +440,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @return \Zend\Http\Header\true
+     * @return boolean
      */
     public function isHttponly()
     {

@@ -48,7 +48,6 @@ class Apc extends AbstractAdapter implements
      *
      * @param  null|array|Traversable|ApcOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {

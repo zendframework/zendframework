@@ -183,9 +183,9 @@ class StorageFactory
     /**
      * Instantiate a storage plugin
      *
-     * @param string|Storage\Plugin                          $pluginName
+     * @param string|Storage\Plugin\PluginInterface     $pluginName
      * @param array|Traversable|Storage\Plugin\PluginOptions $options
-     * @return Storage\Plugin
+     * @return Storage\Plugin\PluginInterface
      * @throws Exception\RuntimeException
      */
     public static function pluginFactory($pluginName, $options = array())

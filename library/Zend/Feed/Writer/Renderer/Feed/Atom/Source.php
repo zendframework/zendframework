@@ -24,7 +24,6 @@ class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer\Renderer
      * Constructor
      *
      * @param  \Zend\Feed\Writer\Source $container
-     * @return void
      */
     public function __construct (\Zend\Feed\Writer\Source $container)
     {
@@ -78,7 +77,7 @@ class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer\Renderer
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getGenerator()) {
+        if (!$this->getDataContainer()->getGenerator()) {
             return;
         }
 

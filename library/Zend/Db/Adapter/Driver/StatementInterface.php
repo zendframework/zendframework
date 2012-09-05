@@ -10,6 +10,7 @@
 
 namespace Zend\Db\Adapter\Driver;
 
+use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 
 /**
@@ -17,37 +18,13 @@ use Zend\Db\Adapter\ParameterContainer;
  * @package    Zend_Db
  * @subpackage Adapter
  */
-interface StatementInterface
+interface StatementInterface extends StatementContainerInterface
 {
 
     /**
      * @return resource
      */
     public function getResource();
-
-    /**
-     * @abstract
-     * @param string $sql
-     */
-    public function setSql($sql);
-
-    /**
-     * @abstract
-     * @return string
-     */
-    public function getSql();
-
-    /**
-     * @abstract
-     * @param ParameterContainer $parameterContainer
-     */
-    public function setParameterContainer(ParameterContainer $parameterContainer);
-
-    /**
-     * @abstract
-     * @return ParameterContainer
-     */
-    public function getParameterContainer();
 
     /**
      * @abstract

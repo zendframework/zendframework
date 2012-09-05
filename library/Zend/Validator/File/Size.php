@@ -10,6 +10,7 @@
 
 namespace Zend\Validator\File;
 
+use Zend\Stdlib\ErrorHandler;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
@@ -247,7 +248,9 @@ class Size extends AbstractValidator
         }
 
         // limited to 4GB files
-        $size        = sprintf("%u", @filesize($value));
+        ErrorHandler::start();
+        $size = sprintf("%u", filesize($value));
+        ErrorHandler::stop();
         $this->size = $size;
 
         // Check to see if it's smaller than min size
@@ -363,7 +366,7 @@ class Size extends AbstractValidator
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $this->value = $file['name'];
                 }
             } elseif (is_string($file)) {

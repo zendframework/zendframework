@@ -10,11 +10,9 @@
 
 namespace Zend\Console\Adapter;
 
-use Zend\Console\AdapterInterface;
-use Zend\Console\ColorInterface;
-use Zend\Console\CharsetInterface;
-use Zend\Console\Exception\RuntimeException;
-use Zend\Console;
+use Zend\Console\Charset\CharsetInterface;
+use Zend\Console\Exception;
+use Zend\Console\Charset;
 
 /**
  * MS Windows with ANSICON console adapter
@@ -34,10 +32,20 @@ use Zend\Console;
  * @package    Zend_Console
  * @subpackage Adapter
  */
-class WindowsAnsicon extends Posix implements AdapterInterface
+class WindowsAnsicon extends Posix
 {
+    /**
+     * Whether or not mbstring is enabled
+     *
+     * @var null|bool
+     */
     protected static $hasMBString;
 
+    /**
+     * Results of mode command
+     *
+     * @var mixed
+     */
     protected $modeResult;
 
     /**
@@ -52,10 +60,8 @@ class WindowsAnsicon extends Posix implements AdapterInterface
             return $width;
         }
 
-        /**
-         * Try to read console size from ANSICON env var
-         */
-        if (preg_match('/\((\d+)x/',getenv('ANSICON'),$matches)) {
+        // Try to read console size from ANSICON env var
+        if (preg_match('/\((\d+)x/', getenv('ANSICON'), $matches)) {
             $width = $matches[1];
         } else {
             $width = AbstractAdapter::getWidth();
@@ -76,10 +82,8 @@ class WindowsAnsicon extends Posix implements AdapterInterface
             return $height;
         }
 
-        /**
-         * Try to read console size from ANSICON env var
-         */
-        if (preg_match('/\(\d+x(\d+)/',getenv('ANSICON'),$matches)) {
+        // Try to read console size from ANSICON env var
+        if (preg_match('/\(\d+x(\d+)/', getenv('ANSICON'), $matches)) {
             $height = $matches[1];
         } else {
             $height = AbstractAdapter::getHeight();
@@ -87,13 +91,18 @@ class WindowsAnsicon extends Posix implements AdapterInterface
         return $height;
     }
 
+    /**
+     * Run and cache results of mode command
+     *
+     * @return void
+     */
     protected function runModeCommand()
     {
-        exec('mode',$output,$return);
+        exec('mode', $output, $return);
         if ($return || !count($output)) {
             $this->modeResult = '';
         } else {
-            $this->modeResult = trim(implode('',$output));
+            $this->modeResult = trim(implode('', $output));
         }
     }
 
@@ -104,15 +113,13 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      */
     public function isUtf8()
     {
-        /**
-         * Try to read code page info from "mode" command
-         */
+        // Try to read code page info from "mode" command
         if ($this->modeResult === null) {
             $this->runModeCommand();
         }
 
-        if (preg_match('/Code page\:\s+(\d+)/', $this->modeResult,$matches)) {
-            return (int)$matches[1] == 65001;
+        if (preg_match('/Code page\:\s+(\d+)/', $this->modeResult, $matches)) {
+            return (int) $matches[1] == 65001;
         }
 
         return false;
@@ -125,15 +132,13 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      */
     public function getTitle()
     {
-        /**
-         * Try to use powershell to retrieve console window title
-         */
-        exec('powershell -command "write $Host.UI.RawUI.WindowTitle"',$output,$result);
+        // Try to use powershell to retrieve console window title
+        exec('powershell -command "write $Host.UI.RawUI.WindowTitle"', $output, $result);
         if ($result || !$output) {
             return '';
         }
 
-        return trim($output,"\r\n");
+        return trim($output, "\r\n");
     }
 
     /**
@@ -141,7 +146,7 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      */
     public function clear()
     {
-        echo chr(27).'[1J'.chr(27).'[u';
+        echo chr(27) . '[1J' . chr(27) . '[u';
     }
 
     /**
@@ -149,14 +154,13 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      */
     public function clearLine()
     {
-        echo chr(27).'[1K';
+        echo chr(27) . '[1K';
     }
-
 
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\CharsetInterface $charset
+     * @param CharsetInterface $charset
      */
     public function setCharset(CharsetInterface $charset)
     {
@@ -167,7 +171,7 @@ class WindowsAnsicon extends Posix implements AdapterInterface
      * Get charset currently in use by this adapter.
      *
 
-     * @return \Zend\Console\CharsetInterface $charset
+     * @return CharsetInterface $charset
      */
     public function getCharset()
     {
@@ -179,7 +183,7 @@ class WindowsAnsicon extends Posix implements AdapterInterface
     }
 
     /**
-     * @return \Zend\Console\Charset\AsciiExtended
+     * @return Charset\AsciiExtended
      */
     public function getDefaultCharset()
     {
@@ -189,33 +193,115 @@ class WindowsAnsicon extends Posix implements AdapterInterface
     /**
      * Read a single character from the console input
      *
-     * @param string|null   $mask   A list of allowed chars
+     * @param  string|null $mask A list of allowed chars
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function readChar($mask = null)
     {
-        /**
-         * Decide if we can use `choice` tool
-         */
-        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]$', $mask);
+        // Decide if we can use `choice` tool
+        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]+$/D', $mask);
 
-        do {
-            if ($useChoice) {
-                system('choice /n /cs /c '.$mask,$return);
+        if ($useChoice) {
+            // Use Windows 98+ "choice" command, which allows for reading a
+            // single character matching a mask, but is limited to lower ASCII
+            // range.
+            do {
+                exec('choice /n /cs /c:' . $mask, $output, $return);
                 if ($return == 255 || $return < 1 || $return > strlen($mask)) {
-                    throw new RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
-                } else {
-                    /**
-                     * Fetch the char from mask
-                     */
-                    $char = substr($mask,$return-1,1);
+                    throw new Exception\RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
                 }
-            } else {
-                $char = parent::readChar($mask);
+
+                // Fetch the char from mask
+                $char = substr($mask, $return - 1, 1);
+            } while (!$char || ($mask !== null && !stristr($mask, $char)));
+
+            return $char;
+        }
+
+        // Try to use PowerShell, giving it console access. Because PowersShell
+        // interpreter can take a short while to load, we are emptying the
+        // whole keyboard buffer and picking the last key that has been pressed
+        // before or after PowerShell command has started. The ASCII code for
+        // that key is then converted to a character.
+        if ($mask === null) {
+            exec(
+                'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
+                    . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
+                    . 'write $key.VirtualKeyCode;'
+                    . '"',
+                $result,
+                $return
+            );
+
+            // Retrieve char from the result.
+            $char = !empty($result) ? implode('', $result) : null;
+
+            if (!empty($char) && !$return) {
+                // We have obtained an ASCII code, convert back to a char ...
+                $char = chr($char);
+
+                // ... and return it...
+                return $char;
             }
+        } else {
+            // Windows and DOS will return carriage-return char (ASCII 13) when
+            // the user presses [ENTER] key, but Console Adapter user might
+            // have provided a \n Newline (ASCII 10) in the mask, to allow
+            // [ENTER].  We are going to replace all CR with NL to conform.
+            $mask = strtr($mask, "\n", "\r");
+
+            // Prepare a list of ASCII codes from mask chars
+            $asciiMask = array_map(function ($char) {
+                return ord($char);
+            }, str_split($mask));
+            $asciiMask = array_unique($asciiMask);
+
+            // Char mask filtering is now handled by the PowerShell itself,
+            // because it's a much faster method than invoking PS interpreter
+            // after each mismatch. The command should return ASCII code of a
+            // matching key.
+            $result = $return = null;
+            exec(
+                'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
+                    . '[int[]] $mask = '.join(',',$asciiMask).';'
+                    . 'do {'
+                        . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
+                    . '} while( !($mask -contains $key) );'
+                    . 'write $key;'
+                    . '"',
+                $result,
+                $return
+            );
+
+            $char = !empty($result) ? trim(implode('', $result)) : null;
+
+            if (!$return && $char && ($mask === null || in_array($char,$asciiMask))) {
+                // We have obtained an ASCII code, check if it is a carriage
+                // return and normalize it as needed
+                if ($char == 13) {
+                    $char = 10;
+                }
+
+                // Convert to a character
+                $char = chr($char);
+
+                // ... and return it...
+                return $char;
+            }
+        }
+
+        // Fall back to standard input, which on Windows does not allow reading
+        // a single character. This is a limitation of Windows streams
+        // implementation (not PHP) and this behavior cannot be changed with a
+        // command like "stty", known to POSIX systems.
+        $stream = fopen('php://stdin', 'rb');
+        do {
+            $char = fgetc($stream);
+            $char = substr(trim($char), 0, 1);
         } while (!$char || ($mask !== null && !stristr($mask, $char)));
+        fclose($stream);
 
         return $char;
     }
-
 }

@@ -107,7 +107,6 @@ class Service
      * Constructor
      *
      * @param  string|array $spec
-     * @return void
      * @throws Zend\Json\Server\Exception\InvalidArgumentException if no name provided
      */
     public function __construct($spec)
@@ -428,9 +427,10 @@ class Service
     /**
      * Validate parameter type
      *
-     * @param  string $type
-     * @return true
-     * @throws Zend\Json\Server\Exception
+     * @param string  $type
+     * @param boolean $isReturn
+     * @return string
+     * @throws InvalidArgumentException
      */
     protected function _validateParamType($type, $isReturn = false)
     {

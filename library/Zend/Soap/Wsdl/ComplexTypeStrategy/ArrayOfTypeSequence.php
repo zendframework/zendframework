@@ -31,10 +31,10 @@ class ArrayOfTypeSequence extends DefaultComplexType
     {
         $nestedCounter = $this->_getNestedCount($type);
 
-        if($nestedCounter > 0) {
+        if ($nestedCounter > 0) {
             $singularType = $this->_getSingularType($type);
 
-            for($i = 1; $i <= $nestedCounter; $i++) {
+            for ($i = 1; $i <= $nestedCounter; $i++) {
                 $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
                 $complexTypePhp = $singularType . str_repeat('[]', $i);
                 $childType      = $this->_getTypeBasedOnNestingLevel($singularType, $i-1);
@@ -61,7 +61,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
      */
     protected function _getTypeBasedOnNestingLevel($singularType, $level)
     {
-        if($level == 0) {
+        if ($level == 0) {
             // This is not an Array anymore, return the xsd simple type
             return $this->getContext()->getType($singularType);
         } else {
@@ -70,7 +70,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
     }
 
     /**
-     * From a nested defintion with type[], get the singular xsd:type
+     * From a nested definition with type[], get the singular xsd:type
      *
      * @param  string $type
      * @return string

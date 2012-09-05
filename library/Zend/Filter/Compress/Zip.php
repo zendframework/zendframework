@@ -40,7 +40,6 @@ class Zip extends AbstractCompressionAlgorithm
      * Class constructor
      *
      * @param  null|array|\Traversable $options (Optional) Options to set
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -106,7 +105,7 @@ class Zip extends AbstractCompressionAlgorithm
      *
      * @param  string $content
      * @return string Compressed archive
-     * @throws Exception\RuntimeException if unable to open zip archive, or error during compresion
+     * @throws Exception\RuntimeException if unable to open zip archive, or error during compression
      */
     public function compress($content)
     {
@@ -231,7 +230,7 @@ class Zip extends AbstractCompressionAlgorithm
      */
     public function errorString($error)
     {
-        switch($error) {
+        switch ($error) {
             case ZipArchive::ER_MULTIDISK :
                 return 'Multidisk ZIP Archives not supported';
 

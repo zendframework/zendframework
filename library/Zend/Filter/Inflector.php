@@ -83,7 +83,7 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * Retreive plugin broker
+     * Retrieve plugin broker
      *
      * @return FilterPluginManager
      */
@@ -412,7 +412,7 @@ class Inflector extends AbstractFilter
     public function filter($source)
     {
         // clean source
-        foreach ( (array) $source as $sourceName => $sourceValue) {
+        foreach ((array) $source as $sourceName => $sourceValue) {
             $source[ltrim($sourceName, ':')] = $sourceValue;
         }
 

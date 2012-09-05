@@ -32,7 +32,7 @@ class Wildcard implements RouteInterface
     protected $keyValueDelimiter;
 
     /**
-     * Delimtier before parameters.
+     * Delimiter before parameters.
      *
      * @var array
      */
@@ -113,6 +113,10 @@ class Wildcard implements RouteInterface
 
         $uri  = $request->getUri();
         $path = $uri->getPath();
+
+        if ($path === '/') {
+            $path = '';
+        }
 
         if ($pathOffset !== null) {
             $path = substr($path, $pathOffset);

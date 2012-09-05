@@ -27,7 +27,6 @@ abstract class AbstractArrayAnnotation
      * Receive and process the contents of an annotation
      *
      * @param  array $data
-     * @return void
      * @throws Exception\DomainException if a 'value' key is missing, or its value is not an array
      */
     public function __construct(array $data)
@@ -36,7 +35,7 @@ abstract class AbstractArrayAnnotation
             throw new Exception\DomainException(sprintf(
                 '%s expects the annotation to define an array; received "%s"',
                 get_class($this),
-                gettype($data['value'])
+                isset($data['value']) ? gettype($data['value']) : 'null'
             ));
         }
         $this->value = $data['value'];

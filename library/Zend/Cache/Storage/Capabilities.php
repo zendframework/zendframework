@@ -433,7 +433,7 @@ class Capabilities
     }
 
     /**
-     * Set maximum key lenth
+     * Set maximum key length
      *
      * @param  stdClass $marker
      * @param  int $maxKeyLength

@@ -27,7 +27,6 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Constructor
      *
      * @param  Writer\Entry $container
-     * @return void
      */
     public function __construct (Writer\Entry $container)
     {
@@ -77,7 +76,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDescription()
+        if (!$this->getDataContainer()->getDescription()
         && !$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
             . ' title element but a title has not been set. In addition, there'
@@ -106,7 +105,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDescription()
+        if (!$this->getDataContainer()->getDescription()
         && !$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
             . ' description element but a description has not been set. In'
@@ -138,7 +137,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDateModified()) {
+        if (!$this->getDataContainer()->getDateModified()) {
             return;
         }
 
@@ -252,7 +251,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getLink()) {
+        if (!$this->getDataContainer()->getLink()) {
             return;
         }
         $link = $dom->createElement('link');
@@ -270,7 +269,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getId()
+        if (!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
             return;
         }

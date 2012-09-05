@@ -20,7 +20,7 @@ use Zend\Uri\Uri;
  * classes can be registered using the registerScheme() method.
  *
  * Note that this class contains only static methods and should not be
- * instanciated
+ * instantiated
  *
  * @category  Zend
  * @package   Zend_Uri

@@ -50,7 +50,6 @@ class Dba extends AbstractAdapter implements
      *
      * @param  null|array|Traversable|DbaOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -509,7 +508,7 @@ class Dba extends AbstractAdapter implements
     }
 
     /**
-     * Close database file if opend
+     * Close database file if opened
      *
      * @return void
      */

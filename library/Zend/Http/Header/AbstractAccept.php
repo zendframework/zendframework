@@ -151,7 +151,8 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Parse the keys contained in the header line
      *
-     * @param string mediaType
+     * @param string $fieldValuePart
+     * @return array
      */
     protected function getParametersFromFieldValuePart($fieldValuePart)
     {
@@ -203,7 +204,7 @@ abstract class AbstractAccept implements HeaderInterface
 
 
     /**
-     * Assemble and escape the field value parameters based on RFC 2616 secion 2.1
+     * Assemble and escape the field value parameters based on RFC 2616 section 2.1
      *
      * @todo someone should review this thoroughly
      * @param string value

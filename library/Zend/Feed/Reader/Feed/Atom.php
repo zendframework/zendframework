@@ -389,7 +389,7 @@ class Atom extends AbstractFeed
             $entries = array();
             $entries = $this->xpath->evaluate('//atom:entry');
 
-            foreach($entries as $index=>$entry) {
+            foreach ($entries as $index=>$entry) {
                 $this->entries[$index] = $entry;
             }
         }

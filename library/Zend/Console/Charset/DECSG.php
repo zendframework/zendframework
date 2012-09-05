@@ -10,8 +10,6 @@
 
 namespace Zend\Console\Charset;
 
-use Zend\Console\CharsetInterface;
-
 /**
  * DEC Special Graphics (VT100 line drawing) character set
  *

@@ -52,7 +52,6 @@ class Memcached extends AbstractAdapter implements
      *
      * @param  null|array|Traversable|MemcachedOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {

@@ -89,11 +89,11 @@ class ArrayDefinition implements DefinitionInterface
     public function hasMethods($class)
     {
         if (!isset($this->dataArray[$class])) {
-            return array();
+            return false;
         }
 
         if (!isset($this->dataArray[$class]['methods'])) {
-            return array();
+            return false;
         }
 
         return (count($this->dataArray[$class]['methods']) > 0);

@@ -219,7 +219,7 @@ abstract class AbstractStorage implements
             if ($this->getMessage($id)) {
                 return true;
             }
-        } catch(Exception\ExceptionInterface $e) {}
+        } catch (Exception\ExceptionInterface $e) {}
 
         return false;
      }

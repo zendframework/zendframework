@@ -39,7 +39,6 @@ class JsonStrategy implements ListenerAggregateInterface
      * Constructor
      *
      * @param  JsonRenderer $renderer
-     * @return void
      */
     public function __construct(JsonRenderer $renderer)
     {

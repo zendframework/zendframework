@@ -116,7 +116,7 @@ class MemoryManager
     {
         /**
          * @todo !!!
-         * uniqid() php function doesn't really garantee the id to be unique
+         * uniqid() php function doesn't really guarantee the id to be unique
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
@@ -129,7 +129,6 @@ class MemoryManager
      * If cache is not specified, then memory objects are never swapped
      *
      * @param  CacheStorage $cache
-     * @return void
      */
     public function __construct(CacheStorage $cache = null)
     {
@@ -224,8 +223,8 @@ class MemoryManager
      * Create new Zend_Memory value container
      *
      * @param string $value
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
     public function create($value = '')
     {
@@ -237,8 +236,8 @@ class MemoryManager
      * locked in memory
      *
      * @param string $value
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
     public function createLocked($value = '')
     {
@@ -250,8 +249,8 @@ class MemoryManager
      *
      * @param string $value
      * @param boolean $locked
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return \Zend\Memory\Container\ContainerInterface
+     * @throws \Zend\Memory\Exception\ExceptionInterface
      */
     private function _create($value, $locked)
     {
@@ -280,8 +279,9 @@ class MemoryManager
      * Used by Memory container destroy() method
      *
      * @internal
+     * @param Container\Movable $container
      * @param integer $id
-     * @return \Zend\Memory\Container\AbstractContainer
+     * @return null
      */
     public function unlink(Container\Movable $container, $id)
     {
@@ -320,7 +320,7 @@ class MemoryManager
         }
 
         // Remove just updated object from list of candidates to unload
-        if( isset($this->unloadCandidates[$id])) {
+        if ( isset($this->unloadCandidates[$id])) {
             unset($this->unloadCandidates[$id]);
         }
 
@@ -388,7 +388,7 @@ class MemoryManager
 
     /**
      * Swap object data to disk
-     * Actualy swaps data or only unloads it from memory,
+     * Actually swaps data or only unloads it from memory,
      * if object is not changed since last swap
      *
      * @param \Zend\Memory\Container\Movable $container
@@ -426,7 +426,7 @@ class MemoryManager
         $this->memorySize += strlen($value);
         $this->_swapCheck();
 
-        // Add loaded obect to the end of loaded objects list
+        // Add loaded object to the end of loaded objects list
         $container->setValue($value);
 
         if ($this->sizes[$id] > $this->minSize) {

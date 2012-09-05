@@ -36,7 +36,6 @@ class HydratingResultSet extends AbstractResultSet
      *
      * @param  null|HydratorInterface $hydrator
      * @param  null|object $objectPrototype
-     * @return void
      */
     public function __construct(HydratorInterface $hydrator = null, $objectPrototype = null)
     {
@@ -64,7 +63,8 @@ class HydratingResultSet extends AbstractResultSet
     /**
      * Set the hydrator to use for each row object
      *
-     * @param HydratorInterface $rowObjectHydrator
+     * @param HydratorInterface $hydrator
+     * @return HydratingResultSet
      */
     public function setHydrator(HydratorInterface $hydrator)
     {

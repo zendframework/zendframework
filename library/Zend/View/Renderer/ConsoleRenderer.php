@@ -1,37 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Renderer;
 
-use ArrayAccess;
 use Zend\Filter\FilterChain;
-use Zend\Loader\Pluggable;
-use Zend\View\Exception;
-use Zend\View\HelperBroker;
-use Zend\View\Model;
-use Zend\View\Renderer;
-use Zend\View\Resolver;
-use Zend\View\Variables;
+use Zend\View\Model\ModelInterface;
+use Zend\View\Resolver\ResolverInterface;
 
 /**
  * Abstract class for Zend_View to help enforce private constructs.
@@ -42,14 +23,11 @@ use Zend\View\Variables;
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ConsoleRenderer implements Renderer, TreeRendererInterface
+class ConsoleRenderer implements RendererInterface, TreeRendererInterface
 {
     /**
      * @var Zend\Filter\FilterChain
-     * @protected
      */
     protected $__filterChain;
 
@@ -68,7 +46,10 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
         $this->init();
     }
 
-    public function setResolver(Resolver $resolver){}
+    public function setResolver(ResolverInterface $resolver)
+    {
+        return $this;
+    }
 
     /**
      * Return the template engine object
@@ -98,7 +79,7 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
      * Set filter chain
      *
      * @param  FilterChain $filters
-     * @return Zend\View\PhpRenderer
+     * @return ConsoleRenderer
      */
     public function setFilterChain(FilterChain $filters)
     {
@@ -122,15 +103,15 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
     /**
      * Recursively processes all ViewModels and returns output.
      *
-     * @param  string|Model            $model        A ViewModel instance.
-     * @param  null|array|Traversable  $values       Values to use when rendering. If none
+     * @param  string|ModelInterface   $model        A ViewModel instance.
+     * @param  null|array|\Traversable $values       Values to use when rendering. If none
      *                                               provided, uses those in the composed
      *                                               variables container.
      * @return string Console output.
      */
     public function render($model, $values = null)
     {
-        if(!$model instanceof Model){
+        if (!$model instanceof ModelInterface) {
             return '';
         }
 
@@ -147,14 +128,14 @@ class ConsoleRenderer implements Renderer, TreeRendererInterface
 
         $values = $model->getVariables();
 
-        if(isset($values['result'])){
+        if (isset($values['result'])) {
             // filter and append the result
             $result .= $this->getFilterChain()->filter($values['result']);
         }
 
-        if($model->hasChildren()){
+        if ($model->hasChildren()) {
             // recursively render all children
-            foreach($model->getChildren() as $child){
+            foreach ($model->getChildren() as $child) {
                 $result .= $this->render($child, $values);
             }
         }

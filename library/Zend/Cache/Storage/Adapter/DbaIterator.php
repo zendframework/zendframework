@@ -21,7 +21,7 @@ use Zend\Cache\Storage\IteratorInterface;
 class DbaIterator implements IteratorInterface
 {
     /**
-     * The apc storage intance
+     * The apc storage instance
      *
      * @var Apc
      */
@@ -61,7 +61,6 @@ class DbaIterator implements IteratorInterface
      * @param Dba      $storage
      * @param resource $handle
      * @param string   $prefix
-     * @return void
      */
     public function __construct(Dba $storage, $handle, $prefix)
     {
@@ -184,7 +183,7 @@ class DbaIterator implements IteratorInterface
     public function rewind()
     {
         if ($this->currentInternalKey === false) {
-            throw new Exception\RuntimeException("Iterater is on an invalid state");
+            throw new Exception\RuntimeException("Iterator is on an invalid state");
         }
 
         $this->currentInternalKey = dba_firstkey($this->handle);

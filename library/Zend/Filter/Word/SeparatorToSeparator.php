@@ -24,8 +24,8 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
     /**
      * Constructor
      *
-     * @param  string  $searchSeparator      Seperator to search for
-     * @param  string  $replacementSeperator Seperator to replace with
+     * @param  string  $searchSeparator      Separator to search for
+     * @param  string  $replacementSeparator Separator to replace with
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
     {
@@ -46,7 +46,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
     }
 
     /**
-     * Returns the actual set seperator to search for
+     * Returns the actual set separator to search for
      *
      * @return  string
      */
@@ -56,9 +56,9 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
     }
 
     /**
-     * Sets a new seperator which replaces the searched one
+     * Sets a new separator which replaces the searched one
      *
-     * @param  string  $separator  Seperator which replaces the searched one
+     * @param  string  $separator  Separator which replaces the searched one
      * @return SeparatorToSeparator
      */
     public function setReplacementSeparator($separator)
@@ -68,7 +68,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
     }
 
     /**
-     * Returns the actual set seperator which replaces the searched one
+     * Returns the actual set separator which replaces the searched one
      *
      * @return  string
      */
@@ -80,7 +80,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
     /**
      * Defined by Zend\Filter\Filter
      *
-     * Returns the string $value, replacing the searched seperators with the defined ones
+     * Returns the string $value, replacing the searched separators with the defined ones
      *
      * @param  string $value
      * @return string

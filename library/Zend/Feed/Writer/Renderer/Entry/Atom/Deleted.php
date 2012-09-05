@@ -26,7 +26,6 @@ class Deleted
      * Constructor
      *
      * @param  \Zend\Feed\Writer\Deleted $container
-     * @return void
      */
     public function __construct (\Zend\Feed\Writer\Deleted $container)
     {
@@ -63,7 +62,7 @@ class Deleted
      */
     protected function _setComment(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getComment()) {
+        if (!$this->getDataContainer()->getComment()) {
             return;
         }
         $c = $dom->createElement('at:comment');

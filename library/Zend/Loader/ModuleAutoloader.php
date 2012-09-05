@@ -45,7 +45,6 @@ class ModuleAutoloader implements SplAutoloader
      * Allow configuration of the autoloader via the constructor.
      *
      * @param  null|array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

@@ -10,9 +10,10 @@
 
 namespace Zend\Console\Prompt;
 
-use Zend\Console\PromptInterface;
+use ReflectionClass;
 use Zend\Console\Console;
-use Zend\Console\AdapterInterface as ConsoleAdapter;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
+use Zend\Console\Exception;
 
 /**
  * @category   Zend
@@ -22,7 +23,7 @@ use Zend\Console\AdapterInterface as ConsoleAdapter;
 abstract class AbstractPrompt implements PromptInterface
 {
     /**
-     * @var Zend\Console\AdapterInterface
+     * @var ConsoleAdapter
      */
     protected $console;
 
@@ -31,10 +32,12 @@ abstract class AbstractPrompt implements PromptInterface
      */
     protected $lastResponse;
 
-    public function show()
-    {
-
-    }
+    /**
+     * Show a prompt
+     *
+     * @return void
+     */
+    abstract public function show();
 
     /**
      * Return last answer to this prompt.
@@ -49,7 +52,7 @@ abstract class AbstractPrompt implements PromptInterface
     /**
      * Return console adapter to use when showing prompt.
      *
-     * @return \Zend\Console\AdapterInterface
+     * @return ConsoleAdapter
      */
     public function getConsole()
     {
@@ -63,11 +66,33 @@ abstract class AbstractPrompt implements PromptInterface
     /**
      * Set console adapter to use when showing prompt.
      *
-     * @param \Zend\Console\AdapterInterface $adapter
+     * @param ConsoleAdapter $adapter
      */
     public function setConsole(ConsoleAdapter $adapter)
     {
         $this->console = $adapter;
     }
 
+    /**
+     * Create an instance of this prompt, show it and return response.
+     *
+     * This is a convenience method for creating statically creating prompts, i.e.:
+     *
+     *      $name = Zend\Console\Prompt\Line::prompt("Enter your name: ");
+     *
+     * @return mixed
+     * @throws Exception\BadMethodCallException
+     */
+    public static function prompt()
+    {
+        if (get_called_class() === __CLASS__) {
+            throw new Exception\BadMethodCallException(
+                'Cannot call prompt() on AbstractPrompt class. Use one of the Zend\Console\Prompt\ subclasses.'
+            );
+        }
+
+        $refl     = new ReflectionClass(get_called_class());
+        $instance = $refl->newInstanceArgs(func_get_args());
+        return $instance->show();
+    }
 }

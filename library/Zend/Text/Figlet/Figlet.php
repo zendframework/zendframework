@@ -12,6 +12,7 @@ namespace Zend\Text\Figlet;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Text\Figlet is a PHP implementation of FIGlet
@@ -137,7 +138,7 @@ class Figlet
     protected $userSmush = 0;
 
     /**
-     * Wether to handle paragraphs || not
+     * Whether to handle paragraphs || not
      *
      * @var boolean
      */
@@ -199,7 +200,7 @@ class Figlet
     protected $outlineLength = 0;
 
     /**
-     * Maxmimum outline length
+     * Maximum outline length
      *
      * @var integer
      */
@@ -317,7 +318,7 @@ class Figlet
     /**
      * Set handling of paragraphs
      *
-     * @param  boolean $handleParagraphs Wether to handle paragraphs or not
+     * @param  boolean $handleParagraphs Whether to handle paragraphs or not
      * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
@@ -426,10 +427,13 @@ class Figlet
 
         $wordBreakMode  = 0;
         $lastCharWasEol = false;
-        $textLength     = @iconv_strlen($text, 'UTF-8');
+
+        ErrorHandler::start(E_NOTICE);
+        $textLength = iconv_strlen($text, 'UTF-8');
+        $error      = ErrorHandler::stop();
 
         if ($textLength === false) {
-            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
+            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding, 0, $error);
         }
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
@@ -1092,7 +1096,7 @@ class Figlet
     }
 
     /**
-     * Set the used smush mode, according to smush override, user smsush and
+     * Set the used smush mode, according to smush override, user smush and
      * font smush.
      *
      * @return void

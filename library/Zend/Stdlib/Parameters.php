@@ -21,7 +21,6 @@ class Parameters extends ArrayObject implements ParametersInterface
      * elements.
      *
      * @param  array $values
-     * @return void
      */
     public function __construct(array $values = null)
     {

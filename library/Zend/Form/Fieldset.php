@@ -11,7 +11,6 @@
 namespace Zend\Form;
 
 use Traversable;
-use Zend\Form\Element\Collection;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\PriorityQueue;
@@ -186,8 +185,8 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            if ($elementOrFieldset instanceof Collection) {
-                $elementOrFieldset->prepareCollection();
+            if ($elementOrFieldset instanceof FieldsetPrepareAwareInterface) {
+                $elementOrFieldset->prepareFieldset();
             }
 
             $this->fieldsets[$name] = $elementOrFieldset;
@@ -367,7 +366,7 @@ class Fieldset extends Element implements FieldsetInterface
     {
         $name = $this->getName();
 
-        foreach($this->byName as $elementOrFieldset) {
+        foreach ($this->byName as $elementOrFieldset) {
             $elementOrFieldset->setName($name . '[' . $elementOrFieldset->getName() . ']');
 
             // Recursively prepare elements
@@ -462,6 +461,17 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param object $object
+     * @return boolean
+     */
+    public function allowObjectBinding($object)
+    {
+        return ($this->object && $object instanceof $this->object);
+    }
+
+    /**
      * Set the hydrator to use when binding an object to the element
      *
      * @param  HydratorInterface $hydrator
@@ -489,6 +499,16 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Checks if this fieldset can bind data
+     *
+     * @return boolean
+     */
+    public function allowValueBinding()
+    {
+        return is_object($this->object);
+    }
+
+    /**
      * Bind values to the bound object
      *
      * @param array $values
@@ -506,9 +526,7 @@ class Fieldset extends Element implements FieldsetInterface
 
             $element = $this->byName[$name];
 
-            if ($element instanceof Collection) {
-                $value = $element->bindValues($value);
-            } elseif ($element instanceof FieldsetInterface && is_object($element->object)) {
+            if($element instanceof FieldsetInterface && $element->allowValueBinding()) {
                 $value = $element->bindValues($value);
             }
 
@@ -554,6 +572,7 @@ class Fieldset extends Element implements FieldsetInterface
         if (!is_object($this->object)) {
             return array();
         }
+
         $hydrator = $this->getHydrator();
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
             return array();
@@ -573,11 +592,8 @@ class Fieldset extends Element implements FieldsetInterface
             if (isset($values[$name])) {
                 $object = $values[$name];
 
-                // Is the object bound to the fieldset of the same type ? Note that we are using a little hack
-                // here, as in case of collection, we bind array to object instance, and let the collection extract
-                // the data
-                if ($fieldset instanceof Collection || (is_object($object) && $fieldset->object && $object instanceof $fieldset->object)) {
-                    $fieldset->object = $object;
+                if ($fieldset->allowObjectBinding($object)) {
+                    $fieldset->setObject($object);
                     $values[$name] = $fieldset->extract();
                 }
             }

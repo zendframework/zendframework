@@ -16,6 +16,7 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
+use Zend\Form\FieldsetPrepareAwareInterface;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\ArrayUtils;
@@ -25,7 +26,7 @@ use Zend\Stdlib\ArrayUtils;
  * @package    Zend_Form
  * @subpackage Element
  */
-class Collection extends Fieldset
+class Collection extends Fieldset implements FieldsetPrepareAwareInterface
 {
     /**
      * Default template placeholder
@@ -125,6 +126,41 @@ class Collection extends Fieldset
         return $this;
     }
 
+
+    /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param object $object
+     * @return boolean
+     */
+    public function allowObjectBinding($object)
+    {
+        return true;
+    }
+
+    /**
+     * Set the object used by the hydrator
+     * In this case the "object" is a collection of objects
+     *
+     * @param  array|\Traversable $object
+     * @return Fieldset|FieldsetInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setObject($object)
+    {
+        if (!is_array($object) && !$object instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object argument; received "%s"',
+                __METHOD__,
+                (is_object($object) ? get_class($object) : gettype($object))
+            ));
+        }
+
+        $this->object = $object;
+        return $this;
+    }
+
+
     /**
      * Populate values
      *
@@ -197,7 +233,24 @@ class Collection extends Fieldset
 
                 $this->add($elementOrFieldset);
             }
+        } elseif (!empty($data) && !$this->allowAdd) {
+            throw new Exception\DomainException(sprintf(
+                'There are more elements than specified in the collection (%s). Either set the allow_add option ' .
+                'to true, or re-submit the form.',
+                get_class($this)
+                )
+            );
         }
+    }
+
+    /**
+     * Checks if this fieldset can bind data
+     *
+     * @return boolean
+     */
+    public function allowValueBinding()
+    {
+        return true;
     }
 
     /**
@@ -439,7 +492,7 @@ class Collection extends Fieldset
      *
      * @return void
      */
-    protected function prepareCollection()
+    public function prepareFieldset()
     {
         if ($this->targetElement !== null) {
             for ($i = 0 ; $i != $this->count ; ++$i) {

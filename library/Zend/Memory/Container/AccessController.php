@@ -17,7 +17,7 @@ namespace Zend\Memory\Container;
  * So container objects always have at least one reference and can't be automatically destroyed.
  *
  * This class is intended to be an userland proxy to memory container object.
- * It's not referenced by memory manager and class destructor is invoked immidiately after gouing
+ * It's not referenced by memory manager and class destructor is invoked immediately after going
  * out of scope or unset operation.
  *
  * Class also provides Zend\Memory\Container interface and works as proxy for such cases.

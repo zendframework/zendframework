@@ -1,42 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Http;
 
-use Zend\EventManager\EventCollection;
-use Zend\EventManager\ListenerAggregate;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Request as HttpRequest;
 use Zend\Console\Request as ConsoleRequest;
-use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
-use Zend\View\Model as ViewModel;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InjectRoutematchParamsListener implements ListenerAggregate
+class InjectRoutematchParamsListener implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -53,10 +38,10 @@ class InjectRoutematchParamsListener implements ListenerAggregate
     /**
      * Attach the aggregate to the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('dispatch', array($this, 'injectParams'), 90);
     }
@@ -64,10 +49,10 @@ class InjectRoutematchParamsListener implements ListenerAggregate
     /**
      * Detach listeners
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {
@@ -88,22 +73,22 @@ class InjectRoutematchParamsListener implements ListenerAggregate
         $request = $e->getRequest();
 
         /** @var $params \Zend\Stdlib\Parameters */
-        if($request instanceof ConsoleRequest){
+        if ($request instanceof ConsoleRequest) {
             $params = $request->params();
-        }elseif($request instanceof HttpRequest){
+        } elseif ($request instanceof HttpRequest) {
             $params = $request->get();
-        }else{
+        } else {
             // unsupported request type
             return;
         }
 
-        if($this->overwrite){
-            foreach($routeMatchParams as $key=>$val){
+        if ($this->overwrite) {
+            foreach ($routeMatchParams as $key => $val) {
                 $params->$key = $val;
             }
-        }else{
-            foreach($routeMatchParams as $key=>$val){
-                if(!$params->offsetExists($key)){
+        } else {
+            foreach ($routeMatchParams as $key => $val) {
+                if (!$params->offsetExists($key)) {
                     $params->$key = $val;
                 }
             }

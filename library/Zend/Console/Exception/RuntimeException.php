@@ -29,7 +29,6 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
      *
      * @param string $message
      * @param string $usage
-     * @return void
      */
     public function __construct($message, $usage = '')
     {

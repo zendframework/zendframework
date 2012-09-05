@@ -11,6 +11,7 @@
 namespace Zend\Json\Server;
 
 use Zend\Server\Cache as ServerCache;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
@@ -38,7 +39,11 @@ class Cache extends ServerCache
             return false;
         }
 
-        if (0 === @file_put_contents($filename, $server->getServiceMap()->toJson())) {
+        ErrorHandler::start();
+        $test = file_put_contents($filename, $server->getServiceMap()->toJson());
+        ErrorHandler::stop();
+
+        if (0 === $test) {
             return false;
         }
 
@@ -63,8 +68,11 @@ class Cache extends ServerCache
             return false;
         }
 
+        ErrorHandler::start();
+        $smd = file_get_contents($filename);
+        ErrorHandler::stop();
 
-        if (false === ($smd = @file_get_contents($filename))) {
+        if (false === $smd) {
             return false;
         }
 

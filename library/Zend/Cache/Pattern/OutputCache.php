@@ -31,6 +31,7 @@ class OutputCache extends AbstractPattern
      * Set options
      *
      * @param  PatternOptions $options
+     * @return OutputCache
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions(PatternOptions $options)
@@ -72,7 +73,7 @@ class OutputCache extends AbstractPattern
     }
 
     /**
-     * Stops bufferung output, write buffered data to cache using the given key on start()
+     * Stops buffering output, write buffered data to cache using the given key on start()
      * and displays the buffer.
      *
      * @return boolean TRUE on success, FALSE on failure writing to cache

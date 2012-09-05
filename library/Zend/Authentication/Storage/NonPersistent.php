@@ -31,7 +31,6 @@ class NonPersistent implements StorageInterface
     /**
      * Returns true if and only if storage is empty
      *
-     * @throws Zend\Authentication\Storage\Exception If it is impossible to determine whether storage is empty
      * @return boolean
      */
     public function isEmpty()

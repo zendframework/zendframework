@@ -11,6 +11,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend
@@ -36,6 +37,15 @@ class FormSubmit extends FormInput
         'formtarget'     => true,
         'type'           => true,
         'value'          => true,
+    );
+
+    /**
+     * Translatable attributes
+     *
+     * @var array
+     */
+    protected $translatableAttributes = array(
+        'value' => true
     );
 
     /**

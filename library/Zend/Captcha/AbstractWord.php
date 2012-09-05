@@ -137,7 +137,7 @@ abstract class AbstractWord extends AbstractAdapter
     }
 
     /**
-     * Retrieve word length to use when genrating captcha
+     * Retrieve word length to use when generating captcha
      *
      * @return integer
      */
@@ -175,7 +175,7 @@ abstract class AbstractWord extends AbstractAdapter
      * Set captcha identifier
      *
      * @param string $id
-     * return Word
+     * @return AbstractWord
      */
     protected function setId ($id)
     {
@@ -347,7 +347,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Generate a random identifier
      *
-     * @return void
+     * @return string
      */
     protected function generateRandomId()
     {

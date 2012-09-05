@@ -21,7 +21,7 @@ use Zend\Math\BigInteger;
  * function acts likes a factory for the Zend\XmlRpc\Value objects
  *
  * Using this function, users/Zend\XmlRpc\Client object can create the Zend\XmlRpc\Value objects
- * from PHP variables, XML string or by specifing the exact XML-RPC natvie type
+ * from PHP variables, XML string or by specifying the exact XML-RPC natvie type
  *
  * @package    Zend_XmlRpc
  */
@@ -47,7 +47,7 @@ abstract class AbstractValue
     protected $xml;
 
     /**
-     * @var Zend\XmlRpc\Generator\GeneratorAbstract
+     * @var \Zend\XmlRpc\Generator\GeneratorInterface
      */
     protected static $generator;
 
@@ -167,7 +167,7 @@ abstract class AbstractValue
      * A XmlRpcValue object can be created in 3 ways:
      * 1. Autodetecting the native type out of a PHP variable
      *    (if $type is not set or equal to Value::AUTO_DETECT_TYPE)
-     * 2. By specifing the native type ($type is one of the Value::XMLRPC_TYPE_* constants)
+     * 2. By specifying the native type ($type is one of the Value::XMLRPC_TYPE_* constants)
      * 3. From a XML string ($type is set to Value::XML_STRING)
      *
      * By default the value type is autodetected according to it's PHP type
@@ -269,7 +269,7 @@ abstract class AbstractValue
     /**
      * Transform a PHP native variable into a XML-RPC native value
      *
-     * @param mixed $value The PHP variable for convertion
+     * @param mixed $value The PHP variable for conversion
      *
      * @return AbstractValue
      * @static
@@ -323,10 +323,10 @@ abstract class AbstractValue
     /**
      * Transform an XML string into a XML-RPC native value
      *
-     * @param string|SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
-     * It can be also a valid XML string for convertion
+     * @param string|\SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
+     * It can be also a valid XML string for conversion
      *
-     * @return Zend\XmlRpc\Value\AbstractValue
+     * @return \Zend\XmlRpc\AbstractValue
      * @static
      */
     protected static function _xmlStringToNativeXmlRpc($xml)
@@ -392,7 +392,7 @@ abstract class AbstractValue
                 break;
             case self::XMLRPC_TYPE_STRUCT:
                 $values = array();
-                // Parse all the memebers of the struct from the XML string
+                // Parse all the members of the struct from the XML string
                 // (simple xml element) to Value objects
                 foreach ($value->member as $member) {
                     // @todo? If a member doesn't have a <value> tag, we don't add it to the struct
@@ -431,7 +431,7 @@ abstract class AbstractValue
     /**
      * Extract XML/RPC type and value from SimpleXMLElement object
      *
-     * @param SimpleXMLElement $xml
+     * @param \SimpleXMLElement $xml
      * @param string &$type Type bind variable
      * @param string &$value Value bind variable
      * @return void

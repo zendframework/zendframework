@@ -47,10 +47,9 @@ class MongoDB extends AbstractWriter
      * Constructor
      *
      * @param Mongo|array|Traversable $mongo
-     * @param string $database
+     * @param string|MongoDB $database
      * @param string $collection
-     * @param array  $saveOptions
-     * @return Zend\Log\Writer\MongoDB
+     * @param array $saveOptions
      */
     public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {
@@ -63,13 +62,13 @@ class MongoDB extends AbstractWriter
             $collection  = isset($mongo['collection']) ? $mongo['collection'] : null;
             if (null === $collection) {
                 throw new Exception\InvalidArgumentException(
-                    'The collection parameter cannot be emtpy'
+                    'The collection parameter cannot be empty'
                 );
             }
             $database = isset($mongo['database']) ? $mongo['database'] : null;
             if (null === $database) {
                 throw new Exception\InvalidArgumentException(
-                    'The database parameter cannot be emtpy'
+                    'The database parameter cannot be empty'
                 );
             }
             $mongo = isset($mongo['mongo']) ? $mongo['mongo'] : null;

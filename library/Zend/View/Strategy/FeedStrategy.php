@@ -40,7 +40,6 @@ class FeedStrategy implements ListenerAggregateInterface
      * Constructor
      *
      * @param  FeedRenderer $renderer
-     * @return void
      */
     public function __construct(FeedRenderer $renderer)
     {

@@ -453,7 +453,7 @@ class Encoder
          * Iterate over every character in the string,
          * escaping with a slash or encoding to UTF-8 where necessary
          */
-        for($i = 0; $i < $strlen_var; $i++) {
+        for ($i = 0; $i < $strlen_var; $i++) {
             $ord_var_c = ord($value[$i]);
 
             switch (true) {
@@ -531,7 +531,7 @@ class Encoder
      *
      * Normally should be handled by mb_convert_encoding, but
      * provides a slower PHP-only method for installations
-     * that lack the multibye string extension.
+     * that lack the multibyte string extension.
      *
      * This method is from the Solar Framework by Paul M. Jones
      *
@@ -542,7 +542,7 @@ class Encoder
     protected static function _utf82utf16($utf8)
     {
         // Check for mb extension otherwise do by hand.
-        if( function_exists('mb_convert_encoding') ) {
+        if (function_exists('mb_convert_encoding')) {
             return mb_convert_encoding($utf8, 'UTF-16', 'UTF-8');
         }
 

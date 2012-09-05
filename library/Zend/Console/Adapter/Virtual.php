@@ -10,10 +10,7 @@
 
 namespace Zend\Console\Adapter;
 
-use Zend\Console\AdapterInterface;
-use Zend\Console\ColorInterface;
-use Zend\Console\CharsetInterface;
-use Zend\Console;
+use Zend\Console\Charset;
 
 /**
  * Virtual buffer adapter
@@ -22,10 +19,20 @@ use Zend\Console;
  * @package    Zend_Console
  * @subpackage Adapter
  */
-class Virtual extends AbstractAdapter implements AdapterInterface
+class Virtual extends AbstractAdapter
 {
+    /**
+     * Whether or not mbstring is enabled
+     *
+     * @var null|bool
+     */
     protected static $hasMBString;
 
+    /**
+     * Results of mode system command
+     *
+     * @var mixed
+     */
     protected $modeResult;
 
     /**
@@ -40,14 +47,12 @@ class Virtual extends AbstractAdapter implements AdapterInterface
             return $width;
         }
 
-        /**
-         * Try to read console size from "mode" command
-         */
+        // Try to read console size from "mode" command
         if ($this->modeResult === null) {
             $this->runProbeCommand();
         }
 
-        if (preg_match('/Columns\:\s+(\d+)/',$this->modeResult,$matches)) {
+        if (preg_match('/Columns\:\s+(\d+)/', $this->modeResult, $matches)) {
             $width = $matches[1];
         } else {
             $width = parent::getWidth();
@@ -68,14 +73,12 @@ class Virtual extends AbstractAdapter implements AdapterInterface
             return $height;
         }
 
-        /**
-         * Try to read console size from "mode" command
-         */
+        // Try to read console size from "mode" command
         if ($this->modeResult === null) {
             $this->runProbeCommand();
         }
 
-        if (preg_match('/Rows\:\s+(\d+)/',$this->modeResult,$matches)) {
+        if (preg_match('/Rows\:\s+(\d+)/', $this->modeResult, $matches)) {
             $height = $matches[1];
         } else {
             $height = parent::getHeight();
@@ -84,13 +87,18 @@ class Virtual extends AbstractAdapter implements AdapterInterface
         return $height;
     }
 
+    /**
+     * Run and store the results of mode command
+     *
+     * @return void
+     */
     protected function runProbeCommand()
     {
-        exec('mode',$output,$return);
+        exec('mode', $output, $return);
         if ($return || !count($output)) {
             $this->modeResult = '';
         } else {
-            $this->modeResult = trim(implode('',$output));
+            $this->modeResult = trim(implode('', $output));
         }
     }
 
@@ -101,15 +109,13 @@ class Virtual extends AbstractAdapter implements AdapterInterface
      */
     public function isUtf8()
     {
-        /**
-         * Try to read code page info from "mode" command
-         */
+        // Try to read code page info from "mode" command
         if ($this->modeResult === null) {
             $this->runProbeCommand();
         }
 
-        if (preg_match('/Code page\:\s+(\d+)/',$this->modeResult,$matches)) {
-            return (int)$matches[1] == 65001;
+        if (preg_match('/Code page\:\s+(\d+)/', $this->modeResult, $matches)) {
+            return (int) $matches[1] == 65001;
         }
 
         return false;
@@ -117,12 +123,12 @@ class Virtual extends AbstractAdapter implements AdapterInterface
 
     /**
      * Set cursor position
-     * @param int   $x
-     * @param int   $y
+     *
+     * @param int $x
+     * @param int $y
      */
     public function setPos($x, $y)
     {
-
     }
 
     /**
@@ -132,23 +138,21 @@ class Virtual extends AbstractAdapter implements AdapterInterface
      */
     public function getTitle()
     {
-        /**
-         * Try to use powershell to retrieve console window title
-         */
-        exec('powershell -command "write $Host.UI.RawUI.WindowTitle"',$output,$result);
+        // Try to use powershell to retrieve console window title
+        exec('powershell -command "write $Host.UI.RawUI.WindowTitle"', $output, $result);
         if ($result || !$output) {
             return '';
         }
 
-        return trim($output,"\r\n");
+        return trim($output, "\r\n");
     }
 
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\CharsetInterface $charset
+     * @param Charset\CharsetInterface $charset
      */
-    public function setCharset(CharsetInterface $charset)
+    public function setCharset(Charset\CharsetInterface $charset)
     {
         $this->charset = $charset;
     }
@@ -156,7 +160,7 @@ class Virtual extends AbstractAdapter implements AdapterInterface
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\CharsetInterface $charset
+     * @return Charset\CharsetInterface $charset
      */
     public function getCharset()
     {
@@ -168,16 +172,20 @@ class Virtual extends AbstractAdapter implements AdapterInterface
     }
 
     /**
-     * @return \Zend\Console\Charset\AsciiExtended
+     * @return Charset\AsciiExtended
      */
     public function getDefaultCharset()
     {
         return new Charset\AsciiExtended;
     }
 
+    /**
+     * Switch to UTF mode
+     *
+     * @return void
+     */
     protected function switchToUtf8()
     {
-        `mode con cp select=65001`;
+        shell_exec('mode con cp select=65001');
     }
-
 }

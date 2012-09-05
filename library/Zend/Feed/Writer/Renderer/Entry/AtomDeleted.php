@@ -26,7 +26,6 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      * Constructor
      *
      * @param  Writer\Deleted $container
-     * @return void
      */
     public function __construct (Writer\Deleted $container)
     {
@@ -63,7 +62,7 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      */
     protected function _setComment(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getComment()) {
+        if (!$this->getDataContainer()->getComment()) {
             return;
         }
         $c = $dom->createElement('at:comment');

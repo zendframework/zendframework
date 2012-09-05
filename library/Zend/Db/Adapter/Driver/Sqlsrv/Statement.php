@@ -83,20 +83,29 @@ class Statement implements StatementInterface
      * (there will need to already be a bound param set if it applies to this query)
      *
      * @param resource
+     * @return Statement
      */
     public function initialize($resource)
     {
+        $resourceType = get_resource_type($resource);
+        if ($resourceType != 'SQL Server Connection' && $resourceType != 'SQL Server Statement') {
+            throw new Exception\InvalidArgumentException('Invalid resource provided to ' . __CLASS__);
+        }
+
         $this->sqlsrv = $resource;
+        return $this;
     }
 
     /**
      * Set parameter container
      *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -105,6 +114,16 @@ class Statement implements StatementInterface
     public function getParameterContainer()
     {
         return $this->parameterContainer;
+    }
+
+    /**
+     * @param $resource
+     * @return Statement
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+        return $this;
     }
 
     /**
@@ -119,10 +138,12 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+        return $this;
     }
 
     /**
@@ -137,6 +158,7 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function prepare($sql = null)
     {
@@ -153,6 +175,7 @@ class Statement implements StatementInterface
         $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef);
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**
@@ -167,7 +190,7 @@ class Statement implements StatementInterface
      * Execute
      *
      * @param  array|ParameterContainer $parameters
-     * @return type
+     * @return Result
      */
     public function execute($parameters = null)
     {

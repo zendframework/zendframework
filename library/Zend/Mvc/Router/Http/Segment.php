@@ -329,7 +329,7 @@ class Segment implements RouteInterface
         $params        = array();
 
         foreach ($this->paramMap as $index => $name) {
-            if (isset($matches[$index])) {
+            if (isset($matches[$index]) && $matches[$index] !== '') {
                 $params[$name] = urldecode($matches[$index]);
             }
         }

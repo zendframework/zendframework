@@ -11,6 +11,7 @@
 namespace Zend\ProgressBar\Adapter;
 
 use Zend\ProgressBar\Adapter\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_ProgressBar_Adapter_Console offers a text-based progressbar for console
@@ -122,7 +123,7 @@ class Console extends AbstractAdapter
     protected $textWidth = 20;
 
     /**
-     * Wether the output started yet or not
+     * Whether the output started yet or not
      *
      * @var boolean
      */
@@ -169,17 +170,19 @@ class Console extends AbstractAdapter
      */
     public function setOutputStream($resource)
     {
-       $stream = @fopen($resource, 'w');
+        ErrorHandler::start();
+        $stream = fopen($resource, 'w');
+        $error  = ErrorHandler::stop();
 
-       if ($stream === false) {
-            throw new Exception\RuntimeException('Unable to open stream');
-       }
+        if ($stream === false) {
+            throw new Exception\RuntimeException('Unable to open stream', 0, $error);
+        }
 
-       if ($this->outputStream !== null) {
-           fclose($this->outputStream);
-       }
+        if ($this->outputStream !== null) {
+            fclose($this->outputStream);
+        }
 
-       $this->outputStream = $stream;
+        $this->outputStream = $stream;
     }
 
     /**
@@ -220,11 +223,13 @@ class Console extends AbstractAdapter
                 $this->width = 80;
 
                 // Try to determine the width through stty
-                if (preg_match('#\d+ (\d+)#', @shell_exec('stty size'), $match) === 1) {
+                ErrorHandler::start();
+                if (preg_match('#\d+ (\d+)#', shell_exec('stty size'), $match) === 1) {
                     $this->width = (int) $match[1];
-                } elseif (preg_match('#columns = (\d+);#', @shell_exec('stty'), $match) === 1) {
+                } elseif (preg_match('#columns = (\d+);#', shell_exec('stty'), $match) === 1) {
                     $this->width = (int) $match[1];
                 }
+                ErrorHandler::stop();
             }
         } else {
             $this->width = (int) $width;
@@ -239,7 +244,7 @@ class Console extends AbstractAdapter
      * Set the elements to display with the progressbar
      *
      * @param  array $elements
-     * @throws \Zend\ProgressBar\Adapter\Exception When an invalid element is foudn in the array
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When an invalid element is found in the array
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setElements(array $elements)
@@ -264,7 +269,7 @@ class Console extends AbstractAdapter
      * Set the left-hand character for the bar
      *
      * @param  string $char
-     * @throws \Zend\ProgressBar\Adapter\Exception When character is empty
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When character is empty
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setBarLeftChar($char)
@@ -282,7 +287,7 @@ class Console extends AbstractAdapter
      * Set the right-hand character for the bar
      *
      * @param  string $char
-     * @throws \Zend\ProgressBar\Adapter\Exception When character is empty
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When character is empty
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setBarRightChar($char)
@@ -338,7 +343,7 @@ class Console extends AbstractAdapter
      * Set the finish action
      *
      * @param  string $action
-     * @throws \Zend\ProgressBar\Adapter\Exception When an invalid action is specified
+     * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When an invalid action is specified
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setFinishAction($action)

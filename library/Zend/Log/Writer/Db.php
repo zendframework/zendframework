@@ -14,6 +14,7 @@ use Traversable;
 use Zend\Db\Adapter\Adapter;
 use Zend\Log\Exception;
 use Zend\Log\Formatter;
+use Zend\Log\Formatter\Db as DbFormatter;
 
 /**
  * @category   Zend
@@ -62,7 +63,7 @@ class Db extends AbstractWriter
      * @return Db
      * @throw Exception\InvalidArgumentException
      */
-    public function __construct($db, $tableName, array $columnMap = null, $separator = null)
+    public function __construct($db, $tableName = null, array $columnMap = null, $separator = null)
     {
         if ($db instanceof Traversable) {
             $db = iterator_to_array($db);
@@ -79,6 +80,11 @@ class Db extends AbstractWriter
             throw new Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
         }
 
+        $tableName = (string) $tableName;
+        if ('' === $tableName){
+            throw new Exception\InvalidArgumentException('You must specify a table name. Either directly in the constructor, or via options');
+        }
+
         $this->db        = $db;
         $this->tableName = $tableName;
         $this->columnMap = $columnMap;
@@ -86,18 +92,8 @@ class Db extends AbstractWriter
         if (!empty($separator)) {
             $this->separator = $separator;
         }
-    }
 
-    /**
-     * Formatting is not possible on this writer
-     *
-     * @param Formatter\FormatterInterface $formatter
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setFormatter(Formatter\FormatterInterface $formatter)
-    {
-        throw new Exception\InvalidArgumentException(get_class() . ' does not support formatting');
+        $this->setFormatter(new DbFormatter());
     }
 
     /**
@@ -122,6 +118,8 @@ class Db extends AbstractWriter
         if (null === $this->db) {
             throw new Exception\RuntimeException('Database adapter is null');
         }
+
+        $event = $this->formatter->format($event);
 
         // Transform the event array into fields
         if (null === $this->columnMap) {

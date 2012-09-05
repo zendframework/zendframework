@@ -118,7 +118,7 @@ class CacheControl implements HeaderInterface
     }
 
     /**
-     * Assembles the directives into a comma-delimeted string
+     * Assembles the directives into a comma-delimited string
      *
      * @return string
      */
@@ -223,6 +223,7 @@ class CacheControl implements HeaderInterface
      * @param array $tokens
      * @param string $string
      * @param string $lastMatch
+     * @return int
      */
     protected static function match($tokens, &$string, &$lastMatch)
     {

@@ -35,14 +35,14 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     protected $table = null;
 
     /**
-     * @var string
+     * @var array
      */
     protected $primaryKeyColumn = null;
 
     /**
      * @var array
      */
-    protected $originalData = null;
+    protected $primaryKeyData = null;
 
     /**
      * @var array
@@ -81,6 +81,8 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
 
         if ($this->primaryKeyColumn == null) {
             throw new Exception\RuntimeException('This row object does not have a primary key column set.');
+        } elseif (is_string($this->primaryKeyColumn)) {
+            $this->primaryKeyColumn = (array) $this->primaryKeyColumn;
         }
 
         if (!$this->sql instanceof Sql) {
@@ -93,29 +95,21 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     }
 
     /**
-     * Populate Original Data
-     *
-     * @param  array $originalData
-     * @param  boolean $originalDataIsCurrent
-     * @return RowGateway
-     */
-    public function populateOriginalData(array $originalData)
-    {
-        $this->originalData = $originalData;
-        return $this;
-    }
-
-    /**
      * Populate Data
      *
-     * @param  array $currentData
-     * @return RowGateway
+     * @param  array $rowData
+     * @param  bool  $rowExistsInDatabase
+     * @return AbstractRowGateway
      */
-    public function populate(array $rowData, $isOriginal = null)
+    public function populate(array $rowData, $rowExistsInDatabase = false)
     {
+        $this->initialize();
+
         $this->data = $rowData;
-        if ($isOriginal == true || ($isOriginal == null && empty($this->originalData))) {
-            $this->populateOriginalData($rowData);
+        if ($rowExistsInDatabase == true) {
+            $this->processPrimaryKeyData();
+        } else {
+            $this->primaryKeyData = null;
         }
 
         return $this;
@@ -137,17 +131,22 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      */
     public function save()
     {
-        if (is_array($this->primaryKeyColumn)) {
-            // @todo compound primary keys
-            throw new Exception\RuntimeException('Compound primary keys are currently not supported, but are on the TODO list.');
-        }
+        $this->initialize();
 
-        if (isset($this->originalData[$this->primaryKeyColumn])) {
+        if ($this->rowExistsInDatabase()) {
 
             // UPDATE
-            $where = array($this->primaryKeyColumn => $this->originalData[$this->primaryKeyColumn]);
+
             $data = $this->data;
-            unset($data[$this->primaryKeyColumn]);
+            $where = array();
+
+            // primary key is always an array even if its a single column
+            foreach ($this->primaryKeyColumn as $pkColumn) {
+                $where[$pkColumn] = $this->primaryKeyData[$pkColumn];
+                if ($data[$pkColumn] == $this->primaryKeyData[$pkColumn]) {
+                    unset($data[$pkColumn]);
+                }
+            }
 
             $statement = $this->sql->prepareStatementForSqlObject($this->sql->update()->set($data)->where($where));
             $result = $statement->execute();
@@ -163,11 +162,21 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             $statement = $this->sql->prepareStatementForSqlObject($insert);
 
             $result = $statement->execute();
-            $primaryKeyValue = $result->getGeneratedValue();
+            if (($primaryKeyValue = $result->getGeneratedValue()) && count($this->primaryKeyColumn) == 1) {
+                $this->primaryKeyData = array($this->primaryKeyColumn[0] => $primaryKeyValue);
+            } else {
+                // make primary key data available so that $where can be complete
+                $this->processPrimaryKeyData();
+            }
             $rowsAffected = $result->getAffectedRows();
             unset($statement, $result); // cleanup
 
-            $where = array($this->primaryKeyColumn => $primaryKeyValue);
+            $where = array();
+            // primary key is always an array even if its a single column
+            foreach ($this->primaryKeyColumn as $pkColumn) {
+                $where[$pkColumn] = $this->primaryKeyData[$pkColumn];
+            }
+
         }
 
         // refresh data
@@ -186,16 +195,27 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     /**
      * Delete
      *
-     * @return void
+     * @return int
      */
     public function delete()
     {
-        if (is_array($this->primaryKeyColumn)) {
-            // @todo compound primary keys
+        $this->initialize();
+
+        $where = array();
+        // primary key is always an array even if its a single column
+        foreach ($this->primaryKeyColumn as $pkColumn) {
+            $where[$pkColumn] = $this->primaryKeyData[$pkColumn];
         }
 
-        $where = array($this->primaryKeyColumn => $this->originalData[$this->primaryKeyColumn]);
-        //return $this->tableGateway->delete($where);
+        // @todo determine if we need to do a select to ensure 1 row will be affected
+
+        $statement = $this->sql->prepareStatementForSqlObject($this->sql->delete()->where($where));
+        $result = $statement->execute();
+
+        if ($result->getAffectedRows() == 1) {
+            // detach from database
+            $this->primaryKeyData = null;
+        }
     }
 
     /**
@@ -237,7 +257,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * Offset unset
      *
      * @param  string $offset
-     * @return RowGateway
+     * @return AbstractRowGateway
      */
     public function offsetUnset($offset)
     {
@@ -311,4 +331,27 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     {
         $this->offsetUnset($name);
     }
+
+    /**
+     * @return bool
+     */
+    public function rowExistsInDatabase()
+    {
+        return ($this->primaryKeyData !== null);
+    }
+
+    /**
+     * @throws Exception\RuntimeException
+     */
+    protected function processPrimaryKeyData()
+    {
+        $this->primaryKeyData = array();
+        foreach ($this->primaryKeyColumn as $column) {
+            if (!isset($this->data[$column])) {
+                throw new Exception\RuntimeException('While processing primary key data, a known key ' . $column . ' was not found in the data array');
+            }
+            $this->primaryKeyData[$column] = $this->data[$column];
+        }
+    }
+
 }

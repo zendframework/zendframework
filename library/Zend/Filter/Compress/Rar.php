@@ -215,7 +215,7 @@ class Rar extends AbstractCompressionAlgorithm
             throw new Exception\RuntimeException("Error reading the RAR Archive");
         }
 
-        foreach($filelist as $file) {
+        foreach ($filelist as $file) {
             $file->extract($target);
         }
 

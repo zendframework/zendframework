@@ -86,7 +86,6 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Constructor
      * @param array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -204,6 +203,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Activate/Deactivate the automatic rendering of exception
      * @param boolean $value
+     * @return AbstractRenderer
      */
     public function setAutomaticRenderError($value)
     {

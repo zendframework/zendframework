@@ -74,13 +74,13 @@ class ColumnObject
 
     /**
      *
-     * @var type
+     * @var int
      */
     protected $numericPrecision = null;
 
     /**
      *
-     * @var type
+     * @var int
      */
     protected $numericScale = null;
 
@@ -144,6 +144,7 @@ class ColumnObject
      * Set table name
      *
      * @param string $tableName
+     * @return ColumnObject
      */
     public function setTableName($tableName)
     {
@@ -181,7 +182,7 @@ class ColumnObject
 
     /**
      * @param int $ordinalPosition to set
-     * @return Column
+     * @return ColumnObject
      */
     public function setOrdinalPosition($ordinalPosition)
     {
@@ -190,7 +191,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $columnDefault
+     * @return null|string the $columnDefault
      */
     public function getColumnDefault()
     {
@@ -199,6 +200,7 @@ class ColumnObject
 
     /**
      * @param mixed $columnDefault to set
+     * @return ColumnObject
      */
     public function setColumnDefault($columnDefault)
     {
@@ -216,6 +218,7 @@ class ColumnObject
 
     /**
      * @param bool $isNullable to set
+     * @return ColumnObject
      */
     public function setIsNullable($isNullable)
     {
@@ -232,7 +235,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $dataType
+     * @return null|string the $dataType
      */
     public function getDataType()
     {
@@ -240,7 +243,8 @@ class ColumnObject
     }
 
     /**
-     * @param $dataType the $dataType to set
+     * @param string $dataType the $dataType to set
+     * @return ColumnObject
      */
     public function setDataType($dataType)
     {
@@ -249,7 +253,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $characterMaximumLength
+     * @return int|null the $characterMaximumLength
      */
     public function getCharacterMaximumLength()
     {
@@ -257,7 +261,8 @@ class ColumnObject
     }
 
     /**
-     * @param $characterMaximumLength the $characterMaximumLength to set
+     * @param int $characterMaximumLength the $characterMaximumLength to set
+     * @return ColumnObject
      */
     public function setCharacterMaximumLength($characterMaximumLength)
     {
@@ -266,7 +271,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $characterOctetLength
+     * @return int|null the $characterOctetLength
      */
     public function getCharacterOctetLength()
     {
@@ -274,7 +279,8 @@ class ColumnObject
     }
 
     /**
-     * @param $characterOctetLength the $characterOctetLength to set
+     * @param int $characterOctetLength the $characterOctetLength to set
+     * @return ColumnObject
      */
     public function setCharacterOctetLength($characterOctetLength)
     {
@@ -283,7 +289,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $numericPrecision
+     * @return int the $numericPrecision
      */
     public function getNumericPrecision()
     {
@@ -291,7 +297,8 @@ class ColumnObject
     }
 
     /**
-     * @param $numericPrevision the $numericPrevision to set
+     * @param int $numericPrecision the $numericPrevision to set
+     * @return ColumnObject
      */
     public function setNumericPrecision($numericPrecision)
     {
@@ -300,7 +307,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $numericScale
+     * @return int the $numericScale
      */
     public function getNumericScale()
     {
@@ -308,7 +315,8 @@ class ColumnObject
     }
 
     /**
-     * @param $numericScale the $numericScale to set
+     * @param int $numericScale the $numericScale to set
+     * @return ColumnObject
      */
     public function setNumericScale($numericScale)
     {
@@ -325,7 +333,8 @@ class ColumnObject
     }
 
     /**
-     * @param $numericUnsigned boolean
+     * @param boolean $numericUnsigned
+     * @return ColumnObject
      */
     public function setNumericUnsigned($numericUnsigned)
     {
@@ -342,7 +351,7 @@ class ColumnObject
     }
 
     /**
-     * @return the $errata
+     * @return array the $errata
      */
     public function getErratas()
     {
@@ -350,7 +359,8 @@ class ColumnObject
     }
 
     /**
-     * @return the $errata
+     * @param array $erratas
+     * @return ColumnObject
      */
     public function setErratas(array $erratas)
     {
@@ -362,7 +372,7 @@ class ColumnObject
 
     /**
      * @param string $errataName
-     * @return ColumnMetadata
+     * @return mixed
      */
     public function getErrata($errataName)
     {
@@ -375,7 +385,7 @@ class ColumnObject
     /**
      * @param string $errataName
      * @param mixed $errataValue
-     * @return ColumnMetadata
+     * @return ColumnObject
      */
     public function setErrata($errataName, $errataValue)
     {

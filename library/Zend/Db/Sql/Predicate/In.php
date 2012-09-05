@@ -10,6 +10,9 @@
 
 namespace Zend\Db\Sql\Predicate;
 
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Db
@@ -25,14 +28,13 @@ class In implements PredicateInterface
      *
      * @param  null|string $identifier
      * @param  array $valueSet
-     * @return void
      */
-    public function __construct($identifier = null, array $valueSet = array())
+    public function __construct($identifier = null, $valueSet = null)
     {
         if ($identifier) {
             $this->setIdentifier($identifier);
         }
-        if (!empty($valueSet)) {
+        if ($valueSet) {
             $this->setValueSet($valueSet);
         }
     }
@@ -65,8 +67,13 @@ class In implements PredicateInterface
      * @param  array $valueSet
      * @return In
      */
-    public function setValueSet(array $valueSet)
+    public function setValueSet($valueSet)
     {
+        if (!is_array($valueSet) && !$valueSet instanceof Select) {
+            throw new Exception\InvalidArgumentException(
+                '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
+            );
+        }
         $this->valueSet = $valueSet;
         return $this;
     }
@@ -84,8 +91,14 @@ class In implements PredicateInterface
     public function getExpressionData()
     {
         $values = $this->getValueSet();
-        $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
-        $types  = array_fill(0, count($values), self::TYPE_VALUE);
+        if ($values instanceof Select) {
+            $specification = '%s IN %s';
+            $types = array(self::TYPE_SELECT);
+            $values = array($values);
+        } else {
+            $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
+            $types = array_fill(0, count($values), self::TYPE_VALUE);
+        }
 
         $identifier = $this->getIdentifier();
         array_unshift($values, $identifier);

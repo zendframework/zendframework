@@ -103,6 +103,11 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         }
 
         $elementSpec = $e->getParam('elementSpec');
+        if (isset($elementSpec['spec']['attributes'])) {
+            $elementSpec['spec']['attributes'] = array_merge($elementSpec['spec']['attributes'], $annotation->getAttributes());
+            return;
+        }
+
         $elementSpec['spec']['attributes'] = $annotation->getAttributes();
     }
 
@@ -312,8 +317,18 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             return;
         }
 
+        $required  = (bool) $annotation->getRequired();
         $inputSpec = $e->getParam('inputSpec');
-        $inputSpec['required'] = (bool) $annotation->getRequired();
+        $inputSpec['required'] = $required;
+
+        if ($required) {
+            $elementSpec = $e->getParam('elementSpec');
+            if (!isset($elementSpec['spec']['attributes'])) {
+                $elementSpec['spec']['attributes'] = array();
+            }
+
+            $elementSpec['spec']['attributes']['required'] = 'required';
+        }
     }
 
     /**

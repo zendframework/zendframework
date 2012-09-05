@@ -30,7 +30,7 @@ class MetadataFeature extends AbstractFeature
     /**
      * Constructor
      *
-     * @param Adapter $slaveAdapter
+     * @param MetadataInterface $metadata
      */
     public function __construct(MetadataInterface $metadata = null)
     {
@@ -43,7 +43,7 @@ class MetadataFeature extends AbstractFeature
         );
     }
 
-    public function initialize()
+    public function postInitialize()
     {
         if ($this->metadata == null) {
             $this->metadata = new Metadata($this->tableGateway->adapter);
@@ -75,30 +75,15 @@ class MetadataFeature extends AbstractFeature
             throw new Exception\RuntimeException('A primary key for this column could not be found in the metadata.');
         }
 
-        if (count($pkc->getKeys()) == 1) {
-            $pkck = $pkc->getKeys();
-            $primaryKey = $pkck[0]->getColumnName();
+        if (count($pkc->getColumns()) == 1) {
+            $pkck = $pkc->getColumns();
+            $primaryKey = $pkck[0];
         } else {
-            $primaryKey = array();
-            foreach ($pkc->getKeys() as $key) {
-                /** @var $key \Zend\Db\Metadata\Object\ConstraintKeyObject */
-                $primaryKey[] = $key->getColumnName();
-            }
+            $primaryKey = $pkc->getColumns();
         }
 
         $this->sharedData['metadata']['primaryKey'] = $primaryKey;
-
-        $this->isInitialized = true;
     }
 
-    /**
-     * after initialization, retrieve the original adapter as "master"
-     */
-    public function postInitialize()
-    {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-    }
 
 }

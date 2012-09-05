@@ -11,10 +11,11 @@
 namespace Zend\Db\Sql\Platform;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\PreparableSqlInterface;
 use Zend\Db\Sql\SqlInterface;
+use Zend\Db\Sql\Exception;
 
 class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInterface, SqlInterface
 {
@@ -55,9 +56,10 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
 
     /**
      * @param Adapter $adapter
-     * @return StatementInterface
+     * @param StatementContainerInterface $statement
+     * @return void
      */
-    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
+    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
     {
         if (!$this->subject instanceof PreparableSqlInterface) {
             throw new Exception\RuntimeException('The subject does not appear to implement Zend\Db\Sql\PreparableSqlInterface, thus calling prepareStatement() has no effect');
@@ -73,9 +75,9 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
         }
         if ($decoratorForType) {
             $decoratorForType->setSubject($this->subject);
-            $decoratorForType->prepareStatement($adapter, $statement);
+            $decoratorForType->prepareStatement($adapter, $statementContainer);
         } else {
-            $this->subject->prepareStatement($adapter, $statement);
+            $this->subject->prepareStatement($adapter, $statementContainer);
         }
     }
 

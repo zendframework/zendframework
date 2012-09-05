@@ -39,7 +39,7 @@ class Debug
     }
 
     /**
-     * Set the debug ouput environment.
+     * Set the debug output environment.
      * Setting a value of null causes Zend_Debug to use PHP_SAPI.
      *
      * @param string $sapi
@@ -77,7 +77,7 @@ class Debug
                     . PHP_EOL . $output
                     . PHP_EOL;
         } else {
-            if(!extension_loaded('xdebug')) {
+            if (!extension_loaded('xdebug')) {
                 $output = htmlspecialchars($output, ENT_QUOTES);
             }
 

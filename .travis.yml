@@ -17,3 +17,4 @@ script:
 
 notifications:
   irc: "irc.freenode.org#zftalk.2"
+  email: false

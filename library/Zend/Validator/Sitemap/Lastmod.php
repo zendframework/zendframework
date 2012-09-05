@@ -10,6 +10,7 @@
 
 namespace Zend\Validator\Sitemap;
 
+use Zend\Stdlib\ErrorHandler;
 use Zend\Validator\AbstractValidator;
 
 /**
@@ -62,7 +63,9 @@ class Lastmod extends AbstractValidator
         }
 
         $this->setValue($value);
-        $result = @preg_match(self::LASTMOD_REGEX, $value);
+        ErrorHandler::start();
+        $result = preg_match(self::LASTMOD_REGEX, $value);
+        ErrorHandler::stop();
         if ($result != 1) {
             $this->error(self::NOT_VALID);
             return false;

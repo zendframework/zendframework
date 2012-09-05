@@ -10,8 +10,6 @@
 
 namespace Zend\Console\Charset;
 
-use Zend\Console\CharsetInterface;
-
 /**
  * Extended ASCII character set (positions 127+, MS DOS & Windows compatible)
  *

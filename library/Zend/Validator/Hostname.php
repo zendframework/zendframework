@@ -10,6 +10,8 @@
 
 namespace Zend\Validator;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * Please note there are two standalone test scripts for testing IDN characters due to problems
  * with file encoding.
@@ -100,7 +102,7 @@ class Hostname extends AbstractValidator
      * Array for valid Idns
      * @see http://www.iana.org/domains/idn-tables/ Official list of supported IDN Chars
      * (.AC) Ascension Island http://www.nic.ac/pdf/AC-IDN-Policy.pdf
-     * (.AR) Argentinia http://www.nic.ar/faqidn.html
+     * (.AR) Argentina http://www.nic.ar/faqidn.html
      * (.AS) American Samoa http://www.nic.as/idn/chars.cfm
      * (.AT) Austria http://www.nic.at/en/service/technical_information/idn/charset_converter/
      * (.BIZ) International http://www.iana.org/domains/idn-tables/
@@ -516,7 +518,7 @@ class Hostname extends AbstractValidator
                     $regexChars = array(0 => '/^[a-z0-9\x2d]{1,63}$/i');
                     if ($this->getIdnCheck() &&  isset($this->validIdns[strtoupper($this->tld)])) {
                         if (is_string($this->validIdns[strtoupper($this->tld)])) {
-                            $regexChars += include($this->validIdns[strtoupper($this->tld)]);
+                            $regexChars += include ($this->validIdns[strtoupper($this->tld)]);
                         } else {
                             $regexChars += $this->validIdns[strtoupper($this->tld)];
                         }
@@ -544,8 +546,10 @@ class Hostname extends AbstractValidator
 
                         // Check each domain part
                         $checked = false;
-                        foreach($regexChars as $regexKey => $regexChar) {
-                            $status = @preg_match($regexChar, $domainPart);
+                        foreach ($regexChars as $regexKey => $regexChar) {
+                            ErrorHandler::start();
+                            $status = preg_match($regexChar, $domainPart);
+                            ErrorHandler::stop();
                             if ($status > 0) {
                                 $length = 63;
                                 if (array_key_exists(strtoupper($this->tld), $this->idnLength)
@@ -599,8 +603,10 @@ class Hostname extends AbstractValidator
         }
 
         // Check input against local network name schema; last chance to pass validation
+        ErrorHandler::start();
         $regexLocal = '/^(([a-zA-Z0-9\x2d]{1,63}\x2e)*[a-zA-Z0-9\x2d]{1,63}[\x2e]{0,1}){1,254}$/';
-        $status = @preg_match($regexLocal, $value);
+        $status = preg_match($regexLocal, $value);
+        ErrorHandler::stop();
 
         // If the input passes as a local network name, and local network names are allowed, then the
         // hostname passes validation

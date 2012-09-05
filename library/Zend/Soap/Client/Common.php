@@ -22,14 +22,14 @@ class Common extends \SoapClient
     /**
      * doRequest() pre-processing method
      *
-     * @var callback
+     * @var callable
      */
     protected $doRequestCallback;
 
     /**
      * Common Soap Client constructor
      *
-     * @param callback $doRequestMethod
+     * @param callable $doRequestMethod
      * @param string $wsdl
      * @param array $options
      */

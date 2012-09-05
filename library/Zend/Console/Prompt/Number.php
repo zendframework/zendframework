@@ -10,14 +10,12 @@
 
 namespace Zend\Console\Prompt;
 
-use Zend\Console\PromptInterface;
-
 /**
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Prompt
  */
-class Number extends Line implements PromptInterface
+class Number extends Line
 {
     /**
      * @var string
@@ -91,18 +89,18 @@ class Number extends Line implements PromptInterface
             $number = parent::show();
             if ($number === "" && !$this->allowEmpty) {
                 $valid = false;
-            } elseif ($number === ""){
+            } elseif ($number === "") {
                 $number = null;
-            } elseif (!is_numeric($number)){
+            } elseif (!is_numeric($number)) {
                 $this->getConsole()->writeLine("$number is not a number\n");
                 $valid = false;
-            } elseif (!$this->allowFloat && (round($number) != $number) ){
+            } elseif (!$this->allowFloat && (round($number) != $number) ) {
                 $this->getConsole()->writeLine("Please enter a non-floating number, i.e. ".round($number)."\n");
                 $valid = false;
-            } elseif ($this->max !== null && $number > $this->max){
+            } elseif ($this->max !== null && $number > $this->max) {
                 $this->getConsole()->writeLine("Please enter a number not greater than ".$this->max."\n");
                 $valid = false;
-            } elseif ($this->min !== null && $number < $this->min){
+            } elseif ($this->min !== null && $number < $this->min) {
                 $this->getConsole()->writeLine("Please enter a number not smaller than ".$this->min."\n");
                 $valid = false;
             }

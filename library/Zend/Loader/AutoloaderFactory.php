@@ -186,10 +186,10 @@ abstract class AutoloaderFactory
             return static::$standardAutoloader;
         }
 
-        // Extract the filename from the classname
-        $stdAutoloader = substr(strrchr(static::STANDARD_AUTOLOADER, '\\'), 1);
 
         if (!class_exists(static::STANDARD_AUTOLOADER)) {
+            // Extract the filename from the classname
+            $stdAutoloader = substr(strrchr(static::STANDARD_AUTOLOADER, '\\'), 1);
             require_once __DIR__ . "/$stdAutoloader.php";
         }
         $loader = new StandardAutoloader();
@@ -205,6 +205,7 @@ abstract class AutoloaderFactory
      *
      * @param string $className
      * @param string $type
+     * @return bool
      */
     protected static function isSubclassOf($className, $type)
     {

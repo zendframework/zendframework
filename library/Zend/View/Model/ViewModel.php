@@ -77,7 +77,6 @@ class ViewModel implements ModelInterface
      *
      * @param  null|array|Traversable $variables
      * @param  array|Traversable $options
-     * @return void
      */
     public function __construct($variables = null, $options = null)
     {
@@ -145,8 +144,7 @@ class ViewModel implements ModelInterface
             return null;
         }
 
-        $variables = $this->getVariables();
-        unset($variables[$name]);
+        unset($this->variables[$name]);
     }
 
     /**
@@ -222,9 +220,9 @@ class ViewModel implements ModelInterface
     public function getVariable($name, $default = null)
     {
         $name = (string)$name;
-        if(array_key_exists($name,$this->variables)){
+        if (array_key_exists($name,$this->variables)) {
             return $this->variables[$name];
-        }else{
+        } else {
             return $default;
         }
     }
@@ -262,9 +260,10 @@ class ViewModel implements ModelInterface
         }
 
         if ($overwrite) {
-            if (!is_object($variables) && !$variables instanceof ArrayAccess) {
+            if (is_object($variables) && !$variables instanceof ArrayAccess) {
                 $variables = ArrayUtils::iteratorToArray($variables);
             }
+
             $this->variables = $variables;
             return $this;
         }

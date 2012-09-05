@@ -94,7 +94,7 @@ abstract class AbstractFunction
         $this->reflection = $r;
 
         // Determine namespace
-        if (null !== $namespace){
+        if (null !== $namespace) {
             $this->setNamespace($namespace);
         }
 

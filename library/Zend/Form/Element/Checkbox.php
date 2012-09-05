@@ -195,4 +195,42 @@ class Checkbox extends Element implements InputProviderInterface
 
         return $spec;
     }
+
+    /**
+     * Checks if this checkbox is checked.
+     *
+     * @return bool
+     */
+    public function isChecked()
+    {
+        return (bool)$this->value;
+    }
+
+    /**
+     * Checks or unchecks the checkbox.
+     *
+     * @param bool $value The flag to set.
+     * @return Checkbox
+     */
+    public function setChecked($value)
+    {
+        $this->value = (bool)$value;
+        return $this;
+    }
+
+    /**
+     * Checks or unchecks the checkbox.
+     *
+     * @param mixed $value A boolean flag or string that is checked against the "checked value".
+     * @return Element
+     */
+    public function setValue($value)
+    {
+        if (is_bool($value)) {
+            $this->value = $value;
+        } else {
+            $this->value = $value === $this->getCheckedValue();
+        }
+        return $this;
+    }
 }

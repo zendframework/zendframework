@@ -59,7 +59,7 @@ class Gravatar extends AbstractHtmlElement
     );
 
     /**
-     * Email Adress
+     * Email Address
      *
      * @var string
      */
@@ -77,16 +77,16 @@ class Gravatar extends AbstractHtmlElement
      *
      * $options may include the following:
      * - 'img_size' int height of img to return
-     * - 'default_img' string img to return if email adress has not found
+     * - 'default_img' string img to return if email address has not found
      * - 'rating' string rating parameter for avatar
      * - 'secure' bool load from the SSL or Non-SSL location
      *
      * @see    http://pl.gravatar.com/site/implement/url
      * @see    http://pl.gravatar.com/site/implement/url More information about gravatar's service.
-     * @param  string|null $email Email adress.
+     * @param  string|null $email Email address.
      * @param  null|array $options Options
      * @param  array $attribs Attributes for image tag (title, alt etc.)
-     * @return Zend\View\Helper\Gravatar
+     * @return Gravatar
      */
     public function __invoke($email = "", $options = array(), $attribs = array())
     {
@@ -173,6 +173,7 @@ class Gravatar extends AbstractHtmlElement
      *
      * @link   http://pl.gravatar.com/site/implement/url More information about rating.
      * @param  string $rating Value for rating. Allowed values are: g, px, r,x
+     * @return Gravatar
      * @throws Exception\DomainException
      */
     public function setRating($rating)
@@ -204,7 +205,7 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
-     * Set email adress
+     * Set email address
      *
      * @param string $email
      * @return Gravatar
@@ -216,7 +217,7 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
-     * Get email adress
+     * Get email address
      *
      * @return string
      */
@@ -292,7 +293,7 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
-     * Get avatar url (including size, rating and default image oprions)
+     * Get avatar url (including size, rating and default image options)
      *
      * @return string
      */

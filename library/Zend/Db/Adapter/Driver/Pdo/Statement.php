@@ -116,6 +116,7 @@ class Statement implements StatementInterface
      * Set sql
      *
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
@@ -135,6 +136,7 @@ class Statement implements StatementInterface
 
     /**
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
@@ -222,8 +224,6 @@ class Statement implements StatementInterface
 
     /**
      * Bind parameters from container
-     *
-     * @param ParameterContainer $container
      */
     protected function bindParametersFromContainer()
     {

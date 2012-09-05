@@ -10,15 +10,14 @@
 
 namespace Zend\Console\Prompt;
 
-use Zend\Console\PromptInterface;
-use Zend\Console\Exception\BadMethodCallException;
+use Zend\Console\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Prompt
  */
-class Select extends Char implements PromptInterface
+class Select extends Char
 {
     /**
      * @var string
@@ -54,7 +53,7 @@ class Select extends Char implements PromptInterface
         }
 
         if (!count($options)) {
-            throw new BadMethodCallException(
+            throw new Exception\BadMethodCallException(
                 'Cannot construct a "select" prompt without any options'
             );
         }
@@ -78,40 +77,55 @@ class Select extends Char implements PromptInterface
      */
     public function show()
     {
-        /**
-         * Show prompt text and available options
-         */
+        // Show prompt text and available options
         $console = $this->getConsole();
         $console->writeLine($this->promptText);
         foreach ($this->options as $k => $v) {
-            $console->writeLine('  '.$k.') '.$v);
+            $console->writeLine('  ' . $k . ') ' . $v);
         }
 
-        /**
-         * Ask for selection
-         */
-        $mask = implode("",array_keys($this->options));
+        //  Prepare mask
+        $mask = implode("", array_keys($this->options));
         if ($this->allowEmpty) {
             $mask .= "\r\n";
         }
-        $this->setAllowedChars($mask);
-        $oldPrompt = $this->promptText;
-        $this->promptText = 'Pick one option: ';
-        $response = parent::show();
-        $this->promptText = $oldPrompt;
 
+        // Prepare other params for parent class
+        $this->setAllowedChars($mask);
+        $oldPrompt        = $this->promptText;
+        $oldEcho          = $this->echo;
+        $this->echo       = false;
+        $this->promptText = null;
+
+        // Retrieve a single character
+        $response = parent::show();
+
+        // Restore old params
+        $this->promptText = $oldPrompt;
+        $this->echo       = $oldEcho;
+
+        // Display selected option if echo is enabled
+        if ($this->echo) {
+            if (isset($this->options[$response])) {
+                $console->writeLine($this->options[$response]);
+            } else {
+                $console->writeLine();
+            }
+        }
+
+        $this->lastResponse = $response;
         return $response;
     }
 
     /**
      * Set allowed options
      *
-     * @param array|Traversable $options
+     * @param array|\Traversable $options
      */
     public function setOptions($options)
     {
         if (!is_array($options) && !$options instanceof \Traversable) {
-            throw new BadMethodCallException(
+            throw new Exception\BadMethodCallException(
                 'Please specify an array or Traversable object as options'
             );
         }

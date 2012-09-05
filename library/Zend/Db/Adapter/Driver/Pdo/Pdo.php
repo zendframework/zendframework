@@ -10,6 +10,7 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
+use PDOStatement;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
 use Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface;
@@ -51,6 +52,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
      * @param array|Connection|\PDO $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
+     * @param string $features
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $features = self::FEATURES_DEFAULT)
     {
@@ -107,8 +109,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
-     * @param string|AbstractFeature $nameOrFeature
-     * @param mixed $value
+     * @param string $name
+     * @param AbstractFeature $feature
      * @return Pdo
      */
     public function addFeature($name, $feature)
@@ -193,18 +195,23 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
-     * @param string $sql
+     * @param string|PDOStatement $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
     {
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
-        } elseif ($sqlOrResource instanceof \PDOStatement) {
+        if ($sqlOrResource instanceof PDOStatement) {
             $statement->setResource($sqlOrResource);
+        } else {
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            }
+            if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+            }
+            $statement->initialize($this->connection->getResource());
         }
-        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 

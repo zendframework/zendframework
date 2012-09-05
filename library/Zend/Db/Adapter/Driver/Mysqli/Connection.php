@@ -207,6 +207,10 @@ class Connection implements ConnectionInterface
      */
     public function beginTransaction()
     {
+        if (!$this->isConnected()) {
+            $this->connect();
+        }
+
         $this->resource->autocommit(false);
         $this->inTransaction = true;
     }

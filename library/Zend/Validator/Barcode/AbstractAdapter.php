@@ -148,7 +148,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Sets the checksum validation method
      *
-     * @param callback $checksum Checksum method to call
+     * @param callable $checksum Checksum method to call
      * @return AbstractAdapter
      */
     protected function setChecksum($checksum)
@@ -300,7 +300,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $values   = str_split(substr($value, 0, -1));
 
         $check = 0;
-        foreach($values as $row) {
+        foreach ($values as $row) {
             $check += $row;
         }
 

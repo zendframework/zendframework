@@ -13,7 +13,8 @@
     },
     "target-dir": "Zend/Validator",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zend-math": "self.version"

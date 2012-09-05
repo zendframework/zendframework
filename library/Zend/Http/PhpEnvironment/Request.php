@@ -94,7 +94,7 @@ class Request extends HttpRequest
     {
         if (empty($this->content)) {
             $requestBody = file_get_contents('php://input');
-            if (strlen($requestBody) > 0){
+            if (strlen($requestBody) > 0) {
                 $this->content = $requestBody;
             }
         }
@@ -264,6 +264,16 @@ class Request extends HttpRequest
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];
             }
+            // Check for missinterpreted IPv6-Address
+            // Reported at least for Safari on Windows
+            if (isset($this->serverParams['SERVER_ADDR']) && preg_match('/^\[[0-9a-fA-F\:]+\]$/', $host)) {
+                $host = '[' . $this->serverParams['SERVER_ADDR'] . ']';
+                if ($port . ']' == substr($host, strrpos($host, ':')+1)) {
+                    // The last digit of the IPv6-Address has been taken as port
+                    // Unset the port so the default port can be used
+                    $port = null;
+                }
+            }
         } elseif ($this->getHeaders()->get('host')) {
             $host = $this->getHeaders()->get('host')->getFieldValue();
             // works for regname, IPv4 & IPv6
@@ -307,7 +317,7 @@ class Request extends HttpRequest
             $this->serverParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->serverParams;
         }
 
@@ -340,7 +350,7 @@ class Request extends HttpRequest
             $this->envParams = new Parameters();
         }
 
-        if($name === null){
+        if ($name === null) {
             return $this->envParams;
         }
 
@@ -474,9 +484,12 @@ class Request extends HttpRequest
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
 
+            $baseUrl  = '/';
             $basename = basename($filename);
-            $path     = ($phpSelf ? trim($phpSelf, '/') : '');
-            $baseUrl  = '/'. substr($path, 0, strpos($path, $basename)) . $basename;
+            if ($basename) {
+                $path     = ($phpSelf ? trim($phpSelf, '/') : '');
+                $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
+            }
         }
 
         // Does the base URL have anything in common with the request URI?

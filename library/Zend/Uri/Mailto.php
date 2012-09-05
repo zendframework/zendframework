@@ -34,7 +34,7 @@ class Mailto extends Uri
     /**
      * Check if the URI is a valid Mailto URI
      *
-     * This applys additional specific validation rules beyond the ones
+     * This applies additional specific validation rules beyond the ones
      * required by the generic URI syntax
      *
      * @return boolean
@@ -61,7 +61,7 @@ class Mailto extends Uri
     /**
      * Set the email address
      *
-     * This is infact equivalent to setPath() - but provides a more clear interface
+     * This is in fact equivalent to setPath() - but provides a more clear interface
      *
      * @param  string $email
      * @return Mailto

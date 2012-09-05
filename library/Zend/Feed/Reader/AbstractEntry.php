@@ -37,7 +37,7 @@ abstract class AbstractEntry
     /**
      * Entry instance
      *
-     * @var Zend\Feed\Entry
+     * @var DOMElement
      */
     protected $entry = null;
 
@@ -67,8 +67,7 @@ abstract class AbstractEntry
      *
      * @param  DOMElement $entry
      * @param  int $entryKey
-     * @param  string $type
-     * @return void
+     * @param  null|string $type
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
@@ -78,7 +77,7 @@ abstract class AbstractEntry
         if ($type !== null) {
             $this->data['type'] = $type;
         } else {
-            $this->data['type'] = Reader::detectType($feed);
+            $this->data['type'] = Reader::detectType($entry);
         }
         $this->_loadExtensions();
     }
@@ -157,7 +156,7 @@ abstract class AbstractEntry
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Zend\Feed\Reader\AbstractEntry
+     * @return \Zend\Feed\Reader\AbstractEntry
      */
     public function setXpath(DOMXPath $xpath)
     {

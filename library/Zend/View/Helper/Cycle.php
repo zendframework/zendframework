@@ -55,7 +55,7 @@ class Cycle extends AbstractHelper implements \Iterator
      */
     public function __invoke(array $data = array(), $name = self::DEFAULT_NAME)
     {
-        if(!empty($data))
+        if (!empty($data))
            $this->data[$name] = $data;
 
         $this->setName($name);
@@ -87,10 +87,10 @@ class Cycle extends AbstractHelper implements \Iterator
     {
        $this->name = $name;
 
-       if(!isset($this->data[$this->name]))
+       if (!isset($this->data[$this->name]))
          $this->data[$this->name] = array();
 
-       if(!isset($this->pointers[$this->name]))
+       if (!isset($this->pointers[$this->name]))
          $this->rewind();
 
        return $this;

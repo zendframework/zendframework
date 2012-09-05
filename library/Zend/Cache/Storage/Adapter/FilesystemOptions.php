@@ -132,7 +132,7 @@ class FilesystemOptions extends AdapterOptions
         if ($cacheDir !== null) {
             if (!is_dir($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$cacheDir}' not found or not a directoy"
+                    "Cache directory '{$cacheDir}' not found or not a directory"
                 );
             } elseif (!is_writable($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
@@ -225,7 +225,8 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set permission to create directories on unix systems
      *
-     * @var false|string|int $dirPermission FALSE to disable explicit permission or an octal number
+     * @param false|string|int $dirPermission FALSE to disable explicit permission or an octal number
+     * @return FilesystemOptions
      * @see setUmask
      * @see setFilePermission
      * @link http://php.net/manual/function.chmod.php
@@ -292,7 +293,8 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set permission to create files on unix systems
      *
-     * @var false|string|int $filePermission FALSE to disable explicit permission or an octal number
+     * @param false|string|int $filePermission FALSE to disable explicit permission or an octal number
+     * @return FilesystemOptions
      * @see setUmask
      * @see setDirPermission
      * @link http://php.net/manual/function.chmod.php
@@ -339,14 +341,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeperator
+     * @param  string $namespaceSeparator
      * @return FilesystemOptions
      */
-    public function setNamespaceSeparator($namespaceSeperator)
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        $namespaceSeperator = (string) $namespaceSeperator;
-        $this->triggerOptionEvent('namespace_separator', $namespaceSeperator);
-        $this->namespaceSeparator = $namespaceSeperator;
+        $namespaceSeparator = (string) $namespaceSeparator;
+        $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+        $this->namespaceSeparator = $namespaceSeparator;
         return $this;
     }
 
@@ -413,7 +415,8 @@ class FilesystemOptions extends AdapterOptions
      *
      * Note: On multithreaded webservers it's better to explicit set file and dir permission.
      *
-     * @var false|string|int FALSE to disable umask or an octal number
+     * @param false|string|int $umask FALSE to disable umask or an octal number
+     * @return FilesystemOptions
      * @see setFilePermission
      * @see setDirPermission
      * @link http://php.net/manual/function.umask.php

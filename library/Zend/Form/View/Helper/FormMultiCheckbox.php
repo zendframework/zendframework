@@ -12,6 +12,7 @@ namespace Zend\Form\View\Helper;
 
 use Traversable;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\Exception;
 
 /**
@@ -190,6 +191,13 @@ class FormMultiCheckbox extends FormInput
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof MultiCheckboxElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\MultiCheckbox',
+                __METHOD__
+            ));
+        }
+
         $name = static::getName($element);
         if ($name === null || $name === '') {
             throw new Exception\DomainException(sprintf(
@@ -198,20 +206,15 @@ class FormMultiCheckbox extends FormInput
             ));
         }
 
-        $attributes = $element->getAttributes();
-
-        if (!isset($attributes['options'])
-            || (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable)
-        ) {
+        $options = $element->getValueOptions();
+        if (empty($options)) {
             throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an array or Traversable "options" attribute; none found',
+                '%s requires that the element has "value_options"; none found',
                 __METHOD__
             ));
         }
 
-        $options = $attributes['options'];
-        unset($attributes['options']);
-
+        $attributes         = $element->getAttributes();
         $attributes['name'] = $name;
         $attributes['type'] = $this->getInputType();
         $selectedOptions    = (array) $element->getValue();
@@ -233,13 +236,13 @@ class FormMultiCheckbox extends FormInput
     /**
      * Render options
      *
-     * @param ElementInterface $element
-     * @param array            $options
-     * @param array            $selectedOptions
-     * @param array            $attributes
+     * @param MultiCheckboxElement $element
+     * @param array                $options
+     * @param array                $selectedOptions
+     * @param array                $attributes
      * @return string
      */
-    protected function renderOptions(ElementInterface $element, array $options, array $selectedOptions,
+    protected function renderOptions(MultiCheckboxElement $element, array $options, array $selectedOptions,
                                      array $attributes)
     {
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
@@ -263,14 +266,17 @@ class FormMultiCheckbox extends FormInput
             }
 
             $value           = '';
-            $label           = $key;
+            $label           = '';
             $selected        = false;
             $disabled        = false;
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
 
-            if (is_string($optionSpec) || is_numeric($optionSpec) || is_bool($optionSpec)) {
-                $optionSpec = array('value' => (string) $optionSpec);
+            if (is_scalar($optionSpec)) {
+                $optionSpec = array(
+                    'label' => $optionSpec,
+                    'value' => $key
+                );
             }
 
             if (isset($optionSpec['value'])) {
@@ -294,7 +300,7 @@ class FormMultiCheckbox extends FormInput
                 $inputAttributes = array_merge($inputAttributes, $optionSpec['attributes']);
             }
 
-            if (in_array($value, $selectedOptions, true)) {
+            if (in_array($value, $selectedOptions)) {
                 $selected = true;
             }
 
@@ -336,11 +342,11 @@ class FormMultiCheckbox extends FormInput
     /**
      * Render a hidden element for empty/unchecked value
      *
-     * @param  ElementInterface $element
-     * @param  array $attributes
+     * @param  MultiCheckboxElement $element
+     * @param  array                $attributes
      * @return string
      */
-    protected function renderHiddenElement(ElementInterface $element, array $attributes)
+    protected function renderHiddenElement(MultiCheckboxElement $element, array $attributes)
     {
         $closingBracket = $this->getInlineClosingBracket();
 

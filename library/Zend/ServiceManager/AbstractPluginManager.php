@@ -58,7 +58,6 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      * creation.
      *
      * @param  null|ConfigInterface $configuration
-     * @return void
      */
     public function __construct(ConfigInterface $configuration = null)
     {
@@ -169,15 +168,6 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     protected function createFromInvokable($canonicalName, $requestedName)
     {
         $invokable = $this->invokableClasses[$canonicalName];
-        if (!class_exists($invokable)) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
-                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                __METHOD__,
-                $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
-            ));
-        }
 
         if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))

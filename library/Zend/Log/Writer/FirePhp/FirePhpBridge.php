@@ -21,6 +21,7 @@ class FirePhpBridge implements FirePhpInterface
 {
     /**
      * FirePHP instance
+     *
      * @var FirePHP
      */
     protected $firephp;

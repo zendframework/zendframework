@@ -38,7 +38,6 @@ class Stdin extends XmlRpcRequest
      * occurs in doing so, or if the XML is invalid, the request is declared a
      * fault.
      *
-     * @return void
      */
     public function __construct()
     {

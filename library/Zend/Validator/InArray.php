@@ -131,7 +131,7 @@ class InArray extends AbstractValidator
         );
 
         // validate strict value
-        if (!in_array($strict, $checkTypes)){
+        if (!in_array($strict, $checkTypes)) {
             throw new Exception\InvalidArgumentException('Strict option must be one of the COMPARE_ constants');
         }
 
@@ -192,7 +192,7 @@ class InArray extends AbstractValidator
                         return true;
                     }
 
-                } else{
+                } else {
 
                     // add protection to prevent string to int vuln's
                     $el = $element;

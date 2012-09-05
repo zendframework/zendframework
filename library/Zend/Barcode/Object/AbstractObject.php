@@ -201,7 +201,6 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Constructor
      * @param array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -403,7 +402,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Retrieve color of the barcode and text
-     * @return unknown
+     * @return integer
      */
     public function getForeColor()
     {
@@ -462,7 +461,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Activate/deactivate drawing of the quiet zones
      * @param boolean $value
-     * @return Zend\Barcode\AbstractObject
+     * @return AbstractObject
      */
     public function setWithQuietZones($value)
     {
@@ -540,6 +539,7 @@ abstract class AbstractObject implements ObjectInterface
      * Automatically add leading zeros if barcode length is fixed
      * @param string $text
      * @param boolean $withoutChecksum
+     * @return string
      */
     protected function addLeadingZeros($text, $withoutChecksum = false)
     {
@@ -944,6 +944,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Get height of the result object
+     * @param bool $recalculate
      * @return integer
      */
     public function getHeight($recalculate = false)
@@ -958,6 +959,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Get width of the result object
+     * @param bool $recalculate
      * @return integer
      */
     public function getWidth($recalculate = false)
@@ -1182,7 +1184,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Check for invalid characters
-     * @param   string $value    Text to be ckecked
+     * @param   string $value    Text to be checked
      * @return void
      */
     public function validateText($value)

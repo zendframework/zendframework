@@ -10,14 +10,12 @@
 
 namespace Zend\Console\Prompt;
 
-use Zend\Console\PromptInterface;
-
 /**
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Prompt
  */
-class Char extends AbstractPrompt implements PromptInterface
+class Char extends AbstractPrompt
 {
     /**
      * @var string
@@ -123,11 +121,13 @@ class Char extends AbstractPrompt implements PromptInterface
             /**
              * Check if it is an allowed char
              */
-            if (stristr($this->allowedChars,$char)) {
+            if (stristr($this->allowedChars,$char) !== false) {
                 if ($this->echo) {
                     echo trim($char)."\n";
                 } else {
-                    echo "\n";
+                    if ($this->promptText) {
+                        echo "\n";  // skip to next line but only if we had any prompt text
+                    }
                 }
                 break;
             }

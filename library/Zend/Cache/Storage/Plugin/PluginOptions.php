@@ -105,7 +105,7 @@ class PluginOptions extends AbstractOptions
      * Used by:
      * - ExceptionHandler
      *
-     * @param  callable EexceptionCallback
+     * @param  callable ExceptionCallback
      * @return PluginOptions
      */
     public function setExceptionCallback($exceptionCallback)
@@ -213,13 +213,16 @@ class PluginOptions extends AbstractOptions
      */
     public function getSerializer()
     {
-        if (is_string($this->serializer)) {
-            $options = $this->getSerializerOptions();
-            $this->setSerializer(SerializerFactory::factory($this->serializer, $options));
-        } elseif (null === $this->serializer) {
-            $this->setSerializer(SerializerFactory::getDefaultAdapter());
+        if (!$this->serializer instanceof SerializerAdapter) {
+            // use default serializer
+            if (!$this->serializer) {
+                $this->setSerializer(SerializerFactory::getDefaultAdapter());
+            // instantiate by class name + serializer_options
+            } else {
+                $options = $this->getSerializerOptions();
+                $this->setSerializer(SerializerFactory::factory($this->serializer, $options));
+            }
         }
-
         return $this->serializer;
     }
 

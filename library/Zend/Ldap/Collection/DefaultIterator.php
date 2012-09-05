@@ -12,6 +12,7 @@ namespace Zend\Ldap\Collection;
 
 use Zend\Ldap;
 use Zend\Ldap\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -57,7 +58,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * The method that will be applied to the attribute's names.
      *
-     * @var  integer|callback
+     * @var  integer|callable
      */
     protected $attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
 
@@ -73,7 +74,11 @@ class DefaultIterator implements \Iterator, \Countable
     {
         $this->ldap      = $ldap;
         $this->resultId  = $resultId;
-        $this->itemCount = @ldap_count_entries($ldap->getResource(), $resultId);
+
+        $resource = $ldap->getResource();
+        ErrorHandler::start();
+        $this->itemCount = ldap_count_entries($resource, $resultId);
+        ErrorHandler::stop();
         if ($this->itemCount === false) {
             throw new Exception\LdapException($this->ldap, 'counting entries');
         }
@@ -93,7 +98,10 @@ class DefaultIterator implements \Iterator, \Countable
     {
         $isClosed = false;
         if (is_resource($this->resultId)) {
-            $isClosed       = @ldap_free_result($this->resultId);
+            ErrorHandler::start();
+            $isClosed       = ldap_free_result($this->resultId);
+            ErrorHandler::stop();
+
             $this->resultId = null;
             $this->current  = null;
         }
@@ -120,7 +128,7 @@ class DefaultIterator implements \Iterator, \Countable
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
-     * @param  integer|callback $attributeNameTreatment
+     * @param  integer|callable $attributeNameTreatment
      * @return DefaultIterator Provides a fluent interface
      */
     public function setAttributeNameTreatment($attributeNameTreatment)
@@ -155,7 +163,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Returns the currently set attribute name treatment
      *
-     * @return integer|callback
+     * @return integer|callable
      */
     public function getAttributeNameTreatment()
     {
@@ -191,13 +199,27 @@ class DefaultIterator implements \Iterator, \Countable
 
         $entry          = array('dn' => $this->key());
         $ber_identifier = null;
-        $name           = @ldap_first_attribute(
-            $this->ldap->getResource(), $this->current,
+
+        $resource = $this->ldap->getResource();
+        ErrorHandler::start();
+        $name = ldap_first_attribute(
+            $resource, $this->current,
             $ber_identifier
         );
+        ErrorHandler::stop();
+
         while ($name) {
-            $data = @ldap_get_values_len($this->ldap->getResource(), $this->current, $name);
-            unset($data['count']);
+            ErrorHandler::start();
+            $data = ldap_get_values_len($resource, $this->current, $name);
+            ErrorHandler::stop();
+
+            if (!$data) {
+                $data = array();
+            }
+
+            if (isset($data['count'])) {
+                unset($data['count']);
+            }
 
             switch ($this->attributeNameTreatment) {
                 case self::ATTRIBUTE_TO_LOWER:
@@ -214,10 +236,13 @@ class DefaultIterator implements \Iterator, \Countable
                     break;
             }
             $entry[$attrName] = $data;
-            $name             = @ldap_next_attribute(
-                $this->ldap->getResource(), $this->current,
+
+            ErrorHandler::start();
+            $name = ldap_next_attribute(
+                $resource, $this->current,
                 $ber_identifier
             );
+            ErrorHandler::stop();
         }
         ksort($entry, SORT_LOCALE_STRING);
         return $entry;
@@ -236,7 +261,11 @@ class DefaultIterator implements \Iterator, \Countable
             $this->rewind();
         }
         if (is_resource($this->current)) {
-            $currentDn = @ldap_get_dn($this->ldap->getResource(), $this->current);
+            $resource = $this->ldap->getResource();
+            ErrorHandler::start();
+            $currentDn = ldap_get_dn($resource, $this->current);
+            ErrorHandler::stop();
+
             if ($currentDn === false) {
                 throw new Exception\LdapException($this->ldap, 'getting dn');
             }
@@ -259,7 +288,10 @@ class DefaultIterator implements \Iterator, \Countable
         $code = 0;
 
         if (is_resource($this->current) && $this->itemCount > 0) {
-            $this->current = @ldap_next_entry($this->ldap->getResource(), $this->current);
+            $resource = $this->ldap->getResource();
+            ErrorHandler::start();
+            $this->current = ldap_next_entry($resource, $this->current);
+            ErrorHandler::stop();
             if ($this->current === false) {
                 $msg = $this->ldap->getLastError($code);
                 if ($code === Exception\LdapException::LDAP_SIZELIMIT_EXCEEDED) {
@@ -284,7 +316,10 @@ class DefaultIterator implements \Iterator, \Countable
     public function rewind()
     {
         if (is_resource($this->resultId)) {
-            $this->current = @ldap_first_entry($this->ldap->getResource(), $this->resultId);
+            $resource = $this->ldap->getResource();
+            ErrorHandler::start();
+            $this->current = ldap_first_entry($resource, $this->resultId);
+            ErrorHandler::stop();
             if ($this->current === false
                 && $this->ldap->getLastErrorCode() > Exception\LdapException::LDAP_SUCCESS
             ) {

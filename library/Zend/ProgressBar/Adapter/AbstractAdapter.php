@@ -53,7 +53,7 @@ abstract class AbstractAdapter
      * Set options via an array
      *
      * @param  array $options
-     * @return \Zend\ProgressBar\Adapter\Adapter
+     * @return AbstractAdapter
      */
     public function setOptions(array $options)
     {

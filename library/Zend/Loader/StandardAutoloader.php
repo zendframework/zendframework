@@ -49,8 +49,7 @@ class StandardAutoloader implements SplAutoloader
     /**
      * Constructor
      *
-     * @param  null|array|Traversable $options
-     * @return void
+     * @param  null|array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -269,9 +268,10 @@ class StandardAutoloader implements SplAutoloader
     /**
      * Load a class, based on its type (namespaced or prefixed)
      *
-     * @param  string $class
-     * @param  string $type
-     * @return void
+     * @param string $class
+     * @param string $type
+     * @return bool|string
+     * @throws Exception\InvalidArgumentException
      */
     protected function loadClass($class, $type)
     {

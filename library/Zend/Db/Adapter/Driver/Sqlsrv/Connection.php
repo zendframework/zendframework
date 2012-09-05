@@ -182,6 +182,7 @@ class Connection implements ConnectionInterface
             );
         }
 
+        return $this;
     }
 
     /**
@@ -263,6 +264,10 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
+        if (!$this->driver instanceof Sqlsrv) {
+            throw new Exception\RuntimeException('Connection is missing an instance of Sqlsrv');
+        }
+
         $returnValue = sqlsrv_query($this->resource, $sql);
 
         // if the returnValue is something other than a Sqlsrv_result, bypass wrapping it
@@ -271,7 +276,7 @@ class Connection implements ConnectionInterface
             // ignore general warnings
             if ($errors[0]['SQLSTATE'] != '01000') {
                 throw new Exception\RuntimeException(
-                    'An exception occured while trying to execute the provided $sql',
+                    'An exception occurred while trying to execute the provided $sql',
                     null,
                     new ErrorException($errors)
                 );
@@ -301,10 +306,14 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      *
+     * @param string $name
      * @return mixed
      */
     public function getLastGeneratedValue($name = null)
     {
+        if (!$this->resource) {
+            $this->connect();
+        }
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);

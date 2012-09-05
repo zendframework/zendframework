@@ -392,7 +392,7 @@ class Di implements DependencyInjectionInterface
     /**
      * Get an object instance from the defined callback
      *
-     * @param  callback                           $callback
+     * @param  callable                           $callback
      * @param  array                              $params
      * @param  string                             $alias
      * @return object

@@ -11,6 +11,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend
@@ -31,6 +32,15 @@ class FormReset extends FormInput
         'form'           => true,
         'type'           => true,
         'value'          => true,
+    );
+
+    /**
+     * Translatable attributes
+     *
+     * @var array
+     */
+    protected $translatableAttributes = array(
+        'value' => true
     );
 
     /**

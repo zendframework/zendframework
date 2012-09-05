@@ -10,24 +10,28 @@
 
 namespace Zend\Console\Adapter;
 
-use Zend\Console\AdapterInterface;
+use Zend\Console\Charset;
+use Zend\Console\Exception;
 use Zend\Console\ColorInterface as Color;
-use Zend\Console\CharsetInterface;
-use Zend\Console\Exception\BadMethodCallException;
-use Zend\Console;
 
 /**
- * @link http://en.wikipedia.org/wiki/ANSI_escape_code
+ * @todo Add GNU readline support
  * @category   Zend
  * @package    Zend_Console
  * @subpackage Adapter
+ * @link http://en.wikipedia.org/wiki/ANSI_escape_code
  */
-class Posix extends AbstractAdapter implements AdapterInterface
+class Posix extends AbstractAdapter
 {
+    /**
+     * Whether or not mbstring is enabled
+     *
+     * @var null|bool
+     */
     protected static $hasMBString;
 
     /**
-     * @var \Zend\Console\CharsetInterface
+     * @var Charset\CharsetInterface
      */
     protected $charset;
 
@@ -39,48 +43,48 @@ class Posix extends AbstractAdapter implements AdapterInterface
      */
     protected static $ansiColorMap = array(
         'fg' => array(
-            Color::NORMAL   => '22;39m',
-            Color::RESET    => '22;39m',
+            Color::NORMAL        => '22;39m',
+            Color::RESET         => '22;39m',
 
-            Color::BLACK    => '0;30',
-            Color::RED      => '0;31',
-            Color::GREEN    => '0;32',
-            Color::YELLOW   => '0;33',
-            Color::BLUE     => '0;34',
-            Color::MAGENTA  => '0;35',
-            Color::CYAN     => '0;36',
-            Color::WHITE    => '0;37',
+            Color::BLACK         => '0;30',
+            Color::RED           => '0;31',
+            Color::GREEN         => '0;32',
+            Color::YELLOW        => '0;33',
+            Color::BLUE          => '0;34',
+            Color::MAGENTA       => '0;35',
+            Color::CYAN          => '0;36',
+            Color::WHITE         => '0;37',
 
-            Color::GRAY           => '1;30',
-            Color::LIGHT_RED      => '1;31',
-            Color::LIGHT_GREEN    => '1;32',
-            Color::LIGHT_YELLOW   => '1;33',
-            Color::LIGHT_BLUE     => '1;34',
-            Color::LIGHT_MAGENTA  => '1;35',
-            Color::LIGHT_CYAN     => '1;36',
-            Color::LIGHT_WHITE    => '1;37',
+            Color::GRAY          => '1;30',
+            Color::LIGHT_RED     => '1;31',
+            Color::LIGHT_GREEN   => '1;32',
+            Color::LIGHT_YELLOW  => '1;33',
+            Color::LIGHT_BLUE    => '1;34',
+            Color::LIGHT_MAGENTA => '1;35',
+            Color::LIGHT_CYAN    => '1;36',
+            Color::LIGHT_WHITE   => '1;37',
         ),
         'bg' => array(
-            Color::NORMAL   => '0;49m',
-            Color::RESET    => '0;49m',
+            Color::NORMAL        => '0;49m',
+            Color::RESET         => '0;49m',
 
-            Color::BLACK    => '40',
-            Color::RED      => '41',
-            Color::GREEN    => '42',
-            Color::YELLOW   => '43',
-            Color::BLUE     => '44',
-            Color::MAGENTA  => '45',
-            Color::CYAN     => '46',
-            Color::WHITE    => '47',
+            Color::BLACK         => '40',
+            Color::RED           => '41',
+            Color::GREEN         => '42',
+            Color::YELLOW        => '43',
+            Color::BLUE          => '44',
+            Color::MAGENTA       => '45',
+            Color::CYAN          => '46',
+            Color::WHITE         => '47',
 
-            Color::GRAY           => '40',
-            Color::LIGHT_RED      => '41',
-            Color::LIGHT_GREEN    => '42',
-            Color::LIGHT_YELLOW   => '43',
-            Color::LIGHT_BLUE     => '44',
-            Color::LIGHT_MAGENTA  => '45',
-            Color::LIGHT_CYAN     => '46',
-            Color::LIGHT_WHITE    => '47',
+            Color::GRAY          => '40',
+            Color::LIGHT_RED     => '41',
+            Color::LIGHT_GREEN   => '42',
+            Color::LIGHT_YELLOW  => '43',
+            Color::LIGHT_BLUE    => '44',
+            Color::LIGHT_MAGENTA => '45',
+            Color::LIGHT_CYAN    => '46',
+            Color::LIGHT_WHITE   => '47',
         ),
     );
 
@@ -133,32 +137,32 @@ class Posix extends AbstractAdapter implements AdapterInterface
             return $height;
         }
 
-        /**
-         * Try to read env variable
-         */
+        // Try to read env variable
         if (($result = getenv('LINES')) !== false) {
-            return $height = (int)$result;
+            return $height = (int) $result;
         }
 
-        /**
-         * Try to read console size from "tput" command
-         */
-        $result = exec('tput lines',$output, $return);
+        // Try to read console size from "tput" command
+        $result = exec('tput lines', $output, $return);
         if (!$return && is_numeric($result)) {
             return $height = (int)$result;
         }
 
         return $height = parent::getHeight();
-
     }
 
+    /**
+     * Run a mode command and store results
+     *
+     * @return void
+     */
     protected function runModeCommand()
     {
-        exec('mode',$output,$return);
+        exec('mode', $output, $return);
         if ($return || !count($output)) {
             $this->modeResult = '';
         } else {
-            $this->modeResult = trim(implode('',$output));
+            $this->modeResult = trim(implode('', $output));
         }
     }
 
@@ -169,11 +173,9 @@ class Posix extends AbstractAdapter implements AdapterInterface
      */
     public function isUtf8()
     {
-        /**
-         * Try to retrieve it from LANG env variable
-         */
+        // Try to retrieve it from LANG env variable
         if (($lang = getenv('LANG')) !== false) {
-            return stristr($lang,'utf-8') || stristr($lang,'utf8');
+            return stristr($lang, 'utf-8') || stristr($lang, 'utf8');
         }
 
         return false;
@@ -197,52 +199,49 @@ class Posix extends AbstractAdapter implements AdapterInterface
 
     /**
      * Set cursor position
-     * @param int   $x
-     * @param int   $y
+     * @param int $x
+     * @param int $y
      */
     public function setPos($x, $y)
     {
-        echo "\x1b[".$y.';'.$x.'f';
+        echo "\x1b[" . $y . ';' . $x . 'f';
     }
 
     /**
      * Prepare a string that will be rendered in color.
      *
-     * @param string                     $string
-     * @param int                        $color
-     * @param null|int                   $bgColor
+     * @param  string   $string
+     * @param  int      $color
+     * @param  null|int $bgColor
      * @return string
      */
     public function colorize($string, $color = null, $bgColor = null)
     {
-        /**
-         * Retrieve ansi color codes
-         */
+        // Retrieve ansi color codes
         if ($color !== null) {
             if (!isset(static::$ansiColorMap['fg'][$color])) {
-                throw new BadMethodCallException(
-                    'Unknown color "'.$color.'". Please use one of Zend\Console\ColorInterface constants.'
-                );
-            } else {
-                $color = static::$ansiColorMap['fg'][$color];
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
+                    $color
+                ));
             }
-        }
-        if ($bgColor !== null) {
-            if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
-                throw new BadMethodCallException(
-                    'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
-                );
-            } else {
-                $bgColor = static::$ansiColorMap['bg'][$bgColor];
-            }
+            $color = static::$ansiColorMap['fg'][$color];
         }
 
-        return
-            ($color !== null ? "\x1b[".$color.'m' : '').
-            ($bgColor !== null ? "\x1b[".$bgColor.'m' : '').
-            $string.
-            "\x1b[22;39m\x1b[0;49m"
-        ;
+        if ($bgColor !== null) {
+            if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
+                    $bgColor
+                ));
+            }
+            $bgColor = static::$ansiColorMap['bg'][$bgColor];
+        }
+
+        return ($color   !== null ? "\x1b[" . $color   . 'm' : '')
+            . ($bgColor !== null ? "\x1b[" . $bgColor . 'm' : '')
+            . $string
+            . "\x1b[22;39m\x1b[0;49m";
     }
 
     /**
@@ -252,20 +251,18 @@ class Posix extends AbstractAdapter implements AdapterInterface
      */
     public function setColor($color)
     {
-        /**
-         * Retrieve ansi color code
-         */
+        // Retrieve ansi color code
         if ($color !== null) {
             if (!isset(static::$ansiColorMap['fg'][$color])) {
-                throw new BadMethodCallException(
-                    'Unknown color "'.$color.'". Please use one of Zend\Console\ColorInterface constants.'
-                );
-            } else {
-                $color = static::$ansiColorMap['fg'][$color];
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
+                    $color
+                ));
             }
+            $color = static::$ansiColorMap['fg'][$color];
         }
 
-        echo "\x1b[".$color.'m';
+        echo "\x1b[" . $color . 'm';
     }
 
     /**
@@ -275,19 +272,19 @@ class Posix extends AbstractAdapter implements AdapterInterface
      */
     public function setBgColor($bgColor)
     {
-        /**
-         * Retrieve ansi color code
-         */
+        // Retrieve ansi color code
         if ($bgColor !== null) {
             if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
-                throw new BadMethodCallException(
-                    'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
-                );
-            } else {
-                $bgColor = static::$ansiColorMap['bg'][$bgColor];
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
+                    $bgColor
+                ));
             }
+
+            $bgColor = static::$ansiColorMap['bg'][$bgColor];
         }
-        echo "\x1b[".($bgColor).'m';
+
+        echo "\x1b[" . ($bgColor) . 'm';
     }
 
     /**
@@ -308,16 +305,14 @@ class Posix extends AbstractAdapter implements AdapterInterface
      */
     public function getTitle()
     {
-
     }
 
     /**
      * Set Console charset to use.
      *
-
-     * @param \Zend\Console\CharsetInterface $charset
+     * @param Charset\CharsetInterface $charset
      */
-    public function setCharset(CharsetInterface $charset)
+    public function setCharset(Charset\CharsetInterface $charset)
     {
         $this->charset = $charset;
     }
@@ -325,7 +320,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\CharsetInterface $charset
+     * @return Charset\CharsetInterface $charset
      */
     public function getCharset()
     {
@@ -337,32 +332,30 @@ class Posix extends AbstractAdapter implements AdapterInterface
     }
 
     /**
-     * @return \Zend\Console\Charset
+     * @return Charset\CharsetInterface
      */
     public function getDefaultCharset()
     {
         if ($this->isUtf8()) {
             return new Charset\Utf8;
-        } else {
-            return new Charset\DECSG();
         }
+        return new Charset\DECSG();
     }
 
     /**
      * Read a single character from the console input
      *
-     * @param string|null   $mask   A list of allowed chars
+     * @param  string|null $mask   A list of allowed chars
      * @return string
      */
     public function readChar($mask = null)
     {
         $this->setTTYMode('-icanon -echo');
 
-        $stream = fopen('php://stdin','rb');
+        $stream = fopen('php://stdin', 'rb');
         do {
             $char = fgetc($stream);
-        } while (!$char || ($mask !== null && !stristr($mask,$char)));
-
+        } while (strlen($char) !== 1 || ($mask !== null && stristr($mask, $char) === false));
         fclose($stream);
 
         $this->restoreTTYMode();
@@ -374,14 +367,14 @@ class Posix extends AbstractAdapter implements AdapterInterface
      */
     public function clear()
     {
-        echo "\x1b[2J"; // reset bg color
-        $this->setPos(1,1); // reset cursor position
+        echo "\x1b[2J";      // reset bg color
+        $this->setPos(1, 1); // reset cursor position
     }
 
     /**
      * Restore TTY (Console) mode to previous value.
      *
-     * @return mixed
+     * @return void
      */
     protected function restoreTTYMode()
     {
@@ -389,31 +382,21 @@ class Posix extends AbstractAdapter implements AdapterInterface
             return;
         }
 
-        shell_exec('stty '.escapeshellarg($this->lastTTYMode));
-
+        shell_exec('stty ' . escapeshellarg($this->lastTTYMode));
     }
 
     /**
      * Change TTY (Console) mode
      *
-     * @link http://en.wikipedia.org/wiki/Stty
+     * @link  http://en.wikipedia.org/wiki/Stty
      * @param $mode
      */
     protected function setTTYMode($mode)
     {
-        /**
-         * Store last mode
-         */
+        // Store last mode
         $this->lastTTYMode = trim(`stty -g`);
 
-        /**
-         * Set new mode
-         */
+        // Set new mode
         shell_exec('stty '.escapeshellcmd($mode));
     }
-
-    /**
-     * @todo Add GNU readline support
-     */
 }
-

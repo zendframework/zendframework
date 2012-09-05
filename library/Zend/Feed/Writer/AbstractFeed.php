@@ -44,7 +44,6 @@ class AbstractFeed
      * Constructor: Primarily triggers the registration of core extensions and
      * loads those appropriate to this data container.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -102,7 +101,7 @@ class AbstractFeed
      */
     public function addAuthors(array $authors)
     {
-        foreach($authors as $author) {
+        foreach ($authors as $author) {
             $this->addAuthor($author);
         }
     }

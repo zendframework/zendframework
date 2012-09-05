@@ -57,7 +57,7 @@ class CreditCard extends AbstractValidator
         self::LENGTH         => "The input contains an invalid amount of digits",
         self::PREFIX         => "The input is not from an allowed institute",
         self::SERVICE        => "The input seems to be an invalid creditcard number",
-        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input",
     );
 
     /**
@@ -203,7 +203,7 @@ class CreditCard extends AbstractValidator
             $type = array($type);
         }
 
-        foreach($type as $typ) {
+        foreach ($type as $typ) {
             if (defined('self::' . strtoupper($typ)) && !in_array($typ, $this->options['type'])) {
                 $this->options['type'][] = $typ;
             }
@@ -219,7 +219,7 @@ class CreditCard extends AbstractValidator
     /**
      * Returns the actual set service
      *
-     * @return callback
+     * @return callable
      */
     public function getService()
     {
@@ -279,7 +279,7 @@ class CreditCard extends AbstractValidator
             }
         }
 
-        if ($foundp == false){
+        if ($foundp == false) {
             $this->error(self::PREFIX, $value);
             return false;
         }

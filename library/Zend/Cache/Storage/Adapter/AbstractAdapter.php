@@ -77,7 +77,6 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      *
      * @param  null|array|Traversable|AdapterOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -1569,7 +1568,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     }
 
     /**
-     * Validates and normalizes an array of key-value paírs
+     * Validates and normalizes an array of key-value pairs
      *
      * @param  array $keyValuePairs
      * @return void

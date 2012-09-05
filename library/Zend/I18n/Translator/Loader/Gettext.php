@@ -13,6 +13,7 @@ namespace Zend\I18n\Translator\Loader;
 use Zend\I18n\Exception;
 use Zend\I18n\Translator\Plural\Rule as PluralRule;
 use Zend\I18n\Translator\TextDomain;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Gettext loader.
@@ -21,7 +22,7 @@ use Zend\I18n\Translator\TextDomain;
  * @package    Zend_I18n
  * @subpackage Translator
  */
-class Gettext implements LoaderInterface
+class Gettext implements FileLoaderInterface
 {
     /**
      * Current file pointer.
@@ -38,15 +39,15 @@ class Gettext implements LoaderInterface
     protected $littleEndian;
 
     /**
-     * load(): defined by LoaderInterface.
+     * load(): defined by FileLoaderInterface.
      *
-     * @see    LoaderInterface::load()
-     * @param  string $filename
+     * @see    FileLoaderInterface::load()
      * @param  string $locale
+     * @param  string $filename
      * @return TextDomain
      * @throws Exception\InvalidArgumentException
      */
-    public function load($filename, $locale)
+    public function load($locale, $filename)
     {
         if (!is_file($filename) || !is_readable($filename)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -57,7 +58,15 @@ class Gettext implements LoaderInterface
 
         $textDomain = new TextDomain();
 
-        $this->file = @fopen($filename, 'rb');
+        ErrorHandler::start();
+        $this->file = fopen($filename, 'rb');
+        $error = ErrorHandler::stop();
+        if (false === $this->file) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Could not open file %s for reading',
+                $filename
+            ), 0, $error);
+        }
 
         // Verify magic number
         $magic = fread($this->file, 4);

@@ -96,6 +96,7 @@ class Expression implements ExpressionInterface
 
     /**
      * @param array $types
+     * @return Expression
      */
     public function setTypes(array $types)
     {

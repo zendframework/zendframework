@@ -17,12 +17,14 @@
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
         "ext-intl": "ext/intl for i18n features",
+        "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
     },
     "autoload": {
         "psr-0": {
-            "Zend": "library/"
+            "Zend\\": "library/",
+            "ZendTest\\": "tests/"
         }
     },
     "config": {

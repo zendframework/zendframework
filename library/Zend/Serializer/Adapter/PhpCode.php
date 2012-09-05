@@ -44,6 +44,8 @@ class PhpCode extends AbstractAdapter
     {
         ErrorHandler::start(E_ALL);
         $ret  = null;
+        // This suppression is due to the fact that the ErrorHandler cannot
+        // catch syntax errors, and is intentionally left in place.
         $eval = @eval('$ret=' . $code . ';');
         $err  = ErrorHandler::stop();
 

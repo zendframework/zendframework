@@ -98,7 +98,7 @@ class Entry extends Extension\AbstractEntry
         $content = null;
 
         $el = $this->getXpath()->query($this->getXpathPrefix() . '/atom:content');
-        if($el->length > 0) {
+        if ($el->length > 0) {
             $el = $el->item(0);
             $type = $el->getAttribute('type');
             switch ($type) {
@@ -521,7 +521,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get source feed metadata from the entry
      *
-     * @return Reader\Reader_Feed_Atom_Source|null
+     * @return Reader\Feed\Atom\Source|null
      */
     public function getSource()
     {

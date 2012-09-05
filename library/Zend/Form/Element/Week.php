@@ -39,7 +39,7 @@ class Week extends DateTime
      */
     protected function getDateValidator()
     {
-        return new RegexValidator('/^#[0-9]{4}\-W[0-9]{2}$/');
+        return new RegexValidator('/^[0-9]{4}\-W[0-9]{2}$/');
     }
 
     /**

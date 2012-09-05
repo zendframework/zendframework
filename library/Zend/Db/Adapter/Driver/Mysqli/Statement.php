@@ -109,10 +109,12 @@ class Statement implements StatementInterface
      * Set Parameter container
      *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -166,6 +168,7 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function prepare($sql = null)
     {
@@ -185,6 +188,7 @@ class Statement implements StatementInterface
         }
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**
@@ -236,8 +240,6 @@ class Statement implements StatementInterface
 
     /**
      * Bind parameters from container
-     *
-     * @param ParameterContainer $pContainer
      */
     protected function bindParametersFromContainer()
     {

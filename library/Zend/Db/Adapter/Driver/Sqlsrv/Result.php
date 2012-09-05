@@ -51,6 +51,7 @@ class Result implements \Iterator, ResultInterface
      * Initialize
      *
      * @param  resource $resource
+     * @param  mixed    $generatedValue
      * @return Result
      */
     public function initialize($resource, $generatedValue = null)
@@ -66,6 +67,14 @@ class Result implements \Iterator, ResultInterface
     public function buffer()
     {
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBuffered()
+    {
+        return false;
     }
 
     /**
@@ -107,7 +116,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Load
      *
-     * @param  string $row
+     * @param  int $row
      * @return mixed
      */
     protected function load($row = SQLSRV_SCROLL_NEXT)
@@ -115,7 +124,7 @@ class Result implements \Iterator, ResultInterface
         $this->currentData = sqlsrv_fetch_array($this->resource, SQLSRV_FETCH_ASSOC, $row);
         $this->currentComplete = true;
         $this->position++;
-        return ($this->currentData);
+        return $this->currentData;
     }
 
     /**

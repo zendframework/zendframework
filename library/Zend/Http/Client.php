@@ -14,6 +14,7 @@ use ArrayIterator;
 use Traversable;
 use Zend\Stdlib;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Uri\Http;
 
 /**
@@ -174,7 +175,7 @@ class Client implements Stdlib\DispatchableInterface
      * Load the connection adapter
      *
      * While this method is not called more than one for a client, it is
-     * seperated from ->request() to preserve logic and readability
+     * separated from ->request() to preserve logic and readability
      *
      * @param  Client\Adapter\AdapterInterface|string $adapter
      * @return Client
@@ -598,11 +599,14 @@ class Client implements Stdlib\DispatchableInterface
             );
         }
 
-        if (false === ($fp = @fopen($this->streamName, "w+b"))) {
+        ErrorHandler::start();
+        $fp    = fopen($this->streamName, "w+b");
+        $error = ErrorHandler::stop();
+        if (false === $fp) {
             if ($this->adapter instanceof Client\Adapter\AdapterInterface) {
                 $this->adapter->close();
             }
-            throw new Exception\RuntimeException("Could not open temp file {$this->streamName}");
+            throw new Exception\RuntimeException("Could not open temp file {$this->streamName}", 0, $error);
         }
 
         return $fp;
@@ -652,7 +656,7 @@ class Client implements Stdlib\DispatchableInterface
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
         $response = false;
-        switch(strtolower($type)) {
+        switch (strtolower($type)) {
             case self::AUTH_BASIC :
                 // In basic authentication, the user name cannot contain ":"
                 if (strpos($user, ':') !== false) {
@@ -926,8 +930,11 @@ class Client implements Stdlib\DispatchableInterface
     public function setFileUpload($filename, $formname, $data = null, $ctype = null)
     {
         if ($data === null) {
-            if (($data = @file_get_contents($filename)) === false) {
-                throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload");
+            ErrorHandler::start();
+            $data  = file_get_contents($filename);
+            $error = ErrorHandler::stop();
+            if ($data === false) {
+                throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload", 0, $error);
             }
             if (!$ctype) {
                 $ctype = $this->detectFileMimeType($filename);
@@ -1156,7 +1163,9 @@ class Client implements Stdlib\DispatchableInterface
         // First try with fileinfo functions
         if (function_exists('finfo_open')) {
             if (self::$fileInfoDb === null) {
-                self::$fileInfoDb = @finfo_open(FILEINFO_MIME);
+                ErrorHandler::start();
+                self::$fileInfoDb = finfo_open(FILEINFO_MIME);
+                ErrorHandler::stop();
             }
 
             if (self::$fileInfoDb) {
@@ -1254,8 +1263,8 @@ class Client implements Stdlib\DispatchableInterface
      * the interaction with the adapter
      *
      * @param Http $uri
-     * @param string $secure
      * @param string $method
+     * @param boolean $secure
      * @param array $headers
      * @param string $body
      * @return string the raw response

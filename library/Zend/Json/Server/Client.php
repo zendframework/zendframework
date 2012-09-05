@@ -162,7 +162,7 @@ class Client implements ServerClient
      * @param  string $method Name of the method we want to call.
      * @param  array $params Array of parameters for the method.
      * @return mixed Method call results.
-     * @throws Exception\ErrorExceptionn When remote call fails.
+     * @throws Exception\ErrorException When remote call fails.
      */
     public function call($method, $params = array())
     {

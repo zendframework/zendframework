@@ -92,8 +92,8 @@ class Callback extends AbstractFilter
     /**
      * Calls the filter per callback
      *
-     * @param  mixed $value Options for the set callback
-     * @return mixed Result from the filter which was callbacked
+     * @param  mixed $value Options for the set callable
+     * @return mixed Result from the filter which was called
      */
     public function filter($value)
     {

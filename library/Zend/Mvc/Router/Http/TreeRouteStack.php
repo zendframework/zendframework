@@ -49,7 +49,7 @@ class TreeRouteStack extends SimpleRouteStack
     protected function init()
     {
         $routes = $this->routePluginManager;
-        foreach(array(
+        foreach (array(
                 'hostname' => __NAMESPACE__ . '\Hostname',
                 'literal'  => __NAMESPACE__ . '\Literal',
                 'part'     => __NAMESPACE__ . '\Part',
@@ -229,9 +229,9 @@ class TreeRouteStack extends SimpleRouteStack
                     $uri->setScheme($this->requestUri->getScheme());
                 }
 
-                return $uri->setPath($path)->toString();
+                return $uri->setPath($path)->normalize()->toString();
             } elseif (!$uri->isAbsolute() && $uri->isValidRelative()) {
-                return $uri->setPath($path)->toString();
+                return $uri->setPath($path)->normalize()->toString();
             }
         }
 

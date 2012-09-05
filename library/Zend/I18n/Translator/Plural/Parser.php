@@ -55,7 +55,6 @@ class Parser
     /**
      * Create a new plural parser.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -188,7 +187,7 @@ class Parser
     }
 
     /**
-     * Register a symbold.
+     * Register a symbol.
      *
      * @param  string  $id
      * @param  integer $leftBindingPower

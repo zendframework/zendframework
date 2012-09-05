@@ -132,7 +132,7 @@ class DocumentLiteralWrapper
         foreach (get_object_vars($document) as $argName => $argValue) {
             if (!isset($params[$argName])) {
                 throw new UnexpectedValueException(sprintf(
-                    "Recieved unknown argument %s which is not an argument to %s::%s",
+                    "Received unknown argument %s which is not an argument to %s::%s",
                     get_class($this->object), $method
                 ));
             }
@@ -148,7 +148,7 @@ class DocumentLiteralWrapper
 
     protected function _assertServiceDelegateHasMethod($method)
     {
-        if ( !$this->reflection->hasMethod($method) ) {
+        if (!$this->reflection->hasMethod($method)) {
             throw new BadMethodCallException(sprintf(
                 "Method %s does not exist on delegate object %s",
                 $method, get_class($this->object)

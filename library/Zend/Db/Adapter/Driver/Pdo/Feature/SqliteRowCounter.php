@@ -33,6 +33,7 @@ class SqliteRowCounter extends AbstractFeature
 
     /**
      * @param \Zend\Db\Adapter\Driver\Pdo\Statement $statement
+     * @return int
      */
     public function getCountForStatement(Pdo\Statement $statement)
     {
@@ -51,7 +52,7 @@ class SqliteRowCounter extends AbstractFeature
 
     /**
      * @param $sql
-     * @return null
+     * @return null|int
      */
     public function getCountForSql($sql)
     {

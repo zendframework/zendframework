@@ -20,7 +20,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
      * We use the __ prefix to avoid collisions with properties in
-     * user-implmentations.
+     * user-implementations.
      *
      * @var bool
      */
@@ -135,7 +135,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     {
         try {
             $this->__set($key, null);
-        } catch(\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
                     . ' NULL is an invalid value for it',

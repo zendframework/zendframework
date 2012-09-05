@@ -66,9 +66,6 @@ if ($argc == 1) {
                     $components = getAll($phpunit_conf);
                 }
                 break;
-            case 'Search':
-                $components[] = 'Zend_Search_Lucene';
-                break;
             default:
                 if (strpos($arg, 'Zend') !== false) {
                     $components[] = $arg;
@@ -87,7 +84,7 @@ if ($run_as == 'groups') {
     echo "\n\n";
 } else {
     foreach ($components as $component) {
-        $component =   'Zend/' . basename(str_replace('_', '/', $component));
+        $component =   'ZendTest/' . basename(str_replace('_', '/', $component));
         echo "$component:\n";
         system("$phpunit_bin $phpunit_opts $phpunit_coverage " . __DIR__ . '/' . $component, $c_result);
         echo "\n\n";
@@ -105,10 +102,10 @@ function getAll($phpunit_conf)
     $components = array();
     $conf = simplexml_load_file($phpunit_conf);
     $excludes = $conf->xpath('/phpunit/testsuites/testsuite/exclude/text()');
-    for($i = 0; $i < count($excludes); $i++) {
+    for ($i = 0; $i < count($excludes); $i++) {
         $excludes[$i] = basename($excludes[$i]);
     }
-    if ($handle = opendir(__DIR__ . '/Zend/')) {
+    if ($handle = opendir(__DIR__ . '/ZendTest/')) {
         while (false !== ($entry = readdir($handle))) {
             if ($entry != '.' && $entry != '..' && !in_array($entry, $excludes)) {
                 $components[] = $entry;

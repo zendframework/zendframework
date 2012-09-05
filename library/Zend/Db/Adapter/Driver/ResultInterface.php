@@ -18,6 +18,7 @@ namespace Zend\Db\Adapter\Driver;
 interface ResultInterface extends \Countable, \Iterator
 {
     public function buffer();
+    public function isBuffered();
     public function isQueryResult();
     public function getAffectedRows();
     public function getGeneratedValue();

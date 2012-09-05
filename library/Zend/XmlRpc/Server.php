@@ -135,7 +135,6 @@ class Server extends AbstractServer
      *
      * Creates system.* methods.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -149,7 +148,7 @@ class Server extends AbstractServer
      * @param  string $method
      * @param  array $params
      * @return mixed
-     * @throws Zend\XmlRpc\Server\Exception
+     * @throws Server\Exception\BadMethodCallException
      */
     public function __call($method, $params)
     {
@@ -171,10 +170,10 @@ class Server extends AbstractServer
      * any arguments following the namespace will be aggregated and passed at
      * dispatch time.
      *
-     * @param string|array $function Valid callback
-     * @param string $namespace Optional namespace prefix
+     * @param string|array|callable $function  Valid callback
+     * @param string                $namespace Optional namespace prefix
      * @return void
-     * @throws Zend\XmlRpc\Server\Exception
+     * @throws \Zend\XmlRpc\Exception\InvalidArgumentException
      */
     public function addFunction($function, $namespace = '')
     {
@@ -213,7 +212,7 @@ class Server extends AbstractServer
      * @param string $namespace Optional
      * @param mixed $argv Optional arguments to pass to methods
      * @return void
-     * @throws Zend\XmlRpc\Server\Exception on invalid input
+     * @throws Server\Exception\InvalidArgumentException on invalid input
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
@@ -235,9 +234,9 @@ class Server extends AbstractServer
     /**
      * Raise an xmlrpc server fault
      *
-     * @param string|Exception $fault
+     * @param string|\Exception $fault
      * @param int $code
-     * @return Zend\XmlRpc\Server\Fault
+     * @return Server\Fault
      */
     public function fault($fault = null, $code = 404)
     {
@@ -327,7 +326,7 @@ class Server extends AbstractServer
      *
      * @param  array|Definition $definition
      * @return void
-     * @throws Server\Exception on invalid input
+     * @throws Server\Exception\InvalidArgumentException on invalid input
      */
     public function loadFunctions($definition)
     {
@@ -393,7 +392,7 @@ class Server extends AbstractServer
      *
      * @param  string|Request $request
      * @return Server
-     * @throws Server\Exception on invalid request class or object
+     * @throws Server\Exception\InvalidArgumentException on invalid request class or object
      */
     public function setRequest($request)
     {
@@ -527,7 +526,7 @@ class Server extends AbstractServer
      *
      * @param  Request $request
      * @return Response
-     * @throws Server\Exception|Exception
+     * @throws Server\Exception\RuntimeException
      * Zend\XmlRpc\Server\Exceptions are thrown for internal errors; otherwise,
      * any other exception may be thrown by the callback
      */
@@ -597,6 +596,7 @@ class Server extends AbstractServer
      *
      * @param string $className
      * @param string $type
+     * @return bool
      */
     protected static function isSubclassOf($className, $type)
     {

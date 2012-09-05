@@ -11,8 +11,6 @@
 namespace Zend\Db\RowGateway;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\Row;
-use Zend\Db\ResultSet\RowObjectInterface;
 use Zend\Db\Sql\Sql;
 
 /**
@@ -26,15 +24,14 @@ class RowGateway extends AbstractRowGateway
     /**
      * Constructor
      *
-     * @param string $tableGateway
+     * @param string $primaryKeyColumn
      * @param string|\Zend\Db\Sql\TableIdentifier $table
-     * @param Adapter $adapter
-     * @param Sql\Sql $sql
+     * @param Adapter|Sql $adapterOrSql
      */
     public function __construct($primaryKeyColumn, $table, $adapterOrSql = null)
     {
         // setup primary key
-        $this->primaryKeyColumn = $primaryKeyColumn;
+        $this->primaryKeyColumn = (array) $primaryKeyColumn;
 
         // set table
         $this->table = $table;

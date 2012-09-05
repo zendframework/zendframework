@@ -139,7 +139,7 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Attach a filter to the chain
      *
-     * @param  callback|FilterInterface $callback A Filter implementation or valid PHP callback
+     * @param  callable|FilterInterface $callback A Filter implementation or valid PHP callback
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */

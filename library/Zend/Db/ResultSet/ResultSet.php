@@ -47,8 +47,8 @@ class ResultSet extends AbstractResultSet
     /**
      * Constructor
      *
-     * @param  null|ArrayObject $arrayObjectPrototype
-     * @return void
+     * @param string           $returnType
+     * @param null|ArrayObject $arrayObjectPrototype
      */
     public function __construct($returnType = self::TYPE_ARRAYOBJECT, $arrayObjectPrototype = null)
     {

@@ -157,7 +157,7 @@ class Cookies extends Headers
         $cookies = $this->_matchPath($cookies, $uri->getPath());
         $cookies = $this->_flattenCookiesArray($cookies, self::COOKIE_OBJECT);
 
-        // Next, run Cookie->match on all cookies to check secure, time and session mathcing
+        // Next, run Cookie->match on all cookies to check secure, time and session matching
         $ret = array();
         foreach ($cookies as $cookie)
             if ($cookie->match($uri, $matchSessionCookies, $now))
@@ -218,7 +218,7 @@ class Cookies extends Headers
     }
 
     /**
-     * Helper function to recursivly flatten an array. Shoud be used when exporting the
+     * Helper function to recursively flatten an array. Should be used when exporting the
      * cookies array (or parts of it)
      *
      * @param \Zend\Http\Header\Cookie|array $ptr

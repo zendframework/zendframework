@@ -74,7 +74,6 @@ class Curl implements HttpAdapter, StreamInterface
      *
      * Config is set using setOptions()
      *
-     * @return void
      * @throws AdapterException\InitializationException
      */
     public function __construct()
@@ -132,7 +131,7 @@ class Curl implements HttpAdapter, StreamInterface
 
         foreach ($options as $k => $v) {
             $option = strtolower($k);
-            switch($option) {
+            switch ($option) {
                 case 'proxyhost':
                     $this->setCurlOption(CURLOPT_PROXY, $v);
                     break;

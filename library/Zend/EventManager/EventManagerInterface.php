@@ -36,7 +36,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * @param  string $event
      * @param  object|string $target
      * @param  array|object $argv
-     * @param  null|callback $callback
+     * @param  null|callable $callback
      * @return ResponseCollection
      */
     public function trigger($event, $target = null, $argv = array(), $callback = null);
@@ -53,7 +53,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * @param  string $event
      * @param  object|string $target
      * @param  array|object $argv
-     * @param  callback $callback
+     * @param  callable $callback
      * @return ResponseCollection
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null);
@@ -62,7 +62,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Attach a listener to an event
      *
      * @param  string $event
-     * @param  callback $callback
+     * @param  callable $callback
      * @param  int $priority Priority at which to register listener
      * @return CallbackHandler
      */

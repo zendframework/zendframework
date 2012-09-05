@@ -38,7 +38,7 @@ class Radio extends MultiCheckbox
     {
         if (null === $this->validator) {
             $this->validator = new InArrayValidator(array(
-                'haystack'  => $this->getOptionAttributeValues(),
+                'haystack'  => $this->getValueOptionsValues(),
                 'strict'    => false,
             ));
         }

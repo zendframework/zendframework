@@ -65,7 +65,6 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      *
      * Set separator to PHP_EOL.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -317,14 +316,14 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
                     continue;
                 }
                 if ('media' == $key) {
-                    if(false === strpos($value, ',')) {
+                    if (false === strpos($value, ',')) {
                         if (!in_array($value, $this->mediaTypes)) {
                             continue;
                         }
                     } else {
                         $media_types = explode(',', $value);
                         $value = '';
-                        foreach($media_types as $type) {
+                        foreach ($media_types as $type) {
                             $type = trim($type);
                             if (!in_array($type, $this->mediaTypes)) {
                                 continue;
@@ -396,7 +395,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     {
         if (!isset($attributes['media'])) {
             $attributes['media'] = 'screen';
-        } else if(is_array($attributes['media'])) {
+        } elseif (is_array($attributes['media'])) {
             $attributes['media'] = implode(',', $attributes['media']);
         }
 

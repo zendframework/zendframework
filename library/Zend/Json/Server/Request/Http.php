@@ -29,7 +29,6 @@ class Http extends JsonRequest
      *
      * Pull JSON request from raw POST body and use to populate request.
      *
-     * @return void
      */
     public function __construct()
     {

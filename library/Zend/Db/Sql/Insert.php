@@ -11,7 +11,7 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Adapter\Platform\Sql92;
@@ -55,8 +55,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Constructor
      *
      * @param  null|string $table
-     * @param  null|string $schema
-     * @return void
      */
     public function __construct($table = null)
     {
@@ -69,7 +67,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Crete INTO clause
      *
      * @param  string $table
-     * @param  null|string $databaseOrSchema
      * @return Insert
      */
     public function into($table)
@@ -136,18 +133,18 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Prepare statement
      *
      * @param  Adapter $adapter
-     * @param  StatementInterface $statement
+     * @param  StatementContainerInterface $statementContainer
      * @return void
      */
-    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
+    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
     {
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
-        $parameterContainer = $statement->getParameterContainer();
+        $parameterContainer = $statementContainer->getParameterContainer();
 
         if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
-            $statement->setParameterContainer($parameterContainer);
+            $statementContainer->setParameterContainer($parameterContainer);
         }
 
         $table = $platform->quoteIdentifier($this->table);
@@ -158,11 +155,9 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
             if ($this->values[$cIndex] instanceof Expression) {
-                $exprData = $this->processExpression($this->values[$cIndex], $platform, $driver);
-                $values[$cIndex] = $exprData['sql'];
-                if (count($exprData['parameters']) > 0) {
-                    $parameterContainer->merge($exprData['parameters']);
-                }
+                $exprData = $this->processExpression($this->values[$cIndex], $platform, $adapter);
+                $values[$cIndex] = $exprData->getSql();
+                $parameterContainer->merge($exprData->getParameterContainer());
             } else {
                 $values[$cIndex] = $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $this->values[$cIndex]);
@@ -176,7 +171,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             implode(', ', $values)
         );
 
-        $statement->setSql($sql);
+        $statementContainer->setSql($sql);
     }
 
     /**
@@ -197,7 +192,9 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->values as $value) {
             if ($value instanceof Expression) {
                 $exprData = $this->processExpression($value, $adapterPlatform);
-                $values[] = $exprData['sql'];
+                $values[] = $exprData->getSql();
+            } elseif (is_null($value)) {
+                $values[] = 'NULL';
             } else {
                 $values[] = $adapterPlatform->quoteValue($value);
             }

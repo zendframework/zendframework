@@ -144,7 +144,7 @@ class Factory
         if (!is_string($reader) && !$reader instanceof Reader\ReaderInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Reader should be plugin name, class name or ' .
-                'instance of %s\Reader\ReaderInterface; recieved "%s"',
+                'instance of %s\Reader\ReaderInterface; received "%s"',
                 __NAMESPACE__,
                 (is_object($reader) ? get_class($reader) : gettype($reader))
             ));

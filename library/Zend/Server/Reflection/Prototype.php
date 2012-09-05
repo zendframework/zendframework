@@ -24,9 +24,8 @@ class Prototype
     /**
      * Constructor
      *
-     * @param Zend\Server\Reflection\ReflectionReturnValue $return
+     * @param ReflectionReturnValue $return
      * @param array $params
-     * @return void
      */
     public function __construct(ReflectionReturnValue $return, $params = null)
     {
@@ -61,7 +60,7 @@ class Prototype
      * Retrieve the return value object
      *
      * @access public
-     * @return Zend\Server\Reflection\ReflectionReturnValue
+     * @return \Zend\Server\Reflection\ReflectionReturnValue
      */
     public function getReturnValue()
     {

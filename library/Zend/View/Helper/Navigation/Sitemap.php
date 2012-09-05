@@ -14,6 +14,7 @@ use DOMDocument;
 use RecursiveIteratorIterator;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Uri;
 use Zend\View;
 use Zend\View\Exception;
@@ -125,8 +126,8 @@ class Sitemap extends AbstractHelper
     /**
      * Sets whether the XML declaration should be used in output
      *
-     * @param  bool $useXmlDecl whether XML delcaration should be rendered
-     * @returnSitemap  fluent interface, returns self
+     * @param  bool $useXmlDecl whether XML declaration should be rendered
+     * @return Sitemap  fluent interface, returns self
      */
     public function setUseXmlDeclaration($useXmlDecl)
     {
@@ -148,7 +149,7 @@ class Sitemap extends AbstractHelper
      * Sets whether sitemap should be validated using Zend\Validate\Sitemap_*
      *
      * @param  bool $useSitemapValidators whether sitemap validators should be used
-     * @returnSitemap  fluent interface, returns self
+     * @return Sitemap  fluent interface, returns self
      */
     public function setUseSitemapValidators($useSitemapValidators)
     {
@@ -170,7 +171,7 @@ class Sitemap extends AbstractHelper
      * Sets whether sitemap should be schema validated when generated
      *
      * @param  bool $schemaValidation whether sitemap should validated using XSD Schema
-     * @returnSitemap  fluent interface, returns self
+     * @return Sitemap
      */
     public function setUseSchemaValidation($schemaValidation)
     {
@@ -422,11 +423,14 @@ class Sitemap extends AbstractHelper
 
         // validate using schema if specified
         if ($this->getUseSchemaValidation()) {
-            if (!@$dom->schemaValidate(self::SITEMAP_XSD)) {
+            ErrorHandler::start();
+            $test  = $dom->schemaValidate(self::SITEMAP_XSD);
+            $error = ErrorHandler::stop();
+            if (!$test) {
                 throw new Exception\RuntimeException(sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
                     self::SITEMAP_XSD
-                ));
+                ), 0, $error);
             }
         }
 

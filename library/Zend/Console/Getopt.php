@@ -148,14 +148,14 @@ class Getopt
     );
 
     /**
-     * Stores the command-line arguments for the calling applicaion.
+     * Stores the command-line arguments for the calling application.
      *
      * @var array
      */
     protected $argv = array();
 
     /**
-     * Stores the name of the calling applicaion.
+     * Stores the name of the calling application.
      *
      * @var string
      */
@@ -212,7 +212,6 @@ class Getopt
      * @param  array $rules
      * @param  array $argv
      * @param  array $getoptConfig
-     * @return void
      */
     public function __construct($rules, $argv = null, $getoptConfig = array())
     {

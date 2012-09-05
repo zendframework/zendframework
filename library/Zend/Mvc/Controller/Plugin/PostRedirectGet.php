@@ -23,10 +23,18 @@ use Zend\Session\Container;
  */
 class PostRedirectGet extends AbstractPlugin
 {
-    public function __invoke($redirect, $redirectToUrl = false)
+    public function __invoke($redirect = null, $redirectToUrl = false)
     {
         $controller = $this->getController();
-        $request = $controller->getRequest();
+        $request    = $controller->getRequest();
+        $params     = array();
+
+        if (null === $redirect) {
+            $routeMatch = $controller->getEvent()->getRouteMatch();
+
+            $redirect = $routeMatch->getMatchedRouteName();
+            $params   = $routeMatch->getParams();
+        }
 
         $container = new Container('prg_post1');
 
@@ -38,9 +46,8 @@ class PostRedirectGet extends AbstractPlugin
                 // get the redirect plugin from the plugin manager
                 $redirector = $controller->getPluginManager()->get('Redirect');
             } else {
-
                 /*
-                 * if the user wants to redirect to a route, the redirector has to come
+                 * If the user wants to redirect to a route, the redirector has to come
                  * from the plugin manager -- otherwise no router will be injected
                  */
                 if ($redirectToUrl === false) {
@@ -51,10 +58,15 @@ class PostRedirectGet extends AbstractPlugin
             }
 
             if ($redirectToUrl === false) {
-                return $redirector->toRoute($redirect);
+                $response = $redirector->toRoute($redirect, $params);
+                $response->setStatusCode(303);
+                return $response;
             }
 
-            return $redirector->toUrl($redirect);
+            $response = $redirector->toUrl($redirect);
+            $response->setStatusCode(303);
+
+            return $response;
         } else {
             if ($container->post !== null) {
                 $post = $container->post;

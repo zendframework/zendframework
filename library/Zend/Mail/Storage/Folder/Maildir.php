@@ -89,10 +89,10 @@ class Maildir extends Storage\Maildir implements FolderInterface
         $this->rootFolder->INBOX = new Storage\Folder('INBOX', 'INBOX', true);
 
         ErrorHandler::start(E_WARNING);
-        $dh = opendir($this->rootdir);
-        ErrorHandler::stop();
+        $dh    = opendir($this->rootdir);
+        $error = ErrorHandler::stop();
         if (!$dh) {
-            throw new Exception\RuntimeException("can't read folders in maildir");
+            throw new Exception\RuntimeException("can't read folders in maildir", 0, $error);
         }
         $dirs = array();
 
@@ -193,7 +193,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
 
         try {
             $this->_openMaildir($this->rootdir . '.' . $folder->getGlobalName());
-        } catch(Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
                 throw new Exception\RuntimeException("{$this->currentFolder} is not selectable", 0, $e);

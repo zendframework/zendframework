@@ -10,12 +10,14 @@
 
 namespace Zend\File\Transfer\Adapter;
 
+use ErrorException;
 use Zend\File\Transfer;
 use Zend\File\Transfer\Exception;
 use Zend\Filter;
 use Zend\Filter\Exception as FilterException;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Validator;
 
 /**
@@ -111,7 +113,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      *         type,            - Mime type of this file
      *         size,            - Filesize in bytes
      *         tmp_name,        - Internally temporary filename for uploaded files
-     *         error,           - Error which has occured
+     *         error,           - Error which has occurred
      *         destination,     - New destination for this file
      *         validators,      - Set validator names for this file
      *         files            - Set file names for this file
@@ -510,6 +512,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      *
      * @param array $options Options to set
      * @param array $files   (Optional) Files to set the options for
+     * @return AbstractAdapter
      */
     public function setOptions($options = array(), $files = null)
     {
@@ -1160,14 +1163,21 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     protected function detectFileSize($value)
     {
         if (file_exists($value['name'])) {
-            $result = sprintf("%u", @filesize($value['name']));
+            $filename = $value['name'];
         } elseif (file_exists($value['tmp_name'])) {
-            $result = sprintf("%u", @filesize($value['tmp_name']));
+            $filename = $value['tmp_name'];
         } else {
             return null;
         }
 
-        return $result;
+        ErrorHandler::start();
+        $filesize = filesize($filename);
+        $return   = ErrorHandler::stop();
+        if ($return instanceof ErrorException) {
+            $filesize = 0;
+        }
+
+        return sprintf("%u", $filesize);
     }
 
     /**
@@ -1218,11 +1228,15 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!empty($value['options']['magicFile'])) {
-                $mime = @finfo_open($const, $value['options']['magicFile']);
+                ErrorHandler::start();
+                $mime = finfo_open($const, $value['options']['magicFile']);
+                ErrorHandler::stop();
             }
 
             if (empty($mime)) {
-                $mime = @finfo_open($const);
+                ErrorHandler::start();
+                $mime = finfo_open($const);
+                ErrorHandler::stop();
             }
 
             if (!empty($mime)) {
@@ -1349,19 +1363,24 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * Tries to detect if we can read and write to the given path
      *
      * @param string $path
+     * @return bool
      */
     protected function isPathWriteable($path)
     {
         $tempFile = rtrim($path, "/\\");
         $tempFile .= '/' . 'test.1';
 
-        $result = @file_put_contents($tempFile, 'TEST');
+        ErrorHandler::start();
+        $result = file_put_contents($tempFile, 'TEST');
+        ErrorHandler::stop();
 
         if ($result == false) {
             return false;
         }
 
-        $result = @unlink($tempFile);
+        ErrorHandler::start();
+        $result = unlink($tempFile);
+        ErrorHandler::stop();
 
         if ($result == false) {
             return false;

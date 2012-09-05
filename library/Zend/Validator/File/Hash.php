@@ -150,7 +150,7 @@ class Hash extends AbstractValidator
                 return $this->throwError($file, self::NOT_DETECTED);
             }
 
-            foreach($hashes as $hash) {
+            foreach ($hashes as $hash) {
                 if ($filehash === $hash) {
                     return true;
                 }
@@ -171,7 +171,7 @@ class Hash extends AbstractValidator
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $this->value = $file['name'];
                 }
             } elseif (is_string($file)) {

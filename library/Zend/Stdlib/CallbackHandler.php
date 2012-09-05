@@ -27,7 +27,7 @@ use WeakRef;
 class CallbackHandler
 {
     /**
-     * @var string|array PHP callback to invoke
+     * @var string|array|callable PHP callback to invoke
      */
     protected $callback;
 
@@ -52,10 +52,9 @@ class CallbackHandler
     /**
      * Constructor
      *
-     * @param  string $event Event to which slot is subscribed
-     * @param  string|array|object $callback PHP callback
-     * @param  array $options Options used by the callback handler (e.g., priority)
-     * @return void
+     * @param  string                       $event    Event to which slot is subscribed
+     * @param  string|array|object|callable $callback PHP callback
+     * @param  array                        $options  Options used by the callback handler (e.g., priority)
      */
     public function __construct($callback, array $metadata = array())
     {

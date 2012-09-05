@@ -11,7 +11,7 @@
 namespace Zend\Db\Sql\Platform\SqlServer;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
@@ -34,9 +34,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
     /**
      * @param Adapter $adapter
-     * @param StatementInterface $statement
+     * @param StatementContainerInterface $statementContainer
      */
-    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
+    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
     {
         // localize variables
         foreach (get_object_vars($this->select) as $name => $value) {
@@ -44,16 +44,16 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         }
 
         // set specifications
-        unset($this->specifications[self::SPECIFICATION_LIMIT]);
-        unset($this->specifications[self::SPECIFICATION_OFFSET]);
+        unset($this->specifications[self::LIMIT]);
+        unset($this->specifications[self::OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
-        parent::prepareStatement($adapter, $statement);
+        parent::prepareStatement($adapter, $statementContainer);
     }
 
     /**
-     * @param Adapter $adapter
-     * @param StatementInterface $statement
+     * @param PlatformInterface $platform
+     * @return string
      */
     public function getSqlString(PlatformInterface $platform = null)
     {
@@ -63,8 +63,8 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         }
 
         // set specifications
-        unset($this->specifications[self::SPECIFICATION_LIMIT]);
-        unset($this->specifications[self::SPECIFICATION_OFFSET]);
+        unset($this->specifications[self::LIMIT]);
+        unset($this->specifications[self::OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
         return parent::getSqlString($platform);
@@ -84,7 +84,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             return null;
         }
 
-        $selectParameters = $parameters[self::SPECIFICATION_SELECT];
+        $selectParameters = $parameters[self::SELECT];
 
         $starSuffix = $platform->getIdentifierSeparator() . self::SQL_STAR;
         foreach ($selectParameters[0] as $i => $columnParameters) {
@@ -100,7 +100,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         // first, produce column list without compound names (using the AS portion only)
         array_unshift($sqls, $this->createSqlFromSpecificationAndParameters(
-            array('SELECT %1$s FROM (' => current($this->specifications[self::SPECIFICATION_SELECT])),
+            array('SELECT %1$s FROM (' => current($this->specifications[self::SELECT])),
             $selectParameters
         ));
 
@@ -117,19 +117,19 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             );
         }
 
-        if (isset($sqls[self::SPECIFICATION_ORDER])) {
-            $orderBy = $sqls[self::SPECIFICATION_ORDER];
-            unset($sqls[self::SPECIFICATION_ORDER]);
+        if (isset($sqls[self::ORDER])) {
+            $orderBy = $sqls[self::ORDER];
+            unset($sqls[self::ORDER]);
         } else {
             $orderBy = 'SELECT 1';
         }
 
         // add a column for row_number() using the order specification
-        $parameters[self::SPECIFICATION_SELECT][0][] = array('ROW_NUMBER() OVER (' . $orderBy . ')', '[__ZEND_ROW_NUMBER]');
+        $parameters[self::SELECT][0][] = array('ROW_NUMBER() OVER (' . $orderBy . ')', '[__ZEND_ROW_NUMBER]');
 
-        $sqls[self::SPECIFICATION_SELECT] = $this->createSqlFromSpecificationAndParameters(
-            $this->specifications[self::SPECIFICATION_SELECT],
-            $parameters[self::SPECIFICATION_SELECT]
+        $sqls[self::SELECT] = $this->createSqlFromSpecificationAndParameters(
+            $this->specifications[self::SELECT],
+            $parameters[self::SELECT]
         );
 
     }

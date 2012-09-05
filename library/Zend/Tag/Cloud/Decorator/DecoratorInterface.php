@@ -25,7 +25,6 @@ interface DecoratorInterface
      * Allow passing options to the constructor.
      *
      * @param  mixed $options
-     * @return void
      */
     public function __construct($options = null);
 

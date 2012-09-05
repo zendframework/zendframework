@@ -52,9 +52,9 @@ class FeedSet extends ArrayObject
             }
             if (!isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
                 $this->rss = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
-            } elseif(!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
+            } elseif (!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
                 $this->atom = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
-            } elseif(!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
+            } elseif (!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
                 $this->rdf = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
             }
             $this[] = new self(array(

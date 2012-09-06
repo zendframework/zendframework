@@ -210,7 +210,7 @@ class Reader
                     $etag = $cache->getItem($cacheId.'_etag');
                 }
                 if ($lastModified === null) {
-                    $lastModified = $cache->getItem($cacheId.'_lastmodified');;
+                    $lastModified = $cache->getItem($cacheId.'_lastmodified');
                 }
                 if ($etag) {
                     $headers->addHeaderLine('If-None-Match', $etag);

@@ -81,12 +81,13 @@ class PluginManager extends AbstractPluginManager
      * plugin is lost.
      *
      * @param  string $cName
+     * @param  array $options
      * @param  array $params
      * @return mixed
      */
-    public function get($name, $usePeeringServiceManagers = true)
+    public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
-        $plugin = parent::get($name, $usePeeringServiceManagers);
+        $plugin = parent::get($name, $options, $usePeeringServiceManagers);
         $this->injectController($plugin);
         return $plugin;
     }

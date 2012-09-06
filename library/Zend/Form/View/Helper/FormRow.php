@@ -78,6 +78,13 @@ class FormRow extends AbstractHelper
         $inputErrorClass = $this->getInputErrorClass();
         $elementErrors   = $elementErrorsHelper->render($element);
 
+        // Translate the label
+        if (null !== ($translator = $this->getTranslator())) {
+            $label = $translator->translate(
+                $label, $this->getTranslatorTextDomain()
+            );
+        }
+
         // Does this element have errors ?
         if (!empty($elementErrors) && !empty($inputErrorClass)) {
             $classAttributes = ($element->hasAttribute('class') ? $element->getAttribute('class') . ' ' : '');
@@ -279,6 +286,13 @@ class FormRow extends AbstractHelper
 
         if (!$this->labelHelper instanceof FormLabel) {
             $this->labelHelper = new FormLabel();
+        }
+
+        if ($this->hasTranslator()) {
+            $this->labelHelper->setTranslator(
+                $this->getTranslator(),
+                $this->getTranslatorTextDomain()
+            );
         }
 
         return $this->labelHelper;

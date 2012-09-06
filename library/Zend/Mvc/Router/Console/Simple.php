@@ -299,7 +299,7 @@ class Simple implements RouteInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroup'.$unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroup' . $unnamedGroupCounter++,
                     'literal'       => true,
                     'required'      => false,
                     'positional'    => true,
@@ -338,7 +338,7 @@ class Simple implements RouteInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt' . $unnamedGroupCounter++,
                     'literal'       => true,
                     'required'      => true,
                     'positional'    => true,
@@ -379,7 +379,7 @@ class Simple implements RouteInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt' . $unnamedGroupCounter++,
                     'literal'       => false,
                     'required'      => true,
                     'positional'    => false,
@@ -420,7 +420,7 @@ class Simple implements RouteInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt' . $unnamedGroupCounter++,
                     'literal'       => false,
                     'required'      => false,
                     'positional'    => false,
@@ -570,16 +570,16 @@ class Simple implements RouteInterface
                 if ($part['short'] === true) {
                     // short variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+                        $regex = '/^\-' . $part['name'].'(?:\=(?<value>.*?)$)?$/';
                     } else {
-                        $regex = '/^\-'.$part['name'].'$/';
+                        $regex = '/^\-' . $part['name'].'$/';
                     }
                 } elseif ($part['short'] === false) {
                     // long variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-{2,}'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+                        $regex = '/^\-{2,}' . $part['name'].'(?:\=(?<value>.*?)$)?$/';
                     } else {
-                        $regex = '/^\-{2,}'.$part['name'].'$/';
+                        $regex = '/^\-{2,}' . $part['name'].'$/';
                     }
                 }
             }

@@ -317,7 +317,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     }
                 }
             } else {
-                throw new RuntimeException('Cannot understand usage info for module '.$moduleName);
+                throw new RuntimeException('Cannot understand usage info for module ' . $moduleName);
             }
         }
 

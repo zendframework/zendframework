@@ -141,7 +141,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($this->hasJsonpCallback()) {
-                $values = $this->jsonpCallback.'('.$values.');';
+                $values = $this->jsonpCallback.'(' . $values.');';
             }
             return $values;
         }
@@ -159,7 +159,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($this->hasJsonpCallback()) {
-                $return = $this->jsonpCallback.'('.$return.');';
+                $return = $this->jsonpCallback.'(' . $return.');';
             }
             return $return;
         }

@@ -492,7 +492,7 @@ class AutoDiscover
         // When using the RPC style, make sure the operation style includes a 'namespace' attribute (WS-I Basic Profile 1.1 R2717)
         $operationBodyStyle = $this->operationBodyStyle;
         if ($this->bindingStyle['style'] == 'rpc' && !isset($operationBodyStyle['namespace'])) {
-            $operationBodyStyle['namespace'] = ''.$uri;
+            $operationBodyStyle['namespace'] = '' . $uri;
         }
 
         // Add the binding operation

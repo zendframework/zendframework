@@ -375,7 +375,7 @@ class Simple implements RouteInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options,function(&$val,$key) {$val = ltrim($val,'-');});
+                array_walk($options,function(&$val, $key) {$val = ltrim($val,'-');});
 
                 // prepare item
                 $item = array(
@@ -416,7 +416,7 @@ class Simple implements RouteInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options,function(&$val,$key) {$val = ltrim($val,'-');});
+                array_walk($options,function(&$val, $key) {$val = ltrim($val,'-');});
 
                 // prepare item
                 $item = array(
@@ -558,7 +558,7 @@ class Simple implements RouteInterface
             if (isset($part['alternatives'])) {
                 // an alternative of flags
                 $regex = '/^\-+(?<name>';
-                $regex .= join('|',$part['alternatives']);
+                $regex .= join('|', $part['alternatives']);
 
                 if ($part['hasValue']) {
                     $regex .= ')(?:\=(?<value>.*?)$)?$/';
@@ -589,12 +589,12 @@ class Simple implements RouteInterface
              */
             $value = $param = null;
             for ($x=0;$x<count($params);$x++) {
-                if (preg_match($regex,$params[$x],$m)) {
+                if (preg_match($regex, $params[$x], $m)) {
                     // found param
                     $param = $params[$x];
 
                     // prevent further scanning of this param
-                    array_splice($params,$x,1);
+                    array_splice($params, $x,1);
 
                     if (isset($m['value'])) {
                         $value = $m['value'];
@@ -642,7 +642,7 @@ class Simple implements RouteInterface
                     $value = $params[$x];
 
                     // prevent further scanning of this param
-                    array_splice($params,$x,1);
+                    array_splice($params, $x,1);
                 } else {
                     // there are no more params available
                     return;
@@ -654,7 +654,7 @@ class Simple implements RouteInterface
              */
             if ($part['hasValue'] && isset($this->constraints[$part['name']])) {
                 if (
-                    !preg_match($this->constraints[$part['name']],$value)
+                    !preg_match($this->constraints[$part['name']], $value)
                 ) {
                     // constraint failed
                     return;
@@ -698,7 +698,7 @@ class Simple implements RouteInterface
          * Scan for left-out flags that should result in a mismatch
          */
         foreach ($params as $param) {
-            if (preg_match('#^\-+#',$param)) {
+            if (preg_match('#^\-+#', $param)) {
                 return; // there is an unrecognized flag
             }
         }
@@ -728,7 +728,7 @@ class Simple implements RouteInterface
              */
             if ($part['literal']) {
                 if (
-                    (isset($part['alternatives']) && !in_array($value,$part['alternatives'])) ||
+                    (isset($part['alternatives']) && !in_array($value, $part['alternatives'])) ||
                     (!isset($part['alternatives']) && $value != $part['name'])
                 ) {
                     return;
@@ -740,7 +740,7 @@ class Simple implements RouteInterface
              */
             if ($part['hasValue'] && isset($this->constraints[$part['name']])) {
                 if (
-                    !preg_match($this->constraints[$part['name']],$value)
+                    !preg_match($this->constraints[$part['name']], $value)
                 ) {
                     // constraint failed
                     return;

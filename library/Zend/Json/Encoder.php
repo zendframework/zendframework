@@ -131,7 +131,7 @@ class Encoder
         $props = '';
 
         if (method_exists($value, 'toJson')) {
-            $props =',' . preg_replace("/^\{(.*)\}$/","\\1",$value->toJson());
+            $props =',' . preg_replace("/^\{(.*)\}$/","\\1", $value->toJson());
         } else {
             if ($value instanceof IteratorAggregate) {
                 $propCollection = $value->getIterator();

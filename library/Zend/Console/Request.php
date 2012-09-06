@@ -162,7 +162,7 @@ class Request extends Message implements RequestInterface
      */
     public function toString()
     {
-        return trim(implode(' ',$this->params()->toArray()));
+        return trim(implode(' ', $this->params()->toArray()));
     }
 
     /**

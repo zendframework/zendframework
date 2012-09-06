@@ -103,7 +103,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     $response = new ConsoleResponse();
                     $e->setResponse($response);
                 }
-                $response->setMetadata('error',$error);
+                $response->setMetadata('error', $error);
                 break;
             default:
                 return;
@@ -206,7 +206,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         /**
          * Join the banners by a newline character
          */
-        return join("\n",$banners);
+        return join("\n", $banners);
     }
 
     /**
@@ -273,7 +273,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                          */
                         if (($tableCols !== 2 || $tableType != 1) && $table !== false) {
                             // render last table
-                            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+                            $result .= $this->renderTable($table, $tableCols, $console->getWidth());
                             $table = false;
 
                              // add extra newline for clarity
@@ -323,7 +323,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
 
         // Finish last table
         if ($table !== false) {
-            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+            $result .= $this->renderTable($table, $tableCols, $console->getWidth());
         }
 
         return $result;
@@ -369,7 +369,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         }
         if ($width >= $consoleWidth - 10) {
             foreach ($data as $row) {
-                $result .= join("    ",$row)."\n";
+                $result .= join("    ", $row)."\n";
             }
             return $result;
         }

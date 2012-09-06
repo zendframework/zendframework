@@ -1,61 +1,24 @@
-### Welcome to the *Zend Framework 2.0.0* Release!
+### Welcome to the *Zend Framework 2.0* Release!
 
 Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0*
+*Zend Framework 2.0.1*
 
-This is the first stable release of the new version 2 release branch.
+This is the first maintenance release for the 2.0 series.
 
-04 September 2012
+XX YYY 2012
 
-### NEW IN ZEND FRAMEWORK 2
+### UPDATES IN 2.0.1
 
-New and/or refactored components include:
+- Zend\Form
+  - Made value and placeholder form attributes translatable
+- Zend\Stdlib
+  - Adds support for "has" methods to ClassMethods hydrator
 
-- EventManager - provides subject/observer, pubsub, aspect-oriented programming,
-  signal slots, and event systems for your applications.
-- ServiceManager - provides an Inversion of Control (IoC) container for managing
-  object life-cycles and dependencies via a configurable and programmable
-  interface.
-- DI - provides a Dependency Injection Container, another form of IoC.
-- MVC - a newly written MVC layer for ZF2, using controllers as services, and
-  wiring everything together using events.
-- ModuleManager - a solution for providing plug-and-play functionality for
-  either MVC applications or any application requiring pluggable 3rd party code.
-  Within ZF2, the ModuleManager provides the MVC with services, and assists in
-  wiring events.
-- Loader - provides new options for autoloading, including standard, performant
-  PSR-0 loading and class-map-based autoloading.
-- Code - provides support for code reflection, static code scanning, and
-  annotation parsing.
-- Config - more performant and more flexible configuration parsing and creation.
-- Escaper - a new component for providing context-specific escaping solutions
-  for HTML, HTML attributes, CSS, JavaScript, and combinations of contexts as
-  well.
-- HTTP - rewritten to provide better header, request, and response abstraction.
-- I18n - a brand new internationalization and localization layer built on top of
-  PHP's ext/intl extension.
-- InputFilter - a new component for providing normalization and validation of
-  sets of data.
-- Form - rewritten from the ground up to properly separate validation, domain
-  modeling, and presentation concerns. Allows binding objects to forms, defining
-  forms and input filters via annotations, and more.
-- Log - rewritten to be more flexible and provide better capabilities
-  surrounding message formats and filtering.
-- Mail - rewritten to separate concerns more cleanly between messages and
-  transports.
-- Session - rewritten to make testing easier, as well as to make it more
-  configurable for end users.
-- Uri - rewritten to provide a cleaner, more object oriented interface.
-
-Many components have been ported from Zend Framework 1, and operate in
-practically identical manners to their 1.X equivalent. Others, such as the
-service components, have been moved to their own repositories to ensure that as
-APIs change, they do not need to wait on the framework to release new versions.
-
-Welcome to a new generation of Zend Framework!
+More than XX pull requests for a variety of features and bugfixes were handled
+since RC6, as well as almost XX documentation changes!
 
 ### SYSTEM REQUIREMENTS
 

@@ -166,7 +166,7 @@ class FormRowTest extends TestCase
         $element->setLabel('The value for foo:');
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
-        $mockTranslator->expects($this->exactly(1))
+        $mockTranslator->expects($this->any())
             ->method('translate')
             ->will($this->returnValue('translated content'));
 
@@ -177,7 +177,16 @@ class FormRowTest extends TestCase
         $this->assertContains('>translated content<', $markup);
         $this->assertContains('<label', $markup);
         $this->assertContains('</label>', $markup);
+
+        // Additional coverage when element's id is set
+        $element->setAttribute('id', 'foo');
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+        $this->assertContains('<label', $markup);
+        $this->assertContains('</label>', $markup);
     }
+
+
 
     public function testTranslatorMethods()
     {

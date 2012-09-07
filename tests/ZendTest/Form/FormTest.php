@@ -286,6 +286,23 @@ class FormTest extends TestCase
         $this->assertInternalType('array', $data);
     }
 
+    /**
+     * @group ZF2-336
+     */
+    public function testCanAddFileEnctypeAttribute()
+    {
+        $this->form->add(array(
+            'name' => 'file_resource',
+            'attributes' => array(
+                'label' => 'This is a file',
+                'type' => 'file',
+            )));
+
+        $enctype = $this->form->getAttribute('enctype');
+        $this->assertNotEmpty($enctype);
+        $this->assertEquals($enctype, 'multipart/form-data');
+    }
+
     public function testCallingGetDataReturnsNormalizedDataByDefault()
     {
         $this->populateForm();

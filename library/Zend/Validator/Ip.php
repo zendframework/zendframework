@@ -26,7 +26,7 @@ class Ip extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID        => 'Invalid type given. String expected',
+        self::INVALID        => "Invalid type given. String expected",
         self::NOT_IP_ADDRESS => "The input does not appear to be a valid IP address",
     );
 

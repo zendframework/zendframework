@@ -24,16 +24,16 @@ final class Version
      * Zend Framework version identification - see compareVersion()
      */
     const VERSION = '2.1.0dev';
-    
+
     /**
      * Github Service Identifier for version information is retreived from
      */
-     const VERSION_SERVICE_GITHUB = 'GITHUB';
-     
-     /**
+    const VERSION_SERVICE_GITHUB = 'GITHUB';
+
+    /**
      * Github Service Identifier for version information is retreived from
      */
-     const VERSION_SERVICE_ZEND = 'ZEND';
+    const VERSION_SERVICE_ZEND = 'ZEND';
 
     /**
      * The latest stable version Zend Framework available
@@ -67,9 +67,9 @@ final class Version
      * we need to reduce the array to a single value, comparing the version
      * numbers with version_compare().
      *
-     * If $service is set to VERSION_SERVICE_ZEND this will fall back to calling the 
+     * If $service is set to VERSION_SERVICE_ZEND this will fall back to calling the
      * classic style of version retreival.
-     * 
+     *
      *
      * @see http://developer.github.com/v3/git/refs/#get-all-references
      * @link https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-
@@ -96,7 +96,7 @@ final class Version
                     return version_compare($a, $b, '>') ? $a : $b;
                 });
             } elseif($service == self::VERSION_SERVICE_ZEND) {
-                 $handle = fopen('http://framework.zend.com/api/zf-version?v=2', 'r');
+                $handle = fopen('http://framework.zend.com/api/zf-version?v=2', 'r');
                 if (false !== $handle) {
                     self::$_latestVersion = stream_get_contents($handle);
                     fclose($handle);

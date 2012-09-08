@@ -213,7 +213,7 @@ class Mime
 
         // assemble the lines together by pre- and appending delimiters, charset, encoding.
         for ($i = 0; $i < count($lines); $i++) {
-            $lines[$i] = " " . $prefix . $lines[$i]."?=";
+            $lines[$i] = " " . $prefix . $lines[$i] . "?=";
         }
         $str = trim(implode($lineEnd, $lines));
         return $str;

@@ -140,6 +140,6 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         $name  = $this->getFieldName();
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
 
-        return $name. ': ' . $value;
+        return $name . ': ' . $value;
     }
 }

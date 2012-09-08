@@ -166,7 +166,7 @@ class Smtp extends AbstractProtocol
      */
     public function connect()
     {
-        return $this->_connect($this->transport . '://' . $this->host . ':'. $this->port);
+        return $this->_connect($this->transport . '://' . $this->host . ':' . $this->port);
     }
 
 

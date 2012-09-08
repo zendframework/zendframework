@@ -369,13 +369,13 @@ class Simple implements RouteInterface
                 /sx', $def, $m, 0, $pos
             )) {
                 // extract available options
-                $options = preg_split('/ *\| */',trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
+                $options = preg_split('/ *\| */', trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
 
                 // remove dupes
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options,function(&$val, $key) {$val = ltrim($val,'-');});
+                array_walk($options, function(&$val, $key) {$val = ltrim($val, '-');});
 
                 // prepare item
                 $item = array(
@@ -410,13 +410,13 @@ class Simple implements RouteInterface
                 /sx', $def, $m, 0, $pos
             )) {
                 // extract available options
-                $options = preg_split('/ *\| */',trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
+                $options = preg_split('/ *\| */', trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
 
                 // remove dupes
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options,function(&$val, $key) {$val = ltrim($val,'-');});
+                array_walk($options, function(&$val, $key) {$val = ltrim($val, '-');});
 
                 // prepare item
                 $item = array(

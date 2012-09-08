@@ -101,7 +101,7 @@ abstract class AbstractAdapter implements AdapterInterface
         } elseif ($width == $consoleWidth) {
             $this->write($text, $color, $bgColor);
         } else {
-            $this->write($text. "\n", $color, $bgColor);
+            $this->write($text . "\n", $color, $bgColor);
         }
     }
 

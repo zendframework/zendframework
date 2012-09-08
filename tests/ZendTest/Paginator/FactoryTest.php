@@ -12,6 +12,7 @@ namespace ZendTest\Paginator;
 
 use Zend\Paginator;
 use Zend\Paginator\Adapter;
+use ZendTest\Paginator\TestAsset\TestArrayAggregate;
 
 /**
  * @category   Zend
@@ -41,13 +42,5 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $paginator = Paginator\Factory::Factory(null, new TestArrayAggregate);
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
-    }
-}
-
-class TestArrayAggregate implements Paginator\AdapterAggregateInterface
-{
-    public function getPaginatorAdapter()
-    {
-        return new Adapter\ArrayAdapter(array(1, 2, 3, 4));
     }
 }

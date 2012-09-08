@@ -18,7 +18,7 @@ use Zend\Paginator\AdapterPluginManager;
  * @subpackage UnitTests
  * @group      Zend_Paginator
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
     protected $adapaterPluginManager;
     

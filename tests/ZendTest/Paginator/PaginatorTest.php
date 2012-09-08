@@ -23,6 +23,7 @@ use Zend\Paginator\Adapter;
 use Zend\Paginator\Exception;
 use Zend\View;
 use Zend\View\Helper;
+use ZendTest\Paginator\TestAsset\TestArrayAggregate;
 
 /**
  * @category   Zend
@@ -795,12 +796,4 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
     }
 
-}
-
-class TestArrayAggregate implements Paginator\AdapterAggregateInterface
-{
-    public function getPaginatorAdapter()
-    {
-        return new Adapter\ArrayAdapter(array(1, 2, 3, 4));
-    }
 }

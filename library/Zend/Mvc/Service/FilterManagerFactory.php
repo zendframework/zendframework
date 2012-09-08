@@ -21,7 +21,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class FilterManagerFactory extends AbstractPluginManagerFactory
 {
     const PLUGIN_MANAGER_CLASS = 'Zend\Filter\FilterPluginManager';
-    
+
     /**
      * Create and return the filter plugin manager
      *

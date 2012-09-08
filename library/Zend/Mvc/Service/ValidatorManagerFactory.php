@@ -21,7 +21,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class ValidatorManagerFactory extends AbstractPluginManagerFactory
 {
     const PLUGIN_MANAGER_CLASS = 'Zend\Validator\ValidatorPluginManager';
-    
+
     /**
      * Create and return the validator plugin manager
      *

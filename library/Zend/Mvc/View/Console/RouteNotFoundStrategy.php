@@ -200,7 +200,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
          * Handle an application with no defined banners
          */
         if (!count($banners)) {
-            return "Zend Framework ".Version::VERSION." application.\nUsage:\n";
+            return "Zend Framework " . Version::VERSION . " application.\nUsage:\n";
         }
 
         /**
@@ -263,7 +263,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         foreach ($usageInfo as $moduleName => $usage) {
             if (is_string($usage)) {
                 // It's a plain string - output as is
-                $result .= $usage."\n";
+                $result .= $usage . "\n";
             } elseif (is_array($usage)) {
                 // It's an array, analyze it
                 foreach ($usage as $a => $b) {
@@ -313,7 +313,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         }
 
                         $tableType = 0;
-                        $result .= $b."\n";
+                        $result .= $b . "\n";
                     }
                 }
             } else {
@@ -345,7 +345,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
-                $result .= $row[0]."\n";
+                $result .= $row[0] . "\n";
             }
             return $result;
         }
@@ -369,7 +369,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         }
         if ($width >= $consoleWidth - 10) {
             foreach ($data as $row) {
-                $result .= join("    ", $row)."\n";
+                $result .= join("    ", $row) . "\n";
             }
             return $result;
         }

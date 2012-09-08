@@ -207,10 +207,10 @@ class Reader
             $data = $cache->getItem($cacheId);
             if ($data) {
                 if ($etag === null) {
-                    $etag = $cache->getItem($cacheId.'_etag');
+                    $etag = $cache->getItem($cacheId . '_etag');
                 }
                 if ($lastModified === null) {
-                    $lastModified = $cache->getItem($cacheId.'_lastmodified');
+                    $lastModified = $cache->getItem($cacheId . '_lastmodified');
                 }
                 if ($etag) {
                     $headers->addHeaderLine('If-None-Match', $etag);

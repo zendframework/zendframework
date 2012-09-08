@@ -381,7 +381,7 @@ class AutoDiscover
         $wsdl->addSchemaTypeSection();
 
         $port = $wsdl->addPortType($serviceName . 'Port');
-        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' .$serviceName. 'Port');
+        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' . $serviceName . 'Port');
 
         $wsdl->addSoapBinding($binding, $this->bindingStyle['style'], $this->bindingStyle['transport']);
         $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', 'tns:' . $serviceName . 'Binding', $uri);

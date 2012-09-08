@@ -118,7 +118,7 @@ class Simple implements RouteInterface
                     'filters' => $filters
                 ));
             } else {
-                throw new InvalidArgumentException('Cannot use '.gettype($filters).' as filters for '.__CLASS__);
+                throw new InvalidArgumentException('Cannot use ' . gettype($filters) . ' as filters for ' . __CLASS__);
             }
         }
 
@@ -131,7 +131,7 @@ class Simple implements RouteInterface
                     $this->validators->addValidator($v);
                 }
             } else {
-                throw new InvalidArgumentException('Cannot use '.gettype($validators).' as validators for '.__CLASS__);
+                throw new InvalidArgumentException('Cannot use ' . gettype($validators) . ' as validators for ' . __CLASS__);
             }
         }
 
@@ -292,7 +292,7 @@ class Simple implements RouteInterface
             )
             ) {
                 // extract available options
-                $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
+                $options = preg_split('/ *\| */', trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
 
                 // remove dupes
                 array_unique($options);
@@ -331,7 +331,7 @@ class Simple implements RouteInterface
                 /sx', $def, $m, 0, $pos
             )) {
                 // extract available options
-                $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
+                $options = preg_split('/ *\| */', trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
 
                 // remove dupes
                 array_unique($options);
@@ -369,7 +369,7 @@ class Simple implements RouteInterface
                 /sx', $def, $m, 0, $pos
             )) {
                 // extract available options
-                $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
+                $options = preg_split('/ *\| */',trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
 
                 // remove dupes
                 array_unique($options);
@@ -410,7 +410,7 @@ class Simple implements RouteInterface
                 /sx', $def, $m, 0, $pos
             )) {
                 // extract available options
-                $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
+                $options = preg_split('/ *\| */',trim($m['options']), 0, PREG_SPLIT_NO_EMPTY);
 
                 // remove dupes
                 array_unique($options);
@@ -570,16 +570,16 @@ class Simple implements RouteInterface
                 if ($part['short'] === true) {
                     // short variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-' . $part['name'].'(?:\=(?<value>.*?)$)?$/';
+                        $regex = '/^\-' . $part['name'] . '(?:\=(?<value>.*?)$)?$/';
                     } else {
-                        $regex = '/^\-' . $part['name'].'$/';
+                        $regex = '/^\-' . $part['name'] . '$/';
                     }
                 } elseif ($part['short'] === false) {
                     // long variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-{2,}' . $part['name'].'(?:\=(?<value>.*?)$)?$/';
+                        $regex = '/^\-{2,}' . $part['name'] . '(?:\=(?<value>.*?)$)?$/';
                     } else {
-                        $regex = '/^\-{2,}' . $part['name'].'$/';
+                        $regex = '/^\-{2,}' . $part['name'] . '$/';
                     }
                 }
             }
@@ -594,7 +594,7 @@ class Simple implements RouteInterface
                     $param = $params[$x];
 
                     // prevent further scanning of this param
-                    array_splice($params, $x,1);
+                    array_splice($params, $x, 1);
 
                     if (isset($m['value'])) {
                         $value = $m['value'];
@@ -642,7 +642,7 @@ class Simple implements RouteInterface
                     $value = $params[$x];
 
                     // prevent further scanning of this param
-                    array_splice($params, $x,1);
+                    array_splice($params, $x, 1);
                 } else {
                     // there are no more params available
                     return;

@@ -125,7 +125,7 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         if (isset($options['proxyuser']) && isset($options['proxypass'])) {
-            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'].":".$options['proxypass']);
+            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'].":" . $options['proxypass']);
             unset($options['proxyuser'], $options['proxypass']);
         }
 
@@ -213,7 +213,7 @@ class Curl implements HttpAdapter, StreamInterface
         if (!$this->curl) {
             $this->close();
 
-            throw new AdapterException\RuntimeException('Unable to Connect to ' .  $host . ':' . $port);
+            throw new AdapterException\RuntimeException('Unable to Connect to ' . $host . ':' . $port);
         }
 
         if ($secure !== false) {

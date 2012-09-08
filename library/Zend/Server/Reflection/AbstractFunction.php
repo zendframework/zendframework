@@ -337,7 +337,7 @@ abstract class AbstractFunction
             return call_user_func_array(array($this->reflection, $method), $args);
         }
 
-        throw new Exception\BadMethodCallException('Invalid reflection method ("' .$method. '")');
+        throw new Exception\BadMethodCallException('Invalid reflection method ("' . $method . '")');
     }
 
     /**

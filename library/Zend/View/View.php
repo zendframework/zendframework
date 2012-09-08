@@ -233,7 +233,7 @@ class View implements EventManagerAwareInterface
             if (!empty($capture)) {
                 if ($child->isAppend()) {
                     $oldResult=$model->{$capture};
-                    $model->setVariable($capture, $oldResult.$result);
+                    $model->setVariable($capture, $oldResult . $result);
                 } else {
                     $model->setVariable($capture, $result);
                 }

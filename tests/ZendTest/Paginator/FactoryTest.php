@@ -10,8 +10,8 @@
 
 namespace ZendTest\Paginator;
 
-use Zend\Paginator\Factory;
-use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\Paginator;
+use Zend\Paginator\Adapter;
 
 /**
  * @category   Zend
@@ -24,7 +24,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCanFactoryPaginatorWithStringAdapterObject()
     {
         $datas = array(1, 2, 3);
-        $paginator = Factory::Factory($datas, new ArrayAdapter($datas));
+        $paginator = Paginator\Factory::Factory($datas, new Adapter\ArrayAdapter($datas));
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
         $this->assertEquals(count($datas), $paginator->getCurrentItemCount());
     }
@@ -32,8 +32,22 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCanFactoryPaginatorWithStringAdapterName()
     {
         $datas = array(1, 2, 3);
-        $paginator = Factory::Factory($datas, 'array');
+        $paginator = Paginator\Factory::Factory($datas, 'array');
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
         $this->assertEquals(count($datas), $paginator->getCurrentItemCount());
+    }
+    
+    public function testCanFactoryPaginatorWithStringAdapterAggregate()
+    {
+        $paginator = Paginator\Factory::Factory(null, new TestArrayAggregate);
+        $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
+    }
+}
+
+class TestArrayAggregate implements Paginator\AdapterAggregateInterface
+{
+    public function getPaginatorAdapter()
+    {
+        return new Adapter\ArrayAdapter(array(1, 2, 3, 4));
     }
 }

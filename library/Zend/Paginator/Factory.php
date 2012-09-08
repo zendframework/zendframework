@@ -16,11 +16,13 @@ use Zend\Paginator\Adapter\AdapterInterface;
  * @category   Zend
  * @package    Zend_Paginator
  */
-class Factory implements Countable, IteratorAggregate
+class Factory
 {
+    protected static $adapters;
+    
     public static function factory($items, $adapter)
     {   
-        if(!$adapter instanceof AdapterInterface && $adapter instanceof AdapterAggregateInterface) {
+        if(!$adapter instanceof AdapterInterface && !$adapter instanceof AdapterAggregateInterface) {
             $adapter = self::getAdapterPluginManager()->get($adapter, $items);
         }
         

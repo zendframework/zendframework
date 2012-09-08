@@ -35,6 +35,37 @@ class AdapterPluginManager extends AbstractPluginManager
         'iterator'      => 'Zend\Paginator\Adapter\Iterator',
         'null'          => 'Zend\Paginator\Adapter\Null',
     );
+    
+    /**
+     * Attempt to create an instance via an invokable class
+     *
+     * Overrides parent implementation by passing $creationOptions to the
+     * constructor, if non-null.
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
+     * @return null|\stdClass
+     * @throws Exception\ServiceNotCreatedException If resolved class does not exist
+     */
+    protected function createFromInvokable($canonicalName, $requestedName)
+    {
+        $invokable = $this->invokableClasses[$canonicalName];
+
+        if (null === $this->creationOptions
+            || (is_array($this->creationOptions) && empty($this->creationOptions))
+        ) {
+            $instance = new $invokable();
+        } else {
+            if($canonicalName == "dbselect" && is_array($this->creationOptions)) {
+                $class = new \ReflectionClass($invokable);
+                $instance = $class->newInstanceArgs($this->creationOptions);
+            } else {
+                $instance = new $invokable($this->creationOptions);
+            }
+        }
+
+        return $instance;
+    }
 
     /**
      * Validate the plugin

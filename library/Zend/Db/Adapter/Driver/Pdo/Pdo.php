@@ -262,7 +262,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
      */
     public function getLastGeneratedValue()
     {
-        $this->connection->getLastGeneratedValue();
+        return $this->connection->getLastGeneratedValue();
     }
 
 }

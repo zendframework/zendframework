@@ -647,4 +647,18 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $test    = substr($test, 0, 16);
         $this->assertEquals($date, $test);
     }
+
+    public function testRestoreFromSerializedString()
+    {
+        $this->message->addTo('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addFrom('matthew@zend.com', "Matthew Weier O'Phinney");
+        $this->message->addCc('zf-contributors@lists.zend.com', 'ZF Contributors List');
+        $this->message->setSubject('This is a subject');
+        $this->message->setBody('foo');
+
+        $serialized      = $this->message->toString();
+        $restoredMessage = new Message();
+        $restoredMessage->fromString($serialized);
+        $this->assertEquals($serialized, $restoredMessage->toString());
+    }
 }

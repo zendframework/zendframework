@@ -535,4 +535,20 @@ class Message
                . Headers::EOL
                . $this->getBodyText();
     }
+
+    /**
+     * Set from serialized string
+     *
+     * @param  string $rawMessage
+     * @return Message
+     */
+    public function fromString($rawMessage)
+    {
+        $headers = null;
+        $content = null;
+        Mime\Decode::splitMessage($rawMessage, $headers, $content);
+        $this->setHeaders($headers);
+        $this->setBody($content);
+        return $this;
+    }
 }

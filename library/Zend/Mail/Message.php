@@ -542,13 +542,17 @@ class Message
      * @param  string $rawMessage
      * @return Message
      */
-    public function fromString($rawMessage)
+    public static function fromString($rawMessage)
     {
+        $message = new static();
         $headers = null;
         $content = null;
         Mime\Decode::splitMessage($rawMessage, $headers, $content);
-        $this->setHeaders($headers);
-        $this->setBody($content);
-        return $this;
+        if ($headers->has('mime-version')) {
+            // @todo restore body to mime\message
+        }
+        $message->setHeaders($headers);
+        $message->setBody($content);
+        return $message;
     }
 }

@@ -655,10 +655,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->addCc('zf-contributors@lists.zend.com', 'ZF Contributors List');
         $this->message->setSubject('This is a subject');
         $this->message->setBody('foo');
-
         $serialized      = $this->message->toString();
-        $restoredMessage = new Message();
-        $restoredMessage->fromString($serialized);
+        $restoredMessage = Message::fromString($serialized);
         $this->assertEquals($serialized, $restoredMessage->toString());
     }
 }

@@ -129,7 +129,7 @@ return array(
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Файлове трябва да имат общ размер от максимум '%max%', но в момента той е '%size%'",
     "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Файлове трябва да имат общ размер от минимум '%min%', но в момента той е '%size%'",
     "One or more files can not be read" => "Един или повече файлове не могат да бъдат прочетени",
-    
+
     // Zend_Validator_File_Hash
     "File '%value%' does not match the given hashes" => "Файлът '%value%' не съвпада с зададения хаш",
     "A hash could not be evaluated for the given file" => "Този хаш не може да оцени дадения файл",
@@ -170,7 +170,7 @@ return array(
     "File '%value%' does not match the given sha1 hashes" => "Файлът '%value%' не съвпада с зададения sha1 хаш",
     "A sha1 hash could not be evaluated for the given file" => "Този sha1 хаш не може да оцени дадения файл",
     "File '%value%' is not readable or does not exist" => "Файлът '%value%' не може да бъде прочетен или не съществува",
-    
+
     // Zend_Validator_File_Size
     "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Максималния разрешен размер на файла '%value%' е '%max%', но в момента той е '%size%'",
     "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Минималния разрешен размер на файла '%value%' е '%min%', но в момента той е '%size%'",

@@ -141,4 +141,14 @@ class ForwardTest extends TestCase
         $this->assertSame($routeMatch, $test);
         $this->assertEquals($matchParams, $testParams);
     }
+
+    public function testAllowsPassingEmptyArrayOfRouteParams()
+    {
+        $result = $this->plugin->dispatch('forward', array());
+        $this->assertInternalType('array', $result);
+        $this->assertTrue(isset($result['status']));
+        $this->assertEquals('not-found', $result['status']);
+        $this->assertTrue(isset($result['params']));
+        $this->assertEquals(array(), $result['params']);
+    }
 }

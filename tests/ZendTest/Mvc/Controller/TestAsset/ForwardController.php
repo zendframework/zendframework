@@ -24,4 +24,12 @@ class ForwardController extends AbstractActionController
         $e = $this->getEvent();
         return $e->getRouteMatch()->getParams();
     }
+
+    public function notFoundAction()
+    {
+        return array(
+            'status' => 'not-found',
+            'params' => $this->params()->fromRoute(),
+        );
+    }
 }

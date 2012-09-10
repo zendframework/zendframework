@@ -230,7 +230,7 @@ class ValidatorChain implements
     {
         return $this->isValid($value);
     }
-    
+
     /**
      * Prepare validator chain for serialization
      *

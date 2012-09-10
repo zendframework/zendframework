@@ -142,7 +142,7 @@ class PluginManager extends AbstractPluginManager
      * Any plugin is considered valid in this context.
      *
      * @param  mixed $plugin
-     * @return true
+     * @return void
      * @throws Exception\InvalidPluginException
      */
     public function validatePlugin($plugin)

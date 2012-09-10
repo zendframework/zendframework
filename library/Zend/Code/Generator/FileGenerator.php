@@ -516,7 +516,7 @@ class FileGenerator extends AbstractGenerator
         $output .= self::LINE_FEED;
 
         // namespace, if any
-        if ($namespace = $this->getNamespace()) {
+        if (($namespace = $this->getNamespace()) !== false) {
             $output .= sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
         }
 

@@ -136,7 +136,7 @@ class Forward extends AbstractPlugin
         }
 
         // Allow passing parameters to seed the RouteMatch with
-        if ($params) {
+        if ($params !== null) {
             $event->setRouteMatch(new RouteMatch($params));
         }
 

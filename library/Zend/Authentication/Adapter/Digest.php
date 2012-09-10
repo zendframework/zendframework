@@ -189,7 +189,11 @@ class Digest implements AdapterInterface
             'messages' => array()
             );
 
-        while ($line = trim(fgets($fileHandle))) {
+        while (($line = fgets($fileHandle)) !== false) {
+            $line = trim($line);
+            if (empty($line)) {
+                break;
+            }
             if (substr($line, 0, $idLength) === $id) {
                 if ($this->_secureStringCompare(substr($line, -32), md5("$this->username:$this->realm:$this->password"))) {
                     $result['code'] = AuthenticationResult::SUCCESS;

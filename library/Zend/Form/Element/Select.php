@@ -86,7 +86,7 @@ class Select extends Element implements InputProviderInterface
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
      * - value_options: list of values and labels for the select options
-     * _ create_empty_option: should an empty option be prepended to the options ?
+     * _ empty_option: should an empty option be prepended to the options ?
      *
      * @param  array|\Traversable $options
      * @return Select|ElementInterface
@@ -104,8 +104,8 @@ class Select extends Element implements InputProviderInterface
             $this->setValueOptions($this->options['options']);
         }
 
-        if (isset($this->options['create_empty_option'])) {
-            $this->setShouldCreateEmptyOption($this->options['create_empty_option']);
+        if (isset($this->options['empty_option'])) {
+            $this->setEmptyOption($this->options['empty_option']);
         }
 
         return $this;

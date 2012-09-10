@@ -25,6 +25,7 @@ class Image extends AbstractWord
      * Render the captcha
      *
      * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)

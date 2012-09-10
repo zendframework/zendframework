@@ -86,7 +86,7 @@ class Mailto extends Uri
     /**
      * Set validator to use when validating email address
      *
-     * @param  Validator $validator
+     * @param  ValidatorInterface $validator
      * @return Mailto
      */
     public function setValidator(ValidatorInterface $validator)
@@ -101,7 +101,7 @@ class Mailto extends Uri
      * If none is currently set, an EmailValidator instance with default options
      * will be used.
      *
-     * @return Validator
+     * @return ValidatorInterface
      */
     public function getValidator()
     {

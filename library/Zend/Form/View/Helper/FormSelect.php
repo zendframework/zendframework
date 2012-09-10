@@ -57,6 +57,8 @@ class FormSelect extends AbstractHelper
      * Render a form <select> element from the provided $element
      *
      * @param  ElementInterface $element
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)

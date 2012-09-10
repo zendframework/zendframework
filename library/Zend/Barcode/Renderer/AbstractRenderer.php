@@ -390,6 +390,8 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Draw the barcode in the rendering resource
+     *
+     * @throws BarcodeException\ExceptionInterface
      * @return mixed
      */
     public function draw()

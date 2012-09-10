@@ -62,7 +62,7 @@ abstract class AbstractFieldValuePart
     }
 
     /**
-     * @return StdClass $params
+     * @return \stdClass $params
      */
     public function getParams()
     {

@@ -58,6 +58,10 @@ class StatementContainer implements StatementContainerInterface
         return $this->sql;
     }
 
+    /**
+     * @param ParameterContainer $parameterContainer
+     * @return StatementContainer
+     */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;

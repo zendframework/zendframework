@@ -23,6 +23,8 @@ namespace Zend\Form\Element;
 
 use Traversable;
 use Zend\Form\Element;
+use Zend\Form\ElementInterface;
+use Zend\Form\Exception\InvalidArgumentException;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Explode as ExplodeValidator;
 use Zend\Validator\InArray as InArrayValidator;
@@ -82,7 +84,7 @@ class Select extends Element implements InputProviderInterface
      *
      * @param  array|\Traversable $options
      * @return Select|ElementInterface
-     * @throws Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setOptions($options)
     {

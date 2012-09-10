@@ -176,6 +176,7 @@ class Mysqli implements DriverInterface
 
     /**
      * @param resource $resource
+     * @param null|bool $isBuffered
      * @return Result
      */
     public function createResult($resource, $isBuffered = null)

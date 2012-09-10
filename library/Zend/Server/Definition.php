@@ -44,7 +44,7 @@ class Definition implements \Countable, \Iterator
      * Set flag indicating whether or not overwriting existing methods is allowed
      *
      * @param mixed $flag
-     * @return void
+     * @return \Zend\Server\Definition
      */
     public function setOverwriteExistingMethods($flag)
     {
@@ -201,7 +201,7 @@ class Definition implements \Countable, \Iterator
     /**
      * Iterator: current item
      *
-     * @return mixed
+     * @return Method\Definition
      */
     public function current()
     {
@@ -221,7 +221,7 @@ class Definition implements \Countable, \Iterator
     /**
      * Iterator: advance to next method
      *
-     * @return void
+     * @return Method\Definition
      */
     public function next()
     {

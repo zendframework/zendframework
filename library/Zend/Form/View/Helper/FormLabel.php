@@ -39,6 +39,8 @@ class FormLabel extends AbstractHelper
      * Generate an opening label tag
      *
      * @param  null|array|ElementInterface $attributesOrElement
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      * @return string
      */
     public function openTag($attributesOrElement = null)
@@ -98,6 +100,7 @@ class FormLabel extends AbstractHelper
      * @param  ElementInterface $element
      * @param  null|string $labelContent
      * @param  string $position
+     * @throws Exception\DomainException
      * @return string|FormLabel
      */
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)

@@ -264,7 +264,7 @@ class Feed
     /**
      * Add feed owner
      *
-     * @param  string $value
+     * @param  array $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */

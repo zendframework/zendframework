@@ -112,6 +112,7 @@ class Connection implements ConnectionInterface
      * Set resource
      *
      * @param  resource $resource
+     * @throws Exception\InvalidArgumentException
      * @return Connection
      */
     public function setResource($resource)
@@ -134,6 +135,7 @@ class Connection implements ConnectionInterface
     /**
      * Connect
      *
+     * @throws Exception\RuntimeException
      * @return null
      */
     public function connect()
@@ -256,6 +258,7 @@ class Connection implements ConnectionInterface
      * Execute
      *
      * @param  string $sql
+     * @throws Exception\RuntimeException
      * @return mixed
      */
     public function execute($sql)

@@ -40,6 +40,7 @@ class Zip extends AbstractCompressionAlgorithm
      * Class constructor
      *
      * @param  null|array|\Traversable $options (Optional) Options to set
+     * @throws Exception\ExtensionNotLoadedException if zip extension not loaded
      */
     public function __construct($options = null)
     {
@@ -87,6 +88,7 @@ class Zip extends AbstractCompressionAlgorithm
      * Sets the target to use
      *
      * @param  string $target
+     * @throws Exception\InvalidArgumentException
      * @return Zip
      */
     public function setTarget($target)

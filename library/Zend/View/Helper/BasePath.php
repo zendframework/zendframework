@@ -33,6 +33,7 @@ class BasePath extends AbstractHelper
      * $file is appended to the base path for simplicity.
      *
      * @param  string|null $file
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function __invoke($file = null)

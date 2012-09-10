@@ -178,7 +178,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
     /**
      * Set value for character encoding
      *
-     * @param  string encoding
+     * @param  string $encoding
      * @return AbstractHelper
      */
     public function setEncoding($encoding)

@@ -79,7 +79,7 @@ class EventManager implements EventManagerInterface
     /**
      * Set shared event manager
      *
-     * @param  SharedEventManagerInterface $connections
+     * @param SharedEventManagerInterface $sharedEventManager
      * @return EventManager
      */
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager)

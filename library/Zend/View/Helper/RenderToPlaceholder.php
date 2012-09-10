@@ -10,6 +10,8 @@
 
 namespace Zend\View\Helper;
 
+use Zend\View\Model\ModelInterface;
+
 /**
  * Renders a template and stores the rendered output as a placeholder
  * variable for later use.
@@ -23,8 +25,8 @@ class RenderToPlaceholder extends AbstractHelper
      * Renders a template and stores the rendered output as a placeholder
      * variable for later use.
      *
-     * @param $script The template script to render
-     * @param $placeholder The placeholder variable name in which to store the rendered output
+     * @param string|ModelInterface $script The template script to render
+     * @param string $placeholder The placeholder variable name in which to store the rendered output
      * @return void
      */
     public function __invoke($script, $placeholder)

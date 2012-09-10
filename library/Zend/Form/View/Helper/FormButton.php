@@ -54,6 +54,8 @@ class FormButton extends FormInput
      * Generate an opening button tag
      *
      * @param  null|array|ElementInterface $attributesOrElement
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      * @return string
      */
     public function openTag($attributesOrElement = null)
@@ -111,6 +113,7 @@ class FormButton extends FormInput
      *
      * @param  ElementInterface $element
      * @param  null|string $buttonContent
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element, $buttonContent = null)

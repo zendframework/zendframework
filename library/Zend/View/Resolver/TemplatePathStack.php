@@ -11,6 +11,7 @@
 namespace Zend\View\Resolver;
 
 use SplFileInfo;
+use Traversable;
 use Zend\Stdlib\SplStack;
 use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
@@ -85,13 +86,13 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Configure object
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return void
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options)
     {
-        if (!is_array($options) && !$options instanceof \Traversable) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Expected array or Traversable object; received "%s"',
                 (is_object($options) ? get_class($options) : gettype($options))
@@ -281,7 +282,7 @@ class TemplatePathStack implements ResolverInterface
      * @param  string $name
      * @param  null|Renderer $renderer
      * @return string
-     * @throws Exception\RuntimeException
+     * @throws Exception\DomainException
      */
     public function resolve($name, Renderer $renderer = null)
     {

@@ -26,6 +26,7 @@ class MultiByte
      * @param  string  $break
      * @param  boolean $cut
      * @param  string  $charset
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function wordWrap($string, $width = 75, $break = "\n", $cut = false, $charset = 'utf-8')

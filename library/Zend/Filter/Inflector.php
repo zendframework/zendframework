@@ -151,7 +151,7 @@ class Inflector extends AbstractFilter
      * Set Whether or not the inflector should throw an exception when a replacement
      * identifier is still found within an inflected target.
      *
-     * @param bool $throwTargetExceptions
+     * @param bool $throwTargetExceptionsOn
      * @return Inflector
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
@@ -407,6 +407,7 @@ class Inflector extends AbstractFilter
      * Inflect
      *
      * @param  string|array $source
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function filter($source)

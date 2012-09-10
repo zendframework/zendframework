@@ -25,6 +25,7 @@ class HtmlList extends AbstractHtmlElement
      * @param array   $items   Array with the elements of the list
      * @param boolean $ordered Specifies ordered/unordered list; default unordered
      * @param array   $attribs Attributes for the ol/ul tag.
+     * @param boolean $escape Escape the items.
      * @return string The list XHTML.
      */
     public function __invoke(array $items, $ordered = false, $attribs = false, $escape = true)

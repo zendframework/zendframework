@@ -166,6 +166,7 @@ class Console extends AbstractAdapter
      * Set a different output-stream
      *
      * @param  string $resource
+     * @throws Exception\RuntimeException
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setOutputStream($resource)

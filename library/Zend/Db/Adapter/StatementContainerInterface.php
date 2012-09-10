@@ -32,6 +32,7 @@ interface StatementContainerInterface
 
     /**
      * @abstract
+     * @param ParameterContainer $parameterContainer
      * @return mixed
      */
     public function setParameterContainer(ParameterContainer $parameterContainer);

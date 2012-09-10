@@ -74,8 +74,9 @@ class PublicKey extends AbstractKey
      * Encrypt using this key
      *
      * @param  string $data
-     * @return string
+     * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
+     * @return string
      */
     public function encrypt($data)
     {
@@ -99,8 +100,9 @@ class PublicKey extends AbstractKey
      * Decrypt using this key
      *
      * @param  string $data
-     * @return string
+     * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
+     * @return string
      */
     public function decrypt($data)
     {

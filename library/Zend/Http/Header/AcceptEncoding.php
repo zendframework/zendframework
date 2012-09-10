@@ -69,7 +69,7 @@ class AcceptEncoding extends AbstractAccept
     /**
      * Parse the keys contained in the header line
      *
-     * @param string mediaType
+     * @param string $fieldValuePart
      * @return \Zend\Http\Header\Accept\FieldValuePart\EncodingFieldValuePart
      * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */

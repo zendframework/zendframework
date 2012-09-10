@@ -56,7 +56,8 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
 
     /**
      * @param Adapter $adapter
-     * @param StatementContainerInterface $statement
+     * @param StatementContainerInterface $statementContainer
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)

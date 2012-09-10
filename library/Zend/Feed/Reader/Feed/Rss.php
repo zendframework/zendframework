@@ -253,6 +253,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed lastBuild date
      *
+     * @throws Exception\RuntimeException
      * @return DateTime
      */
     public function getLastBuildDate()

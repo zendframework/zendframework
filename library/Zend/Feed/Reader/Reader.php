@@ -183,13 +183,13 @@ class Reader
     }
 
     /**
-     * Import a feed by providing a URL
+     * Import a feed by providing a URI
      *
-     * @param  string $url The URL to the feed
+     * @param  string $uri The URI to the feed
      * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
      * @return Reader
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\RuntimeException
      */
     public static function import($uri, $etag = null, $lastModified = null)
     {
@@ -264,6 +264,7 @@ class Reader
      *
      * @param  string $string
      * @return Feed\FeedInterface
+     * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
     public static function importString($string)
@@ -372,8 +373,10 @@ class Reader
      * Detect the feed type of the provided feed
      *
      * @param  Feed\AbstractFeed|DOMDocument|string $feed
+     * @param  bool $specOnly
      * @return string
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public static function detectType($feed, $specOnly = false)
     {

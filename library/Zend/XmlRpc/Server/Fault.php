@@ -174,7 +174,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * Retrieve the exception
      *
      * @access public
-     * @return Exception
+     * @return \Exception
      */
     public function getException()
     {

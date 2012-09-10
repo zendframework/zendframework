@@ -11,6 +11,8 @@
 namespace Zend\Mvc;
 
 use Zend\EventManager\EventsCapableInterface;
+use Zend\Http\Request;
+use Zend\Http\Response;
 
 /**
  * @category   Zend
@@ -42,7 +44,7 @@ interface ApplicationInterface extends EventsCapableInterface
     /**
      * Run the application
      *
-     * @return \Zend\Http\Response
+     * @return Response
      */
     public function run();
 }

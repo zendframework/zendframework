@@ -507,6 +507,7 @@ class Container extends ArrayObject
      *
      * @param  int $hops
      * @param  null|string|array $vars
+     * @throws Exception\InvalidArgumentException
      * @return Container
      */
     public function setExpirationHops($hops, $vars = null)

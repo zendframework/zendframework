@@ -198,6 +198,7 @@ class ReCaptcha extends AbstractAdapter
      *
      * @see    \Zend\Validator\ValidatorInterface::isValid()
      * @param  mixed $value
+     * @param  mixed $context
      * @return boolean
      */
     public function isValid($value, $context = null)

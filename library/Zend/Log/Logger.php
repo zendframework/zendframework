@@ -147,7 +147,7 @@ class Logger implements LoggerInterface
      *
      * @param string $name
      * @param array|null $options
-     * @return Writer
+     * @return Writer\WriterInterface
      */
     public function writerPlugin($name, array $options = null)
     {
@@ -157,8 +157,9 @@ class Logger implements LoggerInterface
     /**
      * Add a writer to a logger
      *
-     * @param  string|Writer $writer
+     * @param  string|Writer\WriterInterface $writer
      * @param  int $priority
+     * @param  array|null $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
@@ -214,6 +215,7 @@ class Logger implements LoggerInterface
      * @return Logger
      * @throws Exception\InvalidArgumentException if message can't be cast to string
      * @throws Exception\InvalidArgumentException if extra can't be iterated over
+     * @throws Exception\RuntimeException if no log writer specified
      */
     public function log($priority, $message, $extra = array())
     {

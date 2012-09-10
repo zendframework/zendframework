@@ -10,6 +10,8 @@
 
 namespace Zend\Loader;
 
+use Traversable;
+
 /**
  * Plugin class locator interface
  *

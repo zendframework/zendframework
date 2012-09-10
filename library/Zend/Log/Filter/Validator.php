@@ -32,6 +32,7 @@ class Validator implements FilterInterface
      * Filter out any log messages not matching the validator
      *
      * @param  ZendValidator|array|Traversable $validator
+     * @throws Exception\InvalidArgumentException
      * @return Validator
      */
     public function __construct($validator)

@@ -87,7 +87,7 @@ class Serializer
      * Change the default adapter.
      *
      * @param string|Adapter $adapter
-     * @param array|\Traversable|null $options
+     * @param array|\Traversable|null $adapterOptions
      */
     public static function setDefaultAdapter($adapter, $adapterOptions = null)
     {

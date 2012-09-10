@@ -836,7 +836,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Checking of parameters after all settings
-     * @return void
+     * @return bool
      */
     public function checkParams()
     {

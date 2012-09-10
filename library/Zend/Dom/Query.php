@@ -67,7 +67,8 @@ class Query
     /**
      * Constructor
      *
-     * @param  null|string $document
+     * @param null|string $document
+     * @param null|string $encoding
      */
     public function __construct($document = null, $encoding = null)
     {
@@ -286,7 +287,7 @@ class Query
     /**
      * Register PHP Functions to use in internal DOMXPath
      *
-     * @param  mixed $restrict
+     * @param  bool $xpathPhpFunctions
      * @return void
      */
     public function registerXpathPhpFunctions($xpathPhpFunctions = true)

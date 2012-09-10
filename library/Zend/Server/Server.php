@@ -90,7 +90,7 @@ interface Server
      *
      * Used for persistence; loads a construct as returned by {@link getFunctions()}.
      *
-     * @param  array $array
+     * @param  array $definition
      * @return void
      */
     public function loadFunctions($definition);

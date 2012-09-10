@@ -57,6 +57,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      * Maps should be arrays or Traversable objects with name => path pairs
      *
      * @param  array|Traversable $map
+     * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
     public function setMap($map)
@@ -82,7 +83,8 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      *
      * @param  string|array|Traversable $nameOrMap
      * @param  null|string $path
-     * @return TemplateResolver
+     * @throws Exception\InvalidArgumentException
+     * @return TemplateMapResolver
      */
     public function add($nameOrMap, $path = null)
     {
@@ -114,6 +116,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      * Merge internal map with provided map
      *
      * @param  array|Traversable $map
+     * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
     public function merge($map)

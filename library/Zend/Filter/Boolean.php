@@ -162,6 +162,7 @@ class Boolean extends AbstractFilter
 
     /**
      * @param  array|Traversable $translations
+     * @throws Exception\InvalidArgumentException
      * @return Boolean
      */
     public function setTranslations($translations)

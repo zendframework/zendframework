@@ -24,6 +24,7 @@ class Integer extends AbstractScalar
      * Set the value of an integer native type
      *
      * @param int $value
+     * @throws Exception\ValueException
      */
     public function __construct($value)
     {

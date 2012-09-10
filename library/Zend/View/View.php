@@ -168,6 +168,7 @@ class View implements EventManagerAwareInterface
      * @triggers renderer(ViewEvent)
      * @triggers response(ViewEvent)
      * @param  Model $model
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function render(Model $model)
@@ -218,6 +219,7 @@ class View implements EventManagerAwareInterface
      * Loop through children, rendering each
      *
      * @param  Model $model
+     * @throws Exception\DomainException
      * @return void
      */
     protected function renderChildren(Model $model)

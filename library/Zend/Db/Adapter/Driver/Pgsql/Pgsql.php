@@ -105,6 +105,7 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * @throws Exception\RuntimeException
      * @return bool
      */
     public function checkEnvironment()
@@ -149,6 +150,7 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * @param resource $resource
      * @return Result
      */
     public function createResult($resource)

@@ -93,10 +93,12 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+        return $this;
     }
 
     /**
@@ -109,10 +111,12 @@ class Statement implements StatementInterface
 
     /**
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -153,6 +157,7 @@ class Statement implements StatementInterface
 
     /**
      * @param  null $parameters
+     * @throws Exception\InvalidQueryException
      * @return Result
      */
     public function execute($parameters = null)

@@ -29,7 +29,7 @@ class Common extends \SoapClient
     /**
      * Common Soap Client constructor
      *
-     * @param callable $doRequestMethod
+     * @param callable $doRequestCallback
      * @param string $wsdl
      * @param array $options
      */

@@ -113,6 +113,7 @@ class ModuleManager implements ModuleManagerInterface
      * Load a specific module by name.
      *
      * @param    string $moduleName
+     * @throws   Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
      * @return   mixed Module's Module class
@@ -192,6 +193,7 @@ class ModuleManager implements ModuleManagerInterface
      * Set an array or Traversable of module names that this module manager should load.
      *
      * @param  mixed $modules array or Traversable of module names
+     * @throws Exception\InvalidArgumentException
      * @return ModuleManager
      */
     public function setModules($modules)

@@ -12,8 +12,8 @@ namespace Zend\Dom;
 
 use Countable;
 use DOMDocument;
-use DOMElement;
 use DOMNodeList;
+use DOMNode;
 use DOMXPath;
 use Iterator;
 
@@ -114,7 +114,7 @@ class NodeList implements Iterator, Countable
     /**
      * Iterator: rewind to first element
      *
-     * @return void
+     * @return DOMNode
      */
     public function rewind()
     {
@@ -138,7 +138,7 @@ class NodeList implements Iterator, Countable
     /**
      * Iterator: return current element
      *
-     * @return DOMElement
+     * @return DOMNode
      */
     public function current()
     {
@@ -158,7 +158,7 @@ class NodeList implements Iterator, Countable
     /**
      * Iterator: move to next element
      *
-     * @return void
+     * @return DOMNode
      */
     public function next()
     {

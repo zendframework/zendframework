@@ -25,7 +25,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get an author entry
      *
-     * @param DOMElement $element
+     * @param int $index
      * @return string
      */
     public function getAuthor($index = 0)

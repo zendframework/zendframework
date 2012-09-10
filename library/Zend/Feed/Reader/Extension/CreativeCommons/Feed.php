@@ -22,6 +22,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the entry license
      *
+     * @param int $index
      * @return string|null
      */
     public function getLicense($index = 0)

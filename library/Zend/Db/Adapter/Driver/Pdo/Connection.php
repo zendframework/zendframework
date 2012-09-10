@@ -294,7 +294,7 @@ class Connection implements ConnectionInterface
 
     /**
      * @return Connection
-     * @throws \Exception
+     * @throws Exception\RuntimeException
      */
     public function rollback()
     {

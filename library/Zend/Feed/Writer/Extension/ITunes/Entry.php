@@ -37,7 +37,7 @@ class Entry
      * Set feed encoding
      *
      * @param  string $enc
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     * @return Entry
      */
     public function setEncoding($enc)
     {
@@ -209,6 +209,7 @@ class Entry
      *
      * @param  string $method
      * @param  array $params
+     * @throws Writer\Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, array $params)

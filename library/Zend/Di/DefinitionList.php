@@ -51,7 +51,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
 
     /**
      * @param  string       $type
-     * @return Definition[]
+     * @return Definition\DefinitionInterface[]
      */
     public function getDefinitionsByType($type)
     {

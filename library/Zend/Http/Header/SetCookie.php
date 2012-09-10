@@ -10,6 +10,8 @@
 
 namespace Zend\Http\Header;
 
+use Closure;
+
 /**
  * @throws Exception\InvalidArgumentException
  * @see http://www.ietf.org/rfc/rfc2109.txt
@@ -270,6 +272,7 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param string $name
+     * @throws Exception\InvalidArgumentException
      * @return SetCookie
      */
     public function setName($name)
@@ -310,6 +313,7 @@ class SetCookie implements MultipleHeaderInterface
      * Set version
      *
      * @param integer $version
+     * @throws Exception\InvalidArgumentException
      */
     public function setVersion($version)
     {
@@ -333,6 +337,7 @@ class SetCookie implements MultipleHeaderInterface
      * Set Max-Age
      *
      * @param integer $maxAge
+     * @throws Exception\InvalidArgumentException
      */
     public function setMaxAge($maxAge)
     {
@@ -354,6 +359,7 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param int $expires
+     * @throws Exception\InvalidArgumentException
      * @return SetCookie
      */
     public function setExpires($expires)
@@ -370,6 +376,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
+     * @param bool $inSeconds
      * @return int
      */
     public function getExpires($inSeconds = false)

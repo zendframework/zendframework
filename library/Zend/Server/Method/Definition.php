@@ -106,6 +106,7 @@ class Definition
      * Set method callback
      *
      * @param  array|\Zend\Server\Method\Callback $callback
+     * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
     public function setCallback($callback)
@@ -133,6 +134,7 @@ class Definition
      * Add prototype to method definition
      *
      * @param  array|\Zend\Server\Method\Prototype $prototype
+     * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
     public function addPrototype($prototype)
@@ -209,6 +211,7 @@ class Definition
      * Set object to use with method calls
      *
      * @param  object $object
+     * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
     public function setObject($object)

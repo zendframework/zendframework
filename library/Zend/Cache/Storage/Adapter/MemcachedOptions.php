@@ -176,6 +176,7 @@ class MemcachedOptions extends AdapterOptions
     /**
      * Get libmemcached option
      *
+     * @param string|int $key
      * @return mixed
      * @link http://php.net/manual/memcached.constants.php
      */

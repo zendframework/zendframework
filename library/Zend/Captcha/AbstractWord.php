@@ -208,7 +208,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Sets if session should be preserved on generate()
      *
-     * @param $keepSession Should session be kept on generate()?
+     * @param bool $keepSession Should session be kept on generate()?
      * @return AbstractWord
      */
     public function setKeepSession($keepSession)
@@ -242,6 +242,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Get session object
      *
+     * @throws Exception\InvalidArgumentException
      * @return Container
      */
     public function getSession()
@@ -359,6 +360,7 @@ abstract class AbstractWord extends AbstractAdapter
      *
      * @see    Zend\Validator\ValidatorInterface::isValid()
      * @param  mixed $value
+     * @param  mixed $context
      * @return bool
      */
     public function isValid($value, $context = null)

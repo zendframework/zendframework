@@ -25,6 +25,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      * Add an ArrayOfType based on the xsd:complexType syntax if type[] is detected in return value doc comment.
      *
      * @param string $type
+     * @throws Exception\InvalidArgumentException
      * @return string tns:xsd-type
      */
     public function addComplexType($type)

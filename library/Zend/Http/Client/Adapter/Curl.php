@@ -240,6 +240,7 @@ class Curl implements HttpAdapter, StreamInterface
      * @param  string        $body
      * @return string        $request
      * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @throws AdapterException\InvalidArgumentException if $method is currently not supported
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
     {

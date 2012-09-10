@@ -242,7 +242,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets envelope keys
      *
-     * @param  string|array $options Envelope keys
+     * @param  string|array $key Envelope keys
      * @return \Zend\Filter\Encrypt\Openssl
      */
     public function setEnvelopeKey($key)

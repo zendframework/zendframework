@@ -174,7 +174,7 @@ class ViewManager implements ListenerAggregateInterface
     /**
      * Instantiates and configures the renderer's resolver
      *
-     * @return ViewAggregateResolver
+     * @return ViewResolver\ResolverInterface
      */
     public function getResolver()
     {

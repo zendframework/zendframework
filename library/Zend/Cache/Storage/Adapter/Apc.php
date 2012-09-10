@@ -166,7 +166,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Remove items by given namespace
      *
-     * @param string $prefix
+     * @param string $namespace
      * @return boolean
      */
     public function clearByNamespace($namespace)
@@ -265,7 +265,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Internal method to test multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
@@ -523,7 +523,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Internal method to remove multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */

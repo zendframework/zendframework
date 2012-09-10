@@ -47,6 +47,8 @@ class DiServiceInitializer extends Di implements InitializerInterface
 
     /**
      * @param $instance
+     * @param ServiceLocatorInterface $serviceLocator
+     * @throws \Exception
      */
     public function initialize($instance, ServiceLocatorInterface $serviceLocator)
     {

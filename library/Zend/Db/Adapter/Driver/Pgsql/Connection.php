@@ -201,6 +201,7 @@ class Connection implements ConnectionInterface
 
     /**
      * @param  string $sql
+     * @throws Exception\InvalidQueryException
      * @return resource|\Zend\Db\ResultSet\ResultSetInterface
      */
     public function execute($sql)

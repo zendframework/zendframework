@@ -90,12 +90,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * @param  array $values Associative array of key values
      * @param  string $flag One of the VALUES_* constants
+     * @throws Exception\InvalidArgumentException
      * @return Update
      */
     public function set(array $values, $flag = self::VALUES_SET)
     {
         if ($values == null) {
-            throw new \InvalidArgumentException('set() expects an array of values');
+            throw new Exception\InvalidArgumentException('set() expects an array of values');
         }
 
         if ($flag == self::VALUES_SET) {
@@ -104,7 +105,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         foreach ($values as $k => $v) {
             if (!is_string($k)) {
-                throw new \Exception('set() expects a string for the value key');
+                throw new Exception\InvalidArgumentException('set() expects a string for the value key');
             }
             $this->set[$k] = $v;
         }
@@ -117,12 +118,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * @param  Where|\Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @throws Exception\InvalidArgumentException
      * @return Select
      */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
         if (is_null($predicate)) {
-            throw new \Zend\Db\Sql\Exception\InvalidArgumentException('Predicate cannot be null');
+            throw new Exception\InvalidArgumentException('Predicate cannot be null');
         }
 
         if ($predicate instanceof Where) {
@@ -185,8 +187,8 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Prepare statement
      *
-     * @param \Zend\Db\Adapter\Adapter $adapter
-     * @param \Zend\Db\Adapter\Driver\StatementInterface $statementContainer
+     * @param Adapter $adapter
+     * @param StatementContainerInterface $statementContainer
      * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)

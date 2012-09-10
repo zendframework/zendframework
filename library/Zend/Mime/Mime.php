@@ -107,7 +107,7 @@ class Mime
      *
      * @param string $str
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeQuotedPrintable($str,
@@ -168,7 +168,7 @@ class Mime
      * @param string $str
      * @param string $charset
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeQuotedPrintableHeader($str, $charset,
@@ -241,7 +241,7 @@ class Mime
      * @param string $str
      * @param string $charset
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeBase64Header($str,
@@ -265,7 +265,7 @@ class Mime
      *
      * @param string $str
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeBase64($str,
@@ -330,7 +330,7 @@ class Mime
     /**
      * Return a MIME boundary line
      *
-     * @param mixed $EOL Defaults to {@link LINEEND}
+     * @param string $EOL Defaults to {@link LINEEND}
      * @access public
      * @return string
      */
@@ -342,6 +342,7 @@ class Mime
     /**
      * Return MIME ending
      *
+     * @param string $EOL Defaults to {@link LINEEND}
      * @access public
      * @return string
      */

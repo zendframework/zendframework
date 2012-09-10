@@ -151,6 +151,7 @@ class Result implements Iterator, ResultInterface
     }
 
     /**
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function rewind()

@@ -44,6 +44,7 @@ class GlobalAdapterFeature extends AbstractFeature
     /**
      * Get static adapter
      *
+     * @throws Exception\RuntimeException
      * @return Adapter
      */
     public static function getStaticAdapter()

@@ -10,6 +10,7 @@
 
 namespace Zend\Mvc\View\Console;
 
+use ArrayAccess;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\ViewManager as BaseViewManager;
 use Zend\Mvc\View\SendResponseListener;

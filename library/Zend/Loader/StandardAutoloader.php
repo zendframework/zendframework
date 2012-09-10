@@ -77,6 +77,7 @@ class StandardAutoloader implements SplAutoloader
      * </code>
      *
      * @param  array|\Traversable $options
+     * @throws Exception\InvalidArgumentException
      * @return StandardAutoloader
      */
     public function setOptions($options)
@@ -153,6 +154,7 @@ class StandardAutoloader implements SplAutoloader
      * Register many namespace/directory pairs at once
      *
      * @param  array $namespaces
+     * @throws Exception\InvalidArgumentException
      * @return StandardAutoloader
      */
     public function registerNamespaces($namespaces)
@@ -186,6 +188,7 @@ class StandardAutoloader implements SplAutoloader
      * Register many namespace/directory pairs at once
      *
      * @param  array $prefixes
+     * @throws Exception\InvalidArgumentException
      * @return StandardAutoloader
      */
     public function registerPrefixes($prefixes)

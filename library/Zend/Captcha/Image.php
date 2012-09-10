@@ -123,6 +123,7 @@ class Image extends AbstractWord
      * Constructor
      *
      * @param  array|\Traversable $options
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = null)
     {
@@ -474,6 +475,8 @@ class Image extends AbstractWord
      *
      * @param string $id Captcha ID
      * @param string $word Captcha word
+     * @throws Exception\NoFontProvidedException if no font was set
+     * @throws Exception\ImageNotLoadableException if start image cannot be loaded
      */
     protected function generateImage($id, $word)
     {

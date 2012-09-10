@@ -64,7 +64,8 @@ class Reflection extends AbstractHydrator
      * class has not been loaded.
      *
      * @static
-     * @param string|object $object
+     * @param string|object $input
+     * @throws Exception\InvalidArgumentException
      * @return array
      */
     protected static function getReflProperties($input)

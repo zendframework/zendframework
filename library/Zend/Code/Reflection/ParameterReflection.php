@@ -80,7 +80,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
      */
     public function getType()
     {
-        if (($docBlock = $this->getDeclaringFunction()->getDocBlock()) !== false) {
+        if ($docBlock = $this->getDeclaringFunction()->getDocBlock()) {
             $params = $docBlock->getTags('param');
 
             if (isset($params[$this->getPosition()])) {

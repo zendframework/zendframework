@@ -30,6 +30,7 @@ class Error extends AbstractObject
 
     /**
      * Height is forced
+     * @param bool $recalculate
      * @return integer
      */
     public function getHeight($recalculate = false)

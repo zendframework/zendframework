@@ -76,7 +76,7 @@ class Mail extends AbstractWriter
      *
      * @param  MailMessage|array|Traversable $mail
      * @param  Transport\TransportInterface $transport Optional
-     * @return Mail
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($mail, Transport\TransportInterface $transport = null)
     {

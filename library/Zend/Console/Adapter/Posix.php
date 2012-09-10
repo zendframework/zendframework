@@ -213,6 +213,7 @@ class Posix extends AbstractAdapter
      * @param  string   $string
      * @param  int      $color
      * @param  null|int $bgColor
+     * @throws Exception\BadMethodCallException
      * @return string
      */
     public function colorize($string, $color = null, $bgColor = null)
@@ -248,6 +249,7 @@ class Posix extends AbstractAdapter
      * Change current drawing color.
      *
      * @param int $color
+     * @throws Exception\BadMethodCallException
      */
     public function setColor($color)
     {
@@ -269,6 +271,7 @@ class Posix extends AbstractAdapter
      * Change current drawing background color
      *
      * @param int $bgColor
+     * @throws Exception\BadMethodCallException
      */
     public function setBgColor($bgColor)
     {

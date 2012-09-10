@@ -557,6 +557,7 @@ class Server implements \Zend\Server\Server
      * Accepts an instanciated object to use when handling requests.
      *
      * @param object $object
+     * @throws Exception\InvalidArgumentException
      * @return Server
      */
     public function setObject($object)
@@ -599,7 +600,7 @@ class Server implements \Zend\Server\Server
     /**
      * Unimplemented: Load server definition
      *
-     * @param array $array
+     * @param array $definition
      * @return void
      * @throws Exception\RuntimeException Unimplemented
      */
@@ -612,6 +613,7 @@ class Server implements \Zend\Server\Server
      * Set server persistence
      *
      * @param int $mode
+     * @throws Exception\InvalidArgumentException
      * @return Server
      */
     public function setPersistence($mode)
@@ -645,6 +647,7 @@ class Server implements \Zend\Server\Server
      * - string; if so, verifies XML
      *
      * @param DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request
+     * @throws Exception\InvalidArgumentException
      * @return Server
      */
     protected function _setRequest($request)

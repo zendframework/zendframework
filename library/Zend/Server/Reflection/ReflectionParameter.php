@@ -47,7 +47,7 @@ class ReflectionParameter
     /**
      * Constructor
      *
-     * @param ReflectionParameter $r
+     * @param \ReflectionParameter $r
      * @param string $type Parameter type
      * @param string $description Parameter description
      */
@@ -63,6 +63,7 @@ class ReflectionParameter
      *
      * @param string $method
      * @param array $args
+     * @throws Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, $args)
@@ -88,6 +89,7 @@ class ReflectionParameter
      * Set parameter type
      *
      * @param string|null $type
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setType($type)
@@ -113,6 +115,7 @@ class ReflectionParameter
      * Set parameter description
      *
      * @param string|null $description
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setDescription($description)

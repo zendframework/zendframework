@@ -241,7 +241,8 @@ abstract class AbstractContainer extends \ArrayObject
     /**
      * Start capturing content to push into placeholder
      *
-     * @param  int $type How to capture content into placeholder; append, prepend, or set
+     * @param  string $type How to capture content into placeholder; append, prepend, or set
+     * @param  mixed $key Key to which to capture content
      * @return void
      * @throws Exception\RuntimeException if nested captures detected
      */
@@ -337,6 +338,7 @@ abstract class AbstractContainer extends \ArrayObject
     /**
      * Render the placeholder
      *
+     * @param null|int|string $indent
      * @return string
      */
     public function toString($indent = null)

@@ -18,10 +18,10 @@ namespace Zend\ModuleManager\Feature;
 interface ControllerProviderInterface
 {
     /**
-     * Expected to return \Zend\ServiceManager\Configuration object or array to
-     * seed such an object.
+     * Expected to return \Zend\ServiceManager\Config object or array to seed
+     * such an object.
      *
-     * @return array|\Zend\ServiceManager\Configuration
+     * @return array|\Zend\ServiceManager\Config
      */
     public function getControllerConfig();
 }

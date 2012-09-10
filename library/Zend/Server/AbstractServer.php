@@ -80,7 +80,7 @@ abstract class AbstractServer implements Server
      * @param  Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
      * @return Method\Definition
-     * @throws Exception on duplicate entry
+     * @throws Exception\RuntimeException on duplicate entry
      */
     protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
     {

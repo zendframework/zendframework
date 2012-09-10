@@ -63,7 +63,7 @@ class Ini implements ReaderInterface
      * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
-     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function fromFile($filename)
     {

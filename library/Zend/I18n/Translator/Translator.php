@@ -487,6 +487,7 @@ class Translator
      *
      * @param  string $textDomain
      * @param  string $locale
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function loadMessages($textDomain, $locale)

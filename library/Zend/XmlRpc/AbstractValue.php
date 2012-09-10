@@ -174,6 +174,7 @@ abstract class AbstractValue
      *
      * @param  mixed $value
      * @param  Zend\XmlRpc\Value::constant $type
+     * @throws Exception\ValueException
      * @return AbstractValue
      */
     public static function getXmlRpcValue($value, $type = self::AUTO_DETECT_TYPE)
@@ -233,6 +234,7 @@ abstract class AbstractValue
      *
      * @static
      * @param mixed $value
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function getXmlRpcTypeByValue($value)
@@ -271,6 +273,7 @@ abstract class AbstractValue
      *
      * @param mixed $value The PHP variable for conversion
      *
+     * @throws Exception\InvalidArgumentException
      * @return AbstractValue
      * @static
      */
@@ -326,6 +329,7 @@ abstract class AbstractValue
      * @param string|\SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
      * It can be also a valid XML string for conversion
      *
+     * @throws Exception\ValueException
      * @return \Zend\XmlRpc\AbstractValue
      * @static
      */

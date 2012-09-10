@@ -168,6 +168,8 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @throws Exception\InvalidQueryException
+     * @throws Exception\RuntimeException
      * @return Statement
      */
     public function prepare($sql = null)
@@ -195,6 +197,7 @@ class Statement implements StatementInterface
      * Execute
      *
      * @param  ParameterContainer $parameters
+     * @throws Exception\RuntimeException
      * @return mixed
      */
     public function execute($parameters = null)

@@ -118,6 +118,7 @@ class DocumentLiteralWrapper
      *
      * @param string $method
      * @param object $document
+     * @throws UnexpectedValueException
      * @return array
      */
     protected function _parseArguments($method, $document)

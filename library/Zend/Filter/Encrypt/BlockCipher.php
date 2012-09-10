@@ -214,6 +214,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
      * Encrypts $value with the defined settings
      *
      * @param  string $value The content to encrypt
+     * @throws Exception\InvalidArgumentException
      * @return string The encrypted content
      */
     public function encrypt($value)

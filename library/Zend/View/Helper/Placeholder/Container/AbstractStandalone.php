@@ -42,7 +42,7 @@ abstract class AbstractStandalone
     /**
      * Flag whether to automatically escape output, must also be
      * enforced in the child class if __toString/toString is overridden
-     * @var book
+     * @var bool
      */
     protected $autoEscape = true;
 
@@ -308,7 +308,7 @@ abstract class AbstractStandalone
     /**
      * IteratorAggregate: get Iterator
      *
-     * @return Iterator
+     * @return \Iterator
      */
     public function getIterator()
     {

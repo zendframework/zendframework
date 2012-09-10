@@ -28,7 +28,7 @@ class ViewResolverFactory implements FactoryInterface
      * map resolver and path stack resolver
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ViewResolverAggregateResolver
+     * @return ViewResolver\AggregateResolver
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

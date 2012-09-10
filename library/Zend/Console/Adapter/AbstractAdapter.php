@@ -136,6 +136,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param int      $bgColor      (optional) Background color
      * @param null|int $fillColor    (optional) Foreground color of box fill
      * @param null|int $fillBgColor  (optional) Background color of box fill
+     * @throws Exception\BadMethodCallException if coordinates are invalid
      */
     public function writeBox(
         $x1,

@@ -48,7 +48,7 @@ class Accept extends AbstractAccept
      *
      * @param  string $type
      * @param  int|float $priority
-     * @param  int $level
+     * @param  array $params
      * @return Accept
      */
     public function addMediaType($type, $priority = 1, array $params = array())
@@ -70,7 +70,7 @@ class Accept extends AbstractAccept
     /**
      * Parse the keys contained in the header line
      *
-     * @param string mediaType
+     * @param string $fieldValuePart
      * @return \Zend\Http\Header\Accept\FieldValuePart\CharsetFieldValuePart
      * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */

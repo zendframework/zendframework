@@ -103,7 +103,7 @@ class FormElementErrors extends AbstractHelper
     /**
      * Set the attributes that will go on the message open format
      *
-     * @param array key value pairs of attributes
+     * @param array $attributes key value pairs of attributes
      * @return FormElementErrors
      */
     public function setAttributes(array $attributes)
@@ -127,6 +127,7 @@ class FormElementErrors extends AbstractHelper
      *
      * @param  ElementInterface $element
      * @param  array $attributes
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element, array $attributes = array())

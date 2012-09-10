@@ -54,6 +54,7 @@ class DbSelect implements AdapterInterface
      * @param Select $select The select query
      * @param Adapter|Sql $adapterOrSqlObject DB adapter or Sql object
      * @param null|ResultSetInterface $resultSetPrototype
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(Select $select, $adapterOrSqlObject, ResultSetInterface $resultSetPrototype = null)
     {

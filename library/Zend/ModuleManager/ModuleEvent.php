@@ -58,6 +58,7 @@ class ModuleEvent extends Event
      * Set the name of a given module
      *
      * @param  string $moduleName
+     * @throws Exception\InvalidArgumentException
      * @return ModuleEvent
      */
     public function setModuleName($moduleName)
@@ -88,6 +89,7 @@ class ModuleEvent extends Event
      * Set module object to compose in this event
      *
      * @param  object $module
+     * @throws Exception\InvalidArgumentException
      * @return ModuleEvent
      */
     public function setModule($module)

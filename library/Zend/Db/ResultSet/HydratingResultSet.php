@@ -47,6 +47,7 @@ class HydratingResultSet extends AbstractResultSet
      * Set the row object prototype
      *
      * @param  object $objectPrototype
+     * @throws Exception\InvalidArgumentException
      * @return ResultSet
      */
     public function setObjectPrototype($objectPrototype)

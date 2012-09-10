@@ -38,7 +38,7 @@ abstract class AbstractEntry
     /**
      * Entry instance
      *
-     * @var Zend_Feed_Entry_Abstract
+     * @var DOMElement
      */
     protected $entry = null;
 

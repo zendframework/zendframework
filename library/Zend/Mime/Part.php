@@ -117,7 +117,8 @@ class Part
     /**
      * Get the Content of the current Mime Part in the given encoding.
      *
-     * @return String
+     * @param string $EOL
+     * @return string
      */
     public function getContent($EOL = Mime::LINEEND)
     {
@@ -145,6 +146,7 @@ class Part
      * Create and return the array of headers for this MIME part
      *
      * @access public
+     * @param string $EOL
      * @return array
      */
     public function getHeadersArray($EOL = Mime::LINEEND)
@@ -197,6 +199,7 @@ class Part
     /**
      * Return the headers for this part as a string
      *
+     * @param string $EOL
      * @return String
      */
     public function getHeaders($EOL = Mime::LINEEND)

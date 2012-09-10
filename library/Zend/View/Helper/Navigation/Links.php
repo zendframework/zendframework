@@ -208,6 +208,7 @@ class Links extends AbstractHelper
      * </code>
      *
      * @param  AbstractPage $page  page to find links for
+     * @param null|int $flag
      * @return array related pages
      */
     public function findAllRelations(AbstractPage $page, $flag = null)
@@ -728,7 +729,7 @@ class Links extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  AbstractContainer string|$container [optional] container to render.
+     * @param  AbstractContainer|string|null $container [optional] container to render.
      *                                         Default is to render the
      *                                         container registered in the
      *                                         helper.

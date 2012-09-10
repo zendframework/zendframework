@@ -272,6 +272,7 @@ class Request
      * Load XML and parse into request components
      *
      * @param string $request
+     * @throws Exception\ValueException if invalid XML
      * @return boolean True on success, false if an error occurred.
      */
     public function loadXml($request)

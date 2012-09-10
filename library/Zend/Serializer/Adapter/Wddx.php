@@ -105,6 +105,7 @@ class Wddx extends AbstractAdapter
      * @param  string $wddx
      * @return mixed
      * @throws Exception\RuntimeException on wddx error
+     * @throws Exception\InvalidArgumentException if invalid xml
      */
     public function unserialize($wddx)
     {

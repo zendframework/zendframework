@@ -10,6 +10,7 @@
 
 namespace Zend\Authentication\Adapter;
 
+use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Ldap as ZendLdap;
 use Zend\Ldap\Exception\LdapException;
@@ -459,7 +460,7 @@ class Ldap implements AdapterInterface
             return false;
         }
 
-        $returnObject = new \stdClass();
+        $returnObject = new stdClass();
 
         $omitAttribs = array_map('strtolower', $omitAttribs);
 

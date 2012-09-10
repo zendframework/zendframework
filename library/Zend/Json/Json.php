@@ -10,6 +10,7 @@
 
 namespace Zend\Json;
 
+use SimpleXMLElement;
 use Zend\Json\Exception\RecursionException;
 use Zend\Json\Exception\RuntimeException;
 
@@ -192,7 +193,7 @@ class Json
      * if it matches, we return a new Zend_Json_Expr instead of a text node
      *
      * @param SimpleXMLElement $simpleXmlElementObject
-     * @return Zend_Json_Expr|string
+     * @return Expr|string
      */
     protected static function _getXmlValue($simpleXmlElementObject)
     {
@@ -205,6 +206,7 @@ class Json
             return (trim(strval($simpleXmlElementObject)));
         }
     }
+
     /**
      * _processXml - Contains the logic for xml2json
      *
@@ -219,11 +221,10 @@ class Json
      * calling a recursive (protected static) function in this class. Once all
      * the XML elements are stored in the PHP array, it is returned to the caller.
      *
-     * Throws a Zend\Json\RecursionException if the XML tree is deeper than the allowed limit.
-     *
      * @param SimpleXMLElement $simpleXmlElementObject
      * @param boolean $ignoreXmlAttributes
      * @param integer $recursionDepth
+     * @throws Exception\RecursionException if the XML tree is deeper than the allowed limit.
      * @return array
      */
     protected static function _processXml($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth = 0)

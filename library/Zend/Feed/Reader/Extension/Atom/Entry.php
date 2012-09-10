@@ -453,6 +453,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Returns a URI pointing to a feed of all comments for this entry
      *
+     * @param string $type
      * @return string
      */
     public function getCommentFeedLink($type = 'atom')
@@ -612,6 +613,8 @@ class Entry extends Extension\AbstractEntry
 
     /**
      * Detect the presence of any Atom namespaces in use
+     *
+     * @return string
      */
     protected function getAtomType()
     {

@@ -64,7 +64,7 @@ interface EntryInterface
     /**
      * Get the entry enclosure
      *
-     * @return stdClass
+     * @return \stdClass
      */
     public function getEnclosure();
 

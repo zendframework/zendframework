@@ -93,7 +93,8 @@ class ClassGenerator extends AbstractGenerator
         }
 
         /* @var \Zend\Code\Reflection\ClassReflection $parentClass */
-        if ($parentClass = $classReflection->getParentClass()) {
+        $parentClass = $classReflection->getParentClass();
+        if ($parentClass) {
             $cg->setExtendedClass($parentClass->getName());
             $interfaces = array_diff($classReflection->getInterfaces(), $parentClass->getInterfaces());
         } else {

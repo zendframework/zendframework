@@ -127,7 +127,7 @@ class Select extends Element implements InputProviderInterface
         if (null === $this->validator) {
             $validator = new InArrayValidator(array(
                 'haystack' => $this->getValueOptionsValues(),
-                'strict'   => false,
+                'strict'   => false
             ));
 
             $multiple = (isset($this->attributes['multiple']))
@@ -177,14 +177,17 @@ class Select extends Element implements InputProviderInterface
         foreach ($options as $key => $optionSpec) {
             if(is_array($optionSpec) && array_key_exists('options', $optionSpec)){
                 foreach ($optionSpec['options'] as $nestedKey => $nestedOptionSpec) {
-                    $value = (is_array($nestedOptionSpec)) ? $nestedOptionSpec['value'] : $nestedKey;
-                    $values[] = $value;
+                    $values[] = $this->getOptionValue($nestedKey, $nestedOptionSpec);
                 }
             }else{
-              $value = (is_array($optionSpec)) ? $optionSpec['value'] : $key;
-              $values[] = $value;
+              $values[] = $this->getOptionValue($key, $optionSpec);
             }
         }
         return $values;
+    }
+
+    private function getOptionValue($key, $optionSpec)
+    {
+        return is_array($optionSpec) ? $optionSpec['value'] : $key;
     }
 }

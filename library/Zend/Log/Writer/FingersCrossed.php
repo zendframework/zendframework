@@ -9,11 +9,11 @@
  */
 namespace Zend\Log\Writer;
 
+use Zend\Log\Filter\Priority as PriorityFilter;
+use Zend\Log\Filter\FilterInterface;
 use Zend\Log\Formatter\FormatterInterface;
 use Zend\Log\Exception;
 use Zend\Log\Logger;
-use Zend\Log\Writer\FingersCrossed\ErrorLevelActivationStrategy;
-use Zend\Log\Writer\FingersCrossed\ActivationStrategyInterface;
 use Zend\Log\Writer\WriterInterface;
 use Zend\Log\Writer\AbstractWriter;
 
@@ -57,32 +57,52 @@ class FingersCrossed extends AbstractWriter
     protected $buffer = array();
 
     /**
-     * Strategy which determines if events are buffered
-     *
-     * @var ActivationStrategyInterface
-     */
-    protected $activationStrategy;
-
-    /**
      * Constructor
      *
      * @param WriterInterface $writer Wrapped writer
-     * @param ActivationStrategyInterface|int $activationStrategyOrPriority Strategy or log priority which determines buffering of events
+     * @param FilterInterface|int $filterOrPriority Filter or log priority which determines buffering of events
      * @param int $bufferSize Maximum buffer size
      */
-    public function __construct(WriterInterface $writer, $activationStrategyOrPriority = null, $bufferSize = 0)
+    public function __construct(WriterInterface $writer, $filterOrPriority = null, $bufferSize = 0)
     {
         $this->writer = $writer;
 
-        if ($activationStrategyOrPriority === null) {
-            $this->activationStrategy = new ErrorLevelActivationStrategy(Logger::WARN);
-        } elseif (! $activationStrategyOrPriority instanceof ActivationStrategyInterface) {
-            $this->activationStrategy = new ErrorLevelActivationStrategy($activationStrategyOrPriority);
+        if (null === $filterOrPriority) {
+            $this->addFilter(new PriorityFilter(Logger::WARN));
+        } elseif (!$filterOrPriority instanceof FilterInterface) {
+            $this->addFilter(new PriorityFilter($filterOrPriority));
         } else {
-            $this->activationStrategy = $activationStrategyOrPriority;
+            $this->addFilter($filterOrPriority);
         }
 
         $this->bufferSize = $bufferSize;
+    }
+
+    /**
+     * Log a message to this writer.
+     *
+     * @param array $event log data event
+     * @return void
+     */
+    public function write(array $event)
+    {
+        $this->doWrite($event);
+    }
+
+    /**
+     * Check if buffered data should be flushed
+     *
+     * @param array $event event data
+     * @return boolean true if buffered data should be flushed
+     */
+    protected function isActivated(array $event)
+    {
+        foreach ($this->filters as $filter) {
+            if (!$filter->filter($event)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -100,7 +120,7 @@ class FingersCrossed extends AbstractWriter
                 array_shift($this->buffer);
             }
 
-            if ($this->activationStrategy->isWriterActivated($event)) {
+            if ($this->isActivated($event)) {
                 $this->buffering = false;
 
                 foreach ($this->buffer as $bufferedEvent) {
@@ -122,13 +142,14 @@ class FingersCrossed extends AbstractWriter
     }
 
     /**
-     * Prevent setting a formatter for this writer
+     * Stub in accordance to parent method signature.
+     * Fomatters must be set on the wrapped writer.
      *
      * @param Formatter $formatter
      */
     public function setFormatter(FormatterInterface $formatter)
     {
-        throw new Exception\InvalidArgumentException('Formatter must be set on the wrapped writer');
+        return $this->writer;
     }
 
     /**

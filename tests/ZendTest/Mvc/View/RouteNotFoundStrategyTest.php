@@ -31,41 +31,43 @@ class RouteNotFoundStrategyTest extends TestCase
         $this->strategy = new RouteNotFoundStrategy();
     }
 
-    public function testMessageParamsInViewModel()
+    public function notFoundResponseProvider()
+    {
+        return array(
+            array('bar', 'assertEquals'),
+            array(null,  'assertTrue'),
+            array(new ViewModel(array('message' => 'bar')), 'assertEquals'),
+            array(new ViewModel(),  'assertTrue'),
+        );
+    }
+
+    /**
+     * @dataProvider notFoundResponseProvider
+     */
+    public function testLeavesReturnedMessageIntact($result, $assertion)
     {
         $response = new Response();
         $event    = new MvcEvent();
-        $event->setResponse($response);
         $response->setStatusCode(404);
+        $event->setResponse($response);
 
-        $event->setResult(null);
+        $event->setResult($result);
+        $this->strategy->prepareNotFoundViewModel($event);
 
-        $testCase = array(
-            'assertEquals' => array (
-                'bar',
-                new ViewModel(array('message' => 'bar')),
-            ),
-            'assertTrue' => array (
-                null,
-                new ViewModel(),
-            )
-        );
-        foreach ($testCase as $type => $results) {
-            foreach ($results as $resultEvent) {
-                $event->setResult($resultEvent);
-                $this->strategy->prepareNotFoundViewModel($event);
-                $viewModel = $event->getResult();
-                $this->assertInstanceOf('Zend\View\Model\ModelInterface', $viewModel);
-                $variables = $viewModel->getVariables();
-                switch ($type) {
-                    case 'assertEquals':
-                        $this->assertEquals('bar', $variables['message']);
-                        break;
-                    case 'assertTrue':
-                        $this->assertTrue(isset($variables['message']));
-                        break;
-                }
-            }
+        $viewModel = $event->getResult();
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $viewModel);
+
+        $variables = $viewModel->getVariables();
+        switch ($assertion) {
+            case 'assertEquals':
+                // Testing if we returned a message in the result
+                $this->assertEquals('bar', $variables['message']);
+                break;
+            case 'assertTrue':
+                // Testing if no message was returned in the result; in that
+                // case, default message is used from strategy
+                $this->assertTrue(isset($variables['message']));
+                break;
         }
     }
 

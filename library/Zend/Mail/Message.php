@@ -537,7 +537,7 @@ class Message
     }
 
     /**
-     * Set from serialized string
+     * Instantiate from raw message string
      *
      * @param  string $rawMessage
      * @return Message

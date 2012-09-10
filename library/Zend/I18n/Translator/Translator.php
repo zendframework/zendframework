@@ -514,7 +514,7 @@ class Translator
                 }
 
                 $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
-                return;
+                goto cache;
             }
         }
 
@@ -531,12 +531,12 @@ class Translator
                     }
 
                     $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
-                    return;
+                    goto cache;
                 }
             }
         }
 
-        // Load concrete files, may override those loaded from patterns
+        // Try to load from concrete files
         foreach (array($locale, '*') as $currentLocale) {
             if (!isset($this->files[$textDomain][$currentLocale])) {
                 continue;
@@ -552,10 +552,11 @@ class Translator
             $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
 
             unset($this->files[$textDomain][$currentLocale]);
-            return;
+            goto cache;
         }
 
         // Cache the loaded text domain
+        cache:
         if ($cache !== null) {
             $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }

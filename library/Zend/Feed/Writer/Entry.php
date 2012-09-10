@@ -250,8 +250,8 @@ class Entry
      */
     public function setCommentCount($count)
     {
-        if (empty($count) || !is_numeric($count) || (int) $count < 0) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "count" must be a non-empty integer number');
+        if (!is_numeric($count) || (int)$count != $count || (int) $count < 0) {
+            throw new Exception\InvalidArgumentException('Invalid parameter: "count" must be a positive integer number or zero');
         }
         $this->data['commentCount'] = (int) $count;
     }

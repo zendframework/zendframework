@@ -521,6 +521,58 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $entry->getCommentCount());
     }
 
+    public function testSetsCommentCount0()
+    {
+        $entry = new Writer\Entry;
+        $entry->setCommentCount(0);
+        $this->assertEquals(0, $entry->getCommentCount());
+    }
+
+    public function allowedCommentCounts()
+    {
+        return array(
+            array(0, 0),
+            array(0.0, 0),
+            array(1, 1),
+            array(PHP_INT_MAX, PHP_INT_MAX),
+        );
+    }
+
+    /**
+     * @dataProvider allowedCommentCounts
+     */
+    public function testSetsCommentCountAllowed($count, $expected)
+    {
+        $entry = new Writer\Entry;
+        $entry->setCommentCount($count);
+        $this->assertSame($expected, $entry->getCommentCount());
+    }
+
+    public function disallowedCommentCounts()
+    {
+        return array(
+            array(1.1),
+            array(-1),
+            array(-PHP_INT_MAX),
+            array(array()),
+            array(''),
+            array(false),
+            array(true),
+            array(new \stdClass),
+            array(null),
+        );
+    }
+
+    /**
+     * @dataProvider disallowedCommentCounts
+     */
+    public function testSetsCommentCountDisallowed($count)
+    {
+        $entry = new Writer\Entry;
+        $this->setExpectedException('Zend\Feed\Writer\Exception\ExceptionInterface');
+        $entry->setCommentCount($count);
+    }
+
     public function testSetCommentCountThrowsExceptionOnInvalidEmptyParameter()
     {
         $entry = new Writer\Entry;

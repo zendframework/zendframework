@@ -31,6 +31,46 @@ class RouteNotFoundStrategyTest extends TestCase
         $this->strategy = new RouteNotFoundStrategy();
     }
 
+    public function notFoundResponseProvider()
+    {
+        return array(
+            array('bar', 'assertEquals'),
+            array(null,  'assertTrue'),
+            array(new ViewModel(array('message' => 'bar')), 'assertEquals'),
+            array(new ViewModel(),  'assertTrue'),
+        );
+    }
+
+    /**
+     * @dataProvider notFoundResponseProvider
+     */
+    public function testLeavesReturnedMessageIntact($result, $assertion)
+    {
+        $response = new Response();
+        $event    = new MvcEvent();
+        $response->setStatusCode(404);
+        $event->setResponse($response);
+
+        $event->setResult($result);
+        $this->strategy->prepareNotFoundViewModel($event);
+
+        $viewModel = $event->getResult();
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $viewModel);
+
+        $variables = $viewModel->getVariables();
+        switch ($assertion) {
+            case 'assertEquals':
+                // Testing if we returned a message in the result
+                $this->assertEquals('bar', $variables['message']);
+                break;
+            case 'assertTrue':
+                // Testing if no message was returned in the result; in that
+                // case, default message is used from strategy
+                $this->assertTrue(isset($variables['message']));
+                break;
+        }
+    }
+
     public function test404ErrorsInject404ResponseStatusCode()
     {
         $response = new Response();
@@ -63,6 +103,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->strategy->setDisplayNotFoundReason($allow);
             foreach ($errors as $key => $error) {
                 $response->setStatusCode(200);
+                $event->setResult(null);
                 $event->setError($error);
                 $this->strategy->detectNotFoundError($event);
                 $this->strategy->prepareNotFoundViewModel($event);
@@ -151,6 +192,7 @@ class RouteNotFoundStrategyTest extends TestCase
         foreach (array(true, false) as $allow) {
             $this->strategy->setDisplayNotFoundReason($allow);
             $response->setStatusCode(404);
+            $event->setResult(null);
             $event->setResponse($response);
             $this->strategy->prepareNotFoundViewModel($event);
             $model = $event->getResult();
@@ -175,6 +217,7 @@ class RouteNotFoundStrategyTest extends TestCase
         foreach (array(true, false) as $allow) {
             $this->strategy->setDisplayExceptions($allow);
             $response->setStatusCode(404);
+            $event->setResult(null);
             $event->setResponse($response);
             $this->strategy->prepareNotFoundViewModel($event);
             $model = $event->getResult();
@@ -202,6 +245,7 @@ class RouteNotFoundStrategyTest extends TestCase
             foreach (array(true, false) as $allow) {
                 $this->strategy->$method($allow);
                 $response->setStatusCode(404);
+                $event->setResult(null);
                 $event->setResponse($response);
                 $this->strategy->prepareNotFoundViewModel($event);
                 $model = $event->getResult();

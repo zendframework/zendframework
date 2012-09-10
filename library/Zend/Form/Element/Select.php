@@ -52,13 +52,11 @@ class Select extends Element implements InputProviderInterface
     protected $validator;
 
     /**
-     * If set to true, an empty option will be automatically prepended to the options. This is
-     * especially useful with JavaScript libraries that may ask an empty option for some features,
-     * like adding a placeholder text
+     * Create an empty option (option with label but no value). If set to null, no option is created
      *
      * @var bool
      */
-    protected $createEmptyOption = false;
+    protected $emptyOption = null;
 
     /**
      * @var array
@@ -132,25 +130,25 @@ class Select extends Element implements InputProviderInterface
     }
 
     /**
-     * Set if an empty option should be added to the value options
+     * Set the string for an empty option (can be empty string). If set to null, no option will be added
      *
-     * @param  bool $createEmptyOption
+     * @param  string|null $emptyOption
      * @return Select
      */
-    public function setShouldCreateEmptyOption($createEmptyOption)
+    public function setEmptyOption($emptyOption)
     {
-        $this->createEmptyOption = (bool) $createEmptyOption;
+        $this->emptyOption = $emptyOption;
         return $this;
     }
 
     /**
-     * Return true if an empty option should be added to the value options
+     * Return the string for the empty option (null if none)
      *
-     * @return bool
+     * @return string|null
      */
-    public function shouldCreateEmptyOption()
+    public function getEmptyOption()
     {
-        return $this->createEmptyOption;
+        return $this->emptyOption;
     }
 
     /**

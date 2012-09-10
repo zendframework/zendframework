@@ -84,8 +84,8 @@ class FormSelect extends AbstractHelper
             ));
         }
 
-        if ($element->shouldCreateEmptyOption()) {
-            $options = array('' => '') + $options;
+        if (($emptyOption = $element->getEmptyOption()) !== null) {
+            $options = array('' => $emptyOption) + $options;
         }
 
         $attributes = $element->getAttributes();

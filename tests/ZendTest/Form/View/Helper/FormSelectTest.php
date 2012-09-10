@@ -255,7 +255,22 @@ class FormSelectTest extends CommonTestCase
     public function testCanCreateEmptyOption()
     {
         $element = new SelectElement('foo');
-        $element->setShouldCreateEmptyOption(true);
+        $element->setEmptyOption('empty');
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertContains('<option value="">empty</option>', $markup);
+    }
+
+    public function testCanCreateEmptyOptionWithEmptyString()
+    {
+        $element = new SelectElement('foo');
+        $element->setEmptyOption('');
         $element->setValueOptions(array(
             array(
                 'label' => 'label1',
@@ -265,5 +280,34 @@ class FormSelectTest extends CommonTestCase
         $markup = $this->helper->render($element);
 
         $this->assertContains('<option value=""></option>', $markup);
+    }
+
+    public function testDoesNotRenderEmptyOptionByDefault()
+    {
+        $element = new SelectElement('foo');
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertNotContains('<option value=""></option>', $markup);
+    }
+
+    public function testNullEmptyOptionDoesNotRenderEmptyOption()
+    {
+        $element = new SelectElement('foo');
+        $element->setEmptyOption(null);
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertNotContains('<option value=""></option>', $markup);
     }
 }

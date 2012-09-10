@@ -52,6 +52,11 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $values           = array();
 
     /**
+     * @var array
+     */
+    protected $keys = array();
+
+    /**
      * Constructor
      *
      * @param  null|string $table
@@ -101,19 +106,19 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $keys = array_keys($values);
-        $firstKey = current($keys);
-
-        if (is_string($firstKey)) {
-            $this->columns($keys);
-            $values = array_values($values);
-        } elseif (is_int($firstKey)) {
-            $values = array_values($values);
-        }
+        $values = array_values($values);
 
         if ($flag == self::VALUES_MERGE) {
             $this->values = array_merge($this->values, $values);
+            $this->keys = array_merge($this->keys, $keys);
         } else {
             $this->values = $values;
+            $this->keys = $keys;
+        }
+
+        $firstKey = current($this->keys);
+        if (is_string($firstKey)) {
+            $this->columns($this->keys);
         }
 
         return $this;

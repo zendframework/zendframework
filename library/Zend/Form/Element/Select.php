@@ -52,6 +52,13 @@ class Select extends Element implements InputProviderInterface
     protected $validator;
 
     /**
+     * Create an empty option (option with label but no value). If set to null, no option is created
+     *
+     * @var bool
+     */
+    protected $emptyOption = null;
+
+    /**
      * @var array
      */
     protected $valueOptions = array();
@@ -79,6 +86,7 @@ class Select extends Element implements InputProviderInterface
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
      * - value_options: list of values and labels for the select options
+     * _ empty_option: should an empty option be prepended to the options ?
      *
      * @param  array|\Traversable $options
      * @return Select|ElementInterface
@@ -94,6 +102,10 @@ class Select extends Element implements InputProviderInterface
         // Alias for 'value_options'
         if (isset($this->options['options'])) {
             $this->setValueOptions($this->options['options']);
+        }
+
+        if (isset($this->options['empty_option'])) {
+            $this->setEmptyOption($this->options['empty_option']);
         }
 
         return $this;
@@ -115,6 +127,28 @@ class Select extends Element implements InputProviderInterface
             return $this;
         }
         return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * Set the string for an empty option (can be empty string). If set to null, no option will be added
+     *
+     * @param  string|null $emptyOption
+     * @return Select
+     */
+    public function setEmptyOption($emptyOption)
+    {
+        $this->emptyOption = $emptyOption;
+        return $this;
+    }
+
+    /**
+     * Return the string for the empty option (null if none)
+     *
+     * @return string|null
+     */
+    public function getEmptyOption()
+    {
+        return $this->emptyOption;
     }
 
     /**

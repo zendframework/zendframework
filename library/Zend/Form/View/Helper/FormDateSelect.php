@@ -56,15 +56,15 @@ class FormDateSelect extends FormMonthSelectHelper
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
         $yearOptions   = $this->getYearsOptions($element->getMinYear(), $element->getMaxYear());
 
-        if ($element->shouldCreateEmptyOption()) {
-            $daysOptions   = array('' => '') + $daysOptions;
-            $monthsOptions = array('' => '') + $monthsOptions;
-            $yearOptions   = array('' => '') + $yearOptions;
-        }
-
         $dayElement   = $element->getDayElement()->setValueOptions($daysOptions);
         $monthElement = $element->getMonthElement()->setValueOptions($monthsOptions);
         $yearElement  = $element->getYearElement()->setValueOptions($yearOptions);
+
+        if ($element->shouldCreateEmptyOption()) {
+            $dayElement->setEmptyOption('');
+            $yearElement->setEmptyOption('');
+            $monthElement->setEmptyOption('');
+        }
 
         $markup = array();
         $markup[$pattern['day']]   = $selectHelper->render($dayElement);

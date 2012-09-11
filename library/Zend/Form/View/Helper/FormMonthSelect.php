@@ -88,13 +88,13 @@ class FormMonthSelect extends AbstractHelper
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
         $yearOptions   = $this->getYearsOptions($element->getMinYear(), $element->getMaxYear());
 
-        if ($element->shouldCreateEmptyOption()) {
-            $monthsOptions = array('' => '') + $monthsOptions;
-            $yearOptions   = array('' => '') + $yearOptions;
-        }
-
         $monthElement = $element->getMonthElement()->setValueOptions($monthsOptions);
         $yearElement  = $element->getYearElement()->setValueOptions($yearOptions);
+
+        if ($element->shouldCreateEmptyOption()) {
+            $monthElement->setEmptyOption('');
+            $yearElement->setEmptyOption('');
+        }
 
         $markup = array();
         $markup[$pattern['month']] = $selectHelper->render($monthElement);

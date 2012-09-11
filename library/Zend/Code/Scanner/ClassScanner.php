@@ -207,22 +207,22 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Returns a list of property names
+     *
+     * @deprecated use getProperties()
+     * @return array
+     */
     public function getPropertyNames()
     {
-        $this->scan();
-
-        $return = array();
-
-        foreach ($this->infos as $info) {
-            if ($info['type'] != 'property') {
-                continue;
-            }
-
-            $return[] = $info['name'];
-        }
-        return $return;
+        return $this->getProperties();
     }
 
+    /**
+     * Returns a list of property names
+     *
+     * @return array
+     */
     public function getProperties()
     {
         $this->scan();
@@ -234,7 +234,7 @@ class ClassScanner implements ScannerInterface
                 continue;
             }
 
-            $return[] = $this->getProperty($info['name']);
+            $return[] = $info['name'];
         }
         return $return;
     }

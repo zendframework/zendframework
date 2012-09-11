@@ -44,8 +44,8 @@ class ClassScannerTest extends TestCase
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $this->assertInternalType('array', $class->getPropertyNames());
-        $this->assertContains('bar', $class->getPropertyNames());
+        $this->assertInternalType('array', $class->getProperties());
+        $this->assertContains('bar', $class->getProperties());
     }
 
     public function testClassScannerHasMethods()

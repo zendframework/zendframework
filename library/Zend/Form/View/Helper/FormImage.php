@@ -39,7 +39,6 @@ class FormImage extends FormInput
         'height'         => true,
         'src'            => true,
         'type'           => true,
-        'value'          => true,
         'width'          => true,
     );
 

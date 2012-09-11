@@ -746,6 +746,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         switch (strtolower($name)) {
             case 'where':
                 return $this->where;
+            case 'having':
+                return $this->having;
             default:
                 throw new Exception\InvalidArgumentException('Not a valid magic property for this object');
         }

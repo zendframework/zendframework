@@ -69,7 +69,7 @@ class DateSelect extends MonthSelect
      * @param  array $dayAttributes
      * @return DateSelect
      */
-    public function seDayAttributes(array $dayAttributes)
+    public function setDayAttributes(array $dayAttributes)
     {
         $this->dayElement->setAttributes($dayAttributes);
         return $this;

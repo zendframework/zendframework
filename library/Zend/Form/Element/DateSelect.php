@@ -38,11 +38,51 @@ class DateSelect extends MonthSelect
     }
 
     /**
+     * Accepted options for DateSelect (plus the ones from MonthSelect) :
+     * - day_attributes: HTML attributes to be rendered with the day element
+     *
+     * @param array|\Traversable $options
+     * @return DateSelect
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['day_attributes'])) {
+            $this->setDayAttributes($options['day_attributes']);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Select
      */
     public function getDayElement()
     {
         return $this->dayElement;
+    }
+
+    /**
+     * Set the day attributes
+     *
+     * @param  array $dayAttributes
+     * @return DateSelect
+     */
+    public function seDayAttributes(array $dayAttributes)
+    {
+        $this->dayElement->setAttributes($dayAttributes);
+        return $this;
+    }
+
+    /**
+     * Get the day attributes
+     *
+     * @return array
+     */
+    public function getDayAttributes()
+    {
+        return $this->dayElement->getAttributes();
     }
 
     /**

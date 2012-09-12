@@ -80,15 +80,25 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * Accepted options for DateSelect:
+     * - month_attributes: HTML attributes to be rendered with the month element
+     * - year_attributes: HTML attributes to be rendered with the month element
      * - min_year: min year to use in the year select
      * - max_year: max year to use in the year select
      *
      * @param array|\Traversable $options
-     * @return DateSelect
+     * @return MonthSelect
      */
     public function setOptions($options)
     {
         parent::setOptions($options);
+
+        if (isset($options['month_attributes'])) {
+            $this->setMonthAttributes($options['month_attributes']);
+        }
+
+        if (isset($options['year_attributes'])) {
+            $this->setYearAttributes($options['year_attributes']);
+        }
 
         if (isset($options['min_year'])) {
             $this->setMinYear($options['min_year']);
@@ -119,6 +129,50 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function getYearElement()
     {
         return $this->yearElement;
+    }
+
+    /**
+     * Set the month attributes
+     *
+     * @param  array $monthAttributes
+     * @return MonthSelect
+     */
+    public function setMonthAttributes(array $monthAttributes)
+    {
+        $this->monthElement->setAttributes($monthAttributes);
+        return $this;
+    }
+
+    /**
+     * Get the month attributes
+     *
+     * @return array
+     */
+    public function getMonthAttributes()
+    {
+        return $this->monthElement->getAttributes();
+    }
+
+    /**
+     * Set the year attributes
+     *
+     * @param  array $yearAttributes
+     * @return MonthSelect
+     */
+    public function setYearAttributes(array $yearAttributes)
+    {
+        $this->yearElement->setAttributes($yearAttributes);
+        return $this;
+    }
+
+    /**
+     * Get the year attributes
+     *
+     * @return array
+     */
+    public function getYearAttributes()
+    {
+        return $this->yearElement->getAttributes();
     }
 
     /**

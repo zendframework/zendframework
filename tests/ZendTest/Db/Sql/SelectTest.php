@@ -21,6 +21,15 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * @covers Zend\Db\Sql\Select::__construct
+     */
+    public function testConstruct()
+    {
+        $select = new Select('foo');
+        $this->assertEquals('foo', $select->getRawState('table'));
+    }
+
+    /**
      * @testdox unit test: Test from() returns Select object (is chainable)
      * @covers Zend\Db\Sql\Select::from
      */
@@ -284,6 +293,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $return = $select->group(array('col1', 'col2'));
         $this->assertSame($select, $return);
         return $return;
+    }
+
+    /**
+     * @testdox unit test: Test group() returns same Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::group
+     */
+    public function testGroupString()
+    {
+        $select = new Select;
+        $return = $select->group('col1');
+        $this->assertSame($select, $return);
     }
 
     /**

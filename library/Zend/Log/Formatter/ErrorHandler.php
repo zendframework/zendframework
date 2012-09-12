@@ -35,17 +35,42 @@ class ErrorHandler extends Simple
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
             $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
+        
+        foreach ($this->buildReplacementsFromArray($event) as $name => $value) {
+            $output = str_replace("%$name%", $value, $output);
+        }
+        
+        return $output;
+    }
 
-        foreach ($event as $name => $value) {
-            if (is_array($value)) {
-                foreach ($value as $sname => $svalue) {
-                    $output = str_replace("%{$name}[{$sname}]%", $svalue, $output);
+    /**
+     * Flatten the multi-dimensional $event array into a single dimensional
+     * array
+     *
+     * @param array $event            
+     * @param string $key            
+     * @return array
+     */
+    protected function buildReplacementsFromArray ($event, $key = null)
+    {
+        $result = array();
+        foreach ($event as $index => $value) {
+            $nextIndex = $key === null ? $index : $key . '[' . $index . ']';
+            if ($value === null) {
+                continue;
+            }
+            if (! is_array($value)) {
+                if ($key === null) {
+                    $result[$nextIndex] = $value;
+                } else {
+                    if (! is_object($value) || method_exists($value, "__toString")) {
+                        $result[$nextIndex] = $value;
+                    }
                 }
             } else {
-                $output = str_replace("%$name%", $value, $output);
+                $result = array_merge($result, $this->buildReplacementsFromArray($value, $nextIndex));
             }
         }
-
-        return $output;
+        return $result;
     }
 }

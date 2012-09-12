@@ -210,16 +210,26 @@ class ClassScanner implements ScannerInterface
     /**
      * Returns a list of property names
      *
-     * @deprecated use getProperties()
      * @return array
      */
     public function getPropertyNames()
     {
-        return $this->getProperties();
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'property') {
+                continue;
+            }
+
+            $return[] = $info['name'];
+        }
+        return $return;
     }
 
     /**
-     * Returns a list of property names
+     * Returns a list of properties
      *
      * @return array
      */
@@ -234,9 +244,44 @@ class ClassScanner implements ScannerInterface
                 continue;
             }
 
-            $return[] = $info['name'];
+            $return[] = $this->getProperty($info['name']);
         }
         return $return;
+    }
+
+    public function getProperty($propertyNameOrInfoIndex)
+    {
+        $this->scan();
+
+        if (is_int($propertyNameOrInfoIndex)) {
+            $info = $this->infos[$propertyNameOrInfoIndex];
+            if ($info['type'] != 'property') {
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a property');
+            }
+        } elseif (is_string($propertyNameOrInfoIndex)) {
+            $propertyFound = false;
+            foreach ($this->infos as $info) {
+                if ($info['type'] === 'property' && $info['name'] === $propertyNameOrInfoIndex) {
+                    $propertyFound = true;
+                    break;
+                }
+            }
+            if (!$propertyFound) {
+                return false;
+            }
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid property name of info index type.  Must be of type int or string');
+        }
+        if (!isset($info)) {
+            return false;
+        }
+        $p = new PropertyScanner(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+            $this->nameInformation
+        );
+        $p->setClass($this->name);
+        $p->setScannerClass($this);
+        return $p;
     }
 
     public function getMethodNames()

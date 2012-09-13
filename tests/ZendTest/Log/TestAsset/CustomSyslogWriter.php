@@ -18,4 +18,9 @@ class CustomSyslogWriter extends SyslogWriter
     {
         return $this->facility;
     }
+
+    public function getApplicationName()
+    {
+        return $this->appName;
+    }
 }

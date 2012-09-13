@@ -93,4 +93,13 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
 
         $writer->write($event);
     }
+
+    /**
+     * @group ZF2-534
+     */
+    public function testPassApplicationNameViaConstructor()
+    {
+        $writer   = new CustomSyslogWriter(array('application' => 'test_app'));
+        $this->assertEquals('test_app', $writer->getApplicationName());
+    }
 }

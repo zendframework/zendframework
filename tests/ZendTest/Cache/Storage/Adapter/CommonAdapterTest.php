@@ -10,6 +10,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\IteratorInterface;
 use Zend\Cache\Storage\StorageInterface;
@@ -19,6 +20,7 @@ use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 use Zend\Http\Header\Expires;
 use Zend\Stdlib\ErrorHandler;
 
@@ -234,7 +236,11 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        $this->assertFalse($this->_storage->hasItem('key'));
+        if (!$capabilities->getUseRequestTime()) {
+            $this->assertFalse($this->_storage->hasItem('key'));
+        } else {
+            $this->assertTrue($this->_storage->hasItem('key'));
+        }
     }
 
     public function testHasItemNonReadable()
@@ -544,11 +550,13 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        if (!$capabilities->getUseRequestTime()) {
-            $this->assertNull($this->_storage->getItem('key'));
-        } else {
+        if ($capabilities->getUseRequestTime()) {
+            // Can't test much more if the request time will be used
             $this->assertEquals('value', $this->_storage->getItem('key'));
+            return;
         }
+
+        $this->assertNull($this->_storage->getItem('key'));
 
         $this->_options->setTtl(0);
         if ($capabilities->getExpiredRead()) {
@@ -1032,5 +1040,35 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasItem('key1'));
         $this->assertFalse($this->_storage->hasItem('key2'));
         $this->assertFalse($this->_storage->hasItem('key3'));
+    }
+
+    public function testGetTotalSpace()
+    {
+        if (!($this->_storage instanceof TotalSpaceCapableInterface)) {
+            $this->markTestSkipped("Storage doesn't implement TotalSpaceCapableInterface");
+        }
+
+        $totalSpace = $this->_storage->getTotalSpace();
+        $this->assertGreaterThan(0, $totalSpace);
+
+        if ($this->_storage instanceof AvailableSpaceCapableInterface) {
+            $availableSpace = $this->_storage->getAvailableSpace();
+            $this->assertGreaterThanOrEqual($availableSpace, $totalSpace);
+        }
+    }
+
+    public function testGetAvailableSpace()
+    {
+        if (!($this->_storage instanceof AvailableSpaceCapableInterface)) {
+            $this->markTestSkipped("Storage doesn't implement AvailableSpaceCapableInterface");
+        }
+
+        $availableSpace = $this->_storage->getAvailableSpace();
+        $this->assertGreaterThanOrEqual(0, $availableSpace);
+
+        if ($this->_storage instanceof TotalSpaceCapableInterface) {
+            $totalSpace = $this->_storage->getTotalSpace();
+            $this->assertLessThanOrEqual($totalSpace, $availableSpace);
+        }
     }
 }

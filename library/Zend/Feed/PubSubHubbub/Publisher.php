@@ -108,8 +108,8 @@ class Publisher
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . 'URL');
         }
         $this->hubUrls[] = $url;
         return $this;
@@ -167,8 +167,8 @@ class Publisher
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . 'URL');
         }
         $this->updatedTopicUrls[] = $url;
         return $this;
@@ -227,8 +227,8 @@ class Publisher
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . 'URL');
         }
         $client = $this->_getHttpClient();
         $client->setUri($url);
@@ -289,7 +289,7 @@ class Publisher
         }
         if (empty($name) || !is_string($name)) {
             throw new Exception\InvalidArgumentException('Invalid parameter "name"'
-                .' of "' . $name . '" must be a non-empty string');
+                . ' of "' . $name . '" must be a non-empty string');
         }
         if ($value === null) {
             $this->removeParameter($name);
@@ -297,7 +297,7 @@ class Publisher
         }
         if (empty($value) || (!is_string($value) && $value !== null)) {
             throw new Exception\InvalidArgumentException('Invalid parameter "value"'
-                .' of "' . $value . '" must be a non-empty string');
+                . ' of "' . $value . '" must be a non-empty string');
         }
         $this->parameters[$name] = $value;
         return $this;
@@ -328,7 +328,7 @@ class Publisher
     {
         if (empty($name) || !is_string($name)) {
             throw new Exception\InvalidArgumentException('Invalid parameter "name"'
-                .' of "' . $name . '" must be a non-empty string');
+                . ' of "' . $name . '" must be a non-empty string');
         }
         if (array_key_exists($name, $this->parameters)) {
             unset($this->parameters[$name]);

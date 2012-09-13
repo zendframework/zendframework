@@ -264,7 +264,7 @@ class WindowsAnsicon extends Posix
             $result = $return = null;
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . '[int[]] $mask = '.join(',',$asciiMask).';'
+                    . '[int[]] $mask = '.join(',', $asciiMask).';'
                     . 'do {'
                         . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
                     . '} while( !($mask -contains $key) );'
@@ -276,7 +276,7 @@ class WindowsAnsicon extends Posix
 
             $char = !empty($result) ? trim(implode('', $result)) : null;
 
-            if (!$return && $char && ($mask === null || in_array($char,$asciiMask))) {
+            if (!$return && $char && ($mask === null || in_array($char, $asciiMask))) {
                 // We have obtained an ASCII code, check if it is a carriage
                 // return and normalize it as needed
                 if ($char == 13) {

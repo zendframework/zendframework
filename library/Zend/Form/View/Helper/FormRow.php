@@ -123,7 +123,7 @@ class FormRow extends AbstractHelper
 
                 switch ($this->labelPosition) {
                     case self::LABEL_PREPEND:
-                        $markup = $labelOpen . '<span>' . $label . '</span>'. $elementString . $labelClose;
+                        $markup = $labelOpen . '<span>' . $label . '</span>' . $elementString . $labelClose;
                         break;
                     case self::LABEL_APPEND:
                     default:

@@ -1210,8 +1210,8 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $acl = new Acl\Acl();
         $acl->addRole('role');
         $acl->addResource('resource');
-        $acl->allow('role',null,null,$assertion);
-        $allowed = $acl->isAllowed('role','resource','privilege',$assertion);
+        $acl->allow('role', null, null, $assertion);
+        $allowed = $acl->isAllowed('role','resource','privilege', $assertion);
 
         $this->assertTrue($allowed);
     }
@@ -1221,7 +1221,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetRoles()
     {
-        $this->assertEquals(array(),$this->_acl->getRoles());
+        $this->assertEquals(array(), $this->_acl->getRoles());
 
         $roleGuest = new Role\GenericRole('guest');
         $this->_acl->addRole($roleGuest);
@@ -1238,7 +1238,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetResources()
     {
-        $this->assertEquals(array(),$this->_acl->getResources());
+        $this->assertEquals(array(), $this->_acl->getResources());
 
         $this->_acl->addResource(new Resource\GenericResource('someResource'));
         $this->_acl->addResource(new Resource\GenericResource('someOtherResource'));

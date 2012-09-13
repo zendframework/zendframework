@@ -117,7 +117,7 @@ class Posix extends AbstractAdapter
         /**
          * Try to read console size from "tput" command
          */
-        $result = exec('tput cols',$output, $return);
+        $result = exec('tput cols', $output, $return);
         if (!$return && is_numeric($result)) {
             return $width = (int)$result;
         }

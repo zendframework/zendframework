@@ -518,10 +518,10 @@ class Image extends AbstractWord
 
         // generate noise
         for ($i=0; $i < $this->dotNoiseLevel; $i++) {
-           imagefilledellipse($img, mt_rand(0,$w), mt_rand(0,$h), 2, 2, $text_color);
+           imagefilledellipse($img, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $text_color);
         }
         for ($i=0; $i < $this->lineNoiseLevel; $i++) {
-           imageline($img, mt_rand(0,$w), mt_rand(0,$h), mt_rand(0,$w), mt_rand(0,$h), $text_color);
+           imageline($img, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $text_color);
         }
 
         // transformed image
@@ -582,11 +582,11 @@ class Image extends AbstractWord
 
         // generate noise
         for ($i=0; $i<$this->dotNoiseLevel; $i++) {
-            imagefilledellipse($img2, mt_rand(0,$w), mt_rand(0,$h), 2, 2, $text_color);
+            imagefilledellipse($img2, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $text_color);
         }
 
         for ($i=0; $i<$this->lineNoiseLevel; $i++) {
-           imageline($img2, mt_rand(0,$w), mt_rand(0,$h), mt_rand(0,$w), mt_rand(0,$h), $text_color);
+           imageline($img2, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $text_color);
         }
 
         imagepng($img2, $img_file);

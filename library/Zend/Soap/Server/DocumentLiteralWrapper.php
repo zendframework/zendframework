@@ -144,7 +144,7 @@ class DocumentLiteralWrapper
 
     protected function _getResultMessage($method, $ret)
     {
-        return array($method.'Result' => $ret);
+        return array($method . 'Result' => $ret);
     }
 
     protected function _assertServiceDelegateHasMethod($method)

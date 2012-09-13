@@ -131,7 +131,7 @@ class CacheControl implements HeaderInterface
                 $parts[] = $key;
             } else {
                 if (preg_match('#[^a-zA-Z0-9._-]#', $value)) {
-                    $value = '"'.$value.'"';
+                    $value = '"' . $value.'"';
                 }
                 $parts[] = "$key=$value";
             }
@@ -228,7 +228,7 @@ class CacheControl implements HeaderInterface
     protected static function match($tokens, &$string, &$lastMatch)
     {
         foreach ($tokens as $i => $token) {
-            if (preg_match('/^'.$token.'/', $string, $matches)) {
+            if (preg_match('/^' . $token . '/', $string, $matches)) {
                 $lastMatch = $matches[0];
                 $string = substr($string, strlen($matches[0]));
                 return $i;

@@ -95,13 +95,13 @@ class Number extends Line
                 $this->getConsole()->writeLine("$number is not a number\n");
                 $valid = false;
             } elseif (!$this->allowFloat && (round($number) != $number) ) {
-                $this->getConsole()->writeLine("Please enter a non-floating number, i.e. ".round($number)."\n");
+                $this->getConsole()->writeLine("Please enter a non-floating number, i.e. " . round($number) . "\n");
                 $valid = false;
             } elseif ($this->max !== null && $number > $this->max) {
-                $this->getConsole()->writeLine("Please enter a number not greater than ".$this->max."\n");
+                $this->getConsole()->writeLine("Please enter a number not greater than " . $this->max . "\n");
                 $valid = false;
             } elseif ($this->min !== null && $number < $this->min) {
-                $this->getConsole()->writeLine("Please enter a number not smaller than ".$this->min."\n");
+                $this->getConsole()->writeLine("Please enter a number not smaller than " . $this->min . "\n");
                 $valid = false;
             }
         } while (!$valid);

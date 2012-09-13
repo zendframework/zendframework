@@ -520,7 +520,7 @@ class ApplicationTest extends TestCase
 
         $this->application->run();
         $this->assertTrue(isset($token->foo));
-        $this->assertEquals('bar',$token->foo);
+        $this->assertEquals('bar', $token->foo);
     }
 
     /**
@@ -543,7 +543,7 @@ class ApplicationTest extends TestCase
 
         $this->application->run();
         $this->assertTrue(isset($token->foo));
-        $this->assertEquals('bar',$token->foo);
+        $this->assertEquals('bar', $token->foo);
     }
 
     public function testApplicationShouldBeEventTargetAtFinishEvent()

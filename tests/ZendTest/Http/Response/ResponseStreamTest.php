@@ -53,7 +53,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
     public function test300isRedirect()
     {
         $values   = $this->readResponse('response_302');
-        $response = Stream::fromStream($values['data'],$values['stream']);
+        $response = Stream::fromStream($values['data'], $values['stream']);
 
         $this->assertEquals(302, $response->getStatusCode(), 'Response code is expected to be 302, but it\'s not.');
         $this->assertFalse($response->isClientError(), 'Response is an error, but isClientError() returned true');
@@ -70,7 +70,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
     public function testMultilineHeader()
     {
         $values   = $this->readResponse('response_multiline_header');
-        $response = Stream::fromStream($values['data'],$values['stream']);
+        $response = Stream::fromStream($values['data'], $values['stream']);
 
         // Make sure we got the corrent no. of headers
         $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');

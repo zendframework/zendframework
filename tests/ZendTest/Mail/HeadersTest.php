@@ -38,7 +38,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Fake', $header->getFieldName());
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
-    
+
     public function testHeadersFromStringFactoryHandlesMissingWhitespace()
     {
         $headers = Mail\Headers::fromString("Fake:foo-bar");

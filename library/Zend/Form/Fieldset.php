@@ -73,14 +73,13 @@ class Fieldset extends Element implements FieldsetInterface
     protected $useAsBaseFieldset = false;
 
     /**
-     * Constructor
-     *
-     * @param null|string|int $name Optional name for the element
+     * @param  null|int|string  $name    Optional name for the element
+     * @param  array            $options Optional options for the element
      */
-    public function __construct($name = null)
+    public function __construct($name = null, $options = array())
     {
         $this->iterator = new PriorityQueue();
-        parent::__construct($name);
+        parent::__construct($name, $options);
     }
 
     /**

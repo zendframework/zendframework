@@ -104,6 +104,16 @@ class FieldsetTest extends TestCase
         $this->assertEquals(1, count($this->fieldset));
     }
 
+    public function testCanSetCustomOptionFromConstructor()
+    {
+        $fieldset = new Fieldset('foo', array(
+            'custom' => 'option'
+        ));
+        $options = $fieldset->getOptions();
+        $this->assertArrayHasKey('custom', $options);
+        $this->assertEquals('option', $options['custom']);
+    }
+
     public function testCanGrabElementByNameWhenNotProvidedWithAlias()
     {
         $element = new Element('foo');

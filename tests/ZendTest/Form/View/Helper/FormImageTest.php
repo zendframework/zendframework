@@ -92,7 +92,7 @@ class FormImageTest extends CommonTestCase
             array('size', 'assertNotContains'),
             array('src', 'assertContains'),
             array('step', 'assertNotContains'),
-            array('value', 'assertContains'),
+            array('value', 'assertNotContains'),
             array('width', 'assertContains'),
         );
     }

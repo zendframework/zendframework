@@ -95,7 +95,6 @@ class Encoder
     }
 
 
-
     /**
      * Encode an object to JSON by encoding each of the public properties
      *

@@ -57,9 +57,8 @@ class Dn implements \ArrayAccess
             return self::fromArray($dn, $caseFold);
         } elseif (is_string($dn)) {
             return self::fromString($dn, $caseFold);
-        } else {
-            throw new Exception\LdapException(null, 'Invalid argument type for $dn');
         }
+        throw new Exception\LdapException(null, 'Invalid argument type for $dn');
     }
 
     /**
@@ -168,9 +167,8 @@ class Dn implements \ArrayAccess
         }
         if ($length === 1) {
             return self::caseFoldRdn($this->dn[$index], $caseFold);
-        } else {
-            return self::caseFoldDn(array_slice($this->dn, $index, $length, false), $caseFold);
         }
+        return self::caseFoldDn(array_slice($this->dn, $index, $length, false), $caseFold);
     }
 
     /**
@@ -325,9 +323,8 @@ class Dn implements \ArrayAccess
 
         if ($caseFold === self::ATTR_CASEFOLD_NONE) {
             return $this->dn;
-        } else {
-            return self::caseFoldDn($this->dn, $caseFold);
         }
+        return self::caseFoldDn($this->dn, $caseFold);
     }
 
     /**
@@ -387,9 +384,8 @@ class Dn implements \ArrayAccess
         $offset = (int)$offset;
         if ($offset < 0 || $offset >= count($this->dn)) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**

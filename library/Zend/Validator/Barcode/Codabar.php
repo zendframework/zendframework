@@ -32,7 +32,6 @@ class Codabar extends AbstractAdapter
      */
     public function hasValidCharacters($value)
     {
-        $first = $value[0];
         if (strpbrk($value, 'ABCD')) {
             $first = $value[0];
             if (!strpbrk($first, 'ABCD')) {

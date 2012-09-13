@@ -12,6 +12,8 @@ namespace ZendTest\Log\Formatter;
 
 use DateTime;
 use Zend\Log\Formatter\ErrorHandler;
+use ZendTest\Log\TestAsset\StringObject;
+use ZendTest\Log\TestAsset\NotStringObject;
 
 /**
  * @category   Zend
@@ -33,7 +35,8 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
             'extra' => array (
                 'errno' => 1,
                 'file'  => 'test.php',
-                'line'  => 1
+                'line'  => 1,
+                'context' => array('object' => new DateTime(), 'string' => 'test')
             )
         );
         $formatter = new ErrorHandler();
@@ -50,4 +53,35 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($formatter, $formatter->setDateTimeFormat('r'));
         $this->assertEquals('r', $formatter->getDateTimeFormat());
     }
+
+    public function testComplexEvent ()
+    {
+        $date = new DateTime();
+        $stringObject = new StringObject();
+        $event = array(
+                'timestamp' => $date,
+                'message' => 'test',
+                'priority' => 1,
+                'priorityName' => 'CRIT',
+                'extra' => array(
+                        'errno' => 1,
+                        'file' => 'test.php',
+                        'line' => 1,
+                        'context' => array(
+                                'object1' => new StringObject(),
+                                'object2' => new NotStringObject(),
+                                'string' => 'test1',
+                                'array' => array(
+                                        'key' => 'test2'
+                                )
+                        )
+                )
+        );
+        $formatString = '%extra[context][object1]% %extra[context][object2]% %extra[context][string]% %extra[context][array]% %extra[context][array][key]%';
+        $formatter = new ErrorHandler($formatString);
+        $output = $formatter->format($event);
+        $this->assertEquals($stringObject->__toString() .' %extra[context][object2]% test1 %extra[context][array]% test2', $output);
+    }
+
+
 }

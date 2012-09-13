@@ -55,7 +55,7 @@ class PluginManagerTest extends TestCase
         $plugin = $pluginManager->get('samplePlugin');
         $this->assertEquals($controller2, $plugin->getController());
     }
-    
+
     public function testGetWithConstrutor()
     {
         $pluginManager = new PluginManager;
@@ -63,7 +63,7 @@ class PluginManagerTest extends TestCase
         $plugin = $pluginManager->get('samplePlugin');
         $this->assertEquals($plugin->getBar(), 'baz');
     }
-    
+
     public function testGetWithConstrutorAndOptions()
     {
         $pluginManager = new PluginManager;

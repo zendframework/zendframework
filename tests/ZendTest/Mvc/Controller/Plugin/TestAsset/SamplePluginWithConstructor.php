@@ -15,12 +15,12 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 class SamplePluginWithConstructor extends AbstractPlugin
 {
     protected $bar;
-    
+
     public function __construct($bar = 'baz')
     {
         $this->bar = $bar;
     }
-    
+
     public function getBar()
     {
         return $this->bar;

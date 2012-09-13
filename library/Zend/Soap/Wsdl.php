@@ -521,9 +521,8 @@ class Wsdl
         if (!$filename) {
             echo $this->toXML();
             return true;
-        } else {
-            return file_put_contents($filename, $this->toXML());
         }
+        return file_put_contents($filename, $this->toXML());
     }
 
     /**

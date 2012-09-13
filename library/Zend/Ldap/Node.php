@@ -395,9 +395,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             return false;
         } elseif ($this->newDn !== null) {
             return ($this->dn != $this->newDn);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -995,12 +995,10 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         if (!is_array($this->children)) {
             if ($this->isAttached()) {
                 return ($this->countChildren() > 0);
-            } else {
-                return false;
             }
-        } else {
-            return (count($this->children) > 0);
+            return false;
         }
+        return (count($this->children) > 0);
     }
 
     /**

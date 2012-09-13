@@ -92,7 +92,7 @@ class FormRow extends AbstractHelper
             // Translate the label
             if (null !== ($translator = $this->getTranslator())) {
                 $label = $translator->translate(
-                        $label, $this->getTranslatorTextDomain()
+                    $label, $this->getTranslatorTextDomain()
                 );
             }
 

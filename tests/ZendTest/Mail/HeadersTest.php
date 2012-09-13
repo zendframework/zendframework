@@ -39,6 +39,17 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
+    public function testHeadersFromStringFactoryHandlesMissingWhitespace()
+    {
+        $headers = Mail\Headers::fromString("Fake:foo-bar");
+        $this->assertEquals(1, $headers->count());
+
+        $header = $headers->get('fake');
+        $this->assertInstanceOf('Zend\Mail\Header\GenericHeader', $header);
+        $this->assertEquals('Fake', $header->getFieldName());
+        $this->assertEquals('foo-bar', $header->getFieldValue());
+    }
+
     public function testHeadersFromStringFactoryCreatesSingleObjectWithContinuationLine()
     {
         $headers = Mail\Headers::fromString("Fake: foo-bar,\r\n      blah-blah");

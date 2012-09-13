@@ -35,11 +35,11 @@ class ErrorHandler extends Simple
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
             $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
-        
+
         foreach ($this->buildReplacementsFromArray($event) as $name => $value) {
             $output = str_replace("%$name%", $value, $output);
         }
-        
+
         return $output;
     }
 
@@ -47,8 +47,8 @@ class ErrorHandler extends Simple
      * Flatten the multi-dimensional $event array into a single dimensional
      * array
      *
-     * @param array $event            
-     * @param string $key            
+     * @param array $event
+     * @param string $key
      * @return array
      */
     protected function buildReplacementsFromArray ($event, $key = null)

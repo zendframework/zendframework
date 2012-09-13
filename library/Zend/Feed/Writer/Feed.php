@@ -37,7 +37,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
     protected $entriesKey = 0;
 
     /**
-     * Creates a new Zend_Feed_Writer_Entry data container for use. This is NOT
+     * Creates a new Zend\Feed\Writer\Entry data container for use. This is NOT
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
@@ -66,7 +66,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
     }
 
     /**
-     * Creates a new Zend_Feed_Writer_Deleted data container for use. This is NOT
+     * Creates a new Zend\Feed\Writer\Deleted data container for use. This is NOT
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
@@ -102,10 +102,10 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function removeEntry($index)
     {
-        if (isset($this->entries[$index])) {
-            unset($this->entries[$index]);
+        if (!isset($this->entries[$index])) {
+            throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
         }
-        throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
+        unset($this->entries[$index]);
     }
 
     /**

@@ -170,4 +170,81 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @covers Zend\Feed\Writer\Deleted::getBy
+     */
+    public function testGetBy()
+    {
+        $entry = new Writer\Deleted;
+
+        $by = $entry->getBy();
+        $this->assertNull($by);
+
+        $entry->setBy(array('name'=>'Joe','email'=>'joe@example.com'));
+        $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $entry->getBy());
+    }
+
+
+    public function testSetByException()
+    {
+        $entry = new Writer\Deleted;
+
+        $this->setExpectedException('Zend\Feed\Writer\Exception\InvalidArgumentException',
+            'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
+        $entry->setBy(array('name' => 'joe','email'=>'joe@example.com', 'uri'=> ''));
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Deleted::getComment
+     * @covers Zend\Feed\Writer\Deleted::setComment
+     * @covers Zend\Feed\Writer\Deleted::remove
+     */
+    public function testCommentAndRemove()
+    {
+        $entry = new Writer\Deleted;
+
+        $comment = $entry->getComment();
+        $this->assertNull($comment);
+
+        $entry->setComment('foo');
+        $this->assertEquals('foo', $entry->getComment());
+
+        $entry->remove('comment');
+        $this->assertNull($entry->getComment());
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Deleted::getEncoding
+     * @covers Zend\Feed\Writer\Deleted::setEncoding
+     */
+    public function testEncoding()
+    {
+        $entry = new Writer\Deleted;
+
+        $encoding = $entry->getEncoding();
+        $this->assertEquals('UTF-8', $encoding);
+
+        $entry->setEncoding('ISO-8859-1');
+        $this->assertEquals('ISO-8859-1', $entry->getEncoding());
+
+        $this->setExpectedException('Zend\Feed\Writer\Exception\InvalidArgumentException',
+            'Invalid parameter: parameter must be a non-empty string');
+        $entry->setEncoding(null);
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Deleted::getType
+     * @covers Zend\Feed\Writer\Deleted::setType
+     */
+    public function testType()
+    {
+        $entry = new Writer\Deleted;
+
+        $type = $entry->getType();
+        $this->assertNull($type);
+
+        $entry->setType('atom');
+        $this->assertEquals('atom', $entry->getType());
+    }
+
 }

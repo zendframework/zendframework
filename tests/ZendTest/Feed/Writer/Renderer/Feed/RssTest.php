@@ -10,6 +10,7 @@
 
 namespace ZendTest\Feed\Writer\Renderer\Feed;
 
+use DateTime;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Reader;
@@ -565,6 +566,16 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->_validWriter);
         $rssFeed->render();
+    }
+
+    public function testFeedSetDateCreated()
+    {
+        $this->_validWriter->setDateCreated(1234567890);
+        $rssFeed = new Renderer\Feed\Rss($this->_validWriter);
+        $rssFeed->render();
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $feed->getDateCreated());
     }
 
 

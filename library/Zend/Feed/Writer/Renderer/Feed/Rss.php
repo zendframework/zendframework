@@ -41,9 +41,6 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     public function render()
     {
-        if (!$this->container->getEncoding()) {
-            $this->container->setEncoding('UTF-8');
-        }
         $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
         $this->dom->formatOutput = true;
         $this->dom->substituteEntities = false;

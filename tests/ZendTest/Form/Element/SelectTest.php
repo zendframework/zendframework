@@ -49,6 +49,41 @@ class SelectTest extends TestCase
         }
     }
 
+    public function testValidateWorksForNestedSelectElementWithSimpleNaming()
+    {
+        $element = new SelectElement();
+        $element->setValueOptions(array(
+          array('label' => 'group 1', 'options' => array(
+            'Option 1' => 'Label 1',
+            'Option 2' => 'Label 2',
+            'Option 3' => 'Label 2',
+          ))));
+
+        $inputSpec = $element->getInputSpecification();
+        $inArrayValidator = $inputSpec['validators'][0];
+
+        $this->assertTrue($inArrayValidator->isValid('Option 1'));
+        $this->assertFalse($inArrayValidator->isValid('Option 5'));
+    }
+
+    public function testValidateWorksForNestedSelectElementWithExplicitNaming()
+    {
+        $element = new SelectElement();
+        $element->setValueOptions(array(
+          array('label' => 'group 1', 'options' => array(
+            array('value' => 'Option 1', 'label'=> 'Label 1'),
+            array('value' => 'Option 2', 'label'=> 'Label 2'),
+            array('value' => 'Option 3', 'label'=> 'Label 3'),
+          ))));
+
+        $inputSpec = $element->getInputSpecification();
+        $inArrayValidator = $inputSpec['validators'][0];
+
+        $this->assertTrue($inArrayValidator->isValid('Option 1'));
+        $this->assertTrue($inArrayValidator->isValid('Option 2'));
+        $this->assertTrue($inArrayValidator->isValid('Option 3'));
+        $this->assertFalse($inArrayValidator->isValid('Option 5'));
+    }
     public function testProvidesInputSpecificationForMultipleSelect()
     {
         $element = new SelectElement();

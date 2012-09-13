@@ -95,6 +95,36 @@ repository.
     % git push origin HEAD:master
     ```
 
+### Pre-Commit Hook (Optional)
+
+The ZF2 Travis-CI will confirm that code style standards are met 
+by using ```php-cs-fixer``` (https://github.com/fabpot/PHP-CS-Fixer) during it's build runs.
+
+To reduce the number of red Travis-CI builds, the following Git pre-commit hook can help catch code style 
+issues before committing.
+
+```sh
+#!/bin/sh
+# Git pre-commit hook to confirm ZF2 code style
+# Install under: zf2/.git/hooks/pre-commit (and ensure it is executable)
+
+PROJECTROOT=`echo $(cd ${0%/*}/../../ && pwd -P)`/
+FIXER=php-cs-fixer
+
+RES=`${FIXER} fix $PROJECTROOT -v --dry-run --level=psr2`
+if [ "$RES" != "" ]; then
+    echo "ZF2 Coding standards are not correct, cancelling your commit."
+    echo ""
+    echo $RES
+    echo ""
+    echo "To fix, run:"
+    echo ""
+    echo "    ${FIXER} fix ${PROJECTROOT} -v --level=psr2"
+    echo ""
+    exit 1
+fi  
+```
+
 ## Keeping Up-to-Date
 
 Periodically, you should update your fork or personal repository to

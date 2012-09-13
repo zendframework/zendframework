@@ -6,8 +6,6 @@ and add the library directory to your PHP `include_path`. To use
 components in the extras library, add the `extras/library` directory to
 your PHP `include_path` as well.
 
-If you would like to use Zend_Tool, simply add `bin/zf.bat` (for Windows)
-or `bin/zf.sh` (for anything else) to your system executable path.
 
 ## SYSTEM REQUIREMENTS
 -------------------

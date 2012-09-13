@@ -21,7 +21,7 @@ interface ApplicationInterface extends EventsCapableInterface
     /**
      * Get the locator object
      *
-     * @return \Zend\ServiceManager\ServiceManager
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
      */
     public function getServiceManager();
 

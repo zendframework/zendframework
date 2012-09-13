@@ -32,7 +32,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $period = $this->_getData($name);
 
         if ($period === null) {
-            $this->_data[$name] = 'daily';
+            $this->data[$name] = 'daily';
             return 'daily'; //Default specified by spec
         }
 
@@ -59,7 +59,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $freq = $this->_getData($name, 'number');
 
         if (!$freq || $freq < 1) {
-            $this->_data[$name] = 1;
+            $this->data[$name] = 1;
             return 1;
         }
 
@@ -76,7 +76,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $freq = $this->_getData($name, 'number');
 
         if (!$freq || $freq < 1) {
-            $this->_data[$name] = 1;
+            $this->data[$name] = 1;
             $freq = 1;
         }
 
@@ -125,17 +125,17 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
      */
     private function _getData($name, $type = 'string')
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
-        $data = $this->_xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/syn10:' . $name . ')');
+        $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/syn10:' . $name . ')');
 
         if (!$data) {
             $data = null;
         }
 
-        $this->_data[$name] = $data;
+        $this->data[$name] = $data;
 
         return $data;
     }
@@ -145,8 +145,8 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('syn10', 'http://purl.org/rss/1.0/modules/syndication/');
+        $this->xpath->registerNamespace('syn10', 'http://purl.org/rss/1.0/modules/syndication/');
     }
 }

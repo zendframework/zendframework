@@ -50,10 +50,10 @@ class Tag extends AbstractGenerator
      */
     public function __construct(array $options = array())
     {
-        if (key_exists('name', $options)) {
+        if (array_key_exists('name', $options)) {
             $this->setName($options['name']);
         }
-        if (key_exists('description', $options)) {
+        if (array_key_exists('description', $options)) {
             $this->setDescription($options['description']);
         }
     }

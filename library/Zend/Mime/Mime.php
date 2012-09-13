@@ -198,7 +198,7 @@ class Mime
             if ($token == '=20') {
                 // only if we have a single char token or space, we can append the
                 // tempstring it to the current line or start a new line if necessary.
-                if (strlen($lines[$currentLine].$tmp) > $lineLength) {
+                if (strlen($lines[$currentLine] . $tmp) > $lineLength) {
                     $lines[$currentLine+1] = $tmp;
                 } else {
                     $lines[$currentLine] .= $tmp;
@@ -213,7 +213,7 @@ class Mime
 
         // assemble the lines together by pre- and appending delimiters, charset, encoding.
         for ($i = 0; $i < count($lines); $i++) {
-            $lines[$i] = " ".$prefix.$lines[$i]."?=";
+            $lines[$i] = " " . $prefix . $lines[$i] . "?=";
         }
         $str = trim(implode($lineEnd, $lines));
         return $str;

@@ -113,7 +113,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->getStrict());
 
         $validator->setStrict(InArray::COMPARE_NOT_STRICT);
-        $this->assertEquals(InArray::COMPARE_NOT_STRICT,$validator->getStrict());
+        $this->assertEquals(InArray::COMPARE_NOT_STRICT, $validator->getStrict());
     }
 
     public function testNonStrictSafeComparisons()

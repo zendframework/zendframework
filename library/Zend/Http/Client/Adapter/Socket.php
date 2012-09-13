@@ -254,7 +254,7 @@ class Socket implements HttpAdapter, StreamInterface
                         'Unable to connect to %s:%d%s',
                         $host,
                         $port,
-                        ($error ? '. Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
+                        ($error ? ' . Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
                     ),
                     0,
                     $error

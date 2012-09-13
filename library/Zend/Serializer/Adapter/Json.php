@@ -71,7 +71,7 @@ class Json extends AbstractAdapter
             'objectDecodeType'     => $options->getObjectDecodeType(),
         );
 
-        try  {
+        try {
             return ZendJson::encode($value, $cycleCheck, $opts);
         } catch (\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);

@@ -465,7 +465,7 @@ class Entry extends Extension\AbstractEntry
         $link = null;
 
         $list = $this->getXpath()->query(
-            $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/'.$type.'+xml"]/@href'
+            $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/' . $type.'+xml"]/@href'
         );
 
         if ($list->length) {

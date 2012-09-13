@@ -97,7 +97,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     public function addSharedInstance($instance, $classOrAlias)
     {
         if (!is_object($instance)) {
-            throw new Exception\InvalidArgumentException('This method requires an object to be shared. Class or Alias given: '.$classOrAlias);
+            throw new Exception\InvalidArgumentException('This method requires an object to be shared. Class or Alias given: ' . $classOrAlias);
         }
 
         $this->sharedInstances[$classOrAlias] = $instance;

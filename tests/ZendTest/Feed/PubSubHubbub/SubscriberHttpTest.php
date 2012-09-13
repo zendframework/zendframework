@@ -33,35 +33,35 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
 {
 
     /** @var Subscriber */
-    protected $_subscriber = null;
+    protected $subscriber = null;
 
     /** @var string */
-    protected $_baseuri;
+    protected $baseuri;
 
     /** @var HttpClient */
-    protected $_client = null;
+    protected $client = null;
 
-    protected $_storage;
+    protected $storage;
 
     public function setUp()
     {
-        $this->_baseuri = constant('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI');
-        if ($this->_baseuri) {
-            if (substr($this->_baseuri, -1) != '/') {
-                $this->_baseuri .= '/';
+        $this->baseuri = constant('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI');
+        if ($this->baseuri) {
+            if (substr($this->baseuri, -1) != '/') {
+                $this->baseuri .= '/';
             }
             $name = $this->getName();
             if (($pos = strpos($name, ' ')) !== false) {
                 $name = substr($name, 0, $pos);
             }
-            $uri = $this->_baseuri . $name . '.php';
-            $this->_client = new HttpClient($uri);
-            $this->_client->setAdapter('\Zend\Http\Client\Adapter\Socket');
-            PubSubHubbub::setHttpClient($this->_client);
-            $this->_subscriber = new Subscriber;
+            $uri = $this->baseuri . $name . '.php';
+            $this->client = new HttpClient($uri);
+            $this->client->setAdapter('\Zend\Http\Client\Adapter\Socket');
+            PubSubHubbub::setHttpClient($this->client);
+            $this->subscriber = new Subscriber;
 
-            $this->_storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
-            $this->_subscriber->setStorage($this->_storage);
+            $this->storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
+            $this->subscriber->setStorage($this->storage);
 
         } else {
             // Skip tests
@@ -71,32 +71,32 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
 
     public function testSubscriptionRequestSendsExpectedPostData()
     {
-        $this->_subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->_subscriber->addHubUrl($this->_baseuri . '/testRawPostData.php');
-        $this->_subscriber->setCallbackUrl('http://www.example.com/callback');
-        $this->_subscriber->setTestStaticToken('abc'); // override for testing
-        $this->_subscriber->subscribeAll();
+        $this->subscriber->setTopicUrl('http://www.example.com/topic');
+        $this->subscriber->addHubUrl($this->baseuri . '/testRawPostData.php');
+        $this->subscriber->setCallbackUrl('http://www.example.com/callback');
+        $this->subscriber->setTestStaticToken('abc'); // override for testing
+        $this->subscriber->subscribeAll();
         $this->assertEquals(
             'hub.callback=http%3A%2F%2Fwww.example.com%2Fcallback%3Fxhub.subscription%3D5536df06b5d'
             .'cb966edab3a4c4d56213c16a8184b&hub.lease_seconds=2592000&hub.mode='
             .'subscribe&hub.topic=http%3A%2F%2Fwww.example.com%2Ftopic&hub.veri'
             .'fy=sync&hub.verify=async&hub.verify_token=abc',
-            $this->_client->getResponse()->getBody());
+            $this->client->getResponse()->getBody());
     }
 
     public function testUnsubscriptionRequestSendsExpectedPostData()
     {
-        $this->_subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->_subscriber->addHubUrl($this->_baseuri . '/testRawPostData.php');
-        $this->_subscriber->setCallbackUrl('http://www.example.com/callback');
-        $this->_subscriber->setTestStaticToken('abc'); //override for testing
-        $this->_subscriber->unsubscribeAll();
+        $this->subscriber->setTopicUrl('http://www.example.com/topic');
+        $this->subscriber->addHubUrl($this->baseuri . '/testRawPostData.php');
+        $this->subscriber->setCallbackUrl('http://www.example.com/callback');
+        $this->subscriber->setTestStaticToken('abc'); //override for testing
+        $this->subscriber->unsubscribeAll();
         $this->assertEquals(
             'hub.callback=http%3A%2F%2Fwww.example.com%2Fcallback%3Fxhub.subscription%3D5536df06b5d'
             .'cb966edab3a4c4d56213c16a8184b&hub.mode=unsubscribe&hub.topic=http'
             .'%3A%2F%2Fwww.example.com%2Ftopic&hub.verify=sync&hub.verify=async'
             .'&hub.verify_token=abc',
-            $this->_client->getResponse()->getBody());
+            $this->client->getResponse()->getBody());
     }
 
     protected function _getCleanMock($className)

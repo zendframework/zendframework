@@ -22,12 +22,12 @@ use Zend\Feed\Reader;
 class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/laut.de-rdf.xml';
+        $this->feedSamplePath = dirname(__FILE__) . '/_files/laut.de-rdf.xml';
     }
 
     /**
@@ -37,7 +37,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsTitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('laut.de - news', $feed->getTitle());
     }
@@ -45,7 +45,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsAuthors()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array(array('name'=>'laut.de')), (array) $feed->getAuthors());
     }
@@ -53,7 +53,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsSingleAuthor()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array('name'=>'laut.de'), $feed->getAuthor());
     }
@@ -61,7 +61,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsCopyright()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('Copyright © 2004 laut.de', $feed->getCopyright());
     }
@@ -69,7 +69,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsDescription()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('laut.de: aktuelle News', $feed->getDescription());
     }
@@ -77,7 +77,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsLanguage()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getLanguage());
     }
@@ -85,7 +85,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://www.laut.de', $feed->getLink());
     }
@@ -93,7 +93,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('ISO-8859-1', $feed->getEncoding());
     }
@@ -107,7 +107,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm', $entry->getId());
@@ -116,7 +116,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryTitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('Angelika Express: MySpace-Aus wegen Sido-Werbung', $entry->getTitle());
@@ -125,7 +125,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryAuthors()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals(array(array('name'=>'laut.de')), (array) $entry->getAuthors());
@@ -134,7 +134,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntrySingleAuthor()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals(array('name'=>'laut.de'), $entry->getAuthor());
@@ -148,7 +148,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryDescription()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.', $entry->getDescription());
@@ -157,7 +157,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryContent()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.', $entry->getContent());
@@ -166,7 +166,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryLinks()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals(array('http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm'), $entry->getLinks());
@@ -175,7 +175,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm', $entry->getLink());
@@ -184,7 +184,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryPermaLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm',
@@ -194,7 +194,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function testGetsEntryEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('ISO-8859-1', $entry->getEncoding());

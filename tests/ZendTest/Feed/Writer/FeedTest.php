@@ -24,11 +24,11 @@ use Zend\Feed\Writer\Feed;
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
-        $this->_feedSamplePath = dirname(__FILE__) . '/Writer/_files';
+        $this->feedSamplePath = dirname(__FILE__) . '/Writer/_files';
     }
 
     public function testAddsAuthorNameFromArray()
@@ -893,5 +893,169 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer->addEntry($entry2);
         $writer->orderByDate();
         $this->assertEquals(1230000000, $writer->getEntry(1)->getDateCreated()->getTimestamp());
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::orderByDate
+     */
+    public function testAddsAndOrdersEntriesByModifiedDate()
+    {
+        $writer = new Writer\Feed;
+        $entry  = $writer->createEntry();
+        $entry->setDateModified(1234567890);
+        $entry2 = $writer->createEntry();
+        $entry2->setDateModified(1230000000);
+        $writer->addEntry($entry);
+        $writer->addEntry($entry2);
+        $writer->orderByDate();
+        $this->assertEquals(1230000000, $writer->getEntry(1)->getDateModified()->getTimestamp());
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::getEntry
+     */
+    public function testGetEntry()
+    {
+        $writer = new Writer\Feed;
+        $entry = $writer->createEntry();
+        $entry->setTitle('foo');
+        $writer->addEntry($entry);
+        $this->assertEquals('foo', $writer->getEntry()->getTitle());
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::removeEntry
+     */
+    public function testGetEntryException()
+    {
+        $writer = new Writer\Feed;
+        try {
+            $writer->getEntry(1);
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::removeEntry
+     */
+    public function testRemoveEntry()
+    {
+        $writer = new Writer\Feed;
+        $entry = $writer->createEntry();
+        $entry->setDateCreated(1234567890);
+        $entry2 = $writer->createEntry();
+        $entry2->setDateCreated(1230000000);
+        $entry3 = $writer->createEntry();
+        $entry3->setDateCreated(1239999999);
+
+        $writer->addEntry($entry);
+        $writer->addEntry($entry2);
+        $writer->addEntry($entry3);
+        $writer->orderByDate();
+        $this->assertEquals('1234567890', $writer->getEntry(1)->getDateCreated()->getTimestamp());
+
+        $writer->removeEntry(1);
+        $writer->orderByDate();
+        $this->assertEquals('1230000000', $writer->getEntry(1)->getDateCreated()->getTimestamp());
+    }
+
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::removeEntry
+     */
+    public function testRemoveEntryException()
+    {
+        $writer = new Writer\Feed;
+        try {
+            $writer->removeEntry(1);
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::createTombstone
+     */
+    public function testCreateTombstone()
+    {
+        $writer = new Writer\Feed;
+        $tombstone = $writer->createTombstone();
+
+        $this->assertInstanceOf('Zend\Feed\Writer\Deleted', $tombstone);
+
+        return $tombstone;
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::addTombstone
+     */
+    public function testAddTombstone()
+    {
+        $writer = new Writer\Feed;
+        $tombstone = $writer->createTombstone();
+        $writer->addTombstone($tombstone);
+
+        $this->assertInstanceOf('Zend\Feed\Writer\Deleted', $writer->getEntry(0));
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::export
+     */
+    public function testExportRss()
+    {
+        $writer = new Writer\Feed;
+        $writer->setTitle('foo');
+        $writer->setDescription('bar');
+        $writer->setLink('http://www.example.org');
+
+        $export = $writer->export('rss');
+
+        $feed = <<<'EOT'
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>foo</title>
+    <description>bar</description>
+    <generator>Zend_Feed_Writer 2.0.1 (http://framework.zend.com)</generator>
+    <link>http://www.example.org</link>
+  </channel>
+</rss>
+
+EOT;
+        $this->assertEquals($feed, $export);
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::export
+     */
+    public function testExportRssIgnoreExceptions()
+    {
+        $writer = new Writer\Feed;
+        $export = $writer->export('rss', true);
+
+        $feed = <<<'EOT'
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <generator>Zend_Feed_Writer 2.0.1 (http://framework.zend.com)</generator>
+  </channel>
+</rss>
+
+EOT;
+        $this->assertEquals($feed, $export);
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Feed::export
+     */
+    public function testExportWrongTypeException()
+    {
+        $writer = new Writer\Feed;
+        try {
+            $writer->export('foo');
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
     }
 }

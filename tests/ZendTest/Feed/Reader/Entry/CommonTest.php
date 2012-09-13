@@ -23,12 +23,12 @@ use Zend\Feed\Reader;
 class CommonTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Common';
+        $this->feedSamplePath = dirname(__FILE__) . '/_files/Common';
     }
 
     /**
@@ -37,7 +37,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testGetsDomDocumentObject()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertTrue($entry->getDomDocument() instanceof \DOMDocument);
@@ -46,7 +46,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testGetsDomXpathObject()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertTrue($entry->getXpath() instanceof \DOMXPath);
@@ -55,7 +55,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testGetsXpathPrefixString()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('//atom:entry[1]', $entry->getXpathPrefix());
@@ -64,7 +64,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testGetsDomElementObject()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertTrue($entry->getElement() instanceof \DOMElement);
@@ -73,16 +73,16 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testSaveXmlOutputsXmlStringForEntry()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals($entry->saveXml(), file_get_contents($this->_feedSamplePath.'/atom_rewrittenbydom.xml'));
+        $this->assertEquals($entry->saveXml(), file_get_contents($this->feedSamplePath.'/atom_rewrittenbydom.xml'));
     }
 
     public function testGetsNamedExtension()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertTrue($entry->getExtension('Atom') instanceof Extension\Atom\Entry);
@@ -91,7 +91,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testReturnsNullIfExtensionDoesNotExist()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertEquals(null, $entry->getExtension('Foo'));
@@ -103,7 +103,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testReturnsEncodingOfFeed()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
@@ -115,7 +115,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testReturnsEncodingOfFeedAsUtf8IfUndefined()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom_noencodingdefined.xml')
+            file_get_contents($this->feedSamplePath.'/atom_noencodingdefined.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
@@ -127,7 +127,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testFeedEntryCanDetectFeedType()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $stub = $this->getMockForAbstractClass(
@@ -143,7 +143,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function testFeedEntryCanSetAnyType()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/atom.xml')
+            file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
         $domElement = new \DOMElement($entry->getElement()->tagName);

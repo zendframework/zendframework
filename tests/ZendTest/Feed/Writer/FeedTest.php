@@ -24,11 +24,11 @@ use Zend\Feed\Writer\Feed;
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
-        $this->_feedSamplePath = dirname(__FILE__) . '/Writer/_files';
+        $this->feedSamplePath = dirname(__FILE__) . '/Writer/_files';
     }
 
     public function testAddsAuthorNameFromArray()

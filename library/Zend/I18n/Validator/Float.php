@@ -123,7 +123,7 @@ class Float extends AbstractValidator
         $valueFiltered = str_replace($groupingSep, '', $value);
         $valueFiltered = str_replace($decimalSep, '.', $valueFiltered);
 
-        if (strval($parsedFloat) !== $valueFiltered) {
+        if (strval($parsedFloat) != $valueFiltered) {
             $this->error(self::NOT_FLOAT);
             return false;
         }

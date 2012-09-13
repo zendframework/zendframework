@@ -61,7 +61,7 @@ class ServerProxy
      */
     public function __get($namespace)
     {
-        $namespace = ltrim("$this->namespace.$namespace", '.');
+        $namespace = ltrim("$this->namespace . $namespace", '.');
         if (!isset($this->cache[$namespace])) {
             $this->cache[$namespace] = new $this($this->client, $namespace);
         }

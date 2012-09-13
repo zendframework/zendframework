@@ -25,9 +25,9 @@ class Entry extends Extension\AbstractEntry
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $content = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+            $content = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/content:encoded)');
         } else {
-            $content = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+            $content = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/content:encoded)');
         }
         return $content;
     }

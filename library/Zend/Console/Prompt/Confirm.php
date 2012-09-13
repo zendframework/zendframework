@@ -85,7 +85,7 @@ class Confirm extends Char
     public function setNoChar($noChar)
     {
         $this->noChar = $noChar;
-        $this->setAllowedChars($this->yesChar.$this->noChar);
+        $this->setAllowedChars($this->yesChar . $this->noChar);
     }
 
     /**
@@ -102,7 +102,7 @@ class Confirm extends Char
     public function setYesChar($yesChar)
     {
         $this->yesChar = $yesChar;
-        $this->setAllowedChars($this->yesChar.$this->noChar);
+        $this->setAllowedChars($this->yesChar . $this->noChar);
     }
 
     /**

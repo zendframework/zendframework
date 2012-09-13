@@ -103,7 +103,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     $response = new ConsoleResponse();
                     $e->setResponse($response);
                 }
-                $response->setMetadata('error',$error);
+                $response->setMetadata('error', $error);
                 break;
             default:
                 return;
@@ -200,13 +200,13 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
          * Handle an application with no defined banners
          */
         if (!count($banners)) {
-            return "Zend Framework ".Version::VERSION." application.\nUsage:\n";
+            return "Zend Framework " . Version::VERSION . " application.\nUsage:\n";
         }
 
         /**
          * Join the banners by a newline character
          */
-        return join("\n",$banners);
+        return join("\n", $banners);
     }
 
     /**
@@ -263,7 +263,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         foreach ($usageInfo as $moduleName => $usage) {
             if (is_string($usage)) {
                 // It's a plain string - output as is
-                $result .= $usage."\n";
+                $result .= $usage . "\n";
             } elseif (is_array($usage)) {
                 // It's an array, analyze it
                 foreach ($usage as $a => $b) {
@@ -273,7 +273,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                          */
                         if (($tableCols !== 2 || $tableType != 1) && $table !== false) {
                             // render last table
-                            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+                            $result .= $this->renderTable($table, $tableCols, $console->getWidth());
                             $table = false;
 
                              // add extra newline for clarity
@@ -313,17 +313,17 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         }
 
                         $tableType = 0;
-                        $result .= $b."\n";
+                        $result .= $b . "\n";
                     }
                 }
             } else {
-                throw new RuntimeException('Cannot understand usage info for module '.$moduleName);
+                throw new RuntimeException('Cannot understand usage info for module ' . $moduleName);
             }
         }
 
         // Finish last table
         if ($table !== false) {
-            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+            $result .= $this->renderTable($table, $tableCols, $console->getWidth());
         }
 
         return $result;
@@ -345,7 +345,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
-                $result .= $row[0]."\n";
+                $result .= $row[0] . "\n";
             }
             return $result;
         }
@@ -369,7 +369,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         }
         if ($width >= $consoleWidth - 10) {
             foreach ($data as $row) {
-                $result .= join("    ",$row)."\n";
+                $result .= join("    ", $row) . "\n";
             }
             return $result;
         }

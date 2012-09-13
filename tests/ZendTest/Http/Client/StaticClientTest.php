@@ -66,7 +66,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     {
         $response= HTTPClient::get($this->baseuri . 'testGetData.php?foo');
         $this->assertTrue($response->isSuccess());
-        $this->assertContains('foo',$response->getBody());
+        $this->assertContains('foo', $response->getBody());
     }
 
     /**
@@ -76,8 +76,8 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     {
         $response= HTTPClient::get($this->baseuri . 'testGetData.php',array('foo' => 'bar'));
         $this->assertTrue($response->isSuccess());
-        $this->assertContains('foo',$response->getBody());
-        $this->assertContains('bar',$response->getBody());
+        $this->assertContains('foo', $response->getBody());
+        $this->assertContains('bar', $response->getBody());
     }
 
     /**
@@ -87,8 +87,8 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     {
         $response= HTTPClient::post($this->baseuri . 'testPostData.php',array('foo' => 'bar'));
         $this->assertTrue($response->isSuccess());
-        $this->assertContains('foo',$response->getBody());
-        $this->assertContains('bar',$response->getBody());
+        $this->assertContains('foo', $response->getBody());
+        $this->assertContains('bar', $response->getBody());
     }
 
     /**
@@ -100,8 +100,8 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
                                     array('foo' => 'bar'),
                                     array('Content-Type' => Client::ENC_URLENCODED));
         $this->assertTrue($response->isSuccess());
-        $this->assertContains('foo',$response->getBody());
-        $this->assertContains('bar',$response->getBody());
+        $this->assertContains('foo', $response->getBody());
+        $this->assertContains('bar', $response->getBody());
     }
 
     /**

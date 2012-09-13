@@ -190,7 +190,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                    . chr(22).'3\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
-        $this->assertEquals($acceptStr, $acceptHeader->getFieldName().': '.$acceptHeader->getFieldValue());
+        $this->assertEquals($acceptStr, $acceptHeader->getFieldName().': ' . $acceptHeader->getFieldValue());
     }
 
 

@@ -86,7 +86,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_resource($fp2));
         $encoded = stream_get_contents($fp2);
         fclose($fp);
-        $this->assertEquals(base64_decode($encoded),$original);
+        $this->assertEquals(base64_decode($encoded), $original);
 
         // test QuotedPrintable
         $fp = fopen($testfile,'rb');
@@ -97,7 +97,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_resource($fp2));
         $encoded = stream_get_contents($fp2);
         fclose($fp);
-        $this->assertEquals(quoted_printable_decode($encoded),$original);
+        $this->assertEquals(quoted_printable_decode($encoded), $original);
     }
 
     /**

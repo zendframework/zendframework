@@ -302,7 +302,7 @@ class Maildir extends AbstractStorage
 
             ErrorHandler::start(E_NOTICE);
             list($uniq, $info) = explode(':', $entry, 2);
-            list(,$size) = explode(',', $uniq, 2);
+            list(, $size) = explode(',', $uniq, 2);
             ErrorHandler::stop();
             if ($size && $size[0] == 'S' && $size[1] == '=') {
                 $size = substr($size, 2);

@@ -236,7 +236,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheFile()
     {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
+        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
     }
 
     /**

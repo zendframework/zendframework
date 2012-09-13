@@ -208,12 +208,23 @@ class Select extends Element implements InputProviderInterface
      */
     protected function getValueOptionsValues()
     {
-        $values = array();
+        $values  = array();
         $options = $this->getValueOptions();
         foreach ($options as $key => $optionSpec) {
-            $value = (is_array($optionSpec)) ? $optionSpec['value'] : $key;
-            $values[] = $value;
+            if (is_array($optionSpec) && array_key_exists('options', $optionSpec)) {
+                foreach ($optionSpec['options'] as $nestedKey => $nestedOptionSpec) {
+                    $values[] = $this->getOptionValue($nestedKey, $nestedOptionSpec);
+                }
+                continue;
+            }
+
+            $values[] = $this->getOptionValue($key, $optionSpec);
         }
         return $values;
+    }
+
+    protected function getOptionValue($key, $optionSpec)
+    {
+        return is_array($optionSpec) ? $optionSpec['value'] : $key;
     }
 }

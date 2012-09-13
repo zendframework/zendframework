@@ -90,7 +90,7 @@ class Syslog extends AbstractWriter
     public function __construct(array $params = array())
     {
         if (isset($params['application'])) {
-            $this->application = $params['application'];
+            $this->appName = $params['application'];
         }
 
         $runInitializeSyslog = true;

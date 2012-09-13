@@ -12,7 +12,6 @@ namespace Zend\Mvc;
 
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;

@@ -137,6 +137,12 @@ class Form extends Fieldset implements FormInterface
             $elementOrFieldset = $factory->create($elementOrFieldset);
         }
 
+        // check if the element is a file and add enctype attribute if so
+        $type = $elementOrFieldset->getAttribute('type');
+        if (isset($type) && $type === 'file') {
+            $this->attributes['enctype'] = 'multipart/form-data';
+        }
+
         parent::add($elementOrFieldset, $flags);
 
         if ($elementOrFieldset instanceof Fieldset && $elementOrFieldset->useAsBaseFieldset()) {

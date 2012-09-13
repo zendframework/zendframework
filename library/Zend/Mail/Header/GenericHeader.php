@@ -41,7 +41,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         if (count($parts) != 2) {
             throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
         }
-        $header = new static($parts[0], trim($parts[1]));
+        $header = new static($parts[0], ltrim($parts[1]));
         if ($decodedLine != $headerLine) {
             $header->setEncoding('UTF-8');
         }

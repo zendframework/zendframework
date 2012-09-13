@@ -44,12 +44,12 @@ class Feed extends Extension\AbstractFeed
     public function getLicenses()
     {
         $name = 'licenses';
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
         $licenses = array();
-        $list = $this->_xpath->evaluate('channel/cc:license');
+        $list = $this->xpath->evaluate('channel/cc:license');
 
         if ($list->length) {
             foreach ($list as $license) {
@@ -59,9 +59,9 @@ class Feed extends Extension\AbstractFeed
             $licenses = array_unique($licenses);
         }
 
-        $this->_data[$name] = $licenses;
+        $this->data[$name] = $licenses;
 
-        return $this->_data[$name];
+        return $this->data[$name];
     }
 
     /**
@@ -69,8 +69,8 @@ class Feed extends Extension\AbstractFeed
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('cc', 'http://backend.userland.com/creativeCommonsRssModule');
+        $this->xpath->registerNamespace('cc', 'http://backend.userland.com/creativeCommonsRssModule');
     }
 }

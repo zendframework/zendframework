@@ -353,18 +353,18 @@ abstract class AbstractSource implements MetadataInterface
         $constraint = new Object\ConstraintObject($constraintName, $table, $schema);
 
         foreach (array(
-            'constraint_type'    => 'setType',
-            'match_option'       => 'setMatchOption',
-            'update_rule'        => 'setUpdateRule',
-            'delete_rule'        => 'setDeleteRule',
-            'columns'            => 'setColumns',
+            'constraint_type'         => 'setType',
+            'match_option'            => 'setMatchOption',
+            'update_rule'             => 'setUpdateRule',
+            'delete_rule'             => 'setDeleteRule',
+            'columns'                 => 'setColumns',
             'referenced_table_schema' => 'setReferencedTableSchema',
             'referenced_table_name'   => 'setReferencedTableName',
             'referenced_columns'      => 'setReferencedColumns',
-            'match_option'       => 'setMatchOption',
-            'update_rule'        => 'setUpdateRule',
-            'delete_rule'        => 'setDeleteRule',
-            'check_clause'       => 'setCheckClause',
+            'match_option'            => 'setMatchOption',
+            'update_rule'             => 'setUpdateRule',
+            'delete_rule'             => 'setDeleteRule',
+            'check_clause'            => 'setCheckClause',
         ) as $key => $setMethod) {
             if (isset($info[$key])) {
                 $constraint->{$setMethod}($info[$key]);

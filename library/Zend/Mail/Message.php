@@ -539,6 +539,7 @@ class Message
     /**
      * Instantiate from raw message string
      *
+     * @todo   Restore body to Mime\Message
      * @param  string $rawMessage
      * @return Message
      */
@@ -549,7 +550,7 @@ class Message
         $content = null;
         Mime\Decode::splitMessage($rawMessage, $headers, $content);
         if ($headers->has('mime-version')) {
-            // @todo restore body to mime\message
+            // todo - restore body to mime\message
         }
         $message->setHeaders($headers);
         $message->setBody($content);

@@ -44,7 +44,6 @@ class ClassScannerTest extends TestCase
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $this->assertInternalType('array', $class->getPropertyNames());
         $this->assertContains('bar', $class->getPropertyNames());
     }
 
@@ -59,9 +58,19 @@ class ClassScannerTest extends TestCase
     {
         $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $methods = $class->getMethods(true);
+        $methods = $class->getMethods();
         foreach ($methods as $method) {
             $this->assertInstanceOf('Zend\Code\Scanner\MethodScanner', $method);
+        }
+    }
+
+    public function testClassScannerReturnsPropertiesWithPropertyScanners()
+    {
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $properties = $class->getProperties();
+        foreach ($properties as $property) {
+            $this->assertInstanceOf('Zend\Code\Scanner\PropertyScanner', $property);
         }
     }
 
@@ -77,7 +86,7 @@ class ClassScannerTest extends TestCase
         $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertEquals(11, $class->getLineStart());
-        $this->assertEquals(23, $class->getLineEnd());
+        $this->assertEquals(31, $class->getLineEnd());
 
         $file    = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\BarClass');

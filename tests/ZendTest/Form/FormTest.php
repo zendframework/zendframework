@@ -159,6 +159,14 @@ class FormTest extends TestCase
         $this->assertSame($filter, $this->form->getInputFilter());
     }
 
+    public function testDefaultNonRequiredInputFilterIsSet()
+    {
+        $this->form->add(new Element('foo'));
+        $inputFilter = $this->form->getInputFilter();
+        $fooInput = $inputFilter->get('foo');
+        $this->assertFalse($fooInput->isRequired());
+    }
+
     public function testCallingIsValidRaisesExceptionIfNoDataSet()
     {
         $this->setExpectedException('Zend\Form\Exception\DomainException');

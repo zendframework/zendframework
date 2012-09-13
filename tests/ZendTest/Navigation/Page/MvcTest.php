@@ -15,6 +15,8 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\Http\Regex as RegexRoute;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;
 use Zend\Mvc\Router\Http\TreeRouteStack;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
 use Zend\Navigation\Page;
 use Zend\Navigation;
 use ZendTest\Navigation\TestAsset;
@@ -118,6 +120,38 @@ class MvcTest extends TestCase
 
         $page->setRouter($router);
         $page->setRouteMatch($routeMatch);
+
+        $this->assertEquals(true, $page->isActive());
+    }
+
+    public function testIsActiveReturnsTrueWhenMatchingRouteWhileUsingModuleRouteListener()
+    {
+        $page = new Page\Mvc(array(
+            'label' => 'mpinkstonwashere',
+            'route' => 'roflcopter',
+            'controller' => 'index'
+        ));
+
+        $route = new LiteralRoute('/roflcopter');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('roflcopter', $route);
+
+        $routeMatch = new RouteMatch(array(
+            ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
+            'controller' => 'index'
+        ));
+        $routeMatch->setMatchedRouteName('roflcopter');
+
+        $event = new MvcEvent();
+        $event->setRouter($router)
+              ->setRouteMatch($routeMatch);
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->onRoute($event);
+
+        $page->setRouter($event->getRouter());
+        $page->setRouteMatch($event->getRouteMatch());
 
         $this->assertEquals(true, $page->isActive());
     }

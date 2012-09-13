@@ -159,4 +159,46 @@ class FormRowTest extends TestCase
     {
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
+
+    public function testLabelWillBeTranslated()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value for foo:');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->any())
+            ->method('translate')
+            ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+        $this->assertContains('<label', $markup);
+        $this->assertContains('</label>', $markup);
+
+        // Additional coverage when element's id is set
+        $element->setAttribute('id', 'foo');
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+        $this->assertContains('<label', $markup);
+        $this->assertContains('</label>', $markup);
+    }
+
+
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
+    }
 }

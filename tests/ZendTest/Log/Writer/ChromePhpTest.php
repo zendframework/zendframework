@@ -43,13 +43,13 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         $this->chromephp = new MockChromePhp();
 
     }
-    
+
     public function testGetChromePhp()
     {
         $writer = new ChromePhp($this->chromephp);
         $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
     }
-    
+
     public function testSetChromePhp()
     {
         $writer   = new ChromePhp($this->chromephp);
@@ -59,7 +59,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
         $this->assertEquals($chromephp2, $writer->getChromePhp());
     }
-    
+
     public function testWrite()
     {
         $writer = new ChromePhp($this->chromephp);
@@ -69,7 +69,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertEquals('my msg', $this->chromephp->calls['trace'][0]);
     }
-    
+
     public function testWriteDisabled()
     {
         $chromephp = new MockChromePhp(false);

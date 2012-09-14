@@ -416,9 +416,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $select1 = clone $select;
         $select1->where('id = foo');
+        $select1->having('id = foo');
 
         $this->assertEquals(0, $select->where->count());
         $this->assertEquals(1, $select1->where->count());
+
+        $this->assertEquals(0, $select->having->count());
+        $this->assertEquals(1, $select1->having->count());
     }
 
     /**

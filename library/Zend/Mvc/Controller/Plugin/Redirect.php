@@ -14,7 +14,6 @@ use Zend\Http\Response;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteStackInterface;
 
 /**
  * @todo       allow specifying status code as a default, or as an option to methods
@@ -26,7 +25,6 @@ class Redirect extends AbstractPlugin
 {
     protected $event;
     protected $response;
-    protected $router;
 
     /**
      * Generates a URL based on a route
@@ -72,6 +70,16 @@ class Redirect extends AbstractPlugin
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
+    }
+
+    /**
+     * Refresh to current route
+     *
+     * @return string
+     */
+    public function refresh()
+    {
+        return $this->toRoute(null, array(), array(), true);
     }
 
     /**

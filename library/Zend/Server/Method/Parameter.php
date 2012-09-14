@@ -21,36 +21,36 @@ class Parameter
 {
     /**
      * Default parameter value
-     * 
-     * @var mixed 
+     *
+     * @var mixed
      */
     protected $defaultValue;
 
     /**
      * Parameter description
      *
-     * @var string 
+     * @var string
      */
     protected $description = '';
 
     /**
      * Parameter variable name
      *
-     * @var string 
+     * @var string
      */
     protected $name;
 
     /**
      * Is parameter optional?
      *
-     * @var bool 
+     * @var bool
      */
     protected $optional = false;
 
     /**
      * Parameter type
      *
-     * @var string 
+     * @var string
      */
     protected $type = 'mixed';
 

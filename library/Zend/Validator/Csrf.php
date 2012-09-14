@@ -76,7 +76,7 @@ class Csrf extends AbstractValidator
      */
     public function __construct($options = array())
     {
-        parent::__construct();
+        parent::__construct($options);
 
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);

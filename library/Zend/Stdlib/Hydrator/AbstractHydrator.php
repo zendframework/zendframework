@@ -44,7 +44,10 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      */
     public function getStrategy($name)
     {
-        return $this->strategies[$name];
+        if(isset($this->strategies[$name])) {
+            return $this->strategies[$name];
+        }
+        return $this->strategies['*'];
     }
 
     /**
@@ -55,7 +58,8 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      */
     public function hasStrategy($name)
     {
-        return array_key_exists($name, $this->strategies);
+        return array_key_exists($name, $this->strategies) 
+                || array_key_exists('*', $this->strategies);
     }
 
     /**

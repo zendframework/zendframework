@@ -22,6 +22,7 @@ use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
  * @subpackage Sql
  *
  * @property Where $where
+ * @property Having $having
  */
 class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
@@ -744,8 +745,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Variable overloading
      *
-     * Proxies to "where" only
-     *
      * @param  string $name
      * @throws Exception\InvalidArgumentException
      * @return mixed
@@ -755,6 +754,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         switch (strtolower($name)) {
             case 'where':
                 return $this->where;
+            case 'having':
+                return $this->having;
             default:
                 throw new Exception\InvalidArgumentException('Not a valid magic property for this object');
         }
@@ -769,6 +770,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function __clone()
     {
-        $this->where = clone $this->where;
+        $this->where  = clone $this->where;
+        $this->having = clone $this->having;
     }
 }

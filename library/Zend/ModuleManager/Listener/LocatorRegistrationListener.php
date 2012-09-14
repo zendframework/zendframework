@@ -67,6 +67,10 @@ class LocatorRegistrationListener extends AbstractListener implements
         $moduleManager = $e->getTarget();
         $events        = $moduleManager->getEventManager()->getSharedManager();
 
+        if (!$events) {
+            return;
+        }
+
         // Shared instance for module manager
         $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);

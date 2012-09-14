@@ -10,8 +10,7 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Di\Config;
-use Zend\Di\Di;
+use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -20,31 +19,26 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package    Zend_Mvc
  * @subpackage Service
  */
-class DiFactory implements FactoryInterface
+class DiStrictAbstractServiceFactoryFactory implements FactoryInterface
 {
     /**
-     * Create and return abstract factory seeded by dependency injector
-     *
-     * Creates and returns an abstract factory seeded by the dependency
-     * injector. If the "di" key of the configuration service is set, that
-     * sub-array is passed to a DiConfig object and used to configure
-     * the DI instance. The DI instance is then used to seed the
-     * DiAbstractServiceFactory, which is then registered with the service
-     * manager.
+     * Class responsible for instantiating a DiStrictAbstractServiceFactory
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return Di
+     * @return DiStrictAbstractServiceFactory
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $di     = new Di();
+        $diAbstractFactory = new DiStrictAbstractServiceFactory(
+            $serviceLocator->get('Di'),
+            DiStrictAbstractServiceFactory::USE_SL_BEFORE_DI
+        );
         $config = $serviceLocator->get('Config');
 
-        if (isset($config['di'])) {
-            $config = new Config($config['di']);
-            $config->configure($di);
+        if (isset($config['di']['allowed_controllers'])) {
+            $diAbstractFactory->setAllowedServiceNames($config['di']['allowed_controllers']);
         }
 
-        return $di;
+        return $diAbstractFactory;
     }
 }

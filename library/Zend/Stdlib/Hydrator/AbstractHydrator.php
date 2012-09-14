@@ -11,6 +11,7 @@
 namespace Zend\Stdlib\Hydrator;
 
 use ArrayObject;
+use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\StrategyEnabledInterface;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
@@ -44,9 +45,18 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      */
     public function getStrategy($name)
     {
-        if(isset($this->strategies[$name])) {
+        if (isset($this->strategies[$name])) {
             return $this->strategies[$name];
         }
+
+        if (!isset($this->strategies['*'])) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: no strategy by name of "%s", and no wildcard strategy present',
+                __METHOD__,
+                $name
+            ));
+        }
+        
         return $this->strategies['*'];
     }
 
@@ -59,7 +69,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     public function hasStrategy($name)
     {
         return array_key_exists($name, $this->strategies)
-                || array_key_exists('*', $this->strategies);
+               || array_key_exists('*', $this->strategies);
     }
 
     /**

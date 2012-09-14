@@ -256,6 +256,12 @@ class FormTest extends TestCase
         $this->assertArrayHasKey('foobar', $messages, var_export($messages, 1));
     }
 
+    public function testSetValidationGroupWithNoArgumentsRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->form->setValidationGroup();
+    }
+
     public function testCallingGetDataPriorToValidationRaisesException()
     {
         $this->setExpectedException('Zend\Form\Exception\DomainException');
@@ -1042,4 +1048,31 @@ class FormTest extends TestCase
         $baseHydrator = $this->form->get('foobar')->getHydrator();
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $baseHydrator);
     }
+
+    public function testBindWithWrongFlagRaisesException()
+    {
+        $model = new stdClass;
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->form->bind($model, Form::VALUES_AS_ARRAY);
+    }
+
+    public function testSetBindOnValidateWrongFlagRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->form->setBindOnValidate(Form::VALUES_AS_ARRAY);
+    }
+
+    public function testSetDataOnValidateWrongFlagRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->form->setData(null);
+    }
+
+    public function testSetDataIsTraversable()
+    {
+        $this->form->setData(new \ArrayObject(array('foo' => 'bar')));
+        $this->assertTrue($this->form->isValid());
+    }
+
+
 }

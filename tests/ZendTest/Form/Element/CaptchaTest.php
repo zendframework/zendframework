@@ -56,6 +56,13 @@ class CaptchaTest extends TestCase
         $this->assertInstanceOf('Zend\Captcha\Dumb', $element->getCaptcha());
     }
 
+    public function testCaptchaWithNullRaisesException()
+    {
+        $element = new CaptchaElement();
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $element->setCaptcha(null);
+    }
+
     public function testSettingCaptchaSetsCaptchaAttribute()
     {
         $element = new CaptchaElement();

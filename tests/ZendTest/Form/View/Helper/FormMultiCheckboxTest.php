@@ -266,4 +266,102 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->helper->setTranslatorEnabled(false);
         $this->assertFalse($this->helper->isTranslatorEnabled());
     }
+
+    public function testRenderInputNotSelectElementRaisesException()
+    {
+        $element = new Element\Text('foo');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->helper->render($element);
+    }
+
+    public function testRenderElementWithNoNameRaisesException()
+    {
+        $element = new MultiCheckboxElement(null);
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
+    }
+
+    public function testRenderElementWithNoValueOptionsRaisesException()
+    {
+        $element = new MultiCheckboxElement('foo');
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
+    }
+
+    public function testCanMarkSingleOptionAsSelected()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $options = array(
+            'value1' => 'This is the first label',
+            1 => array(
+                'value'           => 'value2',
+                'label'           => 'This is the second label (overridden)',
+                'disabled'        => false,
+                'selected'         => true,
+                'label_attributes' => array('class' => 'label-class'),
+                'attributes'      => array('class' => 'input-class'),
+            ),
+            'value3' => 'This is the third label',
+        );
+        $element->setValueOptions($options);
+
+        $markup  = $this->helper->render($element);
+        $this->assertRegexp('#class="input-class" value="value2" checked="checked"#', $markup);
+        $this->assertNotRegexp('#class="input-class" value="value1" checked="checked"#', $markup);
+        $this->assertNotRegexp('#class="input-class" value="value3" checked="checked"#', $markup);
+    }
+
+    public function testInvokeSetLabelPositionToAppend()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setValueOptions(array(
+                                       array(
+                                           'label' => 'label1',
+                                           'value' => 'value1',
+                                       ),
+                                  ));
+        $this->helper->__invoke($element, 'append');
+
+        $this->assertSame('append', $this->helper->getLabelPosition());
+    }
+
+    public function testSetLabelPositionInputNullRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->helper->setLabelPosition(null);
+    }
+
+    public function testSetLabelAttributes()
+    {
+        $this->helper->setLabelAttributes(array('foo', 'bar'));
+        $this->assertEquals(array(0 => 'foo', 1 => 'bar'), $this->helper->getLabelAttributes());
+    }
+
+    public function testGetUseHiddenElementReturnsDefaultFalse()
+    {
+        $hiddenElement = $this->helper->getUseHiddenElement();
+        $this->assertFalse($hiddenElement);
+    }
+
+    public function testGetUseHiddenElementSetToTrue()
+    {
+        $this->helper->setUseHiddenElement(true);
+        $hiddenElement = $this->helper->getUseHiddenElement();
+        $this->assertTrue($hiddenElement);
+    }
+
+    public function testGetUncheckedValueReturnsDefaultEmptyString()
+    {
+        $uncheckedValue = $this->helper->getUncheckedValue();
+        $this->assertSame('', $uncheckedValue);
+    }
+
+    public function testGetUncheckedValueSetToFoo()
+    {
+        $this->helper->setUncheckedValue('foo');
+        $uncheckedValue = $this->helper->getUncheckedValue();
+        $this->assertSame('foo', $uncheckedValue);
+    }
 }

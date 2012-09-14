@@ -41,7 +41,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      * @var CsrfValidator
      */
     protected $csrfValidator;
-    
+
     /**
      * Accepted options for Csrf:
      * - csrf_options: an array used in the Csrf

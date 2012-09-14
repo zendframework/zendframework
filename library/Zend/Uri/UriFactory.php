@@ -67,6 +67,23 @@ abstract class UriFactory
     }
 
     /**
+     * Get the class name for a registered scheme
+     *
+     * If provided scheme is not registered, will return NULL
+     *
+     * @param  string $scheme
+     * @return string|null
+     */
+    public static function getRegisteredSchemeClass($scheme)
+    {
+        if (isset(static::$schemeClasses[$scheme])) {
+            return static::$schemeClasses[$scheme];
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Create a URI from a string
      *
      * @param  string $uriString

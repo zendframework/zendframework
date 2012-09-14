@@ -438,9 +438,9 @@ class Ldap implements AdapterInterface
 
         if ($result === 1) {
             return true;
-        } else {
-            return 'Failed to verify group membership with ' . $group->toString();
         }
+
+        return 'Failed to verify group membership with ' . $group->toString();
     }
 
     /**

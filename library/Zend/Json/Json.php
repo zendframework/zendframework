@@ -201,9 +201,8 @@ class Json
         $match     = preg_match($pattern, $simpleXmlElementObject, $matchings);
         if ($match) {
             return new Expr($matchings[1]);
-        } else {
-            return (trim(strval($simpleXmlElementObject)));
         }
+        return (trim(strval($simpleXmlElementObject)));
     }
     /**
      * _processXml - Contains the logic for xml2json

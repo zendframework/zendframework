@@ -294,14 +294,12 @@ class DbTable implements AdapterInterface
             }
             return $returnObject;
 
-        } else {
-
-            foreach ($this->resultRow as $resultColumn => $resultValue) {
-                $returnObject->{$resultColumn} = $resultValue;
-            }
-            return $returnObject;
-
         }
+
+        foreach ($this->resultRow as $resultColumn => $resultValue) {
+            $returnObject->{$resultColumn} = $resultValue;
+        }
+        return $returnObject;
     }
 
     /**

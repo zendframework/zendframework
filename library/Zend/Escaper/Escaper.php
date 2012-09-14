@@ -268,9 +268,8 @@ class Escaper
          */
         if ($ord > 255) {
             return sprintf('&#x%04X;', $ord);
-        } else {
-            return sprintf('&#x%02X;', $ord);
         }
+        return sprintf('&#x%02X;', $ord);
     }
 
     /**
@@ -285,10 +284,9 @@ class Escaper
         $chr = $matches[0];
         if (strlen($chr) == 1) {
             return sprintf('\\x%02X', ord($chr));
-        } else {
-            $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-            return sprintf('\\u%04s', strtoupper(bin2hex($chr)));
         }
+        $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
+        return sprintf('\\u%04s', strtoupper(bin2hex($chr)));
     }
 
     /**
@@ -384,8 +382,7 @@ class Escaper
 
         if ($result === false) {
             return ''; // return non-fatal blank string on encoding errors from users
-        } else {
-            return $result;
         }
+        return $result;
     }
 }

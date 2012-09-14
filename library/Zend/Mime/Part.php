@@ -123,9 +123,8 @@ class Part
     {
         if ($this->isStream) {
             return stream_get_contents($this->getEncodedStream());
-        } else {
-            return Mime::encode($this->content, $this->encoding, $EOL);
         }
+        return Mime::encode($this->content, $this->encoding, $EOL);
     }
 
     /**
@@ -136,9 +135,8 @@ class Part
     {
         if ($this->isStream) {
             return stream_get_contents($this->content);
-        } else {
-            return $this->content;
         }
+        return $this->content;
     }
 
     /**

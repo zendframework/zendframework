@@ -828,9 +828,8 @@ class Paginator implements Countable, IteratorAggregate
 
         if ($currentItems instanceof DbAbstractRowset) {
             return Json::encode($currentItems->toArray());
-        } else {
-            return Json::encode($currentItems);
         }
+        return Json::encode($currentItems);
     }
 
     /**

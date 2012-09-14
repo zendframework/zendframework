@@ -38,12 +38,12 @@ use Zend\Uri;
 class Cookies extends Headers
 {
     /**
-     * @var Headers
+     * @var \Zend\Http\Headers
      */
     protected $headers = null;
 
     /**
-     * @var $_rawCookies
+     * @var array
      */
     protected $rawCookies;
 

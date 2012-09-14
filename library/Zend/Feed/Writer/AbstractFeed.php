@@ -36,7 +36,7 @@ class AbstractFeed
     protected $type = null;
 
     /**
-     * @var $_extensions
+     * @var $extensions
      */
     protected $extensions;
 

@@ -395,6 +395,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             case self::WHERE:
                 $this->where = new Where;
                 break;
+            case self::GROUP:
+                $this->group = null;
+                break;
+            case self::HAVING:
+                $this->having = new Having;
+                break;
             case self::LIMIT:
                 $this->limit = null;
                 break;

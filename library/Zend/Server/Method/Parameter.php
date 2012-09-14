@@ -20,27 +20,37 @@ namespace Zend\Server\Method;
 class Parameter
 {
     /**
-     * @var mixed Default parameter value
+     * Default parameter value
+     * 
+     * @var mixed 
      */
     protected $defaultValue;
 
     /**
-     * @var string Parameter description
+     * Parameter description
+     *
+     * @var string 
      */
     protected $description = '';
 
     /**
-     * @var string Parameter variable name
+     * Parameter variable name
+     *
+     * @var string 
      */
     protected $name;
 
     /**
-     * @var bool Is parameter optional?
+     * Is parameter optional?
+     *
+     * @var bool 
      */
     protected $optional = false;
 
     /**
-     * @var string Parameter type
+     * Parameter type
+     *
+     * @var string 
      */
     protected $type = 'mixed';
 

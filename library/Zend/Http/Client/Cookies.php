@@ -13,7 +13,6 @@ namespace Zend\Http\Client;
 use ArrayIterator;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Response;
-use Zend\Stdlib\ParametersInterface;
 use Zend\Uri;
 
 /**

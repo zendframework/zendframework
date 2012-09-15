@@ -12,7 +12,6 @@ namespace Zend\ModuleManager\Listener;
 
 use Traversable;
 use Zend\EventManager\EventManagerInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\ServiceManager\Config as ServiceConfig;
 use Zend\ServiceManager\ServiceManager;

@@ -12,7 +12,6 @@ namespace Zend\Console;
 
 use Zend\Stdlib\Message;
 use Zend\Stdlib\Parameters;
-use Zend\Stdlib\ParametersInterface;
 use Zend\Stdlib\RequestInterface;
 
 /**

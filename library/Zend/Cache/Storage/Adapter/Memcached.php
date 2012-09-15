@@ -12,7 +12,6 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject;
 use Memcached as MemcachedResource;
-use MemcachedException;
 use stdClass;
 use Traversable;
 use Zend\Cache\Exception;

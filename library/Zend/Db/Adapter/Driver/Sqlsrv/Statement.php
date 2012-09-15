@@ -48,7 +48,7 @@ class Statement implements StatementInterface
     protected $parameterReferences = array();
 
     /**
-     * @var Zend\Db\Adapter\ParameterContainer\ParameterContainer
+     * @var ParameterContainer
      */
     protected $parameterContainer = null;
 

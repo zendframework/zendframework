@@ -319,7 +319,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Get uri (from the request)
      *
-     * @return Zend\Uri\Http
+     * @return Http
      */
     public function getUri()
     {

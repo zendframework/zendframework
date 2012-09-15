@@ -79,7 +79,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     private $__helpers;
 
     /**
-     * @var Zend\Filter\FilterChain
+     * @var FilterChain
      */
     private $__filterChain;
 

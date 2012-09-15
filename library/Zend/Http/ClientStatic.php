@@ -26,7 +26,7 @@ class ClientStatic
     /**
      * Get the static HTTP client
      *
-     * @return Zend\Http\Client
+     * @return Client
      */
     protected static function getStaticClient()
     {

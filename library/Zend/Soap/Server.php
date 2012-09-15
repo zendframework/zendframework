@@ -736,7 +736,7 @@ class Server implements \Zend\Server\Server
      * SoapServer object, and then registers any functions or class with it, as
      * well as persistence.
      *
-     * @return SoapServer
+     * @return \SoapServer
      */
     protected function _getSoap()
     {
@@ -894,9 +894,9 @@ class Server implements \Zend\Server\Server
      * {@Link registerFaultException()}.
      *
      * @link   http://www.w3.org/TR/soap12-part1/#faultcodes
-     * @param  string|Exception $fault
+     * @param  string|\Exception $fault
      * @param  string $code SOAP Fault Codes
-     * @return SoapFault
+     * @return \SoapFault
      */
     public function fault($fault = null, $code = "Receiver")
     {
@@ -935,7 +935,7 @@ class Server implements \Zend\Server\Server
      * @param int $errline
      * @param array $errcontext
      * @return void
-     * @throws SoapFault
+     * @throws \SoapFault
      */
     public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {

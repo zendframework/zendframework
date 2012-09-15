@@ -257,7 +257,7 @@ class Ldap implements AdapterInterface
         /* Iterate through each server and try to authenticate the supplied
          * credentials against it.
          */
-        foreach ($this->options as $name => $options) {
+        foreach ($this->options as $options) {
 
             if (!is_array($options)) {
                 throw new Exception\InvalidArgumentException('Adapter options array not an array');

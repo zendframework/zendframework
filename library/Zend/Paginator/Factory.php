@@ -16,7 +16,7 @@ use Zend\Paginator\Adapter\AdapterInterface;
  * @category   Zend
  * @package    Zend_Paginator
  */
-class Factory
+abstract class Factory
 {
     protected static $adapters;
     

@@ -201,7 +201,7 @@ class SessionConfig extends StandardConfig
     {
         $hashFunction = (string) $hashFunction;
         $validHashFunctions = $this->getHashFunctions();
-        if (!in_array($hashFunction, $this->getHashFunctions(), true)) {
+        if (!in_array($hashFunction, $validHashFunctions, true)) {
             throw new Exception\InvalidArgumentException('Invalid hash function provided');
         }
 

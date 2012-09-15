@@ -74,7 +74,6 @@ class HttpResponse
         }
         if (!$httpCodeSent) {
             header('HTTP/1.1 ' . $this->statusCode);
-            $httpCodeSent = true;
         }
     }
 

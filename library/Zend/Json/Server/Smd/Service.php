@@ -393,7 +393,6 @@ class Service
      */
     public function toArray()
     {
-        $name       = $this->getName();
         $envelope   = $this->getEnvelope();
         $target     = $this->getTarget();
         $transport  = $this->getTransport();

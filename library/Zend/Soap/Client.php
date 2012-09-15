@@ -349,7 +349,7 @@ class Client implements ServerClient
      */
     public function setClassmap(array $classmap)
     {
-        foreach ($classmap as $type => $class) {
+        foreach ($classmap as $class) {
             if (!class_exists($class)) {
                 throw new Exception\InvalidArgumentException('Invalid class in class map');
             }

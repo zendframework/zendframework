@@ -385,7 +385,7 @@ class Server implements \Zend\Server\Server
         if (!is_array($classmap)) {
             throw new Exception\InvalidArgumentException('Classmap must be an array');
         }
-        foreach ($classmap as $type => $class) {
+        foreach ($classmap as $class) {
             if (!class_exists($class)) {
                 throw new Exception\InvalidArgumentException('Invalid class in class map');
             }

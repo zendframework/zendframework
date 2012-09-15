@@ -80,7 +80,7 @@ class Reflection extends AbstractHydrator
             $reflClass      = new ReflectionClass($input);
             $reflProperties = $reflClass->getProperties();
 
-            foreach ($reflProperties as $key => $property) {
+            foreach ($reflProperties as $property) {
                 $property->setAccessible(true);
                 self::$reflProperties[$input][$property->getName()] = $property;
             }

@@ -583,7 +583,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         $translator      = $this->getTranslator();
         $this->messages = array();
         $break           = false;
-        foreach ($check as $key => $content) {
+        foreach ($check as $content) {
             if (array_key_exists('validators', $content) &&
                 in_array('Zend\Validator\File\Count', $content['validators'])) {
                 $validator = $this->validators['Zend\Validator\File\Count'];

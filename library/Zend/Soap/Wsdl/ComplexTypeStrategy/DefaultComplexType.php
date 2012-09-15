@@ -53,8 +53,6 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
 
         $defaultProperties = $class->getDefaultProperties();
 
-        $defaultProperties = $class->getDefaultProperties();
-
         $complexType = $dom->createElement('xsd:complexType');
         $complexType->setAttribute('name', $soapTypeName);
 

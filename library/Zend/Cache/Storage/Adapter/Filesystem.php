@@ -193,8 +193,6 @@ class Filesystem extends AbstractAdapter implements
         . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
         . \DIRECTORY_SEPARATOR . $nsPrefix . '*';
         $glob = new GlobIterator($path, $flags);
-        $time = time();
-        $ttl  = $options->getTtl();
 
         ErrorHandler::start();
         foreach ($glob as $pathname) {
@@ -227,8 +225,6 @@ class Filesystem extends AbstractAdapter implements
             . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
             . \DIRECTORY_SEPARATOR . $nsPrefix . $prefix . '*';
         $glob = new GlobIterator($path, $flags);
-        $time = time();
-        $ttl  = $options->getTtl();
 
         ErrorHandler::start();
         foreach ($glob as $pathname) {
@@ -317,8 +313,6 @@ class Filesystem extends AbstractAdapter implements
             . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
             . \DIRECTORY_SEPARATOR . $prefix . '*.tag';
         $glob = new GlobIterator($path, $flags);
-        $time = time();
-        $ttl  = $options->getTtl();
 
         foreach ($glob as $pathname) {
             $diff = array_diff($tags, explode("\n", $this->getFileContent($pathname)));
@@ -884,7 +878,6 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $options  = $this->getOptions();
         $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
@@ -903,7 +896,6 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        $baseOptions = $this->getOptions();
         $oldUmask    = null;
 
         // create an associated array of files and contents to write

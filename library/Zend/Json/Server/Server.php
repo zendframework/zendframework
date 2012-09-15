@@ -466,7 +466,7 @@ class Server extends AbstractServer
         if (null === $this->smdMethods) {
             $this->smdMethods = array();
             $methods = get_class_methods('Zend\\Json\\Server\\Smd');
-            foreach ($methods as $key => $method) {
+            foreach ($methods as $method) {
                 if (!preg_match('/^(set|get)/', $method)) {
                     continue;
                 }

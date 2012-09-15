@@ -302,7 +302,7 @@ class Memcached extends AbstractAdapter implements
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        foreach ($result as $key => & $value) {
+        foreach ($result as & $value) {
             $value = array();
         }
 

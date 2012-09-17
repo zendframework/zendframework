@@ -208,7 +208,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $cloud    = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $expected = '<ul class="Zend\Tag\Cloud">'
+        $expected = '<ul class="Zend&#x5C;Tag&#x5C;Cloud">'
                   . '<li><a href="" style="font-size: 10px;">foo</a></li> '
                   . '<li><a href="" style="font-size: 20px;">bar</a></li>'
                   . '</ul>';
@@ -224,7 +224,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testRenderViaToString()
     {
         $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $expected = '<ul class="Zend\Tag\Cloud">'
+        $expected = '<ul class="Zend&#x5C;Tag&#x5C;Cloud">'
                   . '<li><a href="" style="font-size: 10px;">foo</a></li> '
                   . '<li><a href="" style="font-size: 20px;">bar</a></li>'
                   . '</ul>';

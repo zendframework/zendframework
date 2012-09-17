@@ -10,6 +10,9 @@
 
 namespace Zend\Tag\Cloud\Decorator;
 
+use Zend\Escaper\Escaper;
+use Zend\Tag\Exception;
+
 /**
  * Simple HTML decorator for clouds
  *
@@ -22,6 +25,11 @@ class HtmlCloud extends AbstractCloud
      * @var string Encoding to use
      */
     protected $encoding = 'UTF-8';
+
+    /**
+     * @var Escaper
+     */
+    protected $escaper;
 
     /**
      * List of HTML tags
@@ -59,6 +67,33 @@ class HtmlCloud extends AbstractCloud
     {
         $this->encoding = (string) $value;
         return $this;
+    }
+
+    /**
+     * Set Escaper instance
+     *
+     * @param  Escaper $escaper
+     * @return HtmlCloud
+     */
+    public function setEscaper($escaper)
+    {
+        $this->escaper = $escaper;
+        return $this;
+    }
+    
+    /**
+     * Retrieve Escaper instance
+     *
+     * If none registered, instantiates and registers one using current encoding.
+     *
+     * @return Escaper
+     */
+    public function getEscaper()
+    {
+        if (null === $this->escaper) {
+            $this->setEscaper(new Escaper($this->getEncoding()));
+        }
+        return $this->escaper;
     }
 
     /**
@@ -122,17 +157,20 @@ class HtmlCloud extends AbstractCloud
         }
         $cloudHTML = implode($this->getSeparator(), $tags);
 
-        $enc = $this->getEncoding();
+        $escaper = $this->getEscaper();
         foreach ($this->getHTMLTags() as $key => $data) {
             if (is_array($data)) {
                 $htmlTag    = $key;
+                $this->validateElementName($htmlTag);
                 $attributes = '';
 
                 foreach ($data as $param => $value) {
-                    $attributes .= ' ' . $param . '="' . htmlspecialchars($value, ENT_COMPAT, $enc) . '"';
+                    $this->validateAttributeName($param);
+                    $attributes .= ' ' . $param . '="' . $escaper->escapeHtmlAttr($value) . '"';
                 }
             } else {
                 $htmlTag    = $data;
+                $this->validateElementName($htmlTag);
                 $attributes = '';
             }
 
@@ -140,5 +178,39 @@ class HtmlCloud extends AbstractCloud
         }
 
         return $cloudHTML;
+    }
+
+    /**
+     * Validate an HTML element name
+     * 
+     * @param  string $name 
+     * @throws Exception\InvalidElementNameException
+     */
+    protected function validateElementName($name)
+    {
+        if (!preg_match('/^[a-z0-9]+$/i', $name)) {
+            throw new Exception\InvalidElementNameException(sprintf(
+                '%s: Invalid element name "%s" provided; please provide valid HTML element names',
+                __METHOD__,
+                $this->getEscaper()->escapeHtml($name)
+            ));
+        }
+    }
+
+    /**
+     * Validate an HTML attribute name
+     * 
+     * @param  string $name 
+     * @throws Exception\InvalidAttributeNameException
+     */
+    protected function validateAttributeName($name)
+    {
+        if (!preg_match('/^[a-z_:][-a-z0-9_:.]*$/i', $name)) {
+            throw new Exception\InvalidAttributeNameException(sprintf(
+                '%s: Invalid HTML attribute name "%s" provided; please provide valid HTML attribute names',
+                __METHOD__,
+                $this->getEscaper()->escapeHtml($name)
+            ));
+        }
     }
 }

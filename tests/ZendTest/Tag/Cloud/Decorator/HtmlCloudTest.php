@@ -25,7 +25,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
     {
         $decorator = new Decorator\HtmlCloud();
 
-        $this->assertEquals('<ul class="Zend\Tag\Cloud">foo bar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend&#x5C;Tag&#x5C;Cloud">foo bar</ul>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testNestedTags()
@@ -41,7 +41,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlCloud();
         $decorator->setSeparator('-');
 
-        $this->assertEquals('<ul class="Zend\Tag\Cloud">foo-bar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend&#x5C;Tag&#x5C;Cloud">foo-bar</ul>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testConstructorWithArray()
@@ -71,5 +71,60 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlCloud(array('options' => 'foobar'));
         // In case would fail due to an error
     }
-}
 
+    public function invalidHtmlTagProvider()
+    {
+        return array(
+            array(array('_foo')),
+            array(array('&foo')),
+            array(array(' foo')),
+            array(array(' foo')),
+            array(array(
+                '_foo' => array(),
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider invalidHtmlTagProvider
+     */
+    public function testInvalidHtmlTagsRaiseAnException($tags)
+    {
+        $decorator = new Decorator\HtmlCloud();
+        $decorator->setHTMLTags($tags);
+        $this->setExpectedException('Zend\Tag\Exception\InvalidElementNameException');
+        $decorator->render(array());
+    }
+
+    public function invalidAttributeProvider()
+    {
+        return array(
+            array(array(
+                'foo' => array(
+                    '&bar' => 'baz',
+                ),
+            )),
+            array(array(
+                'foo' => array(
+                    ':bar&baz' => 'bat',
+                ),
+            )),
+            array(array(
+                'foo' => array(
+                    'bar/baz' => 'bat',
+                ),
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider invalidAttributeProvider
+     */
+    public function testInvalidAttributeNamesRaiseAnException($tags)
+    {
+        $decorator = new Decorator\HtmlCloud();
+        $decorator->setHTMLTags($tags);
+        $this->setExpectedException('Zend\Tag\Exception\InvalidAttributeNameException');
+        $decorator->render(array());
+    }
+}

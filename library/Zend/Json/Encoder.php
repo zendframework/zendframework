@@ -104,8 +104,8 @@ class Encoder
      *
      * @param $value object
      * @return string
-     * @throws Zend\Json\Exception\RecursionException If recursive checks are enabled
-     *                                                and the object has been serialized previously
+     * @throws RecursionException If recursive checks are enabled and the
+     *                            object has been serialized previously
      */
     protected function _encodeObject(&$value)
     {
@@ -398,7 +398,7 @@ class Encoder
      * @param $package string Optional package name appended to JavaScript
      * proxy class name
      * @return string The class2 (JavaScript) encoding of the class
-     * @throws Zend\Json\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function encodeClass($className, $package = '')
     {

@@ -245,7 +245,7 @@ class Capabilities
         // add missing datatypes as not supported
         $missingTypes = array_diff($allTypes, array_keys($datatypes));
         foreach ($missingTypes as $type) {
-            $datatypes[type] = false;
+            $datatypes[$type] = false;
         }
 
         return $this->setCapability($marker, 'supportedDatatypes', $datatypes);

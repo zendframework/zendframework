@@ -12,7 +12,6 @@ namespace Zend\EventManager;
 
 use ArrayAccess;
 use ArrayObject;
-use SplPriorityQueue;
 use Traversable;
 use Zend\Stdlib\CallbackHandler;
 use Zend\Stdlib\PriorityQueue;

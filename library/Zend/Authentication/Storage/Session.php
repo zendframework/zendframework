@@ -10,7 +10,6 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage;
 use Zend\Session\Container as SessionContainer;
 use Zend\Session\ManagerInterface as SessionManager;
 

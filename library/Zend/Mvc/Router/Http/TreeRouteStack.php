@@ -12,8 +12,6 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable;
 use Zend\Mvc\Router\Exception;
-use Zend\Mvc\Router\Http\RouteInterface;
-use Zend\Mvc\Router\RouteInterface as BaseRoute;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;

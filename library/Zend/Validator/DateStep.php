@@ -11,7 +11,6 @@
 namespace Zend\Validator;
 
 use DateInterval;
-use DatePeriod;
 use DateTime;
 use DateTimeZone;
 use Traversable;

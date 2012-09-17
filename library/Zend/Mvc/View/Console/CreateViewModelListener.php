@@ -24,7 +24,6 @@ namespace Zend\Mvc\View\Console;
 use Zend\EventManager\EventManagerInterface as Events;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\Http\CreateViewModelListener as HttpCreateViewModelListener;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Model\ConsoleModel;
 

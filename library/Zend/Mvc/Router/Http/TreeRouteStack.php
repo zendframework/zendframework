@@ -12,8 +12,6 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable;
 use Zend\Mvc\Router\Exception;
-use Zend\Mvc\Router\Http\RouteInterface;
-use Zend\Mvc\Router\RouteInterface as BaseRoute;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
@@ -124,9 +122,9 @@ class TreeRouteStack extends SimpleRouteStack
     }
 
     /**
-     * match(): defined by BaseRoute interface.
+     * match(): defined by \Zend\Mvc\Router\RouteInterface
      *
-     * @see    BaseRoute::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
      * @return RouteMatch
      */
@@ -171,9 +169,9 @@ class TreeRouteStack extends SimpleRouteStack
     }
 
     /**
-     * assemble(): defined by RouteInterface interface.
+     * assemble(): defined by \Zend\Mvc\Router\RouteInterface interface.
      *
-     * @see    BaseRoute::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed

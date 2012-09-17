@@ -11,7 +11,6 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\I18n\Translator\Translator;
-use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 

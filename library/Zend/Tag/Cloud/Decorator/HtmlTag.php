@@ -10,9 +10,7 @@
 
 namespace Zend\Tag\Cloud\Decorator;
 
-use Zend\Escaper\Escaper;
 use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
-use Zend\Tag\Exception;
 use Zend\Tag\ItemList;
 
 /**
@@ -30,16 +28,6 @@ class HtmlTag extends AbstractTag
      * @var array
      */
     protected $classList = null;
-
-    /**
-     * @var string Encoding to utilize
-     */
-    protected $encoding = 'UTF-8';
-
-    /**
-     * @var Escaper
-     */
-    protected $escaper;
 
     /**
      * Unit for the fontsize
@@ -112,55 +100,6 @@ class HtmlTag extends AbstractTag
     public function getClassList()
     {
         return $this->classList;
-    }
-
-    /**
-     * Get encoding
-     *
-     * @return string
-     */
-    public function getEncoding()
-    {
-         return $this->encoding;
-    }
-
-    /**
-     * Set encoding
-     *
-     * @param  string $value
-     * @return HTMLTag
-     */
-    public function setEncoding($value)
-    {
-        $this->encoding = (string) $value;
-        return $this;
-    }
-
-    /**
-     * Set Escaper instance
-     *
-     * @param  Escaper $escaper
-     * @return HtmlTag
-     */
-    public function setEscaper($escaper)
-    {
-        $this->escaper = $escaper;
-        return $this;
-    }
-    
-    /**
-     * Retrieve Escaper instance
-     *
-     * If none registered, instantiates and registers one using current encoding.
-     *
-     * @return Escaper
-     */
-    public function getEscaper()
-    {
-        if (null === $this->escaper) {
-            $this->setEscaper(new Escaper($this->getEncoding()));
-        }
-        return $this->escaper;
     }
 
     /**
@@ -293,7 +232,6 @@ class HtmlTag extends AbstractTag
 
         $result = array();
 
-        $enc = $this->getEncoding();
         $escaper = $this->getEscaper();
         foreach ($tags as $tag) {
             if (null === ($classList = $this->getClassList())) {
@@ -302,64 +240,11 @@ class HtmlTag extends AbstractTag
                 $attribute = sprintf('class="%s"', $escaper->escapeHtmlAttr($tag->getParam('weightValue')));
             }
 
-            $tagHTML = sprintf('<a href="%s" %s>%s</a>', $escaper->escapeHtml($tag->getParam('url')), $attribute, $escaper->escapeHtml($tag->getTitle()));
-
-            foreach ($this->getHTMLTags() as $key => $data) {
-                if (is_array($data)) {
-                    $attributes = '';
-                    $htmlTag    = $key;
-                    $this->validateElementName($htmlTag);
-
-                    foreach ($data as $param => $value) {
-                        $this->validateAttributeName($param);
-                        $attributes .= ' ' . $param . '="' . $escaper->escapeHtmlAttr($value) . '"';
-                    }
-                } else {
-                    $attributes = '';
-                    $htmlTag    = $data;
-                    $this->validateElementName($htmlTag);
-                }
-
-                $tagHTML = sprintf('<%1$s%3$s>%2$s</%1$s>', $htmlTag, $tagHTML, $attributes);
-            }
-
+            $tagHTML  = sprintf('<a href="%s" %s>%s</a>', $escaper->escapeHtml($tag->getParam('url')), $attribute, $escaper->escapeHtml($tag->getTitle()));
+            $tagHTML  = $this->wrapTag($tagHTML);
             $result[] = $tagHTML;
         }
 
         return $result;
-    }
-
-    /**
-     * Validate an HTML element name
-     * 
-     * @param  string $name 
-     * @throws Exception\InvalidElementNameException
-     */
-    protected function validateElementName($name)
-    {
-        if (!preg_match('/^[a-z0-9]+$/i', $name)) {
-            throw new Exception\InvalidElementNameException(sprintf(
-                '%s: Invalid element name "%s" provided; please provide valid HTML element names',
-                __METHOD__,
-                $this->getEscaper()->escapeHtml($name)
-            ));
-        }
-    }
-
-    /**
-     * Validate an HTML attribute name
-     * 
-     * @param  string $name 
-     * @throws Exception\InvalidAttributeNameException
-     */
-    protected function validateAttributeName($name)
-    {
-        if (!preg_match('/^[a-z_:][-a-z0-9_:.]*$/i', $name)) {
-            throw new Exception\InvalidAttributeNameException(sprintf(
-                '%s: Invalid HTML attribute name "%s" provided; please provide valid HTML attribute names',
-                __METHOD__,
-                $this->getEscaper()->escapeHtml($name)
-            ));
-        }
     }
 }

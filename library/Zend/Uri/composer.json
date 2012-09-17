@@ -14,6 +14,7 @@
     "target-dir": "Zend/Uri",
     "require": {
         "php": ">=5.3.3",
+        "zendframework/zend-escaper": "self.version",
         "zendframework/zend-validator": "self.version"
     }
 }

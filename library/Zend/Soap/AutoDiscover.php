@@ -344,7 +344,7 @@ class AutoDiscover
     /**
      * Generate the WSDL for a service class.
      *
-     * @return Zend\Soap\Wsdl
+     * @return Wsdl
      */
     protected function _generateClass()
     {
@@ -354,7 +354,7 @@ class AutoDiscover
     /**
      * Generate the WSDL for a set of functions.
      *
-     * @return Zend\Soap\Wsdl
+     * @return Wsdl
      */
     protected function _generateFunctions()
     {
@@ -370,7 +370,7 @@ class AutoDiscover
      * Generate the WSDL for a set of reflection method instances.
      *
      * @param array $reflectionMethods
-     * @return Zend\Soap\Wsdl
+     * @return Wsdl
      */
     protected function _generateWsdl(array $reflectionMethods)
     {

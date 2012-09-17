@@ -190,7 +190,7 @@ class Test implements AdapterInterface
     /**
      * Add another response to the response buffer.
      *
-     * @param string \Zend\Http\Response|$response
+     * @param string|Response $response
      */
     public function addResponse($response)
     {

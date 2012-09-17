@@ -52,7 +52,7 @@ class Json
      * @param int $objectDecodeType Optional; flag indicating how to decode
      * objects. See {@link Zend_Json_Decoder::decode()} for details.
      * @return mixed
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     public static function decode($encodedValue, $objectDecodeType = self::TYPE_OBJECT)
     {

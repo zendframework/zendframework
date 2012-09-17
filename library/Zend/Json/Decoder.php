@@ -179,7 +179,7 @@ class Decoder
      * array.
      *
      * @return array|stdClass
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     protected function _decodeObject()
     {
@@ -239,7 +239,7 @@ class Decoder
      *    [element, element2,...,elementN]
      *
      * @return array
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     protected function _decodeArray()
     {
@@ -290,7 +290,7 @@ class Decoder
      * Retrieves the next token from the source stream
      *
      * @return int Token constant value specified in class definition
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     protected function _getNextToken()
     {

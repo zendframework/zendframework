@@ -209,7 +209,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
     /**
      * Return the current feed key
      *
-     * @return unknown
+     * @return int
      */
     public function key()
     {

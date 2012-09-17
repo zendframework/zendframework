@@ -81,7 +81,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     /**
      * Normalize type attribute of meta
      *
-     * @param $type type in CamelCase
+     * @param string $type type in CamelCase
      * @return string
      * @throws Exception\DomainException
      */

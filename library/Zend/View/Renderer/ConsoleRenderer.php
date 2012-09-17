@@ -27,7 +27,7 @@ use Zend\View\Resolver\ResolverInterface;
 class ConsoleRenderer implements RendererInterface, TreeRendererInterface
 {
     /**
-     * @var Zend\Filter\FilterChain
+     * @var FilterChain
      */
     protected $__filterChain;
 

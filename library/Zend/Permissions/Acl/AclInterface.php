@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -15,8 +16,8 @@ namespace Zend\Permissions\Acl;
  * @package    Zend_Permissions
  * @subpackage Acl
  */
-interface AclInterface {
-    
+interface AclInterface
+{
     /**
      * Returns true if and only if the Resource exists in the ACL
      *
@@ -26,7 +27,7 @@ interface AclInterface {
      * @return boolean
      */
     public function hasResource($resource);
-    
+
     /**
      * Returns true if and only if the Role has access to the Resource
      *
@@ -54,5 +55,4 @@ interface AclInterface {
      * @return boolean
      */
     public function isAllowed($role = null, $resource = null, $privilege = null);
-    
 }

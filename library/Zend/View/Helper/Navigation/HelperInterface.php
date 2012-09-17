@@ -12,7 +12,7 @@ namespace Zend\View\Helper\Navigation;
 
 use Zend\I18n\Translator\Translator;
 use Zend\Navigation;
-use Zend\Permissions\AclInterface;
+use Zend\Permissions\Acl;
 use Zend\View\Helper\HelperInterface as BaseHelperInterface;
 
 /**

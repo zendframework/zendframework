@@ -10,7 +10,6 @@
 
 namespace Zend\Code\Reflection;
 
-use Zend\Code\NameInformation;
 use Zend\Code\Scanner\CachingFileScanner;
 
 /**

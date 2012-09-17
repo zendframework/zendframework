@@ -14,7 +14,6 @@ use ArrayAccess;
 use Traversable;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\ApplicationInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;

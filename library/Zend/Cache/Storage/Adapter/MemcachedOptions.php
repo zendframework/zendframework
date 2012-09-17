@@ -10,7 +10,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Memcached as MemcachedResource;
 use Zend\Cache\Exception;
 use Zend\Validator\Hostname;
 

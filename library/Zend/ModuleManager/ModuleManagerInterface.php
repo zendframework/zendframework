@@ -11,7 +11,6 @@
 namespace Zend\ModuleManager;
 
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventsCapableInterface;
 
 /**
  * Module manager interface

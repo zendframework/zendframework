@@ -20,8 +20,9 @@ use Zend\Log\Writer\AbstractWriter;
 /**
  * Buffers all events until the strategy determines to flush them.
  *
- * @category Zend
- * @package Zend_Log
+ * @see        http://packages.python.org/Logbook/api/handlers.html#logbook.FingersCrossedHandler
+ * @category   Zend
+ * @package    Zend_Log
  * @subpackage Writer
  */
 class FingersCrossed extends AbstractWriter
@@ -68,13 +69,12 @@ class FingersCrossed extends AbstractWriter
         $this->writer = $writer;
 
         if (null === $filterOrPriority) {
-            $this->addFilter(new PriorityFilter(Logger::WARN));
+            $filterOrPriority = new PriorityFilter(Logger::WARN);
         } elseif (!$filterOrPriority instanceof FilterInterface) {
-            $this->addFilter(new PriorityFilter($filterOrPriority));
-        } else {
-            $this->addFilter($filterOrPriority);
+            $filterOrPriority = new PriorityFilter($filterOrPriority);
         }
 
+        $this->addFilter($filterOrPriority);
         $this->bufferSize = $bufferSize;
     }
 
@@ -113,22 +113,25 @@ class FingersCrossed extends AbstractWriter
      */
     protected function doWrite(array $event)
     {
-        if ($this->buffering) {
-            $this->buffer[] = $event;
-
-            if ($this->bufferSize > 0 && count($this->buffer) > $this->bufferSize) {
-                array_shift($this->buffer);
-            }
-
-            if ($this->isActivated($event)) {
-                $this->buffering = false;
-
-                foreach ($this->buffer as $bufferedEvent) {
-                    $this->writer->write($bufferedEvent);
-                }
-            }
-        } else {
+        if (!$this->buffering) {
             $this->writer->write($event);
+            return;
+        }
+        
+        $this->buffer[] = $event;
+
+        if ($this->bufferSize > 0 && count($this->buffer) > $this->bufferSize) {
+            array_shift($this->buffer);
+        }
+
+        if (!$this->isActivated($event)) {
+            return;
+        }
+        
+        $this->buffering = false;
+
+        foreach ($this->buffer as $bufferedEvent) {
+            $this->writer->write($bufferedEvent);
         }
     }
 

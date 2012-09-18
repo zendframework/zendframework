@@ -489,7 +489,7 @@ class Form extends Fieldset implements FormInterface
         $argv = func_get_args();
         $this->hasValidated = false;
 
-        if (1 < $argc) {
+        if ($argc > 1) {
             $this->validationGroup = $argv;
             return $this;
         }

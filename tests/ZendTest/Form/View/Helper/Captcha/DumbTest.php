@@ -76,4 +76,20 @@ class DumbTest extends CommonTestCase
         $this->assertContains('>' . $this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator(), $markup);
     }
 
+    public function testSetCaptchaPositionWithNullRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->helper->setCaptchaPosition(null);
+
+    }
+
+    public function testSetSeparator()
+    {
+        $this->helper->setCaptchaPosition('prepend');
+        $element = $this->getElement();
+        $this->helper->render($element);
+        $this->helper->setSeparator('-');
+
+        $this->assertEquals('-', $this->helper->getSeparator());
+    }
 }

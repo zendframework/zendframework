@@ -172,4 +172,19 @@ class SelectTest extends TestCase
         ));
         $this->assertEquals($valueOptions, $element->getValueOptions());
     }
+
+    public function testSetOptionsOptions()
+    {
+        $element = new SelectElement();
+        $element->setOptions(array(
+                                  'value_options' => array('bar' => 'baz'),
+                                  'options' => array('foo' => 'bar'),
+                                  'empty_option' => array('baz' => 'foo'),
+                             ));
+        $this->assertEquals(array('bar' => 'baz'), $element->getOption('value_options'));
+        $this->assertEquals(array('foo' => 'bar'), $element->getOption('options'));
+        $this->assertEquals(array('baz' => 'foo'), $element->getOption('empty_option'));
+    }
+
+
 }

@@ -106,6 +106,18 @@ class FormRowTest extends TestCase
         $this->assertContains("<label>", $markup);
     }
 
+
+    public function testRenderAttributeId()
+    {
+        $element = new Element\Text('foo');
+        $element->setAttribute('type', 'text');
+        $element->setAttribute('id', 'textId');
+        $element->setLabel('This is a text');
+        $markup = $this->helper->render($element);
+        $this->assertContains('<label for="textId">This is a text</label>', $markup);
+        $this->assertContains('<input type="text" name="foo" id="textId"', $markup);
+    }
+
     public function testCanRenderErrors()
     {
         $element  = new Element('foo');
@@ -186,8 +198,6 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
-
-
     public function testTranslatorMethods()
     {
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
@@ -200,5 +210,51 @@ class FormRowTest extends TestCase
 
         $this->helper->setTranslatorEnabled(false);
         $this->assertFalse($this->helper->isTranslatorEnabled());
+    }
+
+    public function testInvokeSetLabelPositionToAppend()
+    {
+        $element = new Element('foo');
+        $this->helper->__invoke($element, 'append');
+
+        $this->assertSame('append', $this->helper->getLabelPosition());
+    }
+
+    public function testSetLabelPositionInputNullRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->helper->setLabelPosition(null);
+    }
+
+    public function testGetLabelPositionReturnsDefaultPrepend()
+    {
+        $labelPosition = $this->helper->getLabelPosition();
+        $this->assertEquals('prepend', $labelPosition);
+    }
+
+    public function testGetLabelPositionReturnsAppend()
+    {
+        $this->helper->setLabelPosition('append');
+        $labelPosition = $this->helper->getLabelPosition();
+        $this->assertEquals('append', $labelPosition);
+    }
+
+    public function testGetRenderErrorsReturnsDefaultTrue()
+    {
+        $renderErrors = $this->helper->getRenderErrors();
+        $this->assertTrue($renderErrors);
+    }
+
+    public function testGetRenderErrorsSetToFalse()
+    {
+        $this->helper->setRenderErrors(false);
+        $renderErrors = $this->helper->getRenderErrors();
+        $this->assertFalse($renderErrors);
+    }
+
+    public function testSetLabelAttributes()
+    {
+        $this->helper->setLabelAttributes(array('foo', 'bar'));
+        $this->assertEquals(array(0 => 'foo', 1 => 'bar'), $this->helper->getLabelAttributes());
     }
 }

@@ -113,4 +113,15 @@ class MultiCheckboxTest extends TestCase
         $this->assertArrayHasKey('type', $attributes);
         $this->assertEquals('multi_checkbox', $attributes['type']);
     }
+
+    public function testSetOptionsOptions()
+    {
+        $element = new MultiCheckboxElement();
+        $element->setOptions(array(
+                                  'value_options' => array('bar' => 'baz'),
+                                  'options' => array('foo' => 'bar'),
+                             ));
+        $this->assertEquals(array('bar' => 'baz'), $element->getOption('value_options'));
+        $this->assertEquals(array('foo' => 'bar'), $element->getOption('options'));
+    }
 }

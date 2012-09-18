@@ -184,6 +184,15 @@ class FormElementTest extends TestCase
         $this->assertContains('>Initial content<', $markup);
     }
 
+    public function testRendersCollectionAsExpected()
+    {
+        $element = new Element\Collection();
+        $element->setLabel('foo');
+
+        $markup  = $this->helper->render($element);
+        $this->assertContains('<legend>foo</legend>', $markup);
+    }
+
     public function testRendersButtonAsExpected()
     {
         $element = new Element\Button('foo');

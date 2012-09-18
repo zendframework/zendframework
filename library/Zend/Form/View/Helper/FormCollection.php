@@ -148,7 +148,7 @@ class FormCollection extends AbstractHelper
      */
     public function shouldWrap()
     {
-        return $this->shouldWrap();
+        return $this->shouldWrap;
     }
 
     /**

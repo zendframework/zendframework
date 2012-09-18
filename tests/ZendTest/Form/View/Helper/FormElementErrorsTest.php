@@ -99,6 +99,19 @@ class FormElementErrorsTest extends CommonTestCase
         $this->assertContains('ul class="error"', $markup);
     }
 
+    public function testGetAttributes()
+    {
+        $messages = $this->getMessageList();
+        $element  = new Element('foo');
+        $element->setMessages($messages);
+
+        $this->helper->setAttributes(array('class' => 'error'));
+
+        $this->helper->render($element);
+
+        $this->assertEquals(array('class' => 'error'), $this->helper->getAttributes());
+    }
+
     public function testRendersNestedMessageSetsAsAFlatList()
     {
         $messages = array(

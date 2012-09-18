@@ -56,7 +56,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
                 $name
             ));
         }
-        
+
         return $this->strategies['*'];
     }
 

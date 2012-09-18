@@ -96,7 +96,7 @@ abstract class AbstractTableObject
      */
     public function getConstraints()
     {
-        return $this->columns;
+        return $this->constraints;
     }
 
     /**

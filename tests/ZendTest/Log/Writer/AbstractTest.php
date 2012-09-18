@@ -70,13 +70,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($instance instanceof ConcreteWriter);
     }
-    
+
     public function testConvertErrorsToException()
     {
         $writer = new ErrorGeneratingWriter();
         $this->setExpectedException('Zend\Log\Exception\RuntimeException');
         $writer->write(array('message' => 'test'));
-        
+
         $writer->setConvertWriteErrorsToExceptions(false);
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
         $writer->write(array('message' => 'test'));

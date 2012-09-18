@@ -42,17 +42,17 @@ abstract class AbstractWriter implements WriterInterface
      * @var Formatter
      */
     protected $formatter;
-    
+
     /**
      * Use Zend\Stdlib\ErrorHandler to report errors during calls to write
-     * 
+     *
      * @var bool
      */
     protected $convertWriteErrorsToExceptions = true;
-    
+
     /**
      * Error level passed to Zend\Stdlib\ErrorHandler::start for errors reported during calls to write
-     * 
+     *
      * @var bool
      */
     protected $errorsToExceptionsConversionLevel = E_WARNING;
@@ -150,31 +150,29 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $errorHandlerStarted = false;
-       
+
         if ($this->convertWriteErrorsToExceptions && !ErrorHandler::started()) {
             ErrorHandler::start($this->errorsToExceptionsConversionLevel);
             $errorHandlerStarted = true;
         }
-        
+
         try {
             $this->doWrite($event);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             if ($errorHandlerStarted) {
                 ErrorHandler::stop();
                 $errorHandlerStarted = false;
             }
             throw $e;
         }
-        
+
         if ($errorHandlerStarted) {
             $error = ErrorHandler::stop();
             $errorHandlerStarted = false;
             if ($error) {
                 throw new Exception\RuntimeException("Unable to write", 0, $error);
             }
-        }   
+        }
     }
 
     /**
@@ -188,7 +186,7 @@ abstract class AbstractWriter implements WriterInterface
         $this->formatter = $formatter;
         return $this;
     }
-    
+
     /**
      * Set convert write errors to exception flag
      *

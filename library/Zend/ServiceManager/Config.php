@@ -64,7 +64,7 @@ class Config implements ConfigInterface
         if (($allowOverride = $this->getAllowOverride()) !== null) {
             $serviceManager->setAllowOverride($allowOverride);
         }
-        
+
         foreach ($this->getFactories() as $name => $factory) {
             $serviceManager->setFactory($name, $factory);
         }

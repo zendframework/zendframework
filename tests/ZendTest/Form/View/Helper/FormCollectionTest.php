@@ -114,4 +114,30 @@ class FormCollectionTest extends TestCase
         $this->assertContains('id="customcolors0"', $markup);
         $this->assertContains('id="customcolors1"', $markup);
     }
+
+    public function testShouldWrapReturnsDefaultTrue()
+    {
+        $this->assertTrue($this->helper->shouldWrap());
+    }
+
+    public function testSetShouldWrapReturnsFalse()
+    {
+        $this->helper->setShouldWrap(false);
+        $this->assertFalse($this->helper->shouldWrap());
+    }
+
+    public function testGetDefaultElementHelperReturnsFormrow()
+    {
+        $defaultElement = $this->helper->getDefaultElementHelper();
+        $this->assertSame('formrow', $defaultElement);
+    }
+
+    public function testSetDefaultElementHelperToFoo()
+    {
+        $this->helper->setDefaultElementHelper('foo');
+        $defaultElement = $this->helper->getDefaultElementHelper();
+        $this->assertSame('foo', $defaultElement);
+    }
+
+
 }

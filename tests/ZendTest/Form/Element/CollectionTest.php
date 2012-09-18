@@ -11,6 +11,7 @@
 namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Form\Element;
 use Zend\Form\Element\Collection as Collection;
 use Zend\Form\Factory;
 
@@ -180,4 +181,56 @@ class CollectionTest extends TestCase
 
         $this->assertEquals(true, $this->form->isValid());
     }
+
+    public function testSetOptions()
+    {
+        $collection = $this->form->get('colors');
+        $element = new Element('foo');
+        $collection->setOptions(array(
+                                  'target_element' => $element,
+                                  'count' => 2,
+                                  'allow_add' => true,
+                                  'allow_remove' => false,
+                                  'should_create_template' => true,
+                                  'template_placeholder' => 'foo',
+                             ));
+        $this->assertInstanceOf('Zend\Form\Element', $collection->getOption('target_element'));
+        $this->assertEquals(2, $collection->getOption('count'));
+        $this->assertEquals(true, $collection->getOption('allow_add'));
+        $this->assertEquals(false, $collection->getOption('allow_remove'));
+        $this->assertEquals(true, $collection->getOption('should_create_template'));
+        $this->assertEquals('foo', $collection->getOption('template_placeholder'));
+    }
+
+    public function testSetObjectNullRaisesException()
+    {
+        $collection = $this->form->get('colors');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $collection->setObject(null);
+    }
+
+    public function testPopulateValuesNullRaisesException()
+    {
+        $collection = $this->form->get('colors');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $collection->populateValues(null);
+    }
+
+    public function testSetTargetElementNullRaisesException()
+    {
+        $collection = $this->form->get('colors');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $collection->setTargetElement(null);
+    }
+
+    public function testGetTargetElement()
+    {
+        $collection = $this->form->get('colors');
+        $element = new Element('foo');
+        $collection->setTargetElement($element);
+
+        $this->assertInstanceOf('Zend\Form\Element', $collection->getTargetElement());
+    }
+
+
 }

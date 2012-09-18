@@ -37,6 +37,13 @@ class FormCheckboxTest extends CommonTestCase
         return $element;
     }
 
+    public function testRaisesExceptionWhenNameIsNotPresentInElement()
+    {
+        $element = new Element\Checkbox();
+        $this->setExpectedException('Zend\Form\Exception\DomainException', 'name');
+        $this->helper->render($element);
+    }
+
     public function testUsesOptionsAttributeToGenerateCheckedAndUnCheckedValues()
     {
         $element = $this->getElement();

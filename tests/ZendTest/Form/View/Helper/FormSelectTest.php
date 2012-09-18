@@ -11,6 +11,7 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Form\Element;
 use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\View\Helper\FormSelect as FormSelectHelper;
 
@@ -102,6 +103,17 @@ class FormSelectTest extends CommonTestCase
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#option .*?value="value2" .*?disabled="disabled"#', $markup);
+    }
+
+    public function testCanMarkOptionsAsSelected()
+    {
+        $element = $this->getElement();
+        $options = $element->getValueOptions('options');
+        $options[1]['selected'] = true;
+        $element->setValueOptions($options);
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#option .*?value="value2" .*?selected="selected"#', $markup);
     }
 
     public function testOptgroupsAreCreatedWhenAnOptionHasAnOptionsKey()
@@ -309,5 +321,28 @@ class FormSelectTest extends CommonTestCase
         $markup = $this->helper->render($element);
 
         $this->assertNotContains('<option value=""></option>', $markup);
+    }
+
+    public function testRenderInputNotSelectElementRaisesException()
+    {
+        $element = new Element\Text('foo');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->helper->render($element);
+    }
+
+    public function testRenderElementWithNoNameRaisesException()
+    {
+        $element = new SelectElement();
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
+    }
+
+    public function testRenderElementWithNoValueOptionsRaisesException()
+    {
+        $element = new SelectElement('foo');
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
     }
 }

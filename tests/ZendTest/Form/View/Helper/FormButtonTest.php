@@ -68,6 +68,13 @@ class FormButtonTest extends CommonTestCase
         $this->helper->openTag($element);
     }
 
+    public function testOpenTagWithWrongElementRaisesException()
+    {
+        $element = new \arrayObject();
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'ArrayObject');
+        $this->helper->openTag($element);
+    }
+
     public function testGeneratesSubmitTypeWhenProvidedAnElementWithNoTypeAttribute()
     {
         $element = new Element('foo');

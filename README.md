@@ -32,7 +32,7 @@ Please see INSTALL.md.
 ### CONTRIBUTING
 
 If you wish to contribute to Zend Framework 2.0, please read both the
-README-DEV.md and README-GIT.md file.
+CONTRIBUTING.md and README-GIT.md file.
 
 ### QUESTIONS AND FEEDBACK
 

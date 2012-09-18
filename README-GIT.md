@@ -4,7 +4,7 @@
 
 Your first step is to establish a public repository from which we can
 pull your work into the master repository. You have two options: use
-github or other public site, or setup/use your own repository.
+GitHub or other public site, or setup/use your own repository.
 
 While you can use a private repository and utilize ``git format-patch`` to
 submit patches, this is discouraged as it does not facilitate public peer
@@ -13,7 +13,7 @@ review.
 ### Option 1: GitHub
 
  1. Setup a GitHub account (http://github.com/), if you haven't yet
- 2. Fork the ZF2 respository (http://github.com/zendframework/zf2)
+ 2. Fork the ZF2 repository (http://github.com/zendframework/zf2)
  3. Clone your fork locally and enter it (use your own GitHub username
     in the statement below)
 
@@ -80,7 +80,7 @@ To reduce the number of red Travis-CI builds, the following Git pre-commit hook
 can help catch code style issues before committing. Save it as
 ```.git/hooks/pre-commit```, and make sure it is executable.
 
-```sh
+```php
 #!/usr/bin/env php
 <?php
 /**

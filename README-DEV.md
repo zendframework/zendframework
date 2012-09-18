@@ -23,10 +23,6 @@ page, http://framework.zend.com/wiki/display/ZFDEV2/RFC%27s.
 
 ## RUNNING TESTS
 
-The full test suite currently does not run! This is due to some
-components not yet being migrated to namespaces, as well as to some
-issues we've encountered in refactoring.
-
 To run tests:
 
 - Make sure you have a recent version of PHPUnit installed; 3.6.0

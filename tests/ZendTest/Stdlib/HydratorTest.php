@@ -179,6 +179,16 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->hasBar(), false);
     }
 
+    public function testHydratorClassMethodsOptions()
+    {
+        $hydrator = new ClassMethods();
+        $this->assertTrue($hydrator->getUnderscoreSeparatedKeys());
+        $hydrator->setOptions(array('underscoreSeparatedKeys' => false));
+        $this->assertFalse($hydrator->getUnderscoreSeparatedKeys());
+        $hydrator->setUnderscoreSeparatedKeys(true);
+        $this->assertTrue($hydrator->getUnderscoreSeparatedKeys());
+    }
+
     public function testHydratorClassMethodsIgnoresInvalidValues()
     {
         $hydrator = new ClassMethods(true);

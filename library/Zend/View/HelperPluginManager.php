@@ -64,6 +64,7 @@ class HelperPluginManager extends AbstractPluginManager
         'partialloop'         => 'Zend\View\Helper\PartialLoop',
         'partial'             => 'Zend\View\Helper\Partial',
         'placeholder'         => 'Zend\View\Helper\Placeholder',
+        'plural'              => 'Zend\View\Helper\Plural',
         'renderchildmodel'    => 'Zend\View\Helper\RenderChildModel',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',

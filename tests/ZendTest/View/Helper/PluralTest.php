@@ -37,13 +37,13 @@ class PluralTest extends TestCase
 
     public function testVerifySingularString()
     {
-        $result = $this->helper->__invoke(1, 'one car', 'two cars');
+        $result = $this->helper->__invoke('one car', 'two cars', 1);
         $this->assertEquals('one car', $result);
     }
 
     public function testVerifyPluralString()
     {
-        $result = $this->helper->__invoke(2, 'one car', 'two cars');
+        $result = $this->helper->__invoke('one car', 'two cars', 2);
         $this->assertEquals('two cars', $result);
     }
 }

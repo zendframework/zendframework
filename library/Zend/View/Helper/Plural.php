@@ -22,12 +22,12 @@ use Zend\View\Helper\AbstractHelper;
 class Plural extends AbstractHelper
 {
     /**
-     * @param int    $number    The number that is used to decide if it's singular or plurial
      * @param string $singular  String to use if singular
      * @param string $plural    String to use if plural
+     * @param int    $number    The number that is used to decide if it's singular or plurial
      * @return string
      */
-    public function __invoke($number, $singular, $plural)
+    public function __invoke($singular, $plural, $number)
     {
         if ($number > 1) {
             return $plural;

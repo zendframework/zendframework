@@ -123,8 +123,10 @@ class Float extends AbstractValidator
         $valueFiltered = str_replace($groupingSep, '', $value);
         $valueFiltered = str_replace($decimalSep, '.', $valueFiltered);
 
-        while (strpos($valueFiltered,'.') !== false && (substr($valueFiltered,-1) == '0' || substr($valueFiltered,-1) == '.')) {
-            $valueFiltered = substr($valueFiltered, 0, strlen($valueFiltered)-1);
+        while (strpos($valueFiltered, '.') !== false
+               && (substr($valueFiltered, -1) == '0' || substr($valueFiltered, -1) == '.')
+        ) {
+            $valueFiltered = substr($valueFiltered, 0, strlen($valueFiltered) - 1);
         }
 
         if (strval($parsedFloat) !== $valueFiltered) {

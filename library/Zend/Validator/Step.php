@@ -142,8 +142,9 @@ class Step extends AbstractValidator
      * @param float $y
      * @return float
      */
-    protected function fmod($x, $y) {
-        if($y == 0.0) {
+    protected function fmod($x, $y)
+    {
+        if ($y == 0.0) {
             return 1.0;
         }
         return $x - $y * floor($x / $y);

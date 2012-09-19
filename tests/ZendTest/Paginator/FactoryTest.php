@@ -22,10 +22,34 @@ use ZendTest\Paginator\TestAsset\TestArrayAggregate;
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
+    protected $mockSelect;
+    
+    protected $mockAdapter;
+    
+    protected function setUp()
+    {
+        $this->mockSelect = $this->getMock('Zend\Db\Sql\Select');
+        
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
+        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
+        $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
+        
+        $this->mockAdapter = $this->getMockForAbstractClass(
+            'Zend\Db\Adapter\Adapter',
+            array($mockDriver, $mockPlatform)
+        );
+    }
+    
     public function testCanFactoryPaginatorWithStringAdapterObject()
     {
         $datas = array(1, 2, 3);
-        $paginator = Paginator\Factory::Factory($datas, new Adapter\ArrayAdapter($datas));
+        $paginator = Paginator\Factory::factory($datas, new Adapter\ArrayAdapter($datas));
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
         $this->assertEquals(count($datas), $paginator->getCurrentItemCount());
     }
@@ -33,14 +57,20 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCanFactoryPaginatorWithStringAdapterName()
     {
         $datas = array(1, 2, 3);
-        $paginator = Paginator\Factory::Factory($datas, 'array');
+        $paginator = Paginator\Factory::factory($datas, 'array');
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
         $this->assertEquals(count($datas), $paginator->getCurrentItemCount());
     }
     
     public function testCanFactoryPaginatorWithStringAdapterAggregate()
     {
-        $paginator = Paginator\Factory::Factory(null, new TestArrayAggregate);
+        $paginator = Paginator\Factory::factory(null, new TestArrayAggregate);
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
+    }
+    
+    public function testCanFactoryPaginatorWithDbSelect()
+    {
+        $paginator = Paginator\Factory::factory(array($this->mockSelect, $this->mockAdapter), 'dbselect');
+        $this->assertInstanceOf('Zend\Paginator\Adapter\DbSelect', $paginator->getAdapter());
     }
 }

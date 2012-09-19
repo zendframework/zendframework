@@ -127,11 +127,25 @@ class Step extends AbstractValidator
 
         $this->setValue($value);
 
-        if (fmod($value - $this->baseValue, $this->step) !== 0.0) {
+        if ($this->fmod($value - $this->baseValue, $this->step) !== 0.0) {
             $this->error(self::NOT_STEP);
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * replaces the internal fmod function which give wrong results on many cases
+     *
+     * @param float $x
+     * @param float $y
+     * @return float
+     */
+    protected function fmod($x, $y) {
+        if($y == 0.0) {
+            return 1.0;
+        }
+        return $x-$y*floor($x/$y);
     }
 }

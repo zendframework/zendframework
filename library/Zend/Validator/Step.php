@@ -146,6 +146,6 @@ class Step extends AbstractValidator
         if($y == 0.0) {
             return 1.0;
         }
-        return $x-$y*floor($x/$y);
+        return $x - $y * floor($x / $y);
     }
 }

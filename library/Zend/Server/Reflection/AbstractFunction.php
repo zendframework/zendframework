@@ -79,7 +79,11 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param ReflectionFunction $r
+     * @param \Reflector $r
+     * @param null|string $namespace
+     * @param null|array $argv
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function __construct(\Reflector $r, $namespace = null, $argv = array())
     {
@@ -166,7 +170,7 @@ abstract class AbstractFunction
      *
      * @param array $return Array of return types
      * @param string $returnDesc Return value description
-     * @param array $params Array of arguments (each an array of types)
+     * @param array $paramTypes Array of arguments (each an array of types)
      * @param array $paramDesc Array of parameter descriptions
      * @return array
      */
@@ -226,7 +230,7 @@ abstract class AbstractFunction
      * comment. Determines method signatures using a combination of
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
-     * @param ReflectionFunction $function
+     * @throws Exception\RuntimeException
      * @return array
      */
     protected function _reflect()
@@ -264,7 +268,7 @@ abstract class AbstractFunction
             // Get param types and description
             if (preg_match_all('/@param\s+([^\s]+)/m', $docBlock, $matches)) {
                 $paramTypesTmp = $matches[1];
-                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
+                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(?=@|\*\/)/s', $docBlock, $matches)) {
                     $paramDesc = $matches[2];
                     foreach ($paramDesc as $key => $value) {
                         $value = preg_replace('/\s?\*\s/m', '', $value);
@@ -276,6 +280,16 @@ abstract class AbstractFunction
         } else {
             $helpText = $function->getName();
             $return   = 'void';
+
+            // Try and auto-determine type, based on reflection
+            $paramTypesTmp = array();
+            foreach ($parameters as $i => $param) {
+                $paramType = 'mixed';
+                if ($param->isArray()) {
+                    $paramType = 'array';
+                }
+                $paramTypesTmp[$i] = $paramType;
+            }
         }
 
         // Set method description
@@ -329,6 +343,7 @@ abstract class AbstractFunction
      *
      * @param string $method
      * @param array $args
+     * @throws Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, $args)
@@ -337,7 +352,7 @@ abstract class AbstractFunction
             return call_user_func_array(array($this->reflection, $method), $args);
         }
 
-        throw new Exception\BadMethodCallException('Invalid reflection method ("' .$method. '")');
+        throw new Exception\BadMethodCallException('Invalid reflection method ("' . $method . '")');
     }
 
     /**
@@ -376,6 +391,7 @@ abstract class AbstractFunction
      * Set method's namespace
      *
      * @param string $namespace
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setNamespace($namespace)
@@ -406,6 +422,7 @@ abstract class AbstractFunction
      * Set the description
      *
      * @param string $string
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setDescription($string)
@@ -420,7 +437,7 @@ abstract class AbstractFunction
     /**
      * Retrieve the description
      *
-     * @return void
+     * @return string
      */
     public function getDescription()
     {

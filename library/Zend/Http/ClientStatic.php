@@ -26,7 +26,7 @@ class ClientStatic
     /**
      * Get the static HTTP client
      *
-     * @return Zend\Http\Client
+     * @return Client
      */
     protected static function getStaticClient()
     {
@@ -42,9 +42,10 @@ class ClientStatic
      * @param  string $url
      * @param  array $query
      * @param  array $headers
+     * @param  mixed $body
      * @return Response|boolean
      */
-    public static function get($url, $query=array(), $headers=array(), $body=null)
+    public static function get($url, $query = array(), $headers = array(), $body = null)
     {
         if (empty($url)) {
             return false;
@@ -68,15 +69,18 @@ class ClientStatic
 
         return self::getStaticClient()->send($request);
     }
+
     /**
      * HTTP POST METHOD (static)
      *
      * @param  string $url
      * @param  array $params
      * @param  array $headers
+     * @param  mixed $body
+     * @throws Exception\InvalidArgumentException
      * @return Response|boolean
      */
-    public static function post($url, $params, $headers=array(), $body=null)
+    public static function post($url, $params, $headers = array(), $body = null)
     {
         if (empty($url)) {
             return false;

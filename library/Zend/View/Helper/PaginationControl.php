@@ -67,7 +67,7 @@ class PaginationControl extends AbstractHelper
     /**
      * Sets the default Scrolling Style
      *
-     * @param type $style string 'all' | 'elastic' | 'sliding' | 'jumping'
+     * @param string $style string 'all' | 'elastic' | 'sliding' | 'jumping'
      */
     public static function setDefaultScrollingStyle($style)
     {

@@ -10,6 +10,7 @@
 
 namespace Zend\Authentication\Adapter;
 
+use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\ResultSet\ResultSet;
@@ -272,7 +273,7 @@ class DbTable implements AdapterInterface
             return false;
         }
 
-        $returnObject = new \stdClass();
+        $returnObject = new stdClass();
 
         if (null !== $returnColumns) {
 
@@ -294,14 +295,12 @@ class DbTable implements AdapterInterface
             }
             return $returnObject;
 
-        } else {
-
-            foreach ($this->resultRow as $resultColumn => $resultValue) {
-                $returnObject->{$resultColumn} = $resultValue;
-            }
-            return $returnObject;
-
         }
+
+        foreach ($this->resultRow as $resultColumn => $resultValue) {
+            $returnObject->{$resultColumn} = $resultValue;
+        }
+        return $returnObject;
     }
 
     /**

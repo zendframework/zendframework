@@ -30,6 +30,7 @@ class Http extends AbstractAdapter
      * Constructor for Http File Transfers
      *
      * @param array $options OPTIONAL Options to set
+     * @throws Exception\PhpEnvironmentException if file uploads are not allowed
      */
     public function __construct($options = array())
     {
@@ -71,9 +72,8 @@ class Http extends AbstractAdapter
     }
 
     /**
-     * Remove an individual validator
+     * Clear the validators
      *
-     * @param  string $name
      * @return AbstractAdapter
      */
     public function clearValidators()
@@ -206,7 +206,7 @@ class Http extends AbstractAdapter
     /**
      * Checks if the file was already sent
      *
-     * @param  string|array $file Files to check
+     * @param  string|array $files Files to check
      * @return boolean
      * @throws Exception\BadMethodCallException Not implemented
      */
@@ -262,7 +262,7 @@ class Http extends AbstractAdapter
     /**
      * Has a file been uploaded ?
      *
-     * @param  array|string|null $file
+     * @param  array|string|null $files
      * @return boolean
      */
     public function isUploaded($files = null)
@@ -287,6 +287,7 @@ class Http extends AbstractAdapter
      * @param  string|array $id The upload to get the progress for
      * @return array|null
      * @throws Exception\PhpEnvironmentException whether APC nor UploadProgress extension installed
+     * @throws Exception\RuntimeException
      */
     public static function getProgress($id = null)
     {

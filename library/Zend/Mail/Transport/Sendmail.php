@@ -179,7 +179,12 @@ class Sendmail implements TransportInterface
      */
     protected function prepareSubject(Mail\Message $message)
     {
-        return $message->getSubject();
+        $headers = $message->getHeaders();
+        if (!$headers->has('subject')) {
+            return null;
+        }
+        $header = $headers->get('subject');
+        return $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 
     /**

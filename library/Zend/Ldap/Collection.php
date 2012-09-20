@@ -88,9 +88,8 @@ class Collection implements \Iterator, \Countable
         if ($this->count() > 0) {
             $this->rewind();
             return $this->current();
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -135,9 +134,8 @@ class Collection implements \Iterator, \Countable
                 $this->cache[$this->current] = $this->createEntry($current);
             }
             return $this->cache[$this->current];
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -163,9 +161,8 @@ class Collection implements \Iterator, \Countable
                 $this->rewind();
             }
             return $this->iterator->key();
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -181,9 +178,8 @@ class Collection implements \Iterator, \Countable
                 $this->rewind();
             }
             return $this->current;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -221,8 +217,7 @@ class Collection implements \Iterator, \Countable
     {
         if (isset($this->cache[$this->current])) {
             return true;
-        } else {
-            return $this->iterator->valid();
         }
+        return $this->iterator->valid();
     }
 }

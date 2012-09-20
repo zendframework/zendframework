@@ -143,6 +143,7 @@ class Response
      * is a fault response.
      *
      * @param string $response
+     * @throws Exception\ValueException if invalid XML
      * @return boolean True if a valid XMLRPC response, false if a fault
      * response or invalid input
      */

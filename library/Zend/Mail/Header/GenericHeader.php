@@ -37,11 +37,11 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        $parts = explode(': ', $decodedLine, 2);
+        $parts = explode(':', $decodedLine, 2);
         if (count($parts) != 2) {
             throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
         }
-        $header = new static($parts[0], $parts[1]);
+        $header = new static($parts[0], ltrim($parts[1]));
         if ($decodedLine != $headerLine) {
             $header->setEncoding('UTF-8');
         }
@@ -140,6 +140,6 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         $name  = $this->getFieldName();
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
 
-        return $name. ': ' . $value;
+        return $name . ': ' . $value;
     }
 }

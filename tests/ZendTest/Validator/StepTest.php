@@ -96,6 +96,7 @@ class StepTest extends \PHPUnit_Framework_TestCase
             array(0.1, false),
             array(2.1, true),
             array(3.1, false),
+            array(10.5, true),
             array('2.1', true),
             array('1.1', false),
             array(1.11, false),

@@ -107,6 +107,8 @@ class Sqlsrv implements DriverInterface
 
     /**
      * Check environment
+     *
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function checkEnvironment()
@@ -125,7 +127,7 @@ class Sqlsrv implements DriverInterface
     }
 
     /**
-     * @param string $sql
+     * @param string|resource $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)

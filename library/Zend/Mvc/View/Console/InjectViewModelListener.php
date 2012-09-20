@@ -10,11 +10,7 @@
 
 namespace Zend\Mvc\View\Console;
 
-use Zend\EventManager\EventManagerInterface as Events;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use Zend\View\Model\ModelInterface as ViewModel;
 use Zend\Mvc\View\Http\InjectViewModelListener as HttpInjectViewModelListener;
 
 class InjectViewModelListener extends HttpInjectViewModelListener implements ListenerAggregateInterface

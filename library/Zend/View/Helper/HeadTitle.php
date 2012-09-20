@@ -90,7 +90,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      * Set a default order to add titles
      *
      * @param string $setType
-     * @return void
+     * @return HeadTitle
      * @throws Exception\DomainException
      */
     public function setDefaultAttachOrder($setType)

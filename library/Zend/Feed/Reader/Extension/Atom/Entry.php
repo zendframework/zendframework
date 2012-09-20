@@ -453,6 +453,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Returns a URI pointing to a feed of all comments for this entry
      *
+     * @param string $type
      * @return string
      */
     public function getCommentFeedLink($type = 'atom')
@@ -464,7 +465,7 @@ class Entry extends Extension\AbstractEntry
         $link = null;
 
         $list = $this->getXpath()->query(
-            $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/'.$type.'+xml"]/@href'
+            $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/' . $type.'+xml"]/@href'
         );
 
         if ($list->length) {
@@ -612,6 +613,8 @@ class Entry extends Extension\AbstractEntry
 
     /**
      * Detect the presence of any Atom namespaces in use
+     *
+     * @return string
      */
     protected function getAtomType()
     {

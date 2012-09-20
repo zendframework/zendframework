@@ -10,6 +10,7 @@
 
 namespace Zend\Json;
 
+use SimpleXMLElement;
 use Zend\Json\Exception\RecursionException;
 use Zend\Json\Exception\RuntimeException;
 
@@ -51,7 +52,7 @@ class Json
      * @param int $objectDecodeType Optional; flag indicating how to decode
      * objects. See {@link Zend_Json_Decoder::decode()} for details.
      * @return mixed
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     public static function decode($encodedValue, $objectDecodeType = self::TYPE_OBJECT)
     {
@@ -192,7 +193,7 @@ class Json
      * if it matches, we return a new Zend_Json_Expr instead of a text node
      *
      * @param SimpleXMLElement $simpleXmlElementObject
-     * @return Zend_Json_Expr|string
+     * @return Expr|string
      */
     protected static function _getXmlValue($simpleXmlElementObject)
     {
@@ -201,10 +202,10 @@ class Json
         $match     = preg_match($pattern, $simpleXmlElementObject, $matchings);
         if ($match) {
             return new Expr($matchings[1]);
-        } else {
-            return (trim(strval($simpleXmlElementObject)));
         }
+        return (trim(strval($simpleXmlElementObject)));
     }
+
     /**
      * _processXml - Contains the logic for xml2json
      *
@@ -219,11 +220,10 @@ class Json
      * calling a recursive (protected static) function in this class. Once all
      * the XML elements are stored in the PHP array, it is returned to the caller.
      *
-     * Throws a Zend\Json\RecursionException if the XML tree is deeper than the allowed limit.
-     *
      * @param SimpleXMLElement $simpleXmlElementObject
      * @param boolean $ignoreXmlAttributes
      * @param integer $recursionDepth
+     * @throws Exception\RecursionException if the XML tree is deeper than the allowed limit.
      * @return array
      */
     protected static function _processXml($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth = 0)
@@ -259,7 +259,7 @@ class Json
         $childArray = array();
         foreach ($children as $child) {
             $childname = $child->getName();
-            $element   = self::_processXml($child,$ignoreXmlAttributes,$recursionDepth + 1);
+            $element   = self::_processXml($child, $ignoreXmlAttributes, $recursionDepth + 1);
             if (array_key_exists($childname, $childArray)) {
                 if (empty($subChild[$childname])) {
                     $childArray[$childname] = array($childArray[$childname]);

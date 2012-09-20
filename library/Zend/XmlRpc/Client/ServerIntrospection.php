@@ -65,6 +65,7 @@ class ServerIntrospection
      * can significantly improve performance if present.
      *
      * @param  array $methods
+     * @throws Exception\IntrospectException
      * @return array array(array(return, param, param, param...))
      */
     public function getSignatureForEachMethodByMulticall($methods = null)
@@ -126,6 +127,7 @@ class ServerIntrospection
      * Call system.methodSignature() for the given method
      *
      * @param  array  $method
+     * @throws Exception\IntrospectException
      * @return array  array(array(return, param, param, param...))
      */
     public function getMethodSignature($method)
@@ -141,7 +143,6 @@ class ServerIntrospection
     /**
      * Call system.listMethods()
      *
-     * @param  array  $method
      * @return array  array(method, method, method...)
      */
     public function listMethods()

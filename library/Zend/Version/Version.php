@@ -23,7 +23,17 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.1.0dev';
+    const VERSION = '2.0.1';
+
+    /**
+     * Github Service Identifier for version information is retreived from
+     */
+    const VERSION_SERVICE_GITHUB = 'GITHUB';
+
+    /**
+     * Github Service Identifier for version information is retreived from
+     */
+    const VERSION_SERVICE_ZEND = 'ZEND';
 
     /**
      * The latest stable version Zend Framework available
@@ -52,32 +62,46 @@ final class Version
     /**
      * Fetches the version of the latest stable release.
      *
-     * This uses the GitHub API (v3) and only returns refs that begin with
+     * By Default, this uses the GitHub API (v3) and only returns refs that begin with
      * 'tags/release-'. Because GitHub returns the refs in alphabetical order,
      * we need to reduce the array to a single value, comparing the version
      * numbers with version_compare().
      *
+     * If $service is set to VERSION_SERVICE_ZEND this will fall back to calling the
+     * classic style of version retreival.
+     *
+     *
      * @see http://developer.github.com/v3/git/refs/#get-all-references
      * @link https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-
+     * @link http://framework.zend.com/api/zf-version?v=2
+     * @param string $service Version Service with which to retrieve the version
      * @return string
      */
-    public static function getLatest()
+    public static function getLatest($service = self::VERSION_SERVICE_GITHUB)
     {
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
-            $url  = 'https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-';
+            if ($service == self::VERSION_SERVICE_GITHUB) {
+                $url  = 'https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-';
 
-            $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
+                $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
 
-            // Simplify the API response into a simple array of version numbers
-            $tags = array_map(function($tag) {
-                return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
-            }, $apiResponse);
+                // Simplify the API response into a simple array of version numbers
+                $tags = array_map(function($tag) {
+                    return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
+                }, $apiResponse);
 
-            // Fetch the latest version number from the array
-            self::$latestVersion = array_reduce($tags, function($a, $b) {
-                return version_compare($a, $b, '>') ? $a : $b;
-            });
+                // Fetch the latest version number from the array
+                self::$latestVersion = array_reduce($tags, function($a, $b) {
+                    return version_compare($a, $b, '>') ? $a : $b;
+                });
+            } elseif($service == self::VERSION_SERVICE_ZEND) {
+                $handle = fopen('http://framework.zend.com/api/zf-version?v=2', 'r');
+                if (false !== $handle) {
+                    self::$_latestVersion = stream_get_contents($handle);
+                    fclose($handle);
+                }
+            }
         }
 
         return self::$latestVersion;

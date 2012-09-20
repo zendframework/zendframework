@@ -90,7 +90,7 @@ class Sitemap extends AbstractHelper
      * Helper entry point
      *
      * @param  string|AbstractContainer $container container to operate on
-     * @return Navigation
+     * @return Sitemap
      */
     public function __invoke($container = null)
     {
@@ -444,10 +444,10 @@ class Sitemap extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  link|AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the
-     *                              helper.
-     * @return string               helper output
+     * @param  AbstractContainer $container [optional] container to render. Default is
+     *                           to render the container registered in the
+     *                           helper.
+     * @return string            helper output
      */
     public function render($container = null)
     {

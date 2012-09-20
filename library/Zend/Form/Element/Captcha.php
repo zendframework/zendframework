@@ -50,6 +50,7 @@ class Captcha extends Element implements InputProviderInterface
      * Set captcha
      *
      * @param  array|ZendCaptcha\AdapterInterface $captcha
+     * @throws Exception\InvalidArgumentException
      * @return Captcha
      */
     public function setCaptcha($captcha)

@@ -175,11 +175,6 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if ('time' == $type) {
-            $helper = $renderer->plugin('form_time');
-            return $helper($element);
-        }
-
         if ('url' == $type) {
             $helper = $renderer->plugin('form_url');
             return $helper($element);

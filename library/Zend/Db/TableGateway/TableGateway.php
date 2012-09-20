@@ -32,6 +32,7 @@ class TableGateway extends AbstractTableGateway
      * @param Feature\AbstractFeature|Feature\FeatureSet|Feature\AbstractFeature[] $features
      * @param ResultSetInterface $resultSetPrototype
      * @param Sql $sql
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($table, Adapter $adapter, $features = null, ResultSetInterface $resultSetPrototype = null, Sql $sql = null)
     {

@@ -10,7 +10,6 @@
 
 namespace Zend\Memory;
 
-use Zend\Cache\Storage\ClearByNamespaceInterface;
 use Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
 use Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
@@ -362,7 +361,7 @@ class MemoryManager
     /**
      * Check and swap objects if necessary
      *
-     * @throws Zend_MemoryException
+     * @throws Exception\RuntimeException
      */
     private function _swapCheck()
     {

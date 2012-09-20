@@ -22,12 +22,12 @@ use Zend\Feed\Reader;
 class PodcastRss2Test extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
+        $this->feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
     }
 
     /**
@@ -37,7 +37,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsNewFeedUrl()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://newlocation.com/example.rss', $feed->getNewFeedUrl());
     }
@@ -45,7 +45,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsOwner()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('john.doe@example.com (John Doe)', $feed->getOwner());
     }
@@ -53,7 +53,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsCategories()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array(
             'Technology' => array(
@@ -66,7 +66,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsTitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('All About Everything', $feed->getTitle());
     }
@@ -74,7 +74,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsCastAuthor()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('John Doe', $feed->getCastAuthor());
     }
@@ -82,7 +82,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsFeedBlock()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('no', $feed->getBlock());
     }
@@ -90,7 +90,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsCopyright()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('℗ & © 2005 John Doe & Family', $feed->getCopyright());
     }
@@ -98,7 +98,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsDescription()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('All About Everything is a show about everything.
             Each week we dive into any subject known to man and talk
@@ -109,7 +109,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsLanguage()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('en-us', $feed->getLanguage());
     }
@@ -117,7 +117,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://www.example.com/podcasts/everything/index.html', $feed->getLink());
     }
@@ -125,7 +125,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
@@ -133,7 +133,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsFeedExplicit()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('yes', $feed->getExplicit());
     }
@@ -141,7 +141,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryCount()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(3, $feed->count());
     }
@@ -149,7 +149,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsImage()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getItunesImage());
     }
@@ -161,7 +161,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryBlock()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('yes', $entry->getBlock());
@@ -170,7 +170,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://example.com/podcasts/archive/aae20050615.m4a', $entry->getId());
@@ -179,7 +179,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryTitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('Shake Shake Shake Your Spices', $entry->getTitle());
@@ -188,7 +188,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryCastAuthor()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('John Doe', $entry->getCastAuthor());
@@ -197,7 +197,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryExplicit()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('no', $entry->getExplicit());
@@ -206,7 +206,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsSubtitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('A short primer on table spices
@@ -216,7 +216,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsSummary()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('This week we talk about salt and pepper
@@ -228,7 +228,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsDuration()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('7:04', $entry->getDuration());
@@ -237,7 +237,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsKeywords()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('salt, pepper, shaker, exciting
@@ -247,7 +247,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
@@ -256,7 +256,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function testGetsEnclosure()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
 

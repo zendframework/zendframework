@@ -379,7 +379,7 @@ class Imap
     public function escapeList($list)
     {
         $result = array();
-        foreach ($list as $k => $v) {
+        foreach ($list as $v) {
             if (!is_array($v)) {
 //              $result[] = $this->escapeString($v);
                 $result[] = $v;

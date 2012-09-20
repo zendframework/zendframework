@@ -37,6 +37,7 @@ class CsrfTest extends TestCase
                     break;
                 default:
                     break;
+
             }
         }
     }
@@ -56,5 +57,19 @@ class CsrfTest extends TestCase
         $validator = $element->getCsrfValidator();
         $this->assertEquals('foo', $validator->getName());
         $this->assertEquals(777, $validator->getTimeout());
+    }
+
+    public function testAllowSettingCsrfOptions()
+    {
+        $element = new CsrfElement('foo');
+        $element->setOptions(array(
+            'csrf_options' => array(
+                'timeout' => 777,
+                'salt' => 'MySalt')
+            ));
+        $validator = $element->getCsrfValidator();
+        $this->assertEquals('foo', $validator->getName());
+        $this->assertEquals(777, $validator->getTimeOut());
+        $this->assertEquals('MySalt', $validator->getSalt());
     }
 }

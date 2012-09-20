@@ -583,7 +583,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         $translator      = $this->getTranslator();
         $this->messages = array();
         $break           = false;
-        foreach ($check as $key => $content) {
+        foreach ($check as $content) {
             if (array_key_exists('validators', $content) &&
                 in_array('Zend\Validator\File\Count', $content['validators'])) {
                 $validator = $this->validators['Zend\Validator\File\Count'];
@@ -885,8 +885,8 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     /**
      * Retrieves the filename of transferred files.
      *
-     * @param  string  $fileelement (Optional) Element to return the filename for
-     * @param  boolean $path        (Optional) Should the path also be returned ?
+     * @param  string  $file (Optional) Element to return the filename for
+     * @param  boolean $path (Optional) Should the path also be returned ?
      * @return string|array
      */
     public function getFileName($file = null, $path = true)
@@ -967,6 +967,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * Retrieve destination directory value
      *
      * @param  null|string|array $files
+     * @throws Exception\InvalidArgumentException
      * @return null|string|array
      */
     public function getDestination($files = null)

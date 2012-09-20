@@ -238,7 +238,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @param  array|Traversable $options [optional] page options. Default is
      *                                    null, which should set defaults.
-     * @throws Exception if invalid options are given
+     * @throws Exception\InvalidArgumentException if invalid options are given
      */
     public function __construct($options = null)
     {
@@ -475,6 +475,8 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @param  array|Traversable $relations  [optional] an associative array of
      *                           forward links to other pages
+     * @throws Exception\InvalidArgumentException if $relations is not an array
+     *                                            or Traversable object
      * @return AbstractPage fluent interface, returns self
      */
     public function setRel($relations = null)
@@ -539,6 +541,8 @@ abstract class AbstractPage extends AbstractContainer
      * @param  array|Traversable $relations [optional] an associative array of
      *                                      reverse links to other pages
      *
+     * @throws Exception\InvalidArgumentException if $relations it not an array
+     *                                            or Traversable object
      * @return AbstractPage fluent interface, returns self
      */
     public function setRev($relations = null)
@@ -811,6 +815,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @param  AbstractContainer $parent [optional] new parent to set.
      *                           Default is null which will set no parent.
+     * @throws Exception\InvalidArgumentException
      * @return AbstractPage fluent interface, returns self
      */
     public function setParent(AbstractContainer $parent = null)

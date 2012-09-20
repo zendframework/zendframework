@@ -18,8 +18,6 @@ class DashToUnderscore extends SeparatorToSeparator
 {
     /**
      * Constructor
-     *
-     * @param  string $separator Space by default
      */
     public function __construct()
     {

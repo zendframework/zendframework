@@ -28,7 +28,7 @@ class StringToUpper extends AbstractUnicode
     /**
      * Constructor
      *
-     * @param string|array|Traversable $options OPTIONAL
+     * @param string|array|Traversable $encodingOrOptions OPTIONAL
      */
     public function __construct($encodingOrOptions = null)
     {

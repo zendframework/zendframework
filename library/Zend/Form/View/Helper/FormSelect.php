@@ -57,6 +57,8 @@ class FormSelect extends AbstractHelper
      * Render a form <select> element from the provided $element
      *
      * @param  ElementInterface $element
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
@@ -76,13 +78,16 @@ class FormSelect extends AbstractHelper
             ));
         }
 
-
         $options = $element->getValueOptions();
         if (empty($options)) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has "value_options"; none found',
                 __METHOD__
             ));
+        }
+
+        if (($emptyOption = $element->getEmptyOption()) !== null) {
+            $options = array('' => $emptyOption) + $options;
         }
 
         $attributes = $element->getAttributes();

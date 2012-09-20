@@ -10,6 +10,7 @@
 
 namespace Zend\Filter;
 
+use Traversable;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -28,7 +29,7 @@ class RealPath extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param boolean|\Traversable $options Options to set
+     * @param boolean|Traversable $existsOrOptions Options to set
      */
     public function __construct($existsOrOptions = true)
     {

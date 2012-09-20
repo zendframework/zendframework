@@ -319,7 +319,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Get uri (from the request)
      *
-     * @return Zend\Uri\Http
+     * @return Http
      */
     public function getUri()
     {
@@ -449,13 +449,14 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @param array|ArrayIterator|Header\SetCookie|string $cookie
      * @param string  $value
-     * @param string  $version
-     * @param string  $maxAge
-     * @param string  $domain
      * @param string  $expire
      * @param string  $path
+     * @param string  $domain
      * @param boolean $secure
      * @param boolean $httponly
+     * @param string  $maxAge
+     * @param string  $version
+     * @throws Exception\InvalidArgumentException
      * @return Client
      */
     public function addCookie($cookie, $value = null, $expire = null, $path = null, $domain = null, $secure = false, $httponly = true, $maxAge = null, $version = null)
@@ -483,6 +484,7 @@ class Client implements Stdlib\DispatchableInterface
      * Set an array of cookies
      *
      * @param  array $cookies
+     * @throws Exception\InvalidArgumentException
      * @return Client
      */
     public function setCookies($cookies)
@@ -510,6 +512,7 @@ class Client implements Stdlib\DispatchableInterface
      * Set the headers (for the request)
      *
      * @param  Headers|array $headers
+     * @throws Exception\InvalidArgumentException
      * @return Client
      */
     public function setHeaders($headers)
@@ -585,6 +588,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Create temporary stream
      *
+     * @throws Exception\RuntimeException
      * @return resource
      */
     protected function openTempStream()
@@ -619,6 +623,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param string $user
      * @param string $password
      * @param string $type
+     * @throws Exception\InvalidArgumentException
      * @return Client
      */
     public function setAuth($user, $password, $type = self::AUTH_BASIC)
@@ -648,6 +653,8 @@ class Client implements Stdlib\DispatchableInterface
      * @param string $password
      * @param string $type
      * @param array $digest
+     * @param null|string $entityBody
+     * @throws Exception\InvalidArgumentException
      * @return string|boolean
      */
     protected function calcAuthDigest($user, $password, $type = self::AUTH_BASIC, $digest = array(), $entityBody = null)
@@ -737,6 +744,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param  Request $request
      * @return Response
      * @throws Exception\RuntimeException
+     * @throws Client\Exception\RuntimeException
      */
     public function send(Request $request = null)
     {
@@ -970,8 +978,8 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Prepare Cookies
      *
-     * @param   string $uri
      * @param   string $domain
+     * @param   string $path
      * @param   boolean $secure
      * @return  Header\Cookie|boolean
      */
@@ -1002,6 +1010,9 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Prepare the request headers
      *
+     * @param resource|string $body
+     * @param Http $uri
+     * @throws Exception\RuntimeException
      * @return array
      */
     protected function prepareHeaders($body, $uri)
@@ -1125,7 +1136,7 @@ class Client implements Stdlib\DispatchableInterface
                 }
 
                 // Encode files
-                foreach ($this->getRequest()->getFiles()->toArray() as $key => $file) {
+                foreach ($this->getRequest()->getFiles()->toArray() as $file) {
                     $fhead = array('Content-Type' => $file['ctype']);
                     $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                 }

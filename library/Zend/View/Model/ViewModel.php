@@ -220,7 +220,7 @@ class ViewModel implements ModelInterface
     public function getVariable($name, $default = null)
     {
         $name = (string)$name;
-        if (array_key_exists($name,$this->variables)) {
+        if (array_key_exists($name, $this->variables)) {
             return $this->variables[$name];
         } else {
             return $default;
@@ -245,8 +245,9 @@ class ViewModel implements ModelInterface
      *
      * Can be an array or a Traversable + ArrayAccess object.
      *
-     * @param  array|ArrayAccess&Traversable $variables
+     * @param  array|ArrayAccess|Traversable $variables
      * @param  bool $overwrite Whether or not to overwrite the internal container with $variables
+     * @throws Exception\InvalidArgumentException
      * @return ViewModel
      */
     public function setVariables($variables, $overwrite = false)

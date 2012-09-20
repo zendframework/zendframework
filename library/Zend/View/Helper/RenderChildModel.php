@@ -95,6 +95,7 @@ class RenderChildModel extends AbstractHelper
     /**
      * Get the current view model
      *
+     * @throws Exception\RuntimeException
      * @return null|Model
      */
     protected function getCurrent()

@@ -71,6 +71,7 @@ class ListenerOptions extends AbstractOptions
      * Set an array of paths where modules reside
      *
      * @param  array|Traversable $modulePaths
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setModulePaths($modulePaths)
@@ -111,6 +112,7 @@ class ListenerOptions extends AbstractOptions
      * Set the glob patterns to use for loading additional config files
      *
      * @param array|Traversable $configGlobPaths
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setConfigGlobPaths($configGlobPaths)
@@ -131,6 +133,7 @@ class ListenerOptions extends AbstractOptions
      * Set the static paths to use for loading additional config files
      *
      * @param array|Traversable $configStaticPaths
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setConfigStaticPaths($configStaticPaths)
@@ -162,6 +165,7 @@ class ListenerOptions extends AbstractOptions
      * for unit testing purposes.
      *
      * @param array|Traversable $extraConfig
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setExtraConfig($extraConfig)
@@ -232,7 +236,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheFile()
     {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
+        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
     }
 
     /**

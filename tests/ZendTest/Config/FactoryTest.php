@@ -128,7 +128,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryCanRegisterCustomReaderPlugn()
     {
         $dummyReader = new Reader\TestAssets\DummyReader();
-        Factory::getReaderPluginManager()->setService('DummyReader',$dummyReader);
+        Factory::getReaderPluginManager()->setService('DummyReader', $dummyReader);
 
         Factory::registerReader('dum', 'DummyReader');
 

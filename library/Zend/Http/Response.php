@@ -511,8 +511,7 @@ class Response extends AbstractMessage implements ResponseInterface
 
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
-        } else {
-            return gzinflate($body);
         }
+        return gzinflate($body);
     }
 }

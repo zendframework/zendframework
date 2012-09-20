@@ -117,15 +117,15 @@ class Part
     /**
      * Get the Content of the current Mime Part in the given encoding.
      *
-     * @return String
+     * @param string $EOL
+     * @return string
      */
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
             return stream_get_contents($this->getEncodedStream());
-        } else {
-            return Mime::encode($this->content, $this->encoding, $EOL);
         }
+        return Mime::encode($this->content, $this->encoding, $EOL);
     }
 
     /**
@@ -136,15 +136,15 @@ class Part
     {
         if ($this->isStream) {
             return stream_get_contents($this->content);
-        } else {
-            return $this->content;
         }
+        return $this->content;
     }
 
     /**
      * Create and return the array of headers for this MIME part
      *
      * @access public
+     * @param string $EOL
      * @return array
      */
     public function getHeadersArray($EOL = Mime::LINEEND)
@@ -197,6 +197,7 @@ class Part
     /**
      * Return the headers for this part as a string
      *
+     * @param string $EOL
      * @return String
      */
     public function getHeaders($EOL = Mime::LINEEND)

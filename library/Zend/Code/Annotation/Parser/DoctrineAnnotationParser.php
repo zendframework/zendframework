@@ -134,6 +134,7 @@ class DoctrineAnnotationParser implements ParserInterface
      *
      * @param  array|Traversable $annotations Array or traversable object of
      *         annotation class names
+     * @throws Exception\InvalidArgumentException
      * @return DoctrineAnnotationParser
      */
     public function registerAnnotations($annotations)

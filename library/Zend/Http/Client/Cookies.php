@@ -13,7 +13,6 @@ namespace Zend\Http\Client;
 use ArrayIterator;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Response;
-use Zend\Stdlib\ParametersInterface;
 use Zend\Uri;
 
 /**
@@ -96,6 +95,7 @@ class Cookies
      *
      * @param Cookie|string $cookie
      * @param Uri\Uri|string    $ref_uri Optional reference URI (for domain, path, secure)
+     * @throws Exception\InvalidArgumentException if invalid $cookie value
      */
     public function addCookie($cookie, $ref_uri = null)
     {
@@ -159,6 +159,7 @@ class Cookies
      * @param boolean $matchSessionCookies Whether to send session cookies
      * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
      * @param int $now Override the current time when checking for expiry time
+     * @throws Exception\InvalidArgumentException if invalid URI
      * @return array|string
      */
     public function getMatchingCookies($uri, $matchSessionCookies = true,
@@ -198,6 +199,7 @@ class Cookies
      * @param Uri\Uri|string $uri The uri (domain and path) to match
      * @param string $cookie_name The cookie's name
      * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
+     * @throws Exception\InvalidArgumentException if invalid URI specified or invalid $ret_as value
      * @return Cookie|string
      */
     public function getCookie($uri, $cookie_name, $ret_as = self::COOKIE_OBJECT)
@@ -302,7 +304,7 @@ class Cookies
     /**
      * Return a subset of a domain-matching cookies that also match a specified path
      *
-     * @param array $dom_array
+     * @param array $domains
      * @param string $path
      * @return array
      */

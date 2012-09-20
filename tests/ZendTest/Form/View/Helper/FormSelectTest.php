@@ -11,6 +11,7 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Form\Element;
 use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\View\Helper\FormSelect as FormSelectHelper;
 
@@ -102,6 +103,17 @@ class FormSelectTest extends CommonTestCase
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#option .*?value="value2" .*?disabled="disabled"#', $markup);
+    }
+
+    public function testCanMarkOptionsAsSelected()
+    {
+        $element = $this->getElement();
+        $options = $element->getValueOptions('options');
+        $options[1]['selected'] = true;
+        $element->setValueOptions($options);
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#option .*?value="value2" .*?selected="selected"#', $markup);
     }
 
     public function testOptgroupsAreCreatedWhenAnOptionHasAnOptionsKey()
@@ -250,5 +262,87 @@ class FormSelectTest extends CommonTestCase
         $this->helper->__invoke($element);
         $markup = $this->helper->__invoke($element);
         $this->assertContains('name="0"', $markup);
+    }
+
+    public function testCanCreateEmptyOption()
+    {
+        $element = new SelectElement('foo');
+        $element->setEmptyOption('empty');
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertContains('<option value="">empty</option>', $markup);
+    }
+
+    public function testCanCreateEmptyOptionWithEmptyString()
+    {
+        $element = new SelectElement('foo');
+        $element->setEmptyOption('');
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertContains('<option value=""></option>', $markup);
+    }
+
+    public function testDoesNotRenderEmptyOptionByDefault()
+    {
+        $element = new SelectElement('foo');
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertNotContains('<option value=""></option>', $markup);
+    }
+
+    public function testNullEmptyOptionDoesNotRenderEmptyOption()
+    {
+        $element = new SelectElement('foo');
+        $element->setEmptyOption(null);
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $this->assertNotContains('<option value=""></option>', $markup);
+    }
+
+    public function testRenderInputNotSelectElementRaisesException()
+    {
+        $element = new Element\Text('foo');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
+        $this->helper->render($element);
+    }
+
+    public function testRenderElementWithNoNameRaisesException()
+    {
+        $element = new SelectElement();
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
+    }
+
+    public function testRenderElementWithNoValueOptionsRaisesException()
+    {
+        $element = new SelectElement('foo');
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
     }
 }

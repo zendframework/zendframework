@@ -48,7 +48,7 @@ class Statement implements StatementInterface
     protected $parameterReferences = array();
 
     /**
-     * @var Zend\Db\Adapter\ParameterContainer\ParameterContainer
+     * @var ParameterContainer
      */
     protected $parameterContainer = null;
 
@@ -82,7 +82,8 @@ class Statement implements StatementInterface
      * b) "SQL Server Statement" when a prepared statement has been already produced
      * (there will need to already be a bound param set if it applies to this query)
      *
-     * @param resource
+     * @param resource $resource
+     * @throws Exception\InvalidArgumentException
      * @return Statement
      */
     public function initialize($resource)
@@ -158,6 +159,7 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @throws Exception\RuntimeException
      * @return Statement
      */
     public function prepare($sql = null)
@@ -190,6 +192,7 @@ class Statement implements StatementInterface
      * Execute
      *
      * @param  array|ParameterContainer $parameters
+     * @throws Exception\RuntimeException
      * @return Result
      */
     public function execute($parameters = null)

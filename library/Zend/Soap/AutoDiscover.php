@@ -106,6 +106,7 @@ class AutoDiscover
      * @param ComplexTypeStrategy $strategy
      * @param string|Uri\Uri $endpointUri
      * @param string $wsdlClass
+     * @param array $classMap
      */
     public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null, array $classMap = array())
     {
@@ -343,7 +344,7 @@ class AutoDiscover
     /**
      * Generate the WSDL for a service class.
      *
-     * @return Zend\Soap\Wsdl
+     * @return Wsdl
      */
     protected function _generateClass()
     {
@@ -353,7 +354,7 @@ class AutoDiscover
     /**
      * Generate the WSDL for a set of functions.
      *
-     * @return Zend\Soap\Wsdl
+     * @return Wsdl
      */
     protected function _generateFunctions()
     {
@@ -368,7 +369,8 @@ class AutoDiscover
     /**
      * Generate the WSDL for a set of reflection method instances.
      *
-     * @return Zend\Soap\Wsdl
+     * @param array $reflectionMethods
+     * @return Wsdl
      */
     protected function _generateWsdl(array $reflectionMethods)
     {
@@ -381,7 +383,7 @@ class AutoDiscover
         $wsdl->addSchemaTypeSection();
 
         $port = $wsdl->addPortType($serviceName . 'Port');
-        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' .$serviceName. 'Port');
+        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' . $serviceName . 'Port');
 
         $wsdl->addSoapBinding($binding, $this->bindingStyle['style'], $this->bindingStyle['transport']);
         $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', 'tns:' . $serviceName . 'Binding', $uri);
@@ -400,6 +402,7 @@ class AutoDiscover
      * @param $wsdl \Zend\Soap\Wsdl WSDL document
      * @param $port object wsdl:portType
      * @param $binding object wsdl:binding
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     protected function _addFunctionToWsdl($function, $wsdl, $port, $binding)
@@ -492,7 +495,7 @@ class AutoDiscover
         // When using the RPC style, make sure the operation style includes a 'namespace' attribute (WS-I Basic Profile 1.1 R2717)
         $operationBodyStyle = $this->operationBodyStyle;
         if ($this->bindingStyle['style'] == 'rpc' && !isset($operationBodyStyle['namespace'])) {
-            $operationBodyStyle['namespace'] = ''.$uri;
+            $operationBodyStyle['namespace'] = '' . $uri;
         }
 
         // Add the binding operation
@@ -507,7 +510,8 @@ class AutoDiscover
     /**
      * Generate the WSDL file from the configured input.
      *
-     * @return Zend_Wsdl
+     * @throws Exception\RuntimeException
+     * @return Wsdl
      */
     public function generate()
     {

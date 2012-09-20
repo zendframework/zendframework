@@ -57,7 +57,6 @@ class Fault extends \Zend\XmlRpc\Fault
         $this->exception = $e;
         $code             = 404;
         $message          = 'Unknown error';
-        $exceptionClass   = get_class($e);
 
         foreach (array_keys(self::$faultExceptionClasses) as $class) {
             if ($e instanceof $class) {
@@ -174,7 +173,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * Retrieve the exception
      *
      * @access public
-     * @return Exception
+     * @return \Exception
      */
     public function getException()
     {

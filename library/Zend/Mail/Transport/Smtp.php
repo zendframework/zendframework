@@ -199,6 +199,7 @@ class Smtp implements TransportInterface
      * developer to add a custom adapter if required before mail is sent.
      *
      * @param Message $message
+     * @throws Exception\RuntimeException
      */
     public function send(Message $message)
     {

@@ -148,7 +148,7 @@ class FormCollection extends AbstractHelper
      */
     public function shouldWrap()
     {
-        return $this->shouldWrap();
+        return $this->shouldWrap;
     }
 
     /**
@@ -174,9 +174,10 @@ class FormCollection extends AbstractHelper
     }
 
     /**
-     * Retrieve the FormRow helper
+     * Retrieve the element helper.
      *
-     * @return FormRow
+     * @throws RuntimeException
+     * @return AbstractHelper
      */
     protected function getElementHelper()
     {
@@ -197,9 +198,9 @@ class FormCollection extends AbstractHelper
     }
 
     /**
-     * Sets the row helper that should be used by this collection.
+     * Sets the element helper that should be used by this collection.
      *
-     * @param FormRow $rowHelper The row helper to use.
+     * @param AbstractHelper $elementHelper The element helper to use.
      * @return FormCollection
      */
     public function setElementHelper(AbstractHelper $elementHelper)

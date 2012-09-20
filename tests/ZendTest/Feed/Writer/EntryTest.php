@@ -23,11 +23,11 @@ use Zend\Feed\Writer;
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files';
+        $this->feedSamplePath = dirname(__FILE__) . '/_files';
     }
 
     public function testAddsAuthorNameFromArray()
@@ -70,7 +70,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         try {
             $entry->addAuthor(array('name' => 'Joe',
-                                    'email'=> ''));
+                                    'email' => ''));
             $this->fail();
         } catch (Writer\Exception\InvalidArgumentException $e) {
         }
@@ -78,11 +78,11 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAuthorThrowsExceptionOnInvalidUriFromArray()
     {
-        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(array('name'=> 'Joe',
-                                    'uri' => 'notauri'));
+            $entry->addAuthor(array('name' => 'Joe',
+                                    'email' => 'joe@example.org',
+                                    'uri' => ''));
             $this->fail();
         } catch (Writer\Exception\InvalidArgumentException $e) {
         }
@@ -408,6 +408,12 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_null($entry->getLink()));
     }
 
+    public function testGetLinksReturnsNullIfNotSet()
+    {
+        $entry = new Writer\Entry;
+        $this->assertTrue(is_null($entry->getLinks()));
+    }
+
     public function testSetsCommentLink()
     {
         $entry = new Writer\Entry;
@@ -521,6 +527,58 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $entry->getCommentCount());
     }
 
+    public function testSetsCommentCount0()
+    {
+        $entry = new Writer\Entry;
+        $entry->setCommentCount(0);
+        $this->assertEquals(0, $entry->getCommentCount());
+    }
+
+    public function allowedCommentCounts()
+    {
+        return array(
+            array(0, 0),
+            array(0.0, 0),
+            array(1, 1),
+            array(PHP_INT_MAX, PHP_INT_MAX),
+        );
+    }
+
+    /**
+     * @dataProvider allowedCommentCounts
+     */
+    public function testSetsCommentCountAllowed($count, $expected)
+    {
+        $entry = new Writer\Entry;
+        $entry->setCommentCount($count);
+        $this->assertSame($expected, $entry->getCommentCount());
+    }
+
+    public function disallowedCommentCounts()
+    {
+        return array(
+            array(1.1),
+            array(-1),
+            array(-PHP_INT_MAX),
+            array(array()),
+            array(''),
+            array(false),
+            array(true),
+            array(new \stdClass),
+            array(null),
+        );
+    }
+
+    /**
+     * @dataProvider disallowedCommentCounts
+     */
+    public function testSetsCommentCountDisallowed($count)
+    {
+        $entry = new Writer\Entry;
+        $this->setExpectedException('Zend\Feed\Writer\Exception\ExceptionInterface');
+        $entry->setCommentCount($count);
+    }
+
     public function testSetCommentCountThrowsExceptionOnInvalidEmptyParameter()
     {
         $entry = new Writer\Entry;
@@ -547,4 +605,106 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_null($entry->getCommentCount()));
     }
 
+    /**
+     * @covers Zend\Feed\Writer\Entry::setEncoding
+     */
+    public function testSetEncodingThrowsExceptionIfNull()
+    {
+        $entry = new Writer\Entry;
+        try {
+            $entry->setEncoding(null);
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::addCategory
+     */
+    public function testAddCategoryThrowsExceptionIfNotSetTerm()
+    {
+        $entry = new Writer\Entry;
+        try {
+            $entry->addCategory(array('scheme' => 'http://www.example.com/schema1'));
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::addCategory
+     */
+    public function testAddCategoryThrowsExceptionIfSchemeNull()
+    {
+        $entry = new Writer\Entry;
+        try {
+            $entry->addCategory(array('term' => 'cat_dog', 'scheme' => ''));
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::setEnclosure
+     */
+    public function testSetEnclosureThrowsExceptionIfNotSetUri()
+    {
+        $entry = new Writer\Entry;
+        try {
+            $entry->setEnclosure(array('length' => '2'));
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::setEnclosure
+     */
+    public function testSetEnclosureThrowsExceptionIfNotValidUri()
+    {
+        $entry = new Writer\Entry;
+        try {
+            $entry->setEnclosure(array('uri' => ''));
+            $this->fail();
+        } catch (Writer\Exception\InvalidArgumentException $e) {
+        }
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::getExtension
+     */
+    public function testGetExtension()
+    {
+        $entry = new Writer\Entry;
+        $foo = $entry->getExtension('foo');
+        $this->assertNull($foo);
+
+        $this->assertInstanceOf('Zend\Feed\Writer\Extension\ITunes\Entry', $entry->getExtension('ITunes'));
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::getExtensions
+     */
+    public function testGetExtensions()
+    {
+        $entry = new Writer\Entry;
+
+        $extensions = $entry->getExtensions();
+        $this->assertInstanceOf('Zend\Feed\Writer\Extension\ITunes\Entry', $extensions['ITunes\Entry']);
+    }
+
+    /**
+     * @covers Zend\Feed\Writer\Entry::getSource
+     * @covers Zend\Feed\Writer\Entry::createSource
+     */
+    public function testGetSource()
+    {
+        $entry = new Writer\Entry;
+
+        $source = $entry->getSource();
+        $this->assertNull($source);
+
+        $entry->setSource($entry->createSource());
+        $this->assertInstanceOf('Zend\Feed\Writer\Source', $entry->getSource());
+    }
 }

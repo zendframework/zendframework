@@ -107,7 +107,6 @@ class Table
     /**
      * Create a basic table object
      *
-     * @param  array             $columns Widths List of all column widths
      * @param  array|Traversable $options Configuration options
      * @throws Exception\UnexpectedValueException When no columns widths were set
      */

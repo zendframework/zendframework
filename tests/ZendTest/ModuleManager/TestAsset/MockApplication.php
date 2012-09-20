@@ -82,6 +82,6 @@ class MockApplication implements ApplicationInterface
         $event = new MvcEvent();
         $event->setApplication($this);
         $event->setTarget($this);
-        $this->getEventManager()->trigger('bootstrap', $event);
+        $this->getEventManager()->trigger(MvcEvent::EVENT_BOOTSTRAP, $event);
     }
 }

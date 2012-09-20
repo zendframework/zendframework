@@ -25,269 +25,269 @@ use Zend\Http\Client as HttpClient;
 class SubscriberTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Subscriber */
-    protected $_subscriber = null;
+    protected $subscriber = null;
 
-    protected $_adapter = null;
+    protected $adapter = null;
 
-    protected $_tableGateway = null;
+    protected $tableGateway = null;
 
     public function setUp()
     {
         $client = new HttpClient;
         PubSubHubbub::setHttpClient($client);
-        $this->_subscriber = new Subscriber;
-        $this->_adapter = $this->_getCleanMock(
+        $this->subscriber = new Subscriber;
+        $this->adapter = $this->_getCleanMock(
             '\Zend\Db\Adapter\Adapter'
         );
-        $this->_tableGateway = $this->_getCleanMock(
+        $this->tableGateway = $this->_getCleanMock(
             '\Zend\Db\TableGateway\TableGateway'
         );
-        $this->_tableGateway->expects($this->any())->method('getAdapter')
-            ->will($this->returnValue($this->_adapter));
+        $this->tableGateway->expects($this->any())->method('getAdapter')
+            ->will($this->returnValue($this->adapter));
     }
 
 
     public function testAddsHubServerUrl()
     {
-        $this->_subscriber->addHubUrl('http://www.example.com/hub');
-        $this->assertEquals(array('http://www.example.com/hub'), $this->_subscriber->getHubUrls());
+        $this->subscriber->addHubUrl('http://www.example.com/hub');
+        $this->assertEquals(array('http://www.example.com/hub'), $this->subscriber->getHubUrls());
     }
 
     public function testAddsHubServerUrlsFromArray()
     {
-        $this->_subscriber->addHubUrls(array(
+        $this->subscriber->addHubUrls(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         ));
         $this->assertEquals(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
-        ), $this->_subscriber->getHubUrls());
+        ), $this->subscriber->getHubUrls());
     }
 
     public function testAddsHubServerUrlsFromArrayUsingSetOptions()
     {
-        $this->_subscriber->setOptions(array('hubUrls' => array(
+        $this->subscriber->setOptions(array('hubUrls' => array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         )));
         $this->assertEquals(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
-        ), $this->_subscriber->getHubUrls());
+        ), $this->subscriber->getHubUrls());
     }
 
     public function testRemovesHubServerUrl()
     {
-        $this->_subscriber->addHubUrls(array(
+        $this->subscriber->addHubUrls(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         ));
-        $this->_subscriber->removeHubUrl('http://www.example.com/hub');
+        $this->subscriber->removeHubUrl('http://www.example.com/hub');
         $this->assertEquals(array(
             1 => 'http://www.example.com/hub2'
-        ), $this->_subscriber->getHubUrls());
+        ), $this->subscriber->getHubUrls());
     }
 
     public function testRetrievesUniqueHubServerUrlsOnly()
     {
-        $this->_subscriber->addHubUrls(array(
+        $this->subscriber->addHubUrls(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2',
             'http://www.example.com/hub'
         ));
         $this->assertEquals(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
-        ), $this->_subscriber->getHubUrls());
+        ), $this->subscriber->getHubUrls());
     }
 
     public function testThrowsExceptionOnSettingEmptyHubServerUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->addHubUrl('');
+        $this->subscriber->addHubUrl('');
     }
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->addHubUrl(123);
+        $this->subscriber->addHubUrl(123);
     }
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->addHubUrl('http://');
+        $this->subscriber->addHubUrl('http://');
     }
 
     public function testAddsParameter()
     {
-        $this->_subscriber->setParameter('foo', 'bar');
-        $this->assertEquals(array('foo'=>'bar'), $this->_subscriber->getParameters());
+        $this->subscriber->setParameter('foo', 'bar');
+        $this->assertEquals(array('foo'=>'bar'), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArray()
     {
-        $this->_subscriber->setParameters(array(
+        $this->subscriber->setParameters(array(
             'foo' => 'bar', 'boo' => 'baz'
         ));
         $this->assertEquals(array(
             'foo' => 'bar', 'boo' => 'baz'
-        ), $this->_subscriber->getParameters());
+        ), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArrayInSingleMethod()
     {
-        $this->_subscriber->setParameter(array(
+        $this->subscriber->setParameter(array(
             'foo' => 'bar', 'boo' => 'baz'
         ));
         $this->assertEquals(array(
             'foo' => 'bar', 'boo' => 'baz'
-        ), $this->_subscriber->getParameters());
+        ), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArrayUsingSetOptions()
     {
-        $this->_subscriber->setOptions(array('parameters' => array(
+        $this->subscriber->setOptions(array('parameters' => array(
             'foo' => 'bar', 'boo' => 'baz'
         )));
         $this->assertEquals(array(
             'foo' => 'bar', 'boo' => 'baz'
-        ), $this->_subscriber->getParameters());
+        ), $this->subscriber->getParameters());
     }
 
     public function testRemovesParameter()
     {
-        $this->_subscriber->setParameters(array(
+        $this->subscriber->setParameters(array(
             'foo' => 'bar', 'boo' => 'baz'
         ));
-        $this->_subscriber->removeParameter('boo');
+        $this->subscriber->removeParameter('boo');
         $this->assertEquals(array(
             'foo' => 'bar'
-        ), $this->_subscriber->getParameters());
+        ), $this->subscriber->getParameters());
     }
 
     public function testRemovesParameterIfSetToNull()
     {
-        $this->_subscriber->setParameters(array(
+        $this->subscriber->setParameters(array(
             'foo' => 'bar', 'boo' => 'baz'
         ));
-        $this->_subscriber->setParameter('boo', null);
+        $this->subscriber->setParameter('boo', null);
         $this->assertEquals(array(
             'foo' => 'bar'
-        ), $this->_subscriber->getParameters());
+        ), $this->subscriber->getParameters());
     }
 
     public function testCanSetTopicUrl()
     {
-        $this->_subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->assertEquals('http://www.example.com/topic', $this->_subscriber->getTopicUrl());
+        $this->subscriber->setTopicUrl('http://www.example.com/topic');
+        $this->assertEquals('http://www.example.com/topic', $this->subscriber->getTopicUrl());
     }
 
     public function testThrowsExceptionOnSettingEmptyTopicUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setTopicUrl('');
+        $this->subscriber->setTopicUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringTopicUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setTopicUrl(123);
+        $this->subscriber->setTopicUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidTopicUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setTopicUrl('http://');
+        $this->subscriber->setTopicUrl('http://');
     }
 
     public function testThrowsExceptionOnMissingTopicUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->getTopicUrl();
+        $this->subscriber->getTopicUrl();
     }
 
     public function testCanSetCallbackUrl()
     {
-        $this->_subscriber->setCallbackUrl('http://www.example.com/callback');
-        $this->assertEquals('http://www.example.com/callback', $this->_subscriber->getCallbackUrl());
+        $this->subscriber->setCallbackUrl('http://www.example.com/callback');
+        $this->assertEquals('http://www.example.com/callback', $this->subscriber->getCallbackUrl());
     }
 
     public function testThrowsExceptionOnSettingEmptyCallbackUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setCallbackUrl('');
+        $this->subscriber->setCallbackUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringCallbackUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setCallbackUrl(123);
+        $this->subscriber->setCallbackUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidCallbackUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setCallbackUrl('http://');
+        $this->subscriber->setCallbackUrl('http://');
     }
 
     public function testThrowsExceptionOnMissingCallbackUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->getCallbackUrl();
+        $this->subscriber->getCallbackUrl();
     }
 
     public function testCanSetLeaseSeconds()
     {
-        $this->_subscriber->setLeaseSeconds('10000');
-        $this->assertEquals(10000, $this->_subscriber->getLeaseSeconds());
+        $this->subscriber->setLeaseSeconds('10000');
+        $this->assertEquals(10000, $this->subscriber->getLeaseSeconds());
     }
 
     public function testThrowsExceptionOnSettingZeroAsLeaseSeconds()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setLeaseSeconds(0);
+        $this->subscriber->setLeaseSeconds(0);
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsLeaseSeconds()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setLeaseSeconds(-1);
+        $this->subscriber->setLeaseSeconds(-1);
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsLeaseSeconds()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setLeaseSeconds('0aa');
+        $this->subscriber->setLeaseSeconds('0aa');
     }
 
     public function testCanSetPreferredVerificationMode()
     {
-        $this->_subscriber->setPreferredVerificationMode(PubSubHubbub::VERIFICATION_MODE_ASYNC);
-        $this->assertEquals(PubSubHubbub::VERIFICATION_MODE_ASYNC, $this->_subscriber->getPreferredVerificationMode());
+        $this->subscriber->setPreferredVerificationMode(PubSubHubbub::VERIFICATION_MODE_ASYNC);
+        $this->assertEquals(PubSubHubbub::VERIFICATION_MODE_ASYNC, $this->subscriber->getPreferredVerificationMode());
     }
 
     public function testSetsPreferredVerificationModeThrowsExceptionOnSettingBadMode()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->setPreferredVerificationMode('abc');
+        $this->subscriber->setPreferredVerificationMode('abc');
     }
 
     public function testPreferredVerificationModeDefaultsToSync()
     {
-        $this->assertEquals(PubSubHubbub::VERIFICATION_MODE_SYNC, $this->_subscriber->getPreferredVerificationMode());
+        $this->assertEquals(PubSubHubbub::VERIFICATION_MODE_SYNC, $this->subscriber->getPreferredVerificationMode());
     }
 
     public function testCanSetStorageImplementation()
     {
-        $storage = new Subscription($this->_tableGateway);
-        $this->_subscriber->setStorage($storage);
-        $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
+        $storage = new Subscription($this->tableGateway);
+        $this->subscriber->setStorage($storage);
+        $this->assertThat($this->subscriber->getStorage(), $this->identicalTo($storage));
     }
 
 
     public function testGetStorageThrowsExceptionIfNoneSet()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
-        $this->_subscriber->getStorage();
+        $this->subscriber->getStorage();
     }
 
     protected function _getCleanMock($className)

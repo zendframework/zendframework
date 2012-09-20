@@ -38,6 +38,6 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeaderInterfac
             }
             $values[] = $header->getFieldValue();
         }
-        return $name. ': ' . implode(',', $values) . "\r\n";
+        return $name . ': ' . implode(',', $values) . "\r\n";
     }
 }

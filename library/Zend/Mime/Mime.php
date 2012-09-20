@@ -107,7 +107,7 @@ class Mime
      *
      * @param string $str
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeQuotedPrintable($str,
@@ -168,7 +168,7 @@ class Mime
      * @param string $str
      * @param string $charset
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeQuotedPrintableHeader($str, $charset,
@@ -198,7 +198,7 @@ class Mime
             if ($token == '=20') {
                 // only if we have a single char token or space, we can append the
                 // tempstring it to the current line or start a new line if necessary.
-                if (strlen($lines[$currentLine].$tmp) > $lineLength) {
+                if (strlen($lines[$currentLine] . $tmp) > $lineLength) {
                     $lines[$currentLine+1] = $tmp;
                 } else {
                     $lines[$currentLine] .= $tmp;
@@ -213,7 +213,7 @@ class Mime
 
         // assemble the lines together by pre- and appending delimiters, charset, encoding.
         for ($i = 0; $i < count($lines); $i++) {
-            $lines[$i] = " ".$prefix.$lines[$i]."?=";
+            $lines[$i] = " " . $prefix . $lines[$i] . "?=";
         }
         $str = trim(implode($lineEnd, $lines));
         return $str;
@@ -241,7 +241,7 @@ class Mime
      * @param string $str
      * @param string $charset
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeBase64Header($str,
@@ -265,7 +265,7 @@ class Mime
      *
      * @param string $str
      * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param int $lineEnd Defaults to {@link LINEEND}
+     * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeBase64($str,
@@ -330,7 +330,7 @@ class Mime
     /**
      * Return a MIME boundary line
      *
-     * @param mixed $EOL Defaults to {@link LINEEND}
+     * @param string $EOL Defaults to {@link LINEEND}
      * @access public
      * @return string
      */
@@ -342,6 +342,7 @@ class Mime
     /**
      * Return MIME ending
      *
+     * @param string $EOL Defaults to {@link LINEEND}
      * @access public
      * @return string
      */

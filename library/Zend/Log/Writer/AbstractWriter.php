@@ -13,6 +13,7 @@ namespace Zend\Log\Writer;
 use Zend\Log\Exception;
 use Zend\Log\Filter;
 use Zend\Log\Formatter\FormatterInterface as Formatter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -31,7 +32,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Filter chain
      *
-     * @var array
+     * @var Filter\FilterInterface[]
      */
     protected $filters = array();
 
@@ -43,9 +44,24 @@ abstract class AbstractWriter implements WriterInterface
     protected $formatter;
 
     /**
+     * Use Zend\Stdlib\ErrorHandler to report errors during calls to write
+     *
+     * @var bool
+     */
+    protected $convertWriteErrorsToExceptions = true;
+
+    /**
+     * Error level passed to Zend\Stdlib\ErrorHandler::start for errors reported during calls to write
+     *
+     * @var bool
+     */
+    protected $errorsToExceptionsConversionLevel = E_WARNING;
+
+    /**
      * Add a filter specific to this writer.
      *
      * @param  int|string|Filter\FilterInterface $filter
+     * @param  array|null $options
      * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
      */
@@ -87,7 +103,7 @@ abstract class AbstractWriter implements WriterInterface
      * Set filter plugin manager
      *
      * @param  string|FilterPluginManager $plugins
-     * @return Logger
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setFilterPluginManager($plugins)
@@ -112,7 +128,7 @@ abstract class AbstractWriter implements WriterInterface
      *
      * @param string $name
      * @param array|null $options
-     * @return Writer
+     * @return Filter\FilterInterface
      */
     public function filterPlugin($name, array $options = null)
     {
@@ -133,8 +149,30 @@ abstract class AbstractWriter implements WriterInterface
             }
         }
 
-        // exception occurs on error
-        $this->doWrite($event);
+        $errorHandlerStarted = false;
+
+        if ($this->convertWriteErrorsToExceptions && !ErrorHandler::started()) {
+            ErrorHandler::start($this->errorsToExceptionsConversionLevel);
+            $errorHandlerStarted = true;
+        }
+
+        try {
+            $this->doWrite($event);
+        } catch (\Exception $e) {
+            if ($errorHandlerStarted) {
+                ErrorHandler::stop();
+                $errorHandlerStarted = false;
+            }
+            throw $e;
+        }
+
+        if ($errorHandlerStarted) {
+            $error = ErrorHandler::stop();
+            $errorHandlerStarted = false;
+            if ($error) {
+                throw new Exception\RuntimeException("Unable to write", 0, $error);
+            }
+        }
     }
 
     /**
@@ -147,6 +185,16 @@ abstract class AbstractWriter implements WriterInterface
     {
         $this->formatter = $formatter;
         return $this;
+    }
+
+    /**
+     * Set convert write errors to exception flag
+     *
+     * @param bool $ignoreWriteErrors
+     */
+    public function setConvertWriteErrorsToExceptions($convertErrors)
+    {
+        $this->convertWriteErrorsToExceptions = $convertErrors;
     }
 
     /**

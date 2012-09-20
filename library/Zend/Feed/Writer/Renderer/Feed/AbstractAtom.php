@@ -26,9 +26,9 @@ class AbstractAtom extends Renderer\AbstractRenderer
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Writer_Feed $container
+     * @param  Writer\AbstractFeed $container
      */
-    public function __construct ($container)
+    public function __construct($container)
     {
         parent::__construct($container);
     }

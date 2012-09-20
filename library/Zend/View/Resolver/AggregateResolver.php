@@ -57,7 +57,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     /**
      * Return count of attached resolvers
      *
-     * @return void
+     * @return int
      */
     public function count()
     {
@@ -67,7 +67,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     /**
      * IteratorAggregate: return internal iterator
      *
-     * @return Traversable
+     * @return PriorityQueue
      */
     public function getIterator()
     {

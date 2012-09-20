@@ -43,6 +43,24 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     protected $csrfValidator;
 
     /**
+     * Accepted options for Csrf:
+     * - csrf_options: an array used in the Csrf
+     *
+     * @param array|\Traversable $options
+     * @return Csrf
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['csrf_options'])) {
+            $this->setCsrfValidatorOptions($options['csrf_options']);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getCsrfValidatorOptions()
@@ -90,7 +108,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      *
      * Retrieves the hash from the validator
      *
-     * @return void
+     * @return string
      */
     public function getValue()
     {

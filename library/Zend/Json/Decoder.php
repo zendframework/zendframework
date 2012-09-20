@@ -10,6 +10,7 @@
 
 namespace Zend\Json;
 
+use stdClass;
 use Zend\Json\Exception\InvalidArgumentException;
 use Zend\Json\Exception\RuntimeException;
 
@@ -85,6 +86,7 @@ class Decoder
      * @param int $decodeType How objects should be decoded -- see
      * {@link Zend_Json::TYPE_ARRAY} and {@link Zend_Json::TYPE_OBJECT} for
      * valid values
+     * @throws InvalidArgumentException
      * @return void
      */
     protected function __construct($source, $decodeType)
@@ -176,8 +178,8 @@ class Decoder
      * {@link $decodeType}. If invalid $decodeType present, returns as an
      * array.
      *
-     * @return array|StdClass
-     * @throws Zend\Json\Exception\RuntimeException
+     * @return array|stdClass
+     * @throws RuntimeException
      */
     protected function _decodeObject()
     {
@@ -214,7 +216,7 @@ class Decoder
         switch ($this->decodeType) {
             case Json::TYPE_OBJECT:
                 // Create new StdClass and populate with $members
-                $result = new \stdClass();
+                $result = new stdClass();
                 foreach ($members as $key => $value) {
                     if ($key === '') {
                         $key = '_empty_';
@@ -237,7 +239,7 @@ class Decoder
      *    [element, element2,...,elementN]
      *
      * @return array
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     protected function _decodeArray()
     {
@@ -288,7 +290,7 @@ class Decoder
      * Retrieves the next token from the source stream
      *
      * @return int Token constant value specified in class definition
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws RuntimeException
      */
     protected function _getNextToken()
     {
@@ -447,7 +449,7 @@ class Decoder
      *
      * @link   http://solarphp.com/
      * @link   http://svn.solarphp.com/core/trunk/Solar/Json.php
-     * @param  string $value
+     * @param  string $chrs
      * @return string
      */
     public static function decodeUnicodeString($chrs)

@@ -10,6 +10,7 @@
 
 namespace Zend\View\Helper;
 
+use stdClass;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -52,6 +53,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Returns current object instance. Optionally, allows passing array of
      * values to build link.
      *
+     * @param array $attributes
+     * @param string $placement
      * @return \Zend\View\Helper\HeadLink
      */
     public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
@@ -161,7 +164,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      */
     protected function isValid($value)
     {
-        if (!$value instanceof \stdClass) {
+        if (!$value instanceof stdClass) {
             return false;
         }
 
@@ -216,7 +219,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * prepend()
      *
      * @param  array $value
-     * @return Zend_Layout_ViewHelper_HeadLink
+     * @return HeadLink
      * @throws Exception\InvalidArgumentException
      */
     public function prepend($value)
@@ -234,7 +237,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * set()
      *
      * @param  array $value
-     * @return Zend_Layout_ViewHelper_HeadLink
+     * @return HeadLink
      * @throws Exception\InvalidArgumentException
      */
     public function set($value)
@@ -255,7 +258,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * @param  stdClass $item
      * @return string
      */
-    public function itemToString(\stdClass $item)
+    public function itemToString(stdClass $item)
     {
         $attributes = (array) $item;
         $link       = '<link ';

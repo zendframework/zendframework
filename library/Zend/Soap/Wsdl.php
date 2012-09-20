@@ -67,7 +67,9 @@ class Wsdl
      *
      * @param string  $name Name of the Web Service being Described
      * @param string|Uri $uri URI where the WSDL will be available
-     * @param ComplexTypeStrategy $strategy
+     * @param null|ComplexTypeStrategy $strategy Strategy for detection of complex types
+     * @param null|array $classMap Map of PHP Class names to WSDL QNames
+     * @throws Exception\RuntimeException
      */
     public function __construct($name, $uri, ComplexTypeStrategy $strategy = null, array $classMap = array())
     {
@@ -265,7 +267,7 @@ class Wsdl
      * Add a {@link http://www.w3.org/TR/wsdl#_bindings binding} element to WSDL
      *
      * @param string $name Name of the Binding
-     * @param string $type name of the portType to bind
+     * @param string $portType name of the portType to bind
      * @return object The new binding's XML_Tree_Node for use with {@link function addBindingOperation} and {@link function addDocumentation}
      */
     public function addBinding($name, $portType)
@@ -519,9 +521,8 @@ class Wsdl
         if (!$filename) {
             echo $this->toXML();
             return true;
-        } else {
-            return file_put_contents($filename, $this->toXML());
         }
+        return file_put_contents($filename, $this->toXML());
     }
 
     /**
@@ -626,6 +627,7 @@ class Wsdl
      * Parse an xsd:element represented as an array into a DOMElement.
      *
      * @param array $element an xsd:element represented as an array
+     * @throws Exception\RuntimeException if $element is not an array
      * @return DOMElement parsed element
      */
     private function _parseElement($element)

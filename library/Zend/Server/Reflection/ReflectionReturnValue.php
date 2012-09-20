@@ -59,6 +59,7 @@ class ReflectionReturnValue
      * Set parameter type
      *
      * @param string|null $type
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setType($type)
@@ -84,6 +85,7 @@ class ReflectionReturnValue
      * Set parameter description
      *
      * @param string|null $description
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setDescription($description)

@@ -112,7 +112,7 @@ class Entry
     /**
      * Set the feed character encoding
      *
-     * @return string|null
+     * @param string $encoding
      * @throws Exception\InvalidArgumentException
      */
     public function setEncoding($encoding)
@@ -139,7 +139,7 @@ class Entry
     /**
      * Set the copyright entry
      *
-     * @return string|null
+     * @param string $copyright
      * @throws Exception\InvalidArgumentException
      */
     public function setCopyright($copyright)
@@ -153,7 +153,7 @@ class Entry
     /**
      * Set the entry's content
      *
-     * @return string|null
+     * @param string $content
      * @throws Exception\InvalidArgumentException
      */
     public function setContent($content)
@@ -167,7 +167,7 @@ class Entry
     /**
      * Set the feed creation date
      *
-     * @return string|null|DateTime
+     * @param string|null|DateTime $date
      * @throws Exception\InvalidArgumentException
      */
     public function setDateCreated($date = null)
@@ -185,7 +185,7 @@ class Entry
     /**
      * Set the feed modification date
      *
-     * @return string|null|DateTime
+     * @param string|null|DateTime $date
      * @throws Exception\InvalidArgumentException
      */
     public function setDateModified($date = null)
@@ -203,7 +203,7 @@ class Entry
     /**
      * Set the feed description
      *
-     * @return string|null
+     * @param string $description
      * @throws Exception\InvalidArgumentException
      */
     public function setDescription($description)
@@ -217,7 +217,7 @@ class Entry
     /**
      * Set the feed ID
      *
-     * @return string|null
+     * @param string $id
      * @throws Exception\InvalidArgumentException
      */
     public function setId($id)
@@ -231,7 +231,7 @@ class Entry
     /**
      * Set a link to the HTML source of this entry
      *
-     * @return string|null
+     * @param string $link
      * @throws Exception\InvalidArgumentException
      */
     public function setLink($link)
@@ -245,13 +245,13 @@ class Entry
     /**
      * Set the number of comments associated with this entry
      *
-     * @return string|null
+     * @param int $count
      * @throws Exception\InvalidArgumentException
      */
     public function setCommentCount($count)
     {
-        if (empty($count) || !is_numeric($count) || (int) $count < 0) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "count" must be a non-empty integer number');
+        if (!is_numeric($count) || (int)$count != $count || (int) $count < 0) {
+            throw new Exception\InvalidArgumentException('Invalid parameter: "count" must be a positive integer number or zero');
         }
         $this->data['commentCount'] = (int) $count;
     }
@@ -259,7 +259,7 @@ class Entry
     /**
      * Set a link to a HTML page containing comments associated with this entry
      *
-     * @return string|null
+     * @param string $link
      * @throws Exception\InvalidArgumentException
      */
     public function setCommentLink($link)
@@ -273,7 +273,7 @@ class Entry
     /**
      * Set a link to an XML feed for any comments associated with this entry
      *
-     * @return string|null
+     * @param array $link
      * @throws Exception\InvalidArgumentException
      */
     public function setCommentFeedLink(array $link)
@@ -296,7 +296,7 @@ class Entry
      * Each link is an array with keys "uri" and "type", where type is one of:
      * "atom", "rss" or "rdf".
      *
-     * @return string|null
+     * @param array $links
      */
     public function setCommentFeedLinks(array $links)
     {
@@ -308,7 +308,7 @@ class Entry
     /**
      * Set the feed title
      *
-     * @return string|null
+     * @param string $title
      * @throws Exception\InvalidArgumentException
      */
     public function setTitle($title)
@@ -493,7 +493,7 @@ class Entry
     /**
      * Add a entry category
      *
-     * @param string $category
+     * @param array $category
      * @throws Exception\InvalidArgumentException
      */
     public function addCategory(array $category)

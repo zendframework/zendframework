@@ -99,7 +99,6 @@ class Cycle extends AbstractHelper implements \Iterator
     /**
      * Gets actual name of cycle
      *
-     * @param $name
      * @return string
      */
     public function getName()

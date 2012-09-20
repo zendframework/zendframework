@@ -55,6 +55,7 @@ class Encrypt extends AbstractFilter
      *
      * @param  string|array $options (Optional) Encryption options
      * @return Encrypt
+     * @throws Exception\DomainException
      * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($options = null)

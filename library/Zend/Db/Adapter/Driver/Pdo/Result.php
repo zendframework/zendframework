@@ -11,7 +11,6 @@
 namespace Zend\Db\Adapter\Driver\Pdo;
 
 use Iterator;
-use PDO as PDOResource;
 use PDOStatement;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
@@ -151,6 +150,7 @@ class Result implements Iterator, ResultInterface
     }
 
     /**
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function rewind()

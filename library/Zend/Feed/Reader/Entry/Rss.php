@@ -71,7 +71,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Get an author entry
      *
-     * @param DOMElement $element
+     * @param int $index
      * @return string
      */
     public function getAuthor($index = 0)
@@ -185,6 +185,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Get the entry's date of modification
      *
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function getDateModified()
@@ -199,7 +200,7 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $dateModified = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/pubDate)');
+            $dateModified = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/pubDate)');
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
@@ -259,9 +260,9 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $description = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/description)');
+            $description = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/description)');
         } else {
-            $description = $this->xpath->evaluate('string('.$this->xpathQueryRdf.'/rss:description)');
+            $description = $this->xpath->evaluate('string(' . $this->xpathQueryRdf . '/rss:description)');
         }
 
         if (!$description) {
@@ -329,7 +330,7 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $id = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/guid)');
+            $id = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/guid)');
         }
 
         if (!$id) {
@@ -389,9 +390,9 @@ class Rss extends AbstractEntry implements EntryInterface
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->xpath->query($this->xpathQueryRss.'//link');
+            $list = $this->xpath->query($this->xpathQueryRss . '//link');
         } else {
-            $list = $this->xpath->query($this->xpathQueryRdf.'//rss:link');
+            $list = $this->xpath->query($this->xpathQueryRdf . '//rss:link');
         }
 
         if (!$list->length) {
@@ -420,9 +421,9 @@ class Rss extends AbstractEntry implements EntryInterface
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->xpath->query($this->xpathQueryRss.'//category');
+            $list = $this->xpath->query($this->xpathQueryRss . '//category');
         } else {
-            $list = $this->xpath->query($this->xpathQueryRdf.'//rss:category');
+            $list = $this->xpath->query($this->xpathQueryRdf . '//rss:category');
         }
 
         if ($list->length) {
@@ -473,9 +474,9 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $title = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/title)');
+            $title = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/title)');
         } else {
-            $title = $this->xpath->evaluate('string('.$this->xpathQueryRdf.'/rss:title)');
+            $title = $this->xpath->evaluate('string(' . $this->xpathQueryRdf . '/rss:title)');
         }
 
         if (!$title) {
@@ -541,7 +542,7 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $commentlink = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/comments)');
+            $commentlink = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/comments)');
         }
 
         if (!$commentlink) {

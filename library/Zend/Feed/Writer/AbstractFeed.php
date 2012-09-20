@@ -36,7 +36,7 @@ class AbstractFeed
     protected $type = null;
 
     /**
-     * @var $_extensions
+     * @var $extensions
      */
     protected $extensions;
 
@@ -109,7 +109,7 @@ class AbstractFeed
     /**
      * Set the copyright entry
      *
-     * @return string|null
+     * @param string $copyright
      * @throws Exception\InvalidArgumentException
      */
     public function setCopyright($copyright)
@@ -180,7 +180,7 @@ class AbstractFeed
     /**
      * Set the feed description
      *
-     * @return string|null
+     * @param string $description
      * @throws Exception\InvalidArgumentException
      */
     public function setDescription($description)
@@ -194,8 +194,11 @@ class AbstractFeed
     /**
      * Set the feed generator entry
      *
-     * @return string|null
+     * @param array|string $name
+     * @param null|string $version
+     * @param null|string $uri
      * @throws Exception\InvalidArgumentException
+     * @return string|null
      */
     public function setGenerator($name, $version = null, $uri = null)
     {
@@ -310,7 +313,7 @@ class AbstractFeed
     /**
      * Set the feed language
      *
-     * @return string|null
+     * @param string $language
      * @throws Exception\InvalidArgumentException
      */
     public function setLanguage($language)
@@ -338,7 +341,8 @@ class AbstractFeed
     /**
      * Set a link to an XML feed for any feed type/version
      *
-     * @return string|null
+     * @param string $link
+     * @param string $type
      * @throws Exception\InvalidArgumentException
      */
     public function setFeedLink($link, $type)
@@ -355,7 +359,7 @@ class AbstractFeed
     /**
      * Set the feed title
      *
-     * @return string|null
+     * @param string $title
      * @throws Exception\InvalidArgumentException
      */
     public function setTitle($title)
@@ -428,7 +432,7 @@ class AbstractFeed
     /**
      * Add a feed category
      *
-     * @param string $category
+     * @param array $category
      * @throws Exception\InvalidArgumentException
      */
     public function addCategory(array $category)
@@ -769,6 +773,7 @@ class AbstractFeed
     /**
      * Load extensions from Zend_Feed_Writer
      *
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function _loadExtensions()

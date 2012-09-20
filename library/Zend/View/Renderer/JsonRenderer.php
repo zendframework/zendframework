@@ -124,8 +124,9 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Renders values as JSON
      *
      * @todo   Determine what use case exists for accepting both $nameOrModel and $values
-     * @param  string|Model $name The script/resource process, or a view model
-     * @param  null|array|\ArrayAccess Values to use during rendering
+     * @param  string|Model $nameOrModel The script/resource process, or a view model
+     * @param  null|array|\ArrayAccess $values Values to use during rendering
+     * @throws Exception\DomainException
      * @return string The script output.
      */
     public function render($nameOrModel, $values = null)
@@ -141,7 +142,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($this->hasJsonpCallback()) {
-                $values = $this->jsonpCallback.'('.$values.');';
+                $values = $this->jsonpCallback . '(' . $values . ');';
             }
             return $values;
         }
@@ -159,7 +160,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($this->hasJsonpCallback()) {
-                $return = $this->jsonpCallback.'('.$return.');';
+                $return = $this->jsonpCallback . '(' . $return . ');';
             }
             return $return;
         }

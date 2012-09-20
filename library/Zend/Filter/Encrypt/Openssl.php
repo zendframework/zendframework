@@ -242,7 +242,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets envelope keys
      *
-     * @param  string|array $options Envelope keys
+     * @param  string|array $key Envelope keys
      * @return \Zend\Filter\Encrypt\Openssl
      */
     public function setEnvelopeKey($key)
@@ -416,7 +416,7 @@ class Openssl implements EncryptionAlgorithmInterface
             throw new Exception\RuntimeException('Please give an envelope key for decryption with Openssl');
         }
 
-        foreach ($this->keys['private'] as $key => $cert) {
+        foreach ($this->keys['private'] as $cert) {
             $keys = openssl_pkey_get_private($cert, $this->getPassphrase());
         }
 

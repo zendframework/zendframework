@@ -39,7 +39,7 @@ abstract class AbstractEntry
     /**
      * Entry instance
      *
-     * @var Zend_Feed_Entry_Interface
+     * @var DOMElement
      */
     protected $entry = null;
 
@@ -160,7 +160,7 @@ abstract class AbstractEntry
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Zend_Feed_Reader_Entry_EntryAbstract
+     * @return AbstractEntry
      */
     public function setXpath(DOMXPath $xpath)
     {
@@ -182,7 +182,7 @@ abstract class AbstractEntry
      * Return an Extension object with the matching name (postfixed with _Entry)
      *
      * @param string $name
-     * @return Zend_Feed_Reader_Extension_EntryAbstract
+     * @return Reader\Extension\AbstractEntry
      */
     public function getExtension($name)
     {

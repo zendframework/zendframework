@@ -602,6 +602,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UTF-8', $this->message->getEncoding());
     }
 
+    public function testMessageReturnsNonEncodedSubject()
+    {
+        $this->message->setSubject('This is a subject');
+        $this->message->setEncoding('UTF-8');
+        $this->assertEquals('This is a subject', $this->message->getSubject());
+    }
+
     public function testSettingNonAsciiEncodingForcesMimeEncodingOfSomeHeaders()
     {
         $this->message->addTo('zf-devteam@zend.com', 'ZF DevTeam');

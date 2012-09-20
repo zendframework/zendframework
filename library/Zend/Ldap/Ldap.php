@@ -982,9 +982,8 @@ class Ldap
         } catch (Exception\LdapException $e) {
             if ($e->getCode() === Exception\LdapException::LDAP_NO_SUCH_OBJECT) {
                 return 0;
-            } else {
-                throw $e;
             }
+            throw $e;
         }
 
         return $result->count();

@@ -12,6 +12,7 @@ namespace Zend\Json;
 
 use Iterator;
 use IteratorAggregate;
+use ReflectionClass;
 use Zend\Json\Exception\InvalidArgumentException;
 use Zend\Json\Exception\RecursionException;
 
@@ -49,7 +50,7 @@ class Encoder
      *
      * @param boolean $cycleCheck Whether or not to check for recursion when encoding
      * @param array $options Additional options used during encoding
-     * @return void
+     * @return Encoder
      */
     protected function __construct($cycleCheck = false, $options = array())
     {
@@ -94,7 +95,6 @@ class Encoder
     }
 
 
-
     /**
      * Encode an object to JSON by encoding each of the public properties
      *
@@ -104,8 +104,8 @@ class Encoder
      *
      * @param $value object
      * @return string
-     * @throws Zend\Json\Exception\RecursionException If recursive checks are enabled
-     *                                                and the object has been serialized previously
+     * @throws RecursionException If recursive checks are enabled and the
+     *                            object has been serialized previously
      */
     protected function _encodeObject(&$value)
     {
@@ -131,7 +131,7 @@ class Encoder
         $props = '';
 
         if (method_exists($value, 'toJson')) {
-            $props =',' . preg_replace("/^\{(.*)\}$/","\\1",$value->toJson());
+            $props =',' . preg_replace("/^\{(.*)\}$/","\\1", $value->toJson());
         } else {
             if ($value instanceof IteratorAggregate) {
                 $propCollection = $value->getIterator();
@@ -247,7 +247,7 @@ class Encoder
     /**
      * JSON encode a string value by escaping characters as necessary
      *
-     * @param $value string
+     * @param string $string
      * @return string
      */
     protected function _encodeString(&$string)
@@ -272,10 +272,10 @@ class Encoder
      * Encode the constants associated with the ReflectionClass
      * parameter. The encoding format is based on the class2 format
      *
-     * @param $cls ReflectionClass
+     * @param ReflectionClass $cls
      * @return string Encoded constant block in class2 format
      */
-    private static function _encodeConstants(\ReflectionClass $cls)
+    private static function _encodeConstants(ReflectionClass $cls)
     {
         $result    = "constants : {";
         $constants = $cls->getConstants();
@@ -297,11 +297,11 @@ class Encoder
      * Encode the public methods of the ReflectionClass in the
      * class2 format
      *
-     * @param $cls ReflectionClass
+     * @param ReflectionClass $cls
      * @return string Encoded method fragment
      *
      */
-    private static function _encodeMethods(\ReflectionClass $cls)
+    private static function _encodeMethods(ReflectionClass $cls)
     {
         $methods = $cls->getMethods();
         $result = 'methods:{';
@@ -361,11 +361,11 @@ class Encoder
      * Encode the public properties of the ReflectionClass in the class2
      * format.
      *
-     * @param $cls ReflectionClass
+     * @param ReflectionClass $cls
      * @return string Encode properties list
      *
      */
-    private static function _encodeVariables(\ReflectionClass $cls)
+    private static function _encodeVariables(ReflectionClass $cls)
     {
         $properties = $cls->getProperties();
         $propValues = get_class_vars($cls->getName());
@@ -398,7 +398,7 @@ class Encoder
      * @param $package string Optional package name appended to JavaScript
      * proxy class name
      * @return string The class2 (JavaScript) encoding of the class
-     * @throws Zend\Json\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function encodeClass($className, $package = '')
     {

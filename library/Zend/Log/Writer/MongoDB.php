@@ -50,6 +50,7 @@ class MongoDB extends AbstractWriter
      * @param string|MongoDB $database
      * @param string $collection
      * @param array $saveOptions
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($mongo, $database, $collection, array $saveOptions = array())
     {

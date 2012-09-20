@@ -18,6 +18,7 @@ use Traversable;
 use Zend\Cache\Storage\IteratorInterface as CacheIterator;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\Db\Sql;
+use Zend\Db\ResultSet\AbstractResultSet;
 use Zend\Filter\FilterInterface;
 use Zend\Json\Json;
 use Zend\Paginator\Adapter\AdapterInterface;
@@ -826,11 +827,10 @@ class Paginator implements Countable, IteratorAggregate
     {
         $currentItems = $this->getCurrentItems();
 
-        if ($currentItems instanceof DbAbstractRowset) {
+        if ($currentItems instanceof AbstractResultSet) {
             return Json::encode($currentItems->toArray());
-        } else {
-            return Json::encode($currentItems);
         }
+        return Json::encode($currentItems);
     }
 
     /**
@@ -892,7 +892,7 @@ class Paginator implements Countable, IteratorAggregate
      * Creates the page collection.
      *
      * @param  string $scrollingStyle Scrolling style
-     * @return stdClass
+     * @return \stdClass
      */
     protected function _createPages($scrollingStyle = null)
     {

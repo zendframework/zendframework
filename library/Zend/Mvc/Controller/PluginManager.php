@@ -80,13 +80,14 @@ class PluginManager extends AbstractPluginManager
      * as the first controller, the reference to the controller inside the
      * plugin is lost.
      *
-     * @param  string $cName
-     * @param  array $params
+     * @param  string $name
+     * @param  mixed  $options
+     * @param  bool   $usePeeringServiceManagers
      * @return mixed
      */
-    public function get($name, $usePeeringServiceManagers = true)
+    public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
-        $plugin = parent::get($name, $usePeeringServiceManagers);
+        $plugin = parent::get($name, $options, $usePeeringServiceManagers);
         $this->injectController($plugin);
         return $plugin;
     }
@@ -142,7 +143,7 @@ class PluginManager extends AbstractPluginManager
      * Any plugin is considered valid in this context.
      *
      * @param  mixed $plugin
-     * @return true
+     * @return void
      * @throws Exception\InvalidPluginException
      */
     public function validatePlugin($plugin)

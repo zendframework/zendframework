@@ -151,7 +151,7 @@ class Inflector extends AbstractFilter
      * Set Whether or not the inflector should throw an exception when a replacement
      * identifier is still found within an inflected target.
      *
-     * @param bool $throwTargetExceptions
+     * @param bool $throwTargetExceptionsOn
      * @return Inflector
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
@@ -407,6 +407,7 @@ class Inflector extends AbstractFilter
      * Inflect
      *
      * @param  string|array $source
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function filter($source)
@@ -423,23 +424,23 @@ class Inflector extends AbstractFilter
             if (isset($source[$ruleName])) {
                 if (is_string($ruleValue)) {
                     // overriding the set rule
-                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $source[$ruleName]);
+                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $source[$ruleName]);
                 } elseif (is_array($ruleValue)) {
                     $processedPart = $source[$ruleName];
                     foreach ($ruleValue as $ruleFilter) {
                         $processedPart = $ruleFilter($processedPart);
                     }
-                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $processedPart);
+                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $processedPart);
                 }
             } elseif (is_string($ruleValue)) {
-                $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $ruleValue);
+                $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $ruleValue);
             }
         }
 
         // all of the values of processedParts would have been str_replace('\\', '\\\\', ..)'d to disable preg_replace backreferences
         $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->target);
 
-        if ($this->throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
+        if ($this->throwTargetExceptionsOn && (preg_match('#(?=' . $pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
             throw new Exception\RuntimeException('A replacement identifier ' . $this->targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
         }
 

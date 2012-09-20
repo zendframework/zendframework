@@ -51,7 +51,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
 
     /**
      * @param  string       $type
-     * @return Definition[]
+     * @return Definition\DefinitionInterface[]
      */
     public function getDefinitionsByType($type)
     {
@@ -144,9 +144,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         $supertypes = array();
         /** @var $definition Definition\DefinitionInterface */
         foreach ($this as $definition) {
-            $supertypes = array_merge($supertypes, $definition->getClassSupertypes($class));
+            if ($definition->hasClass($class)) {
+                $supertypes = array_merge($supertypes, $definition->getClassSupertypes($class));
+                if (!$definition instanceof Definition\PartialMarker) {
+                    return $supertypes;
+                }
+            }
         }
-        // @todo remove duplicates?
         return $supertypes;
     }
 

@@ -10,6 +10,7 @@
 
 namespace Zend\Authentication\Adapter;
 
+use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Ldap as ZendLdap;
 use Zend\Ldap\Exception\LdapException;
@@ -256,7 +257,7 @@ class Ldap implements AdapterInterface
         /* Iterate through each server and try to authenticate the supplied
          * credentials against it.
          */
-        foreach ($this->options as $name => $options) {
+        foreach ($this->options as $options) {
 
             if (!is_array($options)) {
                 throw new Exception\InvalidArgumentException('Adapter options array not an array');
@@ -438,9 +439,9 @@ class Ldap implements AdapterInterface
 
         if ($result === 1) {
             return true;
-        } else {
-            return 'Failed to verify group membership with ' . $group->toString();
         }
+
+        return 'Failed to verify group membership with ' . $group->toString();
     }
 
     /**
@@ -459,7 +460,7 @@ class Ldap implements AdapterInterface
             return false;
         }
 
-        $returnObject = new \stdClass();
+        $returnObject = new stdClass();
 
         $omitAttribs = array_map('strtolower', $omitAttribs);
 

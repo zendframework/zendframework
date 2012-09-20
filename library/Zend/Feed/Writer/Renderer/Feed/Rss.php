@@ -27,7 +27,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Writer_Feed $container
+     * @param  Writer\Feed $container
      */
     public function __construct (Writer\Feed $container)
     {
@@ -37,13 +37,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Render RSS feed
      *
-     * @return Zend_Feed_Writer_Renderer_Feed_Rss
+     * @return self
      */
     public function render()
     {
-        if (!$this->container->getEncoding()) {
-            $this->container->setEncoding('UTF-8');
-        }
         $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
         $this->dom->formatOutput = true;
         $this->dom->substituteEntities = false;

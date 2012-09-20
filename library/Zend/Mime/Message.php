@@ -149,6 +149,7 @@ class Message
      * Get the headers of a given part as a string
      *
      * @param int $partnum
+     * @param string $EOL
      * @return string
      */
     public function getPartHeaders($partnum, $EOL = Mime::LINEEND)
@@ -160,6 +161,7 @@ class Message
      * Get the (encoded) content of a given part as a string
      *
      * @param int $partnum
+     * @param string $EOL
      * @return string
      */
     public function getPartContent($partnum, $EOL = Mime::LINEEND)
@@ -174,6 +176,7 @@ class Message
      *
      * @param string $body
      * @param string $boundary
+     * @throws Exception\RuntimeException
      * @return array
      */
     protected static function _disassembleMime($body, $boundary)
@@ -183,7 +186,7 @@ class Message
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
-        $p = strpos($body, '--'.$boundary."\n", $start);
+        $p = strpos($body, '--' . $boundary."\n", $start);
         if ($p === false) {
             // no parts found!
             return array();
@@ -215,6 +218,7 @@ class Message
      * @param string $message
      * @param string $boundary
      * @param string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @throws Exception\RuntimeException
      * @return \Zend\Mime\Message
      */
     public static function createFromMessage($message, $boundary, $EOL = Mime::LINEEND)

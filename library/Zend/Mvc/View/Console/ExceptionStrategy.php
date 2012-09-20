@@ -12,7 +12,6 @@ namespace Zend\Mvc\View\Console;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Console\Response as ConsoleResponse;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;

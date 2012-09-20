@@ -107,7 +107,7 @@ class Service
      * Constructor
      *
      * @param  string|array $spec
-     * @throws Zend\Json\Server\Exception\InvalidArgumentException if no name provided
+     * @throws InvalidArgumentException if no name provided
      */
     public function __construct($spec)
     {
@@ -126,7 +126,7 @@ class Service
      * Set object state
      *
      * @param  array $options
-     * @return Zend\Json\Server\Smd\Service
+     * @return Service
      */
     public function setOptions(array $options)
     {
@@ -147,8 +147,8 @@ class Service
      * Set service name
      *
      * @param  string $name
-     * @return Zend\Json\Server\Smd\Service
-     * @throws Zend\Json\Server\Exception\InvalidArgumentException
+     * @return Service
+     * @throws InvalidArgumentException
      */
     public function setName($name)
     {
@@ -176,7 +176,8 @@ class Service
      * Currently limited to POST
      *
      * @param  string $transport
-     * @return Zend\Json\Server\Smd\Service
+     * @throws InvalidArgumentException
+     * @return Service
      */
     public function setTransport($transport)
     {
@@ -202,7 +203,7 @@ class Service
      * Set service target
      *
      * @param  string $target
-     * @return Zend\Json\Server\Smd\Service
+     * @return Service
      */
     public function setTarget($target)
     {
@@ -224,7 +225,8 @@ class Service
      * Set envelope type
      *
      * @param  string $envelopeType
-     * @return Zend\Json\Server\Smd\Service
+     * @throws InvalidArgumentException
+     * @return Service
      */
     public function setEnvelope($envelopeType)
     {
@@ -252,7 +254,8 @@ class Service
      * @param  string|array $type
      * @param  array $options
      * @param  int|null $order
-     * @return Zend\Json\Server\Smd\Service
+     * @throws InvalidArgumentException
+     * @return Service
      */
     public function addParam($type, array $options = array(), $order = null)
     {
@@ -294,7 +297,7 @@ class Service
      * Each param should be an array, and should include the key 'type'.
      *
      * @param  array $params
-     * @return Zend\Json\Server\Smd\Service
+     * @return Service
      */
     public function addParams(array $params)
     {
@@ -317,7 +320,7 @@ class Service
      * Overwrite all parameters
      *
      * @param  array $params
-     * @return Zend\Json\Server\Smd\Service
+     * @return Service
      */
     public function setParams(array $params)
     {
@@ -355,7 +358,8 @@ class Service
      * Set return type
      *
      * @param  string|array $type
-     * @return Zend\Json\Server\Smd\Service
+     * @throws InvalidArgumentException
+     * @return Service
      */
     public function setReturn($type)
     {
@@ -389,7 +393,6 @@ class Service
      */
     public function toArray()
     {
-        $name       = $this->getName();
         $envelope   = $this->getEnvelope();
         $target     = $this->getTarget();
         $transport  = $this->getTransport();

@@ -589,9 +589,9 @@ class Http implements AdapterInterface
         if ($this->_secureStringCompare($digest, $data['response'])) {
             $identity = array('username'=>$data['username'], 'realm'=>$data['realm']);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
-        } else {
-            return $this->_challengeClient();
         }
+
+        return $this->_challengeClient();
     }
 
     /**
@@ -682,9 +682,9 @@ class Http implements AdapterInterface
         }
         if (!ctype_xdigit($temp[1])) {
             return false;
-        } else {
-            $data['nonce'] = $temp[1];
         }
+
+        $data['nonce'] = $temp[1];
         $temp = null;
 
         $ret = preg_match('/uri="([^"]+)"/', $header, $temp);
@@ -715,9 +715,9 @@ class Http implements AdapterInterface
         }
         if (32 != strlen($temp[1]) || !ctype_xdigit($temp[1])) {
             return false;
-        } else {
-            $data['response'] = $temp[1];
         }
+
+        $data['response'] = $temp[1];
         $temp = null;
 
         // The spec says this should default to MD5 if omitted. OK, so how does
@@ -739,9 +739,9 @@ class Http implements AdapterInterface
         }
         if (!ctype_print($temp[1])) {
             return false;
-        } else {
-            $data['cnonce'] = $temp[1];
         }
+
+        $data['cnonce'] = $temp[1];
         $temp = null;
 
         // If the server sent an opaque value, the client must send it back
@@ -767,9 +767,9 @@ class Http implements AdapterInterface
             if (!$this->ieNoOpaque &&
                 (32 != strlen($temp[1]) || !ctype_xdigit($temp[1]))) {
                 return false;
-            } else {
-                $data['opaque'] = $temp[1];
             }
+
+            $data['opaque'] = $temp[1];
             $temp = null;
         }
 
@@ -781,9 +781,9 @@ class Http implements AdapterInterface
         }
         if (!in_array($temp[1], $this->supportedQops)) {
             return false;
-        } else {
-            $data['qop'] = $temp[1];
         }
+
+        $data['qop'] = $temp[1];
         $temp = null;
 
         // Not optional in this implementation. The spec says this value
@@ -795,9 +795,9 @@ class Http implements AdapterInterface
         }
         if (8 != strlen($temp[1]) || !ctype_xdigit($temp[1])) {
             return false;
-        } else {
-            $data['nc'] = $temp[1];
         }
+
+        $data['nc'] = $temp[1];
         $temp = null;
 
         return $data;

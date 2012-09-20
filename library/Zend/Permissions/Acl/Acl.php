@@ -839,7 +839,7 @@ class Acl
         }
 
         $dfs['visited'][$role->getRoleId()] = true;
-        foreach ($this->getRoleRegistry()->getParents($role) as $roleParentId => $roleParent) {
+        foreach ($this->getRoleRegistry()->getParents($role) as $roleParent) {
             $dfs['stack'][] = $roleParent;
         }
 
@@ -925,7 +925,7 @@ class Acl
         }
 
         $dfs['visited'][$role->getRoleId()] = true;
-        foreach ($this->getRoleRegistry()->getParents($role) as $roleParentId => $roleParent) {
+        foreach ($this->getRoleRegistry()->getParents($role) as $roleParent) {
             $dfs['stack'][] = $roleParent;
         }
 

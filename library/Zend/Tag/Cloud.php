@@ -22,14 +22,14 @@ class Cloud
     /**
      * DecoratorInterface for the cloud
      *
-     * @var Cloud
+     * @var Cloud\Decorator\AbstractCloud
      */
     protected $cloudDecorator = null;
 
     /**
      * DecoratorInterface for the tags
      *
-     * @var Tag
+     * @var Cloud\Decorator\AbstractTag
      */
     protected $tagDecorator = null;
 
@@ -208,7 +208,7 @@ class Cloud
     /**
      * Get the decorator for the cloud
      *
-     * @return Cloud
+     * @return Cloud\Decorator\AbstractCloud
      */
     public function getCloudDecorator()
     {
@@ -255,7 +255,7 @@ class Cloud
     /**
      * Get the decorator for the tags
      *
-     * @return Tag
+     * @return Cloud\Decorator\AbstractTag
      */
     public function getTagDecorator()
     {

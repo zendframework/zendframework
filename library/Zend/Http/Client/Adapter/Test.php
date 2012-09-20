@@ -80,6 +80,7 @@ class Test implements AdapterInterface
      * Set the configuration array for the adapter
      *
      * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options = array())
     {
@@ -189,7 +190,7 @@ class Test implements AdapterInterface
     /**
      * Add another response to the response buffer.
      *
-     * @param string \Zend\Http\Response|$response
+     * @param string|Response $response
      */
     public function addResponse($response)
     {
@@ -205,6 +206,7 @@ class Test implements AdapterInterface
      * response will be returned on the next call to read().
      *
      * @param integer $index
+     * @throws Exception\OutOfRangeException
      */
     public function setResponseIndex($index)
     {

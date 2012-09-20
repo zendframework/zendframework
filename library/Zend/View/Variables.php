@@ -130,7 +130,7 @@ class Variables extends ArrayObject
      * Otherwise, returns _escaped_ version of the value.
      *
      * @param  mixed $key
-     * @return void
+     * @return mixed
      */
     public function offsetGet($key)
     {

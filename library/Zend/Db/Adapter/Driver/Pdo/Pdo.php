@@ -136,7 +136,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * @param $name
-     * @return bool
+     * @return AbstractFeature|false
      */
     public function getFeature($name)
     {
@@ -217,6 +217,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * @param resource $resource
+     * @param mixed $context
      * @return Result
      */
     public function createResult($resource, $context = null)
@@ -262,7 +263,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
      */
     public function getLastGeneratedValue()
     {
-        $this->connection->getLastGeneratedValue();
+        return $this->connection->getLastGeneratedValue();
     }
 
 }

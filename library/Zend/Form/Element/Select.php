@@ -86,7 +86,7 @@ class Select extends Element implements InputProviderInterface
             $validator = $this->validator instanceof InArrayValidator ? $this->validator : $this->validator->getValidator();
             $validator->setHaystack($this->getValueOptionsValues());          
         }
-        
+                
         return $this;
     }
 

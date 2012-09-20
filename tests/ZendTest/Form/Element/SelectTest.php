@@ -169,7 +169,7 @@ class SelectTest extends TestCase
     	$element->setAttributes(array(
     			'options' => $options,
     	));
-    	$haystack=$explodeValidator->getHaystack();
+    	$haystack=$inArrayValidator->getHaystack();
     	$this->assertCount(count($options), $haystack);
     }
     

@@ -242,14 +242,8 @@ class Sitemap extends AbstractHelper
      */
     protected function xmlEscape($string)
     {
-        $enc = 'UTF-8';
-        if ($this->view instanceof View\Renderer\RendererInterface
-            && method_exists($this->view, 'getEncoding')
-        ) {
-            $enc = $this->view->getEncoding();
-        }
-
-        return htmlspecialchars($string, ENT_QUOTES, $enc, false);
+        $escaper = $this->view->plugin('escapeHtml');
+        return $escaper($string);
     }
 
     // Public methods:

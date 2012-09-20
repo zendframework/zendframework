@@ -10,6 +10,7 @@
 
 namespace Zend\Feed\PubSubHubbub;
 
+use Zend\Escaper\Escaper;
 use Zend\Feed\Reader;
 use Zend\Http;
 
@@ -33,9 +34,14 @@ class PubSubHubbub
     const SUBSCRIPTION_TODELETE    = 'to_delete';
 
     /**
+     * @var Escaper
+     */
+    protected static $escaper;
+
+    /**
      * Singleton instance if required of the HTTP client
      *
-     * @var \Zend\Http\Client
+     * @var Http\Client
      */
     protected static $httpClient = null;
 
@@ -67,7 +73,7 @@ class PubSubHubbub
      * Allows the external environment to make Zend_Oauth use a specific
      * Client instance.
      *
-     * @param  \Zend\Http\Client $httpClient
+     * @param  Http\Client $httpClient
      * @return void
      */
     public static function setHttpClient(Http\Client $httpClient)
@@ -80,15 +86,15 @@ class PubSubHubbub
      * the instance is reset and cleared of previous parameters GET/POST.
      * Headers are NOT reset but handled by this component if applicable.
      *
-     * @return \Zend\Http\Client
+     * @return Http\Client
      */
     public static function getHttpClient()
     {
-        if (!isset(self::$httpClient)):
+        if (!isset(self::$httpClient)) {
             self::$httpClient = new Http\Client;
-        else:
+        } else {
             self::$httpClient->resetParameters();
-        endif;
+        }
         return self::$httpClient;
     }
 
@@ -104,6 +110,33 @@ class PubSubHubbub
     }
 
     /**
+     * Set the Escaper instance
+     *
+     * If null, resets the instance
+     * 
+     * @param  null|Escaper $escaper 
+     */
+    public static function setEscaper(Escaper $escaper = null)
+    {
+        static::$escaper = $escaper;
+    }
+
+    /**
+     * Get the Escaper instance
+     *
+     * If none registered, lazy-loads an instance.
+     * 
+     * @return Escaper
+     */
+    public static function getEscaper()
+    {
+        if (null === static::$escaper) {
+            static::setEscaper(new Escaper());
+        }
+        return static::$escaper;
+    }
+
+    /**
      * RFC 3986 safe url encoding method
      *
      * @param  string $string
@@ -111,7 +144,8 @@ class PubSubHubbub
      */
     public static function urlencode($string)
     {
-        $rawencoded = rawurlencode($string);
+        $escaper    = static::getEscaper();
+        $rawencoded = $escaper->escapeUrl($string);
         $rfcencoded = str_replace('%7E', '~', $rawencoded);
         return $rfcencoded;
     }

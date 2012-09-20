@@ -30,11 +30,6 @@ class HtmlTag extends AbstractTag
     protected $classList = null;
 
     /**
-     * @var string Encoding to utilize
-     */
-    protected $encoding = 'UTF-8';
-
-    /**
      * Unit for the fontsize
      *
      * @var string
@@ -105,28 +100,6 @@ class HtmlTag extends AbstractTag
     public function getClassList()
     {
         return $this->classList;
-    }
-
-    /**
-     * Get encoding
-     *
-     * @return string
-     */
-    public function getEncoding()
-    {
-         return $this->encoding;
-    }
-
-    /**
-     * Set encoding
-     *
-     * @param  string $value
-     * @return HTMLTag
-     */
-    public function setEncoding($value)
-    {
-        $this->encoding = (string) $value;
-        return $this;
     }
 
     /**
@@ -259,32 +232,16 @@ class HtmlTag extends AbstractTag
 
         $result = array();
 
-        $enc = $this->getEncoding();
+        $escaper = $this->getEscaper();
         foreach ($tags as $tag) {
             if (null === ($classList = $this->getClassList())) {
                 $attribute = sprintf('style="font-size: %d%s;"', $tag->getParam('weightValue'), $this->getFontSizeUnit());
             } else {
-                $attribute = sprintf('class="%s"', htmlspecialchars($tag->getParam('weightValue'), ENT_COMPAT, $enc));
+                $attribute = sprintf('class="%s"', $escaper->escapeHtmlAttr($tag->getParam('weightValue')));
             }
 
-            $tagHTML = sprintf('<a href="%s" %s>%s</a>', htmlSpecialChars($tag->getParam('url'), ENT_COMPAT, $enc), $attribute, $tag->getTitle());
-
-            foreach ($this->getHTMLTags() as $key => $data) {
-                if (is_array($data)) {
-                    $htmlTag    = $key;
-                    $attributes = '';
-
-                    foreach ($data as $param => $value) {
-                        $attributes .= ' ' . $param . '="' . htmlspecialchars($value, ENT_COMPAT, $enc) . '"';
-                    }
-                } else {
-                    $htmlTag    = $data;
-                    $attributes = '';
-                }
-
-                $tagHTML = sprintf('<%1$s%3$s>%2$s</%1$s>', $htmlTag, $tagHTML, $attributes);
-            }
-
+            $tagHTML  = sprintf('<a href="%s" %s>%s</a>', $escaper->escapeHtml($tag->getParam('url')), $attribute, $escaper->escapeHtml($tag->getTitle()));
+            $tagHTML  = $this->wrapTag($tagHTML);
             $result[] = $tagHTML;
         }
 

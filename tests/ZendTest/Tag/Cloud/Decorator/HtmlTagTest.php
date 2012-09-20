@@ -10,9 +10,9 @@
 
 namespace ZendTest\Tag\Cloud\Decorator;
 
-use	Zend\Tag,
-    Zend\Tag\Cloud\Decorator,
-    Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
+use	Zend\Tag;
+use Zend\Tag\Cloud\Decorator;
+use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
@@ -74,60 +74,40 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     {
         $decorator = new Decorator\HtmlTag();
 
-        try {
-            $decorator->setClassList(array());
-            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Classlist is empty');
-        }
+        $this->setExpectedException('Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException', 'Classlist is empty');
+        $decorator->setClassList(array());
     }
 
     public function testInvalidClassList()
     {
         $decorator = new Decorator\HtmlTag();
 
-        try {
-            $decorator->setClassList(array(array()));
-            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Classlist contains an invalid classname');
-        }
+        $this->setExpectedException('Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException', 'Classlist contains an invalid classname');
+        $decorator->setClassList(array(array()));
     }
 
     public function testInvalidFontSizeUnit()
     {
         $decorator = new Decorator\HtmlTag();
 
-        try {
-            $decorator->setFontSizeUnit('foo');
-            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Invalid fontsize unit specified');
-        }
+        $this->setExpectedException('Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException', 'Invalid fontsize unit specified');
+        $decorator->setFontSizeUnit('foo');
     }
 
     public function testInvalidMinFontSize()
     {
         $decorator = new Decorator\HtmlTag();
 
-        try {
-            $decorator->setMinFontSize('foo');
-            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Fontsize must be numeric');
-        }
+        $this->setExpectedException('Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException', 'Fontsize must be numeric');
+        $decorator->setMinFontSize('foo');
     }
 
     public function testInvalidMaxFontSize()
     {
         $decorator = new Decorator\HtmlTag();
 
-        try {
-            $decorator->setMaxFontSize('foo');
-            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Fontsize must be numeric');
-        }
+        $this->setExpectedException('Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException', 'Fontsize must be numeric');
+        $decorator->setMaxFontSize('foo');
     }
 
     public function testConstructorWithArray()
@@ -172,5 +152,74 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         $list[] = new Tag\Item(array('title' => 'baz', 'weight' => 10, 'params' => array('url' => 'http://third')));
 
         return $list;
+    }
+
+    public function getTags()
+    {
+        $tags = new Tag\ItemList();
+        $tags[] = new Tag\Item(array(
+            'title' => 'tag',
+            'weight' => 1,
+            'params' => array(
+                'url' => 'http://testing',
+            ),
+        ));
+        return $tags;
+    }
+
+    public function invalidHtmlElementProvider()
+    {
+        return array(
+            array(array('_foo')),
+            array(array('&foo')),
+            array(array(' foo')),
+            array(array(' foo')),
+            array(array(
+                '_foo' => array(),
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider invalidHtmlElementProvider
+     */
+    public function testInvalidElementNamesRaiseAnException($tags)
+    {
+        $decorator = new Decorator\HtmlTag();
+        $decorator->setHTMLTags($tags);
+        $this->setExpectedException('Zend\Tag\Exception\InvalidElementNameException');
+        $decorator->render($this->getTags());
+    }
+
+    public function invalidAttributeProvider()
+    {
+        return array(
+            array(array(
+                'foo' => array(
+                    '&bar' => 'baz',
+                ),
+            )),
+            array(array(
+                'foo' => array(
+                    ':bar&baz' => 'bat',
+                ),
+            )),
+            array(array(
+                'foo' => array(
+                    'bar/baz' => 'bat',
+                ),
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider invalidAttributeProvider
+     */
+    public function testInvalidAttributesRaiseAnException($tags)
+    {
+        $decorator = new Decorator\HtmlTag();
+        $decorator->setHTMLTags($tags);
+        $this->setExpectedException('Zend\Tag\Exception\InvalidAttributeNameException');
+        $decorator->render($this->getTags());
     }
 }

@@ -48,6 +48,16 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\Sql\Update::__construct
+     */
+    public function testConstruct()
+    {
+        $update = new Update('foo');
+        $this->assertEquals('foo', $this->readAttribute($update, 'table'));
+
+    }
+
+    /**
      * @covers Zend\Db\Sql\Update::set
      */
     public function testSet()
@@ -100,6 +110,9 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->update->where(function ($what) use ($test, $where) {
             $test->assertSame($where, $what);
         });
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Predicate cannot be null');
+        $this->update->where(null);
     }
 
     /**
@@ -113,6 +126,21 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $update->set(array('fld1' => 'val1'));
         $update->where(array('id1' => 'val1', 'id2' => 'val2'));
         $this->assertEquals('UPDATE "table" SET "fld1" = \'val1\' WHERE "id1" = \'val1\' AND "id2" = \'val2\'', $update->getSqlString());
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Update::getRawState
+     */
+    public function testGetRawState()
+    {
+        $this->update->table('foo')
+            ->set(array('bar' => 'baz'))
+            ->where('x = y');
+
+        $this->assertEquals('foo', $this->update->getRawState('table'));
+        $this->assertEquals(true, $this->update->getRawState('emptyWhereProtection'));
+        $this->assertEquals(array('bar' => 'baz'), $this->update->getRawState('set'));
+        $this->assertInstanceOf('Zend\Db\Sql\Where', $this->update->getRawState('where'));
     }
 
     /**
@@ -150,6 +178,24 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString());
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Update::__get
+     */
+    public function testGetUpdate()
+    {
+        $getWhere = $this->update->__get('where');
+        $this->assertInstanceOf('Zend\Db\Sql\Where', $getWhere);
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Update::__get
+     */
+    public function testGetUpdateFails()
+    {
+        $getWhat = $this->update->__get('what');
+        $this->assertNull($getWhat);
     }
 
     /**

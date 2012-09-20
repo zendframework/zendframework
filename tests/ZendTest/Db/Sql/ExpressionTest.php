@@ -34,6 +34,16 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\Sql\Expression::setExpression
+     */
+    public function testSetExpressionException()
+    {
+        $expression = new Expression();
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Supplied expression must be a string.');
+        $return = $expression->setExpression(null);
+    }
+
+    /**
      * @covers Zend\Db\Sql\Expression::getExpression
      * @depends testSetExpression
      */
@@ -51,6 +61,17 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $return = $expression->setParameters('foo');
         $this->assertSame($expression, $return);
         return $return;
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Expression::setParameters
+     */
+    public function testSetParametersException()
+    {
+        $expression = new Expression('','foo');
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Expression parameters must be a string or array.');
+        $return = $expression->setParameters(null);
     }
 
     /**

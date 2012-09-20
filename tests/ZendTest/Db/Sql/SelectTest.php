@@ -21,6 +21,15 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * @covers Zend\Db\Sql\Select::__construct
+     */
+    public function testConstruct()
+    {
+        $select = new Select('foo');
+        $this->assertEquals('foo', $select->getRawState('table'));
+    }
+
+    /**
      * @testdox unit test: Test from() returns Select object (is chainable)
      * @covers Zend\Db\Sql\Select::from
      */

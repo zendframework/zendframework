@@ -57,12 +57,6 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)
     {
-        // test
-        $adapter = $this->getMock(
-            'Zend\Db\Adapter\Adapter',
-            null,
-            array($this->getMock('Zend\Db\Adapter\Driver\DriverInterface'))
-        );
         $parameterContainer = new ParameterContainer;
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));

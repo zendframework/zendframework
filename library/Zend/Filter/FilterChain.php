@@ -225,4 +225,14 @@ class FilterChain extends AbstractFilter implements Countable
 
         return $valueFiltered;
     }
+
+    /**
+     * Clone filters
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->filters = clone $this->filters;
+    }
 }

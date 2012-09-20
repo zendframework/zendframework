@@ -158,6 +158,16 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Tu et PARTY', $chain->filter('Tu et Foo'));
     }
+
+    public function testClone()
+    {
+        $chain = new FilterChain();
+        $clone = clone $chain;
+
+        $chain->attachByName('strip_tags');
+
+        $this->assertCount(0, $clone);
+    }
 }
 
 

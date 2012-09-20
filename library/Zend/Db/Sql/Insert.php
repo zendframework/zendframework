@@ -52,11 +52,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $values           = array();
 
     /**
-     * @var array
-     */
-    protected $keys = array();
-
-    /**
      * Constructor
      *
      * @param  null|string $table
@@ -103,23 +98,27 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function values(array $values, $flag = self::VALUES_SET)
     {
         if ($values == null) {
-            throw new Exception\InvalidArgumentException('values() expects an array of values');
+            throw new \InvalidArgumentException('values() expects an array of values');
         }
 
         $keys = array_keys($values);
-        $values = array_values($values);
+        $firstKey = current($keys);
+
+        if (is_string($firstKey)) {
+            if ($flag == self::VALUES_MERGE) {
+                $this->columns(array_merge($this->columns, $keys));
+            } else {
+                $this->columns($keys);
+            }
+            $values = array_values($values);
+        } elseif (is_int($firstKey)) {
+            $values = array_values($values);
+        }
 
         if ($flag == self::VALUES_MERGE) {
             $this->values = array_merge($this->values, $values);
-            $this->keys = array_merge($this->keys, $keys);
         } else {
             $this->values = $values;
-            $this->keys = $keys;
-        }
-
-        $firstKey = current($this->keys);
-        if (is_string($firstKey)) {
-            $this->columns($this->keys);
         }
 
         return $this;

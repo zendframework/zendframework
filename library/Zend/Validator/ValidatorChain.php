@@ -234,14 +234,15 @@ class ValidatorChain implements
     /**
      * Prepare validator chain for serialization
      *
-     * ValidatorPluginManager cannot be serialized, as it contains Traits. For
-     * this reason property 'plugins' is excluded and thus serialized
-     * filter chain is not necessarily equal to current chain.
+     * Plugin manager (property 'plugins') cannot
+     * be serialized. On wakeup the property remains unset
+     * and next invokation to getPluginManager() sets
+     * the default plugin manager instance (ValidatorPluginManager).
      *
      * @return array
      */
     public function __sleep()
     {
-        return array('validators', 'messages');
+        return array('validators','messages');
     }
 }

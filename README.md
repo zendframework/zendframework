@@ -8,17 +8,11 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 This is the first maintenance release for the 2.0 series.
 
-XX YYY 2012
+20 Sep 2012
 
 ### UPDATES IN 2.0.1
 
-- Zend\Form
-  - Made value and placeholder form attributes translatable
-- Zend\Stdlib
-  - Adds support for "has" methods to ClassMethods hydrator
-
-More than XX pull requests for a variety of features and bugfixes were handled
-since RC6, as well as almost XX documentation changes!
+Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS
 

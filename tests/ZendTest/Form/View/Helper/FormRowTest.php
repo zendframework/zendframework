@@ -257,4 +257,20 @@ class FormRowTest extends TestCase
         $this->helper->setLabelAttributes(array('foo', 'bar'));
         $this->assertEquals(array(0 => 'foo', 1 => 'bar'), $this->helper->getLabelAttributes());
     }
+
+    public function testWhenUsingIdAndLabelIsEmptyRemoveSpan()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value for foo:');
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<span', $markup);
+        $this->assertContains('</span>', $markup);
+
+        $element->setAttribute('id', 'foo');
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertNotContains('<span', $markup);
+        $this->assertNotContains('</span>', $markup);
+    }
 }

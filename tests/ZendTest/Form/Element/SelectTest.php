@@ -163,8 +163,8 @@ class SelectTest extends TestCase
     	$element = new SelectElement('my-select');
     	$inputSpec = $element->getInputSpecification();
     	 
-    	$explodeValidator = $inputSpec['validators'][0];
-    	$this->assertInstanceOf('Zend\Validator\InArray', $explodeValidator);
+    	$inArrayValidator = $inputSpec['validators'][0];
+    	$this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
     	 
     	$element->setAttributes(array(
     			'options' => $options,

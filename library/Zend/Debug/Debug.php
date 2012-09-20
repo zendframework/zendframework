@@ -10,6 +10,8 @@
 
 namespace Zend\Debug;
 
+use Zend\Escaper\Escaper;
+
 /**
  * Concrete class for generating debug dumps related to the output source.
  *
@@ -18,6 +20,10 @@ namespace Zend\Debug;
  */
 class Debug
 {
+    /**
+     * @var Escaper
+     */
+    protected static $escaper = null;
 
     /**
      * @var string
@@ -51,6 +57,31 @@ class Debug
     }
 
     /**
+     * Set Escaper instance
+     *
+     * @param  Escaper $escaper
+     */
+    public static function setEscaper(Escaper $escaper)
+    {
+        static::$escaper = $escaper;
+    }
+    
+    /**
+     * Get Escaper instance
+     *
+     * Lazy loads an instance if none provided.
+     *
+     * @return Escaper
+     */
+    public static function getEscaper()
+    {
+        if (null === static::$escaper) {
+            static::setEscaper(new Escaper());
+        }
+        return static::$escaper;
+    }
+
+    /**
      * Debug helper function.  This is a wrapper for var_dump() that adds
      * the <pre /> tags, cleans up newlines and indents, and runs
      * htmlentities() before output.
@@ -78,7 +109,7 @@ class Debug
                     . PHP_EOL;
         } else {
             if (!extension_loaded('xdebug')) {
-                $output = htmlspecialchars($output, ENT_QUOTES);
+                $output = static::getEscaper()->escapeHtml($output);
             }
 
             $output = '<pre>'

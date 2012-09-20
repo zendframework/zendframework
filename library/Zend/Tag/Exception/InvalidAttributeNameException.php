@@ -8,14 +8,9 @@
  * @package   Zend_Tag
  */
 
-namespace Zend\Tag\Cloud\Decorator;
+namespace Zend\Tag\Exception;
 
-/**
- * Abstract class for tag decorators
- *
- * @category  Zend
- * @package   Zend_Tag
- */
-abstract class AbstractTag extends AbstractDecorator
-{
-}
+use DomainException;
+
+class InvalidAttributeNameException extends DomainException implements ExceptionInterface
+{}

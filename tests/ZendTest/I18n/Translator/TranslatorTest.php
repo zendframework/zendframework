@@ -112,8 +112,20 @@ class TranslatorTest extends TestCase
         $this->assertEquals('bar', $this->translator->translate('foo'));
     }
 
+    public function testTranslationsLoadedFromCache()
+    {
+        $cache = \Zend\Cache\StorageFactory::factory(array('adapter' => 'memory'));
+        $this->translator->setCache($cache);
 
-    public function testTranslateWithCache()
+        $cache->addItem(
+            'Zend_I18n_Translator_Messages_' . md5('default' . 'en_EN'),
+            new TextDomain(array('foo' => 'bar'))
+        );
+
+        $this->assertEquals('bar', $this->translator->translate('foo'));
+    }
+
+    public function testTranslationsAreStoredInCache()
     {
         $cache = \Zend\Cache\StorageFactory::factory(array('adapter' => 'memory'));
         $this->translator->setCache($cache);
@@ -124,6 +136,10 @@ class TranslatorTest extends TestCase
         $this->translator->addTranslationFile('test', null);
 
         $this->assertEquals('bar', $this->translator->translate('foo'));
+
+        $item = $cache->getItem('Zend_I18n_Translator_Messages_' . md5('default' . 'en_EN'));
+        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $item);
+        $this->assertEquals('bar', $item['foo']);
     }
 
     public function testTranslatePlurals()

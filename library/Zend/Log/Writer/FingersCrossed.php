@@ -117,7 +117,7 @@ class FingersCrossed extends AbstractWriter
             $this->writer->write($event);
             return;
         }
-        
+
         $this->buffer[] = $event;
 
         if ($this->bufferSize > 0 && count($this->buffer) > $this->bufferSize) {
@@ -127,7 +127,7 @@ class FingersCrossed extends AbstractWriter
         if (!$this->isActivated($event)) {
             return;
         }
-        
+
         $this->buffering = false;
 
         foreach ($this->buffer as $bufferedEvent) {

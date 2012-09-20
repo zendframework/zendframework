@@ -228,11 +228,22 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Clone filters
-     *
-     * @return void
      */
     public function __clone()
     {
         $this->filters = clone $this->filters;
+    }
+
+    /**
+     * Prepare filter chain for serialization
+     *
+     * Plugin manager (property 'plugins') cannot
+     * be serialized. On wakeup the property remains unset
+     * and next invokation to getPluginManager() sets
+     * the default plugin manager instance (FilterPluginManager).
+     */
+    public function __sleep()
+    {
+        return array('filters');
     }
 }

@@ -258,7 +258,7 @@ class FormRowTest extends TestCase
         $this->assertEquals(array(0 => 'foo', 1 => 'bar'), $this->helper->getLabelAttributes());
     }
 
-    public function testWhenUsingIdAndLabelIsEmptyRemoveSpan()
+    public function testWhenUsingIdAndLabelBecomesEmptyRemoveSpan()
     {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');

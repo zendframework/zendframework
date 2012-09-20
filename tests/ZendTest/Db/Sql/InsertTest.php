@@ -133,4 +133,18 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->insert->foo);
     }
 
+    /**
+     * @group ZF2-536
+     */
+    public function testValuesMerge()
+    {
+        $this->insert->into('foo')
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
+        $this->insert->into('foo')
+            ->values(array('qux' => 100), Insert::VALUES_MERGE);
+
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam", "qux") VALUES (\'baz\', NOW(), NULL, \'100\')', $this->insert->getSqlString());
+
+    }
+
 }

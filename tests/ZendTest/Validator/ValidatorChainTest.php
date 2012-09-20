@@ -273,4 +273,16 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertTrue($found);
     }
+
+
+    public function testCanSerializeValidatorChain()
+    {
+        $this->populateValidatorChain();
+        $serialized = serialize($this->validator);
+
+        $unserialized = unserialize($serialized);
+        $this->assertInstanceOf('Zend\Validator\ValidatorChain', $unserialized);
+        $this->assertEquals(2, count($unserialized));
+        $this->assertFalse($unserialized->isValid(''));
+    }
 }

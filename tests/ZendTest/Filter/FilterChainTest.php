@@ -168,6 +168,21 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $clone);
     }
+
+    public function testCanSerializeFilterChain()
+    {
+        $chain = new FilterChain();
+        $chain->attach(new LowerCase())
+              ->attach(new StripUpperCase());
+        $serialized = serialize($chain);
+
+        $unserialized = unserialize($serialized);
+        $this->assertInstanceOf('Zend\Filter\FilterChain', $unserialized);
+        $this->assertEquals(2, count($unserialized));
+        $value         = 'AbC';
+        $valueExpected = 'abc';
+        $this->assertEquals($valueExpected, $unserialized->filter($value));
+    }
 }
 
 

@@ -114,17 +114,17 @@ class MultiCheckboxTest extends TestCase
     public function testInArrayValidatorHaystakIsUpdated($valueTests, $options)
     {
         $element = new MultiCheckboxElement('my-checkbox');
-        $inputSpec = $element->getInputSpecification();    	
+        $inputSpec = $element->getInputSpecification();
         $inArrayValidator=$inputSpec['validators'][0]->getValidator();
 
         $element->setAttributes(array(
-    	    'options' => $options,
-    	));
+            'options' => $options,
+        ));
         $haystack=$inArrayValidator->getHaystack();
         $this->assertCount(count($options), $haystack);
     }
-    
-    
+
+
     public function testAttributeType()
     {
         $element = new MultiCheckboxElement();

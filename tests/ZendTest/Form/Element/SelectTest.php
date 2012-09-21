@@ -151,7 +151,7 @@ class SelectTest extends TestCase
             $this->assertTrue($inArrayValidator->isValid($valueToTest));
         }
     }
-    
+
     /**
      * Testing that InArray Validator Haystack is Updated if the Options
      * are added after the validator is attached
@@ -162,15 +162,15 @@ class SelectTest extends TestCase
     {
         $element = new SelectElement('my-select');
         $inputSpec = $element->getInputSpecification();
-    	 
+
         $inArrayValidator = $inputSpec['validators'][0];
         $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
-    	 
+
         $element->setValueOptions($options);
         $haystack=$inArrayValidator->getHaystack();
         $this->assertCount(count($options), $haystack);
     }
-    
+
 
     public function testOptionsHasArrayOnConstruct()
     {

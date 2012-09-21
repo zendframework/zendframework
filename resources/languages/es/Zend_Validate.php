@@ -262,4 +262,3 @@ return array(
     "'%value%' is less than %min% characters long" => "'%value%' tiene menos de '%min%' caracteres",
     "'%value%' is more than %max% characters long" => "'%value%' tiene más de '%max%' caracteres",
 );
-

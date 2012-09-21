@@ -61,4 +61,3 @@ class DecoratorPluginManager extends AbstractPluginManager
         ));
     }
 }
-

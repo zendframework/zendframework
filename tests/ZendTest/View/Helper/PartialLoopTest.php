@@ -454,4 +454,3 @@ class IteratorWithToArrayTestContainer
         return $this->_info;
     }
 }
-

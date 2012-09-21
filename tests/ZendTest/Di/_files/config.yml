@@ -39,4 +39,3 @@ testing:
         params:    ZendTest\Di\TestAsset\DummyParams
         injected:  ZendTest\Di\TestAsset\InjectedMethod
         inspected: ZendTest\Di\TestAsset\InspectedClass
-

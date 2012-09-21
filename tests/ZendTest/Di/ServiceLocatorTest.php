@@ -108,4 +108,3 @@ class ServiceLocatorTest extends TestCase
         $this->assertEquals($params, $sc->params);
     }
 }
-

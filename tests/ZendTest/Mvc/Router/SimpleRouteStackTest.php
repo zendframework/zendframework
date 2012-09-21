@@ -250,4 +250,3 @@ class SimpleRouteStackTest extends TestCase
         );
     }
 }
-

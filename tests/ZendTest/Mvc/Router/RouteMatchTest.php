@@ -59,4 +59,3 @@ class RouteMatchTest extends TestCase
         $this->assertEquals('bar', $match->getParam('foo', 'bar'));
     }
 }
-

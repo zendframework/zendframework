@@ -51,4 +51,3 @@ class ArrayValue extends AbstractCollection
                   ->closeElement('value');
     }
 }
-

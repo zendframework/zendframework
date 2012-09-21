@@ -67,4 +67,3 @@ class RouteMatchTest extends TestCase
         $this->assertEquals('bar', $match->getMatchedRouteName());
     }
 }
-

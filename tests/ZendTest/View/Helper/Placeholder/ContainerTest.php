@@ -412,4 +412,3 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue((strstr($string, "\n    </ul>")) ? true : false);
     }
 }
-

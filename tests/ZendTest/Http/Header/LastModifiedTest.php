@@ -48,4 +48,3 @@ class LastModifiedTest extends \PHPUnit_Framework_TestCase
      */
 
 }
-

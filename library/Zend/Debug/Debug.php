@@ -65,7 +65,7 @@ class Debug
     {
         static::$escaper = $escaper;
     }
-    
+
     /**
      * Get Escaper instance
      *

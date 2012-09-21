@@ -512,4 +512,3 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         }
     }
 }
-

@@ -160,8 +160,8 @@ class Uri implements UriInterface
 
     /**
      * Set Escaper instance
-     * 
-     * @param  Escaper $escaper 
+     *
+     * @param  Escaper $escaper
      */
     public static function setEscaper(Escaper $escaper)
     {
@@ -172,7 +172,7 @@ class Uri implements UriInterface
      * Retrieve Escaper instance
      *
      * Lazy-loads one if none provided
-     * 
+     *
      * @return Escaper
      */
     public static function getEscaper()

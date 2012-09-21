@@ -138,7 +138,7 @@ class Xml implements FormatterInterface
         $this->escaper = $escaper;
         return $this;
     }
-    
+
     /**
      * Get Escaper instance
      *

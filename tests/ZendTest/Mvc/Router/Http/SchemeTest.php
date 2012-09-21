@@ -81,4 +81,3 @@ class SchemeTest extends TestCase
         );
     }
 }
-

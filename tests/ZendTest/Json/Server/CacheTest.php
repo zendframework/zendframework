@@ -117,5 +117,3 @@ class Foo
         throw new \Exception('application error');
     }
 }
-
-

@@ -33,4 +33,3 @@ class ViewFeedRendererFactory implements FactoryInterface
         return $feedRenderer;
     }
 }
-

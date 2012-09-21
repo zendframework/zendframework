@@ -251,4 +251,3 @@ class HttpTest extends TestCase
         $this->assertEquals($origUri, $uri->toString());
     }
 }
-

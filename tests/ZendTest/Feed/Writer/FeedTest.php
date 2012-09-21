@@ -13,6 +13,7 @@ namespace ZendTest\Feed\Writer;
 use DateTime;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Feed;
+use Zend\Version\Version;
 
 /**
  * @category   Zend
@@ -1017,12 +1018,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
   <channel>
     <title>foo</title>
     <description>bar</description>
-    <generator>Zend_Feed_Writer 2.0.1 (http://framework.zend.com)</generator>
+    <generator>Zend_Feed_Writer %version% (http://framework.zend.com)</generator>
     <link>http://www.example.org</link>
   </channel>
 </rss>
 
 EOT;
+        $feed = str_replace('%version%', Version::VERSION, $feed);
         $this->assertEquals($feed, $export);
     }
 
@@ -1038,11 +1040,12 @@ EOT;
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <generator>Zend_Feed_Writer 2.0.1 (http://framework.zend.com)</generator>
+    <generator>Zend_Feed_Writer %version% (http://framework.zend.com)</generator>
   </channel>
 </rss>
 
 EOT;
+        $feed = str_replace('%version%', Version::VERSION, $feed);
         $this->assertEquals($feed, $export);
     }
 

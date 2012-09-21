@@ -25,6 +25,13 @@ abstract class Console
     protected static $instance;
 
     /**
+     * Allow overriding whether or not we're in a console env. If set, and
+     * boolean, returns that value from isConsole().
+     * @var bool
+     */
+    protected static $isConsole;
+
+    /**
      * Create and return Adapter\AdapterInterface instance.
      *
      * @param  null|string  $forceAdapter Optional adapter class name. Ccan be absolute namespace or class name
@@ -125,11 +132,27 @@ abstract class Console
     /**
      * Check if running in a console environment (CLI)
      *
+     * By default, returns value of PHP_SAPI global constant. If $isConsole is
+     * set, and a boolean value, that value will be returned.
+     *
      * @return bool
      */
     public static function isConsole()
     {
+        if (null !== static::$isConsole && is_bool(static::$isConsole)) {
+            return static::$isConsole;
+        }
         return PHP_SAPI == 'cli';
+    }
+
+    /**
+     * Override the "is console environment" flag
+     *
+     * @param  null|bool $flag
+     */
+    public static function overrideIsConsole($flag)
+    {
+        static::$isConsole = $flag;
     }
 
     /**

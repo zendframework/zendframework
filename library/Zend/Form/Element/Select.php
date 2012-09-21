@@ -80,6 +80,13 @@ class Select extends Element implements InputProviderInterface
     public function setValueOptions(array $options)
     {
         $this->valueOptions = $options;
+        
+        // Update InArrayValidator validator haystack
+        if (!is_null($this->validator)) {
+            $validator = $this->validator instanceof InArrayValidator ? $this->validator : $this->validator->getValidator();
+            $validator->setHaystack($this->getValueOptionsValues());          
+        }
+                
         return $this;
     }
 

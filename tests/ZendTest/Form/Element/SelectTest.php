@@ -160,17 +160,15 @@ class SelectTest extends TestCase
      */
     public function testInArrayValidatorHaystakIsUpdated($valueTests, $options)
     {
-    	$element = new SelectElement('my-select');
-    	$inputSpec = $element->getInputSpecification();
+        $element = new SelectElement('my-select');
+        $inputSpec = $element->getInputSpecification();
     	 
-    	$inArrayValidator = $inputSpec['validators'][0];
-    	$this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
+        $inArrayValidator = $inputSpec['validators'][0];
+        $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
     	 
-    	$element->setAttributes(array(
-    			'options' => $options,
-    	));
-    	$haystack=$inArrayValidator->getHaystack();
-    	$this->assertCount(count($options), $haystack);
+        $element->setValueOptions($options);
+        $haystack=$inArrayValidator->getHaystack();
+        $this->assertCount(count($options), $haystack);
     }
     
 

@@ -79,4 +79,3 @@ class AllowTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($allowHeader->isAllowedMethod('TRACE'));
     }
 }
-

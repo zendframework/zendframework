@@ -59,4 +59,3 @@ class JsPullStub extends \Zend\ProgressBar\Adapter\JsPull
         $this->_lastOutput = $data;
     }
 }
-

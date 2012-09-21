@@ -55,4 +55,3 @@ class HtmlFlashTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('</object>', $htmlFlash);
     }
 }
-

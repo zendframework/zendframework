@@ -68,4 +68,3 @@ class RefererTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Referer: http://www.example.com/path?query', $refererHeader->toString());
     }
 }
-

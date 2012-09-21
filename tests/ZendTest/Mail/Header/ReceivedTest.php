@@ -55,4 +55,3 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
     /** Implementation specific tests here */
 
 }
-

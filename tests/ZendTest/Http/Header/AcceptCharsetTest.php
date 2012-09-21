@@ -79,4 +79,3 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8, *;q=0.4', $acceptHeader->toString());
     }
 }
-

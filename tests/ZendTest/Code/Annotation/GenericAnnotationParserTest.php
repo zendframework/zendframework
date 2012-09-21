@@ -83,4 +83,3 @@ class GenericAnnotationParserTest extends TestCase
         $this->assertEquals('test content', $test->content);
     }
 }
-

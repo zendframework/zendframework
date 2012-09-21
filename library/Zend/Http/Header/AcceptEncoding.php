@@ -80,4 +80,3 @@ class AcceptEncoding extends AbstractAccept
         return new FieldValuePart\EncodingFieldValuePart($internalValues);
     }
 }
-

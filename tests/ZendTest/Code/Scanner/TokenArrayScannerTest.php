@@ -58,8 +58,3 @@ class TokenArrayScannerTest extends TestCase
     }
 
 }
-
-
-
-
-

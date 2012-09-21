@@ -426,4 +426,3 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('id="foo"', $this->helper->toString());
     }
 }
-

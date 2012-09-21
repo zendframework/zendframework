@@ -58,4 +58,3 @@ class AdapterPluginManager extends AbstractPluginManager
         ));
     }
 }
-

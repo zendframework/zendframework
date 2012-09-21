@@ -97,7 +97,7 @@ abstract class AbstractStandalone
         $this->escapers[$encoding] = $escaper;
         return $this;
     }
-    
+
     /**
      * Get Escaper instance
      *

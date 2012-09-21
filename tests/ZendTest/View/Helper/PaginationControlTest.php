@@ -179,4 +179,3 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
     }
 }
-

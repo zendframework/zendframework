@@ -127,7 +127,9 @@ class Step extends AbstractValidator
 
         $this->setValue($value);
 
-        if ($this->fmod($value - $this->baseValue, $this->step) !== 0.0) {
+        $fmod = $this->fmod($value - $this->baseValue, $this->step);
+
+        if ($fmod !== 0.0 && $fmod !== $this->step) {
             $this->error(self::NOT_STEP);
             return false;
         }
@@ -147,6 +149,10 @@ class Step extends AbstractValidator
         if ($y == 0.0) {
             return 1.0;
         }
-        return $x - $y * floor($x / $y);
+
+        //find the maximum precision from both input params to give accurate results
+        $precision = strlen(substr($x, strpos($x, '.')+1)) + strlen(substr($y, strpos($y, '.')+1));
+
+        return round($x - $y * floor($x / $y), $precision);
     }
 }

@@ -86,7 +86,7 @@ if ($run_as == 'groups') {
     foreach ($components as $component) {
         $component =   'ZendTest/' . basename(str_replace('_', '/', $component));
         echo "$component:\n";
-        system("$phpunit_bin $phpunit_opts $phpunit_coverage " . __DIR__ . '/' . $component, $c_result);
+        system("$phpunit_bin $phpunit_opts $phpunit_coverage " . escapeshellarg(__DIR__ . '/' . $component), $c_result);
         echo "\n\n";
         if ($c_result) {
             $result = $c_result;

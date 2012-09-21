@@ -273,7 +273,7 @@ class Segment implements RouteInterface
                     $skippable    = true;
                     $optionalPart = $this->buildPath($part[1], $mergedParams, true, $hasChild);
 
-                    if ($optionalPart !== null) {
+                    if ($optionalPart !== '') {
                         $path .= $optionalPart;
                         $skip  = false;
                     }

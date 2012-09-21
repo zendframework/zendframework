@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2.0.2:
+
+- 2383: Changed unreserved char definition in Zend\Uri (ZF2-533) and added shell
+  escaping to the test runner (https://github.com/zendframework/zf2/pull/2383)
+- 2393: Trying to solve issue ZF2-558
+  (https://github.com/zendframework/zf2/pull/2393)
+- 2398: Segment route: add fix for optional groups within optional groups
+  (https://github.com/zendframework/zf2/pull/2398)
+- 2400: Use 'Router' in http env and 'HttpRouter' in cli
+  (https://github.com/zendframework/zf2/pull/2400)
+- 2401: Better precision for userland fmod algorithm
+  (https://github.com/zendframework/zf2/pull/2401)
+
+
 ## 2.0.1:
 
 - 2285: Seed RouteMatch params as long as params is set. This permits setting an

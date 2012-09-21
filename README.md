@@ -4,13 +4,13 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.1*
+*Zend Framework 2.0.2*
 
-This is the first maintenance release for the 2.0 series.
+This is the second maintenance release for the 2.0 series.
 
-20 Sep 2012
+21 Sep 2012
 
-### UPDATES IN 2.0.1
+### UPDATES IN 2.0.2
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

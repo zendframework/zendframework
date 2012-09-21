@@ -78,4 +78,3 @@ class PostRedirectGet extends AbstractPlugin
         }
     }
 }
-

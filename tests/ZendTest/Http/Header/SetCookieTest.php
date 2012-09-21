@@ -326,4 +326,3 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     }
 
 }
-

@@ -37,4 +37,3 @@ class TestSampleClass6
         return 'mixedValue';
     }
 }
-

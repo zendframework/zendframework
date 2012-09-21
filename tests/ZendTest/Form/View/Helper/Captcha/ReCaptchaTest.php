@@ -89,4 +89,3 @@ class ReCaptchaTest extends CommonTestCase
         $this->assertContains('document.getElementById("' . $element->getName() . '-response")', $markup);
     }
 }
-

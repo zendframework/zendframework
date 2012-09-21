@@ -42,4 +42,3 @@ function function6($one, $two = 2)
 {
     return true;
 }
-

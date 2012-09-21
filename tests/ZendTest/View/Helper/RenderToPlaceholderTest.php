@@ -39,4 +39,3 @@ class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
     }
 
 }
-

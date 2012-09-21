@@ -49,4 +49,3 @@ interface RouteStackInterface extends RouteInterface
      */
     public function setRoutes($routes);
 }
-

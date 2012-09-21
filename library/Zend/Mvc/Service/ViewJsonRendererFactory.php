@@ -33,4 +33,3 @@ class ViewJsonRendererFactory implements FactoryInterface
         return $jsonRenderer;
     }
 }
-

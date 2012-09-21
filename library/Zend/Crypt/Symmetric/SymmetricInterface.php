@@ -42,4 +42,3 @@ interface SymmetricInterface
 
     public function getSupportedModes();
 }
-

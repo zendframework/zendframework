@@ -98,4 +98,3 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Date: Sun Nov 6 08:49:37 1994', $dateHeader->toString());
     }
 }
-

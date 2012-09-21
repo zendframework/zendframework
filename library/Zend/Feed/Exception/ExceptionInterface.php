@@ -16,4 +16,3 @@ namespace Zend\Feed\Exception;
  */
 interface ExceptionInterface
 {}
-

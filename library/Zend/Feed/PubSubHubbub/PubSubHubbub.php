@@ -113,8 +113,8 @@ class PubSubHubbub
      * Set the Escaper instance
      *
      * If null, resets the instance
-     * 
-     * @param  null|Escaper $escaper 
+     *
+     * @param  null|Escaper $escaper
      */
     public static function setEscaper(Escaper $escaper = null)
     {
@@ -125,7 +125,7 @@ class PubSubHubbub
      * Get the Escaper instance
      *
      * If none registered, lazy-loads an instance.
-     * 
+     *
      * @return Escaper
      */
     public static function getEscaper()

@@ -50,4 +50,3 @@ class AgeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Age: 2147483648', $ageHeader->toString());
     }
 }
-

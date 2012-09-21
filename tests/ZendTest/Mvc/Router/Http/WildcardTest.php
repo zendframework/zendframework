@@ -163,4 +163,3 @@ class WildcardTest extends TestCase
         );
     }
 }
-

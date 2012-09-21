@@ -149,4 +149,3 @@ class RegexTest extends TestCase
         );
     }
 }
-

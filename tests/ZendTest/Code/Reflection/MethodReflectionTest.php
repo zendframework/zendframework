@@ -60,4 +60,3 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     }
 
 }
-

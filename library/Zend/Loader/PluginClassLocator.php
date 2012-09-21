@@ -44,4 +44,3 @@ interface PluginClassLocator extends ShortNameLocator, \IteratorAggregate
      */
     public function getRegisteredPlugins();
 }
-

@@ -38,4 +38,3 @@ class Nil extends AbstractScalar
         return null;
     }
 }
-

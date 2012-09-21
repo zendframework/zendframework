@@ -54,4 +54,3 @@ class DoctrineAnnotationParserTest extends TestCase
         $this->assertFalse($this->parser->onCreateAnnotation($event));
     }
 }
-

@@ -369,4 +369,3 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     }
 
 }
-

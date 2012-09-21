@@ -114,7 +114,7 @@ abstract class AbstractDecorator implements Decorator
         $this->escaper = $escaper;
         return $this;
     }
-    
+
     /**
      * Retrieve Escaper instance
      *
@@ -132,8 +132,8 @@ abstract class AbstractDecorator implements Decorator
 
     /**
      * Validate an HTML element name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @throws Exception\InvalidElementNameException
      */
     protected function validateElementName($name)
@@ -149,8 +149,8 @@ abstract class AbstractDecorator implements Decorator
 
     /**
      * Validate an HTML attribute name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @throws Exception\InvalidAttributeNameException
      */
     protected function validateAttributeName($name)

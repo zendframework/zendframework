@@ -137,4 +137,3 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
         return $xml . "\n";
     }
 }
-

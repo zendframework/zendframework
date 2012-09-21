@@ -21,4 +21,3 @@ class Bar implements AnnotationInterface
         $this->content = $content;
     }
 }
-

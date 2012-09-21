@@ -56,4 +56,3 @@ class RetryAfterTest extends \PHPUnit_Framework_TestCase
 
     }
 }
-

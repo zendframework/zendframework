@@ -12,4 +12,3 @@ abstract class TestSampleClass3 extends \ArrayObject implements \Iterator, \Trav
 
 
 }
-

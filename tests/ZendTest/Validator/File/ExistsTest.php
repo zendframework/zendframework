@@ -177,4 +177,3 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("'nofile.mo'", current($validator->getMessages()));
     }
 }
-

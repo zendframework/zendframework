@@ -138,4 +138,3 @@ class HostnameTest extends TestCase
         );
     }
 }
-

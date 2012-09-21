@@ -59,4 +59,3 @@ class ScrollingStylePluginManager extends AbstractPluginManager
         ));
     }
 }
-

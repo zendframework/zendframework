@@ -17,5 +17,3 @@ class ObjectCallback
         return 'bar';
     }
 }
-
-

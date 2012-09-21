@@ -131,4 +131,3 @@ class LiteralTest extends TestCase
         );
     }
 }
-

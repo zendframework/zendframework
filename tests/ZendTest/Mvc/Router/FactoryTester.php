@@ -72,4 +72,3 @@ class FactoryTester
         $classname::factory(new ArrayIterator($options));
     }
 }
-

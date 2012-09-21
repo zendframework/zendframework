@@ -488,4 +488,3 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
 }
-

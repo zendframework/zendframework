@@ -10,18 +10,15 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
+use Zend\Http\Request;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Mvc\Exception\RuntimeException;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\FeedModel;
-use Zend\View\Model\ViewModel;
 use Zend\View\Model\ModelInterface;
-use Zend\Http\Request;
-use Zend\Mvc\Exception;
+use Zend\View\Model\ViewModel;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteStackInterface;
-use Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart;
+
 /**
  * @category   Zend
  * @package    Zend_Mvc
@@ -33,13 +30,11 @@ class AcceptedModel extends AbstractPlugin
     protected $request;
 
     /**
-     * Grabs a param from route match by default.
+     * Detects an appropriate model for view.
      *
-     * @param string $param
-     * @param mixed $default
      * @return ModelInterface
      */
-    public function __invoke($param = null, $default = null)
+    public function __invoke()
     {
         $request = $this->getRequest();
         $headers = $request->getHeaders();
@@ -47,22 +42,22 @@ class AcceptedModel extends AbstractPlugin
         if (!$headers->has('accept')) {
             return new ViewModel();
         }
-        
+
         $accept = $headers->get('Accept');
         foreach ($accept->getPrioritized() as $acceptPart) {
-            if ($acceptPart->getTypeString() == 'application/xhtml+xml' || $acceptPart->getTypeString() == 'text/html') {
+            if (in_array($acceptPart->getTypeString(), array('application/xhtml+xml', 'text/html', 'application/xml'))) {
                 return new ViewModel();
             }
 
-            if ($acceptPart->getTypeString() == 'application/json' || $acceptPart->getTypeString() == 'application/javascript') {
+            if (in_array($acceptPart->getTypeString(), array('application/json', 'application/javascript'))) {
                 return new JsonModel();
             }
 
-            if ($acceptPart->getTypeString('application/rss+xml' || $acceptPart->getTypeString() == 'application/atom+xml')) {
+            if (in_array($acceptPart->getTypeString(), array('application/rss+xml', 'application/atom+xml'))) {
                 return new FeedModel();
             }
         }
-        
+
         return new ViewModel();
     }
 
@@ -84,6 +79,7 @@ class AcceptedModel extends AbstractPlugin
             throw new Exception\DomainException('AcceptedModel plugin requires event compose a request');
         }
         $this->request = $request;
+
         return $this->request;
     }
 
@@ -101,7 +97,7 @@ class AcceptedModel extends AbstractPlugin
 
         $controller = $this->getController();
         if (!$controller instanceof InjectApplicationEventInterface) {
-            throw new Exception\DomainException('Redirect plugin requires a controller that implements InjectApplicationEventInterface');
+            throw new Exception\DomainException('AcceptedModel plugin requires a controller that implements InjectApplicationEventInterface');
         }
 
         $event = $controller->getEvent();

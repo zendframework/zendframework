@@ -84,6 +84,7 @@ class FirePhp extends AbstractWriter
      * Gets the FirePhpInterface instance that is used for logging.
      *
      * @return FirePhp\FirePhpInterface
+     * @throws Zend\Log\Exception\RuntimeException
      */
     public function getFirePhp()
     {
@@ -96,7 +97,7 @@ class FirePhp extends AbstractWriter
             // names would clash in this file on this line.
             $this->setFirePhp(new FirePhp\FirePhpBridge(new FirePHPService()));
         } elseif (!class_exists('FirePHP')) {
-        	throw new RuntimeException('FirePHP Class not found');
+            throw new RuntimeException('FirePHP Class not found');
         }
 
         return $this->firephp;

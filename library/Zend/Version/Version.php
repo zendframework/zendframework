@@ -31,7 +31,7 @@ final class Version
     const VERSION_SERVICE_GITHUB = 'GITHUB';
 
     /**
-     * Github Service Identifier for version information is retreived from
+     * Zend (framework.zend.com) Service Identifier for version information is retreived from
      */
     const VERSION_SERVICE_ZEND = 'ZEND';
 

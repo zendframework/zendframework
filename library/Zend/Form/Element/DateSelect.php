@@ -91,7 +91,16 @@ class DateSelect extends MonthSelect
      */
     public function setValue($value)
     {
-        parent::setValue($value);
+        if ($value instanceof DateTime) {
+            $value = array(
+                'year'  => $value->format('Y'),
+                'month' => $value->format('m'),
+                'day'   => $value->format('d')
+            );
+        }
+
+        $this->yearElement->setValue($value['year']);
+        $this->monthElement->setValue($value['month']);
         $this->dayElement->setValue($value['day']);
     }
 

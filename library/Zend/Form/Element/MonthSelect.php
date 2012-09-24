@@ -10,6 +10,7 @@
 
 namespace Zend\Form\Element;
 
+use DateTime;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Form\Form;
@@ -235,8 +236,15 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     public function setValue($value)
     {
-        $this->monthElement->setValue($value['month']);
+        if ($value instanceof DateTime) {
+            $value = array(
+                'year'  => $value->format('Y'),
+                'month' => $value->format('m')
+            );
+        }
+
         $this->yearElement->setValue($value['year']);
+        $this->monthElement->setValue($value['month']);
     }
 
     /**

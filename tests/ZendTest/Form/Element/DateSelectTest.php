@@ -10,6 +10,7 @@
 
 namespace ZendTest\Form\Element;
 
+use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateSelect as DateSelectElement;
 use Zend\Form\Factory;
@@ -38,5 +39,15 @@ class DateSelectTest extends TestCase
                     break;
             }
         }
+    }
+
+    public function testCanSetDateFromDateTime()
+    {
+        $element  = new DateSelectElement();
+        $element->setValue(new DateTime('2012-09-24'));
+
+        $this->assertEquals('2012', $element->getYearElement()->getValue());
+        $this->assertEquals('09', $element->getMonthElement()->getValue());
+        $this->assertEquals('24', $element->getDayElement()->getValue());
     }
 }

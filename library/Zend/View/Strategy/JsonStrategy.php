@@ -88,36 +88,6 @@ class JsonStrategy implements ListenerAggregateInterface
             // JsonModel found
             return $this->renderer;
         }
-
-        $request = $e->getRequest();
-        if (!$request instanceof HttpRequest) {
-            // Not an HTTP request; cannot autodetermine
-            return;
-        }
-
-        $headers = $request->getHeaders();
-        if (!$headers->has('accept')) {
-            return;
-        }
-
-
-        $accept  = $headers->get('Accept');
-        if (($match = $accept->match('application/json, application/javascript')) == false) {
-            return;
-        }
-
-        if ($match->getTypeString() == 'application/json') {
-            // application/json Accept header found
-            return $this->renderer;
-        }
-
-        if ($match->getTypeString() == 'application/javascript') {
-            // application/javascript Accept header found
-            if (false != ($callback = $request->getQuery()->get('callback'))) {
-                $this->renderer->setJsonpCallback($callback);
-            }
-            return $this->renderer;
-        }
     }
 
     /**

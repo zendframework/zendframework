@@ -28,37 +28,40 @@ class AcceptedModel extends AbstractPlugin
 {
     protected $event;
     protected $request;
+    protected $detected;
 
     /**
      * Detects an appropriate model for view.
      *
      * @return ModelInterface
      */
-    public function __invoke()
+    public function __invoke($cached = true)
     {
-        $request = $this->getRequest();
-        $headers = $request->getHeaders();
+        if ($cached && $this->detected != null) {
+            return new $this->detected;
+        }
+        
+        $this->detected = 'Zend\View\Model\ViewModel';
+        $request        = $this->getRequest();
+        $headers        = $request->getHeaders();
 
         if (!$headers->has('accept')) {
-            return new ViewModel();
+            return new $this->detected;
         }
 
         $accept = $headers->get('Accept');
         foreach ($accept->getPrioritized() as $acceptPart) {
-            if (in_array($acceptPart->getTypeString(), array('application/xhtml+xml', 'text/html', 'application/xml'))) {
-                return new ViewModel();
-            }
+             if (in_array($acceptPart->getTypeString(), array('application/json', 'application/javascript'))) {
+                $this->detected = 'Zend\View\Model\JsonModel';
+                break;
+                             }
+             if (in_array($acceptPart->getTypeString(), array('application/rss+xml', 'application/atom+xml'))) {
+                $this->detected = 'Zend\View\Model\FeedModel';
+                break;
+             }
+         }
 
-            if (in_array($acceptPart->getTypeString(), array('application/json', 'application/javascript'))) {
-                return new JsonModel();
-            }
-
-            if (in_array($acceptPart->getTypeString(), array('application/rss+xml', 'application/atom+xml'))) {
-                return new FeedModel();
-            }
-        }
-
-        return new ViewModel();
+        return new $this->detected;
     }
 
     /**

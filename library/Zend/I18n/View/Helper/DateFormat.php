@@ -105,17 +105,18 @@ class DateFormat extends AbstractHelper
     /**
      * Format a date.
      *
-     * @param  DateTime|integer|array $date
-     * @param  integer                $dateType
-     * @param  integer                $timeType
-     * @param  string                 $locale
+     * @param  DateTime|integer|array  $date
+     * @param  int                     $dateType
+     * @param  int                     $timeType
+     * @param  string|null             $pattern
+     * @param  string                  $locale
      * @return string
-     * @throws Exception\RuntimeException
      */
     public function __invoke(
         $date,
         $dateType = IntlDateFormatter::NONE,
         $timeType = IntlDateFormatter::NONE,
+        $pattern  = null,
         $locale   = null
     ) {
         if ($locale === null) {
@@ -130,7 +131,9 @@ class DateFormat extends AbstractHelper
                 $locale,
                 $dateType,
                 $timeType,
-                $timezone
+                $timezone,
+                IntlDateFormatter::GREGORIAN,
+                $pattern
             );
         }
 

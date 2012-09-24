@@ -12,10 +12,7 @@ namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Http\Request;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\FeedModel;
 use Zend\View\Model\ModelInterface;
-use Zend\View\Model\ViewModel;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
 
@@ -76,10 +73,10 @@ class AcceptedModel extends AbstractPlugin
             return $res;
         }
 
-        //@todo return actual instance, make sure to preserve \
         $modelName = $res->matchedAgainst->params['_internalViewModel'];
-     
-        return str_replace('|', '\\', $modelName);
+        $modelName = str_replace('|', '\\', $modelName);
+        
+        return new $modelName;
     }
 
     /**

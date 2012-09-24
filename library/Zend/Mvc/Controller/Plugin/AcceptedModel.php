@@ -31,37 +31,55 @@ class AcceptedModel extends AbstractPlugin
     protected $detected;
 
     /**
+     * Default match string to match against. Could be set 'somewhere'
+     *
+     * @var String
+     */
+    protected $defaultMatchArray;
+
+    /**
      * Detects an appropriate model for view.
      *
      * @return ModelInterface
      */
-    public function __invoke($cached = true)
+    public function __invoke(array $matchAgainst = null, $returnMatchedAcceptTypeOnly = false)
     {
-        if ($cached && $this->detected != null) {
-            return new $this->detected;
-        }
-        
         $this->detected = 'Zend\View\Model\ViewModel';
         $request        = $this->getRequest();
         $headers        = $request->getHeaders();
 
-        if (!$headers->has('accept')) {
+
+        if ((!$matchAgainst && !$this->defaultMatchString) || !$headers->has('accept')) {
             return new $this->detected;
         }
 
-        $accept = $headers->get('Accept');
-        foreach ($accept->getPrioritized() as $acceptPart) {
-             if (in_array($acceptPart->getTypeString(), array('application/json', 'application/javascript'))) {
-                $this->detected = 'Zend\View\Model\JsonModel';
-                break;
-                             }
-             if (in_array($acceptPart->getTypeString(), array('application/rss+xml', 'application/atom+xml'))) {
-                $this->detected = 'Zend\View\Model\FeedModel';
-                break;
-             }
-         }
+        if (!$matchAgainst) {
+            $matchAgainst = $this->defaultMatchString;
+        }
 
-        return new $this->detected;
+        $matchAgainstString = '';
+        foreach ($matchAgainst as $modelName => $modelStrings) {
+            $modelName = str_replace('\\', '|', $modelName);
+            foreach ((array) $modelStrings as $modelString) {
+                $matchAgainstString .= $modelString
+                                    . '; _internalViewModel="' . $modelName . '", ';
+            }
+        }
+
+        /** @var $accept \Zend\Http\Header\Accept */
+        $accept = $headers->get('Accept');
+        if (($res = $accept->match($matchAgainstString)) === false) {
+            return new $this->detected;
+        }
+
+        if ($returnMatchedAcceptTypeOnly) {
+            return $res;
+        }
+
+        //@todo return actual instance, make sure to preserve \
+        $modelName = $res->matchedAgainst->params['_internalViewModel'];
+     
+        return str_replace('|', '\\', $modelName);
     }
 
     /**

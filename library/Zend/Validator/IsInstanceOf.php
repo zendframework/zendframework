@@ -15,8 +15,7 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 
 class IsInstanceOf extends AbstractValidator
-{
-    
+{    
     const NOT_INSTANCE_OF = 'notInstanceOf';
 
     /**
@@ -67,9 +66,7 @@ class IsInstanceOf extends AbstractValidator
         if (!array_key_exists('className', $options)) {
             throw new Exception\InvalidArgumentException("Missing option 'className'");
         }
-
-        $this->setClassName($options['className']);
-
+        
         parent::__construct($options);
     }
 

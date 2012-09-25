@@ -15,7 +15,7 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 
 class IsInstanceOf extends AbstractValidator
-{    
+{
     const NOT_INSTANCE_OF = 'notInstanceOf';
 
     /**

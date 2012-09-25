@@ -43,7 +43,7 @@ class Plural extends AbstractHelper
      * Set the plural rule to use
      *
      * @param  PluralRule|string $pluralRule
-     * @return self
+     * @return Plural
      */
     public function setPluralRule($pluralRule)
     {

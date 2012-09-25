@@ -107,4 +107,3 @@ class FormDateSelect extends FormMonthSelectHelper
         return $result;
     }
 }
-

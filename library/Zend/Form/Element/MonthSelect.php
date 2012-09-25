@@ -294,4 +294,3 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
         );
     }
 }
-

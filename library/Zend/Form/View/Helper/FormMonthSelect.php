@@ -281,4 +281,3 @@ class FormMonthSelect extends AbstractHelper
         return $this->selectHelper;
     }
 }
-

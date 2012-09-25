@@ -456,4 +456,3 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         return $this->createData($attributes);
     }
 }
-

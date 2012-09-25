@@ -26,7 +26,7 @@ interface ServiceLocatorInterface
      * @return object|array
      */
     public function get($name);
-    
+
     /**
      * Check for a registered instance
      *

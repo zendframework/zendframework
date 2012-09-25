@@ -27,7 +27,7 @@ use Zend\Validator, ReflectionClass;
  */
 
 /**
- * @see Zend_Validator_LessThan
+ * @see Zend_Validator_IsInstanceOf
  */
 
 /**

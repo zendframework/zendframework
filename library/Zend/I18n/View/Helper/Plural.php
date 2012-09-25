@@ -10,7 +10,6 @@
 
 namespace Zend\I18n\View\Helper;
 
-use Locale;
 use Zend\I18n\Exception;
 use Zend\I18n\Translator\Plural\Rule as PluralRule;
 use Zend\View\Helper\AbstractHelper;
@@ -34,104 +33,27 @@ use Zend\View\Helper\AbstractHelper;
 class Plural extends AbstractHelper
 {
     /**
-     * Locale to use instead of the default
+     * Rule to use
      *
-     * @var string
+     * @var PluralRule
      */
-    protected $locale;
+    protected $rule;
 
     /**
-     * Associative array that associate a locale to a plural rule
+     * Set the plural rule to use
      *
-     * @var array
-     */
-    protected $rules;
-
-
-    /**
-     * Set locale to use instead of the default.
-     *
-     * @param  string $locale
-     * @return DateFormat
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = (string) $locale;
-        return $this;
-    }
-
-    /**
-     * Get the locale to use.
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
-        }
-
-        return $this->locale;
-    }
-
-    /**
-     * Add a plural rule for a specific locale. If a rule already exists for this locale, it is overriden
-     *
-     * @param  string            $locale
      * @param  PluralRule|string $pluralRule
      * @return self
      */
-    public function addPluralRule($locale, $pluralRule)
+    public function setPluralRule($pluralRule)
     {
         if (is_string($pluralRule)) {
             $pluralRule = PluralRule::fromString($pluralRule);
         }
 
-        $this->rules[str_replace('-', '_', $locale)] = $pluralRule;
+        $this->rule = $pluralRule;
 
         return $this;
-    }
-
-    /**
-     * Get the plural rule for the given locale. It first checks the complete locale for an exact match, if
-     * none found, it tries to find the plural rule only using the language code
-     *
-     * @param  string $locale
-     * @throws Exception\InvalidArgumentException
-     * @return PluralRule
-     */
-    public function getPluralRule($locale)
-    {
-        $locale = str_replace('-', '_', $locale);
-
-        if (isset($this->rules[$locale])) {
-            return $this->rules[$locale];
-        }
-
-        $language = strtok($locale, '_');
-
-        if (isset($this->rules[$language])) {
-            return $this->rules[$language];
-        }
-
-        throw new Exception\InvalidArgumentException(sprintf(
-            'No plural rule was found for the %s locale',
-            $locale
-        ));
-    }
-
-    /**
-     * This function checks if there is a rule for this locale. It makes a strict comparison, so if the locale
-     * contains both a lang and region, the registered locale must have both
-     *
-     * @param string $locale
-     * @return bool
-     */
-    public function hasPluralRule($locale)
-    {
-        $locale = str_replace('-', '_', $locale);
-
-        return isset($this->rules[$locale]);
     }
 
     /**
@@ -139,23 +61,23 @@ class Plural extends AbstractHelper
      * otherwise), this picks the right string according to plural rules of the locale
      *
      * @param  array|string $strings
-     * @param  int|float    $number
-     * @param  string       $locale
-     * @throws Exception\OutOfBoundsException
+     * @param  int          $number
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
-    public function __invoke($strings, $number, $locale = null)
+    public function __invoke($strings, $number)
     {
-        if ($locale === null) {
-            $locale = $this->getLocale();
+        if ($this->rule === null) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'No plural rule was set'
+            ));
         }
-
-        $rule        = $this->getPluralRule($locale);
-        $pluralIndex = $rule->evaluate($number);
 
         if (!is_array($strings)) {
             $strings = (array) $strings;
         }
+
+        $pluralIndex = $this->rule->evaluate($number);
 
         return $strings[$pluralIndex];
     }

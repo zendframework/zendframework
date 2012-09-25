@@ -35,11 +35,6 @@ class PluralTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->helper = new PluralHelper();
-
-        // Add some rules rules for languages
-        $this->helper->addPluralRule('ja', 'nplurals=1; plural=0');
-        $this->helper->addPluralRule('fr', 'nplurals=2; plural=(n==0 || n==1 ? 0 : 1)');
-        $this->helper->addPluralRule('en', 'nplurals=2; plural=(n==1 ? 0 : 1)');
     }
 
     /**
@@ -48,25 +43,27 @@ class PluralTest extends \PHPUnit_Framework_TestCase
     public function pluralsTestProvider()
     {
         return array(
-            array('かさ', 0, 'ja', 'かさ'),
-            array('かさ', 10, 'ja', 'かさ'),
+            array('nplurals=1; plural=0', 'かさ', 0, 'かさ'),
+            array('nplurals=1; plural=0', 'かさ', 10, 'かさ'),
 
-            array(array('umbrella', 'umbrellas'), 0, 'en', 'umbrellas'),
-            array(array('umbrella', 'umbrellas'), 1, 'en', 'umbrella'),
-            array(array('umbrella', 'umbrellas'), 2, 'en', 'umbrellas'),
+            array('nplurals=2; plural=(n==1 ? 0 : 1)', array('umbrella', 'umbrellas'), 0, 'umbrellas'),
+            array('nplurals=2; plural=(n==1 ? 0 : 1)', array('umbrella', 'umbrellas'), 1, 'umbrella'),
+            array('nplurals=2; plural=(n==1 ? 0 : 1)', array('umbrella', 'umbrellas'), 2, 'umbrellas'),
 
-            array(array('parapluie', 'parapluies'), 0, 'fr', 'parapluie'),
-            array(array('parapluie', 'parapluies'), 1, 'fr', 'parapluie'),
-            array(array('parapluie', 'parapluies'), 2, 'fr', 'parapluies'),
+            array('nplurals=2; plural=(n==0 || n==1 ? 0 : 1)', array('parapluie', 'parapluies'), 0, 'parapluie'),
+            array('nplurals=2; plural=(n==0 || n==1 ? 0 : 1)', array('parapluie', 'parapluies'), 1, 'parapluie'),
+            array('nplurals=2; plural=(n==0 || n==1 ? 0 : 1)', array('parapluie', 'parapluies'), 2, 'parapluies'),
         );
     }
 
     /**
      * @dataProvider pluralsTestProvider
      */
-    public function testGetCorrectPlurals($strings, $number, $locale, $expected)
+    public function testGetCorrectPlurals($pluralRule, $strings, $number, $expected)
     {
-        $result = $this->helper->__invoke($strings, $number, $locale);
+        $this->helper->setPluralRule($pluralRule);
+        $result = $this->helper->__invoke($strings, $number);
         $this->assertEquals($expected, $result);
     }
 }
+

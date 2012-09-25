@@ -108,16 +108,16 @@ class DateFormat extends AbstractHelper
      * @param  DateTime|integer|array  $date
      * @param  int                     $dateType
      * @param  int                     $timeType
-     * @param  string|null             $pattern
      * @param  string                  $locale
+     * @param  string|null             $pattern
      * @return string
      */
     public function __invoke(
         $date,
         $dateType = IntlDateFormatter::NONE,
         $timeType = IntlDateFormatter::NONE,
-        $pattern  = null,
-        $locale   = null
+        $locale   = null,
+        $pattern  = null
     ) {
         if ($locale === null) {
             $locale = $this->getlocale();

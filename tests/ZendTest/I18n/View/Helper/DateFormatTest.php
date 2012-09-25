@@ -210,7 +210,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->setTimezone($timezone);
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
-            $date, $dateType, $timeType, null, $locale
+            $date, $dateType, $timeType, $locale, null
         ));
     }
 
@@ -235,7 +235,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->setTimezone($timezone);
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
-            $date, $dateType, $timeType, $pattern, $locale
+            $date, $dateType, $timeType, $locale, $pattern
         ));
     }
 

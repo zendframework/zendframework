@@ -47,7 +47,7 @@ class Plural extends AbstractHelper
      */
     public function setPluralRule($pluralRule)
     {
-        if (is_string($pluralRule)) {
+        if (!$pluralRule instanceof PluralRule) {
             $pluralRule = PluralRule::fromString($pluralRule);
         }
 

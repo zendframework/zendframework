@@ -620,7 +620,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 : $platform->quoteIdentifier($join['name']);
             // on expression
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
-                ? $this->processExpression($join['on'], $platform, $adapter, $this->processInfo['paramPrefix'] . 'join')
+                ? $this->processExpression($join['on'], $platform, $adapter, $this->processInfo['paramPrefix'] . 'join' . ($j+1) . 'part')
                 : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
             if ($joinSpecArgArray[$j][2] instanceof StatementContainerInterface) {
                 if ($parameterContainer) {

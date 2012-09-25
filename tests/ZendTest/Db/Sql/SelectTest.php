@@ -13,6 +13,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\Sql92;
@@ -377,10 +378,12 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @covers Zend\Db\Sql\Select::prepareStatement
      * @dataProvider providerData
      */
-    public function testPrepareStatement(Select $select, $expectedSqlString, $expectedParameters)
+    public function testPrepareStatement(Select $select, $expectedSqlString, $expectedParameters, $unused1, $unused2, $useNamedParameters = false)
     {
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(
+            function ($name) use ($useNamedParameters) { return (($useNamedParameters) ? ':' . $name : '?'); }
+        ));
         $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
         $parameterContainer = new ParameterContainer();
@@ -834,6 +837,25 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoins'   => array(array(array('INNER', '"bar"', '"m" = "n"')))
         );
 
+        // multiple joins with expressions
+        // reported by @jdolieslager
+        $select36 = new Select;
+        $select36->from('foo')
+            ->join('tableA', new Predicate\Operator('id', '=', 1))
+            ->join('tableB', new Predicate\Operator('id', '=', 2))
+            ->join('tableC', new Predicate\PredicateSet(array(
+                new Predicate\Operator('id', '=', 3),
+                new Predicate\Operator('number', '>', 20)
+            )));
+        $sqlPrep36 = 'SELECT "foo".*, "tableA".*, "tableB".*, "tableC".* FROM "foo"'
+            . ' INNER JOIN "tableA" ON "id" = :join1part1 INNER JOIN "tableB" ON "id" = :join2part1 '
+            . 'INNER JOIN "tableC" ON "id" = :join3part1 AND "number" > :join3part2';
+        $sqlStr36 = 'SELECT "foo".*, "tableA".*, "tableB".*, "tableC".* FROM "foo" '
+            . 'INNER JOIN "tableA" ON "id" = \'1\' INNER JOIN "tableB" ON "id" = \'2\' '
+            . 'INNER JOIN "tableC" ON "id" = \'3\' AND "number" > \'20\'';
+        $internalTests36 = array();
+        $useNamedParams36 = true;
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -842,7 +864,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
          * $internalTests what the internal functions should return (safe-guarding extension)
          */
         return array(
-            //    $select    $sqlPrep    $params     $sqlStr    $internalTests
+            //    $select    $sqlPrep    $params     $sqlStr    $internalTests    // use named param
             array($select0,  $sqlPrep0,  array(),    $sqlStr0,  $internalTests0),
             array($select1,  $sqlPrep1,  array(),    $sqlStr1,  $internalTests1),
             array($select2,  $sqlPrep2,  array(),    $sqlStr2,  $internalTests2),
@@ -879,6 +901,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select33, $sqlPrep33, array(),    $sqlStr33, $internalTests33),
             array($select34, $sqlPrep34, array(),    $sqlStr34, $internalTests34),
             array($select35, $sqlPrep35, array(),    $sqlStr35, $internalTests35),
+            array($select36, $sqlPrep36, array(),    $sqlStr36, $internalTests36,  $useNamedParams36),
         );
     }
 

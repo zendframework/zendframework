@@ -10,6 +10,7 @@
 
 namespace ZendTest\I18n\View\Helper;
 
+use Zend\I18n\Translator\Plural\Rule as PluralRule;
 use Zend\I18n\View\Helper\Plural as PluralHelper;
 
 /**
@@ -34,6 +35,11 @@ class PluralTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->helper = new PluralHelper();
+
+        // Add some rules rules for languages
+        $this->helper->addPluralRule('ja', 'nplurals=1; plural=0');
+        $this->helper->addPluralRule('fr', 'nplurals=2; plural=(n==0 || n==1 ? 0 : 1)');
+        $this->helper->addPluralRule('en', 'nplurals=2; plural=(n==1 ? 0 : 1)');
     }
 
     /**
@@ -52,10 +58,6 @@ class PluralTest extends \PHPUnit_Framework_TestCase
             array(array('parapluie', 'parapluies'), 0, 'fr', 'parapluie'),
             array(array('parapluie', 'parapluies'), 1, 'fr', 'parapluie'),
             array(array('parapluie', 'parapluies'), 2, 'fr', 'parapluies'),
-
-            array(array('зонтик', 'зонтика', 'зонтиков', 'Зонтики'), 1, 'ru', 'зонтик'),
-            array(array('зонтик', 'зонтика', 'зонтиков', 'Зонтики'), 22, 'ru', 'зонтика'),
-            array(array('зонтик', 'зонтика', 'зонтиков', 'Зонтики'), 36, 'ru', 'зонтиков')
         );
     }
 

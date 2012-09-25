@@ -155,4 +155,3 @@ class DateSelect extends MonthSelect
         );
     }
 }
-

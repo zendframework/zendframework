@@ -33,7 +33,7 @@ use Zend\Loader\PluginClassLoader;
 class ValidatorLoader extends PluginClassLoader
 {
     /**
-     * @var array Pre-aliased filter 
+     * @var array Pre-aliased filter
      */
     protected $plugins = array(
         'alnum'                        => 'Zend\Validator\Alnum',
@@ -224,6 +224,9 @@ class ValidatorLoader extends PluginClassLoader
         'int'                          => 'Zend\Validator\Int',
         'ip'                           => 'Zend\Validator\Ip',
         'isbn'                         => 'Zend\Validator\Isbn',
+        'isinstanceof'                 => 'Zend\Validator\IsInstanceOf',
+        'is_instanceof'                => 'Zend\Validator\IsInstanceOf',
+        'is_instance_of'               => 'Zend\Validator\IsInstanceOf',
         'less_than'                    => 'Zend\Validator\LessThan',
         'lessthan'                     => 'Zend\Validator\LessThan',
         'not_empty'                    => 'Zend\Validator\NotEmpty',

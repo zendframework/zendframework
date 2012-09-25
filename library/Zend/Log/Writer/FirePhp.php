@@ -13,6 +13,7 @@ namespace Zend\Log\Writer;
 use FirePHP as FirePHPService;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
+use Zend\Log\Exception;
 
 /**
  * @category   Zend
@@ -83,9 +84,17 @@ class FirePhp extends AbstractWriter
      * Gets the FirePhpInterface instance that is used for logging.
      *
      * @return FirePhp\FirePhpInterface
+     * @throws Exception\RuntimeException
      */
     public function getFirePhp()
     {
+        if (!$this->firephp instanceof FirePhp\FirePhpInterface
+            && !class_exists('FirePHP')
+        ) {
+            // No FirePHP instance, and no way to create one
+            throw new Exception\RuntimeException('FirePHP Class not found');
+        }
+
         // Remember: class names in strings are absolute; thus the class_exists
         // here references the canonical name for the FirePHP class
         if (!$this->firephp instanceof FirePhp\FirePhpInterface
@@ -95,6 +104,7 @@ class FirePhp extends AbstractWriter
             // names would clash in this file on this line.
             $this->setFirePhp(new FirePhp\FirePhpBridge(new FirePHPService()));
         }
+
         return $this->firephp;
     }
 

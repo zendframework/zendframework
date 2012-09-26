@@ -15,10 +15,12 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-escaper": "self.version",
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-uri": "self.version",
+        "zendframework/zend-version": "self.version"
     },
     "suggest": {
-        "zendframework/zend-uri": "Zend\\Uri component",
         "zendframework/zend-validator": "Zend\\Validator component"
     }
 }

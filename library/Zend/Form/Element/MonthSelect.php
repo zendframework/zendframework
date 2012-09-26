@@ -301,5 +301,14 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
             )
         );
     }
+
+    /**
+     * Clone the element (this is needed by Collection element, as it needs different copies of the elements)
+     */
+    public function __clone()
+    {
+        $this->monthElement = clone $this->monthElement;
+        $this->yearElement  = clone $this->yearElement;
+    }
 }
 

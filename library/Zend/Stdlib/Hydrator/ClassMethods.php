@@ -64,17 +64,10 @@ class ClassMethods extends AbstractHydrator
                 continue;
             }
             if (preg_match('/^get/', $method)) {
-                // setter verification
-                $setter = preg_replace('/^get/', 'set', $method);
                 $attribute = substr($method, 3);
                 $attribute = lcfirst($attribute);
             } else {
-                // setter verification
-                $setter = 'set' . ucfirst($method);
                 $attribute = $method;
-            }
-            if (!in_array($setter, $methods)) {
-                continue;
             }
             if ($this->underscoreSeparatedKeys) {
                 $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);

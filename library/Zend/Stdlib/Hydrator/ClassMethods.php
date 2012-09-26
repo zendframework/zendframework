@@ -63,12 +63,13 @@ class ClassMethods extends AbstractHydrator
             if (!preg_match('/^(get|has|is)[A-Z]\w*/', $method)) {
                 continue;
             }
+            
+            $attribute = $method;
             if (preg_match('/^get/', $method)) {
                 $attribute = substr($method, 3);
                 $attribute = lcfirst($attribute);
-            } else {
-                $attribute = $method;
             }
+
             if ($this->underscoreSeparatedKeys) {
                 $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
             }

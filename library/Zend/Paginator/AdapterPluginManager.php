@@ -35,7 +35,7 @@ class AdapterPluginManager extends AbstractPluginManager
         'iterator'      => 'Zend\Paginator\Adapter\Iterator',
         'null'          => 'Zend\Paginator\Adapter\Null',
     );
-    
+
     /**
      * Attempt to create an instance via an invokable class
      *

@@ -10,7 +10,9 @@
 
 namespace Zend\Paginator;
 
+use Traversable;
 use Zend\Paginator\Adapter\AdapterInterface;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -19,16 +21,37 @@ use Zend\Paginator\Adapter\AdapterInterface;
 abstract class Factory
 {
     protected static $adapters;
-    
-    public static function factory($items, $adapter)
-    {   
+
+    public static function factory($items, $adapter = null)
+    {
+        if(null === $adapter) {
+            if ($items instanceof Traversable) {
+                $items = ArrayUtils::iteratorToArray($items);
+            }
+            if(!is_array($items)) {
+                throw new Exception\InvalidArgumentException(
+                    'The factory needs an associative array '
+                    . 'or a Traversable object as an argument when '
+                    . "it's used with one parameter"
+                );
+            }
+            if(!isset($items['adapter']) && !isset($items['items'])) {
+                throw new Exception\InvalidArgumentException(
+                    'The factory needs an associative array '
+                    . 'or a Traversable object with keys '
+                    . '"adapter" and "items"'
+                );
+            }
+            $adapter = $items['adapter'];
+            $items = $items['items'];
+        }
         if(!$adapter instanceof AdapterInterface && !$adapter instanceof AdapterAggregateInterface) {
             $adapter = self::getAdapterPluginManager()->get($adapter, $items);
         }
-        
+
         return new Paginator($adapter);
     }
-    
+
     /**
      * Change the adapter plugin manager
      *

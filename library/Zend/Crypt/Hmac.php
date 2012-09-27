@@ -42,10 +42,6 @@ class Hmac
      */
     public static function compute($key, $hash, $data, $output = self::OUTPUT_STRING)
     {
-        if (!isset($key) || empty($key)) {
-            throw new Exception\InvalidArgumentException('Provided key is null or empty');
-        }
-
         $hash = strtolower($hash);
         if (!self::isSupported($hash)) {
             throw new Exception\InvalidArgumentException(

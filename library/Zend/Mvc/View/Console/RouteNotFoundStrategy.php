@@ -208,8 +208,9 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             );
             $result .= sprintf("\nReason for failure: %s\n", $reasons[$reason]);
 
-            if ($exception instanceof \Exception) {
-                $result .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
+            while ($exception instanceof \Exception) {
+                $result   .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
+                $exception = $exception->getPrevious();
             }
         }
         $model->setResult($result);

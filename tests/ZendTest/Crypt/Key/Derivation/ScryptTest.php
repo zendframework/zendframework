@@ -52,7 +52,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
             $salsaAlg = 'salsa208Core64';
         }
         $salsa20 = self::getMethod($salsaAlg);
-        $obj     = new Scrypt;
+        $obj     = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
         $input   = self::hex2bin(str_replace(array(' ',"\n"),'',$hexInput));
         $result  = $salsa20->invokeArgs($obj, array($input));
 
@@ -88,7 +88,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
                       5d 2a 22 58 77 d5 ed f5 84 2c b9 f1 4e ef e4 25';
 
         $blockMix = self::getMethod('scryptBlockMix');
-        $obj      = new Scrypt;
+        $obj      = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
         $input    = self::hex2bin(str_replace(array(' ',"\n"), '', $hexInput));
         $result   = $blockMix->invokeArgs($obj, array($input, 1));
 
@@ -122,7 +122,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
 
         $roMix  = self::getMethod('scryptROMix');
-        $obj    = new Scrypt;
+        $obj    = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
         $input  = self::hex2bin(str_replace(array(' ',"\n"), '', $hexInput));
         $result = $roMix->invokeArgs($obj, array($input, 16, 1));
 

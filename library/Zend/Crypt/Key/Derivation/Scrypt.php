@@ -20,7 +20,7 @@ use Zend\Crypt\Key\Derivation\Pbkdf2;
  * @see      http://www.tarsnap.com/scrypt.html
  * @see      https://tools.ietf.org/html/draft-josefsson-scrypt-kdf-01
  */
-class Scrypt
+abstract class Scrypt
 {
     /**
      * Execute the scrypt algorithm

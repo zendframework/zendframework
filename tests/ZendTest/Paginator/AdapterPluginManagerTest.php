@@ -21,17 +21,17 @@ use Zend\Paginator\AdapterPluginManager;
 class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
     protected $adapaterPluginManager;
-    
+
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     protected $mockSelect;
-    
+
     protected $mockAdapter;
-    
+
     protected function setUp()
     {
         $this->adapaterPluginManager = new AdapterPluginManager();
         $this->mockSelect = $this->getMock('Zend\Db\Sql\Select');
-        
+
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
 
@@ -40,13 +40,13 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
         $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
         $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
-        
+
         $this->mockAdapter = $this->getMockForAbstractClass(
             'Zend\Db\Adapter\Adapter',
             array($mockDriver, $mockPlatform)
         );
     }
-    
+
     public function testCanRetrieveAdapterPlugin()
     {
         $plugin = $this->adapaterPluginManager->get('array', array(1, 2, 3));

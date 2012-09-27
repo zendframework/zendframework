@@ -75,7 +75,7 @@ class AcceptedModel extends AbstractPlugin
 
         $modelName = $res->matchedAgainst->params['_internalViewModel'];
         $modelName = str_replace('|', '\\', $modelName);
-        
+
         return new $modelName;
     }
 

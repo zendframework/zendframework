@@ -303,8 +303,8 @@ abstract class AbstractAccept implements HeaderInterface
             foreach ($matchAgainst as $right) {
                 if ($right->type == '*' || $left->type == '*') {
                     if ($res = $this->matchAcceptParams($left, $right)) {
-                    	$res->matchedAgainst = $right;
-                    	
+                        $res->matchedAgainst = $right;
+
                         return $res;
                     }
                 }
@@ -317,7 +317,7 @@ abstract class AbstractAccept implements HeaderInterface
                     {
                         if ($res = $this->matchAcceptParams($left, $right)) {
                             $res->matchedAgainst = $right;
-                            
+
                             return $res;
                         }
                     }

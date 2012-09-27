@@ -188,4 +188,19 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), 'bar');
     }
+
+    public function testHydratorClassMethodsCamelCaseWithSetterMissing()
+    {
+        $hydrator = new ClassMethods(false);
+
+        $datas = $hydrator->extract($this->classMethodsCamelCaseMissing);
+        $this->assertTrue(isset($datas['fooBar']));
+        $this->assertEquals($datas['fooBar'], '1');
+        $this->assertTrue(isset($datas['fooBarBaz']));
+        $this->assertFalse(isset($datas['foo_bar']));
+        $test = $hydrator->hydrate(array('fooBar' => 'foo', 'fooBarBaz' => 1), $this->classMethodsCamelCaseMissing);
+        $this->assertSame($this->classMethodsCamelCaseMissing, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), '2');
+    }
 }

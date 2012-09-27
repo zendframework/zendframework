@@ -42,6 +42,13 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
+     * Whether or not to display the reason for routing failure
+     *
+     * @var bool
+     */
+    protected $displayNotFoundReason = true;
+
+    /**
      * The reason for a not-found condition
      *
      * @var boolean|string
@@ -72,6 +79,28 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                 unset($this->listeners[$index]);
             }
         }
+    }
+
+    /**
+     * Set flag indicating whether or not to display the routing failure
+     *
+     * @param  bool $displayNotFoundReason
+     * @return RouteNotFoundStrategy
+     */
+    public function setDisplayNotFoundReason($displayNotFoundReason)
+    {
+        $this->displayNotFoundReason = (bool) $displayNotFoundReason;
+        return $this;
+    }
+
+    /**
+     * Do we display the routing failure?
+     *
+     * @return bool
+     */
+    public function displayNotFoundReason()
+    {
+        return $this->displayNotFoundReason;
     }
 
     /**
@@ -162,10 +191,27 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         // Get application usage information
         $usage = $this->getConsoleUsage($console, $scriptName, $mm, $router);
 
-        // Inject the text into view model
+        // Inject the text into view
         $result  = $banner ? rtrim($banner, "\r\n")        : '';
         $result .= $usage  ? "\n\n" . trim($usage, "\r\n") : '';
         $result .= "\n"; // to ensure we output a final newline
+
+        // Report 404 reason and/or exceptions
+        $exception = $e->getParam('exception', false);
+        if ($this->displayNotFoundReason() && ($exception || $this->reason)) {
+            $reason    = (isset($this->reason) && !empty($this->reason)) ? $this->reason : 'unknown';
+            $reasons   = array(
+                Application::ERROR_CONTROLLER_NOT_FOUND => 'Could not match to a controller',
+                Application::ERROR_CONTROLLER_INVALID   => 'Invalid controller specified',
+                Application::ERROR_ROUTER_NO_MATCH      => 'Invalid arguments or no arguments provided',
+                'unknown'                               => 'Unknown',
+            );
+            $result .= sprintf("\nReason for failure: %s\n", $reasons[$reason]);
+
+            if ($exception instanceof \Exception) {
+                $result .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
+            }
+        }
         $model->setResult($result);
 
         // Inject the result into MvcEvent

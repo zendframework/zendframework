@@ -64,7 +64,7 @@ class MultiCheckbox extends Checkbox
         $this->valueOptions = $options;
 
         // Update InArray validator haystack
-        if (!is_null($this->validator)) {
+        if (!is_null($this->validator) && $this->validator instanceof ExplodeValidator) {
             $validator = $this->validator->getValidator();
             $validator->setHaystack($this->getValueOptionsValues());
         }

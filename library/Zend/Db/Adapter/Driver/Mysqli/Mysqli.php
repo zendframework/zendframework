@@ -45,6 +45,8 @@ class Mysqli implements DriverInterface
     );
 
     /**
+     * Constructor
+     *
      * @param array|Connection|\mysqli $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
@@ -88,6 +90,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Get statement prototype
+     *
      * @return null|Statement
      */
     public function getStatementPrototype()
@@ -130,6 +134,9 @@ class Mysqli implements DriverInterface
 
     /**
      * Check environment
+     *
+     * @throws Exception\RuntimeException
+     * @return void
      */
     public function checkEnvironment()
     {
@@ -139,6 +146,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Get connection
+     *
      * @return Connection
      */
     public function getConnection()
@@ -147,6 +156,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Create statement
+     *
      * @param string $sqlOrResource
      * @return Statement
      */
@@ -175,6 +186,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Create result
+     *
      * @param resource $resource
      * @param null|bool $isBuffered
      * @return Result
@@ -187,6 +200,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Get prepare type
+     *
      * @return array
      */
     public function getPrepareType()
@@ -195,6 +210,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Format parameter name
+     *
      * @param string $name
      * @param mixed  $type
      * @return string
@@ -205,6 +222,8 @@ class Mysqli implements DriverInterface
     }
 
     /**
+     * Get last generated value
+     *
      * @return mixed
      */
     public function getLastGeneratedValue()

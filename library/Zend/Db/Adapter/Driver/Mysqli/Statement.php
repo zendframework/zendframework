@@ -151,6 +151,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get parameter count
+     *
      * @return ParameterContainer
      */
     public function getParameterContainer()
@@ -159,6 +161,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Is prepared
+     *
      * @return bool
      */
     public function isPrepared()
@@ -167,6 +171,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Prepare
+     *
      * @param string $sql
      * @throws Exception\InvalidQueryException
      * @throws Exception\RuntimeException
@@ -243,6 +249,8 @@ class Statement implements StatementInterface
 
     /**
      * Bind parameters from container
+     *
+     * @return void
      */
     protected function bindParametersFromContainer()
     {

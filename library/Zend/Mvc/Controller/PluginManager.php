@@ -33,7 +33,7 @@ class PluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'acceptedmodel'   => 'Zend\Mvc\Controller\Plugin\AcceptedModel',
+        'acceptantviewmodelselector' => 'Zend\Mvc\Controller\Plugin\AcceptantViewModelSelector',
         'flashmessenger'  => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
         'forward'         => 'Zend\Mvc\Controller\Plugin\Forward',
         'layout'          => 'Zend\Mvc\Controller\Plugin\Layout',

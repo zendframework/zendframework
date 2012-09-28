@@ -28,12 +28,40 @@ abstract class AbstractFieldValuePart
     private $internalValues;
 
     /**
+     * A Field Value Part this Field Value Part matched against.
+     * @var AbstractFieldValuePart
+     */
+    protected $matchedPart;
+
+    /**
      *
      * @param object $internalValues
      */
     public function __construct($internalValues)
     {
         $this->internalValues = $internalValues;
+    }
+
+    /**
+     * Set a Field Value Part this Field Value Part matched against.
+     *
+     * @param AbstractFieldValuePart $matchedPart
+     * return AbstractFieldValuePart provides fluent interface
+     */
+    public function setMatchedAgainst(AbstractFieldValuePart $matchedPart)
+    {
+        $this->matchedPart = $matchedPart;
+        return $this;
+    }
+
+    /**
+     * Get a Field Value Part this Field Value Part matched against.
+     *
+     * return AbstractFieldValuePart|null
+     */
+    public function getMatchedAgainst()
+    {
+        return $this->matchedPart;
     }
 
     /**

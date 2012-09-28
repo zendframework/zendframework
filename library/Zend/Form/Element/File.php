@@ -59,21 +59,6 @@ class File extends Element implements InputProviderInterface, ElementPrepareAwar
     }
 
     /**
-     * @return boolean|string
-     */
-    public function getFileName()
-    {
-        $value  = $this->getValue();
-        if (!isset($value['error']) || $value['error'] !== UPLOAD_ERR_OK
-            || !isset($value['tmp_name']) || !is_uploaded_file($value['tmp_name'])
-        ) {
-            return false;
-        }
-
-        return $value['tmp_name'];
-    }
-
-    /**
      * Should return an array specification compatible with
      * {@link Zend\InputFilter\Factory::createInput()}.
      *

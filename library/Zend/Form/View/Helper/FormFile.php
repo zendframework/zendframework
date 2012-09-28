@@ -11,6 +11,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend
@@ -45,5 +46,21 @@ class FormFile extends FormInput
     protected function getType(ElementInterface $element)
     {
         return 'file';
+    }
+
+    /**
+     * Render a form <input> element from the provided $element
+     *
+     * @param  ElementInterface $element
+     * @throws Exception\DomainException
+     * @return string
+     */
+    public function render(ElementInterface $element)
+    {
+        $value = $element->getValue();
+        if (is_array($value) && isset($value['name'])) {
+            $element->setValue($value['name']);
+        }
+        return parent::render($element);
     }
 }

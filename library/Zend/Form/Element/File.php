@@ -21,9 +21,12 @@
 
 namespace Zend\Form\Element;
 
+use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\Form;
+use Zend\Form\Exception;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -32,7 +35,7 @@ use Zend\Form\Form;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends Element implements ElementPrepareAwareInterface
+class File extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes
@@ -53,5 +56,38 @@ class File extends Element implements ElementPrepareAwareInterface
     {
         // Ensure the form is using correct enctype
         $form->setAttribute('enctype', 'multipart/form-data');
+    }
+
+    /**
+     * @return boolean|string
+     */
+    public function getFileName()
+    {
+        $value  = $this->getValue();
+        if (!isset($value['error']) || $value['error'] !== UPLOAD_ERR_OK
+            || !isset($value['tmp_name']) || !is_uploaded_file($value['tmp_name'])
+        ) {
+            return false;
+        }
+
+        return $value['tmp_name'];
+    }
+
+    /**
+     * Should return an array specification compatible with
+     * {@link Zend\InputFilter\Factory::createInput()}.
+     *
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        return array(
+            'type'       => 'Zend\InputFilter\FileInput',
+            'name'       => $this->getName(),
+            'required'   => false,
+            'validators' => array(
+                array('name' => 'fileupload'),
+            ),
+        );
     }
 }

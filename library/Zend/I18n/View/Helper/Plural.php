@@ -82,4 +82,3 @@ class Plural extends AbstractHelper
         return $strings[$pluralIndex];
     }
 }
-

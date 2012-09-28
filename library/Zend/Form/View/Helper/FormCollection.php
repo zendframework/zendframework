@@ -15,6 +15,7 @@ use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
+use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
  * @category   Zend
@@ -189,7 +190,7 @@ class FormCollection extends AbstractHelper
             $this->elementHelper = $this->view->plugin($this->getDefaultElementHelper());
         }
 
-        if (!$this->elementHelper instanceof AbstractHelper) {
+        if (!$this->elementHelper instanceof BaseAbstractHelper) {
             // @todo Ideally the helper should implement an interface.
             throw new RuntimeException('Invalid element helper set in FormCollection. The helper must be an instance of AbstractHelper.');
         }

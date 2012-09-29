@@ -39,20 +39,21 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @param  array|Traversable $options
      * @throws Exception\InvalidArgumentException
-     * @return void
+     * @return AbstractOptions Provides fluent interface
      */
     public function setFromArray($options)
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Parameter provided to %s must be an array or Traversable',
-                __METHOD__
-            ));
+        if (is_array($options) || $options instanceof Traversable) {
+            foreach ($options as $key => $value) {
+                $this->__set($key, $value);
+            }
+            return $this;
         }
 
-        foreach ($options as $key => $value) {
-            $this->__set($key, $value);
-        }
+        throw new Exception\InvalidArgumentException(sprintf(
+            'Parameter provided to %s must be an array or Traversable',
+            __METHOD__
+        ));
     }
 
     /**

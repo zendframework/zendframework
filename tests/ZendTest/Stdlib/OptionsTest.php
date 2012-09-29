@@ -78,4 +78,20 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $options = new TestOptions();
         $options->fieldFoobar;
     }
+
+    public function testSetFromArrayAcceptsArray()
+    {
+        $array = array('test_field' => 3);
+        $options = new TestOptions();
+
+        $this->assertSame($options, $options->setFromArray($array));
+        $this->assertEquals(3, $options->test_field);
+    }
+
+    public function testSetFromArrayThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new TestOptions;
+        $options->setFromArray('asd');
+    }
 }

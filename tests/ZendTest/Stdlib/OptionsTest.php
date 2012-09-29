@@ -66,4 +66,11 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         unset($options->testField);
         $this->assertEquals(false, isset($options->test_field));
     }
+
+    public function testUnsetThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new TestOptions;
+        unset($options->foobarField);
+    }
 }

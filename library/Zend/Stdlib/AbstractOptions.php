@@ -131,14 +131,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @see ParameterObject::__unset()
      * @param string $key
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function __unset($key)
     {
         try {
             $this->__set($key, null);
-        } catch (\InvalidArgumentException $e) {
+        } catch (Exception\BadMethodCallException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
                     . ' NULL is an invalid value for it',

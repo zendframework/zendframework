@@ -13,7 +13,6 @@ namespace ZendTest\Stdlib;
 use ArrayObject;
 use ZendTest\Stdlib\TestAsset\TestOptions;
 use ZendTest\Stdlib\TestAsset\TestOptionsNoStrict;
-use ZendTest\Stdlib\TestAsset\TestTraversable;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 
 class OptionsTest extends \PHPUnit_Framework_TestCase
@@ -48,7 +47,6 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testConstructionWithNull()
     {
         try {
@@ -72,5 +70,12 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException');
         $options = new TestOptions;
         unset($options->foobarField);
+    }
+
+    public function testGetThrowsBadMethodCallException()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        $options = new TestOptions();
+        $options->fieldFoobar;
     }
 }

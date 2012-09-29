@@ -28,8 +28,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
     /**
      * @param  array|Traversable|null $options
-     * @return AbstractOptions
-     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
@@ -108,14 +106,15 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!method_exists($this, $getter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
-                . 'which must be defined'
-            );
+        if (method_exists($this, $getter)) {
+            return $this->{$getter}();
         }
-        return $this->{$getter}();
+
+        throw new Exception\BadMethodCallException(
+            'The option "' . $key . '" does not '
+            . 'have a matching ' . $getter . ' getter method '
+            . 'which must be defined'
+        );
     }
 
     /**

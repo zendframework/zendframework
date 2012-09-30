@@ -778,6 +778,16 @@ class FormTest extends TestCase
         $this->assertEquals(2, count($validators));
         $this->assertTrue($input->isRequired());
         $this->assertEquals('foo', $input->getName());
+
+        // Issue #2586 Ensure default filters aren't added twice
+        $filter = $this->form->getInputFilter();
+
+        $this->assertTrue($filter->has('foo'));
+        $input = $filter->get('foo');
+        $filters = $input->getFilterChain();
+        $this->assertEquals(1, count($filters));
+        $validators = $input->getValidatorChain();
+        $this->assertEquals(2, count($validators));
     }
 
     public function testCanProperlyPrepareNestedFieldsets()

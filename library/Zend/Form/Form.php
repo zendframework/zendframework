@@ -79,6 +79,13 @@ class Form extends Fieldset implements FormInterface
     protected $useInputFilterDefaults = true;
 
     /**
+     * Has the input filter defaults been added already ?
+     *
+     * @var bool
+     */
+    protected $hasAddedInputFilterDefaults = false;
+
+    /**
      * Whether or not validation has occurred
      *
      * @var bool
@@ -558,8 +565,9 @@ class Form extends Fieldset implements FormInterface
      */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
-        $this->hasValidated = false;
-        $this->filter       = $inputFilter;
+        $this->hasValidated                = false;
+        $this->hasAddedInputFilterDefaults = false;
+        $this->filter                      = $inputFilter;
         return $this;
     }
 
@@ -583,12 +591,16 @@ class Form extends Fieldset implements FormInterface
             }
         }
 
-        if (null === $this->filter) {
+        if (!isset($this->filter)) {
             $this->filter = new InputFilter();
         }
 
-        if ($this->filter instanceof InputFilterInterface && $this->useInputFilterDefaults()) {
+        if (!$this->hasAddedInputFilterDefaults
+            && $this->filter instanceof InputFilterInterface
+            && $this->useInputFilterDefaults()
+        ) {
             $this->attachInputFilterDefaults($this->filter, $this);
+            $this->hasAddedInputFilterDefaults = true;
         }
 
         return $this->filter;

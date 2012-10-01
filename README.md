@@ -12,7 +12,7 @@ XX YYY 2012
 
 ### UPDATES IN 2.0.3
 
-Please see [CHANGELOG.md](CHANGELOG.md).
+Please see CHANGELOG.md.
 
 ### SYSTEM REQUIREMENTS
 

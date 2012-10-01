@@ -161,8 +161,8 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * loadModuleFromDir
      *
-     * @param string $dirPath
-     * @param string $class
+     * @param  string $dirPath
+     * @param  string $class
      * @return  mixed
      *          False [if unable to load $class]
      *          get_class($class) [if $class is successfully loaded]
@@ -184,8 +184,8 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * loadModuleFromPhar
      *
-     * @param string $pharPath
-     * @param string $class
+     * @param  string $pharPath
+     * @param  string $class
      * @return  mixed
      *          False [if unable to load $class]
      *          get_class($class) [if $class is successfully loaded]
@@ -261,7 +261,7 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * registerPaths
      *
-     * @param array|Traversable $paths
+     * @param  array|Traversable $paths
      * @throws \InvalidArgumentException
      * @return ModuleAutoloader
      */
@@ -289,8 +289,8 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * registerPath
      *
-     * @param string $path
-     * @param bool|string $moduleName
+     * @param  string $path
+     * @param  bool|string $moduleName
      * @throws \InvalidArgumentException
      * @return ModuleAutoloader
      */
@@ -325,7 +325,7 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * Returns the base module name from the path to a phar
      *
-     * @param string $pharPath
+     * @param  string $pharPath
      * @return string
      */
     protected function pharFileToModuleName($pharPath)

@@ -195,24 +195,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $result  = $banner ? rtrim($banner, "\r\n")        : '';
         $result .= $usage  ? "\n\n" . trim($usage, "\r\n") : '';
         $result .= "\n"; // to ensure we output a final newline
-
-        // Report 404 reason and/or exceptions
-        $exception = $e->getParam('exception', false);
-        if ($this->displayNotFoundReason() && ($exception || $this->reason)) {
-            $reason    = (isset($this->reason) && !empty($this->reason)) ? $this->reason : 'unknown';
-            $reasons   = array(
-                Application::ERROR_CONTROLLER_NOT_FOUND => 'Could not match to a controller',
-                Application::ERROR_CONTROLLER_INVALID   => 'Invalid controller specified',
-                Application::ERROR_ROUTER_NO_MATCH      => 'Invalid arguments or no arguments provided',
-                'unknown'                               => 'Unknown',
-            );
-            $result .= sprintf("\nReason for failure: %s\n", $reasons[$reason]);
-
-            while ($exception instanceof \Exception) {
-                $result   .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
-                $exception = $exception->getPrevious();
-            }
-        }
+        $result .= $this->reportNotFoundReason($e);
         $model->setResult($result);
 
         // Inject the result into MvcEvent
@@ -458,5 +441,37 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         }
 
         return $table->render();
+    }
+
+    /**
+     * Report the 404 reason and/or exceptions
+     *
+     * @param  \Zend\Event\EventInterface $e
+     * @return string
+     */
+    protected function reportNotFoundReason($e)
+    {
+        if (!$this->displayNotFoundReason()) {
+            return '';
+        }
+        $exception = $e->getParam('exception', false);
+        if (!$exception && !$this->reason) {
+            return '';
+        }
+
+        $reason    = (isset($this->reason) && !empty($this->reason)) ? $this->reason : 'unknown';
+        $reasons   = array(
+            Application::ERROR_CONTROLLER_NOT_FOUND => 'Could not match to a controller',
+            Application::ERROR_CONTROLLER_INVALID   => 'Invalid controller specified',
+            Application::ERROR_ROUTER_NO_MATCH      => 'Invalid arguments or no arguments provided',
+            'unknown'                               => 'Unknown',
+        );
+        $report = sprintf("\nReason for failure: %s\n", $reasons[$reason]);
+
+        while ($exception instanceof \Exception) {
+            $report   .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
+            $exception = $exception->getPrevious();
+        }
+        return $report;
     }
 }

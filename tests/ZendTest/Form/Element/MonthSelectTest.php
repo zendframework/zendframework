@@ -10,6 +10,7 @@
 
 namespace ZendTest\Form\Element;
 
+use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\MonthSelect as MonthSelectElement;
 use Zend\Form\Factory;
@@ -70,5 +71,14 @@ class MonthSelectTest extends TestCase
         $this->assertArrayHasKey('validators', $inputSpec);
         $monthValidator = $inputSpec['validators'][0];
         $this->assertEquals($expected, $monthValidator->isValid($value));
+    }
+
+    public function testCanSetMonthFromDateTime()
+    {
+        $element  = new MonthSelectElement();
+        $element->setValue(new DateTime('2012-09'));
+
+        $this->assertEquals('2012', $element->getYearElement()->getValue());
+        $this->assertEquals('09', $element->getMonthElement()->getValue());
     }
 }

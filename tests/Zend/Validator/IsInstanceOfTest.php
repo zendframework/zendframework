@@ -20,17 +20,12 @@
  */
 namespace ZendTest\Validator;
 
-use Zend\Validator, ReflectionClass;
+use DateTime;
+use ReflectionClass;
+use Zend\Validator;
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_IsInstanceOf
- */
-
-/**
+ * @covers     Zend\Validator\IsInstanceOf
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
@@ -40,28 +35,24 @@ use Zend\Validator, ReflectionClass;
  */
 class IsInstanceOfTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Ensures that the validator follows expected behavior
      *
      * @return void
      */
-    public function testBasic ()
+    public function testBasic()
     {
-        $validator = new Validator\IsInstanceOf('\DateTime');
-
-        $this->assertTrue($validator->isValid(new \DateTime())); // True
+        $validator = new Validator\IsInstanceOf('DateTime');
+        $this->assertTrue($validator->isValid(new DateTime())); // True
         $this->assertFalse($validator->isValid(null)); // False
         $this->assertFalse($validator->isValid($this)); // False
 
-        $validator = new Validator\IsInstanceOf('\Exception');
-
+        $validator = new Validator\IsInstanceOf('Exception');
         $this->assertTrue($validator->isValid(new \Exception())); // True
         $this->assertFalse($validator->isValid(null)); // False
         $this->assertFalse($validator->isValid($this)); // False
 
-        $validator = new Validator\IsInstanceOf('\PHPUnit_Framework_TestCase');
-
+        $validator = new Validator\IsInstanceOf('PHPUnit_Framework_TestCase');
         $this->assertTrue($validator->isValid($this)); // True
     }
 
@@ -70,9 +61,9 @@ class IsInstanceOfTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testGetMessages ()
+    public function testGetMessages()
     {
-        $validator = new Validator\IsInstanceOf('\DateTime');
+        $validator = new Validator\IsInstanceOf('DateTime');
         $this->assertEquals(array(), $validator->getMessages());
     }
 
@@ -81,41 +72,37 @@ class IsInstanceOfTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testGetClassName ()
+    public function testGetClassName()
     {
-        $validator = new Validator\IsInstanceOf('\DateTime');
-        $this->assertEquals('\DateTime', $validator->getClassName());
+        $validator = new Validator\IsInstanceOf('DateTime');
+        $this->assertEquals('DateTime', $validator->getClassName());
     }
 
-    public function testEqualsMessageTemplates ()
+    public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\IsInstanceOf('\DateTime');
+        $validator  = new Validator\IsInstanceOf('DateTime');
         $reflection = new ReflectionClass($validator);
 
-        if (! $reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageTemplates');
+        $property = $reflection->getProperty('messageTemplates');
         $property->setAccessible(true);
 
-        $this->assertEquals($property->getValue($validator),
-                $validator->getOption('messageTemplates'));
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
     }
 
-    public function testEqualsMessageVariables ()
+    public function testEqualsMessageVariables()
     {
-        $validator = new Validator\IsInstanceOf('\DateTime');
+        $validator  = new Validator\IsInstanceOf('\DateTime');
         $reflection = new ReflectionClass($validator);
 
-        if (! $reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageVariables');
+        $property = $reflection->getProperty('messageVariables');
         $property->setAccessible(true);
 
-        $this->assertEquals($property->getValue($validator),
-                $validator->getOption('messageVariables'));
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

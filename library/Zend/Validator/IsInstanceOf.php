@@ -10,13 +10,13 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception\InvalidArgumentException;
 
+/**
+ * @category Zend
+ * @package  Zend_Validate
+ */
 class IsInstanceOf extends AbstractValidator
 {
-
     const NOT_INSTANCE_OF = 'notInstanceOf';
 
     /**
@@ -25,7 +25,7 @@ class IsInstanceOf extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_INSTANCE_OF => "The input is not an instance of '%className%'"
+        self::NOT_INSTANCE_OF => "The input is not an instance of '%className%'",
     );
 
     /**
@@ -48,16 +48,16 @@ class IsInstanceOf extends AbstractValidator
      * Sets validator options
      *
      * @param  array|Traversable $options
-     * @throws Zend\Validator\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct ($options = null)
+    public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+            $options = iterator_to_array($options);
         }
 
         // If argument is not an array, consider first argument as class name
-        if (! is_array($options)) {
+        if (!is_array($options)) {
             $options = func_get_args();
 
             $tmpOptions = array();
@@ -66,8 +66,8 @@ class IsInstanceOf extends AbstractValidator
             $options = $tmpOptions;
         }
 
-        if (! array_key_exists('className', $options)) {
-            throw new InvalidArgumentException("Missing option 'className'");
+        if (!array_key_exists('className', $options)) {
+            throw new Exception\InvalidArgumentException('Missing option "className"');
         }
 
         parent::__construct($options);
@@ -78,7 +78,7 @@ class IsInstanceOf extends AbstractValidator
      *
      * @return string
      */
-    public function getClassName ()
+    public function getClassName()
     {
         return $this->className;
     }
@@ -89,7 +89,7 @@ class IsInstanceOf extends AbstractValidator
      * @param  string $className
      * @return self
      */
-    public function setClassName ($className)
+    public function setClassName($className)
     {
         $this->className = $className;
         return $this;
@@ -101,7 +101,7 @@ class IsInstanceOf extends AbstractValidator
      * @param  mixed $value
      * @return boolean
      */
-    public function isValid ($value)
+    public function isValid($value)
     {
         if ($value instanceof $this->className) {
             return true;

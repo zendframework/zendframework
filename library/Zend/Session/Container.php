@@ -136,7 +136,7 @@ class Container extends ArrayObject
             $manager = self::getDefaultManager();
             if (!$manager instanceof Manager) {
                 throw new Exception\InvalidArgumentException(
-                    'Manager provided is invalid; must implement ManagerInterface interface'
+                    'Manager provided is invalid; must implement ManagerInterface'
                 );
             }
         }

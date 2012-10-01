@@ -22,6 +22,11 @@ use Zend\Stdlib\Hydrator;
 
 class FormTest extends TestCase
 {
+    /**
+     * @var Form
+     */
+    protected $form;
+
     public function setUp()
     {
         $this->form = new Form();
@@ -1099,5 +1104,26 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testResetPasswordValueIfFormIsNotValid()
+    {
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Password' ,
+            'name' => 'password'
+        ));
 
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Email',
+            'name' => 'email'
+        ));
+
+        $this->form->setData(array(
+            'password' => 'azerty',
+            'email'    => 'wrongEmail'
+        ));
+
+        $this->assertFalse($this->form->isValid());
+        $this->form->prepare();
+
+        $this->assertEquals('', $this->form->get('password')->getValue());
+    }
 }

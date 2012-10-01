@@ -18,27 +18,31 @@ namespace Zend\Db\Adapter;
 interface StatementContainerInterface
 {
     /**
-     * @abstract
+     * Set sql
+     *
      * @param $sql
      * @return mixed
      */
     public function setSql($sql);
 
     /**
-     * @abstract
+     * Get sql
+     *
      * @return mixed
      */
     public function getSql();
 
     /**
-     * @abstract
+     * Set parameter container
+     *
      * @param ParameterContainer $parameterContainer
      * @return mixed
      */
     public function setParameterContainer(ParameterContainer $parameterContainer);
 
     /**
-     * @abstract
+     * Get parameter container
+     *
      * @return mixed
      */
     public function getParameterContainer();

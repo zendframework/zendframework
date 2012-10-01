@@ -109,6 +109,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
+     * Add feature
+     *
      * @param string $name
      * @param AbstractFeature $feature
      * @return Pdo
@@ -124,7 +126,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
-     * setup the default features for Pdo
+     * Setup the default features for Pdo
+     *
+     * @return Pdo
      */
     public function setupDefaultFeatures()
     {
@@ -135,6 +139,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
+     * Get feature
+     *
      * @param $name
      * @return AbstractFeature|false
      */

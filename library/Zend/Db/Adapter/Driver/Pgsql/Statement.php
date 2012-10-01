@@ -67,6 +67,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Initialize
+     *
      * @param  resource $pgsql
      * @return void
      * @throws Exception\RuntimeException for invalid or missing postgresql connection
@@ -84,6 +86,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get resource
+     *
      * @return resource
      */
     public function getResource()
@@ -92,6 +96,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Set sql
+     *
      * @param string $sql
      * @return Statement
      */
@@ -102,6 +108,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get sql
+     *
      * @return string
      */
     public function getSql()
@@ -110,6 +118,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Set parameter container
+     *
      * @param ParameterContainer $parameterContainer
      * @return Statement
      */
@@ -120,6 +130,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get parameter container
+     *
      * @return ParameterContainer
      */
     public function getParameterContainer()
@@ -128,6 +140,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Prepare
+     *
      * @param string $sql
      */
     public function prepare($sql = null)
@@ -148,6 +162,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Is prepared
+     *
      * @return bool
      */
     public function isPrepared()
@@ -156,7 +172,9 @@ class Statement implements StatementInterface
     }
 
     /**
-     * @param  null $parameters
+     * Execute
+     *
+     * @param  ParameterContainer|null $parameters
      * @throws Exception\InvalidQueryException
      * @return Result
      */

@@ -38,7 +38,7 @@ class PhpClassFile extends SplFileInfo
     /**
      * Add class
      *
-     * @param string $class
+     * @param  string $class
      * @return PhpClassFile
      */
     public function addClass($class)

@@ -87,7 +87,7 @@ class Select extends Element implements InputProviderInterface
                 $validator = $this->validator;
             }
             if ($this->validator instanceof ExplodeValidator 
-                && $this->validator->getValidator instanceof InArrayValidator
+                && $this->validator->getValidator() instanceof InArrayValidator
             ){
                 $validator = $this->validator->getValidator();
             }

@@ -337,6 +337,12 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             $modifiersString .= $key . '="' . $this->escape($value) . '" ';
         }
 
+        $modifiersString = rtrim($modifiersString);
+
+        if ('' != $modifiersString) {
+            $modifiersString = ' ' . $modifiersString;
+        }
+
         if (method_exists($this->view, 'plugin')) {
             if ($this->view->plugin('doctype')->isHtml5()
                 && $type == 'charset'
@@ -345,12 +351,12 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
                     ? '<meta %s="%s"/>'
                     : '<meta %s="%s">';
             } elseif ($this->view->plugin('doctype')->isXhtml()) {
-                $tpl = '<meta %s="%s" content="%s" %s/>';
+                $tpl = '<meta %s="%s" content="%s"%s />';
             } else {
-                $tpl = '<meta %s="%s" content="%s" %s>';
+                $tpl = '<meta %s="%s" content="%s"%s>';
             }
         } else {
-            $tpl = '<meta %s="%s" content="%s" %s/>';
+            $tpl = '<meta %s="%s" content="%s"%s />';
         }
 
         $meta = sprintf(

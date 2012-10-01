@@ -182,7 +182,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     /**
      * Has the file been filtered ?
      *
-     * @param array|string|null $files
+     * @param  array|string|null $files
      * @return bool
      */
     abstract public function isFiltered($files = null);

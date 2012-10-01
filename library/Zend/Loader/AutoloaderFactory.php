@@ -15,7 +15,9 @@ use Traversable;
 
 require_once __DIR__ . '/SplAutoloader.php';
 
-if (class_exists('Zend\Loader\AutoloaderFactory')) return;
+if (class_exists('Zend\Loader\AutoloaderFactory')) {
+    return;
+} 
 
 /**
  * @category   Zend

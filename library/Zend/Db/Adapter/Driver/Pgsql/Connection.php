@@ -60,6 +60,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Set connection parameters
+     *
      * @param  array $connectionParameters
      * @return Connection
      */
@@ -70,6 +72,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Set driver
+     *
      * @param  Pgsql $driver
      * @return Connection
      */
@@ -80,6 +84,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Set resource
+     *
      * @param  resource $resource
      * @return Connection
      */
@@ -90,7 +96,9 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return null
+     * Get current schema
+     *
+     * @return null|string
      */
     public function getCurrentSchema()
     {
@@ -106,6 +114,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Get resource
+     *
      * @return resource
      */
     public function getResource()

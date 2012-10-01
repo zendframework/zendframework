@@ -47,8 +47,10 @@ class Connection implements ConnectionInterface
     protected $inTransaction = false;
 
     /**
+     * Constructor
+     *
      * @param array|\PDO|null $connectionParameters
-     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($connectionParameters = null)
     {
@@ -62,6 +64,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Set driver
+     *
      * @param Pdo $driver
      * @return Connection
      */
@@ -72,6 +76,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Get driver name
+     *
      * @return null|string
      */
     public function getDriverName()
@@ -80,7 +86,10 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Set connection parameters
+     *
      * @param array $connectionParameters
+     * @return void
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -100,6 +109,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Get connection parameters
+     *
      * @return array
      */
     public function getConnectionParameters()
@@ -152,6 +163,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Get resource
+     *
      * @return \PDO
      */
     public function getResource()
@@ -160,8 +173,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Connect
+     *
      * @return Connection
-     * @throws \Exception
+     * @throws Exception\InvalidConnectionParametersException
+     * @throws Exception\RuntimeException
      */
     public function connect()
     {
@@ -247,6 +263,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Is connected
+     *
      * @return bool
      */
     public function isConnected()
@@ -255,6 +273,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Disconnect
+     *
      * @return Connection
      */
     public function disconnect()
@@ -266,6 +286,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Begin transaction
+     *
      * @return Connection
      */
     public function beginTransaction()
@@ -279,6 +301,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Commit
+     *
      * @return Connection
      */
     public function commit()
@@ -293,6 +317,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Rollback
+     *
      * @return Connection
      * @throws Exception\RuntimeException
      */
@@ -311,9 +337,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Execute
+     *
      * @param $sql
      * @return Result
-     * @throws \Zend\Db\Adapter\Exception\InvalidQueryException
+     * @throws Exception\InvalidQueryException
      */
     public function execute($sql)
     {
@@ -334,6 +362,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Prepare
+     *
      * @param string $sql
      * @return Statement
      */

@@ -10,6 +10,7 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
+use Iterator;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
 
@@ -18,7 +19,9 @@ use Zend\Db\Adapter\Exception;
  * @package    Zend_Db
  * @subpackage Adapter
  */
-class Result implements \Iterator, ResultInterface
+class Result implements
+    Iterator,
+    ResultInterface
 {
 
     /**
@@ -101,6 +104,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Force buffering
+     *
      * @throws Exception\RuntimeException
      */
     public function buffer()
@@ -115,6 +119,8 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * Check if is buffered
+     *
      * @return bool|null
      */
     public function isBuffered()
@@ -124,6 +130,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Return the resource
+     *
      * @return mixed
      */
     public function getResource()
@@ -143,6 +150,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Get affected rows
+     *
      * @return integer
      */
     public function getAffectedRows()
@@ -156,6 +164,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Current
+     *
      * @return mixed
      */
     public function current()
@@ -243,6 +252,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Next
+     *
+     * @return void
      */
     public function next()
     {
@@ -257,6 +268,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Key
+     *
      * @return mixed
      */
     public function key()
@@ -266,6 +278,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Rewind
+     *
+     * @return void
      */
     public function rewind()
     {
@@ -281,6 +295,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Valid
+     *
      * @return boolean
      */
     public function valid()
@@ -311,7 +326,9 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
-     * @return int
+     * Get field count
+     *
+     * @return integer
      */
     public function getFieldCount()
     {
@@ -319,6 +336,8 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * Get generated value
+     *
      * @return mixed|null
      */
     public function getGeneratedValue()

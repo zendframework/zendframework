@@ -310,13 +310,38 @@ class FormTest extends TestCase
      */
     public function testCanAddFileEnctypeAttribute()
     {
-        $this->form->add(array(
-            'name' => 'file_resource',
-            'attributes' => array(
-                'label' => 'This is a file',
-                'type' => 'file',
-            )));
+        $file = new Element\File('file_resource');
+        $file
+            ->setOptions(array())
+            ->setLabel('File');
+        $this->form->add($file);
 
+        $this->form->prepare();
+        $enctype = $this->form->getAttribute('enctype');
+        $this->assertNotEmpty($enctype);
+        $this->assertEquals($enctype, 'multipart/form-data');
+    }
+
+    /**
+     * @group ZF2-336
+     */
+    public function testCanAddFileEnctypeFromCollectionAttribute()
+    {
+        $file = new Element\File('file_resource');
+        $file
+            ->setOptions(array())
+            ->setLabel('File');
+
+        $fileCollection = new Element\Collection('collection');
+        $fileCollection->setOptions(array(
+             'count' => 2,
+             'allow_add' => false,
+             'allow_remove' => false,
+             'target_element' => $file,
+        ));
+        $this->form->add($fileCollection);
+
+        $this->form->prepare();
         $enctype = $this->form->getAttribute('enctype');
         $this->assertNotEmpty($enctype);
         $this->assertEquals($enctype, 'multipart/form-data');

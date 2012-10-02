@@ -160,26 +160,29 @@ class Form extends Fieldset implements FormInterface
      * available, and prepares any elements and/or fieldsets that require
      * preparation.
      *
-     * @return void
+     * @return Form
      */
     public function prepare()
     {
-        if (!$this->isPrepared) {
-            $this->getInputFilter();
+        if ($this->isPrepared) {
+            return $this;
+        }
 
-            // If the user wants to, elements names can be wrapped by the form's name
-            if ($this->wrapElements()) {
-                $this->prepareElement($this);
-            } else {
-                foreach ($this->getIterator() as $elementOrFieldset) {
-                    if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                        $elementOrFieldset->prepareElement($this);
-                    }
+        $this->getInputFilter();
+
+        // If the user wants to, elements names can be wrapped by the form's name
+        if ($this->wrapElements()) {
+            $this->prepareElement($this);
+        } else {
+            foreach ($this->getIterator() as $elementOrFieldset) {
+                if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
+                    $elementOrFieldset->prepareElement($this);
                 }
             }
-
-            $this->isPrepared = true;
         }
+
+        $this->isPrepared = true;
+        return $this;
     }
 
     /**

@@ -86,7 +86,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load the provided modules.
      *
-     * @triggers loadModules.pre
+     * @triggers loadModules
      * @triggers loadModules.post
      * @return   ModuleManager
      */

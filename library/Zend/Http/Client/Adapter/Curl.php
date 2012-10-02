@@ -204,11 +204,15 @@ class Curl implements HttpAdapter, StreamInterface
             curl_setopt($this->curl, CURLOPT_PORT, intval($port));
         }
 
-        // Set timeout
-        curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $this->config['timeout']);
+        if (isset($this->config['timeout'])) {
+            // Set timeout
+            curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $this->config['timeout']);
+        }
 
-        // Set Max redirects
-        curl_setopt($this->curl, CURLOPT_MAXREDIRS, $this->config['maxredirects']);
+        if (isset($this->config['maxredirects'])) {
+            // Set Max redirects
+            curl_setopt($this->curl, CURLOPT_MAXREDIRS, $this->config['maxredirects']);
+        }
 
         if (!$this->curl) {
             $this->close();

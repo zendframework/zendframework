@@ -282,7 +282,22 @@ class FormRowTest extends TestCase
             '0'=>'working',
             '1'=>'coding'
         ));
-        $element->setValue(3);
+        $element->setMessages(array(
+            'Error message'
+        ));
+        
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<ul><li>Error message</li></ul>', $markup);
+    }
+    
+    public function testShowErrorInRadio()
+    {
+        $element = new Element\Radio('direction');
+        $element->setLabel("Direction");
+        $element->setValueOptions(array(
+            '0'=>'programming',
+            '1'=>'design'
+        ));
         $element->setMessages(array(
             'Error message'
         ));

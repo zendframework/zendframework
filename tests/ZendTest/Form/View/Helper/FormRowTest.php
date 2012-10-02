@@ -273,4 +273,36 @@ class FormRowTest extends TestCase
         $this->assertNotContains('<span', $markup);
         $this->assertNotContains('</span>', $markup);
     }
+    
+    public function testShowErrorInMultiCheckbox()
+    {
+        $element = new Element\MultiCheckbox('hobby');
+        $element->setLabel("Hobby");
+        $element->setValueOptions(array(
+            '0'=>'working',
+            '1'=>'coding'
+        ));
+        $element->setMessages(array(
+            'Error message'
+        ));
+        
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<ul><li>Error message</li></ul>', $markup);
+    }
+    
+    public function testShowErrorInRadio()
+    {
+        $element = new Element\Radio('direction');
+        $element->setLabel("Direction");
+        $element->setValueOptions(array(
+            '0'=>'programming',
+            '1'=>'design'
+        ));
+        $element->setMessages(array(
+            'Error message'
+        ));
+        
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<ul><li>Error message</li></ul>', $markup);
+    }
 }

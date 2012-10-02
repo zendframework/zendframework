@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.1.0:
+
+- The initializer for ServiceManagerAwareInterface was removed to prevent
+  confusion between ServiceManagerAwareInterface and
+  ServiceLocatorAwareInterface, and to promote using the latter interface.
+
 ## 2.0.2:
 
 - 2383: Changed unreserved char definition in Zend\Uri (ZF2-533) and added shell

@@ -237,14 +237,14 @@ class Size extends AbstractValidator
      */
     public function isValid($value)
     {
-        $file = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
-        $this->setValue(
-            (isset($value['name'])) ? $value['name'] : basename($file)
-        );
+        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
+        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
+        $this->setValue($filename);
 
         // Is file readable ?
         if (false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+            return false;
         }
 
         // limited to 4GB files

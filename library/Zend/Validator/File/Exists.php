@@ -30,7 +30,7 @@ class Exists extends AbstractValidator
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::DOES_NOT_EXIST => "File '%value%' does not exist",
+        self::DOES_NOT_EXIST => "File does not exist",
     );
 
     /**
@@ -138,58 +138,34 @@ class Exists extends AbstractValidator
     /**
      * Returns true if and only if the file already exists in the set directories
      *
-     * @param  string  $value Real file to check for existence
-     * @param  array   $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for existence
      * @return boolean
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
-            $directories[] = $file['destination'];
-        } elseif (!isset($file['name'])) {
-            $file['name'] = $value;
-        }
+        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
+        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
+        $this->setValue($filename);
 
         $check = false;
+        $directories = $this->getDirectory(true);
         foreach ($directories as $directory) {
-            if (empty($directory)) {
+            if (!isset($directory) || '' === $directory) {
                 continue;
             }
 
             $check = true;
-            if (!file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->throwError($file, self::DOES_NOT_EXIST);
+            if (!file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                $this->error(self::DOES_NOT_EXIST);
+                return false;
             }
         }
 
         if (!$check) {
-            return $this->throwError($file, self::DOES_NOT_EXIST);
+            $this->error(self::DOES_NOT_EXIST);
+            return false;
         }
 
         return true;
-    }
-
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function throwError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if (array_key_exists('name', $file)) {
-                    $this->value = basename($file['name']);
-                }
-            } elseif (is_string($file)) {
-                $this->value = basename($file);
-            }
-        }
-
-        $this->error($errorType);
-        return false;
     }
 }

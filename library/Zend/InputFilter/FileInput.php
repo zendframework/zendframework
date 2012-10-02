@@ -52,9 +52,11 @@ class FileInput extends Input
         return $this->isValid;
     }
 
+    /**
+     * @return void
+     */
     protected function injectNotEmptyValidator()
     {
         $this->notEmptyValidator = true;
-        // TODO: Could do something like automatically add the Upload validator here
     }
 }

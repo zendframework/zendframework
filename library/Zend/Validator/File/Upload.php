@@ -43,9 +43,9 @@ class Upload extends AbstractValidator
         self::FORM_SIZE      => "File exceeds the defined form size",
         self::PARTIAL        => "File was only partially uploaded",
         self::NO_FILE        => "File was not uploaded",
-        self::NO_TMP_DIR     => "No temporary directory was found for file '%value%'",
+        self::NO_TMP_DIR     => "No temporary directory was found for file",
         self::CANT_WRITE     => "File can't be written",
-        self::EXTENSION      => "A PHP extension returned an error while uploading the file '%value%'",
+        self::EXTENSION      => "A PHP extension returned an error while uploading the file",
         self::ATTACK         => "File was illegally uploaded. This could be a possible attack",
         self::FILE_NOT_FOUND => "File was not found",
         self::UNKNOWN        => "Unknown error while uploading file",
@@ -59,19 +59,19 @@ class Upload extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->setValue($value);
+        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
+        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
+        $error    = (isset($value['error']))    ? $value['error']    : 0;
+        $this->setValue($filename);
 
-        if (!is_array($value) || !isset($value['name'])
-            || !isset($value['error']) || !isset($value['tmp_name'])
-        ) {
+        if (false === stream_resolve_include_path($file)) {
             $this->error(self::FILE_NOT_FOUND);
             return false;
         }
 
-        $this->value = $value['name'];
-        switch ($value['error']) {
+        switch ($error) {
             case 0:
-                if (!is_uploaded_file($value['tmp_name'])) {
+                if (!is_uploaded_file($file)) {
                     $this->error(self::ATTACK);
                 }
                 break;

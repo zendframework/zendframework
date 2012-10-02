@@ -33,32 +33,32 @@ class NotExists extends Exists
     /**
      * Returns true if and only if the file does not exist in the set destinations
      *
-     * @param  string  $value Real file to check for
-     * @param  array   $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for existence
      * @return boolean
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
-            $directories[] = $file['destination'];
-        } elseif (!isset($file['name'])) {
-            $file['name'] = $value;
-        }
+        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
+        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
+        $this->setValue($filename);
 
+        $check = false;
+        $directories = $this->getDirectory(true);
         foreach ($directories as $directory) {
-            if (empty($directory)) {
+            if (!isset($directory) || '' === $directory) {
                 continue;
             }
 
             $check = true;
-            if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->throwError($file, self::DOES_EXIST);
+            if (file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                $this->error(self::DOES_EXIST);
+                return false;
             }
         }
 
-        if (!isset($check)) {
-            return $this->throwError($file, self::DOES_EXIST);
+        if (!$check) {
+            $this->error(self::DOES_EXIST);
+            return false;
         }
 
         return true;

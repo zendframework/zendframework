@@ -241,7 +241,7 @@ class Input implements InputInterface
         $this->setErrorMessage($input->getErrorMessage());
         $this->setName($input->getName());
         $this->setRequired($input->isRequired());
-        $this->setValue($input->getValue());
+        $this->setValue($input->getRawValue());
 
         $filterChain = $input->getFilterChain();
         $this->getFilterChain()->merge($filterChain);

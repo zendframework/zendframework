@@ -215,4 +215,29 @@ class InputTest extends TestCase
         $this->assertEquals(1, count($validators));
         $this->assertEquals($notEmptyMock, $validators[0]['instance']);
     }
+
+    public function testMerge()
+    {
+        $input  = new Input('foo');
+        $input->setValue(' 123 ');
+        $filter = new Filter\StringTrim();
+        $input->getFilterChain()->attach($filter);
+        $validator = new Validator\Digits();
+        $input->getValidatorChain()->addValidator($validator);
+
+        $input2 = new Input('bar');
+        $input2->merge($input);
+        $validatorChain = $input->getValidatorChain();
+        $filterChain    = $input->getFilterChain();
+
+        $this->assertEquals(' 123 ', $input2->getRawValue());
+        $this->assertEquals(1, $validatorChain->count());
+        $this->assertEquals(1, $filterChain->count());
+
+        $validators = $validatorChain->getValidators();
+        $this->assertInstanceOf('Zend\Validator\Digits', $validators[0]['instance']);
+
+        $filters = $filterChain->getFilters()->toArray();
+        $this->assertInstanceOf('Zend\Filter\StringTrim', $filters[0]);
+    }
 }

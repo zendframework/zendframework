@@ -321,8 +321,12 @@ class ConfigListener extends AbstractListener implements
         return $this;
     }
 
-
-
+    /**
+     * @param string $key
+     * @param array|Traversable $config
+     * @throws Exception\InvalidArgumentException
+     * @return ConfigListener
+     */
     protected function addConfig($key, $config)
     {
         if ($config instanceof Traversable) {

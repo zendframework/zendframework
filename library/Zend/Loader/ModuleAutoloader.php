@@ -85,7 +85,7 @@ class ModuleAutoloader implements SplAutoloader
      * Traversable object.
      *
      * @param  array|Traversable $options
-     * @return SplAutoloader
+     * @return ModuleAutoloader
      */
     public function setOptions($options)
     {

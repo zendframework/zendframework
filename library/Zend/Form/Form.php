@@ -160,7 +160,7 @@ class Form extends Fieldset implements FormInterface
      * available, and prepares any elements and/or fieldsets that require
      * preparation.
      *
-     * @return void
+     * @return \Zend\Form\Form
      */
     public function prepare()
     {
@@ -180,6 +180,8 @@ class Form extends Fieldset implements FormInterface
 
             $this->isPrepared = true;
         }
+
+        return $this;
     }
 
     /**

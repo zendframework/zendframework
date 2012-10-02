@@ -44,7 +44,7 @@ class TableGatewayEvent implements EventInterface
      */
     public function getName()
     {
-        return get_class($this->target) . '.' . $this->name;
+        return $this->name;
     }
 
     /**

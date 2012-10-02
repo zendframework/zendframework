@@ -22,6 +22,8 @@
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
+use Zend\Form\ElementPrepareAwareInterface;
+use Zend\Form\Form;
 
 /**
  * @category   Zend
@@ -30,7 +32,7 @@ use Zend\Form\Element;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends Element
+class File extends Element implements ElementPrepareAwareInterface
 {
     /**
      * Seed attributes
@@ -40,4 +42,16 @@ class File extends Element
     protected $attributes = array(
         'type' => 'file',
     );
+
+    /**
+     * Prepare the form element (mostly used for rendering purposes)
+     *
+     * @param  Form $form
+     * @return mixed
+     */
+    public function prepareElement(Form $form)
+    {
+        // Ensure the form is using correct enctype
+        $form->setAttribute('enctype', 'multipart/form-data');
+    }
 }

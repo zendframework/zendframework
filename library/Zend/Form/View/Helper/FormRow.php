@@ -134,10 +134,10 @@ class FormRow extends AbstractHelper
                         $markup = $labelOpen . $elementString . $label . $labelClose;
                         break;
                 }
+            }
 
-                if ($this->renderErrors) {
-                    $markup .= $elementErrors;
-                }
+            if ($this->renderErrors) {
+                $markup .= $elementErrors;
             }
         } else {
             if ($this->renderErrors) {

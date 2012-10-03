@@ -70,6 +70,11 @@ class ModuleManager implements ModuleManagerInterface
         }
     }
 
+    /**
+     * Handle the loadModules event
+     *
+     * @return void
+     */
     public function onLoadModules()
     {
         if (true === $this->modulesAreLoaded) {

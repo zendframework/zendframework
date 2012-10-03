@@ -231,7 +231,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         $links = Reader\Reader::findFeedLinks('http://meiobit.com');
-        $this->assertEquals('http://meiobit.com/rss.xml', $links->rss);
+        $this->assertEquals('http://mbit.disqus.com/latest.rss', $links->rss);
     }
 
     /**

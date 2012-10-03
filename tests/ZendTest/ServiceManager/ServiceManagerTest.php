@@ -287,6 +287,17 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
     }
 
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateWithMultipleAbstractFactories()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\BarAbstractFactory');
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
+    }
+
     public function testCreateWithInitializerObject()
     {
         $this->serviceManager->addInitializer(new TestAsset\FooInitializer(array('foo' => 'bar')));

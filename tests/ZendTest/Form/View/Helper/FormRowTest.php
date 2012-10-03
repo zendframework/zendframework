@@ -305,4 +305,18 @@ class FormRowTest extends TestCase
         $markup = $this->helper->__invoke($element);
         $this->assertContains('<ul><li>Error message</li></ul>', $markup);
     }
+    
+    public function testErrorShowTwice()
+    {
+        $element = new  Element\Date('birth');
+        $element->setFormat('Y-m-d');
+        $element->setValue('2010-13-13');
+        
+        $validator = new \Zend\Validator\Date();
+        $validator->isValid($element->getValue());
+        $element->setMessages($validator->getMessages());
+        
+        $markup = $this->helper->__invoke($element);
+        $this->assertEquals(2,  count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
+    }
 }

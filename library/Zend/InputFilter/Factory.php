@@ -158,6 +158,9 @@ class Factory
                         $input->setRequired(!$value);
                     }
                     break;
+                case 'fallback_value':
+                    $input->setFallbackValue($value);
+                    break;
                 case 'filters':
                     if ($value instanceof FilterChain) {
                         $input->setFilterChain($value);

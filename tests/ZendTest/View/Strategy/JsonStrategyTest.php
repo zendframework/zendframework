@@ -63,6 +63,16 @@ class JsonStrategyTest extends TestCase
         $this->assertFalse($result->hasJsonpCallback());
     }
 
+    public function testJsonModelMatchedAcceptHeaderMatchSelectsJsonStrategy()
+    {
+        $this->event->setModel(new JsonModel());
+        $request = new HttpRequest();
+        $request->getHeaders()->addHeaderLine('Accept', '*/*');
+        $this->event->setRequest($request);
+        $result = $this->strategy->selectRenderer($this->event);
+        $this->assertSame($this->renderer, $result);
+    }
+
     public function testJsonModelJavascriptAcceptHeaderSetsJsonpCallback()
     {
         $this->event->setModel(new JsonModel());

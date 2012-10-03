@@ -487,7 +487,7 @@ class SetCookie implements MultipleHeaderInterface
 
     public function isValidForRequest($requestDomain, $path, $isSecure = false)
     {
-        if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) !== false)) {
+        if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) === false)) {
             return false;
         }
 

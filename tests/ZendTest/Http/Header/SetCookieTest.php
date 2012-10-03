@@ -153,7 +153,19 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($target, $headerLine);
     }
 
-    /** Implmentation specific tests here */
+    public function testIsValidForRequestSubdomainMatch()
+    {
+        $setCookieHeader = new SetCookie(
+            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT',
+            '/accounts', '.foo.com', true, true, 99, 9
+        );
+        $this->assertTrue($setCookieHeader->isValidForRequest('bar.foo.com', '/accounts', true));
+        $this->assertFalse($setCookieHeader->isValidForRequest('bar.foooo.com', '/accounts', true)); // false because of domain
+        $this->assertFalse($setCookieHeader->isValidForRequest('bar.foo.com', '/accounts', false)); // false because of isSecure
+        $this->assertFalse($setCookieHeader->isValidForRequest('bar.foo.com', '/somethingelse', true)); // false because of path
+    }
+
+    /** Implementation specific tests here */
 
     /**
      * @group ZF2-169

@@ -82,20 +82,21 @@ class ListenerOptions extends AbstractOptions
      *
      * @param  array|Traversable $modulePaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setModulePaths($modulePaths)
     {
-        if (!is_array($modulePaths) && !$modulePaths instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
-                __CLASS__, __METHOD__, gettype($modulePaths))
-            );
+        if (is_array($modulePaths) || $modulePaths instanceof Traversable) {
+            $this->modulePaths = $modulePaths;
+            return $this;
         }
-        $this->modulePaths = $modulePaths;
-        return $this;
+
+        throw new Exception\InvalidArgumentException(
+            sprintf('Argument passed to %s::%s() must be an array, '
+            . 'implement the \Traversable interface, or be an '
+            . 'instance of Zend\Config\Config. %s given.',
+            __CLASS__, __METHOD__, gettype($modulePaths))
+        );
     }
 
     /**
@@ -123,20 +124,21 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configGlobPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigGlobPaths($configGlobPaths)
     {
-        if (!is_array($configGlobPaths) && !$configGlobPaths instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
-                __CLASS__, __METHOD__, gettype($configGlobPaths))
-            );
+        if (is_array($configGlobPaths) || $configGlobPaths instanceof Traversable) {
+            $this->configGlobPaths = $configGlobPaths;
+            return $this;
         }
-        $this->configGlobPaths = $configGlobPaths;
-        return $this;
+
+        throw new Exception\InvalidArgumentException(
+            sprintf('Argument passed to %s::%s() must be an array, '
+            . 'implement the \Traversable interface, or be an '
+            . 'instance of Zend\Config\Config. %s given.',
+            __CLASS__, __METHOD__, gettype($configGlobPaths))
+        );
     }
 
     /**
@@ -144,20 +146,21 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configStaticPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigStaticPaths($configStaticPaths)
     {
-        if (!is_array($configStaticPaths) && !$configStaticPaths instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
-                __CLASS__, __METHOD__, gettype($configStaticPaths))
-            );
+        if (is_array($configStaticPaths) || $configStaticPaths instanceof Traversable) {
+            $this->configStaticPaths = $configStaticPaths;
+            return $this;
         }
-        $this->configStaticPaths = $configStaticPaths;
-        return $this;
+
+        throw new Exception\InvalidArgumentException(
+            sprintf('Argument passed to %s::%s() must be an array, '
+            . 'implement the \Traversable interface, or be an '
+            . 'instance of Zend\Config\Config. %s given.',
+            __CLASS__, __METHOD__, gettype($configStaticPaths))
+        );
     }
 
     /**
@@ -176,20 +179,21 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $extraConfig
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setExtraConfig($extraConfig)
     {
-        if (!is_array($extraConfig) && !$extraConfig instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
-                __CLASS__, __METHOD__, gettype($extraConfig))
-            );
+        if (is_array($extraConfig) || $extraConfig instanceof Traversable) {
+            $this->extraConfig = $extraConfig;
+            return $this;
         }
-        $this->extraConfig = $extraConfig;
-        return $this;
+
+        throw new Exception\InvalidArgumentException(
+            sprintf('Argument passed to %s::%s() must be an array, '
+            . 'implement the \Traversable interface, or be an '
+            . 'instance of Zend\Config\Config. %s given.',
+            __CLASS__, __METHOD__, gettype($extraConfig))
+        );
     }
 
     /**

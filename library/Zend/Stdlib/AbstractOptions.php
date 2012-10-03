@@ -28,8 +28,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
     /**
      * @param  array|Traversable|null $options
-     * @return AbstractOptions
-     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
@@ -41,20 +39,21 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @param  array|Traversable $options
      * @throws Exception\InvalidArgumentException
-     * @return void
+     * @return AbstractOptions Provides fluent interface
      */
     public function setFromArray($options)
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Parameter provided to %s must be an array or Traversable',
-                __METHOD__
-            ));
+        if (is_array($options) || $options instanceof Traversable) {
+            foreach ($options as $key => $value) {
+                $this->__set($key, $value);
+            }
+            return $this;
         }
 
-        foreach ($options as $key => $value) {
-            $this->__set($key, $value);
-        }
+        throw new Exception\InvalidArgumentException(sprintf(
+            'Parameter provided to %s must be an array or Traversable',
+            __METHOD__
+        ));
     }
 
     /**
@@ -108,14 +107,15 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!method_exists($this, $getter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
-                . 'which must be defined'
-            );
+        if (method_exists($this, $getter)) {
+            return $this->{$getter}();
         }
-        return $this->{$getter}();
+
+        throw new Exception\BadMethodCallException(
+            'The option "' . $key . '" does not '
+            . 'have a matching ' . $getter . ' getter method '
+            . 'which must be defined'
+        );
     }
 
     /**
@@ -131,14 +131,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @see ParameterObject::__unset()
      * @param string $key
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function __unset($key)
     {
         try {
             $this->__set($key, null);
-        } catch (\InvalidArgumentException $e) {
+        } catch (Exception\BadMethodCallException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
                     . ' NULL is an invalid value for it',

@@ -71,14 +71,14 @@ class Exists extends AbstractValidator
      * Returns the set file directories which are checked
      *
      * @param  boolean $asArray Returns the values as array, when false an concatenated string is returned
-     * @return string
+     * @return string|null
      */
     public function getDirectory($asArray = false)
     {
         $asArray   = (bool) $asArray;
-        $directory = (string) $this->options['directory'];
-        if ($asArray) {
-            $directory = explode(',', $directory);
+        $directory = $this->options['directory'];
+        if ($asArray && isset($directory)) {
+            $directory = explode(',', (string)$directory);
         }
 
         return $directory;
@@ -107,6 +107,9 @@ class Exists extends AbstractValidator
     public function addDirectory($directory)
     {
         $directories = $this->getDirectory(true);
+        if (!isset($directories)) {
+            $directories = array();
+        }
 
         if (is_string($directory)) {
             $directory = explode(',', $directory);
@@ -130,7 +133,8 @@ class Exists extends AbstractValidator
             }
         }
 
-        $this->options['directory'] = implode(',', $directories);
+        $this->options['directory'] = (!empty($directory))
+            ? implode(',', $directories) : null;
 
         return $this;
     }
@@ -143,21 +147,40 @@ class Exists extends AbstractValidator
      */
     public function isValid($value)
     {
-        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
-        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
-        $this->setValue($filename);
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = basename($file);
+            $this->setValue($value['name']);
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $this->setValue($filename);
+        }
 
         $check = false;
         $directories = $this->getDirectory(true);
-        foreach ($directories as $directory) {
-            if (!isset($directory) || '' === $directory) {
-                continue;
-            }
-
+        if (!isset($directories)) {
             $check = true;
-            if (!file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+            if (!file_exists($file)) {
                 $this->error(self::DOES_NOT_EXIST);
                 return false;
+            }
+        } else {
+            foreach ($directories as $directory) {
+                if (!isset($directory) || '' === $directory) {
+                    continue;
+                }
+
+                $check = true;
+                if (!file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                    $this->error(self::DOES_NOT_EXIST);
+                    return false;
+                }
             }
         }
 

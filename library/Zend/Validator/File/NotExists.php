@@ -10,6 +10,8 @@
 
 namespace Zend\Validator\File;
 
+use Zend\Validator\Exception;
+
 /**
  * Validator which checks if the destination file does not exist
  *
@@ -27,7 +29,7 @@ class NotExists extends Exists
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::DOES_EXIST => "File '%value%' exists",
+        self::DOES_EXIST => "File exists",
     );
 
     /**
@@ -38,21 +40,40 @@ class NotExists extends Exists
      */
     public function isValid($value)
     {
-        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
-        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
-        $this->setValue($filename);
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = basename($file);
+            $this->setValue($value['name']);
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $this->setValue($filename);
+        }
 
         $check = false;
         $directories = $this->getDirectory(true);
-        foreach ($directories as $directory) {
-            if (!isset($directory) || '' === $directory) {
-                continue;
-            }
-
+        if (!isset($directories)) {
             $check = true;
-            if (file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+            if (file_exists($file)) {
                 $this->error(self::DOES_EXIST);
                 return false;
+            }
+        } else {
+            foreach ($directories as $directory) {
+                if (!isset($directory) || '' === $directory) {
+                    continue;
+                }
+
+                $check = true;
+                if (file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                    $this->error(self::DOES_EXIST);
+                    return false;
+                }
             }
         }
 

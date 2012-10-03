@@ -11,6 +11,7 @@
 namespace Zend\Validator\File;
 
 use finfo;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the mime type of a file
@@ -34,9 +35,20 @@ class ExcludeMimeType extends MimeType
      */
     public function isValid($value)
     {
-        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
-        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
-        $filetype = (isset($value['type']))     ? $value['type']     : null;
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name']) || !isset($value['type'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+            $filetype = $value['type'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $filetype = null;
+        }
         $this->setValue($filename);
 
         // Is file readable ?

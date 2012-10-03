@@ -59,9 +59,20 @@ class Upload extends AbstractValidator
      */
     public function isValid($value)
     {
-        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
-        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
-        $error    = (isset($value['error']))    ? $value['error']    : 0;
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name']) || !isset($value['error'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+            $error    = $value['error'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $error    = 0;
+        }
         $this->setValue($filename);
 
         if (false === stream_resolve_include_path($file)) {

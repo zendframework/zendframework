@@ -23,63 +23,56 @@ use Zend\Validator\File;
 class Sha1Test extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile   = __DIR__ . '/_files/picture.jpg';
+        $pictureTests = array(
+            //    Options, isValid Param, Expected value, Expected message
+            array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, true,  ''),
+            array('52a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, false, 'fileSha1DoesNotMatch'),
+            array(
+                array('42a5334847b4328e7d19d9b41fd874dffa911c98', 'b2a5334847b4328e7d19d9b41fd874dffa911c98'),
+                $testFile, true, ''
+            ),
+            array(
+                array('42a5334847b4328e7d19d9b41fd874dffa911c98', '72a5334847b4328e7d19d9b41fd874dffa911c98'),
+                $testFile, false, 'fileSha1DoesNotMatch'
+            ),
+        );
+
+        $testFile   = __DIR__ . '/_files/nofile.mo';
+        $noFileTests = array(
+            //    Options, isValid Param, Expected value, message
+            array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, false, 'fileSha1NotFound'),
+        );
+
+        // Dupe data in File Upload format
+        $testData = array_merge($pictureTests, $noFileTests);
+        foreach ($testData as $data) {
+            $fileUpload = array(
+                'tmp_name' => $data[1], 'name' => basename($data[1]),
+                'size' => 200, 'error' => 0, 'type' => 'text'
+            );
+            $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
+        }
+        return $testData;
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected, $messageKey)
     {
-        $valuesExpected = array(
-            array('b2a5334847b4328e7d19d9b41fd874dffa911c98', true),
-            array('52a5334847b4328e7d19d9b41fd874dffa911c98', false),
-            array(array('42a5334847b4328e7d19d9b41fd874dffa911c98', 'b2a5334847b4328e7d19d9b41fd874dffa911c98'), true),
-            array(array('42a5334847b4328e7d19d9b41fd874dffa911c98', '72a5334847b4328e7d19d9b41fd874dffa911c98'), false),
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Sha1($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
-                "Tested with " . var_export($element, 1)
-            );
+        $validator = new File\Sha1($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+        if (!$expected) {
+            $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
         }
-
-        $validator = new File\Sha1('b2a5334847b4328e7d19d9b41fd874dffa911c98');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileSha1NotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'test1',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => 'tmp_test1',
-            'error'    => 0
-        );
-        $validator = new File\Sha1('b2a5334847b4328e7d19d9b41fd874dffa911c98');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
-        $this->assertTrue(array_key_exists('fileSha1NotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\Sha1('b2a5334847b4328e7d19d9b41fd874dffa911c98');
-        $this->assertTrue($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\Sha1('42a5334847b4328e7d19d9b41fd874dffa911c98');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
-        $this->assertTrue(array_key_exists('fileSha1DoesNotMatch', $validator->getMessages()));
     }
 
     /**
@@ -178,6 +171,6 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
         $validator = new File\Sha1('12345');
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileSha1NotFound', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

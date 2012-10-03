@@ -13,7 +13,7 @@ namespace Zend\Validator\File;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
-
+use Zend\Validator\Exception;
 /**
  * Validator for the file extension of a file
  *
@@ -179,9 +179,19 @@ class Extension extends AbstractValidator
      */
     public function isValid($value)
     {
-        $file     = (isset($value['tmp_name'])) ? $value['tmp_name'] : $value;
-        $filename = (isset($value['name']))     ? $value['name']     : basename($file);
-         $this->setValue($filename);
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+        }
+        $this->setValue($filename);
 
         // Is file readable ?
         if (false === stream_resolve_include_path($file)) {

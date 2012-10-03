@@ -112,7 +112,7 @@ class JsonStrategy implements ListenerAggregateInterface
             }
             return $this->renderer;
         }
-        
+
         return ($model instanceof Model\JsonModel) ? $this->renderer : null;
     }
 

@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Console": ""
+            "Zend\\Console\\": ""
         }
     },
     "target-dir": "Zend/Console",

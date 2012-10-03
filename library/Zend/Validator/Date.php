@@ -132,6 +132,10 @@ class Date extends AbstractValidator
                 $this->error(self::INVALID_DATE);
                 return false;
             }
+            if ($date === false) {
+                $this->error(self::INVALID_DATE);
+                return false;
+            }
         } else {
             if (is_array($value)) {
                 $value = implode('-', $value);

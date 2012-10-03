@@ -13,9 +13,13 @@ namespace ZendTest\View\Helper\TestAsset;
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 
+/**
+ * @category   Zend
+ * @package    Zend_View
+ * @subpackage UnitTests
+ */
 class AuthenticationAdapter implements AdapterInterface
 {
-
     protected $identity;
 
     public function setIdentity($identity)

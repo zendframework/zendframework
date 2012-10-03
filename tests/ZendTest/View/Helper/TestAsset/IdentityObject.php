@@ -10,6 +10,11 @@
 
 namespace ZendTest\View\Helper\TestAsset;
 
+/**
+ * @category   Zend
+ * @package    Zend_View
+ * @subpackage UnitTests
+ */
 class IdentityObject
 {
     /**

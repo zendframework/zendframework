@@ -13,8 +13,6 @@ namespace ZendTest\View\Helper;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage\NonPersistent as NonPersistentStorage;
 use Zend\View\Helper\Identity as IdentityHelper;
-use ZendTest\View\Helper\TestAsset\IdentityObject;
-use ZendTest\View\Helper\TestAsset\AuthenticationAdapter;
 
 /**
  * Zend_View_Helper_IdentityTest
@@ -27,19 +25,15 @@ use ZendTest\View\Helper\TestAsset\AuthenticationAdapter;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-
 class IdentityTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGetIdentity()
     {
-
-        $identity = new IdentityObject();
+        $identity = new TestAsset\IdentityObject();
         $identity->setUsername('a username');
         $identity->setPassword('a password');
 
-
-        $authenticationService = new AuthenticationService(new NonPersistentStorage, new AuthenticationAdapter);
+        $authenticationService = new AuthenticationService(new NonPersistentStorage, new TestAsset\AuthenticationAdapter);
 
         $identityHelper = new IdentityHelper;
         $identityHelper->setAuthenticationService($authenticationService);

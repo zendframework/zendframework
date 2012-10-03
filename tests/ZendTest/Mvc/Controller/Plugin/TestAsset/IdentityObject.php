@@ -10,6 +10,11 @@
 
 namespace ZendTest\Mvc\Controller\Plugin\TestAsset;
 
+/**
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @subpackage UnitTests
+ */
 class IdentityObject
 {
     /**

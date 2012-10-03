@@ -13,8 +13,6 @@ namespace ZendTest\Mvc\Controller\Plugin;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage\NonPersistent as NonPersistentStorage;
 use Zend\Mvc\Controller\Plugin\Identity as IdentityPlugin;
-use ZendTest\Mvc\Controller\Plugin\TestAsset\IdentityObject;
-use ZendTest\Mvc\Controller\Plugin\TestAsset\AuthenticationAdapter;
 
 /**
  * Tests Identity plugin
@@ -25,15 +23,13 @@ use ZendTest\Mvc\Controller\Plugin\TestAsset\AuthenticationAdapter;
  */
 class IdentityTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGetIdentity()
     {
-
-        $identity = new IdentityObject();
+        $identity = new TestAsset\IdentityObject();
         $identity->setUsername('a username');
         $identity->setPassword('a password');
 
-        $authenticationService = new AuthenticationService(new NonPersistentStorage, new AuthenticationAdapter);
+        $authenticationService = new AuthenticationService(new NonPersistentStorage, new TestAsset\AuthenticationAdapter);
 
         $identityPlugin = new IdentityPlugin;
         $identityPlugin->setAuthenticationService($authenticationService);

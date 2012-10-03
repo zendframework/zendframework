@@ -22,16 +22,13 @@ use Zend\View\Exception;
  */
 class Identity extends AbstractHelper
 {
-
     /**
-     *
-     * @var \Zend\Authentication\AuthenticationService
+     * @var AuthenticationService
      */
     protected $authenticationService;
 
     /**
-     *
-     * @return \Zend\Authentication\AuthenticationService
+     * @return AuthenticationService
      */
     public function getAuthenticationService()
     {
@@ -39,8 +36,7 @@ class Identity extends AbstractHelper
     }
 
     /**
-     *
-     * @param \Zend\Authentication\AuthenticationService $authetnicationService
+     * @param AuthenticationService $authenticationService
      */
     public function setAuthenticationService(AuthenticationService $authenticationService)
     {
@@ -48,18 +44,22 @@ class Identity extends AbstractHelper
     }
 
     /**
+     * Retrieve the current identity, if any.
      *
-     * @return mixed | null
+     * If none available, returns null.
+     *
+     * @return mixed|null
      * @throws Exception\RuntimeException
      */
     public function __invoke()
     {
-        if ( ! $this->authenticationService instanceof AuthenticationService){
+        if (!$this->authenticationService instanceof AuthenticationService){
             throw new Exception\RuntimeException('No AuthenticationService instance provided');
         }
-        if ($this->authenticationService->hasIdentity()) {
-            return $this->authenticationService->getIdentity();
+
+        if (!$this->authenticationService->hasIdentity()) {
+            return null;
         }
-        return null;
+        return $this->authenticationService->getIdentity();
     }
 }

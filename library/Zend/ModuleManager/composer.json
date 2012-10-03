@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\ModuleManager": ""
+            "Zend\\ModuleManager\\": ""
         }
     },
     "target-dir": "Zend/ModuleManager",

@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Math": ""
+            "Zend\\Math\\": ""
         }
     },
     "target-dir": "Zend/Math",

@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\InputFilter": ""
+            "Zend\\InputFilter\\": ""
         }
     },
     "target-dir": "Zend/InputFilter",

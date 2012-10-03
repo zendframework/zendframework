@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Validator": ""
+            "Zend\\Validator\\": ""
         }
     },
     "target-dir": "Zend/Validator",

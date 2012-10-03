@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Captcha": ""
+            "Zend\\Captcha\\": ""
         }
     },
     "target-dir": "Zend/Captcha",

@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Form": ""
+            "Zend\\Form\\": ""
         }
     },
     "target-dir": "Zend/Form",

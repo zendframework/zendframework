@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Authentication": ""
+            "Zend\\Authentication\\": ""
         }
     },
     "target-dir": "Zend/Authentication",

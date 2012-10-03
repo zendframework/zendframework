@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Paginator": ""
+            "Zend\\Paginator\\": ""
         }
     },
     "target-dir": "Zend/Paginator",

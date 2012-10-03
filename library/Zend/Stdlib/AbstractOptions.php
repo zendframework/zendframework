@@ -43,17 +43,17 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function setFromArray($options)
     {
-        if (is_array($options) || $options instanceof Traversable) {
-            foreach ($options as $key => $value) {
-                $this->__set($key, $value);
-            }
-            return $this;
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Parameter provided to %s must be an array or Traversable',
+                __METHOD__
+            ));
         }
 
-        throw new Exception\InvalidArgumentException(sprintf(
-            'Parameter provided to %s must be an array or Traversable',
-            __METHOD__
-        ));
+        foreach ($options as $key => $value) {
+            $this->__set($key, $value);
+        }
+        return $this;
     }
 
     /**
@@ -107,15 +107,15 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (method_exists($this, $getter)) {
-            return $this->{$getter}();
+        if (!method_exists($this, $getter)) {
+            throw new Exception\BadMethodCallException(
+                'The option "' . $key . '" does not '
+                . 'have a matching ' . $getter . ' getter method '
+                . 'which must be defined'
+            );
         }
 
-        throw new Exception\BadMethodCallException(
-            'The option "' . $key . '" does not '
-            . 'have a matching ' . $getter . ' getter method '
-            . 'which must be defined'
-        );
+        return $this->{$getter}();
     }
 
     /**

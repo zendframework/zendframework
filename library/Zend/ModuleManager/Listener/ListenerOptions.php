@@ -82,7 +82,7 @@ class ListenerOptions extends AbstractOptions
      *
      * @param  array|Traversable $modulePaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setModulePaths($modulePaths)
     {
@@ -94,6 +94,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($modulePaths))
             );
         }
+
         $this->modulePaths = $modulePaths;
         return $this;
     }
@@ -123,7 +124,7 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configGlobPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigGlobPaths($configGlobPaths)
     {
@@ -135,6 +136,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($configGlobPaths))
             );
         }
+
         $this->configGlobPaths = $configGlobPaths;
         return $this;
     }
@@ -144,7 +146,7 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configStaticPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigStaticPaths($configStaticPaths)
     {
@@ -156,6 +158,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($configStaticPaths))
             );
         }
+
         $this->configStaticPaths = $configStaticPaths;
         return $this;
     }
@@ -176,7 +179,7 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $extraConfig
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setExtraConfig($extraConfig)
     {
@@ -188,6 +191,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($extraConfig))
             );
         }
+
         $this->extraConfig = $extraConfig;
         return $this;
     }

@@ -13,7 +13,6 @@ namespace ZendTest\Stdlib;
 use ArrayObject;
 use ZendTest\Stdlib\TestAsset\TestOptions;
 use ZendTest\Stdlib\TestAsset\TestOptionsNoStrict;
-use ZendTest\Stdlib\TestAsset\TestTraversable;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 
 class OptionsTest extends \PHPUnit_Framework_TestCase
@@ -48,7 +47,6 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testConstructionWithNull()
     {
         try {
@@ -65,5 +63,35 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, isset($options->test_field));
         unset($options->testField);
         $this->assertEquals(false, isset($options->test_field));
+    }
+
+    public function testUnsetThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new TestOptions;
+        unset($options->foobarField);
+    }
+
+    public function testGetThrowsBadMethodCallException()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        $options = new TestOptions();
+        $options->fieldFoobar;
+    }
+
+    public function testSetFromArrayAcceptsArray()
+    {
+        $array = array('test_field' => 3);
+        $options = new TestOptions();
+
+        $this->assertSame($options, $options->setFromArray($array));
+        $this->assertEquals(3, $options->test_field);
+    }
+
+    public function testSetFromArrayThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new TestOptions;
+        $options->setFromArray('asd');
     }
 }

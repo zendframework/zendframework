@@ -17,10 +17,12 @@ class BarAbstractFactory implements AbstractFactoryInterface
 {
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        if ($name == 'bar') {
-            return true;
+        if ($name != 'bar') {
+            return false;
         }
+        return true;
     }
+
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         return new Bar(array());

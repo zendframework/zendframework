@@ -11,7 +11,7 @@
 namespace ZendTest\I18n\View\Helper;
 
 use Locale;
-use Zend\I18n\View\Helper\CurrencyFormat as CurrencyHelper;
+use Zend\I18n\View\Helper\CurrencyFormat as CurrencyFormatHelper;
 
 /**
  * @category   Zend
@@ -23,7 +23,7 @@ use Zend\I18n\View\Helper\CurrencyFormat as CurrencyHelper;
 class CurrencyFormatTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CurrencyHelper
+     * @var CurrencyFormatHelper
      */
     public $helper;
 
@@ -35,61 +35,60 @@ class CurrencyFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->helper = new CurrencyHelper();
+        $this->helper = new CurrencyFormatHelper();
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        unset($this->helper);
-    }
-
-    public function currencyTestsDataProvider()
+    public function currencyProvider()
     {
         return array(
-            //    locale   currency  number                   expected
-            array('de_AT', 'EUR',    1234.56,                 '€ 1.234,56'),
-            array('de_AT', 'EUR',    0.123,                   '€ 0,12'),
-            array('de_DE', 'EUR',    1234567.891234567890000, '1.234.567,89 €'),
-            array('de_DE', 'RUR',    1234567.891234567890000, '1.234.567,89 RUR'),
-            array('ru_RU', 'EUR',    1234567.891234567890000, '1 234 567,89 €'),
-            array('ru_RU', 'RUR',    1234567.891234567890000, '1 234 567,89 р.'),
-            array('en_US', 'EUR',    1234567.891234567890000, '€1,234,567.89'),
-            array('en_US', 'RUR',    1234567.891234567890000, 'RUR1,234,567.89'),
-            array('en_US', 'USD',    1234567.891234567890000, '$1,234,567.89'),
+            //    locale   currency   show decimals      number   expected
+            array('de_AT', 'EUR',     true,              1234.56, '€ 1.234,56'),
+            array('de_AT', 'EUR',     true,              0.123,   '€ 0,12'),
+            array('de_DE', 'EUR',     true,              1234567.891234567890000, '1.234.567,89 €'),
+            array('de_DE', 'RUR',     true,              1234567.891234567890000, '1.234.567,89 RUR'),
+            array('ru_RU', 'EUR',     true,              1234567.891234567890000, '1 234 567,89 €'),
+            array('ru_RU', 'RUR',     true,              1234567.891234567890000, '1 234 567,89 р.'),
+            array('en_US', 'EUR',     true,              1234567.891234567890000, '€1,234,567.89'),
+            array('en_US', 'RUR',     true,              1234567.891234567890000, 'RUR1,234,567.89'),
+            array('en_US', 'USD',     true,              1234567.891234567890000, '$1,234,567.89'),
+            array('de_AT', 'EUR',     false,             1234.56, '€ 1.235'),
+            array('de_AT', 'EUR',     false,             0.123,   '€ 0'),
+            array('de_DE', 'EUR',     false,             1234567.891234567890000, '1.234.568 €'),
+            //array('de_DE', 'RUB',     false,             1234567.891234567890000, '1.234.567,89 RUB'),
+            //array('ru_RU', 'EUR',     false,             1234567.891234567890000, '1 234 568 €'),
+            //array('ru_RU', 'RUR',     false,             1234567.891234567890000, '1 234 567 р.'),
+            //array('en_US', 'EUR',     false,             1234567.891234567890000, '€1,234,568'),
+            //array('en_US', 'EUR',     false,             1234567.891234567890000, '€1,234,568'),
+            array('en_US', 'USD',     false,             1234567.891234567890000, '$1,234,568'),
         );
     }
 
     /**
-     * @dataProvider currencyTestsDataProvider
+     * @dataProvider currencyProvider
      */
-    public function testBasic($locale, $currencyCode, $number, $expected)
+    public function testBasic($locale, $currencyCode, $showDecimals, $number, $expected)
     {
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
-            $number, $currencyCode, $locale
+            $number, $currencyCode, $showDecimals, $locale
         ));
     }
 
     /**
-     * @dataProvider currencyTestsDataProvider
+     * @dataProvider currencyProvider
      */
-    public function testSettersProvideDefaults($locale, $currencyCode, $number, $expected)
+    public function testSettersProvideDefaults($locale, $currencyCode, $showDecimals, $number, $expected)
     {
         $this->helper
-            ->setLocale($locale)
-            ->setCurrencyCode($currencyCode);
+             ->setLocale($locale)
+             ->setShouldShowDecimals($showDecimals)
+             ->setCurrencyCode($currencyCode);
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
     public function testDefaultLocale()
     {
-        $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
+        $this->assertMbStringEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
     public function assertMbStringEquals($expected, $test, $message = '')

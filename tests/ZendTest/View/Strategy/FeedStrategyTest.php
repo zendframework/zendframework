@@ -62,6 +62,27 @@ class FeedStrategyTest extends TestCase
         $this->assertSame($this->renderer, $result);
     }
 
+    public function testViewModelMatchedAcceptHeaderMatchSelectsFeedStrategy()
+    {
+        $this->event->setModel(new FeedModel());
+        $request = new HttpRequest();
+        $request->getHeaders()->addHeaderLine('Accept', '*/*');
+        $this->event->setRequest($request);
+        $result = $this->strategy->selectRenderer($this->event);
+        $this->assertSame($this->renderer, $result);
+    }
+
+    public function testViewModelAcceptHeaderSelectsFeedStrategyAndSetsFeedtype()
+    {
+        $this->event->setModel(new FeedModel());
+        $request = new HttpRequest();
+        $request->getHeaders()->addHeaderLine('Accept', 'application/atom+xml');
+        $this->event->setRequest($request);
+        $result = $this->strategy->selectRenderer($this->event);
+        $this->assertSame($this->renderer, $result);
+        $this->assertSame('atom', $result->getFeedType());
+    }
+
     public function testLackOfFeedModelOrAcceptHeaderDoesNotSelectFeedStrategy()
     {
         $result = $this->strategy->selectRenderer($this->event);

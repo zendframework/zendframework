@@ -85,25 +85,20 @@ class FeedStrategy implements ListenerAggregateInterface
     {
         $model = $e->getModel();
 
-        if ($model instanceof Model\FeedModel) {
-            // FeedModel found
-            return $this->renderer;
-        }
-
         $request = $e->getRequest();
         if (!$request instanceof HttpRequest) {
             // Not an HTTP request; cannot autodetermine
-            return;
+            return ($model instanceof Model\FeedModel) ? $this->renderer : null;
         }
 
         $headers = $request->getHeaders();
         if (!$headers->has('accept')) {
-            return;
+            return ($model instanceof Model\FeedModel) ? $this->renderer : null;
         }
 
         $accept  = $headers->get('accept');
         if (($match = $accept->match('application/rss+xml, application/atom+xml')) == false) {
-            return;
+            return ($model instanceof Model\FeedModel) ? $this->renderer : null;
         }
 
         if ($match->getTypeString() == 'application/rss+xml') {
@@ -116,6 +111,7 @@ class FeedStrategy implements ListenerAggregateInterface
             return $this->renderer;
         }
 
+        return ($model instanceof Model\FeedModel) ? $this->renderer : null;
     }
 
     /**

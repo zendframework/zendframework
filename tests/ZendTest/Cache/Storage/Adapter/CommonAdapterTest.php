@@ -1043,7 +1043,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         $totalSpace = $this->_storage->getTotalSpace();
-        $this->assertGreaterThan(0, $totalSpace);
+        $this->assertGreaterThanOrEqual(0, $totalSpace);
 
         if ($this->_storage instanceof AvailableSpaceCapableInterface) {
             $availableSpace = $this->_storage->getAvailableSpace();

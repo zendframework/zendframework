@@ -27,6 +27,7 @@ class PdfTest extends TestCommon
         if (!constant('TESTS_ZEND_BARCODE_PDF_SUPPORT')) {
             $this->markTestSkipped('Enable TESTS_ZEND_BARCODE_PDF_SUPPORT to test PDF render');
         }
+        parent::setUp();
     }
 
     protected function getRendererObject($options = null)

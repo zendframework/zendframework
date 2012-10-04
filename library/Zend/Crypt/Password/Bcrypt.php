@@ -34,7 +34,7 @@ class Bcrypt implements PasswordInterface
      * @var string
      */
     protected $salt;
-    
+
     /**
      * @var boolean
      */
@@ -178,21 +178,21 @@ class Bcrypt implements PasswordInterface
     {
         return $this->salt;
     }
-    
+
     /**
      * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
-     * 
-     * @param boolean $value 
+     *
+     * @param boolean $value
      */
     public function setBackwardCompatibility($value)
     {
         $this->backwardCompatibility = (boolean) $value;
         return $this;
     }
-    
+
     /**
      * Get the backward compatibility
-     * 
+     *
      * @return boolean
      */
     public function getBackwardCompatibility()

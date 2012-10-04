@@ -139,14 +139,14 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
             $output = $this->bcrypt->create($password);
         }
     }
-    
+
     public function testSetBackwardCompatibility()
     {
         $result = $this->bcrypt->setBackwardCompatibility(true);
         $this->assertTrue($result instanceof Bcrypt);
         $this->assertTrue($this->bcrypt->getBackwardCompatibility());
     }
-    
+
     public function testBackwardCompatibility()
     {
         $this->bcrypt->setSalt($this->salt);

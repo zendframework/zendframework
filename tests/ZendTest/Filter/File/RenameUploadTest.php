@@ -10,7 +10,7 @@
 
 namespace ZendTest\Filter\File;
 
-use Zend\Filter\File\Rename as FileRename;
+use Zend\Filter\File\RenameUpload as FileRenameUpload;
 
 /**
  * @category   Zend
@@ -113,6 +113,54 @@ class RenameTest extends \PHPUnit_Framework_TestCase
         if (file_exists($this->_newDirFile)) {
             unlink($this->_newDirFile);
         }
+
+        if (function_exists("runkit_function_rename")
+            && function_exists('move_uploaded_file_orig')
+        ) {
+            runkit_function_rename('move_uploaded_file',      'move_uploaded_file_mock');
+            runkit_function_rename('move_uploaded_file_orig', 'move_uploaded_file');
+        }
+    }
+
+    /**
+     * Test single parameter filter
+     *
+     * @return void
+     */
+    public function testThrowsExceptionWithNonUploadedFile()
+    {
+        $filter = new FileRenameUpload($this->_newFile);
+
+        $this->assertEquals(array(0 =>
+            array('source'    => '*',
+                  'target'    => $this->_newFile,
+                  'overwrite' => false)),
+            $filter->getFile()
+        );
+        $this->assertEquals('falsefile', $filter('falsefile'));
+        $this->setExpectedException(
+            'Zend\Filter\Exception\RuntimeException', 'could not be renamed'
+        );
+        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
+    }
+
+    /**
+     * Mock the move_uploaded_file() function with rename() functionality
+     *
+     * @return void
+     */
+    protected function setUpMockMoveUploadedFile()
+    {
+        if (!function_exists("runkit_function_rename")
+            || !ini_get('runkit.internal_override')
+        ) {
+            $this->markTestSkipped(
+                'move_uploaded_file cannot be unit tested without runkit module'
+            );
+            return;
+        }
+        runkit_function_rename('move_uploaded_file',      'move_uploaded_file_orig');
+        runkit_function_rename('move_uploaded_file_mock', 'move_uploaded_file');
     }
 
     /**
@@ -122,13 +170,17 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructSingleValue()
     {
-        $filter = new FileRename($this->_newFile);
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload($this->_newFile);
 
         $this->assertEquals(array(0 =>
             array('source'    => '*',
                   'target'    => $this->_newFile,
                   'overwrite' => false)),
-            $filter->getFile());
+            $filter->getFile()
+        );
+
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
     }
@@ -140,7 +192,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructSingleArray()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile,
             'target' => $this->_newFile));
 
@@ -159,7 +213,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructFullOptionsArray()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile,
             'target' => $this->_newFile,
             'overwrite' => true,
@@ -180,7 +236,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructDoubleArray()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             0 => array(
                 'source' => $this->_oldFile,
                 'target' => $this->_newFile)));
@@ -200,7 +258,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructTruncatedTarget()
     {
-        $filter = new FileRename(array(
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile));
 
         $this->assertEquals(array(0 =>
@@ -219,7 +277,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructTruncatedSource()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             'target' => $this->_newFile));
 
         $this->assertEquals(array(0 =>
@@ -238,7 +298,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructSingleDirectory()
     {
-        $filter = new FileRename($this->_newDir);
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload($this->_newDir);
 
         $this->assertEquals(array(0 =>
             array('source'    => '*',
@@ -255,7 +317,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructSingleArrayDirectory()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile,
             'target' => $this->_newDir));
 
@@ -274,7 +338,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructDoubleArrayDirectory()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             0 => array(
                 'source' => $this->_oldFile,
                 'target' => $this->_newDir)));
@@ -294,7 +360,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructTruncatedSourceDirectory()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             'target' => $this->_newDir));
 
         $this->assertEquals(array(0 =>
@@ -311,7 +379,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddSameFileAgainAndOverwriteExistingTarget()
     {
-        $filter = new FileRename(array(
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile,
             'target' => $this->_newDir));
 
@@ -332,7 +402,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNewName()
     {
-        $filter = new FileRename(array(
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile,
             'target' => $this->_newDir));
 
@@ -348,7 +418,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNewNameExceptionWithExistingFile()
     {
-        $filter = new FileRename(array(
+        $filter = new FileRenameUpload(array(
             'source' => $this->_oldFile,
             'target' => $this->_newFile));
 
@@ -368,7 +438,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNewNameOverwriteWithExistingFile()
     {
-        $filter = new FileRename(array(
+        $filter = new FileRenameUpload(array(
             'source'    => $this->_oldFile,
             'target'    => $this->_newFile,
             'overwrite' => true));
@@ -387,7 +457,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFileWithString()
     {
-        $filter = new FileRename($this->_oldFile);
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload($this->_oldFile);
         $filter->addFile($this->_newFile);
 
         $this->assertEquals(array(0 =>
@@ -403,7 +475,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFileWithInvalidOption()
     {
-        $filter = new FileRename($this->_oldFile);
+        $filter = new FileRenameUpload($this->_oldFile);
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
         $filter->addFile(1234);
     }
@@ -414,6 +486,6 @@ class RenameTest extends \PHPUnit_Framework_TestCase
     public function testInvalidConstruction()
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
-        $filter = new FileRename(1234);
+        $filter = new FileRenameUpload(1234);
     }
 }

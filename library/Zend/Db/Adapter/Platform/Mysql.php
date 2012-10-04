@@ -134,7 +134,7 @@ class Mysql implements PlatformInterface
                 case 'as':
                     break;
                 default:
-                    $parts[$i] = '`' . str_replace('`', '\\' . '`', $part) . '`';
+                    $parts[$i] = '`' . str_replace('`', '``', $part) . '`';
             }
         }
         return implode('', $parts);

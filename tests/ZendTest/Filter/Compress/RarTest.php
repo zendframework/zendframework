@@ -108,7 +108,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
                             . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
+        $this->assertTrue($content);
         $content = file_get_contents(dirname(__DIR__) . '/_files/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
@@ -208,7 +208,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new RarCompression();
 
-        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $this->setExpectedException('Zend\Filter\Exception\RuntimeException', 'No compression callback available');
         $filter->compress('test.txt');
     }
 
@@ -216,7 +216,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new RarCompression();
 
-        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'Invalid callback provided');
         $filter->setCallback('invalidCallback');
     }
 
@@ -241,7 +241,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
                             . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
+        $this->assertTrue($content);
         $content = file_get_contents(dirname(__DIR__) . '/_files/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
@@ -266,9 +266,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
 
         mkdir(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '_compress');
         $content = $filter->decompress($content);
-        $this->assertEquals(dirname(__DIR__)
-                            . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '_compress'
-                            . DIRECTORY_SEPARATOR, $content);
+        $this->assertTrue($content);
 
         $base = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
               . DIRECTORY_SEPARATOR . '_compress' . DIRECTORY_SEPARATOR . 'Compress' . DIRECTORY_SEPARATOR;

@@ -13,7 +13,7 @@
     },
     "require-dev": {
         "doctrine/common": ">=2.1",
-        "phpunit/phpunit": "3.7.*"
+        "EHER/PHPUnit": ">=1.2"
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",

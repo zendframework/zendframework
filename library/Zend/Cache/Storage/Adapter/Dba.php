@@ -517,7 +517,7 @@ class Dba extends AbstractAdapter implements
     protected function _close()
     {
         if ($this->handle) {
-            ErrorHandler::start(E_WARNING);
+            ErrorHandler::start(E_NOTICE);
             dba_close($this->handle);
             ErrorHandler::stop();
             $this->handle = null;

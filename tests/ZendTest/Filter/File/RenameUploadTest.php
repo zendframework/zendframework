@@ -18,7 +18,7 @@ use Zend\Filter\File\RenameUpload as FileRenameUpload;
  * @subpackage UnitTests
  * @group      Zend_Filter
  */
-class RenameTest extends \PHPUnit_Framework_TestCase
+class RenameUploadTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Path to test files

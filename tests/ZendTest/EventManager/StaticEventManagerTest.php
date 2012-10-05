@@ -195,11 +195,19 @@ class StaticEventManagerTest extends TestCase
         $this->assertEquals(1, count($listeners));
     }
 
-    public function testCanGetListenersByWildcardAndEvent()
+    public function testCanNotGetListenersByResourceAndEventWithWildcard()
     {
         $events = StaticEventManager::getInstance();
         $events->attach('*', 'bar', array($this, __FUNCTION__));
         $listeners = $events->getListeners('foo', 'bar');
+        $this->assertFalse($listeners);
+    }
+
+    public function testCanGetListenersByWildcardAndEvent()
+    {
+        $events = StaticEventManager::getInstance();
+        $events->attach('*', 'bar', array($this, __FUNCTION__));
+        $listeners = $events->getListeners('*', 'bar');
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
         $this->assertEquals(1, count($listeners));
     }

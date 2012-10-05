@@ -141,7 +141,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->addInitializer(5);
     }
 
-
     /**
      * @covers Zend\ServiceManager\ServiceManager::setService
      */
@@ -160,7 +159,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $ret = $this->serviceManager->setShared('foo', true);
         $this->assertSame($this->serviceManager, $ret);
     }
-    
+
     /**
      * @covers Zend\ServiceManager\ServiceManager::setShared
      */
@@ -206,7 +205,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->assertEquals('bar', $this->serviceManager->get('foo'));
     }
-
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
@@ -546,6 +544,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     public function duplicateService()
     {
         $self = $this;
+
         return array(
             array(
                 'setFactory',

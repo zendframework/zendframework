@@ -11,7 +11,6 @@
 namespace Zend\Crypt\Password;
 
 use Traversable;
-use Zend\Math\Exception as MathException;
 use Zend\Math\Rand;
 use Zend\Stdlib\ArrayUtils;
 

@@ -11,17 +11,14 @@
 namespace ZendTest\ModuleManager\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Config\Config;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
 use Zend\Loader\AutoloaderFactory;
 use Zend\Loader\ModuleAutoloader;
-use Zend\ModuleManager\Listener\ListenerOptions;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\Listener\OnBootstrapListener;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\Application;
-use Zend\Mvc\MvcEvent;
 use ZendTest\ModuleManager\TestAsset\MockApplication;
 
 class OnBootstrapListenerTest extends TestCase

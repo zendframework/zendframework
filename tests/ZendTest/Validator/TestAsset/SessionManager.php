@@ -11,9 +11,6 @@
 namespace ZendTest\Validator\TestAsset;
 
 use Zend\Session\AbstractManager;
-use Zend\Session\Configuration as SessionConfiguration;
-use Zend\Session\Storage as SessionStorage;
-use Zend\Session\SaveHandler as SessionSaveHandler;
 use Zend\EventManager\EventManagerInterface;
 
 class SessionManager extends AbstractManager

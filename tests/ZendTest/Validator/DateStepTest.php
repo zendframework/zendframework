@@ -12,7 +12,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator;
 use DateTime;
-use DateTimeZone;
 use DateInterval;
 
 /**

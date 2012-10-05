@@ -11,7 +11,6 @@
 namespace Zend\Filter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

@@ -11,7 +11,6 @@
 namespace Zend\Code\Reflection;
 
 use Reflector;
-use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Scanner\DocBlockScanner;
 
 /**

@@ -11,7 +11,6 @@
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\ValidatorInterface;

@@ -2,9 +2,7 @@
 
 namespace ZendTest\Code\Reflection\TestAsset;
 
-use Zend\Config as ZendConfig;
 use FooBar\Foo\Bar;
-use One\Two\Three\Four\Five as ottff;
 
 class TestSampleClass8
 {

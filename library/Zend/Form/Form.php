@@ -10,7 +10,6 @@
 
 namespace Zend\Form;
 
-use IteratorAggregate;
 use Traversable;
 use Zend\Form\Element\Collection;
 use Zend\Form\Exception;

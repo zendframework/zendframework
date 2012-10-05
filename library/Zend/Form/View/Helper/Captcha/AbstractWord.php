@@ -10,7 +10,6 @@
 
 namespace Zend\Form\View\Helper\Captcha;
 
-use Traversable;
 use Zend\Captcha\AdapterInterface as CaptchaAdapter;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;

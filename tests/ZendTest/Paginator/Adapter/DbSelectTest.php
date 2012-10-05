@@ -13,7 +13,6 @@ namespace ZendTest\Paginator\Adapter;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Adapter\Adapter as DbAdapter;
 
 /**
  * @category   Zend

@@ -10,7 +10,6 @@
 
 namespace ZendTest\View\TestAsset;
 
-use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Helper\AbstractHelper as Helper;
 
 class Invokable extends Helper

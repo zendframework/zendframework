@@ -15,7 +15,6 @@ use Zend\Loader\ModuleAutoloader;
 use Zend\Loader\AutoloaderFactory;
 use Zend\ModuleManager\Listener\AutoloaderListener;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\Listener\ListenerOptions;
 use Zend\ModuleManager\ModuleManager;
 
 class AutoloaderListenerTest extends TestCase

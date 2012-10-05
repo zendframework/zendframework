@@ -12,7 +12,6 @@ namespace ZendTest\Captcha;
 
 use DirectoryIterator;
 use Zend\Captcha\Image as ImageCaptcha;
-use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend

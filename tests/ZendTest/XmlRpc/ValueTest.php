@@ -15,7 +15,6 @@ use DateTime;
 use Zend\XmlRpc\AbstractValue;
 use Zend\XmlRpc\Value;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
-use Zend\Math\BigInteger;
 
 /**
  * Test case for Value

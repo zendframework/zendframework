@@ -17,7 +17,6 @@ use IteratorAggregate;
 use Traversable;
 use Zend\Cache\Storage\IteratorInterface as CacheIterator;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
-use Zend\Db\Sql;
 use Zend\Db\ResultSet\AbstractResultSet;
 use Zend\Filter\FilterInterface;
 use Zend\Json\Json;

@@ -12,7 +12,6 @@ namespace ZendTest\Mvc\Service;
 
 use Zend\Mvc\Service\DiStrictAbstractServiceFactory;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Di\DiInstanceManagerProxy;
 use Zend\Di\Di;
 use Zend\Di\Config;
 

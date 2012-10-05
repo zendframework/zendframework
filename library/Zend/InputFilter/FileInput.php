@@ -31,7 +31,7 @@ class FileInput extends Input
     public function getValue()
     {
         $filter = $this->getFilterChain();
-        $value  = (isset($this->value['tmp_name']))
+        $value  = (is_array($this->value) && isset($this->value['tmp_name']))
                 ? $this->value['tmp_name'] : $this->value;
         if ($this->isValid) {
             $value = $filter->filter($value);

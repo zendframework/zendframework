@@ -50,6 +50,22 @@ class FormFileTest extends CommonTestCase
         $this->assertContains('type="file"', $markup);
     }
 
+    public function testRendersElementWithFileArrayValue()
+    {
+        $element = new Element('foo');
+        $element->setValue(array(
+            'tmp_name' => '/tmp/foofile',
+            'name'     => 'foofile',
+            'type'     => 'text',
+            'size'     => 200,
+            'error'    => 2,
+        ));
+        $markup  = $this->helper->render($element);
+        $this->assertContains('<input ', $markup);
+        $this->assertContains('type="file"', $markup);
+        $this->assertContains('value="foofile"', $markup);
+    }
+
     public function validAttributes()
     {
         return array(

@@ -385,7 +385,11 @@ class ServiceManager implements ServiceLocatorInterface
     {
         $cName = $this->canonicalizeName($name);
 
-        if (!isset($this->invokableClasses[$cName]) && !isset($this->factories[$cName])) {
+        if (
+            !isset($this->invokableClasses[$cName])
+            && !isset($this->factories[$cName])
+            && !$this->canCreateFromAbstractFactory($cName, $name)
+        ) {
             throw new Exception\ServiceNotFoundException(sprintf(
                 '%s: A service by the name "%s" was not found and could not be marked as shared',
                 __METHOD__,

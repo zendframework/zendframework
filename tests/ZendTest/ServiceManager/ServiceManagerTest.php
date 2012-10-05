@@ -160,6 +160,16 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $ret = $this->serviceManager->setShared('foo', true);
         $this->assertSame($this->serviceManager, $ret);
     }
+    
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setShared
+     */
+    public function testSetSharedAbstractFactory()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $ret = $this->serviceManager->setShared('foo', false);
+        $this->assertSame($this->serviceManager, $ret);
+    }
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::setShared

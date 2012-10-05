@@ -179,10 +179,26 @@ class StaticEventManagerTest extends TestCase
         $this->assertEquals(array('bar'), $events->getEvents('foo'));
     }
 
+    public function testCanGetEventsByWildcard()
+    {
+        $events = StaticEventManager::getInstance();
+        $events->attach('*', 'bar', array($this, __FUNCTION__));
+        $this->assertEquals(array('bar'), $events->getEvents('foo'));
+    }
+
     public function testCanGetListenersByResourceAndEvent()
     {
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
+        $listeners = $events->getListeners('foo', 'bar');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+        $this->assertEquals(1, count($listeners));
+    }
+
+    public function testCanGetListenersByWildcardAndEvent()
+    {
+        $events = StaticEventManager::getInstance();
+        $events->attach('*', 'bar', array($this, __FUNCTION__));
         $listeners = $events->getListeners('foo', 'bar');
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
         $this->assertEquals(1, count($listeners));
@@ -236,5 +252,31 @@ class StaticEventManagerTest extends TestCase
         });
         $manager->trigger('bar', $this, array());
         $this->assertEquals(2, $test->triggered);
+    }
+
+    public function testListenersAttachedToAnyIdentifierProvidedToEventManagerOrWildcardsWillBeTriggered()
+    {
+        $identifiers = array('foo', 'bar');
+        $events  = StaticEventManager::getInstance();
+        $manager = new EventManager($identifiers);
+        $manager->setSharedManager($events);
+
+        $test = new \stdClass;
+        $test->triggered = 0;
+        $events->attach('foo', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $events->attach('bar', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $events->attach('*', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        //Tests one can have multiple wildcards attached
+        $events->attach('*', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $manager->trigger('bar', $this, array());
+        $this->assertEquals(4, $test->triggered);
     }
 }

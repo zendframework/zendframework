@@ -37,7 +37,7 @@ class RouterFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator, $cName = null, $rName = null)
     {
-        $config = $serviceLocator->get('Configuration');
+        $config = $serviceLocator->get('Config');
 
         if (
             $rName === 'ConsoleRouter' ||                   // force console router

@@ -254,6 +254,26 @@ class StaticEventManagerTest extends TestCase
         $this->assertEquals(2, $test->triggered);
     }
 
+    public function testListenersAttachedToWildcardsWillBeTriggered()
+    {
+        $identifiers = array('foo', 'bar');
+        $events  = StaticEventManager::getInstance();
+        $manager = new EventManager($identifiers);
+        $manager->setSharedManager($events);
+
+        $test = new \stdClass;
+        $test->triggered = 0;
+        $events->attach('*', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        //Tests one can have multiple wildcards attached
+        $events->attach('*', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $manager->trigger('bar', $this, array());
+        $this->assertEquals(2, $test->triggered);
+    }
+
     public function testListenersAttachedToAnyIdentifierProvidedToEventManagerOrWildcardsWillBeTriggered()
     {
         $identifiers = array('foo', 'bar');

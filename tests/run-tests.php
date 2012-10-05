@@ -32,6 +32,7 @@
 chdir(__DIR__);
 
 $phpunit_bin      = __DIR__ . '/../vendor/bin/phpunit';
+$phpunit_bin      = file_exists($phpunit_bin) ? $phpunit_bin : 'phpunit';
 $phpunit_conf     = (file_exists('phpunit.xml') ? 'phpunit.xml' : 'phpunit.xml.dist');
 $phpunit_opts     = "-c $phpunit_conf";
 $phpunit_coverage = '';

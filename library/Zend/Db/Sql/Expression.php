@@ -79,8 +79,8 @@ class Expression implements ExpressionInterface
      */
     public function setParameters($parameters)
     {
-        if (!is_string($parameters) && !is_array($parameters)) {
-            throw new Exception\InvalidArgumentException('Expression parameters must be a string or array.');
+        if (!is_scalar($parameters) && !is_array($parameters)) {
+            throw new Exception\InvalidArgumentException('Expression parameters must be a scalar or array.');
         }
         $this->parameters = $parameters;
         return $this;
@@ -118,7 +118,7 @@ class Expression implements ExpressionInterface
      */
     public function getExpressionData()
     {
-        $parameters = (is_string($this->parameters)) ? array($this->parameters) : $this->parameters;
+        $parameters = (is_scalar($this->parameters)) ? array($this->parameters) : $this->parameters;
 
         $types = array();
         for ($i = 0; $i < count($parameters); $i++) {

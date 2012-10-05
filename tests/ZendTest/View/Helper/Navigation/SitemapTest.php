@@ -10,6 +10,7 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
+use DOMDocument;
 use Zend\View;
 
 /**
@@ -198,7 +199,13 @@ class SitemapTest extends AbstractTest
         $this->_helper->setUseSitemapValidators(false);
 
         $expected = $this->_getExpected('sitemap/invalid.xml');
-        $this->assertEquals(trim($expected), $this->_helper->render($nav));
+
+        // using assertEqualXMLStructure to prevent differences in libxml from invalidating test
+        $expectedDom = new DOMDocument();
+        $receivedDom = new DOMDocument();
+        $expectedDom->loadXML($expected);
+        $receivedDom->loadXML($this->_helper->render($nav));
+        $this->assertEqualXMLStructure($expectedDom->documentElement, $receivedDom->documentElement);
     }
 
     public function testSetServerUrlRequiresValidUri()

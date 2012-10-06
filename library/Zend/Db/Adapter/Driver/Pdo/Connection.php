@@ -213,6 +213,9 @@ class Connection implements ConnectionInterface
                 case 'hostname':
                     $hostname = (string) $value;
                     break;
+                case 'port':
+                    $port = (int) $value;
+                    break;
                 case 'database':
                 case 'dbname':
                     $database = (string) $value;
@@ -240,6 +243,9 @@ class Connection implements ConnectionInterface
                     }
                     if (isset($hostname)) {
                         $dsn[] = "host={$hostname}";
+                    }
+                    if (isset($port)) {
+                        $dsn[] = "port={$port}";
                     }
                     break;
             }

@@ -117,7 +117,7 @@ class Connection implements ConnectionInterface
      * @param  mysqli $resource
      * @return Connection
      */
-    public function setResource(mysqli $resource)
+    public function setResource(\mysqli $resource)
     {
         $this->resource = $resource;
         return $this;

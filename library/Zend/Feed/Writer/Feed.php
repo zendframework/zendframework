@@ -86,10 +86,12 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * the feed data container's internal group of entries.
      *
      * @param Entry $entry
+     * @return Feed
      */
     public function addEntry(Entry $entry)
     {
         $this->entries[] = $entry;
+        return $this;
     }
 
     /**
@@ -98,6 +100,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      *
      * @param int $index
      * @throws Exception\InvalidArgumentException
+     * @return Feed
      */
     public function removeEntry($index)
     {
@@ -105,6 +108,8 @@ class Feed extends AbstractFeed implements Iterator, Countable
             throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
         }
         unset($this->entries[$index]);
+
+        return $this;
     }
 
     /**
@@ -129,7 +134,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      *
      * Using this method will alter the original indexation.
      *
-     * @return void
+     * @return Feed
      */
     public function orderByDate()
     {
@@ -148,6 +153,8 @@ class Feed extends AbstractFeed implements Iterator, Countable
         }
         krsort($entries, \SORT_NUMERIC);
         $this->entries = array_values($entries);
+
+        return $this;
     }
 
     /**

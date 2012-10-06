@@ -132,7 +132,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
             return $status;
         }
         $status = $newStatus;
-        if (!empty($status['done'])) {
+        if ('' === $status['message']) {
             $status['message'] = $this->toByteString($status['current']) .
                 " - " . $this->toByteString($status['total']);
         }

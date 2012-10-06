@@ -443,6 +443,37 @@ class BaseInputFilterTest extends TestCase
         $this->assertFalse($filter->isValid());
     }
 
+    public function testValidationSkipsFileInputsMarkedNotRequiredWhenNoMultiFileDataIsPresent()
+    {
+        $filter = new InputFilter();
+
+        $explode = new Validator\File\Explode();
+        $explode->setValidator(new Validator\File\Upload());
+
+        $foo   = new FileInput();
+        $foo->getValidatorChain()->addValidator($explode);
+        $foo->setRequired(false);
+
+        $filter->add($foo, 'foo');
+
+        $data = array(
+            'foo' => array(array(
+                'tmp_name' => '/tmp/barfile',
+                'name'     => 'barfile',
+                'type'     => 'text',
+                'size'     => 0,
+                'error'    => 4,  // UPLOAD_ERR_NO_FILE
+            )),
+        );
+        $filter->setData($data);
+        $this->assertTrue($filter->isValid());
+
+        // Negative test
+        $foo->setRequired(true);
+        $filter->setData($data);
+        $this->assertFalse($filter->isValid());
+    }
+
     public function testValidationAllowsEmptyValuesToRequiredInputWhenAllowEmptyFlagIsTrue()
     {
         $filter = new InputFilter();

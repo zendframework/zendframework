@@ -57,10 +57,32 @@ class FormFile extends FormInput
      */
     public function render(ElementInterface $element)
     {
-        $value = $element->getValue();
-        if (is_array($value) && isset($value['name'])) {
-            $element->setValue($value['name']);
+        $name = $element->getName();
+        if ($name === null || $name === '') {
+            throw new Exception\DomainException(sprintf(
+                '%s requires that the element has an assigned name; none discovered',
+                __METHOD__
+            ));
         }
-        return parent::render($element);
+
+        $attributes          = $element->getAttributes();
+        $attributes['type']  = $this->getType($element);
+        $attributes['name']  = $name;
+        if (array_key_exists('multiple', $attributes) && $attributes['multiple']) {
+            $attributes['name'] .= '[]';
+        }
+
+        $value = $element->getValue();
+        if (is_array($value) && isset($value['name']) && !is_array($value['name'])) {
+            $attributes['value'] = $value['name'];
+        } elseif (is_string($value)) {
+            $attributes['value'] = $value;
+        }
+
+        return sprintf(
+            '<input %s%s',
+            $this->createAttributesString($attributes),
+            $this->getInlineClosingBracket()
+        );
     }
 }

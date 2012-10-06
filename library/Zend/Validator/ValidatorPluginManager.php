@@ -71,6 +71,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'fileexcludeextension'     => 'Zend\Validator\File\ExcludeExtension',
         'fileexcludemimetype'      => 'Zend\Validator\File\ExcludeMimeType',
         'fileexists'               => 'Zend\Validator\File\Exists',
+        'fileexplode'              => 'Zend\Validator\File\Explode',
         'fileextension'            => 'Zend\Validator\File\Extension',
         'filehash'                 => 'Zend\Validator\File\Hash',
         'fileimagesize'            => 'Zend\Validator\File\ImageSize',

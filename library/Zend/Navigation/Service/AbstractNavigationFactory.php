@@ -15,7 +15,6 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface as Router;
 use Zend\Navigation\Exception;
 use Zend\Navigation\Navigation;
-use Zend\Navigation\Page\Mvc as MvcPage;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

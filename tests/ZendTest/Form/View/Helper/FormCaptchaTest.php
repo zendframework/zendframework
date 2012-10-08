@@ -14,7 +14,6 @@ use DirectoryIterator;
 use Zend\Captcha;
 use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\FormCaptcha as FormCaptchaHelper;
-use Zend\View\Renderer\PhpRenderer;
 
 /**
  * @category   Zend

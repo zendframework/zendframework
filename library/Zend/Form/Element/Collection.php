@@ -18,7 +18,6 @@ use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\FieldsetPrepareAwareInterface;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**

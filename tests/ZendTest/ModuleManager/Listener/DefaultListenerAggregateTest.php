@@ -10,9 +10,7 @@
 
 namespace ZendTest\ModuleManager\Listener;
 
-use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\EventManager\EventManager;
 use Zend\Loader\ModuleAutoloader;
 use Zend\Loader\AutoloaderFactory;
 use Zend\ModuleManager\Listener\ListenerOptions;

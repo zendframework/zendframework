@@ -14,7 +14,6 @@ use Zend\Authentication\Adapter\Http;
 use Zend\Http\Headers;
 use Zend\Http\Request;
 use Zend\Http\Response;
-use Zend\Stdlib\Parameters;
 
 /**
  * @category   Zend

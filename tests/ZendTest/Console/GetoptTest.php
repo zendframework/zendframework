@@ -11,7 +11,6 @@
 namespace ZendTest\Console;
 
 use Zend\Console\Getopt;
-use Zend\Console\GetoptException;
 
 /**
  * @category   Zend

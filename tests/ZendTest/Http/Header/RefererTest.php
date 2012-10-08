@@ -11,7 +11,6 @@
 namespace ZendTest\Http\Header;
 
 use Zend\Http\Header\Referer;
-use Zend\Uri\Http as HttpUri;
 
 class RefererTest extends \PHPUnit_Framework_TestCase
 {

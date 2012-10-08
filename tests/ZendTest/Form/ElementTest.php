@@ -12,7 +12,6 @@ namespace ZendTest\Form;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
-use Zend\Form\ElementInterface;
 
 /**
  * @category   Zend

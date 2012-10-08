@@ -10,7 +10,6 @@
 
 namespace Zend\Form\View\Helper;
 
-use Traversable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\Exception;

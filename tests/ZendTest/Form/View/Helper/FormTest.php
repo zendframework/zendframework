@@ -11,7 +11,6 @@
 namespace ZendTest\Form\View\Helper;
 
 use Zend\Form\Form;
-use Zend\Form\FormInterface;
 use Zend\Form\View\Helper\Form as FormHelper;
 
 /**

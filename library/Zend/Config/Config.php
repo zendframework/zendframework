@@ -13,7 +13,6 @@ namespace Zend\Config;
 use ArrayAccess;
 use Countable;
 use Iterator;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Provides a property based interface to an array.

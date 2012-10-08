@@ -12,7 +12,6 @@ namespace ZendTest\XmlRpc;
 
 use Zend\Http\Client\Adapter;
 use Zend\Http;
-use Zend\Http\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
 use Zend\XmlRpc\Client;
 use Zend\XmlRpc\AbstractValue;

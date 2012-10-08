@@ -10,8 +10,6 @@
 
 namespace Zend\Mvc\Router;
 
-use ArrayAccess;
-use ArrayIterator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;

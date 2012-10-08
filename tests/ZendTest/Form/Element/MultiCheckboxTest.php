@@ -23,7 +23,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
-use Zend\Form\Factory;
 
 class MultiCheckboxTest extends TestCase
 {

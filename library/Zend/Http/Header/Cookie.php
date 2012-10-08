@@ -11,7 +11,6 @@
 namespace Zend\Http\Header;
 
 use ArrayObject;
-use Zend\Uri;
 
 /**
  * @see http://www.ietf.org/rfc/rfc2109.txt

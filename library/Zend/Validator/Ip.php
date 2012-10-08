@@ -11,7 +11,6 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

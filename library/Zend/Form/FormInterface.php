@@ -10,7 +10,6 @@
 
 namespace Zend\Form;
 
-use IteratorAggregate;
 use Zend\InputFilter\InputFilterInterface;
 
 /**

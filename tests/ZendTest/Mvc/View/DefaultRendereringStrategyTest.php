@@ -11,23 +11,15 @@
 namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use ReflectionClass;
-use stdClass;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\Http\Request;
 use Zend\Http\Response;
-use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\DefaultRenderingStrategy;
-use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
 use Zend\View\Model\ModelInterface as Model;
-use Zend\View\Renderer\FeedRenderer;
-use Zend\View\Renderer\JsonRenderer;
 use Zend\View\Renderer\PhpRenderer;
-use Zend\View\Resolver\TemplateMapResolver;
 use Zend\View\View;
-use Zend\View\ViewEvent;
 use Zend\View\Model\ViewModel;
 
 /**

@@ -13,10 +13,7 @@ namespace ZendTest\InputFilter;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Filter;
 use Zend\InputFilter\Factory;
-use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
-use Zend\Loader\PluginBroker;
-use Zend\Validator;
 
 class InputFilterTest extends TestCase
 {

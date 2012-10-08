@@ -62,8 +62,8 @@ class MethodScannerTest extends TestCase
         $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
         $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method     = $class->getMethod('three');
-        $this->assertEquals(28, $method->getLineStart());
-        $this->assertEquals(32, $method->getLineEnd());
+        $this->assertEquals(27, $method->getLineStart());
+        $this->assertEquals(31, $method->getLineEnd());
     }
 
     public function testMethodScannerReturnsBodyMethods()

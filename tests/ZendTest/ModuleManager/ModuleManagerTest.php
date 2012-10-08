@@ -13,7 +13,6 @@ namespace ZendTest\ModuleManager;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManager;
 use Zend\Loader\AutoloaderFactory;
-use Zend\Loader\ModuleAutoloader;
 use Zend\ModuleManager\Listener\ListenerOptions;
 use Zend\ModuleManager\Listener\DefaultListenerAggregate;
 use Zend\ModuleManager\ModuleManager;

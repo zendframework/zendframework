@@ -14,7 +14,6 @@ namespace ZendTest\Soap;
 require_once 'TestAsset/commontypes.php';
 
 use Zend\Soap\AutoDiscover;
-use Zend\Soap\AutoDiscoverException;
 
 /** PHPUnit Test Case */
 

@@ -24,18 +24,18 @@ abstract class Factory
 
     public static function factory($items, $adapter = null)
     {
-        if(null === $adapter) {
+        if (null === $adapter) {
             if ($items instanceof Traversable) {
                 $items = ArrayUtils::iteratorToArray($items);
             }
-            if(!is_array($items)) {
+            if (!is_array($items)) {
                 throw new Exception\InvalidArgumentException(
                     'The factory needs an associative array '
                     . 'or a Traversable object as an argument when '
                     . "it's used with one parameter"
                 );
             }
-            if(!isset($items['adapter']) && !isset($items['items'])) {
+            if (!isset($items['adapter']) && !isset($items['items'])) {
                 throw new Exception\InvalidArgumentException(
                     'The factory needs an associative array '
                     . 'or a Traversable object with keys '
@@ -45,7 +45,7 @@ abstract class Factory
             $adapter = $items['adapter'];
             $items = $items['items'];
         }
-        if(!$adapter instanceof AdapterInterface && !$adapter instanceof AdapterAggregateInterface) {
+        if (!$adapter instanceof AdapterInterface && !$adapter instanceof AdapterAggregateInterface) {
             $adapter = self::getAdapterPluginManager()->get($adapter, $items);
         }
 

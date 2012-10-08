@@ -54,17 +54,15 @@ class AdapterPluginManager extends AbstractPluginManager
         if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))
         ) {
-            $instance = new $invokable();
+            return new $invokable();
         } else {
             if($canonicalName == "dbselect" && is_array($this->creationOptions)) {
                 $class = new \ReflectionClass($invokable);
-                $instance = $class->newInstanceArgs($this->creationOptions);
+                return $class->newInstanceArgs($this->creationOptions);
             } else {
-                $instance = new $invokable($this->creationOptions);
+                return new $invokable($this->creationOptions);
             }
         }
-
-        return $instance;
     }
 
     /**

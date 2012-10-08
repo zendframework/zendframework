@@ -128,14 +128,14 @@ class Factory
     }
 
     /**
-    * Writes a config to a file
-    *
-    * @param string $filename
-    * @param array|Config $config
-    * @return boolean TRUE on success | FALSE on failure
-    * @throws Exception\RuntimeException
-    * @throws Exception\InvalidArgumentException
-    */
+     * Writes a config to a file
+     *
+     * @param string $filename
+     * @param array|Config $config
+     * @return boolean TRUE on success | FALSE on failure
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
+     */
     public static function toFile($filename, $config)
     {
         if (

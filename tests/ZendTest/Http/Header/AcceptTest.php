@@ -10,7 +10,6 @@
 
 namespace ZendTest\Http\Header;
 
-use Zend\Http\Header\GenericHeader;
 use Zend\Http\Header\Accept;
 
 

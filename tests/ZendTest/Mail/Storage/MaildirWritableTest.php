@@ -11,7 +11,6 @@
 namespace ZendTest\Mail\Storage;
 
 use Zend\Mail;
-use Zend\Mail\Exception as MailException;
 use Zend\Mail\Storage;
 use Zend\Mail\Storage\Writable;
 

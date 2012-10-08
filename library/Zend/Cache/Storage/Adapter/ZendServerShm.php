@@ -10,7 +10,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\ClearByNamespaceInterface;
 use Zend\Cache\Storage\FlushableInterface;

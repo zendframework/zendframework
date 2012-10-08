@@ -10,7 +10,6 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;

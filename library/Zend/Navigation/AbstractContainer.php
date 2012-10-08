@@ -14,7 +14,6 @@ use Countable;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\ErrorHandler;
 
 /**

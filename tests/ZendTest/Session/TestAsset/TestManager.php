@@ -12,9 +12,6 @@ namespace ZendTest\Session\TestAsset;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\Session\AbstractManager;
-use Zend\Session\Configuration\ConfigurationInterface as SessionConfig;
-use Zend\Session\SaveHandler\SaveHandlerInterface as SessionSaveHandler;
-use Zend\Session\Storage\StorageInterface as SessionStorage;
 
 class TestManager extends AbstractManager
 {

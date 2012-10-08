@@ -12,7 +12,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Url as UrlElement;
-use Zend\Form\Factory;
 
 class UrlTest extends TestCase
 {

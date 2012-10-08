@@ -10,7 +10,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject;
 use Memcached as MemcachedResource;
 use stdClass;
 use Traversable;

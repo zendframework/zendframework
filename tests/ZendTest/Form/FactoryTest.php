@@ -15,7 +15,6 @@ use Zend\Filter;
 use Zend\Form;
 use Zend\Form\Factory as FormFactory;
 use Zend\InputFilter;
-use Zend\Validator;
 
 /**
  * @category   Zend

@@ -10,7 +10,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject;
 use stdClass;
 use Traversable;
 use Zend\Cache\Exception;

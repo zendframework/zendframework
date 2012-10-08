@@ -11,7 +11,6 @@
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
 use DateTime;
-use DOMElement;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;

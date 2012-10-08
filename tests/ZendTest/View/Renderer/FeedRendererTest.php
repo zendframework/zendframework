@@ -11,7 +11,6 @@
 namespace ZendTest\View\Renderer;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Feed\Writer\Factory as FeedFactory;
 use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Model\FeedModel;
 use Zend\View\Model\ViewModel;

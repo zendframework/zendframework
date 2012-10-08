@@ -11,7 +11,6 @@
 namespace ZendTest\Log\Writer;
 
 use Zend\Log\Writer\Null as NullWriter;
-use Zend\Log\Logger;
 
 /**
  * @category   Zend

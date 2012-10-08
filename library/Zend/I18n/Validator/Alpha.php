@@ -11,7 +11,6 @@
 namespace Zend\I18n\Validator;
 
 use Zend\I18n\Filter\Alpha as AlphaFilter;
-use Zend\Validator\AbstractValidator;
 
 /**
  * @category   Zend

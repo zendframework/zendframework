@@ -23,7 +23,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Select as SelectElement;
-use Zend\Form\Factory;
 
 class SelectTest extends TestCase
 {

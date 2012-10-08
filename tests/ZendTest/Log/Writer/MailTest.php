@@ -12,7 +12,6 @@ namespace ZendTest\Log\Writer;
 
 use Zend\Log\Logger;
 use Zend\Log\Writer\Mail as MailWriter;
-use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Mail\Message as MailMessage;
 use Zend\Mail\Transport;
 

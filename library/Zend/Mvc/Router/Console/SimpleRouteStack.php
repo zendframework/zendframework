@@ -14,7 +14,6 @@ use Traversable;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\SimpleRouteStack as BaseSimpleRouteStack;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Tree search implementation.

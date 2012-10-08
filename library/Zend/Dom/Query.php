@@ -11,7 +11,6 @@
 namespace Zend\Dom;
 
 use DOMDocument;
-use DOMNodeList;
 use DOMXPath;
 
 /**

@@ -30,7 +30,6 @@ use Zend\Mvc\Router\Exception;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Filter\FilterChain;
 use Zend\Validator\ValidatorChain;
-use Zend\Mvc\Exception\InvalidArgumentException;
 
 /**
  * Segment route.

@@ -13,7 +13,6 @@ namespace ZendTest\Paginator;
 use ReflectionMethod;
 use stdClass;
 use Zend\Cache\StorageFactory as CacheFactory;
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 use Zend\Config;
 use Zend\Db\Adapter as DbAdapter;
 use Zend\Db\Sql;

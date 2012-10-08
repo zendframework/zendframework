@@ -13,7 +13,6 @@ namespace ZendTest\Log\Writer;
 
 use DateTime;
 use MongoDate;
-use Zend\Log\Logger;
 use Zend\Log\Writer\MongoDB as MongoDBWriter;
 
 /**

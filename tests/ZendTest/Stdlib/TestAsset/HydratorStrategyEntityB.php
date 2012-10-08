@@ -10,7 +10,6 @@
 
 namespace ZendTest\Stdlib\TestAsset;
 
-use Zend\InputFilter\InputFilterAwareInterface;
 
 class HydratorStrategyEntityB
 {

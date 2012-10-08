@@ -13,7 +13,6 @@ namespace ZendTest\Soap;
 require_once __DIR__ . '/TestAsset/commontypes.php';
 
 use Zend\Soap\Server;
-use Zend\Soap\ServerException;
 
 /**
  * Zend_Soap_Server

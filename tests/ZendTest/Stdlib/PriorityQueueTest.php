@@ -11,7 +11,6 @@
 namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\PriorityQueue;
-use SplPriorityQueue;
 
 /**
  * @category   Zend

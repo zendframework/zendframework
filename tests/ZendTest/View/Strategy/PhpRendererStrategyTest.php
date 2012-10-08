@@ -12,10 +12,8 @@ namespace ZendTest\View\Strategy;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManager;
-use Zend\Http\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
 use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
-use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Strategy\PhpRendererStrategy;
 use Zend\View\ViewEvent;

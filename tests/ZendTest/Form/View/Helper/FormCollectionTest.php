@@ -11,7 +11,6 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\Element;
 use Zend\Form\View\HelperConfig;
 use Zend\Form\View\Helper\FormCollection as FormCollectionHelper;
 use Zend\View\Helper\Doctype;

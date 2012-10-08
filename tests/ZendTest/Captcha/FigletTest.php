@@ -13,7 +13,6 @@ namespace ZendTest\Captcha;
 use ArrayObject;
 use Zend\Captcha\Figlet as FigletCaptcha;
 use Zend\Session\Container as SessionContainer;
-use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend

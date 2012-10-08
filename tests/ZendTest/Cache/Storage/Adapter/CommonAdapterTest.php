@@ -21,7 +21,6 @@ use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\TaggableInterface;
 use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
-use Zend\Http\Header\Expires;
 use Zend\Stdlib\ErrorHandler;
 
 /**

@@ -13,7 +13,6 @@ namespace ZendTest\Form\Element;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 use Zend\Form\Element\Collection as Collection;
-use Zend\Form\Factory;
 
 class CollectionTest extends TestCase
 {

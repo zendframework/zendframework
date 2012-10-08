@@ -10,7 +10,6 @@
 
 namespace ZendTest\View\Resolver;
 
-use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\View\Resolver;
 

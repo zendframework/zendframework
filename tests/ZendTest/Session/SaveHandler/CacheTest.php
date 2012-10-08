@@ -11,7 +11,6 @@
 namespace ZendTest\Session\SaveHandler;
 
 use Zend\Session\SaveHandler\Cache;
-use Zend\Session\ManagerInterface as Manager;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 

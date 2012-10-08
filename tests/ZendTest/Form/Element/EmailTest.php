@@ -12,8 +12,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Email as EmailElement;
-use Zend\Form\Factory;
-use Zend\Validator\EmailAddress as EmailValidator;
 
 class EmailTest extends TestCase
 {

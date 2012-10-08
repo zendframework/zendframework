@@ -77,7 +77,7 @@ class OpenLdap extends Schema\AbstractItem implements AttributeTypeInterface
                 return $parent->getMaxLength();
             }
         } else {
-            return (int)$maxLength;
+            return (int) $maxLength;
         }
     }
 

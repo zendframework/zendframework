@@ -181,7 +181,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         $this->has['flags'] = true;
@@ -307,7 +307,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function getFolders($rootFolder = null)
     {
-        $folders = $this->protocol->listMailbox((string)$rootFolder);
+        $folders = $this->protocol->listMailbox((string) $rootFolder);
         if (!$folders) {
             throw new Exception\InvalidArgumentException('folder not found');
         }

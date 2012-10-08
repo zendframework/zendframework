@@ -334,7 +334,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function setCacheEnabled($enable)
     {
-        $this->cacheEnabled = (bool)$enable;
+        $this->cacheEnabled = (bool) $enable;
         return $this;
     }
 
@@ -719,7 +719,7 @@ class Paginator implements Countable, IteratorAggregate
                 $tags = self::$cache->getTags($key);
                 if ($tags && in_array($this->_getCacheInternalId(), $tags)) {
                     if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
-                        $data[(int)substr($key, $prefixLength)] = $value;
+                        $data[(int) substr($key, $prefixLength)] = $value;
                     }
                 }
             }

@@ -475,7 +475,7 @@ class Memcached extends AbstractAdapter implements
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $value    = (int)$value;
+        $value    = (int) $value;
         $newValue = $this->memcached->increment($normalizedKey, $value);
 
         if ($newValue === false) {

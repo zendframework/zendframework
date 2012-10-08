@@ -153,7 +153,7 @@ class ZendServerDisk extends AbstractZendServer implements
      */
     protected function zdcFetch($internalKey)
     {
-        return zend_disk_cache_fetch((string)$internalKey);
+        return zend_disk_cache_fetch((string) $internalKey);
     }
 
     /**

@@ -767,7 +767,7 @@ abstract class AbstractPage extends AbstractContainer
         if (is_string($visible) && 'false' == strtolower($visible)) {
             $visible = false;
         }
-        $this->visible = (bool)$visible;
+        $this->visible = (bool) $visible;
         return $this;
     }
 

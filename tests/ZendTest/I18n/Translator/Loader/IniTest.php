@@ -21,15 +21,15 @@ class IniTest extends TestCase
 
     public function setUp()
     {
-        $this->originalLocale = Locale::getDefault();
-        Locale::setDefault('en_EN');
+        //$this->originalLocale = Locale::getDefault();
+        //Locale::setDefault('en_EN');
 
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
     }
 
     public function tearDown()
     {
-        Locale::setDefault($this->originalLocale);
+        //Locale::setDefault($this->originalLocale);
     }
 
     public function testLoaderFailsToLoadMissingFile()
@@ -46,6 +46,23 @@ class IniTest extends TestCase
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
     }
     
+    public function testLoaderFailsToLoadNonArray()
+    {
+        $loader = new IniLoader();
+        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
+                                    'Each INI row must be an array with message and translation');
+        $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
+    }
+    
+    public function testLoaderFailsToLoadBadSyntax()
+    {
+        $loader = new IniLoader();
+        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
+                                    'Each INI row must be an array with message and translation');
+        $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
+    }
+    
+    
     public function testLoaderReturnsValidTextDomain()
     {
         $loader = new IniLoader();
@@ -55,6 +72,24 @@ class IniTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
+    public function testLoaderReturnsValidTextDomainWithFileWithoutPlural()
+    {
+        $loader = new IniLoader();
+        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
+
+        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+    }
+    
+    public function testLoaderReturnsValidTextDomainWithSimpleSyntax()
+    {
+        $loader = new IniLoader();
+        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_simple_syntax.ini');
+
+        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+    }
+    
     public function testLoaderLoadsPluralRules()
     {
         $loader     = new IniLoader();
@@ -64,14 +99,5 @@ class IniTest extends TestCase
         $this->assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
         $this->assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
-    }
-    
-    public function testLoaderReturnsValidTextDomainWithfileWithoutPlural()
-    {
-        $loader = new IniLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
-
-        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 }

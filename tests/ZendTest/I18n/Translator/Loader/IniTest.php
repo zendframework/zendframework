@@ -38,14 +38,14 @@ class IniTest extends TestCase
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException', 'Could not open file');
         $loader->load('en_EN', 'missing');
     }
-    
+
     public function testLoaderLoadsEmptyFile()
     {
         $loader = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.ini');
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
     }
-    
+
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new IniLoader();
@@ -53,7 +53,7 @@ class IniTest extends TestCase
                                     'Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
     }
-    
+
     public function testLoaderFailsToLoadBadSyntax()
     {
         $loader = new IniLoader();
@@ -61,8 +61,8 @@ class IniTest extends TestCase
                                     'Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
     }
-    
-    
+
+
     public function testLoaderReturnsValidTextDomain()
     {
         $loader = new IniLoader();
@@ -80,7 +80,7 @@ class IniTest extends TestCase
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
-    
+
     public function testLoaderReturnsValidTextDomainWithSimpleSyntax()
     {
         $loader = new IniLoader();
@@ -89,7 +89,7 @@ class IniTest extends TestCase
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
-    
+
     public function testLoaderLoadsPluralRules()
     {
         $loader     = new IniLoader();

@@ -41,11 +41,11 @@ class Ini implements FileLoaderInterface
                 $filename
             ));
         }
-        
+
         $messages = array();
         $iniReader = new IniReader();
         $messagesNamespaced = $iniReader->fromFile($filename);
-        
+
         $list = $messagesNamespaced;
         if(isset($messagesNamespaced['translation'])) {
            $list = $messagesNamespaced['translation'];
@@ -71,10 +71,10 @@ class Ini implements FileLoaderInterface
         }
 
         $textDomain = new TextDomain($messages);
-        
+
         if (array_key_exists('plural', $messagesNamespaced)) {
             if (isset($messagesNamespaced['plural']['plural_forms'])) {
-                
+
                 $textDomain->setPluralRule(
                     PluralRule::fromString($messagesNamespaced['plural']['plural_forms'])
                 );

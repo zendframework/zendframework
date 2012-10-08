@@ -52,7 +52,7 @@ class Factory
      * @var array
      */
     protected static $writerExtensions = array(
-        'php'  => 'PhpArray',
+        'php'  => 'php',
         'ini'  => 'ini',
         'json' => 'json',
         'xml'  => 'xml',
@@ -132,8 +132,9 @@ class Factory
     *
     * @param string $filename
     * @param array|Config $config
-    *
     * @return boolean TRUE on success | FALSE on failure
+    * @throws Exception\RuntimeException
+    * @throws Exception\InvalidArgumentException
     */
     public static function toFile($filename, $config)
     {
@@ -142,7 +143,7 @@ class Factory
             (!is_object($config) && !is_array($config))
         ) {
             throw new Exception\InvalidArgumentException(
-                __METHOD__." \$config should be an array or instance of Zend\Config\Config"
+                __METHOD__." \$config should be an array or instance of Zend\\Config\\Config"
             );
         }
 
@@ -161,29 +162,32 @@ class Factory
             );
         }
 
-        if(!isset(self::$extensionWriters[$extension])) {
+        if(!isset(self::$writerExtensions[$extension])) {
             throw new Exception\RuntimeException(
-                "Unsupported config file extension: .{$extension}"
+                "Unsupported config file extension: '.{$extension}' for writing."
             );
         }
 
-        $writer = self::$extensionWriters[$extension];
+        $writer = self::$writerExtensions[$extension];
         if (($writer instanceOf Writer\AbstractWriter) === false) {
             $writer = self::getWriterPluginManager()->get($writer);
-            self::$extensionWriters[$extension] = $writer;
+            self::$writerExtensions[$extension] = $writer;
         }
 
         if (is_object($config)) {
             $config = $config->toArray();
         }
 
-        return file_put_contents($filename, $writer->processConfig($config));
+        $content = $writer->processConfig($config);
+
+        return (bool) (file_put_contents($filename, $content) !== false);
     }
 
     /**
      * Set reader plugin manager
      *
      * @param ReaderPluginManager $readers
+     * @return void
      */
     public static function setReaderPluginManager(ReaderPluginManager $readers)
     {
@@ -207,6 +211,7 @@ class Factory
      * Set writer plugin manager
      *
      * @param WriterPluginManager $writers
+     * @return void
      */
     public static function setWriterPluginManager(WriterPluginManager $writers)
     {
@@ -233,6 +238,7 @@ class Factory
      * @param  string $extension
      * @param  string|Reader\ReaderInterface $reader
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public static function registerReader($extension, $reader)
     {
@@ -250,6 +256,14 @@ class Factory
         self::$extensions[$extension] = $reader;
     }
 
+    /**
+     * Set config writer for file extension
+     *
+     * @param string $extension
+     * @param string|Writer\AbstractWriter $writer
+     * @throw Exception\InvalidArgumentException
+     * @return void
+     */
     public static function registerWriter($extension, $writer)
     {
         $extension = strtolower($extension);
@@ -263,6 +277,6 @@ class Factory
             ));
         }
 
-        self::$extensions[$extension] = $writer;
+        self::$writerExtensions[$extension] = $writer;
     }
 }

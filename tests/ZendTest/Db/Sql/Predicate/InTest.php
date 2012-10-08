@@ -65,7 +65,7 @@ class InTest extends TestCase
         $expected = array(array(
             '%s IN %s',
             array('foo', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_SELECT)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }

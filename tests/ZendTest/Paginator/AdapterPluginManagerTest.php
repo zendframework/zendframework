@@ -11,6 +11,8 @@
 namespace ZendTest\Paginator;
 
 use Zend\Paginator\AdapterPluginManager;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Mvc\Service\ServiceManagerConfig;
 
 /**
  * @category   Zend
@@ -59,4 +61,17 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Paginator\Adapter\Null', $plugin);
     }
 
+    public function testCanRetrievePluginManagerWithServiceManager()
+    {
+        $sm = $this->serviceManager = new ServiceManager(
+            new ServiceManagerConfig(array(
+                'factories' => array(
+                    'PaginatorPluginManager'  => 'Zend\Mvc\Service\PaginatorPluginManagerFactory',
+                ),
+            ))
+        );
+        $sm->setService('Config', array());
+        $adapterPluginManager = $sm->get('PaginatorPluginManager');
+        $this->assertInstanceOf('Zend\Paginator\AdapterPluginManager', $adapterPluginManager);
+    }
 }

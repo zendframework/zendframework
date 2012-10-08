@@ -53,6 +53,7 @@ class ServiceListenerFactory implements FactoryInterface
             'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
             'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
             'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
+            'PaginatorPluginManager'  => 'Zend\Mvc\Service\PaginatorPluginManagerFactory',
             'Request'                 => 'Zend\Mvc\Service\RequestFactory',
             'Response'                => 'Zend\Mvc\Service\ResponseFactory',
             'Router'                  => 'Zend\Mvc\Service\RouterFactory',

@@ -81,7 +81,7 @@ return array(
     // Zend_Validator_DateStep
     "Invalid type given. String, integer, array or DateTime expected" => "Entrée invalide. Chaîne, entier, tableau ou DateTime attendu",
     "The input does not appear to be a valid date" => "L'entrée ne semble pas être une date valide",
-    "The input is not a valid step" => "L'entrée n'est pas un interval valide",
+    "The input is not a valid step" => "L'entrée n'est pas un intervalle valide",
 
     // Zend_Validator_Db_AbstractDb
     "No record matching the input was found" => "Aucun enregistrement trouvé",
@@ -250,11 +250,11 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Une erreur interne est survenue avec l'expression '%pattern%'",
 
     // Zend_Validator_Sitemap_Changefreq
-    "The input is not a valid sitemap changefreq" => "L'entrée n'est pas une valeur de fréquence de sitemap valide",
+    "The input is not a valid sitemap changefreq" => "L'entrée n'est pas une valeur de fréquence de changement de sitemap valide",
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
 
     // Zend_Validator_Sitemap_Lastmod
-    "The input is not a valid sitemap lastmod" => "L'entrée n'est pas une date de modification de sitemap valide",
+    "The input is not a valid sitemap lastmod" => "L'entrée n'est pas une date de dernière modification de sitemap valide",
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
 
     // Zend_Validator_Sitemap_Loc
@@ -267,7 +267,7 @@ return array(
 
     // Zend_Validator_Step
     "Invalid value given. Scalar expected" => "Type invalide. Scalaire attendu",
-    "The input is not a valid step" => "L'entrée n'est pas un multiple valide",
+    "The input is not a valid step" => "L'entrée n'est pas un intervalle valide",
 
     // Zend_Validator_StringLength
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",

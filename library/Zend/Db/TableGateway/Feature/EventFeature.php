@@ -18,6 +18,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Update;
 use Zend\Db\TableGateway\Exception;
+use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
 
 /**
@@ -42,14 +43,36 @@ class EventFeature extends AbstractFeature
      * @param EventManagerInterface $eventManager
      * @param EventFeature\TableGatewayEvent $tableGatewayEvent
      */
-    public function __construct(EventManagerInterface $eventManager, EventFeature\TableGatewayEvent $tableGatewayEvent)
+    public function __construct(EventManagerInterface $eventManager = null, EventFeature\TableGatewayEvent $tableGatewayEvent = null)
     {
-        $this->eventManager = $eventManager;
+        $this->eventManager = ($eventManager instanceof EventManagerInterface) ? $eventManager : new EventManager;
+
+        $this->eventManager->setIdentifiers(array(
+            'Zend\Db\TableGateway\TableGateway',
+        ));
+
         $this->event = ($tableGatewayEvent) ?: new EventFeature\TableGatewayEvent();
     }
 
+    public function getEventManager()
+    {
+        return $this->eventManager;
+    }
+
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Ensured to only run once
+     */
     public function preInitialize()
     {
+        if (get_class($this->tableGateway) != 'Zend\Db\TableGateway\TableGateway') {
+            $this->eventManager->addIdentifiers(get_class($this->tableGateway));
+        }
+
         $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->eventManager->trigger($this->event);
@@ -57,14 +80,12 @@ class EventFeature extends AbstractFeature
 
     public function postInitialize()
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->eventManager->trigger($this->event);
     }
 
     public function preSelect(Select $select)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array('select' => $select));
         $this->eventManager->trigger($this->event);
@@ -72,7 +93,6 @@ class EventFeature extends AbstractFeature
 
     public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSetInterface $resultSet)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array(
             'statement' => $statement,
@@ -84,7 +104,6 @@ class EventFeature extends AbstractFeature
 
     public function preInsert(Insert $insert)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array('insert' => $insert));
         $this->eventManager->trigger($this->event);
@@ -92,7 +111,6 @@ class EventFeature extends AbstractFeature
 
     public function postInsert(StatementInterface $statement, ResultInterface $result)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array(
             'statement' => $statement,
@@ -103,7 +121,6 @@ class EventFeature extends AbstractFeature
 
     public function preUpdate(Update $update)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array('update' => $update));
         $this->eventManager->trigger($this->event);
@@ -111,7 +128,6 @@ class EventFeature extends AbstractFeature
 
     public function postUpdate(StatementInterface $statement, ResultInterface $result)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array(
             'statement' => $statement,
@@ -122,7 +138,6 @@ class EventFeature extends AbstractFeature
 
     public function preDelete(Delete $delete)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array('delete' => $delete));
         $this->eventManager->trigger($this->event);
@@ -130,7 +145,6 @@ class EventFeature extends AbstractFeature
 
     public function postDelete(StatementInterface $statement, ResultInterface $result)
     {
-        $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);
         $this->event->setParams(array(
             'statement' => $statement,

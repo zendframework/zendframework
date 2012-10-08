@@ -362,4 +362,19 @@ CODE;
         $received = $classGeneratorClass->generate();
         $this->assertContains('class FunClass', $received, $received);
     }
+
+    /**
+     * @group ZF2-151
+     */
+    public function testAddUseClass()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUseClass('My\First\Use\Class');
+        $classGenerator->addUseClass('My\Second\Use\Class');
+        $generated = $classGenerator->generate();
+
+        $this->assertContains('use My\First\Use\Class;', $generated);
+        $this->assertContains('use My\Second\Use\Class;', $generated);
+    }
 }

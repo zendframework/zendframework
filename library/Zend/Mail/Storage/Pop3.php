@@ -40,7 +40,7 @@ class Pop3 extends AbstractStorage
         $count  = 0; // "Declare" variable before first usage.
         $octets = 0; // "Declare" variable since it's passed by reference
         $this->protocol->status($count, $octets);
-        return (int)$count;
+        return (int) $count;
     }
 
     /**
@@ -132,7 +132,7 @@ class Pop3 extends AbstractStorage
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         $this->has['fetchPart'] = false;

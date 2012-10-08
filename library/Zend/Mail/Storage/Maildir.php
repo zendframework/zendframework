@@ -221,7 +221,7 @@ class Maildir extends AbstractStorage
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         if (!isset($params->dirname) || !is_dir($params->dirname)) {
@@ -330,7 +330,7 @@ class Maildir extends AbstractStorage
                           'flaglookup' => array_flip($named_flags),
                           'filename'   => $dirname . $entry);
             if ($size !== null) {
-                $data['size'] = (int)$size;
+                $data['size'] = (int) $size;
             }
             $this->files[] = $data;
         }

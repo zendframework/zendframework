@@ -413,7 +413,7 @@ class WinCache extends AbstractAdapter implements
         $options     = $this->getOptions();
         $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        return wincache_ucache_inc($internalKey, (int)$value);
+        return wincache_ucache_inc($internalKey, (int) $value);
     }
 
     /**
@@ -429,7 +429,7 @@ class WinCache extends AbstractAdapter implements
         $options     = $this->getOptions();
         $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        return wincache_ucache_dec($internalKey, (int)$value);
+        return wincache_ucache_dec($internalKey, (int) $value);
     }
 
     /* status */

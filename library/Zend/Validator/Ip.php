@@ -184,7 +184,7 @@ class Ip extends AbstractValidator
          */
         static $regex = '/^v([[:xdigit:]]+)\.[[:alnum:]\-\._~!\$&\'\(\)\*\+,;=:]+$/';
 
-        $result = (bool)preg_match($regex, $value, $matches);
+        $result = (bool) preg_match($regex, $value, $matches);
 
         /*
          * "As such, implementations must not provide the version flag for the

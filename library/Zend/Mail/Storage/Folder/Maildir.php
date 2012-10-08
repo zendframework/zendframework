@@ -58,7 +58,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         if (!isset($params->dirname) || !is_dir($params->dirname)) {
@@ -186,7 +186,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
      */
     public function selectFolder($globalName)
     {
-        $this->currentFolder = (string)$globalName;
+        $this->currentFolder = (string) $globalName;
 
         // getting folder from folder tree for validation
         $folder = $this->getFolders($this->currentFolder);

@@ -41,7 +41,7 @@ class BodyGenerator extends AbstractGenerator
      */
     public function getContent()
     {
-        return (string)$this->content;
+        return (string) $this->content;
     }
 
     /**

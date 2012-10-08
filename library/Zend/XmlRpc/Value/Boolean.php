@@ -29,7 +29,7 @@ class Boolean extends AbstractScalar
         $this->type = self::XMLRPC_TYPE_BOOLEAN;
         // Make sure the value is boolean and then convert it into a integer
         // The double conversion is because a bug in the ZendOptimizer in PHP version 5.0.4
-        $this->value = (int)(bool)$value;
+        $this->value = (int)(bool) $value;
     }
 
     /**
@@ -39,6 +39,6 @@ class Boolean extends AbstractScalar
      */
     public function getValue()
     {
-        return (bool)$this->value;
+        return (bool) $this->value;
     }
 }

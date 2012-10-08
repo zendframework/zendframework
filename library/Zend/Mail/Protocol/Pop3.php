@@ -275,7 +275,7 @@ class Pop3
             $result = $this->request("LIST $msgno");
 
             list(, $result) = explode(' ', $result);
-            return (int)$result;
+            return (int) $result;
         }
 
         $result = $this->request('LIST', true);
@@ -283,7 +283,7 @@ class Pop3
         $line = strtok($result, "\n");
         while ($line) {
             list($no, $size) = explode(' ', trim($line));
-            $messages[(int)$no] = (int)$size;
+            $messages[(int)$no] = (int) $size;
             $line = strtok("\n");
         }
 
@@ -315,7 +315,7 @@ class Pop3
                 continue;
             }
             list($no, $id) = explode(' ', trim($line), 2);
-            $messages[(int)$no] = $id;
+            $messages[(int) $no] = $id;
         }
 
         return $messages;
@@ -347,7 +347,7 @@ class Pop3
         }
         $this->hasTop = true;
 
-        $lines = (!$lines || $lines < 1) ? 0 : (int)$lines;
+        $lines = (!$lines || $lines < 1) ? 0 : (int) $lines;
 
         try {
             $result = $this->request("TOP $msgno $lines", true);

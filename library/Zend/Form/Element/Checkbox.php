@@ -101,7 +101,7 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function setUseHiddenElement($useHiddenElement)
     {
-        $this->useHiddenElement = (bool)$useHiddenElement;
+        $this->useHiddenElement = (bool) $useHiddenElement;
         return $this;
     }
 
@@ -202,7 +202,7 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function isChecked()
     {
-        return (bool)$this->value;
+        return (bool) $this->value;
     }
 
     /**
@@ -213,7 +213,7 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function setChecked($value)
     {
-        $this->value = (bool)$value;
+        $this->value = (bool) $value;
         return $this;
     }
 

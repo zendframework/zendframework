@@ -54,7 +54,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         if (isset($params->filename)) {
@@ -160,7 +160,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
      */
     public function selectFolder($globalName)
     {
-        $this->currentFolder = (string)$globalName;
+        $this->currentFolder = (string) $globalName;
 
         // getting folder from folder tree for validation
         $folder = $this->getFolders($this->currentFolder);

@@ -33,7 +33,7 @@ class Integer extends AbstractScalar
         }
 
         $this->type = self::XMLRPC_TYPE_INTEGER;
-        $this->value = (int)$value;    // Make sure this value is integer
+        $this->value = (int) $value;    // Make sure this value is integer
     }
 
     /**

@@ -769,7 +769,7 @@ class PythonPickle extends AbstractAdapter
      */
     protected function loadGet()
     {
-        $id = (int)$this->readline();
+        $id = (int) $this->readline();
 
         if (!array_key_exists($id, $this->memo)) {
             throw new Exception\RuntimeException('Get id "' . $id . '" not found in memo');
@@ -950,7 +950,7 @@ class PythonPickle extends AbstractAdapter
      */
     protected function loadString()
     {
-        $this->stack[] = $this->unquoteString((string)$this->readline());
+        $this->stack[] = $this->unquoteString((string) $this->readline());
     }
 
     /**
@@ -964,7 +964,7 @@ class PythonPickle extends AbstractAdapter
             $bin = strrev($bin);
         }
         list(, $len)   = unpack('l', $bin);
-        $this->stack[] = (string)$this->read($len);
+        $this->stack[] = (string) $this->read($len);
     }
 
     /**
@@ -974,7 +974,7 @@ class PythonPickle extends AbstractAdapter
     protected function loadShortBinString()
     {
         $len           = ord($this->read(1));
-        $this->stack[] = (string)$this->read($len);
+        $this->stack[] = (string) $this->read($len);
     }
 
     /**

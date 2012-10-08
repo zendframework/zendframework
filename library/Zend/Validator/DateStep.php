@@ -281,7 +281,7 @@ class DateStep extends AbstractValidator
             foreach ($intervalParts as $key => $value) {
                 if (0 != $value) {
                     $intervalUnit = $key;
-                    $stepValue    = (int)$value;
+                    $stepValue    = (int) $value;
                     break;
                 }
             }

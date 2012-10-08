@@ -386,7 +386,7 @@ class Ldap implements AdapterInterface
                 unset($options[$key]);
                 switch ($key) {
                     case 'groupScope':
-                        $value = (int)$value;
+                        $value = (int) $value;
                         if (in_array($value, array(ZendLdap\Ldap::SEARCH_SCOPE_BASE,
                                 ZendLdap\Ldap::SEARCH_SCOPE_ONE, ZendLdap\Ldap::SEARCH_SCOPE_SUB), true)) {
                            $adapterOptions[$key] = $value;

@@ -140,7 +140,7 @@ class Dn implements \ArrayAccess
      */
     public function getParentDn($levelUp = 1)
     {
-        $levelUp = (int)$levelUp;
+        $levelUp = (int) $levelUp;
         if ($levelUp < 1 || $levelUp >= count($this->dn)) {
             throw new Exception\LdapException(null, 'Cannot retrieve parent DN with given $levelUp');
         }
@@ -161,7 +161,7 @@ class Dn implements \ArrayAccess
     {
         $caseFold = self::sanitizeCaseFold($caseFold, $this->caseFold);
         $this->assertIndex($index);
-        $length = (int)$length;
+        $length = (int) $length;
         if ($length <= 0) {
             $length = 1;
         }
@@ -198,7 +198,7 @@ class Dn implements \ArrayAccess
     public function remove($index, $length = 1)
     {
         $this->assertIndex($index);
-        $length = (int)$length;
+        $length = (int) $length;
         if ($length <= 0) {
             $length = 1;
         }
@@ -381,7 +381,7 @@ class Dn implements \ArrayAccess
      */
     public function offsetExists($offset)
     {
-        $offset = (int)$offset;
+        $offset = (int) $offset;
         if ($offset < 0 || $offset >= count($this->dn)) {
             return false;
         }

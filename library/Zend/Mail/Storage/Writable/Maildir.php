@@ -87,7 +87,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         if (!empty($params->create) && isset($params->dirname) && !file_exists($params->dirname . DIRECTORY_SEPARATOR . 'cur')) {
@@ -495,7 +495,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
                                 'flags'    => $flags,
                                 'filename' => $new_filename);
         if ($this->quota) {
-            $this->_addQuotaEntry((int)$size, 1);
+            $this->_addQuotaEntry((int) $size, 1);
         }
     }
 
@@ -565,7 +565,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         }
 
         if ($this->quota) {
-            $this->_addQuotaEntry((int)$size, 1);
+            $this->_addQuotaEntry((int) $size, 1);
         }
     }
 
@@ -686,7 +686,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         // remove the gap
         $this->files = array_values($this->files);
         if ($this->quota) {
-            $this->_addQuotaEntry(0 - (int)$size, -1);
+            $this->_addQuotaEntry(0 - (int) $size, -1);
         }
     }
 
@@ -923,8 +923,8 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if (!file_exists($this->rootdir . 'maildirsize')) {
             // TODO: should get file handler from _calculateQuota
         }
-        $size  = (int)$size;
-        $count = (int)$count;
+        $size  = (int) $size;
+        $count = (int) $count;
         file_put_contents($this->rootdir . 'maildirsize', "$size $count\n", FILE_APPEND);
     }
 

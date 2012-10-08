@@ -242,7 +242,7 @@ class Reader
                 return self::importString($data);
             }
             $response = $client->send();
-            if ((int)$response->getStatusCode() !== 200) {
+            if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
@@ -250,7 +250,7 @@ class Reader
             return self::importString($responseXml);
         } else {
             $response = $client->send();
-            if ((int)$response->getStatusCode() !== 200) {
+            if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $reader = self::importString($response->getBody());

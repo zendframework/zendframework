@@ -85,7 +85,7 @@ class Windows extends Virtual
         }
 
         if (count($this->probeResult) && (int) $this->probeResult[1]) {
-            $height = (int)$this->probeResult[1];
+            $height = (int) $this->probeResult[1];
         } else {
             $height = parent::getheight();
         }

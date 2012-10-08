@@ -110,7 +110,7 @@ class ZendServerShm extends AbstractZendServer implements
      */
     protected function zdcFetch($internalKey)
     {
-        return zend_shm_cache_fetch((string)$internalKey);
+        return zend_shm_cache_fetch((string) $internalKey);
     }
 
     /**

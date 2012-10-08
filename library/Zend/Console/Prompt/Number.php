@@ -110,7 +110,7 @@ class Number extends Line
          * Cast proper type
          */
         if ($number !== null) {
-            $number = $this->allowFloat ? (double)$number : (int)$number;
+            $number = $this->allowFloat ? (double) $number : (int) $number;
         }
 
         return $this->lastResponse = $number;

@@ -346,7 +346,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      */
     public function setAllowAdd($allowAdd)
     {
-        $this->allowAdd = (bool)$allowAdd;
+        $this->allowAdd = (bool) $allowAdd;
         return $this;
     }
 
@@ -366,7 +366,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      */
     public function setAllowRemove($allowRemove)
     {
-        $this->allowRemove = (bool)$allowRemove;
+        $this->allowRemove = (bool) $allowRemove;
         return $this;
     }
 
@@ -386,7 +386,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      */
     public function setShouldCreateTemplate($shouldCreateTemplate)
     {
-        $this->shouldCreateTemplate = (bool)$shouldCreateTemplate;
+        $this->shouldCreateTemplate = (bool) $shouldCreateTemplate;
 
         return $this;
     }

@@ -56,7 +56,7 @@ class Value implements ArrayAccess, Countable
     {
         $this->container = $container;
 
-        $this->value = (string)$value;
+        $this->value = (string) $value;
 
         /**
          * Object is marked as just modified by memory manager

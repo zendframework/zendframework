@@ -504,7 +504,7 @@ class Server extends AbstractServer
             return $this->sendArgumentsToAllMethods;
         }
 
-        $this->sendArgumentsToAllMethods = (bool)$flag;
+        $this->sendArgumentsToAllMethods = (bool) $flag;
         return $this;
     }
 

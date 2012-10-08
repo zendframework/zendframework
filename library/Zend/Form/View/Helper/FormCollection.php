@@ -153,7 +153,7 @@ class FormCollection extends AbstractHelper
      */
     public function setShouldWrap($wrap)
     {
-        $this->shouldWrap = (bool)$wrap;
+        $this->shouldWrap = (bool) $wrap;
         return $this;
     }
 

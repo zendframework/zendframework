@@ -111,7 +111,7 @@ class Posix extends AbstractAdapter
          * Try to read env variable
          */
         if (($result = getenv('COLUMNS')) !== false) {
-            return $width = (int)$result;
+            return $width = (int) $result;
         }
 
         /**
@@ -119,7 +119,7 @@ class Posix extends AbstractAdapter
          */
         $result = exec('tput cols', $output, $return);
         if (!$return && is_numeric($result)) {
-            return $width = (int)$result;
+            return $width = (int) $result;
         }
 
         return $width = parent::getWidth();
@@ -145,7 +145,7 @@ class Posix extends AbstractAdapter
         // Try to read console size from "tput" command
         $result = exec('tput lines', $output, $return);
         if (!$return && is_numeric($result)) {
-            return $height = (int)$result;
+            return $height = (int) $result;
         }
 
         return $height = parent::getHeight();

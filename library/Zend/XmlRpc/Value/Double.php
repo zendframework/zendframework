@@ -26,9 +26,9 @@ class Double extends AbstractScalar
     public function __construct($value)
     {
         $this->type = self::XMLRPC_TYPE_DOUBLE;
-        $precision = (int)ini_get('precision');
+        $precision = (int) ini_get('precision');
         $formatString = '%1.' . $precision . 'F';
-        $this->value = rtrim(sprintf($formatString, (float)$value), '0');
+        $this->value = rtrim(sprintf($formatString, (float) $value), '0');
     }
 
     /**
@@ -38,6 +38,6 @@ class Double extends AbstractScalar
      */
     public function getValue()
     {
-        return (float)$this->value;
+        return (float) $this->value;
     }
 }

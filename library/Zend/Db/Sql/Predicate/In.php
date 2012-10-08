@@ -94,7 +94,7 @@ class In implements PredicateInterface
         $values = $this->getValueSet();
         if ($values instanceof Select) {
             $specification = '%s IN %s';
-            $types = array(self::TYPE_SELECT);
+            $types = array(self::TYPE_VALUE);
             $values = array($values);
         } else {
             $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';

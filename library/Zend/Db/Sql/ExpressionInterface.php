@@ -15,6 +15,10 @@ interface ExpressionInterface
     const TYPE_IDENTIFIER = 'identifier';
     const TYPE_VALUE = 'value';
     const TYPE_LITERAL = 'literal';
+
+    /**
+     * @deprecated This will go away in 2.1
+     */
     const TYPE_SELECT = 'select';
 
     /**

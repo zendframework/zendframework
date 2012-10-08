@@ -68,6 +68,11 @@ class ClassGenerator extends AbstractGenerator
     protected $methods = array();
 
     /**
+     * @var array Array of string names
+     */
+    protected $useClasses = array();
+
+    /**
      * fromReflection() - build a Code Generation Php Object from a Class Reflection
      *
      * @param ClassReflection $classReflection
@@ -480,6 +485,16 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * Add a class to "use" classes
+     *
+     * @param string $useClass
+     */
+    public function addUseClass($useClass)
+    {
+        $this->useClasses[] = $useClass;
+    }
+
+    /**
      * getProperties()
      *
      * @return PropertyGenerator[]
@@ -503,6 +518,16 @@ class ClassGenerator extends AbstractGenerator
             }
         }
         return false;
+    }
+
+    /**
+     * Returns the "use" classes
+     *
+     * @return array
+     */
+    public function getUseClasses()
+    {
+        return $this->useClasses;
     }
 
     /**
@@ -662,6 +687,14 @@ class ClassGenerator extends AbstractGenerator
 
         if (null !== ($namespace = $this->getNamespaceName())) {
             $output .= 'namespace ' . $namespace . ';' . self::LINE_FEED . self::LINE_FEED;
+        }
+
+        $useClasses = $this->getUseClasses();
+        if (!empty($useClasses)) {
+            foreach ($useClasses as $useClass) {
+                $output .= 'use ' . $useClass . ';' . self::LINE_FEED;
+            }
+            $output .= self::LINE_FEED;
         }
 
         if (null !== ($docBlock = $this->getDocBlock())) {

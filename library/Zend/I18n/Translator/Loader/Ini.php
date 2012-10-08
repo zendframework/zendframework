@@ -47,11 +47,20 @@ class Ini implements FileLoaderInterface
         $messagesNamespaced = $iniReader->fromFile($filename);
         
         $list = $messagesNamespaced;
-        if(isset($messagesNamespaced['translate'])) {
-           $list = $messagesNamespaced['translate'];
+        if(isset($messagesNamespaced['translation'])) {
+           $list = $messagesNamespaced['translation'];
         }
         foreach($list as $message) {
-            $messages[$message['message']] = $message['translate'];
+            if(!is_array($message) || count($message) < 2) {
+                throw new Exception\InvalidArgumentException(
+                    'Each INI row must be an array with message and translation'
+                );
+            }
+            if(isset($message['message']) && isset($message['translation'])) {
+                $messages[$message['message']] = $message['translation'];
+            } else {
+                $messages[array_shift($message)] = array_shift($message);
+            }
         }
 
         if (!is_array($messages)) {

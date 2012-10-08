@@ -81,7 +81,7 @@ return array(
     // Zend_Validator_DateStep
     "Invalid type given. String, integer, array or DateTime expected" => "Entrée invalide. Chaîne, entier, tableau ou DateTime attendu",
     "The input does not appear to be a valid date" => "L'entrée ne semble pas être une date valide",
-    "The input is not a valid step" => "L'entrée n'est pas une step valide",
+    "The input is not a valid step" => "L'entrée n'est pas un interval valide",
 
     // Zend_Validator_Db_AbstractDb
     "No record matching the input was found" => "Aucun enregistrement trouvé",
@@ -99,7 +99,7 @@ return array(
     "'%hostname%' does not appear to have any valid MX or A records for the email address" => "'%hostname%' ne semble pas avoir d'enregistrement MX valide pour l'adresse email",
     "'%hostname%' is not in a routable network segment. The email address should not be resolved from public network" => "'%hostname%' n'est pas dans un segment réseau routable. L'adresse email ne devrait pas être résolue depuis un réseau public.",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' ne correspond pas au format dot-atom",
-    "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' ne correspond pas au format quoted-string",
+    "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' ne correspond pas à une chaîne entre quotes",
     "'%localPart%' is not a valid local part for the email address" => "'%localPart%' n'est pas une partie locale valide pour l'adresse email",
     "The input exceeds the allowed length" => "L'entrée dépasse la taille autorisée",
 
@@ -178,7 +178,7 @@ return array(
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
     // Zend_Validator_File_Upload
-    "File '%value%' exceeds the defined ini size" => "File '%value%' dépasse la taille défini dans le fichier INI",
+    "File '%value%' exceeds the defined ini size" => "Le fichier '%value%' dépasse la taille définie dans le fichier INI",
     "File '%value%' exceeds the defined form size" => "Le fichier '%value%' dépasse la taille définie dans le formulaire",
     "File '%value%' was only partially uploaded" => "Le fichier '%value%' n'a été que partiellement envoyé",
     "File '%value%' was not uploaded" => "Le fichier '%value%' n'a pas été envoyé",
@@ -271,7 +271,7 @@ return array(
 
     // Zend_Validator_StringLength
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
-    "The input is less than %min% characters long" => "L'entrée conteint moins de %min% caractères",
+    "The input is less than %min% characters long" => "L'entrée contient moins de %min% caractères",
     "The input is more than %max% characters long" => "L'entrée contient plus de %max% caractères",
 
     // Zend_Validator_Uri

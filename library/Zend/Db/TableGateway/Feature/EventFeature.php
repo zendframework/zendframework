@@ -20,15 +20,15 @@ use Zend\Db\Sql\Update;
 use Zend\Db\TableGateway\Exception;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage TableGateway
  */
-class EventFeature extends AbstractFeature
+class EventFeature extends AbstractFeature implements EventsCapableInterface
 {
-
     /**
      * @var EventManagerInterface
      */
@@ -43,9 +43,13 @@ class EventFeature extends AbstractFeature
      * @param EventManagerInterface $eventManager
      * @param EventFeature\TableGatewayEvent $tableGatewayEvent
      */
-    public function __construct(EventManagerInterface $eventManager = null, EventFeature\TableGatewayEvent $tableGatewayEvent = null)
-    {
-        $this->eventManager = ($eventManager instanceof EventManagerInterface) ? $eventManager : new EventManager;
+    public function __construct(
+        EventManagerInterface $eventManager = null,
+        EventFeature\TableGatewayEvent $tableGatewayEvent = null
+    ) {
+        $this->eventManager = ($eventManager instanceof EventManagerInterface)
+                            ? $eventManager
+                            : new EventManager;
 
         $this->eventManager->setIdentifiers(array(
             'Zend\Db\TableGateway\TableGateway',
@@ -54,18 +58,34 @@ class EventFeature extends AbstractFeature
         $this->event = ($tableGatewayEvent) ?: new EventFeature\TableGatewayEvent();
     }
 
+    /**
+     * Retrieve composed event manager instance
+     *
+     * @return EventManagerInterface
+     */
     public function getEventManager()
     {
         return $this->eventManager;
     }
 
+    /**
+     * Retrieve composed event instance
+     *
+     * @return EventFeature\TableGatewayEvent
+     */
     public function getEvent()
     {
         return $this->event;
     }
 
     /**
-     * Ensured to only run once
+     * Initialize feature and trigger "preInitialize" event
+     *
+     * Ensures that the composed TableGateway has identifiers based on the
+     * class name, and that the event target is set to the TableGateway
+     * instance. It then triggers the "preInitialize" event.
+     *
+     * @return void
      */
     public function preInitialize()
     {
@@ -78,12 +98,26 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "postInitialize" event
+     *
+     * @return void
+     */
     public function postInitialize()
     {
         $this->event->setName(__FUNCTION__);
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "preSelect" event
+     *
+     * Triggers the "preSelect" event mapping the following parameters:
+     * - $select as "select"
+     *
+     * @param  Select $select
+     * @return void
+     */
     public function preSelect(Select $select)
     {
         $this->event->setName(__FUNCTION__);
@@ -91,6 +125,19 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "postSelect" event
+     *
+     * Triggers the "postSelect" event mapping the following parameters:
+     * - $statement as "statement"
+     * - $result as "result"
+     * - $resultSet as "result_set"
+     *
+     * @param  StatementInterface $statement
+     * @param  ResultInterface $result
+     * @param  ResultSetInterface $resultSet
+     * @return void
+     */
     public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSetInterface $resultSet)
     {
         $this->event->setName(__FUNCTION__);
@@ -102,6 +149,15 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "preInsert" event
+     *
+     * Triggers the "preInsert" event mapping the following parameters:
+     * - $insert as "insert"
+     *
+     * @param  Insert $insert
+     * @return void
+     */
     public function preInsert(Insert $insert)
     {
         $this->event->setName(__FUNCTION__);
@@ -109,6 +165,17 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "postInsert" event
+     *
+     * Triggers the "postInsert" event mapping the following parameters:
+     * - $statement as "statement"
+     * - $result as "result"
+     *
+     * @param  StatementInterface $statement
+     * @param  ResultInterface $result
+     * @return void
+     */
     public function postInsert(StatementInterface $statement, ResultInterface $result)
     {
         $this->event->setName(__FUNCTION__);
@@ -119,6 +186,15 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "preUpdate" event
+     *
+     * Triggers the "preUpdate" event mapping the following parameters:
+     * - $update as "update"
+     *
+     * @param  Update $update
+     * @return void
+     */
     public function preUpdate(Update $update)
     {
         $this->event->setName(__FUNCTION__);
@@ -126,6 +202,17 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "postUpdate" event
+     *
+     * Triggers the "postUpdate" event mapping the following parameters:
+     * - $statement as "statement"
+     * - $result as "result"
+     *
+     * @param  StatementInterface $statement
+     * @param  ResultInterface $result
+     * @return void
+     */
     public function postUpdate(StatementInterface $statement, ResultInterface $result)
     {
         $this->event->setName(__FUNCTION__);
@@ -136,6 +223,15 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "preDelete" event
+     *
+     * Triggers the "preDelete" event mapping the following parameters:
+     * - $delete as "delete"
+     *
+     * @param  Delete $delete
+     * @return void
+     */
     public function preDelete(Delete $delete)
     {
         $this->event->setName(__FUNCTION__);
@@ -143,6 +239,17 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
+    /**
+     * Trigger the "postDelete" event
+     *
+     * Triggers the "postDelete" event mapping the following parameters:
+     * - $statement as "statement"
+     * - $result as "result"
+     *
+     * @param  StatementInterface $statement
+     * @param  ResultInterface $result
+     * @return void
+     */
     public function postDelete(StatementInterface $statement, ResultInterface $result)
     {
         $this->event->setName(__FUNCTION__);
@@ -152,5 +259,4 @@ class EventFeature extends AbstractFeature
         ));
         $this->eventManager->trigger($this->event);
     }
-
 }

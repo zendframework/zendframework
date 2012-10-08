@@ -10,7 +10,6 @@
 
 namespace LoadOtherModule;
 
-use Zend\Config\Config;
 
 class Module
 {

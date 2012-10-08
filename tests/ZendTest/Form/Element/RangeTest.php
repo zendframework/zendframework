@@ -12,7 +12,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Range as RangeElement;
-use Zend\Form\Factory;
 
 class RangeTest extends TestCase
 {

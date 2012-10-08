@@ -11,7 +11,6 @@
 namespace ZendTest\Log\Formatter;
 
 use DateTime;
-use ZendTest\Log\TestAsset\StringObject;
 use Zend\Log\Formatter\Db as DbFormatter;
 
 /**

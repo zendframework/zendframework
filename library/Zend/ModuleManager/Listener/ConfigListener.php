@@ -10,7 +10,6 @@
 
 namespace Zend\ModuleManager\Listener;
 
-use ArrayAccess;
 use Traversable;
 use Zend\Config\Config;
 use Zend\Config\Factory as ConfigFactory;

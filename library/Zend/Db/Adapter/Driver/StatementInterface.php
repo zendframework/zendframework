@@ -11,7 +11,6 @@
 namespace Zend\Db\Adapter\Driver;
 
 use Zend\Db\Adapter\StatementContainerInterface;
-use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend

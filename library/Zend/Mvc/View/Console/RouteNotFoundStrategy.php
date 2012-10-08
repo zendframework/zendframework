@@ -23,7 +23,6 @@ use Zend\Mvc\Exception\RuntimeException;
 use Zend\Console\Response as ConsoleResponse;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
-use Zend\Mvc\Router\RouteInterface;
 use Zend\View\Model\ConsoleModel;
 use Zend\Version\Version;
 use Zend\Stdlib\ResponseInterface as Response;

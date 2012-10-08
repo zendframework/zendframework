@@ -10,7 +10,6 @@
 
 namespace Zend\Log\Filter;
 
-use Zend\Log\Exception;
 
 /**
  * @category   Zend

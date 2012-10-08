@@ -13,7 +13,6 @@ namespace ZendTest\Form\View\Helper\Captcha;
 use Zend\Captcha\ReCaptcha;
 use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\Captcha\ReCaptcha as ReCaptchaHelper;
-use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
 use ZendTest\Form\View\Helper\CommonTestCase;
 
 /**

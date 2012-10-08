@@ -13,7 +13,6 @@ namespace ZendTest\Form\Element;
 use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Date as DateElement;
-use Zend\Form\Factory;
 
 class DateTest extends TestCase
 {

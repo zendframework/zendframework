@@ -12,7 +12,6 @@ namespace ZendTest\Log\Writer;
 
 use DateTime;
 use ZendTest\Log\TestAsset\MockDbAdapter;
-use ZendTest\Log\TestAsset\MockDbDriver;
 use Zend\Log\Writer\Db as DbWriter;
 use Zend\Log\Formatter\FormatterInterface;
 

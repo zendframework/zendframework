@@ -12,7 +12,6 @@ namespace ZendTest\Di;
 
 use Zend\Di\DefinitionList;
 use Zend\Di\Definition\ClassDefinition;
-use Zend\Di\Definition\RuntimeDefinition;
 
 use PHPUnit_Framework_TestCase as TestCase;
 

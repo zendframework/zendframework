@@ -10,7 +10,6 @@
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\RuntimeDefinition;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class RuntimeDefinitionTest extends TestCase

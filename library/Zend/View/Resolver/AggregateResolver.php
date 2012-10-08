@@ -13,7 +13,6 @@ namespace Zend\View\Resolver;
 use Countable;
 use IteratorAggregate;
 use Zend\Stdlib\PriorityQueue;
-use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Resolver\ResolverInterface as Resolver;
 

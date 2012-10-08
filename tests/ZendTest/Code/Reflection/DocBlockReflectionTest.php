@@ -10,7 +10,6 @@
 
 namespace ZendTest\Code\Reflection;
 
-use Zend\Code\Reflection\DocBlockReflection;
 use Zend\Code\Reflection\ClassReflection;
 
 /**

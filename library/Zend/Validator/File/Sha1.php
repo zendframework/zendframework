@@ -10,7 +10,6 @@
 
 namespace Zend\Validator\File;
 
-use Zend\Validator\Exception;
 
 /**
  * Validator for the sha1 hash of given files

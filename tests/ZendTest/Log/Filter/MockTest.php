@@ -11,7 +11,6 @@
 namespace ZendTest\Log\Filter;
 
 use Zend\Log\Filter\Mock as MockFilter;
-use Zend\Log\Logger;
 
 /**
  * @category   Zend

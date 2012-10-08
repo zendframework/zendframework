@@ -23,7 +23,6 @@ namespace Zend\Form\Element;
 
 use Traversable;
 use Zend\Form\Element;
-use Zend\Form\Exception;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\InArray as InArrayValidator;
 use Zend\Validator\ValidatorInterface;

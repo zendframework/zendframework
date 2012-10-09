@@ -46,14 +46,14 @@ class Chain implements StorageInterface
         $this->storages->insert($storage, $priority);
     }
     
-	/**
-	 * Loop over the queue of storages until a storage is found that is non-empty. If such 
-	 * storage is not found, then this chain storage itself is empty. 
-	 * 
-	 * In case a non-empty storage is found then this chain storage is also non-empty. Report 
-	 * that, but also make sure that all the storages with a higher priorty that are empty 
-	 * are filled.
-	 * 
+    /**
+     * Loop over the queue of storages until a storage is found that is non-empty. If such 
+     * storage is not found, then this chain storage itself is empty. 
+     * 
+     * In case a non-empty storage is found then this chain storage is also non-empty. Report 
+     * that, but also make sure that all the storages with a higher priorty that are empty 
+     * are filled.
+     * 
      * @see StorageInterface::isEmpty()
      */
     public function isEmpty()
@@ -81,10 +81,10 @@ class Chain implements StorageInterface
         return true;
     }
 
-	/**
-	 * If the chain is non-empty then the storage with the top priority is guaranteed to be 
-	 * filled. Return its value. 
-	 * 
+    /**
+     * If the chain is non-empty then the storage with the top priority is guaranteed to be 
+     * filled. Return its value. 
+     * 
      * @see StorageInterface::read()
      */
     public function read()
@@ -92,9 +92,9 @@ class Chain implements StorageInterface
         return $this->storages->top()->read();
     }
 
-	/**
-	 * Write the new $contents to all storages in the chain.
-	 * 
+    /**
+     * Write the new $contents to all storages in the chain.
+     * 
      * @see StorageInterface::write()
      */
     public function write( $contents )
@@ -103,10 +103,10 @@ class Chain implements StorageInterface
             $storage->write($contents);
     }
 
-	/**
-	 * Clear all storages in the chain.
-	 * 
-	 * @see StorageInterface::clear()
+    /**
+     * Clear all storages in the chain.
+     * 
+     * @see StorageInterface::clear()
      */
     public function clear()
     {

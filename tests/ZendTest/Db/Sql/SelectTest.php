@@ -857,6 +857,19 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $useNamedParams36 = true;
 
         /**
+         * @author robertbasic
+         * @link https://github.com/zendframework/zf2/pull/2714
+         */
+        $select37 = new Select;
+        $select37->from('foo')->columns(array('bar'), false);
+        $sqlPrep37 = // same
+        $sqlStr37 = 'SELECT "bar" AS "bar" FROM "foo"';
+        $internalTests37 = array(
+            'processSelect' => array(array(array('"bar"', '"bar"')), '"foo"')
+        );
+
+
+        /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
          * $params = the param container contents result of preparation
@@ -902,6 +915,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select34, $sqlPrep34, array(),    $sqlStr34, $internalTests34),
             array($select35, $sqlPrep35, array(),    $sqlStr35, $internalTests35),
             array($select36, $sqlPrep36, array(),    $sqlStr36, $internalTests36,  $useNamedParams36),
+            array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
         );
     }
 

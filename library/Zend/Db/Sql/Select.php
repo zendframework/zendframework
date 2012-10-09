@@ -533,7 +533,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $fromTable = ($this->prefixColumnsWithTable) ? $table : '';
         }
 
-        $fromTable .= $platform->getIdentifierSeparator();
+        $fromTable .= ($this->prefixColumnsWithTable) ? $platform->getIdentifierSeparator() : '';
 
         // process table columns
         $columns = array();

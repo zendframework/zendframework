@@ -12,7 +12,7 @@ namespace Zend\Log\Writer;
 
 use Zend\Log\Exception;
 use Zend\Log\Filter;
-use Zend\Log\Formatter\FormatterInterface as Formatter;
+use Zend\Log\Formatter;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -28,6 +28,13 @@ abstract class AbstractWriter implements WriterInterface
      * @var FilterPluginManager
      */
     protected $filterPlugins;
+    
+    /**
+     * Formatter plugins
+     *
+     * @var FormatterPluginManager
+     */
+    protected $formatterPlugins;
 
     /**
      * Filter chain
@@ -77,7 +84,8 @@ abstract class AbstractWriter implements WriterInterface
 
         if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Writer must implement Zend\Log\Filter\FilterInterface; received "%s"',
+                'Writer must implement %s\Filter\FilterInterface; received "%s"',
+                __NAMESPACE__,
                 is_object($filter) ? get_class($filter) : gettype($filter)
             ));
         }
@@ -134,6 +142,56 @@ abstract class AbstractWriter implements WriterInterface
     {
         return $this->getFilterPluginManager()->get($name, $options);
     }
+    
+    /**
+     * Get formatter plugin manager
+     *
+     * @return FormatterPluginManager
+     */
+    public function getFormatterPluginManager()
+    {
+        if (null === $this->formatterPlugins) {
+            $this->setFormatterPluginManager(new FormatterPluginManager());
+        }
+        return $this->formatterPlugins;
+    }
+    
+    /**
+     * Set formatter plugin manager
+     *
+     * @param  string|FormatterPluginManager $plugins
+     * @return self
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setFormatterPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof FormatterPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Writer plugin manager must extend %s\FormatterPluginManager; received %s',
+                    __NAMESPACE__,
+                    is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+    
+        $this->formatterPlugins = $plugins;
+        return $this;
+    }
+    
+   
+    /**
+     * Get formatter instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Formatter\FormatterInterface
+     */
+    public function formatterPlugin($name, array $options = null)
+    {
+        return $this->getFormatterPluginManager()->get($name, $options);
+    }
 
     /**
      * Log a message to this writer.
@@ -178,12 +236,31 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Set a new formatter for this writer
      *
-     * @param  Formatter $formatter
+     * @param  string|Formatter\FormatterInterface $formatter
      * @return self
+     * @throws Exception\InvalidArgumentException
      */
-    public function setFormatter(Formatter $formatter)
+    public function setFormatter($formatter, array $options = null)
     {
-        $this->formatter = $formatter;
+        if (is_string($formatter)) {
+            $formatter = $this->formatterPlugin($formatter, $options);
+        }
+
+        if (!$formatter instanceof Formatter\FormatterInterface) {
+            // This should be used instead of triggering an error, but this will require to change tests
+            //throw new Exception\InvalidArgumentException(sprintf(
+            //        'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
+            //        __NAMESPACE__,
+            //        is_object($formatter) ? get_class($formatter) : gettype($formatter)   
+            //));
+            trigger_error(sprintf(
+                    'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
+                    __NAMESPACE__,
+                    is_object($formatter) ? get_class($formatter) : gettype($formatter)   
+            ));
+        }
+
+        $this->formatter= $formatter;
         return $this;
     }
 

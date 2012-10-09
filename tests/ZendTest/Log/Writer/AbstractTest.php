@@ -39,6 +39,11 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('PHPUnit_Framework_Error');
         $this->_writer->setFormatter(new \StdClass());
     }
+    
+    public function testSetSimpleFormatterByName()
+    {
+        $this->_writer->setFormatter('simple');
+    }
 
     public function testAddFilter()
     {

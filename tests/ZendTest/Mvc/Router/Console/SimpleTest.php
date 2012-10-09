@@ -3,7 +3,6 @@ namespace ZendTest\Mvc\Router\Console;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\Request;
-use Zend\Stdlib\Request as BaseRequest;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\Router\Console\Simple;
 use ZendTest\Mvc\Router\FactoryTester;

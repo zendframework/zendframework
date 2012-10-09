@@ -256,7 +256,7 @@ class Ldap
                     case 'port':
                     case 'accountCanonicalForm':
                     case 'networkTimeout':
-                        $permittedOptions[$key] = (int)$val;
+                        $permittedOptions[$key] = (int) $val;
                         break;
                     case 'useSsl':
                     case 'bindRequiresDn':
@@ -672,22 +672,22 @@ class Ldap
         if ($port === null) {
             $port = $this->getPort();
         } else {
-            $port = (int)$port;
+            $port = (int) $port;
         }
         if ($useSsl === null) {
             $useSsl = $this->getUseSsl();
         } else {
-            $useSsl = (bool)$useSsl;
+            $useSsl = (bool) $useSsl;
         }
         if ($useStartTls === null) {
             $useStartTls = $this->getUseStartTls();
         } else {
-            $useStartTls = (bool)$useStartTls;
+            $useStartTls = (bool) $useStartTls;
         }
         if ($networkTimeout === null) {
             $networkTimeout = $this->getNetworkTimeout();
         } else {
-            $networkTimeout = (int)$networkTimeout;
+            $networkTimeout = (int) $networkTimeout;
         }
 
         if (!$host) {
@@ -890,7 +890,7 @@ class Ldap
                         break;
                     case 'sizelimit':
                     case 'timelimit':
-                        $$key = (int)$value;
+                        $$key = (int) $value;
                         break;
                 }
             }
@@ -1054,7 +1054,7 @@ class Ldap
         }
         $result = $this->search($filter, $basedn, $scope, $attributes, $sort, null, $sizelimit, $timelimit);
         $items  = $result->toArray();
-        if ((bool)$reverseSort === true) {
+        if ((bool) $reverseSort === true) {
             $items = array_reverse($items, false);
         }
 
@@ -1383,7 +1383,7 @@ class Ldap
      */
     public function rename($from, $to, $recursively = false, $alwaysEmulate = false)
     {
-        $emulate = (bool)$alwaysEmulate;
+        $emulate = (bool) $alwaysEmulate;
         if (!function_exists('ldap_rename')) {
             $emulate = true;
         } elseif ($recursively) {

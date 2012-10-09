@@ -12,7 +12,6 @@ namespace Zend\Log\Formatter;
 
 use DateTime;
 use Traversable;
-use Zend\Log\Exception;
 
 /**
  * @category   Zend

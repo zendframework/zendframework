@@ -12,7 +12,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateTimeLocal as DateTimeLocalElement;
-use Zend\Form\Factory;
 
 class DateTimeLocalTest extends TestCase
 {

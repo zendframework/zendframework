@@ -21,7 +21,6 @@
 
 namespace Zend\Form\Annotation;
 
-use Zend\Form\Exception\UnexpectedValueException;
 
 /**
  * Object annotation

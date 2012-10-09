@@ -13,7 +13,6 @@ namespace Zend\Mvc\View\Http;
 use Zend\EventManager\EventManagerInterface as Events;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
 use Zend\View\Model\ModelInterface as ViewModel;
 
 class InjectViewModelListener implements ListenerAggregateInterface

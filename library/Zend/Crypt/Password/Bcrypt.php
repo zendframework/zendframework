@@ -11,7 +11,6 @@
 namespace Zend\Crypt\Password;
 
 use Traversable;
-use Zend\Math\Exception as MathException;
 use Zend\Math\Rand;
 use Zend\Stdlib\ArrayUtils;
 
@@ -125,7 +124,7 @@ class Bcrypt implements PasswordInterface
     public function setCost($cost)
     {
         if (!empty($cost)) {
-            $cost = (int)$cost;
+            $cost = (int) $cost;
             if ($cost < 4 || $cost > 31) {
                 throw new Exception\InvalidArgumentException(
                     'The cost parameter of bcrypt must be in range 04-31'

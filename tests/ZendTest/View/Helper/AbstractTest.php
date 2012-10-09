@@ -11,7 +11,6 @@
 namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\View\Helper\AbstractHelper;
 use ZendTest\View\Helper\TestAsset\ConcreteHelper;
 
 /**

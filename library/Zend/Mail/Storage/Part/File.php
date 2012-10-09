@@ -12,7 +12,6 @@ namespace Zend\Mail\Storage\Part;
 
 use Zend\Mail\Headers;
 use Zend\Mail\Storage\Part;
-use Zend\Mime;
 
 /**
  * @category   Zend

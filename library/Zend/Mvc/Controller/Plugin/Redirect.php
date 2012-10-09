@@ -14,7 +14,6 @@ use Zend\Http\Response;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteStackInterface;
 
 /**
  * @todo       allow specifying status code as a default, or as an option to methods

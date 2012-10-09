@@ -12,7 +12,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Number as NumberElement;
-use Zend\Form\Factory;
 
 class NumberTest extends TestCase
 {

@@ -11,7 +11,6 @@
 namespace Zend\Session\SaveHandler;
 
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Session\Exception;
 
 /**
  * DB Table Gateway session save handler

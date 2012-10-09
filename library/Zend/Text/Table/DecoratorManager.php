@@ -11,7 +11,6 @@
 namespace Zend\Text\Table;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigInterface;
 
 /**
  * Plugin manager implementation for text table decorators

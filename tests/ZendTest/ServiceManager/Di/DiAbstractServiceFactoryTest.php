@@ -12,7 +12,6 @@ namespace ZendTest\ServiceManager\Di;
 
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Di\DiInstanceManagerProxy;
 
 class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {

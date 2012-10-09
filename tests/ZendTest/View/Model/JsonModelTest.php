@@ -10,11 +10,8 @@
 
 namespace ZendTest\View\Model;
 
-use ArrayObject;
-use stdClass;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\View\Model\JsonModel;
-use Zend\View\Variables as ViewVariables;
 use Zend\Json\Json;
 
 /**

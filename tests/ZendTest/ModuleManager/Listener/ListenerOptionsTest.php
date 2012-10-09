@@ -10,7 +10,6 @@
 
 namespace ZendTest\ModuleManager\Listener;
 
-use BadMethodCallException;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Config\Config;

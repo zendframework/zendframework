@@ -11,7 +11,6 @@
 namespace Zend\Feed\Reader;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigInterface;
 
 /**
  * Plugin manager implementation for feed reader extensions

@@ -70,7 +70,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
     {
         $expression = new Expression('','foo');
 
-        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Expression parameters must be a string or array.');
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Expression parameters must be a scalar or array.');
         $return = $expression->setParameters(null);
     }
 

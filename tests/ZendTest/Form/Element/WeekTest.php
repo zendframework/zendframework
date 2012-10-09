@@ -12,7 +12,6 @@ namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Week as WeekElement;
-use Zend\Form\Factory;
 
 class WeekTest extends TestCase
 {

@@ -10,7 +10,6 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Exception;
 use Zend\View\Helper\Escaper;
 
 /**

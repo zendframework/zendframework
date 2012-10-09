@@ -115,6 +115,17 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
     }
 
+    public function testProcessExpressionWorksWithExpressionContainingExpressionObject()
+    {
+        $expression = new Predicate\Operator(
+            'release_date',
+            '=',
+            new Expression('FROM_UNIXTIME(?)', 100000000)
+        );
+
+        $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
+        $this->assertEquals('"release_date" = FROM_UNIXTIME(\'100000000\')', $sqlAndParams->getSql());
+    }
 
     /**
      * @param \Zend\Db\Sql\ExpressionInterface $expression

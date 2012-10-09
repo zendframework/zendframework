@@ -62,6 +62,20 @@ abstract class AbstractSql
             foreach ($values as $vIndex => $value) {
                 if (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_IDENTIFIER) {
                     $values[$vIndex] = $platform->quoteIdentifierInFragment($value);
+                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_VALUE && $value instanceof Select) {
+                    // process sub-select
+                    if ($adapter) {
+                        $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $adapter, $parameterContainer) . ')';
+                    } else {
+                        $values[$vIndex] = '(' . $this->processSubSelect($value, $platform) . ')';
+                    }
+                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_VALUE && $value instanceof ExpressionInterface) {
+                    // recursive call to satisfy nested expressions
+                    $innerStatementContainer = $this->processExpression($value, $platform, $adapter, $namedParameterPrefix . $vIndex . 'subpart');
+                    $values[$vIndex] = $innerStatementContainer->getSql();
+                    if ($adapter) {
+                        $parameterContainer->merge($innerStatementContainer->getParameterContainer());
+                    }
                 } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_VALUE) {
 
                     // if prepareType is set, it means that this particular value must be
@@ -77,13 +91,6 @@ abstract class AbstractSql
                     $values[$vIndex] = $platform->quoteValue($value);
                 } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_LITERAL) {
                     $values[$vIndex] = $value;
-                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_SELECT) {
-                    // process sub-select
-                    if ($adapter) {
-                        $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $adapter, $statementContainer->getParameterContainer()) . ')';
-                    } else {
-                        $values[$vIndex] = '(' . $this->processSubSelect($value, $platform) . ')';
-                    }
                 }
             }
 

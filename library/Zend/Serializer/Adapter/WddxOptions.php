@@ -10,7 +10,6 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception;
 
 /**
  * @category   Zend

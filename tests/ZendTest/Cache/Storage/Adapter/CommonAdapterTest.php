@@ -19,7 +19,8 @@ use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\TaggableInterface;
-use Zend\Http\Header\Expires;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -1032,5 +1033,35 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasItem('key1'));
         $this->assertFalse($this->_storage->hasItem('key2'));
         $this->assertFalse($this->_storage->hasItem('key3'));
+    }
+
+    public function testGetTotalSpace()
+    {
+        if (!($this->_storage instanceof TotalSpaceCapableInterface)) {
+            $this->markTestSkipped("Storage doesn't implement TotalSpaceCapableInterface");
+        }
+
+        $totalSpace = $this->_storage->getTotalSpace();
+        $this->assertGreaterThanOrEqual(0, $totalSpace);
+
+        if ($this->_storage instanceof AvailableSpaceCapableInterface) {
+            $availableSpace = $this->_storage->getAvailableSpace();
+            $this->assertGreaterThanOrEqual($availableSpace, $totalSpace);
+        }
+    }
+
+    public function testGetAvailableSpace()
+    {
+        if (!($this->_storage instanceof AvailableSpaceCapableInterface)) {
+            $this->markTestSkipped("Storage doesn't implement AvailableSpaceCapableInterface");
+        }
+
+        $availableSpace = $this->_storage->getAvailableSpace();
+        $this->assertGreaterThanOrEqual(0, $availableSpace);
+
+        if ($this->_storage instanceof TotalSpaceCapableInterface) {
+            $totalSpace = $this->_storage->getTotalSpace();
+            $this->assertLessThanOrEqual($totalSpace, $availableSpace);
+        }
     }
 }

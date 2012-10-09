@@ -111,7 +111,7 @@ if (isset($_GET['progress_key'])) {
                 if (httpRequest.overrideMimeType) {
                     httpRequest.overrideMimeType('text/xml');
                 }
-            } elseif (window.ActiveXObject) {
+            } else if (window.ActiveXObject) {
                 try {
                     httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
                 } catch (e) {

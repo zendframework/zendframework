@@ -10,6 +10,8 @@
 
 use Zend\File\Transfer\Adapter\Http;
 use Zend\Form\Form;
+use Zend\Form\Element;
+use Zend\Form\View\Helper;
 use Zend\Loader\StandardAutoloader;
 use Zend\ProgressBar\Adapter\JsPull;
 
@@ -184,21 +186,36 @@ if (isset($_GET['progress_key'])) {
 </head>
 <body>
 <?php
-$form = new Form(
-    array(
-        'enctype'  => 'multipart/form-data',
-        'action'   => 'ZendForm.php',
-        'target'   => 'uploadTarget',
-        'onsubmit' => 'observeProgress();',
-        'elements' => array(
-            'file'   => array('file', array('label' => 'File')),
-            'submit' => array('submit', array('label' => 'Upload!'))
-        )
-  )
-);
+$file  = new Element\File('file');
+$file->setLabel('File');
+
+$progress_key  = new Element\Hidden('progress_key');
+$progress_key->setAttribute('id', 'progress_key');
+$progress_key->setValue(md5(uniqid(rand())));
+
+$submit  = new Element\Submit('submit');
+$submit->setValue('Upload!');
+
+$form = new Form("ZendForm");
+$form->setAttributes(array(
+    'enctype'  => 'multipart/form-data',
+    'action'   => 'ZendForm.php',
+    'target'   => 'uploadTarget',
+    'onsubmit' => 'observeProgress();'
+));
+
 $form->prepare();
 
-echo $form;
+$formhelper   = new Helper\Form();
+$formfile     = new Helper\FormFile();
+$formhidden   = new Helper\FormHidden();
+$formsubmit   = new Helper\FormSubmit();
+
+echo $formhelper->openTag($form);
+echo $formhidden($progress_key);
+echo $formfile($file);
+echo $formsubmit($submit);
+echo $formhelper->closeTag();
 ?>
 <iframe name="uploadTarget"></iframe>
 

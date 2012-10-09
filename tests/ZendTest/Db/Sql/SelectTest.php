@@ -470,6 +470,20 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @autor robertbasic
+     * @group issue2599
+     * @testdox unit test: Not prefixing columns with table will create a valid query
+     */
+    public function testNotPrefixingColumnsWithTableNameCreatesValidQuery()
+    {
+        $select = new Select;
+        $select->from('foo')
+                ->columns(array('bar'), false);
+
+        $this->assertEquals('SELECT "bar" AS "bar" FROM "foo"', $select->getSqlString());
+    }
+
     public function providerData()
     {
         // basic table

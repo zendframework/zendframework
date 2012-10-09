@@ -44,7 +44,7 @@ class FilterPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the writer loaded is an instance of Filter\FilterInterface.
+     * Checks that the filter loaded is an instance of Filter\FilterInterface.
      *
      * @param  mixed $plugin
      * @return void

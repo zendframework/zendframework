@@ -76,7 +76,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         }
 
         $params = array();
-        foreach ((array)$flags as $flag) {
+        foreach ((array) $flags as $flag) {
             if (isset(self::$searchFlags[$flag])) {
                 $params[] = self::$searchFlags[$flag];
             } else {

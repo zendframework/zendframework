@@ -148,11 +148,13 @@ class FingersCrossed extends AbstractWriter
      * Stub in accordance to parent method signature.
      * Fomatters must be set on the wrapped writer.
      *
-     * @param Formatter $formatter
+     * @param Zend\Log\Formatter\FormatterInterface $formatter
+     * @return void
+     * @throws Zend\Log\Exception\InvalidArgumentException
      */
     public function setFormatter(FormatterInterface $formatter)
     {
-        return $this->writer;
+        throw new InvalidArgumentException(get_class() . ' does not support formatting');
     }
 
     /**

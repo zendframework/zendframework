@@ -371,10 +371,10 @@ CODE;
         $classGenerator = new ClassGenerator();
         $classGenerator->setName('My\Class');
         $classGenerator->addUseClass('My\First\Use\Class');
-        $classGenerator->addUseClass('My\Second\Use\Class');
+        $classGenerator->addUseClass('My\Second\Use\Class', 'MyAlias');
         $generated = $classGenerator->generate();
 
         $this->assertContains('use My\First\Use\Class;', $generated);
-        $this->assertContains('use My\Second\Use\Class;', $generated);
+        $this->assertContains('use My\Second\Use\Class as MyAlias;', $generated);
     }
 }

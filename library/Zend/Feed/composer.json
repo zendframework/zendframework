@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Feed": ""
+            "Zend\\Feed\\": ""
         }
     },
     "target-dir": "Zend/Feed",

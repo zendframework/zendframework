@@ -146,6 +146,13 @@ class ViewManager extends BaseViewManager
 
         $this->routeNotFoundStrategy = new RouteNotFoundStrategy();
 
+        $displayNotFoundReason = true;
+
+        if (array_key_exists('display_not_found_reason', $this->config)) {
+            $displayNotFoundReason = $this->config['display_not_found_reason'];
+        }
+        $this->routeNotFoundStrategy->setDisplayNotFoundReason($displayNotFoundReason);
+
         $this->services->setService('RouteNotFoundStrategy', $this->routeNotFoundStrategy);
         $this->services->setAlias('Zend\Mvc\View\RouteNotFoundStrategy', 'RouteNotFoundStrategy');
         $this->services->setAlias('Zend\Mvc\View\Console\RouteNotFoundStrategy', 'RouteNotFoundStrategy');

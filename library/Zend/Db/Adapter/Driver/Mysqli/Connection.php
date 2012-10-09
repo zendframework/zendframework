@@ -138,7 +138,7 @@ class Connection implements ConnectionInterface
      * Connect
      *
      * @throws Exception\RuntimeException
-     * @return null
+     * @return void
      */
     public function connect()
     {
@@ -156,7 +156,7 @@ class Connection implements ConnectionInterface
                     return $p[$name];
                 }
             }
-            return null;
+            return;
         };
 
         $hostname = $findParameterValue(array('hostname', 'host'));
@@ -185,7 +185,7 @@ class Connection implements ConnectionInterface
     /**
      * Is connected
      *
-     * @return boolean
+     * @return bool
      */
     public function isConnected()
     {
@@ -194,6 +194,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Disconnect
+     *
+     * @return void
      */
     public function disconnect()
     {
@@ -205,6 +207,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Begin transaction
+     *
+     * @return void
      */
     public function beginTransaction()
     {
@@ -218,6 +222,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Commit
+     *
+     * @return void
      */
     public function commit()
     {

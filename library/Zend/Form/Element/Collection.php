@@ -157,6 +157,8 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         }
 
         $this->object = $object;
+        $this->count  = count($object);
+
         return $this;
     }
 

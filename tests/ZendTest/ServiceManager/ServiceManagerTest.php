@@ -141,7 +141,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->addInitializer(5);
     }
 
-
     /**
      * @covers Zend\ServiceManager\ServiceManager::setService
      */
@@ -158,6 +157,16 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->serviceManager->setInvokableClass('foo', 'bar');
         $ret = $this->serviceManager->setShared('foo', true);
+        $this->assertSame($this->serviceManager, $ret);
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setShared
+     */
+    public function testSetSharedAbstractFactory()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $ret = $this->serviceManager->setShared('foo', false);
         $this->assertSame($this->serviceManager, $ret);
     }
 
@@ -196,7 +205,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->assertEquals('bar', $this->serviceManager->get('foo'));
     }
-
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
@@ -285,6 +293,17 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateWithMultipleAbstractFactories()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\BarAbstractFactory');
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
     }
 
     public function testCreateWithInitializerObject()
@@ -525,6 +544,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     public function duplicateService()
     {
         $self = $this;
+
         return array(
             array(
                 'setFactory',

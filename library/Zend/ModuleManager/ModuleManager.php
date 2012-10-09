@@ -70,6 +70,11 @@ class ModuleManager implements ModuleManagerInterface
         }
     }
 
+    /**
+     * Handle the loadModules event
+     *
+     * @return void
+     */
     public function onLoadModules()
     {
         if (true === $this->modulesAreLoaded) {
@@ -86,7 +91,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load the provided modules.
      *
-     * @triggers loadModules.pre
+     * @triggers loadModules
      * @triggers loadModules.post
      * @return   ModuleManager
      */

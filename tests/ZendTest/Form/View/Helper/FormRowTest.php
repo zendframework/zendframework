@@ -273,4 +273,50 @@ class FormRowTest extends TestCase
         $this->assertNotContains('<span', $markup);
         $this->assertNotContains('</span>', $markup);
     }
+
+    public function testShowErrorInMultiCheckbox()
+    {
+        $element = new Element\MultiCheckbox('hobby');
+        $element->setLabel("Hobby");
+        $element->setValueOptions(array(
+            '0'=>'working',
+            '1'=>'coding'
+        ));
+        $element->setMessages(array(
+            'Error message'
+        ));
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<ul><li>Error message</li></ul>', $markup);
+    }
+
+    public function testShowErrorInRadio()
+    {
+        $element = new Element\Radio('direction');
+        $element->setLabel("Direction");
+        $element->setValueOptions(array(
+            '0'=>'programming',
+            '1'=>'design'
+        ));
+        $element->setMessages(array(
+            'Error message'
+        ));
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<ul><li>Error message</li></ul>', $markup);
+    }
+
+    public function testErrorShowTwice()
+    {
+        $element = new  Element\Date('birth');
+        $element->setFormat('Y-m-d');
+        $element->setValue('2010-13-13');
+
+        $validator = new \Zend\Validator\Date();
+        $validator->isValid($element->getValue());
+        $element->setMessages($validator->getMessages());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertEquals(2,  count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
+    }
 }

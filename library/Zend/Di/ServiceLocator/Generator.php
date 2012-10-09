@@ -31,6 +31,9 @@ class Generator
     /** @var DependencyInjectorProxy */
     protected $injector;
 
+    /**
+     * @var null|string
+     */
     protected $namespace;
 
     /**

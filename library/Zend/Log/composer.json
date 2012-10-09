@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Log": ""
+            "Zend\\Log\\": ""
         }
     },
     "target-dir": "Zend/Log",

@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\View": ""
+            "Zend\\View\\": ""
         }
     },
     "target-dir": "Zend/View",

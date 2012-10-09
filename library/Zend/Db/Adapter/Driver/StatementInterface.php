@@ -22,24 +22,29 @@ interface StatementInterface extends StatementContainerInterface
 {
 
     /**
+     * Get resource
+     *
      * @return resource
      */
     public function getResource();
 
     /**
-     * @abstract
+     * Prepare sql
+     *
      * @param string $sql
      */
     public function prepare($sql = null);
 
     /**
-     * @abstract
+     * Check if is prepared
+     *
      * @return bool
      */
     public function isPrepared();
 
     /**
-     * @abstract
+     * Execute
+     *
      * @param null $parameters
      * @return ResultInterface
      */

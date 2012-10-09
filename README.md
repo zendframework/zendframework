@@ -1,6 +1,7 @@
 ### Welcome to the *Zend Framework 2.0* Release!
 
 Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
+Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=develop)](http://travis-ci.org/zendframework/zf2)
 
 ## RELEASE INFORMATION
 
@@ -12,7 +13,7 @@ XX YYY 2012
 
 ### UPDATES IN 2.0.3
 
-Please see [CHANGELOG.md](CHANGELOG.md).
+Please see CHANGELOG.md.
 
 ### SYSTEM REQUIREMENTS
 

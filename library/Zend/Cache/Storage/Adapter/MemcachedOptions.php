@@ -139,7 +139,7 @@ class MemcachedOptions extends AdapterOptions
         }
 
         $this->triggerOptionEvent('lib_options', $normalizedOptions);
-        $this->libOptions = array_merge($this->libOptions, $normalizedOptions);
+        $this->libOptions = array_diff_key($this->libOptions, $normalizedOptions) + $normalizedOptions;
 
         return $this;
     }

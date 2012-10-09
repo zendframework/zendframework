@@ -84,26 +84,20 @@ class JsonStrategy implements ListenerAggregateInterface
     {
         $model = $e->getModel();
 
-        if ($model instanceof Model\JsonModel) {
-            // JsonModel found
-            return $this->renderer;
-        }
-
         $request = $e->getRequest();
         if (!$request instanceof HttpRequest) {
             // Not an HTTP request; cannot autodetermine
-            return;
+            return ($model instanceof Model\JsonModel) ? $this->renderer : null;
         }
 
         $headers = $request->getHeaders();
         if (!$headers->has('accept')) {
-            return;
+            return ($model instanceof Model\JsonModel) ? $this->renderer : null;
         }
-
 
         $accept  = $headers->get('Accept');
         if (($match = $accept->match('application/json, application/javascript')) == false) {
-            return;
+            return ($model instanceof Model\JsonModel) ? $this->renderer : null;
         }
 
         if ($match->getTypeString() == 'application/json') {
@@ -118,6 +112,8 @@ class JsonStrategy implements ListenerAggregateInterface
             }
             return $this->renderer;
         }
+
+        return ($model instanceof Model\JsonModel) ? $this->renderer : null;
     }
 
     /**

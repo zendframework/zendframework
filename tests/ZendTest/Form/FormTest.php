@@ -19,6 +19,7 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\Stdlib\Hydrator;
+use ZendTest\Form\TestAsset\Entity;
 
 class FormTest extends TestCase
 {
@@ -1160,5 +1161,42 @@ class FormTest extends TestCase
         $this->form->prepare();
 
         $this->assertEquals('', $this->form->get('password')->getValue());
+    }
+
+    public function testCorrectlyHydrateBaseFieldsetWhenHydratorThatDoesNotIgnoreInvalidDataIsUsed()
+    {
+        $fieldset = new Fieldset('example');
+        $fieldset->add(array(
+            'name' => 'foo'
+        ));
+
+        // Add an hydrator that ignores if values does not exist in the
+        $fieldset->setObject(new Entity\SimplePublicProperty());
+        $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+
+        $this->form->add($fieldset);
+        $this->form->setBaseFieldset($fieldset);
+        $this->form->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+
+        // Add some inputs that do not belong to the base fieldset
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Submit',
+            'name' => 'submit'
+        ));
+
+        $object = new Entity\SimplePublicProperty();
+        $this->form->bind($object);
+
+        $this->form->setData(array(
+            'submit' => 'Confirm',
+            'example' => array(
+                'foo' => 'value example'
+            )
+        ));
+
+        $this->assertTrue($this->form->isValid());
+
+        // Make sure the object was not hydrated at the "form level"
+        $this->assertFalse(isset($object->submit));
     }
 }

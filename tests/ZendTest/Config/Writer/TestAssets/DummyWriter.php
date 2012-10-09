@@ -20,4 +20,3 @@ class DummyWriter extends AbstractWriter
         return serialize($config);
     }
 }
-

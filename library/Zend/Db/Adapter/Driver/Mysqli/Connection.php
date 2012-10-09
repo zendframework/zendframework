@@ -117,7 +117,7 @@ class Connection implements ConnectionInterface
      * @param  mysqli $resource
      * @return Connection
      */
-    public function setResource(mysqli $resource)
+    public function setResource(\mysqli $resource)
     {
         $this->resource = $resource;
         return $this;
@@ -166,7 +166,7 @@ class Connection implements ConnectionInterface
         $port     = (isset($p['port'])) ? (int) $p['port'] : null;
         $socket   = (isset($p['socket'])) ? $p['socket'] : null;
 
-        $this->resource = new \Mysqli($hostname, $username, $password, $database, $port, $socket);
+        $this->resource = new \mysqli($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
             throw new Exception\RuntimeException(
@@ -189,7 +189,7 @@ class Connection implements ConnectionInterface
      */
     public function isConnected()
     {
-        return ($this->resource instanceof \Mysqli);
+        return ($this->resource instanceof \mysqli);
     }
 
     /**
@@ -199,7 +199,7 @@ class Connection implements ConnectionInterface
      */
     public function disconnect()
     {
-        if ($this->resource instanceof \PDO) {
+        if ($this->resource instanceof \mysqli) {
             $this->resource->close();
         }
         unset($this->resource);

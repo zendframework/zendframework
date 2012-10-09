@@ -21,18 +21,14 @@ use Zend\Validator\Exception;
  * @category   Zend
  * @package    Zend_Validate
  */
-class DateStep extends AbstractValidator
+class DateStep extends Date
 {
-    const INVALID      = 'dateStepInvalid';
-    const INVALID_DATE = 'dateStepInvalidDate';
     const NOT_STEP     = 'dateStepNotStep';
 
     /**
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
-        self::INVALID_DATE => "The input does not appear to be a valid date",
         self::NOT_STEP     => "The input is not a valid step"
     );
 
@@ -156,28 +152,6 @@ class DateStep extends AbstractValidator
     }
 
     /**
-     * Returns the format option
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    /**
-     * Sets the format option
-     *
-     * @param  string $format
-     * @return DateStep
-     */
-    public function setFormat($format)
-    {
-        $this->format = $format;
-        return $this;
-    }
-
-    /**
      * Returns the timezone option
      *
      * @return DateTimeZone
@@ -245,7 +219,6 @@ class DateStep extends AbstractValidator
             && !is_int($value)
             && !($value instanceof DateTime)
         ) {
-            $this->error(self::INVALID);
             return false;
         }
 
@@ -258,7 +231,6 @@ class DateStep extends AbstractValidator
         try {
             $valueDate = $this->convertToDateTime($value);
         } catch (Exception\InvalidArgumentException $ex) {
-            $this->error(self::INVALID_DATE);
             return false;
         }
 

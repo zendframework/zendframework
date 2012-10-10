@@ -65,6 +65,11 @@ class Input implements InputInterface
      */
     protected $value;
 
+    /**
+     * @var mixed
+     */
+    protected $fallbackValue;
+
     public function __construct($name = null)
     {
         $this->name = $name;
@@ -152,6 +157,16 @@ class Input implements InputInterface
     }
 
     /**
+     * @param  mixed $value
+     * @return Input
+     */
+    public function setFallbackValue($value)
+    {
+        $this->fallbackValue = $value;
+        return $this;
+    }
+
+    /**
      * @return boolean
      */
     public function allowEmpty()
@@ -231,6 +246,14 @@ class Input implements InputInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getFallbackValue()
+    {
+        return $this->fallbackValue;
+    }
+
+    /**
      * @param  InputInterface $input
      * @return Input
      */
@@ -260,7 +283,13 @@ class Input implements InputInterface
         $this->injectNotEmptyValidator();
         $validator = $this->getValidatorChain();
         $value     = $this->getValue();
-        return $validator->isValid($value, $context);
+        $result    = $validator->isValid($value, $context);
+        if (!$result && $fallbackValue = $this->getFallbackValue()) {
+            $this->setValue($fallbackValue);
+            $result = true;
+        }
+
+        return $result;
     }
 
     /**
@@ -270,6 +299,10 @@ class Input implements InputInterface
     {
         if (null !== $this->errorMessage) {
             return (array) $this->errorMessage;
+        }
+
+        if ($this->getFallbackValue()) {
+            return array();
         }
 
         $validator = $this->getValidatorChain();

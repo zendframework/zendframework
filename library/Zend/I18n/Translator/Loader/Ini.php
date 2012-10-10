@@ -72,13 +72,11 @@ class Ini implements FileLoaderInterface
 
         $textDomain = new TextDomain($messages);
 
-        if (array_key_exists('plural', $messagesNamespaced)) {
-            if (isset($messagesNamespaced['plural']['plural_forms'])) {
-
-                $textDomain->setPluralRule(
-                    PluralRule::fromString($messagesNamespaced['plural']['plural_forms'])
-                );
-            }
+        if (array_key_exists('plural', $messagesNamespaced) &&
+                isset($messagesNamespaced['plural']['plural_forms'])) {
+            $textDomain->setPluralRule(
+                PluralRule::fromString($messagesNamespaced['plural']['plural_forms'])
+            );
         }
 
         return $textDomain;

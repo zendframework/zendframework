@@ -278,7 +278,7 @@ class DbTable implements AdapterInterface
         if (null !== $returnColumns) {
 
             $availableColumns = array_keys($this->resultRow);
-            foreach ((array)$returnColumns as $returnColumn) {
+            foreach ((array) $returnColumns as $returnColumn) {
                 if (in_array($returnColumn, $availableColumns)) {
                     $returnObject->{$returnColumn} = $this->resultRow[$returnColumn];
                 }
@@ -287,7 +287,7 @@ class DbTable implements AdapterInterface
 
         } elseif (null !== $omitColumns) {
 
-            $omitColumns = (array)$omitColumns;
+            $omitColumns = (array) $omitColumns;
             foreach ($this->resultRow as $resultColumn => $resultValue) {
                 if (!in_array($resultColumn, $omitColumns)) {
                     $returnObject->{$resultColumn} = $resultValue;

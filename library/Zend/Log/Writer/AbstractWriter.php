@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Writer;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Log\Filter;
 use Zend\Log\Formatter;
@@ -63,6 +64,50 @@ abstract class AbstractWriter implements WriterInterface
      * @var bool
      */
     protected $errorsToExceptionsConversionLevel = E_WARNING;
+    
+    /**
+     * Constructor
+     * 
+     * Set options for an writer. Accepted options are:
+     * - filters: array of filters to add to this filter
+     * - formatter: formatter for this writer
+     *
+     * @param  array|\Traversable $options
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($options = null)
+    {
+        if ($options instanceof Traversable) {
+            $options = iterator_to_array($options);
+        }
+        
+        if (is_array($options)) {
+            
+            if(isset($options['filters']) && is_array($options['filters'])) {
+                foreach($options['filters'] as $filter) {   
+                    if(!isset($filter['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the filter');
+                    }                   
+                    $filterOptions = (isset($filter['options'])) ? $filter['options'] : null;
+                    $this->addFilter($filter['name'], $filterOptions);
+                }
+            }
+            
+            if(isset($options['formatter'])) {
+                $formatter = $options['formatter'];               
+                if(is_string($formatter) || $formatter instanceof Formatter\FormatterInterface) {
+                    $this->setFormatter($formatter);
+                } elseif(is_array($formatter)) {
+                    if(!isset($formatter['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the formatter');
+                    }
+                    $formatterOptions = (isset($formatter['options'])) ? $formatter['options'] : null;
+                    $this->setFormatter($formatter['name'], $formatterOptions);
+                }
+            }
+        }
+    }
 
     /**
      * Add a filter specific to this writer.

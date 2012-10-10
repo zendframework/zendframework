@@ -277,7 +277,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testOptionsWithWriterOptions()
     {
         $options = array('writers' => array(
-                             'first_writer' => array(
+                              array(
                                  'name'     => 'stream',
                                  'options'  => array(
                                      'stream' => 'php://output',
@@ -290,7 +290,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writers = $logger->getWriters()->toArray();
         $this->assertCount(1, $writers);
         $this->assertInstanceOf('Zend\Log\Writer\Stream', $writers[0]);
-        $this->assertEquals('foo', $writers[0]->getLogSeparator());
-       
+        $this->assertEquals('foo', $writers[0]->getLogSeparator()); 
     }
 }

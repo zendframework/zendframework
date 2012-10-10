@@ -153,6 +153,12 @@ class SegmentTest extends TestCase
                 null,
                 array('foo' => 'foo bar')
             ),
+            'urlencode-flaws-corrected' => array(
+                new Segment('/:foo'),
+                "/!$&'()*,-.:;=@_~",
+                null,
+                array('foo' => "!$&'()*,-.:;=@_~")
+            ),
             'empty-matches-are-replaced-with-defaults' => array(
                 new Segment('/foo[/:bar]/baz-:baz', array(), array('bar' => 'bar')),
                 '/foo/baz-baz',

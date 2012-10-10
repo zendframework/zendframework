@@ -25,6 +25,38 @@ use Zend\Stdlib\RequestInterface as Request;
 class Segment implements RouteInterface
 {
     /**
+     * Map of allowed special chars in path segments.
+     *
+     * http://tools.ietf.org/html/rfc3986#appendix-A
+     * segement      = *pchar
+     * pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+     * unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+     * sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+     *               / "*" / "+" / "," / ";" / "="
+     *
+     * @var array
+     */
+    private static $urlencodeCorrectionMap = array(
+        '%21' => "!", // sub-delims
+        '%24' => "$", // sub-delims
+        '%26' => "&", // sub-delims
+        '%27' => "'", // sub-delims
+        '%28' => "(", // sub-delims
+        '%29' => ")", // sub-delims
+        '%2A' => "*", // sub-delims
+//      '%2B' => "+", // sub-delims - special value for php/urlencode
+        '%2C' => ",", // sub-delims
+//      '%2D' => "-", // unreserved - not touched by urlencode
+//      '%2E' => ".", // unreserved - not touched by urlencode
+        '%3A' => ":", // pchar
+        '%3B' => ";", // sub-delims
+        '%3D' => "=", // sub-delims
+        '%40' => "@", // pchar
+//      '%5F' => "_", // unreserved - not touched by urlencode
+        '%7E' => "~", // unreserved
+    );
+
+    /**
      * Parts of the route.
      *
      * @var array
@@ -264,7 +296,7 @@ class Segment implements RouteInterface
                         $skip = false;
                     }
 
-                    $path .= urlencode($mergedParams[$part[1]]);
+                    $path .= $this->encode($mergedParams[$part[1]]);
 
                     $this->assembledParams[] = $part[1];
                     break;
@@ -330,7 +362,7 @@ class Segment implements RouteInterface
 
         foreach ($this->paramMap as $index => $name) {
             if (isset($matches[$index]) && $matches[$index] !== '') {
-                $params[$name] = urldecode($matches[$index]);
+                $params[$name] = $this->decode($matches[$index]);
             }
         }
 
@@ -366,5 +398,29 @@ class Segment implements RouteInterface
     public function getAssembledParams()
     {
         return $this->assembledParams;
+    }
+
+    /**
+     * Encode a path segment.
+     *
+     * @param string $value
+     * @return string
+     */
+    private function encode($value)
+    {
+        $encoded = urlencode($value);
+        $encoded = strtr($encoded, self::$urlencodeCorrectionMap);
+        return $encoded;
+    }
+
+    /**
+     * Decode a path segment.
+     *
+     * @param string $value
+     * @return string
+     */
+    private function decode($value)
+    {
+        return urldecode($value);
     }
 }

@@ -35,13 +35,13 @@ Online documentation can be found at http://framework.zend.com/manual.
 Questions that are not addressed in the manual should be directed to the
 appropriate mailing list:
 
-http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists
+http://framework.zend.com/archives/subscribe/
 
 If you find code in this release behaving in an unexpected manner or
-contrary to its documented behavior, please create an issue in the Zend
-Framework issue tracker at:
+contrary to its documented behavior, please create an issue in our GitHub
+issue tracker:
 
-http://framework.zend.com/issues/browse/ZF2
+https://github.com/zendframework/zf2/issues
 
 If you would like to be notified of new releases, you can subscribe to
 the fw-announce mailing list by sending a blank message to

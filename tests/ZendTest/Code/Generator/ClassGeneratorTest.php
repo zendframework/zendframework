@@ -366,12 +366,12 @@ CODE;
     /**
      * @group ZF2-151
      */
-    public function testAddUseClass()
+    public function testAddUses()
     {
         $classGenerator = new ClassGenerator();
         $classGenerator->setName('My\Class');
-        $classGenerator->addUseClass('My\First\Use\Class');
-        $classGenerator->addUseClass('My\Second\Use\Class', 'MyAlias');
+        $classGenerator->addUse('My\First\Use\Class');
+        $classGenerator->addUse('My\Second\Use\Class', 'MyAlias');
         $generated = $classGenerator->generate();
 
         $this->assertContains('use My\First\Use\Class;', $generated);

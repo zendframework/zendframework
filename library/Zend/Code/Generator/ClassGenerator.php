@@ -70,7 +70,7 @@ class ClassGenerator extends AbstractGenerator
     /**
      * @var array Array of string names
      */
-    protected $useClasses = array();
+    protected $uses = array();
 
     /**
      * fromReflection() - build a Code Generation Php Object from a Class Reflection
@@ -489,12 +489,12 @@ class ClassGenerator extends AbstractGenerator
      *
      * @param string $useClass
      */
-    public function addUseClass($useClass, $useClassAlias = null)
+    public function addUse($use, $useAlias = null)
     {
-        if (!empty($useClassAlias)) {
-            $useClass .= ' as ' . $useClassAlias;
+        if (!empty($useAlias)) {
+            $use .= ' as ' . $useAlias;
         }
-        $this->useClasses[] = $useClass;
+        $this->uses[] = $use;
     }
 
     /**
@@ -528,9 +528,9 @@ class ClassGenerator extends AbstractGenerator
      *
      * @return array
      */
-    public function getUseClasses()
+    public function getUses()
     {
-        return $this->useClasses;
+        return $this->uses;
     }
 
     /**
@@ -692,10 +692,10 @@ class ClassGenerator extends AbstractGenerator
             $output .= 'namespace ' . $namespace . ';' . self::LINE_FEED . self::LINE_FEED;
         }
 
-        $useClasses = $this->getUseClasses();
-        if (!empty($useClasses)) {
-            foreach ($useClasses as $useClass) {
-                $output .= 'use ' . $useClass . ';' . self::LINE_FEED;
+        $uses = $this->getUses();
+        if (!empty($uses)) {
+            foreach ($uses as $use) {
+                $output .= 'use ' . $use . ';' . self::LINE_FEED;
             }
             $output .= self::LINE_FEED;
         }

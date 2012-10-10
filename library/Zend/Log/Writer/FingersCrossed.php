@@ -9,6 +9,8 @@
  */
 namespace Zend\Log\Writer;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Log\Filter\Priority as PriorityFilter;
 use Zend\Log\Filter\FilterInterface;
 use Zend\Log\Formatter\FormatterInterface;
@@ -16,6 +18,7 @@ use Zend\Log\Exception;
 use Zend\Log\Logger;
 use Zend\Log\Writer\WriterInterface;
 use Zend\Log\Writer\AbstractWriter;
+use Zend\Log\WriterPluginManager;
 
 /**
  * Buffers all events until the strategy determines to flush them.
@@ -34,6 +37,13 @@ class FingersCrossed extends AbstractWriter
      * @var WriterInterface
      */
     protected $writer;
+    
+    /**
+     * Writer plugins
+     *
+     * @var WriterPluginManager
+     */
+    protected $writerPlugins;
 
     /**
      * Flag if buffering is enabled
@@ -60,13 +70,23 @@ class FingersCrossed extends AbstractWriter
     /**
      * Constructor
      *
-     * @param WriterInterface $writer Wrapped writer
+     * @param WriterInterface|string|array|Traversable $writer Wrapped writer or array of configuration options
      * @param FilterInterface|int $filterOrPriority Filter or log priority which determines buffering of events
      * @param int $bufferSize Maximum buffer size
      */
-    public function __construct(WriterInterface $writer, $filterOrPriority = null, $bufferSize = 0)
+    public function __construct($writer, $filterOrPriority = null, $bufferSize = 0)
     {
         $this->writer = $writer;
+        
+        if ($writer instanceof Traversable) {
+            $writer = ArrayUtils::iteratorToArray($writer);
+        }
+        
+        if (is_array($writer)) {
+            $filterOrPriority = isset($writer['priority']) ? $writer['priority'] : null;
+            $bufferSize       = isset($writer['bufferSize']) ? $writer['bufferSize'] : null;
+            $writer           = isset($writer['writer']) ? $writer['writer'] : null;
+        }
 
         if (null === $filterOrPriority) {
             $filterOrPriority = new PriorityFilter(Logger::WARN);
@@ -74,8 +94,88 @@ class FingersCrossed extends AbstractWriter
             $filterOrPriority = new PriorityFilter($filterOrPriority);
         }
 
+        if (is_array($writer) && isset($writer['name'])) {
+            $this->setWriter($writer['name'], $writer['options']);
+        }
+        else {
+            $this->setWriter($writer);
+        }
         $this->addFilter($filterOrPriority);
         $this->bufferSize = $bufferSize;
+    }
+    
+    /**
+     * Set a new formatter for this writer
+     *
+     * @param  string|Formatter\FormatterInterface $formatter
+     * @return self
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setWriter($writer, array $options = null)
+    {
+        if (is_string($writer)) {
+            $writer = $this->writerPlugin($writer, $options);
+        }
+    
+        if (!$writer instanceof WriterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
+                    __NAMESPACE__,
+                    is_object($writer) ? get_class($writer) : gettype($writer)
+            ));
+        }
+    
+        $this->writer = $writer;
+        return $this;
+    }
+    
+    /**
+     * Get writer plugin manager
+     *
+     * @return WriterPluginManager
+     */
+    public function getWriterPluginManager()
+    {
+        if (null === $this->writerPlugins) {
+            $this->setWriterPluginManager(new WriterPluginManager());
+        }
+        return $this->writerPlugins;
+    }
+    
+    /**
+     * Set writer plugin manager
+     *
+     * @param  string|WriterPluginManager $plugins
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setWriterPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof WriterPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Writer plugin manager must extend %s\WriterPluginManager; received %s',
+                    __NAMESPACE__,
+                    is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+    
+        $this->writerPlugins = $plugins;
+        return $this;
+    }
+    
+    /**
+     * Get writer instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Writer\WriterInterface
+     */
+    public function writerPlugin($name, array $options = null)
+    {
+        return $this->getWriterPluginManager()->get($name, $options);
     }
 
     /**

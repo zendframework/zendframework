@@ -54,4 +54,20 @@ class FingersCrossedTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(count($wrappedWriter->events), 3);
     }
+    
+    public function setWriterByName() {
+        $writer = new FingersCrossedWriter('mock');
+        $this->assertAttributeInstanceOf('Zend\Log\Writer\Mock', 'writer', $writer);   
+    }
+    
+    public function testConstructorOptions() {
+        $options = array('writer' => 'mock', 'priority' => 3);
+        $writer = new FingersCrossedWriter($options);
+        $this->assertAttributeInstanceOf('Zend\Log\Writer\Mock', 'writer', $writer);
+        
+        $filters = $this->readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertInstanceOf('Zend\Log\Filter\Priority', $filters[0]);
+        $this->assertAttributeEquals(3, 'priority', $filters[0]);
+    }
 }

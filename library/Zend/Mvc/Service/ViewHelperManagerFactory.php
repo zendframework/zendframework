@@ -76,7 +76,6 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
                         ->getRouteMatch();
 
             if ($match instanceof RouteMatch) {
-
                 $helper->setRouteMatch($match);
             }
 

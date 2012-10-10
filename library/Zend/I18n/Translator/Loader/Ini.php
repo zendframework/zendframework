@@ -58,9 +58,9 @@ class Ini implements FileLoaderInterface
             }
             if(isset($message['message']) && isset($message['translation'])) {
                 $messages[$message['message']] = $message['translation'];
-            } else {
-                $messages[array_shift($message)] = array_shift($message);
+                continue;
             }
+            $messages[array_shift($message)] = array_shift($message);
         }
 
         if (!is_array($messages)) {

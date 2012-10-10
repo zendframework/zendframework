@@ -261,33 +261,36 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         Logger::unregisterErrorHandler();
         $this->assertEquals($writer->events[0]['message'], 'Undefined variable: test');
     }
-    
-    
-    public function testAddProcessor() {
+
+
+    public function testAddProcessor()
+    {
         $processor = new Backtrace();
         $this->logger->addProcessor($processor);
-        
+
         $processors = $this->logger->getProcessors()->toArray();
         $this->assertEquals($processor, $processors[0]);
     }
-    
-    public function testAddProcessorByName() {
+
+    public function testAddProcessorByName()
+    {
         $this->logger->addProcessor('backtrace');
-    
+
         $processors = $this->logger->getProcessors()->toArray();
         $this->assertInstanceOf('Zend\Log\Processor\Backtrace', $processors[0]);
-        
+
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::ERR, 'foo');
     }
-    
-    public function testProcessorOutputAdded() {
+
+    public function testProcessorOutputAdded()
+    {
         $processor = new Backtrace();
         $this->logger->addProcessor($processor);
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
-        
+
         $this->logger->log(Logger::ERR, 'foo');
         $this->assertEquals(__FILE__, $writer->events[0]['extra']['file']);
     }

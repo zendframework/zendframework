@@ -15,7 +15,7 @@ namespace Zend\Validator\File;
  * Validator for the sha1 hash of given files
  *
  * @category  Zend
- * @package   Zend_Validate
+ * @package   Zend_Validator
  */
 class Sha1 extends Hash
 {

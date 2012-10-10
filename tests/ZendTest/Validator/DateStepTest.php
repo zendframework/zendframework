@@ -110,4 +110,15 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('messageTemplates', $validator);
         $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
+
+    public function testStepError()
+    {
+        $validator = new Validator\DateStep(array(
+            'format'       => 'Y-m-d',
+            'baseValue'    => '2012-01-23',
+            'step' => new DateInterval("P10D"),
+        ));
+
+        $this->assertFalse($validator->isValid('2012-13-13'));
+    }
 }

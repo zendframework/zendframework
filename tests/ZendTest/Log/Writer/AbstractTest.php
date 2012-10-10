@@ -39,7 +39,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('PHPUnit_Framework_Error');
         $this->_writer->setFormatter(new \StdClass());
     }
-    
+
     public function testSetSimpleFormatterByName()
     {
         $instance = $this->_writer->setFormatter('simple');
@@ -87,12 +87,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
         $writer->write(array('message' => 'test'));
     }
-    
+
     public function testConstructorWithOptions()
     {
         $options = array('filters' => array(
                              array(
-                                 'name' => 'mock', 
+                                 'name' => 'mock',
                              ),
                              array(
                                  'name' => 'priority',
@@ -105,14 +105,14 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
                              'name' => 'base',
                          ),
                     );
-        
+
         $writer = new ConcreteWriter($options);
-        
+
         $this->assertAttributeInstanceOf('Zend\Log\Formatter\Base', 'formatter', $writer);
-        
+
         $filters = $this->readAttribute($writer, 'filters');
         $this->assertCount(2, $filters);
-        
+
         $this->assertInstanceOf('Zend\Log\Filter\Priority', $filters[1]);
         $this->assertEquals(3, $this->readAttribute($filters[1], 'priority'));
     }

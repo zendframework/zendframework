@@ -27,7 +27,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be a string');
         new Simple(1);
     }
-    
+
     /**
      * @dataProvider provideDateTimeFormats
      */
@@ -35,7 +35,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     {
         $options = array('dateTimeFormat' => $dateTimeFormat, 'format' => '%timestamp%');
         $formatter = new Simple($options);
-        
+
         $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
         $this->assertAttributeEquals('%timestamp%', 'format', $formatter);
     }

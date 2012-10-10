@@ -63,7 +63,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
     }
-    
+
     /**
      * @dataProvider provideDateTimeFormats
      */
@@ -71,7 +71,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     {
         $options = array('dateTimeFormat' => $dateTimeFormat);
         $formatter = new BaseFormatter($options);
-    
+
         $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
     }
 

@@ -10,6 +10,8 @@
 
 namespace Zend\Log\Processor;
 
+use Zend\Console\Console;
+
 /**
  * @category   Zend
  * @package    Zend_Log
@@ -43,19 +45,8 @@ class RequestId implements ProcessorInterface
     protected function getIdentifier()
     {
         $requestTime = (version_compare(PHP_VERSION, '5.4.0') >= 0) ? $_SERVER['REQUEST_TIME_FLOAT'] : $_SERVER['REQUEST_TIME'];
-        $remoteAddr = $this->isCli() ? 'local' : $_SERVER['REMOTE_ADDR'];
+        $remoteAddr = Console::isConsole() ? 'local' : $_SERVER['REMOTE_ADDR'];
 
         return md5($requestTime . $remoteAddr);
     }
-
-    /**
-     * Check if PHP is run from command line
-     *
-     * @return boolean true if php is run from command line
-     */
-    protected function isCli()
-    {
-        return php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR']);
-    }
-
 }

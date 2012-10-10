@@ -536,7 +536,7 @@ class Imap
             $set = (int) $from . ':' . (int)$to;
         }
 
-        $items = (array)$items;
+        $items = (array) $items;
         $itemList = $this->escapeList($items);
 
         $tag = null;  // define $tag variable before first use

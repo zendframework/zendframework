@@ -399,7 +399,7 @@ class Curl implements HttpAdapter, StreamInterface
 
         // set additional curl options
         if (isset($this->config['curloptions'])) {
-            foreach ((array)$this->config['curloptions'] as $k => $v) {
+            foreach ((array) $this->config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->invalidOverwritableCurlOptions)) {
                     if (curl_setopt($this->curl, $k, $v) == false) {
                         throw new AdapterException\RuntimeException(sprintf("Unknown or erroreous cURL option '%s' set", $k));

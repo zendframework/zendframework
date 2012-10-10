@@ -215,12 +215,7 @@ class DateStep extends Date
      */
     public function isValid($value)
     {
-        if (!is_string($value)
-            && !is_int($value)
-            && !($value instanceof DateTime)
-        ) {
-            return false;
-        }
+        parent::isValid($value);
 
         $this->setValue($value);
 

@@ -10,7 +10,6 @@
 
 namespace Zend\Db\Adapter\Driver\Pgsql;
 
-use mysqli;
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
 
@@ -48,13 +47,13 @@ class Connection implements ConnectionInterface
     /**
      * Constructor
      *
-     * @param mysqli|array|null $connectionInfo
+     * @param resource|array|null $connectionInfo
      */
     public function __construct($connectionInfo = null)
     {
         if (is_array($connectionInfo)) {
             $this->setConnectionParameters($connectionInfo);
-        } elseif ($connectionInfo instanceof mysqli) {
+        } elseif (is_resource($connectionInfo)) {
             $this->setResource($connectionInfo);
         }
     }
@@ -224,7 +223,7 @@ class Connection implements ConnectionInterface
 
         //var_dump(pg_result_status($resultResource));
 
-        // if the returnValue is something other than a mysqli_result, bypass wrapping it
+        // if the returnValue is something other than a pg result resource, bypass wrapping it
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_errormessage());
         }

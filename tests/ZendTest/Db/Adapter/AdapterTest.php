@@ -64,6 +64,12 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
             unset($adapter);
         }
 
+        if (extension_loaded('pgsql')) {
+            $adapter = new Adapter(array('driver' => 'pgsql'), $this->mockPlatform);
+            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pgsql\Pgsql', $adapter->driver);
+            unset($adapter);
+        }
+
         if (extension_loaded('sqlsrv')) {
             $adapter = new Adapter(array('driver' => 'sqlsrv'), $this->mockPlatform);
             $this->assertInstanceOf('Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv', $adapter->driver);
@@ -93,6 +99,12 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('SqlServer'));
         $adapter = new Adapter($driver);
         $this->assertInstanceOf('Zend\Db\Adapter\Platform\SqlServer', $adapter->platform);
+        unset($adapter, $driver);
+
+        $driver = clone $this->mockDriver;
+        $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('Postgresql'));
+        $adapter = new Adapter($driver);
+        $this->assertInstanceOf('Zend\Db\Adapter\Platform\Postgresql', $adapter->platform);
         unset($adapter, $driver);
 
         $driver = clone $this->mockDriver;

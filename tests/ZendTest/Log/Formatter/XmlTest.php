@@ -179,22 +179,22 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($expected, $output);
     }
 
-//     /**
-//      * @group ZF2-453
-//      */
-//     public function testFormatWillRemoveExtraEmptyArrayFromEvent()
-//     {
-//         $formatter = new XmlFormatter;
-//         $d = new DateTime('2001-01-01T12:00:00-06:00');
-//         $event = array(
-//             'timestamp'    =>  $d,
-//             'message'      => 'test',
-//             'priority'     => 1,
-//             'priorityName' => 'CRIT',
-//             'extra' => array()
-//         );
-//         $expected = '<logEntry><timestamp>2001-01-01T12:00:00-06:00</timestamp><message>test</message><priority>1</priority><priorityName>CRIT</priorityName></logEntry>';
-//         $expected .= PHP_EOL . PHP_EOL;
-//         $this->assertEquals($expected, $formatter->format($event));
-//     }
+    /**
+     * @group ZF2-453
+     */
+    public function testFormatWillRemoveExtraEmptyArrayFromEvent()
+    {
+        $formatter = new XmlFormatter;
+        $d = new DateTime('2001-01-01T12:00:00-06:00');
+        $event = array(
+            'timestamp'    =>  $d,
+            'message'      => 'test',
+            'priority'     => 1,
+            'priorityName' => 'CRIT',
+            'extra' => array()
+        );
+        $expected = '<logEntry><timestamp>2001-01-01T12:00:00-06:00</timestamp><message>test</message><priority>1</priority><priorityName>CRIT</priorityName></logEntry>';
+        $expected .= PHP_EOL . PHP_EOL;
+        $this->assertEquals($expected, $formatter->format($event));
+    }
 }

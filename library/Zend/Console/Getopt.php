@@ -230,7 +230,7 @@ class Getopt
             $argv = array_slice($_SERVER['argv'], 1);
         }
         if (isset($argv)) {
-            $this->addArguments((array)$argv);
+            $this->addArguments((array) $argv);
         }
     }
 

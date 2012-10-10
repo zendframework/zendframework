@@ -39,11 +39,11 @@ class Base implements FormatterInterface
         if ($dateTimeFormat instanceof Traversable) {
             $dateTimeFormat = iterator_to_array($dateTimeFormat);
         }
-        
+
         if (is_array($dateTimeFormat)) {
             $dateTimeFormat = isset($dateTimeFormat['dateTimeFormat'])? $dateTimeFormat['dateTimeFormat'] : null;
         }
-        
+
         if (null !== $dateTimeFormat) {
             $this->dateTimeFormat = $dateTimeFormat;
         }

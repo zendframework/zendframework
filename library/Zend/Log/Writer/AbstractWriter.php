@@ -29,7 +29,7 @@ abstract class AbstractWriter implements WriterInterface
      * @var FilterPluginManager
      */
     protected $filterPlugins;
-    
+
     /**
      * Formatter plugins
      *
@@ -64,10 +64,10 @@ abstract class AbstractWriter implements WriterInterface
      * @var bool
      */
     protected $errorsToExceptionsConversionLevel = E_WARNING;
-    
+
     /**
      * Constructor
-     * 
+     *
      * Set options for an writer. Accepted options are:
      * - filters: array of filters to add to this filter
      * - formatter: formatter for this writer
@@ -81,21 +81,21 @@ abstract class AbstractWriter implements WriterInterface
         if ($options instanceof Traversable) {
             $options = iterator_to_array($options);
         }
-        
+
         if (is_array($options)) {
-            
+
             if(isset($options['filters']) && is_array($options['filters'])) {
-                foreach($options['filters'] as $filter) {   
+                foreach($options['filters'] as $filter) {
                     if(!isset($filter['name'])) {
                         throw new Exception\InvalidArgumentException('Options must contain a name for the filter');
-                    }                   
+                    }
                     $filterOptions = (isset($filter['options'])) ? $filter['options'] : null;
                     $this->addFilter($filter['name'], $filterOptions);
                 }
             }
-            
+
             if(isset($options['formatter'])) {
-                $formatter = $options['formatter'];               
+                $formatter = $options['formatter'];
                 if(is_string($formatter) || $formatter instanceof Formatter\FormatterInterface) {
                     $this->setFormatter($formatter);
                 } elseif(is_array($formatter)) {
@@ -187,7 +187,7 @@ abstract class AbstractWriter implements WriterInterface
     {
         return $this->getFilterPluginManager()->get($name, $options);
     }
-    
+
     /**
      * Get formatter plugin manager
      *
@@ -200,7 +200,7 @@ abstract class AbstractWriter implements WriterInterface
         }
         return $this->formatterPlugins;
     }
-    
+
     /**
      * Set formatter plugin manager
      *
@@ -220,12 +220,12 @@ abstract class AbstractWriter implements WriterInterface
                     is_object($plugins) ? get_class($plugins) : gettype($plugins)
             ));
         }
-    
+
         $this->formatterPlugins = $plugins;
         return $this;
     }
-    
-   
+
+
     /**
      * Get formatter instance
      *
@@ -296,12 +296,12 @@ abstract class AbstractWriter implements WriterInterface
             //throw new Exception\InvalidArgumentException(sprintf(
             //        'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
             //        __NAMESPACE__,
-            //        is_object($formatter) ? get_class($formatter) : gettype($formatter)   
+            //        is_object($formatter) ? get_class($formatter) : gettype($formatter)
             //));
             trigger_error(sprintf(
                     'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
                     __NAMESPACE__,
-                    is_object($formatter) ? get_class($formatter) : gettype($formatter)   
+                    is_object($formatter) ? get_class($formatter) : gettype($formatter)
             ));
         }
 

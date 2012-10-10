@@ -37,7 +37,7 @@ class FingersCrossed extends AbstractWriter
      * @var WriterInterface
      */
     protected $writer;
-    
+
     /**
      * Writer plugins
      *
@@ -77,11 +77,11 @@ class FingersCrossed extends AbstractWriter
     public function __construct($writer, $filterOrPriority = null, $bufferSize = 0)
     {
         $this->writer = $writer;
-        
+
         if ($writer instanceof Traversable) {
             $writer = ArrayUtils::iteratorToArray($writer);
         }
-        
+
         if (is_array($writer)) {
             $filterOrPriority = isset($writer['priority']) ? $writer['priority'] : null;
             $bufferSize       = isset($writer['bufferSize']) ? $writer['bufferSize'] : null;
@@ -96,14 +96,13 @@ class FingersCrossed extends AbstractWriter
 
         if (is_array($writer) && isset($writer['name'])) {
             $this->setWriter($writer['name'], $writer['options']);
-        }
-        else {
+        } else {
             $this->setWriter($writer);
         }
         $this->addFilter($filterOrPriority);
         $this->bufferSize = $bufferSize;
     }
-    
+
     /**
      * Set a new formatter for this writer
      *
@@ -116,7 +115,7 @@ class FingersCrossed extends AbstractWriter
         if (is_string($writer)) {
             $writer = $this->writerPlugin($writer, $options);
         }
-    
+
         if (!$writer instanceof WriterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                     'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
@@ -124,11 +123,11 @@ class FingersCrossed extends AbstractWriter
                     is_object($writer) ? get_class($writer) : gettype($writer)
             ));
         }
-    
+
         $this->writer = $writer;
         return $this;
     }
-    
+
     /**
      * Get writer plugin manager
      *
@@ -141,7 +140,7 @@ class FingersCrossed extends AbstractWriter
         }
         return $this->writerPlugins;
     }
-    
+
     /**
      * Set writer plugin manager
      *
@@ -161,11 +160,11 @@ class FingersCrossed extends AbstractWriter
                     is_object($plugins) ? get_class($plugins) : gettype($plugins)
             ));
         }
-    
+
         $this->writerPlugins = $plugins;
         return $this;
     }
-    
+
     /**
      * Get writer instance
      *

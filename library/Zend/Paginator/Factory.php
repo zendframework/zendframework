@@ -20,36 +20,72 @@ use Zend\Stdlib\ArrayUtils;
  */
 abstract class Factory
 {
+    /**
+     * Adapter plugin manager
+     * @var AdapterPluginManager
+     */
     protected static $adapters;
 
+    /**
+     * Create adapter from items if necessary, and return paginator
+     * @param Traversable/array $items
+     * @return Paginator
+     */
+    protected static function createAdapterFromItems($items)
+    {
+        if ($items instanceof Traversable) {
+            $items = ArrayUtils::iteratorToArray($items);
+        }
+        if (!is_array($items)) {
+            throw new Exception\InvalidArgumentException(
+                'The factory needs an associative array '
+                . 'or a Traversable object as an argument when '
+                . "it's used with one parameter"
+            );
+        }
+        if (!isset($items['adapter']) && !isset($items['items'])) {
+            throw new Exception\InvalidArgumentException(
+                'The factory needs an associative array '
+                . 'or a Traversable object with keys '
+                . '"adapter" and "items"'
+            );
+        }
+        $adapter = $items['adapter'];
+        $items = $items['items'];
+
+        $paginator = static::getAdapterFromManager($items, $adapter);
+        return $paginator;
+    }
+
+    /**
+     * Get adapter from manager if necessary, and return paginator
+     * @param mixed $items
+     * @param mixed $adapter
+     * @return Paginator
+     */
+    protected static function getAdapterFromManager($items, $adapter)
+    {
+        if ($adapter instanceof AdapterInterface || $adapter instanceof AdapterAggregateInterface) {
+            return new Paginator($adapter);
+        }
+        $adapter = static::getAdapterPluginManager()->get($adapter, $items);
+        return new Paginator($adapter);
+    }
+
+    /**
+     * Create paginator with items and adapter
+     * @param mixed $items
+     * @param mixed $adapter
+     * @return Paginator
+     */
     public static function factory($items, $adapter = null)
     {
         if (null === $adapter) {
-            if ($items instanceof Traversable) {
-                $items = ArrayUtils::iteratorToArray($items);
-            }
-            if (!is_array($items)) {
-                throw new Exception\InvalidArgumentException(
-                    'The factory needs an associative array '
-                    . 'or a Traversable object as an argument when '
-                    . "it's used with one parameter"
-                );
-            }
-            if (!isset($items['adapter']) && !isset($items['items'])) {
-                throw new Exception\InvalidArgumentException(
-                    'The factory needs an associative array '
-                    . 'or a Traversable object with keys '
-                    . '"adapter" and "items"'
-                );
-            }
-            $adapter = $items['adapter'];
-            $items = $items['items'];
+            $paginator = static::createAdapterFromItems($items);
+            return $paginator;
         }
-        if (!$adapter instanceof AdapterInterface && !$adapter instanceof AdapterAggregateInterface) {
-            $adapter = self::getAdapterPluginManager()->get($adapter, $items);
-        }
-
-        return new Paginator($adapter);
+        $paginator = static::getAdapterFromManager($items, $adapter);
+        return $paginator;
     }
 
     /**
@@ -60,7 +96,7 @@ abstract class Factory
      */
     public static function setAdapterPluginManager(AdapterPluginManager $adapters)
     {
-        self::$adapters = $adapters;
+        static::$adapters = $adapters;
     }
 
     /**
@@ -70,9 +106,9 @@ abstract class Factory
      */
     public static function getAdapterPluginManager()
     {
-        if (self::$adapters === null) {
-            self::$adapters = new AdapterPluginManager();
+        if (static::$adapters === null) {
+            static::$adapters = new AdapterPluginManager();
         }
-        return self::$adapters;
+        return static::$adapters;
     }
 }

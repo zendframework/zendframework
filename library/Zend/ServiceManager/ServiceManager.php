@@ -815,7 +815,7 @@ class ServiceManager implements ServiceLocatorInterface
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
+                $invokable
             ));
         }
         $instance = new $invokable;

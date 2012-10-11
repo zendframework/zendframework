@@ -38,7 +38,7 @@ class DocumentLiteralWrapperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @runInSeparateProcess
+     * @r1unInSeparateProcess
      */
     public function testDelegate()
     {

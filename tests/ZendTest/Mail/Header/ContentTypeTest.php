@@ -68,4 +68,11 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($params,array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
     }
 
+    public function testSetContentTypeExcel()
+    {
+        $header = new ContentType();
+        $header->setType('application/vnd.ms-excel');
+
+        $this->assertEquals('Content-Type: application/vnd.ms-excel', $header->toString());
+    }
 }

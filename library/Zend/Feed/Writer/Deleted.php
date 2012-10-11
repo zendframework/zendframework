@@ -228,7 +228,7 @@ class Deleted
     }
 
     /**
-     * @return stro,g
+     * @return string
      */
     public function getComment()
     {

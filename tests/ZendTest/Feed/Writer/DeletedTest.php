@@ -247,4 +247,17 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('atom', $entry->getType());
     }
 
+    public function testFluentInterface()
+    {
+        $entry = new Writer\Deleted;
+
+        $result = $entry->setType('type')
+                        ->setBy(array('name' => 'foo'))
+                        ->setComment('comment')
+                        ->setEncoding('utf-8')
+                        ->setReference('foo')
+                        ->setWhen(null);
+
+        $this->assertEquals($result, $entry);
+    }
 }

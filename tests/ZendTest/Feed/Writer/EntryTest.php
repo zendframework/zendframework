@@ -707,4 +707,32 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setSource($entry->createSource());
         $this->assertInstanceOf('Zend\Feed\Writer\Source', $entry->getSource());
     }
+
+    public function testFluentInterface()
+    {
+        $entry = new Writer\Entry;
+
+        $result = $entry->addAuthor(array('name' => 'foo'))
+                        ->addAuthors(array(array('name' => 'foo')))
+                        ->setEncoding('utf-8')
+                        ->setCopyright('copyright')
+                        ->setContent('content')
+                        ->setDateCreated(null)
+                        ->setDateModified(null)
+                        ->setDescription('description')
+                        ->setId('1')
+                        ->setLink('http://www.example.com')
+                        ->setCommentCount(1)
+                        ->setCommentLink('http://www.example.com')
+                        ->setCommentFeedLink(array('uri' => 'http://www.example.com', 'type' => 'rss'))
+                        ->setCommentFeedLinks(array(array('uri' => 'http://www.example.com', 'type' => 'rss')))
+                        ->setTitle('title')
+                        ->addCategory(array('term' => 'category'))
+                        ->addCategories(array(array('term' => 'category')))
+                        ->setEnclosure(array('uri' => 'http://www.example.com'))
+                        ->setType('type')
+                        ->setSource(new \Zend\Feed\Writer\Source());
+
+        $this->assertEquals($result, $entry);
+    }
 }

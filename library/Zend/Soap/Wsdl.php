@@ -76,10 +76,10 @@ class Wsdl
 
 
     const NS_WSDL           = 'http://schemas.xmlsoap.org/wsdl/';
-    const NS_XMLNS          = 'http://www.w3.org/2000/xmlns/';
     const NS_SOAP           = 'http://schemas.xmlsoap.org/wsdl/soap/';
-    const NS_SCHEMA         = 'http://www.w3.org/2001/XMLSchema';
-    const NS_S_ENC          = 'http://schemas.xmlsoap.org/soap/encoding/';
+	const NS_S_ENC          = 'http://schemas.xmlsoap.org/soap/encoding/';
+	const NS_XMLNS          = 'http://www.w3.org/2000/xmlns/';
+	const NS_SCHEMA         = 'http://www.w3.org/2001/XMLSchema';
     /**
      * Constructor
      *
@@ -113,6 +113,7 @@ class Wsdl
     {
         $dom = new \DOMDocument();
         $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
 
         $definitions = $dom->createElementNS(Wsdl::NS_WSDL,             'definitions');
 
@@ -152,7 +153,7 @@ class Wsdl
      * Set a new uri for this WSDL
      *
      * @param  string|Uri $uri
-     * @return \Zend\Server\Wsdl
+     * @return \Zend\Soap\Wsdl
      */
     public function setUri($uri)
     {
@@ -196,9 +197,11 @@ class Wsdl
      *
      * @param string $name Name for the {@link http://www.w3.org/TR/wsdl#_messages message}
      * @param array $parts An array of {@link http://www.w3.org/TR/wsdl#_message parts}
-     *                     The array is constructed like: 'name of part' => 'part xml schema data type'
-     *                     or 'name of part' => array('type' => 'part xml schema type')
-     *                     or 'name of part' => array('element' => 'part xml element name')
+     *                     The array is constructed like:
+	 * 						'name of part' => 'part xml schema data type' or
+	 * 						'name of part' => array('type' => 'part xml schema type')  or
+	 * 						'name of part' => array('element' => 'part xml element name')
+	 *
      * @return object The new message's XML_Tree_Node for use in {@link function addDocumentation}
      */
     public function addMessage($name, $parts)
@@ -242,17 +245,18 @@ class Wsdl
         return $portType;
     }
 
-    /**
-     * Add an {@link http://www.w3.org/TR/wsdl#_request-response operation} element to a portType element
-     *
-     * @param object $portType a portType XML_Tree_Node, from {@link function addPortType}
-     * @param string $name Operation name
-     * @param string $input Input Message
-     * @param string $output Output Message
-     * @param string $fault Fault Message
-     * @return object The new operation's XML_Tree_Node for use in {@link function addDocumentation}
-     */
-    public function addPortOperation($portType, $name, $input = false, $output = false, $fault = false)
+	/**
+	 * Add an {@link http://www.w3.org/TR/wsdl#_request-response operation} element to a portType element
+	 *
+	 * @param object $portType a portType XML_Tree_Node, from {@link function addPortType}
+	 * @param string $name Operation name
+	 * @param bool|string $input Input Message
+	 * @param bool|string $output Output Message
+	 * @param bool|array $faults list of Fault Messages
+	 *
+	 * @return object The new operation's XML_Tree_Node for use in {@link function addDocumentation}
+	 */
+    public function addPortOperation($portType, $name, $input = false, $output = false, $faults = false)
     {
         $operation = $this->_dom->createElement('operation');
         $operation->setAttribute('name', $name);
@@ -262,15 +266,19 @@ class Wsdl
             $node->setAttribute('message', $input);
             $operation->appendChild($node);
         }
-        if (is_string($output) && (strlen(trim($output)) >= 1)) {
+
+		if (is_string($output) && (strlen(trim($output)) >= 1)) {
             $node= $this->_dom->createElement('output');
             $node->setAttribute('message', $output);
             $operation->appendChild($node);
         }
-        if (is_string($fault) && (strlen(trim($fault)) >= 1)) {
-            $node = $this->_dom->createElement('fault');
-            $node->setAttribute('message', $fault);
-            $operation->appendChild($node);
+
+        if (is_array($faults) && !empty($faults)) {
+			foreach ($faults as $fault) {
+				$node = $this->_dom->createElement('fault');
+				$node->setAttribute('message', $fault);
+				$operation->appendChild($node);
+			}
         }
 
         $portType->appendChild($operation);
@@ -278,13 +286,14 @@ class Wsdl
         return $operation;
     }
 
-    /**
-     * Add a {@link http://www.w3.org/TR/wsdl#_bindings binding} element to WSDL
-     *
-     * @param string $name Name of the Binding
-     * @param string $type name of the portType to bind
-     * @return object The new binding's XML_Tree_Node for use with {@link function addBindingOperation} and {@link function addDocumentation}
-     */
+	/**
+	 * Add a {@link http://www.w3.org/TR/wsdl#_bindings binding} element to WSDL
+	 *
+	 * @param string $name Name of the Binding
+	 * @param string $portType string $type name of the portType to bind
+	 *
+	 * @return object The new binding's XML_Tree_Node for use with {@link function addBindingOperation} and {@link function addDocumentation}
+	 */
     public function addBinding($name, $portType)
     {
         $binding = $this->_dom->createElementNS(Wsdl::NS_WSDL, 'binding');
@@ -301,16 +310,18 @@ class Wsdl
         return $binding;
     }
 
-    /**
-     * Add an operation to a binding element
-     *
-     * @param object $binding A binding XML_Tree_Node returned by {@link function addBinding}
-     * @param array $input An array of attributes for the input element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-     * @param array $output An array of attributes for the output element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-     * @param array $fault An array of attributes for the fault element, allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-     * @return object The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
-     */
-    public function addBindingOperation($binding, $name, $input = false, $output = false, $fault = false)
+	/**
+	 * Add an operation to a binding element
+	 *
+	 * @param object $binding A binding XML_Tree_Node returned by {@link function addBinding}
+	 * @param string $name
+	 * @param array|bool $input An array of attributes for the input element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $output An array of attributes for the output element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $faults An array of elements, each with attributes for the fault element, allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 *
+	 * @return object The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
+	 */
+    public function addBindingOperation($binding, $name, $input = false, $output = false, $faults = false)
     {
         $operation = $this->_dom->createElementNS(Wsdl::NS_WSDL, 'operation');
         $binding->appendChild($operation);
@@ -348,18 +359,18 @@ class Wsdl
             }
         }
 
-        if (is_array($fault)) {
-            $node = $this->_dom->createElementNS(Wsdl::NS_WSDL, 'fault');
-            $operation->appendChild($node);
+        if (is_array($faults)) {
+			foreach ($faults as $fault) {
+				$node = $this->_dom->createElementNS(Wsdl::NS_WSDL, 'fault');
+				$operation->appendChild($node);
 
-            foreach ($fault as $name => $value) {
-                $attr = $this->_dom->createAttributeNS(Wsdl::NS_WSDL, $name);
-                $attr->value = $value;
+				foreach ($fault as $name => $value) {
+					$attr = $this->_dom->createAttributeNS(Wsdl::NS_WSDL, $name);
+					$attr->value = $value;
 
-                $node->appendChild($attr);
-            }
-//            $node->appendChild($soap_node);
-//            $operation->appendChild($node);
+					$node->appendChild($attr);
+				}
+			}
         }
 
         return $operation;

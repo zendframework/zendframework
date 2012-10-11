@@ -40,7 +40,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend\Soap\Wsdl
+     * @var \Zend\Soap\Wsdl
      */
     protected $wsdl;
 
@@ -112,7 +112,6 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testSetUriChangesDomDocumentWsdlStructureTnsAndTargetNamespaceAttributes()
     {
-
         $newUri = 'http://localhost/MyNewService.php';
         $this->wsdl->setUri($newUri);
 
@@ -122,7 +121,6 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testSetUriWithZendUriChangesDomDocumentWsdlStructureTnsAndTargetNamespaceAttributes()
     {
-
         $newUri = 'http://localhost/MyNewService.php';
         $this->wsdl->setUri(new Uri('http://localhost/MyNewService.php'));
 
@@ -143,9 +141,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->wsdl->addMessage($messageName, $messageParts);
 
         $messageNodes = $this->xpath->query('//wsdl:definitions/message');
-        if ($messageNodes->length === 0) {
-            $this->fail('Missing message node in definitions node.');
-        }
+		$this->assertNotEquals(0, $messageNodes->length, 'Missing message node in definitions node.');
+
         $this->assertEquals($messageName, $messageNodes->item(0)->getAttribute('name'));
 
         foreach ($messageParts as $parameterName => $parameterType) {
@@ -160,87 +157,158 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->wsdl->addPortType($portName);
 
         $portTypeNodes = $this->xpath->query('//wsdl:definitions/portType');
-
-        if ($portTypeNodes->length === 0) {
-            $this->fail('Missing portType node in definitions node.');
-        }
+		$this->assertNotEquals(0, $portTypeNodes->length, 'Missing portType node in definitions node.');
 
         $this->assertTrue($portTypeNodes->item(0)->hasAttribute('name'));
         $this->assertEquals($portName, $portTypeNodes->item(0)->getAttribute('name'));
-
     }
 
-    function testAddPortOperation()
-    {
-        $portName = 'myPortType';
-        $portType = $this->wsdl->addPortType($portName);
+	public function testAddPortOperationCheckName()
+	{
+		$portName = 'myPortType';
+		$portType = $this->wsdl->addPortType($portName);
 
-        $this->wsdl->addPortOperation($portType, 'operation1');
-        $this->wsdl->addPortOperation($portType, 'operation2', 'tns:operation2Request', 'tns:operation2Response');
-        $this->wsdl->addPortOperation($portType, 'operation3', 'tns:operation3Request', 'tns:operation3Response', 'tns:operation3Fault');
+		$this->wsdl->addPortOperation($portType, 'operation');
+
+		$portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
+		$this->assertNotEquals(0, $portTypeNodes->length, 'Missing portType node in definitions node.');
+	}
+
+	public function testAddPortOperationWithNoRequestAndResponse()
+	{
+		$portName = 'myPortType';
+		$portType = $this->wsdl->addPortType($portName);
+
+		$this->wsdl->addPortOperation($portType, 'operationName');
+
+		$portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
+
+		$operation1Nodes = $this->xpath->query('operation[@name="operationName"]', $portTypeNodes->item(0));
+		$this->assertEquals(1, $operation1Nodes->length);
+		$this->assertFalse($operation1Nodes->item(0)->hasChildNodes());
+	}
+
+	public function testAddPortOperationWithRequest()
+	{
+		$portName = 'myPortType';
+		$portType = $this->wsdl->addPortType($portName);
+
+		$this->wsdl->addPortOperation($portType, 'operationName', 'operationRequest');
+
+		$portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
+
+		$operationNodes = $this->xpath->query('operation[@name="operationName"]', $portTypeNodes->item(0));
+		$this->assertEquals(1, $operationNodes->length, 'Missing operation node');
+
+		$result = $this->xpath->query('input[@message="operationRequest"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing input operation');
+	}
 
 
-        $portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
-        if ($portTypeNodes->length === 0) {
-            $this->fail('Missing portType node in definitions node.');
-        }
+	public function testAddPortOperationWithRequestAndResponse() {
+		$portName = 'myPortType';
+		$portType = $this->wsdl->addPortType($portName);
+
+		$this->wsdl->addPortOperation($portType, 'operationName', 'operationRequest', 'operationResponse');
+
+		$portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
+
+		$operationNodes = $this->xpath->query('operation[@name="operationName"]', $portTypeNodes->item(0));
+		$this->assertEquals(1, $operationNodes->length, 'Missing operation node');
+
+		$result = $this->xpath->query('input[@message="operationRequest"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing input operation');
+
+		$result = $this->xpath->query('output[@message="operationResponse"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing output operation');
+	}
 
 
-        $operation1Nodes = $this->xpath->query('operation[@name="operation1"]', $portTypeNodes->item(0));
-        $this->assertEquals(1, $operation1Nodes->length);
-        $this->assertFalse($operation1Nodes->item(0)->hasChildNodes());
+	public function testAddPortOperationWithRequestAndResponseAndOneFault() {
+		$portName = 'myPortType';
+		$portType = $this->wsdl->addPortType($portName);
 
+		$this->wsdl->addPortOperation($portType, 'operationName', 'operationRequest', 'operationResponse', array('FaultName'));
 
-        $operation2Nodes = $this->xpath->query('operation[@name="operation2"]', $portTypeNodes->item(0));
-        $this->assertEquals(1, $operation2Nodes->length);
+		$portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
 
-        $inputNodes = $operation2Nodes->item(0)->getElementsByTagName('input');
-        $this->assertEquals(1, $inputNodes->length);
-        $this->assertEquals('tns:operation2Request', $inputNodes->item(0)->getAttribute('message'));
+		$operationNodes = $this->xpath->query('operation[@name="operationName"]', $portTypeNodes->item(0));
+		$this->assertEquals(1, $operationNodes->length, 'Missing operation node');
 
-        $outputNodes = $operation2Nodes->item(0)->getElementsByTagName('output');
-        $this->assertEquals(1, $outputNodes->length);
-        $this->assertEquals('tns:operation2Response', $outputNodes->item(0)->getAttribute('message'));
+		$result = $this->xpath->query('input[@message="operationRequest"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing input operation');
 
+		$result = $this->xpath->query('output[@message="operationResponse"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing output operation');
 
-        $operation3Nodes = $this->xpath->query('operation[@name="operation3"]', $portTypeNodes->item(0));
-        $this->assertEquals(1, $operation3Nodes->length);
+		$result = $this->xpath->query('fault[@message="FaultName"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing fault: FaultName');
+	}
 
-        $inputNodes = $operation3Nodes->item(0)->getElementsByTagName('input');
-        $this->assertEquals(1, $inputNodes->length);
-        $this->assertEquals('tns:operation3Request', $inputNodes->item(0)->getAttribute('message'));
+	public function testAddPortOperationWithRequestAndResponseAndMultipleFaults(){
+		$portName = 'myPortType';
+		$portType = $this->wsdl->addPortType($portName);
 
-        $outputNodes = $operation3Nodes->item(0)->getElementsByTagName('output');
-        $this->assertEquals(1, $outputNodes->length);
-        $this->assertEquals('tns:operation3Response', $outputNodes->item(0)->getAttribute('message'));
+		$faultNames = array(
+			'FaultName1',
+			'FaultName2',
+			'FaultName3'
+		);
 
-        $faultNodes = $operation3Nodes->item(0)->getElementsByTagName('fault');
-        $this->assertEquals(1, $faultNodes->length);
-        $this->assertEquals('tns:operation3Fault', $faultNodes->item(0)->getAttribute('message'));
-    }
+		$this->wsdl->addPortOperation($portType, 'operationName', 'operationRequest', 'operationResponse', $faultNames);
+
+		$portTypeNodes = $this->xpath->query('//wsdl:definitions/portType[@name="'.$portName.'"]');
+
+		$operationNodes = $this->xpath->query('operation[@name="operationName"]', $portTypeNodes->item(0));
+		$this->assertEquals(1, $operationNodes->length, 'Missing operation node');
+
+		$result = $this->xpath->query('input[@message="operationRequest"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing input operation');
+
+		$result = $this->xpath->query('output[@message="operationResponse"]', $operationNodes->item(0));
+		$this->assertEquals(1, $result->length, 'Missing output operation');
+
+		foreach($faultNames as $faultName) {
+			$result = $this->xpath->query('fault[@message="'.$faultName.'"]', $operationNodes->item(0));
+			$this->assertEquals(1, $result->length, 'Missing fault: '.$faultName);
+		}
+	}
 
     function testAddBinding()
     {
         $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
-        $this->wsdl->toDomDocument()->formatOutput = true;
 
         $bindingNodes = $this->xpath->query('//wsdl:definitions/wsdl:binding');
 
-        if ($bindingNodes->length === 0) {
-            $this->fail('Missing binding node in definitions node.'.$bindingNodes->length);
-        }
+		$this->assertNotEquals(0, $bindingNodes->length, 'Missing binding node in definitions node');
 
         $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
         $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'type'));
     }
 
+	public function testAddBindingOperationEmptyOperation()
+	{
+		$binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
+		$this->wsdl->addBindingOperation($binding, 'operation1');
+
+		$bindingNodes = $this->xpath->query('//wsdl:binding');
+		$this->assertNotEquals(0, $bindingNodes->length, 'Missing binding node in definitions node.');
+
+		$this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
+		$this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'type'));
+	}
+
+	public function testAddBindingOperationOneWayOperation()
+	{
+
+	}
+
+
+
+
+
     function testAddBindingOperation()
     {
-
-
-
-        $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
-        $this->wsdl->addBindingOperation($binding, 'operation1');
 
 
         $encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
@@ -255,7 +323,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                    'operation3',
                                    array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
                                    array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
-                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle, 'name' => 'MyFault',)
+                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle, 'name' => array('MyFault'))
         );
 
         $bindingNodes = $this->xpath->query('//wsdl:binding');

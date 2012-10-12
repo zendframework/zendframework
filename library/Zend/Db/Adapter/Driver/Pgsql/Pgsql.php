@@ -122,8 +122,8 @@ class Pgsql implements DriverInterface
      */
     public function checkEnvironment()
     {
-        if (!extension_loaded('mysqli')) {
-            throw new Exception\RuntimeException('The Mysqli extension is required for this adapter but the extension is not loaded');
+        if (!extension_loaded('pgsql')) {
+            throw new Exception\RuntimeException('The PostgreSQL (pgsql) extension is required for this adapter but the extension is not loaded');
         }
     }
 

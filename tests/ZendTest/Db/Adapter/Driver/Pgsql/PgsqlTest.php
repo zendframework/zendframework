@@ -25,11 +25,11 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckEnvironment()
     {
-        if (extension_loaded('pgsql')) {
-            $this->markTestSkipped('PostgreSQL extension (pgsql) is already loaded');
+        if (!extension_loaded('pgsql')) {
+            $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
         }
-        $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
         $this->pgsql->checkEnvironment();
+        $this->assertTrue(true, 'No exception was thrown');
     }
 
     /**

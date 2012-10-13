@@ -158,4 +158,19 @@ class AcceptantViewModelSelectorTest extends \PHPUnit_Framework_TestCase
                 $result
         );
     }
+
+    public function testInvalidModel()
+    {
+        $arr = array('DoesNotExist' => 'text/xml');
+        $header   = Accept::fromString('Accept: */*');
+        $this->request->getHeaders()->addHeader($header);
+
+        try {
+            $result = $this->plugin->getViewModel($arr);
+            $this->fail('Exception expected');
+        } catch(\Zend\Mvc\Exception\InvalidArgumentException $e) {
+            $this->assertEquals('The supplied View Model could not be found', $e->getMessage());
+        }
+
+    }
 }

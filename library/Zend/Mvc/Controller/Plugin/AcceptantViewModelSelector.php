@@ -16,6 +16,7 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\View\Model\ModelInterface;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
@@ -58,9 +59,11 @@ class AcceptantViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel for request.
      *
-     * Proxies to getViewModel()
-     *
-     * @return ModelInterface
+     * @param array (optional) $matchAgainst The Array to match against
+     * @param bool (optional)$returnDefault If no match is availble. Return default instead
+     * @param AbstractFieldValuePart|null (optional) $resultReference The object that was matched
+     * @throws InvalidArgumentException If the supplied and matched View Model could not be found
+     * @return ModelInterface|null
      */
     public function __invoke(
             array $matchAgainst = null,
@@ -76,6 +79,7 @@ class AcceptantViewModelSelector extends AbstractPlugin
      * @param array (optional) $matchAgainst The Array to match against
      * @param bool (optional)$returnDefault If no match is availble. Return default instead
      * @param AbstractFieldValuePart|null (optional) $resultReference The object that was matched
+     * @throws InvalidArgumentException If the supplied and matched View Model could not be found
      * @return ModelInterface|null
      */
     public function getViewModel(
@@ -87,6 +91,10 @@ class AcceptantViewModelSelector extends AbstractPlugin
 
         if (!$name) {
             return;
+        }
+
+        if (!class_exists($name)) {
+            throw new InvalidArgumentException('The supplied View Model could not be found');
         }
 
         return new $name();
@@ -121,7 +129,7 @@ class AcceptantViewModelSelector extends AbstractPlugin
      * Detects an appropriate viewmodel name for request.
      *
      * @param array (optional) $matchAgainst The Array to match against
-     * @return AbstractFieldValuePart (optional) $resultReference The object that was matched
+     * @return AbstractFieldValuePart|null The object that was matched
      */
     public function match(array $matchAgainst = null)
     {

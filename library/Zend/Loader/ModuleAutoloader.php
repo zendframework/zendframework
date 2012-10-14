@@ -130,16 +130,16 @@ class ModuleAutoloader implements SplAutoloader
             foreach ( $this->namespacedPaths as $namespace=>$path ) {
                 if ( false === strpos($moduleName,$namespace) ) {
                     continue;
-            }
-            
+                }
+
                 $moduleName_buffer = str_replace($namespace . "\\", "", $moduleName );
                 $path .= DIRECTORY_SEPARATOR . $moduleName_buffer . DIRECTORY_SEPARATOR;
-                
+
                 $classLoaded = $this->loadModuleFromDir($path, $class);
                 if ($classLoaded) {
                     return $classLoaded;
                 }
-                
+
                 $classLoaded = $this->loadModuleFromPhar($path, $class);
                 if ($classLoaded) {
                     return $classLoaded;

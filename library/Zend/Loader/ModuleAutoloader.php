@@ -330,7 +330,7 @@ class ModuleAutoloader implements SplAutoloader
             ));
         }
         if ($moduleName) {
-            if (in_array( substr($moduleName, -2 ), array('/*','/%') ) ) {
+            if (in_array( substr($moduleName, -2 ), array('\\*','\\%') ) ) {
                 $this->namespacedPaths[ substr($moduleName, 0, -2 ) ] = static::normalizePath($path);
             } else {
                 $this->explicitPaths[$moduleName] = static::normalizePath($path);

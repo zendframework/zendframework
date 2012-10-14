@@ -200,7 +200,7 @@ class ManagerTest extends TestCase
     public function testCanLoadModulesFromNamespace()
     {
         $loader = new ModuleAutoloader(array(
-            'FooModule/*' => __DIR__ . '/_files/FooModule',
+            'FooModule\*' => __DIR__ . '/_files/FooModule',
             'FooModule' => __DIR__ . '/_files/FooModule',
         ));
         $loader->register();

@@ -127,24 +127,24 @@ class ModuleAutoloader implements SplAutoloader
         }
 
         if (count($this->namespacedPaths) >= 1 ) {
-        	foreach ( $this->namespacedPaths as $namespace=>$path ) {
-        		if ( false === strpos($moduleName,$namespace) ) {
-        			continue;
-        		}
-        		
-        		$moduleName_buffer = str_replace($namespace . "\\", "", $moduleName );
-        		$path .= DIRECTORY_SEPARATOR . $moduleName_buffer . DIRECTORY_SEPARATOR;
-        		
-        		$classLoaded = $this->loadModuleFromDir($path, $class);
-        		if ($classLoaded) {
-        			return $classLoaded;
-        		}
-        		
-        		$classLoaded = $this->loadModuleFromPhar($path, $class);
-        		if ($classLoaded) {
-        			return $classLoaded;
-        		}
-        	}
+            foreach ( $this->namespacedPaths as $namespace=>$path ) {
+                if ( false === strpos($moduleName,$namespace) ) {
+                    continue;
+            }
+            
+                $moduleName_buffer = str_replace($namespace . "\\", "", $moduleName );
+                $path .= DIRECTORY_SEPARATOR . $moduleName_buffer . DIRECTORY_SEPARATOR;
+                
+                $classLoaded = $this->loadModuleFromDir($path, $class);
+                if ($classLoaded) {
+                    return $classLoaded;
+                }
+                
+                $classLoaded = $this->loadModuleFromPhar($path, $class);
+                if ($classLoaded) {
+                    return $classLoaded;
+                }
+            }
         }
         
 
@@ -304,7 +304,7 @@ class ModuleAutoloader implements SplAutoloader
 
         foreach ($paths as $module => $path) {
             if (is_string($module)) {
-            	$this->registerPath($path, $module);
+                $this->registerPath($path, $module);
             } else {
                 $this->registerPath($path);
             }
@@ -330,11 +330,11 @@ class ModuleAutoloader implements SplAutoloader
             ));
         }
         if ($moduleName) {
-        	if (in_array( substr($moduleName, -2 ), array('/*','/%') ) ) {
-        		$this->namespacedPaths[ substr($moduleName, 0, -2 ) ] = static::normalizePath($path);
-        	} else {
-        		$this->explicitPaths[$moduleName] = static::normalizePath($path);
-        	}
+            if (in_array( substr($moduleName, -2 ), array('/*','/%') ) ) {
+                $this->namespacedPaths[ substr($moduleName, 0, -2 ) ] = static::normalizePath($path);
+            } else {
+                $this->explicitPaths[$moduleName] = static::normalizePath($path);
+            }
         } else {
             $this->paths[] = static::normalizePath($path);
         }

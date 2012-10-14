@@ -163,4 +163,16 @@ class ControllerLoaderFactoryTest extends TestCase
         $controller = $this->loader->get($controllerName);
         $this->assertSame($testService, $controller->injectedValue);
     }
+    
+    public function testCallPluginWithControllerPluginManager()
+    {
+        $controllerpluginManager = $this->services->get('ControllerPluginManager');
+        $controllerpluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
+        
+        $controller    = new \ZendTest\Mvc\Controller\TestAsset\SampleController;
+        $controllerpluginManager->setController($controller);
+
+        $plugin = $controllerpluginManager->get('samplePlugin');
+        $this->assertEquals($controller, $plugin->getController());
+    }
 }

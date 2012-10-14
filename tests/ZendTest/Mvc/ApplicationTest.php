@@ -80,7 +80,6 @@ class ApplicationTest extends TestCase
                 'aliases' => array(
                     'Router'                 => 'HttpRouter',
                     'Configuration'          => 'Config',
-                    'ControllerPluginBroker' => 'ControllerPluginManager',
                 ),
             ))
         );

@@ -40,7 +40,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
         $this->services->setFactory('ControllerLoader', $loaderFactory);
         $this->services->setService('Config', $config);
-        $this->services->setFactory('ControllerPluginBroker', new ControllerPluginManagerFactory());
+        $this->services->setFactory('ControllerPluginManager', new ControllerPluginManagerFactory());
         $this->services->setFactory('Di', new DiFactory());
         $this->services->setFactory('EventManager', new EventManagerFactory());
         $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
@@ -87,7 +87,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->assertInstanceOf('ZendTest\Mvc\Service\TestAsset\Dispatchable', $controller);
         $this->assertSame($this->services, $controller->getServiceLocator());
         $this->assertSame($this->services->get('EventManager'), $controller->getEventManager());
-        $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
+        $this->assertSame($this->services->get('ControllerPluginManager'), $controller->getPluginManager());
     }
 
     public function testWillInstantiateControllersFromDiAbstractFactoryWhenWhitelisted()

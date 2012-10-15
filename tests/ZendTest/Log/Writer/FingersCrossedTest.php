@@ -72,4 +72,13 @@ class FingersCrossedTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Log\Filter\Priority', $filters[0]);
         $this->assertAttributeEquals(3, 'priority', $filters[0]);
     }
+
+    public function testFormattingIsNotSupported()
+    {
+        $options = array('writer' => 'mock', 'priority' => 3);
+        $writer = new FingersCrossedWriter($options);
+
+        $writer->setFormatter($this->getMock('Zend\Log\Formatter\FormatterInterface'));
+        $this->assertAttributeEmpty('formatter', $writer);
+    }
 }

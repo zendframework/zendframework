@@ -10,8 +10,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
+use Memcached as MemcachedResource;
 use Zend\Cache\Exception;
-use Zend\Validator\Hostname;
 
 /**
  * These are options specific to the APC adapter
@@ -24,14 +24,21 @@ class MemcachedOptions extends AdapterOptions
 {
 
     /**
-     * Memcached server address
+     * A memcached resource to share
+     *
+     * @var null|MemcachedResource
+     */
+    protected $memcachedResource;
+
+    /**
+     * List of memcached servers to add on initialize
      *
      * @var string
      */
     protected $servers = array();
 
     /**
-     * Libmemcached options
+     * List of Libmemcached options to set on initialize
      *
      * @var array
      */
@@ -61,55 +68,104 @@ class MemcachedOptions extends AdapterOptions
     }
 
     /**
-     * Add Server
+     * A memcached resource to share
      *
-     * @param string $host
-     * @param int $port
+     * @param null|MemcachedResource $memcachedResource
      * @return MemcachedOptions
-     * @throws Exception\InvalidArgumentException
      */
-    public function addServer($host, $port = 11211)
+    public function setMemcachedResource(MemcachedResource $memcachedResource = null)
     {
-        $hostNameValidator = new Hostname(array('allow' => Hostname::ALLOW_ALL));
-        if (!$hostNameValidator->isValid($host)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                 '%s expects a valid hostname: %s',
-                 __METHOD__,
-                 implode("\n", $hostNameValidator->getMessages())
-            ));
+        if ($this->memcachedResource !== $memcachedResource) {
+            $this->triggerOptionEvent('memcached_resource', $memcachedResource);
+            $this->memcachedResource = $memcachedResource;
         }
-
-        if (!is_numeric($port) || $port <= 0) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a positive integer', __METHOD__
-            ));
-        }
-
-        $this->servers[] = array($host, $port);
         return $this;
     }
 
     /**
-     * Set Servers
+     * Get memcached resource to share
      *
-     * @param array $servers list of servers in [] = array($host, $port)
+     * @return null|MemcachedResource
+     */
+    public function getMemcachedResource()
+    {
+        return $this->memcachedResource;
+    }
+
+    /**
+     * Set a list of memcached servers to add on initialize
+     *
+     * @param string|array $servers list of servers
      * @return MemcachedOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setServers(array $servers)
+    public function setServers($servers)
     {
-        foreach ($servers as $server) {
-            if (!isset($server[0])) {
-                throw new Exception\InvalidArgumentException('The servers array must contain a host value.');
-            }
-
-            if (!isset($server[1])) {
-                $this->addServer($server[0]);
-            } else {
-                $this->addServer($server[0], $server[1]);
-            }
+        if (!is_array($servers)) {
+            return $this->setServers(explode(',', $servers));
         }
 
+        $list = array();
+        foreach ($servers as $server) {
+
+            // default values
+            $host   = null;
+            $port   = 11211;
+            $weight = 1;
+
+            // parse a single server from an array
+            if (is_array($server)) {
+                // array(array(<host>[, <port>[, <weight>]])[, ...])
+                if (isset($server[0])) {
+                    $host   = (string)$server[0];
+                    $port   = isset($server[1]) ? (int)$server[1] : $port;
+                    $weight = isset($server[2]) ? (int)$server[2] : $weight;
+
+                // array(array('host' => <host>[, 'port' => <port>[, 'weight' => <weight>]])[, ...])
+                } elseif (isset($server['host'])) {
+                    $host   = (string)$server['host'];
+                    $port   = isset($server['port']) ? (int)$server['port'] : $port;
+                    $weight = isset($server['weight']) ? (int)$server['weight'] : $weight;
+                } else {
+                    throw new Exception\InvalidArgumentException("Invalid list of servers given");
+                }
+
+            // parse a single server from a string
+            } else {
+                $server = trim($server);
+                if (strpos($server, '://') === false) {
+                    $server = 'tcp://' . $server;
+                }
+
+                $server = parse_url($server);
+                if (!$server) {
+                    throw new Exception\InvalidArgumentException("Invalid list of servers given");
+                }
+
+                $host = $server['host'];
+                $port = isset($server['port']) ? (int)$server['port'] : $port;
+
+                if (isset($server['query'])) {
+                    $query = null;
+                    parse_str($server['query'], $query);
+                    if (isset($query['weight'])) {
+                        $weight = (int)$query['weight'];
+                    }
+                }
+            }
+
+            if (!$host) {
+                throw new Exception\InvalidArgumentException('The list of servers must contain a host value.');
+            }
+
+            $list[] = array(
+                'host'   => $host,
+                'port'   => $port,
+                'weight' => $weight
+            );
+        }
+
+        $this->servers = $list;
         return $this;
     }
 

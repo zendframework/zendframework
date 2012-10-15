@@ -80,14 +80,14 @@ class Attribute
             }
             $retArray = array();
             foreach ($data[$attribName] as $v) {
-                $retArray[] = self::valueFromLDAP($v);
+                $retArray[] = self::valueFromLdap($v);
             }
             return $retArray;
         } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
             } elseif ($index >= 0 && $index < count($data[$attribName])) {
-                return self::valueFromLDAP($data[$attribName][$index]);
+                return self::valueFromLdap($data[$attribName][$index]);
             } else {
                 return null;
             }
@@ -116,7 +116,7 @@ class Attribute
         }
 
         foreach ($value as $v) {
-            $v = self::valueToLDAP($v);
+            $v = self::valueToLdap($v);
             if (!in_array($v, $data[$attribName], true)) {
                 return false;
             }
@@ -162,7 +162,7 @@ class Attribute
 
         $valArray = array();
         foreach ($value as $v) {
-            $v = self::valueToLDAP($v);
+            $v = self::valueToLdap($v);
             if ($v !== null) {
                 $valArray[] = $v;
             }

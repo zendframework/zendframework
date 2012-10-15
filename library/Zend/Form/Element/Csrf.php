@@ -88,7 +88,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
         if (null === $this->csrfValidator) {
             $csrfOptions = $this->getCsrfValidatorOptions();
             $csrfOptions = array_merge($csrfOptions, array('name' => $this->getName()));
-            $this->csrfValidator = new CsrfValidator($csrfOptions);
+            $this->setCsrfValidator(new CsrfValidator($csrfOptions));
         }
         return $this->csrfValidator;
     }

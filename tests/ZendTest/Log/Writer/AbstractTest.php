@@ -36,7 +36,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testSetFormatter()
     {
         $this->_writer->setFormatter(new SimpleFormatter());
-        $this->setExpectedException('PHPUnit_Framework_Error');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $this->_writer->setFormatter(new \StdClass());
     }
 

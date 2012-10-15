@@ -292,20 +292,14 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         if (!$formatter instanceof Formatter\FormatterInterface) {
-            // This should be used instead of triggering an error, but this will require to change tests
-            //throw new Exception\InvalidArgumentException(sprintf(
-            //        'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
-            //        __NAMESPACE__,
-            //        is_object($formatter) ? get_class($formatter) : gettype($formatter)
-            //));
-            trigger_error(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                     'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
                     __NAMESPACE__,
                     is_object($formatter) ? get_class($formatter) : gettype($formatter)
             ));
         }
 
-        $this->formatter= $formatter;
+        $this->formatter = $formatter;
         return $this;
     }
 

@@ -311,7 +311,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $storage = $this->manager->getStorage();
         $storage['foo'] = 'bar';
         $this->manager->destroy(array('clear_storage' => true));
-        $this->assertSame(array(), (array) $storage);
+        $this->assertFalse(isset($storage['foo']));
     }
 
     /**

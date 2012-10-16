@@ -19,7 +19,7 @@ use Zend\Validator\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  */
 class DateStep extends Date
 {

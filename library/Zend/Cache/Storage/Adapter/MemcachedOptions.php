@@ -22,7 +22,6 @@ use Zend\Cache\Exception;
  */
 class MemcachedOptions extends AdapterOptions
 {
-
     /**
      * A memcached resource to share
      *
@@ -35,7 +34,13 @@ class MemcachedOptions extends AdapterOptions
      *
      * @var string
      */
-    protected $servers = array();
+    protected $servers = array(
+        array(
+            'host'   => '127.0.0.1',
+            'port'   => 11211,
+            'weight' => 0,
+        ),
+    );
 
     /**
      * List of Libmemcached options to set on initialize
@@ -93,6 +98,34 @@ class MemcachedOptions extends AdapterOptions
     }
 
     /**
+     * Add a server to the list
+     *
+     * @param  string $host
+     * @param  int $port
+     * @param  int $weight
+     * @return MemcachedOptions
+     */
+    public function addServer($host, $port = 11211, $weight = 0)
+    {
+        $new = array(
+            'host'   => $host,
+            'port'   => $port,
+            'weight' => $weight
+        );
+
+        foreach ($this->servers as $server) {
+            $diff = array_diff($new, $server);
+            if (empty($diff)) {
+                // Done -- server is already present
+                return $this;
+            }
+        }
+
+        $this->servers[] = $new;
+        return $this;
+    }
+
+    /**
      * Set a list of memcached servers to add on initialize
      *
      * @param string|array $servers list of servers
@@ -105,33 +138,40 @@ class MemcachedOptions extends AdapterOptions
             return $this->setServers(explode(',', $servers));
         }
 
-        $list = array();
+        $this->servers = array();
         foreach ($servers as $server) {
-
             // default values
             $host   = null;
             $port   = 11211;
             $weight = 1;
 
+            if (!is_array($server) && !is_string($server)) {
+                throw new Exception\InvalidArgumentException('Invalid server specification provided; must be an array or string');
+            }
+
             // parse a single server from an array
             if (is_array($server)) {
-                // array(array(<host>[, <port>[, <weight>]])[, ...])
-                if (isset($server[0])) {
-                    $host   = (string)$server[0];
-                    $port   = isset($server[1]) ? (int)$server[1] : $port;
-                    $weight = isset($server[2]) ? (int)$server[2] : $weight;
-
-                // array(array('host' => <host>[, 'port' => <port>[, 'weight' => <weight>]])[, ...])
-                } elseif (isset($server['host'])) {
-                    $host   = (string)$server['host'];
-                    $port   = isset($server['port']) ? (int)$server['port'] : $port;
-                    $weight = isset($server['weight']) ? (int)$server['weight'] : $weight;
-                } else {
+                if (!isset($server[0]) && !isset($server['host'])) {
                     throw new Exception\InvalidArgumentException("Invalid list of servers given");
                 }
 
+                // array(array(<host>[, <port>[, <weight>]])[, ...])
+                if (isset($server[0])) {
+                    $host   = (string) $server[0];
+                    $port   = isset($server[1]) ? (int) $server[1] : $port;
+                    $weight = isset($server[2]) ? (int) $server[2] : $weight;
+                }
+
+                // array(array('host' => <host>[, 'port' => <port>[, 'weight' => <weight>]])[, ...])
+                if (!isset($server[0]) && isset($server['host'])) {
+                    $host   = (string)$server['host'];
+                    $port   = isset($server['port'])   ? (int) $server['port']   : $port;
+                    $weight = isset($server['weight']) ? (int) $server['weight'] : $weight;
+                }
+            }
+
             // parse a single server from a string
-            } else {
+            if (!is_array($server)) {
                 $server = trim($server);
                 if (strpos($server, '://') === false) {
                     $server = 'tcp://' . $server;
@@ -158,14 +198,9 @@ class MemcachedOptions extends AdapterOptions
                 throw new Exception\InvalidArgumentException('The list of servers must contain a host value.');
             }
 
-            $list[] = array(
-                'host'   => $host,
-                'port'   => $port,
-                'weight' => $weight
-            );
+            $this->addServer($host, $port, $weight);
         }
 
-        $this->servers = $list;
         return $this;
     }
 
@@ -262,5 +297,4 @@ class MemcachedOptions extends AdapterOptions
             $key = (int) $key;
         }
     }
-
 }

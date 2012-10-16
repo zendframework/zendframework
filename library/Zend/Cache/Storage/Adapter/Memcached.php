@@ -73,31 +73,43 @@ class Memcached extends AbstractAdapter implements
      */
     protected function getMemcachedResource()
     {
-        if (!$this->memcachedResource) {
-            $options   = $this->getOptions();
-
-            // use a configured resource or a new one
-            $memcached = $options->getMemcachedResource() ?: new MemcachedResource();
-
-            // init lib options
-            if (static::$extMemcachedMajorVersion > 1) {
-                $memcached->setOptions($options->getLibOptions());
-            } else {
-                foreach ($options->getLibOptions() as $k => $v) {
-                    $memcached->setOption($k, $v);
-                }
-            }
-            $memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options->getNamespace());
-
-            // init servers
-            $servers = $options->getServers();
-            if ($servers) {
-                $memcached->addServers($servers);
-            }
-
-            // use the initialized resource
-            $this->memcachedResource = $memcached;
+        if ($this->memcachedResource) {
+            return $this->memcachedResource;
         }
+
+        $options = $this->getOptions();
+
+        // use a configured resource or a new one
+        $memcached = $options->getMemcachedResource() ?: new MemcachedResource();
+
+        // init lib options
+        if (static::$extMemcachedMajorVersion > 1) {
+            $memcached->setOptions($options->getLibOptions());
+        } else {
+            foreach ($options->getLibOptions() as $k => $v) {
+                $memcached->setOption($k, $v);
+            }
+        }
+        $memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options->getNamespace());
+
+        // Allow updating namespace
+        $this->getEventManager()->attach('option', function ($event) use ($memcached) {
+            $params = $event->getParams();
+            if (!isset($params['namespace'])) {
+                // Cannot set lib options after initialization
+                return;
+            }
+            $memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $params['namespace']);
+        });
+
+        // init servers
+        $servers = $options->getServers();
+        if ($servers) {
+            $memcached->addServers($servers);
+        }
+
+        // use the initialized resource
+        $this->memcachedResource = $memcached;
 
         return $this->memcachedResource;
     }
@@ -404,8 +416,8 @@ class Memcached extends AbstractAdapter implements
      */
     protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value)
     {
-        $expiration = $this->expirationTime();
         $memc       = $this->getMemcachedResource();
+        $expiration = $this->expirationTime();
         $result     = $memc->cas($token, $normalizedKey, $value, $expiration);
 
         if ($result === false) {
@@ -483,8 +495,8 @@ class Memcached extends AbstractAdapter implements
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $value    = (int) $value;
         $memc     = $this->getMemcachedResource();
+        $value    = (int) $value;
         $newValue = $memc->increment($normalizedKey, $value);
 
         if ($newValue === false) {
@@ -515,8 +527,8 @@ class Memcached extends AbstractAdapter implements
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
-        $value    = (int)$value;
         $memc     = $this->getMemcachedResource();
+        $value    = (int)$value;
         $newValue = $memc->decrement($normalizedKey, $value);
 
         if ($newValue === false) {

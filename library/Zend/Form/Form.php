@@ -275,7 +275,7 @@ class Form extends Fieldset implements FormInterface
             if (!$this->isValid()) {
                 return;
             }
-        } else if (!$this->isValid) {
+        } elseif (!$this->isValid) {
             return;
         }
 

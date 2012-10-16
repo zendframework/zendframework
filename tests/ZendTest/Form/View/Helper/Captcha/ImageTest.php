@@ -23,6 +23,7 @@ use ZendTest\Form\View\Helper\CommonTestCase;
  */
 class ImageTest extends CommonTestCase
 {
+    protected $tmpDir;
     protected $testDir;
 
     public function setUp()

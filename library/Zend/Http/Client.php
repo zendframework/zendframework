@@ -113,6 +113,7 @@ class Client implements Stdlib\DispatchableInterface
         'keepalive'       => false,
         'outputstream'    => false,
         'encodecookies'   => true,
+        'argseparator'    => null,
         'rfc3986strict'   => false
     );
 
@@ -353,6 +354,32 @@ class Client implements Stdlib\DispatchableInterface
     public function getMethod()
     {
         return $this->getRequest()->getMethod();
+    }
+
+    /**
+     * Set the query string argument separator
+     *
+     * @param string $argSeparator
+     * @return Client
+     */
+    public function setArgSeparator($argSeparator)
+    {
+        $this->setOptions(array("argseparator" => $argSeparator));
+        return $this;
+    }
+
+    /**
+     * Get the query string argument separator
+     *
+     * @return string
+     */
+    public function getArgSeparator()
+    {
+        $argSeparator = $this->options['argseparator'];
+        if (empty($argSeparator)) {
+            $argSeparator = ini_get('arg_separator.output');
+        }
+        return $argSeparator;
     }
 
     /**
@@ -773,14 +800,14 @@ class Client implements Stdlib\DispatchableInterface
 
                 if (!empty($queryArray)) {
                     $newUri = $uri->toString();
-                    $queryString = http_build_query($query);
+                    $queryString = http_build_query($query, null, $this->getArgSeparator());
 
                     if ($this->config['rfc3986strict']) {
                         $queryString = str_replace('+', '%20', $queryString);
                     }
 
                     if (strpos($newUri, '?') !== false) {
-                        $newUri .= '&' . $queryString;
+                        $newUri .= $this->getArgSeparator() . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
                     }

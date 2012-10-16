@@ -40,7 +40,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
         $this->services->setFactory('ControllerLoader', $loaderFactory);
         $this->services->setService('Config', $config);
-        $this->services->setFactory('ControllerPluginBroker', new ControllerPluginManagerFactory());
+        $this->services->setFactory('ControllerPluginManager', new ControllerPluginManagerFactory());
         $this->services->setFactory('Di', new DiFactory());
         $this->services->setFactory('EventManager', new EventManagerFactory());
         $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
@@ -87,7 +87,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->assertInstanceOf('ZendTest\Mvc\Service\TestAsset\Dispatchable', $controller);
         $this->assertSame($this->services, $controller->getServiceLocator());
         $this->assertSame($this->services->get('EventManager'), $controller->getEventManager());
-        $this->assertSame($this->services->get('ControllerPluginBroker'), $controller->getPluginManager());
+        $this->assertSame($this->services->get('ControllerPluginManager'), $controller->getPluginManager());
     }
 
     public function testWillInstantiateControllersFromDiAbstractFactoryWhenWhitelisted()
@@ -162,5 +162,17 @@ class ControllerLoaderFactoryTest extends TestCase
         // invalid controller exception (because we're not getting a \Zend\Stdlib\DispatchableInterface after all)
         $controller = $this->loader->get($controllerName);
         $this->assertSame($testService, $controller->injectedValue);
+    }
+
+    public function testCallPluginWithControllerPluginManager()
+    {
+        $controllerpluginManager = $this->services->get('ControllerPluginManager');
+        $controllerpluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
+
+        $controller    = new \ZendTest\Mvc\Controller\TestAsset\SampleController;
+        $controllerpluginManager->setController($controller);
+
+        $plugin = $controllerpluginManager->get('samplePlugin');
+        $this->assertEquals($controller, $plugin->getController());
     }
 }

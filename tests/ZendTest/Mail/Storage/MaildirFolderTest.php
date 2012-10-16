@@ -89,6 +89,9 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
                 if (!file_exists($this->_tmpdir . $dir . '/' . $subdir)) {
                     continue;
                 }
+                if (!is_dir($this->_tmpdir . $dir . '/' . $subdir)) {
+                    continue;
+                }
                 $dh = opendir($this->_tmpdir . $dir . '/' . $subdir);
                 while (($entry = readdir($dh)) !== false) {
                     $entry = $this->_tmpdir . $dir . '/' . $subdir . '/' . $entry;
@@ -100,7 +103,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
                 closedir($dh);
                 rmdir($this->_tmpdir . $dir . '/' . $subdir);
             }
-            if ($dir != '.') {
+            if ($dir != '.' && is_dir($this->_tmpdir . $dir)) {
                 rmdir($this->_tmpdir . $dir);
             }
         }

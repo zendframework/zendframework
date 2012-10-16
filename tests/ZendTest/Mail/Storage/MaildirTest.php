@@ -74,6 +74,9 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         foreach (array('cur', 'new') as $dir) {
+            if (!is_dir($this->_tmpdir . $dir)) {
+                continue;
+            }
             $dh = opendir($this->_tmpdir . $dir);
             while (($entry = readdir($dh)) !== false) {
                 $entry = $this->_tmpdir . $dir . '/' . $entry;

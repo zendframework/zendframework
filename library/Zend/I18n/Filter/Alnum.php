@@ -15,7 +15,8 @@ use Traversable;
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ * @package    Zend_I18n
+ * @subpackage Filter
  */
 class Alnum extends AbstractLocale
 {

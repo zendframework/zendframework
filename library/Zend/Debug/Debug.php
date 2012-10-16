@@ -119,7 +119,7 @@ class Debug
         }
 
         if ($echo) {
-            echo($output);
+            echo $output;
         }
         return $output;
     }

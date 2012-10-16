@@ -14,7 +14,8 @@ use Zend\I18n\Filter\Alpha as AlphaFilter;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_I18n
+ * @subpackage Validator
  */
 class Alpha extends Alnum
 {

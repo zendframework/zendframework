@@ -371,6 +371,11 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->reset(Select::OFFSET);
         $this->assertNull($select->getRawState(Select::OFFSET));
 
+        // order
+        $select->order('foo asc');
+        $this->assertEquals(array('foo asc'), $select->getRawState(Select::ORDER));
+        $select->reset(Select::ORDER);
+        $this->assertNull($select->getRawState(Select::ORDER));
     }
 
     /**

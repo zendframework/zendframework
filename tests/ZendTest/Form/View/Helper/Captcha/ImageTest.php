@@ -23,7 +23,7 @@ use ZendTest\Form\View\Helper\CommonTestCase;
  */
 class ImageTest extends CommonTestCase
 {
-    protected $tmpDir;
+    protected $testDir;
 
     public function setUp()
     {
@@ -62,11 +62,17 @@ class ImageTest extends CommonTestCase
     public function tearDown()
     {
         // remove captcha images
-        foreach (new DirectoryIterator($this->tmpDir) as $file) {
+        if (!isset($this->testDir)) {
+            parent::tearDown();
+            return;
+        }
+
+        foreach (new DirectoryIterator($this->testDir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
                 unlink($file->getPathname());
             }
         }
+        parent::tearDown();
     }
 
     /**

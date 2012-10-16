@@ -270,7 +270,12 @@ class Form extends Fieldset implements FormInterface
         if (!is_object($this->object)) {
             return;
         }
-        if (!$this->isValid) {
+        if (!$this->hasValidated() && !empty($values)) {
+            $this->setData($values);
+            if (!$this->isValid()) {
+                return;
+            }
+        } else if (!$this->isValid) {
             return;
         }
 
@@ -434,6 +439,8 @@ class Form extends Fieldset implements FormInterface
         }
 
         $this->isValid = $result = $filter->isValid();
+        $this->hasValidated = true;
+
         if ($result && $this->bindOnValidate()) {
             $this->bindValues();
         }
@@ -442,7 +449,6 @@ class Form extends Fieldset implements FormInterface
             $this->setMessages($filter->getMessages());
         }
 
-        $this->hasValidated = true;
         return $result;
     }
 

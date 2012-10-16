@@ -408,6 +408,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             case self::OFFSET:
                 $this->offset = null;
                 break;
+            case self::ORDER:
+                $this->order = null;
+                break;
         }
         return $this;
     }

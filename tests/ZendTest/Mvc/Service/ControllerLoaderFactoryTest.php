@@ -163,7 +163,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $controller = $this->loader->get($controllerName);
         $this->assertSame($testService, $controller->injectedValue);
     }
-    
+
     public function testCallPluginWithControllerPluginManager()
     {
         $controllerpluginManager = $this->services->get('ControllerPluginManager');

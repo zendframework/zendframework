@@ -25,7 +25,7 @@ class IbanTest extends \PHPUnit_Framework_TestCase
         return array(
             array('AD1200012030200359100100', true),
             array('AT611904300234573201',     true),
-            array('AT61 1904 3002 3457 3201', false),
+            array('AT61 1904 3002 3457 3201', true),
             array('AD1200012030200354100100', false),
 
             array('AL47212110090000000235698741', true),

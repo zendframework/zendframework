@@ -69,7 +69,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
         $decoratorForType = false;
         foreach ($this->decorators as $type => $decorator) {
             if ($this->subject instanceof $type && $decorator instanceof PreparableSqlInterface) {
-                /** @var $decoratorForType PreparableSqlInterface */
+                /** @var $decoratorForType PreparableSqlInterface|PlatformDecoratorInterface */
                 $decoratorForType = $decorator;
                 break;
             }
@@ -96,7 +96,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
         $decoratorForType = false;
         foreach ($this->decorators as $type => $decorator) {
             if ($this->subject instanceof $type && $decorator instanceof SqlInterface) {
-                /** @var $decoratorForType SqlInterface */
+                /** @var $decoratorForType SqlInterface|PlatformDecoratorInterface */
                 $decoratorForType = $decorator;
                 break;
             }

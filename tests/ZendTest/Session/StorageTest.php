@@ -220,4 +220,11 @@ class StorageTest extends \PHPUnit_Framework_TestCase
                                     'Cannot clear storage as it is marked immutable');
         $this->storage->clear();
     }
+
+    public function testRequestAccessTimeIsPreservedEvenInFactoryMethod()
+    {
+        $this->assertNotEmpty($this->storage->getRequestAccessTime());
+        $this->storage->fromArray(array());
+        $this->assertNotEmpty($this->storage->getRequestAccessTime());
+    }
 }

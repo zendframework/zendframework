@@ -258,6 +258,6 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
                         ->setReference('foo')
                         ->setWhen(null);
 
-        $this->assertEquals($result, $entry);
+        $this->assertSame($result, $entry);
     }
 }

@@ -1085,6 +1085,6 @@ EOT;
                          ->setTitle('foo')
                          ->setType('foo');
 
-        $this->assertEquals($return, $writer);
+        $this->assertSame($return, $writer);
     }
 }

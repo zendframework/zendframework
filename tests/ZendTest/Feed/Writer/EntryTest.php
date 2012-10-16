@@ -733,6 +733,6 @@ class EntryTest extends \PHPUnit_Framework_TestCase
                         ->setType('type')
                         ->setSource(new \Zend\Feed\Writer\Source());
 
-        $this->assertEquals($result, $entry);
+        $this->assertSame($result, $entry);
     }
 }

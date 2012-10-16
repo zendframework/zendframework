@@ -57,7 +57,7 @@ http://www.php.net/manual/en/configuration.changes.php
 A great place to get up-to-speed quickly is the Zend Framework
 QuickStart:
 
-http://www.framework.zend.com/manual/2.0/en/user-guide/overview.html
+http://framework.zend.com/manual/2.0/en/user-guide/overview.html
 
 The QuickStart covers some of the most commonly used components of ZF.
 Since Zend Framework is designed with a use-at-will architecture and

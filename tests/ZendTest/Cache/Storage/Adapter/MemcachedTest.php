@@ -33,52 +33,76 @@ class MemcachedTest extends CommonAdapterTest
 
         $this->_options = new Cache\Storage\Adapter\MemcachedOptions();
         if (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') && defined('TESTS_ZEND_CACHE_MEMCACHED_PORT')) {
-            $this->_options->addServer(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT);
+            $this->_options->setServers(array(array(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT)));
         } elseif (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST')) {
-            $this->_options->addServer(TESTS_ZEND_CACHE_MEMCACHED_HOST);
+            $this->_options->setServers(TESTS_ZEND_CACHE_MEMCACHED_HOST);
         }
 
-        $this->_storage = new Cache\Storage\Adapter\Memcached($this->_options);
+        $this->_storage = new Cache\Storage\Adapter\Memcached();
+        $this->_storage->setOptions($this->_options);
 
         parent::setUp();
     }
 
-    public function testOptionsAddServer()
+    public function getServersDefinitions()
     {
-        $options = new Cache\Storage\Adapter\MemcachedOptions();
-        $options->addServer('127.0.0.1', 11211);
-        $options->addServer('localhost');
-        $options->addServer('domain.com', 11215);
-
-        $servers = array(
-            array('127.0.0.1', 11211),
-            array('localhost', 11211),
-            array('domain.com', 11215),
+        $expectedServers = array(
+            array('host' => '127.0.0.1', 'port' => 12345, 'weight' => 1),
+            array('host' => 'localhost', 'port' => 54321, 'weight' => 2),
+            array('host' => 'examp.com', 'port' => 11211, 'weight' => 1),
         );
 
-        $this->assertEquals($options->getServers(), $servers);
-        $memcached = new Cache\Storage\Adapter\Memcached($options);
-        $this->assertEquals($memcached->getOptions()->getServers(), $servers);
+        return array(
+            // servers as array list
+            array(
+                array(
+                    array('127.0.0.1', 12345, 1),
+                    array('localhost', '54321', '2'),
+                    array('examp.com'),
+                ),
+                $expectedServers,
+            ),
+
+            // servers as array assoc
+            array(
+                array(
+                    array('127.0.0.1', 12345, 1),
+                    array('localhost', '54321', '2'),
+                    array('examp.com'),
+                ),
+                $expectedServers,
+            ),
+
+            // servers as string list
+            array(
+                array(
+                    '127.0.0.1:12345?weight=1',
+                    'localhost:54321?weight=2',
+                    'examp.com',
+                ),
+                $expectedServers,
+            ),
+
+            // servers as string
+            array(
+                '127.0.0.1:12345?weight=1, localhost:54321?weight=2,tcp://examp.com',
+                $expectedServers,
+            ),
+        );
     }
 
-    public function testOptionsSetServers()
+    /**
+     *
+     * @dataProvider getServersDefinitions
+     */
+    public function testOptionServers($servers, $expectedServers)
     {
         $options = new Cache\Storage\Adapter\MemcachedOptions();
-        $servers = array(
-            array('127.0.0.1', 12345),
-            array('localhost', 54321),
-            array('domain.com')
-        );
-
         $options->setServers($servers);
-        $servers[2][1] = 11211;
-        $this->assertEquals($options->getServers(), $servers);
-
-        $memcached = new Cache\Storage\Adapter\Memcached($options);
-        $this->assertEquals($memcached->getOptions()->getServers(), $servers);
+        $this->assertEquals($expectedServers, $options->getServers());
     }
 
-    public function testLibOptionsSet()
+    public function testOptionLibOptions()
     {
         $options = new Cache\Storage\Adapter\MemcachedOptions();
 
@@ -87,18 +111,6 @@ class MemcachedTest extends CommonAdapterTest
         ));
 
         $this->assertEquals($options->getLibOption(\Memcached::OPT_COMPRESSION), false);
-
-        $memcached = new Cache\Storage\Adapter\Memcached($options);
-        $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
-            \Memcached::OPT_COMPRESSION => false
-        ));
-    }
-
-    public function testNoOptionsSetsDefaultServer()
-    {
-        $memcached = new Cache\Storage\Adapter\Memcached();
-
-        $this->assertEquals($memcached->getOptions()->getServers(), array(array('127.0.0.1', 11211)));
     }
 
     public function tearDown()

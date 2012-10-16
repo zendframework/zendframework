@@ -75,7 +75,7 @@ class ControllerManager extends AbstractPluginManager
         }
 
         if (method_exists($controller, 'setPluginManager')) {
-            $controller->setPluginManager($parentLocator->get('ControllerPluginBroker'));
+            $controller->setPluginManager($parentLocator->get('ControllerPluginManager'));
         }
     }
 

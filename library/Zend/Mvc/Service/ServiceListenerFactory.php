@@ -69,10 +69,8 @@ class ServiceListenerFactory implements FactoryInterface
         'aliases' => array(
             'Configuration'                          => 'Config',
             'Console'                                => 'ConsoleAdapter',
-            'ControllerPluginBroker'                 => 'ControllerPluginManager',
             'Di'                                     => 'DependencyInjector',
             'Zend\Di\LocatorInterface'               => 'DependencyInjector',
-            'Zend\Mvc\Controller\PluginBroker'       => 'ControllerPluginBroker',
             'Zend\Mvc\Controller\PluginManager'      => 'ControllerPluginManager',
             'Zend\View\Resolver\TemplateMapResolver' => 'ViewTemplateMapResolver',
             'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',

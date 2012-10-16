@@ -61,7 +61,7 @@ class AbstractFeed
      *
      * @param array $author
      * @throws Exception\InvalidArgumentException If any value of $author not follow the format.
-     * @return void
+     * @return AbstractFeed
      */
     public function addAuthor(array $author)
     {
@@ -90,6 +90,8 @@ class AbstractFeed
         }
 
         $this->data['authors'][] = $author;
+
+        return $this;
     }
 
     /**
@@ -97,20 +99,23 @@ class AbstractFeed
      *
      * @see addAuthor
      * @param array $authors
-     * @return void
+     * @return AbstractFeed
      */
     public function addAuthors(array $authors)
     {
         foreach ($authors as $author) {
             $this->addAuthor($author);
         }
+
+        return $this;
     }
 
     /**
      * Set the copyright entry
      *
-     * @param string $copyright
+     * @param  string      $copyright
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setCopyright($copyright)
     {
@@ -118,6 +123,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['copyright'] = $copyright;
+
+        return $this;
     }
 
     /**
@@ -125,6 +132,7 @@ class AbstractFeed
      *
      * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setDateCreated($date = null)
     {
@@ -137,6 +145,8 @@ class AbstractFeed
                                                          . ' passed as parameter');
         }
         $this->data['dateCreated'] = $date;
+
+        return $this;
     }
 
     /**
@@ -144,6 +154,7 @@ class AbstractFeed
      *
      * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setDateModified($date = null)
     {
@@ -156,6 +167,8 @@ class AbstractFeed
                                                          . ' passed as parameter');
         }
         $this->data['dateModified'] = $date;
+
+        return $this;
     }
 
     /**
@@ -163,6 +176,7 @@ class AbstractFeed
      *
      * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setLastBuildDate($date = null)
     {
@@ -175,6 +189,8 @@ class AbstractFeed
                                                          . ' passed as parameter');
         }
         $this->data['lastBuildDate'] = $date;
+
+        return $this;
     }
 
     /**
@@ -182,6 +198,7 @@ class AbstractFeed
      *
      * @param string $description
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setDescription($description)
     {
@@ -189,6 +206,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['description'] = $description;
+
+        return $this;
     }
 
     /**
@@ -198,7 +217,7 @@ class AbstractFeed
      * @param null|string $version
      * @param null|string $uri
      * @throws Exception\InvalidArgumentException
-     * @return string|null
+     * @return AbstractFeed
      */
     public function setGenerator($name, $version = null, $uri = null)
     {
@@ -239,6 +258,8 @@ class AbstractFeed
             }
         }
         $this->data['generator'] = $generator;
+
+        return $this;
     }
 
     /**
@@ -246,6 +267,7 @@ class AbstractFeed
      *
      * @param string $id
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setId($id)
     {
@@ -256,6 +278,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->data['id'] = $id;
+
+        return $this;
     }
 
     /**
@@ -298,6 +322,7 @@ class AbstractFeed
      *
      * @param array $data
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setImage(array $data)
     {
@@ -308,6 +333,8 @@ class AbstractFeed
             . ' must be a non-empty string and valid URI/IRI');
         }
         $this->data['image'] = $data;
+
+        return $this;
     }
 
     /**
@@ -315,6 +342,7 @@ class AbstractFeed
      *
      * @param string $language
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setLanguage($language)
     {
@@ -322,6 +350,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['language'] = $language;
+
+        return $this;
     }
 
     /**
@@ -329,6 +359,7 @@ class AbstractFeed
      *
      * @param string $link
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setLink($link)
     {
@@ -336,6 +367,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->data['link'] = $link;
+
+        return $this;
     }
 
     /**
@@ -344,6 +377,7 @@ class AbstractFeed
      * @param string $link
      * @param string $type
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setFeedLink($link, $type)
     {
@@ -354,6 +388,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: "type"; You must declare the type of feed the link points to, i.e. RSS, RDF or Atom');
         }
         $this->data['feedLinks'][strtolower($type)] = $link;
+
+        return $this;
     }
 
     /**
@@ -361,6 +397,7 @@ class AbstractFeed
      *
      * @param string $title
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setTitle($title)
     {
@@ -368,6 +405,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['title'] = $title;
+
+        return $this;
     }
 
     /**
@@ -375,6 +414,7 @@ class AbstractFeed
      *
      * @param string $encoding
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setEncoding($encoding)
     {
@@ -382,6 +422,8 @@ class AbstractFeed
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['encoding'] = $encoding;
+
+        return $this;
     }
 
     /**
@@ -389,6 +431,7 @@ class AbstractFeed
      *
      * @param string $url
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function setBaseUrl($url)
     {
@@ -397,6 +440,8 @@ class AbstractFeed
             . ' must be a non-empty string and valid URI/IRI');
         }
         $this->data['baseUrl'] = $url;
+
+        return $this;
     }
 
     /**
@@ -404,6 +449,7 @@ class AbstractFeed
      *
      * @param string $url
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function addHub($url)
     {
@@ -415,18 +461,23 @@ class AbstractFeed
             $this->data['hubs'] = array();
         }
         $this->data['hubs'][] = $url;
+
+        return $this;
     }
 
     /**
      * Add Pubsubhubbub hub endpoint URLs
      *
      * @param array $urls
+     * @return AbstractFeed
      */
     public function addHubs(array $urls)
     {
         foreach ($urls as $url) {
             $this->addHub($url);
         }
+
+        return $this;
     }
 
     /**
@@ -434,6 +485,7 @@ class AbstractFeed
      *
      * @param array $category
      * @throws Exception\InvalidArgumentException
+     * @return AbstractFeed
      */
     public function addCategory(array $category)
     {
@@ -455,18 +507,23 @@ class AbstractFeed
             $this->data['categories'] = array();
         }
         $this->data['categories'][] = $category;
+
+        return $this;
     }
 
     /**
      * Set an array of feed categories
      *
      * @param array $categories
+     * @return AbstractFeed
      */
     public function addCategories(array $categories)
     {
         foreach ($categories as $category) {
             $this->addCategory($category);
         }
+
+        return $this;
     }
 
     /**
@@ -721,10 +778,12 @@ class AbstractFeed
      * on their appropriateness for the current type, e.g. renderers.
      *
      * @param string $type
+     * @return AbstractFeed
      */
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     /**
@@ -741,12 +800,14 @@ class AbstractFeed
      * Unset a specific data point
      *
      * @param string $name
+     * @return AbstractFeed
      */
     public function remove($name)
     {
         if (isset($this->data[$name])) {
             unset($this->data[$name]);
         }
+        return $this;
     }
 
     /**

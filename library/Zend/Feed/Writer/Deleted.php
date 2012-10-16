@@ -41,6 +41,7 @@ class Deleted
      * @param  $encoding
      * @throws Exception\InvalidArgumentException
      * @return string|null
+     * @return Deleted
      */
     public function setEncoding($encoding)
     {
@@ -48,6 +49,8 @@ class Deleted
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['encoding'] = $encoding;
+
+        return $this;
     }
 
     /**
@@ -67,12 +70,15 @@ class Deleted
      * Unset a specific data point
      *
      * @param string $name
+     * @return Deleted
      */
     public function remove($name)
     {
         if (isset($this->data[$name])) {
             unset($this->data[$name]);
         }
+
+        return $this;
     }
 
     /**
@@ -81,10 +87,12 @@ class Deleted
      * on their appropriateness for the current type, e.g. renderers.
      *
      * @param string $type
+     * @return Deleted
      */
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     /**
@@ -102,6 +110,7 @@ class Deleted
      *
      * @param $reference
      * @throws Exception\InvalidArgumentException
+     * @return Deleted
      */
     public function setReference($reference)
     {
@@ -109,8 +118,13 @@ class Deleted
             throw new Exception\InvalidArgumentException('Invalid parameter: reference must be a non-empty string');
         }
         $this->data['reference'] = $reference;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getReference()
     {
         if (!array_key_exists('reference', $this->data)) {
@@ -124,6 +138,7 @@ class Deleted
      *
      * @param null|string|DateTime $date
      * @throws Exception\InvalidArgumentException
+     * @return Deleted
      */
     public function setWhen($date = null)
     {
@@ -136,10 +151,12 @@ class Deleted
             . ' passed as parameter');
         }
         $this->data['when'] = $date;
+
+        return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getWhen()
     {
@@ -154,6 +171,7 @@ class Deleted
      *
      * @param array $by
      * @throws Exception\InvalidArgumentException
+     * @return Deleted
      */
     public function setBy(array $by)
     {
@@ -184,8 +202,13 @@ class Deleted
             $author['uri'] = $by['uri'];
         }
         $this->data['by'] = $author;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getBy()
     {
         if (!array_key_exists('by', $this->data)) {
@@ -194,11 +217,19 @@ class Deleted
         return $this->data['by'];
     }
 
+    /**
+     * @param string $comment
+     * @return Deleted
+     */
     public function setComment($comment)
     {
         $this->data['comment'] = $comment;
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getComment()
     {
         if (!array_key_exists('comment', $this->data)) {

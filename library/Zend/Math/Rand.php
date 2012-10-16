@@ -15,7 +15,6 @@ namespace Zend\Math;
  *
  * @category   Zend
  * @package    Zend_Math
- * @subpackage Rand
  */
 abstract class Rand
 {

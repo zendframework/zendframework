@@ -226,7 +226,7 @@ class Iban extends AbstractValidator
             return false;
         }
 
-        $value = strtoupper($value);
+        $value = str_replace(' ', '', strtoupper($value));
         $this->setValue($value);
 
         $countryCode = $this->getCountryCode();

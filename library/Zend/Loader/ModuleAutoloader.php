@@ -146,7 +146,7 @@ class ModuleAutoloader implements SplAutoloader
                 }
             }
         }
-        
+
 
         $moduleClassPath   = str_replace('\\', DIRECTORY_SEPARATOR, $moduleName);
 

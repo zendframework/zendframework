@@ -76,7 +76,7 @@ class SessionStorage extends ArrayStorage
      */
     public function fromArray(array $array)
     {
-        $this->exchangeArray($array);
+        parent::fromArray($array);
         if ($_SESSION !== $this) {
             $_SESSION = $this;
         }

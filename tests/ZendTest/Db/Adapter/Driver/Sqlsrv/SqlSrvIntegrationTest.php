@@ -7,20 +7,8 @@ use Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
  * @group integration
  * @group integration-sqlsrv
  */
-class SqlsrvIntegrationTest extends \PHPUnit_Framework_TestCase
+class SqlsrvIntegrationTest extends AbstractIntegrationTest
 {
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        if (!extension_loaded('sqlsrv')) {
-            $this->fail('The phpunit group integration-sqlsrv was enabled, but the extension is not loaded.');
-        }
-    }
-
     /**
      * @group integration-sqlserver
      * @covers Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv::checkEnvironment
@@ -29,6 +17,28 @@ class SqlsrvIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $sqlserver = new Sqlsrv(array());
         $this->assertNull($sqlserver->checkEnvironment());
+    }
+
+    public function testCreateStatement()
+    {
+        $driver = new Sqlsrv(array());
+
+        $resource = sqlsrv_connect(
+            $this->variables['hostname'], array(
+                'UID' => $this->variables['username'],
+                'PWD' => $this->variables['password']
+            )
+        );
+
+        $driver->getConnection()->setResource($resource);
+
+        $stmt = $driver->createStatement('SELECT 1');
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Sqlsrv\Statement', $stmt);
+        $stmt = $driver->createStatement($resource);
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Sqlsrv\Statement', $stmt);
+
+        $this->setExpectedException('Zend\Db\Adapter\Exception\InvalidArgumentException', 'only accepts an SQL string or a Sqlsrv resource');
+        $driver->createStatement(new \stdClass);
     }
 
 }

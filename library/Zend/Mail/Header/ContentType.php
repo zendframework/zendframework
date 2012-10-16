@@ -102,7 +102,7 @@ class ContentType implements HeaderInterface
      */
     public function setType($type)
     {
-        if (!preg_match('/^[a-z_-]+\/[a-z_-]+$/i', $type)) {
+        if (!preg_match('/^[a-z-]+\/[a-z0-9.+-]+$/i', $type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a value in the format "type/subtype"; received "%s"',
                 __METHOD__,

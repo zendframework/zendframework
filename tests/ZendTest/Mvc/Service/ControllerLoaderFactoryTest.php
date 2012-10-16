@@ -168,7 +168,7 @@ class ControllerLoaderFactoryTest extends TestCase
     {
         $controllerpluginManager = $this->services->get('ControllerPluginManager');
         $controllerpluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
-        
+
         $controller    = new \ZendTest\Mvc\Controller\TestAsset\SampleController;
         $controllerpluginManager->setController($controller);
 

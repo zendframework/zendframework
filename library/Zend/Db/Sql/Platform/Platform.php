@@ -25,6 +25,10 @@ class Platform extends AbstractPlatform
         $this->adapter = $adapter;
         $platform = $adapter->getPlatform();
         switch (strtolower($platform->getName())) {
+            case 'mysql':
+                $platform = new Mysql\Mysql();
+                $this->decorators = $platform->decorators;
+                break;
             case 'sqlserver':
                 $platform = new SqlServer\SqlServer();
                 $this->decorators = $platform->decorators;

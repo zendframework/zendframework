@@ -71,4 +71,22 @@ class PluginManagerTest extends TestCase
         $plugin = $pluginManager->get('samplePlugin', 'foo');
         $this->assertEquals($plugin->getBar(), 'foo');
     }
+
+    public function testCanCreateByFactory()
+    {
+        $pluginManager = new PluginManager;
+        $pluginManager->setFactory('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginFactory');
+        $plugin = $pluginManager->get('samplePlugin');
+        $this->assertInstanceOf('\ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin', $plugin);
+    }
+
+    public function testCanCreateByFactoryWithConstrutor()
+    {
+        $pluginManager = new PluginManager;
+        $pluginManager->setFactory('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructorFactory');
+        $plugin = $pluginManager->get('samplePlugin', 'foo');
+        $this->assertInstanceOf('\ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructor', $plugin);
+        $this->assertEquals($plugin->getBar(), 'foo');
+    }
+
 }

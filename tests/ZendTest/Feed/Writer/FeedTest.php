@@ -1061,4 +1061,30 @@ EOT;
         } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
+
+    public function testFluentInterface()
+    {
+        $writer = new Writer\Feed;
+        $return = $writer->addAuthor(array('name' => 'foo'))
+                         ->addAuthors(array(array('name' => 'foo')))
+                         ->setCopyright('copyright')
+                         ->addCategories(array(array('term' => 'foo')))
+                         ->addCategory(array('term' => 'foo'))
+                         ->addHub('foo')
+                         ->addHubs(array('foo'))
+                         ->setBaseUrl('http://www.example.com')
+                         ->setDateCreated(null)
+                         ->setDateModified(null)
+                         ->setDescription('description')
+                         ->setEncoding('utf-8')
+                         ->setId('1')
+                         ->setImage(array('uri' => 'http://www.example.com'))
+                         ->setLanguage('fr')
+                         ->setLastBuildDate(null)
+                         ->setLink('foo')
+                         ->setTitle('foo')
+                         ->setType('foo');
+
+        $this->assertSame($return, $writer);
+    }
 }

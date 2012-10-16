@@ -16,5 +16,4 @@ namespace Zend\Feed\Writer;
 */
 class Source extends AbstractFeed
 {
-
 }

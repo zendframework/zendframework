@@ -30,6 +30,11 @@ class ModuleAutoloader implements SplAutoloader
     protected $explicitPaths = array();
 
     /**
+     * @var array An array of namespaceName => namespacePath
+     */
+    protected $namespacedPaths = array();
+
+    /**
      * @var array An array of supported phar extensions (filled on constructor)
      */
     protected $pharExtensions = array();
@@ -120,6 +125,28 @@ class ModuleAutoloader implements SplAutoloader
                 return $classLoaded;
             }
         }
+
+        if (count($this->namespacedPaths) >= 1 ) {
+            foreach ( $this->namespacedPaths as $namespace=>$path ) {
+                if ( false === strpos($moduleName,$namespace) ) {
+                    continue;
+                }
+
+                $moduleName_buffer = str_replace($namespace . "\\", "", $moduleName );
+                $path .= DIRECTORY_SEPARATOR . $moduleName_buffer . DIRECTORY_SEPARATOR;
+
+                $classLoaded = $this->loadModuleFromDir($path, $class);
+                if ($classLoaded) {
+                    return $classLoaded;
+                }
+
+                $classLoaded = $this->loadModuleFromPhar($path, $class);
+                if ($classLoaded) {
+                    return $classLoaded;
+                }
+            }
+        }
+        
 
         $moduleClassPath   = str_replace('\\', DIRECTORY_SEPARATOR, $moduleName);
 
@@ -303,7 +330,11 @@ class ModuleAutoloader implements SplAutoloader
             ));
         }
         if ($moduleName) {
-            $this->explicitPaths[$moduleName] = static::normalizePath($path);
+            if (in_array( substr($moduleName, -2 ), array('\\*','\\%') ) ) {
+                $this->namespacedPaths[ substr($moduleName, 0, -2 ) ] = static::normalizePath($path);
+            } else {
+                $this->explicitPaths[$moduleName] = static::normalizePath($path);
+            }
         } else {
             $this->paths[] = static::normalizePath($path);
         }

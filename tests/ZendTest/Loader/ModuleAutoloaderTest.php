@@ -197,4 +197,16 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('PharModuleExplicit\Module'));
     }
 
+    public function testCanLoadModulesFromNamespace()
+    {
+        $loader = new ModuleAutoloader(array(
+            'FooModule\*' => __DIR__ . '/_files/FooModule',
+            'FooModule' => __DIR__ . '/_files/FooModule',
+        ));
+        $loader->register();
+        $this->assertTrue(class_exists('FooModule\BarModule\Module'));
+        $this->assertTrue(class_exists('FooModule\SubModule\Module'));
+        $this->assertTrue(class_exists('FooModule\Module'));
+    }
+
 }

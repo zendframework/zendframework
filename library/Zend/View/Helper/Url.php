@@ -102,6 +102,8 @@ class Url extends AbstractHelper
 
             if (isset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
                 $routeMatchParams['controller'] = $routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
+                unset($routeMatchParams[ModuleRouteListener::MODULE_NAMESPACE]);
+                unset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER]);
             }
 
             $params = array_merge($routeMatchParams, $params);

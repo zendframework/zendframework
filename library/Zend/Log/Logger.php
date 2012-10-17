@@ -380,7 +380,7 @@ class Logger implements LoggerInterface
         set_error_handler(function($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
             $errorLevel = error_reporting();
 
-            if ($errorLevel && $errno) {
+            if ($errorLevel & $errno) {
                 if (isset($errorHandlerMap[$errno])) {
                     $priority = $errorHandlerMap[$errno];
                 } else {

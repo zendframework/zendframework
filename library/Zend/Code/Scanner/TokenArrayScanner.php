@@ -584,10 +584,6 @@ class TokenArrayScanner implements ScannerInterface
             }
         }
 
-        if (!$namespaces) {
-            return array();
-        }
-
         if ($namespace === null) {
             $namespace = array_shift($namespaces);
         } elseif (!is_string($namespace)) {

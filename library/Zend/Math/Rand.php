@@ -152,7 +152,7 @@ abstract class Rand
         // charlist is empty or not provided
         if (empty($charlist)) {
             $numBytes = ceil($length * 0.75);
-            $bytes    = static::getBytes($numBytes);
+            $bytes    = static::getBytes($numBytes, $strong);
             return substr(rtrim(base64_encode($bytes), '='), 0, $length);
         }
 

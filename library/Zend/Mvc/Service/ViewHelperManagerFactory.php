@@ -86,7 +86,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
             $config = $serviceLocator->get('Config');
             $basePathHelper = new ViewHelper\BasePath;
             if (isset($config['view_manager']) && isset($config['view_manager']['base_path'])) {
-                $basePath = $config['base_path'];
+                $basePath = $config['view_manager']['base_path'];
             } else {
                 $basePath = $serviceLocator->get('Request')->getBasePath();
             }

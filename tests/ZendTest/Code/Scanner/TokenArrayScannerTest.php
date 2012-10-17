@@ -24,6 +24,18 @@ class TokenArrayScannerTest extends TestCase
         $this->assertContains('ZendTest\Code\TestAsset', $namespaces);
     }
 
+    public function testScannerReturnsNamespacesInNotNamespacedClasses()
+    {
+        $tokenScanner = new TokenArrayScanner(token_get_all(file_get_contents((__DIR__ . '/../TestAsset/FooBarClass.php'))));
+        $uses = $tokenScanner->getUses();
+        $this->assertInternalType('array', $uses);
+        $foundUses = array();
+        foreach ($uses as $use) {
+            $foundUses[] = $use['use'];
+        }
+        $this->assertContains('ArrayObject', $foundUses);
+    }
+
     public function testScannerReturnsClassNames()
     {
         $tokenScanner = new TokenArrayScanner(token_get_all(file_get_contents((__DIR__ . '/../TestAsset/FooClass.php'))));

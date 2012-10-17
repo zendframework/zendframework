@@ -5,13 +5,13 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.3*
+*Zend Framework 2.0.4dev*
 
-This is the third maintenance release for the 2.0 series.
+This is the fourth maintenance release for the 2.0 series.
 
-17 Oct 2012
+XX YYY 2012
 
-### UPDATES IN 2.0.3
+### UPDATES IN 2.0.4
 
 Please see CHANGELOG.md.
 

@@ -26,6 +26,10 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $this->applicationConfig = $applicationConfig;
     }
 
+    /**
+     * Get the application object
+     * @return Zend\Mvc\ApplicationInterface
+     */
     public function getApplication()
     {
         if(null === $this->application) {
@@ -47,6 +51,10 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         return $this->application;
     }
 
+    /**
+     * Get the service manager of the application object
+     * @return Zend\ServiceManager\ServiceManager
+     */
     public function getApplicationServiceLocator()
     {
         return $this->getApplication()->getServiceManager();

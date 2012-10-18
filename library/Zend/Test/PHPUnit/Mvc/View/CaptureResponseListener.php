@@ -47,7 +47,7 @@ class CaptureResponseListener implements ListenerAggregateInterface
      * @return mixed
      */
     public function captureResponse(MvcEvent $e)
-    {   
+    {
         $e->stopPropagation(true);
     }
 }

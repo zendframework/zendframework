@@ -35,7 +35,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     {
         $this->dispatch('--console');
         $this->assertResponseStatusCode(0);
-        
+
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertResponseStatusCode(1);
     }

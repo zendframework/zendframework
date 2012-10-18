@@ -48,7 +48,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotResponseStatusCode(200);
     }
-    
+
     public function testAssertModuleName()
     {
         $this->dispatch('/tests');

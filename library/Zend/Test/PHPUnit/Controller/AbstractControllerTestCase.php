@@ -125,7 +125,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $controllerClass = $controllerManager->get($controllerIdentifier);
         return get_class($controllerClass);
     }
-    
+
     public function assertModule($module)
     {
         $controllerClass = $this->getControllerFullClassName();
@@ -249,7 +249,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertNotEquals($action, $match);
     }
-    
+
     public function assertMatchedRouteName($route)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
@@ -279,7 +279,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertNotEquals($route, $match);
     }
-    
+
     protected function query($path)
     {
         $response = $this->getApplication()->getResponse();
@@ -287,7 +287,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $result = $dom->execute($path);
         return count($result);
     }
-    
+
     public function assertQuery($path)
     {
         $match = $this->query($path);
@@ -298,7 +298,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals(true, $match > 0);
     }
-    
+
     public function assertNotQuery($path)
     {
         $match = $this->query($path);
@@ -309,7 +309,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals(0, $match);
     }
-    
+
     public function assertQueryCount($path, $count)
     {
         $match = $this->query($path);

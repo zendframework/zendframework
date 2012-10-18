@@ -31,38 +31,35 @@ class AdapterPluginManager extends AbstractPluginManager
      */
     protected $invokableClasses = array(
         'array'         => 'Zend\Paginator\Adapter\ArrayAdapter',
-        'dbselect'      => 'Zend\Paginator\Adapter\DbSelect',
         'iterator'      => 'Zend\Paginator\Adapter\Iterator',
         'null'          => 'Zend\Paginator\Adapter\Null',
     );
 
     /**
-     * Attempt to create an instance via an invokable class
+     * Default set of adapter factories
      *
-     * Overrides parent implementation by passing $creationOptions to the
-     * constructor, if non-null.
+     * @var array
+     */
+    protected $factories = array(
+        'dbselect'         => 'Zend\Paginator\Adapter\Service\DbSelectFactory'
+    );
+
+    /**
+     * Attempt to create an instance via a factory
      *
      * @param  string $canonicalName
      * @param  string $requestedName
-     * @return null|\stdClass
-     * @throws Exception\ServiceNotCreatedException If resolved class does not exist
+     * @return mixed
+     * @throws Exception\ServiceNotCreatedException If factory is not callable
      */
-    protected function createFromInvokable($canonicalName, $requestedName)
+    protected function createFromFactory($canonicalName, $requestedName)
     {
-        $invokable = $this->invokableClasses[$canonicalName];
-
-        if (null === $this->creationOptions
-            || (is_array($this->creationOptions) && empty($this->creationOptions))
-        ) {
-            return new $invokable();
-        } else {
-            if($canonicalName == "dbselect" && is_array($this->creationOptions)) {
-                $class = new \ReflectionClass($invokable);
-                return $class->newInstanceArgs($this->creationOptions);
-            } else {
-                return new $invokable($this->creationOptions);
-            }
+        $factory = $this->factories[$canonicalName];
+        if (is_string($factory) && class_exists($factory, true)) {
+            $factory = new $factory($this->creationOptions);
+            $this->factories[$canonicalName] = $factory;
         }
+        return parent::createFromFactory($canonicalName, $requestedName);
     }
 
     /**

@@ -41,7 +41,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     );
 
     /**
-     * @var string
+     * @var string|TableIdentifier
      */
     protected $table = '';
 
@@ -63,7 +63,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Constructor
      *
-     * @param  null|string $table
+     * @param  null|string|TableIdentifier $table
      */
     public function __construct($table = null)
     {
@@ -76,7 +76,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Create from statement
      *
-     * @param  string $table
+     * @param  string|TableIdentifier $table
      * @return Delete
      */
     public function from($table)
@@ -169,7 +169,19 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $statementContainer->setParameterContainer($parameterContainer);
         }
 
-        $table = $platform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = null;
+
+        // create quoted table name to use in columns processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        $table = $platform->quoteIdentifier($table);
+
+        if ($schema) {
+            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
+        }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 

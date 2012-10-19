@@ -41,7 +41,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     );
 
     /**
-     * @var string
+     * @var string|TableIdentifier
      */
     protected $table            = null;
     protected $columns          = array();
@@ -54,7 +54,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Constructor
      *
-     * @param  null|string $table
+     * @param  null|string|TableIdentifier $table
      */
     public function __construct($table = null)
     {
@@ -66,7 +66,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Crete INTO clause
      *
-     * @param  string $table
+     * @param  string|TableIdentifier $table
      * @return Insert
      */
     public function into($table)
@@ -152,7 +152,19 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $statementContainer->setParameterContainer($parameterContainer);
         }
 
-        $table = $platform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = null;
+
+        // create quoted table name to use in columns processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        $table = $platform->quoteIdentifier($table);
+
+        if ($schema) {
+            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
+        }
 
         $columns = array();
         $values  = array();

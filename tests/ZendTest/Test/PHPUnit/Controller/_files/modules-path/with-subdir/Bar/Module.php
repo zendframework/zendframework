@@ -19,7 +19,7 @@ class Module
             ),
         );
     }
-    
+
     public function getServiceConfig()
     {
         return array(

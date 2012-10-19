@@ -94,7 +94,7 @@ class CachingFileScanner extends FileScanner
     /**
      * Get namespaces
      *
-     * @return array
+     * @return string[]
      */
     public function getNamespaces()
     {
@@ -133,7 +133,7 @@ class CachingFileScanner extends FileScanner
     /**
      * Get classes
      *
-     * @return array
+     * @return string[]
      */
     public function getClasses()
     {
@@ -155,7 +155,7 @@ class CachingFileScanner extends FileScanner
      * Get class name information
      *
      * @param string $className
-     * @return bool|null|\Zend\Code\NameInformation
+     * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)
     {
@@ -165,7 +165,7 @@ class CachingFileScanner extends FileScanner
     /**
      * Get function names
      *
-     * @return array
+     * @return string[]
      */
     public function getFunctionNames()
     {
@@ -175,7 +175,7 @@ class CachingFileScanner extends FileScanner
     /**
      * Get functions
      *
-     * @return array
+     * @return string[]
      */
     public function getFunctions()
     {

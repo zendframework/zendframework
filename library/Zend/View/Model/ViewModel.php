@@ -352,6 +352,17 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Clears out all child models
+     *
+     * @return ViewModel
+     */
+    public function clearChildren()
+    {
+        $this->children = array();
+        return $this;
+    }
+
+    /**
      * Set the name of the variable to capture this model to, if it is a child model
      *
      * @param  string $capture

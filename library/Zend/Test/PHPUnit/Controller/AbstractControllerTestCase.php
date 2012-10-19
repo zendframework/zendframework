@@ -72,7 +72,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->getApplication()->run();
     }
-    
+
     public function assertModulesLoaded(array $modules)
     {
         $moduleManager = $this->getApplicationServiceLocator()->get('ModuleManager');
@@ -85,7 +85,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals(count($list), 0);
     }
-    
+
     public function assertNotModulesLoaded(array $modules)
     {
         $moduleManager = $this->getApplicationServiceLocator()->get('ModuleManager');

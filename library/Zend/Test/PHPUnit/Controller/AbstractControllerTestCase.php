@@ -72,6 +72,32 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->getApplication()->run();
     }
+    
+    public function assertModulesLoaded(array $modules)
+    {
+        $moduleManager = $this->getApplicationServiceLocator()->get('ModuleManager');
+        $modulesLoaded = $moduleManager->getModules();
+        $list = array_diff($modules, $modulesLoaded);
+        if($list) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Several modules are not loaded "%s"', implode(', ', $list)
+            ));
+        }
+        $this->assertEquals(count($list), 0);
+    }
+    
+    public function assertNotModulesLoaded(array $modules)
+    {
+        $moduleManager = $this->getApplicationServiceLocator()->get('ModuleManager');
+        $modulesLoaded = $moduleManager->getModules();
+        $list = array_intersect($modules, $modulesLoaded);
+        if($list) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Several modules WAS not loaded "%s"', implode(', ', $list)
+            ));
+        }
+        $this->assertEquals(count($list), 0);
+    }
 
     protected function getResponseStatusCode()
     {

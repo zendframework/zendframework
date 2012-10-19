@@ -349,7 +349,7 @@ class Client implements ServerClient
      */
     public function setClassmap(array $classmap)
     {
-        foreach ($classmap as $class) {
+        foreach ($classmap as $type => $class) {
             if (!class_exists($class)) {
                 throw new Exception\InvalidArgumentException('Invalid class in class map');
             }
@@ -666,7 +666,7 @@ class Client implements ServerClient
     /**
      * Set proxy password
      *
-     * @param  string $proxyPassword
+     * @param  string $proxyLogin
      * @return \Zend\Soap\Client
      */
     public function setProxyPassword($proxyPassword)
@@ -774,7 +774,6 @@ class Client implements ServerClient
     /**
      * Set Stream Context
      *
-     * @param resource $context
      * @return \Zend\Soap\Client
      */
     public function setStreamContext($context)
@@ -858,7 +857,7 @@ class Client implements ServerClient
         if ($userAgent === null) {
             $this->user_agent = null;
         } else {
-            $this->user_agent = (string) $userAgent;
+            $this->user_agent = (string)$userAgent;
         }
         return $this;
     }
@@ -1071,6 +1070,9 @@ class Client implements ServerClient
      */
     public function __call($name, $arguments)
     {
+        if(!is_array($arguments)) {
+            $arguments = array($arguments);
+        }
         $soapClient = $this->getSoapClient();
 
         $this->lastMethod = $name;
@@ -1097,7 +1099,7 @@ class Client implements ServerClient
      */
     public function call($method, $params = array())
     {
-        return call_user_func_array(array($this, '__call'), $params);
+        return call_user_func_array(array($this, '__call'), array($method, $params));
     }
 
     /**
@@ -1141,7 +1143,7 @@ class Client implements ServerClient
     }
 
     /**
-     * @param \SoapClient $soapClient
+     * @param SoapClient $soapClient
      * @return \Zend\Soap\Client
      */
     public function setSoapClient(\SoapClient $soapClient)

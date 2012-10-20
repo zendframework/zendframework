@@ -3,6 +3,7 @@
 namespace ZendTest\Test\PHPUnit\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\Stdlib\Parameters;
 
 class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
@@ -206,5 +207,25 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertQueryCountMax('div.top', 2);
+    }
+
+    public function testAssertQueryWithDynamicQueryParams()
+    {
+        $this->getRequest()
+            ->setMethod('GET')
+            ->setQuery(new Parameters(array('num_get' => 5)));
+        $this->dispatch('/tests');
+        $this->assertQueryCount('div.get', 5);
+        $this->assertQueryCount('div.post', 0);
+    }
+
+    public function testAssertQueryWithDynamicPostParams()
+    {
+        $this->getRequest()
+            ->setMethod('POST')
+            ->setPost(new Parameters(array('num_post' => 5)));
+        $this->dispatch('/tests');
+        $this->assertQueryCount('div.post', 5);
+        $this->assertQueryCount('div.get', 0);
     }
 }

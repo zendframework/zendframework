@@ -59,10 +59,19 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         return $this->getApplication()->getServiceManager();
     }
+    
+    /**
+     * Get the request object
+     * @return \Zend\Stdlib\RequestInterface
+     */
+    public function getRequest()
+    {
+        return $this->getApplication()->getRequest();
+    }
 
     public function dispatch($url)
     {
-        $request = $this->getApplication()->getRequest();
+        $request = $this->getRequest();
         if($this->useConsoleRequest) {
             $params = preg_split('#\s+#', $url);
             $request->params()->exchangeArray($params);

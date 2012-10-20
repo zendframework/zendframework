@@ -324,11 +324,8 @@ class Application implements
         $events = $this->getEventManager();
         $event->setTarget($this);
         try {
-            ob_start();
             $events->trigger(MvcEvent::EVENT_RENDER, $event);
-            ob_end_flush();
         } catch (\Exception $ex) {
-            ob_end_clean();
             $event->setError($this::ERROR_EXCEPTION)
                   ->setParam('exception', $ex);
             $events->trigger(MvcEvent::EVENT_RENDER_ERROR, $event);

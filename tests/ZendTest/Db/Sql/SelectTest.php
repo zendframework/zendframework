@@ -65,6 +65,26 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test isTableReadOnly() returns true for Select with table
+     * @covers Zend\Db\Sql\Select::isTableReadOnly
+     */
+    public function testIsTableReadOnlyForSelectWithTable()
+    {
+        $select = new Select('foo');
+        $this->assertTrue($select->isTableReadOnly());
+    }
+
+    /**
+     * @testdox unit test: Test isTableReadOnly() returns false for Select without table
+     * @covers Zend\Db\Sql\Select::isTableReadOnly
+     */
+    public function testIsTableReadOnlyForSelectWithoutTable()
+    {
+        $select = new Select;
+        $this->assertFalse($select->isTableReadOnly());
+    }
+
+    /**
      * @testdox unit test: Test getRawState() returns information populated via columns()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testColumns

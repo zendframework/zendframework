@@ -498,6 +498,16 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $sql;
     }
 
+    /**
+     * Returns whether the table is read only or not.
+     *
+     * @return boolean
+     */
+    public function isTableReadOnly()
+    {
+        return $this->tableReadOnly;
+    }
+
     protected function processSelect(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         $expr = 1;

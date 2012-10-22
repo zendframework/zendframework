@@ -97,11 +97,11 @@ class HydratingResultSet extends AbstractResultSet
         }        
         $data = $this->dataSource->current();
         $object = is_array($data) ? $this->hydrator->hydrate($data, clone $this->objectPrototype) : false;
-        
+
         if (is_array($this->buffer)) {
             $this->buffer[$this->position] = $object;
         }
-        
+
         return $object;
     }
 

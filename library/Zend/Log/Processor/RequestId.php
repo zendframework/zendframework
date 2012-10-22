@@ -45,8 +45,15 @@ class RequestId implements ProcessorInterface
     protected function getIdentifier()
     {
         $requestTime = (version_compare(PHP_VERSION, '5.4.0') >= 0) ? $_SERVER['REQUEST_TIME_FLOAT'] : $_SERVER['REQUEST_TIME'];
-        $remoteAddr = Console::isConsole() ? 'local' : $_SERVER['REMOTE_ADDR'];
 
-        return md5($requestTime . $remoteAddr);
+        if(Console::isConsole()) {
+            return md5($requestTime);
+        }
+
+        if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return md5($requestTime . $_SERVER['HTTP_X_FORWARDED_FOR']);
+        }
+
+        return md5($requestTime . $_SERVER['REMOTE_ADDR']);
     }
 }

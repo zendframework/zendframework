@@ -99,6 +99,29 @@ class ModuleAutoloader implements SplAutoloader
     }
 
     /**
+     * Retrieves the class map for all loaded modules.
+     *
+     * @return array
+     */
+    public function getModuleClassMap()
+    {
+        return $this->moduleClassMap;
+    }
+
+    /**
+     * Sets the class map used to speed up the module autoloading.
+     *
+     * @param  array $classmap
+     * @return ModuleLoader
+     */
+    public function setModuleClassMap(array $classmap)
+    {
+        $this->moduleClassMap = $classmap;
+
+        return $this;
+    }
+
+    /**
      * Autoload a class
      *
      * @param   $class
@@ -111,6 +134,11 @@ class ModuleAutoloader implements SplAutoloader
         // Limit scope of this autoloader
         if (substr($class, -7) !== '\Module') {
             return false;
+        }
+
+        if (isset($this->moduleClassMap[$class])) {
+            require_once $this->moduleClassMap[$class];
+            return $class;
         }
 
         $moduleName = substr($class, 0, -7);
@@ -295,7 +323,8 @@ class ModuleAutoloader implements SplAutoloader
     public function registerPaths($paths)
     {
         if (!is_array($paths) && !$paths instanceof Traversable) {
-            throw new \InvalidArgumentException(
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            throw new Exception\InvalidArgumentException(
                 'Parameter to \\Zend\\Loader\\ModuleAutoloader\'s '
                 . 'registerPaths method must be an array or '
                 . 'implement the \\Traversable interface'
@@ -324,7 +353,8 @@ class ModuleAutoloader implements SplAutoloader
     public function registerPath($path, $moduleName = false)
     {
         if (!is_string($path)) {
-            throw new \InvalidArgumentException(sprintf(
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid path provided; must be a string, received %s',
                 gettype($path)
             ));

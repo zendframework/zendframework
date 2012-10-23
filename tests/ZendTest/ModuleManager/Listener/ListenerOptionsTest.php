@@ -10,7 +10,6 @@
 
 namespace ZendTest\ModuleManager\Listener;
 
-use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Config\Config;
 use Zend\ModuleManager\Listener\ListenerOptions;
@@ -91,5 +90,32 @@ class ListenerOptionsTest extends TestCase
         $this->setExpectedException('InvalidArgumentException');
         $options = new ListenerOptions;
         $options->setConfigGlobPaths('asd');
+    }
+
+    public function testSetConfigStaticPathsThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new ListenerOptions;
+        $options->setConfigStaticPaths('asd');
+    }
+
+    public function testSetExtraConfigAcceptsArrayOrTraverable()
+    {
+        $array = array(__DIR__);
+        $traversable = new Config($array);
+        $options = new ListenerOptions;
+
+        $this->assertSame($options, $options->setExtraConfig($array));
+        $this->assertSame($array, $options->getExtraConfig());
+
+        $this->assertSame($options, $options->setExtraConfig($traversable));
+        $this->assertSame($traversable, $options->getExtraConfig());
+    }
+
+    public function testSetExtraConfigThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new ListenerOptions;
+        $options->setExtraConfig('asd');
     }
 }

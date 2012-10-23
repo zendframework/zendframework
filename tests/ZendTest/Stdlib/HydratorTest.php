@@ -16,6 +16,8 @@ use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 use ZendTest\Stdlib\TestAsset\Reflection as ReflectionAsset;
+use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
+use Zend\Stdlib\Hydrator\Strategy\SerializableStrategy;
 
 /**
  * @category   Zend
@@ -163,6 +165,16 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->hasBar(), false);
     }
 
+    public function testHydratorClassMethodsOptions()
+    {
+        $hydrator = new ClassMethods();
+        $this->assertTrue($hydrator->getUnderscoreSeparatedKeys());
+        $hydrator->setOptions(array('underscoreSeparatedKeys' => false));
+        $this->assertFalse($hydrator->getUnderscoreSeparatedKeys());
+        $hydrator->setUnderscoreSeparatedKeys(true);
+        $this->assertTrue($hydrator->getUnderscoreSeparatedKeys());
+    }
+
     public function testHydratorClassMethodsIgnoresInvalidValues()
     {
         $hydrator = new ClassMethods(true);
@@ -187,6 +199,39 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->classMethodsUnderscore, $test);
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), 'bar');
+    }
+
+    public function testRetrieveWildStrategyAndOther()
+    {
+        $hydrator = new ClassMethods();
+        $hydrator->addStrategy('default', new DefaultStrategy());
+        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $default = $hydrator->getStrategy('default');
+        $this->assertEquals(get_class($default), 'Zend\Stdlib\Hydrator\Strategy\DefaultStrategy');
+        $serializable = $hydrator->getStrategy('*');
+        $this->assertEquals(get_class($serializable), 'Zend\Stdlib\Hydrator\Strategy\SerializableStrategy');
+    }
+
+    public function testUseWildStrategyByDefault()
+    {
+        $hydrator = new ClassMethods();
+        $datas = $hydrator->extract($this->classMethodsUnderscore);
+        $this->assertEquals($datas['foo_bar'], '1');
+        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $datas = $hydrator->extract($this->classMethodsUnderscore);
+        $this->assertEquals($datas['foo_bar'], 's:1:"1";');
+    }
+
+    public function testUseWildStrategyAndOther()
+    {
+        $hydrator = new ClassMethods();
+        $datas = $hydrator->extract($this->classMethodsUnderscore);
+        $this->assertEquals($datas['foo_bar'], '1');
+        $hydrator->addStrategy('foo_bar', new DefaultStrategy());
+        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $datas = $hydrator->extract($this->classMethodsUnderscore);
+        $this->assertEquals($datas['foo_bar'], '1');
+        $this->assertEquals($datas['foo_bar_baz'], 's:1:"2";');
     }
 
     public function testHydratorClassMethodsCamelCaseWithSetterMissing()

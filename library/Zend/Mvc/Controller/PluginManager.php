@@ -67,6 +67,17 @@ class PluginManager extends AbstractPluginManager
     public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
+
+        $this->setFactory('identity', function ($plugins) {
+            $services = $plugins->getServiceLocator();
+            $plugin   = new Plugin\Identity();
+            if (!$services->has('Zend\Authentication\AuthenticationService')) {
+                return $plugin;
+            }
+            $plugin->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+            return $plugin;
+        });
+
         $this->addInitializer(array($this, 'injectController'));
     }
 

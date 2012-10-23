@@ -21,11 +21,19 @@ class FirePhp implements FormatterInterface
      * Formats the given event data into a single line to be written by the writer.
      *
      * @param array $event The event data which should be formatted.
-     * @return string
+     * @return array  line message and optionally label if 'extra' data exists.
      */
     public function format($event)
     {
-        return $event['message'];
+        $label = null;
+        if ( !empty($event['extra']) ) {
+            $line  = $event['extra'];
+            $label = $event['message'];
+        } else {
+            $line = $event['message'];
+        }
+
+        return array($line, $label);
     }
 
     /**

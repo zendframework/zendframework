@@ -55,15 +55,8 @@ class FirePhp extends AbstractWriter
             return;
         }
 
-        $label = null;
+        list($line, $label) = $this->formatter->format($event);
         
-        if ( !empty($event['extra']) ) {
-            $line  = $event['extra'];
-            $label = $this->formatter->format($event);
-        } else {
-            $line = $this->formatter->format($event);
-        }
-
         switch ($event['priority']) {
             case Logger::EMERG:
             case Logger::ALERT:

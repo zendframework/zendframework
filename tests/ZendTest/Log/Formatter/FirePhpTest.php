@@ -44,8 +44,8 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($fields['message'], $label);
         $this->assertEquals($fields['extra'], $line);
     }
-    
-    public function testFormatWithoutExtra() 
+
+    public function testFormatWithoutExtra()
     {
         $fields = array( 'message' => 'foo' );
 
@@ -55,8 +55,8 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($fields['message'], $line);
         $this->assertNull($label);
     }
-    
-    public function testFormatWithEmptyExtra() 
+
+    public function testFormatWithEmptyExtra()
     {
         $fields = array( 'message' => 'foo',
                 'extra' => array() );
@@ -65,7 +65,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         list($line, $label) = $f->format($fields);
 
         $this->assertContains($fields['message'], $line);
-        $this->assertEmpty($label);
+        $this->assertNull($label);
     }
 
     public function testSetDateTimeFormatDoesNothing()

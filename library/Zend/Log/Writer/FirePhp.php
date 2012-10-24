@@ -56,7 +56,7 @@ class FirePhp extends AbstractWriter
         }
 
         list($line, $label) = $this->formatter->format($event);
-        
+
         switch ($event['priority']) {
             case Logger::EMERG:
             case Logger::ALERT:

@@ -20,6 +20,13 @@ class FileScanner extends TokenArrayScanner implements ScannerInterface
      */
     protected $file = null;
 
+    /**
+     * Constructor
+     *
+     * @param string $file
+     * @param null|AnnotationManager $annotationManager
+     * @throws Exception\InvalidArgumentException
+     */
     public function __construct($file, AnnotationManager $annotationManager = null)
     {
         $this->file = $file;
@@ -31,6 +38,11 @@ class FileScanner extends TokenArrayScanner implements ScannerInterface
         parent::__construct(token_get_all(file_get_contents($file)), $annotationManager);
     }
 
+    /**
+     * Get file
+     *
+     * @return null|string
+     */
     public function getFile()
     {
         return $this->file;

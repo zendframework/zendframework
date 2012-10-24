@@ -96,6 +96,12 @@ class TokenArrayScanner implements ScannerInterface
         return $namespaces;
     }
 
+    /**
+     * Get uses
+     *
+     * @param null|string $namespace
+     * @return array|null
+     */
     public function getUses($namespace = null)
     {
         $this->scan();
@@ -108,6 +114,11 @@ class TokenArrayScanner implements ScannerInterface
         // @todo Implement getIncludes() in TokenArrayScanner
     }
 
+    /**
+     * Get class names
+     *
+     * @return string[]
+     */
     public function getClassNames()
     {
         $this->scan();
@@ -123,6 +134,11 @@ class TokenArrayScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Get classes
+     *
+     * @return ClassScanner[]
+     */
     public function getClasses()
     {
         $this->scan();
@@ -139,12 +155,10 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * getClass()
-     *
      * Return the class object from this scanner
      *
      * @param string|int $name
-     * @throws \Zend\Code\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return ClassScanner
      */
     public function getClass($name)
@@ -179,6 +193,12 @@ class TokenArrayScanner implements ScannerInterface
         );
     }
 
+    /**
+     * Get class name information
+     *
+     * @param string $className
+     * @return bool|null|NameInformation
+     */
     public function getClassNameInformation($className)
     {
         $this->scan();
@@ -202,6 +222,11 @@ class TokenArrayScanner implements ScannerInterface
         return new NameInformation($info['namespace'], $info['uses']);
     }
 
+    /**
+     * Get function names
+     *
+     * @return string[]
+     */
     public function getFunctionNames()
     {
         $this->scan();

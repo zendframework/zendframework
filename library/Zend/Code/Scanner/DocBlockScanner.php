@@ -56,6 +56,8 @@ class DocBlockScanner implements ScannerInterface
     protected $annotations = array();
 
     /**
+     * Constructor
+     *
      * @param string               $docComment
      * @param null|NameInformation $nameInformation
      */
@@ -66,6 +68,8 @@ class DocBlockScanner implements ScannerInterface
     }
 
     /**
+     * Get short description
+     *
      * @return string
      */
     public function getShortDescription()
@@ -75,6 +79,8 @@ class DocBlockScanner implements ScannerInterface
     }
 
     /**
+     * Get long description
+     *
      * @return string
      */
     public function getLongDescription()
@@ -98,6 +104,11 @@ class DocBlockScanner implements ScannerInterface
         return $this->annotations;
     }
 
+    /**
+     * Scan
+     *
+     * @return void
+     */
     protected function scan()
     {
         if ($this->isScanned) {
@@ -162,6 +173,11 @@ class DocBlockScanner implements ScannerInterface
         $this->isScanned        = true;
     }
 
+    /**
+     * Tokenize
+     *
+     * @return array
+     */
     protected function tokenize()
     {
         static $CONTEXT_INSIDE_DOCBLOCK = 0x01;

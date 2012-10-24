@@ -21,6 +21,15 @@ use Zend\Code\Exception;
  */
 class Util
 {
+    /**
+     * Resolve imports
+     *
+     * @param string $value
+     * @param null|string $key
+     * @param \stdClass $data
+     * @return void
+     * @throws Exception\InvalidArgumentException
+     */
     public static function resolveImports(&$value, $key = null, stdClass $data)
     {
         if (!property_exists($data, 'uses') || !property_exists($data, 'namespace')) {

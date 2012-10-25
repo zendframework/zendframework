@@ -27,7 +27,7 @@ class DirectoryScanner implements ScannerInterface
     protected $directories = array();
 
     /**
-     * @var FileScanners[]
+     * @var FileScanner[]
      */
     protected $fileScanners = array();
 

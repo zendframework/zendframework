@@ -19,6 +19,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Sql\Update;
+use Zend\Db\Sql\Where;
 
 /**
  * @category   Zend

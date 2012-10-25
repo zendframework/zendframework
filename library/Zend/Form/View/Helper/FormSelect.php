@@ -83,13 +83,6 @@ class FormSelect extends AbstractHelper
             $options = array('' => $emptyOption) + $options;
         }
 
-        if (empty($options)) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has "value_options"; none found',
-                __METHOD__
-            ));
-        }
-
         $attributes = $element->getAttributes();
         $value      = $this->validateMultiValue($element->getValue(), $attributes);
 

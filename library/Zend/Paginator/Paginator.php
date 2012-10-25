@@ -12,7 +12,6 @@ namespace Zend\Paginator;
 
 use ArrayIterator;
 use Countable;
-use Iterator;
 use IteratorAggregate;
 use Traversable;
 use Zend\Cache\Storage\IteratorInterface as CacheIterator;

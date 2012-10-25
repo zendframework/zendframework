@@ -10,8 +10,6 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap\Wsdl;
-
 /**
  * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
  *

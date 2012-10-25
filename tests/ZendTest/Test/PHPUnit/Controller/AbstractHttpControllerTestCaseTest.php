@@ -4,6 +4,8 @@ namespace ZendTest\Test\PHPUnit\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\Stdlib\Parameters;
+use Zend\Stdlib\RequestInterface;
+use Zend\Stdlib\ResponseInterface;
 
 class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
@@ -30,6 +32,16 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $smClass = get_class($this->getApplicationServiceLocator());
         $this->assertEquals($smClass, 'Zend\ServiceManager\ServiceManager');
+    }
+
+    public function testAssertApplicationRequest()
+    {
+        $this->assertEquals(true, $this->getRequest() instanceof RequestInterface);
+    }
+
+    public function testAssertApplicationResponse()
+    {
+        $this->assertEquals(true, $this->getResponse() instanceof ResponseInterface);
     }
 
     public function testAssertResponseStatusCode()
@@ -185,6 +197,16 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertQueryCount('div.top', 2);
+    }
+
+    public function testAssertNotQueryCount()
+    {
+        $this->dispatch('/tests');
+        $this->assertNotQueryCount('div.top', 1);
+        $this->assertNotQueryCount('div.top', 2);
+
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNotQueryCount('div.top', 3);
     }
 
     public function testAssertQueryCountMin()

@@ -20,8 +20,8 @@ class FirePhp implements FormatterInterface
     /**
      * Formats the given event data into a single line to be written by the writer.
      *
-     * @param array $event The event data which should be formatted.
-     * @return array  line message and optionally label if 'extra' data exists.
+     * @param  array $event The event data which should be formatted.
+     * @return array line message and optionally label if 'extra' data exists.
      */
     public function format($event)
     {
@@ -49,7 +49,7 @@ class FirePhp implements FormatterInterface
     /**
      * This method is implemented for FormatterInterface but not used.
      *
-     * @param string $dateTimeFormat
+     * @param  string             $dateTimeFormat
      * @return FormatterInterface
      */
     public function setDateTimeFormat($dateTimeFormat)

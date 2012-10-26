@@ -44,7 +44,7 @@ class FirePhp extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return void
      */
     protected function doWrite(array $event)
@@ -117,6 +117,7 @@ class FirePhp extends AbstractWriter
     public function setFirePhp(FirePhp\FirePhpInterface $instance)
     {
         $this->firephp = $instance;
+
         return $this;
     }
 }

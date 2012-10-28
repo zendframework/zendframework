@@ -200,13 +200,6 @@ class HmacTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('69ea60798d71616cce5fd0871e23754cd75d5a0a', $hmac);
     }
 
-    public function testEmptyKey()
-    {
-        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-                                    'Provided key is null or empty');
-        $hash = HMAC::compute(null, 'md5', 'test');
-    }
-
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',

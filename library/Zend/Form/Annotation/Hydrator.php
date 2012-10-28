@@ -21,12 +21,12 @@ namespace Zend\Form\Annotation;
  * @package    Zend_Form
  * @subpackage Annotation
  */
-class Hydrator extends AbstractStringAnnotation
+class Hydrator extends AbstractArrayOrStringAnnotation
 {
     /**
      * Retrieve the hydrator class
      *
-     * @return null|string
+     * @return null|string|array
      */
     public function getHydrator()
     {

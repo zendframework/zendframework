@@ -45,6 +45,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        AbstractValidator::setDefaultTranslator(null);
         AbstractValidator::setMessageLength(-1);
     }
 

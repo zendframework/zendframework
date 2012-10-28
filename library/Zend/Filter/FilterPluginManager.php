@@ -68,6 +68,7 @@ class FilterPluginManager extends AbstractPluginManager
         'stringtrim'                => 'Zend\Filter\StringTrim',
         'stripnewlines'             => 'Zend\Filter\StripNewlines',
         'striptags'                 => 'Zend\Filter\StripTags',
+        'urinormalize'              => 'Zend\Filter\UriNormalize',
         'wordcamelcasetodash'       => 'Zend\Filter\Word\CamelCaseToDash',
         'wordcamelcasetoseparator'  => 'Zend\Filter\Word\CamelCaseToSeparator',
         'wordcamelcasetounderscore' => 'Zend\Filter\Word\CamelCaseToUnderscore',

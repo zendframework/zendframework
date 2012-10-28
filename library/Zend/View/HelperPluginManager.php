@@ -86,6 +86,17 @@ class HelperPluginManager extends AbstractPluginManager
     public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
+
+        $this->setFactory('identity', function ($helpers) {
+            $services = $helpers->getServiceLocator();
+            $helper   = new Helper\Identity();
+            if (!$services->has('Zend\Authentication\AuthenticationService')) {
+                return $helper;
+            }
+            $helper->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+            return $helper;
+        });
+
         $this->addInitializer(array($this, 'injectRenderer'))
              ->addInitializer(array($this, 'injectTranslator'));
     }

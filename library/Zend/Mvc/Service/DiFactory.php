@@ -10,12 +10,10 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Di\Config as DiConfig;
+use Zend\Di\Config;
 use Zend\Di\Di;
-use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * @category   Zend
@@ -43,14 +41,8 @@ class DiFactory implements FactoryInterface
         $config = $serviceLocator->get('Config');
 
         if (isset($config['di'])) {
-            $di->configure(new DiConfig($config['di']));
-        }
-
-        if ($serviceLocator instanceof ServiceManager) {
-            /* @var $serviceLocator ServiceManager */
-            $serviceLocator->addAbstractFactory(
-                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-            );
+            $config = new Config($config['di']);
+            $config->configure($di);
         }
 
         return $di;

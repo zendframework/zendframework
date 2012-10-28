@@ -4,6 +4,7 @@ ini_set('phar.readonly', '0');
 // Executable
 // .phar
 buildModulePhar('PharModule');
+buildModulePhar('PharModuleMap');
 // .phar.gz
 buildModulePhar('PharModuleGz', Phar::PHAR, Phar::GZ);
 // .phar.bz2

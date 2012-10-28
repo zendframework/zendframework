@@ -20,7 +20,7 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_Barcode
  */
-class Barcode
+abstract class Barcode
 {
     const OBJECT   = 'OBJECT';
     const RENDERER = 'RENDERER';

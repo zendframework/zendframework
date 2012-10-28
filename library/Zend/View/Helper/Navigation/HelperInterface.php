@@ -44,16 +44,16 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Sets ACL to use when iterating pages
      *
-     * @param  Acl\Acl $acl [optional] ACL instance
+     * @param  Acl\AclInterface $acl [optional] ACL instance
      * @return HelperInterface  fluent interface, returns self
      */
-    public function setAcl(Acl\Acl $acl = null);
+    public function setAcl(Acl\AclInterface $acl = null);
 
     /**
      * Returns ACL or null if it isn't set using {@link setAcl()} or
      * {@link setDefaultAcl()}
      *
-     * @return Acl\Acl|null  ACL object or null
+     * @return Acl\AclInterface|null  ACL object or null
      */
     public function getAcl();
 

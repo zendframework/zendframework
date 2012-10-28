@@ -18,7 +18,7 @@ use Zend\Stdlib\ArrayUtils;
  * @package    Zend_Cache
  * @subpackage Storage
  */
-class StorageFactory
+abstract class StorageFactory
 {
     /**
      * Plugin manager for loading adapters

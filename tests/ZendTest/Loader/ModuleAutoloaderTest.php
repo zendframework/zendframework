@@ -197,6 +197,19 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('PharModuleExplicit\Module'));
     }
 
+    public function testCanLoadModulesFromClassMap()
+    {
+        $loader = new ModuleAutoloader();
+        $loader->setModuleClassMap(array(
+            'BarModule\Module' =>     __DIR__ . '/_files/BarModule/Module.php',
+            'PharModuleMap\Module' => __DIR__ . '/_files/PharModuleMap.phar',
+        ));
+        $loader->register();
+
+        $this->assertTrue(class_exists('BarModule\Module'));
+        $this->assertTrue(class_exists('PharModuleMap\Module'));
+    }
+
     public function testCanLoadModulesFromNamespace()
     {
         $loader = new ModuleAutoloader(array(
@@ -208,5 +221,4 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('FooModule\SubModule\Module'));
         $this->assertTrue(class_exists('FooModule\Module'));
     }
-
 }

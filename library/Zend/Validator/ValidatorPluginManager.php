@@ -95,6 +95,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'int'                      => 'Zend\I18n\Validator\Int',
         'ip'                       => 'Zend\Validator\Ip',
         'isbn'                     => 'Zend\Validator\Isbn',
+        'isinstanceof'             => 'Zend\Validator\IsInstanceOf',
         'lessthan'                 => 'Zend\Validator\LessThan',
         'notempty'                 => 'Zend\Validator\NotEmpty',
         'postcode'                 => 'Zend\I18n\Validator\PostCode',

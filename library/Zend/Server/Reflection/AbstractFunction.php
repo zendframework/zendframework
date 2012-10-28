@@ -448,7 +448,7 @@ abstract class AbstractFunction
      * Retrieve all prototypes as array of
      * {@link \Zend\Server\Reflection\Prototype}s
      *
-     * @return array
+     * @return Prototype[]
      */
     public function getPrototypes()
     {

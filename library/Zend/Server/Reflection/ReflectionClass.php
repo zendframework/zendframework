@@ -43,7 +43,7 @@ class ReflectionClass
 
     /**
      * ReflectionClass object
-     * @var ReflectionClass
+     * @var \ReflectionClass
      */
     protected $reflection;
 

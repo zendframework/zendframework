@@ -27,7 +27,7 @@ namespace Zend\Server\Reflection;
 abstract class AbstractFunction
 {
     /**
-     * @var ReflectionFunction
+     * @var \ReflectionFunctionAbstract
      */
     protected $reflection;
 
@@ -79,22 +79,14 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param \Reflector $r
+     * @param \ReflectionFunctionAbstract $r
      * @param null|string $namespace
      * @param null|array $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function __construct(\Reflector $r, $namespace = null, $argv = array())
+    public function __construct(\ReflectionFunctionAbstract $r, $namespace = null, $argv = array())
     {
-        // In PHP 5.1.x, ReflectionMethod extends ReflectionFunction. In 5.2.x,
-        // both extend ReflectionFunctionAbstract. So, we can't do normal type
-        // hinting in the prototype, but instead need to do some explicit
-        // testing here.
-        if ((!$r instanceof \ReflectionFunction)
-            && (!$r instanceof \ReflectionMethod)) {
-            throw new Exception\InvalidArgumentException('Invalid reflection class');
-        }
         $this->reflection = $r;
 
         // Determine namespace

@@ -480,8 +480,9 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             if ($this->hydrator) {
                 $values[$key] = $this->hydrator->extract($value);
             } elseif ($value instanceof $this->targetElement->object) {
-                $this->targetElement->object = $value;
-                $values[$key] = $this->targetElement->extract();
+                $targetElement = clone $this->targetElement;
+                $targetElement->object = $value;
+                $values[$key] = $targetElement->extract();
             }
         }
 

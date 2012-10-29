@@ -68,7 +68,7 @@ class Zend_VersionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
     }
-    
+
     public function testFetchLatestZENDVersion()
     {
         $actual = Version::getLatest('ZEND');

@@ -825,7 +825,7 @@ class Server implements \Zend\Server\Server
 
         // Send a fault, if we have one
         if ($fault instanceof SoapFault && !$this->returnResponse) {
-            $soap->fault($fault->getCode(), $fault->getMessage());
+            $soap->fault($fault->faultcode, $fault->getMessage());
             return;
         }
 

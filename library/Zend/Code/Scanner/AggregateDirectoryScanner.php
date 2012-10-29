@@ -15,10 +15,20 @@ use Zend\Code\Exception;
 class AggregateDirectoryScanner extends DirectoryScanner
 {
 
+    /**
+     * @var bool
+     */
     protected $isScanned = false;
 
+    /**
+     * Get namespaces
+     *
+     * @param bool $returnScannerClass
+     * @todo not implemented
+     */
     public function getNamespaces($returnScannerClass = false)
     {
+        // @todo
     }
 
     /*
@@ -44,6 +54,12 @@ class AggregateDirectoryScanner extends DirectoryScanner
         return $classes;
     }
 
+    /**
+     * Check for a class
+     *
+     * @param string $class
+     * @return bool
+     */
     public function hasClass($class)
     {
         foreach ($this->directories as $scanner) {
@@ -57,6 +73,15 @@ class AggregateDirectoryScanner extends DirectoryScanner
         return (isset($scanner));
     }
 
+    /**
+     * Get class
+     *
+     * @param string $class
+     * @param bool $returnScannerClass
+     * @param bool $returnDerivedScannerClass
+     * @return ClassScanner|DerivedClassScanner
+     * @throws Exception\RuntimeException
+     */
     public function getClass($class, $returnScannerClass = true, $returnDerivedScannerClass = false)
     {
         foreach ($this->directories as $scanner) {

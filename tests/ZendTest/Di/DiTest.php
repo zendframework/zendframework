@@ -48,14 +48,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($im, $di->instanceManager());
     }
 
-    public function testPassingInvalidDefinitionRaisesException()
-    {
-        $di = new Di();
-
-        $this->setExpectedException('PHPUnit_Framework_Error');
-        $di->setDefinitionList(array('foo'));
-    }
-
     public function testGetRetrievesObjectWithMatchingClassDefinition()
     {
         $di = new Di();

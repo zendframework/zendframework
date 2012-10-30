@@ -48,14 +48,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($im, $di->instanceManager());
     }
 
-    public function testPassingInvalidDefinitionRaisesException()
-    {
-        $di = new Di();
-
-        $this->setExpectedException('PHPUnit_Framework_Error');
-        $di->setDefinitionList(array('foo'));
-    }
-
     public function testGetRetrievesObjectWithMatchingClassDefinition()
     {
         $di = new Di();
@@ -65,12 +57,36 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRetrievesSameInstanceOnSubsequentCalls()
     {
-        $di = new Di();
+        $config = new Config(array(
+            'instance' => array(
+                'ZendTest\Di\TestAsset\BasicClass' => array(
+                    'shared' => true,
+                    ),
+                ),
+        ));
+        $di = new Di(null, null, $config);
         $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertSame($obj1, $obj2);
+    }
+
+    public function testGetRetrievesDifferentInstanceOnSubsequentCallsIfSharingDisabled()
+    {
+        $config = new Config(array(
+            'instance' => array(
+                'ZendTest\Di\TestAsset\BasicClass' => array(
+                    'shared' => false,
+                    ),
+                ),
+        ));
+        $di = new Di(null, null, $config);
+        $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
+        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
+        $this->assertNotSame($obj1, $obj2);
     }
 
     public function testGetThrowsExceptionWhenUnknownClassIsUsed()

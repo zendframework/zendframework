@@ -44,7 +44,7 @@ class FirePhp extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return void
      */
     protected function doWrite(array $event)
@@ -55,27 +55,27 @@ class FirePhp extends AbstractWriter
             return;
         }
 
-        $line = $this->formatter->format($event);
+        list($line, $label) = $this->formatter->format($event);
 
         switch ($event['priority']) {
             case Logger::EMERG:
             case Logger::ALERT:
             case Logger::CRIT:
             case Logger::ERR:
-                $firephp->error($line);
+                $firephp->error($line, $label);
                 break;
             case Logger::WARN:
-                $firephp->warn($line);
+                $firephp->warn($line, $label);
                 break;
             case Logger::NOTICE:
             case Logger::INFO:
-                $firephp->info($line);
+                $firephp->info($line, $label);
                 break;
             case Logger::DEBUG:
                 $firephp->trace($line);
                 break;
             default:
-                $firephp->log($line);
+                $firephp->log($line, $label);
                 break;
         }
     }
@@ -117,6 +117,7 @@ class FirePhp extends AbstractWriter
     public function setFirePhp(FirePhp\FirePhpInterface $instance)
     {
         $this->firephp = $instance;
+
         return $this;
     }
 }

@@ -33,14 +33,39 @@ use Zend\Log\Formatter\FirePhp;
  */
 class FirePhpTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFormat()
+    public function testFormatWithExtraData()
+    {
+        $fields = array( 'message' => 'foo',
+                'extra' => new \stdClass() );
+
+        $f = new FirePhp();
+        list($line, $label) = $f->format($fields);
+
+        $this->assertContains($fields['message'], $label);
+        $this->assertEquals($fields['extra'], $line);
+    }
+
+    public function testFormatWithoutExtra()
     {
         $fields = array( 'message' => 'foo' );
 
         $f = new FirePhp();
-        $line = $f->format($fields);
+        list($line, $label) = $f->format($fields);
 
         $this->assertContains($fields['message'], $line);
+        $this->assertNull($label);
+    }
+
+    public function testFormatWithEmptyExtra()
+    {
+        $fields = array( 'message' => 'foo',
+                'extra' => array() );
+
+        $f = new FirePhp();
+        list($line, $label) = $f->format($fields);
+
+        $this->assertContains($fields['message'], $line);
+        $this->assertNull($label);
     }
 
     public function testSetDateTimeFormatDoesNothing()

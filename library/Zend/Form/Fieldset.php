@@ -19,7 +19,7 @@ use Zend\Stdlib\PriorityQueue;
  * @category   Zend
  * @package    Zend_Form
  */
-class Fieldset extends Element implements FieldsetInterface, FormFactoryAwareInterface
+class Fieldset extends Element implements FieldsetInterface
 {
     /**
      * @var Factory

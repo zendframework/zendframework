@@ -198,8 +198,6 @@ class Server implements \Zend\Server\Server
                 case 'wsdl':
                     $this->setWSDL($value);
                     break;
-                case 'featues':
-                    trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
                 case 'features':
                     $this->setSoapFeatures($value);
                     break;
@@ -630,7 +628,7 @@ class Server implements \Zend\Server\Server
     /**
      * Get server persistence
      *
-     * @return Server
+     * @return int
      */
     public function getPersistence()
     {

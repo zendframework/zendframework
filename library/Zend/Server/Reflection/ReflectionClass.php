@@ -10,6 +10,8 @@
 
 namespace Zend\Server\Reflection;
 
+use ReflectionClass as PhpReflectionClass;
+
 /**
  * Class/Object reflection
  *
@@ -43,7 +45,7 @@ class ReflectionClass
 
     /**
      * ReflectionClass object
-     * @var \ReflectionClass
+     * @var PhpReflectionClass
      */
     protected $reflection;
 
@@ -53,11 +55,11 @@ class ReflectionClass
      * Create array of dispatchable methods, each a
      * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
-     * @param \ReflectionClass $reflection
+     * @param PhpReflectionClass $reflection
      * @param string $namespace
      * @param mixed $argv
      */
-    public function __construct(\ReflectionClass $reflection, $namespace = null, $argv = false)
+    public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
     {
         $this->reflection = $reflection;
         $this->setNamespace($namespace);
@@ -176,6 +178,6 @@ class ReflectionClass
      */
     public function __wakeup()
     {
-        $this->reflection = new \ReflectionClass($this->getName());
+        $this->reflection = new PhpReflectionClass($this->getName());
     }
 }

@@ -37,30 +37,32 @@ class Backtrace implements ProcessorInterface
     */
     public function process(array $event)
     {
-      $trace = $this->getBacktrace();
+        $trace = $this->getBacktrace();
 
-      array_shift($trace); // ignore $this->getBacktrace();
-      array_shift($trace); // ignore $this->process()
+        array_shift($trace); // ignore $this->getBacktrace();
+        array_shift($trace); // ignore $this->process()
 
-      $i = 0;
-      while (isset($trace[$i]['class']) && false !== strpos($trace[$i]['class'], $this->ignoredNamespace)) {
-          $i++;
-      }
+        $i = 0;
+        while (isset($trace[$i]['class'])
+               && false !== strpos($trace[$i]['class'], $this->ignoredNamespace)
+        ) {
+            $i++;
+        }
 
-      $origin = array(
-          'file' => isset($trace[$i-1]['file']) ? $trace[$i-1]['file'] : null,
-          'line' => isset($trace[$i-1]['line']) ? $trace[$i-1]['line'] : null,
-          'class' => isset($trace[$i]['class']) ? $trace[$i]['class'] : null,
-          'function' => isset($trace[$i]['function']) ? $trace[$i]['function'] : null,
-      );
+        $origin = array(
+            'file'     => isset($trace[$i-1]['file'])   ? $trace[$i-1]['file']   : null,
+            'line'     => isset($trace[$i-1]['line'])   ? $trace[$i-1]['line']   : null,
+            'class'    => isset($trace[$i]['class'])    ? $trace[$i]['class']    : null,
+            'function' => isset($trace[$i]['function']) ? $trace[$i]['function'] : null,
+        );
 
-      if(!isset($event['extra'])) {
-          $event['extra'] = $origin;
-      } else {
-          $event['extra'] = array_merge($origin, $event['extra']);
-      }
+        $extra = $origin;
+        if (isset($event['extra'])) {
+            $extra = array_merge($origin, $event['extra']);
+        }
+        $event['extra'] = $extra;
 
-      return $event;
+        return $event;
     }
 
     /**
@@ -80,5 +82,4 @@ class Backtrace implements ProcessorInterface
 
         return debug_backtrace();
     }
-
 }

@@ -11,6 +11,8 @@
 namespace ZendTest\View\Helper;
 
 use Zend\View\Helper\Url as UrlHelper;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack as Router;
 
@@ -131,5 +133,50 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $this->url->setRouteMatch($routeMatch);
         $url = $this->url->__invoke('replace', array('action' => 'bar'), true);
         $this->assertEquals('/foo/bar', $url);
+    }
+
+    public function testRemovesModuleRouteListenerParamsWhenReusingMatchedParameters()
+    {
+        $router = new \Zend\Mvc\Router\Http\TreeRouteStack;
+        $router->addRoute('default', array(
+            'type' => 'Zend\Mvc\Router\Http\Segment',
+            'options' => array(
+                'route'    => '/:controller/:action',
+                'defaults' => array(
+                    ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
+                    'controller' => 'SampleController',
+                    'action'     => 'Dash'
+                )
+            ),
+            'child_routes' => array(
+                'wildcard' => array(
+                    'type'    => 'Zend\Mvc\Router\Http\Wildcard',
+                    'options' => array(
+                        'param_delimiter'     => '=',
+                        'key_value_delimiter' => '%'
+                    )
+                )
+            )
+        ));
+
+        $routeMatch = new RouteMatch(array(
+            ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
+            'controller' => 'Rainbow'
+        ));
+        $routeMatch->setMatchedRouteName('default/wildcard');
+
+        $event = new MvcEvent();
+        $event->setRouter($router)
+              ->setRouteMatch($routeMatch);
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->onRoute($event);
+
+        $helper = new UrlHelper();
+        $helper->setRouter($router);
+        $helper->setRouteMatch($routeMatch);
+
+        $url = $helper->__invoke('default/wildcard', array('Twenty' => 'Cooler'), true);
+        $this->assertEquals('/Rainbow/Dash=Twenty%Cooler', $url);
     }
 }

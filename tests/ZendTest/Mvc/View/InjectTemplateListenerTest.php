@@ -12,6 +12,7 @@ namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManager;
+use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\View\Http\InjectTemplateListener;
@@ -100,6 +101,19 @@ class InjectTemplateListenerTest extends TestCase
         $this->listener->injectTemplate($this->event);
 
         $this->assertEquals('custom', $model->getTemplate());
+    }
+
+    public function testMapsSubNamespaceToSubDirectory()
+    {
+        $this->routeMatch->setParam(ModuleRouteListener::MODULE_NAMESPACE, 'Aj\Controller\SweetAppleAcres\Reports');
+        $this->routeMatch->setParam('controller', 'CiderSales');
+        $this->routeMatch->setParam('action', 'PinkiePieRevenue');
+
+        $model = new ViewModel();
+        $this->event->setResult($model);
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('sweet-apple-acres/reports/cider-sales/pinkie-pie-revenue', $model->getTemplate());
     }
 
     public function testAttachesListenerAtExpectedPriority()

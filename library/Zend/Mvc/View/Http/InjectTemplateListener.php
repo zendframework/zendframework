@@ -14,7 +14,7 @@ use Zend\EventManager\EventManagerInterface as Events;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\ModuleRouteListener;
 use Zend\View\Model\ModelInterface as ViewModel;
 
 class InjectTemplateListener implements ListenerAggregateInterface
@@ -90,9 +90,21 @@ class InjectTemplateListener implements ListenerAggregateInterface
         }
 
         $module     = $this->deriveModuleNamespace($controller);
-        $controller = $this->deriveControllerClass($controller);
 
+        if ($namespace = $routeMatch->getParam(ModuleRouteListener::MODULE_NAMESPACE)) {
+            $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
+            if (!empty($controllerSubNs)) {
+                if (!empty($module)) {
+                    $module .= '/' . $controllerSubNs;
+                } else {
+                    $module = $controllerSubNs;
+                }
+            }
+        }
+
+        $controller = $this->deriveControllerClass($controller);
         $template   = $this->inflectName($module);
+
         if (!empty($template)) {
             $template .= '/';
         }
@@ -133,6 +145,25 @@ class InjectTemplateListener implements ListenerAggregateInterface
         }
         $module = substr($controller, 0, strpos($controller, '\\'));
         return $module;
+    }
+
+    /**
+     * @param $namespace
+     * @return string
+     */
+    protected function deriveControllerSubNamespace($namespace)
+    {
+        if (!strstr($namespace, '\\')) {
+            return '';
+        }
+        $nsArray = explode('\\', $namespace);
+
+        // Remove the first two elements representing the module and controller directory.
+        $subNsArray = array_slice($nsArray, 2);
+        if (empty($subNsArray)) {
+            return '';
+        }
+        return implode('/', $subNsArray);
     }
 
     /**

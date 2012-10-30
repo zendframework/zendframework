@@ -223,7 +223,10 @@ class Factory
         }
 
         // Hook to perform stuff, once all the configuration work has been done
-        $element->init();
+        // TODO for ZF3 : move init to ElementInterface
+        if (method_exists($element, 'init')) {
+            $element->init();
+        }
 
         return $element;
     }

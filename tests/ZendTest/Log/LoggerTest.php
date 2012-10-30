@@ -259,4 +259,37 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         Logger::unregisterErrorHandler();
         $this->assertEquals($writer->events[0]['message'], 'Undefined variable: test');
     }
+
+    public function testOptionsWithMock()
+    {
+        $options = array('writers' => array(
+                             'first_writer' => array(
+                                 'name'     => 'mock',
+                             )
+                        ));
+        $logger = new Logger($options);
+
+        $writers = $logger->getWriters()->toArray();
+        $this->assertCount(1, $writers);
+        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writers[0]);
+    }
+
+    public function testOptionsWithWriterOptions()
+    {
+        $options = array('writers' => array(
+                              array(
+                                 'name'     => 'stream',
+                                 'options'  => array(
+                                     'stream' => 'php://output',
+                                     'log_separator' => 'foo'
+                                 ),
+                              )
+                         ));
+        $logger = new Logger($options);
+
+        $writers = $logger->getWriters()->toArray();
+        $this->assertCount(1, $writers);
+        $this->assertInstanceOf('Zend\Log\Writer\Stream', $writers[0]);
+        $this->assertEquals('foo', $writers[0]->getLogSeparator());
+    }
 }

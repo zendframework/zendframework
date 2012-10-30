@@ -439,7 +439,7 @@ class Request extends HttpRequest
         }
 
         if ($requestUri !== null) {
-            return preg_replace('#^[^:]+://[^/]+#', '', $requestUri);
+            return preg_replace('#^[^/:]+://[^/]+#', '', $requestUri);
         }
 
         // IIS 5.0, PHP as CGI.

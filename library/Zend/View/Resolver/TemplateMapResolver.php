@@ -97,7 +97,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: expects a string, array, or Traversable for the first argument; received "%s"',
                 __METHOD__,
-                (is_object($map) ? get_class($map) : gettype($map))
+                (is_object($nameOrMap) ? get_class($nameOrMap) : gettype($nameOrMap))
             ));
         }
 

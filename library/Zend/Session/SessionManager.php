@@ -85,7 +85,7 @@ class SessionManager extends AbstractManager
 
         session_start();
         if (!$this->isValid()) {
-            throw new Exception\RuntimeException('Session failed validation');
+            throw new Exception\RuntimeException('Session validation failed');
         }
         $storage = $this->getStorage();
 

@@ -21,26 +21,23 @@ namespace Zend\Server\Reflection;
  */
 class Prototype
 {
+    /** @var ReflectionParameter[] */
+    protected $params;
+
     /**
      * Constructor
      *
      * @param ReflectionReturnValue $return
-     * @param array $params
+     * @param ReflectionParameter[] $params
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(ReflectionReturnValue $return, $params = null)
+    public function __construct(ReflectionReturnValue $return, array $params = array())
     {
         $this->return = $return;
 
-        if (!is_array($params) && (null !== $params)) {
-            throw new Exception\InvalidArgumentException('Invalid parameters');
-        }
-
-        if (is_array($params)) {
-            foreach ($params as $param) {
-                if (!$param instanceof ReflectionParameter) {
-                    throw new Exception\InvalidArgumentException('One or more params are invalid');
-                }
+        foreach ($params as $param) {
+            if (!$param instanceof ReflectionParameter) {
+                throw new Exception\InvalidArgumentException('One or more params are invalid');
             }
         }
 
@@ -60,7 +57,6 @@ class Prototype
     /**
      * Retrieve the return value object
      *
-     * @access public
      * @return \Zend\Server\Reflection\ReflectionReturnValue
      */
     public function getReturnValue()
@@ -71,7 +67,7 @@ class Prototype
     /**
      * Retrieve method parameters
      *
-     * @return array Array of {@link \Zend\Server\Reflection\ReflectionParameter}s
+     * @return ReflectionParameter[] Array of {@link \Zend\Server\Reflection\ReflectionParameter}s
      */
     public function getParameters()
     {

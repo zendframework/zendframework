@@ -60,11 +60,25 @@ class Logger implements LoggerInterface
     protected $writers;
 
     /**
+     * Processors
+     *
+     * @var SplPriorityQueue
+     */
+    protected $processors;
+
+    /**
      * Writer plugins
      *
      * @var WriterPluginManager
      */
     protected $writerPlugins;
+
+    /**
+     * Processor plugins
+     *
+     * @var ProcessorPluginManager
+     */
+    protected $processorPlugins;
 
     /**
      * Registered error handler
@@ -83,12 +97,50 @@ class Logger implements LoggerInterface
     /**
      * Constructor
      *
-     * @todo support configuration (writers, dateTimeFormat, and writer plugin manager)
+     * Set options for an logger. Accepted options are:
+     * - writers: array of writers to add to this logger
+     * - exceptionhandler: if true register this logger as exceptionhandler
+     * - errorhandler: if true register this logger as errorhandler
+     *
+     * @param  array|\Traversable $options
      * @return Logger
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct()
+    public function __construct(array $options = null)
     {
         $this->writers = new SplPriorityQueue();
+
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (is_array($options)) {
+
+            if(isset($options['writers']) && is_array($options['writers'])) {
+                foreach($options['writers'] as $writer) {
+
+                    if(!isset($writer['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the writer');
+                    }
+
+                    $priority      = (isset($writer['priority'])) ? $writer['priority'] : null;
+                    $writerOptions = (isset($writer['options'])) ? $writer['options'] : null;
+
+                    $this->addWriter($writer['name'], $priority, $writerOptions);
+                }
+            }
+
+            if(isset($options['exceptionhandler']) && $options['exceptionhandler'] === true) {
+                self::registerExceptionHandler($this);
+            }
+
+            if(isset($options['errorhandler']) && $options['errorhandler'] === true) {
+                self::registerErrorHandler($this);
+            }
+
+        }
+
+        $this->processors = new SplPriorityQueue();
     }
 
     /**
@@ -206,6 +258,90 @@ class Logger implements LoggerInterface
         return $this;
     }
 
+
+    /**
+     * Get processor plugin manager
+     *
+     * @return ProcessorPluginManager
+     */
+    public function getProcessorPluginManager()
+    {
+        if (null === $this->processorPlugins) {
+            $this->setProcessorPluginManager(new ProcessorPluginManager());
+        }
+        return $this->processorPlugins;
+    }
+
+    /**
+     * Set processor plugin manager
+     *
+     * @param  string|ProcessorPluginManager $plugins
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setProcessorPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof ProcessorPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'processor plugin manager must extend %s\ProcessorPluginManager; received %s',
+                    __NAMESPACE__,
+                    is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+
+        $this->processorPlugins = $plugins;
+        return $this;
+    }
+
+    /**
+     * Get processor instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Processor\ProcessorInterface
+     */
+    public function processorPlugin($name, array $options = null)
+    {
+        return $this->getProcessorPluginManager()->get($name, $options);
+    }
+
+    /**
+     * Add a processor to a logger
+     *
+     * @param  string|Processor\ProcessorInterface $processor
+     * @param  int $priority
+     * @param  array|null $options
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function addProcessor($processor, $priority = 1, array $options = null)
+    {
+        if (is_string($processor)) {
+            $processor = $this->processorPlugin($processor, $options);
+        } elseif (!$processor instanceof Processor\ProcessorInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Processor must implement Zend\Log\ProcessorInterface; received "%s"',
+                    is_object($processor) ? get_class($processor) : gettype($processor)
+            ));
+        }
+        $this->processors->insert($processor, $priority);
+
+        return $this;
+    }
+
+    /**
+     * Get processors
+     *
+     * @return SplPriorityQueue
+     */
+    public function getProcessors()
+    {
+        return $this->processors;
+    }
+
     /**
      * Add a message as a log entry
      *
@@ -250,14 +386,20 @@ class Logger implements LoggerInterface
             $message = var_export($message, true);
         }
 
+        $event = array(
+            'timestamp'    => $timestamp,
+            'priority'     => (int) $priority,
+            'priorityName' => $this->priorities[$priority],
+            'message'      => (string) $message,
+            'extra'        => $extra
+        );
+
+        foreach($this->processors->toArray() as $processor) {
+            $event = $processor->process($event);
+        }
+
         foreach ($this->writers->toArray() as $writer) {
-            $writer->write(array(
-                'timestamp'    => $timestamp,
-                'priority'     => (int) $priority,
-                'priorityName' => $this->priorities[$priority],
-                'message'      => (string) $message,
-                'extra'        => $extra
-            ));
+            $writer->write($event);
         }
 
         return $this;

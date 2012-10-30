@@ -16,12 +16,31 @@ use Zend\Code\Exception;
 
 class DirectoryScanner implements ScannerInterface
 {
+    /**
+     * @var bool
+     */
     protected $isScanned = false;
-    /** @var string[]|DirectoryScanner[] */
+
+    /**
+     * @var string[]|DirectoryScanner[]
+     */
     protected $directories = array();
+
+    /**
+     * @var FileScanner[]
+     */
     protected $fileScanners = array();
+
+    /**
+     * @var array
+     */
     protected $classToFileScanner = null;
 
+    /**
+     * Constructor
+     *
+     * @param null|string|array $directory
+     */
     public function __construct($directory = null)
     {
         if ($directory) {
@@ -35,6 +54,13 @@ class DirectoryScanner implements ScannerInterface
         }
     }
 
+    /**
+     * Add directory
+     *
+     * @param DirectoryScanner|string $directory
+     * @return void
+     * @throws Exception\InvalidArgumentException
+     */
     public function addDirectory($directory)
     {
         if ($directory instanceof DirectoryScanner) {
@@ -53,16 +79,33 @@ class DirectoryScanner implements ScannerInterface
         }
     }
 
+    /**
+     * Add directory scanner
+     *
+     * @param DirectoryScanner $directoryScanner
+     * @return void
+     */
     public function addDirectoryScanner(DirectoryScanner $directoryScanner)
     {
         $this->addDirectory($directoryScanner);
     }
 
+    /**
+     * Add file scanner
+     *
+     * @param FileScanner $fileScanner
+     * @return void
+     */
     public function addFileScanner(FileScanner $fileScanner)
     {
         $this->fileScanners[] = $fileScanner;
     }
 
+    /**
+     * Scan
+     *
+     * @return void
+     */
     protected function scan()
     {
         if ($this->isScanned) {
@@ -89,10 +132,22 @@ class DirectoryScanner implements ScannerInterface
         $this->isScanned = true;
     }
 
+    /**
+     * Get namespace
+     *
+     * @todo implement method
+     */
     public function getNamespaces()
     {
+        // @todo
     }
 
+    /**
+     * Get files
+     *
+     * @param bool $returnFileScanners
+     * @return array
+     */
     public function getFiles($returnFileScanners = false)
     {
         $this->scan();
@@ -105,6 +160,11 @@ class DirectoryScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Get class names
+     *
+     * @return string[]
+     */
     public function getClassNames()
     {
         $this->scan();
@@ -116,6 +176,12 @@ class DirectoryScanner implements ScannerInterface
         return array_keys($this->classToFileScanner);
     }
 
+    /**
+     * Get classes
+     *
+     * @param bool $returnDerivedScannerClass
+     * @return string[]
+     */
     public function getClasses($returnDerivedScannerClass = false)
     {
         $this->scan();
@@ -136,6 +202,12 @@ class DirectoryScanner implements ScannerInterface
         return $returnClasses;
     }
 
+    /**
+     * Check for a class
+     *
+     * @param string $class
+     * @return bool
+     */
     public function hasClass($class)
     {
         $this->scan();
@@ -147,6 +219,14 @@ class DirectoryScanner implements ScannerInterface
         return (isset($this->classToFileScanner[$class]));
     }
 
+    /**
+     * Get class
+     *
+     * @param string $class
+     * @param bool $returnDerivedScannerClass
+     * @return ClassScanner|DerivedClassScanner
+     * @throws Exception\InvalidArgumentException
+     */
     public function getClass($class, $returnDerivedScannerClass = false)
     {
         $this->scan();
@@ -170,6 +250,11 @@ class DirectoryScanner implements ScannerInterface
         return $returnClass;
     }
 
+    /**
+     * Create class to file scanner cache
+     *
+     * @return void
+     */
     protected function createClassToFileScannerCache()
     {
         if ($this->classToFileScanner !== null) {
@@ -186,11 +271,23 @@ class DirectoryScanner implements ScannerInterface
         }
     }
 
+    /**
+     * Export
+     *
+     * @todo implement method
+     */
     public static function export()
     {
+        // @todo
     }
 
+    /**
+     * __ToString
+     *
+     * @todo implement method
+     */
     public function __toString()
     {
+        // @todo
     }
 }

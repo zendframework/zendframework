@@ -47,6 +47,8 @@ class TokenArrayScanner implements ScannerInterface
     protected $annotationManager = null;
 
     /**
+     * Constructor
+     *
      * @param null|array             $tokens
      * @param null|AnnotationManager $annotationManager
      */
@@ -56,12 +58,19 @@ class TokenArrayScanner implements ScannerInterface
         $this->annotationManager = $annotationManager;
     }
 
+    /**
+     * Get annotation manager
+     *
+     * @return AnnotationManager
+     */
     public function getAnnotationManager()
     {
         return $this->annotationManager;
     }
 
     /**
+     * Get doc comment
+     *
      * @todo Assignment of $this->docComment should probably be done in scan()
      *       and then $this->getDocComment() just retrieves it.
      */
@@ -83,6 +92,11 @@ class TokenArrayScanner implements ScannerInterface
         }
     }
 
+    /**
+     * Get namespaces
+     *
+     * @return array
+     */
     public function getNamespaces()
     {
         $this->scan();
@@ -96,18 +110,32 @@ class TokenArrayScanner implements ScannerInterface
         return $namespaces;
     }
 
+    /**
+     * Get uses
+     *
+     * @param null|string $namespace
+     * @return array|null
+     */
     public function getUses($namespace = null)
     {
         $this->scan();
         return $this->getUsesNoScan($namespace);
     }
 
+    /**
+     * Get includes
+     */
     public function getIncludes()
     {
         $this->scan();
         // @todo Implement getIncludes() in TokenArrayScanner
     }
 
+    /**
+     * Get class names
+     *
+     * @return array
+     */
     public function getClassNames()
     {
         $this->scan();
@@ -123,6 +151,11 @@ class TokenArrayScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Get classes
+     *
+     * @return ClassScanner[]
+     */
     public function getClasses()
     {
         $this->scan();
@@ -139,12 +172,10 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * getClass()
-     *
      * Return the class object from this scanner
      *
      * @param string|int $name
-     * @throws \Zend\Code\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return ClassScanner
      */
     public function getClass($name)
@@ -179,6 +210,12 @@ class TokenArrayScanner implements ScannerInterface
         );
     }
 
+    /**
+     * Get class name information
+     *
+     * @param string $className
+     * @return bool|null|NameInformation
+     */
     public function getClassNameInformation($className)
     {
         $this->scan();
@@ -202,6 +239,11 @@ class TokenArrayScanner implements ScannerInterface
         return new NameInformation($info['namespace'], $info['uses']);
     }
 
+    /**
+     * Get function names
+     *
+     * @return string[]
+     */
     public function getFunctionNames()
     {
         $this->scan();
@@ -214,6 +256,11 @@ class TokenArrayScanner implements ScannerInterface
         return $functionNames;
     }
 
+    /**
+     * Get functions
+     *
+     * @return array
+     */
     public function getFunctions()
     {
         $this->scan();
@@ -227,6 +274,11 @@ class TokenArrayScanner implements ScannerInterface
         return $functions;
     }
 
+    /**
+     * Export
+     *
+     * @param $tokens
+     */
     public static function export($tokens)
     {
         // @todo
@@ -238,9 +290,13 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
+     * Scan
+     *
      * @todo: $this->docComment should be assigned for valid docblock during
      *        the scan instead of $this->getDocComment() (starting with
      *        T_DOC_COMMENT case)
+     *
+     * @throws Exception\RuntimeException
      */
     protected function scan()
     {
@@ -573,8 +629,31 @@ class TokenArrayScanner implements ScannerInterface
         $this->isScanned = true;
     }
 
-    // @todo hasNamespace(), getNamespace()
+    /**
+     * Check for namespace
+     *
+     * @param string $namespace
+     * @return bool
+     */
+    public function hasNamespace($namespace)
+    {
+        $this->scan();
 
+        foreach ($this->infos as $info) {
+            if ($info['type'] == 'namespace' && $info['namespace'] == $namespace) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get uses no scan
+     *
+     * @param string $namespace
+     * @return null|array
+     * @throws Exception\InvalidArgumentException
+     */
     protected function getUsesNoScan($namespace)
     {
         $namespaces = array();

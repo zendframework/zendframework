@@ -11,6 +11,7 @@
 namespace Zend\Log\Formatter;
 
 use DateTime;
+use Traversable;
 
 /**
  * @category   Zend
@@ -35,6 +36,14 @@ class Db implements FormatterInterface
      */
     public function __construct($dateTimeFormat = null)
     {
+        if ($dateTimeFormat instanceof Traversable) {
+            $dateTimeFormat = iterator_to_array($dateTimeFormat);
+        }
+
+        if (is_array($dateTimeFormat)) {
+            $dateTimeFormat = isset($dateTimeFormat['dateTimeFormat'])? $dateTimeFormat['dateTimeFormat'] : null;
+        }
+
         if (null !== $dateTimeFormat) {
             $this->setDateTimeFormat($dateTimeFormat);
         }

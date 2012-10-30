@@ -22,7 +22,7 @@ namespace Zend\Server\Reflection;
 class ReflectionParameter
 {
     /**
-     * @var ReflectionParameter
+     * @var \ReflectionParameter
      */
     protected $reflection;
 

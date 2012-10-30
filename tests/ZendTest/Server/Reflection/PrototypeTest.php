@@ -91,12 +91,6 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $r1 = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
     }
 
-    public function testConstructionThrowsExceptionOnInvalidParamType()
-    {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid parameters');
-        $r1 = new Reflection\Prototype($this->_r->getReturnValue(), 'string');
-    }
-
     /**
      * getReturnType() test
      *

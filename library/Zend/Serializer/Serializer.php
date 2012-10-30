@@ -45,7 +45,7 @@ class Serializer
             return $adapterName; // $adapterName is already an adapter object
         }
 
-        return self::getAdapterPluginManager()->get($adapterName, $adapterOptions);
+        return static::getAdapterPluginManager()->get($adapterName, $adapterOptions);
     }
 
     /**
@@ -56,7 +56,7 @@ class Serializer
      */
     public static function setAdapterPluginManager(AdapterPluginManager $adapters)
     {
-        self::$adapters = $adapters;
+        static::$adapters = $adapters;
     }
 
     /**
@@ -66,10 +66,10 @@ class Serializer
      */
     public static function getAdapterPluginManager()
     {
-        if (self::$adapters === null) {
-            self::$adapters = new AdapterPluginManager();
+        if (static::$adapters === null) {
+            static::$adapters = new AdapterPluginManager();
         }
-        return self::$adapters;
+        return static::$adapters;
     }
 
     /**
@@ -79,8 +79,8 @@ class Serializer
      */
     public static function resetAdapterPluginManager()
     {
-        self::$adapters = new AdapterPluginManager();
-        return self::$adapters;
+        static::$adapters = new AdapterPluginManager();
+        return static::$adapters;
     }
 
     /**
@@ -91,7 +91,7 @@ class Serializer
      */
     public static function setDefaultAdapter($adapter, $adapterOptions = null)
     {
-        self::$defaultAdapter = self::factory($adapter, $adapterOptions);
+        static::$defaultAdapter = static::factory($adapter, $adapterOptions);
     }
 
     /**
@@ -101,10 +101,10 @@ class Serializer
      */
     public static function getDefaultAdapter()
     {
-        if (!self::$defaultAdapter instanceof Adapter) {
-            self::setDefaultAdapter(self::$defaultAdapter);
+        if (!static::$defaultAdapter instanceof Adapter) {
+            static::setDefaultAdapter(static::$defaultAdapter);
         }
-        return self::$defaultAdapter;
+        return static::$defaultAdapter;
     }
 
     /**
@@ -120,9 +120,9 @@ class Serializer
     public static function serialize($value, $adapter = null, $adapterOptions = null)
     {
         if ($adapter !== null) {
-            $adapter = self::factory($adapter, $adapterOptions);
+            $adapter = static::factory($adapter, $adapterOptions);
         } else {
-            $adapter = self::getDefaultAdapter();
+            $adapter = static::getDefaultAdapter();
         }
 
         return $adapter->serialize($value);
@@ -141,9 +141,9 @@ class Serializer
     public static function unserialize($serialized, $adapter = null, $adapterOptions = null)
     {
         if ($adapter !== null) {
-            $adapter = self::factory($adapter, $adapterOptions);
+            $adapter = static::factory($adapter, $adapterOptions);
         } else {
-            $adapter = self::getDefaultAdapter();
+            $adapter = static::getDefaultAdapter();
         }
 
         return $adapter->unserialize($serialized);

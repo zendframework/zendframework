@@ -12,6 +12,7 @@ namespace Zend\Code\Scanner;
 
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Exception;
+use Zend\Code\NameInformation;
 
 class CachingFileScanner extends FileScanner
 {

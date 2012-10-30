@@ -20,7 +20,7 @@ use Zend\Stdlib\RequestInterface as Request;
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @see        http://manuals.rubyonrails.com/read/chapter/65
+ * @see        http://guides.rubyonrails.org/routing.html
  */
 class Literal implements RouteInterface
 {

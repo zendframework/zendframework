@@ -19,9 +19,16 @@ use Zend\Console\Console;
  */
 class RequestId implements ProcessorInterface
 {
+    /**
+     * Request identifier
+     *
+     * @var string
+     */
+    protected $identifier;
 
     /**
-     * Adds a identfier for the request to the log.
+     * Adds a identifier for the request to the log.
+     *
      * This enables to filter the log for messages belonging to a specific request
      *
      * @param array $event event data
@@ -29,7 +36,7 @@ class RequestId implements ProcessorInterface
      */
     public function process(array $event)
     {
-        if(!isset($event['extra'])) {
+        if (!isset($event['extra'])) {
             $event['extra'] = array();
         }
 
@@ -40,20 +47,29 @@ class RequestId implements ProcessorInterface
     /**
      * Provide unique identifier for a request
      *
-     * @return  array:
+     * @return string
      */
     protected function getIdentifier()
     {
-        $requestTime = (version_compare(PHP_VERSION, '5.4.0') >= 0) ? $_SERVER['REQUEST_TIME_FLOAT'] : $_SERVER['REQUEST_TIME'];
-
-        if(Console::isConsole()) {
-            return md5($requestTime);
+        if ($this->identifier) {
+            return $this->identifier;
         }
 
-        if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return md5($requestTime . $_SERVER['HTTP_X_FORWARDED_FOR']);
+        $requestTime = (version_compare(PHP_VERSION, '5.4.0') >= 0)
+                     ? $_SERVER['REQUEST_TIME_FLOAT']
+                     : $_SERVER['REQUEST_TIME'];
+
+        if (Console::isConsole()) {
+            $this->identifier = md5($requestTime);
+            return $this->identifier;
         }
 
-        return md5($requestTime . $_SERVER['REMOTE_ADDR']);
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $this->identifier = md5($requestTime . $_SERVER['HTTP_X_FORWARDED_FOR']);
+            return $this->identifier;
+        }
+
+        $this->identifier = md5($requestTime . $_SERVER['REMOTE_ADDR']);
+        return $this->identifier;
     }
 }

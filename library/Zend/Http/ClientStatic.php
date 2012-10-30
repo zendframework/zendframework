@@ -30,10 +30,10 @@ class ClientStatic
      */
     protected static function getStaticClient()
     {
-        if (!isset(self::$client)) {
-            self::$client = new Client();
+        if (!isset(static::$client)) {
+            static::$client = new Client();
         }
-        return self::$client;
+        return static::$client;
     }
 
     /**
@@ -67,7 +67,7 @@ class ClientStatic
             $request->setBody($body);
         }
 
-        return self::getStaticClient()->send($request);
+        return static::getStaticClient()->send($request);
     }
 
     /**
@@ -108,6 +108,6 @@ class ClientStatic
             $request->setContent($body);
         }
 
-        return self::getStaticClient()->send($request);
+        return static::getStaticClient()->send($request);
     }
 }

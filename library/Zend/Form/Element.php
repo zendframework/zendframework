@@ -66,6 +66,16 @@ class Element implements ElementInterface
     }
 
     /**
+     * This function is automatically called when creating element with factory. It
+     * allows to perform various operations (add elements...)
+     *
+     * @return void
+     */
+    public function init()
+    {
+    }
+
+    /**
      * Set value for name
      *
      * @param  string $name

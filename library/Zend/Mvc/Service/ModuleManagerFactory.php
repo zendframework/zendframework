@@ -85,6 +85,12 @@ class ModuleManagerFactory implements FactoryInterface
             'Zend\ModuleManager\Feature\FilterProviderInterface',
             'getFilterConfig'
         );
+        $serviceListener->addServiceManager(
+            'FormElementManager',
+            'form_elements',
+            'Zend\ModuleManager\Feature\FormElementProviderInterface',
+            'getFormElementConfig'
+        );
 
         $events = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

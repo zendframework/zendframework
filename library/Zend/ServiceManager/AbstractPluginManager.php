@@ -30,7 +30,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      *
      * @var bool
      */
-    protected $allowOverride   = true;
+    protected $allowOverride = true;
 
     /**
      * Whether or not to auto-add a class as an invokable class if it exists

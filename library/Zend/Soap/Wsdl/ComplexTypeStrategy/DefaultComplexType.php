@@ -22,7 +22,7 @@ use Zend\Soap\Exception;
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
     /**
-     * Add a complex type by recursivly using all the class properties fetched via Reflection.
+     * Add a complex type by recursively using all the class properties fetched via Reflection.
      *
      * @param  string $type Name of the class to be specified
      * @throws Exception\InvalidArgumentException if class does not exist

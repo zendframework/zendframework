@@ -10,6 +10,7 @@
 
 namespace Zend\Soap;
 
+use DOMNode;
 use DOMDocument;
 use DOMElement;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
@@ -24,7 +25,7 @@ use Zend\Uri\Uri;
 class Wsdl
 {
     /**
-     * @var object DomDocument Instance
+     * @var DOMDocument DOM document Instance
      */
     private $dom;
 
@@ -81,7 +82,7 @@ class Wsdl
 
         /**
          * @todo change DomDocument object creation from cparsing to constructing using API
-         * It also should authomatically escape $name and $uri values if necessary
+         * It also should automatically escape $name and $uri values if necessary
          */
         $wsdl = "<?xml version='1.0' ?>
                 <definitions name='$name' targetNamespace='$uri'
@@ -94,7 +95,7 @@ class Wsdl
         libxml_disable_entity_loader(true);
         $this->dom = new DOMDocument();
         if (!$this->dom->loadXML($wsdl)) {
-            throw new Exception\RuntimeException('Unable to create DomDocument');
+            throw new Exception\RuntimeException('Unable to create DOMDocument');
         } else {
             foreach ($this->dom->childNodes as $child) {
                 if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -235,7 +236,7 @@ class Wsdl
      * @param string $input Input Message
      * @param string $output Output Message
      * @param string $fault Fault Message
-     * @return object The new operation's XML_Tree_Node for use in {@link function addDocumentation}
+     * @return DOMElement The new operation's XML_Tree_Node for use in {@link function addDocumentation}
      */
     public function addPortOperation($portType, $name, $input = false, $output = false, $fault = false)
     {
@@ -288,7 +289,7 @@ class Wsdl
      * @param array $input An array of attributes for the input element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
      * @param array $output An array of attributes for the output element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
      * @param array $fault An array of attributes for the fault element, allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-     * @return object The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
+     * @return DOMElement The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
      */
     public function addBindingOperation($binding, $name, $input = false, $output = false, $fault = false)
     {
@@ -355,11 +356,11 @@ class Wsdl
     /**
      * Add a {@link http://www.w3.org/TR/wsdl#_soap:operation SOAP operation} to an operation element
      *
-     * @param object $operation An operation XML_Tree_Node returned by {@link function addBindingOperation}
-     * @param string $soap_action SOAP Action
+     * @param DOMElement $binding     An operation XML_Tree_Node returned by {@link function addBindingOperation}
+     * @param string|Uri $soap_action SOAP Action
      * @return boolean
      */
-    public function addSoapOperation($binding, $soap_action)
+    public function addSoapOperation(DOMElement $binding, $soap_action)
     {
         if ($soap_action instanceof Uri) {
             $soap_action = $soap_action->toString();
@@ -379,7 +380,7 @@ class Wsdl
      * @param string $port_name Name of the port for the service
      * @param string $binding Binding for the port
      * @param string $location SOAP Address for the service
-     * @return object The new service's XML_Tree_Node for use with {@link function addDocumentation}
+     * @return DOMElement The new service's XML_Tree_Node for use with {@link function addDocumentation}
      */
     public function addService($name, $port_name, $binding, $location)
     {
@@ -439,14 +440,14 @@ class Wsdl
     /**
      * Add WSDL Types element
      *
-     * @param object $types A DomDocument|DomNode|DomElement|DomDocumentFragment with all the XML Schema types defined in it
+     * @param DOMNode $types A DOM Node with all the XML Schema types defined in it
      */
-    public function addTypes($types)
+    public function addTypes(DOMNode $types)
     {
-        if ($types instanceof \DomDocument) {
-            $dom = $this->dom->importNode($types->documentElement);
+        if ($types instanceof DOMDocument) {
+            $this->dom->importNode($types->documentElement);
             $this->wsdl->appendChild($types->documentElement);
-        } elseif ($types instanceof \DomNode || $types instanceof \DomElement || $types instanceof \DomDocumentFragment ) {
+        } else {
             $dom = $this->dom->importNode($types);
             $this->wsdl->appendChild($dom);
         }
@@ -504,7 +505,7 @@ class Wsdl
     /**
      * Return DOM Document
      *
-     * @return object DomDocum ent
+     * @return DOMDocument
      */
     public function toDomDocument()
     {
@@ -512,8 +513,9 @@ class Wsdl
     }
 
     /**
-     * Echo the WSDL as XML
+     * Echo the WSDL as XML to stdout or save the WSDL to a file
      *
+     * @param string $filename Filename to save the output (Optional)
      * @return boolean
      */
     public function dump($filename = false)
@@ -522,7 +524,7 @@ class Wsdl
             echo $this->toXML();
             return true;
         }
-        return file_put_contents($filename, $this->toXML());
+        return (bool) file_put_contents($filename, $this->toXML());
     }
 
     /**

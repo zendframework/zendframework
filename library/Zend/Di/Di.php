@@ -150,7 +150,8 @@ class Di implements DependencyInjectionInterface
                 return $im->getSharedInstance($name, $params);
             }
         }
-        $instance = $this->newInstance($name, $params);
+        $config = $im->getConfig($name);
+        $instance = $this->newInstance($name, $params, $config['shared']);
         array_pop($this->instanceContext);
 
         return $instance;

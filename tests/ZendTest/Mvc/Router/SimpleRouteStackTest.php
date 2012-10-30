@@ -248,4 +248,28 @@ class SimpleRouteStackTest extends TestCase
             )
         );
     }
+
+    public function testGetRoutes()
+    {
+        $stack = new SimpleRouteStack();
+        $this->assertInstanceOf('Traversable', $stack->getRoutes());
+    }
+
+    public function testGetRouteByName()
+    {
+        $stack = new SimpleRouteStack();
+        $route = new TestAsset\DummyRoute();
+        $stack->addRoute('foo', $route);
+
+        $this->assertEquals($route, $stack->getRoute('foo'));
+    }
+
+    public function testHasRoute()
+    {
+        $stack = new SimpleRouteStack();
+        $this->assertEquals(false, $stack->hasRoute('foo'));
+
+        $stack->addRoute('foo', new TestAsset\DummyRoute());
+        $this->assertEquals(true, $stack->hasRoute('foo'));
+    }
 }

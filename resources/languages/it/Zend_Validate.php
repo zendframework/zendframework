@@ -83,7 +83,7 @@ return array(
     "The input is not a valid step" => "L'input non è uno step valido",
 
     // Zend_Validator_Db_AbstractDb
-    "No record matching the input was found" => "Non è stato trovata nessuna riga corrispondente all'input",
+    "No record matching the input was found" => "Non è stata trovata nessuna riga corrispondente all'input",
     "A record matching the input was found" => "E' già stata trovata una riga corrispondente all'input",
 
     // Zend_Validator_Digits

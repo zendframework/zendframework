@@ -83,12 +83,48 @@ class Logger implements LoggerInterface
     /**
      * Constructor
      *
-     * @todo support configuration (writers, dateTimeFormat, and writer plugin manager)
+     * Set options for an logger. Accepted options are:
+     * - writers: array of writers to add to this logger
+     * - exceptionhandler: if true register this logger as exceptionhandler
+     * - errorhandler: if true register this logger as errorhandler
+     *
+     * @param  array|\Traversable $options
      * @return Logger
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct()
+    public function __construct(array $options = null)
     {
         $this->writers = new SplPriorityQueue();
+
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (is_array($options)) {
+
+            if(isset($options['writers']) && is_array($options['writers'])) {
+                foreach($options['writers'] as $writer) {
+
+                    if(!isset($writer['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the writer');
+                    }
+
+                    $priority      = (isset($writer['priority'])) ? $writer['priority'] : null;
+                    $writerOptions = (isset($writer['options'])) ? $writer['options'] : null;
+
+                    $this->addWriter($writer['name'], $priority, $writerOptions);
+                }
+            }
+
+            if(isset($options['exceptionhandler']) && $options['exceptionhandler'] === true) {
+                self::registerExceptionHandler($this);
+            }
+
+            if(isset($options['errorhandler']) && $options['errorhandler'] === true) {
+                self::registerErrorHandler($this);
+            }
+
+        }
     }
 
     /**

@@ -11,27 +11,27 @@
 namespace Zend\Log\Writer;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\Log\Filter;
+use Zend\Log\Formatter;
 use Zend\Log\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  */
-class FilterPluginManager extends AbstractPluginManager
+class FormatterPluginManager extends AbstractPluginManager
 {
     /**
-     * Default set of filters
+     * Default set of formatters
      *
      * @var array
      */
     protected $invokableClasses = array(
-        'mock'           => 'Zend\Log\Filter\Mock',
-        'priority'       => 'Zend\Log\Filter\Priority',
-        'regex'          => 'Zend\Log\Filter\Regex',
-        'suppress'       => 'Zend\Log\Filter\suppressFilter',
-        'suppressfilter' => 'Zend\Log\Filter\suppressFilter',
-        'validator'      => 'Zend\Log\Filter\Validator',
+        'base'             => 'Zend\Log\Formatter\Base',
+        'simple'           => 'Zend\Log\Formatter\Simple',
+        'xml'              => 'Zend\Log\Formatter\Xml',
+        'db'               => 'Zend\Log\Formatter\Db',
+        'errorhandler'     => 'Zend\Log\Formatter\ErrorHandler',
+        'exceptionhandler' => 'Zend\Log\Formatter\ExceptionHandler',
     );
 
     /**
@@ -44,7 +44,7 @@ class FilterPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the filter loaded is an instance of Filter\FilterInterface.
+     * Checks that the formatter loaded is an instance of Formatter\FormatterInterface.
      *
      * @param  mixed $plugin
      * @return void
@@ -52,13 +52,13 @@ class FilterPluginManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        if ($plugin instanceof Filter\FilterInterface) {
+        if ($plugin instanceof Formatter\FormatterInterface) {
             // we're okay
             return;
         }
 
         throw new Exception\InvalidArgumentException(sprintf(
-            'Plugin of type %s is invalid; must implement %s\Filter\FilterInterface',
+            'Plugin of type %s is invalid; must implement %s\Formatter\FormatterInterface',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__
         ));

@@ -10,7 +10,6 @@
 
 namespace Zend\Log\Formatter;
 
-use DateTime;
 use Zend\Log\Exception;
 
 /**

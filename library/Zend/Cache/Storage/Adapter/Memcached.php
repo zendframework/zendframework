@@ -59,7 +59,6 @@ class Memcached extends AbstractAdapter implements
 
     /**
      * The namespace prefix
-     * (Gets updated on change one of the options "namespace" or "namespace_separator")
      *
      * @var string
      */

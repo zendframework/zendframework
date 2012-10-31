@@ -279,6 +279,7 @@ class Result implements
     /**
      * Rewind
      *
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function rewind()

@@ -34,10 +34,11 @@ class PropertyTagTest extends \PHPUnit_Framework_TestCase
     public function testParseTypeAndName()
     {
         $tag = new PropertyTag();
-        $tag->initialize('string $test');
+        $tag->initialize('string|null $test');
         $this->assertEquals('$test', $tag->getPropertyName());
         $this->assertNull($tag->getDescription());
         $this->assertEquals('string', $tag->getType());
+        $this->assertEquals(array('string', 'null'), $tag->getTypes());
     }
 
     public function testParseNameAndDescription()

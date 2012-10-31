@@ -16,7 +16,6 @@ use Traversable;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
-use Zend\Cache\Storage\Event;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 

@@ -86,6 +86,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->prepareStatement($mockAdapter, $mockStatement);
 
         // with TableIdentifier
+        $this->insert = new Insert;
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
@@ -96,7 +97,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
         $mockStatement->expects($this->at(1))
             ->method('setSql')
-            ->with($this->equalTo('INSERT INTO "sch."foo" ("bar", "boo") VALUES (?, NOW())'));
+            ->with($this->equalTo('INSERT INTO "sch"."foo" ("bar", "boo") VALUES (?, NOW())'));
 
         $this->insert->into(new TableIdentifier('foo', 'sch'))
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
@@ -115,6 +116,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString());
 
         // with TableIdentifier
+        $this->insert = new Insert;
         $this->insert->into(new TableIdentifier('foo', 'sch'))
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
 

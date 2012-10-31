@@ -173,6 +173,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->update->prepareStatement($mockAdapter, $mockStatement);
 
         // with TableIdentifier
+        $this->update = new Update;
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
@@ -205,6 +206,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString());
 
         // with TableIdentifier
+        $this->update = new Update;
         $this->update->table(new TableIdentifier('foo', 'sch'))
             ->set(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null))
             ->where('x = y');

@@ -509,4 +509,51 @@ class BaseInputFilterTest extends TestCase
         $this->assertArrayHasKey('foo', $messages);
         $this->assertNotEmpty($messages['foo']);
     }
+    public function testHasUnknown()
+    {
+        $filter = $this->getInputFilter();
+        $validData = array(
+            'foo' => ' bazbat ',
+            'bar' => '12345',
+            'baz' => ''
+        );
+        $filter->setData($validData);
+        $this->assertFalse($filter->hasUnknown());
+
+        $filter = $this->getInputFilter();
+        $invalidData = array(
+            'bar' => '12345',
+            'baz' => '',
+            'gru' => '',
+        );
+        $filter->setData($invalidData);
+        $this->assertTrue($filter->hasUnknown());
+    }
+    public function testGetUknown()
+    {
+        $filter = $this->getInputFilter();
+        $unknown = array(
+            'bar' => '12345',
+            'baz' => '',
+            'gru' => 10,
+            'test' => 'ok',
+        );
+        $filter->setData($unknown);
+        $unknown = $filter->getUnknown();
+        $this->assertEquals(2, count($unknown));
+        $this->assertTrue(array_key_exists('gru', $unknown));
+        $this->assertEquals(10, $unknown['gru']);
+        $this->assertTrue(array_key_exists('test', $unknown));
+        $this->assertEquals('ok', $unknown['test']);
+
+        $filter = $this->getInputFilter();
+        $validData = array(
+            'foo' => ' bazbat ',
+            'bar' => '12345',
+            'baz' => ''
+        );
+        $filter->setData($validData);
+        $unknown = $filter->getUnknown();
+        $this->assertEquals(0, count($unknown));
+    }
 }

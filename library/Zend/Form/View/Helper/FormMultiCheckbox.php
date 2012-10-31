@@ -442,6 +442,7 @@ class FormMultiCheckbox extends FormInput
      * Get element name
      *
      * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     protected static function getName(ElementInterface $element)

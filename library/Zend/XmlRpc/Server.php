@@ -172,8 +172,8 @@ class Server extends AbstractServer
      *
      * @param string|array|callable $function  Valid callback
      * @param string                $namespace Optional namespace prefix
+     * @throws Server\Exception\InvalidArgumentException
      * @return void
-     * @throws \Zend\XmlRpc\Exception\InvalidArgumentException
      */
     public function addFunction($function, $namespace = '')
     {

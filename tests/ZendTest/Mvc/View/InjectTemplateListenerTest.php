@@ -103,7 +103,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->assertEquals('custom', $model->getTemplate());
     }
 
-    public function testMapsSubNamespaceToSubDirectory()
+    public function testMapsSubNamespaceToSubDirectoryWithControllerFromRouteMatch()
     {
         $this->routeMatch->setParam(ModuleRouteListener::MODULE_NAMESPACE, 'Aj\Controller\SweetAppleAcres\Reports');
         $this->routeMatch->setParam('controller', 'CiderSales');
@@ -114,6 +114,21 @@ class InjectTemplateListenerTest extends TestCase
         $this->listener->injectTemplate($this->event);
 
         $this->assertEquals('sweet-apple-acres/reports/cider-sales/pinkie-pie-revenue', $model->getTemplate());
+    }
+
+    public function testMapsSubNamespaceToSubDirectoryWithControllerFromEventTarget()
+    {
+        $this->routeMatch->setParam(ModuleRouteListener::MODULE_NAMESPACE, 'ZendTest\Mvc\Controller\TestAsset');
+        $this->routeMatch->setParam('action', 'test');
+
+        $myViewModel  = new ViewModel();
+        $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
+
+        $this->event->setTarget($myController);
+        $this->event->setResult($myViewModel);
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('zend-test/controller/test-asset/sample/test', $myViewModel->getTemplate());
     }
 
     public function testAttachesListenerAtExpectedPriority()

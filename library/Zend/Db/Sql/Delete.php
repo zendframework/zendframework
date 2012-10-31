@@ -172,7 +172,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $table = $this->table;
         $schema = null;
 
-        // create quoted table name to use in columns processing
+        // create quoted table name to use in delete processing
         if ($table instanceof TableIdentifier) {
             list($table, $schema) = $table->getTableAndSchema();
         }
@@ -205,11 +205,19 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-        $table = $adapterPlatform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = null;
 
-//        if ($this->schema != '') {
-//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-//        }
+        // create quoted table name to use in delete processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        $table = $adapterPlatform->quoteIdentifier($table);
+
+        if ($schema) {
+            $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
+        }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 

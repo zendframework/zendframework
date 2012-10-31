@@ -205,7 +205,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $table = $this->table;
         $schema = null;
 
-        // create quoted table name to use in columns processing
+        // create quoted table name to use in update processing
         if ($table instanceof TableIdentifier) {
             list($table, $schema) = $table->getTableAndSchema();
         }
@@ -252,7 +252,19 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-        $table = $adapterPlatform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = null;
+
+        // create quoted table name to use in update processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        $table = $adapterPlatform->quoteIdentifier($table);
+
+        if ($schema) {
+            $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
+        }
 
         $set = $this->set;
         if (is_array($set)) {

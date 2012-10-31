@@ -68,7 +68,7 @@ class MemcachedTest extends CommonAdapterTest
         $expectedServers = array(
             array('host' => '127.0.0.1', 'port' => 12345, 'weight' => 1),
             array('host' => 'localhost', 'port' => 54321, 'weight' => 2),
-            array('host' => 'examp.com', 'port' => 11211, 'weight' => 1),
+            array('host' => 'examp.com', 'port' => 11211, 'weight' => 0),
         );
 
         return array(
@@ -135,19 +135,6 @@ class MemcachedTest extends CommonAdapterTest
         $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
             \Memcached::OPT_COMPRESSION => false
         ));
-    }
-
-    public function testNoOptionsSetsDefaultServer()
-    {
-        $memcached = new Cache\Storage\Adapter\Memcached();
-
-        $expected = array(array(
-            'host'   => '127.0.0.1',
-            'port'   => 11211,
-            'weight' => 0,
-        ));
-
-        $this->assertEquals($expected, $memcached->getOptions()->getServers());
     }
 
     public function tearDown()

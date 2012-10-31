@@ -10,6 +10,9 @@
 
 namespace Zend\Server\Reflection;
 
+use ReflectionFunctionAbstract;
+use Zend\Code\Reflection\DocBlockReflection;
+
 /**
  * Function/Method Reflection
  *
@@ -79,22 +82,14 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param \Reflector $r
+     * @param ReflectionFunctionAbstract $r
      * @param null|string $namespace
      * @param null|array $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function __construct(\Reflector $r, $namespace = null, $argv = array())
+    public function __construct(ReflectionFunctionAbstract $r, $namespace = null, $argv = array())
     {
-        // In PHP 5.1.x, ReflectionMethod extends ReflectionFunction. In 5.2.x,
-        // both extend ReflectionFunctionAbstract. So, we can't do normal type
-        // hinting in the prototype, but instead need to do some explicit
-        // testing here.
-        if ((!$r instanceof \ReflectionFunction)
-            && (!$r instanceof \ReflectionMethod)) {
-            throw new Exception\InvalidArgumentException('Invalid reflection class');
-        }
         $this->reflection = $r;
 
         // Determine namespace
@@ -113,7 +108,7 @@ abstract class AbstractFunction
         }
 
         // Perform some introspection
-        $this->_reflect();
+        $this->reflect();
     }
 
     /**
@@ -127,7 +122,7 @@ abstract class AbstractFunction
      * @param int $level
      * @return void
      */
-    protected function _addTree(Node $parent, $level = 0)
+    protected function addTree(Node $parent, $level = 0)
     {
         if ($level >= $this->sigParamsDepth) {
             return;
@@ -136,7 +131,7 @@ abstract class AbstractFunction
         foreach ($this->sigParams[$level] as $value) {
             $node = new Node($value, $parent);
             if ((null !== $value) && ($this->sigParamsDepth > $level + 1)) {
-                $this->_addTree($node, $level + 1);
+                $this->addTree($node, $level + 1);
             }
         }
     }
@@ -150,12 +145,12 @@ abstract class AbstractFunction
      *
      * @return array
      */
-    protected function _buildTree()
+    protected function buildTree()
     {
         $returnTree = array();
-        foreach ((array) $this->return as $value) {
+        foreach ($this->return as $value) {
             $node = new Node($value);
-            $this->_addTree($node);
+            $this->addTree($node);
             $returnTree[] = $node;
         }
 
@@ -174,15 +169,15 @@ abstract class AbstractFunction
      * @param array $paramDesc Array of parameter descriptions
      * @return array
      */
-    protected function _buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
+    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
     {
         $this->return         = $return;
         $this->returnDesc     = $returnDesc;
         $this->paramDesc      = $paramDesc;
         $this->sigParams      = $paramTypes;
         $this->sigParamsDepth = count($paramTypes);
-        $signatureTrees        = $this->_buildTree();
-        $signatures            = array();
+        $signatureTrees       = $this->buildTree();
+        $signatures           = array();
 
         $endPoints = array();
         foreach ($signatureTrees as $root) {
@@ -233,93 +228,61 @@ abstract class AbstractFunction
      * @throws Exception\RuntimeException
      * @return array
      */
-    protected function _reflect()
+    protected function reflect()
     {
-        $function           = $this->reflection;
-        $helpText           = '';
-        $signatures         = array();
-        $returnDesc         = '';
-        $paramCount         = $function->getNumberOfParameters();
-        $paramCountRequired = $function->getNumberOfRequiredParameters();
-        $parameters         = $function->getParameters();
-        $docBlock           = $function->getDocComment();
+        $function   = $this->reflection;
+        $paramCount = $function->getNumberOfParameters();
+        $parameters = $function->getParameters();
+        $scanner    = new DocBlockReflection(($function->getDocComment()) ? : '/***/');
+        $helpText   = $scanner->getLongDescription();
+        /* @var \Zend\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
+        $paramTags = $scanner->getTags('param');
+        /* @var \Zend\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
+        $returnTag = $scanner->getTag('return');
 
-        if (!empty($docBlock)) {
-            // Get help text
-            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches)) {
-                $helpText = $matches[1];
-                $helpText = preg_replace('/(^\s*\*\s)/m', '', $helpText);
-                $helpText = preg_replace('/\r?\n\s*\*\s*(\r?\n)*/s', "\n", $helpText);
-                $helpText = trim($helpText);
-            }
-
-            // Get return type(s) and description
-            $return     = 'void';
-            if (preg_match('/@return\s+(\S+)/', $docBlock, $matches)) {
-                $return = explode('|', $matches[1]);
-                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
-                    $value = $matches[1];
-                    $value = preg_replace('/\s?\*\s/m', '', $value);
-                    $value = preg_replace('/\s{2,}/', ' ', $value);
-                    $returnDesc = trim($value);
-                }
-            }
-
-            // Get param types and description
-            if (preg_match_all('/@param\s+([^\s]+)/m', $docBlock, $matches)) {
-                $paramTypesTmp = $matches[1];
-                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(?=@|\*\/)/s', $docBlock, $matches)) {
-                    $paramDesc = $matches[2];
-                    foreach ($paramDesc as $key => $value) {
-                        $value = preg_replace('/\s?\*\s/m', '', $value);
-                        $value = preg_replace('/\s{2,}/', ' ', $value);
-                        $paramDesc[$key] = trim($value);
-                    }
-                }
-            }
-        } else {
-            $helpText = $function->getName();
-            $return   = 'void';
-
-            // Try and auto-determine type, based on reflection
-            $paramTypesTmp = array();
-            foreach ($parameters as $i => $param) {
-                $paramType = 'mixed';
-                if ($param->isArray()) {
-                    $paramType = 'array';
-                }
-                $paramTypesTmp[$i] = $paramType;
+        if (empty($helpText)) {
+            $helpText = $scanner->getShortDescription();
+            if (empty($helpText)) {
+                $helpText = $function->getName();
             }
         }
-
-        // Set method description
         $this->setDescription($helpText);
 
-        // Get all param types as arrays
-        if (!isset($paramTypesTmp) && (0 < $paramCount)) {
-            $paramTypesTmp = array_fill(0, $paramCount, 'mixed');
-        } elseif (!isset($paramTypesTmp)) {
-            $paramTypesTmp = array();
-        } elseif (count($paramTypesTmp) < $paramCount) {
-            $start = $paramCount - count($paramTypesTmp);
-            for ($i = $start; $i < $paramCount; ++$i) {
-                $paramTypesTmp[$i] = 'mixed';
+        if ($returnTag) {
+            $return     = array();
+            $returnDesc = $returnTag->getDescription();
+            foreach ($returnTag->getTypes() as $type) {
+                $return[] = $type;
             }
+        } else {
+            $return     = array('void');
+            $returnDesc = '';
         }
 
-        // Get all param descriptions as arrays
-        if (!isset($paramDesc) && (0 < $paramCount)) {
-            $paramDesc = array_fill(0, $paramCount, '');
-        } elseif (!isset($paramDesc)) {
+        $paramTypesTmp = array();
+        $paramDesc     = array();
+        if (empty($paramTags)) {
+            foreach ($parameters as $param) {
+                $paramTypesTmp[] = array(($param->isArray()) ? 'array' : 'mixed');
+                $paramDesc[]     = '';
+            }
+        } else {
             $paramDesc = array();
-        } elseif (count($paramDesc) < $paramCount) {
-            $start = $paramCount - count($paramDesc);
-            for ($i = $start; $i < $paramCount; ++$i) {
-                $paramDesc[$i] = '';
+            foreach ($paramTags as $paramTag) {
+                $paramTypesTmp[] = $paramTag->getTypes();
+                $paramDesc[]     = ($paramTag->getDescription()) ? : '';
             }
         }
 
-        if (count($paramTypesTmp) != $paramCount) {
+        // Get all param types as arrays
+        $nParamTypesTmp = count($paramTypesTmp);
+        if ($nParamTypesTmp < $paramCount) {
+            $start = $paramCount - $nParamTypesTmp;
+            for ($i = $start; $i < $paramCount; ++$i) {
+                $paramTypesTmp[$i] = array('mixed');
+                $paramDesc[$i]     = '';
+            }
+        } elseif ($nParamTypesTmp != $paramCount) {
             throw new Exception\RuntimeException(
                'Variable number of arguments is not supported for services (except optional parameters). '
              . 'Number of function arguments must correspond to actual number of arguments described in a docblock.');
@@ -327,14 +290,13 @@ abstract class AbstractFunction
 
         $paramTypes = array();
         foreach ($paramTypesTmp as $i => $param) {
-            $tmp = explode('|', $param);
             if ($parameters[$i]->isOptional()) {
-                array_unshift($tmp, null);
+                array_unshift($param, null);
             }
-            $paramTypes[] = $tmp;
+            $paramTypes[] = $param;
         }
 
-        $this->_buildSignatures($return, $returnDesc, $paramTypes, $paramDesc);
+        $this->buildSignatures($return, $returnDesc, $paramTypes, $paramDesc);
     }
 
 

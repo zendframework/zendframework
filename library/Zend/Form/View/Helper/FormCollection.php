@@ -46,11 +46,11 @@ class FormCollection extends AbstractHelper
     protected $elementHelper;
 
     /**
-	 * The view helper used to render sub fieldsets.
-	 *
-	 * @var AbstractHelper
-	 */
-	protected $fieldsetHelper;
+     * The view helper used to render sub fieldsets.
+     *
+     * @var AbstractHelper
+     */
+    protected $fieldsetHelper;
 
     /**
      * Render a collection by iterating through all fieldsets and elements
@@ -239,7 +239,8 @@ class FormCollection extends AbstractHelper
      * @param AbstractHelper $fieldsetHelper The fieldset helper to use.
      * @return FormCollection
      */
-    public function setFieldsetHelper(AbstractHelper $fieldsetHelper){
+    public function setFieldsetHelper(AbstractHelper $fieldsetHelper)
+    {
         $this->fieldsetHelper = $fieldsetHelper;
         return $this;
     }

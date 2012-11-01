@@ -35,11 +35,12 @@ class MethodTagTest extends \PHPUnit_Framework_TestCase
     public function testParseNameAndType()
     {
         $tag = new MethodTag();
-        $tag->initialize('string test()');
+        $tag->initialize('string|null test()');
         $this->assertEquals('method', $tag->getName());
         $this->assertEquals('test()', $tag->getMethodName());
         $this->assertFalse($tag->isStatic());
         $this->assertEquals('string', $tag->getReturnType());
+        $this->assertEquals(array('string', 'null'), $tag->getTypes());
         $this->assertNull($tag->getDescription());
     }
 

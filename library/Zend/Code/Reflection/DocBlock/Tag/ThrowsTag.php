@@ -14,17 +14,12 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
  * @category   Zend
  * @package    Zend_Reflection
  */
-class ParamTag implements TagInterface, PhpDocTypedTagInterface
+class ThrowsTag implements TagInterface, PhpDocTypedTagInterface
 {
-    /**
-     * @var array
-     */
-    protected $types = array();
-
     /**
      * @var string
      */
-    protected $variableName = null;
+    protected $type = null;
 
     /**
      * @var string
@@ -36,58 +31,39 @@ class ParamTag implements TagInterface, PhpDocTypedTagInterface
      */
     public function getName()
     {
-        return 'param';
+        return 'throws';
     }
 
     /**
-     * Initializer
-     *
-     * @param string $tagDocBlockLine
+     * @param  string $tagDocBlockLine
+     * @return void
      */
     public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocBlockLine, $matches);
+        preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocBlockLine, $matches);
 
-        $this->types = explode('|', $matches[1]);
+        $this->type = $matches[1];
 
         if (isset($matches[2])) {
-            $this->variableName = $matches[2];
-        }
-
-        if (isset($matches[3])) {
-            $this->description = trim(preg_replace('#\s+#', ' ', $matches[3]));
+            $this->description = $matches[2];
         }
     }
 
     /**
-     * Get parameter variable type
+     * Get return variable type
      *
      * @return string
      * @deprecated 2.0.4 use getTypes instead
      */
     public function getType()
     {
-        if (empty($this->types)) {
-            return '';
-        }
-
-        return $this->types[0];
+        return $this->type;
     }
 
     public function getTypes()
     {
-        return $this->types;
-    }
-
-    /**
-     * Get parameter name
-     *
-     * @return string
-     */
-    public function getVariableName()
-    {
-        return $this->variableName;
+        return array($this->type);
     }
 
     public function getDescription()

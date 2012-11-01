@@ -14,12 +14,12 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
  * @category   Zend
  * @package    Zend_Reflection
  */
-class ReturnTag implements TagInterface
+class ReturnTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $type = null;
+    protected $types = array();
 
     /**
      * @var string
@@ -41,12 +41,12 @@ class ReturnTag implements TagInterface
     public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocBlockLine, $matches);
+        preg_match('#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(.*))?#s', $tagDocBlockLine, $matches);
 
-        $this->type = $matches[1];
+        $this->types = explode('|', $matches[1]);
 
         if (isset($matches[2])) {
-            $this->description = $matches[2];
+            $this->description = trim(preg_replace('#\s+#', ' ', $matches[2]));
         }
     }
 
@@ -54,10 +54,20 @@ class ReturnTag implements TagInterface
      * Get return variable type
      *
      * @return string
+     * @deprecated 2.0.4 use getTypes instead
      */
     public function getType()
     {
-        return $this->type;
+        if (empty($this->types)) {
+            return '';
+        }
+
+        return $this->types[0];
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     public function getDescription()

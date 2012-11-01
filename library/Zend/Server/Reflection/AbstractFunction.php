@@ -11,6 +11,9 @@
 namespace Zend\Server\Reflection;
 
 use ReflectionFunctionAbstract;
+use ReflectionClass as PhpReflectionClass;
+use ReflectionFunction as PhpReflectionFunction;
+use ReflectionMethod as PhpReflectionMethod;
 use Zend\Code\Reflection\DocBlockReflection;
 
 /**

@@ -75,8 +75,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertTrue(is_array($prototypes));
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertInternalType('array', $prototypes);
         $this->assertEquals(8, count($prototypes));
 
         foreach ($prototypes as $p) {

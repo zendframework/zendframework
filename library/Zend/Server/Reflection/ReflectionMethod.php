@@ -62,7 +62,7 @@ class ReflectionMethod extends AbstractFunction
         $this->class = $class->getName();
 
         // Perform some introspection
-        $this->_reflect();
+        $this->reflect();
     }
 
     /**

@@ -38,10 +38,10 @@ class Debug
      */
     public static function getSapi()
     {
-        if (self::$sapi === null) {
-            self::$sapi = PHP_SAPI;
+        if (static::$sapi === null) {
+            static::$sapi = PHP_SAPI;
         }
-        return self::$sapi;
+        return static::$sapi;
     }
 
     /**
@@ -53,7 +53,7 @@ class Debug
      */
     public static function setSapi($sapi)
     {
-        self::$sapi = $sapi;
+        static::$sapi = $sapi;
     }
 
     /**
@@ -103,7 +103,7 @@ class Debug
 
         // neaten the newlines and indents
         $output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
-        if (self::getSapi() == 'cli') {
+        if (static::getSapi() == 'cli') {
             $output = PHP_EOL . $label
                     . PHP_EOL . $output
                     . PHP_EOL;

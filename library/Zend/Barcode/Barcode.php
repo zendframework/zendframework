@@ -22,8 +22,6 @@ use Zend\Stdlib\ArrayUtils;
  */
 class Barcode
 {
-    const OBJECT   = 'OBJECT';
-    const RENDERER = 'RENDERER';
     /**
      * Default barcode TTF font name
      *
@@ -56,11 +54,11 @@ class Barcode
      */
     public static function getObjectPluginManager()
     {
-        if (!self::$objectPlugins instanceof ObjectPluginManager) {
-            self::$objectPlugins = new ObjectPluginManager();
+        if (!static::$objectPlugins instanceof ObjectPluginManager) {
+            static::$objectPlugins = new ObjectPluginManager();
         }
 
-        return self::$objectPlugins;
+        return static::$objectPlugins;
     }
 
     /**
@@ -70,11 +68,11 @@ class Barcode
      */
     public static function getRendererPluginManager()
     {
-        if (!self::$rendererPlugins instanceof RendererPluginManager) {
-            self::$rendererPlugins = new RendererPluginManager();
+        if (!static::$rendererPlugins instanceof RendererPluginManager) {
+            static::$rendererPlugins = new RendererPluginManager();
         }
 
-        return self::$rendererPlugins;
+        return static::$rendererPlugins;
     }
 
     /**
@@ -131,12 +129,12 @@ class Barcode
         }
 
         try {
-            $barcode  = self::makeBarcode($barcode, $barcodeConfig);
-            $renderer = self::makeRenderer($renderer, $rendererConfig);
+            $barcode  = static::makeBarcode($barcode, $barcodeConfig);
+            $renderer = static::makeRenderer($renderer, $rendererConfig);
         } catch (Exception\ExceptionInterface $e) {
             if ($automaticRenderError && !($e instanceof Exception\RendererCreationException)) {
-                $barcode  = self::makeBarcode('error', array( 'text' => $e->getMessage() ));
-                $renderer = self::makeRenderer($renderer, array());
+                $barcode  = static::makeBarcode('error', array( 'text' => $e->getMessage() ));
+                $renderer = static::makeRenderer($renderer, array());
             } else {
                 throw $e;
             }
@@ -197,7 +195,7 @@ class Barcode
             );
         }
 
-        return self::getObjectPluginManager()->get($barcode, $barcodeConfig);
+        return static::getObjectPluginManager()->get($barcode, $barcodeConfig);
     }
 
     /**
@@ -249,7 +247,7 @@ class Barcode
             );
         }
 
-        return self::getRendererPluginManager()->get($renderer, $rendererConfig);
+        return static::getRendererPluginManager()->get($renderer, $rendererConfig);
     }
 
     /**
@@ -265,7 +263,7 @@ class Barcode
                                   $barcodeConfig = array(),
                                   $rendererConfig = array())
     {
-        self::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
+        static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
     }
 
     /**
@@ -282,7 +280,7 @@ class Barcode
                                 $barcodeConfig = array(),
                                 $rendererConfig = array())
     {
-        return self::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
+        return static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
     }
 
     /**
@@ -293,7 +291,7 @@ class Barcode
      */
     public static function setBarcodeFont($font)
     {
-        self::$staticFont = $font;
+        static::$staticFont = $font;
     }
 
     /**
@@ -303,6 +301,6 @@ class Barcode
      */
     public static function getBarcodeFont()
     {
-        return self::$staticFont;
+        return static::$staticFont;
     }
 }

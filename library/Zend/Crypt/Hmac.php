@@ -22,7 +22,7 @@ class Hmac
     const OUTPUT_BINARY = true;
 
     /**
-     * Last algorithm supported correctly
+     * Last algorithm supported
      *
      * @var string|null
      */
@@ -46,7 +46,7 @@ class Hmac
             throw new Exception\InvalidArgumentException('Provided key is null or empty');
         }
 
-        if ($hash !== static::$lastAlgorithmSupported && !static::isSupported($hash)) {
+        if (!$hash || ($hash !== static::$lastAlgorithmSupported && !static::isSupported($hash))) {
             throw new Exception\InvalidArgumentException(
                 "Hash algorithm is not supported on this PHP installation; provided '{$hash}'"
             );
@@ -95,5 +95,13 @@ class Hmac
         }
 
         return false;
+    }
+
+    /**
+     * Clear the cache of last algorithm supported
+     */
+    public static function clearLastAlgorithmCache()
+    {
+        static::$lastAlgorithmSupported = null;
     }
 }

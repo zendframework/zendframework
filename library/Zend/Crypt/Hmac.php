@@ -26,14 +26,7 @@ class Hmac
      *
      * @var string|null
      */
-    protected static $lastAlgorithmSupported = null;
-
-    /**
-     * List of hash algorithms supported
-     *
-     * @var array
-     */
-    protected static $supportedAlgorithms = array();
+    protected static $lastAlgorithmSupported;
 
     /**
      * Performs a HMAC computation given relevant details such as Key, Hashing
@@ -81,11 +74,7 @@ class Hmac
      */
     public static function getSupportedAlgorithms()
     {
-        if (empty(static::$supportedAlgorithms)) {
-            static::$supportedAlgorithms = hash_algos();
-        }
-
-        return static::$supportedAlgorithms;
+        return hash_algos();
     }
 
     /**

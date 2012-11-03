@@ -384,7 +384,7 @@ abstract class AbstractValue
                 }
 
                 if (null === $data) {
-                    throw new Exception\ValueException('Invalid XML for XML-RPC native '. static::XMLRPC_TYPE_ARRAY .' type: ARRAY tag must contain DATA tag');
+                    throw new Exception\ValueException('Invalid XML for XML-RPC native '. self::XMLRPC_TYPE_ARRAY .' type: ARRAY tag must contain DATA tag');
                 }
                 $values = array();
                 // Parse all the elements of the array from the XML string

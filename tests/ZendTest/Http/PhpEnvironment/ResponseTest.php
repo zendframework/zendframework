@@ -13,7 +13,7 @@ namespace ZendTest\Http\PhpEnvironment;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\PhpEnvironment\Response;
 
-class ResposneTest extends TestCase
+class ResponseTest extends TestCase
 {
     /**
      * Original environemnt

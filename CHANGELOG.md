@@ -15,6 +15,8 @@
   progress identifiers.
 - New Zend\Filter\File\RenameUpload filter for securely moving uploaded
   files.
+- New Zend\Mvc\Controller\Plugin\FilePostRedirectGet plugin for file
+  upload forms.
 
 
 ## 2.0.2:

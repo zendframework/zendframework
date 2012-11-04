@@ -11,6 +11,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
+use Zend\Form\Form;
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Session\Container;
 
@@ -21,27 +22,55 @@ use Zend\Session\Container;
  * @package Zend_Mvc
  * @subpackage Controller
  */
-class PostRedirectGet extends AbstractPlugin
+class FilePostRedirectGet extends AbstractPlugin
 {
     /**
      * @var Container
      */
     protected $sessionContainer;
 
-    public function __invoke($redirect = null, $redirectToUrl = false)
+    public function __invoke($form, $redirect = null, $redirectToUrl = false)
     {
         $controller = $this->getController();
         $request    = $controller->getRequest();
         $container  = $this->getSessionContainer();
 
+        $returnObj = new \stdClass(); // TODO: Create a value object class / interface?
+        $returnObj->post     = null;
+        $returnObj->isValid  = null;
+        $returnObj->response = null;
+
         if ($request->isPost()) {
-            $container->post = $request->getPost()->toArray();
-            return $this->redirect($redirect, $redirectToUrl);
+            $post = array_merge(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            $returnObj->post = $container->post = $post;
+            $form->setData($post);
+
+            $returnObj->isValid = $isValid = $form->isValid();
+            if (!$isValid) {
+                $container->errors = $form->getMessages();
+            }
+
+            $returnObj->response = $this->redirect($redirect, $redirectToUrl);
+            return $returnObj;
         } else {
-            if ($container->post !== null) {
-                $post = $container->post;
+            if (null !== $container->post) {
+                $post   = $container->post;
+                $errors = $container->errors;
                 unset($container->post);
-                return $post;
+                unset($container->errors);
+
+                $form->setData($post);
+
+                $returnObj->isValid = $isValid = (null === $errors);
+                if (!$isValid) {
+                    $form->setMessages($errors);
+                }
+
+                $returnObj->post = $post;
+                return $returnObj;
             }
 
             return false;
@@ -51,8 +80,8 @@ class PostRedirectGet extends AbstractPlugin
     protected function getSessionContainer()
     {
         if (!isset($this->sessionContainer)) {
-            $this->sessionContainer = new Container('prg_post1');
-            $this->sessionContainer->setExpirationHops(1, 'post');
+            $this->sessionContainer = new Container('file_prg_post1');
+            $this->sessionContainer->setExpirationHops(1, array('post', 'errors'));
         }
         return $this->sessionContainer;
     }

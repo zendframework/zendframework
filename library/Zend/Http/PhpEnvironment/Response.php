@@ -32,6 +32,22 @@ class Response extends HttpResponse
     protected $contentSent = false;
 
     /**
+     * Construct
+     * Instantiates response.
+     */
+    public function __construct()
+    {
+        // autodetect default HTTP version
+        if (isset($_SERVER['SERVER_PROTOCOL'])) {
+            if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.0') {
+                $this->setVersion(self::VERSION_10);
+            } elseif ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
+                $this->setVersion(self::VERSION_11);
+            }
+        }
+    }
+
+    /**
      * @return bool
      */
     public function headersSent()

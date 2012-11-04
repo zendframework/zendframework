@@ -69,14 +69,14 @@ class ResponseTest extends TestCase
         $response = new Response();
         $this->assertSame(Response::VERSION_11, $response->getVersion());
 
-        // unknown protocol or version
+        // unknown protocol or version -> fallback to HTTP/1.0
         $_SERVER['SERVER_PROTOCOL'] = 'zf/2.0';
         $response = new Response();
-        $this->assertSame(Response::VERSION_11, $response->getVersion());
+        $this->assertSame(Response::VERSION_10, $response->getVersion());
 
-        // undefined
+        // undefined -> fallback to HTTP/1.0
         unset($_SERVER['SERVER_PROTOCOL']);
         $response = new Response();
-        $this->assertSame(Response::VERSION_11, $response->getVersion());
+        $this->assertSame(Response::VERSION_10, $response->getVersion());
     }
 }

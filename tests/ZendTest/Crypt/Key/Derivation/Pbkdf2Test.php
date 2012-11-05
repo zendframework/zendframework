@@ -38,7 +38,7 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
     public function testCalcWithWrongHash()
     {
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
-                                    'The hash algorihtm wrong is not supported by Zend\Crypt\Key\Derivation\Pbkdf2');
+                                    'The hash algorithm wrong is not supported by Zend\Crypt\Key\Derivation\Pbkdf2');
         $password = Pbkdf2::calc('wrong', 'test', $this->salt, 5000, 32);
     }
 

@@ -2,10 +2,11 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
+ * @link       http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd New BSD License
+ * @package    Zend_Http
+ * @subpackage UnitTest
  */
 
 namespace ZendTest\Http\PhpEnvironment;
@@ -57,26 +58,48 @@ class ResponseTest extends TestCase
         $_FILES  = $this->originalEnvironment['files'];
     }
 
-    public function testHttpVersion()
+    public function testReturnsOneOhVersionWhenDetectedInServerSuperglobal()
     {
-        // 'HTTP/1.0
+        // HTTP/1.0
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.0';
         $response = new Response();
         $this->assertSame(Response::VERSION_10, $response->getVersion());
+    }
 
-        // 'HTTP/1.1
+    public function testReturnsOneOneVersionWhenDetectedInServerSuperglobal()
+    {
+        // HTTP/1.1
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $response = new Response();
         $this->assertSame(Response::VERSION_11, $response->getVersion());
+    }
 
+    public function testFallsBackToVersionOneOhWhenServerSuperglobalVersionIsNotRecognized()
+    {
         // unknown protocol or version -> fallback to HTTP/1.0
         $_SERVER['SERVER_PROTOCOL'] = 'zf/2.0';
         $response = new Response();
         $this->assertSame(Response::VERSION_10, $response->getVersion());
+    }
 
+    public function testFallsBackToVersionOneOhWhenNoVersionDetectedInServerSuperglobal()
+    {
         // undefined -> fallback to HTTP/1.0
         unset($_SERVER['SERVER_PROTOCOL']);
         $response = new Response();
         $this->assertSame(Response::VERSION_10, $response->getVersion());
+    }
+
+    public function testCanExplicitlySetVersion()
+    {
+        $response = new Response();
+        $response->setVersion(Response::VERSION_11);
+        $this->assertSame(Response::VERSION_11, $response->getVersion());
+
+        $response->setVersion(Response::VERSION_10);
+        $this->assertSame(Response::VERSION_10, $response->getVersion());
+
+        $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException');
+        $response->setVersion('zf/2.0');
     }
 }

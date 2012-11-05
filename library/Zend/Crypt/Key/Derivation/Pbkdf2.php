@@ -33,16 +33,17 @@ class Pbkdf2
      */
     public static function calc($hash, $password, $salt, $iterations, $length)
     {
-        if (!in_array($hash, Hmac::getSupportedAlgorithms())) {
-            throw new Exception\InvalidArgumentException("The hash algorihtm $hash is not supported by " . __CLASS__);
+        if (!Hmac::isSupported($hash)) {
+            throw new Exception\InvalidArgumentException("The hash algorithm $hash is not supported by " . __CLASS__);
         }
+
         $num    = ceil($length / Hmac::getOutputSize($hash, Hmac::OUTPUT_BINARY));
         $result = '';
         for ($block = 1; $block <= $num; $block++) {
-            $hmac = Hmac::compute($password, $hash, $salt . pack('N', $block), Hmac::OUTPUT_BINARY);
+            $hmac = hash_hmac($hash, $salt . pack('N', $block), $password, Hmac::OUTPUT_BINARY);
             $mix  = $hmac;
             for ($i = 1; $i < $iterations; $i++) {
-                $hmac = Hmac::compute($password, $hash, $hmac, Hmac::OUTPUT_BINARY);
+                $hmac = hash_hmac($hash, $hmac, $password, Hmac::OUTPUT_BINARY);
                 $mix ^= $hmac;
             }
             $result .= $mix;

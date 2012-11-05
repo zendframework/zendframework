@@ -103,4 +103,45 @@ class HydratorStrategyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(3, $entities);
     }
+
+    /**
+     * @dataProvider underscoreHandlingDataProvider
+     */
+    public function testWhenUsingUnderscoreSeparatedKeysHydratorStrategyIsAlwaysConsideredUnderscoreSeparatedToo($underscoreSeparatedKeys, $formFieldKey)
+    {
+        $hydrator = new ClassMethods($underscoreSeparatedKeys);
+
+        $strategy = $this->getMock('Zend\Stdlib\Hydrator\Strategy\StrategyInterface');
+
+        $entity = new TestAsset\ClassMethodsUnderscore();
+        $value = $entity->getFooBar();
+
+        $hydrator->addStrategy($formFieldKey, $strategy);
+
+        $strategy
+            ->expects($this->once())
+            ->method('extract')
+            ->with($this->identicalTo($value))
+            ->will($this->returnValue($value))
+        ;
+
+        $attributes = $hydrator->extract($entity);
+
+        $strategy
+            ->expects($this->once())
+            ->method('hydrate')
+            ->with($this->identicalTo($value))
+            ->will($this->returnValue($value))
+        ;
+
+        $hydrator->hydrate($attributes, $entity);
+    }
+
+    public function underscoreHandlingDataProvider()
+    {
+        return array(
+            array(true, 'foo_bar'),
+            array(false, 'fooBar'),
+        );
+    }
 }

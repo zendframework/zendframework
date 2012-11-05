@@ -143,8 +143,6 @@ class HmacTest extends \PHPUnit_Framework_TestCase
         Hmac::compute(null, 'md5', 'test');
     }
 
-<<<<<<< HEAD
-=======
     public function testNullHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
@@ -152,7 +150,6 @@ class HmacTest extends \PHPUnit_Framework_TestCase
         Hmac::compute('key', null, 'test');
     }
 
->>>>>>> hotfix/hmac-performance
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',

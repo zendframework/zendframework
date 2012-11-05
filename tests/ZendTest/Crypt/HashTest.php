@@ -25,9 +25,36 @@ use Zend\Crypt\Hash;
  */
 class HashTest extends \PHPUnit_Framework_TestCase
 {
-    // SHA1 tests taken from RFC 3174
+    public function testIsSupportedAndCache()
+    {
+        Hash::clearLastAlgorithmCache();
+        $this->assertAttributeEquals(null, 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
 
-    public static function provideTestSHA1Data()
+        $algorithm = 'sha512';
+
+        // cache value must be exactly equal to the original input
+        $this->assertTrue(Hash::isSupported($algorithm));
+        $this->assertAttributeEquals($algorithm, 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
+        $this->assertAttributeNotEquals('sHa512', 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
+
+        // cache value must be exactly equal to the first input (cache hit)
+        Hash::isSupported('sha512');
+        $this->assertAttributeEquals($algorithm, 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
+
+        // cache changes with a new algorithm
+        $this->assertTrue(Hash::isSupported('sha1'));
+        $this->assertAttributeEquals('sha1', 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
+
+        // cache don't change due wrong algorithm
+        $this->assertFalse(Hash::isSupported('wrong'));
+        $this->assertAttributeEquals('sha1', 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
+
+        Hash::clearLastAlgorithmCache();
+        $this->assertAttributeEquals(null, 'lastAlgorithmSupported', 'Zend\Crypt\Hash');
+    }
+
+    // SHA1 tests taken from RFC 3174
+    public function provideSha1Data()
     {
         return array(
             array('abc',
@@ -42,17 +69,16 @@ class HashTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideTestSHA1Data
+     * @dataProvider provideSha1Data
      */
-    public function testSHA1($data, $output)
+    public function testSha1($data, $output)
     {
         $hash = Hash::compute('sha1', $data);
         $this->assertEquals($output, $hash);
     }
 
     // SHA-224 tests taken from RFC 3874
-
-    public static function provideTestSHA224Data()
+    public function provideSha224Data()
     {
         return array(
             array('abc', '23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7'),
@@ -64,17 +90,16 @@ class HashTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideTestSHA224Data
+     * @dataProvider provideSha224Data
      */
-    public function testSHA224($data, $output)
+    public function testSha224($data, $output)
     {
         $hash = Hash::compute('sha224', $data);
         $this->assertEquals($output, $hash);
     }
 
     // MD5 test suite taken from RFC 1321
-
-    public static function provideTestMD5Data()
+    public function provideMd5Data()
     {
         return array(
             array('', 'd41d8cd98f00b204e9800998ecf8427e'),
@@ -89,19 +114,27 @@ class HashTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideTestMD5Data
+     * @dataProvider provideMd5Data
      */
-    public function testMD5($data, $output)
+    public function testMd5($data, $output)
     {
         $hash = Hash::compute('md5', $data);
         $this->assertEquals($output, $hash);
+    }
+
+    public function testNullHashAlgorithm()
+    {
+        Hash::clearLastAlgorithmCache();
+        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+                                    'Hash algorithm provided is not supported on this PHP installation');
+        Hash::compute(null, 'test');
     }
 
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
                                     'Hash algorithm provided is not supported on this PHP installation');
-        $hash = Hash::compute('wrong', 'test');
+        Hash::compute('wrong', 'test');
     }
 
     public function testBinaryOutput()
@@ -109,5 +142,4 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $hash = Hash::compute('sha1', 'test', Hash::OUTPUT_BINARY);
         $this->assertEquals('qUqP5cyxm6YcTAhz05Hph5gvu9M=', base64_encode($hash));
     }
-
 }

@@ -88,9 +88,8 @@ class FilePostRedirectGetTest extends TestCase
             'postval1' => 'value'
         )));
 
-        $result       = $this->controller->dispatch($this->request, $this->response);
-        $prgResult    = $this->controller->fileprg($this->form, '/test/getPage', true);
-        $prgResultUrl = $prgResult->response;
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultUrl = $this->controller->fileprg($this->form, '/test/getPage', true);
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
         $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
@@ -105,9 +104,8 @@ class FilePostRedirectGetTest extends TestCase
             'postval1' => 'value1'
         )));
 
-        $result         = $this->controller->dispatch($this->request, $this->response);
-        $prgResult      = $this->controller->fileprg($this->form, 'home');
-        $prgResultRoute = $prgResult->response;
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultRoute = $this->controller->fileprg($this->form, 'home');
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
@@ -128,7 +126,7 @@ class FilePostRedirectGetTest extends TestCase
             'postval1' => 'value'
         )));
 
-        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->controller->dispatch($this->request, $this->response);
         $this->controller->fileprg($this->form, 'some/route');
     }
 
@@ -141,9 +139,8 @@ class FilePostRedirectGetTest extends TestCase
             'postval1' => 'value1'
         )));
 
-        $result         = $this->controller->dispatch($this->request, $this->response);
-        $prgResult      = $this->controller->fileprg($this->form);
-        $prgResultRoute = $prgResult->response;
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultRoute = $this->controller->fileprg($this->form);
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
@@ -161,8 +158,7 @@ class FilePostRedirectGetTest extends TestCase
         )));
 
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult      = $this->controller->fileprg($this->form);
-        $prgResultRoute = $prgResult->response;
+        $prgResultRoute = $this->controller->fileprg($this->form);
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
@@ -184,8 +180,7 @@ class FilePostRedirectGetTest extends TestCase
         ));
 
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult    = $this->controller->fileprg($this->form, '/test/getPage', true);
-        $prgResultUrl = $prgResult->response;
+        $prgResultUrl = $this->controller->fileprg($this->form, '/test/getPage', true);
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
         $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
@@ -195,11 +190,9 @@ class FilePostRedirectGetTest extends TestCase
         // Do GET
         $this->request = new Request();
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult    = $this->controller->fileprg($this->form, '/test/getPage', true);
+        $prgResult = $this->controller->fileprg($this->form, '/test/getPage', true);
 
-        $this->assertNotEmpty($prgResult);
-        $this->assertNull($prgResult->response);
-        $this->assertEquals($params, $prgResult->post);
+        $this->assertEquals($params, $prgResult);
         $this->assertEquals($params['postval1'], $this->form->get('postval1')->getValue());
     }
 
@@ -221,9 +214,7 @@ class FilePostRedirectGetTest extends TestCase
         $this->form->setInputFilter($inputFilter);
 
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult    = $this->controller->fileprg($this->form, '/test/getPage', true);
-        $prgResultUrl = $prgResult->response;
-
+        $prgResultUrl = $this->controller->fileprg($this->form, '/test/getPage', true);
         $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
         $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
         $this->assertEquals('/test/getPage', $prgResultUrl->getHeaders()->get('Location')->getUri());
@@ -235,10 +226,7 @@ class FilePostRedirectGetTest extends TestCase
         $prgResult = $this->controller->fileprg($this->form, '/test/getPage', true);
         $messages  = $this->form->getMessages();
 
-        $this->assertNotEmpty($prgResult);
-        $this->assertNull($prgResult->response);
-        $this->assertEquals($params, $prgResult->post);
-        $this->assertFalse($prgResult->isValid);
+        $this->assertEquals($params, $prgResult);
         $this->assertNotEmpty($messages['postval1']['isEmpty']);
     }
 }

@@ -35,26 +35,19 @@ class FilePostRedirectGet extends AbstractPlugin
         $request    = $controller->getRequest();
         $container  = $this->getSessionContainer();
 
-        $returnObj = new \stdClass(); // TODO: Create a value object class / interface?
-        $returnObj->post     = null;
-        $returnObj->isValid  = null;
-        $returnObj->response = null;
-
         if ($request->isPost()) {
             $post = array_merge(
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
-            $returnObj->post = $container->post = $post;
-            $form->setData($post);
+            $container->post = $post;
 
-            $returnObj->isValid = $isValid = $form->isValid();
-            if (!$isValid) {
+            $form->setData($post);
+            if (!$form->isValid()) {
                 $container->errors = $form->getMessages();
             }
 
-            $returnObj->response = $this->redirect($redirect, $redirectToUrl);
-            return $returnObj;
+            return $this->redirect($redirect, $redirectToUrl);
         } else {
             if (null !== $container->post) {
                 $post   = $container->post;
@@ -63,14 +56,11 @@ class FilePostRedirectGet extends AbstractPlugin
                 unset($container->errors);
 
                 $form->setData($post);
-
-                $returnObj->isValid = $isValid = (null === $errors);
-                if (!$isValid) {
+                if (null !== $errors) {
                     $form->setMessages($errors);
                 }
 
-                $returnObj->post = $post;
-                return $returnObj;
+                return $post;
             }
 
             return false;

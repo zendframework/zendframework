@@ -23,7 +23,7 @@ use Zend\Mvc\Exception\InvalidArgumentException;
  * @package    Zend_Mvc
  * @subpackage Controller
  */
-class AcceptantViewModelSelector extends AbstractPlugin
+class AcceptableViewModelSelector extends AbstractPlugin
 {
     /**
      *

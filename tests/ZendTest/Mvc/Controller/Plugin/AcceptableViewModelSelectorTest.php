@@ -10,7 +10,7 @@
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AcceptantViewModelSelector;
+use Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Http\Header\Accept;
@@ -21,7 +21,7 @@ use ZendTest\Mvc\Controller\TestAsset\SampleController;
  * @package    Zend_Mvc
  * @subpackage UnitTests
  */
-class AcceptantViewModelSelectorTest extends \PHPUnit_Framework_TestCase
+class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -34,8 +34,8 @@ class AcceptantViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $this->controller = new SampleController();
         $this->controller->setEvent($event);
 
-        /** @var Zend\Mvc\Controller\Plugin\AcceptantViewModelSelector */
-        $this->plugin = $this->controller->plugin('acceptantViewModelSelector');
+        /** @var Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector */
+        $this->plugin = $this->controller->plugin('acceptableViewModelSelector');
     }
 
     public function testInvoke()

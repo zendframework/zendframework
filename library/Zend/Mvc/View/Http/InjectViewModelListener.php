@@ -61,9 +61,9 @@ class InjectViewModelListener implements ListenerAggregateInterface
     /**
      * Insert the view model into the event
      *
-     * Inspects the MVC result; if it is a view model, it then either (a) adds
-     * it as a child to the default, composed view model, or (b) replaces it,
-     * if the result  is marked as terminable.
+     * Inspects the MVC result; if it's a view model, it then either (a) adds
+     * it as a child to the default, composed view model, or (b) replaces it
+     * if the result is marked as terminable.
      *
      * @param  MvcEvent $e
      * @return void

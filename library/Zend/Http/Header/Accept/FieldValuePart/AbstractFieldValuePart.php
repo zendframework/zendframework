@@ -31,7 +31,7 @@ abstract class AbstractFieldValuePart
      * A Field Value Part this Field Value Part matched against.
      * @var AbstractFieldValuePart
      */
-    protected $matchedPart;
+    protected $matchedAgainst;
 
     /**
      *
@@ -46,22 +46,22 @@ abstract class AbstractFieldValuePart
      * Set a Field Value Part this Field Value Part matched against.
      *
      * @param AbstractFieldValuePart $matchedPart
-     * return AbstractFieldValuePart provides fluent interface
+     * @return AbstractFieldValuePart provides fluent interface
      */
-    public function setMatchedAgainst(AbstractFieldValuePart $matchedPart)
+    public function setMatchedAgainst(AbstractFieldValuePart $matchedAgainst)
     {
-        $this->matchedPart = $matchedPart;
+        $this->matchedAgainst = $matchedAgainst;
         return $this;
     }
 
     /**
      * Get a Field Value Part this Field Value Part matched against.
      *
-     * return AbstractFieldValuePart|null
+     * @return AbstractFieldValuePart|null
      */
     public function getMatchedAgainst()
     {
-        return $this->matchedPart;
+        return $this->matchedAgainst;
     }
 
     /**

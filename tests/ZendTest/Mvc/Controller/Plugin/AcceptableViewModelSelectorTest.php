@@ -52,13 +52,43 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
             'Zend\View\Model\ViewModel' => '*/*'
         );
 
-        $plugin   = $this->plugin;
         $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
         $this->request->getHeaders()->addHeader($header);
-        $result = $plugin($arr);
+        $plugin   = $this->plugin;
+        $plugin->setDefaultViewModelName('Zend\View\Model\FeedModel');
+        $result   = $plugin($arr);
 
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertNotInstanceOf('Zend\View\Model\FeedModel', $result); // Ensure the default wasn't selected
+        $this->assertNotInstanceOf('Zend\View\Model\JsonModel', $result);
     }
+
+    public function testDefaultViewModelName()
+    {
+        $arr = array(
+            'Zend\View\Model\JsonModel' => array(
+                'application/json',
+                'application/javascript'
+            ),
+            'Zend\View\Model\FeedModel' => array(
+                'application/rss+xml',
+                'application/atom+xml'
+            ),
+        );
+
+        $header   = Accept::fromString('Accept: text/plain');
+        $this->request->getHeaders()->addHeader($header);
+        $plugin   = $this->plugin;
+        $result   = $plugin->getViewModelName($arr);
+
+        $this->assertEquals('Zend\View\Model\ViewModel', $result); //   Default Default View Model Name
+
+        $plugin->setDefaultViewModelName('Zend\View\Model\FeedModel');
+        $this->assertEquals($plugin->getDefaultViewModelName(), 'Zend\View\Model\FeedModel'); // Test getter along the way
+        $this->assertInstanceOf('Zend\View\Model\FeedModel', $plugin($arr));
+    }
+
+
 
     public function testInvoke_2()
     {
@@ -106,6 +136,8 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $ref = null;
         $result = $plugin(array( 'Zend\View\Model\ViewModel' => '*/*'), false, $ref);
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertNotInstanceOf('Zend\View\Model\JsonModel', $result);
+        $this->assertNotInstanceOf('Zend\View\Model\FeedModel', $result);
         $this->assertInstanceOf('Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart', $ref);
     }
 
@@ -137,26 +169,22 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testMatch()
     {
-        $arr = array(
-                'Zend\View\Model\JsonModel' => array(
-                        'application/json',
-                        'application/javascript'
-                ),
-                'Zend\View\Model\FeedModel' => array(
-                        'application/rss+xml',
-                        'application/atom+xml'
-                ),
-        );
+
 
         $plugin   = $this->plugin;
         $header   = Accept::fromString('Accept: text/html; version=0.2');
         $this->request->getHeaders()->addHeader($header);
 
-        $result = $plugin->match(array( 'Zend\View\Model\ViewModel' => '*/*'));
+        $arr = array( 'Zend\View\Model\ViewModel' => '*/*');
+        $plugin->setDefaultMatchAgainst($arr);
+        $this->assertEquals($plugin->getDefaultMatchAgainst(), $arr);
+        $result = $plugin->match();
         $this->assertInstanceOf(
                 'Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart',
                 $result
         );
+        $this->assertEquals($plugin->getDefaultMatchAgainst(), $arr);
+
     }
 
     public function testInvalidModel()
@@ -165,12 +193,8 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $header   = Accept::fromString('Accept: */*');
         $this->request->getHeaders()->addHeader($header);
 
-        try {
-            $result = $this->plugin->getViewModel($arr);
-            $this->fail('Exception expected');
-        } catch(\Zend\Mvc\Exception\InvalidArgumentException $e) {
-            $this->assertEquals('The supplied View Model could not be found', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Mvc\Exception\InvalidArgumentException');
 
+        $this->plugin->getViewModel($arr);
     }
 }

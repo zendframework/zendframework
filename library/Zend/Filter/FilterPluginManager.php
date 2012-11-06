@@ -53,6 +53,7 @@ class FilterPluginManager extends AbstractPluginManager
         'fileencrypt'               => 'Zend\Filter\File\Encrypt',
         'filelowercase'             => 'Zend\Filter\File\LowerCase',
         'filerename'                => 'Zend\Filter\File\Rename',
+        'filerenameupload'          => 'Zend\Filter\File\RenameUpload',
         'fileuppercase'             => 'Zend\Filter\File\UpperCase',
         'htmlentities'              => 'Zend\Filter\HtmlEntities',
         'inflector'                 => 'Zend\Filter\Inflector',

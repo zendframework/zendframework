@@ -5,17 +5,14 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_File
+ * @package   Zend_ProgressBar
  */
 
-namespace Zend\File\Transfer\Exception;
-
-use Zend\File\Exception;
+namespace Zend\ProgressBar\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_File_Transfer
+ * @package    Zend_ProgressBar
  */
-class RuntimeException extends Exception\RuntimeException implements
-    ExceptionInterface
+class PhpEnvironmentException extends RuntimeException
 {}

@@ -21,86 +21,37 @@ use Zend\Validator\File;
 class ExistsTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile = __DIR__ . '/_files/testsize.mo';
+        $baseDir  = dirname($testFile);
+        $baseName = basename($testFile);
+        $fileUpload = array(
+            'tmp_name' => $testFile, 'name' => basename($testFile),
+            'size' => 200, 'error' => 0, 'type' => 'text'
+        );
+        return array(
+            //    Options, isValid Param, Expected value
+            array(dirname($baseDir), $baseName,   false),
+            array($baseDir,          $baseName,   true),
+            array($baseDir,          $testFile,   true),
+            array(dirname($baseDir), $fileUpload, false),
+            array($baseDir,          $fileUpload, true),
+        );
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected)
     {
-        $baseDir = __DIR__;
-        $valuesExpected = array(
-            array($baseDir, 'testsize.mo', false),
-            array($baseDir . '/_files', 'testsize.mo', true)
-        );
-
-        $files = array(
-            'name'        => 'testsize.mo',
-            'type'        => 'text',
-            'size'        => 200,
-            'tmp_name'    => __DIR__ . '/_files/testsize.mo',
-            'error'       => 0
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Exists($element[0]);
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1]),
-                "Tested with " . var_export($element, 1)
-            );
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1], $files),
-                "Tested with " . var_export($element, 1)
-            );
-        }
-
-        $valuesExpected = array(
-            array($baseDir, 'testsize.mo', false),
-            array($baseDir . '/_files', 'testsize.mo', true)
-        );
-
-        $files = array(
-            'name'        => 'testsize.mo',
-            'type'        => 'text',
-            'size'        => 200,
-            'tmp_name'    => __DIR__ . '/_files/testsize.mo',
-            'error'       => 0,
-            'destination' => __DIR__ . '/_files'
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Exists($element[0]);
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1]),
-                "Tested with " . var_export($element, 1)
-            );
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1], $files),
-                "Tested with " . var_export($element, 1)
-            );
-        }
-
-        $valuesExpected = array(
-            array($baseDir, 'testsize.mo', false, true),
-            array($baseDir . '/_files', 'testsize.mo', false, true)
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Exists();
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1]),
-                "Tested with " . var_export($element, 1)
-            );
-            $this->assertEquals(
-                $element[3],
-                $validator->isValid($element[1], $files),
-                "Tested with " . var_export($element, 1)
-            );
-        }
+        $validator = new File\Exists($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
     }
 
     /**
@@ -174,6 +125,6 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Exists(__DIR__);
         $this->assertFalse($validator->isValid('nofile.mo'));
         $this->assertTrue(array_key_exists('fileExistsDoesNotExist', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

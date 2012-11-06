@@ -21,9 +21,13 @@
 
 namespace Zend\Form\Element;
 
+use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\Form;
+use Zend\Form\Exception;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\File\Explode as FileExplodeValidator;
+use Zend\Validator\File\Upload as FileUploadValidator;
 
 /**
  * @category   Zend
@@ -32,7 +36,7 @@ use Zend\Form\Form;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends Element implements ElementPrepareAwareInterface
+class File extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes
@@ -44,6 +48,11 @@ class File extends Element implements ElementPrepareAwareInterface
     );
 
     /**
+     * @var ValidatorInterface
+     */
+    protected $validator;
+
+    /**
      * Prepare the form element (mostly used for rendering purposes)
      *
      * @param  Form $form
@@ -53,5 +62,47 @@ class File extends Element implements ElementPrepareAwareInterface
     {
         // Ensure the form is using correct enctype
         $form->setAttribute('enctype', 'multipart/form-data');
+    }
+
+    /**
+     * Get validator
+     *
+     * @return ValidatorInterface
+     */
+    protected function getValidator()
+    {
+        if (null === $this->validator) {
+            $validator = new FileUploadValidator();
+
+            $multiple = (isset($this->attributes['multiple']))
+                ? $this->attributes['multiple'] : null;
+
+            if (true === $multiple || 'multiple' === $multiple) {
+                $validator = new FileExplodeValidator(array(
+                    'validator' => $validator
+                ));
+            }
+
+            $this->validator = $validator;
+        }
+        return $this->validator;
+    }
+
+    /**
+     * Should return an array specification compatible with
+     * {@link Zend\InputFilter\Factory::createInput()}.
+     *
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        return array(
+            'type'       => 'Zend\InputFilter\FileInput',
+            'name'       => $this->getName(),
+            'required'   => false,
+            'validators' => array(
+                $this->getValidator(),
+            ),
+        );
     }
 }

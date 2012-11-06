@@ -29,6 +29,19 @@ return array(
                     ),
                 ),
             ),
+            'dnsroute' => array(
+                'type' => 'hostname',
+                'options' => array(
+                    'route' => ':subdomain.domain.tld',
+                    'constraints' => array(
+                        'subdomain' => '\w+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'mock_index',
+                        'action'     => 'unittests',
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(

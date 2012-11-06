@@ -1,12 +1,30 @@
 <?php
 
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Test
+ */
 namespace ZendTest\Test\PHPUnit\Controller;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\Mvc\Application;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\Http\RouteMatch;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\View\Model\ViewModel;
 
+/**
+ * @category   Zend
+ * @package    Zend_Test
+ * @subpackage UnitTests
+ * @group      Zend_Test
+ */
 class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
     public function setUp()
@@ -249,5 +267,70 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQueryCount('div.post', 5);
         $this->assertQueryCount('div.get', 0);
+    }
+
+    public function testAssertUriWithHostname()
+    {
+        $this->dispatch('http://my.domain.tld:443');
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertEquals($routeMatch->getParam('subdomain'), 'my');
+        $this->assertEquals($this->getRequest()->getUri()->getPort(), 443);
+    }
+
+    /**
+     * Sample tests on MvcEvent
+     */
+    public function testAssertApplicationMvcEvent()
+    {
+        $this->dispatch('/tests');
+
+        // get and assert mvc event
+        $mvcEvent = $this->getApplication()->getMvcEvent();
+        $this->assertEquals(true, $mvcEvent instanceof MvcEvent);
+        $this->assertEquals($mvcEvent->getApplication(), $this->getApplication());
+
+        // get and assert view controller
+        $viewModel = $mvcEvent->getResult();
+        $this->assertEquals(true, $viewModel instanceof ViewModel);
+        $this->assertEquals($viewModel->getTemplate(), 'mock/index/unittests');
+
+        // get and assert view manager layout
+        $layout = $mvcEvent->getViewModel();
+        $this->assertEquals(true, $layout instanceof ViewModel);
+        $this->assertEquals($layout->getTemplate(), 'layout/layout');
+
+        // children layout must be the controller view
+        $this->assertEquals($viewModel, current($layout->getChildren()));
+    }
+
+    /**
+     * Sample tests on Application events
+     */
+    public function testAssertApplicationEvents()
+    {
+        $this->url('/tests');
+
+        $result = $this->triggerApplicationEvent(MvcEvent::EVENT_ROUTE);
+        $routeMatch = $result->last();
+        $this->assertEquals(false, $result->stopped());
+        $this->assertEquals(false, $this->getApplication()->getMvcEvent()->getError());
+        $this->assertEquals(true, $routeMatch instanceof RouteMatch);
+        $this->assertEquals($routeMatch->getParam('controller'), 'mock_index');
+
+        $result = $this->triggerApplicationEvent(MvcEvent::EVENT_DISPATCH);
+        $viewModel = $this->getApplication()->getMvcEvent()->getResult();
+        $this->assertEquals(true, $viewModel instanceof ViewModel);
+        $this->assertEquals($viewModel->getTemplate(), 'mock/index/unittests');
+    }
+
+    /**
+     * Sample tests on Application errors events
+     */
+    public function testAssertApplicationErrorsEvents()
+    {
+        $this->url('/bad-url');
+        $result = $this->triggerApplicationEvent(MvcEvent::EVENT_ROUTE);
+        $this->assertEquals(true, $result->stopped());
+        $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $this->getApplication()->getMvcEvent()->getError());
     }
 }

@@ -1,14 +1,29 @@
 <?php
 
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Test
+ */
 namespace Zend\Test\PHPUnit\Controller;
 
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_ExpectationFailedException;
-use Zend\Test\PHPUnit\Mvc\View\CaptureResponseListener;
+use Zend\Dom;
 use Zend\Mvc\Application;
 use Zend\ModuleManager\ModuleEvent;
-use Zend\Dom;
+use Zend\Mvc\MvcEvent;
+use Zend\Test\PHPUnit\Mvc\View\CaptureResponseListener;
+use Zend\Uri\Http as HttpUri;
 
+/**
+ * @category   Zend
+ * @package    Zend_Test
+ * @subpackage PHPUnit
+ */
 class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 {
     /**
@@ -98,6 +113,23 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Set the request URL
+     *
+     * @param string $url
+     */
+    public function url($url)
+    {
+        $request = $this->getRequest();
+        if($this->useConsoleRequest) {
+            $params = preg_split('#\s+#', $url);
+            $request->params()->exchangeArray($params);
+        } else {
+            $uri = new HttpUri($url);
+            $request->setUri($uri);
+        }
+    }
+
+    /**
      * Dispatch the MVC with an URL
      * Accept a HTTP (simulate a customer action) or console route.
      *
@@ -107,15 +139,34 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function dispatch($url)
     {
-        $request = $this->getRequest();
-        if($this->useConsoleRequest) {
-            $params = preg_split('#\s+#', $url);
-            $request->params()->exchangeArray($params);
-        } else {
-            $request->setUri('http://localhost' . $url);
-            $request->setBaseUrl('');
-        }
+        $this->url($url);
         $this->getApplication()->run();
+    }
+
+    /**
+     * Trigger an application event
+     *
+     * @param string $eventName
+     * @return Zend\EventManager\ResponseCollection
+     */
+    public function triggerApplicationEvent($eventName)
+    {
+        $events = $this->getApplication()->getEventManager();
+        $event = $this->getApplication()->getMvcEvent();
+
+        if($eventName == MvcEvent::EVENT_ROUTE || $eventName == MvcEvent::EVENT_DISPATCH) {
+            $shortCircuit = function ($r) use ($event) {
+                if ($r instanceof ResponseInterface) {
+                    return true;
+                }
+                if ($event->getError()) {
+                    return true;
+                }
+                return false;
+            };
+            return $events->trigger($eventName, $event, $shortCircuit);
+        }
+        return $events->trigger($eventName, $event);
     }
 
     /**

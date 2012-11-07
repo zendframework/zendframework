@@ -34,11 +34,10 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $this->controller = new SampleController();
         $this->controller->setEvent($event);
 
-        /** @var Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector */
         $this->plugin = $this->controller->plugin('acceptableViewModelSelector');
     }
 
-    public function testInvoke()
+    public function testHonorsAcceptPrecedenceAndPriorityWhenInvoked()
     {
         $arr = array(
             'Zend\View\Model\JsonModel' => array(
@@ -88,9 +87,7 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\View\Model\FeedModel', $plugin($arr));
     }
 
-
-
-    public function testInvoke_2()
+    public function testSelectsViewModelBasedOnAcceptHeaderWhenInvokedAsFunctor()
     {
         $arr = array(
                 'Zend\View\Model\JsonModel' => array(
@@ -113,7 +110,7 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testInvokeWithoutDefaults()
+    public function testInvokeWithoutDefaultsReturnsNullWhenNoMatchesOccur()
     {
         $arr = array(
                 'Zend\View\Model\JsonModel' => array(
@@ -132,6 +129,13 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
 
         $result = $plugin($arr, false);
         $this->assertNull($result);
+    }
+
+    public function testInvokeReturnsFieldValuePartOnMatchWhenReferenceProvided()
+    {
+        $plugin   = $this->plugin;
+        $header   = Accept::fromString('Accept: text/html; version=0.2');
+        $this->request->getHeaders()->addHeader($header);
 
         $ref = null;
         $result = $plugin(array( 'Zend\View\Model\ViewModel' => '*/*'), false, $ref);
@@ -169,8 +173,6 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testMatch()
     {
-
-
         $plugin   = $this->plugin;
         $header   = Accept::fromString('Accept: text/html; version=0.2');
         $this->request->getHeaders()->addHeader($header);
@@ -184,7 +186,6 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
                 $result
         );
         $this->assertEquals($plugin->getDefaultMatchAgainst(), $arr);
-
     }
 
     public function testInvalidModel()

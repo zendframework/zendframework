@@ -74,7 +74,7 @@ class Application implements
     protected $events;
 
     /**
-     * @var Zend\Stdlib\RequestInterface
+     * @var \Zend\Stdlib\RequestInterface
      */
     protected $request;
 
@@ -159,7 +159,7 @@ class Application implements
     /**
      * Get the request object
      *
-     * @return Zend\Stdlib\RequestInterface
+     * @return \Zend\Stdlib\RequestInterface
      */
     public function getRequest()
     {

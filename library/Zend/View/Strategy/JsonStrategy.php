@@ -83,36 +83,13 @@ class JsonStrategy implements ListenerAggregateInterface
     {
         $model = $e->getModel();
 
-        $request = $e->getRequest();
-        if (!$request instanceof HttpRequest) {
-            // Not an HTTP request; cannot autodetermine
-            return ($model instanceof Model\JsonModel) ? $this->renderer : null;
+        if (!$model instanceof Model\JsonModel) {
+            // no JsonModel; do nothing
+            return;
         }
 
-        $headers = $request->getHeaders();
-        if (!$headers->has('accept')) {
-            return ($model instanceof Model\JsonModel) ? $this->renderer : null;
-        }
-
-        $accept  = $headers->get('Accept');
-        if (($match = $accept->match('application/json, application/javascript')) == false) {
-            return ($model instanceof Model\JsonModel) ? $this->renderer : null;
-        }
-
-        if ($match->getTypeString() == 'application/json') {
-            // application/json Accept header found
-            return $this->renderer;
-        }
-
-        if ($match->getTypeString() == 'application/javascript') {
-            // application/javascript Accept header found
-            if (false != ($callback = $request->getQuery()->get('callback'))) {
-                $this->renderer->setJsonpCallback($callback);
-            }
-            return $this->renderer;
-        }
-
-        return ($model instanceof Model\JsonModel) ? $this->renderer : null;
+        // JsonModel found
+        return $this->renderer;
     }
 
     /**

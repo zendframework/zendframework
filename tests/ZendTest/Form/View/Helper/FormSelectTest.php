@@ -336,10 +336,4 @@ class FormSelectTest extends CommonTestCase
         $this->setExpectedException('Zend\Form\Exception\DomainException');
         $this->helper->render($element);
     }
-
-    public function testRenderElementWithNoValueOptionsDoesNotRaiseException()
-    {
-        $element = new SelectElement('foo');
-        $this->helper->render($element);
-    }
 }

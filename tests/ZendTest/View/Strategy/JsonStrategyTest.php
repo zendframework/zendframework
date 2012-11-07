@@ -45,7 +45,7 @@ class JsonStrategyTest extends TestCase
     }
 
     /**
-     * @see #2410
+     * @group #2410
      */
     public function testJsonAcceptHeaderDoesNotSelectJsonStrategy()
     {
@@ -57,7 +57,7 @@ class JsonStrategyTest extends TestCase
     }
 
     /**
-     * @see #2410
+     * @group #2410
      */
     public function testJavascriptAcceptHeaderDoesNotSelectJsonStrategy()
     {
@@ -69,7 +69,7 @@ class JsonStrategyTest extends TestCase
     }
 
     /**
-     * @see #2410
+     * @group #2410
      */
     public function testJsonModelJavascriptAcceptHeaderDoesNotSetJsonpCallback()
     {

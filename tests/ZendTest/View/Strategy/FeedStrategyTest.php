@@ -44,35 +44,31 @@ class FeedStrategyTest extends TestCase
         $this->assertSame($this->renderer, $result);
     }
 
-    public function testRssAcceptHeaderSelectsFeedStrategy()
+    /**
+     * @group #2410
+     */
+    public function testRssAcceptHeaderDoesNotSelectFeedStrategy()
     {
         $request = new HttpRequest();
         $request->getHeaders()->addHeaderLine('Accept', 'application/rss+xml');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
-        $this->assertSame($this->renderer, $result);
+        $this->assertNotSame($this->renderer, $result);
     }
 
-    public function testAtomAcceptHeaderSelectsFeedStrategy()
+    /**
+     * @group #2410
+     */
+    public function testAtomAcceptHeaderDoesNotSelectFeedStrategy()
     {
         $request = new HttpRequest();
         $request->getHeaders()->addHeaderLine('Accept', 'application/atom+xml');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
-        $this->assertSame($this->renderer, $result);
+        $this->assertNotSame($this->renderer, $result);
     }
 
-    public function testViewModelMatchedAcceptHeaderMatchSelectsFeedStrategy()
-    {
-        $this->event->setModel(new FeedModel());
-        $request = new HttpRequest();
-        $request->getHeaders()->addHeaderLine('Accept', '*/*');
-        $this->event->setRequest($request);
-        $result = $this->strategy->selectRenderer($this->event);
-        $this->assertSame($this->renderer, $result);
-    }
-
-    public function testViewModelAcceptHeaderSelectsFeedStrategyAndSetsFeedtype()
+    public function testAcceptHeaderDoesNotSetFeedtype()
     {
         $this->event->setModel(new FeedModel());
         $request = new HttpRequest();
@@ -80,7 +76,7 @@ class FeedStrategyTest extends TestCase
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
-        $this->assertSame('atom', $result->getFeedType());
+        $this->assertNotSame('atom', $result->getFeedType());
     }
 
     public function testLackOfFeedModelOrAcceptHeaderDoesNotSelectFeedStrategy()

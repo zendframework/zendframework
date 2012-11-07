@@ -13,7 +13,53 @@ XX YYY 2012
 
 ### UPDATES IN 2.0.4
 
-Please see CHANGELOG.md.
+*Security Changes*
+
+By default, the JsonStrategy and FeedStrategy were selecting their
+associated renderers based on two criteria: if a ViewModel of
+appropriate type was present, *OR* if the Accept header matched certain
+criteria. It was pointed out that this latter is undesirable when the
+strategies are enabled globally, as any matching route could be forced
+to return JSON or a feed -- and potentially expose information not meant
+for that particular format, or raise exceptions due to containing
+content not compatible with the format.
+
+In this release, we removed the Accept header detection. To mitigate
+this, however, a new controller plugin, AcceptableViewModelSelector, was
+added. This plugin may be invoked from a controller, and based on
+criteria passed to it, return an appropriate view model type based on
+matching the Accept header. As an example:
+
+```php
+class SomeController extends AbstractActionController
+{
+    protected $acceptCriteria = array(
+        'Zend\View\Model\JsonModel' => array(
+            'application/json',
+        ),
+        'Zend\View\Model\FeedModel' => array(
+            'application/rss+xml',
+        ),
+    );
+
+    public function apiAction()
+    {
+        $viewModel = $this->acceptableViewModelSelector($this->acceptCriteria);
+        
+        // Potentially vary execution based on model returned
+        if ($viewModel instanceof JsonModel) {
+            // ...
+        }
+    }
+}
+```
+
+You will still enable the JsonStrategy or FeedStrategy at the global
+level, but they will only be selected now if an appropriate view model
+is returned by the controller; the above plugin can help you select the
+appropriate view model based on Accept header on an as-needed basis.
+
+For more changes, please see CHANGELOG.md.
 
 ### SYSTEM REQUIREMENTS
 

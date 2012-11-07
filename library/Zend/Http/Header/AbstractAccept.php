@@ -291,7 +291,7 @@ abstract class AbstractAccept implements HeaderInterface
      * Match a media string against this header
      *
      * @param array|string $matchAgainst
-     * @return array|boolean The matched value or false
+     * @return AcceptFieldValuePart|boolean The matched value or false
      */
     public function match($matchAgainst)
     {
@@ -302,8 +302,10 @@ abstract class AbstractAccept implements HeaderInterface
         foreach ($this->getPrioritized() as $left) {
             foreach ($matchAgainst as $right) {
                 if ($right->type == '*' || $left->type == '*') {
-                    if ($res = $this->matchAcceptParams($left, $right)) {
-                        return $res;
+                    if ($this->matchAcceptParams($left, $right)) {
+                        $left->setMatchedAgainst($right);
+
+                        return $left;
                     }
                 }
 
@@ -313,8 +315,10 @@ abstract class AbstractAccept implements HeaderInterface
                             ($left->format == $right->format ||
                                     $right->format == '*' || $left->format == '*')))
                     {
-                        if ($res = $this->matchAcceptParams($left, $right)) {
-                            return $res;
+                        if ($this->matchAcceptParams($left, $right)) {
+                            $left->setMatchedAgainst($right);
+
+                            return $left;
                         }
                     }
                 }

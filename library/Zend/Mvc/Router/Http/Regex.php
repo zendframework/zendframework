@@ -131,7 +131,7 @@ class Regex implements RouteInterface
             if (is_numeric($key) || is_int($key) || $value === '') {
                 unset($matches[$key]);
             } else {
-                $matches[$key] = urldecode($value);
+                $matches[$key] = rawurldecode($value);
             }
         }
 

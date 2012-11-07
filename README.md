@@ -44,10 +44,10 @@ class SomeController extends AbstractActionController
 
     public function apiAction()
     {
-        $model = $this->acceptableViewModelSelector($this->acceptCriteria);
+        $viewModel = $this->acceptableViewModelSelector($this->acceptCriteria);
         
         // Potentially vary execution based on model returned
-        if ($model instanceof JsonModel) {
+        if ($viewModel instanceof JsonModel) {
             // ...
         }
     }

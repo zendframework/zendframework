@@ -33,10 +33,11 @@ class AdapterPluginManager extends AbstractPluginManager
      */
     protected $invokableClasses = array(
         'apc'            => 'Zend\Cache\Storage\Adapter\Apc',
+        'dba'            => 'Zend\Cache\Storage\Adapter\Dba',
         'filesystem'     => 'Zend\Cache\Storage\Adapter\Filesystem',
         'memcached'      => 'Zend\Cache\Storage\Adapter\Memcached',
         'memory'         => 'Zend\Cache\Storage\Adapter\Memory',
-        'dba'            => 'Zend\Cache\Storage\Adapter\Dba',
+        'xcache'         => 'Zend\Cache\Storage\Adapter\XCache',
         'wincache'       => 'Zend\Cache\Storage\Adapter\WinCache',
         'zendserverdisk' => 'Zend\Cache\Storage\Adapter\ZendServerDisk',
         'zendservershm'  => 'Zend\Cache\Storage\Adapter\ZendServerShm',

@@ -248,6 +248,24 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertQueryCountMax('div.top', 2);
     }
+    
+    public function testAssertQueryContentContains()
+    {
+        $this->dispatch('/tests');
+        $this->assertQueryContentContains('div#content', 'foo');
+        
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertQueryContentContains('div#content', 'bar');
+    }
+    
+    public function testAssertNotQueryContentContains()
+    {
+        $this->dispatch('/tests');
+        $this->assertNotQueryContentContains('div#content', 'bar');
+        
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNotQueryContentContains('div#content', 'foo');
+    }
 
     public function testAssertQueryWithDynamicQueryParams()
     {

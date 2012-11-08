@@ -156,6 +156,26 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Reset the request
+     * @return AbstractControllerTestCase
+     */
+    public function reset()
+    {
+        // initiate the request object to authorize multi dispatch
+        $request = $this->getRequest();
+        if($this->useConsoleRequest) {
+            $request->params()->exchangeArray(array());
+        } else {
+            $request->setQuery(new Parameters(array()));
+            $request->setPost(new Parameters(array()));
+            $request->setFiles(new Parameters(array()));
+            $request->setCookies(new Parameters(array()));
+            $request->setServer(new Parameters($_SERVER));
+        }
+        return $this;
+    }
+
+    /**
      * Trigger an application event
      *
      * @param string $eventName
@@ -518,7 +538,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $result = $dom->execute($path);
         return $result;
     }
-    
+
     /**
      * Count the dom query executed
      * @param string $path
@@ -638,7 +658,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals(true, $match <= $count);
     }
-    
+
     /**
      * Assert against DOM selection; node should contain content
      *
@@ -662,7 +682,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals($result->current()->nodeValue, $match);
     }
-    
+
     /**
      * Assert against DOM selection; node should NOT contain content
      *

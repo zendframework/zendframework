@@ -248,21 +248,21 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertQueryCountMax('div.top', 2);
     }
-    
+
     public function testAssertQueryContentContains()
     {
         $this->dispatch('/tests');
         $this->assertQueryContentContains('div#content', 'foo');
-        
+
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertQueryContentContains('div#content', 'bar');
     }
-    
+
     public function testAssertNotQueryContentContains()
     {
         $this->dispatch('/tests');
         $this->assertNotQueryContentContains('div#content', 'bar');
-        
+
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotQueryContentContains('div#content', 'foo');
     }
@@ -300,6 +300,25 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
         $this->assertEquals($routeMatch->getParam('subdomain'), 'my');
         $this->assertEquals($this->getRequest()->getUri()->getPort(), 443);
+    }
+
+    public function testAssertWithMultiDispatch()
+    {
+        $this->dispatch('/tests');
+        $this->assertQueryCount('div.get', 0);
+        $this->assertQueryCount('div.post', 0);
+
+        $this->reset();
+
+        $this->dispatch('/tests?foo=bar&num_get=3');
+        $this->assertQueryCount('div.get', 3);
+        $this->assertQueryCount('div.post', 0);
+
+        $this->reset();
+
+        $this->dispatch('/tests');
+        $this->assertQueryCount('div.get', 0);
+        $this->assertQueryCount('div.post', 0);
     }
 
     /**

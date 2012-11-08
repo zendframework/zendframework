@@ -9,7 +9,7 @@ return array(
                     'options' => array(
                         'route'    => '--console',
                         'defaults' => array(
-                            'controller' => 'mock_index',
+                            'controller' => 'baz_index',
                             'action'     => 'console',
                         ),
                     ),
@@ -24,7 +24,7 @@ return array(
                 'options' => array(
                     'route'    => '/tests',
                     'defaults' => array(
-                        'controller' => 'mock_index',
+                        'controller' => 'baz_index',
                         'action'     => 'unittests',
                     ),
                 ),
@@ -37,7 +37,7 @@ return array(
                         'subdomain' => '\w+'
                     ),
                     'defaults' => array(
-                        'controller' => 'mock_index',
+                        'controller' => 'baz_index',
                         'action'     => 'unittests',
                     ),
                 ),
@@ -46,7 +46,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'mock_index' => 'Mock\Controller\IndexController',
+            'baz_index' => 'Baz\Controller\IndexController',
         ),
     ),
     'view_manager' => array(

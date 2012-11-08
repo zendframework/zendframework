@@ -1,14 +1,14 @@
 <?php
 return array(
     'modules' => array(
-        'Mock',
-        //'Foo', // bar need Foo
+        'Baz',
+        'Foo',
         'Bar',
     ),
     'module_listener_options' => array(
         'config_static_paths'    => array(),
         'module_paths' => array(
-            'Mock' => __DIR__ . '/Mock/',
+            'Baz' => __DIR__ . '/Baz/',
             'Foo' => __DIR__ . '/modules-path/with-subdir/Foo',
             'Bar' => __DIR__ . '/modules-path/with-subdir/Bar',
         ),

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mock\Controller;
+namespace Baz\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 

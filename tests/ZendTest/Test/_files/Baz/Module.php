@@ -1,6 +1,6 @@
 <?php
 
-namespace Mock;
+namespace Baz;
 
 class Module
 {

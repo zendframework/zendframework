@@ -23,7 +23,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     public function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/_files/application.config.php'
+            include __DIR__ . '/../../_files/application.config.php'
         );
         parent::setUp();
     }

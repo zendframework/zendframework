@@ -259,6 +259,13 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCount('div.post', 0);
     }
 
+    public function testAssertQueryWithDynamicQueryParamsInDispatch()
+    {
+        $this->dispatch('/tests?foo=bar&num_get=5');
+        $this->assertQueryCount('div.get', 5);
+        $this->assertQueryCount('div.post', 0);
+    }
+
     public function testAssertQueryWithDynamicPostParams()
     {
         $this->getRequest()

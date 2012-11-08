@@ -18,6 +18,7 @@ use Zend\ModuleManager\ModuleEvent;
 use Zend\Mvc\MvcEvent;
 use Zend\Test\PHPUnit\Mvc\View\CaptureResponseListener;
 use Zend\Uri\Http as HttpUri;
+use Zend\Stdlib\Parameters;
 
 /**
  * @category   Zend
@@ -125,6 +126,11 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $request->params()->exchangeArray($params);
         } else {
             $uri = new HttpUri($url);
+            $query = $uri->getQuery();
+            if($query) {
+                parse_str($query, $args);
+                $request->setQuery(new Parameters($args));
+            }
             $request->setUri($uri);
         }
     }

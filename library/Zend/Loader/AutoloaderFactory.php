@@ -94,7 +94,7 @@ abstract class AutoloaderFactory
                     );
                 }
 
-                if (!self::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
+                if (!static::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)

@@ -45,7 +45,7 @@ class Css2Xpath
         $path     = preg_replace('|\s+>\s+|', '>', $path);
         $segments = preg_split('/\s+/', $path);
         foreach ($segments as $key => $segment) {
-            $pathSegment = self::_tokenize($segment);
+            $pathSegment = static::_tokenize($segment);
             if (0 == $key) {
                 if (0 === strpos($pathSegment, '[contains(')) {
                     $paths[0] .= '*' . ltrim($pathSegment, '*');

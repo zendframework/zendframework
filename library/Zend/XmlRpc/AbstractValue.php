@@ -245,7 +245,7 @@ abstract class AbstractValue
             } elseif ($value instanceof DateTime) {
                 return self::XMLRPC_TYPE_DATETIME;
             }
-            return self::getXmlRpcTypeByValue(get_object_vars($value));
+            return static::getXmlRpcTypeByValue(get_object_vars($value));
         } elseif (is_array($value)) {
             if (!empty($value) && is_array($value) && (array_keys($value) !== range(0, count($value) - 1))) {
                 return self::XMLRPC_TYPE_STRUCT;

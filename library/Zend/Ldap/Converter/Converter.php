@@ -87,10 +87,10 @@ class Converter
         try {
             switch ($type) {
                 case self::BOOLEAN:
-                    return self::toldapBoolean($value);
+                    return static::toldapBoolean($value);
                     break;
                 case self::GENERALIZED_TIME:
-                    return self::toLdapDatetime($value);
+                    return static::toLdapDatetime($value);
                     break;
                 default:
                     if (is_string($value)) {
@@ -98,15 +98,15 @@ class Converter
                     } elseif (is_int($value) || is_float($value)) {
                         return (string)$value;
                     } elseif (is_bool($value)) {
-                        return self::toldapBoolean($value);
+                        return static::toldapBoolean($value);
                     } elseif (is_object($value)) {
                         if ($value instanceof DateTime) {
-                            return self::toLdapDatetime($value);
+                            return static::toLdapDatetime($value);
                         } else {
-                            return self::toLdapSerialize($value);
+                            return static::toLdapSerialize($value);
                         }
                     } elseif (is_array($value)) {
-                        return self::toLdapSerialize($value);
+                        return static::toLdapSerialize($value);
                     } elseif (is_resource($value) && get_resource_type($value) === 'stream') {
                         return stream_get_contents($value);
                     } else {
@@ -204,23 +204,23 @@ class Converter
     {
         switch ($type) {
             case self::BOOLEAN:
-                return self::fromldapBoolean($value);
+                return static::fromldapBoolean($value);
                 break;
             case self::GENERALIZED_TIME:
-                return self::fromLdapDateTime($value);
+                return static::fromLdapDateTime($value);
                 break;
             default:
                 if (is_numeric($value)) {
                     // prevent numeric values to be treated as date/time
                     return $value;
                 } elseif ('TRUE' === $value || 'FALSE' === $value) {
-                    return self::fromLdapBoolean($value);
+                    return static::fromLdapBoolean($value);
                 }
                 if (preg_match('/^\d{4}[\d\+\-Z\.]*$/', $value)) {
-                    return self::fromLdapDateTime($value, $dateTimeAsUtc);
+                    return static::fromLdapDateTime($value, $dateTimeAsUtc);
                 }
                 try {
-                    return self::fromLdapUnserialize($value);
+                    return static::fromLdapUnserialize($value);
                 } catch (Exception\UnexpectedValueException $e) {
                     // Do nothing
                 }

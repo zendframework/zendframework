@@ -55,7 +55,7 @@ class Hash
      */
     public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {
-        return strlen(self::compute($hash, 'data', $output));
+        return strlen(static::compute($hash, 'data', $output));
     }
 
     /**
@@ -65,10 +65,10 @@ class Hash
      */
     public static function getSupportedAlgorithms()
     {
-        if (empty(self::$supportedAlgorithms)) {
-            self::$supportedAlgorithms = hash_algos();
+        if (empty(static::$supportedAlgorithms)) {
+            static::$supportedAlgorithms = hash_algos();
         }
-        return self::$supportedAlgorithms;
+        return static::$supportedAlgorithms;
     }
 
     /**
@@ -79,6 +79,6 @@ class Hash
      */
     public static function isSupported($algo)
     {
-        return in_array($algo, self::getSupportedAlgorithms());
+        return in_array($algo, static::getSupportedAlgorithms());
     }
 }

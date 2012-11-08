@@ -47,7 +47,7 @@ class Hmac
         }
 
         $hash = strtolower($hash);
-        if (!self::isSupported($hash)) {
+        if (!static::isSupported($hash)) {
             throw new Exception\InvalidArgumentException(
                 "Hash algorithm is not supported on this PHP installation; provided '{$hash}'"
             );
@@ -66,7 +66,7 @@ class Hmac
      */
     public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {
-        return strlen(self::compute('key', $hash, 'data', $output));
+        return strlen(static::compute('key', $hash, 'data', $output));
     }
 
     /**
@@ -76,10 +76,10 @@ class Hmac
      */
     public static function getSupportedAlgorithms()
     {
-        if (empty(self::$supportedAlgorithms)) {
-            self::$supportedAlgorithms = hash_algos();
+        if (empty(static::$supportedAlgorithms)) {
+            static::$supportedAlgorithms = hash_algos();
         }
-        return self::$supportedAlgorithms;
+        return static::$supportedAlgorithms;
     }
 
     /**

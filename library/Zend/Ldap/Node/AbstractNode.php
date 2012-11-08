@@ -254,7 +254,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
         if ($includeSystemAttributes === false) {
             $data = array();
             foreach ($this->currentData as $key => $value) {
-                if (!in_array($key, self::$systemAttributes)) {
+                if (!in_array($key, static::$systemAttributes)) {
                     $data[$key] = $value;
                 }
             }

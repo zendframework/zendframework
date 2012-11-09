@@ -206,6 +206,7 @@ class ApplicationTest extends TestCase
         $response = $this->application->getResponse();
         $router   = $this->serviceManager->get('HttpRouter');
 
+        $this->assertFalse($event->isError());
         $this->assertSame($request, $event->getRequest());
         $this->assertSame($response, $event->getResponse());
         $this->assertSame($router, $event->getRouter());
@@ -447,7 +448,8 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController();
         $router = new Router\SimpleRouteStack();
-        $this->application->getMvcEvent()->setRouter($router);
+        $event = $this->application->getMvcEvent();
+        $event->setRouter($router);
 
         $response = $this->application->getResponse();
         $events   = $this->application->getEventManager();
@@ -458,6 +460,7 @@ class ApplicationTest extends TestCase
         });
 
         $this->application->run();
+        $this->assertTrue($event->isError());
         $this->assertContains(Application::ERROR_ROUTER_NO_MATCH, $response->getContent());
     }
 
@@ -484,7 +487,8 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController();
         $router = new Router\SimpleRouteStack();
-        $this->application->getMvcEvent()->setRouter($router);
+        $event = $this->application->getMvcEvent();
+        $event->setRouter($router);
 
         $response = $this->application->getResponse();
         $events   = $this->application->getEventManager();
@@ -495,7 +499,7 @@ class ApplicationTest extends TestCase
         });
 
         $this->application->run();
-        $event = $this->application->getMvcEvent();
+        $this->assertTrue($event->isError());
         $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $event->getError());
     }
 

@@ -109,7 +109,7 @@ class SetCookie implements MultipleHeaderInterface
                     // First K=V pair is always the cookie name and value
                     if ($header->getName() === NULL) {
                         $header->setName($headerKey);
-                        $header->setValue($headerValue);
+                        $header->setValue(urldecode($headerValue));
                         continue;
                     }
 
@@ -230,7 +230,7 @@ class SetCookie implements MultipleHeaderInterface
         if (strpos($value, '"')!==false) {
             $value = '"'.urlencode(str_replace('"', '', $value)).'"';
         } else {
-            $value = urlencode(urldecode($value));
+            $value = urlencode($value);
         }
         $fieldValue = $this->getName() . '=' . $value;
 

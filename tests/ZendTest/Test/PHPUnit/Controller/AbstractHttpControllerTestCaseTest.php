@@ -10,12 +10,14 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use Zend\EventManager\StaticEventManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\Http\RouteMatch;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
+use Zend\Stdlib\Glob;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\View\Model\ViewModel;
 
@@ -35,11 +37,29 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
+    public function testModuleCacheIsDisabled()
+    {
+        $config = $this->getApplicationConfig();
+        $config = $config['module_listener_options']['cache_dir'];
+        $this->assertEquals(0, count(glob($config . '/*.php')));
+    }
+
+    public function testCanNotDefineApplicationConfigWhenApplicationIsBuilt()
+    {
+        // cosntruct app
+        $this->getApplication();
+
+        $this->setExpectedException('Zend\Stdlib\Exception\LogicException');
+        $this->setApplicationConfig(
+            include __DIR__ . '/../../_files/application.config.php'
+        );
+    }
+    
     public function testUseOfRouter()
     {
        $this->assertEquals(false, $this->useConsoleRequest);
     }
-
+    
     public function testApplicationClass()
     {
         $applicationClass = get_class($this->getApplication());
@@ -321,6 +341,43 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCount('div.post', 0);
     }
 
+    public function testAssertWithEventShared()
+    {
+        $this->setApplicationConfig(
+            include __DIR__ . '/../../_files/application.config.with.shared.events.php'
+        );
+        $this->dispatch('/tests');
+        $this->assertNotQuery('div#content');
+        $this->assertEquals('<html></html>', $this->getResponse()->getContent());
+
+        $this->assertEquals(true, StaticEventManager::hasInstance());
+        $countListeners = count(StaticEventManager::getInstance()->getListeners(
+            'Zend\Mvc\Application', MvcEvent::EVENT_FINISH));
+        $this->assertEquals(1, $countListeners);
+
+        $this->reset();
+        
+        $this->assertEquals(false, StaticEventManager::hasInstance());
+        $countListeners = StaticEventManager::getInstance()->getListeners(
+            'Zend\Mvc\Application', MvcEvent::EVENT_FINISH);
+        $this->assertEquals(false, $countListeners);
+        
+        $this->dispatch('/tests-bis');
+        $this->assertQuery('div#content');
+        $this->assertNotEquals('<html></html>', $this->getResponse()->getContent());
+    }
+
+    public function testAssertExceptionInAction()
+    {
+        $this->dispatch('/exception');
+        $this->assertResponseStatusCode(500);
+        $this->assertApplicationException('RuntimeException', 'Foo error');
+
+        $this->dispatch('/exception');
+        $this->assertResponseStatusCode(500);
+        $this->assertApplicationException('RuntimeException');
+    }
+    
     /**
      * Sample tests on MvcEvent
      */

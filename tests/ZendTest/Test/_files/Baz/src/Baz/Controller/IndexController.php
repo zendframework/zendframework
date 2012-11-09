@@ -18,4 +18,9 @@ class IndexController extends AbstractActionController
     {
 
     }
+
+    public function exceptionAction()
+    {
+        throw new \RuntimeException('Foo error !');
+    }
 }

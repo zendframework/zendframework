@@ -13,12 +13,15 @@ namespace Zend\Test\PHPUnit\Controller;
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_ExpectationFailedException;
 use Zend\Dom;
+use Zend\EventManager\StaticEventManager;
 use Zend\Mvc\Application;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\SendResponseListener;
-use Zend\Uri\Http as HttpUri;
+use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\Parameters;
+use Zend\Uri\Http as HttpUri;
+use Zend\View\Helper\Placeholder;
 
 /**
  * @category   Zend
@@ -43,6 +46,11 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     protected $useConsoleRequest = false;
 
+    public function setUp()
+    {
+        $this->reset();
+    }
+    
     /**
      * Set the usage of the console router or not
      * @param boolean $boolean
@@ -58,7 +66,26 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function setApplicationConfig($applicationConfig)
     {
+        if(null !== $this->application && null !== $this->applicationConfig) {
+            throw new LogicException(
+                "Application config can not be set, the application is already built."
+            );
+        }
+
+        // do not cache module config on testing environment
+        if(isset($applicationConfig['module_listener_options']['config_cache_enabled'])) {
+            $applicationConfig['module_listener_options']['config_cache_enabled'] = false;
+        }
         $this->applicationConfig = $applicationConfig;
+    }
+
+    /**
+     * Get the application config
+     * @return array the application config
+     */
+    public function getApplicationConfig()
+    {
+        return $this->applicationConfig;
     }
 
     /**
@@ -139,6 +166,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             }
             $request->setUri($uri);
         }
+        return $this;
     }
 
     /**
@@ -161,17 +189,13 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function reset()
     {
-        // initiate the request object to authorize multi dispatch
-        $request = $this->getRequest();
-        if($this->useConsoleRequest) {
-            $request->params()->exchangeArray(array());
-        } else {
-            $request->setQuery(new Parameters(array()));
-            $request->setPost(new Parameters(array()));
-            $request->setFiles(new Parameters(array()));
-            $request->setCookies(new Parameters(array()));
-            $request->setServer(new Parameters($_SERVER));
-        }
+        // force to re-create all components
+        $this->application = null;
+
+        // reset singleton
+        StaticEventManager::resetInstance();
+        Placeholder\Registry::unsetRegistry();
+        
         return $this;
     }
 
@@ -303,6 +327,27 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($code, $match);
     }
 
+    /**
+     * Assert the application exception and message
+     * @param $type application exception type
+     * @param $message application exception message
+     */
+    public function assertApplicationException($type, $message = null)
+    {
+        $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
+        if(!$exception) {
+            throw new PHPUnit_Framework_ExpectationFailedException(
+                'Failed asserting application exception, exception not exist'
+            );
+        }
+        $this->setExpectedException($type, $message);
+        throw $exception;
+    }
+
+    /**
+     * Get the full current controller class name
+     * @return string
+     */
     protected function getControllerFullClassName()
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
@@ -658,7 +703,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals(true, $match <= $count);
     }
-
+    
     /**
      * Assert against DOM selection; node should contain content
      *

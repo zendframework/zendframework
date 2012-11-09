@@ -29,6 +29,26 @@ return array(
                     ),
                 ),
             ),
+            'myroutebis' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/tests-bis',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'unittests',
+                    ),
+                ),
+            ),
+            'exception' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/exception',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'exception',
+                    ),
+                ),
+            ),
             'dnsroute' => array(
                 'type' => 'hostname',
                 'options' => array(
@@ -50,6 +70,10 @@ return array(
         ),
     ),
     'view_manager' => array(
+        'template_map' => array(
+            '404' => __DIR__ . '/../view/baz/error/404.phtml',
+            'error' => __DIR__ . '/../view/baz/error/error.phtml',
+        ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),

@@ -16,6 +16,7 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * @category   Zend
@@ -111,14 +112,7 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        // Try to instantiate from the plugin manager, and then fallback to manual instanciation
-        $formElementManager = $this->getFormElementManager();
-
-        if ($formElementManager->has($type)) {
-            $element = $formElementManager->get($type);
-        } else {
-            $element = new $type();
-        }
+        $element = $this->getElementFromName($type);
 
         if ($element instanceof FormInterface) {
             return $this->configureForm($element, $spec);
@@ -223,8 +217,7 @@ class Factory
         }
 
         // Hook to perform stuff, once all the configuration work has been done
-        // TODO for ZF3 : move init to ElementInterface
-        if (method_exists($element, 'init')) {
+        if ($element instanceof InitializableInterface) {
             $element->init();
         }
 
@@ -448,22 +441,8 @@ class Factory
             $hydratorOptions = array();
         }
 
-        // Try to pull from service locator first
         if (is_string($hydratorOrName)) {
-            $serviceLocator = $this->getFormElementManager()->getServiceLocator();
-            if ($serviceLocator->has($hydratorOrName)) {
-                $hydrator = $serviceLocator->get($hydratorOrName);
-            } else {
-                if (!class_exists($hydratorOrName)) {
-                    throw new Exception\DomainException(sprintf(
-                        '%s expects string hydrator name to be a valid class name; received "%s"',
-                        $method,
-                        $hydratorOrName
-                    ));
-                }
-
-                $hydrator = new $hydratorOrName;
-            }
+            $hydrator = $this->getHydratorFromName($hydratorOrName);
         }
 
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
@@ -473,6 +452,7 @@ class Factory
                 $hydratorOrName
             ));
         }
+
         if (!empty($hydratorOptions) && $hydrator instanceof Hydrator\HydratorOptionsInterface) {
             $hydrator->setOptions($hydratorOptions);
         }
@@ -547,5 +527,49 @@ class Factory
         }
 
         $form->setValidationGroup($spec);
+    }
+
+    /**
+     * Try to pull to element from element manager, or instantiates it from its name
+     *
+     * @param  string $elementName
+     * @return mixed
+     */
+    protected function getElementFromName($elementName)
+    {
+        $formElementManager = $this->getFormElementManager();
+
+        if ($formElementManager->has($elementName)) {
+            return $formElementManager->get($elementName);
+        }
+
+        return new $elementName();
+    }
+
+    /**
+     * Try to pull hydrator from service manager, or instantiates it from its name
+     *
+     * @param  string $hydratorName
+     * @return mixed
+     * @throws Exception\DomainException
+     */
+    protected function getHydratorFromName($hydratorName)
+    {
+        $serviceLocator = $this->getFormElementManager()->getServiceLocator();
+
+        if ($serviceLocator->has($hydratorName)) {
+            $hydrator = $serviceLocator->get($hydratorName);
+        } else {
+            if (!class_exists($hydratorName)) {
+                throw new Exception\DomainException(sprintf(
+                    'Expects string hydrator name to be a valid class name; received "%s"',
+                    $hydratorName
+                ));
+            }
+
+            $hydrator = new $hydratorName;
+        }
+
+        return $hydrator;
     }
 }

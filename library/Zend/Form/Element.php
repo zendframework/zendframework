@@ -12,12 +12,13 @@ namespace Zend\Form;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  */
-class Element implements ElementInterface
+class Element implements ElementInterface, InitializableInterface
 {
     /**
      * @var array

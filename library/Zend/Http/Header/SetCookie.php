@@ -230,7 +230,7 @@ class SetCookie implements MultipleHeaderInterface
         if (strpos($value, '"')!==false) {
             $value = '"'.urlencode(str_replace('"', '', $value)).'"';
         } else {
-            $value = urlencode($value);
+            $value = urlencode(urldecode($value));
         }
         $fieldValue = $this->getName() . '=' . $value;
 

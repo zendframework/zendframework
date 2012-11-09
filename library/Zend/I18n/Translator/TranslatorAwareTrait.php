@@ -20,26 +20,26 @@ use Zend\I18n\Translator\Translator;
 trait TranslatorAwareTrait
 {
     /**
-     * @var \Zend\I18n\Translator\Translator
+     * @var Translator
      */
     protected $translator = null;
 
     /**
      * @var bool
      */
-    protected $translator_enabled = true;
+    protected $translatorEnabled = true;
 
     /**
      * @var string
      */
-    protected $translator_text_domain = 'default';
+    protected $translatorTextDomain = 'default';
 
     /**
      * setTranslator
      *
-     * @param \Zend\I18n\Translator\Translator $translator
+     * @param Translator $translator
      * @param string $textDomain
-     * @return
+     * @return mixed
      */
     public function setTranslator(Translator $translator = null, $textDomain = null)
     {
@@ -55,7 +55,7 @@ trait TranslatorAwareTrait
     /**
      * getTranslator
      *
-     * @return \Zend\I18n\Translator\Translator
+     * @return Translator
      */
     public function getTranslator()
     {
@@ -76,11 +76,11 @@ trait TranslatorAwareTrait
      * setTranslatorEnabled
      *
      * @param bool $enabled
-     * @return
+     * @return mixed
      */
     public function setTranslatorEnabled($enabled = true)
     {
-        $this->translator_enabled = $enabled;
+        $this->translatorEnabled = $enabled;
 
         return $this;
     }
@@ -92,18 +92,18 @@ trait TranslatorAwareTrait
      */
     public function isTranslatorEnabled()
     {
-        return $this->translator_enabled;
+        return $this->translatorEnabled;
     }
 
     /**
      * setTranslatorTextDomain
      *
      * @param string $textDomain
-     * @return
+     * @return mixed
      */
     public function setTranslatorTextDomain($textDomain = 'default')
     {
-        $this->translator_text_domain = $textDomain;
+        $this->translatorTextDomain = $textDomain;
 
         return $this;
     }
@@ -115,6 +115,6 @@ trait TranslatorAwareTrait
      */
     public function getTranslatorTextDomain()
     {
-        return $this->translator_text_domain;
+        return $this->translatorTextDomain;
     }
 }

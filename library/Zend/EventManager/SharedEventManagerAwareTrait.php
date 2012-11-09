@@ -19,19 +19,19 @@ use \Zend\EventManager\SharedEventManagerInterface;
 trait SharedEventManagerAwareTrait
 {
     /**
-     * @var \Zend\EventManager\SharedEventManagerInterface
+     * @var SharedEventManagerInterface
      */
-    protected $shared_event_manager = null;
+    protected $sharedEventManager = null;
 
     /**
      * setSharedManager
      *
-     * @param \Zend\EventManager\SharedEventManagerInterface $sharedEventManager
-     * @return
+     * @param SharedEventManagerInterface $sharedEventManager
+     * @return mixed
      */
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {
-        $this->shared_event_manager = $sharedEventManager;
+        $this->sharedEventManager = $sharedEventManager;
 
         return $this;
     }
@@ -39,21 +39,21 @@ trait SharedEventManagerAwareTrait
     /**
      * getSharedManager
      *
-     * @return \Zend\EventManager\SharedEventManagerInterface
+     * @return SharedEventManagerInterface
      */
     public function getSharedManager()
     {
-        return $this->shared_event_manager;
+        return $this->sharedEventManager;
     }
 
     /**
      * unsetSharedManager
      *
-     * @return
+     * @return mixed
      */
     public function unsetSharedManager()
     {
-        $this->shared_event_manager = null;
+        $this->sharedEventManager = null;
 
         return $this;
     }

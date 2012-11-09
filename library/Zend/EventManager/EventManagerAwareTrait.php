@@ -19,20 +19,30 @@ use Zend\EventManager\EventManagerInterface;
 trait EventManagerAwareTrait
 {
     /**
-     * @var \Zend\EventManager\EventManagerInterface
+     * @var EventManagerInterface
      */
-    protected $event_manager = null;
+    protected $eventManager = null;
 
     /**
      * setEventManager
      *
-     * @param \Zend\EventManager\EventManagerInterface $eventManager
-     * @return
+     * @param EventManagerInterface $eventManager
+     * @return mixed
      */
     public function setEventManager(EventManagerInterface $eventManager)
     {
-        $this->event_manager = $eventManager;
+        $this->eventManager = $eventManager;
 
         return $this;
+    }
+
+    /**
+     * getEventManager
+     *
+     * @return EventManagerInterface
+     */
+    public function getEventManager()
+    {
+        return $this->eventManager;
     }
 }

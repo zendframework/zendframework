@@ -19,19 +19,19 @@ use Zend\InputFilter\InputFilterInterface;
 trait InputFilterAwareTrait
 {
     /**
-     * @var \Zend\InputFilter\InputFilterInterface
+     * @var InputFilterInterface
      */
-    protected $input_filter = null;
+    protected $inputFilter = null;
 
     /**
      * setInputFilter
      *
-     * @param \Zend\InputFilter\InputFilterInterface $inputFilter
-     * @return
+     * @param InputFilterInterface $inputFilter
+     * @return mixed
      */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
-        $this->input_filter = $inputFilter;
+        $this->inputFilter = $inputFilter;
 
         return $this;
     }
@@ -39,10 +39,10 @@ trait InputFilterAwareTrait
     /**
      * getInputFilter
      *
-     * @return \Zend\InputFilter\InputFilterInterface
+     * @return InputFilterInterface
      */
     public function getInputFilter()
     {
-        return $this->input_filter;
+        return $this->inputFilter;
     }
 }

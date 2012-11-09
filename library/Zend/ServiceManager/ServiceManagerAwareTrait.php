@@ -19,19 +19,19 @@ use Zend\ServiceManager\ServiceManager;
 trait ServiceManagerAwareTrait
 {
     /**
-     * @var \Zend\ServiceManager\ServiceManager
+     * @var ServiceManager
      */
-    protected $service_manager = null;
+    protected $serviceManager = null;
 
     /**
      * setServiceManager
      *
-     * @param \Zend\ServiceManager\ServiceManager $serviceManager
-     * @return
+     * @param ServiceManager $serviceManager
+     * @return mixed
      */
     public function setServiceManager(ServiceManager $serviceManager)
     {
-        $this->service_manager = $serviceManager;
+        $this->serviceManager = $serviceManager;
 
         return $this;
     }

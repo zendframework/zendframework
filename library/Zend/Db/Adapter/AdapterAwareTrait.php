@@ -20,15 +20,15 @@ use Zend\Db\Adapter\Adapter;
 trait AdapterAwareTrait
 {
     /**
-     * @var \Zend\Db\Adapter
+     * @var Adapter
      */
     protected $adapter = null;
 
     /**
      * setDbAdapter
      *
-     * @param \Zend\Db\Adapter\Adapter $adapter
-     * @return
+     * @param Adapter $adapter
+     * @return mixed
      */
     public function setDbAdapter(Adapter $adapter)
     {

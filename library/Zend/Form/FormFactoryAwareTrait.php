@@ -19,19 +19,19 @@ use \Zend\Form\Factory;
 trait FormFactoryAwareTrait
 {
     /**
-     * @var \Zend\Form\Factory
+     * @var Factory
      */
-    protected $form_factory = null;
+    protected $factory = null;
 
     /**
      * setFormFactory
      *
-     * @param \Zend\Form\Factory $factory
+     * @param Factory $factory
      * @return
      */
     public function setFormFactory(Factory $factory)
     {
-        $this->form_factory = $factory;
+        $this->factory = $factory;
 
         return $this;
     }

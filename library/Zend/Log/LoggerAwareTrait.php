@@ -19,15 +19,15 @@ use Zend\Log\LoggerInterface;
 trait LoggerAwareTrait
 {
     /**
-     * @var \Zend\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger = null;
 
     /**
      * setLogger
      *
-     * @param \Zend\Log\LoggerInterface $logger
-     * @return
+     * @param LoggerInterface $logger
+     * @return mixed
      */
     public function setLogger(LoggerInterface $logger)
     {

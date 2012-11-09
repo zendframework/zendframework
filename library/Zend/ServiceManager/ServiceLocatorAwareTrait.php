@@ -19,19 +19,19 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 trait ServiceLocatorAwareTrait
 {
     /**
-     * @var \Zend\ServiceManager\ServiceLocator
+     * @var ServiceLocator
      */
-    protected $service_locator = null;
+    protected $serviceLocator = null;
 
     /**
      * setServiceLocator
      *
-     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
-     * @return
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return mixed
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
-        $this->service_locator = $serviceLocator;
+        $this->serviceLocator = $serviceLocator;
 
         return $this;
     }
@@ -39,10 +39,10 @@ trait ServiceLocatorAwareTrait
     /**
      * getServiceLocator
      *
-     * @return \Zend\ServiceManager\ServiceLocator
+     * @return ServiceLocator
      */
     public function getServiceLocator()
     {
-        return $this->service_locator;
+        return $this->serviceLocator;
     }
 }

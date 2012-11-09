@@ -375,9 +375,10 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getArgSeparator()
     {
-        $argSeparator = $this->options['argseparator'];
+        $argSeparator = $this->config['argseparator'];
         if (empty($argSeparator)) {
             $argSeparator = ini_get('arg_separator.output');
+            $this->setArgSeparator($argSeparator);
         }
         return $argSeparator;
     }

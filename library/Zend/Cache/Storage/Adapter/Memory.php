@@ -14,6 +14,7 @@ use stdClass;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
 use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\ClearExpiredInterface;
 use Zend\Cache\Storage\FlushableInterface;
@@ -29,6 +30,7 @@ use Zend\Cache\Storage\TotalSpaceCapableInterface;
 class Memory extends AbstractAdapter implements
     AvailableSpaceCapableInterface,
     ClearByPrefixInterface,
+    ClearByNamespaceInterface,
     ClearExpiredInterface,
     FlushableInterface,
     IterableInterface,
@@ -174,6 +176,19 @@ class Memory extends AbstractAdapter implements
         return true;
     }
 
+    /* ClearByNamespaceInterface */
+
+    public function clearByNamespace($namespace)
+    {
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
+        unset($this->data[$namespace]);
+        return true;
+    }
+
     /* ClearByPrefixInterface */
 
     /**
@@ -184,6 +199,11 @@ class Memory extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
+        $prefix = (string) $prefix;
+        if ($prefix === '') {
+            throw new Exception\InvalidArgumentException('No prefix given');
+        }
+
         $ns = $this->getOptions()->getNamespace();
         if (!isset($this->data[$ns])) {
             return true;

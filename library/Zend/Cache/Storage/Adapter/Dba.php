@@ -216,6 +216,11 @@ class Dba extends AbstractAdapter implements
      */
     public function clearByNamespace($namespace)
     {
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
         $prefix  = $namespace . $this->getOptions()->getNamespaceSeparator();
         $prefixl = strlen($prefix);
         $result  = true;
@@ -247,10 +252,16 @@ class Dba extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
-        $options = $this->getOptions();
-        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator() . $prefix;
-        $prefixl = strlen($prefix);
-        $result  = true;
+        $prefix = (string) $prefix;
+        if ($prefix === '') {
+            throw new Exception\InvalidArgumentException('No prefix given');
+        }
+
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator() . $prefix;
+        $prefixL   = strlen($prefix);
+        $result    = true;
 
         $this->_open();
 
@@ -258,7 +269,7 @@ class Dba extends AbstractAdapter implements
             $recheck     = false;
             $internalKey = dba_firstkey($this->handle);
             while ($internalKey !== false && $internalKey !== null) {
-                if (substr($internalKey, 0, $prefixl) === $prefix) {
+                if (substr($internalKey, 0, $prefixL) === $prefix) {
                     $result = dba_delete($internalKey, $this->handle) && $result;
                     $recheck = true;
                 }
@@ -279,8 +290,9 @@ class Dba extends AbstractAdapter implements
      */
     public function getIterator()
     {
-        $options = $this->getOptions();
-        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
 
         return new DbaIterator($this, $this->handle, $prefix);
     }
@@ -315,12 +327,12 @@ class Dba extends AbstractAdapter implements
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $options     = $this->getOptions();
-        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
 
         $this->_open();
-        $value = dba_fetch($internalKey, $this->handle);
+        $value = dba_fetch($prefix . $normalizedKey, $this->handle);
 
         if ($value === false) {
             $success = false;
@@ -341,12 +353,12 @@ class Dba extends AbstractAdapter implements
      */
     protected function internalHasItem(& $normalizedKey)
     {
-        $options     = $this->getOptions();
-        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
 
         $this->_open();
-        return dba_exists($internalKey, $this->handle);
+        return dba_exists($prefix . $normalizedKey, $this->handle);
     }
 
     /* writing */
@@ -362,7 +374,8 @@ class Dba extends AbstractAdapter implements
     protected function internalSetItem(& $normalizedKey, & $value)
     {
         $options     = $this->getOptions();
-        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $namespace   = $options->getNamespace();
+        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
 
         $this->_open();
@@ -384,7 +397,8 @@ class Dba extends AbstractAdapter implements
     protected function internalAddItem(& $normalizedKey, & $value)
     {
         $options     = $this->getOptions();
-        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $namespace   = $options->getNamespace();
+        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
 
         $this->_open();
@@ -416,7 +430,8 @@ class Dba extends AbstractAdapter implements
     protected function internalRemoveItem(& $normalizedKey)
     {
         $options     = $this->getOptions();
-        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $namespace   = $options->getNamespace();
+        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
 
         $this->_open();

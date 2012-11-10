@@ -75,6 +75,11 @@ class ZendServerDisk extends AbstractZendServer implements
      */
     public function clearByNamespace($namespace)
     {
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
         return zend_disk_cache_clear($namespace);
     }
 

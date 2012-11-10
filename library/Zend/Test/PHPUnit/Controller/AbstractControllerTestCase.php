@@ -14,6 +14,7 @@ use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_ExpectationFailedException;
 use Zend\Dom;
 use Zend\EventManager\StaticEventManager;
+use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Application;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Mvc\MvcEvent;
@@ -46,11 +47,33 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     protected $useConsoleRequest = false;
 
+    /**
+     * Trace error when exception is throwed in application
+     * @var boolean
+     */
+    protected $traceError = false;
+
+    /**
+     * Reset the application for isolation
+     */
     public function setUp()
     {
         $this->reset();
     }
-    
+
+    /**
+     * Trace error if enabled
+     */
+    public function tearDown()
+    {
+        if(true === $this->traceError) {
+            $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
+            if($exception) {
+                throw $exception;
+            }
+        }
+    }
+
     /**
      * Set the usage of the console router or not
      * @param boolean $boolean
@@ -151,19 +174,29 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      *
      * @param string $url
      */
-    public function url($url)
+    public function url($url, $method = HttpRequest::METHOD_GET, $params = array())
     {
         $request = $this->getRequest();
         if($this->useConsoleRequest) {
             $params = preg_split('#\s+#', $url);
             $request->params()->exchangeArray($params);
         } else {
+            $query = $request->getQuery()->toArray();
+            $post = $request->getPost()->toArray();
+
             $uri = new HttpUri($url);
-            $query = $uri->getQuery();
-            if($query) {
-                parse_str($query, $args);
-                $request->setQuery(new Parameters($args));
+            $queryString = $uri->getQuery();
+            if($queryString) {
+                parse_str($queryString, $query);
             }
+            if($method == HttpRequest::METHOD_POST) {
+                $post = $params;
+            } else if($method == HttpRequest::METHOD_GET) {
+                $query = array_merge($query, $params);
+            }
+            $request->setMethod($method);
+            $request->setQuery(new Parameters($query));
+            $request->setPost(new Parameters($post));
             $request->setUri($uri);
         }
         return $this;
@@ -177,9 +210,9 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      *
      * @param string $url
      */
-    public function dispatch($url)
+    public function dispatch($url, $method = HttpRequest::METHOD_GET, $params = array())
     {
-        $this->url($url);
+        $this->url($url, $method, $params);
         $this->getApplication()->run();
     }
 
@@ -195,7 +228,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         // reset singleton
         StaticEventManager::resetInstance();
         Placeholder\Registry::unsetRegistry();
-        
+
         return $this;
     }
 
@@ -339,6 +372,10 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             throw new PHPUnit_Framework_ExpectationFailedException(
                 'Failed asserting application exception, exception not exist'
             );
+        }
+        if(true === $this->traceError) {
+            // set exception as null because we know and have assert the exception
+            $this->getApplication()->getMvcEvent()->setParam('exception', null);
         }
         $this->setExpectedException($type, $message);
         throw $exception;
@@ -703,7 +740,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals(true, $match <= $count);
     }
-    
+
     /**
      * Assert against DOM selection; node should contain content
      *

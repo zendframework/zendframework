@@ -54,12 +54,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             include __DIR__ . '/../../_files/application.config.php'
         );
     }
-    
+
     public function testUseOfRouter()
     {
        $this->assertEquals(false, $this->useConsoleRequest);
     }
-    
+
     public function testApplicationClass()
     {
         $applicationClass = get_class($this->getApplication());
@@ -297,11 +297,25 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCount('div.post', 0);
     }
 
-    public function testAssertQueryWithDynamicQueryParamsInDispatch()
+    public function testAssertQueryWithDynamicQueryParamsInDispatchMethod()
+    {
+        $this->dispatch('/tests', 'GET', array('num_get' => 5));
+        $this->assertQueryCount('div.get', 5);
+        $this->assertQueryCount('div.post', 0);
+    }
+
+    public function testAssertQueryWithDynamicQueryParamsInUrl()
     {
         $this->dispatch('/tests?foo=bar&num_get=5');
         $this->assertQueryCount('div.get', 5);
         $this->assertQueryCount('div.post', 0);
+    }
+
+    public function testAssertQueryWithDynamicQueryParamsInUrlAnsPostInParams()
+    {
+        $this->dispatch('/tests?foo=bar&num_get=5', 'POST', array('num_post' => 5));
+        $this->assertQueryCount('div.get', 5);
+        $this->assertQueryCount('div.post', 5);
     }
 
     public function testAssertQueryWithDynamicPostParams()
@@ -310,6 +324,13 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             ->setMethod('POST')
             ->setPost(new Parameters(array('num_post' => 5)));
         $this->dispatch('/tests');
+        $this->assertQueryCount('div.post', 5);
+        $this->assertQueryCount('div.get', 0);
+    }
+
+    public function testAssertQueryWithDynamicPostParamsInDispatchMethod()
+    {
+        $this->dispatch('/tests', 'POST', array('num_post' => 5));
         $this->assertQueryCount('div.post', 5);
         $this->assertQueryCount('div.get', 0);
     }
@@ -356,12 +377,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals(1, $countListeners);
 
         $this->reset();
-        
+
         $this->assertEquals(false, StaticEventManager::hasInstance());
         $countListeners = StaticEventManager::getInstance()->getListeners(
             'Zend\Mvc\Application', MvcEvent::EVENT_FINISH);
         $this->assertEquals(false, $countListeners);
-        
+
         $this->dispatch('/tests-bis');
         $this->assertQuery('div#content');
         $this->assertNotEquals('<html></html>', $this->getResponse()->getContent());
@@ -377,7 +398,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertResponseStatusCode(500);
         $this->assertApplicationException('RuntimeException');
     }
-    
+
     /**
      * Sample tests on MvcEvent
      */

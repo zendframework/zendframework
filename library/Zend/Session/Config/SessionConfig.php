@@ -151,7 +151,7 @@ class SessionConfig extends StandardConfig
      * Set session.save_path
      *
      * @param  string $savePath
-     * @return StandardConfig
+     * @return SessionConfig
      * @throws Exception\InvalidArgumentException on invalid path
      */
     public function setSavePath($savePath)

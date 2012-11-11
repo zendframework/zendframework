@@ -70,6 +70,10 @@ class Imap
      */
     public function connect($host, $port = null, $ssl = false)
     {
+        if ($ssl !== false) {
+            $ssl = strtoupper( $ssl );
+        }
+
         if ($ssl == 'SSL') {
             $host = 'ssl://' . $host;
         }

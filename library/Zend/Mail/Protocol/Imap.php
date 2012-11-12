@@ -72,7 +72,7 @@ class Imap
     {
         $isTls = false;
 
-        if ( $ssl !== false ) {
+        if ($ssl) {
             $ssl = strtolower($ssl);
         }
 
@@ -85,8 +85,9 @@ class Imap
                 break;
             case 'tls':
                 $isTls = true;
+                // break intentionally omitted
             default:
-                if ( !$port ) {
+                if (!$port) {
                     $port = 143;
                 }
         }

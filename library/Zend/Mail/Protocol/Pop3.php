@@ -80,21 +80,22 @@ class Pop3
     {
         $isTls = false;
 
-        if ($ssl !== false) {
+        if ($ssl) {
             $ssl = strtolower($ssl);
         }
 
-        switch( $ssl ) {
+        switch ($ssl) {
             case 'ssl':
                 $host = 'ssl://' . $host;
-                if ( !$port ) {
+                if (!$port) {
                     $port = 995;
                 }
                 break;
             case 'tls':
                 $isTls = true;
+                // break intentionally omitted
             default:
-                if ( !$port ) {
+                if (!$port) {
                     $port = 110;
                 }
         }
@@ -119,7 +120,7 @@ class Pop3
             $this->timestamp = '<' . $this->timestamp . '>';
         }
 
-        if ($isTls === true) {
+        if ($isTls) {
             $this->request('STLS');
             $result = stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {

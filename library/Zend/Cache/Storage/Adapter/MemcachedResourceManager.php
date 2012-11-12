@@ -10,8 +10,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ClassReflection;
 use Memcached as MemcachedResource;
+use ReflectionClass;
 use Traversable;
 use Zend\Cache\Exception;
 use Zend\Stdlib\ArrayUtils;

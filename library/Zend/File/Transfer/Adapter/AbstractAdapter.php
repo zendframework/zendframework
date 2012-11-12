@@ -622,7 +622,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
                         $validator->setTranslator($translator);
                     }
 
-                    if (($class === 'Zend\Validator\File\Upload') and (empty($content['tmp_name']))) {
+                    if (($class === 'Zend\Validator\File\Upload') && (empty($content['tmp_name']))) {
                         $tocheck = $key;
                     } else {
                         $tocheck = $content['tmp_name'];
@@ -632,16 +632,16 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
                         $fileerrors += $validator->getMessages();
                     }
 
-                    if (!empty($content['options']['ignoreNoFile']) and (isset($fileerrors['fileUploadErrorNoFile']))) {
+                    if (!empty($content['options']['ignoreNoFile']) && (isset($fileerrors['fileUploadErrorNoFile']))) {
                         unset($fileerrors['fileUploadErrorNoFile']);
                         break;
                     }
 
-                    if (($class === 'Zend\Validator\File\Upload') and (count($fileerrors) > 0)) {
+                    if (($class === 'Zend\Validator\File\Upload') && (count($fileerrors) > 0)) {
                         break;
                     }
 
-                    if (($this->break[$class]) and (count($fileerrors) > 0)) {
+                    if (($this->break[$class]) && (count($fileerrors) > 0)) {
                         $break = true;
                         break;
                     }

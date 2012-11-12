@@ -100,6 +100,12 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setMemcachedResource(MemcachedResource $memcachedResource = null)
     {
+        trigger_error(
+            'This method is deprecated and will be removed in the feature'
+            . ', please use the resource manager instead',
+            E_USER_DEPRECATED
+        );
+
         if ($memcachedResource !== null) {
             $this->triggerOptionEvent('memcached_resource', $memcachedResource);
             $resourceManager = $this->getResourceManager();
@@ -117,6 +123,12 @@ class MemcachedOptions extends AdapterOptions
      */
     public function getMemcachedResource()
     {
+        trigger_error(
+            'This method is deprecated and will be removed in the feature'
+            . ', please use the resource manager instead',
+            E_USER_DEPRECATED
+        );
+
         return $this->resourceManager->getResource($this->getResourceId());
     }
 
@@ -208,11 +220,18 @@ class MemcachedOptions extends AdapterOptions
      */
     public function addServer($host, $port = 11211, $weight = 0)
     {
+        trigger_error(
+            'This method is deprecated and will be removed in the feature'
+            . ', please use the resource manager instead',
+            E_USER_DEPRECATED
+        );
+
         $this->getResourceManager()->addServer($this->getResourceId(), array(
             'host'   => $host,
             'port'   => $port,
             'weight' => $weight
         ));
+
         return $this;
     }
 
@@ -263,7 +282,13 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setLibOption($key, $value)
     {
-        $this->getResourceManager()->setLibOptions($this->getResourceId(), $key, $value);
+        trigger_error(
+            'This method is deprecated and will be removed in the feature'
+            . ', please use "lib_options" or the resource manager instead',
+            E_USER_DEPRECATED
+        );
+
+        $this->getResourceManager()->setLibOption($this->getResourceId(), $key, $value);
         return $this;
     }
 
@@ -288,6 +313,12 @@ class MemcachedOptions extends AdapterOptions
     */
     public function getLibOption($key)
     {
+        trigger_error(
+            'This method is deprecated and will be removed in the feature'
+            . ', please use "lib_options" or the resource manager instead',
+            E_USER_DEPRECATED
+        );
+
         return $this->getResourceManager()->getLibOption($this->getResourceId(), $key);
     }
 }

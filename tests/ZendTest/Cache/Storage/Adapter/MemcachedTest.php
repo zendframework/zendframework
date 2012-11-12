@@ -31,11 +31,18 @@ class MemcachedTest extends CommonAdapterTest
             $this->markTestSkipped("Memcached extension is not loaded");
         }
 
-        $this->_options = new Cache\Storage\Adapter\MemcachedOptions();
+        $this->_options  = new Cache\Storage\Adapter\MemcachedOptions(array(
+            'resource_id' => __CLASS__
+        ));
+
         if (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') && defined('TESTS_ZEND_CACHE_MEMCACHED_PORT')) {
-            $this->_options->addServer(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT);
+            $this->_options->getResourceManager()->setServers(__CLASS__, array(
+                array(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT)
+            ));
         } elseif (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST')) {
-            $this->_options->addServer(TESTS_ZEND_CACHE_MEMCACHED_HOST);
+            $this->_options->getResourceManager()->setServers(__CLASS__, array(
+                array(TESTS_ZEND_CACHE_MEMCACHED_HOST)
+            ));
         }
 
         $this->_storage = new Cache\Storage\Adapter\Memcached();
@@ -45,12 +52,24 @@ class MemcachedTest extends CommonAdapterTest
         parent::setUp();
     }
 
+    /**
+     * @deprecated
+     */
     public function testOptionsAddServer()
     {
         $options = new Cache\Storage\Adapter\MemcachedOptions();
+
+        $deprecated = false;
+        set_error_handler(function () use (& $deprecated) {
+            $deprecated = true;
+        }, E_USER_DEPRECATED);
+
         $options->addServer('127.0.0.1', 11211);
         $options->addServer('localhost');
         $options->addServer('domain.com', 11215);
+
+        restore_error_handler();
+        $this->assertTrue($deprecated, 'Missing deprecated error');
 
         $servers = array(
             array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0),
@@ -111,7 +130,6 @@ class MemcachedTest extends CommonAdapterTest
     }
 
     /**
-     *
      * @dataProvider getServersDefinitions
      */
     public function testOptionSetServers($servers, $expectedServers)
@@ -129,11 +147,40 @@ class MemcachedTest extends CommonAdapterTest
             'COMPRESSION' => false
         ));
 
-        $this->assertEquals($options->getLibOption(\Memcached::OPT_COMPRESSION), false);
+        $this->assertEquals($options->getResourceManager()->getLibOption(
+            $options->getResourceId(), \Memcached::OPT_COMPRESSION
+        ), false);
 
         $memcached = new Cache\Storage\Adapter\Memcached($options);
         $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
             \Memcached::OPT_COMPRESSION => false
+        ));
+    }
+
+    /**
+     * @deprecated
+     */
+    public function testLibOptionSet()
+    {
+        $options = new Cache\Storage\Adapter\MemcachedOptions();
+
+        $deprecated = false;
+        set_error_handler(function () use (& $deprecated) {
+            $deprecated = true;
+        }, E_USER_DEPRECATED);
+
+        $options->setLibOption('COMPRESSION', false);
+
+        restore_error_handler();
+        $this->assertTrue($deprecated, 'Missing deprecated error');
+
+        $this->assertEquals($options->getResourceManager()->getLibOption(
+            $options->getResourceId(), \Memcached::OPT_COMPRESSION
+        ), false);
+
+        $memcached = new Cache\Storage\Adapter\Memcached($options);
+        $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
+                \Memcached::OPT_COMPRESSION => false
         ));
     }
 

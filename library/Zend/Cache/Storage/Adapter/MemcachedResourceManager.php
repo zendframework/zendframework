@@ -270,7 +270,7 @@ class MemcachedResourceManager
      */
     public function setLibOption($id, $key, $value)
     {
-        return $this->setLibOptions($id, array($libOptions));
+        return $this->setLibOptions($id, array($key => $value));
     }
 
     /**

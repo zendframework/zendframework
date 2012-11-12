@@ -351,9 +351,9 @@ class Factory
      * Takes a string indicating a hydrator class name (or a concrete instance), instantiates the class
      * by that name, and injects the hydrator instance into the form.
      *
-     * @param  string $hydratorOrName
-     * @param  FieldsetInterface $fieldset
-     * @param  string $method
+     * @param  string|array|Hydrator\HydratorInterface $hydratorOrName
+     * @param  FieldsetInterface                       $fieldset
+     * @param  string                                  $method
      * @return void
      * @throws Exception\DomainException If $hydratorOrName is not a string, does not resolve to a known class, or
      *                                   the class does not implement Hydrator\HydratorInterface
@@ -365,12 +365,25 @@ class Factory
             return;
         }
 
-        if (!is_string($hydratorOrName)) {
+        if (!is_string($hydratorOrName) && !is_array($hydratorOrName)) {
             throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator class name; received "%s"',
+                '%s expects string hydrator class name or an array specification; received "%s"',
                 $method,
                 (is_object($hydratorOrName) ? get_class($hydratorOrName) : gettype($hydratorOrName))
             ));
+        }
+
+        if (is_array($hydratorOrName)) {
+            if (!isset($hydratorOrName['type'])) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects array specification to have a type value',
+                    $method
+                ));
+            }
+            $hydratorOptions = (isset($hydratorOrName['options'])) ? $hydratorOrName['options'] : array();
+            $hydratorOrName = $hydratorOrName['type'];
+        } else {
+            $hydratorOptions = array();
         }
 
         if (!class_exists($hydratorOrName)) {
@@ -388,6 +401,9 @@ class Factory
                 $method,
                 $hydratorOrName
             ));
+        }
+        if (!empty($hydratorOptions) && $hydrator instanceof Hydrator\HydratorOptionsInterface) {
+            $hydrator->setOptions($hydratorOptions);
         }
 
         $fieldset->setHydrator($hydrator);

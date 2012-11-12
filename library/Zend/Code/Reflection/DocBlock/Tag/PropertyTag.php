@@ -14,12 +14,12 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
  * @category   Zend
  * @package    Zend_Reflection
  */
-class PropertyTag implements TagInterface
+class PropertyTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $type = null;
+    protected $types = array();
 
     /**
      * @var string
@@ -48,7 +48,7 @@ class PropertyTag implements TagInterface
     {
         if (preg_match('#^(.+)?(\$[\S]+)[\s]*(.*)$#m', $tagDocblockLine, $match)) {
             if ($match[1] !== '') {
-                $this->type = rtrim($match[1]);
+                $this->types = explode('|', rtrim($match[1]));
             }
 
             if ($match[2] !== '') {
@@ -65,10 +65,20 @@ class PropertyTag implements TagInterface
      * Get property variable type
      *
      * @return null|string
+     * @deprecated 2.0.4 use getTypes instead
      */
     public function getType()
     {
-        return $this->type;
+        if (empty($this->types)) {
+            return null;
+        }
+
+        return $this->types[0];
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     /**

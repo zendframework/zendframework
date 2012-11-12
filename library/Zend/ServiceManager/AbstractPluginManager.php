@@ -69,9 +69,6 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
             if ($instance instanceof ServiceLocatorAwareInterface) {
                 $instance->setServiceLocator($self);
             }
-            if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($self);
-            }
         });
     }
 

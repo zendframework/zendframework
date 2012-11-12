@@ -22,7 +22,7 @@ interface WriterInterface
     /**
      * Add a log filter to the writer
      *
-     * @param  int|Filter $filter
+     * @param  int|string|Filter $filter
      * @return WriterInterface
      */
     public function addFilter($filter);
@@ -30,10 +30,10 @@ interface WriterInterface
     /**
      * Set a message formatter for the writer
      *
-     * @param Formatter $formatter
+     * @param string|Formatter $formatter
      * @return WriterInterface
      */
-    public function setFormatter(Formatter $formatter);
+    public function setFormatter($formatter);
 
     /**
      * Write a log message

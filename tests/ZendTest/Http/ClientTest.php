@@ -79,4 +79,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $cookies = $client->getCookies();
         $this->assertEquals(2, count($cookies));
     }
+
+    /**
+     * @group 2774
+     * @group 2745
+     */
+    public function testArgSeparatorDefaultsToIniSetting()
+    {
+        $argSeparator = ini_get('arg_separator.output');
+        $client = new Client();
+        $this->assertEquals($argSeparator, $client->getArgSeparator());
+    }
+
+    /**
+     * @group 2774
+     * @group 2745
+     */
+    public function testCanOverrideArgSeparator()
+    {
+        $client = new Client();
+        $client->setArgSeparator(';');
+        $this->assertEquals(';', $client->getArgSeparator());
+    }
 }

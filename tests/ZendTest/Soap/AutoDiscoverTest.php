@@ -685,7 +685,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $wsdl = $autodiscover->toXml();
 
         $this->assertContains(
-            '<operation name="pushOneWay"><documentation>@param string $message</documentation><input message="tns:pushOneWayIn"/></operation>',
+            '<operation name="pushOneWay"><documentation>pushOneWay</documentation><input message="tns:pushOneWayIn"/></operation>',
             $wsdl
         );
     }
@@ -701,7 +701,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $wsdl = $autodiscover->toXml();
 
         $this->assertContains(
-            '<operation name="OneWay"><documentation>@param string $message</documentation><input message="tns:OneWayIn"/></operation>',
+            '<operation name="OneWay"><documentation>ZendTest\Soap\TestAsset\OneWay</documentation><input message="tns:OneWayIn"/></operation>',
             $wsdl
         );
     }

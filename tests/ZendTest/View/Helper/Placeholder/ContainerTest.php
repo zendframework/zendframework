@@ -126,6 +126,26 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
+
+    public function testPrependImplementsFluentInterface()
+    {
+        $result = $this->container->prepend( 'test' );
+        $this->assertSame($this->container, $result);
+    }
+
+    /**
+     * @return void
+     */
+    public function testSetImplementsFluentInterface()
+    {
+        $result = $this->container->set( 'test' );
+        $this->assertSame($this->container, $result);
+    }
+
+
+    /**
+     * @return void
+     */
     public function testSeparatorAccesorsWork()
     {
         $this->assertEquals('', $this->container->getSeparator());

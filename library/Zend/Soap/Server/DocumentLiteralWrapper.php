@@ -123,6 +123,7 @@ class DocumentLiteralWrapper
     protected function _parseArguments($method, $document)
     {
         $reflMethod = $this->reflection->getMethod($method);
+        /* @var \Zend\Server\Reflection\ReflectionParameter[] $params  */
         $params = array();
         foreach ($reflMethod->getParameters() as $param) {
             $params[$param->getName()] = $param;

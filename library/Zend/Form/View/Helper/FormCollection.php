@@ -65,13 +65,7 @@ class FormCollection extends AbstractHelper
         $elementHelper = $this->getElementHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
-            $elementOrFieldset = $element->getTemplateElement();
-
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $templateMarkup .= $this->render($elementOrFieldset);
-            } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $elementHelper($elementOrFieldset);
-            }
+            $templateMarkup = $this->renderTemplate($element);
         }
 
         foreach ($element->getIterator() as $elementOrFieldset) {
@@ -84,12 +78,7 @@ class FormCollection extends AbstractHelper
 
         // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
-            $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
-
-            $markup .= sprintf(
-                '<span data-template="%s"></span>',
-                $escapeHtmlAttribHelper($templateMarkup)
-            );
+            $markup .= $templateMarkup;
         }
 
         // Every collection is wrapped by a fieldset if needed
@@ -108,6 +97,32 @@ class FormCollection extends AbstractHelper
         }
 
         return $markup;
+    }
+
+    /**
+     * Only render a template
+     *
+     * @param  CollectionElement            $collection
+     * @return string
+     */
+    public function renderTemplate(CollectionElement $collection)
+    {
+        $elementHelper          = $this->getElementHelper();
+        $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+        $templateMarkup         = '';
+
+        $elementOrFieldset = $collection->getTemplateElement();
+
+        if ($elementOrFieldset instanceof FieldsetInterface) {
+            $templateMarkup .= $this->render($elementOrFieldset);
+        } elseif ($elementOrFieldset instanceof ElementInterface) {
+            $templateMarkup .= $elementHelper($elementOrFieldset);
+        }
+
+        return sprintf(
+            '<span data-template="%s"></span>',
+            $escapeHtmlAttribHelper($templateMarkup)
+        );
     }
 
     /**

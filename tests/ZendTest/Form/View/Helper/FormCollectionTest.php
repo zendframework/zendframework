@@ -138,5 +138,14 @@ class FormCollectionTest extends TestCase
         $this->assertSame('foo', $defaultElement);
     }
 
+    public function testCanRenderTemplateAlone()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(true);
 
+        $markup = $this->helper->renderTemplate($collection);
+        $this->assertContains('<span data-template', $markup);
+        $this->assertContains($collection->getTemplatePlaceholder(), $markup);
+    }
 }

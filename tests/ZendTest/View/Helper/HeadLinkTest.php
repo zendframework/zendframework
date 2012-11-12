@@ -381,6 +381,22 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertContains(' media="screen,print"', $test);
     }
 
+    public function testSetPrevRelationship()
+    {
+        $this->helper->appendPrev('/foo/bar');
+        $test = $this->helper->toString();
+        $this->assertContains('href="/foo/bar"', $test);
+        $this->assertContains('rel="prev"', $test);
+    }
+
+    public function testSetNextRelationship()
+    {
+        $this->helper->appendNext('/foo/bar');
+        $test = $this->helper->toString();
+        $this->assertContains('href="/foo/bar"', $test);
+        $this->assertContains('rel="next"', $test);
+    }
+
     /**
      * @issue ZF-5435
      */

@@ -27,6 +27,11 @@ abstract class AbstractSql
      */
     protected $processInfo = array('paramPrefix' => '', 'subselectCount' => 0);
 
+    /**
+     * @var array
+     */
+    protected $instanceParameterIndex = array();
+
     protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, Adapter $adapter = null, $namedParameterPrefix = null)
     {
         // static counter for the number of times this method was invoked across the PHP runtime
@@ -42,7 +47,12 @@ abstract class AbstractSql
 
         // initialize variables
         $parts = $expression->getExpressionData();
-        $expressionParamIndex = 1;
+
+        if(!isset($this->instanceParameterIndex[$namedParameterPrefix])) {
+            $this->instanceParameterIndex[$namedParameterPrefix] = 1;
+        }
+
+        $expressionParamIndex = &$this->instanceParameterIndex[$namedParameterPrefix];
 
         foreach ($parts as $part) {
 

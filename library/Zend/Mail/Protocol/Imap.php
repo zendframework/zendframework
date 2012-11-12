@@ -70,12 +70,25 @@ class Imap
      */
     public function connect($host, $port = null, $ssl = false)
     {
-        if ($ssl == 'SSL') {
-            $host = 'ssl://' . $host;
+        $isTls = false;
+
+        if ( $ssl !== false ) {
+            $ssl = strtolower($ssl);
         }
 
-        if ($port === null) {
-            $port = $ssl === 'SSL' ? 993 : 143;
+        switch ($ssl) {
+            case 'ssl':
+                $host = 'ssl://' . $host;
+                if (!$port) {
+                    $port = 993;
+                }
+                break;
+            case 'tls':
+                $isTls = true;
+            default:
+                if ( !$port ) {
+                    $port = 143;
+                }
         }
 
         ErrorHandler::start();
@@ -83,7 +96,7 @@ class Imap
         $error = ErrorHandler::stop();
         if (!$this->socket) {
             throw new Exception\RuntimeException(sprintf(
-                'cannot connect to host%s',
+                'cannot connect to host %s',
                 ($error ? sprintf('; error = %s (errno = %d )', $error->getMessage(), $error->getCode()) : '')
             ), 0, $error);
         }
@@ -92,7 +105,7 @@ class Imap
             throw new Exception\RuntimeException('host doesn\'t allow connection');
         }
 
-        if ($ssl === 'TLS') {
+        if ($isTls) {
             $result = $this->requestAndResponse('STARTTLS');
             $result = $result && stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {

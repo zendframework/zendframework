@@ -22,7 +22,8 @@ interface FieldsetInterface extends
     Countable,
     IteratorAggregate,
     ElementInterface,
-    ElementPrepareAwareInterface
+    ElementPrepareAwareInterface,
+    FormFactoryAwareInterface
 {
     /**
      * Add an element or fieldset

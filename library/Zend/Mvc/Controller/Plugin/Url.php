@@ -79,6 +79,11 @@ class Url extends AbstractPlugin
 
             if (isset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
                 $routeMatchParams['controller'] = $routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
+                unset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER]);
+            }
+
+            if (isset($routeMatchParams[ModuleRouteListener::MODULE_NAMESPACE])) {
+                unset($routeMatchParams[ModuleRouteListener::MODULE_NAMESPACE]);
             }
 
             $params = array_merge($routeMatchParams, $params);

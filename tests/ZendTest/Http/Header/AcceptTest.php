@@ -193,6 +193,38 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testMatchReturnsMatchedAgainstObject()
+    {
+        $acceptStr = 'Accept: text/html;q=1; version=23; level=5, text/json;level=1,' .
+                'text/xml;level=2;q=0.4';
+        $acceptHeader = Accept::fromString($acceptStr);
+
+        $res = $acceptHeader->match('text/html; _randomValue=foobar');
+        $this->assertInstanceOf(
+                'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
+                $res->getMatchedAgainst()
+        );
+        $this->assertEquals(
+                'foobar',
+                $res->getMatchedAgainst()->getParams()->_randomValue
+        );
+
+        $acceptStr = 'Accept: */*; ';
+        $acceptHeader = Accept::fromString($acceptStr);
+
+        $res = $acceptHeader->match('text/html; _foo=bar');
+        $this->assertInstanceOf(
+                'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
+                $res->getMatchedAgainst()
+        );
+
+        $this->assertEquals(
+                'bar',
+                $res->getMatchedAgainst()->getParams()->_foo
+        );
+    }
+
+
     public function testVersioning()
     {
         $acceptStr = 'Accept: text/html;q=1; version=23; level=5, text/json;level=1,' .

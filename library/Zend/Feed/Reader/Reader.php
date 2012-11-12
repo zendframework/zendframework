@@ -188,7 +188,7 @@ class Reader
      * @param  string $uri The URI to the feed
      * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
-     * @return Reader
+     * @return Feed\FeedInterface
      * @throws Exception\RuntimeException
      */
     public static function import($uri, $etag = null, $lastModified = null)

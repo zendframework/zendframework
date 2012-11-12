@@ -445,7 +445,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     /**
      * Report the 404 reason and/or exceptions
      *
-     * @param  \Zend\Event\EventInterface $e
+     * @param  \Zend\EventManager\EventInterface $e
      * @return string
      */
     protected function reportNotFoundReason($e)

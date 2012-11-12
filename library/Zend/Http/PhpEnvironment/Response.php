@@ -22,6 +22,14 @@ use Zend\Http\Response as HttpResponse;
 class Response extends HttpResponse
 {
     /**
+     * The current used version
+     * (The value will be detected on getVersion)
+     *
+     * @var null|string
+     */
+    protected $version;
+
+    /**
      * @var bool
      */
     protected $headersSent = false;
@@ -30,6 +38,37 @@ class Response extends HttpResponse
      * @var bool
      */
     protected $contentSent = false;
+
+    /**
+     * Return the HTTP version for this response
+     *
+     * @return string
+     * @see \Zend\Http\AbstractMessage::getVersion()
+     */
+    public function getVersion()
+    {
+        if (!$this->version) {
+            $this->version = $this->detectVersion();
+        }
+        return $this->version;
+    }
+
+    /**
+     * Detect the current used protocol version.
+     * If detection failed it falls back to version 1.0.
+     *
+     * @return string
+     */
+    protected function detectVersion()
+    {
+        if (isset($_SERVER['SERVER_PROTOCOL'])) {
+            if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
+                return self::VERSION_11;
+            }
+        }
+
+        return self::VERSION_10;
+    }
 
     /**
      * @return bool

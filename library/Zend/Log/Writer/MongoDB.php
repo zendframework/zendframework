@@ -89,13 +89,12 @@ class MongoDB extends AbstractWriter
     /**
      * This writer does not support formatting.
      *
-     * @param Zend\Log\Formatter\FormatterInterface $formatter
-     * @return void
-     * @throws Zend\Log\Exception\InvalidArgumentException
+     * @param string|Zend\Log\Formatter\FormatterInterface $formatter
+     * @return WriterInterface
      */
-    public function setFormatter(FormatterInterface $formatter)
+    public function setFormatter($formatter)
     {
-        throw new InvalidArgumentException(get_class() . ' does not support formatting');
+        return $this;
     }
 
     /**

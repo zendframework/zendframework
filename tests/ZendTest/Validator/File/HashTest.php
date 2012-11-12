@@ -23,79 +23,73 @@ use Zend\Validator\File;
 class HashTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile = __DIR__ . '/_files/picture.jpg';
+        $pictureTests = array(
+            //    Options, isValid Param, Expected value, Expected message
+            array('3f8d07e2',                    $testFile, true, ''),
+            array('9f8d07e2',                    $testFile, false, 'fileHashDoesNotMatch'),
+            array(array('9f8d07e2', '3f8d07e2'), $testFile, true, ''),
+            array(array('9f8d07e2', '7f8d07e2'), $testFile, false, 'fileHashDoesNotMatch'),
+            array(
+                array('ed74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
+                $testFile, true, ''
+            ),
+            array(
+                array('4d74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
+                $testFile, false, 'fileHashDoesNotMatch'
+            ),
+            array(
+                array('4d74c22109fe9f110579f77b053b8bc3', 'ed74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
+                $testFile, true, ''
+            ),
+            array(
+                array('4d74c22109fe9f110579f77b053b8bc3', '7d74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
+                $testFile, false, 'fileHashDoesNotMatch'
+            ),
+        );
+
+        $testFile = __DIR__ . '/_files/nofile.mo';
+        $noFileTests = array(
+            //    Options, isValid Param, Expected value, message
+            array('3f8d07e2', $testFile, false, 'fileHashNotFound'),
+        );
+
+        $testFile = __DIR__ . '/_files/testsize.mo';
+        $sizeFileTests = array(
+            //    Options, isValid Param, Expected value, message
+            array('ffeb8d5d', $testFile, true,  ''),
+            array('9f8d07e2', $testFile, false, 'fileHashDoesNotMatch'),
+        );
+
+        // Dupe data in File Upload format
+        $testData = array_merge($pictureTests, $noFileTests, $sizeFileTests);
+        foreach ($testData as $data) {
+            $fileUpload = array(
+                'tmp_name' => $data[1], 'name' => basename($data[1]),
+                'size' => 200, 'error' => 0, 'type' => 'text'
+            );
+            $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
+        }
+        return $testData;
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected, $messageKey)
     {
-        $valuesExpected = array(
-            array('3f8d07e2', true),
-            array('9f8d07e2', false),
-            array(array('9f8d07e2', '3f8d07e2'), true),
-            array(array('9f8d07e2', '7f8d07e2'), false),
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Hash($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
-                "Tested with " . var_export($element, 1)
-            );
+        $validator = new File\Hash($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+        if (!$expected) {
+            $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
         }
-
-        $valuesExpected = array(
-            array(array('ed74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'), true),
-            array(array('4d74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'), false),
-            array(array('4d74c22109fe9f110579f77b053b8bc3', 'ed74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'), true),
-            array(array('1d74c22109fe9f110579f77b053b8bc3', '4d74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'), false),
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Hash($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
-                "Tested with " . var_export($element, 1)
-            );
-        }
-
-        $validator = new File\Hash('3f8d07e2');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'test1',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => 'tmp_test1',
-            'error'    => 0
-        );
-        $validator = new File\Hash('3f8d07e2');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
-        $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\Hash('3f8d07e2');
-        $this->assertTrue($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\Hash('9f8d07e2');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
-        $this->assertTrue(array_key_exists('fileHashDoesNotMatch', $validator->getMessages()));
     }
 
     /**
@@ -150,6 +144,6 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Hash('3f8d07e2');
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

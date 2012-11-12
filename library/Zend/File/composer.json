@@ -15,11 +15,5 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-stdlib": "self.version"
-    },
-    "suggest": {
-        "zendframework/zend-filter": "Zend\\Filter component",
-        "zendframework/zend-loader": "Zend\\Loader component",
-        "zendframework/zend-i18n": "Zend\\I18n component",
-        "zendframework/zend-validator": "Zend\\Validator component"
     }
 }

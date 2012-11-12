@@ -165,6 +165,11 @@ class BaseInputFilter implements InputFilterInterface
             if (!array_key_exists($name, $this->data)
                 || (null === $this->data[$name])
                 || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
+                // Single and Multi File Uploads
+                || (is_array($this->data[$name])
+                    && isset($this->data[$name]['error']) && $this->data[$name]['error'] === UPLOAD_ERR_NO_FILE)
+                || (is_array($this->data[$name]) && count($this->data[$name]) === 1
+                    && isset($this->data[$name][0]['error']) && $this->data[$name][0]['error'] === UPLOAD_ERR_NO_FILE)
             ) {
                 if ($input instanceof InputInterface) {
                     // - test if input is required

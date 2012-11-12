@@ -28,6 +28,18 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         new Simple(1);
     }
 
+    /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testConstructorWithOptions($dateTimeFormat)
+    {
+        $options = array('dateTimeFormat' => $dateTimeFormat, 'format' => '%timestamp%');
+        $formatter = new Simple($options);
+
+        $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
+        $this->assertAttributeEquals('%timestamp%', 'format', $formatter);
+    }
+
     public function testDefaultFormat()
     {
         $date = new DateTime('2012-08-28T18:15:00Z');

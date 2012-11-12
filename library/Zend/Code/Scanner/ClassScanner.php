@@ -108,6 +108,11 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Get annotations
+     *
+>>>>>>> c7ab3b44304857c7271297becf651225c4bca6b4
      * @param  Annotation\AnnotationManager $annotationManager
      * @return Annotation\AnnotationCollection
      */
@@ -292,6 +297,11 @@ class ClassScanner implements ScannerInterface
         return $p;
     }
 
+    /**
+     * Get method names
+     *
+     * @return array
+     */
     public function getMethodNames()
     {
         $this->scan();

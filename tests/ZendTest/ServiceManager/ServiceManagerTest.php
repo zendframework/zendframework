@@ -586,4 +586,17 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->{$method}('response', $service);
         $this->{$assertion}($expected, $this->serviceManager->get('response'));
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::canonicalizeName
+     */
+    public function testCanonicalizeName()
+    {
+        $this->serviceManager->setService('foo_bar', new \stdClass());
+        $this->assertEquals(true, $this->serviceManager->has('foo_bar'));
+        $this->assertEquals(true, $this->serviceManager->has('foobar'));
+        $this->assertEquals(true, $this->serviceManager->has('foo-bar'));
+        $this->assertEquals(true, $this->serviceManager->has('foo/bar'));
+        $this->assertEquals(true, $this->serviceManager->has('foo bar'));
+    }
 }

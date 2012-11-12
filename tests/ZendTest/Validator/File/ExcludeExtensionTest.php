@@ -21,65 +21,52 @@ use Zend\Validator\File;
 class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile   = __DIR__ . '/_files/testsize.mo';
+        $pictureTests = array(
+            //    Options, isValid Param, Expected value, Expected message
+            array('mo',                       $testFile, false,  'fileExcludeExtensionFalse'),
+            array('gif',                      $testFile, true, ''),
+            array(array('mo'),                $testFile, false,  'fileExcludeExtensionFalse'),
+            array(array('gif'),               $testFile, true, ''),
+            array(array('gif', 'mo', 'pict'), $testFile, false,  'fileExcludeExtensionFalse'),
+            array(array('gif', 'gz', 'hint'), $testFile, true, ''),
+        );
+
+        $testFile   = __DIR__ . '/_files/nofile.mo';
+        $noFileTests = array(
+            //    Options, isValid Param, Expected value, message
+            array('mo', $testFile, false, 'fileExcludeExtensionNotFound'),
+        );
+
+        // Dupe data in File Upload format
+        $testData = array_merge($pictureTests, $noFileTests);
+        foreach ($testData as $data) {
+            $fileUpload = array(
+                'tmp_name' => $data[1], 'name' => basename($data[1]),
+                'size' => 200, 'error' => 0, 'type' => 'text'
+            );
+            $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
+        }
+        return $testData;
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected, $messageKey)
     {
-        $valuesExpected = array(
-            array('mo', false),
-            array('gif', true),
-            array(array('mo'), false),
-            array(array('gif'), true),
-            array(array('gif', 'pdf', 'mo', 'pict'), false),
-            array(array('gif', 'gz', 'hint'), true),
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\ExcludeExtension($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/testsize.mo'),
-                "Tested with " . var_export($element, 1)
-            );
+        $validator = new File\ExcludeExtension($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+        if (!$expected) {
+            $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
         }
-
-        $validator = new File\ExcludeExtension('mo');
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'test1',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => 'tmp_test1',
-            'error'    => 0
-        );
-        $validator = new File\ExcludeExtension('mo');
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
-        $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\ExcludeExtension('mo');
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
-        $this->assertTrue(array_key_exists('fileExcludeExtensionFalse', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\ExcludeExtension('gif');
-        $this->assertEquals(true, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
     }
 
     public function testCaseTesting()
@@ -159,6 +146,6 @@ class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
         $validator = new File\ExcludeExtension('mo');
         $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

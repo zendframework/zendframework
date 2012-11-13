@@ -37,7 +37,8 @@ class Factory
     /**
      * @param FormElementManager $formElementManager
      */
-    public function __construct(FormElementManager $formElementManager = null) {
+    public function __construct(FormElementManager $formElementManager = null)
+    {
         if ($formElementManager) {
             $this->setFormElementManager($formElementManager);
         }
@@ -558,18 +559,17 @@ class Factory
         $serviceLocator = $this->getFormElementManager()->getServiceLocator();
 
         if ($serviceLocator->has($hydratorName)) {
-            $hydrator = $serviceLocator->get($hydratorName);
-        } else {
-            if (!class_exists($hydratorName)) {
-                throw new Exception\DomainException(sprintf(
-                    'Expects string hydrator name to be a valid class name; received "%s"',
-                    $hydratorName
-                ));
-            }
-
-            $hydrator = new $hydratorName;
+            return $serviceLocator->get($hydratorName);
         }
 
+        if (!class_exists($hydratorName)) {
+            throw new Exception\DomainException(sprintf(
+                'Expects string hydrator name to be a valid class name; received "%s"',
+                $hydratorName
+            ));
+        }
+
+        $hydrator = new $hydratorName;
         return $hydrator;
     }
 }

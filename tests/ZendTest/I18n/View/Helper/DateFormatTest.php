@@ -249,6 +249,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     	$date = new DateTime('2012-07-02T22:44:03Z');
     	
     	$helper = new DateFormatHelper();
+        $helper->setTimezone('Europe/Berlin');
     	$this->assertEquals('03/2012', $helper->__invoke($date, null, null, 'it_IT', 'dd/Y'));
     	$this->assertEquals('03-2012', $helper->__invoke($date, null, null, 'it_IT', 'dd-Y'));
     }

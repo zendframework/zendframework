@@ -66,20 +66,14 @@ class FormCollection extends AbstractHelper
             return '';
         }
 
-        $markup = '';
-        $templateMarkup = '';
+        $markup           = '';
+        $templateMarkup   = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $elementHelper = $this->getElementHelper();
-        $fieldsetHelper = $this->getFieldsetHelper();
+        $elementHelper    = $this->getElementHelper();
+        $fieldsetHelper   = $this->getFieldsetHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
-            $elementOrFieldset = $element->getTemplateElement();
-
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $templateMarkup .= $fieldsetHelper($elementOrFieldset);
-            } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $elementHelper($elementOrFieldset);
-            }
+            $templateMarkup = $this->renderTemplate($element);
         }
 
         foreach ($element->getIterator() as $elementOrFieldset) {

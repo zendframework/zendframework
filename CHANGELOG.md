@@ -1,5 +1,6 @@
 # CHANGELOG
 
+
 ## 2.1.0:
 
 - The initializer for ServiceManagerAwareInterface was removed to prevent
@@ -17,6 +18,7 @@
   files.
 - New Zend\Mvc\Controller\Plugin\FilePostRedirectGet plugin for file
   upload forms.
+
 
 
 ## 2.0.2:

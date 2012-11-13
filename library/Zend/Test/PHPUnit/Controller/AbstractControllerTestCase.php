@@ -62,25 +62,52 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Trace error if enabled
+     * Get the trace error flag
+     * @return boolean
      */
-    public function tearDown()
+    public function getTraceError()
     {
-        if(true === $this->traceError) {
-            $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
-            if($exception) {
-                throw $exception;
-            }
-        }
+        return $this->traceError;
+    }
+
+    /**
+     * Set the trace error flag
+     * @param boolean $traceError
+     * @return AbstractControllerTestCase
+     */
+    public function setTraceError($traceError)
+    {
+        $this->traceError = $traceError;
+        return $this;
+    }
+
+    /**
+     * Get the usage of the console router or not
+     * @return boolean $boolean
+     */
+    public function getUseConsoleRequest()
+    {
+        return $this->useConsoleRequest;
     }
 
     /**
      * Set the usage of the console router or not
      * @param boolean $boolean
+     * @return AbstractControllerTestCase
      */
     public function setUseConsoleRequest($boolean)
     {
         $this->useConsoleRequest = (boolean)$boolean;
+        return $this;
+    }
+
+    /**
+     * Get the application config
+     * @return array the application config
+     */
+    public function getApplicationConfig()
+    {
+        return $this->applicationConfig;
     }
 
     /**
@@ -100,15 +127,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $applicationConfig['module_listener_options']['config_cache_enabled'] = false;
         }
         $this->applicationConfig = $applicationConfig;
-    }
-
-    /**
-     * Get the application config
-     * @return array the application config
-     */
-    public function getApplicationConfig()
-    {
-        return $this->applicationConfig;
+        return $this;
     }
 
     /**
@@ -214,6 +233,13 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         $this->url($url, $method, $params);
         $this->getApplication()->run();
+
+        if(true === $this->traceError) {
+            $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
+            if($exception) {
+                throw $exception;
+            }
+        }
     }
 
     /**

@@ -92,7 +92,7 @@ class Wsdl
         }
         $this->classMap = $classMap;
         $this->dom = new DOMDocument('1.0', 'utf-8');
-        $targetNamespace = $this->_escapeUri($uri);
+        $targetNamespace = $this->escapeUri($uri);
         $definitions = $this->dom->createElement('definitions');
         $definitions->setAttributeNS(self::XML_NS_URI, self::XML_NS, self::WSDL_NS_URI);
         $definitions->setAttributeNS(self::XML_NS_URI, self::XML_NS . ':' . self::TYPES_NS, $targetNamespace);
@@ -114,7 +114,7 @@ class Wsdl
      * @param string $uri
      * @return string
      */
-    protected function _escapeUri($uri)
+    protected function escapeUri($uri)
     {
         // normalize URL
         $uri = urldecode($uri);
@@ -132,7 +132,7 @@ class Wsdl
      * @param $uri
      * @return mixed
      */
-    protected function _decodeAmpersand($uri)
+    protected function decodeAmpersand($uri)
     {
         return str_replace('&amp;', '&', $uri);
     }
@@ -182,7 +182,7 @@ class Wsdl
         }
 
         if ($this->wsdl !== null) {
-            $targetNamespace = $this->_escapeUri($uri);
+            $targetNamespace = $this->escapeUri($uri);
             $this->wsdl->setAttributeNS(self::XML_NS_URI, self::XML_NS . ':' . self::TYPES_NS, $targetNamespace);
             $this->wsdl->setAttribute('targetNamespace', $targetNamespace);
             if ($this->schema !== null) {
@@ -331,7 +331,12 @@ class Wsdl
      * @param int $soapVersion SOAP version to be used in binding operation. 1.1 used by default.
      * @return DOMElement The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
      */
-    public function addBindingOperation($binding, $name, $input = false, $output = false, $fault = false,
+    public function addBindingOperation(
+        $binding,
+        $name,
+        $input = false,
+        $output = false,
+        $fault = false,
         $soapVersion = SOAP_1_1
     ) {
         $operation = $this->dom->createElement('operation');
@@ -342,7 +347,7 @@ class Wsdl
             $node = $this->dom->createElement('input');
             $soap_node = $this->dom->createElement($soapNs . ':body');
             foreach ($input as $name => $value) {
-                $soap_node->setAttribute($name, $this->_decodeAmpersand($value));
+                $soap_node->setAttribute($name, $this->decodeAmpersand($value));
             }
             $node->appendChild($soap_node);
             $operation->appendChild($node);
@@ -352,7 +357,7 @@ class Wsdl
             $node = $this->dom->createElement('output');
             $soap_node = $this->dom->createElement($soapNs . ':body');
             foreach ($output as $name => $value) {
-                $soap_node->setAttribute($name, $this->_decodeAmpersand($value));
+                $soap_node->setAttribute($name, $this->decodeAmpersand($value));
             }
             $node->appendChild($soap_node);
             $operation->appendChild($node);
@@ -365,7 +370,7 @@ class Wsdl
             }
             $soap_node = $this->dom->createElement($soapNs . ':fault');
             foreach ($fault as $name => $value) {
-                $soap_node->setAttribute($name, $this->_decodeAmpersand($value));
+                $soap_node->setAttribute($name, $this->decodeAmpersand($value));
             }
             $node->appendChild($soap_node);
             $operation->appendChild($node);
@@ -385,7 +390,10 @@ class Wsdl
      * @param int $soapVersion SOAP version to be used in binding. 1.1 used by default.
      * @return DOMElement
      */
-    public function addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http',
+    public function addSoapBinding(
+        $binding,
+        $style = 'document',
+        $transport = 'http://schemas.xmlsoap.org/soap/http',
         $soapVersion = SOAP_1_1
     ) {
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
@@ -413,7 +421,7 @@ class Wsdl
         }
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
         $soap_operation = $this->dom->createElement($soapNs . ':operation');
-        $soap_operation->setAttribute('soapAction', $this->_decodeAmpersand($soap_action));
+        $soap_operation->setAttribute('soapAction', $this->decodeAmpersand($soap_action));
 
         $operation->insertBefore($soap_operation, $operation->firstChild);
 
@@ -444,7 +452,7 @@ class Wsdl
 
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
         $soap_address = $this->dom->createElement($soapNs . ':address');
-        $soap_address->setAttribute('location', $this->_decodeAmpersand($location));
+        $soap_address->setAttribute('location', $this->decodeAmpersand($location));
 
         $port->appendChild($soap_address);
         $service->appendChild($port);

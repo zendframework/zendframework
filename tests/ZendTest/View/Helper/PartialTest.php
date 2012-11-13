@@ -94,34 +94,6 @@ class PartialTest extends TestCase
         $this->assertSame($view, $this->helper->getView());
     }
 
-    /**
-     * @return void
-     */
-    public function testCloneViewReturnsDifferentViewInstance()
-    {
-        $view = new View();
-        $this->helper->setView($view);
-        $clone = $this->helper->cloneView();
-        $this->assertNotSame($view, $clone);
-        $this->assertTrue($clone instanceof View);
-    }
-
-    /**
-     * @return void
-     */
-    public function testCloneViewClearsViewVariables()
-    {
-        $view = new View();
-        $view->foo = 'bar';
-        $this->helper->setView($view);
-
-        $clone = $this->helper->cloneView();
-        $clonedVars = $clone->vars();
-
-        $this->assertEquals(0, count($clonedVars));
-        $this->assertNull($clone->vars()->foo);
-    }
-
     public function testObjectModelWithPublicPropertiesSetsViewVariables()
     {
         $model = new \stdClass();
@@ -156,7 +128,6 @@ class PartialTest extends TestCase
 
     public function testObjectModelSetInObjectKeyWhenKeyPresent()
     {
-        $this->helper->setObjectKey('foo');
         $model = new \stdClass();
         $model->footest = 'bar';
         $model->bartest = 'baz';

@@ -23,7 +23,7 @@ use Zend\View\Variables as ViewVariables;
  * @package    Zend_View
  * @subpackage Model
  */
-class ViewModel implements ModelInterface
+class ViewModel implements ModelInterface, ClearableModelInterface
 {
     /**
      * What variable a parent model should capture this model to
@@ -211,6 +211,17 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Clear any existing renderer options/hints
+     *
+     * @return ViewModel
+     */
+    public function clearOptions()
+    {
+        $this->options = array();
+        return $this;
+    }
+
+    /**
      * Get a single view variable
      *
      * @param  string       $name
@@ -284,6 +295,19 @@ class ViewModel implements ModelInterface
     public function getVariables()
     {
         return $this->variables;
+    }
+
+    /**
+     * Clear all variables
+     *
+     * Resets the internal variable container to an empty container.
+     *
+     * @return ViewModel
+     */
+    public function clearVariables()
+    {
+        $this->variables = new ViewVariables();
+        return $this;
     }
 
     /**

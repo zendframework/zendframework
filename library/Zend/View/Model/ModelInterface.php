@@ -128,13 +128,6 @@ interface ModelInterface extends Countable, IteratorAggregate
     public function hasChildren();
 
     /**
-     * Clears out all child models
-     *
-     * @return ModelInterface
-     */
-    public function clearChildren();
-
-    /**
      * Set the name of the variable to capture this model to, if it is a child model
      *
      * @param  string $capture

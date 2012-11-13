@@ -401,7 +401,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      */
     public function render($nameOrModel, $values = null)
     {
-         if ($nameOrModel instanceof Model) {
+        if ($nameOrModel instanceof Model) {
             $model       = $nameOrModel;
             $nameOrModel = $model->getTemplate();
             if (empty($nameOrModel)) {

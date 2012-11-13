@@ -36,6 +36,16 @@ class Partial extends AbstractHelper
             return $this;
         }
 
+        if (is_scalar($values)) {
+            $values = array();
+        } elseif (is_object($values)) {
+            if (method_exists($values, 'toArray')) {
+                $values = $values->toArray();
+            } else {
+                $values = get_object_vars($values);
+            }
+        }
+
         return $this->getView()->render($name, $values);
     }
 }

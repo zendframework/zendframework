@@ -208,7 +208,7 @@ class PartialLoopTest extends TestCase
      * @group ZF-3350
      * @group ZF-3352
      */
-    /*public function testShouldNotCastToArrayIfObjectIsTraversable()
+    public function testShouldNotCastToArrayIfObjectIsTraversable()
     {
         $data = array(
             new IteratorWithToArrayTestContainer(array('message' => 'foo')),
@@ -227,7 +227,7 @@ class PartialLoopTest extends TestCase
             $string = 'This is an iteration: ' . $item->message;
             $this->assertContains($string, $result, $result);
         }
-    }*/
+    }
 
     /**
      * @group ZF-3083

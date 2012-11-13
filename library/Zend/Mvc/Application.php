@@ -323,7 +323,14 @@ class Application implements
     {
         $events = $this->getEventManager();
         $event->setTarget($this);
-        $events->trigger(MvcEvent::EVENT_RENDER, $event);
+        try {
+            $events->trigger(MvcEvent::EVENT_RENDER, $event);
+        } catch (\Exception $ex) {
+            $event->setError($this::ERROR_EXCEPTION)
+                  ->setParam('exception', $ex);
+            $events->trigger(MvcEvent::EVENT_RENDER_ERROR, $event);
+            $events->trigger(MvcEvent::EVENT_RENDER, $event);
+        }
         $events->trigger(MvcEvent::EVENT_FINISH, $event);
         return $event->getResponse();
     }

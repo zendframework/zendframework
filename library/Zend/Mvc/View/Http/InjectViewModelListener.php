@@ -41,6 +41,7 @@ class InjectViewModelListener implements ListenerAggregateInterface
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'injectViewModel'), -100);
     }
 
     /**
@@ -82,6 +83,9 @@ class InjectViewModelListener implements ListenerAggregateInterface
             return;
         }
 
+        if ($e->getError()) {
+            $model->clearChildren();
+        }
         $model->addChild($result);
     }
 }

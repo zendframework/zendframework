@@ -13,6 +13,7 @@ namespace Zend\Mvc\View\Http;
 use Zend\EventManager\EventManagerInterface as Events;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ClearableModelInterface;
 use Zend\View\Model\ModelInterface as ViewModel;
 
 class InjectViewModelListener implements ListenerAggregateInterface
@@ -41,6 +42,7 @@ class InjectViewModelListener implements ListenerAggregateInterface
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'injectViewModel'), -100);
     }
 
     /**
@@ -80,6 +82,10 @@ class InjectViewModelListener implements ListenerAggregateInterface
         if ($result->terminate()) {
             $e->setViewModel($result);
             return;
+        }
+
+        if ($e->getError() && $model instanceof ClearableModelInterface) {
+            $model->clearChildren();
         }
 
         $model->addChild($result);

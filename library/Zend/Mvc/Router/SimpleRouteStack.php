@@ -257,9 +257,9 @@ class SimpleRouteStack implements RouteStackInterface
             if (($match = $route->match($request)) instanceof RouteMatch) {
                 $match->setMatchedRouteName($name);
 
-                foreach ($this->defaultParams as $name => $value) {
-                    if ($match->getParam($name) === null) {
-                        $match->setParam($name, $value);
+                foreach ($this->defaultParams as $paramName => $value) {
+                    if ($match->getParam($paramName) === null) {
+                        $match->setParam($paramName, $value);
                     }
                 }
 

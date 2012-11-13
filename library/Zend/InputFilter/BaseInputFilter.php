@@ -20,7 +20,7 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_InputFilter
  */
-class BaseInputFilter implements InputFilterInterface
+class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface
 {
     protected $data;
     protected $inputs = array();
@@ -155,11 +155,11 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        $this->validInputs = array();
+        $this->validInputs   = array();
         $this->invalidInputs = array();
-        $valid = true;
+        $valid               = true;
 
-        $inputs = $this->validationGroup ? : array_keys($this->inputs);
+        $inputs = $this->validationGroup ?: array_keys($this->inputs);
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
             if (!array_key_exists($name, $this->data)
@@ -320,7 +320,7 @@ class BaseInputFilter implements InputFilterInterface
      */
     public function getValues()
     {
-        $inputs = $this->validationGroup ? : array_keys($this->inputs);
+        $inputs = $this->validationGroup ?: array_keys($this->inputs);
         $values = array();
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
@@ -458,9 +458,9 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        $datas = array_keys($this->data);
+        $data   = array_keys($this->data);
         $inputs = array_keys($this->inputs);
-        $diff = array_diff($datas, $inputs);
+        $diff   = array_diff($data, $inputs);
         if (!empty($diff)) {
             return count(array_intersect($diff, $inputs)) == 0;
         }
@@ -483,12 +483,12 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        $datas = array_keys($this->data);
+        $data   = array_keys($this->data);
         $inputs = array_keys($this->inputs);
-        $diff = array_diff($datas, $inputs);
+        $diff   = array_diff($data, $inputs);
 
         $unknownInputs = array();
-        $intersect = array_intersect($diff, $datas);
+        $intersect     = array_intersect($diff, $data);
         if (!empty($intersect)) {
             foreach ($intersect as $key) {
                 $unknownInputs[$key] = $this->data[$key];

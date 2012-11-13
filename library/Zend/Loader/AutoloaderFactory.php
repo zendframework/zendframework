@@ -84,7 +84,7 @@ abstract class AutoloaderFactory
             );
         }
 
-        foreach ($options as $class => $options) {
+        foreach ($options as $class => $autoloaderOptions) {
             if (!isset(static::$loaders[$class])) {
                 $autoloader = static::getStandardAutoloader();
                 if (!class_exists($class) && !$autoloader->autoload($class)) {
@@ -102,14 +102,14 @@ abstract class AutoloaderFactory
                 }
 
                 if ($class === static::STANDARD_AUTOLOADER) {
-                    $autoloader->setOptions($options);
+                    $autoloader->setOptions($autoloaderOptions);
                 } else {
-                    $autoloader = new $class($options);
+                    $autoloader = new $class($autoloaderOptions);
                 }
                 $autoloader->register();
                 static::$loaders[$class] = $autoloader;
             } else {
-                static::$loaders[$class]->setOptions($options);
+                static::$loaders[$class]->setOptions($autoloaderOptions);
             }
         }
     }

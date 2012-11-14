@@ -130,10 +130,11 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         try {
             $view->render($viewModel);
         } catch(\Exception $ex) {
+            $application = $e->getApplication();
+            $events      = $application->getEventManager();
             $e->setError(Application::ERROR_EXCEPTION)
               ->setParam('exception', $ex);
-            $e->trigger(MvcEvent::EVENT_RENDER_ERROR, $e);
-            $e->trigger(MvcEvent::EVENT_RENDER, $e);
+            $events->trigger(MvcEvent::EVENT_RENDER_ERROR, $e);
         }
 
         return $response;

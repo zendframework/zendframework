@@ -265,14 +265,14 @@ class Rename extends Filter\AbstractFilter
             return $file;
         }
 
-        if (!isset($rename['target']) or ($rename['target'] == '*')) {
+        if (!isset($rename['target']) || ($rename['target'] == '*')) {
             $rename['target'] = $rename['source'];
         }
 
         if (is_dir($rename['target'])) {
             $name = basename($rename['source']);
             $last = $rename['target'][strlen($rename['target']) - 1];
-            if (($last != '/') and ($last != '\\')) {
+            if (($last != '/') && ($last != '\\')) {
                 $rename['target'] .= DIRECTORY_SEPARATOR;
             }
 

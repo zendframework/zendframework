@@ -351,7 +351,7 @@ class ImageSize extends AbstractValidator
         $size = getimagesize($file);
         ErrorHandler::stop();
 
-        if (empty($size) or ($size[0] === 0) or ($size[1] === 0)) {
+        if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
             $this->error(self::NOT_DETECTED);
             return false;
         }
@@ -362,7 +362,7 @@ class ImageSize extends AbstractValidator
             $this->error(self::WIDTH_TOO_SMALL);
         }
 
-        if (($this->getMaxWidth() !== null) and ($this->getMaxWidth() < $this->width)) {
+        if (($this->getMaxWidth() !== null) && ($this->getMaxWidth() < $this->width)) {
             $this->error(self::WIDTH_TOO_BIG);
         }
 
@@ -370,7 +370,7 @@ class ImageSize extends AbstractValidator
             $this->error(self::HEIGHT_TOO_SMALL);
         }
 
-        if (($this->getMaxHeight() !== null) and ($this->getMaxHeight() < $this->height)) {
+        if (($this->getMaxHeight() !== null) && ($this->getMaxHeight() < $this->height)) {
             $this->error(self::HEIGHT_TOO_BIG);
         }
 

@@ -66,7 +66,7 @@ class ExcludeExtension extends Extension
         $extension  = substr($filename, strrpos($filename, '.') + 1);
         $extensions = $this->getExtension();
 
-        if ($this->getCase() and (!in_array($extension, $extensions))) {
+        if ($this->getCase() && (!in_array($extension, $extensions))) {
             return true;
         } elseif (!$this->getCase()) {
             foreach ($extensions as $ext) {

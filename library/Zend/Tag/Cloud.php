@@ -244,7 +244,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\AbstractTag)) {
-            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\Tag');
+            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\AbstractTag');
         }
 
         $this->tagDecorator = $decorator;

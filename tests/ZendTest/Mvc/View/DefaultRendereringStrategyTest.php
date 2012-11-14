@@ -15,12 +15,16 @@ use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\Http\Request;
 use Zend\Http\Response;
+use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\DefaultRenderingStrategy;
+use Zend\ServiceManager\ServiceManager;
 use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\View;
 use Zend\View\Model\ViewModel;
+use Zend\View\Resolver\TemplateMapResolver;
+use Zend\View\Strategy\PhpRendererStrategy;
 
 /**
  * @category   Zend
@@ -121,5 +125,46 @@ class DefaultRenderingStrategyTest extends TestCase
 
         $result = $this->strategy->render($this->event);
         $this->assertSame($this->response, $result);
+    }
+
+    public function testTriggersRenderErrorEventInCaseOfRenderingException()
+    {
+        $resolver = new TemplateMapResolver();
+        $resolver->add('exception', __DIR__ . '/_files/exception.phtml');
+        $this->renderer->setResolver($resolver);
+        $strategy = new PhpRendererStrategy($this->renderer);
+        $this->view->getEventManager()->attach($strategy);
+
+        $model = new ViewModel();
+        $model->setTemplate('exception');
+        $this->event->setViewModel($model);
+
+        $services = new ServiceManager();
+        $services->setService('Request', $this->request);
+        $services->setService('Response', $this->response);
+        $services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
+        $services->setFactory('EventManager', function ($services) {
+            $sharedEvents = $services->get('SharedEventManager');
+            $events = new EventManager();
+            $events->setSharedManager($sharedEvents);
+            return $events;
+        }, false);
+
+        $application = new Application(array(), $services);
+        $this->event->setApplication($application);
+
+        $test = (object) array('flag' => false);
+        $application->getEventManager()->attach('render.error', function ($e) use ($test) {
+            $test->flag      = true;
+            $test->error     = $e->getError();
+            $test->exception = $e->getParam('exception');
+        });
+
+        $this->strategy->render($this->event);
+
+        $this->assertTrue($test->flag);
+        $this->assertEquals(Application::ERROR_EXCEPTION, $test->error);
+        $this->assertInstanceOf('Exception', $test->exception);
+        $this->assertContains('script', $test->exception->getMessage());
     }
 }

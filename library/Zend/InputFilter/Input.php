@@ -101,8 +101,7 @@ class Input implements InputInterface
      */
     public function setErrorMessage($errorMessage)
     {
-        $errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
-        $this->errorMessage = $errorMessage;
+        $this->errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
         return $this;
     }
 

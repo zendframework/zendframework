@@ -61,7 +61,7 @@ class Cookies extends Headers
         );
     }
 
-    public function __construct(Headers $headers, $context = self::CONTEXT_REQUEST)
+    public function __construct(Headers $headers)
     {
         $this->headers = $headers;
         parent::__construct();

@@ -79,6 +79,7 @@ class OutputCacheTest extends CommonPatternTest
         $data = ob_get_clean();
 
         $this->assertEquals($output, $data);
+        $this->assertEquals($output, $this->_pattern->getOptions()->getStorage()->getItem($key));
     }
 
     public function testStartEndCacheHit()

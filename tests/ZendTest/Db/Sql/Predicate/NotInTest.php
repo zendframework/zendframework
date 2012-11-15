@@ -36,7 +36,7 @@ class NotInTest extends TestCase
         $expected = array(array(
             '%s NOT IN %s',
             array('foo', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_SELECT)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }

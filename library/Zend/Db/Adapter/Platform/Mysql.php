@@ -46,7 +46,7 @@ class Mysql implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
-        return '`' . str_replace('`', '\\' . '`', $identifier) . '`';
+        return '`' . str_replace('`', '``', $identifier) . '`';
     }
 
     /**
@@ -57,7 +57,7 @@ class Mysql implements PlatformInterface
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        $identifierChain = str_replace('`', '\\`', $identifierChain);
+        $identifierChain = str_replace('`', '``', $identifierChain);
         if (is_array($identifierChain)) {
             $identifierChain = implode('`.`', $identifierChain);
         }
@@ -134,7 +134,7 @@ class Mysql implements PlatformInterface
                 case 'as':
                     break;
                 default:
-                    $parts[$i] = '`' . str_replace('`', '\\' . '`', $part) . '`';
+                    $parts[$i] = '`' . str_replace('`', '``', $part) . '`';
             }
         }
         return implode('', $parts);

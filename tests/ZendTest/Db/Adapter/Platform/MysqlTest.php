@@ -52,7 +52,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('`identifier`', $this->platform->quoteIdentifier('identifier'));
         $this->assertEquals('`ident``ifier`', $this->platform->quoteIdentifier('ident`ifier'));
     }
-     
+
     /**
      * @covers Zend\Db\Adapter\Platform\Mysql::quoteIdentifierChain
      */
@@ -61,10 +61,10 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('`identifier`', $this->platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('`identifier`', $this->platform->quoteIdentifierChain(array('identifier')));
         $this->assertEquals('`schema`.`identifier`', $this->platform->quoteIdentifierChain(array('schema','identifier')));
-    
+
         $this->assertEquals('`ident``ifier`', $this->platform->quoteIdentifierChain('ident`ifier'));
         $this->assertEquals('`ident``ifier`', $this->platform->quoteIdentifierChain(array('ident`ifier')));
-        $this->assertEquals('`schema`.`ident``ifier`', $this->platform->quoteIdentifierChain(array('schema','ident`ifier')));  
+        $this->assertEquals('`schema`.`ident``ifier`', $this->platform->quoteIdentifierChain(array('schema','ident`ifier')));
     }
 
     /**

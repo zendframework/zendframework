@@ -21,8 +21,8 @@ class DateTimeTest extends TestCase
         $element = new DateTimeElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min'       => '2000-01-01T00:00:00Z',
-            'max'       => '2001-01-01T00:00:00Z',
+            'min'       => '2000-01-01T00:00Z',
+            'max'       => '2001-01-01T00:00Z',
             'step'      => '1',
         ));
 
@@ -42,11 +42,11 @@ class DateTimeTest extends TestCase
             switch ($class) {
                 case 'Zend\Validator\GreaterThan':
                     $this->assertTrue($validator->getInclusive());
-                    $this->assertEquals('2000-01-01T00:00:00Z', $validator->getMin());
+                    $this->assertEquals('2000-01-01T00:00Z', $validator->getMin());
                     break;
                 case 'Zend\Validator\LessThan':
                     $this->assertTrue($validator->getInclusive());
-                    $this->assertEquals('2001-01-01T00:00:00Z', $validator->getMax());
+                    $this->assertEquals('2001-01-01T00:00Z', $validator->getMax());
                     break;
                 case 'Zend\Validator\DateStep':
                     $dateInterval = new \DateInterval('PT1M');
@@ -58,18 +58,18 @@ class DateTimeTest extends TestCase
         }
     }
 
-    public function testUsesRfc3339FormatByDefault()
+    public function testUsesBrowserFormatByDefault()
     {
         $element = new DateTimeElement('foo');
-        $this->assertEquals(DateTime::RFC3339, $element->getFormat());
+        $this->assertEquals(DateTimeElement::DATETIME_FORMAT, $element->getFormat());
     }
 
-    public function testSpecifyingADateTimeValueWillReturnRfc3339FormattedStringByDefault()
+    public function testSpecifyingADateTimeValueWillReturnBrowserFormattedStringByDefault()
     {
         $date = new DateTime();
         $element = new DateTimeElement('foo');
         $element->setValue($date);
-        $this->assertEquals($date->format($date::RFC3339), $element->getValue());
+        $this->assertEquals($date->format(DateTimeElement::DATETIME_FORMAT), $element->getValue());
     }
 
     public function testValueIsFormattedAccordingToFormatInElement()

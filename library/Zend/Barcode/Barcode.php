@@ -22,8 +22,6 @@ use Zend\Stdlib\ArrayUtils;
  */
 abstract class Barcode
 {
-    const OBJECT   = 'OBJECT';
-    const RENDERER = 'RENDERER';
     /**
      * Default barcode TTF font name
      *

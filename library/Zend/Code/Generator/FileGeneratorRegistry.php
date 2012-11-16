@@ -40,7 +40,7 @@ class FileGeneratorRegistry
         // in the same DIRECTORY_SEPARATOR that realpath would use:
         $fileName = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $fileName);
 
-        self::$fileCodeGenerators[$fileName] = $fileCodeGenerator;
+        static::$fileCodeGenerators[$fileName] = $fileCodeGenerator;
 
     }
 }

@@ -409,7 +409,7 @@ class Segment implements RouteInterface
     private function encode($value)
     {
         $encoded = urlencode($value);
-        $encoded = strtr($encoded, self::$urlencodeCorrectionMap);
+        $encoded = strtr($encoded, static::$urlencodeCorrectionMap);
         return $encoded;
     }
 

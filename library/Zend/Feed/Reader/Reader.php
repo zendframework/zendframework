@@ -101,7 +101,7 @@ class Reader
      */
     public static function getCache()
     {
-        return self::$cache;
+        return static::$cache;
     }
 
     /**
@@ -112,7 +112,7 @@ class Reader
      */
     public static function setCache(CacheStorage $cache)
     {
-        self::$cache = $cache;
+        static::$cache = $cache;
     }
 
     /**
@@ -125,7 +125,7 @@ class Reader
      */
     public static function setHttpClient(Http\Client $httpClient)
     {
-        self::$httpClient = $httpClient;
+        static::$httpClient = $httpClient;
     }
 
 
@@ -136,11 +136,11 @@ class Reader
      */
     public static function getHttpClient()
     {
-        if (!self::$httpClient instanceof Http\Client) {
-            self::$httpClient = new Http\Client();
+        if (!static::$httpClient instanceof Http\Client) {
+            static::$httpClient = new Http\Client();
         }
 
-        return self::$httpClient;
+        return static::$httpClient;
     }
 
     /**
@@ -158,7 +158,7 @@ class Reader
      */
     public static function setHttpMethodOverride($override = true)
     {
-        self::$httpMethodOverride = $override;
+        static::$httpMethodOverride = $override;
     }
 
     /**
@@ -168,7 +168,7 @@ class Reader
      */
     public static function getHttpMethodOverride()
     {
-        return self::$httpMethodOverride;
+        return static::$httpMethodOverride;
     }
 
     /**
@@ -179,7 +179,7 @@ class Reader
      */
     public static function useHttpConditionalGet($bool = true)
     {
-        self::$httpConditionalGet = $bool;
+        static::$httpConditionalGet = $bool;
     }
 
     /**
@@ -203,7 +203,7 @@ class Reader
         $client->setUri($uri);
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
-        if (self::$httpConditionalGet && $cache) {
+        if (static::$httpConditionalGet && $cache) {
             $data = $cache->getItem($cacheId);
             if ($data) {
                 if ($etag === null) {
@@ -235,11 +235,11 @@ class Reader
                     $cache->setItem($cacheId . '_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
                 }
             }
-            return self::importString($responseXml);
+            return static::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
             if ($data) {
-                return self::importString($data);
+                return static::importString($data);
             }
             $response = $client->send();
             if ((int) $response->getStatusCode() !== 200) {
@@ -247,13 +247,13 @@ class Reader
             }
             $responseXml = $response->getBody();
             $cache->setItem($cacheId, $responseXml);
-            return self::importString($responseXml);
+            return static::importString($responseXml);
         } else {
             $response = $client->send();
             if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
-            $reader = self::importString($response->getBody());
+            $reader = static::importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
             return $reader;
         }
@@ -295,9 +295,9 @@ class Reader
             throw new Exception\RuntimeException($errormsg);
         }
 
-        $type = self::detectType($dom);
+        $type = static::detectType($dom);
 
-        self::registerCoreExtensions();
+        static::registerCoreExtensions();
 
         if (substr($type, 0, 3) == 'rss') {
             $reader = new Feed\Rss($dom, $type);
@@ -327,7 +327,7 @@ class Reader
         if ($feed === false) {
             throw new Exception\RuntimeException("File '{$filename}' could not be loaded", 0, $err);
         }
-        return self::importString($feed);
+        return static::importString($feed);
     }
 
     /**
@@ -339,7 +339,7 @@ class Reader
      */
     public static function findFeedLinks($uri)
     {
-        $client = self::getHttpClient();
+        $client = static::getHttpClient();
         $client->setUri($uri);
         $response = $client->send();
         if ($response->getStatusCode() !== 200) {
@@ -501,7 +501,7 @@ class Reader
      */
     public static function setExtensionManager(ExtensionManager $extensionManager)
     {
-        self::$extensionManager = $extensionManager;
+        static::$extensionManager = $extensionManager;
     }
 
     /**
@@ -511,10 +511,10 @@ class Reader
      */
     public static function getExtensionManager()
     {
-        if (!isset(self::$extensionManager)) {
-            self::setExtensionManager(new ExtensionManager());
+        if (!isset(static::$extensionManager)) {
+            static::setExtensionManager(new ExtensionManager());
         }
-        return self::$extensionManager;
+        return static::$extensionManager;
     }
 
     /**
@@ -528,8 +528,8 @@ class Reader
     {
         $feedName  = $name . '\Feed';
         $entryName = $name . '\Entry';
-        $manager   = self::getExtensionManager();
-        if (self::isRegistered($name)) {
+        $manager   = static::getExtensionManager();
+        if (static::isRegistered($name)) {
             if ($manager->has($feedName) || $manager->has($entryName)) {
                 return;
             }
@@ -540,10 +540,10 @@ class Reader
                 . ' using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
         if ($manager->has($feedName)) {
-            self::$extensions['feed'][] = $feedName;
+            static::$extensions['feed'][] = $feedName;
         }
         if ($manager->has($entryName)) {
-            self::$extensions['entry'][] = $entryName;
+            static::$extensions['entry'][] = $entryName;
         }
     }
 
@@ -557,8 +557,8 @@ class Reader
     {
         $feedName  = $extensionName . '\Feed';
         $entryName = $extensionName . '\Entry';
-        if (in_array($feedName, self::$extensions['feed'])
-            || in_array($entryName, self::$extensions['entry'])
+        if (in_array($feedName, static::$extensions['feed'])
+            || in_array($entryName, static::$extensions['entry'])
         ) {
             return true;
         }
@@ -572,7 +572,7 @@ class Reader
      */
     public static function getExtensions()
     {
-        return self::$extensions;
+        return static::$extensions;
     }
 
     /**
@@ -582,12 +582,12 @@ class Reader
      */
     public static function reset()
     {
-        self::$cache              = null;
-        self::$httpClient         = null;
-        self::$httpMethodOverride = false;
-        self::$httpConditionalGet = false;
-        self::$extensionManager   = null;
-        self::$extensions         = array(
+        static::$cache              = null;
+        static::$httpClient         = null;
+        static::$httpMethodOverride = false;
+        static::$httpConditionalGet = false;
+        static::$extensionManager   = null;
+        static::$extensions         = array(
             'feed' => array(
                 'DublinCore\Feed',
                 'Atom\Feed'
@@ -614,13 +614,13 @@ class Reader
      */
     protected static function registerCoreExtensions()
     {
-        self::registerExtension('DublinCore');
-        self::registerExtension('Content');
-        self::registerExtension('Atom');
-        self::registerExtension('Slash');
-        self::registerExtension('WellFormedWeb');
-        self::registerExtension('Thread');
-        self::registerExtension('Podcast');
+        static::registerExtension('DublinCore');
+        static::registerExtension('Content');
+        static::registerExtension('Atom');
+        static::registerExtension('Slash');
+        static::registerExtension('WellFormedWeb');
+        static::registerExtension('Thread');
+        static::registerExtension('Podcast');
     }
 
     /**

@@ -356,7 +356,7 @@ class Form extends Fieldset implements FormInterface
      */
     public function bindOnValidate()
     {
-        return (self::BIND_ON_VALIDATE === $this->bindOnValidate);
+        return (static::BIND_ON_VALIDATE === $this->bindOnValidate);
     }
 
     /**

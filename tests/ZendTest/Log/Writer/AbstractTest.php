@@ -30,16 +30,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->_writer = new ConcreteWriter();
     }
 
-    /**
-     * @group ZF-6085
-     */
-    public function testSetFormatter()
-    {
-        $this->_writer->setFormatter(new SimpleFormatter());
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
-        $this->_writer->setFormatter(new \StdClass());
-    }
-
     public function testSetSimpleFormatterByName()
     {
         $instance = $this->_writer->setFormatter('simple');

@@ -58,7 +58,7 @@ class Fault extends \Zend\XmlRpc\Fault
         $code             = 404;
         $message          = 'Unknown error';
 
-        foreach (array_keys(self::$faultExceptionClasses) as $class) {
+        foreach (array_keys(static::$faultExceptionClasses) as $class) {
             if ($e instanceof $class) {
                 $code    = $e->getCode();
                 $message = $e->getMessage();
@@ -69,8 +69,8 @@ class Fault extends \Zend\XmlRpc\Fault
         parent::__construct($code, $message);
 
         // Notify exception observers, if present
-        if (!empty(self::$observers)) {
-            foreach (array_keys(self::$observers) as $observer) {
+        if (!empty(static::$observers)) {
+            foreach (array_keys(static::$observers) as $observer) {
                 $observer::observe($this);
             }
         }
@@ -101,7 +101,7 @@ class Fault extends \Zend\XmlRpc\Fault
 
         foreach ($classes as $class) {
             if (is_string($class) && class_exists($class)) {
-                self::$faultExceptionClasses[$class] = true;
+                static::$faultExceptionClasses[$class] = true;
             }
         }
     }
@@ -119,8 +119,8 @@ class Fault extends \Zend\XmlRpc\Fault
         }
 
         foreach ($classes as $class) {
-            if (is_string($class) && isset(self::$faultExceptionClasses[$class])) {
-                unset(self::$faultExceptionClasses[$class]);
+            if (is_string($class) && isset(static::$faultExceptionClasses[$class])) {
+                unset(static::$faultExceptionClasses[$class]);
             }
         }
     }
@@ -146,8 +146,8 @@ class Fault extends \Zend\XmlRpc\Fault
             return false;
         }
 
-        if (!isset(self::$observers[$class])) {
-            self::$observers[$class] = true;
+        if (!isset(static::$observers[$class])) {
+            static::$observers[$class] = true;
         }
 
         return true;
@@ -161,11 +161,11 @@ class Fault extends \Zend\XmlRpc\Fault
      */
     public static function detachObserver($class)
     {
-        if (!isset(self::$observers[$class])) {
+        if (!isset(static::$observers[$class])) {
             return false;
         }
 
-        unset(self::$observers[$class]);
+        unset(static::$observers[$class]);
         return true;
     }
 

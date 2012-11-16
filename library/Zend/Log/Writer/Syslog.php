@@ -149,8 +149,8 @@ class Syslog extends AbstractWriter
      */
     protected function initializeSyslog()
     {
-        self::$lastApplication = $this->appName;
-        self::$lastFacility    = $this->facility;
+        static::$lastApplication = $this->appName;
+        static::$lastFacility    = $this->facility;
         openlog($this->appName, LOG_PID, $this->facility);
     }
 
@@ -231,8 +231,8 @@ class Syslog extends AbstractWriter
             $priority = $this->defaultPriority;
         }
 
-        if ($this->appName !== self::$lastApplication
-            || $this->facility !== self::$lastFacility
+        if ($this->appName !== static::$lastApplication
+            || $this->facility !== static::$lastFacility
         ) {
             $this->initializeSyslog();
         }

@@ -18,7 +18,8 @@
   files.
 - New Zend\Mvc\Controller\Plugin\FilePostRedirectGet plugin for file
   upload forms.
-
+- New Zend\Cache\Storage\Adapter\Session to store items into a session
+  container.
 
 
 ## 2.0.2:

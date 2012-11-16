@@ -10,7 +10,7 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
@@ -155,12 +155,13 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Prepare the delete statement
      *
-     * @param  Adapter $adapter
+     * @param  AdapterInterface $adapter
      * @param  StatementContainerInterface $statementContainer
      * @return void
      */
-    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
+    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
+        $driver = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statementContainer->getParameterContainer();
 
@@ -175,7 +176,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         // process where
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, $adapter, 'where');
+            $whereParts = $this->processExpression($this->where, $platform, $driver, 'where');
             $parameterContainer->merge($whereParts->getParameterContainer());
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
         }

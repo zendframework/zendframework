@@ -8,23 +8,25 @@
  * @package   Zend_Db
  */
 
-namespace Zend\Db\Sql;
-
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\Adapter\StatementContainerInterface;
+namespace Zend\Db\Adapter;
 
 /**
  * @category   Zend
  * @package    Zend_Db
- * @subpackage Sql
+ * @subpackage Adapter
+ *
+ * @property Driver\DriverInterface $driver
+ * @property Platform\PlatformInterface $platform
  */
-interface PreparableSqlInterface
+interface AdapterInterface
 {
+    /**
+     * @return Driver\DriverInterface
+     */
+    public function getDriver();
 
     /**
-     * @param AdapterInterface $adapter
-     * @param StatementContainerInterface $statementContainer
-     * @return void
+     * @return Platform\PlatformInterface
      */
-    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer);
+    public function getPlatform();
 }

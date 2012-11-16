@@ -64,14 +64,6 @@ class DateTimeTest extends TestCase
         $this->assertEquals(DateTimeElement::DATETIME_FORMAT, $element->getFormat());
     }
 
-//    public function testSpecifyingADateTimeValueWillReturnRfc3339FormattedStringByDefault()
-//    {
-//        $date = new DateTime();
-//        $element = new DateTimeElement('foo');
-//        $element->setValue($date);
-//        $this->assertEquals($date->format($date::RFC3339), $element->getValue());
-//    }
-
     public function testSpecifyingADateTimeValueWillReturnBrowserFormattedStringByDefault()
     {
         $date = new DateTime();

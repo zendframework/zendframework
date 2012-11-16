@@ -150,10 +150,10 @@ class DateTime extends Element implements InputProviderInterface
     protected function getStepValidator()
     {
         $stepValue = (isset($this->attributes['step']))
-            ? $this->attributes['step'] : 1; // Minutes
+                   ? $this->attributes['step'] : 1; // Minutes
 
         $baseValue = (isset($this->attributes['min']))
-            ? $this->attributes['min'] : '1970-01-01T00:00Z';
+                   ? $this->attributes['min'] : '1970-01-01T00:00Z';
 
         return new DateStepValidator(array(
             'format'    => $this->format,

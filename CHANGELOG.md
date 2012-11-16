@@ -18,7 +18,7 @@
   files.
 - New Zend\Mvc\Controller\Plugin\FilePostRedirectGet plugin for file
   upload forms.
-
+- New Zend\Cache\Storage\Adapter\XCache to store items using xcache extension.
 
 
 ## 2.0.2:

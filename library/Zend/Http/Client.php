@@ -1173,14 +1173,14 @@ class Client implements Stdlib\DispatchableInterface
 
         // First try with fileinfo functions
         if (function_exists('finfo_open')) {
-            if (self::$fileInfoDb === null) {
+            if (static::$fileInfoDb === null) {
                 ErrorHandler::start();
-                self::$fileInfoDb = finfo_open(FILEINFO_MIME);
+                static::$fileInfoDb = finfo_open(FILEINFO_MIME);
                 ErrorHandler::stop();
             }
 
-            if (self::$fileInfoDb) {
-                $type = finfo_file(self::$fileInfoDb, $file);
+            if (static::$fileInfoDb) {
+                $type = finfo_file(static::$fileInfoDb, $file);
             }
 
         } elseif (function_exists('mime_content_type')) {

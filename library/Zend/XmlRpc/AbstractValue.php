@@ -95,15 +95,15 @@ abstract class AbstractValue
      */
     public static function getGenerator()
     {
-        if (!self::$generator) {
+        if (!static::$generator) {
             if (extension_loaded('xmlwriter')) {
-                self::$generator = new Generator\XmlWriter();
+                static::$generator = new Generator\XmlWriter();
             } else {
-                self::$generator = new Generator\DomDocument();
+                static::$generator = new Generator\DomDocument();
             }
         }
 
-        return self::$generator;
+        return static::$generator;
     }
 
     /**
@@ -114,7 +114,7 @@ abstract class AbstractValue
      */
     public static function setGenerator(Generator\GeneratorInterface $generator = null)
     {
-        self::$generator = $generator;
+        static::$generator = $generator;
     }
 
     /**
@@ -125,9 +125,9 @@ abstract class AbstractValue
      */
     public static function setEncoding($encoding)
     {
-        $generator    = self::getGenerator();
+        $generator    = static::getGenerator();
         $newGenerator = new $generator($encoding);
-        self::setGenerator($newGenerator);
+        static::setGenerator($newGenerator);
     }
 
     /**
@@ -182,11 +182,11 @@ abstract class AbstractValue
         switch ($type) {
             case self::AUTO_DETECT_TYPE:
                 // Auto detect the XML-RPC native type from the PHP type of $value
-                return self::_phpVarToNativeXmlRpc($value);
+                return static::_phpVarToNativeXmlRpc($value);
 
             case self::XML_STRING:
                 // Parse the XML string given in $value and get the XML-RPC value in it
-                return self::_xmlStringToNativeXmlRpc($value);
+                return static::_xmlStringToNativeXmlRpc($value);
 
             case self::XMLRPC_TYPE_I4:
                 // fall through to the next case
@@ -245,7 +245,7 @@ abstract class AbstractValue
             } elseif ($value instanceof DateTime) {
                 return self::XMLRPC_TYPE_DATETIME;
             }
-            return self::getXmlRpcTypeByValue(get_object_vars($value));
+            return static::getXmlRpcTypeByValue(get_object_vars($value));
         } elseif (is_array($value)) {
             if (!empty($value) && is_array($value) && (array_keys($value) !== range(0, count($value) - 1))) {
                 return self::XMLRPC_TYPE_STRUCT;
@@ -293,7 +293,7 @@ abstract class AbstractValue
             }
         }
 
-        switch (self::getXmlRpcTypeByValue($value)) {
+        switch (static::getXmlRpcTypeByValue($value)) {
             case self::XMLRPC_TYPE_DATETIME:
                 return new Value\DateTime($value);
 
@@ -335,9 +335,9 @@ abstract class AbstractValue
      */
     protected static function _xmlStringToNativeXmlRpc($xml)
     {
-        self::_createSimpleXMLElement($xml);
+        static::_createSimpleXMLElement($xml);
 
-        self::_extractTypeAndValue($xml, $type, $value);
+        static::_extractTypeAndValue($xml, $type, $value);
 
         switch ($type) {
             // All valid and known XML-RPC native values
@@ -390,7 +390,7 @@ abstract class AbstractValue
                 // Parse all the elements of the array from the XML string
                 // (simple xml element) to Value objects
                 foreach ($data->value as $element) {
-                    $values[] = self::_xmlStringToNativeXmlRpc($element);
+                    $values[] = static::_xmlStringToNativeXmlRpc($element);
                 }
                 $xmlrpcValue = new Value\ArrayValue($values);
                 break;
@@ -405,7 +405,7 @@ abstract class AbstractValue
                         continue;
                         //throw new Value_Exception('Member of the '. self::XMLRPC_TYPE_STRUCT .' XML-RPC native type must contain a VALUE tag');
                     }
-                    $values[(string)$member->name] = self::_xmlStringToNativeXmlRpc($member->value);
+                    $values[(string)$member->name] = static::_xmlStringToNativeXmlRpc($member->value);
                 }
                 $xmlrpcValue = new Value\Struct($values);
                 break;

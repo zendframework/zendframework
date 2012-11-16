@@ -143,7 +143,7 @@ class Mcrypt implements SymmetricInterface
                         $this->setSalt($value);
                         break;
                     case 'padding':
-                        $plugins       = self::getPaddingPluginManager();
+                        $plugins       = static::getPaddingPluginManager();
                         $padding       = $plugins->get($value);
                         $this->padding = $padding;
                         break;
@@ -165,7 +165,7 @@ class Mcrypt implements SymmetricInterface
             return;
         }
         if (!isset($options['padding'])) {
-            $plugins       = self::getPaddingPluginManager();
+            $plugins       = static::getPaddingPluginManager();
             $padding       = $plugins->get(self::DEFAULT_PADDING);
             $this->padding = $padding;
         }
@@ -178,11 +178,11 @@ class Mcrypt implements SymmetricInterface
      */
     public static function getPaddingPluginManager()
     {
-        if (self::$paddingPlugins === null) {
+        if (static::$paddingPlugins === null) {
             self::setPaddingPluginManager(new PaddingPluginManager());
         }
 
-        return self::$paddingPlugins;
+        return static::$paddingPlugins;
     }
 
     /**
@@ -210,7 +210,7 @@ class Mcrypt implements SymmetricInterface
                 (is_object($plugins) ? get_class($plugins) : gettype($plugins))
             ));
         }
-        self::$paddingPlugins = $plugins;
+        static::$paddingPlugins = $plugins;
     }
 
     /**

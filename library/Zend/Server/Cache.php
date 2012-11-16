@@ -51,7 +51,7 @@ class Cache
         if ($methods instanceof Definition) {
             $definition = new Definition();
             foreach ($methods as $method) {
-                if (in_array($method->getName(), self::$skipMethods)) {
+                if (in_array($method->getName(), static::$skipMethods)) {
                     continue;
                 }
                 $definition->addMethod($method);

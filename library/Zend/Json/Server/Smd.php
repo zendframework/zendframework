@@ -382,7 +382,7 @@ class Smd
         $transport   = $this->getTransport();
         $envelope    = $this->getEnvelope();
         $contentType = $this->getContentType();
-        $SMDVersion  = self::SMD_VERSION;
+        $SMDVersion  = static::SMD_VERSION;
         $service = compact('transport', 'envelope', 'contentType', 'SMDVersion');
 
         if (null !== ($target = $this->getTarget())) {

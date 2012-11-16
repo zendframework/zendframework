@@ -354,7 +354,7 @@ class Logger implements LoggerInterface
     public static function registerErrorHandler(Logger $logger)
     {
         // Only register once per instance
-        if (self::$registeredErrorHandler) {
+        if (static::$registeredErrorHandler) {
             return false;
         }
 
@@ -394,7 +394,7 @@ class Logger implements LoggerInterface
                 ));
             }
         });
-        self::$registeredErrorHandler = true;
+        static::$registeredErrorHandler = true;
         return true;
     }
 
@@ -405,7 +405,7 @@ class Logger implements LoggerInterface
     public static function unregisterErrorHandler()
     {
         restore_error_handler();
-        self::$registeredErrorHandler = false;
+        static::$registeredErrorHandler = false;
     }
 
     /**
@@ -419,7 +419,7 @@ class Logger implements LoggerInterface
     public static function registerExceptionHandler(Logger $logger)
     {
         // Only register once per instance
-        if (self::$registeredExceptionHandler) {
+        if (static::$registeredExceptionHandler) {
             return false;
         }
 
@@ -438,7 +438,7 @@ class Logger implements LoggerInterface
             }
             $logger->log(Logger::ERR, $exception->getMessage(), $extra);
         });
-        self::$registeredExceptionHandler = true;
+        static::$registeredExceptionHandler = true;
         return true;
     }
 
@@ -448,6 +448,6 @@ class Logger implements LoggerInterface
     public static function unregisterExceptionHandler()
     {
         restore_exception_handler();
-        self::$registeredExceptionHandler = false;
+        static::$registeredExceptionHandler = false;
     }
 }

@@ -94,7 +94,7 @@ class BlockCipher
      */
     public static function factory($adapter, $options = array())
     {
-        $plugins = self::getSymmetricPluginManager();
+        $plugins = static::getSymmetricPluginManager();
         $adapter = $plugins->get($adapter, (array) $options);
         return new self($adapter);
     }
@@ -106,11 +106,11 @@ class BlockCipher
      */
     public static function getSymmetricPluginManager()
     {
-        if (self::$symmetricPlugins === null) {
-            self::setSymmetricPluginManager(new SymmetricPluginManager());
+        if (static::$symmetricPlugins === null) {
+            static::setSymmetricPluginManager(new SymmetricPluginManager());
         }
 
-        return self::$symmetricPlugins;
+        return static::$symmetricPlugins;
     }
 
     /**
@@ -137,7 +137,7 @@ class BlockCipher
                 (is_object($plugins) ? get_class($plugins) : gettype($plugins))
             ));
         }
-        self::$symmetricPlugins = $plugins;
+        static::$symmetricPlugins = $plugins;
     }
 
     /**

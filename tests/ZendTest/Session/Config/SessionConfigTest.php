@@ -56,6 +56,12 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(__DIR__, ini_get('session.save_path'));
     }
 
+    public function testSavePathCanBeNonDirectoryWhenSaveHandlerNotFiles()
+    {
+        $this->config->setPhpSaveHandler('user');
+        $this->config->setSavePath('/tmp/sessions.db');
+    }
+
     // session.name
 
     public function testNameDefaultsToIniSettings()

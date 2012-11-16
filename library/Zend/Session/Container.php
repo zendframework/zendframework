@@ -439,6 +439,23 @@ class Container extends ArrayObject
     }
 
     /**
+     * Exchange the current array with another array or object.
+     *
+     * @param array|object $input
+     * @return array Returns the old array
+     * @see ArrayObject::exchangeArray()
+     */
+    public function exchangeArray($input)
+    {
+        $storage = $this->verifyNamespace();
+        $name    = $this->getName();
+
+        $old = $storage[$name];
+        $storage[$name] = $input;
+        return (array) $old;
+    }
+
+    /**
      * Iterate over session container
      *
      * @return Iterator

@@ -59,6 +59,24 @@ class Proxy extends Socket
     protected $negotiated = false;
 
     /**
+     * Set the configuration array for the adapter
+     *
+     * @param array $options
+     */
+    public function setOptions($options = array())
+    {
+        //enforcing that the proxy keys are set in the form proxy_*
+        foreach ($options as $k => $v) {
+            if (preg_match("/^proxy[a-z]+/", $k)) {
+                $options['proxy_' . substr($k, 5, strlen($k))] = $v;
+                unset($options[$k]);
+            }
+        }
+
+        parent::setOptions($options);
+    }
+
+    /**
      * Connect to the remote server
      *
      * Will try to connect to the proxy server. If no proxy was set, will

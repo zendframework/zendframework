@@ -58,7 +58,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testSavePathCanBeNonDirectoryWhenSaveHandlerNotFiles()
     {
-        $this->config->setPhpSaveHandler('sqlite');
+        $this->config->setPhpSaveHandler('user');
         $this->config->setSavePath('/tmp/sessions.db');
     }
 

@@ -29,4 +29,13 @@ interface AdapterInterface
      * @return Platform\PlatformInterface
      */
     public function getPlatform();
+
+    /**
+     * Create statement
+     *
+     * @param  string $initialSql
+     * @param  ParameterContainer $initialParameters
+     * @return Driver\StatementInterface
+     */
+    public function createStatement($initialSql = null, $initialParameters = null);
 }

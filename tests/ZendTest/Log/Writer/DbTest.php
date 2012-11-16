@@ -197,15 +197,6 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->writer->write(array('message' => 'this should fail'));
     }
 
-    /**
-     * @group ZF-10089
-     */
-    public function testThrowStrictSetFormatter()
-    {
-        $this->setExpectedException('PHPUnit_Framework_Error');
-        $this->writer->setFormatter(new \StdClass());
-    }
-
     public function testWriteDateTimeAsTimestamp()
     {
         $date = new DateTime();

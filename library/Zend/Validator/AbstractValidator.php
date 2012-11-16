@@ -480,7 +480,7 @@ abstract class AbstractValidator implements
         Translator $translator = null, $textDomain = null
     )
     {
-        self::$defaultTranslator = $translator;
+        static::$defaultTranslator = $translator;
         if (null !== $textDomain) {
             self::setDefaultTranslatorTextDomain($textDomain);
         }
@@ -493,7 +493,7 @@ abstract class AbstractValidator implements
      */
     public static function getDefaultTranslator()
     {
-        return self::$defaultTranslator;
+        return static::$defaultTranslator;
     }
 
     /**
@@ -503,7 +503,7 @@ abstract class AbstractValidator implements
      */
     public static function hasDefaultTranslator()
     {
-        return (bool) self::$defaultTranslator;
+        return (bool) static::$defaultTranslator;
     }
 
     /**
@@ -514,7 +514,7 @@ abstract class AbstractValidator implements
      */
     public static function setDefaultTranslatorTextDomain($textDomain = 'default')
     {
-        self::$defaultTranslatorTextDomain = $textDomain;
+        static::$defaultTranslatorTextDomain = $textDomain;
     }
 
     /**
@@ -524,7 +524,7 @@ abstract class AbstractValidator implements
      */
     public static function getDefaultTranslatorTextDomain()
     {
-        return self::$defaultTranslatorTextDomain;
+        return static::$defaultTranslatorTextDomain;
     }
 
     /**
@@ -556,7 +556,7 @@ abstract class AbstractValidator implements
      */
     public static function getMessageLength()
     {
-        return self::$messageLength;
+        return static::$messageLength;
     }
 
     /**
@@ -566,7 +566,7 @@ abstract class AbstractValidator implements
      */
     public static function setMessageLength($length = -1)
     {
-        self::$messageLength = $length;
+        static::$messageLength = $length;
     }
 
     /**

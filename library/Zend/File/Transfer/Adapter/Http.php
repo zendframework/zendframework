@@ -291,7 +291,7 @@ class Http extends AbstractAdapter
      */
     public static function getProgress($id = null)
     {
-        if (!self::isApcAvailable() && !self::isUploadProgressAvailable()) {
+        if (!static::isApcAvailable() && !static::isUploadProgressAvailable()) {
             throw new Exception\PhpEnvironmentException('Neither APC nor UploadProgress extension installed');
         }
 
@@ -335,14 +335,14 @@ class Http extends AbstractAdapter
         }
 
         if (!empty($id)) {
-            if (self::isApcAvailable()) {
+            if (static::isApcAvailable()) {
 
-                $call = call_user_func(self::$callbackApc, ini_get('apc.rfc1867_prefix') . $id);
+                $call = call_user_func(static::$callbackApc, ini_get('apc.rfc1867_prefix') . $id);
                 if (is_array($call)) {
                     $status = $call + $status;
                 }
-            } elseif (self::isUploadProgressAvailable()) {
-                $call = call_user_func(self::$callbackUploadProgress, $id);
+            } elseif (static::isUploadProgressAvailable()) {
+                $call = call_user_func(static::$callbackUploadProgress, $id);
                 if (is_array($call)) {
                     $status = $call + $status;
                     $status['total']   = $status['bytes_total'];
@@ -361,7 +361,7 @@ class Http extends AbstractAdapter
                 $status['done']    = true;
                 $status['message'] = 'The upload has been canceled';
             } else {
-                $status['message'] = self::toByteString($status['current']) . " - " . self::toByteString($status['total']);
+                $status['message'] = static::toByteString($status['current']) . " - " . static::toByteString($status['total']);
             }
 
             $status['id'] = $id;
@@ -395,7 +395,7 @@ class Http extends AbstractAdapter
      */
     public static function isApcAvailable()
     {
-        return (bool) ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable(self::$callbackApc);
+        return (bool) ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable(static::$callbackApc);
     }
 
     /**
@@ -405,7 +405,7 @@ class Http extends AbstractAdapter
      */
     public static function isUploadProgressAvailable()
     {
-        return is_callable(self::$callbackUploadProgress);
+        return is_callable(static::$callbackUploadProgress);
     }
 
     /**

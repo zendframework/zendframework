@@ -1137,7 +1137,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         foreach ($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 if ($value['options']['useByteString']) {
-                    $result[$key] = self::toByteString($value['size']);
+                    $result[$key] = static::toByteString($value['size']);
                 } else {
                     $result[$key] = $value['size'];
                 }

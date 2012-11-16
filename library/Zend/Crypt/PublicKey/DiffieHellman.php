@@ -120,7 +120,7 @@ class DiffieHellman
      */
     public static function useOpensslExtension($flag = true)
     {
-        self::$useOpenssl = (boolean) $flag;
+        static::$useOpenssl = (boolean) $flag;
     }
 
     /**
@@ -132,7 +132,7 @@ class DiffieHellman
      */
     public function generateKeys()
     {
-        if (function_exists('openssl_dh_compute_key') && self::$useOpenssl !== false) {
+        if (function_exists('openssl_dh_compute_key') && static::$useOpenssl !== false) {
             $details = array(
                 'p' => $this->convert($this->getPrime(), self::FORMAT_NUMBER, self::FORMAT_BINARY),
                 'g' => $this->convert($this->getGenerator(), self::FORMAT_NUMBER, self::FORMAT_BINARY)
@@ -229,7 +229,7 @@ class DiffieHellman
     public function computeSecretKey($publicKey, $publicKeyFormat = self::FORMAT_NUMBER,
                                                  $secretKeyFormat = self::FORMAT_NUMBER)
     {
-        if (function_exists('openssl_dh_compute_key') && self::$useOpenssl !== false) {
+        if (function_exists('openssl_dh_compute_key') && static::$useOpenssl !== false) {
             $publicKey = $this->convert($publicKey, $publicKeyFormat, self::FORMAT_BINARY);
             $secretKey = openssl_dh_compute_key($publicKey, $this->opensslKeyResource);
             if (false === $secretKey) {

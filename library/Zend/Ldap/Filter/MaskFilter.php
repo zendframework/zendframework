@@ -30,7 +30,7 @@ class MaskFilter extends StringFilter
         $args = func_get_args();
         array_shift($args);
         for ($i = 0; $i < count($args); $i++) {
-            $args[$i] = self::escapeValue($args[$i]);
+            $args[$i] = static::escapeValue($args[$i]);
         }
         $filter = vsprintf($mask, $args);
         parent::__construct($filter);

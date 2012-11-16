@@ -77,8 +77,8 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
 
         $params = array();
         foreach ((array) $flags as $flag) {
-            if (isset(self::$searchFlags[$flag])) {
-                $params[] = self::$searchFlags[$flag];
+            if (isset(static::$searchFlags[$flag])) {
+                $params[] = static::$searchFlags[$flag];
             } else {
                 $params[] = 'KEYWORD';
                 $params[] = $this->protocol->escapeString($flag);
@@ -116,7 +116,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
 
         $flags = array();
         foreach ($data['FLAGS'] as $flag) {
-            $flags[] = isset(self::$knownFlags[$flag]) ? self::$knownFlags[$flag] : $flag;
+            $flags[] = isset(static::$knownFlags[$flag]) ? static::$knownFlags[$flag] : $flag;
         }
 
         return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $header, 'flags' => $flags));

@@ -7,3 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
+
+namespace Zend\Db\Adapter\Driver\Pgsql\Feature;
+
+class SequenceHelper
+{
+
+}

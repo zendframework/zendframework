@@ -17,6 +17,8 @@ use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 
+use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;
+
 class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -598,5 +600,19 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $this->serviceManager->has('foo-bar'));
         $this->assertEquals(true, $this->serviceManager->has('foo/bar'));
         $this->assertEquals(true, $this->serviceManager->has('foo bar'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::canCreateFromAbstractFactory
+     */
+    public function testWanCreateFromAbstractFactoryWillNotInstantiateAbstractFactoryOnce()
+    {
+        $count = FooCounterAbstractFactory::$instantiationCount;
+        $this->serviceManager->addAbstractFactory(__NAMESPACE__ . '\TestAsset\FooCounterAbstractFactory');
+
+        $this->serviceManager->canCreateFromAbstractFactory('foo', 'foo');
+        $this->serviceManager->canCreateFromAbstractFactory('foo', 'foo');
+
+        $this->assertSame($count + 1, FooCounterAbstractFactory::$instantiationCount);
     }
 }

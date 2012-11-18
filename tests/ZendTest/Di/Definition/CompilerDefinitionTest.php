@@ -47,7 +47,7 @@ class CompilerDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
 
         $this->assertEquals(
-            array('ZendTest\Di\TestAsset\CompilerClasses\C::setB:0' => array('b', 'ZendTest\Di\TestAsset\CompilerClasses\B', true)),
+            array('ZendTest\Di\TestAsset\CompilerClasses\C::setB:0' => array('b', 'ZendTest\Di\TestAsset\CompilerClasses\B', true, null)),
             $definition->getMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB')
         );
     }

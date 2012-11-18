@@ -292,15 +292,14 @@ class CompilerDefinition implements DefinitionInterface
 
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
-
             $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
-
             $def['parameters'][$methodName][$fqName] = array();
 
             // set the class name, if it exists
             $def['parameters'][$methodName][$fqName][] = $actualParamName;
             $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass()->getName() : null;
-            $def['parameters'][$methodName][$fqName][] = !$p->isOptional();
+            $def['parameters'][$methodName][$fqName][] = !($optional =$p->isOptional());
+            $def['parameters'][$methodName][$fqName][] = $optional ? $p->getDefaultValue() : null;
         }
 
     }

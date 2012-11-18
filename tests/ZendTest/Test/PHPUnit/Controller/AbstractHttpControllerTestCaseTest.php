@@ -105,21 +105,21 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
 
         // tests with case insensitive
-        $this->assertModule('baz');
-        $this->assertModule('Baz');
-        $this->assertModule('BAz');
+        $this->assertModuleName('baz');
+        $this->assertModuleName('Baz');
+        $this->assertModuleName('BAz');
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
-        $this->assertModule('Application');
+        $this->assertModuleName('Application');
     }
 
     public function testAssertNotModuleName()
     {
         $this->dispatch('/tests');
-        $this->assertNotModule('Application');
+        $this->assertNotModuleName('Application');
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
-        $this->assertNotModule('baz');
+        $this->assertNotModuleName('baz');
     }
 
     public function testAssertControllerClass()

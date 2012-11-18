@@ -426,7 +426,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  string $module
      * @return void
      */
-    public function assertModule($module)
+    public function assertModuleName($module)
     {
         $controllerClass = $this->getControllerFullClassName();
         $match = substr($controllerClass, 0, strpos($controllerClass, '\\'));
@@ -448,7 +448,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  string $module
      * @return void
      */
-    public function assertNotModule($module)
+    public function assertNotModuleName($module)
     {
         $controllerClass = $this->getControllerFullClassName();
         $match = substr($controllerClass, 0, strpos($controllerClass, '\\'));

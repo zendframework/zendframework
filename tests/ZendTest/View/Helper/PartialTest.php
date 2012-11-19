@@ -12,6 +12,7 @@ namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\View\Helper\Partial;
+use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer as View;
 
 /**
@@ -130,6 +131,43 @@ class PartialTest extends TestCase
     {
         $test = $this->helper->__invoke();
         $this->assertSame($this->helper, $test);
+    }
+
+    public function testCanPassViewModelAsSecondArgument()
+    {
+        $model = new ViewModel(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
+
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+        $return = $this->helper->__invoke('partialVars.phtml', $model);
+
+        foreach ($model->getVariables() as $key => $value) {
+            $string = sprintf('%s: %s', $key, $value);
+            $this->assertContains($string, $return);
+        }
+    }
+
+    public function testCanPassViewModelAsSoleArgument()
+    {
+        $model = new ViewModel(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
+        $model->setTemplate('partialVars.phtml');
+
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+        $return = $this->helper->__invoke($model);
+
+        foreach ($model->getVariables() as $key => $value) {
+            $string = sprintf('%s: %s', $key, $value);
+            $this->assertContains($string, $return);
+        }
     }
 }
 

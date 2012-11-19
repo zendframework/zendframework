@@ -221,6 +221,7 @@ class PartialLoopTest extends TestCase
         $view = new View();
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
+        $this->helper->setObjectKey('obj');
 
         $result = $this->helper->__invoke('partialLoopObject.phtml', $o);
         foreach ($data as $item) {

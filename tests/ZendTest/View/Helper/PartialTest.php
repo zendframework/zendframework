@@ -94,34 +94,6 @@ class PartialTest extends TestCase
         $this->assertSame($view, $this->helper->getView());
     }
 
-    /**
-     * @return void
-     */
-    public function testCloneViewReturnsDifferentViewInstance()
-    {
-        $view = new View();
-        $this->helper->setView($view);
-        $clone = $this->helper->cloneView();
-        $this->assertNotSame($view, $clone);
-        $this->assertTrue($clone instanceof View);
-    }
-
-    /**
-     * @return void
-     */
-    public function testCloneViewClearsViewVariables()
-    {
-        $view = new View();
-        $view->foo = 'bar';
-        $this->helper->setView($view);
-
-        $clone = $this->helper->cloneView();
-        $clonedVars = $clone->vars();
-
-        $this->assertEquals(0, count($clonedVars));
-        $this->assertNull($clone->vars()->foo);
-    }
-
     public function testObjectModelWithPublicPropertiesSetsViewVariables()
     {
         $model = new \stdClass();
@@ -154,54 +126,9 @@ class PartialTest extends TestCase
         }
     }
 
-    public function testObjectModelSetInObjectKeyWhenKeyPresent()
-    {
-        $this->helper->setObjectKey('foo');
-        $model = new \stdClass();
-        $model->footest = 'bar';
-        $model->bartest = 'baz';
-
-        $view = new View;
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
-        $this->helper->setView($view);
-        $return = $this->helper->__invoke('partialObj.phtml', $model);
-
-        $this->assertNotContains('No object model passed', $return);
-
-        foreach (get_object_vars($model) as $key => $value) {
-            $string = sprintf('%s: %s', $key, $value);
-            $this->assertContains($string, $return, "Checking for '$return' containing '$string'");
-        }
-    }
-
     public function testPassingNoArgsReturnsHelperInstance()
     {
         $test = $this->helper->__invoke();
-        $this->assertSame($this->helper, $test);
-    }
-
-    public function testObjectKeyIsNullByDefault()
-    {
-        $this->assertNull($this->helper->getObjectKey());
-    }
-
-    public function testCanSetObjectKey()
-    {
-        $this->testObjectKeyIsNullByDefault();
-        $this->helper->setObjectKey('foo');
-        $this->assertEquals('foo', $this->helper->getObjectKey());
-    }
-
-    public function testCanSetObjectKeyToNullValue()
-    {
-        $this->testCanSetObjectKey();
-        $this->helper->setObjectKey(null);
-        $this->assertNull($this->helper->getObjectKey());
-    }
-
-    public function testSetObjectKeyImplementsFluentInterface()
-    {
-        $test = $this->helper->setObjectKey('foo');
         $this->assertSame($this->helper, $test);
     }
 }

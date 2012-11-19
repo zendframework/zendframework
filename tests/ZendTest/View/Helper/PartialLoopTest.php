@@ -221,7 +221,6 @@ class PartialLoopTest extends TestCase
         $view = new View();
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
-        $this->helper->setObjectKey('obj');
 
         $result = $this->helper->__invoke('partialLoopObject.phtml', $o);
         foreach ($data as $item) {
@@ -245,7 +244,7 @@ class PartialLoopTest extends TestCase
     /**
      * @group ZF-2737
      */
-    public function testPartialLoopIncramentsPartialCounter()
+    public function testPartialLoopIncrementsPartialCounter()
     {
         $data = array(
             array('message' => 'foo'),
@@ -258,15 +257,8 @@ class PartialLoopTest extends TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->__invoke('partialLoopCouter.phtml', $data);
-        foreach ($data as $key => $item) {
-            $string = sprintf(
-                'This is an iteration: %s, pointer at %d',
-                $item['message'],
-                $key + 1
-            );
-            $this->assertContains($string, $result, $result);
-        }
+        $this->helper->__invoke('partialLoopCouter.phtml', $data);
+        $this->assertEquals(4, $this->helper->getPartialCounter());
     }
 
     /**
@@ -285,17 +277,11 @@ class PartialLoopTest extends TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->__invoke('partialLoopCouter.phtml', $data);
-        foreach ($data as $key=>$item) {
-            $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
-            $this->assertContains($string, $result);
-        }
+        $this->helper->__invoke('partialLoopCouter.phtml', $data);
+        $this->assertEquals(4, $this->helper->getPartialCounter());
 
-        $result = $this->helper->__invoke('partialLoopCouter.phtml', $data);
-        foreach ($data as $key=>$item) {
-            $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
-            $this->assertContains($string, $result);
-        }
+        $this->helper->__invoke('partialLoopCouter.phtml', $data);
+        $this->assertEquals(4, $this->helper->getPartialCounter());
     }
 }
 

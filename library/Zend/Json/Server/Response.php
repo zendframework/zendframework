@@ -121,7 +121,7 @@ class Response
      * @param  mixed $error
      * @return Response
      */
-    public function setError($error)
+    public function setError(Error $error = null)
     {
         $this->error = $error;
         return $this;

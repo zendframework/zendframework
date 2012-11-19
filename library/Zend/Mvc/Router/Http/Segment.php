@@ -44,15 +44,15 @@ class Segment implements RouteInterface
         '%28' => "(", // sub-delims
         '%29' => ")", // sub-delims
         '%2A' => "*", // sub-delims
-//      '%2B' => "+", // sub-delims - special value for php/urlencode
+        '%2B' => "+", // sub-delims
         '%2C' => ",", // sub-delims
-//      '%2D' => "-", // unreserved - not touched by urlencode
-//      '%2E' => ".", // unreserved - not touched by urlencode
+//      '%2D' => "-", // unreserved - not touched by rawurlencode
+//      '%2E' => ".", // unreserved - not touched by rawurlencode
         '%3A' => ":", // pchar
         '%3B' => ";", // sub-delims
         '%3D' => "=", // sub-delims
         '%40' => "@", // pchar
-//      '%5F' => "_", // unreserved - not touched by urlencode
+//      '%5F' => "_", // unreserved - not touched by rawurlencode
         '%7E' => "~", // unreserved
     );
 
@@ -408,7 +408,7 @@ class Segment implements RouteInterface
      */
     private function encode($value)
     {
-        $encoded = urlencode($value);
+        $encoded = rawurlencode($value);
         $encoded = strtr($encoded, static::$urlencodeCorrectionMap);
         return $encoded;
     }
@@ -421,6 +421,6 @@ class Segment implements RouteInterface
      */
     private function decode($value)
     {
-        return urldecode($value);
+        return rawurldecode($value);
     }
 }

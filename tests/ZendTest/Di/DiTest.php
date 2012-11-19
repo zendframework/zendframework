@@ -709,4 +709,15 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($d->a, 'ZendTest\Di\TestAsset\SetterInjection\A');
     }
 
+    /**
+     * @group ZF2-308
+     */
+    public function testWillNotCallStaticInjectionMethods()
+    {
+        $di = new Di;
+        $di->definitions()->addDefinition(new Definition\RuntimeDefinition(), false);
+        $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', array('name' => 'testName'));
+
+        $this->assertSame(\ZendTest\Di\TestAsset\SetterInjection\StaticSetter::$name, 'originalName');
+    }
 }

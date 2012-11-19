@@ -13,14 +13,14 @@ namespace ZendTest\I18n\Translator;
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\I18n\Translator\Translator;
 
+/**
+ * @requires PHP 5.4
+ */
 class TranslatorAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetTranslator()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals(null, 'translator', $object);
 
@@ -31,12 +31,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertAttributeEquals($translator, 'translator', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetTranslatorAndTextDomain()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals(null, 'translator', $object);
         $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
@@ -50,12 +47,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertAttributeEquals($textDomain, 'translatorTextDomain', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testGetTranslator()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertNull($object->getTranslator());
 
@@ -66,12 +60,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertEquals($translator, $object->getTranslator());
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testHasTranslator()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertFalse($object->hasTranslator());
 
@@ -82,12 +73,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertTrue($object->hasTranslator());
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetTranslatorEnabled()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals(true, 'translatorEnabled', $object);
 
@@ -102,12 +90,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertAttributeEquals(true, 'translatorEnabled', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testIsTranslatorEnabled()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertTrue($object->isTranslatorEnabled());
 
@@ -116,12 +101,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertFalse($object->isTranslatorEnabled());
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetTranslatorTextDomain()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
 
@@ -132,12 +114,9 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertAttributeEquals($textDomain, 'translatorTextDomain', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testGetTranslatorTextDomain()
     {
-        $object = new TestAsset\MockTranslatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertEquals('default', $object->getTranslatorTextDomain());
 

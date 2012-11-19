@@ -25,7 +25,7 @@ trait AdapterAwareTrait
     protected $adapter = null;
 
     /**
-     * setDbAdapter
+     * Set db adapter
      *
      * @param Adapter $adapter
      * @return mixed

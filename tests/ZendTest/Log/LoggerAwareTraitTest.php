@@ -13,14 +13,14 @@ namespace ZendTest\Log;
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\Log\Logger;
 
+/**
+ * @requires PHP 5.4
+ */
 class LoggerAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetLogger()
     {
-        $object = new TestAsset\MockLoggerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\Log\LoggerAwareTrait');
 
         $this->assertAttributeEquals(null, 'logger', $object);
 

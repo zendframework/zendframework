@@ -24,7 +24,7 @@ trait EventManagerAwareTrait
     protected $eventManager = null;
 
     /**
-     * setEventManager
+     * Inject an EventManager instance
      *
      * @param EventManagerInterface $eventManager
      * @return mixed
@@ -37,7 +37,7 @@ trait EventManagerAwareTrait
     }
 
     /**
-     * getEventManager
+     * Retrieve the event manager
      *
      * @return EventManagerInterface
      */

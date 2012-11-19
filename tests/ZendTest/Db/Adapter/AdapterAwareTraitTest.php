@@ -13,14 +13,14 @@ namespace ZendTest\Db\Adapter;
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\Db\Adapter\Adapter;
 
+/**
+ * @requires PHP 5.4
+ */
 class AdapterAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetDbAdapter()
     {
-        $object = new TestAsset\MockAdapterAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\Db\Adapter\AdapterAwareTrait');
 
         $this->assertAttributeEquals(null, 'adapter', $object);
 

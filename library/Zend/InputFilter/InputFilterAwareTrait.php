@@ -24,7 +24,7 @@ trait InputFilterAwareTrait
     protected $inputFilter = null;
 
     /**
-     * setInputFilter
+     * Set input filter
      *
      * @param InputFilterInterface $inputFilter
      * @return mixed
@@ -37,7 +37,7 @@ trait InputFilterAwareTrait
     }
 
     /**
-     * getInputFilter
+     * Retrieve input filter
      *
      * @return InputFilterInterface
      */

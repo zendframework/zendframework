@@ -35,7 +35,7 @@ trait TranslatorAwareTrait
     protected $translatorTextDomain = 'default';
 
     /**
-     * setTranslator
+     * Sets translator to use in helper
      *
      * @param Translator $translator
      * @param string $textDomain
@@ -53,7 +53,7 @@ trait TranslatorAwareTrait
     }
 
     /**
-     * getTranslator
+     * Returns translator used in object
      *
      * @return Translator
      */
@@ -63,7 +63,7 @@ trait TranslatorAwareTrait
     }
 
     /**
-     * hasTranslator
+     * Checks if the object has a translator
      *
      * @return bool
      */
@@ -73,7 +73,7 @@ trait TranslatorAwareTrait
     }
 
     /**
-     * setTranslatorEnabled
+     * Sets whether translator is enabled and should be used
      *
      * @param bool $enabled
      * @return mixed
@@ -86,7 +86,7 @@ trait TranslatorAwareTrait
     }
 
     /**
-     * isTranslatorEnabled
+     * Returns whether translator is enabled and should be used
      *
      * @return bool
      */
@@ -96,7 +96,7 @@ trait TranslatorAwareTrait
     }
 
     /**
-     * setTranslatorTextDomain
+     * Set translation text domain
      *
      * @param string $textDomain
      * @return mixed
@@ -109,7 +109,7 @@ trait TranslatorAwareTrait
     }
 
     /**
-     * getTranslatorTextDomain
+     * Return the translation text domain
      *
      * @return string
      */

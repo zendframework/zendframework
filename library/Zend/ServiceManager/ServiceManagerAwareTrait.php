@@ -24,7 +24,7 @@ trait ServiceManagerAwareTrait
     protected $serviceManager = null;
 
     /**
-     * setServiceManager
+     * Set service manager
      *
      * @param ServiceManager $serviceManager
      * @return mixed

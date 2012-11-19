@@ -24,7 +24,7 @@ trait SharedEventManagerAwareTrait
     protected $sharedEventManager = null;
 
     /**
-     * setSharedManager
+     * Inject a SharedEventManager instance
      *
      * @param SharedEventManagerInterface $sharedEventManager
      * @return mixed
@@ -37,7 +37,7 @@ trait SharedEventManagerAwareTrait
     }
 
     /**
-     * getSharedManager
+     * Get shared collections container
      *
      * @return SharedEventManagerInterface
      */
@@ -47,7 +47,7 @@ trait SharedEventManagerAwareTrait
     }
 
     /**
-     * unsetSharedManager
+     * Remove any shared collections
      *
      * @return mixed
      */

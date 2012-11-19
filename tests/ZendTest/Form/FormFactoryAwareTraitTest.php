@@ -12,16 +12,15 @@ namespace ZendTest\Form;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\Form\Factory;
-use \ZendTest\Form\TestAsset\MockFormFactoryAwareTrait;
 
+/**
+ * @requires PHP 5.4
+ */
 class FormFactoryAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetFormFactory()
     {
-        $object = new MockFormFactoryAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\Form\FormFactoryAwareTrait');
 
         $this->assertAttributeEquals(null, 'factory', $object);
 

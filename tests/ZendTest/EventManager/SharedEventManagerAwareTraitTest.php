@@ -13,14 +13,14 @@ namespace ZendTest\EventManager;
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\EventManager\SharedEventManager;
 
+/**
+ * @requires PHP 5.4
+ */
 class SharedEventManagerAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetSharedManager()
     {
-        $object = new TestAsset\MockSharedEventManagerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\EventManager\SharedEventManagerAwareTrait');
 
         $this->assertAttributeEquals(null, 'sharedEventManager', $object);
 
@@ -31,12 +31,9 @@ class SharedEventManagerAwareTraitTest extends TestCase
         $this->assertAttributeEquals($sharedEventManager, 'sharedEventManager', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testGetSharedManager()
     {
-        $object = new TestAsset\MockSharedEventManagerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\EventManager\SharedEventManagerAwareTrait');
 
         $this->assertEquals(null, $object->getSharedManager());
 
@@ -47,12 +44,9 @@ class SharedEventManagerAwareTraitTest extends TestCase
         $this->assertEquals($sharedEventManager, $object->getSharedManager());
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testUnsetSharedManager()
     {
-        $object = new TestAsset\MockSharedEventManagerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\EventManager\SharedEventManagerAwareTrait');
 
         $this->assertAttributeEquals(null, 'sharedEventManager', $object);
 

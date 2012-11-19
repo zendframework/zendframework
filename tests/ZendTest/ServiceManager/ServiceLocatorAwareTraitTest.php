@@ -13,14 +13,14 @@ namespace ZendTest\ServiceManager;
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\ServiceManager\ServiceManager;
 
+/**
+ * @requires PHP 5.4
+ */
 class ServiceLocatorAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetServiceLocator()
     {
-        $object = new TestAsset\MockServiceLocatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\ServiceManager\ServiceLocatorAwareTrait');
 
         $this->assertAttributeEquals(null, 'serviceLocator', $object);
 
@@ -31,12 +31,9 @@ class ServiceLocatorAwareTraitTest extends TestCase
         $this->assertAttributeEquals($serviceLocator, 'serviceLocator', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testGetServiceLocator()
     {
-        $object = new TestAsset\MockServiceLocatorAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\ServiceManager\ServiceLocatorAwareTrait');
 
         $this->assertNull($object->getServiceLocator());
 

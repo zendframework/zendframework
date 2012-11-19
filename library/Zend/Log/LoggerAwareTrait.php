@@ -24,7 +24,7 @@ trait LoggerAwareTrait
     protected $logger = null;
 
     /**
-     * setLogger
+     * Set logger object
      *
      * @param LoggerInterface $logger
      * @return mixed

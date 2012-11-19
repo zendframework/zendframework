@@ -24,7 +24,7 @@ trait ServiceLocatorAwareTrait
     protected $serviceLocator = null;
 
     /**
-     * setServiceLocator
+     * Set service locator
      *
      * @param ServiceLocatorInterface $serviceLocator
      * @return mixed
@@ -37,7 +37,7 @@ trait ServiceLocatorAwareTrait
     }
 
     /**
-     * getServiceLocator
+     * Get service locator
      *
      * @return ServiceLocator
      */

@@ -24,10 +24,10 @@ trait FormFactoryAwareTrait
     protected $factory = null;
 
     /**
-     * setFormFactory
+     * Compose a form factory into the object
      *
      * @param Factory $factory
-     * @return
+     * @return mixed
      */
     public function setFormFactory(Factory $factory)
     {

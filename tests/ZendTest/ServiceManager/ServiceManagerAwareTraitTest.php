@@ -12,14 +12,14 @@ namespace ZendTest\ServiceManager;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 
+/**
+ * @requires PHP 5.4
+ */
 class ServiceManagerAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetServiceManager()
     {
-        $object = new TestAsset\MockServiceManagerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\ServiceManager\ServiceManagerAwareTrait');
 
         $this->assertAttributeEquals(null, 'serviceManager', $object);
 

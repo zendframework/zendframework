@@ -13,14 +13,14 @@ namespace ZendTest\EventManager;
 use \PHPUnit_Framework_TestCase as TestCase;
 use \Zend\EventManager\EventManager;
 
+/**
+ * @requires PHP 5.4
+ */
 class EventManagerAwareTraitTest extends TestCase
 {
-    /**
-     * @requires PHP 5.4
-     */
     public function testSetEventManager()
     {
-        $object = new TestAsset\MockEventManagerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\EventManager\EventManagerAwareTrait');
 
         $this->assertAttributeEquals(null, 'eventManager', $object);
 
@@ -31,12 +31,9 @@ class EventManagerAwareTraitTest extends TestCase
         $this->assertAttributeEquals($eventManager, 'eventManager', $object);
     }
 
-    /**
-     * @requires PHP 5.4
-     */
     public function testGetEventManager()
     {
-        $object = new TestAsset\MockEventManagerAwareTrait;
+        $object = $this->getObjectForTrait('\Zend\EventManager\EventManagerAwareTrait');
 
         $this->assertEquals(null, $object->getEventManager());
 

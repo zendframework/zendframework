@@ -105,6 +105,46 @@ class FileInputTest extends TestCase
         $this->assertEquals('BAR', $input->getValue());
     }
 
+    public function testCanFilterArrayOfStrings()
+    {
+        $input  = new FileInput('foo');
+        $values = array('foo', 'bar', 'baz');
+        $input->setValue($values);
+        $filter = new Filter\StringToUpper();
+        $input->getFilterChain()->attach($filter);
+        $this->assertEquals($values, $input->getValue());
+        $this->assertTrue($input->isValid());
+        $this->assertEquals(array('FOO', 'BAR', 'BAZ'), $input->getValue());
+    }
+
+    public function testCanFilterArrayOfFileData()
+    {
+        $input  = new FileInput('foo');
+        $value  = array('tmp_name' => 'foo');
+        $input->setValue($value);
+        $filter = new Filter\StringToUpper();
+        $input->getFilterChain()->attach($filter);
+        $this->assertEquals('foo', $input->getValue());
+        $this->assertTrue($input->isValid());
+        $this->assertEquals('FOO', $input->getValue());
+    }
+
+    public function testCanFilterArrayOfMultiFileData()
+    {
+        $input  = new FileInput('foo');
+        $values = array(
+            array('tmp_name' => 'foo'),
+            array('tmp_name' => 'bar'),
+            array('tmp_name' => 'baz'),
+        );
+        $input->setValue($values);
+        $filter = new Filter\StringToUpper();
+        $input->getFilterChain()->attach($filter);
+        $this->assertEquals(array('foo', 'bar', 'baz'), $input->getValue());
+        $this->assertTrue($input->isValid());
+        $this->assertEquals(array('FOO', 'BAR', 'BAZ'), $input->getValue());
+    }
+
     public function testCanRetrieveRawValue()
     {
         $input  = new FileInput('foo');

@@ -33,8 +33,18 @@ class FileInput extends Input
         $filter = $this->getFilterChain();
         $value  = (is_array($this->value) && isset($this->value['tmp_name']))
                 ? $this->value['tmp_name'] : $this->value;
-        if ($this->isValid) {
+        if (is_scalar($value) && $this->isValid) {
+            // Single file input
             $value = $filter->filter($value);
+        } elseif (is_array($value)) {
+            // Multi file input (multiple attribute set)
+            $newValue = array();
+            foreach ($value as $multiFileData) {
+                $fileName = (is_array($multiFileData) && isset($multiFileData['tmp_name']))
+                            ? $multiFileData['tmp_name'] : $multiFileData;
+                $newValue[] = ($this->isValid) ? $filter->filter($fileName) : $fileName;
+            }
+            $value = $newValue;
         }
         return $value;
     }

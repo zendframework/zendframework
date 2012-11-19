@@ -58,6 +58,11 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
+        if ($element instanceof Element\DateTimeSelect) {
+            $helper = $renderer->plugin('form_date_time_select');
+            return $helper($element);
+        }
+
         if ($element instanceof Element\DateSelect) {
             $helper = $renderer->plugin('form_date_select');
             return $helper($element);

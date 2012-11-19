@@ -578,13 +578,12 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->serviceManager->setAllowOverride(true);
         $sm = $this->serviceManager;
-        $this->serviceManager->setFactory('http.response', function ($services) use ($sm) {
+        $this->serviceManager->setFactory('http.response', function () use ($sm) {
             return $sm;
         });
         $this->serviceManager->setAlias('response', 'http.response');
         $this->assertSame($sm, $this->serviceManager->get('response'));
 
-        $self = $this;
         $this->serviceManager->{$method}('response', $service);
         $this->{$assertion}($expected, $this->serviceManager->get('response'));
     }
@@ -636,5 +635,23 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->addAbstractFactory($af2);
 
         $this->assertSame($service, $this->serviceManager->create('test'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setAlias
+     * @covers Zend\ServiceManager\ServiceManager::get
+     * @covers Zend\ServiceManager\ServiceManager::retrieveFromPeeringManager
+     */
+    public function testCanGetAliasedServicesFromPeeringServiceManagers()
+    {
+        $service   = new \stdClass();
+        $peeringSm = new ServiceManager();
+
+        $peeringSm->setService('actual-service-name', $service);
+        $this->serviceManager->addPeeringServiceManager($peeringSm);
+
+        $this->serviceManager->setAlias('alias-name', 'actual-service-name');
+
+        $this->assertSame($service, $this->serviceManager->get('alias-name'));
     }
 }

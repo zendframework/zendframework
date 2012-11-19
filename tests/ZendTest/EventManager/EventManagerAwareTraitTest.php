@@ -44,6 +44,6 @@ class EventManagerAwareTraitTest extends TestCase
 
         $object->setEventManager($eventManager);
 
-        $this->assertEquals($eventManager, $this->object->getEventManager());
+        $this->assertEquals($eventManager, $object->getEventManager());
     }
 }

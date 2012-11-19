@@ -58,11 +58,11 @@ class SharedEventManagerAwareTraitTest extends TestCase
 
         $sharedEventManager = new SharedEventManager;
 
-        $this->object->setSharedManager($sharedEventManager);
+        $object->setSharedManager($sharedEventManager);
 
         $this->assertAttributeEquals($sharedEventManager, 'sharedEventManager', $object);
 
-        $this->object->unsetSharedManager();
+        $object->unsetSharedManager();
 
         $this->assertAttributeEquals(null, 'sharedEventManager', $object);
     }

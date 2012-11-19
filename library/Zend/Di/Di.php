@@ -652,20 +652,19 @@ class Di implements DependencyInjectionInterface
             $name = $value[0];
 
             if (isset($computedParams['value'][$fqParamPos])) {
-
                 // if there is a value supplied, use it
                 $resolvedParams[$index] = $computedParams['value'][$fqParamPos];
-
             } elseif (isset($computedParams['required'][$fqParamPos])) {
-
                 // detect circular dependencies! (they can only happen in instantiators)
                 if ($isInstantiator && in_array($computedParams['required'][$fqParamPos][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException(
                         "Circular dependency detected: $class depends on {$value[1]} and viceversa"
                     );
                 }
+
                 array_push($this->currentDependencies, $class);
                 $dConfig = $this->instanceManager->getConfig($computedParams['required'][$fqParamPos][0]);
+
                 if ($dConfig['shared'] === false) {
                     $resolvedParams[$index] = $this->newInstance($computedParams['required'][$fqParamPos][0], $callTimeUserParams, false);
                 } else {
@@ -673,9 +672,7 @@ class Di implements DependencyInjectionInterface
                 }
 
                 array_pop($this->currentDependencies);
-
             } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {
-
                 if ($methodIsRequired) {
                     // if this item was not marked as optional,
                     // plus it cannot be resolve, and no value exist, bail out
@@ -686,9 +683,8 @@ class Di implements DependencyInjectionInterface
                 } else {
                     return false;
                 }
-
             } else {
-                $resolvedParams[$index] = null;
+                $resolvedParams[$index] = $value[3];
             }
 
             $index++;

@@ -16,7 +16,6 @@ use Zend\Di\Definition\RuntimeDefinition;
 
 class RuntimeDefinitionTest extends TestCase
 {
-
     /**
      * @group ZF2-308
      */
@@ -25,5 +24,39 @@ class RuntimeDefinitionTest extends TestCase
         $definition = new RuntimeDefinition;
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setName'));
+    }
+
+    public function testIncludesDefaultMethodParameters()
+    {
+        $definition = new RuntimeDefinition();
+
+        $definition->forceLoadClass('ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
+
+        $this->assertSame(
+            array(
+                'ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters::__construct:0' => array(
+                    'a',
+                    null,
+                    false,
+                    null,
+                ),
+                'ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters::__construct:1' => array(
+                    'b',
+                    null,
+                    false,
+                    'defaultConstruct',
+                ),
+                'ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters::__construct:2' => array(
+                    'c',
+                    null,
+                    false,
+                    array(),
+                ),
+            ),
+            $definition->getMethodParameters(
+                'ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters',
+                '__construct'
+            )
+        );
     }
 }

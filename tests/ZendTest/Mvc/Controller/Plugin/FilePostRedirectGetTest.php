@@ -194,6 +194,13 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->assertEquals($params, $prgResult);
         $this->assertEquals($params['postval1'], $this->form->get('postval1')->getValue());
+
+        // Do GET again to make sure data is empty
+        $this->request = new Request();
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResult = $this->controller->fileprg($this->form, '/test/getPage', true);
+
+        $this->assertFalse($prgResult);
     }
 
     public function testAppliesFormErrorsOnPostRedirectGet()

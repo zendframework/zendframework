@@ -43,7 +43,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get an array with feed authors
      *
-     * @return array
+     * @return Collection\Author
      */
     public function getAuthors()
     {
@@ -65,7 +65,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if (count($authors) == 0) {
-            $authors = null;
+            $authors = new Collection\Author();
         } else {
             $authors = new Collection\Author(
                 Reader\Reader::arrayUnique($authors)

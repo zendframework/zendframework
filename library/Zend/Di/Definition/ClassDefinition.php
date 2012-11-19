@@ -104,12 +104,16 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
             $this->methodParameters[$method] = array();
         }
 
-        $type = (isset($parameterInfo['type'])) ? $parameterInfo['type'] : null;
+        $type     = (isset($parameterInfo['type'])) ? $parameterInfo['type'] : null;
         $required = (isset($parameterInfo['required'])) ? (bool) $parameterInfo['required'] : false;
+        $default  = (isset($parameterInfo['default'])) ? $parameterInfo['default'] : null;
 
         $fqName = $this->class . '::' . $method . ':' . $parameterName;
         $this->methodParameters[$method][$fqName] = array(
-            $parameterName, $type, $required
+            $parameterName,
+            $type,
+            $required,
+            $default
         );
 
         return $this;

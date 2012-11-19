@@ -720,4 +720,38 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(\ZendTest\Di\TestAsset\SetterInjection\StaticSetter::$name, 'originalName');
     }
+
+    /**
+     * @group ZF2-142
+     */
+    public function testDiWillInjectDefaultParameters()
+    {
+        $di = new Di;
+
+        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
+        $classDef->addMethod('__construct', true);
+        $classDef->addMethodParameter(
+            '__construct',
+            'a',
+            array('type' => false, 'required' => false, 'default' => null)
+        );
+        $classDef->addMethodParameter(
+            '__construct',
+            'b',
+            array('type' => false, 'required' => false, 'default' => 'defaultConstruct')
+        );
+        $classDef->addMethodParameter(
+            '__construct',
+            'c',
+            array('type' => false, 'required' => false, 'default' => array())
+        );
+
+        $di->definitions()->addDefinition($classDef, false);
+
+        $optionalParams = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
+
+        $this->assertSame(null, $optionalParams->a);
+        $this->assertSame('defaultConstruct', $optionalParams->b);
+        $this->assertSame(array(), $optionalParams->c);
+    }
 }

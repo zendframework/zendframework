@@ -65,7 +65,7 @@ class FormMonthSelect extends AbstractHelper
     {
         if (!$element instanceof MonthSelectElement) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s requires that the element is of type Zend\Form\Element\Select',
+                '%s requires that the element is of type Zend\Form\Element\MonthSelect',
                 __METHOD__
             ));
         }

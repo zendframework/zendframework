@@ -43,6 +43,7 @@ class HelperConfig implements ConfigInterface
         'formdate'               => 'Zend\Form\View\Helper\FormDate',
         'formdatetime'           => 'Zend\Form\View\Helper\FormDateTime',
         'formdatetimelocal'      => 'Zend\Form\View\Helper\FormDateTimeLocal',
+        'formdatetimeselect'     => 'Zend\Form\View\Helper\FormDateTimeSelect',
         'formdateselect'         => 'Zend\Form\View\Helper\FormDateSelect',
         'formelement'            => 'Zend\Form\View\Helper\FormElement',
         'formelementerrors'      => 'Zend\Form\View\Helper\FormElementErrors',

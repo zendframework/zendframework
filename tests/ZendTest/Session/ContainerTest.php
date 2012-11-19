@@ -515,4 +515,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $session->test = 42;
         $this->assertEquals(42, $session->test);
     }
+
+    public function testExchangeArray()
+    {
+        $this->container->offsetSet('old', 'old');
+        $this->assertTrue($this->container->offsetExists('old'));
+
+        $old = $this->container->exchangeArray(array('new' => 'new'));
+        $this->assertArrayHasKey('old', $old, "'exchangeArray' doesn't return an array of old items");
+        $this->assertFalse($this->container->offsetExists('old'), "'exchangeArray' doesn't remove old items");
+        $this->assertTrue($this->container->offsetExists('new'), "'exchangeArray' doesn't add the new array items");
+    }
 }

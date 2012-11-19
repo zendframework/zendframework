@@ -10,7 +10,7 @@
 
 namespace Zend\Form\Element;
 
-use DateTime;
+use DateTime as PhpDateTime;
 use Zend\Form\Form;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Date as DateValidator;
@@ -211,7 +211,7 @@ class DateTimeSelect extends DateSelect
      */
     public function setValue($value)
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'   => $value->format('Y'),
                 'month'  => $value->format('m'),

@@ -49,6 +49,16 @@ return array(
                     ),
                 ),
             ),
+            'redirect' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/redirect',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'redirect',
+                    ),
+                ),
+            ),
             'dnsroute' => array(
                 'type' => 'hostname',
                 'options' => array(

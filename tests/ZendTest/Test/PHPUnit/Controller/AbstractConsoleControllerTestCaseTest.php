@@ -33,18 +33,6 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
        $this->assertEquals(true, $this->useConsoleRequest);
     }
 
-    public function testApplicationClass()
-    {
-        $applicationClass = get_class($this->getApplication());
-        $this->assertEquals($applicationClass, 'Zend\Mvc\Application');
-    }
-
-    public function testApplicationServiceLocatorClass()
-    {
-        $smClass = get_class($this->getApplicationServiceLocator());
-        $this->assertEquals($smClass, 'Zend\ServiceManager\ServiceManager');
-    }
-
     public function testAssertResponseStatusCode()
     {
         $this->dispatch('--console');

@@ -29,7 +29,7 @@ use Zend\View\Helper\Placeholder;
  * @package    Zend_Test
  * @subpackage PHPUnit
  */
-class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
+abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend\Mvc\ApplicationInterface
@@ -251,6 +251,12 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         // force to re-create all components
         $this->application = null;
 
+        // reset server datas
+        $_SESSION = array();
+        $_GET     = array();
+        $_POST    = array();
+        $_COOKIE  = array();
+
         // reset singleton
         StaticEventManager::resetInstance();
         Placeholder\Registry::unsetRegistry();
@@ -354,8 +360,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         if($code != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response code "%s", actual status code is "%s"',
-                $code,
-                $match
+                $code, $match
             ));
         }
         $this->assertEquals($code, $match);
@@ -434,9 +439,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $module = strtolower($module);
         if($module != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting module "%s", actual module is "%s"',
-                $module,
-                $match
+                'Failed asserting module name "%s", actual module name is "%s"',
+                $module, $match
             ));
         }
         $this->assertEquals($module, $match);
@@ -478,8 +482,7 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         if($controller != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting controller class "%s", actual controller class is "%s"',
-                $controller,
-                $match
+                $controller, $match
             ));
         }
         $this->assertEquals($controller, $match);
@@ -520,9 +523,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $controller = strtolower($controller);
         if($controller != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting controller name "%s", actual controller is "%s"',
-                $controller,
-                $match
+                'Failed asserting controller name "%s", actual controller name is "%s"',
+                $controller, $match
             ));
         }
         $this->assertEquals($controller, $match);
@@ -563,9 +565,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $action = strtolower($action);
         if($action != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting action name "%s", actual action is "%s"',
-                $action,
-                $match
+                'Failed asserting action name "%s", actual action name is "%s"',
+                $action, $match
             ));
         }
         $this->assertEquals($action, $match);
@@ -606,9 +607,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $route = strtolower($route);
         if($route != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting matched route was "%s", actual route is "%s"',
-                $route,
-                $match
+                'Failed asserting matched route name was "%s", actual matched route name is "%s"',
+                $route, $match
             ));
         }
         $this->assertEquals($route, $match);
@@ -703,8 +703,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $match = $this->queryCount($path);
         if($match != $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times',
-                $path, $count
+                'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times, actually occurs %d times',
+                $path, $count, $match
             ));
         }
         $this->assertEquals($match, $count);
@@ -741,8 +741,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $match = $this->queryCount($path);
         if($match < $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times',
-                $path, $count
+                'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times, actually occurs %d times',
+                $path, $count, $match
             ));
         }
         $this->assertEquals(true, $match >= $count);
@@ -760,8 +760,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $match = $this->queryCount($path);
         if($match > $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times',
-                $path, $count
+                'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times, actually occurs %d times',
+                $path, $count, $match
             ));
         }
         $this->assertEquals(true, $match <= $count);
@@ -784,8 +784,8 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
         if($result->current()->nodeValue != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node denoted by %s CONTAINS content "%s"',
-                $result->current()->nodeValue, $match
+                'Failed asserting node denoted by %s CONTAINS content "%s", actual content is "%s"',
+                $path, $match, $result->current()->nodeValue
             ));
         }
         $this->assertEquals($result->current()->nodeValue, $match);
@@ -809,9 +809,57 @@ class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         if($result->current()->nodeValue == $match) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
-                $result->current()->nodeValue, $match
+                $path, $match
             ));
         }
         $this->assertNotEquals($result->current()->nodeValue, $match);
+    }
+
+    /**
+     * Assert against DOM selection; node should match content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $pattern Pattern that should be contained in matched nodes
+     * @return void
+     */
+    public function assertQueryContentRegex($path, $pattern)
+    {
+        $result = $this->query($path);
+        if($result->count() == 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        if(!preg_match($pattern, $result->current()->nodeValue)) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node denoted by %s CONTAINS content MATCHING "%s", actual content is "%s"',
+                $path, $pattern, $result->current()->nodeValue
+            ));
+        }
+        $this->assertEquals(true, (boolean)preg_match($pattern, $result->current()->nodeValue));
+    }
+
+    /**
+     * Assert against DOM selection; node should NOT match content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $pattern pattern that should NOT be contained in matched nodes
+     * @return void
+     */
+    public function assertNotQueryContentRegex($path, $pattern)
+    {
+        $result = $this->query($path);
+        if($result->count() == 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        if(preg_match($pattern, $result->current()->nodeValue)) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content MATCHING "%s"',
+                $path, $pattern
+            ));
+        }
+        $this->assertEquals(false, (boolean)preg_match($pattern, $result->current()->nodeValue));
     }
 }

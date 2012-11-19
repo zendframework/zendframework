@@ -15,7 +15,7 @@ namespace Zend\Test\PHPUnit\Controller;
  * @package    Zend_Test
  * @subpackage PHPUnit
  */
-class AbstractConsoleControllerTestCase extends AbstractControllerTestCase
+abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestCase
 {
     protected $useConsoleRequest = true;
 }

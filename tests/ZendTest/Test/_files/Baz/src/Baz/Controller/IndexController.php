@@ -8,6 +8,8 @@ class IndexController extends AbstractActionController
 {
     public function unittestsAction()
     {
+        $this->getResponse()->getHeaders()->addHeaderLine('Content-Type: text/html');
+
         $num_get = $this->getRequest()->getQuery()->get('num_get', 0);
         $num_post = $this->getRequest()->getPost()->get('num_post', 0);
 
@@ -17,6 +19,11 @@ class IndexController extends AbstractActionController
     public function consoleAction()
     {
 
+    }
+
+    public function redirectAction()
+    {
+        return $this->redirect()->toUrl('http://www.zend.com');
     }
 
     public function exceptionAction()

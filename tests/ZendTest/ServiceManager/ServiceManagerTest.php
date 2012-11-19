@@ -615,4 +615,26 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($count + 1, FooCounterAbstractFactory::$instantiationCount);
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::canCreateFromAbstractFactory
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testAbstractFactoryNotUsedIfNotAbleToCreate()
+    {
+        $service = new \stdClass;
+
+        $af1 = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
+        $af1->expects($this->any())->method('canCreateServiceWithName')->will($this->returnValue(true));
+        $af1->expects($this->any())->method('createServiceWithName')->will($this->returnValue($service));
+
+        $af2 = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
+        $af2->expects($this->any())->method('canCreateServiceWithName')->will($this->returnValue(false));
+        $af2->expects($this->never())->method('createServiceWithName');
+
+        $this->serviceManager->addAbstractFactory($af1);
+        $this->serviceManager->addAbstractFactory($af2);
+
+        $this->assertSame($service, $this->serviceManager->create('test'));
+    }
 }

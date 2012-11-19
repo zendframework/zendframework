@@ -1025,6 +1025,34 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testFieldsetValidationGroupStillPreparedWhenEmptyData()
+    {
+        $emptyData = array();
+
+        $this->populateForm();
+        $this->form->get('foobar')->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'categories',
+            'options' => array(
+                'count' => 0,
+                'target_element' => array(
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
+                )
+            )
+        ));
+
+        $this->form->setValidationGroup(array(
+            'foobar' => array(
+                'categories' => array(
+                    'name'
+                )
+            )
+        ));
+
+        $this->form->setData($emptyData);
+        $this->assertFalse($this->form->isValid());
+    }
+
     public function testApplyObjectInputFilterToBaseFieldsetAndApplyValidationGroup()
     {
         $fieldset = new Fieldset('foobar');

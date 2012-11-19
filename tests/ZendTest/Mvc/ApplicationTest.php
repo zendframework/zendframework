@@ -576,4 +576,56 @@ class ApplicationTest extends TestCase
         $event = $this->application->getMvcEvent();
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $event->getResult());
     }
+
+    /**
+     * @group 2981
+     */
+    public function testReturnsResponseFromListenerWhenRouteEventShortCircuits()
+    {
+        $this->application->bootstrap();
+        $testResponse = new Response();
+        $response = $this->application->getResponse();
+        $events   = $this->application->getEventManager();
+        $events->clearListeners(MvcEvent::EVENT_DISPATCH);
+        $events->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($testResponse) {
+            $testResponse->setContent('triggered');
+            return $testResponse;
+        }, 100);
+
+        $self      = $this;
+        $triggered = false;
+        $events->attach(MvcEvent::EVENT_FINISH, function ($e) use ($self, $testResponse, &$triggered) {
+            $self->assertSame($testResponse, $e->getResponse());
+            $triggered = true;
+        });
+
+        $this->application->run();
+        $this->assertTrue($triggered);
+    }
+
+    /**
+     * @group 2981
+     */
+    public function testReturnsResponseFromListenerWhenDispatchEventShortCircuits()
+    {
+        $this->application->bootstrap();
+        $testResponse = new Response();
+        $response = $this->application->getResponse();
+        $events   = $this->application->getEventManager();
+        $events->clearListeners(MvcEvent::EVENT_ROUTE);
+        $events->attach(MvcEvent::EVENT_DISPATCH, function ($e) use ($testResponse) {
+            $testResponse->setContent('triggered');
+            return $testResponse;
+        }, 100);
+
+        $self      = $this;
+        $triggered = false;
+        $events->attach(MvcEvent::EVENT_FINISH, function ($e) use ($self, $testResponse, &$triggered) {
+            $self->assertSame($testResponse, $e->getResponse());
+            $triggered = true;
+        });
+
+        $this->application->run();
+        $this->assertTrue($triggered);
+    }
 }

@@ -280,6 +280,7 @@ class Application implements
             $response = $result->last();
             if ($response instanceof ResponseInterface) {
                 $event->setTarget($this);
+                $event->setResponse($response);
                 $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 return $response;
             }
@@ -299,6 +300,7 @@ class Application implements
         $response = $result->last();
         if ($response instanceof ResponseInterface) {
             $event->setTarget($this);
+            $event->setResponse($response);
             $events->trigger(MvcEvent::EVENT_FINISH, $event);
             return $response;
         }

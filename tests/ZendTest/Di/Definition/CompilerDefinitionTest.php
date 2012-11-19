@@ -107,4 +107,16 @@ class CompilerDefinitionTest extends TestCase
         // The exception gets caught before the parameter's class is set
         $this->assertCount(1, current($parameters));
     }
+
+    /**
+     * @group ZF2-308
+     */
+    public function testStaticMethodsNotIncludedInDefinitions()
+    {
+        $definition = new CompilerDefinition;
+        $definition->addDirectory(__DIR__ . '/../TestAsset/SetterInjection');
+        $definition->compile();
+        $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
+        $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setName'));
+    }
 }

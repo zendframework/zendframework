@@ -260,7 +260,7 @@ class RuntimeDefinition implements DefinitionInterface
 
             $methodName = $rMethod->getName();
 
-            if ($rMethod->getName() === '__construct') {
+            if ($rMethod->getName() === '__construct' || $rMethod->isStatic()) {
                 continue;
             }
 

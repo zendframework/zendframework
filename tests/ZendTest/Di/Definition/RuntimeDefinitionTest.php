@@ -12,10 +12,18 @@ namespace ZendTest\Di\Definition;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
+use Zend\Di\Definition\RuntimeDefinition;
+
 class RuntimeDefinitionTest extends TestCase
 {
-    public function testStub()
+
+    /**
+     * @group ZF2-308
+     */
+    public function testStaticMethodsNotIncludedInDefinitions()
     {
-        $this->markTestIncomplete();
+        $definition = new RuntimeDefinition;
+        $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
+        $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setName'));
     }
 }

@@ -11,6 +11,7 @@
 namespace Zend\Test\PHPUnit\Controller;
 
 use PHPUnit_Framework_ExpectationFailedException;
+use Zend\Dom;
 
 /**
  * @category   Zend
@@ -19,7 +20,17 @@ use PHPUnit_Framework_ExpectationFailedException;
  */
 abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 {
+    /**
+     * HTTP controller must not use the console request
+     * @var boolean
+     */
     protected $useConsoleRequest = false;
+
+    /**
+     * XPath namespaces
+     * @var array
+     */
+    protected $xpathNamespaces = array();
 
     /**
      * Get response header by key
@@ -287,5 +298,516 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             ));
         }
         $this->assertEquals(false, (boolean)preg_match($pattern, $responseHeader->getFieldValue()));
+    }
+
+    /**
+     * Register XPath namespaces
+     *
+     * @param   array $xpathNamespaces
+     * @return  void
+     */
+    public function registerXpathNamespaces(array $xpathNamespaces)
+    {
+        $this->xpathNamespaces = $xpathNamespaces;
+    }
+
+    /**
+     * Execute a DOM/XPath query
+     * @param string $path
+     * @param boolean $useXpath
+     * @return array
+     */
+    protected function query($path, $useXpath = false)
+    {
+        $response = $this->getResponse();
+        $dom = new Dom\Query($response->getContent());
+        if($useXpath) {
+            $dom->registerXpathNamespaces($this->xpathNamespaces);
+            return $dom->queryXpath($path);
+        }
+        return $dom->execute($path);
+    }
+
+    /**
+     * Execute a xpath query
+     * @param string $path
+     * @return array
+     */
+    protected function xpathQuery($path)
+    {
+        return $this->query($path, true);
+    }
+
+    /**
+     * Count the dom query executed
+     * @param string $path
+     * @return integer
+     */
+    protected function queryCount($path)
+    {
+        return count($this->query($path, false));
+    }
+
+    /**
+     * Count the dom query executed
+     * @param string $path
+     * @return integer
+     */
+    protected function xpathQueryCount($path)
+    {
+        return count($this->xpathQuery($path));
+    }
+
+    /**
+     * Assert against DOM/XPath selection
+     * @param string $path
+     * @param boolean $useXpath
+     * @return void
+     */
+    protected function queryAssertion($path, $useXpath = false)
+    {
+        $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
+        $match = $this->$method($path);
+        if(!$match > 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        $this->assertEquals(true, $match > 0);
+    }
+
+    /**
+     * Assert against DOM selection
+     *
+     * @param  string $path CSS selector path
+     * @return void
+     */
+    public function assertQuery($path)
+    {
+        $this->queryAssertion($path, false);
+    }
+
+    /**
+     * Assert against XPath selection
+     *
+     * @param  string $path XPath path
+     * @return void
+     */
+    public function assertXpathQuery($path)
+    {
+        $this->queryAssertion($path, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection
+     *
+     * @param  string $path CSS selector path
+     * @param boolean $useXpath
+     * @return void
+     */
+    protected function notQueryAssertion($path, $useXpath = false)
+    {
+        $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
+        $match = $this->$method($path);
+        if($match != 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s DOES NOT EXIST', $path
+            ));
+        }
+        $this->assertEquals(0, $match);
+    }
+
+    /**
+     * Assert against DOM selection
+     *
+     * @param  string $path CSS selector path
+     * @return void
+     */
+    public function assertNotQuery($path)
+    {
+        $this->notQueryAssertion($path, false);
+    }
+
+    /**
+     * Assert against XPath selection
+     *
+     * @param  string $path XPath path
+     * @return void
+     */
+    public function assertNotXpathQuery($path)
+    {
+        $this->notQueryAssertion($path, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; should contain exact number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Number of nodes that should match
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function queryCountAssertion($path, $count, $useXpath = false)
+    {
+        $match = $this->queryCount($path);
+        if($match != $count) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times, actually occurs %d times',
+                $path, $count, $match
+            ));
+        }
+        $this->assertEquals($match, $count);
+    }
+
+    /**
+     * Assert against DOM selection; should contain exact number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Number of nodes that should match
+     * @return void
+     */
+    public function assertQueryCount($path, $count)
+    {
+        $this->queryCountAssertion($path, $count, false);
+    }
+
+    /**
+     * Assert against XPath selection; should contain exact number of nodes
+     *
+     * @param  string $path XPath path
+     * @param  string $count Number of nodes that should match
+     * @return void
+     */
+    public function assertXpathQueryCount($path, $count)
+    {
+        $this->queryCountAssertion($path, $count, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; should NOT contain exact number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Number of nodes that should NOT match
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function notQueryCountAssertion($path, $count, $useXpath = false)
+    {
+        $match = $this->queryCount($path);
+        if($match == $count) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s DOES NOT OCCUR EXACTLY %d times',
+                $path, $count
+            ));
+        }
+        $this->assertNotEquals($match, $count);
+    }
+
+    /**
+     * Assert against DOM selection; should NOT contain exact number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Number of nodes that should NOT match
+     * @return void
+     */
+    public function assertNotQueryCount($path, $count)
+    {
+        $this->notQueryCountAssertion($path, $count, false);
+    }
+
+    /**
+     * Assert against XPath selection; should NOT contain exact number of nodes
+     *
+     * @param  string $path XPath path
+     * @param  string $count Number of nodes that should NOT match
+     * @return void
+     */
+    public function assertNotXpathQueryCount($path, $count)
+    {
+        $this->notQueryCountAssertion($path, $count, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; should contain at least this number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Minimum number of nodes that should match
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function queryCountMinAssertion($path, $count, $useXpath = false)
+    {
+        $match = $this->queryCount($path);
+        if($match < $count) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times, actually occurs %d times',
+                $path, $count, $match
+            ));
+        }
+        $this->assertEquals(true, $match >= $count);
+    }
+
+    /**
+     * Assert against DOM selection; should contain at least this number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Minimum number of nodes that should match
+     * @return void
+     */
+    public function assertQueryCountMin($path, $count)
+    {
+        $this->queryCountMinAssertion($path, $count, false);
+    }
+
+    /**
+     * Assert against XPath selection; should contain at least this number of nodes
+     *
+     * @param  string $path XPath path
+     * @param  string $count Minimum number of nodes that should match
+     * @return void
+     */
+    public function assertXpathQueryCountMin($path, $count)
+    {
+        $this->queryCountMinAssertion($path, $count, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; should contain no more than this number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Maximum number of nodes that should match
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function queryCountMaxAssertion($path, $count, $useXpath = false)
+    {
+        $match = $this->queryCount($path);
+        if($match > $count) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times, actually occurs %d times',
+                $path, $count, $match
+            ));
+        }
+        $this->assertEquals(true, $match <= $count);
+    }
+
+    /**
+     * Assert against DOM selection; should contain no more than this number of nodes
+     *
+     * @param  string $path CSS selector path
+     * @param  string $count Maximum number of nodes that should match
+     * @return void
+     */
+    public function assertQueryCountMax($path, $count)
+    {
+        $this->queryCountMaxAssertion($path, $count, false);
+    }
+
+    /**
+     * Assert against XPath selection; should contain no more than this number of nodes
+     *
+     * @param  string $path XPath path
+     * @param  string $count Maximum number of nodes that should match
+     * @return void
+     */
+    public function assertXpathQueryCountMax($path, $count)
+    {
+        $this->queryCountMaxAssertion($path, $count, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; node should contain content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $match content that should be contained in matched nodes
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function queryContentContainsAssertion($path, $match, $useXpath = false)
+    {
+        $result = $this->query($path);
+        if($result->count() == 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        if($result->current()->nodeValue != $match) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node denoted by %s CONTAINS content "%s", actual content is "%s"',
+                $path, $match, $result->current()->nodeValue
+            ));
+        }
+        $this->assertEquals($result->current()->nodeValue, $match);
+    }
+
+    /**
+     * Assert against DOM selection; node should contain content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $match content that should be contained in matched nodes
+     * @return void
+     */
+    public function assertQueryContentContains($path, $match)
+    {
+        $this->queryContentContainsAssertion($path, $match, false);
+    }
+
+    /**
+     * Assert against XPath selection; node should contain content
+     *
+     * @param  string $path XPath path
+     * @param  string $match content that should be contained in matched nodes
+     * @return void
+     */
+    public function assertXpathQueryContentContains($path, $match)
+    {
+        $this->queryContentContainsAssertion($path, $match, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; node should NOT contain content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $match content that should NOT be contained in matched nodes
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function notQueryContentContainsAssertion($path, $match, $useXpath = false)
+    {
+        $result = $this->query($path);
+        if($result->count() == 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        if($result->current()->nodeValue == $match) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
+                $path, $match
+            ));
+        }
+        $this->assertNotEquals($result->current()->nodeValue, $match);
+    }
+
+    /**
+     * Assert against DOM selection; node should NOT contain content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $match content that should NOT be contained in matched nodes
+     * @return void
+     */
+    public function assertNotQueryContentContains($path, $match)
+    {
+        $this->notQueryContentContainsAssertion($path, $match, false);
+    }
+
+    /**
+     * Assert against XPath selection; node should NOT contain content
+     *
+     * @param  string $path XPath path
+     * @param  string $match content that should NOT be contained in matched nodes
+     * @return void
+     */
+    public function assertNotXpathQueryContentContains($path, $match)
+    {
+        $this->notQueryContentContainsAssertion($path, $match, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; node should match content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $pattern Pattern that should be contained in matched nodes
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function queryContentRegexAssertion($path, $pattern, $useXpath = false)
+    {
+        $result = $this->query($path);
+        if($result->count() == 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        if(!preg_match($pattern, $result->current()->nodeValue)) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node denoted by %s CONTAINS content MATCHING "%s", actual content is "%s"',
+                $path, $pattern, $result->current()->nodeValue
+            ));
+        }
+        $this->assertEquals(true, (boolean)preg_match($pattern, $result->current()->nodeValue));
+    }
+
+    /**
+     * Assert against DOM selection; node should match content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $pattern Pattern that should be contained in matched nodes
+     * @return void
+     */
+    public function assertQueryContentRegex($path, $pattern)
+    {
+        $this->queryContentRegexAssertion($path, $pattern, false);
+    }
+
+    /**
+     * Assert against XPath selection; node should match content
+     *
+     * @param  string $path XPath path
+     * @param  string $pattern Pattern that should be contained in matched nodes
+     * @return void
+     */
+    public function assertXpathQueryContentRegex($path, $pattern)
+    {
+        $this->queryContentRegexAssertion($path, $pattern, true);
+    }
+
+    /**
+     * Assert against DOM/XPath selection; node should NOT match content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $pattern pattern that should NOT be contained in matched nodes
+     * @param boolean $useXpath
+     * @return void
+     */
+    public function notQueryContentRegexAssertion($path, $pattern, $useXpath = false)
+    {
+        $result = $this->query($path);
+        if($result->count() == 0) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s EXISTS', $path
+            ));
+        }
+        if(preg_match($pattern, $result->current()->nodeValue)) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content MATCHING "%s"',
+                $path, $pattern
+            ));
+        }
+        $this->assertEquals(false, (boolean)preg_match($pattern, $result->current()->nodeValue));
+    }
+
+    /**
+     * Assert against DOM selection; node should NOT match content
+     *
+     * @param  string $path CSS selector path
+     * @param  string $pattern pattern that should NOT be contained in matched nodes
+     * @return void
+     */
+    public function assertNotQueryContentRegex($path, $pattern)
+    {
+        $this->notQueryContentRegexAssertion($path, $pattern, false);
+    }
+
+    /**
+     * Assert against XPath selection; node should NOT match content
+     *
+     * @param  string $path XPath path
+     * @param  string $pattern pattern that should NOT be contained in matched nodes
+     * @return void
+     */
+    public function assertNotXpathQueryContentRegex($path, $pattern)
+    {
+        $this->notQueryContentRegexAssertion($path, $pattern, true);
     }
 }

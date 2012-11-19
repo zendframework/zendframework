@@ -17,5 +17,9 @@ namespace Zend\Test\PHPUnit\Controller;
  */
 abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestCase
 {
+    /**
+     * HTTP controller must use the console request
+     * @var boolean
+     */
     protected $useConsoleRequest = true;
 }

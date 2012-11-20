@@ -140,7 +140,7 @@ foreach ($output as $file) {
      */
     $output = array();
     $return = null;
-    exec("php-cs-fixer --dry-run --level=psr2 " . escapeshellarg($fileName), $output, $return);
+    exec("php-cs-fixer fix --dry-run --level=psr2 " . escapeshellarg($fileName), $output, $return);
     if ($return != 0 || !empty($output)) {
         echo "PHP file fails contains CS issues: " . $fileName . ":" . PHP_EOL;
         echo implode(PHP_EOL, $output) . PHP_EOL;

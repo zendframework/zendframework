@@ -10,7 +10,7 @@
 
 namespace Zend\EventManager;
 
-use Zend\EventManager\EventManagerInterface;
+use \Zend\EventManager\ProvidesEvents;
 
 /**
  * @category Zend
@@ -18,31 +18,5 @@ use Zend\EventManager\EventManagerInterface;
  */
 trait EventManagerAwareTrait
 {
-    /**
-     * @var EventManagerInterface
-     */
-    protected $eventManager = null;
-
-    /**
-     * Inject an EventManager instance
-     *
-     * @param EventManagerInterface $eventManager
-     * @return mixed
-     */
-    public function setEventManager(EventManagerInterface $eventManager)
-    {
-        $this->eventManager = $eventManager;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve the event manager
-     *
-     * @return EventManagerInterface
-     */
-    public function getEventManager()
-    {
-        return $this->eventManager;
-    }
+    use ProvidesEvents;
 }

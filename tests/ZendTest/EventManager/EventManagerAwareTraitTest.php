@@ -22,25 +22,25 @@ class EventManagerAwareTraitTest extends TestCase
     {
         $object = $this->getObjectForTrait('\Zend\EventManager\EventManagerAwareTrait');
 
-        $this->assertAttributeEquals(null, 'eventManager', $object);
+        $this->assertAttributeEquals(null, 'events', $object);
 
         $eventManager = new EventManager;
 
         $object->setEventManager($eventManager);
 
-        $this->assertAttributeEquals($eventManager, 'eventManager', $object);
+        $this->assertAttributeEquals($eventManager, 'events', $object);
     }
 
     public function testGetEventManager()
     {
         $object = $this->getObjectForTrait('\Zend\EventManager\EventManagerAwareTrait');
 
-        $this->assertEquals(null, $object->getEventManager());
+        $this->assertInstanceOf('\Zend\EventManager\EventManagerInterface', $object->getEventManager());
 
         $eventManager = new EventManager;
 
         $object->setEventManager($eventManager);
 
-        $this->assertEquals($eventManager, $object->getEventManager());
+        $this->assertSame($eventManager, $object->getEventManager());
     }
 }

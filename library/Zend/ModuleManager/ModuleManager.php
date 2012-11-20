@@ -148,8 +148,8 @@ class ModuleManager implements ModuleManagerInterface
         }
         $event->setModule($module);
 
-        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
         $this->loadedModules[$moduleName] = $module;
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
 
         $this->loadFinished = true;
 

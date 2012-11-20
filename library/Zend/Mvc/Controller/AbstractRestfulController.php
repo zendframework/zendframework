@@ -11,6 +11,7 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Http\Request as HttpRequest;
+use Zend\Json\Decoder;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;
@@ -186,8 +187,14 @@ abstract class AbstractRestfulController extends AbstractController
      * @param Request $request
      * @return mixed
      */
-    public function processPostData(Request $request)
+    public function processPostData (Request $request)
     {
+        $contentType = strtolower( $request->getHeaders()->get('Content-Type')->getFieldValue());
+    
+        if (strpos($contentType, 'application/json') !== false) {
+            return $this->create(Decoder::decode($request->getContent()));
+        }
+    
         return $this->create($request->getPost()->toArray());
     }
 
@@ -206,6 +213,13 @@ abstract class AbstractRestfulController extends AbstractController
                 throw new Exception\DomainException('Missing identifier');
             }
         }
+        
+        $contentType = strtolower( $request->getHeaders()->get('Content-Type')->getFieldValue());
+        
+        if (strpos($contentType, 'application/json') !== false) {
+            return $this->update($id, Decoder::decode($request->getContent()));
+        }
+        
         $content = $request->getContent();
         parse_str($content, $parsedParams);
 

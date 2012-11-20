@@ -35,8 +35,8 @@ class PostRedirectGet extends AbstractPlugin
         $container  = $this->getSessionContainer();
 
         if ($request->isPost()) {
-            $container->post = $request->getPost()->toArray();
             $container->setExpirationHops(1, 'post');
+            $container->post = $request->getPost()->toArray();
             return $this->redirect($redirect, $redirectToUrl);
         } else {
             if ($container->post !== null) {

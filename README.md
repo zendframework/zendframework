@@ -5,7 +5,7 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.4dev*
+*Zend Framework 2.0.4*
 
 This is the fourth maintenance release for the 2.0 series.
 

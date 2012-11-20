@@ -36,6 +36,8 @@ class FilePostRedirectGet extends AbstractPlugin
         $container  = $this->getSessionContainer();
 
         if ($request->isPost()) {
+            $container->setExpirationHops(1, array('post', 'errors'));
+
             $post = array_merge(
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
@@ -46,7 +48,6 @@ class FilePostRedirectGet extends AbstractPlugin
             if (!$form->isValid()) {
                 $container->errors = $form->getMessages();
             }
-            $container->setExpirationHops(1, array('post', 'errors'));
 
             return $this->redirect($redirect, $redirectToUrl);
         } else {

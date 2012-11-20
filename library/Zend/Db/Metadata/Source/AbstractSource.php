@@ -146,6 +146,7 @@ abstract class AbstractSource implements MetadataInterface
                 throw new \Exception('Table "' . $tableName . '" is of an unsupported type "' . $data['table_type'] . '"');
         }
         $table->setColumns($this->getColumns($tableName, $schema));
+        $table->setConstraints($this->getConstraints($tableName, $schema));
         return $table;
     }
 

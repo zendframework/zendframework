@@ -1,5 +1,94 @@
 # CHANGELOG
 
+## 2.0.4
+
+- 2808: Add serializer better inheritance and extension
+  (https://github.com/zendframework/zf2/issues/2808)
+- 2813: Add test on canonical name with the ServiceManager
+  (https://github.com/zendframework/zf2/issues/2813)
+- 2832: bugfix: The helper DateFormat does not cache correctly when a pattern is
+  set. (https://github.com/zendframework/zf2/issues/2832)
+- 2837: Add empty option before empty check
+  (https://github.com/zendframework/zf2/issues/2837)
+- 2843: change self:: with static:: in call-ing static property/method
+  (https://github.com/zendframework/zf2/issues/2843)
+- 2857: Unnecessary path assembly on return in
+  Zend\Mvc\Router\Http\TreeRouteStack->assemble() line 236
+  (https://github.com/zendframework/zf2/issues/2857)
+- 2867: Enable view sub-directories when using ModuleRouteListener
+  (https://github.com/zendframework/zf2/issues/2867)
+- 2872: Resolve naming conflicts in foreach statements
+  (https://github.com/zendframework/zf2/issues/2872)
+- 2878: Fix : change self:: with static:: in call-ing static property/method()
+  in other components ( all ) (https://github.com/zendframework/zf2/issues/2878)
+- 2879: remove unused const in Zend\Barcode\Barcode.php
+  (https://github.com/zendframework/zf2/issues/2879)
+- 2896: Constraints in Zend\Db\Metadata\Source\AbstractSource::getTable not
+  initalised (https://github.com/zendframework/zf2/issues/2896)
+- 2907: Fixed proxy adapter keys being incorrectly set due Zend\Http\Client
+  (https://github.com/zendframework/zf2/issues/2907)
+- 2909: Change format of Form element DateTime and DateTimeLocal
+  (https://github.com/zendframework/zf2/issues/2909)
+- 2921: Added Chinese translations for zf2 validate/captcha resources
+  (https://github.com/zendframework/zf2/issues/2921)
+- 2924: small speed-up of Zend\EventManager\EventManager::triggerListeners()
+  (https://github.com/zendframework/zf2/issues/2924)
+- 2929: SetCookie::getFieldValue() always uses urlencode() for cookie values,
+  even in case they are already encoded
+  (https://github.com/zendframework/zf2/issues/2929)
+- 2930: Add minor test coverage to MvcEvent
+  (https://github.com/zendframework/zf2/issues/2930)
+- 2932: Sessions: SessionConfig does not allow setting non-directory save path
+  (https://github.com/zendframework/zf2/issues/2932)
+- 2937: preserve matched route name within route match instance while
+  forwarding... (https://github.com/zendframework/zf2/issues/2937)
+- 2940: change 'Cloud\Decorator\Tag' to 'Cloud\Decorator\AbstractTag'
+  (https://github.com/zendframework/zf2/issues/2940)
+- 2941: Logical operator fix : 'or' change to '||' and 'and' change to '&&'
+  (https://github.com/zendframework/zf2/issues/2941)
+- 2952: Various Zend\Mvc\Router\Http routers turn + into a space in path
+  segments (https://github.com/zendframework/zf2/issues/2952)
+- 2957: Make Partial proxy to view render function
+  (https://github.com/zendframework/zf2/issues/2957)
+- 2971: Zend\Http\Cookie undefined self::CONTEXT_REQUEST
+  (https://github.com/zendframework/zf2/issues/2971)
+- 2976: Fix for #2541 (https://github.com/zendframework/zf2/issues/2976)
+- 2981: Controller action HttpResponse is not used by SendResponseListener
+  (https://github.com/zendframework/zf2/issues/2981)
+- 2983: replaced all calls to $this->xpath with $this->getXpath() to always
+  have... (https://github.com/zendframework/zf2/issues/2983)
+- 2986: Add class to file missing a class (fixes #2789)
+  (https://github.com/zendframework/zf2/issues/2986)
+- 2987: fixed Zend\Session\Container::exchangeArray
+  (https://github.com/zendframework/zf2/issues/2987)
+- 2994: Fixes #2993 - Add missing asterisk to method docblock
+  (https://github.com/zendframework/zf2/issues/2994)
+- 2997: Fixing abstract factory instantiation time
+  (https://github.com/zendframework/zf2/issues/2997)
+- 2999: Fix for GitHub issue 2579
+  (https://github.com/zendframework/zf2/issues/2999)
+- 3002: update master's resources/ja Zend_Validate.php message
+  (https://github.com/zendframework/zf2/issues/3002)
+- 3003: Adding tests for zendframework/zf2#2593
+  (https://github.com/zendframework/zf2/issues/3003)
+- 3006: Hotfix for #2497 (https://github.com/zendframework/zf2/issues/3006)
+- 3007: Fix for issue 3001 Zend\Db\Sql\Predicate\Between fails with min and max
+  ... (https://github.com/zendframework/zf2/issues/3007)
+- 3008: Hotfix for #2482 (https://github.com/zendframework/zf2/issues/3008)
+- 3009: Hotfix for #2451 (https://github.com/zendframework/zf2/issues/3009)
+- 3013: Solved Issue 2857 (https://github.com/zendframework/zf2/issues/3013)
+- 3025: Removing the separator between the hidden and the visible inputs. As
+  the... (https://github.com/zendframework/zf2/issues/3025)
+- 3027: Reduced #calls of plugin() in PhpRenderer using a cache mechanism
+  (https://github.com/zendframework/zf2/issues/3027)
+- 3029: Fixed the pre-commit script, missed the fix command
+  (https://github.com/zendframework/zf2/issues/3029)
+- 3030: Mark module as loaded before trigginer EVENT_LOAD_MODULE
+  (https://github.com/zendframework/zf2/issues/3030)
+- 3031: Zend\Db\Sql Fix for Insert's Merge and Set capabilities with simlar keys
+  (https://github.com/zendframework/zf2/issues/3031)
+
+
 ## 2.0.3:
 
 - 2244: Fix for issue ZF2-503 (https://github.com/zendframework/zf2/issues/2244)

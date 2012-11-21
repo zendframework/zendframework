@@ -446,7 +446,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Text process*() methods will return proper array when internally called, part of extension API
      * @dataProvider providerData
      * @covers Zend\Db\Sql\Select::processSelect
-     * @covers Zend\Db\Sql\Select::processJoin
+     * @covers Zend\Db\Sql\Select::processJoins
      * @covers Zend\Db\Sql\Select::processWhere
      * @covers Zend\Db\Sql\Select::processGroup
      * @covers Zend\Db\Sql\Select::processHaving

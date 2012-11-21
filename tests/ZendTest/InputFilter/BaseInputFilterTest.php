@@ -446,14 +446,8 @@ class BaseInputFilterTest extends TestCase
     public function testValidationSkipsFileInputsMarkedNotRequiredWhenNoMultiFileDataIsPresent()
     {
         $filter = new InputFilter();
-
-        $explode = new Validator\File\Explode();
-        $explode->setValidator(new Validator\File\Upload());
-
-        $foo   = new FileInput();
-        $foo->getValidatorChain()->addValidator($explode);
+        $foo    = new FileInput();
         $foo->setRequired(false);
-
         $filter->add($foo, 'foo');
 
         $data = array(

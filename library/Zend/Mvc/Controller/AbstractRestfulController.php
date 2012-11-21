@@ -11,7 +11,7 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Http\Request as HttpRequest;
-use Zend\Json\Decoder;
+use Zend\Json\Json;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;
@@ -192,7 +192,7 @@ abstract class AbstractRestfulController extends AbstractController
         $contentType = strtolower( $request->getHeaders()->get('Content-Type')->getFieldValue());
     
         if (strpos($contentType, 'application/json') !== false) {
-            return $this->create(Decoder::decode($request->getContent()));
+            return $this->create(Json::decode($request->getContent()));
         }
     
         return $this->create($request->getPost()->toArray());
@@ -217,7 +217,7 @@ abstract class AbstractRestfulController extends AbstractController
         $contentType = strtolower( $request->getHeaders()->get('Content-Type')->getFieldValue());
         
         if (strpos($contentType, 'application/json') !== false) {
-            return $this->update($id, Decoder::decode($request->getContent()));
+            return $this->update($id, Json::decode($request->getContent()));
         }
         
         $content = $request->getContent();

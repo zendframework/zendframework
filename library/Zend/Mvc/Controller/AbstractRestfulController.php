@@ -26,11 +26,23 @@ use Zend\Stdlib\ResponseInterface as Response;
  */
 abstract class AbstractRestfulController extends AbstractController
 {
+    const CONTENT_TYPE_JSON = 'json';
+    
     /**
      * @var string
      */
     protected $eventIdentifier = __CLASS__;
-
+    
+    /**
+     * @var array
+     */
+    protected $contentTypes = array(
+        self::CONTENT_TYPE_JSON => array(
+            'application/vnd.myapp.resource+json',
+            'application/json'
+        )
+    );
+    
     /**
      * Return list of resources
      *
@@ -189,9 +201,7 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function processPostData (Request $request)
     {
-        $contentType = strtolower( $request->getHeaders()->get('Content-Type')->getFieldValue());
-    
-        if (strpos($contentType, 'application/json') !== false) {
+        if($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
             return $this->create(Json::decode($request->getContent()));
         }
     
@@ -214,9 +224,7 @@ abstract class AbstractRestfulController extends AbstractController
             }
         }
         
-        $contentType = strtolower( $request->getHeaders()->get('Content-Type')->getFieldValue());
-        
-        if (strpos($contentType, 'application/json') !== false) {
+        if($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
             return $this->update($id, Json::decode($request->getContent()));
         }
         
@@ -224,6 +232,26 @@ abstract class AbstractRestfulController extends AbstractController
         parse_str($content, $parsedParams);
 
         return $this->update($id, $parsedParams);
+    }
+    
+    /**
+     * Check if request has certain content type
+     *
+     * @return boolean
+     */
+    public function requestHasContentType (Request $request, $contentType = '')
+    {
+        $requestContentTypeValue = $request->getHeaders()->get('Content-Type')->getFieldValue();
+        
+        if(array_key_exists($contentType, $this->contentTypes)) {
+            foreach ($this->contentTypes[$contentType] as $contentTypeValue) {
+                if (strpos(strtolower($requestContentTypeValue), strtolower($contentTypeValue)) !== false) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
 }

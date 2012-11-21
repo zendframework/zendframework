@@ -84,7 +84,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must start with a letter, and consist of only letters, numbers and dashes'
+                'Header name must start with a letter, and consists of only letters, numbers and dashes.'
             );
         }
 

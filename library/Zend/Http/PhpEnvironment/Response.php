@@ -61,10 +61,8 @@ class Response extends HttpResponse
      */
     protected function detectVersion()
     {
-        if (isset($_SERVER['SERVER_PROTOCOL'])) {
-            if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
-                return self::VERSION_11;
-            }
+        if (isset($_SERVER['SERVER_PROTOCOL']) && $_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
+            return self::VERSION_11;
         }
 
         return self::VERSION_10;

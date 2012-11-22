@@ -277,10 +277,10 @@ class AbstractRowGatewayTest extends \PHPUnit_Framework_TestCase
             'table' => 'foo',
             'sql'   => $mockSql
          );
-        $this->setRowGatewayState( $rgPropertyValues );
-        $this->rowGateway->populate( array( "id" => 4, "name" => "Zender" ) );
-        $this->rowGateway->setFromArray( array( "name" => "Zender Version2" ) );
+        $this->setRowGatewayState($rgPropertyValues);
+        $this->rowGateway->populate(array("id" => 4, "name" => "Zender"));
+        $this->rowGateway->setFromArray(array("name" => "Zender Version2"));
 
-        $this->assertEquals( "Zender Version2", $this->rowGateway->offsetGet( "name" ) );
+        $this->assertEquals("Zender Version2", $this->rowGateway->offsetGet( "name" ));
     }
 }

@@ -386,6 +386,92 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
+    /**
+     * @dataProvider ampersandInUrlDataProvider()
+     */
+    public function testAddBindingOperationWithAmpersandInUrl($actualUrl, $expectedUrl)
+    {
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $wsdl->addPortType('myPortType');
+        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
+
+        $wsdl->addBindingOperation(
+            $binding,
+            'operation1',
+            array('use' => 'encoded', 'encodingStyle' => $actualUrl),
+            array('use' => 'encoded', 'encodingStyle' => $actualUrl),
+            array('name' => 'MyFault','use' => 'encoded', 'encodingStyle' => $actualUrl)
+        );
+
+        $expectedXml = '<operation name="operation1">'
+                       . '<input>'
+                       .   '<soap:body use="encoded" encodingStyle="' . $expectedUrl . '"/>'
+                       . '</input>'
+                       . '<output>'
+                       .   '<soap:body use="encoded" encodingStyle="' . $expectedUrl . '"/>'
+                       . '</output>'
+                       . '<fault name="MyFault">'
+                       .   '<soap:fault name="MyFault" use="encoded" encodingStyle="' . $expectedUrl . '"/>'
+                       . '</fault>'
+                     . '</operation>';
+        $this->assertContains($expectedXml, $wsdl->toXML());
+    }
+
+    /**
+     * @dataProvider ampersandInUrlDataProvider()
+     */
+    public function testAddSoapOperationWithAmpersandInUrl($actualUrl, $expectedUrl)
+    {
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $wsdl->addPortType('myPortType');
+        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
+
+        $wsdl->addSoapOperation($binding, $actualUrl);
+
+        $expectedXml = '<soap:operation soapAction="' . $expectedUrl . '"/>';
+        $this->assertContains($expectedXml, $wsdl->toXML());
+    }
+
+    /**
+     * @dataProvider ampersandInUrlDataProvider()
+     */
+    public function testAddServiceWithAmpersandInUrl($actualUrl, $expectedUrl)
+    {
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $wsdl->addPortType('myPortType');
+        $wsdl->addBinding('MyServiceBinding', 'myPortType');
+
+        $wsdl->addService('Service1', 'myPortType', 'MyServiceBinding', $actualUrl);
+
+        $expectedXml = '<service name="Service1">'
+                       . '<port name="myPortType" binding="MyServiceBinding">'
+                       .   '<soap:address location="' . $expectedUrl . '"/>'
+                       . '</port>'
+                     . '</service>';
+        $this->assertContains($expectedXml, $wsdl->toXML());
+    }
+
+    public function ampersandInUrlDataProvider()
+    {
+        return array(
+            'Decoded ampersand' => array(
+                'http://localhost/MyService.php?foo=bar&baz=qux',
+                'http://localhost/MyService.php?foo=bar&amp;baz=qux',
+            ),
+            'Encoded ampersand' => array(
+                'http://localhost/MyService.php?foo=bar&amp;baz=qux',
+                'http://localhost/MyService.php?foo=bar&amp;baz=qux',
+            ),
+            'Encoded and decoded ampersand' => array(
+                'http://localhost/MyService.php?foo=bar&&amp;baz=qux',
+                'http://localhost/MyService.php?foo=bar&amp;&amp;baz=qux',
+            ),
+        );
+    }
+
     public function testAddDocumentation()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');

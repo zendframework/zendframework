@@ -43,11 +43,58 @@ class SnappyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('compress me', $content);
     }
 
-    // TODO test all three warnings (on each method)
-    // TODO test exception
-    // TODO test recompression
-    // TODO test null/ false compression
-    // TODO test invalid argument cases
+    /**
+     * Snappy should return NULL on invalid arguments.
+     *
+     * @return void
+     */
+    public function testNonScalarInput()
+    {
+        $filter = new SnappyCompression();
+
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
+        // we want to test the returned value
+        set_error_handler(array($this, 'errorHandler'), E_WARNING);
+        $content = $filter->compress(array());
+        restore_error_handler();
+
+        $this->assertNull($content);
+    }
+
+    /**
+     * Snappy should handle empty input data correctly.
+     *
+     * @return void
+     */
+    public function testEmptyString()
+    {
+        $filter = new SnappyCompression();
+
+        $content = $filter->compress(false);
+        $content = $filter->decompress($content);
+        $this->assertEquals('', $content, 'Snappy failed to decompress empty string.');
+    }
+
+    /**
+     * Snappy should throw an exception when decompressing invalid data.
+     *
+     * @return void
+     */
+    public function testInvalidData()
+    {
+        $filter = new SnappyCompression();
+
+        $this->setExpectedException(
+            'Zend\Filter\Exception\RuntimeException',
+            'Error while decompressing.'
+        );
+
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
+        // we want to test the returned value
+        set_error_handler(array($this, 'errorHandler'), E_WARNING);
+        $content = $filter->decompress('123');
+        restore_error_handler();
+    }
 
     /**
      * testing toString
@@ -58,5 +105,12 @@ class SnappyTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new SnappyCompression();
         $this->assertEquals('Snappy', $filter->toString());
+    }
+
+    /**
+     * Null error handler; used when wanting to ignore specific error types
+     */
+    public function errorHandler($errno, $errstr)
+    {
     }
 }

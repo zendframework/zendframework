@@ -64,7 +64,7 @@ class Snappy implements CompressionAlgorithmInterface
         $compressed = snappy_uncompress($content);
 
         if ($compressed === false) {
-            throw new Exception\RuntimeException('Error while uncompressing.');
+            throw new Exception\RuntimeException('Error while decompressing.');
         }
 
         return $compressed;

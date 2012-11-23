@@ -204,6 +204,6 @@ class AnnotationBuilderTest extends TestCase
         $form    = $builder->createForm($entity);
 
         $sampleinput = $form->get('sampleinput');
-        $this->assertEquals(true, $sampleinput->getAttribute('allow_empty'));
+        $this->assertSame(true, $sampleinput->getAttribute('allow_empty'));
     }
 }

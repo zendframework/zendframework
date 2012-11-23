@@ -10,7 +10,6 @@
 
 namespace Zend\Filter\Compress;
 
-
 use Zend\Filter\Exception;
 
 /**

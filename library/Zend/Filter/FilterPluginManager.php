@@ -40,6 +40,7 @@ class FilterPluginManager extends AbstractPluginManager
         'compressgz'                => 'Zend\Filter\Compress\Gz',
         'compresslzf'               => 'Zend\Filter\Compress\Lzf',
         'compressrar'               => 'Zend\Filter\Compress\Rar',
+        'compresssnappy'            => 'Zend\Filter\Compress\Snappy',
         'compresstar'               => 'Zend\Filter\Compress\Tar',
         'compresszip'               => 'Zend\Filter\Compress\Zip',
         'decompress'                => 'Zend\Filter\Decompress',

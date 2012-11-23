@@ -32,7 +32,6 @@ class Snappy implements CompressionAlgorithmInterface
         if (!extension_loaded('snappy')) {
             throw new Exception\ExtensionNotLoadedException('This filter needs the snappy extension');
         }
-        parent::__construct($options);
     }
 
     /**

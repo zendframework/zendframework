@@ -16,7 +16,6 @@ use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Http\Request as HttpRequest;
-use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -252,9 +251,8 @@ abstract class AbstractController implements
     /**
      * Set plugin manager
      *
-     * @param  string|PluginManager $plugins
+     * @param  PluginManager $plugins
      * @return AbstractController
-     * @throws Exception\InvalidArgumentException
      */
     public function setPluginManager(PluginManager $plugins)
     {

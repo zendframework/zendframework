@@ -497,8 +497,6 @@ class Client implements Stdlib\DispatchableInterface
                     throw new Exception\InvalidArgumentException('The cookie parameter is not a valid Set-Cookie type');
                 }
             }
-        } elseif ($cookie instanceof Header\SetCookie) {
-            $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
             $setCookie = new Header\SetCookie($cookie, $value, $expire, $path, $domain, $secure, $httponly, $maxAge, $version);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;

@@ -35,7 +35,8 @@ class SessionProgress extends AbstractUploadHandler
             );
         }
 
-        $uploadInfo = $_SESSION[ini_get('session.upload_progress.prefix') . $id];
+        $sessionKey = ini_get('session.upload_progress.prefix') . $id;
+        $uploadInfo = (isset($_SESSION[$sessionKey])) ? $_SESSION[$sessionKey] : null;
         if (!is_array($uploadInfo)) {
             return false;
         }
@@ -45,12 +46,15 @@ class SessionProgress extends AbstractUploadHandler
             'current'  => 0,
             'rate'     => 0,
             'message'  => '',
-            'done'     => false
+            'done'     => false,
         );
         $status = $uploadInfo + $status;
         $status['total']   = $status['content_length'];
         $status['current'] = $status['bytes_processed'];
-        $status['rate']    = $status['bytes_processed'] / (time() - $status['start_time']);
+
+        $time = time() - $status['start_time'];
+        $status['rate'] = ($time > 0) ? $status['bytes_processed'] / $time : 0;
+
         if (!empty($status['cancel_upload'])) {
             $status['done'] = true;
             $status['message'] = 'The upload has been canceled';
@@ -66,7 +70,6 @@ class SessionProgress extends AbstractUploadHandler
      */
     public function isSessionUploadProgressAvailable()
     {
-        return (bool) version_compare(PHP_VERSION, '5.4.0rc1', '>=')
-            && (bool) ini_get('session.upload_progress.enabled');
+        return (bool) ini_get('session.upload_progress.enabled');
     }
 }

@@ -38,7 +38,10 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->dispatch('--console');
         $this->assertResponseStatusCode(0);
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException',
+            'actual status code is "0"' // check actual status code is display
+        );
         $this->assertResponseStatusCode(1);
     }
 
@@ -54,14 +57,42 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     public function testAssertResponseStatusCodeWithBadCode()
     {
         $this->dispatch('--console');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException',
+            'Console status code assert value must be O (valid) or 1 (error)'
+        );
         $this->assertResponseStatusCode(2);
     }
 
     public function testAssertNotResponseStatusCodeWithBadCode()
     {
         $this->dispatch('--console');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException',
+            'Console status code assert value must be O (valid) or 1 (error)'
+        );
         $this->assertNotResponseStatusCode(2);
+    }
+
+    public function testAssertConsoleOutputContains()
+    {
+        $this->dispatch('--console');
+        $this->assertConsoleOutputContains('foo');
+        $this->assertConsoleOutputContains('foo, bar');
+
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException',
+            'actual content is "foo, bar"' // check actual content is display
+        );
+        $this->assertConsoleOutputContains('baz');
+    }
+
+    public function testNotAssertConsoleOutputContains()
+    {
+        $this->dispatch('--console');
+        $this->assertNotConsoleOutputContains('baz');
+
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNotConsoleOutputContains('foo');
     }
 }

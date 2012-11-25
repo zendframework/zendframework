@@ -10,6 +10,8 @@
  */
 namespace Zend\Test\PHPUnit\Controller;
 
+use PHPUnit_Framework_ExpectationFailedException;
+
 /**
  * @category   Zend
  * @package    Zend_Test
@@ -22,4 +24,40 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
      * @var boolean
      */
     protected $useConsoleRequest = true;
+
+    /**
+     * Assert console output contain content (insensible case)
+     *
+     * @param  string $match content that should be contained in matched nodes
+     * @return void
+     */
+    public function assertConsoleOutputContains($match)
+    {
+        $response = $this->getResponse();
+        if(false === stripos($response->getContent(), $match)) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting output CONTAINS content "%s", actual content is "%s"',
+                $match, $response->getContent()
+            ));
+        }
+        $this->assertNotEquals(false, stripos($response->getContent(), $match));
+    }
+
+    /**
+     * Assert console output not contain content
+     *
+     * @param  string $match content that should be contained in matched nodes
+     * @return void
+     */
+    public function assertNotConsoleOutputContains($match)
+    {
+        $response = $this->getResponse();
+        if(false !== stripos($response->getContent(), $match)) {
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                'Failed asserting output DOES NOT CONTAIN content "%s"',
+                $match
+            ));
+        }
+        $this->assertEquals(false, stripos($response->getContent(), $match));
+    }
 }

@@ -18,7 +18,7 @@ class IndexController extends AbstractActionController
 
     public function consoleAction()
     {
-
+        return 'foo, bar';
     }
 
     public function redirectAction()

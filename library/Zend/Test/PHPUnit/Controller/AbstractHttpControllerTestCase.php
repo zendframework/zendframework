@@ -317,7 +317,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return array
      */
-    protected function query($path, $useXpath = false)
+    private function query($path, $useXpath = false)
     {
         $response = $this->getResponse();
         $dom = new Dom\Query($response->getContent());
@@ -333,7 +333,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param string $path
      * @return array
      */
-    protected function xpathQuery($path)
+    private function xpathQuery($path)
     {
         return $this->query($path, true);
     }
@@ -343,7 +343,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param string $path
      * @return integer
      */
-    protected function queryCount($path)
+    private function queryCount($path)
     {
         return count($this->query($path, false));
     }
@@ -353,7 +353,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param string $path
      * @return integer
      */
-    protected function xpathQueryCount($path)
+    private function xpathQueryCount($path)
     {
         return count($this->xpathQuery($path));
     }
@@ -364,7 +364,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    protected function queryAssertion($path, $useXpath = false)
+    private function queryAssertion($path, $useXpath = false)
     {
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
@@ -405,7 +405,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    protected function notQueryAssertion($path, $useXpath = false)
+    private function notQueryAssertion($path, $useXpath = false)
     {
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
@@ -447,7 +447,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function queryCountAssertion($path, $count, $useXpath = false)
+    private function queryCountAssertion($path, $count, $useXpath = false)
     {
         $match = $this->queryCount($path);
         if($match != $count) {
@@ -491,7 +491,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function notQueryCountAssertion($path, $count, $useXpath = false)
+    private function notQueryCountAssertion($path, $count, $useXpath = false)
     {
         $match = $this->queryCount($path);
         if($match == $count) {
@@ -535,7 +535,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function queryCountMinAssertion($path, $count, $useXpath = false)
+    private function queryCountMinAssertion($path, $count, $useXpath = false)
     {
         $match = $this->queryCount($path);
         if($match < $count) {
@@ -579,7 +579,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function queryCountMaxAssertion($path, $count, $useXpath = false)
+    private function queryCountMaxAssertion($path, $count, $useXpath = false)
     {
         $match = $this->queryCount($path);
         if($match > $count) {
@@ -623,7 +623,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function queryContentContainsAssertion($path, $match, $useXpath = false)
+    private function queryContentContainsAssertion($path, $match, $useXpath = false)
     {
         $result = $this->query($path);
         if($result->count() == 0) {
@@ -672,7 +672,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function notQueryContentContainsAssertion($path, $match, $useXpath = false)
+    private function notQueryContentContainsAssertion($path, $match, $useXpath = false)
     {
         $result = $this->query($path);
         if($result->count() == 0) {
@@ -721,7 +721,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function queryContentRegexAssertion($path, $pattern, $useXpath = false)
+    private function queryContentRegexAssertion($path, $pattern, $useXpath = false)
     {
         $result = $this->query($path);
         if($result->count() == 0) {
@@ -770,7 +770,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * @param boolean $useXpath
      * @return void
      */
-    public function notQueryContentRegexAssertion($path, $pattern, $useXpath = false)
+    private function notQueryContentRegexAssertion($path, $pattern, $useXpath = false)
     {
         $result = $this->query($path);
         if($result->count() == 0) {

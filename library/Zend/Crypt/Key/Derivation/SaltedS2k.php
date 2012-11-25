@@ -25,7 +25,7 @@ class SaltedS2k
         'sha1'       => MHASH_SHA1,
         'sha224'     => MHASH_SHA224,
         'sha256'     => MHASH_SHA256,
-        'sha382'     => MHASH_SHA384,
+        'sha384'     => MHASH_SHA384,
         'sha512'     => MHASH_SHA512,
         'ripemd128'  => MHASH_RIPEMD128,
         'ripemd256'  => MHASH_RIPEMD256,

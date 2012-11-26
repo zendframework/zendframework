@@ -98,6 +98,7 @@ class SetCookie implements MultipleHeaderInterface
             $setCookieProcessor = function($headerLine) use ($setCookieClass) {
                 $header = new $setCookieClass;
                 $keyValuePairs = preg_split('#;\s*#', $headerLine);
+                
                 foreach ($keyValuePairs as $keyValue) {
                     if (strpos($keyValue, '=')) {
                         list($headerKey, $headerValue) = preg_split('#=\s*#', $keyValue, 2);
@@ -112,7 +113,7 @@ class SetCookie implements MultipleHeaderInterface
                         $header->setValue(urldecode($headerValue));
                         continue;
                     }
-
+                    
                     // Process the remaining elements
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
                         case 'expires' : $header->setExpires($headerValue); break;
@@ -563,14 +564,9 @@ class SetCookie implements MultipleHeaderInterface
     
     	$cookieDomain = strtolower($cookieDomain);
     	$host = strtolower($host);
-    
-    	if ($cookieDomain[0] == '.') {
-    		$cookieDomain = substr($cookieDomain, 1);
-    	}
-    
     	// Check for either exact match or suffix match
     	return ($cookieDomain == $host ||
-    			preg_match('/\.' . preg_quote($cookieDomain) . '$/', $host));
+    			preg_match('/' . preg_quote($cookieDomain) . '$/', $host));
     }
     
     /**

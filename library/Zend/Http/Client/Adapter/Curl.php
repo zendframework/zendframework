@@ -374,6 +374,7 @@ class Curl implements HttpAdapter, StreamInterface
         foreach ($headers as $key => $value) {
             $curlHeaders[] = $key . ': ' . $value;
         }
+        
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
 
         /**
@@ -409,13 +410,13 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         // send the request
-        $response = curl_exec($this->curl);
 
+        $response = curl_exec($this->curl);
         // if we used streaming, headers are already there
         if (!is_resource($this->outputStream)) {
             $this->response = $response;
         }
-
+        
         $request  = curl_getinfo($this->curl, CURLINFO_HEADER_OUT);
         $request .= $body;
 

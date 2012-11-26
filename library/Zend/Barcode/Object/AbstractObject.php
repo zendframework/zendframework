@@ -284,7 +284,7 @@ abstract class AbstractObject implements ObjectInterface
     {
         if (intval($value) <= 0) {
             throw new Exception\OutOfRangeException(
-                'Bar height must be greater than 0.'
+                'Bar height must be greater than 0'
             );
         }
         $this->barHeight = intval($value);
@@ -310,7 +310,7 @@ abstract class AbstractObject implements ObjectInterface
     {
         if (intval($value) <= 0) {
             throw new Exception\OutOfRangeException(
-                'Bar width must be greater than 0.'
+                'Bar width must be greater than 0'
             );
         }
         $this->barThinWidth = intval($value);
@@ -336,7 +336,7 @@ abstract class AbstractObject implements ObjectInterface
     {
         if (intval($value) <= 0) {
             throw new Exception\OutOfRangeException(
-                'Bar width must be greater than 0.'
+                'Bar width must be greater than 0'
             );
         }
         $this->barThickWidth = intval($value);
@@ -363,7 +363,7 @@ abstract class AbstractObject implements ObjectInterface
     {
         if (floatval($value) <= 0) {
             throw new Exception\OutOfRangeException(
-                'Factor must be greater than 0.'
+                'Factor must be greater than 0'
             );
         }
         $this->factor = floatval($value);
@@ -394,7 +394,7 @@ abstract class AbstractObject implements ObjectInterface
             $this->foreColor = intval($value);
         } else {
             throw new Exception\InvalidArgumentException(
-                'Text color must be set as #[0-9A-F]{6}.'
+                'Text color must be set as #[0-9A-F]{6}'
             );
         }
         return $this;
@@ -423,7 +423,7 @@ abstract class AbstractObject implements ObjectInterface
             $this->backgroundColor = intval($value);
         } else {
             throw new Exception\InvalidArgumentException(
-                'Background color must be set as #[0-9A-F]{6}.'
+                'Background color must be set as #[0-9A-F]{6}'
             );
         }
         return $this;
@@ -688,7 +688,7 @@ abstract class AbstractObject implements ObjectInterface
         if (is_int($value) && $value >= 1 && $value <= 5) {
             if (!extension_loaded('gd')) {
                 throw new Exception\ExtensionNotLoadedException(
-                    'GD extension is required to use numeric font.'
+                    'GD extension is required to use numeric font'
                 );
             }
 
@@ -701,7 +701,7 @@ abstract class AbstractObject implements ObjectInterface
             $this->font = $value;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Invalid font "%s" provided to setFont().',
+                'Invalid font "%s" provided to setFont()',
                 $value
             ));
         }
@@ -858,7 +858,7 @@ abstract class AbstractObject implements ObjectInterface
         }
         if (!strlen($value)) {
             throw new Exception\RuntimeException(
-                'A text must be provide to Barcode before drawing.'
+                'A text must be provide to Barcode before drawing'
             );
         }
         $this->validateText($value);
@@ -876,7 +876,7 @@ abstract class AbstractObject implements ObjectInterface
         $ratio = $this->barThickWidth / $this->barThinWidth;
         if (!($ratio >= $min && $ratio <= $max)) {
             throw new Exception\OutOfRangeException(sprintf(
-                'Ratio thick/thin bar must be between %0.1f and %0.1f (actual %0.3f).',
+                'Ratio thick/thin bar must be between %0.1f and %0.1f (actual %0.3f)',
                 $min,
                 $max,
                 $ratio
@@ -893,7 +893,7 @@ abstract class AbstractObject implements ObjectInterface
     {
         if (is_numeric($this->font) && $this->orientation != 0) {
             throw new Exception\RuntimeException(
-                'Only drawing with TTF font allow orientation of the barcode.'
+                'Only drawing with TTF font allow orientation of the barcode'
             );
         }
     }

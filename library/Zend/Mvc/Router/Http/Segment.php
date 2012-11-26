@@ -25,6 +25,11 @@ use Zend\Stdlib\RequestInterface as Request;
 class Segment implements RouteInterface
 {
     /**
+     * @var array Cache for the encode output
+     */
+    private static $__cacheEncode = array();
+
+    /**
      * Map of allowed special chars in path segments.
      *
      * http://tools.ietf.org/html/rfc3986#appendix-A
@@ -408,9 +413,11 @@ class Segment implements RouteInterface
      */
     private function encode($value)
     {
-        $encoded = rawurlencode($value);
-        $encoded = strtr($encoded, static::$urlencodeCorrectionMap);
-        return $encoded;
+        if (!isset(static::$__cacheEncode[$value])) {
+            static::$__cacheEncode[$value] = rawurlencode($value);
+            static::$__cacheEncode[$value] = strtr(static::$__cacheEncode[$value], static::$urlencodeCorrectionMap);
+        }
+        return static::$__cacheEncode[$value];
     }
 
     /**

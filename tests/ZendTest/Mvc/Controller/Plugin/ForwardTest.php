@@ -41,7 +41,10 @@ class ForwardTest extends TestCase
         $event->setApplication($mockApplication);
         $event->setRequest(new Request());
         $event->setResponse(new Response());
-        $event->setRouteMatch(new RouteMatch(array('action' => 'test')));
+
+        $routeMatch = new RouteMatch(array('action' => 'test'));
+        $routeMatch->setMatchedRouteName('some-route');
+        $event->setRouteMatch($routeMatch);
 
         $locator = new Locator;
         $locator->add('forward', function() {
@@ -129,17 +132,20 @@ class ForwardTest extends TestCase
 
     public function testRouteMatchObjectRemainsSameFollowingForwardDispatch()
     {
-        $routeMatch  = $this->controller->getEvent()->getRouteMatch();
-        $matchParams = $routeMatch->getParams();
+        $routeMatch            = $this->controller->getEvent()->getRouteMatch();
+        $matchParams           = $routeMatch->getParams();
+        $matchMatchedRouteName = $routeMatch->getMatchedRouteName();
         $result = $this->plugin->dispatch('forward', array(
             'action' => 'test-matches',
             'param1' => 'foobar',
         ));
-        $test       = $this->controller->getEvent()->getRouteMatch();
-        $testParams = $test->getParams();
+        $testMatch            = $this->controller->getEvent()->getRouteMatch();
+        $testParams           = $testMatch->getParams();
+        $testMatchedRouteName = $testMatch->getMatchedRouteName();
 
-        $this->assertSame($routeMatch, $test);
+        $this->assertSame($routeMatch, $testMatch);
         $this->assertEquals($matchParams, $testParams);
+        $this->assertEquals($matchMatchedRouteName, $testMatchedRouteName);
     }
 
     public function testAllowsPassingEmptyArrayOfRouteParams()

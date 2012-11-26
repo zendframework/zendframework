@@ -35,6 +35,7 @@ class PostRedirectGet extends AbstractPlugin
         $container  = $this->getSessionContainer();
 
         if ($request->isPost()) {
+            $container->setExpirationHops(1, 'post');
             $container->post = $request->getPost()->toArray();
             return $this->redirect($redirect, $redirectToUrl);
         } else {
@@ -48,11 +49,10 @@ class PostRedirectGet extends AbstractPlugin
         }
     }
 
-    protected function getSessionContainer()
+    public function getSessionContainer()
     {
         if (!isset($this->sessionContainer)) {
             $this->sessionContainer = new Container('prg_post1');
-            $this->sessionContainer->setExpirationHops(1, 'post');
         }
         return $this->sessionContainer;
     }

@@ -45,7 +45,7 @@ class Css2Xpath
         $path     = preg_replace('|\s+>\s+|', '>', $path);
         $segments = preg_split('/\s+/', $path);
         foreach ($segments as $key => $segment) {
-            $pathSegment = self::_tokenize($segment);
+            $pathSegment = static::_tokenize($segment);
             if (0 == $key) {
                 if (0 === strpos($pathSegment, '[contains(')) {
                     $paths[0] .= '*' . ltrim($pathSegment, '*');
@@ -55,13 +55,13 @@ class Css2Xpath
                 continue;
             }
             if (0 === strpos($pathSegment, '[contains(')) {
-                foreach ($paths as $key => $xpath) {
-                    $paths[$key] .= '//*' . ltrim($pathSegment, '*');
+                foreach ($paths as $pathKey => $xpath) {
+                    $paths[$pathKey] .= '//*' . ltrim($pathSegment, '*');
                     $paths[]      = $xpath . $pathSegment;
                 }
             } else {
-                foreach ($paths as $key => $xpath) {
-                    $paths[$key] .= '//' . $pathSegment;
+                foreach ($paths as $pathKey => $xpath) {
+                    $paths[$pathKey] .= '//' . $pathSegment;
                 }
             }
         }

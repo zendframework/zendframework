@@ -36,6 +36,8 @@ class FilePostRedirectGet extends AbstractPlugin
         $container  = $this->getSessionContainer();
 
         if ($request->isPost()) {
+            $container->setExpirationHops(1, array('post', 'errors'));
+
             $post = array_merge(
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
@@ -67,11 +69,10 @@ class FilePostRedirectGet extends AbstractPlugin
         }
     }
 
-    protected function getSessionContainer()
+    public function getSessionContainer()
     {
         if (!isset($this->sessionContainer)) {
             $this->sessionContainer = new Container('file_prg_post1');
-            $this->sessionContainer->setExpirationHops(1, array('post', 'errors'));
         }
         return $this->sessionContainer;
     }

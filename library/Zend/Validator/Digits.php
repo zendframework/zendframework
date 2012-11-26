@@ -60,11 +60,11 @@ class Digits extends AbstractValidator
             return false;
         }
 
-        if (null === self::$filter) {
-            self::$filter = new DigitsFilter();
+        if (null === static::$filter) {
+            static::$filter = new DigitsFilter();
         }
 
-        if ($this->getValue() !== self::$filter->filter($this->getValue())) {
+        if ($this->getValue() !== static::$filter->filter($this->getValue())) {
             $this->error(self::NOT_DIGITS);
             return false;
         }

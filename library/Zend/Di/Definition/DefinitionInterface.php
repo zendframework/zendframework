@@ -93,6 +93,7 @@ interface DefinitionInterface
      *     0, // string|null: Type Name (if it exists)
      *     1, // bool: whether this param is required
      *     2, // string: fully qualified path to this parameter
+     *     3, // mixed: default value
      * );
      *
      *

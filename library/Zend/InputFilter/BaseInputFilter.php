@@ -20,7 +20,7 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_InputFilter
  */
-class BaseInputFilter implements InputFilterInterface
+class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface
 {
     protected $data;
     protected $inputs = array();
@@ -441,5 +441,60 @@ class BaseInputFilter implements InputFilterInterface
 
             $input->setValue($value);
         }
+    }
+
+    /**
+     * Is the data set has unknown input ?
+     *
+     * @throws Exception\RuntimeException
+     * @return bool
+     */
+    public function hasUnknown()
+    {
+        if (null === $this->data) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: no data present!',
+                __METHOD__
+            ));
+        }
+
+        $data   = array_keys($this->data);
+        $inputs = array_keys($this->inputs);
+        $diff   = array_diff($data, $inputs);
+        if (!empty($diff)) {
+            return count(array_intersect($diff, $inputs)) == 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * Return the unknown input
+     *
+     * @throws Exception\RuntimeException
+     * @return array
+     */
+    public function getUnknown()
+    {
+        if (null === $this->data) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: no data present!',
+                __METHOD__
+            ));
+        }
+
+        $data   = array_keys($this->data);
+        $inputs = array_keys($this->inputs);
+        $diff   = array_diff($data, $inputs);
+
+        $unknownInputs = array();
+        $intersect     = array_intersect($diff, $data);
+        if (!empty($intersect)) {
+            foreach ($intersect as $key) {
+                $unknownInputs[$key] = $this->data[$key];
+            }
+        }
+
+        return $unknownInputs;
     }
 }

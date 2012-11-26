@@ -33,7 +33,7 @@ class StaticFilter
         if ($manager instanceof FilterPluginManager) {
             $manager->setShareByDefault(false);
         }
-        self::$plugins = $manager;
+        static::$plugins = $manager;
     }
 
     /**
@@ -43,10 +43,10 @@ class StaticFilter
      */
     public static function getPluginManager()
     {
-        if (null === self::$plugins) {
+        if (null === static::$plugins) {
             static::setPluginManager(new FilterPluginManager());
         }
-        return self::$plugins;
+        return static::$plugins;
     }
 
     /**

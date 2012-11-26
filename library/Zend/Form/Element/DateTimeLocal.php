@@ -21,6 +21,8 @@ use Zend\Validator\ValidatorInterface;
  */
 class DateTimeLocal extends DateTime
 {
+    const DATETIME_LOCAL_FORMAT = 'Y-m-d\TH:i';
+
     /**
      * Seed attributes
      *
@@ -29,6 +31,15 @@ class DateTimeLocal extends DateTime
     protected $attributes = array(
         'type' => 'datetime-local',
     );
+
+    /**
+     *
+     * Opera and mobile browsers support datetime input, and display a datepicker control
+     * But the submitted value does not include seconds.
+     *
+     * @var string
+     */
+    protected $format = self::DATETIME_LOCAL_FORMAT;
 
     /**
      * Retrieves a DateStepValidator configured for a Date Input type
@@ -41,10 +52,10 @@ class DateTimeLocal extends DateTime
                      ? $this->attributes['step'] : 1; // Minutes
 
         $baseValue = (isset($this->attributes['min']))
-                     ? $this->attributes['min'] : '1970-01-01T00:00:00';
+                     ? $this->attributes['min'] : '1970-01-01T00:00';
 
         return new DateStepValidator(array(
-            'format'    => \DateTime::ISO8601,
+            'format'    => $this->format,
             'baseValue' => $baseValue,
             'step'      => new \DateInterval("PT{$stepValue}M"),
         ));

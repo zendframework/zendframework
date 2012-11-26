@@ -38,8 +38,8 @@ class IgBinary extends AbstractAdapter
             );
         }
 
-        if (self::$serializedNull === null) {
-            self::$serializedNull = igbinary_serialize(null);
+        if (static::$serializedNull === null) {
+            static::$serializedNull = igbinary_serialize(null);
         }
 
         parent::__construct($options);
@@ -74,7 +74,7 @@ class IgBinary extends AbstractAdapter
      */
     public function unserialize($serialized)
     {
-        if ($serialized === self::$serializedNull) {
+        if ($serialized === static::$serializedNull) {
             return null;
         }
 

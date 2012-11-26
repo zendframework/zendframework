@@ -12,12 +12,13 @@ namespace Zend\Form;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  */
-class Element implements ElementInterface
+class Element implements ElementInterface, InitializableInterface
 {
     /**
      * @var array
@@ -63,6 +64,16 @@ class Element implements ElementInterface
         if (!empty($options)) {
             $this->setOptions($options);
         }
+    }
+
+    /**
+     * This function is automatically called when creating element with factory. It
+     * allows to perform various operations (add elements...)
+     *
+     * @return void
+     */
+    public function init()
+    {
     }
 
     /**

@@ -5,12 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
+ * @package   Zend_Form
  */
 
-namespace Zend\Code\Scanner;
+namespace Zend\Form\Exception;
 
-class VariableScanner
-{
-    // @todo
-}
+/**
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage Exception
+ */
+class InvalidElementException extends InvalidArgumentException
+{}

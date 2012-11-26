@@ -32,7 +32,7 @@ abstract class AbstractCollection extends AbstractValue
             // If the elements of the given array are not Zend_XmlRpc_Value objects,
             // we need to convert them as such (using auto-detection from PHP value)
             if (!$value instanceof parent) {
-                $value = self::getXmlRpcValue($value, self::AUTO_DETECT_TYPE);
+                $value = static::getXmlRpcValue($value, self::AUTO_DETECT_TYPE);
             }
             $this->value[$key] = $value;
         }

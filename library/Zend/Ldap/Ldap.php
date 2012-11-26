@@ -1148,7 +1148,7 @@ class Ldap
         if (!($dn instanceof Dn)) {
             $dn = Dn::factory($dn, null);
         }
-        self::prepareLdapEntryArray($entry);
+        static::prepareLdapEntryArray($entry);
         foreach ($entry as $key => $value) {
             if (is_array($value) && count($value) === 0) {
                 unset($entry[$key]);
@@ -1196,7 +1196,7 @@ class Ldap
         if (!($dn instanceof Dn)) {
             $dn = Dn::factory($dn, null);
         }
-        self::prepareLdapEntryArray($entry);
+        static::prepareLdapEntryArray($entry);
 
         $rdnParts = $dn->getRdn(Dn::ATTR_CASEFOLD_LOWER);
         foreach ($rdnParts as $key => $value) {

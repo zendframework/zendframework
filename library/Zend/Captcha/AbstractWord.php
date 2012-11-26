@@ -311,8 +311,8 @@ abstract class AbstractWord extends AbstractAdapter
     {
         $word       = '';
         $wordLen    = $this->getWordLen();
-        $vowels     = $this->useNumbers ? self::$VN : self::$V;
-        $consonants = $this->useNumbers ? self::$CN : self::$C;
+        $vowels     = $this->useNumbers ? static::$VN : static::$V;
+        $consonants = $this->useNumbers ? static::$CN : static::$C;
 
         for ($i=0; $i < $wordLen; $i = $i + 2) {
             // generate word with mix of vowels and consonants

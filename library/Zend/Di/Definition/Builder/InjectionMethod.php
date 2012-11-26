@@ -51,14 +51,16 @@ class InjectionMethod
      * @param  string          $name
      * @param  string|null     $class
      * @param  mixed|null      $isRequired
+     * @param  mixed|null      $default
      * @return InjectionMethod
      */
-    public function addParameter($name, $class = null, $isRequired = null)
+    public function addParameter($name, $class = null, $isRequired = null, $default = null)
     {
         $this->parameters[] = array(
             $name,
             $class,
-            ($isRequired == null) ? true : false
+            ($isRequired == null) ? true : false,
+            $default,
         );
 
         return $this;

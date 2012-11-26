@@ -41,7 +41,7 @@ class PaginationControl extends AbstractHelper
      */
     public static function setDefaultViewPartial($partial)
     {
-        self::$defaultViewPartial = $partial;
+        static::$defaultViewPartial = $partial;
     }
 
     /**
@@ -51,7 +51,7 @@ class PaginationControl extends AbstractHelper
      */
     public static function getDefaultViewPartial()
     {
-        return self::$defaultViewPartial;
+        return static::$defaultViewPartial;
     }
 
      /**
@@ -61,7 +61,7 @@ class PaginationControl extends AbstractHelper
      */
     public static function getDefaultScrollingStyle()
     {
-        return self::$defaultScrollingStyle;
+        return static::$defaultScrollingStyle;
     }
 
     /**
@@ -71,7 +71,7 @@ class PaginationControl extends AbstractHelper
      */
     public static function setDefaultScrollingStyle($style)
     {
-        self::$defaultScrollingStyle = $style;
+        static::$defaultScrollingStyle = $style;
     }
 
     /**
@@ -98,15 +98,15 @@ class PaginationControl extends AbstractHelper
         }
 
         if ($partial === null) {
-            if (self::$defaultViewPartial === null) {
+            if (static::$defaultViewPartial === null) {
                 throw new Exception\RuntimeException('No view partial provided and no default set');
             }
 
-            $partial = self::$defaultViewPartial;
+            $partial = static::$defaultViewPartial;
         }
 
         if ($scrollingStyle === null) {
-            $scrollingStyle = self::$defaultScrollingStyle;
+            $scrollingStyle = static::$defaultScrollingStyle;
         }
 
         $pages = get_object_vars($paginator->getPages($scrollingStyle));

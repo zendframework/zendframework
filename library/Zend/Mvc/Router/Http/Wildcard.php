@@ -134,7 +134,7 @@ class Wildcard implements RouteInterface
 
             for ($i = 1; $i < $count; $i += 2) {
                 if (isset($params[$i + 1])) {
-                    $matches[urldecode($params[$i])] = urldecode($params[$i + 1]);
+                    $matches[rawurldecode($params[$i])] = rawurldecode($params[$i + 1]);
                 }
             }
         } else {
@@ -144,7 +144,7 @@ class Wildcard implements RouteInterface
                 $param = explode($this->keyValueDelimiter, $param, 2);
 
                 if (isset($param[1])) {
-                    $matches[urldecode($param[0])] = urldecode($param[1]);
+                    $matches[rawurldecode($param[0])] = rawurldecode($param[1]);
                 }
             }
         }
@@ -168,7 +168,7 @@ class Wildcard implements RouteInterface
 
         if ($mergedParams) {
             foreach ($mergedParams as $key => $value) {
-                $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
+                $elements[] = rawurlencode($key) . $this->keyValueDelimiter . rawurlencode($value);
 
                 $this->assembledParams[] = $key;
             }

@@ -33,7 +33,7 @@ class StaticValidator
         if ($plugins instanceof ValidatorPluginManager) {
             $plugins->setShareByDefault(false);
         }
-        self::$plugins = $plugins;
+        static::$plugins = $plugins;
     }
 
     /**
@@ -43,10 +43,10 @@ class StaticValidator
      */
     public static function getPluginManager()
     {
-        if (null === self::$plugins) {
+        if (null === static::$plugins) {
             static::setPluginManager(new ValidatorPluginManager());
         }
-        return self::$plugins;
+        return static::$plugins;
     }
 
     /**

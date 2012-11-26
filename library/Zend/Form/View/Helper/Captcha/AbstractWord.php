@@ -130,9 +130,8 @@ abstract class AbstractWord extends FormInput
 
         $hidden    = $this->renderCaptchaHidden($captcha, $attributes);
         $input     = $this->renderCaptchaInput($captcha, $attributes);
-        $separator = $this->getSeparator();
 
-        return $hidden . $separator . $input;
+        return $hidden . $input;
     }
 
     /**

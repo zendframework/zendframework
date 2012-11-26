@@ -71,8 +71,11 @@ class ClassDefinitionTest extends TestCase
     public function testGetMethodParameters()
     {
         $definition = new ClassDefinition('Foo');
-        $definition->addMethodParameter("setVar", "var", array('type' => null, 'required' => true));
+        $definition->addMethodParameter("setVar", "var", array('type' => null, 'required' => true, 'default' => 'test'));
         $this->assertNull($definition->getMethodParameters("Bar", "setVar"));
-        $this->assertEquals(array('Foo::setVar:var' => array("var", null, true)), $definition->getMethodParameters("Foo", "setVar"));
+        $this->assertEquals(
+            array('Foo::setVar:var' => array("var", null, true, 'test')),
+            $definition->getMethodParameters("Foo", "setVar")
+        );
     }
 }

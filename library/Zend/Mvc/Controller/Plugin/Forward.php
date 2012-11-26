@@ -135,10 +135,14 @@ class Forward extends AbstractPlugin
             }
         }
 
-        // Allow passing parameters to seed the RouteMatch with
+
+        // Allow passing parameters to seed the RouteMatch with & copy matched route name
         if ($params !== null) {
-            $event->setRouteMatch(new RouteMatch($params));
+            $routeMatch = new RouteMatch($params);
+            $routeMatch->setMatchedRouteName($event->getRouteMatch()->getMatchedRouteName());
+            $event->setRouteMatch($routeMatch);
         }
+
 
         if ($this->numNestedForwards > $this->maxNestedForwards) {
             throw new Exception\DomainException("Circular forwarding detected: greater than $this->maxNestedForwards nested forwards");

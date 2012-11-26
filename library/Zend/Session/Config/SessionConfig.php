@@ -148,6 +148,24 @@ class SessionConfig extends StandardConfig
     }
 
     /**
+     * Set session.save_path
+     *
+     * @param  string $savePath
+     * @return SessionConfig
+     * @throws Exception\InvalidArgumentException on invalid path
+     */
+    public function setSavePath($savePath)
+    {
+        if ($this->getOption('save_handler') == 'files') {
+            parent::setSavePath($savePath);
+        }
+        $this->savePath = $savePath;
+        $this->setOption('save_path', $savePath);
+        return $this;
+    }
+
+
+    /**
      * Set session.serialize_handler
      *
      * @param  string $serializeHandler

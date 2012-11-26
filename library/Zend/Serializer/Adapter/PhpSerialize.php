@@ -34,8 +34,8 @@ class PhpSerialize extends AbstractAdapter
     {
         // needed to check if a returned false is based on a serialize false
         // or based on failure (igbinary can overwrite [un]serialize functions)
-        if (self::$serializedFalse === null) {
-            self::$serializedFalse = serialize(false);
+        if (static::$serializedFalse === null) {
+            static::$serializedFalse = serialize(false);
         }
 
         parent::__construct($options);
@@ -78,7 +78,7 @@ class PhpSerialize extends AbstractAdapter
 
         // If we have a serialized boolean false value, just return false;
         // prevents the unserialize handler from creating an error.
-        if ($serialized === self::$serializedFalse) {
+        if ($serialized === static::$serializedFalse) {
             return false;
         }
 

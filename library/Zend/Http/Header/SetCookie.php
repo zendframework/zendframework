@@ -98,7 +98,7 @@ class SetCookie implements MultipleHeaderInterface
             $setCookieProcessor = function($headerLine) use ($setCookieClass) {
                 $header = new $setCookieClass;
                 $keyValuePairs = preg_split('#;\s*#', $headerLine);
-                
+
                 foreach ($keyValuePairs as $keyValue) {
                     if (strpos($keyValue, '=')) {
                         list($headerKey, $headerValue) = preg_split('#=\s*#', $keyValue, 2);
@@ -113,7 +113,7 @@ class SetCookie implements MultipleHeaderInterface
                         $header->setValue(urldecode($headerValue));
                         continue;
                     }
-                    
+
                     // Process the remaining elements
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
                         case 'expires' : $header->setExpires($headerValue); break;
@@ -514,32 +514,32 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
-    	if (is_string ($uri)) {
-    		$uri = Zend\Uri\UriFactory::factory($uri);
-    	}
+        if (is_string ($uri)) {
+            $uri = Zend\Uri\UriFactory::factory($uri);
+    }
 
-    	// Make sure we have a valid Zend_Uri_Http object
-    	if (! ($uri->isValid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {
-    		throw new Exception\InvalidArgumentException('Passed URI is not a valid HTTP or HTTPS URI');
-    	}
+        // Make sure we have a valid Zend_Uri_Http object
+        if (! ($uri->isValid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {
+            throw new Exception\InvalidArgumentException('Passed URI is not a valid HTTP or HTTPS URI');
+        }
 
-    	// Check that the cookie is secure (if required) and not expired
-    	if ($this->secure && $uri->getScheme() != 'https') return false;
-    	if ($this->isExpired($now)) return false;
-    	if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
+        // Check that the cookie is secure (if required) and not expired
+        if ($this->secure && $uri->getScheme() != 'https') return false;
+        if ($this->isExpired($now)) return false;
+        if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
 
-    	// Check if the domain matches
-    	if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
-    		return false;
-    	}
+        // Check if the domain matches
+        if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
+            return false;
+        }
 
-    	// Check that path matches using prefix match
-    	if (! self::matchCookiePath($this->getPath(), $uri->getPath())) {
-    		return false;
-    	}
+        // Check that path matches using prefix match
+        if (! self::matchCookiePath($this->getPath(), $uri->getPath())) {
+            return false;
+        }
 
-    	// If we didn't die until now, return true.
-    	return true;
+        // If we didn't die until now, return true.
+        return true;
     }
 
     /**
@@ -554,19 +554,19 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
-    	if (! $cookieDomain) {
-    		throw new Exception\InvalidArgumentException('$cookieDomain is expected to be a cookie domain');
-    	}
+        if (! $cookieDomain) {
+            throw new Exception\InvalidArgumentException('$cookieDomain is expected to be a cookie domain');
+        }
 
-    	if (! $host) {
-    		throw new Exception\InvalidArgumentException('$host is expected to be a host name');
-    	}
+        if (! $host) {
+            throw new Exception\InvalidArgumentException('$host is expected to be a host name');
+        }
 
-    	$cookieDomain = strtolower($cookieDomain);
-    	$host = strtolower($host);
-    	// Check for either exact match or suffix match
-    	return ($cookieDomain == $host ||
-    			preg_match('/' . preg_quote($cookieDomain) . '$/', $host));
+        $cookieDomain = strtolower($cookieDomain);
+        $host = strtolower($host);
+        // Check for either exact match or suffix match
+        return ($cookieDomain == $host ||
+                preg_match('/' . preg_quote($cookieDomain) . '$/', $host));
     }
 
     /**
@@ -580,15 +580,15 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookiePath($cookiePath, $path)
     {
-    	if (! $cookiePath) {
-    		throw new Exception\InvalidArgumentException('$cookiePath is expected to be a cookie path');
-    	}
+        if (! $cookiePath) {
+            throw new Exception\InvalidArgumentException('$cookiePath is expected to be a cookie path');
+        }
 
-    	if (! $path) {
-    		throw new Exception\InvalidArgumentException('$path is expected to be a host name');
-    	}
+        if (! $path) {
+            throw new Exception\InvalidArgumentException('$path is expected to be a host name');
+        }
 
-    	return (strpos($path, $cookiePath) === 0);
+        return (strpos($path, $cookiePath) === 0);
     }
 
     public function toString()

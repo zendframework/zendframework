@@ -37,36 +37,36 @@ use Zend\Uri;
  */
 class Cookies extends Headers
 {
-	/**
-	 * Return cookie(s) as a Zend_Http_Cookie object
-	 *
-	 */
-	const COOKIE_OBJECT = 0;
-	
-	/**
-	 * Return cookie(s) as a string (suitable for sending in an HTTP request)
-	 *
-	 */
-	const COOKIE_STRING_ARRAY = 1;
-	
-	/**
-	 * Return all cookies as one long string (suitable for sending in an HTTP request)
-	 *
-	 */
-	const COOKIE_STRING_CONCAT = 2;
-	
-	/**
-	 * Return all cookies as one long string (strict mode)
-	 *  - Single space after the semi-colon separating each cookie
-	 *  - Remove trailing semi-colon, if any
-	 */
-	const COOKIE_STRING_CONCAT_STRICT = 3;
-	
-	/**
-	 * @var \Zend\Http\Cookies
-	 */
-	protected $cookies = array();
-	
+    /**
+     * Return cookie(s) as a Zend_Http_Cookie object
+     *
+     */
+    const COOKIE_OBJECT = 0;
+
+    /**
+     * Return cookie(s) as a string (suitable for sending in an HTTP request)
+     *
+     */
+    const COOKIE_STRING_ARRAY = 1;
+
+    /**
+     * Return all cookies as one long string (suitable for sending in an HTTP request)
+     *
+     */
+    const COOKIE_STRING_CONCAT = 2;
+
+    /**
+     * Return all cookies as one long string (strict mode)
+     *  - Single space after the semi-colon separating each cookie
+     *  - Remove trailing semi-colon, if any
+     */
+    const COOKIE_STRING_CONCAT_STRICT = 3;
+
+    /**
+     * @var \Zend\Http\Cookies
+     */
+    protected $cookies = array();
+
     /**
      * @var \Zend\Http\Headers
      */

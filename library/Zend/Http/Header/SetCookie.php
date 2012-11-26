@@ -503,7 +503,7 @@ class SetCookie implements MultipleHeaderInterface
         return true;
 
     }
-    
+
     /**
      * Checks whether the cookie should be sent or not in a specific scenario
      *
@@ -517,31 +517,31 @@ class SetCookie implements MultipleHeaderInterface
     	if (is_string ($uri)) {
     		$uri = Zend\Uri\UriFactory::factory($uri);
     	}
-    
+
     	// Make sure we have a valid Zend_Uri_Http object
     	if (! ($uri->isValid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {
     		throw new Exception\InvalidArgumentException('Passed URI is not a valid HTTP or HTTPS URI');
     	}
-    
+
     	// Check that the cookie is secure (if required) and not expired
     	if ($this->secure && $uri->getScheme() != 'https') return false;
     	if ($this->isExpired($now)) return false;
     	if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
-    
+
     	// Check if the domain matches
     	if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
     		return false;
     	}
-    
+
     	// Check that path matches using prefix match
     	if (! self::matchCookiePath($this->getPath(), $uri->getPath())) {
     		return false;
     	}
-    
+
     	// If we didn't die until now, return true.
     	return true;
     }
-    
+
     /**
      * Check if a cookie's domain matches a host name.
      *
@@ -557,18 +557,18 @@ class SetCookie implements MultipleHeaderInterface
     	if (! $cookieDomain) {
     		throw new Exception\InvalidArgumentException('$cookieDomain is expected to be a cookie domain');
     	}
-    
+
     	if (! $host) {
     		throw new Exception\InvalidArgumentException('$host is expected to be a host name');
     	}
-    
+
     	$cookieDomain = strtolower($cookieDomain);
     	$host = strtolower($host);
     	// Check for either exact match or suffix match
     	return ($cookieDomain == $host ||
     			preg_match('/' . preg_quote($cookieDomain) . '$/', $host));
     }
-    
+
     /**
      * Check if a cookie's path matches a URL path
      *
@@ -583,11 +583,11 @@ class SetCookie implements MultipleHeaderInterface
     	if (! $cookiePath) {
     		throw new Exception\InvalidArgumentException('$cookiePath is expected to be a cookie path');
     	}
-    
+
     	if (! $path) {
     		throw new Exception\InvalidArgumentException('$path is expected to be a host name');
     	}
-    
+
     	return (strpos($path, $cookiePath) === 0);
     }
 

@@ -835,7 +835,7 @@ class Client implements Stdlib\DispatchableInterface
             if ($cookie->getFieldValue()) {
                 $headers['Cookie'] = $cookie->getFieldValue();
             }
-            
+
             // check that adapter supports streaming before using it
             if (is_resource($body) && !($this->adapter instanceof Client\Adapter\StreamInterface)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');

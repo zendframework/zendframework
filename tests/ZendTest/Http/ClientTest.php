@@ -19,32 +19,32 @@ use Zend\Http\Header\SetCookie;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
-	public function testIfCookiesAreSticky()
-	{
-		$initialCookies = array(
-				new SetCookie('foo', 'far', null, '/', 'www.domain.com' ),
-				new SetCookie('bar', 'biz', null, '/', 'www.domain.com')
-		);
-	
-		$requestString = "GET http://www.domain.com/index.php HTTP/1.1\r\nHost: domain.com\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:16.0) Gecko/20100101 Firefox/16.0\r\nAccept: */*\r\nAccept-Language: en-US,en;q=0.5\r\nAccept-Encoding: gzip, deflate\r\nConnection: keep-alive\r\n";
-		$request = Request::fromString($requestString);
-	
-		$client = new Client('http://www.domain.com/');
-		$client->setRequest($request);
-		$client->addCookie($initialCookies);
-	
-		$cookies = new Cookies($client->getRequest()->getHeaders());
-		$rawHeaders = "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nContent-Encoding: gzip\r\nContent-Type: application/javascript\r\nDate: Sun, 18 Nov 2012 16:16:08 GMT\r\nServer: nginx/1.1.19\r\nSet-Cookie: baz=bah; domain=www.domain.com; path=/\r\nSet-Cookie: joe=test; domain=www.domain.com; path=/\r\nVary: Accept-Encoding\r\nX-Powered-By: PHP/5.3.10-1ubuntu3.4\r\nConnection: keep-alive\r\n";
-		$response = Response::fromString($rawHeaders);
-		$client->setResponse($response);
-	
-		$cookies->addCookiesFromResponse($client->getResponse(), $client->getUri());
-	
-		$client->addCookie( $cookies->getMatchingCookies($client->getUri()) );
-	
-		$this->assertEquals(4, count($client->getCookies()));
-	}
-	
+    public function testIfCookiesAreSticky()
+    {
+        $initialCookies = array(
+            new SetCookie('foo', 'far', null, '/', 'www.domain.com' ),
+            new SetCookie('bar', 'biz', null, '/', 'www.domain.com')
+        );
+
+        $requestString = "GET http://www.domain.com/index.php HTTP/1.1\r\nHost: domain.com\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:16.0) Gecko/20100101 Firefox/16.0\r\nAccept: */*\r\nAccept-Language: en-US,en;q=0.5\r\nAccept-Encoding: gzip, deflate\r\nConnection: keep-alive\r\n";
+        $request = Request::fromString($requestString);
+
+        $client = new Client('http://www.domain.com/');
+        $client->setRequest($request);
+        $client->addCookie($initialCookies);
+
+        $cookies = new Cookies($client->getRequest()->getHeaders());
+        $rawHeaders = "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nContent-Encoding: gzip\r\nContent-Type: application/javascript\r\nDate: Sun, 18 Nov 2012 16:16:08 GMT\r\nServer: nginx/1.1.19\r\nSet-Cookie: baz=bah; domain=www.domain.com; path=/\r\nSet-Cookie: joe=test; domain=www.domain.com; path=/\r\nVary: Accept-Encoding\r\nX-Powered-By: PHP/5.3.10-1ubuntu3.4\r\nConnection: keep-alive\r\n";
+        $response = Response::fromString($rawHeaders);
+        $client->setResponse($response);
+
+        $cookies->addCookiesFromResponse($client->getResponse(), $client->getUri());
+
+        $client->addCookie( $cookies->getMatchingCookies($client->getUri()) );
+
+        $this->assertEquals(4, count($client->getCookies()));
+}
+
     public function testClientRetrievesUppercaseHttpMethodFromRequestObject()
     {
         $client = new Client;

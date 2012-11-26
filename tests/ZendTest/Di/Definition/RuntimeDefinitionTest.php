@@ -59,4 +59,38 @@ class RuntimeDefinitionTest extends TestCase
             )
         );
     }
+
+    public function testExceptionDefaultValue()
+    {
+        $definition = new RuntimeDefinition();
+
+        $definition->forceLoadClass('RecursiveIteratorIterator');
+
+        $this->assertSame(
+            array(
+                'RecursiveIteratorIterator::__construct:0' => array(
+                    'iterator',
+                    'Traversable',
+                    true,
+                    null,
+                ),
+                'RecursiveIteratorIterator::__construct:1' => Array (
+                    'mode',
+                    null,
+                    true,
+                    null,
+                ),
+                'RecursiveIteratorIterator::__construct:2' => Array (
+                    'flags',
+                    null,
+                    true,
+                    null,
+                ),
+            ),
+            $definition->getMethodParameters(
+                'RecursiveIteratorIterator',
+                '__construct'
+            )
+        );
+    }
 }

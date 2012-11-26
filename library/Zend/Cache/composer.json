@@ -19,7 +19,7 @@
         "zendframework/zend-eventmanager": "self.version"
     },
     "require-dev": {
-        "zendframework/zend-serializer": "self-version"
+        "zendframework/zend-serializer": "self.version"
     },
     "suggest": {
         "zendframework/zend-serializer": "Zend\\Serializer component",

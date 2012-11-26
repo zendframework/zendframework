@@ -10,7 +10,7 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
@@ -101,24 +101,27 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             throw new \InvalidArgumentException('values() expects an array of values');
         }
 
+        // determine if this is assoc or a set of values
         $keys = array_keys($values);
         $firstKey = current($keys);
 
-        if (is_string($firstKey)) {
-            if ($flag == self::VALUES_MERGE) {
-                $this->columns(array_merge($this->columns, $keys));
-            } else {
-                $this->columns($keys);
-            }
-            $values = array_values($values);
-        } elseif (is_int($firstKey)) {
-            $values = array_values($values);
+        if ($flag == self::VALUES_SET) {
+            $this->columns = array();
+            $this->values = array();
         }
 
-        if ($flag == self::VALUES_MERGE) {
-            $this->values = array_merge($this->values, $values);
-        } else {
-            $this->values = $values;
+        if (is_string($firstKey)) {
+            foreach ($keys as $key) {
+                if (($index = array_search($key, $this->columns)) !== false) {
+                    $this->values[$index] = $values[$key];
+                } else {
+                    $this->columns[] = $key;
+                    $this->values[] = $values[$key];
+                }
+            }
+        } elseif (is_int($firstKey)) {
+            // determine if count of columns should match count of values
+            $this->values = array_merge($this->values, array_values($values));
         }
 
         return $this;
@@ -137,11 +140,11 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Prepare statement
      *
-     * @param  Adapter $adapter
+     * @param  AdapterInterface $adapter
      * @param  StatementContainerInterface $statementContainer
      * @return void
      */
-    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
+    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
@@ -160,7 +163,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
             if ($this->values[$cIndex] instanceof Expression) {
-                $exprData = $this->processExpression($this->values[$cIndex], $platform, $adapter);
+                $exprData = $this->processExpression($this->values[$cIndex], $platform, $driver);
                 $values[$cIndex] = $exprData->getSql();
                 $parameterContainer->merge($exprData->getParameterContainer());
             } else {

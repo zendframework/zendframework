@@ -90,11 +90,11 @@ class Factory
             }
 
             $config = include $filename;
-        } elseif (isset(self::$extensions[$extension])) {
-            $reader = self::$extensions[$extension];
+        } elseif (isset(static::$extensions[$extension])) {
+            $reader = static::$extensions[$extension];
             if (!$reader instanceof Reader\ReaderInterface) {
-                $reader = self::getReaderPluginManager()->get($reader);
-                self::$extensions[$extension] = $reader;
+                $reader = static::getReaderPluginManager()->get($reader);
+                static::$extensions[$extension] = $reader;
             }
 
             /** @var Reader\ReaderInterface $reader  */
@@ -121,7 +121,7 @@ class Factory
         $config = array();
 
         foreach ($files as $file) {
-            $config = ArrayUtils::merge($config, self::fromFile($file));
+            $config = ArrayUtils::merge($config, static::fromFile($file));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;
@@ -191,7 +191,7 @@ class Factory
      */
     public static function setReaderPluginManager(ReaderPluginManager $readers)
     {
-        self::$readers = $readers;
+        static::$readers = $readers;
     }
 
     /**
@@ -253,7 +253,7 @@ class Factory
             ));
         }
 
-        self::$extensions[$extension] = $reader;
+        static::$extensions[$extension] = $reader;
     }
 
     /**

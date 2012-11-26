@@ -218,14 +218,14 @@ class Links extends AbstractHelper
         }
 
         $result = array('rel' => array(), 'rev' => array());
-        $native = array_values(self::$RELATIONS);
+        $native = array_values(static::$RELATIONS);
 
         foreach (array_keys($result) as $rel) {
             $meth = 'getDefined' . ucfirst($rel);
             $types = array_merge($native, array_diff($page->$meth(), $native));
 
             foreach ($types as $type) {
-                if (!$relFlag = array_search($type, self::$RELATIONS)) {
+                if (!$relFlag = array_search($type, static::$RELATIONS)) {
                     $relFlag = self::RENDER_CUSTOM;
                 }
                 if (!($flag & $relFlag)) {

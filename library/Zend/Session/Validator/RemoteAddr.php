@@ -72,7 +72,7 @@ class RemoteAddr implements SessionValidator
      */
     public static function setUseProxy($useProxy = true)
     {
-        self::$useProxy = $useProxy;
+        static::$useProxy = $useProxy;
     }
 
     /**
@@ -82,7 +82,7 @@ class RemoteAddr implements SessionValidator
      */
     public static function getUseProxy()
     {
-        return self::$useProxy;
+        return static::$useProxy;
     }
 
     /**
@@ -92,7 +92,7 @@ class RemoteAddr implements SessionValidator
      */
     protected function getIpAddress()
     {
-        if (self::$useProxy) {
+        if (static::$useProxy) {
             // proxy IP address
             if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP']) {
                 $ips = explode(',', $_SERVER['HTTP_CLIENT_IP']);

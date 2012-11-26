@@ -206,6 +206,7 @@ class ApplicationTest extends TestCase
         $response = $this->application->getResponse();
         $router   = $this->serviceManager->get('HttpRouter');
 
+        $this->assertFalse($event->isError());
         $this->assertSame($request, $event->getRequest());
         $this->assertSame($response, $event->getResponse());
         $this->assertSame($router, $event->getRouter());
@@ -447,7 +448,8 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController();
         $router = new Router\SimpleRouteStack();
-        $this->application->getMvcEvent()->setRouter($router);
+        $event = $this->application->getMvcEvent();
+        $event->setRouter($router);
 
         $response = $this->application->getResponse();
         $events   = $this->application->getEventManager();
@@ -458,6 +460,7 @@ class ApplicationTest extends TestCase
         });
 
         $this->application->run();
+        $this->assertTrue($event->isError());
         $this->assertContains(Application::ERROR_ROUTER_NO_MATCH, $response->getContent());
     }
 
@@ -484,7 +487,8 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController();
         $router = new Router\SimpleRouteStack();
-        $this->application->getMvcEvent()->setRouter($router);
+        $event = $this->application->getMvcEvent();
+        $event->setRouter($router);
 
         $response = $this->application->getResponse();
         $events   = $this->application->getEventManager();
@@ -495,7 +499,7 @@ class ApplicationTest extends TestCase
         });
 
         $this->application->run();
-        $event = $this->application->getMvcEvent();
+        $this->assertTrue($event->isError());
         $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $event->getError());
     }
 
@@ -571,5 +575,57 @@ class ApplicationTest extends TestCase
         $this->application->run();
         $event = $this->application->getMvcEvent();
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $event->getResult());
+    }
+
+    /**
+     * @group 2981
+     */
+    public function testReturnsResponseFromListenerWhenRouteEventShortCircuits()
+    {
+        $this->application->bootstrap();
+        $testResponse = new Response();
+        $response = $this->application->getResponse();
+        $events   = $this->application->getEventManager();
+        $events->clearListeners(MvcEvent::EVENT_DISPATCH);
+        $events->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($testResponse) {
+            $testResponse->setContent('triggered');
+            return $testResponse;
+        }, 100);
+
+        $self      = $this;
+        $triggered = false;
+        $events->attach(MvcEvent::EVENT_FINISH, function ($e) use ($self, $testResponse, &$triggered) {
+            $self->assertSame($testResponse, $e->getResponse());
+            $triggered = true;
+        });
+
+        $this->application->run();
+        $this->assertTrue($triggered);
+    }
+
+    /**
+     * @group 2981
+     */
+    public function testReturnsResponseFromListenerWhenDispatchEventShortCircuits()
+    {
+        $this->application->bootstrap();
+        $testResponse = new Response();
+        $response = $this->application->getResponse();
+        $events   = $this->application->getEventManager();
+        $events->clearListeners(MvcEvent::EVENT_ROUTE);
+        $events->attach(MvcEvent::EVENT_DISPATCH, function ($e) use ($testResponse) {
+            $testResponse->setContent('triggered');
+            return $testResponse;
+        }, 100);
+
+        $self      = $this;
+        $triggered = false;
+        $events->attach(MvcEvent::EVENT_FINISH, function ($e) use ($self, $testResponse, &$triggered) {
+            $self->assertSame($testResponse, $e->getResponse());
+            $triggered = true;
+        });
+
+        $this->application->run();
+        $this->assertTrue($triggered);
     }
 }

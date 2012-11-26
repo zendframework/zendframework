@@ -440,7 +440,7 @@ class Request extends AbstractMessage implements RequestInterface
         return ($this->method === self::METHOD_CONNECT);
     }
 
-    /*
+    /**
      * Is this a PATCH method request?
      *
      * @return bool

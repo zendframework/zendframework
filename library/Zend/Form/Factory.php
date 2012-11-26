@@ -558,7 +558,7 @@ class Factory
     {
         $serviceLocator = $this->getFormElementManager()->getServiceLocator();
 
-        if ($serviceLocator->has($hydratorName)) {
+        if ($serviceLocator && $serviceLocator->has($hydratorName)) {
             return $serviceLocator->get($hydratorName);
         }
 

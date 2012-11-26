@@ -216,7 +216,7 @@ class Filter extends Filter\StringFilter
         if ($prepend !== null) {
             $str .= $prepend;
         }
-        $str .= self::escapeValue($value);
+        $str .= static::escapeValue($value);
         if ($append !== null) {
             $str .= $append;
         }
@@ -234,7 +234,7 @@ class Filter extends Filter\StringFilter
      */
     public function __construct($attr, $value, $filtertype, $prepend = null, $append = null)
     {
-        $filter = self::createFilterString($attr, $value, $filtertype, $prepend, $append);
+        $filter = static::createFilterString($attr, $value, $filtertype, $prepend, $append);
         parent::__construct($filter);
     }
 }

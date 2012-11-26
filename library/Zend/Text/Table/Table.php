@@ -122,7 +122,7 @@ class Table
 
         // If no decorator was given, use default unicode decorator
         if ($this->decorator === null) {
-            if (self::getOutputCharset() === 'utf-8') {
+            if (static::getOutputCharset() === 'utf-8') {
                 $this->setDecorator('unicode');
             } else {
                 $this->setDecorator('ascii');
@@ -267,7 +267,7 @@ class Table
      */
     public static function setInputCharset($charset)
     {
-        self::$inputCharset = strtolower($charset);
+        static::$inputCharset = strtolower($charset);
     }
 
     /**
@@ -277,7 +277,7 @@ class Table
      */
     public static function getInputCharset()
     {
-        return self::$inputCharset;
+        return static::$inputCharset;
     }
 
     /**
@@ -287,7 +287,7 @@ class Table
      */
     public static function setOutputCharset($charset)
     {
-        self::$outputCharset = strtolower($charset);
+        static::$outputCharset = strtolower($charset);
     }
 
     /**
@@ -297,7 +297,7 @@ class Table
      */
     public static function getOutputCharset()
     {
-        return self::$outputCharset;
+        return static::$outputCharset;
     }
 
     /**

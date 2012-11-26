@@ -88,7 +88,7 @@ class Container extends ArrayObject
      */
     public static function setDefaultManager(Manager $manager = null)
     {
-        self::$defaultManager = $manager;
+        static::$defaultManager = $manager;
     }
 
     /**
@@ -101,16 +101,16 @@ class Container extends ArrayObject
      */
     public static function getDefaultManager()
     {
-        if (null === self::$defaultManager) {
-            $manager = new self::$managerDefaultClass();
+        if (null === static::$defaultManager) {
+            $manager = new static::$managerDefaultClass();
             if (!$manager instanceof Manager) {
                 throw new Exception\InvalidArgumentException(
                     'Invalid default manager type provided; must implement ManagerInterface'
                 );
             }
-            self::$defaultManager = $manager;
+            static::$defaultManager = $manager;
         }
-        return self::$defaultManager;
+        return static::$defaultManager;
     }
 
     /**
@@ -133,7 +133,7 @@ class Container extends ArrayObject
     protected function setManager(Manager $manager = null)
     {
         if (null === $manager) {
-            $manager = self::getDefaultManager();
+            $manager = static::getDefaultManager();
             if (!$manager instanceof Manager) {
                 throw new Exception\InvalidArgumentException(
                     'Manager provided is invalid; must implement ManagerInterface'

@@ -43,7 +43,7 @@ class CacheControl implements HeaderInterface
         }
 
         // @todo implementation details
-        $header->directives = self::parseValue($value);
+        $header->directives = static::parseValue($value);
 
         return $header;
     }
@@ -171,7 +171,7 @@ class CacheControl implements HeaderInterface
         $lastMatch = null;
 
         state_directive:
-        switch (self::match(array('[a-zA-Z][a-zA-Z_-]*'), $value, $lastMatch)) {
+        switch (static::match(array('[a-zA-Z][a-zA-Z_-]*'), $value, $lastMatch)) {
             case 0:
                 $directive = $lastMatch;
                 goto state_value;
@@ -183,7 +183,7 @@ class CacheControl implements HeaderInterface
         }
 
         state_value:
-        switch (self::match(array('="[^"]*"', '=[^",\s;]*'), $value, $lastMatch)) {
+        switch (static::match(array('="[^"]*"', '=[^",\s;]*'), $value, $lastMatch)) {
             case 0:
                 $directives[$directive] = substr($lastMatch, 2, -1);
                 goto state_separator;
@@ -201,7 +201,7 @@ class CacheControl implements HeaderInterface
         }
 
         state_separator:
-        switch (self::match(array('\s*,\s*', '$'), $value, $lastMatch)) {
+        switch (static::match(array('\s*,\s*', '$'), $value, $lastMatch)) {
             case 0:
                 goto state_directive;
                 break;

@@ -220,7 +220,7 @@ class ParameterGenerator extends AbstractGenerator
     {
         $output = '';
 
-        if ($this->type && !in_array($this->type, self::$simple)) {
+        if ($this->type && !in_array($this->type, static::$simple)) {
             $output .= $this->type . ' ';
         }
 

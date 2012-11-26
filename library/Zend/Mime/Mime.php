@@ -99,7 +99,7 @@ class Mime
      */
     public static function isPrintable($str)
     {
-        return (strcspn($str, self::$qpKeysString) == strlen($str));
+        return (strcspn($str, static::$qpKeysString) == strlen($str));
     }
 
     /**
@@ -154,7 +154,7 @@ class Mime
     private static function _encodeQuotedPrintable($str)
     {
         $str = str_replace('=', '=3D', $str);
-        $str = str_replace(self::$qpKeys, self::$qpReplaceValues, $str);
+        $str = str_replace(static::$qpKeys, static::$qpReplaceValues, $str);
         $str = rtrim($str);
         return $str;
     }
@@ -191,7 +191,7 @@ class Mime
         $tmp = "";
         while (strlen($str) > 0) {
             $currentLine = max(count($lines)-1, 0);
-            $token       = self::getNextQuotedPrintableToken($str);
+            $token       = static::getNextQuotedPrintableToken($str);
             $str         = substr($str, strlen($token));
 
             $tmp .= $token;
@@ -253,7 +253,7 @@ class Mime
         $suffix = '?=';
         $remainingLength = $lineLength - strlen($prefix) - strlen($suffix);
 
-        $encodedValue = self::encodeBase64($str, $remainingLength, $lineEnd);
+        $encodedValue = static::encodeBase64($str, $remainingLength, $lineEnd);
         $encodedValue = str_replace($lineEnd, $suffix . $lineEnd . ' ' . $prefix, $encodedValue);
         $encodedValue = $prefix . $encodedValue . $suffix;
         return $encodedValue;
@@ -285,7 +285,7 @@ class Mime
     {
         // This string needs to be somewhat unique
         if ($boundary === null) {
-            $this->boundary = '=_' . md5(microtime(1) . self::$makeUnique++);
+            $this->boundary = '=_' . md5(microtime(1) . static::$makeUnique++);
         } else {
             $this->boundary = $boundary;
         }
@@ -303,10 +303,10 @@ class Mime
     {
         switch ($encoding) {
             case self::ENCODING_BASE64:
-                return self::encodeBase64($str, self::LINELENGTH, $EOL);
+                return static::encodeBase64($str, self::LINELENGTH, $EOL);
 
             case self::ENCODING_QUOTEDPRINTABLE:
-                return self::encodeQuotedPrintable($str, self::LINELENGTH, $EOL);
+                return static::encodeQuotedPrintable($str, self::LINELENGTH, $EOL);
 
             default:
                 /**

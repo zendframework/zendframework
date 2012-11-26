@@ -20,8 +20,8 @@ class DateTimeLocalTest extends TestCase
         $element = new DateTimeLocalElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min'       => '2000-01-01T00:00:00Z',
-            'max'       => '2001-01-01T00:00:00Z',
+            'min'       => '2000-01-01T00:00Z',
+            'max'       => '2001-01-01T00:00Z',
             'step'      => '1',
         ));
 
@@ -41,11 +41,11 @@ class DateTimeLocalTest extends TestCase
             switch ($class) {
                 case 'Zend\Validator\GreaterThan':
                     $this->assertTrue($validator->getInclusive());
-                    $this->assertEquals('2000-01-01T00:00:00Z', $validator->getMin());
+                    $this->assertEquals('2000-01-01T00:00Z', $validator->getMin());
                     break;
                 case 'Zend\Validator\LessThan':
                     $this->assertTrue($validator->getInclusive());
-                    $this->assertEquals('2001-01-01T00:00:00Z', $validator->getMax());
+                    $this->assertEquals('2001-01-01T00:00Z', $validator->getMax());
                     break;
                 case 'Zend\Validator\DateStep':
                     $dateInterval = new \DateInterval('PT1M');

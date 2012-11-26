@@ -92,4 +92,13 @@ class DumbTest extends CommonTestCase
 
         $this->assertEquals('-', $this->helper->getSeparator());
     }
+
+    public function testRenderSeparatorOneTimeAfterText()
+    {
+        $element = $this->getElement();
+        $this->helper->setSeparator('<br />');
+        $markup  = $this->helper->render($element);
+        $this->assertContains($this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator() . '<input name="foo[id]" type="hidden"', $markup);
+        $this->assertNotContains($this->helper->getSeparator() . '<input name="foo[input]" type="text"', $markup);
+    }
 }

@@ -1,19 +1,45 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
+ */
 
 namespace Zend\Stdlib;
 
-use Zend\Loader\Broker,
-    Zend\Loader\PluginBroker,
-    Zend\Stdlib\StringWrapper\StringWrapperInterface,
-    Zend\Stdlib\StringWrapper\MbString as MbStringWrapper,
-    Zend\Stdlib\StringWrapper\Iconv as IconvWrapper,
-    Zend\Stdlib\StringWrapper\Intl as IntlWrapper,
-    Zend\Stdlib\StringWrapper\Native as NativeWrapper;
+use Zend\Stdlib\StringWrapper\StringWrapperInterface;
+use Zend\Stdlib\StringWrapper\MbString as MbStringWrapper;
+use Zend\Stdlib\StringWrapper\Iconv as IconvWrapper;
+use Zend\Stdlib\StringWrapper\Intl as IntlWrapper;
+use Zend\Stdlib\StringWrapper\Native as NativeWrapper;
 
-class StringUtils
+/**
+ * Utility class for handling strings of different character encodings
+ * using available PHP extensions.
+ *
+ * Declared abstract, as we have no need for instantiation.
+ *
+ * @category   Zend
+ * @package    Zend_Stdlib
+ */
+abstract class StringUtils
 {
 
+    /**
+     * Ordered list of registered string wrapper instances
+     * 
+     * @var StringWrapperInterface[]
+     */
     protected static $wrapperRegistry;
+
+    /**
+     * A list of known single-byte charsets (upper-case)
+     * 
+     * @var string[]
+     */
     protected static $singleByteCharsets = array(
         'ASCII', '7BIT', '8BIT',
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5',
@@ -27,7 +53,7 @@ class StringUtils
     /**
      * Get registered wrappers
      *
-     * @return Zend\Stdlib\StringWrapper\StringWrapperInterface[]
+     * @return StringWrapperInterface[]
      */
     public static function getRegisteredWrappers()
     {
@@ -52,6 +78,12 @@ class StringUtils
         return static::$wrapperRegistry;
     }
 
+    /**
+     * Register a string wrapper
+     *
+     * @param StringWrapperInterface
+     * @return void
+     */
     public static function registerWrapper(StringWrapperInterface $wrapper)
     {
         if (!in_array($wrapper, static::$wrapperRegistry, true)) {
@@ -59,6 +91,12 @@ class StringUtils
         }
     }
 
+    /**
+     * Unregister a string wrapper
+     *
+     * @param StringWrapperInterface $wrapper
+     * @return void
+     */
     public static function unregisterWrapper(StringWrapperInterface $wrapper)
     {
         $index = array_search($wrapper, static::$wrapperRegistry, true);
@@ -67,6 +105,14 @@ class StringUtils
         }
     }
 
+    /**
+     * Get the first string wrapper supporting one or more charsets
+     *
+     * @param string $charset Charset supported by he string wrapper
+     * @param string $charsetN, ... Unlimited OPTIONAL number of additional charsets
+     * @return StringWrapperInterface
+     * @throws Exception\RuntimeException If no wrapper supports all given charsets
+     */
     public static function getWrapper($charset = 'UTF-8')
     {
         $charsets = func_get_args();
@@ -81,21 +127,41 @@ class StringUtils
             return $wrapper;
         }
 
-        throw new Exception\RuntimeException('No wrapper found supporting charset(s) ' . implode(', ', $charsets));
+        throw new Exception\RuntimeException(
+            'No wrapper found supporting charset(s) ' . implode(', ', $charsets)
+        );
     }
 
+    /**
+     * Get a list of all known single-byte charsets
+     *
+     * @return string[]
+     */
     public static function getSingleByteCharsets()
     {
         return static::$singleByteCharsets;
     }
 
+    /**
+     * Check if a given charset is a known single-byte charset
+     *
+     * @param string $charset
+     * @return boolean
+     */
     public static function isSingleByteCharset($charset)
     {
         return in_array(strtoupper($charset), static::$singleByteCharsets);
     }
 
-    public static function isValidUtf8($string)
+    /**
+     * Check if a given string is valid UTF-8 encoded
+     *
+     * @param string $str
+     * @return boolean
+     */
+    public static function isValidUtf8($str)
     {
-        return ($string === '' || preg_match('/^./su', $string) == 1);
+        return is_string($str) && ($str === '' || preg_match('/^./su', $str) == 1);
     }
 }
+

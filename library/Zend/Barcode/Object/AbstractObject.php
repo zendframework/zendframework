@@ -893,7 +893,7 @@ abstract class AbstractObject implements ObjectInterface
     {
         if (is_numeric($this->font) && $this->orientation != 0) {
             throw new Exception\RuntimeException(
-                'Only drawing with TTF font allow orientation of the barcode'
+                'Only drawing with TTF font allow orientation of the barcode.'
             );
         }
     }

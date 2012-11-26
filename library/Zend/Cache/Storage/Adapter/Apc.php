@@ -141,9 +141,9 @@ class Apc extends AbstractAdapter implements
     {
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        if ($namespace === '') {
-            $pattern = null;
-        } else {
+        $prefix    = '';
+        $pattern   = null;
+        if ($namespace !== '') {
             $prefix  = $namespace . $options->getNamespaceSeparator();
             $pattern = '/^' . preg_quote($prefix, '/') . '/';
         }

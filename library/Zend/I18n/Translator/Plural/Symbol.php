@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_I18n
  */
 
 namespace Zend\I18n\Translator\Plural;
@@ -29,14 +18,12 @@ use Zend\I18n\Exception;
  *
  * All properties in the symbol are defined as public for easier and faster
  * access from the applied closures. An exception are the closure properties
- * themself, as they have to be accessed via the appropriate getter and
+ * themselves, as they have to be accessed via the appropriate getter and
  * setter methods.
  *
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Symbol
 {
@@ -109,7 +96,6 @@ class Symbol
      * @param  Parser  $parser
      * @param  string  $id
      * @param  integer $leftBindingPower
-     * @return void
      */
     public function __construct(Parser $parser, $id, $leftBindingPower)
     {
@@ -145,6 +131,7 @@ class Symbol
     /**
      * Get null denotation.
      *
+     * @throws Exception\ParseException
      * @return Symbol
      */
     public function getNullDenotation()
@@ -164,6 +151,7 @@ class Symbol
      * Get left denotation.
      *
      * @param  Symbol $left
+     * @throws Exception\ParseException
      * @return Symbol
      */
     public function getLeftDenotation($left)

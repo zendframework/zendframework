@@ -7,32 +7,37 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Password;
 
-use Zend\Math\Math;
 use Traversable;
+use Zend\Math\Rand;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Math\Exception as MathException;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Bcrypt implements PasswordInterface
 {
     const MIN_SALT_SIZE = 16;
+
     /**
      * @var string
      */
     protected $cost = '14';
+
     /**
      * @var string
      */
     protected $salt;
+
+    /**
+     * @var boolean
+     */
+    protected $backwardCompatibility = false;
 
     /**
      * Constructor
@@ -47,7 +52,7 @@ class Bcrypt implements PasswordInterface
                 $options = ArrayUtils::iteratorToArray($options);
             } elseif (!is_array($options)) {
                 throw new Exception\InvalidArgumentException(
-                    'The options parameter must be an array, a Zend\Config\Config object or a Traversable'
+                    'The options parameter must be an array or a Traversable'
                 );
             }
             foreach ($options as $key => $value) {
@@ -73,7 +78,7 @@ class Bcrypt implements PasswordInterface
     public function create($password)
     {
         if (empty($this->salt)) {
-            $salt = Math::randBytes(self::MIN_SALT_SIZE);   
+            $salt = Rand::getBytes(self::MIN_SALT_SIZE);
         } else {
             $salt = $this->salt;
         }
@@ -82,19 +87,20 @@ class Bcrypt implements PasswordInterface
          * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
          */
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
+        if ((version_compare(PHP_VERSION, '5.3.7') >= 0) && !$this->backwardCompatibility) {
             $prefix = '$2y$';
         } else {
             $prefix = '$2a$';
-            // check if the password contains 8-bit character 
+            // check if the password contains 8-bit character
             if (preg_match('/[\x80-\xFF]/', $password)) {
                 throw new Exception\RuntimeException(
-                        'The bcrypt implementation used by PHP can contains a security flaw using password with 8-bit character. ' .
-                        'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
+                    'The bcrypt implementation used by PHP can contains a security flaw ' .
+                    'using password with 8-bit character. ' .
+                    'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
                 );
             }
         }
-        $hash   = crypt($password, $prefix . $this->cost . '$' . $salt64);
+        $hash = crypt($password, $prefix . $this->cost . '$' . $salt64);
         if (strlen($hash) <= 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }
@@ -123,7 +129,7 @@ class Bcrypt implements PasswordInterface
     public function setCost($cost)
     {
         if (!empty($cost)) {
-            $cost = (int)$cost;
+            $cost = (int) $cost;
             if ($cost < 4 || $cost > 31) {
                 throw new Exception\InvalidArgumentException(
                     'The cost parameter of bcrypt must be in range 04-31'
@@ -170,5 +176,26 @@ class Bcrypt implements PasswordInterface
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    /**
+     * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
+     *
+     * @param boolean $value
+     */
+    public function setBackwardCompatibility($value)
+    {
+        $this->backwardCompatibility = (boolean) $value;
+        return $this;
+    }
+
+    /**
+     * Get the backward compatibility
+     *
+     * @return boolean
+     */
+    public function getBackwardCompatibility()
+    {
+        return $this->backwardCompatibility;
     }
 }

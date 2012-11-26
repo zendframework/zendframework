@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form;
@@ -27,14 +17,13 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 /**
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface FieldsetInterface extends
     Countable,
     IteratorAggregate,
     ElementInterface,
-    ElementPrepareAwareInterface
+    ElementPrepareAwareInterface,
+    FormFactoryAwareInterface
 {
     /**
      * Add an element or fieldset
@@ -70,9 +59,18 @@ interface FieldsetInterface extends
      * Remove a named element or fieldset
      *
      * @param  string $elementOrFieldset
-     * @return void
+     * @return FieldsetInterface
      */
     public function remove($elementOrFieldset);
+
+    /**
+     * Set/change the priority of an element or fieldset
+     *
+     * @param string $elementOrFieldset
+     * @param int $priority
+     * @return FieldsetInterface
+     */
+    public function setPriority($elementOrFieldset, $priority);
 
     /**
      * Retrieve all attached elements
@@ -116,6 +114,14 @@ interface FieldsetInterface extends
     public function getObject();
 
     /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param $object
+     * @return boolean
+     */
+    public function allowObjectBinding($object);
+
+    /**
      * Set the hydrator to use when binding an object to the element
      *
      * @param  HydratorInterface $hydrator
@@ -137,4 +143,11 @@ interface FieldsetInterface extends
      * @return mixed
      */
     public function bindValues(array $values = array());
+
+    /**
+     * Checks if this fieldset can bind data
+     *
+     * @return boolean
+     */
+    public function allowValueBinding();
 }

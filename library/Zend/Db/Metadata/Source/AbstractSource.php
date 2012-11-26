@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Metadata\Source;
 
-use Zend\Db\Metadata\MetadataInterface;
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Metadata\MetadataInterface;
 use Zend\Db\Metadata\Object;
 
 /**
@@ -67,6 +67,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get table names
      *
      * @param  string $schema
+     * @param  bool   $includeViews
      * @return string[]
      */
     public function getTableNames($schema = null, $includeViews = false)
@@ -80,7 +81,7 @@ abstract class AbstractSource implements MetadataInterface
         if ($includeViews) {
             return array_keys($this->data['table_names'][$schema]);
         }
-        
+
         $tableNames = array();
         foreach ($this->data['table_names'][$schema] as $tableName => $data) {
             if ('BASE TABLE' == $data['table_type']) {
@@ -95,6 +96,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get tables
      *
      * @param  string $schema
+     * @param  bool   $includeViews
      * @return Object\TableObject[]
      */
     public function getTables($schema = null, $includeViews = false)
@@ -144,6 +146,7 @@ abstract class AbstractSource implements MetadataInterface
                 throw new \Exception('Table "' . $tableName . '" is of an unsupported type "' . $data['table_type'] . '"');
         }
         $table->setColumns($this->getColumns($tableName, $schema));
+        $table->setConstraints($this->getConstraints($tableName, $schema));
         return $table;
     }
 
@@ -151,6 +154,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get view names
      *
      * @param string $schema
+     * @return array
      */
     public function getViewNames($schema = null)
     {
@@ -173,6 +177,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get views
      *
      * @param string $schema
+     * @return array
      */
     public function getViews($schema = null)
     {
@@ -192,6 +197,7 @@ abstract class AbstractSource implements MetadataInterface
      *
      * @param string $viewName
      * @param string $schema
+     * @return \Zend\Db\Metadata\Object\TableObject
      */
     public function getView($viewName, $schema = null)
     {
@@ -348,18 +354,18 @@ abstract class AbstractSource implements MetadataInterface
         $constraint = new Object\ConstraintObject($constraintName, $table, $schema);
 
         foreach (array(
-            'constraint_type'    => 'setType',
-            'match_option'       => 'setMatchOption',
-            'update_rule'        => 'setUpdateRule',
-            'delete_rule'        => 'setDeleteRule',
-            'columns'            => 'setColumns',
+            'constraint_type'         => 'setType',
+            'match_option'            => 'setMatchOption',
+            'update_rule'             => 'setUpdateRule',
+            'delete_rule'             => 'setDeleteRule',
+            'columns'                 => 'setColumns',
             'referenced_table_schema' => 'setReferencedTableSchema',
             'referenced_table_name'   => 'setReferencedTableName',
             'referenced_columns'      => 'setReferencedColumns',
-            'match_option'       => 'setMatchOption',
-            'update_rule'        => 'setUpdateRule',
-            'delete_rule'        => 'setDeleteRule',
-            'check_clause'       => 'setCheckClause',
+            'match_option'            => 'setMatchOption',
+            'update_rule'             => 'setUpdateRule',
+            'delete_rule'             => 'setDeleteRule',
+            'check_clause'            => 'setCheckClause',
         ) as $key => $setMethod) {
             if (isset($info[$key])) {
                 $constraint->{$setMethod}($info[$key]);
@@ -375,8 +381,7 @@ abstract class AbstractSource implements MetadataInterface
      * @param  string $constraint
      * @param  string $table
      * @param  string $schema
-     * @param  string $database
-     * @return Object\ConstraintKeyObject
+     * @return array
      */
     public function getConstraintKeys($constraint, $table, $schema = null)
     {
@@ -417,6 +422,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get trigger names
      *
      * @param string $schema
+     * @return array
      */
     public function getTriggerNames($schema = null)
     {
@@ -433,6 +439,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get triggers
      *
      * @param string $schema
+     * @return array
      */
     public function getTriggers($schema = null)
     {
@@ -452,6 +459,7 @@ abstract class AbstractSource implements MetadataInterface
      *
      * @param string $triggerName
      * @param string $schema
+     * @return Object\TriggerObject
      */
     public function getTrigger($triggerName, $schema = null)
     {

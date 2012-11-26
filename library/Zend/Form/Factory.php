@@ -1,38 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form;
 
 use ArrayAccess;
-use ReflectionClass;
 use Traversable;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Factory
 {
@@ -40,6 +28,21 @@ class Factory
      * @var InputFilterFactory
      */
     protected $inputFilterFactory;
+
+    /**
+     * @var FormElementManager
+     */
+    protected $formElementManager;
+
+    /**
+     * @param FormElementManager $formElementManager
+     */
+    public function __construct(FormElementManager $formElementManager = null)
+    {
+        if ($formElementManager) {
+            $this->setFormElementManager($formElementManager);
+        }
+    }
 
     /**
      * Set input filter factory to use when creating forms
@@ -69,6 +72,32 @@ class Factory
     }
 
     /**
+     * Set the form element manager
+     *
+     * @param  FormElementManager $formElementManager
+     * @return Factory
+     */
+    public function setFormElementManager(FormElementManager $formElementManager)
+    {
+        $this->formElementManager = $formElementManager;
+        return $this;
+    }
+
+    /**
+     * Get form element manager
+     *
+     * @return FormElementManager
+     */
+    public function getFormElementManager()
+    {
+        if ($this->formElementManager === null) {
+            $this->formElementManager = new FormElementManager();
+        }
+
+        return $this->formElementManager;
+    }
+
+    /**
      * Create an element, fieldset, or form
      *
      * Introspects the 'type' key of the provided $spec, and determines what
@@ -84,33 +113,22 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        if ($type instanceof FormInterface) {
-            return $this->createForm($spec);
+        $element = $this->getElementFromName($type);
+
+        if ($element instanceof FormInterface) {
+            return $this->configureForm($element, $spec);
         }
 
-        if ($type instanceof FieldsetInterface) {
-            return $this->createFieldset($spec);
+        if ($element instanceof FieldsetInterface) {
+            return $this->configureFieldset($element, $spec);
         }
 
-        if ($type instanceof ElementInterface) {
-            return $this->createElement($spec);
-        }
-
-        if (is_string($type) && class_exists($type)) {
-            $reflection = new ReflectionClass($type);
-            if ($reflection->implementsInterface('Zend\Form\FormInterface')) {
-                return $this->createForm($spec);
-            }
-            if ($reflection->implementsInterface('Zend\Form\FieldsetInterface')) {
-                return $this->createFieldset($spec);
-            }
-            if ($reflection->implementsInterface('Zend\Form\ElementInterface')) {
-                return $this->createElement($spec);
-            }
+        if ($element instanceof ElementInterface) {
+            return $this->configureElement($element, $spec);
         }
 
         throw new Exception\DomainException(sprintf(
-            '%s expects the $spec["type"] to implement one of %s, %s, %s, or a valid full qualified class name; received %s',
+            '%s expects the $spec["type"] to implement one of %s, %s, or %s; received %s',
             __METHOD__,
             'Zend\Form\ElementInterface',
             'Zend\Form\FieldsetInterface',
@@ -120,7 +138,52 @@ class Factory
     }
 
     /**
-     * Create an element based on the provided specification
+     * Create an element
+     *
+     * @param  array $spec
+     * @return ElementInterface
+     */
+    public function createElement($spec)
+    {
+        if (!isset($spec['type'])) {
+            $spec['type'] = 'Zend\Form\Element';
+        }
+
+        return $this->create($spec);
+    }
+
+    /**
+     * Create a fieldset
+     *
+     * @param  array $spec
+     * @return ElementInterface
+     */
+    public function createFieldset($spec)
+    {
+        if (!isset($spec['type'])) {
+            $spec['type'] = 'Zend\Form\Fieldset';
+        }
+
+        return $this->create($spec);
+    }
+
+    /**
+     * Create a form
+     *
+     * @param  array $spec
+     * @return ElementInterface
+     */
+    public function createForm($spec)
+    {
+        if (!isset($spec['type'])) {
+            $spec['type'] = 'Zend\Form\Form';
+        }
+
+        return $this->create($spec);
+    }
+
+    /**
+     * Configure an element based on the provided specification
      *
      * Specification can contain any of the following:
      * - type: the Element class to use; defaults to \Zend\Form\Element
@@ -129,28 +192,18 @@ class Factory
      * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
      *
+     * @param  ElementInterface              $element
      * @param  array|Traversable|ArrayAccess $spec
+     * @throws Exception\DomainException
      * @return ElementInterface
-     * @throws Exception\InvalidArgumentException for an invalid $spec
-     * @throws Exception\DomainException for an invalid element type
      */
-    public function createElement($spec)
+    public function configureElement(ElementInterface $element, $spec)
     {
         $spec = $this->validateSpecification($spec, __METHOD__);
 
-        $type       = isset($spec['type'])       ? $spec['type']       : 'Zend\Form\Element';
         $name       = isset($spec['name'])       ? $spec['name']       : null;
         $options    = isset($spec['options'])    ? $spec['options']    : null;
         $attributes = isset($spec['attributes']) ? $spec['attributes'] : null;
-
-        $element = new $type();
-        if (!$element instanceof ElementInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects an element type that implements Zend\Form\ElementInterface; received "%s"',
-                __METHOD__,
-                $type
-            ));
-        }
 
         if ($name !== null && $name !== '') {
             $element->setName($name);
@@ -164,11 +217,16 @@ class Factory
             $element->setAttributes($attributes);
         }
 
+        // Hook to perform stuff, once all the configuration work has been done
+        if ($element instanceof InitializableInterface) {
+            $element->init();
+        }
+
         return $element;
     }
 
     /**
-     * Create a fieldset based on the provided specification
+     * Configure a fieldset based on the provided specification
      *
      * Specification can contain any of the following:
      * - type: the Fieldset class to use; defaults to \Zend\Form\Fieldset
@@ -179,27 +237,24 @@ class Factory
      * - elements: an array or Traversable object where each entry is an array
      *   or ArrayAccess object containing the keys:
      *   - flags: (optional) array of flags to pass to FieldsetInterface::add()
-     *   - spec: the actual element specification, per {@link createElement()}
+     *   - spec: the actual element specification, per {@link configureElement()}
      *
+     * @param  FieldsetInterface             $fieldset
      * @param  array|Traversable|ArrayAccess $spec
+     * @throws Exception\DomainException
      * @return FieldsetInterface
-     * @throws Exception\InvalidArgumentException for an invalid $spec
-     * @throws Exception\DomainException for an invalid fieldset type
      */
-    public function createFieldset($spec)
+    public function configureFieldset(FieldsetInterface $fieldset, $spec)
     {
-        $spec = $this->validateSpecification($spec, __METHOD__);
+        $spec     = $this->validateSpecification($spec, __METHOD__);
+        $fieldset = $this->configureElement($fieldset, $spec);
 
-        $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Fieldset';
-        $spec['type'] = $type;
+        if (isset($spec['object'])) {
+            $this->prepareAndInjectObject($spec['object'], $fieldset, __METHOD__);
+        }
 
-        $fieldset = $this->createElement($spec);
-        if (!$fieldset instanceof FieldsetInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects a fieldset type that implements Zend\Form\FieldsetInterface; received "%s"',
-                __METHOD__,
-                $type
-            ));
+        if (isset($spec['hydrator'])) {
+            $this->prepareAndInjectHydrator($spec['hydrator'], $fieldset, __METHOD__);
         }
 
         if (isset($spec['elements'])) {
@@ -214,42 +269,30 @@ class Factory
     }
 
     /**
-     * Create a form based on the provided specification
+     * Configure a form based on the provided specification
      *
-     * Specification follows that of {@link createFieldset()}, and adds the
+     * Specification follows that of {@link configureFieldset()}, and adds the
      * following keys:
      *
-     * - input_filter: input filter instance, named input filter class, or 
+     * - input_filter: input filter instance, named input filter class, or
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *
-     * @param  array|Traversable|ArrayAccess $spec
+     * @param  FormInterface                  $form
+     * @param  array|Traversable|ArrayAccess  $spec
      * @return FormInterface
-     * @throws Exception\InvalidArgumentException for an invalid $spec
-     * @throws Exception\DomainException for an invalid form type
      */
-    public function createForm($spec)
+    public function configureForm(FormInterface $form, $spec)
     {
         $spec = $this->validateSpecification($spec, __METHOD__);
-
-        $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Form';
-        $spec['type'] = $type;
-
-        $form = $this->createFieldset($spec);
-        if (!$form instanceof FormInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects a form type that implements Zend\Form\FormInterface; received "%s"',
-                __METHOD__,
-                $type
-            ));
-        }
+        $form = $this->configureFieldset($form, $spec);
 
         if (isset($spec['input_filter'])) {
             $this->prepareAndInjectInputFilter($spec['input_filter'], $form, __METHOD__);
         }
 
-        if (isset($spec['hydrator'])) {
-            $this->prepareAndInjectHydrator($spec['hydrator'], $form, __METHOD__);
+        if (isset($spec['validation_group'])) {
+            $this->prepareAndInjectValidationGroup($spec['validation_group'], $form, __METHOD__);
         }
 
         return $form;
@@ -303,7 +346,11 @@ class Factory
             $flags = isset($elementSpecification['flags']) ? $elementSpecification['flags'] : array();
             $spec  = isset($elementSpecification['spec'])  ? $elementSpecification['spec']  : array();
 
-            $element = $this->createElement($spec);
+            if (!isset($spec['type'])) {
+                $spec['type'] = 'Zend\Form\Element';
+            }
+
+            $element = $this->create($spec);
             $fieldset->add($element, $flags);
         }
     }
@@ -327,6 +374,91 @@ class Factory
             $fieldset = $this->createFieldset($spec);
             $masterFieldset->add($fieldset, $flags);
         }
+    }
+
+    /**
+     * Prepare and inject an object
+     *
+     * Takes a string indicating a class name, instantiates the class
+     * by that name, and injects the class instance as the bound object.
+     *
+     * @param  string           $objectName
+     * @param  FieldsetInterface $fieldset
+     * @param  string           $method
+     * @throws Exception\DomainException
+     * @return void
+     */
+    protected function prepareAndInjectObject($objectName, FieldsetInterface $fieldset, $method)
+    {
+        if (!is_string($objectName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string class name; received "%s"',
+                $method,
+                (is_object($objectName) ? get_class($objectName) : gettype($objectName))
+            ));
+        }
+
+        if (!class_exists($objectName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string class name to be a valid class name; received "%s"',
+                $method,
+                $objectName
+            ));
+        }
+
+        $fieldset->setObject(new $objectName);
+    }
+
+    /**
+     * Prepare and inject a named hydrator
+     *
+     * Takes a string indicating a hydrator class name (or a concrete instance), try first to instantiates the class
+     * by pulling it from service manager, and injects the hydrator instance into the form.
+     *
+     * @param  string|array|Hydrator\HydratorInterface $hydratorOrName
+     * @param  FieldsetInterface                       $fieldset
+     * @param  string                                  $method
+     * @return void
+     * @throws Exception\DomainException If $hydratorOrName is not a string, does not resolve to a known class, or
+     *                                   the class does not implement Hydrator\HydratorInterface
+     */
+    protected function prepareAndInjectHydrator($hydratorOrName, FieldsetInterface $fieldset, $method)
+    {
+        if (is_object($hydratorOrName) && $hydratorOrName instanceof Hydrator\HydratorInterface) {
+            $fieldset->setHydrator($hydratorOrName);
+            return;
+        }
+
+        if (is_array($hydratorOrName)) {
+            if (!isset($hydratorOrName['type'])) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects array specification to have a type value',
+                    $method
+                ));
+            }
+            $hydratorOptions = (isset($hydratorOrName['options'])) ? $hydratorOrName['options'] : array();
+            $hydratorOrName = $hydratorOrName['type'];
+        } else {
+            $hydratorOptions = array();
+        }
+
+        if (is_string($hydratorOrName)) {
+            $hydrator = $this->getHydratorFromName($hydratorOrName);
+        }
+
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                $method,
+                $hydratorOrName
+            ));
+        }
+
+        if (!empty($hydratorOptions) && $hydrator instanceof Hydrator\HydratorOptionsInterface) {
+            $hydrator->setOptions($hydratorOptions);
+        }
+
+        $fieldset->setHydrator($hydrator);
     }
 
     /**
@@ -373,45 +505,71 @@ class Factory
     }
 
     /**
-     * Prepare and inject a named hydrator
+     * Prepare a validation group and inject in the provided form
      *
-     * Takes a string indicating a hydrator class name, instantiates the class
-     * by that name, and injects the hydrator instance into the form.
+     * Takes an array of elements names
      *
-     * @param  string $hydratorName
+     * @param  string|array|Traversable $spec
      * @param  FormInterface $form
      * @param  string $method
      * @return void
-     * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
+     * @throws Exception\DomainException if validation group given is not an array
      */
-    protected function prepareAndInjectHydrator($hydratorName, FormInterface $form, $method)
+    protected function prepareAndInjectValidationGroup($spec, FormInterface $form, $method)
     {
-        if (!is_string($hydratorName)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator class name; received "%s"',
-                $method,
-                (is_object($hydratorName) ? get_class($hydratorName) : gettype($hydratorName))
-            ));
+        if (!is_array($spec)) {
+            if (!class_exists($spec)) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects an array for validation group; received "%s"',
+                    $method,
+                    $spec
+                ));
+            }
+        }
+
+        $form->setValidationGroup($spec);
+    }
+
+    /**
+     * Try to pull to element from element manager, or instantiates it from its name
+     *
+     * @param  string $elementName
+     * @return mixed
+     */
+    protected function getElementFromName($elementName)
+    {
+        $formElementManager = $this->getFormElementManager();
+
+        if ($formElementManager->has($elementName)) {
+            return $formElementManager->get($elementName);
+        }
+
+        return new $elementName();
+    }
+
+    /**
+     * Try to pull hydrator from service manager, or instantiates it from its name
+     *
+     * @param  string $hydratorName
+     * @return mixed
+     * @throws Exception\DomainException
+     */
+    protected function getHydratorFromName($hydratorName)
+    {
+        $serviceLocator = $this->getFormElementManager()->getServiceLocator();
+
+        if ($serviceLocator && $serviceLocator->has($hydratorName)) {
+            return $serviceLocator->get($hydratorName);
         }
 
         if (!class_exists($hydratorName)) {
             throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator name to be a valid class name; received "%s"',
-                $method,
+                'Expects string hydrator name to be a valid class name; received "%s"',
                 $hydratorName
             ));
         }
 
         $hydrator = new $hydratorName;
-        if (!$hydrator instanceof Hydrator\HydratorInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
-                $method,
-                $hydratorName
-            ));
-        }
-
-        $form->setHydrator($hydrator);
-        return;
+        return $hydrator;
     }
 }

@@ -1,39 +1,29 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server;
+
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * \Zend\Server\Cache: cache server definitions
  *
  * @category   Zend
  * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Cache
 {
     /**
      * @var array Methods to skip when caching server
      */
-    protected static $_skipMethods = array();
+    protected static $skipMethods = array();
 
     /**
      * Cache a file containing the dispatch list.
@@ -61,7 +51,7 @@ class Cache
         if ($methods instanceof Definition) {
             $definition = new Definition();
             foreach ($methods as $method) {
-                if (in_array($method->getName(), self::$_skipMethods)) {
+                if (in_array($method->getName(), static::$skipMethods)) {
                     continue;
                 }
                 $definition->addMethod($method);
@@ -69,7 +59,10 @@ class Cache
             $methods = $definition;
         }
 
-        if (0 === @file_put_contents($filename, serialize($methods))) {
+        ErrorHandler::start();
+        $test = file_put_contents($filename, serialize($methods));
+        ErrorHandler::stop();
+        if (0 === $test) {
             return false;
         }
 
@@ -116,12 +109,17 @@ class Cache
             return false;
         }
 
-
-        if (false === ($dispatch = @file_get_contents($filename))) {
+        ErrorHandler::start();
+        $dispatch = file_get_contents($filename);
+        ErrorHandler::stop();
+        if (false === $dispatch) {
             return false;
         }
 
-        if (false === ($dispatchArray = @unserialize($dispatch))) {
+        ErrorHandler::start(E_NOTICE);
+        $dispatchArray = unserialize($dispatch);
+        ErrorHandler::stop();
+        if (false === $dispatchArray) {
             return false;
         }
 

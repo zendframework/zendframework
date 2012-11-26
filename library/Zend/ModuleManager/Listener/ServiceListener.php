@@ -1,32 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage Listener
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ModuleManager
  */
 
 namespace Zend\ModuleManager\Listener;
 
 use Traversable;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Configuration as ServiceConfiguration;
+use Zend\ServiceManager\Config as ServiceConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 
@@ -34,16 +21,9 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ServiceListener implements ListenerAggregateInterface
+class ServiceListener implements ServiceListenerInterface
 {
-    /**
-     * @var bool
-     */
-    protected $configured = false;
-
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
@@ -59,7 +39,7 @@ class ServiceListener implements ListenerAggregateInterface
     /**
      * @var array
      */
-    protected $defaultServiceConfiguration;
+    protected $defaultServiceConfig;
 
     /**
      * @var array
@@ -68,16 +48,34 @@ class ServiceListener implements ListenerAggregateInterface
 
     /**
      * @param ServiceManager $serviceManager
+     * @param null|array $configuration
      */
     public function __construct(ServiceManager $serviceManager, $configuration = null)
     {
         $this->defaultServiceManager = $serviceManager;
-        $this->defaultServiceConfiguration = $configuration;
+
+        if ($configuration !== null) {
+            $this->setDefaultServiceConfig($configuration);
+        }
     }
 
     /**
-     * @param string $key
-     * @param ServiceManager|string $serviceManager
+     * @param  array $configuration
+     * @return ServiceListener
+     */
+    public function setDefaultServiceConfig($configuration)
+    {
+        $this->defaultServiceConfig  = $configuration;
+
+        return $this;
+    }
+
+    /**
+     * @param  ServiceManager|string $serviceManager  Service Manager instance or name
+     * @param  string                $key             Configuration key
+     * @param  string                $moduleInterface FQCN as string
+     * @param  string                $method          Method name
+     * @throws Exception\RuntimeException
      * @return ServiceListener
      */
     public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
@@ -92,6 +90,7 @@ class ServiceListener implements ListenerAggregateInterface
                 (string) $serviceManager
             ));
         }
+
         $this->serviceManagers[$smKey] = array(
             'service_manager'        => $serviceManager,
             'config_key'             => $key,
@@ -99,6 +98,11 @@ class ServiceListener implements ListenerAggregateInterface
             'module_class_method'    => $method,
             'configuration'          => array(),
         );
+
+        if ($key === 'service_manager' && $this->defaultServiceConfig) {
+            $this->serviceManagers[$smKey]['configuration']['default_config'] = $this->defaultServiceConfig;
+        }
+
         return $this;
     }
 
@@ -130,10 +134,13 @@ class ServiceListener implements ListenerAggregateInterface
      * Retrieve service manager configuration from module, and
      * configure the service manager.
      *
-     * If the module does not implement ServiceProviderInterface and does not
-     * implement the "getServiceConfiguration()" method, does nothing. Also,
-     * if the return value of that method is not a ServiceConfiguration object,
-     * or not an array or Traversable that can seed one, does nothing.
+     * If the module does not implement a specific interface and does not
+     * implement a specific method, does nothing. Also, if the return value
+     * of that method is not a ServiceConfig object, or not an array or
+     * Traversable that can seed one, does nothing.
+     *
+     * The interface and method name can be set by adding a new service manager
+     * via the addServiceManager() method.
      *
      * @param  ModuleEvent $e
      * @return void
@@ -152,8 +159,8 @@ class ServiceListener implements ListenerAggregateInterface
 
             $config = $module->{$sm['module_class_method']}();
 
-            if ($config instanceof ServiceConfiguration) {
-                $config = $this->serviceConfigurationToArray($config);
+            if ($config instanceof ServiceConfig) {
+                $config = $this->serviceConfigToArray($config);
             }
 
             if ($config instanceof Traversable) {
@@ -165,10 +172,11 @@ class ServiceListener implements ListenerAggregateInterface
                 continue;
             }
 
-            // We're keeping track of which modules provided which configuration to which serivce managers.
+            // We're keeping track of which modules provided which configuration to which service managers.
             // The actual merging takes place later. Doing it this way will enable us to provide more powerful
             // debugging tools for showing which modules overrode what.
-            $this->serviceManagers[$key]['configuration'][$e->getModuleName()] = $config;
+            $fullname = $e->getModuleName() . '::' . $sm['module_class_method'] . '()';
+            $this->serviceManagers[$key]['configuration'][$fullname] = $config;
         }
     }
 
@@ -176,10 +184,11 @@ class ServiceListener implements ListenerAggregateInterface
      * Use merged configuration to configure service manager
      *
      * If the merged configuration has a non-empty, array 'service_manager'
-     * key, it will be passed to a ServiceManager Configuration object, and
+     * key, it will be passed to a ServiceManager Config object, and
      * used to configure the service manager.
      *
      * @param  ModuleEvent $e
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function onLoadModulesPost(ModuleEvent $e)
@@ -187,17 +196,11 @@ class ServiceListener implements ListenerAggregateInterface
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
 
-        if ($this->defaultServiceConfiguration) {
-            $config = ArrayUtils::merge(array('service_manager' => $this->defaultServiceConfiguration), $config);
-        }
-
         foreach ($this->serviceManagers as $key => $sm) {
-
             if (isset($config[$sm['config_key']])
                 && is_array($config[$sm['config_key']])
                 && !empty($config[$sm['config_key']])
             ) {
-
                 $this->serviceManagers[$key]['configuration']['merged_config'] = $config[$sm['config_key']];
             }
 
@@ -206,7 +209,7 @@ class ServiceListener implements ListenerAggregateInterface
             foreach ($this->serviceManagers[$key]['configuration'] as $configs) {
                 if (isset($configs['configuration_classes'])) {
                     foreach ($configs['configuration_classes'] as $class) {
-                        $config = ArrayUtils::merge($configs, $this->serviceConfigurationToArray($class));
+                        $configs = ArrayUtils::merge($configs, $this->serviceConfigToArray($class));
                     }
                 }
                 $smConfig = ArrayUtils::merge($smConfig, $configs);
@@ -222,11 +225,9 @@ class ServiceListener implements ListenerAggregateInterface
                 }
                 $sm['service_manager'] = $instance;
             }
-            $serviceConfig = new ServiceConfiguration($smConfig);
+            $serviceConfig = new ServiceConfig($smConfig);
             $serviceConfig->configureServiceManager($sm['service_manager']);
         }
-
-        $this->configured = true;
     }
 
     /**
@@ -235,19 +236,20 @@ class ServiceListener implements ListenerAggregateInterface
      * Extracts the various service configuration arrays, and then merges with
      * the internal service configuration.
      *
-     * @param  ServiceConfiguration|string $config Instance of ServiceConfiguration or class name
+     * @param  ServiceConfig|string $config Instance of ServiceConfig or class name
+     * @throws Exception\RuntimeException
      * @return array
      */
-    protected function serviceConfigurationToArray($config)
+    protected function serviceConfigToArray($config)
     {
         if (is_string($config) && class_exists($config)) {
             $class  = $config;
             $config = new $class;
         }
 
-        if (!$config instanceof ServiceConfiguration) {
+        if (!$config instanceof ServiceConfig) {
             throw new Exception\RuntimeException(sprintf(
-                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Configuration',
+                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Config',
                 $class
             ));
         }

@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-tag",
+    "description": "a component suite which provides a facility to work with taggable Items",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,10 +8,12 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Tag": ""
+            "Zend\\Tag\\": ""
         }
     },
+    "target-dir": "Zend/Tag",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-escaper": "self.version"
     }
 }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -24,9 +14,7 @@ use Traversable;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Step extends AbstractValidator
 {
@@ -37,8 +25,8 @@ class Step extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID => "Invalid value given. Scalar expected.",
-        self::NOT_STEP => "The input is not a valid step."
+        self::INVALID => "Invalid value given. Scalar expected",
+        self::NOT_STEP => "The input is not a valid step"
     );
 
     /**
@@ -139,11 +127,32 @@ class Step extends AbstractValidator
 
         $this->setValue($value);
 
-        if (fmod($value - $this->baseValue, $this->step) !== 0.0) {
+        $fmod = $this->fmod($value - $this->baseValue, $this->step);
+
+        if ($fmod !== 0.0 && $fmod !== $this->step) {
             $this->error(self::NOT_STEP);
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * replaces the internal fmod function which give wrong results on many cases
+     *
+     * @param float $x
+     * @param float $y
+     * @return float
+     */
+    protected function fmod($x, $y)
+    {
+        if ($y == 0.0) {
+            return 1.0;
+        }
+
+        //find the maximum precision from both input params to give accurate results
+        $precision = strlen(substr($x, strpos($x, '.')+1)) + strlen(substr($y, strpos($y, '.')+1));
+
+        return round($x - $y * floor($x / $y), $precision);
     }
 }

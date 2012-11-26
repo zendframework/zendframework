@@ -58,6 +58,16 @@ class ListenerOptions extends AbstractOptions
     protected $cacheDir;
 
     /**
+     * @var string
+     */
+    protected $moduleMapCacheEnabled = false;
+
+    /**
+     * @var string
+     */
+    protected $moduleMapCacheKey;
+
+    /**
      * Get an array of paths where modules reside
      *
      * @return array
@@ -71,7 +81,8 @@ class ListenerOptions extends AbstractOptions
      * Set an array of paths where modules reside
      *
      * @param  array|Traversable $modulePaths
-     * @return ListenerOptions
+     * @throws Exception\InvalidArgumentException
+     * @return ListenerOptions Provides fluent interface
      */
     public function setModulePaths($modulePaths)
     {
@@ -83,6 +94,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($modulePaths))
             );
         }
+
         $this->modulePaths = $modulePaths;
         return $this;
     }
@@ -111,7 +123,8 @@ class ListenerOptions extends AbstractOptions
      * Set the glob patterns to use for loading additional config files
      *
      * @param array|Traversable $configGlobPaths
-     * @return ListenerOptions
+     * @throws Exception\InvalidArgumentException
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigGlobPaths($configGlobPaths)
     {
@@ -123,6 +136,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($configGlobPaths))
             );
         }
+
         $this->configGlobPaths = $configGlobPaths;
         return $this;
     }
@@ -131,7 +145,8 @@ class ListenerOptions extends AbstractOptions
      * Set the static paths to use for loading additional config files
      *
      * @param array|Traversable $configStaticPaths
-     * @return ListenerOptions
+     * @throws Exception\InvalidArgumentException
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigStaticPaths($configStaticPaths)
     {
@@ -143,6 +158,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($configStaticPaths))
             );
         }
+
         $this->configStaticPaths = $configStaticPaths;
         return $this;
     }
@@ -162,7 +178,8 @@ class ListenerOptions extends AbstractOptions
      * for unit testing purposes.
      *
      * @param array|Traversable $extraConfig
-     * @return ListenerOptions
+     * @throws Exception\InvalidArgumentException
+     * @return ListenerOptions Provides fluent interface
      */
     public function setExtraConfig($extraConfig)
     {
@@ -174,6 +191,7 @@ class ListenerOptions extends AbstractOptions
                 __CLASS__, __METHOD__, gettype($extraConfig))
             );
         }
+
         $this->extraConfig = $extraConfig;
         return $this;
     }
@@ -232,7 +250,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheFile()
     {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
+        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
     }
 
     /**
@@ -259,6 +277,60 @@ class ListenerOptions extends AbstractOptions
             $this->cacheDir = static::normalizePath($cacheDir);
         }
         return $this;
+    }
+
+    /**
+     * Check if the module class map cache is enabled
+     *
+     * @return bool
+     */
+    public function getModuleMapCacheEnabled()
+    {
+        return $this->moduleMapCacheEnabled;
+    }
+
+    /**
+     * Set if the module class map cache should be enabled or not
+     *
+     * @param  bool $enabled
+     * @return ListenerOptions
+     */
+    public function setModuleMapCacheEnabled($enabled)
+    {
+        $this->moduleMapCacheEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Get key used to create the cache file name
+     *
+     * @return string
+     */
+    public function getModuleMapCacheKey()
+    {
+        return (string) $this->moduleMapCacheKey;
+    }
+
+    /**
+     * Set key used to create the cache file name
+     *
+     * @param  string $moduleMapCacheKey the value to be set
+     * @return ListenerOptions
+     */
+    public function setModuleMapCacheKey($moduleMapCacheKey)
+    {
+        $this->moduleMapCacheKey = $moduleMapCacheKey;
+        return $this;
+    }
+
+    /**
+     * Get the path to the module class map cache
+     *
+     * @return string
+     */
+    public function getModuleMapCacheFile()
+    {
+        return $this->getCacheDir() . '/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
     }
 
     /**

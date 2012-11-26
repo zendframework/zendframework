@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_I18n
  */
 
 namespace Zend\I18n\Validator;
 
-use Zend\Validator\AbstractValidator;
 use Zend\I18n\Filter\Alpha as AlphaFilter;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_I18n
+ * @subpackage Validator
  */
 class Alpha extends Alnum
 {
@@ -82,14 +70,14 @@ class Alpha extends Alnum
             return false;
         }
 
-        if (null === self::$filter) {
-            self::$filter = new AlphaFilter();
+        if (null === static::$filter) {
+            static::$filter = new AlphaFilter();
         }
 
-        //self::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
-        self::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
+        //static::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
+        static::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
 
-        if ($value !== self::$filter->filter($value)) {
+        if ($value !== static::$filter->filter($value)) {
             $this->error(self::NOT_ALPHA);
             return false;
         }

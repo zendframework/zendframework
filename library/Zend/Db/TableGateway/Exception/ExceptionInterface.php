@@ -10,13 +10,13 @@
 
 namespace Zend\Db\TableGateway\Exception;
 
-use Zend\Db\Exception\ExceptionInterface as DbExceptionInterface;
+use Zend\Db\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage TableGateway
  */
-interface ExceptionInterface extends DbExceptionInterface
+interface ExceptionInterface extends Exception\ExceptionInterface
 {
 }

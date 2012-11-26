@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -27,9 +17,7 @@ use Zend\Validator\Exception;
  * Validator which checks if the file already exists in the directory
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
 class Exists extends AbstractValidator
 {
@@ -42,7 +30,7 @@ class Exists extends AbstractValidator
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::DOES_NOT_EXIST => "File '%value%' does not exist",
+        self::DOES_NOT_EXIST => "File does not exist",
     );
 
     /**
@@ -83,14 +71,14 @@ class Exists extends AbstractValidator
      * Returns the set file directories which are checked
      *
      * @param  boolean $asArray Returns the values as array, when false an concatenated string is returned
-     * @return string
+     * @return string|null
      */
     public function getDirectory($asArray = false)
     {
         $asArray   = (bool) $asArray;
-        $directory = (string) $this->options['directory'];
-        if ($asArray) {
-            $directory = explode(',', $directory);
+        $directory = $this->options['directory'];
+        if ($asArray && isset($directory)) {
+            $directory = explode(',', (string)$directory);
         }
 
         return $directory;
@@ -119,6 +107,9 @@ class Exists extends AbstractValidator
     public function addDirectory($directory)
     {
         $directories = $this->getDirectory(true);
+        if (!isset($directories)) {
+            $directories = array();
+        }
 
         if (is_string($directory)) {
             $directory = explode(',', $directory);
@@ -142,7 +133,8 @@ class Exists extends AbstractValidator
             }
         }
 
-        $this->options['directory'] = implode(',', $directories);
+        $this->options['directory'] = (!empty($directory))
+            ? implode(',', $directories) : null;
 
         return $this;
     }
@@ -150,58 +142,53 @@ class Exists extends AbstractValidator
     /**
      * Returns true if and only if the file already exists in the set directories
      *
-     * @param  string  $value Real file to check for existence
-     * @param  array   $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for existence
      * @return boolean
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
-            $directories[] = $file['destination'];
-        } elseif (!isset($file['name'])) {
-            $file['name'] = $value;
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = basename($file);
+            $this->setValue($value['name']);
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $this->setValue($filename);
         }
 
         $check = false;
-        foreach ($directories as $directory) {
-            if (empty($directory)) {
-                continue;
-            }
-
+        $directories = $this->getDirectory(true);
+        if (!isset($directories)) {
             $check = true;
-            if (!file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->throwError($file, self::DOES_NOT_EXIST);
+            if (!file_exists($file)) {
+                $this->error(self::DOES_NOT_EXIST);
+                return false;
+            }
+        } else {
+            foreach ($directories as $directory) {
+                if (!isset($directory) || '' === $directory) {
+                    continue;
+                }
+
+                $check = true;
+                if (!file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                    $this->error(self::DOES_NOT_EXIST);
+                    return false;
+                }
             }
         }
 
         if (!$check) {
-            return $this->throwError($file, self::DOES_NOT_EXIST);
+            $this->error(self::DOES_NOT_EXIST);
+            return false;
         }
 
         return true;
-    }
-
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function throwError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
-                    $this->value = basename($file['name']);
-                }
-            } elseif (is_string($file)) {
-                $this->value = basename($file);
-            }
-        }
-
-        $this->error($errorType);
-        return false;
     }
 }

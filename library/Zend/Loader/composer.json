@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-loader",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Loader": ""
+            "Zend\\Loader\\": ""
         }
     },
+    "target-dir": "Zend/Loader",
     "require": {
         "php": ">=5.3.3"
     },

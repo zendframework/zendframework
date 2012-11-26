@@ -11,8 +11,8 @@
 namespace Zend\Config\Reader;
 
 use Zend\Config\Exception;
-use Zend\Json\Json as JsonFormat;
 use Zend\Json\Exception as JsonException;
+use Zend\Json\Json as JsonFormat;
 
 /**
  * JSON config reader.
@@ -46,15 +46,15 @@ class Json implements ReaderInterface
                 $filename
             ));
         }
-        
+
         $this->directory = dirname($filename);
-        
+
         try {
             $config = JsonFormat::decode(file_get_contents($filename), JsonFormat::TYPE_ARRAY);
         } catch (JsonException\RuntimeException $e) {
             throw new Exception\RuntimeException($e->getMessage());
-        }    
-        
+        }
+
         return $this->process($config);
     }
 
@@ -73,19 +73,19 @@ class Json implements ReaderInterface
         }
 
         $this->directory = null;
-        
+
         try {
             $config = JsonFormat::decode($string, JsonFormat::TYPE_ARRAY);
         } catch (JsonException\RuntimeException $e) {
             throw new Exception\RuntimeException($e->getMessage());
-        }    
-        
+        }
+
         return $this->process($config);
     }
 
     /**
      * Process the array for @include
-     * 
+     *
      * @param  array $data
      * @return array
      * @throws Exception\RuntimeException
@@ -103,7 +103,7 @@ class Json implements ReaderInterface
                 $reader = clone $this;
                 unset($data[$key]);
                 $data = array_replace_recursive($data, $reader->fromFile($this->directory . '/' . $value));
-            } 
+            }
         }
         return $data;
     }

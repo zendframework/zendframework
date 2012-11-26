@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-authentication",
+    "description": "provides an API for authentication and includes concrete authentication adapters for common use case scenarios",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,11 +8,13 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Authentication": ""
+            "Zend\\Authentication\\": ""
         }
     },
+    "target-dir": "Zend/Authentication",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
         "zendframework/zend-db": "Zend\\Db component",

@@ -20,7 +20,7 @@ use Zend\Db\ResultSet;
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
-class Adapter
+class Adapter implements AdapterInterface
 {
     /**
      * Query Mode Constants
@@ -51,14 +51,9 @@ class Adapter
     protected $platform = null;
 
     /**
-     * @var \Zend\Db\ResultSet\ResultSet
+     * @var ResultSet\ResultSetInterface
      */
     protected $queryResultSetPrototype = null;
-
-    /**
-     * @var string
-     */
-    protected $queryMode = self::QUERY_MODE_PREPARE;
 
     /**
      * @var Driver\StatementInterface
@@ -68,7 +63,8 @@ class Adapter
     /**
      * @param Driver\DriverInterface|array $driver
      * @param Platform\PlatformInterface $platform
-     * @param ResultSet\ResultSet $queryResultPrototype
+     * @param ResultSet\ResultSetInterface $queryResultPrototype
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
     {
@@ -93,8 +89,8 @@ class Adapter
 
     /**
      * getDriver()
-     * 
-     * @throws Exception
+     *
+     * @throws Exception\RuntimeException
      * @return Driver\DriverInterface
      */
     public function getDriver()
@@ -106,33 +102,19 @@ class Adapter
     }
 
     /**
-     * @param string $queryMode
-     * @return Adapter
-     * @throws \InvalidArgumentException
-     */
-    public function setQueryMode($queryMode)
-    {
-        if (!in_array($queryMode, array(self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE))) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Query Mode must be one of "%s" or "%s"', self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE)
-            );
-        }
-
-        $this->queryMode = $queryMode;
-        return $this;
-    }
-
-    public function getQueryMode()
-    {
-        return $this->queryMode;
-    }
-
-    /**
      * @return Platform\PlatformInterface
      */
     public function getPlatform()
     {
         return $this->platform;
+    }
+
+    /**
+     * @return ResultSet\ResultSetInterface
+     */
+    public function getQueryResultSetPrototype()
+    {
+        return $this->queryResultSetPrototype;
     }
 
     public function getCurrentSchema()
@@ -145,6 +127,7 @@ class Adapter
      *
      * @param string $sql
      * @param string|array $parametersOrQueryMode
+     * @throws Exception\InvalidArgumentException
      * @return Driver\StatementInterface|ResultSet\ResultSet
      */
     public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE)
@@ -184,10 +167,10 @@ class Adapter
 
     /**
      * Create statement
-     * 
+     *
      * @param  string $initialSql
      * @param  ParameterContainer $initialParameters
-     * @return Driver\StatementInterface 
+     * @return Driver\StatementInterface
      */
     public function createStatement($initialSql = null, $initialParameters = null)
     {
@@ -218,6 +201,7 @@ class Adapter
 
     /**
      * @param $name
+     * @throws Exception\InvalidArgumentException
      * @return Driver\DriverInterface|Platform\PlatformInterface
      */
     public function __get($name)
@@ -237,6 +221,7 @@ class Adapter
      * @param array $parameters
      * @return Driver\DriverInterface
      * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     protected function createDriverFromParameters(array $parameters)
     {

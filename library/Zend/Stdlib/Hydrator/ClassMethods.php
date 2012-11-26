@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage Hydrator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib\Hydrator;
@@ -27,32 +16,70 @@ use Zend\Stdlib\Exception;
  * @category   Zend
  * @package    Zend_Stdlib
  * @subpackage Hydrator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ClassMethods implements HydratorInterface
+class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      * @var boolean
      */
-    protected $underscoreSeparatedKeys;
-    
+    protected $underscoreSeparatedKeys = true;
+
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean $underscoreSeparatedKeys 
+     * @param boolean|array $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
-        $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+        parent::__construct();
+        $this->setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
     }
-    
+
+    /**
+     * @param  array|\Traversable $options
+     * @return ClassMethods
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+        if (isset($options['underscoreSeparatedKeys'])) {
+            $this->setUnderscoreSeparatedKeys($options['underscoreSeparatedKeys']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  boolean $underscoreSeparatedKeys
+     * @return ClassMethods
+     */
+    public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
+    {
+        $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUnderscoreSeparatedKeys()
+    {
+        return $this->underscoreSeparatedKeys;
+    }
+
     /**
      * Extract values from an object with class methods
      *
      * Extracts the getter/setter of the given $object.
-     * 
-     * @param  object $object 
+     *
+     * @param  object $object
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -60,48 +87,34 @@ class ClassMethods implements HydratorInterface
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
-        
-        $transform = function($letters)
-        {
+
+        $transform = function($letters) {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
         $attributes = array();
         $methods = get_class_methods($object);
-        foreach($methods as $method) {
-            if(preg_match('/^get[A-Z]\w*/', $method)) {
-                // setter verification
-                $setter = preg_replace('/^get/', 'set', $method);
-                if(!in_array($setter, $methods)) {
-                    continue;
-                }
+
+        foreach ($methods as $method) {
+            if (!preg_match('/^(get|has|is)[A-Z]\w*/', $method)) {
+                continue;
+            }
+
+            $attribute = $method;
+            if (preg_match('/^get/', $method)) {
                 $attribute = substr($method, 3);
                 $attribute = lcfirst($attribute);
-                if ($this->underscoreSeparatedKeys) {
-                    $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
-                }
-
-                $result = $object->$method();
-
-                // Recursively extract if object contains itself other objects or arrays of objects
-                if (is_object($result)) {
-                    $result = $this->extract($result);
-                } elseif (is_array($result)) {
-                    foreach ($result as $key => $value) {
-                        if (is_object($value)) {
-                            $result[$key] = $this->extract($value);
-                        }
-                    }
-                }
-
-                $attributes[$attribute] = $result;
             }
+
+            if ($this->underscoreSeparatedKeys) {
+                $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
+            }
+            $attributes[$attribute] = $this->extractValue($attribute, $object->$method());
         }
-        
+
         return $attributes;
     }
 
@@ -109,9 +122,9 @@ class ClassMethods implements HydratorInterface
      * Hydrate an object by populating getter/setter methods
      *
      * Hydrates an object by getter/setter methods of the object.
-     * 
-     * @param  array $data 
-     * @param  object $object 
+     *
+     * @param  array $data
+     * @param  object $object
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -119,23 +132,23 @@ class ClassMethods implements HydratorInterface
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)',
-                __METHOD__
+                '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
-        
-        $transform = function($letters)
-        {   
+
+        $transform = function($letters) {
             $letter = substr(array_shift($letters), 1, 1);
             return ucfirst($letter);
         };
 
         foreach ($data as $property => $value) {
-            if ($this->underscoreSeparatedKeys) {
-                $property = preg_replace_callback('/(_[a-z])/', $transform, $property);
-            }
             $method = 'set' . ucfirst($property);
+            if ($this->underscoreSeparatedKeys) {
+                $method = preg_replace_callback('/(_[a-z])/', $transform, $method);
+            }
             if (method_exists($object, $method)) {
+                $value = $this->hydrateValue($property, $value);
+
                 $object->$method($value);
             }
         }

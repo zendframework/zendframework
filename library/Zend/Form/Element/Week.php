@@ -1,38 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\DateStep as DateStepValidator;
+use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Week extends DateTime
 {
@@ -52,7 +38,7 @@ class Week extends DateTime
      */
     protected function getDateValidator()
     {
-        return new RegexValidator('/^#[0-9]{4}\-W[0-9]{2}$/');
+        return new RegexValidator('/^[0-9]{4}\-W[0-9]{2}$/');
     }
 
     /**
@@ -69,9 +55,9 @@ class Week extends DateTime
                      ? $this->attributes['min'] : '1970-W01';
 
         return new DateStepValidator(array(
-            'format'       => 'Y-\WW',
-            'baseValue'    => $baseValue,
-            'step' => new \DateInterval("P{$stepValue}W"),
+            'format'    => 'Y-\WW',
+            'baseValue' => $baseValue,
+            'step'      => new \DateInterval("P{$stepValue}W"),
         ));
     }
 }

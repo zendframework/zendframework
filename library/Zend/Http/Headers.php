@@ -10,12 +10,12 @@
 
 namespace Zend\Http;
 
+use ArrayIterator;
+use Countable;
+use Iterator;
+use Traversable;
 use Zend\Http\HeaderLoader;
 use Zend\Loader\PluginClassLocator;
-use Iterator;
-use Countable;
-use Traversable;
-use ArrayIterator;
 
 /**
  * Basic HTTP headers collection functionality
@@ -25,7 +25,7 @@ use ArrayIterator;
  * @package    Zend_Http
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
  */
-class Headers implements Iterator, Countable
+class Headers implements Countable, Iterator
 {
     /**
      * @var \Zend\Loader\PluginClassLoader
@@ -264,17 +264,17 @@ class Headers implements Iterator, Countable
                 $headers[] = $this->headers[$index];
             }
             return new ArrayIterator($headers);
-        } else {
-            $index = array_search($key, $this->headersKeys);
-            if ($index === false) {
-                return false;
-            }
-            if (is_array($this->headers[$index])) {
-                return $this->lazyLoadHeader($index);
-            } else {
-                return $this->headers[$index];
-            }
         }
+
+        $index = array_search($key, $this->headersKeys);
+        if ($index === false) {
+            return false;
+        }
+
+        if (is_array($this->headers[$index])) {
+            return $this->lazyLoadHeader($index);
+        }
+        return $this->headers[$index];
     }
 
     /**
@@ -299,7 +299,7 @@ class Headers implements Iterator, Countable
     }
 
     /**
-     * Return the current key for this object as an interator
+     * Return the current key for this object as an iterator
      *
      * @return mixed
      */
@@ -441,11 +441,10 @@ class Headers implements Iterator, Countable
                 $this->headers[]     = $header;
             }
             return $current;
-        } else {
-            $this->headers[$index] = $current = $headers;
-            return $current;
         }
 
+        $this->headers[$index] = $current = $headers;
+        return $current;
     }
 
     /**

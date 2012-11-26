@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-barcode",
+    "description": "provides a generic way to generate barcodes",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,14 +8,19 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Barcode": ""
+            "Zend\\Barcode\\": ""
         }
     },
+    "target-dir": "Zend/Barcode",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zendpdf": "*"
+    },
     "suggest": {
-        "zendframework/zend-validator": "Zend\\Validator component"
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zendpdf": "ZendPdf component"
     }
 }

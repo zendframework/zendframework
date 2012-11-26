@@ -1,32 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_I18n
  */
 
 namespace Zend\I18n\Translator;
 
 use Locale;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Cache;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\I18n\Exception;
+use Zend\I18n\Translator\Loader\FileLoaderInterface;
+use Zend\I18n\Translator\Loader\RemoteLoaderInterface;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Translator.
@@ -34,8 +25,6 @@ use Zend\I18n\Exception;
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Translator
 {
@@ -59,6 +48,13 @@ class Translator
      * @var array
      */
     protected $patterns = array();
+
+    /**
+     * Remote locations for loading messages.
+     *
+     * @var array
+     */
+    protected $remote = array();
 
     /**
      * Default locale.
@@ -118,16 +114,16 @@ class Translator
             }
         }
 
-        // patterns
-        if (isset($options['translation_patterns'])) {
-            if (!is_array($options['translation_patterns'])) {
+        // file patterns
+        if (isset($options['translation_file_patterns'])) {
+            if (!is_array($options['translation_file_patterns'])) {
                 throw new Exception\InvalidArgumentException(
-                    '"translation_patterns" should be an array'
+                    '"translation_file_patterns" should be an array'
                 );
             }
 
             $requiredKeys = array('type', 'base_dir', 'pattern');
-            foreach ($options['translation_patterns'] as $pattern) {
+            foreach ($options['translation_file_patterns'] as $pattern) {
                 foreach ($requiredKeys as $key) {
                     if (!isset($pattern[$key])) {
                         throw new Exception\InvalidArgumentException(
@@ -136,7 +132,7 @@ class Translator
                     }
                 }
 
-                $translator->addTranslationPattern(
+                $translator->addTranslationFilePattern(
                     $pattern['type'],
                     $pattern['base_dir'],
                     $pattern['pattern'],
@@ -168,6 +164,31 @@ class Translator
                     $file['filename'],
                     isset($file['text_domain']) ? $file['text_domain'] : 'default',
                     isset($file['locale']) ? $file['locale'] : null
+                );
+            }
+        }
+
+        // remote
+        if (isset($options['remote_translation'])) {
+            if (!is_array($options['remote_translation'])) {
+                throw new Exception\InvalidArgumentException(
+                    '"remote_translation" should be an array'
+                );
+            }
+
+            $requiredKeys = array('type');
+            foreach ($options['remote_translation'] as $remote) {
+                foreach ($requiredKeys as $key) {
+                    if (!isset($remote[$key])) {
+                        throw new Exception\InvalidArgumentException(
+                            "'{$key}' is missing for remote translation options"
+                        );
+                    }
+                }
+
+                $translator->addRemoteTranslations(
+                    $remote['type'],
+                    isset($remote['text_domain']) ? $remote['text_domain'] : 'default'
                 );
             }
         }
@@ -218,7 +239,7 @@ class Translator
      */
     public function setFallbackLocale($locale)
     {
-        $this->locale = $locale;
+        $this->fallbackLocale = $locale;
         return $this;
     }
 
@@ -229,11 +250,7 @@ class Translator
      */
     public function getFallbackLocale()
     {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
-        }
-
-        return $this->locale;
+        return $this->fallbackLocale;
     }
 
     /**
@@ -260,8 +277,8 @@ class Translator
 
     /**
      * Set the plugin manager for translation loaders
-     * 
-     * @param  LoaderPluginManager $pluginManager 
+     *
+     * @param  LoaderPluginManager $pluginManager
      * @return Translator
      */
     public function setPluginManager(LoaderPluginManager $pluginManager)
@@ -271,7 +288,7 @@ class Translator
     }
 
     /**
-     * Retreive the plugin manager for tranlation loaders.
+     * Retrieve the plugin manager for translation loaders.
      *
      * Lazy loads an instance if none currently set.
      *
@@ -301,9 +318,9 @@ class Translator
 
         if ($translation !== null && $translation !== '') {
             return $translation;
-        } 
-        
-        if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+        }
+
+        if (null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
             return $this->translate($message, $textDomain, $fallbackLocale);
@@ -334,19 +351,19 @@ class Translator
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if ($translation === null || $translation === '') {
-            if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+            if (null !== ($fallbackLocale = $this->getFallbackLocale())
                 && $locale !== $fallbackLocale
             ) {
                 return $this->translatePlural(
-                    $singular, 
-                    $plural, 
-                    $number, 
-                    $textDomain, 
+                    $singular,
+                    $plural,
+                    $number,
+                    $textDomain,
                     $fallbackLocale
                 );
             }
 
-            return ($number != 1 ? $singular : $plural);
+            return ($number == 1 ? $singular : $plural);
         }
 
         $index = $this->messages[$textDomain][$locale]
@@ -420,7 +437,7 @@ class Translator
     }
 
     /**
-     * Add multiple translations with a pattern.
+     * Add multiple translations with a file pattern.
      *
      * @param  string $type
      * @param  string $baseDir
@@ -428,7 +445,7 @@ class Translator
      * @param  string $textDomain
      * @return Translator
      */
-    public function addTranslationPattern(
+    public function addTranslationFilePattern(
         $type,
         $baseDir,
         $pattern,
@@ -448,10 +465,29 @@ class Translator
     }
 
     /**
+     * Add remote translations.
+     *
+     * @param  string $type
+     * @param  string $textDomain
+     * @return Translator
+     */
+    public function addRemoteTranslations($type, $textDomain = 'default')
+    {
+        if (!isset($this->remote[$textDomain])) {
+            $this->remote[$textDomain] = array();
+        }
+
+        $this->remote[$textDomain][] = $type;
+
+        return $this;
+    }
+
+    /**
      * Load messages for a given language and domain.
      *
      * @param  string $textDomain
      * @param  string $locale
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function loadMessages($textDomain, $locale)
@@ -463,40 +499,65 @@ class Translator
         if (null !== ($cache = $this->getCache())) {
             $cacheId = 'Zend_I18n_Translator_Messages_' . md5($textDomain . $locale);
 
-            if (false !== ($result = $cache->getItem($cacheId))) {
+            if (null !== ($result = $cache->getItem($cacheId))) {
                 $this->messages[$textDomain][$locale] = $result;
                 return;
+            }
+        }
+
+        // Try to load from remote sources
+        if (isset($this->remote[$textDomain])) {
+            foreach ($this->remote[$textDomain] as $loaderType) {
+                $loader = $this->getPluginManager()->get($loaderType);
+
+                if (!$loader instanceof RemoteLoaderInterface) {
+                    throw new Exception\RuntimeException('Specified loader is not a remote loader');
+                }
+
+                $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
+                goto cache;
             }
         }
 
         // Try to load from pattern
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir']
-                          . '/' . sprintf($pattern['pattern'], $locale);
+                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+
                 if (is_file($filename)) {
-                    $this->messages[$textDomain][$locale] = $this->getPluginManager()
-                         ->get($pattern['type'])
-                         ->load($filename, $locale);
+                    $loader = $this->getPluginManager()->get($pattern['type']);
+
+                    if (!$loader instanceof FileLoaderInterface) {
+                        throw new Exception\RuntimeException('Specified loader is not a file loader');
+                    }
+
+                    $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
+                    goto cache;
                 }
             }
         }
 
-        // Load concrete files, may override those loaded from patterns
+        // Try to load from concrete files
         foreach (array($locale, '*') as $currentLocale) {
             if (!isset($this->files[$textDomain][$currentLocale])) {
                 continue;
             }
 
-            $file = $this->files[$textDomain][$currentLocale];
-            $this->messages[$textDomain][$locale] = $this->getPluginManager()
-                 ->get($file['type'])
-                 ->load($file['filename'], $locale);
+            $file   = $this->files[$textDomain][$currentLocale];
+            $loader = $this->getPluginManager()->get($file['type']);
+
+            if (!$loader instanceof FileLoaderInterface) {
+                throw new Exception\RuntimeException('Specified loader is not a file loader');
+            }
+
+            $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
 
             unset($this->files[$textDomain][$currentLocale]);
+            goto cache;
         }
 
         // Cache the loaded text domain
+        cache:
         if ($cache !== null) {
             $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }

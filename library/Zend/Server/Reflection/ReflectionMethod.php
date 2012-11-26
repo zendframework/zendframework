@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server\Reflection;
@@ -27,8 +16,6 @@ namespace Zend\Server\Reflection;
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ReflectionMethod extends AbstractFunction
 {
@@ -36,27 +23,26 @@ class ReflectionMethod extends AbstractFunction
      * Parent class name
      * @var string
      */
-    protected $_class;
+    protected $class;
 
     /**
      * Parent class reflection
-     * @var Zend\Server\Reflection\ReflectionClass
+     * @var ReflectionClass
      */
-    protected $_classReflection;
+    protected $classReflection;
 
     /**
      * Constructor
      *
-     * @param \Zend\Server\Reflection\ReflectionClass $class
-     * @param ReflectionMethod $r
+     * @param ReflectionClass $class
+     * @param \ReflectionMethod $r
      * @param string $namespace
      * @param array $argv
-     * @return void
      */
     public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {
-        $this->_classReflection = $class;
-        $this->_reflection      = $r;
+        $this->classReflection = $class;
+        $this->reflection      = $r;
 
         $classNamespace = $class->getNamespace();
 
@@ -69,14 +55,14 @@ class ReflectionMethod extends AbstractFunction
 
         // Determine arguments
         if (is_array($argv)) {
-            $this->_argv = $argv;
+            $this->argv = $argv;
         }
 
         // If method call, need to store some info on the class
-        $this->_class = $class->getName();
+        $this->class = $class->getName();
 
         // Perform some introspection
-        $this->_reflect();
+        $this->reflect();
     }
 
     /**
@@ -86,7 +72,7 @@ class ReflectionMethod extends AbstractFunction
      */
     public function getDeclaringClass()
     {
-        return $this->_classReflection;
+        return $this->classReflection;
     }
 
     /**
@@ -99,8 +85,8 @@ class ReflectionMethod extends AbstractFunction
      */
     public function __wakeup()
     {
-        $this->_classReflection = new ReflectionClass(new \ReflectionClass($this->_class), $this->getNamespace(), $this->getInvokeArguments());
-        $this->_reflection = new \ReflectionMethod($this->_classReflection->getName(), $this->getName());
+        $this->classReflection = new ReflectionClass(new \ReflectionClass($this->class), $this->getNamespace(), $this->getInvokeArguments());
+        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->getName());
     }
 
 }

@@ -12,6 +12,7 @@ namespace Zend\ModuleManager\Listener;
 
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\ModuleEvent;
+use Zend\Mvc\MvcEvent;
 
 /**
  * Autoloader listener
@@ -39,6 +40,6 @@ class OnBootstrapListener extends AbstractListener
         $moduleManager = $e->getTarget();
         $events        = $moduleManager->getEventManager();
         $sharedEvents  = $events->getSharedManager();
-        $sharedEvents->attach('application', 'bootstrap', array($module, 'onBootstrap'));
+        $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, array($module, 'onBootstrap'));
     }
 }

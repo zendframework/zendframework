@@ -1,39 +1,28 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View;
 
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 
 /**
  * Plugin manager implementation for view helpers
  *
- * Enforces that heleprs retrieved are instances of
+ * Enforces that helpers retrieved are instances of
  * Helper\HelperInterface. Additionally, it registers a number of default
  * helpers.
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HelperPluginManager extends AbstractPluginManager
 {
@@ -90,15 +79,26 @@ class HelperPluginManager extends AbstractPluginManager
      * Constructor
      *
      * After invoking parent constructor, add an initializer to inject the
-     * attached renderer, if any, to the currently requested helper.
+     * attached renderer and translator, if any, to the currently requested helper.
      *
-     * @param  null|ConfigurationInterface $configuration
-     * @return void
+     * @param  null|ConfigInterface $configuration
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
-        $this->addInitializer(array($this, 'injectRenderer'));
+
+        $this->setFactory('identity', function ($helpers) {
+            $services = $helpers->getServiceLocator();
+            $helper   = new Helper\Identity();
+            if (!$services->has('Zend\Authentication\AuthenticationService')) {
+                return $helper;
+            }
+            $helper->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+            return $helper;
+        });
+
+        $this->addInitializer(array($this, 'injectRenderer'))
+             ->addInitializer(array($this, 'injectTranslator'));
     }
 
     /**
@@ -136,6 +136,22 @@ class HelperPluginManager extends AbstractPluginManager
             return;
         }
         $helper->setView($renderer);
+    }
+
+    /**
+     * Inject a helper instance with the registered translator
+     *
+     * @param  Helper\HelperInterface $helper
+     * @return void
+     */
+    public function injectTranslator($helper)
+    {
+        if ($helper instanceof TranslatorAwareInterface) {
+            $locator = $this->getServiceLocator();
+            if ($locator && $locator->has('translator')) {
+                $helper->setTranslator($locator->get('translator'));
+            }
+        }
     }
 
     /**

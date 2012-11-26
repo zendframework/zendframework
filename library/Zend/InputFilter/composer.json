@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-inputfilter",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\InputFilter": ""
+            "Zend\\InputFilter\\": ""
         }
     },
+    "target-dir": "Zend/InputFilter",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-filter": "self.version",

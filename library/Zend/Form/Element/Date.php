@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
+use Zend\Form\Element\DateTime as DateTimeElement;
 use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\ValidatorInterface;
@@ -31,10 +20,8 @@ use Zend\Validator\ValidatorInterface;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Date extends DateTime
+class Date extends DateTimeElement
 {
     /**
      * Seed attributes
@@ -44,6 +31,14 @@ class Date extends DateTime
     protected $attributes = array(
         'type' => 'date',
     );
+
+    /**
+     * Date format to use for DateTime values. By default, this is RFC-3339,
+     * full-date (Y-m-d), which is what HTML5 dictates.
+     *
+     * @var string
+     */
+    protected $format = 'Y-m-d';
 
     /**
      * Retrieves a Date Validator configured for a DateTime Input type

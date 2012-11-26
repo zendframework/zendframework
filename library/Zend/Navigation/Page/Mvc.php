@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage Page
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Navigation
  */
 
 namespace Zend\Navigation\Page;
@@ -24,6 +13,7 @@ namespace Zend\Navigation\Page;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\Navigation\Exception;
+use Zend\Mvc\ModuleRouteListener;
 
 /**
  * Represents a page that is defined using controller, action, route
@@ -32,8 +22,6 @@ use Zend\Navigation\Exception;
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mvc extends AbstractPage
 {
@@ -120,16 +108,28 @@ class Mvc extends AbstractPage
         if (!$this->active) {
             $reqParams = array();
             if ($this->routeMatch instanceof RouteMatch) {
-                $reqParams = $this->routeMatch->getParams();
+                $reqParams  = $this->routeMatch->getParams();
+
+                if (isset($reqParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
+                    $reqParams['controller'] = $reqParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
+                }
+
+                $myParams   = $this->params;
+                if (null !== $this->controller) {
+                    $myParams['controller'] = $this->controller;
+                }
+                if (null !== $this->action) {
+                    $myParams['action'] = $this->action;
+                }
 
                 if (null !== $this->getRoute()
                     && $this->routeMatch->getMatchedRouteName() === $this->getRoute()
+                    && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
                 ) {
                     $this->active = true;
                     return true;
                 }
             }
-
 
             $myParams = $this->params;
 
@@ -148,12 +148,10 @@ class Mvc extends AbstractPage
                 /**
                  * @todo In ZF1, this was configurable and pulled from the front controller
                  */
-                $myParams['action'] = 'action';
+                $myParams['action'] = 'index';
             }
 
-            if (count(array_intersect_assoc($reqParams, $myParams)) ==
-                count($myParams)
-            ) {
+            if (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams)) {
                 $this->active = true;
                 return true;
             }
@@ -180,7 +178,7 @@ class Mvc extends AbstractPage
 
         $router = $this->router;
         if (null === $router) {
-            $router = self::$defaultRouter;
+            $router = static::$defaultRouter;
         }
 
         if (!$router instanceof RouteStackInterface) {
@@ -413,7 +411,7 @@ class Mvc extends AbstractPage
      */
     public static function setDefaultRouter($router)
     {
-        self::$defaultRouter = $router;
+        static::$defaultRouter = $router;
     }
 
     /**
@@ -423,7 +421,7 @@ class Mvc extends AbstractPage
      */
     public static function getDefaultRouter()
     {
-        return self::$defaultRouter;
+        return static::$defaultRouter;
     }
 
     // Public methods:

@@ -31,6 +31,7 @@ class ViewObject extends AbstractTableObject
 
     /**
      * @param string $viewDefinition to set
+     * @return ViewObject
      */
     public function setViewDefinition($viewDefinition)
     {
@@ -48,6 +49,7 @@ class ViewObject extends AbstractTableObject
 
     /**
      * @param string $checkOption to set
+     * @return ViewObject
      */
     public function setCheckOption($checkOption)
     {
@@ -65,6 +67,7 @@ class ViewObject extends AbstractTableObject
 
     /**
      * @param bool $isUpdatable to set
+     * @return ViewObject
      */
     public function setIsUpdatable($isUpdatable)
     {

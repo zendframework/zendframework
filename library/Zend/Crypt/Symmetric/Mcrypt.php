@@ -143,7 +143,7 @@ class Mcrypt implements SymmetricInterface
                         $this->setSalt($value);
                         break;
                     case 'padding':
-                        $plugins       = self::getPaddingPluginManager();
+                        $plugins       = static::getPaddingPluginManager();
                         $padding       = $plugins->get($value);
                         $this->padding = $padding;
                         break;
@@ -165,7 +165,7 @@ class Mcrypt implements SymmetricInterface
             return;
         }
         if (!isset($options['padding'])) {
-            $plugins       = self::getPaddingPluginManager();
+            $plugins       = static::getPaddingPluginManager();
             $padding       = $plugins->get(self::DEFAULT_PADDING);
             $this->padding = $padding;
         }
@@ -178,11 +178,11 @@ class Mcrypt implements SymmetricInterface
      */
     public static function getPaddingPluginManager()
     {
-        if (self::$paddingPlugins === null) {
+        if (static::$paddingPlugins === null) {
             self::setPaddingPluginManager(new PaddingPluginManager());
         }
 
-        return self::$paddingPlugins;
+        return static::$paddingPlugins;
     }
 
     /**
@@ -210,7 +210,7 @@ class Mcrypt implements SymmetricInterface
                 (is_object($plugins) ? get_class($plugins) : gettype($plugins))
             ));
         }
-        self::$paddingPlugins = $plugins;
+        static::$paddingPlugins = $plugins;
     }
 
     /**
@@ -235,9 +235,6 @@ class Mcrypt implements SymmetricInterface
     {
         if (empty($key)) {
             throw new Exception\InvalidArgumentException('The key cannot be empty');
-        }
-        if (strlen($key) < $this->getKeySize()) {
-            throw new Exception\InvalidArgumentException('The key is not long enough for the cipher');
         }
         $this->key = $key;
         return $this;
@@ -318,8 +315,16 @@ class Mcrypt implements SymmetricInterface
         if (null === $this->getKey()) {
             throw new Exception\InvalidArgumentException('No key specified for the encryption');
         }
+        if (strlen($this->getKey()) < $this->getKeySize()) {
+            throw new Exception\InvalidArgumentException('The key is not long enough for the cipher');
+        }
         if (null === $this->getSalt()) {
             throw new Exception\InvalidArgumentException('The salt (IV) cannot be empty');
+        }
+        if (strlen($this->getSalt()) < $this->getSaltSize()) {
+            throw new Exception\InvalidArgumentException(
+                'The size of the salt (IV) is not enough. You need ' . $this->getSaltSize() . ' bytes'
+            );
         }
         if (null === $this->getPadding()) {
             throw new Exception\InvalidArgumentException('You have to specify a padding method');
@@ -400,15 +405,10 @@ class Mcrypt implements SymmetricInterface
      */
     public function setSalt($salt)
     {
-        if (!empty($salt)) {
-            $ivSize = $this->getSaltSize();
-            if (strlen($salt) < $ivSize) {
-                throw new Exception\InvalidArgumentException(
-                    "The size of the salt (IV) is not enough. You need $ivSize bytes"
-                );
-            }
-            $this->iv = $salt;
+        if (empty($salt)) {
+            throw new Exception\InvalidArgumentException('The salt (IV) cannot be empty');
         }
+        $this->iv = $salt;
         return $this;
     }
 

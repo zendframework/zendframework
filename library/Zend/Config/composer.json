@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-config",
+    "description": "provides a nested object property based user interface for accessing this configuration data within application code",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Config": ""
+            "Zend\\Config\\": ""
         }
     },
+    "target-dir": "Zend/Config",
     "require": {
         "php": ">=5.3.3"
     }

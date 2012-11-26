@@ -62,7 +62,7 @@ class Statement implements StatementInterface
     protected $bufferResults = false;
 
     /**
-     * @param  bool $bufferResults 
+     * @param  bool $bufferResults
      */
     public function __construct($bufferResults = false)
     {
@@ -109,10 +109,12 @@ class Statement implements StatementInterface
      * Set Parameter container
      *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -149,6 +151,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get parameter count
+     *
      * @return ParameterContainer
      */
     public function getParameterContainer()
@@ -157,6 +161,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Is prepared
+     *
      * @return bool
      */
     public function isPrepared()
@@ -165,7 +171,12 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Prepare
+     *
      * @param string $sql
+     * @throws Exception\InvalidQueryException
+     * @throws Exception\RuntimeException
+     * @return Statement
      */
     public function prepare($sql = null)
     {
@@ -185,12 +196,14 @@ class Statement implements StatementInterface
         }
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**
      * Execute
      *
      * @param  ParameterContainer $parameters
+     * @throws Exception\RuntimeException
      * @return mixed
      */
     public function execute($parameters = null)
@@ -237,7 +250,7 @@ class Statement implements StatementInterface
     /**
      * Bind parameters from container
      *
-     * @param ParameterContainer $pContainer
+     * @return void
      */
     protected function bindParametersFromContainer()
     {

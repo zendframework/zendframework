@@ -1,52 +1,35 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-use Traversable;
+use DateInterval;
 use DateTime;
 use DateTimeZone;
-use DateInterval;
-use DatePeriod;
+use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
-class DateStep extends AbstractValidator
+class DateStep extends Date
 {
-    const INVALID      = 'dateStepInvalid';
-    const INVALID_DATE = 'dateStepInvalidDate';
     const NOT_STEP     = 'dateStepNotStep';
 
     /**
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
-        self::INVALID_DATE => "The input does not appear to be a valid date",
-        self::NOT_STEP     => "The input is not a valid step."
+        self::NOT_STEP     => "The input is not a valid step"
     );
 
     /**
@@ -169,28 +152,6 @@ class DateStep extends AbstractValidator
     }
 
     /**
-     * Returns the format option
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    /**
-     * Sets the format option
-     *
-     * @param  string $format
-     * @return DateStep
-     */
-    public function setFormat($format)
-    {
-        $this->format = $format;
-        return $this;
-    }
-
-    /**
      * Returns the timezone option
      *
      * @return DateTimeZone
@@ -225,7 +186,7 @@ class DateStep extends AbstractValidator
         if (is_int($param)) {
             // Convert from timestamp
             $dateObj = date_create("@$param");
-        } else if (is_string($param)) {
+        } elseif (is_string($param)) {
             // Custom week format support
             if (strpos($this->getFormat(), 'Y-\WW') === 0
                 && preg_match('/^([0-9]{4})\-W([0-9]{2})/', $param, $matches)
@@ -254,13 +215,7 @@ class DateStep extends AbstractValidator
      */
     public function isValid($value)
     {
-        if (!is_string($value)
-            && !is_int($value)
-            && !($value instanceof DateTime)
-        ) {
-            $this->error(self::INVALID);
-            return false;
-        }
+        parent::isValid($value);
 
         $this->setValue($value);
 
@@ -271,7 +226,6 @@ class DateStep extends AbstractValidator
         try {
             $valueDate = $this->convertToDateTime($value);
         } catch (Exception\InvalidArgumentException $ex) {
-            $this->error(self::INVALID_DATE);
             return false;
         }
 
@@ -294,7 +248,7 @@ class DateStep extends AbstractValidator
             foreach ($intervalParts as $key => $value) {
                 if (0 != $value) {
                     $intervalUnit = $key;
-                    $stepValue    = (int)$value;
+                    $stepValue    = (int) $value;
                     break;
                 }
             }
@@ -351,9 +305,9 @@ class DateStep extends AbstractValidator
                         && 0 == $diffParts['minutes'] && 0 == $diffParts['seconds']
                     ) {
                         return true;
-                    } else if ('minutes' === $intervalUnit && 0 == $diffParts['seconds']) {
+                    } elseif ('minutes' === $intervalUnit && 0 == $diffParts['seconds']) {
                         return true;
-                    } else if ('seconds' === $intervalUnit) {
+                    } elseif ('seconds' === $intervalUnit) {
                         return true;
                     }
                 }

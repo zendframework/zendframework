@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
 
-use Zend\Acl;
-use Zend\I18n\Translator\Translator;
 use Zend\Navigation;
+use Zend\Permissions\Acl;
+use Zend\View\Helper\HelperInterface as BaseHelperInterface;
 
 /**
  * Interface for navigational helpers
@@ -31,17 +20,15 @@ use Zend\Navigation;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface HelperInterface
+interface HelperInterface extends BaseHelperInterface
 {
     /**
      * Sets navigation container the helper should operate on by default
      *
      * @param  string|Navigation\AbstractContainer $container [optional] container to operate
-     *                                         on. Default is null, which 
-     *                                         indicates that the container 
+     *                                         on. Default is null, which
+     *                                         indicates that the container
      *                                         should be reset.
      * @return HelperInterface fluent interface, returns self
      */
@@ -55,46 +42,28 @@ interface HelperInterface
     public function getContainer();
 
     /**
-     * Sets translator to use in helper
-     *
-     * @param  mixed $translator [optional] translator.  Expects an object of 
-     *                           type {@link \Zend\Translator\Adapter} or 
-     *                           {@link \Zend\Translator\Translator}, or null. 
-     *                           Default is null.
-     * @return HelperInterface  fluent interface, returns self
-     */
-    public function setTranslator(Translator $translator = null);
-
-    /**
-     * Returns translator used in helper
-     *
-     * @return \Zend\Translator\Adapter|null  translator or null
-     */
-    public function getTranslator();
-
-    /**
      * Sets ACL to use when iterating pages
      *
-     * @param  Acl\Acl $acl [optional] ACL instance
+     * @param  Acl\AclInterface $acl [optional] ACL instance
      * @return HelperInterface  fluent interface, returns self
      */
-    public function setAcl(Acl\Acl $acl = null);
+    public function setAcl(Acl\AclInterface $acl = null);
 
     /**
      * Returns ACL or null if it isn't set using {@link setAcl()} or
      * {@link setDefaultAcl()}
      *
-     * @return Acl\Acl|null  ACL object or null
+     * @return Acl\AclInterface|null  ACL object or null
      */
     public function getAcl();
 
     /**
      * Sets ACL role to use when iterating pages
      *
-     * @param  mixed $role [optional] role to set.  Expects a string, an 
-     *                     instance of type {@link Acl\Role}, or null. Default 
+     * @param  mixed $role [optional] role to set.  Expects a string, an
+     *                     instance of type {@link Acl\Role}, or null. Default
      *                     is null.
-     * @throws \Zend\View\Exception if $role is invalid
+     * @throws \Zend\View\Exception\ExceptionInterface if $role is invalid
      * @return HelperInterface fluent interface, returns
      *                                             self
      */
@@ -103,7 +72,7 @@ interface HelperInterface
     /**
      * Returns ACL role to use when iterating pages, or null if it isn't set
      *
-     * @return string|Acl\Role|null  role or null
+     * @return string|Acl\Role\RoleInterface|null  role or null
      */
     public function getRole();
 
@@ -138,22 +107,6 @@ interface HelperInterface
     public function setRenderInvisible($renderInvisible = true);
 
     /**
-     * Sets whether translator should be used
-     *
-     * @param  bool $useTranslator [optional] whether translator should be used.
-     *                             Default is true.
-     * @return HelperInterface  fluent interface, returns self
-     */
-    public function setUseTranslator($useTranslator = true);
-
-    /**
-     * Returns whether translator should be used
-     *
-     * @return bool  whether translator should be used
-     */
-    public function getUseTranslator();
-
-    /**
      * Checks if the helper has a container
      *
      * @return bool  whether the helper has a container or not
@@ -175,13 +128,6 @@ interface HelperInterface
     public function hasRole();
 
     /**
-     * Checks if the helper has a translator
-     *
-     * @return bool  whether the helper has a translator or not
-     */
-    public function hasTranslator();
-
-    /**
      * Magic overload: Should proxy to {@link render()}.
      *
      * @return string
@@ -192,9 +138,9 @@ interface HelperInterface
      * Renders helper
      *
      * @param  string|Navigation\AbstractContainer $container [optional] container to render.
-     *                                         Default is null, which indicates 
-     *                                         that the helper should render 
-     *                                         the container returned by {@link 
+     *                                         Default is null, which indicates
+     *                                         that the helper should render
+     *                                         the container returned by {@link
      *                                         getContainer()}.
      * @return string helper output
      * @throws \Zend\View\Exception\ExceptionInterface if unable to render

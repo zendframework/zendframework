@@ -1,43 +1,46 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Filter;
-use Zend\Log\Formatter\FormatterInterface as Formatter;
+use Traversable;
 use Zend\Log\Exception;
+use Zend\Log\Filter;
+use Zend\Log\Formatter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractWriter implements WriterInterface
 {
     /**
+     * Filter plugins
+     *
+     * @var FilterPluginManager
+     */
+    protected $filterPlugins;
+
+    /**
+     * Formatter plugins
+     *
+     * @var FormatterPluginManager
+     */
+    protected $formatterPlugins;
+
+    /**
      * Filter chain
      *
-     * @var array
+     * @var Filter\FilterInterface[]
      */
     protected $filters = array();
 
@@ -49,25 +52,190 @@ abstract class AbstractWriter implements WriterInterface
     protected $formatter;
 
     /**
+     * Use Zend\Stdlib\ErrorHandler to report errors during calls to write
+     *
+     * @var bool
+     */
+    protected $convertWriteErrorsToExceptions = true;
+
+    /**
+     * Error level passed to Zend\Stdlib\ErrorHandler::start for errors reported during calls to write
+     *
+     * @var bool
+     */
+    protected $errorsToExceptionsConversionLevel = E_WARNING;
+
+    /**
+     * Constructor
+     *
+     * Set options for an writer. Accepted options are:
+     * - filters: array of filters to add to this filter
+     * - formatter: formatter for this writer
+     *
+     * @param  array|\Traversable $options
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($options = null)
+    {
+        if ($options instanceof Traversable) {
+            $options = iterator_to_array($options);
+        }
+
+        if (is_array($options)) {
+
+            if(isset($options['filters']) && is_array($options['filters'])) {
+                foreach($options['filters'] as $filter) {
+                    if(!isset($filter['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the filter');
+                    }
+                    $filterOptions = (isset($filter['options'])) ? $filter['options'] : null;
+                    $this->addFilter($filter['name'], $filterOptions);
+                }
+            }
+
+            if(isset($options['formatter'])) {
+                $formatter = $options['formatter'];
+                if(is_string($formatter) || $formatter instanceof Formatter\FormatterInterface) {
+                    $this->setFormatter($formatter);
+                } elseif(is_array($formatter)) {
+                    if(!isset($formatter['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the formatter');
+                    }
+                    $formatterOptions = (isset($formatter['options'])) ? $formatter['options'] : null;
+                    $this->setFormatter($formatter['name'], $formatterOptions);
+                }
+            }
+        }
+    }
+
+    /**
      * Add a filter specific to this writer.
      *
-     * @param  Filter\FilterInterface|int $filter
+     * @param  int|string|Filter\FilterInterface $filter
+     * @param  array|null $options
      * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
      */
-    public function addFilter($filter)
+    public function addFilter($filter, array $options = null)
     {
         if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
-        } elseif (!$filter instanceof Filter\FilterInterface) {
+        }
+
+        if (is_string($filter)) {
+            $filter = $this->filterPlugin($filter, $options);
+        }
+
+        if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Filter must implement Zend\Log\Filter; received %s',
+                'Writer must implement %s\Filter\FilterInterface; received "%s"',
+                __NAMESPACE__,
                 is_object($filter) ? get_class($filter) : gettype($filter)
             ));
         }
 
         $this->filters[] = $filter;
         return $this;
+    }
+
+    /**
+     * Get filter plugin manager
+     *
+     * @return FilterPluginManager
+     */
+    public function getFilterPluginManager()
+    {
+        if (null === $this->filterPlugins) {
+            $this->setFilterPluginManager(new FilterPluginManager());
+        }
+        return $this->filterPlugins;
+    }
+
+    /**
+     * Set filter plugin manager
+     *
+     * @param  string|FilterPluginManager $plugins
+     * @return self
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setFilterPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof FilterPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Writer plugin manager must extend %s\FilterPluginManager; received %s',
+                __NAMESPACE__,
+                is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+
+        $this->filterPlugins = $plugins;
+        return $this;
+    }
+
+    /**
+     * Get filter instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Filter\FilterInterface
+     */
+    public function filterPlugin($name, array $options = null)
+    {
+        return $this->getFilterPluginManager()->get($name, $options);
+    }
+
+    /**
+     * Get formatter plugin manager
+     *
+     * @return FormatterPluginManager
+     */
+    public function getFormatterPluginManager()
+    {
+        if (null === $this->formatterPlugins) {
+            $this->setFormatterPluginManager(new FormatterPluginManager());
+        }
+        return $this->formatterPlugins;
+    }
+
+    /**
+     * Set formatter plugin manager
+     *
+     * @param  string|FormatterPluginManager $plugins
+     * @return self
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setFormatterPluginManager($plugins)
+    {
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
+        }
+        if (!$plugins instanceof FormatterPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Writer plugin manager must extend %s\FormatterPluginManager; received %s',
+                    __NAMESPACE__,
+                    is_object($plugins) ? get_class($plugins) : gettype($plugins)
+            ));
+        }
+
+        $this->formatterPlugins = $plugins;
+        return $this;
+    }
+
+
+    /**
+     * Get formatter instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Formatter\FormatterInterface
+     */
+    public function formatterPlugin($name, array $options = null)
+    {
+        return $this->getFormatterPluginManager()->get($name, $options);
     }
 
     /**
@@ -84,24 +252,69 @@ abstract class AbstractWriter implements WriterInterface
             }
         }
 
-        // exception occurs on error
-        $this->doWrite($event);
+        $errorHandlerStarted = false;
+
+        if ($this->convertWriteErrorsToExceptions && !ErrorHandler::started()) {
+            ErrorHandler::start($this->errorsToExceptionsConversionLevel);
+            $errorHandlerStarted = true;
+        }
+
+        try {
+            $this->doWrite($event);
+        } catch (\Exception $e) {
+            if ($errorHandlerStarted) {
+                ErrorHandler::stop();
+                $errorHandlerStarted = false;
+            }
+            throw $e;
+        }
+
+        if ($errorHandlerStarted) {
+            $error = ErrorHandler::stop();
+            $errorHandlerStarted = false;
+            if ($error) {
+                throw new Exception\RuntimeException("Unable to write", 0, $error);
+            }
+        }
     }
 
     /**
      * Set a new formatter for this writer
      *
-     * @param  Formatter $formatter
+     * @param  string|Formatter\FormatterInterface $formatter
      * @return self
+     * @throws Exception\InvalidArgumentException
      */
-    public function setFormatter(Formatter $formatter)
+    public function setFormatter($formatter, array $options = null)
     {
+        if (is_string($formatter)) {
+            $formatter = $this->formatterPlugin($formatter, $options);
+        }
+
+        if (!$formatter instanceof Formatter\FormatterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
+                    __NAMESPACE__,
+                    is_object($formatter) ? get_class($formatter) : gettype($formatter)
+            ));
+        }
+
         $this->formatter = $formatter;
         return $this;
     }
 
     /**
-     * Perform shutdown activites such as closing open resources
+     * Set convert write errors to exception flag
+     *
+     * @param bool $ignoreWriteErrors
+     */
+    public function setConvertWriteErrorsToExceptions($convertErrors)
+    {
+        $this->convertWriteErrorsToExceptions = $convertErrors;
+    }
+
+    /**
+     * Perform shutdown activities such as closing open resources
      *
      * @return void
      */

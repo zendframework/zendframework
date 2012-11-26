@@ -1,38 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventInterface as Event;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerAwareInterface;
 use Zend\Http\Request as HttpRequest;
-use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Mvc\Exception;
-use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\DispatchableInterface as Dispatchable;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 
@@ -42,44 +22,13 @@ use Zend\Stdlib\ResponseInterface as Response;
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRestfulController implements
-    Dispatchable,
-    EventManagerAwareInterface,
-    InjectApplicationEventInterface,
-    ServiceLocatorAwareInterface
+abstract class AbstractRestfulController extends AbstractController
 {
     /**
-     * @var PluginManager
+     * @var string
      */
-    protected $plugins;
-
-    /**
-     * @var Request
-     */
-    protected $request;
-
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
-     * @var Event
-     */
-    protected $event;
-
-    /**
-     * @var EventManagerInterface
-     */
-    protected $events;
-
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $locator;
+    protected $eventIdentifier = __CLASS__;
 
     /**
      * Return list of resources
@@ -129,6 +78,7 @@ abstract class AbstractRestfulController implements
     public function notFoundAction()
     {
         $this->response->setStatusCode(404);
+
         return array('content' => 'Page not found');
     }
 
@@ -150,28 +100,18 @@ abstract class AbstractRestfulController implements
         if (!$request instanceof HttpRequest) {
             throw new Exception\InvalidArgumentException('Expected an HTTP request');
         }
-        $this->request = $request;
-        if (!$response) {
-            $response = new HttpResponse();
-        }
-        $this->response = $response;
 
-        $e = $this->getEvent();
-        $e->setRequest($request)
-          ->setResponse($response)
-          ->setTarget($this);
-
-        $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
-            return ($test instanceof Response);
-        });
-        if ($result->stopped()) {
-            return $result->last();
-        }
-
-        return $e->getResult();
+        return parent::dispatch($request, $response);
     }
 
-    public function execute(MvcEvent $e)
+    /**
+     * Handle the request
+     *
+     * @param  MvcEvent $e
+     * @return mixed
+     * @throws Exception\DomainException if no route matches in event or invalid HTTP method
+     */
+    public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {
@@ -179,7 +119,7 @@ abstract class AbstractRestfulController implements
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new \DomainException('Missing route matches; unsure how to retrieve action');
+            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
         $request = $e->getRequest();
@@ -210,30 +150,23 @@ abstract class AbstractRestfulController implements
                     break;
                 case 'post':
                     $action = 'create';
-                    $return = $this->create($request->getPost()->toArray());
+                    $return = $this->processPostData($request);
                     break;
                 case 'put':
-                    if (null === $id = $routeMatch->getParam('id')) {
-                        if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
-                        }
-                    }
-                    $content = $request->getContent();
-                    parse_str($content, $parsedParams);
                     $action = 'update';
-                    $return = $this->update($id, $parsedParams);
+                    $return = $this->processPutData($request, $routeMatch);
                     break;
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
                         if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
+                            throw new Exception\DomainException('Missing identifier');
                         }
                     }
                     $action = 'delete';
                     $return = $this->delete($id);
                     break;
                 default:
-                    throw new \DomainException('Invalid HTTP method!');
+                    throw new Exception\DomainException('Invalid HTTP method!');
             }
 
             $routeMatch->setParam('action', $action);
@@ -243,207 +176,40 @@ abstract class AbstractRestfulController implements
         // - return from method, request, response
         // If a listener returns a response object, return it immediately
         $e->setResult($return);
+
         return $return;
     }
 
     /**
-     * Get request object
+     * Process post data and call create
      *
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if (!$this->request) {
-            $this->request = new HttpRequest();
-        }
-        return $this->request;
-    }
-
-    /**
-     * Get response object
-     *
-     * @return Response
-     */
-    public function getResponse()
-    {
-        if (!$this->response) {
-            $this->response = new HttpResponse();
-        }
-        return $this->response;
-    }
-
-    /**
-     * Set the event manager instance used by this context
-     *
-     * @param  EventManagerInterface $events
-     * @return AbstractRestfulController
-     */
-    public function setEventManager(EventManagerInterface $events)
-    {
-        $events->setIdentifiers(array(
-            'Zend\Stdlib\DispatchableInterface',
-            __CLASS__,
-            get_called_class()
-        ));
-        $this->events = $events;
-        $this->attachDefaultListeners();
-        return $this;
-    }
-
-    /**
-     * Retrieve the event manager
-     *
-     * Lazy-loads an EventManager instance if none registered.
-     *
-     * @return EventManagerInterface
-     */
-    public function getEventManager()
-    {
-        if (!$this->events) {
-            $this->setEventManager(new EventManager());
-        }
-        return $this->events;
-    }
-
-    /**
-     * Set an event to use during dispatch
-     *
-     * By default, will re-cast to MvcEvent if another event type is provided.
-     *
-     * @param  Event $e
-     * @return void
-     */
-    public function setEvent(Event $e)
-    {
-        if ($e instanceof Event && !$e instanceof MvcEvent) {
-            $eventParams = $e->getParams();
-            $e = new MvcEvent();
-            $e->setParams($eventParams);
-            unset($eventParams);
-        }
-        $this->event = $e;
-    }
-
-    /**
-     * Get the attached event
-     *
-     * Will create a new MvcEvent if none provided.
-     *
-     * @return MvcEvent
-     */
-    public function getEvent()
-    {
-        if (!$this->event) {
-            $this->setEvent(new MvcEvent());
-        }
-        return $this->event;
-    }
-
-    /**
-     * Set locator instance
-     *
-     * @param  ServiceLocatorInterface $locator
-     * @return void
-     */
-    public function setServiceLocator(ServiceLocatorInterface $locator)
-    {
-        $this->locator = $locator;
-    }
-
-    /**
-     * Retrieve locator instance
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->locator;
-    }
-
-    /**
-     * Get plugin manager
-     *
-     * @return PluginManager
-     */
-    public function getPluginManager()
-    {
-        if (!$this->plugins) {
-            $this->setPluginManager(new PluginManager());
-        }
-        return $this->plugins;
-    }
-
-    /**
-     * Set plugin manager
-     *
-     * @param  string|PluginManager $plugins 
-     * @return RestfulController
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setPluginManager(PluginManager $plugins)
-    {
-        $this->plugins = $plugins;
-        if (method_exists($plugins, 'setController')) {
-            $this->plugins->setController($this);
-        }
-        return $this;
-    }
-
-    /**
-     * Get plugin instance
-     *
-     * @param  string     $name    Name of plugin to return
-     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @param Request $request
      * @return mixed
      */
-    public function plugin($name, array $options = null)
+    public function processPostData(Request $request)
     {
-        return $this->getPluginManager()->get($name, $options);
+        return $this->create($request->getPost()->toArray());
     }
 
     /**
-     * Method overloading: return/call plugins
+     * Process put data and call update
      *
-     * If the plugin is a functor, call it, passing the parameters provided.
-     * Otherwise, return the plugin instance.
-     *
-     * @param  string $method
-     * @param  array $params
+     * @param Request $request
+     * @param $routeMatch
      * @return mixed
+     * @throws Exception\DomainException
      */
-    public function __call($method, $params)
+    public function processPutData(Request $request, $routeMatch)
     {
-        $plugin = $this->plugin($method);
-        if (is_callable($plugin)) {
-            return call_user_func_array($plugin, $params);
+        if (null === $id = $routeMatch->getParam('id')) {
+            if (!($id = $request->getQuery()->get('id', false))) {
+                throw new Exception\DomainException('Missing identifier');
+            }
         }
-        return $plugin;
+        $content = $request->getContent();
+        parse_str($content, $parsedParams);
+
+        return $this->update($id, $parsedParams);
     }
 
-    /**
-     * Register the default events for this controller
-     *
-     * @return void
-     */
-    protected function attachDefaultListeners()
-    {
-        $events = $this->getEventManager();
-        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'execute'));
-    }
-
-    /**
-     * Transform an "action" token into a method name
-     *
-     * @param  string $action
-     * @return string
-     */
-    public static function getMethodFromAction($action)
-    {
-        $method  = str_replace(array('.', '-', '_'), ' ', $action);
-        $method  = ucwords($method);
-        $method  = str_replace(' ', '', $method);
-        $method  = lcfirst($method);
-        $method .= 'Action';
-        return $method;
-    }
 }

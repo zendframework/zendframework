@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
 use Zend\Http\Response;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used
@@ -34,11 +24,21 @@ use Zend\Http\Response;
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Socket implements HttpAdapter, StreamInterface
 {
+    /**
+     * Map SSL transport wrappers to stream crypto method constants
+     *
+     * @var array
+     */
+    protected static $sslCryptoTypes = array(
+            'ssl'   => STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
+            'sslv2' => STREAM_CRYPTO_METHOD_SSLv2_CLIENT,
+            'sslv3' => STREAM_CRYPTO_METHOD_SSLv3_CLIENT,
+            'tls'   => STREAM_CRYPTO_METHOD_TLS_CLIENT
+    );
+
     /**
      * The socket for server connection
      *
@@ -66,11 +66,14 @@ class Socket implements HttpAdapter, StreamInterface
      * @var array
      */
     protected $config = array(
-        'persistent'    => false,
-        'ssltransport'  => 'ssl',
-        'sslcert'       => null,
-        'sslpassphrase' => null,
-        'sslusecontext' => false
+        'persistent'            => false,
+        'ssltransport'          => 'ssl',
+        'sslcert'               => null,
+        'sslpassphrase'         => null,
+        'sslverifypeer'         => true,
+        'sslcapath'             => null,
+        'sslallowselfsigned'    => false,
+        'sslusecontext'         => false
     );
 
     /**
@@ -85,7 +88,7 @@ class Socket implements HttpAdapter, StreamInterface
      *
      * @var resource
      */
-    protected $_context = null;
+    protected $context = null;
 
     /**
      * Adapter constructor, currently empty. Config is set using setOptions()
@@ -99,6 +102,7 @@ class Socket implements HttpAdapter, StreamInterface
      * Set the configuration array for the adapter
      *
      * @param  array|Traversable $options
+     * @throws AdapterException\InvalidArgumentException
      */
     public function setOptions($options = array())
     {
@@ -137,15 +141,16 @@ class Socket implements HttpAdapter, StreamInterface
      * @since  Zend Framework 1.9
      *
      * @param  mixed $context Stream context or array of context options
+     * @throws Exception\InvalidArgumentException
      * @return Socket
      */
     public function setStreamContext($context)
     {
         if (is_resource($context) && get_resource_type($context) == 'stream-context') {
-            $this->_context = $context;
+            $this->context = $context;
 
         } elseif (is_array($context)) {
-            $this->_context = stream_context_create($context);
+            $this->context = stream_context_create($context);
 
         } else {
             // Invalid parameter
@@ -166,11 +171,11 @@ class Socket implements HttpAdapter, StreamInterface
      */
     public function getStreamContext()
     {
-        if (! $this->_context) {
-            $this->_context = stream_context_create();
+        if (! $this->context) {
+            $this->context = stream_context_create();
         }
 
-        return $this->_context;
+        return $this->context;
     }
 
     /**
@@ -183,53 +188,123 @@ class Socket implements HttpAdapter, StreamInterface
      */
     public function connect($host, $port = 80, $secure = false)
     {
-        // If the URI should be accessed via SSL, prepend the Hostname with ssl://
-        $host = ($secure ? $this->config['ssltransport'] : 'tcp') . '://' . $host;
-
         // If we are connected to the wrong host, disconnect first
         if (($this->connected_to[0] != $host || $this->connected_to[1] != $port)) {
-            if (is_resource($this->socket)) $this->close();
+            if (is_resource($this->socket)) {
+                $this->close();
+            }
         }
 
         // Now, if we are not connected, connect
-        if (! is_resource($this->socket) || ! $this->config['keepalive']) {
+        if (!is_resource($this->socket) || ! $this->config['keepalive']) {
             $context = $this->getStreamContext();
+
             if ($secure || $this->config['sslusecontext']) {
+                if ($this->config['sslverifypeer'] !== null) {
+                    if (!stream_context_set_option($context, 'ssl', 'verify_peer', $this->config['sslverifypeer'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslverifypeer option');
+                    }
+                }
+
+                if ($this->config['sslcapath']) {
+                    if (!stream_context_set_option($context, 'ssl', 'capath', $this->config['sslcapath'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslcapath option');
+                    }
+                }
+
+                if ($this->config['sslallowselfsigned'] !== null) {
+                    if (!stream_context_set_option($context, 'ssl', 'allow_self_signed', $this->config['sslallowselfsigned'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslallowselfsigned option');
+                    }
+                }
+
                 if ($this->config['sslcert'] !== null) {
-                    if (! stream_context_set_option($context, 'ssl', 'local_cert',
-                                                    $this->config['sslcert'])) {
+                    if (!stream_context_set_option($context, 'ssl', 'local_cert', $this->config['sslcert'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslcert option');
                     }
                 }
+
                 if ($this->config['sslpassphrase'] !== null) {
-                    if (! stream_context_set_option($context, 'ssl', 'passphrase',
-                                                    $this->config['sslpassphrase'])) {
+                    if (!stream_context_set_option($context, 'ssl', 'passphrase', $this->config['sslpassphrase'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslpassphrase option');
                     }
                 }
             }
 
             $flags = STREAM_CLIENT_CONNECT;
-            if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
+            if ($this->config['persistent']) {
+                $flags |= STREAM_CLIENT_PERSISTENT;
+            }
 
-            $errno = null;
-            $errstr = '';
-            $this->socket = @stream_socket_client($host . ':' . $port,
-                                                  $errno,
-                                                  $errstr,
-                                                  (int) $this->config['timeout'],
-                                                  $flags,
-                                                  $context);
+            ErrorHandler::start();
+            $this->socket = stream_socket_client(
+                $host . ':' . $port,
+                $errno,
+                $errstr,
+                (int) $this->config['timeout'],
+                $flags,
+                $context
+            );
+            $error = ErrorHandler::stop();
 
-            if (! $this->socket) {
+            if (!$this->socket) {
                 $this->close();
                 throw new AdapterException\RuntimeException(
-                    'Unable to Connect to ' . $host . ':' . $port . '. Error #' . $errno . ': ' . $errstr);
+                    sprintf(
+                        'Unable to connect to %s:%d%s',
+                        $host,
+                        $port,
+                        ($error ? ' . Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
+                    ),
+                    0,
+                    $error
+                );
             }
 
             // Set the stream timeout
-            if (! stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
+            if (!stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
                 throw new AdapterException\RuntimeException('Unable to set the connection timeout');
+            }
+
+            if ($secure || $this->config['sslusecontext']) {
+                if ($this->config['ssltransport'] && isset(static::$sslCryptoTypes[$this->config['ssltransport']])) {
+                    $sslCryptoMethod = static::$sslCryptoTypes[$this->config['ssltransport']];
+                } else {
+                    $sslCryptoMethod = STREAM_CRYPTO_METHOD_SSLv3_CLIENT;
+                }
+
+                ErrorHandler::start();
+                $test  = stream_socket_enable_crypto($this->socket, true, $sslCryptoMethod);
+                $error = ErrorHandler::stop();
+                if (!$test || $error) {
+                    // Error handling is kind of difficult when it comes to SSL
+                    $errorString = '';
+                    while (($sslError = openssl_error_string()) != false) {
+                        $errorString .= "; SSL error: $sslError";
+                    }
+                    $this->close();
+
+                    if ((! $errorString) && $this->config['sslverifypeer']) {
+                        // There's good chance our error is due to sslcapath not being properly set
+                        if (! ($this->config['sslcapath'] && is_dir($this->config['sslcapath']))) {
+                            $errorString = 'make sure the "sslcapath" option points to a valid SSL certificate directory';
+                        }
+                    }
+
+                    if ($errorString) {
+                        $errorString = ": $errorString";
+                    }
+
+                    throw new AdapterException\RuntimeException(sprintf(
+                        'Unable to enable crypto on TCP connection %s%s',
+                        $host,
+                        $errorString
+                    ), 0, $error);
+                }
+
+                $host = $this->config['ssltransport'] . "://" . $host;
+            } else {
+                $host = 'tcp://' . $host;
             }
 
             // Update connected_to
@@ -246,6 +321,7 @@ class Socket implements HttpAdapter, StreamInterface
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body
+     * @throws AdapterException\RuntimeException
      * @return string Request as string
      */
     public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
@@ -281,8 +357,11 @@ class Socket implements HttpAdapter, StreamInterface
         }
 
         // Send the request
-        if (! @fwrite($this->socket, $request)) {
-            throw new AdapterException\RuntimeException('Error writing request to server');
+        ErrorHandler::start();
+        $test  = fwrite($this->socket, $request);
+        $error = ErrorHandler::stop();
+        if (!$test) {
+            throw new AdapterException\RuntimeException('Error writing request to server', 0, $error);
         }
 
         if (is_resource($body)) {
@@ -297,6 +376,7 @@ class Socket implements HttpAdapter, StreamInterface
     /**
      * Read response from server
      *
+     * @throws AdapterException\RuntimeException
      * @return string
      */
     public function read()
@@ -305,7 +385,7 @@ class Socket implements HttpAdapter, StreamInterface
         $response = '';
         $gotStatus = false;
 
-        while (($line = @fgets($this->socket)) !== false) {
+        while (($line = fgets($this->socket)) !== false) {
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
             if ($gotStatus) {
                 $response .= $line;
@@ -348,7 +428,7 @@ class Socket implements HttpAdapter, StreamInterface
             if (strtolower($transfer_encoding->getFieldValue()) == 'chunked') {
 
                 do {
-                    $line  = @fgets($this->socket);
+                    $line  = fgets($this->socket);
                     $this->_checkSocketReadTimeout();
 
                     $chunk = $line;
@@ -377,7 +457,7 @@ class Socket implements HttpAdapter, StreamInterface
                               break;
                              }
                         } else {
-                            $line = @fread($this->socket, $read_to - $current_pos);
+                            $line = fread($this->socket, $read_to - $current_pos);
                             if ($line === false || strlen($line) === 0) {
                                 $this->_checkSocketReadTimeout();
                                 break;
@@ -386,7 +466,9 @@ class Socket implements HttpAdapter, StreamInterface
                         }
                     } while (! feof($this->socket));
 
-                    $chunk .= @fgets($this->socket);
+                    ErrorHandler::start();
+                    $chunk .= fgets($this->socket);
+                    ErrorHandler::stop();
                     $this->_checkSocketReadTimeout();
 
                     if (!$this->out_stream) {
@@ -422,12 +504,12 @@ class Socket implements HttpAdapter, StreamInterface
                  $current_pos = ftell($this->socket)) {
 
                  if ($this->out_stream) {
-                     if (@stream_copy_to_stream($this->socket, $this->out_stream, $read_to - $current_pos) == 0) {
+                     if (stream_copy_to_stream($this->socket, $this->out_stream, $read_to - $current_pos) == 0) {
                           $this->_checkSocketReadTimeout();
                           break;
                      }
                  } else {
-                    $chunk = @fread($this->socket, $read_to - $current_pos);
+                    $chunk = fread($this->socket, $read_to - $current_pos);
                     if ($chunk === false || strlen($chunk) === 0) {
                         $this->_checkSocketReadTimeout();
                         break;
@@ -445,12 +527,12 @@ class Socket implements HttpAdapter, StreamInterface
 
             do {
                 if ($this->out_stream) {
-                    if (@stream_copy_to_stream($this->socket, $this->out_stream) == 0) {
+                    if (stream_copy_to_stream($this->socket, $this->out_stream) == 0) {
                           $this->_checkSocketReadTimeout();
                           break;
                      }
                 } else {
-                    $buff = @fread($this->socket, 8192);
+                    $buff = fread($this->socket, 8192);
                     if ($buff === false || strlen($buff) === 0) {
                         $this->_checkSocketReadTimeout();
                         break;
@@ -479,7 +561,11 @@ class Socket implements HttpAdapter, StreamInterface
      */
     public function close()
     {
-        if (is_resource($this->socket)) @fclose($this->socket);
+        if (is_resource($this->socket)) {
+            ErrorHandler::start();
+            fclose($this->socket);
+            ErrorHandler::stop();
+        }
         $this->socket = null;
         $this->connected_to = array(null, null);
     }

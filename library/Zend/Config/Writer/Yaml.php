@@ -21,14 +21,14 @@ class Yaml extends AbstractWriter
 {
     /**
      * YAML encoder callback
-     * 
+     *
      * @var callable
      */
     protected $yamlEncoder;
 
     /**
      * Constructor
-     * 
+     *
      * @param callable|string|null $yamlEncoder
      */
     public function __construct($yamlEncoder = null)
@@ -80,12 +80,12 @@ class Yaml extends AbstractWriter
         if (null === $this->getYamlEncoder()) {
              throw new Exception\RuntimeException("You didn't specify a Yaml callback encoder");
         }
-        
+
         $config = call_user_func($this->getYamlEncoder(), $config);
         if (null === $config) {
             throw new Exception\RuntimeException("Error generating YAML data");
         }
-        
+
         return $config;
     }
 }

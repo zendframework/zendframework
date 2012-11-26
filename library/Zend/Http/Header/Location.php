@@ -10,7 +10,6 @@
 
 namespace Zend\Http\Header;
 
-use Zend\Uri\Http as HttpUri;
 
 /**
  * Location Header

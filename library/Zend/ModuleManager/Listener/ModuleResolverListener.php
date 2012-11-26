@@ -10,9 +10,11 @@
 
 namespace Zend\ModuleManager\Listener;
 
+use Zend\ModuleManager\ModuleEvent;
+
 /**
  * Module resolver listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
@@ -20,10 +22,10 @@ namespace Zend\ModuleManager\Listener;
 class ModuleResolverListener extends AbstractListener
 {
     /**
-     * @param  \Zend\EventManager\EventInterface $e
-     * @return object
+     * @param  ModuleEvent $e
+     * @return object|false False if module class does not exist
      */
-    public function __invoke($e)
+    public function __invoke(ModuleEvent $e)
     {
         $moduleName = $e->getModuleName();
         $class      = $moduleName . '\Module';

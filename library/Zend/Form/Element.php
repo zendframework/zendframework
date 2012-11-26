@@ -1,35 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Element implements ElementInterface
+class Element implements ElementInterface, InitializableInterface
 {
     /**
      * @var array
@@ -51,6 +40,15 @@ class Element implements ElementInterface
      */
     protected $messages = array();
 
+    /**
+     * @var array custom options
+     */
+    protected $options = array();
+
+    /**
+     * @var mixed
+     */
+    protected $value;
 
     /**
      * @param  null|int|string  $name    Optional name for the element
@@ -66,6 +64,16 @@ class Element implements ElementInterface
         if (!empty($options)) {
             $this->setOptions($options);
         }
+    }
+
+    /**
+     * This function is automatically called when creating element with factory. It
+     * allows to perform various operations (add elements...)
+     *
+     * @return void
+     */
+    public function init()
+    {
     }
 
     /**
@@ -117,7 +125,34 @@ class Element implements ElementInterface
             $this->setLabelAttributes($options['label_attributes']);
         }
 
+        $this->options = $options;
+
         return $this;
+    }
+
+    /**
+     * Get defined options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Return the specified option
+     *
+     * @param string $option
+     * @return NULL|mixed
+     */
+    public function getOption($option)
+    {
+        if (!isset($this->options[$option])) {
+            return null;
+        }
+
+        return $this->options[$option];
     }
 
     /**
@@ -129,6 +164,11 @@ class Element implements ElementInterface
      */
     public function setAttribute($key, $value)
     {
+        // Do not include the value in the list of attributes
+        if ($key === 'value') {
+            $this->setValue($value);
+            return $this;
+        }
         $this->attributes[$key] = $value;
         return $this;
     }
@@ -195,18 +235,41 @@ class Element implements ElementInterface
     /**
      * Clear all attributes
      *
-     * @return void
+     * @return Element|ElementInterface
      */
     public function clearAttributes()
     {
         $this->attributes = array();
+        return $this;
+    }
+
+    /**
+     * Set the element value
+     *
+     * @param  mixed $value
+     * @return Element
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the element value
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 
     /**
      * Set the label used for this element
      *
      * @param $label
-     * @return ElementInterface
+     * @return Element|ElementInterface
      */
     public function setLabel($label)
     {
@@ -231,7 +294,7 @@ class Element implements ElementInterface
      * Set the attributes to use with the label
      *
      * @param array $labelAttributes
-     * @return Element
+     * @return Element|ElementInterface
      */
     public function setLabelAttributes(array $labelAttributes)
     {

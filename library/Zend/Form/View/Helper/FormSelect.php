@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
 
-use Traversable;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormSelect extends AbstractHelper
 {
@@ -69,38 +56,35 @@ class FormSelect extends AbstractHelper
      * Render a form <select> element from the provided $element
      *
      * @param  ElementInterface $element
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof SelectElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\Select',
+                __METHOD__
+            ));
+        }
+
         $name   = $element->getName();
-        if (empty($name)) {
+        if (empty($name) && $name !== 0) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__
             ));
         }
 
-        $attributes = $element->getAttributes();
+        $options = $element->getValueOptions();
 
-        if (!isset($attributes['options'])
-            || (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable)
-        ) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an array or Traversable "options" attribute; none found',
-                __METHOD__
-            ));
+        if (($emptyOption = $element->getEmptyOption()) !== null) {
+            $options = array('' => $emptyOption) + $options;
         }
 
-        $options = (array) $attributes['options'];
-        unset($attributes['options']);
-
-        $value = array();
-        if (isset($attributes['value'])) {
-            $value = $attributes['value'];
-            $value = $this->validateMultiValue($value, $attributes);
-            unset($attributes['value']);
-        };
+        $attributes = $element->getAttributes();
+        $value      = $this->validateMultiValue($element->getValue(), $attributes);
 
         $attributes['name'] = $name;
         if (array_key_exists('multiple', $attributes) && $attributes['multiple']) {
@@ -147,8 +131,8 @@ class FormSelect extends AbstractHelper
 
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(
-                    'label' => $key,
-                    'value' => $optionSpec,
+                    'label' => $optionSpec,
+                    'value' => $key
                 );
             }
 
@@ -172,6 +156,12 @@ class FormSelect extends AbstractHelper
 
             if (in_array($value, $selectedOptions)) {
                 $selected = true;
+            }
+
+            if (null !== ($translator = $this->getTranslator())) {
+                $label = $translator->translate(
+                    $label, $this->getTranslatorTextDomain()
+                );
             }
 
             $attributes = compact('value', 'selected', 'disabled');
@@ -252,6 +242,10 @@ class FormSelect extends AbstractHelper
      */
     protected function validateMultiValue($value, array $attributes)
     {
+        if (null === $value) {
+            return array();
+        }
+
         if (!is_array($value)) {
             return (array) $value;
         }

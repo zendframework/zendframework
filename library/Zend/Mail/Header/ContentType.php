@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
@@ -27,18 +16,9 @@ use Zend\Mail\Headers;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ContentType implements HeaderInterface
 {
-    /**
-     * Header encoding
-     * 
-     * @var string
-     */
-    protected $encoding = 'ASCII';
-
     /**
      * @var string
      */
@@ -68,12 +48,12 @@ class ContentType implements HeaderInterface
 
         if (count($values)) {
             foreach ($values as $keyValuePair) {
-                list($key, $value) = explode('=', $keyValuePair);
-                $value = trim($value, "\"\' \t\n\r\0\x0B");
+                list($key, $value) = explode('=', $keyValuePair, 2);
+                $value = trim($value, "'\" \t\n\r\0\x0B");
                 $header->addParameter($key, $value);
             }
         }
-        
+
         return $header;
     }
 
@@ -97,20 +77,20 @@ class ContentType implements HeaderInterface
         return implode(';' . Headers::FOLDING, $values);
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
-        $this->encoding = $encoding;
+        // This header must be always in US-ASCII
         return $this;
     }
 
     public function getEncoding()
     {
-        return $this->encoding;
+        return 'ASCII';
     }
 
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
+        return 'Content-Type: ' . $this->getFieldValue();
     }
 
     /**
@@ -122,7 +102,7 @@ class ContentType implements HeaderInterface
      */
     public function setType($type)
     {
-        if (!preg_match('/^[a-z_-]+\/[a-z_-]+$/i', $type)) {
+        if (!preg_match('/^[a-z-]+\/[a-z0-9.+-]+$/i', $type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a value in the format "type/subtype"; received "%s"',
                 __METHOD__,
@@ -135,7 +115,7 @@ class ContentType implements HeaderInterface
 
     /**
      * Retrieve the content type
-     * 
+     *
      * @return string
      */
     public function getType()
@@ -145,9 +125,9 @@ class ContentType implements HeaderInterface
 
     /**
      * Add a parameter pair
-     * 
-     * @param  string $name 
-     * @param  string $value 
+     *
+     * @param  string $name
+     * @param  string $value
      * @return ContentType
      */
     public function addParameter($name, $value)
@@ -159,7 +139,7 @@ class ContentType implements HeaderInterface
 
     /**
      * Get all parameters
-     * 
+     *
      * @return array
      */
     public function getParameters()
@@ -169,8 +149,8 @@ class ContentType implements HeaderInterface
 
     /**
      * Get a parameter by name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return null|string
      */
     public function getParameter($name)
@@ -184,8 +164,8 @@ class ContentType implements HeaderInterface
 
     /**
      * Remove a named parameter
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function removeParameter($name)

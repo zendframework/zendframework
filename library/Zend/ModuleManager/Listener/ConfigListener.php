@@ -7,18 +7,18 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ModuleManager
  */
+
 namespace Zend\ModuleManager\Listener;
 
-use ArrayAccess;
 use Traversable;
 use Zend\Config\Config;
 use Zend\Config\Factory as ConfigFactory;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Glob;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Config listener
@@ -134,7 +134,7 @@ class ConfigListener extends AbstractListener implements
      */
     public function onLoadModule(ModuleEvent $e)
     {
-        $module = $e->getParam('module');
+        $module = $e->getModule();
 
         if (!$module instanceof ConfigProviderInterface
             && !is_callable(array($module, 'getConfig'))
@@ -165,13 +165,17 @@ class ConfigListener extends AbstractListener implements
 
         // Merge all of the collected configs
         $this->mergedConfig = $this->getOptions()->getExtraConfig() ?: array();
-        foreach ($this->configs as $key => $config) {
+        foreach ($this->configs as $config) {
             $this->mergedConfig = ArrayUtils::merge($this->mergedConfig, $config);
         }
 
         // If enabled, update the config cache
-        if ($this->getOptions()->getConfigCacheEnabled()) {
-            $this->updateCache();
+        if (
+            $this->getOptions()->getConfigCacheEnabled()
+            && false === $this->skipConfig
+        ) {
+            $configFile = $this->getOptions()->getConfigCacheFile();
+            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
         }
 
         return $this;
@@ -263,7 +267,7 @@ class ConfigListener extends AbstractListener implements
     /**
      * Add a static path of config files to merge after loading modules
      *
-     * @param  string $globPath
+     * @param  string $staticPath
      * @return ConfigListener
      */
     public function addConfigStaticPath($staticPath)
@@ -275,7 +279,9 @@ class ConfigListener extends AbstractListener implements
     /**
      * Add an array of paths of config files to merge after loading modules
      *
-     * @param  mixed $paths
+     * @param  Traversable|array $paths
+     * @param string $type
+     * @throws Exception\InvalidArgumentException
      * @return ConfigListener
      */
     protected function addConfigPaths($paths, $type)
@@ -303,6 +309,7 @@ class ConfigListener extends AbstractListener implements
      *
      * @param  string $path
      * @param  string $type
+     * @throws Exception\InvalidArgumentException
      * @return ConfigListener
      */
     protected function addConfigPath($path, $type)
@@ -317,8 +324,12 @@ class ConfigListener extends AbstractListener implements
         return $this;
     }
 
-
-
+    /**
+     * @param string $key
+     * @param array|Traversable $config
+     * @throws Exception\InvalidArgumentException
+     * @return ConfigListener
+     */
     protected function addConfig($key, $config)
     {
         if ($config instanceof Traversable) {
@@ -356,7 +367,7 @@ class ConfigListener extends AbstractListener implements
             case self::GLOB_PATH:
                 // We want to keep track of where each value came from so we don't
                 // use ConfigFactory::fromFiles() since it does merging internally.
-                foreach(Glob::glob($path, Glob::GLOB_BRACE) as $file) {
+                foreach (Glob::glob($path, Glob::GLOB_BRACE) as $file) {
                     $this->addConfig($file, ConfigFactory::fromFile($file));
                 }
                 break;
@@ -384,19 +395,5 @@ class ConfigListener extends AbstractListener implements
     protected function getCachedConfig()
     {
         return include $this->getOptions()->getConfigCacheFile();
-    }
-
-    /**
-     * @return ConfigListener
-     */
-    protected function updateCache()
-    {
-        if (($this->getOptions()->getConfigCacheEnabled())
-            && (false === $this->skipConfig)
-        ) {
-            $configFile = $this->getOptions()->getConfigCacheFile();
-            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
-        }
-        return $this;
     }
 }

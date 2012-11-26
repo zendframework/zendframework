@@ -51,8 +51,8 @@ Currently Implemented
     and manager. In addition to covering every line of code, further effort was
     made to test other use-cases such as nested/sub-modules and various other 
     behaviors.
-* **Module Dependancy**
-    Refectored to now allow self resolution of dependencies. Now provides better access 
+* **Module Dependency**
+    Refactored to now allow self resolution of dependencies. Now provides better access
     to all provisions & dependencies within an application. This is opt-in with
     the enable_dependency_check option. Modules can declare dependencies on
     other modules (and versions of the required modules).

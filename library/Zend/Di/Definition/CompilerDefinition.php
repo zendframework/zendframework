@@ -1,16 +1,29 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di\Definition;
 
 use Zend\Code\Annotation\AnnotationCollection;
-use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Scanner\AggregateDirectoryScanner;
-use Zend\Code\Scanner\DirectoryScanner;
-use Zend\Code\Scanner\DerivedClassScanner;
-use Zend\Code\Scanner\FileScanner;
 use Zend\Code\Reflection;
+use Zend\Code\Scanner\AggregateDirectoryScanner;
+use Zend\Code\Scanner\DerivedClassScanner;
+use Zend\Code\Scanner\DirectoryScanner;
+use Zend\Code\Scanner\FileScanner;
 use Zend\Di\Definition\Annotation;
 
+/**
+ * Class definitions based on a set of directories to be scanned
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class CompilerDefinition implements DefinitionInterface
 {
     protected $isCompiled = false;
@@ -47,6 +60,9 @@ class CompilerDefinition implements DefinitionInterface
         $this->introspectionStrategy = $introspectionStrategy;
     }
 
+    /**
+     * @param bool $allowReflectionExceptions
+     */
     public function setAllowReflectionExceptions($allowReflectionExceptions = true)
     {
         $this->allowReflectionExceptions = (bool) $allowReflectionExceptions;
@@ -103,14 +119,15 @@ class CompilerDefinition implements DefinitionInterface
      */
     public function compile()
     {
-        /*
-         * @var $classScanner \Zend\Code\Scanner\DerivedClassScanner
-         */
+        /* @var $classScanner \Zend\Code\Scanner\DerivedClassScanner */
         foreach ($this->directoryScanner->getClassNames() as $class) {
             $this->processClass($class);
         }
     }
 
+    /**
+     * @return ArrayDefinition
+     */
     public function toArrayDefinition()
     {
         return new ArrayDefinition(
@@ -118,6 +135,10 @@ class CompilerDefinition implements DefinitionInterface
         );
     }
 
+    /**
+     * @param  string               $class
+     * @throws \ReflectionException
+     */
     protected function processClass($class)
     {
         $strategy = $this->introspectionStrategy; // localize for readability
@@ -128,6 +149,7 @@ class CompilerDefinition implements DefinitionInterface
             if (!$this->allowReflectionExceptions) {
                 throw $e;
             }
+
             return;
         }
         $className = $rClass->getName();
@@ -150,10 +172,11 @@ class CompilerDefinition implements DefinitionInterface
             if (($annotations instanceof AnnotationCollection)
                 && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')
             ) {
-                // @todo Instnatiator support in annotations
+                // @todo Instantiator support in annotations
             }
         }
 
+        /* @var $rTarget \Zend\Code\Reflection\ClassReflection */
         $rTarget = $rClass;
         $supertypes = array();
         do {
@@ -181,16 +204,16 @@ class CompilerDefinition implements DefinitionInterface
                 if (!$this->allowReflectionExceptions) {
                     throw $e;
                 }
+
                 return;
             }
         }
-
 
         foreach ($rClass->getMethods(Reflection\MethodReflection::IS_PUBLIC) as $rMethod) {
 
             $methodName = $rMethod->getName();
 
-            if ($rMethod->getName() === '__construct') {
+            if ($rMethod->getName() === '__construct' || $rMethod->isStatic()) {
                 continue;
             }
 
@@ -219,7 +242,6 @@ class CompilerDefinition implements DefinitionInterface
                 }
             }
 
-
             // method
             // by annotation
             // by setter pattern,
@@ -236,7 +258,8 @@ class CompilerDefinition implements DefinitionInterface
                 preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
                 if ($matches) {
                     foreach ($rIface->getMethods() as $rMethod) {
-                        if ($rMethod->getName() === '__construct') { // ctor not allowed in ifaces
+                        if ($rMethod->getName() === '__construct') {
+                            // constructor not allowed in interfaces
                             continue;
                         }
                         $def['methods'][$rMethod->getName()] = true;
@@ -248,6 +271,11 @@ class CompilerDefinition implements DefinitionInterface
         }
     }
 
+    /**
+     * @param array                                  $def
+     * @param \Zend\Code\Reflection\ClassReflection  $rClass
+     * @param \Zend\Code\Reflection\MethodReflection $rMethod
+     */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
     {
         if (count($rMethod->getParameters()) === 0) {
@@ -264,15 +292,14 @@ class CompilerDefinition implements DefinitionInterface
 
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
-
             $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
-
             $def['parameters'][$methodName][$fqName] = array();
 
             // set the class name, if it exists
             $def['parameters'][$methodName][$fqName][] = $actualParamName;
             $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass()->getName() : null;
-            $def['parameters'][$methodName][$fqName][] = !$p->isOptional();
+            $def['parameters'][$methodName][$fqName][] = !($optional =$p->isOptional());
+            $def['parameters'][$methodName][$fqName][] = $optional ? $p->getDefaultValue() : null;
         }
 
     }
@@ -366,7 +393,8 @@ class CompilerDefinition implements DefinitionInterface
 //                preg_match($interfaceInjectorPattern, $sInterface->getName(), $matches);
 //                if ($matches) {
 //                    foreach ($sInterface->getMethods(true) as $sMethod) {
-//                        if ($sMethod->getName() === '__construct') { // ctor not allowed in ifaces
+//                        if ($sMethod->getName() === '__construct') {
+                              // constructor not allowed in interfaces
 //                            continue;
 //                        }
 //                        $def['methods'][$sMethod->getName()] = true;
@@ -432,9 +460,7 @@ class CompilerDefinition implements DefinitionInterface
 //    }
 
     /**
-     * Return nothing
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -442,10 +468,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return whether the class exists
-     *
-     * @param string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -453,101 +476,86 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return the supertypes for this class
-     *
-     * @param string $class
-     * @return array of types
+     * {@inheritDoc}
      */
     public function getClassSupertypes($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['supertypes'];
     }
 
     /**
-     * Get the instantiator
-     *
-     * @param string $class
-     * @return string|callable
+     * {@inheritDoc}
      */
     public function getInstantiator($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['instantiator'];
     }
 
     /**
-     * Return if there are injection methods
-     *
-     * @param string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethods($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return (count($this->classes[$class]['methods']) > 0);
     }
 
     /**
-     * Return injection methods
-     *
-     * @param string $class
-     * @param string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethod($class, $method)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return isset($this->classes[$class]['methods'][$method]);
     }
 
     /**
-     * Return an array of the injection methods
-     *
-     * @param string $class
-     * @return array
+     * {@inheritDoc}
      */
     public function getMethods($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['methods'];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hasMethodParameters($class, $method)
     {
         if (!isset($this->classes[$class])) {
             return false;
         }
+
         return (array_key_exists($method, $this->classes[$class]));
     }
 
     /**
-     * Return the parameters for a method
-     *
-     * 3 item array:
-     *     #1 - Class name, string if it exists, else null
-     *     #2 - Optional?, boolean
-     *     #3 - Instantiable, boolean if class exists, otherwise null
-     *
-     * @param string $class
-     * @param string $method
-     * @return array
+     * {@inheritDoc}
      */
     public function getMethodParameters($class, $method)
     {
         if (!is_array($this->classes[$class])) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['parameters'][$method];
     }
 }

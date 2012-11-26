@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -29,8 +18,6 @@ use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormElement extends BaseAbstractHelper
 {
@@ -51,13 +38,18 @@ class FormElement extends BaseAbstractHelper
             return '';
         }
 
+        if ($element instanceof Element\Button) {
+            $helper = $renderer->plugin('form_button');
+            return $helper($element);
+        }
+
         if ($element instanceof Element\Captcha) {
             $helper = $renderer->plugin('form_captcha');
             return $helper($element);
         }
 
         if ($element instanceof Element\Csrf) {
-            $helper = $renderer->plugin('form_input');
+            $helper = $renderer->plugin('form_hidden');
             return $helper($element);
         }
 
@@ -66,31 +58,145 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        $type    = $element->getAttribute('type');
-        $options = $element->getAttribute('options');
+        if ($element instanceof Element\DateTimeSelect) {
+            $helper = $renderer->plugin('form_date_time_select');
+            return $helper($element);
+        }
 
-        if ($type == 'checkbox') {
+        if ($element instanceof Element\DateSelect) {
+            $helper = $renderer->plugin('form_date_select');
+            return $helper($element);
+        }
+
+        if ($element instanceof Element\MonthSelect) {
+            $helper = $renderer->plugin('form_month_select');
+            return $helper($element);
+        }
+
+        $type = $element->getAttribute('type');
+
+        if ('checkbox' == $type) {
             $helper = $renderer->plugin('form_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'multi_checkbox') {
+        if ('color' == $type) {
+            $helper = $renderer->plugin('form_color');
+            return $helper($element);
+        }
+
+        if ('date' == $type) {
+            $helper = $renderer->plugin('form_date');
+            return $helper($element);
+        }
+
+        if ('datetime' == $type) {
+            $helper = $renderer->plugin('form_date_time');
+            return $helper($element);
+        }
+
+        if ('datetime-local' == $type) {
+            $helper = $renderer->plugin('form_date_time_local');
+            return $helper($element);
+        }
+
+        if ('email' == $type) {
+            $helper = $renderer->plugin('form_email');
+            return $helper($element);
+        }
+
+        if ('file' == $type) {
+            $helper = $renderer->plugin('form_file');
+            return $helper($element);
+        }
+
+        if ('hidden' == $type) {
+            $helper = $renderer->plugin('form_hidden');
+            return $helper($element);
+        }
+
+        if ('image' == $type) {
+            $helper = $renderer->plugin('form_image');
+            return $helper($element);
+        }
+
+        if ('month' == $type) {
+            $helper = $renderer->plugin('form_month');
+            return $helper($element);
+        }
+
+        if ('multi_checkbox' == $type) {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'radio') {
+        if ('number' == $type) {
+            $helper = $renderer->plugin('form_number');
+            return $helper($element);
+        }
+
+        if ('password' == $type) {
+            $helper = $renderer->plugin('form_password');
+            return $helper($element);
+        }
+
+        if ('radio' == $type) {
             $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'select') {
+        if ('range' == $type) {
+            $helper = $renderer->plugin('form_range');
+            return $helper($element);
+        }
+
+        if ('reset' == $type) {
+            $helper = $renderer->plugin('form_reset');
+            return $helper($element);
+        }
+
+        if ('search' == $type) {
+            $helper = $renderer->plugin('form_search');
+            return $helper($element);
+        }
+
+        if ('select' == $type) {
             $helper = $renderer->plugin('form_select');
             return $helper($element);
         }
 
-        if ($type == 'textarea') {
+        if ('submit' == $type) {
+            $helper = $renderer->plugin('form_submit');
+            return $helper($element);
+        }
+
+        if ('tel' == $type) {
+            $helper = $renderer->plugin('form_tel');
+            return $helper($element);
+        }
+
+        if ('text' == $type) {
+            $helper = $renderer->plugin('form_text');
+            return $helper($element);
+        }
+
+        if ('textarea' == $type) {
             $helper = $renderer->plugin('form_textarea');
+            return $helper($element);
+        }
+
+        if ('time' == $type) {
+            $helper = $renderer->plugin('form_time');
+            return $helper($element);
+        }
+
+        if ('url' == $type) {
+            $helper = $renderer->plugin('form_url');
+            return $helper($element);
+        }
+
+        if ('week' == $type) {
+            $helper = $renderer->plugin('form_week');
             return $helper($element);
         }
 

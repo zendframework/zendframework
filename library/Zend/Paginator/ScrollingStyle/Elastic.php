@@ -20,8 +20,6 @@ use Zend\Paginator\Paginator;
  * @link       http://www.google.com/search?q=Zend+Framework
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Elastic extends Sliding
 {
@@ -42,7 +40,7 @@ class Elastic extends Sliding
 
         if ($originalPageRange + $pageNumber - 1 < $pageRange) {
             $pageRange = $originalPageRange + $pageNumber - 1;
-        } else if ($originalPageRange + $pageNumber - 1 > count($paginator)) {
+        } elseif ($originalPageRange + $pageNumber - 1 > count($paginator)) {
             $pageRange = $originalPageRange + count($paginator) - $pageNumber;
         }
 

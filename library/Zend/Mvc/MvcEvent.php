@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc;
@@ -29,8 +19,6 @@ use Zend\View\Model\ViewModel;
 /**
  * @category   Zend
  * @package    Zend_Mvc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MvcEvent extends Event
 {
@@ -42,6 +30,7 @@ class MvcEvent extends Event
     const EVENT_DISPATCH_ERROR = 'dispatch.error';
     const EVENT_FINISH         = 'finish';
     const EVENT_RENDER         = 'render';
+    const EVENT_RENDER_ERROR   = 'render.error';
     const EVENT_ROUTE          = 'route';
     /**#@-*/
 
@@ -79,8 +68,8 @@ class MvcEvent extends Event
 
     /**
      * Set application instance
-     * 
-     * @param  ApplicationInterface $application 
+     *
+     * @param  ApplicationInterface $application
      * @return MvcEvent
      */
     public function setApplication(ApplicationInterface $application)
@@ -92,7 +81,7 @@ class MvcEvent extends Event
 
     /**
      * Get application instance
-     * 
+     *
      * @return ApplicationInterface
      */
     public function getApplication()
@@ -107,7 +96,7 @@ class MvcEvent extends Event
      */
     public function getRouter()
     {
-        return $this->getParam('router');
+        return $this->router;
     }
 
     /**
@@ -130,7 +119,7 @@ class MvcEvent extends Event
      */
     public function getRouteMatch()
     {
-        return $this->getParam('route-match');
+        return $this->routeMatch;
     }
 
     /**
@@ -153,7 +142,7 @@ class MvcEvent extends Event
      */
     public function getRequest()
     {
-        return $this->getParam('request');
+        return $this->request;
     }
 
     /**
@@ -176,7 +165,7 @@ class MvcEvent extends Event
      */
     public function getResponse()
     {
-        return $this->getParam('response');
+        return $this->response;
     }
 
     /**
@@ -224,7 +213,7 @@ class MvcEvent extends Event
      */
     public function getResult()
     {
-        return $this->getParam('__RESULT__');
+        return $this->result;
     }
 
     /**
@@ -242,18 +231,18 @@ class MvcEvent extends Event
 
     /**
      * Does the event represent an error response?
-     * 
+     *
      * @return bool
      */
     public function isError()
     {
-        return $this->getParam('error', false);
+        return (bool) $this->getParam('error', false);
     }
 
     /**
      * Set the error message (indicating error in handling request)
-     * 
-     * @param  string $message 
+     *
+     * @param  string $message
      * @return MvcEvent
      */
     public function setError($message)
@@ -264,7 +253,7 @@ class MvcEvent extends Event
 
     /**
      * Retrieve the error message, if any
-     * 
+     *
      * @return string
      */
     public function getError()
@@ -274,7 +263,7 @@ class MvcEvent extends Event
 
     /**
      * Get the currently registered controller name
-     * 
+     *
      * @return string
      */
     public function getController()
@@ -295,7 +284,7 @@ class MvcEvent extends Event
     }
 
     /**
-     * Get controller clas
+     * Get controller class
      *
      * @return string
      */

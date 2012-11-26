@@ -11,8 +11,8 @@
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config;
-use Zend\Stdlib\PriorityQueue;
 use Zend\Config\Exception;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend

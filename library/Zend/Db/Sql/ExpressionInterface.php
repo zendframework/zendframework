@@ -17,6 +17,11 @@ interface ExpressionInterface
     const TYPE_LITERAL = 'literal';
 
     /**
+     * @deprecated This will go away in 2.1
+     */
+    const TYPE_SELECT = 'select';
+
+    /**
      * @abstract
      *
      * @return array of array|string should return an array in the format:
@@ -35,4 +40,3 @@ interface ExpressionInterface
      */
     public function getExpressionData();
 }
-

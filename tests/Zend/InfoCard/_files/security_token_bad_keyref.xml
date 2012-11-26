@@ -1,5 +1,0 @@
-				<o:SecurityTokenReference xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-					<o:KeyIdentifier ValueType="http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#ThumbprintSHA1" 
-									 EncodingType="foo">/OCqQ7Np25sOiA+4OsFh1R6qIeY=</o:KeyIdentifier>
-				</o:SecurityTokenReference>
-

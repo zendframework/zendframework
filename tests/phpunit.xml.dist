@@ -1,27 +1,30 @@
 <phpunit bootstrap="./Bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Zend Framework Test Suite">
-            <directory>./Zend</directory>
-            <exclude>./Zend/_files/</exclude>
-            <exclude>./Zend/AllTests/</exclude>
-            <exclude>./Zend/Amf/</exclude>
-            <exclude>./Zend/Dojo/</exclude>
-            <exclude>./Zend/Queue/</exclude>
-            <exclude>./Zend/Service/</exclude>
-            <exclude>./Zend/Test/</exclude>
-            <exclude>./Zend/Wildfire/</exclude>
+            <directory>./ZendTest</directory>
+            <exclude>./ZendTest/_files/</exclude>
+            <exclude>./ZendTest/AllTests/</exclude>
         </testsuite>
     </testsuites>
 
     <groups>
         <exclude>
             <group>disable</group>
-            <group>Zend_Amf</group>
-            <group>Zend_Dojo</group>
-            <group>Zend_Queue</group>
-            <group>Zend_Service</group>
-            <group>Zend_Test</group>
-            <group>Zend_Wildfire</group>
+            <group>integration</group>
+            <group>integration-sqlserver</group>
         </exclude>
     </groups>
+
+    <php>
+
+        <!-- Integration Test Variables -->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE" value="" />-->
+
+    </php>
+
+
+
 </phpunit>

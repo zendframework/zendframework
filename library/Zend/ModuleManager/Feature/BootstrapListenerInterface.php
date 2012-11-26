@@ -10,7 +10,7 @@
 
 namespace Zend\ModuleManager\Feature;
 
-use Zend\EventManager\Event;
+use Zend\EventManager\EventInterface;
 
 /**
  * Boostrap listener provider interface
@@ -24,7 +24,8 @@ interface BootstrapListenerInterface
     /**
      * Listen to the bootstrap event
      *
+     * @param EventInterface $e
      * @return array
      */
-    public function onBootstrap(Event $e);
+    public function onBootstrap(EventInterface $e);
 }

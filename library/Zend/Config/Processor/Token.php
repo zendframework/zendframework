@@ -10,9 +10,9 @@
 
 namespace Zend\Config\Processor;
 
+use Traversable;
 use Zend\Config\Config;
 use Zend\Config\Exception;
-use Traversable;
 
 /**
  * @category   Zend
@@ -51,7 +51,7 @@ class Token implements ProcessorInterface
 
     /**
      * Token Processor walks through a Config structure and replaces all
-     * occurences of tokens with supplied values.
+     * occurrences of tokens with supplied values.
      *
      * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
      *                                             to replace it with
@@ -200,7 +200,7 @@ class Token implements ProcessorInterface
      *
      * @param  Config $config
      * @return Config
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function process(Config $config)
     {

@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Key\Derivation;
 
 /**
@@ -14,8 +15,6 @@ namespace Zend\Crypt\Key\Derivation;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SaltedS2k
 {
@@ -57,12 +56,12 @@ class SaltedS2k
      */
     public static function calc($hash, $password, $salt, $bytes)
     {
-        if (!in_array($hash, array_keys(self::$supportedMhashAlgos))) {
+        if (!in_array($hash, array_keys(static::$supportedMhashAlgos))) {
             throw new Exception\InvalidArgumentException("The hash algorihtm $hash is not supported by " . __CLASS__);
         }
         if (strlen($salt)<8) {
             throw new Exception\InvalidArgumentException('The salt size must be at least of 8 bytes');
         }
-        return mhash_keygen_s2k(self::$supportedMhashAlgos[$hash], $password, $salt, $bytes);
+        return mhash_keygen_s2k(static::$supportedMhashAlgos[$hash], $password, $salt, $bytes);
     }
 }

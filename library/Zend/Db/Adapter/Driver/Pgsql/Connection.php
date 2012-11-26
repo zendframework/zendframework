@@ -47,19 +47,21 @@ class Connection implements ConnectionInterface
     /**
      * Constructor
      *
-     * @param mysqli $connectionInfo
+     * @param resource|array|null $connectionInfo
      */
     public function __construct($connectionInfo = null)
     {
         if (is_array($connectionInfo)) {
             $this->setConnectionParameters($connectionInfo);
-        } elseif ($connectionInfo instanceof \mysqli) {
+        } elseif (is_resource($connectionInfo)) {
             $this->setResource($connectionInfo);
         }
     }
 
     /**
-     * @param  array $connectionParameters 
+     * Set connection parameters
+     *
+     * @param  array $connectionParameters
      * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
@@ -69,7 +71,9 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  Pgsql $driver 
+     * Set driver
+     *
+     * @param  Pgsql $driver
      * @return Connection
      */
     public function setDriver(Pgsql $driver)
@@ -79,7 +83,9 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  resource $resource 
+     * Set resource
+     *
+     * @param  resource $resource
      * @return Connection
      */
     public function setResource($resource)
@@ -89,7 +95,9 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return null
+     * Get current schema
+     *
+     * @return null|string
      */
     public function getCurrentSchema()
     {
@@ -105,6 +113,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Get resource
+     *
      * @return resource
      */
     public function getResource()
@@ -114,7 +124,7 @@ class Connection implements ConnectionInterface
 
     /**
      * Connect to the database
-     * 
+     *
      * @return void
      * @throws Exception\RuntimeException on failure
      */
@@ -199,7 +209,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  string $sql 
+     * @param  string $sql
+     * @throws Exception\InvalidQueryException
      * @return resource|\Zend\Db\ResultSet\ResultSetInterface
      */
     public function execute($sql)
@@ -212,7 +223,7 @@ class Connection implements ConnectionInterface
 
         //var_dump(pg_result_status($resultResource));
 
-        // if the returnValue is something other than a mysqli_result, bypass wrapping it
+        // if the returnValue is something other than a pg result resource, bypass wrapping it
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_errormessage());
         }

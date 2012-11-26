@@ -1,37 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
 
+use RuntimeException;
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
+use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormCollection extends AbstractHelper
 {
@@ -43,10 +32,25 @@ class FormCollection extends AbstractHelper
     protected $shouldWrap = true;
 
     /**
-     * @var FormRow
+     * The name of the default view helper that is used to render sub elements.
+     *
+     * @var string
      */
-    protected $rowHelper;
+    protected $defaultElementHelper = 'formrow';
 
+    /**
+     * The view helper used to render sub elements.
+     *
+     * @var AbstractHelper
+     */
+    protected $elementHelper;
+
+    /**
+     * The view helper used to render sub fieldsets.
+     *
+     * @var AbstractHelper
+     */
+    protected $fieldsetHelper;
 
     /**
      * Render a collection by iterating through all fieldsets and elements
@@ -62,37 +66,27 @@ class FormCollection extends AbstractHelper
             return '';
         }
 
-        $markup = '';
-        $templateMarkup = '';
+        $markup           = '';
+        $templateMarkup   = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $rowHelper = $this->getRowHelper();
+        $elementHelper    = $this->getElementHelper();
+        $fieldsetHelper   = $this->getFieldsetHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
-            $elementOrFieldset = $element->getTemplateElement();
-
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $templateMarkup .= $this->render($elementOrFieldset);
-            } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $rowHelper($elementOrFieldset);
-            }
+            $templateMarkup = $this->renderTemplate($element);
         }
 
-        foreach($element->getIterator() as $elementOrFieldset) {
+        foreach ($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
-                $markup .= $this->render($elementOrFieldset);
+                $markup .= $fieldsetHelper($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $markup .= $rowHelper($elementOrFieldset);
+                $markup .= $elementHelper($elementOrFieldset);
             }
         }
 
         // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
-            $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
-
-            $markup .= sprintf(
-                '<span data-template="%s"></span>',
-                $escapeHtmlAttribHelper($templateMarkup)
-            );
+            $markup .= $templateMarkup;
         }
 
         // Every collection is wrapped by a fieldset if needed
@@ -111,6 +105,32 @@ class FormCollection extends AbstractHelper
         }
 
         return $markup;
+    }
+
+    /**
+     * Only render a template
+     *
+     * @param  CollectionElement            $collection
+     * @return string
+     */
+    public function renderTemplate(CollectionElement $collection)
+    {
+        $elementHelper          = $this->getElementHelper();
+        $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+        $templateMarkup         = '';
+
+        $elementOrFieldset = $collection->getTemplateElement();
+
+        if ($elementOrFieldset instanceof FieldsetInterface) {
+            $templateMarkup .= $this->render($elementOrFieldset);
+        } elseif ($elementOrFieldset instanceof ElementInterface) {
+            $templateMarkup .= $elementHelper($elementOrFieldset);
+        }
+
+        return sprintf(
+            '<span data-template="%s"></span>',
+            $escapeHtmlAttribHelper($templateMarkup)
+        );
     }
 
     /**
@@ -141,7 +161,7 @@ class FormCollection extends AbstractHelper
      */
     public function setShouldWrap($wrap)
     {
-        $this->shouldWrap = (bool)$wrap;
+        $this->shouldWrap = (bool) $wrap;
         return $this;
     }
 
@@ -152,28 +172,91 @@ class FormCollection extends AbstractHelper
      */
     public function shouldWrap()
     {
-        return $this->shouldWrap();
+        return $this->shouldWrap;
     }
 
     /**
-     * Retrieve the FormRow helper
+     * Gets the name of the view helper that should be used to render sub elements.
      *
-     * @return FormRow
+     * @return string
      */
-    protected function getRowHelper()
+    public function getDefaultElementHelper()
     {
-        if ($this->rowHelper) {
-            return $this->rowHelper;
+        return $this->defaultElementHelper;
+    }
+
+    /**
+     * Sets the name of the view helper that should be used to render sub elements.
+     *
+     * @param string $defaultSubHelper The name of the view helper to set.
+     * @return FormCollection
+     */
+    public function setDefaultElementHelper($defaultSubHelper)
+    {
+        $this->defaultElementHelper = $defaultSubHelper;
+        return $this;
+    }
+
+    /**
+     * Retrieve the element helper.
+     *
+     * @throws RuntimeException
+     * @return AbstractHelper
+     */
+    protected function getElementHelper()
+    {
+        if ($this->elementHelper) {
+            return $this->elementHelper;
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $this->rowHelper = $this->view->plugin('form_row');
+            $this->elementHelper = $this->view->plugin($this->getDefaultElementHelper());
         }
 
-        if (!$this->rowHelper instanceof FormRow) {
-            $this->rowHelper = new FormRow();
+        if (!$this->elementHelper instanceof BaseAbstractHelper) {
+            // @todo Ideally the helper should implement an interface.
+            throw new RuntimeException('Invalid element helper set in FormCollection. The helper must be an instance of AbstractHelper.');
         }
 
-        return $this->rowHelper;
+        return $this->elementHelper;
+    }
+
+    /**
+     * Sets the element helper that should be used by this collection.
+     *
+     * @param AbstractHelper $elementHelper The element helper to use.
+     * @return FormCollection
+     */
+    public function setElementHelper(AbstractHelper $elementHelper)
+    {
+        $this->elementHelper = $elementHelper;
+        return $this;
+    }
+
+    /**
+     * Retrieve the fieldset helper.
+     *
+     * @return AbstractHelper
+     */
+    protected function getFieldsetHelper()
+    {
+        if ($this->fieldsetHelper) {
+            return $this->fieldsetHelper;
+        }
+
+        //if no special fieldset helper was set fall back to FormCollection helper
+        return $this;
+    }
+
+    /**
+     * Sets the fieldset helper that should be used by this collection.
+     *
+     * @param AbstractHelper $fieldsetHelper The fieldset helper to use.
+     * @return FormCollection
+     */
+    public function setFieldsetHelper(AbstractHelper $fieldsetHelper)
+    {
+        $this->fieldsetHelper = $fieldsetHelper;
+        return $this;
     }
 }

@@ -1,35 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Ldap
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Ldap\Converter is a collection of useful LDAP related conversion functions.
  *
  * @category  Zend
  * @package   Zend_Ldap
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 class Converter
 {
@@ -98,27 +87,27 @@ class Converter
         try {
             switch ($type) {
                 case self::BOOLEAN:
-                    return self::toldapBoolean($value);
+                    return static::toldapBoolean($value);
                     break;
                 case self::GENERALIZED_TIME:
-                    return self::toLdapDatetime($value);
+                    return static::toLdapDatetime($value);
                     break;
                 default:
                     if (is_string($value)) {
                         return $value;
-                    } else if (is_int($value) || is_float($value)) {
+                    } elseif (is_int($value) || is_float($value)) {
                         return (string)$value;
-                    } else if (is_bool($value)) {
-                        return self::toldapBoolean($value);
-                    } else if (is_object($value)) {
+                    } elseif (is_bool($value)) {
+                        return static::toldapBoolean($value);
+                    } elseif (is_object($value)) {
                         if ($value instanceof DateTime) {
-                            return self::toLdapDatetime($value);
+                            return static::toLdapDatetime($value);
                         } else {
-                            return self::toLdapSerialize($value);
+                            return static::toLdapSerialize($value);
                         }
-                    } else if (is_array($value)) {
-                        return self::toLdapSerialize($value);
-                    } else if (is_resource($value) && get_resource_type($value) === 'stream') {
+                    } elseif (is_array($value)) {
+                        return static::toLdapSerialize($value);
+                    } elseif (is_resource($value) && get_resource_type($value) === 'stream') {
                         return stream_get_contents($value);
                     } else {
                         return null;
@@ -147,7 +136,7 @@ class Converter
             if (is_int($date)) {
                 $date = new DateTime('@' . $date);
                 $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
-            } else if (is_string($date)) {
+            } elseif (is_string($date)) {
                 $date = new DateTime($date);
             } else {
                 throw new Exception\InvalidArgumentException('Parameter $date is not of the expected type');
@@ -215,23 +204,23 @@ class Converter
     {
         switch ($type) {
             case self::BOOLEAN:
-                return self::fromldapBoolean($value);
+                return static::fromldapBoolean($value);
                 break;
             case self::GENERALIZED_TIME:
-                return self::fromLdapDateTime($value);
+                return static::fromLdapDateTime($value);
                 break;
             default:
                 if (is_numeric($value)) {
                     // prevent numeric values to be treated as date/time
                     return $value;
-                } else if ('TRUE' === $value || 'FALSE' === $value) {
-                    return self::fromLdapBoolean($value);
+                } elseif ('TRUE' === $value || 'FALSE' === $value) {
+                    return static::fromLdapBoolean($value);
                 }
                 if (preg_match('/^\d{4}[\d\+\-Z\.]*$/', $value)) {
-                    return self::fromLdapDateTime($value, $dateTimeAsUtc);
+                    return static::fromLdapDateTime($value, $dateTimeAsUtc);
                 }
                 try {
-                    return self::fromLdapUnserialize($value);
+                    return static::fromLdapUnserialize($value);
                 } catch (Exception\UnexpectedValueException $e) {
                     // Do nothing
                 }
@@ -378,7 +367,7 @@ class Converter
     {
         if ('TRUE' === $value) {
             return true;
-        } else if ('FALSE' === $value) {
+        } elseif ('FALSE' === $value) {
             return false;
         } else {
             throw new Exception\InvalidArgumentException('The given value is not a boolean value');
@@ -394,7 +383,10 @@ class Converter
      */
     public static function fromLdapUnserialize($value)
     {
-        $v = @unserialize($value);
+        ErrorHandler::start(E_NOTICE);
+        $v = unserialize($value);
+        ErrorHandler::stop();
+
         if (false === $v && $value != 'b:0;') {
             throw new Exception\UnexpectedValueException('The given value could not be unserialized');
         }

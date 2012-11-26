@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
@@ -25,8 +14,6 @@ namespace Zend\Mail\Header;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GenericHeader implements HeaderInterface, UnstructuredInterface
 {
@@ -42,7 +29,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
@@ -50,11 +37,11 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        $parts = explode(': ', $decodedLine, 2);
+        $parts = explode(':', $decodedLine, 2);
         if (count($parts) != 2) {
             throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
         }
-        $header = new static($parts[0], $parts[1]);
+        $header = new static($parts[0], ltrim($parts[1]));
         if ($decodedLine != $headerLine) {
             $header->setEncoding('UTF-8');
         }
@@ -63,7 +50,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param string $fieldName  Optional
      * @param string $fieldValue Optional
      */
@@ -97,7 +84,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must start with a letter, and consist of only letters, numbers and dashes'
+                'Header name must start with a letter, and consists of only letters, numbers and dashes.'
             );
         }
 
@@ -112,7 +99,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     /**
      * Set header value
-     * 
+     *
      * @param  string $fieldValue
      * @return GenericHeader
      */
@@ -130,14 +117,14 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
-        if (HeaderInterface::FORMAT_ENCODED) {
+        if (HeaderInterface::FORMAT_ENCODED === $format) {
             return HeaderWrap::wrap($this->fieldValue, $this);
         }
 
         return $this->fieldValue;
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;
@@ -153,6 +140,6 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         $name  = $this->getFieldName();
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
 
-        return $name. ': ' . $value;
+        return $name . ': ' . $value;
     }
 }

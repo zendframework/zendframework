@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http;
@@ -27,8 +17,6 @@ use Zend\Http\Client;
  *
  * @category   Zend
  * @package    Zend\Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClientStatic
 {
@@ -38,14 +26,14 @@ class ClientStatic
     /**
      * Get the static HTTP client
      *
-     * @return Zend\Http\Client
+     * @return Client
      */
     protected static function getStaticClient()
     {
-        if (!isset(self::$client)) {
-            self::$client = new Client();
+        if (!isset(static::$client)) {
+            static::$client = new Client();
         }
-        return self::$client;
+        return static::$client;
     }
 
     /**
@@ -54,9 +42,10 @@ class ClientStatic
      * @param  string $url
      * @param  array $query
      * @param  array $headers
+     * @param  mixed $body
      * @return Response|boolean
      */
-    public static function get($url, $query=array(), $headers=array(), $body=null)
+    public static function get($url, $query = array(), $headers = array(), $body = null)
     {
         if (empty($url)) {
             return false;
@@ -78,17 +67,20 @@ class ClientStatic
             $request->setBody($body);
         }
 
-        return self::getStaticClient()->send($request);
+        return static::getStaticClient()->send($request);
     }
+
     /**
      * HTTP POST METHOD (static)
      *
      * @param  string $url
      * @param  array $params
      * @param  array $headers
+     * @param  mixed $body
+     * @throws Exception\InvalidArgumentException
      * @return Response|boolean
      */
-    public static function post($url, $params, $headers=array(), $body=null)
+    public static function post($url, $params, $headers = array(), $body = null)
     {
         if (empty($url)) {
             return false;
@@ -116,6 +108,6 @@ class ClientStatic
             $request->setContent($body);
         }
 
-        return self::getStaticClient()->send($request);
+        return static::getStaticClient()->send($request);
     }
 }

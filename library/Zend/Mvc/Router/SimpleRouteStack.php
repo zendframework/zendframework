@@ -1,27 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router;
 
-use ArrayAccess;
-use ArrayIterator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
@@ -30,8 +18,6 @@ use Zend\Stdlib\RequestInterface as Request;
  * Simple route stack implementation.
  *
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleRouteStack implements RouteStackInterface
 {
@@ -189,7 +175,6 @@ class SimpleRouteStack implements RouteStackInterface
         return $this;
     }
 
-
     /**
      * setRoutes(): defined by RouteStackInterface interface.
      *
@@ -201,6 +186,38 @@ class SimpleRouteStack implements RouteStackInterface
         $this->routes->clear();
         $this->addRoutes($routes);
         return $this;
+    }
+
+    /**
+     * Get the added routes
+     *
+     * @return Traversable list of all routes
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
+    /**
+     * Check if a route with a specific name exists
+     *
+     * @param string $name
+     * @return boolean true if route exists
+     */
+    public function hasRoute($name)
+    {
+        return $this->routes->get($name) !== null;
+    }
+
+    /**
+     * Get a route by name
+     *
+     * @param string $name
+     * @return RouteInterface the route
+     */
+    public function getRoute($name)
+    {
+        return $this->routes->get($name);
     }
 
     /**
@@ -271,9 +288,9 @@ class SimpleRouteStack implements RouteStackInterface
             if (($match = $route->match($request)) instanceof RouteMatch) {
                 $match->setMatchedRouteName($name);
 
-                foreach ($this->defaultParams as $name => $value) {
-                    if ($match->getParam($name) === null) {
-                        $match->setParam($name, $value);
+                foreach ($this->defaultParams as $paramName => $value) {
+                    if ($match->getParam($paramName) === null) {
+                        $match->setParam($paramName, $value);
                     }
                 }
 

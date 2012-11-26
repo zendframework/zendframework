@@ -1,39 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Dom
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Dom
  */
 
 namespace Zend\Dom;
 
-use Iterator;
 use Countable;
 use DOMDocument;
 use DOMNodeList;
+use DOMNode;
 use DOMXPath;
-use DOMElement;
+use Iterator;
 
 /**
  * Nodelist for DOM XPath query
  *
  * @package    Zend_Dom
  * @subpackage Query
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class NodeList implements Iterator, Countable
 {
@@ -41,40 +29,40 @@ class NodeList implements Iterator, Countable
      * Number of results
      * @var int
      */
-    protected $_count;
+    protected $count;
 
     /**
      * CSS Selector query
      * @var string
      */
-    protected $_cssQuery;
+    protected $cssQuery;
 
     /**
      * @var DOMDocument
      */
-    protected $_document;
+    protected $document;
 
     /**
      * @var DOMNodeList
      */
-    protected $_nodeList;
+    protected $nodeList;
 
     /**
      * Current iterator position
      * @var int
      */
-    protected $_position = 0;
+    protected $position = 0;
 
     /**
      * @var DOMXPath
      */
-    protected $_xpath;
+    protected $xpath;
 
     /**
      * XPath query
      * @var string
      */
-    protected $_xpathQuery;
+    protected $xpathQuery;
 
     /**
      * Constructor
@@ -87,10 +75,10 @@ class NodeList implements Iterator, Countable
      */
     public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
-        $this->_cssQuery   = $cssQuery;
-        $this->_xpathQuery = $xpathQuery;
-        $this->_document   = $document;
-        $this->_nodeList   = $nodeList;
+        $this->cssQuery   = $cssQuery;
+        $this->xpathQuery = $xpathQuery;
+        $this->document   = $document;
+        $this->nodeList   = $nodeList;
     }
 
     /**
@@ -100,7 +88,7 @@ class NodeList implements Iterator, Countable
      */
     public function getCssQuery()
     {
-        return $this->_cssQuery;
+        return $this->cssQuery;
     }
 
     /**
@@ -110,7 +98,7 @@ class NodeList implements Iterator, Countable
      */
     public function getXpathQuery()
     {
-        return $this->_xpathQuery;
+        return $this->xpathQuery;
     }
 
     /**
@@ -120,18 +108,18 @@ class NodeList implements Iterator, Countable
      */
     public function getDocument()
     {
-        return $this->_document;
+        return $this->document;
     }
 
     /**
      * Iterator: rewind to first element
      *
-     * @return void
+     * @return DOMNode
      */
     public function rewind()
     {
-        $this->_position = 0;
-        return $this->_nodeList->item(0);
+        $this->position = 0;
+        return $this->nodeList->item(0);
     }
 
     /**
@@ -141,7 +129,7 @@ class NodeList implements Iterator, Countable
      */
     public function valid()
     {
-        if (in_array($this->_position, range(0, $this->_nodeList->length - 1)) && $this->_nodeList->length > 0) {
+        if (in_array($this->position, range(0, $this->nodeList->length - 1)) && $this->nodeList->length > 0) {
             return true;
         }
         return false;
@@ -150,11 +138,11 @@ class NodeList implements Iterator, Countable
     /**
      * Iterator: return current element
      *
-     * @return DOMElement
+     * @return DOMNode
      */
     public function current()
     {
-        return $this->_nodeList->item($this->_position);
+        return $this->nodeList->item($this->position);
     }
 
     /**
@@ -164,18 +152,18 @@ class NodeList implements Iterator, Countable
      */
     public function key()
     {
-        return $this->_position;
+        return $this->position;
     }
 
     /**
      * Iterator: move to next element
      *
-     * @return void
+     * @return DOMNode
      */
     public function next()
     {
-        ++$this->_position;
-        return $this->_nodeList->item($this->_position);
+        ++$this->position;
+        return $this->nodeList->item($this->position);
     }
 
     /**
@@ -185,6 +173,6 @@ class NodeList implements Iterator, Countable
      */
     public function count()
     {
-        return $this->_nodeList->length;
+        return $this->nodeList->length;
     }
 }

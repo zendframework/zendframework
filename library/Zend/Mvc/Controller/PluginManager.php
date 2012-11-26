@@ -1,30 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
-use Zend\Stdlib\DispatchableInterface;
 use Zend\Mvc\Exception;
+use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ConfigInterface;
+use Zend\Stdlib\DispatchableInterface;
 
 /**
  * Plugin manager implementation for controllers
@@ -35,8 +24,6 @@ use Zend\Mvc\Exception;
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PluginManager extends AbstractPluginManager
 {
@@ -46,12 +33,25 @@ class PluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'flashmessenger' => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
-        'forward'        => 'Zend\Mvc\Controller\Plugin\Forward',
-        'layout'         => 'Zend\Mvc\Controller\Plugin\Layout',
-        'params'         => 'Zend\Mvc\Controller\Plugin\Params',
-        'redirect'       => 'Zend\Mvc\Controller\Plugin\Redirect',
-        'url'            => 'Zend\Mvc\Controller\Plugin\Url',
+        'acceptableviewmodelselector' => 'Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector',
+        'filepostredirectget'         => 'Zend\Mvc\Controller\Plugin\FilePostRedirectGet',
+        'flashmessenger'              => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
+        'forward'                     => 'Zend\Mvc\Controller\Plugin\Forward',
+        'layout'                      => 'Zend\Mvc\Controller\Plugin\Layout',
+        'params'                      => 'Zend\Mvc\Controller\Plugin\Params',
+        'postredirectget'             => 'Zend\Mvc\Controller\Plugin\PostRedirectGet',
+        'redirect'                    => 'Zend\Mvc\Controller\Plugin\Redirect',
+        'url'                         => 'Zend\Mvc\Controller\Plugin\Url',
+    );
+
+    /**
+     * Default set of plugin aliases
+     *
+     * @var array
+     */
+    protected $aliases = array(
+        'prg'     => 'postredirectget',
+        'fileprg' => 'filepostredirectget',
     );
 
     /**
@@ -65,13 +65,45 @@ class PluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached controller, if any, to the currently requested plugin.
      *
-     * @param  null|ConfigurationInterface $configuration
-     * @return void
+     * @param  null|ConfigInterface $configuration
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
+
+        $this->setFactory('identity', function ($plugins) {
+            $services = $plugins->getServiceLocator();
+            $plugin   = new Plugin\Identity();
+            if (!$services->has('Zend\Authentication\AuthenticationService')) {
+                return $plugin;
+            }
+            $plugin->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+            return $plugin;
+        });
+
         $this->addInitializer(array($this, 'injectController'));
+    }
+
+    /**
+     * Retrieve a registered instance
+     *
+     * After the plugin is retrieved from the service locator, inject the
+     * controller in the plugin every time it is requested. This is required
+     * because a controller can use a plugin and another controller can be
+     * dispatched afterwards. If this second controller uses the same plugin
+     * as the first controller, the reference to the controller inside the
+     * plugin is lost.
+     *
+     * @param  string $name
+     * @param  mixed  $options
+     * @param  bool   $usePeeringServiceManagers
+     * @return mixed
+     */
+    public function get($name, $options = array(), $usePeeringServiceManagers = true)
+    {
+        $plugin = parent::get($name, $options, $usePeeringServiceManagers);
+        $this->injectController($plugin);
+        return $plugin;
     }
 
     /**
@@ -125,7 +157,8 @@ class PluginManager extends AbstractPluginManager
      * Any plugin is considered valid in this context.
      *
      * @param  mixed $plugin
-     * @return true
+     * @return void
+     * @throws Exception\InvalidPluginException
      */
     public function validatePlugin($plugin)
     {

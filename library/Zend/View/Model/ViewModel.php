@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Model;
@@ -33,14 +22,12 @@ use Zend\View\Variables as ViewVariables;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ViewModel implements ModelInterface
+class ViewModel implements ModelInterface, ClearableModelInterface
 {
     /**
-     * What variable a parent model should capture this model to 
-     * 
+     * What variable a parent model should capture this model to
+     *
      * @var string
      */
     protected $captureTo = 'content';
@@ -58,15 +45,15 @@ class ViewModel implements ModelInterface
     protected $options = array();
 
     /**
-     * Template to use when rendering this model 
-     * 
+     * Template to use when rendering this model
+     *
      * @var string
      */
     protected $template = '';
 
     /**
      * Is this a standalone, or terminal, model?
-     * 
+     *
      * @var bool
      */
     protected $terminate = false;
@@ -76,28 +63,29 @@ class ViewModel implements ModelInterface
      * @var array|ArrayAccess&Traversable
      */
     protected $variables = array();
-	
-	
-	/**
+
+
+    /**
      * Is this append to child  with the same capture?
-     * 
+     *
      * @var bool
      */
     protected $append = false;
 
     /**
      * Constructor
-     * 
-     * @param  null|array|Traversable $variables 
-     * @param  array|Traversable $options 
-     * @return void
+     *
+     * @param  null|array|Traversable $variables
+     * @param  array|Traversable $options
      */
     public function __construct($variables = null, $options = null)
     {
         if (null === $variables) {
             $variables = new ViewVariables();
         }
-        $this->setVariables($variables);
+
+        // Initializing the variables container
+        $this->setVariables($variables, true);
 
         if (null !== $options) {
             $this->setOptions($options);
@@ -106,21 +94,20 @@ class ViewModel implements ModelInterface
 
     /**
      * Property overloading: set variable value
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return void
      */
     public function __set($name, $value)
     {
-        $variables = $this->getVariables();
-        $variables[$name] = $value;
+        $this->setVariable($name, $value);
     }
 
     /**
      * Property overloading: get variable value
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)
@@ -135,8 +122,8 @@ class ViewModel implements ModelInterface
 
     /**
      * Property overloading: do we have the requested variable value?
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function __isset($name)
@@ -147,8 +134,8 @@ class ViewModel implements ModelInterface
 
     /**
      * Property overloading: unset the requested variable
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return void
      */
     public function __unset($name)
@@ -157,15 +144,14 @@ class ViewModel implements ModelInterface
             return null;
         }
 
-        $variables = $this->getVariables();
-        unset($variables[$name]);
+        unset($this->variables[$name]);
     }
 
     /**
-     * Set renderer option/hint
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     * Set a single option
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return ViewModel
      */
     public function setOption($name, $value)
@@ -175,9 +161,23 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Get a single option
+     *
+     * @param  string       $name           The option to get.
+     * @param  mixed|null   $default        (optional) A default value if the option is not yet set.
+     * @return mixed
+     */
+    public function getOption($name, $default = null)
+    {
+        $name = (string)$name;
+        return array_key_exists($name, $this->options) ? $this->options[$name] : $default;
+    }
+
+    /**
      * Set renderer options/hints en masse
-     * 
-     * @param  array|Traversable $name 
+     *
+     * @param array|\Traversable $options
+     * @throws \Zend\View\Exception\InvalidArgumentException
      * @return ViewModel
      */
     public function setOptions($options)
@@ -202,19 +202,47 @@ class ViewModel implements ModelInterface
 
     /**
      * Get renderer options/hints
-     * 
+     *
      * @return array
      */
     public function getOptions()
     {
         return $this->options;
     }
-     
+
+    /**
+     * Clear any existing renderer options/hints
+     *
+     * @return ViewModel
+     */
+    public function clearOptions()
+    {
+        $this->options = array();
+        return $this;
+    }
+
+    /**
+     * Get a single view variable
+     *
+     * @param  string       $name
+     * @param  mixed|null   $default (optional) default value if the variable is not present.
+     * @return mixed
+     */
+    public function getVariable($name, $default = null)
+    {
+        $name = (string)$name;
+        if (array_key_exists($name, $this->variables)) {
+            return $this->variables[$name];
+        } else {
+            return $default;
+        }
+    }
+
     /**
      * Set view variable
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return ViewModel
      */
     public function setVariable($name, $value)
@@ -227,37 +255,41 @@ class ViewModel implements ModelInterface
      * Set view variables en masse
      *
      * Can be an array or a Traversable + ArrayAccess object.
-     * 
-     * @param  array|ArrayAccess&Traversable $variables 
+     *
+     * @param  array|ArrayAccess|Traversable $variables
+     * @param  bool $overwrite Whether or not to overwrite the internal container with $variables
+     * @throws Exception\InvalidArgumentException
      * @return ViewModel
      */
-    public function setVariables($variables)
+    public function setVariables($variables, $overwrite = false)
     {
-        // Assumption is that renderers can handle arrays or ArrayAccess objects
-        if ($variables instanceof ArrayAccess && $variables instanceof Traversable) {
-            $this->variables = $variables;
-            return $this;
-        }
-
-        if ($variables instanceof Traversable) {
-            $variables = ArrayUtils::iteratorToArray($variables);
-        }
-
-        if (!is_array($variables)) {
+        if (!is_array($variables) && !$variables instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s: expects an array, or Traversable ArrayAccess argument; received "%s"',
+                '%s: expects an array, or Traversable argument; received "%s"',
                 __METHOD__,
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
         }
 
-        $this->variables = $variables;
+        if ($overwrite) {
+            if (is_object($variables) && !$variables instanceof ArrayAccess) {
+                $variables = ArrayUtils::iteratorToArray($variables);
+            }
+
+            $this->variables = $variables;
+            return $this;
+        }
+
+        foreach ($variables as $key => $value) {
+            $this->setVariable($key, $value);
+        }
+
         return $this;
     }
 
     /**
      * Get view variables
-     * 
+     *
      * @return array|ArrayAccess|Traversable
      */
     public function getVariables()
@@ -266,8 +298,21 @@ class ViewModel implements ModelInterface
     }
 
     /**
-     * Set the template to be used by this model 
-     * 
+     * Clear all variables
+     *
+     * Resets the internal variable container to an empty container.
+     *
+     * @return ViewModel
+     */
+    public function clearVariables()
+    {
+        $this->variables = new ViewVariables();
+        return $this;
+    }
+
+    /**
+     * Set the template to be used by this model
+     *
      * @param  string $template
      * @return ViewModel
      */
@@ -279,7 +324,7 @@ class ViewModel implements ModelInterface
 
     /**
      * Get the template to be used by this model
-     * 
+     *
      * @return string
      */
     public function getTemplate()
@@ -289,7 +334,7 @@ class ViewModel implements ModelInterface
 
     /**
      * Add a child model
-     * 
+     *
      * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
      * @param  null|bool $append Optional; if specified, append to child  with the same capture
@@ -301,10 +346,10 @@ class ViewModel implements ModelInterface
         if (null !== $captureTo) {
             $child->setCaptureTo($captureTo);
         }
-		if (null !== $captureTo) {
-			$child->setAppend($append);
-		}
-		
+        if (null !== $captureTo) {
+            $child->setAppend($append);
+        }
+
         return $this;
     }
 
@@ -321,8 +366,8 @@ class ViewModel implements ModelInterface
     }
 
     /**
-     * Does the model have any children? 
-     * 
+     * Does the model have any children?
+     *
      * @return bool
      */
     public function hasChildren()
@@ -331,9 +376,20 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Clears out all child models
+     *
+     * @return ViewModel
+     */
+    public function clearChildren()
+    {
+        $this->children = array();
+        return $this;
+    }
+
+    /**
      * Set the name of the variable to capture this model to, if it is a child model
-     * 
-     * @param  string $capture 
+     *
+     * @param  string $capture
      * @return ViewModel
      */
     public function setCaptureTo($capture)
@@ -344,7 +400,7 @@ class ViewModel implements ModelInterface
 
     /**
      * Get the name of the variable to which to capture this model
-     * 
+     *
      * @return string
      */
     public function captureTo()
@@ -354,8 +410,8 @@ class ViewModel implements ModelInterface
 
     /**
      * Set flag indicating whether or not this is considered a terminal or standalone model
-     * 
-     * @param  bool $terminate 
+     *
+     * @param  bool $terminate
      * @return ViewModel
      */
     public function setTerminal($terminate)
@@ -366,18 +422,18 @@ class ViewModel implements ModelInterface
 
     /**
      * Is this considered a terminal or standalone model?
-     * 
+     *
      * @return bool
      */
     public function terminate()
     {
         return $this->terminate;
     }
-	
-	/**
+
+    /**
      * Set flag indicating whether or not append to child  with the same capture
-     * 
-     * @param  bool $append 
+     *
+     * @param  bool $append
      * @return ViewModel
      */
     public function setAppend($append)
@@ -388,7 +444,7 @@ class ViewModel implements ModelInterface
 
     /**
      * Is this append to child  with the same capture?
-     * 
+     *
      * @return bool
      */
     public function isAppend()
@@ -398,7 +454,7 @@ class ViewModel implements ModelInterface
 
     /**
      * Return count of children
-     * 
+     *
      * @return int
      */
     public function count()
@@ -408,7 +464,7 @@ class ViewModel implements ModelInterface
 
     /**
      * Get iterator of children
-     * 
+     *
      * @return ArrayIterator
      */
     public function getIterator()

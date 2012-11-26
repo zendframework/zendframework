@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage PHP
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator;
@@ -26,8 +15,6 @@ use Zend\Code\Reflection\ClassReflection;
 /**
  * @category   Zend
  * @package    Zend_Code_Generator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClassGenerator extends AbstractGenerator
 {
@@ -81,6 +68,11 @@ class ClassGenerator extends AbstractGenerator
     protected $methods = array();
 
     /**
+     * @var array Array of string names
+     */
+    protected $uses = array();
+
+    /**
      * fromReflection() - build a Code Generation Php Object from a Class Reflection
      *
      * @param ClassReflection $classReflection
@@ -106,7 +98,8 @@ class ClassGenerator extends AbstractGenerator
         }
 
         /* @var \Zend\Code\Reflection\ClassReflection $parentClass */
-        if ($parentClass = $classReflection->getParentClass()) {
+        $parentClass = $classReflection->getParentClass();
+        if ($parentClass) {
             $cg->setExtendedClass($parentClass->getName());
             $interfaces = array_diff($classReflection->getInterfaces(), $parentClass->getInterfaces());
         } else {
@@ -443,7 +436,7 @@ class ClassGenerator extends AbstractGenerator
             } else {
                 if (is_string($property)) {
                     $this->addProperty($property);
-                } else if (is_array($property)) {
+                } elseif (is_array($property)) {
                     call_user_func_array(array($this, 'addProperty'), $property);
                 }
             }
@@ -492,6 +485,19 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * Add a class to "use" classes
+     *
+     * @param string $useClass
+     */
+    public function addUse($use, $useAlias = null)
+    {
+        if (!empty($useAlias)) {
+            $use .= ' as ' . $useAlias;
+        }
+        $this->uses[] = $use;
+    }
+
+    /**
      * getProperties()
      *
      * @return PropertyGenerator[]
@@ -515,6 +521,16 @@ class ClassGenerator extends AbstractGenerator
             }
         }
         return false;
+    }
+
+    /**
+     * Returns the "use" classes
+     *
+     * @return array
+     */
+    public function getUses()
+    {
+        return $this->uses;
     }
 
     /**
@@ -542,7 +558,7 @@ class ClassGenerator extends AbstractGenerator
             } else {
                 if (is_string($method)) {
                     $this->addMethod($method);
-                } else if (is_array($method)) {
+                } elseif (is_array($method)) {
                     call_user_func_array(array($this, 'addMethod'), $method);
                 }
             }
@@ -674,6 +690,14 @@ class ClassGenerator extends AbstractGenerator
 
         if (null !== ($namespace = $this->getNamespaceName())) {
             $output .= 'namespace ' . $namespace . ';' . self::LINE_FEED . self::LINE_FEED;
+        }
+
+        $uses = $this->getUses();
+        if (!empty($uses)) {
+            foreach ($uses as $use) {
+                $output .= 'use ' . $use . ';' . self::LINE_FEED;
+            }
+            $output .= self::LINE_FEED;
         }
 
         if (null !== ($docBlock = $this->getDocBlock())) {

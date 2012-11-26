@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
@@ -31,14 +21,12 @@ use Zend\ServiceManager\AbstractPluginManager;
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FilterPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of filters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -59,12 +47,13 @@ class FilterPluginManager extends AbstractPluginManager
         'digits'                    => 'Zend\Filter\Digits',
         'dir'                       => 'Zend\Filter\Dir',
         'encrypt'                   => 'Zend\Filter\Encrypt',
-        'encryptmcrypt'             => 'Zend\Filter\Encrypt\Mcrypt',
+        'encryptblockcipher'        => 'Zend\Filter\Encrypt\BlockCipher',
         'encryptopenssl'            => 'Zend\Filter\Encrypt\Openssl',
         'filedecrypt'               => 'Zend\Filter\File\Decrypt',
         'fileencrypt'               => 'Zend\Filter\File\Encrypt',
         'filelowercase'             => 'Zend\Filter\File\LowerCase',
         'filerename'                => 'Zend\Filter\File\Rename',
+        'filerenameupload'          => 'Zend\Filter\File\RenameUpload',
         'fileuppercase'             => 'Zend\Filter\File\UpperCase',
         'htmlentities'              => 'Zend\Filter\HtmlEntities',
         'inflector'                 => 'Zend\Filter\Inflector',
@@ -80,6 +69,7 @@ class FilterPluginManager extends AbstractPluginManager
         'stringtrim'                => 'Zend\Filter\StringTrim',
         'stripnewlines'             => 'Zend\Filter\StripNewlines',
         'striptags'                 => 'Zend\Filter\StripTags',
+        'urinormalize'              => 'Zend\Filter\UriNormalize',
         'wordcamelcasetodash'       => 'Zend\Filter\Word\CamelCaseToDash',
         'wordcamelcasetoseparator'  => 'Zend\Filter\Word\CamelCaseToSeparator',
         'wordcamelcasetounderscore' => 'Zend\Filter\Word\CamelCaseToUnderscore',
@@ -95,12 +85,19 @@ class FilterPluginManager extends AbstractPluginManager
     );
 
     /**
+     * Whether or not to share by default; default to false
+     *
+     * @var bool
+     */
+    protected $shareByDefault = false;
+
+    /**
      * Validate the plugin
      *
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

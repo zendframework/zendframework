@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-crypt",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,12 +8,14 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Crypt": ""
+            "Zend\\Crypt\\": ""
         }
     },
+    "target-dir": "Zend/Crypt",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-math": "self.version",
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-servicemanager": "self.version"
     }
 }

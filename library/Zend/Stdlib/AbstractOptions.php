@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
@@ -25,15 +15,19 @@ use Traversable;
 /**
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
+     * We use the __ prefix to avoid collisions with properties in
+     * user-implementations.
+     *
+     * @var bool
+     */
+    protected $__strictMode__ = true;
+
+    /**
      * @param  array|Traversable|null $options
-     * @return AbstractOptions
-     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
@@ -44,7 +38,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
     /**
      * @param  array|Traversable $options
-     * @return void
+     * @throws Exception\InvalidArgumentException
+     * @return AbstractOptions Provides fluent interface
      */
     public function setFromArray($options)
     {
@@ -58,38 +53,60 @@ abstract class AbstractOptions implements ParameterObjectInterface
         foreach ($options as $key => $value) {
             $this->__set($key, $value);
         }
+        return $this;
     }
 
     /**
-     * @param string $key name of option with underscore
-     * @return string name of setter method
-     * @throws Exception\BadMethodCallException if setter method is undefined
+     * Cast to array
+     *
+     * @return array
      */
-    protected function assembleSetterNameFromKey($key)
+    public function toArray()
     {
-        $parts = explode('_', $key);
-        $parts = array_map('ucfirst', $parts);
-        $setter = 'set' . implode('', $parts);
-        if (!method_exists($this, $setter)) {
+        $array = array();
+        $transform = function($letters) {
+            $letter = array_shift($letters);
+            return '_' . strtolower($letter);
+        };
+        foreach ($this as $key => $value) {
+            if ($key === '__strictMode__') continue;
+            $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
+            $array[$normalizedKey] = $value;
+        }
+        return $array;
+    }
+
+    /**
+     * @see ParameterObject::__set()
+     * @param string $key
+     * @param mixed $value
+     * @throws Exception\BadMethodCallException
+     * @return void
+     */
+    public function __set($key, $value)
+    {
+        $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+        if ($this->__strictMode__ && !method_exists($this, $setter)) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
                 . 'have a matching ' . $setter . ' setter method '
                 . 'which must be defined'
             );
+        } elseif (!$this->__strictMode__ && !method_exists($this, $setter)) {
+            return;
         }
-        return $setter;
+        $this->{$setter}($value);
     }
 
     /**
-     * @param string $key name of option with underscore
-     * @return string name of getter method
-     * @throws Exception\BadMethodCallException if getter method is undefined
+     * @see ParameterObject::__get()
+     * @param string $key
+     * @throws Exception\BadMethodCallException
+     * @return mixed
      */
-    protected function assembleGetterNameFromKey($key)
+    public function __get($key)
     {
-        $parts = explode('_', $key);
-        $parts = array_map('ucfirst', $parts);
-        $getter = 'get' . implode('', $parts);
+        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
         if (!method_exists($this, $getter)) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
@@ -97,29 +114,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
                 . 'which must be defined'
             );
         }
-        return $getter;
-    }
 
-    /**
-     * @see ParameterObject::__set()
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-    public function __set($key, $value)
-    {
-        $setter = $this->assembleSetterNameFromKey($key);
-        $this->{$setter}($value);
-    }
-
-    /**
-     * @see ParameterObject::__get()
-     * @param string $key
-     * @return mixed
-     */
-    public function __get($key)
-    {
-        $getter = $this->assembleGetterNameFromKey($key);
         return $this->{$getter}();
     }
 
@@ -136,14 +131,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @see ParameterObject::__unset()
      * @param string $key
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function __unset($key)
     {
         try {
             $this->__set($key, null);
-        } catch(\InvalidArgumentException $e) {
+        } catch (Exception\BadMethodCallException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
                     . ' NULL is an invalid value for it',

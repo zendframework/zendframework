@@ -1,52 +1,38 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator as BaseApcIterator,
-    ArrayObject,
-    stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface;
+use APCIterator as BaseApcIterator;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Storage
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Apc extends AbstractAdapter implements
-    ClearByPrefixInterface,
+    AvailableSpaceCapableInterface,
     ClearByNamespaceInterface,
+    ClearByPrefixInterface,
     FlushableInterface,
     IterableInterface,
-    AvailableSpaceCapableInterface,
     TotalSpaceCapableInterface
 {
     /**
@@ -61,7 +47,6 @@ class Apc extends AbstractAdapter implements
      *
      * @param  null|array|Traversable|ApcOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -157,7 +142,6 @@ class Apc extends AbstractAdapter implements
         $options = $this->getOptions();
         $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
         $pattern = '/^' . preg_quote($prefix, '/') . '/';
-        $format  = 0;
 
         $baseIt = new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE);
         return new ApcIterator($this, $baseIt, $prefix);
@@ -180,7 +164,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Remove items by given namespace
      *
-     * @param string $prefix
+     * @param string $namespace
      * @return boolean
      */
     public function clearByNamespace($namespace)
@@ -279,7 +263,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Internal method to test multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
@@ -537,7 +521,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Internal method to remove multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */

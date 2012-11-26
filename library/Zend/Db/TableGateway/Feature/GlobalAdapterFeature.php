@@ -10,8 +10,8 @@
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\TableGateway\Exception;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\TableGateway\Exception;
 
 /**
  * @category   Zend
@@ -44,6 +44,7 @@ class GlobalAdapterFeature extends AbstractFeature
     /**
      * Get static adapter
      *
+     * @throws Exception\RuntimeException
      * @return Adapter
      */
     public static function getStaticAdapter()

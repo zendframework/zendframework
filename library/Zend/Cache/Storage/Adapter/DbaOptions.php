@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
@@ -29,8 +18,6 @@ use Zend\Cache\Exception;
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DbaOptions extends AdapterOptions
 {
@@ -65,14 +52,14 @@ class DbaOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $separator
+     * @param  string $namespaceSeparator
      * @return DbaOptions
      */
-    public function setNamespaceSeparator($separator)
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        $separator = (string) $separator;
-        $this->triggerOptionEvent('namespace_separator', $separator);
-        $this->namespaceSeparator = $separator;
+        $namespaceSeparator = (string) $namespaceSeparator;
+        $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+        $this->namespaceSeparator = $namespaceSeparator;
         return $this;
     }
 
@@ -112,7 +99,7 @@ class DbaOptions extends AdapterOptions
     /**
      *
      *
-     * @param unknown_type $mode
+     * @param string $mode
      * @return \Zend\Cache\Storage\Adapter\DbaOptions
      */
     public function setMode($mode)

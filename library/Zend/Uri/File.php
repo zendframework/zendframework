@@ -13,16 +13,14 @@ namespace Zend\Uri;
 /**
  * File URI handler
  *
- * The 'file:...' scheme is loosly defined in RFC-1738
+ * The 'file:...' scheme is loosely defined in RFC-1738
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class File extends Uri
 {
-    static protected $validSchemes = array('file');
+    protected static $validSchemes = array('file');
 
     /**
      * Check if the URI is a valid File URI

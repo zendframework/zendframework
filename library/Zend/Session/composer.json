@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-session",
+    "description": "manage and preserve session data, a logical complement of cookie data, across multiple page requests by the same client",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,15 +8,15 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Session": ""
+            "Zend\\Session\\": ""
         }
     },
+    "target-dir": "Zend/Session",
     "require": {
         "php": ">=5.3.3"
     },
     "suggest": {
         "zendframework/zend-validator": "Zend\\Validator component",
-        "zendframework/zend-filter": "Zend\\Filter component",
         "zendframework/zend-eventmanager": "Zend\\EventManager component"
     }
 }

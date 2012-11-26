@@ -10,7 +10,8 @@
 
 namespace Zend\Db\TableGateway\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
-{
+use Zend\Db\Exception;
 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{
 }

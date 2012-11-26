@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -25,9 +15,7 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class CreditCard extends AbstractValidator
 {
@@ -69,7 +57,7 @@ class CreditCard extends AbstractValidator
         self::LENGTH         => "The input contains an invalid amount of digits",
         self::PREFIX         => "The input is not from an allowed institute",
         self::SERVICE        => "The input seems to be an invalid creditcard number",
-        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input",
     );
 
     /**
@@ -215,7 +203,7 @@ class CreditCard extends AbstractValidator
             $type = array($type);
         }
 
-        foreach($type as $typ) {
+        foreach ($type as $typ) {
             if (defined('self::' . strtoupper($typ)) && !in_array($typ, $this->options['type'])) {
                 $this->options['type'][] = $typ;
             }
@@ -231,7 +219,7 @@ class CreditCard extends AbstractValidator
     /**
      * Returns the actual set service
      *
-     * @return callback
+     * @return callable
      */
     public function getService()
     {
@@ -291,7 +279,7 @@ class CreditCard extends AbstractValidator
             }
         }
 
-        if ($foundp == false){
+        if ($foundp == false) {
             $this->error(self::PREFIX, $value);
             return false;
         }

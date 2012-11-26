@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Placeholder;
@@ -28,13 +17,11 @@ use Zend\View\Exception;
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Registry
 {
     /**
-     * @var Registry Singleton instance 
+     * @var Registry Singleton instance
      */
     protected static $instance;
 
@@ -42,13 +29,13 @@ class Registry
      * Default container class
      * @var string
      */
-    protected $_containerClass = 'Zend\View\Helper\Placeholder\Container';
+    protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
 
     /**
      * Placeholder containers
      * @var array
      */
-    protected $_items = array();
+    protected $items = array();
 
     /**
      * Retrieve or create registry instance
@@ -68,7 +55,7 @@ class Registry
      * Unset the singleton
      *
      * Primarily useful for testing purposes; sets {@link $instance} to null.
-     * 
+     *
      * @return void
      */
     public static function unsetRegistry()
@@ -87,8 +74,8 @@ class Registry
     {
         $key = (string) $key;
 
-        $this->_items[$key] = new $this->_containerClass($value);
-        return $this->_items[$key];
+        $this->items[$key] = new $this->containerClass($value);
+        return $this->items[$key];
     }
 
     /**
@@ -100,8 +87,8 @@ class Registry
     public function getContainer($key)
     {
         $key = (string) $key;
-        if (isset($this->_items[$key])) {
-            return $this->_items[$key];
+        if (isset($this->items[$key])) {
+            return $this->items[$key];
         }
 
         $container = $this->createContainer($key);
@@ -118,7 +105,7 @@ class Registry
     public function containerExists($key)
     {
         $key = (string) $key;
-        $return =  array_key_exists($key, $this->_items);
+        $return =  array_key_exists($key, $this->items);
         return $return;
     }
 
@@ -132,7 +119,7 @@ class Registry
     public function setContainer($key, Container\AbstractContainer $container)
     {
         $key = (string) $key;
-        $this->_items[$key] = $container;
+        $this->items[$key] = $container;
         return $this;
     }
 
@@ -145,8 +132,8 @@ class Registry
     public function deleteContainer($key)
     {
         $key = (string) $key;
-        if (isset($this->_items[$key])) {
-            unset($this->_items[$key]);
+        if (isset($this->items[$key])) {
+            unset($this->items[$key]);
             return true;
         }
 
@@ -175,7 +162,7 @@ class Registry
             throw new Exception\InvalidArgumentException('Invalid Container class specified');
         }
 
-        $this->_containerClass = $name;
+        $this->containerClass = $name;
         return $this;
     }
 
@@ -186,6 +173,6 @@ class Registry
      */
     public function getContainerClass()
     {
-        return $this->_containerClass;
+        return $this->containerClass;
     }
 }

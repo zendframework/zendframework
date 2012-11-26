@@ -1,18 +1,30 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
+ */
 
 namespace Zend\Stdlib\Hydrator;
 
 use ReflectionClass;
-use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\Exception;
 
-class Reflection implements HydratorInterface
+/**
+ * @category   Zend
+ * @package    Zend_Stdlib
+ * @subpackage Hydrator
+ */
+class Reflection extends AbstractHydrator
 {
     /**
      * Simple in-memory array cache of ReflectionProperties used.
      * @var array
      */
-    static protected $reflProperties = array();
+    protected static $reflProperties = array();
 
     /**
      * Extract values from an object
@@ -23,8 +35,11 @@ class Reflection implements HydratorInterface
     public function extract($object)
     {
         $result = array();
-        foreach(self::getReflProperties($object) as $property) {
-            $result[$property->getName()] = $property->getValue($object);
+        foreach (self::getReflProperties($object) as $property) {
+            $propertyName = $property->getName();
+
+            $value = $property->getValue($object);
+            $result[$propertyName] = $this->extractValue($propertyName, $value);
         }
 
         return $result;
@@ -40,9 +55,9 @@ class Reflection implements HydratorInterface
     public function hydrate(array $data, $object)
     {
         $reflProperties = self::getReflProperties($object);
-        foreach($data as $key => $value) {
+        foreach ($data as $key => $value) {
             if (isset($reflProperties[$key])) {
-                $reflProperties[$key]->setValue($object, $value);
+                $reflProperties[$key]->setValue($object, $this->hydrateValue($key, $value));
             }
         }
         return $object;
@@ -53,27 +68,28 @@ class Reflection implements HydratorInterface
      * class has not been loaded.
      *
      * @static
-     * @param string|object $object
+     * @param string|object $input
+     * @throws Exception\InvalidArgumentException
      * @return array
      */
     protected static function getReflProperties($input)
     {
         if (is_object($input)) {
             $input = get_class($input);
-        } else if (!is_string($input)) {
+        } elseif (!is_string($input)) {
             throw new Exception\InvalidArgumentException('Input must be a string or an object.');
         }
 
-        if (!isset(self::$reflProperties[$input])) {
+        if (!isset(static::$reflProperties[$input])) {
             $reflClass      = new ReflectionClass($input);
             $reflProperties = $reflClass->getProperties();
 
-            foreach($reflProperties as $key => $property) {
+            foreach ($reflProperties as $property) {
                 $property->setAccessible(true);
-                self::$reflProperties[$input][$property->getName()] = $property;
+                static::$reflProperties[$input][$property->getName()] = $property;
             }
         }
 
-        return self::$reflProperties[$input];
+        return static::$reflProperties[$input];
     }
 }

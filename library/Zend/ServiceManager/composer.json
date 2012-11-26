@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-servicemanager",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\ServiceManager": ""
+            "Zend\\ServiceManager\\": ""
         }
     },
+    "target-dir": "Zend/ServiceManager",
     "require": {
         "php": ">=5.3.3"
     },

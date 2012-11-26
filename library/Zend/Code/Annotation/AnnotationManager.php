@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Code
- * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
  */
 
 namespace Zend\Code\Annotation;
@@ -31,15 +20,13 @@ use Zend\EventManager\EventManagerInterface;
  *
  * Simply composes an EventManager. When createAnnotation() is called, it fires
  * off an event of the same name, passing it the resolved annotation class, the
- * annotation content, and the raw annotation string; the first listener to 
+ * annotation content, and the raw annotation string; the first listener to
  * return an object will halt execution of the event, and that object will be
  * returned as the annotation.
  *
  * @category   Zend
  * @package    Zend_Code
  * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AnnotationManager implements EventManagerAwareInterface
 {
@@ -52,8 +39,8 @@ class AnnotationManager implements EventManagerAwareInterface
 
     /**
      * Set the event manager instance
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return AnnotationManager
      */
     public function setEventManager(EventManagerInterface $events)
@@ -70,7 +57,7 @@ class AnnotationManager implements EventManagerAwareInterface
      * Retrieve event manager
      *
      * Lazy loads an instance if none registered.
-     * 
+     *
      * @return EventManagerInterface
      */
     public function getEventManager()
@@ -83,8 +70,8 @@ class AnnotationManager implements EventManagerAwareInterface
 
     /**
      * Attach a parser to listen to the createAnnotation event
-     * 
-     * @param  Parser\ParserInterface $parser 
+     *
+     * @param  Parser\ParserInterface $parser
      * @return AnnotationManager
      */
     public function attach(Parser\ParserInterface $parser)

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
  */
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
@@ -23,15 +13,13 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
 /**
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PropertyTag implements TagInterface
+class PropertyTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $type = null;
+    protected $types = array();
 
     /**
      * @var string
@@ -54,13 +42,13 @@ class PropertyTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocBlockLine
+     * @param string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
         if (preg_match('#^(.+)?(\$[\S]+)[\s]*(.*)$#m', $tagDocblockLine, $match)) {
             if ($match[1] !== '') {
-                $this->type = rtrim($match[1]);
+                $this->types = explode('|', rtrim($match[1]));
             }
 
             if ($match[2] !== '') {
@@ -77,10 +65,20 @@ class PropertyTag implements TagInterface
      * Get property variable type
      *
      * @return null|string
+     * @deprecated 2.0.4 use getTypes instead
      */
     public function getType()
     {
-        return $this->type;
+        if (empty($this->types)) {
+            return null;
+        }
+
+        return $this->types[0];
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     /**

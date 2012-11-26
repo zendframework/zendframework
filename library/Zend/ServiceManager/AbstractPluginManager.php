@@ -1,26 +1,14 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ServiceManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
  */
 
 namespace Zend\ServiceManager;
-
-use Zend\Code\Reflection\ClassReflection;
 
 /**
  * ServiceManager implementation for managing plugins
@@ -34,8 +22,6 @@ use Zend\Code\Reflection\ClassReflection;
  *
  * @category   Zend
  * @package    Zend_ServiceManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractPluginManager extends ServiceManager implements ServiceLocatorAwareInterface
 {
@@ -44,10 +30,19 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      *
      * @var bool
      */
-    protected $allowOverride   = true;
+    protected $allowOverride = true;
 
     /**
-     * @var mixed Options to use when creating an instance
+     * Whether or not to auto-add a class as an invokable class if it exists
+     *
+     * @var bool
+     */
+    protected $autoAddInvokableClass = true;
+
+    /**
+     * Options to use when creating an instance
+     *
+     * @var mixed
      */
     protected $creationOptions = null;
 
@@ -64,16 +59,15 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      * Add a default initializer to ensure the plugin is valid after instance
      * creation.
      *
-     * @param  null|ConfigurationInterface $configuration
-     * @return void
+     * @param  null|ConfigInterface $configuration
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
         $self = $this;
         $this->addInitializer(function ($instance) use ($self) {
-            if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($self);
+            if ($instance instanceof ServiceLocatorAwareInterface) {
+                $instance->setServiceLocator($self);
             }
         });
     }
@@ -105,7 +99,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
         // Allow specifying a class name directly; registers as an invokable class
-        if (!$this->has($name) && class_exists($name)) {
+        if (!$this->has($name) && $this->autoAddInvokableClass && class_exists($name)) {
             $this->setInvokableClass($name, $name);
         }
 
@@ -173,15 +167,6 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     protected function createFromInvokable($canonicalName, $requestedName)
     {
         $invokable = $this->invokableClasses[$canonicalName];
-        if (!class_exists($invokable)) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
-                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                __METHOD__,
-                $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
-            ));
-        }
 
         if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))
@@ -195,23 +180,40 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     }
 
     /**
-     * Determine if a class implements a given interface
+     * Attempt to create an instance via a factory class
      *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses
-     * reflection to determine the interfaces implemented.
+     * Overrides parent implementation by passing $creationOptions to the
+     * constructor, if non-null.
      *
-     * @param  string $class
-     * @param  string $type
-     * @return bool
+     * @param  string $canonicalName
+     * @param  string $requestedName
+     * @return mixed
+     * @throws Exception\ServiceNotCreatedException If factory is not callable
      */
-    protected function isSubclassOf($class, $type)
+    protected function createFromFactory($canonicalName, $requestedName)
     {
-        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
-            return is_subclass_of($class, $type);
+        $factory = $this->factories[$canonicalName];
+        if (is_string($factory) && class_exists($factory, true)) {
+            if (null === $this->creationOptions || (is_array($this->creationOptions) && empty($this->creationOptions))) {
+                $factory = new $factory();
+            } else {
+                $factory = new $factory($this->creationOptions);
+            }
+
+            $this->factories[$canonicalName] = $factory;
         }
 
-        $r = new ClassReflection($class);
-        $interfaces = $r->getInterfaceNames();
-        return (in_array($type, $interfaces));
+        if ($factory instanceof FactoryInterface) {
+            $instance = $this->createServiceViaCallback(array($factory, 'createService'), $canonicalName, $requestedName);
+        } elseif (is_callable($factory)) {
+            $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);
+        } else {
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                'While attempting to create %s%s an invalid factory was registered for this instance type.', $canonicalName, ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+            ));
+        }
+
+        return $instance;
     }
+
 }

@@ -12,7 +12,7 @@ namespace Zend\ModuleManager\Listener;
 
 /**
  * Abstract listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener

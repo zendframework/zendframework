@@ -1,9 +1,24 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di;
 
 use Closure;
+use ReflectionClass;
 
+/**
+ * Dependency injector that can generate instances using class definitions and configured instance parameters
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class Di implements DependencyInjectionInterface
 {
     /**
@@ -38,11 +53,11 @@ class Di implements DependencyInjectionInterface
     /**
      * Constructor
      *
-     * @param null|DefinitionList $definitions
+     * @param null|DefinitionList  $definitions
      * @param null|InstanceManager $instanceManager
-     * @param null|Configuration $config
+     * @param null|Config   $config
      */
-    public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Configuration $config = null)
+    public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Config $config = null)
     {
         $this->definitions = ($definitions) ?: new DefinitionList(new Definition\RuntimeDefinition());
         $this->instanceManager = ($instanceManager) ?: new InstanceManager();
@@ -55,21 +70,22 @@ class Di implements DependencyInjectionInterface
     /**
      * Provide a configuration object to configure this instance
      *
-     * @param Configuration $config
+     * @param  Config $config
      * @return void
      */
-    public function configure(Configuration $config)
+    public function configure(Config $config)
     {
         $config->configure($this);
     }
 
     /**
-     * @param DefinitionList $definition
-     * @return Di
+     * @param  DefinitionList $definitions
+     * @return self
      */
     public function setDefinitionList(DefinitionList $definitions)
     {
         $this->definitions = $definitions;
+
         return $this;
     }
 
@@ -84,12 +100,13 @@ class Di implements DependencyInjectionInterface
     /**
      * Set the instance manager
      *
-     * @param InstanceManager $instanceManager
+     * @param  InstanceManager $instanceManager
      * @return Di
      */
     public function setInstanceManager(InstanceManager $instanceManager)
     {
         $this->instanceManager = $instanceManager;
+
         return $this;
     }
 
@@ -102,7 +119,6 @@ class Di implements DependencyInjectionInterface
         return $this->instanceManager;
     }
 
-
     /**
      * Lazy-load a class
      *
@@ -110,8 +126,8 @@ class Di implements DependencyInjectionInterface
      * loaded before, the previous instance will be returned (unless the service
      * definition indicates shared instances should not be used).
      *
-     * @param  string $name Class name or service alias
-     * @param  null|array $params Parameters to pass to the constructor
+     * @param  string      $name   Class name or service alias
+     * @param  null|array  $params Parameters to pass to the constructor
      * @return object|null
      */
     public function get($name, array $params = array())
@@ -124,16 +140,20 @@ class Di implements DependencyInjectionInterface
             $fastHash = $im->hasSharedInstanceWithParameters($name, $params, true);
             if ($fastHash) {
                 array_pop($this->instanceContext);
+
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
             if ($im->hasSharedInstance($name, $params)) {
                 array_pop($this->instanceContext);
+
                 return $im->getSharedInstance($name, $params);
             }
         }
-        $instance = $this->newInstance($name, $params);
+        $config = $im->getConfig($name);
+        $instance = $this->newInstance($name, $params, $config['shared']);
         array_pop($this->instanceContext);
+
         return $instance;
     }
 
@@ -143,9 +163,9 @@ class Di implements DependencyInjectionInterface
      * Forces retrieval of a discrete instance of the given class, using the
      * constructor parameters provided.
      *
-     * @param mixed $name Class name or service alias
-     * @param array $params Parameters to pass to the constructor
-     * @param bool $isShared
+     * @param  mixed                            $name     Class name or service alias
+     * @param  array                            $params   Parameters to pass to the constructor
+     * @param  bool                             $isShared
      * @return object|null
      * @throws Exception\ClassNotFoundException
      * @throws Exception\RuntimeException
@@ -216,14 +236,15 @@ class Di implements DependencyInjectionInterface
         $this->handleInjectDependencies($instance, $injectionMethods, $params, $class, $alias, $name);
 
         array_pop($this->instanceContext);
+
         return $instance;
     }
 
     /**
      * Inject dependencies
      *
-     * @param object $instance
-     * @param array $params
+     * @param  object $instance
+     * @param  array  $params
      * @return void
      */
     public function injectDependencies($instance, array $params = array())
@@ -247,6 +268,15 @@ class Di implements DependencyInjectionInterface
         $this->handleInjectDependencies($instance, $injectionMethods, $params, $class, null, null);
     }
 
+    /**
+     * @param object      $instance
+     * @param array       $injectionMethods
+     * @param array       $params
+     * @param string|null $instanceClass
+     * @param string|null$instanceAlias
+     * @param  string                     $requestedName
+     * @throws Exception\RuntimeException
+     */
     protected function handleInjectDependencies($instance, $injectionMethods, $params, $instanceClass, $instanceAlias, $requestedName)
     {
         // localize dependencies
@@ -267,11 +297,11 @@ class Di implements DependencyInjectionInterface
             }
 
             if ($requestedName) {
-                $instanceConfiguration = $instanceManager->getConfiguration($requestedName);
+                $instanceConfig = $instanceManager->getConfig($requestedName);
 
-                if ($instanceConfiguration['injections']) {
+                if ($instanceConfig['injections']) {
                     $objectsToInject = $methodsToCall = array();
-                    foreach ($instanceConfiguration['injections'] as $injectName => $injectValue) {
+                    foreach ($instanceConfig['injections'] as $injectName => $injectValue) {
                         if (is_int($injectName) && is_string($injectValue)) {
                             $objectsToInject[] = $this->get($injectValue, $params);
                         } elseif (is_string($injectName) && is_array($injectValue)) {
@@ -301,7 +331,7 @@ class Di implements DependencyInjectionInterface
                                         if ($methodParams) {
                                             foreach ($methodParams as $methodParam) {
                                                 $objectToInjectClass = $this->getClass($objectToInject);
-                                                if ($objectToInjectClass == $methodParam[1] || $this->isSubclassOf($objectToInjectClass, $methodParam[1])) {
+                                                if ($objectToInjectClass == $methodParam[1] || self::isSubclassOf($objectToInjectClass, $methodParam[1])) {
                                                     if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, $type)) {
                                                         $calledMethods[$typeInjectionMethod] = true;
                                                     }
@@ -331,9 +361,9 @@ class Di implements DependencyInjectionInterface
      * given parameter is a DependencyReference object, it will be fetched
      * from the container so that the instance may be injected.
      *
-     * @param string $class
-     * @param array $params
-     * @param string|null $alias
+     * @param  string      $class
+     * @param  array       $params
+     * @param  string|null $alias
      * @return object
      */
     protected function createInstanceViaConstructor($class, $params, $alias = null)
@@ -355,6 +385,7 @@ class Di implements DependencyInjectionInterface
                 return new $class($callParameters[0], $callParameters[1], $callParameters[2]);
             default:
                 $r = new \ReflectionClass($class);
+
                 return $r->newInstanceArgs($callParameters);
         }
     }
@@ -362,9 +393,9 @@ class Di implements DependencyInjectionInterface
     /**
      * Get an object instance from the defined callback
      *
-     * @param callback $callback
-     * @param array $params
-     * @param string $alias
+     * @param  callable                           $callback
+     * @param  array                              $params
+     * @param  string                             $alias
      * @return object
      * @throws Exception\InvalidCallbackException
      * @throws Exception\RuntimeException
@@ -388,6 +419,7 @@ class Di implements DependencyInjectionInterface
         if ($this->definitions->hasMethod($class, $method)) {
             $callParameters = $this->resolveMethodParameters($class, $method, $params, $alias, true, true);
         }
+
         return call_user_func_array($callback, $callParameters);
     }
 
@@ -395,10 +427,12 @@ class Di implements DependencyInjectionInterface
      * This parameter will handle any injection methods and resolution of
      * dependencies for such methods
      *
-     * @param object $object
-     * @param string $method
-     * @param array $params
-     * @param string $alias
+     * @param  object      $instance
+     * @param  string      $method
+     * @param  array       $params
+     * @param  string      $alias
+     * @param  bool        $methodIsRequired
+     * @param  string|null $methodClass
      * @return bool
      */
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
@@ -410,21 +444,25 @@ class Di implements DependencyInjectionInterface
         }
         if ($callParameters !== array_fill(0, count($callParameters), null)) {
             call_user_func_array(array($instance, $method), $callParameters);
+
             return true;
         }
+
         return false;
     }
 
     /**
      * Resolve parameters referencing other services
      *
-     * @param string $class
-     * @param string $method
-     * @param array $callTimeUserParams
-     * @param bool $isInstantiator
-     * @param string $alias
-     * @return array
+     * @param  string                                $class
+     * @param  string                                $method
+     * @param  array                                 $callTimeUserParams
+     * @param  string                                $alias
+     * @param  bool                                  $methodIsRequired
+     * @param  bool                                  $isInstantiator
+     * @throws Exception\MissingPropertyException
      * @throws Exception\CircularDependencyException
+     * @return array
      */
     protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $alias, $methodIsRequired, $isInstantiator = false)
     {
@@ -446,13 +484,13 @@ class Di implements DependencyInjectionInterface
         $aliases = $this->instanceManager->getAliases();
 
         // for the alias in the dependency tree
-        if ($alias && $this->instanceManager->hasConfiguration($alias)) {
-            $iConfig['thisAlias'] = $this->instanceManager->getConfiguration($alias);
+        if ($alias && $this->instanceManager->hasConfig($alias)) {
+            $iConfig['thisAlias'] = $this->instanceManager->getConfig($alias);
         }
 
         // for the current class in the dependency tree
-        if ($this->instanceManager->hasConfiguration($class)) {
-            $iConfig['thisClass'] = $this->instanceManager->getConfiguration($class);
+        if ($this->instanceManager->hasConfig($class)) {
+            $iConfig['thisClass'] = $this->instanceManager->getConfig($class);
         }
 
         // for the parent class, provided we are deeper than one node
@@ -464,10 +502,10 @@ class Di implements DependencyInjectionInterface
             $requestedClass = $requestedAlias = null;
         }
 
-        if ($requestedClass != $class && $this->instanceManager->hasConfiguration($requestedClass)) {
-            $iConfig['requestedClass'] = $this->instanceManager->getConfiguration($requestedClass);
+        if ($requestedClass != $class && $this->instanceManager->hasConfig($requestedClass)) {
+            $iConfig['requestedClass'] = $this->instanceManager->getConfig($requestedClass);
             if ($requestedAlias) {
-                $iConfig['requestedAlias'] = $this->instanceManager->getConfiguration($requestedAlias);
+                $iConfig['requestedAlias'] = $this->instanceManager->getConfig($requestedAlias);
             }
         }
 
@@ -552,6 +590,7 @@ class Di implements DependencyInjectionInterface
                     } elseif (is_object($iConfigCurValue)
                         && $iConfigCurValue instanceof Closure
                         && $type !== 'Closure') {
+                        /* @var $iConfigCurValue Closure */
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue();
                     } else {
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue;
@@ -574,7 +613,7 @@ class Di implements DependencyInjectionInterface
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
                         $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
@@ -591,7 +630,7 @@ class Di implements DependencyInjectionInterface
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
                         $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
@@ -613,20 +652,19 @@ class Di implements DependencyInjectionInterface
             $name = $value[0];
 
             if (isset($computedParams['value'][$fqParamPos])) {
-
                 // if there is a value supplied, use it
                 $resolvedParams[$index] = $computedParams['value'][$fqParamPos];
-
             } elseif (isset($computedParams['required'][$fqParamPos])) {
-
                 // detect circular dependencies! (they can only happen in instantiators)
                 if ($isInstantiator && in_array($computedParams['required'][$fqParamPos][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException(
                         "Circular dependency detected: $class depends on {$value[1]} and viceversa"
                     );
                 }
+
                 array_push($this->currentDependencies, $class);
-                $dConfig = $this->instanceManager->getConfiguration($computedParams['required'][$fqParamPos][0]);
+                $dConfig = $this->instanceManager->getConfig($computedParams['required'][$fqParamPos][0]);
+
                 if ($dConfig['shared'] === false) {
                     $resolvedParams[$index] = $this->newInstance($computedParams['required'][$fqParamPos][0], $callTimeUserParams, false);
                 } else {
@@ -634,9 +672,7 @@ class Di implements DependencyInjectionInterface
                 }
 
                 array_pop($this->currentDependencies);
-
             } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {
-
                 if ($methodIsRequired) {
                     // if this item was not marked as optional,
                     // plus it cannot be resolve, and no value exist, bail out
@@ -647,9 +683,8 @@ class Di implements DependencyInjectionInterface
                 } else {
                     return false;
                 }
-
             } else {
-                $resolvedParams[$index] = null;
+                $resolvedParams[$index] = $value[3];
             }
 
             $index++;
@@ -665,7 +700,7 @@ class Di implements DependencyInjectionInterface
      * @internal this method is used by the ServiceLocator\DependencyInjectorProxy class to interact with instances
      *           and is a hack to be used internally until a major refactor does not split the `resolveMethodParameters`. Do not
      *           rely on its functionality.
-     * @param Object $instance
+     * @param  Object $instance
      * @return string
      */
     protected function getClass($instance)
@@ -674,25 +709,28 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
-     * @see https://bugs.php.net/bug.php?id=53727
+     * Checks if the object has this class as one of its parents
      *
-     * @param $class
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
      * @param $type
      * @return bool
      */
-    protected function isSubclassOf($class, $type)
+    protected static function isSubclassOf($className, $type)
     {
-        /* @var $isSubclassFunc Closure */
-        static $isSubclassFuncCache = null; // null as unset, array when set
-
-        if ($isSubclassFuncCache === null) {
-            $isSubclassFuncCache = array();
+        if (is_subclass_of($className, $type)) {
+            return true;
         }
-
-        if (!array_key_exists($class, $isSubclassFuncCache)) {
-            $isSubclassFuncCache[$class] = class_parents($class, true) + class_implements($class, true);
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
         }
-        return (isset($isSubclassFuncCache[$class][$type]));
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+
+        return $r->implementsInterface($type);
     }
-
 }

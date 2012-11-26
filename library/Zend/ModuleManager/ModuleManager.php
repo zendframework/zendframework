@@ -11,8 +11,8 @@
 namespace Zend\ModuleManager;
 
 use Traversable;
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * Module manager
@@ -38,6 +38,11 @@ class ModuleManager implements ModuleManagerInterface
     protected $event;
 
     /**
+     * @var boolean
+     */
+    protected $loadFinished;
+
+    /**
      * modules
      *
      * @var array|Traversable
@@ -56,7 +61,6 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @param  array|Traversable $modules
      * @param  EventManagerInterface $eventManager
-     * @return void
      */
     public function __construct($modules, EventManagerInterface $eventManager = null)
     {
@@ -66,6 +70,11 @@ class ModuleManager implements ModuleManagerInterface
         }
     }
 
+    /**
+     * Handle the loadModules event
+     *
+     * @return void
+     */
     public function onLoadModules()
     {
         if (true === $this->modulesAreLoaded) {
@@ -82,7 +91,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load the provided modules.
      *
-     * @triggers loadModules.pre
+     * @triggers loadModules
      * @triggers loadModules.post
      * @return   ModuleManager
      */
@@ -109,6 +118,7 @@ class ModuleManager implements ModuleManagerInterface
      * Load a specific module by name.
      *
      * @param    string $moduleName
+     * @throws   Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
      * @return   mixed Module's Module class
@@ -119,8 +129,10 @@ class ModuleManager implements ModuleManagerInterface
             return $this->loadedModules[$moduleName];
         }
 
-        $event = $this->getEvent();
+        $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
+
+        $this->loadFinished = false;
 
         $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
             return (is_object($r));
@@ -136,8 +148,11 @@ class ModuleManager implements ModuleManagerInterface
         }
         $event->setModule($module);
 
-        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
         $this->loadedModules[$moduleName] = $module;
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
+
+        $this->loadFinished = true;
+
         return $module;
     }
 
@@ -183,6 +198,7 @@ class ModuleManager implements ModuleManagerInterface
      * Set an array or Traversable of module names that this module manager should load.
      *
      * @param  mixed $modules array or Traversable of module names
+     * @throws Exception\InvalidArgumentException
      * @return ModuleManager
      */
     public function setModules($modules)

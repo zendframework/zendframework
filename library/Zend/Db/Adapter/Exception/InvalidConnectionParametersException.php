@@ -15,7 +15,7 @@ namespace Zend\Db\Adapter\Exception;
  * @package    Zend_Db
  * @subpackage Adapter
  */
-class InvalidConnectionParametersException extends \RuntimeException implements ExceptionInterface
+class InvalidConnectionParametersException extends RuntimeException implements ExceptionInterface
 {
 
     /**

@@ -5,13 +5,13 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Package
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo\Feature;
 
-use Zend\Db\Adapter\Driver\Feature\AbstractFeature,
-    Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
+use Zend\Db\Adapter\Driver\Pdo;
 
 /**
  * SqliteRowCounter
@@ -33,6 +33,7 @@ class SqliteRowCounter extends AbstractFeature
 
     /**
      * @param \Zend\Db\Adapter\Driver\Pdo\Statement $statement
+     * @return int
      */
     public function getCountForStatement(Pdo\Statement $statement)
     {
@@ -51,7 +52,7 @@ class SqliteRowCounter extends AbstractFeature
 
     /**
      * @param $sql
-     * @return null
+     * @return null|int
      */
     public function getCountForSql($sql)
     {

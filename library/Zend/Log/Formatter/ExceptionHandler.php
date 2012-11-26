@@ -1,35 +1,32 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log\Formatter;
+
+use DateTime;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ExceptionHandler implements FormatterInterface
 {
+    /**
+     * Format specifier for DateTime objects in event data
+     *
+     * @see http://php.net/manual/en/function.date.php
+     * @var string
+     */
+    protected $dateTimeFormat = self::DEFAULT_DATETIME_FORMAT;
+
     /**
      * This method formats the event for the PHP Exception
      *
@@ -38,6 +35,10 @@ class ExceptionHandler implements FormatterInterface
      */
     public function format($event)
     {
+        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
+        }
+
         $output = $event['timestamp'] . ' ' . $event['priorityName'] . ' ('
                 . $event['priority'] . ') ' . $event['message'] .' in '
                 . $event['extra']['file'] . ' on line ' . $event['extra']['line'];
@@ -59,10 +60,27 @@ class ExceptionHandler implements FormatterInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->dateTimeFormat;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDateTimeFormat($dateTimeFormat)
+    {
+        $this->dateTimeFormat = (string) $dateTimeFormat;
+        return $this;
+    }
+
+    /**
      * Get the type of a function
-     * 
+     *
      * @param string $type
-     * @return string 
+     * @return string
      */
     protected function getType($type)
     {

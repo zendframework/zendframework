@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
@@ -25,8 +15,6 @@ namespace Zend\Stdlib;
  *
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Glob
 {
@@ -39,12 +27,12 @@ abstract class Glob
     const GLOB_NOESCAPE = 0x08;
     const GLOB_BRACE    = 0x10;
     const GLOB_ONLYDIR  = 0x20;
-    const GLOB_ERR      = 0x30;
+    const GLOB_ERR      = 0x40;
     /**#@-*/
-    
+
     /**
      * Find pathnames matching a pattern.
-     * 
+     *
      * @see    http://docs.php.net/glob
      * @param  string  $pattern
      * @param  integer $flags
@@ -54,15 +42,15 @@ abstract class Glob
     public static function glob($pattern, $flags, $forceFallback = false)
     {
         if (!defined('GLOB_BRACE') || $forceFallback) {
-            return self::fallbackGlob($pattern, $flags);
+            return static::fallbackGlob($pattern, $flags);
         } else {
-            return self::systemGlob($pattern, $flags);
+            return static::systemGlob($pattern, $flags);
         }
     }
-    
+
     /**
      * Use the glob function provided by the system.
-     * 
+     *
      * @param  string  $pattern
      * @param  integer $flags
      * @return array|false
@@ -93,10 +81,10 @@ abstract class Glob
 
         return glob($pattern, $globFlags);
     }
-    
+
     /**
      * Expand braces manually, then use the system glob.
-     * 
+     *
      * @param  string  $pattern
      * @param  integer $flags
      * @return array|false
@@ -104,83 +92,83 @@ abstract class Glob
     protected static function fallbackGlob($pattern, $flags)
     {
         if (!$flags & self::GLOB_BRACE) {
-            return self::systemGlob($pattern, $flags);
+            return static::systemGlob($pattern, $flags);
         }
-        
+
         $flags &= ~self::GLOB_BRACE;
         $length = strlen($pattern);
         $paths  = array();
-        
+
         if ($flags & self::GLOB_NOESCAPE) {
             $begin = strpos($pattern, '{');
         } else {
             $begin = 0;
-            
+
             while (true) {
                 if ($begin === $length) {
                     $begin = false;
                     break;
-                } else if ($pattern[$begin] === '\\' && ($begin + 1) < $length) {
+                } elseif ($pattern[$begin] === '\\' && ($begin + 1) < $length) {
                     $begin++;
-                } else if ($pattern[$begin] === '{') {
+                } elseif ($pattern[$begin] === '{') {
                     break;
                 }
-                
+
                 $begin++;
             }
         }
 
         if ($begin === false) {
-            return self::systemGlob($pattern, $flags);
+            return static::systemGlob($pattern, $flags);
         }
-        
-        $next = self::nextBraceSub($pattern, $begin + 1, $flags);
+
+        $next = static::nextBraceSub($pattern, $begin + 1, $flags);
 
         if ($next === null) {
-            return self::systemGlob($pattern, $flags);
+            return static::systemGlob($pattern, $flags);
         }
 
         $rest = $next;
 
         while ($pattern[$rest] !== '}') {
-            $rest = self::nextBraceSub($pattern, $rest + 1, $flags);
+            $rest = static::nextBraceSub($pattern, $rest + 1, $flags);
 
             if ($rest === null) {
-                return self::systemGlob($pattern, $flags);
+                return static::systemGlob($pattern, $flags);
             }
         }
 
         $p = $begin + 1;
 
-        while (true) {           
+        while (true) {
             $subPattern = substr($pattern, 0, $begin)
                         . substr($pattern, $p, $next - $p)
                         . substr($pattern, $rest + 1);
 
-            $result = self::fallbackGlob($subPattern, $flags | self::GLOB_BRACE);
+            $result = static::fallbackGlob($subPattern, $flags | self::GLOB_BRACE);
 
             if ($result) {
                 $paths = array_merge($paths, $result);
             }
-            
+
             if ($pattern[$next] === '}') {
                 break;
             }
 
             $p    = $next + 1;
-            $next = self::nextBraceSub($pattern, $p, $flags);
+            $next = static::nextBraceSub($pattern, $p, $flags);
         }
-        
+
         return array_unique($paths);
     }
-    
+
     /**
      * Find the end of the sub-pattern in a brace expression.
-     * 
+     *
      * @param  string  $pattern
      * @param  integer $begin
      * @param  integer $flags
-     * @return integer|null 
+     * @return integer|null
      */
     protected static function nextBraceSub($pattern, $begin, $flags)
     {
@@ -193,12 +181,12 @@ abstract class Glob
                 if (++$current === $length) {
                     break;
                 }
-                
+
                 $current++;
-            } else {               
+            } else {
                 if (($pattern[$current] === '}' && $depth-- === 0) || ($pattern[$current] === ',' && $depth === 0)) {
                     break;
-                } else if ($pattern[$current++] === '{') {
+                } elseif ($pattern[$current++] === '{') {
                     $depth++;
                 }
             }

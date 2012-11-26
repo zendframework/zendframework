@@ -11,8 +11,8 @@
 namespace Zend\Db\Adapter\Driver\Pgsql;
 
 use Zend\Db\Adapter\Driver\StatementInterface;
-use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -57,7 +57,7 @@ class Statement implements StatementInterface
     protected $parameterContainer;
 
     /**
-     * @param  Pgsql $driver 
+     * @param  Pgsql $driver
      * @return Statement
      */
     public function setDriver(Pgsql $driver)
@@ -67,7 +67,9 @@ class Statement implements StatementInterface
     }
 
     /**
-     * @param  resource $pgsql 
+     * Initialize
+     *
+     * @param  resource $pgsql
      * @return void
      * @throws Exception\RuntimeException for invalid or missing postgresql connection
      */
@@ -84,6 +86,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get resource
+     *
      * @return resource
      */
     public function getResource()
@@ -92,14 +96,20 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Set sql
+     *
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+        return $this;
     }
 
     /**
+     * Get sql
+     *
      * @return string
      */
     public function getSql()
@@ -108,14 +118,20 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Set parameter container
+     *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
+     * Get parameter container
+     *
      * @return ParameterContainer
      */
     public function getParameterContainer()
@@ -124,6 +140,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Prepare
+     *
      * @param string $sql
      */
     public function prepare($sql = null)
@@ -139,11 +157,13 @@ class Statement implements StatementInterface
         );
 
         $this->sql = $sql;
-        $this->statementName = 'statement' . ++self::$statementIndex;
+        $this->statementName = 'statement' . ++static::$statementIndex;
         $this->resource = pg_prepare($this->pgsql, $this->statementName, $sql);
     }
 
     /**
+     * Is prepared
+     *
      * @return bool
      */
     public function isPrepared()
@@ -152,8 +172,11 @@ class Statement implements StatementInterface
     }
 
     /**
-     * @param  null $parameters
-     * @return ResultInterface
+     * Execute
+     *
+     * @param  ParameterContainer|null $parameters
+     * @throws Exception\InvalidQueryException
+     * @return Result
      */
     public function execute($parameters = null)
     {
@@ -180,7 +203,7 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        $resultResource = pg_execute($this->pgsql, $this->statementName, $parameters);
+        $resultResource = pg_execute($this->pgsql, $this->statementName, (array) $parameters);
 
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_last_error());

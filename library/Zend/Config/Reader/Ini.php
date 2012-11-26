@@ -63,7 +63,7 @@ class Ini implements ReaderInterface
      * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
-     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function fromFile($filename)
     {
@@ -86,7 +86,7 @@ class Ini implements ReaderInterface
         );
         $ini = parse_ini_file($filename, true);
         restore_error_handler();
-        
+
         return $this->process($ini);
     }
 
@@ -114,7 +114,7 @@ class Ini implements ReaderInterface
         );
         $ini = parse_ini_string($string, true);
         restore_error_handler();
-        
+
         return $this->process($ini);
     }
 
@@ -130,7 +130,12 @@ class Ini implements ReaderInterface
 
         foreach ($data as $section => $value) {
             if (is_array($value)) {
-                $config[$section] = $this->processSection($value);
+                if (strpos($section, $this->nestSeparator) !== false) {
+                    $section = explode($this->nestSeparator, $section, 2);
+                    $config[$section[0]][$section[1]] = $this->processSection($value);
+                } else {
+                    $config[$section] = $this->processSection($value);
+                }
             } else {
                 $this->processKey($section, $value, $config);
             }

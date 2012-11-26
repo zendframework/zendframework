@@ -10,9 +10,7 @@
 
 namespace Zend\Db\Metadata\Source;
 
-use Zend\Db\Metadata\MetadataInterface,
-    Zend\Db\Adapter\Adapter,
-    Zend\Db\Metadata\Object;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @category   Zend

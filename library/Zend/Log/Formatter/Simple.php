@@ -1,62 +1,60 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log\Formatter;
 
+use Traversable;
 use Zend\Log\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Simple implements FormatterInterface
+class Simple extends Base
 {
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %extra%';
+
     /**
+     * Format specifier for log messages
+     *
      * @var string
      */
     protected $format;
 
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
-
     /**
      * Class constructor
      *
+     * @see http://php.net/manual/en/function.date.php
      * @param null|string $format Format specifier for log messages
-     * @return Simple
+     * @param null|string $dateTimeFormat Format specifier for DateTime objects in event data
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($format = null)
+    public function __construct($format = null, $dateTimeFormat = null)
     {
-        if ($format === null) {
-            $format = self::DEFAULT_FORMAT . PHP_EOL;
+        if ($format instanceof Traversable) {
+            $format = iterator_to_array($format);
         }
 
-        if (!is_string($format)) {
+        if (is_array($format)) {
+            $dateTimeFormat = isset($format['dateTimeFormat'])? $format['dateTimeFormat'] : null;
+            $format         = isset($format['format'])? $format['format'] : null;
+        }
+
+        if (isset($format) && !is_string($format)) {
             throw new Exception\InvalidArgumentException('Format must be a string');
         }
 
-        $this->format = $format;
+        $this->format = isset($format) ? $format : static::DEFAULT_FORMAT;
+
+        parent::__construct($dateTimeFormat);
     }
 
     /**
@@ -69,19 +67,22 @@ class Simple implements FormatterInterface
     {
         $output = $this->format;
 
-        if (!isset($event['info'])) {
-            $event['info'] = '';
-        }
+        $event = parent::format($event);
         foreach ($event as $name => $value) {
-            if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)
-            ) {
-                $value = gettype($value);
+            if ('extra' == $name && count($value)) {
+                $value = $this->normalize($value);
+            } elseif ('extra' == $name) {
+                // Don't print an empty array
+                $value = '';
             }
-
             $output = str_replace("%$name%", $value, $output);
         }
 
+        if (isset($event['extra']) && empty($event['extra'])
+            && false !== strpos($this->format, '%extra%')
+        ) {
+            $output = rtrim($output, ' ');
+        }
         return $output;
     }
 }

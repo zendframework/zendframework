@@ -10,8 +10,8 @@
 
 namespace Zend\Db\RowGateway\Feature;
 
-use Zend\Db\RowGateway\AbstractRowGateway,
-    Zend\Db\RowGateway\Exception;
+use Zend\Db\RowGateway\AbstractRowGateway;
+use Zend\Db\RowGateway\Exception;
 
 abstract class AbstractFeature extends AbstractRowGateway
 {

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Tag
- * @subpackage Cloud
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Tag
  */
 
 namespace Zend\Tag;
@@ -27,45 +16,43 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * @category   Zend
  * @package    Zend_Tag
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Cloud
 {
     /**
      * DecoratorInterface for the cloud
      *
-     * @var Cloud
+     * @var Cloud\Decorator\AbstractCloud
      */
-    protected $_cloudDecorator = null;
+    protected $cloudDecorator = null;
 
     /**
      * DecoratorInterface for the tags
      *
-     * @var Tag
+     * @var Cloud\Decorator\AbstractTag
      */
-    protected $_tagDecorator = null;
+    protected $tagDecorator = null;
 
     /**
      * List of all tags
      *
      * @var ItemList
      */
-    protected $_tags = null;
+    protected $tags = null;
 
     /**
      * Plugin manager for decorators
      *
      * @var Cloud\DecoratorPluginManager
      */
-    protected $_decorators = null;
+    protected $decorators = null;
 
     /**
      * Option keys to skip when calling setOptions()
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $skipOptions = array(
         'options',
         'config',
     );
@@ -93,17 +80,12 @@ class Cloud
      */
     public function setOptions(array $options)
     {
-        if (isset($options['prefixPath'])) {
-            $this->addPrefixPaths($options['prefixPath']);
-            unset($options['prefixPath']);
-        }
-
         foreach ($options as $key => $value) {
-            if (in_array(strtolower($key), $this->_skipOptions)) {
+            if (in_array(strtolower($key), $this->skipOptions)) {
                 continue;
             }
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set' . $key;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -147,7 +129,7 @@ class Cloud
         if ($tag instanceof TaggableInterface) {
             $tags[] = $tag;
             return $this;
-        } 
+        }
 
         if (!is_array($tag)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -170,7 +152,7 @@ class Cloud
      */
     public function setItemList(ItemList $itemList)
     {
-        $this->_tags = $itemList;
+        $this->tags = $itemList;
         return $this;
     }
 
@@ -183,10 +165,10 @@ class Cloud
      */
     public function getItemList()
     {
-        if (null === $this->_tags) {
+        if (null === $this->tags) {
             $this->setItemList(new ItemList());
         }
-        return $this->_tags;
+        return $this->tags;
     }
 
     /**
@@ -218,7 +200,7 @@ class Cloud
             throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\AbstractCloud');
         }
 
-        $this->_cloudDecorator = $decorator;
+        $this->cloudDecorator = $decorator;
 
         return $this;
     }
@@ -226,14 +208,14 @@ class Cloud
     /**
      * Get the decorator for the cloud
      *
-     * @return Cloud
+     * @return Cloud\Decorator\AbstractCloud
      */
     public function getCloudDecorator()
     {
-        if (null === $this->_cloudDecorator) {
+        if (null === $this->cloudDecorator) {
             $this->setCloudDecorator('htmlCloud');
         }
-        return $this->_cloudDecorator;
+        return $this->cloudDecorator;
     }
 
     /**
@@ -262,10 +244,10 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\AbstractTag)) {
-            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\Tag');
+            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\AbstractTag');
         }
 
-        $this->_tagDecorator = $decorator;
+        $this->tagDecorator = $decorator;
 
         return $this;
     }
@@ -273,14 +255,14 @@ class Cloud
     /**
      * Get the decorator for the tags
      *
-     * @return Tag
+     * @return Cloud\Decorator\AbstractTag
      */
     public function getTagDecorator()
     {
-        if (null === $this->_tagDecorator) {
+        if (null === $this->tagDecorator) {
             $this->setTagDecorator('htmlTag');
         }
-        return $this->_tagDecorator;
+        return $this->tagDecorator;
     }
 
     /**
@@ -291,7 +273,7 @@ class Cloud
      */
     public function setDecoratorPluginManager(Cloud\DecoratorPluginManager $decorators)
     {
-        $this->_decorators = $decorators;
+        $this->decorators = $decorators;
         return $this;
     }
 
@@ -302,11 +284,11 @@ class Cloud
      */
     public function getDecoratorPluginManager()
     {
-        if ($this->_decorators === null) {
-            $this->_decorators = new Cloud\DecoratorPluginManager();
+        if ($this->decorators === null) {
+            $this->decorators = new Cloud\DecoratorPluginManager();
         }
 
-        return $this->_decorators;
+        return $this->decorators;
     }
 
     /**

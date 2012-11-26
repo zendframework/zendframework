@@ -1,46 +1,34 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    SplObjectStorage,
-    stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\ExceptionEvent,
-    Zend\Cache\Storage\PostEvent,
-    Zend\Cache\Storage\Plugin,
-    Zend\Cache\Storage\StorageInterface,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\EventsCapableInterface;
+use ArrayObject;
+use SplObjectStorage;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\ExceptionEvent;
+use Zend\Cache\Storage\Plugin;
+use Zend\Cache\Storage\PostEvent;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter implements StorageInterface, EventsCapableInterface
 {
@@ -90,7 +78,6 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      *
      * @param  null|array|Traversable|AdapterOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -551,7 +538,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     /**
      * Internal method to test multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
@@ -763,7 +750,6 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      * Internal method to store multiple items.
      *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
@@ -1247,7 +1233,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     /**
      * Internal method to remove multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
@@ -1582,7 +1568,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     }
 
     /**
-     * Validates and normalizes an array of key-value paírs
+     * Validates and normalizes an array of key-value pairs
      *
      * @param  array $keyValuePairs
      * @return void

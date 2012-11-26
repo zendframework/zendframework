@@ -1,32 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
+
+use Zend\Validator\Exception;
 
 /**
  * Validator for the md5 hash of given files
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
 class Md5 extends Hash
 {
@@ -41,9 +31,9 @@ class Md5 extends Hash
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::DOES_NOT_MATCH => "File '%value%' does not match the given md5 hashes",
+        self::DOES_NOT_MATCH => "File does not match the given md5 hashes",
         self::NOT_DETECTED   => "A md5 hash could not be evaluated for the given file",
-        self::NOT_FOUND      => "File '%value%' is not readable or does not exist",
+        self::NOT_FOUND      => "File is not readable or does not exist",
     );
 
     /**
@@ -93,33 +83,45 @@ class Md5 extends Hash
     /**
      * Returns true if and only if the given file confirms the set hash
      *
-     * @param  string $value Filename to check for hash
-     * @param  array  $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Filename to check for hash
      * @return boolean
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        if ($file === null) {
-            $file = array('name' => basename($value));
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->throwError($file, self::NOT_FOUND);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(self::NOT_FOUND);
+            return false;
         }
 
         $hashes = array_unique(array_keys($this->getHash()));
-        $filehash = hash_file('md5', $value);
+        $filehash = hash_file('md5', $file);
         if ($filehash === false) {
-            return $this->throwError($file, self::NOT_DETECTED);
+            $this->error(self::NOT_DETECTED);
+            return false;
         }
 
-        foreach($hashes as $hash) {
+        foreach ($hashes as $hash) {
             if ($filehash === $hash) {
                 return true;
             }
         }
 
-        return $this->throwError($file, self::DOES_NOT_MATCH);
+        $this->error(self::DOES_NOT_MATCH);
+        return false;
     }
 }

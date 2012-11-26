@@ -6,8 +6,6 @@ and add the library directory to your PHP `include_path`. To use
 components in the extras library, add the `extras/library` directory to
 your PHP `include_path` as well.
 
-If you would like to use Zend_Tool, simply add `bin/zf.bat` (for Windows)
-or `bin/zf.sh` (for anything else) to your system executable path.
 
 ## SYSTEM REQUIREMENTS
 -------------------
@@ -59,7 +57,7 @@ http://www.php.net/manual/en/configuration.changes.php
 A great place to get up-to-speed quickly is the Zend Framework
 QuickStart:
 
-http://framework.zend.com/manual/en/learning.quickstart.html
+http://framework.zend.com/manual/2.0/en/user-guide/overview.html
 
 The QuickStart covers some of the most commonly used components of ZF.
 Since Zend Framework is designed with a use-at-will architecture and

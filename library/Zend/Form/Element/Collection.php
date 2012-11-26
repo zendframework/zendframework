@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
@@ -27,18 +16,16 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
+use Zend\Form\FieldsetPrepareAwareInterface;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\PriorityQueue;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Collection extends Fieldset
+class Collection extends Fieldset implements FieldsetPrepareAwareInterface
 {
     /**
      * Default template placeholder
@@ -67,6 +54,13 @@ class Collection extends Fieldset
     protected $allowAdd = true;
 
     /**
+     * Are existing elements allowed to be removed dynamically ?
+     *
+     * @var bool
+     */
+    protected $allowRemove = true;
+
+    /**
      * Is the template generated ?
      *
      * @var bool
@@ -93,6 +87,7 @@ class Collection extends Fieldset
      * - target_element: an array or element used in the collection
      * - count: number of times the element is added initially
      * - allow_add: if set to true, elements can be added to the form dynamically (using JavaScript)
+     * - allow_remove: if set to true, elements can be removed to the form
      * - should_create_template: if set to true, a template is generated (inside a <span>)
      * - template_placeholder: placeholder used in the data template
      *
@@ -115,6 +110,10 @@ class Collection extends Fieldset
             $this->setAllowAdd($options['allow_add']);
         }
 
+        if (isset($options['allow_remove'])) {
+            $this->setAllowRemove($options['allow_remove']);
+        }
+
         if (isset($options['should_create_template'])) {
             $this->setShouldCreateTemplate($options['should_create_template']);
         }
@@ -126,10 +125,50 @@ class Collection extends Fieldset
         return $this;
     }
 
+
+    /**
+     * Checks if the object can be set in this fieldset
+     *
+     * @param object $object
+     * @return boolean
+     */
+    public function allowObjectBinding($object)
+    {
+        return true;
+    }
+
+    /**
+     * Set the object used by the hydrator
+     * In this case the "object" is a collection of objects
+     *
+     * @param  array|\Traversable $object
+     * @return Fieldset|FieldsetInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setObject($object)
+    {
+        if (!is_array($object) && !$object instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object argument; received "%s"',
+                __METHOD__,
+                (is_object($object) ? get_class($object) : gettype($object))
+            ));
+        }
+
+        $this->object = $object;
+        $this->count  = count($object);
+
+        return $this;
+    }
+
+
     /**
      * Populate values
      *
      * @param array|\Traversable $data
+     * @throws \Zend\Form\Exception\InvalidArgumentException
+     * @throws \Zend\Form\Exception\DomainException
+     * @return void
      */
     public function populateValues($data)
     {
@@ -143,14 +182,36 @@ class Collection extends Fieldset
 
         // Can't do anything with empty data
         if (empty($data)) {
-
             return;
+        }
+
+        if (count($data) < $this->getCount()) {
+            if (!$this->allowRemove) {
+                throw new Exception\DomainException(sprintf(
+                    'There are fewer elements than specified in the collection (%s). Either set the allow_remove option ' .
+                    'to true, or re-submit the form.',
+                    get_class($this)
+                    )
+                );
+            }
+
+            // If there are less data and that allowRemove is true, we remove elements that are not presents
+            $this->setCount(count($data));
+            foreach ($this->byName as $name => $elementOrFieldset) {
+                if (isset($data[$name])) {
+                    continue;
+                }
+
+                $this->remove($name);
+            }
         }
 
         if ($this->targetElement instanceof FieldsetInterface) {
             foreach ($this->byName as $name => $fieldset) {
-                $fieldset->populateValues($data[$name]);
-                unset($data[$name]);
+                if (isset($data[$name])) {
+                    $fieldset->populateValues($data[$name]);
+                    unset($data[$name]);
+                }
             }
         } else {
             foreach ($this->byName as $name => $element) {
@@ -173,7 +234,46 @@ class Collection extends Fieldset
 
                 $this->add($elementOrFieldset);
             }
+        } elseif (!empty($data) && !$this->allowAdd) {
+            throw new Exception\DomainException(sprintf(
+                'There are more elements than specified in the collection (%s). Either set the allow_add option ' .
+                'to true, or re-submit the form.',
+                get_class($this)
+                )
+            );
         }
+    }
+
+    /**
+     * Checks if this fieldset can bind data
+     *
+     * @return boolean
+     */
+    public function allowValueBinding()
+    {
+        return true;
+    }
+
+    /**
+     * Bind values to the object
+     *
+     * @param array $values
+     * @return array|mixed|void
+     */
+    public function bindValues(array $values = array())
+    {
+        $collection = array();
+        foreach ($values as $name => $value) {
+            $element = $this->get($name);
+
+            if ($element instanceof FieldsetInterface) {
+                $collection[] = $element->bindValues($value);
+            } else {
+                $collection[] = $value;
+            }
+        }
+
+        return $collection;
     }
 
     /**
@@ -246,7 +346,7 @@ class Collection extends Fieldset
      */
     public function setAllowAdd($allowAdd)
     {
-        $this->allowAdd = (bool)$allowAdd;
+        $this->allowAdd = (bool) $allowAdd;
         return $this;
     }
 
@@ -255,9 +355,27 @@ class Collection extends Fieldset
      *
      * @return bool
      */
-    public function getAllowAdd()
+    public function allowAdd()
     {
         return $this->allowAdd;
+    }
+
+    /**
+     * @param bool $allowRemove
+     * @return Collection
+     */
+    public function setAllowRemove($allowRemove)
+    {
+        $this->allowRemove = (bool) $allowRemove;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function allowRemove()
+    {
+        return $this->allowRemove;
     }
 
     /**
@@ -268,7 +386,7 @@ class Collection extends Fieldset
      */
     public function setShouldCreateTemplate($shouldCreateTemplate)
     {
-        $this->shouldCreateTemplate = (bool)$shouldCreateTemplate;
+        $this->shouldCreateTemplate = (bool) $shouldCreateTemplate;
 
         return $this;
     }
@@ -345,11 +463,41 @@ class Collection extends Fieldset
     }
 
     /**
+     * @return array
+     */
+    public function extract()
+    {
+
+        if ($this->object instanceof Traversable) {
+            $this->object = ArrayUtils::iteratorToArray($this->object);
+        }
+
+        if (!is_array($this->object)) {
+            return array();
+        }
+
+        $values = array();
+
+        foreach ($this->object as $key => $value) {
+            if ($this->hydrator) {
+                $values[$key] = $this->hydrator->extract($value);
+            } elseif ($value instanceof $this->targetElement->object) {
+                // @see https://github.com/zendframework/zf2/pull/2848
+                $targetElement = clone $this->targetElement;
+                $targetElement->object = $value;
+                $values[$key] = $targetElement->extract();
+            }
+        }
+
+        return $values;
+    }
+
+    /**
      * If both count and targetElement are set, add them to the fieldset
      *
      * @return void
      */
-    protected function prepareCollection()
+    public function prepareFieldset()
     {
         if ($this->targetElement !== null) {
             for ($i = 0 ; $i != $this->count ; ++$i) {

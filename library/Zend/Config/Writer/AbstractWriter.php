@@ -11,8 +11,8 @@
 namespace Zend\Config\Writer;
 
 use Traversable;
-use Zend\Config\Exception;
 use Zend\Config\Config;
+use Zend\Config\Exception;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -38,12 +38,12 @@ abstract class AbstractWriter implements WriterInterface
         if (empty($filename)) {
             throw new Exception\InvalidArgumentException('No file name specified');
         }
-        
+
         $flags = 0;
         if ($exclusiveLock) {
             $flags |= LOCK_EX;
         }
-        
+
         set_error_handler(
             function($error, $message = '', $file = '', $line = 0) use ($filename) {
                 throw new Exception\RuntimeException(sprintf(

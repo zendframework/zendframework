@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
-use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Annotation;
 use Zend\Code\Exception;
+use Zend\Code\NameInformation;
 
 class ClassScanner implements ScannerInterface
 {
@@ -99,9 +107,22 @@ class ClassScanner implements ScannerInterface
         $this->nameInformation = $nameInformation;
     }
 
-    public function getAnnotations()
+    /**
+<<<<<<< HEAD
+=======
+     * Get annotations
+     *
+>>>>>>> c7ab3b44304857c7271297becf651225c4bca6b4
+     * @param  Annotation\AnnotationManager $annotationManager
+     * @return Annotation\AnnotationCollection
+     */
+    public function getAnnotations(Annotation\AnnotationManager $annotationManager)
     {
-        return array();
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
+
+        return new AnnotationScanner($annotationManager, $docComment, $this->nameInformation);
     }
 
     public function getDocComment()
@@ -199,6 +220,11 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Returns a list of property names
+     *
+     * @return array
+     */
     public function getPropertyNames()
     {
         $this->scan();
@@ -215,6 +241,11 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Returns a list of properties
+     *
+     * @return array
+     */
     public function getProperties()
     {
         $this->scan();
@@ -231,6 +262,46 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    public function getProperty($propertyNameOrInfoIndex)
+    {
+        $this->scan();
+
+        if (is_int($propertyNameOrInfoIndex)) {
+            $info = $this->infos[$propertyNameOrInfoIndex];
+            if ($info['type'] != 'property') {
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a property');
+            }
+        } elseif (is_string($propertyNameOrInfoIndex)) {
+            $propertyFound = false;
+            foreach ($this->infos as $info) {
+                if ($info['type'] === 'property' && $info['name'] === $propertyNameOrInfoIndex) {
+                    $propertyFound = true;
+                    break;
+                }
+            }
+            if (!$propertyFound) {
+                return false;
+            }
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid property name of info index type.  Must be of type int or string');
+        }
+        if (!isset($info)) {
+            return false;
+        }
+        $p = new PropertyScanner(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+            $this->nameInformation
+        );
+        $p->setClass($this->name);
+        $p->setScannerClass($this);
+        return $p;
+    }
+
+    /**
+     * Get method names
+     *
+     * @return array
+     */
     public function getMethodNames()
     {
         $this->scan();
@@ -356,8 +427,7 @@ class ClassScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine)
-        {
+        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
             static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
@@ -372,15 +442,14 @@ class ClassScanner implements ScannerInterface
                 $tokenType    = null;
                 $tokenContent = $token;
                 $tokenLine    = $tokenLine + substr_count($lastTokenArray[1],
-                                                          "\n"); // adjust token line by last known newline count
+                    "\n"); // adjust token line by last known newline count
             } else {
                 $lastTokenArray = $token;
                 list($tokenType, $tokenContent, $tokenLine) = $token;
             }
             return $tokenIndex;
         };
-        $MACRO_INFO_ADVANCE  = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine)
-        {
+        $MACRO_INFO_ADVANCE  = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;

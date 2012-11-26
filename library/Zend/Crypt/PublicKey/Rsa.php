@@ -10,10 +10,10 @@
 
 namespace Zend\Crypt\PublicKey;
 
+use Traversable;
 use Zend\Crypt\PublicKey\RsaOptions;
 use Zend\Crypt\PublicKey\Rsa\Exception;
 use Zend\Stdlib\ArrayUtils;
-use Traversable;
 
 /**
  * Implementation of the RSA public key encryption algorithm.
@@ -185,6 +185,12 @@ class Rsa
             $publicKey = $this->options->getPublicKey();
         }
 
+        // check if signature is encoded in Base64
+        $output = base64_decode($signature, true);
+        if (false !== $output) {
+            $signature = $output;
+        }
+
         $result = openssl_verify(
             $data,
             $signature,
@@ -243,6 +249,12 @@ class Rsa
 
         if (null === $key) {
             throw new Exception\InvalidArgumentException('No key specified for the decryption');
+        }
+
+        // check if data is encoded in Base64
+        $output = base64_decode($data, true);
+        if (false !== $output) {
+            $data = $output;
         }
 
         return $key->decrypt($data);

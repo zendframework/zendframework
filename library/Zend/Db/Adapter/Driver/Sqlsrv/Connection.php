@@ -10,8 +10,9 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\Sqlsrv\Exception\ErrorException;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -111,6 +112,7 @@ class Connection implements ConnectionInterface
      * Set resource
      *
      * @param  resource $resource
+     * @throws Exception\InvalidArgumentException
      * @return Connection
      */
     public function setResource($resource)
@@ -133,6 +135,7 @@ class Connection implements ConnectionInterface
     /**
      * Connect
      *
+     * @throws Exception\RuntimeException
      * @return null
      */
     public function connect()
@@ -181,6 +184,7 @@ class Connection implements ConnectionInterface
             );
         }
 
+        return $this;
     }
 
     /**
@@ -254,12 +258,17 @@ class Connection implements ConnectionInterface
      * Execute
      *
      * @param  string $sql
+     * @throws Exception\RuntimeException
      * @return mixed
      */
     public function execute($sql)
     {
         if (!$this->isConnected()) {
             $this->connect();
+        }
+
+        if (!$this->driver instanceof Sqlsrv) {
+            throw new Exception\RuntimeException('Connection is missing an instance of Sqlsrv');
         }
 
         $returnValue = sqlsrv_query($this->resource, $sql);
@@ -270,7 +279,7 @@ class Connection implements ConnectionInterface
             // ignore general warnings
             if ($errors[0]['SQLSTATE'] != '01000') {
                 throw new Exception\RuntimeException(
-                    'An exception occured while trying to execute the provided $sql',
+                    'An exception occurred while trying to execute the provided $sql',
                     null,
                     new ErrorException($errors)
                 );
@@ -300,10 +309,14 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      *
+     * @param string $name
      * @return mixed
      */
     public function getLastGeneratedValue($name = null)
     {
+        if (!$this->resource) {
+            $this->connect();
+        }
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);

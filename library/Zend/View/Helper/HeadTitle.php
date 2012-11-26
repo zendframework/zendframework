@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
 use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\View\Exception;
 
 /**
@@ -29,36 +19,43 @@ use Zend\View\Exception;
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HeadTitle extends Placeholder\Container\AbstractStandalone
+class HeadTitle extends Placeholder\Container\AbstractStandalone implements
+    TranslatorAwareInterface
 {
     /**
      * Registry key for placeholder
      * @var string
      */
-    protected $_regKey = 'Zend_View_Helper_HeadTitle';
-
-    /**
-     * Whether or not auto-translation is enabled
-     * @var boolean
-     */
-    protected $_translate = false;
-
-    /**
-     * Translation object
-     *
-     * @var \Zend\Translator\Adapter\Adapter
-     */
-    protected $_translator;
+    protected $regKey = 'Zend_View_Helper_HeadTitle';
 
     /**
      * Default title rendering order (i.e. order in which each title attached)
      *
      * @var string
      */
-    protected $_defaultAttachOrder = null;
+    protected $defaultAttachOrder = null;
+
+    /**
+     * Translator (optional)
+     *
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * Translator text domain (optional)
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
+
+    /**
+     * Whether translator should be used
+     *
+     * @var bool
+     */
+    protected $translatorEnabled = true;
 
     /**
      * Retrieve placeholder for title element and optionally set state
@@ -93,7 +90,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      * Set a default order to add titles
      *
      * @param string $setType
-     * @return void
+     * @return HeadTitle
      * @throws Exception\DomainException
      */
     public function setDefaultAttachOrder($setType)
@@ -107,7 +104,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
                 "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
             );
         }
-        $this->_defaultAttachOrder = $setType;
+        $this->defaultAttachOrder = $setType;
 
         return $this;
     }
@@ -119,65 +116,16 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      */
     public function getDefaultAttachOrder()
     {
-        return $this->_defaultAttachOrder;
-    }
-
-    /**
-     * Sets a translation Adapter for translation
-     *
-     * @param  Translator $translator
-     * @return \Zend\View\Helper\HeadTitle
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setTranslator(Translator $translator)
-    {
-        $this->_translator = $translator;
-        return $this;
-    }
-
-    /**
-     * Retrieve translation object
-     *
-     * If none is currently registered, attempts to pull it from the registry
-     * using the key 'Zend_Translator'.
-     *
-     * @return Translator|null
-     */
-    public function getTranslator()
-    {
-        return $this->_translator;
-    }
-
-    /**
-     * Enables translation
-     *
-     * @return \Zend\View\Helper\HeadTitle
-     */
-    public function enableTranslation()
-    {
-        $this->_translate = true;
-        return $this;
-    }
-
-    /**
-     * Disables translation
-     *
-     * @return \Zend\View\Helper\HeadTitle
-     */
-    public function disableTranslation()
-    {
-        $this->_translate = false;
-        return $this;
+        return $this->defaultAttachOrder;
     }
 
     /**
      * Turn helper into string
      *
      * @param  string|null $indent
-     * @param  string|null $locale
      * @return string
      */
-    public function toString($indent = null, $locale = 'default')
+    public function toString($indent = null)
     {
         $indent = (null !== $indent)
                 ? $this->getWhitespace($indent)
@@ -185,9 +133,11 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
 
         $items = array();
 
-        if($this->_translate && $translator = $this->getTranslator()) {
+        if (null !== ($translator = $this->getTranslator())) {
             foreach ($this as $item) {
-                $items[] = $translator->translate($item, $locale);
+                $items[] = $translator->translate(
+                    $item, $this->getTranslatorTextDomain()
+                );
             }
         } else {
             foreach ($this as $item) {
@@ -199,19 +149,108 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
         $output = '';
 
         $prefix = $this->getPrefix();
-        if($prefix) {
+        if ($prefix) {
             $output  .= $prefix;
         }
 
         $output .= implode($separator, $items);
 
         $postfix = $this->getPostfix();
-        if($postfix) {
+        if ($postfix) {
             $output .= $postfix;
         }
 
-        $output = ($this->_autoEscape) ? $this->_escape($output) : $output;
+        $output = ($this->autoEscape) ? $this->escape($output) : $output;
 
         return $indent . '<title>' . $output . '</title>';
+    }
+
+    // Translator methods - Good candidate to refactor as a trait with PHP 5.4
+
+    /**
+     * Sets translator to use in helper
+     *
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
+     * @return HeadTitle
+     */
+    public function setTranslator(Translator $translator = null, $textDomain = null)
+    {
+        $this->translator = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
+        return $this;
+    }
+
+    /**
+     * Returns translator used in helper
+     *
+     * @return Translator|null
+     */
+    public function getTranslator()
+    {
+        if (! $this->isTranslatorEnabled()) {
+            return null;
+        }
+
+        return $this->translator;
+    }
+
+    /**
+     * Checks if the helper has a translator
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
+    }
+
+    /**
+     * Sets whether translator is enabled and should be used
+     *
+     * @param  bool $enabled [optional] whether translator should be used.
+     *                       Default is true.
+     * @return HeadTitle
+     */
+    public function setTranslatorEnabled($enabled = true)
+    {
+        $this->translatorEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Returns whether translator is enabled and should be used
+     *
+     * @return bool
+     */
+    public function isTranslatorEnabled()
+    {
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return HeadTitle
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
     }
 }

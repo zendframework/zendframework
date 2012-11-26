@@ -18,8 +18,6 @@ use Zend\Loader\PluginClassLoader;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HeaderLoader extends PluginClassLoader
 {
@@ -34,6 +32,7 @@ class HeaderLoader extends PluginClassLoader
         'content-type' => 'Zend\Mail\Header\ContentType',
         'date'         => 'Zend\Mail\Header\Date',
         'from'         => 'Zend\Mail\Header\From',
+        'message-id'   => 'Zend\Mail\Header\MessageId',
         'mimeversion'  => 'Zend\Mail\Header\MimeVersion',
         'mime_version' => 'Zend\Mail\Header\MimeVersion',
         'mime-version' => 'Zend\Mail\Header\MimeVersion',

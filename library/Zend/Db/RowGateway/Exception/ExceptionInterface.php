@@ -10,6 +10,8 @@
 
 namespace Zend\Db\RowGateway\Exception;
 
-interface ExceptionInterface
+use Zend\Db\Exception;
+
+interface ExceptionInterface extends Exception\ExceptionInterface
 {
 }

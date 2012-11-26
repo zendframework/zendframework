@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-db",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Db": ""
+            "Zend\\Db\\": ""
         }
     },
+    "target-dir": "Zend/Db",
     "require": {
         "php": ">=5.3.3"
     }

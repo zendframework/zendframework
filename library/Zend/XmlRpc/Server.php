@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
@@ -60,8 +49,6 @@ use Zend\Server\Reflection;
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Server extends AbstractServer
 {
@@ -93,7 +80,7 @@ class Server extends AbstractServer
      * PHP types => XML-RPC types
      * @var array
      */
-    protected $_typeMap = array(
+    protected $typeMap = array(
         'i4'                         => 'i4',
         'int'                        => 'int',
         'integer'                    => 'int',
@@ -148,7 +135,6 @@ class Server extends AbstractServer
      *
      * Creates system.* methods.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -162,7 +148,7 @@ class Server extends AbstractServer
      * @param  string $method
      * @param  array $params
      * @return mixed
-     * @throws Zend\XmlRpc\Server\Exception
+     * @throws Server\Exception\BadMethodCallException
      */
     public function __call($method, $params)
     {
@@ -184,10 +170,10 @@ class Server extends AbstractServer
      * any arguments following the namespace will be aggregated and passed at
      * dispatch time.
      *
-     * @param string|array $function Valid callback
-     * @param string $namespace Optional namespace prefix
+     * @param string|array|callable $function  Valid callback
+     * @param string                $namespace Optional namespace prefix
+     * @throws Server\Exception\InvalidArgumentException
      * @return void
-     * @throws Zend\XmlRpc\Server\Exception
      */
     public function addFunction($function, $namespace = '')
     {
@@ -226,7 +212,7 @@ class Server extends AbstractServer
      * @param string $namespace Optional
      * @param mixed $argv Optional arguments to pass to methods
      * @return void
-     * @throws Zend\XmlRpc\Server\Exception on invalid input
+     * @throws Server\Exception\InvalidArgumentException on invalid input
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
@@ -248,9 +234,9 @@ class Server extends AbstractServer
     /**
      * Raise an xmlrpc server fault
      *
-     * @param string|Exception $fault
+     * @param string|\Exception $fault
      * @param int $code
-     * @return Zend\XmlRpc\Server\Fault
+     * @return Server\Fault
      */
     public function fault($fault = null, $code = 404)
     {
@@ -340,7 +326,7 @@ class Server extends AbstractServer
      *
      * @param  array|Definition $definition
      * @return void
-     * @throws Server\Exception on invalid input
+     * @throws Server\Exception\InvalidArgumentException on invalid input
      */
     public function loadFunctions($definition)
     {
@@ -406,7 +392,7 @@ class Server extends AbstractServer
      *
      * @param  string|Request $request
      * @return Server
-     * @throws Server\Exception on invalid request class or object
+     * @throws Server\Exception\InvalidArgumentException on invalid request class or object
      */
     public function setRequest($request)
     {
@@ -448,14 +434,14 @@ class Server extends AbstractServer
      * Set the class to use for the response
      *
      * @param  string $class
+     * @throws Server\Exception\InvalidArgumentException if invalid response class
      * @return boolean True if class was set, false if not
      */
     public function setResponseClass($class)
     {
-        if (!class_exists($class) or
-            ($c = new ReflectionClass($class) and !$c->isSubclassOf('Zend\\XmlRpc\\Response'))) {
-
+        if (!class_exists($class) || !static::isSubclassOf($class, 'Zend\XmlRpc\Response')) {
             throw new Server\Exception\InvalidArgumentException('Invalid response class');
+
         }
         $this->responseClass = $class;
         return true;
@@ -501,7 +487,7 @@ class Server extends AbstractServer
      */
     public function getSystem()
     {
-        return $this->_system;
+        return $this->system;
     }
 
     /**
@@ -518,7 +504,7 @@ class Server extends AbstractServer
             return $this->sendArgumentsToAllMethods;
         }
 
-        $this->sendArgumentsToAllMethods = (bool)$flag;
+        $this->sendArgumentsToAllMethods = (bool) $flag;
         return $this;
     }
 
@@ -530,8 +516,8 @@ class Server extends AbstractServer
      */
     protected function _fixType($type)
     {
-        if (isset($this->_typeMap[$type])) {
-            return $this->_typeMap[$type];
+        if (isset($this->typeMap[$type])) {
+            return $this->typeMap[$type];
         }
         return 'void';
     }
@@ -541,7 +527,7 @@ class Server extends AbstractServer
      *
      * @param  Request $request
      * @return Response
-     * @throws Server\Exception|Exception
+     * @throws Server\Exception\RuntimeException
      * Zend\XmlRpc\Server\Exceptions are thrown for internal errors; otherwise,
      * any other exception may be thrown by the callback
      */
@@ -599,7 +585,32 @@ class Server extends AbstractServer
     protected function registerSystemMethods()
     {
         $system = new Server\System($this);
-        $this->_system = $system;
+        $this->system = $system;
         $this->setClass($system, 'system');
+    }
+
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     * @return bool
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

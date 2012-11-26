@@ -1,38 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Service
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Service;
 
+use Zend\Console\Console;
 use Zend\Mvc\Exception;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\View\Helper as ViewHelper;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Helper as ViewHelper;
+use Zend\View\Helper\HelperInterface as ViewHelperInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Service
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ViewHelperManagerFactory extends AbstractPluginManagerFactory
 {
@@ -44,16 +33,17 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
      * @var array
      */
     protected $defaultHelperMapClasses = array(
-        'Zend\Form\View\HelperConfiguration',
-        'Zend\I18n\View\HelperConfiguration',
-        'Zend\Navigation\View\HelperConfiguration'
+        'Zend\Form\View\HelperConfig',
+        'Zend\I18n\View\HelperConfig',
+        'Zend\Navigation\View\HelperConfig'
     );
 
     /**
      * Create and return the view helper manager
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ControllerPluginManager
+     * @return ViewHelperInterface
+     * @throws Exception\RuntimeException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
@@ -62,30 +52,30 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
         foreach ($this->defaultHelperMapClasses as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
                 $config = new $configClass;
-            }
 
-            if (!$config instanceof ConfigurationInterface) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
-                    $configClass,
-                    'Zend\ServiceManager\ConfigurationInterface'
-                ));
-            }
+                if (!$config instanceof ConfigInterface) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
+                        $configClass,
+                        'Zend\ServiceManager\ConfigInterface'
+                    ));
+                }
 
-            $config->configureServiceManager($plugins);
+                $config->configureServiceManager($plugins);
+            }
         }
 
         // Configure URL view helper with router
         $plugins->setFactory('url', function($sm) use($serviceLocator) {
             $helper = new ViewHelper\Url;
-            $helper->setRouter($serviceLocator->get('Router'));
+            $router = Console::isConsole() ? 'HttpRouter' : 'Router';
+            $helper->setRouter($serviceLocator->get($router));
 
             $match = $serviceLocator->get('application')
                         ->getMvcEvent()
                         ->getRouteMatch();
 
             if ($match instanceof RouteMatch) {
-
                 $helper->setRouteMatch($match);
             }
 
@@ -93,11 +83,10 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
         });
 
         $plugins->setFactory('basepath', function($sm) use($serviceLocator) {
-            $config = $serviceLocator->get('Configuration');
-            $config = $config['view_manager'];
+            $config = $serviceLocator->get('Config');
             $basePathHelper = new ViewHelper\BasePath;
-            if (isset($config['base_path'])) {
-                $basePath = $config['base_path'];
+            if (isset($config['view_manager']) && isset($config['view_manager']['base_path'])) {
+                $basePath = $config['view_manager']['base_path'];
             } else {
                 $basePath = $serviceLocator->get('Request')->getBasePath();
             }
@@ -112,7 +101,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
          * based on. This is why it must be set early instead of later in the layout phtml.
          */
         $plugins->setFactory('doctype', function($sm) use($serviceLocator) {
-            $config = $serviceLocator->get('Configuration');
+            $config = $serviceLocator->get('Config');
             $config = $config['view_manager'];
             $doctypeHelper = new ViewHelper\Doctype;
             if (isset($config['doctype'])) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#"
+    xmlns:atom10="http://www.w3.org/2005/Atom">
+    <atom10:category scheme="http://example.com/schema1" term="topic1" label="topic1"/>
+    <atom10:category scheme="http://example.com/schema2" term="topic1" label="topic1"/>
+    <atom10:category scheme="http://example.com/schema1" term="cat_dog" label="Cat &amp; Dog"/>
+    <entry>
+
+    </entry>
+</feed>

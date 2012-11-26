@@ -1,7 +1,0 @@
-GET /v1.0/583923/images/19?format=json HTTP/1.1
-Host: servers.api.rackspacecloud.com
-Connection: close
-Accept-encoding: gzip, deflate
-User-Agent: Zend\Http\Client
-X-Auth-Token: ed355855-8bfa-4716-b613-c04b606cdd8c
-

@@ -1,40 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View;
 
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\Mvc\MvcEvent;
+use Zend\EventManager\EventManagerInterface;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Renderer\TreeRendererInterface;
 
 /**
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class View implements EventManagerAwareInterface
 {
@@ -180,6 +167,7 @@ class View implements EventManagerAwareInterface
      * @triggers renderer(ViewEvent)
      * @triggers response(ViewEvent)
      * @param  Model $model
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function render(Model $model)
@@ -197,6 +185,9 @@ class View implements EventManagerAwareInterface
                 __METHOD__
             ));
         }
+
+        $event->setRenderer($renderer);
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
 
         // If we have children, render them first, but only if:
         // a) the renderer does not implement TreeRendererInterface, or
@@ -230,6 +221,7 @@ class View implements EventManagerAwareInterface
      * Loop through children, rendering each
      *
      * @param  Model $model
+     * @throws Exception\DomainException
      * @return void
      */
     protected function renderChildren(Model $model)
@@ -243,11 +235,10 @@ class View implements EventManagerAwareInterface
             $child->setOption('has_parent', null);
             $capture = $child->captureTo();
             if (!empty($capture)) {
-                if($child->isAppend()) {
+                if ($child->isAppend()) {
                     $oldResult=$model->{$capture};
-                    $model->setVariable($capture, $oldResult.$result);
-                }
-                else {
+                    $model->setVariable($capture, $oldResult . $result);
+                } else {
                     $model->setVariable($capture, $result);
                 }
             }

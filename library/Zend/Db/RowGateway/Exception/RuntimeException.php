@@ -10,7 +10,8 @@
 
 namespace Zend\Db\RowGateway\Exception;
 
-class RuntimeException extends \RuntimeException implements ExceptionInterface
-{
+use Zend\Db\Exception;
 
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
+{
 }

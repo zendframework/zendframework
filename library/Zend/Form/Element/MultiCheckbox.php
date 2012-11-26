@@ -1,163 +1,168 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
 
-use Traversable;
-use Zend\Form\Element;
-use Zend\Form\Exception;
-use Zend\InputFilter\InputProviderInterface;
+use Zend\Form\ElementInterface;
+use Zend\Form\Exception\InvalidArgumentException;
+use Zend\Validator\Explode as ExplodeValidator;
+use Zend\Validator\InArray as InArrayValidator;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MultiCheckbox extends Element implements InputProviderInterface
+class MultiCheckbox extends Checkbox
 {
+    /**
+     * Seed attributes
+     *
+     * @var array
+     */
+    protected $attributes = array(
+        'type' => 'multi_checkbox',
+    );
+
     /**
      * @var bool
      */
-    protected $useHiddenElement;
+    protected $useHiddenElement = false;
 
     /**
      * @var string
      */
-    protected $uncheckedValue;
+    protected $uncheckedValue = '';
 
     /**
      * @var array
      */
-    protected $labelAttributes;
+    protected $valueOptions = array();
 
     /**
-     * Accepted options for MultiCheckbox:
-     * - use_hidden_element: do we render hidden element?
-     * - unchecked_value: value for checkbox when unchecked
-     * - label_attributes: attributes to use for the label
+     * @return array
+     */
+    public function getValueOptions()
+    {
+        return $this->valueOptions;
+    }
+
+    /**
+     * @param  array $options
+     * @return MultiCheckbox
+     */
+    public function setValueOptions(array $options)
+    {
+        $this->valueOptions = $options;
+
+        // Update Explode validator haystack
+        if ($this->validator instanceof ExplodeValidator) {
+            $validator = $this->validator->getValidator();
+            $validator->setHaystack($this->getValueOptionsValues());
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set options for an element. Accepted options are:
+     * - label: label to associate with the element
+     * - label_attributes: attributes to use when the label is rendered
+     * - value_options: list of values and labels for the select options
      *
      * @param  array|\Traversable $options
-     * @return MultiCheckbox
+     * @return MultiCheckbox|ElementInterface
+     * @throws InvalidArgumentException
      */
     public function setOptions($options)
     {
         parent::setOptions($options);
 
-        if (isset($options['use_hidden_element'])) {
-            $this->setUseHiddenElement($options['use_hidden_element']);
+        if (isset($this->options['value_options'])) {
+            $this->setValueOptions($this->options['value_options']);
         }
-
-        if (isset($options['unchecked_value'])) {
-            $this->setUncheckedValue($options['unchecked_value']);
-        }
-
-        if (isset($options['label_attributes'])) {
-            $this->setLabelAttributes($options['label_attributes']);
+        // Alias for 'value_options'
+        if (isset($this->options['options'])) {
+            $this->setValueOptions($this->options['options']);
         }
 
         return $this;
     }
 
     /**
-     * Do we render hidden element?
+     * Set a single element attribute
      *
-     * @param  bool $useHiddenElement
-     * @return MultiCheckbox
+     * @param  string $key
+     * @param  mixed  $value
+     * @return MultiCheckbox|ElementInterface
      */
-    public function setUseHiddenElement($useHiddenElement)
+    public function setAttribute($key, $value)
     {
-        $this->useHiddenElement = (bool)$useHiddenElement;
-        return $this;
+        // Do not include the options in the list of attributes
+        // TODO: Deprecate this
+        if ($key === 'options') {
+            $this->setValueOptions($value);
+            return $this;
+        }
+        return parent::setAttribute($key, $value);
     }
 
     /**
-     * Do we render hidden element?
+     * Get validator
      *
-     * @return bool
+     * @return ValidatorInterface
      */
-    public function useHiddenElement()
+    protected function getValidator()
     {
-        return $this->useHiddenElement;
+        if (null === $this->validator) {
+            $inArrayValidator = new InArrayValidator(array(
+                'haystack'  => $this->getValueOptionsValues(),
+                'strict'    => false,
+            ));
+            $this->validator = new ExplodeValidator(array(
+                'validator'      => $inArrayValidator,
+                'valueDelimiter' => null, // skip explode if only one value
+            ));
+        }
+        return $this->validator;
     }
 
     /**
-     * Set the value to use when checkbox is unchecked
-     *
-     * @param $uncheckedValue
-     * @return MultiCheckbox
-     */
-    public function setUncheckedValue($uncheckedValue)
-    {
-        $this->uncheckedValue = $uncheckedValue;
-        return $this;
-    }
-
-    /**
-     * Get the value to use when checkbox is unchecked
-     *
-     * @return string
-     */
-    public function getUncheckedValue()
-    {
-        return $this->uncheckedValue;
-    }
-
-    /**
-     * Set the label attributes
-     *
-     * @param  array $labelAttributes
-     * @return MultiCheckbox
-     */
-    public function setLabelAttributes(array $labelAttributes)
-    {
-        $this->labelAttributes = $labelAttributes;
-        return $this;
-    }
-
-    /**
-     * Get the label attributes
+     * Get only the values from the options attribute
      *
      * @return array
      */
-    public function getLabelAttributes()
+    protected function getValueOptionsValues()
     {
-        return $this->labelAttributes;
+        $values = array();
+        $options = $this->getValueOptions();
+        foreach ($options as $key => $optionSpec) {
+            $value = (is_array($optionSpec)) ? $optionSpec['value'] : $key;
+            $values[] = $value;
+        }
+        if ($this->useHiddenElement()) {
+            $values[] = $this->getUncheckedValue();
+        }
+        return $values;
     }
 
     /**
-     * Provide default input rules for this element
+     * Sets the value that should be selected.
      *
-     * Attaches the captcha as a validator.
-     *
-     * @return array
+     * @param mixed $value The value to set.
+     * @return MultiCheckbox
      */
-    public function getInputSpecification()
+    public function setValue($value)
     {
-        $spec = array(
-            'name' => $this->getName(),
-            'required' => true
-        );
-
-        return $spec;
+        $this->value = $value;
+        return $this;
     }
 }

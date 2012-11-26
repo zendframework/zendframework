@@ -80,7 +80,7 @@ class Xml implements ReaderInterface
         );
         $return = $this->process();
         restore_error_handler();
-        
+
         return $return;
     }
 
@@ -98,7 +98,7 @@ class Xml implements ReaderInterface
             return array();
         }
         $this->reader = new XMLReader();
-        
+
         $this->reader->xml($string, null, LIBXML_XINCLUDE);
 
         $this->directory = null;
@@ -113,7 +113,7 @@ class Xml implements ReaderInterface
         );
         $return = $this->process();
         restore_error_handler();
-        
+
         return $return;
     }
 
@@ -175,7 +175,7 @@ class Xml implements ReaderInterface
                 $text .= $this->reader->value;
             }
         }
-        
+
         return $children ?: $text;
     }
 

@@ -10,11 +10,11 @@
 
 namespace Zend\Db\TableGateway;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\ResultSetInterface,
-    Zend\Db\ResultSet\ResultSet,
-    Zend\Db\Sql\Sql,
-    Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\TableIdentifier;
 
 /**
  * @category   Zend
@@ -30,8 +30,9 @@ class TableGateway extends AbstractTableGateway
      * @param string $table
      * @param Adapter $adapter
      * @param Feature\AbstractFeature|Feature\FeatureSet|Feature\AbstractFeature[] $features
-     * @param ResultSetInterface $selectResultPrototype
-     * @param Sql $selectResultPrototype
+     * @param ResultSetInterface $resultSetPrototype
+     * @param Sql $sql
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($table, Adapter $adapter, $features = null, ResultSetInterface $resultSetPrototype = null, Sql $sql = null)
     {

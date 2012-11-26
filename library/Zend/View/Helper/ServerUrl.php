@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -27,8 +16,6 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ServerUrl extends AbstractHelper
 {
@@ -37,19 +24,18 @@ class ServerUrl extends AbstractHelper
      *
      * @var string
      */
-    protected $_scheme;
+    protected $scheme;
 
     /**
      * Host (including port)
      *
      * @var string
      */
-    protected $_host;
+    protected $host;
 
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {
@@ -64,9 +50,16 @@ class ServerUrl extends AbstractHelper
         }
         $this->setScheme($scheme);
 
-        if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
+        if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+            $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+            if (strpos($host, ',') !== false) {
+                $hosts = explode(',', $host);
+                $host = trim(array_pop($hosts));
+            }
+            $this->setHost($host);
+        } elseif (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
             $this->setHost($_SERVER['HTTP_HOST']);
-        } else if (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
+        } elseif (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
             $name = $_SERVER['SERVER_NAME'];
             $port = $_SERVER['SERVER_PORT'];
 
@@ -94,7 +87,7 @@ class ServerUrl extends AbstractHelper
     {
         if ($requestUri === true) {
             $path = $_SERVER['REQUEST_URI'];
-        } else if (is_string($requestUri)) {
+        } elseif (is_string($requestUri)) {
             $path = $requestUri;
         } else {
             $path = '';
@@ -110,7 +103,7 @@ class ServerUrl extends AbstractHelper
      */
     public function getHost()
     {
-        return $this->_host;
+        return $this->host;
     }
 
     /**
@@ -121,7 +114,7 @@ class ServerUrl extends AbstractHelper
      */
     public function setHost($host)
     {
-        $this->_host = $host;
+        $this->host = $host;
         return $this;
     }
 
@@ -132,7 +125,7 @@ class ServerUrl extends AbstractHelper
      */
     public function getScheme()
     {
-        return $this->_scheme;
+        return $this->scheme;
     }
 
     /**
@@ -143,7 +136,7 @@ class ServerUrl extends AbstractHelper
      */
     public function setScheme($scheme)
     {
-        $this->_scheme = $scheme;
+        $this->scheme = $scheme;
         return $this;
     }
 }

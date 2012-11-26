@@ -1,32 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
+
+use Zend\Validator\Exception;
 
 /**
  * Validator for the excluding file extensions
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
 class ExcludeExtension extends Extension
 {
@@ -40,52 +30,56 @@ class ExcludeExtension extends Extension
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::FALSE_EXTENSION => "File '%value%' has a false extension",
-        self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
+        self::FALSE_EXTENSION => "File has an incorrect extension",
+        self::NOT_FOUND       => "File is not readable or does not exist",
     );
 
     /**
      * Returns true if and only if the file extension of $value is not included in the
      * set extension list
      *
-     * @param  string  $value Real file to check for extension
-     * @param  array   $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for extension
      * @return boolean
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        if ($file === null) {
-            $file = array('name' => basename($value));
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->throwError($file, self::NOT_FOUND);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(self::NOT_FOUND);
+            return false;
         }
 
-        if ($file !== null) {
-            $info['extension'] = substr($file['name'], strrpos($file['name'], '.') + 1);
-        } else {
-            $info = pathinfo($value);
-        }
-
+        $extension  = substr($filename, strrpos($filename, '.') + 1);
         $extensions = $this->getExtension();
 
-        if ($this->getCase() and (!in_array($info['extension'], $extensions))) {
+        if ($this->getCase() && (!in_array($extension, $extensions))) {
             return true;
         } elseif (!$this->getCase()) {
-            $found = false;
-            foreach ($extensions as $extension) {
-                if (strtolower($extension) == strtolower($info['extension'])) {
-                    $found = true;
+            foreach ($extensions as $ext) {
+                if (strtolower($ext) == strtolower($extension)) {
+                    $this->error(self::FALSE_EXTENSION);
+                    return false;
                 }
             }
 
-            if (!$found) {
-                return true;
-            }
+            return true;
         }
 
-        return $this->throwError($file, self::FALSE_EXTENSION);
+        $this->error(self::FALSE_EXTENSION);
+        return false;
     }
 }

@@ -56,7 +56,7 @@ class Filter implements ProcessorInterface
 
     /**
      * Process
-     * 
+     *
      * @param  Config $config
      * @return Config
      * @throws Exception\InvalidArgumentException

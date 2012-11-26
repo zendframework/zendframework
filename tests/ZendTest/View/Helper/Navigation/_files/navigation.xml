@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<navigation_test>
+    <nav_test1>
+
+        <zym>
+            <label>Zym</label>
+            <uri>http://www.zym-project.com/</uri>
+            <order>100</order>
+        </zym>
+
+        <page1>
+            <label>Page 1</label>
+            <uri>page1</uri>
+            <pages>
+
+                <page1_1>
+                    <label>Page 1.1</label>
+                    <uri>page1/page1_1</uri>
+                </page1_1>
+
+            </pages>
+        </page1>
+
+        <page2>
+            <label>Page 2</label>
+            <uri>page2</uri>
+            <pages>
+
+                <page2_1>
+                    <label>Page 2.1</label>
+                    <uri>page2/page2_1</uri>
+                </page2_1>
+
+                <page2_2>
+                    <label>Page 2.2</label>
+                    <uri>page2/page2_2</uri>
+                    <pages>
+
+                        <page2_2_1>
+                            <label>Page 2.2.1</label>
+                            <uri>page2/page2_2/page2_2_1</uri>
+                        </page2_2_1>
+
+                        <page2_2_2>
+                            <label>Page 2.2.2</label>
+                            <uri>page2/page2_2/page2_2_2</uri>
+                            <active>1</active>
+                        </page2_2_2>
+
+                    </pages>
+                </page2_2>
+
+                <page2_3>
+                    <label>Page 2.3</label>
+                    <uri>page2/page2_3</uri>
+                    <pages>
+
+                        <page2_3_1>
+                            <label>Page 2.3.1</label>
+                            <uri>page2/page2_3/page2_3_1</uri>
+                        </page2_3_1>
+
+                        <page2_3_2>
+                            <label>Page 2.3.2</label>
+                            <uri>page2/page2_3/page2_3_2</uri>
+                            <visible>0</visible>
+                            <pages>
+
+                                    <page2_3_2_1>
+                                        <label>Page 2.3.2.1</label>
+                                        <uri>page2/page2_3/page2_3_2/1</uri>
+                                        <active>1</active>
+                                    </page2_3_2_1>
+
+                                    <page2_3_2_2>
+                                        <label>Page 2.3.2.2</label>
+                                        <uri>page2/page2_3/page2_3_2/2</uri>
+                                        <active>1</active>
+
+                                        <pages>
+                                            <page_2_3_2_2_1>
+                                                <label>Ignore</label>
+                                                <uri>#</uri>
+                                                <active>1</active>
+                                            </page_2_3_2_2_1>
+                                        </pages>
+                                    </page2_3_2_2>
+
+                            </pages>
+                        </page2_3_2>
+
+                        <page2_3_3>
+                            <label>Page 2.3.3</label>
+                            <uri>page2/page2_3/page2_3_3</uri>
+                            <resource>admin_foo</resource>
+                            <pages>
+
+                                    <page2_3_3_1>
+                                        <label>Page 2.3.3.1</label>
+                                        <uri>page2/page2_3/page2_3_3/1</uri>
+                                        <active>1</active>
+                                    </page2_3_3_1>
+
+                                    <page2_3_3_2>
+                                        <label>Page 2.3.3.2</label>
+                                        <uri>page2/page2_3/page2_3_3/2</uri>
+                                        <resource>guest_foo</resource>
+                                        <active>1</active>
+                                    </page2_3_3_2>
+
+                            </pages>
+                        </page2_3_3>
+
+                    </pages>
+                </page2_3>
+
+            </pages>
+        </page2>
+
+        <page3>
+            <label>Page 3</label>
+            <uri>page3</uri>
+            <pages>
+
+                <page3_1>
+                    <label>Page 3.1</label>
+                    <uri>page3/page3_1</uri>
+                    <resource>guest_foo</resource>
+                </page3_1>
+
+                <page3_2>
+                    <label>Page 3.2</label>
+                    <uri>page3/page3_2</uri>
+                    <resource>member_foo</resource>
+                    <pages>
+
+                        <page3_2_1>
+                            <label>Page 3.2.1</label>
+                            <uri>page3/page3_2/page3_2_1</uri>
+                        </page3_2_1>
+
+                        <page3_2_2>
+                            <label>Page 3.2.2</label>
+                            <uri>page3/page3_2/page3_2_2</uri>
+                            <resource>admin_foo</resource>
+                            <privilege>read</privilege>
+                        </page3_2_2>
+
+                    </pages>
+                </page3_2>
+
+                <page3_3>
+                    <label>Page 3.3</label>
+                    <uri>page3/page3_3</uri>
+                    <resource>special_foo</resource>
+                    <pages>
+
+                        <page3_3_1>
+                            <label>Page 3.3.1</label>
+                            <uri>page3/page3_3/page3_3_1</uri>
+                            <visible>0</visible>
+                        </page3_3_1>
+
+                        <page3_3_2>
+                            <label>Page 3.3.2</label>
+                            <uri>page3/page3_3/page3_3_2</uri>
+                            <resource>admin_foo</resource>
+                        </page3_3_2>
+
+                    </pages>
+                </page3_3>
+
+            </pages>
+        </page3>
+
+        <home>
+            <label>Home</label>
+            <uri>index</uri>
+            <title>Go home</title>
+            <order>-100</order>
+        </home>
+
+    </nav_test1>
+
+
+
+    <nav_test2>
+
+        <site1>
+            <label>Site 1</label>
+            <uri>site1</uri>
+            <changefreq>daily</changefreq>
+            <priority>0.9</priority>
+        </site1>
+
+        <site2>
+            <label>Site 2</label>
+            <uri>site2</uri>
+            <active>1</active>
+            <lastmod>earlier</lastmod>
+        </site2>
+
+        <site3>
+            <label>Site 3</label>
+            <uri>site3</uri>
+            <changefreq>often</changefreq>
+        </site3>
+
+    </nav_test2>
+
+</navigation_test>

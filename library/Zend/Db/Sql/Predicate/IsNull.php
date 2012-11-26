@@ -30,9 +30,8 @@ class IsNull implements PredicateInterface
 
     /**
      * Constructor
-     * 
-     * @param  string $identifier 
-     * @return void
+     *
+     * @param  string $identifier
      */
     public function __construct($identifier = null)
     {
@@ -43,8 +42,8 @@ class IsNull implements PredicateInterface
 
     /**
      * Set identifier for comparison
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @return IsNull
      */
     public function setIdentifier($identifier)
@@ -55,7 +54,7 @@ class IsNull implements PredicateInterface
 
     /**
      * Get identifier of comparison
-     * 
+     *
      * @return null|string
      */
     public function getIdentifier()
@@ -65,8 +64,8 @@ class IsNull implements PredicateInterface
 
     /**
      * Set specification string to use in forming SQL predicate
-     * 
-     * @param  string $specification 
+     *
+     * @param  string $specification
      * @return IsNull
      */
     public function setSpecification($specification)
@@ -77,7 +76,7 @@ class IsNull implements PredicateInterface
 
     /**
      * Get specification string to use in forming SQL predicate
-     * 
+     *
      * @return string
      */
     public function getSpecification()

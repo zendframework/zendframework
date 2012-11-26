@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-paginator",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Paginator": ""
+            "Zend\\Paginator\\": ""
         }
     },
+    "target-dir": "Zend/Paginator",
     "require": {
         "php": ">=5.3.3"
     }

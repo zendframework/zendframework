@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server\Reflection;
@@ -27,8 +16,6 @@ namespace Zend\Server\Reflection;
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Node
 {
@@ -36,19 +23,19 @@ class Node
      * Node value
      * @var mixed
      */
-    protected $_value = null;
+    protected $value = null;
 
     /**
      * Array of child nodes (if any)
      * @var array
      */
-    protected $_children = array();
+    protected $children = array();
 
     /**
      * Parent node (if any)
      * @var \Zend\Server\Reflection\Node
      */
-    protected $_parent = null;
+    protected $parent = null;
 
     /**
      * Constructor
@@ -59,7 +46,7 @@ class Node
      */
     public function __construct($value, Node $parent = null)
     {
-        $this->_value = $value;
+        $this->value = $value;
         if (null !== $parent) {
             $this->setParent($parent, true);
         }
@@ -77,7 +64,7 @@ class Node
      */
     public function setParent(Node $node, $new = false)
     {
-        $this->_parent = $node;
+        $this->parent = $node;
 
         if ($new) {
             $node->attachChild($this);
@@ -107,7 +94,7 @@ class Node
      */
     public function attachChild(Node $node)
     {
-        $this->_children[] = $node;
+        $this->children[] = $node;
 
         if ($node->getParent() !== $this) {
             $node->setParent($this);
@@ -121,7 +108,7 @@ class Node
      */
     public function getChildren()
     {
-        return $this->_children;
+        return $this->children;
     }
 
     /**
@@ -131,7 +118,7 @@ class Node
      */
     public function hasChildren()
     {
-        return count($this->_children) > 0;
+        return count($this->children) > 0;
     }
 
     /**
@@ -141,7 +128,7 @@ class Node
      */
     public function getParent()
     {
-        return $this->_parent;
+        return $this->parent;
     }
 
     /**
@@ -151,7 +138,7 @@ class Node
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -162,7 +149,7 @@ class Node
      */
     public function setValue($value)
     {
-        $this->_value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -181,7 +168,7 @@ class Node
             return $endPoints;
         }
 
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             $value = $child->getValue();
 
             if (null === $value) {

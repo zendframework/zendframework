@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_I18n
  */
 
 namespace Zend\I18n\View\Helper;
@@ -24,8 +13,8 @@ namespace Zend\I18n\View\Helper;
 use DateTime;
 use IntlDateFormatter;
 use Locale;
-use Zend\View\Helper\AbstractHelper;
 use Zend\I18n\Exception;
+use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for formatting dates.
@@ -33,8 +22,6 @@ use Zend\I18n\Exception;
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DateFormat extends AbstractHelper
 {
@@ -82,6 +69,10 @@ class DateFormat extends AbstractHelper
      */
     public function getTimezone()
     {
+        if (!$this->timezone) {
+            return date_default_timezone_get();
+        }
+
         return $this->timezone;
     }
 
@@ -114,32 +105,35 @@ class DateFormat extends AbstractHelper
     /**
      * Format a date.
      *
-     * @param  DateTime|integer|array $date
-     * @param  integer                $dateType
-     * @param  integer                $timeType
-     * @param  string                 $locale
+     * @param  DateTime|integer|array  $date
+     * @param  int                     $dateType
+     * @param  int                     $timeType
+     * @param  string                  $locale
+     * @param  string|null             $pattern
      * @return string
-     * @throws Exception\RuntimeException
      */
     public function __invoke(
         $date,
         $dateType = IntlDateFormatter::NONE,
         $timeType = IntlDateFormatter::NONE,
-        $locale   = null
+        $locale   = null,
+        $pattern  = null
     ) {
         if ($locale === null) {
             $locale = $this->getlocale();
         }
 
         $timezone    = $this->getTimezone();
-        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale);
+        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale ."\0" . $pattern);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new IntlDateFormatter(
                 $locale,
                 $dateType,
                 $timeType,
-                $timezone
+                $timezone,
+                IntlDateFormatter::GREGORIAN,
+                $pattern
             );
         }
 

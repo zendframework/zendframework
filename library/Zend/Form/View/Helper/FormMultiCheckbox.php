@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
 
-use Traversable;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormMultiCheckbox extends FormInput
 {
@@ -75,7 +62,8 @@ class FormMultiCheckbox extends FormInput
     /**
      * Set value for labelPosition
      *
-     * @param  mixed labelPosition
+     * @param  mixed $labelPosition
+     * @throws Exception\InvalidArgumentException
      * @return $this
      */
     public function setLabelPosition($labelPosition)
@@ -199,40 +187,33 @@ class FormMultiCheckbox extends FormInput
      * Render a form <input> element from the provided $element
      *
      * @param  ElementInterface $element
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
     {
+        if (!$element instanceof MultiCheckboxElement) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that the element is of type Zend\Form\Element\MultiCheckbox',
+                __METHOD__
+            ));
+        }
+
         $name = static::getName($element);
-        if ($name === null || $name === '') {
+
+        $options = $element->getValueOptions();
+        if (empty($options)) {
             throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an assigned name; none discovered',
+                '%s requires that the element has "value_options"; none found',
                 __METHOD__
             ));
         }
 
-        $attributes = $element->getAttributes();
-
-        if (!isset($attributes['options'])
-            || (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable)
-        ) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an array or Traversable "options" attribute; none found',
-                __METHOD__
-            ));
-        }
-
-        $options = $attributes['options'];
-        unset($attributes['options']);
-
+        $attributes         = $element->getAttributes();
         $attributes['name'] = $name;
         $attributes['type'] = $this->getInputType();
-
-        $selectedOptions = array();
-        if (isset($attributes['value'])) {
-            $selectedOptions = (array) $attributes['value'];
-            unset($attributes['value']);
-        }
+        $selectedOptions    = (array) $element->getValue();
 
         $rendered = $this->renderOptions($element, $options, $selectedOptions, $attributes);
 
@@ -251,13 +232,13 @@ class FormMultiCheckbox extends FormInput
     /**
      * Render options
      *
-     * @param ElementInterface $element
-     * @param array            $options
-     * @param array            $selectedOptions
-     * @param array            $attributes
+     * @param MultiCheckboxElement $element
+     * @param array                $options
+     * @param array                $selectedOptions
+     * @param array                $attributes
      * @return string
      */
-    protected function renderOptions(ElementInterface $element, array $options, array $selectedOptions,
+    protected function renderOptions(MultiCheckboxElement $element, array $options, array $selectedOptions,
                                      array $attributes)
     {
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
@@ -281,14 +262,17 @@ class FormMultiCheckbox extends FormInput
             }
 
             $value           = '';
-            $label           = $key;
+            $label           = '';
             $selected        = false;
             $disabled        = false;
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
 
-            if (is_string($optionSpec) || is_numeric($optionSpec) || is_bool($optionSpec)) {
-                $optionSpec = array('value' => (string) $optionSpec);
+            if (is_scalar($optionSpec)) {
+                $optionSpec = array(
+                    'label' => $optionSpec,
+                    'value' => $key
+                );
             }
 
             if (isset($optionSpec['value'])) {
@@ -312,7 +296,7 @@ class FormMultiCheckbox extends FormInput
                 $inputAttributes = array_merge($inputAttributes, $optionSpec['attributes']);
             }
 
-            if (in_array($value, $selectedOptions, true)) {
+            if (in_array($value, $selectedOptions)) {
                 $selected = true;
             }
 
@@ -325,6 +309,12 @@ class FormMultiCheckbox extends FormInput
                 $this->createAttributesString($inputAttributes),
                 $closingBracket
             );
+
+            if (null !== ($translator = $this->getTranslator())) {
+                $label = $translator->translate(
+                    $label, $this->getTranslatorTextDomain()
+                );
+            }
 
             $label     = $escapeHtmlHelper($label);
             $labelOpen = $labelHelper->openTag($labelAttributes);
@@ -348,11 +338,11 @@ class FormMultiCheckbox extends FormInput
     /**
      * Render a hidden element for empty/unchecked value
      *
-     * @param  ElementInterface $element
-     * @param  array $attributes
+     * @param  MultiCheckboxElement $element
+     * @param  array                $attributes
      * @return string
      */
-    protected function renderHiddenElement(ElementInterface $element, array $attributes)
+    protected function renderHiddenElement(MultiCheckboxElement $element, array $attributes)
     {
         $closingBracket = $this->getInlineClosingBracket();
 
@@ -452,10 +442,18 @@ class FormMultiCheckbox extends FormInput
      * Get element name
      *
      * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     protected static function getName(ElementInterface $element)
     {
-        return $element->getName() . '[]';
+        $name = $element->getName();
+        if ($name === null || $name === '') {
+            throw new Exception\DomainException(sprintf(
+                '%s requires that the element has an assigned name; none discovered',
+                __METHOD__
+            ));
+        }
+        return $name . '[]';
     }
 }

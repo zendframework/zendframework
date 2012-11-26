@@ -43,18 +43,17 @@ class Pgsql implements DriverInterface
     );
 
     /**
+     * Constructor
+     *
      * @param array|Connection|resource $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
+     * @param array $options
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = null)
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
-        }
-
-        if (!$connection instanceof Connection) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
         }
 
         $this->registerConnection($connection);
@@ -63,6 +62,8 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Register connection
+     *
      * @param Connection $connection
      * @return Pgsql
      */
@@ -74,6 +75,8 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Register statement prototype
+     *
      * @param Statement $statement
      * @return Pgsql
      */
@@ -85,6 +88,8 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Register result prototype
+     *
      * @param Result $result
      * @return Pgsql
      */
@@ -95,6 +100,8 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Get database platform name
+     *
      * @param string $nameFormat
      * @return string
      */
@@ -108,16 +115,21 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Check environment
+     *
+     * @throws Exception\RuntimeException
      * @return bool
      */
     public function checkEnvironment()
     {
-        if (!extension_loaded('mysqli')) {
-            throw new Exception\RuntimeException('The Mysqli extension is required for this adapter but the extension is not loaded');
+        if (!extension_loaded('pgsql')) {
+            throw new Exception\RuntimeException('The PostgreSQL (pgsql) extension is required for this adapter but the extension is not loaded');
         }
     }
 
     /**
+     * Get connection
+     *
      * @return Connection
      */
     public function getConnection()
@@ -126,7 +138,10 @@ class Pgsql implements DriverInterface
     }
 
     /**
-     * @return StatementInterface
+     * Create statement
+     *
+     * @param string|null $sqlOrResource
+     * @return Statement
      */
     public function createStatement($sqlOrResource = null)
     {
@@ -151,7 +166,10 @@ class Pgsql implements DriverInterface
     }
 
     /**
-     * @return ResultInterface
+     * Create result
+     *
+     * @param resource $resource
+     * @return Result
      */
     public function createResult($resource)
     {
@@ -161,6 +179,8 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Get prepare Type
+     *
      * @return array
      */
     public function getPrepareType()
@@ -169,7 +189,10 @@ class Pgsql implements DriverInterface
     }
 
     /**
-     * @param $name
+     * Format parameter name
+     *
+     * @param string $name
+     * @param mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)
@@ -178,6 +201,8 @@ class Pgsql implements DriverInterface
     }
 
     /**
+     * Get last generated value
+     *
      * @return mixed
      */
     public function getLastGeneratedValue()

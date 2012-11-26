@@ -1,30 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Db;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Adapter\Driver\DriverInterface as DbDriverInterface;
 use Zend\Db\Sql\Select as DbSelect;
+use Zend\Db\Sql\TableIdentifier;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
@@ -32,9 +23,7 @@ use Zend\Validator\Exception;
  * Class for Database record validation
  *
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 abstract class AbstractDb extends AbstractValidator
 {
@@ -105,7 +94,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        parent::__construct();
+        parent::__construct($options);
 
         if ($options instanceof DbSelect) {
             $this->setSelect($options);
@@ -295,43 +284,46 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getSelect()
     {
-        if (null === $this->select) {
-            $adapter  = $this->getAdapter();
-            $driver   = $adapter->getDriver();
-            $platform = $adapter->getPlatform();
+        if ($this->select instanceof DbSelect) {
+            return $this->select;
+        }
 
-            /**
-             * Build select object
-             */
-            $select = new DbSelect();
-            $select->from($this->table, $this->schema)->columns(
-                array($this->field)
+        $adapter  = $this->getAdapter();
+        $driver   = $adapter->getDriver();
+        $platform = $adapter->getPlatform();
+
+        /*
+         * Build select object
+         */
+        $select          = new DbSelect();
+        $tableIdentifier = new TableIdentifier($this->table, $this->schema);
+        $select->from($tableIdentifier)->columns(
+            array($this->field)
+        );
+
+        // Support both named and positional parameters
+        if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
+            $select->where(
+                $platform->quoteIdentifier($this->field, true) . ' = :value'
             );
+        } else {
+            $select->where(
+                $platform->quoteIdentifier($this->field, true) . ' = ?'
+            );
+        }
 
-            // Support both named and positional parameters
-            if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
-                $select->where(
-                    $platform->quoteIdentifier($this->field, true) . ' = :value'
+        if ($this->exclude !== null) {
+            if (is_array($this->exclude)) {
+                $select->where->notEqualTo(
+                    $this->exclude['field'],
+                    $this->exclude['value']
                 );
             } else {
-                $select->where(
-                    $platform->quoteIdentifier($this->field, true) . ' = ?'
-                );
+                $select->where($this->exclude);
             }
-
-            if ($this->exclude !== null) {
-                if (is_array($this->exclude)) {
-                    $select->where(
-                        $platform->quoteIdentifier($this->exclude['field'], true) .
-                        ' != ?', $this->exclude['value']
-                    );
-                } else {
-                    $select->where($this->exclude);
-                }
-            }
-
-            $this->select = $select;
         }
+
+        $this->select = $select;
 
         return $this->select;
     }

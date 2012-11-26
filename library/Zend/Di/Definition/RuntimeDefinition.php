@@ -1,12 +1,25 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition\Annotation;
 use Zend\Code\Annotation\AnnotationCollection;
-use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Reflection;
+use Zend\Di\Definition\Annotation;
 
+/**
+ * Class definitions based on runtime reflection
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class RuntimeDefinition implements DefinitionInterface
 {
 
@@ -34,7 +47,7 @@ class RuntimeDefinition implements DefinitionInterface
      * Constructor
      *
      * @param null|IntrospectionStrategy $introspectionStrategy
-     * @param array|null $explicitClasses
+     * @param array|null                 $explicitClasses
      */
     public function __construct(IntrospectionStrategy $introspectionStrategy = null, array $explicitClasses = null)
     {
@@ -45,7 +58,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * @param IntrospectionStrategy $introspectionStrategy
+     * @param  IntrospectionStrategy $introspectionStrategy
      * @return void
      */
     public function setIntrospectionStrategy(IntrospectionStrategy $introspectionStrategy)
@@ -75,15 +88,16 @@ class RuntimeDefinition implements DefinitionInterface
         $this->classes = $explicitClasses;
     }
 
+    /**
+     * @param string $class
+     */
     public function forceLoadClass($class)
     {
         $this->processClass($class);
     }
 
     /**
-     * Retrieves registered classes names
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -91,10 +105,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return whether the class exists
-     *
-     * @param string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -106,111 +117,92 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return the supertypes for this class
-     *
-     * @param string $class
-     * @return array of types
+     * {@inheritDoc}
      */
     public function getClassSupertypes($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['supertypes'];
     }
 
     /**
-     * Get the instantiator
-     *
-     * @param string $class
-     * @return string|callable
+     * {@inheritDoc}
      */
     public function getInstantiator($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['instantiator'];
     }
 
     /**
-     * Return if there are injection methods
-     *
-     * @param string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethods($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return (count($this->classes[$class]['methods']) > 0);
     }
 
     /**
-     * Return injection methods
-     *
-     * @param string $class
-     * @param string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethod($class, $method)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return isset($this->classes[$class]['methods'][$method]);
     }
 
     /**
-     * Return an array of the injection methods
-     *
-     * @param string $class
-     * @return array
+     * {@inheritDoc}
      */
     public function getMethods($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['methods'];
     }
 
     /**
-     * Check if method has parameters
-     *
-     * @param string $class
-     * @param string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethodParameters($class, $method)
     {
         if (!isset($this->classes[$class])) {
             return false;
         }
+
         return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
     /**
-     * Return the parameters for a method
-     *
-     * 3 item array:
-     *     #1 - Class name, string if it exists, else null
-     *     #2 - Optional?, boolean
-     *     #3 - Instantiable, boolean if class exists, otherwise null
-     *
-     * @param string $class
-     * @param string $method
-     * @return array
+     * {@inheritDoc}
      */
     public function getMethodParameters($class, $method)
     {
         if (!is_array($this->classes[$class])) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['parameters'][$method];
     }
 
+    /**
+     * @param string $class
+     */
     protected function processClass($class)
     {
         $strategy = $this->introspectionStrategy; // localize for readability
@@ -236,7 +228,7 @@ class RuntimeDefinition implements DefinitionInterface
 
             if (($annotations instanceof AnnotationCollection)
                 && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
-                // @todo Instnatiator support in annotations
+                // @todo Instantiator support in annotations
             }
         }
 
@@ -264,12 +256,11 @@ class RuntimeDefinition implements DefinitionInterface
             $this->processParams($def, $rClass, $rClass->getMethod('__construct'));
         }
 
-
         foreach ($rClass->getMethods(Reflection\MethodReflection::IS_PUBLIC) as $rMethod) {
 
             $methodName = $rMethod->getName();
 
-            if ($rMethod->getName() === '__construct') {
+            if ($rMethod->getName() === '__construct' || $rMethod->isStatic()) {
                 continue;
             }
 
@@ -297,7 +288,6 @@ class RuntimeDefinition implements DefinitionInterface
                 }
             }
 
-
             // method
             // by annotation
             // by setter pattern,
@@ -314,7 +304,8 @@ class RuntimeDefinition implements DefinitionInterface
                 preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
                 if ($matches) {
                     foreach ($rIface->getMethods() as $rMethod) {
-                        if ($rMethod->getName() === '__construct') { // ctor not allowed in ifaces
+                        if ($rMethod->getName() === '__construct') {
+                            // constructor not allowed in interfaces
                             continue;
                         }
                         $def['methods'][$rMethod->getName()] = true;
@@ -326,6 +317,11 @@ class RuntimeDefinition implements DefinitionInterface
         }
     }
 
+    /**
+     * @param array                                  $def
+     * @param \Zend\Code\Reflection\ClassReflection  $rClass
+     * @param \Zend\Code\Reflection\MethodReflection $rMethod
+     */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
     {
         if (count($rMethod->getParameters()) === 0) {
@@ -350,7 +346,8 @@ class RuntimeDefinition implements DefinitionInterface
             // set the class name, if it exists
             $def['parameters'][$methodName][$fqName][] = $actualParamName;
             $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass()->getName() : null;
-            $def['parameters'][$methodName][$fqName][] = !$p->isOptional();
+            $def['parameters'][$methodName][$fqName][] = !($optional =$p->isOptional());
+            $def['parameters'][$methodName][$fqName][] = $optional ? $p->getDefaultValue() : null;
         }
 
     }

@@ -15,8 +15,6 @@ namespace Zend\Uri;
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Http extends Uri
 {
@@ -174,10 +172,27 @@ class Http extends Uri
     public function getPort()
     {
         if (empty($this->port)) {
-            if (array_key_exists($this->scheme, self::$defaultPorts)) {
-                return self::$defaultPorts[$this->scheme];
+            if (array_key_exists($this->scheme, static::$defaultPorts)) {
+                return static::$defaultPorts[$this->scheme];
             }
         }
         return $this->port;
+    }
+
+    /**
+     * Parse a URI string
+     *
+     * @param  string $uri
+     * @return Http
+     */
+    public function parse($uri)
+    {
+        parent::parse($uri);
+
+        if (empty($this->path)) {
+            $this->path = '/';
+        }
+
+        return $this;
     }
 }

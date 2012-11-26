@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
@@ -32,11 +21,9 @@ use Zend\Math\BigInteger;
  * function acts likes a factory for the Zend\XmlRpc\Value objects
  *
  * Using this function, users/Zend\XmlRpc\Client object can create the Zend\XmlRpc\Value objects
- * from PHP variables, XML string or by specifing the exact XML-RPC natvie type
+ * from PHP variables, XML string or by specifying the exact XML-RPC natvie type
  *
  * @package    Zend_XmlRpc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractValue
 {
@@ -46,23 +33,23 @@ abstract class AbstractValue
      * If the native type of this object is array or struct, this will be an array
      * of Value objects
      */
-    protected $_value;
+    protected $value;
 
     /**
      * The native XML-RPC type of this object
      * One of the XMLRPC_TYPE_* constants
      */
-    protected $_type;
+    protected $type;
 
     /**
      * XML code representation of this object (will be calculated only once)
      */
-    protected $_xml;
+    protected $xml;
 
     /**
-     * @var Zend\XmlRpc\Generator\GeneratorAbstract
+     * @var \Zend\XmlRpc\Generator\GeneratorInterface
      */
-    protected static $_generator;
+    protected static $generator;
 
     /**
      * Specify that the XML-RPC native type will be auto detected from a PHP variable type
@@ -98,7 +85,7 @@ abstract class AbstractValue
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -108,15 +95,15 @@ abstract class AbstractValue
      */
     public static function getGenerator()
     {
-        if (!self::$_generator) {
+        if (!static::$generator) {
             if (extension_loaded('xmlwriter')) {
-                self::$_generator = new Generator\XmlWriter();
+                static::$generator = new Generator\XmlWriter();
             } else {
-                self::$_generator = new Generator\DomDocument();
+                static::$generator = new Generator\DomDocument();
             }
         }
 
-        return self::$_generator;
+        return static::$generator;
     }
 
     /**
@@ -127,7 +114,7 @@ abstract class AbstractValue
      */
     public static function setGenerator(Generator\GeneratorInterface $generator = null)
     {
-        self::$_generator = $generator;
+        static::$generator = $generator;
     }
 
     /**
@@ -138,9 +125,9 @@ abstract class AbstractValue
      */
     public static function setEncoding($encoding)
     {
-        $generator    = self::getGenerator();
+        $generator    = static::getGenerator();
         $newGenerator = new $generator($encoding);
-        self::setGenerator($newGenerator);
+        static::setGenerator($newGenerator);
     }
 
     /**
@@ -158,11 +145,11 @@ abstract class AbstractValue
      */
     public function saveXml()
     {
-        if (!$this->_xml) {
+        if (!$this->xml) {
             $this->generateXml();
-            $this->_xml = (string) $this->getGenerator();
+            $this->xml = (string) $this->getGenerator();
         }
-        return $this->_xml;
+        return $this->xml;
     }
 
     /**
@@ -180,13 +167,14 @@ abstract class AbstractValue
      * A XmlRpcValue object can be created in 3 ways:
      * 1. Autodetecting the native type out of a PHP variable
      *    (if $type is not set or equal to Value::AUTO_DETECT_TYPE)
-     * 2. By specifing the native type ($type is one of the Value::XMLRPC_TYPE_* constants)
+     * 2. By specifying the native type ($type is one of the Value::XMLRPC_TYPE_* constants)
      * 3. From a XML string ($type is set to Value::XML_STRING)
      *
      * By default the value type is autodetected according to it's PHP type
      *
      * @param  mixed $value
      * @param  Zend\XmlRpc\Value::constant $type
+     * @throws Exception\ValueException
      * @return AbstractValue
      */
     public static function getXmlRpcValue($value, $type = self::AUTO_DETECT_TYPE)
@@ -194,11 +182,11 @@ abstract class AbstractValue
         switch ($type) {
             case self::AUTO_DETECT_TYPE:
                 // Auto detect the XML-RPC native type from the PHP type of $value
-                return self::_phpVarToNativeXmlRpc($value);
+                return static::_phpVarToNativeXmlRpc($value);
 
             case self::XML_STRING:
                 // Parse the XML string given in $value and get the XML-RPC value in it
-                return self::_xmlStringToNativeXmlRpc($value);
+                return static::_xmlStringToNativeXmlRpc($value);
 
             case self::XMLRPC_TYPE_I4:
                 // fall through to the next case
@@ -246,6 +234,7 @@ abstract class AbstractValue
      *
      * @static
      * @param mixed $value
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function getXmlRpcTypeByValue($value)
@@ -256,7 +245,7 @@ abstract class AbstractValue
             } elseif ($value instanceof DateTime) {
                 return self::XMLRPC_TYPE_DATETIME;
             }
-            return self::getXmlRpcTypeByValue(get_object_vars($value));
+            return static::getXmlRpcTypeByValue(get_object_vars($value));
         } elseif (is_array($value)) {
             if (!empty($value) && is_array($value) && (array_keys($value) !== range(0, count($value) - 1))) {
                 return self::XMLRPC_TYPE_STRUCT;
@@ -282,8 +271,9 @@ abstract class AbstractValue
     /**
      * Transform a PHP native variable into a XML-RPC native value
      *
-     * @param mixed $value The PHP variable for convertion
+     * @param mixed $value The PHP variable for conversion
      *
+     * @throws Exception\InvalidArgumentException
      * @return AbstractValue
      * @static
      */
@@ -303,8 +293,7 @@ abstract class AbstractValue
             }
         }
 
-        switch (self::getXmlRpcTypeByValue($value))
-        {
+        switch (static::getXmlRpcTypeByValue($value)) {
             case self::XMLRPC_TYPE_DATETIME:
                 return new Value\DateTime($value);
 
@@ -337,17 +326,18 @@ abstract class AbstractValue
     /**
      * Transform an XML string into a XML-RPC native value
      *
-     * @param string|SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
-     * It can be also a valid XML string for convertion
+     * @param string|\SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
+     * It can be also a valid XML string for conversion
      *
-     * @return Zend\XmlRpc\Value\AbstractValue
+     * @throws Exception\ValueException
+     * @return \Zend\XmlRpc\AbstractValue
      * @static
      */
     protected static function _xmlStringToNativeXmlRpc($xml)
     {
-        self::_createSimpleXMLElement($xml);
+        static::_createSimpleXMLElement($xml);
 
-        self::_extractTypeAndValue($xml, $type, $value);
+        static::_extractTypeAndValue($xml, $type, $value);
 
         switch ($type) {
             // All valid and known XML-RPC native values
@@ -400,13 +390,13 @@ abstract class AbstractValue
                 // Parse all the elements of the array from the XML string
                 // (simple xml element) to Value objects
                 foreach ($data->value as $element) {
-                    $values[] = self::_xmlStringToNativeXmlRpc($element);
+                    $values[] = static::_xmlStringToNativeXmlRpc($element);
                 }
                 $xmlrpcValue = new Value\ArrayValue($values);
                 break;
             case self::XMLRPC_TYPE_STRUCT:
                 $values = array();
-                // Parse all the memebers of the struct from the XML string
+                // Parse all the members of the struct from the XML string
                 // (simple xml element) to Value objects
                 foreach ($value->member as $member) {
                     // @todo? If a member doesn't have a <value> tag, we don't add it to the struct
@@ -415,7 +405,7 @@ abstract class AbstractValue
                         continue;
                         //throw new Value_Exception('Member of the '. self::XMLRPC_TYPE_STRUCT .' XML-RPC native type must contain a VALUE tag');
                     }
-                    $values[(string)$member->name] = self::_xmlStringToNativeXmlRpc($member->value);
+                    $values[(string)$member->name] = static::_xmlStringToNativeXmlRpc($member->value);
                 }
                 $xmlrpcValue = new Value\Struct($values);
                 break;
@@ -445,7 +435,7 @@ abstract class AbstractValue
     /**
      * Extract XML/RPC type and value from SimpleXMLElement object
      *
-     * @param SimpleXMLElement $xml
+     * @param \SimpleXMLElement $xml
      * @param string &$type Type bind variable
      * @param string &$value Value bind variable
      * @return void
@@ -477,6 +467,6 @@ abstract class AbstractValue
      */
     protected function _setXML($xml)
     {
-        $this->_xml = $this->getGenerator()->stripDeclaration($xml);
+        $this->xml = $this->getGenerator()->stripDeclaration($xml);
     }
 }

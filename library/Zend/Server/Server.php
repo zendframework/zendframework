@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server;
@@ -25,8 +15,6 @@ namespace Zend\Server;
  *
  * @category   Zend
  * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Server
 {
@@ -38,7 +26,7 @@ interface Server
      *
      * @param  string $function
      * @param  string $namespace
-     * @param  null|array Optional array of arguments to pass to callbacks at
+     * @param  null|array Optional array of arguments to pass to callback at
      *                    dispatch.
      * @return void
      */
@@ -77,7 +65,7 @@ interface Server
     /**
      * Handle a request
      *
-     * Requests may be passed in, or the server may automagically determine the
+     * Requests may be passed in, or the server may automatically determine the
      * request based on defaults. Dispatches server request to appropriate
      * method and returns a response
      *
@@ -102,7 +90,7 @@ interface Server
      *
      * Used for persistence; loads a construct as returned by {@link getFunctions()}.
      *
-     * @param  array $array
+     * @param  array $definition
      * @return void
      */
     public function loadFunctions($definition);

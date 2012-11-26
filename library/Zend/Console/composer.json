@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-console",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Console": ""
+            "Zend\\Console\\": ""
         }
     },
+    "target-dir": "Zend/Console",
     "require": {
         "php": ">=5.3.3"
     }

@@ -1,37 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Escaper;
 
-use Zend\View\Helper;
-use Zend\View\Exception;
 use Zend\Escaper;
+use Zend\View\Exception;
+use Zend\View\Helper;
 
 /**
  * Helper for escaping values
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHelper extends Helper\AbstractHelper
 {
@@ -71,9 +58,10 @@ abstract class AbstractHelper extends Helper\AbstractHelper
 
     /**
      * Set the encoding to use for escape operations
-     * 
-     * @param  string $encoding 
-     * @return AbstractEscaper
+     *
+     * @param  string $encoding
+     * @throws Exception\InvalidArgumentException
+     * @return AbstractHelper
      */
     public function setEncoding($encoding)
     {
@@ -89,7 +77,7 @@ abstract class AbstractHelper extends Helper\AbstractHelper
 
     /**
      * Get the encoding to use for escape operations
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -99,8 +87,8 @@ abstract class AbstractHelper extends Helper\AbstractHelper
 
     /**
      * Invoke this helper: escape a value
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @param  int $recurse Expects one of the recursion constants; used to decide whether or not to recurse the given value when escaping
      * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not allowing object recursion, returns a string. Otherwise, returns an array.
      * @throws Exception\InvalidArgumentException
@@ -146,6 +134,6 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      * @param string $value
      * @return string
      */
-    protected abstract function escape($value);
+    abstract protected function escape($value);
 
 }

@@ -1,34 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Uri\Uri as UriHandler;
 use Zend\Uri\Exception\ExceptionInterface as UriException;
+use Zend\Uri\Uri as UriHandler;
+use Zend\Validator\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Uri extends AbstractValidator
 {
@@ -94,6 +83,7 @@ class Uri extends AbstractValidator
     }
 
     /**
+     * @throws InvalidArgumentException
      * @return UriHandler
      */
     public function getUriHandler()
@@ -101,16 +91,29 @@ class Uri extends AbstractValidator
         if (null === $this->uriHandler) {
             // Lazy load the base Uri handler
             $this->uriHandler = new UriHandler();
+        } elseif (is_string($this->uriHandler) && class_exists($this->uriHandler)) {
+            // Instantiate string Uri handler that references a class
+            $this->uriHandler = new $this->uriHandler;
         }
+
+        if (! $this->uriHandler instanceof UriHandler) {
+            throw new InvalidArgumentException('URI handler is expected to be a Zend\Uri\Uri object');
+        }
+
         return $this->uriHandler;
     }
 
     /**
      * @param  UriHandler $uriHandler
+     * @throws InvalidArgumentException
      * @return Uri
      */
     public function setUriHandler($uriHandler)
     {
+        if (! is_subclass_of($uriHandler, 'Zend\Uri\Uri')) {
+            throw new InvalidArgumentException('Expecting a subclass name or instance of Zend\Uri\Uri as $uriHandler');
+        }
+
         $this->uriHandler = $uriHandler;
         return $this;
     }
@@ -128,7 +131,7 @@ class Uri extends AbstractValidator
     /**
      * Sets the allowAbsolute option
      *
-     * @param  boolean $allowWhiteSpace
+     * @param  boolean $allowAbsolute
      * @return Uri
      */
     public function setAllowAbsolute($allowAbsolute)

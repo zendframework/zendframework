@@ -1,26 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
+use stdClass;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -30,29 +20,26 @@ use Zend\View\Exception;
  * @see        http://www.w3.org/TR/xhtml1/dtds.html
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HeadLink extends Placeholder\Container\AbstractStandalone
 {
     /**
-     * $_validAttributes
+     * $validAttributes
      *
      * @var array
      */
-    protected $_itemKeys = array('charset', 'href', 'hreflang', 'id', 'media', 'rel', 'rev', 'type', 'title', 'extras');
+    protected $itemKeys = array('charset', 'href', 'hreflang', 'id', 'media', 'rel', 'rev', 'type', 'title', 'extras');
 
     /**
      * @var string registry key
      */
-    protected $_regKey = 'Zend_View_Helper_HeadLink';
+    protected $regKey = 'Zend_View_Helper_HeadLink';
 
     /**
      * Constructor
      *
      * Use PHP_EOL as separator
      *
-     * @return void
      */
     public function __construct()
     {
@@ -66,6 +53,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Returns current object instance. Optionally, allows passing array of
      * values to build link.
      *
+     * @param array $attributes
+     * @param string $placement
      * @return \Zend\View\Helper\HeadLink
      */
     public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
@@ -126,7 +115,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<type>Stylesheet|Alternate)$/', $method, $matches)) {
+        if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<type>Stylesheet|Alternate|Prev|Next)$/', $method, $matches)) {
             $argc   = count($args);
             $action = $matches['action'];
             $type   = $matches['type'];
@@ -173,15 +162,15 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * @param  mixed $value
      * @return boolean
      */
-    protected function _isValid($value)
+    protected function isValid($value)
     {
-        if (!$value instanceof \stdClass) {
+        if (!$value instanceof stdClass) {
             return false;
         }
 
         $vars         = get_object_vars($value);
         $keys         = array_keys($vars);
-        $intersection = array_intersect($this->_itemKeys, $keys);
+        $intersection = array_intersect($this->itemKeys, $keys);
         if (empty($intersection)) {
             return false;
         }
@@ -198,7 +187,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      */
     public function append($value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'append() expects a data token; please use one of the custom append*() methods'
             );
@@ -217,7 +206,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      */
     public function offsetSet($index, $value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'offsetSet() expects a data token; please use one of the custom offsetSet*() methods'
             );
@@ -230,12 +219,12 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * prepend()
      *
      * @param  array $value
-     * @return Zend_Layout_ViewHelper_HeadLink
+     * @return HeadLink
      * @throws Exception\InvalidArgumentException
      */
     public function prepend($value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'prepend() expects a data token; please use one of the custom prepend*() methods'
             );
@@ -248,12 +237,12 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * set()
      *
      * @param  array $value
-     * @return Zend_Layout_ViewHelper_HeadLink
+     * @return HeadLink
      * @throws Exception\InvalidArgumentException
      */
     public function set($value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'set() expects a data token; please use one of the custom set*() methods'
             );
@@ -269,30 +258,30 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * @param  stdClass $item
      * @return string
      */
-    public function itemToString(\stdClass $item)
+    public function itemToString(stdClass $item)
     {
         $attributes = (array) $item;
-        $link       = '<link ';
+        $link       = '<link';
 
-        foreach ($this->_itemKeys as $itemKey) {
+        foreach ($this->itemKeys as $itemKey) {
             if (isset($attributes[$itemKey])) {
-                if(is_array($attributes[$itemKey])) {
-                    foreach($attributes[$itemKey] as $key => $value) {
-                        $link .= sprintf('%s="%s" ', $key, ($this->_autoEscape) ? $this->_escape($value) : $value);
+                if (is_array($attributes[$itemKey])) {
+                    foreach ($attributes[$itemKey] as $key => $value) {
+                        $link .= sprintf(' %s="%s"', $key, ($this->autoEscape) ? $this->escape($value) : $value);
                     }
                 } else {
-                    $link .= sprintf('%s="%s" ', $itemKey, ($this->_autoEscape) ? $this->_escape($attributes[$itemKey]) : $attributes[$itemKey]);
+                    $link .= sprintf(' %s="%s"', $itemKey, ($this->autoEscape) ? $this->escape($attributes[$itemKey]) : $attributes[$itemKey]);
                 }
             }
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $link .= ($this->view->plugin('doctype')->isXhtml()) ? '/>' : '>';
+            $link .= ($this->view->plugin('doctype')->isXhtml()) ? ' />' : '>';
         } else {
-            $link .= '/>';
+            $link .= ' />';
         }
 
-        if (($link == '<link />') || ($link == '<link >')) {
+        if (($link == '<link />') || ($link == '<link>')) {
             return '';
         }
 
@@ -324,7 +313,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             $items[] = $this->itemToString($item);
         }
 
-        return $indent . implode($this->_escape($this->getSeparator()) . $indent, $items);
+        return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
     }
 
     /**
@@ -343,7 +332,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Create item for stylesheet link item
      *
      * @param  array $args
-     * @return stdClass|false Returns fals if stylesheet is a duplicate
+     * @return stdClass|false Returns false if stylesheet is a duplicate
      */
     public function createDataStylesheet(array $args)
     {
@@ -353,13 +342,13 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $conditionalStylesheet = false;
         $href                  = array_shift($args);
 
-        if ($this->_isDuplicateStylesheet($href)) {
+        if ($this->isDuplicateStylesheet($href)) {
             return false;
         }
 
         if (0 < count($args)) {
             $media = array_shift($args);
-            if(is_array($media)) {
+            if (is_array($media)) {
                 $media = implode(',', $media);
             } else {
                 $media = (string) $media;
@@ -367,14 +356,14 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         }
         if (0 < count($args)) {
             $conditionalStylesheet = array_shift($args);
-            if(!empty($conditionalStylesheet) && is_string($conditionalStylesheet)) {
+            if (!empty($conditionalStylesheet) && is_string($conditionalStylesheet)) {
                 $conditionalStylesheet = (string) $conditionalStylesheet;
             } else {
                 $conditionalStylesheet = null;
             }
         }
 
-        if(0 < count($args) && is_array($args[0])) {
+        if (0 < count($args) && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
         }
@@ -389,7 +378,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * @param  string $uri
      * @return bool
      */
-    protected function _isDuplicateStylesheet($uri)
+    protected function isDuplicateStylesheet($uri)
     {
         foreach ($this->getContainer() as $item) {
             if (($item->rel == 'stylesheet') && ($item->href == $uri)) {
@@ -420,11 +409,11 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $type  = array_shift($args);
         $title = array_shift($args);
 
-        if(0 < count($args) && is_array($args[0])) {
+        if (0 < count($args) && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
 
-            if(isset($extras['media']) && is_array($extras['media'])) {
+            if (isset($extras['media']) && is_array($extras['media'])) {
                 $extras['media'] = implode(',', $extras['media']);
             }
         }
@@ -434,6 +423,36 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $title = (string) $title;
 
         $attributes = compact('rel', 'href', 'type', 'title', 'extras');
+        return $this->createData($attributes);
+    }
+
+    /**
+     * Create item for a prev relationship (mainly used for pagination)
+     *
+     * @param array $args
+     * @return stdClass
+     */
+    public function createDataPrev(array $args)
+    {
+        $rel  = 'prev';
+        $href = (string) array_shift($args);
+
+        $attributes = compact('rel', 'href');
+        return $this->createData($attributes);
+    }
+
+    /**
+     * Create item for a prev relationship (mainly used for pagination)
+     *
+     * @param array $args
+     * @return stdClass
+     */
+    public function createDataNext(array $args)
+    {
+        $rel  = 'next';
+        $href = (string) array_shift($args);
+
+        $attributes = compact('rel', 'href');
         return $this->createData($attributes);
     }
 }

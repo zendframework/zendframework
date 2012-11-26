@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-dom",
+    "description": "provides tools for working with DOM documents and structures",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -7,9 +8,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend\\Dom": ""
+            "Zend\\Dom\\": ""
         }
     },
+    "target-dir": "Zend/Dom",
     "require": {
         "php": ">=5.3.3"
     }

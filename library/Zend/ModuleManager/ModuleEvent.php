@@ -30,19 +30,35 @@ class ModuleEvent extends Event
     CONST EVENT_LOAD_MODULES_POST   = 'loadModules.post';
 
     /**
+     * @var mixed
+     */
+    protected $module;
+
+    /**
+     * @var string
+     */
+    protected $moduleName;
+
+    /**
+     * @var Listener\ConfigMergerInterface
+     */
+    protected $configListener;
+
+    /**
      * Get the name of a given module
      *
      * @return string
      */
     public function getModuleName()
     {
-        return $this->getParam('moduleName');
+        return $this->moduleName;
     }
 
     /**
      * Set the name of a given module
      *
      * @param  string $moduleName
+     * @throws Exception\InvalidArgumentException
      * @return ModuleEvent
      */
     public function setModuleName($moduleName)
@@ -53,7 +69,9 @@ class ModuleEvent extends Event
                 ,__METHOD__, gettype($moduleName)
             ));
         }
-        $this->setParam('moduleName', $moduleName);
+        // Performance tweak, don't add it as param.
+        $this->moduleName = $moduleName;
+
         return $this;
     }
 
@@ -64,13 +82,14 @@ class ModuleEvent extends Event
      */
     public function getModule()
     {
-        return $this->getParam('module');
+        return $this->module;
     }
 
     /**
      * Set module object to compose in this event
      *
      * @param  object $module
+     * @throws Exception\InvalidArgumentException
      * @return ModuleEvent
      */
     public function setModule($module)
@@ -81,18 +100,20 @@ class ModuleEvent extends Event
                 ,__METHOD__, gettype($module)
             ));
         }
-        $this->setParam('module', $module);
+        // Performance tweak, don't add it as param.
+        $this->module = $module;
+
         return $this;
     }
 
     /**
-     * Get the config listner
+     * Get the config listener
      *
      * @return null|Listener\ConfigMergerInterface
      */
     public function getConfigListener()
     {
-        return $this->getParam('configListener');
+        return $this->configListener;
     }
 
     /**
@@ -104,6 +125,8 @@ class ModuleEvent extends Event
     public function setConfigListener(Listener\ConfigMergerInterface $configListener)
     {
         $this->setParam('configListener', $configListener);
+        $this->configListener = $configListener;
+
         return $this;
     }
 }

@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
 use Zend\Navigation\AbstractContainer;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\View\Exception;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
-use Zend\View\Exception;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -33,8 +22,6 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Navigation extends AbstractNavigationHelper
 {
@@ -162,7 +149,7 @@ class Navigation extends AbstractNavigationHelper
      * Lazy-loads an instance of Navigation\HelperLoader if none currently
      * registered.
      *
-     * @return ShortNameLocator
+     * @return Navigation\PluginManager
      */
     public function getPluginManager()
     {
@@ -183,11 +170,9 @@ class Navigation extends AbstractNavigationHelper
      *                                             exceptions should be
      *                                             thrown if something goes
      *                                             wrong. Default is true.
-     * @return \Zend\View\Helper\Navigation\Helper\HelperInterface  helper instance
-     * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
+     * @return \Zend\View\Helper\Navigation\HelperInterface  helper instance
+     * @throws Exception\RuntimeException if $strict is true and
      *         helper cannot be found
-     * @throws Exception\InvalidArgumentException if $strict is true and
-     *         helper does not implement the specified interface
      */
     public function findHelper($proxy, $strict = true)
     {
@@ -206,7 +191,7 @@ class Navigation extends AbstractNavigationHelper
         $class  = get_class($helper);
 
         if (!isset($this->injected[$class])) {
-            $this->_inject($helper);
+            $this->inject($helper);
             $this->injected[$class] = true;
         }
 
@@ -220,7 +205,7 @@ class Navigation extends AbstractNavigationHelper
      * @param  NavigationHelper $helper  helper instance
      * @return void
      */
-    protected function _inject(NavigationHelper $helper)
+    protected function inject(NavigationHelper $helper)
     {
         if ($this->getInjectContainer() && !$helper->hasContainer()) {
             $helper->setContainer($this->getContainer());
@@ -236,7 +221,9 @@ class Navigation extends AbstractNavigationHelper
         }
 
         if ($this->getInjectTranslator() && !$helper->hasTranslator()) {
-            $helper->setTranslator($this->getTranslator());
+            $helper->setTranslator(
+                $this->getTranslator(), $this->getTranslatorTextDomain()
+            );
         }
     }
 
@@ -345,11 +332,8 @@ class Navigation extends AbstractNavigationHelper
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.
-     * @return string                                helper output
-     * @throws \Zend\Loader\PluginLoader\Exception    if helper cannot be found
-     * @throws \Zend\View\Exception\ExceptionInterface                   if helper doesn't implement
-     *                                               the interface specified in
-     *                                               {@link findHelper()}
+     * @return string helper output
+     * @throws Exception\RuntimeException if helper cannot be found
      */
     public function render($container = null)
     {

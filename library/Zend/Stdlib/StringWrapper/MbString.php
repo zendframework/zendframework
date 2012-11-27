@@ -101,4 +101,3 @@ class MbString extends AbstractStringWrapper
         return mb_convert_encoding($str, $toCharset, $fromCharset);
     }
 }
-

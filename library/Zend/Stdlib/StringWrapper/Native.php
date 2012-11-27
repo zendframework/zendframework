@@ -81,4 +81,3 @@ class Native extends AbstractStringWrapper
         return false;
     }
 }
-

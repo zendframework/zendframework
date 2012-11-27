@@ -99,4 +99,3 @@ class Iconv extends AbstractStringWrapper
         return iconv($fromCharset, $toCharset, $str);
     }
 }
-

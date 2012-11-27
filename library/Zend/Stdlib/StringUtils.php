@@ -164,4 +164,3 @@ abstract class StringUtils
         return is_string($str) && ($str === '' || preg_match('/^./su', $str) == 1);
     }
 }
-

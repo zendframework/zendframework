@@ -112,4 +112,3 @@ class Intl extends AbstractStringWrapper
         return true;
     }
 }
-

@@ -178,4 +178,3 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         return $return;
     }
 }
-

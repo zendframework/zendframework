@@ -224,14 +224,6 @@ class Headers implements Countable, Iterator
         }
         return false;
     }
-    
-    /**
-     * Remove all Headers from the container
-     */
-	public function removeHeaders()
-	{
-		$this->headers = array();
-	}
 
     /**
      * Clear all headers

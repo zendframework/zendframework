@@ -45,7 +45,6 @@ class Redirect extends AbstractPlugin
             throw new Exception\DomainException('Redirect plugin requires a controller that defines the plugin() method');
         }
 
-        $response  = $this->getResponse();
         $urlPlugin = $controller->plugin('url');
 
         if (is_scalar($options)) {
@@ -54,9 +53,7 @@ class Redirect extends AbstractPlugin
             $url = $urlPlugin->fromRoute($route, $params, $options, $reuseMatchedParams);
         }
 
-        $response->getHeaders()->addHeaderLine('Location', $url);
-        $response->setStatusCode(302);
-        return $response;
+        return $this->toUrl($url);
     }
 
     /**

@@ -38,7 +38,7 @@ interface StringWrapperInterface
      *
      * @param string $str
      * @param string $charset
-     * @return int
+     * @return int|false
      */
     public function strlen($str, $charset = 'UTF-8');
 
@@ -98,3 +98,4 @@ interface StringWrapperInterface
      */
     public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $charset = 'UTF-8');
 }
+

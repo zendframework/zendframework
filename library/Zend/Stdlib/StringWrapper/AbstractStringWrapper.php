@@ -25,21 +25,32 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      */
     protected $charsets = array();
 
+    /**
+     * Check if the given charset is supported
+     *
+     * @param string $charset
+     * @return boolean
+     */
     public function isCharsetSupported($charset)
     {
         $charset = strtoupper($charset);
         return in_array($charset, $this->charsets);
     }
 
+    /**
+     * Get a list of supported charsets
+     *
+     * @return string[]
+     */
     public function getSupportedCharsets()
     {
         return $this->$charsets;
     }
 
     /**
-     * Word wrap
+     * Wraps a string to a given number of characters
      *
-     * @param  string  $string
+     * @param  string  $str
      * @param  integer $width
      * @param  string  $break
      * @param  boolean $cut
@@ -117,7 +128,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
     }
 
     /**
-     * String padding
+     * Pad a string to a certain length with another string
      *
      * @param  string  $input
      * @param  integer $padLength
@@ -167,3 +178,4 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         return $return;
     }
 }
+

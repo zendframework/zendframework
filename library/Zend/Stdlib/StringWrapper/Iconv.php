@@ -46,23 +46,57 @@ class Iconv extends AbstractStringWrapper
         }
     }
 
+    /**
+     * Returns the length of the given string
+     *
+     * @param string $str
+     * @param string $charset
+     * @return int|false
+     */
     public function strlen($str, $charset = 'UTF-8')
     {
         return iconv_strlen($str, $charset);
     }
 
+    /**
+     * Returns the portion of string specified by the start and length parameters
+     * 
+     * @param string   $str
+     * @param int      $offset
+     * @param int|null $length
+     * @param string   $charset
+     * @return string|false
+     */
     public function substr($str, $offset = 0, $length = null, $charset = 'UTF-8')
     {
         return iconv_substr($str, $offset, $length, $charset);
     }
 
+    /**
+     * Find the position of the first occurrence of a substring in a string
+     *
+     * @param string $haystack
+     * @param string $needle
+     * @param int    $offset
+     * @param string $charset
+     * @return int|false
+     */
     public function strpos($haystack, $needle, $offset = 0, $charset = 'UTF-8')
     {
         return iconv_strpos($haystack, $needle, $offset, $charset);
     }
 
+    /**
+     * Convert a string from one character encoding to another
+     *
+     * @param string $str
+     * @param string $toCharset
+     * @param string $fromCharset
+     * @return string|false
+     */
     public function convert($str, $toCharset, $fromCharset = 'UTF-8')
     {
         return iconv($fromCharset, $toCharset, $str);
     }
 }
+

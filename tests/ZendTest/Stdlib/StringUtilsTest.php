@@ -22,8 +22,8 @@
 
 namespace ZendTest\Stdlib;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Stdlib\StringUtils;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Stdlib\StringUtils;
 
 class StringUtilsTest extends TestCase
 {
@@ -47,24 +47,32 @@ class StringUtilsTest extends TestCase
 
     }
 
-    public function singleByCharsets()
+    public function getSingleByCharsets()
     {
         return array(
             array('AscII'),
+            array('7bit'),
+            array('8bit'),
             array('ISo-8859-1'),
-        );
-    }
-
-    public function nonSingleByteCharsets()
-    {
-        return array(
-            array('UTf-8'),
-            array('usC-2')
+            array('ISo-8859-2'),
+            array('ISo-8859-3'),
+            array('ISo-8859-4'),
+            array('ISo-8859-5'),
+            array('ISo-8859-6'),
+            array('ISo-8859-7'),
+            array('ISo-8859-8'),
+            array('ISo-8859-9'),
+            array('ISo-8859-10'),
+            array('ISo-8859-11'),
+            array('ISo-8859-13'),
+            array('ISo-8859-14'),
+            array('ISo-8859-15'),
+            array('ISo-8859-16'),
         );
     }
 
     /**
-     * @dataProvider singleByCharsets
+     * @dataProvider getSingleByCharsets
      * @param string $charset
      */
     public function testIsSingleByteCharsetReturnsTrue($charset)
@@ -72,8 +80,18 @@ class StringUtilsTest extends TestCase
         $this->assertTrue(StringUtils::isSingleByteCharset($charset));
     }
 
+    public function getNonSingleByteCharsets()
+    {
+        return array(
+            array('UTf-8'),
+            array('UTf-16'),
+            array('usC-2'),
+            array('CESU-8'),
+        );
+    }
+
     /**
-     * @dataProvider nonSingleByteCharsets
+     * @dataProvider getNonSingleByteCharsets
      * @param string $charset
      */
     public function testIsSingleByteCharsetReturnsFalse($charset)
@@ -118,10 +136,41 @@ class StringUtilsTest extends TestCase
                 $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Iconv', $wrapper);
             }
         } catch (Exception $e) {
-            if (extension_loaded('mbstring') || extension_loaded('iconv')
-            ) {
+            if (extension_loaded('mbstring') || extension_loaded('iconv')) {
                 $this->fail("Failed to get mbstring or iconv wrapper for UTF-8 and ISO-8859-1");
             }
         }
+    }
+
+    public function getUtf8StringValidity()
+    {
+        return array(
+            // valid
+            array('', true),
+            array("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
+                . "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
+                . ' !"#$%&\'()*+,-./0123456789:;<=>?'
+                . '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_'
+                . '`abcdefghijklmnopqrstuvwxyz{|}~',
+                true
+            ),
+
+            // invalid
+            array(true, false),
+            array(123, false),
+            array(123.45, false),
+            array("\xFF", false),
+            array("\x90a", false),
+        );
+    }
+
+    /**
+     * @dataProvider getUtf8StringValidity
+     * @param string $str
+     * @param boolean $valid
+     */
+    public function testIsValidUtf8($str, $valid)
+    {
+        $this->assertSame($valid, StringUtils::isValidUtf8($str));
     }
 }

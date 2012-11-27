@@ -356,4 +356,48 @@ XML;
         $this->setExpectedException("\Zend\Dom\Exception\RuntimeException");
         $this->query->queryXpath('/');
     }
+
+    public function testOffsetExists()
+    {
+        $this->loadHtml();
+        $results = $this->query->execute('input');
+
+        $this->assertEquals(3, $results->count());
+        $this->assertFalse($results->offsetExists(3));
+        $this->assertTrue($results->offsetExists(2));
+    }
+
+    public function testOffsetGet()
+    {
+        $this->loadHtml();
+        $results = $this->query->execute('input');
+
+        $this->assertEquals(3, $results->count());
+        $this->assertEquals('login', $results[2]->getAttribute('id'));
+    }
+
+    /**
+     * @expectedException Zend\Dom\Exception\BadMethodCallException
+     */
+    public function testOffsetSet()
+    {
+        $this->loadHtml();
+        $results = $this->query->execute('input');
+        $this->assertEquals(3, $results->count());
+
+        $results[0] = '<foobar />';
+    }
+
+
+    /**
+     * @expectedException Zend\Dom\Exception\BadMethodCallException
+     */
+    public function testOffsetUnset()
+    {
+        $this->loadHtml();
+        $results = $this->query->execute('input');
+        $this->assertEquals(3, $results->count());
+
+        unset($results[2]);
+    }
 }

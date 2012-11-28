@@ -36,8 +36,10 @@ class ZendMonitor extends AbstractWriter
      *
      * @return ZendMonitor
      */
-    public function __construct()
+    public function __construct($options = null)
     {
+        parent::__construct($options);
+
         if (!function_exists('monitor_custom_event')) {
             $this->isEnabled = false;
         }

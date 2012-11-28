@@ -88,4 +88,21 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertTrue(empty($this->firephp->calls));
     }
+
+    public function testConstructWithOptions()
+    {
+        $formatter = new \Zend\Log\Formatter\Simple();
+        $filter    = new \Zend\Log\Filter\Mock();
+        $writer = new FirePhp(array(
+                'filters'   => $filter,
+                'formatter' => $formatter,
+                'instance'  => $this->firephp,
+        ));
+        $this->assertTrue($writer->getFirePhp() instanceof FirePhpInterface);
+        $this->assertAttributeInstanceOf('Zend\Log\Formatter\FirePhp', 'formatter', $writer);
+
+        $filters = self::readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertEquals($filter, $filters[0]);
+    }
 }

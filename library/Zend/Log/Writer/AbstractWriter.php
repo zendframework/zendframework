@@ -84,13 +84,22 @@ abstract class AbstractWriter implements WriterInterface
 
         if (is_array($options)) {
 
-            if(isset($options['filters']) && is_array($options['filters'])) {
-                foreach($options['filters'] as $filter) {
-                    if(!isset($filter['name'])) {
-                        throw new Exception\InvalidArgumentException('Options must contain a name for the filter');
+            if(isset($options['filters'])) {
+                $filters = $options['filters'];
+                if(is_string($filters) || $filters instanceof Filter\FilterInterface) {
+                    $this->addFilter($filters);
+                } elseif(is_array($filters)) {
+                    foreach($filters as $filter) {
+                        if(is_string($filter) || $filter instanceof Filter\FilterInterface) {
+                            $this->addFilter($filter);
+                        } elseif(is_array($filter)) {
+                            if(!isset($filter['name'])) {
+                                throw new Exception\InvalidArgumentException('Options must contain a name for the filter');
+                            }
+                            $filterOptions = (isset($filter['options'])) ? $filter['options'] : null;
+                            $this->addFilter($filter['name'], $filterOptions);
+                        }
                     }
-                    $filterOptions = (isset($filter['options'])) ? $filter['options'] : null;
-                    $this->addFilter($filter['name'], $filterOptions);
                 }
             }
 

@@ -26,6 +26,7 @@ use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
 use Zend\View\Model\ConsoleModel;
 use Zend\Version\Version;
 use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\StringUtils;
 use Zend\Text\Table;
 
 /**
@@ -389,6 +390,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $result  = '';
         $padding = 2;
 
+
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
@@ -397,12 +399,15 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             return $result;
         }
 
+        // Get the string wrapper supporting UTF-8 character encoding
+        $strWrapper = StringUtils::getWrapper('UTF-8');
+
         // Determine max width for each column
         $maxW = array();
         for ($x = 1; $x <= $cols; $x += 1) {
             $maxW[$x] = 0;
             foreach ($data as $row) {
-                $maxW[$x] = max($maxW[$x], mb_strlen($row[$x-1],'utf-8') + $padding * 2);
+                $maxW[$x] = max($maxW[$x], $strWrapper->strlen($row[$x-1],'UTF-8') + $padding * 2);
             }
         }
 

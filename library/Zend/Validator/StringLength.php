@@ -10,6 +10,8 @@
 
 namespace Zend\Validator;
 
+use Zend\Stdlib\StringUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Validator
@@ -38,10 +40,12 @@ class StringLength extends AbstractValidator
     );
 
     protected $options = array(
-        'min'      => 0, // Minimum length
-        'max'      => null, // Maximum length, null if there is no length limitation
-        'encoding' => null, // Encoding to use
+        'min'      => 0,       // Minimum length
+        'max'      => null,    // Maximum length, null if there is no length limitation
+        'encoding' => 'UTF-8', // Encoding to use
     );
+
+    protected $stringWrapper;
 
     /**
      * Sets validator options
@@ -146,13 +150,7 @@ class StringLength extends AbstractValidator
     public function setEncoding($encoding = null)
     {
         if ($encoding !== null) {
-            $orig   = iconv_get_encoding('internal_encoding');
-            $result = iconv_set_encoding('internal_encoding', $encoding);
-            if (!$result) {
-                throw new Exception\InvalidArgumentException('Given encoding not supported on this OS!');
-            }
-
-            iconv_set_encoding('internal_encoding', $orig);
+            StringUtils::getWrapper($encoding);
         }
 
         $this->options['encoding'] = $encoding;
@@ -174,12 +172,8 @@ class StringLength extends AbstractValidator
         }
 
         $this->setValue($value);
-        if ($this->getEncoding() !== null) {
-            $length = iconv_strlen($value, $this->getEncoding());
-        } else {
-            $length = iconv_strlen($value);
-        }
 
+        $length = StringUtils::getWrapper($this->getEncoding())->strlen($value, $this->getEncoding());
         if ($length < $this->getMin()) {
             $this->error(self::TOO_SHORT);
         }

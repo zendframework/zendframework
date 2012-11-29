@@ -94,15 +94,11 @@ class RemoteAddr implements SessionValidator
     {
         if (static::$useProxy) {
             // proxy IP address
-            if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP']) {
-                $ips = explode(',', $_SERVER['HTTP_CLIENT_IP']);
-                return trim($ips[0]);
-            }
-
-            // proxy IP address
+            // Only ever look at X-Forwarded-For header; Client-IP is unreliable
             if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) {
                 $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-                return trim($ips[0]);
+                $ip  = array_pop($ips);
+                return trim($ip);
             }
         }
 

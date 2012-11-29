@@ -102,7 +102,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $this->restore();
     }
 
-    public function testMultipleHttpXForwardedFor()
+    public function testUsesRightMostAddressWhenMultipleHttpXForwardedForAddressesPresent()
     {
         $this->backup();
         $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
@@ -110,7 +110,20 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         RemoteAddr::setUseProxy(true);
         $validator = new RemoteAddr();
         RemoteAddr::setUseProxy(false);
-        $this->assertEquals('2.1.2.3', $validator->getData());
+        $this->assertEquals('1.1.2.3', $validator->getData());
+        $this->restore();
+    }
+
+    public function testShouldNotUseClientIpHeaderToTestProxyCapabilities()
+    {
+        $this->backup();
+        $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '2.1.2.3, 1.1.2.3';
+        $_SERVER['HTTP_CLIENT_IP'] = '0.1.2.4';
+        RemoteAddr::setUseProxy(true);
+        $validator = new RemoteAddr();
+        RemoteAddr::setUseProxy(false);
+        $this->assertEquals('1.1.2.3', $validator->getData());
         $this->restore();
     }
 }

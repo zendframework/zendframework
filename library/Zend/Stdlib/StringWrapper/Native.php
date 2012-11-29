@@ -25,17 +25,17 @@ class Native extends AbstractStringWrapper
      */
     public function __construct()
     {
-        $this->charsets = StringUtils::getSingleByteCharsets();
+        $this->encodings = StringUtils::getSingleByteEncodings();
     }
 
     /**
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $charset = 'UTF-8')
+    public function strlen($str, $encoding = 'UTF-8')
     {
         return strlen($str);
     }
@@ -46,10 +46,10 @@ class Native extends AbstractStringWrapper
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $charset
+     * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $charset = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
     {
         return substr($str, $offset, $length);
     }
@@ -60,10 +60,10 @@ class Native extends AbstractStringWrapper
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $charset = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
     {
         return strpos($haystack, $needle, $offset);
     }
@@ -72,14 +72,14 @@ class Native extends AbstractStringWrapper
      * Convert a string from one character encoding to another
      *
      * @param string $str
-     * @param string $toCharset
-     * @param string $fromCharset
+     * @param string $toEncoding
+     * @param string $fromEncoding
      * @return string|false
      */
-    public function convert($str, $toCharset, $fromCharset = 'UTF-8')
+    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
     {
-        if (strcasecmp($toCharset, $fromCharset) != 0) {
-            trigger_error("Can't convert '{$fromCharset}' to '{$toCharset}' using intl", E_WARNING);
+        if (strcasecmp($toEncoding, $fromEncoding) != 0) {
+            trigger_error("Can't convert '{$fromEncoding}' to '{$toEncoding}' using intl", E_WARNING);
             return false;
         }
 

@@ -47,18 +47,18 @@ abstract class CommonStringWrapperTest extends TestCase
     /**
      * @dataProvider strlenProvider
      * @param string $string
-     * @param string $charset
+     * @param string $encoding
      * @param mixed  $expected
      */
-    public function testStrlen($str, $charset, $expected)
+    public function testStrlen($str, $encoding, $expected)
     {
-        if (!$this->stringWrapper->isCharsetSupported($charset)) {
+        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
             $this->markTestSkipped(
-                "Charset {$charset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
             );
         }
 
-        $result = $this->stringWrapper->strlen($str, $charset);
+        $result = $this->stringWrapper->strlen($str, $encoding);
         $this->assertSame($expected, $result);
     }
 
@@ -76,18 +76,18 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $charset
+     * @param string   $encoding
      * @param mixed    $expected
      */
-    public function testSubstr($str, $offset, $length, $charset, $expected)
+    public function testSubstr($str, $offset, $length, $encoding, $expected)
     {
-        if (!$this->stringWrapper->isCharsetSupported($charset)) {
+        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
             $this->markTestSkipped(
-                "Charset {$charset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
             );
         }
 
-        $result = $this->stringWrapper->substr($str, $offset, $length, $charset);
+        $result = $this->stringWrapper->substr($str, $offset, $length, $encoding);
         $this->assertSame($expected, $result);
     }
 
@@ -105,18 +105,18 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $charset
+     * @param string $encoding
      * @param mixed  $expected
      */
-    public function testStrpos($haystack, $needle, $offset, $charset, $expected)
+    public function testStrpos($haystack, $needle, $offset, $encoding, $expected)
     {
-        if (!$this->stringWrapper->isCharsetSupported($charset)) {
+        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
             $this->markTestSkipped(
-                "Charset {$charset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
             );
         }
 
-        $result = $this->stringWrapper->strpos($haystack, $needle, $offset, $charset);
+        $result = $this->stringWrapper->strpos($haystack, $needle, $offset, $encoding);
         $this->assertSame($expected, $result);
     }
 
@@ -134,23 +134,23 @@ abstract class CommonStringWrapperTest extends TestCase
     /**
      * @dataProvider convertProvider
      * @param string $str
-     * @param string $toCharset
-     * @param string $fromCharset
+     * @param string $toEncoding
+     * @param string $fromEncoding
      * @param mixed  $expected
      */
-    public function testConvert($str, $toCharset, $fromCharset, $expected)
+    public function testConvert($str, $toEncoding, $fromEncoding, $expected)
     {
-        if (!$this->stringWrapper->isCharsetSupported($toCharset)) {
+        if (!$this->stringWrapper->isEncodingSupported($toEncoding)) {
             $this->markTestSkipped(
-                "Charset {$toCharset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$toEncoding} not supported by " . get_class($this->stringWrapper)
             );
-        } elseif (!$this->stringWrapper->isCharsetSupported($fromCharset)) {
+        } elseif (!$this->stringWrapper->isEncodingSupported($fromEncoding)) {
             $this->markTestSkipped(
-                "Charset {$fromCharset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$fromEncoding} not supported by " . get_class($this->stringWrapper)
             );
         }
 
-        $result = $this->stringWrapper->convert($str, $toCharset, $fromCharset);
+        $result = $this->stringWrapper->convert($str, $toEncoding, $fromEncoding);
         $this->assertSame($expected, $result);
     }
 
@@ -233,18 +233,18 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param integer $width
      * @param string  $break
      * @param boolean $cut
-     * @param string  $charset
+     * @param string  $encoding
      * @param mixed   $expected
      */
-    public function testWordWrap($string, $width, $break, $cut, $charset, $expected)
+    public function testWordWrap($string, $width, $break, $cut, $encoding, $expected)
     {
-        if (!$this->stringWrapper->isCharsetSupported($charset)) {
+        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
             $this->markTestSkipped(
-                "Charset {$charset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
             );
         }
 
-        $result = $this->stringWrapper->wordWrap($string, $width, $break, $cut, $charset);
+        $result = $this->stringWrapper->wordWrap($string, $width, $break, $cut, $encoding);
         $this->assertSame($expected, $result);
     }
 
@@ -283,20 +283,20 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param  integer $padLength
      * @param  string  $padString
      * @param  integer $padType
-     * @param  string  $charset
+     * @param  string  $encoding
      * @param mixed   $expected
      *
      * @group ZF-12186
      */
-    public function testStrPad($input, $padLength, $padString, $padType, $charset, $expected)
+    public function testStrPad($input, $padLength, $padString, $padType, $encoding, $expected)
     {
-        if (!$this->stringWrapper->isCharsetSupported($charset)) {
+        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
             $this->markTestSkipped(
-                "Charset {$charset} not supported by " . get_class($this->stringWrapper)
+                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
             );
         }
 
-        $result = $this->stringWrapper->strPad($input, $padLength, $padString, $padType, $charset);
+        $result = $this->stringWrapper->strPad($input, $padLength, $padString, $padType, $encoding);
         $this->assertSame($expected, $result);
     }
 }

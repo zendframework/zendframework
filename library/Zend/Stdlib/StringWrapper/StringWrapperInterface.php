@@ -19,28 +19,28 @@ interface StringWrapperInterface
 {
 
     /**
-     * Check if the given charset is supported
+     * Check if the given encoding is supported
      *
-     * @param string $charset
+     * @param string $encoding
      * @return boolean
      */
-    public function isCharsetSupported($charset);
+    public function isEncodingSupported($encoding);
 
     /**
-     * Get a list of supported charsets
+     * Get a list of supported encodings
      *
      * @return string[]
      */
-    public function getSupportedCharsets();
+    public function getSupportedEncodings();
 
     /**
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $charset = 'UTF-8');
+    public function strlen($str, $encoding = 'UTF-8');
 
     /**
      * Returns the portion of string specified by the start and length parameters
@@ -48,10 +48,10 @@ interface StringWrapperInterface
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $charset
+     * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $charset = 'UTF-8');
+    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8');
 
     /**
      * Find the position of the first occurrence of a substring in a string
@@ -59,20 +59,20 @@ interface StringWrapperInterface
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $charset = 'UTF-8');
+    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8');
 
     /**
      * Convert a string from one character encoding to another
      *
      * @param string $str
-     * @param string $toCharset
-     * @param string $fromCharset
+     * @param string $toEncoding
+     * @param string $fromEncoding
      * @return string|false
      */
-    public function convert($str, $toCharset, $fromCharset = 'UTF-8');
+    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8');
 
     /**
      * Wraps a string to a given number of characters
@@ -81,10 +81,10 @@ interface StringWrapperInterface
      * @param  integer $width
      * @param  string  $break
      * @param  boolean $cut
-     * @param  string  $charset
+     * @param  string  $encoding
      * @return string
      */
-    public function wordWrap($str, $width = 75, $break = "\n", $cut = false, $charset = 'UTF-8');
+    public function wordWrap($str, $width = 75, $break = "\n", $cut = false, $encoding = 'UTF-8');
 
     /**
      * Pad a string to a certain length with another string
@@ -93,8 +93,8 @@ interface StringWrapperInterface
      * @param  integer $padLength
      * @param  string  $padString
      * @param  integer $padType
-     * @param  string  $charset
+     * @param  string  $encoding
      * @return string
      */
-    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $charset = 'UTF-8');
+    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $encoding = 'UTF-8');
 }

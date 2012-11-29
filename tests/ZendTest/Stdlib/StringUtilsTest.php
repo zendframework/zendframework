@@ -35,7 +35,7 @@ class StringUtilsTest extends TestCase
 
     }
 
-    public function getSingleByCharsets()
+    public function getSingleByEncodings()
     {
         return array(
             array('AscII'),
@@ -60,15 +60,15 @@ class StringUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getSingleByCharsets
-     * @param string $charset
+     * @dataProvider getSingleByEncodings
+     * @param string $encoding
      */
-    public function testIsSingleByteCharsetReturnsTrue($charset)
+    public function testIsSingleByteEncodingReturnsTrue($encoding)
     {
-        $this->assertTrue(StringUtils::isSingleByteCharset($charset));
+        $this->assertTrue(StringUtils::isSingleByteEncoding($encoding));
     }
 
-    public function getNonSingleByteCharsets()
+    public function getNonSingleByteEncodings()
     {
         return array(
             array('UTf-8'),
@@ -79,12 +79,12 @@ class StringUtilsTest extends TestCase
     }
 
     /**
-     * @dataProvider getNonSingleByteCharsets
-     * @param string $charset
+     * @dataProvider getNonSingleByteEncodings
+     * @param string $encoding
      */
-    public function testIsSingleByteCharsetReturnsFalse($charset)
+    public function testIsSingleByteEncodingReturnsFalse($encoding)
     {
-        $this->assertFalse(StringUtils::isSingleByteCharset($charset));
+        $this->assertFalse(StringUtils::isSingleByteEncoding($encoding));
     }
 
     public function testGetWrapper()

@@ -23,7 +23,7 @@ class MbString extends AbstractStringWrapper
      * @var string[]
      * @link http://php.net/manual/mbstring.supported-encodings.php
      */
-    protected $charsets = array(
+    protected $encodings = array(
         'UCS-4',
         'UCS-4BE',
         'UCS-4LE',
@@ -114,27 +114,27 @@ class MbString extends AbstractStringWrapper
             );
         }
 
-        // remove charsets not available before PHP-5.4
+        // remove encodings not available before PHP-5.4
         if (version_compare(PHP_VERSION, '5.4', '<')) {
             unset(
-                $this->charsets['SJIS-MAC'],
-                $this->charsets['MACJAPANESE'],
-                $this->charsets['SJIS-Mobile#DOCOMO'],
-                $this->charsets['SJIS-DOCOMO'],
-                $this->charsets['SJIS-Mobile#KDDI'],
-                $this->charsets['SJIS-KDDI'],
-                $this->charsets['SJIS-Mobile#SOFTBANK'],
-                $this->charsets['SJIS-SOFTBANK'],
-                $this->charsets['UTF-8-Mobile#DOCOMO'],
-                $this->charsets['UTF-8-DOCOMO'],
-                $this->charsets['UTF-8-Mobile#KDDI-A'],
-                $this->charsets['UTF-8-Mobile#KDDI-B'],
-                $this->charsets['UTF-8-KDDI'],
-                $this->charsets['UTF-8-Mobile#SOFTBANK'],
-                $this->charsets['UTF-8-SOFTBANK'],
-                $this->charsets['ISO-2022-JP-MOBILE#KDDI'],
-                $this->charsets['ISO-2022-JP-KDDI'],
-                $this->charsets['GB18030']
+                $this->encodings['SJIS-MAC'],
+                $this->encodings['MACJAPANESE'],
+                $this->encodings['SJIS-Mobile#DOCOMO'],
+                $this->encodings['SJIS-DOCOMO'],
+                $this->encodings['SJIS-Mobile#KDDI'],
+                $this->encodings['SJIS-KDDI'],
+                $this->encodings['SJIS-Mobile#SOFTBANK'],
+                $this->encodings['SJIS-SOFTBANK'],
+                $this->encodings['UTF-8-Mobile#DOCOMO'],
+                $this->encodings['UTF-8-DOCOMO'],
+                $this->encodings['UTF-8-Mobile#KDDI-A'],
+                $this->encodings['UTF-8-Mobile#KDDI-B'],
+                $this->encodings['UTF-8-KDDI'],
+                $this->encodings['UTF-8-Mobile#SOFTBANK'],
+                $this->encodings['UTF-8-SOFTBANK'],
+                $this->encodings['ISO-2022-JP-MOBILE#KDDI'],
+                $this->encodings['ISO-2022-JP-KDDI'],
+                $this->encodings['GB18030']
             );
         }
     }
@@ -143,12 +143,12 @@ class MbString extends AbstractStringWrapper
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $charset = 'UTF-8')
+    public function strlen($str, $encoding = 'UTF-8')
     {
-        return mb_strlen($str, $charset);
+        return mb_strlen($str, $encoding);
     }
 
     /**
@@ -157,12 +157,12 @@ class MbString extends AbstractStringWrapper
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $charset
+     * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $charset = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
     {
-        return mb_substr($str, $offset, $length, $charset);
+        return mb_substr($str, $offset, $length, $encoding);
     }
 
     /**
@@ -171,24 +171,24 @@ class MbString extends AbstractStringWrapper
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $charset = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
     {
-        return mb_strpos($haystack, $needle, $offset, $charset);
+        return mb_strpos($haystack, $needle, $offset, $encoding);
     }
 
     /**
      * Convert a string from one character encoding to another
      *
      * @param string $str
-     * @param string $toCharset
-     * @param string $fromCharset
+     * @param string $toEncoding
+     * @param string $fromEncoding
      * @return string|false
      */
-    public function convert($str, $toCharset, $fromCharset = 'UTF-8')
+    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
     {
-        return mb_convert_encoding($str, $toCharset, $fromCharset);
+        return mb_convert_encoding($str, $toEncoding, $fromEncoding);
     }
 }

@@ -36,11 +36,11 @@ abstract class StringUtils
     protected static $wrapperRegistry;
 
     /**
-     * A list of known single-byte charsets (upper-case)
+     * A list of known single-byte encodings (upper-case)
      * 
      * @var string[]
      */
-    protected static $singleByteCharsets = array(
+    protected static $singleByteEncodings = array(
         'ASCII', '7BIT', '8BIT',
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5',
         'ISO-8859-6', 'ISO-8859-7', 'ISO-8859-8', 'ISO-8859-9', 'ISO-8859-10',
@@ -106,20 +106,20 @@ abstract class StringUtils
     }
 
     /**
-     * Get the first string wrapper supporting one or more charsets
+     * Get the first string wrapper supporting one or more encodings
      *
-     * @param string $charset Charset supported by he string wrapper
-     * @param string $charsetN, ... Unlimited OPTIONAL number of additional charsets
+     * @param string $encoding Encoding supported by he string wrapper
+     * @param string $encodingN, ... Unlimited OPTIONAL number of additional encodings
      * @return StringWrapperInterface
-     * @throws Exception\RuntimeException If no wrapper supports all given charsets
+     * @throws Exception\RuntimeException If no wrapper supports all given encodings
      */
-    public static function getWrapper($charset = 'UTF-8')
+    public static function getWrapper($encoding = 'UTF-8')
     {
-        $charsets = func_get_args();
+        $$encodings = func_get_args();
 
         foreach (static::getRegisteredWrappers() as $wrapper) {
-            foreach ($charsets as $charset) {
-                if (!$wrapper->isCharsetSupported($charset)) {
+            foreach ($encodings as $encoding) {
+                if (!$wrapper->isEncodingSupported($encoding)) {
                     continue 2;
                 }
             }
@@ -128,29 +128,29 @@ abstract class StringUtils
         }
 
         throw new Exception\RuntimeException(
-            'No wrapper found supporting charset(s) ' . implode(', ', $charsets)
+            'No wrapper found supporting encoding(s) ' . implode(', ', $encodings)
         );
     }
 
     /**
-     * Get a list of all known single-byte charsets
+     * Get a list of all known single-byte encodings
      *
      * @return string[]
      */
-    public static function getSingleByteCharsets()
+    public static function getSingleByteEncodings()
     {
-        return static::$singleByteCharsets;
+        return static::$singleByteEncodings;
     }
 
     /**
-     * Check if a given charset is a known single-byte charset
+     * Check if a given encoding is a known single-byte encoding
      *
-     * @param string $charset
+     * @param string $encoding
      * @return boolean
      */
-    public static function isSingleByteCharset($charset)
+    public static function isSingleByteEncoding($encoding)
     {
-        return in_array(strtoupper($charset), static::$singleByteCharsets);
+        return in_array(strtoupper($encoding), static::$singleByteEncodings);
     }
 
     /**

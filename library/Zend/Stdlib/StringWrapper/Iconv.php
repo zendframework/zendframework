@@ -23,7 +23,7 @@ class Iconv extends AbstractStringWrapper
      * @var string[]
      * @link http://www.gnu.org/software/libiconv/
      */
-    protected $charsets = array(
+    protected $encodings = array(
         // European languages
         'ASCII',
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5', 'ISO-8859-7',
@@ -133,12 +133,12 @@ class Iconv extends AbstractStringWrapper
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $charset = 'UTF-8')
+    public function strlen($str, $encoding = 'UTF-8')
     {
-        return iconv_strlen($str, $charset);
+        return iconv_strlen($str, $encoding);
     }
 
     /**
@@ -147,12 +147,12 @@ class Iconv extends AbstractStringWrapper
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $charset
+     * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $charset = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
     {
-        return iconv_substr($str, $offset, $length, $charset);
+        return iconv_substr($str, $offset, $length, $encoding);
     }
 
     /**
@@ -161,24 +161,24 @@ class Iconv extends AbstractStringWrapper
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $charset
+     * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $charset = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
     {
-        return iconv_strpos($haystack, $needle, $offset, $charset);
+        return iconv_strpos($haystack, $needle, $offset, $encoding);
     }
 
     /**
      * Convert a string from one character encoding to another
      *
      * @param string $str
-     * @param string $toCharset
-     * @param string $fromCharset
+     * @param string $toEncoding
+     * @param string $fromEncoding
      * @return string|false
      */
-    public function convert($str, $toCharset, $fromCharset = 'UTF-8')
+    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
     {
-        return iconv($fromCharset, $toCharset, $str);
+        return iconv($fromEncoding, $toEncoding, $str);
     }
 }

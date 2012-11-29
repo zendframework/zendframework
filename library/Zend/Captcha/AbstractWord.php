@@ -365,11 +365,11 @@ abstract class AbstractWord extends AbstractAdapter
      */
     public function isValid($value, $context = null)
     {
-        if (!is_array($value) && !is_array($context)) {
-            $this->error(self::MISSING_VALUE);
-            return false;
-        }
-        if (!is_array($value) && is_array($context)) {
+        if (!is_array($value)) {
+            if (!is_array($context)) {
+                $this->error(self::MISSING_VALUE);
+                return false;
+            }
             $value = $context;
         }
 

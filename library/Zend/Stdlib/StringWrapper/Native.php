@@ -79,4 +79,4 @@ class Native extends AbstractStringWrapper
     {
         return strpos($haystack, $needle, $offset);
     }
-}	
+}

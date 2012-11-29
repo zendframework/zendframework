@@ -132,6 +132,7 @@ class Application implements
         $events->attach($serviceManager->get('RouteListener'));
         $events->attach($serviceManager->get('DispatchListener'));
         $events->attach($serviceManager->get('ViewManager'));
+        $events->attach($serviceManager->get('SendResponseListener'));
 
         // Setup MVC Event
         $this->event = $event  = new MvcEvent();

@@ -134,7 +134,6 @@ class ViewManager implements ListenerAggregateInterface
         $createViewModelListener = new CreateViewModelListener();
         $injectTemplateListener  = new InjectTemplateListener();
         $injectViewModelListener = new InjectViewModelListener();
-        $sendResponseListener    = new SendResponseListener();
 
         $this->registerMvcRenderingStrategies($events);
         $this->registerViewStrategies();
@@ -143,7 +142,6 @@ class ViewManager implements ListenerAggregateInterface
         $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
-        $events->attach($sendResponseListener);
 
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($routeNotFoundStrategy, 'prepareNotFoundViewModel'), -90);

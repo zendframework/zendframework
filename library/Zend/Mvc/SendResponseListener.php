@@ -8,24 +8,65 @@
  * @package   Zend_Mvc
  */
 
-namespace Zend\Mvc\View;
+namespace Zend\Mvc;
 
+use Traversable;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
- * @subpackage View
  */
-class SendResponseListener implements ListenerAggregateInterface
+class SendResponseListener implements
+    ListenerAggregateInterface,
+    ServiceLocatorAwareInterface
 {
+    /**
+     * @var array
+     */
+    protected $options = array();
+
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
+
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct(array $options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    /**
+     * @return ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
 
     /**
      * Attach the aggregate to the specified event manager
@@ -66,9 +107,13 @@ class SendResponseListener implements ListenerAggregateInterface
             return false; // there is no response to send
         }
 
-        // send the response if possible
-        if (is_callable(array($response,'send'))) {
-            return $response->send();
+        $responseType = get_class($response);
+        if (!isset($this->options[$responseType])) {
+            return false; // there is no known response type to send
         }
+
+        $responseSender = $this->getServiceLocator()->get($this->options[$responseType]);
+        $responseSender->setResponse($response);
+        $responseSender->sendResponse();
     }
 }

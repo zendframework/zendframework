@@ -28,15 +28,16 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
      *
      * @var array
      */
-    protected $_serverBackup;
+    protected $serverBackup;
 
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    public function setUp()
     {
-        $this->_serverBackup = $_SERVER;
+        $this->serverBackup = $_SERVER;
         unset($_SERVER['HTTPS']);
+        unset($_SERVER['SERVER_PORT']);
     }
 
     /**
@@ -44,7 +45,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $_SERVER = $this->_serverBackup;
+        $_SERVER = $this->serverBackup;
     }
 
     public function testConstructorWithOnlyHost()
@@ -66,7 +67,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithHostAndHttpsOn()
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
-        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['HTTPS']     = 'on';
 
         $url = new Helper\ServerUrl();
         $this->assertEquals('https://example.com', $url->__invoke());
@@ -97,7 +98,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $_SERVER['SERVER_PORT'] = 8080;
 
         $url = new Helper\ServerUrl();
-        $this->assertEquals('http://example.com', $url->__invoke());
+        $this->assertEquals('http://example.com:8080', $url->__invoke());
     }
 
     public function testConstructorWithNoHttpHostButServerNameAndPortSet()
@@ -170,6 +171,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'proxyserver.com';
         $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org';
         $url = new Helper\ServerUrl();
+        $url->setUseProxy(true);
         $this->assertEquals('http://www.firsthost.org', $url->__invoke());
     }
 
@@ -181,6 +183,25 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'proxyserver.com';
         $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org, www.secondhost.org';
         $url = new Helper\ServerUrl();
+        $url->setUseProxy(true);
         $this->assertEquals('http://www.secondhost.org', $url->__invoke());
+    }
+
+    public function testDoesNotUseProxyByDefault()
+    {
+        $_SERVER['HTTP_HOST'] = 'proxyserver.com';
+        $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org, www.secondhost.org';
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://proxyserver.com', $url->__invoke());
+    }
+
+    public function testCanUseXForwardedPortIfProvided()
+    {
+        $_SERVER['HTTP_HOST'] = 'proxyserver.com';
+        $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org, www.secondhost.org';
+        $_SERVER['HTTP_X_FORWARDED_PORT'] = '8888';
+        $url = new Helper\ServerUrl();
+        $url->setUseProxy(true);
+        $this->assertEquals('http://www.secondhost.org:8888', $url->__invoke());
     }
 }

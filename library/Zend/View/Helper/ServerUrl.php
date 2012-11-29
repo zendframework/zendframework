@@ -34,6 +34,13 @@ class ServerUrl extends AbstractHelper
     protected $host;
 
     /**
+     * Whether or not to query proxy servers for address
+     *
+     * @var bool
+     */
+    protected $useProxy = false;
+
+    /**
      * Constructor
      *
      */
@@ -46,30 +53,10 @@ class ServerUrl extends AbstractHelper
                 $scheme = 'https';
                 break;
             default:
-            $scheme = 'http';
+                $scheme = 'http';
+                break;
         }
         $this->setScheme($scheme);
-
-        if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-            $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
-            if (strpos($host, ',') !== false) {
-                $hosts = explode(',', $host);
-                $host = trim(array_pop($hosts));
-            }
-            $this->setHost($host);
-        } elseif (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
-            $this->setHost($_SERVER['HTTP_HOST']);
-        } elseif (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
-            $name = $_SERVER['SERVER_NAME'];
-            $port = $_SERVER['SERVER_PORT'];
-
-            if (($scheme == 'http' && $port == 80) ||
-                ($scheme == 'https' && $port == 443)) {
-                $this->setHost($name);
-            } else {
-                $this->setHost($name . ':' . $port);
-            }
-        }
     }
 
     /**
@@ -103,6 +90,9 @@ class ServerUrl extends AbstractHelper
      */
     public function getHost()
     {
+        if (null === $this->host) {
+            $this->detectHost();
+        }
         return $this->host;
     }
 
@@ -138,5 +128,77 @@ class ServerUrl extends AbstractHelper
     {
         $this->scheme = $scheme;
         return $this;
+    }
+
+    /**
+     * Set flag indicating whether or not to query proxy servers
+     *
+     * @param  bool $useProxy
+     * @return ServerUrl
+     */
+    public function setUseProxy($useProxy = false)
+    {
+        $this->useProxy = (bool) $useProxy;
+        return $this;
+    }
+
+    /**
+     * Detect the host based on headers
+     *
+     * @return void
+     */
+    protected function detectHost()
+    {
+        if ($this->setHostFromProxy()) {
+            return;
+        }
+
+        if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
+            $this->setHost($_SERVER['HTTP_HOST']);
+            return;
+        }
+
+        if (!isset($_SERVER['SERVER_NAME']) || !isset($_SERVER['SERVER_PORT'])) {
+            return;
+        }
+
+        $scheme = $this->getScheme();
+        $name   = $_SERVER['SERVER_NAME'];
+        $port   = $_SERVER['SERVER_PORT'];
+
+        if (($scheme == 'http' && $port == 80) ||
+            ($scheme == 'https' && $port == 443)) {
+            $this->setHost($name);
+            return;
+        }
+
+        $this->setHost($name . ':' . $port);
+    }
+
+    /**
+     * Detect if a proxy is in use, and, if so, set the host based on it
+     *
+     * @return bool
+     */
+    protected function setHostFromProxy()
+    {
+        if (!$this->useProxy) {
+            return false;
+        }
+
+        if (!isset($_SERVER['HTTP_X_FORWARDED_HOST']) || empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+            return false;
+        }
+
+        $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+        if (strpos($host, ',') !== false) {
+            $hosts = explode(',', $host);
+            $host = trim(array_pop($hosts));
+        }
+        if (empty($host)) {
+            return false;
+        }
+        $this->setHost($host);
+        return true;
     }
 }

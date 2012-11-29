@@ -170,6 +170,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'proxyserver.com';
         $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org';
         $url = new Helper\ServerUrl();
+        $url->setUseProxy(true);
         $this->assertEquals('http://www.firsthost.org', $url->__invoke());
     }
 
@@ -181,6 +182,15 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'proxyserver.com';
         $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org, www.secondhost.org';
         $url = new Helper\ServerUrl();
+        $url->setUseProxy(true);
         $this->assertEquals('http://www.secondhost.org', $url->__invoke());
+    }
+
+    public function testDoesNotUseProxyByDefault()
+    {
+        $_SERVER['HTTP_HOST'] = 'proxyserver.com';
+        $_SERVER['HTTP_X_FORWARDED_HOST'] = 'www.firsthost.org, www.secondhost.org';
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://proxyserver.com', $url->__invoke());
     }
 }

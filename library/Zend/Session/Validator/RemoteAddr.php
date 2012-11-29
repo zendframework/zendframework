@@ -39,6 +39,13 @@ class RemoteAddr implements SessionValidator
     protected static $useProxy = false;
 
     /**
+     * List of trusted proxy IP addresses
+     *
+     * @var array
+     */
+    protected static $trustedProxies = array();
+
+    /**
      * Constructor
      * get the current user IP and store it in the session as 'valid data'
      */
@@ -86,20 +93,26 @@ class RemoteAddr implements SessionValidator
     }
 
     /**
+     * Set list of trusted proxy addresses
+     *
+     * @param  array $trustedProxies
+     * @return void
+     */
+    public static function setTrustedProxies(array $trustedProxies)
+    {
+        static::$trustedProxies = $trustedProxies;
+    }
+
+    /**
      * Returns client IP address.
      *
      * @return string IP address.
      */
     protected function getIpAddress()
     {
-        if (static::$useProxy) {
-            // proxy IP address
-            // Only ever look at X-Forwarded-For header; Client-IP is unreliable
-            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) {
-                $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-                $ip  = array_pop($ips);
-                return trim($ip);
-            }
+        $ip = $this->getIpAddressFromProxy();
+        if ($ip) {
+            return $ip;
         }
 
         // direct IP address
@@ -108,6 +121,39 @@ class RemoteAddr implements SessionValidator
         }
 
         return '';
+    }
+
+    /**
+     * Attempt to get the IP address for a proxied client
+     *
+     * @return false|string
+     */
+    protected function getIpAddressFromProxy()
+    {
+        if (!static::$useProxy) {
+            return false;
+        }
+
+        // Only ever look at X-Forwarded-For header; Client-IP is unreliable
+        if (!isset($_SERVER['HTTP_X_FORWARDED_FOR']) || empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return false;
+        }
+
+        // Extract IPs
+        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        // trim, so we can compare against trusted proxies properly
+        $ips = array_map('trim', $ips);
+        // remove trusted proxy IPs
+        $ips = array_diff($ips, static::$trustedProxies);
+
+        // Any left?
+        if (empty($ips)) {
+            return false;
+        }
+
+        // Return right-most
+        $ip  = array_pop($ips);
+        return $ip;
     }
 
     /**

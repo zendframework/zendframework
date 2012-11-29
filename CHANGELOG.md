@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2.0.5
+
+- 3004: Zend\Db unit tests fail with code coverage enabled
+  (https://github.com/zendframework/zf2/issues/3004)
+- 3039: combine double if into single conditional
+  (https://github.com/zendframework/zf2/issues/3039)
+- 3042: fix typo 'consist of' should be 'consists of' in singular
+  (https://github.com/zendframework/zf2/issues/3042)
+- 3045: Reduced the #calls of rawurlencode() using a cache mechanism
+  (https://github.com/zendframework/zf2/issues/3045)
+- 3048: Applying quickfix for zendframework/zf2#3004
+  (https://github.com/zendframework/zf2/issues/3048)
+- 3095: Process X-Forwarded-For header in correct order
+  (https://github.com/zendframework/zf2/issues/3095)
+
 ## 2.0.4
 
 - 2808: Add serializer better inheritance and extension

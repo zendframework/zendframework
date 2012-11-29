@@ -75,7 +75,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param  string  $break
      * @param  boolean $cut
      * @param  string  $encoding
-     * @return string
+     * @return string|false
      */
     public function wordWrap($string, $width = 75, $break = "\n", $cut = false, $encoding = 'UTF-8')
     {
@@ -168,41 +168,38 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             return str_pad($input, $padLength, $padString, $padType);
         }
 
-        $return          = '';
         $lengthOfPadding = $padLength - $this->strlen($input, $encoding);
         $padStringLength = $this->strlen($padString, $encoding);
 
         if ($padStringLength === 0 || $lengthOfPadding <= 0) {
-            $return = $input;
-        } else {
-            $repeatCount = floor($lengthOfPadding / $padStringLength);
-
-            if ($padType === \STR_PAD_BOTH) {
-                $lastStringLeft  = '';
-                $lastStringRight = '';
-                $repeatCountLeft = $repeatCountRight = ($repeatCount - $repeatCount % 2) / 2;
-
-                $lastStringLength       = $lengthOfPadding - 2 * $repeatCountLeft * $padStringLength;
-                $lastStringLeftLength   = $lastStringRightLength = floor($lastStringLength / 2);
-                $lastStringRightLength += $lastStringLength % 2;
-
-                $lastStringLeft  = $this->substr($padString, 0, $lastStringLeftLength, $encoding);
-                $lastStringRight = $this->substr($padString, 0, $lastStringRightLength, $encoding);
-
-                $return = str_repeat($padString, $repeatCountLeft) . $lastStringLeft
-                    . $input
-                    . str_repeat($padString, $repeatCountRight) . $lastStringRight;
-            } else {
-                $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength, $encoding);
-
-                if ($padType === \STR_PAD_LEFT) {
-                    $return = str_repeat($padString, $repeatCount) . $lastString . $input;
-                } else {
-                    $return = $input . str_repeat($padString, $repeatCount) . $lastString;
-                }
-            }
+            return $input;
         }
 
-        return $return;
+        $repeatCount = floor($lengthOfPadding / $padStringLength);
+
+        if ($padType === \STR_PAD_BOTH) {
+            $lastStringLeft  = '';
+            $lastStringRight = '';
+            $repeatCountLeft = $repeatCountRight = ($repeatCount - $repeatCount % 2) / 2;
+
+            $lastStringLength       = $lengthOfPadding - 2 * $repeatCountLeft * $padStringLength;
+            $lastStringLeftLength   = $lastStringRightLength = floor($lastStringLength / 2);
+            $lastStringRightLength += $lastStringLength % 2;
+
+            $lastStringLeft  = $this->substr($padString, 0, $lastStringLeftLength, $encoding);
+            $lastStringRight = $this->substr($padString, 0, $lastStringRightLength, $encoding);
+
+            return str_repeat($padString, $repeatCountLeft) . $lastStringLeft
+                . $input
+                . str_repeat($padString, $repeatCountRight) . $lastStringRight;
+        } else {
+            $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength, $encoding);
+
+            if ($padType === \STR_PAD_LEFT) {
+                return str_repeat($padString, $repeatCount) . $lastString . $input;
+            } else {
+                return $input . str_repeat($padString, $repeatCount) . $lastString;
+            }
+        }
     }
 }

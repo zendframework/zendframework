@@ -16,7 +16,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\SendResponseListener;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;

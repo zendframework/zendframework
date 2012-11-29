@@ -205,22 +205,4 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
 
         return $return;
     }
-
-    /**
-     * Get the internal used name of an encoding
-     *
-     * @param string $encoding
-     * @return string
-     * @throws Exception\InvalidArgumentException On an unsupported encoding
-     */
-    protected function getInternalEncoding($encoding)
-    {
-        $encodingUpper = strtoupper($encoding);
-        if (!isset($this->encodingMap[$encodingUpper])) {
-            throw new Exception\InvalidArgumentException(
-                "Character encoding '{$encoding}' isn't supported by this string wrapper"
-            );
-        }
-        return $this->encodingMap[$encodingUpper];
-    }
 }

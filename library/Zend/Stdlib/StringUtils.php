@@ -36,7 +36,7 @@ abstract class StringUtils
     protected static $wrapperRegistry;
 
     /**
-     * A list of known single-byte encodings (upper-case)
+     * A list of known single-byte character encodings (upper-case)
      *
      * @var string[]
      */
@@ -105,12 +105,12 @@ abstract class StringUtils
     }
 
     /**
-     * Get the first string wrapper supporting one or more encodings
+     * Get the first string wrapper supporting one or more character encodings
      *
-     * @param string $encoding Encoding supported by he string wrapper
-     * @param string $encodingN, ... Unlimited OPTIONAL number of additional encodings
+     * @param string $encoding       Character encoding supported by he string wrapper
+     * @param string $encodingN, ... Unlimited OPTIONAL number of additional character encodings
      * @return StringWrapperInterface
-     * @throws Exception\RuntimeException If no wrapper supports all given encodings
+     * @throws Exception\RuntimeException If no wrapper supports all given character encodings
      */
     public static function getWrapper($encoding = 'UTF-8')
     {
@@ -132,7 +132,7 @@ abstract class StringUtils
     }
 
     /**
-     * Get a list of all known single-byte encodings
+     * Get a list of all known single-byte character encodings
      *
      * @return string[]
      */
@@ -142,7 +142,7 @@ abstract class StringUtils
     }
 
     /**
-     * Check if a given encoding is a known single-byte encoding
+     * Check if a given encoding is a known single-byte character encoding
      *
      * @param string $encoding
      * @return boolean

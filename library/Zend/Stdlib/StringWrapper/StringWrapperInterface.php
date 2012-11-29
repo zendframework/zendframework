@@ -19,7 +19,7 @@ interface StringWrapperInterface
 {
 
     /**
-     * Check if the given encoding is supported
+     * Check if the given character encoding is supported
      *
      * @param string $encoding
      * @return boolean
@@ -27,7 +27,7 @@ interface StringWrapperInterface
     public function isEncodingSupported($encoding);
 
     /**
-     * Get a list of supported encodings
+     * Get a list of supported character encodings
      *
      * @return string[]
      */

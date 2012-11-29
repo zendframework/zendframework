@@ -51,6 +51,24 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
     }
 
     /**
+     * Convert a string from one character encoding to another
+     *
+     * @param string $str
+     * @param string $toEncoding
+     * @param string $fromEncoding
+     * @return string|false
+     */
+    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
+    {
+        if (strcasecmp($toEncoding, $fromEncoding) != 0) {
+            trigger_error("Can't convert '{$fromEncoding}' to '{$toEncoding}'", E_WARNING);
+            return false;
+        }
+
+        return $str;
+    }
+
+    /**
      * Wraps a string to a given number of characters
      *
      * @param  string  $str

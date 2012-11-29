@@ -67,22 +67,4 @@ class Native extends AbstractStringWrapper
     {
         return strpos($haystack, $needle, $offset);
     }
-
-    /**
-     * Convert a string from one character encoding to another
-     *
-     * @param string $str
-     * @param string $toEncoding
-     * @param string $fromEncoding
-     * @return string|false
-     */
-    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
-    {
-        if (strcasecmp($toEncoding, $fromEncoding) != 0) {
-            trigger_error("Can't convert '{$fromEncoding}' to '{$toEncoding}' using intl", E_WARNING);
-            return false;
-        }
-
-        return $str;
-    }
-}
+}	

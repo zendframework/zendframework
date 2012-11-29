@@ -48,15 +48,15 @@ class MbString extends AbstractStringWrapper
         'ISO-2022-JP-MS',
         'CP932',
         'CP51932',
-        'SJIS-MAC', 'MACJAPANESE', // **
-        'SJIS-Mobile#DOCOMO', 'SJIS-DOCOMO', // **
-        'SJIS-Mobile#KDDI', 'SJIS-KDDI', // **
-        'SJIS-Mobile#SOFTBANK', 'SJIS-SOFTBANK', // **
-        'UTF-8-Mobile#DOCOMO', 'UTF-8-DOCOMO', // **
-        'UTF-8-Mobile#KDDI-A', // **
-        'UTF-8-Mobile#KDDI-B', 'UTF-8-KDDI', // **
-        'UTF-8-Mobile#SOFTBANK', 'UTF-8-SOFTBANK', // **
-        'ISO-2022-JP-MOBILE#KDDI', 'ISO-2022-JP-KDDI', // **
+        'SJIS-MAC', 'MACJAPANESE',
+        'SJIS-Mobile#DOCOMO', 'SJIS-DOCOMO',
+        'SJIS-Mobile#KDDI', 'SJIS-KDDI',
+        'SJIS-Mobile#SOFTBANK', 'SJIS-SOFTBANK',
+        'UTF-8-Mobile#DOCOMO', 'UTF-8-DOCOMO',
+        'UTF-8-Mobile#KDDI-A',
+        'UTF-8-Mobile#KDDI-B', 'UTF-8-KDDI',
+        'UTF-8-Mobile#SOFTBANK', 'UTF-8-SOFTBANK',
+        'ISO-2022-JP-MOBILE#KDDI', 'ISO-2022-JP-KDDI',
         'JIS',
         'JIS-MS',
         'CP50220',
@@ -87,7 +87,7 @@ class MbString extends AbstractStringWrapper
         '8BIT',
         'EUC-CN',
         'CP936',
-        'GB18030', // **
+        'GB18030',
         'HZ',
         'EUC-TW',
         'CP950',
@@ -98,7 +98,7 @@ class MbString extends AbstractStringWrapper
         'WINDOWS-1251', 'CP1251',
         'WINDOWS-1252', 'CP1252',
         'CP866', 'IBM866',
-        'KOI8-R'
+        'KOI8-R',
     );
 
     /**
@@ -153,7 +153,7 @@ class MbString extends AbstractStringWrapper
 
     /**
      * Returns the portion of string specified by the start and length parameters
-     * 
+     *
      * @param string   $str
      * @param int      $offset
      * @param int|null $length

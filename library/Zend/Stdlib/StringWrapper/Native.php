@@ -42,7 +42,7 @@ class Native extends AbstractStringWrapper
 
     /**
      * Returns the portion of string specified by the start and length parameters
-     * 
+     *
      * @param string   $str
      * @param int      $offset
      * @param int|null $length

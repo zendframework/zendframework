@@ -78,6 +78,11 @@ class Native extends AbstractStringWrapper
      */
     public function convert($str, $toCharset, $fromCharset = 'UTF-8')
     {
-        return false;
+        if (strcasecmp($toCharset, $fromCharset) != 0) {
+            trigger_error("Can't convert '{$fromCharset}' to '{$toCharset}' using intl", E_WARNING);
+            return false;
+        }
+
+        return $str;
     }
 }

@@ -17,7 +17,6 @@ namespace Zend\Stdlib\StringWrapper;
  */
 class Intl extends AbstractStringWrapper
 {
-
     /**
      * List of supported character sets (upper case)
      *
@@ -109,6 +108,6 @@ class Intl extends AbstractStringWrapper
             return false;
         }
 
-        return true;
+        return $str;
     }
 }

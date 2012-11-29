@@ -10,6 +10,9 @@
 
 namespace Zend\Stdlib\StringWrapper;
 
+use Zend\Stdlib\Exception;
+use Zend\Stdlib\StringUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Stdlib
@@ -75,7 +78,11 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             throw new Exception\InvalidArgumentException('Cannot force cut when width is zero');
         }
 
-        $charset     = strtoupper($charset);
+        $charset = strtoupper($charset);
+        if (StringUtils::isSingleByteCharset($charset)) {
+            return wordwrap($string, $width, $break, $cut);
+        }
+
         $stringWidth = $this->strlen($string, $charset);
         $breakWidth  = $this->strlen($break, $charset);
 
@@ -139,7 +146,11 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      */
     public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $charset = 'UTF-8')
     {
-        $charset         = strtoupper($charset);
+        $charset = strtoupper($charset);
+        if (StringUtils::isSingleByteCharset($charset)) {
+            return str_pad($input, $padLength, $padString, $padType);
+        }
+
         $return          = '';
         $lengthOfPadding = $padLength - $this->strlen($input, $charset);
         $padStringLength = $this->strlen($padString, $charset);

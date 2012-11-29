@@ -64,7 +64,7 @@ class RoutePluginManager extends AbstractPluginManager
      * @param  string $canonicalName
      * @param  string $requestedName
      * @return null|\stdClass
-     * @throws Exception\RuntimeException If resolved class does not exist, or does not implement RouterInterface
+     * @throws Exception\RuntimeException If resolved class does not exist, or does not implement RouteInterface
      */
     protected function createFromInvokable($canonicalName, $requestedName)
     {

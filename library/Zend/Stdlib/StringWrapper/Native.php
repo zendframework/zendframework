@@ -19,13 +19,25 @@ use Zend\Stdlib\StringUtils;
  */
 class Native extends AbstractStringWrapper
 {
+    /**
+     * Check if the given encoding is supported
+     *
+     * @param string $encoding
+     * @return boolean
+     */
+    public function isEncodingSupported($encoding)
+    {
+        return StringUtils::isSingleByteEncoding($encoding);
+    }
 
     /**
-     * Constructor
+     * Get a list of supported character encodings
+     *
+     * @return string[]
      */
-    public function __construct()
+    public function getSupportedEncodings()
     {
-        $this->encodings = StringUtils::getSingleByteEncodings();
+        return StringUtils::getSingleByteEncodings();
     }
 
     /**

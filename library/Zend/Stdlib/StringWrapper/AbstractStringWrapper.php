@@ -22,32 +22,31 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
 {
 
     /**
-     * List of supported character sets (upper case)
+     * List of supported character encodings (upper case)
      *
      * @var string[]
      */
     protected $encodings = array();
 
     /**
-     * Check if the given encoding is supported
+     * Check if the given character encoding is supported
      *
      * @param string $encoding
      * @return boolean
      */
     public function isEncodingSupported($encoding)
     {
-        $encoding = strtoupper($encoding);
-        return in_array($encoding, $this->encodings);
+        return in_array(strtoupper($encoding), $this->encodings);
     }
 
     /**
-     * Get a list of supported encodings
+     * Get a list of supported character encodings
      *
      * @return string[]
      */
     public function getSupportedEncodings()
     {
-        return $this->$encodings;
+        return $this->encodings;
     }
 
     /**
@@ -61,7 +60,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
     public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
     {
         if (strcasecmp($toEncoding, $fromEncoding) != 0) {
-            trigger_error("Can't convert '{$fromEncoding}' to '{$toEncoding}'", E_WARNING);
+            trigger_error("Can't convert '{$fromEncoding}' to '{$toEncoding}'", \E_WARNING);
             return false;
         }
 
@@ -78,7 +77,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param  string  $encoding
      * @return string
      */
-    public function wordWrap($string, $width = 75, $break = "\n", $cut = false, $encoding    = 'UTF-8')
+    public function wordWrap($string, $width = 75, $break = "\n", $cut = false, $encoding = 'UTF-8')
     {
         $string = (string) $string;
         if ($string === '') {
@@ -205,5 +204,23 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         }
 
         return $return;
+    }
+
+    /**
+     * Get the internal used name of an encoding
+     *
+     * @param string $encoding
+     * @return string
+     * @throws Exception\InvalidArgumentException On an unsupported encoding
+     */
+    protected function getInternalEncoding($encoding)
+    {
+        $encodingUpper = strtoupper($encoding);
+        if (!isset($this->encodingMap[$encodingUpper])) {
+            throw new Exception\InvalidArgumentException(
+                "Character encoding '{$encoding}' isn't supported by this string wrapper"
+            );
+        }
+        return $this->encodingMap[$encodingUpper];
     }
 }

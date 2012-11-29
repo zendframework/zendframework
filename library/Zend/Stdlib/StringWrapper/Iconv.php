@@ -29,19 +29,18 @@ class Iconv extends AbstractStringWrapper
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5', 'ISO-8859-7',
         'ISO-8859-9', 'ISO-8859-10', 'ISO-8859-13', 'ISO-8859-14', 'ISO-8859-15', 'ISO-8859-16',
         'KOI8-R', 'KOI8-U', 'KOI8-RU',
-        'CP1250', 'CP1251', 'CP1252', 'CP1253', 'CP1254' ,'CP1257',
-        'CP850', 'CP866', 'CP1131',
+        'CP1250', 'CP1251', 'CP1252', 'CP1253', 'CP1254', 'CP1257', 'CP850', 'CP866', 'CP1131',
         'MACROMAN', 'MACCENTRALEUROPE', 'MACICELAND', 'MACCROATIAN', 'MACROMANIA',
-        'MACCYRILLIC', 'MACUKRAINE', 'MACGREEK', 'MACTURKISH',
-        'MACINTOSH',
+        'MACCYRILLIC', 'MACUKRAINE', 'MACGREEK', 'MACTURKISH', 'MACINTOSH',
 
         // Semitic languages
         'ISO-8859-6', 'ISO-8859-8',
-        'CP1255' , 'CP1256', 'CP862',
+        'CP1255', 'CP1256', 'CP862',
         'MACHEBREW', 'MACARABIC',
 
         // Japanese
-        'EUC-JP', 'SHIFT_JIS', 'CP932', 'ISO-2022-JP', 'ISO-2022-JP-2', 'ISO-2022-JP-1',
+        'EUC-JP', 'SHIFT_JIS', 'CP932',
+        'ISO-2022-JP', 'ISO-2022-JP-2', 'ISO-2022-JP-1',
 
         // Chinese
         'EUC-CN', 'HZ', 'GBK', 'CP936', 'GB18030', 'EUC-TW', 'BIG5', 'CP950',

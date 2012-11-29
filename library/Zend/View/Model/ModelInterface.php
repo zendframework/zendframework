@@ -10,10 +10,8 @@
 
 namespace Zend\View\Model;
 
-use ArrayAccess;
 use Countable;
 use IteratorAggregate;
-use Traversable;
 
 /**
  * Interface describing a view model.

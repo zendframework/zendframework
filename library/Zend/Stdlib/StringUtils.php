@@ -115,7 +115,7 @@ abstract class StringUtils
      */
     public static function getWrapper($encoding = 'UTF-8')
     {
-        $$encodings = func_get_args();
+        $encodings = func_get_args();
 
         foreach (static::getRegisteredWrappers() as $wrapper) {
             foreach ($encodings as $encoding) {

@@ -10,6 +10,7 @@
 
 namespace Zend\Session\Validator;
 
+use Zend\Http\PhpEnvironment\RemoteAddress;
 use Zend\Session\Validator\ValidatorInterface as SessionValidator;
 
 /**
@@ -118,7 +119,7 @@ class RemoteAddr implements SessionValidator
      */
     public static function setProxyHeader($header = 'X-Forwarded-For')
     {
-        static::$proxyHeader = static::normalizeProxyHeader($header);
+        static::$proxyHeader = $header;
     }
 
     /**
@@ -128,51 +129,11 @@ class RemoteAddr implements SessionValidator
      */
     protected function getIpAddress()
     {
-        $ip = $this->getIpAddressFromProxy();
-        if ($ip) {
-            return $ip;
-        }
-
-        // direct IP address
-        if (isset($_SERVER['REMOTE_ADDR'])) {
-            return $_SERVER['REMOTE_ADDR'];
-        }
-
-        return '';
-    }
-
-    /**
-     * Attempt to get the IP address for a proxied client
-     *
-     * @return false|string
-     */
-    protected function getIpAddressFromProxy()
-    {
-        if (!static::$useProxy) {
-            return false;
-        }
-
-        $header = static::$proxyHeader;
-
-        if (!isset($_SERVER[$header]) || empty($_SERVER[$header])) {
-            return false;
-        }
-
-        // Extract IPs
-        $ips = explode(',', $_SERVER[$header]);
-        // trim, so we can compare against trusted proxies properly
-        $ips = array_map('trim', $ips);
-        // remove trusted proxy IPs
-        $ips = array_diff($ips, static::$trustedProxies);
-
-        // Any left?
-        if (empty($ips)) {
-            return false;
-        }
-
-        // Return right-most
-        $ip  = array_pop($ips);
-        return $ip;
+        $remoteAddress = new RemoteAddress();
+        $remoteAddress->setUseProxy(static::$useProxy);
+        $remoteAddress->setTrustedProxies(static::$trustedProxies);
+        $remoteAddress->setProxyHeader(static::$proxyHeader);
+        return $remoteAddress->getIpAddress();
     }
 
     /**
@@ -193,24 +154,5 @@ class RemoteAddr implements SessionValidator
     public function getName()
     {
         return __CLASS__;
-    }
-
-    /**
-     * Normalize a header string
-     *
-     * Normalizes a header string to a format that is compatible with
-     * $_SERVER
-     *
-     * @param  string $header
-     * @return string
-     */
-    protected static function normalizeProxyHeader($header)
-    {
-        $header = strtoupper($header);
-        $header = str_replace('-', '_', $header);
-        if (0 !== strpos($header, 'HTTP_')) {
-            $header = 'HTTP_' . $header;
-        }
-        return $header;
     }
 }

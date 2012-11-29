@@ -46,6 +46,13 @@ class RemoteAddr implements SessionValidator
     protected static $trustedProxies = array();
 
     /**
+     * HTTP header to introspect for proxies
+     *
+     * @var string
+     */
+    protected static $proxyHeader = 'HTTP_X_FORWARDED_FOR';
+
+    /**
      * Constructor
      * get the current user IP and store it in the session as 'valid data'
      */
@@ -104,6 +111,17 @@ class RemoteAddr implements SessionValidator
     }
 
     /**
+     * Set the header to introspect for proxy IPs
+     *
+     * @param  string $header
+     * @return void
+     */
+    public static function setProxyHeader($header = 'X-Forwarded-For')
+    {
+        static::$proxyHeader = static::normalizeProxyHeader($header);
+    }
+
+    /**
      * Returns client IP address.
      *
      * @return string IP address.
@@ -134,13 +152,14 @@ class RemoteAddr implements SessionValidator
             return false;
         }
 
-        // Only ever look at X-Forwarded-For header; Client-IP is unreliable
-        if (!isset($_SERVER['HTTP_X_FORWARDED_FOR']) || empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $header = static::$proxyHeader;
+
+        if (!isset($_SERVER[$header]) || empty($_SERVER[$header])) {
             return false;
         }
 
         // Extract IPs
-        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        $ips = explode(',', $_SERVER[$header]);
         // trim, so we can compare against trusted proxies properly
         $ips = array_map('trim', $ips);
         // remove trusted proxy IPs
@@ -174,5 +193,24 @@ class RemoteAddr implements SessionValidator
     public function getName()
     {
         return __CLASS__;
+    }
+
+    /**
+     * Normalize a header string
+     *
+     * Normalizes a header string to a format that is compatible with
+     * $_SERVER
+     *
+     * @param  string $header
+     * @return string
+     */
+    protected static function normalizeProxyHeader($header)
+    {
+        $header = strtoupper($header);
+        $header = str_replace('-', '_', $header);
+        if (0 !== strpos($header, 'HTTP_')) {
+            $header = 'HTTP_' . $header;
+        }
+        return $header;
     }
 }

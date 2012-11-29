@@ -32,6 +32,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         );
         RemoteAddr::setUseProxy(false);
         RemoteAddr::setTrustedProxies(array());
+        RemoteAddr::setProxyHeader();
     }
 
     protected function restore()
@@ -39,6 +40,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $_SERVER = $this->backup;
         RemoteAddr::setUseProxy(false);
         RemoteAddr::setTrustedProxies(array());
+        RemoteAddr::setProxyHeader();
     }
 
     public function testGetData()
@@ -115,7 +117,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $this->restore();
     }
 
-    public function testShouldNotUseClientIpHeaderToTestProxyCapabilities()
+    public function testShouldNotUseClientIpHeaderToTestProxyCapabilitiesByDefault()
     {
         $this->backup();
         $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
@@ -136,6 +138,19 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         RemoteAddr::setTrustedProxies(array('1.1.2.3'));
         $validator = new RemoteAddr();
         $this->assertEquals('2.1.2.3', $validator->getData());
+        $this->restore();
+    }
+
+    public function testCanSpecifyWhichHeaderToUseStatically()
+    {
+        $this->backup();
+        $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '2.1.2.3, 1.1.2.3';
+        $_SERVER['HTTP_CLIENT_IP'] = '0.1.2.4';
+        RemoteAddr::setUseProxy(true);
+        RemoteAddr::setProxyHeader('Client-Ip');
+        $validator = new RemoteAddr();
+        $this->assertEquals('0.1.2.4', $validator->getData());
         $this->restore();
     }
 }

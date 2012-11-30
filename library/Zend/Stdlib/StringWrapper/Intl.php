@@ -47,11 +47,6 @@ class Intl extends AbstractStringWrapper
      */
     public function strlen($str, $encoding = 'UTF-8')
     {
-        if (strcasecmp($encoding, 'UTF-8') != 0) {
-            trigger_error("Character set '{$encoding}' not supported by intl");
-            return false;
-        }
-
         return grapheme_strlen($str);
     }
 
@@ -66,11 +61,6 @@ class Intl extends AbstractStringWrapper
      */
     public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
     {
-        if (strcasecmp($encoding, 'UTF-8') != 0) {
-            trigger_error("Character set '{$encoding}' not supported by intl");
-            return false;
-        }
-
         return grapheme_substr($str, $offset, $length);
     }
 
@@ -85,11 +75,6 @@ class Intl extends AbstractStringWrapper
      */
     public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
     {
-        if (strcasecmp($encoding, 'UTF-8') != 0) {
-            trigger_error("Character set '{$encoding}' not supported by intl");
-            return false;
-        }
-
         return grapheme_strpos($haystack, $needle, $offset);
     }
 }

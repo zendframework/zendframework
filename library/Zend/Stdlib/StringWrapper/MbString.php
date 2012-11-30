@@ -39,6 +39,12 @@ class MbString extends AbstractStringWrapper
         }
 
         $this->encodings = array_map('strtoupper', mb_list_encodings());
+
+        // FIXME: Converting € (UTF-8) to ISO-8859-16 gives a wrong result
+        $indexIso885916 = array_search('ISO-8859-16', $this->encodings, true);
+        if ($indexIso885916 !== false) {
+            unset($this->encodings[$indexIso885916]);
+        }
     }
 
     /**

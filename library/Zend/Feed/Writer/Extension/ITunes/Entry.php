@@ -83,7 +83,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
-        
+
         if ($this->stringWrapper->strlen($value, $this->getEncoding()) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');

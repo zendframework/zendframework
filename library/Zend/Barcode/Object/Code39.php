@@ -120,7 +120,7 @@ class Code39 extends AbstractObject
         if (substr($text, 0, 1) != '*' && substr($text, -1) != '*') {
             return '*' . $text . '*';
         }
-        
+
         return $text;
     }
 

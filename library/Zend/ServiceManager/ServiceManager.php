@@ -10,7 +10,6 @@
 
 namespace Zend\ServiceManager;
 
-use Closure;
 use ReflectionClass;
 
 /**
@@ -45,7 +44,7 @@ class ServiceManager implements ServiceLocatorInterface
     protected $invokableClasses = array();
 
     /**
-     * @var string|callable|Closure|FactoryInterface[]
+     * @var string|callable|\Closure|FactoryInterface[]
      */
     protected $factories = array();
 

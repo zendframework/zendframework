@@ -631,8 +631,8 @@ class Client implements Stdlib\DispatchableInterface
         if (!defined('self::AUTH_' . strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
-        if (empty($user) || empty($password)) {
-            throw new Exception\InvalidArgumentException("The username and the password cannot be empty");
+        if (empty($user)) {
+            throw new Exception\InvalidArgumentException("The username cannot be empty");
         }
 
         $this->auth = array (

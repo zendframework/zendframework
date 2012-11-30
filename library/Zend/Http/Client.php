@@ -1042,9 +1042,9 @@ class Client implements Stdlib\DispatchableInterface
         // zlib is available or not.
         if (!$this->getRequest()->getHeaders()->has('Accept-Encoding')) {
             if (function_exists('gzinflate')) {
-                $headers['Accept-encoding'] = 'gzip, deflate';
+                $headers['Accept-Encoding'] = 'gzip, deflate';
             } else {
-                $headers['Accept-encoding'] = 'identity';
+                $headers['Accept-Encoding'] = 'identity';
             }
         }
 

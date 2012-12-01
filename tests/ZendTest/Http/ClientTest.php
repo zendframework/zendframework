@@ -79,4 +79,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $cookies = $client->getCookies();
         $this->assertEquals(2, count($cookies));
     }
+
+    public function testEncodeAuthHeaderWorksAsExpected()
+    {
+    	$encoded = Client::encodeAuthHeader('test', 'test');
+    	$this->assertEquals('Basic ' . base64_encode('test:test'), $encoded);
+    }
+
+    /**
+     * @expectedException Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public function testEncodeAuthHeaderThrowsExceptionWhenUsernameContainsSemiColon()
+    {
+    	$encoded = Client::encodeAuthHeader('test:', 'test');
+    }
+
+    /**
+     * @expectedException Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public function testEncodeAuthHeaderThrowsExceptionWhenInvalidAuthTypeIsUsed()
+    {
+    	$encoded = Client::encodeAuthHeader('test', 'test', 'test');
+    }
 }

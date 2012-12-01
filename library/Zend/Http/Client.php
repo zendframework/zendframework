@@ -1336,7 +1336,7 @@ class Client implements Stdlib\DispatchableInterface
             default:
                 throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
 
-                return $authHeader;
         }
+        return $authHeader;
     }
 }

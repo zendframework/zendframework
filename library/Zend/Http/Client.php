@@ -1311,7 +1311,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param string $password
      * @param string $type
      * @return string
-     * @throws Zend_Http_Client_Exception
+     * @throws Zend\Http\Client\Exception\InvalidArgumentException
      */
     public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
     {

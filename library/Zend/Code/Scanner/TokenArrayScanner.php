@@ -319,7 +319,6 @@ class TokenArrayScanner implements ScannerInterface
             return $tokenIndex;
         };
         $MACRO_TOKEN_LOGICAL_START_INDEX = function() use (&$tokenIndex, &$docCommentIndex) {
-            ;
             return ($docCommentIndex === false) ? $tokenIndex : $docCommentIndex;
         };
         $MACRO_DOC_COMMENT_START         = function() use (&$tokenIndex, &$docCommentIndex) {

@@ -230,7 +230,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testFeedIncludesLinkToXmlRssWhereRssAndAtomLinksAreProvided()
     {
         $this->validWriter->setFeedLink('http://www.example.com/rss', 'rss');
-        $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');        
+        $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
@@ -238,7 +238,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $xpath = new \DOMXPath($feed->getDomDocument());
         $this->assertEquals(1, $xpath->evaluate('/rss/channel/atom:link[@rel="self"]')->length);
     }
-  
+
     public function testFeedIncludesLinkToXmlRssWhereTheFeedWillBeAvailable()
     {
         $this->validWriter->setFeedLink('http://www.example.com/rss', 'rss');

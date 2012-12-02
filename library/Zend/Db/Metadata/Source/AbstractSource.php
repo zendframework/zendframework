@@ -362,9 +362,6 @@ abstract class AbstractSource implements MetadataInterface
             'referenced_table_schema' => 'setReferencedTableSchema',
             'referenced_table_name'   => 'setReferencedTableName',
             'referenced_columns'      => 'setReferencedColumns',
-            'match_option'            => 'setMatchOption',
-            'update_rule'             => 'setUpdateRule',
-            'delete_rule'             => 'setDeleteRule',
             'check_clause'            => 'setCheckClause',
         ) as $key => $setMethod) {
             if (isset($info[$key])) {

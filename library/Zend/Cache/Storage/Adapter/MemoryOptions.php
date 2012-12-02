@@ -93,7 +93,7 @@ class MemoryOptions extends AdapterOptions
             throw new Exception\InvalidArgumentException("Invalid  memory limit '{$value}'");
         }
 
-        $value = (int)$matches[1];
+        $value = (int) $matches[1];
         if ($value <= 0) {
             return 0;
         }

@@ -283,7 +283,7 @@ class Curl implements HttpAdapter, StreamInterface
                     foreach ($headers AS $k => $header) {
                         if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
                             if (is_resource($body)) {
-                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
+                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $m[1];
                             }
                             unset($headers[$k]);
                         }

@@ -190,7 +190,7 @@ class Xml implements FormatterInterface
                 } elseif ($key == "extra" && empty($value)) {
                     continue;
                 }
-                $elt->appendChild(new DOMElement($key, (string)$value));
+                $elt->appendChild(new DOMElement($key, (string) $value));
             }
         }
 

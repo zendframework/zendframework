@@ -199,7 +199,7 @@ class InArray extends AbstractValidator
                     if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
                         && is_string($value) && (is_int($el) || is_float($el))
                     ) {
-                        $el = (string)$el;
+                        $el = (string) $el;
                     }
 
                     if ($el == $value) {
@@ -223,7 +223,7 @@ class InArray extends AbstractValidator
             ) {
                 foreach ($haystack as &$h) {
                     if (is_int($h) || is_float($h)) {
-                        $h = (string)$h;
+                        $h = (string) $h;
                     }
                 }
             }

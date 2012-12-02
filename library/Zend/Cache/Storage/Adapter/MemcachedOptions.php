@@ -164,7 +164,7 @@ class MemcachedOptions extends AdapterOptions
 
                 // array(array('host' => <host>[, 'port' => <port>[, 'weight' => <weight>]])[, ...])
                 if (!isset($server[0]) && isset($server['host'])) {
-                    $host   = (string)$server['host'];
+                    $host   = (string) $server['host'];
                     $port   = isset($server['port'])   ? (int) $server['port']   : $port;
                     $weight = isset($server['weight']) ? (int) $server['weight'] : $weight;
                 }
@@ -183,13 +183,13 @@ class MemcachedOptions extends AdapterOptions
                 }
 
                 $host = $server['host'];
-                $port = isset($server['port']) ? (int)$server['port'] : $port;
+                $port = isset($server['port']) ? (int) $server['port'] : $port;
 
                 if (isset($server['query'])) {
                     $query = null;
                     parse_str($server['query'], $query);
                     if (isset($query['weight'])) {
-                        $weight = (int)$query['weight'];
+                        $weight = (int) $query['weight'];
                     }
                 }
             }

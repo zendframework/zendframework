@@ -206,7 +206,7 @@ class ClassMapAutoloader implements SplAutoloader
         }
 
         $parts = explode('/', str_replace(array('/','\\'), '/', substr($path, 8)));
-        $parts = array_values(array_filter($parts, function($p) {
+        $parts = array_values(array_filter($parts, function ($p) {
             return ($p !== '' && $p !== '.');
         }));
 

@@ -52,7 +52,7 @@ class ClassMethods extends AbstractHydrator
             ));
         }
 
-        $transform = function($letters) {
+        $transform = function ($letters) {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
@@ -97,7 +97,7 @@ class ClassMethods extends AbstractHydrator
             ));
         }
 
-        $transform = function($letters) {
+        $transform = function ($letters) {
             $letter = substr(array_shift($letters), 1, 1);
             return ucfirst($letter);
         };

@@ -233,7 +233,7 @@ class MethodScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+        $MACRO_TOKEN_ADVANCE = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
             static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
@@ -254,7 +254,7 @@ class MethodScanner implements ScannerInterface
             }
             return $tokenIndex;
         };
-        $MACRO_INFO_START    = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+        $MACRO_INFO_START    = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex] = array(
                 'type'        => 'parameter',
                 'tokenStart'  => $tokenIndex,
@@ -265,7 +265,7 @@ class MethodScanner implements ScannerInterface
                 'position'    => $infoIndex + 1, // position is +1 of infoIndex
             );
         };
-        $MACRO_INFO_ADVANCE  = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+        $MACRO_INFO_ADVANCE  = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;

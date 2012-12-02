@@ -69,7 +69,7 @@ class ServiceListenerTest extends TestCase
         return array(
             'invokables' => array(__CLASS__ => __CLASS__),
             'factories' => array(
-                'foo' => function($sm) { },
+                'foo' => function ($sm) { },
             ),
             'abstract_factories' => array(
                 new \Zend\ServiceManager\Di\DiAbstractServiceFactory(new \Zend\Di\Di()),

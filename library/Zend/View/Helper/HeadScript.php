@@ -413,7 +413,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         $type = ($this->autoEscape) ? $this->escape($item->type) : $item->type;
         $html  = '<script type="' . $type . '"' . $attrString . '>';
         if (!empty($item->source)) {
-            $html .= PHP_EOL ;
+            $html .= PHP_EOL;
 
             if ($addScriptEscape) {
                 $html .= $indent . '    ' . $escapeStart . PHP_EOL;

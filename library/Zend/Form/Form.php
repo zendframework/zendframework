@@ -552,7 +552,7 @@ class Form extends Fieldset implements FormInterface
                 if (isset($data[$key])) {
                     $count = count($data[$key]);
 
-                    for ($i = 0 ; $i != $count ; ++$i) {
+                    for ($i = 0; $i != $count; ++$i) {
                         $values[] = $value;
                     }
                 }

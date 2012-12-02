@@ -496,7 +496,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     public function prepareFieldset()
     {
         if ($this->targetElement !== null) {
-            for ($i = 0 ; $i != $this->count ; ++$i) {
+            for ($i = 0; $i != $this->count; ++$i) {
                 $elementOrFieldset = $this->createNewTargetElementInstance();
                 $elementOrFieldset->setName($i);
 

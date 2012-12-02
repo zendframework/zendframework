@@ -144,14 +144,13 @@ class MemoryManager
             switch (strtolower($memoryLimitStr[strlen($memoryLimitStr)-1])) {
                 case 'g':
                     $this->memoryLimit *= 1024;
-                    // Break intentionally omitted
+                    // no break
                 case 'm':
                     $this->memoryLimit *= 1024;
-                    // Break intentionally omitted
+                    // no break
                 case 'k':
                     $this->memoryLimit *= 1024;
                     break;
-
                 default:
                     break;
             }

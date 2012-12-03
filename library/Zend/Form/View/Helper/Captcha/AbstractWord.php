@@ -118,7 +118,6 @@ abstract class AbstractWord extends FormInput
             ));
         }
 
-        $attributes = $element->getAttributes();
         $captcha = $element->getCaptcha();
 
         if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
@@ -127,9 +126,14 @@ abstract class AbstractWord extends FormInput
                 __METHOD__
             ));
         }
+        
+        
+        $inputAttributes = $element->getAttributes();
+        $hiddenAttributes = $inputAttributes;
+        unset($hiddenAttributes['id']);
 
-        $hidden    = $this->renderCaptchaHidden($captcha, $attributes);
-        $input     = $this->renderCaptchaInput($captcha, $attributes);
+        $hidden    = $this->renderCaptchaHidden($captcha, $hiddenAttributes);
+        $input     = $this->renderCaptchaInput($captcha, $inputAttributes);
 
         return $hidden . $input;
     }

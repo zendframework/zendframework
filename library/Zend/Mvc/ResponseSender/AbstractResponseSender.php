@@ -2,25 +2,29 @@
 
 namespace Zend\Mvc\ResponseSender;
 
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
 use Zend\Stdlib\ResponseInterface;
 
 abstract class AbstractResponseSender implements ResponseSenderInterface
 {
+    /**#@+
+     * Response sender events triggered by eventmanager
+     */
+    const EVENT_SEND_HEADERS  = 'sendHeaders';
+    const EVENT_SEND_CONTENT  = 'sendContent';
+    const EVENT_SEND_RESPONSE = 'sendResponse';
+    /**#@-*/
+
+    /**
+     * @var EventManagerInterface
+     */
+    protected $events;
 
     /**
      * @var ResponseInterface
      */
     protected $response;
-
-    /**
-     * @var bool
-     */
-    protected $headersSent = false;
-
-    /**
-     * @var bool
-     */
-    protected $contentSent = false;
 
     /**
      * Get response
@@ -44,19 +48,35 @@ abstract class AbstractResponseSender implements ResponseSenderInterface
     }
 
     /**
-     * @return bool
+     * Inject an EventManager instance
+     *
+     * @param  EventManagerInterface $eventManager
+     * @return void
      */
-    public function headersSent()
+    public function setEventManager(EventManagerInterface $eventManager)
     {
-        return $this->headersSent;
+        $eventManager->setIdentifiers(array(
+            'Zend\Mvc\ResponseSender\ResponseSenderInterface',
+            __CLASS__,
+            get_called_class(),
+            'response_sender',
+        ));
+        $this->events = $eventManager;
     }
 
     /**
-     * @return bool
+     * Retrieve the event manager
+     *
+     * Lazy-loads an EventManager instance if none registered.
+     *
+     * @return EventManagerInterface
      */
-    public function contentSent()
+    public function getEventManager()
     {
-        return $this->contentSent;
+        if (!$this->events instanceof EventManagerInterface) {
+            $this->setEventManager(new EventManager());
+        }
+        return $this->events;
     }
 
 }

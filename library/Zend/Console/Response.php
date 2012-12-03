@@ -19,11 +19,32 @@ use Zend\Stdlib\ResponseInterface;
  */
 class Response extends Message implements ResponseInterface
 {
+
+    /**
+     * @var bool
+     */
     protected $contentSent = false;
 
+    /**
+     * Check if content was sent
+     *
+     * @return bool
+     */
     public function contentSent()
     {
         return $this->contentSent;
+    }
+
+    /**
+     * Set content sent
+     *
+     * @param $flag
+     * @return Response
+     */
+    public function setContentSent($flag)
+    {
+        $this->contentSent = (bool) $flag;
+        return $this;
     }
 
     /**
@@ -48,6 +69,12 @@ class Response extends Message implements ResponseInterface
         return $this->getMetadata('errorLevel', 0);
     }
 
+    /**
+     * Send content
+     *
+     * @return Response
+     * @deprecated
+     */
     public function sendContent()
     {
         if ($this->contentSent()) {
@@ -58,10 +85,14 @@ class Response extends Message implements ResponseInterface
         return $this;
     }
 
+    /**
+     * @deprecated
+     */
     public function send()
     {
         $this->sendContent();
         $errorLevel = (int)$this->getMetadata('errorLevel',0);
         exit($errorLevel);
     }
+
 }

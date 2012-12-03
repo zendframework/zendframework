@@ -281,7 +281,7 @@ class Application implements
             $response = $result->last();
             if ($response instanceof ResponseInterface) {
                 $event->setTarget($this);
-                $event->setResponse($response);
+                $this->setResponse($response);
                 $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 return $response;
             }
@@ -301,13 +301,13 @@ class Application implements
         $response = $result->last();
         if ($response instanceof ResponseInterface) {
             $event->setTarget($this);
-            $event->setResponse($response);
+            $this->setResponse($response);
             $events->trigger(MvcEvent::EVENT_FINISH, $event);
             return $response;
         }
 
         $response = $this->getResponse();
-        $event->setResponse($response);
+        $this->setResponse($response);
 
         return $this->completeRequest($event);
     }
@@ -328,5 +328,20 @@ class Application implements
         $events->trigger(MvcEvent::EVENT_RENDER, $event);
         $events->trigger(MvcEvent::EVENT_FINISH, $event);
         return $event->getResponse();
+    }
+
+    /**
+     * Set response object in mvc event and service manager
+     *
+     * @param \Zend\Stdlib\ResponseInterface $response
+     */
+    protected function setResponse(ResponseInterface $response)
+    {
+        $serviceManager = $this->getServiceManager();
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService('Response', $response);
+        $serviceManager->setAllowOverride(false);
+        $this->getMvcEvent()->setResponse($response);
+        $this->response = $response;
     }
 }

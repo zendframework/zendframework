@@ -41,11 +41,9 @@ class ServiceListenerFactory implements FactoryInterface
      */
     protected $defaultServiceConfig = array(
         'invokables' => array(
-            'DispatchListener' => 'Zend\Mvc\DispatchListener',
-            'RouteListener'    => 'Zend\Mvc\RouteListener',
-            'HttpResponseSender' => 'Zend\Mvc\ResponseSender\HttpResponseSender',
-            'StreamResponseSender' => 'Zend\Mvc\ResponseSender\StreamResponseSender',
-            'ConsoleResponseSender' => 'Zend\Mvc\ResponseSender\ConsoleResponseSender'
+            'DispatchListener'     => 'Zend\Mvc\DispatchListener',
+            'RouteListener'        => 'Zend\Mvc\RouteListener',
+            'SendResponseListener' => 'Zend\Mvc\SendResponseListener'
         ),
         'factories' => array(
             'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
@@ -58,8 +56,8 @@ class ServiceListenerFactory implements FactoryInterface
             'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
             'Request'                 => 'Zend\Mvc\Service\RequestFactory',
             'Response'                => 'Zend\Mvc\Service\ResponseFactory',
+            'ResponseSender'          => 'Zend\Mvc\Service\ResponseSenderFactory',
             'Router'                  => 'Zend\Mvc\Service\RouterFactory',
-            'SendResponseListener'    => 'Zend\Mvc\Service\SendResponseListenerFactory',
             'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
             'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
             'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
@@ -76,6 +74,7 @@ class ServiceListenerFactory implements FactoryInterface
             'Di'                                     => 'DependencyInjector',
             'Zend\Di\LocatorInterface'               => 'DependencyInjector',
             'Zend\Mvc\Controller\PluginManager'      => 'ControllerPluginManager',
+            'Zend\Mvc\ResponseSender\ResponseSenderInterface' => 'ResponseSender',
             'Zend\View\Resolver\TemplateMapResolver' => 'ViewTemplateMapResolver',
             'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',
             'Zend\View\Resolver\AggregateResolver'   => 'ViewResolver',

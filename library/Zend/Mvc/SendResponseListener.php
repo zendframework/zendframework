@@ -10,32 +10,23 @@
 
 namespace Zend\Mvc;
 
-use Traversable;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Mvc\ResponseSender\ResponseSenderInterface;
 use Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  */
-class SendResponseListener implements
-    ListenerAggregateInterface,
-    ServiceLocatorAwareInterface
+class SendResponseListener implements ListenerAggregateInterface
 {
     /**
-     * @var array
+     * @var ResponseSenderInterface
      */
-    protected $options = array();
-
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
+    protected $responseSender;
 
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -43,29 +34,23 @@ class SendResponseListener implements
     protected $listeners = array();
 
     /**
-     * Constructor
+     * Set response sender
      *
-     * @param array $options
+     * @param ResponseSenderInterface $responseSender
      */
-    public function __construct(array $options)
+    public function setResponseSender(ResponseSenderInterface $responseSender)
     {
-        $this->options = $options;
+        $this->responseSender = $responseSender;
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * Get response sender
+     *
+     * @return ResponseSenderInterface
      */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function getResponseSender()
     {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-    /**
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
+        return $this->responseSender;
     }
 
     /**
@@ -76,6 +61,7 @@ class SendResponseListener implements
      */
     public function attach(EventManagerInterface $events)
     {
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'injectResponseSender'), -5000);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
     }
 
@@ -95,25 +81,35 @@ class SendResponseListener implements
     }
 
     /**
+     * Inject response sender
+     *
+     * @param MvcEvent $e
+     * @return void
+     */
+    public function injectResponseSender(MvcEvent $e)
+    {
+        $response = $e->getResponse();
+        if (!$response instanceof Response) {
+            return; // there is no response to send
+        }
+        $app = $e->getApplication();
+        $serviceManager = $app->getServiceManager();
+        $this->setResponseSender($serviceManager->get('ResponseSender'));
+    }
+
+    /**
      * Send the response
      *
      * @param  MvcEvent $e
-     * @return mixed
+     * @return void
      */
     public function sendResponse(MvcEvent $e)
     {
         $response = $e->getResponse();
         if (!$response instanceof Response) {
-            return false; // there is no response to send
+            return; // there is no response to send
         }
-
-        $responseType = get_class($response);
-        if (!isset($this->options[$responseType])) {
-            return false; // there is no known response type to send
-        }
-
-        $responseSender = $this->getServiceLocator()->get($this->options[$responseType]);
-        $responseSender->setResponse($response);
+        $responseSender = $this->getResponseSender();
         $responseSender->sendResponse();
     }
 }

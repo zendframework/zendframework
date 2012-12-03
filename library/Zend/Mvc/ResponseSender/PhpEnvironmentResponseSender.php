@@ -4,25 +4,27 @@ namespace Zend\Mvc\ResponseSender;
 
 use Zend\Http\Header\MultipleHeaderInterface;
 
-class HttpResponseSender extends AbstractResponseSender
+class PhpEnvironmentResponseSender extends AbstractResponseSender
 {
+
     /**
      * Send HTTP headers
      *
-     * @return HttpResponseSender
+     * @triggers sendHeaders
+     * @return PhpEnvironmentResponseSender
      */
     public function sendHeaders()
     {
-        if ($this->headersSent()) {
+        $this->getEventManager()->trigger(self::EVENT_SEND_HEADERS, $this);
+        $response = $this->getResponse();
+        /* @var $response \Zend\Http\PhpEnvironment\Response */
+
+        if ($response->headersSent()) {
             return $this;
         }
-
-        $response = $this->getResponse();
-        /* @var $response \Zend\Http\Response */
         $status  = $response->renderStatusLine();
         header($status);
-
-        /** @var \Zend\Http\Header\HeaderInterface $header */
+        /* @var \Zend\Http\Header\HeaderInterface $header */
         foreach ($response->getHeaders() as $header) {
             if ($header instanceof MultipleHeaderInterface) {
                 header($header->toString(), false);
@@ -30,36 +32,40 @@ class HttpResponseSender extends AbstractResponseSender
             }
             header($header->toString());
         }
-
-        $this->headersSent = true;
+        echo '1';
         return $this;
     }
 
     /**
      * Send content
      *
-     * @return HttpResponseSender
+     * @triggers sendContent
+     * @return PhpEnvironmentResponseSender
      */
     public function sendContent()
     {
-        if ($this->contentSent()) {
+        $this->getEventManager()->trigger(self::EVENT_SEND_CONTENT, $this);
+        $response = $this->getResponse();
+        /* @var $response \Zend\Http\PhpEnvironment\Response */
+        if ($response->contentSent()) {
             return $this;
         }
 
-        $response = $this->getResponse();
         echo $response->getContent();
-        $this->contentSent = true;
+        $response->setContentSent(true);
         return $this;
     }
 
     /**
      * Send HTTP response
      *
-     * @return HttpResponseSender
+     * @return PhpEnvironmentResponseSender
      */
     public function sendResponse()
     {
+        $this->getEventManager()->trigger(self::EVENT_SEND_RESPONSE, $this);
         $this->sendHeaders()
+        ->sendHeaders()
              ->sendContent();
         return $this;
     }

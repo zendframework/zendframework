@@ -2,11 +2,11 @@
 
 namespace Zend\Mvc\ResponseSender;
 
+use Zend\EventManager\EventManagerAwareInterface;
 use Zend\Stdlib\ResponseInterface;
 
-interface ResponseSenderInterface
+interface ResponseSenderInterface extends EventManagerAwareInterface
 {
-
     /**
      * Get response
      *
@@ -28,4 +28,5 @@ interface ResponseSenderInterface
      * @return void
      */
     public function sendResponse();
+
 }

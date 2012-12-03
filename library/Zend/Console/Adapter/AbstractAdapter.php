@@ -223,9 +223,6 @@ abstract class AbstractAdapter implements AdapterInterface
                 case static::FILL_SHADE_DARK:
                     $fillChar = $charset::SHADE_DARK;
                     break;
-                case static::FILL_SHADE_LIGHT:
-                    $fillChar = $charset::SHADE_LIGHT;
-                    break;
                 case static::FILL_BLOCK:
                 default:
                     $fillChar = $charset::BLOCK;

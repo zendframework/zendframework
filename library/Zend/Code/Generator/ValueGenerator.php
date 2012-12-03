@@ -212,8 +212,6 @@ class ValueGenerator extends AbstractGenerator
         switch (gettype($value)) {
             case 'boolean':
                 return self::TYPE_BOOLEAN;
-            case 'integer':
-                return self::TYPE_INT;
             case 'string':
                 return self::TYPE_STRING;
             case 'double':

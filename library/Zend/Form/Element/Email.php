@@ -14,7 +14,6 @@ use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\Explode as ExplodeValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -38,14 +37,14 @@ class Email extends Element implements InputProviderInterface
     protected $validator;
 
     /**
-     * @var ValidatorInterface
+     * @var \Zend\Validator\ValidatorInterface
      */
     protected $emailValidator;
 
     /**
      * Get primary validator
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     public function getValidator()
     {
@@ -70,7 +69,7 @@ class Email extends Element implements InputProviderInterface
     /**
      * Sets the primary validator to use for this element
      *
-     * @param  ValidatorInterface $validator
+     * @param  \Zend\Validator\ValidatorInterface $validator
      * @return Email
      */
     public function setValidator(ValidatorInterface $validator)
@@ -97,7 +96,7 @@ class Email extends Element implements InputProviderInterface
      * (more strict) email validator such as Zend\Validator\Email
      * if you wish.
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     public function getEmailValidator()
     {
@@ -113,7 +112,7 @@ class Email extends Element implements InputProviderInterface
      * Sets the email validator to use for multiple or single
      * email addresses.
      *
-     * @param  ValidatorInterface $validator
+     * @param  \Zend\Validator\ValidatorInterface $validator
      * @return Email
      */
     public function setEmailValidator(ValidatorInterface $validator)

@@ -15,7 +15,6 @@ use Zend\I18n\Validator\Float as NumberValidator;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
 use Zend\Validator\Step as StepValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -36,7 +35,7 @@ class Range extends NumberElement
     /**
      * Get validator
      *
-     * @return ValidatorInterface[]
+     * @return \Zend\Validator\ValidatorInterface[]
      */
     protected function getValidators()
     {

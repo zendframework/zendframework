@@ -25,7 +25,6 @@ use Traversable;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\InArray as InArrayValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -46,7 +45,7 @@ class Checkbox extends Element implements InputProviderInterface
     );
 
     /**
-     * @var ValidatorInterface
+     * @var \Zend\Validator\ValidatorInterface
      */
     protected $validator;
 
@@ -162,7 +161,7 @@ class Checkbox extends Element implements InputProviderInterface
     /**
      * Get validator
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getValidator()
     {

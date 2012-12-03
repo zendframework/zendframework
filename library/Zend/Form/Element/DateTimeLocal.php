@@ -12,7 +12,6 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\Validator\DateStep as DateStepValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -44,7 +43,7 @@ class DateTimeLocal extends DateTime
     /**
      * Retrieves a DateStepValidator configured for a Date Input type
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getStepValidator()
     {

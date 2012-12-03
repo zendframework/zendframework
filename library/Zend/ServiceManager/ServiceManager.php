@@ -10,7 +10,6 @@
 
 namespace Zend\ServiceManager;
 
-use Closure;
 use ReflectionClass;
 
 /**
@@ -45,7 +44,7 @@ class ServiceManager implements ServiceLocatorInterface
     protected $invokableClasses = array();
 
     /**
-     * @var string|callable|Closure|FactoryInterface[]
+     * @var string|callable|\Closure|FactoryInterface[]
      */
     protected $factories = array();
 
@@ -630,7 +629,11 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->allowOverride === false && $this->has(array($cAlias, $alias), false)) {
-            throw new Exception\InvalidServiceNameException('An alias by this name already exists');
+            throw new Exception\InvalidServiceNameException(sprintf(
+                'An alias by the name "%s" or "%s" already exists',
+                $cAlias,
+                $alias
+            ));
         }
 
         $this->aliases[$cAlias] = $nameOrAlias;

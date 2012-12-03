@@ -14,7 +14,6 @@ use Zend\Form\Element;
 use Zend\Form\Element\DateTime as DateTimeElement;
 use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -43,7 +42,7 @@ class Date extends DateTimeElement
     /**
      * Retrieves a Date Validator configured for a DateTime Input type
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getDateValidator()
     {
@@ -53,7 +52,7 @@ class Date extends DateTimeElement
     /**
      * Retrieves a DateStep Validator configured for a Date Input type
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getStepValidator()
     {

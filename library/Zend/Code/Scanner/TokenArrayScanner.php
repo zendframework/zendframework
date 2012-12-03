@@ -295,7 +295,7 @@ class TokenArrayScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+        $MACRO_TOKEN_ADVANCE             = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
                 $token        = false;
@@ -319,7 +319,6 @@ class TokenArrayScanner implements ScannerInterface
             return $tokenIndex;
         };
         $MACRO_TOKEN_LOGICAL_START_INDEX = function () use (&$tokenIndex, &$docCommentIndex) {
-            ;
             return ($docCommentIndex === false) ? $tokenIndex : $docCommentIndex;
         };
         $MACRO_DOC_COMMENT_START = function () use (&$tokenIndex, &$docCommentIndex) {

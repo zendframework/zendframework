@@ -10,7 +10,6 @@
 
 namespace Zend\View\Helper;
 
-use Traversable;
 use Zend\View\Exception;
 use Zend\View\Model\ModelInterface;
 

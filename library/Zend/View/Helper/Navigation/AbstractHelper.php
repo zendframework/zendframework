@@ -182,7 +182,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     public function getContainer()
     {
         if (null === $this->container) {
-            $this->container = new \Zend\Navigation\Navigation();
+            $this->container = new Navigation\Navigation();
         }
 
         return $this->container;
@@ -191,8 +191,8 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * Verifies container and eventually fetches it from service locator if it is a string
      *
-     * @param \Zend\Navigation\AbstractContainer|string|null $container
-     * @throws \Zend\View\Exception\InvalidArgumentException
+     * @param  Navigation\AbstractContainer|string|null $container
+     * @throws Exception\InvalidArgumentException
      */
     protected function parseContainer(&$container = null)
     {
@@ -212,7 +212,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
              * Load the navigation container from the root service locator
              *
              * The navigation container is probably located in Zend\ServiceManager\ServiceManager
-             * and not in the Zend\View\HelperPluginManager. If the set service locator is a
+             * and not in the View\HelperPluginManager. If the set service locator is a
              * HelperPluginManager, access the navigation container via the main service locator.
              */
             $sl = $this->getServiceLocator();

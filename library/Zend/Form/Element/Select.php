@@ -28,7 +28,6 @@ use Zend\Form\Exception\InvalidArgumentException;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Explode as ExplodeValidator;
 use Zend\Validator\InArray as InArrayValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -49,7 +48,7 @@ class Select extends Element implements InputProviderInterface
     );
 
     /**
-     * @var ValidatorInterface
+     * @var \Zend\Validator\ValidatorInterface
      */
     protected $validator;
 
@@ -172,7 +171,7 @@ class Select extends Element implements InputProviderInterface
     /**
      * Get validator
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getValidator()
     {

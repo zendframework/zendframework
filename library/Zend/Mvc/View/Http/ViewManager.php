@@ -14,11 +14,8 @@ use ArrayAccess;
 use Traversable;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\SendResponseListener;
-use Zend\ServiceManager\ServiceManager;
-use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
 use Zend\View\Resolver as ViewResolver;
 use Zend\View\Strategy\PhpRendererStrategy;
@@ -34,7 +31,7 @@ use Zend\View\View;
  *
  * Defines and manages the following services:
  *
- * - ViewHelperManager (also aliased to Zend\View\HelperPluginManager and ViewHelperBroker)
+ * - ViewHelperManager (also aliased to Zend\View\HelperPluginManager)
  * - ViewTemplateMapResolver (also aliased to Zend\View\Resolver\TemplateMapResolver)
  * - ViewTemplatePathStack (also aliased to Zend\View\Resolver\TemplatePathStack)
  * - ViewResolver (also aliased to Zend\View\Resolver\AggregateResolver and ResolverInterface)
@@ -155,7 +152,7 @@ class ViewManager implements ListenerAggregateInterface
     /**
      * Instantiates and configures the renderer's helper manager
      *
-     * @return ViewHelperManager
+     * @return \Zend\View\HelperPluginManager
      */
     public function getHelperManager()
     {

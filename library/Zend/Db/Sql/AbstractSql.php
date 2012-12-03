@@ -145,7 +145,7 @@ abstract class AbstractSql
     protected function processSubSelect(Select $subselect, PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if ($adapter) {
-            $stmtContainer = new \Zend\Db\Adapter\StatementContainer;
+            $stmtContainer = new StatementContainer;
 
             // Track subselect prefix and count for parameters
             $this->processInfo['subselectCount']++;

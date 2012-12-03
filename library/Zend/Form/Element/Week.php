@@ -13,7 +13,6 @@ namespace Zend\Form\Element;
 use Zend\Form\Element;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\Regex as RegexValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -34,7 +33,7 @@ class Week extends DateTime
     /**
      * Retrieves a Date Validator configured for a Week Input type
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getDateValidator()
     {
@@ -44,7 +43,7 @@ class Week extends DateTime
     /**
      * Retrieves a DateStep Validator configured for a Week Input type
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getStepValidator()
     {

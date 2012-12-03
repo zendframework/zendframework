@@ -32,7 +32,6 @@ class PhpEnvironmentResponseSender extends AbstractResponseSender
             }
             header($header->toString());
         }
-        echo '1';
         return $this;
     }
 
@@ -65,7 +64,6 @@ class PhpEnvironmentResponseSender extends AbstractResponseSender
     {
         $this->getEventManager()->trigger(self::EVENT_SEND_RESPONSE, $this);
         $this->sendHeaders()
-        ->sendHeaders()
              ->sendContent();
         return $this;
     }

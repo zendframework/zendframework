@@ -98,7 +98,7 @@ class ServerUrl extends AbstractHelper
         if (($scheme == 'http' && (null === $port || $port == 80))
             || ($scheme == 'https' && (null === $port || $port == 443))
         ) {
-            $this->host = $host;;
+            $this->host = $host;
             return $this;
         }
 

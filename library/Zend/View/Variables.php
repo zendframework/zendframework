@@ -15,7 +15,7 @@ use ArrayObject;
 /**
  * Abstract class for Zend_View to help enforce private constructs.
  *
- * @todo       Allow specifying string names for broker, filter chain, variables
+ * @todo       Allow specifying string names for manager, filter chain, variables
  * @todo       Move escaping into variables object
  * @todo       Move strict variables into variables object
  * @category   Zend

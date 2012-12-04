@@ -83,7 +83,7 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * Retrieve plugin broker
+     * Retrieve plugin manager
      *
      * @return FilterPluginManager
      */

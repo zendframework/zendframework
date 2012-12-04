@@ -342,7 +342,7 @@ class BaseInputFilterTest extends TestCase
 
         $store = new stdClass;
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\Callback(function($value, $context) use ($store) {
+        $foo->getValidatorChain()->addValidator(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
             return true;
@@ -372,7 +372,7 @@ class BaseInputFilterTest extends TestCase
 
         $store = new stdClass;
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\Callback(function($value, $context) use ($store) {
+        $foo->getValidatorChain()->addValidator(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
             return true;

@@ -77,7 +77,7 @@ class Ini implements ReaderInterface
         $this->directory = dirname($filename);
 
         set_error_handler(
-            function($error, $message = '', $file = '', $line = 0) use ($filename) {
+            function ($error, $message = '', $file = '', $line = 0) use ($filename) {
                 throw new Exception\RuntimeException(sprintf(
                     'Error reading INI file "%s": %s',
                     $filename, $message
@@ -105,7 +105,7 @@ class Ini implements ReaderInterface
         $this->directory = null;
 
         set_error_handler(
-            function($error, $message = '', $file = '', $line = 0) {
+            function ($error, $message = '', $file = '', $line = 0) {
                 throw new Exception\RuntimeException(sprintf(
                     'Error reading INI string: %s',
                     $message

@@ -65,7 +65,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function toArray()
     {
         $array = array();
-        $transform = function($letters) {
+        $transform = function ($letters) {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };

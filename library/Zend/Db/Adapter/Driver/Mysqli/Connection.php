@@ -150,7 +150,7 @@ class Connection implements ConnectionInterface
         $p = $this->connectionParameters;
 
         // given a list of key names, test for existence in $p
-        $findParameterValue = function(array $names) use ($p) {
+        $findParameterValue = function (array $names) use ($p) {
             foreach ($names as $name) {
                 if (isset($p[$name])) {
                     return $p[$name];

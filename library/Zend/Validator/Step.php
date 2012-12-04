@@ -98,7 +98,7 @@ class Step extends AbstractValidator
      */
     public function setStep($step)
     {
-        $this->step = $step;
+        $this->step = (float) $step;
         return $this;
     }
 

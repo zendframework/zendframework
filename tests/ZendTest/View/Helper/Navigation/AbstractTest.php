@@ -114,7 +114,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                 'extra_config'         => array(
                     'service_manager' => array(
                         'factories' => array(
-                            'Config' => function() use ($config) {
+                            'Config' => function () use ($config) {
                                 return array(
                                     'navigation' => array(
                                         'default' => $config->get('nav_test1'),

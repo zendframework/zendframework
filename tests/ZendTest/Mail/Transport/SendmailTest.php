@@ -32,7 +32,7 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
     {
         $this->transport = new Sendmail();
         $self = $this;
-        $this->transport->setCallable(function($to, $subject, $message, $additional_headers, $additional_parameters = null) use ($self) {
+        $this->transport->setCallable(function ($to, $subject, $message, $additional_headers, $additional_parameters = null) use ($self) {
             $self->to                    = $to;
             $self->subject               = $subject;
             $self->message               = $message;

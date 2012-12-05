@@ -152,7 +152,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testRenderingFiltersContentWithFilterChain()
     {
         $expected = 'foo bar baz';
-        $this->renderer->getFilterChain()->attach(function($content) {
+        $this->renderer->getFilterChain()->attach(function ($content) {
             return str_replace('INJECT', 'bar', $content);
         });
         $this->renderer->vars()->assign(array('bar' => 'INJECT'));

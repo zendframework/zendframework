@@ -377,7 +377,7 @@ class Logger implements LoggerInterface
             E_USER_DEPRECATED   => self::DEBUG
         );
 
-        set_error_handler(function($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
+        set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
             $errorLevel = error_reporting();
 
             if ($errorLevel & $errno) {

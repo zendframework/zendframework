@@ -35,7 +35,7 @@ class HelperConfig implements ConfigInterface
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-        $serviceManager->setFactory('navigation', function(HelperPluginManager $pm) {
+        $serviceManager->setFactory('navigation', function (HelperPluginManager $pm) {
             $helper = new \Zend\View\Helper\Navigation;
             $helper->setServiceLocator($pm->getServiceLocator());
             return $helper;

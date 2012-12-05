@@ -220,9 +220,11 @@ abstract class AbstractAccept implements HeaderInterface
                             '/', '[', ']', '?', '=', '{', '}',  ' ',  "\t");
 
         $escaped = preg_replace_callback('/[[:cntrl:]"\\\\]/', // escape cntrl, ", \
-                                         function($v) { return '\\' . $v[0]; },
-                                         $value
-                    );
+            function ($v) {
+                return '\\' . $v[0];
+            },
+            $value
+        );
 
         if ($escaped == $value && !array_intersect(str_split($value), $separators)) {
             $value = $key . '=' . $value;
@@ -405,7 +407,7 @@ abstract class AbstractAccept implements HeaderInterface
      */
     protected function sortFieldValueParts()
     {
-        $sort = function($a, $b) { // If A has higher prio than B, return -1.
+        $sort = function ($a, $b) { // If A has higher prio than B, return -1.
             if ($a->priority > $b->priority) {
                 return -1;
             } elseif ($a->priority < $b->priority) {

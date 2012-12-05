@@ -84,7 +84,7 @@ class LocatorRegistrationTest extends TestCase
     public function testModuleClassIsRegisteredWithDiAndInjectedWithSharedInstances()
     {
         $locator         = $this->serviceManager;
-        $locator->setFactory('Foo\Bar', function($s) {
+        $locator->setFactory('Foo\Bar', function ($s) {
             $module   = $s->get('ListenerTestModule\Module');
             $manager  = $s->get('Zend\ModuleManager\ModuleManager');
             $instance = new \Foo\Bar($module, $manager);

@@ -50,7 +50,7 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
     public function testCallbackIsMutable()
     {
         $original = $this->options->getCallback();
-        $new      = function($transport) {};
+        $new      = function ($transport) {};
         $this->options->setCallback($new);
         $test     = $this->options->getCallback();
         $this->assertNotSame($original, $test);

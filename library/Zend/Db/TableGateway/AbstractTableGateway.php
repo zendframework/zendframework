@@ -67,6 +67,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      * @var Sql
      */
     protected $sql = null;
+    
 
     /**
      *
@@ -441,7 +442,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             case 'adapter':
                 return $this->adapter;
             case 'table':
-                return $this->table;
+                return $this->table;    
         }
         if ($this->featureSet->canCallMagicGet($property)) {
             return $this->featureSet->callMagicGet($property);

@@ -46,7 +46,7 @@ class Oracle implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
-        return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
+        return strtoupper('"' . str_replace('"', '\\' . '"', $identifier) . '"');
     }
 
     /**
@@ -61,7 +61,7 @@ class Oracle implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('"."', $identifierChain);
         }
-        return '"' . $identifierChain . '"';
+        return strtoupper('"' . $identifierChain . '"');
     }
 
     /**
@@ -134,7 +134,7 @@ class Oracle implements PlatformInterface
                 case 'as':
                     break;
                 default:
-                    $parts[$i] = '"' . str_replace('"', '\\' . '"', $part) . '"';
+                    $parts[$i] = strtoupper('"' . str_replace('"', '\\' . '"', $part) . '"');
             }
         }
         return implode('', $parts);

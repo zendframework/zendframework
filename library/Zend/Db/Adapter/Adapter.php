@@ -276,7 +276,7 @@ class Adapter implements AdapterInterface
                 return new Platform\Mysql();
             case 'SqlServer':
                 return new Platform\SqlServer();
-            case 'Oracle':
+            case 'Oci':
                 return new Platform\Oracle();
             case 'Sqlite':
                 return new Platform\Sqlite();

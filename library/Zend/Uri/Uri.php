@@ -1322,7 +1322,7 @@ class Uri implements UriInterface
      */
     protected static function decodeUrlEncodedChars($input, $allowed = '')
     {
-        $decodeCb = function($match) use ($allowed) {
+        $decodeCb = function ($match) use ($allowed) {
             $char = rawurldecode($match[0]);
             if (preg_match($allowed, $char)) {
                 return $char;

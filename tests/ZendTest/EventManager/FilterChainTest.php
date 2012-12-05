@@ -74,14 +74,14 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterChainShouldReturnLastResponse()
     {
-        $this->filterchain->attach(function($context, $params, $chain) {
+        $this->filterchain->attach(function ($context, $params, $chain) {
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
             $return =  $chain->next($context, $params, $chain);
             return $return;
         });
-        $this->filterchain->attach(function($context, array $params) {
+        $this->filterchain->attach(function ($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
             return str_rot13($string);
         });
@@ -107,17 +107,17 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testFilteringStopsAsSoonAsAFilterFailsToCallNext()
     {
-        $this->filterchain->attach(function($context, $params, $chain) {
+        $this->filterchain->attach(function ($context, $params, $chain) {
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
             return $chain->next($context, $params, $chain);
         }, 10000);
-        $this->filterchain->attach(function($context, array $params) {
+        $this->filterchain->attach(function ($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
             return str_rot13($string);
         }, 1000);
-        $this->filterchain->attach(function($context, $params, $chain) {
+        $this->filterchain->attach(function ($context, $params, $chain) {
             $string = isset($params['string']) ? $params['string'] : '';
             return hash('md5', $string);
         }, 100);

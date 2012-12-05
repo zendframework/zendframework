@@ -142,12 +142,12 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
             'serviceFalse'  => null,
         );
 
-        $serviceTrue  = function($value) use ($params) {
+        $serviceTrue  = function ($value) use ($params) {
             $params->serviceTrue = $value;
             return true;
         };
 
-        $serviceFalse = function($value) use ($params) {
+        $serviceFalse = function ($value) use ($params) {
             $params->serviceFalse = $value;
             return false;
         };

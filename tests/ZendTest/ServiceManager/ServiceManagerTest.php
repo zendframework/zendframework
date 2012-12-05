@@ -249,11 +249,11 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     public function testAllowsRetrievingFromPeeringContainerFirst()
     {
         $parent = new ServiceManager();
-        $parent->setFactory('foo', function($sm) {
+        $parent->setFactory('foo', function ($sm) {
             return 'bar';
         });
         $child  = new ServiceManager();
-        $child->setFactory('foo', function($sm) {
+        $child->setFactory('foo', function ($sm) {
             return 'baz';
         });
         $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);

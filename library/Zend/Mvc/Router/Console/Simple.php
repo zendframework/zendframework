@@ -375,7 +375,9 @@ class Simple implements RouteInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options, function(&$val, $key) {$val = ltrim($val, '-');});
+                array_walk($options, function (&$val, $key) {
+                    $val = ltrim($val, '-');
+                });
 
                 // prepare item
                 $item = array(
@@ -416,7 +418,9 @@ class Simple implements RouteInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options, function(&$val, $key) {$val = ltrim($val, '-');});
+                array_walk($options, function (&$val, $key) {
+                    $val = ltrim($val, '-');
+                });
 
                 // prepare item
                 $item = array(

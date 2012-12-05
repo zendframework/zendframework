@@ -193,7 +193,7 @@ class Socket implements HttpAdapter, StreamInterface
             ? substr($this->connected_to[0], (strpos($this->connected_to[0], '://') + 3), strlen($this->connected_to[0]))
             : $this->connected_to[0];
 
-        if (($connected_host != $host || $this->connected_to[1] != $port)) {
+        if ($connected_host != $host || $this->connected_to[1] != $port) {
             if (is_resource($this->socket)) {
                 $this->close();
             }

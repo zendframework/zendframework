@@ -82,8 +82,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testEncodeAuthHeaderWorksAsExpected()
     {
-    	$encoded = Client::encodeAuthHeader('test', 'test');
-    	$this->assertEquals('Basic ' . base64_encode('test:test'), $encoded);
+        $encoded = Client::encodeAuthHeader('test', 'test');
+        $this->assertEquals('Basic ' . base64_encode('test:test'), $encoded);
     }
 
     /**
@@ -91,7 +91,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeAuthHeaderThrowsExceptionWhenUsernameContainsSemiColon()
     {
-    	$encoded = Client::encodeAuthHeader('test:', 'test');
+        $encoded = Client::encodeAuthHeader('test:', 'test');
     }
 
     /**
@@ -99,6 +99,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeAuthHeaderThrowsExceptionWhenInvalidAuthTypeIsUsed()
     {
-    	$encoded = Client::encodeAuthHeader('test', 'test', 'test');
+        $encoded = Client::encodeAuthHeader('test', 'test', 'test');
     }
 }

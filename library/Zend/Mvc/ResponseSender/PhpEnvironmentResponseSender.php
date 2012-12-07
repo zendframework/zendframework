@@ -2,24 +2,22 @@
 
 namespace Zend\Mvc\ResponseSender;
 
+use Zend\Mvc\ResponseSender\SendResponseEvent;
 use Zend\Http\Header\MultipleHeaderInterface;
+use Zend\Http\PhpEnvironment\Response;
 
-class PhpEnvironmentResponseSender extends AbstractResponseSender
+class PhpEnvironmentResponseSender implements ResponseSenderInterface
 {
-
     /**
      * Send HTTP headers
      *
-     * @triggers sendHeaders
+     * @param SendResponseEvent $event
      * @return PhpEnvironmentResponseSender
      */
-    public function sendHeaders()
+    public function sendHeaders(SendResponseEvent $event)
     {
-        $this->getEventManager()->trigger(self::EVENT_SEND_HEADERS, $this);
-        $response = $this->getResponse();
-        /* @var $response \Zend\Http\PhpEnvironment\Response */
-
-        if ($response->headersSent()) {
+        $response = $event->getResponse();
+        if ($response->headersSent() || $event->headersSent()) {
             return $this;
         }
         $status  = $response->renderStatusLine();
@@ -32,39 +30,41 @@ class PhpEnvironmentResponseSender extends AbstractResponseSender
             }
             header($header->toString());
         }
+        $event->setHeadersSent();
         return $this;
     }
 
     /**
      * Send content
      *
-     * @triggers sendContent
+     * @param SendResponseEvent $event
      * @return PhpEnvironmentResponseSender
      */
-    public function sendContent()
+    public function sendContent(SendResponseEvent $event)
     {
-        $this->getEventManager()->trigger(self::EVENT_SEND_CONTENT, $this);
-        $response = $this->getResponse();
-        /* @var $response \Zend\Http\PhpEnvironment\Response */
-        if ($response->contentSent()) {
+        if ($event->contentSent()) {
             return $this;
         }
-
+        $response = $event->getResponse();
         echo $response->getContent();
-        $response->setContentSent(true);
+        $event->setContentSent();
         return $this;
     }
 
     /**
      * Send HTTP response
      *
+     * @param SendResponseEvent $event
      * @return PhpEnvironmentResponseSender
      */
-    public function sendResponse()
+    public function __invoke(SendResponseEvent $event)
     {
-        $this->getEventManager()->trigger(self::EVENT_SEND_RESPONSE, $this);
-        $this->sendHeaders()
-             ->sendContent();
+        $response = $event->getResponse();
+        if ($response instanceof Response) {
+            $this->sendHeaders($event)
+                 ->sendContent($event);
+            $event->stopPropagation(true);
+        }
         return $this;
     }
 

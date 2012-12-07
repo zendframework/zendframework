@@ -2,38 +2,42 @@
 
 namespace Zend\Mvc\ResponseSender;
 
-class ConsoleResponseSender extends AbstractResponseSender
+use Zend\Console\Response;
+
+class ConsoleResponseSender implements ResponseSenderInterface
 {
     /**
      * Send content
      *
+     * @param SendResponseEvent $event
      * @return ConsoleResponseSender
      */
-    public function sendContent()
+    public function sendContent(SendResponseEvent $event)
     {
-        $this->getEventManager()->trigger(self::EVENT_SEND_CONTENT, $this);
-        $response = $this->getResponse();
-        /* @var $response \Zend\Console\Response */
-        if ($response->contentSent()) {
+        if ($event->contentSent()) {
             return $this;
         }
+        $response = $event->getResponse();
         echo $response->getContent();
-        $response->setContentSent(true);
+        $event->setContentSent();
         return $this;
     }
 
     /**
      * Send the response
      *
+     * @param SendResponseEvent $event
      * @return void
      */
-    public function sendResponse()
+    public function __invoke(SendResponseEvent $event)
     {
-        $this->getEventManager()->trigger(self::EVENT_SEND_RESPONSE, $this);
-        $this->sendContent();
-        $response = $this->getResponse();
-        $errorLevel = (int)$response->getMetadata('errorLevel',0);
-        exit($errorLevel);
+        $response = $event->getResponse();
+        if ($response instanceof Response) {
+            $this->sendContent($response);
+            $errorLevel = (int) $response->getMetadata('errorLevel',0);
+            $event->stopPropagation(true);
+            exit($errorLevel);
+        }
     }
 
 }

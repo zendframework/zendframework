@@ -32,11 +32,6 @@ class Response extends HttpResponse
     /**
      * @var bool
      */
-    protected $headersSent = false;
-
-    /**
-     * @var bool
-     */
     protected $contentSent = false;
 
     /**
@@ -73,27 +68,16 @@ class Response extends HttpResponse
      */
     public function headersSent()
     {
-        return $this->headersSent;
+        return headers_sent();
     }
 
     /**
      * @return bool
+     * @deprecated
      */
     public function contentSent()
     {
         return $this->contentSent;
-    }
-
-    /**
-     * Set content sent
-     *
-     * @param bool $flag
-     * @return Response
-     */
-    public function setContentSent($flag)
-    {
-        $this->contentSent = (bool) $flag;
-        return $this;
     }
 
     /**

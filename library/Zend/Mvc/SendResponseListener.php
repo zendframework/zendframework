@@ -10,23 +10,25 @@
 
 namespace Zend\Mvc;
 
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\ResponseSender\ResponseSenderInterface;
+use Zend\Mvc\ResponseSender\ConsoleResponseSender;
+use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
+use Zend\Mvc\ResponseSender\SendResponseEvent;
+use Zend\Mvc\ResponseSender\StreamResponseSender;
 use Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  */
-class SendResponseListener implements ListenerAggregateInterface
+class SendResponseListener implements
+    EventManagerAwareInterface,
+    ListenerAggregateInterface
 {
-    /**
-     * @var ResponseSenderInterface
-     */
-    protected $responseSender;
 
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -34,24 +36,42 @@ class SendResponseListener implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
-     * Set response sender
-     *
-     * @param ResponseSenderInterface $responseSender
+     * @var EventManagerInterface
      */
-    public function setResponseSender(ResponseSenderInterface $responseSender)
+    protected $eventManager;
+
+    /**
+     * Inject an EventManager instance
+     *
+     * @param  EventManagerInterface $eventManager
+     * @return SendResponseListener
+     */
+    public function setEventManager(EventManagerInterface $eventManager)
     {
-        $this->responseSender = $responseSender;
+        $eventManager->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+        ));
+        $this->eventManager = $eventManager;
+        $this->attachDefaultListeners();
+        return $this;
     }
 
     /**
-     * Get response sender
+     * Retrieve the event manager
      *
-     * @return ResponseSenderInterface
+     * Lazy-loads an EventManager instance if none registered.
+     *
+     * @return EventManagerInterface
      */
-    public function getResponseSender()
+    public function getEventManager()
     {
-        return $this->responseSender;
+        if (!$this->eventManager instanceof EventManagerInterface) {
+            $this->setEventManager(new EventManager());
+        }
+        return $this->eventManager;
     }
+
 
     /**
      * Attach the aggregate to the specified event manager
@@ -61,7 +81,6 @@ class SendResponseListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'injectResponseSender'), -5000);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
     }
 
@@ -81,23 +100,6 @@ class SendResponseListener implements ListenerAggregateInterface
     }
 
     /**
-     * Inject response sender
-     *
-     * @param MvcEvent $e
-     * @return void
-     */
-    public function injectResponseSender(MvcEvent $e)
-    {
-        $response = $e->getResponse();
-        if (!$response instanceof Response) {
-            return; // there is no response to send
-        }
-        $app = $e->getApplication();
-        $serviceManager = $app->getServiceManager();
-        $this->setResponseSender($serviceManager->get('ResponseSender'));
-    }
-
-    /**
      * Send the response
      *
      * @param  MvcEvent $e
@@ -109,7 +111,24 @@ class SendResponseListener implements ListenerAggregateInterface
         if (!$response instanceof Response) {
             return; // there is no response to send
         }
-        $responseSender = $this->getResponseSender();
-        $responseSender->sendResponse();
+        $event = new SendResponseEvent();
+        $event->setName(SendResponseEvent::SEND_RESPONSE);
+        $event->setResponse($response);
+        $event->setTarget($this);
+        $this->getEventManager()->trigger($event);
     }
+
+    /**
+     * Register the default event listeners
+     *
+     * @return SendResponseListener
+     */
+    protected function attachDefaultListeners()
+    {
+        $events = $this->getEventManager();
+        $events->attach(SendResponseEvent::SEND_RESPONSE, new PhpEnvironmentResponseSender(), -1000);
+        $events->attach(SendResponseEvent::SEND_RESPONSE, new ConsoleResponseSender(), -2000);
+        //$events->attach(SendResponseEvent::SEND_RESPONSE, new StreamResponseSender(), -3000);
+    }
+
 }

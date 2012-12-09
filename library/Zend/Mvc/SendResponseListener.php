@@ -112,7 +112,6 @@ class SendResponseListener implements
             return; // there is no response to send
         }
         $event = new SendResponseEvent();
-        $event->setName(SendResponseEvent::SEND_RESPONSE);
         $event->setResponse($response);
         $event->setTarget($this);
         $this->getEventManager()->trigger($event);
@@ -126,8 +125,8 @@ class SendResponseListener implements
     protected function attachDefaultListeners()
     {
         $events = $this->getEventManager();
-        $events->attach(SendResponseEvent::SEND_RESPONSE, new PhpEnvironmentResponseSender(), -1000);
-        $events->attach(SendResponseEvent::SEND_RESPONSE, new ConsoleResponseSender(), -2000);
+        $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new PhpEnvironmentResponseSender(), -1000);
+        $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new ConsoleResponseSender(), -2000);
         //$events->attach(SendResponseEvent::SEND_RESPONSE, new StreamResponseSender(), -3000);
     }
 

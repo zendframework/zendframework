@@ -43,8 +43,8 @@ class Posix extends AbstractAdapter
      */
     protected static $ansiColorMap = array(
         'fg' => array(
-            Color::NORMAL        => '22;39m',
-            Color::RESET         => '22;39m',
+            Color::NORMAL        => '22;39',
+            Color::RESET         => '22;39',
 
             Color::BLACK         => '0;30',
             Color::RED           => '0;31',
@@ -65,8 +65,8 @@ class Posix extends AbstractAdapter
             Color::LIGHT_WHITE   => '1;37',
         ),
         'bg' => array(
-            Color::NORMAL        => '0;49m',
-            Color::RESET         => '0;49m',
+            Color::NORMAL        => '0;49',
+            Color::RESET         => '0;49',
 
             Color::BLACK         => '40',
             Color::RED           => '41',

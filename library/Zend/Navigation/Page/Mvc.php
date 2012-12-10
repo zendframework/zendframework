@@ -440,6 +440,8 @@ class Mvc extends AbstractPage
                  'controller' => $this->getController(),
                  'params'     => $this->getParams(),
                  'route'      => $this->getRoute(),
+                 'router'     => $this->getRouter(),
+                 'route_match' => $this->getRouteMatch(),
             )
         );
     }

@@ -80,7 +80,7 @@ class RedirectTest extends TestCase
     {
         $controller = new SampleController();
         $plugin     = $controller->plugin('redirect');
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose a response');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose');
         $plugin->toRoute('home');
     }
 
@@ -90,7 +90,7 @@ class RedirectTest extends TestCase
         $event      = new MvcEvent();
         $controller->setEvent($event);
         $plugin = $controller->plugin('redirect');
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose a response');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose');
         $plugin->toRoute('home');
     }
 

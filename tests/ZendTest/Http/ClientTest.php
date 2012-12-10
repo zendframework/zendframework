@@ -11,7 +11,8 @@
 namespace ZendTest\Http;
 
 use Zend\Http\Client;
-use Zend\Http\Exception;
+
+use Zend\Http\Header\AcceptEncoding;
 use Zend\Http\Header\SetCookie;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -78,5 +79,27 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $cookies = $client->getCookies();
         $this->assertEquals(2, count($cookies));
+    }
+
+    public function testClientUsesAcceptEncodingHeaderFromRequestObject()
+    {
+        $client = new Client();
+
+        $client->setAdapter('Zend\Http\Client\Adapter\Test');
+
+        $request = $client->getRequest();
+
+        $acceptEncodingHeader = new AcceptEncoding();
+        $acceptEncodingHeader->addEncoding('foo', 1);
+        $request->getHeaders()->addHeader($acceptEncodingHeader);
+
+        $client->send();
+
+        $rawRequest = $client->getLastRawRequest();
+
+        $this->assertNotContains('Accept-Encoding: gzip, deflate', $rawRequest, null, true);
+        $this->assertNotContains('Accept-Encoding: identity', $rawRequest, null, true);
+
+        $this->assertContains('Accept-Encoding: foo', $rawRequest);
     }
 }

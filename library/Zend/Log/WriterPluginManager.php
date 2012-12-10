@@ -24,6 +24,7 @@ class WriterPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
+        'chromephp'      => 'Zend\Log\Writer\ChromePhp',
         'db'             => 'Zend\Log\Writer\Db',
         'fingerscrossed' => 'Zend\Log\Writer\FingersCrossed',
         'firephp'        => 'Zend\Log\Writer\FirePhp',

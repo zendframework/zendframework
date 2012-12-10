@@ -565,6 +565,9 @@ class Getopt
         $maxLen = 20;
         $lines = array();
         foreach ($this->rules as $rule) {
+            if (isset($rule['isFreeformFlag'])) {
+                continue;
+            }
             $flags = array();
             if (is_array($rule['alias'])) {
                 foreach ($rule['alias'] as $flag) {
@@ -763,7 +766,10 @@ class Getopt
             // Magic methods in future will use this mark as real flag value
             $this->ruleMap[$flag] = $flag;
             $realFlag = $flag;
-            $this->rules[$realFlag] = array('param' => 'optional');
+            $this->rules[$realFlag] = array(
+                'param'          => 'optional',
+                'isFreeformFlag' => true
+            );
         } else {
             $realFlag = $this->ruleMap[$flag];
         }

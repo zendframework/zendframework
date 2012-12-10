@@ -21,15 +21,7 @@ class IniTest extends TestCase
 
     public function setUp()
     {
-        //$this->originalLocale = Locale::getDefault();
-        //Locale::setDefault('en_EN');
-
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
-    }
-
-    public function tearDown()
-    {
-        //Locale::setDefault($this->originalLocale);
     }
 
     public function testLoaderFailsToLoadMissingFile()
@@ -61,7 +53,6 @@ class IniTest extends TestCase
                                     'Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
     }
-
 
     public function testLoaderReturnsValidTextDomain()
     {

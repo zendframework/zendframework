@@ -42,21 +42,22 @@ class Ini implements FileLoaderInterface
             ));
         }
 
-        $messages = array();
-        $iniReader = new IniReader();
+        $messages           = array();
+        $iniReader          = new IniReader();
         $messagesNamespaced = $iniReader->fromFile($filename);
 
         $list = $messagesNamespaced;
-        if(isset($messagesNamespaced['translation'])) {
+        if (isset($messagesNamespaced['translation'])) {
            $list = $messagesNamespaced['translation'];
         }
-        foreach($list as $message) {
-            if(!is_array($message) || count($message) < 2) {
+
+        foreach ($list as $message) {
+            if (!is_array($message) || count($message) < 2) {
                 throw new Exception\InvalidArgumentException(
                     'Each INI row must be an array with message and translation'
                 );
             }
-            if(isset($message['message']) && isset($message['translation'])) {
+            if (isset($message['message']) && isset($message['translation'])) {
                 $messages[$message['message']] = $message['translation'];
                 continue;
             }
@@ -72,8 +73,9 @@ class Ini implements FileLoaderInterface
 
         $textDomain = new TextDomain($messages);
 
-        if (array_key_exists('plural', $messagesNamespaced) &&
-                isset($messagesNamespaced['plural']['plural_forms'])) {
+        if (array_key_exists('plural', $messagesNamespaced)
+            && isset($messagesNamespaced['plural']['plural_forms'])
+        ) {
             $textDomain->setPluralRule(
                 PluralRule::fromString($messagesNamespaced['plural']['plural_forms'])
             );

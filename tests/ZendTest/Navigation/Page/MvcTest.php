@@ -418,7 +418,9 @@ class MvcTest extends TestCase
             'active'     => true,
             'visible'    => false,
             'foo'        => 'bar',
-            'meaning'    => 42
+            'meaning'    => 42,
+            'router'     => $this->router,
+            'route_match' => $this->routeMatch,
         );
 
         $page = new Page\Mvc($options);

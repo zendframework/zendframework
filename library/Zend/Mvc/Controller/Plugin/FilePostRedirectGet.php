@@ -11,12 +11,24 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
+use Zend\Filter\FilterChain;
 use Zend\Form\Form;
+use Zend\Http\Response;
+use Zend\InputFilter\FileInput;
+use Zend\InputFilter\InputFilterInterface;
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Session\Container;
+use Zend\Validator\ValidatorChain;
 
 /**
- * Plugin to help facilitate Post/Redirect/Get (http://en.wikipedia.org/wiki/Post/Redirect/Get)
+ * Plugin to help facilitate Post/Redirect/Get for file upload forms
+ * (http://en.wikipedia.org/wiki/Post/Redirect/Get)
+ *
+ * Requires that the Form's File inputs contain a 'fileRenameUpload' filter
+ * with the target option set: 'target' => /valid/target/path'.
+ * This is so the files are moved to a new location between requests.
+ * If this filter is not added, the temporary upload files will disappear
+ * between requests.
  *
  * @category Zend
  * @package Zend_Mvc
@@ -29,46 +41,131 @@ class FilePostRedirectGet extends AbstractPlugin
      */
     protected $sessionContainer;
 
-    public function __invoke($form, $redirect = null, $redirectToUrl = false)
+    /**
+     * @param  Form    $form
+     * @param  string  $redirect      Route or URL string (default: current route)
+     * @param  boolean $redirectToUrl Use $redirect as a URL string (default: false)
+     * @return boolean|array|Response
+     */
+    public function __invoke(Form $form, $redirect = null, $redirectToUrl = false)
     {
-        $controller = $this->getController();
-        $request    = $controller->getRequest();
-        $container  = $this->getSessionContainer();
-
+        $request = $this->getController()->getRequest();
         if ($request->isPost()) {
-            $container->setExpirationHops(1, array('post', 'errors'));
-
-            $post = array_merge(
-                $request->getPost()->toArray(),
-                $request->getFiles()->toArray()
-            );
-            $container->post = $post;
-
-            $form->setData($post);
-            if (!$form->isValid()) {
-                $container->errors = $form->getMessages();
-            }
-
-            return $this->redirect($redirect, $redirectToUrl);
+            return $this->handlePostRequest($form, $redirect, $redirectToUrl);
         } else {
-            if (null !== $container->post) {
-                $post   = $container->post;
-                $errors = $container->errors;
-                unset($container->post);
-                unset($container->errors);
-
-                $form->setData($post);
-                if (null !== $errors) {
-                    $form->setMessages($errors);
-                }
-
-                return $post;
-            }
-
-            return false;
+            return $this->handleGetRequest($form);
         }
     }
 
+    /**
+     * @param  Form    $form
+     * @param  string  $redirect      Route or URL string (default: current route)
+     * @param  boolean $redirectToUrl Use $redirect as a URL string (default: false)
+     * @return Response
+     */
+    protected function handlePostRequest(Form $form, $redirect, $redirectToUrl)
+    {
+        $container = $this->getSessionContainer();
+        $request   = $this->getController()->getRequest();
+
+        // Change required flag to false for any previously uploaded files
+        $inputFilter   = $form->getInputFilter();
+        $previousFiles = ($container->files) ?: array();
+        $this->traverseInputs(
+            $inputFilter,
+            $previousFiles,
+            function($input, $value) {
+                if ($input instanceof FileInput) {
+                    $input->setRequired(false);
+                }
+                return $value;
+            }
+        );
+
+        // Run the form validations/filters and retrieve any errors
+        $postFiles = $request->getFiles()->toArray();
+        $postOther = $request->getPost()->toArray();
+        $post      = array_merge($postOther, $postFiles);
+
+        $form->setData($post);
+        $isValid = $form->isValid();
+        $data    = $form->getData(Form::VALUES_AS_ARRAY);
+        $errors  = (!$isValid) ? $form->getMessages() : null;
+
+        // Loop through data and merge previous files with new valid files
+        $postFiles = array_merge(
+            $previousFiles,
+            $this->combineFileInputPostData($inputFilter, $data, $postFiles)
+        );
+        $post = array_merge($post, $postFiles);
+
+        // Save form data in session
+        $container->setExpirationHops(1, array('post', 'errors', 'isValid'));
+        $container->post    = $post;
+        $container->errors  = $errors;
+        $container->isValid = $isValid;
+        $container->files   = $postFiles;
+
+        return $this->redirect($redirect, $redirectToUrl);
+    }
+
+    /**
+     * @param  Form $form
+     * @return boolean|array
+     */
+    protected function handleGetRequest(Form $form)
+    {
+        $container = $this->getSessionContainer();
+        if (null === $container->post) {
+            // No previous post, bail early
+            unset($container->files);
+            return false;
+        }
+
+        // Collect data from session
+        $post          = $container->post;
+        $errors        = $container->errors;
+        $isValid       = $container->isValid;
+        $previousFiles = ($container->files) ?: array();
+        unset($container->post);
+        unset($container->errors);
+        unset($container->isValid);
+
+        // Remove File Input validators and filters on previously uploaded files
+        // in case $form->isValid() or $form->bindValues() is run
+        $inputFilter = $form->getInputFilter();
+        $this->traverseInputs(
+            $inputFilter,
+            $post,
+            function($input, $value) {
+                if ($input instanceof FileInput) {
+                    $input->setAutoPrependUploadValidator(false)
+                          ->setValidatorChain(new ValidatorChain())
+                          ->setFilterChain(new FilterChain);
+                }
+                return $value;
+            }
+        );
+
+        // Fill form with previous info and state
+        $form->setData($post);
+        $form->isValid(); // re-validate to bind values
+        if (null !== $errors) {
+            $form->setMessages($errors); // overwrite messages
+        }
+        $this->setProtectedFormProperty($form, 'isValid', $isValid); // force previous state
+
+        // Clear previous files from session data if form was valid
+        if ($isValid) {
+            unset($container->files);
+        }
+
+        return $post;
+    }
+
+    /**
+     * @return Container
+     */
     public function getSessionContainer()
     {
         if (!isset($this->sessionContainer)) {
@@ -77,6 +174,102 @@ class FilePostRedirectGet extends AbstractPlugin
         return $this->sessionContainer;
     }
 
+    /**
+     * @param  Form   $form
+     * @param  string $property
+     * @param  mixed  $value
+     * @return FilePostRedirectGet
+     */
+    protected function setProtectedFormProperty(Form $form, $property, $value)
+    {
+        $formClass = new \ReflectionClass('Zend\Form\Form');
+        $property  = $formClass->getProperty($property);
+        $property->setAccessible(true);
+        $property->setValue($form, $value);
+        return $this;
+    }
+
+    /**
+     * @param  InputFilterInterface $inputFilter
+     * @param  array                $values
+     * @param  callable             $callback
+     * @return array|null
+     */
+    protected function traverseInputs(InputFilterInterface $inputFilter, $values, $callback)
+    {
+        $returnValues = null;
+        foreach ($values as $name => $value) {
+            if (!$inputFilter->has($name)) {
+                continue;
+            }
+
+            $input = $inputFilter->get($name);
+            if ($input instanceof InputFilterInterface && is_array($value)) {
+                $retVal = $this->traverseInputs($input, $value, $callback);
+                if (null !== $retVal) {
+                    $returnValues[$name] = $retVal;
+                }
+                continue;
+            }
+
+            $retVal = $callback($input, $value);
+            if (null !== $retVal) {
+                $returnValues[$name] = $retVal;
+            }
+        }
+        return $returnValues;
+    }
+
+    /**
+     * @param  InputFilterInterface $inputFilter
+     * @param  array                $data
+     * @param  array                $post
+     * @return array
+     */
+    protected function combineFileInputPostData(InputFilterInterface $inputFilter, $data, $post)
+    {
+        $returnValues = array();
+        $validInputs = $inputFilter->getValidInput();
+        foreach ($validInputs as $name => $input) {
+            if (!isset($data[$name]) || !isset($post[$name])) {
+                continue;
+            }
+            $dataValue = $data[$name];
+            $postValue = $post[$name];
+
+            if ($input instanceof InputFilterInterface && is_array($dataValue)) {
+                $retVal = $this->combineFileInputPostData($input, $dataValue, $postValue);
+                if (!empty($retVal)) {
+                    $returnValues[$name] = $retVal;
+                }
+                continue;
+            }
+
+            if ($input instanceof FileInput) {
+                if (!is_array($dataValue)) {
+                    if ('' !== $dataValue) {
+                        $postValue['tmp_name'] = $dataValue;
+                        $returnValues[$name] = $postValue;
+                    }
+                } else {
+                    foreach ($dataValue as $i => $fileName) {
+                        if ('' !== $fileName) {
+                            $postValue[$i]['tmp_name'] = $fileName;
+                            $returnValues[$name][$i]   = $postValue[$i];
+                        }
+                    }
+                }
+            }
+        }
+        return $returnValues;
+    }
+
+    /**
+     * @param  string  $redirect
+     * @param  boolean $redirectToUrl
+     * @return Response
+     * @throws \Zend\Mvc\Exception\RuntimeException
+     */
     protected function redirect($redirect, $redirectToUrl)
     {
         $controller = $this->getController();

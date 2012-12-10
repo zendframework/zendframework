@@ -25,28 +25,6 @@ class FileTest extends TestCase
         $factory = new InputFilterFactory();
         $input = $factory->createInput($inputSpec);
         $this->assertInstanceOf('Zend\InputFilter\FileInput', $input);
-
-        $validators = $input->getValidatorChain()->getValidators();
-        $this->assertNotEmpty($validators);
-        $this->assertInstanceOf('Zend\Validator\File\Upload', $validators[0]['instance']);
-    }
-
-    public function testProvidesDefaultInputSpecificationForMultiple()
-    {
-        $element = new FileElement('foo');
-        $element->setAttribute('multiple', true);
-        $this->assertEquals('file', $element->getAttribute('type'));
-
-        $inputSpec = $element->getInputSpecification();
-        $factory = new InputFilterFactory();
-        $input = $factory->createInput($inputSpec);
-        $this->assertInstanceOf('Zend\InputFilter\FileInput', $input);
-
-        $validators = $input->getValidatorChain()->getValidators();
-        $this->assertNotEmpty($validators);
-        $validator = $validators[0]['instance'];
-        $this->assertInstanceOf('Zend\Validator\File\Explode', $validator);
-        $this->assertInstanceOf('Zend\Validator\File\Upload', $validator->getValidator());
     }
 
     public function testWillAddFileEnctypeAttributeToForm()

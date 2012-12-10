@@ -360,7 +360,7 @@ class Socket implements HttpAdapter, StreamInterface
         ErrorHandler::start();
         $test  = fwrite($this->socket, $request);
         $error = ErrorHandler::stop();
-        if (!$test) {
+        if (false === $test) {
             throw new AdapterException\RuntimeException('Error writing request to server', 0, $error);
         }
 

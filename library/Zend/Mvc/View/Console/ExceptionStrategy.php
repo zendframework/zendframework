@@ -44,6 +44,9 @@ class ExceptionStrategy implements ListenerAggregateInterface
 :file::line
 :stack
 ======================================================================
+   Previous Exception(s):
+======================================================================
+:previous
 
 EOT;
 
@@ -186,6 +189,7 @@ EOT;
                             ':file',
                             ':line',
                             ':stack',
+                            ':previous',
                         ),array(
                             get_class($exception),
                             $exception->getMessage(),
@@ -193,6 +197,7 @@ EOT;
                             $exception->getFile(),
                             $exception->getLine(),
                             $exception->getTraceAsString(),
+                            $exception->getPrevious(),
                         ),
                         $this->message
                     );
@@ -205,7 +210,9 @@ EOT;
                             ':file',
                             ':line',
                             ':stack',
+                            ':previous',
                         ),array(
+                            '',
                             '',
                             '',
                             '',

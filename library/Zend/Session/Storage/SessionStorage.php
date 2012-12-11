@@ -25,13 +25,6 @@ use ArrayObject;
 class SessionStorage extends ArrayStorage
 {
     /**
-     * Session save path.
-     *
-     * @var string
-     */
-    protected $savePath;
-    
-    /**
      * Constructor
      *
      * Sets the $_SESSION superglobal to an ArrayObject, maintaining previous
@@ -109,33 +102,5 @@ class SessionStorage extends ArrayStorage
     public function isImmutable()
     {
         return (isset($this['_IMMUTABLE']) && $this['_IMMUTABLE']);
-    }
-    
-    /**
-     * Returns the currently set session_save_path() value.  Sets the class 
-     * property if the class property is stale.
-     * 
-     * @return string
-     */
-    public function getSavePath()
-    {
-        $savePath = session_save_path();
-        if ($savePath != $this->savePath) {
-            $this->setSavePath($savePath);
-        }
-        return $this->savePath;
-    }
-
-    /**
-     * Sets the session_save_path() value and the class property.
-     * 
-     * @param string $savePath
-     * @return \Zend\Session\Storage\SessionStorage
-     */
-    public function setSavePath($savePath)
-    {
-        session_save_path($savePath);
-        $this->savePath = $savePath;
-        return $this;
     }
 }

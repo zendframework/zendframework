@@ -133,6 +133,9 @@ class SetCookie implements MultipleHeaderInterface
 
         list($name, $value) = explode(': ', $headerLine, 2);
 
+        // some sites return set-cookie::value, this is to get rid of the second :
+        $name = (strtolower($name) =='set-cookie:') ? 'set-cookie' : $name;
+
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'set-cookie') {
             throw new Exception\InvalidArgumentException('Invalid header line for Set-Cookie string: "' . $name . '"');

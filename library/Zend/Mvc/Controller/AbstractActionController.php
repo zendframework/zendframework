@@ -10,6 +10,7 @@
 
 namespace Zend\Mvc\Controller;
 
+use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
@@ -51,10 +52,9 @@ abstract class AbstractActionController extends AbstractController
         $event      = $this->getEvent();
         $routeMatch = $event->getRouteMatch();
 
-        if($response instanceof \Zend\Console\Response) {
-            return null;
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(404);
         }
-        $response->setStatusCode(404);
         $routeMatch->setParam('action', 'not-found');
 
         return new ViewModel(array(

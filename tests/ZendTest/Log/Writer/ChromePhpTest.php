@@ -80,4 +80,21 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertTrue(empty($this->chromephp->calls));
     }
+
+    public function testConstructWithOptions()
+    {
+        $formatter = new \Zend\Log\Formatter\Simple();
+        $filter    = new \Zend\Log\Filter\Mock();
+        $writer = new ChromePhp(array(
+            'filters'   => $filter,
+            'formatter' => $formatter,
+            'instance'  => $this->chromephp,
+        ));
+        $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
+        $this->assertAttributeInstanceOf('Zend\Log\Formatter\ChromePhp', 'formatter', $writer);
+
+        $filters = self::readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertEquals($filter, $filters[0]);
+    }
 }

@@ -353,7 +353,7 @@ class Capabilities
      */
     public function setStaticTtl(stdClass $marker, $flag)
     {
-        return $this->setCapability($marker, 'staticTtl', (bool)$flag);
+        return $this->setCapability($marker, 'staticTtl', (bool) $flag);
     }
 
     /**
@@ -402,7 +402,7 @@ class Capabilities
      */
     public function setUseRequestTime(stdClass $marker, $flag)
     {
-        return $this->setCapability($marker, 'useRequestTime', (bool)$flag);
+        return $this->setCapability($marker, 'useRequestTime', (bool) $flag);
     }
 
     /**
@@ -424,7 +424,7 @@ class Capabilities
      */
     public function setExpiredRead(stdClass $marker, $flag)
     {
-        return $this->setCapability($marker, 'expiredRead', (bool)$flag);
+        return $this->setCapability($marker, 'expiredRead', (bool) $flag);
     }
 
     /**
@@ -473,7 +473,7 @@ class Capabilities
      */
     public function setNamespaceIsPrefix(stdClass $marker, $flag)
     {
-        return $this->setCapability($marker, 'namespaceIsPrefix', (bool)$flag);
+        return $this->setCapability($marker, 'namespaceIsPrefix', (bool) $flag);
     }
 
     /**

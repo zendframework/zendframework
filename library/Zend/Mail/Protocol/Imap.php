@@ -547,7 +547,7 @@ class Imap
         } elseif ($to === INF) {
             $set = (int) $from . ':*';
         } else {
-            $set = (int) $from . ':' . (int)$to;
+            $set = (int) $from . ':' . (int) $to;
         }
 
         $items = (array) $items;

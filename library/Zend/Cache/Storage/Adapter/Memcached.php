@@ -74,7 +74,7 @@ class Memcached extends AbstractAdapter implements
     {
         if (static::$extMemcachedMajorVersion === null) {
             $v = (string) phpversion('memcached');
-            static::$extMemcachedMajorVersion = ($v !== '') ? (int)$v[0] : 0;
+            static::$extMemcachedMajorVersion = ($v !== '') ? (int) $v[0] : 0;
         }
 
         if (static::$extMemcachedMajorVersion < 1) {
@@ -601,7 +601,7 @@ class Memcached extends AbstractAdapter implements
     {
         $memc        = $this->getMemcachedResource();
         $internalKey = $this->namespacePrefix . $normalizedKey;
-        $value       = (int)$value;
+        $value       = (int) $value;
         $newValue    = $memc->decrement($internalKey, $value);
 
         if ($newValue === false) {

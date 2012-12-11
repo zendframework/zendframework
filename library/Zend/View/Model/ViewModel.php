@@ -169,7 +169,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface
      */
     public function getOption($name, $default = null)
     {
-        $name = (string)$name;
+        $name = (string) $name;
         return array_key_exists($name, $this->options) ? $this->options[$name] : $default;
     }
 
@@ -230,7 +230,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface
      */
     public function getVariable($name, $default = null)
     {
-        $name = (string)$name;
+        $name = (string) $name;
         if (array_key_exists($name, $this->variables)) {
             return $this->variables[$name];
         } else {

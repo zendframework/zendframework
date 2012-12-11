@@ -94,7 +94,38 @@ class PartTest extends TestCase
             )
         );
     }
-
+    public static function getRouteAlternative ()
+    {
+        $routePlugins = new RoutePluginManager();
+        $routePlugins->setInvokableClass('part', 'Zend\Mvc\Router\Http\Part');
+        return new Part(
+                array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                                'route' => '/[:controller[/:action]]',
+                                'defaults' => array(
+                                        'controller' => 'fo-fo',
+                                        'action' => 'index'
+                                )
+                        )
+                ), true, $routePlugins,
+                array(
+                        'wildcard' => array(
+                                'type' => 'Zend\Mvc\Router\Http\Wildcard',
+                                'options' => array(
+                                        'key_value_delimiter' => '/',
+                                        'param_delimiter' => '/'
+                                )
+                        ),
+                        'query' => array(
+                                'type' => 'Zend\Mvc\Router\Http\Query',
+                                'options' => array(
+                                        'key_value_delimiter' => '=',
+                                        'param_delimiter' => '&'
+                                )
+                        )
+                ));
+    }
     public static function routeProvider()
     {
         return array(
@@ -122,14 +153,14 @@ class PartTest extends TestCase
             'offset-does-not-enable-partial-matching' => array(
                 self::getRoute(),
                 '/foo/foo',
-                0,
+                null,
                 null,
                 null
             ),
             'offset-does-not-enable-partial-matching-in-child' => array(
                 self::getRoute(),
                 '/foo/bar/baz',
-                0,
+                null,
                 null,
                 null
             ),
@@ -175,6 +206,37 @@ class PartTest extends TestCase
                 'bat/optional',
                 array('foo' => 'bar')
             ),
+            'simple-match' => array(
+                    self::getRouteAlternative(),
+                    '/',
+                    null,
+                    null,
+                    array(
+                            'controller' => 'fo-fo',
+                            'action' => 'index'
+                    )
+            ),
+            'match-wildcard' => array(
+                    self::getRouteAlternative(),
+                    '/fo-fo/index/param1/value1',
+                    null,
+                    'wildcard',
+                    array(
+                            'controller' => 'fo-fo',
+                            'action' => 'index',
+                            'param1' => 'value1'
+                    )
+            ),
+            'match-query' => array(
+                    self::getRouteAlternative(),
+                    '/fo-fo/index?param1=value1',
+                    0,
+                    'query',
+                    array(
+                            'controller' => 'fo-fo',
+                            'action' => 'index'
+                    )
+            )
         );
     }
 

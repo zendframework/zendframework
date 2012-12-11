@@ -19,6 +19,7 @@ use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
 
+
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testIfCookiesAreSticky()
@@ -174,5 +175,27 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains('Accept-Encoding: identity', $rawRequest, null, true);
 
         $this->assertContains('Accept-Encoding: foo', $rawRequest);
+    }
+
+    public function testEncodeAuthHeaderWorksAsExpected()
+    {
+        $encoded = Client::encodeAuthHeader('test', 'test');
+        $this->assertEquals('Basic ' . base64_encode('test:test'), $encoded);
+    }
+
+    /**
+     * @expectedException Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public function testEncodeAuthHeaderThrowsExceptionWhenUsernameContainsSemiColon()
+    {
+        $encoded = Client::encodeAuthHeader('test:', 'test');
+    }
+
+    /**
+     * @expectedException Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public function testEncodeAuthHeaderThrowsExceptionWhenInvalidAuthTypeIsUsed()
+    {
+        $encoded = Client::encodeAuthHeader('test', 'test', 'test');
     }
 }

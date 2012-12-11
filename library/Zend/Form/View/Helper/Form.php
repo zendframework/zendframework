@@ -10,6 +10,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use Zend\Form\FieldsetInterface;
 use Zend\Form\FormInterface;
 
 /**
@@ -40,11 +41,41 @@ class Form extends AbstractHelper
     /**
      * Invoke as function
      *
+     * @param  null|FormInterface $form
      * @return Form
      */
-    public function __invoke()
+    public function __invoke(FormInterface $form = null)
     {
-        return $this;
+        if (!$form) {
+            return $this;
+        }
+
+        return $this->render($form);
+    }
+
+    /**
+     * Render a form from the provided $form,
+     *
+     * @param  ElementInterface $element
+     * @param  null|string $buttonContent
+     * @throws Exception\DomainException
+     * @return string
+     */
+    public function render(FormInterface $form)
+    {
+        $openTag = $this->openTag($form);
+
+        $formContent = '';
+        
+        foreach ($form as $element) {
+            if ($element instanceof FieldsetInterface) {
+                $formContent.= $this->getView()->formCollection($element);
+            } else {
+                $formContent.= $this->getView()->formRow($element);
+            }
+        }
+        
+        return $openTag . $formContent . $this->closeTag();
     }
 
     /**

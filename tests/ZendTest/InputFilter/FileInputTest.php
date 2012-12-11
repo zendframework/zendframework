@@ -139,7 +139,7 @@ class FileInputTest extends TestCase
     {
         $this->input->setValue(array('tmp_name' => 'bar'));
         $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->addValidator($validator);
+        $this->input->getValidatorChain()->attach($validator);
         $this->assertFalse($this->input->isValid());
     }
 
@@ -147,7 +147,7 @@ class FileInputTest extends TestCase
     {
         $this->input->setValue(array('tmp_name' => 'bar'));
         $validator = new Validator\NotEmpty();
-        $this->input->getValidatorChain()->addValidator($validator);
+        $this->input->getValidatorChain()->attach($validator);
         $this->assertTrue($this->input->isValid());
     }
 
@@ -162,7 +162,7 @@ class FileInputTest extends TestCase
         $filter = new Filter\StringTrim();
         $this->input->getFilterChain()->attach($filter);
         $validator = new Validator\File\Exists();
-        $this->input->getValidatorChain()->addValidator($validator);
+        $this->input->getValidatorChain()->attach($validator);
         $this->assertFalse($this->input->isValid());
         $this->input->setValue(array(
             'tmp_name' => __FILE__,
@@ -205,7 +205,7 @@ class FileInputTest extends TestCase
         );
         $this->input->setValue($values);
         $validator = new Validator\File\Exists();
-        $this->input->getValidatorChain()->addValidator($validator);
+        $this->input->getValidatorChain()->attach($validator);
         $this->assertTrue($this->input->isValid());
 
         // Negative test
@@ -218,7 +218,7 @@ class FileInputTest extends TestCase
     {
         $this->input->setValue(array('tmp_name' => 'bar'));
         $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->addValidator($validator);
+        $this->input->getValidatorChain()->attach($validator);
         $this->input->setErrorMessage('Please enter only digits');
         $this->assertFalse($this->input->isValid());
         $messages = $this->input->getMessages();
@@ -327,7 +327,7 @@ class FileInputTest extends TestCase
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
 
         $input2 = new FileInput('bar');
         $input2->merge($input);

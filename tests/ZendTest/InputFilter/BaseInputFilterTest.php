@@ -74,16 +74,16 @@ class BaseInputFilterTest extends TestCase
         $foo = new Input();
         $foo->getFilterChain()->attachByName('stringtrim')
                               ->attachByName('alpha');
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 6));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 6));
 
         $bar = new Input();
         $bar->getFilterChain()->attachByName('stringtrim');
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
 
         $baz = new Input();
         $baz->setRequired(false);
         $baz->getFilterChain()->attachByName('stringtrim');
-        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
+        $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
@@ -100,16 +100,16 @@ class BaseInputFilterTest extends TestCase
         $foo = new Input();
         $foo->getFilterChain()->attachByName('stringtrim')
                               ->attachByName('alpha');
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 6));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 6));
 
         $bar = new Input();
         $bar->getFilterChain()->attachByName('stringtrim');
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
 
         $baz = new Input();
         $baz->setRequired(false);
         $baz->getFilterChain()->attachByName('stringtrim');
-        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
+        $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
@@ -343,14 +343,14 @@ class BaseInputFilterTest extends TestCase
 
         $store = new stdClass;
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\Callback(function ($value, $context) use ($store) {
+        $foo->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
             return true;
         }));
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar');
@@ -373,14 +373,14 @@ class BaseInputFilterTest extends TestCase
 
         $store = new stdClass;
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\Callback(function ($value, $context) use ($store) {
+        $foo->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
             return true;
         }));
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setBreakOnFailure(true);
 
         $filter->add($bar, 'bar')  // adding bar first, as we want it to validate first and break the chain
@@ -399,11 +399,11 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 5));
         $foo->setRequired(false);
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setRequired(true);
 
         $filter->add($foo, 'foo')
@@ -420,7 +420,7 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new FileInput();
-        $foo->getValidatorChain()->addValidator(new Validator\File\Upload());
+        $foo->getValidatorChain()->attach(new Validator\File\Upload());
         $foo->setRequired(false);
 
         $filter->add($foo, 'foo');
@@ -473,12 +473,12 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new Input('foo');
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 5));
         $foo->setRequired(true);
         $foo->setAllowEmpty(true);
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setRequired(true);
 
         $filter->add($foo, '')
@@ -496,12 +496,12 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 5));
         $foo->setRequired(true);
         $foo->setAllowEmpty(false);
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setRequired(true);
 
         $filter->add($foo, '')

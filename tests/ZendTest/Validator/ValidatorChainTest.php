@@ -51,8 +51,8 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function populateValidatorChain()
     {
-        $this->validator->addValidator(new NotEmpty());
-        $this->validator->addValidator(new Between());
+        $this->validator->attach(new NotEmpty());
+        $this->validator->attach(new Between());
     }
 
     public function testValidatorChainIsEmptyByDefault()
@@ -78,7 +78,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      */
     public function testTrue()
     {
-        $this->validator->addValidator($this->getValidatorTrue());
+        $this->validator->attach($this->getValidatorTrue());
         $this->assertTrue($this->validator->isValid(null));
         $this->assertEquals(array(), $this->validator->getMessages());
     }
@@ -90,7 +90,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      */
     public function testFalse()
     {
-        $this->validator->addValidator($this->getValidatorFalse());
+        $this->validator->attach($this->getValidatorFalse());
         $this->assertFalse($this->validator->isValid(null));
         $this->assertEquals(array('error' => 'validation failed'), $this->validator->getMessages());
     }
@@ -102,8 +102,8 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      */
     public function testBreakChainOnFailure()
     {
-        $this->validator->addValidator($this->getValidatorFalse(), true)
-            ->addValidator($this->getValidatorFalse());
+        $this->validator->attach($this->getValidatorFalse(), true)
+            ->attach($this->getValidatorFalse());
         $this->assertFalse($this->validator->isValid(null));
         $this->assertEquals(array('error' => 'validation failed'), $this->validator->getMessages());
     }
@@ -149,7 +149,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsPrependingValidators()
     {
-        $this->validator->addValidator($this->getValidatorTrue())
+        $this->validator->attach($this->getValidatorTrue())
             ->prependValidator($this->getValidatorFalse(), true);
         $this->assertFalse($this->validator->isValid(true));
         $messages = $this->validator->getMessages();
@@ -158,7 +158,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsPrependingValidatorsByName()
     {
-        $this->validator->addValidator($this->getValidatorTrue())
+        $this->validator->attach($this->getValidatorTrue())
             ->prependByName('NotEmpty', array(), true);
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
@@ -233,7 +233,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanAttachMultipleValidatorsOfTheSameTypeAsDiscreteInstances()
     {
-        $this->validator->addByName('Callback', array(
+        $this->validator->attachByName('Callback', array(
             'callback' => function ($value) {
                 return true;
             },
@@ -241,7 +241,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
                 'callbackValue' => 'This should not be seen in the messages',
             ),
         ));
-        $this->validator->addByName('Callback', array(
+        $this->validator->attachByName('Callback', array(
             'callback' => function ($value) {
                 return false;
             },

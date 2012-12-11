@@ -18,7 +18,10 @@ use Zend\Stdlib\InitializableInterface;
  * @category   Zend
  * @package    Zend_Form
  */
-class Element implements ElementInterface, InitializableInterface
+class Element implements
+    ElementAttributeRemovalInterface,
+    ElementInterface,
+    InitializableInterface
 {
     /**
      * @var array
@@ -188,6 +191,18 @@ class Element implements ElementInterface, InitializableInterface
     }
 
     /**
+     * Remove a single attribute
+     *
+     * @param string $key
+     * @return ElementInterface
+     */
+    public function removeAttribute($key)
+    {
+        unset($this->attributes[$key]);
+        return $this;
+    }
+
+    /**
      * Does the element has a specific attribute ?
      *
      * @param  string $key
@@ -230,6 +245,21 @@ class Element implements ElementInterface, InitializableInterface
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * Remove many attributes at once
+     *
+     * @param array $keys
+     * @return ElementInterface
+     */
+    public function removeAttributes(array $keys)
+    {
+        foreach ($keys as $key) {
+            unset($this->attributes[$key]);
+        }
+
+        return $this;
     }
 
     /**

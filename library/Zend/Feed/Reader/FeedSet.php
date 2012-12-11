@@ -109,7 +109,7 @@ class FeedSet extends ArrayObject
     }
 
     /**
-     * Supports lazy loading of feeds using Zend_Feed_Reader::import() but
+     * Supports lazy loading of feeds using Reader::import() but
      * delegates any other operations to the parent class.
      *
      * @param string $offset

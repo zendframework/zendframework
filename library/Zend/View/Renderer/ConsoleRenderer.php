@@ -35,7 +35,7 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
      * Constructor.
      *
      *
-     * @todo handle passing helper broker, options
+     * @todo handle passing helper manager, options
      * @todo handle passing filter chain, options
      * @todo handle passing variables object, options
      * @todo handle passing resolver object, options

@@ -61,7 +61,7 @@ class Response extends Message implements ResponseInterface
     public function send()
     {
         $this->sendContent();
-        $errorLevel = (int)$this->getMetadata('errorLevel',0);
+        $errorLevel = (int) $this->getMetadata('errorLevel',0);
         exit($errorLevel);
     }
 }

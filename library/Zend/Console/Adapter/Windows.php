@@ -59,7 +59,7 @@ class Windows extends Virtual
         }
 
         if (count($this->probeResult) && (int) $this->probeResult[0]) {
-            $width = (int)$this->probeResult[0];
+            $width = (int) $this->probeResult[0];
         } else {
             $width = parent::getWidth();
         }

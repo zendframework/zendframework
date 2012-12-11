@@ -75,14 +75,6 @@ interface ElementInterface
     public function getAttribute($key);
 
     /**
-     * Remove a single element attribute
-     *
-     * @param  string $key
-     * @return ElementInterface
-     */
-    public function removeAttribute($key);
-
-    /**
      * Return true if a specific attribute is set
      *
      * @param  string $key
@@ -106,21 +98,6 @@ interface ElementInterface
      * @return array|\Traversable
      */
     public function getAttributes();
-
-    /**
-     * Remove many attributes at once
-     *
-     * @param array $keys
-     * @return ElementInterface
-     */
-    public function removeAttributes(array $keys);
-
-    /**
-     * Remove all attributes at once
-     *
-     * @return ElementInterface
-     */
-    public function clearAttributes();
 
     /**
      * Set the value of the element

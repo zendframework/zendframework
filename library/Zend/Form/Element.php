@@ -18,7 +18,10 @@ use Zend\Stdlib\InitializableInterface;
  * @category   Zend
  * @package    Zend_Form
  */
-class Element implements ElementInterface, InitializableInterface
+class Element implements
+    ElementAttributeRemovalInterface,
+    ElementInterface,
+    InitializableInterface
 {
     /**
      * @var array

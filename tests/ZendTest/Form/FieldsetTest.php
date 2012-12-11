@@ -335,6 +335,45 @@ class FieldsetTest extends TestCase
         $this->assertEquals($expected, $test);
     }
 
+    public function testIteratingRespectsOrderPriorityWhenCloned()
+    {
+        $this->fieldset->add(new Element('foo'), array('priority' => 10));
+        $this->fieldset->add(new Element('bar'), array('priority' => 20));
+        $this->fieldset->add(new Element('baz'), array('priority' => -10));
+        $this->fieldset->add(new Fieldset('barbaz'), array('priority' => 30));
+
+        $expected = array('barbaz', 'bar', 'foo', 'baz');
+
+        $testOrig  = array();
+        $testClone = array();
+
+        $fieldsetClone = clone $this->fieldset;
+
+        foreach ($this->fieldset as $element) {
+            $testOrig[] = $element->getName();
+        }
+
+        foreach ($fieldsetClone as $element) {
+            $testClone[] = $element->getName();
+        }
+
+        $this->assertEquals($expected, $testClone);
+        $this->assertEquals($testOrig, $testClone);
+    }
+
+    public function testCloneDeepClonesElementsAndObject()
+    {
+        $this->fieldset->add(new Element('foo'));
+        $this->fieldset->add(new Element('bar'));
+        $this->fieldset->setObject(new \stdClass);
+
+        $fieldsetClone = clone $this->fieldset;
+
+        $this->assertNotSame($this->fieldset->get('foo'), $fieldsetClone->get('foo'));
+        $this->assertNotSame($this->fieldset->get('bar'), $fieldsetClone->get('bar'));
+        $this->assertNotSame($this->fieldset->getObject(), $fieldsetClone->getObject());
+    }
+
     public function testSubFieldsetsBindObject()
     {
         $form = new Form();

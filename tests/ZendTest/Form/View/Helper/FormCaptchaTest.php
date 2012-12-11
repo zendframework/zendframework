@@ -62,12 +62,14 @@ class FormCaptchaTest extends CommonTestCase
         if (null === $this->tmpDir) {
             $this->tmpDir = sys_get_temp_dir();
         }
+
         return $this->tmpDir;
     }
 
     public function getElement()
     {
         $element = new CaptchaElement('foo');
+
         return $element;
     }
 
@@ -87,7 +89,7 @@ class FormCaptchaTest extends CommonTestCase
         $element->setCaptcha($captcha);
         $element->setAttribute('id', 'foo');
         $markup = $this->helper->render($element);
-        $this->assertContains($captcha->getLabel(), $markup);        
+        $this->assertContains($captcha->getLabel(), $markup);
         $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);
         $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
     }
@@ -101,7 +103,7 @@ class FormCaptchaTest extends CommonTestCase
         $element->setCaptcha($captcha);
         $element->setAttribute('id', 'foo');
         $markup = $this->helper->render($element);
-        $this->assertContains('<pre>' . $captcha->getFiglet()->render($captcha->getWord()) . '</pre>', $markup);        
+        $this->assertContains('<pre>' . $captcha->getFiglet()->render($captcha->getWord()) . '</pre>', $markup);
         $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);
         $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
     }
@@ -110,6 +112,7 @@ class FormCaptchaTest extends CommonTestCase
     {
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
+
             return;
         }
         if (!function_exists("imagepng")) {
@@ -132,15 +135,15 @@ class FormCaptchaTest extends CommonTestCase
         $element = $this->getElement();
         $element->setCaptcha($captcha);
         $element->setAttribute('id', 'foo');
-        
+
         $markup = $this->helper->render($element);
-        
+
         $this->assertContains('<img ', $markup);
         $this->assertContains($captcha->getImgUrl(), $markup);
         $this->assertContains($captcha->getId(), $markup);
         $this->assertRegExp('#<img[^>]*(id="' . $element->getAttribute('id') . '-image")[^>]*>#', $markup);
         $this->assertRegExp('#<input[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);
-        $this->assertRegExp('#<input[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);   
+        $this->assertRegExp('#<input[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
     }
 
     public function testPassingElementWithReCaptchaRendersCorrectly()

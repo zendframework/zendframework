@@ -43,7 +43,7 @@ abstract class AbstractWord extends FormInput
     /**
      * Set value for captchaPosition
      *
-     * @param mixed $captchaPosition
+     * @param  mixed                              $captchaPosition
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -60,6 +60,7 @@ abstract class AbstractWord extends FormInput
             ));
         }
         $this->captchaPosition = $captchaPosition;
+
         return $this;
     }
 
@@ -76,12 +77,13 @@ abstract class AbstractWord extends FormInput
     /**
      * Set separator string for captcha and inputs
      *
-     * @param  string $separator
+     * @param  string       $separator
      * @return AbstractWord
      */
     public function setSeparator($separator)
     {
         $this->separator = (string) $separator;
+
         return $this;
     }
 
@@ -104,7 +106,7 @@ abstract class AbstractWord extends FormInput
      *
      * More specific renderers will consume this and render it.
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException
      * @return string
      */
@@ -155,13 +157,18 @@ abstract class AbstractWord extends FormInput
      * Render the hidden input with the captcha identifier
      *
      * @param  CaptchaAdapter $captcha
-     * @param  array $attributes
+     * @param  array          $attributes
      * @return string
      */
     protected function renderCaptchaHidden(CaptchaAdapter $captcha, array $attributes)
     {
         $attributes['type']  = 'hidden';
         $attributes['name'] .= '[id]';
+
+        if (isset($attributes['id'])) {
+            $attributes['id'] .= '-hidden';
+        }
+
         if (method_exists($captcha, 'getId')) {
             $attributes['value'] = $captcha->getId();
         } elseif (array_key_exists('value', $attributes)) {
@@ -175,6 +182,7 @@ abstract class AbstractWord extends FormInput
             $this->createAttributesString($attributes),
             $closingBracket
         );
+
         return $hidden;
     }
 
@@ -182,7 +190,7 @@ abstract class AbstractWord extends FormInput
      * Render the input for capturing the captcha value from the client
      *
      * @param  CaptchaAdapter $captcha
-     * @param  array $attributes
+     * @param  array          $attributes
      * @return string
      */
     protected function renderCaptchaInput(CaptchaAdapter $captcha, array $attributes)
@@ -198,6 +206,7 @@ abstract class AbstractWord extends FormInput
             $this->createAttributesString($attributes),
             $closingBracket
         );
+
         return $input;
     }
 }

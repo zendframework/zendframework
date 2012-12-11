@@ -91,6 +91,15 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('https://example.com:8181', $url->__invoke());
     }
 
+    public function testConstructorWithHttpHostIncludingPortAndPortSet()
+    {
+        $_SERVER['HTTP_HOST'] = 'example.com:8181';
+        $_SERVER['SERVER_PORT'] = 8181;
+
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://example.com:8181', $url->__invoke());
+    }
+
     public function testConstructorWithHttpHostAndServerNameAndPortSet()
     {
         $_SERVER['HTTP_HOST'] = 'example.com';

@@ -405,7 +405,7 @@ abstract class AbstractValue
                         continue;
                         //throw new Value_Exception('Member of the '. self::XMLRPC_TYPE_STRUCT .' XML-RPC native type must contain a VALUE tag');
                     }
-                    $values[(string)$member->name] = static::_xmlStringToNativeXmlRpc($member->value);
+                    $values[(string) $member->name] = static::_xmlStringToNativeXmlRpc($member->value);
                 }
                 $xmlrpcValue = new Value\Struct($values);
                 break;

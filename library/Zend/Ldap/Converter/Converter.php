@@ -96,7 +96,7 @@ class Converter
                     if (is_string($value)) {
                         return $value;
                     } elseif (is_int($value) || is_float($value)) {
-                        return (string)$value;
+                        return (string) $value;
                     } elseif (is_bool($value)) {
                         return static::toldapBoolean($value);
                     } elseif (is_object($value)) {

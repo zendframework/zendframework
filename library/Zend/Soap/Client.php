@@ -622,7 +622,7 @@ class Client implements ServerClient
      */
     public function setProxyPort($proxyPort)
     {
-        $this->proxy_port = (int)$proxyPort;
+        $this->proxy_port = (int) $proxyPort;
 
         $this->soapClient = null;
 
@@ -745,7 +745,7 @@ class Client implements ServerClient
         if ($compressionOptions === null) {
             $this->compression = null;
         } else {
-            $this->compression = (int)$compressionOptions;
+            $this->compression = (int) $compressionOptions;
         }
         $this->soapClient = null;
 
@@ -833,7 +833,7 @@ class Client implements ServerClient
         if ($caching === null) {
             $this->cache_wsdl = null;
         } else {
-            $this->cache_wsdl = (int)$caching;
+            $this->cache_wsdl = (int) $caching;
         }
         return $this;
     }
@@ -859,7 +859,7 @@ class Client implements ServerClient
         if ($userAgent === null) {
             $this->user_agent = null;
         } else {
-            $this->user_agent = (string)$userAgent;
+            $this->user_agent = (string) $userAgent;
         }
         return $this;
     }

@@ -172,7 +172,7 @@ class Encoder
      */
     protected function encodeString($string, &$base64 = null)
     {
-        $string = (string)$string;
+        $string = (string) $string;
         if (!is_numeric($string) && empty($string)) {
             return '';
         }

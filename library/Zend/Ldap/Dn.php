@@ -75,7 +75,7 @@ class Dn implements \ArrayAccess
         if (empty($dn)) {
             $dnArray = array();
         } else {
-            $dnArray = static::explodeDn((string)$dn);
+            $dnArray = static::explodeDn((string) $dn);
         }
         return new self($dnArray, $caseFold);
     }

@@ -95,4 +95,21 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->markImmutable();
         $this->assertTrue($storage->isImmutable(), var_export($_SESSION, 1));
     }
+    
+    public function testSetSavePathSetsSessionSavePath()
+    {
+        $savePath = '/this/is/a/path';
+        $this->storage->setSavePath($savePath);
+        $this->assertEquals($savePath, session_save_path());
+    }
+    
+    public function testGetSavePathGivesAccuratePath()
+    {
+        $savePath = session_save_path();
+        $testSavePath = $this->storage->getSavePath();
+        $this->assertEquals($savePath, $testSavePath);
+        $savePath = '/this/is/a/path';
+        session_save_path($savePath);
+        $this->assertEquals($savePath, $this->storage->getSavePath());
+   }
 }

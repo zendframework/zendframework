@@ -8,8 +8,6 @@
  * @package   Zend_Soap
  */
 
-// @codingStandardsIgnoreStart
-
 namespace Zend\Soap
 {
     use ZendTest\Soap\Client\MockCallUserFunc;
@@ -259,4 +257,3 @@ namespace ZendTest\Soap\Client
     }
 }
 
-// @codingStandardsIgnoreEnd

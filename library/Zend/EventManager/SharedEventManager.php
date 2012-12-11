@@ -23,7 +23,9 @@ use Zend\Stdlib\PriorityQueue;
  * @category   Zend
  * @package    Zend_EventManager
  */
-class SharedEventManager implements SharedEventManagerInterface
+class SharedEventManager implements
+    SharedEventAggregateAwareInterface,
+    SharedEventManagerInterface
 {
     /**
      * Identifiers with event connections

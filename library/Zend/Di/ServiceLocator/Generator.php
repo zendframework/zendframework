@@ -77,7 +77,7 @@ class Generator
     /**
      * Construct, configure, and return a PHP class file code generation object
      *
-     * Creates a Zend\CodeGenerator\Php\PhpFile object that has
+     * Creates a Zend\Code\Generator\FileGenerator object that has
      * created the specified class and service locator methods.
      *
      * @param  null|string                         $filename

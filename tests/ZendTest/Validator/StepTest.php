@@ -190,4 +190,18 @@ class StepTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
                                      'messageTemplates', $validator);
     }
+
+    public function testSetStepFloat()
+    {
+        $step = 0.01;
+        $this->_validator->setStep($step);
+        $this->assertAttributeSame($step, 'step', $this->_validator);
+    }
+
+    public function testSetStepString()
+    {
+        $step = '0.01';
+        $this->_validator->setStep($step);
+        $this->assertAttributeSame((float) $step, 'step', $this->_validator);
+    }
 }

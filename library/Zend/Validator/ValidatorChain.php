@@ -109,6 +109,7 @@ class ValidatorChain implements
     /**
      * Proxy to attach() to keep BC
      *
+     * @deprecated Please use attach()
      * @param  ValidatorInterface      $validator
      * @param  boolean                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
@@ -155,8 +156,9 @@ class ValidatorChain implements
     }
 
     /**
-     * Proxy to attach() to keep BC
+     * Proxy to attachByName() to keep BC
      *
+     * @deprecated Please use attachByName()
      * @param  string $name
      * @param  array  $options
      * @param  bool   $breakChainOnFailure

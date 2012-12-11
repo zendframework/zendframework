@@ -9,7 +9,6 @@
  */
 
 use Zend\Console;
-use Zend\File\ClassFileLocator;
 use Zend\Loader\StandardAutoloader;
 
 /**
@@ -19,11 +18,10 @@ use Zend\Loader\StandardAutoloader;
  * --help|-h                    Get usage message
  * --library|-l [ <string> ]    Library to parse; if none provided, assumes
  *                              current directory
- * --output|-o [ <string> ]     Where to write autoload file; if not provided,
- *                              assumes "autoload_classmap.php" in library directory
- * --append|-a                  Append to autoload file if it exists
- * --overwrite|-w               Whether or not to overwrite existing autoload
- *                              file
+ * --output|-o [ <string> ]     Where to write map file; if not provided,
+ *                              assumes "template_map.php" in library directory
+ * --append|-a                  Append to map file if it exists
+ * --overwrite|-w               Whether or not to overwrite existing map file
  */
 
 $zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
@@ -42,7 +40,7 @@ if (is_dir($zfLibraryPath)) {
 }
 
 $libraryPath = getcwd();
-$viewPath = getcwd() . '/view';
+$viewPath    = getcwd() . '/view';
 
 // Setup autoloading
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
@@ -51,10 +49,10 @@ $loader->register();
 $rules = array(
     'help|h'      => 'Get usage message',
     'library|l-s' => 'Library to parse; if none provided, assumes current directory',
-    'view|v-s'      => 'View path to parse; if none provided, assumes view as template directory',
-    'output|o-s'  => 'Where to write autoload file; if not provided, assumes "autoload_classmap.php" in library directory',
-    'append|a'    => 'Append to autoload file if it exists',
-    'overwrite|w' => 'Whether or not to overwrite existing autoload file',
+    'view|v-s'    => 'View path to parse; if none provided, assumes view as template directory',
+    'output|o-s'  => 'Where to write map file; if not provided, assumes "template_map.php" in library directory',
+    'append|a'    => 'Append to map file if it exists',
+    'overwrite|w' => 'Whether or not to overwrite existing map file',
 );
 
 try {
@@ -70,7 +68,7 @@ if ($opts->getOption('h')) {
     exit(0);
 }
 
-$relativePathForClassmap = '';
+$relativePathForMap = '';
 if (isset($opts->l)) {
     if (!is_dir($opts->l)) {
         echo 'Invalid library directory provided' . PHP_EOL
@@ -91,11 +89,19 @@ if (isset($opts->v)) {
     }
     $viewPath = $opts->v;
 }
+
+if (!is_dir($viewPath)) {
+    printf('Invalid view path provided (%s)', $viewPath);
+    echo PHP_EOL . PHP_EOL;
+    echo $opts->getUsageMessage();
+    exit(2);
+}
+
 $viewPath = str_replace(DIRECTORY_SEPARATOR, '/', realpath($viewPath));
 
 $usingStdout = false;
-$appending = $opts->getOption('a');
-$output = $libraryPath . '/template_map.php';
+$appending   = $opts->getOption('a');
+$output      = $libraryPath . '/template_map.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
@@ -112,38 +118,38 @@ if (isset($opts->o)) {
             . $opts->getUsageMessage();
         exit(2);
     } elseif (file_exists($output) && !$opts->getOption('w') && !$appending) {
-        echo "Autoload file already exists at '$output'," . PHP_EOL
+        echo "Template map file already exists at '$output'," . PHP_EOL
             . "but 'overwrite' or 'appending' flag was not specified; aborting." . PHP_EOL
             . PHP_EOL
             . $opts->getUsageMessage();
         exit(2);
     } else {
-        // We need to add the $libraryPath into the relative path that is created in the classmap file.
-        $classmapPath = str_replace(DIRECTORY_SEPARATOR, '/', realpath(dirname($output)));
+        // We need to add the $libraryPath into the relative path that is created in the template map file.
+        $mapPath = str_replace(DIRECTORY_SEPARATOR, '/', realpath(dirname($output)));
 
-        // Simple case: $libraryPathCompare is in $classmapPathCompare
-        if (strpos($libraryPath, $classmapPath) === 0) {
-            $relativePathForClassmap = substr($libraryPath, strlen($classmapPath) + 1) . '/';
+        // Simple case: $libraryPathCompare is in $mapPathCompare
+        if (strpos($libraryPath, $mapPath) === 0) {
+            $relativePathForMap = substr($libraryPath, strlen($mapPath) + 1) . '/';
         } else {
             $libraryPathParts  = explode('/', $libraryPath);
-            $classmapPathParts = explode('/', $classmapPath);
+            $mapPathParts = explode('/', $mapPath);
 
             // Find the common part
-            $count = count($classmapPathParts);
+            $count = count($mapPathParts);
             for ($i = 0; $i < $count; $i++) {
-                if (!isset($libraryPathParts[$i]) || $libraryPathParts[$i] != $classmapPathParts[$i]) {
+                if (!isset($libraryPathParts[$i]) || $libraryPathParts[$i] != $mapPathParts[$i]) {
                     // Common part end
                     break;
                 }
             }
 
-            // Add parent dirs for the subdirs of classmap
-            $relativePathForClassmap = str_repeat('../', $count - $i);
+            // Add parent dirs for the subdirs of map
+            $relativePathForMap = str_repeat('../', $count - $i);
 
             // Add library subdirs
             $count = count($libraryPathParts);
             for (; $i < $count; $i++) {
-                $relativePathForClassmap .= $libraryPathParts[$i] . '/';
+                $relativePathForMap .= $libraryPathParts[$i] . '/';
             }
         }
     }
@@ -157,28 +163,23 @@ if (!$usingStdout) {
     }
 }
 
-// Get the ClassFileLocator, and pass it the library path
-//$l = new ClassFileLocator($libraryPath);
 $dirOrIterator = new RecursiveDirectoryIterator($viewPath, RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
 $l = new RecursiveIteratorIterator($dirOrIterator);
 
 // Iterate over each element in the path, and create a map of
-// classname => filename, where the filename is relative to the library path
+// template name => filename, where the filename is relative to the view path
 $map = new stdClass;
 foreach ($l as $file) {
-    if(!$file->isFile()) {
+    if (!$file->isFile()) {
         continue;
     }
     $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());
 
     // Add in relative path to library
-    $filename  = $relativePathForClassmap . $filename;
-
-    $baseName =  $file->getBasename('.' .$file->getExtension());
-
+    $filename = $relativePathForMap . $filename;
+    $baseName =  $file->getBasename('.' . $file->getExtension());
     $mapName  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $baseName);
-
-   $map->{$mapName} = $filename;
+    $map->{$mapName} = $filename;
 }
 
 
@@ -195,14 +196,14 @@ if ($appending) {
     $content = explode(PHP_EOL, $content);
     array_shift($content);
 
-    // Load existing class map file and remove the closing "bracket ");" from it
+    // Load existing map file and remove the closing "bracket ");" from it
     $existing = file($output, FILE_IGNORE_NEW_LINES);
     array_pop($existing);
 
     // Merge
     $content = implode(PHP_EOL, array_merge($existing, $content));
 } else {
-    // Create a file with the class/file map.
+    // Create a file with the map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary
     $content = '<' . "?php\n"
              . "// Generated by ZF2's ./bin/templatemap_generator.php\n"

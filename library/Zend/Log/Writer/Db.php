@@ -69,6 +69,7 @@ class Db extends AbstractWriter
         }
 
         if (is_array($db)) {
+            parent::__construct($db);
             $separator = isset($db['separator']) ? $db['separator'] : null;
             $columnMap = isset($db['column']) ? $db['column'] : null;
             $tableName = isset($db['table']) ? $db['table'] : null;

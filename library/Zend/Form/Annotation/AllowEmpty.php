@@ -10,6 +10,8 @@
 
 namespace Zend\Form\Annotation;
 
+use Zend\Filter\Boolean as BooleanFilter;
+
 /**
  * AllowEmpty annotation
  *
@@ -22,4 +24,39 @@ namespace Zend\Form\Annotation;
  */
 class AllowEmpty
 {
+    /**
+     * @var bool
+     */
+    protected $allow_empty = true;
+
+    /**
+     * Receive and process the contents of an annotation
+     *
+     * @param array $data
+     */
+    public function __construct(array $data)
+    {
+        if (!isset($data['value'])) {
+            $data['value'] = false;
+        }
+
+        $allow_empty = $data['value'];
+
+        if (!is_bool($allow_empty)) {
+            $filter   = new BooleanFilter();
+            $allow_empty = $filter->filter($allow_empty);
+        }
+
+        $this->allow_empty = $allow_empty;
+    }
+
+    /**
+     * Get value of required flag
+     *
+     * @return bool
+     */
+    public function getAllowEmpty()
+    {
+        return $this->allow_empty;
+    }
 }

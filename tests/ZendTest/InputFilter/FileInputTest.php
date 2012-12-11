@@ -296,6 +296,27 @@ class FileInputTest extends TestCase
         $this->assertEquals($uploadMock, $validators[0]['instance']);
     }
 
+    public function testValidationsRunWithoutFileArrayDueToAjaxPost()
+    {
+        $this->input->setAutoPrependUploadValidator(true);
+        $this->assertTrue($this->input->getAutoPrependUploadValidator());
+        $this->assertTrue($this->input->isRequired());
+        $this->input->setValue('');
+
+        $uploadMock = $this->getMock('Zend\Validator\File\Upload', array('isValid'));
+        $uploadMock->expects($this->exactly(1))
+            ->method('isValid')
+            ->will($this->returnValue(false));
+
+        $validatorChain = $this->input->getValidatorChain();
+        $validatorChain->prependValidator($uploadMock);
+        $this->assertFalse($this->input->isValid());
+
+        $validators = $validatorChain->getValidators();
+        $this->assertEquals(1, count($validators));
+        $this->assertEquals($uploadMock, $validators[0]['instance']);
+    }
+
     public function testMerge()
     {
         $value  = array('tmp_name' => 'bar');

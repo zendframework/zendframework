@@ -81,6 +81,16 @@ class FileInput extends Input
         //$value   = $this->getValue(); // Do not run the filters yet for File uploads
 
         $rawValue = $this->getRawValue();
+        if (!is_array($rawValue)) {
+            // This can happen in an AJAX POST, where the input comes across as a string
+            $rawValue = array(
+                'tmp_name' => $rawValue,
+                'name'     => $rawValue,
+                'size'     => 0,
+                'type'     => '',
+                'error'    => UPLOAD_ERR_NO_FILE,
+            );
+        }
         if (is_array($rawValue) && isset($rawValue['tmp_name'])) {
             // Single file input
             $this->isValid = $validator->isValid($rawValue, $context);
@@ -93,10 +103,6 @@ class FileInput extends Input
                     break; // Do not continue processing files if validation fails
                 }
             }
-        } else {
-            // RawValue does not contain a file data array
-            $this->setErrorMessage('Invalid type given. File array expected');
-            $this->isValid = false;
         }
 
         return $this->isValid;

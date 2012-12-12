@@ -68,7 +68,7 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->rbac->isGranted('foo', 'can.baz'));
     }
 
-    public function testNotGrantedChildRoles()
+    public function testParentRolesNotGrantedChildPermissions()
     {
         $foo = new Rbac\Role('foo');
         $bar = new Rbac\Role('bar');
@@ -82,7 +82,10 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->rbac->isGranted('foo', 'can.bar'));
     }
 
-    public function testGrantedParentRoles()
+    /**
+     * @group xxx
+     */
+    public function testChildRolesInheritParentPermissions()
     {
         $foo = new Rbac\Role('foo');
         $bar = new Rbac\Role('bar');

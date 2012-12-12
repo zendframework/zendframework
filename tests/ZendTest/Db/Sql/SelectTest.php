@@ -87,6 +87,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test join() exception with bad join
+     * @covers Zend\Db\Sql\Select::join
+     */
+    public function testBadJoin()
+    {
+        $select = new Select;
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', "expects 'foo' as");
+        $select->join(array('foo'), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+    }
+
+    /**
      * @testdox unit test: Test getRawState() returns information populated via join()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testJoin

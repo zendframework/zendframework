@@ -59,64 +59,64 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertNotResponseStatusCode(200);
     }
 
-    public function testAssertHeader()
+    public function testAssertHasResponseHeader()
     {
         $this->dispatch('/tests');
-        $this->assertHeader('Content-Type');
+        $this->assertHasResponseHeader('Content-Type');
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
-        $this->assertHeader('Unknow-header');
+        $this->assertHasResponseHeader('Unknow-header');
     }
 
-    public function testAssertNotHeader()
+    public function testAssertNotHasResponseHeader()
     {
         $this->dispatch('/tests');
-        $this->assertNotHeader('Unknow-header');
+        $this->assertNotHasResponseHeader('Unknow-header');
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
-        $this->assertNotHeader('Content-Type');
+        $this->assertNotHasResponseHeader('Content-Type');
     }
 
-    public function testAssertHeaderContains()
+    public function testAssertResponseHeaderContains()
     {
         $this->dispatch('/tests');
-        $this->assertHeaderContains('Content-Type', 'text/html');
+        $this->assertResponseHeaderContains('Content-Type', 'text/html');
 
         $this->setExpectedException(
             'PHPUnit_Framework_ExpectationFailedException',
             'actual content is "text/html"' // check actual content is display
         );
-        $this->assertHeaderContains('Content-Type', 'text/json');
+        $this->assertResponseHeaderContains('Content-Type', 'text/json');
     }
 
-    public function testAssertNotHeaderContains()
+    public function testAssertNotResponseHeaderContains()
     {
         $this->dispatch('/tests');
-        $this->assertNotHeaderContains('Content-Type', 'text/json');
+        $this->assertNotResponseHeaderContains('Content-Type', 'text/json');
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
-        $this->assertNotHeaderContains('Content-Type', 'text/html');
+        $this->assertNotResponseHeaderContains('Content-Type', 'text/html');
     }
 
-    public function testAssertHeaderRegex()
+    public function testAssertResponseHeaderRegex()
     {
         $this->dispatch('/tests');
-        $this->assertHeaderRegex('Content-Type', '#html$#');
+        $this->assertResponseHeaderRegex('Content-Type', '#html$#');
 
         $this->setExpectedException(
             'PHPUnit_Framework_ExpectationFailedException',
             'actual content is "text/html"' // check actual content is display
         );
-        $this->assertHeaderRegex('Content-Type', '#json#');
+        $this->assertResponseHeaderRegex('Content-Type', '#json#');
     }
 
-    public function testAssertNotHeaderRegex()
+    public function testAssertNotResponseHeaderRegex()
     {
         $this->dispatch('/tests');
-        $this->assertNotHeaderRegex('Content-Type', '#json#');
+        $this->assertNotResponseHeaderRegex('Content-Type', '#json#');
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
-        $this->assertNotHeaderRegex('Content-Type', '#html$#');
+        $this->assertNotResponseHeaderRegex('Content-Type', '#html$#');
     }
 
     public function testAssertRedirect()

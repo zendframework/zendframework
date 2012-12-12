@@ -34,7 +34,7 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
     public function assertConsoleOutputContains($match)
     {
         $response = $this->getResponse();
-        if(false === stripos($response->getContent(), $match)) {
+        if (false === stripos($response->getContent(), $match)) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting output CONTAINS content "%s", actual content is "%s"',
                 $match, $response->getContent()
@@ -52,7 +52,7 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
     public function assertNotConsoleOutputContains($match)
     {
         $response = $this->getResponse();
-        if(false !== stripos($response->getContent(), $match)) {
+        if (false !== stripos($response->getContent(), $match)) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting output DOES NOT CONTAIN content "%s"',
                 $match

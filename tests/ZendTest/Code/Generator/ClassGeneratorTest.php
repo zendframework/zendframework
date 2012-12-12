@@ -37,7 +37,6 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator = new ClassGenerator();
         $classGenerator->setName('TestClass');
         $this->assertEquals($classGenerator->getName(), 'TestClass');
-
     }
 
     public function testClassDocBlockAccessors()
@@ -73,7 +72,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator->addProperties(array(
             'propOne',
             new PropertyGenerator('propTwo')
-            ));
+        ));
 
         $properties = $classGenerator->getProperties();
         $this->assertEquals(count($properties), 2);
@@ -96,7 +95,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
             'A property by name prop3 already exists in this class'
-            );
+        );
         $classGenerator->addProperty('prop3');
     }
 
@@ -107,7 +106,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
             'addProperty() expects string for name'
-            );
+        );
         $classGenerator->addProperty(true);
     }
 
@@ -117,7 +116,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator->addMethods(array(
             'methodOne',
             new MethodGenerator('methodTwo')
-            ));
+        ));
 
         $methods = $classGenerator->getMethods();
         $this->assertEquals(count($methods), 2);
@@ -139,7 +138,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\ExceptionInterface',
             'addMethod() expects string for name'
-            );
+        );
 
         $classGenerator->addMethod(true);
     }
@@ -154,7 +153,10 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator = new ClassGenerator();
         $classGenerator->addMethodFromGenerator($methodA);
 
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'A method by name foo already exists in this class.');
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'A method by name foo already exists in this class.'
+        );
 
         $classGenerator->addMethodFromGenerator($methodB);
     }
@@ -193,7 +195,6 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
             array('baz')
         );
 
-
         $classGenerator = ClassGenerator::fromArray(
             array(
             'name' => 'SampleClass',
@@ -204,12 +205,11 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
             'implementedInterfaces' => array('Iterator', 'Traversable'),
             'properties' => array('foo',
                 array('name' => 'bar')
-                ),
+            ),
             'methods' => array(
                 array('name' => 'baz')
-                ),
-            ));
-
+            ),
+        ));
 
         $expectedOutput = <<<EOS
 abstract class SampleClass extends ExtendedClassName implements Iterator, Traversable
@@ -245,8 +245,8 @@ EOS;
         $code = $classGenerator->generate();
 
         $expectedClassDef = 'class ClassWithInterface'
-                          . ' implements ZendTest\Code\Generator\TestAsset\OneInterface'
-                          . ', ZendTest\Code\Generator\TestAsset\TwoInterface';
+            . ' implements ZendTest\Code\Generator\TestAsset\OneInterface'
+            . ', ZendTest\Code\Generator\TestAsset\TwoInterface';
         $this->assertContains($expectedClassDef, $code);
     }
 
@@ -263,8 +263,8 @@ EOS;
         $code = $classGenerator->generate();
 
         $expectedClassDef = 'class NewClassWithInterface'
-                          . ' extends ZendTest\Code\Generator\TestAsset\ClassWithInterface'
-                          . ' implements ZendTest\Code\Generator\TestAsset\ThreeInterface';
+            . ' extends ZendTest\Code\Generator\TestAsset\ClassWithInterface'
+            . ' implements ZendTest\Code\Generator\TestAsset\ThreeInterface';
         $this->assertContains($expectedClassDef, $code);
     }
 
@@ -274,8 +274,9 @@ EOS;
     public function testSetextendedclassShouldIgnoreEmptyClassnameOnGenerate()
     {
         $classGeneratorClass = new ClassGenerator();
-        $classGeneratorClass->setName( 'MyClass' )
-                     ->setExtendedClass('');
+        $classGeneratorClass
+            ->setName('MyClass')
+            ->setExtendedClass('');
 
         $expected = <<<CODE
 class MyClass
@@ -285,7 +286,7 @@ class MyClass
 }
 
 CODE;
-        $this->assertEquals( $expected, $classGeneratorClass->generate() );
+        $this->assertEquals($expected, $classGeneratorClass->generate());
     }
 
     /**
@@ -294,8 +295,9 @@ CODE;
     public function testSetextendedclassShouldNotIgnoreNonEmptyClassnameOnGenerate()
     {
         $classGeneratorClass = new ClassGenerator();
-        $classGeneratorClass->setName( 'MyClass' )
-                     ->setExtendedClass('ParentClass');
+        $classGeneratorClass
+            ->setName('MyClass')
+            ->setExtendedClass('ParentClass');
 
         $expected = <<<CODE
 class MyClass extends ParentClass
@@ -305,7 +307,7 @@ class MyClass extends ParentClass
 }
 
 CODE;
-        $this->assertEquals( $expected, $classGeneratorClass->generate() );
+        $this->assertEquals($expected, $classGeneratorClass->generate());
     }
 
     /**

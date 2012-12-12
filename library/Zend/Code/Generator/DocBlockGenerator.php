@@ -39,7 +39,7 @@ class DocBlockGenerator extends AbstractGenerator
     protected $indentation = '';
 
     /**
-     * fromReflection() - Build a DocBlock generator object from a reflection object
+     * Build a DocBlock generator object from a reflection object
      *
      * @param DocBlockReflection $reflectionDocBlock
      * @return DocBlockGenerator
@@ -61,6 +61,43 @@ class DocBlockGenerator extends AbstractGenerator
         return $docBlock;
     }
 
+    /**
+     * Generate from array
+     *
+     * @configkey shortdescription string The short description for this doc block
+     * @configkey longdescription  string The long description for this doc block
+     * @configkey tags             array
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param array $array
+     * @return DocBlockGenerator
+     */
+    public static function fromArray(array $array)
+    {
+        $docBlock = new static();
+        
+        foreach ($array as $name => $value) {
+            // normalize key
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
+                case 'shortdescription':
+                    $docBlock->setShortDescription($value);
+                case 'longdescription':
+                    $docBlock->setLongDescription($value);
+                    break;
+                case 'tags':
+                    $docBlock->setTags($value);
+                    break;
+            }
+        }
+
+        return $docBlock;
+    }
+
+    /**
+     * @param string $shortDescription
+     * @param string $longDescription
+     * @param array  $tags
+     */
     public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
     {
         if ($shortDescription !== null) {
@@ -72,12 +109,9 @@ class DocBlockGenerator extends AbstractGenerator
         if ($this->tags !== array()) {
             $this->setTag($tags);
         }
-
     }
 
     /**
-     * setShortDescription()
-     *
      * @param string $shortDescription
      * @return DocBlockGenerator
      */
@@ -88,8 +122,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * getShortDescription()
-     *
      * @return string
      */
     public function getShortDescription()
@@ -98,8 +130,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setLongDescription()
-     *
      * @param string $longDescription
      * @return DocBlockGenerator
      */
@@ -110,8 +140,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * getLongDescription()
-     *
      * @return string
      */
     public function getLongDescription()
@@ -120,8 +148,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setTags()
-     *
      * @param array $tags
      * @return DocBlockGenerator
      */
@@ -135,8 +161,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setTag()
-     *
      * @param array|DocBlock\Tag $tag
      * @throws Exception\InvalidArgumentException
      * @return DocBlockGenerator
@@ -158,9 +182,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * getTags
-     *
-     * @return DocBlock\Tag[]
+     * @return array
      */
     public function getTags()
     {
@@ -168,8 +190,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
@@ -194,8 +214,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * docCommentize()
-     *
      * @param string $content
      * @return string
      */

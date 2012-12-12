@@ -191,7 +191,7 @@ class DotNetTest extends PHPUnit_Framework_TestCase
     /**
      * .NET SOAP client.
      *
-     * @var \HolaDoctor\Cms\Translation\Soap\Client\DotNet
+     * @var \Zend\Soap\Client\DotNet
      */
     private $client = null;
 

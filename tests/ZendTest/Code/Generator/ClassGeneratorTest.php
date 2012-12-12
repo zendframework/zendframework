@@ -11,6 +11,7 @@
 namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Reflection\ClassReflection;
@@ -29,7 +30,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testConstruction()
     {
         $class = new ClassGenerator();
-        $this->isInstanceOf($class, '\Zend\Code\Generator\ClassGenerator');
+        $this->isInstanceOf($class, 'Zend\Code\Generator\ClassGenerator');
     }
 
     public function testNameAccessors()
@@ -185,22 +186,10 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $classGenerator = new ClassGenerator(
-            'SampleClass',
-            null,
-            ClassGenerator::FLAG_ABSTRACT,
-            'ExtendedClassName',
-            array('Iterator', 'Traversable'),
-            array('foo', 'bar'),
-            array('baz')
-        );
-
         $classGenerator = ClassGenerator::fromArray(
             array(
             'name' => 'SampleClass',
-            //'abstract' => true,
             'flags' => ClassGenerator::FLAG_ABSTRACT,
-            'name' => 'SampleClass',
             'extendedClass' => 'ExtendedClassName',
             'implementedInterfaces' => array('Iterator', 'Traversable'),
             'properties' => array('foo',
@@ -255,7 +244,7 @@ EOS;
      */
     public function testClassFromReflectionDiscardParentImplementedInterfaces()
     {
-        $reflClass = new ClassReflection('\ZendTest\Code\Generator\TestAsset\NewClassWithInterface');
+        $reflClass = new ClassReflection('ZendTest\Code\Generator\TestAsset\NewClassWithInterface');
 
         $classGenerator = ClassGenerator::fromReflection($reflClass);
         $classGenerator->setSourceDirty(true);
@@ -363,5 +352,31 @@ CODE;
         $classGeneratorClass->setName('My\Namespaced\FunClass');
         $received = $classGeneratorClass->generate();
         $this->assertContains('class FunClass', $received, $received);
+    }
+
+    public function testCreateFromArrayWithDocBlockFromArray()
+    {
+        $classGenerator = ClassGenerator::fromArray(
+            array(
+            'name' => 'SampleClass',
+            'docblock' => array(
+                'shortdescription' => 'foo',
+            ),
+        ));
+
+        $docBlock = $classGenerator->getDocBlock();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $docBlock);
+    }
+
+    public function testCreateFromArrayWithDocBlockInstance()
+    {
+        $classGenerator = ClassGenerator::fromArray(
+            array(
+            'name' => 'SampleClass',
+            'docblock' => new DocBlockGenerator('foo'),
+        ));
+
+        $docBlock = $classGenerator->getDocBlock();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $docBlock);
     }
 }

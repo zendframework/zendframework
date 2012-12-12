@@ -29,22 +29,11 @@ class Response extends Message implements ResponseInterface
      * Check if content was sent
      *
      * @return bool
+     * @deprecated
      */
     public function contentSent()
     {
         return $this->contentSent;
-    }
-
-    /**
-     * Set content sent
-     *
-     * @param $flag
-     * @return Response
-     */
-    public function setContentSent($flag)
-    {
-        $this->contentSent = (bool) $flag;
-        return $this;
     }
 
     /**

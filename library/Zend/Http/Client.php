@@ -582,6 +582,10 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getStream()
     {
+        if (!is_null($this->streamName)) {
+            return $this->streamName;
+        }
+
         return $this->config['outputstream'];
     }
 
@@ -832,10 +836,6 @@ class Client implements Stdlib\DispatchableInterface
             if ($this->config['outputstream']) {
                 $stream = $this->getStream();
                 if (!is_resource($stream) && is_string($stream)) {
-                    $stream = fopen($stream, 'r');
-                }
-                if (!is_resource($stream)) {
-                    $stream = $this->getUri()->toString();
                     $stream = fopen($stream, 'r');
                 }
                 $streamMetaData = stream_get_meta_data($stream);

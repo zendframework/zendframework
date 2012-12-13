@@ -82,17 +82,6 @@ class ConfigListener extends AbstractListener implements
     }
 
     /**
-     * __invoke proxy to loadModule for easier attaching
-     *
-     * @param  ModuleEvent $e
-     * @return ConfigListener
-     */
-    public function __invoke(ModuleEvent $e)
-    {
-        return $this->loadModule($e);
-    }
-
-    /**
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events

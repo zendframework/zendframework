@@ -73,7 +73,7 @@ class Part
      * @return stream
      * @throws Exception\RuntimeException if not a stream or unable to append filter
      */
-    public function getEncodedStream()
+    public function getEncodedStream($EOL = Mime::LINEEND)
     {
         if (!$this->isStream) {
             throw new Exception\RuntimeException('Attempt to get a stream from a string part');
@@ -88,7 +88,7 @@ class Part
                     STREAM_FILTER_READ,
                     array(
                         'line-length'      => 76,
-                        'line-break-chars' => Mime::LINEEND
+                        'line-break-chars' => $EOL
                     )
                 );
                 if (!is_resource($filter)) {
@@ -102,7 +102,7 @@ class Part
                     STREAM_FILTER_READ,
                     array(
                         'line-length'      => 76,
-                        'line-break-chars' => Mime::LINEEND
+                        'line-break-chars' => $EOL
                     )
                 );
                 if (!is_resource($filter)) {
@@ -123,7 +123,7 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            return stream_get_contents($this->getEncodedStream());
+            return stream_get_contents($this->getEncodedStream($EOL));
         }
         return Mime::encode($this->content, $this->encoding, $EOL);
     }

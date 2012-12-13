@@ -214,7 +214,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function join($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER)
     {
         if (is_array($name) && (!is_string(key($name)) || count($name) !== 1)) {
-            throw new Exception\InvalidArgumentException('join() expects $name as an array is a single element associative array');
+            throw new Exception\InvalidArgumentException(
+                sprintf("join() expects '%s' as an array is a single element associative array", array_shift($name))
+            );
         }
         if (!is_array($columns)) {
             $columns = array($columns);

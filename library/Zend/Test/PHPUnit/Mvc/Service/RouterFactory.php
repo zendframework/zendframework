@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -21,9 +20,17 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class RouterFactory implements FactoryInterface
 {
+    /**
+     * Create and return router
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  string|null $cName
+     * @param  string|null $rName
+     * @return HttpRouter
+     */
     public function createService(ServiceLocatorInterface $serviceLocator, $cName = null, $rName = null)
     {
-        $config = $serviceLocator->get('Config');
+        $config       = $serviceLocator->get('Config');
         $routerConfig = isset($config['router']) ? $config['router'] : array();
         return HttpRouter::factory($routerConfig);
     }

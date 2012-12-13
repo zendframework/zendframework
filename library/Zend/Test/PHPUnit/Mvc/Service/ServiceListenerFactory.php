@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -19,25 +18,26 @@ use Zend\Mvc\Service\ServiceListenerFactory as BaseServiceListenerFactory;
  */
 class ServiceListenerFactory extends BaseServiceListenerFactory
 {
+    /**
+     * Create default service configuration
+     */
     public function __construct()
     {
         // merge basee config with specific tests config
         $this->defaultServiceConfig = array_replace_recursive(
             $this->defaultServiceConfig,
-            array(
-                'factories' => array(
-                    'Request' => function($sm) {
-                        return new \Zend\Http\PhpEnvironment\Request();
-                    },
-                    'Response' => function($sm) {
-                        return new \Zend\Http\PhpEnvironment\Response();
-                    },
-                    'Router' => 'Zend\Test\PHPUnit\Mvc\Service\RouterFactory',
-                    'ViewManager' => function($sm) {
-                        return new \Zend\Mvc\View\Http\ViewManager();
-                    },
-                ),
-            )
+            array('factories' => array(
+                'Request' => function($sm) {
+                    return new \Zend\Http\PhpEnvironment\Request();
+                },
+                'Response' => function($sm) {
+                    return new \Zend\Http\PhpEnvironment\Response();
+                },
+                'Router' => 'Zend\Test\PHPUnit\Mvc\Service\RouterFactory',
+                'ViewManager' => function($sm) {
+                    return new \Zend\Mvc\View\Http\ViewManager();
+                },
+            ))
         );
     }
 }

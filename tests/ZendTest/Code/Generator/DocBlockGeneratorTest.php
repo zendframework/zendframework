@@ -79,7 +79,7 @@ EOS;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 
-    public function testCreateFormArray()
+    public function testCreateFromArray()
     {
         $docBlock = DocBlockGenerator::fromArray(array(
             'shortdescription' => 'foo',

@@ -16,7 +16,6 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator;
-use Zend\Stdlib\InitializableInterface;
 
 /**
  * @category   Zend
@@ -215,11 +214,6 @@ class Factory
 
         if (is_array($attributes) || $attributes instanceof Traversable || $attributes instanceof ArrayAccess) {
             $element->setAttributes($attributes);
-        }
-
-        // Hook to perform stuff, once all the configuration work has been done
-        if ($element instanceof InitializableInterface) {
-            $element->init();
         }
 
         return $element;

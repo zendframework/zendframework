@@ -246,7 +246,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
 
         $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
-        if ($exception) {
+        if ($exception instanceof \Exception) {
             throw $exception;
         }
     }

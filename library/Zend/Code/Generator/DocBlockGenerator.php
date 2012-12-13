@@ -100,14 +100,14 @@ class DocBlockGenerator extends AbstractGenerator
      */
     public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
     {
-        if ($shortDescription !== null) {
+        if ($shortDescription) {
             $this->setShortDescription($shortDescription);
         }
-        if ($longDescription !== null) {
+        if ($longDescription) {
             $this->setLongDescription($longDescription);
         }
-        if ($this->tags !== array()) {
-            $this->setTag($tags);
+        if (is_array($tags) && $tags) {
+            $this->setTags($tags);
         }
     }
 
@@ -184,7 +184,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @return array
+     * @return DocBlock\Tag[]
      */
     public function getTags()
     {

@@ -880,8 +880,17 @@ class Filesystem extends AbstractAdapter implements
         $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
-        $this->putFileContent($filespec . '.dat', $value);
+        // write data in non-blocking mode
+        $wouldblock = null;
+        $this->putFileContent($filespec . '.dat', $value, true, $wouldblock);
+
+        // delete related tag file (if present)
         $this->unlink($filespec . '.tag');
+
+        // Retry writing data in blocking mode if it was blocked before
+        if ($wouldblock) {
+            $this->putFileContent($filespec . '.dat', $value);
+        }
 
         return true;
     }
@@ -1528,7 +1537,7 @@ class Filesystem extends AbstractAdapter implements
                 }
             }
 
-            if (!fwrite($fp, $data)) {
+            if (fwrite($fp, $data) === false) {
                 flock($fp, \LOCK_UN);
                 fclose($fp);
                 $err = ErrorHandler::stop();

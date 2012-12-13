@@ -10,6 +10,7 @@
 
 namespace Zend\Http;
 
+use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\ResponseInterface;
 
 /**
@@ -476,7 +477,17 @@ class Response extends AbstractMessage implements ResponseInterface
             );
         }
 
-        return gzinflate(substr($body, 10));
+        ErrorHandler::start();
+        $return = gzinflate(substr($body, 10));
+        $test = ErrorHandler::stop();
+        if ($test) {
+            throw new Exception\RuntimeException(
+                'Error occurred during gzip inflation',
+                0,
+                $test
+            );
+        }
+        return $return;
     }
 
     /**

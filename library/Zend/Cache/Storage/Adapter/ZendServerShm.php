@@ -65,6 +65,11 @@ class ZendServerShm extends AbstractZendServer implements
      */
     public function clearByNamespace($namespace)
     {
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
         return zend_shm_cache_clear($namespace);
     }
 

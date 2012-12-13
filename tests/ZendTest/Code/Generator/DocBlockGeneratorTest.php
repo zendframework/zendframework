@@ -33,7 +33,7 @@ class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->docBlockGenerator = $this->docBlockGenerator = new DocBlockGenerator();
     }
 
-    public function testCanPassTagsToContructor()
+    public function testCanPassTagsToConstructor()
     {
         $docBlockGenerator = new DocBlockGenerator(null, null, array(
             array('name' => 'foo')

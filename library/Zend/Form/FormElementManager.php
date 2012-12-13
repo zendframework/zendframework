@@ -12,6 +12,7 @@ namespace Zend\Form;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Plugin manager implementation for form elements.
@@ -102,6 +103,11 @@ class FormElementManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
+        // Hook to perform various initialization, when the element is not created through the factory
+        if ($plugin instanceof InitializableInterface) {
+            $plugin->init();
+        }
+
         if ($plugin instanceof ElementInterface) {
             return; // we're okay
         }

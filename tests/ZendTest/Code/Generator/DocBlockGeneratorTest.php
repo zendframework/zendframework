@@ -23,7 +23,9 @@ use Zend\Code\Generator\DocBlock\Tag;
  */
 class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var DocBlockGenerator */
+    /**
+     * @var DocBlockGenerator
+     */
     protected $docBlockGenerator;
 
     protected function setUp()
@@ -66,7 +68,6 @@ class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 EOS;
 
         $this->assertEquals($target, $this->docBlockGenerator->generate());
-
     }
 
     public function testGenerationOfDocBlock()
@@ -76,6 +77,24 @@ EOS;
         $expected = '/**' . DocBlockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
             . DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
+    }
+
+    public function testCreateFromArray()
+    {
+        $docBlock = DocBlockGenerator::fromArray(array(
+            'shortdescription' => 'foo',
+            'longdescription'  => 'bar',
+            'tags' => array(
+                array(
+                    'name'        => 'foo',
+                    'description' => 'bar',
+                )
+            ),
+        ));
+
+        $this->assertEquals('foo', $docBlock->getShortDescription());
+        $this->assertEquals('bar', $docBlock->getLongDescription());
+        $this->assertCount(1, $docBlock->getTags());
     }
 
 }

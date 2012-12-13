@@ -117,6 +117,11 @@ class Session extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
+        $prefix = (string) $prefix;
+        if ($prefix === '') {
+            throw new Exception\InvalidArgumentException('No prefix given');
+        }
+
         $cntr = $this->getSessionContainer();
         $ns   = $this->getOptions()->getNamespace();
 

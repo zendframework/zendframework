@@ -23,7 +23,9 @@ use Zend\Stdlib\PriorityQueue;
  * @category   Zend
  * @package    Zend_EventManager
  */
-class SharedEventManager implements SharedEventManagerInterface
+class SharedEventManager implements
+    SharedEventAggregateAwareInterface,
+    SharedEventManagerInterface
 {
     /**
      * Identifiers with event connections
@@ -78,6 +80,22 @@ class SharedEventManager implements SharedEventManagerInterface
     }
 
     /**
+     * Attach a listener aggregate
+     *
+     * Listener aggregates accept an EventManagerInterface instance, and call attachShared()
+     * one or more times, typically to attach to multiple events using local
+     * methods.
+     *
+     * @param  SharedListenerAggregateInterface $aggregate
+     * @param  int $priority If provided, a suggested priority for the aggregate to use
+     * @return mixed return value of {@link ListenerAggregateInterface::attachShared()}
+     */
+    public function attachAggregate(SharedListenerAggregateInterface $aggregate, $priority = 1)
+    {
+        return $aggregate->attachShared($this, $priority);
+    }
+
+    /**
      * Detach a listener from an event offered by a given resource
      *
      * @param  string|int $id
@@ -90,6 +108,20 @@ class SharedEventManager implements SharedEventManagerInterface
             return false;
         }
         return $this->identifiers[$id]->detach($listener);
+    }
+
+    /**
+     * Detach a listener aggregate
+     *
+     * Listener aggregates accept an SharedEventManagerInterface instance, and call detachShared()
+     * of all previously attached listeners.
+     *
+     * @param  SharedListenerAggregateInterface $aggregate
+     * @return mixed return value of {@link SharedListenerAggregateInterface::detachShared()}
+     */
+    public function detachAggregate(SharedListenerAggregateInterface $aggregate)
+    {
+        return $aggregate->detachShared($this);
     }
 
     /**

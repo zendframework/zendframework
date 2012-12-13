@@ -47,6 +47,8 @@ class TokenArrayScanner implements ScannerInterface
     protected $annotationManager = null;
 
     /**
+     * Constructor
+     *
      * @param null|array             $tokens
      * @param null|AnnotationManager $annotationManager
      */
@@ -56,12 +58,19 @@ class TokenArrayScanner implements ScannerInterface
         $this->annotationManager = $annotationManager;
     }
 
+    /**
+     * Get annotation manager
+     *
+     * @return AnnotationManager
+     */
     public function getAnnotationManager()
     {
         return $this->annotationManager;
     }
 
     /**
+     * Get doc comment
+     *
      * @todo Assignment of $this->docComment should probably be done in scan()
      *       and then $this->getDocComment() just retrieves it.
      */
@@ -83,6 +92,11 @@ class TokenArrayScanner implements ScannerInterface
         }
     }
 
+    /**
+     * Get namespaces
+     *
+     * @return array
+     */
     public function getNamespaces()
     {
         $this->scan();
@@ -108,6 +122,9 @@ class TokenArrayScanner implements ScannerInterface
         return $this->getUsesNoScan($namespace);
     }
 
+    /**
+     * Get includes
+     */
     public function getIncludes()
     {
         $this->scan();
@@ -117,7 +134,7 @@ class TokenArrayScanner implements ScannerInterface
     /**
      * Get class names
      *
-     * @return string[]
+     * @return array
      */
     public function getClassNames()
     {
@@ -239,6 +256,11 @@ class TokenArrayScanner implements ScannerInterface
         return $functionNames;
     }
 
+    /**
+     * Get functions
+     *
+     * @return array
+     */
     public function getFunctions()
     {
         $this->scan();
@@ -252,6 +274,11 @@ class TokenArrayScanner implements ScannerInterface
         return $functions;
     }
 
+    /**
+     * Export
+     *
+     * @param $tokens
+     */
     public static function export($tokens)
     {
         // @todo
@@ -263,9 +290,13 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
+     * Scan
+     *
      * @todo: $this->docComment should be assigned for valid docblock during
      *        the scan instead of $this->getDocComment() (starting with
      *        T_DOC_COMMENT case)
+     *
+     * @throws Exception\RuntimeException
      */
     protected function scan()
     {
@@ -295,7 +326,7 @@ class TokenArrayScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE             = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+        $MACRO_TOKEN_ADVANCE             = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
                 $token        = false;
@@ -318,15 +349,14 @@ class TokenArrayScanner implements ScannerInterface
             }
             return $tokenIndex;
         };
-        $MACRO_TOKEN_LOGICAL_START_INDEX = function() use (&$tokenIndex, &$docCommentIndex) {
-            ;
+        $MACRO_TOKEN_LOGICAL_START_INDEX = function () use (&$tokenIndex, &$docCommentIndex) {
             return ($docCommentIndex === false) ? $tokenIndex : $docCommentIndex;
         };
-        $MACRO_DOC_COMMENT_START         = function() use (&$tokenIndex, &$docCommentIndex) {
+        $MACRO_DOC_COMMENT_START = function () use (&$tokenIndex, &$docCommentIndex) {
             $docCommentIndex = $tokenIndex;
             return $docCommentIndex;
         };
-        $MACRO_DOC_COMMENT_VALIDATE      = function() use (&$tokenType, &$docCommentIndex) {
+        $MACRO_DOC_COMMENT_VALIDATE = function () use (&$tokenType, &$docCommentIndex) {
             static $validTrailingTokens = null;
             if ($validTrailingTokens === null) {
                 $validTrailingTokens = array(T_WHITESPACE, T_FINAL, T_ABSTRACT, T_INTERFACE, T_CLASS, T_FUNCTION);
@@ -336,7 +366,7 @@ class TokenArrayScanner implements ScannerInterface
             }
             return $docCommentIndex;
         };
-        $MACRO_INFO_ADVANCE              = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+        $MACRO_INFO_ADVANCE = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;
@@ -598,8 +628,31 @@ class TokenArrayScanner implements ScannerInterface
         $this->isScanned = true;
     }
 
-    // @todo hasNamespace(), getNamespace()
+    /**
+     * Check for namespace
+     *
+     * @param string $namespace
+     * @return bool
+     */
+    public function hasNamespace($namespace)
+    {
+        $this->scan();
 
+        foreach ($this->infos as $info) {
+            if ($info['type'] == 'namespace' && $info['namespace'] == $namespace) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get uses no scan
+     *
+     * @param string $namespace
+     * @return null|array
+     * @throws Exception\InvalidArgumentException
+     */
     protected function getUsesNoScan($namespace)
     {
         $namespaces = array();

@@ -178,7 +178,7 @@ class Mvc extends AbstractPage
 
         $router = $this->router;
         if (null === $router) {
-            $router = self::$defaultRouter;
+            $router = static::$defaultRouter;
         }
 
         if (!$router instanceof RouteStackInterface) {
@@ -411,7 +411,7 @@ class Mvc extends AbstractPage
      */
     public static function setDefaultRouter($router)
     {
-        self::$defaultRouter = $router;
+        static::$defaultRouter = $router;
     }
 
     /**
@@ -421,7 +421,7 @@ class Mvc extends AbstractPage
      */
     public static function getDefaultRouter()
     {
-        return self::$defaultRouter;
+        return static::$defaultRouter;
     }
 
     // Public methods:
@@ -440,6 +440,8 @@ class Mvc extends AbstractPage
                  'controller' => $this->getController(),
                  'params'     => $this->getParams(),
                  'route'      => $this->getRoute(),
+                 'router'     => $this->getRouter(),
+                 'route_match' => $this->getRouteMatch(),
             )
         );
     }

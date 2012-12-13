@@ -45,7 +45,7 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethod('Foo', 'injectBar'));
         $this->assertContains('injectBar', $definition->getMethods('Foo'));
         $this->assertEquals(
-            array('Foo::injectBar:0' => array('bar', 'Bar', true)),
+            array('Foo::injectBar:0' => array('bar', 'Bar', true, null)),
             $definition->getMethodParameters('Foo', 'injectBar')
         );
     }
@@ -86,8 +86,8 @@ class BuilderDefinitionTest extends TestCase
         $this->assertEquals('__construct', $definition->getInstantiator('My\DbAdapter'));
         $this->assertEquals(
             array(
-                'My\DbAdapter::__construct:0' => array('username', null, true),
-                'My\DbAdapter::__construct:1' => array('password', null, true)
+                'My\DbAdapter::__construct:0' => array('username', null, true, null),
+                'My\DbAdapter::__construct:1' => array('password', null, true, null),
             ),
             $definition->getMethodParameters('My\DbAdapter', '__construct')
         );
@@ -95,14 +95,14 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($definition->hasClass('My\Mapper'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Mapper'));
         $this->assertEquals(
-            array('My\Mapper::__construct:0' => array('dbAdapter', 'My\DbAdapter', true)),
+            array('My\Mapper::__construct:0' => array('dbAdapter', 'My\DbAdapter', true, null)),
             $definition->getMethodParameters('My\Mapper', '__construct')
         );
 
         $this->assertTrue($definition->hasClass('My\Repository'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Repository'));
         $this->assertEquals(
-            array('My\Repository::__construct:0' => array('mapper', 'My\Mapper', true)),
+            array('My\Repository::__construct:0' => array('mapper', 'My\Mapper', true, null)),
             $definition->getMethodParameters('My\Repository', '__construct')
         );
 
@@ -131,11 +131,11 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($builder->hasMethod('Foo', 'setConfig'));
 
         $this->assertEquals(
-            array('Foo::setBar:0' => array('bar', 'Bar', true)),
+            array('Foo::setBar:0' => array('bar', 'Bar', true, null)),
             $builder->getMethodParameters('Foo', 'setBar')
         );
         $this->assertEquals(
-            array('Foo::setConfig:0' => array('config', null, true)),
+            array('Foo::setConfig:0' => array('config', null, true, null)),
             $builder->getMethodParameters('Foo', 'setConfig')
         );
     }

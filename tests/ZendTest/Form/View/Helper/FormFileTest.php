@@ -20,36 +20,70 @@ use Zend\Form\View\Helper\FormFile as FormFileHelper;
  */
 class FormFileTest extends CommonTestCase
 {
+    /**
+     * @return void
+     */
     public function setUp()
     {
         $this->helper = new FormFileHelper();
         parent::setUp();
     }
 
+    /**
+     * @return void
+     */
     public function testRaisesExceptionWhenNameIsNotPresentInElement()
     {
-        $element = new Element();
+        $element = new Element\File();
         $this->setExpectedException('Zend\Form\Exception\DomainException', 'name');
         $this->helper->render($element);
     }
 
+    /**
+     * @return void
+     */
     public function testGeneratesFileInputTagWithElement()
     {
-        $element = new Element('foo');
+        $element = new Element\File('foo');
         $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
     }
 
+    /**
+     * @return void
+     */
     public function testGeneratesFileInputTagRegardlessOfElementType()
     {
-        $element = new Element('foo');
+        $element = new Element\File('foo');
         $element->setAttribute('type', 'email');
         $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
     }
 
+    /**
+     * @return void
+     */
+    public function testRendersElementWithFileArrayValue()
+    {
+        $element = new Element\File('foo');
+        $element->setValue(array(
+            'tmp_name' => '/tmp/foofile',
+            'name'     => 'foofile',
+            'type'     => 'text',
+            'size'     => 200,
+            'error'    => 2,
+        ));
+        $markup  = $this->helper->render($element);
+        $this->assertContains('<input ', $markup);
+        $this->assertContains('type="file"', $markup);
+        $this->assertContains('value="foofile"', $markup);
+    }
+
+    /**
+     * @return array
+     */
     public function validAttributes()
     {
         return array(
@@ -72,7 +106,7 @@ class FormFileTest extends CommonTestCase
             array('max', 'assertNotContains'),
             array('maxlength', 'assertNotContains'),
             array('min', 'assertNotContains'),
-            array('multiple', 'assertContains'),
+            array('multiple', 'assertNotContains'),
             array('pattern', 'assertNotContains'),
             array('placeholder', 'assertNotContains'),
             array('readonly', 'assertNotContains'),
@@ -85,9 +119,12 @@ class FormFileTest extends CommonTestCase
         );
     }
 
+    /**
+     * @return Element\File
+     */
     public function getCompleteElement()
     {
-        $element = new Element('foo');
+        $element = new Element\File('foo');
         $element->setAttributes(array(
             'accept'             => 'value',
             'alt'                => 'value',
@@ -108,7 +145,7 @@ class FormFileTest extends CommonTestCase
             'max'                => 'value',
             'maxlength'          => 'value',
             'min'                => 'value',
-            'multiple'           => 'multiple',
+            'multiple'           => false,
             'name'               => 'value',
             'pattern'            => 'value',
             'placeholder'        => 'value',
@@ -141,15 +178,32 @@ class FormFileTest extends CommonTestCase
         $this->$assertion($expect, $markup);
     }
 
+    /**
+     * @return void
+     */
+    public function testNameShouldHaveArrayNotationWhenMultipleIsSpecified()
+    {
+        $element = new Element\File('foo');
+        $element->setAttribute('multiple', true);
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#<input[^>]*?(name="foo\[\]")#', $markup);
+    }
+
+    /**
+     * @return void
+     */
     public function testInvokeProxiesToRender()
     {
-        $element = new Element('foo');
+        $element = new Element\File('foo');
         $markup  = $this->helper->__invoke($element);
         $this->assertContains('<input', $markup);
         $this->assertContains('name="foo"', $markup);
         $this->assertContains('type="file"', $markup);
     }
 
+    /**
+     * @return void
+     */
     public function testInvokeWithNoElementChainsHelper()
     {
         $this->assertSame($this->helper, $this->helper->__invoke());

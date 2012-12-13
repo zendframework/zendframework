@@ -260,7 +260,7 @@ class RuntimeDefinition implements DefinitionInterface
 
             $methodName = $rMethod->getName();
 
-            if ($rMethod->getName() === '__construct') {
+            if ($rMethod->getName() === '__construct' || $rMethod->isStatic()) {
                 continue;
             }
 
@@ -346,7 +346,8 @@ class RuntimeDefinition implements DefinitionInterface
             // set the class name, if it exists
             $def['parameters'][$methodName][$fqName][] = $actualParamName;
             $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass()->getName() : null;
-            $def['parameters'][$methodName][$fqName][] = !$p->isOptional();
+            $def['parameters'][$methodName][$fqName][] = !($optional = $p->isOptional() && $p->isDefaultValueAvailable());
+            $def['parameters'][$methodName][$fqName][] = $optional ? $p->getDefaultValue() : null;
         }
 
     }

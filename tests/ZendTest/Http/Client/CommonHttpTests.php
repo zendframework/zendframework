@@ -113,20 +113,28 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      * Simple request tests
      */
 
+    public function methodProvider()
+    {
+        return array(
+            array(Request::METHOD_GET),
+            array(Request::METHOD_POST),
+            array(Request::METHOD_OPTIONS),
+            array(Request::METHOD_PUT),
+            array(Request::METHOD_DELETE),
+            array(Request::METHOD_PATCH),
+        );
+    }
+
     /**
      * Test simple requests
      *
+     * @dataProvider methodProvider
      */
-    public function testSimpleRequests()
+    public function testSimpleRequests($method)
     {
-        $methods= array(Request::METHOD_GET, Request::METHOD_POST, Request::METHOD_OPTIONS,
-                        Request::METHOD_PUT, Request::METHOD_DELETE, Request::METHOD_PATCH);
-
-        foreach ($methods as $method) {
-            $this->client->setMethod($method);
-            $res = $this->client->send();
-            $this->assertTrue($res->isSuccess(), "HTTP {$method} request failed.");
-        }
+        $this->client->setMethod($method);
+        $res = $this->client->send();
+        $this->assertTrue($res->isSuccess(), "HTTP {$method} request failed.");
     }
 
     /**
@@ -978,6 +986,21 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 2774
+     * @group 2745
+     */
+    public function testUsesProvidedArgSeparator()
+    {
+        $this->client->setArgSeparator(';');
+        $request = new Request();
+        $request->setUri('http://framework.zend.com');
+        $request->setQuery(array('foo' => 'bar', 'baz' => 'bat'));
+        $this->client->send($request);
+        $rawRequest = $this->client->getLastRawRequest();
+        $this->assertContains('?foo=bar;baz=bat', $rawRequest);
+    }
+
+    /**
      * Internal helpder function to get the contents of test files
      *
      * @param  string $file
@@ -1045,5 +1068,4 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             array(55)
         );
     }
-
 }

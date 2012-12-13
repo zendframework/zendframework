@@ -56,6 +56,12 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(__DIR__, ini_get('session.save_path'));
     }
 
+    public function testSavePathCanBeNonDirectoryWhenSaveHandlerNotFiles()
+    {
+        $this->config->setPhpSaveHandler('user');
+        $this->config->setSavePath('/tmp/sessions.db');
+    }
+
     // session.name
 
     public function testNameDefaultsToIniSettings()
@@ -721,6 +727,42 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->config->setRememberMeSeconds(604800);
         $this->assertEquals(604800, $this->config->getRememberMeSeconds());
+    }
+
+    // setOption
+
+    /**
+     * @dataProvider optionsProvider
+     */
+    public function testSetOptionSetsIniSetting($option, $getter, $value)
+    {
+        // Leaving out special cases.
+        if ($option != 'remember_me_seconds' && $option != 'url_rewriter_tags') {
+            $this->config->setStorageOption($option, $value);
+            $this->assertEquals(ini_get('session.' . $option), $value);
+        }
+    }
+
+    public function testSetOptionUrlRewriterTagsGetsMunged()
+    {
+        $value = 'a=href';
+        $this->config->setStorageOption('url_rewriter_tags', $value);
+        $this->assertEquals(ini_get('url_rewriter.tags'), $value);
+    }
+
+    public function testSetOptionRememberMeSecondsDoesNothing()
+    {
+        // I have no idea how to test this.
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetOptionsThrowsExceptionOnInvalidKey()
+    {
+        $badKey = 'snarfblat';
+        $value = 'foobar';
+        $this->config->setStorageOption($badKey, $value);
     }
 
     // setOptions

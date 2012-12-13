@@ -11,7 +11,9 @@
 namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Console\Response as ConsoleResponse;
 use Zend\EventManager\SharedEventManager;
+use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\PluginManager;
@@ -27,8 +29,10 @@ class ActionControllerTest extends TestCase
 
     public function setUp()
     {
+        StaticEventManager::resetInstance();
         $this->controller = new TestAsset\SampleController();
         $this->request    = new Request();
+        $this->response   = null;
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
@@ -80,7 +84,7 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function ($e) use ($response) {
             return $response;
         }, 100);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -91,7 +95,7 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function ($e) use ($response) {
             return $response;
         }, -10);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -103,7 +107,7 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
+        $events->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, function ($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->getEventManager()->setSharedManager($events);
@@ -116,7 +120,7 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
+        $events->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function ($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->getEventManager()->setSharedManager($events);
@@ -129,7 +133,7 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach(get_class($this->controller), MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
+        $events->attach(get_class($this->controller), MvcEvent::EVENT_DISPATCH, function ($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->getEventManager()->setSharedManager($events);
@@ -193,5 +197,21 @@ class ActionControllerTest extends TestCase
         $model = $this->event->getViewModel();
         $this->controller->layout('alternate/layout');
         $this->assertEquals('alternate/layout', $model->getTemplate());
+    }
+
+    /**
+     * @group 3186
+     */
+    public function testNotFoundActionReturnsSuccessfullyForConsoleResponse()
+    {
+        $response     = new ConsoleResponse();
+        $result       = $this->controller->dispatch($this->request, $response);
+        $testResponse = $this->controller->getResponse();
+        $this->assertSame($response, $testResponse);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
+        $this->assertEquals('content', $result->captureTo());
+        $vars = $result->getVariables();
+        $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
+        $this->assertContains('Page not found', $vars['content']);
     }
 }

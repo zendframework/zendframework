@@ -25,7 +25,6 @@ class Redirect extends AbstractPlugin
 {
     protected $event;
     protected $response;
-    protected $router;
 
     /**
      * Generates a URL based on a route
@@ -45,7 +44,6 @@ class Redirect extends AbstractPlugin
             throw new Exception\DomainException('Redirect plugin requires a controller that defines the plugin() method');
         }
 
-        $response  = $this->getResponse();
         $urlPlugin = $controller->plugin('url');
 
         if (is_scalar($options)) {
@@ -54,9 +52,7 @@ class Redirect extends AbstractPlugin
             $url = $urlPlugin->fromRoute($route, $params, $options, $reuseMatchedParams);
         }
 
-        $response->getHeaders()->addHeaderLine('Location', $url);
-        $response->setStatusCode(302);
-        return $response;
+        return $this->toUrl($url);
     }
 
     /**
@@ -71,6 +67,16 @@ class Redirect extends AbstractPlugin
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
+    }
+
+    /**
+     * Refresh to current route
+     *
+     * @return string
+     */
+    public function refresh()
+    {
+        return $this->toRoute(null, array(), array(), true);
     }
 
     /**

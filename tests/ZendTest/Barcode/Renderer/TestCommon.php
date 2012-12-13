@@ -51,7 +51,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Barcode\Barcode::setBarcodeFont(null);
-        date_default_timezone_set($this->originaltimezone);
+        if (!empty($this->originaltimezone)) {
+            date_default_timezone_set($this->originaltimezone);
+        }
     }
 
     public function testSetBarcodeObject()

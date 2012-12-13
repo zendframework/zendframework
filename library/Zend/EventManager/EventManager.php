@@ -144,7 +144,7 @@ class EventManager implements EventManagerInterface
      */
     public function setIdentifiers($identifiers)
     {
-        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+        if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique((array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array($identifiers);
@@ -160,7 +160,7 @@ class EventManager implements EventManagerInterface
      */
     public function addIdentifiers($identifiers)
     {
-        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+        if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
@@ -447,19 +447,15 @@ class EventManager implements EventManagerInterface
         $wildcardListeners       = $this->getListeners('*');
         if (count($sharedListeners) || count($sharedWildcardListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
-        }
 
-        // Shared listeners on this specific event
-        $this->insertListeners($listeners, $sharedListeners);
+            // Shared listeners on this specific event
+            $this->insertListeners($listeners, $sharedListeners);
 
-        // Shared wildcard listeners
-        $this->insertListeners($listeners, $sharedWildcardListeners);
+            // Shared wildcard listeners
+            $this->insertListeners($listeners, $sharedWildcardListeners);
 
-        // Add wildcard listeners
-        $this->insertListeners($listeners, $wildcardListeners);
-
-        if ($listeners->isEmpty()) {
-            return $responses;
+            // Add wildcard listeners
+            $this->insertListeners($listeners, $wildcardListeners);
         }
 
         foreach ($listeners as $listener) {
@@ -535,10 +531,6 @@ class EventManager implements EventManagerInterface
      */
     protected function insertListeners($masterListeners, $listeners)
     {
-        if (!count($listeners)) {
-            return;
-        }
-
         foreach ($listeners as $listener) {
             $priority = $listener->getMetadatum('priority');
             if (null === $priority) {

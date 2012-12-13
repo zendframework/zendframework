@@ -427,7 +427,7 @@ class Encoder
     {
         $result = '';
         foreach ($classNames as $className) {
-            $result .= self::encodeClass($className, $package);
+            $result .= static::encodeClass($className, $package);
         }
 
         return $result;

@@ -101,8 +101,7 @@ class Input implements InputInterface
      */
     public function setErrorMessage($errorMessage)
     {
-        $errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
-        $this->errorMessage = $errorMessage;
+        $this->errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
         return $this;
     }
 
@@ -309,6 +308,9 @@ class Input implements InputInterface
         return $validator->getMessages();
     }
 
+    /**
+     * @return void
+     */
     protected function injectNotEmptyValidator()
     {
         if ((!$this->isRequired() && $this->allowEmpty()) || $this->notEmptyValidator) {

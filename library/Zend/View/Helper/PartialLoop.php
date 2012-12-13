@@ -10,7 +10,9 @@
 
 namespace Zend\View\Helper;
 
+use Iterator;
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
 
 /**
@@ -22,9 +24,9 @@ use Zend\View\Exception;
  */
 class PartialLoop extends Partial
 {
-
     /**
      * Marker to where the pointer is at in the loop
+     *
      * @var integer
      */
     protected $partialCounter = 0;
@@ -36,40 +38,53 @@ class PartialLoop extends Partial
      * If no arguments are provided, returns object instance.
      *
      * @param  string $name Name of view script
-     * @param  array $model Variables to populate in the view
+     * @param  array $values Variables to populate in the view
      * @return string
      * @throws Exception\InvalidArgumentException
      */
-    public function __invoke($name = null, $model = null)
+    public function __invoke($name = null, $values = null)
     {
         if (0 == func_num_args()) {
             return $this;
         }
 
-        if (!is_array($model)
-            && (!$model instanceof Traversable)
-            && (is_object($model) && !method_exists($model, 'toArray'))
+        if (!is_array($values)
+            && (!$values instanceof Traversable)
+            && (is_object($values) && !method_exists($values, 'toArray'))
         ) {
             throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
         }
 
-        if (is_object($model)
-            && (!$model instanceof Traversable)
-            && method_exists($model, 'toArray')
+        if (is_object($values)
+            && (!$values instanceof Traversable)
+            && method_exists($values, 'toArray')
         ) {
-            $model = $model->toArray();
+            $values = $values->toArray();
         }
 
-        $content = '';
+        if ($values instanceof Iterator) {
+            $values = ArrayUtils::iteratorToArray($values);
+        }
+
         // reset the counter if it's called again
         $this->partialCounter = 0;
-        foreach ($model as $item) {
-            // increment the counter variable
-            $this->partialCounter++;
+        $content = '';
 
+        foreach ($values as $item) {
+            $this->partialCounter++;
             $content .= parent::__invoke($name, $item);
         }
 
         return $content;
+    }
+
+    /**
+     * Get the partial counter
+     *
+     * @return int
+     */
+    public function getPartialCounter()
+    {
+        return $this->partialCounter;
     }
 }

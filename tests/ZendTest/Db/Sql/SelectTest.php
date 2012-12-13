@@ -65,6 +65,19 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test isTableReadOnly() returns correct state for read only
+     * @covers Zend\Db\Sql\Select::isTableReadOnly
+     */
+    public function testIsTableReadOnly()
+    {
+        $select = new Select('foo');
+        $this->assertTrue($select->isTableReadOnly());
+
+        $select = new Select;
+        $this->assertFalse($select->isTableReadOnly());
+    }
+
+    /**
      * @testdox unit test: Test getRawState() returns information populated via columns()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testColumns
@@ -446,7 +459,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Text process*() methods will return proper array when internally called, part of extension API
      * @dataProvider providerData
      * @covers Zend\Db\Sql\Select::processSelect
-     * @covers Zend\Db\Sql\Select::processJoin
+     * @covers Zend\Db\Sql\Select::processJoins
      * @covers Zend\Db\Sql\Select::processWhere
      * @covers Zend\Db\Sql\Select::processGroup
      * @covers Zend\Db\Sql\Select::processHaving
@@ -462,7 +475,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
         $parameterContainer = new ParameterContainer();
 
         $sr = new \ReflectionObject($select);
@@ -470,7 +482,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         foreach ($internalTests as $method => $expected) {
             $mr = $sr->getMethod($method);
             $mr->setAccessible(true);
-            $return = $mr->invokeArgs($select, array(new Sql92, $mockAdapter, $parameterContainer));
+            $return = $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
             $this->assertEquals($expected, $return);
         }
     }

@@ -197,15 +197,6 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->writer->write(array('message' => 'this should fail'));
     }
 
-    /**
-     * @group ZF-10089
-     */
-    public function testThrowStrictSetFormatter()
-    {
-        $this->setExpectedException('PHPUnit_Framework_Error');
-        $this->writer->setFormatter(new \StdClass());
-    }
-
     public function testWriteDateTimeAsTimestamp()
     {
         $date = new DateTime();
@@ -236,5 +227,24 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(array(
             'extra_request_time' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT)
         )), $this->db->calls['execute'][0]);
+    }
+
+    public function testConstructWithOptions()
+    {
+        $formatter = new \Zend\Log\Formatter\Simple();
+        $filter    = new \Zend\Log\Filter\Mock();
+        $writer = new DbWriter(array(
+            'filters'   => $filter,
+            'formatter' => $formatter,
+            'table'     => $this->tableName,
+            'db'        => $this->db,
+
+        ));
+        $this->assertInstanceOf('Zend\Log\Writer\Db', $writer);
+        $this->assertAttributeEquals($this->tableName, 'tableName', $writer);
+
+        $filters = self::readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertEquals($filter, $filters[0]);
     }
 }

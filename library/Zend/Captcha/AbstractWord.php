@@ -311,8 +311,8 @@ abstract class AbstractWord extends AbstractAdapter
     {
         $word       = '';
         $wordLen    = $this->getWordLen();
-        $vowels     = $this->useNumbers ? self::$VN : self::$V;
-        $consonants = $this->useNumbers ? self::$CN : self::$C;
+        $vowels     = $this->useNumbers ? static::$VN : static::$V;
+        $consonants = $this->useNumbers ? static::$CN : static::$C;
 
         for ($i=0; $i < $wordLen; $i = $i + 2) {
             // generate word with mix of vowels and consonants
@@ -365,11 +365,11 @@ abstract class AbstractWord extends AbstractAdapter
      */
     public function isValid($value, $context = null)
     {
-        if (!is_array($value) && !is_array($context)) {
-            $this->error(self::MISSING_VALUE);
-            return false;
-        }
-        if (!is_array($value) && is_array($context)) {
+        if (!is_array($value)) {
+            if (!is_array($context)) {
+                $this->error(self::MISSING_VALUE);
+                return false;
+            }
             $value = $context;
         }
 

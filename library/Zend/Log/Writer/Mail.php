@@ -85,6 +85,7 @@ class Mail extends AbstractWriter
         }
 
         if (is_array($mail)) {
+            parent::__construct($mail);
             $transport = isset($mail['transport']) ? $mail['transport'] : null;
             $mail      = isset($mail['mail']) ? $mail['mail'] : null;
         }
@@ -110,7 +111,9 @@ class Mail extends AbstractWriter
         }
         $this->setTransport($transport);
 
-        $this->formatter = new SimpleFormatter();
+        if($this->formatter === null) {
+            $this->formatter = new SimpleFormatter();
+        }
     }
 
     /**

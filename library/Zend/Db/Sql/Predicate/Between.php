@@ -34,10 +34,10 @@ class Between implements PredicateInterface
         if ($identifier) {
             $this->setIdentifier($identifier);
         }
-        if ($minValue) {
+        if (!is_null($minValue)) {
             $this->setMinValue($minValue);
         }
-        if ($maxValue) {
+        if (!is_null($maxValue)) {
             $this->setMaxValue($maxValue);
         }
     }

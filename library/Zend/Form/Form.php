@@ -356,7 +356,7 @@ class Form extends Fieldset implements FormInterface
      */
     public function bindOnValidate()
     {
-        return (self::BIND_ON_VALIDATE === $this->bindOnValidate);
+        return (static::BIND_ON_VALIDATE === $this->bindOnValidate);
     }
 
     /**
@@ -402,6 +402,10 @@ class Form extends Fieldset implements FormInterface
      */
     public function isValid()
     {
+        if ($this->hasValidated) {
+            return $this->isValid;
+        }
+
         $this->isValid = false;
 
         if (!is_array($this->data) && !is_object($this->object)) {
@@ -552,16 +556,17 @@ class Form extends Fieldset implements FormInterface
                 if (isset($data[$key])) {
                     $count = count($data[$key]);
 
-                    for ($i = 0 ; $i != $count ; ++$i) {
+                    for ($i = 0; $i != $count; ++$i) {
                         $values[] = $value;
                     }
                 }
 
                 $value = $values;
             } else {
-                if (isset($data[$key])) {
-                    $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
+                if (!isset($data[$key])) {
+                    $data[$key] = array();
                 }
+                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
             }
         }
     }

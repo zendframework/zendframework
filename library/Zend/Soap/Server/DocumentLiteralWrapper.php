@@ -123,6 +123,7 @@ class DocumentLiteralWrapper
     protected function _parseArguments($method, $document)
     {
         $reflMethod = $this->reflection->getMethod($method);
+        /* @var \Zend\Server\Reflection\ReflectionParameter[] $params  */
         $params = array();
         foreach ($reflMethod->getParameters() as $param) {
             $params[$param->getName()] = $param;
@@ -133,7 +134,7 @@ class DocumentLiteralWrapper
             if (!isset($params[$argName])) {
                 throw new UnexpectedValueException(sprintf(
                     "Received unknown argument %s which is not an argument to %s::%s",
-                    get_class($this->object), $method
+                    $argName, get_class($this->object), $method
                 ));
             }
             $delegateArgs[$params[$argName]->getPosition()] = $argValue;

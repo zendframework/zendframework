@@ -952,7 +952,7 @@ class Ldap
         if ($collectionClass === null) {
             return new Collection($iterator);
         } else {
-            $collectionClass = (string)$collectionClass;
+            $collectionClass = (string) $collectionClass;
             if (!class_exists($collectionClass)) {
                 throw new Exception\LdapException(null,
                     "Class '$collectionClass' can not be found");
@@ -1108,7 +1108,7 @@ class Ldap
                     } elseif (!is_scalar($v)) {
                         throw new Exception\InvalidArgumentException('Only scalar values allowed in LDAP data');
                     } else {
-                        $v = (string)$v;
+                        $v = (string) $v;
                         if (strlen($v) == 0) {
                             unset($value[$i]);
                         } else {
@@ -1123,7 +1123,7 @@ class Ldap
                 } elseif (!is_scalar($value)) {
                     throw new Exception\InvalidArgumentException('Only scalar values allowed in LDAP data');
                 } else {
-                    $value = (string)$value;
+                    $value = (string) $value;
                     if (strlen($value) == 0) {
                         $entry[$key] = array();
                     } else {
@@ -1148,7 +1148,7 @@ class Ldap
         if (!($dn instanceof Dn)) {
             $dn = Dn::factory($dn, null);
         }
-        self::prepareLdapEntryArray($entry);
+        static::prepareLdapEntryArray($entry);
         foreach ($entry as $key => $value) {
             if (is_array($value) && count($value) === 0) {
                 unset($entry[$key]);
@@ -1196,7 +1196,7 @@ class Ldap
         if (!($dn instanceof Dn)) {
             $dn = Dn::factory($dn, null);
         }
-        self::prepareLdapEntryArray($entry);
+        static::prepareLdapEntryArray($entry);
 
         $rdnParts = $dn->getRdn(Dn::ATTR_CASEFOLD_LOWER);
         foreach ($rdnParts as $key => $value) {

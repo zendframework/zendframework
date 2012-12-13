@@ -283,7 +283,7 @@ class Curl implements HttpAdapter, StreamInterface
                     foreach ($headers AS $k => $header) {
                         if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
                             if (is_resource($body)) {
-                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
+                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $m[1];
                             }
                             unset($headers[$k]);
                         }
@@ -374,6 +374,7 @@ class Curl implements HttpAdapter, StreamInterface
         foreach ($headers as $key => $value) {
             $curlHeaders[] = $key . ': ' . $value;
         }
+
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
 
         /**
@@ -409,8 +410,8 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         // send the request
-        $response = curl_exec($this->curl);
 
+        $response = curl_exec($this->curl);
         // if we used streaming, headers are already there
         if (!is_resource($this->outputStream)) {
             $this->response = $response;

@@ -93,7 +93,7 @@ class MemoryOptions extends AdapterOptions
             throw new Exception\InvalidArgumentException("Invalid  memory limit '{$value}'");
         }
 
-        $value = (int)$matches[1];
+        $value = (int) $matches[1];
         if ($value <= 0) {
             return 0;
         }
@@ -101,15 +101,15 @@ class MemoryOptions extends AdapterOptions
         switch (strtoupper($matches[2])) {
             case 'G':
                 $value*= 1024;
-                // Break intentionally omitted
+                // no break
 
             case 'M':
                 $value*= 1024;
-                // Break intentionally omitted
+                // no break
 
             case 'K':
                 $value*= 1024;
-                // Break intentionally omitted
+                // no break
         }
 
         return $value;

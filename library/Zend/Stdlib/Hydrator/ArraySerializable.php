@@ -39,7 +39,7 @@ class ArraySerializable extends AbstractHydrator
 
         $self = $this;
         $data = $object->getArrayCopy();
-        array_walk($data, function(&$value, $name) use ($self) {
+        array_walk($data, function (&$value, $name) use ($self) {
             $value = $self->extractValue($name, $value);
         });
         return $data;
@@ -59,7 +59,7 @@ class ArraySerializable extends AbstractHydrator
     public function hydrate(array $data, $object)
     {
         $self = $this;
-        array_walk($data, function(&$value, $name) use ($self) {
+        array_walk($data, function (&$value, $name) use ($self) {
             $value = $self->hydrateValue($name, $value);
         });
 

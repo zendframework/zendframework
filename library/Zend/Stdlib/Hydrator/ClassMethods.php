@@ -17,22 +17,61 @@ use Zend\Stdlib\Exception;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-class ClassMethods extends AbstractHydrator
+class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      * @var boolean
      */
-    protected $underscoreSeparatedKeys;
+    protected $underscoreSeparatedKeys = true;
 
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean $underscoreSeparatedKeys
+     * @param boolean|array $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
         parent::__construct();
+        $this->setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
+    }
+
+    /**
+     * @param  array|\Traversable $options
+     * @return ClassMethods
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+        if (isset($options['underscoreSeparatedKeys'])) {
+            $this->setUnderscoreSeparatedKeys($options['underscoreSeparatedKeys']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  boolean $underscoreSeparatedKeys
+     * @return ClassMethods
+     */
+    public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
+    {
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUnderscoreSeparatedKeys()
+    {
+        return $this->underscoreSeparatedKeys;
     }
 
     /**
@@ -52,7 +91,7 @@ class ClassMethods extends AbstractHydrator
             ));
         }
 
-        $transform = function($letters) {
+        $transform = function ($letters) {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
@@ -97,16 +136,16 @@ class ClassMethods extends AbstractHydrator
             ));
         }
 
-        $transform = function($letters) {
+        $transform = function ($letters) {
             $letter = substr(array_shift($letters), 1, 1);
             return ucfirst($letter);
         };
 
         foreach ($data as $property => $value) {
-            if ($this->underscoreSeparatedKeys) {
-                $property = preg_replace_callback('/(_[a-z])/', $transform, $property);
-            }
             $method = 'set' . ucfirst($property);
+            if ($this->underscoreSeparatedKeys) {
+                $method = preg_replace_callback('/(_[a-z])/', $transform, $method);
+            }
             if (method_exists($object, $method)) {
                 $value = $this->hydrateValue($property, $value);
 

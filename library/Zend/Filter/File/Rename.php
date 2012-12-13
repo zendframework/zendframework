@@ -45,7 +45,9 @@ class Rename extends Filter\AbstractFilter
         } elseif (is_string($options)) {
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
+            throw new Exception\InvalidArgumentException(
+                'Invalid options argument provided to filter'
+            );
         }
 
         $this->setFile($options);
@@ -67,7 +69,8 @@ class Rename extends Filter\AbstractFilter
      * Array accepts the following keys:
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the sourcefile
-     * 'overwrite' => Shall existing files be overwritten ?
+     * 'overwrite' => Shall existing files be overwritten?
+     * 'randomize' => Shall target files have a random postfix attached?
      *
      * @param  string|array $options Old file or directory to be rewritten
      * @return \Zend\Filter\File\Rename
@@ -86,7 +89,8 @@ class Rename extends Filter\AbstractFilter
      * Array accepts the following keys:
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the sourcefile
-     * 'overwrite' => Shall existing files be overwritten ?
+     * 'overwrite' => Shall existing files be overwritten?
+     * 'randomize' => Shall target files have a random postfix attached?
      *
      * @param  string|array $options Old file or directory to be rewritten
      * @return Rename
@@ -97,7 +101,9 @@ class Rename extends Filter\AbstractFilter
         if (is_string($options)) {
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Invalid options to rename filter provided');
+            throw new Exception\InvalidArgumentException(
+                'Invalid options to rename filter provided'
+            );
         }
 
         $this->_convertOptions($options);
@@ -129,7 +135,7 @@ class Rename extends Filter\AbstractFilter
             return $value;
         }
 
-        if (($file['overwrite'] == true) && (file_exists($file['target']))) {
+        if ($file['overwrite'] && file_exists($file['target'])) {
             unlink($file['target']);
         }
 
@@ -158,7 +164,7 @@ class Rename extends Filter\AbstractFilter
      */
     public function filter($value)
     {
-        $file   = $this->getNewName($value, true);
+        $file = $this->getNewName($value, true);
         if (is_string($file)) {
             return $file;
         }
@@ -166,7 +172,13 @@ class Rename extends Filter\AbstractFilter
         $result = rename($file['source'], $file['target']);
 
         if ($result !== true) {
-            throw new Exception\RuntimeException(sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $value));
+            throw new Exception\RuntimeException(
+                sprintf(
+                    "File '%s' could not be renamed. " .
+                    "An error occurred while processing the file.",
+                    $value
+                )
+            );
         }
 
         return $file['target'];
@@ -201,6 +213,10 @@ class Rename extends Filter\AbstractFilter
                     $files['overwrite'] = (boolean) $value;
                     break;
 
+                case 'randomize' :
+                    $files['randomize'] = (boolean) $value;
+                    break;
+
                 default:
                     break;
             }
@@ -222,16 +238,20 @@ class Rename extends Filter\AbstractFilter
             $files['overwrite'] = false;
         }
 
+        if (empty($files['randomize'])) {
+            $files['randomize'] = false;
+        }
+
         $found = false;
         foreach ($this->files as $key => $value) {
             if ($value['source'] == $files['source']) {
                 $this->files[$key] = $files;
-                $found              = true;
+                $found             = true;
             }
         }
 
         if (!$found) {
-            $count                = count($this->files);
+            $count               = count($this->files);
             $this->files[$count] = $files;
         }
 
@@ -258,6 +278,7 @@ class Rename extends Filter\AbstractFilter
 
             if ($value['source'] == $file) {
                 $rename = $value;
+                break;
             }
         }
 
@@ -265,18 +286,28 @@ class Rename extends Filter\AbstractFilter
             return $file;
         }
 
-        if (!isset($rename['target']) or ($rename['target'] == '*')) {
+        if (!isset($rename['target']) || $rename['target'] == '*') {
             $rename['target'] = $rename['source'];
         }
 
         if (is_dir($rename['target'])) {
             $name = basename($rename['source']);
             $last = $rename['target'][strlen($rename['target']) - 1];
-            if (($last != '/') and ($last != '\\')) {
+            if (($last != '/') && ($last != '\\')) {
                 $rename['target'] .= DIRECTORY_SEPARATOR;
             }
 
             $rename['target'] .= $name;
+        }
+
+        if ($rename['randomize']) {
+            $info = pathinfo($rename['target']);
+            $newTarget = $info['dirname'] . DIRECTORY_SEPARATOR .
+                $info['filename'] . uniqid('_');
+            if (isset($info['extension'])) {
+                $newTarget .= '.' . $info['extension'];
+            }
+            $rename['target'] = $newTarget;
         }
 
         return $rename;

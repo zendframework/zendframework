@@ -15,7 +15,7 @@ namespace Zend\Math\BigInteger;
  * @package    Zend_Math
  * @subpackage BigInteger
  */
-class BigInteger
+abstract class BigInteger
 {
     /**
      * Plugin manager for loading adapters

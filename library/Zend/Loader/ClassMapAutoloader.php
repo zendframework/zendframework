@@ -134,16 +134,17 @@ class ClassMapAutoloader implements SplAutoloader
     }
 
     /**
-     * Defined by Autoloadable
-     *
-     * @param  string $class
-     * @return void
+     * {@inheritDoc}
      */
     public function autoload($class)
     {
         if (isset($this->map[$class])) {
             require_once $this->map[$class];
+
+            return $class;
         }
+
+        return false;
     }
 
     /**
@@ -205,7 +206,9 @@ class ClassMapAutoloader implements SplAutoloader
         }
 
         $parts = explode('/', str_replace(array('/','\\'), '/', substr($path, 8)));
-        $parts = array_values(array_filter($parts, function($p) { return ($p !== '' && $p !== '.'); }));
+        $parts = array_values(array_filter($parts, function ($p) {
+            return ($p !== '' && $p !== '.');
+        }));
 
         array_walk($parts, function ($value, $key) use(&$parts) {
             if ($value === '..') {

@@ -64,7 +64,7 @@ class RoutePluginManager extends AbstractPluginManager
      * @param  string $canonicalName
      * @param  string $requestedName
      * @return null|\stdClass
-     * @throws Exception\RuntimeException If resolved class does not exist, or does not implement RouterInterface
+     * @throws Exception\RuntimeException If resolved class does not exist, or does not implement RouteInterface
      */
     protected function createFromInvokable($canonicalName, $requestedName)
     {
@@ -79,7 +79,7 @@ class RoutePluginManager extends AbstractPluginManager
             ));
         }
 
-        if (!self::isSubclassOf($invokable, __NAMESPACE__ . '\RouteInterface')) {
+        if (!static::isSubclassOf($invokable, __NAMESPACE__ . '\RouteInterface')) {
             throw new Exception\RuntimeException(sprintf(
                 '%s: failed retrieving "%s%s" via invokable class "%s"; class does not implement %s\RouteInterface',
                 __METHOD__,

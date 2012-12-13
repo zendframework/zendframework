@@ -576,9 +576,9 @@ abstract class AbstractObject implements ObjectInterface
     {
         if ($this->withChecksumInText) {
             return $this->getText();
-        } else {
-            return $this->addLeadingZeros($this->text, true);
         }
+
+        return $this->addLeadingZeros($this->text, true);
     }
 
     /**
@@ -758,9 +758,9 @@ abstract class AbstractObject implements ObjectInterface
     {
         if ($this->withQuietZones || $this->mandatoryQuietZones) {
             return 10 * $this->barThinWidth * $this->factor;
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     /**

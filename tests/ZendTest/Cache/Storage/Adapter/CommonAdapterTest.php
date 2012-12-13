@@ -10,6 +10,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\IteratorInterface;
 use Zend\Cache\Storage\StorageInterface;
@@ -19,8 +20,8 @@ use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\TaggableInterface;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Http\Header\Expires;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -235,7 +236,11 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        $this->assertFalse($this->_storage->hasItem('key'));
+        if (!$capabilities->getUseRequestTime()) {
+            $this->assertFalse($this->_storage->hasItem('key'));
+        } else {
+            $this->assertTrue($this->_storage->hasItem('key'));
+        }
     }
 
     public function testHasItemNonReadable()
@@ -549,11 +554,13 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        if (!$capabilities->getUseRequestTime()) {
-            $this->assertNull($this->_storage->getItem('key'));
-        } else {
+        if ($capabilities->getUseRequestTime()) {
+            // Can't test much more if the request time will be used
             $this->assertEquals('value', $this->_storage->getItem('key'));
+            return;
         }
+
+        $this->assertNull($this->_storage->getItem('key'));
 
         $this->_options->setTtl(0);
         if ($capabilities->getExpiredRead()) {
@@ -1066,7 +1073,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         $totalSpace = $this->_storage->getTotalSpace();
-        $this->assertGreaterThanOrEqual(0, $totalSpace);
+        $this->assertGreaterThan(0, $totalSpace);
 
         if ($this->_storage instanceof AvailableSpaceCapableInterface) {
             $availableSpace = $this->_storage->getAvailableSpace();

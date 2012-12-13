@@ -105,32 +105,35 @@ class DateFormat extends AbstractHelper
     /**
      * Format a date.
      *
-     * @param  DateTime|integer|array $date
-     * @param  integer                $dateType
-     * @param  integer                $timeType
-     * @param  string                 $locale
+     * @param  DateTime|integer|array  $date
+     * @param  int                     $dateType
+     * @param  int                     $timeType
+     * @param  string                  $locale
+     * @param  string|null             $pattern
      * @return string
-     * @throws Exception\RuntimeException
      */
     public function __invoke(
         $date,
         $dateType = IntlDateFormatter::NONE,
         $timeType = IntlDateFormatter::NONE,
-        $locale   = null
+        $locale   = null,
+        $pattern  = null
     ) {
         if ($locale === null) {
             $locale = $this->getlocale();
         }
 
         $timezone    = $this->getTimezone();
-        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale);
+        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale ."\0" . $pattern);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new IntlDateFormatter(
                 $locale,
                 $dateType,
                 $timeType,
-                $timezone
+                $timezone,
+                IntlDateFormatter::GREGORIAN,
+                $pattern
             );
         }
 

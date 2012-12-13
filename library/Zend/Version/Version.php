@@ -23,7 +23,7 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.4dev';
+    const VERSION = '2.1.0dev';
 
     /**
      * Github Service Identifier for version information is retreived from
@@ -79,7 +79,7 @@ final class Version
      */
     public static function getLatest($service = self::VERSION_SERVICE_GITHUB)
     {
-        if (null === self::$latestVersion) {
+        if (null === static::$latestVersion) {
             static::$latestVersion = 'not available';
             if ($service == self::VERSION_SERVICE_GITHUB) {
                 $url  = 'https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-';
@@ -87,12 +87,12 @@ final class Version
                 $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
 
                 // Simplify the API response into a simple array of version numbers
-                $tags = array_map(function($tag) {
+                $tags = array_map(function ($tag) {
                     return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
                 }, $apiResponse);
 
                 // Fetch the latest version number from the array
-                static::$latestVersion = array_reduce($tags, function($a, $b) {
+                static::$latestVersion = array_reduce($tags, function ($a, $b) {
                     return version_compare($a, $b, '>') ? $a : $b;
                 });
             } elseif($service == self::VERSION_SERVICE_ZEND) {

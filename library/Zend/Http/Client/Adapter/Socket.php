@@ -189,7 +189,11 @@ class Socket implements HttpAdapter, StreamInterface
     public function connect($host, $port = 80, $secure = false)
     {
         // If we are connected to the wrong host, disconnect first
-        if (($this->connected_to[0] != $host || $this->connected_to[1] != $port)) {
+        $connected_host = (strpos($this->connected_to[0], '://'))
+            ? substr($this->connected_to[0], (strpos($this->connected_to[0], '://') + 3), strlen($this->connected_to[0]))
+            : $this->connected_to[0];
+
+        if ($connected_host != $host || $this->connected_to[1] != $port) {
             if (is_resource($this->socket)) {
                 $this->close();
             }
@@ -267,8 +271,8 @@ class Socket implements HttpAdapter, StreamInterface
             }
 
             if ($secure || $this->config['sslusecontext']) {
-                if ($this->config['ssltransport'] && isset(self::$sslCryptoTypes[$this->config['ssltransport']])) {
-                    $sslCryptoMethod = self::$sslCryptoTypes[$this->config['ssltransport']];
+                if ($this->config['ssltransport'] && isset(static::$sslCryptoTypes[$this->config['ssltransport']])) {
+                    $sslCryptoMethod = static::$sslCryptoTypes[$this->config['ssltransport']];
                 } else {
                     $sslCryptoMethod = STREAM_CRYPTO_METHOD_SSLv3_CLIENT;
                 }
@@ -360,7 +364,7 @@ class Socket implements HttpAdapter, StreamInterface
         ErrorHandler::start();
         $test  = fwrite($this->socket, $request);
         $error = ErrorHandler::stop();
-        if (!$test) {
+        if (false === $test) {
             throw new AdapterException\RuntimeException('Error writing request to server', 0, $error);
         }
 
@@ -431,7 +435,7 @@ class Socket implements HttpAdapter, StreamInterface
                     $line  = fgets($this->socket);
                     $this->_checkSocketReadTimeout();
 
-                    $chunk = $line;
+                    $chunk = '';
 
                     // Figure out the next chunk size
                     $chunksize = trim($line);

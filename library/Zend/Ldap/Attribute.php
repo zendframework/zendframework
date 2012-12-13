@@ -41,13 +41,13 @@ class Attribute
         $valArray   = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::valueToLdap($v);
+                $v = static::valueToLdap($v);
                 if ($v !== null) {
                     $valArray[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::valueToLdap($value);
+            $value = static::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
             }
@@ -80,14 +80,14 @@ class Attribute
             }
             $retArray = array();
             foreach ($data[$attribName] as $v) {
-                $retArray[] = self::valueFromLdap($v);
+                $retArray[] = static::valueFromLdap($v);
             }
             return $retArray;
         } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
             } elseif ($index >= 0 && $index < count($data[$attribName])) {
-                return self::valueFromLdap($data[$attribName][$index]);
+                return static::valueFromLdap($data[$attribName][$index]);
             } else {
                 return null;
             }
@@ -227,8 +227,8 @@ class Attribute
             }
         }
 
-        $hash = self::createPassword($password, $hashType);
-        self::setAttribute($data, $attribName, $hash, false);
+        $hash = static::createPassword($password, $hashType);
+        static::setAttribute($data, $attribName, $hash, false);
     }
 
     /**
@@ -299,18 +299,18 @@ class Attribute
         $convertedValues = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::valueToLdapDateTime($v, $utc);
+                $v = static::valueToLdapDateTime($v, $utc);
                 if ($v !== null) {
                     $convertedValues[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::valueToLdapDateTime($value, $utc);
+            $value = static::valueToLdapDateTime($value, $utc);
             if ($value !== null) {
                 $convertedValues[] = $value;
             }
         }
-        self::setAttribute($data, $attribName, $convertedValues, $append);
+        static::setAttribute($data, $attribName, $convertedValues, $append);
     }
 
     /**
@@ -337,16 +337,16 @@ class Attribute
      */
     public static function getDateTimeAttribute(array $data, $attribName, $index = null)
     {
-        $values = self::getAttribute($data, $attribName, $index);
+        $values = static::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
             for ($i = 0; $i < count($values); $i++) {
-                $newVal = self::valueFromLdapDateTime($values[$i]);
+                $newVal = static::valueFromLdapDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;
                 }
             }
         } else {
-            $newVal = self::valueFromLdapDateTime($values);
+            $newVal = static::valueFromLdapDateTime($values);
             if ($newVal !== null) {
                 $values = $newVal;
             }

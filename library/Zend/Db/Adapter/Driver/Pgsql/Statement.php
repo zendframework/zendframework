@@ -157,7 +157,7 @@ class Statement implements StatementInterface
         );
 
         $this->sql = $sql;
-        $this->statementName = 'statement' . ++self::$statementIndex;
+        $this->statementName = 'statement' . ++static::$statementIndex;
         $this->resource = pg_prepare($this->pgsql, $this->statementName, $sql);
     }
 

@@ -547,7 +547,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function setUseAsBaseFieldset($useAsBaseFieldset)
     {
-        $this->useAsBaseFieldset = (bool)$useAsBaseFieldset;
+        $this->useAsBaseFieldset = (bool) $useAsBaseFieldset;
         return $this;
     }
 
@@ -608,17 +608,24 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function __clone()
     {
-        $this->iterator = new PriorityQueue();
+        $items = $this->iterator->toArray(PriorityQueue::EXTR_BOTH);
 
-        foreach ($this->byName as $key => $value) {
-            $value = clone $value;
-            $this->byName[$key] = $value;
-            $this->iterator->insert($value);
+        $this->byName    = array();
+        $this->elements  = array();
+        $this->fieldsets = array();
+        $this->iterator  = new PriorityQueue();
 
-            if ($value instanceof FieldsetInterface) {
-                $this->fieldsets[$key] = $value;
-            } elseif ($value instanceof ElementInterface) {
-                $this->elements[$key] = $value;
+        foreach ($items as $item) {
+            $elementOrFieldset = clone $item['data'];
+            $name = $elementOrFieldset->getName();
+
+            $this->iterator->insert($elementOrFieldset, $item['priority']);
+            $this->byName[$name] = $elementOrFieldset;
+
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                $this->fieldsets[$name] = $elementOrFieldset;
+            } elseif ($elementOrFieldset instanceof ElementInterface) {
+                $this->elements[$name] = $elementOrFieldset;
             }
         }
 

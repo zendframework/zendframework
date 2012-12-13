@@ -15,6 +15,7 @@ use ZendTest\Mvc\Controller\TestAsset\SampleController;
 use ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin;
 use ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructor;
 use Zend\Mvc\Controller\PluginManager;
+use Zend\ServiceManager\ServiceManager;
 
 class PluginManagerTest extends TestCase
 {
@@ -72,6 +73,23 @@ class PluginManagerTest extends TestCase
         $this->assertEquals($plugin->getBar(), 'foo');
     }
 
+    public function testDefinesFactoryForIdentityPlugin()
+    {
+        $pluginManager = new PluginManager;
+        $this->assertTrue($pluginManager->has('identity'));
+    }
+
+    public function testIdentityFactoryCanInjectAuthenticationServiceIfInParentServiceManager()
+    {
+        $services = new ServiceManager();
+        $services->setInvokableClass('Zend\Authentication\AuthenticationService', 'Zend\Authentication\AuthenticationService');
+        $pluginManager = new PluginManager;
+        $pluginManager->setServiceLocator($services);
+        $identity = $pluginManager->get('identity');
+        $expected = $services->get('Zend\Authentication\AuthenticationService');
+        $this->assertSame($expected, $identity->getAuthenticationService());
+    }
+
     public function testCanCreateByFactory()
     {
         $pluginManager = new PluginManager;
@@ -88,5 +106,4 @@ class PluginManagerTest extends TestCase
         $this->assertInstanceOf('\ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructor', $plugin);
         $this->assertEquals($plugin->getBar(), 'foo');
     }
-
 }

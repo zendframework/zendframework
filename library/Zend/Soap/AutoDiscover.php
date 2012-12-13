@@ -199,7 +199,7 @@ class AutoDiscover
 
 
     /**
-     * Set the location at which the WSDL file will be availabe.
+     * Set the location at which the WSDL file will be available.
      *
      * @param  Uri\Uri|string $uri
      * @return AutoDiscover
@@ -375,6 +375,7 @@ class AutoDiscover
         $uri = $this->getUri();
 
         $serviceName = $this->getServiceName();
+        /** @var Wsdl $wsdl  */
         $wsdl = new $this->wsdlClass($serviceName, $uri, $this->strategy, $this->classMap);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)

@@ -113,6 +113,7 @@ class Client implements Stdlib\DispatchableInterface
         'keepalive'       => false,
         'outputstream'    => false,
         'encodecookies'   => true,
+        'argseparator'    => null,
         'rfc3986strict'   => false
     );
 
@@ -356,6 +357,33 @@ class Client implements Stdlib\DispatchableInterface
     }
 
     /**
+     * Set the query string argument separator
+     *
+     * @param string $argSeparator
+     * @return Client
+     */
+    public function setArgSeparator($argSeparator)
+    {
+        $this->setOptions(array("argseparator" => $argSeparator));
+        return $this;
+    }
+
+    /**
+     * Get the query string argument separator
+     *
+     * @return string
+     */
+    public function getArgSeparator()
+    {
+        $argSeparator = $this->config['argseparator'];
+        if (empty($argSeparator)) {
+            $argSeparator = ini_get('arg_separator.output');
+            $this->setArgSeparator($argSeparator);
+        }
+        return $argSeparator;
+    }
+
+    /**
      * Set the encoding type and the boundary (if any)
      *
      * @param string $encType
@@ -469,11 +497,11 @@ class Client implements Stdlib\DispatchableInterface
                     throw new Exception\InvalidArgumentException('The cookie parameter is not a valid Set-Cookie type');
                 }
             }
-        } elseif ($cookie instanceof Header\SetCookie) {
-            $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
             $setCookie = new Header\SetCookie($cookie, $value, $expire, $path, $domain, $secure, $httponly, $maxAge, $version);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
+        } elseif ($cookie instanceof Header\SetCookie) {
+            $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');
         }
@@ -631,8 +659,8 @@ class Client implements Stdlib\DispatchableInterface
         if (!defined('self::AUTH_' . strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
-        if (empty($user) || empty($password)) {
-            throw new Exception\InvalidArgumentException("The username and the password cannot be empty");
+        if (empty($user)) {
+            throw new Exception\InvalidArgumentException("The username cannot be empty");
         }
 
         $this->auth = array (
@@ -773,14 +801,14 @@ class Client implements Stdlib\DispatchableInterface
 
                 if (!empty($queryArray)) {
                     $newUri = $uri->toString();
-                    $queryString = http_build_query($query);
+                    $queryString = http_build_query($query, null, $this->getArgSeparator());
 
                     if ($this->config['rfc3986strict']) {
                         $queryString = str_replace('+', '%20', $queryString);
                     }
 
                     if (strpos($newUri, '?') !== false) {
-                        $newUri .= '&' . $queryString;
+                        $newUri .= $this->getArgSeparator() . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
                     }
@@ -855,9 +883,9 @@ class Client implements Stdlib\DispatchableInterface
             }
 
             // Get the cookies from response (if any)
-            $setCookie = $response->getCookie();
-            if (!empty($setCookie)) {
-                $this->addCookie($setCookie);
+            $setCookies = $response->getCookie();
+            if (!empty($setCookies)) {
+                $this->addCookie($setCookies);
             }
 
             // If we got redirected, look for the Location header
@@ -1040,11 +1068,11 @@ class Client implements Stdlib\DispatchableInterface
 
         // Set the Accept-encoding header if not set - depending on whether
         // zlib is available or not.
-        if (! isset($this->headers['accept-encoding'])) {
+        if (!$this->getRequest()->getHeaders()->has('Accept-Encoding')) {
             if (function_exists('gzinflate')) {
-                $headers['Accept-encoding'] = 'gzip, deflate';
+                $headers['Accept-Encoding'] = 'gzip, deflate';
             } else {
-                $headers['Accept-encoding'] = 'identity';
+                $headers['Accept-Encoding'] = 'identity';
             }
         }
 
@@ -1173,14 +1201,14 @@ class Client implements Stdlib\DispatchableInterface
 
         // First try with fileinfo functions
         if (function_exists('finfo_open')) {
-            if (self::$fileInfoDb === null) {
+            if (static::$fileInfoDb === null) {
                 ErrorHandler::start();
-                self::$fileInfoDb = finfo_open(FILEINFO_MIME);
+                static::$fileInfoDb = finfo_open(FILEINFO_MIME);
                 ErrorHandler::stop();
             }
 
-            if (self::$fileInfoDb) {
-                $type = finfo_file(self::$fileInfoDb, $file);
+            if (static::$fileInfoDb) {
+                $type = finfo_file(static::$fileInfoDb, $file);
             }
 
         } elseif (function_exists('mime_content_type')) {
@@ -1294,11 +1322,48 @@ class Client implements Stdlib\DispatchableInterface
                 throw new Exception\RuntimeException('Adapter does not support streaming');
             }
         }
-
         // HTTP connection
         $this->lastRawRequest = $this->adapter->write($method,
             $uri, $this->config['httpversion'], $headers, $body);
 
         return $this->adapter->read();
+    }
+
+    /**
+     * Create a HTTP authentication "Authorization:" header according to the
+     * specified user, password and authentication method.
+     *
+     * @see http://www.faqs.org/rfcs/rfc2617.html
+     * @param string $user
+     * @param string $password
+     * @param string $type
+     * @return string
+     * @throws Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
+    {
+        $authHeader = null;
+
+        switch ($type) {
+            case self::AUTH_BASIC:
+                // In basic authentication, the user name cannot contain ":"
+                if (strpos($user, ':') !== false) {
+                    throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
+                }
+
+                $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
+                break;
+
+            //case self::AUTH_DIGEST:
+                /**
+                * @todo Implement digest authentication
+                */
+                //    break;
+
+            default:
+                throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
+
+        }
+        return $authHeader;
     }
 }

@@ -175,7 +175,7 @@ class View implements EventManagerAwareInterface
         $event   = $this->getEvent();
         $event->setModel($model);
         $events  = $this->getEventManager();
-        $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function($result) {
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function ($result) {
             return ($result instanceof Renderer);
         });
         $renderer = $results->last();
@@ -185,6 +185,9 @@ class View implements EventManagerAwareInterface
                 __METHOD__
             ));
         }
+
+        $event->setRenderer($renderer);
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
 
         // If we have children, render them first, but only if:
         // a) the renderer does not implement TreeRendererInterface, or

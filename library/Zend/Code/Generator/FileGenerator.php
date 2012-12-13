@@ -91,7 +91,7 @@ class FileGenerator extends AbstractGenerator
             include $realpath;
         }
 
-        $codeGenerator = self::fromReflection(($fileReflector = new FileReflection($realpath)));
+        $codeGenerator = static::fromReflection(($fileReflector = new FileReflection($realpath)));
 
         return $codeGenerator;
     }

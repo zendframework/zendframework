@@ -44,6 +44,9 @@ class ExceptionStrategy implements ListenerAggregateInterface
 :file::line
 :stack
 ======================================================================
+   Previous Exception(s):
+======================================================================
+:previous
 
 EOT;
 
@@ -61,6 +64,7 @@ EOT;
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'prepareExceptionViewModel'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'prepareExceptionViewModel'));
     }
 
     /**
@@ -186,6 +190,7 @@ EOT;
                             ':file',
                             ':line',
                             ':stack',
+                            ':previous',
                         ),array(
                             get_class($exception),
                             $exception->getMessage(),
@@ -193,6 +198,7 @@ EOT;
                             $exception->getFile(),
                             $exception->getLine(),
                             $exception->getTraceAsString(),
+                            $exception->getPrevious(),
                         ),
                         $this->message
                     );
@@ -205,7 +211,9 @@ EOT;
                             ':file',
                             ':line',
                             ':stack',
+                            ':previous',
                         ),array(
+                            '',
                             '',
                             '',
                             '',

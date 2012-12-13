@@ -23,12 +23,26 @@ use Zend\Code\Generator\DocBlock\Tag;
  */
 class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var DocBlockGenerator */
+    /**
+     * @var DocBlockGenerator
+     */
     protected $docBlockGenerator;
 
     protected function setUp()
     {
         $this->docBlockGenerator = $this->docBlockGenerator = new DocBlockGenerator();
+    }
+
+    public function testCanPassTagsToContructor()
+    {
+        $docBlockGenerator = new DocBlockGenerator(null, null, array(
+            array('name' => 'foo')
+        ));
+
+        $tags = $docBlockGenerator->getTags();
+        $this->assertCount(1, $tags);
+
+        $this->assertEquals('foo', $tags[0]->getName());
     }
 
     public function testShortDescriptionGetterAndSetter()

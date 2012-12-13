@@ -39,9 +39,9 @@ class DocBlockGenerator extends AbstractGenerator
     protected $indentation = '';
 
     /**
-     * fromReflection() - Build a DocBlock generator object from a reflection object
+     * Build a DocBlock generator object from a reflection object
      *
-     * @param DocBlockReflection $reflectionDocBlock
+     * @param  DocBlockReflection $reflectionDocBlock
      * @return DocBlockGenerator
      */
     public static function fromReflection(DocBlockReflection $reflectionDocBlock)
@@ -61,35 +61,36 @@ class DocBlockGenerator extends AbstractGenerator
         return $docBlock;
     }
 
+    /**
+     * @param string $shortDescription
+     * @param string $longDescription
+     * @param array  $tags
+     */
     public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
     {
-        if ($shortDescription !== null) {
+        if ($shortDescription) {
             $this->setShortDescription($shortDescription);
         }
-        if ($longDescription !== null) {
+        if ($longDescription) {
             $this->setLongDescription($longDescription);
         }
-        if ($this->tags !== array()) {
-            $this->setTag($tags);
+        if (is_array($tags) && $tags) {
+            $this->setTags($tags);
         }
-
     }
 
     /**
-     * setShortDescription()
-     *
-     * @param string $shortDescription
+     * @param  string            $shortDescription
      * @return DocBlockGenerator
      */
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
+
         return $this;
     }
 
     /**
-     * getShortDescription()
-     *
      * @return string
      */
     public function getShortDescription()
@@ -98,20 +99,17 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setLongDescription()
-     *
-     * @param string $longDescription
+     * @param  string            $longDescription
      * @return DocBlockGenerator
      */
     public function setLongDescription($longDescription)
     {
         $this->longDescription = $longDescription;
+
         return $this;
     }
 
     /**
-     * getLongDescription()
-     *
      * @return string
      */
     public function getLongDescription()
@@ -120,9 +118,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setTags()
-     *
-     * @param array $tags
+     * @param  array             $tags
      * @return DocBlockGenerator
      */
     public function setTags(array $tags)
@@ -135,9 +131,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setTag()
-     *
-     * @param array|DocBlock\Tag $tag
+     * @param  array|DocBlock\Tag                 $tag
      * @throws Exception\InvalidArgumentException
      * @return DocBlockGenerator
      */
@@ -158,8 +152,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * getTags
-     *
      * @return DocBlock\Tag[]
      */
     public function getTags()
@@ -168,8 +160,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
@@ -194,9 +184,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * docCommentize()
-     *
-     * @param string $content
+     * @param  string $content
      * @return string
      */
     protected function docCommentize($content)
@@ -213,6 +201,7 @@ class DocBlockGenerator extends AbstractGenerator
             $output .= self::LINE_FEED;
         }
         $output .= $indent . ' */' . self::LINE_FEED;
+
         return $output;
     }
 

@@ -40,7 +40,7 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
                 $match, $response->getContent()
             ));
         }
-        $this->assertNotEquals(false, stripos($response->getContent(), $match));
+        $this->assertNotSame(false, stripos($response->getContent(), $match));
     }
 
     /**
@@ -58,6 +58,6 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
                 $match
             ));
         }
-        $this->assertEquals(false, stripos($response->getContent(), $match));
+        $this->assertSame(false, stripos($response->getContent(), $match));
     }
 }

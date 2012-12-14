@@ -27,6 +27,31 @@ require_once __DIR__ . '/../TestAsset/call_user_func.php';
 class DotNetTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * .NET SOAP client.
+     *
+     * @var \Zend\Soap\Client\DotNet
+     */
+    private $client = null;
+
+    /**
+     * cURL client.
+     *
+     * @var \Zend\Http\Client\Adapter\Curl
+     */
+    private $curlClient = null;
+
+    /**
+     * Sets up the fixture.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        $this->client = new DotNetClient(null, array('location' => 'http://unithost/test',
+                                                    'uri'      => 'http://unithost/test'));
+    }
+
+    /**
      * Tests that a default cURL client is used if none is injected.
      *
      * @return void
@@ -124,17 +149,6 @@ class DotNetTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Sets up the fixture.
-     *
-     * @return void
-     */
-    protected function setUp()
-    {
-        $this->client = new DotNetClient(null, array('location' => 'http://unithost/test',
-                                                     'uri'      => 'http://unithost/test'));
-    }
-
-    /**
      * Mocks the cURL client.
      *
      * @return void
@@ -187,18 +201,4 @@ class DotNetTest extends PHPUnit_Framework_TestCase
                                         'login'          => 'username',
                                         'password'       => 'testpass'));
     }
-
-    /**
-     * .NET SOAP client.
-     *
-     * @var \Zend\Soap\Client\DotNet
-     */
-    private $client = null;
-
-    /**
-     * cURL client.
-     *
-     * @var \Zend\Http\Client\Adapter\Curl
-     */
-    private $curlClient = null;
 }

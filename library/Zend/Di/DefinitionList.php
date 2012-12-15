@@ -204,7 +204,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 if ($definition->hasMethods($class) === false && $definition instanceof Definition\PartialMarker) {
                     continue;
                 } else {
-                    return $definition->hasMethods($class);
+                    return $definition->hasMethod($class, $method);
                 }
             }
         }

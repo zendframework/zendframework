@@ -18,7 +18,6 @@ use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ResponseSender\ConsoleResponseSender;
 use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
 use Zend\Mvc\ResponseSender\SendResponseEvent;
-use Zend\Mvc\ResponseSender\StreamResponseSender;
 use Zend\Stdlib\ResponseInterface as Response;
 
 /**
@@ -36,9 +35,22 @@ class SendResponseListener implements
     protected $listeners = array();
 
     /**
+     * @var SendResponseEvent
+     */
+    protected $event;
+
+    /**
      * @var EventManagerInterface
      */
     protected $eventManager;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->event = new SendResponseEvent();
+    }
 
     /**
      * Inject an EventManager instance
@@ -111,7 +123,7 @@ class SendResponseListener implements
         if (!$response instanceof Response) {
             return; // there is no response to send
         }
-        $event = new SendResponseEvent();
+        $event = $this->event;
         $event->setResponse($response);
         $event->setTarget($this);
         $this->getEventManager()->trigger($event);
@@ -127,7 +139,6 @@ class SendResponseListener implements
         $events = $this->getEventManager();
         $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new PhpEnvironmentResponseSender(), -1000);
         $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new ConsoleResponseSender(), -2000);
-        //$events->attach(SendResponseEvent::SEND_RESPONSE, new StreamResponseSender(), -3000);
     }
 
 }

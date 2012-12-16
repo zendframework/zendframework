@@ -21,7 +21,7 @@ use Zend\Stdlib\ResponseInterface;
 class SendResponseEvent extends Event
 {
     /**#@+
-     * Mvc events triggered by eventmanager
+     * Send response events triggered by eventmanager
      */
     const EVENT_SEND_RESPONSE = 'sendResponse';
     /**#@-*/

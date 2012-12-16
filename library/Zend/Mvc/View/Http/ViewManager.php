@@ -62,7 +62,12 @@ class ViewManager implements ListenerAggregateInterface
     protected $config;
 
     /**
-     * @var \Zend\ServiceManager\ServiceManager
+     * @var MvcEvent
+     */
+    protected $event;
+
+    /**
+     * @var ServiceManager
      */
     protected $services;
 

@@ -80,16 +80,40 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
      */
     public function getType()
     {
-        if ($docBlock = $this->getDeclaringFunction()->getDocBlock()) {
+        $type = null;
+
+        $checkDefault = true;
+
+        if ($this->isArray()) {
+            $type = 'array';
+        } elseif (($class = $this->getClass()) instanceof \ReflectionClass) {
+            $type = $class->getName();
+        } elseif ($docBlock = $this->getDeclaringFunction()->getDocBlock()) {
             $params = $docBlock->getTags('param');
 
             if (isset($params[$this->getPosition()])) {
-                return $params[$this->getPosition()]->getType();
+                $type = $params[$this->getPosition()]->getType();
+                $checkDefault = false;
             }
-
         }
 
-        return null;
+        if ($this->isDefaultValueAvailable() && $checkDefault) {
+            if ($type === null) {
+                $value = $this->getDefaultValue();
+                $type = strtolower(gettype($value));
+
+                switch ($type) {
+                    case 'boolean' : $type = 'bool'; break;
+                    case 'integer' : $type = 'int'; break;
+                }
+            } else {
+                if ($this->getDefaultValue() === null) {
+                   $type .= '|null';
+                }
+            }
+        }
+
+        return $type;
     }
 
     public function toString()

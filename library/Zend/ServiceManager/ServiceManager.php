@@ -893,7 +893,7 @@ class ServiceManager implements ServiceLocatorInterface
             }
             try {
                 if ($abstractFactory->canCreateServiceWithName($this, $canonicalName, $requestedName)) {
-					$this->pendingAbstractFactoryRequests[get_class($abstractFactory)] = $requestedName;
+                    $this->pendingAbstractFactoryRequests[get_class($abstractFactory)] = $requestedName;
                     $instance = $this->createServiceViaCallback(
                         array($abstractFactory, 'createServiceWithName'),
                         $canonicalName,

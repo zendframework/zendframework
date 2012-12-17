@@ -155,14 +155,14 @@ class Ini implements ReaderInterface
     {
         if(count($sections) == 0) {
             return $this->processSection($value);
-        } else {
-            $nestedSection = array();
-
-            $first = array_shift($sections);
-            $nestedSection[$first] = $this->buildNestedSection($sections, $value);
-
-            return $nestedSection;
         }
+
+        $nestedSection = array();
+
+        $first = array_shift($sections);
+        $nestedSection[$first] = $this->buildNestedSection($sections, $value);
+
+        return $nestedSection;
     }
 
     /**

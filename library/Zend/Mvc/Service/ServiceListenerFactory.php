@@ -41,8 +41,9 @@ class ServiceListenerFactory implements FactoryInterface
      */
     protected $defaultServiceConfig = array(
         'invokables' => array(
-            'DispatchListener' => 'Zend\Mvc\DispatchListener',
-            'RouteListener'    => 'Zend\Mvc\RouteListener',
+            'DispatchListener'     => 'Zend\Mvc\DispatchListener',
+            'RouteListener'        => 'Zend\Mvc\RouteListener',
+            'SendResponseListener' => 'Zend\Mvc\SendResponseListener'
         ),
         'factories' => array(
             'Application'                    => 'Zend\Mvc\Service\ApplicationFactory',

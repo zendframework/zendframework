@@ -63,6 +63,7 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
                 'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
                 'DispatchListener'   => 'Zend\Mvc\DispatchListener',
                 'RouteListener'      => 'Zend\Mvc\RouteListener',
+                'SendResponseListener' => 'Zend\Mvc\SendResponseListener'
             ),
             'factories' => array(
                 'Application'             => 'Zend\Mvc\Service\ApplicationFactory',

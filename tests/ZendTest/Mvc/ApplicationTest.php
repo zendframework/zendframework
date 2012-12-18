@@ -14,15 +14,12 @@ use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 use Zend\Config\Config;
-use Zend\EventManager\EventManager;
 use Zend\Http\Request;
 use Zend\Http\PhpEnvironment\Response;
-use Zend\Modulemanager\ModuleManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\Mvc\View\Http\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
 
@@ -37,6 +34,11 @@ class ApplicationTest extends TestCase
      * @var ServiceManager
      */
     protected $serviceManager;
+
+    /**
+     * @var Application
+     */
+    protected $application;
 
     public function setUp()
     {
@@ -68,7 +70,8 @@ class ApplicationTest extends TestCase
                     'Request'          => 'Zend\Http\PhpEnvironment\Request',
                     'Response'         => 'Zend\Http\PhpEnvironment\Response',
                     'RouteListener'    => 'Zend\Mvc\RouteListener',
-                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager'
+                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager',
+                    'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener'
                 ),
                 'factories' => array(
                     'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
@@ -183,6 +186,18 @@ class ApplicationTest extends TestCase
         $this->assertSame(array($dispatchListener, 'onDispatch'), $callback);
     }
 
+    public function testBootstrapRegistersSendResponseListener()
+    {
+        $sendResponseListener = $this->serviceManager->get('SendResponseListener');
+        $this->application->bootstrap();
+        $events = $this->application->getEventManager();
+        $listeners = $events->getListeners(MvcEvent::EVENT_FINISH);
+        $this->assertEquals(1, count($listeners));
+        $listener = $listeners->top();
+        $callback = $listener->getCallback();
+        $this->assertSame(array($sendResponseListener, 'sendResponse'), $callback);
+    }
+
     public function testBootstrapRegistersViewManagerAsBootstrapListener()
     {
         $viewManager = $this->serviceManager->get('ViewManager');
@@ -228,7 +243,6 @@ class ApplicationTest extends TestCase
             ),
         ));
         $router->addRoute('path', $route);
-
         if ($addService) {
             $controllerLoader = $this->serviceManager->get('ControllerLoader');
             $controllerLoader->setFactory('path', function () {

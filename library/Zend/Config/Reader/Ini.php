@@ -131,8 +131,8 @@ class Ini implements ReaderInterface
         foreach ($data as $section => $value) {
             if (is_array($value)) {
                 if (strpos($section, $this->nestSeparator) !== false) {
-                    $section = explode($this->nestSeparator, $section, 2);
-                    $config[$section[0]][$section[1]] = $this->processSection($value);
+                    $sections = explode($this->nestSeparator, $section);
+                    $config = array_merge_recursive($config, $this->buildNestedSection($sections, $value));
                 } else {
                     $config[$section] = $this->processSection($value);
                 }
@@ -142,6 +142,27 @@ class Ini implements ReaderInterface
         }
 
         return $config;
+    }
+
+    /**
+     * Process a nested section
+     *
+     * @param array $sections
+     * @param mixed $value
+     * @return array
+     */
+    private function buildNestedSection($sections, $value)
+    {
+        if(count($sections) == 0) {
+            return $this->processSection($value);
+        }
+
+        $nestedSection = array();
+
+        $first = array_shift($sections);
+        $nestedSection[$first] = $this->buildNestedSection($sections, $value);
+
+        return $nestedSection;
     }
 
     /**

@@ -658,7 +658,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
      */
-    public function testDuplicateNewInstanceMultipleAbstractFactories() 
+    public function testDuplicateNewInstanceMultipleAbstractFactories()
     {
         $this->serviceManager->setAllowOverride(true);
         $this->serviceManager->setShareByDefault(false);

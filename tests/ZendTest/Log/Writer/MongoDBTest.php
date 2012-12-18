@@ -32,7 +32,9 @@ class MongoDBTest extends \PHPUnit_Framework_TestCase
         $this->database = 'zf2_test';
         $this->collection = 'logs';
 
-        $this->mongo = $this->getMockBuilder('Mongo')
+        $mongoClass = (version_compare(phpversion('mongo'), '1.3.0', '<')) ? 'Mongo' : 'MongoClient';
+
+        $this->mongo = $this->getMockBuilder($mongoClass)
             ->disableOriginalConstructor()
             ->setMethods(array('selectCollection'))
             ->getMock();

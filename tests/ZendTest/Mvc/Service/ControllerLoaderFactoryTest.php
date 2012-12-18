@@ -15,6 +15,9 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Service\ControllerLoaderFactory;
 use Zend\Mvc\Service\ControllerPluginManagerFactory;
 use Zend\Mvc\Service\DiFactory;
+use Zend\Mvc\Service\DiStrictAbstractServiceFactoryFactory;
+use Zend\Mvc\Service\DiAbstractServiceFactoryFactory;
+use Zend\Mvc\Service\DiServiceInitializerFactory;
 use Zend\Mvc\Service\EventManagerFactory;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
@@ -42,6 +45,9 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->services->setService('Config', $config);
         $this->services->setFactory('ControllerPluginManager', new ControllerPluginManagerFactory());
         $this->services->setFactory('Di', new DiFactory());
+        $this->services->setFactory('DiStrictAbstractServiceFactory', new DiStrictAbstractServiceFactoryFactory());
+        $this->services->setFactory('DiAbstractServiceFactory', new DiAbstractServiceFactoryFactory());
+        $this->services->setFactory('DiServiceInitializer', new DiServiceInitializerFactory());
         $this->services->setFactory('EventManager', new EventManagerFactory());
         $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
     }

@@ -70,6 +70,7 @@ class Part
      * if this was created with a stream, return a filtered stream for
      * reading the content. very useful for large file attachments.
      *
+     * @param string $EOL
      * @return stream
      * @throws Exception\RuntimeException if not a stream or unable to append filter
      */

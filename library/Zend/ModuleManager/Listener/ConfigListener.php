@@ -159,8 +159,12 @@ class ConfigListener extends AbstractListener implements
         }
 
         // If enabled, update the config cache
-        if ($this->getOptions()->getConfigCacheEnabled()) {
-            $this->updateCache();
+        if (
+            $this->getOptions()->getConfigCacheEnabled()
+            && false === $this->skipConfig
+        ) {
+            $configFile = $this->getOptions()->getConfigCacheFile();
+            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
         }
 
         return $this;
@@ -380,19 +384,5 @@ class ConfigListener extends AbstractListener implements
     protected function getCachedConfig()
     {
         return include $this->getOptions()->getConfigCacheFile();
-    }
-
-    /**
-     * @return ConfigListener
-     */
-    protected function updateCache()
-    {
-        if (($this->getOptions()->getConfigCacheEnabled())
-            && (false === $this->skipConfig)
-        ) {
-            $configFile = $this->getOptions()->getConfigCacheFile();
-            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
-        }
-        return $this;
     }
 }

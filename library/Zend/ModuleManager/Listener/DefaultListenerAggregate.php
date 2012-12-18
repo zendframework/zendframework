@@ -12,7 +12,6 @@ namespace Zend\ModuleManager\Listener;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Loader\ModuleAutoloader;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Stdlib\CallbackHandler;
 
@@ -47,10 +46,9 @@ class DefaultListenerAggregate extends AbstractListener implements
         $options                     = $this->getOptions();
         $configListener              = $this->getConfigListener();
         $locatorRegistrationListener = new LocatorRegistrationListener($options);
-        $moduleAutoloader            = new ModuleAutoloader($options->getModulePaths());
 
         // High priority, we assume module autoloading (for FooNamespace\Module classes) should be available before anything else
-        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($moduleAutoloader, 'register'), 9000);
+        $this->listeners[] = $events->attach(new ModuleLoaderListener($options));
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener);
         // High priority, because most other loadModule listeners will assume the module's classes are available via autoloading
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener($options), 9000);

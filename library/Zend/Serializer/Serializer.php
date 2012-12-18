@@ -16,7 +16,7 @@ use Zend\Serializer\Adapter\AdapterInterface as Adapter;
  * @category   Zend
  * @package    Zend_Serializer
  */
-class Serializer
+abstract class Serializer
 {
     /**
      * Plugin manager for loading adapters

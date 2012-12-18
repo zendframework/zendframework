@@ -20,7 +20,7 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_InputFilter
  */
-class BaseInputFilter implements InputFilterInterface
+class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface
 {
     protected $data;
     protected $inputs = array();
@@ -165,6 +165,11 @@ class BaseInputFilter implements InputFilterInterface
             if (!array_key_exists($name, $this->data)
                 || (null === $this->data[$name])
                 || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
+                // Single and Multi File Uploads
+                || (is_array($this->data[$name])
+                    && isset($this->data[$name]['error']) && $this->data[$name]['error'] === UPLOAD_ERR_NO_FILE)
+                || (is_array($this->data[$name]) && count($this->data[$name]) === 1
+                    && isset($this->data[$name][0]['error']) && $this->data[$name][0]['error'] === UPLOAD_ERR_NO_FILE)
             ) {
                 if ($input instanceof InputInterface) {
                     // - test if input is required
@@ -436,5 +441,60 @@ class BaseInputFilter implements InputFilterInterface
 
             $input->setValue($value);
         }
+    }
+
+    /**
+     * Is the data set has unknown input ?
+     *
+     * @throws Exception\RuntimeException
+     * @return bool
+     */
+    public function hasUnknown()
+    {
+        if (null === $this->data) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: no data present!',
+                __METHOD__
+            ));
+        }
+
+        $data   = array_keys($this->data);
+        $inputs = array_keys($this->inputs);
+        $diff   = array_diff($data, $inputs);
+        if (!empty($diff)) {
+            return count(array_intersect($diff, $inputs)) == 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * Return the unknown input
+     *
+     * @throws Exception\RuntimeException
+     * @return array
+     */
+    public function getUnknown()
+    {
+        if (null === $this->data) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: no data present!',
+                __METHOD__
+            ));
+        }
+
+        $data   = array_keys($this->data);
+        $inputs = array_keys($this->inputs);
+        $diff   = array_diff($data, $inputs);
+
+        $unknownInputs = array();
+        $intersect     = array_intersect($diff, $data);
+        if (!empty($intersect)) {
+            foreach ($intersect as $key) {
+                $unknownInputs[$key] = $this->data[$key];
+            }
+        }
+
+        return $unknownInputs;
     }
 }

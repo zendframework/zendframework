@@ -20,7 +20,7 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_Barcode
  */
-class Barcode
+abstract class Barcode
 {
     /**
      * Default barcode TTF font name

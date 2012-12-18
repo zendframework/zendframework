@@ -464,9 +464,14 @@ class PhpRenderer implements Renderer, TreeRendererInterface
                     $this->__template
                 ));
             }
-            ob_start();
-            include $this->__file;
-            $this->__content = ob_get_clean();
+            try {
+                ob_start();
+                include $this->__file;
+                $this->__content = ob_get_clean();
+            } catch (\Exception $ex) {
+                ob_end_clean();
+                throw $ex;
+            }
         }
 
         $this->setVars(array_pop($this->__varsCache));

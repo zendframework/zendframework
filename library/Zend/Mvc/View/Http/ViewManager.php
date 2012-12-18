@@ -16,6 +16,8 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\SendResponseListener;
+use Zend\ServiceManager\ServiceManager;
+use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
 use Zend\View\Resolver as ViewResolver;
 use Zend\View\Strategy\PhpRendererStrategy;
@@ -60,7 +62,12 @@ class ViewManager implements ListenerAggregateInterface
     protected $config;
 
     /**
-     * @var \Zend\ServiceManager\ServiceManager
+     * @var MvcEvent
+     */
+    protected $event;
+
+    /**
+     * @var ServiceManager
      */
     protected $services;
 
@@ -131,7 +138,6 @@ class ViewManager implements ListenerAggregateInterface
         $createViewModelListener = new CreateViewModelListener();
         $injectTemplateListener  = new InjectTemplateListener();
         $injectViewModelListener = new InjectViewModelListener();
-        $sendResponseListener    = new SendResponseListener();
 
         $this->registerMvcRenderingStrategies($events);
         $this->registerViewStrategies();
@@ -139,8 +145,8 @@ class ViewManager implements ListenerAggregateInterface
         $events->attach($routeNotFoundStrategy);
         $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
+        $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
-        $events->attach($sendResponseListener);
 
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($routeNotFoundStrategy, 'prepareNotFoundViewModel'), -90);

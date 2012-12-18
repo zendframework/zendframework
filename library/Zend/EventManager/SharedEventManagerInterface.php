@@ -66,5 +66,4 @@ interface SharedEventManagerInterface
      * @return bool
      */
     public function clearListeners($id, $event = null);
-
 }

@@ -43,10 +43,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                  . 'xmlns:tns="http://localhost/MyService.php" '
                                  . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                                 . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                  . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                  . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                  . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -59,10 +60,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->setUri('http://localhost/MyNewService.php');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                  . 'xmlns:tns="http://localhost/MyNewService.php" '
                                  . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                                 . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                  . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                  . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                  . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -81,10 +83,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addMessage('myMessage', $messageParts);
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -104,10 +107,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addPortType('myPortType');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -127,10 +131,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addPortOperation($portType, 'operation3', 'tns:operation3Request', 'tns:operation3Response', 'tns:operation3Fault');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -158,10 +163,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addBinding('MyServiceBinding', 'myPortType');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -192,10 +198,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                    );
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -243,10 +250,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                   );
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -281,10 +289,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                   );
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl1->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -323,10 +332,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                   );
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -357,10 +367,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addService('Service1', 'myPortType', 'MyServiceBinding', 'http://localhost/MyService.php');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -375,6 +386,92 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
+    /**
+     * @dataProvider ampersandInUrlDataProvider()
+     */
+    public function testAddBindingOperationWithAmpersandInUrl($actualUrl, $expectedUrl)
+    {
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $wsdl->addPortType('myPortType');
+        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
+
+        $wsdl->addBindingOperation(
+            $binding,
+            'operation1',
+            array('use' => 'encoded', 'encodingStyle' => $actualUrl),
+            array('use' => 'encoded', 'encodingStyle' => $actualUrl),
+            array('name' => 'MyFault','use' => 'encoded', 'encodingStyle' => $actualUrl)
+        );
+
+        $expectedXml = '<operation name="operation1">'
+                       . '<input>'
+                       .   '<soap:body use="encoded" encodingStyle="' . $expectedUrl . '"/>'
+                       . '</input>'
+                       . '<output>'
+                       .   '<soap:body use="encoded" encodingStyle="' . $expectedUrl . '"/>'
+                       . '</output>'
+                       . '<fault name="MyFault">'
+                       .   '<soap:fault name="MyFault" use="encoded" encodingStyle="' . $expectedUrl . '"/>'
+                       . '</fault>'
+                     . '</operation>';
+        $this->assertContains($expectedXml, $wsdl->toXML());
+    }
+
+    /**
+     * @dataProvider ampersandInUrlDataProvider()
+     */
+    public function testAddSoapOperationWithAmpersandInUrl($actualUrl, $expectedUrl)
+    {
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $wsdl->addPortType('myPortType');
+        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
+
+        $wsdl->addSoapOperation($binding, $actualUrl);
+
+        $expectedXml = '<soap:operation soapAction="' . $expectedUrl . '"/>';
+        $this->assertContains($expectedXml, $wsdl->toXML());
+    }
+
+    /**
+     * @dataProvider ampersandInUrlDataProvider()
+     */
+    public function testAddServiceWithAmpersandInUrl($actualUrl, $expectedUrl)
+    {
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $wsdl->addPortType('myPortType');
+        $wsdl->addBinding('MyServiceBinding', 'myPortType');
+
+        $wsdl->addService('Service1', 'myPortType', 'MyServiceBinding', $actualUrl);
+
+        $expectedXml = '<service name="Service1">'
+                       . '<port name="myPortType" binding="MyServiceBinding">'
+                       .   '<soap:address location="' . $expectedUrl . '"/>'
+                       . '</port>'
+                     . '</service>';
+        $this->assertContains($expectedXml, $wsdl->toXML());
+    }
+
+    public function ampersandInUrlDataProvider()
+    {
+        return array(
+            'Decoded ampersand' => array(
+                'http://localhost/MyService.php?foo=bar&baz=qux',
+                'http://localhost/MyService.php?foo=bar&amp;baz=qux',
+            ),
+            'Encoded ampersand' => array(
+                'http://localhost/MyService.php?foo=bar&amp;baz=qux',
+                'http://localhost/MyService.php?foo=bar&amp;baz=qux',
+            ),
+            'Encoded and decoded ampersand' => array(
+                'http://localhost/MyService.php?foo=bar&&amp;baz=qux',
+                'http://localhost/MyService.php?foo=bar&amp;&amp;baz=qux',
+            ),
+        );
+    }
+
     public function testAddDocumentation()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
@@ -384,10 +481,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addDocumentation($portType, 'This is a description for Port Type node.');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -411,10 +509,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addDocumentation($message, "foo");
 
         $this->assertEquals(
-            '<?xml version="1.0"?>'  .
+            '<?xml version="1.0" encoding="utf-8"?>'  .
             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                . 'xmlns:tns="http://localhost/MyService.php" '
                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -435,10 +534,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -453,10 +553,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($dom instanceOf \DOMDocument);
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -472,10 +573,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdlDump = ob_get_clean();
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdlDump),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -485,10 +587,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $dumpedContent = file_get_contents(__DIR__ . '/TestAsset/dumped.wsdl');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($dumpedContent),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -569,10 +672,11 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
+                            '<?xml version="1.0" encoding="utf-8"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+                               . 'xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" '
                                . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                                . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
@@ -631,7 +735,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, substr_count($xml, "ArrayOfInt"),    "ArrayOfInt should appear only once.");
     }
 
-    const URI_WITH_EXPANDED_AMP = "http://localhost/MyService.php?a=b&amp;b=c";
+    const URI_WITH_EXPANDED_AMP = "http://localhost/MyService.php?a%3Db%26b%3Dc";
     const URI_WITHOUT_EXPANDED_AMP = "http://localhost/MyService.php?a=b&b=c";
 
     /**
@@ -639,7 +743,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlAmpersandInUrlInConstructorIsEncodedCorrectly()
     {
-        $wsdl = new Wsdl("MyService", self::URI_WITH_EXPANDED_AMP);
+        $wsdl = new Wsdl("MyService", self::URI_WITHOUT_EXPANDED_AMP);
         $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
     }
 
@@ -649,7 +753,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     public function testHtmlAmpersandInUrlInSetUriIsEncodedCorrectly()
     {
         $wsdl = new Wsdl("MyService", "http://example.com");
-        $wsdl->setUri(self::URI_WITH_EXPANDED_AMP);
+        $wsdl->setUri(self::URI_WITHOUT_EXPANDED_AMP);
         $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
     }
 }

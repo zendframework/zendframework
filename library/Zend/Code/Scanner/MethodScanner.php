@@ -84,7 +84,7 @@ class MethodScanner implements ScannerInterface
 
     /**
      * @param  Annotation\AnnotationManager $annotationManager
-     * @return Annotation\AnnotationCollection
+     * @return AnnotationScanner
      */
     public function getAnnotations(Annotation\AnnotationManager $annotationManager)
     {

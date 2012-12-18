@@ -13,7 +13,6 @@ namespace Zend\Mvc\View\Console;
 use ArrayAccess;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\ViewManager as BaseViewManager;
-use Zend\Mvc\View\SendResponseListener;
 
 /**
  * Prepares the view layer for console applications
@@ -53,7 +52,6 @@ class ViewManager extends BaseViewManager
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
         $createViewModelListener = new CreateViewModelListener();
         $injectViewModelListener = new InjectViewModelListener();
-        $sendResponseListener    = new SendResponseListener();
         $injectParamsListener    = new InjectNamedConsoleParamsListener();
 
         $this->registerMvcRenderingStrategies($events);
@@ -62,8 +60,8 @@ class ViewManager extends BaseViewManager
         $events->attach($routeNotFoundStrategy);
         $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
+        $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
-        $events->attach($sendResponseListener);
 
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectParamsListener,  'injectNamedParams'), 1000);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);

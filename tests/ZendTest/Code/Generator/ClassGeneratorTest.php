@@ -354,6 +354,21 @@ CODE;
         $this->assertContains('class FunClass', $received, $received);
     }
 
+    /**
+     * @group ZF2-151
+     */
+    public function testAddUses()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $classGenerator->addUse('My\Second\Use\Class', 'MyAlias');
+        $generated = $classGenerator->generate();
+
+        $this->assertContains('use My\First\Use\Class;', $generated);
+        $this->assertContains('use My\Second\Use\Class as MyAlias;', $generated);
+    }
+
     public function testCreateFromArrayWithDocBlockFromArray()
     {
         $classGenerator = ClassGenerator::fromArray(

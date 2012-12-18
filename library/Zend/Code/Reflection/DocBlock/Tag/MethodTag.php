@@ -14,14 +14,14 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
  * @category   Zend
  * @package    Zend_Reflection
  */
-class MethodTag implements TagInterface
+class MethodTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * Return value type
      *
-     * @var string
+     * @var array
      */
-    protected $returnType = null;
+    protected $types = array();
 
     /**
      * Method name
@@ -67,7 +67,7 @@ class MethodTag implements TagInterface
             }
 
             if ($match[2] !== '') {
-                $this->returnType = rtrim($match[2]);
+                $this->types = explode('|', rtrim($match[2]));
             }
 
             $this->methodName = $match[3];
@@ -81,11 +81,21 @@ class MethodTag implements TagInterface
     /**
      * Get return value type
      *
-     * @return string
+     * @return null|string
+     * @deprecated 2.0.4 use getTypes instead
      */
     public function getReturnType()
     {
-        return $this->returnType;
+        if (empty($this->types)) {
+            return null;
+        }
+
+        return $this->types[0];
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     /**

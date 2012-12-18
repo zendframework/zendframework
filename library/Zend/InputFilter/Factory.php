@@ -287,7 +287,7 @@ class Factory
     {
         foreach ($validators as $validator) {
             if ($validator instanceof ValidatorInterface) {
-                $chain->addValidator($validator);
+                $chain->attach($validator);
                 continue;
             }
 
@@ -306,7 +306,7 @@ class Factory
                 if (isset($validator['break_chain_on_failure'])) {
                     $breakChainOnFailure = $validator['break_chain_on_failure'];
                 }
-                $chain->addByName($name, $options, $breakChainOnFailure);
+                $chain->attachByName($name, $options, $breakChainOnFailure);
                 continue;
             }
 

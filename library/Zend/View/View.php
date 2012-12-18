@@ -186,6 +186,9 @@ class View implements EventManagerAwareInterface
             ));
         }
 
+        $event->setRenderer($renderer);
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
+
         // If we have children, render them first, but only if:
         // a) the renderer does not implement TreeRendererInterface, or
         // b) it does, but canRenderTrees() returns false

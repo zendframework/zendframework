@@ -19,6 +19,7 @@ class TokenArrayScannerTest extends TestCase
     public function testScannerReturnsNamespaces()
     {
         $tokenScanner = new TokenArrayScanner(token_get_all(file_get_contents((__DIR__ . '/../TestAsset/FooClass.php'))));
+        $this->assertTrue($tokenScanner->hasNamespace('ZendTest\Code\TestAsset'));
         $namespaces = $tokenScanner->getNamespaces();
         $this->assertInternalType('array', $namespaces);
         $this->assertContains('ZendTest\Code\TestAsset', $namespaces);

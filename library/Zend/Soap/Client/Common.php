@@ -53,10 +53,11 @@ class Common extends \SoapClient
      */
     public function __doRequest($request, $location, $action, $version, $one_way = null)
     {
+        // ltrim is a workaround for https://bugs.php.net/bug.php?id=63780
         if ($one_way === null) {
-            return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version);
+            return call_user_func($this->doRequestCallback, $this, ltrim($request), $location, $action, $version);
         } else {
-            return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $one_way);
+            return call_user_func($this->doRequestCallback, $this, ltrim($request), $location, $action, $version, $one_way);
         }
     }
 

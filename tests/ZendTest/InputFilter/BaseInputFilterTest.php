@@ -13,6 +13,7 @@ namespace ZendTest\InputFilter;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 use Zend\InputFilter\Input;
+use Zend\InputFilter\FileInput;
 use Zend\InputFilter\BaseInputFilter as InputFilter;
 use Zend\Filter;
 use Zend\Validator;
@@ -73,16 +74,16 @@ class BaseInputFilterTest extends TestCase
         $foo = new Input();
         $foo->getFilterChain()->attachByName('stringtrim')
                               ->attachByName('alpha');
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 6));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 6));
 
         $bar = new Input();
         $bar->getFilterChain()->attachByName('stringtrim');
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
 
         $baz = new Input();
         $baz->setRequired(false);
         $baz->getFilterChain()->attachByName('stringtrim');
-        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
+        $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
@@ -99,16 +100,16 @@ class BaseInputFilterTest extends TestCase
         $foo = new Input();
         $foo->getFilterChain()->attachByName('stringtrim')
                               ->attachByName('alpha');
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 6));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 6));
 
         $bar = new Input();
         $bar->getFilterChain()->attachByName('stringtrim');
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
 
         $baz = new Input();
         $baz->setRequired(false);
         $baz->getFilterChain()->attachByName('stringtrim');
-        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
+        $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
@@ -342,14 +343,14 @@ class BaseInputFilterTest extends TestCase
 
         $store = new stdClass;
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\Callback(function ($value, $context) use ($store) {
+        $foo->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
             return true;
         }));
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar');
@@ -372,14 +373,14 @@ class BaseInputFilterTest extends TestCase
 
         $store = new stdClass;
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\Callback(function ($value, $context) use ($store) {
+        $foo->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
             return true;
         }));
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setBreakOnFailure(true);
 
         $filter->add($bar, 'bar')  // adding bar first, as we want it to validate first and break the chain
@@ -398,11 +399,11 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 5));
         $foo->setRequired(false);
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setRequired(true);
 
         $filter->add($foo, 'foo')
@@ -414,17 +415,70 @@ class BaseInputFilterTest extends TestCase
         $this->assertTrue($filter->isValid());
     }
 
+    public function testValidationSkipsFileInputsMarkedNotRequiredWhenNoFileDataIsPresent()
+    {
+        $filter = new InputFilter();
+
+        $foo   = new FileInput();
+        $foo->getValidatorChain()->attach(new Validator\File\Upload());
+        $foo->setRequired(false);
+
+        $filter->add($foo, 'foo');
+
+        $data = array(
+            'foo' => array(
+                'tmp_name' => '/tmp/barfile',
+                'name'     => 'barfile',
+                'type'     => 'text',
+                'size'     => 0,
+                'error'    => 4,  // UPLOAD_ERR_NO_FILE
+            )
+        );
+        $filter->setData($data);
+        $this->assertTrue($filter->isValid());
+
+        // Negative test
+        $foo->setRequired(true);
+        $filter->setData($data);
+        $this->assertFalse($filter->isValid());
+    }
+
+    public function testValidationSkipsFileInputsMarkedNotRequiredWhenNoMultiFileDataIsPresent()
+    {
+        $filter = new InputFilter();
+        $foo    = new FileInput();
+        $foo->setRequired(false);
+        $filter->add($foo, 'foo');
+
+        $data = array(
+            'foo' => array(array(
+                'tmp_name' => '/tmp/barfile',
+                'name'     => 'barfile',
+                'type'     => 'text',
+                'size'     => 0,
+                'error'    => 4,  // UPLOAD_ERR_NO_FILE
+            )),
+        );
+        $filter->setData($data);
+        $this->assertTrue($filter->isValid());
+
+        // Negative test
+        $foo->setRequired(true);
+        $filter->setData($data);
+        $this->assertFalse($filter->isValid());
+    }
+
     public function testValidationAllowsEmptyValuesToRequiredInputWhenAllowEmptyFlagIsTrue()
     {
         $filter = new InputFilter();
 
         $foo   = new Input('foo');
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 5));
         $foo->setRequired(true);
         $foo->setAllowEmpty(true);
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setRequired(true);
 
         $filter->add($foo, '')
@@ -442,12 +496,12 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new Input();
-        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->getValidatorChain()->attach(new Validator\StringLength(3, 5));
         $foo->setRequired(true);
         $foo->setAllowEmpty(false);
 
         $bar = new Input();
-        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->getValidatorChain()->attach(new Validator\Digits());
         $bar->setRequired(true);
 
         $filter->add($foo, '')
@@ -508,5 +562,52 @@ class BaseInputFilterTest extends TestCase
         $messages = $filter->getMessages();
         $this->assertArrayHasKey('foo', $messages);
         $this->assertNotEmpty($messages['foo']);
+    }
+    public function testHasUnknown()
+    {
+        $filter = $this->getInputFilter();
+        $validData = array(
+            'foo' => ' bazbat ',
+            'bar' => '12345',
+            'baz' => ''
+        );
+        $filter->setData($validData);
+        $this->assertFalse($filter->hasUnknown());
+
+        $filter = $this->getInputFilter();
+        $invalidData = array(
+            'bar' => '12345',
+            'baz' => '',
+            'gru' => '',
+        );
+        $filter->setData($invalidData);
+        $this->assertTrue($filter->hasUnknown());
+    }
+    public function testGetUknown()
+    {
+        $filter = $this->getInputFilter();
+        $unknown = array(
+            'bar' => '12345',
+            'baz' => '',
+            'gru' => 10,
+            'test' => 'ok',
+        );
+        $filter->setData($unknown);
+        $unknown = $filter->getUnknown();
+        $this->assertEquals(2, count($unknown));
+        $this->assertTrue(array_key_exists('gru', $unknown));
+        $this->assertEquals(10, $unknown['gru']);
+        $this->assertTrue(array_key_exists('test', $unknown));
+        $this->assertEquals('ok', $unknown['test']);
+
+        $filter = $this->getInputFilter();
+        $validData = array(
+            'foo' => ' bazbat ',
+            'bar' => '12345',
+            'baz' => ''
+        );
+        $filter->setData($validData);
+        $unknown = $filter->getUnknown();
+        $this->assertEquals(0, count($unknown));
     }
 }

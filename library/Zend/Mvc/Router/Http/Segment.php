@@ -41,7 +41,7 @@ class Segment implements RouteInterface
      *
      * @var array
      */
-    private static $urlencodeCorrectionMap = array(
+    protected static $urlencodeCorrectionMap = array(
         '%21' => "!", // sub-delims
         '%24' => "$", // sub-delims
         '%26' => "&", // sub-delims

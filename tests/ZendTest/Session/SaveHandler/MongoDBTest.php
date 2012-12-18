@@ -23,7 +23,7 @@ use Zend\Session\SaveHandler\MongoDBOptions;
 class MongoDBTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Mongo
+     * @var Mongo|MongoClient
      */
     protected $mongo;
 
@@ -55,7 +55,9 @@ class MongoDBTest extends \PHPUnit_Framework_TestCase
             'collection' => 'sessions',
         ));
 
-        $this->mongo = new Mongo();
+        $mongoClass = (version_compare(phpversion('mongo'), '1.3.0', '<')) ? '\Mongo' : '\MongoClient';
+
+        $this->mongo = new $mongoClass();
         $this->mongoCollection = $this->mongo->selectCollection($this->options->getDatabase(), $this->options->getCollection());
     }
 

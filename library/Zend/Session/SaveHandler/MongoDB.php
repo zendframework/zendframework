@@ -54,12 +54,19 @@ class MongoDB implements SaveHandlerInterface
     /**
      * Constructor
      *
-     * @param Mongo $mongo
+     * @param Mongo|MongoClient $mongo
      * @param MongoDBOptions $options
      * @throws Zend\Session\Exception\InvalidArgumentException
      */
-    public function __construct(Mongo $mongo, MongoDBOptions $options)
+    public function __construct($mongo, MongoDBOptions $options)
     {
+        if (!($mongo instanceof \MongoClient || $mongo instanceof \Mongo)) {
+            throw new InvalidArgumentException(
+                'Parameter of type %s is invalid; must be MongoClient or Mongo',
+                (is_object($mongo) ? get_class($mongo) : gettype($mongo))
+            );
+        }
+
         if (null === ($database = $options->getDatabase())) {
             throw new InvalidArgumentException('The database option cannot be emtpy');
         }

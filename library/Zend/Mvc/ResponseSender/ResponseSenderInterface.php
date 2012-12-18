@@ -8,16 +8,23 @@
  * @package   Zend_Mvc
  */
 
-namespace Zend\Mvc\View;
+namespace Zend\Mvc\ResponseSender;
 
-use Zend\Mvc\SendResponseListener as MvcSendResponseListener;
+use Zend\Mvc\ResponseSender\SendResponseEvent;;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
- * @subpackage View
- * @deprecated
+ * @subpackage ResponseSender
  */
-class SendResponseListener extends MvcSendResponseListener
+interface ResponseSenderInterface
 {
+    /**
+     * Send the response
+     *
+     * @param SendResponseEvent $event
+     * @return void
+     */
+    public function __invoke(SendResponseEvent $event);
+
 }

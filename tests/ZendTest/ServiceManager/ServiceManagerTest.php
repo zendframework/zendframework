@@ -654,4 +654,17 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($service, $this->serviceManager->get('alias-name'));
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
+    public function testDuplicateNewInstanceMultipleAbstractFactories()
+    {
+        $this->serviceManager->setAllowOverride(true);
+        $this->serviceManager->setShareByDefault(false);
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\BarAbstractFactory');
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
+    }
 }

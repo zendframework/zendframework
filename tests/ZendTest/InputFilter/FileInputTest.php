@@ -86,29 +86,29 @@ class FileInputTest extends TestCase
 
     public function testValueMayBeInjected()
     {
-        $this->input->setValue(array('tmp_name' => 'bar'));
-        $this->assertEquals('bar', $this->input->getValue());
+        $value = array('tmp_name' => 'bar');
+        $this->input->setValue($value);
+        $this->assertEquals($value, $this->input->getValue());
     }
 
     public function testRetrievingValueFiltersTheValueOnlyAfterValidating()
     {
-        $this->input->setValue(array('tmp_name' => 'bar'));
-        $filter = new Filter\StringToUpper();
-        $this->input->getFilterChain()->attach($filter);
-        $this->assertEquals('bar', $this->input->getValue());
-        $this->assertTrue($this->input->isValid());
-        $this->assertEquals('BAR', $this->input->getValue());
-    }
-
-    public function testCanFilterArrayOfFileData()
-    {
-        $value  = array('tmp_name' => 'foo');
+        $value = array('tmp_name' => 'bar');
         $this->input->setValue($value);
-        $filter = new Filter\StringToUpper();
-        $this->input->getFilterChain()->attach($filter);
-        $this->assertEquals('foo', $this->input->getValue());
+
+        $newValue = array('tmp_name' => 'foo');
+        $filterMock = $this->getMockBuilder('Zend\Filter\File\Rename')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $filterMock->expects($this->exactly(1))
+            ->method('filter')
+            ->with($this->anything())
+            ->will($this->returnValue($newValue));
+
+        $this->input->getFilterChain()->attach($filterMock);
+        $this->assertEquals($value, $this->input->getValue());
         $this->assertTrue($this->input->isValid());
-        $this->assertEquals('FOO', $this->input->getValue());
+        $this->assertEquals($newValue, $this->input->getValue());
     }
 
     public function testCanFilterArrayOfMultiFileData()
@@ -119,11 +119,20 @@ class FileInputTest extends TestCase
             array('tmp_name' => 'baz'),
         );
         $this->input->setValue($values);
-        $filter = new Filter\StringToUpper();
-        $this->input->getFilterChain()->attach($filter);
-        $this->assertEquals(array('foo', 'bar', 'baz'), $this->input->getValue());
+
+        $newValue = array('tmp_name' => 'new');
+        $filterMock = $this->getMockBuilder('Zend\Filter\File\Rename')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $filterMock->expects($this->exactly(3))
+            ->method('filter')
+            ->with($this->anything())
+            ->will($this->returnValue($newValue));
+
+        $this->input->getFilterChain()->attach($filterMock);
+        $this->assertEquals($values, $this->input->getValue());
         $this->assertTrue($this->input->isValid());
-        $this->assertEquals(array('FOO', 'BAR', 'BAZ'), $this->input->getValue());
+        $this->assertEquals(array($newValue, $newValue, $newValue), $this->input->getValue());
     }
 
     public function testCanRetrieveRawValue()
@@ -159,8 +168,16 @@ class FileInputTest extends TestCase
             'size'     => 1,
             'error'    => 0,
         ));
-        $filter = new Filter\StringTrim();
-        $this->input->getFilterChain()->attach($filter);
+
+        $newValue = array('tmp_name' => 'new');
+        $filterMock = $this->getMockBuilder('Zend\Filter\File\Rename')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $filterMock->expects($this->any())
+            ->method('filter')
+            ->will($this->returnValue($newValue));
+
+        $this->input->getFilterChain()->attach($filterMock);
         $validator = new Validator\File\Exists();
         $this->input->getValidatorChain()->attach($validator);
         $this->assertFalse($this->input->isValid());

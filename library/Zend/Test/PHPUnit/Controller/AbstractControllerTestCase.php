@@ -15,7 +15,7 @@ use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\SendResponseListener;
+use Zend\Mvc\SendResponseListener;
 use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\Parameters;
 use Zend\Uri\Http as HttpUri;

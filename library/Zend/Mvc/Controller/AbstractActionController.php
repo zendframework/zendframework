@@ -55,13 +55,9 @@ abstract class AbstractActionController extends AbstractController
         $routeMatch->setParam('action', 'not-found');
 
         if ($response instanceof HttpResponse) {
-            $viewModel = $this->createHttpNotFoundModel($response);
+            return $this->createHttpNotFoundModel($response);
         }
-        if (!$response instanceof HttpResponse) {
-            $viewModel = $this->createConsoleNotFoundModel($response);
-        }
-
-        return $viewModel;
+        return $this->createConsoleNotFoundModel($response);
     }
 
     /**

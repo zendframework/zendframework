@@ -85,6 +85,9 @@ class Mail extends AbstractWriter
         }
 
         if (is_array($mail)) {
+            if (isset($mail['subject_prepend_text'])) {
+                $this->setSubjectPrependText($mail['subject_prepend_text']);
+            }
             $transport = isset($mail['transport']) ? $mail['transport'] : null;
             $mail      = isset($mail['mail']) ? $mail['mail'] : null;
         }

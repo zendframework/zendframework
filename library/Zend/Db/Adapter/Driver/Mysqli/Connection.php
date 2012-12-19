@@ -172,11 +172,11 @@ class Connection implements ConnectionInterface
         if (!empty($p['driver_options'])) {
             foreach ($p['driver_options'] as $option => $value) {
                 if (is_string($option)) {
-                    // Suppress warnings here
-                    // Ignore it if it's not a valid constant
-                    $option = @constant(strtoupper($option));
-                    if ($option === null)
+                    $option = strtoupper($option);
+                    if (!defined($option)) {
                         continue;
+                    }
+                    $option = constant($option);
                 }
                 $this->resource->options($option, $value);
             }

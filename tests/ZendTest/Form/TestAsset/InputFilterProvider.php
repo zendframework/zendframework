@@ -18,7 +18,7 @@ class InputFilterProvider extends Form implements InputFilterProviderInterface
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
-        
+
         $this->add(array(
             'name' => 'foo',
             'options' => array(

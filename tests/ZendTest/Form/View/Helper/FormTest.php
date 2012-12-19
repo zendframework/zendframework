@@ -83,12 +83,10 @@ class FormTest extends CommonTestCase
         $this->assertContains('id="login-form"', $markup);
     }
 
-    public function testFullFormRendering()
+    public function testRender()
     {
         $form = new Form();
-        $attributes = array(
-            'name'  => 'login-form',
-        );
+        $attributes = array('name'  => 'login-form');
         $form->setAttributes($attributes);
         $form->add(new CityFieldset());
         $form->add(new Submit('send'));
@@ -100,6 +98,19 @@ class FormTest extends CommonTestCase
         $this->assertContains('<label><span>Name of the city</span>', $markup);
         $this->assertContains('<fieldset><legend>Country</legend>', $markup);
         $this->assertContains('<input type="submit" name="send"', $markup);
+        $this->assertContains('</form>', $markup);
+    }
+
+    public function testRenderPreparesForm()
+    {
+        $form = $this->getMock('Zend\\Form\\Form');
+        $form->expects($this->once())->method('prepare');
+        $form->expects($this->any())->method('getAttributes')->will($this->returnValue(array()));
+        $form->expects($this->any())->method('getIterator')->will($this->returnValue(new \ArrayIterator(array())));
+
+        $markup = $this->helper->__invoke($form);
+
+        $this->assertContains('<form', $markup);
         $this->assertContains('</form>', $markup);
     }
 }

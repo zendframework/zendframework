@@ -208,10 +208,10 @@ class ActionControllerTest extends TestCase
         $result       = $this->controller->dispatch($this->request, $response);
         $testResponse = $this->controller->getResponse();
         $this->assertSame($response, $testResponse);
-        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
-        $this->assertEquals('content', $result->captureTo());
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
         $vars = $result->getVariables();
-        $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
-        $this->assertContains('Page not found', $vars['content']);
+        $this->assertTrue(isset($vars['result']));
+        $this->assertContains('Page not found', $vars['result']);
+        $this->assertEquals(1, $result->getErrorLevel());
     }
 }

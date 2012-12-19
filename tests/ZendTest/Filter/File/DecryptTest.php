@@ -80,6 +80,38 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
             trim(file_get_contents(dirname(__DIR__).'/_files/newencryption.txt')));
     }
 
+    /**
+     * @return void
+     */
+    public function testBasicWithFileArray()
+    {
+        $filter = new FileEncrypt();
+        $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
+
+        $this->assertEquals(
+            dirname(__DIR__).'/_files/newencryption.txt',
+            $filter->getFilename());
+
+        $filter->setVector('1234567890123456');
+        $filter->filter(array('tmp_name' => dirname(__DIR__).'/_files/encryption.txt'));
+
+        $filter = new FileDecrypt();
+
+        $this->assertNotEquals(
+            'Encryption',
+            file_get_contents(dirname(__DIR__).'/_files/newencryption.txt'));
+
+        $filter->setVector('1234567890123456');
+        $this->assertEquals(
+            array('tmp_name' => dirname(__DIR__).'/_files/newencryption.txt'),
+            $filter->filter(array('tmp_name' => dirname(__DIR__).'/_files/newencryption.txt'))
+        );
+
+        $this->assertEquals(
+            'Encryption',
+            trim(file_get_contents(dirname(__DIR__).'/_files/newencryption.txt')));
+    }
+
     public function testEncryptionWithDecryption()
     {
         $filter = new FileEncrypt();

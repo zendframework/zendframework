@@ -55,13 +55,20 @@ class Decrypt extends Filter\Decrypt
      *
      * Decrypts the file $value with the defined settings
      *
-     * @param  string $value Full path of file to change
-     * @return string The filename which has been set, or false when there were errors
+     * @param  string|array $value Full path of file to change or $_FILES data array
+     * @return string|array The filename which has been set
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
     public function filter($value)
     {
+        // An uploaded file? Retrieve the 'tmp_name'
+        $isFileUpload = (is_array($value) && isset($value['tmp_name']));
+        if ($isFileUpload) {
+            $uploadData = $value;
+            $value      = $value['tmp_name'];
+        }
+
         if (!file_exists($value)) {
             throw new Exception\InvalidArgumentException("File '$value' not found");
         }
@@ -86,6 +93,10 @@ class Decrypt extends Filter\Decrypt
             throw new Exception\RuntimeException("Problem while writing file '{$this->filename}'");
         }
 
+        if ($isFileUpload) {
+            $uploadData['tmp_name'] = $this->filename;
+            return $uploadData;
+        }
         return $this->filename;
     }
 }

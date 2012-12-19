@@ -11,6 +11,7 @@
 namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\DocBlock\Tag;
+use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
 
 /**
  * @category   Zend
@@ -45,6 +46,14 @@ class DocBlockTagGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $tag = new Tag(array('description' => 'Foo'));
         $this->assertEquals('Foo', $tag->getDescription());
+    }
+
+    public function testCanGenerateLicenseTag()
+    {
+        $tag = new LicenseTag(array('url' => 'http://test.license.com',
+                                    'description' => 'Test License'));
+        $this->assertEquals('@license http://test.license.com Test License',
+                $tag->generate());
     }
 
     public function testNameGetterAndSetterPersistValue()

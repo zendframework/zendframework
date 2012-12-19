@@ -89,7 +89,11 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         }
 
         // Fetch result from primary model
-        $responseText .= $result->getResult();
+        if ($result instanceof ConsoleViewModel) {
+            $responseText .= $result->getResult();
+        } else {
+            $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
+        }
 
         // Append console response to response object
         $response->setContent(

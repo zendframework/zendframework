@@ -95,7 +95,7 @@ class FilePostRedirectGet extends AbstractPlugin
         // Loop through data and merge previous files with new valid files
         $postFiles = array_merge(
             $previousFiles,
-            $this->combineFileInputPostData($inputFilter, $data, $postFiles)
+            $this->filterInvalidFileInputPostData($inputFilter, $data)
         );
         $post = array_merge($post, $postFiles);
 
@@ -223,41 +223,35 @@ class FilePostRedirectGet extends AbstractPlugin
     /**
      * @param  InputFilterInterface $inputFilter
      * @param  array                $data
-     * @param  array                $post
      * @return array
      */
-    protected function combineFileInputPostData(InputFilterInterface $inputFilter, $data, $post)
+    protected function filterInvalidFileInputPostData(InputFilterInterface $inputFilter, $data)
     {
         $returnValues = array();
         $validInputs = $inputFilter->getValidInput();
         foreach ($validInputs as $name => $input) {
-            if (!isset($data[$name]) || !isset($post[$name])) {
+            if (!isset($data[$name])) {
                 continue;
             }
             $dataValue = $data[$name];
-            $postValue = $post[$name];
 
             if ($input instanceof InputFilterInterface && is_array($dataValue)) {
-                $retVal = $this->combineFileInputPostData($input, $dataValue, $postValue);
+                $retVal = $this->filterInvalidFileInputPostData($input, $dataValue);
                 if (!empty($retVal)) {
                     $returnValues[$name] = $retVal;
                 }
                 continue;
             }
 
-            if ($input instanceof FileInput) {
-                if (!is_array($dataValue)) {
-                    if ('' !== $dataValue) {
-                        $postValue['tmp_name'] = $dataValue;
-                        $returnValues[$name] = $postValue;
-                    }
-                } else {
-                    foreach ($dataValue as $i => $fileName) {
-                        if ('' !== $fileName) {
-                            $postValue[$i]['tmp_name'] = $fileName;
-                            $returnValues[$name][$i]   = $postValue[$i];
-                        }
-                    }
+            $messages = $input->getMessages();
+            if (is_array($dataValue)
+                && $input instanceof FileInput
+                && empty($messages)
+            ) {
+                if (   (isset($dataValue['error'])    && $dataValue['error']    === UPLOAD_ERR_OK)
+                    || (isset($dataValue[0]['error']) && $dataValue[0]['error'] === UPLOAD_ERR_OK)
+                ) {
+                    $returnValues[$name] = $dataValue;
                 }
             }
         }

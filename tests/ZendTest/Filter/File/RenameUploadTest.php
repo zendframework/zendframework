@@ -191,6 +191,31 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return void
+     */
+    public function testConstructSingleValueWithFilesArray()
+    {
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload($this->_newFile);
+
+        $this->assertEquals(
+            array(0 => array(
+                'source'    => '*',
+                'target'    => $this->_newFile,
+                'overwrite' => false,
+                'randomize' => false,
+            )),
+            $filter->getFile()
+        );
+        $this->assertEquals(
+            array('tmp_name' => $this->_newFile),
+            $filter(array('tmp_name' => $this->_oldFile))
+        );
+        $this->assertEquals('falsefile', $filter('falsefile'));
+    }
+
+    /**
      * Test single array parameter filter
      *
      * @return void

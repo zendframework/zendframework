@@ -158,12 +158,19 @@ class Rename extends Filter\AbstractFilter
      * Renames the file $value to the new name set before
      * Returns the file $value, removing all but digit characters
      *
-     * @param  string $value Full path of file to change
+     * @param  string|array $value Full path of file to change or $_FILES data array
      * @throws Exception\RuntimeException
-     * @return string The new filename which has been set, or false when there were errors
+     * @return string|array The new filename which has been set
      */
     public function filter($value)
     {
+        // An uploaded file? Retrieve the 'tmp_name'
+        $isFileUpload = (is_array($value) && isset($value['tmp_name']));
+        if ($isFileUpload) {
+            $uploadData = $value;
+            $value      = $value['tmp_name'];
+        }
+
         $file = $this->getNewName($value, true);
         if (is_string($file)) {
             return $file;
@@ -181,6 +188,10 @@ class Rename extends Filter\AbstractFilter
             );
         }
 
+        if ($isFileUpload) {
+            $uploadData['tmp_name'] = $file['target'];
+            return $uploadData;
+        }
         return $file['target'];
     }
 

@@ -83,6 +83,17 @@ class LowerCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
+    public function testNormalWorkflowWithFilesArray()
+    {
+        $this->assertContains('This is a File', file_get_contents($this->_newFile));
+        $filter = new FileLowerCase();
+        $filter(array('tmp_name' => $this->_newFile));
+        $this->assertContains('this is a file', file_get_contents($this->_newFile));
+    }
+
+    /**
+     * @return void
+     */
     public function testFileNotFoundException()
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');

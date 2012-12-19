@@ -56,8 +56,8 @@ class Form extends AbstractHelper
     /**
      * Render a form from the provided $form,
      *
-     * @param  ElementInterface $element
-     * @param  null|string $buttonContent
+     * @param  ElementInterface          $element
+     * @param  null|string               $buttonContent
      * @throws Exception\DomainException
      * @return string
      */
@@ -66,7 +66,7 @@ class Form extends AbstractHelper
         $openTag = $this->openTag($form);
 
         $formContent = '';
-        
+
         foreach ($form as $element) {
             if ($element instanceof FieldsetInterface) {
                 $formContent.= $this->getView()->formCollection($element);
@@ -74,7 +74,7 @@ class Form extends AbstractHelper
                 $formContent.= $this->getView()->formRow($element);
             }
         }
-        
+
         return $openTag . $formContent . $this->closeTag();
     }
 
@@ -100,6 +100,7 @@ class Form extends AbstractHelper
         }
 
         $tag = sprintf('<form %s>', $this->createAttributesString($attributes));
+
         return $tag;
     }
 

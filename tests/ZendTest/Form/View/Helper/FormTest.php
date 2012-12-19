@@ -94,7 +94,7 @@ class FormTest extends CommonTestCase
         $form->add(new Submit('send'));
 
         $markup = $this->helper->__invoke($form);
-        
+
         $this->assertContains('<form', $markup);
         $this->assertContains('id="login-form"', $markup);
         $this->assertContains('<label><span>Name of the city</span>', $markup);

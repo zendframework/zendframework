@@ -166,7 +166,23 @@ class Connection implements ConnectionInterface
         $port     = (isset($p['port'])) ? (int) $p['port'] : null;
         $socket   = (isset($p['socket'])) ? $p['socket'] : null;
 
-        $this->resource = new \mysqli($hostname, $username, $password, $database, $port, $socket);
+        $this->resource = new \mysqli();
+		$this->resource->init();
+
+        if (!empty($p['driver_options'])) {
+            foreach ($p['driver_options'] as $option => $value) {
+                if (is_string($option)) {
+                    // Suppress warnings here
+                    // Ignore it if it's not a valid constant
+                    $option = @constant(strtoupper($option));
+                    if ($option === null)
+                        continue;
+                }
+                $this->resource->options($option, $value);
+            }
+        }
+
+		$this->resource->real_connect($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
             throw new Exception\RuntimeException(

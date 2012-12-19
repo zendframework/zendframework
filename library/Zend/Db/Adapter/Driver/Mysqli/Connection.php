@@ -167,7 +167,7 @@ class Connection implements ConnectionInterface
         $socket   = (isset($p['socket'])) ? $p['socket'] : null;
 
         $this->resource = new \mysqli();
-		$this->resource->init();
+        $this->resource->init();
 
         if (!empty($p['driver_options'])) {
             foreach ($p['driver_options'] as $option => $value) {
@@ -182,7 +182,7 @@ class Connection implements ConnectionInterface
             }
         }
 
-		$this->resource->real_connect($hostname, $username, $password, $database, $port, $socket);
+        $this->resource->real_connect($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
             throw new Exception\RuntimeException(

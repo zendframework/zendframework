@@ -130,16 +130,8 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     public function testThrowsExceptionWithNonUploadedFile()
     {
         $filter = new FileRenameUpload($this->_newFile);
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
+        $filter->setUseUploadName(false);
+        $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals('falsefile', $filter('falsefile'));
         $this->setExpectedException(
             'Zend\Filter\Exception\RuntimeException', 'could not be renamed'
@@ -167,283 +159,104 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test single parameter filter
-     *
      * @return void
      */
-    public function testConstructSingleValue()
+    public function testOptions()
     {
-        $this->setUpMockMoveUploadedFile();
-
         $filter = new FileRenameUpload($this->_newFile);
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * @return void
-     */
-    public function testConstructSingleValueWithFilesArray()
-    {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload($this->_newFile);
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals(
-            array('tmp_name' => $this->_newFile),
-            $filter(array('tmp_name' => $this->_oldFile))
-        );
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * Test single array parameter filter
-     *
-     * @return void
-     */
-    public function testConstructSingleArray()
-    {
-        $this->setUpMockMoveUploadedFile();
+        $this->assertEquals($this->_newFile, $filter->getTarget());
+        $this->assertTrue($filter->getUseUploadName());
+        $this->assertFalse($filter->getOverwrite());
+        $this->assertFalse($filter->getRandomize());
 
         $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newFile));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * Test full array parameter filter
-     *
-     * @return void
-     */
-    public function testConstructFullOptionsArray()
-    {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newFile,
-            'overwrite' => true,
-            'randomize' => false,
-            'unknown'   => false
+            'target'          => $this->_oldFile,
+            'use_upload_name' => false,
+            'overwrite'       => true,
+            'randomize'       => true,
         ));
+        $this->assertEquals($this->_oldFile, $filter->getTarget());
+        $this->assertFalse($filter->getUseUploadName());
+        $this->assertTrue($filter->getOverwrite());
+        $this->assertTrue($filter->getRandomize());
+    }
 
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => true,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
+    /**
+     * @return void
+     */
+    public function testStringConstructorParam()
+    {
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload($this->_newFile);
+        $filter->setUseUploadName(false);
+        $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
     }
 
     /**
-     * Test single array parameter filter
-     *
      * @return void
      */
-    public function testConstructDoubleArray()
+    public function testStringConstructorWithFilesArray()
+    {
+        $this->setUpMockMoveUploadedFile();
+
+        $filter = new FileRenameUpload($this->_newFile);
+        $this->assertEquals($this->_newFile, $filter->getTarget());
+        $this->assertEquals(
+            array(
+                'tmp_name' => $this->_newFile,
+                'name'     => $this->_newFile,
+            ),
+            $filter(array(
+                'tmp_name' => $this->_oldFile,
+                'name' => $this->_newFile,
+            ))
+        );
+        $this->assertEquals('falsefile', $filter('falsefile'));
+    }
+
+    /**
+     * @return void
+     */
+    public function testArrayConstructorParam()
     {
         $this->setUpMockMoveUploadedFile();
 
         $filter = new FileRenameUpload(array(
-            0 => array(
-                'source' => $this->_oldFile,
-                'target' => $this->_newFile)));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
+            'target'          => $this->_newFile,
+            'use_upload_name' => false,
+            'overwrite'       => false,
+            'randomize'       => false,
+        ));
+        $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
     }
 
     /**
-     * Test single array parameter filter
-     *
      * @return void
      */
     public function testConstructTruncatedTarget()
     {
-        $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => '*',
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
+        $filter = new FileRenameUpload('*');
+        $filter->setUseUploadName(false);
+        $this->assertEquals('*', $filter->getTarget());
         $this->assertEquals($this->_oldFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
     }
 
     /**
-     * Test single array parameter filter
-     *
      * @return void
      */
-    public function testConstructTruncatedSource()
-    {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
-            'target' => $this->_newFile));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * Test single parameter filter by using directory only
-     *
-     * @return void
-     */
-    public function testConstructSingleDirectory()
+    public function testTargetDirectory()
     {
         $this->setUpMockMoveUploadedFile();
 
         $filter = new FileRenameUpload($this->_newDir);
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newDir,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newDirFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * Test single array parameter filter by using directory only
-     *
-     * @return void
-     */
-    public function testConstructSingleArrayDirectory()
-    {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newDir));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newDir,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newDirFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * Test single array parameter filter by using directory only
-     *
-     * @return void
-     */
-    public function testConstructDoubleArrayDirectory()
-    {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
-            0 => array(
-                'source' => $this->_oldFile,
-                'target' => $this->_newDir)));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newDir,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newDirFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * Test single array parameter filter by using directory only
-     *
-     * @return void
-     */
-    public function testConstructTruncatedSourceDirectory()
-    {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
-            'target' => $this->_newDir));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newDir,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
+        $filter->setUseUploadName(false);
+        $this->assertEquals($this->_newDir, $filter->getTarget());
         $this->assertEquals($this->_newDirFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
     }
@@ -451,98 +264,43 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testAddSameFileAgainAndOverwriteExistingTarget()
+    public function testOverwriteWithExistingFile()
     {
         $this->setUpMockMoveUploadedFile();
 
         $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newDir));
-
-        $filter->addFile(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newFile));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * @return void
-     */
-    public function testGetNewName()
-    {
-        $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newDir));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newDir,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newDirFile, $filter->getNewName($this->_oldFile));
-    }
-
-    /**
-     * @return void
-     */
-    public function testGetNewNameExceptionWithExistingFile()
-    {
-        $filter = new FileRenameUpload(array(
-            'source' => $this->_oldFile,
-            'target' => $this->_newFile));
+            'target'          => $this->_newFile,
+            'overwrite'       => true,
+            'use_upload_name' => false,
+        ));
 
         copy($this->_oldFile, $this->_newFile);
 
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'could not be renamed');
-        $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
+        $this->assertEquals($this->_newFile, $filter->getTarget());
+        $this->assertEquals($this->_newFile, $filter->filter($this->_oldFile));
     }
 
     /**
      * @return void
      */
-    public function testGetNewNameOverwriteWithExistingFile()
+    public function testCannotOverwriteExistingFile()
     {
+        $this->setUpMockMoveUploadedFile();
+
         $filter = new FileRenameUpload(array(
-            'source'    => $this->_oldFile,
-            'target'    => $this->_newFile,
-            'overwrite' => true));
+            'target'          => $this->_newFile,
+            'overwrite'       => false,
+            'use_upload_name' => false,
+        ));
 
         copy($this->_oldFile, $this->_newFile);
 
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => true,
-                'randomize' => false,
-            )),
-            $filter->getFile()
+        $this->assertEquals($this->_newFile, $filter->getTarget());
+        $this->assertFalse($filter->getOverwrite());
+        $this->setExpectedException(
+            'Zend\Filter\Exception\InvalidArgumentException', 'already exists'
         );
-        $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
+        $this->assertEquals($this->_newFile, $filter->filter($this->_oldFile));
     }
 
     /**
@@ -550,21 +308,16 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFile()
     {
+        $this->setUpMockMoveUploadedFile();
+
         $filter = new FileRenameUpload(array(
-            'source'    => $this->_oldFile,
-            'target'    => $this->_newFile,
-            'randomize' => true
+            'target'          => $this->_newFile,
+            'randomize'       => true,
+            'use_upload_name' => false,
         ));
 
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => true,
-            )),
-            $filter->getFile()
-        );
+        $this->assertEquals($this->_newFile, $filter->getTarget());
+        $this->assertTrue($filter->getRandomize());
         $fileNoExt = $this->_filesPath . 'newfile';
         $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter->getNewName($this->_oldFile));
     }
@@ -574,56 +327,18 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFileWithoutExtension()
     {
-        $fileNoExt = $this->_filesPath . 'newfile';
-        $filter = new FileRenameUpload(array(
-            'source'    => $this->_oldFile,
-            'target'    => $fileNoExt,
-            'randomize' => true
-        ));
-
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $fileNoExt,
-                'overwrite' => false,
-                'randomize' => true,
-            )),
-            $filter->getFile()
-        );
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter->getNewName($this->_oldFile));
-    }
-
-    /**
-     * @return void
-     */
-    public function testAddFileWithString()
-    {
         $this->setUpMockMoveUploadedFile();
 
-        $filter = new FileRenameUpload($this->_oldFile);
-        $filter->addFile($this->_newFile);
+        $fileNoExt = $this->_filesPath . 'newfile';
+        $filter = new FileRenameUpload(array(
+            'target'          => $fileNoExt,
+            'randomize'       => true,
+            'use_upload_name' => false,
+        ));
 
-        $this->assertEquals(
-            array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
-                'overwrite' => false,
-                'randomize' => false,
-            )),
-            $filter->getFile()
-        );
-        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
-        $this->assertEquals('falsefile', $filter('falsefile'));
-    }
-
-    /**
-     * @return void
-     */
-    public function testAddFileWithInvalidOption()
-    {
-        $filter = new FileRenameUpload($this->_oldFile);
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
-        $filter->addFile(1234);
+        $this->assertEquals($fileNoExt, $filter->getTarget());
+        $this->assertTrue($filter->getRandomize());
+        $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter->getNewName($this->_oldFile));
     }
 
     /**
@@ -631,7 +346,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidConstruction()
     {
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid target');
         $filter = new FileRenameUpload(1234);
     }
 }

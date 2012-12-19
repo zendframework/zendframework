@@ -34,6 +34,7 @@ class Rename extends Filter\AbstractFilter
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the source file
      * 'overwrite' => Shall existing files be overwritten ?
+     * 'randomize' => Shall target files have a random postfix attached?
      *
      * @param  string|array|Traversable $options Target file or directory to be renamed
      * @throws Exception\InvalidArgumentException
@@ -173,7 +174,11 @@ class Rename extends Filter\AbstractFilter
 
         $file = $this->getNewName($value, true);
         if (is_string($file)) {
-            return $file;
+            if ($isFileUpload) {
+                return $uploadData;
+            } else {
+                return $file;
+            }
         }
 
         $result = rename($file['source'], $file['target']);

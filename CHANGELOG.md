@@ -1,6 +1,127 @@
 # CHANGELOG
 
-## 2.0.5
+## 2.0.6 (19 Dec 2012):
+
+- 2885: Zend\Db\TableGateway\AbstractTableGateway won't work with Sqlsrv
+  db adapter (https://github.com/zendframework/zf2/issues/2885)
+- 2922: Fix #2902 (https://github.com/zendframework/zf2/issues/2922)
+- 2961: Revert PR #2943 for 5.3.3 fix
+  (https://github.com/zendframework/zf2/issues/2961)
+- 2962: Allow Accept-Encoding header to be set explicitly by http
+  request (https://github.com/zendframework/zf2/issues/2962)
+- 3033: Fix error checking on Zend\Http\Client\Adapter\Socket->write().
+  (https://github.com/zendframework/zf2/issues/3033)
+- 3040: remove unused 'use DOMXPath' and property $count and $xpath
+  (https://github.com/zendframework/zf2/issues/3040)
+- 3043: improve conditional : reduce file size
+  (https://github.com/zendframework/zf2/issues/3043)
+- 3044: Extending Zend\Mvc\Router\Http\Segment causes error
+  (https://github.com/zendframework/zf2/issues/3044)
+- 3047: Fix Zend\Console\Getopt::getUsageMessage()
+  (https://github.com/zendframework/zf2/issues/3047)
+- 3049: Hotfix/issue #3033
+  (https://github.com/zendframework/zf2/issues/3049)
+- 3050: Fix : The annotation @\Zend\Form\Annotation\AllowEmpty declared
+  on does not accept any values
+  (https://github.com/zendframework/zf2/issues/3050)
+- 3052: Fixed #3051 (https://github.com/zendframework/zf2/issues/3052)
+- 3061: changed it back 'consist' => the 'must' should be applied to all
+  parts of the sentence
+  (https://github.com/zendframework/zf2/issues/3061)
+- 3063: hotfix: change sha382 to sha384 in
+  Zend\Crypt\Key\Derivation\SaltedS2k
+  (https://github.com/zendframework/zf2/issues/3063)
+- 3070: Fix default value unavailable exception for in-build php classes
+  (https://github.com/zendframework/zf2/issues/3070)
+- 3074: Hotfix/issue #2451 (https://github.com/zendframework/zf2/issues/3074)
+- 3091: console exception strategy displays previous exception message
+  (https://github.com/zendframework/zf2/issues/3091)
+- 3114: Fixed Client to allow also empty passwords in HTTP
+  Authentication. (https://github.com/zendframework/zf2/issues/3114)
+- 3125: #2607 - Fixing how headers are accessed
+  (https://github.com/zendframework/zf2/issues/3125)
+- 3126: Fix for GitHub issue 2605
+  (https://github.com/zendframework/zf2/issues/3126)
+- 3127: fix cs: add space after casting
+  (https://github.com/zendframework/zf2/issues/3127)
+- 3130: Obey PSR-2 (https://github.com/zendframework/zf2/issues/3130)
+- 3144: Zend\Form\View\Helper\Captcha\AbstractWord input and hidden
+  attributes (https://github.com/zendframework/zf2/issues/3144)
+- 3148: Fixing obsolete method of checking headers, made it use the new
+  method. (https://github.com/zendframework/zf2/issues/3148)
+- 3149: Zf2634 - Adding missing method Client::encodeAuthHeader
+  (https://github.com/zendframework/zf2/issues/3149)
+- 3151: Rename variable to what it probably should be
+  (https://github.com/zendframework/zf2/issues/3151)
+- 3155: strip duplicated semicolon
+  (https://github.com/zendframework/zf2/issues/3155)
+- 3156: fix typos in docblocks
+  (https://github.com/zendframework/zf2/issues/3156)
+- 3162: Allow Forms to have an InputFilterSpecification
+  (https://github.com/zendframework/zf2/issues/3162)
+- 3163: Added support of driver\_options to Mysqli DB Driver
+  (https://github.com/zendframework/zf2/issues/3163)
+- 3164: Cast $step to float in \Zend\Validator\Step
+  (https://github.com/zendframework/zf2/issues/3164)
+- 3166: [#2678] Sqlsrv driver incorrectly throwing exception when
+  $sqlOrResource... (https://github.com/zendframework/zf2/issues/3166)
+- 3167: Fix #3161 by checking if the server port already exists in the
+  host (https://github.com/zendframework/zf2/issues/3167)
+- 3169: Fixing issue #3036 (https://github.com/zendframework/zf2/issues/3169)
+- 3170: Fixing issue #2554 (https://github.com/zendframework/zf2/issues/3170)
+- 3171: hotfix : add  '$argName' as 'argument %s' in sprintf ( at 1st
+  parameter ) (https://github.com/zendframework/zf2/issues/3171)
+- 3178: Maintain priority flag when cloning a Fieldset
+  (https://github.com/zendframework/zf2/issues/3178)
+- 3184: fix misspelled getCacheStorge()
+  (https://github.com/zendframework/zf2/issues/3184)
+- 3186: Dispatching to a good controller but wrong action triggers a
+  Fatal Error (https://github.com/zendframework/zf2/issues/3186)
+- 3187: Fixing ansiColorMap by removing extra m's showed in the console
+  (https://github.com/zendframework/zf2/issues/3187)
+- 3194: Write clean new line for writeLine method (no background color)
+  (https://github.com/zendframework/zf2/issues/3194)
+- 3197: Fix spelling error (https://github.com/zendframework/zf2/issues/3197)
+- 3201: Session storage set save path
+  (https://github.com/zendframework/zf2/issues/3201)
+- 3204: [wip] Zend\Http\Client makes 2 requests to url if
+  setStream(true) is called
+  (https://github.com/zendframework/zf2/issues/3204)
+- 3207: dead code clean up.
+  (https://github.com/zendframework/zf2/issues/3207)
+- 3208: Zend\Mime\Part: Added EOL paramter to getEncodedStream()
+  (https://github.com/zendframework/zf2/issues/3208)
+- 3213: [#3173] Incorrect creating instance
+  Zend/Code/Generator/ClassGenerator.php by fromArray
+  (https://github.com/zendframework/zf2/issues/3213)
+- 3214: Fix passing of tags to constructor of docblock generator class
+  (https://github.com/zendframework/zf2/issues/3214)
+- 3217: Cache: Optimized Filesystem::setItem with locking enabled by
+  writing the... (https://github.com/zendframework/zf2/issues/3217)
+- 3220: [2.0] Log Writer support for MongoClient driver class
+  (https://github.com/zendframework/zf2/issues/3220)
+- 3226: Licence is not accessable via web
+  (https://github.com/zendframework/zf2/issues/3226)
+- 3229: fixed bug in DefinitionList::hasMethod()
+  (https://github.com/zendframework/zf2/issues/3229)
+- 3234: Removed old Form TODO since all items are complete
+  (https://github.com/zendframework/zf2/issues/3234)
+- 3236: Issue #3222 - Added suport for multi-level nested ini config
+  variables (https://github.com/zendframework/zf2/issues/3236)
+- 3237: [BUG] Service Manager Not Shared Duplicate new Instance with
+  multiple Abstract Factories
+  (https://github.com/zendframework/zf2/issues/3237)
+- 3238: Added French translation for captcha
+  (https://github.com/zendframework/zf2/issues/3238)
+- 3250: Issue #2912 - Fix for LicenseTag generation
+  (https://github.com/zendframework/zf2/issues/3250)
+- 3252: subject prepend text in options for Log\Writer\Mail
+  (https://github.com/zendframework/zf2/issues/3252)
+- 3254: Better capabilities surrounding console notFoundAction
+  (https://github.com/zendframework/zf2/issues/3254)
+
+
+## 2.0.5 (29 Nov 2012):
 
 - 3004: Zend\Db unit tests fail with code coverage enabled
   (https://github.com/zendframework/zf2/issues/3004)
@@ -15,7 +136,7 @@
 - 3095: Process X-Forwarded-For header in correct order
   (https://github.com/zendframework/zf2/issues/3095)
 
-## 2.0.4
+## 2.0.4 (20 Nov 2012):
 
 - 2808: Add serializer better inheritance and extension
   (https://github.com/zendframework/zf2/issues/2808)
@@ -104,7 +225,7 @@
   (https://github.com/zendframework/zf2/issues/3031)
 
 
-## 2.0.3:
+## 2.0.3 (17 Oct 2012):
 
 - 2244: Fix for issue ZF2-503 (https://github.com/zendframework/zf2/issues/2244)
 - 2318: Allow to remove decimals in CurrencyFormat
@@ -259,7 +380,7 @@
   (https://github.com/zendframework/zf2/issues/2731)
 - 2732: Removed references to Mysqli in Zend\Db\Adapter\Driver\Pgsql
   (https://github.com/zendframework/zf2/issues/2732)
-- 2733: fix @package Zend_Validate should be Zend_Validator
+- 2733: fix @package Zend\_Validate should be Zend\_Validator
   (https://github.com/zendframework/zf2/issues/2733)
 - 2734: fix i18n @package and @subpackage value
   (https://github.com/zendframework/zf2/issues/2734)
@@ -286,7 +407,7 @@
   ::getBytes() (https://github.com/zendframework/zf2/issues/2764)
 - 2765: Csrf: always use dedicated setter
   (https://github.com/zendframework/zf2/issues/2765)
-- 2766: Session\Storage: always preserve REQUEST_ACCESS_TIME
+- 2766: Session\Storage: always preserve REQUEST\_ACCESS\_TIME
   (https://github.com/zendframework/zf2/issues/2766)
 - 2768: Zend\Validator dependency is missed in Zend\Cache composer.json
   (https://github.com/zendframework/zf2/issues/2768)
@@ -297,7 +418,7 @@
   (https://github.com/zendframework/zf2/issues/2775)
 - 2776: Allow whitespace in Iban
   (https://github.com/zendframework/zf2/issues/2776)
-- 2777: Fix issue when PREG_BAD_UTF8_OFFSET_ERROR is defined but Unicode support
+- 2777: Fix issue when PREG\_BAD\_UTF8__OFFSET_ERROR is defined but Unicode support
   is not enabled on PCRE (https://github.com/zendframework/zf2/issues/2777)
 - 2778: Undefined Index fix in ViewHelperManagerFactory
   (https://github.com/zendframework/zf2/issues/2778)
@@ -306,7 +427,7 @@
 - 2782: Issue 2781 (https://github.com/zendframework/zf2/issues/2782)
 
 
-## 2.0.2:
+## 2.0.2 (21 Sep 2012):
 
 - 2383: Changed unreserved char definition in Zend\Uri (ZF2-533) and added shell
   escaping to the test runner (https://github.com/zendframework/zf2/pull/2383)
@@ -320,7 +441,7 @@
   (https://github.com/zendframework/zf2/pull/2401)
 
 
-## 2.0.1:
+## 2.0.1 (20 Sep 2012):
 
 - 2285: Seed RouteMatch params as long as params is set. This permits setting an
   empty array. (https://github.com/zendframework/zf2/pull/2285)
@@ -343,7 +464,7 @@
 - 2302: Notifications now to #zftalk.dev
   (https://github.com/zendframework/zf2/pull/2302)
 - 2306: Fix several cs (https://github.com/zendframework/zf2/pull/2306)
-- 2307: Removed comment about non existent Zend_Tool
+- 2307: Removed comment about non existent Zend\_Tool
   (https://github.com/zendframework/zf2/pull/2307)
 - 2308: Fix pluginmanager get method error
   (https://github.com/zendframework/zf2/pull/2308)
@@ -365,7 +486,7 @@
   (https://github.com/zendframework/zf2/pull/2323)
 - 2324: Fix for ZF2-517: Zend\Mail\Header\GenericHeader fails to parse empty
   header (https://github.com/zendframework/zf2/pull/2324)
-- 2328: Wrong \__clone method (https://github.com/zendframework/zf2/pull/2328)
+- 2328: Wrong \_\_clone method (https://github.com/zendframework/zf2/pull/2328)
 - 2331: added validation support for optgroups
   (https://github.com/zendframework/zf2/pull/2331)
 - 2332: README-GIT update with optional pre-commit hook

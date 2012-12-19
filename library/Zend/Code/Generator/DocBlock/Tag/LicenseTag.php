@@ -19,7 +19,6 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  */
 class LicenseTag extends Tag
 {
-
     /**
      * @var string
      */
@@ -36,7 +35,7 @@ class LicenseTag extends Tag
             $this->setUrl($options['url']);
         }
 
-        if(empty($this->name)) {
+        if (empty($this->name)) {
             $this->setName('license');
         }
     }
@@ -88,9 +87,8 @@ class LicenseTag extends Tag
     public function generate()
     {
         $output = '@' . $this->name
-                . (($this->url != null) ? ' ' . $this->url : '')
-                . (($this->description != null) ? ' ' . $this->description : '');
+                . (($this->url !== null) ? ' ' . $this->url : '')
+                . (($this->description !== null) ? ' ' . $this->description : '');
         return $output;
     }
-
 }

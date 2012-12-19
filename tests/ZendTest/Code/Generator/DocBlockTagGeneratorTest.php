@@ -50,10 +50,14 @@ class DocBlockTagGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testCanGenerateLicenseTag()
     {
-        $tag = new LicenseTag(array('url' => 'http://test.license.com',
-                                    'description' => 'Test License'));
-        $this->assertEquals('@license http://test.license.com Test License',
-                $tag->generate());
+        $tag = new LicenseTag(array(
+            'url'         => 'http://test.license.com',
+            'description' => 'Test License',
+        ));
+        $this->assertEquals(
+            '@license http://test.license.com Test License',
+            $tag->generate()
+        );
     }
 
     public function testNameGetterAndSetterPersistValue()

@@ -651,7 +651,7 @@ class Form extends Fieldset implements FormInterface
         $inputFactory = $formFactory->getInputFilterFactory();
 
         if ($this instanceof InputFilterProviderInterface) {
-            foreach ($this->getInputFilterSpecification() AS $name => $spec) {
+            foreach ($this->getInputFilterSpecification() as $name => $spec) {
                 $input = $inputFactory->createInput($spec);
                 $inputFilter->add($input, $name);
             }

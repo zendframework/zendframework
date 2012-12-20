@@ -14,7 +14,7 @@ class BasicClassWithParent
 {
     public $parent;
 
-    public function __construct(BasicClass $parent, $foo) 
+    public function __construct(BasicClass $parent, $foo)
     {
         $this->parent = $parent;
     }

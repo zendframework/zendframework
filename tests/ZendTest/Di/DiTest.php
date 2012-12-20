@@ -78,8 +78,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
             'instance' => array(
                 'ZendTest\Di\TestAsset\BasicClass' => array(
                     'shared' => false,
-                    ),
                 ),
+            ),
         ));
         $di = new Di(null, null, $config);
         $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
@@ -87,6 +87,31 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertNotSame($obj1, $obj2);
+    }
+
+    public function testGetRetrievesSameSharedInstanceOnUsingInConstructor()
+    {
+        $config = new Config(array(
+            'instance' => array(
+                'ZendTest\Di\TestAsset\BasicClass' => array(
+                    'shared' => true,
+                ),
+            ),
+        ));
+        $di = new Di(null, null, $config);
+        $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParent', array('foo' => 0));
+        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParent', array('foo' => 1));
+        $obj3 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParent', array('foo' => 2, 'non_exists' => 1));
+        $objParent1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
+        $objParent2 = $di->get('ZendTest\Di\TestAsset\BasicClass', array('foo' => 1));
+
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClassWithParent', $obj1);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClassWithParent', $obj2);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClassWithParent', $obj3);
+        $this->assertSame($obj1->parent, $obj2->parent);
+        $this->assertSame($obj2->parent, $obj3->parent);
+        $this->assertSame($obj3->parent, $objParent1);
+        $this->assertSame($obj3->parent, $objParent2);
     }
 
     public function testGetThrowsExceptionWhenUnknownClassIsUsed()

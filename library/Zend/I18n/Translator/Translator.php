@@ -428,11 +428,10 @@ class Translator
             $this->files[$textDomain] = array();
         }
 
-        $this->files[$textDomain][$locale] = array(
-            'type'     => $type,
-            'filename' => $filename,
-        );
-
+        $this->files[$textDomain][$locale][] = array(
+			'type' => $type,
+			'filename' => $filename,
+		);
         return $this;
     }
 
@@ -504,6 +503,8 @@ class Translator
                 return;
             }
         }
+        
+        $hasToCache = false;
 
         // Try to load from remote sources
         if (isset($this->remote[$textDomain])) {
@@ -514,8 +515,12 @@ class Translator
                     throw new Exception\RuntimeException('Specified loader is not a remote loader');
                 }
 
-                $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
-                goto cache;
+                if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
+                	(array)$this->messages[$textDomain][$locale],
+                	(array)$loader->load($locale, $textDomain)
+                ));
+                else $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
+                $hasToCache = true;
             }
         }
 
@@ -531,8 +536,12 @@ class Translator
                         throw new Exception\RuntimeException('Specified loader is not a file loader');
                     }
 
-                    $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
-                    goto cache;
+                    if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
+                    	(array)$this->messages[$textDomain][$locale],
+                    	(array)$loader->load($locale, $filename)
+                    ));
+                    else $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
+                    $hasToCache = true;
                 }
             }
         }
@@ -542,23 +551,25 @@ class Translator
             if (!isset($this->files[$textDomain][$currentLocale])) {
                 continue;
             }
-
-            $file   = $this->files[$textDomain][$currentLocale];
-            $loader = $this->getPluginManager()->get($file['type']);
-
-            if (!$loader instanceof FileLoaderInterface) {
-                throw new Exception\RuntimeException('Specified loader is not a file loader');
+            foreach($this->files[$textDomain][$currentLocale] as $file){
+	            $loader = $this->getPluginManager()->get($file['type']);
+	
+	            if (!$loader instanceof FileLoaderInterface) {
+	                throw new Exception\RuntimeException('Specified loader is not a file loader');
+	            }
+	
+	            if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
+	            		(array)$this->messages[$textDomain][$locale],
+	            		(array)$loader->load($locale, $file['filename'])
+	            ));
+	            else $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
+            	$hasToCache = true;
             }
-
-            $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
-
             unset($this->files[$textDomain][$currentLocale]);
-            goto cache;
         }
 
         // Cache the loaded text domain
-        cache:
-        if ($cache !== null) {
+        if ($hasToCache && $cache !== null) {
             $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }
     }

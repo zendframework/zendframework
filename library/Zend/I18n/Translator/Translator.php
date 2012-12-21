@@ -515,11 +515,14 @@ class Translator
                     throw new Exception\RuntimeException('Specified loader is not a remote loader');
                 }
 
-                if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
-                	(array)$this->messages[$textDomain][$locale],
-                	(array)$loader->load($locale, $textDomain)
-                ));
-                else $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
+                if (isset($this->messages[$textDomain][$locale])) {
+                	$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
+	                	(array)$this->messages[$textDomain][$locale],
+	                	(array)$loader->load($locale, $textDomain)
+	                ));
+                } else {
+                	$this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
+                }
                 $hasToCache = true;
             }
         }
@@ -536,11 +539,14 @@ class Translator
                         throw new Exception\RuntimeException('Specified loader is not a file loader');
                     }
 
-                    if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
-                    	(array)$this->messages[$textDomain][$locale],
-                    	(array)$loader->load($locale, $filename)
-                    ));
-                    else $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
+                    if (isset($this->messages[$textDomain][$locale])) {
+                    	$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
+	                    	(array)$this->messages[$textDomain][$locale],
+	                    	(array)$loader->load($locale, $filename)
+	                    ));
+                    } else {
+                    	$this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
+                    }
                     $hasToCache = true;
                 }
             }
@@ -558,11 +564,15 @@ class Translator
 	                throw new Exception\RuntimeException('Specified loader is not a file loader');
 	            }
 	
-	            if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
-	            	(array)$this->messages[$textDomain][$locale],
-	            	(array)$loader->load($locale, $file['filename'])
-	            ));
-	            else $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
+	            if (isset($this->messages[$textDomain][$locale])) {
+	            	$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
+		            	(array)$this->messages[$textDomain][$locale],
+		            	(array)$loader->load($locale, $file['filename'])
+		            ));
+	            }
+	            else {
+	            	$this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
+	            }
             	$hasToCache = true;
             }
             unset($this->files[$textDomain][$currentLocale]);

@@ -269,7 +269,7 @@ class DocBlockScanner implements ScannerInterface
             goto TOKENIZER_TOP;
         }
 
-        if ($currentChar === ' ') {
+        if ($currentChar === ' ' or $currentChar === "\t") {
             $MACRO_TOKEN_SET_TYPE(($context & $CONTEXT_INSIDE_ASTERISK) ? 'DOCBLOCK_WHITESPACE' : 'DOCBLOCK_WHITESPACE_INDENT');
             $MACRO_TOKEN_APPEND_WORD();
             $MACRO_TOKEN_ADVANCE();

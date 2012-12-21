@@ -65,6 +65,30 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testTabbedDocBlockTags()
+    {
+        $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass10');
+
+        $this->assertEquals(3, count($classReflection->getDocBlock()->getTags()));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('author')));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('property')));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('method')));
+
+        $methodTag = $classReflection->getDocBlock()->getTag('method');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\MethodTag', $methodTag);
+
+        $propertyTag = $classReflection->getDocBlock()->getTag('property');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\PropertyTag', $propertyTag);
+
+        $this->assertFalse($classReflection->getDocBlock()->getTag('version'));
+
+        $this->assertTrue($classReflection->getMethod('doSomething')->getDocBlock()->hasTag('return'));
+
+        $returnTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\TagInterface', $returnTag);
+        $this->assertEquals('mixed', $returnTag->getType());
+    }
+
     public function testDocBlockLines()
     {
         //$this->markTestIncomplete('Line numbers incomplete');

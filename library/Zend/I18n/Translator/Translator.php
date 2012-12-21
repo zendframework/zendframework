@@ -559,8 +559,8 @@ class Translator
 	            }
 	
 	            if(isset($this->messages[$textDomain][$locale]))$this->messages[$textDomain][$locale]->exchangeArray(array_merge(
-	            		(array)$this->messages[$textDomain][$locale],
-	            		(array)$loader->load($locale, $file['filename'])
+	            	(array)$this->messages[$textDomain][$locale],
+	            	(array)$loader->load($locale, $file['filename'])
 	            ));
 	            else $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
             	$hasToCache = true;

@@ -14,6 +14,7 @@ use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateSelect as DateSelectElement;
 use Zend\Form\Factory;
+use Zend\Form\Exception;
 
 class DateSelectTest extends TestCase
 {
@@ -49,5 +50,31 @@ class DateSelectTest extends TestCase
         $this->assertEquals('2012', $element->getYearElement()->getValue());
         $this->assertEquals('09', $element->getMonthElement()->getValue());
         $this->assertEquals('24', $element->getDayElement()->getValue());
+    }
+
+    public function testCanSetDateFromString()
+    {
+        $element  = new DateSelectElement();
+        $element->setValue('2012-09-24');
+
+        $this->assertEquals('2012', $element->getYearElement()->getValue());
+        $this->assertEquals('09', $element->getMonthElement()->getValue());
+        $this->assertEquals('24', $element->getDayElement()->getValue());
+    }
+
+    public function testThrowsOnInvalidValue()
+    {
+        $element  = new DateSelectElement();
+
+        try {
+            $element->setValue('hello world');
+
+            // This should never be executed
+            $this->assertTrue(false);
+
+        } catch(\Exception $e) {
+
+            $this->assertTrue($e instanceof Exception\InvalidArgumentException);
+        }
     }
 }

@@ -216,7 +216,7 @@ class DateTimeSelect extends DateSelect
 
             try {
 
-                $value = new DateTime($value);
+                $value = new PhpDateTime($value);
 
             } catch (Exception $e) {
 

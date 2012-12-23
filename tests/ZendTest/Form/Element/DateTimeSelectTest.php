@@ -68,20 +68,13 @@ class DateTimeSelectTest extends TestCase
         $this->assertEquals('05', $element->getSecondElement()->getValue());
     }
 
+    /**
+     * @expectedException \Zend\Form\Exception\InvalidArgumentException
+     */
     public function testThrowsOnInvalidValue()
     {
         $element  = new DateTimeSelectElement();
-
-        try {
-            $element->setValue('hello world');
-
-            // This should never be executed
-            $this->assertTrue(false);
-
-        } catch(\Exception $e) {
-
-            $this->assertTrue($e instanceof Exception\InvalidArgumentException);
-        }
+        $element->setValue('hello world');
     }
 
     public function testUseDefaultValueForSecondsIfNotProvided()

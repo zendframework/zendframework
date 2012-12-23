@@ -62,19 +62,12 @@ class DateSelectTest extends TestCase
         $this->assertEquals('24', $element->getDayElement()->getValue());
     }
 
+    /**
+     * @expectedException \Zend\Form\Exception\InvalidArgumentException
+     */
     public function testThrowsOnInvalidValue()
     {
         $element  = new DateSelectElement();
-
-        try {
-            $element->setValue('hello world');
-
-            // This should never be executed
-            $this->assertTrue(false);
-
-        } catch(\Exception $e) {
-
-            $this->assertTrue($e instanceof Exception\InvalidArgumentException);
-        }
+        $element->setValue('hello world');
     }
 }

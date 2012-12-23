@@ -88,22 +88,16 @@ class DateSelect extends MonthSelect
     }
 
     /**
-     * @throws \Zend\Form\Exception\InvalidArgumentException
-     *
      * @param mixed $value
-     *
+     * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */
     public function setValue($value)
     {
         if (is_string($value)) {
-
             try {
-
                 $value = new DateTime($value);
-
             } catch (Exception $e) {
-
                 throw new InvalidArgumentException('Value should be a parsable string or an instance of \DateTime');
             }
         }

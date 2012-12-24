@@ -69,8 +69,7 @@ class JsonModel extends ViewModel
 
         if (!is_null($this->jsonpCallback)) {
             return $this->jsonpCallback.'('.Json::encode($variables).');';
-        } else {
-            return Json::encode($variables);
         }
+        return Json::encode($variables);
     }
 }

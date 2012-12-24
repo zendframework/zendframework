@@ -259,9 +259,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
                 }
             }
             return $data;
-        } else {
-            return $this->currentData;
         }
+        
+        return $this->currentData;
     }
 
     /**
@@ -286,9 +286,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
             }
 
             return count($this->currentData[$name]) > 0;
-        } else {
-            return false;
         }
+        
+        return false;
     }
 
     /**
@@ -317,9 +317,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         if ($name == 'dn') {
             return $this->getDnString();
-        } else {
-            return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
         }
+        
+        return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
     }
 
     /**

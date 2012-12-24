@@ -128,9 +128,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         if ($this->ldap === null) {
             throw new Exception\LdapException(null, 'No LDAP connection specified.',
                 Exception\LdapException::LDAP_OTHER);
-        } else {
-            return $this->ldap;
         }
+        
+        return $this->ldap;
     }
 
     /**
@@ -816,9 +816,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             throw new Exception\LdapException(null, 'Cannot change attribute because it\'s part of the RDN');
         } elseif (in_array($name, static::$systemAttributes)) {
             throw new Exception\LdapException(null, 'Cannot change attribute because it\'s read-only');
-        } else {
-            return true;
         }
+        
+        return true;
     }
 
     /**

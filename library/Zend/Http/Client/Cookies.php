@@ -237,9 +237,9 @@ class Cookies
                     throw new Exception\InvalidArgumentException("Invalid value passed for \$ret_as: {$ret_as}");
                     break;
             }
-        } else {
-            return false;
         }
+        
+        return false;
     }
 
     /**

@@ -460,9 +460,9 @@ class Filesystem extends AbstractAdapter implements
             return parent::getItem($key, $success, $casToken);
         } elseif ($argn > 1) {
             return parent::getItem($key, $success);
-        } else {
-            return parent::getItem($key);
         }
+        
+        return parent::getItem($key);
     }
 
     /**

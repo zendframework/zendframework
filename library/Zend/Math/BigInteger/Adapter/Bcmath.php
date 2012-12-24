@@ -241,9 +241,9 @@ class Bcmath implements AdapterInterface
                 $bytes = $nb . $bytes;
             }
             return $isNegative ? ~$bytes : $bytes;
-        } else {
-            return $bytes;
         }
+        
+        return $bytes;
     }
 
     /**

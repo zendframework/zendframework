@@ -473,9 +473,9 @@ class SetCookie implements MultipleHeaderInterface
 
         if (is_int($this->expires) && $this->expires < $now) {
             return true;
-        } else {
-            return false;
         }
+        
+        return false;
     }
 
     /**

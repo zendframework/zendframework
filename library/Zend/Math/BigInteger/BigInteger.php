@@ -43,9 +43,9 @@ class BigInteger
             return static::getAvailableAdapter();
         } elseif ($adapterName instanceof Adapter\AdapterInterface) {
             return $adapterName;
-        } else {
-            return static::getAdapterPluginManager()->get($adapterName);
         }
+        
+        return static::getAdapterPluginManager()->get($adapterName);
     }
 
     /**

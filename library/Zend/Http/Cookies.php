@@ -348,7 +348,7 @@ class Cookies extends Headers
      */
     public static function fromResponse(Response $response, $ref_uri)
     {
-        $jar = new self();
+        $jar = new self($response->getHeaders());
         $jar->addCookiesFromResponse($response, $ref_uri);
         return $jar;
     }

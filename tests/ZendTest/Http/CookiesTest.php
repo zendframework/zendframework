@@ -27,8 +27,21 @@ class CookiesTest extends \PHPUnit_Framework_TestCase
         $headers->addHeader($header);
         $response->setHeaders($headers);
 
-
         $response = \Zend\Http\Cookies::fromResponse($response, "http://www.zend.com");
+        $this->assertSame($header, $response->getCookie('http://www.zend.com', 'foo'));
+    }
+
+    public function testFromResponseInCookie()
+    {
+        $response = new Response();
+        $headers = new Headers();
+        $header = new \Zend\Http\Header\SetCookie("foo", "bar");
+        $header->setDomain("www.zend.com");
+        $header->setPath("/");
+        $headers->addHeader($header);
+        $response->setHeaders($headers);
+
+        $response = \Zend\Http\Client\Cookies::fromResponse($response, "http://www.zend.com");
         $this->assertSame($header, $response->getCookie('http://www.zend.com', 'foo'));
     }
 }

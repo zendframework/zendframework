@@ -57,7 +57,7 @@ class OpenLdap extends Schema\AbstractItem implements AttributeTypeInterface
                 return $parent->getSyntax();
             }
         }
-        
+
         return $this->syntax;
     }
 
@@ -77,7 +77,7 @@ class OpenLdap extends Schema\AbstractItem implements AttributeTypeInterface
                 return $parent->getMaxLength();
             }
         }
-        
+
         return (int) $maxLength;
     }
 

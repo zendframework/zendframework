@@ -191,7 +191,7 @@ class StringLength extends AbstractValidator
         if (count($this->getMessages())) {
             return false;
         }
-        
+
         return true;
     }
 }

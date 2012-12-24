@@ -238,7 +238,7 @@ class Cookies
                     break;
             }
         }
-        
+
         return false;
     }
 

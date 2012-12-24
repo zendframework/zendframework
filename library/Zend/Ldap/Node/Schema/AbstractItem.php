@@ -72,7 +72,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
-        
+
         return null;
     }
 

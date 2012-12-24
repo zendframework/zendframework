@@ -188,7 +188,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         if (is_array($this->methods)) {
             return array_key_exists($method, $this->methods);
         }
-        
+
         return null;
     }
 

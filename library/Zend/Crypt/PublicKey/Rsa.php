@@ -166,7 +166,7 @@ class Rsa
         if ($this->options->getBinaryOutput()) {
             return $signature;
         }
-        
+
         return base64_encode($signature);
     }
 
@@ -229,7 +229,7 @@ class Rsa
         if ($this->options->getBinaryOutput()) {
             return $encrypted;
         }
-        
+
         return base64_encode($encrypted);
     }
 

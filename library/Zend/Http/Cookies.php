@@ -215,7 +215,7 @@ class Cookies extends Headers
                     break;
             }
         }
-        
+
         return false;
     }
 

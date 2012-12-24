@@ -113,7 +113,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
         if ($this->current() instanceof Ldap\Node) {
             return $this->current()->hasChildren();
         }
-        
+
         return false;
     }
 
@@ -127,7 +127,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
         if ($this->current() instanceof Ldap\Node) {
             return $this->current()->getChildren();
         }
-        
+
         return null;
     }
 
@@ -143,7 +143,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
         if ($this->offsetExists($rdn)) {
             return $this->data[$rdn];
         }
-        
+
         return null;
     }
 

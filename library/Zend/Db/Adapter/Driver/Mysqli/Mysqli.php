@@ -128,7 +128,7 @@ class Mysqli implements DriverInterface
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
             return 'Mysql';
         }
-        
+
         return 'MySQL';
     }
 

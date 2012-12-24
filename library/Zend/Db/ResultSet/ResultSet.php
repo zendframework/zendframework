@@ -112,7 +112,7 @@ class ResultSet extends AbstractResultSet
             }
             return $ao;
         }
-        
+
         return $data;
     }
 

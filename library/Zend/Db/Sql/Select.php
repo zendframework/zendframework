@@ -744,7 +744,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
             return array($adapter->getDriver()->formatParameterName('offset'));
         }
-        
+
         return array($platform->quoteValue($this->offset));
     }
 

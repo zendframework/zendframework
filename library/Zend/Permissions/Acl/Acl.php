@@ -991,7 +991,7 @@ class Acl
         } elseif (self::TYPE_ALLOW === $rule['type']) {
             return self::TYPE_DENY;
         }
-        
+
         return self::TYPE_ALLOW;
     }
 

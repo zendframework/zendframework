@@ -66,7 +66,7 @@ class DiInstanceManagerProxy extends DiInstanceManager
         if ($this->serviceLocator->has($classOrAlias)) {
             return $this->serviceLocator->get($classOrAlias);
         }
-        
+
         return $this->diInstanceManager->getSharedInstance($classOrAlias);
     }
 }

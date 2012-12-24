@@ -461,7 +461,7 @@ class Filesystem extends AbstractAdapter implements
         } elseif ($argn > 1) {
             return parent::getItem($key, $success);
         }
-        
+
         return parent::getItem($key);
     }
 

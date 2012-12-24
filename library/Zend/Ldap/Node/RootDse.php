@@ -45,7 +45,7 @@ class RootDse extends AbstractNode
         ) {
             return new RootDse\OpenLdap($dn, $data);
         }
-        
+
         return new self($dn, $data);
     }
 

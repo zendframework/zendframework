@@ -260,7 +260,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
         if ($type == null && !is_numeric($name) || $type == self::PARAMETERIZATION_NAMED) {
             return ':' . $name;
         }
-        
+
         return '?';
     }
 

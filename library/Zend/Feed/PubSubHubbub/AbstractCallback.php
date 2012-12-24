@@ -247,7 +247,7 @@ abstract class AbstractCallback implements CallbackInterface
         ) {
             return $name;
         }
-        
+
         return $name . ':' . $port;
     }
 

@@ -542,7 +542,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         if ($found) {
             return array('page' => $found, 'depth' => $foundDepth);
         }
-        
+
         return array();
     }
 

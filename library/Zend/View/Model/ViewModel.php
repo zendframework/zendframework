@@ -223,7 +223,7 @@ class ViewModel implements ModelInterface
         if (array_key_exists($name, $this->variables)) {
             return $this->variables[$name];
         }
-        
+
         return $default;
     }
 

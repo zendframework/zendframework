@@ -101,7 +101,7 @@ class Sqlsrv implements DriverInterface
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
             return 'SqlServer';
         }
-        
+
         return 'SQLServer';
     }
 

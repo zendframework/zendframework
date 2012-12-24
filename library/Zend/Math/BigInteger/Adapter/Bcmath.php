@@ -242,7 +242,7 @@ class Bcmath implements AdapterInterface
             }
             return $isNegative ? ~$bytes : $bytes;
         }
-        
+
         return $bytes;
     }
 

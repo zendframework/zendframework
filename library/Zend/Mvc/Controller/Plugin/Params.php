@@ -48,7 +48,7 @@ class Params extends AbstractPlugin
         if ($name === null) {
             return $this->getController()->getRequest()->getFiles($name, $default)->toArray();
         }
-        
+
         return $this->getController()->getRequest()->getFiles($name, $default);
     }
 
@@ -64,7 +64,7 @@ class Params extends AbstractPlugin
         if ($header === null) {
             return $this->getController()->getRequest()->getHeaders($header, $default)->toArray();
         }
-        
+
         return $this->getController()->getRequest()->getHeaders($header, $default);
     }
 
@@ -80,7 +80,7 @@ class Params extends AbstractPlugin
         if ($param === null) {
             return $this->getController()->getRequest()->getPost($param, $default)->toArray();
         }
-        
+
         return $this->getController()->getRequest()->getPost($param, $default);
     }
 
@@ -96,7 +96,7 @@ class Params extends AbstractPlugin
         if ($param === null) {
             return $this->getController()->getRequest()->getQuery($param, $default)->toArray();
         }
-        
+
         return $this->getController()->getRequest()->getQuery($param, $default);
     }
 
@@ -121,7 +121,7 @@ class Params extends AbstractPlugin
         if ($param === null) {
             return $controller->getEvent()->getRouteMatch()->getParams();
         }
-        
+
         return $controller->getEvent()->getRouteMatch()->getParam($param, $default);
     }
 }

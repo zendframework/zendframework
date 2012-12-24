@@ -63,7 +63,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
             // This is not an Array anymore, return the xsd simple type
             return $this->getContext()->getType($singularType);
         }
-        
+
         return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
     }
 

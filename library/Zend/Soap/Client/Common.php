@@ -56,7 +56,7 @@ class Common extends \SoapClient
         if ($one_way === null) {
             return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version);
         }
-        
+
         return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $one_way);
     }
 

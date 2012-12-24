@@ -196,7 +196,7 @@ class ConfigListener extends AbstractListener implements
             }
             return $this->mergedConfigObject;
         }
-        
+
         return $this->mergedConfig;
     }
 

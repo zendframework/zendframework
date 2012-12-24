@@ -336,7 +336,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         if (isset($this->configurations[$key])) {
             return $this->configurations[$key];
         }
-        
+
         return $this->configurationTemplate;
     }
 

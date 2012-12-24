@@ -44,7 +44,7 @@ class BigInteger
         } elseif ($adapterName instanceof Adapter\AdapterInterface) {
             return $adapterName;
         }
-        
+
         return static::getAdapterPluginManager()->get($adapterName);
     }
 

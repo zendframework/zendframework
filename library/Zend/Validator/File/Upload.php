@@ -207,7 +207,7 @@ class Upload extends AbstractValidator
         if (count($this->getMessages()) > 0) {
             return false;
         }
-        
+
         return true;
     }
 

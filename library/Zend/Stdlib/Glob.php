@@ -44,7 +44,7 @@ abstract class Glob
         if (!defined('GLOB_BRACE') || $forceFallback) {
             return static::fallbackGlob($pattern, $flags);
         }
-        
+
         return static::systemGlob($pattern, $flags);
     }
 

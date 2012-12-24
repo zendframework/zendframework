@@ -231,7 +231,7 @@ class Gmp implements AdapterInterface
             }
             return $isNegative ? ~$bytes : $bytes;
         }
-        
+
         return $bytes;
     }
 

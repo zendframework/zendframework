@@ -211,7 +211,7 @@ class WinCache extends AbstractAdapter implements
             $this->normalizeMetadata($metadata);
             return $metadata;
         }
-        
+
         return false;
     }
 

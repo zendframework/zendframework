@@ -537,7 +537,7 @@ class AbstractFeed
         if (isset($this->data['authors'][$index])) {
             return $this->data['authors'][$index];
         }
-        
+
         return null;
     }
 

@@ -188,8 +188,6 @@ class Rar extends AbstractCompressionAlgorithm
      */
     public function decompress($content)
     {
-        $archive = $this->getArchive();
-
         if (!file_exists($content)) {
             throw new Exception\RuntimeException('RAR Archive not found');
         }

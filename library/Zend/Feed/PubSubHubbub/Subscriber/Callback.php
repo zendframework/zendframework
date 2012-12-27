@@ -93,13 +93,19 @@ class Callback extends PubSubHubbub\AbstractCallback
          * Handle any (un)subscribe confirmation requests
          */
         } elseif ($this->isValidHubVerification($httpGetData)) {
-            $data = $this->currentSubscriptionData;
             $this->getHttpResponse()->setContent($httpGetData['hub_challenge']);
-            $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
-            if (isset($httpGetData['hub_lease_seconds'])) {
-                $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
+
+            if ($httpGetData['hub_mode'] == 'subscribe') {
+            	$data = $this->currentSubscriptionData;
+                $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
+                if (isset($httpGetData['hub_lease_seconds'])) {
+                    $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
+                }
+                $this->getStorage()->setSubscription($data);
+            } else {
+                $verifyTokenKey = $this->_detectVerifyTokenKey($httpGetData);
+                $this->getStorage()->deleteSubscription($verifyTokenKey);
             }
-            $this->getStorage()->setSubscription($data);
         /**
          * Hey, C'mon! We tried everything else!
          */

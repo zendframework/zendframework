@@ -27,7 +27,9 @@ class GenericTag implements TagInterface
      */
     protected $content = null;
 
-    /** @var null|string */
+    /**
+     * @var null|string
+     */
     protected $contentSplitCharacter = null;
 
     /**
@@ -44,7 +46,7 @@ class GenericTag implements TagInterface
     }
 
     /**
-     * @param string $tagDocBlockLine
+     * @param  string $tagDocBlockLine
      * @return void
      */
     public function initialize($tagDocBlockLine)
@@ -62,6 +64,9 @@ class GenericTag implements TagInterface
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -72,6 +77,10 @@ class GenericTag implements TagInterface
         return $this->content;
     }
 
+    /**
+     * @param  integer $position
+     * @return string
+     */
     public function returnValue($position)
     {
         return $this->values[$position];
@@ -90,6 +99,9 @@ class GenericTag implements TagInterface
         return 'DocBlock Tag [ * @' . $this->name . ' ]' . PHP_EOL;
     }
 
+    /**
+     * @param string $docBlockLine
+     */
     protected function parse($docBlockLine)
     {
         $this->content = trim($docBlockLine);

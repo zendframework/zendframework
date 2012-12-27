@@ -19,44 +19,43 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  */
 class LicenseTag extends Tag
 {
-
     /**
      * @var string
      */
     protected $url = null;
 
     /**
-     * fromReflection()
-     *
-     * @param ReflectionDocBlockTag $reflectionTagLicense
+     * @var string
+     */
+    protected $licenseName = null;
+
+    /**
+     * @param  ReflectionDocBlockTag $reflectionTagLicense
      * @return LicenseTag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagLicense)
     {
-        $returnTag = new self();
+        $licenseTag = new self();
+        $licenseTag
+            ->setName('license')
+            ->setUrl($reflectionTagLicense->getUrl())
+            ->setLicenseName($reflectionTagLicense->getDescription());
 
-        $returnTag->setName('license');
-        $returnTag->setUrl($reflectionTagLicense->getUrl());
-        $returnTag->setDescription($reflectionTagLicense->getDescription());
-
-        return $returnTag;
+        return $licenseTag;
     }
 
     /**
-     * setUrl()
-     *
-     * @param string $url
+     * @param  string     $url
      * @return LicenseTag
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
     /**
-     * getUrl()
-     *
      * @return string
      */
     public function getUrl()
@@ -65,12 +64,33 @@ class LicenseTag extends Tag
     }
 
     /**
-     * generate()
-     *
+     * @param  string     $name
+     * @return LicenseTag
+     */
+    public function setLicenseName($name)
+    {
+        $this->licenseName = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicenseName()
+    {
+        return $this->licenseName;
+    }
+
+    /**
      * @return string
      */
     public function generate()
     {
+        $output = '@license '
+            . (($this->url != null) ? $this->url : 'unknown')
+            . (($this->licenseName != null) ? ' ' . $this->licenseName : '');
+
         return $output;
     }
 

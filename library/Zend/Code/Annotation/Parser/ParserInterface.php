@@ -21,7 +21,7 @@ interface ParserInterface
     /**
      * Respond to the "createAnnotation" event
      *
-     * @param  EventInterface $e
+     * @param  EventInterface  $e
      * @return false|\stdClass
      */
     public function onCreateAnnotation(EventInterface $e);

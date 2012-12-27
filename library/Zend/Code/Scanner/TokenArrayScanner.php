@@ -56,6 +56,9 @@ class TokenArrayScanner implements ScannerInterface
         $this->annotationManager = $annotationManager;
     }
 
+    /**
+     * @return AnnotationManager
+     */
     public function getAnnotationManager()
     {
         return $this->annotationManager;
@@ -64,17 +67,19 @@ class TokenArrayScanner implements ScannerInterface
     /**
      * @todo Assignment of $this->docComment should probably be done in scan()
      *       and then $this->getDocComment() just retrieves it.
+     *
+     * @return string
      */
     public function getDocComment()
     {
         foreach ($this->tokens as $token) {
             $type    = $token[0];
             $value   = $token[1];
-            $lineNum = $token[2];
             if (($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
                 continue;
             } elseif ($type == T_DOC_COMMENT) {
                 $this->docComment = $value;
+
                 return $this->docComment;
             } else {
                 // Only whitespace is allowed before file docblocks
@@ -83,6 +88,9 @@ class TokenArrayScanner implements ScannerInterface
         }
     }
 
+    /**
+     * @return array
+     */
     public function getNamespaces()
     {
         $this->scan();
@@ -93,21 +101,24 @@ class TokenArrayScanner implements ScannerInterface
                 $namespaces[] = $info['namespace'];
             }
         }
+
         return $namespaces;
     }
 
     /**
-     * Get uses
-     *
-     * @param null|string $namespace
+     * @param  null|string $namespace
      * @return array|null
      */
     public function getUses($namespace = null)
     {
         $this->scan();
+
         return $this->getUsesNoScan($namespace);
     }
 
+    /**
+     * @return array
+     */
     public function getIncludes()
     {
         $this->scan();
@@ -115,28 +126,25 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * Get class names
-     *
-     * @return string[]
+     * @return array
      */
     public function getClassNames()
     {
         $this->scan();
 
         $return = array();
-
         foreach ($this->infos as $info) {
             if ($info['type'] != 'class') {
                 continue;
             }
+
             $return[] = $info['name'];
         }
+
         return $return;
     }
 
     /**
-     * Get classes
-     *
      * @return ClassScanner[]
      */
     public function getClasses()
@@ -144,20 +152,21 @@ class TokenArrayScanner implements ScannerInterface
         $this->scan();
 
         $return = array();
-
         foreach ($this->infos as $info) {
             if ($info['type'] != 'class') {
                 continue;
             }
+
             $return[] = $this->getClass($info['name']);
         }
+
         return $return;
     }
 
     /**
      * Return the class object from this scanner
      *
-     * @param string|int $name
+     * @param  string|int                         $name
      * @throws Exception\InvalidArgumentException
      * @return ClassScanner
      */
@@ -178,6 +187,7 @@ class TokenArrayScanner implements ScannerInterface
                     break;
                 }
             }
+
             if (!$classFound) {
                 return false;
             }
@@ -194,9 +204,7 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * Get class name information
-     *
-     * @param string $className
+     * @param  string                    $className
      * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)
@@ -210,10 +218,10 @@ class TokenArrayScanner implements ScannerInterface
                 break;
             }
         }
+
         if (!$classFound) {
             return false;
         }
-
 
         if (!isset($info)) {
             return null;
@@ -223,9 +231,7 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * Get function names
-     *
-     * @return string[]
+     * @return array
      */
     public function getFunctionNames()
     {
@@ -236,9 +242,13 @@ class TokenArrayScanner implements ScannerInterface
                 $functionNames[] = $info['name'];
             }
         }
+
         return $functionNames;
     }
 
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         $this->scan();
@@ -249,6 +259,7 @@ class TokenArrayScanner implements ScannerInterface
                 // @todo $functions[] = new FunctionScanner($info['name']);
             }
         }
+
         return $functions;
     }
 
@@ -302,6 +313,7 @@ class TokenArrayScanner implements ScannerInterface
                 $tokenContent = false;
                 $tokenType    = false;
                 $tokenLine    = false;
+
                 return false;
             }
             if (is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"') {
@@ -316,6 +328,7 @@ class TokenArrayScanner implements ScannerInterface
                 $tokenType    = null;
                 $tokenContent = $token;
             }
+
             return $tokenIndex;
         };
         $MACRO_TOKEN_LOGICAL_START_INDEX = function () use (&$tokenIndex, &$docCommentIndex) {
@@ -323,6 +336,7 @@ class TokenArrayScanner implements ScannerInterface
         };
         $MACRO_DOC_COMMENT_START = function () use (&$tokenIndex, &$docCommentIndex) {
             $docCommentIndex = $tokenIndex;
+
             return $docCommentIndex;
         };
         $MACRO_DOC_COMMENT_VALIDATE = function () use (&$tokenType, &$docCommentIndex) {
@@ -333,12 +347,14 @@ class TokenArrayScanner implements ScannerInterface
             if ($docCommentIndex !== false && !in_array($tokenType, $validTrailingTokens)) {
                 $docCommentIndex = false;
             }
+
             return $docCommentIndex;
         };
         $MACRO_INFO_ADVANCE = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;
+
             return $infoIndex;
         };
 
@@ -470,7 +486,6 @@ class TokenArrayScanner implements ScannerInterface
 
                 SCANNER_USE_END:
 
-
                 $MACRO_INFO_ADVANCE();
                 goto SCANNER_CONTINUE;
 
@@ -599,6 +614,11 @@ class TokenArrayScanner implements ScannerInterface
 
     // @todo hasNamespace(), getNamespace()
 
+    /**
+     * @param  string                             $namespace
+     * @return array
+     * @throws Exception\InvalidArgumentException
+     */
     protected function getUsesNoScan($namespace)
     {
         $namespaces = array();

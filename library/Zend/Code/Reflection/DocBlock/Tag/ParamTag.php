@@ -80,6 +80,9 @@ class ParamTag implements TagInterface
         return $this->variableName;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;

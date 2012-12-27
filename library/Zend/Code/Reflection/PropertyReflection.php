@@ -22,6 +22,9 @@ use Zend\Code\Scanner\CachingFileScanner;
  */
 class PropertyReflection extends PhpReflectionProperty implements ReflectionInterface
 {
+    /**
+     * @var AnnotationScanner
+     */
     protected $annotations;
 
     /**
@@ -34,6 +37,7 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
+
         return $zendReflection;
     }
 
@@ -55,13 +59,15 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         if (!($docComment = $this->getDocComment())) {
             return false;
         }
-        $r = new DocBlockReflection($docComment);
-        return $r;
+
+        $docBlockReflection = new DocBlockReflection($docComment);
+
+        return $docBlockReflection;
     }
 
     /**
-     * @param AnnotationManager $annotationManager
-     * @return AnnotationCollection
+     * @param  AnnotationManager $annotationManager
+     * @return AnnotationScanner
      */
     public function getAnnotations(AnnotationManager $annotationManager)
     {

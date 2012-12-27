@@ -51,12 +51,13 @@ class DoctrineAnnotationParser implements ParserInterface
     /**
      * Set the DocParser instance
      *
-     * @param  DocParser $docParser
+     * @param  DocParser                $docParser
      * @return DoctrineAnnotationParser
      */
     public function setDocParser(DocParser $docParser)
     {
         $this->docParser = $docParser;
+
         return $this;
     }
 
@@ -72,13 +73,14 @@ class DoctrineAnnotationParser implements ParserInterface
         if (!$this->docParser instanceof DocParser) {
             $this->setDocParser(new DocParser());
         }
+
         return $this->docParser;
     }
 
     /**
      * Handle annotation creation
      *
-     * @param  EventInterface $e
+     * @param  EventInterface  $e
      * @return false|\stdClass
      */
     public function onCreateAnnotation(EventInterface $e)
@@ -120,19 +122,20 @@ class DoctrineAnnotationParser implements ParserInterface
     /**
      * Specify an allowed annotation class
      *
-     * @param  string $annotation
+     * @param  string                   $annotation
      * @return DoctrineAnnotationParser
      */
     public function registerAnnotation($annotation)
     {
         $this->allowedAnnotations[$annotation] = true;
+
         return $this;
     }
 
     /**
      * Set many allowed annotations at once
      *
-     * @param  array|Traversable $annotations Array or traversable object of
+     * @param array|Traversable $annotations Array or traversable object of
      *         annotation class names
      * @throws Exception\InvalidArgumentException
      * @return DoctrineAnnotationParser
@@ -150,6 +153,7 @@ class DoctrineAnnotationParser implements ParserInterface
         foreach ($annotations as $annotation) {
             $this->allowedAnnotations[$annotation] = true;
         }
+
         return $this;
     }
 }

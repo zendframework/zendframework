@@ -23,8 +23,7 @@ use Zend\Code\Generator\ValueGenerator;
  */
 class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-
-
+    
     public function testTypeGetterAndSetterPersistValue()
     {
         $parameterGenerator = new ParameterGenerator();
@@ -124,7 +123,6 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromReflectionGenerate($methodName, $expectedCode)
     {
-        //$this->markTestSkipped('Test may not be necessary any longer');
         $reflectionParameter = $this->getFirstReflectionParameter($methodName);
         $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
@@ -149,7 +147,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
             array('defaultNumber', '$number = 1234'),
             array('defaultFloat', '$float = 1.34'),
             array('defaultConstant', '$con = \'foo\'')
-            );
+        );
     }
 
 
@@ -159,7 +157,9 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function getFirstReflectionParameter($method)
     {
-        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('ZendTest\Code\Generator\TestAsset\ParameterClass');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection(
+            'ZendTest\Code\Generator\TestAsset\ParameterClass'
+        );
         $method = $reflectionClass->getMethod($method);
 
         $params = $method->getParameters();

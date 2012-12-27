@@ -19,44 +19,38 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  */
 class ReturnTag extends Tag
 {
-
     /**
      * @var string
      */
     protected $datatype = null;
 
     /**
-     * fromReflection()
-     *
-     * @param ReflectionDocBlockTag $reflectionTagReturn
+     * @param  ReflectionDocBlockTag $reflectionTagReturn
      * @return ReturnTag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagReturn)
     {
         $returnTag = new self();
-
-        $returnTag->setName('return');
-        $returnTag->setDatatype($reflectionTagReturn->getType()); // @todo rename
-        $returnTag->setDescription($reflectionTagReturn->getDescription());
+        $returnTag
+            ->setName('return')
+            ->setDatatype($reflectionTagReturn->getType()) // @todo rename
+            ->setDescription($reflectionTagReturn->getDescription());
 
         return $returnTag;
     }
 
     /**
-     * setDatatype()
-     *
-     * @param string $datatype
+     * @param  string    $datatype
      * @return ReturnTag
      */
     public function setDatatype($datatype)
     {
         $this->datatype = $datatype;
+
         return $this;
     }
 
     /**
-     * getDatatype()
-     *
      * @return string
      */
     public function getDatatype()
@@ -64,15 +58,13 @@ class ReturnTag extends Tag
         return $this->datatype;
     }
 
-
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
     {
         $output = '@return ' . $this->datatype . ' ' . $this->description;
+
         return $output;
     }
 

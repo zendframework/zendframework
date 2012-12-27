@@ -14,15 +14,12 @@ use Zend\Code\Exception;
 
 class AggregateDirectoryScanner extends DirectoryScanner
 {
-
     /**
      * @var bool
      */
     protected $isScanned = false;
 
     /**
-     * Get namespaces
-     *
      * @param bool $returnScannerClass
      * @todo not implemented
      */
@@ -51,13 +48,12 @@ class AggregateDirectoryScanner extends DirectoryScanner
                 $classes[$index] = $this->getClass($class, $returnScannerClass, $returnDerivedScannerClass);
             }
         }
+
         return $classes;
     }
 
     /**
-     * Check for a class
-     *
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class)
@@ -74,11 +70,9 @@ class AggregateDirectoryScanner extends DirectoryScanner
     }
 
     /**
-     * Get class
-     *
-     * @param string $class
-     * @param bool $returnScannerClass
-     * @param bool $returnDerivedScannerClass
+     * @param  string                           $class
+     * @param  bool                             $returnScannerClass
+     * @param  bool                             $returnDerivedScannerClass
      * @return ClassScanner|DerivedClassScanner
      * @throws Exception\RuntimeException
      */
@@ -97,6 +91,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
         }
 
         $classScanner = $scanner->getClass($class);
+
         return new DerivedClassScanner($classScanner, $this);
     }
 
@@ -111,6 +106,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
                     $functions[] = $info['name'];
                 }
             }
+
             return $functions;
         }
         $scannerClass = new FunctionScanner();

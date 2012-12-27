@@ -23,7 +23,7 @@ use Zend\Code\Generator\ValueGenerator;
  */
 class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    
+
     public function testTypeGetterAndSetterPersistValue()
     {
         $parameterGenerator = new ParameterGenerator();
@@ -150,9 +150,8 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
-     * @param  string $method
+     * @param  string                               $method
      * @return \Zend\Reflection\ReflectionParameter
      */
     protected function getFirstReflectionParameter($method)
@@ -163,6 +162,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $method = $reflectionClass->getMethod($method);
 
         $params = $method->getParameters();
+
         return array_shift($params);
     }
 }

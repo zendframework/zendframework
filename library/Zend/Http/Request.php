@@ -37,6 +37,7 @@ class Request extends AbstractMessage implements RequestInterface
     const METHOD_TRACE   = 'TRACE';
     const METHOD_CONNECT = 'CONNECT';
     const METHOD_PATCH   = 'PATCH';
+    const METHOD_PROPFIND= 'PROPFIND';
     /**#@-*/
 
     /**

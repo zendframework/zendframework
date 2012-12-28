@@ -101,7 +101,7 @@ class ValidatorChain implements
     {
         $this->validators[] = array(
             'instance'            => $validator,
-            'breakChainOnFailure' => (boolean)$breakChainOnFailure
+            'breakChainOnFailure' => (boolean)$breakChainOnFailure,
         );
         return $this;
     }
@@ -118,11 +118,12 @@ class ValidatorChain implements
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        array_unshift($this->validators,
-                      array(
-                           'instance'            => $validator,
-                           'breakChainOnFailure' => (boolean)$breakChainOnFailure
-                      )
+        array_unshift(
+            $this->validators,
+            array(
+               'instance'            => $validator,
+               'breakChainOnFailure' => (boolean)$breakChainOnFailure,
+            )
         );
         return $this;
     }

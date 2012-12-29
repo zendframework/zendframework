@@ -45,7 +45,7 @@ class Registry
     public static function getRegistry()
     {
         if (null === static::$instance) {
-            static::$instance = new self();
+            static::$instance = new static();
         }
 
         return static::$instance;

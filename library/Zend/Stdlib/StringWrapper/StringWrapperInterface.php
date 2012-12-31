@@ -42,6 +42,15 @@ interface StringWrapperInterface
     public function __construct($encoding, $convertEncoding = null);
 
     /**
+     * Set character encoding working with and convert to
+     *
+     * @param string      $encoding         The character encoding to work with
+     * @param string|null $convertEncoding  The character encoding to convert to
+     * @return StringWrapperInterface
+     */
+    public function setEncoding($encoding, $convertEncoding = null);
+
+    /**
      * Returns the length of the given string
      *
      * @param string $str

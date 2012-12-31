@@ -40,7 +40,7 @@ class MultiByte
         ), E_USER_DEPRECATED);
 
         try {
-            return StringUtils::getWrapper($charset)->wordWrap($string, $width, $break, $cut, $charset);
+            return StringUtils::getWrapper($charset)->wordWrap($string, $width, $break, $cut);
         } catch (\Zend\Stdlib\Exception\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
@@ -63,6 +63,6 @@ class MultiByte
             'Zend\Stdlib\StringUtils::getWrapper(<charset>)->strPad'
         ), E_USER_DEPRECATED);
 
-        return StringUtils::getWrapper($charset)->strPad($input, $padLength, $padString, $padType, $charset);
+        return StringUtils::getWrapper($charset)->strPad($input, $padLength, $padString, $padType);
     }
 }

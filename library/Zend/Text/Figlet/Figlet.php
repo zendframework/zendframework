@@ -415,13 +415,15 @@ class Figlet
         }
 
         // Get the string wrapper supporting UTF-8 character encoding and the input encoding
-        $strWrapper = StringUtils::getWrapper('UTF-8', $encoding);
+        $strWrapper = StringUtils::getWrapper($encoding, 'UTF-8');
 
         // Convert $text to UTF-8 and check encoding
-        $text = $strWrapper->convert($text, 'UTF-8', $encoding);
+        $text = $strWrapper->convert($text);
         if (!StringUtils::isValidUtf8($text)) {
             throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
         }
+
+        $strWrapper = StringUtils::getWrapper('UTF-8');
 
         $this->output     = '';
         $this->outputLine = array();
@@ -433,14 +435,14 @@ class Figlet
 
         $wordBreakMode  = 0;
         $lastCharWasEol = false;
-        $textLength     = $strWrapper->strlen($text, 'UTF-8');
+        $textLength     = $strWrapper->strlen($text);
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
             // Handle paragraphs
-            $char = $strWrapper->substr($text, $charNum, 1, 'UTF-8');
+            $char = $strWrapper->substr($text, $charNum, 1);
 
             if ($char === "\n" && $this->handleParagraphs && !$lastCharWasEol) {
-                $nextChar = $strWrapper->substr($text, ($charNum + 1), 1, 'UTF-8');
+                $nextChar = $strWrapper->substr($text, ($charNum + 1), 1);
                 if (!$nextChar) {
                     $nextChar = null;
                 }

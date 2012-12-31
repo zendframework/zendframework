@@ -109,7 +109,7 @@ class Column
             if (PHP_OS !== 'AIX') {
                 // AIX does not understand these character sets
                 $strWrapper = StringUtils::getWrapper($inputCharset, $outputCharset);
-                $content = $strWrapper->convert($content, $outputCharset, $inputCharset);
+                $content = $strWrapper->convert($content);
             }
 
         }
@@ -206,12 +206,12 @@ class Column
 
         $outputCharset = Table::getOutputCharset();
         $strWrapper    = StringUtils::getWrapper($outputCharset);
-        $lines         = explode("\n", $strWrapper->wordWrap($this->content, $columnWidth, "\n", true, $outputCharset));
+        $lines         = explode("\n", $strWrapper->wordWrap($this->content, $columnWidth, "\n", true));
         $paddedLines   = array();
 
-        foreach ($lines AS $line) {
+        foreach ($lines as $line) {
             $paddedLines[] = str_repeat(' ', $padding)
-                           . $strWrapper->strPad($line, $columnWidth, ' ', $padMode, $outputCharset)
+                           . $strWrapper->strPad($line, $columnWidth, ' ', $padMode)
                            . str_repeat(' ', $padding);
         }
 

@@ -557,7 +557,7 @@ class Hostname extends AbstractValidator
                                     $length = $this->idnLength[strtoupper($this->tld)];
                                 }
 
-                                if ($utf8StrWrapper->strlen($domainPart, 'UTF-8') > $length) {
+                                if ($utf8StrWrapper->strlen($domainPart) > $length) {
                                     $this->error(self::INVALID_HOSTNAME);
                                 } else {
                                     $checked = true;

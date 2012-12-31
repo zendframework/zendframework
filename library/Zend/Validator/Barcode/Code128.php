@@ -10,6 +10,7 @@
 
 namespace Zend\Validator\Barcode;
 
+use Zend\Validator\Exception;
 use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
@@ -84,7 +85,7 @@ class Code128 extends AbstractAdapter
 
     public function setUtf8StringWrapper(StringWrapperInterface $utf8StringWrapper)
     {
-        if (!$utf8StringWrapper->isEncodingSupported('UTF-8')) {
+        if (!$utf8StringWrapper->isSupported('UTF-8')) {
             throw new Exception\InvalidArgumentException(
                 "The string wrapper needs to support UTF-8 character encoding"
             );
@@ -124,12 +125,12 @@ class Code128 extends AbstractAdapter
         $set        = $this->getCodingSet($value);
         $read       = $set;
         if ($set != '') {
-            $value = $strWrapper->substr($value, 1, null, 'UTF-8');
+            $value = $strWrapper->substr($value, 1, null);
         }
 
         // process barcode
         while ($value != '') {
-            $char = $strWrapper->substr($value, 0, 1, 'UTF-8');
+            $char = $strWrapper->substr($value, 0, 1);
 
             switch ($char) {
                 // Function definition
@@ -185,11 +186,11 @@ class Code128 extends AbstractAdapter
                     break;
             }
 
-            $value = $strWrapper->substr($value, 1, null, 'UTF-8');
+            $value = $strWrapper->substr($value, 1, null);
             $read  = $set;
         }
 
-        if (($value != '') && ($strWrapper->strlen($value, 'UTF-8') != 1)) {
+        if (($value != '') && ($strWrapper->strlen($value) != 1)) {
             return false;
         }
 
@@ -210,7 +211,7 @@ class Code128 extends AbstractAdapter
         $read       = $set;
         $usecheck   = $this->useChecksum(null);
         $strWrapper = $this->getUtf8StringWrapper();
-        $char       = $strWrapper->substr($value, 0, 1, 'UTF-8');
+        $char       = $strWrapper->substr($value, 0, 1);
         if ($char == '‡') {
             $sum = 103;
         } elseif ($char == 'ˆ') {
@@ -222,11 +223,11 @@ class Code128 extends AbstractAdapter
             return false;
         }
 
-        $value = $strWrapper->substr($value, 1, null, 'UTF-8');
-        while ($strWrapper->strpos($value, 'Š', 0, 'UTF-8') || ($value != '')) {
-            $char = $strWrapper->substr($value, 0, 1, 'UTF-8');
+        $value = $strWrapper->substr($value, 1, null);
+        while ($strWrapper->strpos($value, 'Š') || ($value != '')) {
+            $char = $strWrapper->substr($value, 0, 1);
             if ($read == 'C') {
-                $char = $strWrapper->substr($value, 0, 2, 'UTF-8');
+                $char = $strWrapper->substr($value, 0, 2);
             }
 
             switch ($char) {
@@ -283,22 +284,22 @@ class Code128 extends AbstractAdapter
                     break;
             }
 
-            $value = $strWrapper->substr($value, 1, null, 'UTF-8');
+            $value = $strWrapper->substr($value, 1);
             ++$pos;
-            if (($strWrapper->strpos($value, 'Š', 0, 'UTF-8') == 1) && ($strWrapper->strlen($value, 'UTF-8') == 2)) {
+            if (($strWrapper->strpos($value, 'Š') == 1) && ($strWrapper->strlen($value) == 2)) {
                 // break by stop and checksum char
                 break;
             }
             $read  = $set;
         }
 
-        if (($strWrapper->strpos($value, 'Š', 0, 'UTF-8') != 1) || ($strWrapper->strlen($value, 'UTF-8') != 2)) {
+        if (($strWrapper->strpos($value, 'Š') != 1) || ($strWrapper->strlen($value) != 2)) {
             // return false if checksum is not readable and true if no startvalue is detected
             return (!$usecheck);
         }
 
         $mod = $sum % 103;
-        if ($strWrapper->substr($value, 0, 1, 'UTF-8') == $this->chr128($mod, $set)) {
+        if ($strWrapper->substr($value, 0, 1) == $this->chr128($mod, $set)) {
             return true;
         }
 
@@ -313,7 +314,7 @@ class Code128 extends AbstractAdapter
      */
     protected function getCodingSet($value)
     {
-        $value = $this->getUtf8StringWrapper()->substr($value, 0, 1, 'UTF-8');
+        $value = $this->getUtf8StringWrapper()->substr($value, 0, 1);
         switch ($value) {
             case '‡' :
                 return 'A';

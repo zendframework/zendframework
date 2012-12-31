@@ -407,7 +407,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         for ($x = 1; $x <= $cols; $x += 1) {
             $maxW[$x] = 0;
             foreach ($data as $row) {
-                $maxW[$x] = max($maxW[$x], $strWrapper->strlen($row[$x-1],'UTF-8') + $padding * 2);
+                $maxW[$x] = max($maxW[$x], $strWrapper->strlen($row[$x-1]) + $padding * 2);
             }
         }
 

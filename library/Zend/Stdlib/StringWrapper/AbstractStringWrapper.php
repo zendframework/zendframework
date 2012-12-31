@@ -72,7 +72,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param string|null $convertEncoding  The character encoding to convert to
      * @return StringWrapperInterface
      */
-    public function setEncoding($encoding, $convertEncoding)
+    public function setEncoding($encoding, $convertEncoding = null)
     {
         $supportedEncodings = static::getSupportedEncodings();
 

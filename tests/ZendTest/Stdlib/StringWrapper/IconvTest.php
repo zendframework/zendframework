@@ -21,14 +21,26 @@ class IconvTest extends CommonStringWrapperTest
     {
         if (!extension_loaded('iconv')) {
             try {
-                new Iconv();
+                new Iconv('utf-8');
                 $this->fail('Missing expected Zend\Stdlib\Exception\ExtensionNotLoadedException');
             } catch (Exception\ExtensionNotLoadedException $e) {
                 $this->markTestSkipped('Missing ext/iconv');
             }
         }
 
-        $this->stringWrapper = new Iconv();
         parent::setUp();
+    }
+
+    protected function getWrapper($encoding = null, $convertEncoding = null)
+    {
+        if ($encoding === null) {
+            $supportedEncodings = Iconv::getSupportedEncodings();
+            $encoding = array_shift($supportedEncodings);
+        }
+
+        if (!Iconv::isSupported($encoding, $convertEncoding)) {
+            return false;
+        }
+        return new Iconv($encoding, $convertEncoding);
     }
 }

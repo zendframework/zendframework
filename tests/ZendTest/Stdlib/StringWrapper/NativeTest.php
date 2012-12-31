@@ -16,9 +16,16 @@ use Zend\Stdlib\StringWrapper\Native;
 class NativeTest extends CommonStringWrapperTest
 {
 
-    public function setUp()
+    protected function getWrapper($encoding = null, $convertEncoding = null)
     {
-        $this->stringWrapper = new Native();
-        parent::setUp();
+        if ($encoding === null) {
+            $supportedEncodings = Native::getSupportedEncodings();
+            $encoding = array_shift($supportedEncodings);
+        }
+
+        if (!Native::isSupported($encoding, $convertEncoding)) {
+            return false;
+        }
+        return new Native($encoding, $convertEncoding);
     }
 }

@@ -17,30 +17,37 @@ namespace Zend\Stdlib\StringWrapper;
  */
 interface StringWrapperInterface
 {
-
     /**
-     * Check if the given character encoding is supported
+     * Check if the given character encoding is supported by this wrapper
+     * and the character encoding to convert to is also supported.
      *
-     * @param string $encoding
-     * @return boolean
+     * @param string      $encoding
+     * @param string|null $convertEncoding
      */
-    public function isEncodingSupported($encoding);
+    public static function isSupported($encoding, $convertEncoding = null);
 
     /**
      * Get a list of supported character encodings
      *
      * @return string[]
      */
-    public function getSupportedEncodings();
+    public static function getSupportedEncodings();
+
+    /**
+     * Constructor
+     *
+     * @param string      $encoding        Character encoding working on
+     * @param string|null $convertEncoding Character encoding to convert to
+     */
+    public function __construct($encoding, $convertEncoding = null);
 
     /**
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $encoding = 'UTF-8');
+    public function strlen($str);
 
     /**
      * Returns the portion of string specified by the start and length parameters
@@ -51,7 +58,7 @@ interface StringWrapperInterface
      * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8');
+    public function substr($str, $offset = 0, $length = null);
 
     /**
      * Find the position of the first occurrence of a substring in a string
@@ -62,17 +69,16 @@ interface StringWrapperInterface
      * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8');
+    public function strpos($haystack, $needle, $offset = 0);
 
     /**
      * Convert a string from one character encoding to another
      *
-     * @param string $str
-     * @param string $toEncoding
-     * @param string $fromEncoding
+     * @param string  $str
+     * @param boolean $backward
      * @return string|false
      */
-    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8');
+    public function convert($str, $backward = false);
 
     /**
      * Wraps a string to a given number of characters
@@ -81,10 +87,9 @@ interface StringWrapperInterface
      * @param  integer $width
      * @param  string  $break
      * @param  boolean $cut
-     * @param  string  $encoding
      * @return string
      */
-    public function wordWrap($str, $width = 75, $break = "\n", $cut = false, $encoding = 'UTF-8');
+    public function wordWrap($str, $width = 75, $break = "\n", $cut = false);
 
     /**
      * Pad a string to a certain length with another string
@@ -93,8 +98,7 @@ interface StringWrapperInterface
      * @param  integer $padLength
      * @param  string  $padString
      * @param  integer $padType
-     * @param  string  $encoding
      * @return string
      */
-    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $encoding = 'UTF-8');
+    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT);
 }

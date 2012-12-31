@@ -10,6 +10,8 @@
 
 namespace Zend\Stdlib\StringWrapper;
 
+use Zend\Stdlib\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Stdlib
@@ -22,20 +24,32 @@ class Intl extends AbstractStringWrapper
      *
      * @var string[]
      */
-    protected $encodings = array('UTF-8');
+    protected static $encodings = array('UTF-8');
+
+    /**
+     * Get a list of supported character encodings
+     *
+     * @return string[]
+     */
+    public static function getSupportedEncodings()
+    {
+        return static::$encodings;
+    }
 
     /**
      * Constructor
      *
      * @throws Exception\ExtensionNotLoadedException
      */
-    public function __construct()
+    public function __construct($encoding, $convertEncoding = null)
     {
         if (!extension_loaded('intl')) {
             throw new Exception\ExtensionNotLoadedException(
                 'PHP extension "intl" is required for this wrapper'
             );
         }
+
+        parent::__construct($encoding, $convertEncoding);
     }
 
     /**
@@ -45,7 +59,7 @@ class Intl extends AbstractStringWrapper
      * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $encoding = 'UTF-8')
+    public function strlen($str)
     {
         return grapheme_strlen($str);
     }
@@ -59,7 +73,7 @@ class Intl extends AbstractStringWrapper
      * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null)
     {
         return grapheme_substr($str, $offset, $length);
     }
@@ -73,7 +87,7 @@ class Intl extends AbstractStringWrapper
      * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0)
     {
         return grapheme_strpos($haystack, $needle, $offset);
     }

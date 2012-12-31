@@ -10,6 +10,8 @@
 
 namespace Zend\Stdlib\StringWrapper;
 
+use Zend\Stdlib\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Stdlib
@@ -23,7 +25,7 @@ class Iconv extends AbstractStringWrapper
      * @var string[]
      * @link http://www.gnu.org/software/libiconv/
      */
-    protected $encodings = array(
+    protected static $encodings = array(
         // European languages
         'ASCII',
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5', 'ISO-8859-7',
@@ -115,17 +117,29 @@ class Iconv extends AbstractStringWrapper
     );
 
     /**
+     * Get a list of supported character encodings
+     *
+     * @return string[]
+     */
+    public static function getSupportedEncodings()
+    {
+        return static::$encodings;
+    }
+
+    /**
      * Constructor
      *
      * @throws Exception\ExtensionNotLoadedException
      */
-    public function __construct()
+    public function __construct($encoding, $convertEncoding = null)
     {
         if (!extension_loaded('iconv')) {
             throw new Exception\ExtensionNotLoadedException(
                 'PHP extension "iconv" is required for this wrapper'
             );
         }
+
+        parent::__construct($encoding, $convertEncoding);
     }
 
     /**
@@ -135,9 +149,9 @@ class Iconv extends AbstractStringWrapper
      * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $encoding = 'UTF-8')
+    public function strlen($str)
     {
-        return iconv_strlen($str, $encoding);
+        return iconv_strlen($str, $this->encoding);
     }
 
     /**
@@ -149,9 +163,9 @@ class Iconv extends AbstractStringWrapper
      * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null)
     {
-        return iconv_substr($str, $offset, $length, $encoding);
+        return iconv_substr($str, $offset, $length, $this->encoding);
     }
 
     /**
@@ -163,9 +177,9 @@ class Iconv extends AbstractStringWrapper
      * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0)
     {
-        return iconv_strpos($haystack, $needle, $offset, $encoding);
+        return iconv_strpos($haystack, $needle, $offset, $this->encoding);
     }
 
     /**
@@ -176,8 +190,10 @@ class Iconv extends AbstractStringWrapper
      * @param string $fromEncoding
      * @return string|false
      */
-    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
+    public function convert($str, $backword = false)
     {
+        $fromEncoding = $backword ? $this->convertEncoding : $this->encoding;
+        $toEncoding   = $backword ? $this->encoding : $this->convertEncoding;
         return iconv($fromEncoding, $toEncoding, $str);
     }
 }

@@ -17,286 +17,269 @@ use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
 abstract class CommonStringWrapperTest extends TestCase
 {
-
-    /**
-     * An instance of the string wrapper to test
-     * @StringWrapperInterface
-     */
-    protected $stringWrapper;
-
-    public function setUp()
-    {
-        if ( !($this->stringWrapper instanceof StringWrapperInterface) ) {
-            $this->fail(sprintf(
-                "%s isn't an instance of %s",
-                get_class($this) . '::stringWrapper',
-                'Zend\Stdlib\StringWrapper\StringWrapperInterface'
-            ));
-        }
-    }
+    abstract protected function getWrapper($encoding = null, $convertEncoding = null);
 
     public function strlenProvider()
     {
         return array(
-            array('abcdefghijklmnopqrstuvwxyz', 'ascii', 26),
-            array('abcdefghijklmnopqrstuvwxyz', 'utf-8', 26),
-            array('äöüß',                       'utf-8', 4),
+            array('ascii', 'abcdefghijklmnopqrstuvwxyz', 26),
+            array('utf-8', 'abcdefghijklmnopqrstuvwxyz', 26),
+            array('utf-8', 'äöüß',                       4),
         );
     }
 
     /**
      * @dataProvider strlenProvider
-     * @param string $string
      * @param string $encoding
+     * @param string $string
      * @param mixed  $expected
      */
-    public function testStrlen($str, $encoding, $expected)
+    public function testStrlen($encoding, $str, $expected)
     {
-        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
-            $this->markTestSkipped(
-                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
-            );
+        $wrapper = $this->getWrapper($encoding);
+        if (!$wrapper) {
+            $this->markTestSkipped("Encoding {$encoding} not supported");
         }
 
-        $result = $this->stringWrapper->strlen($str, $encoding);
+        $result = $wrapper->strlen($str);
         $this->assertSame($expected, $result);
     }
 
     public function substrProvider()
     {
         return array(
-            array('abcdefghijkl', 1, 5, 'ascii', 'bcdef'),
-            array('abcdefghijkl', 1, 5, 'utf-8', 'bcdef'),
-            array('äöüß',         1, 2, 'utf-8', 'öü'),
+            array('ascii', 'abcdefghijkl', 1, 5, 'bcdef'),
+            array('utf-8', 'abcdefghijkl', 1, 5, 'bcdef'),
+            array('utf-8', 'äöüß',         1, 2, 'öü'),
         );
     }
 
     /**
      * @dataProvider substrProvider
+     * @param string   $encoding
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $encoding
      * @param mixed    $expected
      */
-    public function testSubstr($str, $offset, $length, $encoding, $expected)
+    public function testSubstr($encoding, $str, $offset, $length, $expected)
     {
-        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
-            $this->markTestSkipped(
-                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
-            );
+        $wrapper = $this->getWrapper($encoding);
+        if (!$wrapper) {
+            $this->markTestSkipped("Encoding {$encoding} not supported");
         }
 
-        $result = $this->stringWrapper->substr($str, $offset, $length, $encoding);
+        $result = $wrapper->substr($str, $offset, $length);
         $this->assertSame($expected, $result);
     }
 
     public function strposProvider()
     {
         return array(
-            array('abcdefghijkl', 'g', 3, 'ascii', 6),
-            array('abcdefghijkl', 'g', 3, 'utf-8', 6),
-            array('äöüß',         'ü', 1, 'utf-8', 2),
+            array('ascii', 'abcdefghijkl', 'g', 3, 6),
+            array('utf-8', 'abcdefghijkl', 'g', 3, 6),
+            array('utf-8', 'äöüß',         'ü', 1, 2),
         );
     }
 
     /**
      * @dataProvider strposProvider
+     * @param string $encoding
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $encoding
      * @param mixed  $expected
      */
-    public function testStrpos($haystack, $needle, $offset, $encoding, $expected)
+    public function testStrpos($encoding, $haystack, $needle, $offset, $expected)
     {
-        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
-            $this->markTestSkipped(
-                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
-            );
+        $wrapper = $this->getWrapper($encoding);
+        if (!$wrapper) {
+            $this->markTestSkipped("Encoding {$encoding} not supported");
         }
 
-        $result = $this->stringWrapper->strpos($haystack, $needle, $offset, $encoding);
+        $result = $wrapper->strpos($haystack, $needle, $offset);
         $this->assertSame($expected, $result);
     }
 
     public function convertProvider()
     {
         return array(
-            array('abc', 'ascii',       'ascii', 'abc'),
-            array('abc', 'utf-8',       'ascii', 'abc'),
-            array('abc', 'ascii',       'utf-8', 'abc'),
-            array('€',   'iso-8859-15', 'utf-8', "\xA4"),
-            array('€',   'iso-8859-16', 'utf-8', "\xA4"), // ISO-8859-16 is wrong @ mbstring
+            array('ascii', 'ascii', 'abc', 'abc'),
+            array('ascii', 'utf-8', 'abc', 'abc'),
+            array('utf-8', 'ascii', 'abc', 'abc'),
+            array('utf-8', 'iso-8859-15', '€',   "\xA4"),
+            array('utf-8', 'iso-8859-16', '€',   "\xA4"), // ISO-8859-16 is wrong @ mbstring
         );
     }
 
     /**
      * @dataProvider convertProvider
      * @param string $str
-     * @param string $toEncoding
-     * @param string $fromEncoding
+     * @param string $encoding
+     * @param string $convertEncoding
      * @param mixed  $expected
      */
-    public function testConvert($str, $toEncoding, $fromEncoding, $expected)
+    public function testConvert($encoding, $convertEncoding, $str, $expected)
     {
-        if (!$this->stringWrapper->isEncodingSupported($toEncoding)) {
-            $this->markTestSkipped(
-                "Encoding {$toEncoding} not supported by " . get_class($this->stringWrapper)
-            );
-        } elseif (!$this->stringWrapper->isEncodingSupported($fromEncoding)) {
-            $this->markTestSkipped(
-                "Encoding {$fromEncoding} not supported by " . get_class($this->stringWrapper)
-            );
+        $wrapper = $this->getWrapper($encoding, $convertEncoding);
+        if (!$wrapper) {
+            $this->markTestSkipped("Encoding {$encoding} or {$convertEncoding} not supported");
         }
 
-        $result = $this->stringWrapper->convert($str, $toEncoding, $fromEncoding);
+        $result = $wrapper->convert($str);
         $this->assertSame($expected, $result);
+
+        // backword
+        $result = $wrapper->convert($expected, true);
+        $this->assertSame($str, $result);
     }
 
     public function wordWrapProvider()
     {
         return array(
             // Standard cut tests
-            array('äbüöcß', 2, ' ', true, 'utf-8',
+            array('utf-8', 'äbüöcß', 2, ' ', true,
                  'äb üö cß'),
-            array('äbüöc ß äbüöcß', 2, ' ', true, 'utf-8',
+            array('utf-8', 'äbüöc ß äbüöcß', 2, ' ', true,
                   'äb üö c ß äb üö cß'),
-            array('Ä very long wöööööööööööörd.', 8, "\n", true, 'utf-8',
+            array('utf-8', 'Ä very long wöööööööööööörd.', 8, "\n", true,
                   "Ä very\nlong\nwööööööö\nööööörd."),
-            array("Ä very\nlong wöööööööööööörd.", 8, "\n", false, 'utf-8',
+            array('utf-8', "Ä very\nlong wöööööööööööörd.", 8, "\n", false,
                   "Ä very\nlong\nwöööööööööööörd."),
-            array("Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false, 'utf-8',
+            array('utf-8', "Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false,
                   "Ä very<br>long wöö<br>öööööööö<br>öörd."),
 
             // Alternative cut tests
-            array(' äüöäöü', 3, ' ', true, 'utf-8',
+            array('utf-8', ' äüöäöü', 3, ' ', true,
                   ' äüö äöü'),
-            array('äüöäöü ', 3, ' ', true, 'utf-8',
+            array('utf-8', 'äüöäöü ', 3, ' ', true,
                   'äüö äöü '),
-            array('äöüäöü ', 3, '-', true, 'utf-8',
+            array('utf-8', 'äöüäöü ', 3, '-', true,
                   'äöü-äöü-'),
-            array('äüöäöü  ', 3, ' ', true, 'utf-8',
+            array('utf-8', 'äüöäöü  ', 3, ' ', true,
                   'äüö äöü  '),
-            array('12345 ', 5, '-', false, 'utf-8',
+            array('utf-8', '12345 ', 5, '-', false,
                   '12345-'),
-            array('12345  ', 5, '-', false, 'utf-8',
+            array('utf-8', '12345  ', 5, '-', false,
                   '12345- '),
-            array('äüöäöü  ', 3, ' ', true, 'utf-8',
+            array('utf-8', 'äüöäöü  ', 3, ' ', true,
                   'äüö äöü  '),
-            array('äüöäöü--', 3, '-', true, 'utf-8',
+            array('utf-8', 'äüöäöü--', 3, '-', true,
                   'äüö-äöü--'),
-            array("äbü\töcß", 3, ' ', true, 'utf-8',
+            array('utf-8', "äbü\töcß", 3, ' ', true,
                   "äbü \töc ß"),
-            array("äbü\nößt", 3, ' ', true, 'utf-8',
+            array('utf-8', "äbü\nößt", 3, ' ', true,
                   "äbü \nöß t"),
-            array("äbü\nößte", 3, "\n", true, 'utf-8',
+            array('utf-8', "äbü\nößte", 3, "\n", true,
                   "äbü\nößt\ne"),
 
             // Break cut tests
-            array('foobar-foofoofoo', 8, '-', true, 'ascii',
+            array('ascii', 'foobar-foofoofoo', 8, '-', true,
                   'foobar-foofoofo-o'),
-            array('foobar-foobar', 6, '-', true, 'ascii',
+            array('ascii', 'foobar-foobar', 6, '-', true,
                   'foobar-foobar'),
-            array('foobar-foobar', 7, '-', true, 'ascii',
+            array('ascii', 'foobar-foobar', 7, '-', true,
                   'foobar-foobar'),
-            array('foobar-', 7, '-', true, 'ascii',
+            array('ascii', 'foobar-', 7, '-', true,
                   'foobar-'),
-            array('foobar-foobar', 5, '-', true, 'ascii',
+            array('ascii', 'foobar-foobar', 5, '-', true,
                   'fooba-r-fooba-r'),
 
             // Standard no-cut tests
-            array('äbüöcß', 2, ' ', false, 'utf-8',
+            array('utf-8', 'äbüöcß', 2, ' ', false,
                   'äbüöcß'),
-            array('äbüöc ß äbüöcß', 2, "\n", false, 'utf-8',
+            array('utf-8', 'äbüöc ß äbüöcß', 2, "\n", false,
                   "äbüöc\nß\näbüöcß"),
-            array('äöü äöü äöü', 5, "\n", false, 'utf-8',
+            array('utf-8', 'äöü äöü äöü', 5, "\n", false,
                   "äöü\näöü\näöü"),
 
             // Break no-cut tests
-            array('foobar-foofoofoo', 8, '-', false, 'ascii',
+            array('ascii', 'foobar-foofoofoo', 8, '-', false,
                   'foobar-foofoofoo'),
-            array('foobar-foobar', 6, '-', false, 'ascii',
+            array('ascii', 'foobar-foobar', 6, '-', false,
                   'foobar-foobar'),
-            array('foobar-foobar', 7, '-', false, 'ascii',
+            array('ascii', 'foobar-foobar', 7, '-', false,
                   'foobar-foobar'),
-            array('foobar-', 7, '-', false, 'ascii',
+            array('ascii', 'foobar-', 7, '-', false,
                   'foobar-'),
-            array('foobar-foobar', 5, '-', false, 'ascii',
+            array('ascii', 'foobar-foobar', 5, '-', false,
                   'foobar-foobar'),
         );
     }
 
     /**
      * @dataProvider wordWrapProvider
+     * @param string  $encoding
      * @param string  $str
      * @param integer $width
      * @param string  $break
      * @param boolean $cut
-     * @param string  $encoding
      * @param mixed   $expected
      */
-    public function testWordWrap($string, $width, $break, $cut, $encoding, $expected)
+    public function testWordWrap($encoding, $string, $width, $break, $cut, $expected)
     {
-        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
-            $this->markTestSkipped(
-                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
-            );
+        $wrapper = $this->getWrapper($encoding);
+        if (!$wrapper) {
+            $this->markTestSkipped("Encoding {$encoding} not supported");
         }
 
-        $result = $this->stringWrapper->wordWrap($string, $width, $break, $cut, $encoding);
+        $result = $wrapper->wordWrap($string, $width, $break, $cut);
         $this->assertSame($expected, $result);
     }
 
     public function testWordWrapInvalidArgument()
     {
+        $wrapper = $this->getWrapper();
+        if (!$wrapper) {
+            $this->fail("Can't instantiate wrapper");
+        }
+
         $this->setExpectedException(
             'Zend\Stdlib\Exception\InvalidArgumentException',
             "Cannot force cut when width is zero"
         );
-        $this->stringWrapper->wordWrap('a', 0, "\n", true);
+        $wrapper->wordWrap('a', 0, "\n", true);
     }
 
     public function strPadProvider()
     {
         return array(
             // single-byte
-            array('aaa', 5, 'o', STR_PAD_LEFT, 'ascii', 'ooaaa'),
-            array('aaa', 6, 'o', STR_PAD_BOTH, 'ascii', 'oaaaoo'),
-            array('aaa', 5, 'o', STR_PAD_RIGHT, 'ascii', 'aaaoo'),
+            array('ascii', 'aaa', 5, 'o', STR_PAD_LEFT, 'ooaaa'),
+            array('ascii', 'aaa', 6, 'o', STR_PAD_BOTH, 'oaaaoo'),
+            array('ascii', 'aaa', 5, 'o', STR_PAD_RIGHT, 'aaaoo'),
 
             // multi-byte
-            array('äää', 5, 'ö', STR_PAD_LEFT, 'utf-8', 'ööäää'),
-            array('äää', 6, 'ö', STR_PAD_BOTH, 'utf-8', 'öäääöö'),
-            array('äää', 5, 'ö', STR_PAD_RIGHT, 'utf-8', 'äääöö'),
+            array('utf-8', 'äää', 5, 'ö', STR_PAD_LEFT, 'ööäää'),
+            array('utf-8', 'äää', 6, 'ö', STR_PAD_BOTH, 'öäääöö'),
+            array('utf-8', 'äää', 5, 'ö', STR_PAD_RIGHT, 'äääöö'),
 
             // ZF-12186
-            array('äääöö', 2, 'ö', STR_PAD_RIGHT, 'utf-8', 'äääöö'),  // PadInputLongerThanPadLength
-            array('äääöö', 5, 'ö', STR_PAD_RIGHT, 'utf-8', 'äääöö'),  // PadInputSameAsPadLength
-            array('äääöö', -2, 'ö', STR_PAD_RIGHT, 'utf-8', 'äääöö'), // PadNegativePadLength
+            array('utf-8', 'äääöö', 2, 'ö', STR_PAD_RIGHT, 'äääöö'),  // PadInputLongerThanPadLength
+            array('utf-8', 'äääöö', 5, 'ö', STR_PAD_RIGHT, 'äääöö'),  // PadInputSameAsPadLength
+            array('utf-8', 'äääöö', -2, 'ö', STR_PAD_RIGHT, 'äääöö'), // PadNegativePadLength
         );
     }
 
     /**
      * @dataProvider strPadProvider
+     * @param  string  $encoding
      * @param  string  $input
      * @param  integer $padLength
      * @param  string  $padString
      * @param  integer $padType
-     * @param  string  $encoding
      * @param mixed   $expected
      *
      * @group ZF-12186
      */
-    public function testStrPad($input, $padLength, $padString, $padType, $encoding, $expected)
+    public function testStrPad($encoding, $input, $padLength, $padString, $padType, $expected)
     {
-        if (!$this->stringWrapper->isEncodingSupported($encoding)) {
-            $this->markTestSkipped(
-                "Encoding {$encoding} not supported by " . get_class($this->stringWrapper)
-            );
+        $wrapper = $this->getWrapper($encoding);
+        if (!$wrapper) {
+            $this->markTestSkipped("Encoding {$encoding} not supported");
         }
 
-        $result = $this->stringWrapper->strPad($input, $padLength, $padString, $padType, $encoding);
+        $result = $wrapper->strPad($input, $padLength, $padString, $padType);
         $this->assertSame($expected, $result);
     }
 }

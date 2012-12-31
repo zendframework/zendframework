@@ -21,14 +21,26 @@ class MbStringTest extends CommonStringWrapperTest
     {
         if (!extension_loaded('mbstring')) {
             try {
-                new MbString();
+                new MbString('utf-8');
                 $this->fail('Missing expected Zend\Stdlib\Exception\ExtensionNotLoadedException');
             } catch (Exception\ExtensionNotLoadedException $e) {
                 $this->markTestSkipped('Missing ext/mbstring');
             }
         }
 
-        $this->stringWrapper = new MbString();
         parent::setUp();
+    }
+
+    protected function getWrapper($encoding = null, $convertEncoding = null)
+    {
+        if ($encoding === null) {
+            $supportedEncodings = MbString::getSupportedEncodings();
+            $encoding = array_shift($supportedEncodings);
+        }
+
+        if (!MbString::isSupported($encoding, $convertEncoding)) {
+            return false;
+        }
+        return new MbString($encoding, $convertEncoding);
     }
 }

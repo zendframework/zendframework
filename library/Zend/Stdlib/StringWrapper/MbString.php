@@ -10,6 +10,8 @@
 
 namespace Zend\Stdlib\StringWrapper;
 
+use Zend\Stdlib\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Stdlib
@@ -20,17 +22,37 @@ class MbString extends AbstractStringWrapper
     /**
      * List of supported character sets (upper case)
      *
-     * @var string[]
+     * @var null|string[]
      * @link http://php.net/manual/mbstring.supported-encodings.php
      */
-    protected $encodings = array();
+    protected static $encodings = null;
+
+    /**
+     * Get a list of supported character encodings
+     *
+     * @return string[]
+     */
+    public static function getSupportedEncodings()
+    {
+        if (static::$encodings === null) {
+            static::$encodings = array_map('strtoupper', mb_list_encodings());
+
+            // FIXME: Converting € (UTF-8) to ISO-8859-16 gives a wrong result
+            $indexIso885916 = array_search('ISO-8859-16', static::$encodings, true);
+            if ($indexIso885916 !== false) {
+                unset(static::$encodings[$indexIso885916]);
+            }
+        }
+
+        return static::$encodings;
+    }
 
     /**
      * Constructor
      *
      * @throws Exception\ExtensionNotLoadedException
      */
-    public function __construct()
+    public function __construct($encoding, $convertEncoding = null)
     {
         if (!extension_loaded('mbstring')) {
             throw new Exception\ExtensionNotLoadedException(
@@ -38,13 +60,7 @@ class MbString extends AbstractStringWrapper
             );
         }
 
-        $this->encodings = array_map('strtoupper', mb_list_encodings());
-
-        // FIXME: Converting € (UTF-8) to ISO-8859-16 gives a wrong result
-        $indexIso885916 = array_search('ISO-8859-16', $this->encodings, true);
-        if ($indexIso885916 !== false) {
-            unset($this->encodings[$indexIso885916]);
-        }
+        parent::__construct($encoding, $convertEncoding);
     }
 
     /**
@@ -54,9 +70,9 @@ class MbString extends AbstractStringWrapper
      * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $encoding = 'UTF-8')
+    public function strlen($str)
     {
-        return mb_strlen($str, $encoding);
+        return mb_strlen($str, $this->encoding);
     }
 
     /**
@@ -68,9 +84,9 @@ class MbString extends AbstractStringWrapper
      * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null)
     {
-        return mb_substr($str, $offset, $length, $encoding);
+        return mb_substr($str, $offset, $length, $this->encoding);
     }
 
     /**
@@ -82,9 +98,9 @@ class MbString extends AbstractStringWrapper
      * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0)
     {
-        return mb_strpos($haystack, $needle, $offset, $encoding);
+        return mb_strpos($haystack, $needle, $offset, $this->encoding);
     }
 
     /**
@@ -95,8 +111,10 @@ class MbString extends AbstractStringWrapper
      * @param string $fromEncoding
      * @return string|false
      */
-    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
+    public function convert($str, $backword = false)
     {
+        $fromEncoding = $backword ? $this->convertEncoding : $this->encoding;
+        $toEncoding   = $backword ? $this->encoding : $this->convertEncoding;
         return mb_convert_encoding($str, $toEncoding, $fromEncoding);
     }
 }

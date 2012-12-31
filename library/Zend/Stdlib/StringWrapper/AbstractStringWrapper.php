@@ -20,51 +20,108 @@ use Zend\Stdlib\StringUtils;
  */
 abstract class AbstractStringWrapper implements StringWrapperInterface
 {
+    /**
+     * The character encoding working on
+     * @var string|null
+     */
+    protected $encoding;
 
     /**
-     * List of supported character encodings (upper case)
-     *
-     * @var string[]
+     * An optionally character encoding to convert to
+     * @var string|null
      */
-    protected $encodings = array();
+    protected $convertEncoding;
 
     /**
-     * Check if the given character encoding is supported
+     * Check if the given character encoding is supported by this wrapper
+     * and the character encoding to convert to is also supported.
      *
-     * @param string $encoding
-     * @return boolean
+     * @param string      $encoding
+     * @param string|null $convertEncoding
      */
-    public function isEncodingSupported($encoding)
+    public static function isSupported($encoding, $convertEncoding = null)
     {
-        return in_array(strtoupper($encoding), $this->encodings);
+        $supportedEncodings = static::getSupportedEncodings();
+
+        if (!in_array(strtoupper($encoding), $supportedEncodings)) {
+            return false;
+        }
+
+        if ($convertEncoding !== null && !in_array(strtoupper($convertEncoding), $supportedEncodings)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * Get a list of supported character encodings
-     *
-     * @return string[]
+     * Constructor
+     * @param string      $encoding        Character encoding working on
+     * @param string|null $convertEncoding Character encoding to convert to
+     * @throws Exception\InvalidArgumentException
      */
-    public function getSupportedEncodings()
+    public function __construct($encoding, $convertEncoding = null)
     {
-        return $this->encodings;
+        $this->setEncoding($encoding, $convertEncoding);
+    }
+
+    /**
+     * Set character encoding working with and convert to
+     *
+     * @param string      $encoding         The character encoding to work with
+     * @param string|null $convertEncoding  The character encoding to convert to
+     * @return StringWrapperInterface
+     */
+    public function setEncoding($encoding, $convertEncoding)
+    {
+        $supportedEncodings = static::getSupportedEncodings();
+
+        $encodingUpper = strtoupper($encoding);
+        if (!in_array($encodingUpper, $supportedEncodings)) {
+            throw new Exception\InvalidArgumentException(
+                'Wrapper doesn\'t support character encoding "' . $encoding . '"'
+            );
+        }
+
+
+        if ($convertEncoding !== null) {
+            $convertEncodingUpper = strtoupper($convertEncoding);
+            if (!in_array($convertEncodingUpper, $supportedEncodings)) {
+                throw new Exception\InvalidArgumentException(
+                    'Wrapper doesn\'t support character encoding "' . $convertEncoding . '"'
+                );
+            }
+
+            $this->convertEncoding = $convertEncodingUpper;
+        } else {
+            $this->convertEncoding = null;
+        }
+        $this->encoding = $encodingUpper;
+
+        return $this;
     }
 
     /**
      * Convert a string from one character encoding to another
      *
-     * @param string $str
-     * @param string $toEncoding
-     * @param string $fromEncoding
+     * @param string  $str
+     * @param boolean $backward
      * @return string|false
      */
-    public function convert($str, $toEncoding, $fromEncoding = 'UTF-8')
+    public function convert($str, $backward = false)
     {
-        if (strcasecmp($toEncoding, $fromEncoding) != 0) {
-            trigger_error("Can't convert '{$fromEncoding}' to '{$toEncoding}'", \E_WARNING);
-            return false;
+        $from = $backward ? $this->convertEncoding : $this->encoding;
+        $to   = $backward ? $this->encoding : $this->convertEncoding;
+
+        if ($to == $from) {
+            return $str;
         }
 
-        return $str;
+        throw new Exception\RuntimeException(sprintf(
+            'Converting from "%s" to "%s" isn\'t supported by this string wrapper',
+            $from,
+            $to
+        ));
     }
 
     /**
@@ -74,10 +131,9 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param  integer $width
      * @param  string  $break
      * @param  boolean $cut
-     * @param  string  $encoding
      * @return string|false
      */
-    public function wordWrap($string, $width = 75, $break = "\n", $cut = false, $encoding = 'UTF-8')
+    public function wordWrap($string, $width = 75, $break = "\n", $cut = false)
     {
         $string = (string) $string;
         if ($string === '') {
@@ -95,27 +151,26 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             throw new Exception\InvalidArgumentException('Cannot force cut when width is zero');
         }
 
-        $encoding = strtoupper($encoding);
-        if (StringUtils::isSingleByteEncoding($encoding)) {
+        if (StringUtils::isSingleByteEncoding($this->encoding)) {
             return wordwrap($string, $width, $break, $cut);
         }
 
-        $stringWidth = $this->strlen($string, $encoding);
-        $breakWidth  = $this->strlen($break, $encoding);
+        $stringWidth = $this->strlen($string);
+        $breakWidth  = $this->strlen($break);
 
         $result    = '';
         $lastStart = $lastSpace = 0;
 
         for ($current = 0; $current < $stringWidth; $current++) {
-            $char = $this->substr($string, $current, 1, $encoding);
+            $char = $this->substr($string, $current, 1);
 
             $possibleBreak = $char;
             if ($breakWidth !== 1) {
-                $possibleBreak = $this->substr($string, $current, $breakWidth, $encoding);
+                $possibleBreak = $this->substr($string, $current, $breakWidth);
             }
 
             if ($possibleBreak === $break) {
-                $result    .= $this->substr($string, $lastStart, $current - $lastStart + $breakWidth, $encoding);
+                $result    .= $this->substr($string, $lastStart, $current - $lastStart + $breakWidth);
                 $current   += $breakWidth - 1;
                 $lastStart  = $lastSpace = $current + 1;
                 continue;
@@ -123,7 +178,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
 
             if ($char === ' ') {
                 if ($current - $lastStart >= $width) {
-                    $result    .= $this->substr($string, $lastStart, $current - $lastStart, $encoding) . $break;
+                    $result    .= $this->substr($string, $lastStart, $current - $lastStart) . $break;
                     $lastStart  = $current + 1;
                 }
 
@@ -132,20 +187,20 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             }
 
             if ($current - $lastStart >= $width && $cut && $lastStart >= $lastSpace) {
-                $result    .= $this->substr($string, $lastStart, $current - $lastStart, $encoding) . $break;
+                $result    .= $this->substr($string, $lastStart, $current - $lastStart) . $break;
                 $lastStart  = $lastSpace = $current;
                 continue;
             }
 
             if ($current - $lastStart >= $width && $lastStart < $lastSpace) {
-                $result    .= $this->substr($string, $lastStart, $lastSpace - $lastStart, $encoding) . $break;
+                $result    .= $this->substr($string, $lastStart, $lastSpace - $lastStart) . $break;
                 $lastStart  = $lastSpace = $lastSpace + 1;
                 continue;
             }
         }
 
         if ($lastStart !== $current) {
-            $result .= $this->substr($string, $lastStart, $current - $lastStart, $encoding);
+            $result .= $this->substr($string, $lastStart, $current - $lastStart);
         }
 
         return $result;
@@ -158,18 +213,16 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param  integer $padLength
      * @param  string  $padString
      * @param  integer $padType
-     * @param  string  $encoding
      * @return string
      */
-    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $encoding = 'UTF-8')
+    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT)
     {
-        $encoding = strtoupper($encoding);
-        if (StringUtils::isSingleByteEncoding($encoding)) {
+        if (StringUtils::isSingleByteEncoding($this->encoding)) {
             return str_pad($input, $padLength, $padString, $padType);
         }
 
-        $lengthOfPadding = $padLength - $this->strlen($input, $encoding);
-        $padStringLength = $this->strlen($padString, $encoding);
+        $lengthOfPadding = $padLength - $this->strlen($input);
+        $padStringLength = $this->strlen($padString);
 
         if ($padStringLength === 0 || $lengthOfPadding <= 0) {
             return $input;
@@ -186,14 +239,14 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             $lastStringLeftLength   = $lastStringRightLength = floor($lastStringLength / 2);
             $lastStringRightLength += $lastStringLength % 2;
 
-            $lastStringLeft  = $this->substr($padString, 0, $lastStringLeftLength, $encoding);
-            $lastStringRight = $this->substr($padString, 0, $lastStringRightLength, $encoding);
+            $lastStringLeft  = $this->substr($padString, 0, $lastStringLeftLength);
+            $lastStringRight = $this->substr($padString, 0, $lastStringRightLength);
 
             return str_repeat($padString, $repeatCountLeft) . $lastStringLeft
                 . $input
                 . str_repeat($padString, $repeatCountRight) . $lastStringRight;
         } else {
-            $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength, $encoding);
+            $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength);
 
             if ($padType === \STR_PAD_LEFT) {
                 return str_repeat($padString, $repeatCount) . $lastString . $input;

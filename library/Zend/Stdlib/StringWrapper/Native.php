@@ -20,22 +20,11 @@ use Zend\Stdlib\StringUtils;
 class Native extends AbstractStringWrapper
 {
     /**
-     * Check if the given encoding is supported
-     *
-     * @param string $encoding
-     * @return boolean
-     */
-    public function isEncodingSupported($encoding)
-    {
-        return StringUtils::isSingleByteEncoding($encoding);
-    }
-
-    /**
      * Get a list of supported character encodings
      *
      * @return string[]
      */
-    public function getSupportedEncodings()
+    public static function getSupportedEncodings()
     {
         return StringUtils::getSingleByteEncodings();
     }
@@ -44,10 +33,9 @@ class Native extends AbstractStringWrapper
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $encoding
      * @return int|false
      */
-    public function strlen($str, $encoding = 'UTF-8')
+    public function strlen($str)
     {
         return strlen($str);
     }
@@ -58,10 +46,9 @@ class Native extends AbstractStringWrapper
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $encoding
      * @return string|false
      */
-    public function substr($str, $offset = 0, $length = null, $encoding = 'UTF-8')
+    public function substr($str, $offset = 0, $length = null)
     {
         return substr($str, $offset, $length);
     }
@@ -72,10 +59,9 @@ class Native extends AbstractStringWrapper
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $encoding
      * @return int|false
      */
-    public function strpos($haystack, $needle, $offset = 0, $encoding = 'UTF-8')
+    public function strpos($haystack, $needle, $offset = 0)
     {
         return strpos($haystack, $needle, $offset);
     }

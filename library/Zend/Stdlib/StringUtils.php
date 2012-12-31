@@ -11,10 +11,6 @@
 namespace Zend\Stdlib;
 
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
-use Zend\Stdlib\StringWrapper\MbString as MbStringWrapper;
-use Zend\Stdlib\StringWrapper\Iconv as IconvWrapper;
-use Zend\Stdlib\StringWrapper\Intl as IntlWrapper;
-use Zend\Stdlib\StringWrapper\Native as NativeWrapper;
 
 /**
  * Utility class for handling strings of different character encodings
@@ -50,9 +46,9 @@ abstract class StringUtils
     );
 
     /**
-     * Get registered wrappers
+     * Get registered wrapper classes
      *
-     * @return StringWrapperInterface[]
+     * @return string[]
      */
     public static function getRegisteredWrappers()
     {
@@ -60,74 +56,71 @@ abstract class StringUtils
             static::$wrapperRegistry = array();
 
             if (extension_loaded('intl')) {
-                static::$wrapperRegistry[] = new IntlWrapper();
+                static::$wrapperRegistry[] = 'Zend\Stdlib\StringWrapper\Intl';
             }
 
             if (extension_loaded('mbstring')) {
-                static::$wrapperRegistry[] = new MbStringWrapper();
+                static::$wrapperRegistry[] = 'Zend\Stdlib\StringWrapper\MbString';
             }
 
             if (extension_loaded('iconv')) {
-                static::$wrapperRegistry[] = new IconvWrapper();
+                static::$wrapperRegistry[] = 'Zend\Stdlib\StringWrapper\Iconv';
             }
 
-            static::$wrapperRegistry[] = new NativeWrapper();
+            static::$wrapperRegistry[] = 'Zend\Stdlib\StringWrapper\Native';
         }
 
         return static::$wrapperRegistry;
     }
 
     /**
-     * Register a string wrapper
+     * Register a string wrapper class
      *
-     * @param StringWrapperInterface
+     * @param string $wrapper
      * @return void
      */
-    public static function registerWrapper(StringWrapperInterface $wrapper)
+    public static function registerWrapper($wrapper)
     {
+        $wrapper = (string) $wrapper;
         if (!in_array($wrapper, static::$wrapperRegistry, true)) {
             static::$wrapperRegistry[] = $wrapper;
         }
     }
 
     /**
-     * Unregister a string wrapper
+     * Unregister a string wrapper class
      *
-     * @param StringWrapperInterface $wrapper
+     * @param string $wrapper
      * @return void
      */
-    public static function unregisterWrapper(StringWrapperInterface $wrapper)
+    public static function unregisterWrapper($wrapper)
     {
-        $index = array_search($wrapper, static::$wrapperRegistry, true);
+        $index = array_search((string) $wrapper, static::$wrapperRegistry, true);
         if ($index !== false) {
             unset(static::$wrapperRegistry[$index]);
         }
     }
 
     /**
-     * Get the first string wrapper supporting one or more character encodings
+     * Get the first string wrapper supporting the given character encoding
+     * and supports to convert into the given convert encoding.
      *
-     * @param string $encoding       Character encoding supported by he string wrapper
-     * @param string $encodingN, ... Unlimited OPTIONAL number of additional character encodings
+     * @param string      $encoding        Character encoding to support
+     * @param string|null $convertEncoding OPTIONAL character encoding to convert in
      * @return StringWrapperInterface
-     * @throws Exception\RuntimeException If no wrapper supports all given character encodings
+     * @throws Exception\RuntimeException If no wrapper supports given character encodings
      */
-    public static function getWrapper($encoding = 'UTF-8')
+    public static function getWrapper($encoding = 'UTF-8', $convertEncoding = null)
     {
-        $encodings = func_get_args();
-
-        foreach (static::getRegisteredWrappers() as $wrapper) {
-            foreach ($encodings as $encoding) {
-                if (!$wrapper->isEncodingSupported($encoding)) {
-                    continue 2;
-                }
+        foreach (static::getRegisteredWrappers() as $wrapperClass) {
+            if ($wrapperClass::isSupported($encoding, $convertEncoding)) {
+                return new $wrapperClass($encoding, $convertEncoding);
             }
-
-            return $wrapper;
         }
 
         throw new Exception\RuntimeException(
-            'No wrapper found supporting encoding(s) ' . implode(', ', $encodings)
+            'No wrapper found supporting "' . $encoding . '"'
+            . (($convertEncoding !== null) ? ' and "' . $convertEncoding . '"' : '')
         );
     }
 

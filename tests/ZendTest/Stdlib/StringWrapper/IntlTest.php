@@ -21,14 +21,26 @@ class IntlTest extends CommonStringWrapperTest
     {
         if (!extension_loaded('intl')) {
             try {
-                new Intl();
+                new Intl('utf-8');
                 $this->fail('Missing expected Zend\Stdlib\Exception\ExtensionNotLoadedException');
             } catch (Exception\ExtensionNotLoadedException $e) {
                 $this->markTestSkipped('Missing ext/intl');
             }
         }
 
-        $this->stringWrapper = new Intl();
         parent::setUp();
+    }
+
+    protected function getWrapper($encoding = null, $convertEncoding = null)
+    {
+        if ($encoding === null) {
+            $supportedEncodings = Intl::getSupportedEncodings();
+            $encoding = array_shift($supportedEncodings);
+        }
+
+        if (!Intl::isSupported($encoding, $convertEncoding)) {
+            return false;
+        }
+        return new Intl($encoding, $convertEncoding);
     }
 }

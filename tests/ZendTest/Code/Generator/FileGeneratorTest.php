@@ -202,4 +202,31 @@ EOS;
         $generated = $file->generate();
         $this->assertContains('namespace Foo\\Bar', $generated, $generated);
     }
+
+    public function testSetUsesWithArrays()
+    {
+        $file = new FileGenerator();
+        $file->setUses(array(
+                 array('Your\\Bar', 'bar'),
+                 array('My\\Baz', 'FooBaz')
+             ));
+        $generated = $file->generate();
+        $this->assertContains('use My\\Baz as FooBaz;', $generated);
+        $this->assertContains('use Your\\Bar as bar;', $generated);
+    }
+
+    public function testSetUsesWithString()
+    {
+        $file = new FileGenerator();
+        $file->setUses(array(
+            'Your\\Bar',
+            'My\\Baz',
+            array('Another\\Baz', 'Baz2')
+        ));
+        $generated = $file->generate();
+        $this->assertContains('use My\\Baz;', $generated);
+        $this->assertContains('use Your\\Bar;', $generated);
+        $this->assertContains('use Another\\Baz as Baz2;', $generated);
+    }
+
 }

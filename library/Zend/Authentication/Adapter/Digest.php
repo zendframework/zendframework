@@ -226,7 +226,7 @@ class Digest implements AdapterInterface
             return false;
         }
         $result = 0;
-        for ($i = 0; $i < strlen($a); $i++) {
+        for ($i = 0; $len = strlen($a), $i < $len; $i++) {
             $result |= ord($a[$i]) ^ ord($b[$i]);
         }
         return $result == 0;

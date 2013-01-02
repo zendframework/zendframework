@@ -46,7 +46,7 @@ class Date extends DateTimeElement
      */
     protected function getDateValidator()
     {
-        return new DateValidator(array('format' => 'Y-m-d'));
+        return new DateValidator(array('format' => $this->getFormat()));
     }
 
     /**
@@ -63,7 +63,7 @@ class Date extends DateTimeElement
                      ? $this->attributes['min'] : '1970-01-01';
 
         return new DateStepValidator(array(
-            'format'    => 'Y-m-d',
+            'format'    => $this->getFormat(),
             'baseValue' => $baseValue,
             'step'      => new \DateInterval("P{$stepValue}D"),
         ));

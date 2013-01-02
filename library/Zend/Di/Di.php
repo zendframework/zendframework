@@ -125,17 +125,18 @@ class Di implements DependencyInjectionInterface
      * @param string $method
      * @return array
      */
-
-    public function _getCallParameters($name, array $params, $method = "__construct")
+    protected function getCallParameters($name, array $params, $method = "__construct")
     {
-        $im = $this->instanceManager;
+        $im    = $this->instanceManager;
         $class = $im->hasAlias($name) ? $im->getClassFromAlias($name) : $name;
-        if($this->definitions->hasClass($class)) {
+        if ($this->definitions->hasClass($class)) {
             $callParameters = array();
-            if($this->definitions->hasMethod($class, $method)) {
-                foreach($this->definitions->getMethodParameters($class, $method) as $param)
-                    if(isset($params[$param[0]]))
+            if ($this->definitions->hasMethod($class, $method)) {
+                foreach ($this->definitions->getMethodParameters($class, $method) as $param) {
+                    if (isset($params[$param[0]])) {
                         $callParameters[$param[0]] = $params[$param[0]];
+                    }
+                }
             }
             return $callParameters;
         }
@@ -159,22 +160,21 @@ class Di implements DependencyInjectionInterface
 
         $im = $this->instanceManager;
 
-        $callParameters = $this->_getCallParameters($name, $params);
-        if($callParameters) {
+        $callParameters = $this->getCallParameters($name, $params);
+        if ($callParameters) {
             $fastHash = $im->hasSharedInstanceWithParameters($name, $callParameters, true);
             if ($fastHash) {
                 array_pop($this->instanceContext);
-
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
             if ($im->hasSharedInstance($name, $callParameters)) {
                 array_pop($this->instanceContext);
-
                 return $im->getSharedInstance($name, $callParameters);
             }
         }
-        $config = $im->getConfig($name);
+
+        $config   = $im->getConfig($name);
         $instance = $this->newInstance($name, $params, $config['shared']);
         array_pop($this->instanceContext);
 
@@ -250,7 +250,7 @@ class Di implements DependencyInjectionInterface
         }
 
         if ($isShared) {
-            if ($callParameters = $this->_getCallParameters($name, $params)) {
+            if ($callParameters = $this->getCallParameters($name, $params)) {
                 $this->instanceManager->addSharedInstanceWithParameters($instance, $name, $callParameters);
             } else {
                 $this->instanceManager->addSharedInstance($instance, $name);

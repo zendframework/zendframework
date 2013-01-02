@@ -149,14 +149,15 @@ class DateTime extends Element implements InputProviderInterface
      */
     protected function getStepValidator()
     {
+        $format    = $this->getFormat();
         $stepValue = (isset($this->attributes['step']))
                    ? $this->attributes['step'] : 1; // Minutes
 
         $baseValue = (isset($this->attributes['min']))
-                   ? $this->attributes['min'] : '1970-01-01T00:00Z';
+                   ? $this->attributes['min'] : date($format, 0);
 
         return new DateStepValidator(array(
-            'format'    => $this->format,
+            'format'    => $format,
             'baseValue' => $baseValue,
             'step'      => new DateInterval("PT{$stepValue}M"),
         ));

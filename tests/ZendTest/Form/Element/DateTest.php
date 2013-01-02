@@ -35,7 +35,7 @@ class DateTest extends TestCase
                 case 'Zend\Validator\DateStep':
                     $dateInterval = new \DateInterval('P1D');
                     $this->assertEquals($dateInterval, $validator->getStep());
-                    $this->assertEquals('1970-01-01',  $validator->getBaseValue());
+                    $this->assertEquals(date('Y-m-d', 0),  $validator->getBaseValue());
                     break;
                 default:
                     break;

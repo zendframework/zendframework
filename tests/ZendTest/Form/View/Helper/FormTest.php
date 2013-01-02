@@ -10,6 +10,10 @@
 
 namespace ZendTest\Form\View\Helper;
 
+use Zend\Form\Element\Submit;
+
+use ZendTest\Form\TestAsset\CityFieldset;
+
 use Zend\Form\Form;
 use Zend\Form\View\Helper\Form as FormHelper;
 
@@ -77,5 +81,36 @@ class FormTest extends CommonTestCase
         $markup = $this->helper->openTag($form);
         $this->assertContains('name="login-form"', $markup);
         $this->assertContains('id="login-form"', $markup);
+    }
+
+    public function testRender()
+    {
+        $form = new Form();
+        $attributes = array('name'  => 'login-form');
+        $form->setAttributes($attributes);
+        $form->add(new CityFieldset());
+        $form->add(new Submit('send'));
+
+        $markup = $this->helper->__invoke($form);
+
+        $this->assertContains('<form', $markup);
+        $this->assertContains('id="login-form"', $markup);
+        $this->assertContains('<label><span>Name of the city</span>', $markup);
+        $this->assertContains('<fieldset><legend>Country</legend>', $markup);
+        $this->assertContains('<input type="submit" name="send"', $markup);
+        $this->assertContains('</form>', $markup);
+    }
+
+    public function testRenderPreparesForm()
+    {
+        $form = $this->getMock('Zend\\Form\\Form');
+        $form->expects($this->once())->method('prepare');
+        $form->expects($this->any())->method('getAttributes')->will($this->returnValue(array()));
+        $form->expects($this->any())->method('getIterator')->will($this->returnValue(new \ArrayIterator(array())));
+
+        $markup = $this->helper->__invoke($form);
+
+        $this->assertContains('<form', $markup);
+        $this->assertContains('</form>', $markup);
     }
 }

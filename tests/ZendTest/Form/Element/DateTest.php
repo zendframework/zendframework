@@ -103,7 +103,7 @@ class DateTest extends TestCase
             'max'       => '2012-12-31',
         ));
         $element->setFormat('d-m-Y');
-        
+
         $inputSpec = $element->getInputSpecification();
         foreach ($inputSpec['validators'] as $validator) {
             switch (get_class($validator)) {

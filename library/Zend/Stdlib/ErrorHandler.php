@@ -22,46 +22,44 @@ use ErrorException;
 abstract class ErrorHandler
 {
     /**
-     * Flag to mark started
+     * Active stack
      *
-     * @var boolean
+     * @var array
      */
-    protected static $started = false;
+    protected static $stack = array();
 
     /**
-     * All errors as one instance of ErrorException
-     * using the previous exception support.
-     *
-     * @var null|ErrorException
-     */
-    protected static $errorException = null;
-
-    /**
-     * If the error handler has been started.
+     * Check if this error handler is active
      *
      * @return boolean
      */
     public static function started()
     {
-        return static::$started;
+        return (bool) static::getNestedLevel();
+    }
+
+    /**
+     * Get the current nested level
+     *
+     * @return int
+     */
+    public static function getNestedLevel()
+    {
+        return count(static::$stack);
     }
 
     /**
      * Starting the error handler
      *
      * @param int $errorLevel
-     * @throws Exception\LogicException If already started
      */
     public static function start($errorLevel = \E_WARNING)
     {
-        if (static::started() === true) {
-            throw new Exception\LogicException('ErrorHandler already started');
+        if (!static::$stack) {
+            set_error_handler(array(get_called_class(), 'addError'), $errorLevel);
         }
 
-        static::$started        = true;
-        static::$errorException = null;
-
-        set_error_handler(array(get_called_class(), 'addError'), $errorLevel);
+        static::$stack[] = null;
     }
 
     /**
@@ -69,30 +67,43 @@ abstract class ErrorHandler
      *
      * @param  boolean $throw Throw the ErrorException if any
      * @return null|ErrorException
-     * @throws Exception\LogicException If not started before
      * @throws ErrorException If an error has been catched and $throw is true
      */
     public static function stop($throw = false)
     {
-        if (static::started() === false) {
-            throw new Exception\LogicException('ErrorHandler not started');
-        }
+        $errorException = null;
 
-        $errorException = static::$errorException;
+        if (static::$stack) {
+            $errorException = array_pop(static::$stack);
 
-        static::$started        = false;
-        static::$errorException = null;
-        restore_error_handler();
+            if (!static::$stack) {
+                restore_error_handler();
+            }
 
-        if ($errorException && $throw) {
-            throw $errorException;
+            if ($errorException && $throw) {
+                throw $errorException;
+            }
         }
 
         return $errorException;
     }
 
     /**
-     * Add an error to the stack.
+     * Stop all active handler
+     *
+     * @return void
+     */
+    public static function clean()
+    {
+        if (static::$stack) {
+            restore_error_handler();
+        }
+
+        static::$stack = array();
+    }
+
+    /**
+     * Add an error to the stack
      *
      * @param int    $errno
      * @param string $errstr
@@ -102,6 +113,7 @@ abstract class ErrorHandler
      */
     public static function addError($errno, $errstr = '', $errfile = '', $errline = 0)
     {
-        static::$errorException = new ErrorException($errstr, 0, $errno, $errfile, $errline, static::$errorException);
+        $stack = & static::$stack[ count(static::$stack) - 1 ];
+        $stack = new ErrorException($errstr, 0, $errno, $errfile, $errline, $stack);
     }
 }

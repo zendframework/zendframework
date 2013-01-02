@@ -46,7 +46,7 @@ class ConsoleResponseSender implements ResponseSenderInterface
     {
         $response = $event->getResponse();
         if ($response instanceof Response) {
-            $this->sendContent($response);
+            $this->sendContent($event);
             $errorLevel = (int) $response->getMetadata('errorLevel',0);
             $event->stopPropagation(true);
             exit($errorLevel);

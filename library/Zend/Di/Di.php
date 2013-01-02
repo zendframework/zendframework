@@ -120,6 +120,29 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
+     * @param $name
+     * @param array $params
+     * @param string $method
+     * @return array
+     */
+
+    public function _getCallParameters($name, array $params, $method = "__construct")
+    {
+        $im = $this->instanceManager;
+        $class = $im->hasAlias($name) ? $im->getClassFromAlias($name) : $name;
+        if($this->definitions->hasClass($class)) {
+            $callParameters = array();
+            if($this->definitions->hasMethod($class, $method)) {
+                foreach($this->definitions->getMethodParameters($class, $method) as $param)
+                    if(isset($params[$param[0]]))
+                        $callParameters[$param[0]] = $params[$param[0]];
+            }
+            return $callParameters;
+        }
+        return $params;
+    }
+
+    /**
      * Lazy-load a class
      *
      * Attempts to load the class (or service alias) provided. If it has been
@@ -136,18 +159,19 @@ class Di implements DependencyInjectionInterface
 
         $im = $this->instanceManager;
 
-        if ($params) {
-            $fastHash = $im->hasSharedInstanceWithParameters($name, $params, true);
+        $callParameters = $this->_getCallParameters($name, $params);
+        if($callParameters) {
+            $fastHash = $im->hasSharedInstanceWithParameters($name, $callParameters, true);
             if ($fastHash) {
                 array_pop($this->instanceContext);
 
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
-            if ($im->hasSharedInstance($name, $params)) {
+            if ($im->hasSharedInstance($name, $callParameters)) {
                 array_pop($this->instanceContext);
 
-                return $im->getSharedInstance($name, $params);
+                return $im->getSharedInstance($name, $callParameters);
             }
         }
         $config = $im->getConfig($name);
@@ -226,8 +250,8 @@ class Di implements DependencyInjectionInterface
         }
 
         if ($isShared) {
-            if ($params) {
-                $this->instanceManager->addSharedInstanceWithParameters($instance, $name, $params);
+            if ($callParameters = $this->_getCallParameters($name, $params)) {
+                $this->instanceManager->addSharedInstanceWithParameters($instance, $name, $callParameters);
             } else {
                 $this->instanceManager->addSharedInstance($instance, $name);
             }

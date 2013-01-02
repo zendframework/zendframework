@@ -252,7 +252,7 @@ class Sendmail implements TransportInterface
         if (count($from)) {
             $from->rewind();
             $sender      = $from->current();
-            $parameters .= ' -r ' . $sender->getEmail();
+            $parameters .= ' -f ' . $sender->getEmail();
             return $parameters;
         }
 

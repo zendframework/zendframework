@@ -40,16 +40,6 @@ class Date extends DateTimeElement
     protected $format = 'Y-m-d';
 
     /**
-     * Retrieves a Date Validator configured for a DateTime Input type
-     *
-     * @return \Zend\Validator\ValidatorInterface
-     */
-    protected function getDateValidator()
-    {
-        return new DateValidator(array('format' => $this->getFormat()));
-    }
-
-    /**
      * Retrieves a DateStep Validator configured for a Date Input type
      *
      * @return \Zend\Validator\ValidatorInterface

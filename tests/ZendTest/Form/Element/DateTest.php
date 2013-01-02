@@ -94,7 +94,7 @@ class DateTest extends TestCase
         $value   = $element->getValue();
         $this->assertEquals($date->format('Y-m-d'), $value);
     }
-    
+
     public function testCorrectFormatPassedToDateValidator()
     {
         $element = new DateElement('foo');

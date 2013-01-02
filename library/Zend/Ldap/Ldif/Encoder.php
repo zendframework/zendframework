@@ -194,7 +194,7 @@ class Encoder
         $unsafe_char = array(0, 10, 13);
 
         $base64 = false;
-        for ($i = 0; $len = strlen($string), $i < $len; $i++) {
+        for ($i = 0, $len = strlen($string); $i < $len; $i++) {
             $char = ord(substr($string, $i, 1));
             if ($char >= 127) {
                 $base64 = true;

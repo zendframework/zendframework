@@ -38,7 +38,7 @@ class Converter
      */
     public static function ascToHex32($string)
     {
-        for ($i = 0; $len = strlen($string), $i < $len; $i++) {
+        for ($i = 0, $len = strlen($string); $i < $len; $i++) {
             $char = substr($string, $i, 1);
             if (ord($char) < 32) {
                 $hex = dechex(ord($char));

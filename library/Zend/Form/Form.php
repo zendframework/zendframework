@@ -242,6 +242,8 @@ class Form extends Fieldset implements FormInterface
         $this->bindAs = $flags;
         $this->setObject($object);
         $this->extract();
+
+        return $this;
     }
 
     /**

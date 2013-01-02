@@ -556,7 +556,7 @@ class Dn implements \ArrayAccess
             throw new Exception\LdapException(null, 'DN is malformed');
         }
         $ret = array();
-        for ($i = 0; $i < count($k); $i++) {
+        for ($i = 0, $count = count($k); $i < $count; $i++) {
             if (is_array($k[$i]) && is_array($v[$i]) && (count($k[$i]) === count($v[$i]))) {
                 $multi = array();
                 for ($j = 0; $j < count($k[$i]); $j++) {
@@ -756,7 +756,7 @@ class Dn implements \ArrayAccess
         if ($startIndex < 0) {
             return false;
         }
-        for ($i = 0; $i < count($pdn); $i++) {
+        for ($i = 0, $count = count($pdn); $i < $count; $i++) {
             if ($cdn[$i + $startIndex] != $pdn[$i]) {
                 return false;
             }

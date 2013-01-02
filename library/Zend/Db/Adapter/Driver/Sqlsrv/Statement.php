@@ -175,7 +175,7 @@ class Statement implements StatementInterface
         $sql = ($sql) ?: $this->sql;
 
         $pRef = &$this->parameterReferences;
-        for ($position = 0; $position < substr_count($sql, '?'); $position++) {
+        for ($position = 0, $count = substr_count($sql, '?'); $position < $count; $position++) {
             $pRef[$position] = array('', SQLSRV_PARAM_IN, null, null);
         }
 

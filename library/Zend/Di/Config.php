@@ -59,11 +59,9 @@ class Config
         if (isset($this->data['definition'])) {
             $this->configureDefinition($di, $this->data['definition']);
         }
-
         if (isset($this->data['instance'])) {
             $this->configureInstance($di, $this->data['instance']);
         }
-
     }
 
     /**
@@ -90,8 +88,8 @@ class Config
                                 $definitions[] = $definition;
                             }
                         }
-                        $definitions = new DefinitionList($definitions);
-                        $di->setDefinitionList($definitions);
+                        $definitionList = new DefinitionList($definitions);
+                        $di->setDefinitionList($definitionList);
                     } elseif (isset($definitionData['use_annotations']) && $definitionData['use_annotations']) {
                         /* @var $runtimeDefinition Definition\RuntimeDefinition */
                         $runtimeDefinition = $di
@@ -146,9 +144,7 @@ class Config
                         }
                     }
             }
-
         }
-
     }
 
     /**
@@ -200,7 +196,6 @@ class Config
                     }
             }
         }
-
     }
 
 }

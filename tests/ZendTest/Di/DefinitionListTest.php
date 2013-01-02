@@ -29,6 +29,80 @@ class DefinitionListTest extends TestCase
         $definitionList = new DefinitionList(array($definitionClassA, $definitionClassB));
 
         $this->assertEquals($superTypesA, $definitionList->getClassSupertypes("A"));
+    }
 
+    public function testHasMethods()
+    {
+        $definition = $this->getMock('Zend\Di\Definition\ClassDefinition', array(), array(), '', false);
+
+        $definition->expects($this->any())
+            ->method('hasClass')
+            ->will($this->returnValue(true));
+
+        $definition->expects($this->any())
+            ->method('hasMethods')
+            ->will($this->returnValue(true));
+
+        $definitionList = new DefinitionList(array($definition));
+
+        $this->assertTrue($definitionList->hasMethods('foo'));
+    }
+
+    public function testHasMethodsWhenDefinitionHasNotClass()
+    {
+        $definition = $this->getMock('Zend\Di\Definition\ClassDefinition', array(), array(), '', false);
+
+        $definition->expects($this->any())
+            ->method('hasClass')
+            ->will($this->returnValue(false));
+
+        $definitionList = new DefinitionList(array($definition));
+
+        $this->assertFalse($definitionList->hasMethods('foo'));
+    }
+
+    public function testHasMethodsWhenDefinitionHasNotMethods()
+    {
+        $definition = $this->getMock('Zend\Di\Definition\ClassDefinition', array(), array(), '', false);
+
+        $definition->expects($this->any())
+            ->method('hasClass')
+            ->will($this->returnValue(true));
+
+        $definition->expects($this->any())
+            ->method('hasMethods')
+            ->will($this->returnValue(false));
+
+        $definitionList = new DefinitionList(array($definition));
+
+        $this->assertFalse($definitionList->hasMethods('foo'));
+    }
+
+    public function testHasMethod()
+    {
+        $definition = $this->getMock('Zend\Di\Definition\ClassDefinition', array(), array(), '', false);
+
+        $definition->expects($this->any())
+            ->method('hasClass')
+            ->will($this->returnValue(true));
+
+        $definition->expects($this->any())
+            ->method('hasMethods')
+            ->will($this->returnValue(true));
+
+        $definition->expects($this->any())
+            ->method('hasMethod')
+            ->will($this->returnValue(true));
+
+        $definitionList = new DefinitionList(array($definition));
+
+        $this->assertTrue($definitionList->hasMethod('foo', 'doFoo'));
+    }
+
+    public function testHasMethodWithoutDefinitions()
+    {
+        $definitionList = new DefinitionList(array());
+
+        $this->assertFalse($definitionList->hasMethod('foo', 'doFoo'));
     }
 }

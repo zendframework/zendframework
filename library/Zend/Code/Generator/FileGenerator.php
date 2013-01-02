@@ -122,7 +122,7 @@ class FileGenerator extends AbstractGenerator
 
             $bodyLines  = explode("\n", $body);
             $bodyReturn = array();
-            for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
+            for ($lineNum = 1, $count = count($bodyLines); $lineNum <= $count; $lineNum++) {
                 if ($lineNum == $classStartLine) {
                     $bodyReturn[] = str_replace(
                         '?',
@@ -156,7 +156,7 @@ class FileGenerator extends AbstractGenerator
 
             $bodyLines  = explode("\n", $body);
             $bodyReturn = array();
-            for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
+            for ($lineNum = 1, $count = count($bodyLines); $lineNum <= $count; $lineNum++) {
                 if ($lineNum == $docBlock->getStartLine()) {
                     $bodyReturn[] = str_replace(
                         '?',
@@ -305,7 +305,7 @@ class FileGenerator extends AbstractGenerator
     {
         $uses = $this->uses;
         if ($withResolvedAs) {
-            for ($useIndex = 0; $useIndex < count($uses); $useIndex++) {
+            for ($useIndex = 0, $count = count($uses); $useIndex < $count; $useIndex++) {
                 if ($uses[$useIndex][1] == '') {
                     if (($lastSeparator = strrpos($uses[$useIndex][0], '\\')) !== false) {
                         $uses[$useIndex][2] = substr($uses[$useIndex][0], $lastSeparator + 1);

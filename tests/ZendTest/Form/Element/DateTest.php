@@ -94,4 +94,24 @@ class DateTest extends TestCase
         $value   = $element->getValue();
         $this->assertEquals($date->format('Y-m-d'), $value);
     }
+
+    public function testCorrectFormatPassedToDateValidator()
+    {
+        $element = new DateElement('foo');
+        $element->setAttributes(array(
+            'min'       => '2012-01-01',
+            'max'       => '2012-12-31',
+        ));
+        $element->setFormat('d-m-Y');
+
+        $inputSpec = $element->getInputSpecification();
+        foreach ($inputSpec['validators'] as $validator) {
+            switch (get_class($validator)) {
+                case 'Zend\Validator\DateStep':
+                case 'Zend\Validator\Date':
+                    $this->assertEquals('d-m-Y', $validator->getFormat());
+                    break;
+            }
+        }
+    }
 }

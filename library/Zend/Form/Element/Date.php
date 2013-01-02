@@ -10,6 +10,7 @@
 
 namespace Zend\Form\Element;
 
+use DateInterval;
 use Zend\Form\Element;
 use Zend\Form\Element\DateTime as DateTimeElement;
 use Zend\Validator\Date as DateValidator;
@@ -40,32 +41,23 @@ class Date extends DateTimeElement
     protected $format = 'Y-m-d';
 
     /**
-     * Retrieves a Date Validator configured for a DateTime Input type
-     *
-     * @return \Zend\Validator\ValidatorInterface
-     */
-    protected function getDateValidator()
-    {
-        return new DateValidator(array('format' => 'Y-m-d'));
-    }
-
-    /**
      * Retrieves a DateStep Validator configured for a Date Input type
      *
      * @return \Zend\Validator\ValidatorInterface
      */
     protected function getStepValidator()
     {
+        $format    = $this->getFormat();
         $stepValue = (isset($this->attributes['step']))
                      ? $this->attributes['step'] : 1; // Days
 
         $baseValue = (isset($this->attributes['min']))
-                     ? $this->attributes['min'] : '1970-01-01';
+                     ? $this->attributes['min'] : date($format, 0);
 
         return new DateStepValidator(array(
-            'format'    => 'Y-m-d',
+            'format'    => $format,
             'baseValue' => $baseValue,
-            'step'      => new \DateInterval("P{$stepValue}D"),
+            'step'      => new DateInterval("P{$stepValue}D"),
         ));
     }
 }

@@ -460,12 +460,6 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
         $this->config->setEntropyFile(__DIR__ . '/foobarboguspath');
     }
 
-    public function testSetEntropyFileErrorsOnDirectory()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
-        $this->config->setEntropyFile(__DIR__);
-    }
-
     public function testEntropyFileDefaultsToIniSettings()
     {
         $this->assertSame(ini_get('session.entropy_file'), $this->config->getEntropyFile());

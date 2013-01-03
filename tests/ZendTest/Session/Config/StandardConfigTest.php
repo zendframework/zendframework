@@ -266,12 +266,6 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
         $this->config->setEntropyFile(__DIR__ . '/foobarboguspath');
     }
 
-    public function testSetEntropyFileErrorsOnDirectory()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
-        $this->config->setEntropyFile(__DIR__);
-    }
-
     public function testEntropyFileIsMutable()
     {
         $this->config->setEntropyFile(__FILE__);
@@ -564,5 +558,21 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
                 'a=href',
             ),
         );
+    }
+
+    /**
+     * Set entropy file /dev/urandom, see issue #3046
+     *
+     * @link https://github.com/zendframework/zf2/issues/3046
+     */
+    public function testSetEntropyDevUrandom()
+    {
+        if (!file_exists('/dev/urandom')) {
+            $this->markTestSkipped(
+                "This test doesn't work because /dev/urandom file doesn't exist."
+            );
+        }
+        $result = $this->config->setEntropyFile('/dev/urandom');
+        $this->assertInstanceOf('Zend\Session\Config\StandardConfig', $result);
     }
 }

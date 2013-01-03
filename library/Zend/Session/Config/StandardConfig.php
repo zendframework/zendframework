@@ -595,7 +595,7 @@ class StandardConfig implements ConfigInterface
      */
     public function setEntropyFile($entropyFile)
     {
-        if (!is_file($entropyFile) || !is_readable($entropyFile)) {
+        if (!is_readable($entropyFile)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 "Invalid entropy_file provided: '%s'; doesn't exist or not readable",
                 $entropyFile

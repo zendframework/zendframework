@@ -132,15 +132,15 @@ class DispatchListener implements ListenerAggregateInterface
     /**
      * @param MvcEvent $e
      */
-    public function reportMonitorEvent(MvcEvent $e) {
-        $error = $e->getError();
+    public function reportMonitorEvent(MvcEvent $e)
+    {
+        $error     = $e->getError();
         $exception = $e->getParam('exception');
         if ($exception instanceof \Exception) {
-            \zend_monitor_custom_event_ex($error, $exception->getMessage(), 'Zend Framework Exception', array('code' => $exception->getCode(), 'trace' => $exception->getTraceAsString()));
+            zend_monitor_custom_event_ex($error, $exception->getMessage(), 'Zend Framework Exception', array('code' => $exception->getCode(), 'trace' => $exception->getTraceAsString()));
         }
-        return true;
     }
-    
+
     /**
      * Complete the dispatch
      *

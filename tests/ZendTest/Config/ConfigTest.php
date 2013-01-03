@@ -181,6 +181,15 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($data->button));
     }
 
+    public function testCountAfterMerge()
+    {
+        $data = new Config($this->toCombineB);
+        $data->merge(
+            new Config($this->toCombineA)
+        );
+        $this->assertEquals(count($data->toArray()), $data->count());
+    }
+
     public function testIterator()
     {
         // top level

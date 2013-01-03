@@ -365,6 +365,8 @@ class Config implements Countable, Iterator, ArrayAccess
                 } else {
                     $this->data[$key] = $value;
                 }
+
+                $this->count++;
             }
         }
 

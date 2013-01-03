@@ -81,7 +81,7 @@ interface StringWrapperInterface
     public function strpos($haystack, $needle, $offset = 0);
 
     /**
-     * Convert a string from one character encoding to another
+     * Convert a string from defined encoding to the defined convert encoding
      *
      * @param string  $str
      * @param boolean $reverse

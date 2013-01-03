@@ -104,7 +104,7 @@ class MbString extends AbstractStringWrapper
     }
 
     /**
-     * Convert a string from one character encoding to another
+     * Convert a string from defined encoding to the defined convert encoding
      *
      * @param string  $str
      * @param boolean $reverse

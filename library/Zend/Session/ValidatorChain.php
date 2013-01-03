@@ -7,7 +7,6 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
-
 namespace Zend\Session;
 
 use Zend\EventManager\EventManager;
@@ -41,7 +40,7 @@ class ValidatorChain extends EventManager
         $validators = $storage->getMetadata('_VALID');
         if ($validators) {
             foreach ($validators as $validator => $data) {
-                $this->attach('session.validate', new $validator($data), 'isValid');
+                $this->attach('session.validate', array(new $validator($data), 'isValid'));
             }
         }
     }
@@ -56,7 +55,6 @@ class ValidatorChain extends EventManager
      */
     public function attach($event, $callback = null, $priority = 1)
     {
-        /** @var Validator $context  */
         $context = null;
         if ($callback instanceof Validator) {
             $context = $callback;

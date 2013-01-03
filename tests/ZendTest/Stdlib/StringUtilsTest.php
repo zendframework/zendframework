@@ -38,9 +38,10 @@ class StringUtilsTest extends TestCase
     public function getSingleByEncodings()
     {
         return array(
+            // case-mix to check case-insensitivity
             array('AscII'),
-            array('7bit'),
-            array('8bit'),
+            array('7bIt'),
+            array('8Bit'),
             array('ISo-8859-1'),
             array('ISo-8859-2'),
             array('ISo-8859-3'),

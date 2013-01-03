@@ -10,10 +10,12 @@
 
 namespace Zend\Form\Element;
 
-use DateTime;
+use DateTime as PhpDateTime;
 use Zend\Form\Form;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Date as DateValidator;
+use Zend\Form\Exception\InvalidArgumentException;
+use Exception;
 
 class DateSelect extends MonthSelect
 {
@@ -86,12 +88,21 @@ class DateSelect extends MonthSelect
     }
 
     /**
-     * @param mixed $value
+     * @param  string|array|ArrayAccess|PhpDateTime $value
+     * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */
     public function setValue($value)
     {
-        if ($value instanceof DateTime) {
+        if (is_string($value)) {
+            try {
+                $value = new PhpDateTime($value);
+            } catch (Exception $e) {
+                throw new InvalidArgumentException('Value should be a parsable string or an instance of DateTime');
+            }
+        }
+
+        if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'  => $value->format('Y'),
                 'month' => $value->format('m'),

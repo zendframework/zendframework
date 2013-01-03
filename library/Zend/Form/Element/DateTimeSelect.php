@@ -14,6 +14,8 @@ use DateTime as PhpDateTime;
 use Zend\Form\Form;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Date as DateValidator;
+use Zend\Form\Exception\InvalidArgumentException;
+use Exception;
 
 class DateTimeSelect extends DateSelect
 {
@@ -44,7 +46,6 @@ class DateTimeSelect extends DateSelect
      * @var bool
      */
     protected $shouldShowSeconds = false;
-
 
     /**
      * Constructor. Add the hour, minute and second select elements
@@ -207,10 +208,19 @@ class DateTimeSelect extends DateSelect
 
     /**
      * @param mixed $value
+     * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */
     public function setValue($value)
     {
+        if (is_string($value)) {
+            try {
+                $value = new PhpDateTime($value);
+            } catch (Exception $e) {
+                throw new InvalidArgumentException('Value should be a parsable string or an instance of \DateTime');
+            }
+        }
+
         if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'   => $value->format('Y'),

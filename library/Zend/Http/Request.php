@@ -372,6 +372,16 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
+     * Is this a PROPFIND method request?
+     *
+     * @return bool
+     */
+    public function isPropFind()
+    {
+        return ($this->method === self::METHOD_PROPFIND);
+    }
+
+    /**
      * Is this a GET method request?
      *
      * @return bool

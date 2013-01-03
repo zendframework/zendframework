@@ -85,12 +85,14 @@ class Proxy extends Socket
      * @param string  $host
      * @param int     $port
      * @param boolean $secure
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {
         // If no proxy is set, fall back to Socket adapter
         if (! $this->config['proxy_host']) {
-            return parent::connect($host, $port, $secure);
+            parent::connect($host, $port, $secure);
+            return;
         }
 
         /* Url might require stream context even if proxy connection doesn't */
@@ -99,7 +101,7 @@ class Proxy extends Socket
         }
 
         // Connect (a non-secure connection) to the proxy server
-        return parent::connect(
+        parent::connect(
             $this->config['proxy_host'],
             $this->config['proxy_port'],
             false

@@ -84,10 +84,10 @@ interface StringWrapperInterface
      * Convert a string from one character encoding to another
      *
      * @param string  $str
-     * @param boolean $backward
+     * @param boolean $reverse
      * @return string|false
      */
-    public function convert($str, $backward = false);
+    public function convert($str, $reverse = false);
 
     /**
      * Wraps a string to a given number of characters

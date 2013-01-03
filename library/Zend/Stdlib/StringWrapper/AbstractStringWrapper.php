@@ -105,18 +105,17 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * Convert a string from one character encoding to another
      *
      * @param string  $str
-     * @param boolean $backward
+     * @param boolean $reverse
      * @return string|false
      */
-    public function convert($str, $backward = false)
+    public function convert($str, $reverse = false)
     {
-        $from = $backward ? $this->convertEncoding : $this->encoding;
-        $to   = $backward ? $this->encoding : $this->convertEncoding;
-
-        if ($to == $from) {
+        if ($this->encoding === $this->convertEncoding) {
             return $str;
         }
 
+        $from = $reverse ? $this->convertEncoding : $this->encoding;
+        $to   = $reverse ? $this->encoding : $this->convertEncoding;
         throw new Exception\RuntimeException(sprintf(
             'Converting from "%s" to "%s" isn\'t supported by this string wrapper',
             $from,

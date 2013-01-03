@@ -106,15 +106,14 @@ class MbString extends AbstractStringWrapper
     /**
      * Convert a string from one character encoding to another
      *
-     * @param string $str
-     * @param string $toEncoding
-     * @param string $fromEncoding
+     * @param string  $str
+     * @param boolean $reverse
      * @return string|false
      */
-    public function convert($str, $backword = false)
+    public function convert($str, $reverse = false)
     {
-        $fromEncoding = $backword ? $this->convertEncoding : $this->encoding;
-        $toEncoding   = $backword ? $this->encoding : $this->convertEncoding;
+        $fromEncoding = $reverse ? $this->convertEncoding : $this->encoding;
+        $toEncoding   = $reverse ? $this->encoding : $this->convertEncoding;
         return mb_convert_encoding($str, $toEncoding, $fromEncoding);
     }
 }

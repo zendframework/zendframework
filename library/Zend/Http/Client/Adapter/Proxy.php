@@ -92,6 +92,7 @@ class Proxy extends Socket
         // If no proxy is set, fall back to Socket adapter
         if (! $this->config['proxy_host']) {
             parent::connect($host, $port, $secure);
+            return;
         }
 
         /* Url might require stream context even if proxy connection doesn't */

@@ -17,6 +17,7 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ResponseSender\ConsoleResponseSender;
 use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
+use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 use Zend\Mvc\ResponseSender\SendResponseEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 
@@ -139,6 +140,7 @@ class SendResponseListener implements
         $events = $this->getEventManager();
         $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new PhpEnvironmentResponseSender(), -1000);
         $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new ConsoleResponseSender(), -2000);
+        $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new SimpleStreamResponseSender(), -3000);
     }
 
 }

@@ -559,10 +559,10 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
             ),
         );
     }
-    
+
     /**
      * Set entropy file /dev/urandom, see issue #3046
-     * 
+     *
      * @link https://github.com/zendframework/zf2/issues/3046
      */
     public function testSetEntropyDevUrandom()

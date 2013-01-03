@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -22,7 +21,6 @@ use Zend\Session\Validator\ValidatorInterface as Validator;
  */
 class ValidatorChain extends EventManager
 {
-
     /**
      * @var Storage
      */
@@ -57,7 +55,6 @@ class ValidatorChain extends EventManager
      */
     public function attach($event, $callback = null, $priority = 1)
     {
-        /** @var Validator $context  */
         $context = null;
         if ($callback instanceof Validator) {
             $context = $callback;

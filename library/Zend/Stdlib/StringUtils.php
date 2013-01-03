@@ -114,7 +114,9 @@ abstract class StringUtils
     {
         foreach (static::getRegisteredWrappers() as $wrapperClass) {
             if ($wrapperClass::isSupported($encoding, $convertEncoding)) {
-                return new $wrapperClass($encoding, $convertEncoding);
+                $wrapper = new $wrapperClass($encoding, $convertEncoding);
+                $wrapper->setEncoding($encoding, $convertEncoding);
+                return $wrapper;
             }
         }
 

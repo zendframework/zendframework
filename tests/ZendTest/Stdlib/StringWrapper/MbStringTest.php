@@ -41,6 +41,9 @@ class MbStringTest extends CommonStringWrapperTest
         if (!MbString::isSupported($encoding, $convertEncoding)) {
             return false;
         }
-        return new MbString($encoding, $convertEncoding);
+
+        $wrapper = new MbString();
+        $wrapper->setEncoding($encoding, $convertEncoding);
+        return $wrapper;
     }
 }

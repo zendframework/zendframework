@@ -52,15 +52,13 @@ class MbString extends AbstractStringWrapper
      *
      * @throws Exception\ExtensionNotLoadedException
      */
-    public function __construct($encoding, $convertEncoding = null)
+    public function __construct()
     {
         if (!extension_loaded('mbstring')) {
             throw new Exception\ExtensionNotLoadedException(
                 'PHP extension "mbstring" is required for this wrapper'
             );
         }
-
-        parent::__construct($encoding, $convertEncoding);
     }
 
     /**
@@ -72,7 +70,7 @@ class MbString extends AbstractStringWrapper
      */
     public function strlen($str)
     {
-        return mb_strlen($str, $this->encoding);
+        return mb_strlen($str, $this->getEncoding());
     }
 
     /**
@@ -86,7 +84,7 @@ class MbString extends AbstractStringWrapper
      */
     public function substr($str, $offset = 0, $length = null)
     {
-        return mb_substr($str, $offset, $length, $this->encoding);
+        return mb_substr($str, $offset, $length, $this->getEncoding());
     }
 
     /**
@@ -100,7 +98,7 @@ class MbString extends AbstractStringWrapper
      */
     public function strpos($haystack, $needle, $offset = 0)
     {
-        return mb_strpos($haystack, $needle, $offset, $this->encoding);
+        return mb_strpos($haystack, $needle, $offset, $this->getEncoding());
     }
 
     /**
@@ -112,8 +110,21 @@ class MbString extends AbstractStringWrapper
      */
     public function convert($str, $reverse = false)
     {
-        $fromEncoding = $reverse ? $this->convertEncoding : $this->encoding;
-        $toEncoding   = $reverse ? $this->encoding : $this->convertEncoding;
+        $encoding        = $this->getEncoding();
+        $convertEncoding = $this->getConvertEncoding();
+
+        if ($convertEncoding === null) {
+            throw new Exception\LogicException(
+                'No convert encoding defined'
+            );
+        }
+
+        if ($encoding === $convertEncoding) {
+            return $str;
+        }
+
+        $fromEncoding = $reverse ? $convertEncoding : $encoding;
+        $toEncoding   = $reverse ? $encoding : $convertEncoding;
         return mb_convert_encoding($str, $toEncoding, $fromEncoding);
     }
 }

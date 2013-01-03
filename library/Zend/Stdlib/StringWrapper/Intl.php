@@ -41,15 +41,13 @@ class Intl extends AbstractStringWrapper
      *
      * @throws Exception\ExtensionNotLoadedException
      */
-    public function __construct($encoding, $convertEncoding = null)
+    public function __construct()
     {
         if (!extension_loaded('intl')) {
             throw new Exception\ExtensionNotLoadedException(
                 'PHP extension "intl" is required for this wrapper'
             );
         }
-
-        parent::__construct($encoding, $convertEncoding);
     }
 
     /**

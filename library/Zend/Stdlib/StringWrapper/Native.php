@@ -21,6 +21,14 @@ use Zend\Stdlib\StringUtils;
 class Native extends AbstractStringWrapper
 {
     /**
+     * The character encoding working on
+     * (overwritten to change defaut encoding)
+     *
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Check if the given character encoding is supported by this wrapper
      * and the character encoding to convert to is also supported.
      *

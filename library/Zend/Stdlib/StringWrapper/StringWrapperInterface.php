@@ -34,14 +34,6 @@ interface StringWrapperInterface
     public static function getSupportedEncodings();
 
     /**
-     * Constructor
-     *
-     * @param string      $encoding        Character encoding working on
-     * @param string|null $convertEncoding Character encoding to convert to
-     */
-    public function __construct($encoding, $convertEncoding = null);
-
-    /**
      * Set character encoding working with and convert to
      *
      * @param string      $encoding         The character encoding to work with
@@ -49,6 +41,20 @@ interface StringWrapperInterface
      * @return StringWrapperInterface
      */
     public function setEncoding($encoding, $convertEncoding = null);
+
+    /**
+     * Get the defined character encoding to work with (upper case)
+     *
+     * @return string|null
+     */
+    public function getEncoding();
+
+    /**
+     * Get the defined character encoding to convert to (upper case)
+     *
+     * @return string|null
+     */
+    public function getConvertEncoding();
 
     /**
      * Returns the length of the given string

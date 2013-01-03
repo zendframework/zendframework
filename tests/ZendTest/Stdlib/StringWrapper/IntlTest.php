@@ -41,6 +41,9 @@ class IntlTest extends CommonStringWrapperTest
         if (!Intl::isSupported($encoding, $convertEncoding)) {
             return false;
         }
-        return new Intl($encoding, $convertEncoding);
+
+        $wrapper = new Intl();
+        $wrapper->setEncoding($encoding, $convertEncoding);
+        return $wrapper;
     }
 }

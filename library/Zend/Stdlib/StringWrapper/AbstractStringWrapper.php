@@ -24,7 +24,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * The character encoding working on
      * @var string|null
      */
-    protected $encoding;
+    protected $encoding = 'UTF-8';
 
     /**
      * An optionally character encoding to convert to
@@ -52,17 +52,6 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         }
 
         return true;
-    }
-
-    /**
-     * Constructor
-     * @param string      $encoding        Character encoding working on
-     * @param string|null $convertEncoding Character encoding to convert to
-     * @throws Exception\InvalidArgumentException
-     */
-    public function __construct($encoding, $convertEncoding = null)
-    {
-        $this->setEncoding($encoding, $convertEncoding);
     }
 
     /**
@@ -101,6 +90,28 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         return $this;
     }
 
+
+    /**
+     * Get the defined character encoding to work with
+     *
+     * @return string
+     * @throws Exception\LogicException If no encoding was defined
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
+     * Get the defined character encoding to convert to
+     *
+     * @return string|null
+    */
+    public function getConvertEncoding()
+    {
+        return $this->convertEncoding;
+    }
+
     /**
      * Convert a string from defined character encoding to the defined convert encoding
      *
@@ -110,13 +121,20 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      */
     public function convert($str, $reverse = false)
     {
-        if ($this->encoding === $this->convertEncoding) {
+        $encoding        = $this->getEncoding();
+        $convertEncoding = $this->getConvertEncoding();
+        if ($convertEncoding === null) {
+            throw new Exception\LogicException(
+                'No convert encoding defined'
+            );
+        }
+
+        if ($encoding === $convertEncoding) {
             return $str;
         }
 
-        var_dump($this->encoding, $this->convertEncoding);
-        $from = $reverse ? $this->convertEncoding : $this->encoding;
-        $to   = $reverse ? $this->encoding : $this->convertEncoding;
+        $from = $reverse ? $convertEncoding : $encoding;
+        $to   = $reverse ? $encoding : $convertEncoding;
         throw new Exception\RuntimeException(sprintf(
             'Converting from "%s" to "%s" isn\'t supported by this string wrapper',
             $from,
@@ -151,7 +169,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             throw new Exception\InvalidArgumentException('Cannot force cut when width is zero');
         }
 
-        if (StringUtils::isSingleByteEncoding($this->encoding)) {
+        if (StringUtils::isSingleByteEncoding($this->getEncoding())) {
             return wordwrap($string, $width, $break, $cut);
         }
 
@@ -217,7 +235,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      */
     public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT)
     {
-        if (StringUtils::isSingleByteEncoding($this->encoding)) {
+        if (StringUtils::isSingleByteEncoding($this->getEncoding())) {
             return str_pad($input, $padLength, $padString, $padType);
         }
 

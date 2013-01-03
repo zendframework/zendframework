@@ -26,6 +26,9 @@ class NativeTest extends CommonStringWrapperTest
         if (!Native::isSupported($encoding, $convertEncoding)) {
             return false;
         }
-        return new Native($encoding, $convertEncoding);
+
+        $wrapper = new Native();
+        $wrapper->setEncoding($encoding, $convertEncoding);
+        return $wrapper;
     }
 }

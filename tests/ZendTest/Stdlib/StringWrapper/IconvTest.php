@@ -41,6 +41,9 @@ class IconvTest extends CommonStringWrapperTest
         if (!Iconv::isSupported($encoding, $convertEncoding)) {
             return false;
         }
-        return new Iconv($encoding, $convertEncoding);
+
+        $wrapper = new Iconv();
+        $wrapper->setEncoding($encoding, $convertEncoding);
+        return $wrapper;
     }
 }

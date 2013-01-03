@@ -48,7 +48,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @return mixed
      */
-    abstract public function getList ();
+    abstract public function getList();
 
     /**
      * Return single resource
@@ -56,7 +56,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $id
      * @return mixed
      */
-    abstract public function get ($id);
+    abstract public function get($id);
 
     /**
      * Create a new resource
@@ -64,7 +64,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $data
      * @return mixed
      */
-    abstract public function create ($data);
+    abstract public function create($data);
 
     /**
      * Update an existing resource
@@ -73,7 +73,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $data
      * @return mixed
      */
-    abstract public function update ($id, $data);
+    abstract public function update($id, $data);
 
     /**
      * Delete an existing resource
@@ -81,14 +81,14 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $id
      * @return mixed
      */
-    abstract public function delete ($id);
+    abstract public function delete($id);
 
     /**
      * Basic functionality for when a page is not available
      *
      * @return array
      */
-    public function notFoundAction ()
+    public function notFoundAction()
     {
         $this->response->setStatusCode(404);
         
@@ -110,7 +110,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @return mixed|Response
      * @throws Exception\InvalidArgumentException
      */
-    public function dispatch (Request $request, Response $response = null)
+    public function dispatch(Request $request, Response $response = null)
     {
         if (! $request instanceof HttpRequest) {
             throw new Exception\InvalidArgumentException(
@@ -127,7 +127,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @return mixed
      * @throws Exception\DomainException if no route matches in event or invalid HTTP method
      */
-    public function onDispatch (MvcEvent $e)
+    public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
         if (! $routeMatch) {
@@ -204,7 +204,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @param Request $request
      * @return mixed
      */
-    public function processPostData (Request $request)
+    public function processPostData(Request $request)
     {
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
             return $this->create(Json::decode($request->getContent()));
@@ -222,7 +222,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @return mixed
      * @throws Exception\DomainException
      */
-    public function processPutData (Request $request, $routeMatch)
+    public function processPutData(Request $request, $routeMatch)
     {
         if (null === $id = $routeMatch->getParam('id')) {
             if (! ($id = $request->getQuery()->get('id', false))) {
@@ -245,7 +245,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @return boolean
      */
-    public function requestHasContentType (Request $request, $contentType = '')
+    public function requestHasContentType(Request $request, $contentType = '')
     {
         $acceptHeaders = $request->getHeaders()->get('Accept');
         

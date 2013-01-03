@@ -100,7 +100,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             throw new Exception\InvalidArgumentException('Function does not specify an @return annotation tag; cannot determine return type');
         }
         $tag    = $docBlock->getTag('return');
-        $return = DocBlockReflection::factory('@return ' . $tag->getDescription());
+        $return = new DocBlockReflection('@return ' . $tag->getDescription());
         return $return;
     }
 

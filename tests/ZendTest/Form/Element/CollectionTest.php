@@ -264,7 +264,7 @@ class CollectionTest extends TestCase
     public function testExtractMaintainsTargetElementObject()
     {
         $collection = $this->form->get('fieldsets');
-        $this->prepareForExtract($collection); 
+        $this->prepareForExtract($collection);
 
         $expected = $collection->getTargetElement()->getObject();
 
@@ -278,7 +278,7 @@ class CollectionTest extends TestCase
     public function testExtractThroughCustomHydrator()
     {
         $collection = $this->form->get('fieldsets');
-        $this->prepareForExtract($collection); 
+        $this->prepareForExtract($collection);
 
         $mockHydrator = $this->getMock('Zend\Stdlib\Hydrator\HydratorInterface');
         $mockHydrator->expects($this->exactly(2))
@@ -331,6 +331,6 @@ class CollectionTest extends TestCase
         $collection->setObject(array(
             'obj2' => $obj2,
             'obj3' => $obj3,
-        )); 
+        ));
     }
 }

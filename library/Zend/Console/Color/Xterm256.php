@@ -26,20 +26,22 @@ class Xterm256
     public static function calculate($hexColor)
     {
         $hex = str_split($hexColor, 2);
-        if(count($hex) !== 3) {
+        if (count($hex) !== 3) {
             return null;
         }
         $ahex = array_map(function ($hex) {
             $val = round(((hexdec($hex) - 55)/40), 0);
+
             return $val > 0 ? (int) $val : 0;
         }, $hex);
         $x11 = $ahex[0] * 36 + $ahex[1] * 6 + $ahex[2] + 16;
-        if($x11 >= 16 && $x11 <= 231) {
+        if ($x11 >= 16 && $x11 <= 231) {
             return new static($x11);
         }
         else {
             $x11 = 232 + floor(hexdec($hex[0])/10);
         }
+
         return new static($x11);
     }
 }

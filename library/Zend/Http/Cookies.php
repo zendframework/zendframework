@@ -92,10 +92,8 @@ class Cookies extends Headers
         );
     }
 
-    public function __construct(Headers $headers)
-    {
-        $this->headers = $headers;
-    }
+    public function __construct()
+    { }
 
     /**
      * Add a cookie to the class. Cookie should be passed either as a Zend\Http\Header\Cookie object

@@ -55,6 +55,7 @@ class MultiByte
      * @param  integer $padType
      * @param  string  $charset
      * @return string
+     * @deprecated Please use Zend\Stdlib\StringUtils instead
      */
     public static function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $charset = 'utf-8')
     {

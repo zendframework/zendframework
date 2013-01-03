@@ -370,7 +370,8 @@ class Posix extends AbstractAdapter
      * @throws Exception\BadMethodCallException
      * @return string
      */
-    protected function getColorCode($color, $type = 'fg') {
+    protected function getColorCode($color, $type = 'fg')
+    {
         if($color instanceof Xterm256) {
             $r = new \ReflectionClass($color);
             $code = $r->getStaticPropertyValue('color');

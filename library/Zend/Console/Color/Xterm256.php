@@ -14,14 +14,17 @@ namespace Zend\Console\Color;
  * @category   Zend
  * @package    Zend_Console
  */
-class Xterm256 {
+class Xterm256
+{
     public static $color;
     const FOREGROUND = 38;
     const BACKGROUND = 48;
-    private function __construct($color) {
+    private function __construct($color)
+    {
         static::$color = sprintf('%%s;5;%s', $color);
     }
-    public static function calculate($hexColor) {
+    public static function calculate($hexColor)
+    {
         $hex = str_split($hexColor, 2);
         if(count($hex) !== 3) {
             return null;

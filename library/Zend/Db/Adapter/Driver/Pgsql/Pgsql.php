@@ -109,9 +109,9 @@ class Pgsql implements DriverInterface
     {
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
             return 'Postgresql';
-        } else {
-            return 'PostgreSQL';
         }
+
+        return 'PostgreSQL';
     }
 
     /**

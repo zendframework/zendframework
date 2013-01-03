@@ -111,9 +111,9 @@ class ResultSet extends AbstractResultSet
                 $ao->exchangeArray($data);
             }
             return $ao;
-        } else {
-            return $data;
         }
+
+        return $data;
     }
 
 }

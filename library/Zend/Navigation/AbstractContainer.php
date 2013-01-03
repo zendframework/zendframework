@@ -326,9 +326,9 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
     {
         if ($all) {
             return $this->findAllBy($property, $value);
-        } else {
-            return $this->findOneBy($property, $value);
         }
+
+        return $this->findOneBy($property, $value);
     }
 
     /**

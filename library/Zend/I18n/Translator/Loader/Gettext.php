@@ -186,8 +186,8 @@ class Gettext implements FileLoaderInterface
     {
         if ($this->littleEndian) {
             return unpack('V' . $num, fread($this->file, 4 * $num));
-        } else {
-            return unpack('N' . $num, fread($this->file, 4 * $num));
         }
+
+        return unpack('N' . $num, fread($this->file, 4 * $num));
     }
 }

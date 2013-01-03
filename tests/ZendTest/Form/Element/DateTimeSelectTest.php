@@ -14,6 +14,7 @@ use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateTimeSelect as DateTimeSelectElement;
 use Zend\Form\Factory;
+use Zend\Form\Exception;
 
 class DateTimeSelectTest extends TestCase
 {
@@ -52,6 +53,28 @@ class DateTimeSelectTest extends TestCase
         $this->assertEquals('03', $element->getHourElement()->getValue());
         $this->assertEquals('04', $element->getMinuteElement()->getValue());
         $this->assertEquals('05', $element->getSecondElement()->getValue());
+    }
+
+    public function testCanSetDateFromString()
+    {
+        $element  = new DateTimeSelectElement();
+        $element->setValue('2012-09-24 03:04:05');
+
+        $this->assertEquals('2012', $element->getYearElement()->getValue());
+        $this->assertEquals('09', $element->getMonthElement()->getValue());
+        $this->assertEquals('24', $element->getDayElement()->getValue());
+        $this->assertEquals('03', $element->getHourElement()->getValue());
+        $this->assertEquals('04', $element->getMinuteElement()->getValue());
+        $this->assertEquals('05', $element->getSecondElement()->getValue());
+    }
+
+    /**
+     * @expectedException \Zend\Form\Exception\InvalidArgumentException
+     */
+    public function testThrowsOnInvalidValue()
+    {
+        $element  = new DateTimeSelectElement();
+        $element->setValue('hello world');
     }
 
     public function testUseDefaultValueForSecondsIfNotProvided()

@@ -81,7 +81,6 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      */
     protected $templateElement;
 
-
     /**
      * Accepted options for Collection:
      * - target_element: an array or element used in the collection
@@ -125,7 +124,6 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         return $this;
     }
 
-
     /**
      * Checks if the object can be set in this fieldset
      *
@@ -160,7 +158,6 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
 
         return $this;
     }
-
 
     /**
      * Populate values
@@ -476,12 +473,17 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         }
 
         $values = array();
+
         foreach ($this->object as $key => $value) {
             if ($this->hydrator) {
                 $values[$key] = $this->hydrator->extract($value);
             } elseif ($value instanceof $this->targetElement->object) {
+                $originalObject = $this->targetElement->object;
+
                 $this->targetElement->object = $value;
                 $values[$key] = $this->targetElement->extract();
+
+                $this->targetElement->object = $originalObject;
             }
         }
 

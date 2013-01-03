@@ -45,7 +45,7 @@ interface StringWrapperInterface
     /**
      * Get the defined character encoding to work with (upper case)
      *
-     * @return string|null
+     * @return string
      */
     public function getEncoding();
 

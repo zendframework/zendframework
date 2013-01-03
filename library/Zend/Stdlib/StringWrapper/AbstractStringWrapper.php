@@ -222,9 +222,12 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         }
 
         $lengthOfPadding = $padLength - $this->strlen($input);
-        $padStringLength = $this->strlen($padString);
+        if ($lengthOfPadding <= 0) {
+            return $input;
+        }
 
-        if ($padStringLength === 0 || $lengthOfPadding <= 0) {
+        $padStringLength = $this->strlen($padString);
+        if ($padStringLength === 0) {
             return $input;
         }
 
@@ -245,14 +248,14 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             return str_repeat($padString, $repeatCountLeft) . $lastStringLeft
                 . $input
                 . str_repeat($padString, $repeatCountRight) . $lastStringRight;
-        } else {
-            $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength);
-
-            if ($padType === \STR_PAD_LEFT) {
-                return str_repeat($padString, $repeatCount) . $lastString . $input;
-            } else {
-                return $input . str_repeat($padString, $repeatCount) . $lastString;
-            }
         }
+
+        $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength);
+
+        if ($padType === \STR_PAD_LEFT) {
+            return str_repeat($padString, $repeatCount) . $lastString . $input;
+        }
+
+        return $input . str_repeat($padString, $repeatCount) . $lastString;
     }
 }

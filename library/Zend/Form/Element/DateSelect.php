@@ -10,7 +10,7 @@
 
 namespace Zend\Form\Element;
 
-use DateTime;
+use DateTime as PhpDateTime;
 use Zend\Form\Form;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Date as DateValidator;
@@ -88,7 +88,7 @@ class DateSelect extends MonthSelect
     }
 
     /**
-     * @param mixed $value
+     * @param  string|array|ArrayAccess|PhpDateTime $value
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */
@@ -96,13 +96,13 @@ class DateSelect extends MonthSelect
     {
         if (is_string($value)) {
             try {
-                $value = new DateTime($value);
+                $value = new PhpDateTime($value);
             } catch (Exception $e) {
-                throw new InvalidArgumentException('Value should be a parsable string or an instance of \DateTime');
+                throw new InvalidArgumentException('Value should be a parsable string or an instance of DateTime');
             }
         }
 
-        if ($value instanceof DateTime) {
+        if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'  => $value->format('Y'),
                 'month' => $value->format('m'),

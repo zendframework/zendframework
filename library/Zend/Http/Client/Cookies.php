@@ -10,7 +10,7 @@
 
 namespace Zend\Http\Client;
 
-use ArrayIterator;
+use Traversable;
 use Zend\Http\Header\SetCookie;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Response;
@@ -84,13 +84,6 @@ class Cookies
     protected $rawCookies = array();
 
     /**
-     * Construct
-     *
-     */
-    public function __construct()
-    { }
-
-    /**
      * Add a cookie to the class. Cookie should be passed either as a Zend\Http\Header\Cookie object
      * or as a string - in which case an object is created from the string.
      *
@@ -101,7 +94,7 @@ class Cookies
     public function addCookie($cookie, $ref_uri = null)
     {
         if (is_string($cookie)) {
-            $cookie = Cookie::fromString($cookie, $ref_uri);
+            $cookie = SetCookie::fromString($cookie, $ref_uri);
         }
 
         if ($cookie instanceof SetCookie) {
@@ -129,7 +122,7 @@ class Cookies
     public function addCookiesFromResponse(Response $response, $ref_uri)
     {
         $cookie_hdrs = $response->getHeaders()->get('Set-Cookie');
-        if ($cookie_hdrs instanceof \ArrayIterator) {
+        if ($cookie_hdrs instanceof Traversable) {
             $cookie_hdrs = ArrayUtils::iteratorToArray($cookie_hdrs);
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -7,7 +8,6 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
-
 namespace Zend\Session;
 
 use Zend\EventManager\EventManager;
@@ -22,6 +22,7 @@ use Zend\Session\Validator\ValidatorInterface as Validator;
  */
 class ValidatorChain extends EventManager
 {
+
     /**
      * @var Storage
      */
@@ -41,7 +42,7 @@ class ValidatorChain extends EventManager
         $validators = $storage->getMetadata('_VALID');
         if ($validators) {
             foreach ($validators as $validator => $data) {
-                $this->attach('session.validate', new $validator($data), 'isValid');
+                $this->attach('session.validate', array(new $validator($data), 'isValid'));
             }
         }
     }

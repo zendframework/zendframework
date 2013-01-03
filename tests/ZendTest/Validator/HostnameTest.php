@@ -450,6 +450,16 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('رات.si'));
     }
 
+    public function testIDNIT()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        $this->assertTrue($validator->isValid('plainascii.it'));
+        $this->assertTrue($validator->isValid('città-caffè.it'));
+        $this->assertTrue($validator->isValid('edgetest-àâäèéêëìîïòôöùûüæœçÿß.it'));
+        $this->assertFalse($validator->isValid('رات.it'));
+    }
+
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;

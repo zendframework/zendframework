@@ -71,6 +71,32 @@ class TranslatorTest extends TestCase
         $this->assertEquals('de_DE', $translator->getLocale());
     }
 
+    public function testTranslationFromSeveralTranslationFiles()
+    {
+        $translator = Translator::factory(array(
+            'locale' => 'de_DE',
+            'translation_file_patterns' => array(
+                array(
+                    'type' => 'phparray',
+                    'base_dir' => $this->testFilesDir . '/testarray',
+                    'pattern' => 'translation-%s.php'
+                ),
+                array(
+                    'type' => 'phparray',
+                    'base_dir' => $this->testFilesDir . '/testarray',
+                    'pattern' => 'translation-more-%s.php'
+                )
+            )
+        ));
+
+        //Test translator instance
+        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+
+        //Test translations
+        $this->assertEquals('Nachricht 1', $translator->translate('Message 1')); //translation-de_DE.php
+        $this->assertEquals('Nachricht 9', $translator->translate('Message 9')); //translation-more-de_DE.php
+    }
+
     public function testFactoryCreatesTranslatorWithCache()
     {
         $translator = Translator::factory(array(

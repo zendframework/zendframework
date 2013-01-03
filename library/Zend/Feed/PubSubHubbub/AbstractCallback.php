@@ -246,9 +246,9 @@ abstract class AbstractCallback implements CallbackInterface
             || ($scheme == 'https' && $port == 443)
         ) {
             return $name;
-        } else {
-            return $name . ':' . $port;
         }
+
+        return $name . ':' . $port;
     }
 
     /**

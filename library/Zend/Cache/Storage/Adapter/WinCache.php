@@ -218,9 +218,9 @@ class WinCache extends AbstractAdapter implements
             $metadata = $info['ucache_entries'][1];
             $this->normalizeMetadata($metadata);
             return $metadata;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /* writing */

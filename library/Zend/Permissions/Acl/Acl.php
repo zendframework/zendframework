@@ -990,9 +990,9 @@ class Acl implements AclInterface
             return null;
         } elseif (self::TYPE_ALLOW === $rule['type']) {
             return self::TYPE_DENY;
-        } else {
-            return self::TYPE_ALLOW;
         }
+
+        return self::TYPE_ALLOW;
     }
 
     /**

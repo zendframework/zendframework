@@ -82,9 +82,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         if ($driver) {
             $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
             return array($driver->formatParameterName('offset'));
-        } else {
-            return array($this->offset);
         }
+
+        return array($this->offset);
     }
 
 }

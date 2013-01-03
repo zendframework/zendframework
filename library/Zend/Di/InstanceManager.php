@@ -335,9 +335,9 @@ class InstanceManager /* implements InstanceManagerInterface */
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (isset($this->configurations[$key])) {
             return $this->configurations[$key];
-        } else {
-            return $this->configurationTemplate;
         }
+
+        return $this->configurationTemplate;
     }
 
     /**

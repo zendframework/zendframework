@@ -44,9 +44,9 @@ class RootDse extends AbstractNode
             && $data['structuralobjectclass'][0] === 'OpenLDAProotDSE'
         ) {
             return new RootDse\OpenLdap($dn, $data);
-        } else {
-            return new self($dn, $data);
         }
+
+        return new self($dn, $data);
     }
 
     /**

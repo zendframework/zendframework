@@ -291,8 +291,8 @@ class Breadcrumbs extends AbstractHelper
         $partial = $this->getPartial();
         if ($partial) {
             return $this->renderPartial($container, $partial);
-        } else {
-            return $this->renderStraight($container);
         }
+
+        return $this->renderStraight($container);
     }
 }

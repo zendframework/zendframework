@@ -10,8 +10,10 @@
 
 namespace Zend\Mvc\Controller;
 
+use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ConsoleModel;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -50,13 +52,12 @@ abstract class AbstractActionController extends AbstractController
         $response   = $this->response;
         $event      = $this->getEvent();
         $routeMatch = $event->getRouteMatch();
-
-        $response->setStatusCode(404);
         $routeMatch->setParam('action', 'not-found');
 
-        return new ViewModel(array(
-            'content' => 'Page not found'
-        ));
+        if ($response instanceof HttpResponse) {
+            return $this->createHttpNotFoundModel($response);
+        }
+        return $this->createConsoleNotFoundModel($response);
     }
 
     /**
@@ -89,5 +90,33 @@ abstract class AbstractActionController extends AbstractController
         $e->setResult($actionResponse);
 
         return $actionResponse;
+    }
+
+    /**
+     * Create an HTTP view model representing a "not found" page
+     *
+     * @param  HttpResponse $response
+     * @return ViewModel
+     */
+    protected function createHttpNotFoundModel(HttpResponse $response)
+    {
+        $response->setStatusCode(404);
+        return new ViewModel(array(
+            'content' => 'Page not found',
+        ));
+    }
+
+    /**
+     * Create a console view model representing a "not found" action
+     *
+     * @param  \Zend\Stdlib\ResponseInterface $response
+     * @return ConsoleModel
+     */
+    protected function createConsoleNotFoundModel($response)
+    {
+        $viewModel = new ConsoleModel();
+        $viewModel->setErrorLevel(1);
+        $viewModel->setResult('Page not found');
+        return $viewModel;
     }
 }

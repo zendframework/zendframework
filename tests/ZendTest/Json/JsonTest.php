@@ -381,11 +381,11 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testZf461()
     {
-        $item1 = new Item() ;
-        $item2 = new Item() ;
-        $everything = array() ;
-        $everything['allItems'] = array($item1, $item2) ;
-        $everything['currentItem'] = $item1 ;
+        $item1 = new Item();
+        $item2 = new Item();
+        $everything = array();
+        $everything['allItems'] = array($item1, $item2);
+        $everything['currentItem'] = $item1;
 
         // should not fail
         $encoded = Json\Encoder::encode($everything);
@@ -403,11 +403,11 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testZf4053()
     {
-        $item1 = new Item() ;
-        $item2 = new Item() ;
-        $everything = array() ;
-        $everything['allItems'] = array($item1, $item2) ;
-        $everything['currentItem'] = $item1 ;
+        $item1 = new Item();
+        $item2 = new Item();
+        $everything = array();
+        $everything['allItems'] = array($item1, $item2);
+        $everything['currentItem'] = $item1;
 
         $options = array('silenceCyclicalExceptions'=>true);
 

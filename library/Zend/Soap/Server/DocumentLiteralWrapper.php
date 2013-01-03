@@ -133,7 +133,7 @@ class DocumentLiteralWrapper
             if (!isset($params[$argName])) {
                 throw new UnexpectedValueException(sprintf(
                     "Received unknown argument %s which is not an argument to %s::%s",
-                    get_class($this->object), $method
+                    $argName, get_class($this->object), $method
                 ));
             }
             $delegateArgs[$params[$argName]->getPosition()] = $argValue;

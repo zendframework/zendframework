@@ -124,7 +124,7 @@ class SqliteMetadata extends AbstractSource
         $primaryKey = array();
 
         foreach ($this->data['sqlite_columns'][$schema][$table] as $col) {
-            if ((bool)$col['pk']) {
+            if ((bool) $col['pk']) {
                 $primaryKey[] = $col['name'];
             }
         }
@@ -135,7 +135,7 @@ class SqliteMetadata extends AbstractSource
         $constraints = array();
         $indexes = $this->fetchPragma('index_list', $table, $schema);
         foreach ($indexes as $index) {
-            if (!((bool)$index['unique'])) {
+            if (!((bool) $index['unique'])) {
                 continue;
             }
             $constraint = array(

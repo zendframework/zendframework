@@ -87,17 +87,17 @@ ECS;
     public function testFromStringNested()
     {
         $ini = <<<ECS
-foo.bar = foobar
-foobar[] = foobarArray
-foo.baz[] = foobaz1
-foo.baz[] = foobaz2
+bla.foo.bar = foobar
+bla.foobar[] = foobarArray
+bla.foo.baz[] = foobaz1
+bla.foo.baz[] = foobaz2
 
 ECS;
 
         $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['foo']['bar'], 'foobar');
-        $this->assertEquals($arrayIni['foobar'][0], 'foobarArray');
-        $this->assertEquals($arrayIni['foo']['baz'][0], 'foobaz1');
-        $this->assertEquals($arrayIni['foo']['baz'][1], 'foobaz2');
+        $this->assertEquals($arrayIni['bla']['foo']['bar'], 'foobar');
+        $this->assertEquals($arrayIni['bla']['foobar'][0], 'foobarArray');
+        $this->assertEquals($arrayIni['bla']['foo']['baz'][0], 'foobaz1');
+        $this->assertEquals($arrayIni['bla']['foo']['baz'][1], 'foobaz2');
     }
 }

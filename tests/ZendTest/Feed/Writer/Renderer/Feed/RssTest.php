@@ -224,6 +224,21 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed->render();
     }
 
+    /**
+     * @group Issue2605
+     */
+    public function testFeedIncludesLinkToXmlRssWhereRssAndAtomLinksAreProvided()
+    {
+        $this->validWriter->setFeedLink('http://www.example.com/rss', 'rss');
+        $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
+        $rssFeed = new Renderer\Feed\Rss($this->validWriter);
+        $rssFeed->render();
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $this->assertEquals('http://www.example.com/rss', $feed->getFeedLink());
+        $xpath = new \DOMXPath($feed->getDomDocument());
+        $this->assertEquals(1, $xpath->evaluate('/rss/channel/atom:link[@rel="self"]')->length);
+    }
+
     public function testFeedIncludesLinkToXmlRssWhereTheFeedWillBeAvailable()
     {
         $this->validWriter->setFeedLink('http://www.example.com/rss', 'rss');

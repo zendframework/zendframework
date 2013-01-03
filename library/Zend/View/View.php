@@ -175,7 +175,7 @@ class View implements EventManagerAwareInterface
         $event   = $this->getEvent();
         $event->setModel($model);
         $events  = $this->getEventManager();
-        $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function($result) {
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function ($result) {
             return ($result instanceof Renderer);
         });
         $renderer = $results->last();

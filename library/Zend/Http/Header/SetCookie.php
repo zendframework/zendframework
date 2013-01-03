@@ -95,7 +95,7 @@ class SetCookie implements MultipleHeaderInterface
 
         if ($setCookieProcessor === null) {
             $setCookieClass = get_called_class();
-            $setCookieProcessor = function($headerLine) use ($setCookieClass) {
+            $setCookieProcessor = function ($headerLine) use ($setCookieClass) {
                 $header = new $setCookieClass;
                 $keyValuePairs = preg_split('#;\s*#', $headerLine);
                 foreach ($keyValuePairs as $keyValue) {
@@ -132,6 +132,9 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         list($name, $value) = explode(': ', $headerLine, 2);
+
+        // some sites return set-cookie::value, this is to get rid of the second :
+        $name = (strtolower($name) =='set-cookie:') ? 'set-cookie' : $name;
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'set-cookie') {

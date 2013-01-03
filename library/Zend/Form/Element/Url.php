@@ -13,7 +13,6 @@ namespace Zend\Form\Element;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Uri as UriValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -32,14 +31,14 @@ class Url extends Element implements InputProviderInterface
     );
 
     /**
-     * @var ValidatorInterface
+     * @var \Zend\Validator\ValidatorInterface
      */
     protected $validator;
 
     /**
      * Get validator
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     public function getValidator()
     {

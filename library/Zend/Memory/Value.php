@@ -64,7 +64,7 @@ class Value implements ArrayAccess, Countable
          * object is processed (and marked as traced) when another
          * memory object is modified.
          *
-         * It reduces overall numberr of calls necessary to modification trace
+         * It reduces overall number of calls necessary to modification trace
          */
         $this->trace = false;
     }

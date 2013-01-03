@@ -454,7 +454,7 @@ class Decoder
      */
     public static function decodeUnicodeString($chrs)
     {
-        $chrs        = (string)$chrs;
+        $chrs        = (string) $chrs;
         $delim       = substr($chrs, 0, 1);
         $utf8        = '';
         $strlen_chrs = strlen($chrs);

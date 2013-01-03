@@ -144,7 +144,7 @@ class EventManager implements EventManagerInterface
      */
     public function setIdentifiers($identifiers)
     {
-        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+        if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique((array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array($identifiers);
@@ -160,7 +160,7 @@ class EventManager implements EventManagerInterface
      */
     public function addIdentifiers($identifiers)
     {
-        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+        if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));

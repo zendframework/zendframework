@@ -119,9 +119,9 @@ class Code39 extends AbstractObject
         $text = parent::getTextToDisplay();
         if (substr($text, 0, 1) != '*' && substr($text, -1) != '*') {
             return '*' . $text . '*';
-        } else {
-            return $text;
         }
+
+        return $text;
     }
 
     /**

@@ -11,6 +11,7 @@
 namespace ZendTest\Http\Client;
 
 use Zend\Http\Client\Adapter;
+use Zend\Uri\Uri;
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -247,6 +248,17 @@ class SocketTest extends CommonHttpTests
 
         $response = $this->client->send();
         $this->assertEquals($md5, md5($response->getBody()));
+    }
+
+    /**
+     * Verifies that writing on a socket is considered valid even if 0 bytes
+     * were written.
+     */
+    public function testAllowsZeroWrittenBytes()
+    {
+        $this->_adapter->connect('localhost');
+        require_once __DIR__ . '/_files/fwrite.php';
+        $this->_adapter->write('GET', new Uri('tcp://localhost:80/'), '1.1', array(), 'test body');
     }
 
     /**

@@ -47,7 +47,7 @@ class ForwardTest extends TestCase
         $event->setRouteMatch($routeMatch);
 
         $locator = new Locator;
-        $locator->add('forward', function() {
+        $locator->add('forward', function () {
             return new ForwardController();
         });
 
@@ -93,7 +93,7 @@ class ForwardTest extends TestCase
     public function testDispatchRaisesDomainExceptionIfDiscoveredControllerIsNotDispatchable()
     {
         $locator = $this->controller->getServiceLocator();
-        $locator->add('bogus', function() {
+        $locator->add('bogus', function () {
             return new stdClass;
         });
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'DispatchableInterface');
@@ -104,7 +104,7 @@ class ForwardTest extends TestCase
     {
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Circular forwarding');
         $sampleController = $this->controller;
-        $sampleController->getServiceLocator()->add('sample', function() use ($sampleController) {
+        $sampleController->getServiceLocator()->add('sample', function () use ($sampleController) {
             return $sampleController;
         });
         $this->plugin->dispatch('sample', array('action' => 'test-circular'));

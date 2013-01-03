@@ -30,7 +30,7 @@ class Cycle extends AbstractHelper implements \Iterator
      *
      * @var array
      */
-    protected $pointers = array(self::DEFAULT_NAME =>-1) ;
+    protected $pointers = array(self::DEFAULT_NAME =>-1);
 
     /**
      * Array of values

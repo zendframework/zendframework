@@ -84,13 +84,15 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $ticks = 1;
 
         switch ($period) {
-            //intentional fall through
             case 'yearly':
                 $ticks *= 52; //TODO: fix generalisation, how?
+                // no break
             case 'weekly':
                 $ticks *= 7;
+                // no break
             case 'daily':
                 $ticks *= 24;
+                // no break
             case 'hourly':
                 $ticks *= 3600;
                 break;

@@ -24,7 +24,7 @@ class Image extends AbstractWord
     /**
      * Render the captcha
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException
      * @return string
      */
@@ -47,6 +47,11 @@ class Image extends AbstractWord
             'alt'    => $captcha->getImgAlt(),
             'src'    => $captcha->getImgUrl() . $captcha->getId() . $captcha->getSuffix(),
         );
+
+        if ($element->hasAttribute('id')) {
+            $imgAttributes['id'] = $element->getAttribute('id') . '-image';
+        }
+
         $closingBracket = $this->getInlineClosingBracket();
         $img = sprintf(
             '<img %s%s',

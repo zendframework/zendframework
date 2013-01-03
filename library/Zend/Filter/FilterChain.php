@@ -162,7 +162,7 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Attach a filter to the chain using a short name
      *
-     * Retrieves the filter from the attached plugin broker, and then calls attach()
+     * Retrieves the filter from the attached plugin manager, and then calls attach()
      * with the retrieved instance.
      *
      * @param  string $name

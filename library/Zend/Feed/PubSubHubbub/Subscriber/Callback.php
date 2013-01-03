@@ -30,7 +30,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      * Holds a manually set subscription key (i.e. identifies a unique
      * subscription) which is typical when it is not passed in the query string
      * but is part of the Callback URL path, requiring manual retrieval e.g.
-     * using a route and the Zend_Controller_Action::_getParam() method.
+     * using a route and the \Zend\Mvc\Router\RouteMatch::getParam() method.
      *
      * @var string
      */

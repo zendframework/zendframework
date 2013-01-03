@@ -582,6 +582,10 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getStream()
     {
+        if (!is_null($this->streamName)) {
+            return $this->streamName;
+        }
+
         return $this->config['outputstream'];
     }
 
@@ -631,8 +635,8 @@ class Client implements Stdlib\DispatchableInterface
         if (!defined('self::AUTH_' . strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
-        if (empty($user) || empty($password)) {
-            throw new Exception\InvalidArgumentException("The username and the password cannot be empty");
+        if (empty($user)) {
+            throw new Exception\InvalidArgumentException("The username cannot be empty");
         }
 
         $this->auth = array (
@@ -832,10 +836,6 @@ class Client implements Stdlib\DispatchableInterface
             if ($this->config['outputstream']) {
                 $stream = $this->getStream();
                 if (!is_resource($stream) && is_string($stream)) {
-                    $stream = fopen($stream, 'r');
-                }
-                if (!is_resource($stream)) {
-                    $stream = $this->getUri()->toString();
                     $stream = fopen($stream, 'r');
                 }
                 $streamMetaData = stream_get_meta_data($stream);
@@ -1040,11 +1040,11 @@ class Client implements Stdlib\DispatchableInterface
 
         // Set the Accept-encoding header if not set - depending on whether
         // zlib is available or not.
-        if (! isset($this->headers['accept-encoding'])) {
+        if (!$this->getRequest()->getHeaders()->has('Accept-Encoding')) {
             if (function_exists('gzinflate')) {
-                $headers['Accept-encoding'] = 'gzip, deflate';
+                $headers['Accept-Encoding'] = 'gzip, deflate';
             } else {
-                $headers['Accept-encoding'] = 'identity';
+                $headers['Accept-Encoding'] = 'identity';
             }
         }
 
@@ -1300,5 +1300,43 @@ class Client implements Stdlib\DispatchableInterface
             $uri, $this->config['httpversion'], $headers, $body);
 
         return $this->adapter->read();
+    }
+
+    /**
+     * Create a HTTP authentication "Authorization:" header according to the
+     * specified user, password and authentication method.
+     *
+     * @see http://www.faqs.org/rfcs/rfc2617.html
+     * @param string $user
+     * @param string $password
+     * @param string $type
+     * @return string
+     * @throws Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
+    {
+        $authHeader = null;
+
+        switch ($type) {
+            case self::AUTH_BASIC:
+                // In basic authentication, the user name cannot contain ":"
+                if (strpos($user, ':') !== false) {
+                    throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
+                }
+
+                $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
+                break;
+
+            //case self::AUTH_DIGEST:
+                /**
+                * @todo Implement digest authentication
+                */
+                //    break;
+
+            default:
+                throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
+
+        }
+        return $authHeader;
     }
 }

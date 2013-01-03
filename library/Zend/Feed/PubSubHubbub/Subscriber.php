@@ -625,7 +625,7 @@ class Subscriber
             }
             $client->setUri($url);
             $client->setRawBody($this->_getRequestParameters($url, $mode));
-            $response = $client->getResponse();
+            $response = $client->send();
             if ($response->getStatusCode() !== 204
                 && $response->getStatusCode() !== 202
             ) {

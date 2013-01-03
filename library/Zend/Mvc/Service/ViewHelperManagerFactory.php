@@ -66,14 +66,15 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
         }
 
         // Configure URL view helper with router
-        $plugins->setFactory('url', function($sm) use($serviceLocator) {
+        $plugins->setFactory('url', function ($sm) use($serviceLocator) {
             $helper = new ViewHelper\Url;
             $router = Console::isConsole() ? 'HttpRouter' : 'Router';
             $helper->setRouter($serviceLocator->get($router));
 
             $match = $serviceLocator->get('application')
-                        ->getMvcEvent()
-                        ->getRouteMatch();
+                ->getMvcEvent()
+                ->getRouteMatch()
+            ;
 
             if ($match instanceof RouteMatch) {
                 $helper->setRouteMatch($match);
@@ -82,7 +83,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
             return $helper;
         });
 
-        $plugins->setFactory('basepath', function($sm) use($serviceLocator) {
+        $plugins->setFactory('basepath', function ($sm) use($serviceLocator) {
             $config = $serviceLocator->get('Config');
             $basePathHelper = new ViewHelper\BasePath;
             if (isset($config['view_manager']) && isset($config['view_manager']['base_path'])) {
@@ -100,7 +101,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
          * Other view helpers depend on this to decide which spec to generate their tags
          * based on. This is why it must be set early instead of later in the layout phtml.
          */
-        $plugins->setFactory('doctype', function($sm) use($serviceLocator) {
+        $plugins->setFactory('doctype', function ($sm) use($serviceLocator) {
             $config = $serviceLocator->get('Config');
             $config = $config['view_manager'];
             $doctypeHelper = new ViewHelper\Doctype;

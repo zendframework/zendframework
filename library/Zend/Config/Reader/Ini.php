@@ -77,7 +77,7 @@ class Ini implements ReaderInterface
         $this->directory = dirname($filename);
 
         set_error_handler(
-            function($error, $message = '', $file = '', $line = 0) use ($filename) {
+            function ($error, $message = '', $file = '', $line = 0) use ($filename) {
                 throw new Exception\RuntimeException(sprintf(
                     'Error reading INI file "%s": %s',
                     $filename, $message
@@ -105,7 +105,7 @@ class Ini implements ReaderInterface
         $this->directory = null;
 
         set_error_handler(
-            function($error, $message = '', $file = '', $line = 0) {
+            function ($error, $message = '', $file = '', $line = 0) {
                 throw new Exception\RuntimeException(sprintf(
                     'Error reading INI string: %s',
                     $message
@@ -131,8 +131,8 @@ class Ini implements ReaderInterface
         foreach ($data as $section => $value) {
             if (is_array($value)) {
                 if (strpos($section, $this->nestSeparator) !== false) {
-                    $section = explode($this->nestSeparator, $section, 2);
-                    $config[$section[0]][$section[1]] = $this->processSection($value);
+                    $sections = explode($this->nestSeparator, $section);
+                    $config = array_merge_recursive($config, $this->buildNestedSection($sections, $value));
                 } else {
                     $config[$section] = $this->processSection($value);
                 }
@@ -142,6 +142,27 @@ class Ini implements ReaderInterface
         }
 
         return $config;
+    }
+
+    /**
+     * Process a nested section
+     *
+     * @param array $sections
+     * @param mixed $value
+     * @return array
+     */
+    private function buildNestedSection($sections, $value)
+    {
+        if(count($sections) == 0) {
+            return $this->processSection($value);
+        }
+
+        $nestedSection = array();
+
+        $first = array_shift($sections);
+        $nestedSection[$first] = $this->buildNestedSection($sections, $value);
+
+        return $nestedSection;
     }
 
     /**

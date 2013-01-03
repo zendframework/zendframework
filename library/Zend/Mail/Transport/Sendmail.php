@@ -14,7 +14,6 @@ use Traversable;
 use Zend\Mail;
 use Zend\Mail\Address\AddressInterface;
 use Zend\Mail\Exception;
-use Zend\Mail\Headers;
 use Zend\Mail\Header\HeaderInterface;
 
 /**
@@ -245,7 +244,7 @@ class Sendmail implements TransportInterface
 
         $sender = $message->getSender();
         if ($sender instanceof AddressInterface) {
-            $parameters .= ' -r ' . $sender->getEmail();
+            $parameters .= ' -f ' . $sender->getEmail();
             return $parameters;
         }
 
@@ -253,7 +252,7 @@ class Sendmail implements TransportInterface
         if (count($from)) {
             $from->rewind();
             $sender      = $from->current();
-            $parameters .= ' -r ' . $sender->getEmail();
+            $parameters .= ' -f ' . $sender->getEmail();
             return $parameters;
         }
 

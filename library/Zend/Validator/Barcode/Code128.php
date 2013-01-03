@@ -406,8 +406,8 @@ class Code128 extends AbstractAdapter
                 return -1;
             }
         } else {
-            if ($ord <= 106) {
-                return ($ord + 32);
+            if ($value <= 106) {
+                return ($value + 32);
             } else {
                 return -1;
             }

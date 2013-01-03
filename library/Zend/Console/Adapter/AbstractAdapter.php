@@ -101,7 +101,8 @@ abstract class AbstractAdapter implements AdapterInterface
         } elseif ($width == $consoleWidth) {
             $this->write($text, $color, $bgColor);
         } else {
-            $this->write($text . "\n", $color, $bgColor);
+            $this->write($text, $color, $bgColor);
+            $this->write("\n");
         }
     }
 
@@ -222,9 +223,6 @@ abstract class AbstractAdapter implements AdapterInterface
                     break;
                 case static::FILL_SHADE_DARK:
                     $fillChar = $charset::SHADE_DARK;
-                    break;
-                case static::FILL_SHADE_LIGHT:
-                    $fillChar = $charset::SHADE_LIGHT;
                     break;
                 case static::FILL_BLOCK:
                 default:

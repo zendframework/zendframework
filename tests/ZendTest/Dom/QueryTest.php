@@ -195,7 +195,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         try {
             $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
         } catch (\Exception $e) {
-            return ;
+            return;
         }
         $this->assertFails('XPath PHPFunctions should be disable by default');
     }
@@ -218,7 +218,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
             $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
         } catch (\Exception $e) {
             // $e->getMessage() - Not allowed to call handler 'strtolower()
-            return ;
+            return;
         }
         $this->assertFails('Not allowed to call handler strtolower()');
     }

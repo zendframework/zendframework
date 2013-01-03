@@ -13,7 +13,6 @@ namespace Zend\Form\Element;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Regex as RegexValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -32,14 +31,14 @@ class Color extends Element implements InputProviderInterface
     );
 
     /**
-     * @var ValidatorInterface
+     * @var \Zend\Validator\ValidatorInterface
      */
     protected $validator;
 
     /**
      * Get validator
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getValidator()
     {

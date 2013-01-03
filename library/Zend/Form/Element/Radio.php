@@ -11,7 +11,6 @@
 namespace Zend\Form\Element;
 
 use Zend\Validator\InArray as InArrayValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -32,7 +31,7 @@ class Radio extends MultiCheckbox
     /**
      * Get validator
      *
-     * @return ValidatorInterface
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function getValidator()
     {

@@ -157,9 +157,9 @@ class Result implements
     {
         if ($this->resource instanceof \mysqli || $this->resource instanceof \mysqli_stmt) {
             return $this->resource->affected_rows;
-        } else {
-            return $this->resource->num_rows;
         }
+
+        return $this->resource->num_rows;
     }
 
     /**
@@ -307,9 +307,9 @@ class Result implements
 
         if ($this->resource instanceof \mysqli_stmt) {
             return $this->loadDataFromMysqliStatement();
-        } else {
-            return $this->loadFromMysqliResult();
         }
+
+        return $this->loadFromMysqliResult();
     }
 
     /**

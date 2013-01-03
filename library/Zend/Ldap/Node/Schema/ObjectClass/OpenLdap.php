@@ -128,9 +128,9 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
             return Schema::OBJECTCLASS_TYPE_ABSTRACT;
         } elseif ($this->auxiliary) {
             return Schema::OBJECTCLASS_TYPE_AUXILIARY;
-        } else {
-            return Schema::OBJECTCLASS_TYPE_UNKNOWN;
         }
+
+        return Schema::OBJECTCLASS_TYPE_UNKNOWN;
     }
 
     /**

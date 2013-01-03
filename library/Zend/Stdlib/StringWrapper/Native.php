@@ -10,6 +10,7 @@
 
 namespace Zend\Stdlib\StringWrapper;
 
+use Zend\Stdlib\Exception;
 use Zend\Stdlib\StringUtils;
 
 /**
@@ -20,6 +21,30 @@ use Zend\Stdlib\StringUtils;
 class Native extends AbstractStringWrapper
 {
     /**
+     * Check if the given character encoding is supported by this wrapper
+     * and the character encoding to convert to is also supported.
+     *
+     * @param string      $encoding
+     * @param string|null $convertEncoding
+     */
+    public static function isSupported($encoding, $convertEncoding = null)
+    {
+        $encodingUpper      = strtoupper($encoding);
+        $supportedEncodings = static::getSupportedEncodings();
+
+        if (!in_array($encodingUpper, $supportedEncodings)) {
+            return false;
+        }
+
+        // This adapter doesn't support to convert between encodings
+        if ($convertEncoding !== null && $encodingUpper !== strtoupper($convertEncoding)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get a list of supported character encodings
      *
      * @return string[]
@@ -27,6 +52,44 @@ class Native extends AbstractStringWrapper
     public static function getSupportedEncodings()
     {
         return StringUtils::getSingleByteEncodings();
+    }
+
+    /**
+     * Set character encoding working with and convert to
+     *
+     * @param string      $encoding         The character encoding to work with
+     * @param string|null $convertEncoding  The character encoding to convert to
+     * @return StringWrapperInterface
+     */
+    public function setEncoding($encoding, $convertEncoding = null)
+    {
+        $supportedEncodings = static::getSupportedEncodings();
+
+        $encodingUpper = strtoupper($encoding);
+        if (!in_array($encodingUpper, $supportedEncodings)) {
+            throw new Exception\InvalidArgumentException(
+                'Wrapper doesn\'t support character encoding "' . $encoding . '"'
+            );
+        }
+
+        if ($encodingUpper !== strtoupper($convertEncoding)) {
+            $this->convertEncoding = $encodingUpper;
+        }
+
+        if ($convertEncoding !== null) {
+            if ($encodingUpper !== strtoupper($convertEncoding)) {
+                throw new Exception\InvalidArgumentException(
+                    'Wrapper doesn\'t support to convert between character encodings'
+                );
+            }
+
+            $this->convertEncoding = $encodingUpper;
+        } else {
+            $this->convertEncoding = null;
+        }
+        $this->encoding = $encodingUpper;
+
+        return $this;
     }
 
     /**

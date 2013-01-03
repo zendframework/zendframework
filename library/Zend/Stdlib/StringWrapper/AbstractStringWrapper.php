@@ -102,7 +102,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
     }
 
     /**
-     * Convert a string from defined encoding to the defined convert encoding
+     * Convert a string from defined character encoding to the defined convert encoding
      *
      * @param string  $str
      * @param boolean $reverse
@@ -114,6 +114,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             return $str;
         }
 
+        var_dump($this->encoding, $this->convertEncoding);
         $from = $reverse ? $this->convertEncoding : $this->encoding;
         $to   = $reverse ? $this->encoding : $this->convertEncoding;
         throw new Exception\RuntimeException(sprintf(

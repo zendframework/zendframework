@@ -55,6 +55,9 @@ class DispatchListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'));
+        if (function_exists('zend_monitor_custom_event_ex')) {
+            $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'reportMonitorEvent'));
+        }
     }
 
     /**
@@ -124,6 +127,18 @@ class DispatchListener implements ListenerAggregateInterface
         }
 
         return $this->complete($return, $e);
+    }
+
+    /**
+     * @param MvcEvent $e
+     */
+    public function reportMonitorEvent(MvcEvent $e)
+    {
+        $error     = $e->getError();
+        $exception = $e->getParam('exception');
+        if ($exception instanceof \Exception) {
+            zend_monitor_custom_event_ex($error, $exception->getMessage(), 'Zend Framework Exception', array('code' => $exception->getCode(), 'trace' => $exception->getTraceAsString()));
+        }
     }
 
     /**

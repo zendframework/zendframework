@@ -130,7 +130,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     public function testThrowsExceptionWithNonUploadedFile()
     {
         $filter = new FileRenameUpload($this->_newFile);
-        $filter->setUseUploadName(false);
         $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals('falsefile', $filter('falsefile'));
         $this->setExpectedException(
@@ -165,18 +164,18 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileRenameUpload($this->_newFile);
         $this->assertEquals($this->_newFile, $filter->getTarget());
-        $this->assertTrue($filter->getUseUploadName());
+        $this->assertFalse($filter->getUseUploadName());
         $this->assertFalse($filter->getOverwrite());
         $this->assertFalse($filter->getRandomize());
 
         $filter = new FileRenameUpload(array(
             'target'          => $this->_oldFile,
-            'use_upload_name' => false,
+            'use_upload_name' => true,
             'overwrite'       => true,
             'randomize'       => true,
         ));
         $this->assertEquals($this->_oldFile, $filter->getTarget());
-        $this->assertFalse($filter->getUseUploadName());
+        $this->assertTrue($filter->getUseUploadName());
         $this->assertTrue($filter->getOverwrite());
         $this->assertTrue($filter->getRandomize());
     }
@@ -189,7 +188,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $this->setUpMockMoveUploadedFile();
 
         $filter = new FileRenameUpload($this->_newFile);
-        $filter->setUseUploadName(false);
         $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
@@ -225,10 +223,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $this->setUpMockMoveUploadedFile();
 
         $filter = new FileRenameUpload(array(
-            'target'          => $this->_newFile,
-            'use_upload_name' => false,
-            'overwrite'       => false,
-            'randomize'       => false,
+            'target' => $this->_newFile,
         ));
         $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
@@ -241,7 +236,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     public function testConstructTruncatedTarget()
     {
         $filter = new FileRenameUpload('*');
-        $filter->setUseUploadName(false);
         $this->assertEquals('*', $filter->getTarget());
         $this->assertEquals($this->_oldFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
@@ -255,7 +249,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $this->setUpMockMoveUploadedFile();
 
         $filter = new FileRenameUpload($this->_newDir);
-        $filter->setUseUploadName(false);
         $this->assertEquals($this->_newDir, $filter->getTarget());
         $this->assertEquals($this->_newDirFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
@@ -271,7 +264,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $filter = new FileRenameUpload(array(
             'target'          => $this->_newFile,
             'overwrite'       => true,
-            'use_upload_name' => false,
         ));
 
         copy($this->_oldFile, $this->_newFile);
@@ -290,7 +282,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $filter = new FileRenameUpload(array(
             'target'          => $this->_newFile,
             'overwrite'       => false,
-            'use_upload_name' => false,
         ));
 
         copy($this->_oldFile, $this->_newFile);
@@ -313,7 +304,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $filter = new FileRenameUpload(array(
             'target'          => $this->_newFile,
             'randomize'       => true,
-            'use_upload_name' => false,
         ));
 
         $this->assertEquals($this->_newFile, $filter->getTarget());
@@ -333,7 +323,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $filter = new FileRenameUpload(array(
             'target'          => $fileNoExt,
             'randomize'       => true,
-            'use_upload_name' => false,
         ));
 
         $this->assertEquals($fileNoExt, $filter->getTarget());

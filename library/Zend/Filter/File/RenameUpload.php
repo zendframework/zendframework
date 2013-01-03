@@ -25,7 +25,7 @@ class RenameUpload extends AbstractFilter
      */
     protected $options = array(
         'target'          => null,
-        'use_upload_name' => true,
+        'use_upload_name' => false,
         'overwrite'       => false,
         'randomize'       => false,
     );
@@ -42,8 +42,6 @@ class RenameUpload extends AbstractFilter
         } else {
             $this->setTarget($targetOrOptions);
         }
-
-
     }
 
     /**
@@ -145,7 +143,7 @@ class RenameUpload extends AbstractFilter
         } else {
             $uploadData = array(
                 'tmp_name' => $value,
-                'name' => $value,
+                'name'     => $value,
             );
             $sourceFile = $value;
         }

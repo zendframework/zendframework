@@ -350,7 +350,9 @@ class FileGenerator extends AbstractGenerator
      */
     public function setUse($use, $as = null)
     {
-        $this->uses[] = array($use, $as);
+        if (!in_array(array($use, $as), $this->uses)) {
+            $this->uses[] = array($use, $as);
+        }
         return $this;
     }
 

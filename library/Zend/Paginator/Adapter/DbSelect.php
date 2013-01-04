@@ -111,6 +111,7 @@ class DbSelect implements AdapterInterface
         $select->reset(Select::COLUMNS);
         $select->reset(Select::LIMIT);
         $select->reset(Select::OFFSET);
+        $select->reset(Select::ORDER);
 
         $select->columns(array('c' => new Expression('COUNT(1)')));
 

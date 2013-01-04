@@ -27,7 +27,7 @@ class Segment implements RouteInterface
     /**
      * @var array Cache for the encode output
      */
-    private static $cacheEncode = array();
+    protected static $cacheEncode = array();
 
     /**
      * Map of allowed special chars in path segments.
@@ -411,7 +411,7 @@ class Segment implements RouteInterface
      * @param string $value
      * @return string
      */
-    private function encode($value)
+    protected function encode($value)
     {
         if (!isset(static::$cacheEncode[$value])) {
             static::$cacheEncode[$value] = rawurlencode($value);
@@ -426,7 +426,7 @@ class Segment implements RouteInterface
      * @param string $value
      * @return string
      */
-    private function decode($value)
+    protected function decode($value)
     {
         return rawurldecode($value);
     }

@@ -37,9 +37,8 @@ class Xterm256
         $x11 = $ahex[0] * 36 + $ahex[1] * 6 + $ahex[2] + 16;
         if ($x11 >= 16 && $x11 <= 231) {
             return new static($x11);
-        } else {
-            $x11 = 232 + floor(hexdec($hex[0])/10);
         }
+        $x11 = 232 + floor(hexdec($hex[0])/10);
 
         return new static($x11);
     }

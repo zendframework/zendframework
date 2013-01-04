@@ -160,7 +160,7 @@ class FormRow extends AbstractHelper
      * @param bool                  $renderErrors
      * @return string|FormRow
      */
-    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = true)
+    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = null)
     {
         if (!$element) {
             return $this;
@@ -170,7 +170,9 @@ class FormRow extends AbstractHelper
             $this->setLabelPosition($labelPosition);
         }
 
-        $this->setRenderErrors($renderErrors);
+        if($renderErrors !== null){
+            $this->setRenderErrors($renderErrors);
+        }
 
         return $this->render($element);
     }

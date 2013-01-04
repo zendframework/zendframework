@@ -319,4 +319,24 @@ class FormRowTest extends TestCase
         $markup = $this->helper->__invoke($element);
         $this->assertEquals(2,  count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
     }
+    
+    public function testInvokeWithNoRenderErrors()
+    {
+        $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
+        $mock->expects($this->never())
+                ->method('setRenderErrors');
+
+        $mock->__invoke(new Element('foo'));
+    }
+    
+    public function testInvokeWithRenderErrorsTrue()
+    {
+        $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
+        $mock->expects($this->once())
+                ->method('setRenderErrors')
+                ->with(true);
+
+        $mock->__invoke(new Element('foo'), null, true);
+    }
+   
 }

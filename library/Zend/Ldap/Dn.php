@@ -77,7 +77,7 @@ class Dn implements \ArrayAccess
         } else {
             $dnArray = static::explodeDn((string) $dn);
         }
-        return new self($dnArray, $caseFold);
+        return new static($dnArray, $caseFold);
     }
 
     /**
@@ -90,7 +90,7 @@ class Dn implements \ArrayAccess
      */
     public static function fromArray(array $dn, $caseFold = null)
     {
-        return new self($dn, $caseFold);
+        return new static($dn, $caseFold);
     }
 
     /**
@@ -145,7 +145,7 @@ class Dn implements \ArrayAccess
             throw new Exception\LdapException(null, 'Cannot retrieve parent DN with given $levelUp');
         }
         $newDn = array_slice($this->dn, $levelUp);
-        return new self($newDn, $this->caseFold);
+        return new static($newDn, $this->caseFold);
     }
 
     /**

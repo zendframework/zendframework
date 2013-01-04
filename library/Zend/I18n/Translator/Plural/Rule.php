@@ -205,7 +205,7 @@ class Rule
         $tree = static::$parser->parse($match['plural']);
         $ast  = static::createAst($tree);
 
-        return new self($numPlurals, $ast);
+        return new static($numPlurals, $ast);
     }
 
     /**

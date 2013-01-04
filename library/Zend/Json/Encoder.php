@@ -68,7 +68,7 @@ class Encoder
      */
     public static function encode($value, $cycleCheck = false, $options = array())
     {
-        $encoder = new self(($cycleCheck) ? true : false, $options);
+        $encoder = new static(($cycleCheck) ? true : false, $options);
 
         return $encoder->_encodeValue($value);
     }

@@ -72,7 +72,7 @@ class File extends Uri
      */
     public static function fromUnixPath($path)
     {
-        $url = new self('file:');
+        $url = new static('file:');
         if (substr($path, 0, 1) == '/') {
             $url->setHost('');
         }
@@ -89,7 +89,7 @@ class File extends Uri
      */
     public static function fromWindowsPath($path)
     {
-        $url = new self('file:');
+        $url = new static('file:');
 
         // Convert directory separators
         $path = str_replace(array('/', '\\'), array('%2F', '/'), $path);

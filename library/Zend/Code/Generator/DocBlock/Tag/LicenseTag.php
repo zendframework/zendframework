@@ -48,7 +48,7 @@ class LicenseTag extends Tag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagLicense)
     {
-        $returnTag = new self();
+        $returnTag = new static();
 
         $returnTag->setName('license');
         $returnTag->setUrl($reflectionTagLicense->getUrl());

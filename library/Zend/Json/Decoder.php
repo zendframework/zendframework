@@ -137,7 +137,7 @@ class Decoder
      */
     public static function decode($source, $objectDecodeType = Json::TYPE_OBJECT)
     {
-        $decoder = new self($source, $objectDecodeType);
+        $decoder = new static($source, $objectDecodeType);
         return $decoder->_decodeValue();
     }
 

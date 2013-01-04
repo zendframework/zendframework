@@ -96,7 +96,7 @@ class BlockCipher
     {
         $plugins = static::getSymmetricPluginManager();
         $adapter = $plugins->get($adapter, (array) $options);
-        return new self($adapter);
+        return new static($adapter);
     }
 
     /**

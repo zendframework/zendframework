@@ -340,7 +340,7 @@ class Cookies
      */
     public static function fromResponse(Response $response, $ref_uri)
     {
-        $jar = new self();
+        $jar = new static();
         $jar->addCookiesFromResponse($response, $ref_uri);
         return $jar;
     }

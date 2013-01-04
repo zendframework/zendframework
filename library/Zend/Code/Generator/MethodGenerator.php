@@ -44,7 +44,7 @@ class MethodGenerator extends AbstractMemberGenerator
      */
     public static function fromReflection(MethodReflection $reflectionMethod)
     {
-        $method = new self();
+        $method = new static();
 
         $method->setSourceContent($reflectionMethod->getContents(false));
         $method->setSourceDirty(false);

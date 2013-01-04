@@ -43,7 +43,7 @@ class Schema extends AbstractNode
                 return new Schema\OpenLdap($dn, $data, $ldap);
             case RootDse::SERVER_TYPE_EDIRECTORY:
             default:
-                return new self($dn, $data, $ldap);
+                return new static($dn, $data, $ldap);
         }
     }
 

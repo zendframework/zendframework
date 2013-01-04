@@ -42,28 +42,29 @@ class PropertyTag implements TagInterface, PhpDocTypedTagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param  string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
-        if (preg_match('#^(.+)?(\$[\S]+)[\s]*(.*)$#m', $tagDocblockLine, $match)) {
-            if ($match[1] !== '') {
-                $this->types = explode('|', rtrim($match[1]));
-            }
+        $match = array();
+        if (!preg_match('#^(.+)?(\$[\S]+)[\s]*(.*)$#m', $tagDocblockLine, $match)) {
+            return;
+        }
 
-            if ($match[2] !== '') {
-                $this->propertyName = $match[2];
-            }
+        if ($match[1] !== '') {
+            $this->types = explode('|', rtrim($match[1]));
+        }
 
-            if ($match[3] !== '') {
-                $this->description = $match[3];
-            }
+        if ($match[2] !== '') {
+            $this->propertyName = $match[2];
+        }
+
+        if ($match[3] !== '') {
+            $this->description = $match[3];
         }
     }
 
     /**
-     * Get property variable type
-     *
      * @return null|string
      * @deprecated 2.0.4 use getTypes instead
      */
@@ -82,8 +83,6 @@ class PropertyTag implements TagInterface, PhpDocTypedTagInterface
     }
 
     /**
-     * Get property name
-     *
      * @return null|string
      */
     public function getPropertyName()
@@ -92,8 +91,6 @@ class PropertyTag implements TagInterface, PhpDocTypedTagInterface
     }
 
     /**
-     * Get property description
-     *
      * @return null|string
      */
     public function getDescription()

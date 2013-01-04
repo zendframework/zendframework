@@ -28,7 +28,9 @@ class MethodGenerator extends AbstractMemberGenerator
      */
     protected $isFinal = false;
 
-    /** @var ParameterGenerator[] */
+    /**
+     * @var ParameterGenerator[]
+     */
     protected $parameters = array();
 
     /**
@@ -37,8 +39,6 @@ class MethodGenerator extends AbstractMemberGenerator
     protected $body = null;
 
     /**
-     * fromReflection()
-     *
      * @param  MethodReflection $reflectionMethod
      * @return MethodGenerator
      */
@@ -76,30 +76,35 @@ class MethodGenerator extends AbstractMemberGenerator
         return $method;
     }
 
+    /**
+     * @param  string $name
+     * @param  array $parameters
+     * @param  int|array $flags
+     * @param  string $body
+     * @param  DocBlockGenerator|string $docBlock
+     */
     public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null,
                                 $docBlock = null)
     {
-        if ($name !== null) {
+        if ($name) {
             $this->setName($name);
         }
-        if ($parameters !== array()) {
+        if ($parameters) {
             $this->setParameters($parameters);
         }
         if ($flags !== self::FLAG_PUBLIC) {
             $this->setFlags($flags);
         }
-        if ($body !== null) {
+        if ($body) {
             $this->setBody($body);
         }
-        if ($docBlock !== null) {
+        if ($docBlock) {
             $this->setDocBlock($docBlock);
         }
     }
 
     /**
-     * setParameters()
-     *
-     * @param array $parameters
+     * @param  array $parameters
      * @return MethodGenerator
      */
     public function setParameters(array $parameters)
@@ -107,13 +112,12 @@ class MethodGenerator extends AbstractMemberGenerator
         foreach ($parameters as $parameter) {
             $this->setParameter($parameter);
         }
+
         return $this;
     }
 
     /**
-     * setParameter()
-     *
-     * @param ParameterGenerator|string $parameter
+     * @param  ParameterGenerator|string $parameter
      * @throws Exception\InvalidArgumentException
      * @return MethodGenerator
      */
@@ -122,19 +126,21 @@ class MethodGenerator extends AbstractMemberGenerator
         if (is_string($parameter)) {
             $parameter = new ParameterGenerator($parameter);
         } elseif (!$parameter instanceof ParameterGenerator) {
-            throw new Exception\InvalidArgumentException(
-                'setParameter() is expecting either a string, array or an instance of Zend\Code\Generator\ParameterGenerator'
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s is expecting either a string, array or an instance of %s\ParameterGenerator',
+                __METHOD__,
+                __NAMESPACE__
+            ));
         }
+
         $parameterName = $parameter->getName();
 
         $this->parameters[$parameterName] = $parameter;
+
         return $this;
     }
 
     /**
-     * getParameters()
-     *
      * @return ParameterGenerator[]
      */
     public function getParameters()
@@ -143,9 +149,7 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * setBody()
-     *
-     * @param string $body
+     * @param  string $body
      * @return MethodGenerator
      */
     public function setBody($body)
@@ -155,8 +159,6 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * getBody()
-     *
      * @return string
      */
     public function getBody()
@@ -165,8 +167,6 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()

@@ -34,7 +34,6 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
         $valueGenerator = new ValueGenerator();
         $valueGenerator->setValue('foo');
         $this->assertEquals('foo', $valueGenerator->getValue());
-        //$this->assertEquals('\'foo\';', $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleStrings()
@@ -78,11 +77,11 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
                 'bar',
                 array(
                     'baz1',
-                    'baz2'
-                    )
-                ),
+                    'baz2',
+                )
+            ),
             new ValueGenerator('PHP_EOL', 'constant')
-            );
+        );
 
         $expectedSource = <<<EOS
 array(
@@ -105,8 +104,5 @@ EOS;
         $valueGenerator->setValue($targetValue);
         $generatedTargetSource = $valueGenerator->generate();
         $this->assertEquals($expectedSource, $generatedTargetSource);
-
     }
-
-
 }

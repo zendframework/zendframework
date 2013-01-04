@@ -48,6 +48,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
         if ($phpReflection == null) {
             return null;
         }
+
         $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
 
@@ -57,10 +58,9 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     /**
      * Get declaring function reflection object
      *
-     * @param  string $reflectionClass Reflection class to use
      * @return FunctionReflection|MethodReflection
      */
-    public function getDeclaringFunction($reflectionClass = null)
+    public function getDeclaringFunction()
     {
         $phpReflection = parent::getDeclaringFunction();
         if ($phpReflection instanceof \ReflectionMethod) {

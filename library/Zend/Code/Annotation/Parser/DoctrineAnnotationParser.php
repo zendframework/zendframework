@@ -72,6 +72,7 @@ class DoctrineAnnotationParser implements ParserInterface
         if (!$this->docParser instanceof DocParser) {
             $this->setDocParser(new DocParser());
         }
+
         return $this->docParser;
     }
 
@@ -150,6 +151,7 @@ class DoctrineAnnotationParser implements ParserInterface
         foreach ($annotations as $annotation) {
             $this->allowedAnnotations[$annotation] = true;
         }
+
         return $this;
     }
 }

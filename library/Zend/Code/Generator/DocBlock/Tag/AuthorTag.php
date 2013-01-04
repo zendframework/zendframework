@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -17,7 +17,7 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  * @category   Zend
  * @package    Zend_Code_Generator
  */
-class ParamTag extends Tag
+class AuthorTag extends Tag
 {
     /**
      * @var string
@@ -31,27 +31,27 @@ class ParamTag extends Tag
 
     /**
      * @param  ReflectionDocBlockTag $reflectionTagParam
-     * @return ParamTag
+     * @return AuthorTag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagParam)
     {
-        $paramTag = new self();
-        $paramTag
-            ->setName('param')
-            ->setDatatype($reflectionTagParam->getType()) // @todo rename
-            ->setParamName($reflectionTagParam->getVariableName())
+        $authorTag = new self();
+        $authorTag
+            ->setName('author')
+            ->setAuthorName($reflectionTagParam->getType()) // @todo rename
+            ->setAuthorEmail($reflectionTagParam->getVariableName())
             ->setDescription($reflectionTagParam->getDescription());
 
-        return $paramTag;
+        return $authorTag;
     }
 
     /**
      * @param  string $datatype
-     * @return ParamTag
+     * @return AuthorTag
      */
     public function setDatatype($datatype)
     {
-        $this->datatype = $datatype;
+        $this->datatype = (string) $datatype;
         return $this;
     }
 
@@ -65,11 +65,11 @@ class ParamTag extends Tag
 
     /**
      * @param  string $paramName
-     * @return ParamTag
+     * @return AuthorTag
      */
     public function setParamName($paramName)
     {
-        $this->paramName = $paramName;
+        $this->paramName = (string) $paramName;
         return $this;
     }
 

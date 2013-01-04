@@ -106,7 +106,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'addProperty() expects string for name'
+            'Zend\Code\Generator\ClassGenerator::addProperty expects string for name'
         );
         $classGenerator->addProperty(true);
     }
@@ -138,7 +138,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\ExceptionInterface',
-            'addMethod() expects string for name'
+            'Zend\Code\Generator\ClassGenerator::addMethod expects string for name'
         );
 
         $classGenerator->addMethod(true);

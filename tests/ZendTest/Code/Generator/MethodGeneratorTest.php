@@ -25,9 +25,6 @@ use Zend\Code\Reflection\MethodReflection;
  */
 class PhpMethodTest extends \PHPUnit_Framework_TestCase
 {
-
-
-
     public function testMethodConstructor()
     {
         $methodGenerator = new MethodGenerator();

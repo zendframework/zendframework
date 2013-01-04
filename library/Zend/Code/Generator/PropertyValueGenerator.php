@@ -16,10 +16,7 @@ namespace Zend\Code\Generator;
  */
 class PropertyValueGenerator extends ValueGenerator
 {
-
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()

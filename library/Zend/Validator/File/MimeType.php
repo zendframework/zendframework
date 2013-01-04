@@ -404,7 +404,7 @@ class MimeType extends AbstractValidator
 
         if (empty($this->type)) {
             $this->error(static::NOT_DETECTED);
-            false;
+            return false;
         }
 
         $mimetype = $this->getMimeType(true);

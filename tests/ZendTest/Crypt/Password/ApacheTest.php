@@ -29,6 +29,32 @@ class ApacheTest extends \PHPUnit_Framework_TestCase
         $this->apache = new Apache();
     }
 
+    public function testConstruct()
+    {
+        $this->apache = new Apache(array(
+            'format' => 'crypt'
+        ));
+        $this->assertInstanceOf('Zend\Crypt\Password\Apache', $this->apache);
+    }
+    
+    /**
+     * @expectedException Zend\Crypt\Password\Exception\InvalidArgumentException
+     */
+    public function testWrongConstruct()
+    {
+        $this->apache = new Apache('crypt');
+    }
+    
+    /**
+     * @expectedException Zend\Crypt\Password\Exception\InvalidArgumentException
+     */
+    public function testWrongParamConstruct()
+    {
+        $this->apache = new Apache(array(
+            'format' => 'crypto'
+        ));
+    }
+    
     public function testSetUserName()
     {
         $result = $this->apache->setUserName('test');
@@ -99,7 +125,27 @@ class ApacheTest extends \PHPUnit_Framework_TestCase
         $this->apache->setFormat('digest');
         $this->apache->create('myPassword');
     }
+    
+    /**
+     * @expectedException Zend\Crypt\Password\Exception\RuntimeException
+     */
+    public function testDigestWithoutAuthName()
+    {
+        $this->apache->setFormat('digest');
+        $this->apache->setUserName('Enrico');
+        $this->apache->create('myPassword');
+    }
 
+    /**
+     * @expectedException Zend\Crypt\Password\Exception\RuntimeException
+     */
+    public function testDigestWithoutUserName()
+    {
+        $this->apache->setFormat('digest');
+        $this->apache->setAuthName('Auth');
+        $this->apache->create('myPassword');
+    }
+    
     /**
      * Test vectors generated using openssl and htpasswd
      *

@@ -54,31 +54,30 @@ class Apache implements PasswordInterface
     /**
      * Constructor
      *
-     * @param  array|Traversable                  $options
+     * @param  array|Traversable $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
-        if (!empty($options)) {
-            if ($options instanceof Traversable) {
-                $options = ArrayUtils::iteratorToArray($options);
-            } elseif (!is_array($options)) {
-                throw new Exception\InvalidArgumentException(
-                    'The options parameter must be an array or a Traversable'
-                );
-            }
-            foreach ($options as $key => $value) {
-                switch (strtolower($key)) {
-                    case 'format':
-                        $this->setFormat($value);
-                        break;
-                    case 'authname':
-                        $this->setAuthName($value);
-                        break;
-                    case 'username':
-                        $this->setUserName($value);
-                        break;
-                }
+        if (empty($options)) {
+            return;
+        }
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+        foreach ($options as $key => $value) {
+            switch (strtolower($key)) {
+                case 'format':
+                    $this->setFormat($value);
+                    break;
+                case 'authname':
+                    $this->setAuthName($value);
+                    break;
+                case 'username':
+                    $this->setUserName($value);
+                    break;
             }
         }
     }
@@ -86,14 +85,14 @@ class Apache implements PasswordInterface
     /**
      * Generate the hash of a password
      *
-     * @param  string                     $password
+     * @param  string $password
      * @throws Exception\RuntimeException
      * @return string
      */
     public function create($password)
     {
         if (empty($this->format)) {
-            throw new Exception\InvalidArgumentException(
+            throw new Exception\RuntimeException(
                 'You must specify a password format'
             );
         }
@@ -130,10 +129,10 @@ class Apache implements PasswordInterface
     public function verify($password, $hash)
     {
         if (substr($hash, 0, 5) === '{SHA}') {
-            $hash2  = '{SHA}' . base64_encode(sha1($password, true));
-
+            $hash2 = '{SHA}' . base64_encode(sha1($password, true));
             return ($hash === $hash2);
-        } elseif (substr($hash, 0, 6) === '$apr1$') {
+        } 
+        if (substr($hash, 0, 6) === '$apr1$') {
             $token = explode('$', $hash);
             if (empty($token[2])) {
                 throw new Exception\InvalidArgumentException(
@@ -141,21 +140,18 @@ class Apache implements PasswordInterface
                 );
             }
             $hash2 = $this->apr1Md5($password, $token[2]);
-
             return ($hash === $hash2);
-        } elseif (strlen($hash) > 13) { // digest
+        } 
+        if (strlen($hash) > 13) { // digest
             if (empty($this->userName) || empty($this->authName)) {
                 throw new Exception\RuntimeException(
                     'You must specify UserName and AuthName (realm) to verify the digest'
                 );
             }
-            $hash2  = md5($this->userName . ':' . $this->authName . ':' .$password);
-
+            $hash2 = md5($this->userName . ':' . $this->authName . ':' .$password);
             return ($hash === $hash2);
-        } else { // crypt(3)
-
-            return (crypt($password, $hash) === $hash);
-        }
+        } 
+        return (crypt($password, $hash) === $hash);
     }
 
     /**

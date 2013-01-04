@@ -343,7 +343,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             } else {
                 $order = (array) $order;
             }
-        } elseif ($order instanceof Expression){
+        } elseif (!is_array($order)) {
             $order = array($order);
         }
         foreach ($order as $k => $v) {

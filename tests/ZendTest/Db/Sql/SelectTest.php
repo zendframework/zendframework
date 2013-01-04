@@ -286,8 +286,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('name ASC', 'age DESC'), $select->getRawState('order'));
 
         $select = new Select;
-        $select->order(new \Zend\db\sql\Expression('id DESC'));
-        $this->assertEquals('id DESC', current($select->getRawState('order'))->getExpression());
+        $select->order(new Expression('RAND()'));
+        $this->assertEquals('RAND()', current($select->getRawState('order'))->getExpression());
     }
 
     /**

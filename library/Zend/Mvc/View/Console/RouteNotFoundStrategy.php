@@ -10,23 +10,24 @@
 
 namespace Zend\Mvc\View\Console;
 
-use Zend\Mvc\Application;
-use Zend\Mvc\MvcEvent;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
+use Zend\Console\ColorInterface;
+use Zend\Console\Response as ConsoleResponse;
+use Zend\Console\Request as ConsoleRequest;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Mvc\Application;
 use Zend\Mvc\Exception\RuntimeException;
-use Zend\Console\Response as ConsoleResponse;
-use Zend\Console\Request as ConsoleRequest;
-use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
-use Zend\View\Model\ConsoleModel;
-use Zend\Version\Version;
+use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Text\Table;
+use Zend\Version\Version;
+use Zend\View\Model\ConsoleModel;
 
 /**
  * @category   Zend
@@ -326,9 +327,12 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         $result .= "\n";
                     }
 
+                    // Colorize the command
+                    $a = $console->colorize($scriptName . ' ' . $a, ColorInterface::GREEN);
+
                     $tableCols = 2;
                     $tableType = 1;
-                    $table[]   = array($scriptName . ' ' . $a, $b);
+                    $table[]   = array($a, $b);
                     continue;
                 }
 

@@ -234,7 +234,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Create where clause
      *
-     * @param  Where|\Closure|string|array $predicate
+     * @param  Where|\Closure|string|array|Predicate\PredicateInterface $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @return Select
      */

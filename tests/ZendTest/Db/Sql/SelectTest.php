@@ -259,17 +259,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testWhereArgument1IsPredicate()
     {
-    	$select = new Select;
-    	$predicate = new \Zend\Db\Sql\Predicate\Predicate(array(
-    			new \Zend\Db\Sql\Predicate\Expression('name = ?', 'Ralph'),
-    			new \Zend\Db\Sql\Predicate\Expression('age = ?', 33),
-    	));
-    	$select->where($predicate);
+        $select = new Select;
+        $predicate = new Predicate\Predicate(array(
+            new Predicate\Expression('name = ?', 'Ralph'),
+            new Predicate\Expression('age = ?', 33),
+        ));
+        $select->where($predicate);
     
-    	/** @var $where Where */
-    	$where = $select->getRawState('where');
-    	$predicates = $where->getPredicates();
-    	$this->assertSame($predicate, $predicates[0][1]);
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertSame($predicate, $predicates[0][1]);
     }
     
     /**

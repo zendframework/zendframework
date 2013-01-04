@@ -72,7 +72,7 @@ class Tag extends AbstractGenerator
     {
         $tagName = $reflectionTag->getName();
 
-        $codeGenDocBlockTag = new self();
+        $codeGenDocBlockTag = new static();
         $codeGenDocBlockTag->setName($tagName);
 
         // transport any properties via accessors and mutators from reflection to codegen object

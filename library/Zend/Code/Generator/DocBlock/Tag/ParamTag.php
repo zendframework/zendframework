@@ -35,7 +35,7 @@ class ParamTag extends Tag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagParam)
     {
-        $paramTag = new self();
+        $paramTag = new static();
         $paramTag
             ->setName('param')
             ->setDatatype($reflectionTagParam->getType()) // @todo rename

@@ -30,7 +30,7 @@ class ReturnTag extends Tag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagReturn)
     {
-        $returnTag = new self();
+        $returnTag = new static();
         $returnTag
             ->setName('return')
             ->setDatatype($reflectionTagReturn->getType()) // @todo rename

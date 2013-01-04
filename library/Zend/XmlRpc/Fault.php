@@ -254,7 +254,7 @@ class Fault
      */
     public static function isFault($xml)
     {
-        $fault = new self();
+        $fault = new static();
         try {
             $isFault = $fault->loadXml($xml);
         } catch (Exception\ExceptionInterface $e) {

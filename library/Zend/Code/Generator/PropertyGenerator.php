@@ -36,7 +36,7 @@ class PropertyGenerator extends AbstractMemberGenerator
      */
     public static function fromReflection(PropertyReflection $reflectionProperty)
     {
-        $property = new self();
+        $property = new static();
 
         $property->setName($reflectionProperty->getName());
 

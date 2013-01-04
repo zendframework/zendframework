@@ -104,7 +104,7 @@ class FileGenerator extends AbstractGenerator
      */
     public static function fromReflection(FileReflection $fileReflection)
     {
-        $file = new self();
+        $file = new static();
 
         $file->setSourceContent($fileReflection->getContents());
         $file->setSourceDirty(false);

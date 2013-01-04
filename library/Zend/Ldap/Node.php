@@ -245,7 +245,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         } else {
             throw new Exception\LdapException(null, '$dn is of a wrong data type.');
         }
-        $new = new self($dn, array(), false, null);
+        $new = new static($dn, array(), false, null);
         $new->ensureRdnAttributeValues();
         $new->setAttribute('objectClass', $objectClass);
 
@@ -273,7 +273,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         if ($data === null) {
             return null;
         }
-        $entry = new self($dn, $data, true, $ldap);
+        $entry = new static($dn, $data, true, $ldap);
 
         return $entry;
     }
@@ -299,7 +299,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             throw new Exception\LdapException(null, '\'dn\' key is of a wrong data type.');
         }
         $fromDataSource = ($fromDataSource === true) ? true : false;
-        $new            = new self($dn, $data, $fromDataSource, null);
+        $new            = new static($dn, $data, $fromDataSource, null);
         $new->ensureRdnAttributeValues();
 
         return $new;

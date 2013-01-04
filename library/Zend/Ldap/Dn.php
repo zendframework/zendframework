@@ -484,10 +484,10 @@ class Dn implements \ArrayAccess
             // Convert all leading and trailing spaces to sequences of \20.
             if (preg_match('/^(\s*)(.+?)(\s*)$/', $val, $matches)) {
                 $val = $matches[2];
-                for ($i = 0; $i < strlen($matches[1]); $i++) {
+                for ($i = 0, $len = strlen($matches[1]); $i < $len; $i++) {
                     $val = '\20' . $val;
                 }
-                for ($i = 0; $i < strlen($matches[3]); $i++) {
+                for ($i = 0, $len = strlen($matches[3]); $i < $len; $i++) {
                     $val = $val . '\20';
                 }
             }

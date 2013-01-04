@@ -7,10 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
-
 namespace Zend\Mvc\Controller;
 
 use Zend\Http\Request as HttpRequest;
+use Zend\Json\Json;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;
@@ -25,10 +25,23 @@ use Zend\Stdlib\ResponseInterface as Response;
  */
 abstract class AbstractRestfulController extends AbstractController
 {
+
+    const CONTENT_TYPE_JSON = 'json';
+
     /**
      * @var string
      */
     protected $eventIdentifier = __CLASS__;
+
+    /**
+     * @var array
+     */
+    protected $contentTypes = array(
+        self::CONTENT_TYPE_JSON => array(
+            'application/application/hal+json',
+            'application/json'
+        )
+    );
 
     /**
      * Return list of resources
@@ -79,7 +92,9 @@ abstract class AbstractRestfulController extends AbstractController
     {
         $this->response->setStatusCode(404);
 
-        return array('content' => 'Page not found');
+        return array(
+            'content' => 'Page not found'
+        );
     }
 
     /**
@@ -97,8 +112,9 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function dispatch(Request $request, Response $response = null)
     {
-        if (!$request instanceof HttpRequest) {
-            throw new Exception\InvalidArgumentException('Expected an HTTP request');
+        if (! $request instanceof HttpRequest) {
+            throw new Exception\InvalidArgumentException(
+                    'Expected an HTTP request');
         }
 
         return parent::dispatch($request, $response);
@@ -114,20 +130,21 @@ abstract class AbstractRestfulController extends AbstractController
     public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             /**
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
+            throw new Exception\DomainException(
+                    'Missing route matches; unsure how to retrieve action');
         }
 
         $request = $e->getRequest();
-        $action  = $routeMatch->getParam('action', false);
+        $action = $routeMatch->getParam('action', false);
         if ($action) {
             // Handle arbitrary methods, ending in Action
             $method = static::getMethodFromAction($action);
-            if (!method_exists($this, $method)) {
+            if (! method_exists($this, $method)) {
                 $method = 'notFoundAction';
             }
             $return = $this->$method();
@@ -158,8 +175,9 @@ abstract class AbstractRestfulController extends AbstractController
                     break;
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
-                        if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new Exception\DomainException('Missing identifier');
+                        if (! ($id = $request->getQuery()->get('id', false))) {
+                            throw new Exception\DomainException(
+                                    'Missing identifier');
                         }
                     }
                     $action = 'delete';
@@ -188,7 +206,12 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function processPostData(Request $request)
     {
-        return $this->create($request->getPost()->toArray());
+        if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
+            return $this->create(Json::decode($request->getContent()));
+        }
+
+        return $this->create($request->getPost()
+            ->toArray());
     }
 
     /**
@@ -202,14 +225,41 @@ abstract class AbstractRestfulController extends AbstractController
     public function processPutData(Request $request, $routeMatch)
     {
         if (null === $id = $routeMatch->getParam('id')) {
-            if (!($id = $request->getQuery()->get('id', false))) {
+            if (! ($id = $request->getQuery()->get('id', false))) {
                 throw new Exception\DomainException('Missing identifier');
             }
         }
+
+        if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
+            return $this->update($id, Json::decode($request->getContent()));
+        }
+
         $content = $request->getContent();
         parse_str($content, $parsedParams);
 
         return $this->update($id, $parsedParams);
     }
 
+    /**
+     * Check if request has certain content type
+     *
+     * @return boolean
+     */
+    public function requestHasContentType(Request $request, $contentType = '')
+    {
+        $acceptHeaders = $request->getHeaders()->get('Accept');
+        if (!$acceptHeaders) {
+            return false;
+        }
+
+        if (array_key_exists($contentType, $this->contentTypes)) {
+            foreach ($this->contentTypes[$contentType] as $contentTypeValue) {
+                if ($acceptHeaders->match($contentTypeValue) !== false) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

@@ -53,7 +53,7 @@ class Test implements AdapterInterface
     /**
      * Whether or not the next request will fail with an exception
      *
-     * @var boolean
+     * @var bool
      */
     protected $nextRequestWillFail = false;
 
@@ -66,7 +66,7 @@ class Test implements AdapterInterface
     /**
      * Set the nextRequestWillFail flag
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return \Zend\Http\Client\Adapter\Test
      */
     public function setNextRequestWillFail($flag)
@@ -105,7 +105,7 @@ class Test implements AdapterInterface
      *
      * @param string  $host
      * @param int     $port
-     * @param boolean $secure
+     * @param  bool $secure
      * @param int     $timeout
      * @throws Exception\RuntimeException
      */

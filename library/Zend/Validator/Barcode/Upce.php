@@ -30,7 +30,7 @@ class Upce extends AbstractAdapter
      * Overrides parent checkLength
      *
      * @param string $value Value
-     * @return boolean
+     * @return bool
      */
     public function hasValidLength($value)
     {

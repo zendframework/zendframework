@@ -332,7 +332,7 @@ class DefaultIterator implements \Iterator, \Countable
      * after calls to rewind() or next()
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

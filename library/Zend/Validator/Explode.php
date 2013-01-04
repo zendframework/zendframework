@@ -41,7 +41,7 @@ class Explode extends AbstractValidator
     protected $validator;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $breakOnFirstFailure = false;
 
@@ -92,7 +92,7 @@ class Explode extends AbstractValidator
     /**
      * Set break on first failure setting
      *
-     * @param boolean $break
+     * @param  bool $break
      * @return Explode
      */
     public function setBreakOnFirstFailure($break)
@@ -104,7 +104,7 @@ class Explode extends AbstractValidator
     /**
      * Get break on first failure setting
      *
-     * @return boolean
+     * @return bool
      */
     public function isBreakOnFirstFailure()
     {
@@ -117,7 +117,7 @@ class Explode extends AbstractValidator
      * Returns true if all values validate true
      *
      * @param  string|array $value
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     public function isValid($value)

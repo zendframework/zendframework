@@ -169,7 +169,7 @@ class Fault
      * Load an XMLRPC fault from XML
      *
      * @param string $fault
-     * @return boolean Returns true if successfully loaded fault response, false
+     * @return bool Returns true if successfully loaded fault response, false
      * if response was not a fault response
      * @throws \Zend\XmlRpc\Exception\ExceptionInterface if no or faulty XML provided, or if fault
      * response does not contain either code or message
@@ -235,7 +235,7 @@ class Fault
      * Determine if an XML response is an XMLRPC fault
      *
      * @param string $xml
-     * @return boolean
+     * @return bool
      */
     public static function isFault($xml)
     {

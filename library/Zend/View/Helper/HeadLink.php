@@ -160,7 +160,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Check if value is valid
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     protected function isValid($value)
     {

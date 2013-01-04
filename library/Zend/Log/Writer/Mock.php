@@ -27,7 +27,7 @@ class Mock extends AbstractWriter
     /**
      * shutdown called?
      *
-     * @var boolean
+     * @var bool
      */
     public $shutdown = false;
 

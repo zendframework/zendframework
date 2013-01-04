@@ -212,7 +212,7 @@ abstract class AbstractProtocol
      *
      * @param  string $remote Remote
      * @throws Exception\RuntimeException
-     * @return boolean
+     * @return bool
      */
     protected function _connect($remote)
     {
@@ -254,7 +254,7 @@ abstract class AbstractProtocol
      *
      * @param  string $request
      * @throws Exception\RuntimeException
-     * @return integer|boolean Number of bytes written to remote host
+     * @return integer|bool Number of bytes written to remote host
      */
     protected function _send($request)
     {

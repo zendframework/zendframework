@@ -92,7 +92,7 @@ class Isbn extends AbstractValidator
      * Returns true if and only if $value is a valid ISBN.
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

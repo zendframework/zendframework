@@ -20,7 +20,7 @@ class Code25interleaved extends Code25
 {
     /**
      * Drawing of bearer bars
-     * @var boolean
+     * @var bool
      */
     private $withBearerBars = false;
 
@@ -35,7 +35,7 @@ class Code25interleaved extends Code25
 
     /**
      * Activate/deactivate drawing of bearer bars
-     * @param boolean $value
+     * @param  bool $value
      * @return Code25
      */
     public function setWithBearerBars($value)
@@ -46,7 +46,7 @@ class Code25interleaved extends Code25
 
     /**
      * Retrieve if bearer bars are enabled
-     * @return boolean
+     * @return bool
      */
     public function getWithBearerBars()
     {

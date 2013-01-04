@@ -132,7 +132,7 @@ class AuthenticationService
     /**
      * Returns true if and only if an identity is available from storage
      *
-     * @return boolean
+     * @return bool
      */
     public function hasIdentity()
     {

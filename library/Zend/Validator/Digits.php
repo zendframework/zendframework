@@ -44,7 +44,7 @@ class Digits extends AbstractValidator
      * Returns true if and only if $value only contains digit characters
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

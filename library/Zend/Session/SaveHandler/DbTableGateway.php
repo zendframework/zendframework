@@ -70,7 +70,7 @@ class DbTableGateway implements SaveHandlerInterface
      *
      * @param  string $savePath
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function open($savePath, $name)
     {
@@ -84,7 +84,7 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Close session
      *
-     * @return boolean
+     * @return bool
      */
     public function close()
     {
@@ -119,7 +119,7 @@ class DbTableGateway implements SaveHandlerInterface
      *
      * @param string $id
      * @param string $data
-     * @return boolean
+     * @return bool
      */
     public function write($id, $data)
     {
@@ -150,7 +150,7 @@ class DbTableGateway implements SaveHandlerInterface
      * Destroy session
      *
      * @param  string $id
-     * @return boolean
+     * @return bool
      */
     public function destroy($id)
     {

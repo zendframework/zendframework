@@ -40,7 +40,7 @@ class WordCount extends Count
      *
      * @param  string $value Filename to check for word count
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

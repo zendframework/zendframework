@@ -60,7 +60,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
      * Offset exists
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name)
     {
@@ -171,7 +171,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
      * Offset has errata
      *
      * @param  string|integer $name
-     * @return boolean
+     * @return bool
      */
     public function offsetHasErrata($name)
     {
@@ -271,7 +271,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
     /**
      * Valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

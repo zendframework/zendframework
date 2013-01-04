@@ -27,7 +27,7 @@ class Encoder
     /**
      * Whether or not to check for possible cycling
      *
-     * @var boolean
+     * @var bool
      */
     protected $cycleCheck;
 
@@ -48,7 +48,7 @@ class Encoder
     /**
      * Constructor
      *
-     * @param boolean $cycleCheck Whether or not to check for recursion when encoding
+     * @param  bool $cycleCheck Whether or not to check for recursion when encoding
      * @param array $options Additional options used during encoding
      * @return Encoder
      */
@@ -62,7 +62,7 @@ class Encoder
      * Use the JSON encoding scheme for the value specified
      *
      * @param mixed $value The value to be encoded
-     * @param boolean $cycleCheck Whether or not to check for possible object recursion when encoding
+     * @param  bool $cycleCheck Whether or not to check for possible object recursion when encoding
      * @param array $options Additional options used during encoding
      * @return string  The encoded value
      */
@@ -162,7 +162,7 @@ class Encoder
      * Determine if an object has been serialized already
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected function _wasVisited(&$value)
     {

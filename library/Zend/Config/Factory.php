@@ -43,7 +43,7 @@ class Factory
      * Read a config from a file.
      *
      * @param  string  $filename
-     * @param  boolean $returnConfigObject
+     * @param  bool $returnConfigObject
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -93,7 +93,7 @@ class Factory
      * Read configuration from multiple files and merge them.
      *
      * @param  array   $files
-     * @param  boolean $returnConfigObject
+     * @param  bool $returnConfigObject
      * @return array|Config
      */
     public static function fromFiles(array $files, $returnConfigObject = false)

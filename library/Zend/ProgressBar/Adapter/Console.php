@@ -125,7 +125,7 @@ class Console extends AbstractAdapter
     /**
      * Whether the output started yet or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $outputStarted = false;
 

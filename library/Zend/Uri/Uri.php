@@ -188,7 +188,7 @@ class Uri implements UriInterface
      *
      * Note that a relative URI may still be valid
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -222,7 +222,7 @@ class Uri implements UriInterface
     /**
      * Check if the URI is a valid relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidRelative()
     {
@@ -249,7 +249,7 @@ class Uri implements UriInterface
     /**
      * Check if the URI is an absolute or relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbsolute()
     {
@@ -823,7 +823,7 @@ class Uri implements UriInterface
      * also check that $scheme is one of them.
      *
      * @param  string $scheme
-     * @return boolean
+     * @return bool
      */
     public static function validateScheme($scheme)
     {
@@ -840,7 +840,7 @@ class Uri implements UriInterface
      * Check that the userInfo part of a URI is valid
      *
      * @param  string $userInfo
-     * @return boolean
+     * @return bool
      */
     public static function validateUserInfo($userInfo)
     {
@@ -863,7 +863,7 @@ class Uri implements UriInterface
      *
      * @param  string  $host
      * @param  integer $allowed bitmask of allowed host types
-     * @return boolean
+     * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_ALL)
     {
@@ -899,7 +899,7 @@ class Uri implements UriInterface
      * Valid values include numbers between 1 and 65535, and empty values
      *
      * @param  integer $port
-     * @return boolean
+     * @return bool
      */
     public static function validatePort($port)
     {
@@ -921,7 +921,7 @@ class Uri implements UriInterface
      * Validate the path
      *
      * @param  string $path
-     * @return boolean
+     * @return bool
      */
     public static function validatePath($path)
     {
@@ -941,7 +941,7 @@ class Uri implements UriInterface
      * it through the encodeQueryFragment() method.
      *
      * @param  string $input
-     * @return boolean
+     * @return bool
      */
     public static function validateQueryFragment($input)
     {
@@ -1143,7 +1143,7 @@ class Uri implements UriInterface
      *
      * @param  string  $host
      * @param  integer $allowed allowed address types
-     * @return boolean
+     * @return bool
      */
     protected static function isValidIpAddress($host, $allowed)
     {
@@ -1177,7 +1177,7 @@ class Uri implements UriInterface
      * Check if an address is a valid DNS hostname
      *
      * @param  string $host
-     * @return boolean
+     * @return bool
      */
     protected static function isValidDnsHostname($host)
     {
@@ -1192,7 +1192,7 @@ class Uri implements UriInterface
      * Check if an address is a valid registered name (as defined by RFC-3986) address
      *
      * @param  string $host
-     * @return boolean
+     * @return bool
      */
     protected static function isValidRegName($host)
     {

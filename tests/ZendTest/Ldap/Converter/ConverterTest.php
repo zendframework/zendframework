@@ -181,7 +181,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
      *
      * @param DateTime $expected
      * @param string   $convert
-     * @param boolean  $utc
+     * @param  bool  $utc
      * @return void
      */
     public function testFromLdapDateTime($expected, $convert, $utc)

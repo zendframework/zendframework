@@ -28,7 +28,7 @@ class Mock implements FilterInterface
      * Returns TRUE to accept the message
      *
      * @param array $event event data
-     * @return boolean
+     * @return bool
      */
     public function filter(array $event)
     {

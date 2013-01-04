@@ -28,7 +28,7 @@ class Utils
      *
      * @param  string $expected
      * @param  string $actual
-     * @return boolean
+     * @return bool
      */
     public static function compareStrings($expected, $actual)
     {

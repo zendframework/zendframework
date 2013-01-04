@@ -68,7 +68,7 @@ class InArray extends AbstractValidator
     /**
      * Whether a recursive search should be done
      *
-     * @var boolean
+     * @var bool
      */
     protected $recursive = false;
 
@@ -101,7 +101,7 @@ class InArray extends AbstractValidator
     /**
      * Returns the strict option
      *
-     * @return boolean|int
+     * @return bool|int
      */
     public function getStrict()
     {
@@ -142,7 +142,7 @@ class InArray extends AbstractValidator
     /**
      * Returns the recursive option
      *
-     * @return boolean
+     * @return bool
      */
     public function getRecursive()
     {
@@ -152,7 +152,7 @@ class InArray extends AbstractValidator
     /**
      * Sets the recursive option
      *
-     * @param  boolean $recursive
+     * @param  bool $recursive
      * @return InArray Provides a fluent interface
      */
     public function setRecursive($recursive)
@@ -167,7 +167,7 @@ class InArray extends AbstractValidator
      *
      * @param mixed $value
      * See {@link http://php.net/manual/function.in-array.php#104501}
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

@@ -193,7 +193,7 @@ class Getopt
     /**
      * State of the options: parsed or not yet parsed?
      *
-     * @var boolean
+     * @var bool
      */
     protected $parsed = false;
 
@@ -255,7 +255,7 @@ class Getopt
      * Test whether a given option has been seen.
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      */
     public function __isset($key)
     {

@@ -274,7 +274,7 @@ class Headers implements Countable, Iterator
      * Get all headers of a certain name/type
      *
      * @param  string $name
-     * @return boolean|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
+     * @return bool|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
      * contain, an ArrayIterator if the header is a MultipleHeadersInterface instance and finally returns
      * HeaderInterface for the rest of cases.
      */

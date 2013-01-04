@@ -120,7 +120,7 @@ class Registry
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  RoleInterface|string $role
-     * @return boolean
+     * @return bool
      */
     public function has($role)
     {
@@ -164,9 +164,9 @@ class Registry
      *
      * @param  RoleInterface|string  $role
      * @param  RoleInterface|string  $inherit
-     * @param  boolean                    $onlyParents
+     * @param  bool                    $onlyParents
      * @throws Exception\InvalidArgumentException
-     * @return boolean
+     * @return bool
      */
     public function inherits($role, $inherit, $onlyParents = false)
     {

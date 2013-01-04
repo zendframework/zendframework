@@ -55,7 +55,7 @@ class Connection implements HeaderInterface
     /**
      * Set Connection header to define persistent connection
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return Connection
      */
     public function setPersistent($flag)

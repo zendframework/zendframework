@@ -164,7 +164,7 @@ class StringLength extends AbstractValidator
      * no greater than the max option (when the max option is not null).
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

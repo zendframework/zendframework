@@ -44,7 +44,7 @@ class PriorityList implements Iterator, Countable
     /**
      * Whether the list was already sorted.
      *
-     * @var boolean
+     * @var bool
      */
     protected $sorted = false;
 
@@ -194,7 +194,7 @@ class PriorityList implements Iterator, Countable
      * valid(): defined by Iterator interface.
      *
      * @see    Iterator::valid()
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

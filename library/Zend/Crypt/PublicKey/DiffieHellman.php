@@ -36,7 +36,7 @@ class DiffieHellman
      * Static flag to select whether to use PHP5.3's openssl extension
      * if available.
      *
-     * @var boolean
+     * @var bool
      */
     public static $useOpenssl = true;
 
@@ -378,7 +378,7 @@ class DiffieHellman
     /**
      * Check whether a private key currently exists.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPrivateKey()
     {

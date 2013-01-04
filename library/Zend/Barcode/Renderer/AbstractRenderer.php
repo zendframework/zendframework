@@ -38,7 +38,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Activate/Deactivate the automatic rendering of exception
-     * @var boolean
+     * @var bool
      */
     protected $automaticRenderError = false;
 
@@ -202,7 +202,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Activate/Deactivate the automatic rendering of exception
-     * @param boolean $value
+     * @param  bool $value
      * @return AbstractRenderer
      */
     public function setAutomaticRenderError($value)
@@ -292,7 +292,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Retrieve the automatic rendering of exception
-     * @return boolean
+     * @return bool
      */
     public function getAutomaticRenderError()
     {
@@ -321,7 +321,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Checking of parameters after all settings
-     * @return boolean
+     * @return bool
      */
     public function checkParams()
     {
@@ -468,7 +468,7 @@ abstract class AbstractRenderer implements RendererInterface
      * Draw a polygon in the rendering resource
      * @param array $points
      * @param integer $color
-     * @param boolean $filled
+     * @param  bool $filled
      */
     abstract protected function drawPolygon($points, $color, $filled = true);
 

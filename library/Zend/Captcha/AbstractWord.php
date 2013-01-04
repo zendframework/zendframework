@@ -64,14 +64,14 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Should the numbers be used or only letters
      *
-     * @var boolean
+     * @var bool
      */
     protected $useNumbers = true;
 
     /**
      * Should both cases be used or only lowercase
      *
-     * @var boolean
+     * @var bool
      */
     // protected $useCase = false;
 
@@ -85,7 +85,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Should generate() keep session or create a new one?
      *
-     * @var boolean
+     * @var bool
      */
     protected $keepSession = false;
 

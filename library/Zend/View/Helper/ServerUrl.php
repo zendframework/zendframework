@@ -51,7 +51,7 @@ class ServerUrl extends AbstractHelper
      * View helper entry point:
      * Returns the current host's URL like http://site.com
      *
-     * @param  string|boolean $requestUri  [optional] if true, the request URI
+     * @param  string|bool $requestUri  [optional] if true, the request URI
      *                                     found in $_SERVER will be appended
      *                                     as a path. If a string is given, it
      *                                     will be appended as a path. Default

@@ -67,7 +67,7 @@ class Reader
     /**
      * Override HTTP PUT and DELETE request methods?
      *
-     * @var boolean
+     * @var bool
      */
     protected static $httpMethodOverride = false;
 
@@ -153,7 +153,7 @@ class Reader
      * X-Method-Override header will be sent with a value of PUT or
      * DELETE as appropriate.
      *
-     * @param  boolean $override Whether to override PUT and DELETE.
+     * @param  bool $override Whether to override PUT and DELETE.
      * @return void
      */
     public static function setHttpMethodOverride($override = true)
@@ -164,7 +164,7 @@ class Reader
     /**
      * Get the HTTP override state
      *
-     * @return boolean
+     * @return bool
      */
     public static function getHttpMethodOverride()
     {
@@ -551,7 +551,7 @@ class Reader
      * Is a given named Extension registered?
      *
      * @param  string $extensionName
-     * @return boolean
+     * @return bool
      */
     public static function isRegistered($extensionName)
     {

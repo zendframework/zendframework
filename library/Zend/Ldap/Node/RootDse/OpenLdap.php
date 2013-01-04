@@ -46,7 +46,7 @@ class OpenLdap extends Node\RootDse
      * Determines if the control is supported
      *
      * @param  string|array $oids control oid(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsControl($oids)
     {
@@ -57,7 +57,7 @@ class OpenLdap extends Node\RootDse
      * Determines if the extension is supported
      *
      * @param  string|array $oids oid(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsExtension($oids)
     {
@@ -68,7 +68,7 @@ class OpenLdap extends Node\RootDse
      * Determines if the feature is supported
      *
      * @param  string|array $oids feature oid(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsFeature($oids)
     {

@@ -166,7 +166,7 @@ class RsaOptions extends AbstractOptions
     /**
      * Enable/disable the binary output
      *
-     * @param  boolean $value
+     * @param  bool $value
      * @return RsaOptions
      */
     public function setBinaryOutput($value)
@@ -178,7 +178,7 @@ class RsaOptions extends AbstractOptions
     /**
      * Get the value of binary output
      *
-     * @return boolean
+     * @return bool
      */
     public function getBinaryOutput()
     {

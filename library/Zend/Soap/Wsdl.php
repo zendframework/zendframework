@@ -339,7 +339,7 @@ class Wsdl
      * @param object $binding A binding XML_Tree_Node returned by {@link function addBinding}
      * @param string $style binding style, possible values are "rpc" (the default) and "document"
      * @param string $transport Transport method (defaults to HTTP)
-     * @return boolean
+     * @return bool
      */
     public function addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http')
     {
@@ -357,7 +357,7 @@ class Wsdl
      *
      * @param object $operation An operation XML_Tree_Node returned by {@link function addBindingOperation}
      * @param string $soap_action SOAP Action
-     * @return boolean
+     * @return bool
      */
     public function addSoapOperation($binding, $soap_action)
     {
@@ -514,7 +514,7 @@ class Wsdl
     /**
      * Echo the WSDL as XML
      *
-     * @return boolean
+     * @return bool
      */
     public function dump($filename = false)
     {

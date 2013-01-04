@@ -407,7 +407,7 @@ class Client implements ServerClient
      * Check for valid URN
      *
      * @param  string $urn
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface on invalid URN
      */
     public function validateUrn($urn)
@@ -825,7 +825,7 @@ class Client implements ServerClient
     /**
      * Set the SOAP WSDL Caching Options
      *
-     * @param string|int|boolean|null $caching
+     * @param string|int|bool|null $caching
      * @return Client
      */
     public function setWSDLCache($caching)
@@ -1026,7 +1026,7 @@ class Client implements ServerClient
      * Add SOAP input header
      *
      * @param SoapHeader $header
-     * @param boolean $permanent
+     * @param  bool $permanent
      * @return Client
      */
     public function addSoapInputHeader(SoapHeader $header, $permanent = false)

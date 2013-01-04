@@ -31,7 +31,7 @@ class Alnum extends AbstractLocale
     /**
      * Sets default option values for this instance
      *
-     * @param array|Traversable|boolean|null $allowWhiteSpaceOrOptions
+     * @param array|Traversable|bool|null $allowWhiteSpaceOrOptions
      * @param string|null $locale
      */
     public function __construct($allowWhiteSpaceOrOptions = null, $locale = null)
@@ -49,7 +49,7 @@ class Alnum extends AbstractLocale
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param  boolean $flag
+     * @param  bool $flag
      * @return Alnum Provides a fluent interface
      */
     public function setAllowWhiteSpace($flag = true)
@@ -61,7 +61,7 @@ class Alnum extends AbstractLocale
     /**
      * Whether white space is allowed
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowWhiteSpace()
     {

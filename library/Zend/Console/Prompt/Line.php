@@ -70,7 +70,7 @@ class Line extends AbstractPrompt
     }
 
     /**
-     * @param boolean $allowEmpty
+     * @param  bool $allowEmpty
      */
     public function setAllowEmpty($allowEmpty)
     {
@@ -78,7 +78,7 @@ class Line extends AbstractPrompt
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getAllowEmpty()
     {

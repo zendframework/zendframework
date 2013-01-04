@@ -36,7 +36,7 @@ abstract class Glob
      * @see    http://docs.php.net/glob
      * @param  string  $pattern
      * @param  integer $flags
-     * @param  boolean $forceFallback
+     * @param  bool $forceFallback
      * @return array|false
      */
     public static function glob($pattern, $flags, $forceFallback = false)

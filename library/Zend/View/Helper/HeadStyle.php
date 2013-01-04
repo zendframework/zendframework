@@ -163,7 +163,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Determine if a value is a valid style tag
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     protected function isValid($value)
     {

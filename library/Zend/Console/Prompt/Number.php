@@ -117,7 +117,7 @@ class Number extends Line
     }
 
     /**
-     * @param boolean $allowEmpty
+     * @param  bool $allowEmpty
      */
     public function setAllowEmpty($allowEmpty)
     {
@@ -125,7 +125,7 @@ class Number extends Line
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getAllowEmpty()
     {
@@ -197,7 +197,7 @@ class Number extends Line
     }
 
     /**
-     * @param boolean $allowFloat
+     * @param  bool $allowFloat
      */
     public function setAllowFloat($allowFloat)
     {
@@ -205,7 +205,7 @@ class Number extends Line
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getAllowFloat()
     {

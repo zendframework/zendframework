@@ -132,7 +132,7 @@ class Cache
      * Remove a cache file
      *
      * @param  string $filename
-     * @return boolean
+     * @return bool
      */
     public static function delete($filename)
     {

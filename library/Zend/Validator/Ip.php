@@ -63,7 +63,7 @@ class Ip extends AbstractValidator
      * Returns true if and only if $value is a valid IP address
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -98,7 +98,7 @@ class Ip extends AbstractValidator
      * Validates an IPv4 address
      *
      * @param string $value
-     * @return boolean
+     * @return bool
      */
     protected function validateIPv4($value)
     {
@@ -128,7 +128,7 @@ class Ip extends AbstractValidator
      * Validates an IPv6 address
      *
      * @param  string $value Value to check against
-     * @return boolean True when $value is a valid ipv6 address
+     * @return bool True when $value is a valid ipv6 address
      *                 False otherwise
      */
     protected function validateIPv6($value)
@@ -169,7 +169,7 @@ class Ip extends AbstractValidator
      * IPvFuture is loosely defined in the Section 3.2.2 of RFC 3986
      *
      * @param  string $value Value to check against
-     * @return boolean True when $value is a valid IPvFuture address
+     * @return bool True when $value is a valid IPvFuture address
      *                 False otherwise
      */
     protected function validateIPvFuture($value)

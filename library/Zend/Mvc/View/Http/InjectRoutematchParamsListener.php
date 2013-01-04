@@ -98,7 +98,7 @@ class InjectRoutematchParamsListener implements ListenerAggregateInterface
     /**
      * Should RouteMatch parameters replace existing Request params?
      *
-     * @param boolean $overwrite
+     * @param  bool $overwrite
      */
     public function setOverwrite($overwrite)
     {
@@ -106,7 +106,7 @@ class InjectRoutematchParamsListener implements ListenerAggregateInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getOverwrite()
     {

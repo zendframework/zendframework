@@ -74,7 +74,7 @@ class Ini extends AbstractWriter
     /**
      * Return whether the writer should render without sections.
      *
-     * @return boolean
+     * @return bool
      */
     public function shouldRenderWithoutSections()
     {

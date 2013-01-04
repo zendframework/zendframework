@@ -39,13 +39,13 @@ class CallbackHandler
 
     /**
      * PHP version is greater as 5.4rc1?
-     * @var boolean
+     * @var bool
      */
     protected static $isPhp54;
 
     /**
      * Is pecl/weakref extension installed?
-     * @var boolean
+     * @var bool
      */
     protected static $hasWeakRefExtension;
 

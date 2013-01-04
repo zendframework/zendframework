@@ -50,7 +50,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  \Zend\Ldap\Dn $dn
      * @param  array         $data
-     * @param  boolean       $fromDataSource
+     * @param  bool       $fromDataSource
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
@@ -60,7 +60,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
 
     /**
      * @param array   $data
-     * @param boolean $fromDataSource
+     * @param  bool $fromDataSource
      */
     protected function loadData(array $data, $fromDataSource)
     {
@@ -184,7 +184,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an offline method.
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return array
      */
     public function getAttributes($includeSystemAttributes = true)
@@ -219,7 +219,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Returns an array representation of the current node
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return array
      */
     public function toArray($includeSystemAttributes = true)
@@ -231,7 +231,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Returns a JSON representation of the current node
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return string
      */
     public function toJson($includeSystemAttributes = true)
@@ -246,7 +246,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an offline method.
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return array
      */
     public function getData($includeSystemAttributes = true)
@@ -274,8 +274,8 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * missing in the key-collection.
      *
      * @param  string  $name
-     * @param  boolean $emptyExists
-     * @return boolean
+     * @param  bool $emptyExists
+     * @return bool
      */
     public function existsAttribute($name, $emptyExists = false)
     {
@@ -296,7 +296,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string      $attribName
      * @param  mixed|array $value
-     * @return boolean
+     * @return bool
      */
     public function attributeHasValue($attribName, $value)
     {
@@ -386,7 +386,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * Empty attributes will be treated as non-existent.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -448,7 +448,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * Empty attributes will be treated as non-existent.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name)
     {

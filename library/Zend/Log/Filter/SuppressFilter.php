@@ -19,7 +19,7 @@ namespace Zend\Log\Filter;
 class SuppressFilter implements FilterInterface
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $accept = true;
 
@@ -29,7 +29,7 @@ class SuppressFilter implements FilterInterface
      * Call suppress(true) to suppress all log events.
      * Call suppress(false) to accept all log events.
      *
-     * @param boolean $suppress Should all log events be suppressed?
+     * @param  bool $suppress Should all log events be suppressed?
      * @return void
      */
     public function suppress($suppress)
@@ -41,7 +41,7 @@ class SuppressFilter implements FilterInterface
      * Returns TRUE to accept the message, FALSE to block it.
      *
      * @param array $event event data
-     * @return boolean accepted?
+     * @return bool accepted?
      */
     public function filter(array $event)
     {

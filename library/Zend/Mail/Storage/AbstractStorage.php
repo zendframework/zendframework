@@ -310,7 +310,7 @@ abstract class AbstractStorage implements
      /**
       * Iterator::valid()
       *
-      * @return boolean
+      * @return bool
       */
      public function valid()
      {

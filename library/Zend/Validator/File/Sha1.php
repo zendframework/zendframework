@@ -84,7 +84,7 @@ class Sha1 extends Hash
      *
      * @param  string $value Filename to check for hash
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

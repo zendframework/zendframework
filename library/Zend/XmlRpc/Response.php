@@ -119,7 +119,7 @@ class Response
     /**
      * Is the response a fault response?
      *
-     * @return boolean
+     * @return bool
      */
     public function isFault()
     {
@@ -144,7 +144,7 @@ class Response
      *
      * @param string $response
      * @throws Exception\ValueException if invalid XML
-     * @return boolean True if a valid XMLRPC response, false if a fault
+     * @return bool True if a valid XMLRPC response, false if a fault
      * response or invalid input
      */
     public function loadXml($response)

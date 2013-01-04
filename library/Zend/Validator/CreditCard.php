@@ -247,7 +247,7 @@ class CreditCard extends AbstractValidator
      * Returns true if and only if $value follows the Luhn algorithm (mod-10 checksum)
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

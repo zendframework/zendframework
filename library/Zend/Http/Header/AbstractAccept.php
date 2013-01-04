@@ -293,7 +293,7 @@ abstract class AbstractAccept implements HeaderInterface
      * Match a media string against this header
      *
      * @param array|string $matchAgainst
-     * @return AcceptFieldValuePart|boolean The matched value or false
+     * @return AcceptFieldValuePart|bool The matched value or false
      */
     public function match($matchAgainst)
     {
@@ -337,7 +337,7 @@ abstract class AbstractAccept implements HeaderInterface
      *
      * @param array $match1
      * @param array $match2
-     * @return boolean|array
+     * @return bool|array
      */
     protected function matchAcceptParams($match1, $match2)
     {

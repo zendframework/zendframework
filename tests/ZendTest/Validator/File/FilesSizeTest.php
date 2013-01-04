@@ -21,7 +21,7 @@ use Zend\Validator;
  */
 class FilesSizeTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var boolean */
+    /** @var bool */
     public $multipleOptionsDetected;
 
     public function setUp()

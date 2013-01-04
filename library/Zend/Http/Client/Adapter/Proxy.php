@@ -54,7 +54,7 @@ class Proxy extends Socket
     /**
      * Whether HTTPS CONNECT was already negotiated with the proxy or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $negotiated = false;
 
@@ -84,7 +84,7 @@ class Proxy extends Socket
      *
      * @param string  $host
      * @param int     $port
-     * @param boolean $secure
+     * @param  bool $secure
      * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)

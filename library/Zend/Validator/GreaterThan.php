@@ -52,7 +52,7 @@ class GreaterThan extends AbstractValidator
      * If false, then strict comparisons are done, and the value may equal
      * the min option
      *
-     * @var boolean
+     * @var bool
      */
     protected $inclusive;
 
@@ -117,7 +117,7 @@ class GreaterThan extends AbstractValidator
     /**
      * Returns the inclusive option
      *
-     * @return boolean
+     * @return bool
      */
     public function getInclusive()
     {
@@ -127,7 +127,7 @@ class GreaterThan extends AbstractValidator
     /**
      * Sets the inclusive option
      *
-     * @param  boolean $inclusive
+     * @param  bool $inclusive
      * @return GreaterThan Provides a fluent interface
      */
     public function setInclusive($inclusive)
@@ -140,7 +140,7 @@ class GreaterThan extends AbstractValidator
      * Returns true if and only if $value is greater than min option
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

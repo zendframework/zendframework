@@ -113,7 +113,7 @@ class Request
      * Set method to call
      *
      * @param string $method
-     * @return boolean Returns true on success, false if method name is invalid
+     * @return bool Returns true on success, false if method name is invalid
      */
     public function setMethod($method)
     {
@@ -273,7 +273,7 @@ class Request
      *
      * @param string $request
      * @throws Exception\ValueException if invalid XML
-     * @return boolean True on success, false if an error occurred.
+     * @return bool True on success, false if an error occurred.
      */
     public function loadXml($request)
     {
@@ -351,7 +351,7 @@ class Request
      * Does the current request contain errors and should it return a fault
      * response?
      *
-     * @return boolean
+     * @return bool
      */
     public function isFault()
     {

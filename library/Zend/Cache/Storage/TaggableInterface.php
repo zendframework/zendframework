@@ -23,7 +23,7 @@ interface TaggableInterface
      *
      * @param string   $key
      * @param string[] $tags
-     * @return boolean
+     * @return bool
      */
     public function setTags($key, array $tags);
 
@@ -42,8 +42,8 @@ interface TaggableInterface
      * else all given tags must match.
      *
      * @param string[] $tags
-     * @param boolean  $disjunction
-     * @return boolean
+     * @param  bool  $disjunction
+     * @return bool
      */
     public function clearByTags(array $tags, $disjunction = false);
 }

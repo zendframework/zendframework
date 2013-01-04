@@ -57,7 +57,7 @@ class Locked extends AbstractContainer
     /**
      * Return true if object is locked
      *
-     * @return boolean
+     * @return bool
      */
     public function isLocked()
     {

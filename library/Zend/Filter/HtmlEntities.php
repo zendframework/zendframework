@@ -36,7 +36,7 @@ class HtmlEntities extends AbstractFilter
     /**
      * Corresponds to the forth htmlentities() argument
      *
-     * @var boolean
+     * @var bool
      */
     protected $doubleQuote;
 
@@ -153,7 +153,7 @@ class HtmlEntities extends AbstractFilter
     /**
      * Returns the doubleQuote option
      *
-     * @return boolean
+     * @return bool
      */
     public function getDoubleQuote()
     {
@@ -163,7 +163,7 @@ class HtmlEntities extends AbstractFilter
     /**
      * Sets the doubleQuote option
      *
-     * @param boolean $doubleQuote
+     * @param  bool $doubleQuote
      * @return HtmlEntities Provides a fluent interface
      */
     public function setDoubleQuote($doubleQuote)

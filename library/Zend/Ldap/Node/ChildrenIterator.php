@@ -95,7 +95,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * after calls to rewind() or next().
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -106,7 +106,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Checks if current node has children.
      * Returns whether the current element has children.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {
@@ -152,7 +152,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Implements ArrayAccess.
      *
      * @param  string $rdn
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($rdn)
     {

@@ -141,7 +141,7 @@ class Result implements
     /**
      * Is query result?
      *
-     * @return boolean
+     * @return bool
      */
     public function isQueryResult()
     {
@@ -232,7 +232,7 @@ class Result implements
     /**
      * Load from mysqli result
      *
-     * @return boolean
+     * @return bool
      */
     protected function loadFromMysqliResult()
     {
@@ -297,7 +297,7 @@ class Result implements
     /**
      * Valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

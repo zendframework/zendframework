@@ -24,7 +24,7 @@ interface ValidatorInterface
      * validation failed.
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
      */
     public function isValid($value);

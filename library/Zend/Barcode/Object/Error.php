@@ -21,7 +21,7 @@ class Error extends AbstractObject
     /**
      * All texts are accepted
      * @param string $value
-     * @return boolean
+     * @return bool
      */
     public function validateText($value)
     {

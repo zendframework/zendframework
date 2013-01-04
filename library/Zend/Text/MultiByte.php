@@ -24,7 +24,7 @@ class MultiByte
      * @param  string  $string
      * @param  integer $width
      * @param  string  $break
-     * @param  boolean $cut
+     * @param  bool $cut
      * @param  string  $charset
      * @throws Exception\InvalidArgumentException
      * @return string

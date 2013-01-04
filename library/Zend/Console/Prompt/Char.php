@@ -137,7 +137,7 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param boolean $allowEmpty
+     * @param  bool $allowEmpty
      */
     public function setAllowEmpty($allowEmpty)
     {
@@ -145,7 +145,7 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getAllowEmpty()
     {
@@ -185,7 +185,7 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param boolean $ignoreCase
+     * @param  bool $ignoreCase
      */
     public function setIgnoreCase($ignoreCase)
     {
@@ -193,7 +193,7 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIgnoreCase()
     {
@@ -201,7 +201,7 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param boolean $echo
+     * @param  bool $echo
      */
     public function setEcho($echo)
     {
@@ -209,7 +209,7 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getEcho()
     {

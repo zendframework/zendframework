@@ -48,7 +48,7 @@ class Royalmail extends AbstractAdapter
      * Validates the checksum ()
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function royalmail($value)
     {
@@ -79,7 +79,7 @@ class Royalmail extends AbstractAdapter
      * Allows start and stop tag within checked chars
      *
      * @param  string $value The barcode to check for allowed characters
-     * @return boolean
+     * @return bool
      */
     public function hasValidCharacters($value)
     {

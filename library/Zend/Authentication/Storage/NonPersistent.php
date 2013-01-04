@@ -31,7 +31,7 @@ class NonPersistent implements StorageInterface
     /**
      * Returns true if and only if storage is empty
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty()
     {

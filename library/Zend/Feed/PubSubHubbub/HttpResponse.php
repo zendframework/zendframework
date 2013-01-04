@@ -85,7 +85,7 @@ class HttpResponse
      *
      * @param  string $name
      * @param  string $value
-     * @param  boolean $replace
+     * @param  bool $replace
      * @return \Zend\Feed\PubSubHubbub\HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
@@ -137,7 +137,7 @@ class HttpResponse
     /**
      * Can we send headers?
      *
-     * @param  boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
+     * @param  bool $throw Whether or not to throw an exception if headers have been sent; defaults to false
      * @return HttpResponse
      * @throws Exception\RuntimeException
      */

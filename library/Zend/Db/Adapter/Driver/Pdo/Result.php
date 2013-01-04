@@ -168,7 +168,7 @@ class Result implements Iterator, ResultInterface
     /**
      * Valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -204,7 +204,7 @@ class Result implements Iterator, ResultInterface
     /**
      * Is query result
      *
-     * @return boolean
+     * @return bool
      */
     public function isQueryResult()
     {

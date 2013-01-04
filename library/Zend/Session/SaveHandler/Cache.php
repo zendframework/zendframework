@@ -57,7 +57,7 @@ class Cache implements SaveHandlerInterface
      *
      * @param string $savePath
      * @param string $name
-     * @return boolean
+     * @return bool
      */
     public function open($savePath, $name)
     {
@@ -71,7 +71,7 @@ class Cache implements SaveHandlerInterface
     /**
      * Close session
      *
-     * @return boolean
+     * @return bool
      */
     public function close()
     {
@@ -94,7 +94,7 @@ class Cache implements SaveHandlerInterface
      *
      * @param string $id
      * @param string $data
-     * @return boolean
+     * @return bool
      */
     public function write($id, $data)
     {
@@ -105,7 +105,7 @@ class Cache implements SaveHandlerInterface
      * Destroy session
      *
      * @param string $id
-     * @return boolean
+     * @return bool
      */
     public function destroy($id)
     {
@@ -116,7 +116,7 @@ class Cache implements SaveHandlerInterface
      * Garbage Collection
      *
      * @param int $maxlifetime
-     * @return boolean
+     * @return bool
      */
     public function gc($maxlifetime)
     {

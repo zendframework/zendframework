@@ -38,12 +38,12 @@ class Uri extends AbstractValidator
     protected $uriHandler;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $allowRelative = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $allowAbsolute = true;
 
@@ -121,7 +121,7 @@ class Uri extends AbstractValidator
     /**
      * Returns the allowAbsolute option
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowAbsolute()
     {
@@ -131,7 +131,7 @@ class Uri extends AbstractValidator
     /**
      * Sets the allowAbsolute option
      *
-     * @param  boolean $allowAbsolute
+     * @param  bool $allowAbsolute
      * @return Uri
      */
     public function setAllowAbsolute($allowAbsolute)
@@ -143,7 +143,7 @@ class Uri extends AbstractValidator
     /**
      * Returns the allowRelative option
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowRelative()
     {
@@ -153,7 +153,7 @@ class Uri extends AbstractValidator
     /**
      * Sets the allowRelative option
      *
-     * @param  boolean $allowRelative
+     * @param  bool $allowRelative
      * @return Uri
      */
     public function setAllowRelative($allowRelative)
@@ -166,7 +166,7 @@ class Uri extends AbstractValidator
      * Returns true if and only if $value validates as a Uri
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

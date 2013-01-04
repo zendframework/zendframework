@@ -246,7 +246,7 @@ class MemoryManager
      * Create new Zend_Memory object
      *
      * @param string $value
-     * @param boolean $locked
+     * @param  bool $locked
      * @return \Zend\Memory\Container\ContainerInterface
      * @throws \Zend\Memory\Exception\ExceptionInterface
      */

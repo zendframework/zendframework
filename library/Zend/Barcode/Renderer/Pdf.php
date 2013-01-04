@@ -103,7 +103,7 @@ class Pdf extends AbstractRenderer
      * Draw a polygon in the rendering resource
      * @param array $points
      * @param integer $color
-     * @param boolean $filled
+     * @param  bool $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {

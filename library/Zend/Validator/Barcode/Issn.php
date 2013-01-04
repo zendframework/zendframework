@@ -30,7 +30,7 @@ class Issn extends AbstractAdapter
      * Allows X on length of 8 chars
      *
      * @param  string $value The barcode to check for allowed characters
-     * @return boolean
+     * @return bool
      */
     public function hasValidCharacters($value)
     {
@@ -47,7 +47,7 @@ class Issn extends AbstractAdapter
      * Validates the checksum
      *
      * @param  string $value The barcode to check the checksum for
-     * @return boolean
+     * @return bool
      */
     public function hasValidChecksum($value)
     {
@@ -65,7 +65,7 @@ class Issn extends AbstractAdapter
      * ISSN implementation (reversed mod11)
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function issn($value)
     {

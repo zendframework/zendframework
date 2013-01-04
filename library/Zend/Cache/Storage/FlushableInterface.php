@@ -20,7 +20,7 @@ interface FlushableInterface
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush();
 }

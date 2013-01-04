@@ -52,7 +52,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * Readable option
      *
-     * @var boolean
+     * @var bool
      */
     protected $readable = true;
 
@@ -66,7 +66,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * Writable option
      *
-     * @var boolean
+     * @var bool
      */
     protected $writable = true;
 
@@ -154,7 +154,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * Enable/Disable reading data from cache.
      *
-     * @param  boolean $readable
+     * @param  bool $readable
      * @return AbstractAdapter
      */
     public function setReadable($readable)
@@ -170,7 +170,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * If reading data from cache enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getReadable()
     {
@@ -206,7 +206,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * Enable/Disable writing data to cache.
      *
-     * @param  boolean $writable
+     * @param  bool $writable
      * @return AdapterOptions
      */
     public function setWritable($writable)
@@ -222,7 +222,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * If writing data to cache enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getWritable()
     {

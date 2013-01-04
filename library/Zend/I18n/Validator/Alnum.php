@@ -69,7 +69,7 @@ class Alnum extends AbstractValidator
     /**
      * Returns the allowWhiteSpace option
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowWhiteSpace()
     {
@@ -79,7 +79,7 @@ class Alnum extends AbstractValidator
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param boolean $allowWhiteSpace
+     * @param  bool $allowWhiteSpace
      * @return AlnumFilter Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
@@ -92,7 +92,7 @@ class Alnum extends AbstractValidator
      * Returns true if and only if $value contains only alphabetic and digit characters
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

@@ -136,7 +136,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
  */
 class DummyMemoryManager extends Memory\MemoryManager
 {
-    /** @var boolean */
+    /** @var bool */
     public $processUpdatePassed = false;
 
     /** @var integer */

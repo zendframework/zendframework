@@ -237,7 +237,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
     /**
      * Check to see if the iterator is still valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

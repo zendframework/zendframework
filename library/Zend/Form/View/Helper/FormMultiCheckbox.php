@@ -25,7 +25,7 @@ class FormMultiCheckbox extends FormInput
     const LABEL_PREPEND = 'prepend';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $useHiddenElement = false;
 
@@ -141,7 +141,7 @@ class FormMultiCheckbox extends FormInput
      * Returns the option for prefixing the element with a hidden element
      * for the unset value.
      *
-     * @return boolean
+     * @return bool
      */
     public function getUseHiddenElement()
     {
@@ -152,7 +152,7 @@ class FormMultiCheckbox extends FormInput
      * Sets the option for prefixing the element with a hidden element
      * for the unset value.
      *
-     * @param  boolean $useHiddenElement
+     * @param  bool $useHiddenElement
      * @return FormMultiCheckbox
      */
     public function setUseHiddenElement($useHiddenElement)
@@ -174,7 +174,7 @@ class FormMultiCheckbox extends FormInput
     /**
      * Sets the unchecked value used when "UseHiddenElement" is turned on.
      *
-     * @param  boolean $value
+     * @param  bool $value
      * @return FormMultiCheckbox
      */
     public function setUncheckedValue($value)

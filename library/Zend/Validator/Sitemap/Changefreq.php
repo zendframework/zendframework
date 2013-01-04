@@ -56,7 +56,7 @@ class Changefreq extends AbstractValidator
      * @link http://www.sitemaps.org/protocol.php#changefreqdef <changefreq>
      *
      * @param  string  $value  value to validate
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

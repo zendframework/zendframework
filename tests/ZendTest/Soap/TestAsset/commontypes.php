@@ -199,7 +199,7 @@ class AutoDiscoverTestClass2
     /**
      *
      * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 $test
-     * @return boolean
+     * @return bool
      */
     public function add(AutoDiscoverTestClass1 $test)
     {
@@ -277,7 +277,7 @@ class ComplexTest
 class ComplexObjectStructure
 {
     /**
-     * @var boolean
+     * @var bool
      */
     public $boolean = true;
 

@@ -112,7 +112,7 @@ final class Version
      * the latest (or newer??) than the latest tag on GitHub,
      * which is returned by static::getLatest().
      *
-     * @return boolean
+     * @return bool
      */
     public static function isLatest()
     {

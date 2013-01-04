@@ -324,7 +324,7 @@ class PostCode extends AbstractValidator
      * Returns true if and only if $value is a valid postalcode
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      * @throws Exception\InvalidArgumentException
      */
     public function isValid($value)

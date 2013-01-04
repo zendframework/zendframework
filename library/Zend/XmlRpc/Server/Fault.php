@@ -135,7 +135,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * 'observe' that accepts an exception as its sole argument.
      *
      * @param string $class
-     * @return boolean
+     * @return bool
      */
     public static function attachObserver($class)
     {
@@ -157,7 +157,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * Detach an observer
      *
      * @param string $class
-     * @return boolean
+     * @return bool
      */
     public static function detachObserver($class)
     {

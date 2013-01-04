@@ -58,7 +58,7 @@ class Node
      * Set parent node
      *
      * @param \Zend\Server\Reflection\Node $node
-     * @param boolean $new Whether or not the child node is newly created
+     * @param  bool $new Whether or not the child node is newly created
      * and should always be attached
      * @return void
      */
@@ -114,7 +114,7 @@ class Node
     /**
      * Does this node have children?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {

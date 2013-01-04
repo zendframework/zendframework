@@ -84,7 +84,7 @@ class OpenLdap extends Schema\AbstractItem implements AttributeTypeInterface
     /**
      * Returns if the attribute is single-valued.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSingleValued()
     {

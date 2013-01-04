@@ -45,7 +45,7 @@ class Code93 extends AbstractAdapter
      * Validates the checksum (Modulo CK)
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function code93($value)
     {

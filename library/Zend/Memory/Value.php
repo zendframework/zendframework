@@ -41,7 +41,7 @@ class Value implements ArrayAccess, Countable
     /**
      * Boolean flag which signals to trace value modifications
      *
-     * @var boolean
+     * @var bool
      */
     private $trace;
 
@@ -84,7 +84,7 @@ class Value implements ArrayAccess, Countable
      * returns true if string offset exists
      *
      * @param integer $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {

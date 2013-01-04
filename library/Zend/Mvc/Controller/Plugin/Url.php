@@ -30,7 +30,7 @@ class Url extends AbstractPlugin
      * @param  string $route RouteInterface name
      * @param  array $params Parameters to use in url generation, if any
      * @param  array|bool $options RouteInterface-specific options to use in url generation, if any. If boolean, and no fourth argument, used as $reuseMatchedParams
-     * @param  boolean $reuseMatchedParams Whether to reuse matched parameters
+     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
      * @return string
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event

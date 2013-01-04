@@ -40,7 +40,7 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isQuery = null;
 
@@ -62,7 +62,7 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isPrepared = false;
 

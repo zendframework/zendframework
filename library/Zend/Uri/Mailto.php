@@ -37,7 +37,7 @@ class Mailto extends Uri
      * This applies additional specific validation rules beyond the ones
      * required by the generic URI syntax
      *
-     * @return boolean
+     * @return bool
      * @see    Uri::isValid()
      */
     public function isValid()

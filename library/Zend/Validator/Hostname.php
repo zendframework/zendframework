@@ -310,8 +310,8 @@ class Hostname extends AbstractValidator
      * Sets validator options
      *
      * @param integer $allow       OPTIONAL Set what types of hostname to allow (default ALLOW_DNS)
-     * @param boolean $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
-     * @param boolean $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
+     * @param  bool $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
+     * @param  bool $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
      * @param Ip      $ipValidator OPTIONAL
      * @see http://www.iana.org/cctld/specifications-policies-cctlds-01apr02.htm  Technical Specifications for ccTLDs
      */
@@ -391,7 +391,7 @@ class Hostname extends AbstractValidator
     /**
      * Returns the set idn option
      *
-     * @return boolean
+     * @return bool
      */
     public function getIdnCheck()
     {
@@ -403,7 +403,7 @@ class Hostname extends AbstractValidator
      *
      * This only applies when DNS hostnames are validated
      *
-     * @param boolean $useIdnCheck Set to true to validate IDN domains
+     * @param  bool $useIdnCheck Set to true to validate IDN domains
      * @return Hostname
      */
     public function useIdnCheck ($useIdnCheck)
@@ -415,7 +415,7 @@ class Hostname extends AbstractValidator
     /**
      * Returns the set tld option
      *
-     * @return boolean
+     * @return bool
      */
     public function getTldCheck()
     {
@@ -427,7 +427,7 @@ class Hostname extends AbstractValidator
      *
      * This only applies when DNS hostnames are validated
      *
-     * @param boolean $useTldCheck Set to true to validate TLD elements
+     * @param  bool $useTldCheck Set to true to validate TLD elements
      * @return Hostname
      */
     public function useTldCheck ($useTldCheck)
@@ -442,7 +442,7 @@ class Hostname extends AbstractValidator
      * Returns true if and only if the $value is a valid hostname with respect to the current allow option
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

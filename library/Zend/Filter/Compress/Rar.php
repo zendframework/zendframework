@@ -182,7 +182,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Decompresses the given content
      *
      * @param  string $content
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException if archive not found, cannot be opened,
      *                                    or error during decompression
      */

@@ -30,7 +30,7 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Whether modifications to configuration data are allowed.
      *
-     * @var boolean
+     * @var bool
      */
     protected $allowModifications;
 
@@ -52,7 +52,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * Used when unsetting values during iteration to ensure we do not skip
      * the next element.
      *
-     * @var boolean
+     * @var bool
      */
     protected $skipNextIteration;
 
@@ -63,7 +63,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * on construction.
      *
      * @param  array   $array
-     * @param  boolean $allowModifications
+     * @param  bool $allowModifications
      */
     public function __construct(array $array, $allowModifications = false)
     {
@@ -185,7 +185,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * isset() overloading
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -276,7 +276,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * valid(): defined by Iterator interface.
      *
      * @see    Iterator::valid()
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -288,7 +288,7 @@ class Config implements Countable, Iterator, ArrayAccess
      *
      * @see    ArrayAccess::offsetExists()
      * @param  mixed $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -396,7 +396,7 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Returns whether this Config object is read only or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isReadOnly()
     {

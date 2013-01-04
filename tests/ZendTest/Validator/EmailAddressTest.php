@@ -27,7 +27,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     protected $validator;
 
-    /** @var boolean */
+    /** @var bool */
     public $multipleOptionsDetected;
 
     public function setUp()

@@ -31,7 +31,7 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param boolean|array $argv Optional arguments to be used during the method call
+     * @param  bool|array $argv Optional arguments to be used during the method call
      * @param string $namespace Optional namespace with which to prefix the
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
@@ -65,7 +65,7 @@ class Reflection
      * may be provided as an array to $argv.
      *
      * @param string $function Function name
-     * @param boolean|array $argv Optional arguments to be used during the method call
+     * @param  bool|array $argv Optional arguments to be used during the method call
      * @param string $namespace Optional namespace with which to prefix the
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing

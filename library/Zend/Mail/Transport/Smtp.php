@@ -38,7 +38,7 @@ class Smtp implements TransportInterface
     protected $connection;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $autoDisconnect = true;
 
@@ -111,7 +111,7 @@ class Smtp implements TransportInterface
     /**
      * Set the automatic disconnection when destruct
      *
-     * @param  boolean $flag
+     * @param  bool $flag
      * @return Smtp
      */
     public function setAutoDisconnect($flag)
@@ -123,7 +123,7 @@ class Smtp implements TransportInterface
     /**
      * Get the automatic disconnection value
      *
-     * @return boolean
+     * @return bool
      */
     public function getAutoDisconnect()
     {

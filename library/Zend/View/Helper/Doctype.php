@@ -190,7 +190,7 @@ class Doctype extends AbstractHelper
     /**
      * Is doctype XHTML?
      *
-     * @return boolean
+     * @return bool
      */
     public function isXhtml()
     {
@@ -200,7 +200,7 @@ class Doctype extends AbstractHelper
     /**
      * Is doctype HTML5? (HeadMeta uses this for validation)
      *
-     * @return boolean
+     * @return bool
      */
     public function isHtml5()
     {
@@ -210,7 +210,7 @@ class Doctype extends AbstractHelper
     /**
      * Is doctype RDFa?
      *
-     * @return boolean
+     * @return bool
      */
     public function isRdfa()
     {

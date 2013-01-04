@@ -301,7 +301,7 @@ class Mbox extends AbstractStorage
     /**
      * Waste some CPU cycles doing nothing.
      *
-     * @return boolean always return true
+     * @return bool always return true
      */
     public function noop()
     {

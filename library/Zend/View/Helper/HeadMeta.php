@@ -185,7 +185,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * Determine if item is valid
      *
      * @param  mixed $item
-     * @return boolean
+     * @return bool
      */
     protected function isValid($item)
     {

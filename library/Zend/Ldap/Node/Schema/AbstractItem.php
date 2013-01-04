@@ -80,7 +80,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * Checks whether a specific attribute exists.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -131,7 +131,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * Checks whether a specific attribute exists.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name)
     {

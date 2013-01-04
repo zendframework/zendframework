@@ -29,7 +29,7 @@ class RealPath extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param boolean|Traversable $existsOrOptions Options to set
+     * @param  bool|Traversable $existsOrOptions Options to set
      */
     public function __construct($existsOrOptions = true)
     {
@@ -47,7 +47,7 @@ class RealPath extends AbstractFilter
      * TRUE when the path must exist
      * FALSE when not existing paths can be given
      *
-     * @param  boolean $flag Path must exist
+     * @param  bool $flag Path must exist
      * @return RealPath
      */
     public function setExists($flag = true)
@@ -59,7 +59,7 @@ class RealPath extends AbstractFilter
     /**
      * Returns true if the filtered path must exist
      *
-     * @return boolean
+     * @return bool
      */
     public function getExists()
     {

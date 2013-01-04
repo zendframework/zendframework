@@ -28,7 +28,7 @@ abstract class AbstractWriter implements WriterInterface
      * @see    WriterInterface::toFile()
      * @param  string  $filename
      * @param  mixed   $config
-     * @param  boolean $exclusiveLock
+     * @param  bool $exclusiveLock
      * @return void
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException

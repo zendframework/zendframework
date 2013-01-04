@@ -57,7 +57,7 @@ class Collection implements \Iterator, \Countable
     /**
      * Closes the current result set
      *
-     * @return boolean
+     * @return bool
      */
     public function close()
     {
@@ -211,7 +211,7 @@ class Collection implements \Iterator, \Countable
      * after calls to rewind() or next()
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

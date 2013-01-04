@@ -100,7 +100,7 @@ class Identical extends AbstractValidator
     /**
      * Returns the strict parameter
      *
-     * @return boolean
+     * @return bool
      */
     public function getStrict()
     {
@@ -125,7 +125,7 @@ class Identical extends AbstractValidator
      *
      * @param  mixed $value
      * @param  array $context
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $context = null)
     {

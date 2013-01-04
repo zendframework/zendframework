@@ -378,7 +378,7 @@ class ConstraintObject
     /**
      * Is primary key
      *
-     * @return boolean
+     * @return bool
      */
     public function isPrimaryKey()
     {
@@ -388,7 +388,7 @@ class ConstraintObject
     /**
      * Is unique key
      *
-     * @return boolean
+     * @return bool
      */
     public function isUnique()
     {
@@ -398,7 +398,7 @@ class ConstraintObject
     /**
      * Is foreign key
      *
-     * @return boolean
+     * @return bool
      */
     public function isForeignKey()
     {
@@ -408,7 +408,7 @@ class ConstraintObject
     /**
      * Is foreign key
      *
-     * @return boolean
+     * @return bool
      */
     public function isCheck()
     {

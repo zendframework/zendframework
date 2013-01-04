@@ -83,7 +83,7 @@ interface RendererInterface
 
     /**
      * Activate/Deactivate the automatic rendering of exception
-     * @param boolean $value
+     * @param  bool $value
      */
     public function setAutomaticRenderError($value);
 
@@ -128,7 +128,7 @@ interface RendererInterface
 
     /**
      * Retrieve the automatic rendering of exception
-     * @return boolean
+     * @return bool
      */
     public function getAutomaticRenderError();
 
@@ -147,7 +147,7 @@ interface RendererInterface
 
     /**
      * Checking of parameters after all settings
-     * @return boolean
+     * @return bool
      */
     public function checkParams();
 

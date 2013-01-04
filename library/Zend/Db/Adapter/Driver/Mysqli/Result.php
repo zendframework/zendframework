@@ -220,7 +220,7 @@ class Result implements
         }
 
         // dereference
-        for ($i = 0; $i < count($this->statementBindValues['keys']); $i++) {
+        for ($i = 0, $count = count($this->statementBindValues['keys']); $i < $count; $i++) {
             $this->currentData[$this->statementBindValues['keys'][$i]] = $this->statementBindValues['values'][$i];
         }
         $this->currentComplete = true;

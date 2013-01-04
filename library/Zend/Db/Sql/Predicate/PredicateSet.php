@@ -108,7 +108,7 @@ class PredicateSet implements PredicateInterface, Countable
     public function getExpressionData()
     {
         $parts = array();
-        for ($i = 0; $i < count($this->predicates); $i++) {
+        for ($i = 0, $count = count($this->predicates); $i < $count; $i++) {
 
             /** @var $predicate PredicateInterface */
             $predicate = $this->predicates[$i][1];

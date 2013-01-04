@@ -55,7 +55,7 @@ class InstanceManager /* implements InstanceManagerInterface */
          * alias|class => bool
          */
         'shared' => true
-        );
+    );
 
     /**
      * An array of instance configuration data

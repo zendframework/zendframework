@@ -225,7 +225,7 @@ class Message
     {
         $parts = Decode::splitMessageStruct($message, $boundary, $EOL);
 
-        $res = new self();
+        $res = new static();
         foreach ($parts as $part) {
             // now we build a new MimePart for the current Message Part:
             $newPart = new Part($part['body']);

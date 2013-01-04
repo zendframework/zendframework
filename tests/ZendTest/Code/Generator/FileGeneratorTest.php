@@ -202,4 +202,37 @@ EOS;
         $generated = $file->generate();
         $this->assertContains('namespace Foo\\Bar', $generated, $generated);
     }
+
+    public function testSetUseDoesntGenerateMultipleIdenticalUseStatements()
+    {
+        $file = new FileGenerator();
+        $file->setUse('My\Baz')
+             ->setUse('My\Baz');
+        $generated = $file->generate();
+        $this->assertSame(strpos($generated, 'use My\\Baz'), strrpos($generated, 'use My\\Baz'));
+    }
+
+    public function testSetUsesDoesntGenerateMultipleIdenticalUseStatements()
+    {
+        $file = new FileGenerator();
+        $file->setUses(array(
+                 array('Your\Bar', 'bar'),
+                 array('Your\Bar', 'bar'),
+        ));
+        $generated = $file->generate();
+        $this->assertSame(strpos($generated, 'use Your\\Bar as bar;'), strrpos($generated, 'use Your\\Bar as bar;'));
+    }
+
+    public function testSetUseAllowsMultipleAliasedUseStatements()
+    {
+        $file = new FileGenerator();
+        $file->setUses(array(
+                 array('Your\Bar', 'bar'),
+                 array('Your\Bar', 'bar2'),
+        ));
+        $generated = $file->generate();
+        $this->assertContains('use Your\\Bar as bar;', $generated);
+        $this->assertContains('use Your\\Bar as bar2;', $generated);
+    }
+
 }

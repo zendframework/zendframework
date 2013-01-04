@@ -533,7 +533,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
                         case 'ignoreNoFile' :
                         case 'useByteString' :
                         case 'detectInfos' :
-                            $this->files[$key]['options'][$name] = (boolean) $value;
+                            $this->files[$key]['options'][$name] = (bool) $value;
                             break;
 
                         default:

@@ -54,7 +54,7 @@ class Alnum extends AbstractLocale
      */
     public function setAllowWhiteSpace($flag = true)
     {
-        $this->options['allow_white_space'] = (boolean) $flag;
+        $this->options['allow_white_space'] = (bool) $flag;
         return $this;
     }
 

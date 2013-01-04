@@ -198,7 +198,7 @@ class Rename extends Filter\AbstractFilter
                     break;
 
                 case 'overwrite' :
-                    $files['overwrite'] = (boolean) $value;
+                    $files['overwrite'] = (bool) $value;
                     break;
 
                 default:

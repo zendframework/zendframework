@@ -52,7 +52,7 @@ class RealPath extends AbstractFilter
      */
     public function setExists($flag = true)
     {
-        $this->options['exists'] = (boolean) $flag;
+        $this->options['exists'] = (bool) $flag;
         return $this;
     }
 

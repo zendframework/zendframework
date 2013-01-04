@@ -136,7 +136,7 @@ class Uri extends AbstractValidator
      */
     public function setAllowAbsolute($allowAbsolute)
     {
-        $this->allowAbsolute = (boolean) $allowAbsolute;
+        $this->allowAbsolute = (bool) $allowAbsolute;
         return $this;
     }
 
@@ -158,7 +158,7 @@ class Uri extends AbstractValidator
      */
     public function setAllowRelative($allowRelative)
     {
-        $this->allowRelative = (boolean) $allowRelative;
+        $this->allowRelative = (bool) $allowRelative;
         return $this;
     }
 

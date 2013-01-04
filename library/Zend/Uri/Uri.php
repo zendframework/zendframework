@@ -845,7 +845,7 @@ class Uri implements UriInterface
     public static function validateUserInfo($userInfo)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':]+|%[A-Fa-f0-9]{2})*$/';
-        return (boolean) preg_match($regex, $userInfo);
+        return (bool) preg_match($regex, $userInfo);
     }
 
     /**
@@ -928,7 +928,7 @@ class Uri implements UriInterface
         $pchar   = '(?:[' . self::CHAR_UNRESERVED . ':@&=\+\$,]+|%[A-Fa-f0-9]{2})*';
         $segment = $pchar . "(?:;{$pchar})*";
         $regex   = "/^{$segment}(?:\/{$segment})*$/";
-        return (boolean) preg_match($regex, $path);
+        return (bool) preg_match($regex, $path);
     }
 
     /**
@@ -946,7 +946,7 @@ class Uri implements UriInterface
     public static function validateQueryFragment($input)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})*$/';
-        return (boolean) preg_match($regex, $input);
+        return (bool) preg_match($regex, $input);
     }
 
     /**

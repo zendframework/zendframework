@@ -263,7 +263,7 @@ class MimeType extends AbstractValidator
      */
     public function enableHeaderCheck($headerCheck = true)
     {
-        $this->options['enableHeaderCheck'] = (boolean) $headerCheck;
+        $this->options['enableHeaderCheck'] = (bool) $headerCheck;
         return $this;
     }
 

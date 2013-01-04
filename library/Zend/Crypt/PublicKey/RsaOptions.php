@@ -171,7 +171,7 @@ class RsaOptions extends AbstractOptions
      */
     public function setBinaryOutput($value)
     {
-        $this->binaryOutput = (boolean)$value;
+        $this->binaryOutput = (bool) $value;
         return $this;
     }
 

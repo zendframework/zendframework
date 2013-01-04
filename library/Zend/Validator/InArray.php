@@ -157,7 +157,7 @@ class InArray extends AbstractValidator
      */
     public function setRecursive($recursive)
     {
-        $this->recursive = (boolean) $recursive;
+        $this->recursive = (bool) $recursive;
         return $this;
     }
 

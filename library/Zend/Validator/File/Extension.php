@@ -107,7 +107,7 @@ class Extension extends AbstractValidator
      */
     public function setCase($case)
     {
-        $this->options['case'] = (boolean) $case;
+        $this->options['case'] = (bool) $case;
         return $this;
     }
 

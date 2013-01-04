@@ -120,7 +120,7 @@ class DiffieHellman
      */
     public static function useOpensslExtension($flag = true)
     {
-        static::$useOpenssl = (boolean) $flag;
+        static::$useOpenssl = (bool) $flag;
     }
 
     /**

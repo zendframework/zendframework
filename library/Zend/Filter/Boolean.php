@@ -146,7 +146,7 @@ class Boolean extends AbstractFilter
      */
     public function setCasting($flag = true)
     {
-        $this->options['casting'] = (boolean) $flag;
+        $this->options['casting'] = (bool) $flag;
         return $this;
     }
 

@@ -327,7 +327,7 @@ class Openssl implements EncryptionAlgorithmInterface
      */
     public function setPackage($package)
     {
-        $this->package = (boolean) $package;
+        $this->package = (bool) $package;
         return $this;
     }
 

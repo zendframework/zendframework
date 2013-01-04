@@ -268,7 +268,7 @@ class EmailAddress extends AbstractValidator
      */
     public function useDomainCheck($domain = true)
     {
-        $this->options['useDomainCheck'] = (boolean) $domain;
+        $this->options['useDomainCheck'] = (bool) $domain;
         return $this;
     }
 

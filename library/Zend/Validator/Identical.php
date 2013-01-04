@@ -115,7 +115,7 @@ class Identical extends AbstractValidator
      */
     public function setStrict($strict)
     {
-        $this->strict = (boolean) $strict;
+        $this->strict = (bool) $strict;
         return $this;
     }
 

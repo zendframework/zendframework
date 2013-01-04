@@ -67,7 +67,7 @@ class Config implements Countable, Iterator, ArrayAccess
      */
     public function __construct(array $array, $allowModifications = false)
     {
-        $this->allowModifications = (boolean) $allowModifications;
+        $this->allowModifications = (bool) $allowModifications;
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {

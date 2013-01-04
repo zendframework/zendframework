@@ -336,7 +336,11 @@ class FileGenerator extends AbstractGenerator
     public function setUses(array $uses)
     {
         foreach ($uses as $use) {
-            $this->setUse($use[0], $use[1]);
+            if (is_array($use)) {
+                $this->setUse($use[0], $use[1]);
+            } else {
+                $this->setUse($use);
+            }
         }
         return $this;
     }

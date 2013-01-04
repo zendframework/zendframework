@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -21,25 +22,23 @@ use Zend\View\Renderer\PhpRenderer;
  * @package    Zend_Form
  * @subpackage UnitTest
  */
-class FormRowTest extends TestCase
-{
+class FormRowTest extends TestCase {
+
     protected $helper;
     protected $renderer;
 
-    public function setUp()
-    {
+    public function setUp() {
         $this->helper = new FormRowHelper();
 
         $this->renderer = new PhpRenderer;
         $helpers = $this->renderer->getHelperPluginManager();
-        $config  = new HelperConfig();
+        $config = new HelperConfig();
         $config->configureServiceManager($helpers);
 
         $this->helper->setView($this->renderer);
     }
 
-    public function testCanGenerateLabel()
-    {
+    public function testCanGenerateLabel() {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');
         $markup = $this->helper->render($element);
@@ -48,8 +47,7 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
-    public function testCanCreateLabelValueBeforeInput()
-    {
+    public function testCanCreateLabelValueBeforeInput() {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');
         $this->helper->setLabelPosition('prepend');
@@ -58,8 +56,7 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
-    public function testCanCreateLabelValueAfterInput()
-    {
+    public function testCanCreateLabelValueAfterInput() {
         $element = new Element('foo');
         $element->setOptions(array(
             'label' => 'The value for foo:',
@@ -70,8 +67,7 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
-    public function testCanRenderRowLabelAttributes()
-    {
+    public function testCanRenderRowLabelAttributes() {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');
         $element->setLabelAttributes(array('class' => 'bar'));
@@ -80,16 +76,14 @@ class FormRowTest extends TestCase
         $this->assertContains("<label class=\"bar\">", $markup);
     }
 
-    public function testCanCreateMarkupWithoutLabel()
-    {
+    public function testCanCreateMarkupWithoutLabel() {
         $element = new Element('foo');
         $element->setAttribute('type', 'text');
         $markup = $this->helper->render($element);
         $this->assertRegexp('/<input name="foo" type="text"[^\/>]*\/?>/', $markup);
     }
 
-    public function testCanHandleMultiCheckboxesCorrectly()
-    {
+    public function testCanHandleMultiCheckboxesCorrectly() {
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => 'value2',
@@ -106,9 +100,7 @@ class FormRowTest extends TestCase
         $this->assertContains("<label>", $markup);
     }
 
-
-    public function testRenderAttributeId()
-    {
+    public function testRenderAttributeId() {
         $element = new Element\Text('foo');
         $element->setAttribute('type', 'text');
         $element->setAttribute('id', 'textId');
@@ -118,9 +110,8 @@ class FormRowTest extends TestCase
         $this->assertContains('<input type="text" name="foo" id="textId"', $markup);
     }
 
-    public function testCanRenderErrors()
-    {
-        $element  = new Element('foo');
+    public function testCanRenderErrors() {
+        $element = new Element('foo');
         $element->setMessages(array(
             'First error message',
             'Second error message',
@@ -131,9 +122,8 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#<ul>\s*<li>First error message</li>\s*<li>Second error message</li>\s*<li>Third error message</li>\s*</ul>#s', $markup);
     }
 
-    public function testDoesNotRenderErrorsListIfSetToFalse()
-    {
-        $element  = new Element('foo');
+    public function testDoesNotRenderErrorsListIfSetToFalse() {
+        $element = new Element('foo');
         $element->setMessages(array(
             'First error message',
             'Second error message',
@@ -144,9 +134,8 @@ class FormRowTest extends TestCase
         $this->assertRegexp('/<input name="foo" class="input-error" type="text" [^\/>]*\/?>/', $markup);
     }
 
-    public function testCanModifyDefaultErrorClass()
-    {
-        $element  = new Element('foo');
+    public function testCanModifyDefaultErrorClass() {
+        $element = new Element('foo');
         $element->setMessages(array(
             'Error message'
         ));
@@ -155,9 +144,8 @@ class FormRowTest extends TestCase
         $this->assertRegexp('/<input name="foo" class="custom-error-class" type="text" [^\/>]*\/?>/', $markup);
     }
 
-    public function testDoesNotOverrideClassesIfAlreadyPresentWhenThereAreErrors()
-    {
-        $element  = new Element('foo');
+    public function testDoesNotOverrideClassesIfAlreadyPresentWhenThereAreErrors() {
+        $element = new Element('foo');
         $element->setMessages(array(
             'Error message'
         ));
@@ -167,20 +155,18 @@ class FormRowTest extends TestCase
         $this->assertRegexp('/<input name="foo" class="foo bar custom-error-class" type="text" [^\/>]*\/?>/', $markup);
     }
 
-    public function testInvokeWithNoElementChainsHelper()
-    {
+    public function testInvokeWithNoElementChainsHelper() {
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
 
-    public function testLabelWillBeTranslated()
-    {
+    public function testLabelWillBeTranslated() {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->any())
-            ->method('translate')
-            ->will($this->returnValue('translated content'));
+                ->method('translate')
+                ->will($this->returnValue('translated content'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());
@@ -198,8 +184,7 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
-    public function testTranslatorMethods()
-    {
+    public function testTranslatorMethods() {
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
         $this->helper->setTranslator($translatorMock, 'foo');
 
@@ -212,54 +197,46 @@ class FormRowTest extends TestCase
         $this->assertFalse($this->helper->isTranslatorEnabled());
     }
 
-    public function testInvokeSetLabelPositionToAppend()
-    {
+    public function testInvokeSetLabelPositionToAppend() {
         $element = new Element('foo');
         $this->helper->__invoke($element, 'append');
 
         $this->assertSame('append', $this->helper->getLabelPosition());
     }
 
-    public function testSetLabelPositionInputNullRaisesException()
-    {
+    public function testSetLabelPositionInputNullRaisesException() {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->helper->setLabelPosition(null);
     }
 
-    public function testGetLabelPositionReturnsDefaultPrepend()
-    {
+    public function testGetLabelPositionReturnsDefaultPrepend() {
         $labelPosition = $this->helper->getLabelPosition();
         $this->assertEquals('prepend', $labelPosition);
     }
 
-    public function testGetLabelPositionReturnsAppend()
-    {
+    public function testGetLabelPositionReturnsAppend() {
         $this->helper->setLabelPosition('append');
         $labelPosition = $this->helper->getLabelPosition();
         $this->assertEquals('append', $labelPosition);
     }
 
-    public function testGetRenderErrorsReturnsDefaultTrue()
-    {
+    public function testGetRenderErrorsReturnsDefaultTrue() {
         $renderErrors = $this->helper->getRenderErrors();
         $this->assertTrue($renderErrors);
     }
 
-    public function testGetRenderErrorsSetToFalse()
-    {
+    public function testGetRenderErrorsSetToFalse() {
         $this->helper->setRenderErrors(false);
         $renderErrors = $this->helper->getRenderErrors();
         $this->assertFalse($renderErrors);
     }
 
-    public function testSetLabelAttributes()
-    {
+    public function testSetLabelAttributes() {
         $this->helper->setLabelAttributes(array('foo', 'bar'));
         $this->assertEquals(array(0 => 'foo', 1 => 'bar'), $this->helper->getLabelAttributes());
     }
 
-    public function testWhenUsingIdAndLabelBecomesEmptyRemoveSpan()
-    {
+    public function testWhenUsingIdAndLabelBecomesEmptyRemoveSpan() {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');
 
@@ -274,13 +251,12 @@ class FormRowTest extends TestCase
         $this->assertNotContains('</span>', $markup);
     }
 
-    public function testShowErrorInMultiCheckbox()
-    {
+    public function testShowErrorInMultiCheckbox() {
         $element = new Element\MultiCheckbox('hobby');
         $element->setLabel("Hobby");
         $element->setValueOptions(array(
-            '0'=>'working',
-            '1'=>'coding'
+            '0' => 'working',
+            '1' => 'coding'
         ));
         $element->setMessages(array(
             'Error message'
@@ -290,13 +266,12 @@ class FormRowTest extends TestCase
         $this->assertContains('<ul><li>Error message</li></ul>', $markup);
     }
 
-    public function testShowErrorInRadio()
-    {
+    public function testShowErrorInRadio() {
         $element = new Element\Radio('direction');
         $element->setLabel("Direction");
         $element->setValueOptions(array(
-            '0'=>'programming',
-            '1'=>'design'
+            '0' => 'programming',
+            '1' => 'design'
         ));
         $element->setMessages(array(
             'Error message'
@@ -306,9 +281,8 @@ class FormRowTest extends TestCase
         $this->assertContains('<ul><li>Error message</li></ul>', $markup);
     }
 
-    public function testErrorShowTwice()
-    {
-        $element = new  Element\Date('birth');
+    public function testErrorShowTwice() {
+        $element = new Element\Date('birth');
         $element->setFormat('Y-m-d');
         $element->setValue('2010-13-13');
 
@@ -317,6 +291,24 @@ class FormRowTest extends TestCase
         $element->setMessages($validator->getMessages());
 
         $markup = $this->helper->__invoke($element);
-        $this->assertEquals(2,  count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
+        $this->assertEquals(2, count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
     }
+
+    public function testInvokeWithNoRenderErrors() {
+        $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
+        $mock->expects($this->never())
+                ->method('setRenderErrors');
+
+        $mock->__invoke(new Element('foo'));
+    }
+    
+    public function testInvokeWithRenderErrorsTrue() {
+        $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
+        $mock->expects($this->once())
+                ->method('setRenderErrors')
+                ->with(true);
+
+        $mock->__invoke(new Element('foo'), null, true);
+    }
+
 }

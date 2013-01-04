@@ -19,33 +19,8 @@ use Zend\Http\PhpEnvironment\Response;
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-class PhpEnvironmentResponseSender implements ResponseSenderInterface
+class PhpEnvironmentResponseSender extends AbstractResponseSender implements ResponseSenderInterface
 {
-    /**
-     * Send HTTP headers
-     *
-     * @param SendResponseEvent $event
-     * @return PhpEnvironmentResponseSender
-     */
-    public function sendHeaders(SendResponseEvent $event)
-    {
-        $response = $event->getResponse();
-        if ($response->headersSent() || $event->headersSent()) {
-            return $this;
-        }
-        $status  = $response->renderStatusLine();
-        header($status);
-        /* @var \Zend\Http\Header\HeaderInterface $header */
-        foreach ($response->getHeaders() as $header) {
-            if ($header instanceof MultipleHeaderInterface) {
-                header($header->toString(), false);
-                continue;
-            }
-            header($header->toString());
-        }
-        $event->setHeadersSent();
-        return $this;
-    }
 
     /**
      * Send content

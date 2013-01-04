@@ -18,34 +18,8 @@ use Zend\Http\Response\Stream;
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-class SimpleStreamResponseSender implements ResponseSenderInterface
+class SimpleStreamResponseSender extends AbstractResponseSender implements ResponseSenderInterface
 {
-
-    /**
-     * Send headers
-     *
-     * @param SendResponseEvent $event
-     */
-    public function sendHeaders(SendResponseEvent $event)
-    {
-        if ($event->headersSent()) {
-            return $this;
-        }
-        $response = $event->getResponse();
-        /* @var $response Stream */
-        $status  = $response->renderStatusLine();
-        header($status);
-        /* @var \Zend\Http\Header\HeaderInterface $header */
-        foreach ($response->getHeaders() as $header) {
-            if ($header instanceof MultipleHeaderInterface) {
-                header($header->toString(), false);
-                continue;
-            }
-            header($header->toString());
-        }
-        $event->setHeadersSent();
-        return $this;
-    }
 
     /**
      * Send the stream

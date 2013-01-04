@@ -78,40 +78,39 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * @param string $name
-     * @param string $type
-     * @param mixed  $defaultValue
-     * @param int    $position
-     * @param bool   $passByReference
+     * @param  string $name
+     * @param  string $type
+     * @param  mixed $defaultValue
+     * @param  int $position
+     * @param  bool $passByReference
      */
     public function __construct($name = null, $type = null, $defaultValue = null, $position = null,
                                 $passByReference = false)
     {
-        if ($name) {
+        if (null !== $name) {
             $this->setName($name);
         }
-        if ($type) {
+        if (null !== $type) {
             $this->setType($type);
         }
-        if ($defaultValue !== null) {
+        if (null !== $defaultValue) {
             $this->setDefaultValue($defaultValue);
         }
-        if ($position) {
+        if (null !== $position) {
             $this->setPosition($position);
         }
-        if ($passByReference) {
+        if (false !== $passByReference) {
             $this->setPassedByReference(true);
         }
     }
 
     /**
-     * @param  string             $type
+     * @param  string $type
      * @return ParameterGenerator
      */
     public function setType($type)
     {
         $this->type = (string) $type;
-
         return $this;
     }
 
@@ -124,13 +123,12 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string             $name
+     * @param  string $name
      * @return ParameterGenerator
      */
     public function setName($name)
     {
         $this->name = (string) $name;
-
         return $this;
     }
 
@@ -169,19 +167,16 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  int                $position
+     * @param  int $position
      * @return ParameterGenerator
      */
     public function setPosition($position)
     {
         $this->position = (int) $position;
-
         return $this;
     }
 
     /**
-     * getPosition()
-     *
      * @return int
      */
     public function getPosition()
@@ -198,13 +193,12 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  bool               $passedByReference
+     * @param  bool $passedByReference
      * @return ParameterGenerator
      */
     public function setPassedByReference($passedByReference)
     {
         $this->passedByReference = (bool) $passedByReference;
-
         return $this;
     }
 
@@ -219,7 +213,7 @@ class ParameterGenerator extends AbstractGenerator
             $output .= $this->type . ' ';
         }
 
-        if ($this->passedByReference) {
+        if (true === $this->passedByReference) {
             $output .= '&';
         }
 

@@ -17,22 +17,16 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
 class MethodTag implements TagInterface
 {
     /**
-     * Return value type
-     *
      * @var string
      */
     protected $returnType = null;
 
     /**
-     * Method name
-     *
      * @var string
      */
     protected $methodName = null;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description = null;
@@ -45,8 +39,6 @@ class MethodTag implements TagInterface
     protected $isStatic = false;
 
     /**
-     * Get tag name
-     *
      * @return string
      */
     public function getName()
@@ -57,30 +49,32 @@ class MethodTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param  string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
-        if (preg_match('#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m', $tagDocblockLine, $match)) {
-            if ($match[1] !== '') {
-                $this->isStatic = true;
-            }
+        $match = array();
 
-            if ($match[2] !== '') {
-                $this->returnType = rtrim($match[2]);
-            }
+        if (!preg_match('#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m', $tagDocblockLine, $match)) {
+            return;
+        }
 
-            $this->methodName = $match[3];
+        if ($match[1] !== '') {
+            $this->isStatic = true;
+        }
 
-            if ($match[4] !== '') {
-                $this->description = $match[4];
-            }
+        if ($match[2] !== '') {
+            $this->returnType = rtrim($match[2]);
+        }
+
+        $this->methodName = $match[3];
+
+        if ($match[4] !== '') {
+            $this->description = $match[4];
         }
     }
 
     /**
-     * Get return value type
-     *
      * @return string
      */
     public function getReturnType()
@@ -89,8 +83,6 @@ class MethodTag implements TagInterface
     }
 
     /**
-     * Get method name
-     *
      * @return string
      */
     public function getMethodName()
@@ -99,8 +91,6 @@ class MethodTag implements TagInterface
     }
 
     /**
-     * Get method description
-     *
      * @return null|string
      */
     public function getDescription()

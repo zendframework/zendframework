@@ -39,7 +39,7 @@ abstract class AbstractGenerator implements GeneratorInterface
     protected $sourceContent = null;
 
     /**
-     * @param array $options
+     * @param  array $options
      */
     public function __construct($options = array())
     {
@@ -49,13 +49,12 @@ abstract class AbstractGenerator implements GeneratorInterface
     }
 
     /**
-     * @param  bool              $isSourceDirty
+     * @param  bool $isSourceDirty
      * @return AbstractGenerator
      */
     public function setSourceDirty($isSourceDirty = true)
     {
         $this->isSourceDirty = (bool) $isSourceDirty;
-
         return $this;
     }
 
@@ -68,13 +67,12 @@ abstract class AbstractGenerator implements GeneratorInterface
     }
 
     /**
-     * @param  string            $indentation
+     * @param  string $indentation
      * @return AbstractGenerator
      */
     public function setIndentation($indentation)
     {
         $this->indentation = (string) $indentation;
-
         return $this;
     }
 
@@ -87,13 +85,12 @@ abstract class AbstractGenerator implements GeneratorInterface
     }
 
     /**
-     * @param  string            $sourceContent
+     * @param  string $sourceContent
      * @return AbstractGenerator
      */
     public function setSourceContent($sourceContent)
     {
         $this->sourceContent = (string) $sourceContent;
-
         return $this;
     }
 
@@ -106,7 +103,7 @@ abstract class AbstractGenerator implements GeneratorInterface
     }
 
     /**
-     * @param  array|Traversable                  $options
+     * @param  array|Traversable $options
      * @throws Exception\InvalidArgumentException
      * @return AbstractGenerator
      */

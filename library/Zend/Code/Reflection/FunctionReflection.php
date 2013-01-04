@@ -59,7 +59,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool   $includeDocBlock
+     * @param  bool $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)

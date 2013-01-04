@@ -88,7 +88,7 @@ class AnnotationManager implements EventManagerAwareInterface
     /**
      * Create Annotation
      *
-     * @param  array           $annotationData
+     * @param  array $annotationData
      * @return false|\stdClass
      */
     public function createAnnotation(array $annotationData)

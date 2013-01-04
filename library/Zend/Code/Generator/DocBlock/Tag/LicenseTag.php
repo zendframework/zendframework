@@ -45,13 +45,12 @@ class LicenseTag extends Tag
     }
 
     /**
-     * @param  string     $url
+     * @param  string $url
      * @return LicenseTag
      */
     public function setUrl($url)
     {
         $this->url = $url;
-
         return $this;
     }
 
@@ -64,13 +63,12 @@ class LicenseTag extends Tag
     }
 
     /**
-     * @param  string     $name
+     * @param  string $name
      * @return LicenseTag
      */
     public function setLicenseName($name)
     {
         $this->licenseName = $name;
-
         return $this;
     }
 

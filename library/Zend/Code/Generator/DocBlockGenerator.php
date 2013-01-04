@@ -70,7 +70,7 @@ class DocBlockGenerator extends AbstractGenerator
      * @configkey tags             array
      *
      * @throws Exception\InvalidArgumentException
-     * @param  array                              $array
+     * @param  array $array
      * @return DocBlockGenerator
      */
     public static function fromArray(array $array)
@@ -95,9 +95,9 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param string $shortDescription
-     * @param string $longDescription
-     * @param array  $tags
+     * @param  string $shortDescription
+     * @param  string $longDescription
+     * @param  array $tags
      */
     public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
     {
@@ -113,13 +113,12 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string            $shortDescription
+     * @param  string $shortDescription
      * @return DocBlockGenerator
      */
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
-
         return $this;
     }
 
@@ -132,13 +131,12 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string            $longDescription
+     * @param  string $longDescription
      * @return DocBlockGenerator
      */
     public function setLongDescription($longDescription)
     {
         $this->longDescription = $longDescription;
-
         return $this;
     }
 
@@ -151,7 +149,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array             $tags
+     * @param  array $tags
      * @return DocBlockGenerator
      */
     public function setTags(array $tags)
@@ -164,7 +162,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array|DockBlockTag                 $tag
+     * @param  array|DockBlockTag $tag
      * @throws Exception\InvalidArgumentException
      * @return DocBlockGenerator
      */

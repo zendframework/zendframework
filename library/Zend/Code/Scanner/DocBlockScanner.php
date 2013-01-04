@@ -56,7 +56,7 @@ class DocBlockScanner implements ScannerInterface
     protected $annotations = array();
 
     /**
-     * @param string               $docComment
+     * @param  string $docComment
      * @param null|NameInformation $nameInformation
      */
     public function __construct($docComment, NameInformation $nameInformation = null)

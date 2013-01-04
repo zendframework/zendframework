@@ -35,7 +35,7 @@ class DerivedClassScanner extends ClassScanner
     protected $interfaceClassScanners = array();
 
     /**
-     * @param ClassScanner     $classScanner
+     * @param ClassScanner $classScanner
      * @param DirectoryScanner $directoryScanner
      */
     public function __construct(ClassScanner $classScanner, DirectoryScanner $directoryScanner)
@@ -136,7 +136,7 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
-     * @param  bool  $returnClassScanners
+     * @param  bool $returnClassScanners
      * @return array
      */
     public function getInterfaces($returnClassScanners = false)
@@ -167,7 +167,7 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
-     * @param  bool  $returnScannerProperty
+     * @param  bool $returnScannerProperty
      * @return array
      */
     public function getProperties($returnScannerProperty = false)
@@ -207,7 +207,7 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
-     * @param  int|string                         $methodNameOrInfoIndex
+     * @param  int|string $methodNameOrInfoIndex
      * @return MethodScanner
      * @throws Exception\InvalidArgumentException
      */

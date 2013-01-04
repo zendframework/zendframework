@@ -50,14 +50,14 @@ class Tag extends AbstractGenerator
     protected $description = null;
 
     /**
-     * @param array $options
+     * @param  array $options
      */
     public function __construct(array $options = array())
     {
-        if (isset($options['name'])) {
+        if (array_key_exists('name', $options)) {
             $this->setName($options['name']);
         }
-        if (isset($options['description'])) {
+        if (array_key_exists('description', $options)) {
             $this->setDescription($options['description']);
         }
     }
@@ -96,7 +96,6 @@ class Tag extends AbstractGenerator
     public function setName($name)
     {
         $this->name = ltrim($name, '@');
-
         return $this;
     }
 
@@ -115,7 +114,6 @@ class Tag extends AbstractGenerator
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 

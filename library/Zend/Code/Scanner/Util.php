@@ -24,9 +24,9 @@ class Util
     /**
      * Resolve imports
      *
-     * @param  string                             $value
-     * @param  null|string                        $key
-     * @param  \stdClass                          $data
+     * @param  string $value
+     * @param  null|string $key
+     * @param  \stdClass $data
      * @return void
      * @throws Exception\InvalidArgumentException
      */

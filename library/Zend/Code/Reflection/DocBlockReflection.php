@@ -82,8 +82,8 @@ class DocBlockReflection implements ReflectionInterface
     }
 
     /**
-     * @param  Reflector|string                   $commentOrReflector
-     * @param  null|DocBlockTagManager            $tagManager
+     * @param  Reflector|string $commentOrReflector
+     * @param  null|DocBlockTagManager $tagManager
      * @throws Exception\InvalidArgumentException
      * @return DocBlockReflection
      */
@@ -201,7 +201,7 @@ class DocBlockReflection implements ReflectionInterface
     /**
      * Retrieve the given DocBlock tag
      *
-     * @param  string                     $name
+     * @param  string $name
      * @return DocBlockTagInterface|false
      */
     public function getTag($name)
@@ -219,7 +219,7 @@ class DocBlockReflection implements ReflectionInterface
     /**
      * Get all DocBlock annotation tags
      *
-     * @param  string                 $filter
+     * @param  string $filter
      * @return DocBlockTagInterface[]
      */
     public function getTags($filter = null)

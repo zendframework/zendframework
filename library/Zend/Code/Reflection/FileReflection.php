@@ -69,7 +69,7 @@ class FileReflection implements ReflectionInterface
     protected $contents = null;
 
     /**
-     * @param  string                     $filename
+     * @param  string $filename
      * @throws Exception\RuntimeException
      */
     public function __construct($filename)
@@ -214,7 +214,7 @@ class FileReflection implements ReflectionInterface
     /**
      * Retrieve the reflection class of a given class found in this file
      *
-     * @param  null|string                        $name
+     * @param  null|string $name
      * @return ClassReflection
      * @throws Exception\InvalidArgumentException for invalid class name or invalid reflection class
      */

@@ -77,11 +77,11 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param string                   $name
-     * @param array                    $parameters
-     * @param int|array                $flags
-     * @param string                   $body
-     * @param DocBlockGenerator|string $docBlock
+     * @param  string $name
+     * @param  array $parameters
+     * @param  int|array $flags
+     * @param  string $body
+     * @param  DocBlockGenerator|string $docBlock
      */
     public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null,
                                 $docBlock = null)
@@ -104,7 +104,7 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  array           $parameters
+     * @param  array $parameters
      * @return MethodGenerator
      */
     public function setParameters(array $parameters)
@@ -117,7 +117,7 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  ParameterGenerator|string          $parameter
+     * @param  ParameterGenerator|string $parameter
      * @throws Exception\InvalidArgumentException
      * @return MethodGenerator
      */
@@ -149,13 +149,12 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  string          $body
+     * @param  string $body
      * @return MethodGenerator
      */
     public function setBody($body)
     {
         $this->body = $body;
-
         return $this;
     }
 

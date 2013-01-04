@@ -41,7 +41,10 @@ class ReturnTag implements TagInterface
     public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocBlockLine, $matches);
+
+        if (!preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocBlockLine, $matches)) {
+            return;
+        }
 
         $this->type = $matches[1];
 
@@ -51,8 +54,6 @@ class ReturnTag implements TagInterface
     }
 
     /**
-     * Get return variable type
-     *
      * @return string
      */
     public function getType()
@@ -60,6 +61,9 @@ class ReturnTag implements TagInterface
         return $this->type;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;

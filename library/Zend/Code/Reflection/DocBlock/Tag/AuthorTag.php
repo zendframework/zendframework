@@ -37,18 +37,22 @@ class AuthorTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param  string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
-        if (preg_match('/^([^\<]*)(\<([^\>]*)\>)?$/u', $tagDocblockLine, $match)) {
-            if ($match[1] !== '') {
-                $this->authorName = rtrim($match[1]);
-            }
+        $match = array();
 
-            if (isset($match[3]) && $match[3] !== '') {
-                $this->authorEmail = $match[3];
-            }
+        if (!preg_match('/^([^\<]*)(\<([^\>]*)\>)?$/u', $tagDocblockLine, $match)) {
+            return;
+        }
+
+        if ($match[1] !== '') {
+            $this->authorName = rtrim($match[1]);
+        }
+
+        if (isset($match[3]) && $match[3] !== '') {
+            $this->authorEmail = $match[3];
         }
     }
 

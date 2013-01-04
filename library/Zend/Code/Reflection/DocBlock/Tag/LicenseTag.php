@@ -37,18 +37,22 @@ class LicenseTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param  string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
-        if (preg_match('#^([\S]*)(?:\s+(.*))?$#m', $tagDocblockLine, $match)) {
-            if ($match[1] !== '') {
-                $this->url = trim($match[1]);
-            }
+        $match = array();
 
-            if (isset($match[2]) && $match[2] !== '') {
-                $this->licenseName = $match[2];
-            }
+        if (!preg_match('#^([\S]*)(?:\s+(.*))?$#m', $tagDocblockLine, $match)) {
+            return;
+        }
+
+        if ($match[1] !== '') {
+            $this->url = trim($match[1]);
+        }
+
+        if (isset($match[2]) && $match[2] !== '') {
+            $this->licenseName = $match[2];
         }
     }
 

@@ -47,7 +47,7 @@ class TokenArrayScanner implements ScannerInterface
     protected $annotationManager = null;
 
     /**
-     * @param null|array             $tokens
+     * @param null|array $tokens
      * @param null|AnnotationManager $annotationManager
      */
     public function __construct($tokens, AnnotationManager $annotationManager = null)
@@ -166,7 +166,7 @@ class TokenArrayScanner implements ScannerInterface
     /**
      * Return the class object from this scanner
      *
-     * @param  string|int                         $name
+     * @param  string|int $name
      * @throws Exception\InvalidArgumentException
      * @return ClassScanner
      */
@@ -204,7 +204,7 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * @param  string                    $className
+     * @param  string $className
      * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)
@@ -615,7 +615,7 @@ class TokenArrayScanner implements ScannerInterface
     // @todo hasNamespace(), getNamespace()
 
     /**
-     * @param  string                             $namespace
+     * @param  string $namespace
      * @return array
      * @throws Exception\InvalidArgumentException
      */

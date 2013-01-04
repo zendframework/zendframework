@@ -53,7 +53,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * @param  DirectoryScanner|string            $directory
+     * @param  DirectoryScanner|string $directory
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -133,7 +133,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * @param  bool  $returnFileScanners
+     * @param  bool $returnFileScanners
      * @return array
      */
     public function getFiles($returnFileScanners = false)
@@ -202,8 +202,8 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * @param  string                             $class
-     * @param  bool                               $returnDerivedScannerClass
+     * @param  string $class
+     * @param  bool $returnDerivedScannerClass
      * @return ClassScanner|DerivedClassScanner
      * @throws Exception\InvalidArgumentException
      */

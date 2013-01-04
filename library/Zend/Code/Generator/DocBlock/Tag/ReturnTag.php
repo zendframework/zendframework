@@ -40,13 +40,12 @@ class ReturnTag extends Tag
     }
 
     /**
-     * @param  string    $datatype
+     * @param  string $datatype
      * @return ReturnTag
      */
     public function setDatatype($datatype)
     {
         $this->datatype = $datatype;
-
         return $this;
     }
 
@@ -63,9 +62,7 @@ class ReturnTag extends Tag
      */
     public function generate()
     {
-        $output = '@return ' . $this->datatype . ' ' . $this->description;
-
-        return $output;
+        return '@return ' . $this->datatype . ' ' . $this->description;
     }
 
 }

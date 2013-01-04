@@ -96,7 +96,7 @@ class ClassScanner implements ScannerInterface
     protected $infos = array();
 
     /**
-     * @param  array                $classTokens
+     * @param  array $classTokens
      * @param  NameInformation|null $nameInformation
      * @return ClassScanner
      */
@@ -342,7 +342,7 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
-     * @param  string|int                         $methodNameOrInfoIndex
+     * @param  string|int $methodNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return MethodScanner
      */

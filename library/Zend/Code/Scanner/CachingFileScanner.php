@@ -27,8 +27,8 @@ class CachingFileScanner extends FileScanner
     protected $fileScanner = null;
 
     /**
-     * @param  array|null                         $file
-     * @param  AnnotationManager                  $annotationManager
+     * @param  array|null $file
+     * @param  AnnotationManager $annotationManager
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($file, AnnotationManager $annotationManager = null)
@@ -126,7 +126,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * @param  int|string   $className
+     * @param  int|string $className
      * @return ClassScanner
      */
     public function getClass($className)
@@ -135,7 +135,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * @param  string                    $className
+     * @param  string $className
      * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)

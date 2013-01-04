@@ -43,8 +43,8 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
 
     /**
      * @param  AnnotationManager $annotationManager
-     * @param  string            $docComment
-     * @param  NameInformation   $nameInformation
+     * @param  string $docComment
+     * @param  NameInformation $nameInformation
      * @return AnnotationScanner
      */
     public function __construct(AnnotationManager $annotationManager, $docComment,
@@ -65,7 +65,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
     }
 
     /**
-     * @param array $tokens
+     * @param  array $tokens
      */
     protected function scan(array $tokens)
     {

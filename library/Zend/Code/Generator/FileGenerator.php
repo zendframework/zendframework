@@ -56,7 +56,7 @@ class FileGenerator extends AbstractGenerator
     /**
      * Passes $options to {@link setOptions()}.
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -69,8 +69,8 @@ class FileGenerator extends AbstractGenerator
      * Use this if you intend on generating code generation objects based on the same file.
      * This will keep previous changes to the file in tact during the same PHP process
      *
-     * @param  string                             $filePath
-     * @param  bool                               $includeIfNotAlreadyIncluded
+     * @param  string $filePath
+     * @param  bool $includeIfNotAlreadyIncluded
      * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
@@ -178,7 +178,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array         $values
+     * @param  array $values
      * @return FileGenerator
      */
     public static function fromArray(array $values)
@@ -209,7 +209,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  DocBlockGenerator|string           $docBlock
+     * @param  DocBlockGenerator|string $docBlock
      * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
@@ -243,13 +243,12 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array         $requiredFiles
+     * @param  array $requiredFiles
      * @return FileGenerator
      */
     public function setRequiredFiles(array $requiredFiles)
     {
         $this->requiredFiles = $requiredFiles;
-
         return $this;
     }
 
@@ -262,7 +261,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array         $classes
+     * @param  array $classes
      * @return FileGenerator
      */
     public function setClasses(array $classes)
@@ -283,13 +282,12 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string        $namespace
+     * @param  string $namespace
      * @return FileGenerator
      */
     public function setNamespace($namespace)
     {
         $this->namespace = (string) $namespace;
-
         return $this;
     }
 
@@ -298,7 +296,7 @@ class FileGenerator extends AbstractGenerator
      * If $withResolvedAs is set to true, there will be a third element that is the
      * "resolved" as statement, as the second part is not required in use statements
      *
-     * @param  bool  $withResolvedAs
+     * @param  bool $withResolvedAs
      * @return array
      */
     public function getUses($withResolvedAs = false)
@@ -322,7 +320,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array         $uses
+     * @param  array $uses
      * @return FileGenerator
      */
     public function setUses(array $uses)
@@ -335,8 +333,8 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string        $use
-     * @param  null|string   $as
+     * @param  string $use
+     * @param  null|string $as
      * @return FileGenerator
      */
     public function setUse($use, $as = null)
@@ -347,12 +345,12 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string         $name
+     * @param  string $name
      * @return ClassGenerator
      */
     public function getClass($name = null)
     {
-        if (!$name) {
+        if ($name == null) {
             reset($this->classes);
 
             return current($this->classes);
@@ -362,7 +360,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array|string|ClassGenerator        $class
+     * @param  array|string|ClassGenerator $class
      * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
@@ -388,13 +386,12 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string        $filename
+     * @param  string $filename
      * @return FileGenerator
      */
     public function setFilename($filename)
     {
         $this->filename = (string) $filename;
-
         return $this;
     }
 
@@ -415,13 +412,12 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string        $body
+     * @param  string $body
      * @return FileGenerator
      */
     public function setBody($body)
     {
         $this->body = (string) $body;
-
         return $this;
     }
 

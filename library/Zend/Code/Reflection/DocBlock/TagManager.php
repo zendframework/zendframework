@@ -60,7 +60,7 @@ class TagManager
     }
 
     /**
-     * @param TagInterface                        $tag
+     * @param TagInterface $tag
      * @throws Exception\InvalidArgumentException
      */
     public function addTagPrototype(TagInterface $tag)
@@ -80,7 +80,7 @@ class TagManager
     }
 
     /**
-     * @param string $tagName
+     * @param  string $tagName
      * @return boolean
      */
     public function hasTag($tagName)
@@ -90,8 +90,8 @@ class TagManager
     }
 
     /**
-     * @param string $tagName
-     * @param string $content
+     * @param  string $tagName
+     * @param  string $content
      * @return GenericTag
      * @throws Exception\RuntimeException
      */

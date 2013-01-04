@@ -21,8 +21,8 @@ class FileScanner extends TokenArrayScanner implements ScannerInterface
     protected $file = null;
 
     /**
-     * @param  string                             $file
-     * @param  null|AnnotationManager             $annotationManager
+     * @param  string $file
+     * @param  null|AnnotationManager $annotationManager
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($file, AnnotationManager $annotationManager = null)

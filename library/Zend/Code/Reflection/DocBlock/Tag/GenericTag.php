@@ -16,7 +16,6 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
  */
 class GenericTag implements TagInterface
 {
-
     /**
      * @var string
      */
@@ -38,7 +37,7 @@ class GenericTag implements TagInterface
     protected $values = array();
 
     /**
-     * @param string $contentSplitCharacter
+     * @param  string $contentSplitCharacter
      */
     public function __construct($contentSplitCharacter = ' ')
     {
@@ -65,13 +64,16 @@ class GenericTag implements TagInterface
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getContent()
     {
         return $this->content;
@@ -100,7 +102,7 @@ class GenericTag implements TagInterface
     }
 
     /**
-     * @param string $docBlockLine
+     * @param  string $docBlockLine
      */
     protected function parse($docBlockLine)
     {

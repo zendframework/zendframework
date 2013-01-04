@@ -120,7 +120,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool   $includeDocBlock
+     * @param  bool $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)

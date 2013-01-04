@@ -46,13 +46,12 @@ class AuthorTag extends Tag
     }
 
     /**
-     * @param  string    $datatype
+     * @param  string $datatype
      * @return AuthorTag
      */
     public function setDatatype($datatype)
     {
         $this->datatype = (string) $datatype;
-
         return $this;
     }
 
@@ -65,13 +64,12 @@ class AuthorTag extends Tag
     }
 
     /**
-     * @param  string    $paramName
+     * @param  string $paramName
      * @return AuthorTag
      */
     public function setParamName($paramName)
     {
         $this->paramName = (string) $paramName;
-
         return $this;
     }
 

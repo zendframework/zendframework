@@ -66,16 +66,16 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param string                              $name
+     * @param  string $name
      * @param PropertyValueGenerator|string|array $defaultValue
-     * @param int|array                           $flags
+     * @param  int|array $flags
      */
     public function __construct($name = null, $defaultValue = null, $flags = self::FLAG_PUBLIC)
     {
-        if ($name) {
+        if (null !== $name) {
             $this->setName($name);
         }
-        if ($defaultValue !== null) {
+        if (null !== $defaultValue) {
             $this->setDefaultValue($defaultValue);
         }
         if ($flags !== self::FLAG_PUBLIC) {
@@ -84,7 +84,7 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  bool              $const
+     * @param  bool $const
      * @return PropertyGenerator
      */
     public function setConst($const)

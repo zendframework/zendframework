@@ -41,7 +41,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     );
 
     /**
-     * @var string
+     * @var string|TableIdentifier
      */
     protected $table = '';
 
@@ -63,7 +63,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Constructor
      *
-     * @param  null|string $table
+     * @param  null|string|TableIdentifier $table
      */
     public function __construct($table = null)
     {
@@ -76,7 +76,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Specify table for statement
      *
-     * @param  string $table
+     * @param  string|TableIdentifier $table
      * @return Update
      */
     public function table($table)
@@ -202,7 +202,19 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $statementContainer->setParameterContainer($parameterContainer);
         }
 
-        $table = $platform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = null;
+
+        // create quoted table name to use in update processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        $table = $platform->quoteIdentifier($table);
+
+        if ($schema) {
+            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
+        }
 
         $set = $this->set;
         if (is_array($set)) {
@@ -240,7 +252,19 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-        $table = $adapterPlatform->quoteIdentifier($this->table);
+        $table = $this->table;
+        $schema = null;
+
+        // create quoted table name to use in update processing
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        $table = $adapterPlatform->quoteIdentifier($table);
+
+        if ($schema) {
+            $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
+        }
 
         $set = $this->set;
         if (is_array($set)) {

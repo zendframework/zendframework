@@ -23,6 +23,9 @@ class In implements PredicateInterface
     protected $identifier;
     protected $valueSet;
 
+    protected $selectSpecification = '%s IN %s';
+    protected $valueSpecSpecification = '%%s IN (%s)';
+
     /**
      * Constructor
      *
@@ -84,16 +87,6 @@ class In implements PredicateInterface
         return $this->valueSet;
     }
 
-    protected function getSelectSpecification()
-    {
-        return '%s IN %s';
-    }
-
-    protected function getValueSpecification($count)
-    {
-        return '%s IN (' . implode(', ', array_fill(0, $count, '%s')) . ')';
-    }
-
     /**
      * Return array of parts for where statement
      *
@@ -103,11 +96,11 @@ class In implements PredicateInterface
     {
         $values = $this->getValueSet();
         if ($values instanceof Select) {
-            $specification = $this->getSelectSpecification();
+            $specification = $this->selectSpecification;
             $types = array(self::TYPE_VALUE);
             $values = array($values);
         } else {
-            $specification = $this->getValueSpecification(count($values));
+            $specification = sprintf($this->valueSpecSpecification, implode(', ', array_fill(0, count($values), '%s')));
             $types = array_fill(0, count($values), self::TYPE_VALUE);
         }
 

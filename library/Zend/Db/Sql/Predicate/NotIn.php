@@ -17,16 +17,6 @@ namespace Zend\Db\Sql\Predicate;
  */
 class NotIn extends In
 {
-    protected $identifier;
-    protected $valueSet;
-
-    protected function getSelectSpecification()
-    {
-        return '%s NOT IN %s';
-    }
-
-    protected function getValueSpecification($count)
-    {
-        return '%s NOT IN (' . implode(', ', array_fill(0, $count, '%s')) . ')';
-    }
+    protected $selectSpecification = '%s NOT IN %s';
+    protected $valueSpecSpecification = '%%s NOT IN (%s)';
 }

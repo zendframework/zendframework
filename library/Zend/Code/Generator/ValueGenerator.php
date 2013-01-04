@@ -59,6 +59,11 @@ class ValueGenerator extends AbstractGenerator
      */
     protected $allowedTypes = null;
 
+    /**
+     * @param  mixed  $value
+     * @param  string $type
+     * @param  string $outputMode
+     */
     public function __construct($value = null, $type = self::TYPE_AUTO, $outputMode = self::OUTPUT_MULTIPLE_LINE)
     {
         if ($value !== null) { // strict check is important here if $type = AUTO
@@ -70,12 +75,9 @@ class ValueGenerator extends AbstractGenerator
         if ($outputMode !== self::OUTPUT_MULTIPLE_LINE) {
             $this->setOutputMode($outputMode);
         }
-
     }
 
     /**
-     * isValidConstantType()
-     *
      * @return bool
      */
     public function isValidConstantType()
@@ -104,9 +106,7 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * setValue()
-     *
-     * @param mixed $value
+     * @param  mixed $value
      * @return ValueGenerator
      */
     public function setValue($value)
@@ -116,8 +116,6 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * getValue()
-     *
      * @return mixed
      */
     public function getValue()
@@ -126,20 +124,16 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * setType()
-     *
-     * @param string $type
+     * @param  string $type
      * @return ValueGenerator
      */
     public function setType($type)
     {
-        $this->type = $type;
+        $this->type = (string) $type;
         return $this;
     }
 
     /**
-     * getType()
-     *
      * @return string
      */
     public function getType()
@@ -148,20 +142,16 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * setArrayDepth()
-     *
-     * @param int $arrayDepth
+     * @param  int $arrayDepth
      * @return ValueGenerator
      */
     public function setArrayDepth($arrayDepth)
     {
-        $this->arrayDepth = $arrayDepth;
+        $this->arrayDepth = (int) $arrayDepth;
         return $this;
     }
 
     /**
-     * getArrayDepth()
-     *
      * @return int
      */
     public function getArrayDepth()
@@ -170,9 +160,7 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * _getValidatedType()
-     *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     protected function getValidatedType($type)
@@ -202,9 +190,7 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * _getAutoDeterminedType()
-     *
-     * @param mixed $value
+     * @param  mixed $value
      * @return string
      */
     public function getAutoDeterminedType($value)
@@ -231,8 +217,6 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * generate()
-     *
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -320,9 +304,10 @@ class ValueGenerator extends AbstractGenerator
                 break;
             case self::TYPE_OTHER:
             default:
-                throw new Exception\RuntimeException(
-                    "Type '" . get_class($value) . "' is unknown or cannot be used as property default value."
-                );
+                throw new Exception\RuntimeException(sprintf(
+                    'Type "%s" is unknown or cannot be used as property default value.',
+                    get_class($value)
+                ));
         }
 
         return $output;
@@ -331,8 +316,8 @@ class ValueGenerator extends AbstractGenerator
     /**
      * Quotes value for PHP code.
      *
-     * @param string $input Raw string.
-     * @param bool   $quote Whether add surrounding quotes or not.
+     * @param  string $input Raw string.
+     * @param  bool $quote Whether add surrounding quotes or not.
      * @return string PHP-ready code.
      */
     public static function escape($input, $quote = true)
@@ -348,12 +333,12 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * @param string $outputMode
+     * @param  string $outputMode
      * @return ValueGenerator
      */
     public function setOutputMode($outputMode)
     {
-        $this->outputMode = $outputMode;
+        $this->outputMode = (string) $outputMode;
         return $this;
     }
 

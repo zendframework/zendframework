@@ -17,7 +17,7 @@ class AnnotationCollection extends ArrayObject
     /**
      * Checks if the collection has annotations for a class
      *
-     * @param $class
+     * @param  string $class
      * @return bool
      */
     public function hasAnnotation($class)
@@ -27,6 +27,7 @@ class AnnotationCollection extends ArrayObject
                 return true;
             }
         }
+
         return false;
     }
 }

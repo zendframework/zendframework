@@ -18,7 +18,6 @@ use Zend\Code\Reflection\PropertyReflection;
  */
 class PropertyGenerator extends AbstractMemberGenerator
 {
-
     const FLAG_CONSTANT = 0x08;
 
     /**
@@ -32,9 +31,7 @@ class PropertyGenerator extends AbstractMemberGenerator
     protected $defaultValue = null;
 
     /**
-     * fromReflection()
-     *
-     * @param PropertyReflection $reflectionProperty
+     * @param  PropertyReflection $reflectionProperty
      * @return PropertyGenerator
      */
     public static function fromReflection(PropertyReflection $reflectionProperty)
@@ -68,12 +65,17 @@ class PropertyGenerator extends AbstractMemberGenerator
         return $property;
     }
 
+    /**
+     * @param  string $name
+     * @param PropertyValueGenerator|string|array $defaultValue
+     * @param  int|array $flags
+     */
     public function __construct($name = null, $defaultValue = null, $flags = self::FLAG_PUBLIC)
     {
-        if ($name !== null) {
+        if (null !== $name) {
             $this->setName($name);
         }
-        if ($defaultValue !== null) {
+        if (null !== $defaultValue) {
             $this->setDefaultValue($defaultValue);
         }
         if ($flags !== self::FLAG_PUBLIC) {
@@ -82,9 +84,7 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * setConst()
-     *
-     * @param bool $const
+     * @param  bool $const
      * @return PropertyGenerator
      */
     public function setConst($const)
@@ -95,11 +95,11 @@ class PropertyGenerator extends AbstractMemberGenerator
         } else {
             $this->removeFlag(self::FLAG_CONSTANT);
         }
+
+        return $this;
     }
 
     /**
-     * isConst()
-     *
      * @return bool
      */
     public function isConst()
@@ -108,17 +108,15 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * setDefaultValue()
-     *
-     * @param PropertyValueGenerator|string|array $defaultValue
+     * @param  PropertyValueGenerator|string|array $defaultValue
      * @return PropertyGenerator
      */
     public function setDefaultValue($defaultValue)
     {
         // if it looks like
         if (is_array($defaultValue)
-            && array_key_exists('value', $defaultValue)
-            && array_key_exists('type', $defaultValue)
+            && isset($defaultValue['value'])
+            && isset($defaultValue['type'])
         ) {
             $defaultValue = new PropertyValueGenerator($defaultValue);
         }
@@ -133,8 +131,6 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * getDefaultValue()
-     *
      * @return PropertyValueGenerator
      */
     public function getDefaultValue()
@@ -143,8 +139,6 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * generate()
-     *
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -162,8 +156,11 @@ class PropertyGenerator extends AbstractMemberGenerator
 
         if ($this->isConst()) {
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
-                throw new Exception\RuntimeException('The property ' . $this->name . ' is said to be '
-                                                         . 'constant but does not have a valid constant value.');
+                throw new Exception\RuntimeException(sprintf(
+                    'The property %s is said to be '
+                    . 'constant but does not have a valid constant value.',
+                    $this->name
+                ));
             }
             $output .= $this->indentation . 'const ' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');

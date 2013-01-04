@@ -100,7 +100,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
             'null' => null,
             'true' => true,
             "bar's" => "bar's",
-            );
+        );
 
         $expectedSource = <<<EOS
     public \$myFoo = array(
@@ -148,7 +148,9 @@ EOS;
      */
     public function testPropertyWillLoadFromReflection()
     {
-        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection(
+            '\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties'
+        );
 
         // test property 1
         $reflProp = $reflectionClass->getProperty('_bazProperty');
@@ -160,7 +162,6 @@ EOS;
         $this->assertEquals('private', $cgProp->getVisibility());
 
         $reflProp = $reflectionClass->getProperty('_bazStaticProperty');
-
 
         // test property 2
         $cgProp = PropertyGenerator::fromReflection($reflProp);
@@ -212,8 +213,8 @@ EOS;
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\RuntimeException',
-            'Type \'stdClass\' is unknown or cannot be used as property default value'
-            );
+            'Type "stdClass" is unknown or cannot be used as property default value'
+        );
 
         $codeGenProperty->generate();
     }

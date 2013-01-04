@@ -10,6 +10,7 @@
 
 namespace Zend\Code\Annotation;
 
+use Zend\Code\Annotation\Parser\ParserInterface;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
@@ -50,6 +51,7 @@ class AnnotationManager implements EventManagerAwareInterface
             get_class($this),
         ));
         $this->events = $events;
+
         return $this;
     }
 
@@ -65,16 +67,17 @@ class AnnotationManager implements EventManagerAwareInterface
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 
     /**
      * Attach a parser to listen to the createAnnotation event
      *
-     * @param  Parser\ParserInterface $parser
+     * @param  ParserInterface $parser
      * @return AnnotationManager
      */
-    public function attach(Parser\ParserInterface $parser)
+    public function attach(ParserInterface $parser)
     {
         $this->getEventManager()
              ->attach(self::EVENT_CREATE_ANNOTATION, array($parser, 'onCreateAnnotation'));
@@ -99,12 +102,13 @@ class AnnotationManager implements EventManagerAwareInterface
             'raw'     => $annotationData[2],
         ));
 
-        $results = $this->getEventManager()
-                        ->trigger($event, function ($r) {
-                            return (is_object($r));
-                        });
+        $eventManager = $this->getEventManager();
+        $results = $eventManager->trigger($event, function ($r) {
+            return (is_object($r));
+        });
 
         $annotation = $results->last();
+
         return (is_object($annotation) ? $annotation : false);
     }
 }

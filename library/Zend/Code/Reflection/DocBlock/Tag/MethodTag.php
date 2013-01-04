@@ -24,15 +24,11 @@ class MethodTag implements TagInterface, PhpDocTypedTagInterface
     protected $types = array();
 
     /**
-     * Method name
-     *
      * @var string
      */
     protected $methodName = null;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description = null;
@@ -45,8 +41,6 @@ class MethodTag implements TagInterface, PhpDocTypedTagInterface
     protected $isStatic = false;
 
     /**
-     * Get tag name
-     *
      * @return string
      */
     public function getName()
@@ -57,24 +51,28 @@ class MethodTag implements TagInterface, PhpDocTypedTagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param  string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
-        if (preg_match('#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m', $tagDocblockLine, $match)) {
-            if ($match[1] !== '') {
-                $this->isStatic = true;
-            }
+        $match = array();
 
-            if ($match[2] !== '') {
-                $this->types = explode('|', rtrim($match[2]));
-            }
+        if (!preg_match('#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m', $tagDocblockLine, $match)) {
+            return;
+        }
 
-            $this->methodName = $match[3];
+        if ($match[1] !== '') {
+            $this->isStatic = true;
+        }
 
-            if ($match[4] !== '') {
-                $this->description = $match[4];
-            }
+        if ($match[2] !== '') {
+            $this->types = explode('|', rtrim($match[2]));
+        }
+
+        $this->methodName = $match[3];
+
+        if ($match[4] !== '') {
+            $this->description = $match[4];
         }
     }
 
@@ -99,8 +97,6 @@ class MethodTag implements TagInterface, PhpDocTypedTagInterface
     }
 
     /**
-     * Get method name
-     *
      * @return string
      */
     public function getMethodName()
@@ -109,8 +105,6 @@ class MethodTag implements TagInterface, PhpDocTypedTagInterface
     }
 
     /**
-     * Get method description
-     *
      * @return null|string
      */
     public function getDescription()

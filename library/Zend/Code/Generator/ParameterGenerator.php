@@ -50,9 +50,7 @@ class ParameterGenerator extends AbstractGenerator
     protected static $simple = array('int', 'bool', 'string', 'float', 'resource', 'mixed', 'object');
 
     /**
-     * fromReflection()
-     *
-     * @param ParameterReflection $reflectionParameter
+     * @param  ParameterReflection $reflectionParameter
      * @return ParameterGenerator
      */
     public static function fromReflection(ParameterReflection $reflectionParameter)
@@ -64,7 +62,7 @@ class ParameterGenerator extends AbstractGenerator
             $param->setType('array');
         } else {
             $typeClass = $reflectionParameter->getClass();
-            if ($typeClass !== null) {
+            if ($typeClass) {
                 $param->setType($typeClass->getName());
             }
         }
@@ -79,41 +77,44 @@ class ParameterGenerator extends AbstractGenerator
         return $param;
     }
 
+    /**
+     * @param  string $name
+     * @param  string $type
+     * @param  mixed $defaultValue
+     * @param  int $position
+     * @param  bool $passByReference
+     */
     public function __construct($name = null, $type = null, $defaultValue = null, $position = null,
                                 $passByReference = false)
     {
-        if ($name !== null) {
+        if (null !== $name) {
             $this->setName($name);
         }
-        if ($type !== null) {
+        if (null !== $type) {
             $this->setType($type);
         }
-        if ($defaultValue !== null) {
+        if (null !== $defaultValue) {
             $this->setDefaultValue($defaultValue);
         }
-        if ($position !== null) {
+        if (null !== $position) {
             $this->setPosition($position);
         }
-        if ($passByReference !== false) {
+        if (false !== $passByReference) {
             $this->setPassedByReference(true);
         }
     }
 
     /**
-     * setType()
-     *
-     * @param string $type
+     * @param  string $type
      * @return ParameterGenerator
      */
     public function setType($type)
     {
-        $this->type = $type;
+        $this->type = (string) $type;
         return $this;
     }
 
     /**
-     * getType()
-     *
      * @return string
      */
     public function getType()
@@ -122,20 +123,16 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * setName()
-     *
-     * @param string $name
+     * @param  string $name
      * @return ParameterGenerator
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 
     /**
-     * getName()
-     *
      * @return string
      */
     public function getName()
@@ -148,7 +145,7 @@ class ParameterGenerator extends AbstractGenerator
      *
      * Certain variables are difficult to express
      *
-     * @param null|bool|string|int|float|array|ValueGenerator $defaultValue
+     * @param  null|bool|string|int|float|array|ValueGenerator $defaultValue
      * @return ParameterGenerator
      */
     public function setDefaultValue($defaultValue)
@@ -162,8 +159,6 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * getDefaultValue()
-     *
      * @return string
      */
     public function getDefaultValue()
@@ -172,20 +167,16 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * setPosition()
-     *
-     * @param int $position
+     * @param  int $position
      * @return ParameterGenerator
      */
     public function setPosition($position)
     {
-        $this->position = $position;
+        $this->position = (int) $position;
         return $this;
     }
 
     /**
-     * getPosition()
-     *
      * @return int
      */
     public function getPosition()
@@ -202,18 +193,16 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
-     * @param bool $passedByReference
+     * @param  bool $passedByReference
      * @return ParameterGenerator
      */
     public function setPassedByReference($passedByReference)
     {
-        $this->passedByReference = $passedByReference;
+        $this->passedByReference = (bool) $passedByReference;
         return $this;
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
@@ -224,7 +213,7 @@ class ParameterGenerator extends AbstractGenerator
             $output .= $this->type . ' ';
         }
 
-        if ($this->passedByReference === true) {
+        if (true === $this->passedByReference) {
             $output .= '&';
         }
 

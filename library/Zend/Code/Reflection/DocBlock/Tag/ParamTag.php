@@ -42,12 +42,15 @@ class ParamTag implements TagInterface, PhpDocTypedTagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocBlockLine
+     * @param  string $tagDocBlockLine
      */
     public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocBlockLine, $matches);
+
+        if (!preg_match('#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocBlockLine, $matches)) {
+            return;
+        }
 
         $this->types = explode('|', $matches[1]);
 
@@ -90,6 +93,9 @@ class ParamTag implements TagInterface, PhpDocTypedTagInterface
         return $this->variableName;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;

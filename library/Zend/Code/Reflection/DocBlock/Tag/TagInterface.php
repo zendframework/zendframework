@@ -12,7 +12,14 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
 
 interface TagInterface
 {
+    /**
+     * @return string
+     */
     public function getName();
 
+    /**
+     * @param  string $content
+     * @return void
+     */
     public function initialize($content);
 }

@@ -90,10 +90,8 @@ class ParameterScanner
     protected $nameInformation = null;
 
     /**
-     * Constructor
-     *
-     * @param array $parameterTokens
-     * @param NameInformation $nameInformation
+     * @param  array $parameterTokens
+     * @param  NameInformation $nameInformation
      */
     public function __construct(array $parameterTokens, NameInformation $nameInformation = null)
     {
@@ -104,18 +102,18 @@ class ParameterScanner
     /**
      * Set declaring class
      *
-     * @param string $class
+     * @param  string $class
      * @return void
      */
     public function setDeclaringClass($class)
     {
-        $this->declaringClass = $class;
+        $this->declaringClass = (string) $class;
     }
 
     /**
      * Set declaring scanner class
      *
-     * @param ClassScanner $scannerClass
+     * @param  ClassScanner $scannerClass
      * @return void
      */
     public function setDeclaringScannerClass(ClassScanner $scannerClass)
@@ -126,7 +124,7 @@ class ParameterScanner
     /**
      * Set declaring function
      *
-     * @param string $function
+     * @param  string $function
      * @return void
      */
     public function setDeclaringFunction($function)
@@ -137,7 +135,7 @@ class ParameterScanner
     /**
      * Set declaring scanner function
      *
-     * @param MethodScanner $scannerFunction
+     * @param  MethodScanner $scannerFunction
      * @return void
      */
     public function setDeclaringScannerFunction(MethodScanner $scannerFunction)
@@ -148,7 +146,7 @@ class ParameterScanner
     /**
      * Set position
      *
-     * @param int $position
+     * @param  int $position
      * @return void
      */
     public function setPosition($position)
@@ -201,7 +199,6 @@ class ParameterScanner
         if ($this->name !== null) {
             $this->defaultValue .= (is_string($token)) ? $token : $token[1];
         }
-
 
         SCANNER_CONTINUE:
 
@@ -267,6 +264,7 @@ class ParameterScanner
     public function getDefaultValue()
     {
         $this->scan();
+
         return $this->defaultValue;
     }
 
@@ -278,6 +276,7 @@ class ParameterScanner
     public function getClass()
     {
         $this->scan();
+
         return $this->class;
     }
 
@@ -289,6 +288,7 @@ class ParameterScanner
     public function getName()
     {
         $this->scan();
+
         return $this->name;
     }
 
@@ -300,6 +300,7 @@ class ParameterScanner
     public function getPosition()
     {
         $this->scan();
+
         return $this->position;
     }
 
@@ -311,6 +312,7 @@ class ParameterScanner
     public function isArray()
     {
         $this->scan();
+
         return $this->isArray;
     }
 
@@ -322,6 +324,7 @@ class ParameterScanner
     public function isDefaultValueAvailable()
     {
         $this->scan();
+
         return $this->isDefaultValueAvailable;
     }
 
@@ -333,6 +336,7 @@ class ParameterScanner
     public function isOptional()
     {
         $this->scan();
+
         return $this->isOptional;
     }
 
@@ -344,6 +348,7 @@ class ParameterScanner
     public function isPassedByReference()
     {
         $this->scan();
+
         return $this->isPassedByReference;
     }
 

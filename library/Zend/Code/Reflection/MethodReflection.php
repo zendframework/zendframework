@@ -22,9 +22,8 @@ use Zend\Code\Scanner\CachingFileScanner;
  */
 class MethodReflection extends PhpReflectionMethod implements ReflectionInterface
 {
-
     /**
-     * @var AnnotationCollection
+     * @var AnnotationScanner
      */
     protected $annotations = null;
 
@@ -40,12 +39,13 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         }
 
         $instance = new DocBlockReflection($this);
+
         return $instance;
     }
 
     /**
-     * @param AnnotationManager $annotationManager
-     * @return AnnotationCollection
+     * @param  AnnotationManager $annotationManager
+     * @return AnnotationScanner
      */
     public function getAnnotations(AnnotationManager $annotationManager)
     {
@@ -90,25 +90,30 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
+
         return $zendReflection;
     }
 
     /**
      * Get all method parameter reflection objects
      *
-     * @return ReflectionParameter[]
+     * @return ParameterReflection[]
      */
     public function getParameters()
     {
         $phpReflections  = parent::getParameters();
         $zendReflections = array();
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance          = new ParameterReflection(array($this->getDeclaringClass()->getName(),
-                                                               $this->getName()), $phpReflection->getName());
+            $instance = new ParameterReflection(array(
+                $this->getDeclaringClass()->getName(),
+                $this->getName()),
+                $phpReflection->getName()
+            );
             $zendReflections[] = $instance;
             unset($phpReflection);
         }
         unset($phpReflections);
+
         return $zendReflections;
     }
 

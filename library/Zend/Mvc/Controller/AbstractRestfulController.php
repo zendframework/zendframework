@@ -75,12 +75,28 @@ abstract class AbstractRestfulController extends AbstractController
     abstract public function get($id);
 
     /**
+     * Return list of resources
+     *
+     * @return mixed
+     */
+    abstract public function getList();
+
+    /**
      * Retrieve HEAD metadata for the resource
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @param  null|mixed $id
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function head($id = null);
+    public function head($id = null)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Respond to the OPTIONS method
@@ -88,16 +104,34 @@ abstract class AbstractRestfulController extends AbstractController
      * Typically, set the Allow header with allowed HTTP methods, and
      * return the response.
      *
-     * @return mixed
-     */
-    abstract public function options();
-
-    /**
-     * Return list of resources
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function getList();
+    public function options()
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
+
+    /**
+     * Respond to the PATCH method
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
+     *
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function patch($id, $data)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Update an existing resource

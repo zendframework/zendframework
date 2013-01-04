@@ -42,6 +42,7 @@ class HeaderLoader extends PluginClassLoader
         'contentlocation'    => 'Zend\Http\Header\ContentLocation',
         'contentmd5'         => 'Zend\Http\Header\ContentMD5',
         'contentrange'       => 'Zend\Http\Header\ContentRange',
+        'contenttransferencoding' => 'Zend\Http\Header\ContentTransferEncoding',
         'contenttype'        => 'Zend\Http\Header\ContentType',
         'cookie'             => 'Zend\Http\Header\Cookie',
         'date'               => 'Zend\Http\Header\Date',

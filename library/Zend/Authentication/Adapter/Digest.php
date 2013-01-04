@@ -185,9 +185,9 @@ class Digest implements AdapterInterface
             'identity' => array(
                 'realm'    => $this->realm,
                 'username' => $this->username,
-                ),
+            ),
             'messages' => array()
-            );
+        );
 
         while (($line = fgets($fileHandle)) !== false) {
             $line = trim($line);

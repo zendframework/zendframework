@@ -91,7 +91,7 @@ abstract class AbstractRestfulController extends AbstractController
     public function notFoundAction()
     {
         $this->response->setStatusCode(404);
-        
+
         return array(
             'content' => 'Page not found'
         );
@@ -116,7 +116,7 @@ abstract class AbstractRestfulController extends AbstractController
             throw new Exception\InvalidArgumentException(
                     'Expected an HTTP request');
         }
-        
+
         return parent::dispatch($request, $response);
     }
 
@@ -138,7 +138,7 @@ abstract class AbstractRestfulController extends AbstractController
             throw new Exception\DomainException(
                     'Missing route matches; unsure how to retrieve action');
         }
-        
+
         $request = $e->getRequest();
         $action = $routeMatch->getParam('action', false);
         if ($action) {
@@ -186,15 +186,15 @@ abstract class AbstractRestfulController extends AbstractController
                 default:
                     throw new Exception\DomainException('Invalid HTTP method!');
             }
-            
+
             $routeMatch->setParam('action', $action);
         }
-        
+
         // Emit post-dispatch signal, passing:
         // - return from method, request, response
         // If a listener returns a response object, return it immediately
         $e->setResult($return);
-        
+
         return $return;
     }
 
@@ -209,7 +209,7 @@ abstract class AbstractRestfulController extends AbstractController
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
             return $this->create(Json::decode($request->getContent()));
         }
-        
+
         return $this->create($request->getPost()
             ->toArray());
     }
@@ -229,14 +229,14 @@ abstract class AbstractRestfulController extends AbstractController
                 throw new Exception\DomainException('Missing identifier');
             }
         }
-        
+
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
             return $this->update($id, Json::decode($request->getContent()));
         }
-        
+
         $content = $request->getContent();
         parse_str($content, $parsedParams);
-        
+
         return $this->update($id, $parsedParams);
     }
 
@@ -248,7 +248,10 @@ abstract class AbstractRestfulController extends AbstractController
     public function requestHasContentType(Request $request, $contentType = '')
     {
         $acceptHeaders = $request->getHeaders()->get('Accept');
-        
+        if (!$acceptHeaders) {
+            return false;
+        }
+
         if (array_key_exists($contentType, $this->contentTypes)) {
             foreach ($this->contentTypes[$contentType] as $contentTypeValue) {
                 if ($acceptHeaders->match($contentTypeValue) !== false) {
@@ -256,7 +259,7 @@ abstract class AbstractRestfulController extends AbstractController
                 }
             }
         }
-        
+
         return false;
     }
 }

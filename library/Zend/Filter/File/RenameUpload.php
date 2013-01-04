@@ -10,6 +10,7 @@
 
 namespace Zend\Filter\File;
 
+use Zend\Filter\AbstractFilter;
 use Zend\Filter\Exception;
 use Zend\Stdlib\ErrorHandler;
 
@@ -17,8 +18,111 @@ use Zend\Stdlib\ErrorHandler;
  * @category   Zend
  * @package    Zend_Filter
  */
-class RenameUpload extends Rename
+class RenameUpload extends AbstractFilter
 {
+    /**
+     * @var array
+     */
+    protected $options = array(
+        'target'          => null,
+        'use_upload_name' => false,
+        'overwrite'       => false,
+        'randomize'       => false,
+    );
+
+    /**
+     * Constructor
+     *
+     * @param array|string $targetOrOptions The target file path or an options array
+     */
+    public function __construct($targetOrOptions)
+    {
+        if (is_array($targetOrOptions)) {
+            $this->setOptions($targetOrOptions);
+        } else {
+            $this->setTarget($targetOrOptions);
+        }
+    }
+
+    /**
+     * @param  string $target Target file path or directory
+     * @return RenameUpload
+     */
+    public function setTarget($target)
+    {
+        if (!is_string($target)) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid target, must be a string'
+            );
+        }
+        $this->options['target'] = $target;
+        return $this;
+    }
+
+    /**
+     * @return string Target file path or directory
+     */
+    public function getTarget()
+    {
+        return $this->options['target'];
+    }
+
+    /**
+     * @param  boolean $flag When true, this filter will use the $_FILES['name']
+     *                       as the target filename.
+     *                       Otherwise, it uses the default 'target' rules.
+     * @return RenameUpload
+     */
+    public function setUseUploadName($flag = true)
+    {
+        $this->options['use_upload_name'] = (boolean) $flag;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUseUploadName()
+    {
+        return $this->options['use_upload_name'];
+    }
+
+    /**
+     * @param  boolean $flag Shall existing files be overwritten?
+     * @return RenameUpload
+     */
+    public function setOverwrite($flag = true)
+    {
+        $this->options['overwrite'] = (boolean) $flag;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getOverwrite()
+    {
+        return $this->options['overwrite'];
+    }
+
+    /**
+     * @param  boolean $flag Shall target files have a random postfix attached?
+     * @return RenameUpload
+     */
+    public function setRandomize($flag = true)
+    {
+        $this->options['randomize'] = (boolean) $flag;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getRandomize()
+    {
+        return $this->options['randomize'];
+    }
+
     /**
      * Defined by Zend\Filter\Filter
      *
@@ -35,16 +139,24 @@ class RenameUpload extends Rename
         $isFileUpload = (is_array($value) && isset($value['tmp_name']));
         if ($isFileUpload) {
             $uploadData = $value;
-            $value      = $value['tmp_name'];
+            $sourceFile = $value['tmp_name'];
+        } else {
+            $uploadData = array(
+                'tmp_name' => $value,
+                'name'     => $value,
+            );
+            $sourceFile = $value;
         }
 
-        $file   = $this->getNewName($value, true);
-        if (is_string($file)) {
-            return $file;
+        $targetFile = $this->getFinalTarget($uploadData);
+        if (!file_exists($sourceFile) || $sourceFile == $targetFile) {
+            return $value;
         }
+
+        $this->checkFileExists($targetFile);
 
         ErrorHandler::start();
-        $result = move_uploaded_file($file['source'], $file['target']);
+        $result = move_uploaded_file($sourceFile, $targetFile);
         $warningException = ErrorHandler::stop();
         if (!$result || null !== $warningException) {
             throw new Exception\RuntimeException(
@@ -54,9 +166,80 @@ class RenameUpload extends Rename
         }
 
         if ($isFileUpload) {
-            $uploadData['tmp_name'] = $file['target'];
+            $uploadData['tmp_name'] = $targetFile;
             return $uploadData;
         }
-        return $file['target'];
+        return $targetFile;
+    }
+
+    /**
+     * @param  string $targetFile Target file path
+     * @throws \Zend\Filter\Exception\InvalidArgumentException
+     */
+    protected function checkFileExists($targetFile)
+    {
+        if (file_exists($targetFile)) {
+            if ($this->getOverwrite()) {
+                unlink($targetFile);
+            } else {
+                throw new Exception\InvalidArgumentException(
+                    sprintf("File '%s' could not be renamed. It already exists.", $targetFile)
+                );
+            }
+        }
+    }
+
+    /**
+     * @param  array $uploadData $_FILES array
+     * @return string
+     */
+    protected function getFinalTarget($uploadData)
+    {
+        $source = $uploadData['tmp_name'];
+        $target = $this->getTarget();
+        if (!isset($target) || $target == '*') {
+            $target = $source;
+        }
+
+        // Get the target directory
+        if (is_dir($target)) {
+            $targetDir = $target;
+            $last      = $target[strlen($target) - 1];
+            if (($last != '/') && ($last != '\\')) {
+                $targetDir .= DIRECTORY_SEPARATOR;
+            }
+        } else {
+            $info      = pathinfo($target);
+            $targetDir = $info['dirname'] . DIRECTORY_SEPARATOR;
+        }
+
+        // Get the target filename
+        if ($this->getUseUploadName()) {
+            $targetFile = basename($uploadData['name']);
+        } elseif (!is_dir($target)) {
+            $targetFile = basename($target);
+        } else {
+            $targetFile = basename($source);
+        }
+
+        if ($this->getRandomize()) {
+            $targetFile = $this->applyRandomToFilename($targetFile);
+        }
+
+        return $targetDir . $targetFile;
+    }
+
+    /**
+     * @param  string $filename
+     * @return string
+     */
+    protected function applyRandomToFilename($filename)
+    {
+        $info = pathinfo($filename);
+        $filename = $info['filename'] . uniqid('_');
+        if (isset($info['extension'])) {
+            $filename .= '.' . $info['extension'];
+        }
+        return $filename;
     }
 }

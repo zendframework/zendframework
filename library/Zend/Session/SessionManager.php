@@ -84,7 +84,7 @@ class SessionManager extends AbstractManager
         }
 
         session_start();
-        
+
         $storage = $this->getStorage();
 
         // Since session is starting, we need to potentially repopulate our

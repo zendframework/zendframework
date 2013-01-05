@@ -15,4 +15,29 @@ class ClassMethodsInvalidParameter
     {
         return $alias;
     }
+
+    public function getTest($foo)
+    {
+        return $foo;
+    }
+
+    public function isTest($bar)
+    {
+        return $bar;
+    }
+
+    public function hasBar()
+    {
+        return true;
+    }
+
+    public function getFoo()
+    {
+        return "Bar";
+    }
+
+    public function isBla()
+    {
+        return false;
+    }
 }

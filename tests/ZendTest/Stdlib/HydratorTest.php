@@ -215,5 +215,9 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     {
         $hydrator = new ClassMethods(false);
         $datas = $hydrator->extract($this->classMethodsInvalidParameter);
+
+        $this->assertTrue($datas['hasBar']);
+        $this->assertEquals('Bar', $datas['foo']);
+        $this->assertFalse($datas['isBla']);
     }
 }

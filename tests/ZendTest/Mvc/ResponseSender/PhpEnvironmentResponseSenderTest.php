@@ -11,39 +11,36 @@
 namespace ZendTest\Mvc\ResponseSender;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use ZendTest\Mvc\ResponseSender\TestAsset\ConsoleResponseSender;
+use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage UnitTest
  */
-class ConsoleResponseSenderTest extends TestCase
+class PhpEnvironmentResponseSenderTest extends TestCase
 {
     public function testSendResponseIgnoresInvalidResponseTypes()
     {
         $mockResponse = $this->getMockForAbstractClass('Zend\Stdlib\ResponseInterface');
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
-        $responseSender = new ConsoleResponseSender();
+        $responseSender = new PhpEnvironmentResponseSender();
         ob_start();
-        $result = $responseSender($mockSendResponseEvent);
+        $responseSender($mockSendResponseEvent);
         $body = ob_get_clean();
         $this->assertEquals('', $body);
-        $this->assertNull($result);
     }
 
-    public function testSendResponsePrintsResponseAndReturnsErrorLevel()
+    public function testSendResponsePrintsResponse()
     {
-        $mockResponse = $this->getMock('Zend\Console\Response');
+        $mockResponse = $this->getMock('Zend\Http\PhpEnvironment\Response');
         $mockResponse->expects($this->once())->method('getContent')->will($this->returnValue('body'));
-        $mockResponse->expects($this->once())->method('getMetadata')->with('errorLevel', 0)->will($this->returnValue(0));
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
-        $responseSender = new ConsoleResponseSender();
+        $responseSender = new PhpEnvironmentResponseSender();
         ob_start();
-        $result = $responseSender($mockSendResponseEvent);
+        $responseSender($mockSendResponseEvent);
         $body = ob_get_clean();
         $this->assertEquals('body', $body);
-        $this->assertEquals(0, $result);
     }
 
     protected function getSendResponseEventMock($response)

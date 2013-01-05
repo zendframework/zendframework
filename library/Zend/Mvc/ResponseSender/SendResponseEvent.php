@@ -86,8 +86,7 @@ class SendResponseEvent extends Event
     public function contentSent()
     {
         $response = $this->getResponse();
-        if (isset($this->contentSent[spl_object_hash($response)])
-            && true === $this->contentSent[spl_object_hash($response)]) {
+        if (isset($this->contentSent[spl_object_hash($response)])) {
             return true;
         }
         return false;
@@ -114,8 +113,7 @@ class SendResponseEvent extends Event
     public function headersSent()
     {
         $response = $this->getResponse();
-        if (isset($this->headersSent[spl_object_hash($response)])
-            && true === $this->headersSent[spl_object_hash($response)]) {
+        if (isset($this->headersSent[spl_object_hash($response)])) {
             return true;
         }
         return false;

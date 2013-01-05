@@ -15,6 +15,7 @@ use Zend\Stdlib\Hydrator\Reflection;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
+use ZendTest\Stdlib\TestAsset\ClassMethodsInvalidParameter;
 use ZendTest\Stdlib\TestAsset\Reflection as ReflectionAsset;
 
 /**
@@ -42,6 +43,11 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     protected $classMethodsUnderscore;
 
     /**
+     * @var ClassMethodsInvalidParameter
+     */
+    protected $classMethodsInvalidParameter;
+
+    /**
      * @var ReflectionAsset
      */
     protected $reflection;
@@ -51,6 +57,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->classMethodsCamelCase = new ClassMethodsCamelCase();
         $this->classMethodsCamelCaseMissing = new ClassMethodsCamelCaseMissing();
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
+        $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
         $this->reflection = new ReflectionAsset;
     }
 
@@ -202,5 +209,11 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->classMethodsCamelCaseMissing, $test);
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), '2');
+    }
+
+    public function testHydratorClassMethodsWithServiceManager()
+    {
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsInvalidParameter);
     }
 }

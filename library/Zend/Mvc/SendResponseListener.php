@@ -46,14 +46,6 @@ class SendResponseListener implements
     protected $eventManager;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->event = new SendResponseEvent();
-    }
-
-    /**
      * Inject an EventManager instance
      *
      * @param  EventManagerInterface $eventManager
@@ -124,10 +116,35 @@ class SendResponseListener implements
         if (!$response instanceof Response) {
             return; // there is no response to send
         }
-        $event = $this->event;
+        $event = $this->getEvent();
         $event->setResponse($response);
         $event->setTarget($this);
         $this->getEventManager()->trigger($event);
+    }
+
+    /**
+     * Get the send response event
+     *
+     * @return SendResponseEvent
+     */
+    public function getEvent()
+    {
+        if (!$this->event instanceof SendResponseEvent) {
+            $this->event = new SendResponseEvent();
+        }
+        return $this->event;
+    }
+
+    /**
+     * Set the send response event
+     *
+     * @param SendResponseEvent $e
+     * @return SendResponseEvent
+     */
+    public function setEvent(SendResponseEvent $e)
+    {
+        $this->event = $e;
+        return $this;
     }
 
     /**

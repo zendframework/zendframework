@@ -150,6 +150,13 @@ class SendResponseListener implements
     /**
      * Register the default event listeners
      *
+     * The order in which the response sender are listed here, is by their usage:
+     * PhpEnvironmentResponseSender has highest priority, because it's used most often.
+     * ConsoleResponseSender and SimpleStreamResponseSender are not used that often, yo they have a lower priority.
+     * You can attach your response sender before or after every default response sender implementation.
+     * All default response sender implementation have negative priority.
+     * You are able to attach listeners without giving a priority and your response sender would be first to try.
+     *
      * @return SendResponseListener
      */
     protected function attachDefaultListeners()

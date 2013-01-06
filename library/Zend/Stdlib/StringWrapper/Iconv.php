@@ -153,15 +153,17 @@ class Iconv extends AbstractStringWrapper
         'C99',
         'JAVA',
 
+        /* Commented out because that's internal encodings not existing in real world
         // Full Unicode, in terms of uint16_t or uint32_t (with machine dependent endianness and alignment)
-        // 'UCS-2-INTERNAL',
-        // 'UCS-4-INTERNAL',
+        'UCS-2-INTERNAL',
+        'UCS-4-INTERNAL',
 
         // Locale dependent, in terms of `char' or `wchar_t' (with machine dependent endianness and alignment,
         // and with OS and locale dependent semantics)
-        // 'char',
-        // 'wchar_t',
-        // '', // The empty encoding name is equivalent to "char": it denotes the locale dependent character encoding.
+        'char',
+        'wchar_t',
+        '', // The empty encoding name is equivalent to "char": it denotes the locale dependent character encoding.
+        */
 
         // When configured with the option --enable-extra-encodings,
         // it also provides support for a few extra encodings:

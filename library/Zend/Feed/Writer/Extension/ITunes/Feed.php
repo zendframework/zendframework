@@ -86,7 +86,7 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
-        if ($this->stringWrapper->strlen($value, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($value) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
         }
@@ -117,7 +117,7 @@ class Feed
      */
     public function addItunesAuthor($value)
     {
-        if ($this->stringWrapper->strlen($value, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($value) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
@@ -142,19 +142,19 @@ class Feed
         }
         foreach ($values as $key=>$value) {
             if (!is_array($value)) {
-                if ($this->stringWrapper->strlen($value, $this->getEncoding()) > 255) {
+                if ($this->stringWrapper->strlen($value) > 255) {
                     throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                     . ' contain a maximum of 255 characters each');
                 }
                 $this->data['categories'][] = $value;
             } else {
-                if ($this->stringWrapper->strlen($key, $this->getEncoding()) > 255) {
+                if ($this->stringWrapper->strlen($key) > 255) {
                     throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                     . ' contain a maximum of 255 characters each');
                 }
                 $this->data['categories'][$key] = array();
                 foreach ($value as $val) {
-                    if ($this->stringWrapper->strlen($val, $this->getEncoding()) > 255) {
+                    if ($this->stringWrapper->strlen($val) > 255) {
                         throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                         . ' contain a maximum of 255 characters each');
                     }
@@ -239,7 +239,7 @@ class Feed
             . ' contain a maximum of 12 terms');
         }
         $concat = implode(',', $value);
-        if ($this->stringWrapper->strlen($concat, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($concat) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "keywords" may only'
             . ' have a concatenated length of 255 chars where terms are delimited'
             . ' by a comma');
@@ -292,8 +292,8 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "owner" must'
             . ' be an array containing keys "name" and "email"');
         }
-        if ($this->stringWrapper->strlen($value['name'], $this->getEncoding()) > 255
-            || $this->stringWrapper->strlen($value['email'], $this->getEncoding()) > 255
+        if ($this->stringWrapper->strlen($value['name']) > 255
+            || $this->stringWrapper->strlen($value['email']) > 255
         ) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "owner" may only'
             . ' contain a maximum of 255 characters each for "name" and "email"');
@@ -314,7 +314,7 @@ class Feed
      */
     public function setItunesSubtitle($value)
     {
-        if ($this->stringWrapper->strlen($value, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($value) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "subtitle" may only'
             . ' contain a maximum of 255 characters');
         }
@@ -331,7 +331,7 @@ class Feed
      */
     public function setItunesSummary($value)
     {
-        if ($this->stringWrapper->strlen($value, $this->getEncoding()) > 4000) {
+        if ($this->stringWrapper->strlen($value) > 4000) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "summary" may only'
             . ' contain a maximum of 4000 characters');
         }

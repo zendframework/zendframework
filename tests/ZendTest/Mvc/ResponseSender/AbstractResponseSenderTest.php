@@ -20,10 +20,11 @@ use Zend\Http\Response;
  */
 class AbstractResponseSenderTest extends TestCase
 {
+
     /**
      * @runInSeparateProcess
      */
-    public function testSendHeaders()
+    public function testSendHeadersTwoTimesSendsOnlyOnce()
     {
         if (!function_exists('xdebug_get_headers')) {
             $this->markTestSkipped('Xdebug extension needed, skipped test');
@@ -41,6 +42,8 @@ class AbstractResponseSenderTest extends TestCase
         $responseSender = $this->getMockForAbstractClass('Zend\Mvc\ResponseSender\AbstractResponseSender');
         $responseSender->sendHeaders($mockSendResponseEvent);
         $this->assertEquals($headers, xdebug_get_headers());
+        $responseSender->sendHeaders($mockSendResponseEvent);
+        $this->assertEquals(array(), xdebug_get_headers());
     }
 
 }

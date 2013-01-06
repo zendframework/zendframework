@@ -32,23 +32,40 @@ class ConsoleResponseSenderTest extends TestCase
         $this->assertNull($result);
     }
 
-    public function testSendResponsePrintsResponseAndReturnsErrorLevel()
+    public function testSendResponseTwoTimesPrintsResponseOnceAndReturnsErrorLevel()
     {
+        $returnValue = false;
         $mockResponse = $this->getMock('Zend\Console\Response');
         $mockResponse->expects($this->once())->method('getContent')->will($this->returnValue('body'));
-        $mockResponse->expects($this->once())->method('getMetadata')->with('errorLevel', 0)->will($this->returnValue(0));
+        $mockResponse->expects($this->exactly(2))->method('getMetadata')->with('errorLevel', 0)->will($this->returnValue(0));
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
+        $mockSendResponseEvent->expects($this->once())->method('setContentSent');
+        $mockSendResponseEvent->expects($this->any())->method('contentSent')->will($this->returnCallback(
+            function() use (&$returnValue) {
+                if (false === $returnValue) {
+                    $returnValue = true;
+                    return false;
+                }
+                return true;
+        }));
         $responseSender = new ConsoleResponseSender();
         ob_start();
         $result = $responseSender($mockSendResponseEvent);
         $body = ob_get_clean();
         $this->assertEquals('body', $body);
         $this->assertEquals(0, $result);
+
+        ob_start();
+        $result = $responseSender($mockSendResponseEvent);
+        $body = ob_get_clean();
+        $this->assertEquals('', $body);
+        $this->assertEquals(0, $result);
+
     }
 
     protected function getSendResponseEventMock($response)
     {
-        $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse'));
+        $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse', 'contentSent', 'setContentSent'));
         $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($response));
         return $mockSendResponseEvent;
     }

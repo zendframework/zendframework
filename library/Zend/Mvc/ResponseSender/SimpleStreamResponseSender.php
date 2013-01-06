@@ -29,9 +29,10 @@ class SimpleStreamResponseSender extends AbstractResponseSender implements Respo
      */
     public function sendStream(SendResponseEvent $event)
     {
+        if ($event->contentSent()) {
+            return $this;
+        }
         $response = $event->getResponse();
-        /* @var $response Stream */
-
         $stream = $response->getStream();
         fpassthru($stream);
         $event->setContentSent();
@@ -45,7 +46,7 @@ class SimpleStreamResponseSender extends AbstractResponseSender implements Respo
      */
     public function __invoke(SendResponseEvent $event)
     {
-        $response = $event->getParam('response');
+        $response = $event->getResponse();
         if ($response instanceof Stream) {
             $this->sendHeaders($event);
             $this->sendStream($event);

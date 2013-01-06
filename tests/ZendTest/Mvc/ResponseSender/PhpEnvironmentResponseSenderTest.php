@@ -23,7 +23,8 @@ class PhpEnvironmentResponseSenderTest extends TestCase
     public function testSendResponseIgnoresInvalidResponseTypes()
     {
         $mockResponse = $this->getMockForAbstractClass('Zend\Stdlib\ResponseInterface');
-        $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
+        $mockSendResponseEvent = $this->getSendResponseEventMock();
+        $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($mockResponse));
         $responseSender = new PhpEnvironmentResponseSender();
         ob_start();
         $responseSender($mockSendResponseEvent);
@@ -31,22 +32,42 @@ class PhpEnvironmentResponseSenderTest extends TestCase
         $this->assertEquals('', $body);
     }
 
-    public function testSendResponsePrintsResponse()
+    public function testSendResponseTwoTimesPrintsResponseOnlyOnce()
     {
         $mockResponse = $this->getMock('Zend\Http\PhpEnvironment\Response');
-        $mockResponse->expects($this->once())->method('getContent')->will($this->returnValue('body'));
-        $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
+        $mockResponse->expects($this->any())->method('getContent')->will($this->returnValue('body'));
+        $mockSendResponseEvent = $this->getSendResponseEventMock();
+        $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($mockResponse));
+        $mockSendResponseEvent->expects($this->once())->method('setContentSent');
         $responseSender = new PhpEnvironmentResponseSender();
         ob_start();
         $responseSender($mockSendResponseEvent);
         $body = ob_get_clean();
         $this->assertEquals('body', $body);
+
+        ob_start();
+        $responseSender($mockSendResponseEvent);
+        $body = ob_get_clean();
+        $this->assertEquals('', $body);
     }
 
-    protected function getSendResponseEventMock($response)
+    protected function getSendResponseEventMock()
     {
-        $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse'));
-        $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($response));
+        $returnValue = false;
+        $mockSendResponseEvent = $this->getMock(
+            'Zend\Mvc\ResponseSender\SendResponseEvent',
+            array('getResponse', 'contentSent', 'setContentSent')
+        );
+        $mockSendResponseEvent->expects($this->any())
+            ->method('contentSent')
+            ->will($this->returnCallback(function() use (&$returnValue) {
+                if (false === $returnValue) {
+                    $returnValue = true;
+                    return false;
+                }
+                return true;
+        }));
         return $mockSendResponseEvent;
     }
+
 }

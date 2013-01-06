@@ -15,24 +15,9 @@ use Zend\Stdlib\StringUtils;
 
 class StringUtilsTest extends TestCase
 {
-
-    protected $bufferedWrappers;
-
-    public function setUp()
-    {
-        $this->bufferedWrappers = StringUtils::getRegisteredWrappers();
-    }
-
     public function tearDown()
     {
-        // reset registered wrappers
-        foreach (StringUtils::getRegisteredWrappers() as $wrapper) {
-            StringUtils::unregisterWrapper($wrapper);
-        }
-        foreach ($this->bufferedWrappers as $wrapper) {
-            StringUtils::registerWrapper($wrapper);
-        }
-
+        StringUtils::resetRegisteredWrappers();
     }
 
     public function getSingleByEncodings()

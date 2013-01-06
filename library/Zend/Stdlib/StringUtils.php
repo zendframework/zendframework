@@ -29,7 +29,7 @@ abstract class StringUtils
      *
      * @var StringWrapperInterface[]
      */
-    protected static $wrapperRegistry;
+    protected static $wrapperRegistry = null;
 
     /**
      * A list of known single-byte character encodings (upper-case)
@@ -99,6 +99,16 @@ abstract class StringUtils
         if ($index !== false) {
             unset(static::$wrapperRegistry[$index]);
         }
+    }
+
+    /**
+     * Reset all registered wrappers so the default wrappers will be used
+     *
+     * @return void
+     */
+    public static function resetRegisteredWrappers()
+    {
+        static::$wrapperRegistry = null;
     }
 
     /**

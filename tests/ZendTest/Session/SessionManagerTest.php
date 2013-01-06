@@ -56,7 +56,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         }
         return false;
     }
-    
+
     public function testManagerUsesSessionConfigByDefault()
     {
         $config = $this->manager->getConfig();
@@ -529,7 +529,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
     }
-    
+
     /**
      * @runInSeparateProcess
      */
@@ -538,5 +538,5 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->setSaveHandler(new TestAsset\TestSaveHandlerWithValidator);
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
-    }	
+    }
 }

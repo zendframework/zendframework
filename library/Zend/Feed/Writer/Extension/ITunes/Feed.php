@@ -47,7 +47,7 @@ class Feed
      */
     public function __construct()
     {
-        $this->stringWrapper = StringUtils::getWrapper($this->getEncoding());
+        $this->stringWrapper = StringUtils::getWrapper($this->encoding);
     }
 
     /**

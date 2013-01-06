@@ -27,10 +27,10 @@ abstract class AbstractResponseSender
      */
     public function sendHeaders(SendResponseEvent $event)
     {
-        $response = $event->getResponse();
         if (headers_sent() || $event->headersSent()) {
             return $this;
         }
+        $response = $event->getResponse();
         $status  = $response->renderStatusLine();
         header($status);
         foreach ($response->getHeaders() as $header) {

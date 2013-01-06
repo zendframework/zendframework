@@ -115,5 +115,5 @@ interface StringWrapperInterface
      * @param  integer $padType
      * @return string
      */
-    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT);
+    public function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT);
 }

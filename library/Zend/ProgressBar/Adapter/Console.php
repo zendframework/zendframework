@@ -443,7 +443,7 @@ class Console extends AbstractAdapter
                         substr($text, 0, $this->textWidth),
                         $this->textWidth,
                         ' ',
-                        \STR_PAD_RIGHT
+                        STR_PAD_RIGHT
                     );
                     break;
             }

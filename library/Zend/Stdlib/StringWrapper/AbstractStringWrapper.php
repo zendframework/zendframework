@@ -232,7 +232,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param  integer $padType
      * @return string
      */
-    public function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT)
+    public function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT)
     {
         if (StringUtils::isSingleByteEncoding($this->getEncoding())) {
             return str_pad($input, $padLength, $padString, $padType);
@@ -250,7 +250,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
 
         $repeatCount = floor($lengthOfPadding / $padStringLength);
 
-        if ($padType === \STR_PAD_BOTH) {
+        if ($padType === STR_PAD_BOTH) {
             $lastStringLeft  = '';
             $lastStringRight = '';
             $repeatCountLeft = $repeatCountRight = ($repeatCount - $repeatCount % 2) / 2;
@@ -269,7 +269,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
 
         $lastString = $this->substr($padString, 0, $lengthOfPadding % $padStringLength);
 
-        if ($padType === \STR_PAD_LEFT) {
+        if ($padType === STR_PAD_LEFT) {
             return str_repeat($padString, $repeatCount) . $lastString . $input;
         }
 

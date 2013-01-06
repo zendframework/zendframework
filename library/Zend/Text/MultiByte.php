@@ -57,7 +57,7 @@ class MultiByte
      * @return string
      * @deprecated Please use Zend\Stdlib\StringUtils instead
      */
-    public static function strPad($input, $padLength, $padString = ' ', $padType = \STR_PAD_RIGHT, $charset = 'utf-8')
+    public static function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT, $charset = 'utf-8')
     {
         trigger_error(sprintf(
             "This method is deprecated, please use '%s' instead",

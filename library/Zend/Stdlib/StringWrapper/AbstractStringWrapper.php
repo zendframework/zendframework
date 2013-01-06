@@ -163,7 +163,6 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         }
 
         $width = (int) $width;
-        $cut   = (bool) $cut;
         if ($width === 0 && $cut) {
             throw new Exception\InvalidArgumentException('Cannot force cut when width is zero');
         }

@@ -12,6 +12,7 @@ namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\Reflection;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
@@ -247,5 +248,49 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->classMethodsCamelCaseMissing, $test);
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), '2');
+    }
+
+    public function testHydratorClassMethodsManipulateFilter()
+    {
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+
+        $this->assertTrue(isset($datas['fooBar']));
+        $this->assertEquals($datas['fooBar'], '1');
+        $this->assertTrue(isset($datas['fooBarBaz']));
+        $this->assertFalse(isset($datas['foo_bar']));
+        $this->assertTrue(isset($datas['isFoo']));
+        $this->assertEquals($datas['isFoo'], true);
+        $this->assertTrue(isset($datas['isBar']));
+        $this->assertEquals($datas['isBar'], true);
+        $this->assertTrue(isset($datas['hasFoo']));
+        $this->assertEquals($datas['hasFoo'], true);
+        $this->assertTrue(isset($datas['hasBar']));
+        $this->assertEquals($datas['hasBar'], true);
+
+        $hydrator->removeFilter('has');
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+        $this->assertTrue(isset($datas['hasFoo'])); //method is getHasFoo
+        $this->assertFalse(isset($datas['hasBar'])); //method is hasBar
+    }
+
+    public function testHydratorClassMethodsWithCostumFilter()
+    {
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+        $hydrator->addFilter("exclude",
+            function($property) {
+                list($class, $method) = explode('::', $property);
+
+                if($method == 'getHasFoo') {
+                    return false;
+                }
+
+                return true;
+            }, FilterComposite::CONDITION_AND
+        );
+
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+        $this->assertFalse(isset($datas['hasFoo']));
     }
 }

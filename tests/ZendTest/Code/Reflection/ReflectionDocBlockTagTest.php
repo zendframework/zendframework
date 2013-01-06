@@ -27,7 +27,8 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $authorTag = $classReflection->getDocBlock()->getTag('author');
-        $this->assertEquals('Ralph Schindler <ralph.schindler@zend.com>', $authorTag->getContent());
+        $this->assertEquals('Ralph Schindler', $authorTag->getAuthorName());
+        $this->assertEquals('ralph.schindler@zend.com', $authorTag->getAuthorEmail());
     }
 
     public function testTagShouldAllowJustTagNameInDocBlockTagLine()

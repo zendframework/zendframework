@@ -90,7 +90,6 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         return $this;
     }
 
-
     /**
      * Get the defined character encoding to work with
      *

@@ -138,77 +138,107 @@ abstract class CommonStringWrapperTest extends TestCase
     {
         return array(
             // Standard cut tests
-            array('utf-8', 'äbüöcß', 2, ' ', true,
+            array('Word wrap cut single-line',
+                  'utf-8', 'äbüöcß', 2, ' ', true,
                  'äb üö cß'),
-            array('utf-8', 'äbüöc ß äbüöcß', 2, ' ', true,
+            array('Word wrap cut multi-line',
+                  'utf-8', 'äbüöc ß äbüöcß', 2, ' ', true,
                   'äb üö c ß äb üö cß'),
-            array('utf-8', 'Ä very long wöööööööööööörd.', 8, "\n", true,
+            array('Word wrap cut multi-line short words',
+                  'utf-8', 'Ä very long wöööööööööööörd.', 8, "\n", true,
                   "Ä very\nlong\nwööööööö\nööööörd."),
-            array('utf-8', "Ä very\nlong wöööööööööööörd.", 8, "\n", false,
+            array('Word wrap cut multi-line with previous new lines',
+                  'utf-8', "Ä very\nlong wöööööööööööörd.", 8, "\n", false,
                   "Ä very\nlong\nwöööööööööööörd."),
-            array('utf-8', "Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false,
+            array('Word wrap long break',
+                  'utf-8', "Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false,
                   "Ä very<br>long wöö<br>öööööööö<br>öörd."),
 
             // Alternative cut tests
-            array('utf-8', ' äüöäöü', 3, ' ', true,
+            array('Word wrap cut beginning single space',
+                  'utf-8', ' äüöäöü', 3, ' ', true,
                   ' äüö äöü'),
-            array('utf-8', 'äüöäöü ', 3, ' ', true,
+            array('Word wrap cut ending single space',
+                  'utf-8', 'äüöäöü ', 3, ' ', true,
                   'äüö äöü '),
-            array('utf-8', 'äöüäöü ', 3, '-', true,
+            array('Word wrap cut ending single space with non space divider',
+                  'utf-8', 'äöüäöü ', 3, '-', true,
                   'äöü-äöü-'),
-            array('utf-8', 'äüöäöü  ', 3, ' ', true,
+            array('Word wrap cut ending two spaces',
+                  'utf-8', 'äüöäöü  ', 3, ' ', true,
                   'äüö äöü  '),
-            array('utf-8', '12345 ', 5, '-', false,
+            array('Word wrap no cut ending single space',
+                  'utf-8', '12345 ', 5, '-', false,
                   '12345-'),
-            array('utf-8', '12345  ', 5, '-', false,
+            array('Word wrap no cut ending two spaces',
+                  'utf-8', '12345  ', 5, '-', false,
                   '12345- '),
-            array('utf-8', 'äüöäöü  ', 3, ' ', true,
+            array('Word wrap cut ending three spaces',
+                  'utf-8', 'äüöäöü  ', 3, ' ', true,
                   'äüö äöü  '),
-            array('utf-8', 'äüöäöü--', 3, '-', true,
+            array('Word wrap cut ending two breaks',
+                  'utf-8', 'äüöäöü--', 3, '-', true,
                   'äüö-äöü--'),
-            array('utf-8', "äbü\töcß", 3, ' ', true,
+            array('Word wrap cut tab',
+                  'utf-8', "äbü\töcß", 3, ' ', true,
                   "äbü \töc ß"),
-            array('utf-8', "äbü\nößt", 3, ' ', true,
+            array('Word wrap cut new-line with space',
+                  'utf-8', "äbü\nößt", 3, ' ', true,
                   "äbü \nöß t"),
-            array('utf-8', "äbü\nößte", 3, "\n", true,
+            array('Word wrap cut new-line with new-line',
+                  'utf-8', "äbü\nößte", 3, "\n", true,
                   "äbü\nößt\ne"),
 
             // Break cut tests
-            array('ascii', 'foobar-foofoofoo', 8, '-', true,
+            array('Word wrap cut break before',
+                  'ascii', 'foobar-foofoofoo', 8, '-', true,
                   'foobar-foofoofo-o'),
-            array('ascii', 'foobar-foobar', 6, '-', true,
+            array('Word wrap cut break with',
+                  'ascii', 'foobar-foobar', 6, '-', true,
                   'foobar-foobar'),
-            array('ascii', 'foobar-foobar', 7, '-', true,
+            array('Word wrap cut break within',
+                  'ascii', 'foobar-foobar', 7, '-', true,
                   'foobar-foobar'),
-            array('ascii', 'foobar-', 7, '-', true,
+            array('Word wrap cut break within end',
+                  'ascii', 'foobar-', 7, '-', true,
                   'foobar-'),
-            array('ascii', 'foobar-foobar', 5, '-', true,
+            array('Word wrap cut break after',
+                  'ascii', 'foobar-foobar', 5, '-', true,
                   'fooba-r-fooba-r'),
 
             // Standard no-cut tests
-            array('utf-8', 'äbüöcß', 2, ' ', false,
+            array('Word wrap no cut single-line',
+                  'utf-8', 'äbüöcß', 2, ' ', false,
                   'äbüöcß'),
-            array('utf-8', 'äbüöc ß äbüöcß', 2, "\n", false,
+            array('Word wrap no cut multi-line',
+                  'utf-8', 'äbüöc ß äbüöcß', 2, "\n", false,
                   "äbüöc\nß\näbüöcß"),
-            array('utf-8', 'äöü äöü äöü', 5, "\n", false,
+            array('Word wrap no cut multi-word',
+                  'utf-8', 'äöü äöü äöü', 5, "\n", false,
                   "äöü\näöü\näöü"),
 
             // Break no-cut tests
-            array('ascii', 'foobar-foofoofoo', 8, '-', false,
+            array('Word wrap no cut break before',
+                  'ascii', 'foobar-foofoofoo', 8, '-', false,
                   'foobar-foofoofoo'),
-            array('ascii', 'foobar-foobar', 6, '-', false,
+            array('Word wrap no cut break with',
+                  'ascii', 'foobar-foobar', 6, '-', false,
                   'foobar-foobar'),
-            array('ascii', 'foobar-foobar', 7, '-', false,
+            array('Word wrap no cut break within',
+                  'ascii', 'foobar-foobar', 7, '-', false,
                   'foobar-foobar'),
-            array('ascii', 'foobar-', 7, '-', false,
+            array('Word wrap no cut break within end',
+                  'ascii', 'foobar-', 7, '-', false,
                   'foobar-'),
-            array('ascii', 'foobar-foobar', 5, '-', false,
+            array('Word wrap no cut break after',
+                  'ascii', 'foobar-foobar', 5, '-', false,
                   'foobar-foobar'),
         );
     }
 
     /**
      * @dataProvider wordWrapProvider
+     * @param string  $shortDesc
      * @param string  $encoding
      * @param string  $str
      * @param integer $width
@@ -216,7 +246,7 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param boolean $cut
      * @param mixed   $expected
      */
-    public function testWordWrap($encoding, $string, $width, $break, $cut, $expected)
+    public function testWordWrap($shortDesc, $encoding, $string, $width, $break, $cut, $expected)
     {
         $wrapper = $this->getWrapper($encoding);
         if (!$wrapper) {
@@ -245,24 +275,34 @@ abstract class CommonStringWrapperTest extends TestCase
     {
         return array(
             // single-byte
-            array('ascii', 'aaa', 5, 'o', STR_PAD_LEFT, 'ooaaa'),
-            array('ascii', 'aaa', 6, 'o', STR_PAD_BOTH, 'oaaaoo'),
-            array('ascii', 'aaa', 5, 'o', STR_PAD_RIGHT, 'aaaoo'),
+            array('Left padding - single byte',
+                  'ascii', 'aaa', 5, 'o', STR_PAD_LEFT, 'ooaaa'),
+            array('Center padding - single byte',
+                  'ascii', 'aaa', 6, 'o', STR_PAD_BOTH, 'oaaaoo'),
+            array('Right padding - single byte',
+                  'ascii', 'aaa', 5, 'o', STR_PAD_RIGHT, 'aaaoo'),
 
             // multi-byte
-            array('utf-8', 'äää', 5, 'ö', STR_PAD_LEFT, 'ööäää'),
-            array('utf-8', 'äää', 6, 'ö', STR_PAD_BOTH, 'öäääöö'),
-            array('utf-8', 'äää', 5, 'ö', STR_PAD_RIGHT, 'äääöö'),
+            array('Left padding - multi-byte',
+                  'utf-8', 'äää', 5, 'ö', STR_PAD_LEFT, 'ööäää'),
+            array('Center padding - multi byte',
+                  'utf-8', 'äää', 6, 'ö', STR_PAD_BOTH, 'öäääöö'),
+            array('Right padding - multi-byte',
+                  'utf-8', 'äää', 5, 'ö', STR_PAD_RIGHT, 'äääöö'),
 
             // ZF-12186
-            array('utf-8', 'äääöö', 2, 'ö', STR_PAD_RIGHT, 'äääöö'),  // PadInputLongerThanPadLength
-            array('utf-8', 'äääöö', 5, 'ö', STR_PAD_RIGHT, 'äääöö'),  // PadInputSameAsPadLength
-            array('utf-8', 'äääöö', -2, 'ö', STR_PAD_RIGHT, 'äääöö'), // PadNegativePadLength
+            array('Input longer than pad length',
+                  'utf-8', 'äääöö', 2, 'ö', STR_PAD_RIGHT, 'äääöö'),
+            array('Input same as pad length',
+                  'utf-8', 'äääöö', 5, 'ö', STR_PAD_RIGHT, 'äääöö'),
+            array('Negative pad length',
+                  'utf-8', 'äääöö', -2, 'ö', STR_PAD_RIGHT, 'äääöö'),
         );
     }
 
     /**
      * @dataProvider strPadProvider
+     * @param  string  $shortDesc
      * @param  string  $encoding
      * @param  string  $input
      * @param  integer $padLength
@@ -272,7 +312,7 @@ abstract class CommonStringWrapperTest extends TestCase
      *
      * @group ZF-12186
      */
-    public function testStrPad($encoding, $input, $padLength, $padString, $padType, $expected)
+    public function testStrPad($shortDesc, $encoding, $input, $padLength, $padString, $padType, $expected)
     {
         $wrapper = $this->getWrapper($encoding);
         if (!$wrapper) {

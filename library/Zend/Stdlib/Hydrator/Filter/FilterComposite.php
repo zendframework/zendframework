@@ -9,6 +9,8 @@
  */
 namespace Zend\Stdlib\Hydrator\Filter;
 
+use Zend\Stdlib\Exception\InvalidArgumentException;
+
 /**
  * @category   Zend
  * @package    Zend_Stdlib
@@ -36,9 +38,39 @@ class FilterComposite implements FilterInterface
 
     /**
      * Define default Filter
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct($orFilter = array(), $andFilter = array())
     {
+        array_walk($orFilter,
+            function($value, $key) {
+                if(
+                    !is_callable($value) &&
+                    !$value instanceof FilterInterface
+                ) {
+                    throw new InvalidArgumentException(
+                        'The value of ' . $key . ' should be either a callable or ' .
+                        'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
+                    );
+                }
+            }
+        );
+
+        array_walk($andFilter,
+            function($value, $key) {
+                if(
+                    !is_callable($value) &&
+                    !$value instanceof FilterInterface
+                ) {
+                    throw new InvalidArgumentException(
+                        'The value of ' . $key . '  should be either a callable or ' .
+                        'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
+                    );
+                }
+            }
+        );
+
         $this->orFilter = new \ArrayObject($orFilter);
         $this->andFilter = new \ArrayObject($andFilter);
     }
@@ -62,6 +94,7 @@ class FilterComposite implements FilterInterface
      * @param string $name
      * @param callable|FilterInterface $filter
      * @param int $condition Can be either FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
+     * @throws InvalidArgumentException
      */
     public function addFilter($name, $filter, $condition = self::CONDITION_OR)
     {
@@ -71,10 +104,14 @@ class FilterComposite implements FilterInterface
         ) {
             if ($condition === self::CONDITION_OR) {
                 $this->orFilter[$name] = $filter;
-            }
-            if ($condition === self::CONDITION_AND) {
+            } elseif ($condition === self::CONDITION_AND) {
                 $this->andFilter[$name] = $filter;
             }
+        } else {
+            throw new InvalidArgumentException(
+                'The value of ' . $name . ' should be either a callable or ' .
+                'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
+            );
         }
     }
 

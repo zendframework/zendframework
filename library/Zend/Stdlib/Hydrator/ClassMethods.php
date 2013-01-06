@@ -78,7 +78,6 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
     {
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
-
         return $this;
     }
 
@@ -88,7 +87,6 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function getUnderscoreSeparatedKeys()
     {
         return $this->underscoreSeparatedKeys;
-
     }
 
     /**

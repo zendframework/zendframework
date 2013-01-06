@@ -12,56 +12,56 @@ namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 
-class ValidationCompositeTest extends \PHPUnit_Framework_TestCase
+class FilterCompositeTest extends \PHPUnit_Framework_TestCase
 {
-    protected $validatorComposite;
+    protected $filterComposite;
 
     public function setUp()
     {
-        $this->validatorComposite = new FilterComposite();
+        $this->filterComposite = new FilterComposite();
     }
 
     public function testValidationAdd()
     {
-        $this->assertTrue($this->validatorComposite->filter("foo"));
-        $this->validatorComposite->addFilter("has",
+        $this->assertTrue($this->filterComposite->filter("foo"));
+        $this->filterComposite->addFilter("has",
             function($property) {
                 return false;
             }
         );
-        $this->assertFalse($this->validatorComposite->filter("foo"));
+        $this->assertFalse($this->filterComposite->filter("foo"));
     }
 
     public function testValidationRemove()
     {
-        $this->validatorComposite->addFilter("has",
+        $this->filterComposite->addFilter("has",
             function($property) {
                 return false;
             }
         );
-        $this->assertFalse($this->validatorComposite->filter("foo"));
-        $this->validatorComposite->removeFilter("has");
-        $this->assertTrue($this->validatorComposite->filter("foo"));
+        $this->assertFalse($this->filterComposite->filter("foo"));
+        $this->filterComposite->removeFilter("has");
+        $this->assertTrue($this->filterComposite->filter("foo"));
     }
 
     public function testValidationHas()
     {
-        $this->validatorComposite->addFilter("has",
+        $this->filterComposite->addFilter("has",
             function($property) {
                 return false;
             }
         );
-        $this->assertFalse($this->validatorComposite->filter("foo"));
-        $this->assertTrue($this->validatorComposite->hasFilter("has"));
+        $this->assertFalse($this->filterComposite->filter("foo"));
+        $this->assertTrue($this->filterComposite->hasFilter("has"));
     }
 
     public function testComplexValidation()
     {
-        $this->validatorComposite->addFilter("has", new \Zend\Stdlib\Hydrator\Filter\HasFilter());
-        $this->validatorComposite->addFilter("get", new \Zend\Stdlib\Hydrator\Filter\GetFilter());
-        $this->validatorComposite->addFilter("is", new \Zend\Stdlib\Hydrator\Filter\IsFilter());
+        $this->filterComposite->addFilter("has", new \Zend\Stdlib\Hydrator\Filter\HasFilter());
+        $this->filterComposite->addFilter("get", new \Zend\Stdlib\Hydrator\Filter\GetFilter());
+        $this->filterComposite->addFilter("is", new \Zend\Stdlib\Hydrator\Filter\IsFilter());
 
-        $this->validatorComposite->addFilter("exclude",
+        $this->filterComposite->addFilter("exclude",
             function($property) {
                 $method = substr($property, strpos($property, '::'));
 
@@ -73,7 +73,59 @@ class ValidationCompositeTest extends \PHPUnit_Framework_TestCase
             }, FilterComposite::CONDITION_AND
         );
 
-        $this->assertTrue($this->validatorComposite->filter('getFooBar'));
-        $this->assertFalse($this->validatorComposite->filter('getServiceLocator'));
+        $this->assertTrue($this->filterComposite->filter('getFooBar'));
+        $this->assertFalse($this->filterComposite->filter('getServiceLocator'));
+    }
+
+    public function testConstructorInjection()
+    {
+        $andCondition = array(
+            'servicelocator' => function($property) {
+                if($property === 'getServiceLocator') {
+                    return false;
+                }
+                return true;
+            },
+            'foobar' => function($property) {
+                if($property === 'getFooBar') {
+                    return false;
+                }
+                return true;
+            }
+        );
+        $orCondition = array(
+            'has' => new \Zend\Stdlib\Hydrator\Filter\HasFilter(),
+            'get' => new \Zend\Stdlib\Hydrator\Filter\GetFilter()
+        );
+        $filterComposite = new FilterComposite($orCondition, $andCondition);
+
+        $this->assertFalse($filterComposite->filter('getFooBar'));
+        $this->assertFalse($filterComposite->filter('geTFooBar'));
+        $this->assertFalse($filterComposite->filter('getServiceLocator'));
+        $this->assertTrue($filterComposite->filter('getFoo'));
+        $this->assertTrue($filterComposite->filter('hasFoo'));
+    }
+
+    /**
+     * @expectedException Zend\Stdlib\Exception\InvalidArgumentException
+     * @expectedExceptionMessage The value of test should be either a callable
+     * or an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface
+     */
+    public function testInvalidParameterConstructorInjection()
+    {
+        $andCondition = array('foo' => 'bar');
+        $orCondition = array('test' => 'blubb');
+
+        new FilterComposite($orCondition, $andCondition);
+    }
+
+    /**
+     * @expectedException Zend\Stdlib\Exception\InvalidArgumentException
+     * @expectedExceptionMessage The value of foo should be either a callable
+     * or an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface
+     */
+    public function testInvalidFilterInjection()
+    {
+        $this->filterComposite->addFilter('foo', 'bar');
     }
 }

@@ -56,6 +56,8 @@ class TagManager
         $this->addTagPrototype(new Tag\ReturnTag());
         $this->addTagPrototype(new Tag\MethodTag());
         $this->addTagPrototype(new Tag\PropertyTag());
+        $this->addTagPrototype(new Tag\AuthorTag());
+        $this->addTagPrototype(new Tag\LicenseTag());
         $this->addTagPrototype(new Tag\ThrowsTag());
         $this->addTagPrototype(new Tag\GenericTag());
     }

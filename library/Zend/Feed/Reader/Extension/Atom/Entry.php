@@ -175,13 +175,11 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateCreated) {
-            if( $dateCreated[19] === '.'){
+            $format = DateTime::ISO8601;
+            if ($dateCreated[19] === '.') {
                 $format = 'Y-m-d\TH:i:s.uO';
-            } else {
-                $format = DateTime::ISO8601;
             }
-            
-            $date = DateTime::createFromFormat( $format, $dateCreated);
+            $date = DateTime::createFromFormat($format, $dateCreated);
         }
 
         $this->data['datecreated'] = $date;
@@ -209,7 +207,11 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateModified) {
-            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
+            $format = DateTime::ISO8601;
+            if ($dateCreated[19] === '.') {
+                $format = 'Y-m-d\TH:i:s.uO';
+            }
+            $date = DateTime::createFromFormat($format, $dateCreated);
         }
 
         $this->data['datemodified'] = $date;

@@ -50,7 +50,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
     /**
      * Is doctype XHTML?
      *
-     * @return boolean
+     * @return bool
      */
     protected function isXhtml()
     {

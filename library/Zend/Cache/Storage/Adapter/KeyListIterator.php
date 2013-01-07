@@ -137,7 +137,7 @@ class KeyListIterator implements IteratorInterface, Countable
     /**
      * Checks if current position is valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

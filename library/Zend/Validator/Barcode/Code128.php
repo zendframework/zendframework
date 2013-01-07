@@ -76,7 +76,7 @@ class Code128 extends AbstractAdapter
      * Checks for allowed characters within the barcode
      *
      * @param  string $value The barcode to check for allowed characters
-     * @return boolean
+     * @return bool
      */
     public function hasValidCharacters($value)
     {
@@ -164,7 +164,7 @@ class Code128 extends AbstractAdapter
      * Validates the checksum ()
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function code128($value)
     {

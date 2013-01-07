@@ -121,8 +121,8 @@ class Barcode extends AbstractValidator
     /**
      * Sets if checksum should be validated, if no value is given the actual setting is returned
      *
-     * @param  boolean $checksum
-     * @return boolean
+     * @param  bool $checksum
+     * @return bool
      */
     public function useChecksum($checksum = null)
     {
@@ -135,7 +135,7 @@ class Barcode extends AbstractValidator
      * Returns true if and only if $value contains a valid barcode
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

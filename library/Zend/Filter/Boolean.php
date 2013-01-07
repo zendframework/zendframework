@@ -139,21 +139,21 @@ class Boolean extends AbstractFilter
     /**
      * Set the working mode
      *
-     * @param  boolean $flag When true this filter works like cast
+     * @param  bool $flag When true this filter works like cast
      *                       When false it recognises only true and false
      *                       and all other values are returned as is
      * @return Boolean
      */
     public function setCasting($flag = true)
     {
-        $this->options['casting'] = (boolean) $flag;
+        $this->options['casting'] = (bool) $flag;
         return $this;
     }
 
     /**
      * Returns the casting option
      *
-     * @return boolean
+     * @return bool
      */
     public function getCasting()
     {

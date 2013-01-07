@@ -34,7 +34,7 @@ interface AdapterInterface
      *
      * @param string  $host
      * @param int     $port
-     * @param boolean $secure
+     * @param  bool $secure
      */
     public function connect($host, $port = 80, $secure = false);
 

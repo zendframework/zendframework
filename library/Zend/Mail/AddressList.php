@@ -114,7 +114,7 @@ class AddressList implements Countable, Iterator
      * Get an address by email
      *
      * @param  string $email
-     * @return boolean|Address\AddressInterface
+     * @return bool|Address\AddressInterface
      */
     public function get($email)
     {

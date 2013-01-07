@@ -50,7 +50,7 @@ interface AttributeTypeInterface
     /**
      * Returns if the attribute is single-valued.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSingleValued();
 

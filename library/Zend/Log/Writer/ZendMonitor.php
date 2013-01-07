@@ -20,14 +20,14 @@ class ZendMonitor extends AbstractWriter
     /**
      * Is Zend Monitor enabled?
      *
-     * @var boolean
+     * @var bool
      */
     protected $isEnabled = true;
 
     /**
      * Is this for a Zend Server instance?
      *
-     * @var boolean
+     * @var bool
      */
     protected $isZendServer = false;
 
@@ -53,7 +53,7 @@ class ZendMonitor extends AbstractWriter
      * fail silently. You can query this method to determine if the log
      * writer is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {

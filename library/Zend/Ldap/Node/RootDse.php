@@ -86,7 +86,7 @@ class RootDse extends AbstractNode
      * Determines if the version is supported
      *
      * @param  string|int|array $versions version(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsVersion($versions)
     {
@@ -97,7 +97,7 @@ class RootDse extends AbstractNode
      * Determines if the sasl mechanism is supported
      *
      * @param  string|array $mechlist SASL mechanisms to check
-     * @return boolean
+     * @return bool
      */
     public function supportsSaslMechanism($mechlist)
     {

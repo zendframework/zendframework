@@ -22,7 +22,7 @@ abstract class Rand
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
      * @param  integer $length
-     * @param  boolean $strong true if you need a strong random generator (cryptography)
+     * @param  bool $strong true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -64,13 +64,13 @@ abstract class Rand
     /**
      * Generate random boolean
      *
-     * @param  boolean $strong true if you need a strong random generator (cryptography)
+     * @param  bool $strong true if you need a strong random generator (cryptography)
      * @return bool
      */
     public static function getBoolean($strong = false)
     {
         $byte = static::getBytes(1, $strong);
-        return (boolean) (ord($byte) % 2);
+        return (bool) (ord($byte) % 2);
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class Rand
      *
      * @param  integer $min
      * @param  integer $max
-     * @param  boolean $strong true if you need a strong random generator (cryptography)
+     * @param  bool $strong true if you need a strong random generator (cryptography)
      * @return integer
      * @throws Exception\DomainException
      */
@@ -118,7 +118,7 @@ abstract class Rand
      * and we fix the exponent to the bias (1023). In this way we generate
      * a float of 1.mantissa.
      *
-     * @param  boolean $strong  true if you need a strong random generator (cryptography)
+     * @param  bool $strong  true if you need a strong random generator (cryptography)
      * @return float
      */
     public static function getFloat($strong = false)
@@ -139,7 +139,7 @@ abstract class Rand
      *
      * @param  integer $length
      * @param  string|null $charlist
-     * @param  boolean $strong  true if you need a strong random generator (cryptography)
+     * @param  bool $strong  true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\DomainException
      */

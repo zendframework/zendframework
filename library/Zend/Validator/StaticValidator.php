@@ -53,7 +53,7 @@ class StaticValidator
      * @param  mixed    $value
      * @param  string   $classBaseName
      * @param  array    $args          OPTIONAL
-     * @return boolean
+     * @return bool
      */
     public static function execute($value, $classBaseName, array $args = array())
     {

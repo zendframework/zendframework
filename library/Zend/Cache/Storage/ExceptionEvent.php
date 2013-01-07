@@ -30,7 +30,7 @@ class ExceptionEvent extends PostEvent
     /**
      * Throw the exception or use the result
      *
-     * @var boolean
+     * @var bool
      */
     protected $throwException = true;
 
@@ -76,7 +76,7 @@ class ExceptionEvent extends PostEvent
     /**
      * Throw the exception or use the result
      *
-     * @param  boolean $flag
+     * @param  bool $flag
      * @return ExceptionEvent
      */
     public function setThrowException($flag)
@@ -88,7 +88,7 @@ class ExceptionEvent extends PostEvent
     /**
      * Throw the exception or use the result
      *
-     * @return boolean
+     * @return bool
      */
     public function getThrowException()
     {

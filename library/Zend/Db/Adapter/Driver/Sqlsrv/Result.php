@@ -26,13 +26,13 @@ class Result implements \Iterator, ResultInterface
     protected $resource = null;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $currentData = false;
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $currentComplete = false;
 
@@ -105,7 +105,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Next
      *
-     * @return boolean
+     * @return bool
      */
     public function next()
     {
@@ -140,7 +140,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Rewind
      *
-     * @return boolean
+     * @return bool
      */
     public function rewind()
     {
@@ -152,7 +152,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -184,7 +184,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Is query result
      *
-     * @return boolean
+     * @return bool
      */
     public function isQueryResult()
     {

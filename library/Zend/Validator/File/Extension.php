@@ -92,7 +92,7 @@ class Extension extends AbstractValidator
     /**
      * Returns the case option
      *
-     * @return boolean
+     * @return bool
      */
     public function getCase()
     {
@@ -102,12 +102,12 @@ class Extension extends AbstractValidator
     /**
      * Sets the case to use
      *
-     * @param  boolean $case
+     * @param  bool $case
      * @return Extension Provides a fluent interface
      */
     public function setCase($case)
     {
-        $this->options['case'] = (boolean) $case;
+        $this->options['case'] = (bool) $case;
         return $this;
     }
 
@@ -176,7 +176,7 @@ class Extension extends AbstractValidator
      *
      * @param  string  $value Real file to check for extension
      * @param  array   $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

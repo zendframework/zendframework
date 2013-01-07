@@ -24,14 +24,14 @@ class JsPull extends AbstractAdapter
     /**
      * Whether to exit after json data send or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $exitAfterSend = true;
 
     /**
      * Set whether to exit after json data send or not
      *
-     * @param  boolean $exitAfterSend
+     * @param  bool $exitAfterSend
      * @return \Zend\ProgressBar\Adapter\JsPull
      */
     public function setExitAfterSend($exitAfterSend)

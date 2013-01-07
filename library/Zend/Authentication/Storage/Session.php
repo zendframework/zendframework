@@ -92,7 +92,7 @@ class Session implements StorageInterface
     /**
      * Defined by Zend\Authentication\Storage\StorageInterface
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty()
     {

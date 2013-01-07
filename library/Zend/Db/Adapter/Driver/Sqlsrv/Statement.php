@@ -59,7 +59,7 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isPrepared = false;
 

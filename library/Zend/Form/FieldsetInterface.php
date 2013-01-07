@@ -117,7 +117,7 @@ interface FieldsetInterface extends
      * Checks if the object can be set in this fieldset
      *
      * @param $object
-     * @return boolean
+     * @return bool
      */
     public function allowObjectBinding($object);
 
@@ -147,7 +147,7 @@ interface FieldsetInterface extends
     /**
      * Checks if this fieldset can bind data
      *
-     * @return boolean
+     * @return bool
      */
     public function allowValueBinding();
 }

@@ -94,7 +94,7 @@ class Result
     /**
      * Returns whether the result represents a successful authentication attempt
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {

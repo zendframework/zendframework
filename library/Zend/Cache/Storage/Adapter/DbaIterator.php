@@ -51,7 +51,7 @@ class DbaIterator implements IteratorInterface
     /**
      * The current internal key
      *
-     * @var string|boolean
+     * @var string|bool
      */
     protected $currentInternalKey;
 
@@ -167,7 +167,7 @@ class DbaIterator implements IteratorInterface
     /**
      * Checks if current position is valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

@@ -30,7 +30,7 @@ class ErrorException extends Exception\ErrorException implements ExceptionInterf
     /**
      * Construct
      *
-     * @param boolean $errors
+     * @param  bool $errors
      */
     public function __construct($errors = false)
     {

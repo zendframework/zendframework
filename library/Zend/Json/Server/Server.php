@@ -268,7 +268,7 @@ class Server extends AbstractServer
      *
      * The response is always available via {@link getResponse()}.
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return Server
      */
     public function setReturnResponse($flag = true)
@@ -280,7 +280,7 @@ class Server extends AbstractServer
     /**
      * Retrieve return response flag
      *
-     * @return boolean
+     * @return bool
      */
     public function getReturnResponse()
     {

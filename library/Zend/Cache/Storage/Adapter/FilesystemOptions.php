@@ -34,7 +34,7 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Call clearstatcache enabled?
      *
-     * @var boolean
+     * @var bool
      */
     protected $clearStatCache = true;
 
@@ -55,7 +55,7 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Lock files on writing
      *
-     * @var boolean
+     * @var bool
      */
     protected $fileLocking = true;
 
@@ -85,14 +85,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Don't get 'fileatime' as 'atime' on metadata
      *
-     * @var boolean
+     * @var bool
      */
     protected $noAtime = true;
 
     /**
      * Don't get 'filectime' as 'ctime' on metadata
      *
-     * @var boolean
+     * @var bool
      */
     protected $noCtime = true;
 

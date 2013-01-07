@@ -29,7 +29,7 @@ class Cache extends ServerCache
      *
      * @param  string $filename
      * @param  \Zend\Json\Server\Server $server
-     * @return boolean
+     * @return bool
      */
     public static function saveSmd($filename, Server $server)
     {

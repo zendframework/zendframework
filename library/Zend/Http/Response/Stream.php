@@ -55,7 +55,7 @@ class Stream extends Response
     /**
      * Should we clean up the stream file when this response is closed?
      *
-     * @var boolean
+     * @var bool
      */
     protected $cleanup;
 
@@ -84,7 +84,7 @@ class Stream extends Response
     /**
      * Get the cleanup trigger
      *
-     * @return boolean
+     * @return bool
      */
     public function getCleanup()
     {

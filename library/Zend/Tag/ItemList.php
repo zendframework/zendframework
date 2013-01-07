@@ -154,7 +154,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -175,7 +175,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * Check if an offset exists
      *
      * @param  mixed $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {

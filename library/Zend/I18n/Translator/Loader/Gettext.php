@@ -34,7 +34,7 @@ class Gettext implements FileLoaderInterface
     /**
      * Whether the current file is little endian.
      *
-     * @var boolean
+     * @var bool
      */
     protected $littleEndian;
 

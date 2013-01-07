@@ -296,7 +296,7 @@ class Sendmail implements TransportInterface
      * @param string $errfile
      * @param string $errline
      * @param array  $errcontext
-     * @return boolean always true
+     * @return bool always true
      */
     public function handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {

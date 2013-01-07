@@ -951,5 +951,4 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
         );
     }
-
 }

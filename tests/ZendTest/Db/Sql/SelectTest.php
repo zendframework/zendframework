@@ -18,7 +18,7 @@ use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\Sql92;
 
-class SelectTest extends \PHPUnit_Framework_TestCase
+class test extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -39,6 +39,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->from('foo', 'bar');
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -61,6 +62,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->columns(array('foo', 'bar'));
         $this->assertSame($select, $return);
+
         return $select;
     }
 
@@ -96,6 +98,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->join('foo', 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -295,6 +298,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->group(array('col1', 'col2'));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -320,6 +324,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->having(array('x = ?' => 5));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -896,7 +901,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"', '"bar"')), '"foo"')
         );
 
-
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -904,6 +908,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
          * $sqlStr = the sql as a result of getting a string back
          * $internalTests what the internal functions should return (safe-guarding extension)
          */
+
         return array(
             //    $select    $sqlPrep    $params     $sqlStr    $internalTests    // use named param
             array($select0,  $sqlPrep0,  array(),    $sqlStr0,  $internalTests0),

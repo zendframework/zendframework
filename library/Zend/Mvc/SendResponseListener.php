@@ -17,6 +17,7 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ResponseSender\ConsoleResponseSender;
 use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
+use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 use Zend\Mvc\ResponseSender\SendResponseEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 
@@ -43,14 +44,6 @@ class SendResponseListener implements
      * @var EventManagerInterface
      */
     protected $eventManager;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->event = new SendResponseEvent();
-    }
 
     /**
      * Inject an EventManager instance
@@ -123,14 +116,46 @@ class SendResponseListener implements
         if (!$response instanceof Response) {
             return; // there is no response to send
         }
-        $event = $this->event;
+        $event = $this->getEvent();
         $event->setResponse($response);
         $event->setTarget($this);
         $this->getEventManager()->trigger($event);
     }
 
     /**
+     * Get the send response event
+     *
+     * @return SendResponseEvent
+     */
+    public function getEvent()
+    {
+        if (!$this->event instanceof SendResponseEvent) {
+            $this->event = new SendResponseEvent();
+        }
+        return $this->event;
+    }
+
+    /**
+     * Set the send response event
+     *
+     * @param SendResponseEvent $e
+     * @return SendResponseEvent
+     */
+    public function setEvent(SendResponseEvent $e)
+    {
+        $this->event = $e;
+        return $this;
+    }
+
+    /**
      * Register the default event listeners
+     *
+     * The order in which the response sender are listed here, is by their usage:
+     * PhpEnvironmentResponseSender has highest priority, because it's used most often.
+     * ConsoleResponseSender and SimpleStreamResponseSender are not used that often, yo they have a lower priority.
+     * You can attach your response sender before or after every default response sender implementation.
+     * All default response sender implementation have negative priority.
+     * You are able to attach listeners without giving a priority and your response sender would be first to try.
      *
      * @return SendResponseListener
      */
@@ -139,6 +164,7 @@ class SendResponseListener implements
         $events = $this->getEventManager();
         $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new PhpEnvironmentResponseSender(), -1000);
         $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new ConsoleResponseSender(), -2000);
+        $events->attach(SendResponseEvent::EVENT_SEND_RESPONSE, new SimpleStreamResponseSender(), -3000);
     }
 
 }

@@ -10,47 +10,46 @@
 
 namespace Zend\Mvc\ResponseSender;
 
-use Zend\Mvc\ResponseSender\SendResponseEvent;
 use Zend\Http\Header\MultipleHeaderInterface;
-use Zend\Http\PhpEnvironment\Response;
+use Zend\Http\Response\Stream;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-class PhpEnvironmentResponseSender extends AbstractResponseSender implements ResponseSenderInterface
+class SimpleStreamResponseSender extends AbstractResponseSender implements ResponseSenderInterface
 {
 
     /**
-     * Send content
+     * Send the stream
      *
      * @param SendResponseEvent $event
-     * @return PhpEnvironmentResponseSender
+     * @return SimpleStreamResponseSender
      */
-    public function sendContent(SendResponseEvent $event)
+    public function sendStream(SendResponseEvent $event)
     {
         if ($event->contentSent()) {
             return $this;
         }
         $response = $event->getResponse();
-        echo $response->getContent();
+        $stream = $response->getStream();
+        fpassthru($stream);
         $event->setContentSent();
-        return $this;
     }
 
     /**
-     * Send HTTP response
+     * Send stream response
      *
      * @param SendResponseEvent $event
-     * @return PhpEnvironmentResponseSender
+     * @return SimpleStreamResponseSender
      */
     public function __invoke(SendResponseEvent $event)
     {
         $response = $event->getResponse();
-        if ($response instanceof Response) {
-            $this->sendHeaders($event)
-                 ->sendContent($event);
+        if ($response instanceof Stream) {
+            $this->sendHeaders($event);
+            $this->sendStream($event);
             $event->stopPropagation(true);
         }
         return $this;

@@ -10,11 +10,11 @@
 
 namespace Zend\Stdlib\Hydrator;
 
-use Zend\Stdlib\Exception,
-    Zend\Stdlib\Hydrator\Filter\FilterComposite,
-    Zend\Stdlib\Hydrator\Filter\IsFilter,
-    Zend\Stdlib\Hydrator\Filter\GetFilter,
-    Zend\Stdlib\Hydrator\Filter\HasFilter;
+use Zend\Stdlib\Exception;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
+use Zend\Stdlib\Hydrator\Filter\GetFilter;
+use Zend\Stdlib\Hydrator\Filter\HasFilter;
+use Zend\Stdlib\Hydrator\Filter\IsFilter;
 
 /**
  * @category   Zend

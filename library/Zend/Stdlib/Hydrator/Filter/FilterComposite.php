@@ -9,6 +9,7 @@
  */
 namespace Zend\Stdlib\Hydrator\Filter;
 
+use ArrayObject;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 
 /**
@@ -19,11 +20,12 @@ use Zend\Stdlib\Exception\InvalidArgumentException;
 class FilterComposite implements FilterInterface
 {
     /**
-     * @var \ArrayObject
+     * @var ArrayObject
      */
     protected $orFilter;
+
     /**
-     * @var \ArrayObject
+     * @var ArrayObject
      */
     protected $andFilter;
 
@@ -31,6 +33,7 @@ class FilterComposite implements FilterInterface
      * Constant to add with "or" conditition
      */
     const CONDITION_OR = 1;
+
     /**
      * Constant to add with "and" conditition
      */
@@ -46,8 +49,8 @@ class FilterComposite implements FilterInterface
         array_walk($orFilter,
             function($value, $key) {
                 if(
-                    !is_callable($value) &&
-                    !$value instanceof FilterInterface
+                    !is_callable($value)
+                    && !$value instanceof FilterInterface
                 ) {
                     throw new InvalidArgumentException(
                         'The value of ' . $key . ' should be either a callable or ' .
@@ -60,8 +63,8 @@ class FilterComposite implements FilterInterface
         array_walk($andFilter,
             function($value, $key) {
                 if(
-                    !is_callable($value) &&
-                    !$value instanceof FilterInterface
+                    !is_callable($value)
+                    && !$value instanceof FilterInterface
                 ) {
                     throw new InvalidArgumentException(
                         'The value of ' . $key . '  should be either a callable or ' .
@@ -71,8 +74,8 @@ class FilterComposite implements FilterInterface
             }
         );
 
-        $this->orFilter = new \ArrayObject($orFilter);
-        $this->andFilter = new \ArrayObject($andFilter);
+        $this->orFilter = new ArrayObject($orFilter);
+        $this->andFilter = new ArrayObject($andFilter);
     }
 
     /**
@@ -95,30 +98,31 @@ class FilterComposite implements FilterInterface
      * @param callable|FilterInterface $filter
      * @param int $condition Can be either FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
      * @throws InvalidArgumentException
+     * @return FilterComposite
      */
     public function addFilter($name, $filter, $condition = self::CONDITION_OR)
     {
-        if (
-            is_callable($filter) ||
-            $filter instanceof FilterInterface
-        ) {
-            if ($condition === self::CONDITION_OR) {
-                $this->orFilter[$name] = $filter;
-            } elseif ($condition === self::CONDITION_AND) {
-                $this->andFilter[$name] = $filter;
-            }
-        } else {
+        if ( !is_callable($filter) && !($filter instanceof FilterInterface) ) {
             throw new InvalidArgumentException(
                 'The value of ' . $name . ' should be either a callable or ' .
                 'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
             );
         }
+
+        if ($condition === self::CONDITION_OR) {
+            $this->orFilter[$name] = $filter;
+        } elseif ($condition === self::CONDITION_AND) {
+            $this->andFilter[$name] = $filter;
+        }
+
+        return $this;
     }
 
     /**
      * Remove a filter from the composition
      *
      * @param $name string Identifier for the filter
+     * @return FilterComposite
      */
     public function removeFilter($name)
     {
@@ -129,6 +133,8 @@ class FilterComposite implements FilterInterface
         if( isset($this->andFilter[$name])) {
             unset($this->andFilter[$name]);
         }
+
+        return $this;
     }
 
     /**
@@ -139,8 +145,7 @@ class FilterComposite implements FilterInterface
      */
     public function hasFilter($name)
     {
-        return
-            isset($this->orFilter[$name]) || isset($this->andFilter[$name]);
+        return isset($this->orFilter[$name]) || isset($this->andFilter[$name]);
     }
 
     /**
@@ -170,6 +175,7 @@ class FilterComposite implements FilterInterface
                     $returnValue = true;
                     break;
                 }
+                continue;
             } else {
                 if ( $filter->filter($property) === true) {
                     $returnValue = true;
@@ -184,6 +190,7 @@ class FilterComposite implements FilterInterface
                 if( $filter($property) === false) {
                     return false;
                 }
+                continue;
             } else {
                 if( $filter->filter($property) === false) {
                     return false;

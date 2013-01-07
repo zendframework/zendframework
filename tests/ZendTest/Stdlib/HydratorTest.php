@@ -274,7 +274,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($datas['hasBar'])); //method is hasBar
     }
 
-    public function testHydratorClassMethodsWithCostumFilter()
+    public function testHydratorClassMethodsWithCustomFilter()
     {
         $hydrator = new ClassMethods(false);
         $datas = $hydrator->extract($this->classMethodsCamelCase);

@@ -12,6 +12,7 @@
 namespace ZendTest\Stdlib\StringWrapper;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
@@ -132,6 +133,22 @@ abstract class CommonStringWrapperTest extends TestCase
         // backword
         $result = $wrapper->convert($expected, true);
         $this->assertSame($str, $result);
+    }
+
+    public function testConvertDontSubstringsOnInvalidCharacter()
+    {
+        $wrapper = $this->getWrapper('UTF-8', 'ASCII');
+        if (!$wrapper) {
+            $this->markTestSkipped("Converting UTF-8 to ASCII not supported");
+        }
+
+        // NOTE: This call could trigger a notice/warning/error
+        // but that isn't part of this test
+        ErrorHandler::start(E_NOTICE);
+        $result = $wrapper->convert($wrapper->convert("foo \xDEx bar"), true);
+        ErrorHandler::stop();
+
+        $this->assertSame("foo x bar", $result);
     }
 
     public function wordWrapProvider()

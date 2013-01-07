@@ -290,6 +290,9 @@ class Iconv extends AbstractStringWrapper
 
         $fromEncoding = $reverse ? $convertEncoding : $encoding;
         $toEncoding   = $reverse ? $encoding : $convertEncoding;
-        return iconv($fromEncoding, $toEncoding, $str);
+
+        // automatically add "//IGNORE" to not stop converting on invalid characters
+        // invalid characters triggers a notice anyway
+        return iconv($fromEncoding, $toEncoding . '//IGNORE', $str);
     }
 }

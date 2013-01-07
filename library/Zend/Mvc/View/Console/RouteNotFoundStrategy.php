@@ -51,7 +51,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     /**
      * The reason for a not-found condition
      *
-     * @var boolean|string
+     * @var bool|string
      */
     protected $reason = false;
 

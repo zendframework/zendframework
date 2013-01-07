@@ -31,7 +31,7 @@ class ExcludeMimeType extends MimeType
      * mime types will not be accepted like "image/gif", "image/jpeg" and so on.
      *
      * @param  string|array $value Real file to check for mimetype
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

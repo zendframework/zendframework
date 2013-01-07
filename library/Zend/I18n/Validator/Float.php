@@ -90,7 +90,7 @@ class Float extends AbstractValidator
      * Returns true if and only if $value is a floating-point value
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      * @throws Exception\InvalidArgumentException
      */
     public function isValid($value)

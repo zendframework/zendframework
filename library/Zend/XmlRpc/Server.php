@@ -120,7 +120,7 @@ class Server extends AbstractServer
     /**
      * Flag: whether or not {@link handle()} should return a response instead
      * of automatically emitting it.
-     * @var boolean
+     * @var bool
      */
     protected $returnResponse = false;
 
@@ -259,7 +259,7 @@ class Server extends AbstractServer
      *
      * The response is always available via {@link getResponse()}.
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return Server
      */
     public function setReturnResponse($flag = true)
@@ -271,7 +271,7 @@ class Server extends AbstractServer
     /**
      * Retrieve return response flag
      *
-     * @return boolean
+     * @return bool
      */
     public function getReturnResponse()
     {
@@ -435,7 +435,7 @@ class Server extends AbstractServer
      *
      * @param  string $class
      * @throws Server\Exception\InvalidArgumentException if invalid response class
-     * @return boolean True if class was set, false if not
+     * @return bool True if class was set, false if not
      */
     public function setResponseClass($class)
     {

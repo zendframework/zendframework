@@ -572,8 +572,8 @@ class Wsdl
     /**
      * Echo the WSDL as XML to stdout or save the WSDL to a file
      *
-     * @param bool|string $filename Filename to save the output (Optional)
-     * @return boolean
+     * @param  bool|string $filename Filename to save the output (Optional)
+     * @return bool
      */
     public function dump($filename = false)
     {

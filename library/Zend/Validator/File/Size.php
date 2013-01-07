@@ -97,7 +97,7 @@ class Size extends AbstractValidator
     /**
      * Should messages return bytes as integer or as string in SI notation
      *
-     * @param  boolean $byteString Use bytestring ?
+     * @param  bool $byteString Use bytestring ?
      * @return integer
      */
     public function useByteString($byteString = true)
@@ -109,7 +109,7 @@ class Size extends AbstractValidator
     /**
      * Will bytestring be used?
      *
-     * @return boolean
+     * @return bool
      */
     public function getByteString()
     {
@@ -233,7 +233,7 @@ class Size extends AbstractValidator
      * not bigger than max (when max is not null).
      *
      * @param  string|array $value File to check for size
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

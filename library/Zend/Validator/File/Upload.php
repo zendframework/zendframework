@@ -55,7 +55,7 @@ class Upload extends AbstractValidator
      * Returns true if and only if the file was uploaded without errors
      *
      * @param  string $value File to check for upload errors
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

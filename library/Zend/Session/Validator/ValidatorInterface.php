@@ -23,7 +23,7 @@ interface ValidatorInterface
      * every session to determine if the current environment matches
      * that which was store in the setup() procedure.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid();
 

@@ -54,7 +54,7 @@ class Alpha extends Alnum
      * Returns true if and only if $value contains only alphabetic characters
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

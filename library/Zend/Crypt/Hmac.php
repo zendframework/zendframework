@@ -36,7 +36,7 @@ class Hmac
      * @param  string  $key
      * @param  string  $hash
      * @param  string  $data
-     * @param  boolean $output
+     * @param  bool $output
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -60,7 +60,7 @@ class Hmac
      * Get the output size according to the hash algorithm and the output format
      *
      * @param  string  $hash
-     * @param  boolean $output
+     * @param  bool $output
      * @return integer
      */
     public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
@@ -82,7 +82,7 @@ class Hmac
      * Is the hash algorithm supported?
      *
      * @param  string $algorithm
-     * @return boolean
+     * @return bool
      */
     public static function isSupported($algorithm)
     {

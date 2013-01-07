@@ -84,7 +84,7 @@ class Sha1 extends Hash
      * Returns true if and only if the given file confirms the set hash
      *
      * @param  string $value|array Filename to check for hash
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

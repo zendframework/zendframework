@@ -45,7 +45,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     /**
      * The Alphabet means english alphabet.
      *
-     * @var boolean
+     * @var bool
      */
     protected static $meansEnglishAlphabet;
 

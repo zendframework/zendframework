@@ -156,7 +156,7 @@ class NotEmpty extends AbstractValidator
      * Returns true if and only if $value is not an empty value.
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

@@ -44,7 +44,7 @@ class Code39 extends AbstractAdapter
      * Validates the checksum (Modulo 43)
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function code39($value)
     {

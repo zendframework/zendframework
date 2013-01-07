@@ -36,7 +36,7 @@ class NotExists extends Exists
      * Returns true if and only if the file does not exist in the set destinations
      *
      * @param  string|array $value Real file to check for existence
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

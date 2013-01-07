@@ -96,7 +96,7 @@ abstract class Barcode
      * @param  mixed $renderer        String name of renderer class
      * @param  mixed $barcodeConfig   OPTIONAL; an array or Traversable object with barcode parameters.
      * @param  mixed $rendererConfig  OPTIONAL; an array or Traversable object with renderer parameters.
-     * @param  boolean $automaticRenderError  OPTIONAL; set the automatic rendering of exception
+     * @param  bool $automaticRenderError  OPTIONAL; set the automatic rendering of exception
      * @return Barcode
      * @throws Exception\ExceptionInterface
      */

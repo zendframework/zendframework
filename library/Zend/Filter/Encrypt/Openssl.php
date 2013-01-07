@@ -55,7 +55,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Internal create package
      *
-     * @var boolean
+     * @var bool
      */
     protected $package = false;
 
@@ -312,7 +312,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Returns if header should be packaged
      *
-     * @return boolean
+     * @return bool
      */
     public function getPackage()
     {
@@ -322,12 +322,12 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets if the envelope keys should be included in the encrypted value
      *
-     * @param boolean $package
+     * @param  bool $package
      * @return Openssl
      */
     public function setPackage($package)
     {
-        $this->package = (boolean) $package;
+        $this->package = (bool) $package;
         return $this;
     }
 

@@ -323,7 +323,7 @@ class ImageSize extends AbstractValidator
      * not bigger than max
      *
      * @param  string|array $value Real file to check for image size
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

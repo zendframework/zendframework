@@ -115,7 +115,7 @@ class Callback extends AbstractValidator
      *
      * @param  mixed $value
      * @param  mixed $context Additional context to provide to the callback
-     * @return boolean
+     * @return bool
      * @throws Exception\InvalidArgumentException
      */
     public function isValid($value, $context = null)

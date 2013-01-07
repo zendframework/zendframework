@@ -333,7 +333,7 @@ class Smd
      * Get service object
      *
      * @param  string $name
-     * @return boolean|Smd\Service
+     * @return bool|Smd\Service
      */
     public function getService($name)
     {
@@ -357,7 +357,7 @@ class Smd
      * Remove service
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function removeService($name)
     {

@@ -98,7 +98,7 @@ class Date extends AbstractValidator
      * according to DateTime
      *
      * @param  string|array|int|DateTime $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

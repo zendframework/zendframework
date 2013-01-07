@@ -26,7 +26,7 @@ class eDirectory extends Node\RootDse
      * Determines if the extension is supported
      *
      * @param  string|array $oids oid(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsExtension($oids)
     {

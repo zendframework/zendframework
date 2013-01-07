@@ -431,7 +431,7 @@ class Service
      * Validate parameter type
      *
      * @param string  $type
-     * @param boolean $isReturn
+     * @param  bool $isReturn
      * @return string
      * @throws InvalidArgumentException
      */

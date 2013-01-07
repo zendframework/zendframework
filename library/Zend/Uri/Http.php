@@ -57,7 +57,7 @@ class Http extends Uri
      * This applies additional HTTP specific validation rules beyond the ones
      * required by the generic URI syntax
      *
-     * @return boolean
+     * @return bool
      * @see    Uri::isValid()
      */
     public function isValid()
@@ -127,7 +127,7 @@ class Http extends Uri
      *
      * @param  string  $host
      * @param  integer $allowed
-     * @return boolean
+     * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
     {

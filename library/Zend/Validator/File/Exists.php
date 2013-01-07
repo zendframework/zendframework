@@ -70,7 +70,7 @@ class Exists extends AbstractValidator
     /**
      * Returns the set file directories which are checked
      *
-     * @param  boolean $asArray Returns the values as array, when false an concatenated string is returned
+     * @param  bool $asArray Returns the values as array; when false, a concatenated string is returned
      * @return string|null
      */
     public function getDirectory($asArray = false)
@@ -143,7 +143,7 @@ class Exists extends AbstractValidator
      * Returns true if and only if the file already exists in the set directories
      *
      * @param  string|array $value Real file to check for existence
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

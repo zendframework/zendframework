@@ -121,7 +121,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @see ParameterObject::__isset()
      * @param string $key
-     * @return boolean
+     * @return bool
      */
     public function __isset($key)
     {

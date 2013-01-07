@@ -153,7 +153,7 @@ class Cookies
      * checking cookie expiry time.
      *
      * @param string|Uri\Uri $uri URI to check against (secure, domain, path)
-     * @param boolean $matchSessionCookies Whether to send session cookies
+     * @param  bool $matchSessionCookies Whether to send session cookies
      * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
      * @param int $now Override the current time when checking for expiry time
      * @throws Exception\InvalidArgumentException if invalid URI
@@ -390,7 +390,7 @@ class Cookies
      * @param mixed $offset <p>
      * An offset to check for.
      * </p>
-     * @return boolean Returns true on success or false on failure.
+     * @return bool Returns true on success or false on failure.
      * </p>
      * <p>
      * The return value will be casted to boolean if non-boolean was returned.

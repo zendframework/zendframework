@@ -65,7 +65,7 @@ abstract class ErrorHandler
     /**
      * Stopping the error handler
      *
-     * @param  boolean $throw Throw the ErrorException if any
+     * @param  bool $throw Throw the ErrorException if any
      * @return null|ErrorException
      * @throws ErrorException If an error has been catched and $throw is true
      */

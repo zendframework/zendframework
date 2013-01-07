@@ -159,8 +159,8 @@ class Cookies extends Headers
      * checking cookie expiry time.
      *
      * @param string|Uri\Uri $uri URI to check against (secure, domain, path)
-     * @param boolean $matchSessionCookies Whether to send session cookies
-     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
+     * @param bool $matchSessionCookies Whether to send session cookies
+     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
      * @param int $now Override the current time when checking for expiry time
      * @throws Exception\InvalidArgumentException if invalid URI specified
      * @return array|string

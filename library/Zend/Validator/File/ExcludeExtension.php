@@ -39,7 +39,7 @@ class ExcludeExtension extends Extension
      * set extension list
      *
      * @param  string|array $value Real file to check for extension
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

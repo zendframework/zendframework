@@ -135,7 +135,7 @@ class Between extends AbstractValidator
     /**
      * Returns the inclusive option
      *
-     * @return boolean
+     * @return bool
      */
     public function getInclusive()
     {
@@ -145,7 +145,7 @@ class Between extends AbstractValidator
     /**
      * Sets the inclusive option
      *
-     * @param  boolean $inclusive
+     * @param  bool $inclusive
      * @return Between Provides a fluent interface
      */
     public function setInclusive($inclusive)
@@ -159,7 +159,7 @@ class Between extends AbstractValidator
      * if inclusive option is true.
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

@@ -466,7 +466,7 @@ class Request extends AbstractMessage implements RequestInterface
      *
      * Should work with Prototype/Script.aculo.us, possibly others.
      *
-     * @return boolean
+     * @return bool
      */
     public function isXmlHttpRequest()
     {
@@ -477,7 +477,7 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * Is this a Flash request?
      *
-     * @return boolean
+     * @return bool
      */
     public function isFlashRequest()
     {

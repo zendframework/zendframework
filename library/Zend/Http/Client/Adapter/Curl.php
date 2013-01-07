@@ -178,7 +178,7 @@ class Curl implements HttpAdapter, StreamInterface
      *
      * @param  string  $host
      * @param  int     $port
-     * @param  boolean $secure
+     * @param  bool $secure
      * @return void
      * @throws AdapterException\RuntimeException if unable to connect
      */

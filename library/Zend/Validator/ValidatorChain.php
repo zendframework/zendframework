@@ -94,7 +94,7 @@ class ValidatorChain implements
      * if one exists, will not be executed.
      *
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function attach(ValidatorInterface $validator, $breakChainOnFailure = false)
@@ -126,7 +126,7 @@ class ValidatorChain implements
      * if one exists, will not be executed.
      *
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
@@ -192,7 +192,7 @@ class ValidatorChain implements
      *
      * @param  mixed $value
      * @param  mixed $context Extra "context" to provide the validator
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $context = null)
     {
@@ -252,7 +252,7 @@ class ValidatorChain implements
      * Invoke chain as command
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function __invoke($value)
     {

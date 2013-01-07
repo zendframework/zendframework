@@ -380,7 +380,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      * @see Part::hasHeader
      *
      * @param  string
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {

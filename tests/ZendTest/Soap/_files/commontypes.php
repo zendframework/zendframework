@@ -197,7 +197,7 @@ class Zend_Soap_AutoDiscoverTestClass2
     /**
      *
      * @param Zend_Soap_AutoDiscoverTestClass1 $test
-     * @return boolean
+     * @return bool
      */
     public function add(Zend_Soap_AutoDiscoverTestClass1 $test)
     {
@@ -275,7 +275,7 @@ class Zend_Soap_Wsdl_ComplexTest
 class Zend_Soap_Wsdl_ComplexObjectStructure
 {
     /**
-     * @var boolean
+     * @var bool
      */
     public $boolean = true;
 

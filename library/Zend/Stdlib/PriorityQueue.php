@@ -88,7 +88,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * instances.
      *
      * @param  mixed $datum
-     * @return boolean False if the item was not found, true otherwise.
+     * @return bool False if the item was not found, true otherwise.
      */
     public function remove($datum)
     {

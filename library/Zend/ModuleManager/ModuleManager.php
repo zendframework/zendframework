@@ -38,7 +38,7 @@ class ModuleManager implements ModuleManagerInterface
     protected $event;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $loadFinished;
 

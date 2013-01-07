@@ -21,13 +21,13 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
-     * @var boolean
+     * @var bool
      */
     protected $underscoreSeparatedKeys = true;
 
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean|array $underscoreSeparatedKeys
+     * @param bool|array $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {

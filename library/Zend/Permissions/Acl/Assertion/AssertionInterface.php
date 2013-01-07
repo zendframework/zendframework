@@ -32,7 +32,7 @@ interface AssertionInterface
      * @param  RoleInterface         $role
      * @param  ResourceInterface $resource
      * @param  string                         $privilege
-     * @return boolean
+     * @return bool
      */
     public function assert(Acl $acl, RoleInterface $role = null, ResourceInterface $resource = null, $privilege = null);
 }

@@ -128,7 +128,7 @@ class Hash extends AbstractValidator
      * Returns true if and only if the given file confirms the set hash
      *
      * @param  string|array $value File to check for hash
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

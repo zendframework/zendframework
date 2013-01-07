@@ -95,7 +95,7 @@ class Http implements AdapterInterface
     /**
      * Whether to send the opaque value in the header. True by default
      *
-     * @var boolean
+     * @var bool
      */
     protected $useOpaque;
 
@@ -126,14 +126,14 @@ class Http implements AdapterInterface
      * Whether or not to do Proxy Authentication instead of origin server
      * authentication (send 407's instead of 401's). Off by default.
      *
-     * @var boolean
+     * @var bool
      */
     protected $imaProxy;
 
     /**
      * Flag indicating the client is IE and didn't bother to return the opaque string
      *
-     * @var boolean
+     * @var bool
      */
     protected $ieNoOpaque;
 

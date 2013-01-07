@@ -40,7 +40,7 @@ class StringEquals extends AbstractValidator
      * are equal to one another with string comparison.
      *
      * @param  array $value Value to validate
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

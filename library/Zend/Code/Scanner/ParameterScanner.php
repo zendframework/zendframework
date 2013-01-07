@@ -307,7 +307,7 @@ class ParameterScanner
     /**
      * Check if is array
      *
-     * @return boolean
+     * @return bool
      */
     public function isArray()
     {
@@ -319,7 +319,7 @@ class ParameterScanner
     /**
      * Check if default value is available
      *
-     * @return boolean
+     * @return bool
      */
     public function isDefaultValueAvailable()
     {
@@ -331,7 +331,7 @@ class ParameterScanner
     /**
      * Check if is optional
      *
-     * @return boolean
+     * @return bool
      */
     public function isOptional()
     {
@@ -343,7 +343,7 @@ class ParameterScanner
     /**
      * Check if is passed by reference
      *
-     * @return boolean
+     * @return bool
      */
     public function isPassedByReference()
     {

@@ -153,7 +153,7 @@ class FilesystemIterator implements IteratorInterface
     /**
      * Checks if current position is valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

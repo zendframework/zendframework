@@ -68,7 +68,7 @@ class Url extends AbstractHelper
      * @param  string  $name               Name of the route
      * @param  array   $params             Parameters for the link
      * @param  array   $options            Options for the route
-     * @param  boolean $reuseMatchedParams Whether to reuse matched parameters
+     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
      * @return string Url                  For the link href attribute
      * @throws Exception\RuntimeException  If no RouteStackInterface was provided
      * @throws Exception\RuntimeException  If no RouteMatch was provided

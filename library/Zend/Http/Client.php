@@ -462,7 +462,7 @@ class Client implements Stdlib\DispatchableInterface
      * Get the cookie Id (name+domain+path)
      *
      * @param  Header\SetCookie|Header\Cookie $cookie
-     * @return string|boolean
+     * @return string|bool
      */
     protected function getCookieId($cookie)
     {
@@ -480,8 +480,8 @@ class Client implements Stdlib\DispatchableInterface
      * @param string  $expire
      * @param string  $path
      * @param string  $domain
-     * @param boolean $secure
-     * @param boolean $httponly
+     * @param  bool $secure
+     * @param  bool $httponly
      * @param string  $maxAge
      * @param string  $version
      * @throws Exception\InvalidArgumentException
@@ -561,7 +561,7 @@ class Client implements Stdlib\DispatchableInterface
      * Check if exists the header type specified
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function hasHeader($name)
     {
@@ -578,7 +578,7 @@ class Client implements Stdlib\DispatchableInterface
      * Get the header value of the request
      *
      * @param  string $name
-     * @return string|boolean
+     * @return string|bool
      */
     public function getHeader($name)
     {
@@ -595,7 +595,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set streaming for received data
      *
-     * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
+     * @param string|bool $streamfile Stream file, true for temp file, false/null for no streaming
      * @return \Zend\Http\Client
      */
     public function setStream($streamfile = true)
@@ -606,7 +606,7 @@ class Client implements Stdlib\DispatchableInterface
 
     /**
      * Get status of streaming for received data
-     * @return boolean|string
+     * @return bool|string
      */
     public function getStream()
     {
@@ -687,7 +687,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param array $digest
      * @param null|string $entityBody
      * @throws Exception\InvalidArgumentException
-     * @return string|boolean
+     * @return string|bool
      */
     protected function calcAuthDigest($user, $password, $type = self::AUTH_BASIC, $digest = array(), $entityBody = null)
     {
@@ -991,7 +991,7 @@ class Client implements Stdlib\DispatchableInterface
      * Remove a file to upload
      *
      * @param  string $filename
-     * @return boolean
+     * @return bool
      */
     public function removeFileUpload($filename)
     {
@@ -1009,7 +1009,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param   string $domain
      * @param   string $path
      * @param   boolean $secure
-     * @return  Header\Cookie|boolean
+     * @return  Header\Cookie|bool
      */
     protected function prepareCookies($domain, $path, $secure)
     {
@@ -1303,7 +1303,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @param Http $uri
      * @param string $method
-     * @param boolean $secure
+     * @param  bool $secure
      * @param array $headers
      * @param string $body
      * @return string the raw response

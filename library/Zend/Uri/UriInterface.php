@@ -32,21 +32,21 @@ interface UriInterface
      *
      * Note that a relative URI may still be valid
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid();
 
     /**
      * Check if the URI is a valid relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidRelative();
 
     /**
      * Check if the URI is an absolute or relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbsolute();
 

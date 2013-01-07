@@ -59,7 +59,7 @@ class Regex implements FilterInterface
      * Returns TRUE to accept the message, FALSE to block it.
      *
      * @param array $event event data
-     * @return boolean accepted?
+     * @return bool accepted?
      */
     public function filter(array $event)
     {

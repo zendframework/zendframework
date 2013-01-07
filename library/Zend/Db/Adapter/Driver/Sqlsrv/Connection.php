@@ -189,7 +189,7 @@ class Connection implements ConnectionInterface
 
     /**
      * Is connected
-     * @return boolean
+     * @return bool
      */
     public function isConnected()
     {

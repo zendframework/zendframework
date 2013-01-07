@@ -171,7 +171,7 @@ class WordCount extends AbstractValidator
      * not bigger than max (when max is not null).
      *
      * @param  string $value|array Filename to check for word count
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

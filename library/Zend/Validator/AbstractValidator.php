@@ -171,7 +171,7 @@ abstract class AbstractValidator implements
      * Invoke as command
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function __invoke($value)
     {
@@ -499,7 +499,7 @@ abstract class AbstractValidator implements
     /**
      * Is there a default translation object set?
      *
-     * @return boolean
+     * @return bool
      */
     public static function hasDefaultTranslator()
     {

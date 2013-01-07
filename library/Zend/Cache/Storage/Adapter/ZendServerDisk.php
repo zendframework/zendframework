@@ -58,7 +58,7 @@ class ZendServerDisk extends AbstractZendServer implements
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush()
     {
@@ -71,7 +71,7 @@ class ZendServerDisk extends AbstractZendServer implements
      * Remove items of given namespace
      *
      * @param string $namespace
-     * @return boolean
+     * @return bool
      */
     public function clearByNamespace($namespace)
     {
@@ -183,7 +183,7 @@ class ZendServerDisk extends AbstractZendServer implements
      * Delete data from Zend Data Disk Cache
      *
      * @param  string $internalKey
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function zdcDelete($internalKey)

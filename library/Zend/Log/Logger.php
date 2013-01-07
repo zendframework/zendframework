@@ -83,14 +83,14 @@ class Logger implements LoggerInterface
     /**
      * Registered error handler
      *
-     * @var boolean
+     * @var bool
      */
     protected static $registeredErrorHandler = false;
 
     /**
      * Registered exception handler
      *
-     * @var boolean
+     * @var bool
      */
     protected static $registeredExceptionHandler = false;
 

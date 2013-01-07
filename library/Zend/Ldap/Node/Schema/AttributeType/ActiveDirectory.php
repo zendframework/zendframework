@@ -65,7 +65,7 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
     /**
      * Returns if the attribute is single-valued.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSingleValued()
     {

@@ -39,6 +39,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->from('foo', 'bar');
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -61,6 +62,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->columns(array('foo', 'bar'));
         $this->assertSame($select, $return);
+
         return $select;
     }
 
@@ -96,6 +98,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->join('foo', 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -265,13 +268,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             new Predicate\Expression('age = ?', 33),
         ));
         $select->where($predicate);
-    
+
         /** @var $where Where */
         $where = $select->getRawState('where');
         $predicates = $where->getPredicates();
         $this->assertSame($predicate, $predicates[0][1]);
     }
-    
+
     /**
      * @testdox unit test: Test where() will accept a Where object
      * @covers Zend\Db\Sql\Select::where
@@ -318,6 +321,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->group(array('col1', 'col2'));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -343,6 +347,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->having(array('x = ?' => 5));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -919,7 +924,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"', '"bar"')), '"foo"')
         );
 
-
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -927,6 +931,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
          * $sqlStr = the sql as a result of getting a string back
          * $internalTests what the internal functions should return (safe-guarding extension)
          */
+
         return array(
             //    $select    $sqlPrep    $params     $sqlStr    $internalTests    // use named param
             array($select0,  $sqlPrep0,  array(),    $sqlStr0,  $internalTests0),
@@ -969,5 +974,4 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
         );
     }
-
 }

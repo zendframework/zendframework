@@ -10,47 +10,49 @@
 
 namespace Zend\Mvc\ResponseSender;
 
-use Zend\Console\Response;
+use Zend\Http\Header\MultipleHeaderInterface;
+use Zend\Http\Response\Stream;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-class ConsoleResponseSender implements ResponseSenderInterface
+class SimpleStreamResponseSender extends AbstractResponseSender
 {
     /**
-     * Send content
+     * Send the stream
      *
      * @param  SendResponseEvent $event
-     * @return ConsoleResponseSender
+     * @return SimpleStreamResponseSender
      */
-    public function sendContent(SendResponseEvent $event)
+    public function sendStream(SendResponseEvent $event)
     {
         if ($event->contentSent()) {
             return $this;
         }
         $response = $event->getResponse();
-        echo $response->getContent();
+        $stream   = $response->getStream();
+        fpassthru($stream);
         $event->setContentSent();
-        return $this;
     }
 
     /**
-     * Send the response
+     * Send stream response
      *
      * @param  SendResponseEvent $event
+     * @return SimpleStreamResponseSender
      */
     public function __invoke(SendResponseEvent $event)
     {
         $response = $event->getResponse();
-        if (!$response instanceof Response) {
-            return;
+        if (!$response instanceof Stream) {
+            return $this;
         }
 
-        $this->sendContent($event);
-        $errorLevel = (int) $response->getMetadata('errorLevel',0);
+        $this->sendHeaders($event);
+        $this->sendStream($event);
         $event->stopPropagation(true);
-        exit($errorLevel);
+        return $this;
     }
 }

@@ -84,9 +84,7 @@ class SessionManager extends AbstractManager
         }
 
         session_start();
-        if (!$this->isValid()) {
-            throw new Exception\RuntimeException('Session validation failed');
-        }
+
         $storage = $this->getStorage();
 
         // Since session is starting, we need to potentially repopulate our
@@ -96,6 +94,9 @@ class SessionManager extends AbstractManager
                 $storage->fromArray($_SESSION);
             }
             $_SESSION = $storage;
+        }
+        if (!$this->isValid()) {
+            throw new Exception\RuntimeException('Session validation failed');
         }
     }
 

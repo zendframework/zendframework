@@ -26,7 +26,7 @@ class Xterm256
     public static function calculate($hexColor)
     {
         $hex = str_split($hexColor, 2);
-        if (count($hex) !== 3 || !preg_match('#[0-9A-F]{6}#', $hexColor)) {
+        if (count($hex) !== 3 || !preg_match('#[0-9A-F]{6}#i', $hexColor)) {
             return new static();
         }
         $ahex = array_map(function ($hex) {

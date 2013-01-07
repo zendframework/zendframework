@@ -121,7 +121,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $orderBy = $sqls[self::ORDER];
             unset($sqls[self::ORDER]);
         } else {
-            $orderBy = 'SELECT 1';
+            $orderBy = 'ORDER BY (SELECT 1)';
         }
 
         // add a column for row_number() using the order specification

@@ -41,7 +41,8 @@ class Xterm256Test extends \PHPUnit_Framework_TestCase
             $this->assertNull($code);
         }
     }
-    public function testApproximateHexCodeInputs() {
+    public function testApproximateHexCodeInputs()
+    {
         $ahexs = array(
             '000100'    => 16,
             'FF33A0'    => 199,

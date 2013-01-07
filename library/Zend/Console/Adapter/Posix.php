@@ -12,6 +12,7 @@ namespace Zend\Console\Adapter;
 
 use Zend\Console\Charset;
 use Zend\Console\Exception;
+use Zend\Console\Color\Xterm256;
 use Zend\Console\ColorInterface as Color;
 
 /**
@@ -38,7 +39,6 @@ class Posix extends AbstractAdapter
     /**
      * Map of colors to ANSI codes
      *
-     * @todo implement Xterm 256 colors (http://www.frexx.de/xterm-256-notes/)
      * @var array
      */
     protected static $ansiColorMap = array(
@@ -218,27 +218,8 @@ class Posix extends AbstractAdapter
      */
     public function colorize($string, $color = null, $bgColor = null)
     {
-        // Retrieve ansi color codes
-        if ($color !== null) {
-            if (!isset(static::$ansiColorMap['fg'][$color])) {
-                throw new Exception\BadMethodCallException(sprintf(
-                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
-                    $color
-                ));
-            }
-            $color = static::$ansiColorMap['fg'][$color];
-        }
-
-        if ($bgColor !== null) {
-            if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
-                throw new Exception\BadMethodCallException(sprintf(
-                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
-                    $bgColor
-                ));
-            }
-            $bgColor = static::$ansiColorMap['bg'][$bgColor];
-        }
-
+        $color = $this->getColorCode($color, 'fg');
+        $bgColor = $this->getColorCode($bgColor, 'bg');
         return ($color   !== null ? "\x1b[" . $color   . 'm' : '')
             . ($bgColor !== null ? "\x1b[" . $bgColor . 'm' : '')
             . $string
@@ -253,17 +234,7 @@ class Posix extends AbstractAdapter
      */
     public function setColor($color)
     {
-        // Retrieve ansi color code
-        if ($color !== null) {
-            if (!isset(static::$ansiColorMap['fg'][$color])) {
-                throw new Exception\BadMethodCallException(sprintf(
-                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
-                    $color
-                ));
-            }
-            $color = static::$ansiColorMap['fg'][$color];
-        }
-
+        $color = $this->getColorCode($color, 'fg');
         echo "\x1b[" . $color . 'm';
     }
 
@@ -275,18 +246,7 @@ class Posix extends AbstractAdapter
      */
     public function setBgColor($bgColor)
     {
-        // Retrieve ansi color code
-        if ($bgColor !== null) {
-            if (!isset(static::$ansiColorMap['bg'][$bgColor])) {
-                throw new Exception\BadMethodCallException(sprintf(
-                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants',
-                    $bgColor
-                ));
-            }
-
-            $bgColor = static::$ansiColorMap['bg'][$bgColor];
-        }
-
+        $bgColor = $this->getColorCode($bgColor, 'bg');
         echo "\x1b[" . ($bgColor) . 'm';
     }
 
@@ -401,5 +361,34 @@ class Posix extends AbstractAdapter
 
         // Set new mode
         shell_exec('stty '.escapeshellcmd($mode));
+    }
+
+    /**
+     * Get the final color code and throw exception on error
+     *
+     * @param  null|int|Xterm256 $color
+     * @throws Exception\BadMethodCallException
+     * @return string
+     */
+    protected function getColorCode($color, $type = 'fg')
+    {
+        if ($color instanceof Xterm256) {
+            $r = new \ReflectionClass($color);
+            $code = $r->getStaticPropertyValue('color');
+
+            return $type == 'fg' ? sprintf($code, $color::FOREGROUND) : sprintf($code, $color::BACKGROUND);
+        }
+        if ($color !== null) {
+            if (!isset(static::$ansiColorMap[$type][$color])) {
+                throw new Exception\BadMethodCallException(sprintf(
+                        'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants or use Zend\Console\Color\Xterm256::calculate',
+                        $color
+                ));
+            }
+
+            return static::$ansiColorMap[$type][$color];
+        }
+
+        return null;
     }
 }

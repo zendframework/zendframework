@@ -353,7 +353,7 @@ class ClassGenerator extends AbstractGenerator
 
     /**
      * @param  bool $isAbstract
-     * @return AbstractMemberGenerator
+     * @return ClassGenerator
      */
     public function setAbstract($isAbstract)
     {
@@ -370,7 +370,7 @@ class ClassGenerator extends AbstractGenerator
 
     /**
      * @param  bool $isFinal
-     * @return AbstractMemberGenerator
+     * @return ClassGenerator
      */
     public function setFinal($isFinal)
     {

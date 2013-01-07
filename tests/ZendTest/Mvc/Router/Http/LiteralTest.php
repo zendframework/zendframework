@@ -130,4 +130,14 @@ class LiteralTest extends TestCase
             )
         );
     }
+
+    /**
+     * @group ZF2-436
+     */
+    public function testEmptyLiteral()
+    {
+        $request = new Request();
+        $route = new Literal('');
+        $this->assertNull($route->match($request, 0));
+    }
 }

@@ -268,13 +268,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             new Predicate\Expression('age = ?', 33),
         ));
         $select->where($predicate);
-    
+
         /** @var $where Where */
         $where = $select->getRawState('where');
         $predicates = $where->getPredicates();
         $this->assertSame($predicate, $predicates[0][1]);
     }
-    
+
     /**
      * @testdox unit test: Test where() will accept a Where object
      * @covers Zend\Db\Sql\Select::where

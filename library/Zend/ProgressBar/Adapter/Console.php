@@ -12,6 +12,7 @@ namespace Zend\ProgressBar\Adapter;
 
 use Zend\ProgressBar\Adapter\Exception;
 use Zend\Stdlib\ErrorHandler;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Zend_ProgressBar_Adapter_Console offers a text-based progressbar for console
@@ -438,7 +439,12 @@ class Console extends AbstractAdapter
                     break;
 
                 case self::ELEMENT_TEXT:
-                    $renderedElements[] = \Zend\Text\MultiByte::strPad(substr($text, 0, $this->textWidth), $this->textWidth, ' ', STR_PAD_RIGHT, $this->charset);
+                    $renderedElements[] = StringUtils::getWrapper($this->charset)->strPad(
+                        substr($text, 0, $this->textWidth),
+                        $this->textWidth,
+                        ' ',
+                        STR_PAD_RIGHT
+                    );
                     break;
             }
         }

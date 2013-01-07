@@ -10,6 +10,7 @@
 
 namespace Zend\Text\Table;
 
+use Zend\Stdlib\StringUtils;
 use Zend\Text;
 
 /**
@@ -107,7 +108,8 @@ class Column
         if ($inputCharset !== $outputCharset) {
             if (PHP_OS !== 'AIX') {
                 // AIX does not understand these character sets
-                $content = iconv($inputCharset, $outputCharset, $content);
+                $strWrapper = StringUtils::getWrapper($inputCharset, $outputCharset);
+                $content = $strWrapper->convert($content);
             }
 
         }
@@ -203,12 +205,13 @@ class Column
         }
 
         $outputCharset = Table::getOutputCharset();
-        $lines         = explode("\n", Text\MultiByte::wordWrap($this->content, $columnWidth, "\n", true, $outputCharset));
+        $strWrapper    = StringUtils::getWrapper($outputCharset);
+        $lines         = explode("\n", $strWrapper->wordWrap($this->content, $columnWidth, "\n", true));
         $paddedLines   = array();
 
-        foreach ($lines AS $line) {
+        foreach ($lines as $line) {
             $paddedLines[] = str_repeat(' ', $padding)
-                           . Text\MultiByte::strPad($line, $columnWidth, ' ', $padMode, $outputCharset)
+                           . $strWrapper->strPad($line, $columnWidth, ' ', $padMode)
                            . str_repeat(' ', $padding);
         }
 

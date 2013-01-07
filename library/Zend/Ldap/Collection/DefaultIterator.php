@@ -197,14 +197,14 @@ class DefaultIterator implements \Iterator, \Countable
             return null;
         }
 
-        $entry          = array('dn' => $this->key());
-        $ber_identifier = null;
+        $entry         = array('dn' => $this->key());
+        $berIdentifier = null;
 
         $resource = $this->ldap->getResource();
         ErrorHandler::start();
         $name = ldap_first_attribute(
             $resource, $this->current,
-            $ber_identifier
+            $berIdentifier
         );
         ErrorHandler::stop();
 
@@ -240,7 +240,7 @@ class DefaultIterator implements \Iterator, \Countable
             ErrorHandler::start();
             $name = ldap_next_attribute(
                 $resource, $this->current,
-                $ber_identifier
+                $berIdentifier
             );
             ErrorHandler::stop();
         }

@@ -291,9 +291,9 @@ class Maildir extends AbstractStorage
      *
      * @param resource $dh            dir handle used for search
      * @param string   $dirname       dirname of dir in $dh
-     * @param array    $default_flags default flags for given dir
+     * @param array    $defaultFlags default flags for given dir
      */
-    protected function _getMaildirFiles($dh, $dirname, $default_flags = array())
+    protected function _getMaildirFiles($dh, $dirname, $defaultFlags = array())
     {
         while (($entry = readdir($dh)) !== false) {
             if ($entry[0] == '.' || !is_file($dirname . $entry)) {
@@ -318,16 +318,16 @@ class Maildir extends AbstractStorage
                 $flags = '';
             }
 
-            $named_flags = $default_flags;
+            $namedFlags = $defaultFlags;
             $length = strlen($flags);
             for ($i = 0; $i < $length; ++$i) {
                 $flag = $flags[$i];
-                $named_flags[$flag] = isset(static::$knownFlags[$flag]) ? static::$knownFlags[$flag] : $flag;
+                $namedFlags[$flag] = isset(static::$knownFlags[$flag]) ? static::$knownFlags[$flag] : $flag;
             }
 
             $data = array('uniq'       => $uniq,
-                          'flags'      => $named_flags,
-                          'flaglookup' => array_flip($named_flags),
+                          'flags'      => $namedFlags,
+                          'flaglookup' => array_flip($namedFlags),
                           'filename'   => $dirname . $entry);
             if ($size !== null) {
                 $data['size'] = (int) $size;

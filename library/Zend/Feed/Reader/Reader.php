@@ -269,7 +269,7 @@ class Reader
      */
     public static function importString($string)
     {
-        $libxml_errflag = libxml_use_internal_errors(true);
+        $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadXML(trim($string));
@@ -281,7 +281,7 @@ class Reader
             }
         }
         libxml_disable_entity_loader($oldValue);
-        libxml_use_internal_errors($libxml_errflag);
+        libxml_use_internal_errors($libxmlErrflag);
 
         if (!$status) {
             // Build error message
@@ -346,12 +346,12 @@ class Reader
             throw new Exception\RuntimeException("Failed to access $uri, got response code " . $response->getStatusCode());
         }
         $responseHtml = $response->getBody();
-        $libxml_errflag = libxml_use_internal_errors(true);
+        $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadHTML(trim($responseHtml));
         libxml_disable_entity_loader($oldValue);
-        libxml_use_internal_errors($libxml_errflag);
+        libxml_use_internal_errors($libxmlErrflag);
         if (!$status) {
             // Build error message
             $error = libxml_get_last_error();
@@ -401,14 +401,14 @@ class Reader
             ini_restore('track_errors');
             ErrorHandler::stop();
             if (!$status) {
-                if (!isset($php_errormsg)) {
+                if (!isset($phpErrormsg)) {
                     if (function_exists('xdebug_is_enabled')) {
-                        $php_errormsg = '(error message not available, when XDebug is running)';
+                        $phpErrormsg = '(error message not available, when XDebug is running)';
                     } else {
-                        $php_errormsg = '(error message not available)';
+                        $phpErrormsg = '(error message not available)';
                     }
                 }
-                throw new Exception\RuntimeException("DOMDocument cannot parse XML: $php_errormsg");
+                throw new Exception\RuntimeException("DOMDocument cannot parse XML: $phpErrormsg");
             }
         } else {
             throw new Exception\InvalidArgumentException('Invalid object/scalar provided: must'

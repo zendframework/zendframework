@@ -16,7 +16,7 @@ use Zend\Filter\Boolean as BooleanFilter;
  * AllowEmpty annotation
  *
  * Presence of this annotation is a hint that the associated
- * \Zend\InputFilter\Input should enable the allow_empty flag.
+ * \Zend\InputFilter\Input should enable the allowEmpty flag.
  *
  * @Annotation
  * @package    Zend_Form
@@ -27,7 +27,7 @@ class AllowEmpty
     /**
      * @var bool
      */
-    protected $allow_empty = true;
+    protected $allowEmpty = true;
 
     /**
      * Receive and process the contents of an annotation
@@ -40,14 +40,14 @@ class AllowEmpty
             $data['value'] = false;
         }
 
-        $allow_empty = $data['value'];
+        $allowEmpty = $data['value'];
 
-        if (!is_bool($allow_empty)) {
+        if (!is_bool($allowEmpty)) {
             $filter   = new BooleanFilter();
-            $allow_empty = $filter->filter($allow_empty);
+            $allowEmpty = $filter->filter($allowEmpty);
         }
 
-        $this->allow_empty = $allow_empty;
+        $this->allowEmpty = $allowEmpty;
     }
 
     /**
@@ -57,6 +57,6 @@ class AllowEmpty
      */
     public function getAllowEmpty()
     {
-        return $this->allow_empty;
+        return $this->allowEmpty;
     }
 }

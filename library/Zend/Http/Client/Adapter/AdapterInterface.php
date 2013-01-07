@@ -43,12 +43,12 @@ interface AdapterInterface
      *
      * @param string        $method
      * @param \Zend\Uri\Uri $url
-     * @param string        $http_ver
+     * @param string        $httpVer
      * @param array         $headers
      * @param string        $body
      * @return string Request as text
      */
-    public function write($method, $url, $http_ver = '1.1', $headers = array(), $body = '');
+    public function write($method, $url, $httpVer = '1.1', $headers = array(), $body = '');
 
     /**
      * Read response from server

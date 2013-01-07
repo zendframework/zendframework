@@ -322,9 +322,9 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
                             continue;
                         }
                     } else {
-                        $media_types = explode(',', $value);
+                        $mediaTypes = explode(',', $value);
                         $value = '';
-                        foreach ($media_types as $type) {
+                        foreach ($mediaTypes as $type) {
                             $type = trim($type);
                             if (!in_array($type, $this->mediaTypes)) {
                                 continue;

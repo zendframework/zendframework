@@ -637,7 +637,7 @@ class Getopt
     /**
      * Define help messages for options.
      *
-     * The parameter $help_map is an associative array
+     * The parameter $helpMap is an associative array
      * mapping option name (short or long) to the help string.
      *
      * @param  array $helpMap

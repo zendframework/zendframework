@@ -148,11 +148,11 @@ class Crammd5 extends Smtp
             $key = str_pad($key, $block, "\0");
         }
 
-        $k_ipad = substr($key, 0, 64) ^ str_repeat(chr(0x36), 64);
-        $k_opad = substr($key, 0, 64) ^ str_repeat(chr(0x5C), 64);
+        $kIpad = substr($key, 0, 64) ^ str_repeat(chr(0x36), 64);
+        $kOpad = substr($key, 0, 64) ^ str_repeat(chr(0x5C), 64);
 
-        $inner = pack('H32', md5($k_ipad . $data));
-        $digest = md5($k_opad . $inner);
+        $inner = pack('H32', md5($kIpad . $data));
+        $digest = md5($kOpad . $inner);
 
         return $digest;
     }

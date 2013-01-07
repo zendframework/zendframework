@@ -666,7 +666,7 @@ class Hostname extends AbstractValidator
         $char  = 0x80;
 
         for ($indexe = ($separator) ? ($separator + 1) : 0; $indexe < $lengthe; ++$lengthd) {
-            for ($old_index = $index, $pos = 1, $key = 36; 1; $key += 36) {
+            for ($oldIndex = $index, $pos = 1, $key = 36; 1; $key += 36) {
                 $hex   = ord($encoded[$indexe++]);
                 $digit = ($hex - 48 < 10) ? $hex - 22
                        : (($hex - 65 < 26) ? $hex - 65
@@ -682,7 +682,7 @@ class Hostname extends AbstractValidator
                 $pos = (int) ($pos * (36 - $tag));
             }
 
-            $delta   = intval($init ? (($index - $old_index) / 700) : (($index - $old_index) / 2));
+            $delta   = intval($init ? (($index - $oldIndex) / 700) : (($index - $oldIndex) / 2));
             $delta  += intval($delta / ($lengthd + 1));
             for ($key = 0; $delta > 910 / 2; $key += 36) {
                 $delta = intval($delta / 35);

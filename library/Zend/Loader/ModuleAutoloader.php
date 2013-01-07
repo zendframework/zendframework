@@ -160,8 +160,8 @@ class ModuleAutoloader implements SplAutoloader
                     continue;
                 }
 
-                $moduleName_buffer = str_replace($namespace . "\\", "", $moduleName );
-                $path .= DIRECTORY_SEPARATOR . $moduleName_buffer . DIRECTORY_SEPARATOR;
+                $moduleNameBuffer = str_replace($namespace . "\\", "", $moduleName );
+                $path .= DIRECTORY_SEPARATOR . $moduleNameBuffer . DIRECTORY_SEPARATOR;
 
                 $classLoaded = $this->loadModuleFromDir($path, $class);
                 if ($classLoaded) {

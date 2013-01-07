@@ -345,21 +345,21 @@ class Wsdl
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
         if (is_array($input)) {
             $node = $this->dom->createElement('input');
-            $soap_node = $this->dom->createElement($soapNs . ':body');
+            $soapNode = $this->dom->createElement($soapNs . ':body');
             foreach ($input as $name => $value) {
-                $soap_node->setAttribute($name, $this->decodeAmpersand($value));
+                $soapNode->setAttribute($name, $this->decodeAmpersand($value));
             }
-            $node->appendChild($soap_node);
+            $node->appendChild($soapNode);
             $operation->appendChild($node);
         }
 
         if (is_array($output)) {
             $node = $this->dom->createElement('output');
-            $soap_node = $this->dom->createElement($soapNs . ':body');
+            $soapNode = $this->dom->createElement($soapNs . ':body');
             foreach ($output as $name => $value) {
-                $soap_node->setAttribute($name, $this->decodeAmpersand($value));
+                $soapNode->setAttribute($name, $this->decodeAmpersand($value));
             }
-            $node->appendChild($soap_node);
+            $node->appendChild($soapNode);
             $operation->appendChild($node);
         }
 
@@ -368,11 +368,11 @@ class Wsdl
             if (isset($fault['name'])) {
                 $node->setAttribute('name', $fault['name']);
             }
-            $soap_node = $this->dom->createElement($soapNs . ':fault');
+            $soapNode = $this->dom->createElement($soapNs . ':fault');
             foreach ($fault as $name => $value) {
-                $soap_node->setAttribute($name, $this->decodeAmpersand($value));
+                $soapNode->setAttribute($name, $this->decodeAmpersand($value));
             }
-            $node->appendChild($soap_node);
+            $node->appendChild($soapNode);
             $operation->appendChild($node);
         }
 
@@ -397,48 +397,48 @@ class Wsdl
         $soapVersion = SOAP_1_1
     ) {
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
-        $soap_binding = $this->dom->createElement($soapNs . ':binding');
-        $soap_binding->setAttribute('style', $style);
-        $soap_binding->setAttribute('transport', $transport);
+        $soapBinding = $this->dom->createElement($soapNs . ':binding');
+        $soapBinding->setAttribute('style', $style);
+        $soapBinding->setAttribute('transport', $transport);
 
-        $binding->appendChild($soap_binding);
+        $binding->appendChild($soapBinding);
 
-        return $soap_binding;
+        return $soapBinding;
     }
 
     /**
      * Add a {@link http://www.w3.org/TR/wsdl#_soap:operation SOAP operation} to an operation element
      *
      * @param DOMElement $operation An operation XML_Tree_Node returned by {@link function addBindingOperation}
-     * @param string $soap_action SOAP Action
+     * @param string $soapAction SOAP Action
      * @param int $soapVersion SOAP version to be used in operation. 1.1 used by default.
      * @return DOMElement
      */
-    public function addSoapOperation($operation, $soap_action, $soapVersion = SOAP_1_1)
+    public function addSoapOperation($operation, $soapAction, $soapVersion = SOAP_1_1)
     {
-        if ($soap_action instanceof Uri) {
-            $soap_action = $soap_action->toString();
+        if ($soapAction instanceof Uri) {
+            $soapAction = $soapAction->toString();
         }
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
-        $soap_operation = $this->dom->createElement($soapNs . ':operation');
-        $soap_operation->setAttribute('soapAction', $this->decodeAmpersand($soap_action));
+        $soapOperation = $this->dom->createElement($soapNs . ':operation');
+        $soapOperation->setAttribute('soapAction', $this->decodeAmpersand($soapAction));
 
-        $operation->insertBefore($soap_operation, $operation->firstChild);
+        $operation->insertBefore($soapOperation, $operation->firstChild);
 
-        return $soap_operation;
+        return $soapOperation;
     }
 
     /**
      * Add a {@link http://www.w3.org/TR/wsdl#_services service} element to the WSDL
      *
      * @param string $name Service Name
-     * @param string $port_name Name of the port for the service
+     * @param string $portName Name of the port for the service
      * @param string $binding Binding for the port
      * @param string $location SOAP Address for the service
      * @param int $soapVersion SOAP version to be used in service. 1.1 used by default.
      * @return DOMElement The new service's XML_Tree_Node for use with {@link function addDocumentation}
      */
-    public function addService($name, $port_name, $binding, $location, $soapVersion = SOAP_1_1)
+    public function addService($name, $portName, $binding, $location, $soapVersion = SOAP_1_1)
     {
         if ($location instanceof Uri) {
             $location = $location->toString();
@@ -447,14 +447,14 @@ class Wsdl
         $service->setAttribute('name', $name);
 
         $port = $this->dom->createElement('port');
-        $port->setAttribute('name', $port_name);
+        $port->setAttribute('name', $portName);
         $port->setAttribute('binding', $binding);
 
         $soapNs = $soapVersion == SOAP_1_1 ? self::SOAP_11_NS : self::SOAP_12_NS;
-        $soap_address = $this->dom->createElement($soapNs . ':address');
-        $soap_address->setAttribute('location', $this->decodeAmpersand($location));
+        $soapAddress = $this->dom->createElement($soapNs . ':address');
+        $soapAddress->setAttribute('location', $this->decodeAmpersand($location));
 
-        $port->appendChild($soap_address);
+        $port->appendChild($soapAddress);
         $service->appendChild($port);
 
         $this->wsdl->appendChild($service);
@@ -469,21 +469,21 @@ class Wsdl
      * but the WSDL {@link http://schemas.xmlsoap.org/wsdl/ schema} uses 'documentation' instead.
      * The {@link http://www.ws-i.org/Profiles/BasicProfile-1.1-2004-08-24.html#WSDL_documentation_Element WS-I Basic Profile 1.1} recommends using 'documentation'.
      *
-     * @param DOMElement $input_node An XML_Tree_Node returned by another method to add the documentation to
+     * @param DOMElement $inputNode An XML_Tree_Node returned by another method to add the documentation to
      * @param string $documentation Human readable documentation for the node
      * @return DOMElement The documentation element
      */
-    public function addDocumentation($input_node, $documentation)
+    public function addDocumentation($inputNode, $documentation)
     {
-        if ($input_node === $this) {
+        if ($inputNode === $this) {
             $node = $this->dom->documentElement;
         } else {
-            $node = $input_node;
+            $node = $inputNode;
         }
 
         $doc = $this->dom->createElement('documentation');
-        $doc_cdata = $this->dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
-        $doc->appendChild($doc_cdata);
+        $docCData = $this->dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
+        $doc->appendChild($docCData);
 
         if ($node->hasChildNodes()) {
             $node->insertBefore($doc, $node->firstChild);

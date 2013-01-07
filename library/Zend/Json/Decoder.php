@@ -244,7 +244,7 @@ class Decoder
     protected function _decodeArray()
     {
         $result = array();
-        $starttok = $tok = $this->_getNextToken(); // Move past the '['
+        $tok = $this->_getNextToken(); // Move past the '['
         $index  = 0;
 
         while ($tok && $tok != self::RBRACKET) {

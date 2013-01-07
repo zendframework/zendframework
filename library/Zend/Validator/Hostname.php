@@ -11,6 +11,7 @@
 namespace Zend\Validator;
 
 use Zend\Stdlib\ErrorHandler;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Please note there are two standalone test scripts for testing IDN characters due to problems
@@ -485,10 +486,9 @@ class Hostname extends AbstractValidator
 
         // Check input against DNS hostname schema
         if ((count($domainParts) > 1) && (strlen($value) >= 4) && (strlen($value) <= 254)) {
-            $status = false;
+            $utf8StrWrapper = StringUtils::getWrapper('UTF-8');
+            $status         = false;
 
-            $origenc = iconv_get_encoding('internal_encoding');
-            iconv_set_encoding('internal_encoding', 'UTF-8');
             do {
                 // First check TLD
                 $matches = array();
@@ -558,7 +558,7 @@ class Hostname extends AbstractValidator
                                     $length = $this->idnLength[strtoupper($this->tld)];
                                 }
 
-                                if (iconv_strlen($domainPart, 'UTF-8') > $length) {
+                                if ($utf8StrWrapper->strlen($domainPart) > $length) {
                                     $this->error(self::INVALID_HOSTNAME);
                                 } else {
                                     $checked = true;
@@ -584,7 +584,6 @@ class Hostname extends AbstractValidator
                 }
             } while (false);
 
-            iconv_set_encoding('internal_encoding', $origenc);
             // If the input passes as an Internet domain name, and domain names are allowed, then the hostname
             // passes validation
             if ($status && ($this->getAllow() & self::ALLOW_DNS)) {

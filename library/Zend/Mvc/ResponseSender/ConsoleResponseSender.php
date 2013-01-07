@@ -22,7 +22,7 @@ class ConsoleResponseSender implements ResponseSenderInterface
     /**
      * Send content
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return ConsoleResponseSender
      */
     public function sendContent(SendResponseEvent $event)
@@ -39,18 +39,18 @@ class ConsoleResponseSender implements ResponseSenderInterface
     /**
      * Send the response
      *
-     * @param SendResponseEvent $event
-     * @return void
+     * @param  SendResponseEvent $event
      */
     public function __invoke(SendResponseEvent $event)
     {
         $response = $event->getResponse();
-        if ($response instanceof Response) {
-            $this->sendContent($event);
-            $errorLevel = (int) $response->getMetadata('errorLevel',0);
-            $event->stopPropagation(true);
-            exit($errorLevel);
+        if (!$response instanceof Response) {
+            return;
         }
-    }
 
+        $this->sendContent($event);
+        $errorLevel = (int) $response->getMetadata('errorLevel',0);
+        $event->stopPropagation(true);
+        exit($errorLevel);
+    }
 }

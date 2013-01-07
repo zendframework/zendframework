@@ -18,13 +18,12 @@ use Zend\Http\Response\Stream;
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-class SimpleStreamResponseSender extends AbstractResponseSender implements ResponseSenderInterface
+class SimpleStreamResponseSender extends AbstractResponseSender
 {
-
     /**
      * Send the stream
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return SimpleStreamResponseSender
      */
     public function sendStream(SendResponseEvent $event)
@@ -33,7 +32,7 @@ class SimpleStreamResponseSender extends AbstractResponseSender implements Respo
             return $this;
         }
         $response = $event->getResponse();
-        $stream = $response->getStream();
+        $stream   = $response->getStream();
         fpassthru($stream);
         $event->setContentSent();
     }
@@ -41,18 +40,19 @@ class SimpleStreamResponseSender extends AbstractResponseSender implements Respo
     /**
      * Send stream response
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return SimpleStreamResponseSender
      */
     public function __invoke(SendResponseEvent $event)
     {
         $response = $event->getResponse();
-        if ($response instanceof Stream) {
-            $this->sendHeaders($event);
-            $this->sendStream($event);
-            $event->stopPropagation(true);
+        if (!$response instanceof Stream) {
+            return $this;
         }
+
+        $this->sendHeaders($event);
+        $this->sendStream($event);
+        $event->stopPropagation(true);
         return $this;
     }
-
 }

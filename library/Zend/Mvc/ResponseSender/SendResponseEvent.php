@@ -118,5 +118,4 @@ class SendResponseEvent extends Event
         }
         return false;
     }
-
 }

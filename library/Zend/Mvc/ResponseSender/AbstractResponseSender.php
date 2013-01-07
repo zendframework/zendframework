@@ -17,12 +17,12 @@ use Zend\Http\Header\MultipleHeaderInterface;
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-abstract class AbstractResponseSender
+abstract class AbstractResponseSender implements ResponseSenderInterface
 {
     /**
      * Send HTTP headers
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return PhpEnvironmentResponseSender
      */
     public function sendHeaders(SendResponseEvent $event)
@@ -30,9 +30,11 @@ abstract class AbstractResponseSender
         if (headers_sent() || $event->headersSent()) {
             return $this;
         }
+
         $response = $event->getResponse();
-        $status  = $response->renderStatusLine();
+        $status   = $response->renderStatusLine();
         header($status);
+
         foreach ($response->getHeaders() as $header) {
             if ($header instanceof MultipleHeaderInterface) {
                 header($header->toString(), false);
@@ -40,8 +42,8 @@ abstract class AbstractResponseSender
             }
             header($header->toString());
         }
+
         $event->setHeadersSent();
         return $this;
     }
-
 }

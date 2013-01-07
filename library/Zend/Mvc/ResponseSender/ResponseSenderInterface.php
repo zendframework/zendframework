@@ -26,5 +26,4 @@ interface ResponseSenderInterface
      * @return void
      */
     public function __invoke(SendResponseEvent $event);
-
 }

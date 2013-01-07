@@ -19,13 +19,12 @@ use Zend\Http\PhpEnvironment\Response;
  * @package    Zend_Mvc
  * @subpackage ResponseSender
  */
-class PhpEnvironmentResponseSender extends AbstractResponseSender implements ResponseSenderInterface
+class PhpEnvironmentResponseSender extends AbstractResponseSender
 {
-
     /**
      * Send content
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return PhpEnvironmentResponseSender
      */
     public function sendContent(SendResponseEvent $event)
@@ -42,18 +41,19 @@ class PhpEnvironmentResponseSender extends AbstractResponseSender implements Res
     /**
      * Send HTTP response
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return PhpEnvironmentResponseSender
      */
     public function __invoke(SendResponseEvent $event)
     {
         $response = $event->getResponse();
-        if ($response instanceof Response) {
-            $this->sendHeaders($event)
-                 ->sendContent($event);
-            $event->stopPropagation(true);
+        if (!$response instanceof Response) {
+            return $this;
         }
+
+        $this->sendHeaders($event)
+             ->sendContent($event);
+        $event->stopPropagation(true);
         return $this;
     }
-
 }

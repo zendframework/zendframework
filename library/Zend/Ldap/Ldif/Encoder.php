@@ -185,13 +185,13 @@ class Encoder
          *                ; and less-than ("<" , ASCII 60 decimal)
          *
          */
-        $unsafe_init_char = array(0, 10, 13, 32, 58, 60);
+        $unsafeInitChar = array(0, 10, 13, 32, 58, 60);
         /*
          * SAFE-CHAR      = %x01-09 / %x0B-0C / %x0E-7F
          *                ; any value <= 127 decimal except NUL, LF,
          *                ; and CR
          */
-        $unsafe_char = array(0, 10, 13);
+        $unsafeChar = array(0, 10, 13);
 
         $base64 = false;
         for ($i = 0, $len = strlen($string); $i < $len; $i++) {
@@ -199,10 +199,10 @@ class Encoder
             if ($char >= 127) {
                 $base64 = true;
                 break;
-            } elseif ($i === 0 && in_array($char, $unsafe_init_char)) {
+            } elseif ($i === 0 && in_array($char, $unsafeInitChar)) {
                 $base64 = true;
                 break;
-            } elseif (in_array($char, $unsafe_char)) {
+            } elseif (in_array($char, $unsafeChar)) {
                 $base64 = true;
                 break;
             }

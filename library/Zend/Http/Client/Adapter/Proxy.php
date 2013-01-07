@@ -113,16 +113,16 @@ class Proxy extends Socket
      *
      * @param string        $method
      * @param \Zend\Uri\Uri $uri
-     * @param string        $http_ver
+     * @param string        $httpVer
      * @param array         $headers
      * @param string        $body
      * @throws AdapterException\RuntimeException
      * @return string Request as string
      */
-    public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
+    public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
         // If no proxy is set, fall back to default Socket adapter
-        if (! $this->config['proxy_host']) return parent::write($method, $uri, $http_ver, $headers, $body);
+        if (! $this->config['proxy_host']) return parent::write($method, $uri, $httpVer, $headers, $body);
 
         // Make sure we're properly connected
         if (! $this->socket) {
@@ -132,7 +132,7 @@ class Proxy extends Socket
         $host = $this->config['proxy_host'];
         $port = $this->config['proxy_port'];
 
-        if ($this->connected_to[0] != "tcp://$host" || $this->connected_to[1] != $port) {
+        if ($this->connectedTo[0] != "tcp://$host" || $this->connectedTo[1] != $port) {
             throw new AdapterException\RuntimeException("Trying to write but we are connected to the wrong proxy server");
         }
 
@@ -145,7 +145,7 @@ class Proxy extends Socket
 
         // if we are proxying HTTPS, preform CONNECT handshake with the proxy
         if ($uri->getScheme() == 'https' && (! $this->negotiated)) {
-            $this->connectHandshake($uri->getHost(), $uri->getPort(), $http_ver, $headers);
+            $this->connectHandshake($uri->getHost(), $uri->getPort(), $httpVer, $headers);
             $this->negotiated = true;
         }
 
@@ -158,9 +158,9 @@ class Proxy extends Socket
             if ($uri->getQuery()) {
                 $path .= '?' . $uri->getQuery();
             }
-            $request = "$method $path HTTP/$http_ver\r\n";
+            $request = "$method $path HTTP/$httpVer\r\n";
         } else {
-            $request = "$method $uri HTTP/$http_ver\r\n";
+            $request = "$method $uri HTTP/$httpVer\r\n";
         }
 
         // Add all headers to the request string
@@ -198,13 +198,13 @@ class Proxy extends Socket
      *
      * @param string  $host
      * @param integer $port
-     * @param string  $http_ver
+     * @param string  $httpVer
      * @param array   $headers
      * @throws AdapterException\RuntimeException
      */
-    protected function connectHandshake($host, $port = 443, $http_ver = '1.1', array &$headers = array())
+    protected function connectHandshake($host, $port = 443, $httpVer = '1.1', array &$headers = array())
     {
-        $request = "CONNECT $host:$port HTTP/$http_ver\r\n" .
+        $request = "CONNECT $host:$port HTTP/$httpVer\r\n" .
                    "Host: " . $this->config['proxy_host'] . "\r\n";
 
         // Add the user-agent header

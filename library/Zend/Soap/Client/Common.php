@@ -48,16 +48,16 @@ class Common extends \SoapClient
      * @param string $location
      * @param string $action
      * @param int    $version
-     * @param int    $one_way
+     * @param int    $oneWay
      * @return mixed
      */
-    public function __doRequest($request, $location, $action, $version, $one_way = null)
+    public function __doRequest($request, $location, $action, $version, $oneWay = null)
     {
-        if ($one_way === null) {
+        if ($oneWay === null) {
             return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version);
         }
 
-        return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $one_way);
+        return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $oneWay);
     }
 
 }

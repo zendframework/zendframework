@@ -78,6 +78,62 @@ class ParameterGenerator extends AbstractGenerator
     }
 
     /**
+     * Generate from array
+     *
+     * @configkey name           string        [required] Class Name
+     * @configkey docblock       string        The docblock information
+     * @configkey flags          int           Flags, one of MethodGenerator::FLAG_ABSTRACT MethodGenerator::FLAG_FINAL
+     * @configkey parameters     string        Class which this class is extending
+     * @configkey body           string
+     * @configkey abstract       bool
+     * @configkey final          bool
+     * @configkey static         bool
+     * @configkey visibility     string
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param  array $array
+     * @return ParameterGenerator
+     */
+    public static function fromArray(array $array)
+    {
+        if (!isset($array['name'])) {
+            throw new Exception\InvalidArgumentException(
+                'Paramerer generator requires that a name is provided for this object'
+            );
+        }
+
+        $param = new static($array['name']);
+        foreach ($array as $name => $value) {
+            // normalize key
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
+                case 'type':
+                    $param->setType($value);
+                    break;
+                case 'defaultvalue':
+                    $param->setDefaultValue($value);
+                    break;
+                case 'passedbyreference':
+                    $param->setPassedByReference($value);
+                    break;
+                case 'position':
+                    $param->setPosition($value);
+                    break;
+                case 'sourcedirty':
+                    $param->setSourceDirty($value);
+                    break;
+                case 'indentation':
+                    $param->setIndentation($value);
+                    break;
+                case 'sourcecontent':
+                    $param->setSourceContent($value);
+                    break;
+            }
+        }
+
+        return $param;
+    }
+
+    /**
      * @param  string $name
      * @param  string $type
      * @param  mixed $defaultValue

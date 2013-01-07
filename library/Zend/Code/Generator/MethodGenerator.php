@@ -72,6 +72,66 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
+     * Generate from array
+     *
+     * @configkey name           string        [required] Class Name
+     * @configkey docblock       string        The docblock information
+     * @configkey flags          int           Flags, one of MethodGenerator::FLAG_ABSTRACT MethodGenerator::FLAG_FINAL
+     * @configkey parameters     string        Class which this class is extending
+     * @configkey body           string
+     * @configkey abstract       bool
+     * @configkey final          bool
+     * @configkey static         bool
+     * @configkey visibility     string
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param  array $array
+     * @return MethodGenerator
+     */
+    public static function fromArray(array $array)
+    {
+        if (!isset($array['name'])) {
+            throw new Exception\InvalidArgumentException(
+                'Method generator requires that a name is provided for this object'
+            );
+        }
+
+        $method = new static($array['name']);
+        foreach ($array as $name => $value) {
+            // normalize key
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
+                case 'docblock':
+                    $docBlock = ($value instanceof DocBlockGenerator) ? $value : DocBlockGenerator::fromArray($value);
+                    $method->setDocBlock($docBlock);
+                    break;
+                case 'flags':
+                    $method->setFlags($value);
+                    break;
+                case 'parameters':
+                    $method->setParameters($value);
+                    break;
+                case 'body':
+                    $method->setBody($value);
+                    break;
+                case 'abstract':
+                    $method->setAbstract($value);
+                    break;
+                case 'final':
+                    $method->setFinal($value);
+                    break;
+                case 'static':
+                    $method->setStatic($value);
+                    break;
+                case 'visibility':
+                    $method->setVisibility($value);
+                    break;
+            }
+        }
+
+        return $method;
+    }
+
+    /**
      * @param  string $name
      * @param  array $parameters
      * @param  int|array $flags

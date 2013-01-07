@@ -165,4 +165,27 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
         return array_shift($params);
     }
+
+    public function testCreateFromArray()
+    {
+        $parameterGenerator = ParameterGenerator::fromArray(array(
+            'name'              => 'SampleParameter',
+            'type'              => 'int',
+            'defaultvalue'      => 'foo',
+            'passedbyreference' => false,
+            'position'          => 1,
+            'sourcedirty'       => false,
+            'sourcecontent'     => 'foo',
+            'indentation'       => '-',
+        ));
+
+        $this->assertEquals('SampleParameter', $parameterGenerator->getName());
+        $this->assertEquals('int', $parameterGenerator->getType());
+        $this->assertEquals('foo', $parameterGenerator->getDefaultValue());
+        $this->assertTrue($parameterGenerator->getPassedByReference());
+        $this->assertEquals(1, $parameterGenerator->getPosition());
+        $this->assertFalse($parameterGenerator->isSourceDirty());
+        $this->assertEquals('foo', $parameterGenerator->getSourceContent());
+        $this->assertEquals('-', $parameterGenerator->getIndentation());
+    }
 }

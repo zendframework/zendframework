@@ -10,6 +10,7 @@
 
 namespace Zend\Console\Adapter;
 
+use ReflectionClass;
 use Zend\Console\Charset;
 use Zend\Console\Exception;
 use Zend\Console\Color\Xterm256;
@@ -218,9 +219,9 @@ class Posix extends AbstractAdapter
      */
     public function colorize($string, $color = null, $bgColor = null)
     {
-        $color = $this->getColorCode($color, 'fg');
+        $color   = $this->getColorCode($color, 'fg');
         $bgColor = $this->getColorCode($bgColor, 'bg');
-        return ($color   !== null ? "\x1b[" . $color   . 'm' : '')
+        return ($color !== null ? "\x1b[" . $color   . 'm' : '')
             . ($bgColor !== null ? "\x1b[" . $bgColor . 'm' : '')
             . $string
             . "\x1b[22;39m\x1b[0;49m";
@@ -373,11 +374,16 @@ class Posix extends AbstractAdapter
     protected function getColorCode($color, $type = 'fg')
     {
         if ($color instanceof Xterm256) {
-            $r = new \ReflectionClass($color);
+            $r    = new ReflectionClass($color);
             $code = $r->getStaticPropertyValue('color');
-
-            return $type == 'fg' ? sprintf($code, $color::FOREGROUND) : sprintf($code, $color::BACKGROUND);
+            if ($type == 'fg') {
+                $code = sprintf($code, $color::FOREGROUND);
+            } else {
+                $code = sprintf($code, $color::BACKGROUND);
+            }
+            return $code;
         }
+
         if ($color !== null) {
             if (!isset(static::$ansiColorMap[$type][$color])) {
                 throw new Exception\BadMethodCallException(sprintf(

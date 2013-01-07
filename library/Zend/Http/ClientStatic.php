@@ -43,7 +43,7 @@ class ClientStatic
      * @param  array $query
      * @param  array $headers
      * @param  mixed $body
-     * @return Response|boolean
+     * @return Response|bool
      */
     public static function get($url, $query = array(), $headers = array(), $body = null)
     {
@@ -78,7 +78,7 @@ class ClientStatic
      * @param  array $headers
      * @param  mixed $body
      * @throws Exception\InvalidArgumentException
-     * @return Response|boolean
+     * @return Response|bool
      */
     public static function post($url, $params, $headers = array(), $body = null)
     {

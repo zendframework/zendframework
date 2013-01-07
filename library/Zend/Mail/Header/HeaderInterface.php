@@ -20,14 +20,14 @@ interface HeaderInterface
     /**
      * Format value in Mime-Encoding if not US-ASCII encoding is used
      *
-     * @var boolean
+     * @var bool
      */
     const FORMAT_ENCODED = true;
 
     /**
      * Return value with the interval ZF2 value (UTF-8 non-encoded)
      *
-     * @var boolean
+     * @var bool
      */
     const FORMAT_RAW     = false;
 
@@ -50,7 +50,7 @@ interface HeaderInterface
     /**
      * Retrieve header value
      *
-     * @param  boolean $format Return the value in Mime::Encoded or in Raw format
+     * @param  bool $format Return the value in Mime::Encoded or in Raw format
      * @return string
      */
     public function getFieldValue($format = HeaderInterface::FORMAT_RAW);

@@ -69,7 +69,7 @@ class Figlet
     /**
      * Indicates if a font was loaded yet
      *
-     * @var boolean
+     * @var bool
      */
     protected $fontLoaded = false;
 
@@ -140,7 +140,7 @@ class Figlet
     /**
      * Whether to handle paragraphs || not
      *
-     * @var boolean
+     * @var bool
      */
     protected $handleParagraphs = false;
 
@@ -318,7 +318,7 @@ class Figlet
     /**
      * Set handling of paragraphs
      *
-     * @param  boolean $handleParagraphs Whether to handle paragraphs or not
+     * @param  bool $handleParagraphs Whether to handle paragraphs or not
      * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
@@ -638,7 +638,7 @@ class Figlet
      * Returns true if this can be done, false otherwise.
      *
      * @param  string $char Character which to add to the output
-     * @return boolean
+     * @return bool
      */
     protected function _addChar($char)
     {

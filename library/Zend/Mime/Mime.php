@@ -95,7 +95,7 @@ class Mime
      * false, encode the string for secure delivery.
      *
      * @param string $str
-     * @return boolean
+     * @return bool
      */
     public static function isPrintable($str)
     {

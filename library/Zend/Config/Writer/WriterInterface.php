@@ -22,7 +22,7 @@ interface WriterInterface
      *
      * @param  string  $filename
      * @param  mixed   $config
-     * @param  boolean $exclusiveLock
+     * @param  bool $exclusiveLock
      * @return void
      */
     public function toFile($filename, $config, $exclusiveLock = true);

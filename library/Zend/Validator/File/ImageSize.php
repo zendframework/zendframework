@@ -324,7 +324,7 @@ class ImageSize extends AbstractValidator
      *
      * @param  string $value Real file to check for image size
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

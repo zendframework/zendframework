@@ -329,7 +329,7 @@ class Image extends AbstractRenderer
      *
      * @param array $points
      * @param integer $color
-     * @param boolean $filled
+     * @param  bool $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {

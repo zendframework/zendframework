@@ -452,7 +452,7 @@ class Ldap implements AdapterInterface
      *
      * @param  array $returnAttribs
      * @param  array $omitAttribs
-     * @return stdClass|boolean
+     * @return stdClass|bool
      */
     public function getAccountObject(array $returnAttribs = array(), array $omitAttribs = array())
     {

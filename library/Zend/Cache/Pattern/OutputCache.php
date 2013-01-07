@@ -50,7 +50,7 @@ class OutputCache extends AbstractPattern
      *
      * @param  string  $key Key
      * @throws Exception\MissingKeyException if key is missing
-     * @return boolean
+     * @return bool
      */
     public function start($key)
     {
@@ -76,7 +76,7 @@ class OutputCache extends AbstractPattern
      * and displays the buffer.
      *
      * @throws Exception\RuntimeException if output cache not started or buffering not active
-     * @return boolean TRUE on success, FALSE on failure writing to cache
+     * @return bool TRUE on success, FALSE on failure writing to cache
      */
     public function end()
     {

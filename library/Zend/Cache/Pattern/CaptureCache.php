@@ -110,7 +110,7 @@ class CaptureCache extends AbstractPattern
      *
      * @param  null|string $pageId
      * @throws Exception\LogicException
-     * @return boolean
+     * @return bool
      */
     public function has($pageId = null)
     {
@@ -136,7 +136,7 @@ class CaptureCache extends AbstractPattern
      * @param  null|string $pageId
      * @throws Exception\LogicException
      * @throws Exception\RuntimeException
-     * @return boolean
+     * @return bool
      */
     public function remove($pageId = null)
     {

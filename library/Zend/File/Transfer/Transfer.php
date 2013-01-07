@@ -29,7 +29,7 @@ class Transfer
      * Creates a file processing handler
      *
      * @param  string  $adapter   Adapter to use
-     * @param  boolean $direction OPTIONAL False means Download, true means upload
+     * @param  bool $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
      * @throws Exception\InvalidArgumentException
      */
@@ -42,7 +42,7 @@ class Transfer
      * Sets a new adapter
      *
      * @param  string  $adapter   Adapter to use
-     * @param  boolean $direction OPTIONAL False means Download, true means upload
+     * @param  bool $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
      * @return Transfer
      * @throws Exception\InvalidArgumentException
@@ -71,7 +71,7 @@ class Transfer
     /**
      * Returns all set adapters
      *
-     * @param boolean $direction On null, all directions are returned
+     * @param  bool $direction On null, all directions are returned
      *                           On false, download direction is returned
      *                           On true, upload direction is returned
      * @return array|Adapter\AbstractAdapter

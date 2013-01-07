@@ -62,14 +62,14 @@ class Alnum extends AbstractValidator
         parent::__construct($options);
 
         if (is_scalar($allowWhiteSpace)) {
-            $this->options['allowWhiteSpace'] = (boolean) $allowWhiteSpace;
+            $this->options['allowWhiteSpace'] = (bool) $allowWhiteSpace;
         }
     }
 
     /**
      * Returns the allowWhiteSpace option
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowWhiteSpace()
     {
@@ -79,12 +79,12 @@ class Alnum extends AbstractValidator
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param boolean $allowWhiteSpace
+     * @param  bool $allowWhiteSpace
      * @return AlnumFilter Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
-        $this->options['allowWhiteSpace'] = (boolean) $allowWhiteSpace;
+        $this->options['allowWhiteSpace'] = (bool) $allowWhiteSpace;
         return $this;
     }
 
@@ -92,7 +92,7 @@ class Alnum extends AbstractValidator
      * Returns true if and only if $value contains only alphabetic and digit characters
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

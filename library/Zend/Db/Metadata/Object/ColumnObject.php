@@ -50,7 +50,7 @@ class ColumnObject
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isNullable = null;
 
@@ -86,7 +86,7 @@ class ColumnObject
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $numericUnsigned = null;
 
@@ -325,7 +325,7 @@ class ColumnObject
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getNumericUnsigned()
     {
@@ -333,7 +333,7 @@ class ColumnObject
     }
 
     /**
-     * @param boolean $numericUnsigned
+     * @param  bool $numericUnsigned
      * @return ColumnObject
      */
     public function setNumericUnsigned($numericUnsigned)
@@ -343,7 +343,7 @@ class ColumnObject
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isNumericUnsigned()
     {

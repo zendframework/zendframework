@@ -31,7 +31,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Whether an error occurred
      *
-     * @var boolean
+     * @var bool
      */
     protected $errorOccurred = false;
 

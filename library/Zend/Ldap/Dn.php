@@ -254,7 +254,7 @@ class Dn implements \ArrayAccess
      * Assert index is correct and usable
      *
      * @param  mixed $index
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     protected function assertIndex($index)
@@ -272,7 +272,7 @@ class Dn implements \ArrayAccess
      * Assert if value is in a correct RDN format
      *
      * @param  array $value
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     protected static function assertRdn(array $value)
@@ -377,7 +377,7 @@ class Dn implements \ArrayAccess
      * Required by the ArrayAccess implementation
      *
      * @param  int $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -583,7 +583,7 @@ class Dn implements \ArrayAccess
      * @param  array  $keys     An optional array to receive DN keys (e.g. CN, OU, DC, ...)
      * @param  array  $vals     An optional array to receive DN values
      * @param  string $caseFold
-     * @return boolean True if the DN was successfully parsed or false if the string is not a valid DN.
+     * @return bool True if the DN was successfully parsed or false if the string is not a valid DN.
      */
     public static function checkDn(
         $dn, array &$keys = null, array &$vals = null,
@@ -731,7 +731,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string|Dn $childDn
      * @param  string|Dn $parentDn
-     * @return boolean
+     * @return bool
      */
     public static function isChildOf($childDn, $parentDn)
     {

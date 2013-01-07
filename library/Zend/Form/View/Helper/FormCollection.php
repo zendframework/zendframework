@@ -27,7 +27,7 @@ class FormCollection extends AbstractHelper
     /**
      * If set to true, collections are automatically wrapped around a fieldset
      *
-     * @var boolean
+     * @var bool
      */
     protected $shouldWrap = true;
 
@@ -116,7 +116,7 @@ class FormCollection extends AbstractHelper
      * Proxies to {@link render()}.
      *
      * @param  ElementInterface|null $element
-     * @param  boolean $wrap
+     * @param  bool $wrap
      * @return string|FormCollection
      */
     public function __invoke(ElementInterface $element = null, $wrap = true)

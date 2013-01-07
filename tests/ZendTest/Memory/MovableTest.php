@@ -66,13 +66,13 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertFalse((boolean)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((boolean)$memObject->isLocked());
+        $this->assertTrue((bool) $memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((boolean)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
     }
 
     /**
@@ -136,7 +136,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
  */
 class DummyMemoryManager extends Memory\MemoryManager
 {
-    /** @var boolean */
+    /** @var bool */
     public $processUpdatePassed = false;
 
     /** @var integer */

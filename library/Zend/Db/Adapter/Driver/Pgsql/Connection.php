@@ -40,7 +40,7 @@ class Connection implements ConnectionInterface
     /**
      * In transaction
      *
-     * @var boolean
+     * @var bool
      */
     protected $inTransaction = false;
 

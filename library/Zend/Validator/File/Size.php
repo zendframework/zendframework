@@ -97,7 +97,7 @@ class Size extends AbstractValidator
     /**
      * Should messages return bytes as integer or as string in SI notation
      *
-     * @param  boolean $byteString Use bytestring ?
+     * @param  bool $byteString Use bytestring ?
      * @return integer
      */
     public function useByteString($byteString = true)
@@ -109,7 +109,7 @@ class Size extends AbstractValidator
     /**
      * Will bytestring be used?
      *
-     * @return boolean
+     * @return bool
      */
     public function getByteString()
     {
@@ -234,7 +234,7 @@ class Size extends AbstractValidator
      *
      * @param  string $value Real file to check for size
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

@@ -21,7 +21,7 @@ class Code128 extends AbstractObject
     /**
      * Drawing of checksum
      * (even if it's sometime optional, most of time it's required)
-     * @var boolean
+     * @var bool
      */
     protected $withChecksum = true;
 

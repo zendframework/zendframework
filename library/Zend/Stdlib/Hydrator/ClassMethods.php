@@ -21,13 +21,13 @@ class ClassMethods extends AbstractHydrator
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
-     * @var boolean
+     * @var bool
      */
     protected $underscoreSeparatedKeys;
 
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean $underscoreSeparatedKeys
+     * @param  bool $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {

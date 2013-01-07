@@ -25,7 +25,7 @@ interface PasswordInterface
      *
      * @param  string $password The password to hash
      * @param  string $hash     The supplied hash to validate
-     * @return boolean Does the password validate against the hash
+     * @return bool Does the password validate against the hash
      */
     public function verify($password, $hash);
 }

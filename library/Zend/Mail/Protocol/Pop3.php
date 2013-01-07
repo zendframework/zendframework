@@ -138,7 +138,7 @@ class Pop3
     /**
      * read a response
      *
-     * @param  boolean $multiline response has multiple lines and should be read until "<nl>.<nl>"
+     * @param  bool $multiline response has multiple lines and should be read until "<nl>.<nl>"
      * @throws Exception\RuntimeException
      * @return string response
      */

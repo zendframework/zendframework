@@ -39,7 +39,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - IgnoreUserAbort
-     * @var boolean
+     * @var bool
      */
     protected $exitOnAbort = true;
 
@@ -134,7 +134,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Exit if connection aborted and ignore_user_abort is disabled.
      *
-     * @param boolean $exitOnAbort
+     * @param  bool $exitOnAbort
      * @return PluginOptions
      */
     public function setExitOnAbort($exitOnAbort)
@@ -146,7 +146,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Exit if connection aborted and ignore_user_abort is disabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getExitOnAbort()
     {

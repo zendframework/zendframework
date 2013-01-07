@@ -221,7 +221,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * Offset Exists
      *
      * @param  string $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -313,7 +313,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * __isset
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {

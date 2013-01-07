@@ -36,7 +36,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * Whether the route may terminate.
      *
-     * @var boolean
+     * @var bool
      */
     protected $mayTerminate;
 
@@ -51,7 +51,7 @@ class Part extends TreeRouteStack implements RouteInterface
      * Create a new part route.
      *
      * @param  mixed              $route
-     * @param  boolean            $mayTerminate
+     * @param  bool            $mayTerminate
      * @param  RoutePluginManager $routePlugins
      * @param  array|null         $childRoutes
      * @throws Exception\InvalidArgumentException

@@ -102,7 +102,7 @@ class Movable extends AbstractContainer
     /**
      * Return true if object is locked
      *
-     * @return boolean
+     * @return bool
      */
     public function isLocked()
     {
@@ -248,7 +248,7 @@ class Movable extends AbstractContainer
      * Check if object is marked as swapped
      *
      * @internal
-     * @return boolean
+     * @return bool
      */
     public function isSwapped()
     {

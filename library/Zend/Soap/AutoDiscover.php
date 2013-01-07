@@ -52,7 +52,7 @@ class AutoDiscover
     protected $class;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $strategy;
 

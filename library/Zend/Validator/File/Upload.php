@@ -137,7 +137,7 @@ class Upload extends AbstractValidator
      * @param  string $value Single file to check for upload errors, when giving null the $_FILES array
      *                       from initialization will be used
      * @param  mixed  $file
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

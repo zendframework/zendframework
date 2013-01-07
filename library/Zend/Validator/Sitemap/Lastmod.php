@@ -53,7 +53,7 @@ class Lastmod extends AbstractValidator
      * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
      *
      * @param  string  $value  value to validate
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

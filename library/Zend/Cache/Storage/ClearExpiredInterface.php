@@ -20,7 +20,7 @@ interface ClearExpiredInterface
     /**
      * Remove expired items
      *
-     * @return boolean
+     * @return bool
      */
     public function clearExpired();
 }

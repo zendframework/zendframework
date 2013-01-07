@@ -141,7 +141,7 @@ class HttpTest extends TestCase
      * Test the validity of the hosts
      *
      * @param string  $host
-     * @param boolean $expected
+     * @param  bool $expected
      * @return void
      * @dataProvider validHostProvider
      */

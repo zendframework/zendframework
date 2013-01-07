@@ -158,7 +158,7 @@ class Allow implements HeaderInterface
      * Check whether method is allowed
      *
      * @param string $method
-     * @return boolean
+     * @return bool
      */
     public function isAllowedMethod($method)
     {

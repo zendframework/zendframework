@@ -33,7 +33,7 @@ class Encoder
     );
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $versionWritten = false;
 
@@ -167,7 +167,7 @@ class Encoder
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
      * @param  string  $string
-     * @param  boolean $base64
+     * @param  bool $base64
      * @return string
      */
     protected function encodeString($string, &$base64 = null)

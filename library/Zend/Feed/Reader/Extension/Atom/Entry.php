@@ -175,7 +175,13 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateCreated) {
-            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
+            if( $dateCreated[19] === '.'){
+                $format = 'Y-m-d\TH:i:s.uO';
+            } else {
+                $format = DateTime::ISO8601;
+            }
+            
+            $date = DateTime::createFromFormat( $format, $dateCreated);
         }
 
         $this->data['datecreated'] = $date;

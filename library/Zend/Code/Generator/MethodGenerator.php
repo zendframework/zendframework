@@ -24,11 +24,6 @@ class MethodGenerator extends AbstractMemberGenerator
     protected $docBlock = null;
 
     /**
-     * @var bool
-     */
-    protected $isFinal = false;
-
-    /**
      * @var ParameterGenerator[]
      */
     protected $parameters = array();

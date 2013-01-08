@@ -162,8 +162,8 @@ class FilterComposite implements FilterInterface
         $orCount = count($this->orFilter);
         // return true if no filters are registered
         if (
-            $orCount === 0 &&
-            $andCount === 0
+            $orCount === 0
+            && $andCount === 0
         ) {
             return true;
         } elseif ($orCount === 0 && $andCount !== 0) {

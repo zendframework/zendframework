@@ -181,8 +181,8 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('SampleParameter', $parameterGenerator->getName());
         $this->assertEquals('int', $parameterGenerator->getType());
-        $this->assertEquals('foo', $parameterGenerator->getDefaultValue());
-        $this->assertTrue($parameterGenerator->getPassedByReference());
+        $this->assertInstanceOf('Zend\Code\Generator\ValueGenerator', $parameterGenerator->getDefaultValue());
+        $this->assertFalse($parameterGenerator->getPassedByReference());
         $this->assertEquals(1, $parameterGenerator->getPosition());
         $this->assertFalse($parameterGenerator->isSourceDirty());
         $this->assertEquals('foo', $parameterGenerator->getSourceContent());

@@ -19,7 +19,7 @@ use Zend\Session\Container;
  * @subpackage UnitTests
  * @group      Zend_Session
  */
-class SessionStorageTest extends \PHPUnit_Framework_TestCase
+class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

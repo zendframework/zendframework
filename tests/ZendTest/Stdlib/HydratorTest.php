@@ -12,13 +12,18 @@ namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\Reflection;
+use Zend\Stdlib\Hydrator\ObjectProperty;
+use Zend\Stdlib\Hydrator\ArraySerializable;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 use ZendTest\Stdlib\TestAsset\Reflection as ReflectionAsset;
+use ZendTest\Stdlib\TestAsset\ObjectProperty as ObjectPropertyAsset;
+use ZendTest\Stdlib\TestAsset\ArraySerializable as ArraySerializableAsset;
 use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
 use Zend\Stdlib\Hydrator\Strategy\SerializableStrategy;
+
 
 /**
  * @category   Zend
@@ -294,10 +299,11 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($datas['hasFoo']));
     }
 
-    public function testArraySerializableFilter()
+    /**
+     * @dataProvider filterProvider
+     */
+    public function testArraySerializableFilter($hydrator, $serializable)
     {
-        $hydrator = new \Zend\Stdlib\Hydrator\ArraySerializable();
-        $serializable = new \ZendTest\Stdlib\TestAsset\ArraySerializable();
         $this->assertSame(
             array(
                 "foo" => "bar",
@@ -350,6 +356,14 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
                 "quo" => "blubb"
             ),
             $hydrator->extract($serializable)
+        );
+    }
+
+    public function filterProvider()
+    {
+        return array(
+            array(new ObjectProperty(), new ObjectPropertyAsset),
+            array(new ArraySerializable(), new ArraySerializableAsset)
         );
     }
 }

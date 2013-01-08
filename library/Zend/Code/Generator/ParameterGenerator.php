@@ -80,15 +80,14 @@ class ParameterGenerator extends AbstractGenerator
     /**
      * Generate from array
      *
-     * @configkey name           string        [required] Class Name
-     * @configkey docblock       string        The docblock information
-     * @configkey flags          int           Flags, one of MethodGenerator::FLAG_ABSTRACT MethodGenerator::FLAG_FINAL
-     * @configkey parameters     string        Class which this class is extending
-     * @configkey body           string
-     * @configkey abstract       bool
-     * @configkey final          bool
-     * @configkey static         bool
-     * @configkey visibility     string
+     * @configkey name              string                                          [required] Class Name
+     * @configkey type              string
+     * @configkey defaultvalue      null|bool|string|int|float|array|ValueGenerator
+     * @configkey passedbyreference bool
+     * @configkey position          int
+     * @configkey sourcedirty       bool
+     * @configkey indentation       string
+     * @configkey sourcecontent     string
      *
      * @throws Exception\InvalidArgumentException
      * @param  array $array

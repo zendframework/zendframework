@@ -19,6 +19,7 @@ use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 use ZendTest\Stdlib\TestAsset\Reflection as ReflectionAsset;
+use ZendTest\Stdlib\TestAsset\ReflectionFilter;
 use ZendTest\Stdlib\TestAsset\ObjectProperty as ObjectPropertyAsset;
 use ZendTest\Stdlib\TestAsset\ArraySerializable as ArraySerializableAsset;
 use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
@@ -363,7 +364,8 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(new ObjectProperty(), new ObjectPropertyAsset),
-            array(new ArraySerializable(), new ArraySerializableAsset)
+            array(new ArraySerializable(), new ArraySerializableAsset),
+            array(new Reflection(), new ReflectionFilter)
         );
     }
 }

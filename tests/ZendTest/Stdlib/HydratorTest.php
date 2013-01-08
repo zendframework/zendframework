@@ -293,4 +293,63 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $datas = $hydrator->extract($this->classMethodsCamelCase);
         $this->assertFalse(isset($datas['hasFoo']));
     }
+
+    public function testArraySerializableFilter()
+    {
+        $hydrator = new \Zend\Stdlib\Hydrator\ArraySerializable();
+        $serializable = new \ZendTest\Stdlib\TestAsset\ArraySerializable();
+        $this->assertSame(
+            array(
+                "foo" => "bar",
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+
+        $hydrator->addFilter("foo", function($property) {
+                if ($property == "foo") {
+                    return false;
+                }
+                return true;
+            });
+
+        $this->assertSame(
+            array(
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+
+        $hydrator->addFilter("len", function($property) {
+                if (strlen($property) !== 3) {
+                    return false;
+                }
+                return true;
+            }, FilterComposite::CONDITION_AND);
+
+        $this->assertSame(
+            array(
+                "bar" => "foo",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+
+        $hydrator->removeFilter("len");
+        $hydrator->removeFilter("foo");
+
+        $this->assertSame(
+            array(
+                "foo" => "bar",
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+    }
 }

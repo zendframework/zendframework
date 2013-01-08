@@ -138,6 +138,16 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     }
 
     /**
+     * Get the filter instance
+     *
+     * @return Filter\FilterComposite
+     */
+    public function getFilter()
+    {
+        return $this->filterComposite;
+    }
+
+    /**
      * Add a new filter to take care of what needs to be hydrated.
      * To exclude e.g. the method getServiceLocator:
      *

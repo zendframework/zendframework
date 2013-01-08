@@ -208,10 +208,10 @@ class Entry extends Extension\AbstractEntry
 
         if ($dateModified) {
             $format = DateTime::ISO8601;
-            if ($dateCreated[19] === '.') {
+            if ($dateModified[19] === '.') {
                 $format = 'Y-m-d\TH:i:s.uO';
             }
-            $date = DateTime::createFromFormat($format, $dateCreated);
+            $date = DateTime::createFromFormat($format, $dateModified);
         }
 
         $this->data['datemodified'] = $date;

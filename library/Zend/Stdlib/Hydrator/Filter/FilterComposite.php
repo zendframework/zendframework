@@ -158,16 +158,21 @@ class FilterComposite implements FilterInterface
      */
     public function filter($property)
     {
+        $andCount = count($this->andFilter);
+        $orCount = count($this->orFilter);
         // return true if no filters are registered
         if (
-            count($this->orFilter) === 0 &&
-            count($this->andFilter) === 0
+            $orCount === 0 &&
+            $andCount === 0
         ) {
             return true;
+        } elseif ($orCount === 0 && $andCount !== 0) {
+            $returnValue = true;
+        } else {
+            $returnValue = false;
         }
 
         // Check if 1 from the or filters return true
-        $returnValue = false;
         foreach($this->orFilter as $filter) {
             if (is_callable($filter)) {
                 if( $filter($property) === true)

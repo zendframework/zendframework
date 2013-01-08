@@ -106,6 +106,55 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filterComposite->filter('hasFoo'));
     }
 
+    public function testWithOnlyAndFiltersAdded()
+    {
+        $filter = new FilterComposite();
+        $filter->addFilter("foobarbaz", function($property) {
+                return true;
+            }, FilterComposite::CONDITION_AND);
+        $filter->addFilter("foobar", function($property) {
+                return true;
+            }, FilterComposite::CONDITION_AND);
+        $this->assertTrue($filter->filter("foo"));
+    }
+
+    public function testWithOnlyOrFiltersAdded()
+    {
+        $filter = new FilterComposite();
+        $filter->addFilter("foobarbaz", function($property) {
+                return true;
+            });
+        $filter->addFilter("foobar", function($property) {
+                return false;
+            });
+        $this->assertTrue($filter->filter("foo"));
+    }
+
+    public function testWithComplexCompositeAdded()
+    {
+        $filter1 = new FilterComposite();
+        $filter1->addFilter("foobarbaz", function($property) {
+                return true;
+            });
+        $filter1->addFilter("foobar", function($property) {
+                return false;
+            });
+        $filter2 = new FilterComposite();
+        $filter2->addFilter("bar", function($property) {
+                return true;
+            }, FilterComposite::CONDITION_AND);
+        $filter2->addFilter("barblubb", function($property) {
+                return true;
+            }, FilterComposite::CONDITION_AND);
+        $this->assertTrue($filter1->filter("foo"));
+        $this->assertTrue($filter2->filter("foo"));
+        $filter1->addFilter("bar", $filter2);
+        $this->assertTrue($filter1->filter("blubb"));
+
+        $filter1->addFilter("blubb", function($property) { return false; }, FilterComposite::CONDITION_AND);
+        $this->assertFalse($filter1->filter("test"));
+    }
+
     /**
      * @expectedException Zend\Stdlib\Exception\InvalidArgumentException
      * @expectedExceptionMessage The value of test should be either a callable

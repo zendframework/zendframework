@@ -133,8 +133,7 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         } catch(\Exception $ex) {
             if ($e->getName() === MvcEvent::EVENT_RENDER_ERROR) {
                 throw $ex;
-            }
-            else {
+            } else {
                 $application = $e->getApplication();
                 $events      = $application->getEventManager();
                 $e->setError(Application::ERROR_EXCEPTION)

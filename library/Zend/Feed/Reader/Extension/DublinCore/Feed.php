@@ -231,7 +231,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($date) {
-            $d = DateTime::createISO8601Date($date);
+            $d = DateTime::createFromISO8601($date);
         }
 
         $this->data['date'] = $d;

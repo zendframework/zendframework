@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
+ * @package   Zend_Stdlib
  */
 
 namespace ZendTest\Stdlib;
@@ -27,7 +27,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $time = '2009-03-07T08:03:50Z';
         
-        $date = DateTime::createISO8601Date($time);
+        $date = DateTime::createFromISO8601($time);
         
         $this->assertEquals( \DateTime::createFromFormat(\DateTime::ISO8601, $time), $date);
     }
@@ -36,11 +36,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $time = '2009-03-07T08:03:50.012Z';
         
-        $date = DateTime::createISO8601Date($time);
+        $date = DateTime::createFromISO8601($time);
         
         $standard = \DateTime::createFromFormat('Y-m-d\TH:i:s.uO', $time);
         
         $this->assertEquals( $standard, $date);
     }
-    
 }

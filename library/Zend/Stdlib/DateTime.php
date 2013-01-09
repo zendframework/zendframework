@@ -23,13 +23,15 @@ use DateTimeZone;
 class DateTime extends \DateTime {
     
     /**
-     * Creates a DateTime object from a string and (optional) timezone.
+     * The DateTime::ISO8601 constant used by php's native DateTime object does
+     * not allow for fractions of a second. This function better handles ISO8601
+     * formatted date strings.
      * 
      * @param string $time
      * @param DateTimeZone $timezone
      * @return mixed
      */
-    public static function createISO8601Date($time, DateTimeZone $timezone = null){
+    public static function createFromISO8601($time, DateTimeZone $timezone = null){
         $format = self::ISO8601;
         if (isset($time[19]) && $time[19] === '.') {
             $format = 'Y-m-d\TH:i:s.uO';

@@ -125,7 +125,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateCreated) {
-            $date = DateTime::createISO8601Date($dateCreated);
+            $date = DateTime::createFromISO8601($dateCreated);
         }
 
         $this->data['datecreated'] = $date;
@@ -153,7 +153,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateModified) {
-            $date = DateTime::createISO8601Date($dateModified);
+            $date = DateTime::createFromISO8601($dateModified);
         }
 
         $this->data['datemodified'] = $date;

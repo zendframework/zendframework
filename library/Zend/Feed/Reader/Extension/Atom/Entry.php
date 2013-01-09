@@ -175,7 +175,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateCreated) {
-            $date = DateTime::createISO8601Date($dateCreated);
+            $date = DateTime::createFromISO8601($dateCreated);
         }
 
         $this->data['datecreated'] = $date;
@@ -203,7 +203,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateModified) {
-            $date = DateTime::createISO8601Date($dateModified);
+            $date = DateTime::createFromISO8601($dateModified);
         }
 
         $this->data['datemodified'] = $date;

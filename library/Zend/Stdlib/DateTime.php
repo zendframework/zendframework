@@ -20,27 +20,29 @@ use DateTimeZone;
  * @category   Zend
  * @package    Zend_Stdlib
  */
-class DateTime extends \DateTime {
-    
+class DateTime extends \DateTime
+{
     /**
      * The DateTime::ISO8601 constant used by php's native DateTime object does
      * not allow for fractions of a second. This function better handles ISO8601
      * formatted date strings.
-     * 
-     * @param string $time
-     * @param DateTimeZone $timezone
+     *
+     * @param  string       $time
+     * @param  DateTimeZone $timezone
      * @return mixed
      */
-    public static function createFromISO8601($time, DateTimeZone $timezone = null){
+    public static function createFromISO8601($time, DateTimeZone $timezone = null)
+    {
         $format = self::ISO8601;
         if (isset($time[19]) && $time[19] === '.') {
             $format = 'Y-m-d\TH:i:s.uO';
         }
-        
-        if( $timezone !== null )
+
+        if ($timezone !== null) {
             return self::createFromFormat($format, $time, $timezone);
+        }
 
         return self::createFromFormat($format, $time);
     }
-    
+
 }

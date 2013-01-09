@@ -10,11 +10,11 @@
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
-use DateTime;
 use DOMElement;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
+use Zend\Stdlib\DateTime;
 use Zend\Uri;
 
 /**
@@ -125,7 +125,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateCreated) {
-            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
+            $date = DateTime::createFromISO8601($dateCreated);
         }
 
         $this->data['datecreated'] = $date;
@@ -153,7 +153,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateModified) {
-            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
+            $date = DateTime::createFromISO8601($dateModified);
         }
 
         $this->data['datemodified'] = $date;

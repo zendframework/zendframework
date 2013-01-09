@@ -96,7 +96,7 @@ class ZendServerShm extends AbstractZendServer implements
         if (!zend_shm_cache_store($internalKey, $value, $ttl)) {
             $valueType = gettype($value);
             throw new Exception\RuntimeException(
-                "zend_disk_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
+                "zend_shm_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
             );
         }
     }

@@ -61,7 +61,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $select->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->select('bar');
     }
 
@@ -75,7 +75,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $insert->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->insert('bar');
     }
 
@@ -89,7 +89,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $update->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->update('bar');
 
     }
@@ -106,7 +106,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $delete->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->delete('bar');
 
     }

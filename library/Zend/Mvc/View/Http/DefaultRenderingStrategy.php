@@ -63,6 +63,7 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'render'), -10000);
     }
 
     /**
@@ -130,11 +131,16 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         try {
             $view->render($viewModel);
         } catch(\Exception $ex) {
-            $application = $e->getApplication();
-            $events      = $application->getEventManager();
-            $e->setError(Application::ERROR_EXCEPTION)
-              ->setParam('exception', $ex);
-            $events->trigger(MvcEvent::EVENT_RENDER_ERROR, $e);
+            if ($e->getName() === MvcEvent::EVENT_RENDER_ERROR) {
+                throw $ex;
+            }
+            else {
+                $application = $e->getApplication();
+                $events      = $application->getEventManager();
+                $e->setError(Application::ERROR_EXCEPTION)
+                  ->setParam('exception', $ex);
+                $events->trigger(MvcEvent::EVENT_RENDER_ERROR, $e);
+            }
         }
 
         return $response;

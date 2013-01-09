@@ -13,13 +13,12 @@ namespace ZendTest\Stdlib;
 use Zend\Stdlib\DateTime;
 
 /**
-* @category Zend
-* @package Zend_Feed
-* @subpackage UnitTests
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
-class AtomTest extends \PHPUnit_Framework_TestCase
+ * @category   Zend
+ * @package    Zend_Stdlib
+ * @subpackage UnitTests
+ * @group      Zend_Stdlib
+ */
+class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
     public $dateTime;
     

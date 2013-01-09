@@ -11,9 +11,11 @@
 namespace Zend\Stdlib\Hydrator;
 
 use Zend\Stdlib\Exception;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\Filter\GetFilter;
 use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
+use Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter;
 
 /**
  * @category   Zend
@@ -40,6 +42,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         $this->filterComposite->addFilter("is", new IsFilter());
         $this->filterComposite->addFilter("has", new HasFilter());
         $this->filterComposite->addFilter("get", new GetFilter());
+        $this->filterComposite->addFilter("parameter", new NumberOfParameterFilter(), FilterComposite::CONDITION_AND);
     }
 
     /**

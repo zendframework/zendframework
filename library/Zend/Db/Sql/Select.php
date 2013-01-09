@@ -286,6 +286,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                         // as an Expression predicate
                         $predicate = new Predicate\Expression($pkey, $pvalue);
 
+                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
+                        // Predicate type is ok
+                        $predicate = $pvalue;
+                            
                     } elseif (is_string($pkey)) {
                         // Otherwise, if still a string, do something intelligent with the PHP type provided
 
@@ -299,9 +303,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                             // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
                             $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
                         }
-                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
-                        // Predicate type is ok
-                        $predicate = $pvalue;
                     } else {
                         // must be an array of expressions (with int-indexed array)
                         $predicate = (strpos($pvalue, Expression::PLACEHOLDER) !== false)

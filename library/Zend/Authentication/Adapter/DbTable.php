@@ -61,6 +61,14 @@ class DbTable extends AbstractAdapter
     protected $credentialTreatment = null;
 
     /**
+     * $credentialValidationCallback - This overrides the Treatment usage to provide a callback
+     * that allows for validation to happen in code
+     *
+     * @var callable
+     */
+    protected $credentialValidationCallback = null;
+
+    /**
      * $authenticateResultInfo
      *
      * @var array
@@ -86,15 +94,16 @@ class DbTable extends AbstractAdapter
     /**
      * __construct() - Sets configuration options
      *
-     * @param  DbAdapter $zendDb
-     * @param  string    $tableName           Optional
-     * @param  string    $identityColumn      Optional
-     * @param  string    $credentialColumn    Optional
-     * @param  string    $credentialTreatment Optional
+     * @param  DbAdapter    $zendDb
+     * @param  string       $tableName                      Optional
+     * @param  string       $identityColumn                 Optional
+     * @param  string       $credentialColumn               Optional
+     * @param  string       $credentialTreatment            Optional
+     * @param  callable     $credentialValidationCallback   Optional
      * @return \Zend\Authentication\Adapter\DbTable
      */
     public function __construct(DbAdapter $zendDb, $tableName = null, $identityColumn = null,
-                                $credentialColumn = null, $credentialTreatment = null)
+                                $credentialColumn = null, $credentialTreatment = null, callable $credentialValidationCallback = null)
     {
         $this->zendDb = $zendDb;
 
@@ -112,6 +121,10 @@ class DbTable extends AbstractAdapter
 
         if (null !== $credentialTreatment) {
             $this->setCredentialTreatment($credentialTreatment);
+        }
+
+        if (null !== $credentialValidationCallback) {
+            $this->setCredentialValidationCallback($credentialValidationCallback);
         }
     }
 
@@ -171,6 +184,18 @@ class DbTable extends AbstractAdapter
     public function setCredentialTreatment($treatment)
     {
         $this->credentialTreatment = $treatment;
+        return $this;
+    }
+    /**
+     * setCredentialValidationCallback() - allows the developer to use a callback as a way of checking the
+     * credential.
+     *
+     * @param  callable $validationCallback
+     * @return DbTable Provides a fluent interface
+     */
+    public function setCredentialValidationCallback(callable $validationCallback)
+    {
+        $this->credentialValidationCallback = $validationCallback;
         return $this;
     }
 
@@ -334,21 +359,25 @@ class DbTable extends AbstractAdapter
      */
     protected function _authenticateCreateSelect()
     {
-        // build credential expression
-        if (empty($this->credentialTreatment) || (strpos($this->credentialTreatment, '?') === false)) {
-            $this->credentialTreatment = '?';
-        }
+        $tableColumns = array('*');
+        if (!is_callable($this->credentialValidationCallback)) {
+            // build credential expression
+            if (empty($this->credentialTreatment) || (strpos($this->credentialTreatment, '?') === false)) {
+                $this->credentialTreatment = '?';
+            }
 
-        $credentialExpression = new SqlExpr(
-            '(CASE WHEN ?' . ' = ' . $this->credentialTreatment . ' THEN 1 ELSE 0 END) AS ?',
-            array($this->credentialColumn, $this->credential, 'zend_auth_credential_match'),
-            array(SqlExpr::TYPE_IDENTIFIER, SqlExpr::TYPE_VALUE, SqlExpr::TYPE_IDENTIFIER)
-        );
+            $credentialExpression = new SqlExpr(
+                '(CASE WHEN ?' . ' = ' . $this->credentialTreatment . ' THEN 1 ELSE 0 END) AS ?',
+                array($this->credentialColumn, $this->credential, 'zend_auth_credential_match'),
+                array(SqlExpr::TYPE_IDENTIFIER, SqlExpr::TYPE_VALUE, SqlExpr::TYPE_IDENTIFIER)
+            );
+            $tableColumns[] = $credentialExpression;
+        }
 
         // get select
         $dbSelect = clone $this->getDbSelect();
         $dbSelect->from($this->tableName)
-            ->columns(array('*', $credentialExpression))
+            ->columns($tableColumns)
             ->where(new SqlOp($this->identityColumn, '=', $this->identity));
 
         return $dbSelect;
@@ -416,6 +445,19 @@ class DbTable extends AbstractAdapter
      */
     protected function _authenticateValidateResult($resultIdentity)
     {
+        if (is_callable($this->credentialValidationCallback)) {
+            // since we are not aware of
+            try {
+                $callbackResult = call_user_func($this->credentialValidationCallback, $resultIdentity[$this->credentialColumn], $this->credential);
+            } catch (Exception $e) {
+                $callbackResult = false;
+            }
+            if ($callbackResult !== true) {
+                $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
+                $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+                return $this->_authenticateCreateAuthResult();
+            }
+        }
         if ($resultIdentity['zend_auth_credential_match'] != '1') {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';

@@ -33,7 +33,7 @@ class GenericAnnotationParser implements ParserInterface
     protected $aliases = array();
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $annotationNames = array();
 
@@ -75,6 +75,7 @@ class GenericAnnotationParser implements ParserInterface
         if ($content) {
             $newAnnotation->initialize($content);
         }
+
         return $newAnnotation;
     }
 
@@ -106,7 +107,10 @@ class GenericAnnotationParser implements ParserInterface
         $class = $class ?: get_class($annotation);
 
         if (in_array($class, $this->annotationNames)) {
-            throw new Exception\InvalidArgumentException('An annotation for this class ' . $class . ' already exists');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'An annotation for this class %s already exists',
+                $class
+            ));
         }
 
         $this->annotations[]     = $annotation;
@@ -133,6 +137,7 @@ class GenericAnnotationParser implements ParserInterface
         foreach ($annotations as $annotation) {
             $this->registerAnnotation($annotation);
         }
+
         return $this;
     }
 
@@ -177,6 +182,7 @@ class GenericAnnotationParser implements ParserInterface
 
         $alias = $this->normalizeAlias($alias);
         $this->aliases[$alias] = $class;
+
         return $this;
     }
 
@@ -200,6 +206,7 @@ class GenericAnnotationParser implements ParserInterface
     protected function hasAlias($alias)
     {
         $alias = $this->normalizeAlias($alias);
+
         return (isset($this->aliases[$alias]));
     }
 
@@ -215,6 +222,7 @@ class GenericAnnotationParser implements ParserInterface
             $normalized = $this->normalizeAlias($alias);
             $class      = $this->aliases[$normalized];
         } while ($this->hasAlias($class));
+
         return $class;
     }
 }

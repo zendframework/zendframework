@@ -186,6 +186,17 @@ class AnnotationBuilderTest extends TestCase
         $this->assertEquals(array('class' => 'label'), $username->getLabelAttributes());
     }
 
+    public function testCanHandleHydratorArrayAnnotation()
+    {
+        $entity  = new TestAsset\Annotation\EntityWithHydratorArray();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $hydrator = $form->getHydrator();
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ClassMethods', $hydrator);
+        $this->assertFalse($hydrator->getUnderscoreSeparatedKeys());
+    }
+
     public function testAllowTypeAsElementNameInInputFilter()
     {
         $entity  = new TestAsset\Annotation\EntityWithTypeAsElementName();

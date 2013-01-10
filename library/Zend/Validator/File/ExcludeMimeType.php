@@ -11,6 +11,7 @@
 namespace Zend\Validator\File;
 
 use finfo;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the mime type of a file
@@ -29,22 +30,31 @@ class ExcludeMimeType extends MimeType
      * of mimetypes can be checked. If you give for example "image" all image
      * mime types will not be accepted like "image/gif", "image/jpeg" and so on.
      *
-     * @param  string $value Real file to check for mimetype
-     * @param  array  $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for mimetype
      * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        if ($file === null) {
-            $file = array(
-                'type' => null,
-                'name' => $value,
-            );
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name']) || !isset($value['type'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+            $filetype = $value['type'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $filetype = null;
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->createError($file, self::NOT_READABLE);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(self::NOT_READABLE);
+            return false;
         }
 
         $mimefile = $this->getMagicFile();
@@ -60,27 +70,29 @@ class ExcludeMimeType extends MimeType
 
             $this->type = null;
             if (!empty($this->finfo)) {
-                $this->type = finfo_file($this->finfo, $value);
+                $this->type = finfo_file($this->finfo, $file);
             }
         }
 
         if (empty($this->type) &&
             (function_exists('mime_content_type') && ini_get('mime_magic.magicfile'))
         ) {
-            $this->type = mime_content_type($value);
+            $this->type = mime_content_type($file);
         }
 
         if (empty($this->type) && $this->getHeaderCheck()) {
-            $this->type = $file['type'];
+            $this->type = $filetype;
         }
 
         if (empty($this->type)) {
-            return $this->createError($file, self::NOT_DETECTED);
+            $this->error(self::NOT_DETECTED);
+            false;
         }
 
         $mimetype = $this->getMimeType(true);
         if (in_array($this->type, $mimetype)) {
-            return $this->createError($file, self::FALSE_TYPE);
+            $this->error(self::FALSE_TYPE);
+            return false;
         }
 
         $types = explode('/', $this->type);
@@ -88,7 +100,8 @@ class ExcludeMimeType extends MimeType
         $types = array_merge($types, explode(';', $this->type));
         foreach ($mimetype as $mime) {
             if (in_array($mime, $types)) {
-                return $this->createError($file, self::FALSE_TYPE);
+                $this->error(self::FALSE_TYPE);
+                return false;
             }
         }
 

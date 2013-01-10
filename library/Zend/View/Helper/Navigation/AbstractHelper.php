@@ -69,7 +69,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * ACL to use when iterating pages
      *
-     * @var Acl\Acl
+     * @var Acl\AclInterface
      */
     protected $acl;
 
@@ -119,7 +119,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Default ACL to use when iterating pages if not explicitly set in the
      * instance by calling {@link setAcl()}
      *
-     * @var Acl\Acl
+     * @var Acl\AclInterface
      */
     protected static $defaultAcl;
 
@@ -316,10 +316,10 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      *
      * Implements {@link HelperInterface::setAcl()}.
      *
-     * @param  Acl\Acl $acl [optional] ACL object.  Default is null.
+     * @param  Acl\AclInterface $acl [optional] ACL object.  Default is null.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setAcl(Acl\Acl $acl = null)
+    public function setAcl(Acl\AclInterface $acl = null)
     {
         $this->acl = $acl;
         return $this;
@@ -331,7 +331,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      *
      * Implements {@link HelperInterface::getAcl()}.
      *
-     * @return Acl\Acl|null  ACL object or null
+     * @return Acl\AclInterface|null  ACL object or null
      */
     public function getAcl()
     {
@@ -844,11 +844,11 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * Sets default ACL to use if another ACL is not explicitly set
      *
-     * @param  Acl\Acl $acl [optional] ACL object. Default is null, which
+     * @param  Acl\AclInterface $acl [optional] ACL object. Default is null, which
      *                      sets no ACL object.
      * @return void
      */
-    public static function setDefaultAcl(Acl\Acl $acl = null)
+    public static function setDefaultAcl(Acl\AclInterface $acl = null)
     {
         static::$defaultAcl = $acl;
     }

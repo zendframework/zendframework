@@ -10,7 +10,7 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 
@@ -25,7 +25,7 @@ class Sql
     protected $table = null;
     protected $sqlPlatform = null;
 
-    public function __construct(Adapter $adapter, $table = null, Platform\AbstractPlatform $sqlPlatform = null)
+    public function __construct(AdapterInterface $adapter, $table = null, Platform\AbstractPlatform $sqlPlatform = null)
     {
         $this->adapter = $adapter;
         if ($table) {

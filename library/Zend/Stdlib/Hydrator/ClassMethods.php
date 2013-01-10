@@ -17,22 +17,61 @@ use Zend\Stdlib\Exception;
  * @package    Zend_Stdlib
  * @subpackage Hydrator
  */
-class ClassMethods extends AbstractHydrator
+class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      * @var bool
      */
-    protected $underscoreSeparatedKeys;
+    protected $underscoreSeparatedKeys = true;
 
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param  bool $underscoreSeparatedKeys
+     * @param bool|array $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
         parent::__construct();
+        $this->setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
+    }
+
+    /**
+     * @param  array|\Traversable $options
+     * @return ClassMethods
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+        if (isset($options['underscoreSeparatedKeys'])) {
+            $this->setUnderscoreSeparatedKeys($options['underscoreSeparatedKeys']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  boolean $underscoreSeparatedKeys
+     * @return ClassMethods
+     */
+    public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
+    {
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUnderscoreSeparatedKeys()
+    {
+        return $this->underscoreSeparatedKeys;
     }
 
     /**

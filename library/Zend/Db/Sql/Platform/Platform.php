@@ -10,17 +10,17 @@
 
 namespace Zend\Db\Sql\Platform;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 
 class Platform extends AbstractPlatform
 {
 
     /**
-     * @var Adapter
+     * @var AdapterInterface
      */
     protected $adapter = null;
 
-    public function __construct(Adapter $adapter)
+    public function __construct(AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
         $platform = $adapter->getPlatform();

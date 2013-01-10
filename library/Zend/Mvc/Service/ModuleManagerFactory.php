@@ -73,6 +73,24 @@ class ModuleManagerFactory implements FactoryInterface
             'Zend\ModuleManager\Feature\ViewHelperProviderInterface',
             'getViewHelperConfig'
         );
+        $serviceListener->addServiceManager(
+            'ValidatorManager',
+            'validators',
+            'Zend\ModuleManager\Feature\ValidatorProviderInterface',
+            'getValidatorConfig'
+        );
+        $serviceListener->addServiceManager(
+            'FilterManager',
+            'filters',
+            'Zend\ModuleManager\Feature\FilterProviderInterface',
+            'getFilterConfig'
+        );
+        $serviceListener->addServiceManager(
+            'FormElementManager',
+            'form_elements',
+            'Zend\ModuleManager\Feature\FormElementProviderInterface',
+            'getFormElementConfig'
+        );
 
         $events = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

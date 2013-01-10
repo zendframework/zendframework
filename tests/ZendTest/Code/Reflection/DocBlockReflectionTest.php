@@ -11,6 +11,7 @@
 namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Reflection\ClassReflection;
+use Zend\Code\Reflection\DocBlockReflection;
 
 /**
  * @category   Zend
@@ -143,5 +144,53 @@ EOS;
                         . '}' . PHP_EOL;
 
         $this->assertEquals($expectedString, (string)$classDocBlock);
+    }
+
+    public function testFunctionDocBlockTags()
+    {
+        $docblock = '
+    /**
+     * Method ShortDescription
+     *
+     * @param int $one Description for one
+     * @param int[] Description for two
+     * @param string|null $three Description for three
+     *                      which spans multiple lines
+     * @return int[]|null Description
+     * @throws Exception
+     */
+';
+
+        $docblockReflection = new DocBlockReflection($docblock);
+
+        $paramTags = $docblockReflection->getTags('param');
+
+        $this->assertEquals(5, count($docblockReflection->getTags()));
+        $this->assertEquals(3, count($paramTags));
+        $this->assertEquals(1, count($docblockReflection->getTags('return')));
+        $this->assertEquals(1, count($docblockReflection->getTags('throws')));
+
+        $returnTag = $docblockReflection->getTag('return');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\ReturnTag', $returnTag);
+        $this->assertEquals('int[]', $returnTag->getType());
+        $this->assertEquals(array('int[]', 'null'), $returnTag->getTypes());
+        $this->assertEquals('Description', $returnTag->getDescription());
+
+        $throwsTag = $docblockReflection->getTag('throws');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\ThrowsTag', $throwsTag);
+        $this->assertEquals('Exception', $throwsTag->getType());
+
+        $paramTag = $paramTags[0];
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\ParamTag', $paramTag);
+        $this->assertEquals('int', $paramTag->getType());
+
+        $paramTag = $paramTags[1];
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\ParamTag', $paramTag);
+        $this->assertEquals('int[]', $paramTag->getType());
+
+        $paramTag = $paramTags[2];
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\ParamTag', $paramTag);
+        $this->assertEquals('string', $paramTag->getType());
+        $this->assertEquals(array('string', 'null'), $paramTag->getTypes());
     }
 }

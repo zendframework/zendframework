@@ -32,10 +32,18 @@ class Base implements FormatterInterface
      * Class constructor
      *
      * @see http://php.net/manual/en/function.date.php
-     * @param null|string $dateTimeFormat Format for DateTime objects
+     * @param null|string|array|Traversable $dateTimeFormat Format for DateTime objects
      */
     public function __construct($dateTimeFormat = null)
     {
+        if ($dateTimeFormat instanceof Traversable) {
+            $dateTimeFormat = iterator_to_array($dateTimeFormat);
+        }
+
+        if (is_array($dateTimeFormat)) {
+            $dateTimeFormat = isset($dateTimeFormat['dateTimeFormat'])? $dateTimeFormat['dateTimeFormat'] : null;
+        }
+
         if (null !== $dateTimeFormat) {
             $this->dateTimeFormat = $dateTimeFormat;
         }

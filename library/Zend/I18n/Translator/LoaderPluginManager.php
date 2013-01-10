@@ -32,8 +32,9 @@ class LoaderPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'phparray' => 'Zend\I18n\Translator\Loader\PhpArray',
         'gettext'  => 'Zend\I18n\Translator\Loader\Gettext',
+        'ini'      => 'Zend\I18n\Translator\Loader\Ini',
+        'phparray' => 'Zend\I18n\Translator\Loader\PhpArray',
     );
 
     /**

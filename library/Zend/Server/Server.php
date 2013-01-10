@@ -65,7 +65,7 @@ interface Server
     /**
      * Handle a request
      *
-     * Requests may be passed in, or the server may automagically determine the
+     * Requests may be passed in, or the server may automatically determine the
      * request based on defaults. Dispatches server request to appropriate
      * method and returns a response
      *

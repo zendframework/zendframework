@@ -35,8 +35,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidatorChain()
     {
         $validatorChain = new ValidatorChain();
-        $validatorChain->addValidator(new DigitsFilter());
-        $validatorChain->addValidator(new Int());
+        $validatorChain->attach(new DigitsFilter());
+        $validatorChain->attach(new Int());
         $filter = new Validator($validatorChain);
         $this->assertTrue($filter->filter(array('message' => '123')));
         $this->assertFalse($filter->filter(array('message' => 'test')));

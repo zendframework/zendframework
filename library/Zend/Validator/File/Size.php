@@ -33,9 +33,9 @@ class Size extends AbstractValidator
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::TOO_BIG   => "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected",
-        self::TOO_SMALL => "Minimum expected size for file '%value%' is '%min%' but '%size%' detected",
-        self::NOT_FOUND => "File '%value%' is not readable or does not exist",
+        self::TOO_BIG   => "Maximum allowed size for file is '%max%' but '%size%' detected",
+        self::TOO_SMALL => "Minimum expected size for file is '%min%' but '%size%' detected",
+        self::NOT_FOUND => "File is not readable or does not exist",
     );
 
     /**
@@ -232,24 +232,34 @@ class Size extends AbstractValidator
      * Returns true if and only if the file size of $value is at least min and
      * not bigger than max (when max is not null).
      *
-     * @param  string $value Real file to check for size
-     * @param  array  $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value File to check for size
      * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
-        if ($file === null) {
-            $file = array('name' => basename($value));
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->throwError($file, self::NOT_FOUND);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(self::NOT_FOUND);
+            return false;
         }
 
         // limited to 4GB files
         ErrorHandler::start();
-        $size = sprintf("%u", filesize($value));
+        $size = sprintf("%u", filesize($file));
         ErrorHandler::stop();
         $this->size = $size;
 
@@ -260,11 +270,11 @@ class Size extends AbstractValidator
             if ($this->getByteString()) {
                 $this->options['min'] = $this->toByteString($min);
                 $this->size          = $this->toByteString($size);
-                $this->throwError($file, self::TOO_SMALL);
+                $this->error(self::TOO_SMALL);
                 $this->options['min'] = $min;
                 $this->size          = $size;
             } else {
-                $this->throwError($file, self::TOO_SMALL);
+                $this->error(self::TOO_SMALL);
             }
         }
 
@@ -273,11 +283,11 @@ class Size extends AbstractValidator
             if ($this->getByteString()) {
                 $this->options['max'] = $this->toByteString($max);
                 $this->size          = $this->toByteString($size);
-                $this->throwError($file, self::TOO_BIG);
+                $this->error(self::TOO_BIG);
                 $this->options['max'] = $max;
                 $this->size          = $size;
             } else {
-                $this->throwError($file, self::TOO_BIG);
+                $this->error(self::TOO_BIG);
             }
         }
 
@@ -355,26 +365,5 @@ class Size extends AbstractValidator
         return $value;
     }
 
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function throwError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if (array_key_exists('name', $file)) {
-                    $this->value = $file['name'];
-                }
-            } elseif (is_string($file)) {
-                $this->value = $file;
-            }
-        }
 
-        $this->error($errorType);
-        return false;
-    }
 }

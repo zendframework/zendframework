@@ -25,7 +25,12 @@ class LicenseTag extends Tag
     protected $url = null;
 
     /**
-     * @param array $options
+     * @var string
+     */
+    protected $licenseName = null;
+
+    /**
+     * @param  array $options
      */
     public function __construct(array $options = array())
     {
@@ -41,26 +46,22 @@ class LicenseTag extends Tag
     }
 
     /**
-     * fromReflection()
-     *
-     * @param ReflectionDocBlockTag $reflectionTagLicense
+     * @param  ReflectionDocBlockTag $reflectionTagLicense
      * @return LicenseTag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagLicense)
     {
-        $returnTag = new static();
+        $licenseTag = new static();
+        $licenseTag
+            ->setName('license')
+            ->setUrl($reflectionTagLicense->getUrl())
+            ->setLicenseName($reflectionTagLicense->getDescription());
 
-        $returnTag->setName('license');
-        $returnTag->setUrl($reflectionTagLicense->getUrl());
-        $returnTag->setDescription($reflectionTagLicense->getDescription());
-
-        return $returnTag;
+        return $licenseTag;
     }
 
     /**
-     * setUrl()
-     *
-     * @param string $url
+     * @param  string $url
      * @return LicenseTag
      */
     public function setUrl($url)
@@ -70,8 +71,6 @@ class LicenseTag extends Tag
     }
 
     /**
-     * getUrl()
-     *
      * @return string
      */
     public function getUrl()
@@ -80,15 +79,33 @@ class LicenseTag extends Tag
     }
 
     /**
-     * generate()
-     *
+     * @param  string $name
+     * @return LicenseTag
+     */
+    public function setLicenseName($name)
+    {
+        $this->licenseName = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicenseName()
+    {
+        return $this->licenseName;
+    }
+
+    /**
      * @return string
      */
     public function generate()
     {
-        $output = '@' . $this->name
-                . (($this->url !== null) ? ' ' . $this->url : '')
-                . (($this->description !== null) ? ' ' . $this->description : '');
+        $output = '@license '
+            . (($this->url != null) ? $this->url : 'unknown')
+            . (($this->licenseName != null) ? ' ' . $this->licenseName : '')
+            . (($this->description != null) ? ' ' . $this->description : '');
+
         return $output;
     }
 }

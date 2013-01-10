@@ -36,7 +36,7 @@ class Reflection
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
      * @return \Zend\Server\Reflection\ReflectionClass
-     * @throws \Zend\Server\Reflection\Exception\ExceptionInterface
+     * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectClass($class, $argv = false, $namespace = '')
     {
@@ -70,7 +70,7 @@ class Reflection
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
      * @return \Zend\Server\Reflection\ReflectionFunction
-     * @throws \Zend\Server\Reflection\Exception\ExceptionInterface
+     * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {

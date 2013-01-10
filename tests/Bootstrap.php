@@ -93,3 +93,12 @@ if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
  * Unset global variables that are no longer needed.
  */
 unset($zfRoot, $zfCoreLibrary, $zfCoreTests, $path);
+
+/**
+ * Internal PHP function mocks
+ * To be used with runkit_function_rename()
+ */
+function move_uploaded_file_mock($source, $dest)
+{
+    return rename($source, $dest);
+}

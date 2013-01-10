@@ -51,14 +51,14 @@ class FileGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         $codeGenFile = FileGenerator::fromArray(array(
-                                                     'requiredFiles' => array('SampleClass.php'),
-                                                     'class' => array(
-                                                         'flags' => ClassGenerator::FLAG_ABSTRACT,
-                                                         'name' => 'SampleClass',
-                                                         'extendedClass' => 'ExtendedClassName',
-                                                         'implementedInterfaces' => array('Iterator', 'Traversable')
-                                                     )
-                                                ));
+            'requiredFiles' => array('SampleClass.php'),
+            'class' => array(
+                'flags' => ClassGenerator::FLAG_ABSTRACT,
+                'name' => 'SampleClass',
+                'extendedClass' => 'ExtendedClassName',
+                'implementedInterfaces' => array('Iterator', 'Traversable')
+            )
+        ));
 
 
         $expectedOutput = <<<EOS
@@ -84,10 +84,10 @@ EOS;
         $tempFile = tempnam(sys_get_temp_dir(), 'UnitFile');
 
         $codeGenFile = FileGenerator::fromArray(array(
-                                                     'class' => array(
-                                                         'name' => 'SampleClass'
-                                                     )
-                                                ));
+            'class' => array(
+                'name' => 'SampleClass'
+            )
+        ));
 
         file_put_contents($tempFile, $codeGenFile->generate());
 
@@ -168,9 +168,9 @@ EOS;
                 'abstract' => true,
                 'name' => 'SampleClass',
                 'extendedClass' => 'ExtendedClassName',
-                'implementedInterfaces' => array('Iterator', 'Traversable')
-                )
-            ));
+                'implementedInterfaces' => array('Iterator', 'Traversable'),
+            ),
+        ));
 
         // explode by newline, this would leave CF in place if it were generated
         $lines = explode("\n", $codeGenFile->generate());

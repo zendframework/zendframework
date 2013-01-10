@@ -12,6 +12,7 @@ namespace Zend\Dom;
 
 use DOMDocument;
 use DOMXPath;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Query DOM structures based on CSS selectors and/or XPath
@@ -314,6 +315,13 @@ class Query
                 : $xpath->registerPHPFunctions($this->xpathPhpFunctions);
         }
         $xpathQuery = (string) $xpathQuery;
-        return $xpath->query($xpathQuery);
+
+        ErrorHandler::start();
+        $nodeList = $xpath->query($xpathQuery);
+        $error = ErrorHandler::stop();
+        if ($error) {
+            throw $error;
+        }
+        return $nodeList;
     }
 }

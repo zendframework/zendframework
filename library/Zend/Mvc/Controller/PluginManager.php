@@ -34,6 +34,7 @@ class PluginManager extends AbstractPluginManager
      */
     protected $invokableClasses = array(
         'acceptableviewmodelselector' => 'Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector',
+        'filepostredirectget'         => 'Zend\Mvc\Controller\Plugin\FilePostRedirectGet',
         'flashmessenger'              => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
         'forward'                     => 'Zend\Mvc\Controller\Plugin\Forward',
         'layout'                      => 'Zend\Mvc\Controller\Plugin\Layout',
@@ -49,7 +50,8 @@ class PluginManager extends AbstractPluginManager
      * @var array
      */
     protected $aliases = array(
-        'prg'             => 'postredirectget',
+        'prg'     => 'postredirectget',
+        'fileprg' => 'filepostredirectget',
     );
 
     /**
@@ -68,6 +70,17 @@ class PluginManager extends AbstractPluginManager
     public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
+
+        $this->setFactory('identity', function ($plugins) {
+            $services = $plugins->getServiceLocator();
+            $plugin   = new Plugin\Identity();
+            if (!$services->has('Zend\Authentication\AuthenticationService')) {
+                return $plugin;
+            }
+            $plugin->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+            return $plugin;
+        });
+
         $this->addInitializer(array($this, 'injectController'));
     }
 

@@ -18,27 +18,6 @@ class RestfulTestController extends AbstractRestfulController
     public $entity   = array();
 
     /**
-     * Return list of resources
-     *
-     * @return mixed
-     */
-    public function getList()
-    {
-        return array('entities' => $this->entities);
-    }
-
-    /**
-     * Return single resource
-     *
-     * @param  mixed $id
-     * @return mixed
-     */
-    public function get($id)
-    {
-        return array('entity' => $this->entity);
-    }
-
-    /**
      * Create a new resource
      *
      * @param  mixed $data
@@ -46,19 +25,6 @@ class RestfulTestController extends AbstractRestfulController
      */
     public function create($data)
     {
-        return array('entity' => $data);
-    }
-
-    /**
-     * Update an existing resource
-     *
-     * @param  mixed $id
-     * @param  mixed $data
-     * @return mixed
-     */
-    public function update($id, $data)
-    {
-        $data['id'] = $id;
         return array('entity' => $data);
     }
 
@@ -74,6 +40,77 @@ class RestfulTestController extends AbstractRestfulController
         return array();
     }
 
+    /**
+     * Return single resource
+     *
+     * @param  mixed $id
+     * @return mixed
+     */
+    public function get($id)
+    {
+        return array('entity' => $this->entity);
+    }
+
+    /**
+     * Return list of resources
+     *
+     * @return mixed
+     */
+    public function getList()
+    {
+        return array('entities' => $this->entities);
+    }
+
+    /**
+     * Retrieve the headers for a given resource
+     *
+     * @return void
+     */
+    public function head($id = null)
+    {
+    }
+
+    /**
+     * Return list of allowed HTTP methods
+     *
+     * @return \Zend\Http\Response
+     */
+    public function options()
+    {
+        $response = $this->getResponse();
+        $headers  = $response->getHeaders();
+        $headers->addHeaderLine('Allow', 'GET, POST, PUT, DELETE, PATCH, HEAD, TRACE');
+        return $response;
+    }
+
+    /**
+     * Patch (partial update) an entity
+     *
+     * @param  int $id
+     * @param  array $data
+     * @return array
+     */
+    public function patch($id, $data)
+    {
+        $entity     = (array) $this->entity;
+        $data['id'] = $id;
+        $updated    = array_merge($entity, $data);
+        return array('entity' => $updated);
+    }
+
+    /**
+     * Update an existing resource
+     *
+     * @param  mixed $id
+     * @param  mixed $data
+     * @return mixed
+     */
+    public function update($id, $data)
+    {
+        $data['id'] = $id;
+        return array('entity' => $data);
+    }
+
     public function editAction()
     {
         return array('content' => __FUNCTION__);
@@ -82,5 +119,10 @@ class RestfulTestController extends AbstractRestfulController
     public function testSomeStrangelySeparatedWordsAction()
     {
         return array('content' => 'Test Some Strangely Separated Words');
+    }
+
+    public function describe()
+    {
+        return array('description' => __METHOD__);
     }
 }

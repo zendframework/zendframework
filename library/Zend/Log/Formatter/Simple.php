@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Formatter;
 
+use Traversable;
 use Zend\Log\Exception;
 
 /**
@@ -38,6 +39,15 @@ class Simple extends Base
      */
     public function __construct($format = null, $dateTimeFormat = null)
     {
+        if ($format instanceof Traversable) {
+            $format = iterator_to_array($format);
+        }
+
+        if (is_array($format)) {
+            $dateTimeFormat = isset($format['dateTimeFormat'])? $format['dateTimeFormat'] : null;
+            $format         = isset($format['format'])? $format['format'] : null;
+        }
+
         if (isset($format) && !is_string($format)) {
             throw new Exception\InvalidArgumentException('Format must be a string');
         }

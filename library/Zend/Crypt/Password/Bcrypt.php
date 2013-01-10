@@ -35,6 +35,11 @@ class Bcrypt implements PasswordInterface
     protected $salt;
 
     /**
+     * @var boolean
+     */
+    protected $backwardCompatibility = false;
+
+    /**
      * Constructor
      *
      * @param array|Traversable $options
@@ -82,7 +87,7 @@ class Bcrypt implements PasswordInterface
          * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
          */
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
+        if ((version_compare(PHP_VERSION, '5.3.7') >= 0) && !$this->backwardCompatibility) {
             $prefix = '$2y$';
         } else {
             $prefix = '$2a$';
@@ -171,5 +176,26 @@ class Bcrypt implements PasswordInterface
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    /**
+     * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
+     *
+     * @param boolean $value
+     */
+    public function setBackwardCompatibility($value)
+    {
+        $this->backwardCompatibility = (boolean) $value;
+        return $this;
+    }
+
+    /**
+     * Get the backward compatibility
+     *
+     * @return boolean
+     */
+    public function getBackwardCompatibility()
+    {
+        return $this->backwardCompatibility;
     }
 }

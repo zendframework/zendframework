@@ -50,7 +50,10 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
      */
     protected $fieldCount = null;
 
-    protected $position = null;
+    /**
+     * @var int
+     */
+    protected $position = 0;
 
     /**
      * Set the data source for the result set
@@ -101,6 +104,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
         } elseif ($this->buffer === null) {
             $this->buffer = array();
         }
+        return $this;
     }
 
     public function isBuffered()

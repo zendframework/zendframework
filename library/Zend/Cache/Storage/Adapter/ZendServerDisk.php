@@ -75,6 +75,11 @@ class ZendServerDisk extends AbstractZendServer implements
      */
     public function clearByNamespace($namespace)
     {
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
         return zend_disk_cache_clear($namespace);
     }
 
@@ -88,8 +93,8 @@ class ZendServerDisk extends AbstractZendServer implements
      */
     public function getTotalSpace()
     {
-        if ($this->totalSpace !== null) {
-            $path = $this->getOptions()->getCacheDir();
+        if ($this->totalSpace === null) {
+            $path = ini_get('zend_datacache.disk.save_path');
 
             ErrorHandler::start();
             $total = disk_total_space($path);
@@ -97,6 +102,8 @@ class ZendServerDisk extends AbstractZendServer implements
             if ($total === false) {
                 throw new Exception\RuntimeException("Can't detect total space of '{$path}'", 0, $error);
             }
+
+            $this->totalSpace = $total;
         }
         return $this->totalSpace;
     }
@@ -111,7 +118,7 @@ class ZendServerDisk extends AbstractZendServer implements
      */
     public function getAvailableSpace()
     {
-        $path = $this->getOptions()->getCacheDir();
+        $path = ini_get('zend_datacache.disk.save_path');
 
         ErrorHandler::start();
         $avail = disk_free_space($path);

@@ -12,6 +12,8 @@ namespace Zend\Feed\Writer\Extension\ITunes;
 
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Extension;
+use Zend\Stdlib\StringUtils;
+use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
 /**
 * @category Zend
@@ -34,6 +36,18 @@ class Entry
     protected $encoding = 'UTF-8';
 
     /**
+     * The used string wrapper supporting encoding
+     *
+     * @var StringWrapperInterface
+     */
+    protected $stringWrapper;
+
+    public function __construct()
+    {
+        $this->stringWrapper = StringUtils::getWrapper($this->encoding);
+    }
+
+    /**
      * Set feed encoding
      *
      * @param  string $enc
@@ -41,7 +55,8 @@ class Entry
      */
     public function setEncoding($enc)
     {
-        $this->encoding = $enc;
+        $this->stringWrapper = StringUtils::getWrapper($enc);
+        $this->encoding      = $enc;
         return $this;
     }
 
@@ -68,7 +83,8 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
-        if (iconv_strlen($value, $this->getEncoding()) > 255) {
+
+        if ($this->stringWrapper->strlen($value) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
         }
@@ -98,7 +114,7 @@ class Entry
      */
     public function addItunesAuthor($value)
     {
-        if (iconv_strlen($value, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($value) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
@@ -160,8 +176,9 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "keywords" may only'
             . ' contain a maximum of 12 terms');
         }
+
         $concat = implode(',', $value);
-        if (iconv_strlen($concat, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($concat) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "keywords" may only'
             . ' have a concatenated length of 255 chars where terms are delimited'
             . ' by a comma');
@@ -179,7 +196,7 @@ class Entry
      */
     public function setItunesSubtitle($value)
     {
-        if (iconv_strlen($value, $this->getEncoding()) > 255) {
+        if ($this->stringWrapper->strlen($value) > 255) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "subtitle" may only'
             . ' contain a maximum of 255 characters');
         }
@@ -196,7 +213,7 @@ class Entry
      */
     public function setItunesSummary($value)
     {
-        if (iconv_strlen($value, $this->getEncoding()) > 4000) {
+        if ($this->stringWrapper->strlen($value) > 4000) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "summary" may only'
             . ' contain a maximum of 4000 characters');
         }

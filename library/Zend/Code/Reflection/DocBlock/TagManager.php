@@ -11,15 +11,31 @@
 namespace Zend\Code\Reflection\DocBlock;
 
 use Zend\Code\Reflection\Exception;
+use Zend\Code\Reflection\DocBlock\Tag\GenericTag;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface;
 
 class TagManager
 {
     const USE_DEFAULT_PROTOTYPES = 'default';
 
+    /**
+     * @var array
+     */
     protected $tagNames = array();
+
+    /**
+     * @var array
+     */
     protected $tags = array();
+
+    /**
+     * @var GenericTag
+     */
     protected $genericTag = null;
 
+    /**
+     * @param TagInterface[] $prototypes
+     */
     public function __construct($prototypes = null)
     {
         if (is_array($prototypes)) {
@@ -31,16 +47,26 @@ class TagManager
         }
     }
 
+    /**
+     * @return void
+     */
     public function useDefaultPrototypes()
     {
         $this->addTagPrototype(new Tag\ParamTag());
         $this->addTagPrototype(new Tag\ReturnTag());
         $this->addTagPrototype(new Tag\MethodTag());
         $this->addTagPrototype(new Tag\PropertyTag());
+        $this->addTagPrototype(new Tag\AuthorTag());
+        $this->addTagPrototype(new Tag\LicenseTag());
+        $this->addTagPrototype(new Tag\ThrowsTag());
         $this->addTagPrototype(new Tag\GenericTag());
     }
 
-    public function addTagPrototype(Tag\TagInterface $tag)
+    /**
+     * @param TagInterface $tag
+     * @throws Exception\InvalidArgumentException
+     */
+    public function addTagPrototype(TagInterface $tag)
     {
         $tagName = str_replace(array('-', '_'), '', $tag->getName());
 
@@ -51,17 +77,27 @@ class TagManager
         $this->tagNames[] = $tagName;
         $this->tags[]     = $tag;
 
-        if ($tag instanceof Tag\GenericTag) {
+        if ($tag instanceof GenericTag) {
             $this->genericTag = $tag;
         }
     }
 
+    /**
+     * @param  string $tagName
+     * @return boolean
+     */
     public function hasTag($tagName)
     {
         // otherwise, only if its name exists as a key
         return in_array(str_replace(array('-', '_'), '', $tagName), $this->tagNames);
     }
 
+    /**
+     * @param  string $tagName
+     * @param  string $content
+     * @return GenericTag
+     * @throws Exception\RuntimeException
+     */
     public function createTag($tagName, $content = null)
     {
         $tagName = str_replace(array('-', '_'), '', $tagName);
@@ -72,7 +108,7 @@ class TagManager
 
         $index = array_search($tagName, $this->tagNames);
 
-        /* @var Tag\TagInterface $tag */
+        /* @var TagInterface $tag */
         $tag = ($index !== false) ? $this->tags[$index] : $this->genericTag;
 
         $newTag = clone $tag;
@@ -80,7 +116,7 @@ class TagManager
             $newTag->initialize($content);
         }
 
-        if ($newTag instanceof Tag\GenericTag) {
+        if ($newTag instanceof GenericTag) {
             $newTag->setName($tagName);
         }
 

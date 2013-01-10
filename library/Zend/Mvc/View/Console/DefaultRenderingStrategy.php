@@ -69,14 +69,12 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
             return $result; // the result is already rendered ...
         }
 
-        // <artial arguments
+        // marshal arguments
         $response  = $e->getResponse();
 
         if (empty($result)) {
-            /**
-             * There is absolutely no result, so there's nothing to display.
-             * We will return an empty response object
-             */
+            // There is absolutely no result, so there's nothing to display.
+            // We will return an empty response object
             return $response;
         }
 
@@ -84,7 +82,8 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         $responseText = '';
         if ($result->hasChildren()) {
             foreach ($result->getChildren() as $child) {
-                // Do not use ::getResult() method here as we cannot be sure if children are also console models.
+                // Do not use ::getResult() method here as we cannot be sure if
+                // children are also console models.
                 $responseText .= $child->getVariable(ConsoleViewModel::RESULT);
             }
         }
@@ -102,12 +101,9 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         );
 
         // Pass on console-specific options
-        if (
-            $response  instanceof ConsoleResponse &&
-            $result    instanceof ConsoleViewModel
+        if ($response instanceof ConsoleResponse
+            && $result instanceof ConsoleViewModel
         ) {
-            /* @var $response ConsoleResponse */
-            /* @var $result ConsoleViewModel */
             $errorLevel = $result->getErrorLevel();
             $response->setErrorLevel($errorLevel);
         }

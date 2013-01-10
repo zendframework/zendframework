@@ -85,6 +85,7 @@ class Mail extends AbstractWriter
         }
 
         if (is_array($mail)) {
+            parent::__construct($mail);
             if (isset($mail['subject_prepend_text'])) {
                 $this->setSubjectPrependText($mail['subject_prepend_text']);
             }
@@ -113,7 +114,9 @@ class Mail extends AbstractWriter
         }
         $this->setTransport($transport);
 
-        $this->formatter = new SimpleFormatter();
+        if($this->formatter === null) {
+            $this->formatter = new SimpleFormatter();
+        }
     }
 
     /**

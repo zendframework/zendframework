@@ -25,7 +25,6 @@ class Redirect extends AbstractPlugin
 {
     protected $event;
     protected $response;
-    protected $router;
 
     /**
      * Generates a URL based on a route
@@ -68,6 +67,16 @@ class Redirect extends AbstractPlugin
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
+    }
+
+    /**
+     * Refresh to current route
+     *
+     * @return string
+     */
+    public function refresh()
+    {
+        return $this->toRoute(null, array(), array(), true);
     }
 
     /**

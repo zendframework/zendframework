@@ -90,9 +90,19 @@ class HydratingResultSet extends AbstractResultSet
      */
     public function current()
     {
+        if ($this->buffer === null) {
+            $this->buffer = -2; // implicitly disable buffering from here on
+        } elseif (is_array($this->buffer) && isset($this->buffer[$this->position])) {
+            return $this->buffer[$this->position];
+        }
         $data = $this->dataSource->current();
-        $object = clone $this->objectPrototype;
-        return is_array($data) ? $this->hydrator->hydrate($data, $object) : false;
+        $object = is_array($data) ? $this->hydrator->hydrate($data, clone $this->objectPrototype) : false;
+
+        if (is_array($this->buffer)) {
+            $this->buffer[$this->position] = $object;
+        }
+
+        return $object;
     }
 
     /**

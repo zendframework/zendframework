@@ -39,6 +39,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->from('foo', 'bar');
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -61,7 +62,21 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->columns(array('foo', 'bar'));
         $this->assertSame($select, $return);
+
         return $select;
+    }
+
+    /**
+     * @testdox unit test: Test isTableReadOnly() returns correct state for read only
+     * @covers Zend\Db\Sql\Select::isTableReadOnly
+     */
+    public function testIsTableReadOnly()
+    {
+        $select = new Select('foo');
+        $this->assertTrue($select->isTableReadOnly());
+
+        $select = new Select;
+        $this->assertFalse($select->isTableReadOnly());
     }
 
     /**
@@ -83,6 +98,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->join('foo', 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -241,6 +257,25 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test where() will accept any Predicate object as-is
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsPredicate()
+    {
+        $select = new Select;
+        $predicate = new Predicate\Predicate(array(
+            new Predicate\Expression('name = ?', 'Ralph'),
+            new Predicate\Expression('age = ?', 33),
+        ));
+        $select->where($predicate);
+
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertSame($predicate, $predicates[0][1]);
+    }
+
+    /**
      * @testdox unit test: Test where() will accept a Where object
      * @covers Zend\Db\Sql\Select::where
      */
@@ -271,6 +306,10 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $select->order(array('name ASC', 'age DESC'));
         $this->assertEquals(array('name ASC', 'age DESC'), $select->getRawState('order'));
+
+        $select = new Select;
+        $select->order(new Expression('RAND()'));
+        $this->assertEquals('RAND()', current($select->getRawState('order'))->getExpression());
     }
 
     /**
@@ -282,6 +321,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->group(array('col1', 'col2'));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -307,6 +347,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->having(array('x = ?' => 5));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -473,7 +514,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
         $parameterContainer = new ParameterContainer();
 
         $sr = new \ReflectionObject($select);
@@ -481,7 +521,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         foreach ($internalTests as $method => $expected) {
             $mr = $sr->getMethod($method);
             $mr->setAccessible(true);
-            $return = $mr->invokeArgs($select, array(new Sql92, $mockAdapter, $parameterContainer));
+            $return = $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
             $this->assertEquals($expected, $return);
         }
     }
@@ -884,7 +924,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"', '"bar"')), '"foo"')
         );
 
-
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -892,6 +931,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
          * $sqlStr = the sql as a result of getting a string back
          * $internalTests what the internal functions should return (safe-guarding extension)
          */
+
         return array(
             //    $select    $sqlPrep    $params     $sqlStr    $internalTests    // use named param
             array($select0,  $sqlPrep0,  array(),    $sqlStr0,  $internalTests0),
@@ -934,5 +974,4 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
         );
     }
-
 }

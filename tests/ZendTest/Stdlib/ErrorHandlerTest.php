@@ -17,9 +17,38 @@ class ErrorHandlerTest extends TestCase
 {
     public function tearDown()
     {
-        if (ErrorHandler::started()) {
-            ErrorHandler::stop();
+        if (ErrorHandler::getNestedLevel()) {
+            ErrorHandler::clean();
         }
+    }
+
+    public function testNestedLevel()
+    {
+        $this->assertSame(0, ErrorHandler::getNestedLevel());
+
+        ErrorHandler::start();
+        $this->assertSame(1, ErrorHandler::getNestedLevel());
+
+        ErrorHandler::start();
+        $this->assertSame(2, ErrorHandler::getNestedLevel());
+
+        ErrorHandler::stop();
+        $this->assertSame(1, ErrorHandler::getNestedLevel());
+
+        ErrorHandler::stop();
+        $this->assertSame(0, ErrorHandler::getNestedLevel());
+    }
+
+    public function testClean()
+    {
+        ErrorHandler::start();
+        $this->assertSame(1, ErrorHandler::getNestedLevel());
+
+        ErrorHandler::start();
+        $this->assertSame(2, ErrorHandler::getNestedLevel());
+
+        ErrorHandler::clean();
+        $this->assertSame(0, ErrorHandler::getNestedLevel());
     }
 
     public function testStarted()
@@ -31,20 +60,6 @@ class ErrorHandlerTest extends TestCase
 
         ErrorHandler::stop();
         $this->assertFalse(ErrorHandler::started());
-    }
-
-    public function testStartThrowsLogicException()
-    {
-        ErrorHandler::start();
-
-        $this->setExpectedException('Zend\Stdlib\Exception\LogicException');
-        ErrorHandler::start();
-    }
-
-    public function testStopThrowsLogicException()
-    {
-        $this->setExpectedException('Zend\Stdlib\Exception\LogicException');
-        ErrorHandler::stop();
     }
 
     public function testReturnCatchedError()
@@ -65,7 +80,7 @@ class ErrorHandlerTest extends TestCase
         ErrorHandler::stop(true);
     }
 
-    public function testAddErrors()
+    public function testAddError()
     {
         ErrorHandler::start();
         ErrorHandler::addError(1, 'test-msg1', 'test-file1', 100);

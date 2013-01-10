@@ -12,6 +12,7 @@ namespace Zend\Mvc\View\Http;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ModelInterface as ViewModel;
@@ -125,7 +126,16 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         $view = $this->view;
         $view->setRequest($request);
         $view->setResponse($response);
-        $view->render($viewModel);
+
+        try {
+            $view->render($viewModel);
+        } catch(\Exception $ex) {
+            $application = $e->getApplication();
+            $events      = $application->getEventManager();
+            $e->setError(Application::ERROR_EXCEPTION)
+              ->setParam('exception', $ex);
+            $events->trigger(MvcEvent::EVENT_RENDER_ERROR, $e);
+        }
 
         return $response;
     }

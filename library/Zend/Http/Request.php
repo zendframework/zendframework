@@ -37,6 +37,7 @@ class Request extends AbstractMessage implements RequestInterface
     const METHOD_TRACE   = 'TRACE';
     const METHOD_CONNECT = 'CONNECT';
     const METHOD_PATCH   = 'PATCH';
+    const METHOD_PROPFIND= 'PROPFIND';
     /**#@-*/
 
     /**
@@ -368,6 +369,16 @@ class Request extends AbstractMessage implements RequestInterface
     public function isOptions()
     {
         return ($this->method === self::METHOD_OPTIONS);
+    }
+
+    /**
+     * Is this a PROPFIND method request?
+     *
+     * @return bool
+     */
+    public function isPropFind()
+    {
+        return ($this->method === self::METHOD_PROPFIND);
     }
 
     /**

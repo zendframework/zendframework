@@ -22,41 +22,39 @@ use Zend\Validator\File\ExcludeMimeType;
  */
 class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
 {
-    public static function basicValues()
+    /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
     {
+        $testFile = __DIR__ . '/_files/picture.jpg';
+        $fileUpload = array(
+            'tmp_name' => $testFile, 'name' => basename($testFile),
+            'size' => 200, 'error' => 0, 'type' => 'image/jpeg'
+        );
         return array(
-            array('image/gif', true),
-            array('image', false),
-            array('test/notype', true),
-            array('image/gif, image/jpeg', false),
-            array(array('image/vasa', 'image/gif'), true),
-            array(array('image/gif', 'jpeg'), false),
-            array(array('image/gif', 'gif'), true),
+            //    Options, isValid Param, Expected value
+            array('image/gif',                      $fileUpload, true),
+            array('image',                          $fileUpload, false),
+            array('test/notype',                    $fileUpload, true),
+            array('image/gif, image/jpeg',          $fileUpload, false),
+            array(array('image/vasa', 'image/gif'), $fileUpload, true),
+            array(array('image/gif', 'jpeg'),       $fileUpload, false),
+            array(array('image/gif', 'gif'),        $fileUpload, true),
         );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @group fml
-     * @dataProvider basicValues
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
      */
-    public function testBasic($input, $expected)
+    public function testBasic($options, $isValidParam, $expected)
     {
-        $files = array(
-            'name'     => 'picture.jpg',
-            'type'     => 'image/jpeg',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/picture.jpg',
-            'error'    => 0
-        );
-
-        $validator = new ExcludeMimeType($input);
+        $validator = new ExcludeMimeType($options);
         $validator->enableHeaderCheck();
-        $this->assertEquals(
-            $expected,
-            $validator->isValid(__DIR__ . '/_files/picture.jpg', $files)
-        );
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
     }
 
     /**

@@ -286,7 +286,7 @@ class Paginator implements Countable, IteratorAggregate
             $this->adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
-                'Zend_Paginator only accepts instances of the type ' .
+                'Zend\Paginator only accepts instances of the type ' .
                 'Zend\Paginator\Adapter\AdapterInterface or Zend\Paginator\AdapterAggregateInterface.'
             );
         }

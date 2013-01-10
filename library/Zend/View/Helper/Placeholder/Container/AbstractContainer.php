@@ -98,6 +98,7 @@ abstract class AbstractContainer extends \ArrayObject
     public function set($value)
     {
         $this->exchangeArray(array($value));
+        return $this;
     }
 
     /**
@@ -111,6 +112,7 @@ abstract class AbstractContainer extends \ArrayObject
         $values = $this->getArrayCopy();
         array_unshift($values, $value);
         $this->exchangeArray($values);
+        return $this;
     }
 
     /**

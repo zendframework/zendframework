@@ -32,9 +32,9 @@ class IsCompressed extends MimeType
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::FALSE_TYPE   => "File '%value%' is not compressed, '%type%' detected",
-        self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
-        self::NOT_READABLE => "File '%value%' is not readable or does not exist",
+        self::FALSE_TYPE   => "File is not compressed, '%type%' detected",
+        self::NOT_DETECTED => "The mimetype could not be detected from the file",
+        self::NOT_READABLE => "File is not readable or does not exist",
     );
 
     /**
@@ -88,43 +88,5 @@ class IsCompressed extends MimeType
         }
 
         parent::__construct($options);
-    }
-
-    /**
-     * Throws an error of the given type
-     * Duplicates parent method due to OOP Problem with late static binding in PHP 5.2
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function createError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if (array_key_exists('name', $file)) {
-                    $file = $file['name'];
-                }
-            }
-
-            if (is_string($file)) {
-                $this->value = basename($file);
-            }
-        }
-
-        switch ($errorType) {
-            case MimeType::FALSE_TYPE :
-                $errorType = self::FALSE_TYPE;
-                break;
-            case MimeType::NOT_DETECTED :
-                $errorType = self::NOT_DETECTED;
-                break;
-            case MimeType::NOT_READABLE :
-                $errorType = self::NOT_READABLE;
-                break;
-        }
-
-        $this->error($errorType);
-        return false;
     }
 }

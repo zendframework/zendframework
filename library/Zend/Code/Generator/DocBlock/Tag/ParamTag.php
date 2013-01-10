@@ -19,7 +19,6 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  */
 class ParamTag extends Tag
 {
-
     /**
      * @var string
      */
@@ -31,27 +30,23 @@ class ParamTag extends Tag
     protected $paramName = null;
 
     /**
-     * fromReflection()
-     *
-     * @param ReflectionDocBlockTag $reflectionTagParam
+     * @param  ReflectionDocBlockTag $reflectionTagParam
      * @return ParamTag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagParam)
     {
         $paramTag = new static();
-
-        $paramTag->setName('param');
-        $paramTag->setDatatype($reflectionTagParam->getType()); // @todo rename
-        $paramTag->setParamName($reflectionTagParam->getVariableName());
-        $paramTag->setDescription($reflectionTagParam->getDescription());
+        $paramTag
+            ->setName('param')
+            ->setDatatype($reflectionTagParam->getType()) // @todo rename
+            ->setParamName($reflectionTagParam->getVariableName())
+            ->setDescription($reflectionTagParam->getDescription());
 
         return $paramTag;
     }
 
     /**
-     * setDatatype()
-     *
-     * @param string $datatype
+     * @param  string $datatype
      * @return ParamTag
      */
     public function setDatatype($datatype)
@@ -61,8 +56,6 @@ class ParamTag extends Tag
     }
 
     /**
-     * getDatatype
-     *
      * @return string
      */
     public function getDatatype()
@@ -71,9 +64,7 @@ class ParamTag extends Tag
     }
 
     /**
-     * setParamName()
-     *
-     * @param string $paramName
+     * @param  string $paramName
      * @return ParamTag
      */
     public function setParamName($paramName)
@@ -83,8 +74,6 @@ class ParamTag extends Tag
     }
 
     /**
-     * getParamName()
-     *
      * @return string
      */
     public function getParamName()
@@ -93,8 +82,6 @@ class ParamTag extends Tag
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
@@ -103,6 +90,7 @@ class ParamTag extends Tag
             . (($this->datatype != null) ? $this->datatype : 'unknown')
             . (($this->paramName != null) ? ' $' . $this->paramName : '')
             . (($this->description != null) ? ' ' . $this->description : '');
+
         return $output;
     }
 

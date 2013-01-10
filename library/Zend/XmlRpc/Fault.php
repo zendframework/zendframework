@@ -10,6 +10,8 @@
 
 namespace Zend\XmlRpc;
 
+use SimpleXMLElement;
+
 /**
  * XMLRPC Faults
  *
@@ -171,7 +173,7 @@ class Fault
      * @param string $fault
      * @return bool Returns true if successfully loaded fault response, false
      * if response was not a fault response
-     * @throws \Zend\XmlRpc\Exception\ExceptionInterface if no or faulty XML provided, or if fault
+     * @throws Exception\ExceptionInterface if no or faulty XML provided, or if fault
      * response does not contain either code or message
      */
     public function loadXml($fault)
@@ -180,12 +182,25 @@ class Fault
             throw new Exception\InvalidArgumentException('Invalid XML provided to fault');
         }
 
+        $xmlErrorsFlag = libxml_use_internal_errors(true);
         try {
-            $xml = new \SimpleXMLElement($fault);
+            $xml = new SimpleXMLElement($fault);
         } catch (\Exception $e) {
             // Not valid XML
             throw new Exception\InvalidArgumentException('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
         }
+        if (!$xml instanceof SimpleXMLElement) {
+            $errors = libxml_get_errors();
+            $errors = array_reduce($errors, function ($result, $item) {
+                if (empty($result)) {
+                    return $item->message;
+                }
+                return $result . '; ' . $item->message;
+            }, '');
+            libxml_use_internal_errors($xmlErrorsFlag);
+            throw new Exception\InvalidArgumentException('Failed to parse XML fault: ' . $errors, 500);
+        }
+        libxml_use_internal_errors($xmlErrorsFlag);
 
         // Check for fault
         if (!$xml->fault) {

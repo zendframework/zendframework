@@ -10,6 +10,8 @@
 
 namespace Zend\Validator\File;
 
+use Zend\Validator\Exception;
+
 /**
  * Validator which checks if the destination file does not exist
  *
@@ -27,38 +29,57 @@ class NotExists extends Exists
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::DOES_EXIST => "File '%value%' exists",
+        self::DOES_EXIST => "File exists",
     );
 
     /**
      * Returns true if and only if the file does not exist in the set destinations
      *
-     * @param  string  $value Real file to check for
-     * @param  array   $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for existence
      * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value)
     {
+        if (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = basename($file);
+            $this->setValue($value['name']);
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $this->setValue($filename);
+        }
+
+        $check = false;
         $directories = $this->getDirectory(true);
-        if (($file !== null) && (!empty($file['destination']))) {
-            $directories[] = $file['destination'];
-        } elseif (!isset($file['name'])) {
-            $file['name'] = $value;
-        }
-
-        foreach ($directories as $directory) {
-            if (empty($directory)) {
-                continue;
-            }
-
+        if (!isset($directories)) {
             $check = true;
-            if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->throwError($file, self::DOES_EXIST);
+            if (file_exists($file)) {
+                $this->error(self::DOES_EXIST);
+                return false;
+            }
+        } else {
+            foreach ($directories as $directory) {
+                if (!isset($directory) || '' === $directory) {
+                    continue;
+                }
+
+                $check = true;
+                if (file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                    $this->error(self::DOES_EXIST);
+                    return false;
+                }
             }
         }
 
-        if (!isset($check)) {
-            return $this->throwError($file, self::DOES_EXIST);
+        if (!$check) {
+            $this->error(self::DOES_EXIST);
+            return false;
         }
 
         return true;

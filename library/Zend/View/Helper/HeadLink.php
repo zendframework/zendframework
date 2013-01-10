@@ -115,7 +115,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<type>Stylesheet|Alternate)$/', $method, $matches)) {
+        if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<type>Stylesheet|Alternate|Prev|Next)$/', $method, $matches)) {
             $argc   = count($args);
             $action = $matches['action'];
             $type   = $matches['type'];
@@ -423,6 +423,36 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $title = (string) $title;
 
         $attributes = compact('rel', 'href', 'type', 'title', 'extras');
+        return $this->createData($attributes);
+    }
+
+    /**
+     * Create item for a prev relationship (mainly used for pagination)
+     *
+     * @param array $args
+     * @return stdClass
+     */
+    public function createDataPrev(array $args)
+    {
+        $rel  = 'prev';
+        $href = (string) array_shift($args);
+
+        $attributes = compact('rel', 'href');
+        return $this->createData($attributes);
+    }
+
+    /**
+     * Create item for a prev relationship (mainly used for pagination)
+     *
+     * @param array $args
+     * @return stdClass
+     */
+    public function createDataNext(array $args)
+    {
+        $rel  = 'next';
+        $href = (string) array_shift($args);
+
+        $attributes = compact('rel', 'href');
         return $this->createData($attributes);
     }
 }

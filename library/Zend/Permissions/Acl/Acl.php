@@ -15,7 +15,7 @@ namespace Zend\Permissions\Acl;
  * @package    Zend_Permissions
  * @subpackage Acl
  */
-class Acl
+class Acl implements AclInterface
 {
     /**
      * Rule type: allow

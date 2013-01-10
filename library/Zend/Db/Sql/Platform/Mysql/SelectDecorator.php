@@ -10,7 +10,8 @@
 
 namespace Zend\Db\Sql\Platform\Mysql;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
@@ -33,10 +34,10 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
-     * @param Adapter $adapter
+     * @param AdapterInterface $adapter
      * @param StatementContainerInterface $statementContainer
      */
-    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
+    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
         // localize variables
         foreach (get_object_vars($this->select) as $name => $value) {
@@ -58,13 +59,12 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         return parent::getSqlString($platform);
     }
 
-    protected function processLimit(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
+    protected function processLimit(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->limit === null) {
             return null;
         }
-        if ($adapter) {
-            $driver = $adapter->getDriver();
+        if ($driver) {
             $sql = $driver->formatParameterName('limit');
             $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
         } else {
@@ -74,14 +74,14 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         return array($sql);
     }
 
-    protected function processOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
+    protected function processOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->offset === null) {
             return null;
         }
-        if ($adapter) {
+        if ($driver) {
             $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
-            return array($adapter->getDriver()->formatParameterName('offset'));
+            return array($driver->formatParameterName('offset'));
         }
 
         return array($this->offset);

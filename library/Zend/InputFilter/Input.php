@@ -308,6 +308,9 @@ class Input implements InputInterface
         return $validator->getMessages();
     }
 
+    /**
+     * @return void
+     */
     protected function injectNotEmptyValidator()
     {
         if ((!$this->isRequired() && $this->allowEmpty()) || $this->notEmptyValidator) {

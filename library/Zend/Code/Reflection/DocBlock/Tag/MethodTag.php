@@ -14,25 +14,21 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
  * @category   Zend
  * @package    Zend_Reflection
  */
-class MethodTag implements TagInterface
+class MethodTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * Return value type
      *
-     * @var string
+     * @var array
      */
-    protected $returnType = null;
+    protected $types = array();
 
     /**
-     * Method name
-     *
      * @var string
      */
     protected $methodName = null;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description = null;
@@ -45,8 +41,6 @@ class MethodTag implements TagInterface
     protected $isStatic = false;
 
     /**
-     * Get tag name
-     *
      * @return string
      */
     public function getName()
@@ -57,40 +51,52 @@ class MethodTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param  string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
-        if (preg_match('#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m', $tagDocblockLine, $match)) {
-            if ($match[1] !== '') {
-                $this->isStatic = true;
-            }
+        $match = array();
 
-            if ($match[2] !== '') {
-                $this->returnType = rtrim($match[2]);
-            }
+        if (!preg_match('#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m', $tagDocblockLine, $match)) {
+            return;
+        }
 
-            $this->methodName = $match[3];
+        if ($match[1] !== '') {
+            $this->isStatic = true;
+        }
 
-            if ($match[4] !== '') {
-                $this->description = $match[4];
-            }
+        if ($match[2] !== '') {
+            $this->types = explode('|', rtrim($match[2]));
+        }
+
+        $this->methodName = $match[3];
+
+        if ($match[4] !== '') {
+            $this->description = $match[4];
         }
     }
 
     /**
      * Get return value type
      *
-     * @return string
+     * @return null|string
+     * @deprecated 2.0.4 use getTypes instead
      */
     public function getReturnType()
     {
-        return $this->returnType;
+        if (empty($this->types)) {
+            return null;
+        }
+
+        return $this->types[0];
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     /**
-     * Get method name
-     *
      * @return string
      */
     public function getMethodName()
@@ -99,8 +105,6 @@ class MethodTag implements TagInterface
     }
 
     /**
-     * Get method description
-     *
      * @return null|string
      */
     public function getDescription()

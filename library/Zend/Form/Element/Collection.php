@@ -464,6 +464,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      */
     public function extract()
     {
+
         if ($this->object instanceof Traversable) {
             $this->object = ArrayUtils::iteratorToArray($this->object);
         }
@@ -478,12 +479,10 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             if ($this->hydrator) {
                 $values[$key] = $this->hydrator->extract($value);
             } elseif ($value instanceof $this->targetElement->object) {
-                $originalObject = $this->targetElement->object;
-
-                $this->targetElement->object = $value;
-                $values[$key] = $this->targetElement->extract();
-
-                $this->targetElement->object = $originalObject;
+                // @see https://github.com/zendframework/zf2/pull/2848
+                $targetElement = clone $this->targetElement;
+                $targetElement->object = $value;
+                $values[$key] = $targetElement->extract();
             }
         }
 

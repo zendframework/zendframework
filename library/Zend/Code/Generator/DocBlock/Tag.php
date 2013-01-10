@@ -12,6 +12,8 @@ namespace Zend\Code\Generator\DocBlock;
 
 use Zend\Code\Generator\AbstractGenerator;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use ReflectionClass;
+use ReflectionMethod;
 
 /**
  * @category   Zend
@@ -48,7 +50,7 @@ class Tag extends AbstractGenerator
     protected $description = null;
 
     /**
-     * @param array $options
+     * @param  array $options
      */
     public function __construct(array $options = array())
     {
@@ -74,8 +76,8 @@ class Tag extends AbstractGenerator
         $codeGenDocBlockTag->setName($tagName);
 
         // transport any properties via accessors and mutators from reflection to codegen object
-        $reflectionClass = new \ReflectionClass($reflectionTag);
-        foreach ($reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+        $reflectionClass = new ReflectionClass($reflectionTag);
+        foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             if (substr($method->getName(), 0, 3) == 'get') {
                 $propertyName = substr($method->getName(), 3);
                 if (method_exists($codeGenDocBlockTag, 'set' . $propertyName)) {

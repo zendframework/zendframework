@@ -490,9 +490,7 @@ class Request extends AbstractMessage implements RequestInterface
     public function toString()
     {
         $str = $this->renderRequestLine() . "\r\n";
-        if ($this->headers) {
-            $str .= $this->headers->toString();
-        }
+        $str .= $this->getHeaders()->toString();
         $str .= "\r\n";
         $str .= $this->getContent();
         return $str;

@@ -13,6 +13,15 @@ DD Mmm YYYY
 
 ### UPDATES IN 2.1.0
 
+#### Backwards Compatibility Break: Session Storage
+The default session storage object has changed to an array adapter; this
+is a minimal break in compatibility.  Most developers are not working
+directly with the storage object, but rather a Container, therefore switching
+out the default will not change anything for those developers.
+For those who are using it directly:
+ * Register the old SessionStorage object explicitly, or
+ * Do not utilize object notation for accessing members of the Storage object.
+
 Please see CHANGELOG.md.
 
 ### SYSTEM REQUIREMENTS

@@ -269,7 +269,8 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
         if ($readOnly && !$locks) {
             // global lock in play; all keys are locked
             return true;
-        } elseif ($readOnly && $locks) {
+        }
+        if ($readOnly && $locks) {
             return array_key_exists($key, $locks);
         }
 

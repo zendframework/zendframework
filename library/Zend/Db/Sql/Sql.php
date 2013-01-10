@@ -58,7 +58,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -69,7 +69,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -80,7 +80,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -91,7 +91,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }

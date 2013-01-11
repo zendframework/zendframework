@@ -51,18 +51,11 @@ class ParameterReflectionTest extends \PHPUnit_Framework_TestCase
     public function paramTypeTestProvider()
     {
         return array(
-            array('one',		'int'),
-            array('two',		'int'),
-            array('three',		'string'),
-            array('empty',		null),
-            array('string',		'string'),
-            array('null', 		'null'),
-            array('int',		'int'),
-            array('bool',		'bool'),
-            array('array',		'array'),
-            array('arrayOrNull','array|null'),
-            array('class',		'ZendTest\Code\Reflection\TestAsset\TestSampleClass'),
-            array('classOrNull','ZendTest\Code\Reflection\TestAsset\TestSampleClass|null'),
+            array('one','int'),
+            array('two','int'),
+            array('three','string'),
+            array('array','array'),
+            array('class','ZendTest\Code\Reflection\TestAsset\TestSampleClass')
         );
     }
 }

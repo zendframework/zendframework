@@ -34,7 +34,7 @@ class TestSampleClass5
      *                      which spans multiple lines
      * @return mixed Some return descr
      */
-    public function doSomething($one, $two = 2, $three = 'three', $empty, $string = 'somestring', $null = null, $int = 1, $bool = true, array $array, array $arrayOrNull = null, TestSampleClass $class, TestSampleClass $classOrNull = null)
+    public function doSomething($one, $two = 2, $three = 'three', array $array = array(), TestSampleClass $class = null)
     {
         return 'mixedValue';
     }

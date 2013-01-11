@@ -82,8 +82,6 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     {
         $type = null;
 
-        $checkDefault = true;
-
         if ($this->isArray()) {
             $type = 'array';
         } elseif (($class = $this->getClass()) instanceof \ReflectionClass) {
@@ -93,23 +91,6 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
 
             if (isset($params[$this->getPosition()])) {
                 $type = $params[$this->getPosition()]->getType();
-                $checkDefault = false;
-            }
-        }
-
-        if ($this->isDefaultValueAvailable() && $checkDefault) {
-            if ($type === null) {
-                $value = $this->getDefaultValue();
-                $type = strtolower(gettype($value));
-
-                switch ($type) {
-                    case 'boolean' : $type = 'bool'; break;
-                    case 'integer' : $type = 'int'; break;
-                }
-            } else {
-                if ($this->getDefaultValue() === null) {
-                   $type .= '|null';
-                }
             }
         }
 

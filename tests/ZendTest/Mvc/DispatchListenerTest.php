@@ -107,11 +107,20 @@ class DispatchListenerTest extends TestCase
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
         $controllerLoader->addAbstractFactory('ZendTest\Mvc\Controller\TestAsset\ControllerLoaderAbstractFactory');
 
+        $log = array();
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use (&$log) {
+            $log['error'] = $e->getError();
+        });
+
         $this->application->run();
 
         $event = $this->application->getMvcEvent();
         $dispatchListener = $this->serviceManager->get('DispatchListener');
         $return = $dispatchListener->onDispatch($event);
+
+        $this->assertEmpty($log);
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $return);
+        $this->assertSame(200, $return->getStatusCode());
     }
 
     public function testUnlocatableControllerLoaderComposedOfAbstractFactory()

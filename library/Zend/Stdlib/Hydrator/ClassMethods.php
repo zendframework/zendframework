@@ -105,15 +105,10 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         $filter = null;
         if ($object instanceof FilterProviderInterface) {
-            $filter = $object->getFilter();
-            if ($filter instanceof FilterComposite)
-            {
-                $filter->addFilter(
-                    "getfilter",
-                    new MethodMatchFilter("getFilter"),
-                    FilterComposite::CONDITION_AND
-                );
-            }
+            $filter = new FilterComposite(
+                array($object->getFilter()),
+                array(new MethodMatchFilter("getFilter"))
+            );
         } else {
             $filter = $this->filterComposite;
         }

@@ -211,6 +211,13 @@ class Request extends HttpRequest
             ) {
                 $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
             }
+
+            // CordovaJS and some other libraries send with the header name all lowercase; test for this
+            if (!isset($this->serverParams['HTTP_AUTHORIZATION'])
+                && isset($apacheRequestHeaders['authorization'])
+            ) {
+                $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['authorization']);
+            }
         }
 
         // set headers

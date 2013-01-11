@@ -293,4 +293,16 @@ class RestfulControllerTest extends TestCase
         $this->controller->layout('alternate/layout');
         $this->assertEquals('alternate/layout', $model->getTemplate());
     }
+
+    public function testParsingDataAsJsonWillReturnAsArray()
+    {
+        $this->request->setMethod('POST');
+        $this->request->getHeaders()->addHeaderLine('Content-type', 'application/json');
+        $this->request->setContent('{"foo":"bar"}');
+        $this->controller->getEventManager()->setSharedManager(new SharedEventManager());
+
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertInternalType('array', $result);
+        $this->assertEquals(array('entity' => array('foo' => 'bar')), $result);
+    }
 }

@@ -38,10 +38,15 @@ abstract class AbstractRestfulController extends AbstractController
      */
     protected $contentTypes = array(
         self::CONTENT_TYPE_JSON => array(
-            'application/application/hal+json',
+            'application/hal+json',
             'application/json'
         )
     );
+
+    /**
+     * @var int From Zend\Json\Json
+     */
+    protected $jsonDecodeType = Json::TYPE_ARRAY;
 
     /**
      * Map of custom HTTP methods and their handlers
@@ -301,7 +306,7 @@ abstract class AbstractRestfulController extends AbstractController
     public function processPostData(Request $request)
     {
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
-            $data = Json::decode($request->getContent());
+            $data = Json::decode($request->getContent(), $this->jsonDecodeType);
         } else {
             $data = $request->getPost()->toArray();
         }
@@ -336,14 +341,15 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function requestHasContentType(Request $request, $contentType = '')
     {
-        $acceptHeaders = $request->getHeaders()->get('Accept');
-        if (!$acceptHeaders) {
+        /** @var $headerContentType \Zend\Http\Header\ContentType */
+        $headerContentType = $request->getHeaders()->get('content-type');
+        if (!$headerContentType) {
             return false;
         }
 
         if (array_key_exists($contentType, $this->contentTypes)) {
             foreach ($this->contentTypes[$contentType] as $contentTypeValue) {
-                if ($acceptHeaders->match($contentTypeValue) !== false) {
+                if (stripos($contentTypeValue, $headerContentType->getFieldValue()) === 0) {
                     return true;
                 }
             }
@@ -434,7 +440,7 @@ abstract class AbstractRestfulController extends AbstractController
 
         // JSON content? decode and return it.
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
-            return Json::decode($content);
+            return Json::decode($content, $this->jsonDecodeType);
         }
 
         parse_str($content, $parsedParams);

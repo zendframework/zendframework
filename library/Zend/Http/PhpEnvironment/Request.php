@@ -206,17 +206,12 @@ class Request extends HttpRequest
         // This seems to be the only way to get the Authorization header on Apache
         if (function_exists('apache_request_headers')) {
             $apacheRequestHeaders = apache_request_headers();
-            if (!isset($this->serverParams['HTTP_AUTHORIZATION'])
-                && isset($apacheRequestHeaders['Authorization'])
-            ) {
-                $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
-            }
-
-            // CordovaJS and some other libraries send with the header name all lowercase; test for this
-            if (!isset($this->serverParams['HTTP_AUTHORIZATION'])
-                && isset($apacheRequestHeaders['authorization'])
-            ) {
-                $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['authorization']);
+            if (!isset($this->serverParams['HTTP_AUTHORIZATION'])) {
+                if (isset($apacheRequestHeaders['Authorization'])) {
+                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
+                } elseif (isset($apacheRequestHeaders['authorization'])) {
+                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['authorization']);
+                }
             }
         }
 

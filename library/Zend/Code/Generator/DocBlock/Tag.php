@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -19,7 +19,9 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  */
 class Tag extends AbstractGenerator
 {
-
+    /**
+     * @var array
+     */
     protected static $typeFormats = array(
         array(
             'param',
@@ -50,25 +52,25 @@ class Tag extends AbstractGenerator
      */
     public function __construct(array $options = array())
     {
-        if (array_key_exists('name', $options)) {
+        if (isset($options['name'])) {
             $this->setName($options['name']);
         }
-        if (array_key_exists('description', $options)) {
+        if (isset($options['description'])) {
             $this->setDescription($options['description']);
         }
     }
 
     /**
-     * fromReflection()
+     * Build a Tag generator object from a reflection object
      *
-     * @param ReflectionDocBlockTag $reflectionTag
+     * @param  ReflectionDocBlockTag $reflectionTag
      * @return Tag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTag)
     {
         $tagName = $reflectionTag->getName();
 
-        $codeGenDocBlockTag = new self();
+        $codeGenDocBlockTag = new static();
         $codeGenDocBlockTag->setName($tagName);
 
         // transport any properties via accessors and mutators from reflection to codegen object
@@ -86,20 +88,17 @@ class Tag extends AbstractGenerator
     }
 
     /**
-     * setName()
-     *
-     * @param string $name
+     * @param  string $name
      * @return Tag
      */
     public function setName($name)
     {
         $this->name = ltrim($name, '@');
+
         return $this;
     }
 
     /**
-     * getName()
-     *
      * @return string
      */
     public function getName()
@@ -108,20 +107,17 @@ class Tag extends AbstractGenerator
     }
 
     /**
-     * setDescription()
-     *
-     * @param string $description
+     * @param  string $description
      * @return Tag
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * getDescription()
-     *
      * @return string
      */
     public function getDescription()
@@ -130,14 +126,13 @@ class Tag extends AbstractGenerator
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
     {
         $output = '@' . $this->name
             . (($this->description != null) ? ' ' . $this->description : '');
+
         return $output;
     }
 

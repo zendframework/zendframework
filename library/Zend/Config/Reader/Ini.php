@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Config
  */
@@ -131,8 +131,8 @@ class Ini implements ReaderInterface
         foreach ($data as $section => $value) {
             if (is_array($value)) {
                 if (strpos($section, $this->nestSeparator) !== false) {
-                    $section = explode($this->nestSeparator, $section, 2);
-                    $config[$section[0]][$section[1]] = $this->processSection($value);
+                    $sections = explode($this->nestSeparator, $section);
+                    $config = array_merge_recursive($config, $this->buildNestedSection($sections, $value));
                 } else {
                     $config[$section] = $this->processSection($value);
                 }
@@ -142,6 +142,27 @@ class Ini implements ReaderInterface
         }
 
         return $config;
+    }
+
+    /**
+     * Process a nested section
+     *
+     * @param array $sections
+     * @param mixed $value
+     * @return array
+     */
+    private function buildNestedSection($sections, $value)
+    {
+        if(count($sections) == 0) {
+            return $this->processSection($value);
+        }
+
+        $nestedSection = array();
+
+        $first = array_shift($sections);
+        $nestedSection[$first] = $this->buildNestedSection($sections, $value);
+
+        return $nestedSection;
     }
 
     /**

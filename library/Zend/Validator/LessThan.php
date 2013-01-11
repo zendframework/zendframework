@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -54,7 +54,7 @@ class LessThan extends AbstractValidator
      * If false, then strict comparisons are done, and the value may equal
      * the max option
      *
-     * @var boolean
+     * @var bool
      */
     protected $inclusive;
 
@@ -119,7 +119,7 @@ class LessThan extends AbstractValidator
     /**
      * Returns the inclusive option
      *
-     * @return boolean
+     * @return bool
      */
     public function getInclusive()
     {
@@ -129,7 +129,7 @@ class LessThan extends AbstractValidator
     /**
      * Sets the inclusive option
      *
-     * @param  boolean $inclusive
+     * @param  bool $inclusive
      * @return LessThan Provides a fluent interface
      */
     public function setInclusive($inclusive)
@@ -143,7 +143,7 @@ class LessThan extends AbstractValidator
      * when the inclusive option is true
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Captcha
  */
@@ -64,14 +64,14 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Should the numbers be used or only letters
      *
-     * @var boolean
+     * @var bool
      */
     protected $useNumbers = true;
 
     /**
      * Should both cases be used or only lowercase
      *
-     * @var boolean
+     * @var bool
      */
     // protected $useCase = false;
 
@@ -85,7 +85,7 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Should generate() keep session or create a new one?
      *
-     * @var boolean
+     * @var bool
      */
     protected $keepSession = false;
 

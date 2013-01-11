@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Cache
  */
@@ -164,7 +164,7 @@ class MemcachedOptions extends AdapterOptions
 
                 // array(array('host' => <host>[, 'port' => <port>[, 'weight' => <weight>]])[, ...])
                 if (!isset($server[0]) && isset($server['host'])) {
-                    $host   = (string)$server['host'];
+                    $host   = (string) $server['host'];
                     $port   = isset($server['port'])   ? (int) $server['port']   : $port;
                     $weight = isset($server['weight']) ? (int) $server['weight'] : $weight;
                 }
@@ -183,13 +183,13 @@ class MemcachedOptions extends AdapterOptions
                 }
 
                 $host = $server['host'];
-                $port = isset($server['port']) ? (int)$server['port'] : $port;
+                $port = isset($server['port']) ? (int) $server['port'] : $port;
 
                 if (isset($server['query'])) {
                     $query = null;
                     parse_str($server['query'], $query);
                     if (isset($query['weight'])) {
-                        $weight = (int)$query['weight'];
+                        $weight = (int) $query['weight'];
                     }
                 }
             }

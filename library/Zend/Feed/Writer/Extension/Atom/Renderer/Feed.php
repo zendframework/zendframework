@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Feed
  */
@@ -76,12 +76,14 @@ class Feed extends Extension\AbstractRenderer
             return;
         }
         foreach ($flinks as $type => $href) {
-            $mime  = 'application/' . strtolower($type) . '+xml';
-            $flink = $dom->createElement('atom:link');
-            $root->appendChild($flink);
-            $flink->setAttribute('rel', 'self');
-            $flink->setAttribute('type', $mime);
-            $flink->setAttribute('href', $href);
+            if (strtolower($type) == $this->getType()) { // issue 2605
+                $mime  = 'application/' . strtolower($type) . '+xml';
+                $flink = $dom->createElement('atom:link');
+                $root->appendChild($flink);
+                $flink->setAttribute('rel', 'self');
+                $flink->setAttribute('type', $mime);
+                $flink->setAttribute('href', $href);
+            }
         }
         $this->called = true;
     }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -189,5 +189,19 @@ class StepTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\Step();
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
                                      'messageTemplates', $validator);
+    }
+
+    public function testSetStepFloat()
+    {
+        $step = 0.01;
+        $this->_validator->setStep($step);
+        $this->assertAttributeSame($step, 'step', $this->_validator);
+    }
+
+    public function testSetStepString()
+    {
+        $step = '0.01';
+        $this->_validator->setStep($step);
+        $this->assertAttributeSame((float) $step, 'step', $this->_validator);
     }
 }

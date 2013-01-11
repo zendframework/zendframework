@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Server
  */
@@ -89,11 +89,11 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
  *
  * Used to test reflectFunction generation of signatures
  *
- * @param boolean $arg1
+ * @param  bool $arg1
  * @param string|array $arg2
  * @param string $arg3 Optional argument
  * @param string|struct|false $arg4 Optional argument
- * @return boolean|array
+ * @return bool|array
  */
 function reflectionTestFunction($arg1, $arg2, $arg3 = 'string', $arg4 = 'array')
 {
@@ -144,7 +144,7 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param string $arg2
-     * @return boolean|array
+     * @return bool|array
      */
     public static function two($arg1, $arg2)
     {

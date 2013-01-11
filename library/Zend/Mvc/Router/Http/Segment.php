@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -27,7 +27,7 @@ class Segment implements RouteInterface
     /**
      * @var array Cache for the encode output
      */
-    private static $cacheEncode = array();
+    protected static $cacheEncode = array();
 
     /**
      * Map of allowed special chars in path segments.
@@ -41,7 +41,7 @@ class Segment implements RouteInterface
      *
      * @var array
      */
-    private static $urlencodeCorrectionMap = array(
+    protected static $urlencodeCorrectionMap = array(
         '%21' => "!", // sub-delims
         '%24' => "$", // sub-delims
         '%26' => "&", // sub-delims
@@ -270,8 +270,8 @@ class Segment implements RouteInterface
      *
      * @param  array   $parts
      * @param  array   $mergedParams
-     * @param  boolean $isOptional
-     * @param  boolean $hasChild
+     * @param  bool $isOptional
+     * @param  bool $hasChild
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
@@ -411,7 +411,7 @@ class Segment implements RouteInterface
      * @param string $value
      * @return string
      */
-    private function encode($value)
+    protected function encode($value)
     {
         if (!isset(static::$cacheEncode[$value])) {
             static::$cacheEncode[$value] = rawurlencode($value);
@@ -426,7 +426,7 @@ class Segment implements RouteInterface
      * @param string $value
      * @return string
      */
-    private function decode($value)
+    protected function decode($value)
     {
         return rawurldecode($value);
     }

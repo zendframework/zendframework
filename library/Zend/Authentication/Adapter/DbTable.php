@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Authentication
  */
@@ -98,7 +98,7 @@ class DbTable implements AdapterInterface
      * different credentials. Default is FALSE and need to be set to true to
      * allow ambiguity usage.
      *
-     * @var boolean
+     * @var bool
      */
     protected $ambiguityIdentity = false;
 
@@ -265,7 +265,7 @@ class DbTable implements AdapterInterface
      *
      * @param  string|array $returnColumns
      * @param  string|array $omitColumns
-     * @return stdClass|boolean
+     * @return stdClass|bool
      */
     public function getResultRowObject($returnColumns = null, $omitColumns = null)
     {
@@ -339,7 +339,7 @@ class DbTable implements AdapterInterface
      * required pieces of information.
      *
      * @throws Exception\RuntimeException in the event that setup was not done properly
-     * @return boolean
+     * @return bool
      */
     protected function _authenticateSetup()
     {
@@ -431,7 +431,7 @@ class DbTable implements AdapterInterface
      * certain that only one record was returned in the resultset
      *
      * @param  array $resultIdentities
-     * @return boolean|\Zend\Authentication\Result
+     * @return bool|\Zend\Authentication\Result
      */
     protected function _authenticateValidateResultSet(array $resultIdentities)
     {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -197,14 +197,14 @@ class DefaultIterator implements \Iterator, \Countable
             return null;
         }
 
-        $entry          = array('dn' => $this->key());
-        $ber_identifier = null;
+        $entry         = array('dn' => $this->key());
+        $berIdentifier = null;
 
         $resource = $this->ldap->getResource();
         ErrorHandler::start();
         $name = ldap_first_attribute(
             $resource, $this->current,
-            $ber_identifier
+            $berIdentifier
         );
         ErrorHandler::stop();
 
@@ -240,7 +240,7 @@ class DefaultIterator implements \Iterator, \Countable
             ErrorHandler::start();
             $name = ldap_next_attribute(
                 $resource, $this->current,
-                $ber_identifier
+                $berIdentifier
             );
             ErrorHandler::stop();
         }
@@ -332,7 +332,7 @@ class DefaultIterator implements \Iterator, \Countable
      * after calls to rewind() or next()
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

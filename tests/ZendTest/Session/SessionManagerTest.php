@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
@@ -525,16 +525,18 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testStartingSessionThatFailsAValidatorShouldRaiseException()
     {
         $chain = $this->manager->getValidatorChain();
-        $chain->attach('session.validate', array($this, 'validateSession'));
+        $chain->attach('session.validate', array(new TestAsset\TestFailingValidator(), 'isValid'));
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
     }
 
     /**
-     * @see testStartingSessionThatFailsAValidatorShouldRaiseException()
+     * @runInSeparateProcess
      */
-    public static function validateSession()
+    public function testResumeSessionThatFailsAValidatorShouldRaiseException()
     {
-        return false;
+        $this->manager->setSaveHandler(new TestAsset\TestSaveHandlerWithValidator);
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
+        $this->manager->start();
     }
 }

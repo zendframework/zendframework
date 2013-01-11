@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -184,6 +184,7 @@ class Hostname extends AbstractValidator
             8 => '/^[\x{002d}0-9a-záéíñóúü]{1,63}$/iu'),
         'IO'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿăąāćĉčċďđĕěėęēğĝġģĥħĭĩįīıĵķĺľļłńňņŋŏőōœĸŕřŗśŝšşťţŧŭůűũųūŵŷźžż]{1,63}$/iu'),
         'IS'  => array(1 => '/^[\x{002d}0-9a-záéýúíóþæöð]{1,63}$/iu'),
+        'IT'  => array(1 => '/^[\x{002d}0-9a-zàâäèéêëìîïòôöùûüæœçÿß-]{1,63}$/iu'),
         'JP'  => 'Hostname/Jp.php',
         'KR'  => array(1 => '/^[\x{AC00}-\x{D7A3}]{1,17}$/iu'),
         'LI'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿœ]{1,63}$/iu'),
@@ -309,8 +310,8 @@ class Hostname extends AbstractValidator
      * Sets validator options
      *
      * @param integer $allow       OPTIONAL Set what types of hostname to allow (default ALLOW_DNS)
-     * @param boolean $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
-     * @param boolean $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
+     * @param  bool $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
+     * @param  bool $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
      * @param Ip      $ipValidator OPTIONAL
      * @see http://www.iana.org/cctld/specifications-policies-cctlds-01apr02.htm  Technical Specifications for ccTLDs
      */
@@ -390,7 +391,7 @@ class Hostname extends AbstractValidator
     /**
      * Returns the set idn option
      *
-     * @return boolean
+     * @return bool
      */
     public function getIdnCheck()
     {
@@ -402,7 +403,7 @@ class Hostname extends AbstractValidator
      *
      * This only applies when DNS hostnames are validated
      *
-     * @param boolean $useIdnCheck Set to true to validate IDN domains
+     * @param  bool $useIdnCheck Set to true to validate IDN domains
      * @return Hostname
      */
     public function useIdnCheck ($useIdnCheck)
@@ -414,7 +415,7 @@ class Hostname extends AbstractValidator
     /**
      * Returns the set tld option
      *
-     * @return boolean
+     * @return bool
      */
     public function getTldCheck()
     {
@@ -426,7 +427,7 @@ class Hostname extends AbstractValidator
      *
      * This only applies when DNS hostnames are validated
      *
-     * @param boolean $useTldCheck Set to true to validate TLD elements
+     * @param  bool $useTldCheck Set to true to validate TLD elements
      * @return Hostname
      */
     public function useTldCheck ($useTldCheck)
@@ -441,7 +442,7 @@ class Hostname extends AbstractValidator
      * Returns true if and only if the $value is a valid hostname with respect to the current allow option
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -665,7 +666,7 @@ class Hostname extends AbstractValidator
         $char  = 0x80;
 
         for ($indexe = ($separator) ? ($separator + 1) : 0; $indexe < $lengthe; ++$lengthd) {
-            for ($old_index = $index, $pos = 1, $key = 36; 1; $key += 36) {
+            for ($oldIndex = $index, $pos = 1, $key = 36; 1; $key += 36) {
                 $hex   = ord($encoded[$indexe++]);
                 $digit = ($hex - 48 < 10) ? $hex - 22
                        : (($hex - 65 < 26) ? $hex - 65
@@ -681,7 +682,7 @@ class Hostname extends AbstractValidator
                 $pos = (int) ($pos * (36 - $tag));
             }
 
-            $delta   = intval($init ? (($index - $old_index) / 700) : (($index - $old_index) / 2));
+            $delta   = intval($init ? (($index - $oldIndex) / 700) : (($index - $oldIndex) / 2));
             $delta  += intval($delta / ($lengthd + 1));
             for ($key = 0; $delta > 910 / 2; $key += 36) {
                 $delta = intval($delta / 35);

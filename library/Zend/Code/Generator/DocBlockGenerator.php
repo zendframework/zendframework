@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -39,9 +39,9 @@ class DocBlockGenerator extends AbstractGenerator
     protected $indentation = '';
 
     /**
-     * fromReflection() - Build a DocBlock generator object from a reflection object
+     * Build a DocBlock generator object from a reflection object
      *
-     * @param DocBlockReflection $reflectionDocBlock
+     * @param  DocBlockReflection $reflectionDocBlock
      * @return DocBlockGenerator
      */
     public static function fromReflection(DocBlockReflection $reflectionDocBlock)
@@ -61,35 +61,68 @@ class DocBlockGenerator extends AbstractGenerator
         return $docBlock;
     }
 
-    public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
+    /**
+     * Generate from array
+     *
+     * @configkey shortdescription string The short description for this doc block
+     * @configkey longdescription  string The long description for this doc block
+     * @configkey tags             array
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param  array                              $array
+     * @return DocBlockGenerator
+     */
+    public static function fromArray(array $array)
     {
-        if ($shortDescription !== null) {
-            $this->setShortDescription($shortDescription);
-        }
-        if ($longDescription !== null) {
-            $this->setLongDescription($longDescription);
-        }
-        if ($this->tags !== array()) {
-            $this->setTag($tags);
+        $docBlock = new static();
+
+        foreach ($array as $name => $value) {
+            // normalize key
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
+                case 'shortdescription':
+                    $docBlock->setShortDescription($value);
+                case 'longdescription':
+                    $docBlock->setLongDescription($value);
+                    break;
+                case 'tags':
+                    $docBlock->setTags($value);
+                    break;
+            }
         }
 
+        return $docBlock;
     }
 
     /**
-     * setShortDescription()
-     *
      * @param string $shortDescription
+     * @param string $longDescription
+     * @param array  $tags
+     */
+    public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
+    {
+        if ($shortDescription) {
+            $this->setShortDescription($shortDescription);
+        }
+        if ($longDescription) {
+            $this->setLongDescription($longDescription);
+        }
+        if (is_array($tags) && $tags) {
+            $this->setTags($tags);
+        }
+    }
+
+    /**
+     * @param  string            $shortDescription
      * @return DocBlockGenerator
      */
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
+
         return $this;
     }
 
     /**
-     * getShortDescription()
-     *
      * @return string
      */
     public function getShortDescription()
@@ -98,20 +131,17 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setLongDescription()
-     *
-     * @param string $longDescription
+     * @param  string            $longDescription
      * @return DocBlockGenerator
      */
     public function setLongDescription($longDescription)
     {
         $this->longDescription = $longDescription;
+
         return $this;
     }
 
     /**
-     * getLongDescription()
-     *
      * @return string
      */
     public function getLongDescription()
@@ -120,9 +150,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setTags()
-     *
-     * @param array $tags
+     * @param  array             $tags
      * @return DocBlockGenerator
      */
     public function setTags(array $tags)
@@ -135,9 +163,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * setTag()
-     *
-     * @param array|DocBlock\Tag $tag
+     * @param  array|DocBlock\Tag                 $tag
      * @throws Exception\InvalidArgumentException
      * @return DocBlockGenerator
      */
@@ -158,8 +184,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * getTags
-     *
      * @return DocBlock\Tag[]
      */
     public function getTags()
@@ -168,8 +192,6 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
@@ -194,9 +216,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * docCommentize()
-     *
-     * @param string $content
+     * @param  string $content
      * @return string
      */
     protected function docCommentize($content)
@@ -213,6 +233,7 @@ class DocBlockGenerator extends AbstractGenerator
             $output .= self::LINE_FEED;
         }
         $output .= $indent . ' */' . self::LINE_FEED;
+
         return $output;
     }
 

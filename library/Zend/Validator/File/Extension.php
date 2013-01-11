@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -92,7 +92,7 @@ class Extension extends AbstractValidator
     /**
      * Returns the case option
      *
-     * @return boolean
+     * @return bool
      */
     public function getCase()
     {
@@ -102,12 +102,12 @@ class Extension extends AbstractValidator
     /**
      * Sets the case to use
      *
-     * @param  boolean $case
+     * @param  bool $case
      * @return Extension Provides a fluent interface
      */
     public function setCase($case)
     {
-        $this->options['case'] = (boolean) $case;
+        $this->options['case'] = (bool) $case;
         return $this;
     }
 
@@ -176,7 +176,7 @@ class Extension extends AbstractValidator
      *
      * @param  string  $value Real file to check for extension
      * @param  array   $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

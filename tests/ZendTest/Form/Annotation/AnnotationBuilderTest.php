@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -23,7 +23,6 @@ class AnnotationBuilderTest extends TestCase
         ) {
             $this->markTestSkipped('Enable TESTS_ZEND_FORM_ANNOTATION_SUPPORT to test annotation parsing');
         }
-
     }
 
     public function testCanCreateFormFromStandardEntity()
@@ -196,5 +195,16 @@ class AnnotationBuilderTest extends TestCase
         $this->assertInstanceOf('Zend\Form\Form', $form);
         $element = $form->get('type');
         $this->assertInstanceOf('Zend\Form\Element', $element);
+    }
+
+    public function testAllowEmptyInput()
+    {
+        $entity  = new TestAsset\Annotation\SampleEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $inputFilter = $form->getInputFilter();
+        $sampleinput = $inputFilter->get('sampleinput');
+        $this->assertTrue($sampleinput->allowEmpty());
     }
 }

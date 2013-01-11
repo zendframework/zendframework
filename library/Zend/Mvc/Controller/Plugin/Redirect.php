@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -45,7 +45,6 @@ class Redirect extends AbstractPlugin
             throw new Exception\DomainException('Redirect plugin requires a controller that defines the plugin() method');
         }
 
-        $response  = $this->getResponse();
         $urlPlugin = $controller->plugin('url');
 
         if (is_scalar($options)) {
@@ -54,9 +53,7 @@ class Redirect extends AbstractPlugin
             $url = $urlPlugin->fromRoute($route, $params, $options, $reuseMatchedParams);
         }
 
-        $response->getHeaders()->addHeaderLine('Location', $url);
-        $response->setStatusCode(302);
-        return $response;
+        return $this->toUrl($url);
     }
 
     /**

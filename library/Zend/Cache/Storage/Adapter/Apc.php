@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Cache
  */
@@ -109,7 +109,7 @@ class Apc extends AbstractAdapter implements
      */
     public function getTotalSpace()
     {
-        if ($this->totalSpace !== null) {
+        if ($this->totalSpace === null) {
             $smaInfo = apc_sma_info(true);
             $this->totalSpace = $smaInfo['num_seg'] * $smaInfo['seg_size'];
         }
@@ -152,7 +152,7 @@ class Apc extends AbstractAdapter implements
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush()
     {
@@ -165,7 +165,7 @@ class Apc extends AbstractAdapter implements
      * Remove items by given namespace
      *
      * @param string $namespace
-     * @return boolean
+     * @return bool
      */
     public function clearByNamespace($namespace)
     {
@@ -181,7 +181,7 @@ class Apc extends AbstractAdapter implements
      * Remove items matching given prefix
      *
      * @param string $prefix
-     * @return boolean
+     * @return bool
      */
     public function clearByPrefix($prefix)
     {
@@ -197,7 +197,7 @@ class Apc extends AbstractAdapter implements
      * Internal method to get an item.
      *
      * @param  string  $normalizedKey
-     * @param  boolean $success
+     * @param  bool $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
@@ -250,7 +250,7 @@ class Apc extends AbstractAdapter implements
      * Internal method to test if an item exists.
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey)
@@ -293,7 +293,7 @@ class Apc extends AbstractAdapter implements
      * Get metadata of an item.
      *
      * @param  string $normalizedKey
-     * @return array|boolean Metadata on success, false on failure
+     * @return array|bool Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadata(& $normalizedKey)
@@ -365,7 +365,7 @@ class Apc extends AbstractAdapter implements
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
@@ -420,7 +420,7 @@ class Apc extends AbstractAdapter implements
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value)
@@ -479,7 +479,7 @@ class Apc extends AbstractAdapter implements
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value)
@@ -507,7 +507,7 @@ class Apc extends AbstractAdapter implements
      * Internal method to remove an item.
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey)
@@ -551,7 +551,7 @@ class Apc extends AbstractAdapter implements
      *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
@@ -582,7 +582,7 @@ class Apc extends AbstractAdapter implements
      *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)

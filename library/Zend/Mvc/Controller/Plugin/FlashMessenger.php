@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -46,7 +46,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Whether a message has been added during this request
      *
-     * @var boolean
+     * @var bool
      */
     protected $messageAdded = false;
 
@@ -155,7 +155,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Whether a specific namespace has messages
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMessages()
     {
@@ -180,7 +180,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear all messages from the previous request & current namespace
      *
-     * @return boolean True if messages were cleared, false if none existed
+     * @return bool True if messages were cleared, false if none existed
      */
     public function clearMessages()
     {
@@ -196,7 +196,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Check to see if messages have been added to the current
      * namespace within this request
      *
-     * @return boolean
+     * @return bool
      */
     public function hasCurrentMessages()
     {
@@ -225,7 +225,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear messages from the current request and current namespace
      *
-     * @return boolean
+     * @return bool
      */
     public function clearCurrentMessages()
     {

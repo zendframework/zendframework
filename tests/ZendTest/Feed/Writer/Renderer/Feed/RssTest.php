@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Feed
  */
@@ -222,6 +222,21 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validWriter->remove('link');
         $rssFeed->render();
+    }
+
+    /**
+     * @group Issue2605
+     */
+    public function testFeedIncludesLinkToXmlRssWhereRssAndAtomLinksAreProvided()
+    {
+        $this->validWriter->setFeedLink('http://www.example.com/rss', 'rss');
+        $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
+        $rssFeed = new Renderer\Feed\Rss($this->validWriter);
+        $rssFeed->render();
+        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $this->assertEquals('http://www.example.com/rss', $feed->getFeedLink());
+        $xpath = new \DOMXPath($feed->getDomDocument());
+        $this->assertEquals(1, $xpath->evaluate('/rss/channel/atom:link[@rel="self"]')->length);
     }
 
     public function testFeedIncludesLinkToXmlRssWhereTheFeedWillBeAvailable()

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Permissions
  */
@@ -139,7 +139,7 @@ class Acl
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  Role\RoleInterface|string $role
-     * @return boolean
+     * @return bool
      */
     public function hasRole($role)
     {
@@ -157,8 +157,8 @@ class Acl
      *
      * @param  Role\RoleInterface|string    $role
      * @param  Role\RoleInterface|string    $inherit
-     * @param  boolean                      $onlyParents
-     * @return boolean
+     * @param  bool                      $onlyParents
+     * @return bool
      */
     public function inheritsRole($role, $inherit, $onlyParents = false)
     {
@@ -307,7 +307,7 @@ class Acl
      * The $resource parameter can either be a Resource or a Resource identifier.
      *
      * @param  Resource\ResourceInterface|string $resource
-     * @return boolean
+     * @return bool
      */
     public function hasResource($resource)
     {
@@ -331,9 +331,9 @@ class Acl
      *
      * @param  Resource\ResourceInterface|string    $resource
      * @param  Resource\ResourceInterface|string    inherit
-     * @param  boolean                              $onlyParent
+     * @param  bool                              $onlyParent
      * @throws Exception\InvalidArgumentException
-     * @return boolean
+     * @return bool
      */
     public function inheritsResource($resource, $inherit, $onlyParent = false)
     {
@@ -683,7 +683,7 @@ class Acl
      * @param  Role\RoleInterface|string            $role
      * @param  Resource\ResourceInterface|string    $resource
      * @param  string                               $privilege
-     * @return boolean
+     * @return bool
      */
     public function isAllowed($role = null, $resource = null, $privilege = null)
     {
@@ -782,7 +782,7 @@ class Acl
      *
      * @param  Role\RoleInterface           $role
      * @param  Resource\ResourceInterface   $resource
-     * @return boolean|null
+     * @return bool|null
      */
     protected function roleDFSAllPrivileges(Role\RoleInterface $role, Resource\ResourceInterface $resource = null)
     {
@@ -818,7 +818,7 @@ class Acl
      * @param  Role\RoleInterface           $role
      * @param  Resource\ResourceInterface   $resource
      * @param  array                        $dfs
-     * @return boolean|null
+     * @return bool|null
      * @throws Exception\RuntimeException
      */
     protected function roleDFSVisitAllPrivileges(Role\RoleInterface $role, Resource\ResourceInterface $resource = null, &$dfs = null)
@@ -856,7 +856,7 @@ class Acl
      * @param  Role\RoleInterface           $role
      * @param  Resource\ResourceInterface   $resource
      * @param  string                       $privilege
-     * @return boolean|null
+     * @return bool|null
      * @throws Exception\RuntimeException
      */
     protected function roleDFSOnePrivilege(Role\RoleInterface $role, Resource\ResourceInterface $resource = null, $privilege = null)
@@ -898,7 +898,7 @@ class Acl
      * @param  Resource\ResourceInterface   $resource
      * @param  string                       $privilege
      * @param  array                        $dfs
-     * @return boolean|null
+     * @return bool|null
      * @throws Exception\RuntimeException
      */
     protected function roleDFSVisitOnePrivilege(Role\RoleInterface $role, Resource\ResourceInterface $resource = null,
@@ -990,9 +990,9 @@ class Acl
             return null;
         } elseif (self::TYPE_ALLOW === $rule['type']) {
             return self::TYPE_DENY;
-        } else {
-            return self::TYPE_ALLOW;
         }
+
+        return self::TYPE_ALLOW;
     }
 
     /**
@@ -1005,7 +1005,7 @@ class Acl
      *
      * @param  Resource\ResourceInterface $resource
      * @param  Role\RoleInterface         $role
-     * @param  boolean                    $create
+     * @param  bool                    $create
      * @return array|null
      */
     protected function &getRules(Resource\ResourceInterface $resource = null, Role\RoleInterface $role = null, $create = false)

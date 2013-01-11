@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -97,7 +97,7 @@ class Size extends AbstractValidator
     /**
      * Should messages return bytes as integer or as string in SI notation
      *
-     * @param  boolean $byteString Use bytestring ?
+     * @param  bool $byteString Use bytestring ?
      * @return integer
      */
     public function useByteString($byteString = true)
@@ -109,7 +109,7 @@ class Size extends AbstractValidator
     /**
      * Will bytestring be used?
      *
-     * @return boolean
+     * @return bool
      */
     public function getByteString()
     {
@@ -234,7 +234,7 @@ class Size extends AbstractValidator
      *
      * @param  string $value Real file to check for size
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

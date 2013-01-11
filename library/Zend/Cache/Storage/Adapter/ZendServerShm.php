@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Cache
  */
@@ -48,7 +48,7 @@ class ZendServerShm extends AbstractZendServer implements
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush()
     {
@@ -61,7 +61,7 @@ class ZendServerShm extends AbstractZendServer implements
      * Remove items of given namespace
      *
      * @param string $namespace
-     * @return boolean
+     * @return bool
      */
     public function clearByNamespace($namespace)
     {
@@ -96,7 +96,7 @@ class ZendServerShm extends AbstractZendServer implements
         if (!zend_shm_cache_store($internalKey, $value, $ttl)) {
             $valueType = gettype($value);
             throw new Exception\RuntimeException(
-                "zend_disk_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
+                "zend_shm_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
             );
         }
     }
@@ -133,7 +133,7 @@ class ZendServerShm extends AbstractZendServer implements
      * Delete data from Zend Data SHM Cache
      *
      * @param  string $internalKey
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function zdcDelete($internalKey)

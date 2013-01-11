@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -23,12 +23,26 @@ use Zend\Code\Generator\DocBlock\Tag;
  */
 class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var DocBlockGenerator */
+    /**
+     * @var DocBlockGenerator
+     */
     protected $docBlockGenerator;
 
     protected function setUp()
     {
         $this->docBlockGenerator = $this->docBlockGenerator = new DocBlockGenerator();
+    }
+
+    public function testCanPassTagsToConstructor()
+    {
+        $docBlockGenerator = new DocBlockGenerator(null, null, array(
+            array('name' => 'foo')
+        ));
+
+        $tags = $docBlockGenerator->getTags();
+        $this->assertCount(1, $tags);
+
+        $this->assertEquals('foo', $tags[0]->getName());
     }
 
     public function testShortDescriptionGetterAndSetter()
@@ -66,7 +80,6 @@ class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 EOS;
 
         $this->assertEquals($target, $this->docBlockGenerator->generate());
-
     }
 
     public function testGenerationOfDocBlock()
@@ -76,6 +89,24 @@ EOS;
         $expected = '/**' . DocBlockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
             . DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
+    }
+
+    public function testCreateFromArray()
+    {
+        $docBlock = DocBlockGenerator::fromArray(array(
+            'shortdescription' => 'foo',
+            'longdescription'  => 'bar',
+            'tags' => array(
+                array(
+                    'name'        => 'foo',
+                    'description' => 'bar',
+                )
+            ),
+        ));
+
+        $this->assertEquals('foo', $docBlock->getShortDescription());
+        $this->assertEquals('bar', $docBlock->getLongDescription());
+        $this->assertCount(1, $docBlock->getTags());
     }
 
 }

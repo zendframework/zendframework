@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Captcha
  */
@@ -490,7 +490,7 @@ class Image extends AbstractWord
         $h     = $this->getHeight();
         $fsize = $this->getFontSize();
 
-        $img_file   = $this->getImgDir() . $id . $this->getSuffix();
+        $imgFile   = $this->getImgDir() . $id . $this->getSuffix();
 
         if (empty($this->startImage)) {
             $img = imagecreatetruecolor($w, $h);
@@ -508,26 +508,26 @@ class Image extends AbstractWord
             $h = imagesy($img);
         }
 
-        $text_color = imagecolorallocate($img, 0, 0, 0);
-        $bg_color   = imagecolorallocate($img, 255, 255, 255);
-        imagefilledrectangle($img, 0, 0, $w-1, $h-1, $bg_color);
+        $textColor = imagecolorallocate($img, 0, 0, 0);
+        $bgColor   = imagecolorallocate($img, 255, 255, 255);
+        imagefilledrectangle($img, 0, 0, $w-1, $h-1, $bgColor);
         $textbox = imageftbbox($fsize, 0, $font, $word);
         $x = ($w - ($textbox[2] - $textbox[0])) / 2;
         $y = ($h - ($textbox[7] - $textbox[1])) / 2;
-        imagefttext($img, $fsize, 0, $x, $y, $text_color, $font, $word);
+        imagefttext($img, $fsize, 0, $x, $y, $textColor, $font, $word);
 
         // generate noise
         for ($i=0; $i < $this->dotNoiseLevel; $i++) {
-           imagefilledellipse($img, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $text_color);
+           imagefilledellipse($img, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $textColor);
         }
         for ($i=0; $i < $this->lineNoiseLevel; $i++) {
-           imageline($img, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $text_color);
+           imageline($img, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $textColor);
         }
 
         // transformed image
         $img2     = imagecreatetruecolor($w, $h);
-        $bg_color = imagecolorallocate($img2, 255, 255, 255);
-        imagefilledrectangle($img2, 0, 0, $w-1, $h-1, $bg_color);
+        $bgColor = imagecolorallocate($img2, 255, 255, 255);
+        imagefilledrectangle($img2, 0, 0, $w-1, $h-1, $bgColor);
 
         // apply wave transforms
         $freq1 = $this->randomFreq();
@@ -551,29 +551,29 @@ class Image extends AbstractWord
                 if ($sx < 0 || $sy < 0 || $sx >= $w - 1 || $sy >= $h - 1) {
                     continue;
                 } else {
-                    $color    = (imagecolorat($img, $sx, $sy) >> 16)         & 0xFF;
-                    $color_x  = (imagecolorat($img, $sx + 1, $sy) >> 16)     & 0xFF;
-                    $color_y  = (imagecolorat($img, $sx, $sy + 1) >> 16)     & 0xFF;
-                    $color_xy = (imagecolorat($img, $sx + 1, $sy + 1) >> 16) & 0xFF;
+                    $color   = (imagecolorat($img, $sx, $sy) >> 16)         & 0xFF;
+                    $colorX  = (imagecolorat($img, $sx + 1, $sy) >> 16)     & 0xFF;
+                    $colorY  = (imagecolorat($img, $sx, $sy + 1) >> 16)     & 0xFF;
+                    $colorXY = (imagecolorat($img, $sx + 1, $sy + 1) >> 16) & 0xFF;
                 }
 
-                if ($color == 255 && $color_x == 255 && $color_y == 255 && $color_xy == 255) {
+                if ($color == 255 && $colorX == 255 && $colorY == 255 && $colorXY == 255) {
                     // ignore background
                     continue;
-                } elseif ($color == 0 && $color_x == 0 && $color_y == 0 && $color_xy == 0) {
+                } elseif ($color == 0 && $colorX == 0 && $colorY == 0 && $colorXY == 0) {
                     // transfer inside of the image as-is
                     $newcolor = 0;
                 } else {
                     // do antialiasing for border items
-                    $frac_x  = $sx-floor($sx);
-                    $frac_y  = $sy-floor($sy);
-                    $frac_x1 = 1-$frac_x;
-                    $frac_y1 = 1-$frac_y;
+                    $fracX  = $sx - floor($sx);
+                    $fracY  = $sy - floor($sy);
+                    $fracX1 = 1 - $fracX;
+                    $fracY1 = 1 - $fracY;
 
-                    $newcolor = $color    * $frac_x1 * $frac_y1
-                              + $color_x  * $frac_x  * $frac_y1
-                              + $color_y  * $frac_x1 * $frac_y
-                              + $color_xy * $frac_x  * $frac_y;
+                    $newcolor = $color   * $fracX1 * $fracY1
+                              + $colorX  * $fracX  * $fracY1
+                              + $colorY  * $fracX1 * $fracY
+                              + $colorXY * $fracX  * $fracY;
                 }
 
                 imagesetpixel($img2, $x, $y, imagecolorallocate($img2, $newcolor, $newcolor, $newcolor));
@@ -582,14 +582,14 @@ class Image extends AbstractWord
 
         // generate noise
         for ($i=0; $i<$this->dotNoiseLevel; $i++) {
-            imagefilledellipse($img2, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $text_color);
+            imagefilledellipse($img2, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $textColor);
         }
 
         for ($i=0; $i<$this->lineNoiseLevel; $i++) {
-           imageline($img2, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $text_color);
+           imageline($img2, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $textColor);
         }
 
-        imagepng($img2, $img_file);
+        imagepng($img2, $imgFile);
         imagedestroy($img);
         imagedestroy($img2);
     }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
@@ -70,12 +70,10 @@ class SessionConfig extends StandardConfig
     /**
      * Set storage option in backend configuration store
      *
-     * Does nothing in this implementation; others might use it to set things
-     * such as INI settings.
-     *
      * @param  string $storageName
      * @param  mixed $storageValue
      * @return SessionConfig
+     * @throws \InvalidArgumentException
      */
     public function setStorageOption($storageName, $storageValue)
     {
@@ -92,7 +90,11 @@ class SessionConfig extends StandardConfig
                 break;
         }
 
-        ini_set($key, $storageValue);
+        $result = ini_set($key, $storageValue);
+        if (FALSE === $result) {
+            throw new \InvalidArgumentException("'" . $key .
+                    "' is not a valid sessions-related ini setting.");
+        }
         return $this;
     }
 

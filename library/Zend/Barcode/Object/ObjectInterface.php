@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Barcode
  */
@@ -135,14 +135,14 @@ interface ObjectInterface
 
     /**
      * Activate/deactivate drawing of the bar
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setWithBorder($value);
 
     /**
      * Retrieve if border are draw or not
-     * @return boolean
+     * @return bool
      */
     public function getWithBorder();
 
@@ -192,21 +192,21 @@ interface ObjectInterface
 
     /**
      * Activate/deactivate drawing of text to encode
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setDrawText($value);
 
     /**
      * Retrieve if drawing of text to encode is enabled
-     * @return boolean
+     * @return bool
      */
     public function getDrawText();
 
     /**
      * Activate/deactivate the adjustment of the position
      * of the characters to the position of the bars
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setStretchText($value);
@@ -214,7 +214,7 @@ interface ObjectInterface
     /**
      * Retrieve if the adjustment of the position of the characters
      * to the position of the bars is enabled
-     * @return boolean
+     * @return bool
      */
     public function getStretchText();
 
@@ -222,7 +222,7 @@ interface ObjectInterface
      * Activate/deactivate the automatic generation
      * of the checksum character
      * added to the barcode text
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setWithChecksum($value);
@@ -230,7 +230,7 @@ interface ObjectInterface
     /**
      * Retrieve if the checksum character is automatically
      * added to the barcode text
-     * @return boolean
+     * @return bool
      */
     public function getWithChecksum();
 
@@ -238,7 +238,7 @@ interface ObjectInterface
      * Activate/deactivate the automatic generation
      * of the checksum character
      * added to the barcode text
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setWithChecksumInText($value);
@@ -246,7 +246,7 @@ interface ObjectInterface
     /**
      * Retrieve if the checksum character is automatically
      * added to the barcode text
-     * @return boolean
+     * @return bool
      */
     public function getWithChecksumInText();
 
@@ -299,14 +299,14 @@ interface ObjectInterface
 
     /**
      * Get height of the result object
-     * @param boolean $recalculate
+     * @param  bool $recalculate
      * @return integer
      */
     public function getHeight($recalculate = false);
 
     /**
      * Get width of the result object
-     * @param boolean $recalculate
+     * @param  bool $recalculate
      * @return integer
      */
     public function getWidth($recalculate = false);
@@ -314,7 +314,7 @@ interface ObjectInterface
     /**
      * Calculate the offset from the left of the object
      * if an orientation is activated
-     * @param boolean $recalculate
+     * @param  bool $recalculate
      * @return float
      */
     public function getOffsetLeft($recalculate = false);
@@ -322,7 +322,7 @@ interface ObjectInterface
     /**
      * Calculate the offset from the top of the object
      * if an orientation is activated
-     * @param boolean $recalculate
+     * @param  bool $recalculate
      * @return float
      */
     public function getOffsetTop($recalculate = false);

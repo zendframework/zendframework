@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -43,7 +43,7 @@ class Schema extends AbstractNode
                 return new Schema\OpenLdap($dn, $data, $ldap);
             case RootDse::SERVER_TYPE_EDIRECTORY:
             default:
-                return new self($dn, $data, $ldap);
+                return new static($dn, $data, $ldap);
         }
     }
 

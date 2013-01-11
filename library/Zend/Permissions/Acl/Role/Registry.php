@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Permissions
  */
@@ -120,7 +120,7 @@ class Registry
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  RoleInterface|string $role
-     * @return boolean
+     * @return bool
      */
     public function has($role)
     {
@@ -164,9 +164,9 @@ class Registry
      *
      * @param  RoleInterface|string  $role
      * @param  RoleInterface|string  $inherit
-     * @param  boolean                    $onlyParents
+     * @param  bool                    $onlyParents
      * @throws Exception\InvalidArgumentException
-     * @return boolean
+     * @return bool
      */
     public function inherits($role, $inherit, $onlyParents = false)
     {

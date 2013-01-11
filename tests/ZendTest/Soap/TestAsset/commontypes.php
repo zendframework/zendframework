@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Soap
  */
@@ -199,7 +199,7 @@ class AutoDiscoverTestClass2
     /**
      *
      * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 $test
-     * @return boolean
+     * @return bool
      */
     public function add(AutoDiscoverTestClass1 $test)
     {
@@ -277,7 +277,7 @@ class ComplexTest
 class ComplexObjectStructure
 {
     /**
-     * @var boolean
+     * @var bool
      */
     public $boolean = true;
 

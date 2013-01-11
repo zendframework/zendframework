@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -214,7 +214,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function join($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER)
     {
         if (is_array($name) && (!is_string(key($name)) || count($name) !== 1)) {
-            throw new Exception\InvalidArgumentException('join() expects $name as an array is a single element associative array');
+            throw new Exception\InvalidArgumentException(
+                sprintf("join() expects '%s' as an array is a single element associative array", array_shift($name))
+            );
         }
         if (!is_array($columns)) {
             $columns = array($columns);
@@ -741,9 +743,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($adapter) {
             $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
             return array($adapter->getDriver()->formatParameterName('offset'));
-        } else {
-            return array($platform->quoteValue($this->offset));
         }
+
+        return array($platform->quoteValue($this->offset));
     }
 
     /**

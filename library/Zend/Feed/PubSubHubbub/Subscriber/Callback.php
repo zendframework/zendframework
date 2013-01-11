@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Feed
  */
@@ -30,7 +30,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      * Holds a manually set subscription key (i.e. identifies a unique
      * subscription) which is typical when it is not passed in the query string
      * but is part of the Callback URL path, requiring manual retrieval e.g.
-     * using a route and the Zend_Controller_Action::_getParam() method.
+     * using a route and the \Zend\Mvc\Router\RouteMatch::getParam() method.
      *
      * @var string
      */

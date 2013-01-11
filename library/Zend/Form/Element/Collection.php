@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -81,7 +81,6 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      */
     protected $templateElement;
 
-
     /**
      * Accepted options for Collection:
      * - target_element: an array or element used in the collection
@@ -125,12 +124,11 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         return $this;
     }
 
-
     /**
      * Checks if the object can be set in this fieldset
      *
      * @param object $object
-     * @return boolean
+     * @return bool
      */
     public function allowObjectBinding($object)
     {
@@ -160,7 +158,6 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
 
         return $this;
     }
-
 
     /**
      * Populate values
@@ -247,7 +244,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     /**
      * Checks if this fieldset can bind data
      *
-     * @return boolean
+     * @return bool
      */
     public function allowValueBinding()
     {
@@ -476,12 +473,17 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         }
 
         $values = array();
+
         foreach ($this->object as $key => $value) {
             if ($this->hydrator) {
                 $values[$key] = $this->hydrator->extract($value);
             } elseif ($value instanceof $this->targetElement->object) {
+                $originalObject = $this->targetElement->object;
+
                 $this->targetElement->object = $value;
                 $values[$key] = $this->targetElement->extract();
+
+                $this->targetElement->object = $originalObject;
             }
         }
 

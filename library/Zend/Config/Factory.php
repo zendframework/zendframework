@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Config
  */
@@ -43,7 +43,7 @@ class Factory
      * Read a config from a file.
      *
      * @param  string  $filename
-     * @param  boolean $returnConfigObject
+     * @param  bool $returnConfigObject
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -93,7 +93,7 @@ class Factory
      * Read configuration from multiple files and merge them.
      *
      * @param  array   $files
-     * @param  boolean $returnConfigObject
+     * @param  bool $returnConfigObject
      * @return array|Config
      */
     public static function fromFiles(array $files, $returnConfigObject = false)

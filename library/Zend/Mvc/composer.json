@@ -22,6 +22,7 @@
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-text": "self.version",
         "zendframework/zend-view": "self.version"
     }
 }

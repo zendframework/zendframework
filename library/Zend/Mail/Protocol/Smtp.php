@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mail
  */
@@ -40,7 +40,7 @@ class Smtp extends AbstractProtocol
     /**
      * Indicates an smtp session has been started by the HELO command
      *
-     * @var boolean
+     * @var bool
      */
     protected $sess = false;
 
@@ -48,7 +48,7 @@ class Smtp extends AbstractProtocol
     /**
      * Indicates the HELO command has been issues
      *
-     * @var boolean
+     * @var bool
      */
     protected $helo = false;
 
@@ -56,7 +56,7 @@ class Smtp extends AbstractProtocol
     /**
      * Indicates an smtp AUTH has been issued and authenticated
      *
-     * @var boolean
+     * @var bool
      */
     protected $auth = false;
 
@@ -64,7 +64,7 @@ class Smtp extends AbstractProtocol
     /**
      * Indicates a MAIL command has been issued
      *
-     * @var boolean
+     * @var bool
      */
     protected $mail = false;
 
@@ -72,7 +72,7 @@ class Smtp extends AbstractProtocol
     /**
      * Indicates one or more RCTP commands have been issued
      *
-     * @var boolean
+     * @var bool
      */
     protected $rcpt = false;
 
@@ -80,7 +80,7 @@ class Smtp extends AbstractProtocol
     /**
      * Indicates that DATA has been issued and sent
      *
-     * @var boolean
+     * @var bool
      */
     protected $data = null;
 
@@ -162,7 +162,7 @@ class Smtp extends AbstractProtocol
     /**
      * Connect to the server with the parameters given in the constructor.
      *
-     * @return boolean
+     * @return bool
      */
     public function connect()
     {

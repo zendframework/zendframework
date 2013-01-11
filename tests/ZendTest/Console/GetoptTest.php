@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Console
  */
@@ -587,6 +587,35 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals('test', $opts->freeform);
+    }
+
+    public function testGetoptWithFreeformFlagOptionShowHelpAfterParseDoesNotThrowNotices()
+    {
+        // this formerly failed, because the index 'alias' is not set for freeform flags.
+        $opts = new Getopt(
+            array('colors' => 'Colors-option'),
+            array('color', '--freeform', 'test', 'zend'),
+            array(Getopt::CONFIG_FREEFORM_FLAGS => true)
+        );
+        $opts->parse();
+
+        $opts->getUsageMessage();
+    }
+
+    public function testGetoptWithFreeformFlagOptionShowHelpAfterParseDoesNotShowFreeformFlags()
+    {
+        $opts = new Getopt(
+            array('colors' => 'Colors-option'),
+            array('color', '--freeform', 'test', 'zend'),
+            array(Getopt::CONFIG_FREEFORM_FLAGS => true)
+        );
+        $opts->parse();
+
+        $message = preg_replace('/Usage: .* \[ options \]/',
+            'Usage: <progname> [ options ]',
+            $opts->getUsageMessage());
+        $message = preg_replace('/ /', '_', $message);
+        $this->assertEquals($message, "Usage:_<progname>_[_options_]\n--colors_____________Colors-option\n");
     }
 
     public function testGetoptRaiseExceptionForNumericOptionsByDefault()

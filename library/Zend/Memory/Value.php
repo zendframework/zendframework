@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Memory
  */
@@ -41,7 +41,7 @@ class Value implements ArrayAccess, Countable
     /**
      * Boolean flag which signals to trace value modifications
      *
-     * @var boolean
+     * @var bool
      */
     private $trace;
 
@@ -64,7 +64,7 @@ class Value implements ArrayAccess, Countable
          * object is processed (and marked as traced) when another
          * memory object is modified.
          *
-         * It reduces overall numberr of calls necessary to modification trace
+         * It reduces overall number of calls necessary to modification trace
          */
         $this->trace = false;
     }
@@ -84,7 +84,7 @@ class Value implements ArrayAccess, Countable
      * returns true if string offset exists
      *
      * @param integer $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {

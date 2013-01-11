@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Http
  */
@@ -434,7 +434,7 @@ class Client implements Stdlib\DispatchableInterface
      * Get the cookie Id (name+domain+path)
      *
      * @param  Header\SetCookie|Header\Cookie $cookie
-     * @return string|boolean
+     * @return string|bool
      */
     protected function getCookieId($cookie)
     {
@@ -452,8 +452,8 @@ class Client implements Stdlib\DispatchableInterface
      * @param string  $expire
      * @param string  $path
      * @param string  $domain
-     * @param boolean $secure
-     * @param boolean $httponly
+     * @param  bool $secure
+     * @param  bool $httponly
      * @param string  $maxAge
      * @param string  $version
      * @throws Exception\InvalidArgumentException
@@ -533,7 +533,7 @@ class Client implements Stdlib\DispatchableInterface
      * Check if exists the header type specified
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function hasHeader($name)
     {
@@ -550,7 +550,7 @@ class Client implements Stdlib\DispatchableInterface
      * Get the header value of the request
      *
      * @param  string $name
-     * @return string|boolean
+     * @return string|bool
      */
     public function getHeader($name)
     {
@@ -567,7 +567,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set streaming for received data
      *
-     * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
+     * @param string|bool $streamfile Stream file, true for temp file, false/null for no streaming
      * @return \Zend\Http\Client
      */
     public function setStream($streamfile = true)
@@ -578,10 +578,14 @@ class Client implements Stdlib\DispatchableInterface
 
     /**
      * Get status of streaming for received data
-     * @return boolean|string
+     * @return bool|string
      */
     public function getStream()
     {
+        if (!is_null($this->streamName)) {
+            return $this->streamName;
+        }
+
         return $this->config['outputstream'];
     }
 
@@ -631,8 +635,8 @@ class Client implements Stdlib\DispatchableInterface
         if (!defined('self::AUTH_' . strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
-        if (empty($user) || empty($password)) {
-            throw new Exception\InvalidArgumentException("The username and the password cannot be empty");
+        if (empty($user)) {
+            throw new Exception\InvalidArgumentException("The username cannot be empty");
         }
 
         $this->auth = array (
@@ -655,7 +659,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param array $digest
      * @param null|string $entityBody
      * @throws Exception\InvalidArgumentException
-     * @return string|boolean
+     * @return string|bool
      */
     protected function calcAuthDigest($user, $password, $type = self::AUTH_BASIC, $digest = array(), $entityBody = null)
     {
@@ -834,10 +838,6 @@ class Client implements Stdlib\DispatchableInterface
                 if (!is_resource($stream) && is_string($stream)) {
                     $stream = fopen($stream, 'r');
                 }
-                if (!is_resource($stream)) {
-                    $stream = $this->getUri()->toString();
-                    $stream = fopen($stream, 'r');
-                }
                 $streamMetaData = stream_get_meta_data($stream);
                 if ($streamMetaData['seekable']) {
                     rewind($stream);
@@ -963,7 +963,7 @@ class Client implements Stdlib\DispatchableInterface
      * Remove a file to upload
      *
      * @param  string $filename
-     * @return boolean
+     * @return bool
      */
     public function removeFileUpload($filename)
     {
@@ -981,7 +981,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param   string $domain
      * @param   string $path
      * @param   boolean $secure
-     * @return  Header\Cookie|boolean
+     * @return  Header\Cookie|bool
      */
     protected function prepareCookies($domain, $path, $secure)
     {
@@ -1040,11 +1040,11 @@ class Client implements Stdlib\DispatchableInterface
 
         // Set the Accept-encoding header if not set - depending on whether
         // zlib is available or not.
-        if (! isset($this->headers['accept-encoding'])) {
+        if (!$this->getRequest()->getHeaders()->has('Accept-Encoding')) {
             if (function_exists('gzinflate')) {
-                $headers['Accept-encoding'] = 'gzip, deflate';
+                $headers['Accept-Encoding'] = 'gzip, deflate';
             } else {
-                $headers['Accept-encoding'] = 'identity';
+                $headers['Accept-Encoding'] = 'identity';
             }
         }
 
@@ -1275,7 +1275,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @param Http $uri
      * @param string $method
-     * @param boolean $secure
+     * @param  bool $secure
      * @param array $headers
      * @param string $body
      * @return string the raw response
@@ -1300,5 +1300,43 @@ class Client implements Stdlib\DispatchableInterface
             $uri, $this->config['httpversion'], $headers, $body);
 
         return $this->adapter->read();
+    }
+
+    /**
+     * Create a HTTP authentication "Authorization:" header according to the
+     * specified user, password and authentication method.
+     *
+     * @see http://www.faqs.org/rfcs/rfc2617.html
+     * @param string $user
+     * @param string $password
+     * @param string $type
+     * @return string
+     * @throws Zend\Http\Client\Exception\InvalidArgumentException
+     */
+    public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
+    {
+        $authHeader = null;
+
+        switch ($type) {
+            case self::AUTH_BASIC:
+                // In basic authentication, the user name cannot contain ":"
+                if (strpos($user, ':') !== false) {
+                    throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
+                }
+
+                $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
+                break;
+
+            //case self::AUTH_DIGEST:
+                /**
+                * @todo Implement digest authentication
+                */
+                //    break;
+
+            default:
+                throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
+
+        }
+        return $authHeader;
     }
 }

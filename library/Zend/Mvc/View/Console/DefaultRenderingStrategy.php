@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -83,7 +83,6 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         // Collect results from child models
         $responseText = '';
         if ($result->hasChildren()) {
-            /* @var $child ViewModel */
             foreach ($result->getChildren() as $child) {
                 // Do not use ::getResult() method here as we cannot be sure if children are also console models.
                 $responseText .= $child->getVariable(ConsoleViewModel::RESULT);
@@ -91,7 +90,11 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         }
 
         // Fetch result from primary model
-        $responseText .= $result->getResult();
+        if ($result instanceof ConsoleViewModel) {
+            $responseText .= $result->getResult();
+        } else {
+            $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
+        }
 
         // Append console response to response object
         $response->setContent(

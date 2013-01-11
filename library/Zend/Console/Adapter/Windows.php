@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Console
  */
@@ -59,7 +59,7 @@ class Windows extends Virtual
         }
 
         if (count($this->probeResult) && (int) $this->probeResult[0]) {
-            $width = (int)$this->probeResult[0];
+            $width = (int) $this->probeResult[0];
         } else {
             $width = parent::getWidth();
         }

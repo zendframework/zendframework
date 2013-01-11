@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
@@ -460,12 +460,6 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
         $this->config->setEntropyFile(__DIR__ . '/foobarboguspath');
     }
 
-    public function testSetEntropyFileErrorsOnDirectory()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
-        $this->config->setEntropyFile(__DIR__);
-    }
-
     public function testEntropyFileDefaultsToIniSettings()
     {
         $this->assertSame(ini_get('session.entropy_file'), $this->config->getEntropyFile());
@@ -727,6 +721,42 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->config->setRememberMeSeconds(604800);
         $this->assertEquals(604800, $this->config->getRememberMeSeconds());
+    }
+
+    // setOption
+
+    /**
+     * @dataProvider optionsProvider
+     */
+    public function testSetOptionSetsIniSetting($option, $getter, $value)
+    {
+        // Leaving out special cases.
+        if ($option != 'remember_me_seconds' && $option != 'url_rewriter_tags') {
+            $this->config->setStorageOption($option, $value);
+            $this->assertEquals(ini_get('session.' . $option), $value);
+        }
+    }
+
+    public function testSetOptionUrlRewriterTagsGetsMunged()
+    {
+        $value = 'a=href';
+        $this->config->setStorageOption('url_rewriter_tags', $value);
+        $this->assertEquals(ini_get('url_rewriter.tags'), $value);
+    }
+
+    public function testSetOptionRememberMeSecondsDoesNothing()
+    {
+        // I have no idea how to test this.
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetOptionsThrowsExceptionOnInvalidKey()
+    {
+        $badKey = 'snarfblat';
+        $value = 'foobar';
+        $this->config->setStorageOption($badKey, $value);
     }
 
     // setOptions

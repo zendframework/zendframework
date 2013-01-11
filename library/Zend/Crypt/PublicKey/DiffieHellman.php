@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
@@ -36,7 +36,7 @@ class DiffieHellman
      * Static flag to select whether to use PHP5.3's openssl extension
      * if available.
      *
-     * @var boolean
+     * @var bool
      */
     public static $useOpenssl = true;
 
@@ -120,7 +120,7 @@ class DiffieHellman
      */
     public static function useOpensslExtension($flag = true)
     {
-        static::$useOpenssl = (boolean) $flag;
+        static::$useOpenssl = (bool) $flag;
     }
 
     /**
@@ -378,7 +378,7 @@ class DiffieHellman
     /**
      * Check whether a private key currently exists.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPrivateKey()
     {

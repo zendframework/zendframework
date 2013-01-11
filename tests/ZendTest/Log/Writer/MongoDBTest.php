@@ -4,7 +4,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
@@ -32,7 +32,9 @@ class MongoDBTest extends \PHPUnit_Framework_TestCase
         $this->database = 'zf2_test';
         $this->collection = 'logs';
 
-        $this->mongo = $this->getMockBuilder('Mongo')
+        $mongoClass = (version_compare(phpversion('mongo'), '1.3.0', '<')) ? 'Mongo' : 'MongoClient';
+
+        $this->mongo = $this->getMockBuilder($mongoClass)
             ->disableOriginalConstructor()
             ->setMethods(array('selectCollection'))
             ->getMock();

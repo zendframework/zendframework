@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -35,7 +35,7 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
      * Constructor.
      *
      *
-     * @todo handle passing helper broker, options
+     * @todo handle passing helper manager, options
      * @todo handle passing filter chain, options
      * @todo handle passing variables object, options
      * @todo handle passing resolver object, options

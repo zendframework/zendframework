@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -19,11 +19,26 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
  */
 class LicenseTag extends Tag
 {
-
     /**
      * @var string
      */
     protected $url = null;
+
+    /**
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+
+        if (isset($options['url'])) {
+            $this->setUrl($options['url']);
+        }
+
+        if (empty($this->name)) {
+            $this->setName('license');
+        }
+    }
 
     /**
      * fromReflection()
@@ -33,7 +48,7 @@ class LicenseTag extends Tag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagLicense)
     {
-        $returnTag = new self();
+        $returnTag = new static();
 
         $returnTag->setName('license');
         $returnTag->setUrl($reflectionTagLicense->getUrl());
@@ -71,7 +86,9 @@ class LicenseTag extends Tag
      */
     public function generate()
     {
+        $output = '@' . $this->name
+                . (($this->url !== null) ? ' ' . $this->url : '')
+                . (($this->description !== null) ? ' ' . $this->description : '');
         return $output;
     }
-
 }

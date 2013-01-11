@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -94,14 +94,14 @@ class ValidatorChain implements
      * if one exists, will not be executed.
      *
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
         $this->validators[] = array(
             'instance'            => $validator,
-            'breakChainOnFailure' => (boolean)$breakChainOnFailure
+            'breakChainOnFailure' => (bool) $breakChainOnFailure,
         );
         return $this;
     }
@@ -113,16 +113,17 @@ class ValidatorChain implements
      * if one exists, will not be executed.
      *
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        array_unshift($this->validators,
-                      array(
-                           'instance'            => $validator,
-                           'breakChainOnFailure' => (boolean)$breakChainOnFailure
-                      )
+        array_unshift(
+            $this->validators,
+            array(
+               'instance'            => $validator,
+               'breakChainOnFailure' => (bool) $breakChainOnFailure,
+            )
         );
         return $this;
     }
@@ -164,7 +165,7 @@ class ValidatorChain implements
      *
      * @param  mixed $value
      * @param  mixed $context Extra "context" to provide the validator
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $context = null)
     {
@@ -224,7 +225,7 @@ class ValidatorChain implements
      * Invoke chain as command
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function __invoke($value)
     {

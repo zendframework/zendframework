@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Feed
  */
@@ -67,7 +67,7 @@ class Reader
     /**
      * Override HTTP PUT and DELETE request methods?
      *
-     * @var boolean
+     * @var bool
      */
     protected static $httpMethodOverride = false;
 
@@ -153,7 +153,7 @@ class Reader
      * X-Method-Override header will be sent with a value of PUT or
      * DELETE as appropriate.
      *
-     * @param  boolean $override Whether to override PUT and DELETE.
+     * @param  bool $override Whether to override PUT and DELETE.
      * @return void
      */
     public static function setHttpMethodOverride($override = true)
@@ -164,7 +164,7 @@ class Reader
     /**
      * Get the HTTP override state
      *
-     * @return boolean
+     * @return bool
      */
     public static function getHttpMethodOverride()
     {
@@ -269,7 +269,7 @@ class Reader
      */
     public static function importString($string)
     {
-        $libxml_errflag = libxml_use_internal_errors(true);
+        $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadXML(trim($string));
@@ -281,7 +281,7 @@ class Reader
             }
         }
         libxml_disable_entity_loader($oldValue);
-        libxml_use_internal_errors($libxml_errflag);
+        libxml_use_internal_errors($libxmlErrflag);
 
         if (!$status) {
             // Build error message
@@ -346,12 +346,12 @@ class Reader
             throw new Exception\RuntimeException("Failed to access $uri, got response code " . $response->getStatusCode());
         }
         $responseHtml = $response->getBody();
-        $libxml_errflag = libxml_use_internal_errors(true);
+        $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadHTML(trim($responseHtml));
         libxml_disable_entity_loader($oldValue);
-        libxml_use_internal_errors($libxml_errflag);
+        libxml_use_internal_errors($libxmlErrflag);
         if (!$status) {
             // Build error message
             $error = libxml_get_last_error();
@@ -401,14 +401,14 @@ class Reader
             ini_restore('track_errors');
             ErrorHandler::stop();
             if (!$status) {
-                if (!isset($php_errormsg)) {
+                if (!isset($phpErrormsg)) {
                     if (function_exists('xdebug_is_enabled')) {
-                        $php_errormsg = '(error message not available, when XDebug is running)';
+                        $phpErrormsg = '(error message not available, when XDebug is running)';
                     } else {
-                        $php_errormsg = '(error message not available)';
+                        $phpErrormsg = '(error message not available)';
                     }
                 }
-                throw new Exception\RuntimeException("DOMDocument cannot parse XML: $php_errormsg");
+                throw new Exception\RuntimeException("DOMDocument cannot parse XML: $phpErrormsg");
             }
         } else {
             throw new Exception\InvalidArgumentException('Invalid object/scalar provided: must'
@@ -551,7 +551,7 @@ class Reader
      * Is a given named Extension registered?
      *
      * @param  string $extensionName
-     * @return boolean
+     * @return bool
      */
     public static function isRegistered($extensionName)
     {

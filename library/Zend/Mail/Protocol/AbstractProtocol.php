@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mail
  */
@@ -212,7 +212,7 @@ abstract class AbstractProtocol
      *
      * @param  string $remote Remote
      * @throws Exception\RuntimeException
-     * @return boolean
+     * @return bool
      */
     protected function _connect($remote)
     {
@@ -254,7 +254,7 @@ abstract class AbstractProtocol
      *
      * @param  string $request
      * @throws Exception\RuntimeException
-     * @return integer|boolean Number of bytes written to remote host
+     * @return integer|bool Number of bytes written to remote host
      */
     protected function _send($request)
     {

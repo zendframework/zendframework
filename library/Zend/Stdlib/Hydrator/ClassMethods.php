@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Stdlib
  */
@@ -21,13 +21,13 @@ class ClassMethods extends AbstractHydrator
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
-     * @var boolean
+     * @var bool
      */
     protected $underscoreSeparatedKeys;
 
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean $underscoreSeparatedKeys
+     * @param  bool $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
@@ -20,14 +20,14 @@ class ZendMonitor extends AbstractWriter
     /**
      * Is Zend Monitor enabled?
      *
-     * @var boolean
+     * @var bool
      */
     protected $isEnabled = true;
 
     /**
      * Is this for a Zend Server instance?
      *
-     * @var boolean
+     * @var bool
      */
     protected $isZendServer = false;
 
@@ -53,7 +53,7 @@ class ZendMonitor extends AbstractWriter
      * fail silently. You can query this method to determine if the log
      * writer is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {

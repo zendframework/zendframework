@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -11,7 +11,9 @@
 namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Console\Response as ConsoleResponse;
 use Zend\EventManager\SharedEventManager;
+use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\PluginManager;
@@ -27,8 +29,10 @@ class ActionControllerTest extends TestCase
 
     public function setUp()
     {
+        StaticEventManager::resetInstance();
         $this->controller = new TestAsset\SampleController();
         $this->request    = new Request();
+        $this->response   = null;
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
@@ -193,5 +197,21 @@ class ActionControllerTest extends TestCase
         $model = $this->event->getViewModel();
         $this->controller->layout('alternate/layout');
         $this->assertEquals('alternate/layout', $model->getTemplate());
+    }
+
+    /**
+     * @group 3186
+     */
+    public function testNotFoundActionReturnsSuccessfullyForConsoleResponse()
+    {
+        $response     = new ConsoleResponse();
+        $result       = $this->controller->dispatch($this->request, $response);
+        $testResponse = $this->controller->getResponse();
+        $this->assertSame($response, $testResponse);
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
+        $vars = $result->getVariables();
+        $this->assertTrue(isset($vars['result']));
+        $this->assertContains('Page not found', $vars['result']);
+        $this->assertEquals(1, $result->getErrorLevel());
     }
 }

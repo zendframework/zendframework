@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -306,7 +306,7 @@ class ParameterScanner
     /**
      * Check if is array
      *
-     * @return boolean
+     * @return bool
      */
     public function isArray()
     {
@@ -317,7 +317,7 @@ class ParameterScanner
     /**
      * Check if default value is available
      *
-     * @return boolean
+     * @return bool
      */
     public function isDefaultValueAvailable()
     {
@@ -328,7 +328,7 @@ class ParameterScanner
     /**
      * Check if is optional
      *
-     * @return boolean
+     * @return bool
      */
     public function isOptional()
     {
@@ -339,7 +339,7 @@ class ParameterScanner
     /**
      * Check if is passed by reference
      *
-     * @return boolean
+     * @return bool
      */
     public function isPassedByReference()
     {

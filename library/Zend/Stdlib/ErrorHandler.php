@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Stdlib
  */
@@ -24,7 +24,7 @@ abstract class ErrorHandler
     /**
      * Flag to mark started
      *
-     * @var boolean
+     * @var bool
      */
     protected static $started = false;
 
@@ -39,7 +39,7 @@ abstract class ErrorHandler
     /**
      * If the error handler has been started.
      *
-     * @return boolean
+     * @return bool
      */
     public static function started()
     {
@@ -67,7 +67,7 @@ abstract class ErrorHandler
     /**
      * Stopping the error handler
      *
-     * @param  boolean $throw Throw the ErrorException if any
+     * @param  bool $throw Throw the ErrorException if any
      * @return null|ErrorException
      * @throws Exception\LogicException If not started before
      * @throws ErrorException If an error has been catched and $throw is true

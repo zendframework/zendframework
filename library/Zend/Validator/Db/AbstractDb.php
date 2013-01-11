@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -214,7 +214,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setField($field)
     {
-        $this->field = (string)$field;
+        $this->field = (string) $field;
         return $this;
     }
 
@@ -236,7 +236,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setTable($table)
     {
-        $this->table = (string)$table;
+        $this->table = (string) $table;
         return $this;
     }
 

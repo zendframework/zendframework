@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ServiceManager
  */
@@ -653,5 +653,18 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->setAlias('alias-name', 'actual-service-name');
 
         $this->assertSame($service, $this->serviceManager->get('alias-name'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
+    public function testDuplicateNewInstanceMultipleAbstractFactories()
+    {
+        $this->serviceManager->setAllowOverride(true);
+        $this->serviceManager->setShareByDefault(false);
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\BarAbstractFactory');
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
     }
 }

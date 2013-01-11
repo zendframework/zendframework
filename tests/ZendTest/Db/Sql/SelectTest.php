@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -84,6 +84,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $return = $select->join('foo', 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
         $this->assertSame($select, $return);
         return $return;
+    }
+
+    /**
+     * @testdox unit test: Test join() exception with bad join
+     * @covers Zend\Db\Sql\Select::join
+     */
+    public function testBadJoin()
+    {
+        $select = new Select;
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', "expects 'foo' as");
+        $select->join(array('foo'), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
     }
 
     /**

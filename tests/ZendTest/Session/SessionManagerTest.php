@@ -73,7 +73,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionStorageByDefault()
     {
         $storage = $this->manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
+        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
     }
 
     public function testCanPassStorageToConstructor()

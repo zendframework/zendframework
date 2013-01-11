@@ -45,7 +45,7 @@ abstract class AbstractManager implements Manager
      * Default storage class to use when no storage provided
      * @var string
      */
-    protected $defaultStorageClass = 'Zend\Session\Storage\SessionStorage';
+    protected $defaultStorageClass = 'Zend\Session\Storage\SessionArrayStorage';
 
     /**
      * @var SaveHandler

@@ -179,7 +179,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $config  = $manager->getConfig();
         $this->assertTrue($config instanceof Session\Config\SessionConfig);
         $storage = $manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
+        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
     }
 
     public function testContainerAllowsInjectingManagerViaConstructor()

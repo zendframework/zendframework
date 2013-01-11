@@ -38,7 +38,7 @@ abstract class AbstractRestfulController extends AbstractController
      */
     protected $contentTypes = array(
         self::CONTENT_TYPE_JSON => array(
-            'application/application/hal+json',
+            'application/hal+json',
             'application/json'
         )
     );

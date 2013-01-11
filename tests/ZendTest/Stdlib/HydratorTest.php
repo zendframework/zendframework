@@ -16,6 +16,7 @@ use Zend\Stdlib\Hydrator\ObjectProperty;
 use Zend\Stdlib\Hydrator\ArraySerializable;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
+use ZendTest\Stdlib\TestAsset\ClassMethodsFilterProviderInterface;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 use ZendTest\Stdlib\TestAsset\ClassMethodsInvalidParameter;
@@ -384,5 +385,15 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($datas['hasBar']);
         $this->assertEquals('Bar', $datas['foo']);
         $this->assertFalse($datas['isBla']);
+    }
+
+    public function testObjectBasedFilters()
+    {
+        $hydrator = new ClassMethods(false);
+        $foo = new ClassMethodsFilterProviderInterface();
+        $data = $hydrator->extract($foo);
+        $this->assertFalse(array_key_exists("filter", $data));
+        $this->assertSame("bar", $data["foo"]);
+        $this->assertSame("foo", $data["bar"]);
     }
 }

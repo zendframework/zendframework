@@ -12,6 +12,8 @@ namespace Zend\Stdlib\Hydrator;
 
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
+use Zend\Stdlib\Hydrator\Filter\FilterProviderInterface;
+use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\GetFilter;
 use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
@@ -101,6 +103,21 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             ));
         }
 
+        $filter = null;
+        if ($object instanceof FilterProviderInterface) {
+            $filter = $object->getFilter();
+            if ($filter instanceof FilterComposite)
+            {
+                $filter->addFilter(
+                    "getfilter",
+                    new MethodMatchFilter("getFilter"),
+                    FilterComposite::CONDITION_AND
+                );
+            }
+        } else {
+            $filter = $this->filterComposite;
+        }
+
         $transform = function ($letters) {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
@@ -110,7 +127,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         foreach ($methods as $method) {
             if (
-                !$this->filterComposite->filter(
+                !$filter->filter(
                     get_class($object) . '::' . $method
                 )
             ) {

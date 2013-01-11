@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
@@ -82,5 +82,31 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $contents = file_get_contents(__DIR__ . '/' . self::FILENAME);
         $this->assertContains('an info message', $contents);
         $this->assertContains('Subject: test', $contents);
+    }
+
+    public function testConstructWithOptions()
+    {
+        $message   = new MailMessage();
+        $transport = new Transport\File();
+        $options   = new Transport\FileOptions(array(
+                'path'      => __DIR__,
+                'callback'  => function (Transport\File $transport) {
+                    return MailTest::FILENAME;
+                },
+        ));
+        $transport->setOptions($options);
+
+        $formatter = new \Zend\Log\Formatter\Simple();
+        $writer = new MailWriter(array(
+                'formatter' => $formatter,
+                'mail'      => $message,
+                'transport' => $transport,
+                'subject_prepend_text' => 'subject prepend',
+        ));
+
+        $this->assertAttributeEquals($message, 'mail', $writer);
+        $this->assertAttributeEquals($transport, 'transport', $writer);
+        $this->assertAttributeEquals($formatter, 'formatter', $writer);
+        $this->assertAttributeEquals('subject prepend', 'subjectPrependText', $writer);
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -242,6 +242,8 @@ class Form extends Fieldset implements FormInterface
         $this->bindAs = $flags;
         $this->setObject($object);
         $this->extract();
+
+        return $this;
     }
 
     /**
@@ -649,6 +651,14 @@ class Form extends Fieldset implements FormInterface
     {
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
+
+        if ($this instanceof InputFilterProviderInterface) {
+            foreach ($this->getInputFilterSpecification() as $name => $spec) {
+                $input = $inputFactory->createInput($spec);
+                $inputFilter->add($input, $name);
+            }
+        }
+
         foreach ($fieldset->getElements() as $element) {
             $name = $element->getName();
 

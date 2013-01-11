@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Http
  */
@@ -72,12 +72,12 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Whether the cookie is secure or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $secure = null;
 
     /**
-     * @var boolean|null
+     * @var bool|null
      */
     protected $httponly = null;
 
@@ -426,7 +426,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param boolean $secure
+     * @param  bool $secure
      */
     public function setSecure($secure)
     {
@@ -434,7 +434,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSecure()
     {
@@ -442,7 +442,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param boolean $httponly
+     * @param  bool $httponly
      */
     public function setHttponly($httponly)
     {
@@ -450,7 +450,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isHttponly()
     {
@@ -463,7 +463,7 @@ class SetCookie implements MultipleHeaderInterface
      * Always returns false if the cookie is a session cookie (has no expiry time)
      *
      * @param int $now Timestamp to consider as "now"
-     * @return boolean
+     * @return bool
      */
     public function isExpired($now = null)
     {
@@ -473,15 +473,15 @@ class SetCookie implements MultipleHeaderInterface
 
         if (is_int($this->expires) && $this->expires < $now) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * Check whether the cookie is a session cookie (has no expiry time set)
      *
-     * @return boolean
+     * @return bool
      */
     public function isSessionCookie()
     {

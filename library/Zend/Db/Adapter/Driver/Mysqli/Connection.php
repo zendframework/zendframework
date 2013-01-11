@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -41,7 +41,7 @@ class Connection implements ConnectionInterface
     /**
      * In transaction
      *
-     * @var boolean
+     * @var bool
      */
     protected $inTransaction = false;
 
@@ -166,7 +166,23 @@ class Connection implements ConnectionInterface
         $port     = (isset($p['port'])) ? (int) $p['port'] : null;
         $socket   = (isset($p['socket'])) ? $p['socket'] : null;
 
-        $this->resource = new \mysqli($hostname, $username, $password, $database, $port, $socket);
+        $this->resource = new \mysqli();
+        $this->resource->init();
+
+        if (!empty($p['driver_options'])) {
+            foreach ($p['driver_options'] as $option => $value) {
+                if (is_string($option)) {
+                    $option = strtoupper($option);
+                    if (!defined($option)) {
+                        continue;
+                    }
+                    $option = constant($option);
+                }
+                $this->resource->options($option, $value);
+            }
+        }
+
+        $this->resource->real_connect($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
             throw new Exception\RuntimeException(

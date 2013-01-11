@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
@@ -36,7 +36,7 @@ class Hmac
      * @param  string  $key
      * @param  string  $hash
      * @param  string  $data
-     * @param  boolean $output
+     * @param  bool $output
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -59,7 +59,7 @@ class Hmac
      * Get the output size according to the hash algorithm and the output format
      *
      * @param  string  $hash
-     * @param  boolean $output
+     * @param  bool $output
      * @return integer
      */
     public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
@@ -81,7 +81,7 @@ class Hmac
      * Is the hash algorithm supported?
      *
      * @param  string $algorithm
-     * @return boolean
+     * @return bool
      */
     public static function isSupported($algorithm)
     {

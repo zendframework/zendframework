@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mime
  */
@@ -57,7 +57,7 @@ class Message
      * Check if message needs to be sent as multipart
      * MIME message or if it has only one part.
      *
-     * @return boolean
+     * @return bool
      */
     public function isMultiPart()
     {
@@ -225,7 +225,7 @@ class Message
     {
         $parts = Decode::splitMessageStruct($message, $boundary, $EOL);
 
-        $res = new self();
+        $res = new static();
         foreach ($parts as $part) {
             // now we build a new MimePart for the current Message Part:
             $newPart = new Part($part['body']);

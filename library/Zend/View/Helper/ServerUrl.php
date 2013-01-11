@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -51,7 +51,7 @@ class ServerUrl extends AbstractHelper
      * View helper entry point:
      * Returns the current host's URL like http://site.com
      *
-     * @param  string|boolean $requestUri  [optional] if true, the request URI
+     * @param  string|bool $requestUri  [optional] if true, the request URI
      *                                     found in $_SERVER will be appended
      *                                     as a path. If a string is given, it
      *                                     will be appended as a path. Default

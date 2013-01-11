@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -77,7 +77,7 @@ class Dn implements \ArrayAccess
         } else {
             $dnArray = static::explodeDn((string) $dn);
         }
-        return new self($dnArray, $caseFold);
+        return new static($dnArray, $caseFold);
     }
 
     /**
@@ -90,7 +90,7 @@ class Dn implements \ArrayAccess
      */
     public static function fromArray(array $dn, $caseFold = null)
     {
-        return new self($dn, $caseFold);
+        return new static($dn, $caseFold);
     }
 
     /**
@@ -145,7 +145,7 @@ class Dn implements \ArrayAccess
             throw new Exception\LdapException(null, 'Cannot retrieve parent DN with given $levelUp');
         }
         $newDn = array_slice($this->dn, $levelUp);
-        return new self($newDn, $this->caseFold);
+        return new static($newDn, $this->caseFold);
     }
 
     /**
@@ -254,7 +254,7 @@ class Dn implements \ArrayAccess
      * Assert index is correct and usable
      *
      * @param  mixed $index
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     protected function assertIndex($index)
@@ -272,7 +272,7 @@ class Dn implements \ArrayAccess
      * Assert if value is in a correct RDN format
      *
      * @param  array $value
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     protected static function assertRdn(array $value)
@@ -377,7 +377,7 @@ class Dn implements \ArrayAccess
      * Required by the ArrayAccess implementation
      *
      * @param  int $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -484,10 +484,10 @@ class Dn implements \ArrayAccess
             // Convert all leading and trailing spaces to sequences of \20.
             if (preg_match('/^(\s*)(.+?)(\s*)$/', $val, $matches)) {
                 $val = $matches[2];
-                for ($i = 0; $i < strlen($matches[1]); $i++) {
+                for ($i = 0, $len = strlen($matches[1]); $i < $len; $i++) {
                     $val = '\20' . $val;
                 }
-                for ($i = 0; $i < strlen($matches[3]); $i++) {
+                for ($i = 0, $len = strlen($matches[3]); $i < $len; $i++) {
                     $val = $val . '\20';
                 }
             }
@@ -556,7 +556,7 @@ class Dn implements \ArrayAccess
             throw new Exception\LdapException(null, 'DN is malformed');
         }
         $ret = array();
-        for ($i = 0; $i < count($k); $i++) {
+        for ($i = 0, $count = count($k); $i < $count; $i++) {
             if (is_array($k[$i]) && is_array($v[$i]) && (count($k[$i]) === count($v[$i]))) {
                 $multi = array();
                 for ($j = 0; $j < count($k[$i]); $j++) {
@@ -583,7 +583,7 @@ class Dn implements \ArrayAccess
      * @param  array  $keys     An optional array to receive DN keys (e.g. CN, OU, DC, ...)
      * @param  array  $vals     An optional array to receive DN values
      * @param  string $caseFold
-     * @return boolean True if the DN was successfully parsed or false if the string is not a valid DN.
+     * @return bool True if the DN was successfully parsed or false if the string is not a valid DN.
      */
     public static function checkDn(
         $dn, array &$keys = null, array &$vals = null,
@@ -731,7 +731,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string|Dn $childDn
      * @param  string|Dn $parentDn
-     * @return boolean
+     * @return bool
      */
     public static function isChildOf($childDn, $parentDn)
     {
@@ -756,7 +756,7 @@ class Dn implements \ArrayAccess
         if ($startIndex < 0) {
             return false;
         }
-        for ($i = 0; $i < count($pdn); $i++) {
+        for ($i = 0, $count = count($pdn); $i < $count; $i++) {
             if ($cdn[$i + $startIndex] != $pdn[$i]) {
                 return false;
             }

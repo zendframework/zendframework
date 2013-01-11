@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Filter
  */
@@ -110,7 +110,7 @@ class Rename extends Filter\AbstractFilter
      * But existing files will be erased when the overwrite option is true
      *
      * @param  string  $value  Full path of file to change
-     * @param  boolean $source Return internal informations
+     * @param  bool $source Return internal informations
      * @return string The new filename which has been set
      * @throws Exception\InvalidArgumentException If the target file already exists.
      */
@@ -198,7 +198,7 @@ class Rename extends Filter\AbstractFilter
                     break;
 
                 case 'overwrite' :
-                    $files['overwrite'] = (boolean) $value;
+                    $files['overwrite'] = (bool) $value;
                     break;
 
                 default:

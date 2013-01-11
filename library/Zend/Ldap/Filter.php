@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -36,7 +36,7 @@ class Filter extends Filter\StringFilter
      */
     public static function equals($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_EQUALS, null, null);
+        return new static($attr, $value, self::TYPE_EQUALS, null, null);
     }
 
     /**
@@ -49,7 +49,7 @@ class Filter extends Filter\StringFilter
      */
     public static function begins($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_EQUALS, null, '*');
+        return new static($attr, $value, self::TYPE_EQUALS, null, '*');
     }
 
     /**
@@ -62,7 +62,7 @@ class Filter extends Filter\StringFilter
      */
     public static function ends($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_EQUALS, '*', null);
+        return new static($attr, $value, self::TYPE_EQUALS, '*', null);
     }
 
     /**
@@ -75,7 +75,7 @@ class Filter extends Filter\StringFilter
      */
     public static function contains($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_EQUALS, '*', '*');
+        return new static($attr, $value, self::TYPE_EQUALS, '*', '*');
     }
 
     /**
@@ -88,7 +88,7 @@ class Filter extends Filter\StringFilter
      */
     public static function greater($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_GREATER, null, null);
+        return new static($attr, $value, self::TYPE_GREATER, null, null);
     }
 
     /**
@@ -101,7 +101,7 @@ class Filter extends Filter\StringFilter
      */
     public static function greaterOrEqual($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_GREATEROREQUAL, null, null);
+        return new static($attr, $value, self::TYPE_GREATEROREQUAL, null, null);
     }
 
     /**
@@ -114,7 +114,7 @@ class Filter extends Filter\StringFilter
      */
     public static function less($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_LESS, null, null);
+        return new static($attr, $value, self::TYPE_LESS, null, null);
     }
 
     /**
@@ -127,7 +127,7 @@ class Filter extends Filter\StringFilter
      */
     public static function lessOrEqual($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_LESSOREQUAL, null, null);
+        return new static($attr, $value, self::TYPE_LESSOREQUAL, null, null);
     }
 
     /**
@@ -140,7 +140,7 @@ class Filter extends Filter\StringFilter
      */
     public static function approx($attr, $value)
     {
-        return new self($attr, $value, self::TYPE_APPROX, null, null);
+        return new static($attr, $value, self::TYPE_APPROX, null, null);
     }
 
     /**
@@ -152,7 +152,7 @@ class Filter extends Filter\StringFilter
      */
     public static function any($attr)
     {
-        return new self($attr, '', self::TYPE_EQUALS, '*', null);
+        return new static($attr, '', self::TYPE_EQUALS, '*', null);
     }
 
     /**

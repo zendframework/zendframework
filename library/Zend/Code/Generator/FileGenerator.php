@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -104,7 +104,7 @@ class FileGenerator extends AbstractGenerator
      */
     public static function fromReflection(FileReflection $fileReflection)
     {
-        $file = new self();
+        $file = new static();
 
         $file->setSourceContent($fileReflection->getContents());
         $file->setSourceDirty(false);
@@ -336,7 +336,11 @@ class FileGenerator extends AbstractGenerator
     public function setUses(array $uses)
     {
         foreach ($uses as $use) {
-            $this->setUse($use[0], $use[1]);
+            if (is_array($use)) {
+                $this->setUse($use[0], $use[1]);
+            } else {
+                $this->setUse($use);
+            }
         }
         return $this;
     }
@@ -350,7 +354,9 @@ class FileGenerator extends AbstractGenerator
      */
     public function setUse($use, $as = null)
     {
-        $this->uses[] = array($use, $as);
+        if (!in_array(array($use, $as), $this->uses)) {
+            $this->uses[] = array($use, $as);
+        }
         return $this;
     }
 

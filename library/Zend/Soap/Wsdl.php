@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Soap
  */
@@ -297,21 +297,21 @@ class Wsdl
 
         if (is_array($input)) {
             $node = $this->dom->createElement('input');
-            $soap_node = $this->dom->createElement('soap:body');
+            $soapNode = $this->dom->createElement('soap:body');
             foreach ($input as $name => $value) {
-                $soap_node->setAttribute($name, $value);
+                $soapNode->setAttribute($name, $value);
             }
-            $node->appendChild($soap_node);
+            $node->appendChild($soapNode);
             $operation->appendChild($node);
         }
 
         if (is_array($output)) {
             $node = $this->dom->createElement('output');
-            $soap_node = $this->dom->createElement('soap:body');
+            $soapNode = $this->dom->createElement('soap:body');
             foreach ($output as $name => $value) {
-                $soap_node->setAttribute($name, $value);
+                $soapNode->setAttribute($name, $value);
             }
-            $node->appendChild($soap_node);
+            $node->appendChild($soapNode);
             $operation->appendChild($node);
         }
 
@@ -320,11 +320,11 @@ class Wsdl
             if (isset($fault['name'])) {
                 $node->setAttribute('name', $fault['name']);
             }
-            $soap_node = $this->dom->createElement('soap:fault');
+            $soapNode = $this->dom->createElement('soap:fault');
             foreach ($fault as $name => $value) {
-                $soap_node->setAttribute($name, $value);
+                $soapNode->setAttribute($name, $value);
             }
-            $node->appendChild($soap_node);
+            $node->appendChild($soapNode);
             $operation->appendChild($node);
         }
 
@@ -339,49 +339,49 @@ class Wsdl
      * @param object $binding A binding XML_Tree_Node returned by {@link function addBinding}
      * @param string $style binding style, possible values are "rpc" (the default) and "document"
      * @param string $transport Transport method (defaults to HTTP)
-     * @return boolean
+     * @return bool
      */
     public function addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http')
     {
-        $soap_binding = $this->dom->createElement('soap:binding');
-        $soap_binding->setAttribute('style', $style);
-        $soap_binding->setAttribute('transport', $transport);
+        $soapBinding = $this->dom->createElement('soap:binding');
+        $soapBinding->setAttribute('style', $style);
+        $soapBinding->setAttribute('transport', $transport);
 
-        $binding->appendChild($soap_binding);
+        $binding->appendChild($soapBinding);
 
-        return $soap_binding;
+        return $soapBinding;
     }
 
     /**
      * Add a {@link http://www.w3.org/TR/wsdl#_soap:operation SOAP operation} to an operation element
      *
      * @param object $operation An operation XML_Tree_Node returned by {@link function addBindingOperation}
-     * @param string $soap_action SOAP Action
-     * @return boolean
+     * @param string $soapAction SOAP Action
+     * @return bool
      */
-    public function addSoapOperation($binding, $soap_action)
+    public function addSoapOperation($binding, $soapAction)
     {
-        if ($soap_action instanceof Uri) {
-            $soap_action = $soap_action->toString();
+        if ($soapAction instanceof Uri) {
+            $soapAction = $soapAction->toString();
         }
-        $soap_operation = $this->dom->createElement('soap:operation');
-        $soap_operation->setAttribute('soapAction', $soap_action);
+        $soapOperation = $this->dom->createElement('soap:operation');
+        $soapOperation->setAttribute('soapAction', $soapAction);
 
-        $binding->insertBefore($soap_operation, $binding->firstChild);
+        $binding->insertBefore($soapOperation, $binding->firstChild);
 
-        return $soap_operation;
+        return $soapOperation;
     }
 
     /**
      * Add a {@link http://www.w3.org/TR/wsdl#_services service} element to the WSDL
      *
      * @param string $name Service Name
-     * @param string $port_name Name of the port for the service
+     * @param string $portName Name of the port for the service
      * @param string $binding Binding for the port
      * @param string $location SOAP Address for the service
      * @return object The new service's XML_Tree_Node for use with {@link function addDocumentation}
      */
-    public function addService($name, $port_name, $binding, $location)
+    public function addService($name, $portName, $binding, $location)
     {
         if ($location instanceof Uri) {
             $location = $location->toString();
@@ -390,13 +390,13 @@ class Wsdl
         $service->setAttribute('name', $name);
 
         $port = $this->dom->createElement('port');
-        $port->setAttribute('name', $port_name);
+        $port->setAttribute('name', $portName);
         $port->setAttribute('binding', $binding);
 
-        $soap_address = $this->dom->createElement('soap:address');
-        $soap_address->setAttribute('location', $location);
+        $soapAddress = $this->dom->createElement('soap:address');
+        $soapAddress->setAttribute('location', $location);
 
-        $port->appendChild($soap_address);
+        $port->appendChild($soapAddress);
         $service->appendChild($port);
 
         $this->wsdl->appendChild($service);
@@ -411,21 +411,21 @@ class Wsdl
      * but the WSDL {@link http://schemas.xmlsoap.org/wsdl/ schema} uses 'documentation' instead.
      * The {@link http://www.ws-i.org/Profiles/BasicProfile-1.1-2004-08-24.html#WSDL_documentation_Element WS-I Basic Profile 1.1} recommends using 'documentation'.
      *
-     * @param object $input_node An XML_Tree_Node returned by another method to add the documentation to
+     * @param object $inputNode An XML_Tree_Node returned by another method to add the documentation to
      * @param string $documentation Human readable documentation for the node
      * @return DOMElement The documentation element
      */
-    public function addDocumentation($input_node, $documentation)
+    public function addDocumentation($inputNode, $documentation)
     {
-        if ($input_node === $this) {
+        if ($inputNode === $this) {
             $node = $this->dom->documentElement;
         } else {
-            $node = $input_node;
+            $node = $inputNode;
         }
 
         $doc = $this->dom->createElement('documentation');
-        $doc_cdata = $this->dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
-        $doc->appendChild($doc_cdata);
+        $docCData = $this->dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
+        $doc->appendChild($docCData);
 
         if ($node->hasChildNodes()) {
             $node->insertBefore($doc, $node->firstChild);
@@ -514,7 +514,7 @@ class Wsdl
     /**
      * Echo the WSDL as XML
      *
-     * @return boolean
+     * @return bool
      */
     public function dump($filename = false)
     {

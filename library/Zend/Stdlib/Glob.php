@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Stdlib
  */
@@ -36,16 +36,16 @@ abstract class Glob
      * @see    http://docs.php.net/glob
      * @param  string  $pattern
      * @param  integer $flags
-     * @param  boolean $forceFallback
+     * @param  bool $forceFallback
      * @return array|false
      */
     public static function glob($pattern, $flags, $forceFallback = false)
     {
         if (!defined('GLOB_BRACE') || $forceFallback) {
             return static::fallbackGlob($pattern, $flags);
-        } else {
-            return static::systemGlob($pattern, $flags);
         }
+
+        return static::systemGlob($pattern, $flags);
     }
 
     /**

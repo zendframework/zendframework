@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Tag
  */
@@ -154,7 +154,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -175,7 +175,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * Check if an offset exists
      *
      * @param  mixed $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {

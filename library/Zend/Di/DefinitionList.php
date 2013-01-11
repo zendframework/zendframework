@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Di
  */
@@ -146,9 +146,11 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         foreach ($this as $definition) {
             if ($definition->hasClass($class)) {
                 $supertypes = array_merge($supertypes, $definition->getClassSupertypes($class));
-                if (!$definition instanceof Definition\PartialMarker) {
-                    return $supertypes;
+                if ($definition instanceof Definition\PartialMarker) {
+                    continue;
                 }
+
+                return $supertypes;
             }
         }
         return $supertypes;
@@ -165,9 +167,9 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 $value = $definition->getInstantiator($class);
                 if ($value === null && $definition instanceof Definition\PartialMarker) {
                     continue;
-                } else {
-                    return $value;
                 }
+
+                return $value;
             }
         }
 
@@ -184,9 +186,9 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
             if ($definition->hasClass($class)) {
                 if ($definition->hasMethods($class) === false && $definition instanceof Definition\PartialMarker) {
                     continue;
-                } else {
-                    return $definition->hasMethods($class);
                 }
+
+                return $definition->hasMethods($class);
             }
         }
 
@@ -198,14 +200,14 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
      */
     public function hasMethod($class, $method)
     {
+        if (!$this->hasMethods($class)) {
+            return false;
+        }
+
         /** @var $definition Definition\DefinitionInterface */
         foreach ($this as $definition) {
-            if ($definition->hasClass($class)) {
-                if ($definition->hasMethods($class) === false && $definition instanceof Definition\PartialMarker) {
-                    continue;
-                } else {
-                    return $definition->hasMethods($class);
-                }
+            if ($definition->hasMethod($class, $method)) {
+                return true;
             }
         }
 
@@ -221,11 +223,11 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         $methods = array();
         foreach ($this as $definition) {
             if ($definition->hasClass($class)) {
-                if ($definition instanceof Definition\PartialMarker) {
-                    $methods = array_merge($definition->getMethods($class), $methods);
-                } else {
+                if (!$definition instanceof Definition\PartialMarker) {
                     return array_merge($definition->getMethods($class), $methods);
                 }
+
+                $methods = array_merge($definition->getMethods($class), $methods);
             }
         }
 

@@ -4,7 +4,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
@@ -13,6 +13,7 @@ namespace Zend\Log\Writer;
 
 use DateTime;
 use Mongo;
+use MongoClient;
 use MongoDate;
 use Traversable;
 use Zend\Log\Exception\InvalidArgumentException;
@@ -46,7 +47,7 @@ class MongoDB extends AbstractWriter
     /**
      * Constructor
      *
-     * @param Mongo|array|Traversable $mongo
+     * @param Mongo|MongoClient|array|Traversable $mongo
      * @param string|MongoDB $database
      * @param string $collection
      * @param array $saveOptions
@@ -75,9 +76,9 @@ class MongoDB extends AbstractWriter
             $mongo = isset($mongo['mongo']) ? $mongo['mongo'] : null;
         }
 
-        if (!($mongo instanceof Mongo)) {
+        if (!($mongo instanceof MongoClient || $mongo instanceof Mongo)) {
             throw new Exception\InvalidArgumentException(
-                'Parameter of type %s is invalid; must be Mongo',
+                'Parameter of type %s is invalid; must be MongoClient or Mongo',
                 (is_object($mongo) ? get_class($mongo) : gettype($mongo))
             );
         }

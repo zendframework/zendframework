@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Authentication
  */
@@ -95,7 +95,7 @@ class Http implements AdapterInterface
     /**
      * Whether to send the opaque value in the header. True by default
      *
-     * @var boolean
+     * @var bool
      */
     protected $useOpaque;
 
@@ -126,14 +126,14 @@ class Http implements AdapterInterface
      * Whether or not to do Proxy Authentication instead of origin server
      * authentication (send 407's instead of 401's). Off by default.
      *
-     * @var boolean
+     * @var bool
      */
     protected $imaProxy;
 
     /**
      * Flag indicating the client is IE and didn't bother to return the opaque string
      *
-     * @var boolean
+     * @var bool
      */
     protected $ieNoOpaque;
 
@@ -819,7 +819,7 @@ class Http implements AdapterInterface
             return false;
         }
         $result = 0;
-        for ($i = 0; $i < strlen($a); $i++) {
+        for ($i = 0, $len = strlen($a); $i < $len; $i++) {
             $result |= ord($a[$i]) ^ ord($b[$i]);
         }
         return $result == 0;

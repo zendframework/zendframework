@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -54,7 +54,7 @@ class Ldap
      * NULL if there has been an anonymous bind
      * username of the currently bound user
      *
-     * @var boolean|null|string
+     * @var bool|null|string
      */
     protected $boundUser = false;
 
@@ -310,7 +310,7 @@ class Ldap
     }
 
     /**
-     * @return boolean The default SSL / TLS encrypted transport control
+     * @return bool The default SSL / TLS encrypted transport control
      */
     protected function getUseSsl()
     {
@@ -334,7 +334,7 @@ class Ldap
     }
 
     /**
-     * @return boolean Bind requires DN
+     * @return bool Bind requires DN
      */
     protected function getBindRequiresDn()
     {
@@ -406,7 +406,7 @@ class Ldap
     }
 
     /**
-     * @return boolean Allow empty passwords
+     * @return bool Allow empty passwords
      */
     protected function getAllowEmptyPassword()
     {
@@ -414,7 +414,7 @@ class Ldap
     }
 
     /**
-     * @return boolean The default SSL / TLS encrypted transport control
+     * @return bool The default SSL / TLS encrypted transport control
      */
     protected function getUseStartTls()
     {
@@ -422,7 +422,7 @@ class Ldap
     }
 
     /**
-     * @return boolean Opt. Referrals
+     * @return bool Opt. Referrals
      */
     protected function getOptReferrals()
     {
@@ -430,7 +430,7 @@ class Ldap
     }
 
     /**
-     * @return boolean Try splitting the username into username and domain
+     * @return bool Try splitting the username into username and domain
      */
     protected function getTryUsernameSplit()
     {
@@ -513,7 +513,7 @@ class Ldap
 
     /**
      * @param  string $dname The domain name to check
-     * @return boolean
+     * @return bool
      */
     protected function isPossibleAuthority($dname)
     {
@@ -658,8 +658,8 @@ class Ldap
      *
      * @param  string  $host           The hostname of the LDAP server to connect to
      * @param  int     $port           The port number of the LDAP server to connect to
-     * @param  boolean $useSsl         Use SSL
-     * @param  boolean $useStartTls    Use STARTTLS
+     * @param  bool $useSsl         Use SSL
+     * @param  bool $useStartTls    Use STARTTLS
      * @param  int     $networkTimeout The value for network timeout when connect to the LDAP server.
      * @return Ldap Provides a fluent interface
      * @throws Exception\LdapException
@@ -1005,7 +1005,7 @@ class Ldap
      * Check if a given DN exists.
      *
      * @param  string|Dn $dn
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     public function exists($dn)
@@ -1032,7 +1032,7 @@ class Ldap
      * @param  integer                            $scope
      * @param  array                              $attributes
      * @param  string|null                        $sort
-     * @param  boolean                            $reverseSort
+     * @param  bool                            $reverseSort
      * @param  integer                            $sizelimit
      * @param  integer                            $timelimit
      * @return array
@@ -1066,7 +1066,7 @@ class Ldap
      *
      * @param  string|Dn $dn
      * @param  array     $attributes
-     * @param  boolean   $throwOnNotFound
+     * @param  bool   $throwOnNotFound
      * @return array
      * @throws null|Exception\LdapException
      */
@@ -1255,7 +1255,7 @@ class Ldap
      * Delete an LDAP entry
      *
      * @param  string|Dn $dn
-     * @param  boolean   $recursively
+     * @param  bool   $recursively
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1327,8 +1327,8 @@ class Ldap
      *
      * @param  string|Dn $from
      * @param  string|Dn $to
-     * @param  boolean   $recursively
-     * @param  boolean   $alwaysEmulate
+     * @param  bool   $recursively
+     * @param  bool   $alwaysEmulate
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1359,8 +1359,8 @@ class Ldap
      *
      * @param  string|Dn $from
      * @param  string|Dn $to
-     * @param  boolean   $recursively
-     * @param  boolean   $alwaysEmulate
+     * @param  bool   $recursively
+     * @param  bool   $alwaysEmulate
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1376,8 +1376,8 @@ class Ldap
      *
      * @param  string|Dn $from
      * @param  string|Dn $to
-     * @param  boolean   $recursively
-     * @param  boolean   $alwaysEmulate
+     * @param  bool   $recursively
+     * @param  bool   $alwaysEmulate
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1427,7 +1427,7 @@ class Ldap
      *
      * @param  string|Dn $from
      * @param  string|Dn $to
-     * @param  boolean   $recursively
+     * @param  bool   $recursively
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1456,7 +1456,7 @@ class Ldap
      *
      * @param  string|Dn $from
      * @param  string|Dn $to
-     * @param  boolean   $recursively
+     * @param  bool   $recursively
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */

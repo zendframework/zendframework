@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -237,7 +237,7 @@ class MimeType extends AbstractValidator
     /**
      * Is usage of MagicFile disabled?
      *
-     * @return boolean
+     * @return bool
      */
     public function isMagicFileDisabled()
     {
@@ -247,7 +247,7 @@ class MimeType extends AbstractValidator
     /**
      * Returns the Header Check option
      *
-     * @return boolean
+     * @return bool
      */
     public function getHeaderCheck()
     {
@@ -258,19 +258,19 @@ class MimeType extends AbstractValidator
      * Defines if the http header should be used
      * Note that this is unsafe and therefor the default value is false
      *
-     * @param  boolean $headerCheck
+     * @param  bool $headerCheck
      * @return MimeType Provides fluid interface
      */
     public function enableHeaderCheck($headerCheck = true)
     {
-        $this->options['enableHeaderCheck'] = (boolean) $headerCheck;
+        $this->options['enableHeaderCheck'] = (bool) $headerCheck;
         return $this;
     }
 
     /**
      * Returns the set mimetypes
      *
-     * @param  boolean $asArray Returns the values as array, when false a concatenated string is returned
+     * @param  bool $asArray Returns the values as array, when false a concatenated string is returned
      * @return string|array
      */
     public function getMimeType($asArray = false)
@@ -347,7 +347,7 @@ class MimeType extends AbstractValidator
      *
      * @param  string $value Real file to check for mimetype
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {

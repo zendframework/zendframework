@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mail
  */
@@ -138,7 +138,7 @@ class Pop3
     /**
      * read a response
      *
-     * @param  boolean $multiline response has multiple lines and should be read until "<nl>.<nl>"
+     * @param  bool $multiline response has multiple lines and should be read until "<nl>.<nl>"
      * @throws Exception\RuntimeException
      * @return string response
      */

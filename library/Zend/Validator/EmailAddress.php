@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -196,7 +196,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Whether MX checking via getmxrr is supported or not
      *
-     * @return boolean
+     * @return bool
      */
     public function isMxSupported()
     {
@@ -206,7 +206,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set validateMx option
      *
-     * @return boolean
+     * @return bool
      */
     public function getMxCheck()
     {
@@ -218,7 +218,7 @@ class EmailAddress extends AbstractValidator
      *
      * This only applies when DNS hostnames are validated
      *
-     * @param boolean $mx Set allowed to true to validate for MX records, and false to not validate them
+     * @param  bool $mx Set allowed to true to validate for MX records, and false to not validate them
      * @return EmailAddress Fluid Interface
      */
     public function useMxCheck($mx)
@@ -230,7 +230,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set deepMxCheck option
      *
-     * @return boolean
+     * @return bool
      */
     public function getDeepMxCheck()
     {
@@ -240,7 +240,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Use deep validation for MX records
      *
-     * @param boolean $deep Set deep to true to perform a deep validation process for MX records
+     * @param  bool $deep Set deep to true to perform a deep validation process for MX records
      * @return EmailAddress Fluid Interface
      */
     public function useDeepMxCheck($deep)
@@ -252,7 +252,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set domainCheck option
      *
-     * @return boolean
+     * @return bool
      */
     public function getDomainCheck()
     {
@@ -263,12 +263,12 @@ class EmailAddress extends AbstractValidator
      * Sets if the domain should also be checked
      * or only the local part of the email address
      *
-     * @param boolean $domain
+     * @param  bool $domain
      * @return EmailAddress Fluid Interface
      */
     public function useDomainCheck($domain = true)
     {
-        $this->options['useDomainCheck'] = (boolean) $domain;
+        $this->options['useDomainCheck'] = (bool) $domain;
         return $this;
     }
 
@@ -296,7 +296,7 @@ class EmailAddress extends AbstractValidator
      * @see http://tools.ietf.org/html/rfc6598#section-7
      *
      * @param string $host
-     * @return boolean Returns false when minimal one of the given addresses is not reserved
+     * @return bool Returns false when minimal one of the given addresses is not reserved
      */
     protected function isReserved($host)
     {
@@ -336,7 +336,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Internal method to validate the local part of the email address
      *
-     * @return boolean
+     * @return bool
      */
     protected function validateLocalPart()
     {
@@ -383,7 +383,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Internal method to validate the servers MX records
      *
-     * @return boolean
+     * @return bool
      */
     protected function validateMXRecords()
     {
@@ -445,7 +445,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Internal method to validate the hostname part of the email address
      *
-     * @return boolean
+     * @return bool
      */
     protected function validateHostnamePart()
     {
@@ -494,7 +494,7 @@ class EmailAddress extends AbstractValidator
      * @link   http://www.ietf.org/rfc/rfc2822.txt RFC2822
      * @link   http://www.columbia.edu/kermit/ascii.html US-ASCII characters
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

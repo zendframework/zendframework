@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -100,9 +100,9 @@ class Sqlsrv implements DriverInterface
     {
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
             return 'SqlServer';
-        } else {
-            return 'SQLServer';
         }
+
+        return 'SQLServer';
     }
 
     /**
@@ -128,22 +128,23 @@ class Sqlsrv implements DriverInterface
 
     /**
      * @param string|resource $sqlOrResource
-     * @throws Exception\InvalidArgumentException
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
     {
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
+        if (is_resource($sqlOrResource)) {
+            $statement->initialize($sqlOrResource);
+        } else {
             if (!$this->connection->isConnected()) {
                 $this->connection->connect();
             }
             $statement->initialize($this->connection->getResource());
-        } elseif (is_resource($sqlOrResource)) {
-            $statement->initialize($sqlOrResource); // will check the resource type
-        } else {
-            throw new Exception\InvalidArgumentException('createStatement() only accepts an SQL string or a Sqlsrv resource');
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            } elseif ($sqlOrResource != null) {
+                throw new Exception\InvalidArgumentException('createStatement() only accepts an SQL string or a Sqlsrv resource');
+            }
         }
         return $statement;
     }

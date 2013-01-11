@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Filter
  */
@@ -139,21 +139,21 @@ class Boolean extends AbstractFilter
     /**
      * Set the working mode
      *
-     * @param  boolean $flag When true this filter works like cast
+     * @param  bool $flag When true this filter works like cast
      *                       When false it recognises only true and false
      *                       and all other values are returned as is
      * @return Boolean
      */
     public function setCasting($flag = true)
     {
-        $this->options['casting'] = (boolean) $flag;
+        $this->options['casting'] = (bool) $flag;
         return $this;
     }
 
     /**
      * Returns the casting option
      *
-     * @return boolean
+     * @return bool
      */
     public function getCasting()
     {

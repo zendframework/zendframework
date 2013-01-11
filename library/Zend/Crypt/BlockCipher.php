@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
@@ -57,7 +57,7 @@ class BlockCipher
     /**
      * The output is binary?
      *
-     * @var boolean
+     * @var bool
      */
     protected $binaryOutput = false;
 
@@ -96,7 +96,7 @@ class BlockCipher
     {
         $plugins = static::getSymmetricPluginManager();
         $adapter = $plugins->get($adapter, (array) $options);
-        return new self($adapter);
+        return new static($adapter);
     }
 
     /**
@@ -213,19 +213,19 @@ class BlockCipher
     /**
      * Enable/disable the binary output
      *
-     * @param boolean $value
+     * @param  bool $value
      * @return BlockCipher
      */
     public function setBinaryOutput($value)
     {
-        $this->binaryOutput = (boolean)$value;
+        $this->binaryOutput = (bool) $value;
         return $this;
     }
 
     /**
      * Get the value of binary output
      *
-     * @return boolean
+     * @return bool
      */
     public function getBinaryOutput()
     {
@@ -281,7 +281,7 @@ class BlockCipher
     /**
      * Get the cipher algorithm
      *
-     * @return string|boolean
+     * @return string|bool
      */
     public function getCipherAlgorithm()
     {
@@ -383,7 +383,7 @@ class BlockCipher
      * Decrypt
      *
      * @param  string $data
-     * @return string|boolean
+     * @return string|bool
      * @throws Exception\InvalidArgumentException
      */
     public function decrypt($data)

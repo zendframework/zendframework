@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Uri
  */
@@ -188,7 +188,7 @@ class Uri implements UriInterface
      *
      * Note that a relative URI may still be valid
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -222,7 +222,7 @@ class Uri implements UriInterface
     /**
      * Check if the URI is a valid relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidRelative()
     {
@@ -249,7 +249,7 @@ class Uri implements UriInterface
     /**
      * Check if the URI is an absolute or relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbsolute()
     {
@@ -823,7 +823,7 @@ class Uri implements UriInterface
      * also check that $scheme is one of them.
      *
      * @param  string $scheme
-     * @return boolean
+     * @return bool
      */
     public static function validateScheme($scheme)
     {
@@ -840,12 +840,12 @@ class Uri implements UriInterface
      * Check that the userInfo part of a URI is valid
      *
      * @param  string $userInfo
-     * @return boolean
+     * @return bool
      */
     public static function validateUserInfo($userInfo)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':]+|%[A-Fa-f0-9]{2})*$/';
-        return (boolean) preg_match($regex, $userInfo);
+        return (bool) preg_match($regex, $userInfo);
     }
 
     /**
@@ -863,7 +863,7 @@ class Uri implements UriInterface
      *
      * @param  string  $host
      * @param  integer $allowed bitmask of allowed host types
-     * @return boolean
+     * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_ALL)
     {
@@ -899,7 +899,7 @@ class Uri implements UriInterface
      * Valid values include numbers between 1 and 65535, and empty values
      *
      * @param  integer $port
-     * @return boolean
+     * @return bool
      */
     public static function validatePort($port)
     {
@@ -921,14 +921,14 @@ class Uri implements UriInterface
      * Validate the path
      *
      * @param  string $path
-     * @return boolean
+     * @return bool
      */
     public static function validatePath($path)
     {
         $pchar   = '(?:[' . self::CHAR_UNRESERVED . ':@&=\+\$,]+|%[A-Fa-f0-9]{2})*';
         $segment = $pchar . "(?:;{$pchar})*";
         $regex   = "/^{$segment}(?:\/{$segment})*$/";
-        return (boolean) preg_match($regex, $path);
+        return (bool) preg_match($regex, $path);
     }
 
     /**
@@ -941,12 +941,12 @@ class Uri implements UriInterface
      * it through the encodeQueryFragment() method.
      *
      * @param  string $input
-     * @return boolean
+     * @return bool
      */
     public static function validateQueryFragment($input)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})*$/';
-        return (boolean) preg_match($regex, $input);
+        return (bool) preg_match($regex, $input);
     }
 
     /**
@@ -1143,7 +1143,7 @@ class Uri implements UriInterface
      *
      * @param  string  $host
      * @param  integer $allowed allowed address types
-     * @return boolean
+     * @return bool
      */
     protected static function isValidIpAddress($host, $allowed)
     {
@@ -1177,7 +1177,7 @@ class Uri implements UriInterface
      * Check if an address is a valid DNS hostname
      *
      * @param  string $host
-     * @return boolean
+     * @return bool
      */
     protected static function isValidDnsHostname($host)
     {
@@ -1192,7 +1192,7 @@ class Uri implements UriInterface
      * Check if an address is a valid registered name (as defined by RFC-3986) address
      *
      * @param  string $host
-     * @return boolean
+     * @return bool
      */
     protected static function isValidRegName($host)
     {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Json
  */
@@ -137,7 +137,7 @@ class Decoder
      */
     public static function decode($source, $objectDecodeType = Json::TYPE_OBJECT)
     {
-        $decoder = new self($source, $objectDecodeType);
+        $decoder = new static($source, $objectDecodeType);
         return $decoder->_decodeValue();
     }
 
@@ -244,7 +244,7 @@ class Decoder
     protected function _decodeArray()
     {
         $result = array();
-        $starttok = $tok = $this->_getNextToken(); // Move past the '['
+        $tok = $this->_getNextToken(); // Move past the '['
         $index  = 0;
 
         while ($tok && $tok != self::RBRACKET) {
@@ -302,10 +302,10 @@ class Decoder
             return(self::EOF);
         }
 
-        $str        = $this->source;
-        $str_length = $this->sourceLength;
-        $i          = $this->offset;
-        $start      = $i;
+        $str       = $this->source;
+        $strLength = $this->sourceLength;
+        $i         = $this->offset;
+        $start     = $i;
 
         switch ($str{$i}) {
             case '{':
@@ -330,7 +330,7 @@ class Decoder
                 $result = '';
                 do {
                     $i++;
-                    if ($i >= $str_length) {
+                    if ($i >= $strLength) {
                         break;
                     }
 
@@ -338,7 +338,7 @@ class Decoder
 
                     if ($chr == '\\') {
                         $i++;
-                        if ($i >= $str_length) {
+                        if ($i >= $strLength) {
                             break;
                         }
                         $chr = $str{$i};
@@ -378,28 +378,28 @@ class Decoder
                     } else {
                         $result .= $chr;
                     }
-                } while ($i < $str_length);
+                } while ($i < $strLength);
 
                 $this->token = self::DATUM;
                 //$this->tokenValue = substr($str, $start + 1, $i - $start - 1);
                 $this->tokenValue = $result;
                 break;
             case 't':
-                if (($i+ 3) < $str_length && substr($str, $start, 4) == "true") {
+                if (($i+ 3) < $strLength && substr($str, $start, 4) == "true") {
                     $this->token = self::DATUM;
                 }
                 $this->tokenValue = true;
                 $i += 3;
                 break;
             case 'f':
-                if (($i+ 4) < $str_length && substr($str, $start, 5) == "false") {
+                if (($i+ 4) < $strLength && substr($str, $start, 5) == "false") {
                     $this->token = self::DATUM;
                 }
                 $this->tokenValue = false;
                 $i += 4;
                 break;
             case 'n':
-                if (($i+ 3) < $str_length && substr($str, $start, 4) == "null") {
+                if (($i+ 3) < $strLength && substr($str, $start, 4) == "null") {
                     $this->token = self::DATUM;
                 }
                 $this->tokenValue = NULL;
@@ -454,15 +454,12 @@ class Decoder
      */
     public static function decodeUnicodeString($chrs)
     {
-        $chrs        = (string) $chrs;
-        $delim       = substr($chrs, 0, 1);
-        $utf8        = '';
-        $strlen_chrs = strlen($chrs);
+        $chrs       = (string) $chrs;
+        $utf8       = '';
+        $strlenChrs = strlen($chrs);
 
-        for ($i = 0; $i < $strlen_chrs; $i++) {
-
-            $substr_chrs_c_2 = substr($chrs, $i, 2);
-            $ord_chrs_c = ord($chrs[$i]);
+        for ($i = 0; $i < $strlenChrs; $i++) {
+            $ordChrsC = ord($chrs[$i]);
 
             switch (true) {
                 case preg_match('/\\\u[0-9A-F]{4}/i', substr($chrs, $i, 6)):
@@ -478,34 +475,34 @@ class Decoder
                     $utf8 .= $utf8char;
                     $i += 5;
                     break;
-                case ($ord_chrs_c >= 0x20) && ($ord_chrs_c <= 0x7F):
+                case ($ordChrsC >= 0x20) && ($ordChrsC <= 0x7F):
                     $utf8 .= $chrs{$i};
                     break;
-                case ($ord_chrs_c & 0xE0) == 0xC0:
+                case ($ordChrsC & 0xE0) == 0xC0:
                     // characters U-00000080 - U-000007FF, mask 110XXXXX
                     //see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                     $utf8 .= substr($chrs, $i, 2);
                     ++$i;
                     break;
-                case ($ord_chrs_c & 0xF0) == 0xE0:
+                case ($ordChrsC & 0xF0) == 0xE0:
                     // characters U-00000800 - U-0000FFFF, mask 1110XXXX
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                     $utf8 .= substr($chrs, $i, 3);
                     $i += 2;
                     break;
-                case ($ord_chrs_c & 0xF8) == 0xF0:
+                case ($ordChrsC & 0xF8) == 0xF0:
                     // characters U-00010000 - U-001FFFFF, mask 11110XXX
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                     $utf8 .= substr($chrs, $i, 4);
                     $i += 3;
                     break;
-                case ($ord_chrs_c & 0xFC) == 0xF8:
+                case ($ordChrsC & 0xFC) == 0xF8:
                     // characters U-00200000 - U-03FFFFFF, mask 111110XX
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                     $utf8 .= substr($chrs, $i, 5);
                     $i += 4;
                     break;
-                case ($ord_chrs_c & 0xFE) == 0xFC:
+                case ($ordChrsC & 0xFE) == 0xFC:
                     // characters U-04000000 - U-7FFFFFFF, mask 1111110X
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                     $utf8 .= substr($chrs, $i, 6);

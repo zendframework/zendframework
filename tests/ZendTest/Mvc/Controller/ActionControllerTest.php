@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -208,10 +208,10 @@ class ActionControllerTest extends TestCase
         $result       = $this->controller->dispatch($this->request, $response);
         $testResponse = $this->controller->getResponse();
         $this->assertSame($response, $testResponse);
-        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
-        $this->assertEquals('content', $result->captureTo());
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
         $vars = $result->getVariables();
-        $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
-        $this->assertContains('Page not found', $vars['content']);
+        $this->assertTrue(isset($vars['result']));
+        $this->assertContains('Page not found', $vars['result']);
+        $this->assertEquals(1, $result->getErrorLevel());
     }
 }

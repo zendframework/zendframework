@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Soap
  */
@@ -48,16 +48,16 @@ class Common extends \SoapClient
      * @param string $location
      * @param string $action
      * @param int    $version
-     * @param int    $one_way
+     * @param int    $oneWay
      * @return mixed
      */
-    public function __doRequest($request, $location, $action, $version, $one_way = null)
+    public function __doRequest($request, $location, $action, $version, $oneWay = null)
     {
-        if ($one_way === null) {
+        if ($oneWay === null) {
             return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version);
-        } else {
-            return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $one_way);
         }
+
+        return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $oneWay);
     }
 
 }

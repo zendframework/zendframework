@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -38,7 +38,7 @@ class Converter
      */
     public static function ascToHex32($string)
     {
-        for ($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0, $len = strlen($string); $i < $len; $i++) {
             $char = substr($string, $i, 1);
             if (ord($char) < 32) {
                 $hex = dechex(ord($char));
@@ -126,7 +126,7 @@ class Converter
      * DateTime Object, a string that is parseable by strtotime().
      *
      * @param integer|string|DateTime $date  The date-entity
-     * @param boolean                 $asUtc Whether to return the LDAP-compatible date-string as UTC or as local value
+     * @param  bool                 $asUtc Whether to return the LDAP-compatible date-string as UTC or as local value
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -160,7 +160,7 @@ class Converter
      * case-insensitive string 'true' to an LDAP-compatible 'TRUE'. All other
      * other values are converted to an LDAP-compatible 'FALSE'.
      *
-     * @param boolean|integer|string $value The boolean value to encode
+     * @param  bool|integer|string $value The boolean value to encode
      * @return string
      */
     public static function toLdapBoolean($value)
@@ -197,7 +197,7 @@ class Converter
      * @see Converter::GENERALIZED_TIME
      * @param string  $value         The value to convert
      * @param int     $type          The conversion type to use
-     * @param boolean $dateTimeAsUtc Return DateTime values in UTC timezone
+     * @param  bool $dateTimeAsUtc Return DateTime values in UTC timezone
      * @return mixed
      */
     public static function fromLdap($value, $type = self::STANDARD, $dateTimeAsUtc = true)
@@ -236,7 +236,7 @@ class Converter
      * CAVEAT: The DateTime-Object returned will always be set to UTC-Timezone.
      *
      * @param string  $date  The generalized-Time
-     * @param boolean $asUtc Return the DateTime with UTC timezone
+     * @param  bool $asUtc Return the DateTime with UTC timezone
      * @return DateTime
      * @throws Exception\InvalidArgumentException if a non-parseable-format is given
      */
@@ -360,7 +360,7 @@ class Converter
      * Convert an LDAP-compatible boolean value into a PHP-compatible one
      *
      * @param string $value The value to convert
-     * @return boolean
+     * @return bool
      * @throws Exception\InvalidArgumentException
      */
     public static function fromLdapBoolean($value)

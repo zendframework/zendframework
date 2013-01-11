@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -27,7 +27,7 @@ class FormCollection extends AbstractHelper
     /**
      * If set to true, collections are automatically wrapped around a fieldset
      *
-     * @var boolean
+     * @var bool
      */
     protected $shouldWrap = true;
 
@@ -116,7 +116,7 @@ class FormCollection extends AbstractHelper
      * Proxies to {@link render()}.
      *
      * @param  ElementInterface|null $element
-     * @param  boolean $wrap
+     * @param  bool $wrap
      * @return string|FormCollection
      */
     public function __invoke(ElementInterface $element = null, $wrap = true)

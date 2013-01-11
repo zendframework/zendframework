@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -35,7 +35,7 @@ class DateTest extends TestCase
                 case 'Zend\Validator\DateStep':
                     $dateInterval = new \DateInterval('P1D');
                     $this->assertEquals($dateInterval, $validator->getStep());
-                    $this->assertEquals('1970-01-01',  $validator->getBaseValue());
+                    $this->assertEquals(date('Y-m-d', 0),  $validator->getBaseValue());
                     break;
                 default:
                     break;
@@ -93,5 +93,25 @@ class DateTest extends TestCase
         $element->setValue($date);
         $value   = $element->getValue();
         $this->assertEquals($date->format('Y-m-d'), $value);
+    }
+
+    public function testCorrectFormatPassedToDateValidator()
+    {
+        $element = new DateElement('foo');
+        $element->setAttributes(array(
+            'min'       => '2012-01-01',
+            'max'       => '2012-12-31',
+        ));
+        $element->setFormat('d-m-Y');
+
+        $inputSpec = $element->getInputSpecification();
+        foreach ($inputSpec['validators'] as $validator) {
+            switch (get_class($validator)) {
+                case 'Zend\Validator\DateStep':
+                case 'Zend\Validator\Date':
+                    $this->assertEquals('d-m-Y', $validator->getFormat());
+                    break;
+            }
+        }
     }
 }

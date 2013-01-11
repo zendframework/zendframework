@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
@@ -595,7 +595,7 @@ class StandardConfig implements ConfigInterface
      */
     public function setEntropyFile($entropyFile)
     {
-        if (!is_file($entropyFile) || !is_readable($entropyFile)) {
+        if (!is_readable($entropyFile)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 "Invalid entropy_file provided: '%s'; doesn't exist or not readable",
                 $entropyFile

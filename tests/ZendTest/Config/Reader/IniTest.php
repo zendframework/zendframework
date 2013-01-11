@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Config
  */
@@ -87,17 +87,17 @@ ECS;
     public function testFromStringNested()
     {
         $ini = <<<ECS
-foo.bar = foobar
-foobar[] = foobarArray
-foo.baz[] = foobaz1
-foo.baz[] = foobaz2
+bla.foo.bar = foobar
+bla.foobar[] = foobarArray
+bla.foo.baz[] = foobaz1
+bla.foo.baz[] = foobaz2
 
 ECS;
 
         $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['foo']['bar'], 'foobar');
-        $this->assertEquals($arrayIni['foobar'][0], 'foobarArray');
-        $this->assertEquals($arrayIni['foo']['baz'][0], 'foobaz1');
-        $this->assertEquals($arrayIni['foo']['baz'][1], 'foobaz2');
+        $this->assertEquals($arrayIni['bla']['foo']['bar'], 'foobar');
+        $this->assertEquals($arrayIni['bla']['foobar'][0], 'foobarArray');
+        $this->assertEquals($arrayIni['bla']['foo']['baz'][0], 'foobaz1');
+        $this->assertEquals($arrayIni['bla']['foo']['baz'][1], 'foobaz2');
     }
 }

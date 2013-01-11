@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -164,7 +164,7 @@ class StringLength extends AbstractValidator
      * no greater than the max option (when the max option is not null).
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -190,8 +190,8 @@ class StringLength extends AbstractValidator
 
         if (count($this->getMessages())) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 }

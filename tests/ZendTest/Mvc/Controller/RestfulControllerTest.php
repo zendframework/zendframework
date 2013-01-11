@@ -299,7 +299,7 @@ class RestfulControllerTest extends TestCase
         $this->request->setMethod('POST');
         $this->request->getHeaders()->addHeaderLine('Content-type', 'application/json');
         $this->request->setContent('{"foo":"bar"}');
-        $this->response = new Response;
+        $this->controller->getEventManager()->setSharedManager(new SharedEventManager());
 
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result);

@@ -46,7 +46,7 @@ class ArraySerializable extends AbstractHydrator
                 $value = $self->extractValue($name, $value);
             }
         });
-        #var_dump($data);
+
         return $data;
     }
 

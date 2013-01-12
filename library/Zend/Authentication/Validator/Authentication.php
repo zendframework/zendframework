@@ -116,12 +116,13 @@ class Authentication extends AbstractValidator
     /**
      * Set Adapter
      *
-     * @param Zend\Authentication\Adapter\AdapterInterface $adapter
+     * @param  Zend\Authentication\Adapter\AdapterInterface $adapter
      * @return Authentication
      */
     public function setAdapter(AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
+
         return $this;
     }
 
@@ -138,12 +139,13 @@ class Authentication extends AbstractValidator
     /**
      * Set Identity
      *
-     * @param  mixed $identity
+     * @param  mixed          $identity
      * @return Authentication
      */
     public function setIdentity($identity)
     {
         $this->identity = $identity;
+
         return $this;
     }
 
@@ -160,12 +162,13 @@ class Authentication extends AbstractValidator
     /**
      * Set Credential
      *
-     * @param  mixed $credential
+     * @param  mixed          $credential
      * @return Authentication
      */
     public function setCredential($credential)
     {
         $this->credential = $credential;
+
         return $this;
     }
 
@@ -182,20 +185,21 @@ class Authentication extends AbstractValidator
     /**
      * Set Service
      *
-     * @param Zend\Authentication\AuthenticationService $service
+     * @param  Zend\Authentication\AuthenticationService $service
      * @return Authentication
      */
     public function setService(AuthenticationService $service)
     {
         $this->service = $service;
+
         return $this;
     }
 
     /**
      * Is Valid
      *
-     * @param mixed $value
-     * @param array $context
+     * @param  mixed $value
+     * @param  array $context
      * @return bool
      */
     public function isValid($value = null, $context = null)
@@ -224,12 +228,12 @@ class Authentication extends AbstractValidator
         }
         $this->adapter->setIdentity($identity);
         $this->adapter->setCredential($credential);
-        
+
         if (!$this->service) {
             throw new Exception\RuntimeException('AuthenticationService must be set prior to validation');
         }
         $result = $this->service->authenticate($this->adapter);
-        
+
         if ($result->getCode() != Result::SUCCESS) {
             switch ($result->getCode()) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
@@ -247,8 +251,10 @@ class Authentication extends AbstractValidator
                 default:
                     $this->error(self::GENERAL);
             }
+
             return false;
         }
+
         return true;
     }
 }

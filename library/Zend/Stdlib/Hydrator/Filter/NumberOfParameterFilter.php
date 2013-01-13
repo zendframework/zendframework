@@ -57,4 +57,3 @@ class NumberOfParameterFilter implements FilterInterface
         return true;
     }
 }
-

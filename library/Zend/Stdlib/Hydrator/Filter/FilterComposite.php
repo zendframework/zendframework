@@ -48,7 +48,7 @@ class FilterComposite implements FilterInterface
     {
         array_walk($orFilter,
             function($value, $key) {
-                if(
+                if (
                     !is_callable($value)
                     && !$value instanceof FilterInterface
                 ) {
@@ -62,7 +62,7 @@ class FilterComposite implements FilterInterface
 
         array_walk($andFilter,
             function($value, $key) {
-                if(
+                if (
                     !is_callable($value)
                     && !$value instanceof FilterInterface
                 ) {
@@ -94,9 +94,9 @@ class FilterComposite implements FilterInterface
      * );
      * </code>
      *
-     * @param string $name
-     * @param callable|FilterInterface $filter
-     * @param int $condition Can be either FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
+     * @param  string                   $name
+     * @param  callable|FilterInterface $filter
+     * @param  int                      $condition Can be either FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
      * @throws InvalidArgumentException
      * @return FilterComposite
      */
@@ -126,11 +126,11 @@ class FilterComposite implements FilterInterface
      */
     public function removeFilter($name)
     {
-        if( isset($this->orFilter[$name])) {
+        if (isset($this->orFilter[$name])) {
             unset($this->orFilter[$name]);
         }
 
-        if( isset($this->andFilter[$name])) {
+        if (isset($this->andFilter[$name])) {
             unset($this->andFilter[$name]);
         }
 
@@ -161,10 +161,7 @@ class FilterComposite implements FilterInterface
         $andCount = count($this->andFilter);
         $orCount = count($this->orFilter);
         // return true if no filters are registered
-        if (
-            $orCount === 0
-            && $andCount === 0
-        ) {
+        if ($orCount === 0 && $andCount === 0) {
             return true;
         } elseif ($orCount === 0 && $andCount !== 0) {
             $returnValue = true;
@@ -173,10 +170,9 @@ class FilterComposite implements FilterInterface
         }
 
         // Check if 1 from the or filters return true
-        foreach($this->orFilter as $filter) {
+        foreach ($this->orFilter as $filter) {
             if (is_callable($filter)) {
-                if( $filter($property) === true)
-                {
+                if ( $filter($property) === true) {
                     $returnValue = true;
                     break;
                 }
@@ -190,14 +186,14 @@ class FilterComposite implements FilterInterface
         }
 
         // Check if all of the and condition return true
-        foreach($this->andFilter as $filter) {
+        foreach ($this->andFilter as $filter) {
             if (is_callable($filter)) {
-                if( $filter($property) === false) {
+                if ($filter($property) === false) {
                     return false;
                 }
                 continue;
             } else {
-                if( $filter->filter($property) === false) {
+                if ($filter->filter($property) === false) {
                     return false;
                 }
             }

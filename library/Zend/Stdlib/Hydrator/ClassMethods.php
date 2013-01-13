@@ -48,7 +48,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  array|\Traversable $options
+     * @param  array|\Traversable                 $options
      * @return ClassMethods
      * @throws Exception\InvalidArgumentException
      */
@@ -69,12 +69,13 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  boolean $underscoreSeparatedKeys
+     * @param  boolean      $underscoreSeparatedKeys
      * @return ClassMethods
      */
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
     {
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+
         return $this;
     }
 
@@ -91,7 +92,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      *
      * Extracts the getter/setter of the given $object.
      *
-     * @param  object $object
+     * @param  object                           $object
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -115,6 +116,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         $transform = function ($letters) {
             $letter = array_shift($letters);
+
             return '_' . strtolower($letter);
         };
         $attributes = array();
@@ -149,8 +151,8 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      *
      * Hydrates an object by getter/setter methods of the object.
      *
-     * @param  array $data
-     * @param  object $object
+     * @param  array                            $data
+     * @param  object                           $object
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -164,6 +166,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         $transform = function ($letters) {
             $letter = substr(array_shift($letters), 1, 1);
+
             return ucfirst($letter);
         };
 
@@ -178,6 +181,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
                 $object->$method($value);
             }
         }
+
         return $object;
     }
 

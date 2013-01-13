@@ -418,17 +418,22 @@ class ServiceManager implements ServiceLocatorInterface
                 $cName = $this->aliases[$cName];
             } while ($this->hasAlias($cName));
         }
-
-        if (isset($this->instances[$cName])) {
-            return $this->instances[$cName];
-        }
-
+        
         $instance                        = null;
         $retrieveFromPeeringManagerFirst = $this->retrieveFromPeeringManagerFirst();
 
         if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
             $instance = $this->retrieveFromPeeringManager($name);
+            
+            if(null !== $instance) {
+                return $instance;
+            }
         }
+        
+        if (isset($this->instances[$cName])) {
+            return $this->instances[$cName];
+        }
+
         if (!$instance) {
             if ($this->canCreate(array($cName, $name))) {
                 $instance = $this->create(array($cName, $name));

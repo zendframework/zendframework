@@ -43,6 +43,17 @@ class SessionManager extends AbstractManager
     protected $validatorChain;
 
     /**
+     * Destructor
+     * Ensures that writeClose is called.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        $this->writeClose();
+    }
+
+    /**
      * Does a session exist and is it currently active?
      *
      * @return bool
@@ -149,10 +160,12 @@ class SessionManager extends AbstractManager
         // flushed to the session handler. As such, we now mark the storage
         // object isImmutable.
         $storage  = $this->getStorage();
-        $_SESSION = (array) $storage;
-        session_write_close();
-        $storage->fromArray($_SESSION);
-        $storage->markImmutable();
+        if (!$storage->isImmutable()) {
+            $_SESSION = (array) $storage;
+            session_write_close();
+            $storage->fromArray($_SESSION);
+            $storage->markImmutable();
+        }
     }
 
     /**

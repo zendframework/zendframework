@@ -12,13 +12,21 @@ namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\Reflection;
+use Zend\Stdlib\Hydrator\ObjectProperty;
+use Zend\Stdlib\Hydrator\ArraySerializable;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
+use ZendTest\Stdlib\TestAsset\ClassMethodsFilterProviderInterface;
 use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 use ZendTest\Stdlib\TestAsset\ClassMethodsInvalidParameter;
 use ZendTest\Stdlib\TestAsset\Reflection as ReflectionAsset;
+use ZendTest\Stdlib\TestAsset\ReflectionFilter;
+use ZendTest\Stdlib\TestAsset\ObjectProperty as ObjectPropertyAsset;
+use ZendTest\Stdlib\TestAsset\ArraySerializable as ArraySerializableAsset;
 use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
 use Zend\Stdlib\Hydrator\Strategy\SerializableStrategy;
+
 
 /**
  * @category   Zend
@@ -61,6 +69,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
         $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
         $this->reflection = new ReflectionAsset;
+        $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
     }
 
     public function testInitiateValues()
@@ -256,7 +265,120 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getFooBarBaz(), '2');
     }
 
-    public function testHydratorClassMethodsWithServiceManager()
+    public function testHydratorClassMethodsManipulateFilter()
+    {
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+
+        $this->assertTrue(isset($datas['fooBar']));
+        $this->assertEquals($datas['fooBar'], '1');
+        $this->assertTrue(isset($datas['fooBarBaz']));
+        $this->assertFalse(isset($datas['foo_bar']));
+        $this->assertTrue(isset($datas['isFoo']));
+        $this->assertEquals($datas['isFoo'], true);
+        $this->assertTrue(isset($datas['isBar']));
+        $this->assertEquals($datas['isBar'], true);
+        $this->assertTrue(isset($datas['hasFoo']));
+        $this->assertEquals($datas['hasFoo'], true);
+        $this->assertTrue(isset($datas['hasBar']));
+        $this->assertEquals($datas['hasBar'], true);
+
+        $hydrator->removeFilter('has');
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+        $this->assertTrue(isset($datas['hasFoo'])); //method is getHasFoo
+        $this->assertFalse(isset($datas['hasBar'])); //method is hasBar
+    }
+
+    public function testHydratorClassMethodsWithCustomFilter()
+    {
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+        $hydrator->addFilter("exclude",
+            function($property) {
+                list($class, $method) = explode('::', $property);
+
+                if($method == 'getHasFoo') {
+                    return false;
+                }
+
+                return true;
+            }, FilterComposite::CONDITION_AND
+        );
+
+        $datas = $hydrator->extract($this->classMethodsCamelCase);
+        $this->assertFalse(isset($datas['hasFoo']));
+    }
+
+    /**
+     * @dataProvider filterProvider
+     */
+    public function testArraySerializableFilter($hydrator, $serializable)
+    {
+        $this->assertSame(
+            array(
+                "foo" => "bar",
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+
+        $hydrator->addFilter("foo", function($property) {
+                if ($property == "foo") {
+                    return false;
+                }
+                return true;
+            });
+
+        $this->assertSame(
+            array(
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+
+        $hydrator->addFilter("len", function($property) {
+                if (strlen($property) !== 3) {
+                    return false;
+                }
+                return true;
+            }, FilterComposite::CONDITION_AND);
+
+        $this->assertSame(
+            array(
+                "bar" => "foo",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+
+        $hydrator->removeFilter("len");
+        $hydrator->removeFilter("foo");
+
+        $this->assertSame(
+            array(
+                "foo" => "bar",
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $hydrator->extract($serializable)
+        );
+    }
+
+    public function filterProvider()
+    {
+        return array(
+            array(new ObjectProperty(), new ObjectPropertyAsset),
+            array(new ArraySerializable(), new ArraySerializableAsset),
+            array(new Reflection(), new ReflectionFilter)
+        );
+    }
+
+    public function testHydratorClassMethodsWithInvalidNumberOfParameters()
     {
         $hydrator = new ClassMethods(false);
         $datas = $hydrator->extract($this->classMethodsInvalidParameter);
@@ -264,5 +386,15 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($datas['hasBar']);
         $this->assertEquals('Bar', $datas['foo']);
         $this->assertFalse($datas['isBla']);
+    }
+
+    public function testObjectBasedFilters()
+    {
+        $hydrator = new ClassMethods(false);
+        $foo = new ClassMethodsFilterProviderInterface();
+        $data = $hydrator->extract($foo);
+        $this->assertFalse(array_key_exists("filter", $data));
+        $this->assertSame("bar", $data["foo"]);
+        $this->assertSame("foo", $data["bar"]);
     }
 }

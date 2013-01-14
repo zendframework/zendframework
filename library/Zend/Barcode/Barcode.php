@@ -11,7 +11,6 @@
 namespace Zend\Barcode;
 
 use Traversable;
-use Zend;
 use Zend\Stdlib\ArrayUtils;
 
 /**

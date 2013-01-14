@@ -137,7 +137,7 @@ class ChainTest extends TestCase
      * @param  mixed            $identity
      * @return StorageInterface
      */
-    protected function storageFactory( $identity = null )
+    protected function storageFactory($identity = null)
     {
         $storage = new NonPersistent();
 

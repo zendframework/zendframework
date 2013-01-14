@@ -41,7 +41,7 @@ class Chain implements StorageInterface
      * @param StorageInterface $storage
      * @param integer          $priority
      */
-    public function add( StorageInterface $storage, $priority = 1 )
+    public function add(StorageInterface $storage, $priority = 1)
     {
         $this->storageChain->insert($storage, $priority);
     }
@@ -63,7 +63,7 @@ class Chain implements StorageInterface
         // Loop invariant: $storageWithHigherPriority contains all storage with higher priorty
         // than the current one.
         foreach ($this->storageChain as $storage) {
-            if ( $storage->isEmpty() ) {
+            if ($storage->isEmpty()) {
                 $storageWithHigherPriority[] = $storage;
                 continue;
             }
@@ -95,7 +95,7 @@ class Chain implements StorageInterface
      *
      * @see StorageInterface::write()
      */
-    public function write( $contents )
+    public function write($contents)
     {
         foreach ($this->storageChain as $storage) {
             $storage->write($contents);

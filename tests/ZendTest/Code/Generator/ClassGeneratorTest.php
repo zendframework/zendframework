@@ -186,8 +186,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'flags' => ClassGenerator::FLAG_ABSTRACT,
             'extendedClass' => 'ExtendedClassName',
@@ -371,8 +370,7 @@ CODE;
 
     public function testCreateFromArrayWithDocBlockFromArray()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'docblock' => array(
                 'shortdescription' => 'foo',
@@ -385,8 +383,7 @@ CODE;
 
     public function testCreateFromArrayWithDocBlockInstance()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'docblock' => new DocBlockGenerator('foo'),
         ));

@@ -185,15 +185,14 @@ class FileGenerator extends AbstractGenerator
     {
         $fileGenerator = new static;
         foreach ($values as $name => $value) {
-            switch ($name) {
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
                 case 'filename':
-                    $fileGenerator->filename = $value;
+                    $fileGenerator->setFilename($value);
                     continue;
                 case 'class':
                     $fileGenerator->setClass(($value instanceof ClassGenerator) ? : ClassGenerator::fromArray($value));
                     continue;
-                case 'requiredFiles':
-                case 'required_files':
+                case 'requiredfiles':
                     $fileGenerator->setRequiredFiles($value);
                     continue;
                 default:

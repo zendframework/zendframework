@@ -92,36 +92,6 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  DocBlockGenerator|string $docBlock
-     * @throws Exception\InvalidArgumentException
-     * @return AbstractMemberGenerator
-     */
-    public function setDocBlock($docBlock)
-    {
-        if (is_string($docBlock)) {
-            $docBlock = new DocBlockGenerator($docBlock);
-        } elseif (!$docBlock instanceof DocBlockGenerator) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s is expecting either a string, array or an instance of %s\DocBlockGenerator',
-                __METHOD__,
-                __NAMESPACE__
-            ));
-        }
-
-        $this->docBlock = $docBlock;
-
-        return $this;
-    }
-
-    /**
-     * @return DocBlockGenerator
-     */
-    public function getDocBlock()
-    {
-        return $this->docBlock;
-    }
-
-    /**
      * @param  bool $isAbstract
      * @return AbstractMemberGenerator
      */
@@ -135,7 +105,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isAbstract()
     {
-        return ($this->flags & self::FLAG_ABSTRACT);
+        return (bool) ($this->flags & self::FLAG_ABSTRACT);
     }
 
     /**
@@ -152,7 +122,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isFinal()
     {
-        return ($this->flags & self::FLAG_FINAL);
+        return (bool) ($this->flags & self::FLAG_FINAL);
     }
 
     /**
@@ -229,4 +199,33 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
         return $this->name;
     }
 
+    /**
+     * @param  DocBlockGenerator|string $docBlock
+     * @throws Exception\InvalidArgumentException
+     * @return AbstractMemberGenerator
+     */
+    public function setDocBlock($docBlock)
+    {
+        if (is_string($docBlock)) {
+            $docBlock = new DocBlockGenerator($docBlock);
+        } elseif (!$docBlock instanceof DocBlockGenerator) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s is expecting either a string, array or an instance of %s\DocBlockGenerator',
+                __METHOD__,
+                __NAMESPACE__
+            ));
+        }
+
+        $this->docBlock = $docBlock;
+
+        return $this;
+    }
+
+    /**
+     * @return DocBlockGenerator
+     */
+    public function getDocBlock()
+    {
+        return $this->docBlock;
+    }
 }

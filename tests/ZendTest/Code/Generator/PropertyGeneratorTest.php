@@ -219,4 +219,29 @@ EOS;
         $codeGenProperty->generate();
     }
 
+    public function testCreateFromArray()
+    {
+        $propertyGenerator = PropertyGenerator::fromArray(array(
+            'name'         => 'SampleProperty',
+            'const'        => true,
+            'defaultvalue' => 'foo',
+            'docblock'     => array(
+                'shortdescription' => 'foo',
+            ),
+            'abstract'     => true,
+            'final'        => true,
+            'static'       => true,
+            'visibility'   => PropertyGenerator::VISIBILITY_PROTECTED,
+        ));
+
+        $this->assertEquals('SampleProperty', $propertyGenerator->getName());
+        $this->assertTrue($propertyGenerator->isConst());
+        $this->assertInstanceOf('Zend\Code\Generator\ValueGenerator', $propertyGenerator->getDefaultValue());
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $propertyGenerator->getDocBlock());
+        $this->assertTrue($propertyGenerator->isAbstract());
+        $this->assertTrue($propertyGenerator->isFinal());
+        $this->assertTrue($propertyGenerator->isStatic());
+        $this->assertEquals(PropertyGenerator::VISIBILITY_PROTECTED, $propertyGenerator->getVisibility());
+    }
+
 }

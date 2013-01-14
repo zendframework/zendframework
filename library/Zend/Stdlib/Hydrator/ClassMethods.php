@@ -10,6 +10,7 @@
 
 namespace Zend\Stdlib\Hydrator;
 
+use ReflectionMethod;
 use Zend\Stdlib\Exception;
 
 /**
@@ -61,6 +62,11 @@ class ClassMethods extends AbstractHydrator
 
         foreach ($methods as $method) {
             if (!preg_match('/^(get|has|is)[A-Z]\w*/', $method)) {
+                continue;
+            }
+
+            $reflectionMethod = new ReflectionMethod(get_class($object) . '::' . $method);
+            if ($reflectionMethod->getNumberOfParameters() > 0) {
                 continue;
             }
 

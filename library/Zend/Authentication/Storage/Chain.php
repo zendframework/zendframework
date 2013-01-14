@@ -27,14 +27,14 @@ class Chain implements StorageInterface
      * 
      * @var PriorityQueue
      */
-    protected $storageQueue;
+    protected $storageChain;
     
     /**
      * Initializes the priority queue.
      */
     public function __construct()
     {
-        $this->storageQueue = new PriorityQueue();
+        $this->storageChain = new PriorityQueue();
     }
     
     /**
@@ -43,7 +43,7 @@ class Chain implements StorageInterface
      */
     public function add( StorageInterface $storage, $priority = 1 )
     {
-        $this->storageQueue->insert($storage, $priority);
+        $this->storageChain->insert($storage, $priority);
     }
     
     /**
@@ -62,7 +62,7 @@ class Chain implements StorageInterface
 
         // Loop invariant: $storageWithHigherPriority contains all storage with higher priorty  
         // than the current one.
-        foreach( $this->storageQueue as $storage )
+        foreach( $this->storageChain as $storage )
         {
             if( $storage->isEmpty() )
             {
@@ -88,7 +88,7 @@ class Chain implements StorageInterface
      */
     public function read()
     {
-        return $this->storageQueue->top()->read();
+        return $this->storageChain->top()->read();
     }
 
     /**
@@ -98,7 +98,7 @@ class Chain implements StorageInterface
      */
     public function write( $contents )
     {
-        foreach( $this->storageQueue as $storage )
+        foreach( $this->storageChain as $storage )
             $storage->write($contents);
     }
 
@@ -109,7 +109,7 @@ class Chain implements StorageInterface
      */
     public function clear()
     {
-        foreach( $this->storageQueue as $storage )
+        foreach( $this->storageChain as $storage )
             $storage->clear();
     }
 }

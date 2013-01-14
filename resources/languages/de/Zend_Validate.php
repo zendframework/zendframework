@@ -25,39 +25,39 @@
 return array(
     // Zend_Validate_Alnum
     "Invalid type given. String, integer or float expected" => "Ungültiger Typ angegeben. String, Integer oder Float erwartet",
-    "The inputcontains characters which are non alphabetic and no digits" => "Der Wert enthält Zeichen welche keine Buchstaben und keine Ziffern sind",
-    "The inputis an empty string" => "Der Wert ist ein leerer String",
+    "The input contains characters which are non alphabetic and no digits" => "Der Wert enthält Zeichen welche keine Buchstaben und keine Ziffern sind",
+    "The input is an empty string" => "Der Wert ist ein leerer String",
 
     // Zend_Validate_Alpha
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The inputcontains non alphabetic characters" => "Der Wert enthält Zeichen welche keine Buchstaben sind",
-    "The inputis an empty string" => "Der Wert ist ein leerer String",
+    "The input contains non alphabetic characters" => "Der Wert enthält Zeichen welche keine Buchstaben sind",
+    "The input is an empty string" => "Der Wert ist ein leerer String",
 
     // Zend_Validate_Barcode
-    "The inputfailed checksum validation" => "Der Wert hat die Prüfung der Checksumme nicht bestanden",
-    "The inputcontains invalid characters" => "Der Wert enthält ungültige Zeichen",
-    "The inputshould have a length of %length% characters" => "Der Wert sollte eine Länge von %length% Zeichen haben",
+    "The input failed checksum validation" => "Der Wert hat die Prüfung der Checksumme nicht bestanden",
+    "The input contains invalid characters" => "Der Wert enthält ungültige Zeichen",
+    "The input should have a length of %length% characters" => "Der Wert sollte eine Länge von %length% Zeichen haben",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Between
-    "The inputis not between '%min%' and '%max%', inclusively" => "Der Wert ist nicht zwischen '%min%' und '%max%', inklusive diesen Werten",
-    "The inputis not strictly between '%min%' and '%max%'" => "Der Wert ist nicht strikt zwischen '%min%' und '%max%'",
+    "The input is not between '%min%' and '%max%', inclusively" => "Der Wert ist nicht zwischen '%min%' und '%max%', inklusive diesen Werten",
+    "The input is not strictly between '%min%' and '%max%'" => "Der Wert ist nicht strikt zwischen '%min%' und '%max%'",
 
     // Zend_Validate_Callback
-    "The inputis not valid" => "Der Wert ist nicht gültig",
+    "The input is not valid" => "Der Wert ist nicht gültig",
     "An exception has been raised within the callback" => "Eine Exception wurde im Callback geworfen",
 
     // Zend_Validate_Ccnum
-    "The inputmust contain between 13 and 19 digits" => "Der Wert muss zwischen 13 und 19 Ziffern enthalten",
+    "The input must contain between 13 and 19 digits" => "Der Wert muss zwischen 13 und 19 Ziffern enthalten",
     "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "Der Luhn Algorithmus (Mod-10 Checksumme) ist auf '%value%' fehlgeschlagen",
 
     // Zend_Validate_CreditCard
-    "The inputseems to contain an invalid checksum" => "Der Wert scheint eine ungültige Prüfsumme zu enthalten",
-    "The inputmust contain only digits" => "Der Wert darf nur Ziffern enthalten",
+    "The input seems to contain an invalid checksum" => "Der Wert scheint eine ungültige Prüfsumme zu enthalten",
+    "The input must contain only digits" => "Der Wert darf nur Ziffern enthalten",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The inputcontains an invalid amount of digits" => "Der Wert enthält eine ungültige Anzahl an Ziffern",
-    "The inputis not from an allowed institute" => "Der Wert ist nicht von einem der erlaubten Institute",
-    "The inputseems to be an invalid creditcard number" => "Der Wert scheint eine ungültige Kreditkarten-Nummer zu sein",
+    "The input contains an invalid amount of digits" => "Der Wert enthält eine ungültige Anzahl an Ziffern",
+    "The input is not from an allowed institute" => "Der Wert ist nicht von einem der erlaubten Institute",
+    "The input seems to be an invalid creditcard number" => "Der Wert scheint eine ungültige Kreditkarten-Nummer zu sein",
     "An exception has been raised while validating '%value%'" => "Eine Exception wurde wärend der Prüfung von '%value%' geworfen",
 
     // Zend_Validate_Date
@@ -71,19 +71,19 @@ return array(
 
     // Zend_Validate_Digits
     "Invalid type given. String, integer or float expected" => "Ungültiger Typ angegeben. String, Integer oder Float erwartet",
-    "The inputmust contain only digits" => "Der Wert darf nur Ziffern enthalten",
-    "The inputis an empty string" => "Der Wert ist ein leerer String",
+    "The input must contain only digits" => "Der Wert darf nur Ziffern enthalten",
+    "The input is an empty string" => "Der Wert ist ein leerer String",
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The inputis not a valid email address in the basic format local-part@hostname" => "Der Wert ist keine gültige Emailadresse im Basisformat local-part@hostname",
+    "The input is not a valid email address in the basic format local-part@hostname" => "Der Wert ist keine gültige Emailadresse im Basisformat local-part@hostname",
     "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' ist kein gültiger Hostname für die Emailadresse '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die Emailadresse '%value%' zu haben",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die Emailadresse '%value%' sollte nicht vom öffentlichen Netz aus aufgelöst werden",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' passt nicht auf das dot-atom Format",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' passt nicht auf das quoted-string Format",
     "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse '%value%'",
-    "The inputexceeds the allowed length" => "Der Wert ist länger als erlaubt",
+    "The input exceeds the allowed length" => "Der Wert ist länger als erlaubt",
 
     // Zend_Validate_File_Count
     "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Zu viele Dateien. Maximal '%max%' sind erlaubt aber '%count%' wurden angegeben",
@@ -183,36 +183,36 @@ return array(
     "The input does not appear to be a float" => "Der Wert scheint kein Float zu sein",
 
     // Zend_Validate_GreaterThan
-    "The inputis not greater than '%min%'" => "Der Wert ist nicht größer als '%min%'",
+    "The input is not greater than '%min%'" => "Der Wert ist nicht größer als '%min%'",
 
     // Zend_Validate_Hex
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The inputhas not only hexadecimal digit characters" => "Der Wert enthält nicht nur hexadezimale Ziffern",
+    "The input hashas not only hexadecimal digit characters" => "Der Wert enthält nicht nur hexadezimale Ziffern",
 
     // Zend_Validate_Hostname
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The inputappears to be an IP address, but IP addresses are not allowed" => "Der Wert scheint eine IP Adresse zu sein, aber IP Adressen sind nicht erlaubt",
-    "The inputappears to be a DNS hostname but cannot match TLD against known list" => "Der Wert scheint ein DNS Hostname zu sein, aber die TLD wurde in der bekannten Liste nicht gefunden",
-    "The inputappears to be a DNS hostname but contains a dash in an invalid position" => "Der Wert scheint ein DNS Hostname zu sein, enthält aber einen Bindestrich an einer ungültigen Position",
-    "The inputappears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Der Wert scheint ein DNS Hostname zu sein, passt aber nicht in das Hostname Schema für die TLD '%tld%'",
-    "The inputappears to be a DNS hostname but cannot extract TLD part" => "Der Wert scheint ein DNS Hostname zu sein, aber der TLD Teil konnte nicht extrahiert werden",
+    "The input appears to be an IP address, but IP addresses are not allowed" => "Der Wert scheint eine IP Adresse zu sein, aber IP Adressen sind nicht erlaubt",
+    "The input appears to be a DNS hostname but cannot match TLD against known list" => "Der Wert scheint ein DNS Hostname zu sein, aber die TLD wurde in der bekannten Liste nicht gefunden",
+    "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Der Wert scheint ein DNS Hostname zu sein, enthält aber einen Bindestrich an einer ungültigen Position",
+    "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Der Wert scheint ein DNS Hostname zu sein, passt aber nicht in das Hostname Schema für die TLD '%tld%'",
+    "The input appears to be a DNS hostname but cannot extract TLD part" => "Der Wert scheint ein DNS Hostname zu sein, aber der TLD Teil konnte nicht extrahiert werden",
     "The input does not match the expected structure for a DNS hostname" => "Der Wert passt nicht in die erwartete Struktur für einen DNS Hostname",
     "The input does not appear to be a valid local network name" => "Der Wert scheint kein gültiger lokaler Netzerkname zu sein",
-    "The inputappears to be a local network name but local network names are not allowed" => "Der Wert scheint ein lokaler Netzwerkname zu sein, aber lokale Netzwerknamen sind nicht erlaubt",
-    "The inputappears to be a DNS hostname but the given punycode notation cannot be decoded" => "Der Wert scheint ein DNS Hostname zu sein, aber die angegebene Punycode Schreibweise konnte nicht dekodiert werden",
+    "The input appears to be a local network name but local network names are not allowed" => "Der Wert scheint ein lokaler Netzwerkname zu sein, aber lokale Netzwerknamen sind nicht erlaubt",
+    "The input appears to be a DNS hostname but the given punycode notation cannot be decoded" => "Der Wert scheint ein DNS Hostname zu sein, aber die angegebene Punycode Schreibweise konnte nicht dekodiert werden",
     "The input does not appear to be a valid URI hostname" => "Der Wert scheint kein gültiger URI Hostname zu sein",
 
     // Zend_Validate_Iban
     "Unknown country within the IBAN '%value%'" => "Unbekanntes Land in der IBAN '%value%'",
-    "The inputhas a false IBAN format" => "Der Wert enthält ein falsches IBAN Format",
-    "The inputhas failed the IBAN check" => "Die IBAN Prüfung ist für '%value%' fehlgeschlagen",
+    "The input has a false IBAN format" => "Der Wert enthält ein falsches IBAN Format",
+    "The input has failed the IBAN check" => "Die IBAN Prüfung ist für '%value%' fehlgeschlagen",
 
     // Zend_Validate_Identical
     "The two given tokens do not match" => "Die zwei angegebenen Token stimmen nicht überein",
     "No token was provided to match against" => "Es wurde kein Token angegeben gegen den geprüft werden kann",
 
     // Zend_Validate_InArray
-    "The inputwas not found in the haystack" => "Der Wert wurde im Haystack nicht gefunden",
+    "The input was not found in the haystack" => "Der Wert wurde im Haystack nicht gefunden",
 
     // Zend_Validate_Int
     "Invalid type given. String or integer expected" => "Ungültiger Typ angegeben. String oder Integer erwartet",
@@ -224,10 +224,10 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Ungültiger Typ angegeben. String oder Integer erwartet",
-    "The inputis not a valid ISBN number" => "Der Wert ist keine gültige ISBN Nummer",
+    "The input is not a valid ISBN number" => "Der Wert ist keine gültige ISBN Nummer",
 
     // Zend_Validate_LessThan
-    "The inputis not less than '%max%'" => "Der Wert ist nicht weniger als '%max%'",
+    "The input is not less than '%max%'" => "Der Wert ist nicht weniger als '%max%'",
 
     // Zend_Validate_NotEmpty
     "Invalid type given. String, integer, float, boolean or array expected" => "Ungültiger Typ angegeben. String, Integer, Float, Boolean oder Array erwartet",
@@ -243,23 +243,23 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Patterns '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "The inputis not a valid sitemap changefreq" => "Der Wert ist keine gültige Changefreq für Sitemap",
+    "The input is not a valid sitemap changefreq" => "Der Wert ist keine gültige Changefreq für Sitemap",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Sitemap_Lastmod
-    "The inputis not a valid sitemap lastmod" => "Der Wert ist keine gültige Lastmod für Sitemap",
+    "The input is not a valid sitemap lastmod" => "Der Wert ist keine gültige Lastmod für Sitemap",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Sitemap_Loc
-    "The inputis not a valid sitemap location" => "Der Wert ist keine gültige Location für Sitemap",
+    "The input is not a valid sitemap location" => "Der Wert ist keine gültige Location für Sitemap",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Sitemap_Priority
-    "The inputis not a valid sitemap priority" => "Der Wert ist keine gültige Priority für Sitemap",
+    "The input is not a valid sitemap priority" => "Der Wert ist keine gültige Priority für Sitemap",
     "Invalid type given. Numeric string, integer or float expected" => "Ungültiger Typ angegeben. Nummerischer String, Integer oder Float erwartet",
 
     // Zend_Validate_StringLength
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The inputis less than %min% characters long" => "Der Wert ist weniger als %min% Zeichen lang",
-    "The inputis more than %max% characters long" => "Der Wert ist mehr als %max% Zeichen lang",
+    "The input is less than %min% characters long" => "Der Wert ist weniger als %min% Zeichen lang",
+    "The input is more than %max% characters long" => "Der Wert ist mehr als %max% Zeichen lang",
 );

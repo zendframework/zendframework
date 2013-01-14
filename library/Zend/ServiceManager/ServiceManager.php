@@ -227,7 +227,7 @@ class ServiceManager implements ServiceLocatorInterface
     {
         $cName = $this->canonicalizeName($name);
 
-        if ($this->has(array($cName, $name), false)) {
+        if ($this->has(array($cName, $name), false, false)) {
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
@@ -263,7 +263,7 @@ class ServiceManager implements ServiceLocatorInterface
             );
         }
 
-        if ($this->has(array($cName, $name), false)) {
+        if ($this->has(array($cName, $name), false, false)) {
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
@@ -356,7 +356,7 @@ class ServiceManager implements ServiceLocatorInterface
     {
         $cName = $this->canonicalizeName($name);
 
-        if ($this->has($cName, false)) {
+        if ($this->has($cName, false, false)) {
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
@@ -425,7 +425,7 @@ class ServiceManager implements ServiceLocatorInterface
         if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
             $instance = $this->retrieveFromPeeringManager($name);
 
-            if(null !== $instance) {
+            if (null !== $instance) {
                 return $instance;
             }
         }
@@ -630,7 +630,7 @@ class ServiceManager implements ServiceLocatorInterface
             throw new Exception\InvalidServiceNameException('Invalid service name alias');
         }
 
-        if ($this->allowOverride === false && $this->has(array($cAlias, $alias), false)) {
+        if ($this->allowOverride === false && $this->has(array($cAlias, $alias), false, false)) {
             throw new Exception\InvalidServiceNameException(sprintf(
                 'An alias by the name "%s" or "%s" already exists',
                 $cAlias,

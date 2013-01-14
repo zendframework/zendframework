@@ -160,6 +160,11 @@ class ExceptionStrategy implements ListenerAggregateInterface
                     $response = new HttpResponse();
                     $response->setStatusCode(500);
                     $e->setResponse($response);
+                } else {
+                    $statusCode = $response->getStatusCode();
+                    if ($statusCode === 200) {
+                        $response->setStatusCode(500);
+                    }
                 }
 
                 break;

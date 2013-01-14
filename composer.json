@@ -74,6 +74,7 @@
         "zendframework/zend-soap": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-tag": "self.version",
+        "zendframework/zend-test": "self.version",
         "zendframework/zend-text": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-validator": "self.version",

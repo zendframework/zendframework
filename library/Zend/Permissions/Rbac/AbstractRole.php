@@ -10,8 +10,6 @@
 
 namespace Zend\Permissions\Rbac;
 
-use RecursiveIteratorIterator;
-
 /**
  * @category   Zend
  * @package    Zend_Permissions

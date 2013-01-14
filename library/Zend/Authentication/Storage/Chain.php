@@ -67,15 +67,14 @@ class Chain implements StorageInterface
             if( $storage->isEmpty() )
             {
                 $storageWithHigherPriority[] = $storage;
+                continue;
             }
-            else
-            { 
-                $storageValue = $storage->read();
-                foreach( $storageWithHigherPriority as $higherPriorityStorage )
-                    $higherPriorityStorage->write($storageValue);
-                    
-                return false;
-            }
+             
+            $storageValue = $storage->read();
+            foreach( $storageWithHigherPriority as $higherPriorityStorage )
+                $higherPriorityStorage->write($storageValue);
+                
+            return false;
         }
         
         return true;

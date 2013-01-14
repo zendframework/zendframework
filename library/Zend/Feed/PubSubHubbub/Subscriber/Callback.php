@@ -11,6 +11,7 @@
 namespace Zend\Feed\PubSubHubbub\Subscriber;
 
 use Zend\Feed\PubSubHubbub;
+use Zend\Feed\PubSubHubbub\Exception;
 use Zend\Uri;
 
 /**
@@ -95,16 +96,24 @@ class Callback extends PubSubHubbub\AbstractCallback
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $this->getHttpResponse()->setContent($httpGetData['hub_challenge']);
 
-            if ($httpGetData['hub_mode'] == 'subscribe') {
-            	$data = $this->currentSubscriptionData;
-                $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
-                if (isset($httpGetData['hub_lease_seconds'])) {
-                    $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
-                }
-                $this->getStorage()->setSubscription($data);
-            } else {
-                $verifyTokenKey = $this->_detectVerifyTokenKey($httpGetData);
-                $this->getStorage()->deleteSubscription($verifyTokenKey);
+            switch (strtolower($httpGetData['hub_mode'])) {
+                case 'subscribe':
+                    $data = $this->currentSubscriptionData;
+                    $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
+                    if (isset($httpGetData['hub_lease_seconds'])) {
+                        $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
+                    }
+                    $this->getStorage()->setSubscription($data);
+                    break;
+                case 'unsubscribe':
+                    $verifyTokenKey = $this->_detectVerifyTokenKey($httpGetData);
+                    $this->getStorage()->deleteSubscription($verifyTokenKey);
+                    break;
+                default:
+                    throw new Exception\RuntimeException(sprintf(
+                        'Invalid hub_mode ("%s") provided',
+                        $httpGetData['hub_mode']
+                    ));
             }
         /**
          * Hey, C'mon! We tried everything else!
@@ -112,6 +121,7 @@ class Callback extends PubSubHubbub\AbstractCallback
         } else {
             $this->getHttpResponse()->setStatusCode(404);
         }
+
         if ($sendResponseNow) {
             $this->sendResponse();
         }

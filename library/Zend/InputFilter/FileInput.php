@@ -13,6 +13,19 @@ namespace Zend\InputFilter;
 use Zend\Validator\File\Upload as UploadValidator;
 
 /**
+ * FileInput is a special Input type for handling uploaded files.
+ *
+ * It differs from Input in a few ways:
+ *
+ * 1. It expects the raw value to be in the $_FILES array format.
+ *
+ * 2. The validators are run **before** the filters (the opposite behavior of Input).
+ *    This is so is_uploaded_file() validation can be run prior to any filters that
+ *    may rename/move/modify the file.
+ *
+ * 3. Instead of adding a NotEmpty validator, it will (by default) automatically add
+ *    a Zend\Validator\File\Upload validator.
+ *
  * @category   Zend
  * @package    Zend_InputFilter
  */
@@ -53,6 +66,8 @@ class FileInput extends Input
     {
         $value = $this->value;
         if ($this->isValid && is_array($value)) {
+            // Run filters ~after~ validation, so that is_uploaded_file()
+            // validation is not affected by filters.
             $filter = $this->getFilterChain();
             if (isset($value['tmp_name'])) {
                 // Single file input
@@ -80,9 +95,8 @@ class FileInput extends Input
     {
         $this->injectUploadValidator();
         $validator = $this->getValidatorChain();
-        //$value   = $this->getValue(); // Do not run the filters yet for File uploads
-
-        $rawValue = $this->getRawValue();
+        //$value   = $this->getValue(); // Do not run the filters yet for File uploads (see getValue())
+        $rawValue  = $this->getRawValue();
         if (!is_array($rawValue)) {
             // This can happen in an AJAX POST, where the input comes across as a string
             $rawValue = array(

@@ -21,20 +21,20 @@ use Zend\Authentication\Storage\StorageInterface;
 class Chain implements StorageInterface
 {
     /**
-     * Contains all storages that this authentication method uses. A storage
+     * Contains all storage that this authentication method uses. A storage
      * placed in the priority queue with a higher priority is always used
      * before using a storage with a lower priority.
      * 
      * @var PriorityQueue
      */
-    protected $storages;
+    protected $storageQueue;
     
     /**
-     * Initializes the priority queue that contains storages.
+     * Initializes the priority queue.
      */
     public function __construct()
     {
-        $this->storages = new PriorityQueue();
+        $this->storageQueue = new PriorityQueue();
     }
     
     /**
@@ -43,35 +43,35 @@ class Chain implements StorageInterface
      */
     public function add( StorageInterface $storage, $priority = 1 )
     {
-        $this->storages->insert($storage, $priority);
+        $this->storageQueue->insert($storage, $priority);
     }
     
     /**
-     * Loop over the queue of storages until a storage is found that is non-empty. If such 
+     * Loop over the queue of storage until a storage is found that is non-empty. If such 
      * storage is not found, then this chain storage itself is empty. 
      * 
      * In case a non-empty storage is found then this chain storage is also non-empty. Report 
-     * that, but also make sure that all the storages with a higher priorty that are empty 
+     * that, but also make sure that all storage with higher priorty that are empty 
      * are filled.
      * 
      * @see StorageInterface::isEmpty()
      */
     public function isEmpty()
     { 
-        $storagesWithHigherPriority = array();
+        $storageWithHigherPriority = array();
 
-        // Loop invariant: $storagesWithHigherPriority contains all storages with a higher priorty  
+        // Loop invariant: $storageWithHigherPriority contains all storage with higher priorty  
         // than the current one.
-        foreach( $this->storages as $storage )
+        foreach( $this->storageQueue as $storage )
         {
             if( $storage->isEmpty() )
             {
-                $storagesWithHigherPriority[] = $storage;
+                $storageWithHigherPriority[] = $storage;
             }
             else
             { 
                 $storageValue = $storage->read();
-                foreach( $storagesWithHigherPriority as $higherPriorityStorage )
+                foreach( $storageWithHigherPriority as $higherPriorityStorage )
                     $higherPriorityStorage->write($storageValue);
                     
                 return false;
@@ -89,28 +89,28 @@ class Chain implements StorageInterface
      */
     public function read()
     {
-        return $this->storages->top()->read();
+        return $this->storageQueue->top()->read();
     }
 
     /**
-     * Write the new $contents to all storages in the chain.
+     * Write the new $contents to all storage in the chain.
      * 
      * @see StorageInterface::write()
      */
     public function write( $contents )
     {
-        foreach( $this->storages as $storage )
+        foreach( $this->storageQueue as $storage )
             $storage->write($contents);
     }
 
     /**
-     * Clear all storages in the chain.
+     * Clear all storage in the chain.
      * 
      * @see StorageInterface::clear()
      */
     public function clear()
     {
-        foreach( $this->storages as $storage )
+        foreach( $this->storageQueue as $storage )
             $storage->clear();
     }
 }

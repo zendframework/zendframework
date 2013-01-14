@@ -66,6 +66,7 @@
         "zendframework/zend-navigation": "self.version",
         "zendframework/zend-paginator": "self.version",
         "zendframework/zend-permissions-acl": "self.version",
+        "zendframework/zend-permissions-rbac": "self.version",
         "zendframework/zend-progressbar": "self.version",
         "zendframework/zend-serializer": "self.version",
         "zendframework/zend-server": "self.version",

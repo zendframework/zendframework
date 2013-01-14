@@ -66,6 +66,65 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
+     * Generate from array
+     *
+     * @configkey name         string                                          [required] Class Name
+     * @configkey const        bool
+     * @configkey defaultvalue null|bool|string|int|float|array|ValueGenerator
+     * @configkey flags        int
+     * @configkey abstract     bool
+     * @configkey final        bool
+     * @configkey static       bool
+     * @configkey visibility   string
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param  array $array
+     * @return PropertyGenerator
+     */
+    public static function fromArray(array $array)
+    {
+        if (!isset($array['name'])) {
+            throw new Exception\InvalidArgumentException(
+                'Property generator requires that a name is provided for this object'
+            );
+        }
+
+        $property = new static($array['name']);
+        foreach ($array as $name => $value) {
+            // normalize key
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
+                case 'const':
+                    $property->setConst($value);
+                    break;
+                case 'defaultvalue':
+                    $property->setDefaultValue($value);
+                    break;
+                case 'docblock':
+                    $docBlock = ($value instanceof DocBlockGenerator) ? $value : DocBlockGenerator::fromArray($value);
+                    $property->setDocBlock($docBlock);
+                    break;
+                case 'flags':
+                    $property->setFlags($value);
+                    break;
+                case 'abstract':
+                    $property->setAbstract($value);
+                    break;
+                case 'final':
+                    $property->setFinal($value);
+                    break;
+                case 'static':
+                    $property->setStatic($value);
+                    break;
+                case 'visibility':
+                    $property->setVisibility($value);
+                    break;
+            }
+        }
+
+        return $property;
+    }
+
+    /**
      * @param  string $name
      * @param PropertyValueGenerator|string|array $defaultValue
      * @param  int|array $flags
@@ -104,7 +163,7 @@ class PropertyGenerator extends AbstractMemberGenerator
      */
     public function isConst()
     {
-        return ($this->flags & self::FLAG_CONSTANT);
+        return (bool) ($this->flags & self::FLAG_CONSTANT);
     }
 
     /**

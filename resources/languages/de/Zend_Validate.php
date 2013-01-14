@@ -76,7 +76,7 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "The input is not a valid email address in the basic format local-part@hostname" => "Der Wert ist keine gültige Emailadresse im Basisformat local-part@hostname",
+    "The input is not a valid email address. Use the basic format local-part@hostname" => "Der Wert ist keine gültige Emailadresse im Basisformat local-part@hostname",
     "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' ist kein gültiger Hostname für die Emailadresse '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die Emailadresse '%value%' zu haben",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die Emailadresse '%value%' sollte nicht vom öffentlichen Netz aus aufgelöst werden",

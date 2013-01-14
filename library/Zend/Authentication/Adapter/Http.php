@@ -27,7 +27,7 @@ use Zend\Uri\UriFactory;
  * @todo       Track nonces, nonce-count, opaque for replay protection and stale support
  * @todo       Support Authentication-Info header
  */
-class Http extends AbstractAdapter
+class Http implements AdapterInterface
 {
     /**
      * Reference to the HTTP Request object

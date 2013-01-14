@@ -13,7 +13,7 @@
 namespace Zend\Authentication\Validator;
 
 use Traversable;
-use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Adapter\ValidatableAdapterInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Result;
 use Zend\Authentication\Exception;
@@ -106,7 +106,7 @@ class Authentication extends AbstractValidator
     /**
      * Get Adapter
      *
-     * @return Zend\Authentication\Adapter\AdapterInterface
+     * @return Zend\Authentication\Adapter\ValidatableAdapterInterface
      */
     public function getAdapter()
     {
@@ -116,10 +116,10 @@ class Authentication extends AbstractValidator
     /**
      * Set Adapter
      *
-     * @param  Zend\Authentication\Adapter\AdapterInterface $adapter
+     * @param  Zend\Authentication\Adapter\ValidatableAdapterInterface $adapter
      * @return Authentication
      */
-    public function setAdapter(AdapterInterface $adapter)
+    public function setAdapter(ValidatableAdapterInterface $adapter)
     {
         $this->adapter = $adapter;
 

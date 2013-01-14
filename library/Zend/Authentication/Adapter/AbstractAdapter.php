@@ -15,7 +15,7 @@ namespace Zend\Authentication\Adapter;
  * @package    Zend_Authentication
  * @subpackage Adapter
  */
-abstract class AbstractAdapter implements AdapterInterface
+abstract class AbstractAdapter implements ValidatableAdapterInterface
 {
 
     /**
@@ -42,12 +42,13 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Sets the credential for binding
      *
-     * @param  mixed $credential
+     * @param  mixed           $credential
      * @return AbstractAdapter
      */
     public function setCredential($credential)
     {
         $this->credential = $credential;
+
         return $this;
     }
 
@@ -65,12 +66,13 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Sets the identity for binding
      *
-     * @param  mixed $identity
+     * @param  mixed          $identity
      * @return AbstractAdpter
      */
     public function setIdentity($identity)
     {
         $this->identity = $identity;
+
         return $this;
     }
 }

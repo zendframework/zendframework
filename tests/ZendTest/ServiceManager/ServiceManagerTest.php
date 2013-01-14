@@ -667,7 +667,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
     }
-    
+
     /**
      * @covers Zend\ServiceManager\ServiceManager::setService
      * @covers Zend\ServiceManager\ServiceManager::get
@@ -680,22 +680,22 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $foo1 = "foo1";
         $boo1 = "boo1";
         $boo2 = "boo2";
-        
+
         $this->serviceManager->setService($foo1, $boo1);
         $this->assertEquals($this->serviceManager->get($foo1), $boo1);
-        
+
         $serviceManagerChild = new ServiceManager();
         $serviceManagerChild->setService($foo1, $boo2);
         $this->assertEquals($serviceManagerChild->get($foo1), $boo2);
-        
+
         $this->assertFalse($this->serviceManager->retrieveFromPeeringManagerFirst());
-        $this->serviceManager->setRetrieveFromPeeringManagerFirst(true); 
+        $this->serviceManager->setRetrieveFromPeeringManagerFirst(true);
         $this->assertTrue($this->serviceManager->retrieveFromPeeringManagerFirst());
-        
+
         $this->serviceManager->addPeeringServiceManager($serviceManagerChild);
-        
+
         $this->assertContains($serviceManagerChild, $this->readAttribute($this->serviceManager, 'peeringServiceManagers'));
-        
+
         $this->assertEquals($serviceManagerChild->get($foo1), $boo2);
         $this->assertEquals($this->serviceManager->get($foo1), $boo2);
     }

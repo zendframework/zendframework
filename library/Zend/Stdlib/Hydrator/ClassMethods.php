@@ -10,6 +10,7 @@
 
 namespace Zend\Stdlib\Hydrator;
 
+use ReflectionMethod;
 use Zend\Stdlib\Exception;
 
 /**
@@ -64,7 +65,7 @@ class ClassMethods extends AbstractHydrator
                 continue;
             }
 
-            $reflectionMethod = new \ReflectionMethod(get_class($object) . '::' . $method);
+            $reflectionMethod = new ReflectionMethod(get_class($object) . '::' . $method);
             if ($reflectionMethod->getNumberOfParameters() > 0) {
                 continue;
             }

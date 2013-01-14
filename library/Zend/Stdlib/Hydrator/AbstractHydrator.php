@@ -12,6 +12,7 @@ namespace Zend\Stdlib\Hydrator;
 
 use ArrayObject;
 use Zend\Stdlib\Exception;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\StrategyEnabledInterface;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
@@ -30,11 +31,18 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     protected $strategies;
 
     /**
+     * Composite to filter the methods, that need to be hydrated
+     * @var Filter\FilterComposite
+     */
+    protected $filterComposite;
+
+    /**
      * Initializes a new instance of this class.
      */
     public function __construct()
     {
         $this->strategies = new ArrayObject();
+        $this->filterComposite = new FilterComposite();
     }
 
     /**
@@ -127,5 +135,68 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
             $value = $strategy->hydrate($value);
         }
         return $value;
+    }
+
+    /**
+     * Get the filter instance
+     *
+     * @return Filter\FilterComposite
+     */
+    public function getFilter()
+    {
+        return $this->filterComposite;
+    }
+
+    /**
+     * Add a new filter to take care of what needs to be hydrated.
+     * To exclude e.g. the method getServiceLocator:
+     *
+     * <code>
+     * $composite->addFilter("servicelocator",
+     *     function($property) {
+     *         list($class, $method) = explode('::', $property);
+     *         if ($method === 'getServiceLocator') {
+     *             return false;
+     *         }
+     *         return true;
+     *     }, FilterComposite::CONDITION_AND
+     * );
+     * </code>
+     *
+     * @param string $name Index in the composite
+     * @param callable|Zend\Stdlib\Hydrator\Filter\FilterInterface $filter
+     * @param int $condition
+     * @return Filter\FilterComposite
+     */
+    public function addFilter($name, $filter, $condition = FilterComposite::CONDITION_OR)
+    {
+        return $this->filterComposite->addFilter($name, $filter, $condition);
+    }
+
+    /**
+     * Check whether a specific filter exists at key $name or not
+     *
+     * @param string $name Index in the composite
+     * @return bool
+     */
+    public function hasFilter($name)
+    {
+        return $this->filterComposite->hasFilter($name);
+    }
+
+    /**
+     * Remove a filter from the composition.
+     * To not extract "has" methods, you simply need to unregister it
+     *
+     * <code>
+     * $filterComposite->removeFilter('has');
+     * </code>
+     *
+     * @param $name
+     * @return Filter\FilterComposite
+     */
+    public function removeFilter($name)
+    {
+        return $this->filterComposite->removeFilter($name);
     }
 }

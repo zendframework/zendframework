@@ -135,22 +135,6 @@ abstract class CommonStringWrapperTest extends TestCase
         $this->assertSame($str, $result);
     }
 
-    public function testConvertDontSubstringsOnInvalidCharacter()
-    {
-        $wrapper = $this->getWrapper('UTF-8', 'ASCII');
-        if (!$wrapper) {
-            $this->markTestSkipped("Converting UTF-8 to ASCII not supported");
-        }
-
-        // NOTE: This call could trigger a notice/warning/error
-        // but that isn't part of this test
-        ErrorHandler::start(E_NOTICE);
-        $result = $wrapper->convert($wrapper->convert("foo \xDEx bar"), true);
-        ErrorHandler::stop();
-
-        $this->assertSame("foo x bar", $result);
-    }
-
     public function wordWrapProvider()
     {
         return array(

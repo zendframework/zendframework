@@ -24,4 +24,3 @@ class UnlocatableControllerLoaderAbstractFactory implements AbstractFactoryInter
     {
     }
 }
-

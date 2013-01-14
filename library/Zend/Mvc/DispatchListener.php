@@ -21,10 +21,10 @@ use Zend\Stdlib\ArrayUtils;
  * Default dispatch listener
  *
  * Pulls controllers from the service manager's "ControllerLoader" service.
- * 
+ *
  * If the controller cannot be found a "404" result is set up. Otherwise it
  * will continue to try to load the controller.
- * 
+ *
  * If the controller is not dispatchable it sets up a "404" result. In case
  * of any other exceptions it trigger the "dispatch.error" event in an attempt
  * to return a 500 status.
@@ -93,10 +93,10 @@ class DispatchListener implements ListenerAggregateInterface
         $controllerLoader = $application->getServiceManager()->get('ControllerLoader');
 
         if (!$controllerLoader->has($controllerName)) {
-        	$return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $e, $application);
+            $return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $e, $application);
             return $this->complete($return, $e);
         }
-        
+
         try {
             $controller = $controllerLoader->get($controllerName);
         } catch (InvalidControllerException $exception) {

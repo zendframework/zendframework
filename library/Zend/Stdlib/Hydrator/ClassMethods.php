@@ -64,6 +64,11 @@ class ClassMethods extends AbstractHydrator
                 continue;
             }
 
+            $reflectionMethod = new \ReflectionMethod(get_class($object) . '::' . $method);
+            if ($reflectionMethod->getNumberOfParameters() > 0) {
+                continue;
+            }
+
             $attribute = $method;
             if (preg_match('/^get/', $method)) {
                 $attribute = substr($method, 3);

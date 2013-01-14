@@ -97,6 +97,9 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             .'%3A%2F%2Fwww.example.com%2Ftopic&hub.verify=sync&hub.verify=async'
             .'&hub.verify_token=abc',
             $this->client->getResponse()->getBody());
+
+        $subscriptionRecord = $this->subscriber->getStorage()->getSubscription();
+        $this->assertEquals($subscriptionRecord['subscription_state'], PubSubHubbub::SUBSCRIPTION_TODELETE);
     }
 
     protected function _getCleanMock($className)

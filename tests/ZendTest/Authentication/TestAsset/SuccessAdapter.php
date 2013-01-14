@@ -10,10 +10,10 @@
 
 namespace ZendTest\Authentication\TestAsset;
 
-use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter;
+use Zend\Authentication\Adapter\AbstractAdapter as AuthenticationAdapter;
 use Zend\Authentication\Result as AuthenticationResult;
 
-class SuccessAdapter implements AuthenticationAdapter
+class SuccessAdapter extends AuthenticationAdapter
 {
     public function authenticate()
     {

@@ -32,7 +32,6 @@
         "bin/classmap_generator.php"
     ],
     "replace": {
-        "zendframework/zend-acl": "self.version",
         "zendframework/zend-authentication": "self.version",
         "zendframework/zend-barcode": "self.version",
         "zendframework/zend-cache": "self.version",
@@ -42,6 +41,7 @@
         "zendframework/zend-console": "self.version",
         "zendframework/zend-crypt": "self.version",
         "zendframework/zend-db": "self.version",
+        "zendframework/zend-debug": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-dom": "self.version",
         "zendframework/zend-escaper": "self.version",
@@ -58,7 +58,6 @@
         "zendframework/zend-loader": "self.version",
         "zendframework/zend-log": "self.version",
         "zendframework/zend-mail": "self.version",
-        "zendframework/zend-markup": "self.version",
         "zendframework/zend-math": "self.version",
         "zendframework/zend-memory": "self.version",
         "zendframework/zend-mime": "self.version",
@@ -66,6 +65,7 @@
         "zendframework/zend-mvc": "self.version",
         "zendframework/zend-navigation": "self.version",
         "zendframework/zend-paginator": "self.version",
+        "zendframework/zend-permissions-acl": "self.version",
         "zendframework/zend-progressbar": "self.version",
         "zendframework/zend-serializer": "self.version",
         "zendframework/zend-server": "self.version",
@@ -77,6 +77,7 @@
         "zendframework/zend-text": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-validator": "self.version",
+        "zendframework/zend-version": "self.version",
         "zendframework/zend-view": "self.version",
         "zendframework/zend-xmlrpc": "self.version"
     },

@@ -305,4 +305,40 @@ class RestfulControllerTest extends TestCase
         $this->assertInternalType('array', $result);
         $this->assertEquals(array('entity' => array('foo' => 'bar')), $result);
     }
+
+    public function matchingContentTypes()
+    {
+        return array(
+            'exact-first' => array('application/hal+json'),
+            'exact-second' => array('application/json'),
+            'with-charset' => array('application/json; charset=utf-8'),
+            'with-whitespace' => array('application/json '),
+        );
+    }
+
+    /**
+     * @dataProvider matchingContentTypes
+     */
+    public function testRequestingContentTypeReturnsTrueForValidMatches($contentType)
+    {
+        $this->request->getHeaders()->addHeaderLine('Content-Type', $contentType);
+        $this->assertTrue($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
+    }
+
+    public function nonMatchingContentTypes()
+    {
+        return array(
+            'specific-type' => array('application/xml'),
+            'generic-type' => array('text/json'),
+        );
+    }
+
+    /**
+     * @dataProvider nonMatchingContentTypes
+     */
+    public function testRequestingContentTypeReturnsFalseForInvalidMatches($contentType)
+    {
+        $this->request->getHeaders()->addHeaderLine('Content-Type', $contentType);
+        $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
+    }
 }

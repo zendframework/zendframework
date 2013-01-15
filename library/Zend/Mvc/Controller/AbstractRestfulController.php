@@ -347,9 +347,15 @@ abstract class AbstractRestfulController extends AbstractController
             return false;
         }
 
+        $requestedContentType = $headerContentType->getFieldValue();
+        if (strstr($requestedContentType, ';')) {
+            $headerData = explode(';', $requestedContentType);
+            $requestedContentType = array_shift($headerData);
+        }
+        $requestedContentType = trim($requestedContentType);
         if (array_key_exists($contentType, $this->contentTypes)) {
             foreach ($this->contentTypes[$contentType] as $contentTypeValue) {
-                if (stripos($contentTypeValue, $headerContentType->getFieldValue()) === 0) {
+                if (stripos($contentTypeValue, $requestedContentType) === 0) {
                     return true;
                 }
             }

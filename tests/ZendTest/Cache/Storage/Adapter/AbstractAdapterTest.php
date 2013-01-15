@@ -330,22 +330,18 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testInternalHasItemsCallsInternalHasItem()
     {
-        $this->_storage = $this->getMockForAbstractAdapter(array('internalHasItem', 'internalGetItem'));
+        $this->_storage = $this->getMockForAbstractAdapter(array('internalHasItem'));
 
-        $items  = array('key1' => true, 'key2' => false);
-        $result = array('key1');
+        $items  = array('key1' => true);
 
-        $i = 0; // method call counter
-        foreach ($items as $k => $v) {
-            $this->_storage
-                ->expects($this->at($i++))
-                ->method('internalHasItem')
-                ->with($this->equalTo($k))
-                ->will($this->returnValue($v));
-        }
+        $this->_storage
+            ->expects($this->atLeastOnce())
+            ->method('internalHasItem')
+            ->with($this->equalTo('key1'))
+            ->will($this->returnValue(true));
 
         $rs = $this->_storage->hasItems(array_keys($items));
-        $this->assertEquals($result, $rs);
+        $this->assertEquals(array('key1'), $rs);
     }
 
     public function testGetMetadataCallsInternalGetMetadata()

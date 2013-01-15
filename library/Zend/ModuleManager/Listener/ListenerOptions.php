@@ -58,6 +58,11 @@ class ListenerOptions extends AbstractOptions
     protected $cacheDir;
 
     /**
+     * @var bool
+     */
+    protected $checkDependencies = true;
+
+    /**
      * Get an array of paths where modules reside
      *
      * @return array
@@ -262,6 +267,30 @@ class ListenerOptions extends AbstractOptions
         } else {
             $this->cacheDir = static::normalizePath($cacheDir);
         }
+        return $this;
+    }
+
+    /**
+     * Set whether to check dependencies during module loading or not
+     *
+     * @return string
+     */
+    public function getCheckDependencies()
+    {
+        return $this->checkDependencies;
+    }
+
+    /**
+     * Set whether to check dependencies during module loading or not
+     *
+     * @param  bool $checkDependencies the value to be set
+     *
+     * @return ListenerOptions
+     */
+    public function setCheckDependencies($checkDependencies)
+    {
+        $this->checkDependencies = (bool) $checkDependencies;
+
         return $this;
     }
 

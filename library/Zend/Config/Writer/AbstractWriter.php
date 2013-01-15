@@ -52,12 +52,9 @@ abstract class AbstractWriter implements WriterInterface
             }, E_WARNING
         );
 
-        try
-        {
+        try {
             file_put_contents($filename, $this->toString($config), $flags);
-        }
-        catch( \Exception $e )
-        {
+        } catch( \Exception $e ) {
             restore_error_handler();
             throw $e;
         }

@@ -56,7 +56,7 @@ abstract class AbstractWriter implements WriterInterface
         {
             file_put_contents($filename, $this->toString($config), $flags);
         }
-        catch( Exception\RuntimeException $e )
+        catch( \Exception $e )
         {
             restore_error_handler();
             throw $e;

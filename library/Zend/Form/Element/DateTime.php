@@ -53,7 +53,7 @@ class DateTime extends Element implements InputProviderInterface
 
     /**
      * Accepted options for DateTime:
-     * - format: A PHP date() compatible string
+     * - format: A \DateTime compatible string
      *
      * @param array|\Traversable $options
      * @return DateSelect
@@ -62,8 +62,8 @@ class DateTime extends Element implements InputProviderInterface
     {
         parent::setOptions($options);
 
-        if (isset($options['format'])) {
-            $this->setFormat($options['format']);
+        if (isset($this->options['format'])) {
+            $this->setFormat($this->options['format']);
         }
 
         return $this;

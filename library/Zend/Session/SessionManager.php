@@ -11,7 +11,6 @@
 namespace Zend\Session;
 
 use Zend\EventManager\EventManagerInterface;
-use Zend\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
@@ -43,14 +42,17 @@ class SessionManager extends AbstractManager
     protected $validatorChain;
 
     /**
-     * Destructor
-     * Ensures that writeClose is called.
+     * Constructor
      *
-     * @return void
+     * @param  Config\ConfigInterface|null $config
+     * @param  Storage\StorageInterface|null $storage
+     * @param  SaveHandler\SaveHandlerInterface|null $saveHandler
+     * @throws Exception\RuntimeException
      */
-    public function __destruct()
+    public function __construct(Config\ConfigInterface $config = null, Storage\StorageInterface $storage = null, SaveHandler\SaveHandlerInterface $saveHandler = null)
     {
-        $this->writeClose();
+        parent::__construct($config, $storage, $saveHandler);
+        register_shutdown_function(array($this, 'writeClose'));
     }
 
     /**
@@ -89,7 +91,7 @@ class SessionManager extends AbstractManager
         }
 
         $saveHandler = $this->getSaveHandler();
-        if ($saveHandler instanceof SaveHandlerInterface) {
+        if ($saveHandler instanceof SaveHandler\SaveHandlerInterface) {
             // register the session handler with ext/session
             $this->registerSaveHandler($saveHandler);
         }

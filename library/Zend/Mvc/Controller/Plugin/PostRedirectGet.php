@@ -28,6 +28,24 @@ class PostRedirectGet extends AbstractPlugin
      */
     protected $sessionContainer;
 
+    /**
+     * Perform PRG logic
+     *
+     * If a null value is present for the $redirect, the current route is
+     * retrieved and use to generate the URL for redirect.
+     *
+     * If the request method is POST, creates a session container set to expire
+     * after 1 hop containing the values of the POST. It then redirects to the
+     * specified URL using a status 303.
+     *
+     * If the request method is GET, checks to see if we have values in the
+     * session container, and, if so, returns them; otherwise, it returns a
+     * boolean false.
+     *
+     * @param  null|string $redirect
+     * @param  bool $redirectToUrl
+     * @return \Zend\Http\Response|array|Traversable|false
+     */
     public function __invoke($redirect = null, $redirectToUrl = false)
     {
         $controller = $this->getController();

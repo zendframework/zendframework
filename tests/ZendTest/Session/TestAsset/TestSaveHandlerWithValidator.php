@@ -15,7 +15,9 @@ use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
 class TestSaveHandlerWithValidator implements SaveHandler
 {
     public function open($save_path, $name)
-    {return true;}
+    {
+        return true;
+    }
 
     public function close()
     {}

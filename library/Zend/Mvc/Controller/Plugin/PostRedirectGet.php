@@ -13,6 +13,7 @@ namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Session\Container;
+use Zend\Session\ManagerInterface as Manager;
 
 /**
  * Plugin to help facilitate Post/Redirect/Get (http://en.wikipedia.org/wiki/Post/Redirect/Get)
@@ -23,6 +24,56 @@ use Zend\Session\Container;
  */
 class PostRedirectGet extends AbstractPlugin
 {
+    /**
+     * @var Manager
+     */
+    protected $session;
+
+    /**
+     * Set the session manager
+     *
+     * @param  Manager $manager
+     * @return FlashMessenger
+     */
+    public function setSessionManager(Manager $manager)
+    {
+        $this->session = $manager;
+        return $this;
+    }
+
+    /**
+     * Retrieve the session manager
+     *
+     * If none composed, lazy-loads a SessionManager instance
+     *
+     * @return Manager
+     */
+    public function getSessionManager()
+    {
+        if (!$this->session instanceof Manager) {
+            $this->setSessionManager(Container::getDefaultManager());
+        }
+        return $this->session;
+    }
+
+    /**
+     * Perform PRG logic
+     *
+     * If a null value is present for the $redirect, the current route is
+     * retrieved and use to generate the URL for redirect.
+     *
+     * If the request method is POST, creates a session container set to expire
+     * after 1 hop containing the values of the POST. It then redirects to the
+     * specified URL using a status 303.
+     *
+     * If the request method is GET, checks to see if we have values in the
+     * session container, and, if so, returns them; otherwise, it returns a
+     * boolean false.
+     *
+     * @param  null|string $redirect
+     * @param  bool $redirectToUrl
+     * @return \Zend\Http\Response|array|Traversable|false
+     */
     public function __invoke($redirect = null, $redirectToUrl = false)
     {
         $controller = $this->getController();
@@ -36,7 +87,7 @@ class PostRedirectGet extends AbstractPlugin
             $params   = $routeMatch->getParams();
         }
 
-        $container = new Container('prg_post1');
+        $container = new Container('prg_post1', $this->getSessionManager());
 
         if ($request->isPost()) {
             $container->setExpirationHops(1, 'post');
@@ -67,14 +118,14 @@ class PostRedirectGet extends AbstractPlugin
             $response->setStatusCode(303);
 
             return $response;
-        } else {
-            if ($container->post !== null) {
-                $post = $container->post;
-                unset($container->post);
-                return $post;
-            }
-
-            return false;
         }
+
+        if ($container->post !== null) {
+            $post = $container->post;
+            unset($container->post);
+            return $post;
+        }
+
+        return false;
     }
 }

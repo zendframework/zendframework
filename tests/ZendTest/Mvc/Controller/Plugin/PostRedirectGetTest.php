@@ -65,7 +65,9 @@ class PostRedirectGetTest extends TestCase
         $this->sessionManager->destroy();
 
         $this->controller->setEvent($this->event);
-        $this->controller->flashMessenger()->setSessionManager($this->sessionManager);
+        $plugins = $this->controller->getPluginManager();
+        $plugins->get('flashmessenger')->setSessionManager($this->sessionManager);
+        $plugins->get('prg')->setSessionManager($this->sessionManager);
     }
 
     public function testReturnsFalseOnIntialGet()

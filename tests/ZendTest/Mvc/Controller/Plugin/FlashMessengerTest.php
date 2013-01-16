@@ -27,6 +27,11 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->helper->setSessionManager($this->session);
     }
 
+    public function tearDown()
+    {
+        $this->session->getStorage()->clear();
+    }
+
     public function seedMessages()
     {
         $helper = new FlashMessenger();

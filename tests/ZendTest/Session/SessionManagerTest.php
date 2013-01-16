@@ -329,18 +329,6 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testCallingDestructorMarksStorageAsImmutable()
-    {
-        $this->manager->start();
-        $storage = $this->manager->getStorage();
-        $storage['foo'] = 'bar';
-        $this->manager = null;
-        $this->assertTrue($storage->isImmutable());
-    }
-
-    /**
-     * @runInSeparateProcess
-     */
     public function testCallingWriteCloseShouldNotAlterSessionExistsStatus()
     {
         $this->manager->start();

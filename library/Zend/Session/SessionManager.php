@@ -11,7 +11,9 @@
 namespace Zend\Session;
 
 use Zend\EventManager\EventManagerInterface;
-use Zend\Session\SaveHandler\SaveHandlerInterface;
+use Zend\Session\Config\ConfigInterface as Config;
+use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
+use Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
@@ -43,14 +45,17 @@ class SessionManager extends AbstractManager
     protected $validatorChain;
 
     /**
-     * Destructor
-     * Ensures that writeClose is called.
+     * Constructor
      *
-     * @return void
+     * @param  Config|null $config
+     * @param  Storage|null $storage
+     * @param  SaveHandler|null $saveHandler
+     * @throws Exception\RuntimeException
      */
-    public function __destruct()
+    public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
     {
-        $this->writeClose();
+        parent::__construct($config, $storage, $saveHandler);
+        register_shutdown_function(array($this, 'writeClose'));
     }
 
     /**
@@ -89,7 +94,7 @@ class SessionManager extends AbstractManager
         }
 
         $saveHandler = $this->getSaveHandler();
-        if ($saveHandler instanceof SaveHandlerInterface) {
+        if ($saveHandler instanceof SaveHandler) {
             // register the session handler with ext/session
             $this->registerSaveHandler($saveHandler);
         }
@@ -399,10 +404,10 @@ class SessionManager extends AbstractManager
      * Since ext/session is coupled to this particular session manager
      * register the save handler with ext/session.
      *
-     * @param SaveHandler\SaveHandlerInterface $saveHandler
+     * @param SaveHandler $saveHandler
      * @return bool
      */
-    protected function registerSaveHandler(SaveHandler\SaveHandlerInterface $saveHandler)
+    protected function registerSaveHandler(SaveHandler $saveHandler)
     {
         return session_set_save_handler(
             array($saveHandler, 'open'),

@@ -13,6 +13,7 @@ namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Session\Container;
+use Zend\Session\ManagerInterface as Manager;
 
 /**
  * Plugin to help facilitate Post/Redirect/Get (http://en.wikipedia.org/wiki/Post/Redirect/Get)
@@ -23,6 +24,38 @@ use Zend\Session\Container;
  */
 class PostRedirectGet extends AbstractPlugin
 {
+    /**
+     * @var Manager
+     */
+    protected $session;
+
+    /**
+     * Set the session manager
+     *
+     * @param  Manager $manager
+     * @return FlashMessenger
+     */
+    public function setSessionManager(Manager $manager)
+    {
+        $this->session = $manager;
+        return $this;
+    }
+
+    /**
+     * Retrieve the session manager
+     *
+     * If none composed, lazy-loads a SessionManager instance
+     *
+     * @return Manager
+     */
+    public function getSessionManager()
+    {
+        if (!$this->session instanceof Manager) {
+            $this->setSessionManager(Container::getDefaultManager());
+        }
+        return $this->session;
+    }
+
     public function __invoke($redirect = null, $redirectToUrl = false)
     {
         $controller = $this->getController();
@@ -36,7 +69,7 @@ class PostRedirectGet extends AbstractPlugin
             $params   = $routeMatch->getParams();
         }
 
-        $container = new Container('prg_post1');
+        $container = new Container('prg_post1', $this->getSessionManager());
 
         if ($request->isPost()) {
             $container->setExpirationHops(1, 'post');

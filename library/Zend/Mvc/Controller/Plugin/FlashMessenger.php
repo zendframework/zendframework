@@ -15,7 +15,6 @@ use Countable;
 use IteratorAggregate;
 use Zend\Session\Container;
 use Zend\Session\ManagerInterface as Manager;
-use Zend\Session\SessionManager;
 use Zend\Stdlib\SplQueue;
 
 /**
@@ -79,7 +78,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     public function getSessionManager()
     {
         if (!$this->session instanceof Manager) {
-            $this->setSessionManager(new SessionManager());
+            $this->setSessionManager(Container::getDefaultManager());
         }
         return $this->session;
     }

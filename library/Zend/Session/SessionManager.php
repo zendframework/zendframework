@@ -11,9 +11,6 @@
 namespace Zend\Session;
 
 use Zend\EventManager\EventManagerInterface;
-use Zend\Session\Config\ConfigInterface as Config;
-use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
-use Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
@@ -47,12 +44,12 @@ class SessionManager extends AbstractManager
     /**
      * Constructor
      *
-     * @param  Config|null $config
-     * @param  Storage|null $storage
-     * @param  SaveHandler|null $saveHandler
+     * @param  Config\ConfigInterface|null $config
+     * @param  Storage\StorageInterface|null $storage
+     * @param  SaveHandler\SaveHandlerInterface|null $saveHandler
      * @throws Exception\RuntimeException
      */
-    public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
+    public function __construct(Config\ConfigInterface $config = null, Storage\StorageInterface $storage = null, SaveHandler\SaveHandlerInterface $saveHandler = null)
     {
         parent::__construct($config, $storage, $saveHandler);
         register_shutdown_function(array($this, 'writeClose'));
@@ -94,7 +91,7 @@ class SessionManager extends AbstractManager
         }
 
         $saveHandler = $this->getSaveHandler();
-        if ($saveHandler instanceof SaveHandler) {
+        if ($saveHandler instanceof SaveHandler\SaveHandlerInterface) {
             // register the session handler with ext/session
             $this->registerSaveHandler($saveHandler);
         }
@@ -404,10 +401,10 @@ class SessionManager extends AbstractManager
      * Since ext/session is coupled to this particular session manager
      * register the save handler with ext/session.
      *
-     * @param SaveHandler $saveHandler
+     * @param SaveHandler\SaveHandlerInterface $saveHandler
      * @return bool
      */
-    protected function registerSaveHandler(SaveHandler $saveHandler)
+    protected function registerSaveHandler(SaveHandler\SaveHandlerInterface $saveHandler)
     {
         return session_set_save_handler(
             array($saveHandler, 'open'),

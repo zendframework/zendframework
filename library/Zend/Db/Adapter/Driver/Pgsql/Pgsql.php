@@ -161,6 +161,10 @@ class Pgsql implements DriverInterface
         }
         */
 
+        if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+        }
+
         $statement->initialize($this->connection->getResource());
         return $statement;
     }

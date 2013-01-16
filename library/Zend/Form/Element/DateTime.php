@@ -56,7 +56,7 @@ class DateTime extends Element implements InputProviderInterface
      * - format: A \DateTime compatible string
      *
      * @param array|\Traversable $options
-     * @return DateSelect
+     * @return DateTime
      */
     public function setOptions($options)
     {

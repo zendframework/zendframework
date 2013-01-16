@@ -52,6 +52,24 @@ class DateTime extends Element implements InputProviderInterface
     protected $validators;
 
     /**
+     * Accepted options for DateTime:
+     * - format: A \DateTime compatible string
+     *
+     * @param array|\Traversable $options
+     * @return DateTime
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($this->options['format'])) {
+            $this->setFormat($this->options['format']);
+        }
+
+        return $this;
+    }
+
+    /**
      * Retrieve the element value
      *
      * If the value is a DateTime object, and $returnFormattedValue is true

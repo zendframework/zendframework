@@ -88,4 +88,16 @@ class DateTimeTest extends TestCase
         $element->setValue($date);
         $this->assertSame($date, $element->getValue(false));
     }
+
+    public function testSetFormatWithOptions()
+    {
+
+        $format = 'Y-m-d';
+        $element = new DateTimeElement('foo');
+        $element->setOptions(array(
+            'format' => $format,
+        ));
+
+        $this->assertSame($format, $element->getFormat());
+    }
 }

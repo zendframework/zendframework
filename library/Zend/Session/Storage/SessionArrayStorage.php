@@ -449,7 +449,11 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      */
     public function toArray()
     {
-        $values = $_SESSION;
+        if (isset($_SESSION)) {
+            $values = $_SESSION;
+        } else {
+            $values = array();
+        }
         if (isset($values['__ZF'])) {
             unset($values['__ZF']);
         }

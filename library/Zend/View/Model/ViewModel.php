@@ -346,7 +346,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface
         if (null !== $captureTo) {
             $child->setCaptureTo($captureTo);
         }
-        if (null !== $captureTo) {
+        if (null !== $append) {
             $child->setAppend($append);
         }
 

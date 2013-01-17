@@ -163,7 +163,7 @@ class SessionManager extends AbstractManager
         // object isImmutable.
         $storage  = $this->getStorage();
         if (!$storage->isImmutable()) {
-            $_SESSION = (array) $storage;
+            $_SESSION = $storage->toArray();
             session_write_close();
             $storage->fromArray($_SESSION);
             $storage->markImmutable();

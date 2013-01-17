@@ -35,7 +35,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->_writer->addFilter(1);
         $this->_writer->addFilter(new RegexFilter('/mess/'));
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
-        $this->_writer->addFilter(new \StdClass());
+        $this->_writer->addFilter(new \stdClass());
     }
 
     public function testAddMockFilterByName()

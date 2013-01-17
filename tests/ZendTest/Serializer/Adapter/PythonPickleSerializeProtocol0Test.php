@@ -164,7 +164,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value = new \StdClass();
+        $value = new \stdClass();
         $value->test  = 'test';
         $value->test2 = 2;
         $expected = "(dp0\r\n"

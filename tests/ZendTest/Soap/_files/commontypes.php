@@ -82,7 +82,7 @@ function Zend_Soap_AutoDiscover_TestFunc7()
 /**
  * Return Object
  *
- * @return StdClass
+ * @return stdClass
  */
 function Zend_Soap_AutoDiscover_TestFunc8()
 {

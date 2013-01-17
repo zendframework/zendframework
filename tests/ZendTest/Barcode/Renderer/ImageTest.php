@@ -49,7 +49,7 @@ class ImageTest extends TestCommon
     public function testObjectImageResource()
     {
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $imageResource = new \StdClass();
+        $imageResource = new \stdClass();
         $this->renderer->setResource($imageResource);
     }
 

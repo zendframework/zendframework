@@ -84,7 +84,7 @@ function TestFunc7()
 /**
  * Return Object
  *
- * @return StdClass
+ * @return stdClass
  */
 function TestFunc8()
 {

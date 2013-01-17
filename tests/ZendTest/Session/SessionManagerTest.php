@@ -164,7 +164,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->writeClose();
         $this->assertTrue(isset($storage['foo']) && $storage['foo'] == 'bar');
     }
-    
+
     /**
      * @runInSeparateProcess
      */

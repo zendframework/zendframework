@@ -156,6 +156,18 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
+    public function testStorageContentIsPreservedByWriteCloseOperation()
+    {
+        $this->manager->start();
+        $storage = $this->manager->getStorage();
+        $storage['foo'] = 'bar';
+        $this->manager->writeClose();
+        $this->assertTrue(isset($storage['foo']) && $storage['foo'] == 'bar');
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
     public function testStartCreatesNewSessionIfPreviousSessionHasBeenDestroyed()
     {
         $this->manager->start();

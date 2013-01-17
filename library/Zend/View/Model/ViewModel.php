@@ -322,7 +322,7 @@ class ViewModel implements ModelInterface
         if (null !== $captureTo) {
             $child->setCaptureTo($captureTo);
         }
-        if (null !== $captureTo) {
+        if (null !== $append) {
             $child->setAppend($append);
         }
 

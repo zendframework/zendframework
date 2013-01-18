@@ -1312,6 +1312,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->_acl->addResource('blogposts');
         $this->_acl->addResource('feature', 'blogposts');
         $this->_acl->addResource('post_1', 'feature');
+        $this->_acl->addResource('post_2', 'feature');
 
         // Allow a guest to read feature posts and
         // comment on everything except feature posts.
@@ -1322,6 +1323,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->_acl->isAllowed('guest', 'feature', 'write'));
         $this->assertTrue($this->_acl->isAllowed('guest', 'post_1', 'read'));
+        $this->assertTrue($this->_acl->isAllowed('guest', 'post_2', 'read'));
+
         $this->assertFalse($this->_acl->isAllowed('guest', 'post_1', 'comment'));
+        $this->assertFalse($this->_acl->isAllowed('guest', 'post_2', 'comment'));
     }
 }

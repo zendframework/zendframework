@@ -21,7 +21,7 @@ use Zend\Stdlib\Hydrator\Strategy\ClosureStrategy;
  */
 class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * The hydrator that is used during testing.
      *
@@ -33,7 +33,7 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $this->hydrator = new ObjectProperty();
     }
-    
+
     public function testAddingStrategy()
     {
         $this->assertAttributeCount(0, 'strategies', $this->hydrator);
@@ -42,12 +42,12 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertAttributeCount(1, 'strategies', $this->hydrator);
     }
-    
+
     public function testCheckStrategyEmpty()
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
     }
-    
+
     public function testCheckStrategyNotEmpty()
     {
         $this->hydrator->addStrategy('myStrategy', new ClosureStrategy());
@@ -88,14 +88,14 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
             },
             null
         ));
-        
+
         $entity = new TestAsset\HydratorClosureStrategyEntity(111, 'world');
         $values = $this->hydrator->extract($entity);
-        
+
         $this->assertEquals(111, $values['field1']);
         $this->assertEquals('hello, world!', $values['field2']);
     }
-    
+
     public function testHydratingObjects()
     {
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
@@ -110,17 +110,17 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
                 return new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value));
             }
         ));
-            
+
         $entity = new TestAsset\HydratorClosureStrategyEntity(111, 'world');
-        
+
         $values = $this->hydrator->extract($entity);
         $values['field3'] = 333;
 
         $this->assertCount(2, (array)$entity);
         $this->hydrator->hydrate($values, $entity);
         $this->assertCount(3, (array)$entity);
-        
+
         $this->assertInstanceOf('ZendTest\Stdlib\TestAsset\HydratorClosureStrategyEntity', $entity->field3);
     }
-    
+
 }

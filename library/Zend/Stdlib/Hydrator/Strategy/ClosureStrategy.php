@@ -25,7 +25,7 @@ class ClosureStrategy implements StrategyInterface
      * @var callable
      */
     protected $extractFunc = null;
-    
+
     /**
      * Function, used in hydrate method, default:
      * function($value) {
@@ -34,7 +34,7 @@ class ClosureStrategy implements StrategyInterface
      * @var callable
      */
     protected $hydrateFunc = null;
-    
+
     /**
      * You can describe how your values will extract and hydrate, like this:
      * $hydrator->addStrategy('category', new ClosureStrategy(
@@ -45,9 +45,9 @@ class ClosureStrategy implements StrategyInterface
      *         return new Category((int)$value);
      *     }
      * ));
-     * 
+     *
      * @param callable $extractFunc - anonymous function, that extract values
-     * from object 
+     * from object
      * @param callable $hydrateFunc - anonymous function, that hydrate values
      * into object
      */
@@ -77,7 +77,7 @@ class ClosureStrategy implements StrategyInterface
             };
         }
     }
-    
+
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *

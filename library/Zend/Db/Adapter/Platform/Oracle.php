@@ -46,7 +46,7 @@ class Oracle implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
-        return strtoupper('"' . str_replace('"', '\\' . '"', $identifier) . '"');
+        return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
     }
 
     /**
@@ -61,7 +61,7 @@ class Oracle implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('"."', $identifierChain);
         }
-        return strtoupper('"' . $identifierChain . '"');
+        return '"' . $identifierChain . '"';
     }
 
     /**

@@ -305,7 +305,9 @@ abstract class AbstractRestfulController extends AbstractController
             case 'patch':
                 $id = $this->getIdentifier($routeMatch, $request);
                 if ($id === false) {
-                    throw new Exception\DomainException('Missing identifier');
+                    $response = $e->getResponse();
+                    $response->setStatusCode(405);
+                    return $response;
                 }
                 $data   = $this->processBodyContent($request);
                 $action = 'patch';
@@ -332,7 +334,9 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // All others...
             default:
-                throw new Exception\DomainException('Invalid HTTP method!');
+                $response = $e->getResponse();
+                $response->setStatusCode(405);
+                return $response;
         }
 
         $routeMatch->setParam('action', $action);

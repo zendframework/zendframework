@@ -367,7 +367,7 @@ class RestfulControllerTest extends TestCase
         $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
     }
 
-    public function testDispatchViaPatchWithoutIdentifierRaisesException()
+    public function testDispatchViaPatchWithoutIdentifierReturns405Response()
     {
         $entity = new stdClass;
         $entity->name = 'foo';
@@ -377,7 +377,16 @@ class RestfulControllerTest extends TestCase
         $string = http_build_query($entity);
         $this->request->setMethod('PATCH')
                       ->setContent($string);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'identifier');
         $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertInstanceOf('Zend\Http\Response', $result);
+        $this->assertEquals(405, $result->getStatusCode());
+    }
+
+    public function testDispatchWithUnrecognizedMethodReturns405Response()
+    {
+        $this->request->setMethod('PROPFIND');
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertInstanceOf('Zend\Http\Response', $result);
+        $this->assertEquals(405, $result->getStatusCode());
     }
 }

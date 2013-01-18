@@ -25,6 +25,13 @@ use Zend\View\ViewEvent;
 class JsonStrategy implements ListenerAggregateInterface
 {
     /**
+     * Character set for associated content-type
+     *
+     * @var string
+     */
+    protected $charset = 'utf-8';
+
+    /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
@@ -73,6 +80,18 @@ class JsonStrategy implements ListenerAggregateInterface
     }
 
     /**
+     * Set the content-type character set
+     *
+     * @param  string $charset
+     * @return JsonStrategy
+     */
+    public function setCharset($charset)
+    {
+        $this->charset = (string) $charset;
+        return $this;
+    }
+
+    /**
      * Detect if we should use the JsonRenderer based on model type and/or
      * Accept header
      *
@@ -116,10 +135,14 @@ class JsonStrategy implements ListenerAggregateInterface
         $response = $e->getResponse();
         $response->setContent($result);
         $headers = $response->getHeaders();
+
         if ($this->renderer->hasJsonpCallback()) {
-            $headers->addHeaderLine('content-type', 'application/javascript');
+            $contentType = 'application/javascript';
         } else {
-            $headers->addHeaderLine('content-type', 'application/json');
+            $contentType = 'application/json';
         }
+
+        $contentType .= '; charset=' . $this->charset;
+        $headers->addHeaderLine('content-type', $contentType);
     }
 }

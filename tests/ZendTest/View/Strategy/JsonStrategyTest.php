@@ -135,7 +135,7 @@ class JsonStrategyTest extends TestCase
         $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
-        $this->assertEquals('application/json', $headers->get('content-type')->getFieldValue());
+        $this->assertContains('application/json', $headers->get('content-type')->getFieldValue());
     }
 
     public function testMatchingRendererAndStringResultInjectsResponseJsonp()
@@ -151,7 +151,7 @@ class JsonStrategyTest extends TestCase
         $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
-        $this->assertEquals('application/javascript', $headers->get('content-type')->getFieldValue());
+        $this->assertContains('application/javascript', $headers->get('content-type')->getFieldValue());
     }
 
     public function testReturnsNullWhenCannotSelectRenderer()
@@ -223,5 +223,69 @@ class JsonStrategyTest extends TestCase
         $this->assertEquals(0, count($listeners));
         $listeners = $events->getListeners('response');
         $this->assertEquals(0, count($listeners));
+    }
+
+    public function testDefaultsToUtf8CharsetWhenCreatingJavascriptHeader()
+    {
+        $expected = json_encode(array('foo' => 'bar'));
+        $this->renderer->setJsonpCallback('foo');
+        $this->event->setResponse($this->response);
+        $this->event->setRenderer($this->renderer);
+        $this->event->setResult($expected);
+
+        $this->strategy->injectResponse($this->event);
+        $content = $this->response->getContent();
+        $headers = $this->response->getHeaders();
+        $this->assertEquals($expected, $content);
+        $this->assertTrue($headers->has('content-type'));
+        $this->assertContains('application/javascript; charset=utf-8', $headers->get('content-type')->getFieldValue());
+    }
+
+    public function testDefaultsToUtf8CharsetWhenCreatingJsonHeader()
+    {
+        $expected = json_encode(array('foo' => 'bar'));
+        $this->event->setResponse($this->response);
+        $this->event->setRenderer($this->renderer);
+        $this->event->setResult($expected);
+
+        $this->strategy->injectResponse($this->event);
+        $content = $this->response->getContent();
+        $headers = $this->response->getHeaders();
+        $this->assertEquals($expected, $content);
+        $this->assertTrue($headers->has('content-type'));
+        $this->assertContains('application/json; charset=utf-8', $headers->get('content-type')->getFieldValue());
+    }
+
+    public function testUsesProvidedCharsetWhenCreatingJavascriptHeader()
+    {
+        $expected = json_encode(array('foo' => 'bar'));
+        $this->renderer->setJsonpCallback('foo');
+        $this->event->setResponse($this->response);
+        $this->event->setRenderer($this->renderer);
+        $this->event->setResult($expected);
+
+        $this->strategy->setCharset('utf-16');
+        $this->strategy->injectResponse($this->event);
+        $content = $this->response->getContent();
+        $headers = $this->response->getHeaders();
+        $this->assertEquals($expected, $content);
+        $this->assertTrue($headers->has('content-type'));
+        $this->assertContains('application/javascript; charset=utf-16', $headers->get('content-type')->getFieldValue());
+    }
+
+    public function testUsesProvidedCharsetWhenCreatingJsonHeader()
+    {
+        $expected = json_encode(array('foo' => 'bar'));
+        $this->event->setResponse($this->response);
+        $this->event->setRenderer($this->renderer);
+        $this->event->setResult($expected);
+
+        $this->strategy->setCharset('utf-16');
+        $this->strategy->injectResponse($this->event);
+        $content = $this->response->getContent();
+        $headers = $this->response->getHeaders();
+        $this->assertEquals($expected, $content);
+        $this->assertTrue($headers->has('content-type'));
+        $this->assertContains('application/json; charset=utf-16', $headers->get('content-type')->getFieldValue());
     }
 }

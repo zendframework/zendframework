@@ -1303,4 +1303,21 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_acl->isAllowed('guest', 'newsletter', 'read'));
     }
 
+    /**
+     * @group ZF2-5434
+     */
+    public function testAclResourcePermissionsAreInheritedWithMultilevelResources()
+    {
+        $this->_acl->addRole('guest');
+        $this->_acl->addResource('blogposts');
+        $this->_acl->addResource('feature', 'blogposts');
+        $this->_acl->addResource('post_1', 'feature');
+
+        $this->_acl->deny();
+        $this->_acl->allow('guest', 'feature', 'read');
+
+        $this->assertFalse($this->_acl->isAllowed('guest', 'feature', 'write'));
+        $this->assertTrue($this->_acl->isAllowed('guest', 'post_1', 'read'));
+    }
+
 }

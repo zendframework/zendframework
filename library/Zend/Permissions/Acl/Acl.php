@@ -572,7 +572,9 @@ class Acl
         $resources = array();
         foreach ($resourcesTemp as $resource) {
             if (null !== $resource) {
-                $resources[] = $this->getResource($resource);
+                $children = $this->getChildResources($this->getResource($resource));
+                $resources = array_merge($resources, $children);
+                $resources[$resource] = $this->getResource($resource);
             } else {
                 $resources[] = null;
             }
@@ -657,6 +659,24 @@ class Acl
         }
 
         return $this;
+    }
+
+    /**
+     * Returns all child resources from the given resource.
+     *
+     * @param  Resource\ResourceInterface|string    $resource
+     * @return Resource\ResourceInterface[]
+     */
+    protected function getChildResources(Resource\ResourceInterface $resource)
+    {
+        $id = $resource->getResourceId();
+        $children = $this->resources[$id]['children'];
+        $return = array();
+        foreach($children as $child) {
+            $return = $this->getChildResources($child);
+            $return[$child->getResourceId()] = $child;
+        }
+        return $return;
     }
 
     /**

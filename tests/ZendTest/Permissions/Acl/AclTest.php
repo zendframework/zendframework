@@ -1306,18 +1306,22 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF2-3454
      */
-    public function testAclResourcePermissionsAreInheritedWithMultilevelResources()
+    public function testAclResourcePermissionsAreInheritedWithMultilevelResourcesAndDenyPolicy()
     {
         $this->_acl->addRole('guest');
         $this->_acl->addResource('blogposts');
         $this->_acl->addResource('feature', 'blogposts');
         $this->_acl->addResource('post_1', 'feature');
 
+        // Allow a guest to read feature posts and
+        // comment on everything except feature posts.
         $this->_acl->deny();
         $this->_acl->allow('guest', 'feature', 'read');
+        $this->_acl->allow('guest', null, 'comment');
+        $this->_acl->deny('guest', 'feature', 'comment');
 
         $this->assertFalse($this->_acl->isAllowed('guest', 'feature', 'write'));
         $this->assertTrue($this->_acl->isAllowed('guest', 'post_1', 'read'));
+        $this->assertFalse($this->_acl->isAllowed('guest', 'post_1', 'comment'));
     }
-
 }

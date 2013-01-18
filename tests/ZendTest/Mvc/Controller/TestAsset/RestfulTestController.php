@@ -41,6 +41,19 @@ class RestfulTestController extends AbstractRestfulController
     }
 
     /**
+     * Delete the collection
+     *
+     * @return \Zend\Http\Response
+     */
+    public function deleteList()
+    {
+        $response = $this->getResponse();
+        $response->setStatusCode(204);
+        $response->getHeaders()->addHeaderLine('X-Deleted', 'true');
+        return $response;
+    }
+
+    /**
      * Return single resource
      *
      * @param  mixed $id

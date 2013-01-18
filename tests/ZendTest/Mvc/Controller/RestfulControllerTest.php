@@ -102,6 +102,16 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals('delete', $this->routeMatch->getParam('action'));
     }
 
+    public function testDispatchInvokesDeleteListMethodWhenNoActionPresentAndDeleteInvokedWithoutIdentifier()
+    {
+        $this->request->setMethod('DELETE');
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertSame($this->response, $result);
+        $this->assertEquals(204, $result->getStatusCode());
+        $this->assertTrue($result->getHeaders()->has('X-Deleted'));
+        $this->assertEquals('deleteList', $this->routeMatch->getParam('action'));
+    }
+
     public function testDispatchInvokesOptionsMethodWhenNoActionPresentAndOptionsInvoked()
     {
         $this->request->setMethod('OPTIONS');

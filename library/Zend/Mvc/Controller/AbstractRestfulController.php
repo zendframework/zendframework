@@ -72,6 +72,22 @@ abstract class AbstractRestfulController extends AbstractController
     abstract public function delete($id);
 
     /**
+     * Delete the entire resource collection
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
+     *
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function deleteList()
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
+
+    /**
      * Return single resource
      *
      * @param  mixed $id
@@ -231,8 +247,9 @@ abstract class AbstractRestfulController extends AbstractController
             case 'delete':
                 if (null === $id = $routeMatch->getParam('id')) {
                     if (! ($id = $request->getQuery()->get('id', false))) {
-                        throw new Exception\DomainException(
-                                'Missing identifier');
+                        $action = 'deleteList';
+                        $return = $this->deleteList();
+                        break;
                     }
                 }
                 $action = 'delete';

@@ -263,7 +263,7 @@ abstract class AbstractRestfulController extends AbstractController
             // DELETE
             case 'delete':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if ($id) {
+                if ($id !== false) {
                     $action = 'delete';
                     $return = $this->delete($id);
                     break;
@@ -275,7 +275,7 @@ abstract class AbstractRestfulController extends AbstractController
             // GET
             case 'get':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if ($id) {
+                if ($id !== false) {
                     $action = 'get';
                     $return = $this->get($id);
                     break;
@@ -286,7 +286,7 @@ abstract class AbstractRestfulController extends AbstractController
             // HEAD
             case 'head':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if (!$id) {
+                if (!$id !== false) {
                     $id = null;
                 }
                 $action = 'head';
@@ -304,7 +304,7 @@ abstract class AbstractRestfulController extends AbstractController
             // PATCH
             case 'patch':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if (!$id) {
+                if (!$id !== false) {
                     throw new Exception\DomainException('Missing identifier');
                 }
                 $data   = $this->processBodyContent($request);
@@ -318,10 +318,10 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // PUT
             case 'put':
-                $id     = $this->getIdentifier($routeMatch, $request);
-                $data   = $this->processBodyContent($request);
+                $id   = $this->getIdentifier($routeMatch, $request);
+                $data = $this->processBodyContent($request);
 
-                if ($id) {
+                if ($id !== false) {
                     $action = 'update';
                     $return = $this->update($id, $data);
                     break;

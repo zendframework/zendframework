@@ -72,6 +72,22 @@ abstract class AbstractRestfulController extends AbstractController
     abstract public function delete($id);
 
     /**
+     * Delete the entire resource collection
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
+     *
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function deleteList()
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
+
+    /**
      * Return single resource
      *
      * @param  mixed $id
@@ -132,6 +148,23 @@ abstract class AbstractRestfulController extends AbstractController
      * @throws Exception\RuntimeException
      */
     public function patch($id, $data)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
+
+    /**
+     * Replace an entire resource collection
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
+     *
+     * @param  mixed $data
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function replaceList($data)
     {
         throw new Exception\RuntimeException(sprintf(
             '%s is unimplemented', __METHOD__
@@ -229,19 +262,20 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // DELETE
             case 'delete':
-                if (null === $id = $routeMatch->getParam('id')) {
-                    if (! ($id = $request->getQuery()->get('id', false))) {
-                        throw new Exception\DomainException(
-                                'Missing identifier');
-                    }
+                $id = $this->getIdentifier($routeMatch, $request);
+                if ($id !== false) {
+                    $action = 'delete';
+                    $return = $this->delete($id);
+                    break;
                 }
-                $action = 'delete';
-                $return = $this->delete($id);
+
+                $action = 'deleteList';
+                $return = $this->deleteList();
                 break;
             // GET
             case 'get':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if ($id) {
+                if ($id !== false) {
                     $action = 'get';
                     $return = $this->get($id);
                     break;
@@ -252,7 +286,7 @@ abstract class AbstractRestfulController extends AbstractController
             // HEAD
             case 'head':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if (!$id) {
+                if ($id !== false) {
                     $id = null;
                 }
                 $action = 'head';
@@ -270,8 +304,10 @@ abstract class AbstractRestfulController extends AbstractController
             // PATCH
             case 'patch':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if (!$id) {
-                    throw new Exception\DomainException('Missing identifier');
+                if ($id === false) {
+                    $response = $e->getResponse();
+                    $response->setStatusCode(405);
+                    return $response;
                 }
                 $data   = $this->processBodyContent($request);
                 $action = 'patch';
@@ -284,12 +320,23 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // PUT
             case 'put':
-                $action = 'update';
-                $return = $this->processPutData($request, $routeMatch);
+                $id   = $this->getIdentifier($routeMatch, $request);
+                $data = $this->processBodyContent($request);
+
+                if ($id !== false) {
+                    $action = 'update';
+                    $return = $this->update($id, $data);
+                    break;
+                }
+
+                $action = 'replaceList';
+                $return = $this->replaceList($data);
                 break;
             // All others...
             default:
-                throw new Exception\DomainException('Invalid HTTP method!');
+                $response = $e->getResponse();
+                $response->setStatusCode(405);
+                return $response;
         }
 
         $routeMatch->setParam('action', $action);
@@ -312,26 +359,6 @@ abstract class AbstractRestfulController extends AbstractController
         }
 
         return $this->create($data);
-    }
-
-    /**
-     * Process put data and call update
-     *
-     * @param Request $request
-     * @param $routeMatch
-     * @return mixed
-     * @throws Exception\DomainException
-     */
-    public function processPutData(Request $request, $routeMatch)
-    {
-        $id = $this->getIdentifier($routeMatch, $request);
-        if (!$id) {
-            throw new Exception\DomainException('Missing identifier');
-        }
-
-        $data = $this->processBodyContent($request);
-
-        return $this->update($id, $data);
     }
 
     /**

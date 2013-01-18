@@ -41,6 +41,19 @@ class RestfulTestController extends AbstractRestfulController
     }
 
     /**
+     * Delete the collection
+     *
+     * @return \Zend\Http\Response
+     */
+    public function deleteList()
+    {
+        $response = $this->getResponse();
+        $response->setStatusCode(204);
+        $response->getHeaders()->addHeaderLine('X-Deleted', 'true');
+        return $response;
+    }
+
+    /**
      * Return single resource
      *
      * @param  mixed $id
@@ -96,6 +109,17 @@ class RestfulTestController extends AbstractRestfulController
         $data['id'] = $id;
         $updated    = array_merge($entity, $data);
         return array('entity' => $updated);
+    }
+
+    /**
+     * Replace the entire resource collection
+     *
+     * @param  array|\Traversable $items
+     * @return array|\Traversable
+     */
+    public function replaceList($items)
+    {
+        return $items;
     }
 
     /**

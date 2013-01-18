@@ -90,6 +90,21 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals('update', $this->routeMatch->getParam('action'));
     }
 
+    public function testDispatchInvokesReplaceListMethodWhenNoActionPresentAndPutInvokedWithoutIdentifier()
+    {
+        $entities = array(
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+        );
+        $string = http_build_query($entities);
+        $this->request->setMethod('PUT')
+                      ->setContent($string);
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEquals($entities, $result);
+        $this->assertEquals('replaceList', $this->routeMatch->getParam('action'));
+    }
+
     public function testDispatchInvokesDeleteMethodWhenNoActionPresentAndDeleteInvokedWithIdentifier()
     {
         $entity = array('id' => 1, 'name' => __FUNCTION__);
@@ -100,6 +115,16 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals(array(), $result);
         $this->assertEquals(array(), $this->controller->entity);
         $this->assertEquals('delete', $this->routeMatch->getParam('action'));
+    }
+
+    public function testDispatchInvokesDeleteListMethodWhenNoActionPresentAndDeleteInvokedWithoutIdentifier()
+    {
+        $this->request->setMethod('DELETE');
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertSame($this->response, $result);
+        $this->assertEquals(204, $result->getStatusCode());
+        $this->assertTrue($result->getHeaders()->has('X-Deleted'));
+        $this->assertEquals('deleteList', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesOptionsMethodWhenNoActionPresentAndOptionsInvoked()
@@ -340,5 +365,28 @@ class RestfulControllerTest extends TestCase
     {
         $this->request->getHeaders()->addHeaderLine('Content-Type', $contentType);
         $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
+    }
+
+    public function testDispatchViaPatchWithoutIdentifierReturns405Response()
+    {
+        $entity = new stdClass;
+        $entity->name = 'foo';
+        $entity->type = 'standard';
+        $this->controller->entity = $entity;
+        $entity = array('name' => __FUNCTION__);
+        $string = http_build_query($entity);
+        $this->request->setMethod('PATCH')
+                      ->setContent($string);
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertInstanceOf('Zend\Http\Response', $result);
+        $this->assertEquals(405, $result->getStatusCode());
+    }
+
+    public function testDispatchWithUnrecognizedMethodReturns405Response()
+    {
+        $this->request->setMethod('PROPFIND');
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertInstanceOf('Zend\Http\Response', $result);
+        $this->assertEquals(405, $result->getStatusCode());
     }
 }

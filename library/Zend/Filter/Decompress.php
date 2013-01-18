@@ -32,7 +32,7 @@ class Decompress extends Compress
     }
 
     /**
-     * Defined by Zend\Filter\FilterInterface
+     * Defined by FilterInterface
      *
      * Decompresses the content $value with the defined settings
      *

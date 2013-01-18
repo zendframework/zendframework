@@ -358,25 +358,6 @@ abstract class AbstractRestfulController extends AbstractController
     }
 
     /**
-     * Process put data and call update
-     *
-     * @param Request $request
-     * @param $routeMatch
-     * @return mixed
-     */
-    public function processPutData(Request $request, $routeMatch)
-    {
-        $id   = $this->getIdentifier($routeMatch, $request);
-        $data = $this->processBodyContent($request);
-
-        if (!$id) {
-            return $this->replaceList($data);
-        }
-
-        return $this->update($id, $data);
-    }
-
-    /**
      * Check if request has certain content type
      *
      * @return boolean

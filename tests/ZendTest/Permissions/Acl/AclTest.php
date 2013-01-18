@@ -1304,7 +1304,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF2-5434
+     * @group ZF2-3454
      */
     public function testAclResourcePermissionsAreInheritedWithMultilevelResources()
     {

@@ -104,10 +104,6 @@ class EmailAddress extends AbstractValidator
             $options = $temp;
         }
 
-        if (!array_key_exists('hostnameValidator', $options)) {
-            $options['hostnameValidator'] = null;
-        }
-
         parent::__construct($options);
     }
 

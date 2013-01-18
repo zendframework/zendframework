@@ -522,8 +522,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     public function testSetSingleMessageViaOptions()
     {
         $validator = new EmailAddress(array('message' => 'TestMessage'));
-        $messages = $validator->getMessageTemplates();
-        $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
+        foreach ($validator->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
+        foreach ($validator->getHostnameValidator()->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
     }
 
     public function testSetMultipleMessageViaOptions()
@@ -559,8 +563,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $messages = $this->validator->getMessageTemplates();
         $this->assertNotEquals('TestMessage', $messages[EmailAddress::INVALID]);
         $this->validator->setMessage('TestMessage');
-        $messages = $this->validator->getMessageTemplates();
-        $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
+        foreach ($this->validator->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
+        foreach ($this->validator->getHostnameValidator()->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
     }
 
     /**

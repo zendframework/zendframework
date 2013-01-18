@@ -30,7 +30,7 @@ class SequenceFeature extends AbstractFeature
      * @var string
      */
     protected $sequenceName;
-    
+
     /**
      * @var int
      */
@@ -56,22 +56,22 @@ class SequenceFeature extends AbstractFeature
             $this->sequenceValue = $values[$key];
             return $insert;
         }
-        
+
         $this->sequenceValue = $this->nextSequenceId();
         if ($this->sequenceValue === null)
             return $insert;
-        
+
         array_push($columns, $this->primaryKeyField);
         array_push($values, $this->sequenceValue);
         $insert->columns($columns);
         $insert->values($values);
         return $insert;
     }
-    
+
     public function postInsert(StatementInterface $statement, ResultInterface $result)
-    {        
+    {
         if ($this->sequenceValue !== null)
-            $this->tableGateway->lastInsertValue = $this->sequenceValue;        
+            $this->tableGateway->lastInsertValue = $this->sequenceValue;
     }
 
     /**

@@ -120,7 +120,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $parameterContainer->offsetSetReference('offsetForSum', 'offset');
         } else {
             array_push($sqls, ') b WHERE rownum <= ('
-                . (int) $this->offset 
+                . (int) $this->offset
                 . '+'
                 . (int) $this->limit
                 . ')) WHERE b_rownum >= ('

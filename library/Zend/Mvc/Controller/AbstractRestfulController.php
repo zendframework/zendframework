@@ -286,7 +286,7 @@ abstract class AbstractRestfulController extends AbstractController
             // HEAD
             case 'head':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if (!$id !== false) {
+                if ($id !== false) {
                     $id = null;
                 }
                 $action = 'head';
@@ -304,7 +304,7 @@ abstract class AbstractRestfulController extends AbstractController
             // PATCH
             case 'patch':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if (!$id !== false) {
+                if ($id === false) {
                     throw new Exception\DomainException('Missing identifier');
                 }
                 $data   = $this->processBodyContent($request);

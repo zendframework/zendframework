@@ -457,14 +457,15 @@ class DbTable extends AbstractAdapter
                 $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
                 return $this->_authenticateCreateAuthResult();
             }
-        }
-        if ($resultIdentity['zend_auth_credential_match'] != '1') {
-            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
-            $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
-            return $this->_authenticateCreateAuthResult();
-        }
+        } else {
+            if ($resultIdentity['zend_auth_credential_match'] != '1') {
+                $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
+                $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+                return $this->_authenticateCreateAuthResult();
+            }
 
-        unset($resultIdentity['zend_auth_credential_match']);
+            unset($resultIdentity['zend_auth_credential_match']);
+        }
         $this->resultRow = $resultIdentity;
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;

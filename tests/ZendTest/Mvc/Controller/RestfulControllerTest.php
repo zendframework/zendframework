@@ -366,4 +366,18 @@ class RestfulControllerTest extends TestCase
         $this->request->getHeaders()->addHeaderLine('Content-Type', $contentType);
         $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
     }
+
+    public function testDispatchViaPatchWithoutIdentifierRaisesException()
+    {
+        $entity = new stdClass;
+        $entity->name = 'foo';
+        $entity->type = 'standard';
+        $this->controller->entity = $entity;
+        $entity = array('name' => __FUNCTION__);
+        $string = http_build_query($entity);
+        $this->request->setMethod('PATCH')
+                      ->setContent($string);
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'identifier');
+        $result = $this->controller->dispatch($this->request, $this->response);
+    }
 }

@@ -439,11 +439,17 @@ class DbTable implements AdapterInterface
      */
     protected function _authenticateQuerySelect(DbSelect $dbSelect)
     {
+        $params = array($this->identity);
+
+        if (!is_callable($this->credentialValidationCallback)) {
+            array_unshift($params, $this->credential);
+        }
+
         $statement = $this->zendDb->createStatement();
         $dbSelect->prepareStatement($this->zendDb, $statement);
         $resultSet = new ResultSet();
         try {
-            $resultSet->initialize($statement->execute(array($this->credential, $this->identity)));
+            $resultSet->initialize($statement->execute($params));
             $resultIdentities = $resultSet->toArray();
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
@@ -500,14 +506,15 @@ class DbTable implements AdapterInterface
                 $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
                 return $this->_authenticateCreateAuthResult();
             }
-        }
-        if ($resultIdentity['zend_auth_credential_match'] != '1') {
-            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
-            $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
-            return $this->_authenticateCreateAuthResult();
-        }
+        } else {
+            if ($resultIdentity['zend_auth_credential_match'] != '1') {
+                $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
+                $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+                return $this->_authenticateCreateAuthResult();
+            }
 
-        unset($resultIdentity['zend_auth_credential_match']);
+            unset($resultIdentity['zend_auth_credential_match']);
+        }
         $this->resultRow = $resultIdentity;
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;

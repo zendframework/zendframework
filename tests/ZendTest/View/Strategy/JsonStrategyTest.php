@@ -288,4 +288,41 @@ class JsonStrategyTest extends TestCase
         $this->assertTrue($headers->has('content-type'));
         $this->assertContains('application/json; charset=utf-16', $headers->get('content-type')->getFieldValue());
     }
+
+    public function testCharsetIsUtf8ByDefault()
+    {
+        $this->assertEquals('utf-8', $this->strategy->getCharset());
+    }
+
+    public function testCharsetIsMutable()
+    {
+        $this->strategy->setCharset('iso-8859-1');
+        $this->assertEquals('iso-8859-1', $this->strategy->getCharset());
+    }
+
+    public function multibyteCharsets()
+    {
+        return array(
+            'utf-16' => array('utf-16'),
+            'utf-32' => array('utf-32'),
+        );
+    }
+
+    /**
+     * @dataProvider multibyteCharsets
+     */
+    public function testContentTransferEncodingHeaderSetToBinaryForSpecificMultibyteCharsets($charset)
+    {
+        $this->strategy->setCharset($charset);
+
+        $this->event->setResponse($this->response);
+        $this->event->setRenderer($this->renderer);
+        $this->event->setResult(json_encode(array('foo' => 'bar')));
+
+        $this->strategy->injectResponse($this->event);
+        $content = $this->response->getContent();
+        $headers = $this->response->getHeaders();
+        $this->assertTrue($headers->has('content-transfer-encoding'));
+        $this->assertEquals('BINARY', $headers->get('content-transfer-encoding')->getFieldValue());
+    }
 }

@@ -37,6 +37,16 @@ class JsonStrategy implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
+     * Multibyte character sets that will trigger a binary content-transfer-encoding
+     *
+     * @var array
+     */
+    protected $multibyteCharsets = array(
+        'UTF-16',
+        'UTF-32',
+    );
+
+    /**
      * @var JsonRenderer
      */
     protected $renderer;
@@ -92,6 +102,16 @@ class JsonStrategy implements ListenerAggregateInterface
     }
 
     /**
+     * Retrieve the current character set
+     *
+     * @return string
+     */
+    public function getCharset()
+    {
+        return $this->charset;
+    }
+
+    /**
      * Detect if we should use the JsonRenderer based on model type and/or
      * Accept header
      *
@@ -144,5 +164,9 @@ class JsonStrategy implements ListenerAggregateInterface
 
         $contentType .= '; charset=' . $this->charset;
         $headers->addHeaderLine('content-type', $contentType);
+
+        if (in_array(strtoupper($this->charset), $this->multibyteCharsets)) {
+            $headers->addHeaderLine('content-transfer-encoding', 'BINARY');
+        }
     }
 }

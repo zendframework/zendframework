@@ -17,6 +17,6 @@ namespace Zend\ModuleManager\Exception;
  * @package    Zend_ModuleManager
  * @subpackage Exception
  */
-class MissingDependencyModuleException extends \RuntimeException implements ExceptionInterface
+class MissingDependencyModuleException extends RuntimeException implements ExceptionInterface
 {
 }

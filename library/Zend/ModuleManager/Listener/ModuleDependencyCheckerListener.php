@@ -10,7 +10,7 @@
 
 namespace Zend\ModuleManager\Listener;
 
-use Zend\ModuleManager\Exception\MissingDependencyModuleException;
+use Zend\ModuleManager\Exception;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\ModuleEvent;
 
@@ -31,7 +31,7 @@ class ModuleDependencyCheckerListener
     /**
      * @param \Zend\ModuleManager\ModuleEvent $e
      *
-     * @throws \Zend\ModuleManager\Exception\MissingDependencyModuleException
+     * @throws Exception\MissingDependencyModuleException
      */
     public function __invoke(ModuleEvent $e)
     {
@@ -42,7 +42,7 @@ class ModuleDependencyCheckerListener
 
             foreach ($dependencies as $dependencyModule) {
                 if (!isset($this->loaded[$dependencyModule])) {
-                    throw new MissingDependencyModuleException(
+                    throw new Exception\MissingDependencyModuleException(
                         sprintf(
                             'Module "%s" depends on module "%s", which was not initialized before it',
                             $e->getModuleName(),

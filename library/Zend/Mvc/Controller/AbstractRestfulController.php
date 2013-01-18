@@ -155,6 +155,23 @@ abstract class AbstractRestfulController extends AbstractController
     }
 
     /**
+     * Replace an entire resource collection
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.1.0); instead, raises an exception if not implemented.
+     *
+     * @param  mixed $data
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function replaceList($data)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
+
+    /**
      * Update an existing resource
      *
      * @param  mixed $id
@@ -245,15 +262,15 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // DELETE
             case 'delete':
-                if (null === $id = $routeMatch->getParam('id')) {
-                    if (! ($id = $request->getQuery()->get('id', false))) {
-                        $action = 'deleteList';
-                        $return = $this->deleteList();
-                        break;
-                    }
+                $id = $this->getIdentifier($routeMatch, $request);
+                if ($id) {
+                    $action = 'delete';
+                    $return = $this->delete($id);
+                    break;
                 }
-                $action = 'delete';
-                $return = $this->delete($id);
+
+                $action = 'deleteList';
+                $return = $this->deleteList();
                 break;
             // GET
             case 'get':
@@ -301,8 +318,17 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // PUT
             case 'put':
-                $action = 'update';
-                $return = $this->processPutData($request, $routeMatch);
+                $id     = $this->getIdentifier($routeMatch, $request);
+                $data   = $this->processBodyContent($request);
+
+                if ($id) {
+                    $action = 'update';
+                    $return = $this->update($id, $data);
+                    break;
+                }
+
+                $action = 'replaceList';
+                $return = $this->replaceList($data);
                 break;
             // All others...
             default:
@@ -337,16 +363,15 @@ abstract class AbstractRestfulController extends AbstractController
      * @param Request $request
      * @param $routeMatch
      * @return mixed
-     * @throws Exception\DomainException
      */
     public function processPutData(Request $request, $routeMatch)
     {
-        $id = $this->getIdentifier($routeMatch, $request);
-        if (!$id) {
-            throw new Exception\DomainException('Missing identifier');
-        }
-
+        $id   = $this->getIdentifier($routeMatch, $request);
         $data = $this->processBodyContent($request);
+
+        if (!$id) {
+            return $this->replaceList($data);
+        }
 
         return $this->update($id, $data);
     }

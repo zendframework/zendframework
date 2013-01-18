@@ -90,6 +90,21 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals('update', $this->routeMatch->getParam('action'));
     }
 
+    public function testDispatchInvokesReplaceListMethodWhenNoActionPresentAndPutInvokedWithoutIdentifier()
+    {
+        $entities = array(
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+        );
+        $string = http_build_query($entities);
+        $this->request->setMethod('PUT')
+                      ->setContent($string);
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEquals($entities, $result);
+        $this->assertEquals('replaceList', $this->routeMatch->getParam('action'));
+    }
+
     public function testDispatchInvokesDeleteMethodWhenNoActionPresentAndDeleteInvokedWithIdentifier()
     {
         $entity = array('id' => 1, 'name' => __FUNCTION__);

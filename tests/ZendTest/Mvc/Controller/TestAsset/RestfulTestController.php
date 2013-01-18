@@ -112,6 +112,17 @@ class RestfulTestController extends AbstractRestfulController
     }
 
     /**
+     * Replace the entire resource collection
+     *
+     * @param  array|Traversable $items
+     * @return array|Traversable
+     */
+    public function replaceList($items)
+    {
+        return $items;
+    }
+
+    /**
      * Update an existing resource
      *
      * @param  mixed $id

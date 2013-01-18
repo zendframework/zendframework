@@ -39,8 +39,8 @@ class Captcha extends Element implements InputProviderInterface
     {
         parent::setOptions($options);
 
-        if (isset($options['captcha'])) {
-            $this->setCaptcha($options['captcha']);
+        if (isset($this->options['captcha'])) {
+            $this->setCaptcha($this->options['captcha']);
         }
 
         return $this;

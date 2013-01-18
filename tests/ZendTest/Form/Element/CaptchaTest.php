@@ -11,10 +11,12 @@
 namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use ArrayIterator;
 use ArrayObject;
 use Zend\Captcha;
 use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\Factory;
+use ZendTest\Form\TestAsset;
 
 class CaptchaTest extends TestCase
 {
@@ -106,5 +108,23 @@ class CaptchaTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
         $test = array_shift($inputSpec['validators']);
         $this->assertSame($captcha, $test);
+    }
+
+    /**
+     * @group 3446
+     */
+    public function testAllowsPassingTraversableOptionsToConstructor()
+    {
+        $options = new TestAsset\IteratorAggregate(new ArrayIterator(array(
+            'captcha' => array(
+                'class'   => 'dumb',
+                'options' => array(
+                    'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
+                ),
+            ),
+        )));
+        $element = new CaptchaElement('captcha', $options);
+        $captcha = $element->getCaptcha();
+        $this->assertInstanceOf('Zend\Captcha\Dumb', $captcha);
     }
 }

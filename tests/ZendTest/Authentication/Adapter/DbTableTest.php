@@ -92,6 +92,19 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->isValid());
     }
 
+
+     /**
+     * Ensures expected behavior for authentication success
+     */
+    public function testAuthenticateSuccessWithCallback()
+    {
+        $this->_adapter = new Adapter\DbTable($this->_db, 'users', 'username', 'password', null, function($a, $b){return $a === $b;});
+        $this->_adapter->setIdentity('my_username');
+        $this->_adapter->setCredential('my_password');
+        $result = $this->_adapter->authenticate();
+        $this->assertTrue($result->isValid());
+    }
+
     /**
      * Ensures expected behavior for for authentication failure
      * reason: Identity not found.

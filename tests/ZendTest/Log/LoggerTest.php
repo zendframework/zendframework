@@ -256,8 +256,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Logger::registerErrorHandler($this->logger));
         // check for single error handler instance
         $this->assertFalse(Logger::registerErrorHandler($this->logger));
+
         // generate a warning
-        echo $test;
+        echo $test; // $test is not defined
+
         Logger::unregisterErrorHandler();
         $this->assertEquals($writer->events[0]['message'], 'Undefined variable: test');
     }

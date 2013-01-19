@@ -37,6 +37,40 @@ class Logger implements LoggerInterface
     const DEBUG  = 7;
 
     /**
+     * Map native PHP errors to priority
+     *
+     * @var array
+     */
+    public static $errorPriorityMap = array(
+        E_NOTICE            => self::NOTICE,
+        E_USER_NOTICE       => self::NOTICE,
+        E_WARNING           => self::WARN,
+        E_CORE_WARNING      => self::WARN,
+        E_USER_WARNING      => self::WARN,
+        E_ERROR             => self::ERR,
+        E_USER_ERROR        => self::ERR,
+        E_CORE_ERROR        => self::ERR,
+        E_RECOVERABLE_ERROR => self::ERR,
+        E_STRICT            => self::DEBUG,
+        E_DEPRECATED        => self::DEBUG,
+        E_USER_DEPRECATED   => self::DEBUG
+    );
+
+    /**
+     * Registered error handler
+     *
+     * @var bool
+     */
+    protected static $registeredErrorHandler = false;
+
+    /**
+     * Registered exception handler
+     *
+     * @var bool
+    */
+    protected static $registeredExceptionHandler = false;
+
+    /**
      * List of priority code => priority (short) name
      *
      * @var array
@@ -79,20 +113,6 @@ class Logger implements LoggerInterface
      * @var ProcessorPluginManager
      */
     protected $processorPlugins;
-
-    /**
-     * Registered error handler
-     *
-     * @var bool
-     */
-    protected static $registeredErrorHandler = false;
-
-    /**
-     * Registered exception handler
-     *
-     * @var bool
-     */
-    protected static $registeredExceptionHandler = false;
 
     /**
      * Constructor
@@ -257,7 +277,6 @@ class Logger implements LoggerInterface
         $this->writers = $writers;
         return $this;
     }
-
 
     /**
      * Get processor plugin manager
@@ -488,54 +507,40 @@ class Logger implements LoggerInterface
     /**
      * Register logging system as an error handler to log PHP errors
      *
-     * @link http://www.php.net/manual/en/function.set-error-handler.php
+     * @link http://www.php.net/manual/function.set-error-handler.php
      * @param  Logger $logger
+     * @param  bool   $continueNativeHandler
      * @return bool
      * @throws Exception\InvalidArgumentException if logger is null
      */
-    public static function registerErrorHandler(Logger $logger)
+    public static function registerErrorHandler(Logger $logger, $continueNativeHandler = false)
     {
         // Only register once per instance
         if (static::$registeredErrorHandler) {
             return false;
         }
 
-        if ($logger === null) {
-            throw new Exception\InvalidArgumentException('Invalid Logger specified');
-        }
+        $handlerRet = !$continueNativeHandler;
+        set_error_handler(function ($level, $message, $file, $line, $context) use ($logger, $handlerRet) {
+            $iniLevel = error_reporting();
 
-        $errorHandlerMap = array(
-            E_NOTICE            => self::NOTICE,
-            E_USER_NOTICE       => self::NOTICE,
-            E_WARNING           => self::WARN,
-            E_CORE_WARNING      => self::WARN,
-            E_USER_WARNING      => self::WARN,
-            E_ERROR             => self::ERR,
-            E_USER_ERROR        => self::ERR,
-            E_CORE_ERROR        => self::ERR,
-            E_RECOVERABLE_ERROR => self::ERR,
-            E_STRICT            => self::DEBUG,
-            E_DEPRECATED        => self::DEBUG,
-            E_USER_DEPRECATED   => self::DEBUG
-        );
-
-        set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
-            $errorLevel = error_reporting();
-
-            if ($errorLevel & $errno) {
-                if (isset($errorHandlerMap[$errno])) {
-                    $priority = $errorHandlerMap[$errno];
+            if ($iniLevel & $level) {
+                if (isset(Logger::$errorPriorityMap[$level])) {
+                    $priority = Logger::$errorPriorityMap[$level];
                 } else {
                     $priority = Logger::INFO;
                 }
-                $logger->log($priority, $errstr, array(
-                    'errno' => $errno,
-                    'file' => $errfile,
-                    'line' => $errline,
-                    'context' => $errcontext
+                $logger->log($priority, $message, array(
+                    'errno'   => $level,
+                    'file'    => $file,
+                    'line'    => $line,
+                    'context' => $context
                 ));
             }
+
+            return $handlerRet;
         });
+
         static::$registeredErrorHandler = true;
         return true;
     }

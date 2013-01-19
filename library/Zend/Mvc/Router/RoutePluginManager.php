@@ -75,7 +75,7 @@ class RoutePluginManager extends AbstractPluginManager
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
+                $invokable
             ));
         }
 
@@ -85,7 +85,7 @@ class RoutePluginManager extends AbstractPluginManager
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName,
+                $invokable,
                 __NAMESPACE__
             ));
         }

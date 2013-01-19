@@ -11,16 +11,16 @@
 namespace Zend\Filter\Word;
 
 use Zend\Filter\Exception;
-use Zend\Filter\PregReplace as PregReplaceFilter;
+use Zend\Filter\AbstractFilter;
 
 /**
  * @category   Zend
  * @package    Zend_Filter
  */
-abstract class AbstractSeparator extends PregReplaceFilter
+abstract class AbstractSeparator extends AbstractFilter
 {
 
-    protected $separator = null;
+    protected $separator = ' ';
 
     /**
      * Constructor

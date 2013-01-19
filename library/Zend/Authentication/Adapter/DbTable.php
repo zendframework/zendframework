@@ -122,7 +122,7 @@ class DbTable implements AdapterInterface
      * @return \Zend\Authentication\Adapter\DbTable
      */
     public function __construct(DbAdapter $zendDb, $tableName = null, $identityColumn = null,
-                                $credentialColumn = null, $credentialTreatment = null, callable $credentialValidationCallback = null)
+                                $credentialColumn = null, $credentialTreatment = null, $credentialValidationCallback = null)
     {
         $this->zendDb = $zendDb;
 
@@ -212,7 +212,7 @@ class DbTable implements AdapterInterface
      * @param  callable $validationCallback
      * @return DbTable Provides a fluent interface
      */
-    public function setCredentialValidationCallback(callable $validationCallback)
+    public function setCredentialValidationCallback($validationCallback)
     {
         $this->credentialValidationCallback = $validationCallback;
         return $this;
@@ -418,7 +418,7 @@ class DbTable implements AdapterInterface
                 . $this->zendDb->getPlatform()->quoteIdentifier('zend_auth_credential_match')
             );
             $tableColumns[] = $credentialExpression;
-        } 
+        }
 
         // get select
         $dbSelect = clone $this->getDbSelect();

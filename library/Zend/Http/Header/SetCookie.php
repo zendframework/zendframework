@@ -11,6 +11,7 @@
 namespace Zend\Http\Header;
 
 use Closure;
+use Zend\Uri\UriFactory;
 
 /**
  * @throws Exception\InvalidArgumentException
@@ -510,7 +511,7 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Checks whether the cookie should be sent or not in a specific scenario
      *
-     * @param string|Zend\Uri $uri URI to check against (secure, domain, path)
+     * @param string|Zend\Uri\Uri $uri URI to check against (secure, domain, path)
      * @param boolean $matchSessionCookies Whether to send session cookies
      * @param int $now Override the current time when checking for expiry time
      * @return boolean
@@ -518,8 +519,8 @@ class SetCookie implements MultipleHeaderInterface
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
         if (is_string ($uri)) {
-            $uri = Zend\Uri\UriFactory::factory($uri);
-    }
+            $uri = UriFactory::factory($uri);
+        }
 
         // Make sure we have a valid Zend_Uri_Http object
         if (! ($uri->isValid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {

@@ -19,7 +19,7 @@ namespace Zend\Filter;
 class Decompress extends Compress
 {
     /**
-     * Defined by Zend_Filter_Filter
+     * Use filter as functor
      *
      * Decompresses the content $value with the defined settings
      *
@@ -27,6 +27,19 @@ class Decompress extends Compress
      * @return string The decompressed content
      */
     public function __invoke($value)
+    {
+        return $this->getAdapter()->decompress($value);
+    }
+
+    /**
+     * Defined by FilterInterface
+     *
+     * Decompresses the content $value with the defined settings
+     *
+     * @param  string $value Content to decompress
+     * @return string The decompressed content
+     */
+    public function filter($value)
     {
         return $this->getAdapter()->decompress($value);
     }

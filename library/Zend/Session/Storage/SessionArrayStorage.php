@@ -11,7 +11,9 @@
 namespace Zend\Session\Storage;
 
 use ArrayAccess;
+use ArrayIterator;
 use IteratorAggregate;
+use Zend\Session\Exception;
 
 /**
  * Session storage in $_SESSION

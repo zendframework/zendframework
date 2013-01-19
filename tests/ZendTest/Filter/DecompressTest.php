@@ -97,4 +97,18 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
         $content2 = $filter2($archive);
         $this->assertEquals('compress me', $content2);
     }
+
+    public function testFilterMethodProxiesToDecompress()
+    {
+        $filter   = new DecompressFilter('bz2');
+        $archive = __DIR__ . '/../_files/compressed.bz2';
+        $filter->setArchive($archive);
+
+        $content = $filter->compress('compress me');
+        $this->assertTrue($content);
+
+        $filter2  = new DecompressFilter('bz2');
+        $content2 = $filter2->filter($archive);
+        $this->assertEquals('compress me', $content2);
+    }
 }

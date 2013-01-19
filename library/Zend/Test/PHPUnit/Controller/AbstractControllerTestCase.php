@@ -18,6 +18,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\Mvc\SendResponseListener;
 use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\Parameters;
+use Zend\Stdlib\ResponseInterface;
 use Zend\Uri\Http as HttpUri;
 use Zend\View\Helper\Placeholder;
 
@@ -180,7 +181,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Get the application response object
-     * @return \Zend\Stdlib\ResponseInterface
+     * @return ResponseInterface
      */
     public function getResponse()
     {

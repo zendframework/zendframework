@@ -188,7 +188,7 @@ EOS;
         $file = new FileGenerator();
         $file->setUse('My\Baz')
              ->setUses(array(
-                 array('Your\Bar', 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
              ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz;', $generated);
@@ -216,8 +216,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-                 array('Your\Bar', 'bar'),
-                 array('Your\Bar', 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
         ));
         $generated = $file->generate();
         $this->assertSame(strpos($generated, 'use Your\\Bar as bar;'), strrpos($generated, 'use Your\\Bar as bar;'));
@@ -227,8 +227,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-                 array('Your\Bar', 'bar'),
-                 array('Your\Bar', 'bar2'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar2'),
         ));
         $generated = $file->generate();
         $this->assertContains('use Your\\Bar as bar;', $generated);
@@ -239,8 +239,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-                 array('Your\\Bar', 'bar'),
-                 array('My\\Baz', 'FooBaz')
+                 array('use' => 'Your\\Bar', 'as' => 'bar'),
+                 array('use' => 'My\\Baz', 'as' => 'FooBaz')
              ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz as FooBaz;', $generated);
@@ -253,7 +253,7 @@ EOS;
         $file->setUses(array(
             'Your\\Bar',
             'My\\Baz',
-            array('Another\\Baz', 'Baz2')
+            array('use' => 'Another\\Baz', 'as' => 'Baz2')
         ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz;', $generated);

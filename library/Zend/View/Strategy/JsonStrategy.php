@@ -25,9 +25,26 @@ use Zend\View\ViewEvent;
 class JsonStrategy implements ListenerAggregateInterface
 {
     /**
+     * Character set for associated content-type
+     *
+     * @var string
+     */
+    protected $charset = 'utf-8';
+
+    /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
+
+    /**
+     * Multibyte character sets that will trigger a binary content-transfer-encoding
+     *
+     * @var array
+     */
+    protected $multibyteCharsets = array(
+        'UTF-16',
+        'UTF-32',
+    );
 
     /**
      * @var JsonRenderer
@@ -70,6 +87,28 @@ class JsonStrategy implements ListenerAggregateInterface
                 unset($this->listeners[$index]);
             }
         }
+    }
+
+    /**
+     * Set the content-type character set
+     *
+     * @param  string $charset
+     * @return JsonStrategy
+     */
+    public function setCharset($charset)
+    {
+        $this->charset = (string) $charset;
+        return $this;
+    }
+
+    /**
+     * Retrieve the current character set
+     *
+     * @return string
+     */
+    public function getCharset()
+    {
+        return $this->charset;
     }
 
     /**
@@ -116,10 +155,18 @@ class JsonStrategy implements ListenerAggregateInterface
         $response = $e->getResponse();
         $response->setContent($result);
         $headers = $response->getHeaders();
+
         if ($this->renderer->hasJsonpCallback()) {
-            $headers->addHeaderLine('content-type', 'application/javascript');
+            $contentType = 'application/javascript';
         } else {
-            $headers->addHeaderLine('content-type', 'application/json');
+            $contentType = 'application/json';
+        }
+
+        $contentType .= '; charset=' . $this->charset;
+        $headers->addHeaderLine('content-type', $contentType);
+
+        if (in_array(strtoupper($this->charset), $this->multibyteCharsets)) {
+            $headers->addHeaderLine('content-transfer-encoding', 'BINARY');
         }
     }
 }

@@ -11,7 +11,6 @@
 namespace Zend\Config\Writer;
 
 use Traversable;
-use Zend\Config\Config;
 use Zend\Config\Exception;
 use Zend\Stdlib\ArrayUtils;
 
@@ -52,7 +51,14 @@ abstract class AbstractWriter implements WriterInterface
                 ), $error);
             }, E_WARNING
         );
-        file_put_contents($filename, $this->toString($config), $flags);
+
+        try {
+            file_put_contents($filename, $this->toString($config), $flags);
+        } catch( \Exception $e ) {
+            restore_error_handler();
+            throw $e;
+        }
+
         restore_error_handler();
     }
 

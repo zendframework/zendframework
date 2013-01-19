@@ -10,6 +10,7 @@
 
 namespace Zend\Stdlib;
 
+use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
 /**
@@ -44,6 +45,13 @@ abstract class StringUtils
         'CP-1251', 'CP-1252',
         // TODO
     );
+
+    /**
+     * Is PCRE compiled with Unicode support?
+     *
+     * @var bool
+     **/
+    protected static $hasPcreUnicodeSupport = null;
 
     /**
      * Get registered wrapper classes
@@ -166,5 +174,20 @@ abstract class StringUtils
     public static function isValidUtf8($str)
     {
         return is_string($str) && ($str === '' || preg_match('/^./su', $str) == 1);
+    }
+
+    /**
+     * Is PCRE compiled with Unicode support?
+     *
+     * @return bool
+     */
+    public static function hasPcreUnicodeSupport()
+    {
+        if (static::$hasPcreUnicodeSupport === null) {
+            ErrorHandler::start();
+            static::$hasPcreUnicodeSupport = defined('PREG_BAD_UTF8_OFFSET_ERROR') && preg_match('/\pL/u', 'a') == 1;
+            ErrorHandler::stop();
+        }
+        return static::$hasPcreUnicodeSupport;
     }
 }

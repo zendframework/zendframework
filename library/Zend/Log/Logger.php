@@ -53,7 +53,7 @@ class Logger implements LoggerInterface
         E_RECOVERABLE_ERROR => self::ERR,
         E_STRICT            => self::DEBUG,
         E_DEPRECATED        => self::DEBUG,
-        E_USER_DEPRECATED   => self::DEBUG
+        E_USER_DEPRECATED   => self::DEBUG,
     );
 
     /**
@@ -67,7 +67,7 @@ class Logger implements LoggerInterface
      * Registered exception handler
      *
      * @var bool
-    */
+     */
     protected static $registeredExceptionHandler = false;
 
     /**
@@ -534,7 +534,7 @@ class Logger implements LoggerInterface
                     'errno'   => $level,
                     'file'    => $file,
                     'line'    => $line,
-                    'context' => $context
+                    'context' => $context,
                 ));
             }
 

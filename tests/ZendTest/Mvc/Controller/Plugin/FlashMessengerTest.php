@@ -38,6 +38,9 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $helper->setSessionManager($this->session);
         $helper->addMessage('foo');
         $helper->addMessage('bar');
+        $helper->addInfoMessage('bar-info');
+        $helper->addSuccessMessage('bar-success');
+        $helper->addErrorMessage('bar-error');
         unset($helper);
     }
 
@@ -94,8 +97,24 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
     {
         $this->seedMessages();
         $this->assertTrue($this->helper->hasMessages());
+        $this->assertTrue($this->helper->hasInfoMessages());
+        $this->assertTrue($this->helper->hasSuccessMessages());
+        $this->assertTrue($this->helper->hasErrorMessages());
+
         $this->helper->clearMessages();
         $this->assertFalse($this->helper->hasMessages());
+        $this->assertTrue($this->helper->hasInfoMessages());
+        $this->assertTrue($this->helper->hasSuccessMessages());
+        $this->assertTrue($this->helper->hasErrorMessages());
+
+        $this->helper->clearMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $this->assertFalse($this->helper->hasInfoMessages());
+
+        $this->helper->clearMessagesFromContainer();
+        $this->assertFalse($this->helper->hasMessages());
+        $this->assertFalse($this->helper->hasInfoMessages());
+        $this->assertFalse($this->helper->hasSuccessMessages());
+        $this->assertFalse($this->helper->hasErrorMessages());
     }
 
     public function testCanRetrieveMessages()
@@ -106,14 +125,63 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($messages));
         $this->assertContains('foo', $messages);
         $this->assertContains('bar', $messages);
+
+        $messages = $this->helper->getInfoMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-info', $messages);
+
+        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-info', $messages);
+
+        $messages = $this->helper->getSuccessMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-success', $messages);
+
+        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::SUCCESS_MESSAGE);
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-success', $messages);
+
+        $messages = $this->helper->getErrorMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-error', $messages);
+
+        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::ERROR_MESSAGE);
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-error', $messages);
     }
 
     public function testCanRetrieveCurrentMessages()
     {
-        $this->helper->addMessage('foo');
+        $this->seedMessages();
         $messages = $this->helper->getCurrentMessages();
-        $this->assertEquals(1, count($messages));
+        $this->assertEquals(2, count($messages));
         $this->assertContains('foo', $messages);
+        $this->assertContains('bar', $messages);
+
+        $messages = $this->helper->getCurrentInfoMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-info', $messages);
+
+        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-info', $messages);
+
+        $messages = $this->helper->getCurrentSuccessMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-success', $messages);
+
+        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::SUCCESS_MESSAGE);
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-success', $messages);
+
+        $messages = $this->helper->getCurrentErrorMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-error', $messages);
+
+        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::ERROR_MESSAGE);
+        $this->assertEquals(1, count($messages));
+        $this->assertContains('bar-error', $messages);
     }
 
     public function testCanClearCurrentMessages()
@@ -122,6 +190,27 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->helper->hasCurrentMessages());
         $this->helper->clearCurrentMessages();
         $this->assertFalse($this->helper->hasCurrentMessages());
+
+        $this->seedMessages();
+        $this->assertTrue($this->helper->hasCurrentMessages());
+        $this->assertTrue($this->helper->hasCurrentInfoMessages());
+        $this->assertTrue($this->helper->hasCurrentSuccessMessages());
+        $this->assertTrue($this->helper->hasCurrentErrorMessages());
+
+        $this->helper->clearCurrentMessages();
+        $this->assertFalse($this->helper->hasCurrentMessages());
+        $this->assertTrue($this->helper->hasCurrentInfoMessages());
+        $this->assertTrue($this->helper->hasCurrentSuccessMessages());
+        $this->assertTrue($this->helper->hasCurrentErrorMessages());
+
+        $this->helper->clearCurrentMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $this->assertFalse($this->helper->hasCurrentInfoMessages());
+
+        $this->helper->clearCurrentMessagesFromContainer();
+        $this->assertFalse($this->helper->hasCurrentMessages());
+        $this->assertFalse($this->helper->hasCurrentInfoMessages());
+        $this->assertFalse($this->helper->hasCurrentSuccessMessages());
+        $this->assertFalse($this->helper->hasCurrentErrorMessages());
     }
 
     public function testIterationOccursOverMessages()

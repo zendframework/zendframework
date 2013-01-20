@@ -60,6 +60,26 @@ class Stream extends Response
     protected $cleanup;
 
     /**
+     * Set content length
+     *
+     * @param int $contentLength
+     */
+    public function setContentLength($contentLength = null)
+    {
+        $this->contentLength = $contentLength;
+    }
+
+    /**
+     * Get content length
+     *
+     * @return int
+     */
+    public function getContentLength()
+    {
+        return $this->contentLength;
+    }
+
+    /**
      * Get the response as stream
      *
      * @return resource

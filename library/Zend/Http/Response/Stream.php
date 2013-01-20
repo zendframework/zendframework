@@ -72,7 +72,7 @@ class Stream extends Response
     /**
      * Get content length
      *
-     * @return int
+     * @return int|null
      */
     public function getContentLength()
     {
@@ -202,12 +202,12 @@ class Stream extends Response
         $headers = $response->getHeaders();
         foreach ($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
-                $response->contentLength = (int) $header->getFieldValue();
-                if (strlen($response->content) > $response->contentLength) {
+                $response->setContentLength((int) $header->getFieldValue());
+                if (strlen($response->content) > $response->getContentLength()) {
                     throw new Exception\OutOfRangeException(sprintf(
                         'Too much content was extracted from the stream (%d instead of %d bytes)',
                         strlen($response->content),
-                        $response->contentLength
+                        $response->getContentLength()
                     ));
                 }
                 break;
@@ -262,8 +262,9 @@ class Stream extends Response
      */
     protected function readStream()
     {
-        if (!is_null($this->contentLength)) {
-            $bytes =  $this->contentLength - $this->contentStreamed;
+        $contentLength = $this->getContentLength();
+        if (!is_null($contentLength)) {
+            $bytes =  $contentLength - $this->contentStreamed;
         } else {
             $bytes = -1; //Read the whole buffer
         }
@@ -275,7 +276,7 @@ class Stream extends Response
         $this->content         .= stream_get_contents($this->stream, $bytes);
         $this->contentStreamed += strlen($this->content);
 
-        if ($this->contentLength == $this->contentStreamed) {
+        if ($this->getContentLength() == $this->contentStreamed) {
             $this->stream = null;
         }
     }

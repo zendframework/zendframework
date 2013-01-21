@@ -84,6 +84,7 @@ class Oci8 implements DriverInterface
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this); // needs access to driver to createResult()
+        return $this;
     }
 
     /**
@@ -102,6 +103,7 @@ class Oci8 implements DriverInterface
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+        return $this;
     }
 
     /**
@@ -157,6 +159,10 @@ class Oci8 implements DriverInterface
         } else {
             if (is_string($sqlOrResource)) {
                 $statement->setSql($sqlOrResource);
+            } elseif ($sqlOrResource !== null) {
+                throw new Exception\InvalidArgumentException(
+                    'Oci8 only accepts an SQL string or a oci8 resource in ' . __FUNCTION__
+                );
             }
             if (!$this->connection->isConnected()) {
                 $this->connection->connect();

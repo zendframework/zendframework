@@ -105,6 +105,7 @@ class Statement implements StatementInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -187,6 +188,7 @@ class Statement implements StatementInterface
         }
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**

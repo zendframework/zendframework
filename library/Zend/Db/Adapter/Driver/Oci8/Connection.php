@@ -104,7 +104,11 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
-        // @todo
+        $query = "SELECT sys_context('USERENV', 'DB_NAME') as \"database_name\" FROM DUAL";
+        $stmt = oci_parse($this->resource, $query);
+        oci_execute($stmt);
+        $dbNameArray = oci_fetch_array($stmt, OCI_ASSOC);
+        return $dbNameArray['database_name'];
     }
 
     /**
@@ -177,6 +181,7 @@ class Connection implements ConnectionInterface
                 new Exception\ErrorException($e['message'], $e['code'])
             );
         }
+        return $this;
     }
 
     /**

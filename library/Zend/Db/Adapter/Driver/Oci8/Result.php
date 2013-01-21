@@ -94,6 +94,16 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * Is the result buffered?
+     *
+     * @return bool
+     */
+    public function isBuffered()
+    {
+        return false;
+    }
+
+    /**
      * Return the resource
      * @return mixed
      */

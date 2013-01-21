@@ -11,6 +11,7 @@
 namespace ZendTest\Stdlib;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringUtils;
 
 class StringUtilsTest extends TestCase
@@ -146,5 +147,14 @@ class StringUtilsTest extends TestCase
     public function testIsValidUtf8($str, $valid)
     {
         $this->assertSame($valid, StringUtils::isValidUtf8($str));
+    }
+
+    public function testHasPcreUnicodeSupport()
+    {
+        ErrorHandler::start();
+        $expected = defined('PREG_BAD_UTF8_OFFSET_ERROR') && preg_match('/\pL/u', 'a') == 1;
+        ErrorHandler::stop();
+
+        $this->assertSame($expected, StringUtils::hasPcreUnicodeSupport());
     }
 }

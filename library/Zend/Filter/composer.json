@@ -22,6 +22,7 @@
         "zendframework/zend-i18n": "Zend\\I18n component",
         "zendframework/zend-uri": "Zend\\Uri component for UriNormalize filter",
         "zendframework/zend-validator": "Zend\\Validator component",
-        "zendframework/zend-crypt": "Zend\\Crypt component"
+        "zendframework/zend-crypt": "Zend\\Crypt component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component"
     }
 }

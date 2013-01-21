@@ -60,6 +60,26 @@ class Stream extends Response
     protected $cleanup;
 
     /**
+     * Set content length
+     *
+     * @param int $contentLength
+     */
+    public function setContentLength($contentLength = null)
+    {
+        $this->contentLength = $contentLength;
+    }
+
+    /**
+     * Get content length
+     *
+     * @return int|null
+     */
+    public function getContentLength()
+    {
+        return $this->contentLength;
+    }
+
+    /**
      * Get the response as stream
      *
      * @return resource
@@ -182,12 +202,13 @@ class Stream extends Response
         $headers = $response->getHeaders();
         foreach ($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
-                $response->contentLength = (int) $header->getFieldValue();
-                if (strlen($response->content) > $response->contentLength) {
+                $response->setContentLength((int) $header->getFieldValue());
+                $contentLength = $response->getContentLength();
+                if (strlen($response->content) > $contentLength) {
                     throw new Exception\OutOfRangeException(sprintf(
                         'Too much content was extracted from the stream (%d instead of %d bytes)',
                         strlen($response->content),
-                        $response->contentLength
+                        $contentLength
                     ));
                 }
                 break;
@@ -242,10 +263,11 @@ class Stream extends Response
      */
     protected function readStream()
     {
-        if (!is_null($this->contentLength)) {
-            $bytes =  $this->contentLength - $this->contentStreamed;
+        $contentLength = $this->getContentLength();
+        if (null !== $contentLength) {
+            $bytes = $contentLength - $this->contentStreamed;
         } else {
-            $bytes = -1; //Read the whole buffer
+            $bytes = -1; // Read the whole buffer
         }
 
         if (!is_resource($this->stream) || $bytes == 0) {
@@ -255,7 +277,7 @@ class Stream extends Response
         $this->content         .= stream_get_contents($this->stream, $bytes);
         $this->contentStreamed += strlen($this->content);
 
-        if ($this->contentLength == $this->contentStreamed) {
+        if ($this->getContentLength() == $this->contentStreamed) {
             $this->stream = null;
         }
     }

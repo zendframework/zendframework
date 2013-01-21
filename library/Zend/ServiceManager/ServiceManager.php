@@ -223,7 +223,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @return ServiceManager
      * @throws Exception\InvalidServiceNameException
      */
-    public function setInvokableClass($name, $invokableClass, $shared = true)
+    public function setInvokableClass($name, $invokableClass, $shared = null)
     {
         $cName = $this->canonicalizeName($name);
 
@@ -235,6 +235,10 @@ class ServiceManager implements ServiceLocatorInterface
                 ));
             }
             $this->unregisterService($cName);
+        }
+        
+        if ($shared === null) {
+            $shared = $this->shareByDefault();
         }
 
         $this->invokableClasses[$cName] = $invokableClass;
@@ -253,7 +257,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\InvalidServiceNameException
      */
-    public function setFactory($name, $factory, $shared = true)
+    public function setFactory($name, $factory, $shared = null)
     {
         $cName = $this->canonicalizeName($name);
 
@@ -273,6 +277,10 @@ class ServiceManager implements ServiceLocatorInterface
             $this->unregisterService($cName);
         }
 
+        if ($shared === null) {
+            $shared = $this->shareByDefault();
+        }
+        
         $this->factories[$cName] = $factory;
         $this->shared[$cName]    = (bool) $shared;
 
@@ -352,7 +360,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @return ServiceManager
      * @throws Exception\InvalidServiceNameException
      */
-    public function setService($name, $service, $shared = true)
+    public function setService($name, $service, $shared = null)
     {
         $cName = $this->canonicalizeName($name);
 
@@ -367,6 +375,10 @@ class ServiceManager implements ServiceLocatorInterface
             $this->unregisterService($cName);
         }
 
+        if ($shared === null) {
+            $shared = $this->shareByDefault();
+        }
+        
         $this->instances[$cName] = $service;
         $this->shared[$cName]    = (bool) $shared;
         return $this;
@@ -458,7 +470,10 @@ class ServiceManager implements ServiceLocatorInterface
             ));
         }
 
-        if ($this->shareByDefault() && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)) {
+        if (
+            ($this->shareByDefault() && !isset($this->shared[$cName]))
+            || (isset($this->shared[$cName]) && $this->shared[$cName] === true)
+        ) {
             $this->instances[$cName] = $instance;
         }
 

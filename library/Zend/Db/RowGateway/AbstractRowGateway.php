@@ -353,4 +353,21 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         }
     }
 
+    /**
+     * Set all Data in the row from a Array
+     *
+     * @param array $data
+     * @return AbstractRowGateway
+     */
+    public function setFromArray(array $data)
+    {
+        $data = array_intersect_key($data, $this->data);
+
+        foreach ($data as $columnName => $value) {
+            $this->offsetSet($columnName, $value);
+        }
+
+        return $this;
+    }
+
 }

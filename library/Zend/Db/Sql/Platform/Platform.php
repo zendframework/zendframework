@@ -36,7 +36,7 @@ class Platform extends AbstractPlatform
             case 'oracle':
                 $platform = new Oracle\Oracle();
                 $this->decorators = $platform->decorators;
-                break;    
+                break;
             default:
         }
     }

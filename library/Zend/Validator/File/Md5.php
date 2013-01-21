@@ -30,7 +30,7 @@ class Md5 extends Hash
      */
     protected $messageTemplates = array(
         self::DOES_NOT_MATCH => "File '%value%' does not match the given md5 hashes",
-        self::NOT_DETECTED   => "An md5 hash could not be evaluated for the given file",
+        self::NOT_DETECTED   => "An md5 hash could not be evaluated for the given file.",
         self::NOT_FOUND      => "File '%value%' is not readable or does not exist",
     );
 

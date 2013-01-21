@@ -210,8 +210,8 @@ class DbTable implements AdapterInterface
      * setCredentialValidationCallback() - allows the developer to use a callback as a way of checking the
      * credential.
      *
-     * @param type $validationCallback
-     * @return \Zend\Authentication\Adapter\DbTable
+     * @param callable $validationCallback
+     * @return DbTable
      * @throws Exception\InvalidArgumentException
      */
     public function setCredentialValidationCallback($validationCallback)

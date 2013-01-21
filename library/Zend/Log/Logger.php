@@ -510,7 +510,7 @@ class Logger implements LoggerInterface
      * @link http://www.php.net/manual/function.set-error-handler.php
      * @param  Logger $logger
      * @param  bool   $continueNativeHandler
-     * @return bool
+     * @return mixed  Returns result of set_error_handler
      * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerErrorHandler(Logger $logger, $continueNativeHandler = false)
@@ -520,29 +520,30 @@ class Logger implements LoggerInterface
             return false;
         }
 
-        $handlerRet = !$continueNativeHandler;
-        set_error_handler(function ($level, $message, $file, $line, $context) use ($logger, $handlerRet) {
-            $iniLevel = error_reporting();
+        $previous = set_error_handler(
+            function ($level, $message, $file, $line, $context) use ($logger, $continueNativeHandler) {
+                $iniLevel = error_reporting();
 
-            if ($iniLevel & $level) {
-                if (isset(Logger::$errorPriorityMap[$level])) {
-                    $priority = Logger::$errorPriorityMap[$level];
-                } else {
-                    $priority = Logger::INFO;
+                if ($iniLevel & $level) {
+                    if (isset(Logger::$errorPriorityMap[$level])) {
+                        $priority = Logger::$errorPriorityMap[$level];
+                    } else {
+                        $priority = Logger::INFO;
+                    }
+                    $logger->log($priority, $message, array(
+                        'errno'   => $level,
+                        'file'    => $file,
+                        'line'    => $line,
+                        'context' => $context,
+                    ));
                 }
-                $logger->log($priority, $message, array(
-                    'errno'   => $level,
-                    'file'    => $file,
-                    'line'    => $line,
-                    'context' => $context,
-                ));
-            }
 
-            return $handlerRet;
-        });
+                return !$continueNativeHandler;
+            }
+        );
 
         static::$registeredErrorHandler = true;
-        return true;
+        return $previous;
     }
 
     /**

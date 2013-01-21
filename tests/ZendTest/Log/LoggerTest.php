@@ -253,7 +253,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
 
-        $this->assertTrue(Logger::registerErrorHandler($this->logger));
+        $previous = Logger::registerErrorHandler($this->logger);
+        $this->assertNotNull($previous);
+        $this->assertTrue(false !== $previous);
+
         // check for single error handler instance
         $this->assertFalse(Logger::registerErrorHandler($this->logger));
 

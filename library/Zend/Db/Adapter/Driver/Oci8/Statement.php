@@ -120,12 +120,19 @@ class Statement implements StatementInterface
     /**
      * Set resource
      *
-     * @param  \mysqli_stmt $mysqliStatement
+     * @param  resource $oci8Statement
      * @return Statement
      */
-    public function setResource(\mysqli_stmt $mysqliStatement)
+    public function setResource($oci8Statement)
     {
-        $this->resource = $mysqliStatement;
+        $type = oci_statement_type($oci8Statement);
+        if (false === $type || 'UNKNOWN' == $type) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid statement provided to %s',
+                __METHOD__
+            ));
+        }
+        $this->resource = $oci8Statement;
         $this->isPrepared = true;
         return $this;
     }

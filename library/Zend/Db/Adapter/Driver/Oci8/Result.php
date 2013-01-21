@@ -137,7 +137,7 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
-     * Load from mysqli result
+     * Load from oci8 result
      *
      * @return boolean
      */

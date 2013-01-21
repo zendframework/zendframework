@@ -44,7 +44,7 @@ class Oci8 implements DriverInterface
     );
 
     /**
-     * @param array|Connection|\mysqli $connection
+     * @param array|Connection|\oci8 $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
      * @param array $options
@@ -66,7 +66,7 @@ class Oci8 implements DriverInterface
      * Register connection
      *
      * @param  Connection $connection
-     * @return Mysqli
+     * @return Oci8
      */
     public function registerConnection(Connection $connection)
     {

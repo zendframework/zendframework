@@ -54,7 +54,7 @@ class Connection implements ConnectionInterface
     {
         if (is_array($connectionInfo)) {
             $this->setConnectionParameters($connectionInfo);
-        } elseif ($connectionInfo instanceof \mysqli) {
+        } elseif ($connectionInfo instanceof \oci8) {
             $this->setResource($connectionInfo);
         } elseif (null !== $connectionInfo) {
             throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a oci8 resource or null');
@@ -125,7 +125,7 @@ class Connection implements ConnectionInterface
     /**
      * Get resource
      *
-     * @return \mysqli
+     * @return \oci8
      */
     public function getResource()
     {

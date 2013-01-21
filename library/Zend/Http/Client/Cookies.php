@@ -10,10 +10,11 @@
 
 namespace Zend\Http\Client;
 
+use ArrayIterator;
 use Traversable;
 use Zend\Http\Header\SetCookie;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Response;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 
 /**
@@ -259,7 +260,7 @@ class Cookies
                 }
             }
             return $ret;
-        } elseif ($ptr instanceof Cookie) {
+        } elseif ($ptr instanceof SetCookie) {
             switch ($retAs) {
                 case self::COOKIE_STRING_ARRAY:
                     return array($ptr->__toString());
@@ -290,7 +291,7 @@ class Cookies
         $ret = array();
 
         foreach (array_keys($this->cookies) as $cdom) {
-            if (Cookie::matchCookieDomain($cdom, $domain)) {
+            if (SetCookie::matchCookieDomain($cdom, $domain)) {
                 $ret[$cdom] = $this->cookies[$cdom];
             }
         }
@@ -311,7 +312,7 @@ class Cookies
 
         foreach ($domains as $dom => $pathsArray) {
             foreach (array_keys($pathsArray) as $cpath) {
-                if (Cookie::matchCookiePath($cpath, $path)) {
+                if (SetCookie::matchCookiePath($cpath, $path)) {
                     if (! isset($ret[$dom])) {
                         $ret[$dom] = array();
                     }

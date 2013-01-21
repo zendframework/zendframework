@@ -11,7 +11,9 @@
 namespace Zend\Stdlib\Hydrator;
 
 use ReflectionMethod;
+use Traversable;
 use Zend\Stdlib\Exception;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\Filter\FilterProviderInterface;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;

@@ -48,7 +48,7 @@ class ServerIntrospection
 
         try {
             $signatures = $this->getSignatureForEachMethodByMulticall($methods);
-        } catch (FaultException $e) {
+        } catch (Exception\FaultException $e) {
             // degrade to looping
         }
 

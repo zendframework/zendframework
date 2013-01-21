@@ -110,7 +110,7 @@ class MongoDB extends AbstractWriter
     protected function doWrite(array $event)
     {
         if (null === $this->mongoCollection) {
-            throw new RuntimeException('MongoCollection must be defined');
+            throw new Exception\RuntimeException('MongoCollection must be defined');
         }
 
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {

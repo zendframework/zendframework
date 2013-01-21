@@ -105,6 +105,19 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->isValid());
     }
 
+
+    /**
+     * Ensures expected behavior for an invalid callback
+     */
+    public function testAuthenticateCallbackThrowsException()
+    {
+        $this->setExpectedException(
+            'Zend\Authentication\Adapter\Exception\InvalidArgumentException',
+            'Invalid callback provided'
+        );
+        $this->_adapter->setCredentialValidationCallback('This is not a valid callback');
+    }
+
     /**
      * Ensures expected behavior for for authentication failure
      * reason: Identity not found.

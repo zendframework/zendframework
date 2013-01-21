@@ -205,15 +205,20 @@ class DbTable implements AdapterInterface
         $this->credentialTreatment = $treatment;
         return $this;
     }
+
     /**
      * setCredentialValidationCallback() - allows the developer to use a callback as a way of checking the
      * credential.
      *
-     * @param  callable $validationCallback
-     * @return DbTable Provides a fluent interface
+     * @param type $validationCallback
+     * @return \Zend\Authentication\Adapter\DbTable
+     * @throws Exception\InvalidArgumentException
      */
     public function setCredentialValidationCallback($validationCallback)
     {
+        if (!is_callable($validationCallback)) {
+            throw new Exception\InvalidArgumentException('Invalid callback provided');
+        }
         $this->credentialValidationCallback = $validationCallback;
         return $this;
     }

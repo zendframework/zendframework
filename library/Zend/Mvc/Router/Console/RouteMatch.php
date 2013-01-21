@@ -77,10 +77,10 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Merge parameters from another match.
      *
-     * @param  self $match
-     * @return self
+     * @param  RouteMatch $match
+     * @return RouteMatch
      */
-    public function merge(self $match)
+    public function merge(RouteMatch $match)
     {
         $this->params  = array_merge($this->params, $match->getParams());
         $this->length += $match->getLength();

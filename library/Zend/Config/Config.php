@@ -343,7 +343,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * @param  Config $merge
      * @return Config
      */
-    public function merge(self $merge)
+    public function merge(Config $merge)
     {
         /** @var Config $value */
         foreach ($merge as $key => $value) {

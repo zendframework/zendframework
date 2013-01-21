@@ -263,24 +263,4 @@ class AbstractRowGatewayTest extends \PHPUnit_Framework_TestCase
             $refRowGatewayProp->setValue($this->rowGateway, $rgPropertyValue);
         }
     }
-    /**
-     * @covers Zend\Db\RowGateway\RowGateway::setFromArray
-     */
-    public function testsetFromArray()
-    {
-        $this->rowGateway = $this->getMockForAbstractClass( 'Zend\Db\RowGateway\AbstractRowGateway');
-
-        $mockSql = $this->getMockForAbstractClass('\Zend\Db\Sql\Sql', array( $this->mockAdapter ));
-
-        $rgPropertyValues = array(
-            'primaryKeyColumn' => "id",
-            'table' => 'foo',
-            'sql'   => $mockSql
-         );
-        $this->setRowGatewayState($rgPropertyValues);
-        $this->rowGateway->populate(array("id" => 4, "name" => "Zender"));
-        $this->rowGateway->setFromArray(array("name" => "Zender Version2"));
-
-        $this->assertEquals("Zender Version2", $this->rowGateway->offsetGet( "name" ));
-    }
 }

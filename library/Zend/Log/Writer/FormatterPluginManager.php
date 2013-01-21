@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
@@ -14,10 +13,6 @@ use Zend\ServiceManager\AbstractPluginManager;
 use Zend\Log\Formatter;
 use Zend\Log\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- */
 class FormatterPluginManager extends AbstractPluginManager
 {
     /**

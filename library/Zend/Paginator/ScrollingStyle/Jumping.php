@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator\ScrollingStyle;
@@ -16,9 +15,6 @@ use Zend\Paginator\Paginator;
  * A scrolling style in which the cursor advances to the upper bound
  * of the page range, the page range "jumps" to the next section, and
  * the cursor moves back to the beginning of the range.
- *
- * @category   Zend
- * @package    Zend_Paginator
  */
 class Jumping implements ScrollingStyleInterface
 {

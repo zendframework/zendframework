@@ -12,11 +12,6 @@ namespace Zend\Log\Processor;
 
 use Zend\Console\Console;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Processor
- */
 class RequestId implements ProcessorInterface
 {
     /**

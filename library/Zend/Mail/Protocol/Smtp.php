@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Protocol;
@@ -14,10 +13,6 @@ namespace Zend\Mail\Protocol;
  * SMTP implementation of Zend\Mail\Protocol\AbstractProtocol
  *
  * Minimum implementation according to RFC2821: EHLO, MAIL FROM, RCPT TO, DATA, RSET, NOOP, QUIT
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Protocol
  */
 class Smtp extends AbstractProtocol
 {

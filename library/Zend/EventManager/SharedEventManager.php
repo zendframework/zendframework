@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager;
@@ -19,9 +18,6 @@ use Zend\Stdlib\PriorityQueue;
  * Allows attaching to EMs composed by other classes without having an instance first.
  * The assumption is that the SharedEventManager will be injected into EventManager
  * instances, and then queried for additional listeners when triggering an event.
- *
- * @category   Zend
- * @package    Zend_EventManager
  */
 class SharedEventManager implements
     SharedEventAggregateAwareInterface,

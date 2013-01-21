@@ -10,11 +10,6 @@
 
 namespace Zend\Log\Processor;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Processor
- */
 class Backtrace implements ProcessorInterface
 {
     /**

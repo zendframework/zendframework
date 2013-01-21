@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace Zend\Session\Storage;
@@ -20,10 +19,6 @@ use Zend\Session\Exception;
  *
  * Replaces the $_SESSION superglobal with an ArrayObject that allows for
  * property access, metadata storage, locking, and immutability.
- *
- * @category   Zend
- * @package    Zend_Session
- * @subpackage Storage
  */
 class SessionArrayStorage implements IteratorAggregate, StorageInterface
 {

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc;
@@ -38,9 +37,6 @@ use Zend\Stdlib\ArrayUtils;
  *
  * The return value of dispatching the controller is placed into the result
  * property of the MvcEvent, and returned.
- *
- * @category   Zend
- * @package    Zend_Mvc
  */
 class DispatchListener implements ListenerAggregateInterface
 {

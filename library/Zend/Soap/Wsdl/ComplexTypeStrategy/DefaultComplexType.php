@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
@@ -14,10 +13,6 @@ use Zend\Soap\Exception;
 
 /**
  * Zend_Soap_Wsdl_Strategy_DefaultComplexType
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage WSDL
  */
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
@@ -15,10 +14,6 @@ namespace Zend\Http\Client\Adapter;
  *
  * These classes are used as connectors for Zend_Http_Client, performing the
  * tasks of connecting, writing, reading and closing connection to the server.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
  */
 interface AdapterInterface
 {

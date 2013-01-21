@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\I18n\View\Helper;
@@ -25,10 +24,6 @@ use Zend\View\Helper\AbstractHelper;
  * However, you can find most of the up-to-date plural rules for most languages in those links:
  *      - http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
  *      - https://developer.mozilla.org/en-US/docs/Localization_and_Plurals
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage View
  */
 class Plural extends AbstractHelper
 {

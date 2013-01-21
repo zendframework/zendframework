@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt\Key\Derivation;
@@ -15,8 +14,6 @@ use Zend\Crypt\Key\Derivation\Pbkdf2;
 /**
  * Scrypt key derivation function
  *
- * @category Zend
- * @package  Zend_Crypt
  * @see      http://www.tarsnap.com/scrypt.html
  * @see      https://tools.ietf.org/html/draft-josefsson-scrypt-kdf-01
  */

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Annotation;
@@ -24,10 +23,6 @@ use Zend\EventManager\EventManagerInterface;
  * annotation content, and the raw annotation string; the first listener to
  * return an object will halt execution of the event, and that object will be
  * returned as the annotation.
- *
- * @category   Zend
- * @package    Zend_Code
- * @subpackage Annotation
  */
 class AnnotationManager implements EventManagerAwareInterface
 {

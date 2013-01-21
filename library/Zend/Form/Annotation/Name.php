@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
@@ -17,8 +16,6 @@ namespace Zend\Form\Annotation;
  * when building the form, element, or input. The value should be a string.
  *
  * @Annotation
- * @package    Zend_Form
- * @subpackage Annotation
  */
 class Name extends AbstractStringAnnotation
 {

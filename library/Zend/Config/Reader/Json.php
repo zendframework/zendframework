@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Config
  */
 
 namespace Zend\Config\Reader;
@@ -16,10 +15,6 @@ use Zend\Json\Json as JsonFormat;
 
 /**
  * JSON config reader.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage Reader
  */
 class Json implements ReaderInterface
 {

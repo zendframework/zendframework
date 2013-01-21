@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
@@ -22,11 +21,6 @@ use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\TaggableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- */
 class Memory extends AbstractAdapter implements
     AvailableSpaceCapableInterface,
     ClearByPrefixInterface,

@@ -303,7 +303,7 @@ abstract class AbstractValidator implements
         ) {
             $value = get_class($value) . ' object';
         } elseif (is_array($value)) {
-            $value = '[' . implode(', ', $value) . ']';
+            $value = var_export($value, 1);
         } else {
             $value = (string) $value;
         }

@@ -223,6 +223,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
             $variables = $model->getVariables();
             if ($allow) {
+                $this->assertTrue($variables['display_exceptions']);
                 $this->assertTrue(isset($variables['exception']));
                 $this->assertSame($exception, $variables['exception']);
             } else {

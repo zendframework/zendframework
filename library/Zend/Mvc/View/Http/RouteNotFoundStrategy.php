@@ -276,6 +276,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             return;
         }
 
+        $model->setVariable('display_exceptions', true);
+
         $exception = $e->getParam('exception', false);
         if (!$exception instanceof \Exception) {
             return;

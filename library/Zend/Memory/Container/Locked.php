@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Memory
  */
 
 namespace Zend\Memory\Container;
@@ -14,9 +13,6 @@ namespace Zend\Memory\Container;
  * Memory value container
  *
  * Locked (always stored in memory).
- *
- * @category   Zend
- * @package    Zend_Memory
  */
 class Locked extends AbstractContainer
 {

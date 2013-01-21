@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib\Hydrator\Strategy;
@@ -14,11 +13,6 @@ use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter;
 use Zend\Serializer\Serializer as SerializerFactory;
 
-/**
- * @category   Zend
- * @package    Zend_Stdlib_Hydrator
- * @subpackage Strategy
- */
 class SerializableStrategy implements StrategyInterface
 {
     /**

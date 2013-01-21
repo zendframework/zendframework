@@ -5,16 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Hostname;
 
 /**
  * Resource file for japanese idn validation
- *
- * @category   Zend
- * @package    Zend_Validator
  */
 return array(
     1  => '/^[\x{002d}0-9a-z\x{3005}-\x{3007}\x{3041}-\x{3093}\x{309D}\x{309E}' .

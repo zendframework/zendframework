@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Header;
@@ -26,9 +25,6 @@ use Zend\Uri\Uri;
  * Note for 'Location' header:
  * While RFC 1945 requires an absolute URI, most of the browsers also support relative URI
  * This class allows relative URIs, and let user retrieve URI instance if strict validation needed
- *
- * @category   Zend
- * @package    Zend_Http
  */
 abstract class AbstractLocation implements HeaderInterface
 {

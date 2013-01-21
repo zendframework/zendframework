@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter\File;
@@ -15,9 +14,6 @@ use Zend\Filter\Exception;
 
 /**
  * Decrypts a given file and stores the decrypted file content
- *
- * @category   Zend
- * @package    Zend_Filter
  */
 class Decrypt extends Filter\Decrypt
 {

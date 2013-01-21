@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Dom
  */
 
 namespace Zend\Dom;
@@ -19,9 +18,6 @@ use ArrayAccess;
 
 /**
  * Nodelist for DOM XPath query
- *
- * @package    Zend_Dom
- * @subpackage Query
  */
 class NodeList implements Iterator, Countable, ArrayAccess
 {

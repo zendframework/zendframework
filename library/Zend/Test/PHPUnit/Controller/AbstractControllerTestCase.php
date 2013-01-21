@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Test
  */
 namespace Zend\Test\PHPUnit\Controller;
 
@@ -22,11 +21,6 @@ use Zend\Stdlib\ResponseInterface;
 use Zend\Uri\Http as HttpUri;
 use Zend\View\Helper\Placeholder;
 
-/**
- * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
- */
 abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 {
     /**

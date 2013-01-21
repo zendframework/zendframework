@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Storage;
@@ -16,10 +15,6 @@ namespace Zend\Authentication\Storage;
  * Since HTTP Authentication happens again on each request, this will always be
  * re-populated. So there's no need to use sessions, this simple value class
  * will hold the data for rest of the current request.
- *
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Storage
  */
 class NonPersistent implements StorageInterface
 {

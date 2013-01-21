@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Model;
@@ -15,10 +14,6 @@ namespace Zend\View\Model;
  *
  * View models implementing this interface allow clearing children, options,
  * and variables.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Model
  */
 interface ClearableModelInterface
 {

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Uri
  */
 
 namespace Zend\Uri;
@@ -21,9 +20,6 @@ use Zend\Uri\Uri;
  *
  * Note that this class contains only static methods and should not be
  * instantiated
- *
- * @category  Zend
- * @package   Zend_Uri
  */
 abstract class UriFactory
 {

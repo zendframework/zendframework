@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator\DocBlock\Tag;
@@ -13,10 +12,6 @@ namespace Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
-/**
- * @category   Zend
- * @package    Zend_Code_Generator
- */
 class AuthorTag extends Tag
 {
     /**

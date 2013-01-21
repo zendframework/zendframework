@@ -6,7 +6,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
@@ -29,10 +28,6 @@ use Zend\Validator\ValidatorChain;
  * This is so the files are moved to a new location between requests.
  * If this filter is not added, the temporary upload files will disappear
  * between requests.
- *
- * @category Zend
- * @package Zend_Mvc
- * @subpackage Controller
  */
 class FilePostRedirectGet extends AbstractPlugin
 {

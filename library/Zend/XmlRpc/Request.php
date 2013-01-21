@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
@@ -24,9 +23,6 @@ use Zend\Stdlib\ErrorHandler;
  * Additionally, if errors occur setting the method or parsing XML, a fault is
  * generated and stored in {@link $fault}; developers may check for it using
  * {@link isFault()} and {@link getFault()}.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
  */
 class Request
 {

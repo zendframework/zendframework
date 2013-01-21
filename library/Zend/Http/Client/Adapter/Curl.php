@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
@@ -20,10 +19,6 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
  * Curl requires libcurl. See for full requirements the PHP manual: http://php.net/curl
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
  */
 class Curl implements HttpAdapter, StreamInterface
 {

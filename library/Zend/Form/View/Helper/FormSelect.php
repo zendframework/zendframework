@@ -13,6 +13,7 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -154,7 +155,7 @@ class FormSelect extends AbstractHelper
                 $disabled = $optionSpec['disabled'];
             }
 
-            if (in_array($value, $selectedOptions)) {
+            if (ArrayUtils::inArray($value, $selectedOptions)) {
                 $selected = true;
             }
 

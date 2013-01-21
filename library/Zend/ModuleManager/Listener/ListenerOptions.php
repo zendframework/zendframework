@@ -58,6 +58,11 @@ class ListenerOptions extends AbstractOptions
     protected $cacheDir;
 
     /**
+     * @var bool
+     */
+    protected $checkDependencies = true;
+
+    /**
      * @var string
      */
     protected $moduleMapCacheEnabled = false;
@@ -331,6 +336,30 @@ class ListenerOptions extends AbstractOptions
     public function getModuleMapCacheFile()
     {
         return $this->getCacheDir() . '/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
+    }
+
+    /**
+     * Set whether to check dependencies during module loading or not
+     *
+     * @return string
+     */
+    public function getCheckDependencies()
+    {
+        return $this->checkDependencies;
+    }
+
+    /**
+     * Set whether to check dependencies during module loading or not
+     *
+     * @param  bool $checkDependencies the value to be set
+     *
+     * @return ListenerOptions
+     */
+    public function setCheckDependencies($checkDependencies)
+    {
+        $this->checkDependencies = (bool) $checkDependencies;
+
+        return $this;
     }
 
     /**

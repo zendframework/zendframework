@@ -29,8 +29,8 @@ class FlashMessengerFactory implements FactoryInterface
         $flashMessenger = $controllerPluginManager->get('flashmessenger');
         $helper->setPluginFlashMessenger($flashMessenger);
         $config = $serviceLocator->get('Config');
-        if (isset($config['view_helper']['flashmessenger'])) {
-            $configHelper = $config['view_helper']['flashmessenger'];
+        if (isset($config['view_helper_config']['flashmessenger'])) {
+            $configHelper = $config['view_helper_config']['flashmessenger'];
             if (isset($configHelper['message_open_format'])) {
                 $helper->setMessageOpenFormat($configHelper['message_open_format']);
             }

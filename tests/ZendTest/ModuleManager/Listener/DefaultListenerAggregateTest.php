@@ -79,6 +79,7 @@ class DefaultListenerAggregateTest extends TestCase
             ),
             'loadModule' => array(
                 'Zend\ModuleManager\Listener\AutoloaderListener',
+                'Zend\ModuleManager\Listener\ModuleDependencyCheckerListener',
                 'Zend\ModuleManager\Listener\InitTrigger',
                 'Zend\ModuleManager\Listener\OnBootstrapListener',
                 'Zend\ModuleManager\Listener\ConfigListener',

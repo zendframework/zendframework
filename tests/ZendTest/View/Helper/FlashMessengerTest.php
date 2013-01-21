@@ -144,7 +144,7 @@ class FlashMessengerTest extends TestCase
         $this->seedMessages();
 
         $config = array(
-            'view_helper' => array(
+            'view_helper_config' => array(
                 'flashmessenger' => array(
                     'message_open_format' => '<div%s><ul><li>',
                     'message_separator_string' => '</li><li>',

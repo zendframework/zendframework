@@ -165,6 +165,36 @@ abstract class ArrayUtils
     }
 
     /**
+     * Checks if a value exists in an array.
+     *
+     * Due to "foo" == 0 === TRUE with in_array when strict = false, an option
+     * has been added to prevent this. When $strict = 0/false, the most secure
+     * non-strict check is implemented. if $strict = -1, the default in_array
+     * non-strict behaviour is used.
+     *
+     * @param mixed $needle
+     * @param array $haystack
+     * @param int|bool $strict
+     * @return bool
+     */
+    public static function inArray($needle, array $haystack, $strict = false)
+    {
+        if (!$strict) {
+            if (is_int($needle) || is_float($needle)) {
+                $needle = (string) $needle;
+            }
+            if (is_string($needle)) {
+                foreach ($haystack as &$h) {
+                    if (is_int($h) || is_float($h)) {
+                        $h = (string) $h;
+                    }
+                }
+            }
+        }
+        return in_array($needle, $haystack, $strict);
+    }
+
+    /**
      * Convert an iterator to an array.
      *
      * Converts an iterator to an array. The $recursive flag, on by default,

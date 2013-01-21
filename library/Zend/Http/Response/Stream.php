@@ -203,11 +203,12 @@ class Stream extends Response
         foreach ($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
                 $response->setContentLength((int) $header->getFieldValue());
-                if (strlen($response->content) > $response->getContentLength()) {
+                $contentLength = $response->getContentLength();
+                if (strlen($response->content) > $contentLength) {
                     throw new Exception\OutOfRangeException(sprintf(
                         'Too much content was extracted from the stream (%d instead of %d bytes)',
                         strlen($response->content),
-                        $response->getContentLength()
+                        $contentLength
                     ));
                 }
                 break;
@@ -263,10 +264,10 @@ class Stream extends Response
     protected function readStream()
     {
         $contentLength = $this->getContentLength();
-        if (!is_null($contentLength)) {
-            $bytes =  $contentLength - $this->contentStreamed;
+        if (null !== $contentLength) {
+            $bytes = $contentLength - $this->contentStreamed;
         } else {
-            $bytes = -1; //Read the whole buffer
+            $bytes = -1; // Read the whole buffer
         }
 
         if (!is_resource($this->stream) || $bytes == 0) {

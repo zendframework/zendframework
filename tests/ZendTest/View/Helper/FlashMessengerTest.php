@@ -106,13 +106,13 @@ class FlashMessengerTest extends TestCase
     public function testCanDisplayListOfMessages()
     {
         $displayInfoAssertion = '';
-        $displayInfo = $this->helper->render(PluginFlashMessenger::INFO_MESSAGE);
+        $displayInfo = $this->helper->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
 
         $this->seedMessages();
 
         $displayInfoAssertion = '<ul class="info"><li>bar-info</li></ul>';
-        $displayInfo = $this->helper->render(PluginFlashMessenger::INFO_MESSAGE);
+        $displayInfo = $this->helper->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -122,7 +122,7 @@ class FlashMessengerTest extends TestCase
         $this->seedMessages();
 
         $displayInfoAssertion = '<ul class="info"><li>bar-info</li></ul>';
-        $displayInfo = $helper()->render(PluginFlashMessenger::INFO_MESSAGE);
+        $displayInfo = $helper()->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -135,7 +135,7 @@ class FlashMessengerTest extends TestCase
                 ->setMessageOpenFormat('<div%s><p>')
                 ->setMessageSeparatorString('</p><p>')
                 ->setMessageCloseString('</p></div>')
-                ->render(PluginFlashMessenger::INFO_MESSAGE, array('foo-baz', 'foo-bar'));
+                ->render(PluginFlashMessenger::NAMESPACE_INFO, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -170,7 +170,7 @@ class FlashMessengerTest extends TestCase
         $helper = $helperPluginManager->get('flashmessenger');
 
         $displayInfoAssertion = '<div class="info"><ul><li>bar-info</li></ul></div>';
-        $displayInfo = $helper->render(PluginFlashMessenger::INFO_MESSAGE);
+        $displayInfo = $helper->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 }

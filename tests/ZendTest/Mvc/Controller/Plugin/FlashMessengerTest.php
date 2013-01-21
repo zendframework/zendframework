@@ -107,7 +107,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->helper->hasSuccessMessages());
         $this->assertTrue($this->helper->hasErrorMessages());
 
-        $this->helper->clearMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $this->helper->clearMessagesFromNamespace(FlashMessenger::NAMESPACE_INFO);
         $this->assertFalse($this->helper->hasInfoMessages());
 
         $this->helper->clearMessagesFromContainer();
@@ -130,7 +130,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-info', $messages);
 
-        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::NAMESPACE_INFO);
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-info', $messages);
 
@@ -138,7 +138,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-success', $messages);
 
-        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::SUCCESS_MESSAGE);
+        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::NAMESPACE_SUCCESS);
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-success', $messages);
 
@@ -146,7 +146,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-error', $messages);
 
-        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::ERROR_MESSAGE);
+        $messages = $this->helper->getMessagesFromNamespace(FlashMessenger::NAMESPACE_ERROR);
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-error', $messages);
     }
@@ -163,7 +163,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-info', $messages);
 
-        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::NAMESPACE_INFO);
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-info', $messages);
 
@@ -171,7 +171,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-success', $messages);
 
-        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::SUCCESS_MESSAGE);
+        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::NAMESPACE_SUCCESS);
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-success', $messages);
 
@@ -179,7 +179,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-error', $messages);
 
-        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::ERROR_MESSAGE);
+        $messages = $this->helper->getCurrentMessagesFromNamespace(FlashMessenger::NAMESPACE_ERROR);
         $this->assertEquals(1, count($messages));
         $this->assertContains('bar-error', $messages);
     }
@@ -203,7 +203,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->helper->hasCurrentSuccessMessages());
         $this->assertTrue($this->helper->hasCurrentErrorMessages());
 
-        $this->helper->clearCurrentMessagesFromNamespace(FlashMessenger::INFO_MESSAGE);
+        $this->helper->clearCurrentMessagesFromNamespace(FlashMessenger::NAMESPACE_INFO);
         $this->assertFalse($this->helper->hasCurrentInfoMessages());
 
         $this->helper->clearCurrentMessagesFromContainer();

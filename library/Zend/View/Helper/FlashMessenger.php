@@ -50,10 +50,10 @@ class FlashMessenger extends AbstractHelper implements ServiceLocatorAwareInterf
      * @var array Default attributes for the open format tag
      */
     protected $classMessages = array(
-        PluginFlashMessenger::INFO_MESSAGE => 'info',
-        PluginFlashMessenger::ERROR_MESSAGE => 'error',
-        PluginFlashMessenger::SUCCESS_MESSAGE => 'success',
-        PluginFlashMessenger::DEFAULT_MESSAGE => 'default',
+        PluginFlashMessenger::NAMESPACE_INFO => 'info',
+        PluginFlashMessenger::NAMESPACE_ERROR => 'error',
+        PluginFlashMessenger::NAMESPACE_SUCCESS => 'success',
+        PluginFlashMessenger::NAMESPACE_DEFAULT => 'default',
     );
 
     /**
@@ -98,7 +98,7 @@ class FlashMessenger extends AbstractHelper implements ServiceLocatorAwareInterf
         // Prepare classes for opening tag
         if (empty($classes)) {
             $classes = isset($this->classMessages[$namespace]) ?
-                $this->classMessages[$namespace] : $this->classMessages[PluginFlashMessenger::DEFAULT_MESSAGE];
+                $this->classMessages[$namespace] : $this->classMessages[PluginFlashMessenger::NAMESPACE_DEFAULT];
             $classes = array($classes);
         }
 

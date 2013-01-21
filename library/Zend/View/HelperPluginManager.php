@@ -27,6 +27,15 @@ use Zend\ServiceManager\ConfigInterface;
 class HelperPluginManager extends AbstractPluginManager
 {
     /**
+     * Default set of helpers factories
+     *
+     * @var array
+     */
+    protected $factories = array(
+        'flashmessenger'      => 'Zend\View\Helper\FlashMessenger',
+    );
+
+    /**
      * Default set of helpers
      *
      * @var array
@@ -81,7 +90,7 @@ class HelperPluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached renderer and translator, if any, to the currently requested helper.
      *
-     * @param  null|ConfigInterface $configuration
+     * @param null|ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)
     {
@@ -110,6 +119,7 @@ class HelperPluginManager extends AbstractPluginManager
     public function setRenderer(Renderer\RendererInterface $renderer)
     {
         $this->renderer = $renderer;
+
         return $this;
     }
 
@@ -159,7 +169,7 @@ class HelperPluginManager extends AbstractPluginManager
      *
      * Checks that the helper loaded is an instance of Helper\HelperInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                            $plugin
      * @return void
      * @throws Exception\InvalidHelperException if invalid
      */

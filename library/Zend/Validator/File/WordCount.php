@@ -29,7 +29,7 @@ class WordCount extends Count
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::TOO_MUCH => "Too much words, maximum '%max%' are allowed but '%count%' were counted",
+        self::TOO_MUCH => "Too many words, maximum '%max%' are allowed but '%count%' were counted",
         self::TOO_LESS => "Too less words, minimum '%min%' are expected but '%count%' were counted",
         self::NOT_FOUND => "File '%value%' is not readable or does not exist",
     );

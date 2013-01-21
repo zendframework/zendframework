@@ -25,7 +25,7 @@ class ControllerLoaderFactory implements FactoryInterface
     /**
      * Create the controller loader service
      *
-     * Creates and returns an instance of Controller\ControllerManager. The
+     * Creates and returns an instance of ControllerManager. The
      * only controllers this manager will allow are those defined in the
      * application configuration's "controllers" array. If a controller is
      * matched, the scoped manager will attempt to load the controller.

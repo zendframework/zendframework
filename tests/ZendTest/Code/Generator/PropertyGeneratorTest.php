@@ -244,4 +244,26 @@ EOS;
         $this->assertEquals(PropertyGenerator::VISIBILITY_PROTECTED, $propertyGenerator->getVisibility());
     }
 
+    /**
+     * @3491
+     */
+    public function testPropertyDocBlockWillLoadFromReflection()
+    {
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+
+        $reflProp = $reflectionClass->getProperty('fooProperty');
+        $cgProp   = PropertyGenerator::fromReflection($reflProp);
+
+        $this->assertEquals('fooProperty', $cgProp->getName());
+
+        $docBlock = $cgProp->getDocBlock();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $docBlock);
+        $tags     = $docBlock->getTags();
+        $this->assertInternalType('array', $tags);
+        $this->assertEquals(1, count($tags));
+        $tag = array_shift($tags);
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag', $tag);
+        $this->assertEquals('var', $tag->getName());
+    }
+
 }

@@ -37,8 +37,8 @@ class ModuleDependencyCheckerListener
     {
         $module = $e->getModule();
 
-        if ($module instanceof DependencyIndicatorInterface || method_exists($module, 'getDependencyModules')) {
-            $dependencies = $module->getDependencyModules();
+        if ($module instanceof DependencyIndicatorInterface || method_exists($module, 'getModuleDependencies')) {
+            $dependencies = $module->getModuleDependencies();
 
             foreach ($dependencies as $dependencyModule) {
                 if (!isset($this->loaded[$dependencyModule])) {

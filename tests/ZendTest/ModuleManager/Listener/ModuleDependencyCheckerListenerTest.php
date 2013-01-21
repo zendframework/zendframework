@@ -19,13 +19,13 @@ class ModuleDependencyCheckerListenerTest extends TestCase
     /**
      * @covers \Zend\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
      */
-    public function testCallsGetDependencyModulesOnModuleImplementingInterface()
+    public function testCallsGetModuleDependenciesOnModuleImplementingInterface()
     {
         //$moduleManager = new ModuleManager(array());
         //$moduleManager->getEventManager()->attach('loadModule', new ModuleDependencyCheckerListener(), 2000);
 
         $module = $this->getMock('Zend\ModuleManager\Feature\DependencyIndicatorInterface');
-        $module->expects($this->once())->method('getDependencyModules')->will($this->returnValue(array()));
+        $module->expects($this->once())->method('getModuleDependencies')->will($this->returnValue(array()));
 
         $event = $this->getMock('Zend\ModuleManager\ModuleEvent');
         $event->expects($this->any())->method('getModule')->will($this->returnValue($module));
@@ -37,10 +37,10 @@ class ModuleDependencyCheckerListenerTest extends TestCase
     /**
      * @covers \Zend\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
      */
-    public function testCallsGetDependencyModulesOnModuleNotImplementingInterface()
+    public function testCallsGetModuleDependenciesOnModuleNotImplementingInterface()
     {
-        $module = $this->getMock('stdClass', array('getDependencyModules'));
-        $module->expects($this->once())->method('getDependencyModules')->will($this->returnValue(array()));
+        $module = $this->getMock('stdClass', array('getModuleDependencies'));
+        $module->expects($this->once())->method('getModuleDependencies')->will($this->returnValue(array()));
 
         $event = $this->getMock('Zend\ModuleManager\ModuleEvent');
         $event->expects($this->any())->method('getModule')->will($this->returnValue($module));
@@ -54,8 +54,8 @@ class ModuleDependencyCheckerListenerTest extends TestCase
      */
     public function testNotFulfilledDependencyThrowsException()
     {
-        $module = $this->getMock('stdClass', array('getDependencyModules'));
-        $module->expects($this->once())->method('getDependencyModules')->will($this->returnValue(array('OtherModule')));
+        $module = $this->getMock('stdClass', array('getModuleDependencies'));
+        $module->expects($this->once())->method('getModuleDependencies')->will($this->returnValue(array('OtherModule')));
 
         $event = $this->getMock('Zend\ModuleManager\ModuleEvent');
         $event->expects($this->any())->method('getModule')->will($this->returnValue($module));

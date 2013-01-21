@@ -22,5 +22,5 @@ interface DependencyIndicatorInterface
      *
      * @return array
      */
-    public function getDependencyModules();
+    public function getModuleDependencies();
 }

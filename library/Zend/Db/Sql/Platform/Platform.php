@@ -33,6 +33,10 @@ class Platform extends AbstractPlatform
                 $platform = new SqlServer\SqlServer();
                 $this->decorators = $platform->decorators;
                 break;
+            case 'oracle':
+                $platform = new Oracle\Oracle();
+                $this->decorators = $platform->decorators;
+                break;
             default:
         }
     }

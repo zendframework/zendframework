@@ -243,6 +243,9 @@ class Adapter implements AdapterInterface
             case 'sqlsrv':
                 $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
                 break;
+            case 'oci8':
+                $driver = new Driver\Oci8\Oci8($parameters);
+                break;
             case 'pgsql':
                 $driver = new Driver\Pgsql\Pgsql($parameters);
                 break;
@@ -273,6 +276,8 @@ class Adapter implements AdapterInterface
                 return new Platform\Mysql();
             case 'SqlServer':
                 return new Platform\SqlServer();
+            case 'Oracle':
+                return new Platform\Oracle();
             case 'Sqlite':
                 return new Platform\Sqlite();
             case 'Postgresql':

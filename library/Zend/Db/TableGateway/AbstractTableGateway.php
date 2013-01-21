@@ -68,6 +68,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      */
     protected $sql = null;
 
+
     /**
      *
      * @var integer

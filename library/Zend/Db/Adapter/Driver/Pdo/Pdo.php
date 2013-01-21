@@ -135,6 +135,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
         if ($this->connection->getDriverName() == 'sqlite') {
             $this->addFeature(null, new Feature\SqliteRowCounter);
         }
+        if ($this->connection->getDriverName() == 'oci') {
+            $this->addFeature(null, new Feature\OracleRowCounter);
+        }
         return $this;
     }
 
@@ -237,6 +240,14 @@ class Pdo implements DriverInterface, DriverFeatureInterface
             && $resource->columnCount() > 0) {
             $rowCount = $sqliteRowCounter->getRowCountClosure($context);
         }
+
+        // special feature, oracle PDO counter
+        if ($this->connection->getDriverName() == 'oci'
+            && ($oracleRowCounter = $this->getFeature('OracleRowCounter'))
+            && $resource->columnCount() > 0) {
+            $rowCount = $oracleRowCounter->getRowCountClosure($context);
+        }
+
 
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $rowCount);
         return $result;

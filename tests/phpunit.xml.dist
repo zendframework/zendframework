@@ -23,6 +23,11 @@
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD" value="" />-->
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE" value="" />-->
 
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_DATABASE" value="" />-->
+
     </php>
 
 

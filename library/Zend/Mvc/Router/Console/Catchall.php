@@ -72,12 +72,12 @@ class Catchall implements RouteInterface
     protected $assembledParams = array();
 
     /**
-     * @var \Zend\Validator\ValidatorChain
+     * @var ValidatorChain
      */
     protected $validators;
 
     /**
-     * @var \Zend\Filter\FilterChain
+     * @var FilterChain
      */
     protected $filters;
 

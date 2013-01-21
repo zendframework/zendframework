@@ -218,7 +218,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
         $this->serviceManager->setShared('foo', true);
         $this->assertSame($this->serviceManager->get('foo'), $this->serviceManager->get('foo'));
-        
+
         $this->serviceManager->setShareByDefault(true);
         $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
         $this->serviceManager->setShared('foo', false);

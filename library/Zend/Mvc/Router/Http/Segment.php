@@ -58,7 +58,7 @@ class Segment implements RouteInterface
         '%3D' => "=", // sub-delims
         '%40' => "@", // pchar
 //      '%5F' => "_", // unreserved - not touched by rawurlencode
-        '%7E' => "~", // unreserved
+//      '%7E' => "~", // unreserved - not touched by rawurlencode
     );
 
     /**

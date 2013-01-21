@@ -10,6 +10,8 @@
 
 namespace Zend\Filter;
 
+use Zend\Stdlib\StringUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -26,7 +28,7 @@ class Digits extends AbstractFilter
      */
     public function filter($value)
     {
-        if (!static::hasPcreUnicodeSupport()) {
+        if (!StringUtils::hasPcreUnicodeSupport()) {
             // POSIX named classes are not supported, use alternative 0-9 match
             $pattern = '/[^0-9]/';
         } elseif (extension_loaded('mbstring')) {

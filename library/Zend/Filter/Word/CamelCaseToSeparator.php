@@ -10,6 +10,8 @@
 
 namespace Zend\Filter\Word;
 
+use Zend\Stdlib\StringUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -24,7 +26,7 @@ class CamelCaseToSeparator extends AbstractSeparator
      */
     public function filter($value)
     {
-        if (self::hasPcreUnicodeSupport()) {
+        if (StringUtils::hasPcreUnicodeSupport()) {
             $pattern     = array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#');
             $replacement = array($this->separator . '\1', $this->separator . '\1');
         } else {

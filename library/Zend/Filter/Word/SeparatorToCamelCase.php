@@ -10,6 +10,8 @@
 
 namespace Zend\Filter\Word;
 
+use Zend\Stdlib\StringUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -27,7 +29,7 @@ class SeparatorToCamelCase extends AbstractSeparator
         // a unicode safe way of converting characters to \x00\x00 notation
         $pregQuotedSeparator = preg_quote($this->separator, '#');
 
-        if (self::hasPcreUnicodeSupport()) {
+        if (StringUtils::hasPcreUnicodeSupport()) {
             $patterns = array(
                 '#(' . $pregQuotedSeparator.')(\p{L}{1})#u',
                 '#(^\p{Ll}{1})#u',

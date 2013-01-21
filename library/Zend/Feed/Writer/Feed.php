@@ -14,8 +14,6 @@ use Iterator;
 use Zend\Feed\Writer\Renderer;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Feed extends AbstractFeed implements Iterator, Countable
 {

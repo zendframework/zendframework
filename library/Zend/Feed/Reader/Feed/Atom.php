@@ -13,8 +13,6 @@ use DOMDocument;
 use Zend\Feed\Reader;
 
 /**
-* @category Zend
-* @package Reader
 */
 class Atom extends AbstractFeed
 {

@@ -9,10 +9,6 @@
 
 namespace Zend\Feed\Reader\Collection;
 
-/**
-* @category Zend
-* @package Zend_Feed_Reader
-*/
 class Author extends AbstractCollection
 {
 

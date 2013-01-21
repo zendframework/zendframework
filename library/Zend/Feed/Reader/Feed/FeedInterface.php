@@ -13,8 +13,6 @@ use Countable;
 use Iterator;
 
 /**
-* @category Zend
-* @package Zend_Feed_Reader
 */
 interface FeedInterface extends Iterator, Countable
 {

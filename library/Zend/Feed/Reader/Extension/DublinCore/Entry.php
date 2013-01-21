@@ -14,10 +14,6 @@ use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
 use Zend\Stdlib\DateTime;
 
-/**
-* @category Zend
-* @package Reader\Reader
-*/
 class Entry extends Extension\AbstractEntry
 {
     /**

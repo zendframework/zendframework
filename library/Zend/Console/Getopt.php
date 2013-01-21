@@ -67,9 +67,6 @@ namespace Zend\Console;
  * Example:  'abc:' means options '-a', '-b', and '-c'
  * are legal, and the latter requires a string parameter.
  *
- * @version    Release: @package_version@
- * @since      Class available since Release 0.6.0
- *
  * @todo  Handle flags that implicitly print usage message, e.g. --help
  *
  * @todo  Enable user to specify header and footer content in the help message.

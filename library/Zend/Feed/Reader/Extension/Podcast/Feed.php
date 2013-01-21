@@ -13,8 +13,6 @@ use DOMText;
 use Zend\Feed\Reader\Extension;
 
 /**
-* @category Zend
-* @package Zend_Feed_Reader
 */
 class Feed extends Extension\AbstractFeed
 {

@@ -14,10 +14,6 @@ use DOMElement;
 use DOMXPath;
 use Zend\Feed\Reader;
 
-/**
-* @category Zend
-* @package Reader\Reader
-*/
 abstract class AbstractEntry
 {
     /**

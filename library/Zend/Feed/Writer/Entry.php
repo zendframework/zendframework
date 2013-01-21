@@ -14,8 +14,6 @@ use Zend\Feed\Writer\Exception;
 use Zend\Uri;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Entry
 {

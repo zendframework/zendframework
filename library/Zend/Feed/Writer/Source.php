@@ -10,8 +10,6 @@
 namespace Zend\Feed\Writer;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Source extends AbstractFeed
 {

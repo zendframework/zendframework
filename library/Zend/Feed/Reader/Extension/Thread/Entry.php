@@ -12,8 +12,6 @@ namespace Zend\Feed\Reader\Extension\Thread;
 use Zend\Feed\Reader\Extension;
 
 /**
-* @category Zend
-* @package Zend_Feed_Reader
 */
 class Entry extends Extension\AbstractEntry
 {

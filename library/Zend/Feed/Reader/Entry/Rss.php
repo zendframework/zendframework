@@ -15,10 +15,6 @@ use DOMXPath;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
 
-/**
-* @category Zend
-* @package Reader\Reader
-*/
 class Rss extends AbstractEntry implements EntryInterface
 {
 

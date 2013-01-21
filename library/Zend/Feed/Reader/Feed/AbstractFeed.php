@@ -16,8 +16,6 @@ use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
 
 /**
-* @category Zend
-* @package Zend_Feed_Reader
 */
 abstract class AbstractFeed implements FeedInterface
 {

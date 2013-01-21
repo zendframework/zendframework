@@ -13,8 +13,6 @@ use DOMDocument;
 use DOMElement;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 interface RendererInterface
 {

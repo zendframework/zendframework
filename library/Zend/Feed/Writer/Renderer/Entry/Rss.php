@@ -17,8 +17,6 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Uri;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {

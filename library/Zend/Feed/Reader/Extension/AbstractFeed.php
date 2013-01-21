@@ -13,10 +13,6 @@ use DOMDocument;
 use DOMXPath;
 use Zend\Feed\Reader;
 
-/**
-* @category Zend
-* @package Zend_Feed_Reader
-*/
 abstract class AbstractFeed
 {
     /**

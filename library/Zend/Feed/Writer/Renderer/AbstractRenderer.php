@@ -14,8 +14,6 @@ use DOMElement;
 use Zend\Feed\Writer;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class AbstractRenderer
 {

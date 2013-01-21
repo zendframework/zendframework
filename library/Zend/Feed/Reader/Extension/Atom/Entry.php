@@ -18,10 +18,6 @@ use Zend\Feed\Reader\Extension;
 use Zend\Stdlib\DateTime;
 use Zend\Uri;
 
-/**
-* @category Zend
-* @package Reader\Reader
-*/
 class Entry extends Extension\AbstractEntry
 {
     /**

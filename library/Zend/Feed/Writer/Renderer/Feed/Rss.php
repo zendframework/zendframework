@@ -18,8 +18,6 @@ use Zend\Uri;
 use Zend\Version\Version;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {

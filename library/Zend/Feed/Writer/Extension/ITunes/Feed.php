@@ -15,8 +15,6 @@ use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Feed
 {

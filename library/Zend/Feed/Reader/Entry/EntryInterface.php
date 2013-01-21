@@ -11,10 +11,6 @@ namespace Zend\Feed\Reader\Entry;
 
 use Zend\Feed\Reader\Collection\Category;
 
-/**
-* @category Zend
-* @package Zend_Feed_Reader
-*/
 interface EntryInterface
 {
     /**

@@ -13,10 +13,6 @@ use DOMElement;
 use DOMXPath;
 use Zend\Feed\Reader;
 
-/**
-* @category Zend
-* @package Zend_Feed_Reader
-*/
 class Atom extends AbstractEntry implements EntryInterface
 {
     /**

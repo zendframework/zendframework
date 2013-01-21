@@ -17,8 +17,6 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Version\Version;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class AbstractAtom extends Renderer\AbstractRenderer
 {

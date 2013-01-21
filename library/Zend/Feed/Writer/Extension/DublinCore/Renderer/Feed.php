@@ -14,8 +14,6 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Feed extends Extension\AbstractRenderer
 {

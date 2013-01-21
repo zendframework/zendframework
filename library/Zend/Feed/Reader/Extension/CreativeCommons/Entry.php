@@ -12,10 +12,6 @@ namespace Zend\Feed\Reader\Extension\CreativeCommons;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Extension;
 
-/**
-* @category Zend
-* @package Reader\Reader
-*/
 class Entry extends Extension\AbstractEntry
 {
     /**

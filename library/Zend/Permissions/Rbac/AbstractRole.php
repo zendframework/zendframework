@@ -50,7 +50,7 @@ abstract class AbstractRole extends AbstractIterator
     }
 
     /**
-     * Checks if a permission exists for this role or any parent roles.
+     * Checks if a permission exists for this role or any child roles.
      *
      * @param  string $name
      * @return bool
@@ -61,8 +61,12 @@ abstract class AbstractRole extends AbstractIterator
             return true;
         }
 
-        if($this->parent && $this->parent->hasPermission($name)) {
-            return true;
+        $it = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($it as $leaf) {
+            /** @var AbstractRole $leaf */
+            if ($leaf->hasPermission($name)) {
+                return true;
+            }
         }
 
         return false;

@@ -1,10 +1,5 @@
 <?php
-/**
- *
- * User: Timo Tewes
- * Date: 19.01.13
- * Time: 10:08
- */
+
 namespace ZendTest\View\Helper\Navigation;
 
 

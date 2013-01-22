@@ -12,7 +12,6 @@ namespace Zend\Db\Adapter;
 use Zend\Db\ResultSet;
 
 /**
- *
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
@@ -245,6 +244,9 @@ class Adapter implements AdapterInterface
             case 'pgsql':
                 $driver = new Driver\Pgsql\Pgsql($parameters);
                 break;
+            case 'ibmdb2':
+                $driver = new Driver\IbmDb2\IbmDb2($parameters);
+                break;
             case 'pdo':
             default:
                 if ($driverName == 'pdo' || strpos($driverName, 'pdo') === 0) {
@@ -278,9 +280,10 @@ class Adapter implements AdapterInterface
                 return new Platform\Sqlite();
             case 'Postgresql':
                 return new Platform\Postgresql();
+            case 'IbmDb2':
+                return new Platform\IbmDb2();
             default:
                 return new Platform\Sql92();
         }
     }
-
 }

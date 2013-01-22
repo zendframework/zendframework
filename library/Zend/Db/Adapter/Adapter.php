@@ -12,7 +12,6 @@ namespace Zend\Db\Adapter;
 use Zend\Db\ResultSet;
 
 /**
- *
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
@@ -287,5 +286,4 @@ class Adapter implements AdapterInterface
                 return new Platform\Sql92();
         }
     }
-
 }

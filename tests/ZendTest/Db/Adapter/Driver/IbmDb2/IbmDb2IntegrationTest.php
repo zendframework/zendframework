@@ -5,18 +5,18 @@ use Zend\Db\Adapter\Driver\IbmDb2\IbmDb2;
 
 /**
  * @group integration
- * @group integration-sqlsrv
+ * @group integration-ibm_db2
  */
 class IbmDb2IntegrationTest extends AbstractIntegrationTest
 {
     /**
-     * @group integration-sqlserver
+     * @group integration-ibm_db2
      * @covers Zend\Db\Adapter\Driver\IbmDb2\IbmDb2::checkEnvironment
      */
     public function testCheckEnvironment()
     {
-        $sqlserver = new IbmDb2(array());
-        $this->assertNull($sqlserver->checkEnvironment());
+        $ibmdb2 = new IbmDb2(array());
+        $this->assertNull($ibmdb2->checkEnvironment());
     }
 
     public function testCreateStatement()

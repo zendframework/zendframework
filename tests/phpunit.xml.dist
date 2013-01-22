@@ -12,6 +12,7 @@
             <group>disable</group>
             <group>integration</group>
             <group>integration-sqlserver</group>
+            <group>integration-ibm_db2</group>
         </exclude>
     </groups>
 

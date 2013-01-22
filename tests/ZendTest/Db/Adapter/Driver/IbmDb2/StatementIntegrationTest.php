@@ -6,7 +6,7 @@ use Zend\Db\Adapter\Driver\IbmDb2\Statement;
 
 /**
  * @group integration
- * @group integration-sqlsrv
+ * @group integration-ibm_db2
  */
 class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -83,13 +83,13 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecute()
     {
-        $sqlsrv = new IbmDb2($this->variables);
-        $statement = $sqlsrv->createStatement("SELECT 'foo' FROM SYSIBM.SYSDUMMY1");
+        $ibmdb2 = new IbmDb2($this->variables);
+        $statement = $ibmdb2->createStatement("SELECT 'foo' FROM SYSIBM.SYSDUMMY1");
         $this->assertSame($statement, $statement->prepare());
 
         $result = $statement->execute();
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\IbmDb2\Result', $result);
 
-        unset($resource, $sqlsrvResource);
+        unset($resource, $ibmdb2);
     }
 }

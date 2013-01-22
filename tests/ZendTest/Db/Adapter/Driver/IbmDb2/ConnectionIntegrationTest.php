@@ -6,7 +6,7 @@ use Zend\Db\Adapter\Driver\IbmDb2\Connection;
 
 /**
  * @group integration
- * @group integration-sqlserver
+ * @group integration-ibm_db2
  */
 class ConnectionIntegrationTest extends AbstractIntegrationTest
 {
@@ -130,8 +130,8 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
      */
     public function testExecute()
     {
-        $sqlsrv = new IbmDb2($this->variables);
-        $connection = $sqlsrv->getConnection();
+        $ibmdb2 = new IbmDb2($this->variables);
+        $connection = $ibmdb2->getConnection();
 
         $result = $connection->execute('SELECT \'foo\' FROM SYSIBM.SYSDUMMY1');
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\IbmDb2\Result', $result);

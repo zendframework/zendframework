@@ -11,6 +11,9 @@ namespace ZendTest\Db\Adapter\Driver\IbmDb2;
 
 abstract class AbstractIntegrationTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var array
+     */
     protected $variables = array(
         'database' => 'ZEND_DB_ADAPTER_DRIVER_IBMDB2_DATABASE',
         'username' => 'ZEND_DB_ADAPTER_DRIVER_IBMDB2_USERNAME',

@@ -14,7 +14,6 @@ use Zend\Db\Adapter\Exception;
 
 class IbmDb2 implements DriverInterface
 {
-
     /**
      * @var Connection
      */
@@ -43,6 +42,10 @@ class IbmDb2 implements DriverInterface
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
+    /**
+     * @param  Connection $connection
+     * @return IbmDb2
+     */
     public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
@@ -50,6 +53,10 @@ class IbmDb2 implements DriverInterface
         return $this;
     }
 
+    /**
+     * @param  Statement $statementPrototype
+     * @return IbmDb2
+     */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
@@ -57,6 +64,10 @@ class IbmDb2 implements DriverInterface
         return $this;
     }
 
+    /**
+     * @param  Result $resultPrototype
+     * @return IbmDb2
+     */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;

@@ -13,6 +13,9 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 
 class Result implements ResultInterface
 {
+    /**
+     * @var resource
+     */
     protected $resource;
 
     /**
@@ -20,11 +23,26 @@ class Result implements ResultInterface
      */
     protected $position = 0;
 
+    /**
+     * @var bool
+     */
     protected $currentComplete = false;
+
+    /**
+     * @var mixed
+     */
     protected $currentData = null;
 
+    /**
+     * @var mixed
+     */
     protected $generatedValue = null;
 
+    /**
+     * @param  resource $resource
+     * @param  mixed $generatedValue
+     * @return Result
+     */
     public function initialize($resource, $generatedValue = null)
     {
         $this->resource = $resource;
@@ -48,6 +66,9 @@ class Result implements ResultInterface
         return $this->currentData;
     }
 
+    /**
+     * @return mixed
+     */
     public function next()
     {
         $this->currentData = db2_fetch_assoc($this->resource);
@@ -56,11 +77,17 @@ class Result implements ResultInterface
         return $this->currentData;
     }
 
+    /**
+     * @return int|string
+     */
     public function key()
     {
         return $this->position;
     }
 
+    /**
+     * @return bool
+     */
     public function valid()
     {
         return ($this->currentData !== false);
@@ -154,6 +181,9 @@ class Result implements ResultInterface
         return db2_num_fields($this->resource);
     }
 
+    /**
+     * @return null|int
+     */
     public function count()
     {
         return null;

@@ -68,6 +68,10 @@ class Connection implements ConnectionInterface
         return $this->connectionParameters;
     }
 
+    /**
+     * @param  resource $resource DB2 resource
+     * @return Connection
+     */
     public function setResource($resource)
     {
         if (!is_resource($resource) || get_resource_type($resource) !== 'DB2 Connection') {

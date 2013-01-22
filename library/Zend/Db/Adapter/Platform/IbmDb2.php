@@ -135,5 +135,4 @@ class IbmDb2 implements PlatformInterface
 
         return implode('', $parts);
     }
-
 }

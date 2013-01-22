@@ -15,6 +15,9 @@ use Zend\Db\Adapter\Exception;
 
 class Statement implements StatementInterface
 {
+    /**
+     * @var resource
+     */
     protected $db2 = null;
 
     /**
@@ -22,10 +25,19 @@ class Statement implements StatementInterface
      */
     protected $driver = null;
 
+    /**
+     * @var string
+     */
     protected $sql = '';
 
+    /**
+     * @var ParameterContainer
+     */
     protected $parameterContainer = null;
 
+    /**
+     * @var bool
+     */
     protected $isPrepared = false;
 
     /**

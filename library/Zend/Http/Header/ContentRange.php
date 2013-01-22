@@ -48,5 +48,4 @@ class ContentRange implements HeaderInterface
     {
         return 'Content-Range: ' . $this->getFieldValue();
     }
-
 }

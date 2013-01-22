@@ -110,5 +110,4 @@ class AcceptLanguage extends AbstractAccept
 
         return new FieldValuePart\LanguageFieldValuePart((object) $aggregated);
     }
-
 }

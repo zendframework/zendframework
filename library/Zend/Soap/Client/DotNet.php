@@ -74,5 +74,4 @@ class DotNet extends SOAPClient
 
         return $result->$resultProperty;
     }
-
 }

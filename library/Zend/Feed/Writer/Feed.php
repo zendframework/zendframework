@@ -241,5 +241,4 @@ class Feed extends AbstractFeed implements Iterator, Countable
         }
         return $renderer->render()->saveXml();
     }
-
 }

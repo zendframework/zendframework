@@ -86,5 +86,4 @@ class TagManager
 
         return $newTag;
     }
-
 }

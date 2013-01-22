@@ -271,5 +271,4 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
         }
         return $return;
     }
-
 }

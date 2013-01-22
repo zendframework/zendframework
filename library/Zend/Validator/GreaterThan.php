@@ -160,5 +160,4 @@ class GreaterThan extends AbstractValidator
 
         return true;
     }
-
 }

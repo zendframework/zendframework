@@ -63,5 +63,4 @@ class AcceptRanges implements HeaderInterface
     {
         return 'Accept-Ranges: ' . $this->getFieldValue();
     }
-
 }

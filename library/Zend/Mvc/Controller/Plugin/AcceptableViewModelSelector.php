@@ -284,5 +284,4 @@ class AcceptableViewModelSelector extends AbstractPlugin
 
         return $this->event;
     }
-
 }

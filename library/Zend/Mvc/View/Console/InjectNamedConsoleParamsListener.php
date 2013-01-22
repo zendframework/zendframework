@@ -75,5 +75,4 @@ class InjectNamedConsoleParamsListener implements ListenerAggregateInterface
         );
         $request->getParams()->fromArray($params);
     }
-
 }

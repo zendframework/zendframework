@@ -151,5 +151,4 @@ class Config implements ConfigInterface
             $serviceManager->setShared($name, $isShared);
         }
     }
-
 }

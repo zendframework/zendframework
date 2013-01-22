@@ -141,5 +141,4 @@ class Sql92 implements PlatformInterface
 
         return implode('', $parts);
     }
-
 }

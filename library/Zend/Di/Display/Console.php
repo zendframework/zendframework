@@ -179,5 +179,4 @@ class Console
         }
         echo PHP_EOL;
     }
-
 }

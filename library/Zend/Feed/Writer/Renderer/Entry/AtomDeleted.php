@@ -104,5 +104,4 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
             $uri->appendChild($text);
         }
     }
-
 }

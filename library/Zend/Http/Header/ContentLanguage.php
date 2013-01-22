@@ -48,5 +48,4 @@ class ContentLanguage implements HeaderInterface
     {
         return 'Content-Language: ' . $this->getFieldValue();
     }
-
 }

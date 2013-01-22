@@ -487,5 +487,4 @@ class DbTable implements AdapterInterface
             $this->authenticateResultInfo['messages']
         );
     }
-
 }

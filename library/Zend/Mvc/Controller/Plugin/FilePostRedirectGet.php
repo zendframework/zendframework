@@ -17,6 +17,7 @@ use Zend\InputFilter\FileInput;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Session\Container;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\ValidatorChain;
 
 /**
@@ -80,7 +81,7 @@ class FilePostRedirectGet extends AbstractPlugin
         // Run the form validations/filters and retrieve any errors
         $postFiles = $request->getFiles()->toArray();
         $postOther = $request->getPost()->toArray();
-        $post      = array_merge($postOther, $postFiles);
+        $post      = ArrayUtils::merge($postOther, $postFiles);
 
         $form->setData($post);
         $isValid = $form->isValid();
@@ -88,11 +89,11 @@ class FilePostRedirectGet extends AbstractPlugin
         $errors  = (!$isValid) ? $form->getMessages() : null;
 
         // Loop through data and merge previous files with new valid files
-        $postFiles = array_merge(
+        $postFiles = ArrayUtils::merge(
             $previousFiles,
             $this->filterInvalidFileInputPostData($inputFilter, $data)
         );
-        $post = array_merge($post, $postFiles);
+        $post = ArrayUtils::merge($post, $postFiles);
 
         // Save form data in session
         $container->setExpirationHops(1, array('post', 'errors', 'isValid'));

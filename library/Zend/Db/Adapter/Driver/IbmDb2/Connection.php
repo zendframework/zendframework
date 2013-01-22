@@ -23,7 +23,7 @@ class Connection implements ConnectionInterface
     /**
      * Constructor
      *
-     * @param array|\PDO|null $connectionParameters
+     * @param array|resource|null $connectionParameters (ibm_db2 connection resource)
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($connectionParameters = null)
@@ -33,7 +33,9 @@ class Connection implements ConnectionInterface
         } elseif (is_resource($connectionParameters)) {
             $this->setResource($connectionParameters);
         } elseif (null !== $connectionParameters) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a PDO object or null');
+            throw new Exception\InvalidArgumentException(
+                '$connection must be an array of parameters, a db2 connection resource or null'
+            );
         }
     }
 

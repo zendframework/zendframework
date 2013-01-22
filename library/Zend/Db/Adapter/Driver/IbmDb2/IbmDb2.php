@@ -28,7 +28,7 @@ class IbmDb2 implements DriverInterface
     protected $resultPrototype;
 
     /**
-     * @param array|Connection|\PDO $connection
+     * @param array|Connection|resource $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
      * @param string $features

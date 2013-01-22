@@ -730,6 +730,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertWsdlPathExists($wsdl, $path);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testHandle()
     {
         $scriptUri = 'http://localhost/my_script.php';

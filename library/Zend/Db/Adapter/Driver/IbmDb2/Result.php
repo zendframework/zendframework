@@ -10,6 +10,7 @@
 namespace Zend\Db\Adapter\Driver\IbmDb2;
 
 use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\Adapter\Exception;
 
 class Result implements ResultInterface
 {

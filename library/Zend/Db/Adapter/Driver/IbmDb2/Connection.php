@@ -49,10 +49,22 @@ class Connection implements ConnectionInterface
         return $this;
     }
 
+    /**
+     * @param array $connectionParameters
+     * @return Connection
+     */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConnectionParameters()
+    {
+        return $this->connectionParameters;
     }
 
     public function setResource($resource)
@@ -71,7 +83,12 @@ class Connection implements ConnectionInterface
      */
     public function getCurrentSchema()
     {
-        // TODO: Implement getCurrentSchema() method.
+        if (!$this->isConnected()) {
+            $this->connect();
+        }
+
+        $info = db2_server_info($this->resource);
+        return (isset($info->DB_NAME) ? $info->DB_NAME : '');
     }
 
     /**
@@ -127,6 +144,7 @@ class Connection implements ConnectionInterface
                 __METHOD__
             ));
         }
+        return $this;
     }
 
     /**
@@ -148,6 +166,7 @@ class Connection implements ConnectionInterface
     {
         if ($this->resource) {
             db2_close($this->resource);
+            $this->resource = null;
         }
         return $this;
     }

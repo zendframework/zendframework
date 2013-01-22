@@ -34,13 +34,20 @@ class Statement implements StatementInterface
      */
     protected $resource = null;
 
-
-
+    /**
+     * @param $resource
+     * @return Statement
+     */
     public function initialize($resource)
     {
         $this->db2 = $resource;
+        return $this;
     }
 
+    /**
+     * @param IbmDb2 $driver
+     * @return Statement
+     */
     public function setDriver(IbmDb2 $driver)
     {
         $this->driver = $driver;
@@ -91,6 +98,10 @@ class Statement implements StatementInterface
         return $this->parameterContainer;
     }
 
+    /**
+     * @param $resource
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     */
     public function setResource($resource)
     {
         if (get_resource_type($resource) !== 'DB2 Statement') {
@@ -112,7 +123,8 @@ class Statement implements StatementInterface
     /**
      * Prepare sql
      *
-     * @param string $sql
+     * @param string|null $sql
+     * @return Statement
      */
     public function prepare($sql = null)
     {
@@ -131,6 +143,7 @@ class Statement implements StatementInterface
         }
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**

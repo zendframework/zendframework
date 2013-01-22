@@ -115,6 +115,10 @@ class IbmDb2 implements DriverInterface
         } else {
             if (is_string($sqlOrResource)) {
                 $statement->setSql($sqlOrResource);
+            } elseif ($sqlOrResource !== null) {
+                throw new Exception\InvalidArgumentException(
+                    __FUNCTION__ . ' only accepts an SQL string or a ibm_db2 resource'
+                );
             }
             if (!$this->connection->isConnected()) {
                 $this->connection->connect();

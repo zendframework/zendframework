@@ -1328,4 +1328,15 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_acl->isAllowed('guest', 'post_1', 'comment'));
         $this->assertFalse($this->_acl->isAllowed('guest', 'post_2', 'comment'));
     }
+
+    public function testSetRuleWorksWithResourceInterface()
+    {
+        $roleGuest = new Role\GenericRole('guest');
+        $this->_acl->addRole($roleGuest);
+
+        $resourceFoo = new Resource\GenericResource('foo');
+        $this->_acl->addResource($resourceFoo);
+
+        $this->_acl->setRule(Acl\Acl::OP_ADD, Acl\Acl::TYPE_ALLOW, $roleGuest, $resourceFoo);
+    }
 }

@@ -68,7 +68,7 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->rbac->isGranted('foo', 'can.baz'));
     }
 
-    public function testParentRolesNotGrantedChildPermissions()
+    public function testIsGrantedChildRoles()
     {
         $foo = new Rbac\Role('foo');
         $bar = new Rbac\Role('bar');
@@ -79,24 +79,12 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $this->rbac->addRole($foo);
         $this->rbac->addRole($bar, $foo);
 
-        $this->assertFalse($this->rbac->isGranted('foo', 'can.bar'));
-    }
+        $this->assertEquals(true, $this->rbac->isGranted('foo', 'can.bar'));
+        $this->assertEquals(true, $this->rbac->isGranted('foo', 'can.foo'));
+        $this->assertEquals(true, $this->rbac->isGranted('bar', 'can.bar'));
 
-    /**
-     * @group xxx
-     */
-    public function testChildRolesInheritParentPermissions()
-    {
-        $foo = new Rbac\Role('foo');
-        $bar = new Rbac\Role('bar');
-
-        $foo->addPermission('can.foo');
-        $bar->addPermission('can.bar');
-
-        $this->rbac->addRole($foo);
-        $this->rbac->addRole($bar, $foo);
-
-        $this->assertTrue($this->rbac->isGranted('bar', 'can.foo'));
+        $this->assertEquals(false, $this->rbac->isGranted('foo', 'can.baz'));
+        $this->assertEquals(false, $this->rbac->isGranted('bar', 'can.baz'));
     }
 
     public function testHasRole()

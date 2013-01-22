@@ -3,11 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Permissions\Rbac;
+
+use RecursiveIteratorIterator;
 
 abstract class AbstractRole extends AbstractIterator
 {
@@ -50,7 +52,7 @@ abstract class AbstractRole extends AbstractIterator
     }
 
     /**
-     * Checks if a permission exists for this role or any parent roles.
+     * Checks if a permission exists for this role or any child roles.
      *
      * @param  string $name
      * @return bool
@@ -61,8 +63,12 @@ abstract class AbstractRole extends AbstractIterator
             return true;
         }
 
-        if($this->parent && $this->parent->hasPermission($name)) {
-            return true;
+        $it = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($it as $leaf) {
+            /** @var AbstractRole $leaf */
+            if ($leaf->hasPermission($name)) {
+                return true;
+            }
         }
 
         return false;

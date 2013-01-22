@@ -257,7 +257,7 @@ abstract class AbstractValue
             return self::XMLRPC_TYPE_DOUBLE;
         } elseif (is_bool($value)) {
             return self::XMLRPC_TYPE_BOOLEAN;
-        } elseif (is_null($value)) {
+        } elseif (null === $value) {
             return self::XMLRPC_TYPE_NIL;
         } elseif (is_string($value)) {
             return self::XMLRPC_TYPE_STRING;

@@ -572,9 +572,11 @@ class Acl
         $resources = array();
         foreach ($resourcesTemp as $resource) {
             if (null !== $resource) {
-                $children = $this->getChildResources($this->getResource($resource));
+                $resourceObj = $this->getResource($resource);
+                $resourceId = $resourceObj->getResourceId();
+                $children = $this->getChildResources($resourceObj);
                 $resources = array_merge($resources, $children);
-                $resources[$resource] = $this->getResource($resource);
+                $resources[$resourceId] = $resourceObj;
             } else {
                 $resources[] = null;
             }

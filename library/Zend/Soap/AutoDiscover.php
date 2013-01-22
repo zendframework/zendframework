@@ -544,4 +544,13 @@ class AutoDiscover
     {
         return $this->generate()->toXml();
     }
+
+    /**
+     * Handle WSDL document.
+     */
+    public function handle()
+    {
+        header('Content-Type: text/xml');
+        echo $this->toXml();
+    }
 }

@@ -44,5 +44,4 @@ class DateTime extends \DateTime
 
         return self::createFromFormat($format, $time);
     }
-
 }

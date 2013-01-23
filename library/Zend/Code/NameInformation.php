@@ -110,5 +110,4 @@ class NameInformation
         }
         return $name;
     }
-
 }

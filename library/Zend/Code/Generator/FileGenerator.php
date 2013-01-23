@@ -592,5 +592,4 @@ class FileGenerator extends AbstractGenerator
         file_put_contents($this->filename, $this->generate());
         return $this;
     }
-
 }

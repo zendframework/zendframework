@@ -257,5 +257,4 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     {
         return $this->name;
     }
-
 }

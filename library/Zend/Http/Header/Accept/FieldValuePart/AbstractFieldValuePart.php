@@ -114,5 +114,4 @@ abstract class AbstractFieldValuePart
     {
         return $this->getInternalValues()->$key;
     }
-
 }

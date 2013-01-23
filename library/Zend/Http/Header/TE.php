@@ -48,5 +48,4 @@ class TE implements HeaderInterface
     {
         return 'TE: ' . $this->getFieldValue();
     }
-
 }

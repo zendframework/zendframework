@@ -37,5 +37,4 @@ class Category extends AbstractCollection
         }
         return array_unique($categories);
     }
-
 }

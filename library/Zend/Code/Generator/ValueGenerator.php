@@ -369,5 +369,4 @@ class ValueGenerator extends AbstractGenerator
     {
         return $this->generate();
     }
-
 }

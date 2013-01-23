@@ -48,5 +48,4 @@ class ProxyAuthorization implements HeaderInterface
     {
         return 'Proxy-Authorization: ' . $this->getFieldValue();
     }
-
 }

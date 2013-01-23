@@ -73,5 +73,4 @@ class InjectionMethod
     {
         return $this->parameters;
     }
-
 }

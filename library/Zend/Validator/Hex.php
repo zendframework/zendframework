@@ -50,5 +50,4 @@ class Hex extends AbstractValidator
 
         return true;
     }
-
 }

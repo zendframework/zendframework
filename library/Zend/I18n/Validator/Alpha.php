@@ -84,5 +84,4 @@ class Alpha extends Alnum
 
         return true;
     }
-
 }

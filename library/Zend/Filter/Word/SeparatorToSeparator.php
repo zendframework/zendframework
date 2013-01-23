@@ -109,5 +109,4 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
         $this->setReplacement($this->replacementSeparator);
         return parent::filter($value);
     }
-
 }

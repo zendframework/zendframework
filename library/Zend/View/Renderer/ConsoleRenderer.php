@@ -151,5 +151,4 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
     {
         return true;
     }
-
 }

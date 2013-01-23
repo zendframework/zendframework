@@ -48,5 +48,4 @@ class ContentDisposition implements HeaderInterface
     {
         return 'Content-Disposition: ' . $this->getFieldValue();
     }
-
 }

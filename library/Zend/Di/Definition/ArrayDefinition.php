@@ -166,5 +166,4 @@ class ArrayDefinition implements DefinitionInterface
     {
         return $this->dataArray;
     }
-
 }

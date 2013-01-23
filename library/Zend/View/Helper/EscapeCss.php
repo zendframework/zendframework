@@ -31,5 +31,4 @@ class EscapeCss extends Escaper\AbstractHelper
     {
         return $this->getEscaper()->escapeCss($value);
     }
-
 }

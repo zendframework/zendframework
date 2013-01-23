@@ -322,5 +322,4 @@ class Connection implements ConnectionInterface
         $row = sqlsrv_fetch_array($result);
         return $row['Current_Identity'];
     }
-
 }

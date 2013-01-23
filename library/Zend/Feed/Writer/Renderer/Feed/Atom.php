@@ -96,5 +96,4 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
         }
         return $this;
     }
-
 }

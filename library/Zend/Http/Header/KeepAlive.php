@@ -48,5 +48,4 @@ class KeepAlive implements HeaderInterface
     {
         return 'Keep-Alive: ' . $this->getFieldValue();
     }
-
 }

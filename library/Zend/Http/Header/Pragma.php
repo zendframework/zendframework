@@ -48,5 +48,4 @@ class Pragma implements HeaderInterface
     {
         return 'Pragma: ' . $this->getFieldValue();
     }
-
 }

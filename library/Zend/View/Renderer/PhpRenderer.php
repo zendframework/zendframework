@@ -522,5 +522,4 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     {
         $this->__vars = clone $this->vars();
     }
-
 }

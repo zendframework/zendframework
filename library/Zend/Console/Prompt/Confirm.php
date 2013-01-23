@@ -112,5 +112,4 @@ class Confirm extends Char
     {
         return $this->yesChar;
     }
-
 }

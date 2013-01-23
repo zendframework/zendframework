@@ -48,5 +48,4 @@ class IfRange implements HeaderInterface
     {
         return 'If-Range: ' . $this->getFieldValue();
     }
-
 }

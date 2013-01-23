@@ -392,5 +392,4 @@ class MethodScanner implements ScannerInterface
         $this->isScanned = true;
         return;
     }
-
 }

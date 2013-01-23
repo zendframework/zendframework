@@ -327,5 +327,4 @@ class StandardAutoloader implements SplAutoloader
         $directory .= DIRECTORY_SEPARATOR;
         return $directory;
     }
-
 }

@@ -133,5 +133,4 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         );
 
     }
-
 }

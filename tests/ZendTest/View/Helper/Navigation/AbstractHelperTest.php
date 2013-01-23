@@ -5,6 +5,16 @@ namespace ZendTest\View\Helper\Navigation;
 
 class AbstractHelperTest extends AbstractTest
 {
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->_helper->setDefaultAcl(null);
+        $this->_helper->setAcl(null);
+        $this->_helper->setDefaultRole(null);
+        $this->_helper->setRole(null);
+    }
+
     /**
      * Class name for view helper to test
      *
@@ -62,15 +72,5 @@ class AbstractHelperTest extends AbstractTest
         $this->_helper->setRole($role);
         $this->assertEquals(true, $this->_helper->hasRole());
     }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
-        $this->_helper->setDefaultAcl(null);
-        $this->_helper->setAcl(null);
-        $this->_helper->setDefaultRole(null);
-        $this->_helper->setRole(null);
-    }
-
 
 }

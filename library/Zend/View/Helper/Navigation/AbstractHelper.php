@@ -567,8 +567,8 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      */
     public function hasAcl()
     {
-        if ($this->acl instanceof \Zend\Permissions\Acl\Acl ||
-            static::$defaultAcl instanceof \Zend\Permissions\Acl\Acl) {
+        if ($this->acl instanceof Acl\Acl ||
+            static::$defaultAcl instanceof Acl\Acl) {
             return true;
         }
 
@@ -584,9 +584,9 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      */
     public function hasRole()
     {
-        if ($this->role instanceof \Zend\Permissions\Acl\Role\RoleInterface ||
+        if ($this->role instanceof Acl\Role\RoleInterface ||
             is_string($this->role) ||
-            static::$defaultRole instanceof \Zend\Permissions\Acl\Role\RoleInterface ||
+            static::$defaultRole instanceof Acl\Role\RoleInterface ||
             is_string(static::$defaultRole)) {
             return true;
         }

@@ -11,10 +11,10 @@ namespace Zend\Permissions\Rbac;
 
 use RecursiveIteratorIterator;
 
-abstract class AbstractRole extends AbstractIterator
+abstract class AbstractRole extends AbstractIterator implements RoleInterface
 {
     /**
-     * @var null|AbstractRole
+     * @var null|RoleInterface
      */
     protected $parent;
 
@@ -42,7 +42,7 @@ abstract class AbstractRole extends AbstractIterator
      * Add permission to the role.
      *
      * @param $name
-     * @return AbstractRole
+     * @return RoleInterface
      */
     public function addPermission($name)
     {
@@ -65,7 +65,7 @@ abstract class AbstractRole extends AbstractIterator
 
         $it = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($it as $leaf) {
-            /** @var AbstractRole $leaf */
+            /** @var RoleInterface $leaf */
             if ($leaf->hasPermission($name)) {
                 return true;
             }
@@ -77,7 +77,7 @@ abstract class AbstractRole extends AbstractIterator
     /**
      * Add a child.
      *
-     * @param  AbstractRole|string $child
+     * @param  RoleInterface|string $child
      * @return Role
      */
     public function addChild($child)
@@ -85,9 +85,9 @@ abstract class AbstractRole extends AbstractIterator
         if (is_string($child)) {
             $child = new Role($child);
         }
-        if (!$child instanceof AbstractRole) {
+        if (!$child instanceof RoleInterface) {
             throw new Exception\InvalidArgumentException(
-                'Child must be a string or instance of Zend\Permissions\Rbac\AbstractRole'
+                'Child must be a string or implement Zend\Permissions\Rbac\RoleInterface'
             );
         }
 
@@ -98,8 +98,8 @@ abstract class AbstractRole extends AbstractIterator
     }
 
     /**
-     * @param  AbstractRole $parent
-     * @return AbstractRole
+     * @param  RoleInterface $parent
+     * @return RoleInterface
      */
     public function setParent($parent)
     {
@@ -109,7 +109,7 @@ abstract class AbstractRole extends AbstractIterator
     }
 
     /**
-     * @return null|AbstractRole
+     * @return null|RoleInterface
      */
     public function getParent()
     {

@@ -41,14 +41,6 @@ class Smtp extends AbstractProtocol
 
 
     /**
-     * Indicates the HELO command has been issues
-     *
-     * @var bool
-     */
-    protected $helo = false;
-
-
-    /**
      * Indicates an smtp AUTH has been issued and authenticated
      *
      * @var bool

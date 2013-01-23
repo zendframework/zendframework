@@ -117,5 +117,4 @@ class MessageId implements HeaderInterface
 
         return sha1($time . $user . $rand) . '@' . $hostName;
     }
-
 }

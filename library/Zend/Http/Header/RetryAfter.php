@@ -108,5 +108,4 @@ class RetryAfter extends AbstractDate
     {
         return 'Retry-After: ' . $this->getFieldValue();
     }
-
 }

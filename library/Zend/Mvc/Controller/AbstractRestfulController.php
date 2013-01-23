@@ -211,5 +211,4 @@ abstract class AbstractRestfulController extends AbstractController
 
         return $this->update($id, $parsedParams);
     }
-
 }

@@ -35,5 +35,4 @@ class LanguageFieldValuePart extends AbstractFieldValuePart
     {
         return $this->getInternalValues()->subtype;
     }
-
 }

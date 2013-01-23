@@ -52,5 +52,4 @@ class RowGateway extends AbstractRowGateway
 
         $this->initialize();
     }
-
 }

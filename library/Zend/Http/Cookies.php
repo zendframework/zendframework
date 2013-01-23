@@ -342,5 +342,4 @@ class Cookies extends Headers
         $this->cookies = $this->rawCookies = array();
         return $this;
     }
-
 }

@@ -244,5 +244,4 @@ class ParameterGenerator extends AbstractGenerator
 
         return $output;
     }
-
 }

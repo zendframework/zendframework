@@ -22,7 +22,6 @@ use Zend\Mail\Protocol\Smtp;
 class SmtpProtocolSpy extends Smtp
 {
     protected $connect = false;
-    protected $helo;
     protected $mail;
     protected $rcptTest = array();
     protected $sess = true;
@@ -36,18 +35,15 @@ class SmtpProtocolSpy extends Smtp
     public function helo($serverName = '127.0.0.1')
     {
         parent::helo($serverName);
-        $this->helo = $serverName;
     }
 
     public function quit()
     {
-        $this->helo = null;
         $this->rset();
     }
 
     public function disconnect()
     {
-        $this->helo    = null;
         $this->connect = false;
         $this->rset();
     }
@@ -89,16 +85,6 @@ class SmtpProtocolSpy extends Smtp
     public function isConnected()
     {
         return $this->connect;
-    }
-
-    /**
-     * Get server name we opened a connection with
-     *
-     * @return null|string
-     */
-    public function getHelo()
-    {
-        return $this->helo;
     }
 
     /**

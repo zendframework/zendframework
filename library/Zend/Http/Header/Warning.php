@@ -48,5 +48,4 @@ class Warning implements HeaderInterface
     {
         return 'Warning: ' . $this->getFieldValue();
     }
-
 }

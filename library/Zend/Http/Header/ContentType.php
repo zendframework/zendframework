@@ -48,5 +48,4 @@ class ContentType implements HeaderInterface
     {
         return 'Content-Type: ' . $this->getFieldValue();
     }
-
 }

@@ -48,5 +48,4 @@ class From implements HeaderInterface
     {
         return 'From: ' . $this->getFieldValue();
     }
-
 }

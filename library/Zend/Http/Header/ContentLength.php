@@ -48,5 +48,4 @@ class ContentLength implements HeaderInterface
     {
         return 'Content-Length: ' . $this->getFieldValue();
     }
-
 }

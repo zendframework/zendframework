@@ -284,5 +284,4 @@ class DocBlockReflection implements ReflectionInterface
     {
         return $this->toString();
     }
-
 }

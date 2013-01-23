@@ -48,5 +48,4 @@ class Via implements HeaderInterface
     {
         return 'Via: ' . $this->getFieldValue();
     }
-
 }

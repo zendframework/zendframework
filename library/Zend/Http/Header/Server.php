@@ -48,5 +48,4 @@ class Server implements HeaderInterface
     {
         return 'Server: ' . $this->getFieldValue();
     }
-
 }

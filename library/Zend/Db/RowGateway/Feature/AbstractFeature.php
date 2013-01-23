@@ -57,5 +57,4 @@ abstract class AbstractFeature extends AbstractRowGateway
     {
         return array();
     }
-
 }

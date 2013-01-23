@@ -127,5 +127,4 @@ class FeedSet extends ArrayObject
         }
         return parent::offsetGet($offset);
     }
-
 }

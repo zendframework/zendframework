@@ -191,5 +191,4 @@ class Request extends Message implements RequestInterface
     {
         return $this->scriptName;
     }
-
 }

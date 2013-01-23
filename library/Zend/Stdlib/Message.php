@@ -120,5 +120,4 @@ class Message implements MessageInterface
         $request .= "\r\n" . $this->getContent();
         return $request;
     }
-
 }

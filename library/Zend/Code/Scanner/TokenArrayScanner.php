@@ -630,5 +630,4 @@ class TokenArrayScanner implements ScannerInterface
 
         return $uses;
     }
-
 }

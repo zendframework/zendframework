@@ -123,5 +123,4 @@ class Debug
         }
         return $output;
     }
-
 }

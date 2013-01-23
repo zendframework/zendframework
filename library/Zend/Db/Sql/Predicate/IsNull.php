@@ -97,5 +97,4 @@ class IsNull implements PredicateInterface
             array(self::TYPE_IDENTIFIER),
         ));
     }
-
 }

@@ -47,5 +47,4 @@ class ContentMD5 implements HeaderInterface
     {
         return 'Content-MD5: ' . $this->getFieldValue();
     }
-
 }

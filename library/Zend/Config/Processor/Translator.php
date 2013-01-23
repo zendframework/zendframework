@@ -136,5 +136,4 @@ class Translator implements ProcessorInterface
     {
         return $this->translator->translate($value, $this->textDomain, $this->locale);
     }
-
 }

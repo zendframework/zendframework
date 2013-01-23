@@ -246,5 +246,4 @@ class DerivedClassScanner extends ClassScanner
 
         return false;
     }
-
 }

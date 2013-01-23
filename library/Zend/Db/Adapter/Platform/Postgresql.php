@@ -132,5 +132,4 @@ class Postgresql implements PlatformInterface
         }
         return implode('', $parts);
     }
-
 }

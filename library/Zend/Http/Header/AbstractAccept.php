@@ -449,5 +449,4 @@ abstract class AbstractAccept implements HeaderInterface
 
         return $this->fieldValueParts;
     }
-
 }

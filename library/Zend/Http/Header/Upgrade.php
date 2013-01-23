@@ -47,5 +47,4 @@ class Upgrade implements HeaderInterface
     {
         return 'Upgrade: ' . $this->getFieldValue();
     }
-
 }

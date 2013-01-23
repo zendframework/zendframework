@@ -261,5 +261,4 @@ class BlockCipher implements EncryptionAlgorithmInterface
     {
         return 'BlockCipher';
     }
-
 }

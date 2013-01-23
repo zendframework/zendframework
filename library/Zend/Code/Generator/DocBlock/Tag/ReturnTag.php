@@ -59,5 +59,4 @@ class ReturnTag extends Tag
     {
         return '@return ' . $this->datatype . ' ' . $this->description;
     }
-
 }

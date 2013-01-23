@@ -534,5 +534,4 @@ class MethodScanner implements ScannerInterface
 
         return;
     }
-
 }

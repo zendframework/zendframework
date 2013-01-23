@@ -179,5 +179,4 @@ class Sqlsrv implements DriverInterface
     {
         return $this->getConnection()->getLastGeneratedValue();
     }
-
 }

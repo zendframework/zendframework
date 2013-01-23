@@ -543,5 +543,4 @@ abstract class AbstractSource implements MetadataInterface
 
         $this->prepareDataHierarchy('triggers', $schema);
     }
-
 }

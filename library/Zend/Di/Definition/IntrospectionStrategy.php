@@ -132,5 +132,4 @@ class IntrospectionStrategy
     {
         return $this->interfaceInjectionInclusionPatterns;
     }
-
 }

@@ -47,5 +47,4 @@ class Trailer implements HeaderInterface
     {
         return 'Trailer: ' . $this->getFieldValue();
     }
-
 }

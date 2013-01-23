@@ -211,5 +211,4 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
 
         return $instance;
     }
-
 }

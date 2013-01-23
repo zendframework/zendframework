@@ -47,5 +47,4 @@ class Etag implements HeaderInterface
     {
         return 'Etag: ' . $this->getFieldValue();
     }
-
 }

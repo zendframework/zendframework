@@ -99,5 +99,4 @@ class Deleted
             $uri->appendChild($text);
         }
     }
-
 }

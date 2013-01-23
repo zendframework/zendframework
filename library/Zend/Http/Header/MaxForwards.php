@@ -47,5 +47,4 @@ class MaxForwards implements HeaderInterface
     {
         return 'Max-Forwards: ' . $this->getFieldValue();
     }
-
 }

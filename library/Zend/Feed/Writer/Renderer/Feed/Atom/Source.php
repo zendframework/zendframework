@@ -88,5 +88,4 @@ class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer\Renderer
             $generator->setAttribute('version', $gdata['version']);
         }
     }
-
 }

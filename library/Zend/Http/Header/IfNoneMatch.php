@@ -47,5 +47,4 @@ class IfNoneMatch implements HeaderInterface
     {
         return 'If-None-Match: ' . $this->getFieldValue();
     }
-
 }

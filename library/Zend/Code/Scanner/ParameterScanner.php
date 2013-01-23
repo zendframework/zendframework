@@ -350,5 +350,4 @@ class ParameterScanner
 
         return $this->isPassedByReference;
     }
-
 }

@@ -59,5 +59,4 @@ class MasterSlaveFeature extends AbstractFeature
     {
         $this->tableGateway->adapter = $this->masterAdapter;
     }
-
 }

@@ -47,5 +47,4 @@ class Expect implements HeaderInterface
     {
         return 'Expect: ' . $this->getFieldValue();
     }
-
 }

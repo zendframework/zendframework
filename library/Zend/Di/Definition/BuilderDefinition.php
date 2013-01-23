@@ -318,5 +318,4 @@ class BuilderDefinition implements DefinitionInterface
 
         return $methodParameters;
     }
-
 }

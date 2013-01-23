@@ -26,5 +26,4 @@ class Author extends AbstractCollection
         }
         return array_unique($authors);
     }
-
 }

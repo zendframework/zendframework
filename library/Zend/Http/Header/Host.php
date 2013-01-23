@@ -47,5 +47,4 @@ class Host implements HeaderInterface
     {
         return 'Host: ' . $this->getFieldValue();
     }
-
 }

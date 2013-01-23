@@ -227,5 +227,4 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     {
         return parent::__toString();
     }
-
 }

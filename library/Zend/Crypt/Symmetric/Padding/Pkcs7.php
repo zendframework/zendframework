@@ -46,5 +46,4 @@ class Pkcs7 implements PaddingInterface
         }
         return false;
     }
-
 }

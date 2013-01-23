@@ -137,5 +137,4 @@ class TableGatewayEvent implements EventInterface
     {
         return false;
     }
-
 }

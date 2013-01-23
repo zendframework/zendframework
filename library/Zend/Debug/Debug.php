@@ -119,5 +119,4 @@ class Debug
         }
         return $output;
     }
-
 }

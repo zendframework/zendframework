@@ -485,5 +485,4 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             $this->table = clone $this->table;
         }
     }
-
 }

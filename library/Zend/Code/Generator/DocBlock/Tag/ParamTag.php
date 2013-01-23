@@ -88,5 +88,4 @@ class ParamTag extends Tag
 
         return $output;
     }
-
 }

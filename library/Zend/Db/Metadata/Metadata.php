@@ -246,5 +246,4 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getColumn($columnName, $table, $schema);
     }
-
 }

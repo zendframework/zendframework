@@ -172,5 +172,4 @@ class PhpClass
     {
         return $this->injectionMethods;
     }
-
 }

@@ -279,5 +279,4 @@ class Statement implements StatementInterface
             call_user_func_array(array($this->resource, 'bind_param'), $args);
         }
     }
-
 }

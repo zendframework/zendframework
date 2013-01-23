@@ -47,5 +47,4 @@ class IfMatch implements HeaderInterface
     {
         return 'If-Match: ' . $this->getFieldValue();
     }
-
 }

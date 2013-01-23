@@ -133,5 +133,4 @@ class Mysql implements PlatformInterface
         }
         return implode('', $parts);
     }
-
 }

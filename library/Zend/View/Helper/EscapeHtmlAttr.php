@@ -27,5 +27,4 @@ class EscapeHtmlAttr extends Escaper\AbstractHelper
     {
         return $this->getEscaper()->escapeHtmlAttr($value);
     }
-
 }

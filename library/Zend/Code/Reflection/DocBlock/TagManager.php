@@ -121,5 +121,4 @@ class TagManager
 
         return $newTag;
     }
-
 }

@@ -47,5 +47,4 @@ class UserAgent implements HeaderInterface
     {
         return 'User-Agent: ' . $this->getFieldValue();
     }
-
 }

@@ -47,5 +47,4 @@ class Vary implements HeaderInterface
     {
         return 'Vary: ' . $this->getFieldValue();
     }
-
 }

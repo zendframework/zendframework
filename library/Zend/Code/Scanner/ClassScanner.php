@@ -791,5 +791,4 @@ class ClassScanner implements ScannerInterface
 
         return;
     }
-
 }

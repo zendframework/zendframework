@@ -205,5 +205,4 @@ class Number extends Line
     {
         return $this->allowFloat;
     }
-
 }

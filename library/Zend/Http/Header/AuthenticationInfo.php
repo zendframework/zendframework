@@ -47,5 +47,4 @@ class AuthenticationInfo implements HeaderInterface
     {
         return 'Authentication-Info: ' . $this->getFieldValue();
     }
-
 }

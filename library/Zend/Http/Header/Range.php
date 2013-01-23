@@ -47,5 +47,4 @@ class Range implements HeaderInterface
     {
         return 'Range: ' . $this->getFieldValue();
     }
-
 }

@@ -152,5 +152,4 @@ class NameInformation
 
         return $name;
     }
-
 }

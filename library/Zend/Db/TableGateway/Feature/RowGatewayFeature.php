@@ -65,5 +65,4 @@ class RowGatewayFeature extends AbstractFeature
             $resultSetPrototype->setArrayObjectPrototype($rowGatewayPrototype);
         }
     }
-
 }

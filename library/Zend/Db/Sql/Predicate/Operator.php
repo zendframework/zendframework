@@ -215,5 +215,4 @@ class Operator implements PredicateInterface
             array($this->leftType, $this->rightType)
         ));
     }
-
 }

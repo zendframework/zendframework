@@ -54,7 +54,6 @@ class Common extends \SoapClient
 
         return call_user_func($this->doRequestCallback, $this, ltrim($request), $location, $action, $version, $oneWay);
     }
-
 }
 
 } // end if (extension_loaded('soap')

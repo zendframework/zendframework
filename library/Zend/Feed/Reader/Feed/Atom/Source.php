@@ -91,5 +91,4 @@ class Source extends Feed\Atom
      * @return void
      */
     protected function indexEntries() {}
-
 }

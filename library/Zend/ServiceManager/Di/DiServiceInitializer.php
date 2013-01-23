@@ -64,5 +64,4 @@ class DiServiceInitializer extends Di implements InitializerInterface
             throw $e;
         }
     }
-
 }

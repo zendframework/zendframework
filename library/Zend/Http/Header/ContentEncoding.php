@@ -47,5 +47,4 @@ class ContentEncoding implements HeaderInterface
     {
         return 'Content-Encoding: ' . $this->getFieldValue();
     }
-
 }

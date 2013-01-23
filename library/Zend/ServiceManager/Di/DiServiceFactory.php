@@ -119,5 +119,4 @@ class DiServiceFactory extends Di implements FactoryInterface
         }
 
     }
-
 }

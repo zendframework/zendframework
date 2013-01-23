@@ -798,5 +798,4 @@ class Imap
         }
         return array();
     }
-
 }

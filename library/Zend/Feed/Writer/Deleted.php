@@ -234,5 +234,4 @@ class Deleted
         }
         return $this->data['comment'];
     }
-
 }

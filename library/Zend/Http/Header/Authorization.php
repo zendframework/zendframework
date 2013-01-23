@@ -47,5 +47,4 @@ class Authorization implements HeaderInterface
     {
         return 'Authorization: ' . $this->getFieldValue();
     }
-
 }

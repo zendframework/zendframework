@@ -442,5 +442,4 @@ class DbTable extends AbstractAdapter
             $this->authenticateResultInfo['messages']
         );
     }
-
 }

@@ -238,5 +238,4 @@ class Connection implements ConnectionInterface
         $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
         return pg_fetch_result($result, 0, 'currval');
     }
-
 }

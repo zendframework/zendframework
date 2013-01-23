@@ -209,5 +209,4 @@ class Char extends AbstractPrompt
     {
         return $this->echo;
     }
-
 }

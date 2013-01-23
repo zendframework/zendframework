@@ -47,5 +47,4 @@ class Refresh implements HeaderInterface
     {
         return 'Refresh: ' . $this->getFieldValue();
     }
-
 }

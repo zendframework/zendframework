@@ -391,5 +391,4 @@ class Mbox extends AbstractStorage
             }
         }
     }
-
 }

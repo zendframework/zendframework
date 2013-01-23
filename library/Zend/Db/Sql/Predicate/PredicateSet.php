@@ -133,5 +133,4 @@ class PredicateSet implements PredicateInterface, Countable
     {
         return count($this->predicates);
     }
-
 }

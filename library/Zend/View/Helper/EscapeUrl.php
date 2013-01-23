@@ -27,5 +27,4 @@ class EscapeUrl extends Escaper\AbstractHelper
     {
         return $this->getEscaper()->escapeUrl($value);
     }
-
 }

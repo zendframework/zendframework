@@ -144,5 +144,4 @@ class ServerIntrospection
     {
         return $this->system->listMethods();
     }
-
 }

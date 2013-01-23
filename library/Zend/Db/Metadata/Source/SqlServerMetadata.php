@@ -340,5 +340,4 @@ class SqlServerMetadata extends AbstractSource
 
         $this->data['triggers'][$schema] = $data;
     }
-
 }

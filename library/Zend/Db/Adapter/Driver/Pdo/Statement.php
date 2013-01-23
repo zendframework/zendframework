@@ -268,5 +268,4 @@ class Statement implements StatementInterface
         }
 
     }
-
 }

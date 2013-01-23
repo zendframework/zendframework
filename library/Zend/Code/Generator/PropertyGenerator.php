@@ -228,5 +228,4 @@ class PropertyGenerator extends AbstractMemberGenerator
 
         return $output;
     }
-
 }

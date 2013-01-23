@@ -41,5 +41,4 @@ class AcceptFieldValuePart extends AbstractFieldValuePart
     {
         return $this->getInternalValues()->format;
     }
-
 }

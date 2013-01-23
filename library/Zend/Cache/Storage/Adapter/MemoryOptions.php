@@ -109,5 +109,4 @@ class MemoryOptions extends AdapterOptions
 
         return $value;
     }
-
 }

@@ -395,5 +395,4 @@ class Connection implements ConnectionInterface
         }
         return false;
     }
-
 }

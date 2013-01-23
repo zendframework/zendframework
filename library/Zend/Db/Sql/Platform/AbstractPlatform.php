@@ -107,5 +107,4 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
 
         return $this->subject->getSqlString($adapterPlatform);
     }
-
 }

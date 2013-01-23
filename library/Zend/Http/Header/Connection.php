@@ -117,5 +117,4 @@ class Connection implements HeaderInterface
     {
         return 'Connection: ' . $this->getFieldValue();
     }
-
 }

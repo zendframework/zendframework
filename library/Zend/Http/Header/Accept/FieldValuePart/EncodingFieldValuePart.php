@@ -26,5 +26,4 @@ class EncodingFieldValuePart extends AbstractFieldValuePart
     {
         return $this->type;
     }
-
 }

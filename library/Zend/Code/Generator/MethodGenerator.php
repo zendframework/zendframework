@@ -267,5 +267,4 @@ class MethodGenerator extends AbstractMemberGenerator
     {
         return $this->generate();
     }
-
 }

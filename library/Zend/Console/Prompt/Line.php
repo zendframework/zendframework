@@ -110,5 +110,4 @@ class Line extends AbstractPrompt
     {
         return $this->promptText;
     }
-
 }

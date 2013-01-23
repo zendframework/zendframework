@@ -14,8 +14,8 @@ interface ElementPrepareAwareInterface
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param Form $form
+     * @param FormInterface $form
      * @return mixed
      */
-    public function prepareElement(Form $form);
+    public function prepareElement(FormInterface $form);
 }

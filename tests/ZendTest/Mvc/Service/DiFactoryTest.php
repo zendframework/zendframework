@@ -15,7 +15,7 @@ use Zend\ServiceManager\ServiceManager;
 
 class DiFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testWillInitializeDiAndDiAbstractFactoryAndDiInitializer()
+    public function testWillInitializeDiAndDiAbstractFactory()
     {
         $serviceManager = new ServiceManager();
         $serviceManager->setService('Config', array('di' => array('')));

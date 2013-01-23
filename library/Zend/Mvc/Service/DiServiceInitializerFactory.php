@@ -24,13 +24,6 @@ class DiServiceInitializerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $initializer = new DiServiceInitializer($serviceLocator->get('Di'), $serviceLocator);
-
-        if ($serviceLocator instanceof ServiceManager) {
-            /* @var $serviceLocator ServiceManager */
-            $serviceLocator->addInitializer($initializer);
-        }
-
-        return $initializer;
+        return new DiServiceInitializer($serviceLocator->get('Di'), $serviceLocator);
     }
 }

@@ -6,7 +6,7 @@ use Zend\Db\Adapter\Driver\Oci8\Statement;
 
 /**
  * @group integration
- * @group integration-sqlsrv
+ * @group integration-oracle
  */
 class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
         }
 
         if (!extension_loaded('oci8')) {
-            $this->fail('The phpunit group integration-sqlsrv was enabled, but the extension is not loaded.');
+            $this->fail('The phpunit group integration-oracle was enabled, but the extension is not loaded.');
         }
     }
 
@@ -90,6 +90,6 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
         $result = $statement->execute();
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\Oci8\Result', $result);
 
-        unset($resource, $sqlsrvResource);
+        unset($resource, $oci8);
     }
 }

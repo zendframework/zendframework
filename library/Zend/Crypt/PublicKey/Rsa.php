@@ -178,7 +178,7 @@ class Rsa
      * Verify signature with public key
      *
      * $signature can be encoded in base64 or not. $mode sets how the input must be processed:
-     *  - MODE_AUTO: Try to guess if $signature is base64 encoded or not. This mode is not recommended.
+     *  - MODE_AUTO: Check if the $signature is encoded in base64. Not recommended for performance.
      *  - MODE_BASE64: Decode $signature using base64 algorithm.
      *  - MODE_RAW: $signature is not encoded.
      *
@@ -264,7 +264,7 @@ class Rsa
      * Decrypt with private/public key
      *
      * $data can be encoded in base64 or not. $mode sets how the input must be processed:
-     *  - MODE_AUTO: Try to guess if $data is base64 encoded or not. This mode is not recommended.
+     *  - MODE_AUTO: Check if the $signature is encoded in base64. Not recommended for performance.
      *  - MODE_BASE64: Decode $data using base64 algorithm.
      *  - MODE_RAW: $data is not encoded.
      *

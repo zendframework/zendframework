@@ -26,7 +26,7 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     {
         $this->markTestIncomplete('edit this');
         $resource = oci_connect($this->variables['username'], $this->variables['password']);
-        
+
         $connection = new Connection(array());
         $this->assertSame($connection, $connection->setResource($resource));
 

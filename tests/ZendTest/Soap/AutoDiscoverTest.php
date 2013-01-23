@@ -730,6 +730,23 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertWsdlPathExists($wsdl, $path);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
+    public function testHandle()
+    {
+        $scriptUri = 'http://localhost/my_script.php';
+
+        $server = $this->createAutodiscoverService();
+        $server->setClass('\ZendTest\Soap\TestAsset\Test');
+
+        ob_start();
+        $server->handle();
+        $actualWsdl = ob_get_clean();
+        $this->assertNotEmpty($actualWsdl, "WSDL content was not outputted.");
+        $this->assertContains($scriptUri, $actualWsdl, "Script URL was not found in WSDL content.");
+    }
+
     public function assertWsdlPathExists($xml, $path)
     {
         $doc = new \DOMDocument('UTF-8');

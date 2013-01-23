@@ -16,14 +16,17 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 use Zend\Form\Element\Collection as Collection;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
+use ZendTest\Form\TestAsset\Entity\Product;
 
 class CollectionTest extends TestCase
 {
     protected $form;
+    protected $productFieldset;
 
     public function setUp()
     {
         $this->form = new \ZendTest\Form\TestAsset\FormCollection();
+        $this->productFieldset = new \ZendTest\Form\TestAsset\ProductFieldset();
 
         parent::setUp();
     }
@@ -240,6 +243,45 @@ class CollectionTest extends TestCase
         $collection->setTargetElement($element);
 
         $this->assertInstanceOf('Zend\Form\Element', $collection->getTargetElement());
+    }
+
+    public function testExtractFromObjectDoesntTouchOriginalObject()
+    {
+        $form = new \Zend\Form\Form();
+        $form->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $this->productFieldset->setUseAsBaseFieldset(true);
+        $form->add($this->productFieldset);
+
+        $originalObjectHash = spl_object_hash($this->productFieldset->get("categories")->getTargetElement()->getObject());
+
+        $product = new Product();
+        $product->setName("foo");
+        $product->setPrice(42);
+        $cat1 = new \ZendTest\Form\TestAsset\Entity\Category();
+        $cat1->setName("bar");
+        $cat2 = new \ZendTest\Form\TestAsset\Entity\Category();
+        $cat2->setName("bar2");
+
+        $product->setCategories(array($cat1,$cat2));
+
+        $form->bind($product);
+
+        $form->setData(
+            array("product"=>
+                array(
+                    "name" => "franz",
+                    "price" => 13,
+                    "categories" => array(
+                        array("name" => "sepp"),
+                        array("name" => "herbert")
+                    )
+                )
+            )
+        );
+
+        $objectAfterExtractHash = spl_object_hash($this->productFieldset->get("categories")->getTargetElement()->getObject());
+
+        $this->assertSame($originalObjectHash,$objectAfterExtractHash);
     }
 
     public function testExtractDefaultIsEmptyArray()

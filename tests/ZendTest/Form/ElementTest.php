@@ -76,6 +76,33 @@ class ElementTest extends TestCase
         $this->assertEquals(array(), $element->getAttributes());
     }
 
+    public function testCanRemoveSingleAttribute()
+    {
+        $element = new Element();
+        $attributes = array(
+            'type'     => 'text',
+            'class'    => 'text-element',
+            'data-foo' => 'bar',
+        );
+        $element->setAttributes($attributes);
+        $element->removeAttribute('type');
+        $this->assertFalse($element->hasAttribute('type'));
+    }
+
+    public function testCanRemoveMultipleAttributes()
+    {
+        $element = new Element();
+        $attributes = array(
+            'type'     => 'text',
+            'class'    => 'text-element',
+            'data-foo' => 'bar',
+        );
+        $element->setAttributes($attributes);
+        $element->removeAttributes(array('type', 'class'));
+        $this->assertFalse($element->hasAttribute('type'));
+        $this->assertFalse($element->hasAttribute('class'));
+    }
+
     public function testSettingNameSetsNameAttribute()
     {
         $element = new Element();

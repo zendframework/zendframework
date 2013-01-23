@@ -307,4 +307,28 @@ class StaticEventManagerTest extends TestCase
         $manager->trigger('bar', $this, array());
         $this->assertEquals(4, $test->triggered);
     }
+
+    public function testCanAttachListenerAggregate()
+    {
+        $staticManager = StaticEventManager::getInstance();
+        $aggregate = new TestAsset\SharedMockAggregate('bazinga');
+        $staticManager->attachAggregate($aggregate);
+
+        $events = $staticManager->getEvents('bazinga');
+        $this->assertCount(2, $events);
+    }
+
+    public function testCanDetachListenerAggregate()
+    {
+        $staticManager = StaticEventManager::getInstance();
+        $aggregate = new TestAsset\SharedMockAggregate('bazinga');
+
+        $staticManager->attachAggregate($aggregate);
+        $events = $staticManager->getEvents('bazinga');
+        $this->assertCount(2, $events);
+
+        $staticManager->detachAggregate($aggregate);
+        $events = $staticManager->getEvents('bazinga');
+        $this->assertCount(0, $events);
+    }
 }

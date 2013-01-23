@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Ldif;
@@ -14,10 +13,6 @@ use Zend\Ldap;
 
 /**
  * Zend\Ldap\Ldif\Encoder provides methods to encode and decode LDAP data into/from Ldif.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Ldif
  */
 class Encoder
 {

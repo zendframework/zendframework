@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc;
@@ -43,9 +42,6 @@ use Zend\Stdlib\ResponseInterface;
  * sets up the MvcEvent, and triggers the bootstrap event. This can be omitted
  * if you wish to setup your own listeners and/or workflow; alternately, you
  * can simply extend the class to override such behavior.
- *
- * @category   Zend
- * @package    Zend_Mvc
  */
 class Application implements
     ApplicationInterface,
@@ -132,6 +128,7 @@ class Application implements
         $events->attach($serviceManager->get('RouteListener'));
         $events->attach($serviceManager->get('DispatchListener'));
         $events->attach($serviceManager->get('ViewManager'));
+        $events->attach($serviceManager->get('SendResponseListener'));
 
         // Setup MVC Event
         $this->event = $event  = new MvcEvent();

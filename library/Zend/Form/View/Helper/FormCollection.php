@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -17,11 +16,6 @@ use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormCollection extends AbstractHelper
 {
     /**
@@ -46,6 +40,13 @@ class FormCollection extends AbstractHelper
     protected $elementHelper;
 
     /**
+     * The view helper used to render sub fieldsets.
+     *
+     * @var AbstractHelper
+     */
+    protected $fieldsetHelper;
+
+    /**
      * Render a collection by iterating through all fieldsets and elements
      *
      * @param  ElementInterface $element
@@ -59,24 +60,19 @@ class FormCollection extends AbstractHelper
             return '';
         }
 
-        $markup = '';
-        $templateMarkup = '';
+        $markup           = '';
+        $templateMarkup   = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $elementHelper = $this->getElementHelper();
+        $elementHelper    = $this->getElementHelper();
+        $fieldsetHelper   = $this->getFieldsetHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
-            $elementOrFieldset = $element->getTemplateElement();
-
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $templateMarkup .= $this->render($elementOrFieldset);
-            } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $elementHelper($elementOrFieldset);
-            }
+            $templateMarkup = $this->renderTemplate($element);
         }
 
         foreach ($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
-                $markup .= $this->render($elementOrFieldset);
+                $markup .= $fieldsetHelper($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
                 $markup .= $elementHelper($elementOrFieldset);
             }
@@ -84,12 +80,7 @@ class FormCollection extends AbstractHelper
 
         // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
-            $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
-
-            $markup .= sprintf(
-                '<span data-template="%s"></span>',
-                $escapeHtmlAttribHelper($templateMarkup)
-            );
+            $markup .= $templateMarkup;
         }
 
         // Every collection is wrapped by a fieldset if needed
@@ -108,6 +99,32 @@ class FormCollection extends AbstractHelper
         }
 
         return $markup;
+    }
+
+    /**
+     * Only render a template
+     *
+     * @param  CollectionElement            $collection
+     * @return string
+     */
+    public function renderTemplate(CollectionElement $collection)
+    {
+        $elementHelper          = $this->getElementHelper();
+        $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+        $templateMarkup         = '';
+
+        $elementOrFieldset = $collection->getTemplateElement();
+
+        if ($elementOrFieldset instanceof FieldsetInterface) {
+            $templateMarkup .= $this->render($elementOrFieldset);
+        } elseif ($elementOrFieldset instanceof ElementInterface) {
+            $templateMarkup .= $elementHelper($elementOrFieldset);
+        }
+
+        return sprintf(
+            '<span data-template="%s"></span>',
+            $escapeHtmlAttribHelper($templateMarkup)
+        );
     }
 
     /**
@@ -207,6 +224,33 @@ class FormCollection extends AbstractHelper
     public function setElementHelper(AbstractHelper $elementHelper)
     {
         $this->elementHelper = $elementHelper;
+        return $this;
+    }
+
+    /**
+     * Retrieve the fieldset helper.
+     *
+     * @return AbstractHelper
+     */
+    protected function getFieldsetHelper()
+    {
+        if ($this->fieldsetHelper) {
+            return $this->fieldsetHelper;
+        }
+
+        //if no special fieldset helper was set fall back to FormCollection helper
+        return $this;
+    }
+
+    /**
+     * Sets the fieldset helper that should be used by this collection.
+     *
+     * @param AbstractHelper $fieldsetHelper The fieldset helper to use.
+     * @return FormCollection
+     */
+    public function setFieldsetHelper(AbstractHelper $fieldsetHelper)
+    {
+        $this->fieldsetHelper = $fieldsetHelper;
         return $this;
     }
 }

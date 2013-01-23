@@ -24,7 +24,6 @@ use Zend\Code\Generator\ValueGenerator;
 class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
-
     public function testTypeGetterAndSetterPersistValue()
     {
         $parameterGenerator = new ParameterGenerator();
@@ -124,7 +123,6 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromReflectionGenerate($methodName, $expectedCode)
     {
-        //$this->markTestSkipped('Test may not be necessary any longer');
         $reflectionParameter = $this->getFirstReflectionParameter($methodName);
         $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
@@ -149,20 +147,45 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
             array('defaultNumber', '$number = 1234'),
             array('defaultFloat', '$float = 1.34'),
             array('defaultConstant', '$con = \'foo\'')
-            );
+        );
     }
 
-
     /**
-     * @param  string $method
+     * @param  string                               $method
      * @return \Zend\Reflection\ReflectionParameter
      */
     protected function getFirstReflectionParameter($method)
     {
-        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('ZendTest\Code\Generator\TestAsset\ParameterClass');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection(
+            'ZendTest\Code\Generator\TestAsset\ParameterClass'
+        );
         $method = $reflectionClass->getMethod($method);
 
         $params = $method->getParameters();
+
         return array_shift($params);
+    }
+
+    public function testCreateFromArray()
+    {
+        $parameterGenerator = ParameterGenerator::fromArray(array(
+            'name'              => 'SampleParameter',
+            'type'              => 'int',
+            'defaultvalue'      => 'foo',
+            'passedbyreference' => false,
+            'position'          => 1,
+            'sourcedirty'       => false,
+            'sourcecontent'     => 'foo',
+            'indentation'       => '-',
+        ));
+
+        $this->assertEquals('SampleParameter', $parameterGenerator->getName());
+        $this->assertEquals('int', $parameterGenerator->getType());
+        $this->assertInstanceOf('Zend\Code\Generator\ValueGenerator', $parameterGenerator->getDefaultValue());
+        $this->assertFalse($parameterGenerator->getPassedByReference());
+        $this->assertEquals(1, $parameterGenerator->getPosition());
+        $this->assertFalse($parameterGenerator->isSourceDirty());
+        $this->assertEquals('foo', $parameterGenerator->getSourceContent());
+        $this->assertEquals('-', $parameterGenerator->getIndentation());
     }
 }

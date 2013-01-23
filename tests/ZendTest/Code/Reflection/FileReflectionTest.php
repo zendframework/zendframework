@@ -99,8 +99,12 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
 
-        $this->assertTrue($reflectionFile->getDocBlock() instanceof \Zend\Code\Reflection\DocBlockReflection);
-        $this->assertEquals('Jeremiah Small <jsmall@soliantconsulting.com>', $reflectionFile->getDocBlock()->getTag('author')->getContent());
+        $reflectionDocBlock = $reflectionFile->getDocBlock();
+        $this->assertTrue($reflectionDocBlock instanceof \Zend\Code\Reflection\DocBlockReflection);
+
+        $authorTag = $reflectionDocBlock->getTag('author');
+        $this->assertEquals('Jeremiah Small', $authorTag->getAuthorName());
+        $this->assertEquals('jsmall@soliantconsulting.com', $authorTag->getAuthorEmail());
     }
 
     public function testFileGetFunctionsReturnsFunctions()

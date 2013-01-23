@@ -5,88 +5,184 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Annotation;
+use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Exception;
 use Zend\Code\NameInformation;
 
 class MethodScanner implements ScannerInterface
 {
+    /**
+     * @var bool
+     */
     protected $isScanned    = false;
 
+    /**
+     * @var string
+     */
     protected $docComment   = null;
+
+    /**
+     * @var ClassScanner
+     */
     protected $scannerClass = null;
+
+    /**
+     * @var string
+     */
     protected $class        = null;
+
+    /**
+     * @var string
+     */
     protected $name         = null;
+
+    /**
+     * @var int
+     */
     protected $lineStart    = null;
+
+    /**
+     * @var int
+     */
     protected $lineEnd      = null;
-    protected $isFinal      = false;
-    protected $isAbstract   = false;
-    protected $isPublic     = true;
-    protected $isProtected  = false;
-    protected $isPrivate    = false;
-    protected $isStatic     = false;
 
-    protected $body         = '';
+    /**
+     * @var bool
+     */
+    protected $isFinal = false;
 
-    protected $tokens       = array();
+    /**
+     * @var bool
+     */
+    protected $isAbstract = false;
+
+    /**
+     * @var bool
+     */
+    protected $isPublic = true;
+
+    /**
+     * @var bool
+     */
+    protected $isProtected = false;
+
+    /**
+     * @var bool
+     */
+    protected $isPrivate = false;
+
+    /**
+     * @var bool
+     */
+    protected $isStatic = false;
+
+    /**
+     * @var string
+     */
+    protected $body = '';
+
+    /**
+     * @var array
+     */
+    protected $tokens = array();
+
+    /**
+     * @var NameInformation
+     */
     protected $nameInformation = null;
-    protected $infos        = array();
 
+    /**
+     * @var array
+     */
+    protected $infos = array();
+
+    /**
+     * @param  array $methodTokens
+     * @param NameInformation $nameInformation
+     */
     public function __construct(array $methodTokens, NameInformation $nameInformation = null)
     {
         $this->tokens          = $methodTokens;
         $this->nameInformation = $nameInformation;
     }
 
+    /**
+     * @param  string $class
+     * @return MethodScanner
+     */
     public function setClass($class)
     {
-        $this->class = $class;
+        $this->class = (string) $class;
+        return $this;
     }
 
+    /**
+     * @param  ClassScanner  $scannerClass
+     * @return MethodScanner
+     */
     public function setScannerClass(ClassScanner $scannerClass)
     {
         $this->scannerClass = $scannerClass;
+        return $this;
     }
 
+    /**
+     * @return MethodScanner
+     */
     public function getClassScanner()
     {
         return $this->scannerClass;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         $this->scan();
+
         return $this->name;
     }
 
+    /**
+     * @return int
+     */
     public function getLineStart()
     {
         $this->scan();
+
         return $this->lineStart;
     }
 
+    /**
+     * @return int
+     */
     public function getLineEnd()
     {
         $this->scan();
+
         return $this->lineEnd;
     }
 
+    /**
+     * @return string
+     */
     public function getDocComment()
     {
         $this->scan();
+
         return $this->docComment;
     }
 
     /**
-     * @param  Annotation\AnnotationManager $annotationManager
-     * @return Annotation\AnnotationCollection
+     * @param  AnnotationManager $annotationManager
+     * @return AnnotationScanner
      */
-    public function getAnnotations(Annotation\AnnotationManager $annotationManager)
+    public function getAnnotations(AnnotationManager $annotationManager)
     {
         if (($docComment = $this->getDocComment()) == '') {
             return false;
@@ -95,47 +191,78 @@ class MethodScanner implements ScannerInterface
         return new AnnotationScanner($annotationManager, $docComment, $this->nameInformation);
     }
 
+    /**
+     * @return bool
+     */
     public function isFinal()
     {
         $this->scan();
+
         return $this->isFinal;
     }
 
+    /**
+     * @return bool
+     */
     public function isAbstract()
     {
         $this->scan();
+
         return $this->isAbstract;
     }
 
+    /**
+     * @return bool
+     */
     public function isPublic()
     {
         $this->scan();
+
         return $this->isPublic;
     }
 
+    /**
+     * @return bool
+     */
     public function isProtected()
     {
         $this->scan();
+
         return $this->isProtected;
     }
 
+    /**
+     * @return bool
+     */
     public function isPrivate()
     {
         $this->scan();
+
         return $this->isPrivate;
     }
 
+    /**
+     * @return bool
+     */
     public function isStatic()
     {
         $this->scan();
+
         return $this->isStatic;
     }
 
+    /**
+     * @return int
+     */
     public function getNumberOfParameters()
     {
         return count($this->getParameters());
     }
 
+    /**
+     * @param  bool $returnScanner
+     * @return array
+     */
     public function getParameters($returnScanner = false)
     {
         $this->scan();
@@ -153,9 +280,15 @@ class MethodScanner implements ScannerInterface
                 $return[] = $this->getParameter($info['name']);
             }
         }
+
         return $return;
     }
 
+    /**
+     * @param  int|string $parameterNameOrInfoIndex
+     * @return ParameterScanner
+     * @throws Exception\InvalidArgumentException
+     */
     public function getParameter($parameterNameOrInfoIndex)
     {
         $this->scan();
@@ -186,12 +319,17 @@ class MethodScanner implements ScannerInterface
         $p->setDeclaringClass($this->class);
         $p->setDeclaringScannerClass($this->scannerClass);
         $p->setPosition($info['position']);
+
         return $p;
     }
 
+    /**
+     * @return string
+     */
     public function getBody()
     {
         $this->scan();
+
         return $this->body;
     }
 
@@ -203,6 +341,7 @@ class MethodScanner implements ScannerInterface
     public function __toString()
     {
         $this->scan();
+
         return var_export($this, true);
     }
 
@@ -241,6 +380,7 @@ class MethodScanner implements ScannerInterface
                 $tokenContent = false;
                 $tokenType    = false;
                 $tokenLine    = false;
+
                 return false;
             }
             $token = $tokens[$tokenIndex];
@@ -252,6 +392,7 @@ class MethodScanner implements ScannerInterface
             } else {
                 list($tokenType, $tokenContent, $tokenLine) = $token;
             }
+
             return $tokenIndex;
         };
         $MACRO_INFO_START    = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
@@ -269,6 +410,7 @@ class MethodScanner implements ScannerInterface
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;
+
             return $infoIndex;
         };
 
@@ -280,7 +422,6 @@ class MethodScanner implements ScannerInterface
         $MACRO_TOKEN_ADVANCE();
 
         SCANNER_TOP:
-
 
         $this->lineStart = ($this->lineStart) ? : $tokenLine;
 
@@ -390,6 +531,7 @@ class MethodScanner implements ScannerInterface
         SCANNER_END:
 
         $this->isScanned = true;
+
         return;
     }
 

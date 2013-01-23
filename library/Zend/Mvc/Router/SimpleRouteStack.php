@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router;
@@ -16,8 +15,6 @@ use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Simple route stack implementation.
- *
- * @package    Zend_Mvc_Router
  */
 class SimpleRouteStack implements RouteStackInterface
 {
@@ -175,7 +172,6 @@ class SimpleRouteStack implements RouteStackInterface
         return $this;
     }
 
-
     /**
      * setRoutes(): defined by RouteStackInterface interface.
      *
@@ -187,6 +183,38 @@ class SimpleRouteStack implements RouteStackInterface
         $this->routes->clear();
         $this->addRoutes($routes);
         return $this;
+    }
+
+    /**
+     * Get the added routes
+     *
+     * @return Traversable list of all routes
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
+    /**
+     * Check if a route with a specific name exists
+     *
+     * @param string $name
+     * @return boolean true if route exists
+     */
+    public function hasRoute($name)
+    {
+        return $this->routes->get($name) !== null;
+    }
+
+    /**
+     * Get a route by name
+     *
+     * @param string $name
+     * @return RouteInterface the route
+     */
+    public function getRoute($name)
+    {
+        return $this->routes->get($name);
     }
 
     /**

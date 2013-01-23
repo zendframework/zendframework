@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
@@ -16,11 +15,6 @@ use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
 use Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface;
 use Zend\Db\Adapter\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- */
 class Pdo implements DriverInterface, DriverFeatureInterface
 {
     /**
@@ -135,6 +129,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
         if ($this->connection->getDriverName() == 'sqlite') {
             $this->addFeature(null, new Feature\SqliteRowCounter);
         }
+        if ($this->connection->getDriverName() == 'oci') {
+            $this->addFeature(null, new Feature\OracleRowCounter);
+        }
         return $this;
     }
 
@@ -237,6 +234,14 @@ class Pdo implements DriverInterface, DriverFeatureInterface
             && $resource->columnCount() > 0) {
             $rowCount = $sqliteRowCounter->getRowCountClosure($context);
         }
+
+        // special feature, oracle PDO counter
+        if ($this->connection->getDriverName() == 'oci'
+            && ($oracleRowCounter = $this->getFeature('OracleRowCounter'))
+            && $resource->columnCount() > 0) {
+            $rowCount = $oracleRowCounter->getRowCountClosure($context);
+        }
+
 
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $rowCount);
         return $result;

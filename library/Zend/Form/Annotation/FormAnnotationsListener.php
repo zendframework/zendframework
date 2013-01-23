@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
@@ -29,10 +28,6 @@ use Zend\EventManager\EventManagerInterface;
  * See the individual annotation classes for more details. The handlers
  * registered work with the annotation values, as well as the form
  * specification passed in the event object.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
  */
 class FormAnnotationsListener extends AbstractAnnotationsListener
 {

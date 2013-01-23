@@ -5,35 +5,83 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib\Hydrator;
 
 use ReflectionMethod;
+use Traversable;
 use Zend\Stdlib\Exception;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
+use Zend\Stdlib\Hydrator\Filter\FilterProviderInterface;
+use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
+use Zend\Stdlib\Hydrator\Filter\GetFilter;
+use Zend\Stdlib\Hydrator\Filter\HasFilter;
+use Zend\Stdlib\Hydrator\Filter\IsFilter;
+use Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter;
 
-/**
- * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage Hydrator
- */
-class ClassMethods extends AbstractHydrator
+class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      * @var bool
      */
-    protected $underscoreSeparatedKeys;
+    protected $underscoreSeparatedKeys = true;
 
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param  bool $underscoreSeparatedKeys
+     * @param bool|array $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
         parent::__construct();
+        $this->setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
+
+        $this->filterComposite->addFilter("is", new IsFilter());
+        $this->filterComposite->addFilter("has", new HasFilter());
+        $this->filterComposite->addFilter("get", new GetFilter());
+        $this->filterComposite->addFilter("parameter", new NumberOfParameterFilter(), FilterComposite::CONDITION_AND);
+    }
+
+    /**
+     * @param  array|\Traversable                 $options
+     * @return ClassMethods
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+        if (isset($options['underscoreSeparatedKeys'])) {
+            $this->setUnderscoreSeparatedKeys($options['underscoreSeparatedKeys']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  boolean      $underscoreSeparatedKeys
+     * @return ClassMethods
+     */
+    public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
+    {
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUnderscoreSeparatedKeys()
+    {
+        return $this->underscoreSeparatedKeys;
     }
 
     /**
@@ -41,7 +89,7 @@ class ClassMethods extends AbstractHydrator
      *
      * Extracts the getter/setter of the given $object.
      *
-     * @param  object $object
+     * @param  object                           $object
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -53,15 +101,30 @@ class ClassMethods extends AbstractHydrator
             ));
         }
 
+        $filter = null;
+        if ($object instanceof FilterProviderInterface) {
+            $filter = new FilterComposite(
+                array($object->getFilter()),
+                array(new MethodMatchFilter("getFilter"))
+            );
+        } else {
+            $filter = $this->filterComposite;
+        }
+
         $transform = function ($letters) {
             $letter = array_shift($letters);
+
             return '_' . strtolower($letter);
         };
         $attributes = array();
         $methods = get_class_methods($object);
 
         foreach ($methods as $method) {
-            if (!preg_match('/^(get|has|is)[A-Z]\w*/', $method)) {
+            if (
+                !$filter->filter(
+                    get_class($object) . '::' . $method
+                )
+            ) {
                 continue;
             }
 
@@ -90,8 +153,8 @@ class ClassMethods extends AbstractHydrator
      *
      * Hydrates an object by getter/setter methods of the object.
      *
-     * @param  array $data
-     * @param  object $object
+     * @param  array                            $data
+     * @param  object                           $object
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -105,6 +168,7 @@ class ClassMethods extends AbstractHydrator
 
         $transform = function ($letters) {
             $letter = substr(array_shift($letters), 1, 1);
+
             return ucfirst($letter);
         };
 
@@ -119,6 +183,8 @@ class ClassMethods extends AbstractHydrator
                 $object->$method($value);
             }
         }
+
         return $object;
     }
+
 }

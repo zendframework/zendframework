@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
  */
 
 namespace Zend\ModuleManager\Listener;
@@ -22,10 +21,6 @@ use Zend\Stdlib\Glob;
 
 /**
  * Config listener
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage Listener
  */
 class ConfigListener extends AbstractListener implements
     ConfigMergerInterface,
@@ -159,8 +154,12 @@ class ConfigListener extends AbstractListener implements
         }
 
         // If enabled, update the config cache
-        if ($this->getOptions()->getConfigCacheEnabled()) {
-            $this->updateCache();
+        if (
+            $this->getOptions()->getConfigCacheEnabled()
+            && false === $this->skipConfig
+        ) {
+            $configFile = $this->getOptions()->getConfigCacheFile();
+            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
         }
 
         return $this;
@@ -380,19 +379,5 @@ class ConfigListener extends AbstractListener implements
     protected function getCachedConfig()
     {
         return include $this->getOptions()->getConfigCacheFile();
-    }
-
-    /**
-     * @return ConfigListener
-     */
-    protected function updateCache()
-    {
-        if (($this->getOptions()->getConfigCacheEnabled())
-            && (false === $this->skipConfig)
-        ) {
-            $configFile = $this->getOptions()->getConfigCacheFile();
-            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
-        }
-        return $this;
     }
 }

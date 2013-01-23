@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\PhpEnvironment;
@@ -15,9 +14,6 @@ use Zend\Http\Response as HttpResponse;
 
 /**
  * HTTP Response for current PHP environment
- *
- * @category   Zend
- * @package    Zend_Http
  */
 class Response extends HttpResponse
 {
@@ -28,11 +24,6 @@ class Response extends HttpResponse
      * @var null|string
      */
     protected $version;
-
-    /**
-     * @var bool
-     */
-    protected $headersSent = false;
 
     /**
      * @var bool
@@ -73,11 +64,12 @@ class Response extends HttpResponse
      */
     public function headersSent()
     {
-        return $this->headersSent;
+        return headers_sent();
     }
 
     /**
      * @return bool
+     * @deprecated
      */
     public function contentSent()
     {
@@ -88,6 +80,7 @@ class Response extends HttpResponse
      * Send HTTP headers
      *
      * @return Response
+     * @deprecated
      */
     public function sendHeaders()
     {
@@ -115,6 +108,7 @@ class Response extends HttpResponse
      * Send content
      *
      * @return Response
+     * @deprecated
      */
     public function sendContent()
     {
@@ -131,6 +125,7 @@ class Response extends HttpResponse
      * Send HTTP response
      *
      * @return Response
+     * @deprecated
      */
     public function send()
     {

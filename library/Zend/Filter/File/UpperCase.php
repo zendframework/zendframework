@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter\File;
@@ -13,10 +12,6 @@ namespace Zend\Filter\File;
 use Zend\Filter\Exception;
 use Zend\Filter\StringToUpper;
 
-/**
- * @category   Zend
- * @package    Zend_Filter
- */
 class UpperCase extends StringToUpper
 {
     /**
@@ -24,13 +19,20 @@ class UpperCase extends StringToUpper
      *
      * Does a lowercase on the content of the given file
      *
-     * @param  string $value Full path of file to change
-     * @return string The given $value
+     * @param  string|array $value Full path of file to change or $_FILES data array
+     * @return string|array The given $value
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
     public function filter($value)
     {
+        // An uploaded file? Retrieve the 'tmp_name'
+        $isFileUpload = (is_array($value) && isset($value['tmp_name']));
+        if ($isFileUpload) {
+            $uploadData = $value;
+            $value      = $value['tmp_name'];
+        }
+
         if (!file_exists($value)) {
             throw new Exception\InvalidArgumentException("File '$value' not found");
         }
@@ -51,6 +53,9 @@ class UpperCase extends StringToUpper
             throw new Exception\RuntimeException("Problem while writing file '$value'");
         }
 
+        if ($isFileUpload) {
+            return $uploadData;
+        }
         return $value;
     }
 }

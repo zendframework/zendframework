@@ -17,6 +17,7 @@ use Zend\View\Helper\Doctype;
 use Zend\View\Renderer\PhpRenderer;
 use ZendTest\Form\TestAsset\FormCollection;
 use ZendTest\Form\TestAsset\CustomViewHelper;
+use ZendTest\Form\TestAsset\CustomFieldsetHelper;
 
 /**
  * @category   Zend
@@ -114,6 +115,19 @@ class FormCollectionTest extends TestCase
         $this->assertContains('id="customcolors1"', $markup);
     }
 
+    public function testRenderWithCustomFieldsetHelper()
+    {
+        $form = $this->getForm();
+
+        $fieldsetHelper = new CustomFieldsetHelper();
+        $fieldsetHelper->setView($this->renderer);
+
+        $markup = $this->helper->setFieldsetHelper($fieldsetHelper)->render($form);
+
+        $this->assertContains('id="customFieldsetcolors"', $markup);
+        $this->assertContains('id="customFieldsetfieldsets"', $markup);
+    }
+
     public function testShouldWrapReturnsDefaultTrue()
     {
         $this->assertTrue($this->helper->shouldWrap());
@@ -138,5 +152,14 @@ class FormCollectionTest extends TestCase
         $this->assertSame('foo', $defaultElement);
     }
 
+    public function testCanRenderTemplateAlone()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(true);
 
+        $markup = $this->helper->renderTemplate($collection);
+        $this->assertContains('<span data-template', $markup);
+        $this->assertContains($collection->getTemplatePlaceholder(), $markup);
+    }
 }

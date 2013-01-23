@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
@@ -14,10 +13,6 @@ use Zend\EventManager\EventManager;
 
 /**
  * Zend\Ldap\Node provides an object oriented view into a LDAP node.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Node
  */
 class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 {

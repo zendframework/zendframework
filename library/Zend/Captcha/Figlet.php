@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Captcha
  */
 
 namespace Zend\Captcha;
@@ -16,10 +15,6 @@ use Zend\Text\Figlet\Figlet as FigletManager;
  * Captcha based on figlet text rendering service
  *
  * Note that this engine seems not to like numbers
- *
- * @category   Zend
- * @package    Zend_Captcha
- * @subpackage Adapter
  */
 class Figlet extends AbstractWord
 {

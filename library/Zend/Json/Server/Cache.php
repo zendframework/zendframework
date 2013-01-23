@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json\Server;
@@ -15,10 +14,6 @@ use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
- *
- * @category   Zend
- * @package    Zend_Json
- * @subpackage Server
  */
 class Cache extends ServerCache
 {

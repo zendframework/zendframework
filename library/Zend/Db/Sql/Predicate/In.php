@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Predicate;
@@ -13,15 +12,13 @@ namespace Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- */
 class In implements PredicateInterface
 {
     protected $identifier;
     protected $valueSet;
+
+    protected $selectSpecification = '%s IN %s';
+    protected $valueSpecSpecification = '%%s IN (%s)';
 
     /**
      * Constructor
@@ -93,11 +90,11 @@ class In implements PredicateInterface
     {
         $values = $this->getValueSet();
         if ($values instanceof Select) {
-            $specification = '%s IN %s';
+            $specification = $this->selectSpecification;
             $types = array(self::TYPE_VALUE);
             $values = array($values);
         } else {
-            $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
+            $specification = sprintf($this->valueSpecSpecification, implode(', ', array_fill(0, count($values), '%s')));
             $types = array_fill(0, count($values), self::TYPE_VALUE);
         }
 

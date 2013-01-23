@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter;
@@ -13,14 +12,10 @@ namespace Zend\Db\Adapter;
 use Zend\Db\ResultSet;
 
 /**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- *
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
-class Adapter
+class Adapter implements AdapterInterface
 {
     /**
      * Query Mode Constants
@@ -243,8 +238,14 @@ class Adapter
             case 'sqlsrv':
                 $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
                 break;
+            case 'oci8':
+                $driver = new Driver\Oci8\Oci8($parameters);
+                break;
             case 'pgsql':
                 $driver = new Driver\Pgsql\Pgsql($parameters);
+                break;
+            case 'ibmdb2':
+                $driver = new Driver\IbmDb2\IbmDb2($parameters);
                 break;
             case 'pdo':
             default:
@@ -273,13 +274,16 @@ class Adapter
                 return new Platform\Mysql();
             case 'SqlServer':
                 return new Platform\SqlServer();
+            case 'Oracle':
+                return new Platform\Oracle();
             case 'Sqlite':
                 return new Platform\Sqlite();
             case 'Postgresql':
                 return new Platform\Postgresql();
+            case 'IbmDb2':
+                return new Platform\IbmDb2();
             default:
                 return new Platform\Sql92();
         }
     }
-
 }

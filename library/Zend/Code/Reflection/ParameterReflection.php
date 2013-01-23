@@ -5,17 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Reflection;
 
 use ReflectionParameter;
 
-/**
- * @category   Zend
- * @package    Zend_Reflection
- */
 class ParameterReflection extends ReflectionParameter implements ReflectionInterface
 {
     /**
@@ -48,6 +43,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
         if ($phpReflection == null) {
             return null;
         }
+
         $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
 
@@ -57,10 +53,9 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     /**
      * Get declaring function reflection object
      *
-     * @param  string $reflectionClass Reflection class to use
      * @return FunctionReflection|MethodReflection
      */
-    public function getDeclaringFunction($reflectionClass = null)
+    public function getDeclaringFunction()
     {
         $phpReflection = parent::getDeclaringFunction();
         if ($phpReflection instanceof \ReflectionMethod) {

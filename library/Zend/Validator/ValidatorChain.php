@@ -5,17 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 use Countable;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class ValidatorChain implements
     Countable,
     ValidatorInterface
@@ -88,7 +83,7 @@ class ValidatorChain implements
     }
 
     /**
-     * Adds a validator to the end of the chain
+     * Attach a validator to the end of the chain
      *
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
@@ -97,13 +92,26 @@ class ValidatorChain implements
      * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
-    public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
+    public function attach(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
         $this->validators[] = array(
             'instance'            => $validator,
             'breakChainOnFailure' => (bool) $breakChainOnFailure,
         );
         return $this;
+    }
+
+    /**
+     * Proxy to attach() to keep BC
+     *
+     * @deprecated Please use attach()
+     * @param  ValidatorInterface      $validator
+     * @param  boolean                 $breakChainOnFailure
+     * @return ValidatorChain Provides a fluent interface
+     */
+    public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
+    {
+        return $this->attach($validator, $breakChainOnFailure);
     }
 
     /**
@@ -136,11 +144,25 @@ class ValidatorChain implements
      * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
-    public function addByName($name, $options = array(), $breakChainOnFailure = false)
+    public function attachByName($name, $options = array(), $breakChainOnFailure = false)
     {
         $validator = $this->plugin($name, $options);
-        $this->addValidator($validator, $breakChainOnFailure);
+        $this->attach($validator, $breakChainOnFailure);
         return $this;
+    }
+
+    /**
+     * Proxy to attachByName() to keep BC
+     *
+     * @deprecated Please use attachByName()
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
+     * @return ValidatorChain
+     */
+    public function addByName($name, $options = array(), $breakChainOnFailure = false)
+    {
+        return $this->attachByName($name, $options, $breakChainOnFailure);
     }
 
     /**

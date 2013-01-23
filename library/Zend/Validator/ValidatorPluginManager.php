@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -14,10 +13,6 @@ use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class ValidatorPluginManager extends AbstractPluginManager
 {
     /**
@@ -67,13 +62,11 @@ class ValidatorPluginManager extends AbstractPluginManager
         'digits'                   => 'Zend\Validator\Digits',
         'emailaddress'             => 'Zend\Validator\EmailAddress',
         'explode'                  => 'Zend\Validator\Explode',
-        'filecount'                => 'Zend\Validator\File\Count',
         'filecrc32'                => 'Zend\Validator\File\Crc32',
         'fileexcludeextension'     => 'Zend\Validator\File\ExcludeExtension',
         'fileexcludemimetype'      => 'Zend\Validator\File\ExcludeMimeType',
         'fileexists'               => 'Zend\Validator\File\Exists',
         'fileextension'            => 'Zend\Validator\File\Extension',
-        'filefilessize'            => 'Zend\Validator\File\FilesSize',
         'filehash'                 => 'Zend\Validator\File\Hash',
         'fileimagesize'            => 'Zend\Validator\File\ImageSize',
         'fileiscompressed'         => 'Zend\Validator\File\IsCompressed',
@@ -95,6 +88,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'int'                      => 'Zend\I18n\Validator\Int',
         'ip'                       => 'Zend\Validator\Ip',
         'isbn'                     => 'Zend\Validator\Isbn',
+        'isinstanceof'             => 'Zend\Validator\IsInstanceOf',
         'lessthan'                 => 'Zend\Validator\LessThan',
         'notempty'                 => 'Zend\Validator\NotEmpty',
         'postcode'                 => 'Zend\I18n\Validator\PostCode',

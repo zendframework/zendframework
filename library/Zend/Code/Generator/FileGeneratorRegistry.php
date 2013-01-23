@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator;
@@ -15,15 +14,15 @@ use Zend\Code\Generator\Exception\RuntimeException;
 class FileGeneratorRegistry
 {
     /**
-     * @var array[string]\Zend\Code\Generator\FileGenerator $fileCodeGenerators registry for Zend\Code\Generator\FileGenerator
+     * @var array $fileCodeGenerators
      */
     private static $fileCodeGenerators = array();
 
     /**
      * Registry for the Zend_Code package. Zend_Tool uses this
      *
-     * @param FileGenerator $fileCodeGenerator
-     * @param string        $fileName
+     * @param  FileGenerator $fileCodeGenerator
+     * @param  string $fileName
      * @throws RuntimeException
      */
     public static function registerFileCodeGenerator(FileGenerator $fileCodeGenerator, $fileName = null)
@@ -41,6 +40,5 @@ class FileGeneratorRegistry
         $fileName = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $fileName);
 
         static::$fileCodeGenerators[$fileName] = $fileCodeGenerator;
-
     }
 }

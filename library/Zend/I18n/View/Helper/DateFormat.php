@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace Zend\I18n\View\Helper;
@@ -18,10 +17,6 @@ use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for formatting dates.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage View
  */
 class DateFormat extends AbstractHelper
 {
@@ -105,32 +100,35 @@ class DateFormat extends AbstractHelper
     /**
      * Format a date.
      *
-     * @param  DateTime|integer|array $date
-     * @param  integer                $dateType
-     * @param  integer                $timeType
-     * @param  string                 $locale
+     * @param  DateTime|integer|array  $date
+     * @param  int                     $dateType
+     * @param  int                     $timeType
+     * @param  string                  $locale
+     * @param  string|null             $pattern
      * @return string
-     * @throws Exception\RuntimeException
      */
     public function __invoke(
         $date,
         $dateType = IntlDateFormatter::NONE,
         $timeType = IntlDateFormatter::NONE,
-        $locale   = null
+        $locale   = null,
+        $pattern  = null
     ) {
         if ($locale === null) {
             $locale = $this->getlocale();
         }
 
         $timezone    = $this->getTimezone();
-        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale);
+        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale ."\0" . $pattern);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new IntlDateFormatter(
                 $locale,
                 $dateType,
                 $timeType,
-                $timezone
+                $timezone,
+                IntlDateFormatter::GREGORIAN,
+                $pattern
             );
         }
 

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
@@ -14,6 +13,7 @@ use stdClass;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
 use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\ClearExpiredInterface;
 use Zend\Cache\Storage\FlushableInterface;
@@ -21,14 +21,10 @@ use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\TaggableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- */
 class Memory extends AbstractAdapter implements
     AvailableSpaceCapableInterface,
     ClearByPrefixInterface,
+    ClearByNamespaceInterface,
     ClearExpiredInterface,
     FlushableInterface,
     IterableInterface,
@@ -174,6 +170,19 @@ class Memory extends AbstractAdapter implements
         return true;
     }
 
+    /* ClearByNamespaceInterface */
+
+    public function clearByNamespace($namespace)
+    {
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
+        unset($this->data[$namespace]);
+        return true;
+    }
+
     /* ClearByPrefixInterface */
 
     /**
@@ -184,6 +193,11 @@ class Memory extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
+        $prefix = (string) $prefix;
+        if ($prefix === '') {
+            throw new Exception\InvalidArgumentException('No prefix given');
+        }
+
         $ns = $this->getOptions()->getNamespace();
         if (!isset($this->data[$ns])) {
             return true;

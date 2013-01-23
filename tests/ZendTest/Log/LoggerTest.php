@@ -10,6 +10,8 @@
 
 namespace ZendTest\Log;
 
+use Zend\Log\Processor\Backtrace;
+
 use Zend\Log\Logger;
 use Zend\Log\Writer\Mock as MockWriter;
 use Zend\Log\Filter\Mock as MockFilter;
@@ -251,12 +253,82 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
 
-        $this->assertTrue(Logger::registerErrorHandler($this->logger));
+        $previous = Logger::registerErrorHandler($this->logger);
+        $this->assertNotNull($previous);
+        $this->assertTrue(false !== $previous);
+
         // check for single error handler instance
         $this->assertFalse(Logger::registerErrorHandler($this->logger));
+
         // generate a warning
-        echo $test;
+        echo $test; // $test is not defined
+
         Logger::unregisterErrorHandler();
         $this->assertEquals($writer->events[0]['message'], 'Undefined variable: test');
+    }
+
+    public function testOptionsWithMock()
+    {
+        $options = array('writers' => array(
+                             'first_writer' => array(
+                                 'name'     => 'mock',
+                             )
+                        ));
+        $logger = new Logger($options);
+
+        $writers = $logger->getWriters()->toArray();
+        $this->assertCount(1, $writers);
+        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writers[0]);
+    }
+
+    public function testOptionsWithWriterOptions()
+    {
+        $options = array('writers' => array(
+                              array(
+                                 'name'     => 'stream',
+                                 'options'  => array(
+                                     'stream' => 'php://output',
+                                     'log_separator' => 'foo'
+                                 ),
+                              )
+                         ));
+        $logger = new Logger($options);
+
+        $writers = $logger->getWriters()->toArray();
+        $this->assertCount(1, $writers);
+        $this->assertInstanceOf('Zend\Log\Writer\Stream', $writers[0]);
+        $this->assertEquals('foo', $writers[0]->getLogSeparator());
+    }
+
+    public function testAddProcessor()
+    {
+        $processor = new Backtrace();
+        $this->logger->addProcessor($processor);
+
+        $processors = $this->logger->getProcessors()->toArray();
+        $this->assertEquals($processor, $processors[0]);
+    }
+
+    public function testAddProcessorByName()
+    {
+        $this->logger->addProcessor('backtrace');
+
+        $processors = $this->logger->getProcessors()->toArray();
+        $this->assertInstanceOf('Zend\Log\Processor\Backtrace', $processors[0]);
+
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+        $this->logger->log(Logger::ERR, 'foo');
+    }
+
+    public function testProcessorOutputAdded()
+    {
+        $processor = new Backtrace();
+        $this->logger->addProcessor($processor);
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+
+        $this->logger->log(Logger::ERR, 'foo');
+        $this->assertEquals(__FILE__, $writer->events[0]['extra']['file']);
     }
 }

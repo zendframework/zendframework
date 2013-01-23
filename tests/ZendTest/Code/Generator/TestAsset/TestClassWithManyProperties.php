@@ -30,7 +30,7 @@ class TestClassWithManyProperties
             'bar',
             'baz',
             //PHP_EOL
-            )
-        );
+        )
+    );
 
 }

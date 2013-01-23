@@ -74,6 +74,7 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
                 'Router'                  => 'Zend\Mvc\Service\RouterFactory',
                 'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
                 'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
+                'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
                 'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
                 'ViewResolver'            => 'Zend\Mvc\Service\ViewResolverFactory',
                 'ViewTemplateMapResolver' => 'Zend\Mvc\Service\ViewTemplateMapResolverFactory',

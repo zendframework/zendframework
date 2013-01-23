@@ -69,7 +69,6 @@ class Response extends HttpResponse
 
     /**
      * @return bool
-     * @deprecated
      */
     public function contentSent()
     {
@@ -80,7 +79,6 @@ class Response extends HttpResponse
      * Send HTTP headers
      *
      * @return Response
-     * @deprecated
      */
     public function sendHeaders()
     {
@@ -108,7 +106,6 @@ class Response extends HttpResponse
      * Send content
      *
      * @return Response
-     * @deprecated
      */
     public function sendContent()
     {
@@ -125,7 +122,6 @@ class Response extends HttpResponse
      * Send HTTP response
      *
      * @return Response
-     * @deprecated
      */
     public function send()
     {

@@ -25,12 +25,8 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     public function testSetResource()
     {
         $this->markTestIncomplete('edit this');
-        $resource = sqlsrv_connect(
-            $this->variables['hostname'], array(
-                'UID' => $this->variables['username'],
-                'PWD' => $this->variables['password']
-            )
-        );
+        $resource = oci_connect($this->variables['username'], $this->variables['password']);
+        
         $connection = new Connection(array());
         $this->assertSame($connection, $connection->setResource($resource));
 

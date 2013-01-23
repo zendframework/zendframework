@@ -48,7 +48,7 @@ class SimpleRouteStack implements RouteStackInterface
     {
         $this->routes = new PriorityList();
 
-        if ($routePluginManager === null) {
+        if (null === $routePluginManager) {
             $routePluginManager = new RoutePluginManager();
         }
 

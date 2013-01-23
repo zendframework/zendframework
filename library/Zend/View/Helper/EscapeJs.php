@@ -31,5 +31,4 @@ class EscapeJs extends Escaper\AbstractHelper
     {
         return $this->getEscaper()->escapeJs($value);
     }
-
 }

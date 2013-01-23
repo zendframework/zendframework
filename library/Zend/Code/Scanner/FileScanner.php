@@ -47,5 +47,4 @@ class FileScanner extends TokenArrayScanner implements ScannerInterface
     {
         return $this->file;
     }
-
 }

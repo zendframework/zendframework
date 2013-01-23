@@ -345,5 +345,4 @@ class Result implements
     {
         return $this->generatedValue;
     }
-
 }

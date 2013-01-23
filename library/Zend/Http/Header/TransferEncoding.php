@@ -48,5 +48,4 @@ class TransferEncoding implements HeaderInterface
     {
         return 'Transfer-Encoding: ' . $this->getFieldValue();
     }
-
 }

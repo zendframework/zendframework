@@ -691,5 +691,4 @@ class ClassGenerator extends AbstractGenerator
 
         return $output;
     }
-
 }

@@ -342,5 +342,4 @@ class Predicate extends PredicateSet
         }
         return $this;
     }
-
 }

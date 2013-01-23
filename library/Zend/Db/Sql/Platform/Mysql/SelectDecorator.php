@@ -86,5 +86,4 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         return array($this->offset);
     }
-
 }

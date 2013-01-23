@@ -95,5 +95,4 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
             $generator->setAttribute('version', $gdata['version']);
         }
     }
-
 }

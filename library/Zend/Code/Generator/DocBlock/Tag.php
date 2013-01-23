@@ -135,5 +135,4 @@ class Tag extends AbstractGenerator
 
         return $output;
     }
-
 }

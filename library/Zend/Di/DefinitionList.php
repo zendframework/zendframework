@@ -258,5 +258,4 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
 
         return array();
     }
-
 }

@@ -111,5 +111,4 @@ class In implements PredicateInterface
             $types,
         ));
     }
-
 }

@@ -105,5 +105,4 @@ class ParamTag extends Tag
             . (($this->description != null) ? ' ' . $this->description : '');
         return $output;
     }
-
 }

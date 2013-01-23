@@ -236,5 +236,4 @@ class DocBlockGenerator extends AbstractGenerator
 
         return $output;
     }
-
 }

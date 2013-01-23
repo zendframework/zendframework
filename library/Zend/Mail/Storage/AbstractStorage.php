@@ -338,5 +338,4 @@ abstract class AbstractStorage implements
         }
         $this->iterationPos = $pos;
      }
-
 }

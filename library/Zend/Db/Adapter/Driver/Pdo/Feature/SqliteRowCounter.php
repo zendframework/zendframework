@@ -81,5 +81,4 @@ class SqliteRowCounter extends AbstractFeature
                 : $sqliteRowCounter->getCountForSql($context);
         };
     }
-
 }

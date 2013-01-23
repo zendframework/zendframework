@@ -95,5 +95,4 @@ class GenericTag implements TagInterface
         $this->content = trim($docBlockLine);
         $this->values = explode($this->contentSplitCharacter, $docBlockLine);
     }
-
 }

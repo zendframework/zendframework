@@ -787,5 +787,4 @@ class ClassScanner implements ScannerInterface
         $this->isScanned = true;
         return;
     }
-
 }

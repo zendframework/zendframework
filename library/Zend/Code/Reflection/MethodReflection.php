@@ -166,5 +166,4 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         return parent::__toString();
     }
-
 }

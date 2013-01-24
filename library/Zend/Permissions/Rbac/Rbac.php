@@ -43,8 +43,8 @@ class Rbac extends AbstractIterator
     /**
      * Add a child.
      *
-     * @param  string|AbstractRole                $child
-     * @return AbstractRole
+     * @param  string|RoleInterface                $child
+     * @return RoleInterface
      * @throws Exception\InvalidArgumentException
      */
     public function addRole($child, $parents = null)
@@ -52,9 +52,9 @@ class Rbac extends AbstractIterator
         if (is_string($child)) {
             $child = new Role($child);
         }
-        if (!$child instanceof AbstractRole) {
+        if (!$child instanceof RoleInterface) {
             throw new Exception\InvalidArgumentException(
-                'Child must be a string or instance of Zend\Permissions\Rbac\AbstractRole'
+                'Child must be a string or implement Zend\Permissions\Rbac\RoleInterface'
             );
         }
 
@@ -78,7 +78,7 @@ class Rbac extends AbstractIterator
     /**
      * Is a child with $name registered?
      *
-     * @param  \Zend\Permissions\Rbac\AbstractRole|string $objectOrName
+     * @param  \Zend\Permissions\Rbac\RoleInterface|string $objectOrName
      * @return bool
      */
     public function hasRole($objectOrName)
@@ -95,15 +95,15 @@ class Rbac extends AbstractIterator
     /**
      * Get a child.
      *
-     * @param  \Zend\Permissions\Rbac\AbstractRole|string $objectOrName
-     * @return AbstractRole
+     * @param  \Zend\Permissions\Rbac\RoleInterface|string $objectOrName
+     * @return RoleInterface
      * @throws Exception\InvalidArgumentException
      */
     public function getRole($objectOrName)
     {
-        if (!is_string($objectOrName) && !$objectOrName instanceof AbstractRole) {
+        if (!is_string($objectOrName) && !$objectOrName instanceof RoleInterface) {
             throw new Exception\InvalidArgumentException(
-                'Expected string or instance of \Zend\Permissions\Rbac\AbstractRole'
+                'Expected string or implement \Zend\Permissions\Rbac\RoleInterface'
             );
         }
 

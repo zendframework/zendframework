@@ -107,15 +107,15 @@ class FormRow extends AbstractHelper
                     $elementString);
             } else {
                 if ($element->hasAttribute('id')) {
-                    $labelOpen = $labelHelper($element);
+                    $labelOpen = '';
                     $labelClose = '';
-                    $label = '';
+                    $label = $labelHelper($element);
                 } else {
                     $labelOpen  = $labelHelper->openTag($labelAttributes);
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if ($label !== '') {
+                if ($label !== '' && !$element->hasAttribute('id')) {
                     $label = '<span>' . $label . '</span>';
                 }
 

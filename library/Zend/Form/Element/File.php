@@ -18,7 +18,7 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\Form;
+use Zend\Form\FormInterface;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
 use Zend\InputFilter\InputProviderInterface;
@@ -41,10 +41,10 @@ class File extends Element implements InputProviderInterface, ElementPrepareAwar
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param  Form $form
+     * @param  FormInterface $form
      * @return mixed
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         // Ensure the form is using correct enctype
         $form->setAttribute('enctype', 'multipart/form-data');

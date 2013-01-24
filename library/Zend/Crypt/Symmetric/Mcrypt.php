@@ -161,9 +161,6 @@ class Mcrypt implements SymmetricInterface
      */
     protected function setDefaultOptions($options = array())
     {
-        if (empty($options)) {
-            return;
-        }
         if (!isset($options['padding'])) {
             $plugins       = static::getPaddingPluginManager();
             $padding       = $plugins->get(self::DEFAULT_PADDING);
@@ -321,11 +318,6 @@ class Mcrypt implements SymmetricInterface
         if (null === $this->getSalt()) {
             throw new Exception\InvalidArgumentException('The salt (IV) cannot be empty');
         }
-        if (strlen($this->getSalt()) < $this->getSaltSize()) {
-            throw new Exception\InvalidArgumentException(
-                'The size of the salt (IV) is not enough. You need ' . $this->getSaltSize() . ' bytes'
-            );
-        }
         if (null === $this->getPadding()) {
             throw new Exception\InvalidArgumentException('You have to specify a padding method');
         }
@@ -408,6 +400,11 @@ class Mcrypt implements SymmetricInterface
         if (empty($salt)) {
             throw new Exception\InvalidArgumentException('The salt (IV) cannot be empty');
         }
+        if (strlen($salt) < $this->getSaltSize()) {
+            throw new Exception\InvalidArgumentException(
+                'The size of the salt (IV) must be at least ' . $this->getSaltSize() . ' bytes'
+            );
+        } 
         $this->iv = $salt;
         return $this;
     }

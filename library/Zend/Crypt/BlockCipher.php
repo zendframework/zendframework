@@ -360,7 +360,7 @@ class BlockCipher
         // generate the encryption key and the HMAC key for the authentication
         $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
                              $this->getKey(),
-                             $this->cipher->getSalt(),
+                             substr($this->cipher->getSalt(), 0, $this->cipher->getSaltSize()),
                              $this->keyIteration,
                              $keySize * 2);
         // set the encryption key

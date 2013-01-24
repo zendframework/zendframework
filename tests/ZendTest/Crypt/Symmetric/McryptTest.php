@@ -125,17 +125,17 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSalt()
     {
-        $this->mcrypt->setSalt($this->salt);
-        $this->assertEquals($this->salt, $this->mcrypt->getSalt());
+        $salt = substr($this->salt, 0, $this->mcrypt->getSaltSize());
+        $this->mcrypt->setSalt($salt);
+        $this->assertEquals($salt, $this->mcrypt->getSalt());
     }
 
+    /**
+     * @expectedException Zend\Crypt\Symmetric\Exception\InvalidArgumentException
+     */
     public function testShortSalt()
     {
         $this->mcrypt->setSalt('short');
-        $this->mcrypt->setKey($this->key);
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-                                    'The size of the salt (IV) is not enough. You need 16 bytes');
-        $output = $this->mcrypt->encrypt('test');
     }
 
     public function testSetMode()
@@ -153,13 +153,13 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testEncryptDecrypt()
     {
-        $this->mcrypt->setSalt($this->salt);
         $this->mcrypt->setKey($this->key);
         $this->mcrypt->setPadding(new PKCS7());
         foreach ($this->mcrypt->getSupportedAlgorithms() as $algo) {
             foreach ($this->mcrypt->getSupportedModes() as $mode) {
                 $this->mcrypt->setAlgorithm($algo);
                 $this->mcrypt->setMode($mode);
+                $this->mcrypt->setSalt($this->salt);
                 $encrypted = $this->mcrypt->encrypt($this->plaintext);
                 $this->assertTrue(!empty($encrypted));
                 $decrypted = $this->mcrypt->decrypt($encrypted);
@@ -191,15 +191,6 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         $ciphertext = $this->mcrypt->encrypt($this->plaintext);
     }
 
-    public function testEncryptWithoutPadding()
-    {
-        $this->mcrypt->setKey($this->key);
-        $this->mcrypt->setSalt($this->salt);
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-                                    'You have to specify a padding method');
-        $ciphertext = $this->mcrypt->encrypt($this->plaintext);
-    }
-
     public function testDecryptEmptyData()
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
@@ -211,14 +202,6 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
                                     'No key specified for the decryption');
-        $this->mcrypt->decrypt($this->plaintext);
-    }
-
-    public function testDecryptWihoutPadding()
-    {
-        $this->mcrypt->setKey($this->key);
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-                                    'You have to specify a padding method');
         $this->mcrypt->decrypt($this->plaintext);
     }
 }

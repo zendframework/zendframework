@@ -353,10 +353,10 @@ class Fieldset extends Element implements FieldsetInterface
      * Ensures state is ready for use. Here, we append the name of the fieldsets to every elements in order to avoid
      * name clashes if the same fieldset is used multiple times
      *
-     * @param  Form $form
+     * @param  FormInterface $form
      * @return mixed|void
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         $name = $this->getName();
 

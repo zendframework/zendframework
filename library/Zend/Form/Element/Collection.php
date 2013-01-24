@@ -16,7 +16,7 @@ use Zend\Form\Exception;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\FieldsetPrepareAwareInterface;
-use Zend\Form\Form;
+use Zend\Form\FormInterface;
 use Zend\Stdlib\ArrayUtils;
 
 class Collection extends Fieldset implements FieldsetPrepareAwareInterface
@@ -434,10 +434,10 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     /**
      * Prepare the collection by adding a dummy template element if the user want one
      *
-     * @param Form $form
+     * @param  FormInterface $form
      * @return mixed|void
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         // Create a template that will also be prepared
         if ($this->shouldCreateTemplate) {

@@ -11,7 +11,7 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\Form;
+use Zend\Form\FormInterface;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Csrf as CsrfValidator;
 
@@ -149,7 +149,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     /**
      * Prepare the form element
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         $this->getCsrfValidator()->getHash(true);
     }

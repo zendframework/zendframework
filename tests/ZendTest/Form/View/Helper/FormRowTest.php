@@ -339,4 +339,14 @@ class FormRowTest extends TestCase
         $mock->__invoke(new Element('foo'), null, true);
     }
 
+    public function testAppendLabelEvenIfElementHasId()
+    {
+        $element  = new Element('foo');
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('Baz');
+
+        $this->helper->setLabelPosition('append');
+        $markup = $this->helper->render($element);
+        $this->assertEquals('<input name="foo" id="bar" type="text" value=""/><label for="bar">Baz</label>', $markup);
+    }
 }

@@ -594,4 +594,11 @@ class FactoryTest extends TestCase
 
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $fieldset->getHydrator());
     }
+
+    public function testCreatedFieldsetsHaveFactoryAndFormElementManagerInjected()
+    {
+        $fieldset = $this->factory->createFieldset(array('name' => 'myFieldset'));
+        $this->assertAttributeInstanceOf('Zend\Form\Factory', 'factory', $fieldset);
+        $this->assertSame($fieldset->getFormFactory()->getFormElementManager(), $this->factory->getFormElementManager());
+    }
 }

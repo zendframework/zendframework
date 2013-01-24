@@ -107,7 +107,7 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        $element = $this->getElementFromName($type);
+        $element = $this->getFormElementManager()->get($type);
 
         if ($element instanceof FormInterface) {
             return $this->configureForm($element, $spec);
@@ -517,23 +517,6 @@ class Factory
         }
 
         $form->setValidationGroup($spec);
-    }
-
-    /**
-     * Try to pull to element from element manager, or instantiates it from its name
-     *
-     * @param  string $elementName
-     * @return mixed
-     */
-    protected function getElementFromName($elementName)
-    {
-        $formElementManager = $this->getFormElementManager();
-
-        if ($formElementManager->has($elementName)) {
-            return $formElementManager->get($elementName);
-        }
-
-        return new $elementName();
     }
 
     /**

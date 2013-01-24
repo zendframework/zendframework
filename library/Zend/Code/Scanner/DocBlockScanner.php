@@ -187,7 +187,7 @@ class DocBlockScanner implements ScannerInterface
         $currentWord = null;
         $currentLine = null;
 
-        $MACRO_STREAM_ADVANCE_CHAR       = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode) {
+        $MACRO_STREAM_ADVANCE_CHAR       = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine) {
             $positionsForward = ($positionsForward > 0) ? $positionsForward : 1;
             $streamIndex      = ($streamIndex === null) ? 0 : $streamIndex + $positionsForward;
             if (!isset($stream[$streamIndex])) {
@@ -202,12 +202,7 @@ class DocBlockScanner implements ScannerInterface
             if ($currentChar === ' ') {
                 $currentWord = (preg_match('#( +)#', $currentLine, $matches) === 1) ? $matches[1] : $currentLine;
             } else {
-                if ($annotationMode) {
-                    $currentWord = (($matches = strpos($currentLine, ' ')) !== false) ? substr($currentLine, 0,
-                                                                                               $matches) : $currentLine;
-                } else {
-                    $currentWord = strtok($currentLine, " \n\t\r");
-                }
+                $currentWord = (($matches = strpos($currentLine, ' ')) !== false) ? substr($currentLine, 0, $matches) : $currentLine;
             }
 
             return $currentChar;

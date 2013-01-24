@@ -162,4 +162,24 @@ class FormCollectionTest extends TestCase
         $this->assertContains('<span data-template', $markup);
         $this->assertContains($collection->getTemplatePlaceholder(), $markup);
     }
+
+    public function testCanTranslateLegend()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('untranslated legend');
+        $this->helper->setShouldWrap(true);
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+                       ->method('translate')
+                       ->will($this->returnValue('translated legend'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertContains('>translated legend<', $markup);
+    }
 }

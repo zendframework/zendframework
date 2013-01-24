@@ -88,6 +88,13 @@ class FormCollection extends AbstractHelper
             $label = $element->getLabel();
 
             if (!empty($label)) {
+
+                if (null !== ($translator = $this->getTranslator())) {
+                    $label = $translator->translate(
+                            $label, $this->getTranslatorTextDomain()
+                    );
+                }
+
                 $label = $escapeHtmlHelper($label);
 
                 $markup = sprintf(

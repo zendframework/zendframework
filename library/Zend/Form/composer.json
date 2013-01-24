@@ -14,7 +14,8 @@
     "target-dir": "Zend/Form",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-inputfilter": "self.version"
+        "zendframework/zend-inputfilter": "self.version",
+        "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zendservice-recaptcha": "*"

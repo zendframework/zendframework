@@ -36,7 +36,6 @@ abstract class AbstractPluginManagerFactory implements FactoryInterface
 
         if (isset($configuration['di']) && $serviceLocator->has('Di')) {
             $plugins->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
-            $plugins->addInitializer($serviceLocator->get('DiServiceInitializer'));
         }
 
         return $plugins;

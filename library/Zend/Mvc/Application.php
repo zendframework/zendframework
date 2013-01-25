@@ -13,6 +13,7 @@ use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ResponseInterface;
+use Zend\Stdlib\Nop;
 
 /**
  * Main application class for invoking applications
@@ -304,8 +305,16 @@ class Application implements
 
         $response = $this->getResponse();
         $event->setResponse($response);
+        $this->completeRequest($event);
 
-        return $this->completeRequest($event);
+        return $this;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function send()
+    {
     }
 
     /**

@@ -368,7 +368,8 @@ class ApplicationTest extends TestCase
         $this->application->getEventManager()->attach(MvcEvent::EVENT_FINISH, function ($e) {
             return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
         });
-        $this->assertContains('foobar', $this->application->run()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
+        $this->application->run();
+        $this->assertContains('foobar', $this->application->getResponse()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
     }
 
     /**

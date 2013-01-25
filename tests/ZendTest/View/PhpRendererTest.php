@@ -340,8 +340,12 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $model = new ViewModel();
         $model->setTemplate('exception');
 
-        $this->setExpectedException('Exception', 'thrown from view script');
-        $this->renderer->render($model);
+        try {
+            $this->renderer->render($model);
+            $this->fail('Exception from renderer should propagate');
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('Exception', $e);
+        }
     }
 
     public function testRendererRaisesExceptionIfResolverCannotResolveTemplate()

@@ -154,11 +154,11 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $this->mcrypt->setKey($this->key);
         $this->mcrypt->setPadding(new PKCS7());
+        $this->mcrypt->setSalt($this->salt);
         foreach ($this->mcrypt->getSupportedAlgorithms() as $algo) {
             foreach ($this->mcrypt->getSupportedModes() as $mode) {
                 $this->mcrypt->setAlgorithm($algo);
                 $this->mcrypt->setMode($mode);
-                $this->mcrypt->setSalt($this->salt);
                 $encrypted = $this->mcrypt->encrypt($this->plaintext);
                 $this->assertTrue(!empty($encrypted));
                 $decrypted = $this->mcrypt->decrypt($encrypted);

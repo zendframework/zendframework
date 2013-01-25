@@ -14,11 +14,12 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Helper\EscapeHtml;
+use Zend\I18n\View\Helper\AbstractTranslatorHelper;
 
 /**
  * Helper to proxy the plugin flash messenger
  */
-class FlashMessenger extends AbstractHelper implements ServiceLocatorAwareInterface
+class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorAwareInterface
 {
     /**
      * @var ServiceLocatorInterface
@@ -102,6 +103,11 @@ class FlashMessenger extends AbstractHelper implements ServiceLocatorAwareInterf
         $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
         array_walk_recursive($messages, function($item) use (&$messagesToPrint, $escapeHtml) {
+            if (($translator = $this->getTranslator()) !== null) {
+                $item = $translator->translate(
+                        $item, $this->getTranslatorTextDomain()
+                );
+            }
             $messagesToPrint[] = $escapeHtml($item);
         });
 

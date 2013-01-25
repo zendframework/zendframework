@@ -62,6 +62,9 @@ class PostRedirectGet extends AbstractPlugin
         }
     }
 
+    /**
+     * @return Container
+     */
     public function getSessionContainer()
     {
         if (!isset($this->sessionContainer)) {
@@ -70,6 +73,24 @@ class PostRedirectGet extends AbstractPlugin
         return $this->sessionContainer;
     }
 
+    /**
+     * @param  Container $container
+     * @return PostRedirectGet
+     */
+    public function setSessionContainer(Container $container)
+    {
+        $this->sessionContainer = $container;
+        return $this;
+    }
+
+    /**
+     * TODO: Good candidate for traits method in PHP 5.4 with FilePostRedirectGet plugin
+     *
+     * @param  string  $redirect
+     * @param  boolean $redirectToUrl
+     * @return Response
+     * @throws \Zend\Mvc\Exception\RuntimeException
+     */
     protected function redirect($redirect, $redirectToUrl)
     {
         $controller = $this->getController();

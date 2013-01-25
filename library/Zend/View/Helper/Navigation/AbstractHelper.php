@@ -567,8 +567,9 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      */
     public function hasAcl()
     {
-        if ($this->acl instanceof Acl\Acl ||
-            static::$defaultAcl instanceof Acl\Acl) {
+        if ($this->acl instanceof Acl\Acl
+            || static::$defaultAcl instanceof Acl\Acl
+        ) {
             return true;
         }
 
@@ -584,10 +585,11 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      */
     public function hasRole()
     {
-        if ($this->role instanceof Acl\Role\RoleInterface ||
-            is_string($this->role) ||
-            static::$defaultRole instanceof Acl\Role\RoleInterface ||
-            is_string(static::$defaultRole)) {
+        if ($this->role instanceof Acl\Role\RoleInterface
+            || is_string($this->role)
+            || static::$defaultRole instanceof Acl\Role\RoleInterface
+            || is_string(static::$defaultRole)
+        ) {
             return true;
         }
 

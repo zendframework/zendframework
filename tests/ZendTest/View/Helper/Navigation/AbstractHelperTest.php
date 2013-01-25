@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
+ */
 
 namespace ZendTest\View\Helper\Navigation;
 
@@ -31,7 +39,6 @@ class AbstractHelperTest extends AbstractTest
     public function testHasACLChecksDefaultACL()
     {
         $aclContainer = $this->_getAcl();
-        /** @var $acl \Zend\Permissions\Acl\Acl */
         $acl = $aclContainer['acl'];
 
         $this->assertEquals(false, $this->_helper->hasACL());
@@ -42,7 +49,6 @@ class AbstractHelperTest extends AbstractTest
     public function testHasACLChecksMemberVariable()
     {
         $aclContainer = $this->_getAcl();
-        /** @var $acl \Zend\Permissions\Acl\Acl */
         $acl = $aclContainer['acl'];
 
         $this->assertEquals(false, $this->_helper->hasAcl());
@@ -53,7 +59,6 @@ class AbstractHelperTest extends AbstractTest
     public function testHasRoleChecksDefaultRole()
     {
         $aclContainer = $this->_getAcl();
-        /** @var $role \Zend\Permissions\Acl\Role */
         $role = $aclContainer['role'];
 
         $this->assertEquals(false, $this->_helper->hasRole());
@@ -64,12 +69,10 @@ class AbstractHelperTest extends AbstractTest
     public function testHasRoleChecksMemberVariable()
     {
         $aclContainer = $this->_getAcl();
-        /** @var $role \Zend\Permissions\Acl\Role */
         $role = $aclContainer['role'];
 
         $this->assertEquals(false, $this->_helper->hasRole());
         $this->_helper->setRole($role);
         $this->assertEquals(true, $this->_helper->hasRole());
     }
-
 }

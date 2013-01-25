@@ -606,7 +606,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getStream()
     {
-        if (!is_null($this->streamName)) {
+        if (null !== $this->streamName) {
             return $this->streamName;
         }
 

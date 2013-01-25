@@ -206,13 +206,23 @@ class BlockCipher
     }
 
     /**
-     * Get the salt (IV)
+     * Get the salt (IV) according to the size requested by the algorithm
      *
      * @return string
      */
     public function getSalt()
     {
         return $this->cipher->getSalt();
+    }
+
+    /**
+     * Get the original salt value
+     *
+     * @return type
+     */
+    public function getOriginalSalt()
+    {
+        return $this->cipher->getOriginalSalt();
     }
 
     /**

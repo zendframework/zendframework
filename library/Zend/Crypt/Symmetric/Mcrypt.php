@@ -441,6 +441,16 @@ class Mcrypt implements SymmetricInterface
     }
 
     /**
+     * Get the original salt value
+     *
+     * @return string
+     */
+    public function getOriginalSalt()
+    {
+        return $this->iv;
+    }
+
+    /**
      * Set the cipher mode
      *
      * @param  string                             $mode

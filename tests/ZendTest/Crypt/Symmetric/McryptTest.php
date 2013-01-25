@@ -124,9 +124,10 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSalt()
     {
-        $salt = substr($this->salt, 0, $this->mcrypt->getSaltSize());
-        $this->mcrypt->setSalt($salt);
-        $this->assertEquals($salt, $this->mcrypt->getSalt());
+        $this->mcrypt->setSalt($this->salt);
+        $this->assertEquals(substr($this->salt, 0, $this->mcrypt->getSaltSize()),
+                            $this->mcrypt->getSalt());
+        $this->assertEquals($this->salt, $this->mcrypt->getOriginalSalt());
     }
 
     /**

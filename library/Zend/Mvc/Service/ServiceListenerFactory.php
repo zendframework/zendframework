@@ -57,6 +57,7 @@ class ServiceListenerFactory implements FactoryInterface
             'Request'                        => 'Zend\Mvc\Service\RequestFactory',
             'Response'                       => 'Zend\Mvc\Service\ResponseFactory',
             'Router'                         => 'Zend\Mvc\Service\RouterFactory',
+            'RoutePluginManager'             => 'Zend\Mvc\Service\RoutePluginManagerFactory',
             'ValidatorManager'               => 'Zend\Mvc\Service\ValidatorManagerFactory',
             'ViewHelperManager'              => 'Zend\Mvc\Service\ViewHelperManagerFactory',
             'ViewFeedRenderer'               => 'Zend\Mvc\Service\ViewFeedRendererFactory',

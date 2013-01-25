@@ -85,6 +85,12 @@ class ModuleManagerFactory implements FactoryInterface
             'Zend\ModuleManager\Feature\FormElementProviderInterface',
             'getFormElementConfig'
         );
+        $serviceListener->addServiceManager(
+            'RoutePluginManager',
+            'route_manager',
+            'Zend\ModuleManager\Feature\RouteProviderInterface',
+            'getRouteConfig'
+        );
 
         $events = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

@@ -46,15 +46,14 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         );
 
         $enc = $filter->getEncryption();
-        $filter->setVector('1234567890123456');
-        $this->assertEquals('ZendFramework', $enc['key']);
+        $filter->setKey('1234567890123456');
         foreach ($valuesExpected as $input => $output) {
             $this->assertNotEquals($output, $filter($input));
         }
     }
 
     /**
-     * Ensures that the encryption works fine 
+     * Ensures that the encryption works fine
      */
     public function testDecryptBlockCipher()
     {
@@ -66,7 +65,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $decrypted = $decrypt->filter('ec133eb7460682b0020b736ad6d2ef14c35de0f1e5976330ae1dd096ef3b4cb7MTIzNDU2Nzg5MDEyMzQ1NoZvxY1JkeL6TnQP3ug5F0k=');
         $this->assertEquals($decrypted, 'test');
     }
-    
+
     /**
      * Ensures that the filter follows expected behavior
      *

@@ -56,8 +56,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($mcrypt instanceof Mcrypt);
         $this->assertEquals($mcrypt->getAlgorithm(), MCRYPT_BLOWFISH);
         $this->assertEquals($mcrypt->getMode(), MCRYPT_MODE_CFB);
-        $this->assertEquals($mcrypt->getKey(), $this->key);
-        $this->assertEquals($mcrypt->getSalt(), $this->salt);
+        $this->assertEquals($mcrypt->getKey(), substr($this->key, 0, $mcrypt->getKeySize()));
+        $this->assertEquals($mcrypt->getSalt(), substr($this->salt, 0, $mcrypt->getSaltSize()));
         $this->assertTrue($mcrypt->getPadding() instanceof PKCS7);
     }
 
@@ -75,8 +75,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($mcrypt instanceof Mcrypt);
         $this->assertEquals($mcrypt->getAlgorithm(), MCRYPT_BLOWFISH);
         $this->assertEquals($mcrypt->getMode(), MCRYPT_MODE_CFB);
-        $this->assertEquals($mcrypt->getKey(), $this->key);
-        $this->assertEquals($mcrypt->getSalt(), $this->salt);
+        $this->assertEquals($mcrypt->getKey(), substr($this->key, 0, $mcrypt->getKeySize()));
+        $this->assertEquals($mcrypt->getSalt(), substr($this->salt, 0, $mcrypt->getSaltSize()));
         $this->assertTrue($mcrypt->getPadding() instanceof PKCS7);
     }
 
@@ -117,8 +117,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShortKey()
     {
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-                                    'The key is not long enough for the cipher');
+        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException');
         $result = $this->mcrypt->setKey('short');
         $output = $this->mcrypt->encrypt('test');
     }
@@ -171,8 +170,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testEncryptWithoutKey()
     {
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-                                    'No key specified for the encryption');
+        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException');
         $ciphertext = $this->mcrypt->encrypt('test');
     }
 
@@ -200,8 +198,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testDecryptWithoutKey()
     {
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-                                    'No key specified for the decryption');
+        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException');
         $this->mcrypt->decrypt($this->plaintext);
     }
 }

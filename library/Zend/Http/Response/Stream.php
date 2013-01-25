@@ -242,7 +242,7 @@ class Stream extends Response
      */
     protected function readStream()
     {
-        if (!is_null($this->contentLength)) {
+        if (null !== $this->contentLength) {
             $bytes =  $this->contentLength - $this->contentStreamed;
         } else {
             $bytes = -1; //Read the whole buffer

@@ -65,7 +65,7 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      */
     public function setEncoding($encoding)
     {
-        if (!is_null($this->escaper)) {
+        if (null !== $this->escaper) {
             throw new Exception\InvalidArgumentException(
                 'Character encoding settings cannot be changed once the Helper has been used or '
                 . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'

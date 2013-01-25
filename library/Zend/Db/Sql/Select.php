@@ -261,7 +261,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } elseif (is_string($pkey)) {
                         // Otherwise, if still a string, do something intelligent with the PHP type provided
 
-                        if (is_null($pvalue)) {
+                        if (null === $pvalue) {
                             // map PHP null to SQL IS NULL expression
                             $predicate = new Predicate\IsNull($pkey, $pvalue);
                         } elseif (is_array($pvalue)) {

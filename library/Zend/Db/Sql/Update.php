@@ -123,7 +123,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
-        if (null === $predicate) {
+        if ($predicate === null) {
             throw new Exception\InvalidArgumentException('Predicate cannot be null');
         }
 
@@ -149,7 +149,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } elseif (is_string($pkey)) {
                         // Otherwise, if still a string, do something intelligent with the PHP type provided
 
-                        if (null === $pvalue) {
+                        if ($pvalue === null) {
                             // map PHP null to SQL IS NULL expression
                             $predicate = new Predicate\IsNull($pkey, $pvalue);
                         } elseif (is_array($pvalue)) {
@@ -249,7 +249,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 if ($value instanceof Expression) {
                     $exprData = $this->processExpression($value, $adapterPlatform);
                     $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
-                } elseif (null === $value) {
+                } elseif ($value === null) {
                     $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = NULL';
                 } else {
                     $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);

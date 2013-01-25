@@ -201,7 +201,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             if ($value instanceof Expression) {
                 $exprData = $this->processExpression($value, $adapterPlatform);
                 $values[] = $exprData->getSql();
-            } elseif (null === $value) {
+            } elseif ($value === null) {
                 $values[] = 'NULL';
             } else {
                 $values[] = $adapterPlatform->quoteValue($value);

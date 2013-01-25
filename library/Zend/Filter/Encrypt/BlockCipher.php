@@ -34,7 +34,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
      *     'key_iteration' => the number of iterations for the PBKDF2 key generation
      *     'algorithm      => cipher algorithm to use
      *     'hash'          => algorithm to use for the authentication
-     *     'vector         => initialization vector
+     *     'vector'        => initialization vector
      * )
      */
     protected $encryption = array(

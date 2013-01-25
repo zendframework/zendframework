@@ -250,12 +250,9 @@ class Mcrypt implements SymmetricInterface
      */
     public function getKey()
     {
-        if (strlen($this->key) < $this->getKeySize()) {
-             throw new Exception\InvalidArgumentException(
-                'The size of the key must be at least of ' . $this->getKeySize() . ' bytes'
-             );
+        if (empty($this->key)) {
+            return null;
         }
-
         return substr($this->key, 0, $this->getKeySize());
     }
 

@@ -87,7 +87,7 @@ class ModuleManagerFactory implements FactoryInterface
         );
         $serviceListener->addServiceManager(
             'RoutePluginManager',
-            'routes',
+            'route_manager',
             'Zend\ModuleManager\Feature\RouteProviderInterface',
             'getRouteConfig'
         );

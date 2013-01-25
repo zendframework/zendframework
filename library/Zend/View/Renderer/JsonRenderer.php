@@ -107,7 +107,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      */
     public function hasJsonpCallback()
     {
-        return !is_null($this->jsonpCallback);
+        return (null !== $this->jsonpCallback);
     }
 
     /**

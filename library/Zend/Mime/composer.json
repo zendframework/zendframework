@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-mime",
+    "description": " ",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "mime"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Mime\\": ""
+        }
+    },
+    "target-dir": "Zend/Mime",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
+    }
+}

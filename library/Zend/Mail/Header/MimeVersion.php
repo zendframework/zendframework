@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
@@ -25,8 +14,6 @@ namespace Zend\Mail\Header;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MimeVersion implements HeaderInterface
 {
@@ -35,20 +22,13 @@ class MimeVersion implements HeaderInterface
      */
     protected $version = '1.0';
 
-    /**
-     * Unserialize from string
-     *
-     * @param  string $headerLine
-     * @throws Exception\InvalidArgumentException
-     * @return MimeVersion
-     */
     public static function fromString($headerLine)
     {
         list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'mime-version') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Mime-Version string');
+            throw new Exception\InvalidArgumentException('Invalid header line for MIME-Version string');
         }
 
         // Check for version, and set if found
@@ -60,53 +40,30 @@ class MimeVersion implements HeaderInterface
         return $header;
     }
 
-    /**
-     * Get the field name
-     *
-     * @return string
-     */
     public function getFieldName()
     {
-        return 'Mime-Version';
+        return 'MIME-Version';
     }
 
-    /**
-     * Get the field value (version string)
-     *
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         return $this->version;
     }
 
-    /**
-     * Set character encoding
-     *
-     * @param  string $encoding
-     */
     public function setEncoding($encoding)
     {
-        // irrelevant to this implementation
+        // This header must be always in US-ASCII
+        return $this;
     }
 
-    /**
-     * Get character encoding
-     *
-     */
     public function getEncoding()
     {
-        // irrelevant to this implementation
+        return 'ASCII';
     }
 
-    /**
-     * Serialize to string
-     *
-     * @return string
-     */
     public function toString()
     {
-        return 'Mime-Version: ' . $this->getFieldValue();
+        return 'MIME-Version: ' . $this->getFieldValue();
     }
 
     /**

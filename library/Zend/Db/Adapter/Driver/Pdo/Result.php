@@ -3,17 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ResultInterface;
 use Iterator;
-use PDO as PDOResource;
 use PDOStatement;
+use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
 
 /**
@@ -53,7 +52,7 @@ class Result implements Iterator, ResultInterface
      * Track current item in recordset
      * @var mixed
      */
-    protected $currentData;
+    protected $currentData = null;
 
     /**
      * Current position of scrollable statement
@@ -75,6 +74,8 @@ class Result implements Iterator, ResultInterface
      * Initialize
      *
      * @param  PDOStatement $resource
+     * @param               $generatedValue
+     * @param  int          $rowCount
      * @return Result
      */
     public function initialize(PDOStatement $resource, $generatedValue, $rowCount = null)
@@ -91,6 +92,14 @@ class Result implements Iterator, ResultInterface
     public function buffer()
     {
         return null;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isBuffered()
+    {
+        return false;
     }
 
     /**
@@ -141,6 +150,7 @@ class Result implements Iterator, ResultInterface
     }
 
     /**
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function rewind()
@@ -158,11 +168,11 @@ class Result implements Iterator, ResultInterface
     /**
      * Valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
-        return ($this->currentData != false);
+        return ($this->currentData !== false);
     }
 
     /**
@@ -176,9 +186,9 @@ class Result implements Iterator, ResultInterface
             return $this->rowCount;
         }
         if ($this->rowCount instanceof \Closure) {
-            $this->rowCount = call_user_func($this->rowCount);
+            $this->rowCount = (int) call_user_func($this->rowCount);
         } else {
-            $this->rowCount = $this->resource->rowCount();
+            $this->rowCount = (int) $this->resource->rowCount();
         }
         return $this->rowCount;
     }
@@ -194,7 +204,7 @@ class Result implements Iterator, ResultInterface
     /**
      * Is query result
      *
-     * @return boolean
+     * @return bool
      */
     public function isQueryResult()
     {
@@ -218,5 +228,4 @@ class Result implements Iterator, ResultInterface
     {
         return $this->generatedValue;
     }
-
 }

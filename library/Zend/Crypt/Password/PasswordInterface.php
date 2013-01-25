@@ -3,10 +3,11 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Password;
 
 interface PasswordInterface
@@ -24,7 +25,7 @@ interface PasswordInterface
      *
      * @param  string $password The password to hash
      * @param  string $hash     The supplied hash to validate
-     * @return boolean Does the password validate against the hash
+     * @return bool Does the password validate against the hash
      */
     public function verify($password, $hash);
 }

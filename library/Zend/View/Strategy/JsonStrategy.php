@@ -1,40 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Strategy
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Http\Request as HttpRequest;
+use Zend\View\Model;
+use Zend\View\Renderer\JsonRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage Strategy
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class JsonStrategy implements ListenerAggregateInterface
 {
@@ -52,7 +38,6 @@ class JsonStrategy implements ListenerAggregateInterface
      * Constructor
      *
      * @param  JsonRenderer $renderer
-     * @return void
      */
     public function __construct(JsonRenderer $renderer)
     {
@@ -98,37 +83,13 @@ class JsonStrategy implements ListenerAggregateInterface
     {
         $model = $e->getModel();
 
-        if ($model instanceof Model\JsonModel) {
-            // JsonModel found
-            return $this->renderer;
-        }
-
-        $request = $e->getRequest();
-        if (!$request instanceof HttpRequest) {
-            // Not an HTTP request; cannot autodetermine
+        if (!$model instanceof Model\JsonModel) {
+            // no JsonModel; do nothing
             return;
         }
 
-        $headers = $request->headers();
-        if ($headers->has('accept')) {
-            $accept  = $headers->get('Accept');
-            foreach ($accept->getPrioritized() as $mediaType) {
-                if (0 === strpos($mediaType, 'application/json')) {
-                    // application/json Accept header found
-                    return $this->renderer;
-                }
-                if (0 === strpos($mediaType, 'application/javascript')) {
-                    // application/javascript Accept header found
-                    if (false != ($callback = $request->query()->get('callback'))) {
-                        $this->renderer->setJsonpCallback($callback);
-                    }
-                    return $this->renderer;
-                }
-            }
-        }
-
-        // Not matched!
-        return;
+        // JsonModel found
+        return $this->renderer;
     }
 
     /**
@@ -154,7 +115,7 @@ class JsonStrategy implements ListenerAggregateInterface
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         if ($this->renderer->hasJsonpCallback()) {
             $headers->addHeaderLine('content-type', 'application/javascript');
         } else {

@@ -1,26 +1,14 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
-
-use Zend\Soap\Wsdl;
 
 /**
  * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
@@ -28,8 +16,6 @@ use Zend\Soap\Wsdl;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ArrayOfTypeSequence extends DefaultComplexType
 {
@@ -43,10 +29,10 @@ class ArrayOfTypeSequence extends DefaultComplexType
     {
         $nestedCounter = $this->_getNestedCount($type);
 
-        if($nestedCounter > 0) {
+        if ($nestedCounter > 0) {
             $singularType = $this->_getSingularType($type);
 
-            for($i = 1; $i <= $nestedCounter; $i++) {
+            for ($i = 1; $i <= $nestedCounter; $i++) {
                 $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
                 $complexTypePhp = $singularType . str_repeat('[]', $i);
                 $childType      = $this->_getTypeBasedOnNestingLevel($singularType, $i-1);
@@ -55,7 +41,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
             }
 
             return $complexType;
-        } else if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
+        } elseif (($soapType = $this->scanRegisteredTypes($type)) !== null) {
             // Existing complex type
             return $soapType;
         } else {
@@ -73,16 +59,16 @@ class ArrayOfTypeSequence extends DefaultComplexType
      */
     protected function _getTypeBasedOnNestingLevel($singularType, $level)
     {
-        if($level == 0) {
+        if ($level == 0) {
             // This is not an Array anymore, return the xsd simple type
             return $this->getContext()->getType($singularType);
-        } else {
-            return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
         }
+
+        return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
     }
 
     /**
-     * From a nested defintion with type[], get the singular xsd:type
+     * From a nested definition with type[], get the singular xsd:type
      *
      * @param  string $type
      * @return string

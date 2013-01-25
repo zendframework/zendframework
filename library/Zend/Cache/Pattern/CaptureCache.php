@@ -1,124 +1,131 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class CaptureCache extends AbstractPattern
 {
     /**
-     * Page identifier
-     *
-     * @var null|string
-     */
-    protected $pageId = null;
-
-    /**
      * Start the cache
      *
      * @param  string $pageId  Page identifier
-     * @param  array  $options Options
-     * @return boolean false
+     * @return void
      */
-    public function start($pageId = null, array $options = array())
+    public function start($pageId = null)
     {
-        if ($this->pageId !== null) {
-            throw new Exception\RuntimeException("Capturing already stated with page id '{$this->pageId}'");
-        }
-
-        $classOptions = $this->getOptions();
-
-        if (isset($options['tags'])) {
-            $classOptions->setTags($options['tags']);
-            unset($options['tags']);
-        }
-
-        if ($classOptions->getTags() && !$classOptions->getTagStorage()) {
-            throw new Exception\RuntimeException('Tags are defined but missing a tag storage');
-        }
-
-        if (($pageId = (string) $pageId) === '') {
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        ob_start(array($this, 'flush'));
-        ob_implicit_flush(false);
-        $this->pageId = $pageId;
+        $that = $this;
+        ob_start(function ($content) use ($that, $pageId) {
+            $that->set($content, $pageId);
 
-        return false;
+            // http://php.net/manual/function.ob-start.php
+            // -> If output_callback  returns FALSE original input is sent to the browser.
+            return false;
+        });
+
+        ob_implicit_flush(false);
+    }
+
+    /**
+     * Write content to page identity
+     *
+     * @param string      $content
+     * @param null|string $pageId
+     * @throws Exception\LogicException
+     */
+    public function set($content, $pageId = null)
+    {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
+        if ($pageId === null) {
+            $pageId = $this->detectPageId();
+        }
+
+        $path = $this->pageId2Path($pageId);
+        $file = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+
+        $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
+        $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $content);
     }
 
     /**
      * Get from cache
      *
      * @param  null|string $pageId
-     * @param  array $options
      * @return bool|string
+     * @throws Exception\LogicException
      * @throws Exception\RuntimeException
      */
-    public function get($pageId = null, array $options = array())
+    public function get($pageId = null)
     {
-        if (($pageId = (string) $pageId) === '') {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getOptions()->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $publicDir
+            . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+            . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
-            if (($content = @file_get_contents($file)) === false) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException("Failed to read cached pageId '{$pageId}': {$lastErr['message']}");
+            ErrorHandler::start();
+            $content = file_get_contents($file);
+            $error   = ErrorHandler::stop();
+            if ($content === false) {
+                throw new Exception\RuntimeException(
+                    "Failed to read cached pageId '{$pageId}'", 0, $error
+                );
             }
             return $content;
         }
-
-        return false;
     }
 
     /**
      * Checks if a cache with given id exists
      *
      * @param  null|string $pageId
-     * @param  array $options
+     * @throws Exception\LogicException
      * @return bool
      */
-    public function exists($pageId = null, array $options = array())
+    public function has($pageId = null)
     {
-        if (($pageId = (string) $pageId) === '') {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getOptions()->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $publicDir
+            . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+            . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         return file_exists($file);
     }
@@ -127,43 +134,76 @@ class CaptureCache extends AbstractPattern
      * Remove from cache
      *
      * @param  null|string $pageId
-     * @param  array $options
+     * @throws Exception\LogicException
      * @throws Exception\RuntimeException
-     * @return void
+     * @return bool
      */
-    public function remove($pageId = null, array $options = array())
+    public function remove($pageId = null)
     {
-        if (($pageId = (string)$pageId) === '') {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getOptions()->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $publicDir
+            . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+            . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
-            if (!@unlink($file)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException("Failed to remove cached pageId '{$pageId}': {$lastErr['message']}");
+            ErrorHandler::start();
+            $res = unlink($file);
+            $err = ErrorHandler::stop();
+            if (!$res) {
+                throw new Exception\RuntimeException(
+                    "Failed to remove cached pageId '{$pageId}'", 0, $err
+                );
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Clear cached pages matching glob pattern
+     *
+     * @param string $pattern
+     * @throws Exception\LogicException
+     */
+    public function clearByGlob($pattern = '**')
+    {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
+        $it = new \GlobIterator(
+            $publicDir . '/' . $pattern,
+            \GlobIterator::CURRENT_AS_SELF | \GlobIterator::SKIP_DOTS | \GlobIterator::UNIX_PATHS
+        );
+        foreach ($it as $pathname => $entry) {
+            if ($entry->isFile()) {
+                unlink($pathname);
             }
         }
     }
 
     /**
-     * Clear cache
-     */
-    public function clear(/*TODO*/)
-    {
-        // TODO
-    }
-
-    /**
      * Determine the page to save from the request
      *
+     * @throws Exception\RuntimeException
      * @return string
      */
     protected function detectPageId()
     {
+        if (!isset($_SERVER['REQUEST_URI'])) {
+            throw new Exception\RuntimeException("Can't auto-detect current page identity");
+        }
+
         return $_SERVER['REQUEST_URI'];
     }
 
@@ -175,13 +215,11 @@ class CaptureCache extends AbstractPattern
      */
     protected function pageId2Filename($pageId)
     {
-        $filename = basename($pageId);
-
-        if ($filename === '') {
-            $filename = $this->getOptions()->getIndexFilename();
+        if (substr($pageId, -1) === '/') {
+            return $this->getOptions()->getIndexFilename();
         }
 
-        return $filename;
+        return basename($pageId);
     }
 
     /**
@@ -192,100 +230,157 @@ class CaptureCache extends AbstractPattern
      */
     protected function pageId2Path($pageId)
     {
-        $path = rtrim(dirname($pageId), '/');
+        if (substr($pageId, -1) == '/') {
+            $path = rtrim($pageId, '/');
+        } else {
+            $path = dirname($pageId);
+        }
 
         // convert requested "/" to the valid local directory separator
-        if ('/' != DIRECTORY_SEPARATOR) {
-            $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        if ('/' != \DIRECTORY_SEPARATOR) {
+            $path = str_replace('/', \DIRECTORY_SEPARATOR, $path);
         }
 
         return $path;
     }
 
     /**
-     * callback for output buffering
-     *
-     * @param  string $output Buffered output
-     * @return boolean FALSE means original input is sent to the browser.
-     */
-    protected function flush($output)
-    {
-        $this->save($output);
-
-        // http://php.net/manual/function.ob-start.php
-        // -> If output_callback  returns FALSE original input is sent to the browser.
-        return false;
-    }
-
-    /**
-     * Save the cache
-     *
-     * @param  $output
-     * @throws Exception\RuntimeException
-     */
-    protected function save($output)
-    {
-        $options  = $this->getOptions();
-        $path     = $this->pageId2Path($this->pageId);
-        $fullPath = $options->getPublicDir() . DIRECTORY_SEPARATOR . $path;
-        if (!file_exists($fullPath)) {
-            $oldUmask = umask($options->getDirUmask());
-            if (!@mkdir($fullPath, 0777, true)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException(
-                    "Can't create directory '{$fullPath}': {$lastErr['message']}"
-                );
-            }
-        }
-
-        if ($oldUmask !== null) { // $oldUmask could be set on create directory
-            umask($options->getFileUmask());
-        } else {
-            $oldUmask = umask($options->getFileUmask());
-        }
-        $file     = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
-        $fullFile = $options->getPublicDir() . DIRECTORY_SEPARATOR . $file;
-        $this->putFileContent($fullFile, $output);
-
-        $tagStorage = $options->getTagStorage();
-        if ($tagStorage) {
-            $tagKey     = $options->getTagKey();
-            $tagIndex = $tagStorage->getTagStorage()->getItem($tagKey);
-            if (!$tagIndex) {
-                $tagIndex = null;
-            }
-
-            if ($this->tags) {
-                $tagIndex[$file] = &$this->tags;
-            } elseif ($tagIndex) {
-                unset($tagIndex[$file]);
-            }
-
-            if ($tagIndex !== null) {
-                $tagStorage->setItem($tagKey, $tagIndex);
-            }
-        }
-    }
-
-    /**
      * Write content to a file
      *
-     * @param  string $file  File complete path
-     * @param  string $data  Data to write
+     * @param  string  $file File complete path
+     * @param  string  $data Data to write
+     * @return void
      * @throws Exception\RuntimeException
      */
     protected function putFileContent($file, $data)
     {
-        $flags = FILE_BINARY; // since PHP 6 but defined as 0 in PHP 5.3
-        if ($this->getOptions()->getFileLocking()) {
-            $flags = $flags | LOCK_EX;
+        $options = $this->getOptions();
+        $locking = $options->getFileLocking();
+        $perm    = $options->getFilePermission();
+        $umask   = $options->getUmask();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
         }
 
-        $put = @file_put_contents($file, $data, $flags);
-        if ( $put < strlen((binary)$data) ) {
-            $lastErr = error_get_last();
-            @unlink($file); // remove old or incomplete written file
-            throw new Exception\RuntimeException($lastErr['message']);
+        ErrorHandler::start();
+
+        $umask = ($umask !== false) ? umask($umask) : false;
+        $rs    = file_put_contents($file, $data, $locking ? \LOCK_EX : 0);
+        if ($umask) {
+            umask($umask);
         }
+
+        if ($rs === false) {
+            $err = ErrorHandler::stop();
+            throw new Exception\RuntimeException(
+                "Error writing file '{$file}'", 0, $err
+            );
+        }
+
+        if ($perm !== false && !chmod($file, $perm)) {
+            $oct = decoct($perm);
+            $err = ErrorHandler::stop();
+            throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
+        }
+
+        ErrorHandler::stop();
+    }
+
+    /**
+     * Creates directory if not already done.
+     *
+     * @param string $pathname
+     * @return void
+     * @throws Exception\RuntimeException
+     */
+    protected function createDirectoryStructure($pathname)
+    {
+        // Directory structure already exists
+        if (file_exists($pathname)) {
+            return;
+        }
+
+        $options = $this->getOptions();
+        $perm    = $options->getDirPermission();
+        $umask   = $options->getUmask();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
+        }
+
+        ErrorHandler::start();
+
+        if ($perm === false) {
+            // build-in mkdir function is enough
+
+            $umask = ($umask !== false) ? umask($umask) : false;
+            $res   = mkdir($pathname, ($perm !== false) ? $perm : 0777, true);
+
+            if ($umask !== false) {
+                umask($umask);
+            }
+
+            if (!$res) {
+                $oct = ($perm === false) ? '777' : decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err
+                );
+            }
+
+            if ($perm !== false && !chmod($pathname, $perm)) {
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "chmod('{$pathname}', 0{$oct}) failed", 0, $err
+                );
+            }
+
+        } else {
+            // build-in mkdir function sets permission together with current umask
+            // which doesn't work well on multo threaded webservers
+            // -> create directories one by one and set permissions
+
+            // find existing path and missing path parts
+            $parts = array();
+            $path  = $pathname;
+            while (!file_exists($path)) {
+                array_unshift($parts, basename($path));
+                $nextPath = dirname($path);
+                if ($nextPath === $path) {
+                    break;
+                }
+                $path = $nextPath;
+            }
+
+            // make all missing path parts
+            foreach ($parts as $part) {
+                $path.= \DIRECTORY_SEPARATOR . $part;
+
+                // create a single directory, set and reset umask immediately
+                $umask = ($umask !== false) ? umask($umask) : false;
+                $res   = mkdir($path, ($perm === false) ? 0777 : $perm, false);
+                if ($umask !== false) {
+                    umask($umask);
+                }
+
+                if (!$res) {
+                    $oct = ($perm === false) ? '777' : decoct($perm);
+                    $err = ErrorHandler::stop();
+                    throw new Exception\RuntimeException(
+                        "mkdir('{$path}', 0{$oct}, false) failed"
+                    );
+                }
+
+                if ($perm !== false && !chmod($path, $perm)) {
+                    $oct = decoct($perm);
+                    $err = ErrorHandler::stop();
+                    throw new Exception\RuntimeException(
+                        "chmod('{$path}', 0{$oct}) failed"
+                    );
+                }
+            }
+        }
+
+        ErrorHandler::stop();
     }
 }

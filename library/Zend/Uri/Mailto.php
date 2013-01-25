@@ -3,15 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Uri
  */
 
 namespace Zend\Uri;
 
-use Zend\Validator\ValidatorInterface,
-    Zend\Validator\EmailAddress as EmailValidator;
+use Zend\Validator\EmailAddress as EmailValidator;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * "Mailto" URI handler
@@ -20,8 +20,6 @@ use Zend\Validator\ValidatorInterface,
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mailto extends Uri
 {
@@ -36,10 +34,10 @@ class Mailto extends Uri
     /**
      * Check if the URI is a valid Mailto URI
      *
-     * This applys additional specific validation rules beyond the ones
+     * This applies additional specific validation rules beyond the ones
      * required by the generic URI syntax
      *
-     * @return boolean
+     * @return bool
      * @see    Uri::isValid()
      */
     public function isValid()
@@ -63,7 +61,7 @@ class Mailto extends Uri
     /**
      * Set the email address
      *
-     * This is infact equivalent to setPath() - but provides a more clear interface
+     * This is in fact equivalent to setPath() - but provides a more clear interface
      *
      * @param  string $email
      * @return Mailto
@@ -88,7 +86,7 @@ class Mailto extends Uri
     /**
      * Set validator to use when validating email address
      *
-     * @param  Validator $validator
+     * @param  ValidatorInterface $validator
      * @return Mailto
      */
     public function setValidator(ValidatorInterface $validator)
@@ -103,7 +101,7 @@ class Mailto extends Uri
      * If none is currently set, an EmailValidator instance with default options
      * will be used.
      *
-     * @return Validator
+     * @return ValidatorInterface
      */
     public function getValidator()
     {

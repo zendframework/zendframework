@@ -1,67 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Formatter;
 
-use Zend\Log\Exception;
+use DateTime;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ErrorHandler implements FormatterInterface
+class ErrorHandler extends Simple
 {
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
-    
-    /**
-     * Format
-     * 
-     * @var string 
-     */
-    protected $format;
-    
-    /**
-     * Class constructor
-     *
-     * @param  null|string  $format  Format specifier for log messages
-     * @throws Zend\Log\Exception\InvalidArgumentException
-     */
-    public function __construct($format = null)
-    {
-        if ($format === null) {
-            $format = self::DEFAULT_FORMAT;
-        }
-
-        if (!is_string($format)) {
-            throw new Exception\InvalidArgumentException('Format must be a string');
-        }
-
-        $this->format = $format;
-    }
 
     /**
      * This method formats the event for the PHP Error Handler.
@@ -72,15 +30,46 @@ class ErrorHandler implements FormatterInterface
     public function format($event)
     {
         $output = $this->format;
-        foreach ($event as $name => $value) {
-            if (is_array($value)) {
-                foreach ($value as $sname => $svalue) {
-                    $output = str_replace("%{$name}[{$sname}]%", $svalue, $output);
+
+        if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
+            $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
+        }
+
+        foreach ($this->buildReplacementsFromArray($event) as $name => $value) {
+            $output = str_replace("%$name%", $value, $output);
+        }
+
+        return $output;
+    }
+
+    /**
+     * Flatten the multi-dimensional $event array into a single dimensional
+     * array
+     *
+     * @param array $event
+     * @param string $key
+     * @return array
+     */
+    protected function buildReplacementsFromArray ($event, $key = null)
+    {
+        $result = array();
+        foreach ($event as $index => $value) {
+            $nextIndex = $key === null ? $index : $key . '[' . $index . ']';
+            if ($value === null) {
+                continue;
+            }
+            if (! is_array($value)) {
+                if ($key === null) {
+                    $result[$nextIndex] = $value;
+                } else {
+                    if (! is_object($value) || method_exists($value, "__toString")) {
+                        $result[$nextIndex] = $value;
+                    }
                 }
             } else {
-                $output = str_replace("%$name%", $value, $output);
+                $result = array_merge($result, $this->buildReplacementsFromArray($value, $nextIndex));
             }
         }
-        return $output;
+        return $result;
     }
 }

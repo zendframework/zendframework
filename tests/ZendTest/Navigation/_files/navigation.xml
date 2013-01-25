@@ -1,0 +1,14 @@
+<configData>
+    <pageOne>
+        <label>Page 1</label>
+        <uri>page1.html</uri>
+    </pageOne>
+    <pageTwo>
+        <label>Page 2</label>
+        <uri>page2.html</uri>
+    </pageTwo>
+    <pageThree>
+        <label>Page 3</label>
+        <uri>page3.html</uri>
+    </pageThree>
+</configData>

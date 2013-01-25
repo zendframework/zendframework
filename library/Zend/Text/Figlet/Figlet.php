@@ -1,35 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Text_Figlet
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Text
  */
 
 namespace Zend\Text\Figlet;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend\Text\Figlet is a PHP implementation of FIGlet
  *
  * @category  Zend
  * @package   Zend_Text_Figlet
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Figlet
 {
@@ -75,14 +64,14 @@ class Figlet
      *
      * @var array
      */
-    protected $_charList = array();
+    protected $charList = array();
 
     /**
      * Indicates if a font was loaded yet
      *
-     * @var boolean
+     * @var bool
      */
-    protected $_fontLoaded = false;
+    protected $fontLoaded = false;
 
     /**
      * Latin-1 codes for German letters, respectively:
@@ -97,73 +86,73 @@ class Figlet
      *
      * @var array
      */
-    protected $_germanChars = array(196, 214, 220, 228, 246, 252, 223);
+    protected $germanChars = array(196, 214, 220, 228, 246, 252, 223);
 
     /**
      * Output width, defaults to 80.
      *
      * @var integer
      */
-    protected $_outputWidth = 80;
+    protected $outputWidth = 80;
 
     /**
      * Hard blank character
      *
      * @var string
      */
-    protected $_hardBlank;
+    protected $hardBlank;
 
     /**
      * Height of the characters
      *
      * @var integer
      */
-    protected $_charHeight;
+    protected $charHeight;
 
     /**
      * Max length of any character
      *
      * @var integer
      */
-    protected $_maxLength;
+    protected $maxLength;
 
     /**
      * Smush mode
      *
      * @var integer
      */
-    protected $_smushMode = 0;
+    protected $smushMode = 0;
 
     /**
      * Smush defined by the font
      *
      * @var integer
      */
-    protected $_fontSmush = 0;
+    protected $fontSmush = 0;
 
     /**
      * Smush defined by the user
      *
      * @var integer
      */
-    protected $_userSmush = 0;
+    protected $userSmush = 0;
 
     /**
-     * Wether to handle paragraphs || not
+     * Whether to handle paragraphs || not
      *
-     * @var boolean
+     * @var bool
      */
-    protected $_handleParagraphs = false;
+    protected $handleParagraphs = false;
 
     /**
-     * Justification for the text, according to $_outputWidth
+     * Justification for the text, according to $outputWidth
      *
      * For using font default, this parameter should be null, else one of
      * the values of Zend\Text\Figlet::JUSTIFICATION_*
      *
      * @var integer
      */
-    protected $_justification = null;
+    protected $justification = null;
 
     /**
      * Direction of text-writing, namely right to left
@@ -173,98 +162,98 @@ class Figlet
      *
      * @var integer
      */
-    protected $_rightToLeft = null;
+    protected $rightToLeft = null;
 
     /**
      * Override font file smush layout
      *
      * @var integer
      */
-    protected $_smushOverride = 0;
+    protected $smushOverride = 0;
 
     /**
      * Options of the current font
      *
      * @var array
      */
-    protected $_fontOptions = array();
+    protected $fontOptions = array();
 
     /**
      * Previous character width
      *
      * @var integer
      */
-    protected $_previousCharWidth = 0;
+    protected $previousCharWidth = 0;
 
     /**
      * Current character width
      *
      * @var integer
      */
-    protected $_currentCharWidth = 0;
+    protected $currentCharWidth = 0;
 
     /**
      * Current outline length
      *
      * @var integer
      */
-    protected $_outlineLength = 0;
+    protected $outlineLength = 0;
 
     /**
-     * Maxmimum outline length
+     * Maximum outline length
      *
      * @var integer
      */
-    protected $_outlineLengthLimit = 0;
+    protected $outlineLengthLimit = 0;
 
     /**
      * In character line
      *
      * @var string
      */
-    protected $_inCharLine;
+    protected $inCharLine;
 
     /**
      * In character line length
      *
      * @var integer
      */
-    protected $_inCharLineLength = 0;
+    protected $inCharLineLength = 0;
 
     /**
      * Maximum in character line length
      *
      * @var integer
      */
-    protected $_inCharLineLengthLimit = 0;
+    protected $inCharLineLengthLimit = 0;
 
     /**
      * Current char
      *
      * @var array
      */
-    protected $_currentChar = null;
+    protected $currentChar = null;
 
     /**
      * Current output line
      *
      * @var array
      */
-    protected $_outputLine;
+    protected $outputLine;
 
     /**
      * Current output
      *
      * @var string
      */
-    protected $_output;
+    protected $output;
 
     /**
      * Option keys to skip when calling setOptions()
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $skipOptions = array(
         'options',
         'config',
     );
@@ -288,7 +277,7 @@ class Figlet
         }
 
         // If no font was defined, load default font
-        if (!$this->_fontLoaded) {
+        if (!$this->fontLoaded) {
             $this->_loadFont(__DIR__ . '/zend-framework.flf');
         }
     }
@@ -302,7 +291,7 @@ class Figlet
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            if (in_array(strtolower($key), $this->_skipOptions)) {
+            if (in_array(strtolower($key), $this->skipOptions)) {
                 continue;
             }
 
@@ -329,12 +318,12 @@ class Figlet
     /**
      * Set handling of paragraphs
      *
-     * @param  boolean $handleParagraphs Wether to handle paragraphs or not
+     * @param  bool $handleParagraphs Whether to handle paragraphs or not
      * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
     {
-        $this->_handleParagraphs = (bool) $handleParagraphs;
+        $this->handleParagraphs = (bool) $handleParagraphs;
         return $this;
     }
 
@@ -347,7 +336,7 @@ class Figlet
      */
     public function setJustification($justification)
     {
-        $this->_justification = min(3, max(0, (int) $justification));
+        $this->justification = min(3, max(0, (int) $justification));
         return $this;
     }
 
@@ -360,7 +349,7 @@ class Figlet
      */
     public function setOutputWidth($outputWidth)
     {
-        $this->_outputWidth = max(1, (int) $outputWidth);
+        $this->outputWidth = max(1, (int) $outputWidth);
         return $this;
     }
 
@@ -374,7 +363,7 @@ class Figlet
      */
     public function setRightToLeft($rightToLeft)
     {
-        $this->_rightToLeft = min(1, max(0, (int) $rightToLeft));
+        $this->rightToLeft = min(1, max(0, (int) $rightToLeft));
         return $this;
     }
 
@@ -391,17 +380,17 @@ class Figlet
         $smushMode = (int) $smushMode;
 
         if ($smushMode < -1) {
-            $this->_smushOverride = self::SMO_NO;
+            $this->smushOverride = self::SMO_NO;
         } else {
             if ($smushMode === 0) {
-                $this->_userSmush = self::SM_KERN;
-            } else if ($smushMode === -1) {
-                $this->_userSmush = 0;
+                $this->userSmush = self::SM_KERN;
+            } elseif ($smushMode === -1) {
+                $this->userSmush = 0;
             } else {
-                $this->_userSmush = (($smushMode & 63) | self::SM_SMUSH);
+                $this->userSmush = (($smushMode & 63) | self::SM_SMUSH);
             }
 
-            $this->_smushOverride = self::SMO_YES;
+            $this->smushOverride = self::SMO_YES;
         }
 
         $this->_setUsedSmush();
@@ -428,27 +417,30 @@ class Figlet
             $text = iconv($encoding, 'UTF-8', $text);
         }
 
-        $this->_output     = '';
-        $this->_outputLine = array();
+        $this->output     = '';
+        $this->outputLine = array();
 
         $this->_clearLine();
 
-        $this->_outlineLengthLimit    = ($this->_outputWidth - 1);
-        $this->_inCharLineLengthLimit = ($this->_outputWidth * 4 + 100);
+        $this->outlineLengthLimit    = ($this->outputWidth - 1);
+        $this->inCharLineLengthLimit = ($this->outputWidth * 4 + 100);
 
         $wordBreakMode  = 0;
         $lastCharWasEol = false;
-        $textLength     = @iconv_strlen($text, 'UTF-8');
+
+        ErrorHandler::start(E_NOTICE);
+        $textLength = iconv_strlen($text, 'UTF-8');
+        $error      = ErrorHandler::stop();
 
         if ($textLength === false) {
-            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
+            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding, 0, $error);
         }
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
             // Handle paragraphs
             $char = iconv_substr($text, $charNum, 1, 'UTF-8');
 
-            if ($char === "\n" && $this->_handleParagraphs && !$lastCharWasEol) {
+            if ($char === "\n" && $this->handleParagraphs && !$lastCharWasEol) {
                 $nextChar = iconv_substr($text, ($charNum + 1), 1, 'UTF-8');
                 if (!$nextChar) {
                     $nextChar = null;
@@ -478,7 +470,7 @@ class Figlet
                 if ($wordBreakMode === -1) {
                     if ($char === ' ') {
                         break;
-                    } else if ($char === "\n") {
+                    } elseif ($char === "\n") {
                         $wordBreakMode = 0;
                         break;
                     }
@@ -489,24 +481,24 @@ class Figlet
                 if ($char === "\n") {
                     $this->_appendLine();
                     $wordBreakMode = false;
-                } else if ($this->_addChar($char)) {
+                } elseif ($this->_addChar($char)) {
                     if ($char !== ' ') {
                         $wordBreakMode = ($wordBreakMode >= 2) ? 3: 1;
                     } else {
                         $wordBreakMode = ($wordBreakMode > 0) ? 2: 0;
                     }
-                } else if ($this->_outlineLength === 0) {
-                    for ($i = 0; $i < $this->_charHeight; $i++) {
-                        if ($this->_rightToLeft === 1 && $this->_outputWidth > 1) {
-                            $offset = (strlen($this->_currentChar[$i]) - $this->_outlineLengthLimit);
-                            $this->_putString(substr($this->_currentChar[$i], $offset));
+                } elseif ($this->outlineLength === 0) {
+                    for ($i = 0; $i < $this->charHeight; $i++) {
+                        if ($this->rightToLeft === 1 && $this->outputWidth > 1) {
+                            $offset = (strlen($this->currentChar[$i]) - $this->outlineLengthLimit);
+                            $this->_putString(substr($this->currentChar[$i], $offset));
                         } else {
-                            $this->_putString($this->_currentChar[$i]);
+                            $this->_putString($this->currentChar[$i]);
                         }
                     }
 
                     $wordBreakMode = -1;
-                } else if ($char === ' ') {
+                } elseif ($char === ' ') {
                     if ($wordBreakMode === 2) {
                         $this->_splitLine();
                     } else {
@@ -527,11 +519,11 @@ class Figlet
             } while ($charNotAdded);
         }
 
-        if ($this->_outlineLength !== 0) {
+        if ($this->outlineLength !== 0) {
             $this->_appendLine();
         }
 
-        return $this->_output;
+        return $this->output;
     }
 
     /**
@@ -548,21 +540,21 @@ class Figlet
     {
         $length = strlen($string);
 
-        if ($this->_outputWidth > 1) {
-            if ($length > ($this->_outputWidth - 1)) {
-                $length = ($this->_outputWidth - 1);
+        if ($this->outputWidth > 1) {
+            if ($length > ($this->outputWidth - 1)) {
+                $length = ($this->outputWidth - 1);
             }
 
-            if ($this->_justification > 0) {
+            if ($this->justification > 0) {
                 for ($i = 1;
-                     ((3 - $this->_justification) * $i + $length + $this->_justification - 2) < $this->_outputWidth;
+                     ((3 - $this->justification) * $i + $length + $this->justification - 2) < $this->outputWidth;
                      $i++) {
-                    $this->_output .= ' ';
+                    $this->output .= ' ';
                 }
             }
         }
 
-        $this->_output .= str_replace($this->_hardBlank, ' ', $string) . "\n";
+        $this->output .= str_replace($this->hardBlank, ' ', $string) . "\n";
     }
 
     /**
@@ -572,8 +564,8 @@ class Figlet
      */
     protected function _appendLine()
     {
-        for ($i = 0; $i < $this->_charHeight; $i++) {
-            $this->_putString($this->_outputLine[$i]);
+        for ($i = 0; $i < $this->charHeight; $i++) {
+            $this->_putString($this->outputLine[$i]);
         }
 
         $this->_clearLine();
@@ -589,28 +581,28 @@ class Figlet
     protected function _splitLine()
     {
         $gotSpace = false;
-        for ($i = ($this->_inCharLineLength - 1); $i >= 0; $i--) {
-            if (!$gotSpace && $this->_inCharLine[$i] === ' ') {
+        for ($i = ($this->inCharLineLength - 1); $i >= 0; $i--) {
+            if (!$gotSpace && $this->inCharLine[$i] === ' ') {
                 $gotSpace  = true;
                 $lastSpace = $i;
             }
 
-            if ($gotSpace && $this->_inCharLine[$i] !== ' ') {
+            if ($gotSpace && $this->inCharLine[$i] !== ' ') {
                 break;
             }
         }
 
         $firstLength = ($i + 1);
-        $lastLength  = ($this->_inCharLineLength - $lastSpace - 1);
+        $lastLength  = ($this->inCharLineLength - $lastSpace - 1);
 
         $firstPart = '';
         for ($i = 0; $i < $firstLength; $i++) {
-            $firstPart[$i] = $this->_inCharLine[$i];
+            $firstPart[$i] = $this->inCharLine[$i];
         }
 
         $lastPart = '';
         for ($i = 0; $i < $lastLength; $i++) {
-            $lastPart[$i] = $this->_inCharLine[($lastSpace + 1 + $i)];
+            $lastPart[$i] = $this->inCharLine[($lastSpace + 1 + $i)];
         }
 
         $this->_clearLine();
@@ -633,12 +625,12 @@ class Figlet
      */
     protected function _clearLine()
     {
-        for ($i = 0; $i < $this->_charHeight; $i++) {
-            $this->_outputLine[$i] = '';
+        for ($i = 0; $i < $this->charHeight; $i++) {
+            $this->outputLine[$i] = '';
         }
 
-        $this->_outlineLength    = 0;
-        $this->_inCharLineLength = 0;
+        $this->outlineLength    = 0;
+        $this->inCharLineLength = 0;
     }
 
     /**
@@ -646,56 +638,56 @@ class Figlet
      * Returns true if this can be done, false otherwise.
      *
      * @param  string $char Character which to add to the output
-     * @return boolean
+     * @return bool
      */
     protected function _addChar($char)
     {
         $this->_getLetter($char);
 
-        if ($this->_currentChar === null) {
+        if ($this->currentChar === null) {
             return true;
         }
 
         $smushAmount = $this->_smushAmount();
 
-        if (($this->_outlineLength + $this->_currentCharWidth - $smushAmount) > $this->_outlineLengthLimit
-            || ($this->_inCharLineLength + 1) > $this->_inCharLineLengthLimit) {
+        if (($this->outlineLength + $this->currentCharWidth - $smushAmount) > $this->outlineLengthLimit
+            || ($this->inCharLineLength + 1) > $this->inCharLineLengthLimit) {
             return false;
         }
 
         $tempLine = '';
-        for ($row = 0; $row < $this->_charHeight; $row++) {
-            if ($this->_rightToLeft === 1) {
-                $tempLine = $this->_currentChar[$row];
+        for ($row = 0; $row < $this->charHeight; $row++) {
+            if ($this->rightToLeft === 1) {
+                $tempLine = $this->currentChar[$row];
 
                 for ($k = 0; $k < $smushAmount; $k++) {
-                    $position            = ($this->_currentCharWidth - $smushAmount + $k);
-                    $tempLine[$position] = $this->_smushem($tempLine[$position], $this->_outputLine[$row][$k]);
+                    $position            = ($this->currentCharWidth - $smushAmount + $k);
+                    $tempLine[$position] = $this->_smushem($tempLine[$position], $this->outputLine[$row][$k]);
                 }
 
-                $this->_outputLine[$row] = $tempLine . substr($this->_outputLine[$row], $smushAmount);
+                $this->outputLine[$row] = $tempLine . substr($this->outputLine[$row], $smushAmount);
             } else {
                 for ($k = 0; $k < $smushAmount; $k++) {
-                    if (($this->_outlineLength - $smushAmount + $k) < 0) {
+                    if (($this->outlineLength - $smushAmount + $k) < 0) {
                         continue;
                     }
 
-                    $position = ($this->_outlineLength - $smushAmount + $k);
-                    if (isset($this->_outputLine[$row][$position])) {
-                        $leftChar = $this->_outputLine[$row][$position];
+                    $position = ($this->outlineLength - $smushAmount + $k);
+                    if (isset($this->outputLine[$row][$position])) {
+                        $leftChar = $this->outputLine[$row][$position];
                     } else {
                         $leftChar = null;
                     }
 
-                    $this->_outputLine[$row][$position] = $this->_smushem($leftChar, $this->_currentChar[$row][$k]);
+                    $this->outputLine[$row][$position] = $this->_smushem($leftChar, $this->currentChar[$row][$k]);
                 }
 
-                $this->_outputLine[$row] .= substr($this->_currentChar[$row], $smushAmount);
+                $this->outputLine[$row] .= substr($this->currentChar[$row], $smushAmount);
             }
         }
 
-        $this->_outlineLength                          = strlen($this->_outputLine[0]);
-        $this->_inCharLine[$this->_inCharLineLength++] = $char;
+        $this->outlineLength                          = strlen($this->outputLine[0]);
+        $this->inCharLine[$this->inCharLineLength++] = $char;
 
         return true;
     }
@@ -708,12 +700,12 @@ class Figlet
      */
     protected function _getLetter($char)
     {
-        if (array_key_exists($this->_uniOrd($char), $this->_charList)) {
-            $this->_currentChar       = $this->_charList[$this->_uniOrd($char)];
-            $this->_previousCharWidth = $this->_currentCharWidth;
-            $this->_currentCharWidth  = strlen($this->_currentChar[0]);
+        if (array_key_exists($this->_uniOrd($char), $this->charList)) {
+            $this->currentChar       = $this->charList[$this->_uniOrd($char)];
+            $this->previousCharWidth = $this->currentCharWidth;
+            $this->currentCharWidth  = strlen($this->currentChar[0]);
         } else {
-            $this->_currentChar = null;
+            $this->currentChar = null;
         }
     }
 
@@ -725,21 +717,21 @@ class Figlet
      */
     protected function _smushAmount()
     {
-        if (($this->_smushMode & (self::SM_SMUSH | self::SM_KERN)) === 0) {
+        if (($this->smushMode & (self::SM_SMUSH | self::SM_KERN)) === 0) {
             return 0;
         }
 
-        $maxSmush = $this->_currentCharWidth;
+        $maxSmush = $this->currentCharWidth;
         $amount   = $maxSmush;
 
-        for ($row = 0; $row < $this->_charHeight; $row++) {
-            if ($this->_rightToLeft === 1) {
-                $charbd = strlen($this->_currentChar[$row]);
+        for ($row = 0; $row < $this->charHeight; $row++) {
+            if ($this->rightToLeft === 1) {
+                $charbd = strlen($this->currentChar[$row]);
                 while (true) {
-                    if (!isset($this->_currentChar[$row][$charbd])) {
+                    if (!isset($this->currentChar[$row][$charbd])) {
                         $leftChar = null;
                     } else {
-                        $leftChar = $this->_currentChar[$row][$charbd];
+                        $leftChar = $this->currentChar[$row][$charbd];
                     }
 
                     if ($charbd > 0 && ($leftChar === null || $leftChar == ' ')) {
@@ -751,10 +743,10 @@ class Figlet
 
                 $linebd = 0;
                 while (true) {
-                    if (!isset($this->_outputLine[$row][$linebd])) {
+                    if (!isset($this->outputLine[$row][$linebd])) {
                         $rightChar = null;
                     } else {
-                        $rightChar = $this->_outputLine[$row][$linebd];
+                        $rightChar = $this->outputLine[$row][$linebd];
                     }
 
                     if ($rightChar === ' ') {
@@ -764,14 +756,14 @@ class Figlet
                     }
                 }
 
-                $amount = ($linebd + $this->_currentCharWidth - 1 - $charbd);
+                $amount = ($linebd + $this->currentCharWidth - 1 - $charbd);
             } else {
-                $linebd = strlen($this->_outputLine[$row]);
+                $linebd = strlen($this->outputLine[$row]);
                 while (true) {
-                    if (!isset($this->_outputLine[$row][$linebd])) {
+                    if (!isset($this->outputLine[$row][$linebd])) {
                         $leftChar = null;
                     } else {
-                        $leftChar = $this->_outputLine[$row][$linebd];
+                        $leftChar = $this->outputLine[$row][$linebd];
                     }
 
                     if ($linebd > 0 && ($leftChar === null || $leftChar == ' ')) {
@@ -783,10 +775,10 @@ class Figlet
 
                 $charbd = 0;
                 while (true) {
-                    if (!isset($this->_currentChar[$row][$charbd])) {
+                    if (!isset($this->currentChar[$row][$charbd])) {
                         $rightChar = null;
                     } else {
-                        $rightChar = $this->_currentChar[$row][$charbd];
+                        $rightChar = $this->currentChar[$row][$charbd];
                     }
 
                     if ($rightChar === ' ') {
@@ -796,12 +788,12 @@ class Figlet
                     }
                 }
 
-                $amount = ($charbd + $this->_outlineLength - 1 - $linebd);
+                $amount = ($charbd + $this->outlineLength - 1 - $linebd);
             }
 
             if (empty($leftChar) || $leftChar === ' ') {
                 $amount++;
-            } else if (!empty($rightChar)) {
+            } elseif (!empty($rightChar)) {
                 if ($this->_smushem($leftChar, $rightChar) !== null) {
                     $amount++;
                 }
@@ -842,28 +834,28 @@ class Figlet
             return $leftChar;
         }
 
-        if ($this->_previousCharWidth < 2 || $this->_currentCharWidth < 2) {
+        if ($this->previousCharWidth < 2 || $this->currentCharWidth < 2) {
             // Disallows overlapping if the previous character or the current
             // character has a width of one or zero.
             return null;
         }
 
-        if (($this->_smushMode & self::SM_SMUSH) === 0) {
+        if (($this->smushMode & self::SM_SMUSH) === 0) {
             // Kerning
             return null;
         }
 
-        if (($this->_smushMode & 63) === 0) {
+        if (($this->smushMode & 63) === 0) {
             // This is smushing by universal overlapping
             if ($leftChar === ' ') {
                 return $rightChar;
-            } else if ($rightChar === ' ') {
+            } elseif ($rightChar === ' ') {
                 return $leftChar;
-            } else if ($leftChar === $this->_hardBlank) {
+            } elseif ($leftChar === $this->hardBlank) {
                 return $rightChar;
-            } else if ($rightChar === $this->_hardBlank) {
+            } elseif ($rightChar === $this->hardBlank) {
                 return $rightChar;
-            } else if ($this->_rightToLeft === 1) {
+            } elseif ($this->rightToLeft === 1) {
                 return $leftChar;
             } else {
                 // Occurs in the absence of above exceptions
@@ -871,76 +863,76 @@ class Figlet
             }
         }
 
-        if (($this->_smushMode & self::SM_HARDBLANK) > 0) {
-            if ($leftChar === $this->_hardBlank && $rightChar === $this->_hardBlank) {
+        if (($this->smushMode & self::SM_HARDBLANK) > 0) {
+            if ($leftChar === $this->hardBlank && $rightChar === $this->hardBlank) {
                 return $leftChar;
             }
         }
 
-        if ($leftChar === $this->_hardBlank && $rightChar === $this->_hardBlank) {
+        if ($leftChar === $this->hardBlank && $rightChar === $this->hardBlank) {
             return null;
         }
 
-        if (($this->_smushMode & self::SM_EQUAL) > 0) {
+        if (($this->smushMode & self::SM_EQUAL) > 0) {
             if ($leftChar === $rightChar) {
                 return $leftChar;
             }
         }
 
-        if (($this->_smushMode & self::SM_LOWLINE) > 0) {
+        if (($this->smushMode & self::SM_LOWLINE) > 0) {
             if ($leftChar === '_' && strchr('|/\\[]{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if ($rightChar === '_' && strchr('|/\\[]{}()<>', $leftChar) !== false) {
+            } elseif ($rightChar === '_' && strchr('|/\\[]{}()<>', $leftChar) !== false) {
                 return $leftChar;
             }
         }
 
-        if (($this->_smushMode & self::SM_HIERARCHY) > 0) {
+        if (($this->smushMode & self::SM_HIERARCHY) > 0) {
             if ($leftChar === '|' && strchr('/\\[]{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if ($rightChar === '|' && strchr('/\\[]{}()<>', $leftChar) !== false) {
+            } elseif ($rightChar === '|' && strchr('/\\[]{}()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('/\\', $leftChar) && strchr('[]{}()<>', $rightChar) !== false) {
+            } elseif (strchr('/\\', $leftChar) && strchr('[]{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('/\\', $rightChar) && strchr('[]{}()<>', $leftChar) !== false) {
+            } elseif (strchr('/\\', $rightChar) && strchr('[]{}()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('[]', $leftChar) && strchr('{}()<>', $rightChar) !== false) {
+            } elseif (strchr('[]', $leftChar) && strchr('{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('[]', $rightChar) && strchr('{}()<>', $leftChar) !== false) {
+            } elseif (strchr('[]', $rightChar) && strchr('{}()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('{}', $leftChar) && strchr('()<>', $rightChar) !== false) {
+            } elseif (strchr('{}', $leftChar) && strchr('()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('{}', $rightChar) && strchr('()<>', $leftChar) !== false) {
+            } elseif (strchr('{}', $rightChar) && strchr('()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('()', $leftChar) && strchr('<>', $rightChar) !== false) {
+            } elseif (strchr('()', $leftChar) && strchr('<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('()', $rightChar) && strchr('<>', $leftChar) !== false) {
+            } elseif (strchr('()', $rightChar) && strchr('<>', $leftChar) !== false) {
                 return $leftChar;
             }
         }
 
-        if (($this->_smushMode & self::SM_PAIR) > 0) {
+        if (($this->smushMode & self::SM_PAIR) > 0) {
             if ($leftChar === '[' && $rightChar === ']') {
                 return '|';
-            } else if ($rightChar === '[' && $leftChar === ']') {
+            } elseif ($rightChar === '[' && $leftChar === ']') {
                 return '|';
-            } else if ($leftChar === '{' && $rightChar === '}') {
+            } elseif ($leftChar === '{' && $rightChar === '}') {
                 return '|';
-            } else if ($rightChar === '{' && $leftChar === '}') {
+            } elseif ($rightChar === '{' && $leftChar === '}') {
                 return '|';
-            } else if ($leftChar === '(' && $rightChar === ')') {
+            } elseif ($leftChar === '(' && $rightChar === ')') {
                 return '|';
-            } else if ($rightChar === '(' && $leftChar === ')') {
+            } elseif ($rightChar === '(' && $leftChar === ')') {
                 return '|';
             }
         }
 
-        if (($this->_smushMode & self::SM_BIGX) > 0) {
+        if (($this->smushMode & self::SM_BIGX) > 0) {
             if ($leftChar === '/' && $rightChar === '\\') {
                 return '|';
-            } else if ($rightChar === '/' && $leftChar === '\\') {
+            } elseif ($rightChar === '/' && $leftChar === '\\') {
                 return 'Y';
-            } else if ($leftChar === '>' && $rightChar === '<') {
+            } elseif ($leftChar === '>' && $rightChar === '<') {
                 return 'X';
             }
         }
@@ -995,13 +987,13 @@ class Figlet
         // Get the header
         $numsRead = sscanf(fgets($fp, 1000),
                            '%*c%c %d %*d %d %d %d %d %d',
-                           $this->_hardBlank,
-                           $this->_charHeight,
-                           $this->_maxLength,
+                           $this->hardBlank,
+                           $this->charHeight,
+                           $this->maxLength,
                            $smush,
                            $cmtLines,
                            $rightToLeft,
-                           $this->_fontSmush);
+                           $this->fontSmush);
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
             throw new Exception\UnexpectedValueException($fontFile . ': Not a FIGlet 2 font file');
@@ -1015,32 +1007,32 @@ class Figlet
         // If no smush2, decode smush into smush2
         if ($numsRead < 7) {
             if ($smush === 2) {
-                $this->_fontSmush = self::SM_KERN;
-            } else if ($smush < 0) {
-                $this->_fontSmush = 0;
+                $this->fontSmush = self::SM_KERN;
+            } elseif ($smush < 0) {
+                $this->fontSmush = 0;
             } else {
-                $this->_fontSmush = (($smush & 31) | self::SM_SMUSH);
+                $this->fontSmush = (($smush & 31) | self::SM_SMUSH);
             }
         }
 
         // Correct char height && maxlength
-        $this->_charHeight = max(1, $this->_charHeight);
-        $this->_maxLength  = max(1, $this->_maxLength);
+        $this->charHeight = max(1, $this->charHeight);
+        $this->maxLength  = max(1, $this->maxLength);
 
         // Give ourselves some extra room
-        $this->_maxLength += 100;
+        $this->maxLength += 100;
 
         // See if we have to override smush settings
         $this->_setUsedSmush();
 
         // Get left to right value
-        if ($this->_rightToLeft === null) {
-            $this->_rightToLeft = $rightToLeft;
+        if ($this->rightToLeft === null) {
+            $this->rightToLeft = $rightToLeft;
         }
 
         // Get justification value
-        if ($this->_justification === null) {
-            $this->_justification = (2 * $this->_rightToLeft);
+        if ($this->justification === null) {
+            $this->justification = (2 * $this->rightToLeft);
         }
 
         // Skip all comment lines
@@ -1050,11 +1042,11 @@ class Figlet
 
         // Fetch all ASCII characters
         for ($asciiCode = 32; $asciiCode < 127; $asciiCode++) {
-            $this->_charList[$asciiCode] = $this->_loadChar($fp);
+            $this->charList[$asciiCode] = $this->_loadChar($fp);
         }
 
         // Fetch all german characters
-        foreach ($this->_germanChars as $uniCode) {
+        foreach ($this->germanChars as $uniCode) {
             $char = $this->_loadChar($fp);
 
             if ($char === false) {
@@ -1063,7 +1055,7 @@ class Figlet
             }
 
             if (trim(implode('', $char)) !== '') {
-                $this->_charList[$uniCode] = $char;
+                $this->charList[$uniCode] = $char;
             }
         }
 
@@ -1079,7 +1071,7 @@ class Figlet
             // Convert it if required
             if (substr($uniCode, 0, 2) === '0x') {
                 $uniCode = hexdec(substr($uniCode, 2));
-            } else if (substr($uniCode, 0, 1) === '0' and
+            } elseif (substr($uniCode, 0, 1) === '0' and
                        $uniCode !== '0' or
                        substr($uniCode, 0, 2) === '-0') {
                 $uniCode = octdec($uniCode);
@@ -1095,28 +1087,28 @@ class Figlet
                 return;
             }
 
-            $this->_charList[$uniCode] = $char;
+            $this->charList[$uniCode] = $char;
         }
 
         fclose($fp);
 
-        $this->_fontLoaded = true;
+        $this->fontLoaded = true;
     }
 
     /**
-     * Set the used smush mode, according to smush override, user smsush and
+     * Set the used smush mode, according to smush override, user smush and
      * font smush.
      *
      * @return void
      */
     protected function _setUsedSmush()
     {
-        if ($this->_smushOverride === self::SMO_NO) {
-            $this->_smushMode = $this->_fontSmush;
-        } else if ($this->_smushOverride === self::SMO_YES) {
-            $this->_smushMode = $this->_userSmush;
-        } else if ($this->_smushOverride === self::SMO_FORCE) {
-            $this->_smushMode = ($this->_fontSmush | $this->_userSmush);
+        if ($this->smushOverride === self::SMO_NO) {
+            $this->smushMode = $this->fontSmush;
+        } elseif ($this->smushOverride === self::SMO_YES) {
+            $this->smushMode = $this->userSmush;
+        } elseif ($this->smushOverride === self::SMO_FORCE) {
+            $this->smushMode = ($this->fontSmush | $this->userSmush);
         }
     }
 
@@ -1175,7 +1167,7 @@ class Figlet
     {
         $char = array();
 
-        for ($i = 0; $i < $this->_charHeight; $i++) {
+        for ($i = 0; $i < $this->charHeight; $i++) {
             if (feof($fp)) {
                 return false;
             }
@@ -1204,13 +1196,13 @@ class Figlet
 
         if ($h <= 0x7F) {
             $ord = $h;
-        } else if ($h < 0xC2) {
+        } elseif ($h < 0xC2) {
             $ord = 0;
-        } else if ($h <= 0xDF) {
+        } elseif ($h <= 0xDF) {
             $ord = (($h & 0x1F) << 6 | (ord($c[1]) & 0x3F));
-        } else if ($h <= 0xEF) {
+        } elseif ($h <= 0xEF) {
             $ord = (($h & 0x0F) << 12 | (ord($c[1]) & 0x3F) << 6 | (ord($c[2]) & 0x3F));
-        } else if ($h <= 0xF4) {
+        } elseif ($h <= 0xF4) {
             $ord = (($h & 0x0F) << 18 | (ord($c[1]) & 0x3F) << 12 |
                    (ord($c[2]) & 0x3F) << 6 | (ord($c[3]) & 0x3F));
         } else {

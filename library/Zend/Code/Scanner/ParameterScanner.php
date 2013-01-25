@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
@@ -6,55 +14,153 @@ use Zend\Code\NameInformation;
 
 class ParameterScanner
 {
+    /**
+     * @var bool
+     */
     protected $isScanned = false;
 
+    /**
+     * @var null|ClassScanner
+     */
     protected $declaringScannerClass = null;
+
+    /**
+     * @var null|string
+     */
     protected $declaringClass = null;
+
+    /**
+     * @var null|MethodScanner
+     */
     protected $declaringScannerFunction = null;
+
+    /**
+     * @var null|string
+     */
     protected $declaringFunction = null;
+
+    /**
+     * @var null|string
+     */
     protected $defaultValue = null;
+
+    /**
+     * @var null|string
+     */
     protected $class = null;
+
+    /**
+     * @var null|string
+     */
     protected $name = null;
+
+    /**
+     * @var null|int
+     */
     protected $position = null;
+
+    /**
+     * @var bool
+     */
     protected $isArray = false;
+
+    /**
+     * @var bool
+     */
     protected $isDefaultValueAvailable = false;
+
+    /**
+     * @var bool
+     */
     protected $isOptional = false;
+
+    /**
+     * @var bool
+     */
     protected $isPassedByReference = false;
 
+    /**
+     * @var array|null
+     */
     protected $tokens = null;
+
+    /**
+     * @var null|NameInformation
+     */
     protected $nameInformation = null;
 
+    /**
+     * Constructor
+     *
+     * @param array $parameterTokens
+     * @param NameInformation $nameInformation
+     */
     public function __construct(array $parameterTokens, NameInformation $nameInformation = null)
     {
         $this->tokens          = $parameterTokens;
         $this->nameInformation = $nameInformation;
     }
 
+    /**
+     * Set declaring class
+     *
+     * @param string $class
+     * @return void
+     */
     public function setDeclaringClass($class)
     {
         $this->declaringClass = $class;
     }
 
+    /**
+     * Set declaring scanner class
+     *
+     * @param ClassScanner $scannerClass
+     * @return void
+     */
     public function setDeclaringScannerClass(ClassScanner $scannerClass)
     {
         $this->declaringScannerClass = $scannerClass;
     }
 
+    /**
+     * Set declaring function
+     *
+     * @param string $function
+     * @return void
+     */
     public function setDeclaringFunction($function)
     {
         $this->declaringFunction = $function;
     }
 
+    /**
+     * Set declaring scanner function
+     *
+     * @param MethodScanner $scannerFunction
+     * @return void
+     */
     public function setDeclaringScannerFunction(MethodScanner $scannerFunction)
     {
         $this->declaringScannerFunction = $scannerFunction;
     }
 
+    /**
+     * Set position
+     *
+     * @param int $position
+     * @return void
+     */
     public function setPosition($position)
     {
         $this->position = $position;
     }
 
+    /**
+     * Scan
+     *
+     * @return void
+     */
     protected function scan()
     {
         if ($this->isScanned) {
@@ -114,7 +220,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $declaringScannerClass
+     * Get declaring scanner class
+     *
+     * @return ClassScanner
      */
     public function getDeclaringScannerClass()
     {
@@ -122,7 +230,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $declaringClass
+     * Get declaring class
+     *
+     * @return string
      */
     public function getDeclaringClass()
     {
@@ -130,7 +240,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $declaringScannerFunction
+     * Get declaring scanner function
+     *
+     * @return MethodScanner
      */
     public function getDeclaringScannerFunction()
     {
@@ -138,7 +250,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $declaringFunction
+     * Get declaring function
+     *
+     * @return string
      */
     public function getDeclaringFunction()
     {
@@ -146,7 +260,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $defaultValue
+     * Get default value
+     *
+     * @return string
      */
     public function getDefaultValue()
     {
@@ -155,7 +271,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $class
+     * Get class
+     *
+     * @return string
      */
     public function getClass()
     {
@@ -164,7 +282,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $name
+     * Get name
+     *
+     * @return string
      */
     public function getName()
     {
@@ -173,7 +293,9 @@ class ParameterScanner
     }
 
     /**
-     * @return $position
+     * Get position
+     *
+     * @return int
      */
     public function getPosition()
     {
@@ -182,7 +304,9 @@ class ParameterScanner
     }
 
     /**
-     * @return boolean
+     * Check if is array
+     *
+     * @return bool
      */
     public function isArray()
     {
@@ -191,7 +315,9 @@ class ParameterScanner
     }
 
     /**
-     * @return boolean
+     * Check if default value is available
+     *
+     * @return bool
      */
     public function isDefaultValueAvailable()
     {
@@ -200,7 +326,9 @@ class ParameterScanner
     }
 
     /**
-     * @return boolean
+     * Check if is optional
+     *
+     * @return bool
      */
     public function isOptional()
     {
@@ -209,13 +337,13 @@ class ParameterScanner
     }
 
     /**
-     * @return boolean
+     * Check if is passed by reference
+     *
+     * @return bool
      */
     public function isPassedByReference()
     {
         $this->scan();
         return $this->isPassedByReference;
     }
-
-
 }

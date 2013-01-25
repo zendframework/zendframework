@@ -3,15 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\Sqlsrv\Exception\ErrorException;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -92,21 +93,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Get default catalog
-     *
-     * @return null
-     */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * Get dafault schema
+     * Get current schema
      *
      * @return string
      */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
@@ -121,6 +112,7 @@ class Connection implements ConnectionInterface
      * Set resource
      *
      * @param  resource $resource
+     * @throws Exception\InvalidArgumentException
      * @return Connection
      */
     public function setResource($resource)
@@ -143,6 +135,7 @@ class Connection implements ConnectionInterface
     /**
      * Connect
      *
+     * @throws Exception\RuntimeException
      * @return null
      */
     public function connect()
@@ -187,15 +180,16 @@ class Connection implements ConnectionInterface
             throw new Exception\RuntimeException(
                 'Connect Error',
                 null,
-                new Exception\ErrorException(sqlsrv_errors())
+                new ErrorException(sqlsrv_errors())
             );
         }
 
+        return $this;
     }
 
     /**
      * Is connected
-     * @return boolean
+     * @return bool
      */
     public function isConnected()
     {
@@ -264,12 +258,17 @@ class Connection implements ConnectionInterface
      * Execute
      *
      * @param  string $sql
+     * @throws Exception\RuntimeException
      * @return mixed
      */
     public function execute($sql)
     {
         if (!$this->isConnected()) {
             $this->connect();
+        }
+
+        if (!$this->driver instanceof Sqlsrv) {
+            throw new Exception\RuntimeException('Connection is missing an instance of Sqlsrv');
         }
 
         $returnValue = sqlsrv_query($this->resource, $sql);
@@ -280,9 +279,9 @@ class Connection implements ConnectionInterface
             // ignore general warnings
             if ($errors[0]['SQLSTATE'] != '01000') {
                 throw new Exception\RuntimeException(
-                    'An exception occured while trying to execute the provided $sql',
+                    'An exception occurred while trying to execute the provided $sql',
                     null,
-                    new Exception\ErrorException($errors)
+                    new ErrorException($errors)
                 );
             }
         }
@@ -310,14 +309,17 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      *
+     * @param string $name
      * @return mixed
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
+        if (!$this->resource) {
+            $this->connect();
+        }
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);
         return $row['Current_Identity'];
     }
-
 }

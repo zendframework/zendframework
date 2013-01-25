@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ModuleManager
  */
@@ -13,16 +13,17 @@ namespace Zend\ModuleManager\Listener;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Loader\ModuleAutoloader;
+use Zend\ModuleManager\ModuleEvent;
 use Zend\Stdlib\CallbackHandler;
 
 /**
  * Default listener aggregate
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class DefaultListenerAggregate extends AbstractListener implements 
+class DefaultListenerAggregate extends AbstractListener implements
     ListenerAggregateInterface
 {
     /**
@@ -39,7 +40,7 @@ class DefaultListenerAggregate extends AbstractListener implements
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @return DefaultListenerAggregate
      */
     public function attach(EventManagerInterface $events)
     {
@@ -48,11 +49,13 @@ class DefaultListenerAggregate extends AbstractListener implements
         $locatorRegistrationListener = new LocatorRegistrationListener($options);
         $moduleAutoloader            = new ModuleAutoloader($options->getModulePaths());
 
-        $this->listeners[] = $events->attach('loadModules.pre', array($moduleAutoloader, 'register'), 1000);
-        $this->listeners[] = $events->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->listeners[] = $events->attach('loadModule', new AutoloaderListener($options), 2000);
-        $this->listeners[] = $events->attach('loadModule', new InitTrigger($options), 1000);
-        $this->listeners[] = $events->attach('loadModule', new OnBootstrapListener($options), 1000);
+        // High priority, we assume module autoloading (for FooNamespace\Module classes) should be available before anything else
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($moduleAutoloader, 'register'), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener);
+        // High priority, because most other loadModule listeners will assume the module's classes are available via autoloading
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener($options), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new InitTrigger($options));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener($options));
         $this->listeners[] = $events->attach($locatorRegistrationListener);
         $this->listeners[] = $events->attach($configListener);
         return $this;

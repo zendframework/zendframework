@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication;
@@ -23,8 +13,6 @@ namespace Zend\Authentication;
 /**
  * @category   Zend
  * @package    Zend_Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AuthenticationService
 {
@@ -44,9 +32,9 @@ class AuthenticationService
 
     /**
      * Constructor
-     * 
-     * @param  Storage\StorageInterface $storage 
-     * @param  Adapter\AdapterInterface $adapter 
+     *
+     * @param  Storage\StorageInterface $storage
+     * @param  Adapter\AdapterInterface $adapter
      */
     public function __construct(Storage\StorageInterface $storage = null, Adapter\AdapterInterface $adapter = null)
     {
@@ -127,7 +115,7 @@ class AuthenticationService
         $result = $adapter->authenticate();
 
         /**
-         * ZF-7546 - prevent multiple succesive calls from storing inconsistent results
+         * ZF-7546 - prevent multiple successive calls from storing inconsistent results
          * Ensure storage has clean state
          */
         if ($this->hasIdentity()) {
@@ -144,7 +132,7 @@ class AuthenticationService
     /**
      * Returns true if and only if an identity is available from storage
      *
-     * @return boolean
+     * @return bool
      */
     public function hasIdentity()
     {

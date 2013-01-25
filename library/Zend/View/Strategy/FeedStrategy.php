@@ -1,41 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Strategy
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface,
-    Zend\Feed\Writer\Feed,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Feed\Writer\Feed;
+use Zend\Http\Request as HttpRequest;
+use Zend\View\Model;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage Strategy
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FeedStrategy implements ListenerAggregateInterface
 {
@@ -53,7 +39,6 @@ class FeedStrategy implements ListenerAggregateInterface
      * Constructor
      *
      * @param  FeedRenderer $renderer
-     * @return void
      */
     public function __construct(FeedRenderer $renderer)
     {
@@ -99,36 +84,13 @@ class FeedStrategy implements ListenerAggregateInterface
     {
         $model = $e->getModel();
 
-        if ($model instanceof Model\FeedModel) {
-            // FeedModel found
-            return $this->renderer;
-        }
-
-        $request = $e->getRequest();
-        if (!$request instanceof HttpRequest) {
-            // Not an HTTP request; cannot autodetermine
+        if (!$model instanceof Model\FeedModel) {
+            // no FeedModel present; do nothing
             return;
         }
 
-        $headers = $request->headers();
-        if ($headers->has('accept')) {
-            $accept  = $headers->get('accept');
-            foreach ($accept->getPrioritized() as $mediaType) {
-                if (0 === strpos($mediaType, 'application/rss+xml')) {
-                    // application/rss+xml Accept header found
-                    $this->renderer->setFeedType('rss');
-                    return $this->renderer;
-                }
-                if (0 === strpos($mediaType, 'application/atom+xml')) {
-                    // application/atom+xml Accept header found
-                    $this->renderer->setFeedType('atom');
-                    return $this->renderer;
-                }
-            }
-        }
-
-        // Not matched!
-        return;
+        // FeedModel found
+        return $this->renderer;
     }
 
     /**
@@ -162,10 +124,20 @@ class FeedStrategy implements ListenerAggregateInterface
                   ? 'application/rss+xml'
                   : 'application/atom+xml';
 
+        $model   = $e->getModel();
+        $charset = '';
+
+        if ($model instanceof Model\FeedModel) {
+
+            $feed = $model->getFeed();
+
+            $charset = '; charset=' . $feed->getEncoding() . ';';
+        }
+
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
-        $headers = $response->headers();
-        $headers->addHeaderLine('content-type', $feedType);
+        $headers = $response->getHeaders();
+        $headers->addHeaderLine('content-type', $feedType . $charset);
     }
 }

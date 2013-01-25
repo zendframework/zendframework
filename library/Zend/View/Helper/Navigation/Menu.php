@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
@@ -33,8 +22,6 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Menu extends AbstractHelper
 {
@@ -51,6 +38,13 @@ class Menu extends AbstractHelper
      * @var bool
      */
     protected $onlyActiveBranch = false;
+
+    /**
+     * Whether labels should be escaped
+     *
+     * @var bool
+     */
+    protected $escapeLabels = true;
 
     /**
      * Whether parents should be rendered when only rendering active branch
@@ -133,6 +127,18 @@ class Menu extends AbstractHelper
     }
 
     /**
+     * Sets a flag indicating whether labels should be escaped
+     *
+     * @param bool $flag [optional] escape labels. Default is true.
+     * @return Menu  fluent interface, returns self
+     */
+    public function escapeLabels($flag = true)
+    {
+        $this->escapeLabels = (bool) $flag;
+        return $this;
+    }
+
+    /**
      * Enables/disables rendering of parents when only rendering active branch
      *
      * See {@link setOnlyActiveBranch()} for more information.
@@ -164,9 +170,9 @@ class Menu extends AbstractHelper
      * Sets which partial view script to use for rendering menu
      *
      * @param  string|array $partial partial view script or null. If an array is
-     *                               given, it is expected to contain two 
-     *                               values; the partial view script to use, 
-     *                               and the module where the script can be 
+     *                               given, it is expected to contain two
+     *                               values; the partial view script to use,
+     *                               and the module where the script can be
      *                               found.
      * @return Menu  fluent interface, returns self
      */
@@ -197,22 +203,24 @@ class Menu extends AbstractHelper
      *
      * Overrides {@link AbstractHelper::htmlify()}.
      *
-     * @param  AbstractPage $page  page to generate HTML for
-     * @return string              HTML string for the given page
+     * @param  AbstractPage $page   page to generate HTML for
+     * @param bool $escapeLabel     Whether or not to escape the label
+     * @return string               HTML string for the given page
      */
-    public function htmlify(AbstractPage $page)
+    public function htmlify(AbstractPage $page, $escapeLabel = true)
     {
         // get label and title for translating
         $label = $page->getLabel();
         $title = $page->getTitle();
 
         // translate label and title?
-        if ($this->getUseTranslator() && $t = $this->getTranslator()) {
+        if (null !== ($translator = $this->getTranslator())) {
+            $textDomain = $this->getTranslatorTextDomain();
             if (is_string($label) && !empty($label)) {
-                $label = $t->translate($label);
+                $label = $translator->translate($label, $textDomain);
             }
             if (is_string($title) && !empty($title)) {
-                $title = $t->translate($title);
+                $title = $translator->translate($title, $textDomain);
             }
         }
 
@@ -233,10 +241,16 @@ class Menu extends AbstractHelper
             $element = 'span';
         }
 
-        $escaper = $this->view->plugin('escape');
-        return '<' . $element . $this->_htmlAttribs($attribs) . '>'
-             . $escaper($label)
-             . '</' . $element . '>';
+        $html = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        if ($escapeLabel === true) {
+            $escaper = $this->view->plugin('escapeHtml');
+            $html .= $escaper($label);
+        } else {
+            $html .= $label;
+        }
+        $html .= '</' . $element . '>';
+
+        return $html;
     }
 
     /**
@@ -283,6 +297,10 @@ class Menu extends AbstractHelper
             $options['onlyActiveBranch'] = $this->getOnlyActiveBranch();
         }
 
+        if (!isset($options['escapeLabels'])) {
+            $options['escapeLabels'] = $this->escapeLabels;
+        }
+
         if (!isset($options['renderParents'])) {
             $options['renderParents'] = $this->getRenderParents();
         }
@@ -293,22 +311,23 @@ class Menu extends AbstractHelper
     // Render methods:
 
     /**
-     * Renders the deepest active menu within [$minDepth, $maxDeth], (called
+     * Renders the deepest active menu within [$minDepth, $maxDepth], (called
      * from {@link renderMenu()})
      *
-     * @param  AbstractContainer         $container  container to render
-     * @param  array                     $active     active page and depth
-     * @param  string                    $ulClass    CSS class for first UL
-     * @param  string                    $indent     initial indentation
-     * @param  int|null                  $minDepth   minimum depth
-     * @param  int|null                  $maxDepth   maximum depth
-     * @return string                                rendered menu
+     * @param  AbstractContainer         $container    container to render
+     * @param  string                    $ulClass      CSS class for first UL
+     * @param  string                    $indent       initial indentation
+     * @param  int|null                  $minDepth     minimum depth
+     * @param  int|null                  $maxDepth     maximum depth
+     * @param  bool                      $escapeLabels Whether or not to escape the labels
+     * @return string                                  rendered menu
      */
     protected function renderDeepestMenu(AbstractContainer $container,
                                          $ulClass,
                                          $indent,
                                          $minDepth,
-                                         $maxDepth
+                                         $maxDepth,
+                                         $escapeLabels
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -319,10 +338,10 @@ class Menu extends AbstractHelper
             if (!$active['page']->hasPages()) {
                 return '';
             }
-        } else if (!$active['page']->hasPages()) {
+        } elseif (!$active['page']->hasPages()) {
             // found pages has no children; render siblings
             $active['page'] = $active['page']->getParent();
-        } else if (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
+        } elseif (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
             // children are below max depth; render siblings
             $active['page'] = $active['page']->getParent();
         }
@@ -336,7 +355,7 @@ class Menu extends AbstractHelper
             }
             $liClass = $subPage->isActive(true) ? ' class="active"' : '';
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage) . self::EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
             $html .= $indent . '    </li>' . self::EOL;
         }
 
@@ -348,20 +367,22 @@ class Menu extends AbstractHelper
     /**
      * Renders a normal menu (called from {@link renderMenu()})
      *
-     * @param  AbstractContainer                 $container   container to render
-     * @param  string                    $ulClass     CSS class for first UL
-     * @param  string                    $indent      initial indentation
-     * @param  int|null                  $minDepth    minimum depth
-     * @param  int|null                  $maxDepth    maximum depth
-     * @param  bool                      $onlyActive  render only active branch?
+     * @param  AbstractContainer         $container    container to render
+     * @param  string                    $ulClass      CSS class for first UL
+     * @param  string                    $indent       initial indentation
+     * @param  int|null                  $minDepth     minimum depth
+     * @param  int|null                  $maxDepth     maximum depth
+     * @param  bool                      $onlyActive   render only active branch?
+     * @param  bool                      $escapeLabels Whether or not to escape the labels
      * @return string
      */
-    protected function _renderMenu(AbstractContainer $container,
+    protected function renderNormalMenu(AbstractContainer $container,
                                    $ulClass,
                                    $indent,
                                    $minDepth,
                                    $maxDepth,
-                                   $onlyActive
+                                   $onlyActive,
+                                   $escapeLabels
     ) {
         $html = '';
 
@@ -387,16 +408,16 @@ class Menu extends AbstractHelper
             $depth = $iterator->getDepth();
             $isActive = $page->isActive(true);
             if ($depth < $minDepth || !$this->accept($page)) {
-                // page is below minDepth or not accepted by acl/visibilty
+                // page is below minDepth or not accepted by acl/visibility
                 continue;
-            } else if ($onlyActive && !$isActive) {
+            } elseif ($onlyActive && !$isActive) {
                 // page is not active itself, but might be in the active branch
                 $accept = false;
                 if ($foundPage) {
                     if ($foundPage->hasPage($page)) {
                         // accept if page is a direct child of the active page
                         $accept = true;
-                    } else if ($foundPage->getParent()->hasPage($page)) {
+                    } elseif ($foundPage->getParent()->hasPage($page)) {
                         // page is a sibling of the active page...
                         if (!$foundPage->hasPages() ||
                             is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
@@ -424,7 +445,7 @@ class Menu extends AbstractHelper
                     $ulClass = '';
                 }
                 $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
-            } else if ($prevDepth > $depth) {
+            } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
                     $ind = $indent . str_repeat('        ', $i);
@@ -441,7 +462,7 @@ class Menu extends AbstractHelper
             // render li tag and page
             $liClass = $isActive ? ' class="active"' : '';
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                   . $myIndent . '        ' . $this->htmlify($page) . self::EOL;
+                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -470,9 +491,9 @@ class Menu extends AbstractHelper
      *
      *
      * @param  AbstractContainer $container [optional] container to create menu from.
-     *                              Default is to use the container retrieved 
+     *                              Default is to use the container retrieved
      *                              from {@link getContainer()}.
-     * @param  array     $options   [optional] options for controlling rendering 
+     * @param  array     $options   [optional] options for controlling rendering
      * @return string    rendered menu
      */
     public function renderMenu($container = null, array $options = array())
@@ -490,14 +511,16 @@ class Menu extends AbstractHelper
                                               $options['ulClass'],
                                               $options['indent'],
                                               $options['minDepth'],
-                                              $options['maxDepth']);
+                                              $options['maxDepth'],
+                                              $options['escapeLabels']);
         } else {
-            $html = $this->_renderMenu($container,
+            $html = $this->renderNormalMenu($container,
                                        $options['ulClass'],
                                        $options['indent'],
                                        $options['minDepth'],
                                        $options['maxDepth'],
-                                       $options['onlyActiveBranch']);
+                                       $options['onlyActiveBranch'],
+                                       $options['escapeLabels']);
         }
 
         return $html;
@@ -508,7 +531,7 @@ class Menu extends AbstractHelper
      *
      * This is a convenience method which is equivalent to the following call:
      * <code>
-     * _renderMenu($container, array(
+     * renderMenu($container, array(
      *     'indent'           => $indent,
      *     'ulClass'          => $ulClass,
      *     'minDepth'         => null,
@@ -543,7 +566,8 @@ class Menu extends AbstractHelper
             'minDepth'         => null,
             'maxDepth'         => null,
             'onlyActiveBranch' => true,
-            'renderParents'    => false
+            'renderParents'    => false,
+            'escapeLabels'     => true
         ));
     }
 
@@ -555,14 +579,14 @@ class Menu extends AbstractHelper
      * <code>echo 'Number of pages: ', count($this->container);</code>.
      *
      * @param  AbstractContainer     $container [optional] container to pass to view
-     *                                  script. Default is to use the container 
+     *                                  script. Default is to use the container
      *                                  registered in the helper.
-     * @param  string|array  $partial   [optional] partial view script to use. 
-     *                                  Default is to use the partial 
-     *                                  registered in the helper. If an array 
-     *                                  is given, it is expected to contain two 
-     *                                  values; the partial view script to use, 
-     *                                  and the module where the script can be 
+     * @param  string|array  $partial   [optional] partial view script to use.
+     *                                  Default is to use the partial
+     *                                  registered in the helper. If an array
+     *                                  is given, it is expected to contain two
+     *                                  values; the partial view script to use,
+     *                                  and the module where the script can be
      *                                  found.
      * @return string                   helper output
      * @throws Exception\RuntimeException if no partial provided
@@ -621,7 +645,7 @@ class Menu extends AbstractHelper
      * @see renderMenu()
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the 
+     *                              to render the container registered in the
      *                              helper.
      * @return string               helper output
      */

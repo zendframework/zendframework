@@ -3,451 +3,396 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Source;
 
-use Zend\Db\Metadata\MetadataInterface,
-    Zend\Db\Adapter\Adapter,
-    Zend\Db\Metadata\Object;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSetInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
  */
-class SqliteMetadata implements MetadataInterface
+class SqliteMetadata extends AbstractSource
 {
-
-    /**
-     *
-     * @var Adapter
-     */
-    protected $adapter = null;
-
-    /**
-     *
-     * @var string
-     */
-    protected $defaultSchema = null;
-
-    /**
-     *
-     * @var array
-     */
-    protected $tableData = array();
-
-    /**
-     *
-     * @var array
-     */
-    protected $constraintData = array();
-
-    /**
-     * Constructor
-     * 
-     * @param Adapter $adapter 
-     */
-    public function __construct(Adapter $adapter)
+    protected function loadSchemaData()
     {
-        $this->adapter = $adapter;
-    }
-
-    /**
-     * Get schemas
-     * 
-     * @return null 
-     */
-    public function getSchemas()
-    {
-        return null;
-    }
-
-    /**
-     * Get table names
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTableNames($schema = null)
-    {
-        if ($this->tableData == null) {
-            $this->loadTableColumnData();
+        if (isset($this->data['schemas'])) {
+            return;
         }
+        $this->prepareDataHierarchy('schemas');
 
+        $results = $this->fetchPragma('database_list');
+        foreach ($results as $row) {
+            $schemas[] = $row['name'];
+        }
+        $this->data['schemas'] = $schemas;
+    }
+
+    protected function loadTableNameData($schema)
+    {
+        if (isset($this->data['table_names'][$schema])) {
+            return;
+        }
+        $this->prepareDataHierarchy('table_names', $schema);
+
+        // FEATURE: Filename?
+
+        $p = $this->adapter->getPlatform();
+
+        $sql = 'SELECT "name", "type", "sql" FROM ' . $p->quoteIdentifierChain(array($schema, 'sqlite_master'))
+             . ' WHERE "type" IN (\'table\',\'view\') AND "name" NOT LIKE \'sqlite_%\'';
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $tables = array();
-        foreach ($this->tableData as $tableName => $columns) {
-            $tables[] = $tableName;
-        }
-        return $tables;
-    }
+        foreach ($results->toArray() as $row) {
+            if ('table' == $row['type']) {
+                $table = array(
+                    'table_type' => 'BASE TABLE',
+                    'view_definition' => null, // VIEW only
+                    'check_option' => null,    // VIEW only
+                    'is_updatable' => null,    // VIEW only
+                );
+            } else {
+                $table = array(
+                    'table_type' => 'VIEW',
+                    'view_definition' => null,
+                    'check_option' => 'NONE',
+                    'is_updatable' => false,
+                );
 
-    /**
-     * Get tables
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTables($schema = null)
-    {
-        $tables = array();
-        foreach ($this->getTableNames() as $table) {
-            $tables[] = $this->getTable($table);
-        }
-        return $tables;
-    }
-
-    /**
-     * Get table
-     * 
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return Object\TableObject 
-     */
-    public function getTable($table, $schema = null)
-    {
-        $tableObj = new Object\TableObject($table);
-        $tableObj->setColumns($this->getColumns($table));
-        $tableObj->setConstraints($this->getConstraints($table, $schema));
-
-        return $tableObj;
-    }
-
-    /**
-     * Get views
-     * 
-     * @param string $schema
-     * @param string $database 
-     */
-    public function getViews($schema = null)
-    {
-
-    }
-
-    /**
-     * Get column names
-     * 
-     * @param string $table
-     * @param string $schema
-     * @param string $database 
-     */
-    public function getColumnNames($table, $schema = null)
-    {
-        if ($this->tableData == null) {
-            $this->loadTableColumnData();
-        }
-
-        if (!isset($this->tableData[$table])) {
-            throw new Exception\InvalidArgumentException('Invalid table name provided');
-        }
-
-        $names = array();
-        foreach ($this->tableData[$table] as $columnData) {
-            $names[] = $columnData['name'];
-        }
-        return $names;
-    }
-
-    /**
-     * Get column
-     * 
-     * @param  string $columnName
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return Object\ColumnObject 
-     */
-    public function getColumn($columnName, $table, $schema = null)
-    {
-        $sql = 'PRAGMA table_info("' . $table . '")';
-        $rows = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-
-        $found = false;
-        foreach ($rows->toArray() as $row) {
-            if ($row['name'] == $columnName) {
-                $found = $row;
-                break;
+                // Parse out extra data
+                if (null !== ($data = $this->parseView($row['sql']))) {
+                    $table = array_merge($table, $data);
+                }
             }
+            $tables[$row['name']] = $table;
         }
-
-        if ($found == false) {
-            throw new \Exception('Column not found');
-        }
-
-        $column = new Object\ColumnObject($found['name'], $table);
-        $column->setOrdinalPosition($found['cid']);
-        $column->setDataType($found['type']);
-        $column->setIsNullable(!((bool) $found['notnull']));
-        $column->setColumnDefault($found['dflt_value']);
-        return $column;
+        $this->data['table_names'][$schema] = $tables;
     }
 
-    /**
-     * Get columns
-     * 
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getColumns($table, $schema = null)
+    protected function loadColumnData($table, $schema)
     {
-        $sql = 'PRAGMA table_info("' . $table . '")';
-        $rows = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        if (isset($this->data['columns'][$schema][$table])) {
+            return;
+        }
+        $this->prepareDataHierarchy('columns', $schema, $table);
+        $this->prepareDataHierarchy('sqlite_columns', $schema, $table);
+
+        $p = $this->adapter->getPlatform();
+
+
+        $results = $this->fetchPragma('table_info', $table, $schema);
+
         $columns = array();
-        foreach ($rows as $row) {
-            $columns[] = $this->getColumn($row['name'], $table, $schema);
+
+        foreach ($results as $row) {
+            $columns[$row['name']] = array(
+                // cid appears to be zero-based, ordinal position needs to be one-based
+                'ordinal_position'          => $row['cid'] + 1,
+                'column_default'            => $row['dflt_value'],
+                'is_nullable'               => !((bool) $row['notnull']),
+                'data_type'                 => $row['type'],
+                'character_maximum_length'  => null,
+                'character_octet_length'    => null,
+                'numeric_precision'         => null,
+                'numeric_scale'             => null,
+                'numeric_unsigned'          => null,
+                'erratas'                   => array(),
+            );
+            // TODO: populate character_ and numeric_values with correct info
         }
-        return $columns;
+
+        $this->data['columns'][$schema][$table] = $columns;
+        $this->data['sqlite_columns'][$schema][$table] = $results;
     }
 
-    /**
-     * Get constraints
-     * 
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getConstraints($table, $schema = null)
+    protected function loadConstraintData($table, $schema)
     {
-        if ($this->constraintData == null) {
-            $this->loadConstraintData();
+        if (isset($this->data['constraints'][$schema][$table])) {
+            return;
         }
 
+        $this->prepareDataHierarchy('constraints', $schema, $table);
+
+        $this->loadColumnData($table, $schema);
+        $primaryKey = array();
+
+        foreach ($this->data['sqlite_columns'][$schema][$table] as $col) {
+            if ((bool) $col['pk']) {
+                $primaryKey[] = $col['name'];
+            }
+        }
+
+        if (empty($primaryKey)) {
+            $primaryKey = null;
+        }
         $constraints = array();
-        foreach ($this->constraintData[$table] as $constraintData) {
-            $constraints[] = $this->getConstraint($constraintData['name'], $table, $schema);
-        }
-
-        return $constraints;
-    }
-
-    /**
-     * Get constraint
-     * 
-     * @param  string $constraintName
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return Object\ConstraintObject 
-     */
-    public function getConstraint($constraintName, $table, $schema = null)
-    {
-        if ($this->constraintData == null) {
-            $this->loadConstraintData();
-        }
-
-        $found = false;
-        foreach ($this->constraintData as $tableName => $constraints) {
-            foreach ($constraints as $constraintData) {
-                if ($tableName == $table && $constraintData['name'] == $constraintName) {
-                    $found = $constraintData;
-                    break 2;
-                }
+        $indexes = $this->fetchPragma('index_list', $table, $schema);
+        foreach ($indexes as $index) {
+            if (!((bool) $index['unique'])) {
+                continue;
             }
-        }
+            $constraint = array(
+                'constraint_name' => $index['name'],
+                'constraint_type' => 'UNIQUE',
+                'table_name'      => $table,
+                'columns'         => array(),
+            );
 
-        if (!$found) {
-            throw new \Exception('invalid constraint, or constraint not found');
-        }
+            $info = $this->fetchPragma('index_info', $index['name'], $schema);
 
-        $constraint = new Object\ConstraintObject($found['name'], $table);
-        $constraint->setType($found['type']);
-        $constraint->setKeys($this->getConstraintKeys($found['name'], $table, $schema));
-        return $constraint;
-    }
-
-    /**
-     * Get constraint keys
-     * 
-     * @param  string $constraint
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return Object\ConstraintKeyObject 
-     */
-    public function getConstraintKeys($constraint, $table, $schema = null)
-    {
-        if ($this->constraintData == null) {
-            $this->loadConstraintData();
-        }
-
-        $found = false;
-        foreach ($this->constraintData as $tableName => $constraints) {
-            foreach ($constraints as $constraintData) {
-                if ($tableName == $table && $constraintData['name'] == $constraint) {
-                    $found = $constraintData;
-                    break 2;
-                }
+            foreach ($info as $column) {
+                $constraint['columns'][] = $column['name'];
             }
-        }
-
-        if (!$found) {
-            throw new \Exception('invalid constraint, or constraint not found');
-        }
-
-        $keys = array();
-        foreach ($found['keys'] as $keyData) {
-            $keys[] = $key = new Object\ConstraintKeyObject($keyData['column']);
-            if ($found['type'] == 'FOREIGN KEY') {
-                $key->setReferencedTableName($keyData['referenced_table']);
-                $key->setReferencedColumnName($keyData['referenced_column']);
-                $key->setForeignKeyUpdateRule($keyData['update_rule']);
-                $key->setForeignKeyDeleteRule($keyData['delete_rule']);
+            if ($primaryKey === $constraint['columns']) {
+                $constraint['constraint_type'] = 'PRIMARY KEY';
+                $primaryKey = null;
             }
+            $constraints[$constraint['constraint_name']] = $constraint;
         }
 
-        return $keys;
-    }
-
-    /**
-     * Get view names
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getViewNames($schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get view
-     * 
-     * @param  string $viewName
-     * @param  string $schema
-     * @param  string $database
-     * @return array
-     */
-    public function getView($viewName, $schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get triggers
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTriggers($schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get trigger names
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTriggerNames($schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get trigger
-     * 
-     * @param  string $triggerName
-     * @param  string $schema
-     * @param  string $database
-     * @return array
-     */
-    public function getTrigger($triggerName, $schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Load table column data
-     */
-    protected function loadTableColumnData()
-    {
-        $sql = 'SELECT "name" FROM "sqlite_master" WHERE "type" = \'table\'';
-        $tables = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        $tables = $tables->toArray();
-
-        foreach ($tables as $table) {
-            $sql = 'PRAGMA table_info("' . $table['name'] . '")';
-            $columns = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-            $this->tableData[$table['name']] = $columns->toArray();
-        }
-    }
-
-    /**
-     * Load constraint data
-     */
-    protected function loadConstraintData()
-    {
-        if ($this->tableData == null) {
-            $this->loadTableColumnData();
+        if (null !== $primaryKey) {
+            $constraintName = '_zf_' . $table . '_PRIMARY';
+            $constraints[$constraintName] = array(
+                'constraint_name'  => $constraintName,
+                'constraint_type'  => 'PRIMARY KEY',
+                'table_name'       => $table,
+                'columns' => $primaryKey,
+            );
         }
 
-        foreach ($this->tableData as $tableName => $columns) {
-            $this->constraintData[$tableName] = array();
-            foreach ($columns as $column) {
-                if ($column['pk'] == '1') {
-                    $constraint = array(
-                        'name' => 'PRIMARY',
-                        'type' => 'PRIMARY KEY',
-                        'keys' => array(0 => array('column' => $column['name']))
-                    );
-                    $this->constraintData[$tableName][] = $constraint;
-                    break;
-                }
-            }
+        $foreignKeys = $this->fetchPragma('foreign_key_list', $table, $schema);
 
-            $indexSql = 'PRAGMA index_list("' . $tableName . '")';
-            $indexes = $this->adapter->query($indexSql, Adapter::QUERY_MODE_EXECUTE);
-
-            foreach ($indexes as $index) {
-
-                $constraint = array(
-                    'name' => $index['name'],
-                    'type' => 'UNIQUE KEY',
-                    'keys' => array()
+        $id = $name = null;
+        foreach ($foreignKeys as $fk) {
+            if ($id !== $fk['id']) {
+                $id = $fk['id'];
+                $name = '_zf_' . $table . '_FOREIGN_KEY_' . ($id + 1);
+                $constraints[$name] = array(
+                    'constraint_name'  => $name,
+                    'constraint_type'  => 'FOREIGN KEY',
+                    'table_name'       => $table,
+                    'columns'          => array(),
+                    'referenced_table_schema' => $schema,
+                    'referenced_table_name'   => $fk['table'],
+                    'referenced_columns'      => array(),
+                    // TODO: Verify match, on_update, and on_delete values conform to SQL Standard
+                    'match_option'     => strtoupper($fk['match']),
+                    'update_rule'      => strtoupper($fk['on_update']),
+                    'delete_rule'      => strtoupper($fk['on_delete']),
                 );
-
-                $indexInfoSql = 'PRAGMA index_info("' . $index['name'] . '")';
-                $indexInfos = $this->adapter->query($indexInfoSql, Adapter::QUERY_MODE_EXECUTE);
-                foreach ($indexInfos as $indexInfo) {
-                    $constraint['keys'][] = array('column' => $indexInfo['name']);
-                }
-
-                $this->constraintData[$tableName][] = $constraint;
             }
-
-            $foreignSql = 'PRAGMA foreign_key_list("' . $tableName . '");';
-            $foreignKeys = $this->adapter->query($foreignSql, Adapter::QUERY_MODE_EXECUTE);
-
-            foreach ($foreignKeys as $fkIndex => $foreignKey) {
-                $constraint = array(
-                    'name' => 'fk_' . $tableName . '_' . ($fkIndex+1),
-                    'type' => 'FOREIGN KEY',
-                    'keys' => array(0 => array(
-                        'column' => $foreignKey['from'],
-                        'referenced_table' => $foreignKey['table'],
-                        'referenced_column' => $foreignKey['to'],
-                        'update_rule' => $foreignKey['on_update'],
-                        'delete_rule' => $foreignKey['on_delete']
-                    ))
-                );
-
-                $this->constraintData[$tableName][] = $constraint;
-            }
-
+            $constraints[$name]['columns'][] = $fk['from'];
+            $constraints[$name]['referenced_columns'][] = $fk['to'];
         }
+
+        $this->data['constraints'][$schema][$table] = $constraints;
     }
 
+    protected function loadTriggerData($schema)
+    {
+        if (isset($this->data['triggers'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('triggers', $schema);
+
+        $p = $this->adapter->getPlatform();
+
+        $sql = 'SELECT "name", "tbl_name", "sql" FROM '
+             . $p->quoteIdentifierChain(array($schema, 'sqlite_master'))
+             . ' WHERE "type" = \'trigger\'';
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        $triggers = array();
+        foreach ($results->toArray() as $row) {
+            $trigger = array(
+                'trigger_name'               => $row['name'],
+                'event_manipulation'         => null, // in $row['sql']
+                'event_object_catalog'       => null,
+                'event_object_schema'        => $schema,
+                'event_object_table'         => $row['tbl_name'],
+                'action_order'               => 0,
+                'action_condition'           => null, // in $row['sql']
+                'action_statement'           => null, // in $row['sql']
+                'action_orientation'         => 'ROW',
+                'action_timing'              => null, // in $row['sql']
+                'action_reference_old_table' => null,
+                'action_reference_new_table' => null,
+                'action_reference_old_row'   => 'OLD',
+                'action_reference_new_row'   => 'NEW',
+                'created'                    => null,
+            );
+
+            // Parse out extra data
+            if (null !== ($data = $this->parseTrigger($row['sql']))) {
+                $trigger = array_merge($trigger, $data);
+            }
+            $triggers[$trigger['trigger_name']] = $trigger;
+        }
+
+        $this->data['triggers'][$schema] = $triggers;
+    }
+
+    protected function fetchPragma($name, $value = null, $schema = null)
+    {
+        $p = $this->adapter->getPlatform();
+
+        $sql = 'PRAGMA ';
+
+        if (null !== $schema) {
+            $sql .= $p->quoteIdentifier($schema) . '.';
+        }
+        $sql .= $name;
+
+        if (null !== $value) {
+            $sql .= '(' . $p->quoteValue($value) . ')';
+        }
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        if ($results instanceof ResultSetInterface) {
+            return $results->toArray();
+        }
+        return array();
+    }
+
+    protected function parseView($sql)
+    {
+        static $re = null;
+        if (null === $re) {
+            $identifier = $this->getIdentifierRegularExpression();
+            $identifierList = $this->getIdentifierListRegularExpression();
+            $identifierChain = $this->getIdentifierChainRegularExpression();
+            $re = $this->buildRegularExpression(array(
+                'CREATE',
+                array('TEMP|TEMPORARY'),
+                'VIEW',
+                array('IF','NOT','EXISTS'),
+                $identifierChain,
+                'AS',
+                '(?<view_definition>.+)',
+                array(';'),
+            ));
+        }
+
+        if (!preg_match($re, $sql, $matches)) {
+            return null;
+        }
+        return array(
+            'view_definition' => $matches['view_definition'],
+        );
+    }
+
+    protected function parseTrigger($sql)
+    {
+        static $re = null;
+        if (null === $re) {
+            $identifier = $this->getIdentifierRegularExpression();
+            $identifierList = $this->getIdentifierListRegularExpression();
+            $identifierChain = $this->getIdentifierChainRegularExpression();
+            $re = $this->buildRegularExpression(array(
+                'CREATE',
+                array('TEMP|TEMPORARY'),
+                'TRIGGER',
+                array('IF','NOT','EXISTS'),
+                $identifierChain,
+                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)',),
+                '(?<event_manipulation>DELETE|INSERT|UPDATE)',
+                array('OF','(?<column_usage>' . $identifierList . ')'),
+                'ON',
+                '(?<event_object_table>' . $identifier . ')',
+                array('FOR','EACH','ROW'),
+                array('WHEN','(?<action_condition>.+)'),
+                '(?<action_statement>BEGIN',
+                '.+',
+                'END)',
+                array(';'),
+            ));
+        }
+
+        if (!preg_match($re, $sql, $matches)) {
+            return null;
+        }
+        $data = array();
+
+        foreach ($matches as $key => $value) {
+            if (is_string($key)) {
+                $data[$key] = $value;
+            }
+        }
+
+        // Normalize data and populate defaults, if necessary
+
+        $data['event_manipulation'] = strtoupper($data['event_manipulation']);
+        if (empty($data['action_condition'])) {
+            $data['action_condition'] = null;
+        }
+        if (!empty($data['action_timing'])) {
+            $data['action_timing'] = strtoupper($data['action_timing']);
+            if ('I' == $data['action_timing'][0]) {
+                // normalize the white-space between the two words
+                $data['action_timing'] = 'INSTEAD OF';
+            }
+        } else {
+            $data['action_timing'] = 'AFTER';
+        }
+        unset($data['column_usage']);
+
+        return $data;
+    }
+
+    protected function buildRegularExpression(array $re)
+    {
+        foreach ($re as &$value) {
+            if (is_array($value)) {
+                $value = '(?:' . implode('\\s*+', $value) . '\\s*+)?';
+            } else {
+                $value .= '\\s*+';
+            }
+        }
+        unset($value);
+        $re = '/^' . implode('\\s*+', $re) . '$/';
+        return $re;
+    }
+
+    protected function getIdentifierRegularExpression()
+    {
+        static $re = null;
+        if (null === $re) {
+            $re = '(?:' . implode('|', array(
+                '"(?:[^"\\\\]++|\\\\.)*+"',
+                '`(?:[^`]++|``)*+`',
+                '\\[[^\\]]+\\]',
+                '[^\\s\\.]+',
+            )) . ')';
+        }
+
+        return $re;
+    }
+
+    protected function getIdentifierChainRegularExpression()
+    {
+        static $re = null;
+        if (null === $re) {
+            $identifier = $this->getIdentifierRegularExpression();
+            $re = $identifier . '(?:\\s*\\.\\s*' . $identifier . ')*+';
+        }
+        return $re;
+    }
+
+    protected function getIdentifierListRegularExpression()
+    {
+        static $re = null;
+        if (null === $re) {
+            $identifier = $this->getIdentifierRegularExpression();
+            $re = $identifier . '(?:\\s*,\\s*' . $identifier . ')*+';
+        }
+        return $re;
+    }
 }

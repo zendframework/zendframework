@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Paginator
  */
@@ -13,8 +13,6 @@ namespace Zend\Paginator\Adapter;
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Null implements AdapterInterface
 {
@@ -23,7 +21,7 @@ class Null implements AdapterInterface
      *
      * @var integer
      */
-    protected $_count = null;
+    protected $count = null;
 
     /**
      * Constructor.
@@ -31,8 +29,8 @@ class Null implements AdapterInterface
      * @param integer $count Total item count (Optional)
      */
     public function __construct($count = 0)
-    {;
-        $this->_count = $count;
+    {
+        $this->count = $count;
     }
 
     /**
@@ -61,6 +59,6 @@ class Null implements AdapterInterface
      */
     public function count()
     {
-        return $this->_count;
+        return $this->count;
     }
 }

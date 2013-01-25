@@ -3,15 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -28,8 +28,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Connection parameters
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $connectionParameters = array();
 
@@ -40,8 +40,8 @@ class Connection implements ConnectionInterface
 
     /**
      * In transaction
-     * 
-     * @var boolean
+     *
+     * @var bool
      */
     protected $inTransaction = false;
 
@@ -74,9 +74,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set connection parameters
-     * 
+     *
      * @param  array $connectionParameters
-     * @return Connection 
+     * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -86,8 +86,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get connection parameters
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getConnectionParameters()
     {
@@ -95,21 +95,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Get default catalog
-     * 
-     * @return null 
+     * Get current schema
+     *
+     * @return string
      */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * Get default schema
-     * 
-     * @return string 
-     */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
@@ -123,11 +113,11 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     * 
+     *
      * @param  mysqli $resource
-     * @return Connection 
+     * @return Connection
      */
-    public function setResource(mysqli $resource)
+    public function setResource(\mysqli $resource)
     {
         $this->resource = $resource;
         return $this;
@@ -135,7 +125,7 @@ class Connection implements ConnectionInterface
 
     /**
      * Get resource
-     * 
+     *
      * @return \mysqli
      */
     public function getResource()
@@ -146,8 +136,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Connect
-     * 
-     * @return null 
+     *
+     * @throws Exception\RuntimeException
+     * @return void
      */
     public function connect()
     {
@@ -159,13 +150,13 @@ class Connection implements ConnectionInterface
         $p = $this->connectionParameters;
 
         // given a list of key names, test for existence in $p
-        $findParameterValue = function(array $names) use ($p) {
+        $findParameterValue = function (array $names) use ($p) {
             foreach ($names as $name) {
                 if (isset($p[$name])) {
                     return $p[$name];
                 }
             }
-            return null;
+            return;
         };
 
         $hostname = $findParameterValue(array('hostname', 'host'));
@@ -175,7 +166,23 @@ class Connection implements ConnectionInterface
         $port     = (isset($p['port'])) ? (int) $p['port'] : null;
         $socket   = (isset($p['socket'])) ? $p['socket'] : null;
 
-        $this->resource = new \Mysqli($hostname, $username, $password, $database, $port, $socket);
+        $this->resource = new \mysqli();
+        $this->resource->init();
+
+        if (!empty($p['driver_options'])) {
+            foreach ($p['driver_options'] as $option => $value) {
+                if (is_string($option)) {
+                    $option = strtoupper($option);
+                    if (!defined($option)) {
+                        continue;
+                    }
+                    $option = constant($option);
+                }
+                $this->resource->options($option, $value);
+            }
+        }
+
+        $this->resource->real_connect($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
             throw new Exception\RuntimeException(
@@ -193,20 +200,22 @@ class Connection implements ConnectionInterface
 
     /**
      * Is connected
-     * 
-     * @return boolean 
+     *
+     * @return bool
      */
     public function isConnected()
     {
-        return ($this->resource instanceof \Mysqli);
+        return ($this->resource instanceof \mysqli);
     }
 
     /**
      * Disconnect
+     *
+     * @return void
      */
     public function disconnect()
     {
-        if ($this->resource instanceof \PDO) {
+        if ($this->resource instanceof \mysqli) {
             $this->resource->close();
         }
         unset($this->resource);
@@ -214,15 +223,23 @@ class Connection implements ConnectionInterface
 
     /**
      * Begin transaction
+     *
+     * @return void
      */
     public function beginTransaction()
     {
+        if (!$this->isConnected()) {
+            $this->connect();
+        }
+
         $this->resource->autocommit(false);
         $this->inTransaction = true;
     }
 
     /**
      * Commit
+     *
+     * @return void
      */
     public function commit()
     {
@@ -237,8 +254,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Rollback
-     * 
-     * @return Connection 
+     *
+     * @throws Exception\RuntimeException
+     * @return Connection
      */
     public function rollback()
     {
@@ -256,9 +274,10 @@ class Connection implements ConnectionInterface
 
     /**
      * Execute
-     * 
+     *
      * @param  string $sql
-     * @return Result 
+     * @throws Exception\InvalidQueryException
+     * @return Result
      */
     public function execute($sql)
     {
@@ -279,12 +298,12 @@ class Connection implements ConnectionInterface
 
     /**
      * Get last generated id
-     * 
-     * @return integer 
+     *
+     * @param  null $name Ignored
+     * @return integer
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         return $this->resource->insert_id;
     }
-
 }

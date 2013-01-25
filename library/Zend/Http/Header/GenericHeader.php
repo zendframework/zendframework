@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Http
  */
@@ -45,7 +45,7 @@ class GenericHeader implements HeaderInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param null|string $fieldName
      * @param null|string $fieldValue
      */
@@ -62,7 +62,7 @@ class GenericHeader implements HeaderInterface
 
     /**
      * Set header field name
-     * 
+     *
      * @param  string $fieldName
      * @return GenericHeader
      * @throws Exception\InvalidArgumentException(
@@ -99,7 +99,7 @@ class GenericHeader implements HeaderInterface
 
     /**
      * Set header field value
-     * 
+     *
      * @param  string $fieldValue
      * @return GenericHeader
      */
@@ -117,7 +117,7 @@ class GenericHeader implements HeaderInterface
 
     /**
      * Retrieve header field value
-     * 
+     *
      * @return string
      */
     public function getFieldValue()

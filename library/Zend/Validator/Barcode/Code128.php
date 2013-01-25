@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Barcode;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Code128 extends AbstractAdapter
 {
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -82,7 +68,7 @@ class Code128 extends AbstractAdapter
             88 => '88', 89 => '89', 90 => '90', 91 => '91', 92 => '92', 93 => '93', 94 => '94', 95 => '95',
             96 => '96', 97 => '97', 98 => '98', 99 => '99',100 => 'ä', 101 => 'à', 102 => 'å', 103 => '‡',
            104 => 'ˆ', 105 => '‰', 106 => 'Š')));
-        $this->setChecksum('_code128');
+        $this->setChecksum('code128');
 
     }
 
@@ -90,7 +76,7 @@ class Code128 extends AbstractAdapter
      * Checks for allowed characters within the barcode
      *
      * @param  string $value The barcode to check for allowed characters
-     * @return boolean
+     * @return bool
      */
     public function hasValidCharacters($value)
     {
@@ -99,7 +85,7 @@ class Code128 extends AbstractAdapter
         }
 
         // detect starting charset
-        $set        = $this->_getCodingSet($value);
+        $set        = $this->getCodingSet($value);
         $read       = $set;
         if ($set != '') {
             $value = iconv_substr($value, 1, iconv_strlen($value, 'UTF-8'), 'UTF-8');
@@ -120,7 +106,7 @@ class Code128 extends AbstractAdapter
                 case 'é' :
                     if ($set == 'A') {
                         $read = 'B';
-                    } else if ($set == 'B') {
+                    } elseif ($set == 'B') {
                         $read = 'A';
                     }
                     break;
@@ -156,7 +142,7 @@ class Code128 extends AbstractAdapter
 
                 default:
                     // Does the char exist within the charset to read?
-                    if ($this->_ord128($char, $read) == -1) {
+                    if ($this->ord128($char, $read) == -1) {
                         return false;
                     }
 
@@ -178,23 +164,23 @@ class Code128 extends AbstractAdapter
      * Validates the checksum ()
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
-    protected function _code128($value)
+    protected function code128($value)
     {
         $sum        = 0;
         $pos        = 1;
-        $set        = $this->_getCodingSet($value);
+        $set        = $this->getCodingSet($value);
         $read       = $set;
         $usecheck   = $this->useChecksum(null);
         $char       = iconv_substr($value, 0, 1, 'UTF-8');
         if ($char == '‡') {
             $sum = 103;
-        } else if ($char == 'ˆ') {
+        } elseif ($char == 'ˆ') {
             $sum = 104;
-        } else if ($char == '‰') {
+        } elseif ($char == '‰') {
             $sum = 105;
-        } else if ($usecheck == true) {
+        } elseif ($usecheck == true) {
             // no start value, unable to detect an proper checksum
             return false;
         }
@@ -206,40 +192,40 @@ class Code128 extends AbstractAdapter
                 $char = iconv_substr($value, 0, 2, 'UTF-8');
             }
 
-            switch($char) {
+            switch ($char) {
                 // Function definition
                 case 'Ç' :
                 case 'ü' :
                 case 'å' :
-                    $sum += ($pos * $this->_ord128($char, $set));
+                    $sum += ($pos * $this->ord128($char, $set));
                     break;
 
                 case 'é' :
-                    $sum += ($pos * $this->_ord128($char, $set));
+                    $sum += ($pos * $this->ord128($char, $set));
                      if ($set == 'A') {
                         $read = 'B';
-                    } else if ($set == 'B') {
+                    } elseif ($set == 'B') {
                         $read = 'A';
                     }
                     break;
 
                 // Switch to C
                 case 'â' :
-                    $sum += ($pos * $this->_ord128($char, $set));
+                    $sum += ($pos * $this->ord128($char, $set));
                     $set = 'C';
                     $read = 'C';
                     break;
 
                 // Switch to B
                 case 'ä' :
-                    $sum += ($pos * $this->_ord128($char, $set));
+                    $sum += ($pos * $this->ord128($char, $set));
                     $set  = 'B';
                     $read = 'B';
                     break;
 
                 // Switch to A
                 case 'à' :
-                    $sum += ($pos * $this->_ord128($char, $set));
+                    $sum += ($pos * $this->ord128($char, $set));
                     $set  = 'A';
                     $read = 'A';
                     break;
@@ -252,11 +238,11 @@ class Code128 extends AbstractAdapter
 
                 default:
                     // Does the char exist within the charset to read?
-                    if ($this->_ord128($char, $read) == -1) {
+                    if ($this->ord128($char, $read) == -1) {
                         return false;
                     }
 
-                    $sum += ($pos * $this->_ord128($char, $set));
+                    $sum += ($pos * $this->ord128($char, $set));
                     break;
             }
 
@@ -275,7 +261,7 @@ class Code128 extends AbstractAdapter
         }
 
         $mod = $sum % 103;
-        if (iconv_substr($value, 0, 1, 'UTF-8') == $this->_chr128($mod, $set)) {
+        if (iconv_substr($value, 0, 1, 'UTF-8') == $this->chr128($mod, $set)) {
             return true;
         }
 
@@ -288,7 +274,7 @@ class Code128 extends AbstractAdapter
      * @param string $value Barcode
      * @return string
      */
-    protected function _getCodingSet($value)
+    protected function getCodingSet($value)
     {
         $value = iconv_substr($value, 0, 1, 'UTF-8');
         switch ($value) {
@@ -328,32 +314,32 @@ class Code128 extends AbstractAdapter
      * @param string $set
      * @return integer
      */
-    protected function _ord128($value, $set)
+    protected function ord128($value, $set)
     {
         $ord = ord($value);
         if ($set == 'A') {
             if ($ord < 32) {
                 return ($ord + 64);
-            } else if ($ord < 96) {
+            } elseif ($ord < 96) {
                 return ($ord - 32);
-            } else if ($ord > 138) {
+            } elseif ($ord > 138) {
                 return -1;
             } else {
                 return ($ord - 32);
             }
-        } else if ($set == 'B') {
+        } elseif ($set == 'B') {
             if ($ord < 32) {
                 return -1;
-            } else if ($ord <= 138) {
+            } elseif ($ord <= 138) {
                 return ($ord - 32);
             } else {
                 return -1;
             }
-        } else if ($set == 'C') {
+        } elseif ($set == 'C') {
             $val = (int) $value;
             if (($val >= 0) && ($val <= 99)) {
                 return $val;
-            } else if (($ord >= 132) && ($ord <= 138)) {
+            } elseif (($ord >= 132) && ($ord <= 138)) {
                 return ($ord - 32);
             } else {
                 return -1;
@@ -361,7 +347,7 @@ class Code128 extends AbstractAdapter
         } else {
             if ($ord < 32) {
                 return ($ord +64);
-            } else if ($ord <= 138) {
+            } elseif ($ord <= 138) {
                 return ($ord - 32);
             } else {
                 return -1;
@@ -391,37 +377,37 @@ class Code128 extends AbstractAdapter
      * @param string $set
      * @return string
      */
-    protected function _chr128($value, $set)
+    protected function chr128($value, $set)
     {
         if ($set == 'A') {
             if ($value < 64) {
                 return chr($value + 32);
-            } else if ($value < 96) {
+            } elseif ($value < 96) {
                 return chr($value - 64);
-            } else if ($value > 106) {
+            } elseif ($value > 106) {
                 return -1;
             } else {
                 return chr($value + 32);
             }
-        } else if ($set == 'B') {
+        } elseif ($set == 'B') {
             if ($value > 106) {
                 return -1;
             } else {
                 return chr($value + 32);
             }
-        } else if ($set == 'C') {
+        } elseif ($set == 'C') {
             if (($value >= 0) && ($value <= 9)) {
                 return "0" . (string) $value;
-            } else if ($value <= 99) {
+            } elseif ($value <= 99) {
                 return (string) $value;
-            } else if ($value <= 106) {
+            } elseif ($value <= 106) {
                 return chr($value + 32);
             } else {
                 return -1;
             }
         } else {
-            if ($ord <= 106) {
-                return ($ord + 32);
+            if ($value <= 106) {
+                return ($value + 32);
             } else {
                 return -1;
             }

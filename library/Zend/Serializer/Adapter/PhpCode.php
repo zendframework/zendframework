@@ -1,45 +1,32 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Serializer
  */
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpCode extends AbstractAdapter
 {
     /**
      * Serialize PHP using var_export
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
      * @return string
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value)
     {
         return var_export($value, true);
     }
@@ -48,19 +35,33 @@ class PhpCode extends AbstractAdapter
      * Deserialize PHP string
      *
      * Warning: this uses eval(), and should likely be avoided.
-     * 
-     * @param  string $code 
-     * @param  array $opts 
+     *
+     * @param  string $code
      * @return mixed
-     * @throws RuntimeException on eval error
+     * @throws Exception\RuntimeException on eval error
      */
-    public function unserialize($code, array $opts = array())
+    public function unserialize($code)
     {
+        ErrorHandler::start(E_ALL);
+        $ret  = null;
+        // This suppression is due to the fact that the ErrorHandler cannot
+        // catch syntax errors, and is intentionally left in place.
         $eval = @eval('$ret=' . $code . ';');
-        if ($eval === false) {
-            $lastErr = error_get_last();
-            throw new RuntimeException('eval failed: ' . $lastErr['message']);
+        $err  = ErrorHandler::stop();
+
+        if ($eval === false || $err) {
+
+            $msg = 'eval failed';
+
+            // Error handler doesn't catch syntax errors
+            if ($eval === false) {
+                $lastErr = error_get_last();
+                $msg    .= ': ' . $lastErr['message'];
+            }
+
+            throw new Exception\RuntimeException($msg, 0, $err);
         }
+
         return $ret;
     }
 }

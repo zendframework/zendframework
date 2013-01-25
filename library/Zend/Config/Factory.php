@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Config;
@@ -23,58 +13,72 @@ namespace Zend\Config;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Declared abstract to prevent instantiation
- * 
  * @category  Zend
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Factory
+class Factory
 {
     /**
-     * Readers used for config files.
+     * Plugin manager for loading readers
+     *
+     * @var null|ReaderPluginManager
+     */
+    public static $readers = null;
+
+    /**
+     * Registered config file extensions.
+     * key is extension, value is reader instance or plugin name
      *
      * @var array
      */
-    protected static $readers = array(
-        'ini' => 'Ini',
-        'xml' => 'Xml'
+    protected static $extensions = array(
+        'ini'  => 'ini',
+        'json' => 'json',
+        'xml'  => 'xml',
+        'yaml' => 'yaml',
     );
+
 
     /**
      * Read a config from a file.
      *
      * @param  string  $filename
-     * @param  boolean $returnConfigObject 
+     * @param  bool $returnConfigObject
      * @return array|Config
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public static function fromFile($filename, $returnConfigObject = false)
     {
         $pathinfo = pathinfo($filename);
-        
+
         if (!isset($pathinfo['extension'])) {
             throw new Exception\RuntimeException(sprintf(
                 'Filename "%s" is missing an extension and cannot be auto-detected',
                 $filename
             ));
         }
-        
+
         $extension = strtolower($pathinfo['extension']);
-       
+
         if ($extension === 'php') {
             if (!is_file($filename) || !is_readable($filename)) {
-                throw new Exception\RuntimeException(sprintf('Filename "%s" is either not a file or not readable', $filename));
+                throw new Exception\RuntimeException(sprintf(
+                    "File '%s' doesn't exist or not readable",
+                    $filename
+                ));
             }
-            
+
             $config = include $filename;
-        } elseif (isset(self::$readers[$extension])) {
-            if (is_string(self::$readers[$extension])) {
-                $classname = __NAMESPACE__ . '\\Reader\\' . self::$readers[$extension];
-                self::$readers[$extension] = new $classname();
+        } elseif (isset(static::$extensions[$extension])) {
+            $reader = static::$extensions[$extension];
+            if (!$reader instanceof Reader\ReaderInterface) {
+                $reader = static::getReaderPluginManager()->get($reader);
+                static::$extensions[$extension] = $reader;
             }
-            
-            $config = self::$readers[$extension]->fromFile($filename);
+
+            /** @var Reader\ReaderInterface $reader  */
+            $config = $reader->fromFile($filename);
         } else {
             throw new Exception\RuntimeException(sprintf(
                 'Unsupported config file extension: .%s',
@@ -89,7 +93,7 @@ abstract class Factory
      * Read configuration from multiple files and merge them.
      *
      * @param  array   $files
-     * @param  boolean $returnConfigObject 
+     * @param  bool $returnConfigObject
      * @return array|Config
      */
     public static function fromFiles(array $files, $returnConfigObject = false)
@@ -97,9 +101,55 @@ abstract class Factory
         $config = array();
 
         foreach ($files as $file) {
-            $config = ArrayUtils::merge($config, self::fromFile($file));
+            $config = ArrayUtils::merge($config, static::fromFile($file));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;
+    }
+
+    /**
+     * Set reader plugin manager
+     *
+     * @param ReaderPluginManager $readers
+     */
+    public static function setReaderPluginManager(ReaderPluginManager $readers)
+    {
+        static::$readers = $readers;
+    }
+
+    /**
+     * Get the reader plugin manager
+     *
+     * @return ReaderPluginManager
+     */
+    public static function getReaderPluginManager()
+    {
+        if (static::$readers === null) {
+            static::$readers = new ReaderPluginManager();
+        }
+        return static::$readers;
+    }
+
+    /**
+     * Set config reader for file extension
+     *
+     * @param  string $extension
+     * @param  string|Reader\ReaderInterface $reader
+     * @throws Exception\InvalidArgumentException
+     */
+    public static function registerReader($extension, $reader)
+    {
+        $extension = strtolower($extension);
+
+        if (!is_string($reader) && !$reader instanceof Reader\ReaderInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Reader should be plugin name, class name or ' .
+                'instance of %s\Reader\ReaderInterface; received "%s"',
+                __NAMESPACE__,
+                (is_object($reader) ? get_class($reader) : gettype($reader))
+            ));
+        }
+
+        static::$extensions[$extension] = $reader;
     }
 }

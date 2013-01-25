@@ -1,34 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache,
-    Zend\Cache\Exception;
+use Zend\Cache;
+use Zend\Cache\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClassCache extends CallbackCache
 {
@@ -36,6 +23,7 @@ class ClassCache extends CallbackCache
      * Set options
      *
      * @param  PatternOptions $options
+     * @return ClassCache
      * @throws Exception\InvalidArgumentException if missing 'class' or 'storage' options
      */
     public function setOptions(PatternOptions $options)
@@ -56,7 +44,8 @@ class ClassCache extends CallbackCache
      * @param  string $method  Method name to call
      * @param  array  $args    Method arguments
      * @return mixed
-     * @throws Exception
+     * @throws Exception\RuntimeException
+     * @throws \Exception
      */
     public function call($method, array $args = array())
     {
@@ -90,7 +79,7 @@ class ClassCache extends CallbackCache
      * @param  string     $method  The method
      * @param  array      $args    Callback arguments
      * @return string
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     public function generateKey($method, array $args = array())
     {
@@ -104,10 +93,10 @@ class ClassCache extends CallbackCache
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callback   $callback  A valid callback
+     * @param  callable   $callback  A valid callback
      * @param  array      $args      Callback arguments
      * @return string
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     protected function generateCallbackKey($callback, array $args)
     {
@@ -122,7 +111,8 @@ class ClassCache extends CallbackCache
      * @param  string $method  Method name to call
      * @param  array  $args    Method arguments
      * @return mixed
-     * @throws Exception
+     * @throws Exception\RuntimeException
+     * @throws \Exception
      */
     public function __call($method, array $args)
     {

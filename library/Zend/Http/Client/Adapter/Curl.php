@@ -1,33 +1,21 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
-use Zend\Http\Client;
 use Zend\Http\Request;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
@@ -36,8 +24,6 @@ use Zend\Http\Request;
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Curl implements HttpAdapter, StreamInterface
 {
@@ -88,7 +74,6 @@ class Curl implements HttpAdapter, StreamInterface
      *
      * Config is set using setOptions()
      *
-     * @return void
      * @throws AdapterException\InitializationException
      */
     public function __construct()
@@ -140,13 +125,13 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         if (isset($options['proxyuser']) && isset($options['proxypass'])) {
-            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'].":".$options['proxypass']);
+            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'] . ":" . $options['proxypass']);
             unset($options['proxyuser'], $options['proxypass']);
         }
 
         foreach ($options as $k => $v) {
             $option = strtolower($k);
-            switch($option) {
+            switch ($option) {
                 case 'proxyhost':
                     $this->setCurlOption(CURLOPT_PROXY, $v);
                     break;
@@ -193,7 +178,7 @@ class Curl implements HttpAdapter, StreamInterface
      *
      * @param  string  $host
      * @param  int     $port
-     * @param  boolean $secure
+     * @param  bool $secure
      * @return void
      * @throws AdapterException\RuntimeException if unable to connect
      */
@@ -219,16 +204,20 @@ class Curl implements HttpAdapter, StreamInterface
             curl_setopt($this->curl, CURLOPT_PORT, intval($port));
         }
 
-        // Set timeout
-        curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $this->config['timeout']);
+        if (isset($this->config['timeout'])) {
+            // Set timeout
+            curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $this->config['timeout']);
+        }
 
-        // Set Max redirects
-        curl_setopt($this->curl, CURLOPT_MAXREDIRS, $this->config['maxredirects']);
+        if (isset($this->config['maxredirects'])) {
+            // Set Max redirects
+            curl_setopt($this->curl, CURLOPT_MAXREDIRS, $this->config['maxredirects']);
+        }
 
         if (!$this->curl) {
             $this->close();
 
-            throw new AdapterException\RuntimeException('Unable to Connect to ' .  $host . ':' . $port);
+            throw new AdapterException\RuntimeException('Unable to Connect to ' . $host . ':' . $port);
         }
 
         if ($secure !== false) {
@@ -255,6 +244,7 @@ class Curl implements HttpAdapter, StreamInterface
      * @param  string        $body
      * @return string        $request
      * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @throws AdapterException\InvalidArgumentException if $method is currently not supported
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
     {
@@ -293,7 +283,7 @@ class Curl implements HttpAdapter, StreamInterface
                     foreach ($headers AS $k => $header) {
                         if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
                             if (is_resource($body)) {
-                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
+                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $m[1];
                             }
                             unset($headers[$k]);
                         }
@@ -312,6 +302,11 @@ class Curl implements HttpAdapter, StreamInterface
                     $curlMethod = CURLOPT_CUSTOMREQUEST;
                     $curlValue = "PUT";
                 }
+                break;
+
+            case 'PATCH' :
+                $curlMethod = CURLOPT_CUSTOMREQUEST;
+                $curlValue = "PATCH";
                 break;
 
             case 'DELETE' :
@@ -366,9 +361,9 @@ class Curl implements HttpAdapter, StreamInterface
 
         // Treating basic auth headers in a special way
         if (array_key_exists('Authorization', $headers) && 'Basic' == substr($headers['Authorization'], 0, 5)) {
-        	curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        	curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
-        	unset($headers['Authorization']);
+            curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
+            unset($headers['Authorization']);
         }
 
         // set additional headers
@@ -398,11 +393,13 @@ class Curl implements HttpAdapter, StreamInterface
         } elseif ($method == 'PUT') {
             // This is a PUT by a setRawData string, not by file-handle
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+        } elseif ($method == 'PATCH') {
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
 
         // set additional curl options
         if (isset($this->config['curloptions'])) {
-            foreach ((array)$this->config['curloptions'] as $k => $v) {
+            foreach ((array) $this->config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->invalidOverwritableCurlOptions)) {
                     if (curl_setopt($this->curl, $k, $v) == false) {
                         throw new AdapterException\RuntimeException(sprintf("Unknown or erroreous cURL option '%s' set", $k));

@@ -1,43 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader\Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Date,
-    DOMElement;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Stdlib\DateTime;
 
 /**
 * @category Zend
 * @package Reader\Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Entry extends Extension\AbstractEntry
 {
     /**
      * Get an author entry
      *
-     * @param DOMElement $element
+     * @param int $index
      * @return string
      */
     public function getAuthor($index = 0)
@@ -58,21 +45,21 @@ class Entry extends Extension\AbstractEntry
      */
     public function getAuthors()
     {
-        if (array_key_exists('authors', $this->_data)) {
-            return $this->_data['authors'];
+        if (array_key_exists('authors', $this->data)) {
+            return $this->data['authors'];
         }
 
         $authors = array();
-        $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:creator');
+        $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:creator');
 
         if (!$list->length) {
-            $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:creator');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:creator');
         }
         if (!$list->length) {
-            $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:publisher');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:publisher');
 
             if (!$list->length) {
-                $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:publisher');
+                $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:publisher');
             }
         }
 
@@ -89,11 +76,11 @@ class Entry extends Extension\AbstractEntry
             $authors = null;
         }
 
-        $this->_data['authors'] = $authors;
+        $this->data['authors'] = $authors;
 
-        return $this->_data['authors'];
+        return $this->data['authors'];
     }
-    
+
     /**
      * Get categories (subjects under DC)
      *
@@ -101,16 +88,16 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCategories()
     {
-        if (array_key_exists('categories', $this->_data)) {
-            return $this->_data['categories'];
+        if (array_key_exists('categories', $this->data)) {
+            return $this->data['categories'];
         }
-        
-        $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:subject');
+
+        $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:subject');
 
         if (!$list->length) {
-            $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:subject');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:subject');
         }
-        
+
         if ($list->length) {
             $categoryCollection = new Collection\Category;
             foreach ($list as $category) {
@@ -123,11 +110,11 @@ class Entry extends Extension\AbstractEntry
         } else {
             $categoryCollection = new Collection\Category;
         }
-        
-        $this->_data['categories'] = $categoryCollection;
-        return $this->_data['categories'];  
+
+        $this->data['categories'] = $categoryCollection;
+        return $this->data['categories'];
     }
-    
+
 
     /**
      * Get the entry content
@@ -146,24 +133,24 @@ class Entry extends Extension\AbstractEntry
      */
     public function getDescription()
     {
-        if (array_key_exists('description', $this->_data)) {
-            return $this->_data['description'];
+        if (array_key_exists('description', $this->data)) {
+            return $this->data['description'];
         }
 
         $description = null;
-        $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
+        $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
 
         if (!$description) {
-            $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
+            $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
         }
 
         if (!$description) {
             $description = null;
         }
 
-        $this->_data['description'] = $description;
+        $this->data['description'] = $description;
 
-        return $this->_data['description'];
+        return $this->data['description'];
     }
 
     /**
@@ -173,20 +160,20 @@ class Entry extends Extension\AbstractEntry
      */
     public function getId()
     {
-        if (array_key_exists('id', $this->_data)) {
-            return $this->_data['id'];
+        if (array_key_exists('id', $this->data)) {
+            return $this->data['id'];
         }
 
         $id = null;
-        $id = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
+        $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
 
         if (!$id) {
-            $id = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
+            $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
         }
 
-        $this->_data['id'] = $id;
+        $this->data['id'] = $id;
 
-        return $this->_data['id'];
+        return $this->data['id'];
     }
 
     /**
@@ -196,52 +183,51 @@ class Entry extends Extension\AbstractEntry
      */
     public function getTitle()
     {
-        if (array_key_exists('title', $this->_data)) {
-            return $this->_data['title'];
+        if (array_key_exists('title', $this->data)) {
+            return $this->data['title'];
         }
 
         $title = null;
-        $title = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
+        $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
 
         if (!$title) {
-            $title = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
+            $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
         }
 
         if (!$title) {
             $title = null;
         }
 
-        $this->_data['title'] = $title;
+        $this->data['title'] = $title;
 
-        return $this->_data['title'];
+        return $this->data['title'];
     }
 
     /**
      *
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDate()
     {
-        if (array_key_exists('date', $this->_data)) {
-            return $this->_data['date'];
+        if (array_key_exists('date', $this->data)) {
+            return $this->data['date'];
         }
 
         $d    = null;
-        $date = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
+        $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
 
         if (!$date) {
-            $date = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
+            $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
         }
 
         if ($date) {
-            $d = new Date\Date;
-            $d->set($date, Date\Date::ISO_8601);
+            $d = DateTime::createFromISO8601($date);
         }
 
-        $this->_data['date'] = $d;
+        $this->data['date'] = $d;
 
-        return $this->_data['date'];
+        return $this->data['date'];
     }
 
     /**
@@ -249,9 +235,9 @@ class Entry extends Extension\AbstractEntry
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('dc10', 'http://purl.org/dc/elements/1.0/');
-        $this->_xpath->registerNamespace('dc11', 'http://purl.org/dc/elements/1.1/');
+        $this->getXpath()->registerNamespace('dc10', 'http://purl.org/dc/elements/1.0/');
+        $this->getXpath()->registerNamespace('dc11', 'http://purl.org/dc/elements/1.1/');
     }
 }

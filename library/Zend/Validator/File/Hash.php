@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
 
-use Zend\Validator,
-    Zend\Validator\Exception;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the hash of given files
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
-class Hash extends Validator\AbstractValidator
+class Hash extends AbstractValidator
 {
     /**
      * @const string Error constants
@@ -43,7 +31,7 @@ class Hash extends Validator\AbstractValidator
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::DOES_NOT_MATCH => "File '%value%' does not match the given hashes",
         self::NOT_DETECTED   => "A hash could not be evaluated for the given file",
         self::NOT_FOUND      => "File '%value%' is not readable or does not exist"
@@ -62,8 +50,7 @@ class Hash extends Validator\AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array $options
-     * @return void
+     * @param string|array $options
      */
     public function __construct($options = null)
     {
@@ -93,7 +80,7 @@ class Hash extends Validator\AbstractValidator
      * Sets the hash for one or multiple files
      *
      * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
+     * @return Hash Provides a fluent interface
      */
     public function setHash($options)
     {
@@ -107,13 +94,14 @@ class Hash extends Validator\AbstractValidator
      * Adds the hash for one or multiple files
      *
      * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
+     * @return Hash Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
      */
     public function addHash($options)
     {
         if (is_string($options)) {
             $options = array($options);
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException("False parameter given");
         }
 
@@ -141,7 +129,7 @@ class Hash extends Validator\AbstractValidator
      *
      * @param  string $value Filename to check for hash
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
@@ -151,7 +139,7 @@ class Hash extends Validator\AbstractValidator
 
         // Is file readable ?
         if (false === stream_resolve_include_path($value)) {
-            return $this->_throw($file, self::NOT_FOUND);
+            return $this->throwError($file, self::NOT_FOUND);
         }
 
         $algos  = array_unique(array_values($this->getHash()));
@@ -159,17 +147,17 @@ class Hash extends Validator\AbstractValidator
         foreach ($algos as $algorithm) {
             $filehash = hash_file($algorithm, $value);
             if ($filehash === false) {
-                return $this->_throw($file, self::NOT_DETECTED);
+                return $this->throwError($file, self::NOT_DETECTED);
             }
 
-            foreach($hashes as $hash) {
+            foreach ($hashes as $hash) {
                 if ($filehash === $hash) {
                     return true;
                 }
             }
         }
 
-        return $this->_throw($file, self::DOES_NOT_MATCH);
+        return $this->throwError($file, self::DOES_NOT_MATCH);
     }
 
     /**
@@ -179,14 +167,14 @@ class Hash extends Validator\AbstractValidator
      * @param  string $errorType
      * @return false
      */
-    protected function _throw($file, $errorType)
+    protected function throwError($file, $errorType)
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $this->value = $file['name'];
                 }
-            } else if (is_string($file)) {
+            } elseif (is_string($file)) {
                 $this->value = $file;
             }
         }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
@@ -28,15 +18,13 @@ use Zend\Stdlib\ArrayUtils;
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Encrypt extends AbstractFilter
 {
     /**
      * Encryption adapter
      */
-    protected $_adapter;
+    protected $adapter;
 
     /**
      * Class constructor
@@ -59,7 +47,7 @@ class Encrypt extends AbstractFilter
      */
     public function getAdapter()
     {
-        return $this->_adapter->toString();
+        return $this->adapter->toString();
     }
 
     /**
@@ -67,36 +55,36 @@ class Encrypt extends AbstractFilter
      *
      * @param  string|array $options (Optional) Encryption options
      * @return Encrypt
+     * @throws Exception\DomainException
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($options = null)
     {
         if (is_string($options)) {
             $adapter = $options;
-        } else if (isset($options['adapter'])) {
+        } elseif (isset($options['adapter'])) {
             $adapter = $options['adapter'];
             unset($options['adapter']);
         } else {
-            $adapter = 'Mcrypt';
+            $adapter = 'BlockCipher';
         }
 
         if (!is_array($options)) {
             $options = array();
         }
 
-        if (stream_resolve_include_path('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
-            $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
-        }
-
-        if (!class_exists($adapter)) {
+        if (class_exists('Zend\Filter\Encrypt\\' . ucfirst($adapter))) {
+            $adapter = 'Zend\Filter\Encrypt\\' . ucfirst($adapter);
+        } elseif (!class_exists($adapter)) {
             throw new Exception\DomainException(
                 sprintf('%s expects a valid registry class name; received "%s", which did not resolve',
-                        __METHOD__,
-                        $adapter
-                ));
+                    __METHOD__,
+                    $adapter
+            ));
         }
 
-        $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+        $this->adapter = new $adapter($options);
+        if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
             throw new Exception\InvalidArgumentException(
                 "Encoding adapter '" . $adapter
                 . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
@@ -110,15 +98,17 @@ class Encrypt extends AbstractFilter
      *
      * @param string       $method  Method to call
      * @param string|array $options Options for this method
+     * @return mixed
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $options)
     {
         $part = substr($method, 0, 3);
-        if ((($part != 'get') and ($part != 'set')) or !method_exists($this->_adapter, $method)) {
+        if ((($part != 'get') && ($part != 'set')) || !method_exists($this->adapter, $method)) {
             throw new Exception\BadMethodCallException("Unknown method '{$method}'");
         }
 
-        return call_user_func_array(array($this->_adapter, $method), $options);
+        return call_user_func_array(array($this->adapter, $method), $options);
     }
 
     /**
@@ -131,6 +121,6 @@ class Encrypt extends AbstractFilter
      */
     public function filter($value)
     {
-        return $this->_adapter->encrypt($value);
+        return $this->adapter->encrypt($value);
     }
 }

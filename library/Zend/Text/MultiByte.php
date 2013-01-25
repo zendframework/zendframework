@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Text
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Text;
@@ -25,8 +15,6 @@ namespace Zend\Text;
  *
  * @category  Zend
  * @package   Zend_Text
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MultiByte
 {
@@ -36,8 +24,9 @@ class MultiByte
      * @param  string  $string
      * @param  integer $width
      * @param  string  $break
-     * @param  boolean $cut
+     * @param  bool $cut
      * @param  string  $charset
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function wordWrap($string, $width = 75, $break = "\n", $cut = false, $charset = 'utf-8')
@@ -47,49 +36,49 @@ class MultiByte
 
         if (strlen($string) === 0) {
             return '';
-        } 
+        }
 
         if ($breakWidth === null) {
             throw new Exception\InvalidArgumentException('Break string cannot be empty');
-        } 
+        }
 
         if ($width === 0 && $cut) {
             throw new Exception\InvalidArgumentException('Cannot force cut when width is zero');
         }
-        
+
         $result    = '';
         $lastStart = $lastSpace = 0;
-        
+
         for ($current = 0; $current < $stringWidth; $current++) {
             $char = iconv_substr($string, $current, 1, $charset);
-            
+
             $possibleBreak = $char;
             if ($breakWidth !== 1) {
                 $possibleBreak = iconv_substr($string, $current, $breakWidth, $charset);
             }
-            
+
             if ($possibleBreak === $break) {
                 $result    .= iconv_substr($string, $lastStart, $current - $lastStart + $breakWidth, $charset);
                 $current   += $breakWidth - 1;
                 $lastStart  = $lastSpace = $current + 1;
                 continue;
-            } 
+            }
 
             if ($char === ' ') {
                 if ($current - $lastStart >= $width) {
                     $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
                     $lastStart  = $current + 1;
                 }
-                
+
                 $lastSpace = $current;
                 continue;
-            } 
+            }
 
             if ($current - $lastStart >= $width && $cut && $lastStart >= $lastSpace) {
                 $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
                 $lastStart  = $lastSpace = $current;
                 continue;
-            } 
+            }
 
             if ($current - $lastStart >= $width && $lastStart < $lastSpace) {
                 $result    .= iconv_substr($string, $lastStart, $lastSpace - $lastStart, $charset) . $break;
@@ -97,11 +86,11 @@ class MultiByte
                 continue;
             }
         }
-        
+
         if ($lastStart !== $current) {
             $result .= iconv_substr($string, $lastStart, $current - $lastStart, $charset);
         }
-        
+
         return $result;
     }
 

@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc_Router
- * @subpackage Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Mvc\Router\Exception;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Regex route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://manuals.rubyonrails.com/read/chapter/65
+ * @see        http://guides.rubyonrails.org/routing.html
  */
 class Regex implements RouteInterface
 {
@@ -54,7 +41,7 @@ class Regex implements RouteInterface
     /**
      * Specification for URL assembly.
      *
-     * Parameters accepting subsitutions should be denoted as "%key%"
+     * Parameters accepting substitutions should be denoted as "%key%"
      *
      * @var string
      */
@@ -115,17 +102,17 @@ class Regex implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
      * @param  Request $request
+     * @param  integer $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return null;
         }
 
-        $uri  = $request->uri();
+        $uri  = $request->getUri();
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
@@ -141,10 +128,10 @@ class Regex implements RouteInterface
         $matchedLength = strlen($matches[0]);
 
         foreach ($matches as $key => $value) {
-            if (is_numeric($key) || is_int($key)) {
+            if (is_numeric($key) || is_int($key) || $value === '') {
                 unset($matches[$key]);
             } else {
-                $matches[$key] = urldecode($matches[$key]);
+                $matches[$key] = rawurldecode($value);
             }
         }
 
@@ -169,7 +156,7 @@ class Regex implements RouteInterface
             $spec = '%' . $key . '%';
 
             if (strpos($url, $spec) !== false) {
-                $url = str_replace($spec, urlencode($value), $url);
+                $url = str_replace($spec, rawurlencode($value), $url);
 
                 $this->assembledParams[] = $key;
             }

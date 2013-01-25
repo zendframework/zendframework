@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Logger,
-    Zend\Log\Formatter,
-    Zend\Log\Exception;
+use Zend\Log\Exception;
+use Zend\Log\Logger;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * Writes log messages to syslog
@@ -31,8 +20,6 @@ use Zend\Log\Logger,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Syslog extends AbstractWriter
 {
@@ -103,7 +90,7 @@ class Syslog extends AbstractWriter
     public function __construct(array $params = array())
     {
         if (isset($params['application'])) {
-            $this->application = $params['application'];
+            $this->appName = $params['application'];
         }
 
         $runInitializeSyslog = true;
@@ -115,6 +102,8 @@ class Syslog extends AbstractWriter
         if ($runInitializeSyslog) {
             $this->initializeSyslog();
         }
+
+        $this->setFormatter(new SimpleFormatter('%message%'));
     }
 
     /**
@@ -160,8 +149,8 @@ class Syslog extends AbstractWriter
      */
     protected function initializeSyslog()
     {
-        self::$lastApplication = $this->appName;
-        self::$lastFacility    = $this->facility;
+        static::$lastApplication = $this->appName;
+        static::$lastFacility    = $this->facility;
         openlog($this->appName, LOG_PID, $this->facility);
     }
 
@@ -184,7 +173,7 @@ class Syslog extends AbstractWriter
 
         if (!in_array($facility, $this->validFacilities)) {
             throw new Exception\InvalidArgumentException(
-            	'Invalid log facility provided; please see http://php.net/openlog for a list of valid facility values'
+                'Invalid log facility provided; please see http://php.net/openlog for a list of valid facility values'
             );
         }
 
@@ -242,17 +231,13 @@ class Syslog extends AbstractWriter
             $priority = $this->defaultPriority;
         }
 
-        if ($this->appName !== self::$lastApplication
-            || $this->facility !== self::$lastFacility
+        if ($this->appName !== static::$lastApplication
+            || $this->facility !== static::$lastFacility
         ) {
             $this->initializeSyslog();
         }
 
-        if ($this->formatter instanceof Formatter) {
-            $message = $this->formatter->format($event);
-        } else {
-            $message = $event['message'];
-        }
+        $message = $this->formatter->format($event);
 
         syslog($priority, $message);
     }

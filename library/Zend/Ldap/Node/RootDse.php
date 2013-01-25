@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage RootDse
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node;
@@ -29,8 +18,6 @@ use Zend\Ldap;
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RootDse extends AbstractNode
 {
@@ -51,15 +38,15 @@ class RootDse extends AbstractNode
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if (isset($data['domainfunctionality'])) {
             return new RootDse\ActiveDirectory($dn, $data);
-        } else if (isset($data['dsaname'])) {
+        } elseif (isset($data['dsaname'])) {
             return new RootDse\eDirectory($dn, $data);
-        } else if (isset($data['structuralobjectclass'])
+        } elseif (isset($data['structuralobjectclass'])
             && $data['structuralobjectclass'][0] === 'OpenLDAProotDSE'
         ) {
             return new RootDse\OpenLdap($dn, $data);
-        } else {
-            return new self($dn, $data);
         }
+
+        return new static($dn, $data);
     }
 
     /**
@@ -99,7 +86,7 @@ class RootDse extends AbstractNode
      * Determines if the version is supported
      *
      * @param  string|int|array $versions version(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsVersion($versions)
     {
@@ -110,7 +97,7 @@ class RootDse extends AbstractNode
      * Determines if the sasl mechanism is supported
      *
      * @param  string|array $mechlist SASL mechanisms to check
-     * @return boolean
+     * @return bool
      */
     public function supportsSaslMechanism($mechlist)
     {

@@ -3,16 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Exception,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -52,7 +52,7 @@ class Statement implements StatementInterface
     /**
      * Is prepared
      *
-     * @var boolean
+     * @var bool
      */
     protected $isPrepared = false;
 
@@ -60,6 +60,14 @@ class Statement implements StatementInterface
      * @var bool
      */
     protected $bufferResults = false;
+
+    /**
+     * @param  bool $bufferResults
+     */
+    public function __construct($bufferResults = false)
+    {
+        $this->bufferResults = (bool) $bufferResults;
+    }
 
     /**
      * Set driver
@@ -101,10 +109,12 @@ class Statement implements StatementInterface
      * Set Parameter container
      *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -141,6 +151,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Get parameter count
+     *
      * @return ParameterContainer
      */
     public function getParameterContainer()
@@ -149,6 +161,8 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Is prepared
+     *
      * @return bool
      */
     public function isPrepared()
@@ -157,7 +171,12 @@ class Statement implements StatementInterface
     }
 
     /**
+     * Prepare
+     *
      * @param string $sql
+     * @throws Exception\InvalidQueryException
+     * @throws Exception\RuntimeException
+     * @return Statement
      */
     public function prepare($sql = null)
     {
@@ -177,12 +196,14 @@ class Statement implements StatementInterface
         }
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**
      * Execute
      *
      * @param  ParameterContainer $parameters
+     * @throws Exception\RuntimeException
      * @return mixed
      */
     public function execute($parameters = null)
@@ -216,6 +237,7 @@ class Statement implements StatementInterface
 
         if ($this->bufferResults === true) {
             $this->resource->store_result();
+            $this->isPrepared = false;
             $buffered = true;
         } else {
             $buffered = false;
@@ -228,7 +250,7 @@ class Statement implements StatementInterface
     /**
      * Bind parameters from container
      *
-     * @param ParameterContainer $pContainer
+     * @return void
      */
     protected function bindParametersFromContainer()
     {
@@ -263,5 +285,4 @@ class Statement implements StatementInterface
             call_user_func_array(array($this->resource, 'bind_param'), $args);
         }
     }
-
 }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -24,9 +14,7 @@ namespace Zend\Validator\File;
  * Validator which checks if the destination file does not exist
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
 class NotExists extends Exists
 {
@@ -38,7 +26,7 @@ class NotExists extends Exists
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::DOES_EXIST => "File '%value%' exists",
     );
 
@@ -47,14 +35,14 @@ class NotExists extends Exists
      *
      * @param  string  $value Real file to check for
      * @param  array   $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
         $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
+        if (($file !== null) && (!empty($file['destination']))) {
             $directories[] = $file['destination'];
-        } else if (!isset($file['name'])) {
+        } elseif (!isset($file['name'])) {
             $file['name'] = $value;
         }
 
@@ -65,12 +53,12 @@ class NotExists extends Exists
 
             $check = true;
             if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->_throw($file, self::DOES_EXIST);
+                return $this->throwError($file, self::DOES_EXIST);
             }
         }
 
         if (!isset($check)) {
-            return $this->_throw($file, self::DOES_EXIST);
+            return $this->throwError($file, self::DOES_EXIST);
         }
 
         return true;

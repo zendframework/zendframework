@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
-use Zend\Code\Exception;
 use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Exception;
+use Zend\Code\NameInformation;
 
 class TokenArrayScanner implements ScannerInterface
 {
@@ -54,16 +62,16 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * @todo Assignment of $this->docComment should probably be done in scan() 
+     * @todo Assignment of $this->docComment should probably be done in scan()
      *       and then $this->getDocComment() just retrieves it.
      */
     public function getDocComment()
     {
-	    foreach ($this->tokens as $token) {
+        foreach ($this->tokens as $token) {
             $type    = $token[0];
             $value   = $token[1];
             $lineNum = $token[2];
-            if(($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
+            if (($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
                 continue;
             } elseif ($type == T_DOC_COMMENT) {
                 $this->docComment = $value;
@@ -88,6 +96,12 @@ class TokenArrayScanner implements ScannerInterface
         return $namespaces;
     }
 
+    /**
+     * Get uses
+     *
+     * @param null|string $namespace
+     * @return array|null
+     */
     public function getUses($namespace = null)
     {
         $this->scan();
@@ -100,6 +114,11 @@ class TokenArrayScanner implements ScannerInterface
         // @todo Implement getIncludes() in TokenArrayScanner
     }
 
+    /**
+     * Get class names
+     *
+     * @return string[]
+     */
     public function getClassNames()
     {
         $this->scan();
@@ -115,6 +134,11 @@ class TokenArrayScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Get classes
+     *
+     * @return ClassScanner[]
+     */
     public function getClasses()
     {
         $this->scan();
@@ -131,12 +155,10 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * getClass()
-     *
      * Return the class object from this scanner
      *
      * @param string|int $name
-     * @throws \Zend\Code\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return ClassScanner
      */
     public function getClass($name)
@@ -171,6 +193,12 @@ class TokenArrayScanner implements ScannerInterface
         );
     }
 
+    /**
+     * Get class name information
+     *
+     * @param string $className
+     * @return bool|null|NameInformation
+     */
     public function getClassNameInformation($className)
     {
         $this->scan();
@@ -194,6 +222,11 @@ class TokenArrayScanner implements ScannerInterface
         return new NameInformation($info['namespace'], $info['uses']);
     }
 
+    /**
+     * Get function names
+     *
+     * @return string[]
+     */
     public function getFunctionNames()
     {
         $this->scan();
@@ -230,8 +263,8 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * @todo: $this->docComment should be assigned for valid docblock during 
-     *        the scan instead of $this->getDocComment() (starting with 
+     * @todo: $this->docComment should be assigned for valid docblock during
+     *        the scan instead of $this->getDocComment() (starting with
      *        T_DOC_COMMENT case)
      */
     protected function scan()
@@ -262,8 +295,7 @@ class TokenArrayScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE             = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine)
-        {
+        $MACRO_TOKEN_ADVANCE             = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
                 $token        = false;
@@ -286,18 +318,14 @@ class TokenArrayScanner implements ScannerInterface
             }
             return $tokenIndex;
         };
-        $MACRO_TOKEN_LOGICAL_START_INDEX = function() use (&$tokenIndex, &$docCommentIndex)
-        {
-            ;
+        $MACRO_TOKEN_LOGICAL_START_INDEX = function () use (&$tokenIndex, &$docCommentIndex) {
             return ($docCommentIndex === false) ? $tokenIndex : $docCommentIndex;
         };
-        $MACRO_DOC_COMMENT_START         = function() use (&$tokenIndex, &$docCommentIndex)
-        {
+        $MACRO_DOC_COMMENT_START = function () use (&$tokenIndex, &$docCommentIndex) {
             $docCommentIndex = $tokenIndex;
             return $docCommentIndex;
         };
-        $MACRO_DOC_COMMENT_VALIDATE      = function() use (&$tokenType, &$docCommentIndex)
-        {
+        $MACRO_DOC_COMMENT_VALIDATE = function () use (&$tokenType, &$docCommentIndex) {
             static $validTrailingTokens = null;
             if ($validTrailingTokens === null) {
                 $validTrailingTokens = array(T_WHITESPACE, T_FINAL, T_ABSTRACT, T_INTERFACE, T_CLASS, T_FUNCTION);
@@ -307,8 +335,7 @@ class TokenArrayScanner implements ScannerInterface
             }
             return $docCommentIndex;
         };
-        $MACRO_INFO_ADVANCE              = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine)
-        {
+        $MACRO_INFO_ADVANCE = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;
@@ -581,10 +608,6 @@ class TokenArrayScanner implements ScannerInterface
             }
         }
 
-        if (!$namespaces) {
-            return array();
-        }
-
         if ($namespace === null) {
             $namespace = array_shift($namespaces);
         } elseif (!is_string($namespace)) {
@@ -607,5 +630,4 @@ class TokenArrayScanner implements ScannerInterface
 
         return $uses;
     }
-
 }

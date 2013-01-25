@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Feed;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Exception,
-    Zend\Date,
-    DOMDocument;
+use DateTime;
+use DOMDocument;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Exception;
 
 /**
 * @category Zend
 * @package Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Rss extends AbstractFeed
 {
@@ -45,17 +33,28 @@ class Rss extends AbstractFeed
     {
         parent::__construct($dom, $type);
 
-        $dublinCoreClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Feed');
-        $this->_extensions['DublinCore\Feed'] = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
-        $this->_extensions['Atom\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $manager = Reader\Reader::getExtensionManager();
 
-        if ($this->getType() !== Reader\Reader::TYPE_RSS_10 && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
+        $feed = $manager->get('DublinCore\Feed');
+        $feed->setDomDocument($dom);
+        $feed->setType($this->data['type']);
+        $feed->setXpath($this->xpath);
+        $this->extensions['DublinCore\Feed'] = $feed;
+
+        $feed = $manager->get('Atom\Feed');
+        $feed->setDomDocument($dom);
+        $feed->setType($this->data['type']);
+        $feed->setXpath($this->xpath);
+        $this->extensions['Atom\Feed'] = $feed;
+
+        if ($this->getType() !== Reader\Reader::TYPE_RSS_10
+            && $this->getType() !== Reader\Reader::TYPE_RSS_090
+        ) {
             $xpathPrefix = '/rss/channel';
         } else {
             $xpathPrefix = '/rdf:RDF/rss:channel';
         }
-        foreach ($this->_extensions as $extension) {
+        foreach ($this->extensions as $extension) {
             $extension->setXpathPrefix($xpathPrefix);
         }
     }
@@ -84,14 +83,14 @@ class Rss extends AbstractFeed
      */
     public function getAuthors()
     {
-        if (array_key_exists('authors', $this->_data)) {
-            return $this->_data['authors'];
+        if (array_key_exists('authors', $this->data)) {
+            return $this->data['authors'];
         }
-        
+
         $authors = array();
-        $authors_dc = $this->getExtension('DublinCore')->getAuthors();
-        if (!empty($authors_dc)) {
-            foreach ($authors_dc as $author) {
+        $authorsDc = $this->getExtension('DublinCore')->getAuthors();
+        if (!empty($authorsDc)) {
+            foreach ($authorsDc as $author) {
                 $authors[] = array(
                     'name' => $author['name']
                 );
@@ -104,9 +103,9 @@ class Rss extends AbstractFeed
          */
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
         && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->_xpath->query('//author');
+            $list = $this->xpath->query('//author');
         } else {
-            $list = $this->_xpath->query('//rss:author');
+            $list = $this->xpath->query('//rss:author');
         }
         if ($list->length) {
             foreach ($list as $author) {
@@ -121,7 +120,7 @@ class Rss extends AbstractFeed
                         $data['name'] = $matches[1];
                     }
                     $authors[] = $data;
-                } 
+                }
             }
         }
 
@@ -137,9 +136,9 @@ class Rss extends AbstractFeed
             $authors = null;
         }
 
-        $this->_data['authors'] = $authors;
+        $this->data['authors'] = $authors;
 
-        return $this->_data['authors'];
+        return $this->data['authors'];
     }
 
     /**
@@ -149,15 +148,15 @@ class Rss extends AbstractFeed
      */
     public function getCopyright()
     {
-        if (array_key_exists('copyright', $this->_data)) {
-            return $this->_data['copyright'];
+        if (array_key_exists('copyright', $this->data)) {
+            return $this->data['copyright'];
         }
 
         $copyright = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $copyright = $this->_xpath->evaluate('string(/rss/channel/copyright)');
+            $copyright = $this->xpath->evaluate('string(/rss/channel/copyright)');
         }
 
         if (!$copyright && $this->getExtension('DublinCore') !== null) {
@@ -172,9 +171,9 @@ class Rss extends AbstractFeed
             $copyright = null;
         }
 
-        $this->_data['copyright'] = $copyright;
+        $this->data['copyright'] = $copyright;
 
-        return $this->_data['copyright'];
+        return $this->data['copyright'];
     }
 
     /**
@@ -190,13 +189,13 @@ class Rss extends AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return Date\Date
+     * @return DateTime
      * @throws Exception\RuntimeException
      */
     public function getDateModified()
     {
-        if (array_key_exists('datemodified', $this->_data)) {
-            return $this->_data['datemodified'];
+        if (array_key_exists('datemodified', $this->data)) {
+            return $this->data['datemodified'];
         }
 
         $dateModified = null;
@@ -204,24 +203,23 @@ class Rss extends AbstractFeed
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $dateModified = $this->_xpath->evaluate('string(/rss/channel/pubDate)');
+            $dateModified = $this->xpath->evaluate('string(/rss/channel/pubDate)');
             if (!$dateModified) {
-                $dateModified = $this->_xpath->evaluate('string(/rss/channel/lastBuildDate)');
+                $dateModified = $this->xpath->evaluate('string(/rss/channel/lastBuildDate)');
             }
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new Date\Date($dateModifiedParsed);
+                    $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($dateModified, $standard);
+                            $date = DateTime::createFromFormat($standard, $dateModified);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
@@ -247,20 +245,21 @@ class Rss extends AbstractFeed
             $date = null;
         }
 
-        $this->_data['datemodified'] = $date;
+        $this->data['datemodified'] = $date;
 
-        return $this->_data['datemodified'];
+        return $this->data['datemodified'];
     }
 
     /**
      * Get the feed lastBuild date
      *
-     * @return Date\Date
+     * @throws Exception\RuntimeException
+     * @return DateTime
      */
     public function getLastBuildDate()
     {
-        if (array_key_exists('lastBuildDate', $this->_data)) {
-            return $this->_data['lastBuildDate'];
+        if (array_key_exists('lastBuildDate', $this->data)) {
+            return $this->data['lastBuildDate'];
         }
 
         $lastBuildDate = null;
@@ -268,21 +267,20 @@ class Rss extends AbstractFeed
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $lastBuildDate = $this->_xpath->evaluate('string(/rss/channel/lastBuildDate)');
+            $lastBuildDate = $this->xpath->evaluate('string(/rss/channel/lastBuildDate)');
             if ($lastBuildDate) {
                 $lastBuildDateParsed = strtotime($lastBuildDate);
                 if ($lastBuildDateParsed) {
-                    $date = new Date\Date($lastBuildDateParsed);
+                    $date = new DateTime('@' . $lastBuildDateParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($lastBuildDate, $standard);
+                            $date = DateTime::createFromFormat($standard, $lastBuildDateParsed);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
@@ -300,9 +298,9 @@ class Rss extends AbstractFeed
             $date = null;
         }
 
-        $this->_data['lastBuildDate'] = $date;
+        $this->data['lastBuildDate'] = $date;
 
-        return $this->_data['lastBuildDate'];
+        return $this->data['lastBuildDate'];
     }
 
     /**
@@ -312,17 +310,17 @@ class Rss extends AbstractFeed
      */
     public function getDescription()
     {
-        if (array_key_exists('description', $this->_data)) {
-            return $this->_data['description'];
+        if (array_key_exists('description', $this->data)) {
+            return $this->data['description'];
         }
 
         $description = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $description = $this->_xpath->evaluate('string(/rss/channel/description)');
+            $description = $this->xpath->evaluate('string(/rss/channel/description)');
         } else {
-            $description = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/rss:description)');
+            $description = $this->xpath->evaluate('string(/rdf:RDF/rss:channel/rss:description)');
         }
 
         if (!$description && $this->getExtension('DublinCore') !== null) {
@@ -337,9 +335,9 @@ class Rss extends AbstractFeed
             $description = null;
         }
 
-        $this->_data['description'] = $description;
+        $this->data['description'] = $description;
 
-        return $this->_data['description'];
+        return $this->data['description'];
     }
 
     /**
@@ -349,15 +347,15 @@ class Rss extends AbstractFeed
      */
     public function getId()
     {
-        if (array_key_exists('id', $this->_data)) {
-            return $this->_data['id'];
+        if (array_key_exists('id', $this->data)) {
+            return $this->data['id'];
         }
 
         $id = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $id = $this->_xpath->evaluate('string(/rss/channel/guid)');
+            $id = $this->xpath->evaluate('string(/rss/channel/guid)');
         }
 
         if (!$id && $this->getExtension('DublinCore') !== null) {
@@ -378,9 +376,9 @@ class Rss extends AbstractFeed
             }
         }
 
-        $this->_data['id'] = $id;
+        $this->data['id'] = $id;
 
-        return $this->_data['id'];
+        return $this->data['id'];
     }
 
     /**
@@ -390,41 +388,41 @@ class Rss extends AbstractFeed
      */
     public function getImage()
     {
-        if (array_key_exists('image', $this->_data)) {
-            return $this->_data['image'];
+        if (array_key_exists('image', $this->data)) {
+            return $this->data['image'];
         }
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->_xpath->query('/rss/channel/image');
+            $list = $this->xpath->query('/rss/channel/image');
             $prefix = '/rss/channel/image[1]';
         } else {
-            $list = $this->_xpath->query('/rdf:RDF/rss:channel/rss:image');
+            $list = $this->xpath->query('/rdf:RDF/rss:channel/rss:image');
             $prefix = '/rdf:RDF/rss:channel/rss:image[1]';
         }
         if ($list->length > 0) {
             $image = array();
-            $value = $this->_xpath->evaluate('string(' . $prefix . '/url)');
+            $value = $this->xpath->evaluate('string(' . $prefix . '/url)');
             if ($value) {
                 $image['uri'] = $value;
             }
-            $value = $this->_xpath->evaluate('string(' . $prefix . '/link)');
+            $value = $this->xpath->evaluate('string(' . $prefix . '/link)');
             if ($value) {
                 $image['link'] = $value;
             }
-            $value = $this->_xpath->evaluate('string(' . $prefix . '/title)');
+            $value = $this->xpath->evaluate('string(' . $prefix . '/title)');
             if ($value) {
                 $image['title'] = $value;
             }
-            $value = $this->_xpath->evaluate('string(' . $prefix . '/height)');
+            $value = $this->xpath->evaluate('string(' . $prefix . '/height)');
             if ($value) {
                 $image['height'] = $value;
             }
-            $value = $this->_xpath->evaluate('string(' . $prefix . '/width)');
+            $value = $this->xpath->evaluate('string(' . $prefix . '/width)');
             if ($value) {
                 $image['width'] = $value;
             }
-            $value = $this->_xpath->evaluate('string(' . $prefix . '/description)');
+            $value = $this->xpath->evaluate('string(' . $prefix . '/description)');
             if ($value) {
                 $image['description'] = $value;
             }
@@ -432,9 +430,9 @@ class Rss extends AbstractFeed
             $image = null;
         }
 
-        $this->_data['image'] = $image;
+        $this->data['image'] = $image;
 
-        return $this->_data['image'];
+        return $this->data['image'];
     }
 
     /**
@@ -444,15 +442,15 @@ class Rss extends AbstractFeed
      */
     public function getLanguage()
     {
-        if (array_key_exists('language', $this->_data)) {
-            return $this->_data['language'];
+        if (array_key_exists('language', $this->data)) {
+            return $this->data['language'];
         }
 
         $language = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $language = $this->_xpath->evaluate('string(/rss/channel/language)');
+            $language = $this->xpath->evaluate('string(/rss/channel/language)');
         }
 
         if (!$language && $this->getExtension('DublinCore') !== null) {
@@ -464,16 +462,16 @@ class Rss extends AbstractFeed
         }
 
         if (!$language) {
-            $language = $this->_xpath->evaluate('string(//@xml:lang[1])');
+            $language = $this->xpath->evaluate('string(//@xml:lang[1])');
         }
 
         if (!$language) {
             $language = null;
         }
 
-        $this->_data['language'] = $language;
+        $this->data['language'] = $language;
 
-        return $this->_data['language'];
+        return $this->data['language'];
     }
 
     /**
@@ -483,17 +481,17 @@ class Rss extends AbstractFeed
      */
     public function getLink()
     {
-        if (array_key_exists('link', $this->_data)) {
-            return $this->_data['link'];
+        if (array_key_exists('link', $this->data)) {
+            return $this->data['link'];
         }
 
         $link = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $link = $this->_xpath->evaluate('string(/rss/channel/link)');
+            $link = $this->xpath->evaluate('string(/rss/channel/link)');
         } else {
-            $link = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/rss:link)');
+            $link = $this->xpath->evaluate('string(/rdf:RDF/rss:channel/rss:link)');
         }
 
         if (empty($link)) {
@@ -504,9 +502,9 @@ class Rss extends AbstractFeed
             $link = null;
         }
 
-        $this->_data['link'] = $link;
+        $this->data['link'] = $link;
 
-        return $this->_data['link'];
+        return $this->data['link'];
     }
 
     /**
@@ -516,8 +514,8 @@ class Rss extends AbstractFeed
      */
     public function getFeedLink()
     {
-        if (array_key_exists('feedlink', $this->_data)) {
-            return $this->_data['feedlink'];
+        if (array_key_exists('feedlink', $this->data)) {
+            return $this->data['feedlink'];
         }
 
         $link = null;
@@ -528,9 +526,9 @@ class Rss extends AbstractFeed
             $link = $this->getOriginalSourceUri();
         }
 
-        $this->_data['feedlink'] = $link;
+        $this->data['feedlink'] = $link;
 
-        return $this->_data['feedlink'];
+        return $this->data['feedlink'];
     }
 
     /**
@@ -540,23 +538,23 @@ class Rss extends AbstractFeed
      */
     public function getGenerator()
     {
-        if (array_key_exists('generator', $this->_data)) {
-            return $this->_data['generator'];
+        if (array_key_exists('generator', $this->data)) {
+            return $this->data['generator'];
         }
 
         $generator = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $generator = $this->_xpath->evaluate('string(/rss/channel/generator)');
+            $generator = $this->xpath->evaluate('string(/rss/channel/generator)');
         }
 
         if (!$generator) {
             if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-                $generator = $this->_xpath->evaluate('string(/rss/channel/atom:generator)');
+                $generator = $this->xpath->evaluate('string(/rss/channel/atom:generator)');
             } else {
-                $generator = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/atom:generator)');
+                $generator = $this->xpath->evaluate('string(/rdf:RDF/rss:channel/atom:generator)');
             }
         }
 
@@ -568,9 +566,9 @@ class Rss extends AbstractFeed
             $generator = null;
         }
 
-        $this->_data['generator'] = $generator;
+        $this->data['generator'] = $generator;
 
-        return $this->_data['generator'];
+        return $this->data['generator'];
     }
 
     /**
@@ -580,17 +578,17 @@ class Rss extends AbstractFeed
      */
     public function getTitle()
     {
-        if (array_key_exists('title', $this->_data)) {
-            return $this->_data['title'];
+        if (array_key_exists('title', $this->data)) {
+            return $this->data['title'];
         }
 
         $title = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $title = $this->_xpath->evaluate('string(/rss/channel/title)');
+            $title = $this->xpath->evaluate('string(/rss/channel/title)');
         } else {
-            $title = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/rss:title)');
+            $title = $this->xpath->evaluate('string(/rdf:RDF/rss:channel/rss:title)');
         }
 
         if (!$title && $this->getExtension('DublinCore') !== null) {
@@ -605,9 +603,9 @@ class Rss extends AbstractFeed
             $title = null;
         }
 
-        $this->_data['title'] = $title;
+        $this->data['title'] = $title;
 
-        return $this->_data['title'];
+        return $this->data['title'];
     }
 
     /**
@@ -617,8 +615,8 @@ class Rss extends AbstractFeed
      */
     public function getHubs()
     {
-        if (array_key_exists('hubs', $this->_data)) {
-            return $this->_data['hubs'];
+        if (array_key_exists('hubs', $this->data)) {
+            return $this->data['hubs'];
         }
 
         $hubs = $this->getExtension('Atom')->getHubs();
@@ -629,11 +627,11 @@ class Rss extends AbstractFeed
             $hubs = array_unique($hubs);
         }
 
-        $this->_data['hubs'] = $hubs;
+        $this->data['hubs'] = $hubs;
 
-        return $this->_data['hubs'];
+        return $this->data['hubs'];
     }
-    
+
     /**
      * Get all categories
      *
@@ -641,15 +639,15 @@ class Rss extends AbstractFeed
      */
     public function getCategories()
     {
-        if (array_key_exists('categories', $this->_data)) {
-            return $this->_data['categories'];
+        if (array_key_exists('categories', $this->data)) {
+            return $this->data['categories'];
         }
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->_xpath->query('/rss/channel//category');
+            $list = $this->xpath->query('/rss/channel//category');
         } else {
-            $list = $this->_xpath->query('/rdf:RDF/rss:channel//rss:category');
+            $list = $this->xpath->query('/rdf:RDF/rss:channel//rss:category');
         }
 
         if ($list->length) {
@@ -664,32 +662,32 @@ class Rss extends AbstractFeed
         } else {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
-        
+
         if (count($categoryCollection) == 0) {
             $categoryCollection = $this->getExtension('Atom')->getCategories();
         }
 
-        $this->_data['categories'] = $categoryCollection;
+        $this->data['categories'] = $categoryCollection;
 
-        return $this->_data['categories'];
+        return $this->data['categories'];
     }
 
     /**
      * Read all entries to the internal entries array
      *
      */
-    protected function _indexEntries()
+    protected function indexEntries()
     {
         $entries = array();
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $entries = $this->_xpath->evaluate('//item');
+            $entries = $this->xpath->evaluate('//item');
         } else {
-            $entries = $this->_xpath->evaluate('//rss:item');
+            $entries = $this->xpath->evaluate('//rss:item');
         }
 
-        foreach($entries as $index=>$entry) {
-            $this->_entries[$index] = $entry;
+        foreach ($entries as $index=>$entry) {
+            $this->entries[$index] = $entry;
         }
     }
 
@@ -697,17 +695,17 @@ class Rss extends AbstractFeed
      * Register the default namespaces for the current feed format
      *
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        switch ($this->_data['type']) {
+        switch ($this->data['type']) {
             case Reader\Reader::TYPE_RSS_10:
-                $this->_xpath->registerNamespace('rdf', Reader\Reader::NAMESPACE_RDF);
-                $this->_xpath->registerNamespace('rss', Reader\Reader::NAMESPACE_RSS_10);
+                $this->xpath->registerNamespace('rdf', Reader\Reader::NAMESPACE_RDF);
+                $this->xpath->registerNamespace('rss', Reader\Reader::NAMESPACE_RSS_10);
                 break;
 
             case Reader\Reader::TYPE_RSS_090:
-                $this->_xpath->registerNamespace('rdf', Reader\Reader::NAMESPACE_RDF);
-                $this->_xpath->registerNamespace('rss', Reader\Reader::NAMESPACE_RSS_090);
+                $this->xpath->registerNamespace('rdf', Reader\Reader::NAMESPACE_RDF);
+                $this->xpath->registerNamespace('rss', Reader\Reader::NAMESPACE_RSS_090);
                 break;
         }
     }

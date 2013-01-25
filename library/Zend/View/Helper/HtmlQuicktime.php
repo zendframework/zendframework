@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -25,10 +14,8 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlQuicktime extends HtmlElement
+class HtmlQuicktime extends AbstractHtmlElement
 {
     /**
      * Default file type for a movie applet
@@ -53,7 +40,7 @@ class HtmlQuicktime extends HtmlElement
      *
      * @var array
      */
-    protected $_attribs = array('classid'  => self::ATTRIB_CLASSID,
+    protected $attribs = array('classid'  => self::ATTRIB_CLASSID,
                                 'codebase' => self::ATTRIB_CODEBASE);
 
     /**
@@ -68,7 +55,7 @@ class HtmlQuicktime extends HtmlElement
     public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
         // Attrs
-        $attribs = array_merge($this->_attribs, $attribs);
+        $attribs = array_merge($this->attribs, $attribs);
 
         // Params
         $params = array_merge(array('src' => $data), $params);

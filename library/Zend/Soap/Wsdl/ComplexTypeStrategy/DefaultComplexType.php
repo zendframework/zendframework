@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage WSDL
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
@@ -29,8 +18,6 @@ use Zend\Soap\Exception;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
@@ -38,11 +25,12 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
      * Add a complex type by recursivly using all the class properties fetched via Reflection.
      *
      * @param  string $type Name of the class to be specified
+     * @throws Exception\InvalidArgumentException if class does not exist
      * @return string XSD Type for the given PHP type
      */
     public function addComplexType($type)
     {
-        if(!class_exists($type)) {
+        if (!class_exists($type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Cannot add a complex type %s that is not an object or where '
               . 'class could not be found in \'DefaultComplexType\' strategy.', $type
@@ -62,8 +50,6 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         // Register type here to avoid recursion
         $this->getContext()->addType($type, $soapType);
 
-
-        $defaultProperties = $class->getDefaultProperties();
 
         $defaultProperties = $class->getDefaultProperties();
 

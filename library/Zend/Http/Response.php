@@ -1,13 +1,27 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http;
 
-use Zend\Stdlib\Message,
-    Zend\Stdlib\ResponseInterface;
+use Zend\Stdlib\ErrorHandler;
+use Zend\Stdlib\ResponseInterface;
 
-class Response extends Message implements ResponseInterface
+/**
+ * HTTP Response
+ *
+ * @category  Zend
+ * @package   Zend_Http
+ * @link      http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6
+ */
+class Response extends AbstractMessage implements ResponseInterface
 {
-
     /**#@+
      * @const int Status codes
      */
@@ -69,20 +83,7 @@ class Response extends Message implements ResponseInterface
     const STATUS_CODE_507 = 507;
     const STATUS_CODE_508 = 508;
     const STATUS_CODE_511 = 511;
-
     /**#@-*/
-
-    /**#@+
-     * @const string Version constant numbers
-     */
-    const VERSION_11 = '1.1';
-    const VERSION_10 = '1.0';
-    /**#@-*/
-
-    /**
-     * @var string
-     */
-    protected $version = self::VERSION_11;
 
     /**
      * @var array Recommended Reason Phrases
@@ -163,15 +164,11 @@ class Response extends Message implements ResponseInterface
     protected $reasonPhrase = null;
 
     /**
-     * @var Headers
-     */
-    protected $headers = null;
-
-    /**
      * Populate object from string
      *
      * @param  string $string
      * @return Response
+     * @throws Exception\InvalidArgumentException
      */
     public static function fromString($string)
     {
@@ -183,9 +180,13 @@ class Response extends Message implements ResponseInterface
         $firstLine = array_shift($lines);
 
         $response = new static();
-        $matches = null;
-        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.+))?$/', $firstLine, $matches)) {
-            throw new Exception\InvalidArgumentException('A valid response status line was not found in the provided string');
+
+        $regex   = '/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.*))?$/';
+        $matches = array();
+        if (!preg_match($regex, $firstLine, $matches)) {
+            throw new Exception\InvalidArgumentException(
+                'A valid response status line was not found in the provided string'
+            );
         }
 
         $response->version = $matches['version'];
@@ -207,9 +208,9 @@ class Response extends Message implements ResponseInterface
                 continue;
             }
             if ($isHeader) {
-                $headers[] .= $nextLine;
+                $headers[] = $nextLine;
             } else {
-                $content[] .= $nextLine;
+                $content[] = $nextLine;
             }
         }
 
@@ -225,70 +226,32 @@ class Response extends Message implements ResponseInterface
     }
 
     /**
-     * Render the status line header
-     *
-     * @return string
-     */
-    public function renderStatusLine()
-    {
-        $status = sprintf(
-            'HTTP/%s %d %s',
-            $this->getVersion(),
-            $this->getStatusCode(),
-            $this->getReasonPhrase()
-        );
-        return trim($status);
-    }
-
-    /**
-     * Set response headers
-     *
-     * @param  Headers $headers
-     * @return Response
-     */
-    public function setHeaders(Headers $headers)
-    {
-        $this->headers = $headers;
-        return $this;
-    }
-
-    /**
-     * Get response headers
-     *
-     * @return Headers
-     */
-    public function headers()
-    {
-        if ($this->headers === null || is_string($this->headers)) {
-            $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
-        }
-        return $this->headers;
-    }
-
-    /**
      * @return Header\SetCookie[]
      */
-    public function cookie()
+    public function getCookie()
     {
-        return $this->headers()->get('Set-Cookie');
+        return $this->getHeaders()->get('Set-Cookie');
     }
 
     /**
-     * @param string $version
+     * Set HTTP status code and (optionally) message
+     *
+     * @param  integer $code
+     * @throws Exception\InvalidArgumentException
      * @return Response
      */
-    public function setVersion($version)
+    public function setStatusCode($code)
     {
-        $this->version = $version;
+        $const = get_called_class() . '::STATUS_CODE_' . $code;
+        if (!is_numeric($code) || !defined($const)) {
+            $code = is_scalar($code) ? $code : gettype($code);
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid status code provided: "%s"',
+                $code
+            ));
+        }
+        $this->statusCode = (int) $code;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
     }
 
     /**
@@ -325,27 +288,6 @@ class Response extends Message implements ResponseInterface
     }
 
     /**
-     * Set HTTP status code and (optionally) message
-     *
-     * @param integer $code
-     * @throws Exception\InvalidArgumentException
-     * @return \Zend\Http\Response
-     */
-    public function setStatusCode($code)
-    {
-        $const = get_called_class() . '::STATUS_CODE_' . $code;
-        if (!is_numeric($code) || !defined($const)) {
-            $code = is_scalar($code) ? $code : gettype($code);
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Invalid status code provided: "%s"',
-                $code
-            ));
-        }
-        $this->statusCode = (int) $code;
-        return $this;
-    }
-
-    /**
      * Get the body of the response
      *
      * @return string
@@ -354,7 +296,7 @@ class Response extends Message implements ResponseInterface
     {
         $body = (string) $this->getContent();
 
-        $transferEncoding = $this->headers()->get('Transfer-Encoding');
+        $transferEncoding = $this->getHeaders()->get('Transfer-Encoding');
 
         if (!empty($transferEncoding)) {
             if (strtolower($transferEncoding->getFieldValue()) == 'chunked') {
@@ -362,7 +304,7 @@ class Response extends Message implements ResponseInterface
             }
         }
 
-        $contentEncoding = $this->headers()->get('Content-Encoding');
+        $contentEncoding = $this->getHeaders()->get('Content-Encoding');
 
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
@@ -461,6 +403,21 @@ class Response extends Message implements ResponseInterface
         return (200 <= $code && 300 > $code);
     }
 
+    /**
+     * Render the status line header
+     *
+     * @return string
+     */
+    public function renderStatusLine()
+    {
+        $status = sprintf(
+            'HTTP/%s %d %s',
+            $this->getVersion(),
+            $this->getStatusCode(),
+            $this->getReasonPhrase()
+        );
+        return trim($status);
+    }
 
     /**
      * Render entire response as HTTP response string
@@ -470,27 +427,18 @@ class Response extends Message implements ResponseInterface
     public function toString()
     {
         $str  = $this->renderStatusLine() . "\r\n";
-        $str .= $this->headers()->toString();
+        $str .= $this->getHeaders()->toString();
         $str .= "\r\n";
         $str .= $this->getContent();
         return $str;
     }
 
     /**
-     * Implements magic __toString()
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
-    }
-
-    /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
      *
-     * @param string $body
+     * @param  string $body
      * @return string
+     * @throws Exception\RuntimeException
      */
     protected function decodeChunkedBody($body)
     {
@@ -517,8 +465,9 @@ class Response extends Message implements ResponseInterface
      *
      * Currently requires PHP with zlib support
      *
-     * @param string $body
+     * @param  string $body
      * @return string
+     * @throws Exception\RuntimeException
      */
     protected function decodeGzip($body)
     {
@@ -528,7 +477,17 @@ class Response extends Message implements ResponseInterface
             );
         }
 
-        return gzinflate(substr($body, 10));
+        ErrorHandler::start();
+        $return = gzinflate(substr($body, 10));
+        $test = ErrorHandler::stop();
+        if ($test) {
+            throw new Exception\RuntimeException(
+                'Error occurred during gzip inflation',
+                0,
+                $test
+            );
+        }
+        return $return;
     }
 
     /**
@@ -536,8 +495,9 @@ class Response extends Message implements ResponseInterface
      *
      * Currently requires PHP with zlib support
      *
-     * @param string $body
+     * @param  string $body
      * @return string
+     * @throws Exception\RuntimeException
      */
     protected function decodeDeflate($body)
     {
@@ -562,8 +522,7 @@ class Response extends Message implements ResponseInterface
 
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
-        } else {
-            return gzinflate($body);
         }
+        return gzinflate($body);
     }
 }

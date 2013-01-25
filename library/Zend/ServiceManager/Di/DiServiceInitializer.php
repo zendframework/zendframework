@@ -1,12 +1,19 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\ServiceManager\InitializerInterface,
-    Zend\ServiceManager\ServiceLocatorInterface,
-    Zend\ServiceManager\Exception,
-    Zend\Di\Di,
-    Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\Di\Di;
+use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\InitializerInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiServiceInitializer extends Di implements InitializerInterface
 {
@@ -26,6 +33,8 @@ class DiServiceInitializer extends Di implements InitializerInterface
     protected $serviceLocator = null;
 
     /**
+     * Constructor
+     *
      * @param \Zend\Di\Di $di
      * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
      * @param null|DiInstanceManagerProxy $diImProxy
@@ -38,9 +47,13 @@ class DiServiceInitializer extends Di implements InitializerInterface
     }
 
     /**
+     * Initialize
+     *
      * @param $instance
+     * @param ServiceLocatorInterface $serviceLocator
+     * @throws \Exception
      */
-    public function initialize($instance)
+    public function initialize($instance, ServiceLocatorInterface $serviceLocator)
     {
         $instanceManager = $this->di->instanceManager;
         $this->di->instanceManager = $this->diInstanceManagerProxy;
@@ -52,5 +65,4 @@ class DiServiceInitializer extends Di implements InitializerInterface
             throw $e;
         }
     }
-
 }

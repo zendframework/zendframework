@@ -1,62 +1,52 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
-use Zend\Loader\Broker;
-
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StaticFilter
 {
     /**
-     * @var Broker
+     * @var FilterPluginManager
      */
-    protected static $broker;
+    protected static $plugins;
 
     /**
-     * Set broker for resolving filter classes
-     * 
-     * @param  Broker $broker 
+     * Set plugin manager for resolving filter classes
+     *
+     * @param  FilterPluginManager $manager
      * @return void
      */
-    public static function setBroker(Broker $broker = null)
+    public static function setPluginManager(FilterPluginManager $manager = null)
     {
-        self::$broker = $broker;
+        // Don't share by default to allow different arguments on subsequent calls
+        if ($manager instanceof FilterPluginManager) {
+            $manager->setShareByDefault(false);
+        }
+        static::$plugins = $manager;
     }
 
     /**
-     * Get broker for loading filter classes
-     * 
-     * @return Broker
+     * Get plugin manager for loading filter classes
+     *
+     * @return FilterPluginManager
      */
-    public static function getBroker()
+    public static function getPluginManager()
     {
-        if (null === self::$broker) {
-            static::setBroker(new FilterBroker());
+        if (null === static::$plugins) {
+            static::setPluginManager(new FilterPluginManager());
         }
-        return self::$broker;
+        return static::$plugins;
     }
 
     /**
@@ -77,14 +67,9 @@ class StaticFilter
      */
     public static function execute($value, $classBaseName, array $args = array())
     {
-        $broker = static::getBroker();
+        $plugins = static::getPluginManager();
 
-        $filter = $broker->load($classBaseName, $args);
-        $filteredValue = $filter->filter($value);
-
-        // Unregistering filter to allow different arguments on subsequent calls
-        $broker->unregister($classBaseName);
-
-        return $filteredValue;
+        $filter = $plugins->get($classBaseName, $args);
+        return $filter->filter($value);
     }
 }

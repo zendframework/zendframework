@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -29,8 +18,6 @@ use Zend\Form\Exception;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormElementErrors extends AbstractHelper
 {
@@ -116,7 +103,7 @@ class FormElementErrors extends AbstractHelper
     /**
      * Set the attributes that will go on the message open format
      *
-     * @param array key value pairs of attributes
+     * @param array $attributes key value pairs of attributes
      * @return FormElementErrors
      */
     public function setAttributes(array $attributes)
@@ -140,6 +127,7 @@ class FormElementErrors extends AbstractHelper
      *
      * @param  ElementInterface $element
      * @param  array $attributes
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element, array $attributes = array())
@@ -164,11 +152,15 @@ class FormElementErrors extends AbstractHelper
         }
 
         // Flatten message array
-        $escape          = $this->getEscapeHelper();
+        $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
-        array_walk_recursive($messages, function($item) use (&$messagesToPrint, $escape) {
-            $messagesToPrint[] = $escape($item);
+        array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml) {
+            $messagesToPrint[] = $escapeHtml($item);
         });
+
+        if (empty($messagesToPrint)) {
+            return '';
+        }
 
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), $attributes);
@@ -189,9 +181,10 @@ class FormElementErrors extends AbstractHelper
      */
     public function __invoke(ElementInterface $element = null, array $attributes = array())
     {
-        if ($element) {
-            return $this->render($element, $attributes);
+        if (!$element) {
+            return $this;
         }
-        return $this;
+
+        return $this->render($element, $attributes);
     }
 }

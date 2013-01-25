@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<rss version="2.0">
-    <channel>
-    	<item>
-            <enclosure url="http://www.scripting.com/mp3s/weatherReportSuite.mp3" length="12216320" type="audio/mpeg" />
-		</item>
-    </channel>
-</rss>

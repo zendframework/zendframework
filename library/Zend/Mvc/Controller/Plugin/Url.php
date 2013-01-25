@@ -1,38 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\InjectApplicationEventInterface,
-    Zend\Mvc\Exception,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteStackInterface,
-    Zend\EventManager\EventInterface;
+use Zend\EventManager\EventInterface;
+use Zend\Mvc\Exception;
+use Zend\Mvc\InjectApplicationEventInterface;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteStackInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Url extends AbstractPlugin
 {
@@ -41,27 +29,64 @@ class Url extends AbstractPlugin
      *
      * @param  string $route RouteInterface name
      * @param  array $params Parameters to use in url generation, if any
-     * @param  array $options RouteInterface-specific options to use in url generation, if any
+     * @param  array|bool $options RouteInterface-specific options to use in url generation, if any. If boolean, and no fourth argument, used as $reuseMatchedParams
+     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
      * @return string
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event
+     * @throws Exception\RuntimeException if no RouteMatch instance or no matched route name present
      */
-    public function fromRoute($route, array $params = array(), array $options = array())
+    public function fromRoute($route = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
     {
         $controller = $this->getController();
         if (!$controller instanceof InjectApplicationEventInterface) {
             throw new Exception\DomainException('Url plugin requires a controller that implements InjectApplicationEventInterface');
         }
 
-        $event  = $controller->getEvent();
-        $router = null;
+        $event   = $controller->getEvent();
+        $router  = null;
+        $matches =null;
         if ($event instanceof MvcEvent) {
-            $router = $event->getRouter();
+            $router  = $event->getRouter();
+            $matches = $event->getRouteMatch();
         } elseif ($event instanceof EventInterface) {
-            $router = $event->getParam('router', false);
+            $router  = $event->getParam('router', false);
+            $matches = $event->getParam('route-match', false);
         }
         if (!$router instanceof RouteStackInterface) {
             throw new Exception\DomainException('Url plugin requires that controller event compose a router; none found');
+        }
+
+        if (3 == func_num_args() && is_bool($options)) {
+            $reuseMatchedParams = $options;
+            $options = array();
+        }
+
+        if ($route === null) {
+            if (!$matches) {
+                throw new Exception\RuntimeException('No RouteMatch instance present');
+            }
+
+            $route = $matches->getMatchedRouteName();
+
+            if ($route === null) {
+                throw new Exception\RuntimeException('RouteMatch does not contain a matched route name');
+            }
+        }
+
+        if ($reuseMatchedParams && $matches) {
+            $routeMatchParams = $matches->getParams();
+
+            if (isset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
+                $routeMatchParams['controller'] = $routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
+                unset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER]);
+            }
+
+            if (isset($routeMatchParams[ModuleRouteListener::MODULE_NAMESPACE])) {
+                unset($routeMatchParams[ModuleRouteListener::MODULE_NAMESPACE]);
+            }
+
+            $params = array_merge($routeMatchParams, $params);
         }
 
         $options['name'] = $route;

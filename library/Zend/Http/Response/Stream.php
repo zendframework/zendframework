@@ -1,57 +1,41 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Response
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Response;
 
-use Zend\Http\Response,
-    Zend\Http\Exception;
-
+use Zend\Http\Exception;
+use Zend\Http\Response;
+use Zend\Stdlib\ErrorHandler;
 
 /**
- * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
- * includes easy access to all the response's different elemts, as well as some
- * convenience methods for parsing and validating HTTP responses.
+ * Represents an HTTP response message as PHP stream resource
  *
  * @package    Zend_Http
  * @subpackage Response
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Stream extends Response
 {
-    
     /**
      * The Content-Length value, if set
      *
      * @var int
      */
     protected $contentLength = null;
-    
+
     /**
      * The portion of the body that has alredy been streamed
      *
      * @var int
      */
     protected $contentStreamed = 0;
-    
+
     /**
      * Response as stream
      *
@@ -71,14 +55,14 @@ class Stream extends Response
     /**
      * Should we clean up the stream file when this response is closed?
      *
-     * @var boolean
+     * @var bool
      */
     protected $cleanup;
 
     /**
      * Get the response as stream
      *
-     * @return resourse
+     * @return resource
      */
     public function getStream()
     {
@@ -88,7 +72,7 @@ class Stream extends Response
     /**
      * Set the response stream
      *
-     * @param resourse $stream
+     * @param resource $stream
      * @return Stream
      */
     public function setStream($stream)
@@ -100,7 +84,7 @@ class Stream extends Response
     /**
      * Get the cleanup trigger
      *
-     * @return boolean
+     * @return bool
      */
     public function getCleanup()
     {
@@ -110,7 +94,7 @@ class Stream extends Response
     /**
      * Set the cleanup trigger
      *
-     * @param $cleanup Set cleanup trigger
+     * @param bool $cleanup
      */
     public function setCleanup($cleanup = true)
     {
@@ -139,70 +123,72 @@ class Stream extends Response
         return $this;
     }
 
-    
     /**
      * Create a new Zend\Http\Response\Stream object from a stream
      *
      * @param  string $responseString
      * @param  resource $stream
      * @return Stream
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\OutOfRangeException
      */
     public static function fromStream($responseString, $stream)
     {
-    
-        if (!is_resource($stream)) {
+        if (!is_resource($stream) || get_resource_type($stream) !== 'stream') {
             throw new Exception\InvalidArgumentException('A valid stream is required');
         }
 
         $headerComplete = false;
         $headersString  = '';
-        
-        $responseArray = explode("\n",$responseString);
+
+        $responseArray = explode("\n", $responseString);
 
         while (count($responseArray)) {
-            $nextLine = array_shift($responseArray);
-            $headersString .= $nextLine."\n";
+            $nextLine        = array_shift($responseArray);
+            $headersString  .= $nextLine."\n";
             $nextLineTrimmed = trim($nextLine);
-            if ($nextLineTrimmed == "") {
+            if ($nextLineTrimmed == '') {
                 $headerComplete = true;
                 break;
             }
-            
         }
-        
+
         if (!$headerComplete) {
             while (false !== ($nextLine = fgets($stream))) {
-                
+
                 $headersString .= trim($nextLine)."\r\n";
                 if ($nextLine == "\r\n" || $nextLine == "\n") {
                     $headerComplete = true;
                     break;
                 }
             }
-        } 
+        }
 
         if (!$headerComplete) {
             throw new Exception\OutOfRangeException('End of header not found');
         }
-            
+
+        /** @var Stream $response  */
         $response = static::fromString($headersString);
-    
+
         if (is_resource($stream)) {
             $response->setStream($stream);
         }
-        
+
         if (count($responseArray)) {
             $response->content = implode("\n", $responseArray);
-        } 
-    
-        $headers = $response->headers();
-        foreach($headers as $header) {
+        }
+
+        $headers = $response->getHeaders();
+        foreach ($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
                 $response->contentLength = (int) $header->getFieldValue();
                 if (strlen($response->content) > $response->contentLength) {
-                    throw new Exception\OutOfRangeException(
-                        sprintf('Too much content was extracted from the stream (%d instead of %d bytes)',
-                                    strlen($this->content), $this->contentLength));
+                    throw new Exception\OutOfRangeException(sprintf(
+                        'Too much content was extracted from the stream (%d instead of %d bytes)',
+                        strlen($response->content),
+                        $response->contentLength
+                    ));
                 }
                 break;
             }
@@ -210,8 +196,7 @@ class Stream extends Response
 
         return $response;
     }
-    
-    
+
     /**
      * Get the response body as string
      *
@@ -219,7 +204,7 @@ class Stream extends Response
      * should be in it's readable version - that is, after decoding it (if it
      * was decoded), deflating it (if it was gzip compressed), etc.
      *
-     * If you want to get the raw body (as transfered on wire) use
+     * If you want to get the raw body (as transferred on wire) use
      * $this->getRawBody() instead.
      *
      * @return string
@@ -233,7 +218,7 @@ class Stream extends Response
     }
 
     /**
-     * Get the raw response body (as transfered "on wire") as string
+     * Get the raw response body (as transferred "on wire") as string
      *
      * If the body is encoded (with Transfer-Encoding, not content-encoding -
      * IE "chunked" body), gzip compressed, etc. it will not be decoded.
@@ -248,7 +233,6 @@ class Stream extends Response
         return $this->content;
     }
 
-    
     /**
      * Read stream content and return it as string
      *
@@ -267,15 +251,15 @@ class Stream extends Response
         if (!is_resource($this->stream) || $bytes == 0) {
             return '';
         }
-    
+
         $this->content         .= stream_get_contents($this->stream, $bytes);
         $this->contentStreamed += strlen($this->content);
-    
+
         if ($this->contentLength == $this->contentStreamed) {
             $this->stream = null;
         }
     }
-        
+
     /**
      * Destructor
      */
@@ -285,7 +269,9 @@ class Stream extends Response
             $this->stream = null; //Could be listened by others
         }
         if ($this->cleanup) {
-            @unlink($this->stream_name);
+            ErrorHandler::start(E_WARNING);
+            unlink($this->streamName);
+            ErrorHandler::stop();
         }
     }
 }

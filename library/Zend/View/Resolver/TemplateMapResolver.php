@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Resolver;
 
-use ArrayIterator,
-    IteratorAggregate,
-    Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View\Exception,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Exception;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 {
@@ -46,9 +33,8 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      * Constructor
      *
      * Instantiate and optionally populate template map.
-     * 
-     * @param  array|Traversable $map 
-     * @return void
+     *
+     * @param  array|Traversable $map
      */
     public function __construct($map = array())
     {
@@ -57,7 +43,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * IteratorAggregate: return internal iterator
-     * 
+     *
      * @return Traversable
      */
     public function getIterator()
@@ -69,8 +55,9 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      * Set (overwrite) template map
      *
      * Maps should be arrays or Traversable objects with name => path pairs
-     * 
-     * @param  array|Traversable $map 
+     *
+     * @param  array|Traversable $map
+     * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
     public function setMap($map)
@@ -93,10 +80,11 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * Add an entry to the map
-     * 
-     * @param  string|array|Traversable $nameOrMap 
-     * @param  null|string $path 
-     * @return TemplateResolver
+     *
+     * @param  string|array|Traversable $nameOrMap
+     * @param  null|string $path
+     * @throws Exception\InvalidArgumentException
+     * @return TemplateMapResolver
      */
     public function add($nameOrMap, $path = null)
     {
@@ -109,7 +97,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: expects a string, array, or Traversable for the first argument; received "%s"',
                 __METHOD__,
-                (is_object($map) ? get_class($map) : gettype($map))
+                (is_object($nameOrMap) ? get_class($nameOrMap) : gettype($nameOrMap))
             ));
         }
 
@@ -126,8 +114,9 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * Merge internal map with provided map
-     * 
-     * @param  array|Traversable $map 
+     *
+     * @param  array|Traversable $map
+     * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
     public function merge($map)
@@ -150,8 +139,8 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * Does the resolver contain an entry for the given name?
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function has($name)
@@ -161,8 +150,8 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * Retrieve a template path by name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return false|string
      * @throws Exception\DomainException if no entry exists
      */
@@ -176,7 +165,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * Retrieve the template map
-     * 
+     *
      * @return array
      */
     public function getMap()
@@ -186,9 +175,9 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
 
     /**
      * Resolve a template/pattern name to a resource the renderer can consume
-     * 
-     * @param  string $name 
-     * @param  null|Renderer $renderer 
+     *
+     * @param  string $name
+     * @param  null|Renderer $renderer
      * @return string
      */
     public function resolve($name, Renderer $renderer = null)

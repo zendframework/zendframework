@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
- 
+
 namespace Zend\Feed\Writer\Extension\ITunes;
 
-use Zend\Feed\Writer,
-    Zend\Uri;
+use Zend\Feed\Writer;
+use Zend\Uri;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed
 {
@@ -36,37 +24,37 @@ class Feed
      *
      * @var array
      */
-    protected $_data = array();
-    
+    protected $data = array();
+
     /**
      * Encoding of all text values
      *
      * @var string
      */
-    protected $_encoding = 'UTF-8';
-    
+    protected $encoding = 'UTF-8';
+
     /**
      * Set feed encoding
-     * 
-     * @param  string $enc 
+     *
+     * @param  string $enc
      * @return Feed
      */
     public function setEncoding($enc)
     {
-        $this->_encoding = $enc;
+        $this->encoding = $enc;
         return $this;
     }
-    
+
     /**
      * Get feed encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
-    
+
     /**
      * Set a block value of "yes" or "no". You may also set an empty string.
      *
@@ -84,14 +72,14 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
         }
-        $this->_data['block'] = $value;
+        $this->data['block'] = $value;
         return $this;
     }
-    
+
     /**
      * Add feed authors
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Feed
      */
     public function addItunesAuthors(array $values)
@@ -101,11 +89,11 @@ class Feed
         }
         return $this;
     }
-    
+
     /**
      * Add feed author
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -115,24 +103,24 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
-        if (!isset($this->_data['authors'])) {
-            $this->_data['authors'] = array();
+        if (!isset($this->data['authors'])) {
+            $this->data['authors'] = array();
         }
-        $this->_data['authors'][] = $value;   
+        $this->data['authors'][] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed categories
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesCategories(array $values)
     {
-        if (!isset($this->_data['categories'])) {
-            $this->_data['categories'] = array();
+        if (!isset($this->data['categories'])) {
+            $this->data['categories'] = array();
         }
         foreach ($values as $key=>$value) {
             if (!is_array($value)) {
@@ -140,29 +128,29 @@ class Feed
                     throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                     . ' contain a maximum of 255 characters each');
                 }
-                $this->_data['categories'][] = $value;
+                $this->data['categories'][] = $value;
             } else {
                 if (iconv_strlen($key, $this->getEncoding()) > 255) {
                     throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                     . ' contain a maximum of 255 characters each');
                 }
-                $this->_data['categories'][$key] = array();
+                $this->data['categories'][$key] = array();
                 foreach ($value as $val) {
                     if (iconv_strlen($val, $this->getEncoding()) > 255) {
                         throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                         . ' contain a maximum of 255 characters each');
                     }
-                    $this->_data['categories'][$key][] = $val;
-                } 
+                    $this->data['categories'][$key][] = $val;
+                }
             }
         }
         return $this;
     }
-    
+
     /**
      * Set feed image (icon)
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -177,14 +165,14 @@ class Feed
             . ' use file extension "jpg" or "png" which must be the last three'
             . ' characters of the URI (i.e. no query string or fragment)');
         }
-        $this->_data['image'] = $value;
+        $this->data['image'] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed cumulative duration
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -198,14 +186,14 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "duration" may only'
             . ' be of a specified [[HH:]MM:]SS format');
         }
-        $this->_data['duration'] = $value;
+        $this->data['duration'] = $value;
         return $this;
     }
-    
+
     /**
      * Set "explicit" flag
-     * 
-     * @param  bool $value 
+     *
+     * @param  bool $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -215,14 +203,14 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }
-        $this->_data['explicit'] = $value;
+        $this->data['explicit'] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed keywords
-     * 
-     * @param  array $value 
+     *
+     * @param  array $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -238,14 +226,14 @@ class Feed
             . ' have a concatenated length of 255 chars where terms are delimited'
             . ' by a comma');
         }
-        $this->_data['keywords'] = $value;
+        $this->data['keywords'] = $value;
         return $this;
     }
-    
+
     /**
      * Set new feed URL
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -255,28 +243,28 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "newFeedUrl" may only'
             . ' be a valid URI/IRI');
         }
-        $this->_data['newFeedUrl'] = $value;
+        $this->data['newFeedUrl'] = $value;
         return $this;
     }
-    
+
     /**
      * Add feed owners
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Feed
      */
     public function addItunesOwners(array $values)
     {
         foreach ($values as $value) {
-            $this->addItunesOwner($value); 
+            $this->addItunesOwner($value);
         }
         return $this;
     }
-    
+
     /**
      * Add feed owner
-     * 
-     * @param  string $value 
+     *
+     * @param  array $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -292,17 +280,17 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "owner" may only'
             . ' contain a maximum of 255 characters each for "name" and "email"');
         }
-        if (!isset($this->_data['owners'])) {
-            $this->_data['owners'] = array();
+        if (!isset($this->data['owners'])) {
+            $this->data['owners'] = array();
         }
-        $this->_data['owners'][] = $value;
+        $this->data['owners'][] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed subtitle
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -312,14 +300,14 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "subtitle" may only'
             . ' contain a maximum of 255 characters');
         }
-        $this->_data['subtitle'] = $value;
+        $this->data['subtitle'] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed summary
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -329,15 +317,15 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "summary" may only'
             . ' contain a maximum of 4000 characters');
         }
-        $this->_data['summary'] = $value;
+        $this->data['summary'] = $value;
         return $this;
     }
-    
+
     /**
      * Overloading: proxy to internal setters
-     * 
-     * @param  string $method 
-     * @param  array $params 
+     *
+     * @param  string $method
+     * @param  array $params
      * @return mixed
      * @throws Writer\Exception\BadMethodCallException
      */
@@ -351,9 +339,9 @@ class Feed
                 'invalid method: ' . $method
             );
         }
-        if (!array_key_exists($point, $this->_data) || empty($this->_data[$point])) {
+        if (!array_key_exists($point, $this->data) || empty($this->data[$point])) {
             return null;
         }
-        return $this->_data[$point];
+        return $this->data[$point];
     }
 }

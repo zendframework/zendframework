@@ -1,30 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Memory
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Memory
  */
 
 namespace Zend\Memory;
 
-use Zend\Cache\Storage\ClearByNamespaceInterface;
-
-use Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage,
-    Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
+use Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
+use Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
  * Memory manager
@@ -34,8 +22,6 @@ use Zend\Cache\Storage\StorageInterface as CacheStorage,
  *
  * @category   Zend
  * @package    Zend_Memory
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MemoryManager
 {
@@ -44,7 +30,7 @@ class MemoryManager
      *
      * @var CacheStorage
      */
-    private $_cache = null;
+    private $cache = null;
 
     /**
      * Memory grow limit.
@@ -53,7 +39,7 @@ class MemoryManager
      *
      * @var integer
      */
-    private $_memoryLimit = -1;
+    private $memoryLimit = -1;
 
     /**
      * Minimum value size to be swapped.
@@ -62,21 +48,21 @@ class MemoryManager
      *
      * @var integer
      */
-    private $_minSize = 16384;
+    private $minSize = 16384;
 
     /**
      * Overall size of memory, used by values
      *
      * @var integer
      */
-    private $_memorySize = 0;
+    private $memorySize = 0;
 
     /**
      * Id for next Zend_Memory object
      *
      * @var integer
      */
-    private $_nextId = 0;
+    private $nextId = 0;
 
     /**
      * List of candidates to unload
@@ -90,7 +76,7 @@ class MemoryManager
      *
      * @var array
      */
-    private $_unloadCandidates = array();
+    private $unloadCandidates = array();
 
     /**
      * List of object sizes.
@@ -101,7 +87,7 @@ class MemoryManager
      *
      * @var array
      */
-    private $_sizes = array();
+    private $sizes = array();
 
     /**
      * Last modified object
@@ -113,14 +99,14 @@ class MemoryManager
      *
      * @var \Zend\Memory\Container\Movable
      */
-    private $_lastModified = null;
+    private $lastModified = null;
 
     /**
      * Unique memory manager id
      *
      * @var integer
      */
-    private $_managerId;
+    private $managerId;
 
     /**
      * This function is intended to generate unique id, used by memory manager
@@ -129,11 +115,11 @@ class MemoryManager
     {
         /**
          * @todo !!!
-         * uniqid() php function doesn't really garantee the id to be unique
+         * uniqid() php function doesn't really guarantee the id to be unique
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
-        $this->_managerId = str_replace('.', '_', uniqid('ZendMemManager', true)) . '_';
+        $this->managerId = str_replace('.', '_', uniqid('ZendMemManager', true)) . '_';
     }
 
     /**
@@ -142,7 +128,6 @@ class MemoryManager
      * If cache is not specified, then memory objects are never swapped
      *
      * @param  CacheStorage $cache
-     * @return void
      */
     public function __construct(CacheStorage $cache = null)
     {
@@ -150,28 +135,27 @@ class MemoryManager
             return;
         }
 
-        $this->_cache = $cache;
+        $this->cache = $cache;
         $this->_generateMemManagerId();
 
         $memoryLimitStr = trim(ini_get('memory_limit'));
         if ($memoryLimitStr != ''  &&  $memoryLimitStr != -1) {
-            $this->_memoryLimit = (integer)$memoryLimitStr;
+            $this->memoryLimit = (integer)$memoryLimitStr;
             switch (strtolower($memoryLimitStr[strlen($memoryLimitStr)-1])) {
                 case 'g':
-                    $this->_memoryLimit *= 1024;
-                    // Break intentionally omitted
+                    $this->memoryLimit *= 1024;
+                    // no break
                 case 'm':
-                    $this->_memoryLimit *= 1024;
-                    // Break intentionally omitted
+                    $this->memoryLimit *= 1024;
+                    // no break
                 case 'k':
-                    $this->_memoryLimit *= 1024;
+                    $this->memoryLimit *= 1024;
                     break;
-
                 default:
                     break;
             }
 
-            $this->_memoryLimit = (int)($this->_memoryLimit*2/3);
+            $this->memoryLimit = (int) ($this->memoryLimit*2/3);
         } // No limit otherwise
     }
 
@@ -182,11 +166,11 @@ class MemoryManager
      */
     public function __destruct()
     {
-        if ($this->_cache !== null) {
-            if ($this->_cache instanceof ClearByNamespaceCacheStorage) {
-                $this->_cache->clearByNamespace($this->_cache->getOptions()->getNamespace());
-            } elseif ($this->_cache instanceof FlushableCacheStorage) {
-                $this->_cache->flush();
+        if ($this->cache !== null) {
+            if ($this->cache instanceof ClearByNamespaceCacheStorage) {
+                $this->cache->clearByNamespace($this->cache->getOptions()->getNamespace());
+            } elseif ($this->cache instanceof FlushableCacheStorage) {
+                $this->cache->flush();
             }
         }
     }
@@ -198,7 +182,7 @@ class MemoryManager
      */
     public function setMemoryLimit($newLimit)
     {
-        $this->_memoryLimit = $newLimit;
+        $this->memoryLimit = $newLimit;
 
         $this->_swapCheck();
     }
@@ -210,7 +194,7 @@ class MemoryManager
      */
     public function getMemoryLimit()
     {
-        return $this->_memoryLimit;
+        return $this->memoryLimit;
     }
 
     /**
@@ -220,7 +204,7 @@ class MemoryManager
      */
     public function setMinSize($newSize)
     {
-        $this->_minSize = $newSize;
+        $this->minSize = $newSize;
     }
 
     /**
@@ -230,15 +214,15 @@ class MemoryManager
      */
     public function getMinSize()
     {
-        return $this->_minSize;
+        return $this->minSize;
     }
 
     /**
      * Create new Zend_Memory value container
      *
      * @param string $value
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
     public function create($value = '')
     {
@@ -250,8 +234,8 @@ class MemoryManager
      * locked in memory
      *
      * @param string $value
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
     public function createLocked($value = '')
     {
@@ -262,15 +246,15 @@ class MemoryManager
      * Create new Zend_Memory object
      *
      * @param string $value
-     * @param boolean $locked
-     * @return \Zend\Memory\Container
-     * @throws \Zend\Memory\Exception
+     * @param  bool $locked
+     * @return \Zend\Memory\Container\ContainerInterface
+     * @throws \Zend\Memory\Exception\ExceptionInterface
      */
     private function _create($value, $locked)
     {
-        $id = $this->_nextId++;
+        $id = $this->nextId++;
 
-        if ($locked  ||  ($this->_cache === null) /* Use only memory locked objects if backend is not specified */) {
+        if ($locked  ||  ($this->cache === null) /* Use only memory locked objects if backend is not specified */) {
             return new Container\Locked($value);
         }
 
@@ -280,9 +264,9 @@ class MemoryManager
         $valueObject = new Container\Movable($this, $id, $value);
 
         // Store last object size as 0
-        $this->_sizes[$id] = 0;
+        $this->sizes[$id] = 0;
         // prepare object for next modifications
-        $this->_lastModified = $valueObject;
+        $this->lastModified = $valueObject;
 
         return new Container\AccessController($valueObject);
     }
@@ -293,24 +277,25 @@ class MemoryManager
      * Used by Memory container destroy() method
      *
      * @internal
+     * @param Container\Movable $container
      * @param integer $id
-     * @return \Zend\Memory\Container\AbstractContainer
+     * @return null
      */
     public function unlink(Container\Movable $container, $id)
     {
-        if ($this->_lastModified === $container) {
+        if ($this->lastModified === $container) {
             // Drop all object modifications
-            $this->_lastModified = null;
-            unset($this->_sizes[$id]);
+            $this->lastModified = null;
+            unset($this->sizes[$id]);
             return;
         }
 
-        if (isset($this->_unloadCandidates[$id])) {
-            unset($this->_unloadCandidates[$id]);
+        if (isset($this->unloadCandidates[$id])) {
+            unset($this->unloadCandidates[$id]);
         }
 
-        $this->_memorySize -= $this->_sizes[$id];
-        unset($this->_sizes[$id]);
+        $this->memorySize -= $this->sizes[$id];
+        unset($this->sizes[$id]);
     }
 
     /**
@@ -328,22 +313,22 @@ class MemoryManager
          * several times depending on used algorithm. So we have to use this check
          * to optimize this case.
          */
-        if ($container === $this->_lastModified) {
+        if ($container === $this->lastModified) {
             return;
         }
 
         // Remove just updated object from list of candidates to unload
-        if( isset($this->_unloadCandidates[$id])) {
-            unset($this->_unloadCandidates[$id]);
+        if ( isset($this->unloadCandidates[$id])) {
+            unset($this->unloadCandidates[$id]);
         }
 
         // Reduce used memory mark
-        $this->_memorySize -= $this->_sizes[$id];
+        $this->memorySize -= $this->sizes[$id];
 
         // Commit changes of previously modified object if necessary
         $this->_commit();
 
-        $this->_lastModified = $container;
+        $this->lastModified = $container;
     }
 
     /**
@@ -351,20 +336,20 @@ class MemoryManager
      */
     private function _commit()
     {
-        if (($container = $this->_lastModified) === null) {
+        if (($container = $this->lastModified) === null) {
             return;
         }
 
-        $this->_lastModified = null;
+        $this->lastModified = null;
 
         $id = $container->getId();
 
         // Calculate new object size and increase used memory size by this value
-        $this->_memorySize += ($this->_sizes[$id] = strlen($container->getRef()));
+        $this->memorySize += ($this->sizes[$id] = strlen($container->getRef()));
 
-        if ($this->_sizes[$id] > $this->_minSize) {
+        if ($this->sizes[$id] > $this->minSize) {
             // Move object to "unload candidates list"
-            $this->_unloadCandidates[$id] = $container;
+            $this->unloadCandidates[$id] = $container;
         }
 
         $container->startTrace();
@@ -375,22 +360,22 @@ class MemoryManager
     /**
      * Check and swap objects if necessary
      *
-     * @throws Zend_MemoryException
+     * @throws Exception\RuntimeException
      */
     private function _swapCheck()
     {
-        if ($this->_memoryLimit < 0  ||  $this->_memorySize < $this->_memoryLimit) {
+        if ($this->memoryLimit < 0  ||  $this->memorySize < $this->memoryLimit) {
             // Memory limit is not reached
             // Do nothing
             return;
         }
 
         // walk through loaded objects in access history order
-        foreach ($this->_unloadCandidates as $id => $container) {
+        foreach ($this->unloadCandidates as $id => $container) {
             $this->_swap($container, $id);
-            unset($this->_unloadCandidates[$id]);
+            unset($this->unloadCandidates[$id]);
 
-            if ($this->_memorySize < $this->_memoryLimit) {
+            if ($this->memorySize < $this->memoryLimit) {
                 // We've swapped enough objects
                 return;
             }
@@ -401,7 +386,7 @@ class MemoryManager
 
     /**
      * Swap object data to disk
-     * Actualy swaps data or only unloads it from memory,
+     * Actually swaps data or only unloads it from memory,
      * if object is not changed since last swap
      *
      * @param \Zend\Memory\Container\Movable $container
@@ -414,10 +399,10 @@ class MemoryManager
         }
 
         if (!$container->isSwapped()) {
-            $this->_cache->setItem($this->_managerId . $id, $container->getRef());
+            $this->cache->setItem($this->managerId . $id, $container->getRef());
         }
 
-        $this->_memorySize -= $this->_sizes[$id];
+        $this->memorySize -= $this->sizes[$id];
 
         $container->markAsSwapped();
         $container->unloadValue();
@@ -432,19 +417,19 @@ class MemoryManager
      */
     public function load(Container\Movable $container, $id)
     {
-        $value = $this->_cache->getItem($this->_managerId . $id);
+        $value = $this->cache->getItem($this->managerId . $id);
 
         // Try to swap other objects if necessary
         // (do not include specified object into check)
-        $this->_memorySize += strlen($value);
+        $this->memorySize += strlen($value);
         $this->_swapCheck();
 
-        // Add loaded obect to the end of loaded objects list
+        // Add loaded object to the end of loaded objects list
         $container->setValue($value);
 
-        if ($this->_sizes[$id] > $this->_minSize) {
+        if ($this->sizes[$id] > $this->minSize) {
             // Add object to the end of "unload candidates list"
-            $this->_unloadCandidates[$id] = $container;
+            $this->unloadCandidates[$id] = $container;
         }
     }
 }

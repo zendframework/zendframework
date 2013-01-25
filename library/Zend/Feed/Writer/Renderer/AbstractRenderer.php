@@ -1,23 +1,13 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
- 
+
 namespace Zend\Feed\Writer\Renderer;
 
 use DOMDocument;
@@ -27,8 +17,6 @@ use Zend\Feed\Writer;
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class AbstractRenderer
 {
@@ -36,64 +24,63 @@ class AbstractRenderer
      * Extensions
      * @var array
      */
-    protected $_extensions = array();
-    
+    protected $extensions = array();
+
     /**
-     * @var mixed
+     * @var Writer\AbstractFeed
      */
-    protected $_container = null;
+    protected $container = null;
 
     /**
      * @var DOMDocument
      */
-    protected $_dom = null;
+    protected $dom = null;
 
     /**
      * @var bool
      */
-    protected $_ignoreExceptions = false;
+    protected $ignoreExceptions = false;
 
     /**
      * @var array
      */
-    protected $_exceptions = array();
-    
+    protected $exceptions = array();
+
     /**
      * Encoding of all text values
      *
      * @var string
      */
-    protected $_encoding = 'UTF-8';
-    
+    protected $encoding = 'UTF-8';
+
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
      * when last exported.
      *
      * @var string
      */
-    protected $_type = null;
-    
+    protected $type = null;
+
     /**
      * @var DOMElement
      */
-    protected $_rootElement = null;
+    protected $rootElement = null;
 
     /**
      * Constructor
-     * 
-     * @param  mixed $container 
-     * @return void
+     *
+     * @param Writer\AbstractFeed $container
      */
     public function __construct($container)
     {
-        $this->_container = $container;
+        $this->container = $container;
         $this->setType($container->getType());
         $this->_loadExtensions();
     }
-    
+
     /**
      * Save XML to string
-     * 
+     *
      * @return string
      */
     public function saveXml()
@@ -103,17 +90,17 @@ class AbstractRenderer
 
     /**
      * Get DOM document
-     * 
+     *
      * @return DOMDocument
      */
     public function getDomDocument()
     {
-        return $this->_dom;
+        return $this->dom;
     }
 
     /**
      * Get document element from DOM
-     * 
+     *
      * @return DOMElement
      */
     public function getElement()
@@ -123,40 +110,40 @@ class AbstractRenderer
 
     /**
      * Get data container of items being rendered
-     * 
-     * @return mixed
+     *
+     * @return Writer\AbstractFeed
      */
     public function getDataContainer()
     {
-        return $this->_container;
+        return $this->container;
     }
-    
+
     /**
      * Set feed encoding
-     * 
-     * @param  string $enc 
+     *
+     * @param  string $enc
      * @return AbstractRenderer
      */
     public function setEncoding($enc)
     {
-        $this->_encoding = $enc;
+        $this->encoding = $enc;
         return $this;
     }
-    
+
     /**
      * Get feed encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
      * Indicate whether or not to ignore exceptions
-     * 
-     * @param  bool $bool 
+     *
+     * @param  bool $bool
      * @return AbstractRenderer
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -165,20 +152,20 @@ class AbstractRenderer
         if (!is_bool($bool)) {
             throw new Writer\Exception\InvalidArgumentException('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
-        $this->_ignoreExceptions = $bool;
+        $this->ignoreExceptions = $bool;
         return $this;
     }
 
     /**
      * Get exception list
-     * 
+     *
      * @return array
      */
     public function getExceptions()
     {
-        return $this->_exceptions;
+        return $this->exceptions;
     }
-    
+
     /**
      * Set the current feed type being exported to "rss" or "atom". This allows
      * other objects to gracefully choose whether to execute or not, depending
@@ -188,9 +175,9 @@ class AbstractRenderer
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
-    
+
     /**
      * Retrieve the current or last feed type exported.
      *
@@ -198,9 +185,9 @@ class AbstractRenderer
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
-    
+
     /**
      * Sets the absolute root element for the XML feed being generated. This
      * helps simplify the appending of namespace declarations, but also ensures
@@ -211,9 +198,9 @@ class AbstractRenderer
      */
     public function setRootElement(DOMElement $root)
     {
-        $this->_rootElement = $root;
+        $this->rootElement = $root;
     }
-    
+
     /**
      * Retrieve the absolute root element for the XML feed being generated.
      *
@@ -221,9 +208,9 @@ class AbstractRenderer
      */
     public function getRootElement()
     {
-        return $this->_rootElement;
+        return $this->rootElement;
     }
-    
+
     /**
      * Load extensions from Zend_Feed_Writer
      *
@@ -232,6 +219,7 @@ class AbstractRenderer
     protected function _loadExtensions()
     {
         Writer\Writer::registerCoreExtensions();
+        $manager = Writer\Writer::getExtensionManager();
         $all = Writer\Writer::getExtensions();
         if (stripos(get_called_class(), 'entry')) {
             $exts = $all['entryRenderer'];
@@ -239,11 +227,10 @@ class AbstractRenderer
             $exts = $all['feedRenderer'];
         }
         foreach ($exts as $extension) {
-            $className = Writer\Writer::getPluginLoader()->getClassName($extension);
-            $this->_extensions[$extension] = new $className(
-                $this->getDataContainer()
-            );
-            $this->_extensions[$extension]->setEncoding($this->getEncoding());
+            $plugin = $manager->get($extension);
+            $plugin->setDataContainer($this->getDataContainer());
+            $plugin->setEncoding($this->getEncoding());
+            $this->extensions[$extension] = $plugin;
         }
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -30,10 +30,9 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Constructor
-     * 
-     * @param  null|array $predicates 
-     * @param  string $defaultCombination 
-     * @return void
+     *
+     * @param  null|array $predicates
+     * @param  string $defaultCombination
      */
     public function __construct(array $predicates = null, $defaultCombination = self::COMBINED_BY_AND)
     {
@@ -47,9 +46,9 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Add predicate to set
-     * 
-     * @param  PredicateInterface $predicate 
-     * @param  string $combination 
+     *
+     * @param  PredicateInterface $predicate
+     * @param  string $combination
      * @return PredicateSet
      */
     public function addPredicate(PredicateInterface $predicate, $combination = null)
@@ -79,8 +78,8 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Add predicate using OR operator
-     * 
-     * @param  PredicateInterface $predicate 
+     *
+     * @param  PredicateInterface $predicate
      * @return PredicateSet
      */
     public function orPredicate(PredicateInterface $predicate)
@@ -91,8 +90,8 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Add predicate using AND operator
-     * 
-     * @param  PredicateInterface $predicate 
+     *
+     * @param  PredicateInterface $predicate
      * @return PredicateSet
      */
     public function andPredicate(PredicateInterface $predicate)
@@ -109,7 +108,7 @@ class PredicateSet implements PredicateInterface, Countable
     public function getExpressionData()
     {
         $parts = array();
-        for ($i = 0; $i < count($this->predicates); $i++) {
+        for ($i = 0, $count = count($this->predicates); $i < $count; $i++) {
 
             /** @var $predicate PredicateInterface */
             $predicate = $this->predicates[$i][1];
@@ -133,12 +132,11 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Get count of attached predicates
-     * 
+     *
      * @return int
      */
     public function count()
     {
         return count($this->predicates);
     }
-
 }

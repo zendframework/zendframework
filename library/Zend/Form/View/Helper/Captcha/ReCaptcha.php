@@ -1,27 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper\Captcha;
 
-use Traversable;
 use Zend\Captcha\ReCaptcha as CaptchaAdapter;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
@@ -31,31 +19,27 @@ use Zend\Form\View\Helper\FormInput;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ReCaptcha extends FormInput
 {
     /**
      * Render ReCaptcha form elements
      *
-     * @param  ElementInterface $element 
+     * @param  ElementInterface $element
+     * @throws Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
     {
         $attributes = $element->getAttributes();
-        if (!isset($attributes['captcha']) 
-            || !$attributes['captcha'] instanceof CaptchaAdapter
-        ) {
+        $captcha = $element->getCaptcha();
+
+        if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has a "captcha" attribute implementing Zend\Captcha\AdapterInterface; none found',
                 __METHOD__
             ));
         }
-
-        $captcha = $attributes['captcha'];
-        unset($attributes['captcha']);
 
         $name          = $element->getName();
         $id            = isset($attributes['id']) ? $attributes['id'] : $name;
@@ -75,8 +59,8 @@ class ReCaptcha extends FormInput
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function __invoke(ElementInterface $element = null)
@@ -90,11 +74,11 @@ class ReCaptcha extends FormInput
 
     /**
      * Render hidden input elements for the challenge and response
-     * 
-     * @param  string $challengeName 
-     * @param  string $challengeId 
-     * @param  string $responseName 
-     * @param  string $responseId 
+     *
+     * @param  string $challengeName
+     * @param  string $challengeId
+     * @param  string $responseName
+     * @param  string $responseId
      * @return string
      */
     protected function renderHiddenInput($challengeName, $challengeId, $responseName, $responseId)
@@ -119,16 +103,18 @@ class ReCaptcha extends FormInput
 
     /**
      * Create the JS events used to bind the challenge and response values to the submitted form.
-     * 
-     * @param  string $challengeId 
-     * @param  string $responseId 
+     *
+     * @param  string $challengeId
+     * @param  string $responseId
      * @return string
      */
     protected function renderJsEvents($challengeId, $responseId)
     {
+        $elseif = 'else if'; // php-cs-fixer bug
         $js =<<<EOJ
 <script type="text/javascript" language="JavaScript">
-function windowOnLoad(fn) {
+function windowOnLoad(fn)
+{
     var old = window.onload;
     window.onload = function() {
         if (old) {
@@ -137,14 +123,15 @@ function windowOnLoad(fn) {
         fn();
     };
 }
-function zendBindEvent(el, eventName, eventHandler) {
-    if (el.addEventListener){
+function zendBindEvent(el, eventName, eventHandler)
+{
+    if (el.addEventListener) {
         el.addEventListener(eventName, eventHandler, false);
-    } else if (el.attachEvent){
+    } $elseif (el.attachEvent) {
         el.attachEvent('on'+eventName, eventHandler);
     }
 }
-windowOnLoad(function(){
+windowOnLoad(function() {
     zendBindEvent(
         document.getElementById("$challengeId").form,
         'submit',

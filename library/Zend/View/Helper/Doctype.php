@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-use Zend\View\Exception,
-    Zend\Registry,
-    ArrayObject;
+use ArrayObject;
+use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving the doctype
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Doctype extends AbstractHelper
 {
@@ -43,6 +29,7 @@ class Doctype extends AbstractHelper
     const XHTML1_TRANSITIONAL = 'XHTML1_TRANSITIONAL';
     const XHTML1_FRAMESET     = 'XHTML1_FRAMESET';
     const XHTML1_RDFA         = 'XHTML1_RDFA';
+    const XHTML1_RDFA11       = 'XHTML1_RDFA11';
     const XHTML_BASIC1        = 'XHTML_BASIC1';
     const XHTML5              = 'XHTML5';
     const HTML4_STRICT        = 'HTML4_STRICT';
@@ -54,22 +41,59 @@ class Doctype extends AbstractHelper
     /**#@-*/
 
     /**
+     * @var ArrayObject Shared doctypes to use throughout all instances
+     */
+    protected static $registeredDoctypes;
+
+    /**
      * Default DocType
      * @var string
      */
-    protected $_defaultDoctype = self::HTML4_LOOSE;
+    protected $defaultDoctype = self::HTML4_LOOSE;
 
     /**
      * Registry containing current doctype and mappings
-     * @var \ArrayObject
+     * @var ArrayObject
      */
-    protected $_registry;
+    protected $registry;
 
     /**
-     * Registry key in which helper is stored
-     * @var string
+     * Register the default doctypes we understand
+     *
+     * @return void
      */
-    protected $_regKey = 'Zend_View_Helper_Doctype';
+    protected static function registerDefaultDoctypes()
+    {
+        static::$registeredDoctypes = new ArrayObject(array(
+            'doctypes' => array(
+                self::XHTML11             => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
+                self::XHTML1_STRICT       => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
+                self::XHTML1_TRANSITIONAL => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
+                self::XHTML1_FRAMESET     => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
+                self::XHTML1_RDFA         => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">',
+                self::XHTML1_RDFA11       => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.1//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd">',
+                self::XHTML_BASIC1        => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">',
+                self::XHTML5              => '<!DOCTYPE html>',
+                self::HTML4_STRICT        => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
+                self::HTML4_LOOSE         => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
+                self::HTML4_FRAMESET      => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
+                self::HTML5               => '<!DOCTYPE html>',
+            ),
+        ));
+    }
+
+    /**
+     * Unset the static doctype registry
+     *
+     * Mainly useful for testing purposes. Sets {@link $registeredDoctypes} to
+     * a null value.
+     *
+     * @return void
+     */
+    public static function unsetDoctypeRegistry()
+    {
+        static::$registeredDoctypes = null;
+    }
 
     /**
      * Constructor
@@ -78,28 +102,11 @@ class Doctype extends AbstractHelper
      */
     public function __construct()
     {
-        if (!Registry::isRegistered($this->_regKey)) {
-            $this->_registry = new ArrayObject(array(
-                'doctypes' => array(
-                    self::XHTML11             => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
-                    self::XHTML1_STRICT       => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
-                    self::XHTML1_TRANSITIONAL => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
-                    self::XHTML1_FRAMESET     => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
-                    self::XHTML1_RDFA         => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">',
-                    self::XHTML_BASIC1        => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">',
-                    self::XHTML5              => '<!DOCTYPE html>',
-                    self::HTML4_STRICT        => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
-                    self::HTML4_LOOSE         => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
-                    self::HTML4_FRAMESET      => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
-                    self::HTML5               => '<!DOCTYPE html>',
-                )
-            ));
-
-            Registry::set($this->_regKey, $this->_registry);
-            $this->setDoctype($this->_defaultDoctype);
-        } else {
-            $this->_registry = Registry::get($this->_regKey);
+        if (null === static::$registeredDoctypes) {
+            static::registerDefaultDoctypes();
+            $this->setDoctype($this->defaultDoctype);
         }
+        $this->registry = static::$registeredDoctypes;
     }
 
     /**
@@ -119,6 +126,7 @@ class Doctype extends AbstractHelper
                 case self::XHTML1_FRAMESET:
                 case self::XHTML_BASIC1:
                 case self::XHTML1_RDFA:
+                case self::XHTML1_RDFA11:
                 case self::XHTML5:
                 case self::HTML4_STRICT:
                 case self::HTML4_LOOSE:
@@ -136,7 +144,7 @@ class Doctype extends AbstractHelper
                         $type = self::CUSTOM;
                     }
                     $this->setDoctype($type);
-                    $this->_registry['doctypes'][$type] = $doctype;
+                    $this->registry['doctypes'][$type] = $doctype;
                     break;
             }
         }
@@ -152,7 +160,7 @@ class Doctype extends AbstractHelper
      */
     public function setDoctype($doctype)
     {
-        $this->_registry['doctype'] = $doctype;
+        $this->registry['doctype'] = $doctype;
         return $this;
     }
 
@@ -163,7 +171,10 @@ class Doctype extends AbstractHelper
      */
     public function getDoctype()
     {
-        return $this->_registry['doctype'];
+        if (!isset($this->registry['doctype'])) {
+            $this->setDoctype($this->defaultDoctype);
+        }
+        return $this->registry['doctype'];
     }
 
     /**
@@ -173,13 +184,13 @@ class Doctype extends AbstractHelper
      */
     public function getDoctypes()
     {
-        return $this->_registry['doctypes'];
+        return $this->registry['doctypes'];
     }
 
     /**
      * Is doctype XHTML?
      *
-     * @return boolean
+     * @return bool
      */
     public function isXhtml()
     {
@@ -189,7 +200,7 @@ class Doctype extends AbstractHelper
     /**
      * Is doctype HTML5? (HeadMeta uses this for validation)
      *
-     * @return boolean
+     * @return bool
      */
     public function isHtml5()
     {
@@ -199,11 +210,11 @@ class Doctype extends AbstractHelper
     /**
      * Is doctype RDFa?
      *
-     * @return boolean
+     * @return bool
      */
     public function isRdfa()
     {
-        return (stristr($this->getDoctype(), 'rdfa') ? true : false);
+        return ($this->isHtml5() || stristr($this->getDoctype(), 'rdfa') ? true : false);
     }
 
     /**

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -24,29 +24,28 @@ class Between implements PredicateInterface
 
     /**
      * Constructor
-     * 
-     * @param  string $identifier 
-     * @param  string $minValue 
-     * @param  string $maxValue 
-     * @return void
+     *
+     * @param  string $identifier
+     * @param  int|float|string $minValue
+     * @param  int|float|string $maxValue
      */
     public function __construct($identifier = null, $minValue = null, $maxValue = null)
     {
         if ($identifier) {
             $this->setIdentifier($identifier);
         }
-        if ($minValue) {
+        if (!is_null($minValue)) {
             $this->setMinValue($minValue);
         }
-        if ($maxValue) {
+        if (!is_null($maxValue)) {
             $this->setMaxValue($maxValue);
         }
     }
 
     /**
      * Set identifier for comparison
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @return Between
      */
     public function setIdentifier($identifier)
@@ -57,7 +56,7 @@ class Between implements PredicateInterface
 
     /**
      * Get identifier of comparison
-     * 
+     *
      * @return null|string
      */
     public function getIdentifier()
@@ -67,8 +66,8 @@ class Between implements PredicateInterface
 
     /**
      * Set minimum boundary for comparison
-     * 
-     * @param  int|float|string $minValue 
+     *
+     * @param  int|float|string $minValue
      * @return Between
      */
     public function setMinValue($minValue)
@@ -79,7 +78,7 @@ class Between implements PredicateInterface
 
     /**
      * Get minimum boundary for comparison
-     * 
+     *
      * @return null|int|float|string
      */
     public function getMinValue()
@@ -89,8 +88,8 @@ class Between implements PredicateInterface
 
     /**
      * Set maximum boundary for comparison
-     * 
-     * @param  int|float|string $maxValue 
+     *
+     * @param  int|float|string $maxValue
      * @return Between
      */
     public function setMaxValue($maxValue)
@@ -101,7 +100,7 @@ class Between implements PredicateInterface
 
     /**
      * Get maximum boundary for comparison
-     * 
+     *
      * @return null|int|float|string
      */
     public function getMaxValue()
@@ -111,8 +110,8 @@ class Between implements PredicateInterface
 
     /**
      * Set specification string to use in forming SQL predicate
-     * 
-     * @param  string $specification 
+     *
+     * @param  string $specification
      * @return Between
      */
     public function setSpecification($specification)
@@ -123,7 +122,7 @@ class Between implements PredicateInterface
 
     /**
      * Get specification string to use in forming SQL predicate
-     * 
+     *
      * @return string
      */
     public function getSpecification()

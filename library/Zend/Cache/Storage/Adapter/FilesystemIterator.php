@@ -1,42 +1,28 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use GlobIterator,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\IteratorInterface;
+use GlobIterator;
+use Zend\Cache\Storage\IteratorInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FilesystemIterator implements IteratorInterface
 {
 
     /**
-     * The apc storage intance
+     * The apc storage instance
      *
      * @var Apc
      */
@@ -76,7 +62,6 @@ class FilesystemIterator implements IteratorInterface
      * @param Filesystem  $storage
      * @param string      $path
      * @param string      $prefix
-     * @return void
      */
     public function __construct(Filesystem $storage, $path, $prefix)
     {
@@ -89,7 +74,7 @@ class FilesystemIterator implements IteratorInterface
     /**
      * Get storage instance
      *
-     * @return StorageInterface
+     * @return Filesystem
      */
     public function getStorage()
     {
@@ -120,10 +105,10 @@ class FilesystemIterator implements IteratorInterface
 
     /* Iterator */
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -142,10 +127,10 @@ class FilesystemIterator implements IteratorInterface
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
      */
     public function key()
     {
@@ -165,10 +150,10 @@ class FilesystemIterator implements IteratorInterface
         $this->globIterator->next();
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return bool
      */
     public function valid()
     {
@@ -182,10 +167,10 @@ class FilesystemIterator implements IteratorInterface
         }
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

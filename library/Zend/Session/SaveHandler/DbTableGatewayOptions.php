@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-webat this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Session
  */
 
 namespace Zend\Session\SaveHandler;
 
 use Zend\Session\Exception;
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * DbTableGateway Save Handler Options
@@ -29,22 +19,26 @@ use Zend\Stdlib\Options;
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbTableGatewayOptions extends Options
+class DbTableGatewayOptions extends AbstractOptions
 {
-    /**
-     * Data Column
-     * @var string
-     */
-    protected $dataColumn = 'data';
-
     /**
      * ID Column
      * @var string
      */
     protected $idColumn = 'id';
+
+    /**
+     * Name Column
+     * @var string
+     */
+    protected $nameColumn = 'name';
+
+    /**
+     * Data Column
+     * @var string
+     */
+    protected $dataColumn = 'data';
 
     /**
      * Lifetime Column
@@ -58,20 +52,59 @@ class DbTableGatewayOptions extends Options
      */
     protected $modifiedColumn = 'modified';
 
-    /**
-     * Name Column
-     * @var string
-     */
-    protected $nameColumn = 'name';
 
     /**
-     * Get Data Column
+     * Set Id Column
+     *
+     * @param string $idColumn
+     * @return DbTableGatewayOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setIdColumn($idColumn)
+    {
+        $idColumn = (string) $idColumn;
+        if (strlen($idColumn) === 0) {
+            throw new Exception\InvalidArgumentException('$idColumn must be a non-empty string');
+        }
+        $this->idColumn = $idColumn;
+        return $this;
+    }
+
+    /**
+     * Get Id Column
      *
      * @return string
      */
-    public function getDataColumn()
+    public function getIdColumn()
     {
-        return $this->dataColumn;
+        return $this->idColumn;
+    }
+
+    /**
+     * Set Name Column
+     *
+     * @param string $nameColumn
+     * @return DbTableGatewayOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setNameColumn($nameColumn)
+    {
+        $nameColumn = (string) $nameColumn;
+        if (strlen($nameColumn) === 0) {
+            throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
+        }
+        $this->nameColumn = $nameColumn;
+        return $this;
+    }
+
+    /**
+     * Get Name Column
+     *
+     * @return string
+     */
+    public function getNameColumn()
+    {
+        return $this->nameColumn;
     }
 
     /**
@@ -92,40 +125,13 @@ class DbTableGatewayOptions extends Options
     }
 
     /**
-     * Get Id Column
+     * Get Data Column
      *
      * @return string
      */
-    public function getIdColumn()
+    public function getDataColumn()
     {
-        return $this->idColumn;
-    }
-
-    /**
-     * Set Id Column
-     *
-     * @param string $idColumn
-     * @return DbTableGatewayOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setIdColumn($idColumn)
-    {
-        $idColumn = (string) $idColumn;
-        if (strlen($idColumn) === 0) {
-            throw new Exception\InvalidArgumentException('$idColumn must be a non-empty string');
-        }
-        $this->idColumn = $idColumn;
-        return $this;
-    }
-
-    /**
-     * Get Lifetime Column
-     *
-     * @return string
-     */
-    public function getLifetimeColumn()
-    {
-        return $this->lifetimeColumn;
+        return $this->dataColumn;
     }
 
     /**
@@ -146,18 +152,18 @@ class DbTableGatewayOptions extends Options
     }
 
     /**
-     * Get Modified Column
+     * Get Lifetime Column
      *
      * @return string
      */
-    public function getModifiedColumn()
+    public function getLifetimeColumn()
     {
-        return $this->modifiedColumn;
+        return $this->lifetimeColumn;
     }
 
     /**
      * Set Modified Column
-     * 
+     *
      * @param string $modifiedColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException
@@ -173,29 +179,12 @@ class DbTableGatewayOptions extends Options
     }
 
     /**
-     * Get Name Column
+     * Get Modified Column
      *
      * @return string
      */
-    public function getNameColumn()
+    public function getModifiedColumn()
     {
-        return $this->nameColumn;
-    }
-
-    /**
-     * Set Name Column
-     *
-     * @param string $nameColumn
-     * @return DbTableGatewayOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setNameColumn($nameColumn)
-    {
-        $nameColumn = (string) $nameColumn;
-        if (strlen($nameColumn) === 0) {
-            throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
-        }
-        $this->nameColumn = $nameColumn;
-        return $this;
+        return $this->modifiedColumn;
     }
 }

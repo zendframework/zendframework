@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ModuleManager
  */
@@ -11,12 +11,12 @@
 namespace Zend\ModuleManager;
 
 use Traversable;
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * Module manager
- * 
+ *
  * @category Zend
  * @package  Zend_ModuleManager
  */
@@ -38,6 +38,11 @@ class ModuleManager implements ModuleManagerInterface
     protected $event;
 
     /**
+     * @var bool
+     */
+    protected $loadFinished;
+
+    /**
      * modules
      *
      * @var array|Traversable
@@ -56,7 +61,6 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @param  array|Traversable $modules
      * @param  EventManagerInterface $eventManager
-     * @return void
      */
     public function __construct($modules, EventManagerInterface $eventManager = null)
     {
@@ -67,9 +71,27 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
+     * Handle the loadModules event
+     *
+     * @return void
+     */
+    public function onLoadModules()
+    {
+        if (true === $this->modulesAreLoaded) {
+            return $this;
+        }
+
+        foreach ($this->getModules() as $moduleName) {
+            $this->loadModule($moduleName);
+        }
+
+        $this->modulesAreLoaded = true;
+    }
+
+    /**
      * Load the provided modules.
      *
-     * @triggers loadModules.pre
+     * @triggers loadModules
      * @triggers loadModules.post
      * @return   ModuleManager
      */
@@ -79,15 +101,16 @@ class ModuleManager implements ModuleManagerInterface
             return $this;
         }
 
-        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $this->getEvent());
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULES, $this, $this->getEvent());
 
-        foreach ($this->getModules() as $moduleName) {
-            $this->loadModule($moduleName);
-        }
+        /**
+         * Having a dedicated .post event abstracts the complexity of priorities from the user.
+         * Users can attach to the .post event and be sure that important
+         * things like config merging are complete without having to worry if
+         * they set a low enough priority.
+         */
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULES_POST, $this, $this->getEvent());
 
-        $this->events()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent());
-
-        $this->modulesAreLoaded = true;
         return $this;
     }
 
@@ -95,6 +118,7 @@ class ModuleManager implements ModuleManagerInterface
      * Load a specific module by name.
      *
      * @param    string $moduleName
+     * @throws   Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
      * @return   mixed Module's Module class
@@ -105,10 +129,12 @@ class ModuleManager implements ModuleManagerInterface
             return $this->loadedModules[$moduleName];
         }
 
-        $event = $this->getEvent();
+        $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
 
-        $result = $this->events()->trigger(__FUNCTION__ . '.resolve', $this, $event, function ($r) {
+        $this->loadFinished = false;
+
+        $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
             return (is_object($r));
         });
 
@@ -122,8 +148,11 @@ class ModuleManager implements ModuleManagerInterface
         }
         $event->setModule($module);
 
-        $this->events()->trigger(__FUNCTION__, $this, $event);
         $this->loadedModules[$moduleName] = $module;
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
+
+        $this->loadFinished = true;
+
         return $module;
     }
 
@@ -142,9 +171,9 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
-     * Get an instance of a module class by the module name 
-     * 
-     * @param  string $moduleName 
+     * Get an instance of a module class by the module name
+     *
+     * @param  string $moduleName
      * @return mixed
      */
     public function getModule($moduleName)
@@ -169,6 +198,7 @@ class ModuleManager implements ModuleManagerInterface
      * Set an array or Traversable of module names that this module manager should load.
      *
      * @param  mixed $modules array or Traversable of module names
+     * @throws Exception\InvalidArgumentException
      * @return ModuleManager
      */
     public function setModules($modules)
@@ -223,6 +253,7 @@ class ModuleManager implements ModuleManagerInterface
             'module_manager',
         ));
         $this->events = $events;
+        $this->attachDefaultListeners();
         return $this;
     }
 
@@ -233,11 +264,22 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
         return $this->events;
+    }
+
+    /**
+     * Register the default event listeners
+     *
+     * @return ModuleManager
+     */
+    protected function attachDefaultListeners()
+    {
+        $events = $this->getEventManager();
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModules'));
     }
 }

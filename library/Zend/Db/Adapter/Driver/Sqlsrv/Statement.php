@@ -3,16 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -48,7 +48,7 @@ class Statement implements StatementInterface
     protected $parameterReferences = array();
 
     /**
-     * @var Zend\Db\Adapter\ParameterContainer\ParameterContainer
+     * @var ParameterContainer
      */
     protected $parameterContainer = null;
 
@@ -59,7 +59,7 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isPrepared = false;
 
@@ -82,21 +82,36 @@ class Statement implements StatementInterface
      * b) "SQL Server Statement" when a prepared statement has been already produced
      * (there will need to already be a bound param set if it applies to this query)
      *
-     * @param resource
+     * @param resource $resource
+     * @throws Exception\InvalidArgumentException
+     * @return Statement
      */
     public function initialize($resource)
     {
-        $this->sqlsrv = $resource;
+        $resourceType = get_resource_type($resource);
+
+        if ($resourceType == 'SQL Server Connection') {
+            $this->sqlsrv = $resource;
+        } elseif ($resourceType == 'SQL Server Statement') {
+            $this->resource = $resource;
+            $this->isPrepared = true;
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid resource provided to ' . __CLASS__);
+        }
+
+        return $this;
     }
 
     /**
      * Set parameter container
      *
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+        return $this;
     }
 
     /**
@@ -105,6 +120,16 @@ class Statement implements StatementInterface
     public function getParameterContainer()
     {
         return $this->parameterContainer;
+    }
+
+    /**
+     * @param $resource
+     * @return Statement
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+        return $this;
     }
 
     /**
@@ -119,10 +144,12 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+        return $this;
     }
 
     /**
@@ -137,6 +164,8 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @throws Exception\RuntimeException
+     * @return Statement
      */
     public function prepare($sql = null)
     {
@@ -146,13 +175,14 @@ class Statement implements StatementInterface
         $sql = ($sql) ?: $this->sql;
 
         $pRef = &$this->parameterReferences;
-        for ($position = 0; $position < substr_count($sql, '?'); $position++) {
+        for ($position = 0, $count = substr_count($sql, '?'); $position < $count; $position++) {
             $pRef[$position] = array('', SQLSRV_PARAM_IN, null, null);
         }
 
         $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef);
 
         $this->isPrepared = true;
+        return $this;
     }
 
     /**
@@ -167,7 +197,8 @@ class Statement implements StatementInterface
      * Execute
      *
      * @param  array|ParameterContainer $parameters
-     * @return type
+     * @throws Exception\RuntimeException
+     * @return Result
      */
     public function execute($parameters = null)
     {
@@ -229,5 +260,4 @@ class Statement implements StatementInterface
         //    }
         //}
     }
-
 }

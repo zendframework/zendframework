@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
@@ -7,10 +15,20 @@ use Zend\Code\Exception;
 class AggregateDirectoryScanner extends DirectoryScanner
 {
 
+    /**
+     * @var bool
+     */
     protected $isScanned = false;
 
+    /**
+     * Get namespaces
+     *
+     * @param bool $returnScannerClass
+     * @todo not implemented
+     */
     public function getNamespaces($returnScannerClass = false)
     {
+        // @todo
     }
 
     /*
@@ -36,6 +54,12 @@ class AggregateDirectoryScanner extends DirectoryScanner
         return $classes;
     }
 
+    /**
+     * Check for a class
+     *
+     * @param string $class
+     * @return bool
+     */
     public function hasClass($class)
     {
         foreach ($this->directories as $scanner) {
@@ -49,6 +73,15 @@ class AggregateDirectoryScanner extends DirectoryScanner
         return (isset($scanner));
     }
 
+    /**
+     * Get class
+     *
+     * @param string $class
+     * @param bool $returnScannerClass
+     * @param bool $returnDerivedScannerClass
+     * @return ClassScanner|DerivedClassScanner
+     * @throws Exception\RuntimeException
+     */
     public function getClass($class, $returnScannerClass = true, $returnDerivedScannerClass = false)
     {
         foreach ($this->directories as $scanner) {
@@ -89,7 +122,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
     {
         // @todo
     }
-    
+
     public function __toString()
     {
         // @todo

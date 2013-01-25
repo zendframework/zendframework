@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Podcast;
 
-use Zend\Feed\Reader\Extension,
-    DOMText;
+use DOMText;
+use Zend\Feed\Reader\Extension;
 
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed extends Extension\AbstractFeed
 {
@@ -38,19 +26,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getCastAuthor()
     {
-        if (isset($this->_data['author'])) {
-            return $this->_data['author'];
+        if (isset($this->data['author'])) {
+            return $this->data['author'];
         }
 
-        $author = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:author)');
+        $author = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:author)');
 
         if (!$author) {
             $author = null;
         }
 
-        $this->_data['author'] = $author;
+        $this->data['author'] = $author;
 
-        return $this->_data['author'];
+        return $this->data['author'];
     }
 
     /**
@@ -60,19 +48,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getBlock()
     {
-        if (isset($this->_data['block'])) {
-            return $this->_data['block'];
+        if (isset($this->data['block'])) {
+            return $this->data['block'];
         }
 
-        $block = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:block)');
+        $block = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:block)');
 
         if (!$block) {
             $block = null;
         }
 
-        $this->_data['block'] = $block;
+        $this->data['block'] = $block;
 
-        return $this->_data['block'];
+        return $this->data['block'];
     }
 
     /**
@@ -82,11 +70,11 @@ class Feed extends Extension\AbstractFeed
      */
     public function getItunesCategories()
     {
-        if (isset($this->_data['categories'])) {
-            return $this->_data['categories'];
+        if (isset($this->data['categories'])) {
+            return $this->data['categories'];
         }
 
-        $categoryList = $this->_xpath->query($this->getXpathPrefix() . '/itunes:category');
+        $categoryList = $this->xpath->query($this->getXpathPrefix() . '/itunes:category');
 
         $categories = array();
 
@@ -113,9 +101,9 @@ class Feed extends Extension\AbstractFeed
             $categories = null;
         }
 
-        $this->_data['categories'] = $categories;
+        $this->data['categories'] = $categories;
 
-        return $this->_data['categories'];
+        return $this->data['categories'];
     }
 
     /**
@@ -125,19 +113,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getExplicit()
     {
-        if (isset($this->_data['explicit'])) {
-            return $this->_data['explicit'];
+        if (isset($this->data['explicit'])) {
+            return $this->data['explicit'];
         }
 
-        $explicit = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:explicit)');
+        $explicit = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:explicit)');
 
         if (!$explicit) {
             $explicit = null;
         }
 
-        $this->_data['explicit'] = $explicit;
+        $this->data['explicit'] = $explicit;
 
-        return $this->_data['explicit'];
+        return $this->data['explicit'];
     }
 
     /**
@@ -147,19 +135,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getItunesImage()
     {
-        if (isset($this->_data['image'])) {
-            return $this->_data['image'];
+        if (isset($this->data['image'])) {
+            return $this->data['image'];
         }
 
-        $image = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:image/@href)');
+        $image = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:image/@href)');
 
         if (!$image) {
             $image = null;
         }
 
-        $this->_data['image'] = $image;
+        $this->data['image'] = $image;
 
-        return $this->_data['image'];
+        return $this->data['image'];
     }
 
     /**
@@ -169,19 +157,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getKeywords()
     {
-        if (isset($this->_data['keywords'])) {
-            return $this->_data['keywords'];
+        if (isset($this->data['keywords'])) {
+            return $this->data['keywords'];
         }
 
-        $keywords = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:keywords)');
+        $keywords = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:keywords)');
 
         if (!$keywords) {
             $keywords = null;
         }
 
-        $this->_data['keywords'] = $keywords;
+        $this->data['keywords'] = $keywords;
 
-        return $this->_data['keywords'];
+        return $this->data['keywords'];
     }
 
     /**
@@ -191,19 +179,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getNewFeedUrl()
     {
-        if (isset($this->_data['new-feed-url'])) {
-            return $this->_data['new-feed-url'];
+        if (isset($this->data['new-feed-url'])) {
+            return $this->data['new-feed-url'];
         }
 
-        $newFeedUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:new-feed-url)');
+        $newFeedUrl = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:new-feed-url)');
 
         if (!$newFeedUrl) {
             $newFeedUrl = null;
         }
 
-        $this->_data['new-feed-url'] = $newFeedUrl;
+        $this->data['new-feed-url'] = $newFeedUrl;
 
-        return $this->_data['new-feed-url'];
+        return $this->data['new-feed-url'];
     }
 
     /**
@@ -213,18 +201,18 @@ class Feed extends Extension\AbstractFeed
      */
     public function getOwner()
     {
-        if (isset($this->_data['owner'])) {
-            return $this->_data['owner'];
+        if (isset($this->data['owner'])) {
+            return $this->data['owner'];
         }
 
         $owner = null;
 
-        $email = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:email)');
-        $name  = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:name)');
+        $email = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:email)');
+        $name  = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:name)');
 
         if (!empty($email)) {
             $owner = $email . (empty($name) ? '' : ' (' . $name . ')');
-        } else if (!empty($name)) {
+        } elseif (!empty($name)) {
             $owner = $name;
         }
 
@@ -232,9 +220,9 @@ class Feed extends Extension\AbstractFeed
             $owner = null;
         }
 
-        $this->_data['owner'] = $owner;
+        $this->data['owner'] = $owner;
 
-        return $this->_data['owner'];
+        return $this->data['owner'];
     }
 
     /**
@@ -244,19 +232,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getSubtitle()
     {
-        if (isset($this->_data['subtitle'])) {
-            return $this->_data['subtitle'];
+        if (isset($this->data['subtitle'])) {
+            return $this->data['subtitle'];
         }
 
-        $subtitle = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:subtitle)');
+        $subtitle = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:subtitle)');
 
         if (!$subtitle) {
             $subtitle = null;
         }
 
-        $this->_data['subtitle'] = $subtitle;
+        $this->data['subtitle'] = $subtitle;
 
-        return $this->_data['subtitle'];
+        return $this->data['subtitle'];
     }
 
     /**
@@ -266,27 +254,27 @@ class Feed extends Extension\AbstractFeed
      */
     public function getSummary()
     {
-        if (isset($this->_data['summary'])) {
-            return $this->_data['summary'];
+        if (isset($this->data['summary'])) {
+            return $this->data['summary'];
         }
 
-        $summary = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:summary)');
+        $summary = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:summary)');
 
         if (!$summary) {
             $summary = null;
         }
 
-        $this->_data['summary'] = $summary;
+        $this->data['summary'] = $summary;
 
-        return $this->_data['summary'];
+        return $this->data['summary'];
     }
 
     /**
      * Register iTunes namespace
      *
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
+        $this->xpath->registerNamespace('itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
     }
 }

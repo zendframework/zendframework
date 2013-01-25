@@ -1,43 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode;
 
-use Traversable,
-    Zend,
-    Zend\Loader\Broker,
-    Zend\Loader\ShortNameLocator,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class for generate Barcode
  *
  * @category   Zend
  * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Barcode
 {
-    const OBJECT   = 'OBJECT';
-    const RENDERER = 'RENDERER';
     /**
      * Default barcode TTF font name
      *
@@ -50,45 +33,45 @@ class Barcode
     protected static $staticFont = null;
 
     /**
-     * The parser broker
+     * The parser plugin manager
      *
-     * @var Broker
+     * @var ObjectPluginManager
      */
-    protected static $objectBroker;
+    protected static $objectPlugins;
 
     /**
-     * The renderer broker
+     * The renderer plugin manager
      *
-     * @var Broker
+     * @var RendererPluginManager
      */
-    protected static $rendererBroker;
+    protected static $rendererPlugins;
 
     /**
-     * Get the parser broker
+     * Get the parser plugin manager
      *
-     * @return Broker
+     * @return ObjectPluginManager
      */
-    public static function getObjectBroker()
+    public static function getObjectPluginManager()
     {
-        if (!self::$objectBroker instanceof Broker) {
-            self::$objectBroker = new ObjectBroker();
+        if (!static::$objectPlugins instanceof ObjectPluginManager) {
+            static::$objectPlugins = new ObjectPluginManager();
         }
 
-        return self::$objectBroker;
+        return static::$objectPlugins;
     }
 
     /**
-     * Get the renderer broker
+     * Get the renderer plugin manager
      *
-     * @return Broker
+     * @return RendererPluginManager
      */
-    public static function getRendererBroker()
+    public static function getRendererPluginManager()
     {
-        if (!self::$rendererBroker instanceof Broker) {
-            self::$rendererBroker = new RendererBroker();
+        if (!static::$rendererPlugins instanceof RendererPluginManager) {
+            static::$rendererPlugins = new RendererPluginManager();
         }
 
-        return self::$rendererBroker;
+        return static::$rendererPlugins;
     }
 
     /**
@@ -112,9 +95,9 @@ class Barcode
      * @param  mixed $renderer        String name of renderer class
      * @param  mixed $barcodeConfig   OPTIONAL; an array or Traversable object with barcode parameters.
      * @param  mixed $rendererConfig  OPTIONAL; an array or Traversable object with renderer parameters.
-     * @param  boolean $automaticRenderError  OPTIONAL; set the automatic rendering of exception
+     * @param  bool $automaticRenderError  OPTIONAL; set the automatic rendering of exception
      * @return Barcode
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public static function factory($barcode,
                                    $renderer = 'image',
@@ -145,12 +128,12 @@ class Barcode
         }
 
         try {
-            $barcode  = self::makeBarcode($barcode, $barcodeConfig);
-            $renderer = self::makeRenderer($renderer, $rendererConfig);
+            $barcode  = static::makeBarcode($barcode, $barcodeConfig);
+            $renderer = static::makeRenderer($renderer, $rendererConfig);
         } catch (Exception\ExceptionInterface $e) {
             if ($automaticRenderError && !($e instanceof Exception\RendererCreationException)) {
-                $barcode  = self::makeBarcode('error', array( 'text' => $e->getMessage() ));
-                $renderer = self::makeRenderer($renderer, array());
+                $barcode  = static::makeBarcode('error', array( 'text' => $e->getMessage() ));
+                $renderer = static::makeRenderer($renderer, array());
             } else {
                 throw $e;
             }
@@ -165,6 +148,7 @@ class Barcode
      *
      * @param mixed $barcode        String name of barcode class, or Traversable object, or barcode object.
      * @param mixed $barcodeConfig  OPTIONAL; an array or Traversable object with barcode parameters.
+     * @throws Exception\InvalidArgumentException
      * @return Object
      */
     public static function makeBarcode($barcode, $barcodeConfig = array())
@@ -210,7 +194,7 @@ class Barcode
             );
         }
 
-        return self::getObjectBroker()->load($barcode, $barcodeConfig);
+        return static::getObjectPluginManager()->get($barcode, $barcodeConfig);
     }
 
     /**
@@ -218,7 +202,8 @@ class Barcode
      *
      * @param mixed $renderer           String name of renderer class, or Traversable object.
      * @param mixed $rendererConfig     OPTIONAL; an array or Traversable object with renderer parameters.
-     * @return Renderer
+     * @throws Exception\RendererCreationException
+     * @return Renderer\RendererInterface
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())
     {
@@ -261,14 +246,14 @@ class Barcode
             );
         }
 
-        return self::getRendererBroker()->load($renderer, $rendererConfig);
+        return static::getRendererPluginManager()->get($renderer, $rendererConfig);
     }
 
     /**
      * Proxy to renderer render() method
      *
      * @param string | Object\ObjectInterface | array | Traversable $barcode
-     * @param string | Renderer $renderer
+     * @param string | Renderer\RendererInterface $renderer
      * @param array  | Traversable $barcodeConfig
      * @param array  | Traversable $rendererConfig
      */
@@ -277,14 +262,14 @@ class Barcode
                                   $barcodeConfig = array(),
                                   $rendererConfig = array())
     {
-        self::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
+        static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
     }
 
     /**
      * Proxy to renderer draw() method
      *
      * @param string | Object\ObjectInterface | array | Traversable $barcode
-     * @param string | Renderer $renderer
+     * @param string | Renderer\RendererInterface $renderer
      * @param array | Traversable $barcodeConfig
      * @param array | Traversable $rendererConfig
      * @return mixed
@@ -294,7 +279,7 @@ class Barcode
                                 $barcodeConfig = array(),
                                 $rendererConfig = array())
     {
-        return self::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
+        return static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
     }
 
     /**
@@ -305,7 +290,7 @@ class Barcode
      */
     public static function setBarcodeFont($font)
     {
-        self::$staticFont = $font;
+        static::$staticFont = $font;
     }
 
     /**
@@ -315,6 +300,6 @@ class Barcode
      */
     public static function getBarcodeFont()
     {
-        return self::$staticFont;
+        return static::$staticFont;
     }
 }

@@ -3,12 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Predicate;
+
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Exception;
 
 /**
  * @category   Zend
@@ -22,25 +25,24 @@ class In implements PredicateInterface
 
     /**
      * Constructor
-     * 
-     * @param  null|string $identifier 
-     * @param  array $valueSet 
-     * @return void
+     *
+     * @param  null|string $identifier
+     * @param  array $valueSet
      */
-    public function __construct($identifier = null, array $valueSet = array())
+    public function __construct($identifier = null, $valueSet = null)
     {
         if ($identifier) {
             $this->setIdentifier($identifier);
         }
-        if (!empty($valueSet)) {
+        if ($valueSet) {
             $this->setValueSet($valueSet);
         }
     }
 
     /**
      * Set identifier for comparison
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @return In
      */
     public function setIdentifier($identifier)
@@ -51,7 +53,7 @@ class In implements PredicateInterface
 
     /**
      * Get identifier of comparison
-     * 
+     *
      * @return null|string
      */
     public function getIdentifier()
@@ -61,12 +63,18 @@ class In implements PredicateInterface
 
     /**
      * Set set of values for IN comparison
-     * 
-     * @param  array $valueSet 
+     *
+     * @param  array $valueSet
+     * @throws Exception\InvalidArgumentException
      * @return In
      */
-    public function setValueSet(array $valueSet)
+    public function setValueSet($valueSet)
     {
+        if (!is_array($valueSet) && !$valueSet instanceof Select) {
+            throw new Exception\InvalidArgumentException(
+                '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
+            );
+        }
         $this->valueSet = $valueSet;
         return $this;
     }
@@ -84,8 +92,14 @@ class In implements PredicateInterface
     public function getExpressionData()
     {
         $values = $this->getValueSet();
-        $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
-        $types  = array_fill(0, count($values), self::TYPE_VALUE);
+        if ($values instanceof Select) {
+            $specification = '%s IN %s';
+            $types = array(self::TYPE_VALUE);
+            $values = array($values);
+        } else {
+            $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
+            $types = array_fill(0, count($values), self::TYPE_VALUE);
+        }
 
         $identifier = $this->getIdentifier();
         array_unshift($values, $identifier);
@@ -97,5 +111,4 @@ class In implements PredicateInterface
             $types,
         ));
     }
-
 }

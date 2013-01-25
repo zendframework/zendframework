@@ -1,9 +1,0 @@
-POST / HTTP/1.1
-Host: us-east-1.monitoring.amazonaws.com
-Connection: close
-Accept-encoding: gzip, deflate
-User-Agent: Zend_Http_Client
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 465
-
-Action=GetMetricStatistics&MeasureName=CPUUtilization&Period=60&Namespace=AWS%2FEC2&Statistics.member.1=Average&StartTime=2011-10-04T09%3A20%3A52%2B00%3A00&EndTime=2011-10-04T10%3A20%3A52%2B00%3A00&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-6cfcb00c&AWSAccessKeyId=0123456789&SignatureVersion=2&Timestamp=2011-10-04T10%3A20%3A52Z&Version=2009-05-15&SignatureMethod=HmacSHA256&Signature=7Lqkjxw2gB%2FKwcUYImKBnyTHzyacUzhkc4YlnqoPFfg%3D

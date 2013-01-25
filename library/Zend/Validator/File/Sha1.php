@@ -1,34 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
 
-use Zend\Validator\Exception;
 
 /**
  * Validator for the sha1 hash of given files
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
 class Sha1 extends Hash
 {
@@ -42,7 +29,7 @@ class Sha1 extends Hash
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::DOES_NOT_MATCH => "File '%value%' does not match the given sha1 hashes",
         self::NOT_DETECTED   => "A sha1 hash could not be evaluated for the given file",
         self::NOT_FOUND      => "File '%value%' is not readable or does not exist",
@@ -72,7 +59,7 @@ class Sha1 extends Hash
      * Sets the sha1 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
+     * @return Hash Provides a fluent interface
      */
     public function setSha1($options)
     {
@@ -84,7 +71,7 @@ class Sha1 extends Hash
      * Adds the sha1 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
+     * @return Hash Provides a fluent interface
      */
     public function addSha1($options)
     {
@@ -97,7 +84,7 @@ class Sha1 extends Hash
      *
      * @param  string $value Filename to check for hash
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
@@ -107,13 +94,13 @@ class Sha1 extends Hash
 
         // Is file readable ?
         if (false === stream_resolve_include_path($value)) {
-            return $this->_throw($file, self::NOT_FOUND);
+            return $this->throwError($file, self::NOT_FOUND);
         }
 
         $hashes = array_unique(array_keys($this->getHash()));
         $filehash = hash_file('sha1', $value);
         if ($filehash === false) {
-            return $this->_throw($file, self::NOT_DETECTED);
+            return $this->throwError($file, self::NOT_DETECTED);
         }
 
         foreach ($hashes as $hash) {
@@ -122,6 +109,6 @@ class Sha1 extends Hash
             }
         }
 
-        return $this->_throw($file, self::DOES_NOT_MATCH);
+        return $this->throwError($file, self::DOES_NOT_MATCH);
     }
 }

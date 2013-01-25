@@ -1,37 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
 
-use Zend\Validator,
-    Zend\Validator\Exception;
+use Zend\Stdlib\ErrorHandler;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the image size of a image file
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
-class ImageSize extends Validator\AbstractValidator
+class ImageSize extends AbstractValidator
 {
     /**
      * @const string Error constants
@@ -46,7 +35,7 @@ class ImageSize extends Validator\AbstractValidator
     /**
      * @var array Error message template
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::WIDTH_TOO_BIG    => "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected",
         self::WIDTH_TOO_SMALL  => "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected",
         self::HEIGHT_TOO_BIG   => "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected",
@@ -58,13 +47,13 @@ class ImageSize extends Validator\AbstractValidator
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'minwidth'  => array('options' => 'minWidth'),
         'maxwidth'  => array('options' => 'maxWidth'),
         'minheight' => array('options' => 'minHeight'),
         'maxheight' => array('options' => 'maxHeight'),
-        'width'     => '_width',
-        'height'    => '_height'
+        'width'     => 'width',
+        'height'    => 'height'
     );
 
     /**
@@ -72,14 +61,14 @@ class ImageSize extends Validator\AbstractValidator
      *
      * @var integer
      */
-    protected $_width;
+    protected $width;
 
     /**
      * Detected height
      *
      * @var integer
      */
-    protected $_height;
+    protected $height;
 
     /**
      * Options for this validator
@@ -139,8 +128,8 @@ class ImageSize extends Validator\AbstractValidator
      * Sets the minimum allowed width
      *
      * @param  integer $minWidth
-     * @throws \Zend\Validator\Exception      When minwidth is greater than maxwidth
-     * @return \Zend\Validator\File\ImageSize Provides a fluid interface
+     * @return ImageSize Provides a fluid interface
+     * @throws Exception\InvalidArgumentException When minwidth is greater than maxwidth
      */
     public function setMinWidth($minWidth)
     {
@@ -167,8 +156,8 @@ class ImageSize extends Validator\AbstractValidator
      * Sets the maximum allowed width
      *
      * @param  integer $maxWidth
-     * @throws \Zend\Validator\Exception      When maxwidth is less than minwidth
-     * @return \Zend\Validator\File\ImageSize Provides a fluid interface
+     * @return ImageSize Provides a fluid interface
+     * @throws Exception\InvalidArgumentException When maxwidth is less than minwidth
      */
     public function setMaxWidth($maxWidth)
     {
@@ -195,8 +184,8 @@ class ImageSize extends Validator\AbstractValidator
      * Sets the minimum allowed height
      *
      * @param  integer $minHeight
-     * @throws \Zend\Validator\Exception      When minheight is greater than maxheight
-     * @return \Zend\Validator\File\ImageSize Provides a fluid interface
+     * @return ImageSize Provides a fluid interface
+     * @throws Exception\InvalidArgumentException When minheight is greater than maxheight
      */
     public function setMinHeight($minHeight)
     {
@@ -223,8 +212,8 @@ class ImageSize extends Validator\AbstractValidator
      * Sets the maximum allowed height
      *
      * @param  integer $maxHeight
-     * @throws \Zend\Validator\Exception      When maxheight is less than minheight
-     * @return \Zend\Validator\File\ImageSize Provides a fluid interface
+     * @return ImageSize Provides a fluid interface
+     * @throws Exception\InvalidArgumentException When maxheight is less than minheight
      */
     public function setMaxHeight($maxHeight)
     {
@@ -281,79 +270,31 @@ class ImageSize extends Validator\AbstractValidator
      * Sets the minimum image size
      *
      * @param  array $options                 The minimum image dimensions
-     * @throws \Zend\Validator\Exception      When minwidth is greater than maxwidth
-     * @throws \Zend\Validator\Exception      When minheight is greater than maxheight
-     * @return \Zend\Validator\File\ImageSize Provides a fluent interface
+     * @return ImageSize Provides a fluent interface
      */
     public function setImageMin($options)
     {
         $this->setOptions($options);
-//        if (isset($options['minwidth'])) {
-//            if (($this->_maxwidth !== null) and ($options['minwidth'] > $this->_maxwidth)) {
-//                throw new Exception\InvalidArgumentException("The minimum image width must be less than or equal to the "
-//                    . " maximum image width, but {$options['minwidth']} > {$this->_maxwidth}");
-//            }
-//        }
-
-//        if (isset($options['maxheight'])) {
-//            if (($this->_maxheight !== null) and ($options['minheight'] > $this->_maxheight)) {
-//                throw new Exception\InvalidArgumentException("The minimum image height must be less than or equal to the "
-//                    . " maximum image height, but {$options['minheight']} > {$this->_maxheight}");
-//            }
-//        }
-
-//        if (isset($options['minWidth'])) {
-//            $this->_minwidth  = (int) $options['minwidth'];
-//        }
-
-//        if (isset($options['minheight'])) {
-//            $this->_minheight = (int) $options['minheight'];
-//        }
-
         return $this;
     }
 
     /**
      * Sets the maximum image size
      *
-     * @param  array $options          The maximum image dimensions
-     * @throws \Zend\Validator\Exception When maxwidth is smaller than minwidth
-     * @throws \Zend\Validator\Exception When maxheight is smaller than minheight
-     * @return \Zend\Validator\StringLength Provides a fluent interface
+     * @param  array|\Traversable $options The maximum image dimensions
+     * @return ImageSize Provides a fluent interface
      */
     public function setImageMax($options)
     {
         $this->setOptions($options);
-//        if (isset($options['maxwidth'])) {
-//            if (($this->_minwidth !== null) and ($options['maxwidth'] < $this->_minwidth)) {
-//                throw new Exception\InvalidArgumentException("The maximum image width must be greater than or equal to the "
-//                    . "minimum image width, but {$options['maxwidth']} < {$this->_minwidth}");
-//            }
-//        }
-
-//        if (isset($options['maxheight'])) {
-//            if (($this->_minheight !== null) and ($options['maxheight'] < $this->_minheight)) {
-//                throw new Exception\InvalidArgumentException("The maximum image height must be greater than or equal to the "
-//                    . "minimum image height, but {$options['maxheight']} < {$this->_minwidth}");
-//            }
-//        }
-
-//        if (isset($options['maxwidth'])) {
-//            $this->_maxwidth  = (int) $options['maxwidth'];
-//        }
-
-//        if (isset($options['maxheight'])) {
-//            $this->_maxheight = (int) $options['maxheight'];
-//        }
-
         return $this;
     }
 
     /**
-     * Sets the mimimum and maximum image width
+     * Sets the minimum and maximum image width
      *
      * @param  array $options               The image width dimensions
-     * @return \Zend\Validator\File\ImageSize Provides a fluent interface
+     * @return ImageSize Provides a fluent interface
      */
     public function setImageWidth($options)
     {
@@ -364,10 +305,10 @@ class ImageSize extends Validator\AbstractValidator
     }
 
     /**
-     * Sets the mimimum and maximum image height
+     * Sets the minimum and maximum image height
      *
      * @param  array $options               The image height dimensions
-     * @return \Zend\Validator\File\ImageSize Provides a fluent interface
+     * @return ImageSize Provides a fluent interface
      */
     public function setImageHeight($options)
     {
@@ -378,12 +319,12 @@ class ImageSize extends Validator\AbstractValidator
     }
 
     /**
-     * Returns true if and only if the imagesize of $value is at least min and
+     * Returns true if and only if the image size of $value is at least min and
      * not bigger than max
      *
      * @param  string $value Real file to check for image size
      * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
@@ -393,32 +334,34 @@ class ImageSize extends Validator\AbstractValidator
 
         // Is file readable ?
         if (false === stream_resolve_include_path($value)) {
-            return $this->_throw($file, self::NOT_READABLE);
+            return $this->throwError($file, self::NOT_READABLE);
         }
 
-        $size = @getimagesize($value);
+        ErrorHandler::start();
+        $size = getimagesize($value);
+        ErrorHandler::stop();
         $this->setValue($file);
 
-        if (empty($size) or ($size[0] === 0) or ($size[1] === 0)) {
-            return $this->_throw($file, self::NOT_DETECTED);
+        if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
+            return $this->throwError($file, self::NOT_DETECTED);
         }
 
-        $this->_width  = $size[0];
-        $this->_height = $size[1];
-        if ($this->_width < $this->getMinWidth()) {
-            $this->_throw($file, self::WIDTH_TOO_SMALL);
+        $this->width  = $size[0];
+        $this->height = $size[1];
+        if ($this->width < $this->getMinWidth()) {
+            $this->throwError($file, self::WIDTH_TOO_SMALL);
         }
 
-        if (($this->getMaxWidth() !== null) and ($this->getMaxWidth() < $this->_width)) {
-            $this->_throw($file, self::WIDTH_TOO_BIG);
+        if (($this->getMaxWidth() !== null) && ($this->getMaxWidth() < $this->width)) {
+            $this->throwError($file, self::WIDTH_TOO_BIG);
         }
 
-        if ($this->_height < $this->getMinHeight()) {
-            $this->_throw($file, self::HEIGHT_TOO_SMALL);
+        if ($this->height < $this->getMinHeight()) {
+            $this->throwError($file, self::HEIGHT_TOO_SMALL);
         }
 
-        if (($this->getMaxHeight() !== null) and ($this->getMaxHeight() < $this->_height)) {
-            $this->_throw($file, self::HEIGHT_TOO_BIG);
+        if (($this->getMaxHeight() !== null) && ($this->getMaxHeight() < $this->height)) {
+            $this->throwError($file, self::HEIGHT_TOO_BIG);
         }
 
         if (count($this->getMessages()) > 0) {
@@ -435,14 +378,14 @@ class ImageSize extends Validator\AbstractValidator
      * @param  string $errorType
      * @return false
      */
-    protected function _throw($file, $errorType)
+    protected function throwError($file, $errorType)
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $this->value = $file['name'];
                 }
-            } else if (is_string($file)) {
+            } elseif (is_string($file)) {
                 $this->value = $file;
             }
         }

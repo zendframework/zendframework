@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Response;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * A testing-purposes adapter.
@@ -36,8 +25,6 @@ use Zend\Http\Response;
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Test implements AdapterInterface
 {
@@ -64,11 +51,11 @@ class Test implements AdapterInterface
     protected $responseIndex = 0;
 
     /**
-     * Wether or not the next request will fail with an exception
+     * Whether or not the next request will fail with an exception
      *
-     * @var boolean
+     * @var bool
      */
-    protected $_nextRequestWillFail = false;
+    protected $nextRequestWillFail = false;
 
     /**
      * Adapter constructor, currently empty. Config is set using setOptions()
@@ -79,12 +66,12 @@ class Test implements AdapterInterface
     /**
      * Set the nextRequestWillFail flag
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return \Zend\Http\Client\Adapter\Test
      */
     public function setNextRequestWillFail($flag)
     {
-        $this->_nextRequestWillFail = (bool) $flag;
+        $this->nextRequestWillFail = (bool) $flag;
 
         return $this;
     }
@@ -93,6 +80,7 @@ class Test implements AdapterInterface
      * Set the configuration array for the adapter
      *
      * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options = array())
     {
@@ -117,14 +105,14 @@ class Test implements AdapterInterface
      *
      * @param string  $host
      * @param int     $port
-     * @param boolean $secure
+     * @param  bool $secure
      * @param int     $timeout
      * @throws Exception\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {
-        if ($this->_nextRequestWillFail) {
-            $this->_nextRequestWillFail = false;
+        if ($this->nextRequestWillFail) {
+            $this->nextRequestWillFail = false;
             throw new Exception\RuntimeException('Request failed');
         }
     }
@@ -134,12 +122,12 @@ class Test implements AdapterInterface
      *
      * @param string        $method
      * @param \Zend\Uri\Uri $uri
-     * @param string        $http_ver
+     * @param string        $httpVer
      * @param array         $headers
      * @param string        $body
      * @return string Request as string
      */
-    public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
+    public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
         $host = $uri->getHost();
             $host = (strtolower($uri->getScheme()) == 'https' ? 'sslv2://' . $host : $host);
@@ -150,7 +138,7 @@ class Test implements AdapterInterface
             $path = '/';
         }
         if ($uri->getQuery()) $path .= '?' . $uri->getQuery();
-        $request = "{$method} {$path} HTTP/{$http_ver}\r\n";
+        $request = "{$method} {$path} HTTP/{$httpVer}\r\n";
         foreach ($headers as $k => $v) {
             if (is_string($k)) $v = ucfirst($k) . ": $v";
             $request .= "$v\r\n";
@@ -202,7 +190,7 @@ class Test implements AdapterInterface
     /**
      * Add another response to the response buffer.
      *
-     * @param string \Zend\Http\Response|$response
+     * @param string|Response $response
      */
     public function addResponse($response)
     {
@@ -218,6 +206,7 @@ class Test implements AdapterInterface
      * response will be returned on the next call to read().
      *
      * @param integer $index
+     * @throws Exception\OutOfRangeException
      */
     public function setResponseIndex($index)
     {

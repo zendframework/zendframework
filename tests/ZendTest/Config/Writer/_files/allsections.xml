@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <all>
+        <hostname>all</hostname>
+        <name>thisname</name>
+        <db>
+            <host>127.0.0.1</host>
+            <user>username</user>
+            <pass>password</pass>
+            <name>live</name>
+        </db>
+        <one>
+            <two>
+                <three>multi</three>
+            </two>
+        </one>
+    </all>
+
+    <staging extends="all">
+        <hostname>staging</hostname>
+        <db>
+            <name>dbstaging</name>
+        </db>
+        <debug>false</debug>
+    </staging>
+
+    <other_staging>
+        <only_in>otherStaging</only_in>
+        <db>
+            <pass>anotherpwd</pass>
+        </db>
+    </other_staging>
+
+
+</config>

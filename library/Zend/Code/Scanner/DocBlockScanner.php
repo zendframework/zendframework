@@ -1,9 +1,17 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
 use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\NameInformation;
 
 class DocBlockScanner implements ScannerInterface
 {
@@ -48,6 +56,8 @@ class DocBlockScanner implements ScannerInterface
     protected $annotations = array();
 
     /**
+     * Constructor
+     *
      * @param string               $docComment
      * @param null|NameInformation $nameInformation
      */
@@ -58,6 +68,8 @@ class DocBlockScanner implements ScannerInterface
     }
 
     /**
+     * Get short description
+     *
      * @return string
      */
     public function getShortDescription()
@@ -67,6 +79,8 @@ class DocBlockScanner implements ScannerInterface
     }
 
     /**
+     * Get long description
+     *
      * @return string
      */
     public function getLongDescription()
@@ -90,6 +104,11 @@ class DocBlockScanner implements ScannerInterface
         return $this->annotations;
     }
 
+    /**
+     * Scan
+     *
+     * @return void
+     */
     protected function scan()
     {
         if ($this->isScanned) {
@@ -154,6 +173,11 @@ class DocBlockScanner implements ScannerInterface
         $this->isScanned        = true;
     }
 
+    /**
+     * Tokenize
+     *
+     * @return array
+     */
     protected function tokenize()
     {
         static $CONTEXT_INSIDE_DOCBLOCK = 0x01;
@@ -168,8 +192,7 @@ class DocBlockScanner implements ScannerInterface
         $currentWord = null;
         $currentLine = null;
 
-        $MACRO_STREAM_ADVANCE_CHAR       = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode)
-        {
+        $MACRO_STREAM_ADVANCE_CHAR       = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode) {
             $positionsForward = ($positionsForward > 0) ? $positionsForward : 1;
             $streamIndex      = ($streamIndex === null) ? 0 : $streamIndex + $positionsForward;
             if (!isset($stream[$streamIndex])) {
@@ -192,37 +215,29 @@ class DocBlockScanner implements ScannerInterface
             }
             return $currentChar;
         };
-        $MACRO_STREAM_ADVANCE_WORD       = function () use (&$currentWord, &$MACRO_STREAM_ADVANCE_CHAR)
-        {
+        $MACRO_STREAM_ADVANCE_WORD       = function () use (&$currentWord, &$MACRO_STREAM_ADVANCE_CHAR) {
             return $MACRO_STREAM_ADVANCE_CHAR(strlen($currentWord));
         };
-        $MACRO_STREAM_ADVANCE_LINE       = function () use (&$currentLine, &$MACRO_STREAM_ADVANCE_CHAR)
-        {
+        $MACRO_STREAM_ADVANCE_LINE       = function () use (&$currentLine, &$MACRO_STREAM_ADVANCE_CHAR) {
             return $MACRO_STREAM_ADVANCE_CHAR(strlen($currentLine));
         };
-        $MACRO_TOKEN_ADVANCE             = function () use (&$tokenIndex, &$tokens)
-        {
+        $MACRO_TOKEN_ADVANCE             = function () use (&$tokenIndex, &$tokens) {
             $tokenIndex          = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             $tokens[$tokenIndex] = array('DOCBLOCK_UNKNOWN', '');
         };
-        $MACRO_TOKEN_SET_TYPE            = function ($type) use (&$tokenIndex, &$tokens)
-        {
+        $MACRO_TOKEN_SET_TYPE            = function ($type) use (&$tokenIndex, &$tokens) {
             $tokens[$tokenIndex][0] = $type;
         };
-        $MACRO_TOKEN_APPEND_CHAR         = function () use (&$currentChar, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_CHAR         = function () use (&$currentChar, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= $currentChar;
         };
-        $MACRO_TOKEN_APPEND_WORD         = function () use (&$currentWord, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_WORD         = function () use (&$currentWord, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= $currentWord;
         };
-        $MACRO_TOKEN_APPEND_WORD_PARTIAL = function ($length) use (&$currentWord, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_WORD_PARTIAL = function ($length) use (&$currentWord, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= substr($currentWord, 0, $length);
         };
-        $MACRO_TOKEN_APPEND_LINE         = function () use (&$currentLine, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_LINE         = function () use (&$currentLine, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= $currentLine;
         };
 
@@ -254,7 +269,7 @@ class DocBlockScanner implements ScannerInterface
             goto TOKENIZER_TOP;
         }
 
-        if ($currentChar === ' ') {
+        if ($currentChar === ' ' || $currentChar === "\t") {
             $MACRO_TOKEN_SET_TYPE(($context & $CONTEXT_INSIDE_ASTERISK) ? 'DOCBLOCK_WHITESPACE' : 'DOCBLOCK_WHITESPACE_INDENT');
             $MACRO_TOKEN_APPEND_WORD();
             $MACRO_TOKEN_ADVANCE();

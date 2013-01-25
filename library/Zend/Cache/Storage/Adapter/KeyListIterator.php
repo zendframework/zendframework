@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Countable,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\IteratorInterface,
-    Zend\Cache\Storage\StorageInterface;
+use Countable;
+use Zend\Cache\Storage\IteratorInterface;
+use Zend\Cache\Storage\StorageInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class KeyListIterator implements IteratorInterface, Countable
 {
@@ -76,7 +62,6 @@ class KeyListIterator implements IteratorInterface, Countable
      *
      * @param StorageInterface $storage
      * @param array            $keys
-     * @return void
      */
     public function __construct(StorageInterface $storage, array $keys)
     {
@@ -117,10 +102,10 @@ class KeyListIterator implements IteratorInterface, Countable
         return $this;
     }
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -139,20 +124,20 @@ class KeyListIterator implements IteratorInterface, Countable
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
      */
     public function key()
     {
         return $this->keys[$this->position];
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return bool
      */
     public function valid()
     {
@@ -169,10 +154,10 @@ class KeyListIterator implements IteratorInterface, Countable
         $this->position++;
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail;
 
-use ArrayIterator,
-    Iterator,
-    Countable,
-    Traversable,
-    Zend\Loader\PluginClassLocator;
+use ArrayIterator;
+use Countable;
+use Iterator;
+use Traversable;
+use Zend\Loader\PluginClassLocator;
 
 /**
  * Basic mail headers collection functionality
@@ -35,10 +24,8 @@ use ArrayIterator,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Headers implements Iterator, Countable
+class Headers implements Countable, Iterator
 {
     /** @var string End of Line for fields */
     const EOL = "\r\n";
@@ -76,16 +63,17 @@ class Headers implements Iterator, Countable
      * will be lazy loaded)
      *
      * @param  string $string
+     * @param  string $EOL EOL string; defaults to {@link EOL}
      * @throws Exception\RuntimeException
      * @return Headers
      */
-    public static function fromString($string)
+    public static function fromString($string, $EOL = self::EOL)
     {
         $headers     = new static();
         $currentLine = '';
 
         // iterate the header lines, some might be continuations
-        foreach (explode(self::EOL, $string) as $line) {
+        foreach (explode($EOL, $string) as $line) {
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($currentLine) {
@@ -222,12 +210,15 @@ class Headers implements Iterator, Countable
         }
 
         if ($fieldValue === null) {
-            $header = Header\GenericHeader::fromString($headerFieldNameOrLine);
+            $this->addHeader(Header\GenericHeader::fromString($headerFieldNameOrLine));
+        } elseif (is_array($fieldValue)) {
+            foreach ($fieldValue as $i) {
+                $this->addHeader(new Header\GenericMultiHeader($headerFieldNameOrLine, $i));
+            }
         } else {
-            $header = new Header\GenericHeader($headerFieldNameOrLine, $fieldValue);
+            $this->addHeader(new Header\GenericHeader($headerFieldNameOrLine, $fieldValue));
         }
 
-        $this->addHeader($header);
         return $this;
     }
 
@@ -240,10 +231,11 @@ class Headers implements Iterator, Countable
     public function addHeader(Header\HeaderInterface $header)
     {
         $key = $this->normalizeFieldName($header->getFieldName());
-
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
-        $header->setEncoding($this->getEncoding());
+        if ($this->getEncoding() !== 'ASCII') {
+            $header->setEncoding($this->getEncoding());
+        }
         return $this;
     }
 
@@ -282,7 +274,7 @@ class Headers implements Iterator, Countable
      * Get all headers of a certain name/type
      *
      * @param  string $name
-     * @return boolean|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
+     * @return bool|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
      * contain, an ArrayIterator if the header is a MultipleHeadersInterface instance and finally returns
      * HeaderInterface for the rest of cases.
      */
@@ -292,10 +284,14 @@ class Headers implements Iterator, Countable
         $results = array();
 
         foreach (array_keys($this->headersKeys, $key) as $index) {
-            $results[] = $this->headers[$index];
+            if ($this->headers[$index] instanceof Header\GenericHeader) {
+                $results[] = $this->lazyLoadHeader($index);
+            } else {
+                $results[] = $this->headers[$index];
+            }
         }
 
-        switch(count($results)) {
+        switch (count($results)) {
             case 0:
                 return false;
             case 1:
@@ -453,7 +449,7 @@ class Headers implements Iterator, Countable
         /* @var $class Header\HeaderInterface */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
-        $encoding = $this->getEncoding();
+        $encoding = $current->getEncoding();
         $headers  = $class::fromString($current->toString());
         if (is_array($headers)) {
             $current = array_shift($headers);

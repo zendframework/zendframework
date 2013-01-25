@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -25,9 +15,7 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class NotEmpty extends AbstractValidator
 {
@@ -48,7 +36,7 @@ class NotEmpty extends AbstractValidator
     const INVALID  = 'notEmptyInvalid';
     const IS_EMPTY = 'isEmpty';
 
-    protected $_constants = array(
+    protected $constants = array(
         self::BOOLEAN       => 'boolean',
         self::INTEGER       => 'integer',
         self::FLOAT         => 'float',
@@ -67,7 +55,7 @@ class NotEmpty extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::IS_EMPTY => "Value is required and can't be empty",
         self::INVALID  => "Invalid type given. String, integer, float, boolean or array expected",
     );
@@ -84,7 +72,7 @@ class NotEmpty extends AbstractValidator
     /**
      * Constructor
      *
-     * @param  array|Traversable $options OPTIONAL
+     * @param  array|Traversable|int $options OPTIONAL
      */
     public function __construct($options = null)
     {
@@ -107,9 +95,9 @@ class NotEmpty extends AbstractValidator
                 $detected = 0;
                 $found    = false;
                 foreach ($options as $option) {
-                    if (in_array($option, $this->_constants)) {
+                    if (in_array($option, $this->constants)) {
                         $found = true;
-                        $detected += array_search($option, $this->_constants);
+                        $detected += array_search($option, $this->constants);
                     }
                 }
 
@@ -136,24 +124,24 @@ class NotEmpty extends AbstractValidator
      * Set the types
      *
      * @param  integer|array $type
-     * @throws \Zend\Validator\Exception
-     * @return \Zend\Validator\NotEmpty
+     * @throws Exception\InvalidArgumentException
+     * @return NotEmpty
      */
     public function setType($type = null)
     {
         if (is_array($type)) {
             $detected = 0;
-            foreach($type as $value) {
+            foreach ($type as $value) {
                 if (is_int($value)) {
                     $detected += $value;
-                } else if (in_array($value, $this->_constants)) {
-                    $detected += array_search($value, $this->_constants);
+                } elseif (in_array($value, $this->constants)) {
+                    $detected += array_search($value, $this->constants);
                 }
             }
 
             $type = $detected;
-        } else if (is_string($type) && in_array($type, $this->_constants)) {
-            $type = array_search($type, $this->_constants);
+        } elseif (is_string($type) && in_array($type, $this->constants)) {
+            $type = array_search($type, $this->constants);
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
@@ -168,7 +156,7 @@ class NotEmpty extends AbstractValidator
      * Returns true if and only if $value is not an empty value.
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -210,7 +198,7 @@ class NotEmpty extends AbstractValidator
         if ($type >= self::OBJECT) {
             $type -= self::OBJECT;
             // fall trough, objects are always not empty
-        } else if ($object === false) {
+        } elseif ($object === false) {
             // object not allowed but object given -> return false
             if (is_object($value)) {
                 $this->error(self::IS_EMPTY);

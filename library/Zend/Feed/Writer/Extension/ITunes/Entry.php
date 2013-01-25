@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
- 
-namespace Zend\Feed\Writer\Extension\ITunes;
-use Zend\Feed\Writer\Extension;
-use Zend\Feed\Writer;
 
+namespace Zend\Feed\Writer\Extension\ITunes;
+
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Extension;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Entry
 {
@@ -36,37 +24,37 @@ class Entry
      *
      * @var array
      */
-    protected $_data = array();
-    
+    protected $data = array();
+
     /**
      * Encoding of all text values
      *
      * @var string
      */
-    protected $_encoding = 'UTF-8';
-    
+    protected $encoding = 'UTF-8';
+
     /**
      * Set feed encoding
-     * 
-     * @param  string $enc 
-     * @return Zend_Feed_Writer_Extension_ITunes_Entry
+     *
+     * @param  string $enc
+     * @return Entry
      */
     public function setEncoding($enc)
     {
-        $this->_encoding = $enc;
+        $this->encoding = $enc;
         return $this;
     }
-    
+
     /**
      * Get feed encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
-    
+
     /**
      * Set a block value of "yes" or "no". You may also set an empty string.
      *
@@ -84,13 +72,13 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
         }
-        $this->_data['block'] = $value;
+        $this->data['block'] = $value;
     }
-    
+
     /**
      * Add authors to itunes entry
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Entry
      */
     public function addItunesAuthors(array $values)
@@ -100,11 +88,11 @@ class Entry
         }
         return $this;
     }
-    
+
     /**
      * Add author to itunes entry
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -114,17 +102,17 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
-        if (!isset($this->_data['authors'])) {
-            $this->_data['authors'] = array();
+        if (!isset($this->data['authors'])) {
+            $this->data['authors'] = array();
         }
-        $this->_data['authors'][] = $value;   
+        $this->data['authors'][] = $value;
         return $this;
     }
-    
+
     /**
      * Set duration
-     * 
-     * @param  int $value 
+     *
+     * @param  int $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -138,14 +126,14 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "duration" may only'
             . ' be of a specified [[HH:]MM:]SS format');
         }
-        $this->_data['duration'] = $value;
+        $this->data['duration'] = $value;
         return $this;
     }
-    
+
     /**
      * Set "explicit" flag
-     * 
-     * @param  bool $value 
+     *
+     * @param  bool $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -155,14 +143,14 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }
-        $this->_data['explicit'] = $value;
+        $this->data['explicit'] = $value;
         return $this;
     }
-    
+
     /**
      * Set keywords
-     * 
-     * @param  array $value 
+     *
+     * @param  array $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -178,15 +166,16 @@ class Entry
             . ' have a concatenated length of 255 chars where terms are delimited'
             . ' by a comma');
         }
-        $this->_data['keywords'] = $value;
+        $this->data['keywords'] = $value;
         return $this;
     }
-    
+
     /**
      * Set subtitle
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Entry
+     * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesSubtitle($value)
     {
@@ -194,14 +183,14 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "subtitle" may only'
             . ' contain a maximum of 255 characters');
         }
-        $this->_data['subtitle'] = $value;
+        $this->data['subtitle'] = $value;
         return $this;
     }
-    
+
     /**
      * Set summary
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -211,15 +200,16 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "summary" may only'
             . ' contain a maximum of 4000 characters');
         }
-        $this->_data['summary'] = $value;
+        $this->data['summary'] = $value;
         return $this;
     }
-    
+
     /**
      * Overloading to itunes specific setters
-     * 
-     * @param  string $method 
-     * @param  array $params 
+     *
+     * @param  string $method
+     * @param  array $params
+     * @throws Writer\Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, array $params)
@@ -232,11 +222,11 @@ class Entry
                 'invalid method: ' . $method
             );
         }
-        if (!array_key_exists($point, $this->_data) 
-            || empty($this->_data[$point])
+        if (!array_key_exists($point, $this->data)
+            || empty($this->data[$point])
         ) {
             return null;
         }
-        return $this->_data[$point];
+        return $this->data[$point];
     }
 }

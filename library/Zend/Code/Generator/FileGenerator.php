@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage PHP
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator;
@@ -26,8 +15,6 @@ use Zend\Code\Reflection\FileReflection;
 /**
  * @category   Zend
  * @package    Zend_Code_Generator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FileGenerator extends AbstractGenerator
 {
@@ -104,7 +91,7 @@ class FileGenerator extends AbstractGenerator
             include $realpath;
         }
 
-        $codeGenerator = self::fromReflection(($fileReflector = new FileReflection($realpath)));
+        $codeGenerator = static::fromReflection(($fileReflector = new FileReflection($realpath)));
 
         return $codeGenerator;
     }
@@ -117,7 +104,7 @@ class FileGenerator extends AbstractGenerator
      */
     public static function fromReflection(FileReflection $fileReflection)
     {
-        $file = new self();
+        $file = new static();
 
         $file->setSourceContent($fileReflection->getContents());
         $file->setSourceDirty(false);
@@ -349,7 +336,11 @@ class FileGenerator extends AbstractGenerator
     public function setUses(array $uses)
     {
         foreach ($uses as $use) {
-            $this->setUse($use[0], $use[1]);
+            if (is_array($use)) {
+                $this->setUse($use[0], $use[1]);
+            } else {
+                $this->setUse($use);
+            }
         }
         return $this;
     }
@@ -363,7 +354,9 @@ class FileGenerator extends AbstractGenerator
      */
     public function setUse($use, $as = null)
     {
-        $this->uses[] = array($use, $as);
+        if (!in_array(array($use, $as), $this->uses)) {
+            $this->uses[] = array($use, $as);
+        }
         return $this;
     }
 
@@ -529,7 +522,8 @@ class FileGenerator extends AbstractGenerator
         $output .= self::LINE_FEED;
 
         // namespace, if any
-        if ($namespace = $this->getNamespace()) {
+        $namespace = $this->getNamespace();
+        if ($namespace) {
             $output .= sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
         }
 
@@ -598,5 +592,4 @@ class FileGenerator extends AbstractGenerator
         file_put_contents($this->filename, $this->generate());
         return $this;
     }
-
 }

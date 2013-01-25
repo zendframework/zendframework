@@ -1,23 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Code25.php 20096 2010-01-06 02:05:09Z bkarwin $
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
@@ -27,15 +15,13 @@ namespace Zend\Barcode\Object;
  *
  * @category   Zend
  * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Code128 extends AbstractObject
 {
     /**
      * Drawing of checksum
      * (even if it's sometime optional, most of time it's required)
-     * @var boolean
+     * @var bool
      */
     protected $withChecksum = true;
 
@@ -209,6 +195,7 @@ class Code128 extends AbstractObject
 
     /**
      * Convert string to barcode string
+     * @param string $string
      * @return array
      */
     protected function convertToBarcodeChars($string)
@@ -231,8 +218,8 @@ class Code128 extends AbstractObject
             $char = $string[$pos];
             $code = null;
 
-            if (self::_isDigit($string, $pos, 4) && $currentCharset != 'C'
-             || self::_isDigit($string, $pos, 2) && $currentCharset == 'C') {
+            if (static::_isDigit($string, $pos, 4) && $currentCharset != 'C'
+             || static::_isDigit($string, $pos, 2) && $currentCharset == 'C') {
                 /**
                  * Switch to C if the next 4 chars are numeric or stay C if the next 2
                  * chars are numeric
@@ -246,7 +233,7 @@ class Code128 extends AbstractObject
                     $result[] = $code;
                     $currentCharset = 'C';
                 }
-            } else if (in_array($char, $this->charSets['B']) && $currentCharset != 'B'
+            } elseif (in_array($char, $this->charSets['B']) && $currentCharset != 'B'
                   && !(in_array($char, $this->charSets['A']) && $currentCharset == 'A')) {
                 /**
                  * Switch to B as B contains the char and B is not the current charset.
@@ -258,7 +245,7 @@ class Code128 extends AbstractObject
                 }
                 $result[] = $code;
                 $currentCharset = 'B';
-            } else if (array_key_exists($char, $this->charSets['A']) && $currentCharset != 'A'
+            } elseif (array_key_exists($char, $this->charSets['A']) && $currentCharset != 'A'
                   && !(array_key_exists($char, $this->charSets['B']) && $currentCharset == 'B')) {
                 /**
                  * Switch to C as C contains the char and C is not the current charset.
@@ -288,7 +275,7 @@ class Code128 extends AbstractObject
     /**
      * Set text to encode
      * @param string $value
-     * @return Zend_Barcode_Object
+     * @return Code128
      */
     public function setText($value)
     {

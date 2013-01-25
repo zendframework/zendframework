@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use RecursiveIteratorIterator;
+use Traversable;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -35,8 +25,6 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Links extends AbstractHelper
 {
@@ -112,7 +100,7 @@ class Links extends AbstractHelper
      * Helper entry point
      *
      * @param  string|AbstractContainer $container container to operate on
-     * @return Navigation
+     * @return Links
      */
     public function __invoke($container = null)
     {
@@ -136,11 +124,15 @@ class Links extends AbstractHelper
      *
      * @param  string $method             method name
      * @param  array  $arguments          method arguments
-     * @throws Navigation\Exception\ExceptionInterface  if method does not exist in container
+     * @return mixed
+     * @throws Exception\ExceptionInterface  if method does not exist in container
      */
     public function __call($method, array $arguments = array())
     {
-        if (@preg_match('/find(Rel|Rev)(.+)/', $method, $match)) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/find(Rel|Rev)(.+)/', $method, $match);
+        ErrorHandler::stop();
+        if ($result) {
             return $this->findRelation($arguments[0],
                                        strtolower($match[1]),
                                        strtolower($match[2]));
@@ -216,6 +208,7 @@ class Links extends AbstractHelper
      * </code>
      *
      * @param  AbstractPage $page  page to find links for
+     * @param null|int $flag
      * @return array related pages
      */
     public function findAllRelations(AbstractPage $page, $flag = null)
@@ -225,14 +218,14 @@ class Links extends AbstractHelper
         }
 
         $result = array('rel' => array(), 'rev' => array());
-        $native = array_values(self::$RELATIONS);
+        $native = array_values(static::$RELATIONS);
 
         foreach (array_keys($result) as $rel) {
             $meth = 'getDefined' . ucfirst($rel);
             $types = array_merge($native, array_diff($page->$meth(), $native));
 
             foreach ($types as $type) {
-                if (!$relFlag = array_search($type, self::$RELATIONS)) {
+                if (!$relFlag = array_search($type, static::$RELATIONS)) {
                     $relFlag = self::RENDER_CUSTOM;
                 }
                 if (!($flag & $relFlag)) {
@@ -725,7 +718,7 @@ class Links extends AbstractHelper
         );
 
         return '<link' .
-               $this->_htmlAttribs($attribs) .
+               $this->htmlAttribs($attribs) .
                $this->getClosingBracket();
     }
 
@@ -736,9 +729,9 @@ class Links extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  AbstractContainer string|$container [optional] container to render.
-     *                                         Default is to render the 
-     *                                         container registered in the 
+     * @param  AbstractContainer|string|null $container [optional] container to render.
+     *                                         Default is to render the
+     *                                         container registered in the
      *                                         helper.
      * @return string                          helper output
      */

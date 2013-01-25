@@ -1,59 +1,45 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RealPath extends AbstractFilter
 {
     /**
-     * @var boolean $_pathExists
+     * @var array $options
      */
-    protected $_exists = true;
+    protected $options = array(
+        'exists' => true
+    );
 
     /**
      * Class constructor
      *
-     * @param boolean|\Traversable $options Options to set
+     * @param  bool|Traversable $existsOrOptions Options to set
      */
-    public function __construct($options = true)
+    public function __construct($existsOrOptions = true)
     {
-        $this->setExists($options);
-    }
-
-    /**
-     * Returns true if the filtered path must exist
-     *
-     * @return boolean
-     */
-    public function getExists()
-    {
-        return $this->_exists;
+        if ($existsOrOptions !== null) {
+            if (!static::isOptions($existsOrOptions)) {
+                $this->setExists($existsOrOptions);
+            } else {
+                $this->setOptions($existsOrOptions);
+            }
+        }
     }
 
     /**
@@ -61,23 +47,23 @@ class RealPath extends AbstractFilter
      * TRUE when the path must exist
      * FALSE when not existing paths can be given
      *
-     * @param boolean|array|Traversable $options Path must exist
+     * @param  bool $flag Path must exist
      * @return RealPath
      */
-    public function setExists($options)
+    public function setExists($flag = true)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-
-        if (is_array($options)) {
-            if (isset($options['exists'])) {
-                $options = (boolean) $options['exists'];
-            }
-        }
-
-        $this->_exists = (boolean) $options;
+        $this->options['exists'] = (bool) $flag;
         return $this;
+    }
+
+    /**
+     * Returns true if the filtered path must exist
+     *
+     * @return bool
+     */
+    public function getExists()
+    {
+        return $this->options['exists'];
     }
 
     /**
@@ -91,20 +77,22 @@ class RealPath extends AbstractFilter
     public function filter($value)
     {
         $path = (string) $value;
-        if ($this->_exists) {
+        if ($this->options['exists']) {
             return realpath($path);
         }
 
-        $realpath = @realpath($path);
+        ErrorHandler::start();
+        $realpath = realpath($path);
+        ErrorHandler::stop();
         if ($realpath) {
             return $realpath;
         }
 
         $drive = '';
-        if (substr(PHP_OS, 0, 3) == 'WIN') {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $path = preg_replace('/[\\\\\/]/', DIRECTORY_SEPARATOR, $path);
             if (preg_match('/([a-zA-Z]\:)(.*)/', $path, $matches)) {
-                list($fullMatch, $drive, $path) = $matches;
+                list(, $drive, $path) = $matches;
             } else {
                 $cwd   = getcwd();
                 $drive = substr($cwd, 0, 2);

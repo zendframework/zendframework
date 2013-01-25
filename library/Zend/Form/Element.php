@@ -1,32 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Element implements ElementInterface
 {
@@ -36,35 +25,58 @@ class Element implements ElementInterface
     protected $attributes = array();
 
     /**
+     * @var string
+     */
+    protected $label;
+
+    /**
+     * @var array
+     */
+    protected $labelAttributes;
+
+    /**
      * @var array Validation error messages
      */
     protected $messages = array();
 
     /**
-     * Constructor
-     * 
-     * @param  null|string|int $name Optional name for the element
-     * @return void
+     * @var array custom options
      */
-    public function __construct($name = null)
+    protected $options = array();
+
+    /**
+     * @var mixed
+     */
+    protected $value;
+
+    /**
+     * @param  null|int|string  $name    Optional name for the element
+     * @param  array            $options Optional options for the element
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($name = null, $options = array())
     {
         if (null !== $name) {
             $this->setName($name);
+        }
+
+        if (!empty($options)) {
+            $this->setOptions($options);
         }
     }
 
     /**
      * Set value for name
      *
-     * @param  string|int name
-     * @return Element
+     * @param  string $name
+     * @return Element|ElementInterface
      */
     public function setName($name)
     {
         $this->setAttribute('name', $name);
         return $this;
     }
-    
+
     /**
      * Get value for name
      *
@@ -76,23 +88,85 @@ class Element implements ElementInterface
     }
 
     /**
+     * Set options for an element. Accepted options are:
+     * - label: label to associate with the element
+     * - label_attributes: attributes to use when the label is rendered
+     *
+     * @param  array|\Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+
+        if (isset($options['label'])) {
+            $this->setLabel($options['label']);
+        }
+
+        if (isset($options['label_attributes'])) {
+            $this->setLabelAttributes($options['label_attributes']);
+        }
+
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * Get defined options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Return the specified option
+     *
+     * @param string $option
+     * @return NULL|mixed
+     */
+    public function getOption($option)
+    {
+        if (!isset($this->options[$option])) {
+            return null;
+        }
+
+        return $this->options[$option];
+    }
+
+    /**
      * Set a single element attribute
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
-     * @return Element
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return Element|ElementInterface
      */
     public function setAttribute($key, $value)
     {
+        // Do not include the value in the list of attributes
+        if ($key === 'value') {
+            $this->setValue($value);
+            return $this;
+        }
         $this->attributes[$key] = $value;
         return $this;
     }
 
     /**
      * Retrieve a single element attribute
-     * 
-     * @param  string $optionalKey 
-     * @return mixed
+     *
+     * @param  $key
+     * @return mixed|null
      */
     public function getAttribute($key)
     {
@@ -103,12 +177,24 @@ class Element implements ElementInterface
     }
 
     /**
+     * Does the element has a specific attribute ?
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function hasAttribute($key)
+    {
+        return array_key_exists($key, $this->attributes);
+    }
+
+    /**
      * Set many attributes at once
      *
      * Implementation will decide if this will overwrite or merge.
-     * 
-     * @param  array|Traversable $arrayOrTraversable 
-     * @return Element
+     *
+     * @param  array|Traversable $arrayOrTraversable
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setAttributes($arrayOrTraversable)
     {
@@ -127,8 +213,8 @@ class Element implements ElementInterface
 
     /**
      * Retrieve all attributes at once
-     * 
-     * @return array
+     *
+     * @return array|Traversable
      */
     public function getAttributes()
     {
@@ -137,19 +223,90 @@ class Element implements ElementInterface
 
     /**
      * Clear all attributes
-     * 
-     * @return void
+     *
+     * @return Element|ElementInterface
      */
     public function clearAttributes()
     {
         $this->attributes = array();
+        return $this;
+    }
+
+    /**
+     * Set the element value
+     *
+     * @param  mixed $value
+     * @return Element
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the element value
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set the label used for this element
+     *
+     * @param $label
+     * @return Element|ElementInterface
+     */
+    public function setLabel($label)
+    {
+        if (is_string($label)) {
+            $this->label = $label;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retrieve the label used for this element
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set the attributes to use with the label
+     *
+     * @param array $labelAttributes
+     * @return Element|ElementInterface
+     */
+    public function setLabelAttributes(array $labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+        return $this;
+    }
+
+    /**
+     * Get the attributes to use with the label
+     *
+     * @return array
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
     }
 
     /**
      * Set a list of messages to report when validation fails
      *
      * @param  array|Traversable $messages
-     * @return ElementInterface
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setMessages($messages)
     {
@@ -166,10 +323,10 @@ class Element implements ElementInterface
     }
 
     /**
-     * Get validation error messages, if any
+     * Get validation error messages, if any.
      *
      * Returns a list of validation failure messages, if any.
-     * 
+     *
      * @return array|Traversable
      */
     public function getMessages()

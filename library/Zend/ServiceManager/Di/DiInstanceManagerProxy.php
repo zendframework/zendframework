@@ -1,9 +1,17 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\Di\InstanceManager as DiInstanceManager,
-    Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Di\InstanceManager as DiInstanceManager;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiInstanceManagerProxy extends DiInstanceManager
 {
@@ -18,6 +26,8 @@ class DiInstanceManagerProxy extends DiInstanceManager
     protected $serviceLocator = null;
 
     /**
+     * Constructor
+     *
      * @param DiInstanceManager $diInstanceManager
      * @param ServiceLocatorInterface $serviceLocator
      */
@@ -35,6 +45,8 @@ class DiInstanceManagerProxy extends DiInstanceManager
     }
 
     /**
+     * Determine if we have a shared instance by class or alias
+     *
      * @param $classOrAlias
      * @return bool
      */
@@ -44,6 +56,8 @@ class DiInstanceManagerProxy extends DiInstanceManager
     }
 
     /**
+     * Get shared instance
+     *
      * @param $classOrAlias
      * @return mixed
      */
@@ -51,8 +65,8 @@ class DiInstanceManagerProxy extends DiInstanceManager
     {
         if ($this->serviceLocator->has($classOrAlias)) {
             return $this->serviceLocator->get($classOrAlias);
-        } else {
-            return $this->diInstanceManager->getSharedInstance($classOrAlias);
         }
+
+        return $this->diInstanceManager->getSharedInstance($classOrAlias);
     }
 }

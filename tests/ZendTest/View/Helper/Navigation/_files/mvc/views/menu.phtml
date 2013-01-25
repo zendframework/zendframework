@@ -1,0 +1,13 @@
+<?php
+$isContainer = $this->vars('container') instanceof \Zend\Navigation\AbstractContainer
+             ? 'yes'
+             : 'no';
+
+$pages = array();
+foreach ($this->vars('container') as $page) {
+    $pages[] = $page->getLabel();
+}
+$pages = implode(', ', $pages);
+?>
+Is a container: <?php echo $isContainer . PHP_EOL; ?>
+Pages: <?php echo $pages; ?>

@@ -1,45 +1,36 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ProgressBar
- * @subpackage Demos
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ProgressBar
  */
+
+use Zend\Loader\StandardAutoloader;
+use Zend\ProgressBar\Adapter\JsPush;
+use Zend\ProgressBar\ProgressBar;
 
 /**
  * This sample file demonstrates a simple use case of a jspush-driven progressbar
  */
 
 if (isset($_GET['progress'])) {
-    set_include_path(realpath(__DIR__ . '/../../../library')
-                     . PATH_SEPARATOR . get_include_path());
+    require_once dirname(dirname(dirname(__DIR__))) . '/library/Zend/Loader/StandardAutoloader.php';
+    $loader = new StandardAutoloader(array('autoregister_zf' => true));
+    $loader->register();
 
-    require_once 'Zend/ProgressBar.php';
-    require_once 'Zend/ProgressBar/Adapter/JsPush.php';
-
-    $adapter     = new Zend_ProgressBar_Adapter_JsPush(array('updateMethodName' => 'Zend_ProgressBar_Update',
-                                                             'finishMethodName' => 'Zend_ProgressBar_Finish'));
-    $progressBar = new Zend_ProgressBar($adapter, 0, 100);
+    $adapter     = new JsPush(array('updateMethodName' => 'Zend_ProgressBar_Update',
+                                    'finishMethodName' => 'Zend_ProgressBar_Finish'));
+    $progressBar = new ProgressBar($adapter, 0, 100);
 
     for ($i = 1; $i <= 100; $i++) {
         if ($i < 20) {
             $text = 'Just beginning';
-        } else if ($i < 50) {
+        } elseif ($i < 50) {
             $text = 'A bit done';
-        } else if ($i < 80) {
+        } elseif ($i < 80) {
             $text = 'Getting closer';
         } else {
             $text = 'Nearly done';
@@ -160,6 +151,8 @@ if (isset($_GET['progress'])) {
             <div class="pg-text" id="pg-text-2"></div>
         </div>
     </div>
-    <div id="progressBar"><div id="progressDone"></div></div>
+    <div id="progressBar">
+        <div id="progressDone"></div>
+    </div>
 </body>
 </html>

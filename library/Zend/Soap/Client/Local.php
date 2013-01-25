@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace Zend\Soap\Client;
 
-use Zend\Soap\Client as SOAPClient,
-    Zend\Soap\Server as SOAPServer;
+use Zend\Soap\Client as SOAPClient;
+use Zend\Soap\Server as SOAPServer;
 
 /**
  * \Zend\Soap\Client\Local
@@ -43,7 +32,7 @@ class Local extends SOAPClient
      *
      * @var \Zend\Soap\Server
      */
-    protected $_server;
+    protected $server;
 
     /**
      * Local client constructor
@@ -52,9 +41,9 @@ class Local extends SOAPClient
      * @param string $wsdl
      * @param array $options
      */
-    function __construct(SOAPServer $server, $wsdl, $options = null)
+    public function __construct(SOAPServer $server, $wsdl, $options = null)
     {
-        $this->_server = $server;
+        $this->server = $server;
 
         // Use Server specified SOAP version as default
         $this->setSoapVersion($server->getSoapVersion());
@@ -71,15 +60,22 @@ class Local extends SOAPClient
      * @param string $location
      * @param string $action
      * @param int    $version
-     * @param int    $one_way
+     * @param int    $oneWay
      * @return mixed
      */
-    public function _doRequest(Common $client, $request, $location, $action, $version, $one_way = null)
+    public function _doRequest(Common $client, $request, $location, $action, $version, $oneWay = null)
     {
         // Perform request as is
         ob_start();
-        $this->_server->handle($request);
+        $this->server->handle($request);
         $response = ob_get_clean();
+
+        if ($response === null || $response === '') {
+            $serverResponse = $this->server->getResponse();
+            if ($serverResponse !== null) {
+                $response = $serverResponse;
+            }
+        }
 
         return $response;
     }

@@ -1,27 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
+use Zend\Form\ElementPrepareAwareInterface;
+use Zend\Form\Form;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Csrf as CsrfValidator;
 
@@ -29,14 +20,12 @@ use Zend\Validator\Csrf as CsrfValidator;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Csrf extends Element implements InputProviderInterface
+class Csrf extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes
-     * 
+     *
      * @var array
      */
     protected $attributes = array(
@@ -44,71 +33,86 @@ class Csrf extends Element implements InputProviderInterface
     );
 
     /**
-     * @var CsrfValidator
+     * @var array
      */
-    protected $validator;
+    protected $csrfValidatorOptions = array();
 
     /**
-     * Set validator
+     * @var CsrfValidator
+     */
+    protected $csrfValidator;
+
+    /**
+     * Accepted options for Csrf:
+     * - csrf_options: an array used in the Csrf
      *
-     * @param  CsrfValidator $validator
+     * @param array|\Traversable $options
      * @return Csrf
      */
-    public function setValidator(CsrfValidator $validator)
+    public function setOptions($options)
     {
-        $this->validator = $validator;
+        parent::setOptions($options);
+
+        if (isset($options['csrf_options'])) {
+            $this->setCsrfValidatorOptions($options['csrf_options']);
+        }
+
         return $this;
     }
-    
+
+    /**
+     * @return array
+     */
+    public function getCsrfValidatorOptions()
+    {
+        return $this->csrfValidatorOptions;
+    }
+
+    /**
+     * @param  array $options
+     * @return Csrf
+     */
+    public function setCsrfValidatorOptions(array $options)
+    {
+        $this->csrfValidatorOptions = $options;
+        return $this;
+    }
+
     /**
      * Get CSRF validator
      *
      * @return CsrfValidator
      */
-    public function getValidator()
+    public function getCsrfValidator()
     {
-        if (null === $this->validator) {
-            $this->setValidator(new CsrfValidator(array(
-                'name' => $this->getName(),
-            )));
+        if (null === $this->csrfValidator) {
+            $csrfOptions = $this->getCsrfValidatorOptions();
+            $csrfOptions = array_merge($csrfOptions, array('name' => $this->getName()));
+            $this->setCsrfValidator(new CsrfValidator($csrfOptions));
         }
-        return $this->validator;
+        return $this->csrfValidator;
     }
 
     /**
-     * Override: set a single element attribute
-     *
-     * Does not allow setting value attribute; this will always be
-     * retrieved from the validator.
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     * @param  \Zend\Validator\Csrf $validator
      * @return Csrf
      */
-    public function setAttribute($name, $value)
+    public function setCsrfValidator(CsrfValidator $validator)
     {
-        if ('value' == $name) {
-            // Do not allow setting this
-            return;
-        }
-        return parent::setAttribute($name, $value);
+        $this->csrfValidator = $validator;
+        return $this;
     }
 
     /**
-     * Override: retrieve a single element attribute
+     * Retrieve value
      *
-     * Retrieves validator hash when asked for 'value' attribute;
-     * otherwise, proxies to parent.
-     * 
-     * @param  string $name 
-     * @return mixed
+     * Retrieves the hash from the validator
+     *
+     * @return string
      */
-    public function getAttribute($name)
+    public function getValue()
     {
-        if ($name != 'value') {
-            return parent::getAttribute($name);
-        }
-        $validator = $this->getValidator();
+        $validator = $this->getCsrfValidator();
         return $validator->getHash();
     }
 
@@ -116,13 +120,13 @@ class Csrf extends Element implements InputProviderInterface
      * Override: get attributes
      *
      * Seeds 'value' attribute with validator hash
-     * 
+     *
      * @return array
      */
     public function getAttributes()
     {
         $attributes = parent::getAttributes();
-        $validator  = $this->getValidator();
+        $validator  = $this->getCsrfValidator();
         $attributes['value'] = $validator->getHash();
         return $attributes;
     }
@@ -131,7 +135,7 @@ class Csrf extends Element implements InputProviderInterface
      * Provide default input rules for this element
      *
      * Attaches the captcha as a validator.
-     * 
+     *
      * @return array
      */
     public function getInputSpecification()
@@ -143,8 +147,16 @@ class Csrf extends Element implements InputProviderInterface
                 array('name' => 'Zend\Filter\StringTrim'),
             ),
             'validators' => array(
-                $this->getValidator(),
+                $this->getCsrfValidator(),
             ),
         );
+    }
+
+    /**
+     * Prepare the form element
+     */
+    public function prepareElement(Form $form)
+    {
+        $this->getCsrfValidator()->getHash(true);
     }
 }

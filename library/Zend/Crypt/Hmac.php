@@ -3,10 +3,11 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt;
 
 /**
@@ -14,64 +15,56 @@ namespace Zend\Crypt;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hmac
 {
-    /**
-     * List of hash algorithms supported
-     *
-     * @var array
-     */
-    protected static $supportedAlgorithms = array();
+    const OUTPUT_STRING = false;
+    const OUTPUT_BINARY = true;
 
     /**
-     * Constants representing the output mode of the hash algorithm
+     * Last algorithm supported
+     *
+     * @var string|null
      */
-    const STRING = 'string';
-    const BINARY = 'binary';
+    protected static $lastAlgorithmSupported;
 
     /**
      * Performs a HMAC computation given relevant details such as Key, Hashing
      * algorithm, the data to compute MAC of, and an output format of String,
-     * Binary notation or BTWOC.
+     * or Binary.
      *
-     * @param  string $key
-     * @param  string $hash
-     * @param  string $data
-     * @param  string $output
+     * @param  string  $key
+     * @param  string  $hash
+     * @param  string  $data
+     * @param  bool $output
      * @throws Exception\InvalidArgumentException
      * @return string
      */
-    public static function compute($key, $hash, $data, $output = self::STRING)
+    public static function compute($key, $hash, $data, $output = self::OUTPUT_STRING)
     {
-        if (!isset($key) || empty($key)) {
+        if (empty($key)) {
             throw new Exception\InvalidArgumentException('Provided key is null or empty');
         }
 
-        $hash = strtolower($hash);
-        if (!self::isSupported($hash)) {
-            throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
+        if (!$hash || ($hash !== static::$lastAlgorithmSupported && !static::isSupported($hash))) {
+            throw new Exception\InvalidArgumentException(
+                "Hash algorithm is not supported on this PHP installation; provided '{$hash}'"
+            );
         }
 
-        if ($output == self::BINARY) {
-            return hash_hmac($hash, $data, $key, 1);
-        } else {
-            return hash_hmac($hash, $data, $key);
-        }
+        return hash_hmac($hash, $data, $key, $output);
     }
 
     /**
      * Get the output size according to the hash algorithm and the output format
      *
-     * @param  string $hash
-     * @param  string $output
+     * @param  string  $hash
+     * @param  bool $output
      * @return integer
      */
-    public static function getOutputSize($hash, $output = self::STRING)
+    public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {
-        return strlen(self::compute('key', $hash, 'data', $output));
+        return strlen(static::compute('key', $hash, 'data', $output));
     }
 
     /**
@@ -81,20 +74,34 @@ class Hmac
      */
     public static function getSupportedAlgorithms()
     {
-        if (empty(self::$supportedAlgorithms)) {
-            self::$supportedAlgorithms = hash_algos();
-        }
-        return self::$supportedAlgorithms;
+        return hash_algos();
     }
 
     /**
      * Is the hash algorithm supported?
      *
-     * @param  string $algo
-     * @return boolean
+     * @param  string $algorithm
+     * @return bool
      */
-    public static function isSupported($algo)
+    public static function isSupported($algorithm)
     {
-        return in_array($algo, self::getSupportedAlgorithms());
+        if ($algorithm === static::$lastAlgorithmSupported) {
+            return true;
+        }
+
+        if (in_array(strtolower($algorithm), hash_algos(), true)) {
+            static::$lastAlgorithmSupported = $algorithm;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Clear the cache of last algorithm supported
+     */
+    public static function clearLastAlgorithmCache()
+    {
+        static::$lastAlgorithmSupported = null;
     }
 }

@@ -1,38 +1,62 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
 
+use Zend\Filter\Boolean as BooleanFilter;
+
 /**
  * AllowEmpty annotation
  *
- * Presence of this annotation is a hint that the associated 
- * \Zend\InputFilter\Input should enable the allow_empty flag.
+ * Presence of this annotation is a hint that the associated
+ * \Zend\InputFilter\Input should enable the allowEmpty flag.
  *
- * @category   Zend
+ * @Annotation
  * @package    Zend_Form
  * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AllowEmpty extends AbstractAnnotation
+class AllowEmpty
 {
+    /**
+     * @var bool
+     */
+    protected $allowEmpty = true;
+
+    /**
+     * Receive and process the contents of an annotation
+     *
+     * @param array $data
+     */
+    public function __construct(array $data)
+    {
+        if (!isset($data['value'])) {
+            $data['value'] = false;
+        }
+
+        $allowEmpty = $data['value'];
+
+        if (!is_bool($allowEmpty)) {
+            $filter   = new BooleanFilter();
+            $allowEmpty = $filter->filter($allowEmpty);
+        }
+
+        $this->allowEmpty = $allowEmpty;
+    }
+
+    /**
+     * Get value of required flag
+     *
+     * @return bool
+     */
+    public function getAllowEmpty()
+    {
+        return $this->allowEmpty;
+    }
 }

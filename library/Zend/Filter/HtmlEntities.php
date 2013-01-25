@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
@@ -26,8 +16,6 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HtmlEntities extends AbstractFilter
 {
@@ -36,21 +24,21 @@ class HtmlEntities extends AbstractFilter
      *
      * @var integer
      */
-    protected $_quoteStyle;
+    protected $quoteStyle;
 
     /**
      * Corresponds to the third htmlentities() argument
      *
      * @var string
      */
-    protected $_encoding;
+    protected $encoding;
 
     /**
      * Corresponds to the forth htmlentities() argument
      *
-     * @var boolean
+     * @var bool
      */
-    protected $_doubleQuote;
+    protected $doubleQuote;
 
     /**
      * Sets filter options
@@ -73,7 +61,7 @@ class HtmlEntities extends AbstractFilter
         }
 
         if (!isset($options['quotestyle'])) {
-            $options['quotestyle'] = ENT_COMPAT;
+            $options['quotestyle'] = ENT_QUOTES;
         }
 
         if (!isset($options['encoding'])) {
@@ -99,7 +87,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function getQuoteStyle()
     {
-        return $this->_quoteStyle;
+        return $this->quoteStyle;
     }
 
     /**
@@ -110,7 +98,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setQuoteStyle($quoteStyle)
     {
-        $this->_quoteStyle = $quoteStyle;
+        $this->quoteStyle = $quoteStyle;
         return $this;
     }
 
@@ -122,7 +110,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function getEncoding()
     {
-         return $this->_encoding;
+         return $this->encoding;
     }
 
     /**
@@ -133,7 +121,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setEncoding($value)
     {
-        $this->_encoding = (string) $value;
+        $this->encoding = (string) $value;
         return $this;
     }
 
@@ -165,22 +153,22 @@ class HtmlEntities extends AbstractFilter
     /**
      * Returns the doubleQuote option
      *
-     * @return boolean
+     * @return bool
      */
     public function getDoubleQuote()
     {
-        return $this->_doubleQuote;
+        return $this->doubleQuote;
     }
 
     /**
      * Sets the doubleQuote option
      *
-     * @param boolean $doubleQuote
+     * @param  bool $doubleQuote
      * @return HtmlEntities Provides a fluent interface
      */
     public function setDoubleQuote($doubleQuote)
     {
-        $this->_doubleQuote = (boolean) $doubleQuote;
+        $this->doubleQuote = (bool) $doubleQuote;
         return $this;
     }
 

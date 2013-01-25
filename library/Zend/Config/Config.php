@@ -1,43 +1,36 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config;
 
-use Countable,
-    Iterator,
-    ArrayAccess,
-    Zend\Stdlib\ArrayUtils
-;
+use ArrayAccess;
+use Countable;
+use Iterator;
 
 /**
+ * Provides a property based interface to an array.
+ * The data are read-only unless $allowModifications is set to true
+ * on construction.
+ *
+ * Implements Countable, Iterator and ArrayAccess
+ * to facilitate easy access to the data.
+ *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Config implements Countable, Iterator, ArrayAccess
 {
     /**
      * Whether modifications to configuration data are allowed.
      *
-     * @var boolean
+     * @var bool
      */
     protected $allowModifications;
 
@@ -59,29 +52,26 @@ class Config implements Countable, Iterator, ArrayAccess
      * Used when unsetting values during iteration to ensure we do not skip
      * the next element.
      *
-     * @var boolean
+     * @var bool
      */
     protected $skipNextIteration;
 
     /**
-     * Zend_Config provides a property based interface to
-     * an array. The data are read-only unless $allowModifications
-     * is set to true on construction.
+     * Constructor.
      *
-     * Zend_Config also implements Countable, Iterator and ArrayAccess to
-     * facilitate easy access to the data.
+     * Data is read-only unless $allowModifications is set to true
+     * on construction.
      *
      * @param  array   $array
-     * @param  boolean $allowModifications
-     * @return void
+     * @param  bool $allowModifications
      */
     public function __construct(array $array, $allowModifications = false)
     {
-        $this->allowModifications = (boolean) $allowModifications;
+        $this->allowModifications = (bool) $allowModifications;
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $this->data[$key] = new self($value, $this->allowModifications);
+                $this->data[$key] = new static($value, $this->allowModifications);
             } else {
                 $this->data[$key] = $value;
             }
@@ -126,12 +116,18 @@ class Config implements Countable, Iterator, ArrayAccess
      * @param  string $name
      * @param  mixed  $value
      * @return void
+     * @throws Exception\RuntimeException
      */
     public function __set($name, $value)
     {
         if ($this->allowModifications) {
+
             if (is_array($value)) {
-                $this->data[$name] = new self($value, true);
+                $value = new static($value, true);
+            }
+
+            if (null === $name) {
+                $this->data[] = $value;
             } else {
                 $this->data[$name] = $value;
             }
@@ -173,6 +169,7 @@ class Config implements Countable, Iterator, ArrayAccess
         $array = array();
         $data  = $this->data;
 
+        /** @var self $value */
         foreach ($data as $key => $value) {
             if ($value instanceof self) {
                 $array[$key] = $value->toArray();
@@ -188,7 +185,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * isset() overloading
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -200,6 +197,7 @@ class Config implements Countable, Iterator, ArrayAccess
      *
      * @param  string $name
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function __unset($name)
     {
@@ -278,7 +276,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * valid(): defined by Iterator interface.
      *
      * @see    Iterator::valid()
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -290,7 +288,7 @@ class Config implements Countable, Iterator, ArrayAccess
      *
      * @see    ArrayAccess::offsetExists()
      * @param  mixed $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -342,11 +340,12 @@ class Config implements Countable, Iterator, ArrayAccess
      * - Items in $merge with INTEGER keys will be appended.
      * - Items in $merge with STRING keys will overwrite current values.
      *
-     * @param  Config $replace
+     * @param  Config $merge
      * @return Config
      */
-    public function merge(self $merge)
+    public function merge(Config $merge)
     {
+        /** @var Config $value */
         foreach ($merge as $key => $value) {
             if (array_key_exists($key, $this->data)) {
                 if (is_int($key)) {
@@ -355,17 +354,19 @@ class Config implements Countable, Iterator, ArrayAccess
                     $this->data[$key]->merge($value);
                 } else {
                     if ($value instanceof self) {
-                        $this->data[$key] = new self($value->toArray(), $this->allowModifications);
+                        $this->data[$key] = new static($value->toArray(), $this->allowModifications);
                     } else {
                         $this->data[$key] = $value;
                     }
                 }
             } else {
                 if ($value instanceof self) {
-                    $this->data[$key] = new self($value->toArray(), $this->allowModifications);
+                    $this->data[$key] = new static($value->toArray(), $this->allowModifications);
                 } else {
                     $this->data[$key] = $value;
                 }
+
+                $this->count++;
             }
         }
 
@@ -384,6 +385,7 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         $this->allowModifications = false;
 
+        /** @var Config $value */
         foreach ($this->data as $value) {
             if ($value instanceof self) {
                 $value->setReadOnly();
@@ -394,7 +396,7 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Returns whether this Config object is read only or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isReadOnly()
     {

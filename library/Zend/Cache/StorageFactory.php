@@ -1,52 +1,38 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache;
 
-use Traversable,
-    Zend\Loader\Broker,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StorageFactory
 {
     /**
-     * Broker for loading adapters
+     * Plugin manager for loading adapters
      *
-     * @var null|Broker
+     * @var null|Storage\AdapterPluginManager
      */
-    protected static $adapterBroker = null;
+    protected static $adapters = null;
 
     /**
-     * Broker for loading plugins
+     * Plugin manager for loading plugins
      *
-     * @var null|Broker
+     * @var null|Storage\PluginManager
      */
-    protected static $pluginBroker = null;
+    protected static $plugins = null;
 
     /**
      * The storage factory
@@ -87,7 +73,7 @@ class StorageFactory
             $adapterOptions = array_merge($adapterOptions, $cfg['options']);
         }
 
-        $adapter = static::adapterFactory((string)$adapterName, $adapterOptions);
+        $adapter = static::adapterFactory((string) $adapterName, $adapterOptions);
 
         // add plugins
         if (isset($cfg['plugins'])) {
@@ -150,7 +136,7 @@ class StorageFactory
             // $adapterName is already an adapter object
             $adapter = $adapterName;
         } else {
-            $adapter = static::getAdapterBroker()->load($adapterName);
+            $adapter = static::getAdapterPluginManager()->get($adapterName);
         }
 
         if ($options) {
@@ -161,46 +147,45 @@ class StorageFactory
     }
 
     /**
-     * Get the adapter broker
+     * Get the adapter plugin manager
      *
-     * @return Broker
+     * @return Storage\AdapterPluginManager
      */
-    public static function getAdapterBroker()
+    public static function getAdapterPluginManager()
     {
-        if (static::$adapterBroker === null) {
-            static::$adapterBroker = new Storage\AdapterBroker();
-            static::$adapterBroker->setRegisterPluginsOnLoad(false);
+        if (static::$adapters === null) {
+            static::$adapters = new Storage\AdapterPluginManager();
         }
-        return static::$adapterBroker;
+        return static::$adapters;
     }
 
     /**
-     * Change the adapter broker
+     * Change the adapter plugin manager
      *
-     * @param  Broker $broker
+     * @param  Storage\AdapterPluginManager $adapters
      * @return void
      */
-    public static function setAdapterBroker(Broker $broker)
+    public static function setAdapterPluginManager(Storage\AdapterPluginManager $adapters)
     {
-        static::$adapterBroker = $broker;
+        static::$adapters = $adapters;
     }
 
     /**
-     * Resets the internal adapter broker
+     * Resets the internal adapter plugin manager
      *
      * @return void
      */
-    public static function resetAdapterBroker()
+    public static function resetAdapterPluginManager()
     {
-        static::$adapterBroker = null;
+        static::$adapters = null;
     }
 
     /**
      * Instantiate a storage plugin
      *
-     * @param string|Storage\Plugin                          $pluginName
+     * @param string|Storage\Plugin\PluginInterface     $pluginName
      * @param array|Traversable|Storage\Plugin\PluginOptions $options
-     * @return Storage\Plugin
+     * @return Storage\Plugin\PluginInterface
      * @throws Exception\RuntimeException
      */
     public static function pluginFactory($pluginName, $options = array())
@@ -209,7 +194,7 @@ class StorageFactory
             // $pluginName is already an plugin object
             $plugin = $pluginName;
         } else {
-            $plugin = static::getPluginBroker()->load($pluginName);
+            $plugin = static::getPluginManager()->get($pluginName);
         }
 
         if (!$options instanceof Storage\Plugin\PluginOptions) {
@@ -224,37 +209,36 @@ class StorageFactory
     }
 
     /**
-     * Get the plugin broker
+     * Get the plugin manager
      *
-     * @return Broker
+     * @return Storage\PluginManager
      */
-    public static function getPluginBroker()
+    public static function getPluginManager()
     {
-        if (static::$pluginBroker === null) {
-            static::$pluginBroker = new Storage\PluginBroker();
-            static::$pluginBroker->setRegisterPluginsOnLoad(false);
+        if (static::$plugins === null) {
+            static::$plugins = new Storage\PluginManager();
         }
-        return static::$pluginBroker;
+        return static::$plugins;
     }
 
     /**
-     * Change the plugin broker
+     * Change the plugin manager
      *
-     * @param  Broker $broker
+     * @param  Storage\PluginManager $plugins
      * @return void
      */
-    public static function setPluginBroker(Broker $broker)
+    public static function setPluginManager(Storage\PluginManager $plugins)
     {
-        static::$pluginBroker = $broker;
+        static::$plugins = $plugins;
     }
 
     /**
-     * Resets the internal plugin broker
+     * Resets the internal plugin manager
      *
      * @return void
      */
-    public static function resetPluginBroker()
+    public static function resetPluginManager()
     {
-        static::$pluginBroker = null;
+        static::$plugins = null;
     }
 }

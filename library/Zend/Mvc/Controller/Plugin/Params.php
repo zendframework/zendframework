@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\InjectApplicationEventInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Params extends AbstractPlugin
 {
@@ -41,19 +28,87 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function __invoke($param, $default = null)
+    public function __invoke($param = null, $default = null)
     {
+        if ($param === null) {
+            return $this;
+        }
         return $this->fromRoute($param, $default);
     }
 
     /**
-     * Get a param from the route match.
+     * Return all files or a single file.
      *
-     * @param string $param
-     * @param mixed $default
+     * @param  string $name File name to retrieve, or null to get all.
+     * @param  mixed $default Default value to use when the file is missing.
+     * @return array|\ArrayAccess|null
+     */
+    public function fromFiles($name = null, $default = null)
+    {
+        if ($name === null) {
+            return $this->getController()->getRequest()->getFiles($name, $default)->toArray();
+        }
+
+        return $this->getController()->getRequest()->getFiles($name, $default);
+    }
+
+    /**
+     * Return all header parameters or a single header parameter.
+     *
+     * @param  string $header Header name to retrieve, or null to get all.
+     * @param  mixed $default Default value to use when the requested header is missing.
+     * @return null|\Zend\Http\Header\HeaderInterface
+     */
+    public function fromHeader($header = null, $default = null)
+    {
+        if ($header === null) {
+            return $this->getController()->getRequest()->getHeaders($header, $default)->toArray();
+        }
+
+        return $this->getController()->getRequest()->getHeaders($header, $default);
+    }
+
+    /**
+     * Return all post parameters or a single post parameter.
+     *
+     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      */
-    public function fromRoute($param, $default = null)
+    public function fromPost($param = null, $default = null)
+    {
+        if ($param === null) {
+            return $this->getController()->getRequest()->getPost($param, $default)->toArray();
+        }
+
+        return $this->getController()->getRequest()->getPost($param, $default);
+    }
+
+    /**
+     * Return all query parameters or a single query parameter.
+     *
+     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param mixed $default Default value to use when the parameter is missing.
+     * @return mixed
+     */
+    public function fromQuery($param = null, $default = null)
+    {
+        if ($param === null) {
+            return $this->getController()->getRequest()->getQuery($param, $default)->toArray();
+        }
+
+        return $this->getController()->getRequest()->getQuery($param, $default);
+    }
+
+    /**
+     * Return all route parameters or a single route parameter.
+     *
+     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param mixed $default Default value to use when the parameter is missing.
+     * @return mixed
+     * @throws RuntimeException
+     */
+    public function fromRoute($param = null, $default = null)
     {
         $controller = $this->getController();
 
@@ -63,30 +118,10 @@ class Params extends AbstractPlugin
             );
         }
 
+        if ($param === null) {
+            return $controller->getEvent()->getRouteMatch()->getParams();
+        }
+
         return $controller->getEvent()->getRouteMatch()->getParam($param, $default);
-    }
-
-    /**
-     * Get a param from POST.
-     *
-     * @param string $param
-     * @param mixed $default
-     * @return mixed
-     */
-    public function fromPost($param, $default = null)
-    {
-        return $this->getController()->getRequest()->post()->get($param, $default);
-    }
-
-    /**
-     * Get a param from QUERY.
-     *
-     * @param string $param
-     * @param mixed $default
-     * @return mixed
-     */
-    public function fromQuery($param, $default = null)
-    {
-        return $this->getController()->getRequest()->query()->get($param, $default);
     }
 }

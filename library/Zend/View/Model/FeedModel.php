@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Model;
 
-use Zend\Feed\Writer\Feed,
-    Zend\Feed\Writer\FeedFactory;
+use Zend\Feed\Writer\Feed;
+use Zend\Feed\Writer\FeedFactory;
 
 /**
  * Marker view model for indicating feed data.
@@ -30,8 +19,6 @@ use Zend\Feed\Writer\Feed,
  * @category   Zend
  * @package    Zend_View
  * @subpackage Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FeedModel extends ViewModel
 {
@@ -45,6 +32,16 @@ class FeedModel extends ViewModel
      */
     protected $type = false;
 
+    /**
+     * A feed is always terminal
+     *
+     * @var bool
+     */
+    protected $terminate = true;
+
+    /**
+     * @return \Zend\Feed\Writer\Feed
+     */
     public function getFeed()
     {
         if ($this->feed instanceof Feed) {
@@ -67,8 +64,8 @@ class FeedModel extends ViewModel
 
     /**
      * Set the feed object
-     * 
-     * @param  Feed $feed 
+     *
+     * @param  Feed $feed
      * @return FeedModel
      */
     public function setFeed(Feed $feed)
@@ -79,7 +76,7 @@ class FeedModel extends ViewModel
 
     /**
      * Get the feed type
-     * 
+     *
      * @return false|string
      */
     public function getFeedType()

@@ -1,42 +1,32 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ProgressBar
- * @subpackage Demos
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ProgressBar
  */
+
+use Zend\Loader\StandardAutoloader;
+use Zend\ProgressBar\Adapter\JsPull;
+use Zend\ProgressBar\ProgressBar;
 
 /**
  * This sample file demonstrates a simple use case of a jspull-driven progressbar
  */
 
 if (isset($_GET['uploadId'])) {
-    set_include_path(realpath(__DIR__ . '/../../../library')
-                     . PATH_SEPARATOR . get_include_path());
-
-    require_once 'Zend/ProgressBar.php';
-    require_once 'Zend/ProgressBar/Adapter/JsPull.php';
-    require_once 'Zend/Session/Namespace.php';
+    require_once dirname(dirname(dirname(__DIR__))) . '/library/Zend/Loader/StandardAutoloader.php';
+    $loader = new StandardAutoloader(array('autoregister_zf' => true));
+    $loader->register();
 
     $data          = uploadprogress_get_info($_GET['uploadId']);
     $bytesTotal    = ($data === null ? 0 : $data['bytes_total']);
     $bytesUploaded = ($data === null ? 0 : $data['bytes_uploaded']);
 
-    $adapter     = new Zend_ProgressBar_Adapter_JsPull();
-    $progressBar = new Zend_ProgressBar($adapter, 0, $bytesTotal, 'uploadProgress');
+    $adapter     = new JsPull();
+    $progressBar = new ProgressBar($adapter, 0, $bytesTotal, 'uploadProgress');
 
     if ($bytesTotal === $bytesUploaded) {
         $progressBar->finish();
@@ -132,7 +122,8 @@ if (isset($_GET['uploadId'])) {
                 } catch (e) {
                     try {
                         httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-                    } catch (e) {}
+                    } catch (e) {
+                    }
                 }
             }
 
@@ -141,7 +132,9 @@ if (isset($_GET['uploadId'])) {
                 return false;
             }
 
-            httpRequest.onreadystatechange = function() { evalProgress(httpRequest); };
+            httpRequest.onreadystatechange = function () {
+                evalProgress(httpRequest);
+            };
             httpRequest.open('GET', url, true);
             httpRequest.send('');
 
@@ -174,7 +167,7 @@ if (isset($_GET['uploadId'])) {
                         alert('There was a problem with the request.');
                     }
                 }
-            } catch(e) {
+            } catch (e) {
                 alert('Caught Exception: ' + e.description);
             }
         }
@@ -197,10 +190,11 @@ if (isset($_GET['uploadId'])) {
     </script>
 </head>
 <body>
-    <form enctype="multipart/form-data" method="post" action="Upload.php" target="uploadTarget" onsubmit="observeProgress();">
-        <input type="hidden" name="UPLOAD_IDENTIFIER" id="uploadId" value="<?php echo md5(uniqid(rand())); ?>" />
-        <input type="file" name="file" />
-        <input type="submit" value="Upload!" />
+    <form enctype="multipart/form-data" method="post" action="Upload.php" target="uploadTarget"
+          onsubmit="observeProgress();">
+        <input type="hidden" name="UPLOAD_IDENTIFIER" id="uploadId" value="<?php echo md5(uniqid(rand())); ?>"/>
+        <input type="file" name="file"/>
+        <input type="submit" value="Upload!"/>
     </form>
     <iframe name="uploadTarget"></iframe>
 
@@ -213,6 +207,8 @@ if (isset($_GET['uploadId'])) {
             <div class="pg-text" id="pg-text-2"></div>
         </div>
     </div>
-    <div id="progressBar"><div id="progressDone"></div></div>
+    <div id="progressBar">
+        <div id="progressDone"></div>
+    </div>
 </body>
 </html>

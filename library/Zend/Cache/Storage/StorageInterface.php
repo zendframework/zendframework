@@ -1,32 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage;
+
+use Traversable;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface StorageInterface
 {
@@ -51,7 +40,7 @@ interface StorageInterface
      * Get an item.
      *
      * @param  string  $key
-     * @param  boolean $success
+     * @param  bool $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
@@ -71,7 +60,7 @@ interface StorageInterface
      * Test if an item exists.
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function hasItem($key);
@@ -89,7 +78,7 @@ interface StorageInterface
      * Get metadata of an item.
      *
      * @param  string $key
-     * @return array|boolean Metadata on success, false on failure
+     * @return array|bool Metadata on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getMetadata($key);
@@ -110,7 +99,7 @@ interface StorageInterface
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function setItem($key, $value);
@@ -129,7 +118,7 @@ interface StorageInterface
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function addItem($key, $value);
@@ -148,7 +137,7 @@ interface StorageInterface
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function replaceItem($key, $value);
@@ -171,7 +160,7 @@ interface StorageInterface
      * @param  mixed  $token
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
@@ -182,7 +171,7 @@ interface StorageInterface
      * Reset lifetime of an item
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function touchItem($key);
@@ -200,7 +189,7 @@ interface StorageInterface
      * Remove an item.
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function removeItem($key);
@@ -219,7 +208,7 @@ interface StorageInterface
      *
      * @param  string $key
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function incrementItem($key, $value);
@@ -238,7 +227,7 @@ interface StorageInterface
      *
      * @param  string $key
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function decrementItem($key, $value);

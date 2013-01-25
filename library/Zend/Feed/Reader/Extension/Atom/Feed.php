@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader\Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
-use Zend\Date,
-    Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Uri,
-    DOMElement;
+use DOMElement;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Stdlib\DateTime;
+use Zend\Uri;
 
 /**
 * @category Zend
 * @package Reader\Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed extends Extension\AbstractFeed
 {
@@ -55,21 +43,21 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get an array with feed authors
      *
-     * @return array
+     * @return Collection\Author
      */
     public function getAuthors()
     {
-        if (array_key_exists('authors', $this->_data)) {
-            return $this->_data['authors'];
+        if (array_key_exists('authors', $this->data)) {
+            return $this->data['authors'];
         }
 
-        $list = $this->_xpath->query('//atom:author');
+        $list = $this->xpath->query('//atom:author');
 
         $authors = array();
 
         if ($list->length) {
             foreach ($list as $author) {
-                $author = $this->_getAuthor($author);
+                $author = $this->getAuthorFromElement($author);
                 if (!empty($author)) {
                     $authors[] = $author;
                 }
@@ -77,16 +65,16 @@ class Feed extends Extension\AbstractFeed
         }
 
         if (count($authors) == 0) {
-            $authors = null;
+            $authors = new Collection\Author();
         } else {
             $authors = new Collection\Author(
                 Reader\Reader::arrayUnique($authors)
             );
         }
 
-        $this->_data['authors'] = $authors;
+        $this->data['authors'] = $authors;
 
-        return $this->_data['authors'];
+        return $this->data['authors'];
     }
 
     /**
@@ -96,83 +84,81 @@ class Feed extends Extension\AbstractFeed
      */
     public function getCopyright()
     {
-        if (array_key_exists('copyright', $this->_data)) {
-            return $this->_data['copyright'];
+        if (array_key_exists('copyright', $this->data)) {
+            return $this->data['copyright'];
         }
 
         $copyright = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $copyright = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:copyright)');
+            $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:copyright)');
         } else {
-            $copyright = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:rights)');
+            $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:rights)');
         }
 
         if (!$copyright) {
             $copyright = null;
         }
 
-        $this->_data['copyright'] = $copyright;
+        $this->data['copyright'] = $copyright;
 
-        return $this->_data['copyright'];
+        return $this->data['copyright'];
     }
 
     /**
      * Get the feed creation date
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDateCreated()
     {
-        if (array_key_exists('datecreated', $this->_data)) {
-            return $this->_data['datecreated'];
+        if (array_key_exists('datecreated', $this->data)) {
+            return $this->data['datecreated'];
         }
 
         $date = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $dateCreated = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
+            $dateCreated = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
         } else {
-            $dateCreated = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
+            $dateCreated = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
         }
 
         if ($dateCreated) {
-            $date = new Date\Date;
-            $date->set($dateCreated, Date\Date::ISO_8601);
+            $date = DateTime::createFromISO8601($dateCreated);
         }
 
-        $this->_data['datecreated'] = $date;
+        $this->data['datecreated'] = $date;
 
-        return $this->_data['datecreated'];
+        return $this->data['datecreated'];
     }
 
     /**
      * Get the feed modification date
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDateModified()
     {
-        if (array_key_exists('datemodified', $this->_data)) {
-            return $this->_data['datemodified'];
+        if (array_key_exists('datemodified', $this->data)) {
+            return $this->data['datemodified'];
         }
 
         $date = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $dateModified = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
+            $dateModified = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
         } else {
-            $dateModified = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
+            $dateModified = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
         }
 
         if ($dateModified) {
-            $date = new Date\Date;
-            $date->set($dateModified, Date\Date::ISO_8601);
+            $date = DateTime::createFromISO8601($dateModified);
         }
 
-        $this->_data['datemodified'] = $date;
+        $this->data['datemodified'] = $date;
 
-        return $this->_data['datemodified'];
+        return $this->data['datemodified'];
     }
 
     /**
@@ -182,25 +168,25 @@ class Feed extends Extension\AbstractFeed
      */
     public function getDescription()
     {
-        if (array_key_exists('description', $this->_data)) {
-            return $this->_data['description'];
+        if (array_key_exists('description', $this->data)) {
+            return $this->data['description'];
         }
 
         $description = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:tagline)');
+            $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:tagline)');
         } else {
-            $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:subtitle)');
+            $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:subtitle)');
         }
 
         if (!$description) {
             $description = null;
         }
 
-        $this->_data['description'] = $description;
+        $this->data['description'] = $description;
 
-        return $this->_data['description'];
+        return $this->data['description'];
     }
 
     /**
@@ -210,19 +196,19 @@ class Feed extends Extension\AbstractFeed
      */
     public function getGenerator()
     {
-        if (array_key_exists('generator', $this->_data)) {
-            return $this->_data['generator'];
+        if (array_key_exists('generator', $this->data)) {
+            return $this->data['generator'];
         }
         // TODO: Add uri support
-        $generator = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:generator)');
+        $generator = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:generator)');
 
         if (!$generator) {
             $generator = null;
         }
 
-        $this->_data['generator'] = $generator;
+        $this->data['generator'] = $generator;
 
-        return $this->_data['generator'];
+        return $this->data['generator'];
     }
 
     /**
@@ -232,11 +218,11 @@ class Feed extends Extension\AbstractFeed
      */
     public function getId()
     {
-        if (array_key_exists('id', $this->_data)) {
-            return $this->_data['id'];
+        if (array_key_exists('id', $this->data)) {
+            return $this->data['id'];
         }
 
-        $id = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
+        $id = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
 
         if (!$id) {
             if ($this->getLink()) {
@@ -248,9 +234,9 @@ class Feed extends Extension\AbstractFeed
             }
         }
 
-        $this->_data['id'] = $id;
+        $this->data['id'] = $id;
 
-        return $this->_data['id'];
+        return $this->data['id'];
     }
 
     /**
@@ -260,23 +246,23 @@ class Feed extends Extension\AbstractFeed
      */
     public function getLanguage()
     {
-        if (array_key_exists('language', $this->_data)) {
-            return $this->_data['language'];
+        if (array_key_exists('language', $this->data)) {
+            return $this->data['language'];
         }
 
-        $language = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:lang)');
+        $language = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:lang)');
 
         if (!$language) {
-            $language = $this->_xpath->evaluate('string(//@xml:lang[1])');
+            $language = $this->xpath->evaluate('string(//@xml:lang[1])');
         }
 
         if (!$language) {
             $language = null;
         }
 
-        $this->_data['language'] = $language;
+        $this->data['language'] = $language;
 
-        return $this->_data['language'];
+        return $this->data['language'];
     }
 
     /**
@@ -286,11 +272,11 @@ class Feed extends Extension\AbstractFeed
      */
     public function getImage()
     {
-        if (array_key_exists('image', $this->_data)) {
-            return $this->_data['image'];
+        if (array_key_exists('image', $this->data)) {
+            return $this->data['image'];
         }
 
-        $imageUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
+        $imageUrl = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
 
         if (!$imageUrl) {
             $image = null;
@@ -298,9 +284,9 @@ class Feed extends Extension\AbstractFeed
             $image = array('uri'=>$imageUrl);
         }
 
-        $this->_data['image'] = $image;
+        $this->data['image'] = $image;
 
-        return $this->_data['image'];
+        return $this->data['image'];
     }
 
     /**
@@ -310,18 +296,18 @@ class Feed extends Extension\AbstractFeed
      */
     public function getBaseUrl()
     {
-        if (array_key_exists('baseUrl', $this->_data)) {
-            return $this->_data['baseUrl'];
+        if (array_key_exists('baseUrl', $this->data)) {
+            return $this->data['baseUrl'];
         }
 
-        $baseUrl = $this->_xpath->evaluate('string(//@xml:base[1])');
+        $baseUrl = $this->xpath->evaluate('string(//@xml:base[1])');
 
         if (!$baseUrl) {
             $baseUrl = null;
         }
-        $this->_data['baseUrl'] = $baseUrl;
+        $this->data['baseUrl'] = $baseUrl;
 
-        return $this->_data['baseUrl'];
+        return $this->data['baseUrl'];
     }
 
     /**
@@ -331,25 +317,25 @@ class Feed extends Extension\AbstractFeed
      */
     public function getLink()
     {
-        if (array_key_exists('link', $this->_data)) {
-            return $this->_data['link'];
+        if (array_key_exists('link', $this->data)) {
+            return $this->data['link'];
         }
 
         $link = null;
 
-        $list = $this->_xpath->query(
+        $list = $this->xpath->query(
             $this->getXpathPrefix() . '/atom:link[@rel="alternate"]/@href' . '|' .
             $this->getXpathPrefix() . '/atom:link[not(@rel)]/@href'
         );
 
         if ($list->length) {
             $link = $list->item(0)->nodeValue;
-            $link = $this->_absolutiseUri($link);
+            $link = $this->absolutiseUri($link);
         }
 
-        $this->_data['link'] = $link;
+        $this->data['link'] = $link;
 
-        return $this->_data['link'];
+        return $this->data['link'];
     }
 
     /**
@@ -359,17 +345,17 @@ class Feed extends Extension\AbstractFeed
      */
     public function getFeedLink()
     {
-        if (array_key_exists('feedlink', $this->_data)) {
-            return $this->_data['feedlink'];
+        if (array_key_exists('feedlink', $this->data)) {
+            return $this->data['feedlink'];
         }
 
-        $link = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:link[@rel="self"]/@href)');
+        $link = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:link[@rel="self"]/@href)');
 
-        $link = $this->_absolutiseUri($link);
+        $link = $this->absolutiseUri($link);
 
-        $this->_data['feedlink'] = $link;
+        $this->data['feedlink'] = $link;
 
-        return $this->_data['feedlink'];
+        return $this->data['feedlink'];
     }
 
     /**
@@ -379,25 +365,25 @@ class Feed extends Extension\AbstractFeed
      */
     public function getHubs()
     {
-        if (array_key_exists('hubs', $this->_data)) {
-            return $this->_data['hubs'];
+        if (array_key_exists('hubs', $this->data)) {
+            return $this->data['hubs'];
         }
         $hubs = array();
-        
-        $list = $this->_xpath->query($this->getXpathPrefix()
+
+        $list = $this->xpath->query($this->getXpathPrefix()
             . '//atom:link[@rel="hub"]/@href');
 
         if ($list->length) {
             foreach ($list as $uri) {
-                $hubs[] = $this->_absolutiseUri($uri->nodeValue);
+                $hubs[] = $this->absolutiseUri($uri->nodeValue);
             }
         } else {
             $hubs = null;
         }
 
-        $this->_data['hubs'] = $hubs;
+        $this->data['hubs'] = $hubs;
 
-        return $this->_data['hubs'];
+        return $this->data['hubs'];
     }
 
     /**
@@ -407,21 +393,21 @@ class Feed extends Extension\AbstractFeed
      */
     public function getTitle()
     {
-        if (array_key_exists('title', $this->_data)) {
-            return $this->_data['title'];
+        if (array_key_exists('title', $this->data)) {
+            return $this->data['title'];
         }
 
-        $title = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
+        $title = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
 
         if (!$title) {
             $title = null;
         }
 
-        $this->_data['title'] = $title;
+        $this->data['title'] = $title;
 
-        return $this->_data['title'];
+        return $this->data['title'];
     }
-    
+
     /**
      * Get all categories
      *
@@ -429,20 +415,20 @@ class Feed extends Extension\AbstractFeed
      */
     public function getCategories()
     {
-        if (array_key_exists('categories', $this->_data)) {
-            return $this->_data['categories'];
+        if (array_key_exists('categories', $this->data)) {
+            return $this->data['categories'];
         }
 
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10) {
-            $list = $this->_xpath->query($this->getXpathPrefix() . '/atom:category');
+            $list = $this->xpath->query($this->getXpathPrefix() . '/atom:category');
         } else {
             /**
              * Since Atom 0.3 did not support categories, it would have used the
              * Dublin Core extension. However there is a small possibility Atom 0.3
              * may have been retrofittied to use Atom 1.0 instead.
              */
-            $this->_xpath->registerNamespace('atom10', Reader\Reader::NAMESPACE_ATOM_10);
-            $list = $this->_xpath->query($this->getXpathPrefix() . '/atom10:category');
+            $this->xpath->registerNamespace('atom10', Reader\Reader::NAMESPACE_ATOM_10);
+            $list = $this->xpath->query($this->getXpathPrefix() . '/atom10:category');
         }
 
         if ($list->length) {
@@ -458,9 +444,9 @@ class Feed extends Extension\AbstractFeed
             return new Collection\Category;
         }
 
-        $this->_data['categories'] = $categoryCollection;
+        $this->data['categories'] = $categoryCollection;
 
-        return $this->_data['categories'];
+        return $this->data['categories'];
     }
 
     /**
@@ -469,14 +455,14 @@ class Feed extends Extension\AbstractFeed
      * @param  DOMElement $element
      * @return string
      */
-    protected function _getAuthor(DOMElement $element)
+    protected function getAuthorFromElement(DOMElement $element)
     {
         $author = array();
 
         $emailNode = $element->getElementsByTagName('email');
         $nameNode  = $element->getElementsByTagName('name');
         $uriNode   = $element->getElementsByTagName('uri');
-        
+
         if ($emailNode->length && strlen($emailNode->item(0)->nodeValue) > 0) {
             $author['email'] = $emailNode->item(0)->nodeValue;
         }
@@ -499,9 +485,9 @@ class Feed extends Extension\AbstractFeed
      *  Attempt to absolutise the URI, i.e. if a relative URI apply the
      *  xml:base value as a prefix to turn into an absolute URI.
      */
-    protected function _absolutiseUri($link)
+    protected function absolutiseUri($link)
     {
-        if (!Uri\UriFactory::factory($link)->isValid()) {
+        if (!Uri\UriFactory::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
                 if (!Uri\UriFactory::factory($link)->isValid()) {
@@ -515,20 +501,20 @@ class Feed extends Extension\AbstractFeed
     /**
      * Register the default namespaces for the current feed format
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10
             || $this->getType() == Reader\Reader::TYPE_ATOM_03
         ) {
             return; // pre-registered at Feed level
         }
-        $atomDetected = $this->_getAtomType();
+        $atomDetected = $this->getAtomType();
         switch ($atomDetected) {
             case Reader\Reader::TYPE_ATOM_03:
-                $this->_xpath->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_03);
+                $this->xpath->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_03);
                 break;
             default:
-                $this->_xpath->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_10);
+                $this->xpath->registerNamespace('atom', Reader\Reader::NAMESPACE_ATOM_10);
                 break;
         }
     }
@@ -536,17 +522,19 @@ class Feed extends Extension\AbstractFeed
     /**
      * Detect the presence of any Atom namespaces in use
      */
-    protected function _getAtomType()
+    protected function getAtomType()
     {
         $dom = $this->getDomDocument();
         $prefixAtom03 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_03);
         $prefixAtom10 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_10);
         if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_10)
-        || !empty($prefixAtom10)) {
+            || !empty($prefixAtom10)
+        ) {
             return Reader\Reader::TYPE_ATOM_10;
         }
         if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_03)
-        || !empty($prefixAtom03)) {
+            || !empty($prefixAtom03)
+        ) {
             return Reader\Reader::TYPE_ATOM_03;
         }
     }

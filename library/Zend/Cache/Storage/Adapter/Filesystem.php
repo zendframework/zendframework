@@ -1,58 +1,47 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    GlobIterator,
-    stdClass,
-    Exception as BaseException,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage,
-    Zend\Cache\Storage\StorageInterface,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearExpiredInterface,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\OptimizableInterface,
-    Zend\Cache\Storage\TagableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface,
-    Zend\Cache\Utils,
-    Zend\Stdlib\ErrorHandler;
+use Exception as BaseException;
+use GlobIterator;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem
-    extends AbstractAdapter
-    implements FlushableInterface, ClearExpiredInterface, ClearByNamespaceInterface, ClearByPrefixInterface,
-               TagableInterface, IterableInterface, OptimizableInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Filesystem extends AbstractAdapter implements
+    AvailableSpaceCapableInterface,
+    ClearByNamespaceInterface,
+    ClearByPrefixInterface,
+    ClearExpiredInterface,
+    FlushableInterface,
+    IterableInterface,
+    OptimizableInterface,
+    TaggableInterface,
+    TotalSpaceCapableInterface
 {
 
     /**
@@ -112,7 +101,8 @@ class Filesystem
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @throws Exception\RuntimeException
+     * @return bool
      */
     public function flush()
     {
@@ -146,7 +136,7 @@ class Filesystem
     /**
      * Remove expired items
      *
-     * @return boolean
+     * @return bool
      */
     public function clearExpired()
     {
@@ -172,11 +162,6 @@ class Filesystem
                 if (file_exists($tagPathname)) {
                     unlink($tagPathname);
                 }
-
-                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
-                if (file_exists($ifoPathname)) {
-                    unlink($ifoPathname);
-                }
             }
         }
         $error = ErrorHandler::stop();
@@ -193,7 +178,8 @@ class Filesystem
      * Remove items by given namespace
      *
      * @param string $namespace
-     * @return boolean
+     * @throws Exception\RuntimeException
+     * @return bool
      */
     public function clearByNamespace($namespace)
     {
@@ -205,8 +191,6 @@ class Filesystem
         . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
         . \DIRECTORY_SEPARATOR . $nsPrefix . '*';
         $glob = new GlobIterator($path, $flags);
-        $time = time();
-        $ttl  = $options->getTtl();
 
         ErrorHandler::start();
         foreach ($glob as $pathname) {
@@ -226,7 +210,8 @@ class Filesystem
      * Remove items matching given prefix
      *
      * @param string $prefix
-     * @return boolean
+     * @throws Exception\RuntimeException
+     * @return bool
      */
     public function clearByPrefix($prefix)
     {
@@ -238,8 +223,6 @@ class Filesystem
             . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
             . \DIRECTORY_SEPARATOR . $nsPrefix . $prefix . '*';
         $glob = new GlobIterator($path, $flags);
-        $time = time();
-        $ttl  = $options->getTtl();
 
         ErrorHandler::start();
         foreach ($glob as $pathname) {
@@ -253,7 +236,7 @@ class Filesystem
         return true;
     }
 
-    /* TagableInterface  */
+    /* TaggableInterface  */
 
     /**
      * Set tags to an item by given key.
@@ -261,7 +244,7 @@ class Filesystem
      *
      * @param string   $key
      * @param string[] $tags
-     * @return boolean
+     * @return bool
      */
     public function setTags($key, array $tags)
     {
@@ -310,8 +293,8 @@ class Filesystem
      * else all given tags must match.
      *
      * @param string[] $tags
-     * @param boolean  $disjunction
-     * @return boolean
+     * @param  bool  $disjunction
+     * @return bool
      */
     public function clearByTags(array $tags, $disjunction = false)
     {
@@ -328,8 +311,6 @@ class Filesystem
             . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
             . \DIRECTORY_SEPARATOR . $prefix . '*.tag';
         $glob = new GlobIterator($path, $flags);
-        $time = time();
-        $ttl  = $options->getTtl();
 
         foreach ($glob as $pathname) {
             $diff = array_diff($tags, explode("\n", $this->getFileContent($pathname)));
@@ -347,11 +328,6 @@ class Filesystem
                 $datPathname = substr($pathname, 0, -4) . '.dat';
                 if (file_exists($datPathname)) {
                     unlink($datPathname);
-                }
-
-                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
-                if (file_exists($ifoPathname)) {
-                    unlink($ifoPathname);
                 }
             }
         }
@@ -381,7 +357,7 @@ class Filesystem
     /**
      * Optimize the storage
      *
-     * @return void
+     * @return bool
      * @return Exception\RuntimeException
      */
     public function optimize()
@@ -402,11 +378,12 @@ class Filesystem
     /**
      * Get total space in bytes
      *
+     * @throws Exception\RuntimeException
      * @return int|float
      */
     public function getTotalSpace()
     {
-        if ($this->totalSpace !== null) {
+        if ($this->totalSpace === null) {
             $path = $this->getOptions()->getCacheDir();
 
             ErrorHandler::start();
@@ -415,9 +392,10 @@ class Filesystem
             if ($total === false) {
                 throw new Exception\RuntimeException("Can't detect total space of '{$path}'", 0, $error);
             }
+            $this->totalSpace = $total;
 
             // clean total space buffer on change cache_dir
-            $events     = $this->events();
+            $events     = $this->getEventManager();
             $handle     = null;
             $totalSpace = & $this->totalSpace;
             $callback   = function ($event) use (& $events, & $handle, & $totalSpace) {
@@ -427,8 +405,9 @@ class Filesystem
                     $events->detach($handle);
                 }
             };
-            $handle = $this->events()->attach($callback);
+            $handle = $events->attach('option', $callback);
         }
+
         return $this->totalSpace;
     }
 
@@ -437,6 +416,7 @@ class Filesystem
     /**
      * Get available space in bytes
      *
+     * @throws Exception\RuntimeException
      * @return int|float
      */
     public function getAvailableSpace()
@@ -459,7 +439,7 @@ class Filesystem
      * Get an item.
      *
      * @param  string  $key
-     * @param  boolean $success
+     * @param  bool $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
@@ -480,9 +460,9 @@ class Filesystem
             return parent::getItem($key, $success, $casToken);
         } elseif ($argn > 1) {
             return parent::getItem($key, $success);
-        } else {
-            return parent::getItem($key);
         }
+
+        return parent::getItem($key);
     }
 
     /**
@@ -510,7 +490,7 @@ class Filesystem
      * Internal method to get an item.
      *
      * @param  string  $normalizedKey
-     * @param  boolean $success
+     * @param  bool $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
@@ -525,17 +505,6 @@ class Filesystem
         try {
             $filespec = $this->getFileSpec($normalizedKey);
             $data     = $this->getFileContent($filespec . '.dat');
-
-            if ($this->getOptions()->getReadControl()) {
-                if ( ($info = $this->readInfoFile($filespec . '.ifo'))
-                    && isset($info['hash'], $info['algo'])
-                    && Utils::generateHash($info['algo'], $data, true) != $info['hash']
-                ) {
-                    throw new Exception\UnexpectedValueException(
-                        "ReadControl: Stored hash and computed hash don't match"
-                    );
-                }
-            }
 
             // use filemtime + filesize as CAS token
             if (func_num_args() > 2) {
@@ -583,17 +552,6 @@ class Filesystem
                     unset($keys[$i]);
                 }
 
-                if ($options->getReadControl()) {
-                    $info = $this->readInfoFile($filespec . '.ifo');
-                    if (isset($info['hash'], $info['algo'])
-                        && Utils::generateHash($info['algo'], $data, true) != $info['hash']
-                    ) {
-                        throw new Exception\UnexpectedValueException(
-                            "ReadControl: Stored hash and computed hash doesn't match"
-                        );
-                    }
-                }
-
                 $result[$key] = $data;
             }
 
@@ -608,7 +566,7 @@ class Filesystem
      * Test if an item exists.
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers hasItem.pre(PreEvent)
@@ -650,8 +608,7 @@ class Filesystem
      * Internal method to test if an item exists.
      *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey)
@@ -684,7 +641,7 @@ class Filesystem
      * Get metadata
      *
      * @param string $key
-     * @return array|boolean Metadata on success, false on failure
+     * @return array|bool Metadata on success, false on failure
      */
     public function getMetadata($key)
     {
@@ -700,6 +657,7 @@ class Filesystem
      * Get metadatas
      *
      * @param array $keys
+     * @param array $options
      * @return array Associative array of keys and metadata
      */
     public function getMetadatas(array $keys, array $options = array())
@@ -716,7 +674,7 @@ class Filesystem
      * Get info by key
      *
      * @param string $normalizedKey
-     * @return array|boolean Metadata on success, false on failure
+     * @return array|bool Metadata on success, false on failure
      */
     protected function internalGetMetadata(& $normalizedKey)
     {
@@ -786,7 +744,7 @@ class Filesystem
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers setItem.pre(PreEvent)
@@ -828,7 +786,7 @@ class Filesystem
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers addItem.pre(PreEvent)
@@ -849,7 +807,7 @@ class Filesystem
      * Add multiple items.
      *
      * @param  array $keyValuePairs
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers addItems.pre(PreEvent)
@@ -871,7 +829,7 @@ class Filesystem
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItem.pre(PreEvent)
@@ -892,7 +850,7 @@ class Filesystem
      * Replace multiple existing items.
      *
      * @param  array $keyValuePairs
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItems.pre(PreEvent)
@@ -914,56 +872,27 @@ class Filesystem
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $options  = $this->getOptions();
         $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
-        $info = null;
-        if ($options->getReadControl()) {
-            $info['hash'] = Utils::generateHash($options->getReadControlAlgo(), $value, true);
-            $info['algo'] = $options->getReadControlAlgo();
+        // write data in non-blocking mode
+        $wouldblock = null;
+        $this->putFileContent($filespec . '.dat', $value, true, $wouldblock);
+
+        // delete related tag file (if present)
+        $this->unlink($filespec . '.tag');
+
+        // Retry writing data in blocking mode if it was blocked before
+        if ($wouldblock) {
+            $this->putFileContent($filespec . '.dat', $value);
         }
 
-        // write files
-        try {
-            // set umask for files
-            $oldUmask = umask($options->getFileUmask());
-
-            $contents = array($filespec . '.dat' => & $value);
-            if ($info) {
-                $contents[$filespec . '.ifo'] = serialize($info);
-            } else {
-                $this->unlink($filespec . '.ifo');
-                $this->unlink($filespec . '.tag');
-            }
-
-            while ($contents) {
-                $nonBlocking = count($contents) > 1;
-                $wouldblock  = null;
-
-                foreach ($contents as $file => $content) {
-                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
-                    if (!$nonBlocking || !$wouldblock) {
-                        unset($contents[$file]);
-                    }
-                }
-            }
-
-            // reset file_umask
-            umask($oldUmask);
-
-            return true;
-
-        } catch (BaseException $e) {
-            // reset umask on exception
-            umask($oldUmask);
-            throw $e;
-        }
+        return true;
     }
 
     /**
@@ -975,7 +904,6 @@ class Filesystem
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        $baseOptions = $this->getOptions();
         $oldUmask    = null;
 
         // create an associated array of files and contents to write
@@ -987,48 +915,25 @@ class Filesystem
             // *.dat file
             $contents[$filespec . '.dat'] = & $value;
 
-            // *.ifo file
-            $info = null;
-            if ($baseOptions->getReadControl()) {
-                $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
-                $info['algo'] = $baseOptions->getReadControlAlgo();
-            }
-            if ($info) {
-                $contents[$filespec . '.ifo'] = serialize($info);
-            } else {
-                $this->unlink($filespec . '.ifo');
-                $this->unlink($filespec . '.tag');
-            }
+            // *.tag file
+            $this->unlink($filespec . '.tag');
         }
 
         // write to disk
-        try {
-            // set umask for files
-            $oldUmask = umask($baseOptions->getFileUmask());
+        while ($contents) {
+            $nonBlocking = count($contents) > 1;
+            $wouldblock  = null;
 
-            while ($contents) {
-                $nonBlocking = count($contents) > 1;
-                $wouldblock  = null;
-
-                foreach ($contents as $file => & $content) {
-                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
-                    if (!$nonBlocking || !$wouldblock) {
-                        unset($contents[$file]);
-                    }
+            foreach ($contents as $file => & $content) {
+                $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
+                if (!$nonBlocking || !$wouldblock) {
+                    unset($contents[$file]);
                 }
             }
-
-            // reset umask
-            umask($oldUmask);
-
-            // return OK
-            return array();
-
-        } catch (BaseException $e) {
-            // reset umask on exception
-            umask($oldUmask);
-            throw $e;
         }
+
+        // return OK
+        return array();
     }
 
     /**
@@ -1040,7 +945,7 @@ class Filesystem
      * @param  mixed  $token
      * @param  string $key
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
@@ -1061,7 +966,7 @@ class Filesystem
      * @param  mixed  $token
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
@@ -1086,7 +991,7 @@ class Filesystem
      * Reset lifetime of an item
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers touchItem.pre(PreEvent)
@@ -1127,8 +1032,8 @@ class Filesystem
     /**
      * Internal method to reset lifetime of an item
      *
-     * @param  string $key
-     * @return boolean
+     * @param  string $normalizedKey
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey)
@@ -1155,7 +1060,7 @@ class Filesystem
      * Remove an item.
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      *
      * @triggers removeItem.pre(PreEvent)
@@ -1197,7 +1102,7 @@ class Filesystem
      * Internal method to remove an item.
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey)
@@ -1208,7 +1113,6 @@ class Filesystem
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.tag');
-            $this->unlink($filespec . '.ifo');
         }
         return true;
     }
@@ -1250,18 +1154,19 @@ class Filesystem
                         'resource' => false,
                     ),
                     'supportedMetadata'  => $metadata,
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => false,
                     'ttlPrecision'       => 1,
                     'expiredRead'        => true,
-                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
+                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .tag)
                     'namespaceIsPrefix'  => true,
                     'namespaceSeparator' => $options->getNamespaceSeparator(),
                 )
             );
 
             // update capabilities on change options
-            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+            $this->getEventManager()->attach('option', function ($event) use ($capabilities, $marker) {
                 $params = $event->getParams();
 
                 if (isset($params['namespace_separator'])) {
@@ -1364,9 +1269,9 @@ class Filesystem
      * Read info file
      *
      * @param  string  $file
-     * @param  boolean $nonBlocking Don't block script if file is locked
-     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
-     * @return array|boolean The info array or false if file wasn't found
+     * @param  bool $nonBlocking Don't block script if file is locked
+     * @param  bool $wouldblock  The optional argument is set to TRUE if the lock would block
+     * @return array|bool The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
     protected function readInfoFile($file, $nonBlocking = false, & $wouldblock = null)
@@ -1396,8 +1301,8 @@ class Filesystem
      * Read a complete file
      *
      * @param  string  $file        File complete path
-     * @param  boolean $nonBlocking Don't block script if file is locked
-     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
+     * @param  bool $nonBlocking Don't block script if file is locked
+     * @param  bool $wouldblock  The optional argument is set to TRUE if the lock would block
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -1476,21 +1381,100 @@ class Filesystem
     protected function prepareDirectoryStructure($file)
     {
         $options = $this->getOptions();
-        if ($options->getDirLevel() > 0) {
-            $path = dirname($file);
-            if (!file_exists($path)) {
-                $oldUmask = umask($options->getDirUmask());
-                ErrorHandler::start();
-                $mkdir = mkdir($path, 0777, true);
-                $error = ErrorHandler::stop();
-                umask($oldUmask);
-                if (!$mkdir) {
+        $level   = $options->getDirLevel();
+
+        // Directory structure is required only if directory level > 0
+        if (!$level) {
+            return;
+        }
+
+        // Directory structure already exists
+        $pathname = dirname($file);
+        if (file_exists($pathname)) {
+            return;
+        }
+
+        $perm     = $options->getDirPermission();
+        $umask    = $options->getUmask();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
+        }
+
+        ErrorHandler::start();
+
+        if ($perm === false || $level == 1) {
+            // build-in mkdir function is enough
+
+            $umask = ($umask !== false) ? umask($umask) : false;
+            $res   = mkdir($pathname, ($perm !== false) ? $perm : 0777, true);
+
+            if ($umask !== false) {
+                umask($umask);
+            }
+
+            if (!$res) {
+                $oct = ($perm === false) ? '777' : decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err
+                );
+            }
+
+            if ($perm !== false && !chmod($pathname, $perm)) {
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "chmod('{$pathname}', 0{$oct}) failed", 0, $err
+                );
+            }
+
+        } else {
+            // build-in mkdir function sets permission together with current umask
+            // which doesn't work well on multo threaded webservers
+            // -> create directories one by one and set permissions
+
+            // find existing path and missing path parts
+            $parts = array();
+            $path  = $pathname;
+            while (!file_exists($path)) {
+                array_unshift($parts, basename($path));
+                $nextPath = dirname($path);
+                if ($nextPath === $path) {
+                    break;
+                }
+                $path = $nextPath;
+            }
+
+            // make all missing path parts
+            foreach ($parts as $part) {
+                $path.= \DIRECTORY_SEPARATOR . $part;
+
+                // create a single directory, set and reset umask immediately
+                $umask = ($umask !== false) ? umask($umask) : false;
+                $res   = mkdir($path, ($perm === false) ? 0777 : $perm, false);
+                if ($umask !== false) {
+                    umask($umask);
+                }
+
+                if (!$res) {
+                    $oct = ($perm === false) ? '777' : decoct($perm);
+                    $err = ErrorHandler::stop();
                     throw new Exception\RuntimeException(
-                        "Error creating directory '{$path}'", 0, $error
+                        "mkdir('{$path}', 0{$oct}, false) failed"
+                    );
+                }
+
+                if ($perm !== false && !chmod($path, $perm)) {
+                    $oct = decoct($perm);
+                    $err = ErrorHandler::stop();
+                    throw new Exception\RuntimeException(
+                        "chmod('{$path}', 0{$oct}) failed"
                     );
                 }
             }
         }
+
+        ErrorHandler::stop();
     }
 
     /**
@@ -1498,22 +1482,37 @@ class Filesystem
      *
      * @param  string  $file        File complete path
      * @param  string  $data        Data to write
-     * @param  boolean $nonBlocking Don't block script if file is locked
-     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
+     * @param  bool $nonBlocking Don't block script if file is locked
+     * @param  bool $wouldblock  The optional argument is set to TRUE if the lock would block
      * @return void
      * @throws Exception\RuntimeException
      */
     protected function putFileContent($file, $data, $nonBlocking = false, & $wouldblock = null)
     {
-        $locking     = $this->getOptions()->getFileLocking();
+        $options     = $this->getOptions();
+        $locking     = $options->getFileLocking();
         $nonBlocking = $locking && $nonBlocking;
         $wouldblock  = null;
+
+        $umask = $options->getUmask();
+        $perm  = $options->getFilePermission();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
+        }
 
         ErrorHandler::start();
 
         // if locking and non blocking is enabled -> file_put_contents can't used
         if ($locking && $nonBlocking) {
+
+            $umask = ($umask !== false) ? umask($umask) : false;
+
             $fp = fopen($file, 'cb');
+
+            if ($umask) {
+                umask($umask);
+            }
+
             if (!$fp) {
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
@@ -1521,7 +1520,14 @@ class Filesystem
                 );
             }
 
-            if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
+            if ($perm !== false && !chmod($file, $perm)) {
+                fclose($fp);
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
+            }
+
+            if (!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 if ($wouldblock) {
@@ -1531,7 +1537,7 @@ class Filesystem
                 }
             }
 
-            if (!fwrite($fp, $data)) {
+            if (fwrite($fp, $data) === false) {
                 flock($fp, \LOCK_UN);
                 fclose($fp);
                 $err = ErrorHandler::stop();
@@ -1555,11 +1561,25 @@ class Filesystem
                 $flags = $flags | \LOCK_EX;
             }
 
-            if (file_put_contents($file, $data, $flags) === false) {
+            $umask = ($umask !== false) ? umask($umask) : false;
+
+            $rs = file_put_contents($file, $data, $flags);
+
+            if ($umask) {
+                umask($umask);
+            }
+
+            if ($rs === false) {
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
                     "Error writing file '{$file}'", 0, $err
                 );
+            }
+
+            if ($perm !== false && !chmod($file, $perm)) {
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
             }
         }
 

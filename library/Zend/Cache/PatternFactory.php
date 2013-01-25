@@ -1,43 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache;
 
-use Traversable,
-    Zend\Loader\Broker,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PatternFactory
 {
     /**
-     * The pattern broker
+     * The pattern manager
      *
-     * @var null|Broker
+     * @var null|PatternPluginManager
      */
-    protected static $broker = null;
+    protected static $plugins = null;
 
     /**
      * Instantiate a cache pattern
@@ -45,7 +32,7 @@ class PatternFactory
      * @param  string|Pattern\PatternInterface $patternName
      * @param  array|Traversable|Pattern\PatternOptions $options
      * @return Pattern\PatternInterface
-     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($patternName, $options = array())
     {
@@ -68,44 +55,43 @@ class PatternFactory
             return $patternName;
         }
 
-        $pattern = static::getBroker()->load($patternName);
+        $pattern = static::getPluginManager()->get($patternName);
         $pattern->setOptions($options);
         return $pattern;
     }
 
     /**
-     * Get the pattern broker
+     * Get the pattern plugin manager
      *
-     * @return Broker
+     * @return PatternPluginManager
      */
-    public static function getBroker()
+    public static function getPluginManager()
     {
-        if (static::$broker === null) {
-            static::$broker = new PatternBroker();
-            static::$broker->setRegisterPluginsOnLoad(false);
+        if (static::$plugins === null) {
+            static::$plugins = new PatternPluginManager();
         }
 
-        return static::$broker;
+        return static::$plugins;
     }
 
     /**
-     * Set the pattern broker
+     * Set the pattern plugin manager
      *
-     * @param  Broker $broker
+     * @param  PatternPluginManager $plugins
      * @return void
      */
-    public static function setBroker(Broker $broker)
+    public static function setPluginManager(PatternPluginManager $plugins)
     {
-        static::$broker = $broker;
+        static::$plugins = $plugins;
     }
 
     /**
-     * Reset pattern broker to default
+     * Reset pattern plugin manager to default
      *
      * @return void
      */
-    public static function resetBroker()
+    public static function resetPluginManager()
     {
-        static::$broker = null;
+        static::$plugins = null;
     }
 }

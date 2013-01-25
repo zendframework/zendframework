@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Paginator
  */
@@ -15,8 +15,6 @@ use Iterator;
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SerializableLimitIterator extends \LimitIterator implements \Serializable, \ArrayAccess
 {
@@ -26,14 +24,14 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
      *
      * @var int
      */
-    private $_offset;
+    private $offset;
 
     /**
      * Maximum number of elements to show or -1 for all
      *
      * @var int
      */
-    private $_count;
+    private $count;
 
     /**
      * Construct a Zend\Paginator\SerializableLimitIterator
@@ -46,8 +44,8 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
     public function __construct (Iterator $it, $offset=0, $count=-1)
     {
         parent::__construct($it, $offset, $count);
-        $this->_offset = $offset;
-        $this->_count = $count;
+        $this->offset = $offset;
+        $this->count = $count;
     }
 
     /**
@@ -57,14 +55,15 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
     {
         return serialize(array(
             'it'     => $this->getInnerIterator(),
-            'offset' => $this->_offset,
-            'count'  => $this->_count,
+            'offset' => $this->offset,
+            'count'  => $this->count,
             'pos'    => $this->getPosition(),
         ));
     }
 
     /**
      * @param string $data representation of the instance
+     * @return void
      */
     public function unserialize($data)
     {
@@ -107,7 +106,7 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
      */
     public function offsetExists($offset)
     {
-        if ($offset > 0 && $offset < $this->_count) {
+        if ($offset > 0 && $offset < $this->count) {
             try {
                 $currentOffset = $this->key();
                 $this->seek($offset);

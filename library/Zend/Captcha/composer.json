@@ -1,0 +1,25 @@
+{
+    "name": "zendframework/zend-captcha",
+    "description": " ",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "captcha"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Captcha\\": ""
+        }
+    },
+    "target-dir": "Zend/Captcha",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-math": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zendservice-recaptcha": "*"
+    },
+    "suggest": {
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
+    }
+}

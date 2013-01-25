@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
@@ -23,8 +13,6 @@ namespace Zend\Feed\PubSubHubbub;
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HttpResponse
 {
@@ -40,7 +28,7 @@ class HttpResponse
      *
      * @var array
      */
-    protected $_headers = array();
+    protected $headers = array();
 
     /**
      * HTTP response code to use in headers
@@ -70,13 +58,13 @@ class HttpResponse
      */
     public function sendHeaders()
     {
-        if (count($this->_headers) || (200 != $this->statusCode)) {
+        if (count($this->headers) || (200 != $this->statusCode)) {
             $this->canSendHeaders(true);
         } elseif (200 == $this->statusCode) {
             return;
         }
         $httpCodeSent = false;
-        foreach ($this->_headers as $header) {
+        foreach ($this->headers as $header) {
             if (!$httpCodeSent && $this->statusCode) {
                 header($header['name'] . ': ' . $header['value'], $header['replace'], $this->statusCode);
                 $httpCodeSent = true;
@@ -86,7 +74,6 @@ class HttpResponse
         }
         if (!$httpCodeSent) {
             header('HTTP/1.1 ' . $this->statusCode);
-            $httpCodeSent = true;
         }
     }
 
@@ -98,7 +85,7 @@ class HttpResponse
      *
      * @param  string $name
      * @param  string $value
-     * @param  boolean $replace
+     * @param  bool $replace
      * @return \Zend\Feed\PubSubHubbub\HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
@@ -106,13 +93,13 @@ class HttpResponse
         $name  = $this->_normalizeHeader($name);
         $value = (string) $value;
         if ($replace) {
-            foreach ($this->_headers as $key => $header) {
+            foreach ($this->headers as $key => $header) {
                 if ($name == $header['name']) {
-                    unset($this->_headers[$key]);
+                    unset($this->headers[$key]);
                 }
             }
         }
-        $this->_headers[] = array(
+        $this->headers[] = array(
             'name'    => $name,
             'value'   => $value,
             'replace' => $replace,
@@ -130,7 +117,7 @@ class HttpResponse
     public function getHeader($name)
     {
         $name = $this->_normalizeHeader($name);
-        foreach ($this->_headers as $header) {
+        foreach ($this->headers as $header) {
             if ($header['name'] == $name) {
                 return $header['value'];
             }
@@ -138,19 +125,19 @@ class HttpResponse
     }
 
     /**
-     * Return array of headers; see {@link $_headers} for format
+     * Return array of headers; see {@link $headers} for format
      *
      * @return array
      */
     public function getHeaders()
     {
-        return $this->_headers;
+        return $this->headers;
     }
 
     /**
      * Can we send headers?
      *
-     * @param  boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
+     * @param  bool $throw Whether or not to throw an exception if headers have been sent; defaults to false
      * @return HttpResponse
      * @throws Exception\RuntimeException
      */

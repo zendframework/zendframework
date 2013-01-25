@@ -3,17 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\RowGateway;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\Row,
-    Zend\Db\ResultSet\RowObjectInterface,
-    Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 /**
  * @category   Zend
@@ -25,16 +23,16 @@ class RowGateway extends AbstractRowGateway
 
     /**
      * Constructor
-     * 
-     * @param string $tableGateway
+     *
+     * @param string $primaryKeyColumn
      * @param string|\Zend\Db\Sql\TableIdentifier $table
-     * @param Adapter $adapter
-     * @param Sql\Sql $sql
+     * @param Adapter|Sql $adapterOrSql
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($primaryKeyColumn, $table, $adapterOrSql = null)
     {
         // setup primary key
-        $this->primaryKeyColumn = $primaryKeyColumn;
+        $this->primaryKeyColumn = (array) $primaryKeyColumn;
 
         // set table
         $this->table = $table;
@@ -54,5 +52,4 @@ class RowGateway extends AbstractRowGateway
 
         $this->initialize();
     }
-
 }

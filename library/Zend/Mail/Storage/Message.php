@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Message extends Part implements Message\MessageInterface
 {
@@ -33,7 +22,7 @@ class Message extends Part implements Message\MessageInterface
      * flags for this message
      * @var array
      */
-    protected $_flags = array();
+    protected $flags = array();
 
     /**
      * Public constructor
@@ -49,9 +38,11 @@ class Message extends Part implements Message\MessageInterface
     {
         if (isset($params['file'])) {
             if (!is_resource($params['file'])) {
-                $params['raw'] = @file_get_contents($params['file']);
+                ErrorHandler::start();
+                $params['raw'] = file_get_contents($params['file']);
+                $error = ErrorHandler::stop();
                 if ($params['raw'] === false) {
-                    throw new Exception\RuntimeException('could not open file');
+                    throw new Exception\RuntimeException('could not open file', 0, $error);
                 }
             } else {
                 $params['raw'] = stream_get_contents($params['file']);
@@ -60,7 +51,7 @@ class Message extends Part implements Message\MessageInterface
 
         if (!empty($params['flags'])) {
             // set key and value to the same value for easy lookup
-            $this->_flags = array_combine($params['flags'], $params['flags']);
+            $this->flags = array_combine($params['flags'], $params['flags']);
         }
 
         parent::__construct($params);
@@ -73,7 +64,7 @@ class Message extends Part implements Message\MessageInterface
      */
     public function getTopLines()
     {
-        return $this->_topLines;
+        return $this->topLines;
     }
 
     /**
@@ -84,7 +75,7 @@ class Message extends Part implements Message\MessageInterface
      */
     public function hasFlag($flag)
     {
-        return isset($this->_flags[$flag]);
+        return isset($this->flags[$flag]);
     }
 
     /**
@@ -94,6 +85,6 @@ class Message extends Part implements Message\MessageInterface
      */
     public function getFlags()
     {
-        return $this->_flags;
+        return $this->flags;
     }
 }

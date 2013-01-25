@@ -1,3 +1,0 @@
-[submodule "tools/phptools"]
-	path = tools/phptools
-	url = git://github.com/ralphschindler/PHPTools.git

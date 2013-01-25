@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Math
  */
@@ -48,15 +48,15 @@ class Bcmath implements AdapterInterface
                 $base    = 10;
                 $operand = $m[1];
             // octal
-            } else if (preg_match('#^(0[0-7]+)$#', $operand, $m)) {
+            } elseif (preg_match('#^(0[0-7]+)$#', $operand, $m)) {
                 $base    = 8;
                 $operand = $m[1];
             // hex
-            } else if (preg_match('#^(?:0x)?([0-9a-f]+)$#', strtolower($operand), $m)) {
+            } elseif (preg_match('#^(?:0x)?([0-9a-f]+)$#', strtolower($operand), $m)) {
                 $base    = 16;
                 $operand = $m[1];
             // scientific notation
-            } else if (preg_match('#^([1-9]?\.?[0-9]+)[eE]\+?([0-9]+)$#', $operand, $m)) {
+            } elseif (preg_match('#^([1-9]?\.?[0-9]+)[eE]\+?([0-9]+)$#', $operand, $m)) {
                 $base    = 10;
                 $operand = bcmul($m[1], bcpow('10', $m[2]));
             } else {
@@ -158,6 +158,17 @@ class Bcmath implements AdapterInterface
     }
 
     /**
+     * Get absolute value of a big integer
+     *
+     * @param  string $operand
+     * @return string
+     */
+    public function abs($operand)
+    {
+        return ltrim($operand, '-');
+    }
+
+    /**
      * Get modulus of a big integer
      *
      * @param  string $leftOperand
@@ -168,7 +179,6 @@ class Bcmath implements AdapterInterface
     {
         return bcmod($leftOperand, $rightOperand);
     }
-
 
     /**
      * Raise a big integer to another, reduced by a specified modulus
@@ -231,9 +241,9 @@ class Bcmath implements AdapterInterface
                 $bytes = $nb . $bytes;
             }
             return $isNegative ? ~$bytes : $bytes;
-        } else {
-            return $bytes;
         }
+
+        return $bytes;
     }
 
     /**

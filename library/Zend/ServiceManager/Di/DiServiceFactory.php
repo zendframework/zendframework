@@ -1,12 +1,20 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\ServiceManager\FactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface,
-    Zend\ServiceManager\Exception,
-    Zend\Di\Di,
-    Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\Di\Di;
+use Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiServiceFactory extends Di implements FactoryInterface
 {
@@ -44,6 +52,8 @@ class DiServiceFactory extends Di implements FactoryInterface
     protected $serviceLocator = null;
 
     /**
+     * Constructor
+     *
      * @param \Zend\Di\Di $di
      * @param null|\Zend\Di\InstanceManager $name
      * @param array $parameters
@@ -64,6 +74,8 @@ class DiServiceFactory extends Di implements FactoryInterface
     }
 
     /**
+     * Create service
+     *
      * @param ServiceLocatorInterface $serviceLocator
      * @return object
      */
@@ -79,7 +91,7 @@ class DiServiceFactory extends Di implements FactoryInterface
      * @param string $name
      * @param array $params
      * @return object
-     * @throws Exception\InvalidServiceNameException
+     * @throws Exception\ServiceNotFoundException
      */
     public function get($name, array $params = array())
     {
@@ -108,5 +120,4 @@ class DiServiceFactory extends Di implements FactoryInterface
         }
 
     }
-
 }

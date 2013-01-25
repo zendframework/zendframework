@@ -1,29 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Session\Container as SessionContainer;
+use Traversable;
+use Zend\Math\Rand;
+use Zend\Session\Container as SessionContainer;
+use Zend\Stdlib\ArrayUtils;
 
 class Csrf extends AbstractValidator
 {
@@ -37,7 +27,7 @@ class Csrf extends AbstractValidator
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOT_SAME => "The form submitted did not originate from the expected site",
     );
 
@@ -75,19 +65,18 @@ class Csrf extends AbstractValidator
 
     /**
      * TTL for CSRF token
-     * @var int
+     * @var int|null
      */
     protected $timeout = 300;
 
     /**
      * Constructor
      *
-     * @param  array $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        parent::__construct();
+        parent::__construct($options);
 
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -112,7 +101,7 @@ class Csrf extends AbstractValidator
                     $this->setTimeout($value);
                     break;
                 default:
-                    // ignore uknown options
+                    // ignore unknown options
                     break;
             }
         }
@@ -216,14 +205,23 @@ class Csrf extends AbstractValidator
     /**
      * Retrieve CSRF token
      *
-     * If no CSRF token currently exists, generates one.
+     * If no CSRF token currently exists, or should be regenerated,
+     * generates one.
      *
+     * @param  bool $regenerate    default false
      * @return string
      */
-    public function getHash()
+    public function getHash($regenerate = false)
     {
-        if (null === $this->hash) {
-            $this->generateHash();
+        if ((null === $this->hash) || $regenerate) {
+            if ($regenerate) {
+                $this->hash = null;
+            } else {
+                $this->hash = $this->getValidationToken();
+            }
+            if (null === $this->hash) {
+                $this->generateHash();
+            }
         }
         return $this->hash;
     }
@@ -237,18 +235,20 @@ class Csrf extends AbstractValidator
      */
     public function getSessionName()
     {
-        return str_replace('\\', '_', __CLASS__) . '_' . $this->getSalt() . '_' . $this->getName();
+        return str_replace('\\', '_', __CLASS__) . '_'
+            . $this->getSalt() . '_'
+            . strtr($this->getName(), array('[' => '_', ']' => ''));
     }
 
     /**
      * Set timeout for CSRF session token
      *
-     * @param  int $ttl
+     * @param  int|null $ttl
      * @return Csrf
      */
     public function setTimeout($ttl)
     {
-        $this->timeout = (int) $ttl;
+        $this->timeout = ($ttl !== null) ? (int) $ttl : null;
         return $this;
     }
 
@@ -267,11 +267,14 @@ class Csrf extends AbstractValidator
      *
      * @return void
      */
-    public function initCsrfToken()
+    protected function initCsrfToken()
     {
         $session = $this->getSession();
-        $session->setExpirationHops(1, null, true);
-        $session->setExpirationSeconds($this->getTimeout());
+        //$session->setExpirationHops(1, null, true);
+        $timeout = $this->getTimeout();
+        if (null !== $timeout) {
+            $session->setExpirationSeconds($timeout);
+        }
         $session->hash = $this->getHash();
     }
 
@@ -288,12 +291,7 @@ class Csrf extends AbstractValidator
         if (isset(static::$hashCache[$this->getSessionName()])) {
             $this->hash = static::$hashCache[$this->getSessionName()];
         } else {
-            $this->hash = md5(
-                mt_rand(1,1000000)
-                .  $this->getSalt()
-                .  $this->getName()
-                .  mt_rand(1,1000000)
-            );
+            $this->hash = md5($this->getSalt() . Rand::getBytes(32) .  $this->getName());
             static::$hashCache[$this->getSessionName()] = $this->hash;
         }
         $this->setValue($this->hash);

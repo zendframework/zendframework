@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Renderer;
@@ -29,22 +18,19 @@ use Zend\Barcode\Object\ObjectInterface;
  * @category   Zend
  * @package    Zend_Barcode
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface RendererInterface
 {
     /**
      * Constructor
      * @param array|\Traversable $options
-     * @return void
      */
     public function __construct($options = null);
 
     /**
      * Set renderer state from options array
      * @param  array $options
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setOptions($options);
 
@@ -52,7 +38,7 @@ interface RendererInterface
      * Set renderer namespace for autoloading
      *
      * @param string $namespace
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setRendererNamespace($namespace);
 
@@ -72,7 +58,7 @@ interface RendererInterface
     /**
      * Manually adjust top position
      * @param integer $value
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setTopOffset($value);
 
@@ -85,7 +71,7 @@ interface RendererInterface
     /**
      * Manually adjust left position
      * @param integer $value
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setLeftOffset($value);
 
@@ -97,14 +83,14 @@ interface RendererInterface
 
     /**
      * Activate/Deactivate the automatic rendering of exception
-     * @param boolean $value
+     * @param  bool $value
      */
     public function setAutomaticRenderError($value);
 
     /**
      * Horizontal position of the barcode in the rendering resource
      * @param string $value
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setHorizontalPosition($value);
 
@@ -117,7 +103,7 @@ interface RendererInterface
     /**
      * Vertical position of the barcode in the rendering resource
      * @param string $value
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setVerticalPosition($value);
 
@@ -130,7 +116,7 @@ interface RendererInterface
     /**
      * Set the size of a module
      * @param float $value
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setModuleSize($value);
 
@@ -142,14 +128,14 @@ interface RendererInterface
 
     /**
      * Retrieve the automatic rendering of exception
-     * @return boolean
+     * @return bool
      */
     public function getAutomaticRenderError();
 
     /**
      * Set the barcode object
      * @param  ObjectInterface $barcode
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setBarcode(ObjectInterface $barcode);
 
@@ -161,7 +147,7 @@ interface RendererInterface
 
     /**
      * Checking of parameters after all settings
-     * @return boolean
+     * @return bool
      */
     public function checkParams();
 

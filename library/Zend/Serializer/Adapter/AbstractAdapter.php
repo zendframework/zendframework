@@ -1,114 +1,65 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Serializer
  */
 
 namespace Zend\Serializer\Adapter;
-
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Serializer\Adapter\AdapterInterface as SerializationAdapter,
-    Zend\Serializer\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements SerializationAdapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**
-     * Serializer options
-     *
-     * @var array
+     * @var AdapterOptions
      */
-    protected $_options = array();
+    protected $options = null;
 
     /**
      * Constructor
      *
-     * @param  array|Traversable $options Serializer options
+     * @param array|\Traversable|AdapterOptions $options
      */
-    public function __construct($options = array())
+    public function __construct($options = null)
     {
-        $this->setOptions($options);
+        if ($options !== null) {
+            $this->setOptions($options);
+        }
     }
 
     /**
-     * Set serializer options
+     * Set adapter options
      *
-     * @param  array|Traversable $options Serializer options
+     * @param  array|\Traversable|AdapterOptions $options
      * @return AbstractAdapter
      */
     public function setOptions($options)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        } else {
-            $options = (array) $options;
+        if (!$options instanceof AdapterOptions) {
+            $options = new AdapterOptions($options);
         }
 
-        foreach ($options as $k => $v) {
-            $this->setOption($k, $v);
-        }
+        $this->options = $options;
         return $this;
     }
 
     /**
-     * Set a serializer option
+     * Get adapter options
      *
-     * @param  string $name Option name
-     * @param  mixed $value Option value
-     * @return AbstractAdapter
+     * @return AdapterOptions
      */
-    public function setOption($name, $value) 
+    public function getOptions()
     {
-        $this->_options[(string) $name] = $value;
-        return $this;
-    }
-
-    /**
-     * Get serializer options
-     *
-     * @return array
-     */
-    public function getOptions() 
-    {
-        return $this->_options;
-    }
-
-    /**
-     * Get a serializer option
-     *
-     * @param  string $name
-     * @return mixed
-     * @throws InvalidArgumentException
-     */
-    public function getOption($name) 
-    {
-        $name = (string) $name;
-        if (!array_key_exists($name, $this->_options)) {
-            throw new InvalidArgumentException("Unknown option '{$name}'");
+        if ($this->options === null) {
+            $this->options = new AdapterOptions();
         }
-
-        return $this->_options[$name];
+        return $this->options;
     }
 }

@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Request as HttpRequest;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
-use Zend\Version;
+use Zend\Version\Version;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Publisher
 {
@@ -40,7 +28,7 @@ class Publisher
      *
      * @var array
      */
-    protected $_hubUrls = array();
+    protected $hubUrls = array();
 
     /**
      * An array of topic (Atom or RSS feed) URLs which have been updated and
@@ -48,7 +36,7 @@ class Publisher
      *
      * @var array
      */
-    protected $_updatedTopicUrls = array();
+    protected $updatedTopicUrls = array();
 
     /**
      * An array of any errors including keys for 'response', 'hubUrl'.
@@ -56,7 +44,7 @@ class Publisher
      *
      * @var array
      */
-    protected $_errors = array();
+    protected $errors = array();
 
     /**
      * An array of topic (Atom or RSS feed) URLs which have been updated and
@@ -64,7 +52,7 @@ class Publisher
      *
      * @var array
      */
-    protected $_parameters = array();
+    protected $parameters = array();
 
     /**
      * Constructor; accepts an array or Zend_Config instance to preset
@@ -120,10 +108,10 @@ class Publisher
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . 'URL');
         }
-        $this->_hubUrls[] = $url;
+        $this->hubUrls[] = $url;
         return $this;
     }
 
@@ -152,8 +140,8 @@ class Publisher
         if (!in_array($url, $this->getHubUrls())) {
             return $this;
         }
-        $key = array_search($url, $this->_hubUrls);
-        unset($this->_hubUrls[$key]);
+        $key = array_search($url, $this->hubUrls);
+        unset($this->hubUrls[$key]);
         return $this;
     }
 
@@ -164,8 +152,8 @@ class Publisher
      */
     public function getHubUrls()
     {
-        $this->_hubUrls = array_unique($this->_hubUrls);
-        return $this->_hubUrls;
+        $this->hubUrls = array_unique($this->hubUrls);
+        return $this->hubUrls;
     }
 
     /**
@@ -179,10 +167,10 @@ class Publisher
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . 'URL');
         }
-        $this->_updatedTopicUrls[] = $url;
+        $this->updatedTopicUrls[] = $url;
         return $this;
     }
 
@@ -211,8 +199,8 @@ class Publisher
         if (!in_array($url, $this->getUpdatedTopicUrls())) {
             return $this;
         }
-        $key = array_search($url, $this->_updatedTopicUrls);
-        unset($this->_updatedTopicUrls[$key]);
+        $key = array_search($url, $this->updatedTopicUrls);
+        unset($this->updatedTopicUrls[$key]);
         return $this;
     }
 
@@ -223,8 +211,8 @@ class Publisher
      */
     public function getUpdatedTopicUrls()
     {
-        $this->_updatedTopicUrls = array_unique($this->_updatedTopicUrls);
-        return $this->_updatedTopicUrls;
+        $this->updatedTopicUrls = array_unique($this->updatedTopicUrls);
+        return $this->updatedTopicUrls;
     }
 
     /**
@@ -239,8 +227,8 @@ class Publisher
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . 'URL');
         }
         $client = $this->_getHttpClient();
         $client->setUri($url);
@@ -272,12 +260,12 @@ class Publisher
             throw new Exception\RuntimeException('No Hub Server URLs'
                 . ' have been set so no notifications can be sent');
         }
-        $this->_errors = array();
+        $this->errors = array();
         foreach ($hubs as $url) {
             $client->setUri($url);
             $response = $client->getResponse();
             if ($response->getStatusCode() !== 204) {
-                $this->_errors[] = array(
+                $this->errors[] = array(
                     'response' => $response,
                     'hubUrl' => $url
                 );
@@ -301,7 +289,7 @@ class Publisher
         }
         if (empty($name) || !is_string($name)) {
             throw new Exception\InvalidArgumentException('Invalid parameter "name"'
-                .' of "' . $name . '" must be a non-empty string');
+                . ' of "' . $name . '" must be a non-empty string');
         }
         if ($value === null) {
             $this->removeParameter($name);
@@ -309,9 +297,9 @@ class Publisher
         }
         if (empty($value) || (!is_string($value) && $value !== null)) {
             throw new Exception\InvalidArgumentException('Invalid parameter "value"'
-                .' of "' . $value . '" must be a non-empty string');
+                . ' of "' . $value . '" must be a non-empty string');
         }
-        $this->_parameters[$name] = $value;
+        $this->parameters[$name] = $value;
         return $this;
     }
 
@@ -340,10 +328,10 @@ class Publisher
     {
         if (empty($name) || !is_string($name)) {
             throw new Exception\InvalidArgumentException('Invalid parameter "name"'
-                .' of "' . $name . '" must be a non-empty string');
+                . ' of "' . $name . '" must be a non-empty string');
         }
-        if (array_key_exists($name, $this->_parameters)) {
-            unset($this->_parameters[$name]);
+        if (array_key_exists($name, $this->parameters)) {
+            unset($this->parameters[$name]);
         }
         return $this;
     }
@@ -355,7 +343,7 @@ class Publisher
      */
     public function getParameters()
     {
-        return $this->_parameters;
+        return $this->parameters;
     }
 
     /**
@@ -366,7 +354,7 @@ class Publisher
      */
     public function isSuccess()
     {
-        return !(count($this->_errors) != 0);
+        return !(count($this->errors) != 0);
     }
 
     /**
@@ -378,7 +366,7 @@ class Publisher
      */
     public function getErrors()
     {
-        return $this->_errors;
+        return $this->errors;
     }
 
     /**

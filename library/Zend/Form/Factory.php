@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form;
@@ -31,8 +21,6 @@ use Zend\Stdlib\Hydrator;
 /**
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Factory
 {
@@ -77,39 +65,27 @@ class Factory
      *
      * @param  array|Traversable $spec
      * @return ElementInterface
+     * @throws Exception\DomainException
      */
     public function create($spec)
     {
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        if ($type instanceof FormInterface) {
+        if (self::isSubclassOf($type, 'Zend\Form\FormInterface')) {
             return $this->createForm($spec);
         }
 
-        if ($type instanceof FieldsetInterface) {
+        if (self::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             return $this->createFieldset($spec);
         }
 
-        if ($type instanceof ElementInterface) {
+        if (self::isSubclassOf($type, 'Zend\Form\ElementInterface')) {
             return $this->createElement($spec);
         }
 
-        if (is_string($type) && class_exists($type)) {
-            $reflection = new ReflectionClass($type);
-            if ($reflection->implementsInterface('Zend\Form\FormInterface')) {
-                return $this->createForm($spec);
-            }
-            if ($reflection->implementsInterface('Zend\Form\FieldsetInterface')) {
-                return $this->createFieldset($spec);
-            }
-            if ($reflection->implementsInterface('Zend\Form\ElementInterface')) {
-                return $this->createElement($spec);
-            }
-        }
-
         throw new Exception\DomainException(sprintf(
-            '%s expects the $spec["type"] to implement one of %s, %s, %s, or a valid full qualified class name; received %s',
+            '%s expects the $spec["type"] to implement one of %s, %s, or %s; received %s',
             __METHOD__,
             'Zend\Form\ElementInterface',
             'Zend\Form\FieldsetInterface',
@@ -124,6 +100,7 @@ class Factory
      * Specification can contain any of the following:
      * - type: the Element class to use; defaults to \Zend\Form\Element
      * - name: what name to provide the element, if any
+     * - options: an array, Traversable, or ArrayAccess object of element options
      * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
      *
@@ -138,6 +115,7 @@ class Factory
 
         $type       = isset($spec['type'])       ? $spec['type']       : 'Zend\Form\Element';
         $name       = isset($spec['name'])       ? $spec['name']       : null;
+        $options    = isset($spec['options'])    ? $spec['options']    : null;
         $attributes = isset($spec['attributes']) ? $spec['attributes'] : null;
 
         $element = new $type();
@@ -149,8 +127,12 @@ class Factory
             ));
         }
 
-        if ($name) {
+        if ($name !== null && $name !== '') {
             $element->setName($name);
+        }
+
+        if (is_array($options) || $options instanceof Traversable || $options instanceof ArrayAccess) {
+            $element->setOptions($options);
         }
 
         if (is_array($attributes) || $attributes instanceof Traversable || $attributes instanceof ArrayAccess) {
@@ -166,6 +148,7 @@ class Factory
      * Specification can contain any of the following:
      * - type: the Fieldset class to use; defaults to \Zend\Form\Fieldset
      * - name: what name to provide the fieldset, if any
+     * - options: an array, Traversable, or ArrayAccess object of element options
      * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
      * - elements: an array or Traversable object where each entry is an array
@@ -194,6 +177,14 @@ class Factory
             ));
         }
 
+        if (isset($spec['object'])) {
+            $this->prepareAndInjectObject($spec['object'], $fieldset, __METHOD__);
+        }
+
+        if (isset($spec['hydrator'])) {
+            $this->prepareAndInjectHydrator($spec['hydrator'], $fieldset, __METHOD__);
+        }
+
         if (isset($spec['elements'])) {
             $this->prepareAndInjectElements($spec['elements'], $fieldset, __METHOD__);
         }
@@ -211,7 +202,7 @@ class Factory
      * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
      *
-     * - input_filter: input filter instance, named input filter class, or 
+     * - input_filter: input filter instance, named input filter class, or
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *
@@ -240,8 +231,8 @@ class Factory
             $this->prepareAndInjectInputFilter($spec['input_filter'], $form, __METHOD__);
         }
 
-        if (isset($spec['hydrator'])) {
-            $this->prepareAndInjectHydrator($spec['hydrator'], $form, __METHOD__);
+        if (isset($spec['validation_group'])) {
+            $this->prepareAndInjectValidationGroup($spec['validation_group'], $form, __METHOD__);
         }
 
         return $form;
@@ -322,6 +313,87 @@ class Factory
     }
 
     /**
+     * Prepare and inject an object
+     *
+     * Takes a string indicating a class name, instantiates the class
+     * by that name, and injects the class instance as the bound object.
+     *
+     * @param  string           $objectName
+     * @param  FieldsetInterface $fieldset
+     * @param  string           $method
+     * @throws Exception\DomainException
+     * @return void
+     */
+    protected function prepareAndInjectObject($objectName, FieldsetInterface $fieldset, $method)
+    {
+        if (!is_string($objectName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string class name; received "%s"',
+                $method,
+                (is_object($objectName) ? get_class($objectName) : gettype($objectName))
+            ));
+        }
+
+        if (!class_exists($objectName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string class name to be a valid class name; received "%s"',
+                $method,
+                $objectName
+            ));
+        }
+
+        $fieldset->setObject(new $objectName);
+    }
+
+    /**
+     * Prepare and inject a named hydrator
+     *
+     * Takes a string indicating a hydrator class name (or a concrete instance), instantiates the class
+     * by that name, and injects the hydrator instance into the form.
+     *
+     * @param  string $hydratorOrName
+     * @param  FieldsetInterface $fieldset
+     * @param  string $method
+     * @return void
+     * @throws Exception\DomainException If $hydratorOrName is not a string, does not resolve to a known class, or
+     *                                   the class does not implement Hydrator\HydratorInterface
+     */
+    protected function prepareAndInjectHydrator($hydratorOrName, FieldsetInterface $fieldset, $method)
+    {
+        if (is_object($hydratorOrName) && $hydratorOrName instanceof Hydrator\HydratorInterface) {
+            $fieldset->setHydrator($hydratorOrName);
+            return;
+        }
+
+        if (!is_string($hydratorOrName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string hydrator class name; received "%s"',
+                $method,
+                (is_object($hydratorOrName) ? get_class($hydratorOrName) : gettype($hydratorOrName))
+            ));
+        }
+
+        if (!class_exists($hydratorOrName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string hydrator name to be a valid class name; received "%s"',
+                $method,
+                $hydratorOrName
+            ));
+        }
+
+        $hydrator = new $hydratorOrName;
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                $method,
+                $hydratorOrName
+            ));
+        }
+
+        $fieldset->setHydrator($hydrator);
+    }
+
+    /**
      * Prepare an input filter instance and inject in the provided form
      *
      * If the input filter specified is a string, assumes it is a class name,
@@ -365,45 +437,53 @@ class Factory
     }
 
     /**
-     * Prepare and inject a named hydrator
+     * Prepare a validation group and inject in the provided form
      *
-     * Takes a string indicating a hydrator class name, instantiates the class
-     * by that name, and injects the hydrator instance into the form.
+     * Takes an array of elements names
      *
-     * @param  string $hydratorName
+     * @param  string|array|Traversable $spec
      * @param  FormInterface $form
      * @param  string $method
      * @return void
-     * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
+     * @throws Exception\DomainException if validation group given is not an array
      */
-    protected function prepareAndInjectHydrator($hydratorName, FormInterface $form, $method)
+    protected function prepareAndInjectValidationGroup($spec, FormInterface $form, $method)
     {
-        if (!is_string($hydratorName)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator class name; received "%s"',
-                $method,
-                (is_object($hydratorName) ? get_class($hydratorName) : gettype($hydratorName))
-            ));
+        if (!is_array($spec)) {
+            if (!class_exists($spec)) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects an array for validation group; received "%s"',
+                    $method,
+                    $spec
+                ));
+            }
         }
 
-        if (!class_exists($hydratorName)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator name to be a valid class name; received "%s"',
-                $method,
-                $hydratorName
-            ));
-        }
+        $form->setValidationGroup($spec);
+    }
 
-        $hydrator = new $hydratorName;
-        if (!$hydrator instanceof Hydrator\HydratorInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
-                $method,
-                $hydratorName
-            ));
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     * @return bool
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (is_subclass_of($className, $type)) {
+            return true;
         }
-
-        $form->setHydrator($hydrator);
-        return;
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

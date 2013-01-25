@@ -3,17 +3,19 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\PublicKey\Rsa;
 
 /**
+ * RSA private key
+ *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage PublicKey
  */
 class PrivateKey extends AbstractKey
 {
@@ -25,11 +27,30 @@ class PrivateKey extends AbstractKey
     protected $publicKey = null;
 
     /**
+     * Create private key instance from PEM formatted key file
+     *
+     * @param  string      $pemFile
+     * @param  string|null $passPhrase
+     * @return PrivateKey
+     * @throws Exception\InvalidArgumentException
+     */
+    public static function fromFile($pemFile, $passPhrase = null)
+    {
+        if (!is_readable($pemFile)) {
+            throw new Exception\InvalidArgumentException(
+                "PEM file '{$pemFile}' is not readable"
+            );
+        }
+
+        return new static(file_get_contents($pemFile), $passPhrase);
+    }
+
+    /**
      * Constructor
      *
-     * @param string $pemString
-     * @param string $passPhrase
-     * @throws  Exception\RuntimeException
+     * @param  string $pemString
+     * @param  string $passPhrase
+     * @throws Exception\RuntimeException
      */
     public function __construct($pemString, $passPhrase = null)
     {
@@ -62,12 +83,17 @@ class PrivateKey extends AbstractKey
     /**
      * Encrypt using this key
      *
-     * @param string $data
+     * @param  string $data
      * @return string
      * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function encrypt($data)
     {
+        if (empty($data)) {
+            throw new Exception\InvalidArgumentException('The data to encrypt cannot be empty');
+        }
+
         $encrypted = '';
         $result = openssl_private_encrypt($data, $encrypted, $this->getOpensslKeyResource());
         if (false === $result) {
@@ -79,16 +105,23 @@ class PrivateKey extends AbstractKey
         return $encrypted;
     }
 
-
     /**
      * Decrypt using this key
      *
-     * @param string $data
+     * @param  string $data
      * @return string
      * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function decrypt($data)
     {
+        if (!is_string($data)) {
+            throw new Exception\InvalidArgumentException('The data to decrypt must be a string');
+        }
+        if ('' === $data) {
+            throw new Exception\InvalidArgumentException('The data to decrypt cannot be empty');
+        }
+
         $decrypted = '';
         $result = openssl_private_decrypt($data, $decrypted, $this->getOpensslKeyResource());
         if (false === $result) {

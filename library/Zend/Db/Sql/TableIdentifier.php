@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -27,22 +27,11 @@ class TableIdentifier
     protected $schema;
 
     /**
-     * @var string
-     */
-    protected $alias;
-
-    /**
      * @param string $table
      * @param string $schema
      */
     public function __construct($table, $schema = null)
     {
-        if (is_array($table)) {
-            $keys = array_keys($table);
-            $this->alias = array_pop($keys) ?: null;
-
-            $table = $table[$this->alias];
-        }
         $this->table = $table;
         $this->schema = $schema;
     }
@@ -87,33 +76,8 @@ class TableIdentifier
         return $this->schema;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasAlias()
-    {
-        return ($this->alias != null);
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getAlias()
-    {
-        return $this->alias;
-    }
-
-    /**
-     * @param string $alias
-     */
-    public function setAlias($alias)
-    {
-        $this->alias = $alias;
-    }
-
     public function getTableAndSchema()
     {
-        return array($this->table, $this->schema, $this->alias);
+        return array($this->table, $this->schema);
     }
-
 }

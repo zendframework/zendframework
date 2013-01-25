@@ -1,26 +1,15 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager;
 
-use ArrayObject;
 use Traversable;
 use Zend\Stdlib\CallbackHandler;
 
@@ -29,8 +18,6 @@ use Zend\Stdlib\CallbackHandler;
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface EventManagerInterface extends SharedEventManagerAwareInterface
 {
@@ -44,11 +31,11 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * - Passing event name, target, and array|ArrayAccess of arguments
      *
      * Can emulate triggerUntil() if the last argument provided is a callback.
-     * 
-     * @param  string $event 
-     * @param  object|string $target 
-     * @param  array|object $argv 
-     * @param  null|callback $callback 
+     *
+     * @param  string $event
+     * @param  object|string $target
+     * @param  array|object $argv
+     * @param  null|callable $callback
      * @return ResponseCollection
      */
     public function trigger($event, $target = null, $argv = array(), $callback = null);
@@ -61,20 +48,20 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * - Passing event name, Event object, and callback only
      * - Passing event name, target, Event object, and callback
      * - Passing event name, target, array|ArrayAccess of arguments, and callback
-     * 
-     * @param  string $event 
-     * @param  object|string $target 
-     * @param  array|object $argv 
-     * @param  callback $callback 
+     *
+     * @param  string $event
+     * @param  object|string $target
+     * @param  array|object $argv
+     * @param  callable $callback
      * @return ResponseCollection
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null);
 
     /**
      * Attach a listener to an event
-     * 
-     * @param  string $event 
-     * @param  callback $callback
+     *
+     * @param  string $event
+     * @param  callable $callback
      * @param  int $priority Priority at which to register listener
      * @return CallbackHandler
      */
@@ -82,31 +69,31 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
 
     /**
      * Detach an event listener
-     * 
-     * @param  CallbackHandler|ListenerAggregateInterface $listener 
+     *
+     * @param  CallbackHandler|ListenerAggregateInterface $listener
      * @return bool
      */
     public function detach($listener);
 
     /**
      * Get a list of events for which this collection has listeners
-     * 
+     *
      * @return array
      */
     public function getEvents();
 
     /**
      * Retrieve a list of listeners registered to a given event
-     * 
-     * @param  string $event 
+     *
+     * @param  string $event
      * @return array|object
      */
     public function getListeners($event);
 
     /**
      * Clear all listeners for a given event
-     * 
-     * @param  string $event 
+     *
+     * @param  string $event
      * @return void
      */
     public function clearListeners($event);

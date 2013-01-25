@@ -3,17 +3,18 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface,
-    Zend\Db\Adapter\Driver\Feature\AbstractFeature,
-    Zend\Db\Adapter\Exception;
+use PDOStatement;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
+use Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -51,6 +52,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
      * @param array|Connection|\PDO $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
+     * @param string $features
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $features = self::FEATURES_DEFAULT)
     {
@@ -74,9 +76,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Register connection
-     * 
+     *
      * @param  Connection $connection
-     * @return Pdo 
+     * @return Pdo
      */
     public function registerConnection(Connection $connection)
     {
@@ -87,8 +89,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Register statement prototype
-     * 
-     * @param Statement $statementPrototype 
+     *
+     * @param Statement $statementPrototype
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
@@ -98,8 +100,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Register result prototype
-     * 
-     * @param Result $resultPrototype 
+     *
+     * @param Result $resultPrototype
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
@@ -107,8 +109,10 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
-     * @param string|AbstractFeature $nameOrFeature
-     * @param mixed $value
+     * Add feature
+     *
+     * @param string $name
+     * @param AbstractFeature $feature
      * @return Pdo
      */
     public function addFeature($name, $feature)
@@ -122,7 +126,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
-     * setup the default features for Pdo
+     * Setup the default features for Pdo
+     *
+     * @return Pdo
      */
     public function setupDefaultFeatures()
     {
@@ -133,8 +139,10 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
+     * Get feature
+     *
      * @param $name
-     * @return bool
+     * @return AbstractFeature|false
      */
     public function getFeature($name)
     {
@@ -146,9 +154,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
 
     /**
      * Get database platform name
-     * 
+     *
      * @param  string $nameFormat
-     * @return string 
+     * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
@@ -193,23 +201,29 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     }
 
     /**
-     * @param string $sql
+     * @param string|PDOStatement $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
     {
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
-        } elseif ($sqlOrResource instanceof \PDOStatement) {
+        if ($sqlOrResource instanceof PDOStatement) {
             $statement->setResource($sqlOrResource);
+        } else {
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            }
+            if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+            }
+            $statement->initialize($this->connection->getResource());
         }
-        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 
     /**
      * @param resource $resource
+     * @param mixed $context
      * @return Result
      */
     public function createResult($resource, $context = null)
@@ -245,9 +259,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     {
         if ($type == null && !is_numeric($name) || $type == self::PARAMETERIZATION_NAMED) {
             return ':' . $name;
-        } else {
-            return '?';
         }
+
+        return '?';
     }
 
     /**
@@ -255,7 +269,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface
      */
     public function getLastGeneratedValue()
     {
-        $this->connection->getLastGeneratedValue();
+        return $this->connection->getLastGeneratedValue();
     }
-
 }

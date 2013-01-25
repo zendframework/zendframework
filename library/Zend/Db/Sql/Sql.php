@@ -3,16 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\Platform\PlatformInterface;
 
 /**
  * @category   Zend
@@ -58,7 +58,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -69,7 +69,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -80,7 +80,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -91,7 +91,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }

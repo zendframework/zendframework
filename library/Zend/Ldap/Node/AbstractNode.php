@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Node
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node;
@@ -30,8 +19,6 @@ use Zend\Ldap\Exception;
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Node
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractNode implements \ArrayAccess, \Countable
 {
@@ -63,7 +50,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  \Zend\Ldap\Dn $dn
      * @param  array         $data
-     * @param  boolean       $fromDataSource
+     * @param  bool       $fromDataSource
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
@@ -73,7 +60,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
 
     /**
      * @param array   $data
-     * @param boolean $fromDataSource
+     * @param  bool $fromDataSource
      */
     protected function loadData(array $data, $fromDataSource)
     {
@@ -197,7 +184,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an offline method.
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return array
      */
     public function getAttributes($includeSystemAttributes = true)
@@ -232,7 +219,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Returns an array representation of the current node
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return array
      */
     public function toArray($includeSystemAttributes = true)
@@ -244,7 +231,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Returns a JSON representation of the current node
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return string
      */
     public function toJson($includeSystemAttributes = true)
@@ -259,7 +246,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an offline method.
      *
-     * @param  boolean $includeSystemAttributes
+     * @param  bool $includeSystemAttributes
      * @return array
      */
     public function getData($includeSystemAttributes = true)
@@ -267,14 +254,14 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
         if ($includeSystemAttributes === false) {
             $data = array();
             foreach ($this->currentData as $key => $value) {
-                if (!in_array($key, self::$systemAttributes)) {
+                if (!in_array($key, static::$systemAttributes)) {
                     $data[$key] = $value;
                 }
             }
             return $data;
-        } else {
-            return $this->currentData;
         }
+
+        return $this->currentData;
     }
 
     /**
@@ -287,8 +274,8 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * missing in the key-collection.
      *
      * @param  string  $name
-     * @param  boolean $emptyExists
-     * @return boolean
+     * @param  bool $emptyExists
+     * @return bool
      */
     public function existsAttribute($name, $emptyExists = false)
     {
@@ -300,9 +287,8 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
 
             return count($this->currentData[$name]) > 0;
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 
     /**
@@ -310,7 +296,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string      $attribName
      * @param  mixed|array $value
-     * @return boolean
+     * @return bool
      */
     public function attributeHasValue($attribName, $value)
     {
@@ -331,9 +317,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         if ($name == 'dn') {
             return $this->getDnString();
-        } else {
-            return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
         }
+
+        return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
     }
 
     /**
@@ -400,7 +386,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * Empty attributes will be treated as non-existent.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -462,7 +448,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * Empty attributes will be treated as non-existent.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name)
     {

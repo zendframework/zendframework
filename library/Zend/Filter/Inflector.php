@@ -1,63 +1,50 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader\Broker;
 
 /**
  * Filter chain for string inflection
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\Broker
+     * @var FilterPluginManager
      */
-    protected $_pluginBroker = null;
+    protected $pluginManager = null;
 
     /**
      * @var string
      */
-    protected $_target = null;
+    protected $target = null;
 
     /**
      * @var bool
      */
-    protected $_throwTargetExceptionsOn = true;
+    protected $throwTargetExceptionsOn = true;
 
     /**
      * @var string
      */
-    protected $_targetReplacementIdentifier = ':';
+    protected $targetReplacementIdentifier = ':';
 
     /**
      * @var array
      */
-    protected $_rules = array();
+    protected $rules = array();
 
     /**
      * Constructor
@@ -96,28 +83,28 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * Retreive plugin broker
+     * Retrieve plugin manager
      *
-     * @return \Zend\Loader\Broker
+     * @return FilterPluginManager
      */
-    public function getPluginBroker()
+    public function getPluginManager()
     {
-        if (!$this->_pluginBroker instanceof Broker) {
-            $this->setPluginBroker(new FilterBroker());
+        if (!$this->pluginManager instanceof FilterPluginManager) {
+            $this->setPluginManager(new FilterPluginManager());
         }
 
-        return $this->_pluginBroker;
+        return $this->pluginManager;
     }
 
     /**
-     * Set plugin broker
+     * Set plugin manager
      *
-     * @param \Zend\Loader\Broker $broker
+     * @param  FilterPluginManager $manager
      * @return Inflector
      */
-    public function setPluginBroker(Broker $broker)
+    public function setPluginManager(FilterPluginManager $manager)
     {
-        $this->_pluginBroker = $broker;
+        $this->pluginManager = $manager;
         return $this;
     }
 
@@ -133,12 +120,12 @@ class Inflector extends AbstractFilter
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        // Set broker
-        if (array_key_exists('pluginBroker', $options)) {
-            if (is_scalar($options['pluginBroker']) && class_exists($options['pluginBroker'])) {
-                $options['pluginBroker'] = new $options['pluginBroker'];
+        // Set plugin manager
+        if (array_key_exists('pluginManager', $options)) {
+            if (is_scalar($options['pluginManager']) && class_exists($options['pluginManager'])) {
+                $options['pluginManager'] = new $options['pluginManager'];
             }
-            $this->setPluginBroker($options['pluginBroker']);
+            $this->setPluginManager($options['pluginManager']);
         }
 
         if (array_key_exists('throwTargetExceptionsOn', $options)) {
@@ -164,12 +151,12 @@ class Inflector extends AbstractFilter
      * Set Whether or not the inflector should throw an exception when a replacement
      * identifier is still found within an inflected target.
      *
-     * @param bool $throwTargetExceptions
+     * @param bool $throwTargetExceptionsOn
      * @return Inflector
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
-        $this->_throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
+        $this->throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
         return $this;
     }
 
@@ -180,7 +167,7 @@ class Inflector extends AbstractFilter
      */
     public function isThrowTargetExceptionsOn()
     {
-        return $this->_throwTargetExceptionsOn;
+        return $this->throwTargetExceptionsOn;
     }
 
     /**
@@ -192,7 +179,7 @@ class Inflector extends AbstractFilter
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
         if ($targetReplacementIdentifier) {
-            $this->_targetReplacementIdentifier = (string) $targetReplacementIdentifier;
+            $this->targetReplacementIdentifier = (string) $targetReplacementIdentifier;
         }
 
         return $this;
@@ -205,7 +192,7 @@ class Inflector extends AbstractFilter
      */
     public function getTargetReplacementIdentifier()
     {
-        return $this->_targetReplacementIdentifier;
+        return $this->targetReplacementIdentifier;
     }
 
     /**
@@ -217,7 +204,7 @@ class Inflector extends AbstractFilter
      */
     public function setTarget($target)
     {
-        $this->_target = (string) $target;
+        $this->target = (string) $target;
         return $this;
     }
 
@@ -228,7 +215,7 @@ class Inflector extends AbstractFilter
      */
     public function getTarget()
     {
-        return $this->_target;
+        return $this->target;
     }
 
     /**
@@ -239,7 +226,7 @@ class Inflector extends AbstractFilter
      */
     public function setTargetReference(&$target)
     {
-        $this->_target =& $target;
+        $this->target =& $target;
         return $this;
     }
 
@@ -300,13 +287,13 @@ class Inflector extends AbstractFilter
     {
         if (null !== $spec) {
             $spec = $this->_normalizeSpec($spec);
-            if (isset($this->_rules[$spec])) {
-                return $this->_rules[$spec];
+            if (isset($this->rules[$spec])) {
+                return $this->rules[$spec];
             }
             return false;
         }
 
-        return $this->_rules;
+        return $this->rules;
     }
 
     /**
@@ -319,9 +306,9 @@ class Inflector extends AbstractFilter
     public function getRule($spec, $index)
     {
         $spec = $this->_normalizeSpec($spec);
-        if (isset($this->_rules[$spec]) && is_array($this->_rules[$spec])) {
-            if (isset($this->_rules[$spec][$index])) {
-                return $this->_rules[$spec][$index];
+        if (isset($this->rules[$spec]) && is_array($this->rules[$spec])) {
+            if (isset($this->rules[$spec][$index])) {
+                return $this->rules[$spec][$index];
             }
         }
         return false;
@@ -334,7 +321,7 @@ class Inflector extends AbstractFilter
      */
     public function clearRules()
     {
-        $this->_rules = array();
+        $this->rules = array();
         return $this;
     }
 
@@ -349,7 +336,7 @@ class Inflector extends AbstractFilter
     public function setFilterRule($spec, $ruleSet)
     {
         $spec = $this->_normalizeSpec($spec);
-        $this->_rules[$spec] = array();
+        $this->rules[$spec] = array();
         return $this->addFilterRule($spec, $ruleSet);
     }
 
@@ -363,22 +350,22 @@ class Inflector extends AbstractFilter
     public function addFilterRule($spec, $ruleSet)
     {
         $spec = $this->_normalizeSpec($spec);
-        if (!isset($this->_rules[$spec])) {
-            $this->_rules[$spec] = array();
+        if (!isset($this->rules[$spec])) {
+            $this->rules[$spec] = array();
         }
 
         if (!is_array($ruleSet)) {
             $ruleSet = array($ruleSet);
         }
 
-        if (is_string($this->_rules[$spec])) {
-            $temp = $this->_rules[$spec];
-            $this->_rules[$spec] = array();
-            $this->_rules[$spec][] = $temp;
+        if (is_string($this->rules[$spec])) {
+            $temp = $this->rules[$spec];
+            $this->rules[$spec] = array();
+            $this->rules[$spec][] = $temp;
         }
 
         foreach ($ruleSet as $rule) {
-            $this->_rules[$spec][] = $this->_getRule($rule);
+            $this->rules[$spec][] = $this->_getRule($rule);
         }
 
         return $this;
@@ -394,7 +381,7 @@ class Inflector extends AbstractFilter
     public function setStaticRule($name, $value)
     {
         $name = $this->_normalizeSpec($name);
-        $this->_rules[$name] = (string) $value;
+        $this->rules[$name] = (string) $value;
         return $this;
     }
 
@@ -412,7 +399,7 @@ class Inflector extends AbstractFilter
     public function setStaticRuleReference($name, &$reference)
     {
         $name = $this->_normalizeSpec($name);
-        $this->_rules[$name] =& $reference;
+        $this->rules[$name] =& $reference;
         return $this;
     }
 
@@ -420,40 +407,41 @@ class Inflector extends AbstractFilter
      * Inflect
      *
      * @param  string|array $source
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function filter($source)
     {
         // clean source
-        foreach ( (array) $source as $sourceName => $sourceValue) {
+        foreach ((array) $source as $sourceName => $sourceValue) {
             $source[ltrim($sourceName, ':')] = $sourceValue;
         }
 
-        $pregQuotedTargetReplacementIdentifier = preg_quote($this->_targetReplacementIdentifier, '#');
+        $pregQuotedTargetReplacementIdentifier = preg_quote($this->targetReplacementIdentifier, '#');
         $processedParts = array();
 
-        foreach ($this->_rules as $ruleName => $ruleValue) {
+        foreach ($this->rules as $ruleName => $ruleValue) {
             if (isset($source[$ruleName])) {
                 if (is_string($ruleValue)) {
                     // overriding the set rule
-                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $source[$ruleName]);
+                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $source[$ruleName]);
                 } elseif (is_array($ruleValue)) {
                     $processedPart = $source[$ruleName];
                     foreach ($ruleValue as $ruleFilter) {
                         $processedPart = $ruleFilter($processedPart);
                     }
-                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $processedPart);
+                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $processedPart);
                 }
             } elseif (is_string($ruleValue)) {
-                $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $ruleValue);
+                $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $ruleValue);
             }
         }
 
         // all of the values of processedParts would have been str_replace('\\', '\\\\', ..)'d to disable preg_replace backreferences
-        $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->_target);
+        $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->target);
 
-        if ($this->_throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
-            throw new Exception\RuntimeException('A replacement identifier ' . $this->_targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
+        if ($this->throwTargetExceptionsOn && (preg_match('#(?=' . $pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
+            throw new Exception\RuntimeException('A replacement identifier ' . $this->targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
         }
 
         return $inflectedTarget;
@@ -483,6 +471,6 @@ class Inflector extends AbstractFilter
         }
 
         $rule = (string) $rule;
-        return $this->getPluginBroker()->load($rule);
+        return $this->getPluginManager()->get($rule);
     }
 }

@@ -1,42 +1,29 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use Zend\Feed\Writer\Renderer,
-    Zend\Feed\Writer,
-    DOMDocument;
+use DOMDocument;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Atom extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
      * Constructor
-     * 
+     *
      * @param  Writer\Feed $container
-     * @return void
      */
     public function __construct (Writer\Feed $container)
     {
@@ -45,69 +32,68 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
 
     /**
      * Render Atom feed
-     * 
+     *
      * @return Atom
      */
     public function render()
     {
-        if (!$this->_container->getEncoding()) {
-            $this->_container->setEncoding('UTF-8');
+        if (!$this->container->getEncoding()) {
+            $this->container->setEncoding('UTF-8');
         }
-        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
-        $this->_dom->formatOutput = true;
-        $root = $this->_dom->createElementNS(
+        $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
+        $this->dom->formatOutput = true;
+        $root = $this->dom->createElementNS(
             Writer\Writer::NAMESPACE_ATOM_10, 'feed'
         );
         $this->setRootElement($root);
-        $this->_dom->appendChild($root);
-        $this->_setLanguage($this->_dom, $root);
-        $this->_setBaseUrl($this->_dom, $root);
-        $this->_setTitle($this->_dom, $root);
-        $this->_setDescription($this->_dom, $root);
-        $this->_setImage($this->_dom, $root);
-        $this->_setDateCreated($this->_dom, $root);
-        $this->_setDateModified($this->_dom, $root);
-        $this->_setGenerator($this->_dom, $root);
-        $this->_setLink($this->_dom, $root);
-        $this->_setFeedLinks($this->_dom, $root);
-        $this->_setId($this->_dom, $root);
-        $this->_setAuthors($this->_dom, $root);
-        $this->_setCopyright($this->_dom, $root);
-        $this->_setCategories($this->_dom, $root);
-        $this->_setHubs($this->_dom, $root);
-        
-        foreach ($this->_extensions as $ext) {
+        $this->dom->appendChild($root);
+        $this->_setLanguage($this->dom, $root);
+        $this->_setBaseUrl($this->dom, $root);
+        $this->_setTitle($this->dom, $root);
+        $this->_setDescription($this->dom, $root);
+        $this->_setImage($this->dom, $root);
+        $this->_setDateCreated($this->dom, $root);
+        $this->_setDateModified($this->dom, $root);
+        $this->_setGenerator($this->dom, $root);
+        $this->_setLink($this->dom, $root);
+        $this->_setFeedLinks($this->dom, $root);
+        $this->_setId($this->dom, $root);
+        $this->_setAuthors($this->dom, $root);
+        $this->_setCopyright($this->dom, $root);
+        $this->_setCategories($this->dom, $root);
+        $this->_setHubs($this->dom, $root);
+
+        foreach ($this->extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
             $ext->setDOMDocument($this->getDOMDocument(), $root);
             $ext->render();
         }
-        
-        foreach ($this->_container as $entry) {
+
+        foreach ($this->container as $entry) {
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());
             }
             if ($entry instanceof Writer\Entry) {
                 $renderer = new Renderer\Entry\Atom($entry);
             } else {
-                if (!$this->_dom->documentElement->hasAttribute('xmlns:at')) {
-                    $this->_dom->documentElement->setAttribute(
+                if (!$this->dom->documentElement->hasAttribute('xmlns:at')) {
+                    $this->dom->documentElement->setAttribute(
                         'xmlns:at', 'http://purl.org/atompub/tombstones/1.0'
                     );
                 }
                 $renderer = new Renderer\Entry\AtomDeleted($entry);
             }
-            if ($this->_ignoreExceptions === true) {
+            if ($this->ignoreExceptions === true) {
                 $renderer->ignoreExceptions();
             }
             $renderer->setType($this->getType());
-            $renderer->setRootElement($this->_dom->documentElement);
+            $renderer->setRootElement($this->dom->documentElement);
             $renderer->render();
             $element = $renderer->getElement();
-            $imported = $this->_dom->importNode($element, true);
+            $imported = $this->dom->importNode($element, true);
             $root->appendChild($imported);
         }
         return $this;
     }
-
 }

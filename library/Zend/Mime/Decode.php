@@ -1,35 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mime
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mime
  */
 
 namespace Zend\Mime;
 
+use Zend\Mail\Headers;
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Mime
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Decode
 {
     /**
-     * Explode MIME multipart string into seperate parts
+     * Explode MIME multipart string into separate parts
      *
      * Parts consist of the header and the body of each MIME part.
      *
@@ -40,7 +31,7 @@ class Decode
      */
     public static function splitMime($body, $boundary)
     {
-        // TODO: we're ignoring \r for now - is this function fast enough and is it safe to asume noone needs \r?
+        // TODO: we're ignoring \r for now - is this function fast enough and is it safe to assume noone needs \r?
         $body = str_replace("\r", '', $body);
 
         $start = 0;
@@ -85,7 +76,7 @@ class Decode
      */
     public static function splitMessageStruct($message, $boundary, $EOL = Mime::LINEEND)
     {
-        $parts = self::splitMime($message, $boundary);
+        $parts = static::splitMime($message, $boundary);
         if (count($parts) <= 0) {
             return null;
         }
@@ -93,7 +84,7 @@ class Decode
         $headers = null; // "Declare" variable before the first usage "for reading"
         $body    = null; // "Declare" variable before the first usage "for reading"
         foreach ($parts as $part) {
-            self::splitMessage($part, $headers, $body, $EOL);
+            static::splitMessage($part, $headers, $body, $EOL);
             $result[] = array('header' => $headers,
                               'body'   => $body    );
         }
@@ -106,21 +97,33 @@ class Decode
      *
      * The charset of the returned headers depend on your iconv settings.
      *
-     * @param  string $message raw message with header and optional content
-     * @param  array  $headers output param, array with headers as array(name => value)
-     * @param  string $body    output param, content of message
-     * @param  string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param  string|Headers  $message raw message with header and optional content
+     * @param  Headers         $headers output param, headers container
+     * @param  string          $body    output param, content of message
+     * @param  string          $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param  bool         $strict  enable strict mode for parsing message
      * @return null
      */
-    public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND)
+    public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND, $strict = false)
     {
+        if ($message instanceof Headers) {
+            $message = $message->toString();
+        }
         // check for valid header at first line
         $firstline = strtok($message, "\n");
         if (!preg_match('%^[^\s]+[^:]*:%', $firstline)) {
             $headers = array();
-            // TODO: we're ignoring \r for now - is this function fast enough and is it safe to asume noone needs \r?
+            // TODO: we're ignoring \r for now - is this function fast enough and is it safe to assume noone needs \r?
             $body = str_replace(array("\r", "\n"), array('', $EOL), $message);
             return;
+        }
+
+        // see @ZF2-372, pops the first line off a message if it doesn't contain a header
+        if (!$strict) {
+            $parts = explode(': ', $firstline, 2);
+            if (count($parts) != 2) {
+                $message = substr($message, strpos($message, $EOL)+1);
+            }
         }
 
         // find an empty line between headers and body
@@ -128,40 +131,19 @@ class Decode
         if (strpos($message, $EOL . $EOL)) {
             list($headers, $body) = explode($EOL . $EOL, $message, 2);
         // next is the standard new line
-        } else if ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
+        } elseif ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
             list($headers, $body) = explode("\r\n\r\n", $message, 2);
         // next is the other "standard" new line
-        } else if ($EOL != "\n" && strpos($message, "\n\n")) {
+        } elseif ($EOL != "\n" && strpos($message, "\n\n")) {
             list($headers, $body) = explode("\n\n", $message, 2);
         // at last resort find anything that looks like a new line
         } else {
-            @list($headers, $body) = @preg_split("%([\r\n]+)\\1%U", $message, 2);
+            ErrorHandler::start(E_NOTICE|E_WARNING);
+            list($headers, $body) = preg_split("%([\r\n]+)\\1%U", $message, 2);
+            ErrorHandler::stop();
         }
 
-        $headers = iconv_mime_decode_headers($headers, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-
-        if ($headers === false) {
-            // an error occurs during the decoding
-            return;
-        }
-
-        // normalize header names
-        foreach ($headers as $name => $header) {
-            $lower = strtolower($name);
-            if ($lower == $name) {
-                continue;
-            }
-            unset($headers[$name]);
-            if (!isset($headers[$lower])) {
-                $headers[$lower] = $header;
-                continue;
-            }
-            if (is_array($headers[$lower])) {
-                $headers[$lower][] = $header;
-                continue;
-            }
-            $headers[$lower] = array($headers[$lower], $header);
-        }
+        $headers = Headers::fromString($headers, $EOL);
     }
 
     /**
@@ -173,7 +155,7 @@ class Decode
      */
     public static function splitContentType($type, $wantedPart = null)
     {
-        return self::splitHeaderField($type, $wantedPart, 'type');
+        return static::splitHeaderField($type, $wantedPart, 'type');
     }
 
     /**
@@ -237,6 +219,6 @@ class Decode
      */
     public static function decodeQuotedPrintable($string)
     {
-        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
     }
 }

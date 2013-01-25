@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
@@ -30,8 +19,6 @@ namespace Zend\Http\Client\Adapter;
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface AdapterInterface
 {
@@ -47,7 +34,7 @@ interface AdapterInterface
      *
      * @param string  $host
      * @param int     $port
-     * @param boolean $secure
+     * @param  bool $secure
      */
     public function connect($host, $port = 80, $secure = false);
 
@@ -56,12 +43,12 @@ interface AdapterInterface
      *
      * @param string        $method
      * @param \Zend\Uri\Uri $url
-     * @param string        $http_ver
+     * @param string        $httpVer
      * @param array         $headers
      * @param string        $body
      * @return string Request as text
      */
-    public function write($method, $url, $http_ver = '1.1', $headers = array(), $body = '');
+    public function write($method, $url, $httpVer = '1.1', $headers = array(), $body = '');
 
     /**
      * Read response from server

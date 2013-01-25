@@ -1,9 +1,0 @@
-POST / HTTP/1.1
-Host: us-east-1.ec2.amazonaws.com
-Connection: close
-Accept-encoding: gzip, deflate
-User-Agent: Zend_Http_Client
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 224
-
-Action=DescribeImages&AWSAccessKeyId=0123456789&SignatureVersion=2&Timestamp=2011-10-04T10%3A20%3A43Z&Version=2009-04-04&SignatureMethod=HmacSHA256&Signature=5q6Q%2F9Xv%2BBr%2FuISP1eKjK1lnPSC%2F9b%2FtkkykHytfpg8%3D

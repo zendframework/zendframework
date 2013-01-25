@@ -1,39 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Strategy
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage Strategy
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpRendererStrategy implements ListenerAggregateInterface
 {
@@ -58,7 +43,6 @@ class PhpRendererStrategy implements ListenerAggregateInterface
      * Constructor
      *
      * @param  PhpRenderer $renderer
-     * @return void
      */
     public function __construct(PhpRenderer $renderer)
     {
@@ -78,7 +62,7 @@ class PhpRendererStrategy implements ListenerAggregateInterface
     /**
      * Set list of possible content placeholders
      *
-     * @param  array contentPlaceholders
+     * @param  array $contentPlaceholders
      * @return PhpRendererStrategy
      */
     public function setContentPlaceholders(array $contentPlaceholders)
@@ -143,7 +127,7 @@ class PhpRendererStrategy implements ListenerAggregateInterface
      * Populates the content of the response object from the view rendering
      * results.
      *
-     * @param  ViewEvent $e
+     * @param ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)

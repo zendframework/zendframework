@@ -3,16 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\Db\Metadata\MetadataInterface,
-    Zend\Db\Metadata\Metadata,
-    Zend\Db\TableGateway\Exception;
+use Zend\Db\Metadata\Metadata;
+use Zend\Db\Metadata\MetadataInterface;
+use Zend\Db\TableGateway\Exception;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ class MetadataFeature extends AbstractFeature
     /**
      * Constructor
      *
-     * @param Adapter $slaveAdapter
+     * @param MetadataInterface $metadata
      */
     public function __construct(MetadataInterface $metadata = null)
     {
@@ -43,7 +43,7 @@ class MetadataFeature extends AbstractFeature
         );
     }
 
-    public function initialize()
+    public function postInitialize()
     {
         if ($this->metadata == null) {
             $this->metadata = new Metadata($this->tableGateway->adapter);
@@ -75,30 +75,15 @@ class MetadataFeature extends AbstractFeature
             throw new Exception\RuntimeException('A primary key for this column could not be found in the metadata.');
         }
 
-        if (count($pkc->getKeys()) == 1) {
-            $pkck = $pkc->getKeys();
-            $primaryKey = $pkck[0]->getColumnName();
+        if (count($pkc->getColumns()) == 1) {
+            $pkck = $pkc->getColumns();
+            $primaryKey = $pkck[0];
         } else {
-            $primaryKey = array();
-            foreach ($pkc->getKeys() as $key) {
-                /** @var $key \Zend\Db\Metadata\Object\ConstraintKeyObject */
-                $primaryKey[] = $key->getColumnName();
-            }
+            $primaryKey = $pkc->getColumns();
         }
 
         $this->sharedData['metadata']['primaryKey'] = $primaryKey;
-
-        $this->isInitialized = true;
     }
 
-    /**
-     * after initialization, retrieve the original adapter as "master"
-     */
-    public function postInitialize()
-    {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-    }
 
 }

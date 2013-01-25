@@ -1,37 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace Zend\Soap\Client;
 
-use Zend\Soap\Client as SOAPClient,
-    Zend\Soap\Exception;
+use Zend\Soap\Client as SOAPClient;
+use Zend\Soap\Exception;
 
 /**
  * .NET SOAP client
  *
  * Class is intended to be used with .Net Web Services.
- *
- * Important! Class is at experimental stage now.
- * Please leave your notes, compatiblity issues reports or
- * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
  *
  * @category   Zend
  * @package    Zend_Soap
@@ -60,7 +45,8 @@ class DotNet extends SOAPClient
      * My be overridden in descendant classes
      *
      * @param array $arguments
-     * @throws \Zend\Soap\ClientException
+     * @throws Exception\RuntimeException
+     * @return array
      */
     protected function _preProcessArguments($arguments)
     {
@@ -79,7 +65,8 @@ class DotNet extends SOAPClient
      *
      * My be overridden in descendant classes
      *
-     * @param array $arguments
+     * @param object $result
+     * @return mixed
      */
     protected function _preProcessResult($result)
     {
@@ -87,5 +74,4 @@ class DotNet extends SOAPClient
 
         return $result->$resultProperty;
     }
-
 }

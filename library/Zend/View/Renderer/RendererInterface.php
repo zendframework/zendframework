@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Renderer;
 
-use Zend\View\Resolver\ResolverInterface as Resolver,
-    Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\ModelInterface;
+use Zend\View\Resolver\ResolverInterface;
 
 /**
  * Interface class for Zend_View compatible template engine implementations
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface RendererInterface
 {
@@ -47,17 +34,17 @@ interface RendererInterface
 
     /**
      * Set the resolver used to map a template name to a resource the renderer may consume.
-     * 
-     * @param  Resolver $resolver 
+     *
+     * @param  ResolverInterface $resolver
      * @return RendererInterface
      */
-    public function setResolver(Resolver $resolver);
+    public function setResolver(ResolverInterface $resolver);
 
     /**
      * Processes a view script and returns the output.
      *
-     * @param  string|Model $name The script/resource process, or a view model
-     * @param  null|array|\ArrayAccess Values to use during rendering
+     * @param  string|ModelInterface   $nameOrModel The script/resource process, or a view model
+     * @param  null|array|\ArrayAccess $values      Values to use during rendering
      * @return string The script output.
      */
     public function render($nameOrModel, $values = null);

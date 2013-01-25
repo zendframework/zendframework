@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc\Value;
@@ -25,10 +14,8 @@ namespace Zend\XmlRpc\Value;
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Boolean extends Scalar
+class Boolean extends AbstractScalar
 {
 
     /**
@@ -39,10 +26,10 @@ class Boolean extends Scalar
      */
     public function __construct($value)
     {
-        $this->_type = self::XMLRPC_TYPE_BOOLEAN;
+        $this->type = self::XMLRPC_TYPE_BOOLEAN;
         // Make sure the value is boolean and then convert it into a integer
-        // The double convertion is because a bug in the ZendOptimizer in PHP version 5.0.4
-        $this->_value = (int)(bool)$value;
+        // The double conversion is because a bug in the ZendOptimizer in PHP version 5.0.4
+        $this->value = (int)(bool) $value;
     }
 
     /**
@@ -52,6 +39,6 @@ class Boolean extends Scalar
      */
     public function getValue()
     {
-        return (bool)$this->_value;
+        return (bool) $this->value;
     }
 }

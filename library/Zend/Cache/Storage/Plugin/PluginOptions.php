@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\Cache\Exception,
-    Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter,
-    Zend\Serializer\Serializer as SerializerFactory,
-    Zend\Stdlib\Options;
+use Zend\Cache\Exception;
+use Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter;
+use Zend\Serializer\Serializer as SerializerFactory;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginOptions extends Options
+class PluginOptions extends AbstractOptions
 {
     /**
      * Used by:
@@ -52,7 +39,7 @@ class PluginOptions extends Options
     /**
      * Used by:
      * - IgnoreUserAbort
-     * @var boolean
+     * @var bool
      */
     protected $exitOnAbort = true;
 
@@ -118,7 +105,8 @@ class PluginOptions extends Options
      * Used by:
      * - ExceptionHandler
      *
-     * @param  callable EexceptionCallback
+     * @param  callable $exceptionCallback
+     * @throws Exception\InvalidArgumentException
      * @return PluginOptions
      */
     public function setExceptionCallback($exceptionCallback)
@@ -146,7 +134,7 @@ class PluginOptions extends Options
     /**
      * Exit if connection aborted and ignore_user_abort is disabled.
      *
-     * @param boolean $exitOnAbort
+     * @param  bool $exitOnAbort
      * @return PluginOptions
      */
     public function setExitOnAbort($exitOnAbort)
@@ -158,7 +146,7 @@ class PluginOptions extends Options
     /**
      * Exit if connection aborted and ignore_user_abort is disabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getExitOnAbort()
     {
@@ -200,6 +188,7 @@ class PluginOptions extends Options
      * - Serializer
      *
      * @param  string|SerializerAdapter $serializer
+     * @throws Exception\InvalidArgumentException
      * @return Serializer
      */
     public function setSerializer($serializer)
@@ -226,13 +215,16 @@ class PluginOptions extends Options
      */
     public function getSerializer()
     {
-        if (is_string($this->serializer)) {
-            $options = $this->getSerializerOptions();
-            $this->setSerializer(SerializerFactory::factory($this->serializer, $options));
-        } elseif (null === $this->serializer) {
-            $this->setSerializer(SerializerFactory::getDefaultAdapter());
+        if (!$this->serializer instanceof SerializerAdapter) {
+            // use default serializer
+            if (!$this->serializer) {
+                $this->setSerializer(SerializerFactory::getDefaultAdapter());
+            // instantiate by class name + serializer_options
+            } else {
+                $options = $this->getSerializerOptions();
+                $this->setSerializer(SerializerFactory::factory($this->serializer, $options));
+            }
         }
-
         return $this->serializer;
     }
 
@@ -242,10 +234,10 @@ class PluginOptions extends Options
      * Used by:
      * - Serializer
      *
-     * @param  array $serializerOptions
+     * @param  mixed $serializerOptions
      * @return PluginOptions
      */
-    public function setSerializerOptions(array $serializerOptions)
+    public function setSerializerOptions($serializerOptions)
     {
         $this->serializerOptions = $serializerOptions;
         return $this;

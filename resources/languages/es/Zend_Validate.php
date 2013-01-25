@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage Resource
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -262,4 +262,3 @@ return array(
     "'%value%' is less than %min% characters long" => "'%value%' tiene menos de '%min%' caracteres",
     "'%value%' is more than %max% characters long" => "'%value%' tiene más de '%max%' caracteres",
 );
-

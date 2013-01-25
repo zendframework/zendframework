@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Log\Exception,
-    Zend\Mail\Message as MailMessage,
-    Zend\Mail\Transport,
-    Zend\Mail\Transport\Exception as TransportException;
+use Traversable;
+use Zend\Log\Exception;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Mail\Message as MailMessage;
+use Zend\Mail\Transport;
+use Zend\Mail\Transport\Exception as TransportException;
 
 /**
  * Class used for writing log messages to email via Zend\Mail.
@@ -35,12 +25,10 @@ use Zend\Log\Formatter\Simple as SimpleFormatter,
  * completion, so any log entries accumulated are sent in a single email.
  * The email is sent using a Zend\Mail\Transport\TransportInterface object
  * (Sendmail is default).
- * 
+ *
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mail extends AbstractWriter
 {
@@ -50,7 +38,6 @@ class Mail extends AbstractWriter
      * @var array
      */
     protected $eventsToMail = array();
-
 
     /**
      * Mail message instance to use
@@ -86,19 +73,46 @@ class Mail extends AbstractWriter
 
     /**
      * Constructor
-     * 
-     * @param  MailMessage $mail
+     *
+     * @param  MailMessage|array|Traversable $mail
      * @param  Transport\TransportInterface $transport Optional
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct(MailMessage $mail, Transport\TransportInterface $transport = null)
+    public function __construct($mail, Transport\TransportInterface $transport = null)
     {
-        $this->mail = $mail;
-        if (null !== $transport) {
-            $this->setTransport($transport);
-        } else {
-            // default transport
-            $this->setTransport(new Transport\Sendmail());
+        if ($mail instanceof Traversable) {
+            $mail = iterator_to_array($mail);
         }
+
+        if (is_array($mail)) {
+            if (isset($mail['subject_prepend_text'])) {
+                $this->setSubjectPrependText($mail['subject_prepend_text']);
+            }
+            $transport = isset($mail['transport']) ? $mail['transport'] : null;
+            $mail      = isset($mail['mail']) ? $mail['mail'] : null;
+        }
+
+        // Ensure we have a valid mail message
+        if (!$mail instanceof MailMessage) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Mail parameter of type %s is invalid; must be of type Zend\Mail\Message',
+                (is_object($mail) ? get_class($mail) : gettype($mail))
+            ));
+        }
+        $this->mail = $mail;
+
+        // Ensure we have a valid mail transport
+        if (null === $transport) {
+            $transport = new Transport\Sendmail();
+        }
+        if (!$transport instanceof Transport\TransportInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Transport parameter of type %s is invalid; must be of type Zend\Mail\Transport\TransportInterface',
+                (is_object($transport) ? get_class($transport) : gettype($transport))
+            ));
+        }
+        $this->setTransport($transport);
+
         $this->formatter = new SimpleFormatter();
     }
 
@@ -170,7 +184,7 @@ class Mail extends AbstractWriter
         }
 
         // Always provide events to mail as plaintext.
-        $this->mail->setBody(implode('', $this->eventsToMail));
+        $this->mail->setBody(implode(PHP_EOL, $this->eventsToMail));
 
         // Finally, send the mail.  If an exception occurs, convert it into a
         // warning-level message so we can avoid an exception thrown without a

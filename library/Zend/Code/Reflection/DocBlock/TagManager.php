@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Reflection\DocBlock;
 
@@ -27,6 +35,8 @@ class TagManager
     {
         $this->addTagPrototype(new Tag\ParamTag());
         $this->addTagPrototype(new Tag\ReturnTag());
+        $this->addTagPrototype(new Tag\MethodTag());
+        $this->addTagPrototype(new Tag\PropertyTag());
         $this->addTagPrototype(new Tag\GenericTag());
     }
 
@@ -76,5 +86,4 @@ class TagManager
 
         return $newTag;
     }
-
 }

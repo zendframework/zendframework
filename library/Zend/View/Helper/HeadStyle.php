@@ -1,56 +1,44 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-use Zend\View,
-    Zend\View\Exception;
+use stdClass;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving stylesheets
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HeadStyle extends Placeholder\Container\Standalone
+class HeadStyle extends Placeholder\Container\AbstractStandalone
 {
     /**
      * Registry key for placeholder
      * @var string
      */
-    protected $_regKey = 'Zend_View_Helper_HeadStyle';
+    protected $regKey = 'Zend_View_Helper_HeadStyle';
 
     /**
      * Allowed optional attributes
      * @var array
      */
-    protected $_optionalAttributes = array('lang', 'title', 'media', 'dir');
+    protected $optionalAttributes = array('lang', 'title', 'media', 'dir');
 
     /**
      * Allowed media types
      * @var array
      */
-    protected $_mediaTypes = array(
+    protected $mediaTypes = array(
         'all', 'aural', 'braille', 'handheld', 'print',
         'projection', 'screen', 'tty', 'tv'
     );
@@ -59,26 +47,25 @@ class HeadStyle extends Placeholder\Container\Standalone
      * Capture type and/or attributes (used for hinting during capture)
      * @var string
      */
-    protected $_captureAttrs = null;
+    protected $captureAttrs = null;
 
     /**
      * Capture lock
      * @var bool
      */
-    protected $_captureLock;
+    protected $captureLock;
 
     /**
      * Capture type (append, prepend, set)
      * @var string
      */
-    protected $_captureType;
+    protected $captureType;
 
     /**
      * Constructor
      *
      * Set separator to PHP_EOL.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -176,12 +163,11 @@ class HeadStyle extends Placeholder\Container\Standalone
      * Determine if a value is a valid style tag
      *
      * @param  mixed $value
-     * @param  string $method
-     * @return boolean
+     * @return bool
      */
-    protected function _isValid($value)
+    protected function isValid($value)
     {
-        if ((!$value instanceof \stdClass)
+        if ((!$value instanceof stdClass)
             || !isset($value->content)
             || !isset($value->attributes))
         {
@@ -200,7 +186,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      */
     public function append($value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid value passed to append; please use appendStyle()'
             );
@@ -219,7 +205,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      */
     public function offsetSet($index, $value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid value passed to offsetSet; please use offsetSetStyle()'
             );
@@ -237,7 +223,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      */
     public function prepend($value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid value passed to prepend; please use prependStyle()'
             );
@@ -255,7 +241,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      */
     public function set($value)
     {
-        if (!$this->_isValid($value)) {
+        if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException('Invalid value passed to set; please use setStyle()');
         }
 
@@ -265,20 +251,20 @@ class HeadStyle extends Placeholder\Container\Standalone
     /**
      * Start capture action
      *
-     * @param  mixed $captureType
-     * @param  string $typeOrAttrs
+     * @param string $type
+     * @param string $attrs
      * @return void
      * @throws Exception\RuntimeException
      */
     public function captureStart($type = Placeholder\Container\AbstractContainer::APPEND, $attrs = null)
     {
-        if ($this->_captureLock) {
+        if ($this->captureLock) {
             throw new Exception\RuntimeException('Cannot nest headStyle captures');
         }
 
-        $this->_captureLock        = true;
-        $this->_captureAttrs       = $attrs;
-        $this->_captureType        = $type;
+        $this->captureLock        = true;
+        $this->captureAttrs       = $attrs;
+        $this->captureType        = $type;
         ob_start();
     }
 
@@ -290,11 +276,11 @@ class HeadStyle extends Placeholder\Container\Standalone
     public function captureEnd()
     {
         $content             = ob_get_clean();
-        $attrs               = $this->_captureAttrs;
-        $this->_captureAttrs = null;
-        $this->_captureLock  = false;
+        $attrs               = $this->captureAttrs;
+        $this->captureAttrs = null;
+        $this->captureLock  = false;
 
-        switch ($this->_captureType) {
+        switch ($this->captureType) {
             case Placeholder\Container\AbstractContainer::SET:
                 $this->setStyle($content, $attrs);
                 break;
@@ -315,7 +301,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      * @param  string $indent Indentation to use
      * @return string
      */
-    public function itemToString(\stdClass $item, $indent)
+    public function itemToString(stdClass $item, $indent)
     {
         $attrString = '';
         if (!empty($item->attributes)) {
@@ -325,21 +311,22 @@ class HeadStyle extends Placeholder\Container\Standalone
             ) {
                 $enc = $this->view->getEncoding();
             }
+            $escaper = $this->getEscaper($enc);
             foreach ($item->attributes as $key => $value) {
-                if (!in_array($key, $this->_optionalAttributes)) {
+                if (!in_array($key, $this->optionalAttributes)) {
                     continue;
                 }
                 if ('media' == $key) {
-                    if(false === strpos($value, ',')) {
-                        if (!in_array($value, $this->_mediaTypes)) {
+                    if (false === strpos($value, ',')) {
+                        if (!in_array($value, $this->mediaTypes)) {
                             continue;
                         }
                     } else {
-                        $media_types = explode(',', $value);
+                        $mediaTypes = explode(',', $value);
                         $value = '';
-                        foreach($media_types as $type) {
+                        foreach ($mediaTypes as $type) {
                             $type = trim($type);
-                            if (!in_array($type, $this->_mediaTypes)) {
+                            if (!in_array($type, $this->mediaTypes)) {
                                 continue;
                             }
                             $value .= $type .',';
@@ -347,12 +334,12 @@ class HeadStyle extends Placeholder\Container\Standalone
                         $value = substr($value, 0, -1);
                     }
                 }
-                $attrString .= sprintf(' %s="%s"', $key, htmlspecialchars($value, ENT_COMPAT, $enc));
+                $attrString .= sprintf(' %s="%s"', $key, $escaper->escapeHtmlAttr($value));
             }
         }
 
-        $escapeStart = $indent . '<!--'. PHP_EOL;
-        $escapeEnd = $indent . '-->'. PHP_EOL;
+        $escapeStart = $indent . '<!--' . PHP_EOL;
+        $escapeEnd = $indent . '-->' . PHP_EOL;
         if (isset($item->attributes['conditional'])
             && !empty($item->attributes['conditional'])
             && is_string($item->attributes['conditional'])
@@ -387,7 +374,7 @@ class HeadStyle extends Placeholder\Container\Standalone
         $items = array();
         $this->getContainer()->ksort();
         foreach ($this as $item) {
-            if (!$this->_isValid($item)) {
+            if (!$this->isValid($item)) {
                 continue;
             }
             $items[] = $this->itemToString($item, $indent);
@@ -409,11 +396,11 @@ class HeadStyle extends Placeholder\Container\Standalone
     {
         if (!isset($attributes['media'])) {
             $attributes['media'] = 'screen';
-        } else if(is_array($attributes['media'])) {
+        } elseif (is_array($attributes['media'])) {
             $attributes['media'] = implode(',', $attributes['media']);
         }
 
-        $data = new \stdClass();
+        $data = new stdClass();
         $data->content    = $content;
         $data->attributes = $attributes;
 

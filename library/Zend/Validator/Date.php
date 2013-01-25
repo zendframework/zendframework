@@ -1,37 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Date as ZendDate,
-    Zend\Locale\Format,
-    Zend\Locale\Locale,
-    Zend\Registry,
-    Zend\Stdlib\ArrayUtils;
+use DateTime;
+use Traversable;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Date extends AbstractValidator
 {
@@ -44,16 +28,16 @@ class Date extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::INVALID        => "Invalid type given. String, integer, array or Zend_Date expected",
-        self::INVALID_DATE   => "'%value%' does not appear to be a valid date",
-        self::FALSEFORMAT    => "'%value%' does not fit the date format '%format%'",
+    protected $messageTemplates = array(
+        self::INVALID        => "Invalid type given. String, integer, array or DateTime expected",
+        self::INVALID_DATE   => "The input does not appear to be a valid date",
+        self::FALSEFORMAT    => "The input does not fit the date format '%format%'",
     );
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'format'  => 'format'
     );
 
@@ -65,29 +49,17 @@ class Date extends AbstractValidator
     protected $format;
 
     /**
-     * Optional locale
-     *
-     * @var string|\Zend\Locale\Locale|null
-     */
-    protected $locale;
-
-    /**
      * Sets validator options
      *
      * @param  string|array|Traversable $options OPTIONAL
-     * @return void
      */
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+            $options = iterator_to_array($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['format'] = array_shift($options);
-            if (!empty($options)) {
-                $temp['locale'] = array_shift($options);
-            }
-
             $options = $temp;
         }
 
@@ -95,43 +67,11 @@ class Date extends AbstractValidator
             $this->setFormat($options['format']);
         }
 
-        if (!array_key_exists('locale', $options)) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $options['locale'] = Registry::get('Zend_Locale');
-            }
-        }
-
-        if (array_key_exists('locale', $options)) {
-            $this->setLocale($options['locale']);
-        }
-        
         parent::__construct($options);
     }
 
     /**
-     * Returns the locale option
-     *
-     * @return string|Locale|null
-     */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    /**
-     * Sets the locale option
-     *
-     * @param  string|Locale $locale
-     * @return Date provides a fluent interface
-     */
-    public function setLocale($locale = null)
-    {
-        $this->locale = Locale::findLocale($locale);
-        return $this;
-    }
-
-    /**
-     * Returns the locale option
+     * Returns the format option
      *
      * @return string|null
      */
@@ -144,7 +84,7 @@ class Date extends AbstractValidator
      * Sets the format option
      *
      * @param  string $format
-     * @return \Zend\Validator\Date provides a fluent interface
+     * @return Date provides a fluent interface
      */
     public function setFormat($format = null)
     {
@@ -154,19 +94,18 @@ class Date extends AbstractValidator
 
     /**
      * Returns true if $value is a valid date of the format YYYY-MM-DD
-     * If optional $format or $locale is set the date format is checked
-     * according to Zend_Date, see Zend_Date::isDate()
+     * If optional $format is set the date format is checked
+     * according to DateTime
      *
-     * @param  string|array|ZendDate $value
-     * @return boolean
+     * @param  string|array|int|DateTime $value
+     * @return bool
      */
     public function isValid($value)
     {
-        if (!is_string($value) 
-            && !is_int($value) 
-            && !is_float($value) 
-            && !is_array($value) 
-            && !($value instanceof ZendDate\Date)
+        if (!is_string($value)
+            && !is_array($value)
+            && !is_int($value)
+            && !($value instanceof DateTime)
         ) {
             $this->error(self::INVALID);
             return false;
@@ -174,22 +113,36 @@ class Date extends AbstractValidator
 
         $this->setValue($value);
 
-        if (($this->format !== null) 
-            || ($this->locale !== null)
-            || is_array($value) 
-            || $value instanceof ZendDate\Date
+        $format = $this->getFormat();
+
+        if ($value instanceof DateTime) {
+            return true;
+        } elseif (is_int($value)
+            || (is_string($value) && null !== $format)
         ) {
-            if (!ZendDate\Date::isDate($value, $this->format, $this->locale)) {
-                if ($this->checkFormat($value) === false) {
-                    $this->error(self::FALSEFORMAT);
-                } else {
-                    $this->error(self::INVALID_DATE);
-                }
+            $date = (is_int($value))
+                    ? date_create("@$value") // from timestamp
+                    : DateTime::createFromFormat($format, $value);
+
+            // Invalid dates can show up as warnings (ie. "2007-02-99")
+            // and still return a DateTime object
+            $errors = DateTime::getLastErrors();
+
+            if ($errors['warning_count'] > 0) {
+                $this->error(self::INVALID_DATE);
+                return false;
+            }
+            if ($date === false) {
+                $this->error(self::INVALID_DATE);
                 return false;
             }
         } else {
+            if (is_array($value)) {
+                $value = implode('-', $value);
+            }
+
             if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
-                $this->format = 'yyyy-MM-dd';
+                $this->format = 'Y-m-d';
                 $this->error(self::FALSEFORMAT);
                 $this->format = null;
                 return false;
@@ -203,69 +156,6 @@ class Date extends AbstractValidator
             }
         }
 
-        return true;
-    }
-
-    /**
-     * Check if the given date fits the given format
-     *
-     * @param  string $value  Date to check
-     * @return boolean False when date does not fit the format
-     */
-    private function checkFormat($value)
-    {
-        try {
-            $parsed = Format::getDate((string) $value, array(
-                'date_format' => $this->format,
-                'format_type' => 'iso',
-                'fix_date'    => false,
-            ));
-            if (isset($parsed['year']) 
-                && ((strpos(strtoupper($this->format), 'YY') !== false) 
-                    && (strpos(strtoupper($this->format), 'YYYY') === false))
-            ) {
-                $parsed['year'] = ZendDate\Date::getFullYear($parsed['year']);
-            }
-        } catch (\Exception $e) {
-            // Date can not be parsed
-            return false;
-        }
-
-        if (((strpos($this->format, 'Y') !== false) || (strpos($this->format, 'y') !== false)) 
-            && (!isset($parsed['year']))
-        ) {
-            // Year expected but not found
-            return false;
-        }
-
-        if ((strpos($this->format, 'M') !== false) && (!isset($parsed['month']))) {
-            // Month expected but not found
-            return false;
-        }
-
-        if ((strpos($this->format, 'd') !== false) && (!isset($parsed['day']))) {
-            // Day expected but not found
-            return false;
-        }
-
-        if (((strpos($this->format, 'H') !== false) || (strpos($this->format, 'h') !== false)) 
-            && (!isset($parsed['hour']))
-        ) {
-            // Hour expected but not found
-            return false;
-        }
-
-        if ((strpos($this->format, 'm') !== false) && (!isset($parsed['minute']))) {
-            // Minute expected but not found
-            return false;
-        }
-
-        if ((strpos($this->format, 's') !== false) && (!isset($parsed['second']))) {
-            // Second expected  but not found
-            return false;
-        }
-
-        // Date fits the format
         return true;
     }
 }

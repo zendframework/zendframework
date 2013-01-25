@@ -3,15 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -54,9 +54,9 @@ class Sqlsrv implements DriverInterface
 
     /**
      * Register connection
-     * 
+     *
      * @param  Connection $connection
-     * @return Sqlsrv 
+     * @return Sqlsrv
      */
     public function registerConnection(Connection $connection)
     {
@@ -67,42 +67,49 @@ class Sqlsrv implements DriverInterface
 
     /**
      * Register statement prototype
-     * 
-     * @param Statement $statementPrototype 
+     *
+     * @param Statement $statementPrototype
+     * @return Sqlsrv
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
+        return $this;
     }
 
     /**
      * Register result prototype
-     * 
-     * @param Result $resultPrototype 
+     *
+     * @param Result $resultPrototype
+     * @return Sqlsrv
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+        return $this;
     }
 
     /**
      * Get database paltform name
-     * 
+     *
      * @param  string $nameFormat
-     * @return string 
+     * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
             return 'SqlServer';
-        } else {
-            return 'SQLServer';
         }
+
+        return 'SQLServer';
     }
 
     /**
      * Check environment
+     *
+     * @throws Exception\RuntimeException
+     * @return void
      */
     public function checkEnvironment()
     {
@@ -120,23 +127,30 @@ class Sqlsrv implements DriverInterface
     }
 
     /**
-     * @param string $sql
+     * @param string|resource $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
     {
         $statement = clone $this->statementPrototype;
-        if (is_string($sqlOrResource)) {
-            $statement->setSql($sqlOrResource);
-        } elseif ($sqlOrResource instanceof \PDOStatement) {
-            $statement->setResource($sqlOrResource);
+        if (is_resource($sqlOrResource)) {
+            $statement->initialize($sqlOrResource);
+        } else {
+            if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+            }
+            $statement->initialize($this->connection->getResource());
+            if (is_string($sqlOrResource)) {
+                $statement->setSql($sqlOrResource);
+            } elseif ($sqlOrResource != null) {
+                throw new Exception\InvalidArgumentException('createStatement() only accepts an SQL string or a Sqlsrv resource');
+            }
         }
-        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 
     /**
-     * @param resource $result
+     * @param resource $resource
      * @return Result
      */
     public function createResult($resource)
@@ -155,7 +169,8 @@ class Sqlsrv implements DriverInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
+     * @param mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)
@@ -170,5 +185,4 @@ class Sqlsrv implements DriverInterface
     {
         return $this->getConnection()->getLastGeneratedValue();
     }
-
 }

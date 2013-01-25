@@ -1,30 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Hex extends AbstractValidator
 {
@@ -36,16 +24,16 @@ class Hex extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID => "Invalid type given. String expected",
-        self::NOT_HEX => "'%value%' has not only hexadecimal digit characters",
+        self::NOT_HEX => "The input contains non-hexadecimal characters",
     );
 
     /**
      * Returns true if and only if $value contains only hexadecimal digit characters
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -62,5 +50,4 @@ class Hex extends AbstractValidator
 
         return true;
     }
-
 }

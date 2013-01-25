@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -20,8 +20,8 @@ class Sqlite implements PlatformInterface
 
     /**
      * Get name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {
@@ -30,8 +30,8 @@ class Sqlite implements PlatformInterface
 
     /**
      * Get quote identifier symbol
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getQuoteIdentifierSymbol()
     {
@@ -40,9 +40,9 @@ class Sqlite implements PlatformInterface
 
     /**
      * Quote identifier
-     * 
+     *
      * @param  string $identifier
-     * @return string 
+     * @return string
      */
     public function quoteIdentifier($identifier)
     {
@@ -50,9 +50,24 @@ class Sqlite implements PlatformInterface
     }
 
     /**
+     * Quote identifier chain
+     *
+     * @param string|string[] $identifierChain
+     * @return string
+     */
+    public function quoteIdentifierChain($identifierChain)
+    {
+        $identifierChain = str_replace('"', '\\"', $identifierChain);
+        if (is_array($identifierChain)) {
+            $identifierChain = implode('"."', $identifierChain);
+        }
+        return '"' . $identifierChain . '"';
+    }
+
+    /**
      * Get quote value symbol
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getQuoteValueSymbol()
     {
@@ -61,9 +76,9 @@ class Sqlite implements PlatformInterface
 
     /**
      * Quote value
-     * 
+     *
      * @param  string $value
-     * @return string 
+     * @return string
      */
     public function quoteValue($value)
     {
@@ -71,9 +86,24 @@ class Sqlite implements PlatformInterface
     }
 
     /**
+     * Quote value list
+     *
+     * @param string|string[] $valueList
+     * @return string
+     */
+    public function quoteValueList($valueList)
+    {
+        $valueList = str_replace('\'', '\\' . '\'', $valueList);
+        if (is_array($valueList)) {
+            $valueList = implode('\', \'', $valueList);
+        }
+        return '\'' . $valueList . '\'';
+    }
+
+    /**
      * Get identifier separator
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getIdentifierSeparator()
     {
@@ -82,15 +112,15 @@ class Sqlite implements PlatformInterface
 
     /**
      * Quote identifier in fragment
-     * 
+     *
      * @param  string $identifier
      * @param  array $safeWords
-     * @return string 
+     * @return string
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
-        $parts = preg_split('#([\.\s])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE);
-        foreach($parts as $i => $part) {
+        $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        foreach ($parts as $i => $part) {
             if ($safeWords && in_array($part, $safeWords)) {
                 continue;
             }
@@ -109,5 +139,4 @@ class Sqlite implements PlatformInterface
         }
         return implode('', $parts);
     }
-
 }

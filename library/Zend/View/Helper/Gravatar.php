@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -28,10 +17,8 @@ use Zend\View\Exception;
  *
  * @package    Zend\View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Gravatar extends HtmlElement
+class Gravatar extends AbstractHtmlElement
 {
     /**
      * URL to gravatar service
@@ -72,7 +59,7 @@ class Gravatar extends HtmlElement
     );
 
     /**
-     * Email Adress
+     * Email Address
      *
      * @var string
      */
@@ -90,16 +77,16 @@ class Gravatar extends HtmlElement
      *
      * $options may include the following:
      * - 'img_size' int height of img to return
-     * - 'default_img' string img to return if email adress has not found
+     * - 'default_img' string img to return if email address has not found
      * - 'rating' string rating parameter for avatar
      * - 'secure' bool load from the SSL or Non-SSL location
      *
      * @see    http://pl.gravatar.com/site/implement/url
      * @see    http://pl.gravatar.com/site/implement/url More information about gravatar's service.
-     * @param  string|null $email Email adress.
+     * @param  string|null $email Email address.
      * @param  null|array $options Options
      * @param  array $attribs Attributes for image tag (title, alt etc.)
-     * @return Zend\View\Helper\Gravatar
+     * @return Gravatar
      */
     public function __invoke($email = "", $options = array(), $attribs = array())
     {
@@ -186,6 +173,7 @@ class Gravatar extends HtmlElement
      *
      * @link   http://pl.gravatar.com/site/implement/url More information about rating.
      * @param  string $rating Value for rating. Allowed values are: g, px, r,x
+     * @return Gravatar
      * @throws Exception\DomainException
      */
     public function setRating($rating)
@@ -217,7 +205,7 @@ class Gravatar extends HtmlElement
     }
 
     /**
-     * Set email adress
+     * Set email address
      *
      * @param string $email
      * @return Gravatar
@@ -229,7 +217,7 @@ class Gravatar extends HtmlElement
     }
 
     /**
-     * Get email adress
+     * Get email address
      *
      * @return string
      */
@@ -305,7 +293,7 @@ class Gravatar extends HtmlElement
     }
 
     /**
-     * Get avatar url (including size, rating and default image oprions)
+     * Get avatar url (including size, rating and default image options)
      *
      * @return string
      */
@@ -345,7 +333,7 @@ class Gravatar extends HtmlElement
     {
         $this->setSrcAttribForImg();
         $html = '<img'
-              . $this->_htmlAttribs($this->getAttribs())
+              . $this->htmlAttribs($this->getAttribs())
               . $this->getClosingBracket();
 
         return $html;

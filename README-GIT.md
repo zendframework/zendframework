@@ -1,29 +1,19 @@
 # USING THE GIT REPOSITORY
 
-## Initial Setup
-
-First, make sure you know the email address associated with your JIRA
-credentials. All commits pushed to the master repository are checked
-against these addresses, so your repository will need to be configured
-to use that address. The following will give you that information:
-
- 1. Visit the ZF Crowd install: http://framework.zend.com/crowd
- 2. Log in, if you aren't.
- 3. Find the "My Profile" link in the upper right of the page, and follow
-    it.
- 4. The resulting page will display your profile, including the _email_
-    address with which you are registered. Make a note of it.
-
 ## Setup your own public repository
 
-Your next step is to establish a public repository from which we can
+Your first step is to establish a public repository from which we can
 pull your work into the master repository. You have two options: use
-github or other public site, or setup/use your own repository.
+GitHub or other public site, or setup/use your own repository.
+
+While you can use a private repository and utilize ``git format-patch`` to
+submit patches, this is discouraged as it does not facilitate public peer
+review.
 
 ### Option 1: GitHub
 
  1. Setup a GitHub account (http://github.com/), if you haven't yet
- 2. Fork the ZF2 respository (http://github.com/zendframework/zf2)
+ 2. Fork the ZF2 repository (http://github.com/zendframework/zf2)
  3. Clone your fork locally and enter it (use your own GitHub username
     in the statement below)
 
@@ -32,14 +22,7 @@ github or other public site, or setup/use your own repository.
     % cd zf2
     ```
 
- 4. Configure git to use the email address with which you are registered
-    in JIRA:
-
-    ```sh
-    % git config user.email <your email address>
-    ```
-
- 5. Add a remote to the canonical ZF repository, so you can keep your fork
+ 4. Add a remote to the canonical ZF repository, so you can keep your fork
     up-to-date:
 
     ```sh
@@ -49,10 +32,10 @@ github or other public site, or setup/use your own repository.
 
 ### Option 2: Personal Repository
 
-We assume you will use gitosis (http://progit.org/book/ch4-7.html) or gitolite
-(http://progit.org/book/ch4-8.html) to host your own repository.  If
-you go this route, we will assume you have the knowledge to do so, or
-know where to obtain it. We will not assist you in setting up such a
+We assume you will use gitosis (http://git-scm.com/book/en/Git-on-the-Server-Gitosis)
+or gitolite (http://git-scm.com/book/en/Git-on-the-Server-Gitolite) to host your
+own repository.  If you go this route, we will assume you have the knowledge to
+do so, or know where to obtain it. We will not assist you in setting up such a
 repository.
 
  1.  Create a new repository
@@ -61,39 +44,113 @@ repository.
     % git init
     ```
 
- 2. Configure git to use the email address with which you are registered
-    in JIRA:
-
-    ```sh
-    % git config user.email <your email address>
-    ```
-
- 3. Add an "origin" remote pointing to your gitosis/gitolite repo:
+ 2. Add an "origin" remote pointing to your gitosis/gitolite repo:
 
     ```sh
     % git remote add origin git://yourdomain/yourrepo.git
     ```
 
- 4. Add a remote for the ZF repository and fetch it
+ 3. Add a remote for the ZF repository and fetch it
 
     ```sh
     % git remote add zf2 https://github.com/zendframework/zf2.git
     % git fetch zf2
     ```
 
- 5. Create a new branch for the ZF repository (named "zf/master" here)
+ 4. Create a new branch for the ZF repository (named "zf/master" here)
 
     ```sh
-    % git branch -b zf/master zf2/master
+    % git checkout -b zf/master zf2/master
     ```
 
- 6. Create your master branch off the ZF branch, and push to your
+ 5. Create your master branch off the ZF branch, and push to your
     repository
 
     ```sh
-    % git branch -b master
+    % git checkout -b master
     % git push origin HEAD:master
     ```
+
+### Pre-Commit Hook (Optional)
+
+The ZF2 Travis-CI will confirm that code style standards are met 
+by using ```php-cs-fixer``` (https://github.com/fabpot/PHP-CS-Fixer) during it's build runs.
+
+To reduce the number of red Travis-CI builds, the following Git pre-commit hook
+can help catch code style issues before committing. Save it as
+```.git/hooks/pre-commit```, and make sure it is executable.
+
+```php
+#!/usr/bin/env php
+<?php
+/**
+ * .git/hooks/pre-commit
+ * 
+ * This pre-commit hooks will check for PHP errors (lint), and make sure the 
+ * code is PSR-2 compliant.
+ * 
+ * Dependecy: PHP-CS-Fixer (https://github.com/fabpot/PHP-CS-Fixer)
+ * 
+ * @author  Mardix  http://github.com/mardix 
+ * @author  Matthew Weier O'Phinney http://mwop.net/
+ * @since   4 Sept 2012
+ */
+
+$exit = 0;
+
+/*
+ * collect all files which have been added, copied or
+ * modified and store them in an array called output
+ */
+$output = array();
+exec('git diff --cached --name-status --diff-filter=ACM', $output);
+
+foreach ($output as $file) {
+    if ('D' === substr($file, 0, 1)) {
+        // deleted file; do nothing
+        continue;
+    }
+
+    $fileName = trim(substr($file, 1));
+
+    /*
+     * Only PHP files
+     */
+    $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+    if (!preg_match('/^ph(p|tml)$/', $extension)) {
+        continue;
+    }
+
+    /*
+     * Check for parse errors
+     */
+    $output = array();
+    $return = 0;
+    exec("php -l " . escapeshellarg($fileName), $output, $return);
+
+    if ($return != 0) {
+        echo "PHP file fails to parse: " . $fileName . ":" . PHP_EOL;
+        echo implode(PHP_EOL, $lintOutput) . PHP_EOL;
+        $exit = 1;
+        continue;
+    }
+
+    /*
+     * PHP-CS-Fixer
+     */
+    $output = array();
+    $return = null;
+    exec("php-cs-fixer fix --dry-run --level=psr2 " . escapeshellarg($fileName), $output, $return);
+    if ($return != 0 || !empty($output)) {
+        echo "PHP file fails contains CS issues: " . $fileName . ":" . PHP_EOL;
+        echo implode(PHP_EOL, $output) . PHP_EOL;
+        $exit = 1;
+        continue;
+    }
+}
+
+exit($exit);
+```
 
 ## Keeping Up-to-Date
 
@@ -109,6 +166,10 @@ the following:
 - OPTIONALLY, to keep your remote up-to-date -
 % git push origin
 ```
+
+If you're tracking other branches -- for example, the "develop" branch, where
+new feature development occurs -- you'll want to do the same operations for that
+branch; simply substibute "develop" for "master".
 
 ## Working on Zend Framework
 
@@ -169,6 +230,16 @@ email indicating you have changes to pull:
      -  The nature of the changes (e.g., `implements
         Zend_Service_Twitter`, `fixes ZF-9295`, etc.)
 
+### What branch to issue the pull request against?
+
+Which branch should you issue a pull request against?
+
+- For fixes against the stable release, issue the pull request against the
+  "master" branch.
+- For new features, or fixes that introduce new elements to the public API (such
+  as new public methods or properties), issue the pull request against the
+  "develop" branch.
+
 ## Branch Cleanup
 
 As you might imagine, if you are a frequent contributor, you'll start to
@@ -198,24 +269,10 @@ RSS feeds may be found at:
 
 where &lt;branch&gt; is a branch in the repository.
 
-To subscribe to git email notifications, send an email to:
-
-<zf-git-subscribe@lists.zend.com>
-
-You will need to reply to the verification email sent to you by this
-list.
-
-Should you wish to filter emails from the list, they will use the
-"subject" line of commit messages, preceded by `[branch] `, and come
-from <zf-git@lists.zend.com>.
+To subscribe to git email notifications, simply watch or fork the zf2 repository
+on GitHub.
 
 ## CONTRIBUTORS AND COMMITTERS
 
-For the immediate future, and until we create a community process team,
-only the Zend team will be committers. If you have a patch or
-feature-set you wish to have incorporated into the repository, please
-issue a pull request to a committer. A pull request may be done by using
-git's "git-send-email" functionality, or by sending a request to a
-committer indicating the URL of your repository, the branch that should
-be pulled, and/or the specific revision(s) to pull.
-
+Both Zend's internal Zend Framework team and the members of the Community Review
+team have push privileges to the ZF2 repository. 

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
@@ -25,10 +14,8 @@ namespace Zend\Mail\Header;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericHeader implements HeaderInterface
+class GenericHeader implements HeaderInterface, UnstructuredInterface
 {
     /**
      * @var string
@@ -42,31 +29,28 @@ class GenericHeader implements HeaderInterface
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
 
-    /**
-     * Factory to generate a header object from a string
-     *
-     * @param string $headerLine
-     * @return GenericHeader
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        $parts = explode(': ', $headerLine, 2);
+        $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+        $parts = explode(':', $decodedLine, 2);
         if (count($parts) != 2) {
             throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
         }
-        $header = new static($parts[0], $parts[1]);
+        $header = new static($parts[0], ltrim($parts[1]));
+        if ($decodedLine != $headerLine) {
+            $header->setEncoding('UTF-8');
+        }
         return $header;
     }
 
     /**
      * Constructor
-     * 
+     *
      * @param string $fieldName  Optional
      * @param string $fieldValue Optional
      */
@@ -100,7 +84,7 @@ class GenericHeader implements HeaderInterface
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must start with a letter, and consist of only letters, numbers and dashes'
+                'Header name must start with a letter, and consist of only letters, numbers and dashes.'
             );
         }
 
@@ -108,11 +92,6 @@ class GenericHeader implements HeaderInterface
         return $this;
     }
 
-    /**
-     * Retrieve header name
-     *
-     * @return string
-     */
     public function getFieldName()
     {
         return $this->fieldName;
@@ -120,7 +99,7 @@ class GenericHeader implements HeaderInterface
 
     /**
      * Set header value
-     * 
+     *
      * @param  string $fieldValue
      * @return GenericHeader
      */
@@ -136,50 +115,31 @@ class GenericHeader implements HeaderInterface
         return $this;
     }
 
-    /**
-     * Retrieve header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
+        if (HeaderInterface::FORMAT_ENCODED === $format) {
+            return HeaderWrap::wrap($this->fieldValue, $this);
+        }
+
         return $this->fieldValue;
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return GenericHeader
-     */
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Cast to string
-     *
-     * Returns in form of "NAME: VALUE"
-     *
-     * @return string
-     */
     public function toString()
     {
         $name  = $this->getFieldName();
-        $value = $this->getFieldValue();
+        $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
 
-        return $name. ': ' . $value;
+        return $name . ': ' . $value;
     }
 }

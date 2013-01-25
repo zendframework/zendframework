@@ -1,34 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Syndication;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Extension,
-    Zend\Date;
+use DateTime;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
 {
@@ -44,12 +32,11 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $period = $this->_getData($name);
 
         if ($period === null) {
-            $this->_data[$name] = 'daily';
+            $this->data[$name] = 'daily';
             return 'daily'; //Default specified by spec
         }
 
-        switch ($period)
-        {
+        switch ($period) {
             case 'hourly':
             case 'daily':
             case 'weekly':
@@ -72,7 +59,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $freq = $this->_getData($name, 'number');
 
         if (!$freq || $freq < 1) {
-            $this->_data[$name] = 1;
+            $this->data[$name] = 1;
             return 1;
         }
 
@@ -89,22 +76,23 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $freq = $this->_getData($name, 'number');
 
         if (!$freq || $freq < 1) {
-            $this->_data[$name] = 1;
+            $this->data[$name] = 1;
             $freq = 1;
         }
 
         $period = $this->getUpdatePeriod();
         $ticks = 1;
 
-        switch ($period)
-        {
-            //intentional fall through
+        switch ($period) {
             case 'yearly':
                 $ticks *= 52; //TODO: fix generalisation, how?
+                // no break
             case 'weekly':
                 $ticks *= 7;
+                // no break
             case 'daily':
                 $ticks *= 24;
+                // no break
             case 'hourly':
                 $ticks *= 3600;
                 break;
@@ -118,15 +106,14 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
     /**
      * Get update base
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getUpdateBase()
     {
         $updateBase = $this->_getData('updateBase');
         $date = null;
         if ($updateBase) {
-            $date = new Date\Date;
-            $date->set($updateBase, Date\Date::W3C);
+            $date = DateTime::createFromFormat(DateTime::W3C, $updateBase);
         }
         return $date;
     }
@@ -140,17 +127,17 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
      */
     private function _getData($name, $type = 'string')
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
-        $data = $this->_xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/syn10:' . $name . ')');
+        $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/syn10:' . $name . ')');
 
         if (!$data) {
             $data = null;
         }
 
-        $this->_data[$name] = $data;
+        $this->data[$name] = $data;
 
         return $data;
     }
@@ -160,8 +147,8 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('syn10', 'http://purl.org/rss/1.0/modules/syndication/');
+        $this->xpath->registerNamespace('syn10', 'http://purl.org/rss/1.0/modules/syndication/');
     }
 }

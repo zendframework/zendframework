@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @package    Zend_XmlRpc
- * @subpackage Server
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
@@ -32,8 +22,6 @@ namespace Zend\XmlRpc;
  *
  * @category   Zend
  * @package    Zend_XmlRpc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Fault
 {
@@ -41,25 +29,25 @@ class Fault
      * Fault code
      * @var int
      */
-    protected $_code;
+    protected $code;
 
     /**
      * Fault character encoding
      * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * Fault message
      * @var string
      */
-    protected $_message;
+    protected $message;
 
     /**
      * Internal fault codes => messages
      * @var array
      */
-    protected $_internal = array(
+    protected $internal = array(
         404 => 'Unknown Error',
 
         // 610 - 619 reflection errors
@@ -96,15 +84,14 @@ class Fault
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct($code = 404, $message = '')
     {
         $this->setCode($code);
         $code = $this->getCode();
 
-        if (empty($message) && isset($this->_internal[$code])) {
-            $message = $this->_internal[$code];
+        if (empty($message) && isset($this->internal[$code])) {
+            $message = $this->internal[$code];
         } elseif (empty($message)) {
             $message = 'Unknown error';
         }
@@ -119,7 +106,7 @@ class Fault
      */
     public function setCode($code)
     {
-        $this->_code = (int) $code;
+        $this->code = (int) $code;
         return $this;
     }
 
@@ -130,7 +117,7 @@ class Fault
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -141,7 +128,7 @@ class Fault
      */
     public function setMessage($message)
     {
-        $this->_message = (string) $message;
+        $this->message = (string) $message;
         return $this;
     }
 
@@ -152,7 +139,7 @@ class Fault
      */
     public function getMessage()
     {
-        return $this->_message;
+        return $this->message;
     }
 
     /**
@@ -163,8 +150,8 @@ class Fault
      */
     public function setEncoding($encoding)
     {
-        $this->_encoding = $encoding;
-        Value::setEncoding($encoding);
+        $this->encoding = $encoding;
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -175,14 +162,14 @@ class Fault
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
      * Load an XMLRPC fault from XML
      *
      * @param string $fault
-     * @return boolean Returns true if successfully loaded fault response, false
+     * @return bool Returns true if successfully loaded fault response, false
      * if response was not a fault response
      * @throws \Zend\XmlRpc\Exception\ExceptionInterface if no or faulty XML provided, or if fault
      * response does not contain either code or message
@@ -212,7 +199,7 @@ class Fault
         }
 
         $structXml = $xml->fault->value->asXML();
-        $struct    = Value::getXmlRpcValue($structXml, Value::XML_STRING);
+        $struct    = AbstractValue::getXmlRpcValue($structXml, AbstractValue::XML_STRING);
         $struct    = $struct->getValue();
 
         if (isset($struct['faultCode'])) {
@@ -231,8 +218,8 @@ class Fault
         }
 
         if (empty($message)) {
-            if (isset($this->_internal[$code])) {
-                $message = $this->_internal[$code];
+            if (isset($this->internal[$code])) {
+                $message = $this->internal[$code];
             } else {
                 $message = 'Unknown Error';
             }
@@ -248,11 +235,11 @@ class Fault
      * Determine if an XML response is an XMLRPC fault
      *
      * @param string $xml
-     * @return boolean
+     * @return bool
      */
     public static function isFault($xml)
     {
-        $fault = new self();
+        $fault = new static();
         try {
             $isFault = $fault->loadXml($xml);
         } catch (Exception\ExceptionInterface $e) {
@@ -274,9 +261,9 @@ class Fault
             'faultCode'   => $this->getCode(),
             'faultString' => $this->getMessage()
         );
-        $value = Value::getXmlRpcValue($faultStruct);
+        $value = AbstractValue::getXmlRpcValue($faultStruct);
 
-        $generator = Value::getGenerator();
+        $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
                   ->openElement('fault');
         $value->generateXml();

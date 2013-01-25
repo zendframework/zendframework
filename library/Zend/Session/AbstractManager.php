@@ -1,29 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-webat this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Session
  */
 
 namespace Zend\Session;
 
-use Zend\Session\ManagerInterface as Manager,
-    Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler,
-    Zend\Session\Storage\StorageInterface as Storage,
-    Zend\Session\Configuration\ConfigurationInterface as Configuration;
+use Zend\Session\Config\ConfigInterface as Config;
+use Zend\Session\ManagerInterface as Manager;
+use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
+use Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Base ManagerInterface implementation
@@ -32,13 +22,11 @@ use Zend\Session\ManagerInterface as Manager,
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractManager implements Manager
 {
     /**
-     * @var Configuration
+     * @var Config
      */
     protected $config;
 
@@ -46,7 +34,7 @@ abstract class AbstractManager implements Manager
      * Default configuration class to use when no configuration provided
      * @var string
      */
-    protected $configDefaultClass = 'Zend\\Session\\Configuration\\SessionConfiguration';
+    protected $defaultConfigClass = 'Zend\Session\Config\SessionConfig';
 
     /**
      * @var Storage
@@ -57,56 +45,89 @@ abstract class AbstractManager implements Manager
      * Default storage class to use when no storage provided
      * @var string
      */
-    protected $storageDefaultClass = 'Zend\\Session\\Storage\\SessionStorage';
+    protected $defaultStorageClass = 'Zend\Session\Storage\SessionStorage';
 
     /**
      * @var SaveHandler
      */
     protected $saveHandler;
 
-
     /**
      * Constructor
      *
-     * Allow passing a configuration object or class name, a storage object or 
-     * class name, or an array of configuration.
-     * 
-     * @param  Configuration $config 
-     * @param  Storage $storage 
-     * @param  SaveHandler $saveHandler
-     * @return void
+     * @param  Config|null $config
+     * @param  Storage|null $storage
+     * @param  SaveHandler|null $saveHandler
+     * @throws Exception\RuntimeException
      */
-    public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
+    public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
     {
-        $this->setOptions($config);
-        $this->setStorage($storage);
-        if ($saveHandler) {
-            $this->setSaveHandler($saveHandler);
+        // init config
+        if ($config === null) {
+            if (!class_exists($this->defaultConfigClass)) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Unable to locate config class "%s"; class does not exist',
+                    $this->defaultConfigClass
+                ));
+            }
+
+            $config = new $this->defaultConfigClass();
+
+            if (!$config instanceof Config) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Default config class %s is invalid; must implement %s\Config\ConfigInterface',
+                    $this->defaultConfigClass,
+                    __NAMESPACE__
+                ));
+            }
+        }
+
+        $this->config = $config;
+
+        // init storage
+        if ($storage === null) {
+            if (!class_exists($this->defaultStorageClass)) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Unable to locate storage class "%s"; class does not exist',
+                    $this->defaultStorageClass
+                ));
+            }
+
+            $storage = new $this->defaultStorageClass();
+
+            if (!$storage instanceof Storage) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Default storage class %s is invalid; must implement %s\Storage\StorageInterface',
+                    $this->defaultConfigClass,
+                    __NAMESPACE__
+                ));
+            }
+        }
+
+        $this->storage = $storage;
+
+        // save handler
+        if ($saveHandler !== null) {
+            $this->saveHandler = $saveHandler;
         }
     }
 
     /**
      * Set configuration object
      *
-     * @param  null|Configuration $config 
-     * @return void
+     * @param  Config $config
+     * @return AbstractManager
      */
-    public function setOptions(Configuration $config = null)
+    public function setConfig(Config $config)
     {
-        if (null === $config) {
-            $config = new $this->configDefaultClass();
-            if (!$config instanceof Configuration) {
-                throw new Exception\InvalidArgumentException('Default configuration type provided is invalid; must implement Zend\\Session\\Configuration');
-            }
-        }
-
         $this->config = $config;
+        return $this;
     }
 
     /**
      * Retrieve configuration object
-     * 
-     * @return Configuration
+     *
+     * @return Config
      */
     public function getConfig()
     {
@@ -116,24 +137,18 @@ abstract class AbstractManager implements Manager
     /**
      * Set session storage object
      *
-     * @param  null|Storage $storage 
-     * @return void
+     * @param  Storage $storage
+     * @return AbstractManager
      */
-    public function setStorage(Storage $storage = null)
+    public function setStorage(Storage $storage)
     {
-        if (null === $storage) {
-            $storage = new $this->storageDefaultClass();
-            if (!$storage instanceof Storage) {
-                throw new Exception\InvalidArgumentException('Default storage type provided is invalid; must implement Zend\\Session\\Storage');
-            }
-        }
-
         $this->storage = $storage;
+        return $this;
     }
 
     /**
      * Retrieve storage object
-     * 
+     *
      * @return Storage
      */
     public function getStorage()
@@ -144,15 +159,13 @@ abstract class AbstractManager implements Manager
     /**
      * Set session save handler object
      *
-     * @param SaveHandler $saveHandler
-     * @return void
+     * @param  SaveHandler $saveHandler
+     * @return AbstractManager
      */
     public function setSaveHandler(SaveHandler $saveHandler)
     {
-        if ($saveHandler === null) {
-            return ;
-        }
         $this->saveHandler = $saveHandler;
+        return $this;
     }
 
     /**

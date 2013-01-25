@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
@@ -26,8 +15,6 @@ namespace Zend\Barcode\Object;
  *
  * @category   Zend
  * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ean13 extends AbstractObject
 {
@@ -53,17 +40,17 @@ class Ean13 extends AbstractObject
         ));
 
     protected $parities = array(
-		0 => array('A','A','A','A','A','A'),
-		1 => array('A','A','B','A','B','B'),
-		2 => array('A','A','B','B','A','B'),
-		3 => array('A','A','B','B','B','A'),
-		4 => array('A','B','A','A','B','B'),
-		5 => array('A','B','B','A','A','B'),
-		6 => array('A','B','B','B','A','A'),
-		7 => array('A','B','A','B','A','B'),
-		8 => array('A','B','A','B','B','A'),
-		9 => array('A','B','B','A','B','A')
-	);
+        0 => array('A','A','A','A','A','A'),
+        1 => array('A','A','B','A','B','B'),
+        2 => array('A','A','B','B','A','B'),
+        3 => array('A','A','B','B','B','A'),
+        4 => array('A','B','A','A','B','B'),
+        5 => array('A','B','B','A','A','B'),
+        6 => array('A','B','B','B','A','A'),
+        7 => array('A','B','A','B','A','B'),
+        8 => array('A','B','A','B','B','A'),
+        9 => array('A','B','B','A','B','A')
+    );
 
     /**
      * Default options for Postnet barcode

@@ -1,85 +1,74 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage;
 
 use RecursiveIterator;
+use Zend\Mail\Headers;
+use Zend\Mail\Header\HeaderInterface;
 use Zend\Mime;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Part implements RecursiveIterator, Part\PartInterface
 {
     /**
-     * headers of part as array
-     * @var null|array
+     * Headers of the part
+     * @var Headers|null
      */
-    protected $_headers;
+    protected $headers;
 
     /**
      * raw part body
      * @var null|string
      */
-    protected $_content;
+    protected $content;
 
     /**
      * toplines as fetched with headers
      * @var string
      */
-    protected $_topLines = '';
+    protected $topLines = '';
 
     /**
      * parts of multipart message
      * @var array
      */
-    protected $_parts = array();
+    protected $parts = array();
 
     /**
      * count of parts of a multipart message
      * @var null|int
      */
-    protected $_countParts;
+    protected $countParts;
 
     /**
      * current position of iterator
      * @var int
      */
-    protected $_iterationPos = 1;
+    protected $iterationPos = 1;
 
     /**
      * mail handler, if late fetch is active
      * @var null|AbstractStorage
      */
-    protected $_mail;
+    protected $mail;
 
     /**
      * message number for mail handler
      * @var int
      */
-    protected $_messageNum = 0;
+    protected $messageNum = 0;
 
     /**
      * Public constructor
@@ -91,6 +80,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      * - headers    headers as array (name => value) or string, if a content part is found it's used as toplines
      * - noToplines ignore content found after headers in param 'headers'
      * - content    content as string
+     * - strict     strictly parse raw content
      *
      * @param   array $params  full message with or without headers
      * @throws Exception\InvalidArgumentException
@@ -105,25 +95,28 @@ class Part implements RecursiveIterator, Part\PartInterface
                 throw new Exception\InvalidArgumentException('need a message id with a handler');
             }
 
-            $this->_mail       = $params['handler'];
-            $this->_messageNum = $params['id'];
+            $this->mail       = $params['handler'];
+            $this->messageNum = $params['id'];
         }
 
+        $params['strict'] = isset($params['strict']) ? $params['strict'] : false;
+
         if (isset($params['raw'])) {
-            Mime\Decode::splitMessage($params['raw'], $this->_headers, $this->_content);
-        } else if (isset($params['headers'])) {
+            Mime\Decode::splitMessage($params['raw'], $this->headers, $this->content, Mime\Mime::LINEEND, $params['strict']);
+        } elseif (isset($params['headers'])) {
             if (is_array($params['headers'])) {
-                $this->_headers = $params['headers'];
+                $this->headers = new Headers();
+                $this->headers->addHeaders($params['headers']);
             } else {
-                $body = null; // "Declare" variable since it's passed by reference
-                if (!empty($params['noToplines'])) {
-                    Mime\Decode::splitMessage($params['headers'], $this->_headers, $body);
+                if (empty($params['noToplines'])) {
+                    Mime\Decode::splitMessage($params['headers'], $this->headers, $this->topLines);
                 } else {
-                    Mime\Decode::splitMessage($params['headers'], $this->_headers, $this->_topLines);
+                    $this->headers = Headers::fromString($params['headers']);
                 }
             }
+
             if (isset($params['content'])) {
-                $this->_content = $params['content'];
+                $this->content = $params['content'];
             }
         }
     }
@@ -137,7 +130,7 @@ class Part implements RecursiveIterator, Part\PartInterface
     {
         try {
             return stripos($this->contentType, 'multipart/') === 0;
-        } catch(Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface $e) {
             return false;
         }
     }
@@ -153,15 +146,15 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function getContent()
     {
-        if ($this->_content !== null) {
-            return $this->_content;
+        if ($this->content !== null) {
+            return $this->content;
         }
 
-        if ($this->_mail) {
-            return $this->_mail->getRawContent($this->_messageNum);
-        } else {
-            throw new Exception\RuntimeException('no content');
+        if ($this->mail) {
+            return $this->mail->getRawContent($this->messageNum);
         }
+
+        throw new Exception\RuntimeException('no content');
     }
 
     /**
@@ -171,7 +164,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      *
      * @return int size
      */
-    public function getSize() 
+    public function getSize()
     {
         return strlen($this->getContent());
     }
@@ -186,8 +179,8 @@ class Part implements RecursiveIterator, Part\PartInterface
     protected function _cacheContent()
     {
         // caching content if we can't fetch parts
-        if ($this->_content === null && $this->_mail) {
-            $this->_content = $this->_mail->getRawContent($this->_messageNum);
+        if ($this->content === null && $this->mail) {
+            $this->content = $this->mail->getRawContent($this->messageNum);
         }
 
         if (!$this->isMultipart()) {
@@ -199,13 +192,13 @@ class Part implements RecursiveIterator, Part\PartInterface
         if (!$boundary) {
             throw new Exception\RuntimeException('no boundary found in content type to split message');
         }
-        $parts = Mime\Decode::splitMessageStruct($this->_content, $boundary);
+        $parts = Mime\Decode::splitMessageStruct($this->content, $boundary);
         if ($parts === null) {
             return;
         }
         $counter = 1;
         foreach ($parts as $part) {
-            $this->_parts[$counter++] = new self(array('headers' => $part['header'], 'content' => $part['body']));
+            $this->parts[$counter++] = new static(array('headers' => $part['header'], 'content' => $part['body']));
         }
     }
 
@@ -218,26 +211,26 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function getPart($num)
     {
-        if (isset($this->_parts[$num])) {
-            return $this->_parts[$num];
+        if (isset($this->parts[$num])) {
+            return $this->parts[$num];
         }
 
-        if (!$this->_mail && $this->_content === null) {
+        if (!$this->mail && $this->content === null) {
             throw new Exception\RuntimeException('part not found');
         }
 
-        if ($this->_mail && $this->_mail->hasFetchPart) {
+        if ($this->mail && $this->mail->hasFetchPart) {
             // TODO: fetch part
             // return
         }
 
         $this->_cacheContent();
 
-        if (!isset($this->_parts[$num])) {
+        if (!isset($this->parts[$num])) {
             throw new Exception\RuntimeException('part not found');
         }
 
-        return $this->_parts[$num];
+        return $this->parts[$num];
     }
 
     /**
@@ -247,48 +240,45 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function countParts()
     {
-        if ($this->_countParts) {
-            return $this->_countParts;
+        if ($this->countParts) {
+            return $this->countParts;
         }
 
-        $this->_countParts = count($this->_parts);
-        if ($this->_countParts) {
-            return $this->_countParts;
+        $this->countParts = count($this->parts);
+        if ($this->countParts) {
+            return $this->countParts;
         }
 
-        if ($this->_mail && $this->_mail->hasFetchPart) {
+        if ($this->mail && $this->mail->hasFetchPart) {
             // TODO: fetch part
             // return
         }
 
         $this->_cacheContent();
 
-        $this->_countParts = count($this->_parts);
-        return $this->_countParts;
+        $this->countParts = count($this->parts);
+        return $this->countParts;
     }
 
-
     /**
-     * Get all headers
+     * Access headers collection
      *
-     * The returned headers are as saved internally. All names are lowercased. The value is a string or an array
-     * if a header with the same name occurs more than once.
+     * Lazy-loads if not already attached.
      *
-     * @return array headers as array(name => value)
+     * @return Headers
      */
     public function getHeaders()
     {
-        if ($this->_headers === null) {
-            if (!$this->_mail) {
-                $this->_headers = array();
+        if (null === $this->headers) {
+            if ($this->mail) {
+                $part = $this->mail->getRawHeader($this->messageNum);
+                $this->headers = Headers::fromString($part);
             } else {
-                $part = $this->_mail->getRawHeader($this->_messageNum);
-                $body = null; // "Declare" variable since it's passed by reference
-                Mime\Decode::splitMessage($part, $this->_headers, $body);
+                $this->headers = new Headers();
             }
         }
 
-        return $this->_headers;
+        return $this->headers;
     }
 
     /**
@@ -300,55 +290,49 @@ class Part implements RecursiveIterator, Part\PartInterface
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
      * @throws Exception\InvalidArgumentException
-     * @return string|array value of header in wanted or internal format
+     * @return string|array|HeaderInterface|\ArrayIterator value of header in wanted or internal format
      */
     public function getHeader($name, $format = null)
     {
-        if ($this->_headers === null) {
-            $this->getHeaders();
-        }
-
-        $lowerName = strtolower($name);
-
-        if ($this->headerExists($name) == false) {
+        $header = $this->getHeaders()->get($name);
+        if ($header === false) {
             $lowerName = strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
-            if ($this->headerExists($lowerName) == false) {
-                throw new Exception\InvalidArgumentException("no Header with Name $name or $lowerName found");
+            $header = $this->getHeaders()->get($lowerName);
+            if ($header === false) {
+                throw new Exception\InvalidArgumentException(
+                    "Header with Name $name or $lowerName not found"
+                );
             }
         }
-        $name = $lowerName;
-
-        $header = $this->_headers[$name];
 
         switch ($format) {
             case 'string':
-                if (is_array($header)) {
-                    $header = implode(Mime\Mime::LINEEND, $header);
+                if ($header instanceof HeaderInterface) {
+                    $return = $header->getFieldValue(HeaderInterface::FORMAT_RAW);
+                } else {
+                    $return = '';
+                    foreach ($header as $h) {
+                        $return .= $h->getFieldValue(HeaderInterface::FORMAT_RAW)
+                                 . Mime\Mime::LINEEND;
+                    }
+                    $return = trim($return, Mime\Mime::LINEEND);
                 }
                 break;
             case 'array':
-                $header = (array)$header;
+                if ($header instanceof HeaderInterface) {
+                    $return = array($header->getFieldValue());
+                } else {
+                    $return = array();
+                    foreach ($header as $h) {
+                        $return[] = $h->getFieldValue(HeaderInterface::FORMAT_RAW);
+                    }
+                }
+                break;
             default:
-                // do nothing
+                $return = $header;
         }
 
-        return $header;
-    }
-
-    /**
-     * Check whether the Mail part has a specific header.
-     *
-     * @param  string $name
-     * @return boolean
-     */
-    public function headerExists($name)
-    {
-        $name = strtolower($name);
-        if (isset($this->_headers[$name])) {
-            return true;
-        } else {
-            return false;
-        }
+        return $return;
     }
 
     /**
@@ -396,11 +380,11 @@ class Part implements RecursiveIterator, Part\PartInterface
      * @see Part::hasHeader
      *
      * @param  string
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
-        return $this->headerExists($name);
+        return $this->getHeaders()->has($name);
     }
 
     /**
@@ -441,10 +425,10 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function valid()
     {
-        if ($this->_countParts === null) {
+        if ($this->countParts === null) {
             $this->countParts();
         }
-        return $this->_iterationPos && $this->_iterationPos <= $this->_countParts;
+        return $this->iterationPos && $this->iterationPos <= $this->countParts;
     }
 
     /**
@@ -452,7 +436,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function next()
     {
-        ++$this->_iterationPos;
+        ++$this->iterationPos;
     }
 
     /**
@@ -462,7 +446,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function key()
     {
-        return $this->_iterationPos;
+        return $this->iterationPos;
     }
 
     /**
@@ -472,7 +456,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      */
     public function current()
     {
-        return $this->getPart($this->_iterationPos);
+        return $this->getPart($this->iterationPos);
     }
 
     /**
@@ -481,6 +465,6 @@ class Part implements RecursiveIterator, Part\PartInterface
     public function rewind()
     {
         $this->countParts();
-        $this->_iterationPos = 1;
+        $this->iterationPos = 1;
     }
 }

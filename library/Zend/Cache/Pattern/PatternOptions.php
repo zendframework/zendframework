@@ -1,39 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache\Exception,
-    Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\StorageInterface as Storage,
-    Zend\Stdlib\Options;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\StorageFactory;
+use Zend\Cache\Storage\StorageInterface as Storage;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PatternOptions extends Options
+class PatternOptions extends AbstractOptions
 {
     /**
      * Used by:
@@ -76,9 +64,23 @@ class PatternOptions extends Options
     /**
      * Used by:
      * - CaptureCache
-     * @var int
+     * @var false|int
      */
-    protected $dirUmask = 0007;
+    protected $umask = false;
+
+    /**
+     * Used by:
+     * - CaptureCache
+     * @var false|int
+     */
+    protected $dirPermission = 0700;
+
+    /**
+     * Used by:
+     * - CaptureCache
+     * @var false|int
+     */
+    protected $filePermission = 0600;
 
     /**
      * Used by:
@@ -86,13 +88,6 @@ class PatternOptions extends Options
      * @var bool
      */
     protected $fileLocking = true;
-
-    /**
-     * Used by:
-     * - CaptureCache
-     * @var int
-     */
-    protected $fileUmask = 0117;
 
     /**
      * Used by:
@@ -154,25 +149,22 @@ class PatternOptions extends Options
     protected $storage;
 
     /**
-     * Used by:
-     * - CaptureCache
-     * @var string
+     * Constructor
+     *
+     * @param  array|Traversable|null $options
+     * @return PatternOptions
+     * @throws Exception\InvalidArgumentException
      */
-    protected $tagKey = 'ZendCachePatternCaptureCache_Tags';
+    public function __construct($options = null)
+    {
+        // disable file/directory permissions by default on windows systems
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+            $this->filePermission = false;
+            $this->dirPermission = false;
+        }
 
-    /**
-     * Used by:
-     * - CaptureCache
-     * @var array
-     */
-    protected $tags = array();
-
-    /**
-     * Used by:
-     * - CaptureCache
-     * @var null|Storage
-     */
-    protected $tagStorage;
+        parent::__construct($options);
+    }
 
     /**
      * Set flag indicating whether or not to cache by default
@@ -243,6 +235,7 @@ class PatternOptions extends Options
      * - ClassCache
      *
      * @param  string $class
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setClass($class)
@@ -324,71 +317,88 @@ class PatternOptions extends Options
     }
 
     /**
-     * Set directory permissions
+     * Set directory permission
      *
-     * Sets {@link $dirUmask} property to inverse of provided value.
-     *
-     * @param  string $dirPerm
+     * @param  false|int $dirPermission
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
-    public function setDirPerm($dirPerm)
+    public function setDirPermission($dirPermission)
     {
-        if (is_string($dirPerm)) {
-            $dirPerm = octdec($dirPerm);
-        } else {
-            $dirPerm = (int) $dirPerm;
-        }
+        if ($dirPermission !== false) {
+            if (is_string($dirPermission)) {
+                $dirPermission = octdec($dirPermission);
+            } else {
+                $dirPermission = (int) $dirPermission;
+            }
 
-        // use umask
-        return $this->setDirUmask(~$dirPerm);
-    }
-
-    /**
-     * Gets directory permissions
-     *
-     * Proxies to {@link $dirUmask} property, returning its inverse.
-     *
-     * @return int
-     */
-    public function getDirPerm()
-    {
-        return ~$this->getDirUmask();
-    }
-
-    /**
-     * Set directory umask
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @param  int $dirUmask
-     * @return PatternOptions
-     */
-    public function setDirUmask($dirUmask)
-    {
-        $dirUmask = $this->normalizeUmask($dirUmask, function($umask) {
-            if ((~$umask & 0700) != 0700 ) {
+            // validate
+            if (($dirPermission & 0700) != 0700) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid directory umask or directory permissions: '
-                    . 'need permissions to execute, read and write directories by owner'
+                    'Invalid directory permission: need permission to execute, read and write by owner'
                 );
             }
-        });
-        $this->dirUmask = $dirUmask;
+        }
+
+        $this->dirPermission = $dirPermission;
         return $this;
     }
 
     /**
-     * Get directory umask
+     * Gets directory permission
+     *
+     * @return false|int
+     */
+    public function getDirPermission()
+    {
+        return $this->dirPermission;
+    }
+
+    /**
+     * Set umask
      *
      * Used by:
      * - CaptureCache
      *
-     * @return int
+     * @param  false|int $umask
+     * @throws Exception\InvalidArgumentException
+     * @return PatternOptions
      */
-    public function getDirUmask()
+    public function setUmask($umask)
     {
-        return $this->dirUmask;
+        if ($umask !== false) {
+            if (is_string($umask)) {
+                $umask = octdec($umask);
+            } else {
+                $umask = (int) $umask;
+            }
+
+            // validate
+            if ($umask & 0700) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid umask: need permission to execute, read and write by owner'
+                );
+            }
+
+            // normalize
+            $umask = $umask & 0777;
+        }
+
+        $this->umask = $umask;
+        return $this;
+    }
+
+    /**
+     * Get umask
+     *
+     * Used by:
+     * - CaptureCache
+     *
+     * @return false|int
+     */
+    public function getUmask()
+    {
+        return $this->umask;
     }
 
     /**
@@ -420,76 +430,45 @@ class PatternOptions extends Options
     }
 
     /**
-     * Set file permissions
+     * Set file permission
      *
-     * Sets {@link $fileUmask} property to inverse of provided value.
-     *
-     * @param  string $filePerm
+     * @param  false|int $filePermission
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
-    public function setFilePerm($filePerm)
+    public function setFilePermission($filePermission)
     {
-        if (is_string($filePerm)) {
-            $filePerm = octdec($filePerm);
-        } else {
-            $filePerm = (int) $filePerm;
-        }
+        if ($filePermission !== false) {
+            if (is_string($filePermission)) {
+                $filePermission = octdec($filePermission);
+            } else {
+                $filePermission = (int) $filePermission;
+            }
 
-        // use umask
-        return $this->setFileUmask(~$filePerm);
-    }
-
-    /**
-     * Gets file permissions
-     *
-     * Proxies to {@link $fileUmask} property, returning its inverse.
-     *
-     * @return int
-     */
-    public function getFilePerm()
-    {
-        return ~$this->getFileUmask();
-    }
-
-    /**
-     * Set file umask
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @param  int $fileUmask
-     * @return PatternOptions
-     */
-    public function setFileUmask($fileUmask)
-    {
-        $fileUmask = $this->normalizeUmask($fileUmask, function($umask) {
-            if ((~$umask & 0600) != 0600 ) {
+            // validate
+            if (($filePermission & 0600) != 0600) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid file umask or file permission: '
-                    . 'need permissions to read and write files by owner'
+                    'Invalid file permission: need permission to read and write by owner'
                 );
-            } elseif ((~$umask & 0111) > 0) {
+            } elseif ($filePermission & 0111) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid file umask or file permission: '
-                    . 'executable cache files are not allowed'
+                    "Invalid file permission: Files shoudn't be executable"
                 );
             }
-        });
-        $this->fileUmask = $fileUmask;
+        }
+
+        $this->filePermission = $filePermission;
         return $this;
     }
 
     /**
-     * Get file umask
+     * Gets file permission
      *
-     * Used by:
-     * - CaptureCache
-     *
-     * @return int
+     * @return false|int
      */
-    public function getFileUmask()
+    public function getFilePermission()
     {
-        return $this->fileUmask;
+        return $this->filePermission;
     }
 
     /**
@@ -517,7 +496,8 @@ class PatternOptions extends Options
     /**
      * Set object to cache
      *
-     * @param  mixed $value
+     * @param  mixed $object
+     * @throws Exception\InvalidArgumentException
      * @return $this
      */
     public function setObject($object)
@@ -600,7 +580,7 @@ class PatternOptions extends Options
      * Used by:
      * - ObjectCache
      *
-     * @param  mixed $value
+     * @param  mixed $objectKey
      * @return $this
      */
     public function setObjectKey($objectKey)
@@ -659,11 +639,28 @@ class PatternOptions extends Options
      * - CaptureCache
      *
      * @param  string $publicDir
+     * @throws Exception\InvalidArgumentException
      * @return PatternOptions
      */
     public function setPublicDir($publicDir)
     {
-        $this->publicDir = (string) $publicDir;
+        $publicDir = (string) $publicDir;
+
+        if (!is_dir($publicDir)) {
+            throw new Exception\InvalidArgumentException(
+                "Public directory '{$publicDir}' not found or not a directory"
+            );
+        } elseif (!is_writable($publicDir)) {
+            throw new Exception\InvalidArgumentException(
+                "Public directory '{$publicDir}' not writable"
+            );
+        } elseif (!is_readable($publicDir)) {
+            throw new Exception\InvalidArgumentException(
+                "Public directory '{$publicDir}' not readable"
+            );
+        }
+
+        $this->publicDir = rtrim(realpath($publicDir), \DIRECTORY_SEPARATOR);
         return $this;
     }
 
@@ -715,88 +712,6 @@ class PatternOptions extends Options
     }
 
     /**
-     * Set tag key
-     *
-     * @param  string $tagKey
-     * @return PatternOptions
-     */
-    public function setTagKey($tagKey)
-    {
-        if (($tagKey = (string)$tagKey) === '') {
-            throw new Exception\InvalidArgumentException("Missing tag key '{$tagKey}'");
-        }
-
-        $this->tagKey = $tagKey;
-        return $this;
-    }
-
-    /**
-     * Get tag key
-     *
-     * @return string
-     */
-    public function getTagKey()
-    {
-        return $this->tagKey;
-    }
-
-    /**
-     * Set tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @param  array $tags
-     * @return PatternOptions
-     */
-    public function setTags(array $tags)
-    {
-        $this->tags = $tags;
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Set storage adapter for tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @param  string|array|Storage $tagStorage
-     * @return PatternOptions
-     */
-    public function setTagStorage($tagStorage)
-    {
-        $this->tagStorage = $this->storageFactory($tagStorage);
-        return $this;
-    }
-
-    /**
-     * Get storage adapter for tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @return null|Storage
-     */
-    public function getTagStorage()
-    {
-        return $this->tagStorage;
-    }
-
-    /**
      * Recursively apply strtolower on all values of an array, and return as a
      * list of unique values
      *
@@ -805,9 +720,7 @@ class PatternOptions extends Options
      */
     protected function recursiveStrtolower(array $array)
     {
-        return array_values(array_unique(array_map(function($value) {
-            return strtolower($value);
-        }, $array)));
+        return array_values(array_unique(array_map('strtolower', $array)));
     }
 
     /**
@@ -833,34 +746,11 @@ class PatternOptions extends Options
     }
 
     /**
-     * Normalize a umask
-     *
-     * Allows specifying a umask as either an octal or integer. If the umask
-     * fails required permissions, raises an exception.
-     *
-     * @param  int|string $umask
-     * @param  callable   $comparison Callback used to verify the umask is acceptable for the given purpose
-     * @return int
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function normalizeUmask($umask, $comparison)
-    {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int)$umask;
-        }
-
-        $comparison($umask);
-
-        return $umask;
-    }
-
-    /**
      * Create a storage object from a given specification
      *
      * @param  array|string|Storage $storage
-     * @return StorageAdapter
+     * @throws Exception\InvalidArgumentException
+     * @return Storage
      */
     protected function storageFactory($storage)
     {
@@ -868,7 +758,7 @@ class PatternOptions extends Options
             $storage = StorageFactory::factory($storage);
         } elseif (is_string($storage)) {
             $storage = StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof Storage) ) {
+        } elseif (!($storage instanceof Storage)) {
             throw new Exception\InvalidArgumentException(
                 'The storage must be an instanceof Zend\Cache\Storage\StorageInterface '
                 . 'or an array passed to Zend\Cache\Storage::factory '

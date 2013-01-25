@@ -1,39 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Resolver;
 
-use Countable,
-    IteratorAggregate,
-    Zend\Stdlib\PriorityQueue,
-    Zend\View\Exception,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Resolver\ResolverInterface as Resolver;
+use Countable;
+use IteratorAggregate;
+use Zend\Stdlib\PriorityQueue;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AggregateResolver implements Countable, IteratorAggregate, ResolverInterface
 {
@@ -60,8 +46,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
      * Constructor
      *
      * Instantiate the internal priority queue
-     * 
-     * @return void
+     *
      */
     public function __construct()
     {
@@ -70,8 +55,8 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
     /**
      * Return count of attached resolvers
-     * 
-     * @return void
+     *
+     * @return int
      */
     public function count()
     {
@@ -80,8 +65,8 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
     /**
      * IteratorAggregate: return internal iterator
-     * 
-     * @return Traversable
+     *
+     * @return PriorityQueue
      */
     public function getIterator()
     {
@@ -90,9 +75,9 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
     /**
      * Attach a resolver
-     * 
-     * @param  Resolver $resolver 
-     * @param  int $priority 
+     *
+     * @param  Resolver $resolver
+     * @param  int $priority
      * @return AggregateResolver
      */
     public function attach(Resolver $resolver, $priority = 1)
@@ -103,9 +88,9 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
     /**
      * Resolve a template/pattern name to a resource the renderer can consume
-     * 
-     * @param  string $name 
-     * @param  null|Renderer $renderer 
+     *
+     * @param  string $name
+     * @param  null|Renderer $renderer
      * @return false|string
      */
     public function resolve($name, Renderer $renderer = null)
@@ -136,7 +121,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
     /**
      * Return the last successful resolver, if any
-     * 
+     *
      * @return Resolver
      */
     public function getLastSuccessfulResolver()
@@ -146,7 +131,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
     /**
      * Get last lookup failure
-     * 
+     *
      * @return false|string
      */
     public function getLastLookupFailure()

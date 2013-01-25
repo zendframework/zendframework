@@ -1,38 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
- 
+
 namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
 
-use Zend\Feed\Writer\Extension,
-    DOMDocument,
-    DOMElement;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed\Writer\Extension;
 
 /**
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed extends Extension\AbstractRenderer
 {
-    
+
     /**
      * Set to TRUE if a rendering method actually renders something. This
      * is used to prevent premature appending of a XML namespace declaration
@@ -40,47 +28,47 @@ class Feed extends Extension\AbstractRenderer
      *
      * @var bool
      */
-    protected $_called = false;
-    
+    protected $called = false;
+
     /**
      * Render feed
-     * 
+     *
      * @return void
      */
     public function render()
     {
-        $this->_setAuthors($this->_dom, $this->_base);
-        $this->_setBlock($this->_dom, $this->_base);
-        $this->_setCategories($this->_dom, $this->_base);
-        $this->_setImage($this->_dom, $this->_base);
-        $this->_setDuration($this->_dom, $this->_base);
-        $this->_setExplicit($this->_dom, $this->_base);
-        $this->_setKeywords($this->_dom, $this->_base);
-        $this->_setNewFeedUrl($this->_dom, $this->_base);
-        $this->_setOwners($this->_dom, $this->_base);
-        $this->_setSubtitle($this->_dom, $this->_base);
-        $this->_setSummary($this->_dom, $this->_base);
-        if ($this->_called) {
+        $this->_setAuthors($this->dom, $this->base);
+        $this->_setBlock($this->dom, $this->base);
+        $this->_setCategories($this->dom, $this->base);
+        $this->_setImage($this->dom, $this->base);
+        $this->_setDuration($this->dom, $this->base);
+        $this->_setExplicit($this->dom, $this->base);
+        $this->_setKeywords($this->dom, $this->base);
+        $this->_setNewFeedUrl($this->dom, $this->base);
+        $this->_setOwners($this->dom, $this->base);
+        $this->_setSubtitle($this->dom, $this->base);
+        $this->_setSummary($this->dom, $this->base);
+        if ($this->called) {
             $this->_appendNamespaces();
         }
     }
-    
+
     /**
      * Append feed namespaces
-     * 
+     *
      * @return void
      */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:itunes',
-            'http://www.itunes.com/dtds/podcast-1.0.dtd');  
+            'http://www.itunes.com/dtds/podcast-1.0.dtd');
     }
 
     /**
      * Set feed authors
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -95,14 +83,14 @@ class Feed extends Extension\AbstractRenderer
             $el->appendChild($text);
             $root->appendChild($el);
         }
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed itunes block
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
@@ -115,14 +103,14 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($block);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed categories
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
@@ -147,14 +135,14 @@ class Feed extends Extension\AbstractRenderer
                 }
             }
         }
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed image (icon)
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
@@ -166,14 +154,14 @@ class Feed extends Extension\AbstractRenderer
         $el = $dom->createElement('itunes:image');
         $el->setAttribute('href', $image);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed cumulative duration
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setDuration(DOMDocument $dom, DOMElement $root)
@@ -186,14 +174,14 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($duration);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set explicit flag
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
@@ -206,14 +194,14 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($explicit);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed keywords
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setKeywords(DOMDocument $dom, DOMElement $root)
@@ -226,14 +214,14 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode(implode(',', $keywords));
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed's new URL
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setNewFeedUrl(DOMDocument $dom, DOMElement $root)
@@ -246,14 +234,14 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($url);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
-     * Set feed owners 
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * Set feed owners
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setOwners(DOMDocument $dom, DOMElement $root)
@@ -274,14 +262,14 @@ class Feed extends Extension\AbstractRenderer
             $el->appendChild($name);
             $el->appendChild($email);
         }
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed subtitle
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
@@ -294,14 +282,14 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($subtitle);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
-    
+
     /**
      * Set feed summary
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setSummary(DOMDocument $dom, DOMElement $root)
@@ -314,6 +302,6 @@ class Feed extends Extension\AbstractRenderer
         $text = $dom->createTextNode($summary);
         $el->appendChild($text);
         $root->appendChild($el);
-        $this->_called = true;
+        $this->called = true;
     }
 }

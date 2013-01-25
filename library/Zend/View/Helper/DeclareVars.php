@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -26,8 +15,6 @@ namespace Zend\View\Helper;
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DeclareVars extends AbstractHelper
 {
@@ -65,13 +52,13 @@ class DeclareVars extends AbstractHelper
     {
         $view = $this->getView();
         $args = func_get_args();
-        foreach($args as $key) {
+        foreach ($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
-                    $this->_declareVar($name, $value);
+                    $this->declareVar($name, $value);
                 }
-            } else if (!isset($view->vars()->$key)) {
-                $this->_declareVar($key);
+            } elseif (!isset($view->vars()->$key)) {
+                $this->declareVar($key);
             }
         }
     }
@@ -85,7 +72,7 @@ class DeclareVars extends AbstractHelper
      * @param  string $value Defaults to an empty string
      * @return void
      */
-    protected function _declareVar($key, $value = '')
+    protected function declareVar($key, $value = '')
     {
         $view = $this->getView();
         $vars = $view->vars();

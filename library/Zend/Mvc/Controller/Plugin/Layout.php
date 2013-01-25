@@ -1,37 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\InjectApplicationEventInterface,
-    Zend\Mvc\Exception,
-    Zend\Mvc\MvcEvent,
-    Zend\View\Model\ModelInterface as Model;
+use Zend\Mvc\Exception;
+use Zend\Mvc\InjectApplicationEventInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ModelInterface as Model;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Layout extends AbstractPlugin
 {
@@ -42,8 +29,8 @@ class Layout extends AbstractPlugin
 
     /**
      * Set the layout template
-     * 
-     * @param  string $template 
+     *
+     * @param  string $template
      * @return Layout
      */
     public function setTemplate($template)
@@ -58,8 +45,8 @@ class Layout extends AbstractPlugin
      *
      * If no arguments are given, grabs the "root" or "layout" view model.
      * Otherwise, attempts to set the template for that view model.
-     * 
-     * @param  null|string $template 
+     *
+     * @param  null|string $template
      * @return Model|Layout
      */
     public function __invoke($template = null)
@@ -100,7 +87,7 @@ class Layout extends AbstractPlugin
 
     /**
      * Retrieve the root view model from the event
-     * 
+     *
      * @return Model
      * @throws Exception\DomainException
      */

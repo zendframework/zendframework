@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
@@ -27,8 +17,6 @@ use DateTime;
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Attribute
 {
@@ -44,7 +32,7 @@ class Attribute
      * @param  array                     $data
      * @param  string                    $attribName
      * @param  string|array|\Traversable $value
-     * @param  boolean                   $append
+     * @param  bool                   $append
      * @return void
      */
     public static function setAttribute(array &$data, $attribName, $value, $append = false)
@@ -53,13 +41,13 @@ class Attribute
         $valArray   = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::valueToLdap($v);
+                $v = static::valueToLdap($v);
                 if ($v !== null) {
                     $valArray[] = $v;
                 }
             }
-        } else if ($value !== null) {
-            $value = self::valueToLdap($value);
+        } elseif ($value !== null) {
+            $value = static::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
             }
@@ -92,14 +80,14 @@ class Attribute
             }
             $retArray = array();
             foreach ($data[$attribName] as $v) {
-                $retArray[] = self::valueFromLDAP($v);
+                $retArray[] = static::valueFromLdap($v);
             }
             return $retArray;
-        } else if (is_int($index)) {
+        } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
-            } else if ($index >= 0 && $index < count($data[$attribName])) {
-                return self::valueFromLDAP($data[$attribName][$index]);
+            } elseif ($index >= 0 && $index < count($data[$attribName])) {
+                return static::valueFromLdap($data[$attribName][$index]);
             } else {
                 return null;
             }
@@ -114,7 +102,7 @@ class Attribute
      * @param array       $data
      * @param string      $attribName
      * @param mixed|array $value
-     * @return boolean
+     * @return bool
      */
     public static function attributeHasValue(array &$data, $attribName, $value)
     {
@@ -128,7 +116,7 @@ class Attribute
         }
 
         foreach ($value as $v) {
-            $v = self::valueToLDAP($v);
+            $v = self::valueToLdap($v);
             if (!in_array($v, $data[$attribName], true)) {
                 return false;
             }
@@ -174,7 +162,7 @@ class Attribute
 
         $valArray = array();
         foreach ($value as $v) {
-            $v = self::valueToLDAP($v);
+            $v = self::valueToLdap($v);
             if ($v !== null) {
                 $valArray[] = $v;
             }
@@ -239,8 +227,8 @@ class Attribute
             }
         }
 
-        $hash = self::createPassword($password, $hashType);
-        self::setAttribute($data, $attribName, $hash, false);
+        $hash = static::createPassword($password, $hashType);
+        static::setAttribute($data, $attribName, $hash, false);
     }
 
     /**
@@ -260,7 +248,7 @@ class Attribute
                 $password = '"' . $password . '"';
                 if (function_exists('mb_convert_encoding')) {
                     $password = mb_convert_encoding($password, 'UTF-16LE', 'UTF-8');
-                } else if (function_exists('iconv')) {
+                } elseif (function_exists('iconv')) {
                     $password = iconv('UTF-8', 'UTF-16LE', $password);
                 } else {
                     $len = strlen($password);
@@ -300,8 +288,8 @@ class Attribute
      * @param  array                      $data
      * @param  string                     $attribName
      * @param  integer|array|\Traversable $value
-     * @param  boolean                    $utc
-     * @param  boolean                    $append
+     * @param  bool                    $utc
+     * @param  bool                    $append
      */
     public static function setDateTimeAttribute(
         array &$data, $attribName, $value, $utc = false,
@@ -311,23 +299,23 @@ class Attribute
         $convertedValues = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::valueToLdapDateTime($v, $utc);
+                $v = static::valueToLdapDateTime($v, $utc);
                 if ($v !== null) {
                     $convertedValues[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::valueToLdapDateTime($value, $utc);
+            $value = static::valueToLdapDateTime($value, $utc);
             if ($value !== null) {
                 $convertedValues[] = $value;
             }
         }
-        self::setAttribute($data, $attribName, $convertedValues, $append);
+        static::setAttribute($data, $attribName, $convertedValues, $append);
     }
 
     /**
      * @param  integer $value
-     * @param  boolean $utc
+     * @param  bool $utc
      * @return string|null
      */
     private static function valueToLdapDateTime($value, $utc)
@@ -349,16 +337,16 @@ class Attribute
      */
     public static function getDateTimeAttribute(array $data, $attribName, $index = null)
     {
-        $values = self::getAttribute($data, $attribName, $index);
+        $values = static::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
             for ($i = 0; $i < count($values); $i++) {
-                $newVal = self::valueFromLdapDateTime($values[$i]);
+                $newVal = static::valueFromLdapDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;
                 }
             }
         } else {
-            $newVal = self::valueFromLdapDateTime($values);
+            $newVal = static::valueFromLdapDateTime($values);
             if ($newVal !== null) {
                 $values = $newVal;
             }
@@ -375,7 +363,7 @@ class Attribute
     {
         if ($value instanceof DateTime) {
             return $value->format('U');
-        } else if (is_string($value)) {
+        } elseif (is_string($value)) {
             try {
                 return Converter\Converter::fromLdapDateTime($value, false)->format('U');
             } catch (Converter\Exception\InvalidArgumentException $e) {

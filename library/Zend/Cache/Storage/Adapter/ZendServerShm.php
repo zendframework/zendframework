@@ -1,50 +1,36 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendServerShm
-    extends AbstractZendServer
-    implements FlushableInterface, ClearByNamespaceInterface, TotalSpaceCapableInterface
+class ZendServerShm extends AbstractZendServer implements
+    ClearByNamespaceInterface,
+    FlushableInterface,
+    TotalSpaceCapableInterface
 {
 
     /**
      * Constructor
      *
      * @param  null|array|\Traversable|AdapterOptions $options
-     * @throws Exception\ExceptionInterface
-     * @return void
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = array())
     {
@@ -62,7 +48,7 @@ class ZendServerShm
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush()
     {
@@ -75,7 +61,7 @@ class ZendServerShm
      * Remove items of given namespace
      *
      * @param string $namespace
-     * @return boolean
+     * @return bool
      */
     public function clearByNamespace($namespace)
     {
@@ -110,7 +96,7 @@ class ZendServerShm
         if (!zend_shm_cache_store($internalKey, $value, $ttl)) {
             $valueType = gettype($value);
             throw new Exception\RuntimeException(
-                "zend_disk_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
+                "zend_shm_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
             );
         }
     }
@@ -124,7 +110,7 @@ class ZendServerShm
      */
     protected function zdcFetch($internalKey)
     {
-        return zend_shm_cache_fetch((string)$internalKey);
+        return zend_shm_cache_fetch((string) $internalKey);
     }
 
     /**
@@ -147,7 +133,7 @@ class ZendServerShm
      * Delete data from Zend Data SHM Cache
      *
      * @param  string $internalKey
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function zdcDelete($internalKey)

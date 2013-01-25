@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
@@ -27,8 +17,6 @@ namespace Zend\XmlRpc;
  *
  * @category   Zend
  * @package    Zend_XmlRpc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Response
 {
@@ -36,25 +24,25 @@ class Response
      * Return value
      * @var mixed
      */
-    protected $_return;
+    protected $return;
 
     /**
      * Return type
      * @var string
      */
-    protected $_type;
+    protected $type;
 
     /**
      * Response character encoding
      * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * Fault, if response is a fault response
-     * @var null|Zend\XmlRpc\Fault
+     * @var null|\Zend\XmlRpc\Fault
      */
-    protected $_fault = null;
+    protected $fault = null;
 
     /**
      * Constructor
@@ -64,7 +52,6 @@ class Response
      *
      * @param mixed $return
      * @param string $type
-     * @return void
      */
     public function __construct($return = null, $type = null)
     {
@@ -75,12 +62,12 @@ class Response
      * Set encoding to use in response
      *
      * @param string $encoding
-     * @return Zend\XmlRpc\Response
+     * @return \Zend\XmlRpc\Response
      */
     public function setEncoding($encoding)
     {
-        $this->_encoding = $encoding;
-        Value::setEncoding($encoding);
+        $this->encoding = $encoding;
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -91,7 +78,7 @@ class Response
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
@@ -105,8 +92,8 @@ class Response
      */
     public function setReturnValue($value, $type = null)
     {
-        $this->_return = $value;
-        $this->_type = (string) $type;
+        $this->return = $value;
+        $this->type = (string) $type;
     }
 
     /**
@@ -116,37 +103,37 @@ class Response
      */
     public function getReturnValue()
     {
-        return $this->_return;
+        return $this->return;
     }
 
     /**
      * Retrieve the XMLRPC value for the return value
      *
-     * @return Zend\XmlRpc\Value
+     * @return \Zend\XmlRpc\AbstractValue
      */
     protected function _getXmlRpcReturn()
     {
-        return Value::getXmlRpcValue($this->_return);
+        return AbstractValue::getXmlRpcValue($this->return);
     }
 
     /**
      * Is the response a fault response?
      *
-     * @return boolean
+     * @return bool
      */
     public function isFault()
     {
-        return $this->_fault instanceof Fault;
+        return $this->fault instanceof Fault;
     }
 
     /**
      * Returns the fault, if any.
      *
-     * @return null|Zend\XmlRpc\Fault
+     * @return null|\Zend\XmlRpc\Fault
      */
     public function getFault()
     {
-        return $this->_fault;
+        return $this->fault;
     }
 
     /**
@@ -156,14 +143,15 @@ class Response
      * is a fault response.
      *
      * @param string $response
-     * @return boolean True if a valid XMLRPC response, false if a fault
+     * @throws Exception\ValueException if invalid XML
+     * @return bool True if a valid XMLRPC response, false if a fault
      * response or invalid input
      */
     public function loadXml($response)
     {
         if (!is_string($response)) {
-            $this->_fault = new Fault(650);
-            $this->_fault->setEncoding($this->getEncoding());
+            $this->fault = new Fault(650);
+            $this->fault->setEncoding($this->getEncoding());
             return false;
         }
 
@@ -171,6 +159,17 @@ class Response
         $loadEntities         = libxml_disable_entity_loader(true);
         $useInternalXmlErrors = libxml_use_internal_errors(true);
         try {
+            $dom = new \DOMDocument;
+            $dom->loadXML($response);
+            foreach ($dom->childNodes as $child) {
+                if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
+                    throw new Exception\ValueException(
+                        'Invalid XML: Detected use of illegal DOCTYPE'
+                    );
+                }
+            }
+            // TODO: Locate why this passes tests but a simplexml import doesn't
+            //$xml = simplexml_import_dom($dom);
             $xml = new \SimpleXMLElement($response);
             libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
@@ -178,23 +177,23 @@ class Response
             libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
             // Not valid XML
-            $this->_fault = new Fault(651);
-            $this->_fault->setEncoding($this->getEncoding());
+            $this->fault = new Fault(651);
+            $this->fault->setEncoding($this->getEncoding());
             return false;
         }
 
         if (!empty($xml->fault)) {
             // fault response
-            $this->_fault = new Fault();
-            $this->_fault->setEncoding($this->getEncoding());
-            $this->_fault->loadXml($response);
+            $this->fault = new Fault();
+            $this->fault->setEncoding($this->getEncoding());
+            $this->fault->loadXml($response);
             return false;
         }
 
         if (empty($xml->params)) {
             // Invalid response
-            $this->_fault = new Fault(652);
-            $this->_fault->setEncoding($this->getEncoding());
+            $this->fault = new Fault(652);
+            $this->fault->setEncoding($this->getEncoding());
             return false;
         }
 
@@ -203,10 +202,10 @@ class Response
                 throw new Exception\ValueException('Missing XML-RPC value in XML');
             }
             $valueXml = $xml->params->param->value->asXML();
-            $value = Value::getXmlRpcValue($valueXml, Value::XML_STRING);
+            $value = AbstractValue::getXmlRpcValue($valueXml, AbstractValue::XML_STRING);
         } catch (Exception\ValueException $e) {
-            $this->_fault = new Fault(653);
-            $this->_fault->setEncoding($this->getEncoding());
+            $this->fault = new Fault(653);
+            $this->fault->setEncoding($this->getEncoding());
             return false;
         }
 
@@ -222,7 +221,7 @@ class Response
     public function saveXml()
     {
         $value = $this->_getXmlRpcReturn();
-        $generator = Value::getGenerator();
+        $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
                   ->openElement('params')
                   ->openElement('param');

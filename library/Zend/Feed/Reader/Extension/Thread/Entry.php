@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Thread;
@@ -25,8 +15,6 @@ use Zend\Feed\Reader\Extension;
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Entry extends Extension\AbstractEntry
 {
@@ -49,29 +37,28 @@ class Entry extends Extension\AbstractEntry
      */
     public function getCommentCount()
     {
-        return $this->_getData('total');
+        return $this->getData('total');
     }
 
     /**
      * Get the entry data specified by name
      *
      * @param  string $name
-     * @param  string $type
      * @return mixed|null
      */
-    protected function _getData($name)
+    protected function getData($name)
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
 
-        $data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
+        $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
 
         if (!$data) {
             $data = null;
         }
 
-        $this->_data[$name] = $data;
+        $this->data[$name] = $data;
 
         return $data;
     }
@@ -81,8 +68,8 @@ class Entry extends Extension\AbstractEntry
      *
      * @return void
      */
-    protected function _registerNamespaces()
+    protected function registerNamespaces()
     {
-        $this->_xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
+        $this->xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
     }
 }

@@ -1,32 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\StorageInterface,
-    Zend\EventManager\EventsCapableInterface,
-    Zend\Stdlib\Options;
+use ArrayObject;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\EventManager\EventsCapableInterface;
+use Zend\Stdlib\AbstractOptions;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Unless otherwise marked, all options in this class affect all adapters.
@@ -34,10 +24,8 @@ use ArrayObject,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AdapterOptions extends Options
+class AdapterOptions extends AbstractOptions
 {
 
     /**
@@ -64,7 +52,7 @@ class AdapterOptions extends Options
     /**
      * Readable option
      *
-     * @var boolean
+     * @var bool
      */
     protected $readable = true;
 
@@ -78,28 +66,9 @@ class AdapterOptions extends Options
     /**
      * Writable option
      *
-     * @var boolean
+     * @var bool
      */
     protected $writable = true;
-
-    /**
-     * Cast to array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $array = array();
-        $transform = function($letters) {
-            $letter = array_shift($letters);
-            return '_' . strtolower($letter);
-        };
-        foreach ($this as $key => $value) {
-            $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
-            $array[$normalizedKey] = $value;
-        }
-        return $array;
-    }
 
     /**
      * Adapter using this instance
@@ -116,23 +85,30 @@ class AdapterOptions extends Options
     /**
      * Set key pattern
      *
-     * @param  null|string $pattern
+     * @param  null|string $keyPattern
+     * @throws Exception\InvalidArgumentException
      * @return AdapterOptions
      */
-    public function setKeyPattern($pattern)
+    public function setKeyPattern($keyPattern)
     {
-        $pattern = (string) $pattern;
-        if ($this->keyPattern !== $pattern) {
+        $keyPattern = (string) $keyPattern;
+        if ($this->keyPattern !== $keyPattern) {
             // validate pattern
-            if ($pattern !== '') {
-                if (@preg_match($pattern, '') === false) {
-                    $err = error_get_last();
-                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
+            if ($keyPattern !== '') {
+                ErrorHandler::start(E_WARNING);
+                $result = preg_match($keyPattern, '');
+                $error = ErrorHandler::stop();
+                if ($result === false) {
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'Invalid pattern "%s"%s',
+                        $keyPattern,
+                        ($error ? ': ' . $error->getMessage() : '')
+                    ), 0, $error);
                 }
             }
 
-            $this->triggerOptionEvent('key_pattern', $pattern);
-            $this->keyPattern = $pattern;
+            $this->triggerOptionEvent('key_pattern', $keyPattern);
+            $this->keyPattern = $keyPattern;
         }
 
         return $this;
@@ -178,15 +154,15 @@ class AdapterOptions extends Options
     /**
      * Enable/Disable reading data from cache.
      *
-     * @param  boolean $flag
+     * @param  bool $readable
      * @return AbstractAdapter
      */
-    public function setReadable($flag)
+    public function setReadable($readable)
     {
-        $flag = (bool) $flag;
-        if ($this->readable !== $flag) {
-            $this->triggerOptionEvent('readable', $flag);
-            $this->readable = $flag;
+        $readable = (bool) $readable;
+        if ($this->readable !== $readable) {
+            $this->triggerOptionEvent('readable', $readable);
+            $this->readable = $readable;
         }
         return $this;
     }
@@ -194,7 +170,7 @@ class AdapterOptions extends Options
     /**
      * If reading data from cache enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getReadable()
     {
@@ -230,15 +206,15 @@ class AdapterOptions extends Options
     /**
      * Enable/Disable writing data to cache.
      *
-     * @param  boolean $flag
+     * @param  bool $writable
      * @return AdapterOptions
      */
-    public function setWritable($flag)
+    public function setWritable($writable)
     {
-        $flag = (bool) $flag;
-        if ($this->writable !== $flag) {
-            $this->triggerOptionEvent('writable', $flag);
-            $this->writable = $flag;
+        $writable = (bool) $writable;
+        if ($this->writable !== $writable) {
+            $this->triggerOptionEvent('writable', $writable);
+            $this->writable = $writable;
         }
         return $this;
     }
@@ -246,7 +222,7 @@ class AdapterOptions extends Options
     /**
      * If writing data to cache enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getWritable()
     {
@@ -265,7 +241,7 @@ class AdapterOptions extends Options
     {
         if ($this->adapter instanceof EventsCapableInterface) {
             $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
-            $this->adapter->events()->trigger($event);
+            $this->adapter->getEventManager()->trigger($event);
         }
     }
 

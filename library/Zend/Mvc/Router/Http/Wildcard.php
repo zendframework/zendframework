@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc_Router
- * @subpackage Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Mvc\Router\Exception;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Wildcard route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://manuals.rubyonrails.com/read/chapter/65
+ * @see        http://guides.rubyonrails.org/routing.html
  */
 class Wildcard implements RouteInterface
 {
@@ -45,7 +32,7 @@ class Wildcard implements RouteInterface
     protected $keyValueDelimiter;
 
     /**
-     * Delimtier before parameters.
+     * Delimiter before parameters.
      *
      * @var array
      */
@@ -120,12 +107,16 @@ class Wildcard implements RouteInterface
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return null;
         }
 
-        $uri  = $request->uri();
+        $uri  = $request->getUri();
         $path = $uri->getPath();
+
+        if ($path === '/') {
+            $path = '';
+        }
 
         if ($pathOffset !== null) {
             $path = substr($path, $pathOffset);
@@ -143,7 +134,7 @@ class Wildcard implements RouteInterface
 
             for ($i = 1; $i < $count; $i += 2) {
                 if (isset($params[$i + 1])) {
-                    $matches[urldecode($params[$i])] = urldecode($params[$i + 1]);
+                    $matches[rawurldecode($params[$i])] = rawurldecode($params[$i + 1]);
                 }
             }
         } else {
@@ -153,7 +144,7 @@ class Wildcard implements RouteInterface
                 $param = explode($this->keyValueDelimiter, $param, 2);
 
                 if (isset($param[1])) {
-                    $matches[urldecode($param[0])] = urldecode($param[1]);
+                    $matches[rawurldecode($param[0])] = rawurldecode($param[1]);
                 }
             }
         }
@@ -177,7 +168,7 @@ class Wildcard implements RouteInterface
 
         if ($mergedParams) {
             foreach ($mergedParams as $key => $value) {
-                $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
+                $elements[] = rawurlencode($key) . $this->keyValueDelimiter . rawurlencode($value);
 
                 $this->assembledParams[] = $key;
             }

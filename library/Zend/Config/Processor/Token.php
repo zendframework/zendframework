@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config\Processor;
 
-use Zend\Config\Config,
-    Zend\Config\Exception,
-    Traversable,
-    ArrayObject;
+use Traversable;
+use Zend\Config\Config;
+use Zend\Config\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Processor
  */
 class Token implements ProcessorInterface
 {
@@ -63,20 +51,32 @@ class Token implements ProcessorInterface
 
     /**
      * Token Processor walks through a Config structure and replaces all
-     * occurences of tokens with supplied values.
+     * occurrences of tokens with supplied values.
      *
-     * @param  array|\Zend\Config\Config|ArrayObject|\Traversable   $tokens  Associative array of TOKEN => value
-     *                                                                      to replace it with
-     * @param string $prefix
-     * @param string $suffix
+     * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
+     *                                             to replace it with
+     * @param    string $prefix
+     * @param    string $suffix
      * @internal param array $options
-     * @return \Zend\Config\Processor\Token
+     * @return   Token
      */
     public function __construct($tokens = array(), $prefix = '', $suffix = '')
     {
         $this->setTokens($tokens);
         $this->setPrefix($prefix);
         $this->setSuffix($suffix);
+    }
+
+    /**
+     * @param  string $prefix
+     * @return Token
+     */
+    public function setPrefix($prefix)
+    {
+        // reset map
+        $this->map = null;
+        $this->prefix = $prefix;
+        return $this;
     }
 
     /**
@@ -88,6 +88,19 @@ class Token implements ProcessorInterface
     }
 
     /**
+     * @param  string $suffix
+     * @return Token
+     */
+    public function setSuffix($suffix)
+    {
+        // reset map
+        $this->map = null;
+        $this->suffix = $suffix;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getSuffix()
@@ -96,35 +109,12 @@ class Token implements ProcessorInterface
     }
 
     /**
-     * @param string $prefix
-     * @return mixed
-     */
-    public function setPrefix($prefix)
-    {
-        // reset map
-        $this->map = null;
-
-        return $this->prefix = $prefix;
-    }
-
-    /**
-     * @param string $suffix
-     * @return string
-     */
-    public function setSuffix($suffix)
-    {
-        // reset map
-        $this->map = null;
-
-        return $this->suffix = $suffix;
-    }
-
-    /**
      * Set token registry.
      *
-     * @param  array|\Zend\Config\Config|\ArrayObject|\Traversable   $tokens  Associative array of TOKEN => value
-     *                                                                      to replace it with
-     * @throws \Zend\Config\Exception\InvalidArgumentException
+     * @param  array|Config|Traversable  $tokens  Associative array of TOKEN => value
+     *                                            to replace it with
+     * @return Token
+     * @throws Exception\InvalidArgumentException
      */
     public function setTokens($tokens)
     {
@@ -132,7 +122,7 @@ class Token implements ProcessorInterface
             $this->tokens = $tokens;
         } elseif ($tokens instanceof Config) {
             $this->tokens = $tokens->toArray();
-        } elseif ($tokens instanceof \Traversable) {
+        } elseif ($tokens instanceof Traversable) {
             $this->tokens = array();
             foreach ($tokens as $key => $val) {
                 $this->tokens[$key] = $val;
@@ -143,10 +133,13 @@ class Token implements ProcessorInterface
 
         // reset map
         $this->map = null;
+
+        return $this;
     }
 
     /**
      * Get current token registry.
+     *
      * @return array
      */
     public function getTokens()
@@ -157,9 +150,10 @@ class Token implements ProcessorInterface
     /**
      * Add new token.
      *
-     * @param $token
-     * @param $value
-     * @throws \Zend\Config\Exception\InvalidArgumentException
+     * @param  string $token
+     * @param  mixed $value
+     * @return Token
+     * @throws Exception\InvalidArgumentException
      */
     public function addToken($token, $value)
     {
@@ -170,14 +164,16 @@ class Token implements ProcessorInterface
 
         // reset map
         $this->map = null;
+
+        return $this;
     }
 
     /**
      * Add new token.
      *
-     * @param $token
-     * @param $value
-     * @throws \Zend\Config\Exception\InvalidArgumentException
+     * @param string $token
+     * @param mixed $value
+     * @return Token
      */
     public function setToken($token, $value)
     {
@@ -204,11 +200,12 @@ class Token implements ProcessorInterface
      *
      * @param  Config $config
      * @return Config
+     * @throws Exception\InvalidArgumentException
      */
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
-            throw new Exception\InvalidArgumentException('Cannot parse config because it is read-only');
+            throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
         }
 
         if ($this->map === null) {
@@ -244,6 +241,7 @@ class Token implements ProcessorInterface
         }
         $keys = array_keys($this->map);
         $values = array_values($this->map);
+
         return str_replace($keys, $values, $value);
     }
 }

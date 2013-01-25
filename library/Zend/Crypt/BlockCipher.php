@@ -3,59 +3,71 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt;
 
-use Zend\Crypt\Symmetric\SymmetricInterface;
 use Zend\Crypt\Hmac;
-use Zend\Crypt\Utils;
 use Zend\Crypt\Key\Derivation\Pbkdf2;
-use Zend\Math\Math;
+use Zend\Crypt\Symmetric\SymmetricInterface;
+use Zend\Crypt\Utils;
+use Zend\Math\Rand;
 
 /**
  * Encrypt using a symmetric cipher then authenticate using HMAC (SHA-256)
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BlockCipher
 {
     const KEY_DERIV_HMAC = 'sha256';
+
     /**
      * Symmetric cipher
      *
      * @var SymmetricInterface
      */
     protected $cipher;
+
     /**
-     * Symmetric cipher broker
+     * Symmetric cipher plugin manager
      *
-     * @var SymmetricBroker
+     * @var SymmetricPluginManager
      */
-    protected static $symmetricBroker = null;
+    protected static $symmetricPlugins = null;
+
     /**
      * Hash algorithm fot HMAC
      *
      * @var string
      */
     protected $hash = 'sha256';
+
+    /**
+     * Salt (IV)
+     *
+     * @var string
+     */
+    protected $salt;
+
     /**
      * The output is binary?
      *
-     * @var boolean
+     * @var bool
      */
     protected $binaryOutput = false;
+
     /**
      * User's key
      *
      * @var string
      */
     protected $key;
+
     /**
      * Number of iterations for Pbkdf2
      *
@@ -82,51 +94,50 @@ class BlockCipher
      */
     public static function factory($adapter, $options = array())
     {
-        $broker  = self::getSymmetricBroker();
-        $adapter = $broker->load($adapter, array($options));
-        return new self($adapter);
+        $plugins = static::getSymmetricPluginManager();
+        $adapter = $plugins->get($adapter, (array) $options);
+        return new static($adapter);
     }
 
     /**
-     * Returns the symmetric cipher broker.  If it doesn't exist it's created.
+     * Returns the symmetric cipher plugin manager.  If it doesn't exist it's created.
      *
-     * @return SymmetricBroker
+     * @return SymmetricPluginManager
      */
-    public static function getSymmetricBroker()
+    public static function getSymmetricPluginManager()
     {
-        if (self::$symmetricBroker === null) {
-            self::setSymmetricBroker(new SymmetricBroker());
+        if (static::$symmetricPlugins === null) {
+            static::setSymmetricPluginManager(new SymmetricPluginManager());
         }
 
-        return self::$symmetricBroker;
+        return static::$symmetricPlugins;
     }
 
     /**
-     * Set the symmetric cipher broker
+     * Set the symmetric cipher plugin manager
      *
-     * @param  string|SymmetricBroker $broker
+     * @param  string|SymmetricPluginManager $plugins
      * @throws Exception\InvalidArgumentException
      */
-    public static function setSymmetricBroker($broker)
+    public static function setSymmetricPluginManager($plugins)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
-                throw new Exception\InvalidArgumentException(
-                    sprintf(
-                        'Unable to locate symmetric cipher broker of class "%s"',
-                        $broker
-                    ));
-            }
-            $broker = new $broker();
-        }
-        if (!$broker instanceof SymmetricBroker) {
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    'Symmetric cipher broker must extend SymmetricBroker; received "%s"',
-                    (is_object($broker) ? get_class($broker) : gettype($broker))
+        if (is_string($plugins)) {
+            if (!class_exists($plugins)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unable to locate symmetric cipher plugins using class "%s"; class does not exist',
+                    $plugins
                 ));
+            }
+            $plugins = new $plugins();
         }
-        self::$symmetricBroker = $broker;
+        if (!$plugins instanceof SymmetricPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected an instance or extension of %s\SymmetricPluginManager; received "%s"',
+                __NAMESPACE__,
+                (is_object($plugins) ? get_class($plugins) : gettype($plugins))
+            ));
+        }
+        static::$symmetricPlugins = $plugins;
     }
 
     /**
@@ -174,21 +185,47 @@ class BlockCipher
     }
 
     /**
+     * Set the salt (IV)
+     *
+     * @param string $salt
+     * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setSalt($salt)
+    {
+        if (empty($salt)) {
+            throw new Exception\InvalidArgumentException("The salt (IV) cannot be empty");
+        }
+        $this->salt = $salt;
+        return $this;
+    }
+
+    /**
+     * Get the salt (IV)
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
      * Enable/disable the binary output
      *
-     * @param boolean $value
+     * @param  bool $value
      * @return BlockCipher
      */
     public function setBinaryOutput($value)
     {
-        $this->binaryOutput = (boolean)$value;
+        $this->binaryOutput = (bool) $value;
         return $this;
     }
 
     /**
      * Get the value of binary output
      *
-     * @return boolean
+     * @return bool
      */
     public function getBinaryOutput()
     {
@@ -244,7 +281,7 @@ class BlockCipher
     /**
      * Get the cipher algorithm
      *
-     * @return string|boolean
+     * @return string|bool
      */
     public function getCipherAlgorithm()
     {
@@ -278,7 +315,7 @@ class BlockCipher
     {
         if (!Hash::isSupported($hash)) {
             throw new Exception\InvalidArgumentException(
-                "The specified hash algorithm $hash is not supported by Zend\Crypt\Hash"
+                "The specified hash algorithm '{$hash}' is not supported by Zend\Crypt\Hash"
             );
         }
         $this->hash = $hash;
@@ -314,8 +351,12 @@ class BlockCipher
             throw new Exception\InvalidArgumentException('No symmetric cipher specified');
         }
         $keySize = $this->cipher->getKeySize();
-        // generate a random salt (IV)
-        $this->cipher->setSalt(Math::randBytes($this->cipher->getSaltSize(), true));
+        $salt = $this->getSalt();
+        // generate a random salt (IV) if empty
+        if (empty($salt)) {
+            $salt = Rand::getBytes($this->cipher->getSaltSize(), true);
+        }
+        $this->cipher->setSalt($salt);
         // generate the encryption key and the HMAC key for the authentication
         $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
                              $this->getKey(),
@@ -328,7 +369,7 @@ class BlockCipher
         $keyHmac = substr($hash, $keySize);
         // encryption
         $ciphertext = $this->cipher->encrypt($data);
-        // HMAC 
+        // HMAC
         $hmac = Hmac::compute($keyHmac,
                               $this->hash,
                               $this->cipher->getAlgorithm() . $ciphertext);
@@ -342,7 +383,7 @@ class BlockCipher
      * Decrypt
      *
      * @param  string $data
-     * @return string|boolean
+     * @return string|bool
      * @throws Exception\InvalidArgumentException
      */
     public function decrypt($data)

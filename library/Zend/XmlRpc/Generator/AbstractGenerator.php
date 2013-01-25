@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Generator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc\Generator;
@@ -32,7 +21,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      *
      * @var string
      */
-    protected $_encoding;
+    protected $encoding;
 
     /**
      * Construct new instance of the generator
@@ -47,7 +36,7 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * Initialize internal objects
-     * 
+     *
      * @return void
      */
     abstract protected function _init();
@@ -56,7 +45,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      * Start XML element
      *
      * Method opens a new XML element with an element name and an optional value
-     * 
+     *
      * @param string $name XML tag name
      * @param string $value Optional value of the XML tag
      * @return AbstractGenerator Fluent interface
@@ -88,23 +77,23 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * Return encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->encoding;
     }
 
     /**
      * Set XML encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return AbstractGenerator
      */
     public function setEncoding($encoding)
     {
-        $this->_encoding = $encoding;
+        $this->encoding = $encoding;
         return $this;
     }
 
@@ -157,7 +146,7 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * End XML element
-     * 
+     *
      * @param string $name
      */
     abstract protected function _closeElement($name);

@@ -1,30 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Explode extends AbstractValidator
 {
@@ -33,14 +21,14 @@ class Explode extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID => "Invalid type given. String expected",
     );
 
     /**
      * @var array
      */
-    protected $_messageVariables = array();
+    protected $messageVariables = array();
 
     /**
      * @var string
@@ -53,7 +41,7 @@ class Explode extends AbstractValidator
     protected $validator;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $breakOnFirstFailure = false;
 
@@ -104,7 +92,7 @@ class Explode extends AbstractValidator
     /**
      * Set break on first failure setting
      *
-     * @param boolean $break
+     * @param  bool $break
      * @return Explode
      */
     public function setBreakOnFirstFailure($break)
@@ -116,7 +104,7 @@ class Explode extends AbstractValidator
     /**
      * Get break on first failure setting
      *
-     * @return boolean
+     * @return bool
      */
     public function isBreakOnFirstFailure()
     {
@@ -124,26 +112,36 @@ class Explode extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
+     * Defined by Zend\Validator\ValidatorInterface
      *
-     * Returns true if and only if $value is a valid list of email addresses
-     * (separated by comma) according to RFC2822
+     * Returns true if all values validate true
      *
-     * @link   http://www.ietf.org/rfc/rfc2822.txt RFC2822
-     * @link   http://www.columbia.edu/kermit/ascii.html US-ASCII characters
-     * @param  string $value
-     * @return boolean
+     * @param  string|array $value
+     * @return bool
+     * @throws Exception\RuntimeException
      */
     public function isValid($value)
     {
-        if (!is_string($value)) {
+        if (!is_string($value) && !is_array($value)) {
             $this->error(self::INVALID);
             return false;
         }
 
         $this->setValue($value);
 
-        $values    = explode($this->valueDelimiter, $value);
+        if (!is_array($value)) {
+            $delimiter = $this->getValueDelimiter();
+            // Skip explode if delimiter is null,
+            // used when value is expected to be either an
+            // array when multiple values and a string for
+            // single values (ie. MultiCheckbox form behavior)
+            $values = (null !== $delimiter)
+                      ? explode($this->valueDelimiter, $value)
+                      : array($value);
+        } else {
+            $values = $value;
+        }
+
         $retval    = true;
         $messages  = array();
         $validator = $this->getValidator();

@@ -1,25 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @subpackage Sitemap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Sitemap;
+
+use Zend\Stdlib\ErrorHandler;
+use Zend\Validator\AbstractValidator;
 
 /**
  * Validates whether a given value is valid as a sitemap <lastmod> value
@@ -27,12 +19,10 @@ namespace Zend\Validator\Sitemap;
  * @link       http://www.sitemaps.org/protocol.php Sitemaps XML format
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage Sitemap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Lastmod extends \Zend\Validator\AbstractValidator
+class Lastmod extends AbstractValidator
 {
     /**
      * Regular expression to use when validating
@@ -52,8 +42,8 @@ class Lastmod extends \Zend\Validator\AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is not a valid sitemap lastmod",
+    protected $messageTemplates = array(
+        self::NOT_VALID => "The input is not a valid sitemap lastmod",
         self::INVALID   => "Invalid type given. String expected",
     );
 
@@ -63,7 +53,7 @@ class Lastmod extends \Zend\Validator\AbstractValidator
      * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
      *
      * @param  string  $value  value to validate
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -73,7 +63,9 @@ class Lastmod extends \Zend\Validator\AbstractValidator
         }
 
         $this->setValue($value);
-        $result = @preg_match(self::LASTMOD_REGEX, $value);
+        ErrorHandler::start();
+        $result = preg_match(self::LASTMOD_REGEX, $value);
+        ErrorHandler::stop();
         if ($result != 1) {
             $this->error(self::NOT_VALID);
             return false;

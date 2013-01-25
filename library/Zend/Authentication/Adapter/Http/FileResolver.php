@@ -1,25 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter\Http;
+
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * HTTP Authentication File Resolver
@@ -27,8 +18,6 @@ namespace Zend\Authentication\Adapter\Http;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FileResolver implements ResolverInterface
 {
@@ -37,7 +26,7 @@ class FileResolver implements ResolverInterface
      *
      * @var string
      */
-    protected $_file;
+    protected $file;
 
     /**
      * Constructor
@@ -56,14 +45,14 @@ class FileResolver implements ResolverInterface
      *
      * @param  string $path
      * @return FileResolver Provides a fluent interface
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException if path is not readable
      */
     public function setFile($path)
     {
         if (empty($path) || !is_readable($path)) {
             throw new Exception\InvalidArgumentException('Path not readable: ' . $path);
         }
-        $this->_file = $path;
+        $this->file = $path;
 
         return $this;
     }
@@ -75,7 +64,7 @@ class FileResolver implements ResolverInterface
      */
     public function getFile()
     {
-        return $this->_file;
+        return $this->file;
     }
 
     /**
@@ -99,25 +88,27 @@ class FileResolver implements ResolverInterface
      *         realm, false otherwise.
      * @throws Exception\ExceptionInterface
      */
-    public function resolve($username, $realm)
+    public function resolve($username, $realm, $password = null)
     {
         if (empty($username)) {
             throw new Exception\InvalidArgumentException('Username is required');
-        } else if (!ctype_print($username) || strpos($username, ':') !== false) {
+        } elseif (!ctype_print($username) || strpos($username, ':') !== false) {
             throw new Exception\InvalidArgumentException('Username must consist only of printable characters, '
                                                               . 'excluding the colon');
         }
         if (empty($realm)) {
             throw new Exception\InvalidArgumentException('Realm is required');
-        } else if (!ctype_print($realm) || strpos($realm, ':') !== false) {
+        } elseif (!ctype_print($realm) || strpos($realm, ':') !== false) {
             throw new Exception\InvalidArgumentException('Realm must consist only of printable characters, '
                                                               . 'excluding the colon.');
         }
 
         // Open file, read through looking for matching credentials
-        $fp = @fopen($this->_file, 'r');
+        ErrorHandler::start(E_WARNING);
+        $fp     = fopen($this->file, 'r');
+        $error = ErrorHandler::stop();
         if (!$fp) {
-            throw new Exception\RuntimeException('Unable to open password file: ' . $this->_file);
+            throw new Exception\RuntimeException('Unable to open password file: ' . $this->file, 0, $error);
         }
 
         // No real validation is done on the contents of the password file. The

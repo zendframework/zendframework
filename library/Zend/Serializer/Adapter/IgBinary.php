@@ -1,96 +1,91 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Serializer
  */
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException,
-    Zend\Serializer\Exception\ExtensionNotLoadedException;
+use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class IgBinary extends AbstractAdapter
 {
     /**
      * @var string Serialized null value
      */
-    private static $_serializedNull = null;
+    private static $serializedNull = null;
 
     /**
      * Constructor
-     * 
-     * @param  array|\Traversable $options
-     * @return void
-     * @throws ExtensionNotLoadedException If igbinary extension is not present
+     *
+     * @throws Exception\ExtensionNotLoadedException If igbinary extension is not present
      */
-    public function __construct($options = array())
+    public function __construct($options = null)
     {
         if (!extension_loaded('igbinary')) {
-            throw new ExtensionNotLoadedException('PHP extension "igbinary" is required for this adapter');
+            throw new Exception\ExtensionNotLoadedException(
+                'PHP extension "igbinary" is required for this adapter'
+            );
+        }
+
+        if (static::$serializedNull === null) {
+            static::$serializedNull = igbinary_serialize(null);
         }
 
         parent::__construct($options);
-
-        if (self::$_serializedNull === null) {
-            self::$_serializedNull = igbinary_serialize(null);
-        }
     }
 
     /**
      * Serialize PHP value to igbinary
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
      * @return string
-     * @throws RuntimeException on igbinary error
+     * @throws Exception\RuntimeException on igbinary error
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value)
     {
+        ErrorHandler::start();
         $ret = igbinary_serialize($value);
+        $err = ErrorHandler::stop();
+
         if ($ret === false) {
-            $lastErr = error_get_last();
-            throw new RuntimeException($lastErr['message']);
+            throw new Exception\RuntimeException('Serialization failed', 0, $err);
         }
+
         return $ret;
     }
 
     /**
      * Deserialize igbinary string to PHP value
-     * 
-     * @param  string|binary $serialized 
-     * @param  array $opts 
+     *
+     * @param  string $serialized
      * @return mixed
-     * @throws RuntimeException on igbinary error
+     * @throws Exception\RuntimeException on igbinary error
      */
-    public function unserialize($serialized, array $opts = array())
+    public function unserialize($serialized)
     {
-        $ret = igbinary_unserialize($serialized);
-        if ($ret === null && $serialized !== self::$_serializedNull) {
-            $lastErr = error_get_last();
-            throw new RuntimeException($lastErr['message']);
+        if ($serialized === static::$serializedNull) {
+            return null;
         }
+
+        ErrorHandler::start();
+        $ret = igbinary_unserialize($serialized);
+        $err = ErrorHandler::stop();
+
+        if ($ret === null) {
+            throw new Exception\RuntimeException('Unserialization failed', 0, $err);
+        }
+
         return $ret;
     }
 }

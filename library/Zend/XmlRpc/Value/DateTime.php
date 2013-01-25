@@ -1,49 +1,37 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc\Value;
+
 use Zend\XmlRpc\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DateTime extends Scalar
+class DateTime extends AbstractScalar
 {
     /**
      * PHP compatible format string for XML/RPC datetime values
      *
      * @var string
      */
-    protected $_phpFormatString = 'Ymd\\TH:i:s';
+    protected $phpFormatString = 'Ymd\\TH:i:s';
 
     /**
      * ISO compatible format string for XML/RPC datetime values
      *
      * @var string
      */
-    protected $_isoFormatString = 'yyyyMMddTHH:mm:ss';
+    protected $isoFormatString = 'yyyyMMddTHH:mm:ss';
 
     /**
      * Set the value of a dateTime.iso8601 native type
@@ -52,17 +40,16 @@ class DateTime extends Scalar
      *
      * @param mixed $value Integer of the unix timestamp or any string that can be parsed
      *                     to a unix timestamp using the PHP strtotime() function
+     * @throws Exception\ValueException if unable to create a DateTime object from $value
      */
     public function __construct($value)
     {
-        $this->_type = self::XMLRPC_TYPE_DATETIME;
+        $this->type = self::XMLRPC_TYPE_DATETIME;
 
-        if ($value instanceof \Zend\Date\Date) {
-            $this->_value = $value->toString($this->_isoFormatString);
-        } elseif ($value instanceof \DateTime) {
-            $this->_value = $value->format($this->_phpFormatString);
+        if ($value instanceof \DateTime) {
+            $this->value = $value->format($this->phpFormatString);
         } elseif (is_numeric($value)) { // The value is numeric, we make sure it is an integer
-            $this->_value = date($this->_phpFormatString, (int)$value);
+            $this->value = date($this->phpFormatString, (int) $value);
         } else {
             try {
                 $dateTime = new \DateTime($value);
@@ -70,7 +57,7 @@ class DateTime extends Scalar
                 throw new Exception\ValueException($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->_value = $dateTime->format($this->_phpFormatString); // Convert the DateTime to iso8601 format
+            $this->value = $dateTime->format($this->phpFormatString); // Convert the DateTime to iso8601 format
         }
     }
 
@@ -81,6 +68,6 @@ class DateTime extends Scalar
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 }

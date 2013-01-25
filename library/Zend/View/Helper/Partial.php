@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
 use Zend\View\Exception;
+use Zend\View\Model\ModelInterface;
 
 /**
  * Helper for rendering a template fragment in its own variable scope.
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Partial extends AbstractHelper
 {
@@ -37,65 +25,43 @@ class Partial extends AbstractHelper
      * Variable to which object will be assigned
      * @var string
      */
-    protected $_objectKey;
+    protected $objectKey;
 
     /**
      * Renders a template fragment within a variable scope distinct from the
-     * calling View object.
+     * calling View object. It proxies to view's render function
      *
-     * If no arguments are passed, returns the helper instance.
-     *
-     * If the $model is an array, it is passed to the view object's assign()
-     * method.
-     *
-     * If the $model is an object, it first checks to see if the object
-     * implements a 'toArray' method; if so, it passes the result of that
-     * method to to the view object's assign() method. Otherwise, the result of
-     * get_object_vars() is passed.
-     *
-     * @param  string $name Name of view script
-     * @param  array $model Variables to populate in the view
+     * @param  string|ModelInterface $name Name of view script, or a view model
+     * @param  array|object $values Variables to populate in the view
      * @return string|Partial
      * @throws Exception\RuntimeException
      */
-    public function __invoke($name = null, $model = null)
+    public function __invoke($name = null, $values = null)
     {
         if (0 == func_num_args()) {
             return $this;
         }
 
-        $view = $this->cloneView();
-        if (isset($this->partialCounter)) {
-            $view->partialCounter = $this->partialCounter;
+        // If we were passed only a view model, just render it.
+        if ($name instanceof ModelInterface) {
+            return $this->getView()->render($name);
         }
 
-        if (!empty($model)) {
-            if (is_array($model)) {
-                $view->vars()->assign($model);
-            } elseif (is_object($model)) {
-                if (null !== ($objectKey = $this->getObjectKey())) {
-                    $view->vars()->offsetSet($objectKey, $model);
-                } elseif (method_exists($model, 'toArray')) {
-                    $view->vars()->assign($model->toArray());
-                } else {
-                    $view->vars()->assign(get_object_vars($model));
-                }
+        if (is_scalar($values)) {
+            $values = array();
+        } elseif ($values instanceof ModelInterface) {
+            $values = $values->getVariables();
+        } elseif (is_object($values)) {
+            if (null !== ($objectKey = $this->getObjectKey())) {
+                $values = array($objectKey => $values);
+            } elseif (method_exists($values, 'toArray')) {
+                $values = $values->toArray();
+            } else {
+                $values = get_object_vars($values);
             }
         }
 
-        return $view->render($name);
-    }
-
-    /**
-     * Clone the current View
-     *
-     * @return \Zend\View\Renderer\RendererInterface
-     */
-    public function cloneView()
-    {
-        $view = clone $this->view;
-        $view->setVars(array());
-        return $view;
+        return $this->getView()->render($name, $values);
     }
 
     /**
@@ -107,11 +73,11 @@ class Partial extends AbstractHelper
     public function setObjectKey($key)
     {
         if (null === $key) {
-            $this->_objectKey = null;
-        } else {
-            $this->_objectKey = (string) $key;
+            $this->objectKey = null;
+            return $this;
         }
 
+        $this->objectKey = (string) $key;
         return $this;
     }
 
@@ -125,6 +91,6 @@ class Partial extends AbstractHelper
      */
     public function getObjectKey()
     {
-        return $this->_objectKey;
+        return $this->objectKey;
     }
 }

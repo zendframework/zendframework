@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
 
-use Zend\Http,
-    Zend\Server\Client as ServerClient,
-    Zend\XmlRpc\Value;
+use Zend\Http;
+use Zend\Server\Client as ServerClient;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * An XML-RPC client implementation
@@ -31,8 +20,6 @@ use Zend\Http,
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Client implements ServerClient
 {
@@ -41,43 +28,43 @@ class Client implements ServerClient
      * @var string
      * @example http://time.xmlrpc.com/RPC2
      */
-    protected $_serverAddress;
+    protected $serverAddress;
 
     /**
      * HTTP Client to use for requests
-     * @var Zend\Http\Client
+     * @var \Zend\Http\Client
      */
-    protected $_httpClient = null;
+    protected $httpClient = null;
 
     /**
      * Introspection object
-     * @var Zend\Http\Client\ServerIntrospection
+     * @var \Zend\XmlRpc\Client\ServerIntrospection
      */
-    protected $_introspector = null;
+    protected $introspector = null;
 
     /**
      * Request of the last method call
-     * @var Zend\XmlRpc\Request
+     * @var \Zend\XmlRpc\Request
      */
-    protected $_lastRequest = null;
+    protected $lastRequest = null;
 
     /**
      * Response received from the last method call
-     * @var Zend\XmlRpc\Response
+     * @var \Zend\XmlRpc\Response
      */
-    protected $_lastResponse = null;
+    protected $lastResponse = null;
 
     /**
      * Proxy object for more convenient method calls
      * @var array of Zend\XmlRpc\Client\ServerProxy
      */
-    protected $_proxyCache = array();
+    protected $proxyCache = array();
 
     /**
      * Flag for skipping system lookup
      * @var bool
      */
-    protected $_skipSystemLookup = false;
+    protected $skipSystemLookup = false;
 
     /**
      * Create a new XML-RPC client to a remote server
@@ -85,113 +72,112 @@ class Client implements ServerClient
      * @param  string $server      Full address of the XML-RPC service
      *                             (e.g. http://time.xmlrpc.com/RPC2)
      * @param  \Zend\Http\Client $httpClient HTTP Client to use for requests
-     * @return void
      */
     public function __construct($server, Http\Client $httpClient = null)
     {
         if ($httpClient === null) {
-            $this->_httpClient = new Http\Client();
+            $this->httpClient = new Http\Client();
         } else {
-            $this->_httpClient = $httpClient;
+            $this->httpClient = $httpClient;
         }
 
-        $this->_introspector  = new Client\ServerIntrospection($this);
-        $this->_serverAddress = $server;
+        $this->introspector  = new Client\ServerIntrospection($this);
+        $this->serverAddress = $server;
     }
 
 
     /**
      * Sets the HTTP client object to use for connecting the XML-RPC server.
      *
-     * @param  Zend\Http\Client $httpClient
-     * @return Zend\Http\Client
+     * @param  \Zend\Http\Client $httpClient
+     * @return \Zend\Http\Client
      */
     public function setHttpClient(Http\Client $httpClient)
     {
-        return $this->_httpClient = $httpClient;
+        return $this->httpClient = $httpClient;
     }
 
 
     /**
      * Gets the HTTP client object.
      *
-     * @return Zend\Http\Client
+     * @return \Zend\Http\Client
      */
     public function getHttpClient()
     {
-        return $this->_httpClient;
+        return $this->httpClient;
     }
 
 
     /**
      * Sets the object used to introspect remote servers
      *
-     * @param  Zend\XmlRpc\Client\ServerIntrospection
-     * @return Zend\XmlRpc\Client\ServerIntrospection
+     * @param  \Zend\XmlRpc\Client\ServerIntrospection
+     * @return \Zend\XmlRpc\Client\ServerIntrospection
      */
     public function setIntrospector(Client\ServerIntrospection $introspector)
     {
-        return $this->_introspector = $introspector;
+        return $this->introspector = $introspector;
     }
 
 
     /**
      * Gets the introspection object.
      *
-     * @return Zend\XmlRpc\Client\ServerIntrospection
+     * @return \Zend\XmlRpc\Client\ServerIntrospection
      */
     public function getIntrospector()
     {
-        return $this->_introspector;
+        return $this->introspector;
     }
 
 
    /**
      * The request of the last method call
      *
-     * @return Zend\XmlRpc\Request
+     * @return \Zend\XmlRpc\Request
      */
     public function getLastRequest()
     {
-        return $this->_lastRequest;
+        return $this->lastRequest;
     }
 
 
     /**
      * The response received from the last method call
      *
-     * @return Zend\XmlRpc\Response
+     * @return \Zend\XmlRpc\Response
      */
     public function getLastResponse()
     {
-        return $this->_lastResponse;
+        return $this->lastResponse;
     }
 
 
     /**
      * Returns a proxy object for more convenient method calls
      *
-     * @param $namespace  Namespace to proxy or empty string for none
-     * @return Zend\XmlRpc\Client\ServerProxy
+     * @param string $namespace  Namespace to proxy or empty string for none
+     * @return \Zend\XmlRpc\Client\ServerProxy
      */
     public function getProxy($namespace = '')
     {
-        if (empty($this->_proxyCache[$namespace])) {
+        if (empty($this->proxyCache[$namespace])) {
             $proxy = new Client\ServerProxy($this, $namespace);
-            $this->_proxyCache[$namespace] = $proxy;
+            $this->proxyCache[$namespace] = $proxy;
         }
-        return $this->_proxyCache[$namespace];
+        return $this->proxyCache[$namespace];
     }
 
     /**
      * Set skip system lookup flag
      *
      * @param  bool $flag
-     * @return Zend\XmlRpc\Client
+     * @return \Zend\XmlRpc\Client
      */
     public function setSkipSystemLookup($flag = true)
     {
-        $this->_skipSystemLookup = (bool) $flag;
+        $this->skipSystemLookup = (bool) $flag;
         return $this;
     }
 
@@ -202,20 +188,20 @@ class Client implements ServerClient
      */
     public function skipSystemLookup()
     {
-        return $this->_skipSystemLookup;
+        return $this->skipSystemLookup;
     }
 
     /**
      * Perform an XML-RPC request and return a response.
      *
-     * @param Zend\XmlRpc\Request $request
-     * @param null|Zend\XmlRpc\Response $response
+     * @param \Zend\XmlRpc\Request $request
+     * @param null|\Zend\XmlRpc\Response $response
      * @return void
-     * @throws Zend\XmlRpc\Client\HttpException
+     * @throws \Zend\XmlRpc\Client\Exception\HttpException
      */
     public function doRequest($request, $response = null)
     {
-        $this->_lastRequest = $request;
+        $this->lastRequest = $request;
 
         iconv_set_encoding('input_encoding', 'UTF-8');
         iconv_set_encoding('output_encoding', 'UTF-8');
@@ -223,11 +209,11 @@ class Client implements ServerClient
 
         $http        = $this->getHttpClient();
         $httpRequest = $http->getRequest();
-        if ($httpRequest->getUri() === null) {
-            $http->setUri($this->_serverAddress);
+        if ($httpRequest->getUriString() === null) {
+            $http->setUri($this->serverAddress);
         }
 
-        $headers = $httpRequest->headers();
+        $headers = $httpRequest->getHeaders();
         $headers->addHeaders(array(
             'Content-Type: text/xml; charset=utf-8',
             'Accept: text/xml',
@@ -237,7 +223,7 @@ class Client implements ServerClient
             $headers->addHeaderLine('user-agent', 'Zend_XmlRpc_Client');
         }
 
-        $xml = $this->_lastRequest->__toString();
+        $xml = $this->lastRequest->__toString();
         $http->setRawBody($xml);
         $httpResponse = $http->setMethod('POST')->send();
 
@@ -255,8 +241,8 @@ class Client implements ServerClient
             $response = new Response();
         }
 
-        $this->_lastResponse = $response;
-        $this->_lastResponse->loadXml(trim($httpResponse->getBody()));
+        $this->lastResponse = $response;
+        $this->lastResponse->loadXml(trim($httpResponse->getBody()));
     }
 
     /**
@@ -265,7 +251,7 @@ class Client implements ServerClient
      * @param  string $method Name of the method we want to call
      * @param  array $params Array of parameters for the method
      * @return mixed
-     * @throws Zend\XmlRpc\Client\FaultException
+     * @throws \Zend\XmlRpc\Client\Exception\FaultException
      */
     public function call($method, $params=array())
     {
@@ -280,28 +266,28 @@ class Client implements ServerClient
             }
             if ($success) {
                 $validTypes = array(
-                    Value::XMLRPC_TYPE_ARRAY,
-                    Value::XMLRPC_TYPE_BASE64,
-                    Value::XMLRPC_TYPE_BOOLEAN,
-                    Value::XMLRPC_TYPE_DATETIME,
-                    Value::XMLRPC_TYPE_DOUBLE,
-                    Value::XMLRPC_TYPE_I4,
-                    Value::XMLRPC_TYPE_INTEGER,
-                    Value::XMLRPC_TYPE_NIL,
-                    Value::XMLRPC_TYPE_STRING,
-                    Value::XMLRPC_TYPE_STRUCT,
+                    AbstractValue::XMLRPC_TYPE_ARRAY,
+                    AbstractValue::XMLRPC_TYPE_BASE64,
+                    AbstractValue::XMLRPC_TYPE_BOOLEAN,
+                    AbstractValue::XMLRPC_TYPE_DATETIME,
+                    AbstractValue::XMLRPC_TYPE_DOUBLE,
+                    AbstractValue::XMLRPC_TYPE_I4,
+                    AbstractValue::XMLRPC_TYPE_INTEGER,
+                    AbstractValue::XMLRPC_TYPE_NIL,
+                    AbstractValue::XMLRPC_TYPE_STRING,
+                    AbstractValue::XMLRPC_TYPE_STRUCT,
                 );
 
                 if (!is_array($params)) {
                     $params = array($params);
                 }
                 foreach ($params as $key => $param) {
-                    if ($param instanceof Value) {
+                    if ($param instanceof AbstractValue) {
                         continue;
                     }
 
                     if (count($signatures) > 1) {
-                        $type = Value::getXmlRpcTypeByValue($param);
+                        $type = AbstractValue::getXmlRpcTypeByValue($param);
                         foreach ($signatures as $signature) {
                             if (!is_array($signature)) {
                                 continue;
@@ -319,10 +305,10 @@ class Client implements ServerClient
                     }
 
                     if (empty($type) || !in_array($type, $validTypes)) {
-                        $type = Value::AUTO_DETECT_TYPE;
+                        $type = AbstractValue::AUTO_DETECT_TYPE;
                     }
 
-                    $params[$key] = Value::getXmlRpcValue($param, $type);
+                    $params[$key] = AbstractValue::getXmlRpcValue($param, $type);
                 }
             }
         }
@@ -331,8 +317,8 @@ class Client implements ServerClient
 
         $this->doRequest($request);
 
-        if ($this->_lastResponse->isFault()) {
-            $fault = $this->_lastResponse->getFault();
+        if ($this->lastResponse->isFault()) {
+            $fault = $this->lastResponse->getFault();
             /**
              * Exception thrown when an XML-RPC fault is returned
              */
@@ -342,13 +328,15 @@ class Client implements ServerClient
                 );
         }
 
-        return $this->_lastResponse->getReturnValue();
+        return $this->lastResponse->getReturnValue();
     }
 
     /**
      * Create request object
      *
-     * @return Zend\XmlRpc\Request
+     * @param string $method
+     * @param array $params
+     * @return \Zend\XmlRpc\Request
      */
     protected function _createRequest($method, $params)
     {

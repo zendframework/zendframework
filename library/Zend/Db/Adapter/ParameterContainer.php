@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -15,7 +15,7 @@ namespace Zend\Db\Adapter;
  * @package    Zend_Db
  * @subpackage Adapter
  */
-class ParameterContainer implements \Iterator, \ArrayAccess
+class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
 {
 
     const TYPE_AUTO    = 'auto';
@@ -27,7 +27,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Data
-     * 
+     *
      * @var array
      */
     protected $data = array();
@@ -39,15 +39,15 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Errata
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $errata = array();
 
     /**
      * Constructor
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      */
     public function __construct(array $data = array())
     {
@@ -58,9 +58,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset exists
-     * 
+     *
      * @param  string $name
-     * @return boolean 
+     * @return bool
      */
     public function offsetExists($name)
     {
@@ -69,9 +69,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset get
-     * 
+     *
      * @param  string $name
-     * @return mixed 
+     * @return mixed
      */
     public function offsetGet($name)
     {
@@ -89,10 +89,10 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset set
-     * 
+     *
      * @param string|integer $name
      * @param mixed $value
-     * @param mixed $errata 
+     * @param mixed $errata
      */
     public function offsetSet($name, $value, $errata = null)
     {
@@ -108,9 +108,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset unset
-     * 
+     *
      * @param  string $name
-     * @return ParameterContainer 
+     * @return ParameterContainer
      */
     public function offsetUnset($name)
     {
@@ -123,9 +123,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Set from array
-     * 
+     *
      * @param  array $data
-     * @return ParameterContainer 
+     * @return ParameterContainer
      */
     public function setFromArray(Array $data)
     {
@@ -137,9 +137,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset set errata
-     * 
+     *
      * @param string|integer $name
-     * @param mixed $errata 
+     * @param mixed $errata
      */
     public function offsetSetErrata($name, $errata)
     {
@@ -151,9 +151,10 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset get errata
-     * 
+     *
      * @param  string|integer $name
-     * @return mixed 
+     * @throws Exception\InvalidArgumentException
+     * @return mixed
      */
     public function offsetGetErrata($name)
     {
@@ -168,9 +169,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset has errata
-     * 
+     *
      * @param  string|integer $name
-     * @return boolean 
+     * @return bool
      */
     public function offsetHasErrata($name)
     {
@@ -182,8 +183,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Offset unset errata
-     * 
+     *
      * @param string|integer $name
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetUnsetErrata($name)
     {
@@ -198,8 +200,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Get errata iterator
-     * 
-     * @return \ArrayIterator 
+     *
+     * @return \ArrayIterator
      */
     public function getErrataIterator()
     {
@@ -228,8 +230,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * count
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function count()
     {
@@ -238,8 +240,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Current
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -248,9 +250,9 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Next
-     * 
-     * @return mixed 
-     */    
+     *
+     * @return mixed
+     */
     public function next()
     {
         return next($this->data);
@@ -258,8 +260,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Key
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function key()
     {
@@ -268,8 +270,8 @@ class ParameterContainer implements \Iterator, \ArrayAccess
 
     /**
      * Valid
-     * 
-     * @return boolean 
+     *
+     * @return bool
      */
     public function valid()
     {
@@ -285,12 +287,25 @@ class ParameterContainer implements \Iterator, \ArrayAccess
     }
 
     /**
-     * @param array $array
+     * @param array|ParameterContainer $parameters
+     * @throws Exception\InvalidArgumentException
      * @return ParameterContainer
      */
-    public function merge(array $array)
+    public function merge($parameters)
     {
-        foreach ($array as $key => $value) {
+        if (!is_array($parameters) && !$parameters instanceof ParameterContainer) {
+            throw new Exception\InvalidArgumentException('$parameters must be an array or an instance of ParameterContainer');
+        }
+
+        if (count($parameters) == 0) {
+            return $this;
+        }
+
+        if ($parameters instanceof ParameterContainer) {
+            $parameters = $parameters->getNamedArray();
+        }
+
+        foreach ($parameters as $key => $value) {
             if (is_int($key)) {
                 $key = null;
             }

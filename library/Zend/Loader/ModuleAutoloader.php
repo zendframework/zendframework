@@ -1,13 +1,21 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Loader
+ */
 
 namespace Zend\Loader;
 
 // Grab SplAutoloader interface
 require_once __DIR__ . '/SplAutoloader.php';
 
-use GlobIterator,
-    SplFileInfo,
-    Traversable;
+use GlobIterator;
+use SplFileInfo;
+use Traversable;
 
 class ModuleAutoloader implements SplAutoloader
 {
@@ -20,6 +28,11 @@ class ModuleAutoloader implements SplAutoloader
      * @var array An array of modulename => path
      */
     protected $explicitPaths = array();
+
+    /**
+     * @var array An array of namespaceName => namespacePath
+     */
+    protected $namespacedPaths = array();
 
     /**
      * @var array An array of supported phar extensions (filled on constructor)
@@ -37,7 +50,6 @@ class ModuleAutoloader implements SplAutoloader
      * Allow configuration of the autoloader via the constructor.
      *
      * @param  null|array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -78,7 +90,7 @@ class ModuleAutoloader implements SplAutoloader
      * Traversable object.
      *
      * @param  array|Traversable $options
-     * @return SplAutoloader
+     * @return ModuleAutoloader
      */
     public function setOptions($options)
     {
@@ -113,6 +125,28 @@ class ModuleAutoloader implements SplAutoloader
                 return $classLoaded;
             }
         }
+
+        if (count($this->namespacedPaths) >= 1 ) {
+            foreach ( $this->namespacedPaths as $namespace=>$path ) {
+                if ( false === strpos($moduleName,$namespace) ) {
+                    continue;
+                }
+
+                $moduleNameBuffer = str_replace($namespace . "\\", "", $moduleName );
+                $path .= DIRECTORY_SEPARATOR . $moduleNameBuffer . DIRECTORY_SEPARATOR;
+
+                $classLoaded = $this->loadModuleFromDir($path, $class);
+                if ($classLoaded) {
+                    return $classLoaded;
+                }
+
+                $classLoaded = $this->loadModuleFromPhar($path, $class);
+                if ($classLoaded) {
+                    return $classLoaded;
+                }
+            }
+        }
+
 
         $moduleClassPath   = str_replace('\\', DIRECTORY_SEPARATOR, $moduleName);
 
@@ -154,8 +188,8 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * loadModuleFromDir
      *
-     * @param string $dirPath
-     * @param string $class
+     * @param  string $dirPath
+     * @param  string $class
      * @return  mixed
      *          False [if unable to load $class]
      *          get_class($class) [if $class is successfully loaded]
@@ -177,8 +211,8 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * loadModuleFromPhar
      *
-     * @param string $pharPath
-     * @param string $class
+     * @param  string $pharPath
+     * @param  string $class
      * @return  mixed
      *          False [if unable to load $class]
      *          get_class($class) [if $class is successfully loaded]
@@ -248,14 +282,15 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function unregister()
     {
-        $test = spl_autoload_unregister(array($this, 'autoload'));
+        spl_autoload_unregister(array($this, 'autoload'));
     }
 
     /**
      * registerPaths
      *
-     * @param array|Traversable $paths
-     * @return ModuleLoader
+     * @param  array|Traversable $paths
+     * @throws \InvalidArgumentException
+     * @return ModuleAutoloader
      */
     public function registerPaths($paths)
     {
@@ -281,9 +316,10 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * registerPath
      *
-     * @param string $path
-     * @param string $moduleName
-     * @return ModuleLoader
+     * @param  string $path
+     * @param  bool|string $moduleName
+     * @throws \InvalidArgumentException
+     * @return ModuleAutoloader
      */
     public function registerPath($path, $moduleName = false)
     {
@@ -294,7 +330,11 @@ class ModuleAutoloader implements SplAutoloader
             ));
         }
         if ($moduleName) {
-            $this->explicitPaths[$moduleName] = static::normalizePath($path);
+            if (in_array( substr($moduleName, -2 ), array('\\*','\\%') ) ) {
+                $this->namespacedPaths[ substr($moduleName, 0, -2 ) ] = static::normalizePath($path);
+            } else {
+                $this->explicitPaths[$moduleName] = static::normalizePath($path);
+            }
         } else {
             $this->paths[] = static::normalizePath($path);
         }
@@ -316,7 +356,7 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * Returns the base module name from the path to a phar
      *
-     * @param string $pharPath
+     * @param  string $pharPath
      * @return string
      */
     protected function pharFileToModuleName($pharPath)
@@ -332,6 +372,7 @@ class ModuleAutoloader implements SplAutoloader
      * Normalize a path for insertion in the stack
      *
      * @param  string $path
+     * @param  bool   $trailingSlash Whether trailing slash should be included
      * @return string
      */
     public static function normalizePath($path, $trailingSlash = true)

@@ -1,30 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class StringLength extends AbstractValidator
 {
@@ -35,16 +23,16 @@ class StringLength extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID   => "Invalid type given. String expected",
-        self::TOO_SHORT => "'%value%' is less than %min% characters long",
-        self::TOO_LONG  => "'%value%' is more than %max% characters long",
+        self::TOO_SHORT => "The input is less than %min% characters long",
+        self::TOO_LONG  => "The input is more than %max% characters long",
     );
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'min' => array('options' => 'min'),
         'max' => array('options' => 'max'),
     );
@@ -93,8 +81,8 @@ class StringLength extends AbstractValidator
      * Sets the min option
      *
      * @param  integer $min
-     * @throws \Zend\Validator\Exception
-     * @return \Zend\Validator\StringLength Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
+     * @return StringLength Provides a fluent interface
      */
     public function setMin($min)
     {
@@ -121,14 +109,14 @@ class StringLength extends AbstractValidator
      * Sets the max option
      *
      * @param  integer|null $max
-     * @throws \Zend\Validator\Exception
-     * @return \Zend\Validator\StringLength Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
+     * @return StringLength Provides a fluent interface
      */
     public function setMax($max)
     {
         if (null === $max) {
             $this->options['max'] = null;
-        } else if ($max < $this->getMin()) {
+        } elseif ($max < $this->getMin()) {
             throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum length, but "
                                             . "$max < " . $this->getMin());
         } else {
@@ -152,7 +140,8 @@ class StringLength extends AbstractValidator
      * Sets a new encoding to use
      *
      * @param string $encoding
-     * @return \Zend\Validator\StringLength
+     * @return StringLength
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncoding($encoding = null)
     {
@@ -175,7 +164,7 @@ class StringLength extends AbstractValidator
      * no greater than the max option (when the max option is not null).
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -201,8 +190,8 @@ class StringLength extends AbstractValidator
 
         if (count($this->getMessages())) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 }

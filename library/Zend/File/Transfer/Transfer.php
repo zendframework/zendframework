@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_File
  */
 
 namespace Zend\File\Transfer;
@@ -25,8 +15,6 @@ namespace Zend\File\Transfer;
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Transfer
 {
@@ -41,7 +29,7 @@ class Transfer
      * Creates a file processing handler
      *
      * @param  string  $adapter   Adapter to use
-     * @param  boolean $direction OPTIONAL False means Download, true means upload
+     * @param  bool $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
      * @throws Exception\InvalidArgumentException
      */
@@ -54,7 +42,7 @@ class Transfer
      * Sets a new adapter
      *
      * @param  string  $adapter   Adapter to use
-     * @param  boolean $direction OPTIONAL False means Download, true means upload
+     * @param  bool $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
      * @return Transfer
      * @throws Exception\InvalidArgumentException
@@ -64,7 +52,7 @@ class Transfer
         if (!is_string($adapter)) {
             throw new Exception\InvalidArgumentException('Adapter must be a string');
         }
-        
+
         if ($adapter[0] != '\\') {
             $adapter = '\Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
         }
@@ -83,7 +71,7 @@ class Transfer
     /**
      * Returns all set adapters
      *
-     * @param boolean $direction On null, all directions are returned
+     * @param  bool $direction On null, all directions are returned
      *                           On false, download direction is returned
      *                           On true, upload direction is returned
      * @return array|Adapter\AbstractAdapter
@@ -103,6 +91,7 @@ class Transfer
      *
      * @param  string $method  Method to call
      * @param  array  $options Options for this method
+     * @throws Exception\BadMethodCallException if unknown method
      * @return mixed
      */
     public function __call($method, array $options)

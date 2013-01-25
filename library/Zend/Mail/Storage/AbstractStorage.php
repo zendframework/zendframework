@@ -1,44 +1,34 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage;
 
-use ArrayAccess,
-    Countable,
-    SeekableIterator;
+use ArrayAccess;
+use Countable;
+use SeekableIterator;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterator
+abstract class AbstractStorage implements
+    ArrayAccess,
+    Countable,
+    SeekableIterator
 {
     /**
      * class capabilities with default values
      * @var array
      */
-    protected $_has = array('uniqueid'  => true,
+    protected $has = array('uniqueid'  => true,
                             'delete'    => false,
                             'create'    => false,
                             'top'       => false,
@@ -49,19 +39,19 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      * current iteration position
      * @var int
      */
-    protected $_iterationPos = 0;
+    protected $iterationPos = 0;
 
     /**
      * maximum iteration position (= message count)
      * @var null|int
      */
-    protected $_iterationMax = null;
+    protected $iterationMax = null;
 
     /**
      * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = 'Zend\Mail\Storage\Message';
+    protected $messageClass = 'Zend\Mail\Storage\Message';
 
     /**
      * Getter for has-properties. The standard has properties
@@ -80,7 +70,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
     {
         if (strpos($var, 'has') === 0) {
             $var = strtolower(substr($var, 3));
-            return isset($this->_has[$var]) ? $this->_has[$var] : null;
+            return isset($this->has[$var]) ? $this->has[$var] : null;
         }
 
         throw new Exception\InvalidArgumentException($var . ' not found');
@@ -94,7 +84,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      */
     public function getCapabilities()
     {
-        return $this->_has;
+        return $this->has;
     }
 
 
@@ -229,7 +219,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
             if ($this->getMessage($id)) {
                 return true;
             }
-        } catch(Exception\ExceptionInterface $e) {}
+        } catch (Exception\ExceptionInterface $e) {}
 
         return false;
      }
@@ -281,8 +271,8 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       */
      public function rewind()
      {
-        $this->_iterationMax = $this->countMessages();
-        $this->_iterationPos = 1;
+        $this->iterationMax = $this->countMessages();
+        $this->iterationPos = 1;
      }
 
 
@@ -293,7 +283,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       */
      public function current()
      {
-        return $this->getMessage($this->_iterationPos);
+        return $this->getMessage($this->iterationPos);
      }
 
 
@@ -304,7 +294,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       */
      public function key()
      {
-        return $this->_iterationPos;
+        return $this->iterationPos;
      }
 
 
@@ -313,21 +303,21 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       */
      public function next()
      {
-        ++$this->_iterationPos;
+        ++$this->iterationPos;
      }
 
 
      /**
       * Iterator::valid()
       *
-      * @return boolean
+      * @return bool
       */
      public function valid()
      {
-        if ($this->_iterationMax === null) {
-          $this->_iterationMax = $this->countMessages();
+        if ($this->iterationMax === null) {
+          $this->iterationMax = $this->countMessages();
         }
-        return $this->_iterationPos && $this->_iterationPos <= $this->_iterationMax;
+        return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
      }
 
 
@@ -339,14 +329,13 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       */
      public function seek($pos)
      {
-        if ($this->_iterationMax === null) {
-          $this->_iterationMax = $this->countMessages();
+        if ($this->iterationMax === null) {
+          $this->iterationMax = $this->countMessages();
         }
 
-        if ($pos > $this->_iterationMax) {
+        if ($pos > $this->iterationMax) {
             throw new Exception\OutOfBoundsException('this position does not exist');
         }
-        $this->_iterationPos = $pos;
+        $this->iterationPos = $pos;
      }
-
 }

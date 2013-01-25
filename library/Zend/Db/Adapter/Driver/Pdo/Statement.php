@@ -3,16 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -40,13 +40,13 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean 
+     * @var bool
      */
     protected $isQuery = null;
 
     /**
      *
-     * @var ParameterContainer 
+     * @var ParameterContainer
      */
     protected $parameterContainer = null;
 
@@ -62,15 +62,15 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isPrepared = false;
 
     /**
      * Set driver
-     * 
+     *
      * @param  Pdo $driver
-     * @return Statement 
+     * @return Statement
      */
     public function setDriver(Pdo $driver)
     {
@@ -80,9 +80,9 @@ class Statement implements StatementInterface
 
     /**
      * Initialize
-     * 
+     *
      * @param  \PDO $connectionResource
-     * @return Statement 
+     * @return Statement
      */
     public function initialize(\PDO $connectionResource)
     {
@@ -92,9 +92,9 @@ class Statement implements StatementInterface
 
     /**
      * Set resource
-     * 
+     *
      * @param  \PDOStatement $pdoStatement
-     * @return Statement 
+     * @return Statement
      */
     public function setResource(\PDOStatement $pdoStatement)
     {
@@ -104,8 +104,8 @@ class Statement implements StatementInterface
 
     /**
      * Get resource
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function getResource()
     {
@@ -114,8 +114,9 @@ class Statement implements StatementInterface
 
     /**
      * Set sql
-     * 
+     *
      * @param string $sql
+     * @return Statement
      */
     public function setSql($sql)
     {
@@ -125,8 +126,8 @@ class Statement implements StatementInterface
 
     /**
      * Get sql
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getSql()
     {
@@ -135,6 +136,7 @@ class Statement implements StatementInterface
 
     /**
      * @param ParameterContainer $parameterContainer
+     * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
@@ -152,6 +154,7 @@ class Statement implements StatementInterface
 
     /**
      * @param string $sql
+     * @throws Exception\RuntimeException
      */
     public function prepare($sql = null)
     {
@@ -183,6 +186,7 @@ class Statement implements StatementInterface
 
     /**
      * @param mixed $parameters
+     * @throws Exception\InvalidQueryException
      * @return Result
      */
     public function execute($parameters = null)
@@ -222,8 +226,6 @@ class Statement implements StatementInterface
 
     /**
      * Bind parameters from container
-     * 
-     * @param ParameterContainer $container
      */
     protected function bindParametersFromContainer()
     {
@@ -272,5 +274,4 @@ class Statement implements StatementInterface
         }
 
     }
-
 }

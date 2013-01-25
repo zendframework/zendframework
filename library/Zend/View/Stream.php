@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View;
@@ -35,8 +25,6 @@ namespace Zend\View;
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Stream
 {
@@ -45,21 +33,21 @@ class Stream
      *
      * @var int
      */
-    protected $_pos = 0;
+    protected $pos = 0;
 
     /**
      * Data for streaming.
      *
      * @var string
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Stream stats.
      *
      * @var array
      */
-    protected $_stat;
+    protected $stat;
 
     /**
      * Opens the script file and converts markup.
@@ -68,30 +56,30 @@ class Stream
     {
         // get the view script source
         $path        = str_replace('zend.view://', '', $path);
-        $this->_data = file_get_contents($path);
+        $this->data = file_get_contents($path);
 
         /**
          * If reading the file failed, update our local stat store
          * to reflect the real stat of the file, then return on failure
          */
-        if ($this->_data === false) {
-            $this->_stat = stat($path);
+        if ($this->data === false) {
+            $this->stat = stat($path);
             return false;
         }
 
         /**
-         * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
+         * Convert <?= ?> to long-form <?php echo ?> and <?php ?> to <?php ?>
          *
          */
-        $this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);
-        $this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->_data);
+        $this->data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->data);
+        $this->data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->data);
 
         /**
          * file_get_contents() won't update PHP's stat cache, so we grab a stat
          * of the file to prevent additional reads should the script be
          * requested again, which will make include() happy.
          */
-        $this->_stat = stat($path);
+        $this->stat = stat($path);
 
         return true;
     }
@@ -103,7 +91,7 @@ class Stream
      */
     public function url_stat()
     {
-        return $this->_stat;
+        return $this->stat;
     }
 
     /**
@@ -111,8 +99,8 @@ class Stream
      */
     public function stream_read($count)
     {
-        $ret = substr($this->_data, $this->_pos, $count);
-        $this->_pos += strlen($ret);
+        $ret = substr($this->data, $this->pos, $count);
+        $this->pos += strlen($ret);
         return $ret;
     }
 
@@ -122,7 +110,7 @@ class Stream
      */
     public function stream_tell()
     {
-        return $this->_pos;
+        return $this->pos;
     }
 
 
@@ -131,7 +119,7 @@ class Stream
      */
     public function stream_eof()
     {
-        return $this->_pos >= strlen($this->_data);
+        return $this->pos >= strlen($this->data);
     }
 
 
@@ -140,7 +128,7 @@ class Stream
      */
     public function stream_stat()
     {
-        return $this->_stat;
+        return $this->stat;
     }
 
 
@@ -151,8 +139,8 @@ class Stream
     {
         switch ($whence) {
             case SEEK_SET:
-                if ($offset < strlen($this->_data) && $offset >= 0) {
-                $this->_pos = $offset;
+                if ($offset < strlen($this->data) && $offset >= 0) {
+                $this->pos = $offset;
                     return true;
                 } else {
                     return false;
@@ -161,7 +149,7 @@ class Stream
 
             case SEEK_CUR:
                 if ($offset >= 0) {
-                    $this->_pos += $offset;
+                    $this->pos += $offset;
                     return true;
                 } else {
                     return false;
@@ -169,8 +157,8 @@ class Stream
                 break;
 
             case SEEK_END:
-                if (strlen($this->_data) + $offset >= 0) {
-                    $this->_pos = strlen($this->_data) + $offset;
+                if (strlen($this->data) + $offset >= 0) {
+                    $this->pos = strlen($this->data) + $offset;
                     return true;
                 } else {
                     return false;

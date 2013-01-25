@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
@@ -16,9 +24,23 @@ class DerivedClassScanner extends ClassScanner
      * @var ClassScanner
      */
     protected $classScanner = null;
+
+    /**
+     * @var array
+     */
     protected $parentClassScanners = array();
+
+    /**
+     * @var array
+     */
     protected $interfaceClassScanners = array();
 
+    /**
+     * Constructor
+     *
+     * @param ClassScanner $classScanner
+     * @param DirectoryScanner $directoryScanner
+     */
     public function __construct(ClassScanner $classScanner, DirectoryScanner $directoryScanner)
     {
         $this->classScanner     = $classScanner;
@@ -44,51 +66,102 @@ class DerivedClassScanner extends ClassScanner
         }
     }
 
+    /**
+     * Get name
+     *
+     * @return null|string
+     */
     public function getName()
     {
         return $this->classScanner->getName();
     }
 
+    /**
+     * Get short name
+     *
+     * @return null|string
+     */
     public function getShortName()
     {
         return $this->classScanner->getShortName();
     }
 
+    /**
+     * Check if instantiable
+     *
+     * @return bool
+     */
     public function isInstantiable()
     {
         return $this->classScanner->isInstantiable();
     }
 
+    /**
+     * Check if final
+     *
+     * @return bool
+     */
     public function isFinal()
     {
         return $this->classScanner->isFinal();
     }
 
+    /**
+     * Check if is abstract
+     *
+     * @return bool
+     */
     public function isAbstract()
     {
         return $this->classScanner->isAbstract();
     }
 
+    /**
+     * Check if is interface
+     *
+     * @return bool
+     */
     public function isInterface()
     {
         return $this->classScanner->isInterface();
     }
 
+    /**
+     * Get parent classes
+     *
+     * @return array
+     */
     public function getParentClasses()
     {
         return array_keys($this->parentClassScanners);
     }
 
+    /**
+     * Check for parent class
+     *
+     * @return bool
+     */
     public function hasParentClass()
     {
         return ($this->classScanner->getParentClass() != null);
     }
 
+    /**
+     * Get parent class
+     *
+     * @return null|string
+     */
     public function getParentClass()
     {
         return $this->classScanner->getParentClass();
     }
 
+    /**
+     * Get interfaces
+     *
+     * @param bool $returnClassScanners
+     * @return array
+     */
     public function getInterfaces($returnClassScanners = false)
     {
         if ($returnClassScanners) {
@@ -102,6 +175,11 @@ class DerivedClassScanner extends ClassScanner
         return $interfaces;
     }
 
+    /**
+     * Get constants
+     *
+     * @return array
+     */
     public function getConstants()
     {
         $constants = $this->classScanner->getConstants();
@@ -111,6 +189,12 @@ class DerivedClassScanner extends ClassScanner
         return $constants;
     }
 
+    /**
+     * Get properties
+     *
+     * @param bool $returnScannerProperty
+     * @return array
+     */
     public function getProperties($returnScannerProperty = false)
     {
         $properties = $this->classScanner->getProperties($returnScannerProperty);
@@ -120,6 +204,11 @@ class DerivedClassScanner extends ClassScanner
         return $properties;
     }
 
+    /**
+     * Get method names
+     *
+     * @return array
+     */
     public function getMethodNames()
     {
         $methods = $this->classScanner->getMethodNames();
@@ -130,6 +219,8 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
+     * Get methods
+     *
      * @return MethodScanner[]
      */
     public function getMethods()
@@ -141,6 +232,13 @@ class DerivedClassScanner extends ClassScanner
         return $methods;
     }
 
+    /**
+     * Get method
+     *
+     * @param int|string $methodNameOrInfoIndex
+     * @return MethodScanner
+     * @throws Exception\InvalidArgumentException
+     */
     public function getMethod($methodNameOrInfoIndex)
     {
         if ($this->classScanner->hasMethod($methodNameOrInfoIndex)) {
@@ -158,6 +256,12 @@ class DerivedClassScanner extends ClassScanner
                                                      ));
     }
 
+    /**
+     * Check for method
+     *
+     * @param string $name
+     * @return bool
+     */
     public function hasMethod($name)
     {
         if ($this->classScanner->hasMethod($name)) {
@@ -170,5 +274,4 @@ class DerivedClassScanner extends ClassScanner
         }
         return false;
     }
-
 }

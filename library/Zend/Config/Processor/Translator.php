@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config\Processor;
 
-use Zend\Config\Config,
-    Zend\Config\Exception\InvalidArgumentException,
-    Zend\Translator\Translator as ZendTranslator,
-    Zend\Locale\Locale,
-    Traversable,
-    ArrayObject;
+use Zend\Config\Config;
+use Zend\Config\Exception;
+use Zend\I18n\Translator\Translator as ZendTranslator;
 
 /**
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Processor
  */
 class Translator implements ProcessorInterface
 {
@@ -41,22 +27,38 @@ class Translator implements ProcessorInterface
     protected $translator;
 
     /**
-     * @var Locale|string|null
+     * @var string|null
      */
     protected $locale = null;
 
     /**
-     * Translator uses the supplied Zend\Translator\Translator to find and
-     * translate language strings in config.
+     * @var string
+     */
+    protected $textDomain = 'default';
+
+    /**
+     * Translator uses the supplied Zend\I18n\Translator\Translator to find
+     * and translate language strings in config.
      *
      * @param  ZendTranslator $translator
-     * @param  Locale|string|null $locale
-     * @return ZendTranslator
+     * @param  string $textDomain
+     * @param  string|null $locale
      */
-    public function __construct(ZendTranslator $translator, $locale = null)
+    public function __construct(ZendTranslator $translator, $textDomain = 'default', $locale = null)
     {
         $this->setTranslator($translator);
+        $this->setTextDomain($textDomain);
         $this->setLocale($locale);
+    }
+
+    /**
+     * @param  ZendTranslator $translator
+     * @return Translator
+     */
+    public function setTranslator(ZendTranslator $translator)
+    {
+        $this->translator = $translator;
+        return $this;
     }
 
     /**
@@ -68,15 +70,17 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @param ZendTranslator $translator
+     * @param  string|null $locale
+     * @return Translator
      */
-    public function setTranslator(ZendTranslator $translator)
+    public function setLocale($locale)
     {
-        $this->translator = $translator;
+        $this->locale = $locale;
+        return $this;
     }
 
     /**
-     * @return Locale|string|null
+     * @return string|null
      */
     public function getLocale()
     {
@@ -84,24 +88,34 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @param Locale|string|null $locale
+     * @param  string $textDomain
+     * @return Translator
      */
-    public function setLocale($locale)
+    public function setTextDomain($textDomain)
     {
-        $this->locale = $locale;
+        $this->textDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextDomain()
+    {
+        return $this->textDomain;
     }
 
     /**
      * Process
      *
-     * @param Config $config
+     * @param  Config $config
      * @return Config
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
-            throw new InvalidArgumentException('Cannot parse config because it is read-only');
+            throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
         }
 
         /**
@@ -111,7 +125,7 @@ class Translator implements ProcessorInterface
             if ($val instanceof Config) {
                 $this->process($val);
             } else {
-                $config->$key = $this->translator->translate($val, $this->locale);
+                $config->{$key} = $this->translator->translate($val, $this->textDomain, $this->locale);
             }
         }
 
@@ -126,7 +140,6 @@ class Translator implements ProcessorInterface
      */
     public function processValue($value)
     {
-        return $this->translator->translate($value, $this->locale);
+        return $this->translator->translate($value, $this->textDomain, $this->locale);
     }
-
 }

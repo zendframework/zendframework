@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<author xmlns="http://www.w3.org/2005/Atom">
-   <name xmlns="http://www.w3.org/2005/Atom">John Doe</name>
-   <email xmlns="http://www.w3.org/2005/Atom">johndoes@someemailadress.com</email>
-   <uri xmlns="http://www.w3.org/2005/Atom">http://www.google.com</uri>
-</author>

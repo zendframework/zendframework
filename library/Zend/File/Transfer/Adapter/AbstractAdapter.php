@@ -1,33 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_File
  */
 
 namespace Zend\File\Transfer\Adapter;
 
-use Zend\File\Transfer,
-    Zend\File\Transfer\Exception,
-    Zend\Filter,
-    Zend\Filter\Exception as FilterException,
-    Zend\Loader,
-    Zend\Translator,
-    Zend\Translator\Adapter as AdapterTranslator,
-    Zend\Validator;
+use ErrorException;
+use Zend\File\Transfer;
+use Zend\File\Transfer\Exception;
+use Zend\Filter;
+use Zend\Filter\Exception as FilterException;
+use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\Stdlib\ErrorHandler;
+use Zend\Validator;
 
 /**
  * Abstract class for file transfers (Downloads and Uploads)
@@ -41,10 +32,8 @@ use Zend\File\Transfer,
  * @todo      Rewrite
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter
+abstract class AbstractAdapter implements TranslatorAwareInterface
 {
     /**@+
      * Plugin loader Constants
@@ -59,6 +48,11 @@ abstract class AbstractAdapter
      * @var array
      */
     protected $break = array();
+
+    /**
+     * @var FilterPluginManager
+     */
+    protected $filterManager;
 
     /**
      * Internal list of filters
@@ -82,16 +76,28 @@ abstract class AbstractAdapter
     protected $messages = array();
 
     /**
-     * @var AdapterTranslator\AbstractAdapter
+     * @var Translator
      */
     protected $translator;
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @var bool
      */
-    protected $translatorDisabled = false;
+    protected $translatorEnabled = true;
+
+    /**
+     * Translator text domain (optional)
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
+
+    /**
+     * @var ValidatorPluginManager
+     */
+    protected $validatorManager;
 
     /**
      * Internal list of validators
@@ -107,7 +113,7 @@ abstract class AbstractAdapter
      *         type,            - Mime type of this file
      *         size,            - Filesize in bytes
      *         tmp_name,        - Internally temporary filename for uploaded files
-     *         error,           - Error which has occured
+     *         error,           - Error which has occurred
      *         destination,     - New destination for this file
      *         validators,      - Set validator names for this file
      *         files            - Set file names for this file
@@ -176,7 +182,7 @@ abstract class AbstractAdapter
     /**
      * Has the file been filtered ?
      *
-     * @param array|string|null $files
+     * @param  array|string|null $files
      * @return bool
      */
     abstract public function isFiltered($files = null);
@@ -219,162 +225,60 @@ abstract class AbstractAdapter
     //abstract public function getFile();
 
     /**
-     * Set plugin loader to use for validator or filter chain
+     * Set the filter plugin manager instance
      *
-     * @param  Loader\ShortNameLocator $loader
-     * @param  string                  $type 'filter', or 'validator'
-     * @return AbstractAdapter
-     * @throws Exception\InvalidArgumentException on invalid type
-     */
-    public function setPluginLoader(Loader\ShortNameLocator $loader, $type)
-    {
-        $type = strtoupper($type);
-        switch ($type) {
-            case self::FILTER:
-            case self::VALIDATOR:
-                $this->loaders[$type] = $loader;
-                return $this;
-            default:
-                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
-        }
-    }
-
-    /**
-     * Retrieve plugin loader for validator or filter chain
-     *
-     * Instantiates with default rules if none available for that type. Use
-     * 'filter' or 'validator' for $type.
-     *
-     * @param  string $type
-     * @return Loader\ShortNameLocator
-     * @throws Exception\InvalidArgumentException on invalid type.
-     */
-    public function getPluginLoader($type)
-    {
-        $type = strtoupper($type);
-        switch ($type) {
-            case self::FILTER:
-            case self::VALIDATOR:
-                $prefixSegment = ucfirst(strtolower($type));
-                $pathSegment   = $prefixSegment;
-                if (!isset($this->loaders[$type])) {
-                    $paths         = array(
-                        'Zend\\' . $prefixSegment . '\\'    => 'Zend/' . $pathSegment . '/',
-                        'Zend\\' . $prefixSegment . '\File' => 'Zend/' . $pathSegment . '/File',
-                    );
-
-                    $this->loaders[$type] = new Loader\PrefixPathLoader($paths);
-                } else {
-                    $loader = $this->loaders[$type];
-                    if ($loader instanceof Loader\PrefixPathMapper) {
-                        $prefix = 'Zend\\' . $prefixSegment . '\File\\';
-                        if (!$loader->getPaths($prefix)) {
-                            $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
-                        }
-                    }
-                }
-
-                return $this->loaders[$type];
-            default:
-                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
-        }
-    }
-
-    /**
-     * Add prefix path for plugin loader
-     *
-     * If no $type specified, assumes it is a base path for both filters and
-     * validators, and sets each according to the following rules:
-     * - filters:    $prefix = $prefix . '_Filter'
-     * - validators: $prefix = $prefix . '_Validator'
-     *
-     * Otherwise, the path prefix is set on the appropriate plugin loader.
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @param  string $type
-     * @return AbstractAdapter
-     * @throws Exception\InvalidArgumentException for invalid type
-     */
-    public function addPrefixPath($prefix, $path, $type = null)
-    {
-        $type = (null === $type) ? null : strtoupper($type);
-        switch ($type) {
-            case self::FILTER:
-            case self::VALIDATOR:
-                $loader = $this->getPluginLoader($type);
-                if ($loader instanceof Loader\PrefixPathMapper) {
-                    $loader->addPrefixPath($prefix, $path);
-                }
-
-                return $this;
-            case null:
-                $prefix = rtrim($prefix, '\\');
-                $path   = rtrim($path, DIRECTORY_SEPARATOR);
-                foreach (array(self::FILTER, self::VALIDATOR) as $type) {
-                    $loader       = $this->getPluginLoader($type);
-                    if ($loader instanceof Loader\PrefixPathMapper) {
-                        $cType        = ucfirst(strtolower($type));
-                        $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
-                        $pluginPrefix = $prefix . '\\' . $cType;
-                        $loader->addPrefixPath($pluginPrefix, $pluginPath);
-                    }
-                }
-
-                return $this;
-            default:
-                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
-        }
-    }
-
-    /**
-     * Add many prefix paths at once
-     *
-     * @param  array $spec
+     * @param  FilterPluginManager $filterManager
      * @return AbstractAdapter
      */
-    public function addPrefixPaths(array $spec)
+    public function setFilterManager(FilterPluginManager $filterManager)
     {
-        if (isset($spec['prefix']) && isset($spec['path'])) {
-            return $this->addPrefixPath($spec['prefix'], $spec['path']);
-        }
-        foreach ($spec as $type => $paths) {
-            if (is_numeric($type) && is_array($paths)) {
-                $type = null;
-                if (isset($paths['prefix']) && isset($paths['path'])) {
-                    if (isset($paths['type'])) {
-                        $type = $paths['type'];
-                    }
-                    $this->addPrefixPath($paths['prefix'], $paths['path'], $type);
-                }
-            } elseif (!is_numeric($type)) {
-                if (!isset($paths['prefix']) || !isset($paths['path'])) {
-                    foreach ($paths as $prefix => $spec) {
-                        if (is_array($spec)) {
-                            foreach ($spec as $path) {
-                                if (!is_string($path)) {
-                                    continue;
-                                }
-                                $this->addPrefixPath($prefix, $path, $type);
-                            }
-                        } elseif (is_string($spec)) {
-                            $this->addPrefixPath($prefix, $spec, $type);
-                        }
-                    }
-                } else {
-                    $this->addPrefixPath($paths['prefix'], $paths['path'], $type);
-                }
-            }
-        }
-
+        $this->filterManager = $filterManager;
         return $this;
+    }
+
+    /**
+     * Get the filter plugin manager instance
+     *
+     * @return FilterPluginManager
+     */
+    public function getFilterManager()
+    {
+        if (!$this->filterManager instanceof FilterPluginManager) {
+            $this->setFilterManager(new FilterPluginManager());
+        }
+        return $this->filterManager;
+    }
+
+    /**
+     * Set the validator plugin manager instance
+     *
+     * @param  ValidatorPluginManager $validatorManager
+     * @return AbstractAdapter
+     */
+    public function setValidatorManager(ValidatorPluginManager $validatorManager)
+    {
+        $this->validatorManager = $validatorManager;
+        return $this;
+    }
+
+    /**
+     * Get the validator plugin manager instance
+     *
+     * @return ValidatorPluginManager
+     */
+    public function getValidatorManager()
+    {
+        if (!$this->validatorManager instanceof ValidatorPluginManager) {
+            $this->setValidatorManager(new ValidatorPluginManager());
+        }
+        return $this->validatorManager;
     }
 
     /**
      * Adds a new validator for this class
      *
      * @param  string|Validator\ValidatorInterface $validator           Type of validator to add
-     * @param  boolean                    $breakChainOnFailure If the validation chain should stop an failure
+     * @param  bool                    $breakChainOnFailure If the validation chain should stop an failure
      * @param  string|array               $options             Options to set for the validator
      * @param  string|array               $files               Files to limit this validator to
      * @return AbstractAdapter
@@ -382,11 +286,8 @@ abstract class AbstractAdapter
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = null, $files = null)
     {
-        if ($validator instanceof Validator\ValidatorInterface) {
-            $name = get_class($validator);
-        } elseif (is_string($validator)) {
-            $name      = $this->getPluginLoader(self::VALIDATOR)->load($validator);
-            $validator = new $name($options);
+        if (is_string($validator)) {
+            $validator = $this->getValidatorManager()->get($validator, $options);
             if (is_array($options) && isset($options['messages'])) {
                 if (is_array($options['messages'])) {
                     $validator->setMessages($options['messages']);
@@ -396,9 +297,16 @@ abstract class AbstractAdapter
 
                 unset($options['messages']);
             }
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\ValidatorInterface');
         }
+
+        if (!$validator instanceof Validator\ValidatorInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid validator provided to addValidator; ' .
+                'must be string or Zend\Validator\ValidatorInterface'
+            );
+        }
+
+        $name = get_class($validator);
 
         $this->validators[$name] = $validator;
         $this->break[$name]      = $breakChainOnFailure;
@@ -431,13 +339,13 @@ abstract class AbstractAdapter
         foreach ($validators as $name => $validatorInfo) {
             if ($validatorInfo instanceof Validator\ValidatorInterface) {
                 $this->addValidator($validatorInfo, null, null, $files);
-            } else if (is_string($validatorInfo)) {
+            } elseif (is_string($validatorInfo)) {
                 if (!is_int($name)) {
                     $this->addValidator($name, null, $validatorInfo, $files);
                 } else {
                     $this->addValidator($validatorInfo, null, null, $files);
                 }
-            } else if (is_array($validatorInfo)) {
+            } elseif (is_array($validatorInfo)) {
                 $argc                = count($validatorInfo);
                 $breakChainOnFailure = false;
                 $options             = array();
@@ -604,8 +512,10 @@ abstract class AbstractAdapter
      *
      * @param array $options Options to set
      * @param array $files   (Optional) Files to set the options for
+     * @return AbstractAdapter
      */
-    public function setOptions($options = array(), $files = null) {
+    public function setOptions($options = array(), $files = null)
+    {
         $file = $this->getFiles($files, false, true);
 
         if (is_array($options)) {
@@ -623,7 +533,7 @@ abstract class AbstractAdapter
                         case 'ignoreNoFile' :
                         case 'useByteString' :
                         case 'detectInfos' :
-                            $this->files[$key]['options'][$name] = (boolean) $value;
+                            $this->files[$key]['options'][$name] = (bool) $value;
                             break;
 
                         default:
@@ -642,7 +552,8 @@ abstract class AbstractAdapter
      * @param  array $files (Optional) Files to return the options for
      * @return array Options for given files
      */
-    public function getOptions($files = null) {
+    public function getOptions($files = null)
+    {
         $file = $this->getFiles($files, false, true);
 
         foreach ($file as $key => $content) {
@@ -660,7 +571,7 @@ abstract class AbstractAdapter
      * Checks if the files are valid
      *
      * @param  string|array $files (Optional) Files to check
-     * @return boolean True if all checks are valid
+     * @return bool True if all checks are valid
      */
     public function isValid($files = null)
     {
@@ -672,7 +583,7 @@ abstract class AbstractAdapter
         $translator      = $this->getTranslator();
         $this->messages = array();
         $break           = false;
-        foreach($check as $key => $content) {
+        foreach ($check as $content) {
             if (array_key_exists('validators', $content) &&
                 in_array('Zend\Validator\File\Count', $content['validators'])) {
                 $validator = $this->validators['Zend\Validator\File\Count'];
@@ -711,7 +622,7 @@ abstract class AbstractAdapter
                         $validator->setTranslator($translator);
                     }
 
-                    if (($class === 'Zend\Validator\File\Upload') and (empty($content['tmp_name']))) {
+                    if (($class === 'Zend\Validator\File\Upload') && (empty($content['tmp_name']))) {
                         $tocheck = $key;
                     } else {
                         $tocheck = $content['tmp_name'];
@@ -721,16 +632,16 @@ abstract class AbstractAdapter
                         $fileerrors += $validator->getMessages();
                     }
 
-                    if (!empty($content['options']['ignoreNoFile']) and (isset($fileerrors['fileUploadErrorNoFile']))) {
+                    if (!empty($content['options']['ignoreNoFile']) && (isset($fileerrors['fileUploadErrorNoFile']))) {
                         unset($fileerrors['fileUploadErrorNoFile']);
                         break;
                     }
 
-                    if (($class === 'Zend\Validator\File\Upload') and (count($fileerrors) > 0)) {
+                    if (($class === 'Zend\Validator\File\Upload') && (count($fileerrors) > 0)) {
                         break;
                     }
 
-                    if (($this->break[$class]) and (count($fileerrors) > 0)) {
+                    if (($this->break[$class]) && (count($fileerrors) > 0)) {
                         $break = true;
                         break;
                     }
@@ -779,7 +690,7 @@ abstract class AbstractAdapter
     /**
      * Are there errors registered?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasErrors()
     {
@@ -797,17 +708,17 @@ abstract class AbstractAdapter
      */
     public function addFilter($filter, $options = null, $files = null)
     {
-        if ($filter instanceof Filter\FilterInterface) {
-            $class = get_class($filter);
-        } elseif (is_string($filter)) {
-            $class  = $this->getPluginLoader(self::FILTER)->load($filter);
-            $filter = new $class($options);
-        } else {
+        if (is_string($filter)) {
+            $filter = $this->getFilterManager()->get($filter, $options);
+        }
+
+        if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException('Invalid filter specified');
         }
 
+        $class                 = get_class($filter);
         $this->filters[$class] = $filter;
-        $files                  = $this->getFiles($files, true, true);
+        $files                 = $this->getFiles($files, true, true);
         foreach ($files as $file) {
             $this->files[$file]['filters'][] = $class;
         }
@@ -974,8 +885,8 @@ abstract class AbstractAdapter
     /**
      * Retrieves the filename of transferred files.
      *
-     * @param  string  $fileelement (Optional) Element to return the filename for
-     * @param  boolean $path        (Optional) Should the path also be returned ?
+     * @param  string  $file (Optional) Element to return the filename for
+     * @param  bool $path (Optional) Should the path also be returned ?
      * @return string|array
      */
     public function getFileName($file = null, $path = true)
@@ -983,7 +894,7 @@ abstract class AbstractAdapter
         $files     = $this->getFiles($file, true, true);
         $result    = array();
         $directory = "";
-        foreach($files as $file) {
+        foreach ($files as $file) {
             if (empty($this->files[$file]['name'])) {
                 continue;
             }
@@ -1056,6 +967,7 @@ abstract class AbstractAdapter
      * Retrieve destination directory value
      *
      * @param  null|string|array $files
+     * @throws Exception\InvalidArgumentException
      * @return null|string|array
      */
     public function getDestination($files = null)
@@ -1067,7 +979,9 @@ abstract class AbstractAdapter
             if (isset($this->files[$orig]['destination'])) {
                 $destinations[$orig] = $this->files[$orig]['destination'];
             } else {
-                throw new Exception\InvalidArgumentException(sprintf('The file transfer adapter can not find "%s"', $orig));
+                throw new Exception\InvalidArgumentException(
+                    sprintf('The file transfer adapter can not find "%s"', $orig)
+                );
             }
         }
 
@@ -1083,7 +997,7 @@ abstract class AbstractAdapter
 
         if (empty($destinations)) {
             $destinations = $this->getTmpDir();
-        } else if (count($destinations) == 1) {
+        } elseif (count($destinations) == 1) {
             $destinations = current($destinations);
         }
 
@@ -1091,34 +1005,31 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Set translator object for localization
+     * Sets translator to use in helper
      *
-     * @param  Translator\Translator|AdapterTranslator\AbstractAdapter|null $translator
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
      * @return AbstractAdapter
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null, $textDomain = null)
     {
-        if (null === $translator) {
-            $this->translator = null;
-        } elseif ($translator instanceof AdapterTranslator\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid translator specified');
+        $this->translator = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
         }
-
         return $this;
     }
 
     /**
      * Retrieve localization translator object
      *
-     * @return AdapterTranslator\AbstractAdapter|null
+     * @return Translator|null
      */
     public function getTranslator()
     {
-        if ($this->translatorIsDisabled()) {
+        if ($this->isTranslatorEnabled()) {
             return null;
         }
 
@@ -1126,25 +1037,57 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Indicate whether or not translation should be disabled
+     * Checks if the helper has a translator
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
+    }
+
+    /**
+     * Indicate whether or not translation should be enabled
      *
      * @param  bool $flag
      * @return AbstractAdapter
      */
-    public function setDisableTranslator($flag)
+    public function setTranslatorEnabled($flag = true)
     {
-        $this->translatorDisabled = (bool) $flag;
+        $this->translatorEnabled = (bool) $flag;
         return $this;
     }
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @return bool
      */
-    public function translatorIsDisabled()
+    public function isTranslatorEnabled()
     {
-        return $this->translatorDisabled;
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return AbstractAdapter
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
     }
 
     /**
@@ -1163,12 +1106,12 @@ abstract class AbstractAdapter
 
         $files  = $this->getFiles($files);
         $result = array();
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             if (file_exists($value['name'])) {
                 $result[$key] = hash_file($hash, $value['name']);
-            } else if (file_exists($value['tmp_name'])) {
+            } elseif (file_exists($value['tmp_name'])) {
                 $result[$key] = hash_file($hash, $value['tmp_name']);
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             }
         }
@@ -1191,14 +1134,14 @@ abstract class AbstractAdapter
     {
         $files  = $this->getFiles($files);
         $result = array();
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 if ($value['options']['useByteString']) {
-                    $result[$key] = self::toByteString($value['size']);
+                    $result[$key] = static::toByteString($value['size']);
                 } else {
                     $result[$key] = $value['size'];
                 }
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             } else {
                 continue;
@@ -1221,14 +1164,21 @@ abstract class AbstractAdapter
     protected function detectFileSize($value)
     {
         if (file_exists($value['name'])) {
-            $result = sprintf("%u", @filesize($value['name']));
-        } else if (file_exists($value['tmp_name'])) {
-            $result = sprintf("%u", @filesize($value['tmp_name']));
+            $filename = $value['name'];
+        } elseif (file_exists($value['tmp_name'])) {
+            $filename = $value['tmp_name'];
         } else {
             return null;
         }
 
-        return $result;
+        ErrorHandler::start();
+        $filesize = filesize($filename);
+        $return   = ErrorHandler::stop();
+        if ($return instanceof ErrorException) {
+            $filesize = 0;
+        }
+
+        return sprintf("%u", $filesize);
     }
 
     /**
@@ -1243,10 +1193,10 @@ abstract class AbstractAdapter
     {
         $files  = $this->getFiles($files);
         $result = array();
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 $result[$key] = $value['type'];
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("the file '{$value['name']}' does not exist");
             } else {
                 continue;
@@ -1270,7 +1220,7 @@ abstract class AbstractAdapter
     {
         if (file_exists($value['name'])) {
             $file = $value['name'];
-        } else if (file_exists($value['tmp_name'])) {
+        } elseif (file_exists($value['tmp_name'])) {
             $file = $value['tmp_name'];
         } else {
             return null;
@@ -1279,11 +1229,15 @@ abstract class AbstractAdapter
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!empty($value['options']['magicFile'])) {
-                $mime = @finfo_open($const, $value['options']['magicFile']);
+                ErrorHandler::start();
+                $mime = finfo_open($const, $value['options']['magicFile']);
+                ErrorHandler::stop();
             }
 
             if (empty($mime)) {
-                $mime = @finfo_open($const);
+                ErrorHandler::start();
+                $mime = finfo_open($const);
+                ErrorHandler::stop();
             }
 
             if (!empty($mime)) {
@@ -1325,7 +1279,7 @@ abstract class AbstractAdapter
      * Internal function to filter all given files
      *
      * @param  string|array $files (Optional) Files to check
-     * @return boolean False on error
+     * @return bool False on error
      */
     protected function filter($files = null)
     {
@@ -1384,7 +1338,7 @@ abstract class AbstractAdapter
                 $tmpdir[] = realpath($upload);
             }
 
-            foreach($tmpdir as $directory) {
+            foreach ($tmpdir as $directory) {
                 if ($this->isPathWriteable($directory)) {
                     $this->tmpDir = $directory;
                 }
@@ -1392,7 +1346,7 @@ abstract class AbstractAdapter
 
             if (empty($this->tmpDir)) {
                 // Attemp to detect by creating a temporary file
-                $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
+                $tempFile = tempnam(md5(uniqid(rand(), true)), '');
                 if ($tempFile) {
                     $this->tmpDir = realpath(dirname($tempFile));
                     unlink($tempFile);
@@ -1410,19 +1364,24 @@ abstract class AbstractAdapter
      * Tries to detect if we can read and write to the given path
      *
      * @param string $path
+     * @return bool
      */
     protected function isPathWriteable($path)
     {
         $tempFile = rtrim($path, "/\\");
         $tempFile .= '/' . 'test.1';
 
-        $result = @file_put_contents($tempFile, 'TEST');
+        ErrorHandler::start();
+        $result = file_put_contents($tempFile, 'TEST');
+        ErrorHandler::stop();
 
         if ($result == false) {
             return false;
         }
 
-        $result = @unlink($tempFile);
+        ErrorHandler::start();
+        $result = unlink($tempFile);
+        ErrorHandler::stop();
 
         if ($result == false) {
             return false;
@@ -1435,8 +1394,8 @@ abstract class AbstractAdapter
      * Returns found files based on internal file array and given files
      *
      * @param  string|array $files       (Optional) Files to return
-     * @param  boolean      $names       (Optional) Returns only names on true, else complete info
-     * @param  boolean      $noexception (Optional) Allows throwing an exception, otherwise returns an empty array
+     * @param  bool      $names       (Optional) Returns only names on true, else complete info
+     * @param  bool      $noexception (Optional) Allows throwing an exception, otherwise returns an empty array
      * @return array Found files
      * @throws Exception\RuntimeException On false filename
      */

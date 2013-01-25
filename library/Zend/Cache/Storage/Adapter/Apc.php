@@ -1,50 +1,39 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator as BaseApcIterator,
-    ArrayObject,
-    stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface;
+use APCIterator as BaseApcIterator;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Storage
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Apc
-    extends AbstractAdapter
-    implements ClearByPrefixInterface, ClearByNamespaceInterface, FlushableInterface, IterableInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Apc extends AbstractAdapter implements
+    AvailableSpaceCapableInterface,
+    ClearByNamespaceInterface,
+    ClearByPrefixInterface,
+    FlushableInterface,
+    IterableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Buffered total space in bytes
@@ -58,7 +47,6 @@ class Apc
      *
      * @param  null|array|Traversable|ApcOptions $options
      * @throws Exception\ExceptionInterface
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -102,7 +90,7 @@ class Apc
      * Get options.
      *
      * @return ApcOptions
-     * @see setOptions()
+     * @see    setOptions()
      */
     public function getOptions()
     {
@@ -121,7 +109,7 @@ class Apc
      */
     public function getTotalSpace()
     {
-        if ($this->totalSpace !== null) {
+        if ($this->totalSpace === null) {
             $smaInfo = apc_sma_info(true);
             $this->totalSpace = $smaInfo['num_seg'] * $smaInfo['seg_size'];
         }
@@ -154,7 +142,6 @@ class Apc
         $options = $this->getOptions();
         $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
         $pattern = '/^' . preg_quote($prefix, '/') . '/';
-        $format  = 0;
 
         $baseIt = new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE);
         return new ApcIterator($this, $baseIt, $prefix);
@@ -165,7 +152,7 @@ class Apc
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush()
     {
@@ -177,8 +164,8 @@ class Apc
     /**
      * Remove items by given namespace
      *
-     * @param string $prefix
-     * @return boolean
+     * @param string $namespace
+     * @return bool
      */
     public function clearByNamespace($namespace)
     {
@@ -194,7 +181,7 @@ class Apc
      * Remove items matching given prefix
      *
      * @param string $prefix
-     * @return boolean
+     * @return bool
      */
     public function clearByPrefix($prefix)
     {
@@ -210,7 +197,7 @@ class Apc
      * Internal method to get an item.
      *
      * @param  string  $normalizedKey
-     * @param  boolean $success
+     * @param  bool $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
@@ -263,7 +250,7 @@ class Apc
      * Internal method to test if an item exists.
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey)
@@ -276,7 +263,7 @@ class Apc
     /**
      * Internal method to test multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
@@ -306,12 +293,8 @@ class Apc
      * Get metadata of an item.
      *
      * @param  string $normalizedKey
-     * @return array|boolean Metadata on success, false on failure
+     * @return array|bool Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
-     *
-     * @triggers getMetadata.pre(PreEvent)
-     * @triggers getMetadata.post(PostEvent)
-     * @triggers getMetadata.exception(ExceptionEvent)
      */
     protected function internalGetMetadata(& $normalizedKey)
     {
@@ -382,7 +365,7 @@ class Apc
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
@@ -437,7 +420,7 @@ class Apc
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value)
@@ -496,7 +479,7 @@ class Apc
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value)
@@ -524,7 +507,7 @@ class Apc
      * Internal method to remove an item.
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey)
@@ -538,7 +521,7 @@ class Apc
     /**
      * Internal method to remove multiple items.
      *
-     * @param  array $keys
+     * @param  array $normalizedKeys
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
@@ -568,7 +551,7 @@ class Apc
      *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
@@ -599,7 +582,7 @@ class Apc
      *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
@@ -654,6 +637,7 @@ class Apc
                         'atime', 'ctime', 'mtime', 'rtime',
                         'size', 'hits', 'ttl',
                     ),
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
                     'ttlPrecision'       => 1,
@@ -666,7 +650,7 @@ class Apc
             );
 
             // update namespace separator on change option
-            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+            $this->getEventManager()->attach('option', function ($event) use ($capabilities, $marker) {
                 $params = $event->getParams();
 
                 if (isset($params['namespace_separator'])) {

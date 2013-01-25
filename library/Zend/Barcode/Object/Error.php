@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
@@ -26,15 +15,13 @@ namespace Zend\Barcode\Object;
  *
  * @category   Zend
  * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Error extends AbstractObject
 {
     /**
      * All texts are accepted
      * @param string $value
-     * @return boolean
+     * @return bool
      */
     public function validateText($value)
     {
@@ -43,6 +30,7 @@ class Error extends AbstractObject
 
     /**
      * Height is forced
+     * @param bool $recalculate
      * @return integer
      */
     public function getHeight($recalculate = false)
@@ -52,6 +40,7 @@ class Error extends AbstractObject
 
     /**
      * Width is forced
+     * @param bool $recalculate
      * @return integer
      */
     public function getWidth($recalculate = false)

@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller\Plugin
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use ArrayIterator,
-    Countable,
-    IteratorAggregate,
-    Zend\Session\Container,
-    Zend\Session\ManagerInterface as Manager,
-    Zend\Session\SessionManager,
-    Zend\Stdlib\SplQueue;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+use Zend\Session\Container;
+use Zend\Session\ManagerInterface as Manager;
+use Zend\Stdlib\SplQueue;
 
 /**
  * Flash Messenger - implement session-based messages
@@ -35,10 +23,8 @@ use ArrayIterator,
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Controller\Plugin
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FlashMessenger implements IteratorAggregate, Countable
+class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Countable
 {
     /**
      * @var Container
@@ -59,7 +45,7 @@ class FlashMessenger implements IteratorAggregate, Countable
     /**
      * Whether a message has been added during this request
      *
-     * @var boolean
+     * @var bool
      */
     protected $messageAdded = false;
 
@@ -72,8 +58,8 @@ class FlashMessenger implements IteratorAggregate, Countable
 
     /**
      * Set the session manager
-     * 
-     * @param  Manager $manager 
+     *
+     * @param  Manager $manager
      * @return FlashMessenger
      */
     public function setSessionManager(Manager $manager)
@@ -86,20 +72,20 @@ class FlashMessenger implements IteratorAggregate, Countable
      * Retrieve the session manager
      *
      * If none composed, lazy-loads a SessionManager instance
-     * 
+     *
      * @return Manager
      */
     public function getSessionManager()
     {
         if (!$this->session instanceof Manager) {
-            $this->setSessionManager(new SessionManager());
+            $this->setSessionManager(Container::getDefaultManager());
         }
         return $this->session;
     }
 
     /**
      * Get session container for flash messages
-     * 
+     *
      * @return Container
      */
     public function getContainer()
@@ -114,7 +100,7 @@ class FlashMessenger implements IteratorAggregate, Countable
     }
 
     /**
-     * Change the namespace messages are added to 
+     * Change the namespace messages are added to
      *
      * Useful for per action controller messaging between requests
      *
@@ -129,7 +115,7 @@ class FlashMessenger implements IteratorAggregate, Countable
 
     /**
      * Get the message namespace
-     * 
+     *
      * @return string
      */
     public function getNamespace()
@@ -168,7 +154,7 @@ class FlashMessenger implements IteratorAggregate, Countable
     /**
      * Whether a specific namespace has messages
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMessages()
     {
@@ -193,7 +179,7 @@ class FlashMessenger implements IteratorAggregate, Countable
     /**
      * Clear all messages from the previous request & current namespace
      *
-     * @return boolean True if messages were cleared, false if none existed
+     * @return bool True if messages were cleared, false if none existed
      */
     public function clearMessages()
     {
@@ -209,7 +195,7 @@ class FlashMessenger implements IteratorAggregate, Countable
      * Check to see if messages have been added to the current
      * namespace within this request
      *
-     * @return boolean
+     * @return bool
      */
     public function hasCurrentMessages()
     {
@@ -238,7 +224,7 @@ class FlashMessenger implements IteratorAggregate, Countable
     /**
      * Clear messages from the current request and current namespace
      *
-     * @return boolean
+     * @return bool
      */
     public function clearCurrentMessages()
     {
@@ -285,7 +271,7 @@ class FlashMessenger implements IteratorAggregate, Countable
      *
      * Iterates through the session container, removing messages into the local
      * scope.
-     * 
+     *
      * @return void
      */
     protected function getMessagesFromContainer()

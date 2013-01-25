@@ -1,29 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
 
 use ArrayObject;
+use ReflectionClass;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Annotation\Parser;
 use Zend\Code\Reflection\ClassReflection;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
@@ -31,34 +22,38 @@ use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Form\Exception;
 use Zend\Form\Factory;
+use Zend\Form\FormFactoryAwareInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Parses a class' properties for annotations in order to create a form and 
+ * Parses a class' properties for annotations in order to create a form and
  * input filter definition.
  *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnnotationBuilder implements EventManagerAwareInterface
+class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareInterface
 {
     /**
-     * @var AnnotationManager 
+     * @var AnnotationManager
      */
     protected $annotationManager;
 
-    /** 
-     * @var EventManagerInterface 
+    /**
+     * @var EventManagerInterface
      */
     protected $events;
 
-    /** 
-     * @var Factory 
+    /**
+     * @var Factory
      */
     protected $formFactory;
+
+    /**
+     * @var object
+     */
+    protected $entity;
 
     /**
      * @var array Default annotations to register
@@ -75,15 +70,18 @@ class AnnotationBuilder implements EventManagerAwareInterface
         'Input',
         'InputFilter',
         'Name',
+        'Object',
+        'Options',
         'Required',
         'Type',
-        'Validator',
+        'ValidationGroup',
+        'Validator'
     );
 
     /**
      * Set form factory to use when building form from annotations
-     * 
-     * @param  Factory $formFactory 
+     *
+     * @param  Factory $formFactory
      * @return AnnotationBuilder
      */
     public function setFormFactory(Factory $formFactory)
@@ -94,24 +92,26 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Set annotation manager to use when building form from annotations
-     * 
-     * @param  AnnotationManager $annotationManager 
+     *
+     * @param  AnnotationManager $annotationManager
      * @return AnnotationBuilder
      */
     public function setAnnotationManager(AnnotationManager $annotationManager)
     {
+        $parser = new Parser\DoctrineAnnotationParser();
         foreach ($this->defaultAnnotations as $annotationName) {
             $class = __NAMESPACE__ . '\\' . $annotationName;
-            $annotationManager->registerAnnotation(new $class);
+            $parser->registerAnnotation($class);
         }
+        $annotationManager->attach($parser);
         $this->annotationManager = $annotationManager;
         return $this;
     }
 
     /**
      * Set event manager instance
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return AnnotationBuilder
      */
     public function setEventManager(EventManagerInterface $events)
@@ -130,7 +130,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * Retrieve form factory
      *
      * Lazy-loads the default form factory if none is currently set.
-     * 
+     *
      * @return Factory
      */
     public function getFormFactory()
@@ -147,7 +147,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * Retrieve annotation manager
      *
      * If none is currently set, creates one with default annotations.
-     * 
+     *
      * @return AnnotationManager
      */
     public function getAnnotationManager()
@@ -162,10 +162,10 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Get event manager
-     * 
+     *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
@@ -176,11 +176,12 @@ class AnnotationBuilder implements EventManagerAwareInterface
     /**
      * Creates and returns a form specification for use with a factory
      *
-     * Parses the object provided, and processes annotations for the class and 
-     * all properties. Information from annotations is then used to create 
+     * Parses the object provided, and processes annotations for the class and
+     * all properties. Information from annotations is then used to create
      * specifications for a form, its elements, and its input filter.
-     * 
+     *
      * @param  string|object $entity Either an instance or a valid class name for an entity
+     * @throws Exception\InvalidArgumentException if $entity is not an object or class name
      * @return ArrayObject
      */
     public function getFormSpecification($entity)
@@ -197,6 +198,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             }
         }
 
+        $this->entity      = $entity;
         $annotationManager = $this->getAnnotationManager();
         $formSpec          = new ArrayObject();
         $filterSpec        = new ArrayObject();
@@ -226,7 +228,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
     /**
      * Create a form from an object.
      *
-     * @param  string|object $entity 
+     * @param  string|object $entity
      * @return \Zend\Form\Form
      */
     public function createForm($entity)
@@ -237,12 +239,22 @@ class AnnotationBuilder implements EventManagerAwareInterface
     }
 
     /**
+     * Get the entity used to construct the form.
+     *
+     * @return object
+     */
+    public function getEntity()
+    {
+        return $this->entity;
+    }
+
+    /**
      * Configure the form specification from annotations
-     * 
-     * @param  AnnotationCollection $annotations 
-     * @param  ClassReflection $reflection 
-     * @param  ArrayObject $formSpec 
-     * @param  ArrayObject $filterSpec 
+     *
+     * @param  AnnotationCollection $annotations
+     * @param  ClassReflection $reflection
+     * @param  ArrayObject $formSpec
+     * @param  ArrayObject $filterSpec
      * @return void
      * @triggers discoverName
      * @triggers configureForm
@@ -255,12 +267,12 @@ class AnnotationBuilder implements EventManagerAwareInterface
         $formSpec['elements']   = array();
         $formSpec['fieldsets']  = array();
 
-        $events = $this->events();
+        $events = $this->getEventManager();
         foreach ($annotations as $annotation) {
             $events->trigger(__FUNCTION__, $this, array(
-                'annotation' => $annotation, 
+                'annotation' => $annotation,
                 'name'        => $name,
-                'formSpec'   => $formSpec, 
+                'formSpec'   => $formSpec,
                 'filterSpec' => $filterSpec,
             ));
         }
@@ -268,11 +280,11 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Configure an element from annotations
-     * 
-     * @param  AnnotationCollection $annotations 
-     * @param  \Zend\Code\Reflection\PropertyReflection $reflection 
-     * @param  ArrayObject $formSpec 
-     * @param  ArrayObject $filterSpec 
+     *
+     * @param  AnnotationCollection $annotations
+     * @param  \Zend\Code\Reflection\PropertyReflection $reflection
+     * @param  ArrayObject $formSpec
+     * @param  ArrayObject $filterSpec
      * @return void
      * @triggers checkForExclude
      * @triggers discoverName
@@ -285,7 +297,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             return;
         }
 
-        $events = $this->events();
+        $events = $this->getEventManager();
         $name   = $this->discoverName($annotations, $reflection);
 
         $elementSpec = new ArrayObject(array(
@@ -303,7 +315,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             'name'        => $name,
             'elementSpec' => $elementSpec,
             'inputSpec'   => $inputSpec,
-            'formSpec'    => $formSpec, 
+            'formSpec'    => $formSpec,
             'filterSpec'  => $filterSpec,
         ));
         foreach ($annotations as $annotation) {
@@ -315,11 +327,11 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
         $elementSpec = $event->getParam('elementSpec');
         $type        = (isset($elementSpec['spec']['type']))
-                     ? $elementSpec['spec']['type']
-                     : 'Zend\Form\Element';
+            ? $elementSpec['spec']['type']
+            : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
-        if ($this->isFieldset($type)) {
+        if (static::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -334,14 +346,14 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Discover the name of the given form or element
-     * 
-     * @param  AnnotationCollection $annotations 
-     * @param  \Reflector $reflection 
+     *
+     * @param  AnnotationCollection $annotations
+     * @param  \Reflector $reflection
      * @return string
      */
     protected function discoverName($annotations, $reflection)
     {
-        $results = $this->events()->trigger('discoverName', $this, array(
+        $results = $this->getEventManager()->trigger('discoverName', $this, array(
             'annotations' => $annotations,
             'reflection'  => $reflection,
         ), function ($r) {
@@ -352,13 +364,13 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Determine if an element is marked to exclude from the definitions
-     * 
-     * @param  AnnotationCollection $annotations 
+     *
+     * @param  AnnotationCollection $annotations
      * @return true|false
      */
     protected function checkForExclude($annotations)
     {
-        $results = $this->events()->trigger('checkForExclude', $this, array(
+        $results = $this->getEventManager()->trigger('checkForExclude', $this, array(
             'annotations' => $annotations,
         ), function ($r) {
             return (true === $r);
@@ -367,22 +379,27 @@ class AnnotationBuilder implements EventManagerAwareInterface
     }
 
     /**
-     * Determine if the type represents a fieldset
+     * Checks if the object has this class as one of its parents
      *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses 
-     * reflection to determine the interfaces implemented.
-     * 
-     * @param  string $type 
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
      * @return bool
      */
-    protected function isFieldset($type)
+    protected static function isSubclassOf($className, $type)
     {
-        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
-            return is_subclass_of($type, 'Zend\Form\FieldsetInterface');
+        if (is_subclass_of($className, $type)) {
+            return true;
         }
-
-        $r = new ClassReflection($type);
-        $interfaces = $r->getInterfaceNames();
-        return (in_array('Zend\Form\FieldsetInterface', $interfaces));
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

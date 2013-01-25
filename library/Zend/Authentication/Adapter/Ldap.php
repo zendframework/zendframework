@@ -1,26 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter;
 
+use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Ldap as ZendLdap;
 use Zend\Ldap\Exception\LdapException;
@@ -29,8 +19,6 @@ use Zend\Ldap\Exception\LdapException;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ldap implements AdapterInterface
 {
@@ -269,7 +257,7 @@ class Ldap implements AdapterInterface
         /* Iterate through each server and try to authenticate the supplied
          * credentials against it.
          */
-        foreach ($this->options as $name => $options) {
+        foreach ($this->options as $options) {
 
             if (!is_array($options)) {
                 throw new Exception\InvalidArgumentException('Adapter options array not an array');
@@ -346,11 +334,11 @@ class Ldap implements AdapterInterface
                      * server options.
                      */
                     continue;
-                } else if ($err == LdapException::LDAP_NO_SUCH_OBJECT) {
+                } elseif ($err == LdapException::LDAP_NO_SUCH_OBJECT) {
                     $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
                     $messages[0] = "Account not found: $username";
                     $failedAuthorities[$dname] = $zle->getMessage();
-                } else if ($err == LdapException::LDAP_INVALID_CREDENTIALS) {
+                } elseif ($err == LdapException::LDAP_INVALID_CREDENTIALS) {
                     $code = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
                     $messages[0] = 'Invalid credentials';
                     $failedAuthorities[$dname] = $zle->getMessage();
@@ -398,7 +386,7 @@ class Ldap implements AdapterInterface
                 unset($options[$key]);
                 switch ($key) {
                     case 'groupScope':
-                        $value = (int)$value;
+                        $value = (int) $value;
                         if (in_array($value, array(ZendLdap\Ldap::SEARCH_SCOPE_BASE,
                                 ZendLdap\Ldap::SEARCH_SCOPE_ONE, ZendLdap\Ldap::SEARCH_SCOPE_SUB), true)) {
                            $adapterOptions[$key] = $value;
@@ -451,9 +439,9 @@ class Ldap implements AdapterInterface
 
         if ($result === 1) {
             return true;
-        } else {
-            return 'Failed to verify group membership with ' . $group->toString();
         }
+
+        return 'Failed to verify group membership with ' . $group->toString();
     }
 
     /**
@@ -464,7 +452,7 @@ class Ldap implements AdapterInterface
      *
      * @param  array $returnAttribs
      * @param  array $omitAttribs
-     * @return stdClass|boolean
+     * @return stdClass|bool
      */
     public function getAccountObject(array $returnAttribs = array(), array $omitAttribs = array())
     {
@@ -472,7 +460,7 @@ class Ldap implements AdapterInterface
             return false;
         }
 
-        $returnObject = new \stdClass();
+        $returnObject = new stdClass();
 
         $omitAttribs = array_map('strtolower', $omitAttribs);
 

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ModuleManager
  */
@@ -15,15 +15,16 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
 use Zend\ModuleManager\ModuleEvent;
+use Zend\Mvc\MvcEvent;
 
 /**
  * Locator registration listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class LocatorRegistrationListener extends AbstractListener implements 
+class LocatorRegistrationListener extends AbstractListener implements
     ListenerAggregateInterface
 {
     /**
@@ -37,15 +38,15 @@ class LocatorRegistrationListener extends AbstractListener implements
     protected $listeners = array();
 
     /**
-     * loadModule 
+     * loadModule
      *
-     * Check each loaded module to see if it implements LocatorRegistered. If it 
+     * Check each loaded module to see if it implements LocatorRegistered. If it
      * does, we add it to an internal array for later.
-     * 
-     * @param  ModuleEvent $e 
+     *
+     * @param  ModuleEvent $e
      * @return void
      */
-    public function loadModule(ModuleEvent $e)
+    public function onLoadModule(ModuleEvent $e)
     {
         if (!$e->getModule() instanceof LocatorRegisteredInterface) {
             return;
@@ -54,20 +55,24 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /**
-     * loadModulesPost 
+     * loadModulesPost
      *
-     * Once all the modules are loaded, loop 
-     * 
-     * @param  Event $e 
+     * Once all the modules are loaded, loop
+     *
+     * @param  Event $e
      * @return void
      */
-    public function loadModulesPost(Event $e)
+    public function onLoadModulesPost(Event $e)
     {
         $moduleManager = $e->getTarget();
-        $events        = $moduleManager->events()->getSharedManager();
+        $events        = $moduleManager->getEventManager()->getSharedManager();
+
+        if (!$events) {
+            return;
+        }
 
         // Shared instance for module manager
-        $events->attach('application', 'bootstrap', function ($e) use ($moduleManager) {
+        $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
             $application     = $e->getApplication();
             $services        = $application->getServiceManager();
@@ -81,18 +86,18 @@ class LocatorRegistrationListener extends AbstractListener implements
         }
 
         // Attach to the bootstrap event if there are modules we need to process
-        $events->attach('application', 'bootstrap', array($this, 'onBootstrap'), 1000);
+        $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, array($this, 'onBootstrap'), 1000);
     }
 
     /**
-     * Bootstrap listener 
+     * Bootstrap listener
      *
-     * This is ran during the MVC bootstrap event because it requires access to 
+     * This is ran during the MVC bootstrap event because it requires access to
      * the DI container.
      *
-     * @TODO: Check the application / locator / etc a bit better to make sure 
+     * @TODO: Check the application / locator / etc a bit better to make sure
      * the env looks how we're expecting it to?
-     * @param Event $e 
+     * @param Event $e
      * @return void
      */
     public function onBootstrap(Event $e)
@@ -112,12 +117,12 @@ class LocatorRegistrationListener extends AbstractListener implements
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @return LocatorRegistrationListener
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'loadModulesPost'), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModulesPost'), -1000);
         return $this;
     }
 

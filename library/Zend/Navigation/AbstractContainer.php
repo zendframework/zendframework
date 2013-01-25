@@ -1,30 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Navigation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Navigation;
 
-use Countable,
-    RecursiveIterator,
-    RecursiveIteratorIterator,
-    Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Countable;
+use RecursiveIterator;
+use RecursiveIteratorIterator;
+use Traversable;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Navigation_Container
@@ -33,10 +23,8 @@ use Countable,
  *
  * @category  Zend
  * @package   Zend_Navigation
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractContainer implements RecursiveIterator, Countable
+abstract class AbstractContainer implements Countable, RecursiveIterator
 {
     /**
      * Contains sub pages
@@ -166,7 +154,7 @@ abstract class AbstractContainer implements RecursiveIterator, Countable
             );
         }
 
-        // Because adding a page to a container removes it from the original 
+        // Because adding a page to a container removes it from the original
         // (see {@link Page\AbstractPage::setParent()}), iteration of the
         // original container will break. As such, we need to iterate the
         // container into an array first.
@@ -249,7 +237,7 @@ abstract class AbstractContainer implements RecursiveIterator, Countable
      * Checks if the container has the given page
      *
      * @param  Page\AbstractPage $page page to look for
-     * @param  bool $recursive [optional] whether to search recursively. 
+     * @param  bool $recursive [optional] whether to search recursively.
      *                         Default is false.
      * @return bool whether page is in container
      */
@@ -338,9 +326,9 @@ abstract class AbstractContainer implements RecursiveIterator, Countable
     {
         if ($all) {
             return $this->findAllBy($property, $value);
-        } else {
-            return $this->findOneBy($property, $value);
         }
+
+        return $this->findOneBy($property, $value);
     }
 
     /**
@@ -360,17 +348,18 @@ abstract class AbstractContainer implements RecursiveIterator, Countable
      */
     public function __call($method, $arguments)
     {
-        if (@preg_match('/(find(?:One|All)?By)(.+)/', $method, $match)) {
-            return $this->{$match[1]}($match[2], $arguments[0]);
-        }
-
-        throw new Exception\BadMethodCallException(
-            sprintf(
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/(find(?:One|All)?By)(.+)/', $method, $match);
+        $error  = ErrorHandler::stop();
+        if (!$result) {
+            throw new Exception\BadMethodCallException(sprintf(
                 'Bad method call: Unknown method %s::%s',
                 get_called_class(),
                 $method
-            )
-        );
+            ), 0, $error);
+        }
+        return $this->{$match[1]}($match[2], $arguments[0]);
+
     }
 
     /**

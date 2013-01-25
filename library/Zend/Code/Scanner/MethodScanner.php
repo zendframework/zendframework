@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
-use Zend\Code\Exception;
 use Zend\Code\Annotation;
+use Zend\Code\Exception;
+use Zend\Code\NameInformation;
 
 class MethodScanner implements ScannerInterface
 {
@@ -28,7 +36,7 @@ class MethodScanner implements ScannerInterface
     protected $tokens       = array();
     protected $nameInformation = null;
     protected $infos        = array();
-    
+
     public function __construct(array $methodTokens, NameInformation $nameInformation = null)
     {
         $this->tokens          = $methodTokens;
@@ -225,8 +233,7 @@ class MethodScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine)
-        {
+        $MACRO_TOKEN_ADVANCE = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
             static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
@@ -247,8 +254,7 @@ class MethodScanner implements ScannerInterface
             }
             return $tokenIndex;
         };
-        $MACRO_INFO_START    = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine)
-        {
+        $MACRO_INFO_START    = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex] = array(
                 'type'        => 'parameter',
                 'tokenStart'  => $tokenIndex,
@@ -259,8 +265,7 @@ class MethodScanner implements ScannerInterface
                 'position'    => $infoIndex + 1, // position is +1 of infoIndex
             );
         };
-        $MACRO_INFO_ADVANCE  = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine)
-        {
+        $MACRO_INFO_ADVANCE  = function () use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
             $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
             $infos[$infoIndex]['lineEnd']  = $tokenLine;
             $infoIndex++;
@@ -387,5 +392,4 @@ class MethodScanner implements ScannerInterface
         $this->isScanned = true;
         return;
     }
-
 }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
@@ -28,20 +18,18 @@ use Zend\Stdlib\ArrayUtils;
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Compress extends AbstractFilter
 {
     /**
      * Compression adapter
      */
-    protected $_adapter = 'Gz';
+    protected $adapter = 'Gz';
 
     /**
      * Compression adapter constructor options
      */
-    protected $_adapterOptions = array();
+    protected $adapterOptions = array();
 
     /**
      * Class constructor
@@ -66,10 +54,19 @@ class Compress extends AbstractFilter
      * Set filter setate
      *
      * @param  array $options
+     * @throws Exception\InvalidArgumentException if options is not an array or Traversable
      * @return Compress
      */
-    public function setOptions(array $options)
+    public function setOptions($options)
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%s" expects an array or Traversable; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         foreach ($options as $key => $value) {
             if ($key == 'options') {
                 $key = 'adapterOptions';
@@ -85,15 +82,17 @@ class Compress extends AbstractFilter
     /**
      * Returns the current adapter, instantiating it if necessary
      *
-     * @return string
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
+     * @return Compress\CompressionAlgorithmInterface
      */
     public function getAdapter()
     {
-        if ($this->_adapter instanceof Compress\CompressionAlgorithmInterface) {
-            return $this->_adapter;
+        if ($this->adapter instanceof Compress\CompressionAlgorithmInterface) {
+            return $this->adapter;
         }
 
-        $adapter = $this->_adapter;
+        $adapter = $this->adapter;
         $options = $this->getAdapterOptions();
         if (!class_exists($adapter)) {
             $adapter = 'Zend\\Filter\\Compress\\' . ucfirst($adapter);
@@ -101,16 +100,16 @@ class Compress extends AbstractFilter
                 throw new Exception\RuntimeException(sprintf(
                     '%s unable to load adapter; class "%s" not found',
                     __METHOD__,
-                    $this->_adapter
+                    $this->adapter
                 ));
             }
         }
 
-        $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Compress\CompressionAlgorithmInterface) {
+        $this->adapter = new $adapter($options);
+        if (!$this->adapter instanceof Compress\CompressionAlgorithmInterface) {
             throw new Exception\InvalidArgumentException("Compression adapter '" . $adapter . "' does not implement Zend\\Filter\\Compress\\CompressionAlgorithmInterface");
         }
-        return $this->_adapter;
+        return $this->adapter;
     }
 
     /**
@@ -128,17 +127,18 @@ class Compress extends AbstractFilter
      *
      * @param  string|Compress\CompressionAlgorithmInterface $adapter Adapter to use
      * @return Compress
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
     {
         if ($adapter instanceof Compress\CompressionAlgorithmInterface) {
-            $this->_adapter = $adapter;
+            $this->adapter = $adapter;
             return $this;
         }
         if (!is_string($adapter)) {
             throw new Exception\InvalidArgumentException('Invalid adapter provided; must be string or instance of Zend\\Filter\\Compress\\CompressionAlgorithmInterface');
         }
-        $this->_adapter = $adapter;
+        $this->adapter = $adapter;
 
         return $this;
     }
@@ -150,7 +150,7 @@ class Compress extends AbstractFilter
      */
     public function getAdapterOptions()
     {
-        return $this->_adapterOptions;
+        return $this->adapterOptions;
     }
 
     /**
@@ -161,8 +161,20 @@ class Compress extends AbstractFilter
      */
     public function setAdapterOptions(array $options)
     {
-        $this->_adapterOptions = $options;
+        $this->adapterOptions = $options;
         return $this;
+    }
+
+    /**
+     * Get individual or all options from underlying adapter
+     *
+     * @param  null|string $option
+     * @return mixed
+     */
+    public function getOptions($option = null)
+    {
+        $adapter = $this->getAdapter();
+        return $adapter->getOptions($option);
     }
 
     /**
@@ -170,6 +182,8 @@ class Compress extends AbstractFilter
      *
      * @param string       $method  Method to call
      * @param string|array $options Options for this method
+     * @return mixed
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $options)
     {

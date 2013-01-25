@@ -1,35 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Validator which checks if the file already exists in the directory
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Validator
  */
 class IsCompressed extends MimeType
 {
@@ -43,7 +31,7 @@ class IsCompressed extends MimeType
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FALSE_TYPE   => "File '%value%' is not compressed, '%type%' detected",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
         self::NOT_READABLE => "File '%value%' is not readable or does not exist",
@@ -52,7 +40,7 @@ class IsCompressed extends MimeType
     /**
      * Sets validator options
      *
-     * @param  string|array|Traversable $compression
+     * @param string|array|Traversable $options
      */
     public function __construct($options = array())
     {
@@ -114,17 +102,17 @@ class IsCompressed extends MimeType
     {
         if ($file !== null) {
             if (is_array($file)) {
-                if(array_key_exists('name', $file)) {
+                if (array_key_exists('name', $file)) {
                     $file = $file['name'];
                 }
-            } 
+            }
 
             if (is_string($file)) {
                 $this->value = basename($file);
             }
         }
 
-        switch($errorType) {
+        switch ($errorType) {
             case MimeType::FALSE_TYPE :
                 $errorType = self::FALSE_TYPE;
                 break;

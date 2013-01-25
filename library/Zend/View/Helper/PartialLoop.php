@@ -1,28 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-use Traversable,
-    Zend\View\Exception;
+use Iterator;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Exception;
 
 /**
  * Helper for rendering a template fragment in its own variable scope; iterates
@@ -30,14 +21,12 @@ use Traversable,
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PartialLoop extends Partial
 {
-
     /**
      * Marker to where the pointer is at in the loop
+     *
      * @var integer
      */
     protected $partialCounter = 0;
@@ -49,40 +38,53 @@ class PartialLoop extends Partial
      * If no arguments are provided, returns object instance.
      *
      * @param  string $name Name of view script
-     * @param  array $model Variables to populate in the view
+     * @param  array $values Variables to populate in the view
      * @return string
      * @throws Exception\InvalidArgumentException
      */
-    public function __invoke($name = null, $model = null)
+    public function __invoke($name = null, $values = null)
     {
         if (0 == func_num_args()) {
             return $this;
         }
 
-        if (!is_array($model)
-            && (!$model instanceof Traversable)
-            && (is_object($model) && !method_exists($model, 'toArray'))
+        if (!is_array($values)
+            && (!$values instanceof Traversable)
+            && (is_object($values) && !method_exists($values, 'toArray'))
         ) {
             throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
         }
 
-        if (is_object($model)
-            && (!$model instanceof Traversable)
-            && method_exists($model, 'toArray')
+        if (is_object($values)
+            && (!$values instanceof Traversable)
+            && method_exists($values, 'toArray')
         ) {
-            $model = $model->toArray();
+            $values = $values->toArray();
         }
 
-        $content = '';
+        if ($values instanceof Iterator) {
+            $values = ArrayUtils::iteratorToArray($values);
+        }
+
         // reset the counter if it's called again
         $this->partialCounter = 0;
-        foreach ($model as $item) {
-            // increment the counter variable
-            $this->partialCounter++;
+        $content = '';
 
+        foreach ($values as $item) {
+            $this->partialCounter++;
             $content .= parent::__invoke($name, $item);
         }
 
         return $content;
+    }
+
+    /**
+     * Get the partial counter
+     *
+     * @return int
+     */
+    public function getPartialCounter()
+    {
+        return $this->partialCounter;
     }
 }

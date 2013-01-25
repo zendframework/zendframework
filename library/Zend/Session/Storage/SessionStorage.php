@@ -1,51 +1,40 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-webat this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Session
  */
 
 namespace Zend\Session\Storage;
 
+use ArrayObject;
+
 /**
  * Session storage in $_SESSION
  *
- * Replaces the $_SESSION superglobal with an ArrayObject that allows for 
+ * Replaces the $_SESSION superglobal with an ArrayObject that allows for
  * property access, metadata storage, locking, and immutability.
- * 
+ *
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionStorage extends ArrayStorage
 {
     /**
      * Constructor
      *
-     * Sets the $_SESSION superglobal to an ArrayObject, maintaining previous 
+     * Sets the $_SESSION superglobal to an ArrayObject, maintaining previous
      * values if any discovered.
-     * 
-     * @param  null|array|ArrayAccess $input 
-     * @param  int $flags 
-     * @param  string $iteratorClass 
-     * @return void
+     *
+     * @param  array|null $input
+     * @param  int $flags
+     * @param  string $iteratorClass
      */
-    public function __construct($input = null, $flags = \ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
+    public function __construct($input = null, $flags = ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
     {
         $resetSession = true;
         if ((null === $input) && isset($_SESSION)) {
@@ -67,9 +56,9 @@ class SessionStorage extends ArrayStorage
     /**
      * Destructor
      *
-     * Resets $_SESSION superglobal to an array, by casting object using 
+     * Resets $_SESSION superglobal to an array, by casting object using
      * getArrayCopy().
-     * 
+     *
      * @return void
      */
     public function __destruct()
@@ -81,13 +70,13 @@ class SessionStorage extends ArrayStorage
      * Load session object from an existing array
      *
      * Ensures $_SESSION is set to an instance of the object when complete.
-     * 
-     * @param  array $array 
+     *
+     * @param  array $array
      * @return SessionStorage
      */
     public function fromArray(array $array)
     {
-        $this->exchangeArray($array);
+        parent::fromArray($array);
         if ($_SESSION !== $this) {
             $_SESSION = $this;
         }
@@ -95,18 +84,19 @@ class SessionStorage extends ArrayStorage
     }
 
     /**
-     * Mark object as immutable
-     * 
-     * @return void
+     * Mark object as isImmutable
+     *
+     * @return SessionStorage
      */
     public function markImmutable()
     {
         $this['_IMMUTABLE'] = true;
+        return $this;
     }
 
     /**
-     * Determine if this object is immutable
-     * 
+     * Determine if this object is isImmutable
+     *
      * @return bool
      */
     public function isImmutable()

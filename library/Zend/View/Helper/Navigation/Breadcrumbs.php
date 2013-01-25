@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
@@ -32,8 +21,6 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Breadcrumbs extends AbstractHelper
 {
@@ -69,13 +56,10 @@ class Breadcrumbs extends AbstractHelper
      * Helper entry point
      *
      * @param  string|AbstractContainer $container container to operate on
-     * @return Navigation
+     * @return Breadcrumbs
      */
     public function __invoke($container = null)
     {
-        if (is_string($container)) {
-            $container = $this->getServiceLocator()->get($container);
-        }
         if (null !== $container) {
             $this->setContainer($container);
         }
@@ -134,9 +118,9 @@ class Breadcrumbs extends AbstractHelper
      * Sets which partial view script to use for rendering menu
      *
      * @param  string|array $partial partial view script or null. If an array is
-     *                               given, it is expected to contain two 
-     *                               values; the partial view script to use, 
-     *                               and the module where the script can be 
+     *                               given, it is expected to contain two
+     *                               values; the partial view script to use,
+     *                               and the module where the script can be
      *                               found.
      * @return Breadcrumbs fluent interface, returns self
      */
@@ -188,10 +172,10 @@ class Breadcrumbs extends AbstractHelper
             $html = $this->htmlify($active);
         } else {
             $html = $active->getLabel();
-            if ($this->getUseTranslator() && $t = $this->getTranslator()) {
-                $html = $t->translate($html);
+            if (null !== ($translator = $this->getTranslator())) {
+                $html = $translator->translate($html, $this->getTranslatorTextDomain());
             }
-            $escaper = $this->view->plugin('escape');
+            $escaper = $this->view->plugin('escapeHtml');
             $html    = $escaper($html);
         }
 
@@ -222,13 +206,13 @@ class Breadcrumbs extends AbstractHelper
      * so in the script it will be available in <code>$this->container</code>.
      *
      * @param  AbstractContainer $container [optional] container to pass to view script.
-     *                              Default is to use the container registered 
+     *                              Default is to use the container registered
      *                              in the helper.
-     * @param  string|array $partial [optional] partial view script to use. 
-     *                               Default is to use the partial registered 
-     *                               in the helper.  If an array is given, it 
-     *                               is expected to contain two values; the 
-     *                               partial view script to use, and the module 
+     * @param  string|array $partial [optional] partial view script to use.
+     *                               Default is to use the partial registered
+     *                               in the helper.  If an array is given, it
+     *                               is expected to contain two values; the
+     *                               partial view script to use, and the module
      *                               where the script can be found.
      * @return string               helper output
      * @throws Exception\RuntimeException if no partial provided
@@ -307,8 +291,8 @@ class Breadcrumbs extends AbstractHelper
         $partial = $this->getPartial();
         if ($partial) {
             return $this->renderPartial($container, $partial);
-        } else {
-            return $this->renderStraight($container);
         }
+
+        return $this->renderStraight($container);
     }
 }

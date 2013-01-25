@@ -1,30 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Barcode;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package    Zend_Validator
  */
 class Identcode extends AbstractAdapter
 {
@@ -32,28 +20,27 @@ class Identcode extends AbstractAdapter
      * Allowed barcode lengths
      * @var integer
      */
-    protected $_length = 12;
+    protected $length = 12;
 
     /**
      * Allowed barcode characters
      * @var string
      */
-    protected $_characters = '0123456789';
+    protected $characters = '0123456789';
 
     /**
      * Checksum function
      * @var string
      */
-    protected $_checksum = '_identcode';
+    protected $checksum = 'identcode';
+
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength(12);
         $this->setCharacters('0123456789');
-        $this->setChecksum('_identcode');
+        $this->setChecksum('identcode');
     }
 }

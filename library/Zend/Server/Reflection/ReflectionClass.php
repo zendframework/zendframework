@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Server
  */
 
 namespace Zend\Server\Reflection;
@@ -30,8 +19,6 @@ namespace Zend\Server\Reflection;
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ReflectionClass
 {
@@ -40,25 +27,25 @@ class ReflectionClass
      * {@link __set()}
      * @var array
      */
-    protected $_config = array();
+    protected $config = array();
 
     /**
      * Array of {@link \Zend\Server\Reflection\Method}s
      * @var array
      */
-    protected $_methods = array();
+    protected $methods = array();
 
     /**
      * Namespace
      * @var string
      */
-    protected $_namespace = null;
+    protected $namespace = null;
 
     /**
      * ReflectionClass object
      * @var ReflectionClass
      */
-    protected $_reflection;
+    protected $reflection;
 
     /**
      * Constructor
@@ -66,14 +53,13 @@ class ReflectionClass
      * Create array of dispatchable methods, each a
      * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
-     * @param ReflectionClass $reflection
+     * @param \ReflectionClass $reflection
      * @param string $namespace
      * @param mixed $argv
-     * @return void
      */
     public function __construct(\ReflectionClass $reflection, $namespace = null, $argv = false)
     {
-        $this->_reflection = $reflection;
+        $this->reflection = $reflection;
         $this->setNamespace($namespace);
 
         foreach ($reflection->getMethods() as $method) {
@@ -84,7 +70,7 @@ class ReflectionClass
 
             if ($method->isPublic()) {
                 // Get signatures and description
-                $this->_methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), $argv);
+                $this->methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), $argv);
             }
         }
     }
@@ -94,12 +80,13 @@ class ReflectionClass
      *
      * @param string $method
      * @param array $args
+     * @throws Exception\BadMethodCallException
      * @return mixed
      */
     public function __call($method, $args)
     {
-        if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
+        if (method_exists($this->reflection, $method)) {
+            return call_user_func_array(array($this->reflection, $method), $args);
         }
 
         throw new Exception\BadMethodCallException('Invalid reflection method');
@@ -108,7 +95,7 @@ class ReflectionClass
     /**
      * Retrieve configuration parameters
      *
-     * Values are retrieved by key from {@link $_config}. Returns null if no
+     * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
      * @param string $key
@@ -116,8 +103,8 @@ class ReflectionClass
      */
     public function __get($key)
     {
-        if (isset($this->_config[$key])) {
-            return $this->_config[$key];
+        if (isset($this->config[$key])) {
+            return $this->config[$key];
         }
 
         return null;
@@ -126,7 +113,7 @@ class ReflectionClass
     /**
      * Set configuration parameters
      *
-     * Values are stored by $key in {@link $_config}.
+     * Values are stored by $key in {@link $config}.
      *
      * @param string $key
      * @param mixed $value
@@ -134,7 +121,7 @@ class ReflectionClass
      */
     public function __set($key, $value)
     {
-        $this->_config[$key] = $value;
+        $this->config[$key] = $value;
     }
 
     /**
@@ -145,7 +132,7 @@ class ReflectionClass
      */
     public function getMethods()
     {
-        return $this->_methods;
+        return $this->methods;
     }
 
     /**
@@ -155,19 +142,20 @@ class ReflectionClass
      */
     public function getNamespace()
     {
-        return $this->_namespace;
+        return $this->namespace;
     }
 
     /**
      * Set namespace for this class
      *
      * @param string $namespace
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function setNamespace($namespace)
     {
         if (empty($namespace)) {
-            $this->_namespace = '';
+            $this->namespace = '';
             return;
         }
 
@@ -175,7 +163,7 @@ class ReflectionClass
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
-        $this->_namespace = $namespace;
+        $this->namespace = $namespace;
     }
 
     /**
@@ -188,6 +176,6 @@ class ReflectionClass
      */
     public function __wakeup()
     {
-        $this->_reflection = new \ReflectionClass($this->getName());
+        $this->reflection = new \ReflectionClass($this->getName());
     }
 }

@@ -1,33 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-use Zend\Loader\ShortNameLocator;
-use Zend\Loader\PluginClassLoader;
 use Zend\Navigation\AbstractContainer;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\View\Exception;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
-use Zend\View\Exception;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -35,8 +22,6 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Navigation extends AbstractNavigationHelper
 {
@@ -48,9 +33,9 @@ class Navigation extends AbstractNavigationHelper
     const NS = 'Zend\View\Helper\Navigation';
 
     /**
-     * @var ShortNameLocator
+     * @var Navigation\PluginManager
      */
-    protected $loader;
+    protected $plugins;
 
     /**
      * Default proxy to use in {@link render()}
@@ -60,11 +45,11 @@ class Navigation extends AbstractNavigationHelper
     protected $defaultProxy = 'menu';
 
     /**
-     * Contains references to proxied helpers
+     * Indicates whether or not a given helper has been injected
      *
      * @var array
      */
-    protected $helpers = array();
+    protected $injected = array();
 
     /**
      * Whether container should be injected when proxying
@@ -143,14 +128,18 @@ class Navigation extends AbstractNavigationHelper
     }
 
     /**
-     * Set plugin loader for retrieving navigation helpers
+     * Set manager for retrieving navigation helpers
      *
-     * @param ShortNameLocator $loader
+     * @param  Navigation\PluginManager $plugins
      * @return Navigation
      */
-    public function setPluginLoader(ShortNameLocator $loader)
+    public function setPluginManager(Navigation\PluginManager $plugins)
     {
-        $this->loader = $loader;
+        $renderer = $this->getView();
+        if ($renderer) {
+            $plugins->setRenderer($renderer);
+        }
+        $this->plugins = $plugins;
         return $this;
     }
 
@@ -160,14 +149,14 @@ class Navigation extends AbstractNavigationHelper
      * Lazy-loads an instance of Navigation\HelperLoader if none currently
      * registered.
      *
-     * @return ShortNameLocator
+     * @return Navigation\PluginManager
      */
-    public function getPluginLoader()
+    public function getPluginManager()
     {
-        if (null === $this->loader) {
-            $this->setPluginLoader(new Navigation\HelperLoader());
+        if (null === $this->plugins) {
+            $this->setPluginManager(new Navigation\PluginManager());
         }
-        return $this->loader;
+        return $this->plugins;
     }
 
     /**
@@ -181,51 +170,30 @@ class Navigation extends AbstractNavigationHelper
      *                                             exceptions should be
      *                                             thrown if something goes
      *                                             wrong. Default is true.
-     * @return \Zend\View\Helper\Navigation\Helper\HelperInterface  helper instance
-     * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
+     * @return \Zend\View\Helper\Navigation\HelperInterface  helper instance
+     * @throws Exception\RuntimeException if $strict is true and
      *         helper cannot be found
-     * @throws Exception\InvalidArgumentException if $strict is true and
-     *         helper does not implement the specified interface
      */
     public function findHelper($proxy, $strict = true)
     {
-        if (isset($this->helpers[$proxy])) {
-            return $this->helpers[$proxy];
-        }
-
-        $loader = $this->getPluginLoader();
-        $class  = $loader->load($proxy);
-
-        if ($strict && !$class) {
-            throw new Exception\RuntimeException(sprintf(
-                'Failed to find plugin for %s',
-                $proxy
-            ));
-        }
-
-        if (!class_exists($class)) {
+        $plugins = $this->getPluginManager();
+        if (!$plugins->has($proxy)) {
             if ($strict) {
-                throw new Exception\RuntimeException('Failed to find a class to proxy to');
+                throw new Exception\RuntimeException(sprintf(
+                    'Failed to find plugin for %s',
+                    $proxy
+                ));
             }
             return false;
         }
-        $helper = new $class();
 
-        if (!$helper instanceof AbstractNavigationHelper) {
-            if ($strict) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                        'Proxy helper "%s" is not an instance of ' .
-                        'Zend\View\Helper\Navigation\Helper',
-                        get_class($helper)
-                ));
-            }
+        $helper = $plugins->get($proxy);
+        $class  = get_class($helper);
 
-            return null;
+        if (!isset($this->injected[$class])) {
+            $this->inject($helper);
+            $this->injected[$class] = true;
         }
-
-        $helper->setView($this->view);
-        $this->_inject($helper);
-        $this->helpers[$proxy] = $helper;
 
         return $helper;
     }
@@ -237,7 +205,7 @@ class Navigation extends AbstractNavigationHelper
      * @param  NavigationHelper $helper  helper instance
      * @return void
      */
-    protected function _inject(NavigationHelper $helper)
+    protected function inject(NavigationHelper $helper)
     {
         if ($this->getInjectContainer() && !$helper->hasContainer()) {
             $helper->setContainer($this->getContainer());
@@ -253,7 +221,9 @@ class Navigation extends AbstractNavigationHelper
         }
 
         if ($this->getInjectTranslator() && !$helper->hasTranslator()) {
-            $helper->setTranslator($this->getTranslator());
+            $helper->setTranslator(
+                $this->getTranslator(), $this->getTranslatorTextDomain()
+            );
         }
     }
 
@@ -362,11 +332,8 @@ class Navigation extends AbstractNavigationHelper
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.
-     * @return string                                helper output
-     * @throws \Zend\Loader\PluginLoader\Exception    if helper cannot be found
-     * @throws \Zend\View\Exception\ExceptionInterface                   if helper doesn't implement
-     *                                               the interface specified in
-     *                                               {@link findHelper()}
+     * @return string helper output
+     * @throws Exception\RuntimeException if helper cannot be found
      */
     public function render($container = null)
     {

@@ -11,102 +11,80 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "doctrine/common": ">=2.1",
+        "phpunit/PHPUnit": "3.7.*"
+    },
+    "suggest": {
+        "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
+        "ext-intl": "ext/intl for i18n features",
+        "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",
+        "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
+    },
     "autoload": {
         "psr-0": {
-            "Zend": "library/"
+            "Zend\\": "library/",
+            "ZendTest\\": "tests/"
         }
     },
-    "config": {
-        "bin-dir": "bin"
-    },
+    "bin": [
+        "bin/classmap_generator.php"
+    ],
     "replace": {
-        "zendframework/zend-acl": "self.version",
-        "zendframework/zend-amf": "self.version",
         "zendframework/zend-authentication": "self.version",
         "zendframework/zend-barcode": "self.version",
         "zendframework/zend-cache": "self.version",
         "zendframework/zend-captcha": "self.version",
-        "zendframework/zend-cloud": "self.version",
         "zendframework/zend-code": "self.version",
         "zendframework/zend-config": "self.version",
         "zendframework/zend-console": "self.version",
         "zendframework/zend-crypt": "self.version",
-        "zendframework/zend-currency": "self.version",
-        "zendframework/zend-date": "self.version",
         "zendframework/zend-db": "self.version",
+        "zendframework/zend-debug": "self.version",
         "zendframework/zend-di": "self.version",
-        "zendframework/zend-docbook": "self.version",
-        "zendframework/zend-dojo": "self.version",
         "zendframework/zend-dom": "self.version",
+        "zendframework/zend-escaper": "self.version",
         "zendframework/zend-eventmanager": "self.version",
         "zendframework/zend-feed": "self.version",
         "zendframework/zend-file": "self.version",
         "zendframework/zend-filter": "self.version",
         "zendframework/zend-form": "self.version",
-        "zendframework/zend-gdata": "self.version",
         "zendframework/zend-http": "self.version",
-        "zendframework/zend-infocard": "self.version",
+        "zendframework/zend-i18n": "self.version",
         "zendframework/zend-inputfilter": "self.version",
         "zendframework/zend-json": "self.version",
         "zendframework/zend-ldap": "self.version",
         "zendframework/zend-loader": "self.version",
-        "zendframework/zend-locale": "self.version",
         "zendframework/zend-log": "self.version",
         "zendframework/zend-mail": "self.version",
-        "zendframework/zend-markup": "self.version",
         "zendframework/zend-math": "self.version",
-        "zendframework/zend-measure": "self.version",
         "zendframework/zend-memory": "self.version",
         "zendframework/zend-mime": "self.version",
         "zendframework/zend-modulemanager": "self.version",
         "zendframework/zend-mvc": "self.version",
         "zendframework/zend-navigation": "self.version",
-        "zendframework/zend-oauth": "self.version",
-        "zendframework/zend-openid": "self.version",
         "zendframework/zend-paginator": "self.version",
-        "zendframework/zend-pdf": "self.version",
+        "zendframework/zend-permissions-acl": "self.version",
         "zendframework/zend-progressbar": "self.version",
-        "zendframework/zend-queue": "self.version",
-        "zendframework/zend-rest": "self.version",
-        "zendframework/zend-search-lucene": "self.version",
         "zendframework/zend-serializer": "self.version",
         "zendframework/zend-server": "self.version",
-        "zendframework/zend-service-agilezen": "self.version",
-        "zendframework/zend-service-akismet": "self.version",
-        "zendframework/zend-service-amazon": "self.version",
-        "zendframework/zend-service-audioscrobbler": "self.version",
-        "zendframework/zend-service-delicious": "self.version",
-        "zendframework/zend-service-developergarden": "self.version",
-        "zendframework/zend-service-flickr": "self.version",
-        "zendframework/zend-service-gogrid": "self.version",
-        "zendframework/zend-service-livedocx": "self.version",
-        "zendframework/zend-service-nirvanix": "self.version",
-        "zendframework/zend-service-rackspace": "self.version",
-        "zendframework/zend-service-recaptcha": "self.version",
-        "zendframework/zend-service-slideshare": "self.version",
-        "zendframework/zend-service-strikeiron": "self.version",
-        "zendframework/zend-service-technorati": "self.version",
-        "zendframework/zend-service-twitter": "self.version",
-        "zendframework/zend-service-windowsazure": "self.version",
-        "zendframework/zend-service-yahoo": "self.version",
         "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-session": "self.version",
         "zendframework/zend-soap": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-tag": "self.version",
-        "zendframework/zend-test": "self.version",
         "zendframework/zend-text": "self.version",
-        "zendframework/zend-timesync": "self.version",
-        "zendframework/zend-translator": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-validator": "self.version",
+        "zendframework/zend-version": "self.version",
         "zendframework/zend-view": "self.version",
-        "zendframework/zend-wildfire": "self.version",
         "zendframework/zend-xmlrpc": "self.version"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "2.0-dev",
+            "dev-develop": "2.1-dev"
         }
     }
 }

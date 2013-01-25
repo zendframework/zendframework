@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ModuleManager
  */
@@ -11,16 +11,16 @@
 namespace Zend\ModuleManager\Listener;
 
 use Traversable;
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * Listener options
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class ListenerOptions extends Options
+class ListenerOptions extends AbstractOptions
 {
     /**
      * @var array
@@ -31,11 +31,16 @@ class ListenerOptions extends Options
      * @var array
      */
     protected $configGlobPaths = array();
-    
+
     /**
      * @var array
      */
     protected $configStaticPaths = array();
+
+    /**
+     * @var array
+     */
+    protected $extraConfig = array();
 
     /**
      * @var bool
@@ -66,6 +71,7 @@ class ListenerOptions extends Options
      * Set an array of paths where modules reside
      *
      * @param  array|Traversable $modulePaths
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setModulePaths($modulePaths)
@@ -83,18 +89,18 @@ class ListenerOptions extends Options
     }
 
     /**
-     * Get the glob patterns to load additional config files 
-     * 
+     * Get the glob patterns to load additional config files
+     *
      * @return array
      */
     public function getConfigGlobPaths()
     {
         return $this->configGlobPaths;
     }
-    
+
     /**
-     * Get the static paths to load additional config files 
-     * 
+     * Get the static paths to load additional config files
+     *
      * @return array
      */
     public function getConfigStaticPaths()
@@ -104,8 +110,9 @@ class ListenerOptions extends Options
 
     /**
      * Set the glob patterns to use for loading additional config files
-     * 
-     * @param array $configGlobPaths
+     *
+     * @param array|Traversable $configGlobPaths
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setConfigGlobPaths($configGlobPaths)
@@ -119,12 +126,14 @@ class ListenerOptions extends Options
             );
         }
         $this->configGlobPaths = $configGlobPaths;
+        return $this;
     }
-    
+
     /**
      * Set the static paths to use for loading additional config files
-     * 
-     * @param array $configStaticPaths
+     *
+     * @param array|Traversable $configStaticPaths
+     * @throws Exception\InvalidArgumentException
      * @return ListenerOptions
      */
     public function setConfigStaticPaths($configStaticPaths)
@@ -138,6 +147,39 @@ class ListenerOptions extends Options
             );
         }
         $this->configStaticPaths = $configStaticPaths;
+        return $this;
+    }
+
+    /**
+     * Get any extra config to merge in.
+     *
+     * @return array|Traversable
+     */
+    public function getExtraConfig()
+    {
+        return $this->extraConfig;
+    }
+
+    /**
+     * Add some extra config array to the main config. This is mainly useful
+     * for unit testing purposes.
+     *
+     * @param array|Traversable $extraConfig
+     * @throws Exception\InvalidArgumentException
+     * @return ListenerOptions
+     */
+    public function setExtraConfig($extraConfig)
+    {
+        if (!is_array($extraConfig) && !$extraConfig instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Argument passed to %s::%s() must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.',
+                __CLASS__, __METHOD__, gettype($extraConfig))
+            );
+        }
+        $this->extraConfig = $extraConfig;
+        return $this;
     }
 
     /**
@@ -194,7 +236,7 @@ class ListenerOptions extends Options
      */
     public function getConfigCacheFile()
     {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
+        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
     }
 
     /**

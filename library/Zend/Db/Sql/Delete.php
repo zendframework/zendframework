@@ -3,18 +3,18 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\StatementContainerInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Platform\Sql92;
 
 /**
  * @category   Zend
@@ -62,10 +62,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Constructor
-     * 
-     * @param  null|string $table 
-     * @param  null|string $schema
-     * @return void
+     *
+     * @param  null|string $table
      */
     public function __construct($table = null)
     {
@@ -77,9 +75,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create from statement
-     * 
-     * @param  string $table 
-     * @param  null|string $schema
+     *
+     * @param  string $table
      * @return Delete
      */
     public function from($table)
@@ -101,8 +98,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create where clause
-     * 
-     * @param  Where|Closure|string|array $predicate 
+     *
+     * @param  Where|\Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @return Delete
      */
@@ -113,39 +110,63 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } elseif ($predicate instanceof \Closure) {
             $predicate($this->where);
         } else {
+
             if (is_string($predicate)) {
+                // String $predicate should be passed as an expression
                 $predicate = new Predicate\Expression($predicate);
+                $this->where->addPredicate($predicate, $combination);
             } elseif (is_array($predicate)) {
+
                 foreach ($predicate as $pkey => $pvalue) {
+                    // loop through predicates
+
                     if (is_string($pkey) && strpos($pkey, '?') !== false) {
+                        // First, process strings that the abstraction replacement character ?
+                        // as an Expression predicate
                         $predicate = new Predicate\Expression($pkey, $pvalue);
+
                     } elseif (is_string($pkey)) {
-                        $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
+                        // Otherwise, if still a string, do something intelligent with the PHP type provided
+
+                        if (is_null($pvalue)) {
+                            // map PHP null to SQL IS NULL expression
+                            $predicate = new Predicate\IsNull($pkey, $pvalue);
+                        } elseif (is_array($pvalue)) {
+                            // if the value is an array, assume IN() is desired
+                            $predicate = new Predicate\In($pkey, $pvalue);
+                        } else {
+                            // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
+                            $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
+                        }
+                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
+                        // Predicate type is ok
+                        $predicate = $pvalue;
                     } else {
+                        // must be an array of expressions (with int-indexed array)
                         $predicate = new Predicate\Expression($pvalue);
                     }
+                    $this->where->addPredicate($predicate, $combination);
                 }
             }
-            $this->where->addPredicate($predicate, $combination);
         }
         return $this;
     }
 
     /**
      * Prepare the delete statement
-     * 
-     * @param  Adapter $adapter 
-     * @param  StatementInterface $statement 
+     *
+     * @param  Adapter $adapter
+     * @param  StatementContainerInterface $statementContainer
      * @return void
      */
-    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
+    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
     {
         $platform = $adapter->getPlatform();
-        $parameterContainer = $statement->getParameterContainer();
+        $parameterContainer = $statementContainer->getParameterContainer();
 
         if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
-            $statement->setParameterContainer($parameterContainer);
+            $statementContainer->setParameterContainer($parameterContainer);
         }
 
         $table = $platform->quoteIdentifier($this->table);
@@ -154,20 +175,18 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         // process where
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, $adapter->getDriver(), 'where');
-            if (count($whereParts['parameters']) > 0) {
-                $parameterContainer->merge($whereParts['parameters']);
-            }
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+            $whereParts = $this->processExpression($this->where, $platform, $adapter, 'where');
+            $parameterContainer->merge($whereParts->getParameterContainer());
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
         }
-        $statement->setSql($sql);
+        $statementContainer->setSql($sql);
     }
 
     /**
      * Get the SQL string, based on the platform
      *
      * Platform defaults to Sql92 if none provided
-     * 
+     *
      * @param  null|PlatformInterface $adapterPlatform
      * @return string
      */
@@ -184,7 +203,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
         }
 
         return $sql;
@@ -194,8 +213,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Property overloading
      *
      * Overloads "where" only.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)

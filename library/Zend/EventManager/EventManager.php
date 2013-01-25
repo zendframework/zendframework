@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager;
 
 use ArrayAccess;
 use ArrayObject;
-use SplPriorityQueue;
 use Traversable;
 use Zend\Stdlib\CallbackHandler;
 use Zend\Stdlib\PriorityQueue;
@@ -35,8 +24,6 @@ use Zend\Stdlib\PriorityQueue;
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EventManager implements EventManagerInterface
 {
@@ -91,18 +78,19 @@ class EventManager implements EventManagerInterface
     /**
      * Set shared event manager
      *
-     * @param  SharedEventManagerInterface $connections
+     * @param SharedEventManagerInterface $sharedEventManager
      * @return EventManager
      */
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {
         $this->sharedManager = $sharedEventManager;
+        StaticEventManager::setInstance($sharedEventManager);
         return $this;
     }
 
     /**
      * Remove any shared event manager currently attached
-     * 
+     *
      * @return void
      */
     public function unsetSharedManager()
@@ -113,13 +101,28 @@ class EventManager implements EventManagerInterface
     /**
      * Get shared event manager
      *
+     * If one is not defined, but we have a static instance in
+     * StaticEventManager, that one will be used and set in this instance.
+     *
+     * If none is available in the StaticEventManager, a boolean false is
+     * returned.
+     *
      * @return false|SharedEventManagerInterface
      */
     public function getSharedManager()
     {
-        if (null === $this->sharedManager) {
-            $this->setSharedManager(StaticEventManager::getInstance());
+        // "false" means "I do not want a shared manager; don't try and fetch one"
+        if (false === $this->sharedManager
+            || $this->sharedManager instanceof SharedEventManagerInterface
+        ) {
+            return $this->sharedManager;
         }
+
+        if (!StaticEventManager::hasInstance()) {
+            return false;
+        }
+
+        $this->sharedManager = StaticEventManager::getInstance();
         return $this->sharedManager;
     }
 
@@ -141,7 +144,7 @@ class EventManager implements EventManagerInterface
      */
     public function setIdentifiers($identifiers)
     {
-        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+        if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique((array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array($identifiers);
@@ -157,10 +160,10 @@ class EventManager implements EventManagerInterface
      */
     public function addIdentifiers($identifiers)
     {
-        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+        if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
-            $this->identifiers = array_unique($this->identifiers + array($identifiers));
+            $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
         }
         return $this;
     }
@@ -173,7 +176,7 @@ class EventManager implements EventManagerInterface
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  null|callback $callback
+     * @param  null|callable $callback
      * @return ResponseCollection All listener return values
      * @throws Exception\InvalidCallbackException
      */
@@ -215,9 +218,9 @@ class EventManager implements EventManagerInterface
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  Callable $callback
+     * @param  callable $callback
      * @return ResponseCollection
-     * @throws Exception\InvalidCallbackException if invalid callback provided
+     * @throws Exception\InvalidCallbackException if invalid callable provided
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
@@ -258,13 +261,13 @@ class EventManager implements EventManagerInterface
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      *
-     * You can specify "*" for the event name. In such cases, the listener will 
+     * You can specify "*" for the event name. In such cases, the listener will
      * be triggered for every event.
      *
      * @param  string|array|ListenerAggregateInterface $event An event or array of event names. If a ListenerAggregateInterface, proxies to {@link attachAggregate()}.
-     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregateInterface $event, this will be the priority
-     * @param  int $priority If provided, the priority at which to register the callback
-     * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
+     * @param  callable|int $callback If string $event provided, expects PHP callback; for a ListenerAggregateInterface $event, this will be the priority
+     * @param  int $priority If provided, the priority at which to register the callable
+     * @return CallbackHandler|mixed CallbackHandler if attaching callable (to allow later unsubscribe); mixed if attaching aggregate
      * @throws Exception\InvalidArgumentException
      */
     public function attach($event, $callback = null, $priority = 1)
@@ -429,7 +432,7 @@ class EventManager implements EventManagerInterface
      *
      * @param  string           $event Event name
      * @param  EventInterface $e
-     * @param  null|callback    $callback
+     * @param  null|callable    $callback
      * @return ResponseCollection
      */
     protected function triggerListeners($event, EventInterface $e, $callback = null)
@@ -444,19 +447,15 @@ class EventManager implements EventManagerInterface
         $wildcardListeners       = $this->getListeners('*');
         if (count($sharedListeners) || count($sharedWildcardListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
-        }
 
-        // Shared listeners on this specific event
-        $this->insertListeners($listeners, $sharedListeners);
+            // Shared listeners on this specific event
+            $this->insertListeners($listeners, $sharedListeners);
 
-        // Shared wildcard listeners
-        $this->insertListeners($listeners, $sharedWildcardListeners);
+            // Shared wildcard listeners
+            $this->insertListeners($listeners, $sharedWildcardListeners);
 
-        // Add wildcard listeners
-        $this->insertListeners($listeners, $wildcardListeners);
-
-        if ($listeners->isEmpty()) {
-            return $responses;
+            // Add wildcard listeners
+            $this->insertListeners($listeners, $wildcardListeners);
         }
 
         foreach ($listeners as $listener) {
@@ -495,6 +494,10 @@ class EventManager implements EventManagerInterface
         }
 
         $identifiers     = $this->getIdentifiers();
+        //Add wildcard id to the search, if not already added
+        if (!in_array('*', $identifiers)) {
+            $identifiers[] = '*';
+        }
         $sharedListeners = array();
 
         foreach ($identifiers as $id) {
@@ -521,17 +524,13 @@ class EventManager implements EventManagerInterface
      * Add listeners to the master queue of listeners
      *
      * Used to inject shared listeners and wildcard listeners.
-     * 
-     * @param  PriorityQueue $masterListeners 
-     * @param  PriorityQueue $listeners 
+     *
+     * @param  PriorityQueue $masterListeners
+     * @param  PriorityQueue $listeners
      * @return void
      */
     protected function insertListeners($masterListeners, $listeners)
     {
-        if (!count($listeners)) {
-            return;
-        }
-
         foreach ($listeners as $listener) {
             $priority = $listener->getMetadatum('priority');
             if (null === $priority) {

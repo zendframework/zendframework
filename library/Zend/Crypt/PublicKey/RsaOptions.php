@@ -3,72 +3,66 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt\PublicKey;
 
-use Zend\Stdlib\Options;
-use Zend\Crypt\PublicKey\Rsa\PrivateKey;
-use Zend\Crypt\PublicKey\Rsa\PublicKey;
 use Zend\Crypt\PublicKey\Rsa\Exception;
+use Zend\Stdlib\AbstractOptions;
 
 /**
+ * RSA instance options
+ *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage PublicKey
  */
-class RsaOptions extends Options
+class RsaOptions extends AbstractOptions
 {
     /**
-     * @var PrivateKey
+     * @var Rsa\PrivateKey
      */
     protected $privateKey = null;
 
     /**
-     * @var PublicKey
+     * @var Rsa\PublicKey
      */
     protected $publicKey = null;
 
     /**
      * @var string
      */
-    protected $pemString;
+    protected $hashAlgorithm = 'sha1';
+
+    /**
+     * Signature hash algorithm defined by openss constants
+     *
+     * @var int
+     */
+    protected $opensslSignatureAlgorithm = null;
 
     /**
      * @var string
      */
-    protected $pemPath;
+    protected $passPhrase = null;
 
     /**
-     * @var string
+     * Output is binary
+     *
+     * @var bool
      */
-    protected $certificateString;
+    protected $binaryOutput = true;
 
     /**
-     * @var string
-     */
-    protected $certificatePath;
-
-    /**
-     * @var string
-     */
-    protected $hashAlgorithm;
-
-    /**
-     * @var string
-     */
-    protected $passPhrase;
-
-
-    /**
-     * @param Rsa\PrivateKey $key
+     * Set private key
+     *
+     * @param  Rsa\PrivateKey $key
      * @return RsaOptions
      */
-    public function setPrivateKey(PrivateKey $key)
+    public function setPrivateKey(Rsa\PrivateKey $key)
     {
         $this->privateKey = $key;
         $this->publicKey  = $this->privateKey->getPublicKey();
@@ -76,6 +70,8 @@ class RsaOptions extends Options
     }
 
     /**
+     * Get private key
+     *
      * @return null|Rsa\PrivateKey
      */
     public function getPrivateKey()
@@ -84,16 +80,20 @@ class RsaOptions extends Options
     }
 
     /**
-     * @param Rsa\PublicKey $key
+     * Set public key
+     *
+     * @param  Rsa\PublicKey $key
      * @return RsaOptions
      */
-    public function setPublicKey(PublicKey $key)
+    public function setPublicKey(Rsa\PublicKey $key)
     {
         $this->publicKey = $key;
         return $this;
     }
 
     /**
+     * Get public key
+     *
      * @return null|Rsa\PublicKey
      */
     public function getPublicKey()
@@ -124,107 +124,24 @@ class RsaOptions extends Options
     }
 
     /**
-     * Set PEM string
-     *
-     * @param string $value
-     * @return RsaOptions
-     */
-    public function setPemString($value)
-    {
-        $this->pemString = $value;
-
-        try {
-            $this->privateKey = new Rsa\PrivateKey($this->pemString, $this->passPhrase);
-            $this->publicKey  = $this->privateKey->getPublicKey();
-        } catch (Rsa\Exception\RuntimeException $e) {
-            $this->privateKey = null;
-            $this->publicKey  = new Rsa\PublicKey($this->pemString);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get PEM string
-     *
-     * @return string
-     */
-    public function getPemString()
-    {
-        return $this->pemString;
-    }
-
-    /**
-     * Set PEM path
-     *
-     * @param string $path
-     * @return RsaOptions
-     * @throws Rsa\Exception\InvalidArgumentException
-     */
-    public function setPemPath($path)
-    {
-        if (!is_readable($path)) {
-            throw new Exception\InvalidArgumentException(
-                "PEM file '{$path}' is not readable"
-            );
-        }
-
-        $this->pemPath = $path;
-        $this->setPemString(file_get_contents($path));
-
-        return $this;
-    }
-
-    /**
-     * Get PEM path
-     *
-     * @return string
-     */
-    public function getPemPath()
-    {
-        return $this->pemPath;
-    }
-
-    /**
      * Set hash algorithm
      *
-     * @param  $name
+     * @param  string $hash
      * @return RsaOptions
      * @throws Rsa\Exception\RuntimeException
      * @throws Rsa\Exception\InvalidArgumentException
      */
-    public function setHashAlgorithm($name)
+    public function setHashAlgorithm($hash)
     {
-        switch (strtolower($name)) {
-            case 'md2':
-                // check if md2 digest is enabled on openssl just for backwards compatibility
-                $digests = openssl_get_md_methods();
-                if (!in_array(strtoupper($name), $digests)) {
-                    throw new Exception\RuntimeException(
-                        'Openssl md2 digest is not enabled  (deprecated)'
-                    );
-                }
-                $this->hashAlgorithm = OPENSSL_ALGO_MD2;
-                break;
-            case 'md4':
-                $this->hashAlgorithm = OPENSSL_ALGO_MD4;
-                break;
-            case 'md5':
-                $this->hashAlgorithm = OPENSSL_ALGO_MD5;
-                break;
-            case 'sha1':
-                $this->hashAlgorithm = OPENSSL_ALGO_SHA1;
-                break;
-            case 'dss1':
-                $this->hashAlgorithm = OPENSSL_ALGO_DSS1;
-                break;
-            default:
-                throw new Exception\InvalidArgumentException(
-                    "Hash algorithm '{$name}' is not supported"
-                );
-                break;
+        $hashUpper = strtoupper($hash);
+        if (!defined('OPENSSL_ALGO_' . $hashUpper)) {
+            throw new Exception\InvalidArgumentException(
+                "Hash algorithm '{$hash}' is not supported"
+            );
         }
 
+        $this->hashAlgorithm = strtolower($hash);
+        $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_' . $hashUpper);
         return $this;
     }
 
@@ -235,65 +152,75 @@ class RsaOptions extends Options
      */
     public function getHashAlgorithm()
     {
-        if (!isset($this->hashAlgorithm)) {
-            $this->hashAlgorithm = OPENSSL_ALGO_SHA1;
-        }
-
         return $this->hashAlgorithm;
     }
 
-    /**
-     * Set certificate string
-     *
-     * @param string $value
-     * @return RsaOptions
-     */
-    public function setCertificateString($value)
+    public function getOpensslSignatureAlgorithm()
     {
-        $this->certificateString = $value;
-        $this->publicKey         = new Rsa\PublicKey($this->certificateString);
-
-        return $this;
-    }
-
-    /**
-     * Get certificate string
-     *
-     * @return string
-     */
-    public function getCertificateString()
-    {
-        return $this->certificateString;
-    }
-
-    /**
-     * Set certificate path
-     *
-     * @param string $path
-     * @return RsaOptions
-     * @throws Rsa\Exception\InvalidArgumentException
-     */
-    public function setCertificatePath($path)
-    {
-        if (!is_readable($path)) {
-            throw new Exception\InvalidArgumentException(
-                "Certificate file '{$path}' is not readable"
-            );
+        if (!isset($this->opensslSignatureAlgorithm)) {
+            $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_' . strtoupper($this->hashAlgorithm));
         }
+        return $this->opensslSignatureAlgorithm;
+    }
 
-        $this->certificatePath = $path;
-        $this->setCertificateString(file_get_contents($path));
-
+    /**
+     * Enable/disable the binary output
+     *
+     * @param  bool $value
+     * @return RsaOptions
+     */
+    public function setBinaryOutput($value)
+    {
+        $this->binaryOutput = (bool) $value;
         return $this;
     }
 
     /**
-     * Get certificate path
+     * Get the value of binary output
      *
-     * @return string
+     * @return bool
      */
-    public function getCertificatePath()
+    public function getBinaryOutput()
     {
-        return $this->certificatePath;
+        return $this->binaryOutput;
     }
+
+    /**
+     * Generate new private/public key pair
+     *
+     * @param  array $opensslConfig
+     * @return RsaOptions
+     * @throws Rsa\Exception\RuntimeException
+     */
+    public function generateKeys(array $opensslConfig = array())
+     {
+         $opensslConfig = array_replace(array(
+              'private_key_type' => OPENSSL_KEYTYPE_RSA,
+              'private_key_bits' => Rsa\PrivateKey::DEFAULT_KEY_SIZE,
+              'digest_alg'       => $this->getHashAlgorithm()
+         ), $opensslConfig);
+
+         // generate
+         $resource = openssl_pkey_new($opensslConfig);
+         if (false === $resource) {
+             throw new Exception\RuntimeException(
+                 'Can not generate keys; openssl ' . openssl_error_string()
+             );
+         }
+
+         // export key
+         $passPhrase = $this->getPassPhrase();
+         $result     = openssl_pkey_export($resource, $private, $passPhrase);
+         if (false === $result) {
+             throw new Exception\RuntimeException(
+                 'Can not export key; openssl ' . openssl_error_string()
+             );
+         }
+
+         $details          = openssl_pkey_get_details($resource);
+         $this->privateKey = new Rsa\PrivateKey($private, $passPhrase);
+         $this->publicKey  = new Rsa\PublicKey($details['key']);
+
+         return $this;
+     }
 }

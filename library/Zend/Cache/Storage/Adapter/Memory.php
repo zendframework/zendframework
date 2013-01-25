@@ -1,50 +1,39 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    stdClass,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearExpiredInterface,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\TagableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface,
-    Zend\Cache\Utils;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Memory
-    extends AbstractAdapter
-    implements ClearExpiredInterface, ClearByPrefixInterface, FlushableInterface, TagableInterface,
-               IterableInterface, AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Memory extends AbstractAdapter implements
+    AvailableSpaceCapableInterface,
+    ClearByPrefixInterface,
+    ClearExpiredInterface,
+    FlushableInterface,
+    IterableInterface,
+    TaggableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Data Array
@@ -125,7 +114,7 @@ class Memory
     /**
      * Get the storage iterator
      *
-     * @return MemoryIterator
+     * @return KeyListIterator
      */
     public function getIterator()
     {
@@ -148,7 +137,7 @@ class Memory
     /**
      * Flush the whole storage
      *
-     * @return boolean
+     * @return bool
      */
     public function flush()
     {
@@ -161,7 +150,7 @@ class Memory
     /**
      * Remove expired items
      *
-     * @return boolean
+     * @return bool
      */
     public function clearExpired()
     {
@@ -191,7 +180,7 @@ class Memory
      * Remove items matching given prefix
      *
      * @param string $prefix
-     * @return boolean
+     * @return bool
      */
     public function clearByPrefix($prefix)
     {
@@ -211,7 +200,7 @@ class Memory
         return true;
     }
 
-    /* TagableInterface */
+    /* TaggableInterface */
 
     /**
      * Set tags to an item by given key.
@@ -219,7 +208,7 @@ class Memory
      *
      * @param string   $key
      * @param string[] $tags
-     * @return boolean
+     * @return bool
      */
     public function setTags($key, array $tags)
     {
@@ -265,8 +254,8 @@ class Memory
      * else all given tags must match.
      *
      * @param string[] $tags
-     * @param boolean  $disjunction
-     * @return boolean
+     * @param  bool  $disjunction
+     * @return bool
     */
     public function clearByTags(array $tags, $disjunction = false)
     {
@@ -295,7 +284,7 @@ class Memory
      * Internal method to get an item.
      *
      * @param  string  $normalizedKey
-     * @param  boolean $success
+     * @param  bool $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
@@ -356,9 +345,7 @@ class Memory
      * Internal method to test if an item exists.
      *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
+     * @return bool
      */
     protected function internalHasItem(& $normalizedKey)
     {
@@ -380,9 +367,8 @@ class Memory
     /**
      * Internal method to test multiple items.
      *
-     * @param  array $keys
+     * @param array $normalizedKeys
      * @return array Array of found keys
-     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys)
     {
@@ -412,7 +398,7 @@ class Memory
      * Get metadata of an item.
      *
      * @param  string $normalizedKey
-     * @return array|boolean Metadata on success, false on failure
+     * @return array|bool Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
@@ -438,7 +424,7 @@ class Memory
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
@@ -495,7 +481,7 @@ class Memory
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value)
@@ -560,7 +546,7 @@ class Memory
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value)
@@ -605,7 +591,7 @@ class Memory
      * Internal method to reset lifetime of an item
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey)
@@ -624,7 +610,7 @@ class Memory
      * Internal method to remove an item.
      *
      * @param  string $normalizedKey
-     * @return boolean
+     * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey)
@@ -649,7 +635,7 @@ class Memory
      *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
@@ -674,7 +660,7 @@ class Memory
      *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @return int|boolean The new value on success, false on failure
+     * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
@@ -719,7 +705,8 @@ class Memory
                         'object'   => true,
                         'resource' => true,
                     ),
-                    'supportedMetadata' => array('mtime'),
+                    'supportedMetadata'  => array('mtime'),
+                    'minTtl'             => 1,
                     'maxTtl'             => PHP_INT_MAX,
                     'staticTtl'          => false,
                     'ttlPrecision'       => 0.05,
@@ -739,7 +726,7 @@ class Memory
     /**
      * Has space available to store items?
      *
-     * @return boolean
+     * @return bool
      */
     protected function hasAvailableSpace()
     {

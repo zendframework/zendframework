@@ -1,33 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Entry\Atom;
 
-use DOMDocument,
-    DOMElement;
+use DateTime;
+use DOMDocument;
+use DOMElement;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Deleted
     extends \Zend\Feed\Writer\Renderer\AbstractRenderer
@@ -35,9 +24,8 @@ class Deleted
 {
     /**
      * Constructor
-     * 
-     * @param  \Zend\Feed\Writer\Deleted $container 
-     * @return void
+     *
+     * @param  \Zend\Feed\Writer\Deleted $container
      */
     public function __construct (\Zend\Feed\Writer\Deleted $container)
     {
@@ -46,35 +34,35 @@ class Deleted
 
     /**
      * Render atom entry
-     * 
+     *
      * @return \Zend\Feed\Writer\Renderer\Entry\Atom
      */
     public function render()
     {
-        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
-        $this->_dom->formatOutput = true;
-        $entry = $this->_dom->createElement('at:deleted-entry');
-        $this->_dom->appendChild($entry);
-        
-        $entry->setAttribute('ref', $this->_container->getReference());
-        $entry->setAttribute('when', $this->_container->getWhen()->get(\Zend\Date\Date::ISO_8601));
-        
-        $this->_setBy($this->_dom, $entry);
-        $this->_setComment($this->_dom, $entry);
-        
+        $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
+        $this->dom->formatOutput = true;
+        $entry = $this->dom->createElement('at:deleted-entry');
+        $this->dom->appendChild($entry);
+
+        $entry->setAttribute('ref', $this->container->getReference());
+        $entry->setAttribute('when', $this->container->getWhen()->format(DateTime::ISO8601));
+
+        $this->_setBy($this->dom, $entry);
+        $this->_setComment($this->dom, $entry);
+
         return $this;
     }
-    
+
     /**
      * Set tombstone comment
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setComment(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getComment()) {
+        if (!$this->getDataContainer()->getComment()) {
             return;
         }
         $c = $dom->createElement('at:comment');
@@ -83,38 +71,37 @@ class Deleted
         $cdata = $dom->createCDATASection($this->getDataContainer()->getComment());
         $c->appendChild($cdata);
     }
-    
+
     /**
-     * Set entry authors 
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * Set entry authors
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setBy(DOMDocument $dom, DOMElement $root)
     {
-        $data = $this->_container->getBy();
+        $data = $this->container->getBy();
         if ((!$data || empty($data))) {
             return;
         }
-        $author = $this->_dom->createElement('at:by');
-        $name = $this->_dom->createElement('name');
+        $author = $this->dom->createElement('at:by');
+        $name = $this->dom->createElement('name');
         $author->appendChild($name);
         $root->appendChild($author);
         $text = $dom->createTextNode($data['name']);
         $name->appendChild($text);
         if (array_key_exists('email', $data)) {
-            $email = $this->_dom->createElement('email');
+            $email = $this->dom->createElement('email');
             $author->appendChild($email);
             $text = $dom->createTextNode($data['email']);
             $email->appendChild($text);
         }
         if (array_key_exists('uri', $data)) {
-            $uri = $this->_dom->createElement('uri');
+            $uri = $this->dom->createElement('uri');
             $author->appendChild($uri);
             $text = $dom->createTextNode($data['uri']);
             $uri->appendChild($text);
         }
     }
-    
 }

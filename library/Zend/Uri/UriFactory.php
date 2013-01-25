@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Uri
  */
@@ -20,12 +20,10 @@ use Zend\Uri\Uri;
  * classes can be registered using the registerScheme() method.
  *
  * Note that this class contains only static methods and should not be
- * instanciated
+ * instantiated
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class UriFactory
 {
@@ -34,11 +32,13 @@ abstract class UriFactory
      *
      * @var array
      */
-    static protected $schemeClasses = array(
+     protected static $schemeClasses = array(
         'http'   => 'Zend\Uri\Http',
         'https'  => 'Zend\Uri\Http',
         'mailto' => 'Zend\Uri\Mailto',
         'file'   => 'Zend\Uri\File',
+        'urn'    => 'Zend\Uri\Uri',
+        'tag'    => 'Zend\Uri\Uri',
     );
 
     /**
@@ -47,10 +47,23 @@ abstract class UriFactory
      * @param string $scheme
      * @param string $class
      */
-    static public function registerScheme($scheme, $class)
+    public static function registerScheme($scheme, $class)
     {
         $scheme = strtolower($scheme);
         static::$schemeClasses[$scheme] = $class;
+    }
+
+    /**
+     * Unregister a scheme
+     *
+     * @param string $scheme
+     */
+    public static function unregisterScheme($scheme)
+    {
+        $scheme = strtolower($scheme);
+        if (isset(static::$schemeClasses[$scheme])) {
+            unset(static::$schemeClasses[$scheme]);
+        }
     }
 
     /**
@@ -61,7 +74,7 @@ abstract class UriFactory
      * @throws Exception\InvalidArgumentException
      * @return \Zend\Uri\Uri
      */
-    static public function factory($uriString, $defaultScheme = null)
+    public static function factory($uriString, $defaultScheme = null)
     {
         if (!is_string($uriString)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -76,12 +89,18 @@ abstract class UriFactory
             $scheme = $defaultScheme;
         }
 
+        if ($scheme && ! isset(static::$schemeClasses[$scheme])) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'no class registered for scheme "%s"',
+                    $scheme
+                ));
+        }
         if ($scheme && isset(static::$schemeClasses[$scheme])) {
             $class = static::$schemeClasses[$scheme];
             $uri = new $class($uri);
-            if (! $uri instanceof Uri) {
+            if (! $uri instanceof UriInterface) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'class "%s" registered for scheme "%s" is not a subclass of Zend\Uri\Uri',
+                    'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
                     $class,
                     $scheme
                 ));

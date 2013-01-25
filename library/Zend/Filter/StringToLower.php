@@ -1,103 +1,44 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StringToLower extends AbstractFilter
+class StringToLower extends AbstractUnicode
 {
     /**
-     * Encoding for the input string
-     *
-     * @var string
+     * @var array
      */
-    protected $_encoding = null;
+    protected $options = array(
+        'encoding' => null,
+    );
 
     /**
      * Constructor
      *
-     * @param string|array|Traversable $options OPTIONAL
+     * @param string|array|Traversable $encodingOrOptions OPTIONAL
      */
-    public function __construct($options = null)
+    public function __construct($encodingOrOptions = null)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (!is_array($options)) {
-            $options = func_get_args();
-            $temp    = array();
-            if (!empty($options)) {
-                $temp['encoding'] = array_shift($options);
-            }
-            $options = $temp;
-        }
-
-        if (!array_key_exists('encoding', $options) && function_exists('mb_internal_encoding')) {
-            $options['encoding'] = mb_internal_encoding();
-        }
-
-        if (array_key_exists('encoding', $options)) {
-            $this->setEncoding($options['encoding']);
-        }
-    }
-
-    /**
-     * Returns the set encoding
-     *
-     * @return string
-     */
-    public function getEncoding()
-    {
-        return $this->_encoding;
-    }
-
-    /**
-     * Set the input encoding for the given string
-     *
-     * @param  string $encoding
-     * @return StringToLower Provides a fluent interface
-     * @throws Exception\ExceptionInterface
-     */
-    public function setEncoding($encoding = null)
-    {
-        if ($encoding !== null) {
-            if (!function_exists('mb_strtolower')) {
-                throw new Exception\ExtensionNotLoadedException('mbstring is required for this feature');
-            }
-
-            $encoding = (string) $encoding;
-            if (!in_array(strtolower($encoding), array_map('strtolower', mb_list_encodings()))) {
-                throw new Exception\InvalidArgumentException("The given encoding '$encoding' is not supported by mbstring");
+        if ($encodingOrOptions !== null) {
+            if (!static::isOptions($encodingOrOptions)) {
+                $this->setEncoding($encodingOrOptions);
+            } else {
+                $this->setOptions($encodingOrOptions);
             }
         }
-
-        $this->_encoding = $encoding;
-        return $this;
     }
 
     /**
@@ -110,8 +51,8 @@ class StringToLower extends AbstractFilter
      */
     public function filter($value)
     {
-        if ($this->_encoding !== null) {
-            return mb_strtolower((string) $value, $this->_encoding);
+        if ($this->options['encoding'] !== null) {
+            return mb_strtolower((string) $value,  $this->options['encoding']);
         }
 
         return strtolower((string) $value);

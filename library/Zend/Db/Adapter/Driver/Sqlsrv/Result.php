@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -26,13 +26,13 @@ class Result implements \Iterator, ResultInterface
     protected $resource = null;
 
     /**
-     * @var boolean 
+     * @var bool
      */
     protected $currentData = false;
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $currentComplete = false;
 
@@ -49,9 +49,10 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Initialize
-     * 
+     *
      * @param  resource $resource
-     * @return Result 
+     * @param  mixed    $generatedValue
+     * @return Result
      */
     public function initialize($resource, $generatedValue = null)
     {
@@ -69,9 +70,17 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isBuffered()
+    {
+        return false;
+    }
+
+    /**
      * Get resource
-     * 
-     * @return resource 
+     *
+     * @return resource
      */
     public function getResource()
     {
@@ -80,8 +89,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Current
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -95,8 +104,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Next
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
     public function next()
     {
@@ -106,22 +115,22 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Load
-     * 
-     * @param  string $row
-     * @return mixed 
+     *
+     * @param  int $row
+     * @return mixed
      */
     protected function load($row = SQLSRV_SCROLL_NEXT)
     {
         $this->currentData = sqlsrv_fetch_array($this->resource, SQLSRV_FETCH_ASSOC, $row);
         $this->currentComplete = true;
         $this->position++;
-        return ($this->currentData);
+        return $this->currentData;
     }
 
     /**
      * Key
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function key()
     {
@@ -130,8 +139,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Rewind
-     * 
-     * @return boolean 
+     *
+     * @return bool
      */
     public function rewind()
     {
@@ -142,8 +151,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Valid
-     * 
-     * @return boolean 
+     *
+     * @return bool
      */
     public function valid()
     {
@@ -156,7 +165,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Count
-     * 
+     *
      * @return integer
      */
     public function count()
@@ -174,8 +183,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Is query result
-     * 
-     * @return boolean 
+     *
+     * @return bool
      */
     public function isQueryResult()
     {
@@ -187,8 +196,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Get affected rows
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getAffectedRows()
     {

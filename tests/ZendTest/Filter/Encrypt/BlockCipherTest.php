@@ -58,14 +58,18 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetVector()
     {
-        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
-        $filter->setVector('testvect');
-        $this->assertEquals('testvect', $filter->getVector());
 
-        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
-        $output = $filter->encrypt('test');
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
+        $filter->setVector('1234567890123456');
+        $this->assertEquals('1234567890123456', $filter->getVector());
     }
 
+    public function testWrongSizeVector()
+    {
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
+        $filter = new BlockCipherEncryption(array('key' => 'testkey'));
+        $filter->setVector('testvect');
+    }
     /**
      * Ensures that the filter allows default encryption
      *
@@ -74,13 +78,13 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     public function testDefaultEncryption()
     {
         $filter = new BlockCipherEncryption(array('key' => 'testkey'));
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
         $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => 'aes',
-                  'vector' => 'testvect',
+            array('key'           => 'testkey',
+                  'algorithm'     => 'aes',
+                  'vector'        => '1234567890123456',
                   'key_iteration' => 5000,
-                  'hash' => 'sha256'),
+                  'hash'          => 'sha256'),
             $filter->getEncryption()
         );
     }
@@ -93,16 +97,16 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     public function testGetSetEncryption()
     {
         $filter = new BlockCipherEncryption(array('key' => 'testkey'));
-        $filter->setVector('testvect');
+        $filter->setVector('1234567890123456');
         $filter->setEncryption(
             array('algorithm' => '3des')
         );
         $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => '3des',
-                  'vector' => 'testvect',
+            array('key'           => 'testkey',
+                  'algorithm'     => '3des',
+                  'vector'        => '1234567890123456',
                   'key_iteration' => 5000,
-                  'hash' => 'sha256'),
+                  'hash'          => 'sha256'),
             $filter->getEncryption()
         );
     }

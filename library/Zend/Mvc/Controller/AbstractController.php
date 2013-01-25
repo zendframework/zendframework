@@ -25,6 +25,21 @@ use Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * Abstract controller
+ *
+ * Convenience methods for pre-built plugins (@see __call):
+ *
+ * @method \Zend\View\Model\ModelInterface acceptableViewModelSelector(array $matchAgainst = null, bool $returnDefault = true, \Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart $resultReference = null)
+ * @method boolean|array|\Zend\Http\Response fileprg(\Zend\Form\Form $form, $redirect = null, $redirectToUrl = false)
+ * @method boolean|array|\Zend\Http\Response filePostRedirectGet(\Zend\Form\Form $form, $redirect = null, $redirectToUrl = false)
+ * @method \Zend\Mvc\Controller\Plugin\FlashMessenger flashMessenger()
+ * @method \Zend\Mvc\Controller\Plugin\Forward forward()
+ * @method mixed|null identity()
+ * @method \Zend\Mvc\Controller\Plugin\Layout|\Zend\View\Model\ModelInterface layout(string $template = null)
+ * @method \Zend\Mvc\Controller\Plugin\Params|mixed params(string $param = null, mixed $default = null)
+ * @method \Zend\Http\Response|array prg(string $redirect = null, bool $redirectToUrl = false)
+ * @method \Zend\Http\Response|array postRedirectGet(string $redirect = null, bool $redirectToUrl = false)
+ * @method \Zend\Mvc\Controller\Plugin\Redirect redirect()
+ * @method \Zend\Mvc\Controller\Plugin\Url url()
  */
 abstract class AbstractController implements
     Dispatchable,

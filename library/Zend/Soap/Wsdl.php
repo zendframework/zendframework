@@ -85,9 +85,9 @@ class Wsdl
         $this->uri = $uri;
         $this->classMap = $classMap;
 
-        $this->_dom = $this->getDOMDocument($uri, $name);
+        $this->dom = $this->getDOMDocument($uri, $name);
 
-        $this->_wsdl = $this->_dom->documentElement;
+        $this->wsdl = $this->dom->documentElement;
 
         $this->setComplexTypeStrategy($strategy ?: new Wsdl\ComplexTypeStrategy\DefaultComplexType);
     }
@@ -102,7 +102,8 @@ class Wsdl
     protected function getDOMDocument($uri, $name)
     {
         $dom = new \DOMDocument();
-        $dom->preserveWhiteSpace = false;
+        $dom->preserveWhiteSpace = true;
+        $dom->formatOutput = true;
 
         $definitions = $dom->createElementNS(Wsdl::NS_WSDL,             'definitions');
 
@@ -150,7 +151,6 @@ class Wsdl
             $uri = $uri->toString();
         }
         $this->uri = $uri;
-        
 
         if($this->dom instanceof \DOMDocument ) {
             $this->dom->documentElement->setAttributeNS(Wsdl::NS_XMLNS,     'xmlns:tns',        $uri);
@@ -185,22 +185,22 @@ class Wsdl
     /**
      * Add a {@link http://www.w3.org/TR/wsdl#_messages message} element to the WSDL
      *
-     * @param string $name Name for the {@link http://www.w3.org/TR/wsdl#_messages message}
+     * @param string $messageName Name for the {@link http://www.w3.org/TR/wsdl#_messages message}
      * @param array $parts An array of {@link http://www.w3.org/TR/wsdl#_message parts}
      *                     The array is constructed like: 'name of part' => 'part xml schema data type'
      *                     or 'name of part' => array('type' => 'part xml schema type')
      *                     or 'name of part' => array('element' => 'part xml element name')
      * @return object The new message's XML_Tree_Node for use in {@link function addDocumentation}
      */
-    public function addMessage($name, $parts)
+    public function addMessage($messageName, $parts)
     {
-        $message = $this->dom->createElement('message');
+        $message = $this->dom->createElementNS(Wsdl::NS_WSDL, 'message');
 
-        $message->setAttribute('name', $name);
+        $message->setAttribute('name', $messageName);
 
         if (count($parts) > 0) {
             foreach ($parts as $name => $type) {
-                $part = $this->dom->createElement('part');
+                $part = $this->dom->createElementNS(Wsdl::NS_WSDL, 'part');
                 $part->setAttribute('name', $name);
                 if (is_array($type)) {
                     foreach ($type as $key => $value) {
@@ -226,7 +226,7 @@ class Wsdl
      */
     public function addPortType($name)
     {
-        $portType = $this->dom->createElement('portType');
+        $portType = $this->dom->createElementNS(Wsdl::NS_WSDL, 'portType');
         $portType->setAttribute('name', $name);
         $this->wsdl->appendChild($portType);
 
@@ -245,21 +245,21 @@ class Wsdl
      */
     public function addPortOperation($portType, $name, $input = false, $output = false, $fault = false)
     {
-        $operation = $this->dom->createElement('operation');
+        $operation = $this->dom->createElementNS(Wsdl::NS_WSDL, 'operation');
         $operation->setAttribute('name', $name);
 
         if (is_string($input) && (strlen(trim($input)) >= 1)) {
-            $node = $this->dom->createElement('input');
+            $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'input');
             $node->setAttribute('message', $input);
             $operation->appendChild($node);
         }
         if (is_string($output) && (strlen(trim($output)) >= 1)) {
-            $node= $this->dom->createElement('output');
+            $node= $this->dom->createElementNS(Wsdl::NS_WSDL, 'output');
             $node->setAttribute('message', $output);
             $operation->appendChild($node);
         }
         if (is_string($fault) && (strlen(trim($fault)) >= 1)) {
-            $node = $this->dom->createElement('fault');
+            $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'fault');
             $node->setAttribute('message', $fault);
             $operation->appendChild($node);
         }
@@ -278,14 +278,14 @@ class Wsdl
      */
     public function addBinding($name, $portType)
     {
-        $binding = $this->_dom->createElementNS(Wsdl::NS_WSDL, 'binding');
-        $this->_wsdl->appendChild($binding);
+        $binding = $this->dom->createElementNS(Wsdl::NS_WSDL, 'binding');
+        $this->wsdl->appendChild($binding);
 
-        $attr = $this->_dom->createAttributeNS(Wsdl::NS_WSDL, 'name');
+        $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, 'name');
         $attr->value = $name;
         $binding->appendChild($attr);
 
-        $attr = $this->_dom->createAttributeNS(Wsdl::NS_WSDL, 'type');
+        $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, 'type');
         $attr->value = $portType;
         $binding->appendChild($attr);
 
@@ -314,13 +314,13 @@ class Wsdl
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'input');
             $operation->appendChild($node);
 
-            $soap_node = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
-            $node->appendChild($soap_node);
+            $soapNode = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
+            $node->appendChild($soapNode);
 
             foreach ($input as $name => $value) {
                 $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, $name);
                 $attr->value = $value;
-                $soap_node->appendChild($attr);
+                $soapNode->appendChild($attr);
             }
 
         }
@@ -329,13 +329,13 @@ class Wsdl
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'output');
             $operation->appendChild($node);
 
-            $soap_node = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
-            $node->appendChild($soap_node);
+            $soapNode = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
+            $node->appendChild($soapNode);
 
             foreach ($input as $name => $value) {
                 $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, $name);
                 $attr->value = $value;
-                $soap_node->appendChild($attr);
+                $soapNode->appendChild($attr);
             }
         }
 
@@ -349,7 +349,7 @@ class Wsdl
 
                 $node->appendChild($attr);
             }
-//            $node->appendChild($soap_node);
+//            $node->appendChild($soapNode);
 //            $operation->appendChild($node);
         }
 
@@ -463,11 +463,13 @@ class Wsdl
      * Add WSDL Types element
      *
      * @param object $types A DomDocument|DomNode|DomElement|DomDocumentFragment with all the XML Schema types defined in it
+     *
+     * @return void
      */
     public function addTypes($types)
     {
         if ($types instanceof \DomDocument) {
-            $dom = $this->dom->importNode($types->documentElement);
+            $this->dom->importNode($types->documentElement);
             $this->wsdl->appendChild($types->documentElement);
         } elseif ($types instanceof \DomNode || $types instanceof \DomElement || $types instanceof \DomDocumentFragment ) {
             $dom = $this->dom->importNode($types);

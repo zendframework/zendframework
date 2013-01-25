@@ -23,6 +23,8 @@ namespace ZendTest\Soap;
 use Zend\Soap\Wsdl,
     Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use Zend\Uri\Uri;
+
 /**
  * Test cases for Zend_Soap_Wsdl
  *
@@ -36,6 +38,27 @@ use Zend\Soap\Wsdl,
  */
 class WsdlTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var Wsdl
+     */
+    protected $wsdl;
+
+    /**
+     * @var \DOMDocument
+     */
+    protected $dom;
+
+    /**
+     * @var \DOMXPath
+     */
+    protected $xpath;
+
+    /**
+     * @deprecated Move to native DOM
+     * @param $xmlstring
+     * @return mixed
+     */
     protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
     {
         $xmlstring = str_replace(array("\r", "\n"), "", $xmlstring);
@@ -50,160 +73,266 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+
+    public function setUp()
+    {
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $this->dom = $this->wsdl->toDomDocument();
+        $this->xpath = new \DOMXPath($this->dom);
+        $this->xpath->registerNamespace('unittest', Wsdl::NS_WSDL);
+
+        $this->xpath->registerNamespace('tns',      'http://localhost/MyService.php');
+        $this->xpath->registerNamespace('soap',     Wsdl::NS_SOAP);
+        $this->xpath->registerNamespace('xsd',      Wsdl::NS_SCHEMA);
+        $this->xpath->registerNamespace('soap-enc', Wsdl::NS_S_ENC);
+        $this->xpath->registerNamespace('wsdl',     Wsdl::NS_WSDL);
+
+    }
+
     function testConstructor()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                                 . 'xmlns:tns="http://localhost/MyService.php" '
-                                 . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                                 . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                                 . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                                 . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                                 . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
+        $uri = 'http://localhost/MyService.php';
+        $name = 'MyService';
+
+        $this->assertEquals(Wsdl::NS_WSDL,          $this->dom->lookupNamespaceUri(null));
+        $this->assertEquals(Wsdl::NS_SOAP,          $this->dom->lookupNamespaceUri('soap'));
+        $this->assertEquals($uri,                   $this->dom->lookupNamespaceUri('tns'));
+        $this->assertEquals(Wsdl::NS_SOAP,          $this->dom->lookupNamespaceUri('soap'));
+        $this->assertEquals(Wsdl::NS_SCHEMA,        $this->dom->lookupNamespaceUri('xsd'));
+        $this->assertEquals(Wsdl::NS_S_ENC,         $this->dom->lookupNamespaceUri('soap-enc'));
+        $this->assertEquals(Wsdl::NS_WSDL,          $this->dom->lookupNamespaceUri('wsdl'));
+
+        $this->assertEquals(Wsdl::NS_WSDL,          $this->dom->documentElement->namespaceURI);
+
+        $this->assertEquals($name,  $this->dom->documentElement->getAttributeNS(Wsdl::NS_WSDL, 'name'));
+        $this->assertEquals($uri,   $this->dom->documentElement->getAttributeNS(Wsdl::NS_WSDL, 'targetNamespace'));
+
     }
 
     function testSetUriChangesDomDocumentWsdlStructureTnsAndTargetNamespaceAttributes()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $wsdl->setUri('http://localhost/MyNewService.php');
+        $newUri = 'http://localhost/MyNewService.php';
+        $this->wsdl->setUri($newUri);
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                                 . 'xmlns:tns="http://localhost/MyNewService.php" '
-                                 . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                                 . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                                 . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                                 . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                                 . 'name="MyService" targetNamespace="http://localhost/MyNewService.php"/>' );
+        $this->assertEquals($newUri, $this->dom->lookupNamespaceUri('tns'));
+        $this->assertEquals($newUri, $this->dom->documentElement->getAttributeNS(Wsdl::NS_WSDL, 'targetNamespace'));
+    }
+
+    function testSetUriWithZendUriChangesDomDocumentWsdlStructureTnsAndTargetNamespaceAttributes()
+    {
+        $newUri = 'http://localhost/MyNewService.php';
+        $this->wsdl->setUri(new Uri('http://localhost/MyNewService.php'));
+
+        $this->assertEquals($newUri, $this->dom->lookupNamespaceUri('tns'));
+        $this->assertEquals($newUri, $this->dom->documentElement->getAttributeNS(Wsdl::NS_WSDL, 'targetNamespace'));
     }
 
     function testAddMessage()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-
         $messageParts = array();
-        $messageParts['parameter1'] = $wsdl->getType('int');
-        $messageParts['parameter2'] = $wsdl->getType('string');
-        $messageParts['parameter3'] = $wsdl->getType('mixed');
 
-        $wsdl->addMessage('myMessage', $messageParts);
+        $messageParts['parameter1'] = $this->wsdl->getType('int');
+        $messageParts['parameter2'] = $this->wsdl->getType('string');
+        $messageParts['parameter3'] = $this->wsdl->getType('mixed');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'xmlns:tns="http://localhost/MyService.php" '
-                               . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                               . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                               . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                               . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
-                               . '<message name="myMessage">'
-                               .   '<part name="parameter1" type="xsd:int"/>'
-                               .   '<part name="parameter2" type="xsd:string"/>'
-                               .   '<part name="parameter3" type="xsd:anyType"/>'
-                               . '</message>'
-                          . '</definitions>' );
+        $messageName = 'myMessage';
+
+        $this->wsdl->addMessage($messageName, $messageParts);
+
+        $messageNodes = $this->xpath->query('//wsdl:definitions/wsdl:message');
+
+        $this->assertGreaterThan(0, $messageNodes->length, 'Missing message node in definitions node.');
+
+        $this->assertEquals($messageName, $messageNodes->item(0)->getAttribute('name'));
+
+        foreach ($messageParts as $parameterName => $parameterType) {
+            $part = $this->xpath->query('//wsdl:part[@name="'.$parameterName.'"]', $messageNodes->item(0));
+            $this->assertEquals($parameterType, $part->item(0)->getAttribute('type'));
+        }
     }
 
     function testAddPortType()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $portName = 'myPortType';
+        $this->wsdl->addPortType($portName);
 
-        $wsdl->addPortType('myPortType');
+        $portTypeNodes = $this->xpath->query('//wsdl:definitions/wsdl:portType');
+        print $portTypeNodes->length;
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'xmlns:tns="http://localhost/MyService.php" '
-                               . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                               . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                               . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                               . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
-                               . '<portType name="myPortType"/>'
-                          . '</definitions>' );
+        $this->assertGreaterThan(0, $portTypeNodes->length, 'Missing portType node in definitions node.');
+
+        $this->assertTrue($portTypeNodes->item(0)->hasAttribute('name'));
+        $this->assertEquals($portName, $portTypeNodes->item(0)->getAttribute('name'));
+
     }
 
-    function testAddPortOperation()
+    /**
+     * @dataProvider dataProviderForAddPortOperation
+     */
+    function testAddPortOperation($operationName, $inputRequest = null, $inputRequest = null, $outputResponse = null, $fail = null)
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $portName = 'myPortType';
+        $portType = $this->wsdl->addPortType($portName);
 
-        $portType = $wsdl->addPortType('myPortType');
+        $this->wsdl->addPortOperation($portType, $operationName, $inputRequest, $outputResponse, $fail);
+//        $this->wsdl->addPortOperation($portType, 'operation2', 'tns:operation2Request', 'tns:operation2Response');
+//        $this->wsdl->addPortOperation($portType, 'operation3', 'tns:operation3Request', 'tns:operation3Response', 'tns:operation3Fault');
 
-        $wsdl->addPortOperation($portType, 'operation1');
-        $wsdl->addPortOperation($portType, 'operation2', 'tns:operation2Request', 'tns:operation2Response');
-        $wsdl->addPortOperation($portType, 'operation3', 'tns:operation3Request', 'tns:operation3Response', 'tns:operation3Fault');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'xmlns:tns="http://localhost/MyService.php" '
-                               . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                               . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                               . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                               . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
-                               . '<portType name="myPortType">'
-                               .   '<operation name="operation1"/>'
-                               .   '<operation name="operation2">'
-                               .     '<input message="tns:operation2Request"/>'
-                               .     '<output message="tns:operation2Response"/>'
-                               .   '</operation>'
-                               .   '<operation name="operation3">'
-                               .     '<input message="tns:operation3Request"/>'
-                               .     '<output message="tns:operation3Response"/>'
-                               .     '<fault message="tns:operation3Fault"/>'
-                               .   '</operation>'
-                               . '</portType>'
-                          . '</definitions>' );
+        $portTypeNodes = $this->xpath->query('//wsdl:definitions/wsdl:portType[@name="'.$portName.'"]');
+        $this->assertGreaterThan(0, $portTypeNodes->length, 'Missing portType node in definitions node.');
+
+
+        $operation1Nodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $portTypeNodes->item(0));
+        $this->assertGreaterThan(0, $operation1Nodes->length);
+        if (empty($inputRequest)) {
+            $this->assertFalse($operation1Nodes->item(0)->hasChildNodes());
+        } else {
+            $this->assertTrue($operation1Nodes->item(0)->hasChildNodes());
+
+            $inputNodes = $operation1Nodes->item(0)->getElementsByTagName('input');
+            $this->assertEquals($inputRequest, $inputNodes->item(0)->getAttribute('message'));
+        }
+
+
+//        $inputNodes = $operation2Nodes->item(0)->getElementsByTagName('input');
+//        $this->assertEquals(1, $inputNodes->length);
+//
+//
+//        $outputNodes = $operation2Nodes->item(0)->getElementsByTagName('output');
+//        $this->assertEquals(1, $outputNodes->length);
+//        $this->assertEquals('tns:operation2Response', $outputNodes->item(0)->getAttribute('message'));
+//
+//
+//        $operation3Nodes = $this->xpath->query('wsdl:operation[@name="operation3"]', $portTypeNodes->item(0));
+//        $this->assertEquals(1, $operation3Nodes->length);
+//
+//        $inputNodes = $operation3Nodes->item(0)->getElementsByTagName('input');
+//        $this->assertEquals(1, $inputNodes->length);
+//        $this->assertEquals('tns:operation3Request', $inputNodes->item(0)->getAttribute('message'));
+//
+//        $outputNodes = $operation3Nodes->item(0)->getElementsByTagName('output');
+//        $this->assertEquals(1, $outputNodes->length);
+//        $this->assertEquals('tns:operation3Response', $outputNodes->item(0)->getAttribute('message'));
+//
+//        $faultNodes = $operation3Nodes->item(0)->getElementsByTagName('fault');
+//        $this->assertEquals(1, $faultNodes->length);
+//        $this->assertEquals('tns:operation3Fault', $faultNodes->item(0)->getAttribute('message'));
+    }
+
+    /**
+     *
+     */
+    function dataProviderForAddPortOperation()
+    {
+
+        return array(
+            array('operation1'),
+            array('operation2', 'tns:operation2Request', 'tns:operation2Response'),
+        );
+
+
+
     }
 
     function testAddBinding()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
+        $this->wsdl->toDomDocument()->formatOutput = true;
 
-        $wsdl->addPortType('myPortType');
-        $wsdl->addBinding('MyServiceBinding', 'myPortType');
+        $bindingNodes = $this->xpath->query('//wsdl:definitions/wsdl:binding');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'xmlns:tns="http://localhost/MyService.php" '
-                               . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                               . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                               . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                               . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
-                               . '<portType name="myPortType"/>'
-                               . '<binding name="MyServiceBinding" type="myPortType"/>'
-                          . '</definitions>' );
+        if ($bindingNodes->length === 0) {
+            $this->fail('Missing binding node in definitions node.'.$bindingNodes->length);
+        }
+
+        $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
+        $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'type'));
     }
 
     function testAddBindingOperation()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $wsdl->addPortType('myPortType');
-        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
 
-        $wsdl->addBindingOperation($binding, 'operation1');
-        $wsdl->addBindingOperation($binding,
+
+        $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
+        $this->wsdl->addBindingOperation($binding, 'operation1');
+
+
+        $encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+        $this->wsdl->addBindingOperation($binding,
                                    'operation2',
-                                   array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
-                                   array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
-                                  );
-        $wsdl->addBindingOperation($binding,
-                                   'operation3',
-                                   array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
-                                   array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
-                                   array('name' => 'MyFault','use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
-                                   );
+                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
+                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle)
+        );
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+
+        $this->wsdl->addBindingOperation($binding,
+                                   'operation3',
+                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
+                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
+                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle, 'name' => 'MyFault',)
+        );
+
+        $bindingNodes = $this->xpath->query('//wsdl:binding');
+
+        if ($bindingNodes->length === 0) {
+            $this->fail('Missing binding node in definitions node.'.$bindingNodes->length);
+        }
+
+        $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
+        $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'type'));
+
+
+        $operation1Nodes = $this->xpath->query('//wsdl:operation[@name="operation1"]', $bindingNodes->item(0));
+        $this->assertEquals(1, $operation1Nodes->length);
+        //@todo namespace ?
+        $this->assertFalse($operation1Nodes->item(0)->hasChildNodes());
+
+        $inputBodyNodes = $this->xpath->query('//wsdl:operation[@name="operation2"]/wsdl:input/soap:body', $bindingNodes->item(0));
+        if ($inputBodyNodes->length === 0){
+            $this->fail('Unable to find body in binding operation node');
+        }
+        $this->assertEquals('encoded',      $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
+        $this->assertEquals($encodingStyle, $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
+
+        foreach(array('input', 'output') as $direction) {
+            foreach(array('operation2', 'operation3') as $operation) {
+                $inputBodyNodes = $this->xpath->query('//wsdl:operation[@name="'.$operation.'"]/wsdl:'.$direction.'/soap:body', $bindingNodes->item(0));
+                if ($inputBodyNodes->length === 0){
+                    $this->fail('Unable to find body in binding '.$operation.' node');
+                }
+                $this->assertEquals('encoded',       $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
+                $this->assertEquals($encodingStyle,  $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
+            }
+        }
+
+        $faultNodes = $this->xpath->query('//wsdl:operation[@name="operation3"]/wsdl:fault', $bindingNodes->item(0));
+        if ($faultNodes->length === 0){
+            $this->fail('Unable to find fault operation node');
+        }
+        $this->assertEquals('encoded',       $faultNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
+        $this->assertEquals('MyFault',       $faultNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
+        $this->assertEquals($encodingStyle,  $faultNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
+
+
+//        $this->wsdl->toDomDocument()->formatOutput = true;
+//        print ($this->wsdl->toDomDocument()->saveXML());exit;
+
+
+//        $inputBodyNodes = $this->xpath->query('//wsdl:operation[@name="operation3"]/wsdl:input/soap:body', $bindingNodes->item(0));
+//        if ($inputBodyNodes->length === 0){
+//            $this->fail('Unable to find body in binding operation node');
+//        }
+//        $this->assertEquals('encoded',       $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
+//        $this->assertEquals($encodingStyle,  $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
+
+
+
+
+        ($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()).
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -240,21 +369,21 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testAddSoapBinding()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $wsdl->addPortType('myPortType');
-        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
+        $this->wsdl->addPortType('myPortType');
+        $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
-        $wsdl->addSoapBinding($binding);
+        $this->wsdl->addSoapBinding($binding);
 
-        $wsdl->addBindingOperation($binding, 'operation1');
-        $wsdl->addBindingOperation($binding,
+        $this->wsdl->addBindingOperation($binding, 'operation1');
+        $this->wsdl->addBindingOperation($binding,
                                    'operation2',
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                   );
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -320,21 +449,21 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testAddSoapOperation()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $wsdl->addPortType('myPortType');
-        $binding = $wsdl->addBinding('MyServiceBinding', 'myPortType');
+        $this->wsdl->addPortType('myPortType');
+        $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
-        $wsdl->addSoapOperation($binding, 'http://localhost/MyService.php#myOperation');
+        $this->wsdl->addSoapOperation($binding, 'http://localhost/MyService.php#myOperation');
 
-        $wsdl->addBindingOperation($binding, 'operation1');
-        $wsdl->addBindingOperation($binding,
+        $this->wsdl->addBindingOperation($binding, 'operation1');
+        $this->wsdl->addBindingOperation($binding,
                                    'operation2',
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                   );
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -361,14 +490,14 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testAddService()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $wsdl->addPortType('myPortType');
-        $wsdl->addBinding('MyServiceBinding', 'myPortType');
+        $this->wsdl->addPortType('myPortType');
+        $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
-        $wsdl->addService('Service1', 'myPortType', 'MyServiceBinding', 'http://localhost/MyService.php');
+        $this->wsdl->addService('Service1', 'myPortType', 'MyServiceBinding', 'http://localhost/MyService.php');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -389,13 +518,13 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testAddDocumentation()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $portType = $wsdl->addPortType('myPortType');
+        $portType = $this->wsdl->addPortType('myPortType');
 
-        $wsdl->addDocumentation($portType, 'This is a description for Port Type node.');
+        $this->wsdl->addDocumentation($portType, 'This is a description for Port Type node.');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -412,15 +541,15 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     public function testAddDocumentationToSetInsertsBefore()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
         $messageParts = array();
-        $messageParts['parameter1'] = $wsdl->getType('int');
-        $messageParts['parameter2'] = $wsdl->getType('string');
-        $messageParts['parameter3'] = $wsdl->getType('mixed');
+        $messageParts['parameter1'] = $this->wsdl->getType('int');
+        $messageParts['parameter2'] = $this->wsdl->getType('string');
+        $messageParts['parameter3'] = $this->wsdl->getType('mixed');
 
-        $message = $wsdl->addMessage('myMessage', $messageParts);
-        $wsdl->addDocumentation($message, "foo");
+        $message = $this->wsdl->addMessage('myMessage', $messageParts);
+        $this->wsdl->addDocumentation($message, "foo");
 
         $this->assertEquals(
             '<?xml version="1.0"?>'  .
@@ -438,15 +567,15 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                .   '<part name="parameter3" type="xsd:anyType"/>'
                . '</message>'
             . '</definitions>',
-            $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml())
+            $this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml())
         );
     }
 
     function testToXml()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -459,12 +588,12 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testToDomDocument()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $dom = $wsdl->toDomDocument();
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->dom = $this->wsdl->toDomDocument();
 
-        $this->assertTrue($dom instanceOf \DOMDocument);
+        $this->assertTrue($this->dom instanceOf \DOMDocument);
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->dom->saveXML()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -477,10 +606,10 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testDump()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
         ob_start();
-        $wsdl->dump();
+        $this->wsdl->dump();
         $wsdlDump = ob_get_clean();
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdlDump),
@@ -493,7 +622,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php"/>' );
 
-        $wsdl->dump(__DIR__ . '/TestAsset/dumped.wsdl');
+        $this->wsdl->dump(__DIR__ . '/TestAsset/dumped.wsdl');
         $dumpedContent = file_get_contents(__DIR__ . '/TestAsset/dumped.wsdl');
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($dumpedContent),
@@ -511,27 +640,27 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testGetType()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $this->assertEquals('xsd:string',       $wsdl->getType('string'),  'xsd:string detection failed.');
-        $this->assertEquals('xsd:string',       $wsdl->getType('str'),     'xsd:string detection failed.');
-        $this->assertEquals('xsd:int',          $wsdl->getType('int'),     'xsd:int detection failed.');
-        $this->assertEquals('xsd:int',          $wsdl->getType('integer'), 'xsd:int detection failed.');
-        $this->assertEquals('xsd:float',        $wsdl->getType('float'),   'xsd:float detection failed.');
-        $this->assertEquals('xsd:double',        $wsdl->getType('double'),  'xsd:double detection failed.');
-        $this->assertEquals('xsd:boolean',      $wsdl->getType('boolean'), 'xsd:boolean detection failed.');
-        $this->assertEquals('xsd:boolean',      $wsdl->getType('bool'),    'xsd:boolean detection failed.');
-        $this->assertEquals('soap-enc:Array',   $wsdl->getType('array'),   'soap-enc:Array detection failed.');
-        $this->assertEquals('xsd:struct',       $wsdl->getType('object'),  'xsd:struct detection failed.');
-        $this->assertEquals('xsd:anyType',      $wsdl->getType('mixed'),   'xsd:anyType detection failed.');
-        $this->assertEquals('',                 $wsdl->getType('void'),    'void  detection failed.');
+        $this->assertEquals('xsd:string',       $this->wsdl->getType('string'),  'xsd:string detection failed.');
+        $this->assertEquals('xsd:string',       $this->wsdl->getType('str'),     'xsd:string detection failed.');
+        $this->assertEquals('xsd:int',          $this->wsdl->getType('int'),     'xsd:int detection failed.');
+        $this->assertEquals('xsd:int',          $this->wsdl->getType('integer'), 'xsd:int detection failed.');
+        $this->assertEquals('xsd:float',        $this->wsdl->getType('float'),   'xsd:float detection failed.');
+        $this->assertEquals('xsd:double',       $this->wsdl->getType('double'),  'xsd:double detection failed.');
+        $this->assertEquals('xsd:boolean',      $this->wsdl->getType('boolean'), 'xsd:boolean detection failed.');
+        $this->assertEquals('xsd:boolean',      $this->wsdl->getType('bool'),    'xsd:boolean detection failed.');
+        $this->assertEquals('soap-enc:Array',   $this->wsdl->getType('array'),   'soap-enc:Array detection failed.');
+        $this->assertEquals('xsd:struct',       $this->wsdl->getType('object'),  'xsd:struct detection failed.');
+        $this->assertEquals('xsd:anyType',      $this->wsdl->getType('mixed'),   'xsd:anyType detection failed.');
+        $this->assertEquals('',                 $this->wsdl->getType('void'),    'void  detection failed.');
     }
 
     function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $this->assertEquals('tns:WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
-        $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
+        $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
 
 //        $wsdl2 = new Wsdl('MyService', 'http://localhost/MyService.php', false);
 //        $this->assertEquals('xsd:anyType', $wsdl2->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
@@ -540,9 +669,9 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testGetComplexTypeBasedOnStrategiesStringNames()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType);
-        $this->assertEquals('tns:WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
-        $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType);
+        $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
+        $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
 
         $wsdl2 = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType);
         $this->assertEquals('xsd:anyType', $wsdl2->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
@@ -551,10 +680,10 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testAddingSameComplexTypeMoreThanOnceIsIgnored()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:SomeTypeName');
-        $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:AnotherTypeName');
-        $types = $wsdl->getTypes();
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:SomeTypeName');
+        $this->wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:AnotherTypeName');
+        $types = $this->wsdl->getTypes();
         $this->assertEquals(1, count($types));
         $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:SomeTypeName'),
                             $types);
@@ -562,25 +691,25 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' =>
                                      'tns:WsdlTestClass'),
-                            $wsdl->getTypes());
+                            $this->wsdl->getTypes());
 
-        $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
+        $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' =>
                                      'tns:WsdlTestClass'),
-                            $wsdl->getTypes());
+                            $this->wsdl->getTypes());
     }
 
     function testAddComplexType()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
+        $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
 
-        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -607,14 +736,14 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $this->assertEquals("xsd:string", $wsdl->getType("StrIng"));
-        $this->assertEquals("xsd:string", $wsdl->getType("sTr"));
-        $this->assertEquals("xsd:int", $wsdl->getType("iNt"));
-        $this->assertEquals("xsd:int", $wsdl->getType("INTEGER"));
-        $this->assertEquals("xsd:float", $wsdl->getType("FLOAT"));
-        $this->assertEquals("xsd:double", $wsdl->getType("douBLE"));
+        $this->assertEquals("xsd:string", $this->wsdl->getType("StrIng"));
+        $this->assertEquals("xsd:string", $this->wsdl->getType("sTr"));
+        $this->assertEquals("xsd:int", $this->wsdl->getType("iNt"));
+        $this->assertEquals("xsd:int", $this->wsdl->getType("INTEGER"));
+        $this->assertEquals("xsd:float", $this->wsdl->getType("FLOAT"));
+        $this->assertEquals("xsd:double", $this->wsdl->getType("douBLE"));
     }
 
     /**
@@ -622,8 +751,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWsdlGetTypeWillAllowLongType()
     {
-        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $this->assertEquals("xsd:long", $wsdl->getType("long"));
+        $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $this->assertEquals("xsd:long", $this->wsdl->getType("long"));
     }
 
     /**
@@ -631,14 +760,14 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultipleSequenceDefinitionsOfSameTypeWillBeRecognizedOnceBySequenceStrategy()
     {
-        $wsdl = new Wsdl("MyService", "http://localhost/MyService.php");
-        $wsdl->setComplexTypeStrategy(new ComplexTypeStrategy\ArrayOfTypeSequence());
+        $this->wsdl = new Wsdl("MyService", "http://localhost/MyService.php");
+        $this->wsdl->setComplexTypeStrategy(new ComplexTypeStrategy\ArrayOfTypeSequence());
 
-        $wsdl->addComplexType("string[]");
-        $wsdl->addComplexType("int[]");
-        $wsdl->addComplexType("string[]");
+        $this->wsdl->addComplexType("string[]");
+        $this->wsdl->addComplexType("int[]");
+        $this->wsdl->addComplexType("string[]");
 
-        $xml = $wsdl->toXml();
+        $xml = $this->wsdl->toXml();
         $this->assertEquals(1, substr_count($xml, "ArrayOfString"), "ArrayOfString should appear only once.");
         $this->assertEquals(1, substr_count($xml, "ArrayOfInt"),    "ArrayOfInt should appear only once.");
     }
@@ -651,8 +780,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlAmpersandInUrlInConstructorIsEncodedCorrectly()
     {
-        $wsdl = new Wsdl("MyService", self::URI_WITH_EXPANDED_AMP);
-        $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
+        $this->wsdl = new Wsdl("MyService", self::URI_WITH_EXPANDED_AMP);
+        $this->assertContains(self::URI_WITH_EXPANDED_AMP, $this->wsdl->toXML());
     }
 
     /**
@@ -660,8 +789,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testHtmlAmpersandInUrlInSetUriIsEncodedCorrectly()
     {
-        $wsdl = new Wsdl("MyService", "http://example.com");
-        $wsdl->setUri(self::URI_WITH_EXPANDED_AMP);
-        $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
+        $this->wsdl = new Wsdl("MyService", "http://example.com");
+        $this->wsdl->setUri(self::URI_WITH_EXPANDED_AMP);
+        $this->assertContains(self::URI_WITH_EXPANDED_AMP, $this->wsdl->toXML());
     }
 }

@@ -66,6 +66,7 @@ class DispatchListenerTest extends TestCase
                 'factories' => array(
                     'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
                     'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+                    'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
                     'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
                     'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
                     'Config'                  => $config,

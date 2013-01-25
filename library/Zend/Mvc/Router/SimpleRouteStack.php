@@ -41,11 +41,18 @@ class SimpleRouteStack implements RouteStackInterface
 
     /**
      * Create a new simple route stack.
+     *
+     * @param RoutePluginManager $routePluginManager
      */
-    public function __construct()
+    public function __construct(RoutePluginManager $routePluginManager = null)
     {
-        $this->routes             = new PriorityList();
-        $this->routePluginManager = new RoutePluginManager();
+        $this->routes = new PriorityList();
+
+        if (null === $routePluginManager) {
+            $routePluginManager = new RoutePluginManager();
+        }
+
+        $this->routePluginManager = $routePluginManager;
 
         $this->init();
     }

@@ -165,6 +165,6 @@ class KeyListIterator implements IteratorInterface, Countable
      */
     public function count()
     {
-        return $this->count();
+        return $this->count;
     }
 }

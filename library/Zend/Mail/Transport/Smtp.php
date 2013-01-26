@@ -201,9 +201,8 @@ class Smtp implements TransportInterface
         // If sending multiple messages per session use existing adapter
         $connection = $this->getConnection();
 
-        if (!($connection instanceof Protocol\Smtp)) {
-            // First time connecting
-            $connection = $this->lazyLoadConnection();
+        if (!($connection instanceof Protocol\Smtp) || !$connection->hasSession()) {
+            $connection = $this->connect();
         } else {
             // Reset connection to ensure reliable transaction
             $connection->rset();
@@ -322,8 +321,21 @@ class Smtp implements TransportInterface
         $config['port'] = $options->getPort();
         $connection = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
+        return $this->connect();
+    }
+
+    /**
+     * Connect the connection, and pass it helo
+     *
+     * @return Protocol\Smtp
+     */
+    protected function connect()
+    {
+        if (!$this->connection instanceof Protocol\Smtp) {
+            $this->lazyLoadConnection();
+        }
         $this->connection->connect();
-        $this->connection->helo($options->getName());
+        $this->connection->helo($this->getOptions()->getName());
         return $this->connection;
     }
 }

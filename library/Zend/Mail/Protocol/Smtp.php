@@ -193,6 +193,15 @@ class Smtp extends AbstractProtocol
         $this->auth();
     }
 
+    /**
+     * Returns the perceived session status
+     *
+     * @return boolean
+     */
+    public function hasSession()
+    {
+        return $this->sess;
+    }
 
     /**
      * Send EHLO or HELO depending on capabilities of smtp host
@@ -367,6 +376,7 @@ class Smtp extends AbstractProtocol
      */
     public function disconnect()
     {
+        $this->quit();
         $this->_disconnect();
     }
 

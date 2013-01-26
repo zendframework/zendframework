@@ -29,8 +29,8 @@ class IbmDb2 implements PlatformInterface
     {
         if (isset($options['quote_identifiers'])
             && ($options['quote_identifiers'] == false
-            || $options['quote_identifiers'] === 'false'))
-        {
+            || $options['quote_identifiers'] === 'false')
+        ) {
             $this->quoteIdentifiers = false;
         }
 

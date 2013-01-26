@@ -13,6 +13,24 @@ class Oracle implements PlatformInterface
 {
 
     /**
+     * @var bool
+     */
+    protected $quoteIdentifiers = true;
+
+    /**
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        if (isset($options['quote_identifiers'])
+            && ($options['quote_identifiers'] == false
+            || $options['quote_identifiers'] === 'false'))
+        {
+            $this->quoteIdentifiers = false;
+        }
+    }
+
+    /**
      * Get name
      *
      * @return string
@@ -40,6 +58,9 @@ class Oracle implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
+        if ($this->quoteIdentifiers === false) {
+            return $identifier;
+        }
         return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
     }
 
@@ -51,6 +72,9 @@ class Oracle implements PlatformInterface
      */
     public function quoteIdentifierChain($identifierChain)
     {
+        if ($this->quoteIdentifiers === false) {
+            return (is_array($identifierChain)) ? implode('.', $identifierChain) : $identifierChain;
+        }
         $identifierChain = str_replace('"', '\\"', $identifierChain);
         if (is_array($identifierChain)) {
             $identifierChain = implode('"."', $identifierChain);
@@ -113,6 +137,9 @@ class Oracle implements PlatformInterface
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
+        if ($this->quoteIdentifiers === false) {
+            return $identifier;
+        }
         $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         foreach ($parts as $i => $part) {
             if ($safeWords && in_array($part, $safeWords)) {
@@ -128,7 +155,7 @@ class Oracle implements PlatformInterface
                 case 'as':
                     break;
                 default:
-                    $parts[$i] = strtoupper('"' . str_replace('"', '\\' . '"', $part) . '"');
+                    $parts[$i] = '"' . str_replace('"', '\\' . '"', $part) . '"';
             }
         }
         return implode('', $parts);

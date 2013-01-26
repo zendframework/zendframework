@@ -116,6 +116,16 @@ class FlashMessengerTest extends TestCase
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
+    public function testCanDisplayListOfMessagesByDefaultParameters()
+    {
+        $helper = $this->helper;
+        $this->seedMessages();
+
+        $displayInfoAssertion = '<ul class="default"><li>foo</li><li>bar</li></ul>';
+        $displayInfo = $helper()->render();
+        $this->assertEquals($displayInfoAssertion, $displayInfo);
+    }
+
     public function testCanDisplayListOfMessagesByInvoke()
     {
         $helper = $this->helper;

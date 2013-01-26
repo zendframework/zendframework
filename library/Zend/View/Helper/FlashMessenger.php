@@ -83,11 +83,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     }
 
     /**
+     * Render Messages
      *
-     *
-     * @param type $namespace
+     * @param  string $namespace
+     * @param  array  $classes
+     * @return string
      */
-    public function render($namespace = null, array $classes = array())
+    public function render($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array())
     {
         $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getMessagesFromNamespace($namespace);
@@ -102,10 +104,14 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         // Flatten message array
         $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
-        array_walk_recursive($messages, function($item) use (&$messagesToPrint, $escapeHtml) {
-            if (($translator = $this->getTranslator()) !== null) {
+
+        $translator = $this->getTranslator();
+        $translatorTextDomain = $this->getTranslatorTextDomain();
+
+        array_walk_recursive($messages, function($item) use (&$messagesToPrint, $escapeHtml, $translator, $translatorTextDomain) {
+            if ($translator !== null) {
                 $item = $translator->translate(
-                        $item, $this->getTranslatorTextDomain()
+                        $item, $translatorTextDomain
                 );
             }
             $messagesToPrint[] = $escapeHtml($item);

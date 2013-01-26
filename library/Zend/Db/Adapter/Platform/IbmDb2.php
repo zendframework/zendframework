@@ -11,6 +11,34 @@ namespace Zend\Db\Adapter\Platform;
 
 class IbmDb2 implements PlatformInterface
 {
+
+    /**
+     * @var bool
+     */
+    protected $quoteIdentifiers = true;
+
+    /**
+     * @var string
+     */
+    protected $identifierSeparator = '.';
+
+    /**
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        if (isset($options['quote_identifiers'])
+            && ($options['quote_identifiers'] == false
+            || $options['quote_identifiers'] === 'false')
+        ) {
+            $this->quoteIdentifiers = false;
+        }
+
+        if (isset($options['identifier_separator'])) {
+            $this->identifierSeparator = $options['identifier_separator'];
+        }
+    }
+
     /**
      * Get name
      *
@@ -39,6 +67,9 @@ class IbmDb2 implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
+        if ($this->quoteIdentifiers === false) {
+            return $identifier;
+        }
         return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
     }
 
@@ -50,9 +81,12 @@ class IbmDb2 implements PlatformInterface
      */
     public function quoteIdentifierChain($identifierChain)
     {
+        if ($this->quoteIdentifiers === false) {
+            return (is_array($identifierChain)) ? implode($this->identifierSeparator, $identifierChain) : $identifierChain;
+        }
         $identifierChain = str_replace('"', '\\"', $identifierChain);
         if (is_array($identifierChain)) {
-            $identifierChain = implode('"."', $identifierChain);
+            $identifierChain = implode('"' . $this->identifierSeparator . '"', $identifierChain);
         }
         return '"' . $identifierChain . '"';
     }
@@ -100,7 +134,7 @@ class IbmDb2 implements PlatformInterface
      */
     public function getIdentifierSeparator()
     {
-        return '.';
+        return $this->identifierSeparator;
     }
 
     /**
@@ -112,6 +146,9 @@ class IbmDb2 implements PlatformInterface
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
+        if ($this->quoteIdentifiers === false) {
+            return $identifier;
+        }
         $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
         foreach ($parts as $i => $part) {

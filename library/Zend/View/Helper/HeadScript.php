@@ -422,7 +422,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             $html .= $indent . '    ' . $item->source;
 
             if ($addScriptEscape) {
-                $html .= $indent . '    ' . $escapeEnd . PHP_EOL;
+                $html .= $indent . PHP_EOL . '    ' . $escapeEnd;
             }
 
             $html .= $indent;

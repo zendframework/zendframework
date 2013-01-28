@@ -256,7 +256,7 @@ class Apache implements PasswordInterface
                 );
             }
             for ($i = 0; $i < 8; $i++) {
-                if (strpos(self::ALPHA64, $password[$i]) === false) {
+                if (strpos(self::ALPHA64, $salt[$i]) === false) {
                     throw new Exception\InvalidArgumentException(
                         'The salt value must be a string in the alphabet "./0-9A-Za-z"'
                     );

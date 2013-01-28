@@ -36,7 +36,7 @@ class ObjectProperty extends AbstractHydrator
             if (!$self->getFilter()->filter($name)) {
                 unset($data[$name]);
             } else {
-                $value = $self->extractValue($name, $value);
+                $value = $self->extractValue($name, $value, $object);
             }
         });
         return $data;
@@ -60,7 +60,7 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
         foreach ($data as $property => $value) {
-            $object->$property = $this->hydrateValue($property, $value);
+            $object->$property = $this->hydrateValue($property, $value, $data);
         }
         return $object;
     }

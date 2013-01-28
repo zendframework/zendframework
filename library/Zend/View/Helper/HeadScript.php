@@ -425,7 +425,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
                 $html .= $indent . PHP_EOL . '    ' . $escapeEnd;
             }
 
-            $html .= $indent;
+            $html .= PHP_EOL . $indent;
         }
         $html .= '</script>';
 

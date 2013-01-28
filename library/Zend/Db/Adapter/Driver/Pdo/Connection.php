@@ -255,7 +255,11 @@ class Connection implements ConnectionInterface
             $this->resource->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         } catch (\PDOException $e) {
-            throw new Exception\RuntimeException('Connect Error: ' . $e->getMessage(), $e->getCode(), $e);
+            $code = $e->getCode();
+            if(!is_long($code)) {
+                $code = null;
+            }
+            throw new Exception\RuntimeException('Connect Error: ' . $e->getMessage(), $code, $e);
         }
 
         return $this;

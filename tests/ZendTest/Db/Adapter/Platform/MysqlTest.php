@@ -108,6 +108,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('`foo`.`bar`', $this->platform->quoteIdentifierInFragment('foo.bar'));
         $this->assertEquals('`foo` as `bar`', $this->platform->quoteIdentifierInFragment('foo as bar'));
+        $this->assertEquals('`$TableName`.`bar`', $this->platform->quoteIdentifierInFragment('$TableName.bar'));
     }
 
     /**

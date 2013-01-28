@@ -12,8 +12,9 @@ namespace Zend\Db\Adapter\Driver\IbmDb2;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-class Statement implements StatementInterface
+class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @var resource
@@ -24,6 +25,11 @@ class Statement implements StatementInterface
      * @var IbmDb2
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * @var string
@@ -63,6 +69,24 @@ class Statement implements StatementInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Statement
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -194,9 +218,17 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
+        if ($this->profiler) {
+            $this->profiler->profilerStart($this);
+        }
+
         set_error_handler(function () {}, E_WARNING); // suppress warnings
         $response = db2_execute($this->resource, $this->parameterContainer->getPositionalArray());
         restore_error_handler();
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish();
+        }
 
         if ($response === false) {
             throw new Exception\RuntimeException(db2_stmt_errormsg($this->resource));

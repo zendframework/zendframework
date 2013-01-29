@@ -371,7 +371,7 @@ class Server extends AbstractServer
             if (array_key_exists('default', $param)) {
                 $value = $param['default'];
             }
-            array_push($args, $value);
+            $args[$param['name']] = $value;
         }
         return $args;
     }

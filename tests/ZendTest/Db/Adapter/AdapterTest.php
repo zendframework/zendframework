@@ -170,6 +170,43 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test query() in prepare mode, with array of parameters, produces a result object
+     * @covers Zend\Db\Adapter\Adapter::query
+     */
+    public function testQueryWhenPreparedWithParameterArrayProducesResult()
+    {
+        $parray = array('bar'=>'foo');
+        $sql = 'SELECT foo, :bar';
+        $statement = $this->getMock('\Zend\Db\Adapter\Driver\StatementInterface');
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockDriver->expects($this->any())->method('createStatement')->with($sql)->will($this->returnValue($statement));
+        $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
+
+        $r = $this->adapter->query($sql, $parray);
+        $this->assertSame($result, $r);
+    }
+
+    /**
+     * @testdox unit test: Test query() in prepare mode, with ParameterContainer, produces a result object
+     * @covers Zend\Db\Adapter\Adapter::query
+     */
+    public function testQueryWhenPreparedWithParameterContainerProducesResult()
+    {
+        $parameterContainer = new ParameterContainer(array('bar'=>'foo'));
+        $sql = 'SELECT foo, :bar';
+        $parameterContainer = $this->getMock('Zend\Db\Adapter\ParameterContainer');
+        $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockDriver->expects($this->any())->method('createStatement')->with($sql)->will($this->returnValue($statement));
+        $this->mockStatement->expects($this->any())->method('setParameterContainer')->with($parameterContainer)->will($this->returnValue($statement));
+        $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
+        $result->expects($this->any())->method('isQueryResult')->will($this->returnValue(true));
+
+        $r = $this->adapter->query($sql, $parameterContainer);
+        $this->assertSame($result, $r);
+    }
+
+    /**
      * @testdox unit test: Test query() in execute mode produces a driver result object
      * @covers Zend\Db\Adapter\Adapter::query
      */

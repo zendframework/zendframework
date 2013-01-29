@@ -126,7 +126,7 @@ class Adapter
      * query() is a convenience function
      *
      * @param string $sql
-     * @param string|array $parametersOrQueryMode
+     * @param string|array|ParameterContainer $parametersOrQueryMode
      * @throws Exception\InvalidArgumentException
      * @return Driver\StatementInterface|ResultSet\ResultSet
      */

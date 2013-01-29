@@ -11,7 +11,6 @@
 namespace ZendTest\Db\Adapter;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\ParameterContainer;
 
 class AdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -193,18 +192,15 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryWhenPreparedWithParameterContainerProducesResult()
     {
-        $parameterContainer = new ParameterContainer(array('bar'=>'foo'));
-        $sql = 'SELECT foo, :bar';
+        $sql = 'SELECT foo';
         $parameterContainer = $this->getMock('Zend\Db\Adapter\ParameterContainer');
-        $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
-        $this->mockDriver->expects($this->any())->method('createStatement')->with($sql)->will($this->returnValue($statement));
-        $this->mockStatement->expects($this->any())->method('setParameterContainer')->with($parameterContainer)->will($this->returnValue($statement));
+        $this->mockDriver->expects($this->any())->method('createStatement')->with($sql)->will($this->returnValue($this->mockStatement));
         $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
         $result->expects($this->any())->method('isQueryResult')->will($this->returnValue(true));
 
         $r = $this->adapter->query($sql, $parameterContainer);
-        $this->assertSame($result, $r);
+        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $r);
     }
 
     /**

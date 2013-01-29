@@ -231,7 +231,7 @@ class FileInputTest extends TestCase
         ));
         $this->assertFalse($this->input->isValid());
         $messages = $this->input->getMessages();
-        $this->assertArrayHasKey(Validator\File\Upload::ATTACK, $messages);
+        $this->assertArrayHasKey(Validator\File\UploadFile::ATTACK, $messages);
     }
 
     public function testCanValidateArrayOfMultiFileData()
@@ -307,7 +307,7 @@ class FileInputTest extends TestCase
         $this->assertFalse($this->input->isValid());
         $validators = $validatorChain->getValidators();
         $this->assertEquals(1, count($validators));
-        $this->assertInstanceOf('Zend\Validator\File\Upload', $validators[0]['instance']);
+        $this->assertInstanceOf('Zend\Validator\File\UploadFile', $validators[0]['instance']);
     }
 
     public function testUploadValidatorIsNotAddedWhenIsValidIsCalled()
@@ -329,7 +329,7 @@ class FileInputTest extends TestCase
         $this->assertTrue($this->input->isRequired());
         $this->input->setValue(array('tmp_name' => 'bar'));
 
-        $uploadMock = $this->getMock('Zend\Validator\File\Upload', array('isValid'));
+        $uploadMock = $this->getMock('Zend\Validator\File\UploadFile', array('isValid'));
         $uploadMock->expects($this->exactly(1))
                      ->method('isValid')
                      ->will($this->returnValue(true));
@@ -350,7 +350,7 @@ class FileInputTest extends TestCase
         $this->assertTrue($this->input->isRequired());
         $this->input->setValue('');
 
-        $uploadMock = $this->getMock('Zend\Validator\File\Upload', array('isValid'));
+        $uploadMock = $this->getMock('Zend\Validator\File\UploadFile', array('isValid'));
         $uploadMock->expects($this->exactly(1))
             ->method('isValid')
             ->will($this->returnValue(false));

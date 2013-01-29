@@ -9,7 +9,7 @@
 
 namespace Zend\InputFilter;
 
-use Zend\Validator\File\Upload as UploadValidator;
+use Zend\Validator\File\UploadFile as UploadValidator;
 
 /**
  * FileInput is a special Input type for handling uploaded files.
@@ -139,7 +139,7 @@ class FileInput extends Input
             return;
         }
 
-        $chain->prependByName('fileupload', array(), true);
+        $chain->prependByName('fileuploadfile', array(), true);
         $this->autoPrependUploadValidator = false;
     }
 

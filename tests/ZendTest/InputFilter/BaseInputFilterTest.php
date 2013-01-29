@@ -420,7 +420,7 @@ class BaseInputFilterTest extends TestCase
         $filter = new InputFilter();
 
         $foo   = new FileInput();
-        $foo->getValidatorChain()->attach(new Validator\File\Upload());
+        $foo->getValidatorChain()->attach(new Validator\File\UploadFile());
         $foo->setRequired(false);
 
         $filter->add($foo, 'foo');

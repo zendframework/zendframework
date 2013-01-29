@@ -9,7 +9,7 @@
 
 namespace Zend\Db\TableGateway;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Delete;
@@ -22,7 +22,7 @@ use Zend\Db\Sql\Where;
 
 /**
  *
- * @property Adapter $adapter
+ * @property AdapterInterface $adapter
  * @property int $lastInsertValue
  * @property string $table
  */
@@ -35,7 +35,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected $isInitialized = false;
 
     /**
-     * @var Adapter
+     * @var AdapterInterface
      */
     protected $adapter = null;
 
@@ -63,7 +63,6 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      * @var Sql
      */
     protected $sql = null;
-
 
     /**
      *
@@ -98,7 +97,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->featureSet->setTableGateway($this);
         $this->featureSet->apply('preInitialize', array());
 
-        if (!$this->adapter instanceof Adapter) {
+        if (!$this->adapter instanceof AdapterInterface) {
             throw new Exception\RuntimeException('This table does not have an Adapter setup');
         }
 
@@ -132,7 +131,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Get adapter
      *
-     * @return Adapter
+     * @return AdapterInterface
      */
     public function getAdapter()
     {
@@ -485,4 +484,5 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             $this->table = clone $this->table;
         }
     }
+
 }

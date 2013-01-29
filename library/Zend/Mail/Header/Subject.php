@@ -32,7 +32,8 @@ class Subject implements UnstructuredInterface
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        list($name, $value) = explode(': ', $decodedLine, 2);
+        list($name, $value) = explode(':', $decodedLine, 2);
+        $value = ltrim($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'subject') {

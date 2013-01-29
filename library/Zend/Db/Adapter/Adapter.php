@@ -101,6 +101,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param Profiler\ProfilerInterface $profiler
+     * @return Adapter
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
@@ -108,6 +109,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         if ($this->driver instanceof Profiler\ProfilerAwareInterface) {
             $this->driver->setProfiler($profiler);
         }
+        return $this;
     }
 
     /**
@@ -256,8 +258,16 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
      */
     protected function createDriver($parameters)
     {
-        if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
-            throw new Exception\InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
+        if (!isset($parameters['driver'])) {
+            throw new Exception\InvalidArgumentException(__FUNCTION__ . ' expects a "driver" key to be present inside the parameters');
+        }
+
+        if ($parameters['driver'] instanceof Driver\DriverInterface) {
+            return $parameters['driver'];
+        }
+
+        if (!is_string($parameters['driver'])) {
+            throw new Exception\InvalidArgumentException(__FUNCTION__ . ' expects a "driver" to be a string or instance of DriverInterface');
         }
 
         $options = array();

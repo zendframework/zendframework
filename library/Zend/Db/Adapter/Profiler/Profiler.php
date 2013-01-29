@@ -15,7 +15,7 @@ class Profiler implements ProfilerInterface
     /**
      * @var null
      */
-    protected $current = null;
+    protected $currentIndex = 0;
 
     /**
      * @param string|StatementContainerInterface $target
@@ -33,14 +33,15 @@ class Profiler implements ProfilerInterface
         );
         if ($target instanceof StatementContainerInterface) {
             $profileInformation['sql'] = $target->getSql();
-            $profileInformation['params'] = clone $target->getParameterContainer();
+            $profileInformation['parameters'] = clone $target->getParameterContainer();
         } elseif (is_string($target)) {
             $profileInformation['sql'] = $target;
         } else {
             throw new Exception\InvalidArgumentException(__FUNCTION__ . ' takes either a StatementContainer or a string');
         }
 
-        $this->profiles[] = $this->current = $profileInformation;
+        $this->profiles[$this->currentIndex] = $profileInformation;
+
         return $this;
     }
 
@@ -49,8 +50,13 @@ class Profiler implements ProfilerInterface
      */
     public function profilerFinish()
     {
-        $this->current['end'] = microtime(true);
-        $this->current['elapse'] = $this->current['end'] - $this->current['start'];
+        if (!isset($this->profiles[$this->currentIndex])) {
+            throw new Exception\RuntimeException('A profile must be started before ' . __FUNCTION__ . ' can be called.');
+        }
+        $current = &$this->profiles[$this->currentIndex];
+        $current['end'] = microtime(true);
+        $current['elapse'] = $current['end'] - $current['start'];
+        $this->currentIndex++;
         return $this;
     }
 

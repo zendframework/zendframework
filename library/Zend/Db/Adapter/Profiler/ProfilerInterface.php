@@ -2,12 +2,10 @@
 
 namespace Zend\Db\Adapter\Profiler;
 
-use Zend\Db\Adapter\StatementContainerInterface;
-
 interface ProfilerInterface
 {
     /**
-     * @param string|StatementContainerInterface $target
+     * @param string|\Zend\Db\Adapter\StatementContainerInterface $target
      * @return mixed
      */
     public function profilerStart($target);

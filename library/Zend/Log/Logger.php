@@ -10,6 +10,7 @@
 namespace Zend\Log;
 
 use DateTime;
+use ErrorException;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\SplPriorityQueue;
@@ -516,27 +517,29 @@ class Logger implements LoggerInterface
             return false;
         }
 
-        $previous = set_error_handler(
-            function ($level, $message, $file, $line, $context) use ($logger, $continueNativeHandler) {
-                $iniLevel = error_reporting();
+        $errorHandlerMap = static::$errorPriorityMap;
 
-                if ($iniLevel & $level) {
-                    if (isset(Logger::$errorPriorityMap[$level])) {
-                        $priority = Logger::$errorPriorityMap[$level];
-                    } else {
-                        $priority = Logger::INFO;
-                    }
-                    $logger->log($priority, $message, array(
-                        'errno'   => $level,
-                        'file'    => $file,
-                        'line'    => $line,
-                        'context' => $context,
-                    ));
+        $previous = set_error_handler(function ($level, $message, $file, $line, $context)
+            use ($logger, $errorHandlerMap, $continueNativeHandler)
+        {
+            $iniLevel = error_reporting();
+
+            if ($iniLevel & $level) {
+                if (isset(Logger::$errorPriorityMap[$level])) {
+                    $priority = $errorHandlerMap[$level];
+                } else {
+                    $priority = Logger::INFO;
                 }
-
-                return !$continueNativeHandler;
+                $logger->log($priority, $message, array(
+                    'errno'   => $level,
+                    'file'    => $file,
+                    'line'    => $line,
+                    'context' => $context,
+                ));
             }
-        );
+
+            return !$continueNativeHandler;
+        });
 
         static::$registeredErrorHandler = true;
         return $previous;
@@ -571,17 +574,39 @@ class Logger implements LoggerInterface
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
 
-        set_exception_handler(function ($exception) use ($logger) {
-            $extra = array(
-                'file'  => $exception->getFile(),
-                'line'  => $exception->getLine(),
-                'trace' => $exception->getTrace()
-            );
-            if (isset($exception->xdebug_message)) {
-                $extra['xdebug'] = $exception->xdebug_message;
+        $errorPriorityMap = static::$errorPriorityMap;
+
+        set_exception_handler(function ($exception) use ($logger, $errorPriorityMap) {
+            $logMessages = array();
+
+            do {
+                $priority = Logger::ERR;
+                if ($exception instanceof ErrorException && isset($errorPriorityMap[$exception->getSeverity()])) {
+                    $priority = $errorPriorityMap[$exception->getSeverity()];
+                }
+
+                $extra = array(
+                    'file'  => $exception->getFile(),
+                    'line'  => $exception->getLine(),
+                    'trace' => $exception->getTrace(),
+                );
+                if (isset($exception->xdebug_message)) {
+                    $extra['xdebug'] = $exception->xdebug_message;
+                }
+
+                $logMessages[] = array(
+                    'priority' => $priority,
+                    'message'  => $exception->getMessage(),
+                    'extra'    => $extra,
+                );
+                $exception = $exception->getPrevious();
+            } while ($exception);
+
+            foreach (array_reverse($logMessages) as $logMessage) {
+                $logger->log($logMessage['priority'], $logMessage['message'], $logMessage['extra']);
             }
-            $logger->log(Logger::ERR, $exception->getMessage(), $extra);
         });
+
         static::$registeredExceptionHandler = true;
         return true;
     }

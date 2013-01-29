@@ -101,20 +101,27 @@ class ApacheResolver implements ResolverInterface
     {
         if (empty($username)) {
             throw new Exception\InvalidArgumentException('Username is required');
-        } elseif (!ctype_print($username) || strpos($username, ':') !== false) {
-            throw new Exception\InvalidArgumentException('Username must consist only of printable characters, '
-                                                              . 'excluding the colon');
         }
+
+        if (!ctype_print($username) || strpos($username, ':') !== false) {
+            throw new Exception\InvalidArgumentException(
+                'Username must consist only of printable characters, excluding the colon'
+            );
+        }
+
         if (!empty($realm) && (!ctype_print($realm) || strpos($realm, ':') !== false)) {
-            throw new Exception\InvalidArgumentException('Realm must consist only of printable characters, '
-                                                              . 'excluding the colon.');
+            throw new Exception\InvalidArgumentException(
+                'Realm must consist only of printable characters, excluding the colon'
+            );
         }
+
         if (empty($password)) {
             throw new Exception\InvalidArgumentException('Password is required');
         }
+
         // Open file, read through looking for matching credentials
         ErrorHandler::start(E_WARNING);
-        $fp     = fopen($this->file, 'r');
+        $fp    = fopen($this->file, 'r');
         $error = ErrorHandler::stop();
         if (!$fp) {
             throw new Exception\RuntimeException('Unable to open password file: ' . $this->file, 0, $error);
@@ -123,17 +130,20 @@ class ApacheResolver implements ResolverInterface
         // No real validation is done on the contents of the password file. The
         // assumption is that we trust the administrators to keep it secure.
         while (($line = fgetcsv($fp, 512, ':')) !== false) {
-            if ($line[0] == $username) {
-                if (isset($line[2])) {
-                    if ($line[1] == $realm) {
-                        $matchedHash = $line[2];
-                        break;
-                    }
-                } else {
-                    $matchedHash = $line[1];
+            if ($line[0] != $username) {
+                continue;
+            }
+
+            if (isset($line[2])) {
+                if ($line[1] == $realm) {
+                    $matchedHash = $line[2];
                     break;
                 }
+                continue;
             }
+
+            $matchedHash = $line[1];
+            break;
         }
         fclose($fp);
 
@@ -154,8 +164,8 @@ class ApacheResolver implements ResolverInterface
 
         if ($apache->verify($password, $matchedHash)) {
             return new AuthResult(AuthResult::SUCCESS, $username);
-        } else {
-            return new AuthResult(AuthResult::FAILURE_CREDENTIAL_INVALID, null, array('Passwords did not match.'));
         }
+
+        return new AuthResult(AuthResult::FAILURE_CREDENTIAL_INVALID, null, array('Passwords did not match.'));
     }
 }

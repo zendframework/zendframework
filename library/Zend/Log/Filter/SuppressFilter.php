@@ -9,6 +9,7 @@
 
 namespace Zend\Log\Filter;
 
+use Zend\Log\Exception;
 
 class SuppressFilter implements FilterInterface
 {
@@ -16,6 +17,29 @@ class SuppressFilter implements FilterInterface
      * @var bool
      */
     protected $accept = true;
+
+    /**
+     * This is a simple boolean filter.
+     *
+     * @param int|array|Traversable $suppress
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($suppress = false)
+    {
+        if ($suppress instanceof Traversable) {
+            $suppress = iterator_to_array($suppress);
+        }
+        if (is_array($suppress)) {
+            $suppress = isset($suppress['suppress']) ? $suppress['suppress'] : false;
+        }
+        if (!is_bool($suppress)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Suppress must be an boolean; received "%s"', gettype($suppress)
+            ));
+        }
+
+        $this->suppress($suppress);
+    }
 
     /**
      * This is a simple boolean filter.

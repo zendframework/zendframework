@@ -261,7 +261,7 @@ class Forward extends AbstractPlugin
 
         $controller = $this->getController();
         if (!$controller instanceof InjectApplicationEventInterface) {
-            throw new Exception\DomainException('Redirect plugin requires a controller that implements InjectApplicationEventInterface');
+            throw new Exception\DomainException('Forward plugin requires a controller that implements InjectApplicationEventInterface');
         }
 
         $event = $controller->getEvent();

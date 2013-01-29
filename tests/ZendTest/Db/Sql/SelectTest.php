@@ -950,6 +950,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoins'   => array(array(array('INNER', '"baz"."bar"', '"m" = "n"')))
         );
 
+        // subselect in join
+        $select39subselect = new Select;
+        $select39subselect->from('bar')->where->like('y', '%Foo%');
+        $select39 = new Select;
+        $select39->from('foo')->join(array('z' => $select39subselect), 'z.foo = bar.id');
+        $sqlPrep39 = 'SELECT "foo".*, "z".* FROM "foo" INNER JOIN (SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "z" ON "z"."foo" = "bar"."id"';
+        $sqlStr39 = 'SELECT "foo".*, "z".* FROM "foo" INNER JOIN (SELECT "bar".* FROM "bar" WHERE "y" LIKE \'%Foo%\') AS "z" ON "z"."foo" = "bar"."id"';
+        $internalTests39 = array(
+            'processJoins' => array(array(array('INNER', '(SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "z"', '"z"."foo" = "bar"."id"')))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -999,6 +1010,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select36, $sqlPrep36, array(),    $sqlStr36, $internalTests36,  $useNamedParams36),
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
             array($select38, $sqlPrep38, array(),    $sqlStr38, $internalTests38),
+            array($select39, $sqlPrep39, array(),    $sqlStr39, $internalTests39),
         );
     }
 }

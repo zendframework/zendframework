@@ -924,6 +924,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"', '"bar"')), '"foo"')
         );
 
+        // @link https://github.com/zendframework/zf2/issues/3294
+        // Test TableIdentifier In Joins
+        $select38 = new Select;
+        $select38->from('foo')->columns(array())->join(new TableIdentifier('bar', 'baz'), 'm = n', array('thecount' => new Expression("COUNT(*)")));
+        $sqlPrep38 = // same
+        $sqlStr38 = 'SELECT COUNT(*) AS "thecount" FROM "foo" INNER JOIN "baz"."bar" ON "m" = "n"';
+        $internalTests38 = array(
+            'processSelect' => array(array(array('COUNT(*)', '"thecount"')), '"foo"'),
+            'processJoins'   => array(array(array('INNER', '"baz"."bar"', '"m" = "n"')))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -972,6 +983,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select35, $sqlPrep35, array(),    $sqlStr35, $internalTests35),
             array($select36, $sqlPrep36, array(),    $sqlStr36, $internalTests36,  $useNamedParams36),
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
+            array($select38, $sqlPrep38, array(),    $sqlStr38, $internalTests38),
         );
     }
 }

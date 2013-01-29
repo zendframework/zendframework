@@ -38,6 +38,26 @@ class Logger implements LoggerInterface
     const DEBUG  = 7;
 
     /**
+     * Map of PHP error constants to log priorities
+     *
+     * @var array
+     */
+    protected static $errorPriorityMap = array(
+        E_NOTICE            => self::NOTICE,
+        E_USER_NOTICE       => self::NOTICE,
+        E_WARNING           => self::WARN,
+        E_CORE_WARNING      => self::WARN,
+        E_USER_WARNING      => self::WARN,
+        E_ERROR             => self::ERR,
+        E_USER_ERROR        => self::ERR,
+        E_CORE_ERROR        => self::ERR,
+        E_RECOVERABLE_ERROR => self::ERR,
+        E_STRICT            => self::DEBUG,
+        E_DEPRECATED        => self::DEBUG,
+        E_USER_DEPRECATED   => self::DEBUG,
+    );
+
+    /**
      * List of priority code => priority (short) name
      *
      * @var array
@@ -363,22 +383,11 @@ class Logger implements LoggerInterface
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
 
-        $errorHandlerMap = array(
-            E_NOTICE            => self::NOTICE,
-            E_USER_NOTICE       => self::NOTICE,
-            E_WARNING           => self::WARN,
-            E_CORE_WARNING      => self::WARN,
-            E_USER_WARNING      => self::WARN,
-            E_ERROR             => self::ERR,
-            E_USER_ERROR        => self::ERR,
-            E_CORE_ERROR        => self::ERR,
-            E_RECOVERABLE_ERROR => self::ERR,
-            E_STRICT            => self::DEBUG,
-            E_DEPRECATED        => self::DEBUG,
-            E_USER_DEPRECATED   => self::DEBUG
-        );
+        $errorHandlerMap = static::$errorPriorityMap;
 
-        set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
+        set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext)
+            use ($errorHandlerMap, $logger)
+        {
             $errorLevel = error_reporting();
 
             if ($errorLevel & $errno) {
@@ -428,27 +437,15 @@ class Logger implements LoggerInterface
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
 
-        $errorPriorityMap = array(
-            E_NOTICE            => self::NOTICE,
-            E_USER_NOTICE       => self::NOTICE,
-            E_WARNING           => self::WARN,
-            E_CORE_WARNING      => self::WARN,
-            E_USER_WARNING      => self::WARN,
-            E_ERROR             => self::ERR,
-            E_USER_ERROR        => self::ERR,
-            E_CORE_ERROR        => self::ERR,
-            E_RECOVERABLE_ERROR => self::ERR,
-            E_STRICT            => self::DEBUG,
-            E_DEPRECATED        => self::DEBUG,
-            E_USER_DEPRECATED   => self::DEBUG,
-        );
+        $errorPriorityMap = static::$errorPriorityMap;
+
         set_exception_handler(function ($exception) use ($logger, $errorPriorityMap) {
             $logMessages = array();
 
             do {
-                $prio = Logger::ERR;
+                $priority = Logger::ERR;
                 if ($exception instanceof ErrorException && isset($errorPriorityMap[$exception->getSeverity()])) {
-                    $prio = $errorPriorityMap[$exception->getSeverity()];
+                    $priority = $errorPriorityMap[$exception->getSeverity()];
                 }
 
                 $extra = array(
@@ -461,15 +458,15 @@ class Logger implements LoggerInterface
                 }
 
                 $logMessages[] = array(
-                    'prio'  => $prio,
-                    'msg'   => $exception->getMessage(),
-                    'extra' => $extra,
+                    'priority' => $priority,
+                    'message'  => $exception->getMessage(),
+                    'extra'    => $extra,
                 );
                 $exception = $exception->getPrevious();
             } while ($exception);
 
             foreach (array_reverse($logMessages) as $logMessage) {
-                $logger->log($logMessage['prio'], $logMessage['msg'], $logMessage['extra']);
+                $logger->log($logMessage['priority'], $logMessage['message'], $logMessage['extra']);
             }
         });
 

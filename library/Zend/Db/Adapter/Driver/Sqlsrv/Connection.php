@@ -12,13 +12,19 @@ namespace Zend\Db\Adapter\Driver\Sqlsrv;
 use Zend\Db\Adapter\Driver\Sqlsrv\Exception\ErrorException;
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface
+class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @var Sqlsrv
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * @var array
@@ -62,6 +68,24 @@ class Connection implements ConnectionInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Connection
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -265,7 +289,15 @@ class Connection implements ConnectionInterface
             throw new Exception\RuntimeException('Connection is missing an instance of Sqlsrv');
         }
 
+        if ($this->profiler) {
+            $this->profiler->profilerStart($sql);
+        }
+
         $returnValue = sqlsrv_query($this->resource, $sql);
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish($sql);
+        }
 
         // if the returnValue is something other than a Sqlsrv_result, bypass wrapping it
         if ($returnValue === false) {

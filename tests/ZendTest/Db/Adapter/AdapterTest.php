@@ -11,6 +11,7 @@
 namespace ZendTest\Db\Adapter;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Profiler;
 
 class AdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,6 +51,29 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $this->mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($this->mockStatement));
 
         $this->adapter = new Adapter($this->mockDriver, $this->mockPlatform);
+    }
+
+    /**
+     * @testdox unit test: Test setProfiler() will store profiler
+     * @covers Zend\Db\Adapter\Adapter::setProfiler
+     */
+    public function testSetProfiler()
+    {
+        $ret = $this->adapter->setProfiler(new Profiler\Profiler());
+        $this->assertSame($this->adapter, $ret);
+    }
+
+    /**
+     * @testdox unit test: Test getProfiler() will store profiler
+     * @covers Zend\Db\Adapter\Adapter::getProfiler
+     */
+    public function testGetProfiler()
+    {
+        $this->adapter->setProfiler($profiler = new Profiler\Profiler());
+        $this->assertSame($profiler, $this->adapter->getProfiler());
+
+        $adapter = new Adapter(array('driver' => $this->mockDriver, 'profiler' => true), $this->mockPlatform);
+        $this->assertInstanceOf('Zend\Db\Adapter\Profiler\Profiler', $adapter->getProfiler());
     }
 
     /**

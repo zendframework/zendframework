@@ -12,8 +12,9 @@ namespace Zend\Db\Adapter\Driver\Mysqli;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Profiler;
 
-class Statement implements StatementInterface
+class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
 
     /**
@@ -25,6 +26,11 @@ class Statement implements StatementInterface
      * @var Mysqli
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * @var string
@@ -73,6 +79,24 @@ class Statement implements StatementInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Statement
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -225,7 +249,17 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        if ($this->resource->execute() === false) {
+        if ($this->profiler) {
+            $this->profiler->profilerStart($this);
+        }
+
+        $return = $this->resource->execute();
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish();
+        }
+
+        if ($return === false) {
             throw new Exception\RuntimeException($this->resource->error);
         }
 

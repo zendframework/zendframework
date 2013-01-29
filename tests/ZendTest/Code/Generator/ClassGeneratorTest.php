@@ -106,7 +106,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'addProperty() expects string for name'
+            'Zend\Code\Generator\ClassGenerator::addProperty expects string for name'
         );
         $classGenerator->addProperty(true);
     }
@@ -138,7 +138,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\ExceptionInterface',
-            'addMethod() expects string for name'
+            'Zend\Code\Generator\ClassGenerator::addMethod expects string for name'
         );
 
         $classGenerator->addMethod(true);
@@ -186,8 +186,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'flags' => ClassGenerator::FLAG_ABSTRACT,
             'extendedClass' => 'ExtendedClassName',
@@ -354,10 +353,24 @@ CODE;
         $this->assertContains('class FunClass', $received, $received);
     }
 
+    /**
+     * @group ZF2-151
+     */
+    public function testAddUses()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $classGenerator->addUse('My\Second\Use\Class', 'MyAlias');
+        $generated = $classGenerator->generate();
+
+        $this->assertContains('use My\First\Use\Class;', $generated);
+        $this->assertContains('use My\Second\Use\Class as MyAlias;', $generated);
+    }
+
     public function testCreateFromArrayWithDocBlockFromArray()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'docblock' => array(
                 'shortdescription' => 'foo',
@@ -370,8 +383,7 @@ CODE;
 
     public function testCreateFromArrayWithDocBlockInstance()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'docblock' => new DocBlockGenerator('foo'),
         ));

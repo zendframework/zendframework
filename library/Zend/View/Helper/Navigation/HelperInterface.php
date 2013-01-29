@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
@@ -16,10 +15,6 @@ use Zend\View\Helper\HelperInterface as BaseHelperInterface;
 
 /**
  * Interface for navigational helpers
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
  */
 interface HelperInterface extends BaseHelperInterface
 {
@@ -44,16 +39,16 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Sets ACL to use when iterating pages
      *
-     * @param  Acl\Acl $acl [optional] ACL instance
+     * @param  Acl\AclInterface $acl [optional] ACL instance
      * @return HelperInterface  fluent interface, returns self
      */
-    public function setAcl(Acl\Acl $acl = null);
+    public function setAcl(Acl\AclInterface $acl = null);
 
     /**
      * Returns ACL or null if it isn't set using {@link setAcl()} or
      * {@link setDefaultAcl()}
      *
-     * @return Acl\Acl|null  ACL object or null
+     * @return Acl\AclInterface|null  ACL object or null
      */
     public function getAcl();
 

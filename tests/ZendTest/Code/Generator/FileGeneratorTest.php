@@ -51,14 +51,14 @@ class FileGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         $codeGenFile = FileGenerator::fromArray(array(
-                                                     'requiredFiles' => array('SampleClass.php'),
-                                                     'class' => array(
-                                                         'flags' => ClassGenerator::FLAG_ABSTRACT,
-                                                         'name' => 'SampleClass',
-                                                         'extendedClass' => 'ExtendedClassName',
-                                                         'implementedInterfaces' => array('Iterator', 'Traversable')
-                                                     )
-                                                ));
+            'requiredFiles' => array('SampleClass.php'),
+            'class' => array(
+                'flags' => ClassGenerator::FLAG_ABSTRACT,
+                'name' => 'SampleClass',
+                'extendedClass' => 'ExtendedClassName',
+                'implementedInterfaces' => array('Iterator', 'Traversable')
+            )
+        ));
 
 
         $expectedOutput = <<<EOS
@@ -84,10 +84,10 @@ EOS;
         $tempFile = tempnam(sys_get_temp_dir(), 'UnitFile');
 
         $codeGenFile = FileGenerator::fromArray(array(
-                                                     'class' => array(
-                                                         'name' => 'SampleClass'
-                                                     )
-                                                ));
+            'class' => array(
+                'name' => 'SampleClass'
+            )
+        ));
 
         file_put_contents($tempFile, $codeGenFile->generate());
 
@@ -168,9 +168,9 @@ EOS;
                 'abstract' => true,
                 'name' => 'SampleClass',
                 'extendedClass' => 'ExtendedClassName',
-                'implementedInterfaces' => array('Iterator', 'Traversable')
-                )
-            ));
+                'implementedInterfaces' => array('Iterator', 'Traversable'),
+            ),
+        ));
 
         // explode by newline, this would leave CF in place if it were generated
         $lines = explode("\n", $codeGenFile->generate());
@@ -188,7 +188,7 @@ EOS;
         $file = new FileGenerator();
         $file->setUse('My\Baz')
              ->setUses(array(
-                 array('Your\Bar', 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
              ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz;', $generated);
@@ -216,8 +216,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-                 array('Your\Bar', 'bar'),
-                 array('Your\Bar', 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
         ));
         $generated = $file->generate();
         $this->assertSame(strpos($generated, 'use Your\\Bar as bar;'), strrpos($generated, 'use Your\\Bar as bar;'));
@@ -227,8 +227,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-                 array('Your\Bar', 'bar'),
-                 array('Your\Bar', 'bar2'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar2'),
         ));
         $generated = $file->generate();
         $this->assertContains('use Your\\Bar as bar;', $generated);
@@ -239,8 +239,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-                 array('Your\\Bar', 'bar'),
-                 array('My\\Baz', 'FooBaz')
+                 array('use' => 'Your\\Bar', 'as' => 'bar'),
+                 array('use' => 'My\\Baz', 'as' => 'FooBaz')
              ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz as FooBaz;', $generated);
@@ -253,7 +253,7 @@ EOS;
         $file->setUses(array(
             'Your\\Bar',
             'My\\Baz',
-            array('Another\\Baz', 'Baz2')
+            array('use' => 'Another\\Baz', 'as' => 'Baz2')
         ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz;', $generated);

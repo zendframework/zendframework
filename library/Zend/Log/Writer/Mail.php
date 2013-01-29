@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
@@ -25,10 +24,6 @@ use Zend\Mail\Transport\Exception as TransportException;
  * completion, so any log entries accumulated are sent in a single email.
  * The email is sent using a Zend\Mail\Transport\TransportInterface object
  * (Sendmail is default).
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
  */
 class Mail extends AbstractWriter
 {
@@ -85,6 +80,7 @@ class Mail extends AbstractWriter
         }
 
         if (is_array($mail)) {
+            parent::__construct($mail);
             if (isset($mail['subject_prepend_text'])) {
                 $this->setSubjectPrependText($mail['subject_prepend_text']);
             }
@@ -113,7 +109,9 @@ class Mail extends AbstractWriter
         }
         $this->setTransport($transport);
 
-        $this->formatter = new SimpleFormatter();
+        if($this->formatter === null) {
+            $this->formatter = new SimpleFormatter();
+        }
     }
 
     /**

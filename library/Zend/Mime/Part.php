@@ -5,16 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mime
  */
 
 namespace Zend\Mime;
 
 /**
  * Class representing a MIME part.
- *
- * @category   Zend
- * @package    Zend_Mime
  */
 class Part
 {
@@ -70,6 +66,7 @@ class Part
      * if this was created with a stream, return a filtered stream for
      * reading the content. very useful for large file attachments.
      *
+     * @param string $EOL
      * @return stream
      * @throws Exception\RuntimeException if not a stream or unable to append filter
      */

@@ -648,9 +648,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResponse, $server1->handle($request));
     }
 
-    /**
-     * @todo Implement testRegisterFaultException().
-     */
     public function testRegisterFaultException()
     {
         $server = new Server();
@@ -665,9 +662,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         ), $server->getFaultExceptions());
     }
 
-    /**
-     * @todo Implement testDeregisterFaultException().
-     */
     public function testDeregisterFaultException()
     {
         $server = new Server();
@@ -684,9 +678,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($ret);
     }
 
-    /**
-     * @todo Implement testGetFaultExceptions().
-     */
     public function testGetFaultExceptions()
     {
         $server = new Server();

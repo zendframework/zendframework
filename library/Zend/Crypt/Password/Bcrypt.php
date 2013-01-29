@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt\Password;
@@ -16,9 +15,6 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP
- *
- * @category   Zend
- * @package    Zend_Crypt
  */
 class Bcrypt implements PasswordInterface
 {
@@ -33,6 +29,11 @@ class Bcrypt implements PasswordInterface
      * @var string
      */
     protected $salt;
+
+    /**
+     * @var boolean
+     */
+    protected $backwardCompatibility = false;
 
     /**
      * Constructor
@@ -82,7 +83,7 @@ class Bcrypt implements PasswordInterface
          * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
          */
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
+        if ((version_compare(PHP_VERSION, '5.3.7') >= 0) && !$this->backwardCompatibility) {
             $prefix = '$2y$';
         } else {
             $prefix = '$2a$';
@@ -171,5 +172,26 @@ class Bcrypt implements PasswordInterface
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    /**
+     * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
+     *
+     * @param boolean $value
+     */
+    public function setBackwardCompatibility($value)
+    {
+        $this->backwardCompatibility = (boolean) $value;
+        return $this;
+    }
+
+    /**
+     * Get the backward compatibility
+     *
+     * @return boolean
+     */
+    public function getBackwardCompatibility()
+    {
+        return $this->backwardCompatibility;
     }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager;
@@ -17,9 +16,6 @@ namespace Zend\EventManager;
  * with an EventManager, without an event name. The {@link attach()} method will
  * then be called with the current EventManager instance, allowing the class to
  * wire up one or more listeners.
- *
- * @category   Zend
- * @package    Zend_EventManager
  */
 interface ListenerAggregateInterface
 {

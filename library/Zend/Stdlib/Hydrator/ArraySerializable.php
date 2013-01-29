@@ -5,18 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib\Hydrator;
 
 use Zend\Stdlib\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage Hydrator
- */
 class ArraySerializable extends AbstractHydrator
 {
 
@@ -39,9 +33,14 @@ class ArraySerializable extends AbstractHydrator
 
         $self = $this;
         $data = $object->getArrayCopy();
-        array_walk($data, function (&$value, $name) use ($self) {
-            $value = $self->extractValue($name, $value);
+        array_walk($data, function (&$value, $name) use ($self, &$data) {
+            if (!$self->getFilter()->filter($name)) {
+                unset($data[$name]);
+            } else {
+                $value = $self->extractValue($name, $value);
+            }
         });
+
         return $data;
     }
 

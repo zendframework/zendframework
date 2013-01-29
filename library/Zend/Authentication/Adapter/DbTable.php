@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter;
@@ -17,12 +16,7 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select as DbSelect;
 
-/**
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter
- */
-class DbTable implements AdapterInterface
+class DbTable extends AbstractAdapter
 {
 
     /**
@@ -57,20 +51,6 @@ class DbTable implements AdapterInterface
      * @var string
      */
     protected $credentialColumn = null;
-
-    /**
-     * $identity - Identity value
-     *
-     * @var string
-     */
-    protected $identity = null;
-
-    /**
-     * $credential - Credential values
-     *
-     * @var string
-     */
-    protected $credential = null;
 
     /**
      * $credentialTreatment - Treatment applied to the credential, such as MD5() or PASSWORD()
@@ -190,31 +170,6 @@ class DbTable implements AdapterInterface
     public function setCredentialTreatment($treatment)
     {
         $this->credentialTreatment = $treatment;
-        return $this;
-    }
-
-    /**
-     * setIdentity() - set the value to be used as the identity
-     *
-     * @param  string $value
-     * @return DbTable Provides a fluent interface
-     */
-    public function setIdentity($value)
-    {
-        $this->identity = $value;
-        return $this;
-    }
-
-    /**
-     * setCredential() - set the credential value to be used, optionally can specify a treatment
-     * to be used, should be supplied in parametrized form, such as 'MD5(?)' or 'PASSWORD(?)'
-     *
-     * @param  string $credential
-     * @return DbTable Provides a fluent interface
-     */
-    public function setCredential($credential)
-    {
-        $this->credential = $credential;
         return $this;
     }
 

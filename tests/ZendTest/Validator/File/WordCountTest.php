@@ -22,27 +22,40 @@ use Zend\Validator;
 class WordCountTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile = __DIR__ . '/_files/wordcount.txt';
+        $testData = array(
+            //    Options, isValid Param, Expected value
+            array(15,      $testFile,     true),
+            array(4,       $testFile,     false),
+            array(array('min' => 0,  'max' => 10), $testFile,   true),
+            array(array('min' => 10, 'max' => 15), $testFile,   false),
+        );
+
+        // Dupe data in File Upload format
+        foreach ($testData as $data) {
+            $fileUpload = array(
+                'tmp_name' => $data[1], 'name' => basename($data[1]),
+                'size' => 200, 'error' => 0, 'type' => 'text'
+            );
+            $testData[] = array($data[0], $fileUpload, $data[2]);
+        }
+        return $testData;
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected)
     {
-        $valuesExpected = array(
-            array(15, true),
-            array(4, false),
-            array(array('min' => 0, 'max' => 10), true),
-            array(array('min' => 10, 'max' => 15), false),
-            );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\WordCount($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/wordcount.txt'),
-                "Tested with " . var_export($element, 1)
-            );
-        }
+        $validator = new File\WordCount($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
     }
 
     /**
@@ -111,6 +124,6 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $validator = new File\WordCount(array('min' => 1, 'max' => 10000));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileWordCountNotFound', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

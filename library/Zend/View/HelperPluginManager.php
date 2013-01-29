@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View;
@@ -20,12 +19,18 @@ use Zend\ServiceManager\ConfigInterface;
  * Enforces that helpers retrieved are instances of
  * Helper\HelperInterface. Additionally, it registers a number of default
  * helpers.
- *
- * @category   Zend
- * @package    Zend_View
  */
 class HelperPluginManager extends AbstractPluginManager
 {
+    /**
+     * Default set of helpers factories
+     *
+     * @var array
+     */
+    protected $factories = array(
+        'flashmessenger'      => 'Zend\View\Helper\Service\FlashMessengerFactory',
+    );
+
     /**
      * Default set of helpers
      *
@@ -81,11 +86,22 @@ class HelperPluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached renderer and translator, if any, to the currently requested helper.
      *
-     * @param  null|ConfigInterface $configuration
+     * @param null|ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
+
+        $this->setFactory('identity', function ($helpers) {
+            $services = $helpers->getServiceLocator();
+            $helper   = new Helper\Identity();
+            if (!$services->has('Zend\Authentication\AuthenticationService')) {
+                return $helper;
+            }
+            $helper->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+            return $helper;
+        });
+
         $this->addInitializer(array($this, 'injectRenderer'))
              ->addInitializer(array($this, 'injectTranslator'));
     }
@@ -99,6 +115,7 @@ class HelperPluginManager extends AbstractPluginManager
     public function setRenderer(Renderer\RendererInterface $renderer)
     {
         $this->renderer = $renderer;
+
         return $this;
     }
 
@@ -148,7 +165,7 @@ class HelperPluginManager extends AbstractPluginManager
      *
      * Checks that the helper loaded is an instance of Helper\HelperInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                            $plugin
      * @return void
      * @throws Exception\InvalidHelperException if invalid
      */

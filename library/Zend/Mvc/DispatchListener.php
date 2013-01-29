@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc;
@@ -13,9 +12,7 @@ namespace Zend\Mvc;
 use ArrayObject;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use Zend\ServiceManager\ServiceManager;
+use Zend\Mvc\Exception\InvalidControllerException;
 use Zend\Stdlib\ArrayUtils;
 
 
@@ -23,8 +20,13 @@ use Zend\Stdlib\ArrayUtils;
  * Default dispatch listener
  *
  * Pulls controllers from the service manager's "ControllerLoader" service.
- * If the controller cannot be found, or is not dispatchable, sets up a "404"
- * result.
+ *
+ * If the controller cannot be found a "404" result is set up. Otherwise it
+ * will continue to try to load the controller.
+ *
+ * If the controller is not dispatchable it sets up a "404" result. In case
+ * of any other exceptions it trigger the "dispatch.error" event in an attempt
+ * to return a 500 status.
  *
  * If the controller subscribes to InjectApplicationEventInterface, it injects
  * the current MvcEvent into the controller.
@@ -35,9 +37,6 @@ use Zend\Stdlib\ArrayUtils;
  *
  * The return value of dispatching the controller is placed into the result
  * property of the MvcEvent, and returned.
- *
- * @category   Zend
- * @package    Zend_Mvc
  */
 class DispatchListener implements ListenerAggregateInterface
 {
@@ -55,6 +54,9 @@ class DispatchListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'));
+        if (function_exists('zend_monitor_custom_event_ex')) {
+            $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'reportMonitorEvent'));
+        }
     }
 
     /**
@@ -86,19 +88,18 @@ class DispatchListener implements ListenerAggregateInterface
         $events           = $application->getEventManager();
         $controllerLoader = $application->getServiceManager()->get('ControllerLoader');
 
+        if (!$controllerLoader->has($controllerName)) {
+            $return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $e, $application);
+            return $this->complete($return, $e);
+        }
+
         try {
             $controller = $controllerLoader->get($controllerName);
-        } catch (ServiceNotFoundException $exception) {
-            $return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $exception, $e, $application);
-            return $this->complete($return, $e);
-        } catch (ServiceNotCreatedException $exception) {
-            $return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $exception, $e, $application);
-            return $this->complete($return, $e);
-        } catch (Exception\InvalidControllerException $exception) {
-            $return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $exception, $e, $application);
+        } catch (InvalidControllerException $exception) {
+            $return = $this->marshallControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $e, $application, $exception);
             return $this->complete($return, $e);
         } catch (\Exception $exception) {
-            $return = $this->marshallBadControllerEvent($controllerName, $exception, $e, $application);
+            $return = $this->marshallBadControllerEvent($controllerName, $e, $application, $exception);
             return $this->complete($return, $e);
         }
 
@@ -127,6 +128,18 @@ class DispatchListener implements ListenerAggregateInterface
     }
 
     /**
+     * @param MvcEvent $e
+     */
+    public function reportMonitorEvent(MvcEvent $e)
+    {
+        $error     = $e->getError();
+        $exception = $e->getParam('exception');
+        if ($exception instanceof \Exception) {
+            zend_monitor_custom_event_ex($error, $exception->getMessage(), 'Zend Framework Exception', array('code' => $exception->getCode(), 'trace' => $exception->getTraceAsString()));
+        }
+    }
+
+    /**
      * Complete the dispatch
      *
      * @param  mixed $return
@@ -149,22 +162,24 @@ class DispatchListener implements ListenerAggregateInterface
      *
      * @param  string $type
      * @param  string $controllerName
-     * @param  \Exception $exception
      * @param  MvcEvent $event
      * @param  Application $application
+     * @param  \Exception $exception
      * @return mixed
      */
     protected function marshallControllerNotFoundEvent(
         $type,
         $controllerName,
-        \Exception $exception,
         MvcEvent $event,
-        Application $application
+        Application $application,
+        \Exception $exception = null
     ) {
         $event->setError($type)
               ->setController($controllerName)
-              ->setControllerClass('invalid controller class or alias: ' . $controllerName)
-              ->setParam('exception', $exception);
+              ->setControllerClass('invalid controller class or alias: ' . $controllerName);
+        if ($exception !== null) {
+            $event->setParam('exception', $exception);
+        }
 
         $events  = $application->getEventManager();
         $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
@@ -179,16 +194,16 @@ class DispatchListener implements ListenerAggregateInterface
      * Marshall a bad controller exception event
      *
      * @param  string $controllerName
-     * @param  \Exception $exception
      * @param  MvcEvent $event
      * @param  Application $application
+     * @param  \Exception $exception
      * @return mixed
      */
     protected function marshallBadControllerEvent(
         $controllerName,
-        \Exception $exception,
         MvcEvent $event,
-        Application $application
+        Application $application,
+        \Exception $exception
     ) {
         $event->setError($application::ERROR_EXCEPTION)
               ->setController($controllerName)

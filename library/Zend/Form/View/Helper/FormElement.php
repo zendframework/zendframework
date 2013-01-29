@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -14,11 +13,6 @@ use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormElement extends BaseAbstractHelper
 {
     /**
@@ -55,6 +49,21 @@ class FormElement extends BaseAbstractHelper
 
         if ($element instanceof Element\Collection) {
             $helper = $renderer->plugin('form_collection');
+            return $helper($element);
+        }
+
+        if ($element instanceof Element\DateTimeSelect) {
+            $helper = $renderer->plugin('form_date_time_select');
+            return $helper($element);
+        }
+
+        if ($element instanceof Element\DateSelect) {
+            $helper = $renderer->plugin('form_date_select');
+            return $helper($element);
+        }
+
+        if ($element instanceof Element\MonthSelect) {
+            $helper = $renderer->plugin('form_month_select');
             return $helper($element);
         }
 

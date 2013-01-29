@@ -5,20 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- */
-class Sqlsrv implements DriverInterface
+class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
 {
 
     /**
@@ -37,6 +32,11 @@ class Sqlsrv implements DriverInterface
     protected $resultPrototype = null;
 
     /**
+     * @var null|Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
+
+    /**
      * @param array|Connection|resource $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
@@ -50,6 +50,30 @@ class Sqlsrv implements DriverInterface
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Sqlsrv
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        if ($this->connection instanceof Profiler\ProfilerAwareInterface) {
+            $this->connection->setProfiler($profiler);
+        }
+        if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
+            $this->statementPrototype->setProfiler($profiler);
+        }
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**

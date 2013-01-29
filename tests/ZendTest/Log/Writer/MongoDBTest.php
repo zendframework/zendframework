@@ -50,14 +50,12 @@ class MongoDBTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->mongoCollection));
     }
 
-    /**
-     * @expectedException Zend\Log\Exception\InvalidArgumentException
-     */
     public function testFormattingIsNotSupported()
     {
         $writer = new MongoDBWriter($this->mongo, $this->database, $this->collection);
 
         $writer->setFormatter($this->getMock('Zend\Log\Formatter\FormatterInterface'));
+        $this->assertAttributeEmpty('formatter', $writer);
     }
 
     public function testWriteWithDefaultSaveOptions()

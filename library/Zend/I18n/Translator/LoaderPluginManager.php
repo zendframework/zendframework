@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace Zend\I18n\Translator;
@@ -19,10 +18,6 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Enforces that loaders retrieved are either instances of
  * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface. Additionally,
  * it registers a number of default loaders.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage Translator
  */
 class LoaderPluginManager extends AbstractPluginManager
 {
@@ -32,8 +27,9 @@ class LoaderPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'phparray' => 'Zend\I18n\Translator\Loader\PhpArray',
         'gettext'  => 'Zend\I18n\Translator\Loader\Gettext',
+        'ini'      => 'Zend\I18n\Translator\Loader\Ini',
+        'phparray' => 'Zend\I18n\Translator\Loader\PhpArray',
     );
 
     /**

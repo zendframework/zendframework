@@ -148,4 +148,27 @@ class FilesSize extends Size
 
         return true;
     }
+
+    /**
+     * Throws an error of the given type
+     *
+     * @param  string $file
+     * @param  string $errorType
+     * @return false
+     */
+    protected function throwError($file, $errorType)
+    {
+        if ($file !== null) {
+            if (is_array($file)) {
+                if (array_key_exists('name', $file)) {
+                    $this->value = $file['name'];
+                }
+            } elseif (is_string($file)) {
+                $this->value = $file;
+            }
+        }
+
+        $this->error($errorType);
+        return false;
+    }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt;
@@ -18,9 +17,6 @@ use Zend\Math\Rand;
 
 /**
  * Encrypt using a symmetric cipher then authenticate using HMAC (SHA-256)
- *
- * @category   Zend
- * @package    Zend_Crypt
  */
 class BlockCipher
 {

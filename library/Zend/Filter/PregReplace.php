@@ -5,17 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
 use Traversable;
 
-/**
- * @category   Zend
- * @package    Zend_Filter
- */
 class PregReplace extends AbstractFilter
 {
     protected $options = array(
@@ -69,6 +64,17 @@ class PregReplace extends AbstractFilter
                 (is_object($pattern) ? get_class($pattern) : gettype($pattern))
             ));
         }
+
+        if (is_array($pattern)) {
+            foreach ($pattern as $p) {
+                $this->validatePattern($p);
+            }
+        }
+
+        if (is_string($pattern)) {
+            $this->validatePattern($pattern);
+        }
+
         $this->options['pattern'] = $pattern;
         return $this;
     }
@@ -131,5 +137,25 @@ class PregReplace extends AbstractFilter
         }
 
         return preg_replace($this->options['pattern'], $this->options['replacement'], $value);
+    }
+
+    /**
+     * Validate a pattern and ensure it does not contain the "e" modifier
+     *
+     * @param  string $pattern
+     * @throws Exception\InvalidArgumentException
+     */
+    protected function validatePattern($pattern)
+    {
+        if (!preg_match('/(?<modifier>[imsxeADSUXJu]+)$/', $pattern, $matches)) {
+            return true;
+        }
+
+        if (false !== strstr($matches['modifier'], 'e')) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Pattern for a PregReplace filter may not contain the "e" pattern modifier; received "%s"',
+                $pattern
+            ));
+        }
     }
 }

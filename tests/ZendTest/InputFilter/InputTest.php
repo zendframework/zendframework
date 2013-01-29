@@ -117,7 +117,7 @@ class InputTest extends TestCase
         $input  = new Input('foo');
         $input->setValue('bar');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertFalse($input->isValid());
     }
 
@@ -126,7 +126,7 @@ class InputTest extends TestCase
         $input  = new Input('foo');
         $input->setValue('123');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertTrue($input->isValid());
     }
 
@@ -137,7 +137,7 @@ class InputTest extends TestCase
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertTrue($input->isValid());
     }
 
@@ -146,7 +146,7 @@ class InputTest extends TestCase
         $input  = new Input('foo');
         $input->setValue('bar');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertFalse($input->isValid());
         $messages = $input->getMessages();
         $this->assertArrayHasKey(Validator\Digits::NOT_DIGITS, $messages);
@@ -157,7 +157,7 @@ class InputTest extends TestCase
         $input = new Input('foo');
         $input->setValue('bar');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $input->setErrorMessage('Please enter only digits');
         $this->assertFalse($input->isValid());
         $messages = $input->getMessages();
@@ -223,7 +223,7 @@ class InputTest extends TestCase
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
 
         $input2 = new Input('bar');
         $input2->merge($input);

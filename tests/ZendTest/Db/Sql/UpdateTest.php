@@ -13,6 +13,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\TableIdentifier;
 
 class UpdateTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,6 +46,10 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $this->update->table('foo', 'bar');
         $this->assertEquals('foo', $this->readAttribute($this->update, 'table'));
+
+        $tableIdentifier = new TableIdentifier('foo', 'bar');
+        $this->update->table($tableIdentifier);
+        $this->assertEquals($tableIdentifier, $this->readAttribute($this->update, 'table'));
     }
 
     /**
@@ -166,6 +171,27 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $this->update->prepareStatement($mockAdapter, $mockStatement);
+
+        // with TableIdentifier
+        $this->update = new Update;
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('UPDATE "sch"."foo" SET "bar" = ?, "boo" = NOW() WHERE x = y'));
+
+        $this->update->table(new TableIdentifier('foo', 'sch'))
+            ->set(array('bar' => 'baz', 'boo' => new Expression('NOW()')))
+            ->where('x = y');
+
+        $this->update->prepareStatement($mockAdapter, $mockStatement);
     }
 
     /**
@@ -178,6 +204,14 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString());
+
+        // with TableIdentifier
+        $this->update = new Update;
+        $this->update->table(new TableIdentifier('foo', 'sch'))
+            ->set(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null))
+            ->where('x = y');
+
+        $this->assertEquals('UPDATE "sch"."foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString());
     }
 
     /**

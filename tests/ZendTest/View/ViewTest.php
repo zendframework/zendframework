@@ -290,4 +290,20 @@ class ViewTest extends TestCase
 
         $this->assertEquals($expected, $result->content);
     }
+
+    public function testCanTriggerPostRendererEvent()
+    {
+        $this->attachTestStrategies();
+        $test = (object) array('flag' => false);
+        $this->view->getEventManager()->attach('renderer.post', function ($e) use ($test) {
+            $test->flag = true;
+        });
+        $variables = array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        );
+        $this->model->setVariables($variables);
+        $this->view->render($this->model);
+        $this->assertTrue($test->flag);
+    }
 }

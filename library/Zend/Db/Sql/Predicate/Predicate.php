@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Predicate;
@@ -17,9 +16,6 @@ namespace Zend\Db\Sql\Predicate;
  * @property Predicate $OR
  * @property Predicate $NEST
  * @property Predicate $UNNEST
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
  */
 class Predicate extends PredicateSet
 {
@@ -219,6 +215,17 @@ class Predicate extends PredicateSet
         return $this;
     }
 
+    public function expression($expression, $parameters)
+    {
+        $this->addPredicate(
+            new Expression($expression, $parameters),
+            ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
+        );
+        $this->nextPredicateCombineOperator = null;
+
+        return $this;
+    }
+
     /**
      * Create "Literal" predicate
      *
@@ -228,10 +235,15 @@ class Predicate extends PredicateSet
      * @param  int|float|bool|string|array $parameter
      * @return Predicate
      */
-    public function literal($literal, $parameter)
+    public function literal($literal, $expressionParameters = null)
     {
+        if ($expressionParameters) {
+            $predicate = new Expression($literal, $expressionParameters);
+        } else {
+            $predicate = new Literal($literal);
+        }
         $this->addPredicate(
-            new Expression($literal, $parameter),
+            $predicate,
             ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;

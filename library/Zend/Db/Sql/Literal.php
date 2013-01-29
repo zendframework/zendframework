@@ -12,7 +12,7 @@ class Literal implements ExpressionInterface
     /**
      * @param $literal
      */
-    public function __construct($literal)
+    public function __construct($literal = '')
     {
         $this->literal = $literal;
     }

@@ -125,6 +125,7 @@ class Expression implements ExpressionInterface
         if ($parametersCount == 0 && strpos($this->expression, self::PLACEHOLDER) !== false) {
             // if there are no parameters, but there is a placeholder
             $parametersCount = substr_count($this->expression, self::PLACEHOLDER);
+            $parameters = array_fill(0, $parametersCount, null);
         }
 
         for ($i = 0; $i < $parametersCount; $i++) {

@@ -9,29 +9,51 @@
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\Sql\Sql;
 
 class MasterSlaveFeature extends AbstractFeature
 {
 
     /**
-     * @var Adapter
-     */
-    protected $masterAdapter = null;
-
-    /**
-     * @var Adapter
+     * @var AdapterInterface
      */
     protected $slaveAdapter = null;
+
+    /**
+     * @var Sql
+     */
+    protected $masterSql = null;
+
+    /**
+     * @var Sql
+     */
+    protected $slaveSql = null;
 
     /**
      * Constructor
      *
      * @param Adapter $slaveAdapter
      */
-    public function __construct(Adapter $slaveAdapter)
+    public function __construct(AdapterInterface $slaveAdapter, Sql $slaveSql = null)
     {
         $this->slaveAdapter = $slaveAdapter;
+        if ($slaveSql) {
+            $this->slaveSql = $slaveSql;
+        }
+    }
+
+    public function getSlaveAdapter()
+    {
+        return $this->slaveAdapter;
+    }
+
+    /**
+     * @return Sql
+     */
+    public function getSlaveSql()
+    {
+        return $this->slaveSql;
     }
 
     /**
@@ -39,7 +61,14 @@ class MasterSlaveFeature extends AbstractFeature
      */
     public function postInitialize()
     {
-        $this->masterAdapter = $this->tableGateway->adapter;
+        $this->masterSql = $this->tableGateway->sql;
+        if ($this->slaveSql == null) {
+            $this->slaveSql = new Sql(
+                $this->slaveAdapter,
+                $this->tableGateway->sql->getTable(),
+                $this->tableGateway->sql->getSqlPlatform()
+            );
+        }
     }
 
     /**
@@ -48,7 +77,7 @@ class MasterSlaveFeature extends AbstractFeature
      */
     public function preSelect()
     {
-        $this->tableGateway->adapter = $this->slaveAdapter;
+        $this->tableGateway->sql = $this->slaveSql;
     }
 
     /**
@@ -57,6 +86,7 @@ class MasterSlaveFeature extends AbstractFeature
      */
     public function postSelect()
     {
-        $this->tableGateway->adapter = $this->masterAdapter;
+        $this->tableGateway->sql = $this->masterSql;
     }
+
 }

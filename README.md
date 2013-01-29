@@ -5,13 +5,13 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.6*
+*Zend Framework 2.0.7*
 
-This is the sixth maintenance release for the 2.0 series.
+This is the seventh maintenance release for the 2.0 series.
 
 19 Dec 2012
 
-### UPDATES IN 2.0.6
+### UPDATES IN 2.0.7
 
 Please see CHANGELOG.md.
 

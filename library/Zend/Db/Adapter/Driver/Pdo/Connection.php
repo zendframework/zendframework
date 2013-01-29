@@ -256,7 +256,7 @@ class Connection implements ConnectionInterface
             $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         } catch (\PDOException $e) {
             $code = $e->getCode();
-            if(!is_long($code)) {
+            if (!is_long($code)) {
                 $code = null;
             }
             throw new Exception\RuntimeException('Connect Error: ' . $e->getMessage(), $code, $e);

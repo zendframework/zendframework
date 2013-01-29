@@ -10,6 +10,8 @@
 
 namespace ZendTest\Log;
 
+use Exception;
+use ErrorException;
 use Zend\Log\Logger;
 use Zend\Log\Writer\Mock as MockWriter;
 use Zend\Log\Filter\Mock as MockFilter;
@@ -252,11 +254,52 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->addWriter($writer);
 
         $this->assertTrue(Logger::registerErrorHandler($this->logger));
+
         // check for single error handler instance
         $this->assertFalse(Logger::registerErrorHandler($this->logger));
+
         // generate a warning
         echo $test;
+
         Logger::unregisterErrorHandler();
+
         $this->assertEquals($writer->events[0]['message'], 'Undefined variable: test');
+    }
+
+    public function testExceptionHandler()
+    {
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+
+        $this->assertTrue(Logger::registerExceptionHandler($this->logger));
+
+        // check for single error handler instance
+        $this->assertFalse(Logger::registerExceptionHandler($this->logger));
+
+        // get the internal exception handler
+        $exceptionHandler = set_exception_handler(function ($e) {});
+        set_exception_handler($exceptionHandler);
+
+        // reset the exception handler
+        Logger::unregisterExceptionHandler();
+
+        // call the exception handler
+        $exceptionHandler(new Exception('error', 200, new Exception('previos', 100)));
+        $exceptionHandler(new ErrorException('user notice', 1000, E_USER_NOTICE, __FILE__, __LINE__));
+
+        // check logged messages
+        $expectedEvents = array(
+            array('priority' => Logger::ERR,    'message' => 'previos',     'file' => __FILE__),
+            array('priority' => Logger::ERR,    'message' => 'error',       'file' => __FILE__),
+            array('priority' => Logger::NOTICE, 'message' => 'user notice', 'file' => __FILE__),
+        );
+        for ($i = 0; $i < count($expectedEvents); $i++) {
+            $expectedEvent = $expectedEvents[$i];
+            $event         = $writer->events[$i];
+
+            $this->assertEquals($expectedEvent['priority'], $event['priority'], 'Unexpected priority');
+            $this->assertEquals($expectedEvent['message'], $event['message'], 'Unexpected message');
+            $this->assertEquals($expectedEvent['file'], $event['extra']['file'], 'Unexpected file');
+        }
     }
 }

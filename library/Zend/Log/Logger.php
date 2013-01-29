@@ -11,6 +11,7 @@
 namespace Zend\Log;
 
 use DateTime;
+use ErrorException;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\SplPriorityQueue;
@@ -427,17 +428,51 @@ class Logger implements LoggerInterface
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
 
-        set_exception_handler(function ($exception) use ($logger) {
-            $extra = array(
-                'file'  => $exception->getFile(),
-                'line'  => $exception->getLine(),
-                'trace' => $exception->getTrace()
-            );
-            if (isset($exception->xdebug_message)) {
-                $extra['xdebug'] = $exception->xdebug_message;
+        $errorPriorityMap = array(
+            E_NOTICE            => self::NOTICE,
+            E_USER_NOTICE       => self::NOTICE,
+            E_WARNING           => self::WARN,
+            E_CORE_WARNING      => self::WARN,
+            E_USER_WARNING      => self::WARN,
+            E_ERROR             => self::ERR,
+            E_USER_ERROR        => self::ERR,
+            E_CORE_ERROR        => self::ERR,
+            E_RECOVERABLE_ERROR => self::ERR,
+            E_STRICT            => self::DEBUG,
+            E_DEPRECATED        => self::DEBUG,
+            E_USER_DEPRECATED   => self::DEBUG,
+        );
+        set_exception_handler(function ($exception) use ($logger, $errorPriorityMap) {
+            $logMessages = array();
+
+            do {
+                $prio = Logger::ERR;
+                if ($exception instanceof ErrorException && isset($errorPriorityMap[$exception->getSeverity()])) {
+                    $prio = $errorPriorityMap[$exception->getSeverity()];
+                }
+
+                $extra = array(
+                    'file'  => $exception->getFile(),
+                    'line'  => $exception->getLine(),
+                    'trace' => $exception->getTrace(),
+                );
+                if (isset($exception->xdebug_message)) {
+                    $extra['xdebug'] = $exception->xdebug_message;
+                }
+
+                $logMessages[] = array(
+                    'prio'  => $prio,
+                    'msg'   => $exception->getMessage(),
+                    'extra' => $extra,
+                );
+                $exception = $exception->getPrevious();
+            } while ($exception);
+
+            foreach (array_reverse($logMessages) as $logMessage) {
+                $logger->log($logMessage['prio'], $logMessage['msg'], $logMessage['extra']);
             }
-            $logger->log(Logger::ERR, $exception->getMessage(), $extra);
         });
+
         static::$registeredExceptionHandler = true;
         return true;
     }

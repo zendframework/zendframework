@@ -15,7 +15,7 @@ use Zend\Db\ResultSet;
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
-class Adapter implements AdapterInterface
+class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * Query Mode Constants
@@ -46,6 +46,11 @@ class Adapter implements AdapterInterface
     protected $platform = null;
 
     /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
+
+    /**
      * @var ResultSet\ResultSetInterface
      */
     protected $queryResultSetPrototype = null;
@@ -59,15 +64,19 @@ class Adapter implements AdapterInterface
      * @param Driver\DriverInterface|array $driver
      * @param Platform\PlatformInterface $platform
      * @param ResultSet\ResultSetInterface $queryResultPrototype
+     * @param Profiler\ProfilerInterface $profiler
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
+    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null, Profiler\ProfilerInterface $profiler = null)
     {
         // first argument can be an array of parameters
         $parameters = array();
 
         if (is_array($driver)) {
             $parameters = $driver;
+            if ($profiler === null && isset($parameters['profiler'])) {
+                $profiler = $this->createProfiler($parameters);
+            }
             $driver = $this->createDriver($parameters);
         } elseif (!$driver instanceof Driver\DriverInterface) {
             throw new Exception\InvalidArgumentException(
@@ -84,6 +93,31 @@ class Adapter implements AdapterInterface
 
         $this->platform = $platform;
         $this->queryResultSetPrototype = ($queryResultPrototype) ?: new ResultSet\ResultSet();
+
+        if ($profiler) {
+            $this->setProfiler($profiler);
+        }
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Adapter
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        if ($this->driver instanceof Profiler\ProfilerAwareInterface) {
+            $this->driver->setProfiler($profiler);
+        }
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -224,8 +258,16 @@ class Adapter implements AdapterInterface
      */
     protected function createDriver($parameters)
     {
-        if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
-            throw new Exception\InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
+        if (!isset($parameters['driver'])) {
+            throw new Exception\InvalidArgumentException(__FUNCTION__ . ' expects a "driver" key to be present inside the parameters');
+        }
+
+        if ($parameters['driver'] instanceof Driver\DriverInterface) {
+            return $parameters['driver'];
+        }
+
+        if (!is_string($parameters['driver'])) {
+            throw new Exception\InvalidArgumentException(__FUNCTION__ . ' expects a "driver" to be a string or instance of DriverInterface');
         }
 
         $options = array();
@@ -297,6 +339,20 @@ class Adapter implements AdapterInterface
             default:
                 return new Platform\Sql92($options);
         }
+    }
+
+    protected function createProfiler($parameters)
+    {
+        if ($parameters['profiler'] instanceof Profiler\ProfilerInterface) {
+            $profiler = $parameters['profiler'];
+        } elseif (is_bool($parameters['profiler'])) {
+            $profiler = ($parameters['profiler'] == true) ? new Profiler\Profiler : null;
+        } else {
+            throw new Exception\InvalidArgumentException(
+                '"profiler" parameter must be an instance of ProfilerInterface or a boolean'
+            );
+        }
+        return $profiler;
     }
 
     /**

@@ -11,13 +11,19 @@ namespace Zend\Db\Adapter\Driver\Oci8;
 
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface
+class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @var Oci8
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * Connection parameters
@@ -63,6 +69,24 @@ class Connection implements ConnectionInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Connection
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -252,9 +276,16 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
-        $ociStmt = oci_parse($this->resource, $sql);
+        if ($this->profiler) {
+            $this->profiler->profilerStart($sql);
+        }
 
+        $ociStmt = oci_parse($this->resource, $sql);
         $valid = @oci_execute($ociStmt);
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish($sql);
+        }
 
         if ($valid === false) {
             $e = oci_error($ociStmt);

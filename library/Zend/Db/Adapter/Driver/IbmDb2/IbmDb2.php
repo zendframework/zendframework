@@ -11,8 +11,9 @@ namespace Zend\Db\Adapter\Driver\IbmDb2;
 
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-class IbmDb2 implements DriverInterface
+class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @var Connection
@@ -24,6 +25,11 @@ class IbmDb2 implements DriverInterface
 
     /** @var Result */
     protected $resultPrototype;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler;
 
     /**
      * @param array|Connection|resource $connection
@@ -40,6 +46,30 @@ class IbmDb2 implements DriverInterface
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return IbmDb2
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        if ($this->connection instanceof Profiler\ProfilerAwareInterface) {
+            $this->connection->setProfiler($profiler);
+        }
+        if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
+            $this->statementPrototype->setProfiler($profiler);
+        }
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**

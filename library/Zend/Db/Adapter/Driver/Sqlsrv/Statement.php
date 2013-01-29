@@ -12,8 +12,9 @@ namespace Zend\Db\Adapter\Driver\Sqlsrv;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Profiler;
 
-class Statement implements StatementInterface
+class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
 
     /**
@@ -25,6 +26,11 @@ class Statement implements StatementInterface
      * @var Sqlsrv
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * @var string
@@ -67,6 +73,24 @@ class Statement implements StatementInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Statement
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -219,7 +243,15 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
+        if ($this->profiler) {
+            $this->profiler->profilerStart($this);
+        }
+
         $resultValue = sqlsrv_execute($this->resource);
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish();
+        }
 
         if ($resultValue === false) {
             $errors = sqlsrv_errors();

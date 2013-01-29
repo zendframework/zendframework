@@ -12,8 +12,9 @@ namespace Zend\Db\Adapter\Driver\Pgsql;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Profiler;
 
-class Statement implements StatementInterface
+class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @var int
@@ -29,6 +30,11 @@ class Statement implements StatementInterface
      * @var Pgsql
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * @var resource
@@ -58,6 +64,24 @@ class Statement implements StatementInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Statement
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -197,7 +221,15 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
+        if ($this->profiler) {
+            $this->profiler->profilerStart($this);
+        }
+
         $resultResource = pg_execute($this->pgsql, $this->statementName, (array) $parameters);
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish();
+        }
 
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_last_error());

@@ -14,8 +14,9 @@ use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
 use Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-class Pdo implements DriverInterface, DriverFeatureInterface
+class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @const
@@ -66,6 +67,30 @@ class Pdo implements DriverInterface, DriverFeatureInterface
         } elseif ($features === self::FEATURES_DEFAULT) {
             $this->setupDefaultFeatures();
         }
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Pdo
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        if ($this->connection instanceof Profiler\ProfilerAwareInterface) {
+            $this->connection->setProfiler($profiler);
+        }
+        if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
+            $this->statementPrototype->setProfiler($profiler);
+        }
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**

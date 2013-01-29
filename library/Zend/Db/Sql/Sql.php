@@ -15,8 +15,13 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 
 class Sql
 {
+    /** @var AdapterInterface */
     protected $adapter = null;
+
+    /** @var string */
     protected $table = null;
+
+    /** @var Platform\Platform */
     protected $sqlPlatform = null;
 
     public function __construct(AdapterInterface $adapter, $table = null, Platform\AbstractPlatform $sqlPlatform = null)
@@ -26,6 +31,14 @@ class Sql
             $this->setTable($table);
         }
         $this->sqlPlatform = ($sqlPlatform) ?: new Platform\Platform($adapter);
+    }
+
+    /**
+     * @return null|\Zend\Db\Adapter\AdapterInterface
+     */
+    public function getAdapter()
+    {
+        return $this->adapter;
     }
 
     public function hasTable()
@@ -46,6 +59,11 @@ class Sql
     public function getTable()
     {
         return $this->table;
+    }
+
+    public function getSqlPlatform()
+    {
+        return $this->sqlPlatform;
     }
 
     public function select($table = null)
@@ -92,9 +110,14 @@ class Sql
         return new Delete(($table) ?: $this->table);
     }
 
+    /**
+     * @param PreparableSqlInterface $sqlObject
+     * @param StatementInterface|null $statement
+     * @return StatementInterface
+     */
     public function prepareStatementForSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
     {
-        $statement = ($statement) ?: $this->adapter->createStatement();
+        $statement = ($statement) ?: $this->adapter->getDriver()->createStatement();
 
         if ($this->sqlPlatform) {
             $this->sqlPlatform->setSubject($sqlObject);

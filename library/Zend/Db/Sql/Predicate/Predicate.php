@@ -215,6 +215,17 @@ class Predicate extends PredicateSet
         return $this;
     }
 
+    public function expression($expression, $parameters)
+    {
+        $this->addPredicate(
+            new Expression($expression, $parameters),
+            ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
+        );
+        $this->nextPredicateCombineOperator = null;
+
+        return $this;
+    }
+
     /**
      * Create "Literal" predicate
      *
@@ -224,10 +235,15 @@ class Predicate extends PredicateSet
      * @param  int|float|bool|string|array $parameter
      * @return Predicate
      */
-    public function literal($literal, $parameter)
+    public function literal($literal, $expressionParameters = null)
     {
+        if ($expressionParameters) {
+            $predicate = new Expression($literal, $expressionParameters);
+        } else {
+            $predicate = new Literal($literal);
+        }
         $this->addPredicate(
-            new Expression($literal, $parameter),
+            $predicate,
             ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;

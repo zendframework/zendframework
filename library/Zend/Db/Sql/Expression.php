@@ -121,6 +121,12 @@ class Expression implements ExpressionInterface
 
         $types = array();
         $parametersCount = count($parameters);
+
+        if ($parametersCount == 0 && strpos($this->expression, self::PLACEHOLDER) !== false) {
+            // if there are no parameters, but there is a placeholder
+            $parametersCount = substr_count($this->expression, self::PLACEHOLDER);
+        }
+
         for ($i = 0; $i < $parametersCount; $i++) {
             $types[$i] = (isset($this->types[$i]) && ($this->types[$i] == self::TYPE_IDENTIFIER || $this->types[$i] == self::TYPE_LITERAL))
                 ? $this->types[$i] : self::TYPE_VALUE;

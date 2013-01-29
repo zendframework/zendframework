@@ -148,7 +148,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     public function testWhereArgument1IsString()
     {
         $select = new Select;
-        $select->where('x = y');
+        $select->where('x = ?');
 
         /** @var $where Where */
         $where = $select->getRawState('where');
@@ -156,7 +156,15 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($predicates));
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
         $this->assertEquals(Where::OP_AND, $predicates[0][0]);
-        $this->assertEquals('x = y', $predicates[0][1]->getExpression());
+        $this->assertEquals('x = ?', $predicates[0][1]->getExpression());
+
+        $select = new Select;
+        $select->where('x = y');
+
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
     }
 
     /**
@@ -201,6 +209,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Where::OP_AND, $predicates[1][0]);
         $this->assertEquals('age', $predicates[1][1]->getLeft());
         $this->assertEquals(33, $predicates[1][1]->getRight());
+
+        $select = new Select;
+        $select->where(array('x = y'));
+
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
     }
 
     /**
@@ -217,9 +232,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertEquals(1, count($predicates));
 
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
         $this->assertEquals(Where::OP_AND, $predicates[0][0]);
-        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getExpression());
+        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getLiteral());
     }
 
     /**
@@ -236,9 +251,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertEquals(1, count($predicates));
 
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
         $this->assertEquals(Where::OP_OR, $predicates[0][0]);
-        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getExpression());
+        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getLiteral());
     }
 
     /**

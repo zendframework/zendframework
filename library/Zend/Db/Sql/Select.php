@@ -245,7 +245,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             if (is_string($predicate)) {
                 // String $predicate should be passed as an expression
-                $predicate = new Predicate\Expression($predicate);
+                $predicate = (strpos($predicate, Expression::PLACEHOLDER) !== false)
+                    ? new Predicate\Expression($predicate) : new Predicate\Literal($predicate);
                 $this->where->addPredicate($predicate, $combination);
             } elseif (is_array($predicate)) {
 
@@ -275,7 +276,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                         $predicate = $pvalue;
                     } else {
                         // must be an array of expressions (with int-indexed array)
-                        $predicate = new Predicate\Expression($pvalue);
+                        $predicate = (strpos($pvalue, Expression::PLACEHOLDER) !== false)
+                            ? new Predicate\Expression($pvalue) : new Predicate\Literal($pvalue);
                     }
                     $this->where->addPredicate($predicate, $combination);
                 }

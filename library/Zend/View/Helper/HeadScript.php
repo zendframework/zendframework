@@ -418,10 +418,10 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             $html .= $indent . '    ' . $item->source;
 
             if ($addScriptEscape) {
-                $html .= $indent . '    ' . $escapeEnd . PHP_EOL;
+                $html .= $indent . PHP_EOL . '    ' . $escapeEnd;
             }
 
-            $html .= $indent;
+            $html .= PHP_EOL . $indent;
         }
         $html .= '</script>';
 
@@ -429,7 +429,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             && !empty($item->attributes['conditional'])
             && is_string($item->attributes['conditional']))
         {
-            $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
+            $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
         } else {
             $html = $indent . $html;
         }

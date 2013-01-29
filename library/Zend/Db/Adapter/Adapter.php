@@ -135,7 +135,7 @@ class Adapter
         if (is_string($parametersOrQueryMode) && in_array($parametersOrQueryMode, array(self::QUERY_MODE_PREPARE, self::QUERY_MODE_EXECUTE))) {
             $mode = $parametersOrQueryMode;
             $parameters = null;
-        } elseif (is_array($parametersOrQueryMode)) {
+        } elseif (is_array($parametersOrQueryMode) || $parametersOrQueryMode instanceof ParameterContainer) {
             $mode = self::QUERY_MODE_PREPARE;
             $parameters = $parametersOrQueryMode;
         } else {

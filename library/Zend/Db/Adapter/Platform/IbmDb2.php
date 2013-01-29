@@ -151,8 +151,12 @@ class IbmDb2 implements PlatformInterface
         }
         $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
+        if ($safeWords) {
+            $safeWords = array_flip($safeWords);
+            $safeWords = array_change_key_case($safeWords, CASE_LOWER);
+        }
         foreach ($parts as $i => $part) {
-            if ($safeWords && in_array($part, $safeWords)) {
+            if ($safeWords && isset($safeWords[strtolower($part)])) {
                 continue;
             }
 

@@ -310,7 +310,7 @@ class Wsdl
         $attr->value = $name;
         $operation->appendChild($attr);
 
-        if (is_array($input)) {
+        if (is_array($input) AND !empty($input)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'input');
             $operation->appendChild($node);
 
@@ -325,21 +325,21 @@ class Wsdl
 
         }
 
-        if (is_array($output)) {
+        if (is_array($output) AND !empty($output)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'output');
             $operation->appendChild($node);
 
             $soapNode = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
             $node->appendChild($soapNode);
 
-            foreach ($input as $name => $value) {
+            foreach ($output as $name => $value) {
                 $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, $name);
                 $attr->value = $value;
                 $soapNode->appendChild($attr);
             }
         }
 
-        if (is_array($fault)) {
+        if (is_array($fault) AND !empty($fault)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'fault');
             $operation->appendChild($node);
 

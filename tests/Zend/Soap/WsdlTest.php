@@ -129,13 +129,18 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newUri, $this->dom->documentElement->getAttributeNS(Wsdl::NS_WSDL, 'targetNamespace'));
     }
 
-    function testAddMessage()
+	/**
+	 *
+	 * @dataProvider dataProviderForAddMessage
+	 *
+	 * @param array $parameters
+	 */
+	function testAddMessage($parameters)
     {
-        $messageParts = array();
-
-        $messageParts['parameter1'] = $this->wsdl->getType('int');
-        $messageParts['parameter2'] = $this->wsdl->getType('string');
-        $messageParts['parameter3'] = $this->wsdl->getType('mixed');
+		$messageParts = array();
+		foreach($parameters as $i => $parameter) {
+			$messageParts['parameter'.$i] = $this->wsdl->getType($parameter);
+		}
 
         $messageName = 'myMessage';
 
@@ -152,6 +157,19 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($parameterType, $part->item(0)->getAttribute('type'));
         }
     }
+
+	/**
+	 *
+	 */
+	public function dataProviderForAddMessage(){
+		return array(
+			array(array('int', 'int', 'int')),
+			array(array('string', 'string', 'string', 'string')),
+			array(array('mixed')),
+			array(array('int', 'int', 'string', 'string')),
+			array(array('int', 'string', 'int', 'string')),
+		);
+	}
 
     function testAddPortType()
     {
@@ -177,49 +195,35 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $portType = $this->wsdl->addPortType($portName);
 
         $this->wsdl->addPortOperation($portType, $operationName, $inputRequest, $outputResponse, $fail);
-//        $this->wsdl->addPortOperation($portType, 'operation2', 'tns:operation2Request', 'tns:operation2Response');
-//        $this->wsdl->addPortOperation($portType, 'operation3', 'tns:operation3Request', 'tns:operation3Response', 'tns:operation3Fault');
-
 
         $portTypeNodes = $this->xpath->query('//wsdl:definitions/wsdl:portType[@name="'.$portName.'"]');
         $this->assertGreaterThan(0, $portTypeNodes->length, 'Missing portType node in definitions node.');
 
 
-        $operation1Nodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $portTypeNodes->item(0));
-        $this->assertGreaterThan(0, $operation1Nodes->length);
-        if (empty($inputRequest)) {
-            $this->assertFalse($operation1Nodes->item(0)->hasChildNodes());
-        } else {
-            $this->assertTrue($operation1Nodes->item(0)->hasChildNodes());
+        $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $portTypeNodes->item(0));
+        $this->assertGreaterThan(0, $operationNodes->length);
 
-            $inputNodes = $operation1Nodes->item(0)->getElementsByTagName('input');
+		if (empty($inputRequest) AND empty($outputResponse) AND empty($fail)) {
+            $this->assertFalse($operationNodes->item(0)->hasChildNodes());
+        } else {
+            $this->assertTrue($operationNodes->item(0)->hasChildNodes());
+		}
+
+		if (!empty($inputRequest)) {
+            $inputNodes = $operationNodes->item(0)->getElementsByTagName('input');
             $this->assertEquals($inputRequest, $inputNodes->item(0)->getAttribute('message'));
         }
 
+		if (!empty($outputResponse)) {
+			$outputNodes = $operationNodes->item(0)->getElementsByTagName('output');
+    	    $this->assertEquals($outputResponse, $outputNodes->item(0)->getAttribute('message'));
+		}
 
-//        $inputNodes = $operation2Nodes->item(0)->getElementsByTagName('input');
-//        $this->assertEquals(1, $inputNodes->length);
-//
-//
-//        $outputNodes = $operation2Nodes->item(0)->getElementsByTagName('output');
-//        $this->assertEquals(1, $outputNodes->length);
-//        $this->assertEquals('tns:operation2Response', $outputNodes->item(0)->getAttribute('message'));
-//
-//
-//        $operation3Nodes = $this->xpath->query('wsdl:operation[@name="operation3"]', $portTypeNodes->item(0));
-//        $this->assertEquals(1, $operation3Nodes->length);
-//
-//        $inputNodes = $operation3Nodes->item(0)->getElementsByTagName('input');
-//        $this->assertEquals(1, $inputNodes->length);
-//        $this->assertEquals('tns:operation3Request', $inputNodes->item(0)->getAttribute('message'));
-//
-//        $outputNodes = $operation3Nodes->item(0)->getElementsByTagName('output');
-//        $this->assertEquals(1, $outputNodes->length);
-//        $this->assertEquals('tns:operation3Response', $outputNodes->item(0)->getAttribute('message'));
-//
-//        $faultNodes = $operation3Nodes->item(0)->getElementsByTagName('fault');
-//        $this->assertEquals(1, $faultNodes->length);
-//        $this->assertEquals('tns:operation3Fault', $faultNodes->item(0)->getAttribute('message'));
+		//@todo fault array
+		if (!empty($fail)) {
+        	$faultNodes = $operationNodes->item(0)->getElementsByTagName('fault');
+        	$this->assertEquals($fail, $faultNodes->item(0)->getAttribute('message'));
+		}
     }
 
     /**
@@ -227,14 +231,15 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     function dataProviderForAddPortOperation()
     {
-
         return array(
-            array('operation1'),
-            array('operation2', 'tns:operation2Request', 'tns:operation2Response'),
-        );
-
-
-
+            array('operation'),
+            array('operation', 'tns:operationRequest', 'tns:operationResponse'),
+            array('operation', 'tns:operationRequest', 'tns:operationResponse', 'tns:operationFault'),
+            array('operation', 'tns:operationRequest', null, 'tns:operationFault'),
+            array('operation', null, null, 'tns:operationFault'),
+            array('operation', null, 'tns:operationResponse', 'tns:operationFault'),
+			array('operation', null, 'tns:operationResponse'),
+		);
     }
 
     function testAddBinding()
@@ -252,120 +257,100 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'type'));
     }
 
-    function testAddBindingOperation()
+	/**
+	 * @dataProvider dataProviderForAddBindingOperation
+	 *
+	 * @param $operationName
+	 * @param null $input
+	 * @param null $inputEncoding
+	 * @param null $output
+	 * @param null $outputEncoding
+	 * @param null $fault
+	 * @param null $faultEncoding
+	 * @param null $faultName
+	 */
+	function testAddBindingOperation($operationName,
+		$input = null, $inputEncoding = null,
+		$output = null, $outputEncoding = null,
+		$fault = null, $faultEncoding = null, $faultName = null)
     {
-
-
-
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
-        $this->wsdl->addBindingOperation($binding, 'operation1');
 
+		$inputArray = array();
+		if (!empty($input) AND !empty($inputEncoding)) {
+			$inputArray = array('use' => $input, 	'encodingStyle' => $inputEncoding);
+		}
 
-        $encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
-        $this->wsdl->addBindingOperation($binding,
-                                   'operation2',
-                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
-                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle)
-        );
+		$outputArray = array();
+		if (!empty($output) AND !empty($outputEncoding)) {
+			$outputArray = array('use' => $output, 'encodingStyle' => $outputEncoding);
+		}
 
+		$faultArray = array();
+		if (!empty($fault) AND !empty($faultEncoding) AND !empty($faultName)) {
+			$faultArray = array('use' => $fault, 	'encodingStyle' => $faultEncoding, 	'name'=>$faultName);
+		}
 
-        $this->wsdl->addBindingOperation($binding,
-                                   'operation3',
-                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
-                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle),
-                                   array('use' => 'encoded', 'encodingStyle' => $encodingStyle, 'name' => 'MyFault',)
-        );
+		$this->wsdl->addBindingOperation($binding,
+			$operationName,
+			$inputArray,
+			$outputArray,
+			$faultArray
+		);
 
         $bindingNodes = $this->xpath->query('//wsdl:binding');
 
-        if ($bindingNodes->length === 0) {
-            $this->fail('Missing binding node in definitions node.'.$bindingNodes->length);
-        }
+		$this->assertGreaterThan(0, $bindingNodes->length, 'Missing binding node in definition.');
 
         $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
         $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'type'));
 
+		$operationNodes = $this->xpath->query('//wsdl:operation[@name="'.$operationName.'"]', $bindingNodes->item(0));
+		$this->assertEquals(1, $operationNodes->length, 'Missing operation node in definition.');
 
-        $operation1Nodes = $this->xpath->query('//wsdl:operation[@name="operation1"]', $bindingNodes->item(0));
-        $this->assertEquals(1, $operation1Nodes->length);
-        //@todo namespace ?
-        $this->assertFalse($operation1Nodes->item(0)->hasChildNodes());
+		if (empty($inputArray) AND empty($outputArray) AND empty($faultArray)) {
+			$this->assertFalse($operationNodes->item(0)->hasChildNodes());
+		}
 
-        $inputBodyNodes = $this->xpath->query('//wsdl:operation[@name="operation2"]/wsdl:input/soap:body', $bindingNodes->item(0));
-        if ($inputBodyNodes->length === 0){
-            $this->fail('Unable to find body in binding operation node');
-        }
-        $this->assertEquals('encoded',      $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
-        $this->assertEquals($encodingStyle, $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
+        foreach (array(
+            '//wsdl:input/soap:body'    => $inputArray,
+            '//wsdl:output/soap:body'   => $outputArray,
+            '//wsdl:fault'              => $faultArray
+                 ) as $query => $ar) {
 
-        foreach(array('input', 'output') as $direction) {
-            foreach(array('operation2', 'operation3') as $operation) {
-                $inputBodyNodes = $this->xpath->query('//wsdl:operation[@name="'.$operation.'"]/wsdl:'.$direction.'/soap:body', $bindingNodes->item(0));
-                if ($inputBodyNodes->length === 0){
-                    $this->fail('Unable to find body in binding '.$operation.' node');
+            if (!empty($ar)) {
+                $nodes = $this->xpath->query($query);
+
+                $this->assertGreaterThan(0, $nodes->length, 'Missing operation body.');
+
+                foreach ($ar as $key => $val) {
+                    $this->assertEquals($ar[$key], $nodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, $key),
+                        'Bad attribute in operation definition: '.$key);
                 }
-                $this->assertEquals('encoded',       $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
-                $this->assertEquals($encodingStyle,  $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
             }
         }
 
-        $faultNodes = $this->xpath->query('//wsdl:operation[@name="operation3"]/wsdl:fault', $bindingNodes->item(0));
-        if ($faultNodes->length === 0){
-            $this->fail('Unable to find fault operation node');
-        }
-        $this->assertEquals('encoded',       $faultNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
-        $this->assertEquals('MyFault',       $faultNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'name'));
-        $this->assertEquals($encodingStyle,  $faultNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
+        print_r($this->wsdl->toXML());
 
-
-//        $this->wsdl->toDomDocument()->formatOutput = true;
-//        print ($this->wsdl->toDomDocument()->saveXML());exit;
-
-
-//        $inputBodyNodes = $this->xpath->query('//wsdl:operation[@name="operation3"]/wsdl:input/soap:body', $bindingNodes->item(0));
-//        if ($inputBodyNodes->length === 0){
-//            $this->fail('Unable to find body in binding operation node');
-//        }
-//        $this->assertEquals('encoded',       $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'use'));
-//        $this->assertEquals($encodingStyle,  $inputBodyNodes->item(0)->getAttributeNS(Wsdl::NS_WSDL, 'encodingStyle'));
-
-
-
-
-        ($this->sanitizeWsdlXmlOutputForOsCompability($this->wsdl->toXml()).
-                            '<?xml version="1.0"?>'  .
-                            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'xmlns:tns="http://localhost/MyService.php" '
-                               . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-                               . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                               . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-                               . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-                               . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
-                               . '<portType name="myPortType"/>'
-                               . '<binding name="MyServiceBinding" type="myPortType">'
-                               .   '<operation name="operation1"/>'
-                               .   '<operation name="operation2">'
-                               .     '<input>'
-                               .       '<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
-                               .     '</input>'
-                               .     '<output>'
-                               .       '<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
-                               .     '</output>'
-                               .   '</operation>'
-                               .   '<operation name="operation3">'
-                               .     '<input>'
-                               .       '<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
-                               .     '</input>'
-                               .     '<output>'
-                               .       '<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
-                               .     '</output>'
-                               .     '<fault name="MyFault">'
-                               .       '<soap:fault name="MyFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
-                               .     '</fault>'
-                               .   '</operation>'
-                               . '</binding>'
-                          . '</definitions>' );
     }
+
+	/**
+	 *
+	 */
+	public function dataProviderForAddBindingOperation() {
+
+		$enc = 'http://schemas.xmlsoap.org/soap/encoding/';
+
+		return array(
+			array('operation'),
+			array('operation', 'encoded', $enc, 'encoded', $enc, 'encoded', $enc, 'myFaultName'),
+			array('operation', null, null, 'encoded', $enc, 'encoded', $enc, 'myFaultName'),
+			array('operation', null, null, 'encoded', $enc, 'encoded'),
+			array('operation', 'encoded', $enc),
+			array('operation', null, null, null, null, 'encoded', $enc, 'myFaultName'),
+		);
+	}
+
 
     function testAddSoapBinding()
     {

@@ -11,6 +11,7 @@
 namespace ZendTest\Db\Adapter;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\ParameterContainer;
 
 class AdapterTest extends \PHPUnit_Framework_TestCase
 {

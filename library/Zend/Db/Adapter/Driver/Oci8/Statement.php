@@ -271,14 +271,16 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         foreach ($parameters as $name => &$value) {
             if ($this->parameterContainer->offsetHasErrata($name)) {
                 switch ($this->parameterContainer->offsetGetErrata($name)) {
-                    case ParameterContainer::TYPE_DOUBLE:
-                        $type = SQLT_LNG;
-                        break;
                     case ParameterContainer::TYPE_NULL:
+                        $type = null;
                         $value = null;
                         break;
+                    case ParameterContainer::TYPE_DOUBLE:
                     case ParameterContainer::TYPE_INTEGER:
                         $type = SQLT_INT;
+                        if (is_string($value)) {
+                            $value = (int) $value;
+                        }
                         break;
                     case ParameterContainer::TYPE_STRING:
                     default:
@@ -288,7 +290,8 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             } else {
                 $type = SQLT_CHR;
             }
-            oci_bind_by_name($this->resource, ':' . $name, $value, -1, $type);
+
+            oci_bind_by_name($this->resource, $name, $value, -1, $type);
         }
     }
 

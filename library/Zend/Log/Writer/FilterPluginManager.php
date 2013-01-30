@@ -24,8 +24,8 @@ class FilterPluginManager extends AbstractPluginManager
         'mock'           => 'Zend\Log\Filter\Mock',
         'priority'       => 'Zend\Log\Filter\Priority',
         'regex'          => 'Zend\Log\Filter\Regex',
-        'suppress'       => 'Zend\Log\Filter\suppressFilter',
-        'suppressfilter' => 'Zend\Log\Filter\suppressFilter',
+        'suppress'       => 'Zend\Log\Filter\SuppressFilter',
+        'suppressfilter' => 'Zend\Log\Filter\SuppressFilter',
         'validator'      => 'Zend\Log\Filter\Validator',
     );
 

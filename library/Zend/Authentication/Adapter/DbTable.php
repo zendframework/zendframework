@@ -102,7 +102,7 @@ class DbTable extends AbstractAdapter
      * @return \Zend\Authentication\Adapter\DbTable
      */
     public function __construct(DbAdapter $zendDb, $tableName = null, $identityColumn = null,
-                                $credentialColumn = null, $credentialTreatment = null, callable $credentialValidationCallback = null)
+                                $credentialColumn = null, $credentialTreatment = null, $credentialValidationCallback = null)
     {
         $this->zendDb = $zendDb;
 
@@ -185,15 +185,20 @@ class DbTable extends AbstractAdapter
         $this->credentialTreatment = $treatment;
         return $this;
     }
+
     /**
      * setCredentialValidationCallback() - allows the developer to use a callback as a way of checking the
      * credential.
      *
-     * @param  callable $validationCallback
-     * @return DbTable Provides a fluent interface
+     * @param callable $validationCallback
+     * @return DbTable
+     * @throws Exception\InvalidArgumentException
      */
-    public function setCredentialValidationCallback(callable $validationCallback)
+    public function setCredentialValidationCallback($validationCallback)
     {
+        if (!is_callable($validationCallback)) {
+            throw new Exception\InvalidArgumentException('Invalid callback provided');
+        }
         $this->credentialValidationCallback = $validationCallback;
         return $this;
     }
@@ -373,7 +378,7 @@ class DbTable extends AbstractAdapter
                 . $this->zendDb->getPlatform()->quoteIdentifier('zend_auth_credential_match')
             );
             $tableColumns[] = $credentialExpression;
-        } 
+        }
 
         // get select
         $dbSelect = clone $this->getDbSelect();
@@ -394,11 +399,17 @@ class DbTable extends AbstractAdapter
      */
     protected function _authenticateQuerySelect(DbSelect $dbSelect)
     {
+        $params = array($this->identity);
+
+        if (!is_callable($this->credentialValidationCallback)) {
+            array_unshift($params, $this->credential);
+        }
+
         $statement = $this->zendDb->createStatement();
         $dbSelect->prepareStatement($this->zendDb, $statement);
         $resultSet = new ResultSet();
         try {
-            $resultSet->initialize($statement->execute(array($this->credential, $this->identity)));
+            $resultSet->initialize($statement->execute($params));
             $resultIdentities = $resultSet->toArray();
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
@@ -455,14 +466,15 @@ class DbTable extends AbstractAdapter
                 $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
                 return $this->_authenticateCreateAuthResult();
             }
-        }
-        if ($resultIdentity['zend_auth_credential_match'] != '1') {
-            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
-            $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
-            return $this->_authenticateCreateAuthResult();
-        }
+        } else {
+            if ($resultIdentity['zend_auth_credential_match'] != '1') {
+                $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
+                $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+                return $this->_authenticateCreateAuthResult();
+            }
 
-        unset($resultIdentity['zend_auth_credential_match']);
+            unset($resultIdentity['zend_auth_credential_match']);
+        }
         $this->resultRow = $resultIdentity;
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;

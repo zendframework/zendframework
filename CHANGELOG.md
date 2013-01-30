@@ -315,7 +315,7 @@
   #2884
   (https://github.com/zendframework/zf2/issues/3606)
 
-###Potential Breakage
+### Potential Breakage
 
 Includes a fix to the classes `Zend\Filter\Encrypt`
 and `Zend\Filter\Decrypt` which may pose a small break for end-users. Each
@@ -684,7 +684,7 @@ For those affected, the following courses of action are possible:
   exceptions 
   (https://github.com/zendframework/zf2/issues/3604)
 
-###Potential Breakage
+### Potential Breakage
 
 Includes a fix to the classes `Zend\Filter\Encrypt`
 and `Zend\Filter\Decrypt` which may pose a small break for end-users. Each

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -10,7 +9,8 @@
 
 namespace Zend\Db\Sql\Platform\Oracle;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
@@ -18,7 +18,6 @@ use Zend\Db\Sql\ExpressionInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Sql\Select;
 
-//@Todo
 class SelectDecorator extends Select implements PlatformDecoratorInterface
 {
 
@@ -36,12 +35,11 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
-     * @param Adapter $adapter
+     * @param AdapterInterface $adapter
      * @param StatementContainerInterface $statementContainer
      */
-    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
+    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
-
         // localize variables
         foreach (get_object_vars($this->select) as $name => $value) {
             $this->{$name} = $value;
@@ -75,15 +73,14 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
     /**
      * @param PlatformInterface $platform
-     * @param Adapter $adapter
+     * @param DriverInterface $driver
      * @param ParameterContainer $parameterContainer
      * @param $sqls
      * @param $parameters
      * @return null
      */
-    protected function processLimitOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null, &$sqls, &$parameters)
+    protected function processLimitOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, &$sqls, &$parameters)
     {
-
         if ($this->limit === null && $this->offset === null) {
             return null;
         }
@@ -102,22 +99,21 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             }
         }
 
-        if ($this->offset === null)
+        if ($this->offset === null) {
             $this->offset = 0;
+        }
 
         // first, produce column list without compound names (using the AS portion only)
         array_unshift($sqls, $this->createSqlFromSpecificationAndParameters(
-                        array('SELECT %1$s FROM (SELECT b.%1$s, rownum b_rownum FROM (' => current($this->specifications[self::SELECT])), $selectParameters
-                ));
-
+            array('SELECT %1$s FROM (SELECT b.%1$s, rownum b_rownum FROM (' => current($this->specifications[self::SELECT])), $selectParameters
+        ));
 
         if ($parameterContainer) {
             // create bottom part of query, with offset and limit using row_number
             array_push($sqls, ') b WHERE rownum <= (:offset+:limit)) WHERE b_rownum >= (:offset + 1)');
 
-            $parameterContainer->offsetSet('offset', $this->offset);
-            $parameterContainer->offsetSet('limit', $this->limit);
-            $parameterContainer->offsetSetReference('offsetForSum', 'offset');
+            $parameterContainer->offsetSet('offset', $this->offset, $parameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('limit', $this->limit, $parameterContainer::TYPE_INTEGER);
         } else {
             array_push($sqls, ') b WHERE rownum <= ('
                 . (int) $this->offset
@@ -125,16 +121,17 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
                 . (int) $this->limit
                 . ')) WHERE b_rownum >= ('
                 . (int) $this->offset
-                . ' + 1)');
+                . ' + 1)'
+            );
         }
 
         $sqls[self::SELECT] = $this->createSqlFromSpecificationAndParameters(
-                $this->specifications[self::SELECT], $parameters[self::SELECT]
+            $this->specifications[self::SELECT], $parameters[self::SELECT]
         );
     }
 
 
-    protected function processJoins(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
+    protected function processJoins(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->joins) {
             return null;
@@ -152,7 +149,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
                 : $platform->quoteIdentifier($join['name']);
             // on expression
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
-                ? $this->processExpression($join['on'], $platform, $adapter, $this->processInfo['paramPrefix'] . 'join')
+                ? $this->processExpression($join['on'], $platform, $driver, $this->processInfo['paramPrefix'] . 'join')
                 : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
             if ($joinSpecArgArray[$j][2] instanceof StatementContainerInterface) {
                 if ($parameterContainer) {

@@ -308,19 +308,20 @@ class Smtp implements TransportInterface
     }
 
     /**
-     * Lazy load the connection, and pass it helo
+     * Lazy load the connection
      *
      * @return Protocol\Smtp
      */
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options        = $this->getOptions();
-        $config         = $options->getConnectionConfig();
-        $config['host'] = $options->getHost();
-        $config['port'] = $options->getPort();
-        $connection = $this->plugin($options->getConnectionClass(), $config);
+        $options          = $this->getOptions();
+        $config           = $options->getConnectionConfig();
+        $config['host']   = $options->getHost();
+        $config['port']   = $options->getPort();
+        $connection       = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
+
         return $this->connect();
     }
 
@@ -332,10 +333,12 @@ class Smtp implements TransportInterface
     protected function connect()
     {
         if (!$this->connection instanceof Protocol\Smtp) {
-            $this->lazyLoadConnection();
+            return $this->lazyLoadConnection();
         }
+
         $this->connection->connect();
         $this->connection->helo($this->getOptions()->getName());
+
         return $this->connection;
     }
 }

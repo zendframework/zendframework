@@ -62,8 +62,6 @@ class Result implements \Iterator, ResultInterface
     /**
      * Initialize
      * @param resource $resource
-     * // param mixed $generatedValue
-     * // param bool|null $isBuffered
      * @return Result
      */
     public function initialize($resource /*, $generatedValue, $isBuffered = null*/)
@@ -147,6 +145,7 @@ class Result implements \Iterator, ResultInterface
      */
     protected function loadData()
     {
+        $this->currentComplete = false;
         $this->currentData = null;
 
         $this->currentData = oci_fetch_assoc($this->resource);
